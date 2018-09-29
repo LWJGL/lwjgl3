@@ -17,11 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T, SELF>> extends CustomBuffer<SELF> implements Iterable<T> {
 
     protected StructBuffer(ByteBuffer container, int remaining) {
-        this(memAddress(container), container, -1, 0, remaining, remaining);
+        super(memAddress(container), container, -1, 0, remaining, remaining);
     }
 
     protected StructBuffer(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
         super(address, container, mark, position, limit, capacity);
+    }
+
+    @Override
+    public int sizeof() {
+        return getElementFactory().sizeof();
     }
 
     /**
@@ -35,7 +40,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public T get() {
-        return nget(nextGetIndex());
+        return getElementFactory().wrap(address, nextGetIndex(), container);
     }
 
     /**
@@ -46,7 +51,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public SELF get(T value) {
-        memCopy(address + nextGetIndex() * sizeof(), value.address(), sizeof());
+        int sizeof = getElementFactory().sizeof();
+        memCopy(address + Integer.toUnsignedLong(nextGetIndex()) * sizeof, value.address(), sizeof);
         return self();
     }
 
@@ -63,7 +69,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
      */
     public SELF put(T value) {
-        memCopy(value.address(), address + nextPutIndex() * sizeof(), sizeof());
+        int sizeof = getElementFactory().sizeof();
+        memCopy(value.address(), address + Integer.toUnsignedLong(nextPutIndex()) * sizeof, sizeof);
         return self();
     }
 
@@ -80,11 +87,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public T get(int index) {
-        return nget(check(index, limit));
-    }
-
-    private T nget(long index) {
-        return newInstance(address + index * sizeof());
+        return getElementFactory().wrap(address, check(index, limit), container);
     }
 
     /**
@@ -97,7 +100,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public SELF get(int index, T value) {
-        memCopy(address + check(index, limit) * sizeof(), value.address(), sizeof());
+        int sizeof = getElementFactory().sizeof();
+        memCopy(address + Checks.check(index, limit) * sizeof, value.address(), sizeof);
         return self();
     }
 
@@ -115,7 +119,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
      */
     public SELF put(int index, T value) {
-        memCopy(value.address(), address + check(index, limit) * sizeof(), sizeof());
+        int sizeof = getElementFactory().sizeof();
+        memCopy(value.address(), address + Checks.check(index, limit) * sizeof, sizeof);
         return self();
     }
 
@@ -123,57 +128,83 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
-            int index = position;
-            int fence = limit;
+        return new StructIterator<>(address, container, getElementFactory(), position, limit);
+    }
 
-            @Override public boolean hasNext() {
-                return index < fence;
-            }
+    // This class is static to avoid capturing the StructBuffer instance. Hotspot trivially marks the instance
+    // as escaping when this happens, even if the iterator instance is not escaping and scalar replaced. This
+    // is not a problem on Graal. Also, see JDK-8166840.
+    private static class StructIterator<T extends Struct, SELF extends StructBuffer<T, SELF>> implements Iterator<T> {
+        private long address;
 
-            @Override public T next() {
-                return nget(index++);
-            }
+        @Nullable
+        private ByteBuffer container;
 
-            @Override public void forEachRemaining(Consumer<? super T> action) {
-                Objects.requireNonNull(action);
-                int i = index;
-                try {
-                    for (; i < fence; i++) {
-                        action.accept(nget(i));
-                    }
-                } finally {
-                    index = i;
+        private T factory;
+
+        private int index;
+        private int fence;
+
+        StructIterator(long address, @Nullable ByteBuffer container, T factory, int position, int limit) {
+            this.address = address;
+            this.container = container;
+            this.factory = factory;
+            this.index = position;
+            this.fence = limit;
+        }
+
+        @Override public boolean hasNext() {
+            return index < fence;
+        }
+
+        @Override public T next() {
+            return factory.wrap(address, index++, container);
+        }
+
+        @Override public void forEachRemaining(Consumer<? super T> action) {
+            Objects.requireNonNull(action);
+            int i = index;
+            try {
+                for (; i < fence; i++) {
+                    action.accept(factory.<T>wrap(address, i, container));
                 }
+            } finally {
+                index = i;
             }
-        };
+        }
     }
 
     @Override
     public void forEach(Consumer<? super T> action) {
         Objects.requireNonNull(action);
+        T factory = getElementFactory();
         for (int i = position, fence = limit; i < fence; i++) {
-            action.accept(nget(i));
+            action.accept(factory.<T>wrap(address, i, container));
         }
     }
 
     @Override
     public Spliterator<T> spliterator() {
-        return new StructSpliterator();
+        return new StructSpliterator<>(address, container, getElementFactory(), position, limit);
     }
 
-    private class StructSpliterator implements Spliterator<T> {
+    private static class StructSpliterator<T extends Struct, SELF extends StructBuffer<T, SELF>> implements Spliterator<T> {
+        private long address;
+
+        @Nullable
+        private ByteBuffer container;
+
+        private T factory;
+
         private int index;
+        private int fence;
 
-        private final int fence;
-
-        StructSpliterator() {
-            this(position, limit);
-        }
-
-        StructSpliterator(int origin, int fence) {
-            this.index = origin;
-            this.fence = fence;
+        StructSpliterator(long address, @Nullable ByteBuffer container, T factory, int position, int limit) {
+            this.address = address;
+            this.container = container;
+            this.factory = factory;
+            this.index = position;
+            this.fence = limit;
         }
 
         @Override
@@ -181,7 +212,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
             Objects.requireNonNull(action);
 
             if (index < fence) {
-                action.accept(nget(index++));
+                action.accept(factory.<T>wrap(address, index++, container));
                 return true;
             }
 
@@ -195,7 +226,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
                 mid = (lo + fence) >>> 1;
 
             return lo < mid
-                ? new StructSpliterator(lo, index = mid)
+                ? new StructSpliterator<>(address, container, factory, lo, index = mid)
                 : null;
         }
 
@@ -215,7 +246,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
             int i = index;
             try {
                 for (; i < fence; i++) {
-                    action.accept(nget(i));
+                    action.accept(factory.<T>wrap(address, i, container));
                 }
             } finally {
                 index = i;
@@ -240,6 +271,13 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 
     // --------------------------------------
 
-    protected abstract T newInstance(long address);
+    protected abstract T getElementFactory();
+
+    private static int check(int index, int length) {
+        if (CHECKS && (index < 0 || length <= index)) {
+            throw new IndexOutOfBoundsException();
+        }
+        return index;
+    }
 
 }

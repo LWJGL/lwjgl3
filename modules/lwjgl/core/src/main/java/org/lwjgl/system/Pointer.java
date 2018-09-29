@@ -7,8 +7,10 @@ package org.lwjgl.system;
 import org.lwjgl.*;
 
 import javax.annotation.*;
+import java.nio.*;
 
 import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Pointer interface.
@@ -44,12 +46,40 @@ public interface Pointer {
     /** Default {@link Pointer} implementation. */
     abstract class Default implements Pointer {
 
+        protected static final sun.misc.Unsafe UNSAFE;
+
+        protected static final long ADDRESS;
+
+        protected static final long BUFFER_CONTAINER;
+
+        protected static final long BUFFER_MARK;
+        protected static final long BUFFER_POSITION;
+        protected static final long BUFFER_LIMIT;
+        protected static final long BUFFER_CAPACITY;
+
+        static {
+            UNSAFE = MemoryUtil.UNSAFE;
+
+            try {
+                ADDRESS = UNSAFE.objectFieldOffset(Pointer.Default.class.getDeclaredField("address"));
+
+                BUFFER_CONTAINER = UNSAFE.objectFieldOffset(CustomBuffer.class.getDeclaredField("container"));
+
+                BUFFER_MARK = UNSAFE.objectFieldOffset(CustomBuffer.class.getDeclaredField("mark"));
+                BUFFER_POSITION = UNSAFE.objectFieldOffset(CustomBuffer.class.getDeclaredField("position"));
+                BUFFER_LIMIT = UNSAFE.objectFieldOffset(CustomBuffer.class.getDeclaredField("limit"));
+                BUFFER_CAPACITY = UNSAFE.objectFieldOffset(CustomBuffer.class.getDeclaredField("capacity"));
+            } catch (Throwable t) {
+                throw new UnsupportedOperationException(t);
+            }
+        }
+
         // Removed final due to JDK-8139758. TODO: Restore if the fix is backported to JDK 8.
-        private long address;
+        protected long address;
 
         protected Default(long address) {
-            if (CHECKS) {
-                check(address);
+            if (CHECKS && address == NULL) {
+                throw new NullPointerException();
             }
             this.address = address;
         }
@@ -79,6 +109,41 @@ public interface Pointer {
         @Override
         public String toString() {
             return String.format("%s pointer [0x%X]", getClass().getSimpleName(), address);
+        }
+
+        @SuppressWarnings("unchecked")
+        protected static <T extends CustomBuffer<?>> T wrap(Class<? extends T> clazz, long address, int capacity) {
+            T buffer;
+            try {
+                buffer = (T)UNSAFE.allocateInstance(clazz);
+            } catch (InstantiationException e) {
+                throw new UnsupportedOperationException(e);
+            }
+
+            UNSAFE.putLong(buffer, ADDRESS, address);
+            UNSAFE.putInt(buffer, BUFFER_MARK, -1);
+            UNSAFE.putInt(buffer, BUFFER_LIMIT, capacity);
+            UNSAFE.putInt(buffer, BUFFER_CAPACITY, capacity);
+
+            return buffer;
+        }
+
+        @SuppressWarnings("unchecked")
+        protected static <T extends CustomBuffer<?>> T wrap(Class<? extends T> clazz, long address, int capacity, ByteBuffer container) {
+            T buffer;
+            try {
+                buffer = (T)UNSAFE.allocateInstance(clazz);
+            } catch (InstantiationException e) {
+                throw new UnsupportedOperationException(e);
+            }
+
+            UNSAFE.putLong(buffer, ADDRESS, address);
+            UNSAFE.putInt(buffer, BUFFER_MARK, -1);
+            UNSAFE.putInt(buffer, BUFFER_LIMIT, capacity);
+            UNSAFE.putInt(buffer, BUFFER_CAPACITY, capacity);
+            UNSAFE.putObject(buffer, BUFFER_CONTAINER, container);
+
+            return buffer;
         }
 
     }

@@ -12,9 +12,7 @@ import java.util.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.StackWalkUtil.*;
 
 /**
@@ -25,7 +23,7 @@ import static org.lwjgl.system.StackWalkUtil.*;
  * @see Configuration#STACK_SIZE
  * @see Configuration#DEBUG_STACK
  */
-public class MemoryStack implements AutoCloseable {
+public class MemoryStack extends Pointer.Default implements AutoCloseable {
 
     private static final int DEFAULT_STACK_SIZE   = Configuration.STACK_SIZE.get(64) * 1024;
     private static final int DEFAULT_STACK_FRAMES = 8;
@@ -39,10 +37,9 @@ public class MemoryStack implements AutoCloseable {
     }
 
     @Nullable
-    private final ByteBuffer buffer;
+    private final ByteBuffer container;
 
-    private final long address;
-    private final int  size;
+    private final int size;
 
     private int pointer;
 
@@ -54,13 +51,13 @@ public class MemoryStack implements AutoCloseable {
      *
      * <p>In the initial state, there is no active stack frame. The {@link #push} method must be used before any allocations.</p>
      *
-     * @param buffer  the backing memory buffer, may be null
-     * @param address the backing memory address
-     * @param size    the backing memory size
+     * @param container the backing memory buffer, may be null
+     * @param address   the backing memory address
+     * @param size      the backing memory size
      */
-    protected MemoryStack(@Nullable ByteBuffer buffer, long address, int size) {
-        this.buffer = buffer;
-        this.address = address;
+    protected MemoryStack(@Nullable ByteBuffer container, long address, int size) {
+        super(address);
+        this.container = container;
 
         this.size = size;
         this.pointer = size;
@@ -279,14 +276,8 @@ public class MemoryStack implements AutoCloseable {
     }
 
     private static void checkAlignment(int alignment) {
-        if (!mathIsPoT(alignment)) {
+        if (!(Integer.bitCount(alignment) == 1)) {
             throw new IllegalArgumentException("Alignment must be a power-of-two value.");
-        }
-    }
-
-    private static void checkPush(int pointer) {
-        if (pointer < 0) {
-            throw new OutOfMemoryError("Out of stack space.");
         }
     }
 
@@ -311,19 +302,15 @@ public class MemoryStack implements AutoCloseable {
      * @return the memory address on the stack for the requested allocation
      */
     public long nmalloc(int alignment, int size) {
-        if (DEBUG) {
-            checkAlignment(alignment);
-        }
-
         int newPointer = pointer - size;
-        if (CHECKS) {
-            checkPush(newPointer);
+        if (CHECKS && newPointer < 0) {
+            throw new OutOfMemoryError("Out of stack space.");
         }
 
         // Align pointer to the specified alignment
         pointer = newPointer & ~(alignment - 1);
 
-        return this.address + Integer.toUnsignedLong(pointer);
+        return this.address + ((long)pointer & 0xFFFF_FFFFL);
     }
 
     /**
@@ -353,9 +340,19 @@ public class MemoryStack implements AutoCloseable {
      *
      * @return the allocated buffer
      */
-    public ByteBuffer malloc(int alignment, int size) { return memByteBuffer(nmalloc(alignment, size), size); }
+    public ByteBuffer malloc(int alignment, int size) {
+        if (DEBUG) {
+            checkAlignment(alignment);
+        }
+        return MemoryUtil.wrap(BUFFER_BYTE, nmalloc(alignment, size), size);
+    }
     /** Calloc version of {@link #malloc(int, int)}. */
-    public ByteBuffer calloc(int alignment, int size) { return memByteBuffer(ncalloc(alignment, size, 1), size); }
+    public ByteBuffer calloc(int alignment, int size) {
+        if (DEBUG) {
+            checkAlignment(alignment);
+        }
+        return MemoryUtil.wrap(BUFFER_BYTE, ncalloc(alignment, size, 1), size);
+    }
 
     /**
      * Allocates a {@link ByteBuffer} on the stack.
@@ -398,9 +395,14 @@ public class MemoryStack implements AutoCloseable {
     // -------------------------------------------------
 
     /** Short version of {@link #malloc(int)}. */
-    public ShortBuffer mallocShort(int size) { return memShortBuffer(nmalloc(2, size << 1), size); }
+    public ShortBuffer mallocShort(int size) { return MemoryUtil.wrap(BUFFER_SHORT, nmalloc(2, size << 1), size); }
     /** Short version of {@link #calloc(int)}. */
-    public ShortBuffer callocShort(int size) { return memShortBuffer(ncalloc(2, size, 2), size); }
+    public ShortBuffer callocShort(int size) {
+        int  bytes   = size * 2;
+        long address = nmalloc(2, bytes);
+        memSet(address, 0, bytes);
+        return MemoryUtil.wrap(BUFFER_SHORT, address, size);
+    }
 
     /** Single value version of {@link #mallocShort}. */
     public ShortBuffer shorts(short x) { return mallocShort(1).put(0, x); }
@@ -421,9 +423,14 @@ public class MemoryStack implements AutoCloseable {
     // -------------------------------------------------
 
     /** Int version of {@link #malloc(int)}. */
-    public IntBuffer mallocInt(int size) { return memIntBuffer(nmalloc(4, size << 2), size); }
-    /** Int version of {@link #calloc(int)}. */
-    public IntBuffer callocInt(int size) { return memIntBuffer(ncalloc(4, size, 4), size); }
+    public IntBuffer mallocInt(int size) { return MemoryUtil.wrap(BUFFER_INT, nmalloc(4, size << 2), size); }
+
+    public IntBuffer callocInt(int size) {
+        int  bytes   = size * 4;
+        long address = nmalloc(4, bytes);
+        memSet(address, 0, bytes);
+        return MemoryUtil.wrap(BUFFER_INT, address, size);
+    }
 
     /** Single value version of {@link #mallocInt}. */
     public IntBuffer ints(int x) { return mallocInt(1).put(0, x); }
@@ -444,9 +451,14 @@ public class MemoryStack implements AutoCloseable {
     // -------------------------------------------------
 
     /** Long version of {@link #malloc(int)}. */
-    public LongBuffer mallocLong(int size) { return memLongBuffer(nmalloc(8, size << 3), size); }
+    public LongBuffer mallocLong(int size) { return MemoryUtil.wrap(BUFFER_LONG, nmalloc(8, size << 3), size); }
     /** Long version of {@link #calloc(int)}. */
-    public LongBuffer callocLong(int size) { return memLongBuffer(ncalloc(8, size, 8), size); }
+    public LongBuffer callocLong(int size) {
+        int  bytes   = size * 8;
+        long address = nmalloc(8, bytes);
+        memSet(address, 0, bytes);
+        return MemoryUtil.wrap(BUFFER_LONG, address, size);
+    }
 
     /** Single value version of {@link #mallocLong}. */
     public LongBuffer longs(long x) { return mallocLong(1).put(0, x); }
@@ -467,9 +479,14 @@ public class MemoryStack implements AutoCloseable {
     // -------------------------------------------------
 
     /** Float version of {@link #malloc(int)}. */
-    public FloatBuffer mallocFloat(int size) { return memFloatBuffer(nmalloc(4, size << 2), size); }
+    public FloatBuffer mallocFloat(int size) { return MemoryUtil.wrap(BUFFER_FLOAT, nmalloc(4, size << 2), size); }
     /** Float version of {@link #calloc(int)}. */
-    public FloatBuffer callocFloat(int size) { return memFloatBuffer(ncalloc(4, size, 4), size); }
+    public FloatBuffer callocFloat(int size) {
+        int  bytes   = size * 4;
+        long address = nmalloc(4, bytes);
+        memSet(address, 0, bytes);
+        return MemoryUtil.wrap(BUFFER_FLOAT, address, size);
+    }
 
     /** Single value version of {@link #mallocFloat}. */
     public FloatBuffer floats(float x) { return mallocFloat(1).put(0, x); }
@@ -490,9 +507,14 @@ public class MemoryStack implements AutoCloseable {
     // -------------------------------------------------
 
     /** Double version of {@link #malloc(int)}. */
-    public DoubleBuffer mallocDouble(int size) { return memDoubleBuffer(nmalloc(8, size << 3), size); }
+    public DoubleBuffer mallocDouble(int size) { return MemoryUtil.wrap(BUFFER_DOUBLE, nmalloc(8, size << 3), size); }
     /** Double version of {@link #calloc(int)}. */
-    public DoubleBuffer callocDouble(int size) { return memDoubleBuffer(ncalloc(8, size, 8), size); }
+    public DoubleBuffer callocDouble(int size) {
+        int  bytes   = size * 8;
+        long address = nmalloc(8, bytes);
+        memSet(address, 0, bytes);
+        return MemoryUtil.wrap(BUFFER_DOUBLE, address, size);
+    }
 
     /** Single value version of {@link #mallocDouble}. */
     public DoubleBuffer doubles(double x) { return mallocDouble(1).put(0, x); }
@@ -513,9 +535,14 @@ public class MemoryStack implements AutoCloseable {
     // -------------------------------------------------
 
     /** Pointer version of {@link #malloc(int)}. */
-    public PointerBuffer mallocPointer(int size) { return memPointerBuffer(nmalloc(POINTER_SIZE, size << POINTER_SHIFT), size); }
+    public PointerBuffer mallocPointer(int size) { return wrap(PointerBuffer.class, nmalloc(POINTER_SIZE, size << POINTER_SHIFT), size); }
     /** Pointer version of {@link #calloc(int)}. */
-    public PointerBuffer callocPointer(int size) { return memPointerBuffer(ncalloc(POINTER_SIZE, size, POINTER_SIZE), size); }
+    public PointerBuffer callocPointer(int size) {
+        int  bytes   = size * POINTER_SIZE;
+        long address = nmalloc(POINTER_SIZE, bytes);
+        memSet(address, 0, bytes);
+        return wrap(PointerBuffer.class, address, size);
+    }
 
     /** Single value version of {@link #mallocPointer}. */
     public PointerBuffer pointers(long x) { return mallocPointer(1).put(0, x); }

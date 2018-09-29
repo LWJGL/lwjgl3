@@ -338,6 +338,7 @@
         </lwjgl.javac>
 
         <mkdir dir="${bin.lwjgl}/core/META-INF/versions/9" if:set="jdk9"/>
+        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/10" if:set="jdk10"/>
         <delete file="${bin.lwjgl}/core/META-INF/versions/9/module-info.class" quiet="true" if:set="jdk9"/>
         <lwjgl.javac9
             destdir="${bin.lwjgl}/core/META-INF/versions/9"
@@ -348,6 +349,16 @@
 
             taskname="javac: Core - Java 9"
             if:set="jdk9"
+        />
+        <lwjgl.javac10
+            destdir="${bin.lwjgl}/core/META-INF/versions/10"
+            classpath="${bin.lwjgl}/core"
+
+            srcdir="${module.lwjgl}/core/src/main/java10"
+            includes="**"
+
+            taskname="javac: Core - Java 10"
+            if:set="jdk10"
         />
 
         <parallel threadsPerProcessor="1">
@@ -620,6 +631,7 @@
         <testng outputDir="${bin.test.html}" taskname="Tests">
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${lib}/java/jcommander.jar"/>
@@ -654,6 +666,7 @@
         <java classname="${class}" fork="true" failonerror="${failonerror}" spawn="${spawn}" taskname="Demo">
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${bin.samples}"/>
@@ -1046,6 +1059,9 @@
         <!-- CORE -->
         <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/9" if:set="jdk9">
             <fileset dir="${module.lwjgl}/core/src/main/java9" includes="**"/>
+        </copy>
+        <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/10" if:set="jdk10">
+            <fileset dir="${module.lwjgl}/core/src/main/java10" includes="**"/>
         </copy>
         <release-module package="org.lwjgl" name="core" native-library="lwjgl" license="dyncall" title="Core"/>
 

@@ -454,12 +454,12 @@ class YogaNode {
         static final YGValue ZERO      = YGValue.create().set(0, YogaUnit.POINT);
         static final YGValue AUTO      = YGValue.create().set(YogaConstants.UNDEFINED, YogaUnit.AUTO);
 
-        YogaValue(long address, @Nullable ByteBuffer container) {
-            super(address, container);
+        YogaValue(ByteBuffer container) {
+            super(container);
         }
 
         public static YogaValue create(MemoryStack stack, float value, int unit) {
-            YogaValue v = new YogaValue(stack.nmalloc(ALIGNOF, SIZEOF), null);
+            YogaValue v = wrap(YogaValue.class, stack.nmalloc(ALIGNOF, SIZEOF));
             v.set(value, unit);
             return v;
         }

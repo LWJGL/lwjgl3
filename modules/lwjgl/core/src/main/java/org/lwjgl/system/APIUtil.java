@@ -145,25 +145,26 @@ public final class APIUtil {
 
     @Nullable
     public static ByteBuffer apiGetMappedBuffer(@Nullable ByteBuffer buffer, long mappedAddress, int capacity) {
-        return buffer == null || memAddress(buffer) != mappedAddress || buffer.capacity() != capacity
-            ? memByteBufferSafe(mappedAddress, capacity)
-            : buffer;
+        if (buffer != null && memAddress(buffer) == mappedAddress && buffer.capacity() == capacity) {
+            return buffer;
+        }
+        return mappedAddress == NULL ? null : wrap(BUFFER_BYTE, mappedAddress, capacity).order(NATIVE_ORDER);
     }
 
     public static long apiGetBytes(int elements, int elementShift) {
-        return Integer.toUnsignedLong(elements) << elementShift;
+        return ((long)elements & 0xFFFF_FFFFL) << elementShift;
     }
 
-    public static void apiCheckAllocation(int elements, long bytes, long maxBytes) {
-        if (!DEBUG) {
-            return;
+    public static long apiCheckAllocation(int elements, long bytes, long maxBytes) {
+        if (DEBUG) {
+            if (elements < 0) {
+                throw new IllegalArgumentException("Invalid number of elements");
+            }
+            if ((maxBytes + Long.MIN_VALUE) < (bytes + Long.MIN_VALUE)) { // unsigned comparison
+                throw new IllegalArgumentException("The request allocation is too large");
+            }
         }
-        if (elements < 0) {
-            throw new IllegalArgumentException("Invalid number of elements");
-        }
-        if ((maxBytes + Long.MIN_VALUE) < (bytes + Long.MIN_VALUE)) { // unsigned comparison
-            throw new IllegalArgumentException("The request allocation is too large");
-        }
+        return bytes;
     }
 
     /** A data class for API versioning information. */
@@ -333,13 +334,13 @@ public final class APIUtil {
      * @return the pointer array address on the stack
      */
     public static long apiArray(MemoryStack stack, long... addresses) {
-        PointerBuffer pointers = stack.mallocPointer(addresses.length);
+        PointerBuffer pointers = memPointerBuffer(stack.nmalloc(POINTER_SIZE, addresses.length << POINTER_SHIFT), addresses.length);
 
         for (long address : addresses) {
             pointers.put(address);
         }
 
-        return memAddress0(pointers);
+        return pointers.address;
     }
 
     /**
@@ -351,13 +352,13 @@ public final class APIUtil {
      * @return the pointer array address on the stack
      */
     public static long apiArray(MemoryStack stack, ByteBuffer... buffers) {
-        PointerBuffer pointers = stack.mallocPointer(buffers.length);
+        PointerBuffer pointers = memPointerBuffer(stack.nmalloc(POINTER_SIZE, buffers.length << POINTER_SHIFT), buffers.length);
 
         for (ByteBuffer buffer : buffers) {
             pointers.put(buffer);
         }
 
-        return memAddress0(pointers);
+        return pointers.address;
     }
 
     /**
@@ -403,7 +404,7 @@ public final class APIUtil {
             pointers.put(encoder.encode(s, true));
         }
 
-        return memAddress0(pointers);
+        return pointers.address;
     }
 
     /**
@@ -430,7 +431,7 @@ public final class APIUtil {
             lengths.put(buffer.capacity());
         }
 
-        return memAddress0(pointers);
+        return pointers.address;
     }
 
     /**
@@ -457,7 +458,7 @@ public final class APIUtil {
             lengths.put(buffer.capacity());
         }
 
-        return memAddress0(pointers);
+        return pointers.address;
     }
 
     /**

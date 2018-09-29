@@ -7,13 +7,10 @@ package org.lwjgl.system;
 import javax.annotation.*;
 import java.nio.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Base class of custom buffers with an API that mirrors {@code java.nio} for convenience. */
-public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements Pointer {
-
-    protected long address;
+public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Pointer.Default {
 
     @Nullable
     protected ByteBuffer container;
@@ -25,10 +22,8 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
         capacity;
 
     protected CustomBuffer(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
-        if (CHECKS) {
-            check(address);
-        }
-        this.address = address;
+        super(address);
+
         this.container = container;
 
         this.mark = mark;
@@ -47,7 +42,9 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
 
     /** Returns the memory address at the current buffer position. */
     @Override
-    public long address() { return address(position()); }
+    public long address() {
+        return address + Integer.toUnsignedLong(position) * sizeof();
+    }
 
     /** Returns the memory address at the specified buffer position. */
     public long address(int position) {
@@ -60,7 +57,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      * <p>This method should not be used if the memory backing this buffer is not owned by the buffer.</p>
      */
     public void free() {
-        nmemFree(address0());
+        nmemFree(address);
     }
 
     /**
@@ -254,8 +251,22 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      *
      * @return the new buffer
      */
+    @SuppressWarnings("unchecked")
     public SELF slice() {
-        return newBufferInstance(address(), container, -1, 0, this.remaining(), this.remaining());
+        SELF slice;
+        try {
+            slice = (SELF)UNSAFE.allocateInstance(this.getClass());
+        } catch (InstantiationException e) {
+            throw new UnsupportedOperationException(e);
+        }
+
+        UNSAFE.putLong(slice, ADDRESS, address + Integer.toUnsignedLong(position) * sizeof());
+        UNSAFE.putInt(slice, BUFFER_MARK, -1);
+        UNSAFE.putInt(slice, BUFFER_LIMIT, remaining());
+        UNSAFE.putInt(slice, BUFFER_CAPACITY, remaining());
+        UNSAFE.putObject(slice, BUFFER_CONTAINER, container);
+
+        return slice;
     }
 
     /**
@@ -268,16 +279,31 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      *
      * @return the sliced buffer
      */
+    @SuppressWarnings("unchecked")
     public SELF slice(int offset, int capacity) {
-        if (offset < 0 || remaining() < offset) {
+        int position = this.position + offset;
+        if (offset < 0 || this.limit < offset) {
             throw new IllegalArgumentException();
         }
 
-        if (capacity < 0 || this.capacity - position - offset < capacity) {
+        if (capacity < 0 || this.capacity - position < capacity) {
             throw new IllegalArgumentException();
         }
 
-        return newBufferInstance(address() + Integer.toUnsignedLong(offset) * sizeof(), container, -1, 0, capacity, capacity);
+        SELF slice;
+        try {
+            slice = (SELF)UNSAFE.allocateInstance(this.getClass());
+        } catch (InstantiationException e) {
+            throw new UnsupportedOperationException(e);
+        }
+
+        UNSAFE.putLong(slice, ADDRESS, address + Integer.toUnsignedLong(position) * sizeof());
+        UNSAFE.putInt(slice, BUFFER_MARK, -1);
+        UNSAFE.putInt(slice, BUFFER_LIMIT, capacity);
+        UNSAFE.putInt(slice, BUFFER_CAPACITY, capacity);
+        UNSAFE.putObject(slice, BUFFER_CONTAINER, container);
+
+        return slice;
     }
 
     /**
@@ -290,8 +316,23 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
      *
      * @return the new buffer
      */
+    @SuppressWarnings("unchecked")
     public SELF duplicate() {
-        return newBufferInstance(address, container, mark, position, limit, capacity);
+        SELF dup;
+        try {
+            dup = (SELF)UNSAFE.allocateInstance(this.getClass());
+        } catch (InstantiationException e) {
+            throw new UnsupportedOperationException(e);
+        }
+
+        UNSAFE.putLong(dup, ADDRESS, address);
+        UNSAFE.putInt(dup, BUFFER_MARK, mark);
+        UNSAFE.putInt(dup, BUFFER_POSITION, position);
+        UNSAFE.putInt(dup, BUFFER_LIMIT, limit);
+        UNSAFE.putInt(dup, BUFFER_CAPACITY, capacity);
+        UNSAFE.putObject(dup, BUFFER_CONTAINER, container);
+
+        return dup;
     }
 
     // -- Bulk get operations --
@@ -375,18 +416,16 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> implements P
 
     protected abstract SELF self();
 
-    protected abstract SELF newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity);
-
-    protected final long nextGetIndex() {
+    protected final int nextGetIndex() {
         if (position < limit) {
-            return Integer.toUnsignedLong(position++);
+            return position++;
         }
         throw new BufferUnderflowException();
     }
 
-    protected final long nextPutIndex() {
+    protected final int nextPutIndex() {
         if (position < limit) {
-            return Integer.toUnsignedLong(position++);
+            return position++;
         }
         throw new BufferOverflowException();
     }

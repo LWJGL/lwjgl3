@@ -77,15 +77,18 @@ public class MemoryUtilTest {
         }
     }
 
-    public void testMemSet2() {
+    public void testMemSetMisaligned() {
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j <= (16 - i); j++) {
-                long ref = nmemCalloc(1, 16);
-                long mem = nmemCalloc(1, 16);
+                // cannot trust the memSet in nmemCalloc yet
+                long ref = nmemAlloc(16);
+                long mem = nmemAlloc(16);
+                memSetReference(ref, 0, 16);
+                memSetReference(mem, 0, 16);
 
                 // test misaligned memsets
-                memSetReference(ref + i, (byte)0xFF, j);
-                memSet(mem + i, (byte)0xFF, j);
+                memSetReference(ref + i, 0xFF, j);
+                memSet(mem + i, 0xFF, j);
 
                 for (int k = 0; k < 16; k++) {
                     assertEquals(memGetByte(mem + k), memGetByte(ref + k));
@@ -97,9 +100,9 @@ public class MemoryUtilTest {
         }
     }
 
-    private static void memSetReference(long m, byte value, int bytes) {
+    private static void memSetReference(long m, int value, int bytes) {
         for (int i = 0; i < bytes; i++) {
-            memPutByte(m + i, value);
+            memPutByte(m + i, (byte)(value & 0xFF));
         }
     }
 
@@ -115,6 +118,39 @@ public class MemoryUtilTest {
 
         for (int i = 0; i < src.capacity(); i++) {
             assertEquals(src.get(i), dst.get(i));
+        }
+    }
+
+    public void testMemCopyMisaligned() {
+        long src = nmemCalloc(1, 16);
+        for (int i = 0; i < 16; i++) {
+            memPutByte(src + i, (byte)i);
+        }
+
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j <= (16 - i); j++) {
+                long ref = nmemCalloc(1, 16);
+                long mem = nmemCalloc(1, 16);
+
+                // test misaligned memcpys
+                memCopyReference(src + i, ref + i, j);
+                memCopy(src + i, mem + i, j);
+
+                for (int k = 0; k < 16; k++) {
+                    assertEquals(memGetByte(mem + k), memGetByte(ref + k));
+                }
+
+                nmemFree(mem);
+                nmemFree(ref);
+            }
+        }
+
+        nmemFree(src);
+    }
+
+    private static void memCopyReference(long src, long dst, int bytes) {
+        for (int i = 0; i < bytes; i++) {
+            memPutByte(dst + i, memGetByte(src + i));
         }
     }
 
@@ -235,6 +271,128 @@ public class MemoryUtilTest {
         }
     }
 
+    @FunctionalInterface
+    private interface BufferAddressGetter<T extends Buffer> {
+        long apply(T buffer);
+    }
+
+    public void testDuplicateBuffer() {
+        testDuplicateBuffer(memAlloc(32), it -> it.duplicate().order(it.order()), MemoryUtil::memDuplicate, ByteBuffer::order, MemoryUtil::memAddress);
+        testDuplicateBuffer(memAllocShort(32), ShortBuffer::duplicate, MemoryUtil::memDuplicate, ShortBuffer::order, MemoryUtil::memAddress);
+        testDuplicateBuffer(memAllocInt(32), IntBuffer::duplicate, MemoryUtil::memDuplicate, IntBuffer::order, MemoryUtil::memAddress);
+        testDuplicateBuffer(memAllocLong(32), LongBuffer::duplicate, MemoryUtil::memDuplicate, LongBuffer::order, MemoryUtil::memAddress);
+        testDuplicateBuffer(memAllocFloat(32), FloatBuffer::duplicate, MemoryUtil::memDuplicate, FloatBuffer::order, MemoryUtil::memAddress);
+        testDuplicateBuffer(memAllocDouble(32), DoubleBuffer::duplicate, MemoryUtil::memDuplicate, DoubleBuffer::order, MemoryUtil::memAddress);
+    }
+
+    private static <T extends Buffer> void testDuplicateBuffer(
+        T buffer,
+        Function<T, T> duplicate,
+        Function<T, T> memDuplicate,
+        Function<T, ByteOrder> order,
+        BufferAddressGetter<T> memAddress
+    ) {
+        buffer.mark();
+        buffer.position(8);
+        buffer.limit(16);
+
+        T ref = duplicate.apply(buffer);
+        T dup = memDuplicate.apply(buffer);
+
+        assertEquals(order.apply(dup), order.apply(ref));
+        assertEquals(memAddress.apply(dup), memAddress.apply(ref));
+        assertEquals(dup.capacity(), ref.capacity());
+        assertEquals(dup, ref);
+
+        dup.reset();
+        ref.reset();
+        assertEquals(dup.position(), ref.position());
+
+        memFree(buffer);
+    }
+
+    public void testSliceBuffer() {
+        testSliceBuffer(memAlloc(32), it -> it.slice().order(it.order()), MemoryUtil::memSlice, ByteBuffer::order, MemoryUtil::memAddress);
+        testSliceBuffer(memAllocShort(32), ShortBuffer::slice, MemoryUtil::memSlice, ShortBuffer::order, MemoryUtil::memAddress);
+        testSliceBuffer(memAllocInt(32), IntBuffer::slice, MemoryUtil::memSlice, IntBuffer::order, MemoryUtil::memAddress);
+        testSliceBuffer(memAllocLong(32), LongBuffer::slice, MemoryUtil::memSlice, LongBuffer::order, MemoryUtil::memAddress);
+        testSliceBuffer(memAllocFloat(32), FloatBuffer::slice, MemoryUtil::memSlice, FloatBuffer::order, MemoryUtil::memAddress);
+        testSliceBuffer(memAllocDouble(32), DoubleBuffer::slice, MemoryUtil::memSlice, DoubleBuffer::order, MemoryUtil::memAddress);
+    }
+
+    private static <T extends Buffer> void testSliceBuffer(
+        T buffer,
+        Function<T, T> slice,
+        Function<T, T> memSlice,
+        Function<T, ByteOrder> order,
+        BufferAddressGetter<T> memAddress
+    ) {
+        buffer.position(8);
+        buffer.limit(16);
+
+        T ref = slice.apply(buffer);
+        T dup = memSlice.apply(buffer);
+
+        assertEquals(order.apply(dup), order.apply(ref));
+        assertEquals(memAddress.apply(dup), memAddress.apply(ref));
+        assertEquals(dup.capacity(), ref.capacity());
+        assertEquals(dup, ref);
+
+        memFree(buffer);
+    }
+
+    public void testSliceBufferAbs() {
+        testSliceBufferAbs(
+            memAlloc(32),
+            it -> it.duplicate().order(it.order()),
+            it -> it.slice().order(it.order()),
+            MemoryUtil::memSlice,
+            ByteBuffer::order,
+            MemoryUtil::memAddress
+        );
+        testSliceBufferAbs(memAllocShort(32), ShortBuffer::duplicate, ShortBuffer::slice, MemoryUtil::memSlice, ShortBuffer::order, MemoryUtil::memAddress);
+        testSliceBufferAbs(memAllocInt(32), IntBuffer::duplicate, IntBuffer::slice, MemoryUtil::memSlice, IntBuffer::order, MemoryUtil::memAddress);
+        testSliceBufferAbs(memAllocLong(32), LongBuffer::duplicate, LongBuffer::slice, MemoryUtil::memSlice, LongBuffer::order, MemoryUtil::memAddress);
+        testSliceBufferAbs(memAllocFloat(32), FloatBuffer::duplicate, FloatBuffer::slice, MemoryUtil::memSlice, FloatBuffer::order, MemoryUtil::memAddress);
+        testSliceBufferAbs(memAllocDouble(32), DoubleBuffer::duplicate, DoubleBuffer::slice, MemoryUtil::memSlice, DoubleBuffer::order, MemoryUtil::memAddress);
+    }
+
+    @FunctionalInterface
+    private interface AbsoluteSlicer<T extends Buffer> {
+        T apply(T buffer, int offset, int capacity);
+    }
+
+    private static <T extends Buffer> void testSliceBufferAbs(
+        T buffer,
+        Function<T, T> duplicate,
+        Function<T, T> slice,
+        AbsoluteSlicer<T> memSlice,
+        Function<T, ByteOrder> order,
+        BufferAddressGetter<T> memAddress
+    ) {
+        buffer.position(4);
+
+        T ref = sliceRef(buffer, 4, 12, duplicate, slice);
+        T dup = memSlice.apply(buffer, 4, 12);
+
+        assertEquals(order.apply(dup), order.apply(ref));
+        assertEquals(memAddress.apply(dup), memAddress.apply(ref));
+        assertEquals(dup.capacity(), ref.capacity());
+        assertEquals(dup, ref);
+
+        memFree(buffer);
+    }
+
+    private static <T extends Buffer> T sliceRef(T buffer, int offset, int capacity, Function<T, T> duplicate, Function<T, T> slice) {
+        T copy = duplicate.apply(buffer);
+
+        int position = buffer.position() + offset;
+        copy.limit(position + capacity);
+        copy.position(position);
+
+        return slice.apply(copy);
+    }
+
     public void testTextDecoding() {
         testTextDecoding(MemoryUtil::memASCII, MemoryUtil::memASCII, MemoryUtil::memASCII, 1);
         testTextDecoding(MemoryUtil::memUTF8, MemoryUtil::memUTF8, MemoryUtil::memUTF8, 1);
@@ -243,7 +401,7 @@ public class MemoryUtilTest {
 
     @FunctionalInterface
     private interface TextEncoder {
-        ByteBuffer apply(String text, boolean nullTerminated);
+        ByteBuffer apply(CharSequence text, boolean nullTerminated);
     }
 
     @FunctionalInterface
@@ -252,10 +410,10 @@ public class MemoryUtilTest {
     }
 
     private static void testTextDecoding(TextEncoder encoder, Function<ByteBuffer, String> decoder, TextDecoder decoderUnsafe, int bpc) {
-        ByteBuffer encoded = encoder.apply("one two three", false);
+        ByteBuffer encoded = encoder.apply("one two three", true);
 
         assertEquals(encoded.position(), 0);
-        assertEquals(encoded.remaining(), 13 * bpc);
+        assertEquals(encoded.remaining(), 14 * bpc);
 
         encoded.limit(13 * bpc);
         encoded.position(0 * bpc);

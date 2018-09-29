@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/bgfx-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/bgfx-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/core.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/core.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/core-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/core-templates.iml" group="TEMPLATES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/core10.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/core10.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/core9.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/core9.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/egl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/egl.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/egl-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/egl-templates.iml" group="TEMPLATES" />

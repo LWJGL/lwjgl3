@@ -701,10 +701,6 @@ $indentation}"""
         printCustomMethods(static = true)
 
         print("""
-    $className(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link $className} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -712,7 +708,7 @@ $indentation}"""
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     ${access.modifier}$className(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(${if (alias == null) "memAddress(container), __checkContainer(container, SIZEOF)" else "container"});
     }
 """)
 
@@ -767,17 +763,18 @@ $indentation}"""
             print("""
     /** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static $className malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap($className.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static $className calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap($className.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link $className} instance allocated with {@link BufferUtils}. */
     public static $className create() {
-        return new $className(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap($className.class, memAddress(container), container);
     }
 """)
         }
@@ -785,13 +782,13 @@ $indentation}"""
         print("""
     /** Returns a new {@link $className} instance for the specified memory address. */
     public static $className create(long address) {
-        return new $className(address, null);
+        return wrap($className.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static $className createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap($className.class, address);
     }
 """)
         if (generateBuffer) {
@@ -803,7 +800,7 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static $className.Buffer malloc(int $BUFFER_CAPACITY_PARAM) {
-        return create(__malloc($BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc($BUFFER_CAPACITY_PARAM, SIZEOF)), $BUFFER_CAPACITY_PARAM);
     }
 
     /**
@@ -812,7 +809,7 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static $className.Buffer calloc(int $BUFFER_CAPACITY_PARAM) {
-        return create(nmemCallocChecked($BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
+        return wrap(Buffer.class, nmemCallocChecked($BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
 
     /**
@@ -821,7 +818,8 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static $className.Buffer create(int $BUFFER_CAPACITY_PARAM) {
-        return new Buffer(__create($BUFFER_CAPACITY_PARAM, SIZEOF));
+        ByteBuffer container = __create($BUFFER_CAPACITY_PARAM, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), $BUFFER_CAPACITY_PARAM, container);
     }
 """)
             }
@@ -834,13 +832,13 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static $className.Buffer create(long address, int $BUFFER_CAPACITY_PARAM) {
-        return new Buffer(address, $BUFFER_CAPACITY_PARAM);
+        return wrap(Buffer.class, address, $BUFFER_CAPACITY_PARAM);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static $className.Buffer createSafe(long address, int $BUFFER_CAPACITY_PARAM) {
-        return address == NULL ? null : create(address, $BUFFER_CAPACITY_PARAM);
+        return address == NULL ? null : wrap(Buffer.class, address, $BUFFER_CAPACITY_PARAM);
     }
 """)
         }
@@ -865,7 +863,7 @@ $indentation}"""
      * @param stack the stack from which to allocate
      */
     public static $className mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap($className.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -874,7 +872,7 @@ $indentation}"""
      * @param stack the stack from which to allocate
      */
     public static $className callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap($className.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 """)
             if (generateBuffer) {
@@ -904,7 +902,7 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static $className.Buffer mallocStack(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
 
     /**
@@ -914,7 +912,7 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static $className.Buffer callocStack(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
 """)
             }
@@ -979,6 +977,8 @@ ${validations.joinToString("\n")}
 
             print(""" {
 
+        private static final $className ELEMENT_FACTORY = $className.create(-1L);
+
         /**
          * Creates a new {@link $className.Buffer} instance backed by the specified container.
          *
@@ -1016,24 +1016,11 @@ ${validations.joinToString("\n")}
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected $className newInstance(long address) {
-            return new $className(address, container);
+        protected $className getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 """)
 
-            if (alias == null) {
-                print("""
-        @Override
-        public int sizeof() {
-            return SIZEOF;
-        }
-""")
-            }
             members = publicMembers
             if (members.any()) {
                 if (alias == null) {
@@ -1379,7 +1366,7 @@ ${validations.joinToString("\n")}
                         println("${t}public static void n$setter(long $STRUCT, ${it.nullable(it.nativeType.javaMethodType)} value) { memPutAddress($STRUCT + $field, ${it.addressValue}); }")
                     } else {
                         val javaType = it.nativeType.nativeMethodType
-                        val bufferMethod = getBufferMethod(it, javaType)
+                        val bufferMethod = getBufferMethod("put", it, javaType)
 
                         if (it.public)
                             println(
@@ -1388,7 +1375,7 @@ ${validations.joinToString("\n")}
                                 else
                                     "$t/** Unsafe version of {@link #$setter(${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else javaType}) $setter}. */"
                             )
-                        print("${t}public static void n$setter(long $STRUCT, $javaType value) { memPut$bufferMethod($STRUCT + $field, ")
+                        print("${t}public static void n$setter(long $STRUCT, $javaType value) { ${getBufferMethod("put", it, javaType)}$STRUCT + $field, ")
                         print(when {
                             javaType == "boolean"
                                  -> "value ? (byte)1 : (byte)0"
@@ -1470,7 +1457,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(int, $javaType) $setter}. */")
                         println("${t}public static void n$setter(long $STRUCT, int index, $javaType value) {")
-                        println("$t${t}memPut${getBufferMethod(it, javaType)}($STRUCT + $field + check(index, ${it.size}) * $bytesPerElement, value);")
+                        println("$t${t}${getBufferMethod("put", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * $bytesPerElement, value);")
                         println("$t}")
                     }
                 } else if (it.nativeType is CharSequenceType) {
@@ -1662,9 +1649,8 @@ ${validations.joinToString("\n")}
                         println("$t${it.nullable("public")} static ${it.nativeType.className} n$getter(long $STRUCT) { return ${it.construct(it.nativeType.className)}(memGetAddress($STRUCT + $field)); }")
                     } else {
                         val javaType = it.nativeType.nativeMethodType
-                        val bufferMethod = getBufferMethod(it, javaType)
 
-                        print("${t}public static $javaType n$getter(long $STRUCT) { return memGet$bufferMethod($STRUCT + $field)")
+                        print("${t}public static $javaType n$getter(long $STRUCT) { return ${getBufferMethod("get", it, javaType)}$STRUCT + $field)")
                         if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN)
                             print(" != 0")
                         println("; }")
@@ -1725,7 +1711,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
                         println("${t}public static $javaType n$getter(long $STRUCT, int index) {")
-                        print("$t${t}return memGet${getBufferMethod(it, javaType)}($STRUCT + $field + check(index, ${it.size}) * $bytesPerElement)")
+                        print("$t${t}return ${getBufferMethod("get", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * $bytesPerElement)")
                         if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN)
                             print(" != 0")
                         println(";\n$t}")
@@ -1913,10 +1899,12 @@ $indent */""")
         }
     }
 
-    private fun getBufferMethod(member: StructMember, javaType: String) = if (member.nativeType.isPointer)
-        "Address"
+    private fun getBufferMethod(type: String, member: StructMember, javaType: String) = if (member.nativeType.isPointer)
+        "mem${type.upperCaseFirst}Address("
     else
+        "UNSAFE.$type${
         bufferMethodMap[javaType] ?: throw UnsupportedOperationException("Unsupported struct member java type: $className.${member.name} ($javaType)")
+        }(null, "
 
     override val skipNative get() = !nativeLayout && members.isNotEmpty()
 

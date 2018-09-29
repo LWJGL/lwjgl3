@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system;
 
-import org.lwjgl.*;
-
 import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
@@ -17,8 +15,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Base class of all struct implementations. */
 public abstract class Struct extends Pointer.Default {
 
+    private static final long CONTAINER;
+
     static {
         Library.initialize();
+
+        try {
+            CONTAINER = UNSAFE.objectFieldOffset(Struct.class.getDeclaredField("container"));
+        } catch (Throwable t) {
+            throw new UnsupportedOperationException(t);
+        }
     }
 
     @SuppressWarnings({"unused", "FieldCanBeLocal"})
@@ -65,6 +71,50 @@ public abstract class Struct extends Pointer.Default {
 
     // ---------------- Implementation utilities ----------------
 
+    @SuppressWarnings("unchecked")
+    protected static <T extends Struct> T wrap(Class<T> clazz, long address) {
+        T struct;
+        try {
+            struct = (T)UNSAFE.allocateInstance(clazz);
+        } catch (InstantiationException e) {
+            throw new UnsupportedOperationException(e);
+        }
+
+        UNSAFE.putLong(struct, ADDRESS, address);
+
+        return struct;
+    }
+
+    @SuppressWarnings("unchecked")
+    protected static <T extends Struct> T wrap(Class<T> clazz, long address, ByteBuffer container) {
+        T struct;
+        try {
+            struct = (T)UNSAFE.allocateInstance(clazz);
+        } catch (InstantiationException e) {
+            throw new UnsupportedOperationException(e);
+        }
+
+        UNSAFE.putLong(struct, ADDRESS, address);
+        UNSAFE.putObject(struct, CONTAINER, container);
+
+        return struct;
+    }
+
+    @SuppressWarnings("unchecked")
+    <T extends Struct> T wrap(long address, int index, @Nullable ByteBuffer container) {
+        T struct;
+        try {
+            struct = (T)UNSAFE.allocateInstance(this.getClass());
+        } catch (InstantiationException e) {
+            throw new UnsupportedOperationException(e);
+        }
+
+        UNSAFE.putLong(struct, ADDRESS, address + Integer.toUnsignedLong(index) * sizeof());
+        UNSAFE.putObject(struct, CONTAINER, container);
+
+        return struct;
+    }
+
     private void checkMemberOffset(int memberOffset) {
         if (memberOffset < 0 || sizeof() - memberOffset < POINTER_SIZE) {
             throw new IllegalArgumentException("Invalid member offset.");
@@ -79,18 +129,25 @@ public abstract class Struct extends Pointer.Default {
     }
 
     private static long getBytes(int elements, int elementSize) {
-        return Integer.toUnsignedLong(elements) * elementSize;
+        return ((long)elements & 0xFFFF_FFFFL) * elementSize;
     }
 
-    protected static long __malloc(int elements, int elementSize) {
-        long bytes = getBytes(elements, elementSize);
-        apiCheckAllocation(elements, bytes, BITS64 ? Long.MAX_VALUE : 0xFFFFFFFFL);
-        return nmemAllocChecked(bytes);
+    protected static long __checkMalloc(int elements, int elementSize) {
+        long bytes = ((long)elements & 0xFFFF_FFFFL) * elementSize;
+        if (DEBUG) {
+            if (elements < 0) {
+                throw new IllegalArgumentException("Invalid number of elements");
+            }
+            if (BITS32 && 0xFFFF_FFFFL < bytes) {
+                throw new IllegalArgumentException("The request allocation is too large");
+            }
+        }
+        return bytes;
     }
 
     protected static ByteBuffer __create(int elements, int elementSize) {
-        apiCheckAllocation(elements, getBytes(elements, elementSize), 0x7FFFFFFFL);
-        return BufferUtils.createByteBuffer(elements * elementSize);
+        apiCheckAllocation(elements, getBytes(elements, elementSize), 0x7FFF_FFFFL);
+        return ByteBuffer.allocateDirect(elements * elementSize).order(ByteOrder.nativeOrder());
     }
 
     // ---------------- Struct Member Layout ----------------

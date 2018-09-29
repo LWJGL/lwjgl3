@@ -125,6 +125,12 @@ This script is included in /build.xml and /config/update-dependencies.xml.
             <matches string="${java.version}" pattern="^9((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?$"/>
         </or>
     </condition>
+
+    <!-- Used for testing multi-release implementations. -->
+    <condition property="core.java11"><isset property="core.java12"/></condition>
+    <condition property="core.java10"><isset property="core.java11"/></condition>
+    <condition property="core.java9"><isset property="core.java10"/></condition>
+
     <property name="jni.headers" location="${java.home}/include" if:set="jdk9"/>
     <property name="jni.headers" location="${java.home}/../include" unless:set="jdk9"/>
     <condition property="set-boot-class-path">
@@ -148,6 +154,14 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <presetdef name="lwjgl.javac9">
         <javac sourcepath="" debug="yes" encoding="UTF-8">
             <compilerarg line="--release 9"/>
+            <compilerarg value="-Xlint:all"/>
+            <compilerarg value="-XDignore.symbol.file"/>
+        </javac>
+    </presetdef>
+
+    <presetdef name="lwjgl.javac10">
+        <javac sourcepath="" debug="yes" encoding="UTF-8">
+            <compilerarg line="--release 10"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>
