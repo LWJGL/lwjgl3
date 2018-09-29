@@ -232,12 +232,12 @@ public class LMDB {
      * <li>{@link #MDB_GET_BOTH GET_BOTH} - Position at key/data pair. Only for {@link #MDB_DUPSORT DUPSORT}.</li>
      * <li>{@link #MDB_GET_BOTH_RANGE GET_BOTH_RANGE} - position at key, nearest data. Only for {@link #MDB_DUPSORT DUPSORT}.</li>
      * <li>{@link #MDB_GET_CURRENT GET_CURRENT} - Return key/data at current cursor position.</li>
-     * <li>{@link #MDB_GET_MULTIPLE GET_MULTIPLE} - Return key and up to a page of duplicate data items from current cursor position. Move cursor to prepare for {@link #MDB_NEXT_MULTIPLE NEXT_MULTIPLE}. Only for {@link #MDB_DUPFIXED DUPFIXED}.</li>
+     * <li>{@link #MDB_GET_MULTIPLE GET_MULTIPLE} - Return up to a page of duplicate data items from current cursor position. Move cursor to prepare for {@link #MDB_NEXT_MULTIPLE NEXT_MULTIPLE}. Only for {@link #MDB_DUPFIXED DUPFIXED}.</li>
      * <li>{@link #MDB_LAST LAST} - Position at last key/data item.</li>
      * <li>{@link #MDB_LAST_DUP LAST_DUP} - Position at last data item of current key. Only for {@link #MDB_DUPSORT DUPSORT}.</li>
      * <li>{@link #MDB_NEXT NEXT} - Position at next data item.</li>
      * <li>{@link #MDB_NEXT_DUP NEXT_DUP} - Position at next data item of current key. Only for {@link #MDB_DUPSORT DUPSORT}.</li>
-     * <li>{@link #MDB_NEXT_MULTIPLE NEXT_MULTIPLE} - Return key and up to a page of duplicate data items from next cursor position. Move cursor to prepare for {@link #MDB_NEXT_MULTIPLE NEXT_MULTIPLE}. Only for {@link #MDB_DUPFIXED DUPFIXED}.</li>
+     * <li>{@link #MDB_NEXT_MULTIPLE NEXT_MULTIPLE} - Return up to a page of duplicate data items from next cursor position. Move cursor to prepare for {@link #MDB_NEXT_MULTIPLE NEXT_MULTIPLE}. Only for {@link #MDB_DUPFIXED DUPFIXED}.</li>
      * <li>{@link #MDB_NEXT_NODUP NEXT_NODUP} - Position at first data item of next key.</li>
      * <li>{@link #MDB_PREV PREV} - Position at previous data item.</li>
      * <li>{@link #MDB_PREV_DUP PREV_DUP} - Position at previous data item of current key. Only for {@link #MDB_DUPSORT DUPSORT}.</li>
@@ -245,7 +245,7 @@ public class LMDB {
      * <li>{@link #MDB_SET SET} - Position at specified key.</li>
      * <li>{@link #MDB_SET_KEY SET_KEY} - Position at specified key, return key + data.</li>
      * <li>{@link #MDB_SET_RANGE SET_RANGE} - Position at first key greater than or equal to specified key.</li>
-     * <li>{@link #MDB_PREV_MULTIPLE PREV_MULTIPLE} - Position at previous page and return key and up to a page of duplicate data items. Only for {@link #MDB_DUPFIXED DUPFIXED}.</li>
+     * <li>{@link #MDB_PREV_MULTIPLE PREV_MULTIPLE} - Position at previous page and return up to a page of duplicate data items. Only for {@link #MDB_DUPFIXED DUPFIXED}.</li>
      * </ul>
      */
     public static final int
@@ -1896,6 +1896,9 @@ public class LMDB {
      * Deletes current key/data pair.
      * 
      * <p>This function deletes the key/data pair to which the cursor refers.</p>
+     * 
+     * <p>This does not invalidate the cursor, so operations such as {@link #MDB_NEXT NEXT} can still be used on it. Both {@link #MDB_NEXT NEXT} and {@link #MDB_GET_CURRENT GET_CURRENT} will return the same record after
+     * this operation.</p>
      *
      * @param cursor a cursor handle returned by {@link #mdb_cursor_open cursor_open}
      * @param flags  options for this operation. This parameter must be set to 0 or one of the values described here.

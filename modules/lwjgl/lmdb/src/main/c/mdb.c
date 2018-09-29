@@ -144,6 +144,14 @@ extern int cacheflush(char *addr, int nbytes, int cache);
 #define LMDB_FREE(p)              org_lwjgl_free(p)
 #define LMDB_ALIGNED_ALLOC(al,sz) org_lwjgl_aligned_alloc(al,sz)
 #define LMDB_ALIGNED_FREE(p)      org_lwjgl_aligned_free(p)
+static char * LMDB_strdup(char * s) {
+    char *t = (char *)LMDB_MALLOC(strlen(s) + 1);
+    if (t != NULL) {
+        strcpy(t, s);
+    }
+    return t;
+}
+
 
 #ifdef _MSC_VER
 #include <io.h>
@@ -3503,10 +3511,41 @@ mdb_freelist_save(MDB_txn *txn)
 		 * we may be unable to return them to me_pghead.
 		 */
 		MDB_page *mp = txn->mt_loose_pgs;
+		MDB_ID2 *dl = txn->mt_u.dirty_list;
+		unsigned x;
 		if ((rc = mdb_midl_need(&txn->mt_free_pgs, txn->mt_loose_count)) != 0)
 			return rc;
-		for (; mp; mp = NEXT_LOOSE_PAGE(mp))
+		for (; mp; mp = NEXT_LOOSE_PAGE(mp)) {
 			mdb_midl_xappend(txn->mt_free_pgs, mp->mp_pgno);
+			/* must also remove from dirty list */
+			if (txn->mt_flags & MDB_TXN_WRITEMAP) {
+				for (x=1; x<=dl[0].mid; x++)
+					if (dl[x].mid == mp->mp_pgno)
+						break;
+				mdb_tassert(txn, x <= dl[0].mid);
+			} else {
+				x = mdb_mid2l_search(dl, mp->mp_pgno);
+				mdb_tassert(txn, dl[x].mid == mp->mp_pgno);
+			}
+			dl[x].mptr = NULL;
+			mdb_dpage_free(env, mp);
+		}
+		{
+			/* squash freed slots out of the dirty list */
+			unsigned y;
+			for (y=1; dl[y].mptr && y <= dl[0].mid; y++);
+			if (y <= dl[0].mid) {
+				for(x=y, y++;;) {
+					while (!dl[y].mptr && y <= dl[0].mid) y++;
+					if (y > dl[0].mid) break;
+					dl[x++] = dl[y++];
+				}
+				dl[0].mid = x-1;
+			} else {
+				/* all slots freed */
+				dl[0].mid = 0;
+			}
+		}
 		txn->mt_loose_pgs = NULL;
 		txn->mt_loose_count = 0;
 	}
@@ -5490,7 +5529,7 @@ mdb_env_open(MDB_env *env, const char *path, unsigned int flags, mdb_mode_t mode
 	}
 #endif
 
-	env->me_path = strdup(path);
+	env->me_path = LMDB_strdup(path);
 	env->me_dbxs = LMDB_CALLOC(env->me_maxdbs, sizeof(MDB_dbx));
 	env->me_dbflags = LMDB_CALLOC(env->me_maxdbs, sizeof(uint16_t));
 	env->me_dbiseqs = LMDB_CALLOC(env->me_maxdbs, sizeof(unsigned int));
@@ -5592,7 +5631,7 @@ mdb_env_close0(MDB_env *env, int excl)
 	LMDB_FREE(env->me_pbuf);
 	LMDB_FREE(env->me_dbiseqs);
 	LMDB_FREE(env->me_dbflags);
-	free(env->me_path);
+	LMDB_FREE(env->me_path);
 	LMDB_FREE(env->me_dirty_list);
 #ifdef MDB_VL32
 	if (env->me_txn0 && env->me_txn0->mt_rpages)
@@ -10707,7 +10746,7 @@ int mdb_dbi_open(MDB_txn *txn, const char *name, unsigned int flags, MDB_dbi *db
 	}
 
 	/* Done here so we cannot fail after creating a new DB */
-	if ((namedup = strdup(name)) == NULL)
+	if ((namedup = LMDB_strdup(name)) == NULL)
 		return ENOMEM;
 
 	if (rc) {
@@ -10723,7 +10762,7 @@ int mdb_dbi_open(MDB_txn *txn, const char *name, unsigned int flags, MDB_dbi *db
 	}
 
 	if (rc) {
-		free(namedup);
+		LMDB_FREE(namedup);
 	} else {
 		/* Got info, register DBI in this txn */
 		unsigned int slot = unused ? unused : txn->mt_numdbs;

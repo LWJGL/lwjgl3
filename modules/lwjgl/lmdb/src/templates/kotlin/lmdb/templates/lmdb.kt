@@ -183,13 +183,13 @@ ENABLE_WARNINGS()""")
         "GET_BOTH".enum("Position at key/data pair. Only for #DUPSORT."),
         "GET_BOTH_RANGE".enum("position at key, nearest data. Only for #DUPSORT."),
         "GET_CURRENT".enum("Return key/data at current cursor position."),
-        "GET_MULTIPLE".enum("Return key and up to a page of duplicate data items from current cursor position. Move cursor to prepare for #NEXT_MULTIPLE. Only for #DUPFIXED."),
+        "GET_MULTIPLE".enum("Return up to a page of duplicate data items from current cursor position. Move cursor to prepare for #NEXT_MULTIPLE. Only for #DUPFIXED."),
         "LAST".enum("Position at last key/data item."),
         "LAST_DUP".enum("Position at last data item of current key. Only for #DUPSORT."),
         "NEXT".enum("Position at next data item."),
         "NEXT_DUP".enum("Position at next data item of current key. Only for #DUPSORT."),
         "NEXT_MULTIPLE".enum(
-            "Return key and up to a page of duplicate data items from next cursor position. Move cursor to prepare for #NEXT_MULTIPLE. Only for #DUPFIXED."
+            "Return up to a page of duplicate data items from next cursor position. Move cursor to prepare for #NEXT_MULTIPLE. Only for #DUPFIXED."
         ),
         "NEXT_NODUP".enum("Position at first data item of next key."),
         "PREV".enum("Position at previous data item."),
@@ -198,7 +198,7 @@ ENABLE_WARNINGS()""")
         "SET".enum("Position at specified key."),
         "SET_KEY".enum("Position at specified key, return key + data."),
         "SET_RANGE".enum("Position at first key greater than or equal to specified key."),
-        "PREV_MULTIPLE".enum("Position at previous page and return key and up to a page of duplicate data items. Only for #DUPFIXED.")
+        "PREV_MULTIPLE".enum("Position at previous page and return up to a page of duplicate data items. Only for #DUPFIXED.")
     ).javaDocLinks
 
     EnumConstant(
@@ -1282,6 +1282,9 @@ ENABLE_WARNINGS()""")
         Deletes current key/data pair.
 
         This function deletes the key/data pair to which the cursor refers.
+
+        This does not invalidate the cursor, so operations such as #NEXT can still be used on it. Both #NEXT and #GET_CURRENT will return the same record after
+        this operation.
         """,
 
         cursor_close["cursor"],

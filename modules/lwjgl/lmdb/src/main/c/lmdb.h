@@ -402,7 +402,7 @@ typedef enum MDB_cursor_op {
 	MDB_GET_BOTH,			/**< Position at key/data pair. Only for #MDB_DUPSORT */
 	MDB_GET_BOTH_RANGE,		/**< position at key, nearest data. Only for #MDB_DUPSORT */
 	MDB_GET_CURRENT,		/**< Return key/data at current cursor position */
-	MDB_GET_MULTIPLE,		/**< Return key and up to a page of duplicate data items
+	MDB_GET_MULTIPLE,		/**< Return up to a page of duplicate data items
 								from current cursor position. Move cursor to prepare
 								for #MDB_NEXT_MULTIPLE. Only for #MDB_DUPFIXED */
 	MDB_LAST,				/**< Position at last key/data item */
@@ -411,7 +411,7 @@ typedef enum MDB_cursor_op {
 	MDB_NEXT,				/**< Position at next data item */
 	MDB_NEXT_DUP,			/**< Position at next data item of current key.
 								Only for #MDB_DUPSORT */
-	MDB_NEXT_MULTIPLE,		/**< Return key and up to a page of duplicate data items
+	MDB_NEXT_MULTIPLE,		/**< Return up to a page of duplicate data items
 								from next cursor position. Move cursor to prepare
 								for #MDB_NEXT_MULTIPLE. Only for #MDB_DUPFIXED */
 	MDB_NEXT_NODUP,			/**< Position at first data item of next key */
@@ -422,7 +422,7 @@ typedef enum MDB_cursor_op {
 	MDB_SET,				/**< Position at specified key */
 	MDB_SET_KEY,			/**< Position at specified key, return key + data */
 	MDB_SET_RANGE,			/**< Position at first key greater than or equal to specified key. */
-	MDB_PREV_MULTIPLE		/**< Position at previous page and return key and up to
+	MDB_PREV_MULTIPLE		/**< Position at previous page and return up to
 								a page of duplicate data items. Only for #MDB_DUPFIXED */
 } MDB_cursor_op;
 
@@ -1553,6 +1553,10 @@ int  mdb_cursor_put(MDB_cursor *cursor, MDB_val *key, MDB_val *data,
 	/** @brief Delete current key/data pair
 	 *
 	 * This function deletes the key/data pair to which the cursor refers.
+	 * This does not invalidate the cursor, so operations such as MDB_NEXT
+	 * can still be used on it.
+	 * Both MDB_NEXT and MDB_GET_CURRENT will return the same record after
+	 * this operation.
 	 * @param[in] cursor A cursor handle returned by #mdb_cursor_open()
 	 * @param[in] flags Options for this operation. This parameter
 	 * must be set to 0 or one of the values described here.
