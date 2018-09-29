@@ -1183,7 +1183,7 @@ public final class MemoryUtil {
      */
     public static void memCopy(ByteBuffer src, ByteBuffer dst) {
         if (CHECKS) {
-            check(src, dst.remaining());
+            check(dst, src.remaining());
         }
         memCopy(memAddress(src), memAddress(dst), src.remaining());
     }
@@ -1196,7 +1196,7 @@ public final class MemoryUtil {
      */
     public static void memCopy(ShortBuffer src, ShortBuffer dst) {
         if (CHECKS) {
-            check(src, dst.remaining());
+            check(dst, src.remaining());
         }
         memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 1));
     }
@@ -1209,7 +1209,7 @@ public final class MemoryUtil {
      */
     public static void memCopy(CharBuffer src, CharBuffer dst) {
         if (CHECKS) {
-            check((Buffer)src, dst.remaining());
+            check((Buffer)dst, src.remaining());
         }
         memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 1));
     }
@@ -1222,7 +1222,7 @@ public final class MemoryUtil {
      */
     public static void memCopy(IntBuffer src, IntBuffer dst) {
         if (CHECKS) {
-            check(src, dst.remaining());
+            check(dst, src.remaining());
         }
         memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 2));
     }
@@ -1235,7 +1235,7 @@ public final class MemoryUtil {
      */
     public static void memCopy(LongBuffer src, LongBuffer dst) {
         if (CHECKS) {
-            check(src, dst.remaining());
+            check(dst, src.remaining());
         }
         memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 3));
     }
@@ -1248,7 +1248,7 @@ public final class MemoryUtil {
      */
     public static void memCopy(FloatBuffer src, FloatBuffer dst) {
         if (CHECKS) {
-            check(src, dst.remaining());
+            check(dst, src.remaining());
         }
         memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 2));
     }
@@ -1261,7 +1261,7 @@ public final class MemoryUtil {
      */
     public static void memCopy(DoubleBuffer src, DoubleBuffer dst) {
         if (CHECKS) {
-            check(src, dst.remaining());
+            check(dst, src.remaining());
         }
         memCopy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 3));
     }
@@ -1274,7 +1274,7 @@ public final class MemoryUtil {
      */
     public static <T extends CustomBuffer<T>> void memCopy(T src, T dst) {
         if (CHECKS) {
-            check(src, dst.remaining());
+            check(dst, src.remaining());
         }
         memCopy(memAddress(src), memAddress(dst), Integer.toUnsignedLong(src.remaining()) * src.sizeof());
     }
