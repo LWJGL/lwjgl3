@@ -1959,8 +1959,6 @@ public class Assimp {
             GetMaterialString                  = apiGetFunctionAddress(ASSIMP, "aiGetMaterialString"),
             GetMaterialTextureCount            = apiGetFunctionAddress(ASSIMP, "aiGetMaterialTextureCount"),
             GetMaterialTexture                 = apiGetFunctionAddress(ASSIMP, "aiGetMaterialTexture"),
-            CreateAndRegisterDefaultMaterial   = apiGetFunctionAddress(ASSIMP, "aiCreateAndRegisterDefaultMaterial"),
-            ReleaseDefaultMaterial             = apiGetFunctionAddress(ASSIMP, "aiReleaseDefaultMaterial"),
             GetLegalString                     = apiGetFunctionAddress(ASSIMP, "aiGetLegalString"),
             GetVersionMinor                    = apiGetFunctionAddress(ASSIMP, "aiGetVersionMinor"),
             GetVersionMajor                    = apiGetFunctionAddress(ASSIMP, "aiGetVersionMajor"),
@@ -3904,34 +3902,6 @@ public class Assimp {
             checkSafe(flags, 1);
         }
         return naiGetMaterialTexture(pMat.address(), type, index, path.address(), memAddressSafe(mapping), memAddressSafe(uvindex), memAddressSafe(blend), memAddressSafe(op), memAddressSafe(mapmode), memAddressSafe(flags));
-    }
-
-    // --- [ aiCreateAndRegisterDefaultMaterial ] ---
-
-    /** Unsafe version of: {@link #aiCreateAndRegisterDefaultMaterial CreateAndRegisterDefaultMaterial} */
-    public static long naiCreateAndRegisterDefaultMaterial() {
-        long __functionAddress = Functions.CreateAndRegisterDefaultMaterial;
-        return invokeP(__functionAddress);
-    }
-
-    /**
-     * Helper function to get all values pertaining to a particular texture slot from a material structure.
-     *
-     * @return pointer to the default material
-     */
-    @Nullable
-    @NativeType("struct aiMaterial *")
-    public static AIMaterial aiCreateAndRegisterDefaultMaterial() {
-        long __result = naiCreateAndRegisterDefaultMaterial();
-        return AIMaterial.createSafe(__result);
-    }
-
-    // --- [ aiReleaseDefaultMaterial ] ---
-
-    /** Helper function to release the default material instance, the instance will not be destroyed. */
-    public static void aiReleaseDefaultMaterial() {
-        long __functionAddress = Functions.ReleaseDefaultMaterial;
-        invokeV(__functionAddress);
     }
 
     // --- [ aiGetLegalString ] ---

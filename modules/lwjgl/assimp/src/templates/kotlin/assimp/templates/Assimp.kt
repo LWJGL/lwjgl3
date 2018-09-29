@@ -2311,18 +2311,6 @@ aiAttachLogStream(&c);""")}
         returnDoc = "#Return_SUCCESS on success, otherwise something else. Have fun."
     )
 
-    aiMaterial.p(
-        "CreateAndRegisterDefaultMaterial",
-        "Helper function to get all values pertaining to a particular texture slot from a material structure.",
-
-        returnDoc = "pointer to the default material"
-    )
-
-    void(
-        "ReleaseDefaultMaterial",
-        "Helper function to release the default material instance, the instance will not be destroyed."
-    )
-
     // mesh.h
 
     IntConstant(
