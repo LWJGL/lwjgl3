@@ -22,8 +22,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <pre><code>
  * void (*) (
  *     bgfx_callback_interface_t *_this,
+ *     char const *_filePath,
+ *     uint16_t _line,
  *     bgfx_fatal_t _code,
- *     char *_str
+ *     char const *_str
  * )</code></pre>
  */
 public abstract class BGFXFatalCallback extends Callback implements BGFXFatalCallbackI {
@@ -71,8 +73,8 @@ public abstract class BGFXFatalCallback extends Callback implements BGFXFatalCal
         }
 
         @Override
-        public void invoke(long _this, int _code, long _str) {
-            delegate.invoke(_this, _code, _str);
+        public void invoke(long _this, long _filePath, short _line, int _code, long _str) {
+            delegate.invoke(_this, _filePath, _line, _code, _str);
         }
 
     }

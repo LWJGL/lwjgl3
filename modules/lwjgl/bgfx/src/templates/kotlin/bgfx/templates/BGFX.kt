@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."76"
+        "API_VERSION".."84"
     )
 
     ShortConstant(
@@ -274,98 +274,111 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "BUFFER_COMPUTE_TYPE_MASK"..0x0030.s
     )
 
-    val TextureFlags = IntConstant(
-        "Texture",
+    val TextureFlags = LongConstant(
+        "Texture creation flags.",
+        
+        "TEXTURE_NONE"..0x0000000000000000L,
+        "TEXTURE_MSAA_SAMPLE"..0x0000000800000000L,
+        "TEXTURE_RT"..0x0000001000000000L,
+        "TEXTURE_RT_MSAA_X2"..0x0000002000000000L,
+        "TEXTURE_RT_MSAA_X4"..0x0000003000000000L,
+        "TEXTURE_RT_MSAA_X8"..0x0000004000000000L,
+        "TEXTURE_RT_MSAA_X16"..0x0000005000000000L,
+        "TEXTURE_RT_WRITE_ONLY"..0x0000008000000000L,
+        "TEXTURE_COMPUTE_WRITE"..0x0000100000000000L,
+        "TEXTURE_SRGB"..0x0000200000000000L,
+        "TEXTURE_BLIT_DST"..0x0000400000000000L,
+        "TEXTURE_READ_BACK"..0x0000800000000000L
+    ).javaDocLinks
+    
+    IntConstant(
+        "Texture shifts.",
 
-        "TEXTURE_NONE"..0x00000000,
+        "TEXTURE_RT_MSAA_SHIFT".."36"
+    )
 
-        "TEXTURE_U_MIRROR"..0x00000001,
-        "TEXTURE_U_CLAMP"..0x00000002,
-        "TEXTURE_U_BORDER"..0x00000003,
+    LongConstant(
+        "Texture masks.",
 
-        "TEXTURE_V_MIRROR"..0x00000004,
-        "TEXTURE_V_CLAMP"..0x00000008,
-        "TEXTURE_V_BORDER"..0x0000000c,
+        "TEXTURE_RT_MSAA_MASK"..0x0000007000000000L,
+        "TEXTURE_RT_MASK"..0x000000f000000000L
+    )
 
-        "TEXTURE_W_MIRROR"..0x00000010,
-        "TEXTURE_W_CLAMP"..0x00000020,
-        "TEXTURE_W_BORDER"..0x00000030,
+    val SamplerFlags = IntConstant(
+        "Sample flags.",
 
-        "TEXTURE_MIN_POINT"..0x00000040,
-        "TEXTURE_MIN_ANISOTROPIC"..0x00000080,
+        "SAMPLER_NONE"..0x00000000,
 
-        "TEXTURE_MAG_POINT"..0x00000100,
-        "TEXTURE_MAG_ANISOTROPIC"..0x00000200,
+        "SAMPLER_U_MIRROR"..0x00000001,
+        "SAMPLER_U_CLAMP"..0x00000002,
+        "SAMPLER_U_BORDER"..0x00000003,
 
-        "TEXTURE_MIP_POINT"..0x00000400,
+        "SAMPLER_V_MIRROR"..0x00000004,
+        "SAMPLER_V_CLAMP"..0x00000008,
+        "SAMPLER_V_BORDER"..0x0000000c,
 
-        "TEXTURE_MSAA_SAMPLE"..0x00000800,
-        "TEXTURE_RT"..0x00001000,
-        "TEXTURE_RT_MSAA_X2"..0x00002000,
-        "TEXTURE_RT_MSAA_X4"..0x00003000,
-        "TEXTURE_RT_MSAA_X8"..0x00004000,
-        "TEXTURE_RT_MSAA_X16"..0x00005000,
+        "SAMPLER_W_MIRROR"..0x00000010,
+        "SAMPLER_W_CLAMP"..0x00000020,
+        "SAMPLER_W_BORDER"..0x00000030,
 
-        "TEXTURE_RT_WRITE_ONLY"..0x00008000,
+        "SAMPLER_MIN_POINT"..0x00000040,
+        "SAMPLER_MIN_ANISOTROPIC"..0x00000080,
 
-        "TEXTURE_COMPARE_LESS"..0x00010000,
-        "TEXTURE_COMPARE_LEQUAL"..0x00020000,
-        "TEXTURE_COMPARE_EQUAL"..0x00030000,
-        "TEXTURE_COMPARE_GEQUAL"..0x00040000,
-        "TEXTURE_COMPARE_GREATER"..0x00050000,
-        "TEXTURE_COMPARE_NOTEQUAL"..0x00060000,
-        "TEXTURE_COMPARE_NEVER"..0x00070000,
-        "TEXTURE_COMPARE_ALWAYS"..0x00080000,
+        "SAMPLER_MAG_POINT"..0x00000100,
+        "SAMPLER_MAG_ANISOTROPIC"..0x00000200,
 
-        "TEXTURE_COMPUTE_WRITE"..0x00100000,
-        "TEXTURE_SRGB"..0x00200000,
-        "TEXTURE_BLIT_DST"..0x00400000,
-        "TEXTURE_READ_BACK"..0x00800000
+        "SAMPLER_MIP_POINT"..0x00000400,
+
+        "SAMPLER_COMPARE_LESS"..0x00010000,
+        "SAMPLER_COMPARE_LEQUAL"..0x00020000,
+        "SAMPLER_COMPARE_EQUAL"..0x00030000,
+        "SAMPLER_COMPARE_GEQUAL"..0x00040000,
+        "SAMPLER_COMPARE_GREATER"..0x00050000,
+        "SAMPLER_COMPARE_NOTEQUAL"..0x00060000,
+        "SAMPLER_COMPARE_NEVER"..0x00070000,
+        "SAMPLER_COMPARE_ALWAYS"..0x00080000,
+
+        "SAMPLER_SAMPLE_STENCIL"..0x00100000
     ).javaDocLinks
 
     IntConstant(
-        "Texture shifts/masks",
+        "Sampler shifts/masks",
 
-        "TEXTURE_U_SHIFT".."0",
-        "TEXTURE_U_MASK"..0x00000003,
+        "SAMPLER_U_SHIFT".."0",
+        "SAMPLER_U_MASK"..0x00000003,
 
-        "TEXTURE_V_SHIFT".."2",
-        "TEXTURE_V_MASK"..0x0000000c,
+        "SAMPLER_V_SHIFT".."2",
+        "SAMPLER_V_MASK"..0x0000000c,
 
-        "TEXTURE_W_SHIFT".."4",
-        "TEXTURE_W_MASK"..0x00000030,
+        "SAMPLER_W_SHIFT".."4",
+        "SAMPLER_W_MASK"..0x00000030,
 
-        "TEXTURE_MIN_SHIFT".."6",
-        "TEXTURE_MIN_MASK"..0x000000c0,
+        "SAMPLER_MIN_SHIFT".."6",
+        "SAMPLER_MIN_MASK"..0x000000c0,
 
-        "TEXTURE_MAG_SHIFT".."8",
-        "TEXTURE_MAG_MASK"..0x00000300,
+        "SAMPLER_MAG_SHIFT".."8",
+        "SAMPLER_MAG_MASK"..0x00000300,
 
-        "TEXTURE_MIP_SHIFT".."10",
-        "TEXTURE_MIP_MASK"..0x00000400,
+        "SAMPLER_MIP_SHIFT".."10",
+        "SAMPLER_MIP_MASK"..0x00000400,
 
-        "TEXTURE_RT_MSAA_SHIFT".."12",
-        "TEXTURE_RT_MSAA_MASK"..0x00007000,
+        "SAMPLER_COMPARE_SHIFT".."16",
+        "SAMPLER_COMPARE_MASK"..0x000f0000,
 
-        "TEXTURE_RT_MASK"..0x0000f000,
+        "SAMPLER_BORDER_COLOR_SHIFT".."24",
+        "SAMPLER_BORDER_COLOR_MASK"..0x0f000000,
 
-        "TEXTURE_COMPARE_SHIFT".."16",
-        "TEXTURE_COMPARE_MASK"..0x000f0000,
+        "SAMPLER_RESERVED_SHIFT".."28",
+        "SAMPLER_RESERVED_MASK".."0xF0000000",
 
-        "TEXTURE_BORDER_COLOR_SHIFT".."24",
-        "TEXTURE_BORDER_COLOR_MASK"..0x0f000000,
-
-        "TEXTURE_RESERVED_SHIFT".."28",
-        "TEXTURE_RESERVED_MASK".."0xf0000000",
-
-        "TEXTURE_SAMPLER_BITS_MASK".."""(0
-        | BGFX_TEXTURE_U_MASK
-        | BGFX_TEXTURE_V_MASK
-        | BGFX_TEXTURE_W_MASK
-        | BGFX_TEXTURE_MIN_MASK
-        | BGFX_TEXTURE_MAG_MASK
-        | BGFX_TEXTURE_MIP_MASK
-        | BGFX_TEXTURE_COMPARE_MASK)
+        "SAMPLER_SAMPLER_BITS_MASK".."""(0
+        | BGFX_SAMPLER_U_MASK
+        | BGFX_SAMPLER_V_MASK
+        | BGFX_SAMPLER_W_MASK
+        | BGFX_SAMPLER_MIN_MASK
+        | BGFX_SAMPLER_MAG_MASK
+        | BGFX_SAMPLER_MIP_MASK
+        | BGFX_SAMPLER_COMPARE_MASK)
         """
     )
 
@@ -388,9 +401,10 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "RESET_FLUSH_AFTER_RENDER"..0x00002000,
         "RESET_FLIP_AFTER_RENDER"..0x00004000,
         "RESET_SRGB_BACKBUFFER"..0x00008000,
-        "RESET_HIDPI"..0x00010000,
-        "RESET_DEPTH_CLAMP"..0x00020000,
-        "RESET_SUSPEND"..0x00040000
+        "RESET_HDR10"..0x00010000,
+        "RESET_HIDPI"..0x00020000,
+        "RESET_DEPTH_CLAMP"..0x00040000,
+        "RESET_SUSPEND"..0x00080000
     ).javaDocLinks
 
     IntConstant(
@@ -411,23 +425,24 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_FRAGMENT_DEPTH"..0x0000000000000020L,
         "CAPS_FRAGMENT_ORDERING"..0x0000000000000040L,
         "CAPS_GRAPHICS_DEBUGGER"..0x0000000000000080L,
-        "CAPS_HIDPI"..0x0000000000000100L,
-        "CAPS_INDEX32"..0x0000000000000400L,
-        "CAPS_INSTANCING"..0x0000000000000800L,
-        "CAPS_OCCLUSION_QUERY"..0x0000000000001000L,
-        "CAPS_RENDERER_MULTITHREADED"..0x0000000000002000L,
-        "CAPS_SWAP_CHAIN"..0x0000000000004000L,
-        "CAPS_TEXTURE_2D_ARRAY"..0x0000000000008000L,
-        "CAPS_TEXTURE_3D"..0x0000000000010000L,
-        "CAPS_TEXTURE_BLIT"..0x0000000000020000L,
-        "CAPS_TEXTURE_COMPARE_ALL"..0x00000000000C0000L,
-        "CAPS_TEXTURE_COMPARE_LEQUAL"..0x0000000000080000L,
-        "CAPS_TEXTURE_CUBE_ARRAY"..0x0000000000100000L,
-        "CAPS_TEXTURE_DIRECT_ACCESS"..0x0000000000200000L,
-        "CAPS_TEXTURE_READ_BACK"..0x0000000000400000L,
+        "CAPS_HDR10"..0x0000000000000100L,
+        "CAPS_HIDPI"..0x0000000000000400L,
+        "CAPS_INDEX32"..0x0000000000000800L,
+        "CAPS_INSTANCING"..0x0000000000001000L,
+        "CAPS_OCCLUSION_QUERY"..0x0000000000002000L,
+        "CAPS_RENDERER_MULTITHREADED"..0x0000000000004000L,
+        "CAPS_SWAP_CHAIN"..0x0000000000008000L,
+        "CAPS_TEXTURE_2D_ARRAY"..0x0000000000010000L,
+        "CAPS_TEXTURE_3D"..0x0000000000020000L,
+        "CAPS_TEXTURE_BLIT"..0x00000000000c0000L,
+        "CAPS_TEXTURE_COMPARE_ALL"..0x0000000000080000L,
+        "CAPS_TEXTURE_COMPARE_LEQUAL"..0x0000000000100000L,
+        "CAPS_TEXTURE_CUBE_ARRAY"..0x0000000000200000L,
+        "CAPS_TEXTURE_DIRECT_ACCESS"..0x0000000000400000L,
+        "CAPS_TEXTURE_READ_BACK"..0x0000000000800000L,
         "CAPS_VERTEX_ATTRIB_HALF"..0x0000000000800000L,
-        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000000800000L,
-        "CAPS_VERTEX_ID"..0x0000000001000000L
+        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000001000000L,
+        "CAPS_VERTEX_ID"..0x0000000002000000L
     )
 
     ShortConstant(
@@ -994,7 +1009,8 @@ RGBA16S
 
         uint32_t.IN("_width", "back-buffer width"),
         uint32_t.IN("_height", "back-buffer height"),
-        uint32_t.IN("_flags", "reset flags", ResetFlags, LinkMode.BITFIELD)
+        uint32_t.IN("_flags", "reset flags", ResetFlags, LinkMode.BITFIELD),
+        bgfx_texture_format_t.IN("_format", "texture format", TextureFormat)
     )
 
     bgfx_encoder_s.p(
@@ -1420,7 +1436,7 @@ RGBA16S
         bool.IN("_cubeMap", "indicates that texture contains cubemap"),
         MapToInt..uint16_t.IN("_numLayers", "number of layers in texture array"),
         bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
-        uint32_t.IN("_flags", "texture flags", TextureFlags, LinkMode.BITFIELD)
+        uint64_t.IN("_flags", "texture flags", TextureFlags, LinkMode.BITFIELD)
     )
 
     void(
@@ -1442,7 +1458,11 @@ RGBA16S
         "Creates texture from memory buffer.",
 
         bgfx_memory_t.const.p.IN("_mem", "DDS, KTX or PVR texture data"),
-        uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
+        uint64_t.IN(
+            "_flags",
+            "texture creation and sampler flags. Default texture sampling mode is linear, and wrap mode is repeat.",
+            "$TextureFlags $SamplerFlags", LinkMode.BITFIELD
+        ),
         MapToInt..uint8_t.IN("_skip", "skip top level mips when parsing texture"),
         nullable..bgfx_texture_info_t_p.OUT("_info", "when non-#NULL is specified it returns parsed texture information")
     )
@@ -1456,7 +1476,11 @@ RGBA16S
         bool.IN("_hasMips", "indicates that texture contains full mip-map chain"),
         MapToInt..uint16_t.IN("_numLayers", "number of layers in texture array. Must be 1 if caps #CAPS_TEXTURE_2D_ARRAY flag is not set."),
         bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
-        uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
+        uint64_t.IN(
+            "_flags",
+            "texture creation and sampler flags. Default texture sampling mode is linear, and wrap mode is repeat.",
+            "$TextureFlags $SamplerFlags", LinkMode.BITFIELD
+        ),
         nullable..bgfx_memory_t.const.p.IN(
             "_mem",
             """
@@ -1474,7 +1498,11 @@ RGBA16S
         bool.IN("_hasMips", "indicates that texture contains full mip-map chain"),
         MapToInt..uint16_t.IN("_numLayers", "number of layers in texture array. Must be 1 if caps #CAPS_TEXTURE_2D_ARRAY flag is not set."),
         bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
-        uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD)
+        uint64_t.IN(
+            "_flags",
+            "texture creation and sampler flags. Default texture sampling mode is linear, and wrap mode is repeat.",
+            "$TextureFlags $SamplerFlags", LinkMode.BITFIELD
+        )
     )
 
     bgfx_texture_handle_t(
@@ -1486,7 +1514,11 @@ RGBA16S
         MapToInt..uint16_t.IN("_depth", "depth"),
         bool.IN("_hasMips", "indicates that texture contains full mip-map chain"),
         bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
-        uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
+        uint64_t.IN(
+            "_flags",
+            "texture creation and sampler flags. Default texture sampling mode is linear, and wrap mode is repeat.",
+            "$TextureFlags $SamplerFlags", LinkMode.BITFIELD
+        ),
         nullable..bgfx_memory_t.const.p.IN("_mem", "texture data. If {@code _mem} is non-#NULL, created texture will be immutable.")
     )
 
@@ -1498,7 +1530,11 @@ RGBA16S
         bool.IN("_hasMips", "indicates that texture contains full mip-map chain"),
         MapToInt..uint16_t.IN("_numLayers", "number of layers in texture array. Must be 1 if caps #CAPS_TEXTURE_CUBE_ARRAY flag is not set."),
         bgfx_texture_format_t.IN("_format", "", TextureFormat),
-        uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags, LinkMode.BITFIELD),
+        uint64_t.IN(
+            "_flags",
+            "texture creation and sampler flags. Default texture sampling mode is linear, and wrap mode is repeat.",
+            "$TextureFlags $SamplerFlags", LinkMode.BITFIELD
+        ),
         nullable..bgfx_memory_t.const.p.IN(
             "_mem",
             """
@@ -1642,7 +1678,7 @@ RGBA16S
         MapToInt..uint16_t.IN("_width", "texture width"),
         MapToInt..uint16_t.IN("_height", "texture height"),
         bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
-        uint32_t.IN("_textureFlags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags),
+        uint64_t.IN("_textureFlags", "default texture sampling mode is linear, and wrap mode is repeat", "$TextureFlags $SamplerFlags"),
 
         returnDoc = "handle to frame buffer object"
     )
@@ -1653,7 +1689,7 @@ RGBA16S
 
         bgfx_backbuffer_ratio_t.IN("_ratio", "frame buffer size in respect to back-buffer size", BackbufferRatio),
         bgfx_texture_format_t.IN("_format", "texture format", TextureFormat),
-        uint32_t.IN("_textureFlags", "default texture sampling mode is linear, and wrap mode is repeat", TextureFlags),
+        uint64_t.IN("_textureFlags", "default texture sampling mode is linear, and wrap mode is repeat", "$TextureFlags $SamplerFlags"),
 
         returnDoc = "handle to frame buffer object"
     )
@@ -1691,6 +1727,7 @@ RGBA16S
         opaque_p.IN("_nwh", "OS' target native window handle"),
         MapToInt..uint16_t.IN("_width", "window back buffer width"),
         MapToInt..uint16_t.IN("_height", "window back buffer height"),
+        bgfx_texture_format_t.IN("_format", "window back buffer color format", TextureFormat),
         bgfx_texture_format_t.IN("_depthFormat", "window back buffer depth format", TextureFormat),
 
         returnDoc = "handle to frame buffer object"
@@ -2163,13 +2200,24 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
     )
 
     void(
+        "set_instance_count",
+        """
+        Sets number of instances for auto generated instances use in conjuction with {@code gl_InstanceID}.
+
+        Availability depends on: #CAPS_VERTEX_ID.
+        """,
+
+        uint32_t.IN("_numInstances", "number of instances")
+    )
+
+    void(
         "set_texture",
         "Sets texture stage for draw primitive.",
 
         MapToInt..uint8_t.IN("_stage", "texture unit"),
         bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
         bgfx_texture_handle_t.IN("_handle", "texture handle"),
-        uint32_t.IN("_flags", "texture sampling mode. {@code UINT32_MAX} uses texture sampling settings from the texture.", TextureFlags)
+        uint32_t.IN("_flags", "texture sampling mode. {@code UINT32_MAX} uses texture sampling settings from the texture.", SamplerFlags)
     )
 
     void(
@@ -2574,6 +2622,18 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
     )
 
     void(
+        "encoder_set_instance_count",
+        """
+        Sets number of instances for auto generated instances use in conjuction with {@code gl_InstanceID}.
+
+        Availability depends on: #CAPS_VERTEX_ID.
+        """,
+
+        bgfx_encoder_s.p.IN("_encoder", "the encoder"),
+        uint32_t.IN("_numInstances", "number of instances")
+    )
+
+    void(
         "encoder_set_texture",
         "Sets texture stage for draw primitive.",
 
@@ -2581,7 +2641,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..uint8_t.IN("_stage", "texture unit"),
         bgfx_uniform_handle_t.IN("_sampler", "program sampler"),
         bgfx_texture_handle_t.IN("_handle", "texture handle"),
-        uint32_t.IN("_flags", "texture sampling mode. {@code UINT32_MAX} uses texture sampling settings from the texture.", TextureFlags)
+        uint32_t.IN("_flags", "texture sampling mode. {@code UINT32_MAX} uses texture sampling settings from the texture.", SamplerFlags)
     )
 
     void(
@@ -2899,8 +2959,8 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         noPrefix = true
     )
 
-    macro(expression = "(_index << BGFX_TEXTURE_BORDER_COLOR_SHIFT) & BGFX_TEXTURE_BORDER_COLOR_MASK")..uint32_t(
-        "BGFX_TEXTURE_BORDER_COLOR", "",
+    macro(expression = "(_index << BGFX_SAMPLER_BORDER_COLOR_SHIFT) & BGFX_SAMPLER_BORDER_COLOR_MASK")..uint32_t(
+        "BGFX_SAMPLER_BORDER_COLOR", "",
         uint32_t.IN("_index", ""),
         noPrefix = true
     )

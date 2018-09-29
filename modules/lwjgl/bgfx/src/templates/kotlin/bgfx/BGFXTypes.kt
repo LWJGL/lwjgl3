@@ -85,7 +85,12 @@ val bgfx_release_fn_t = Module.BGFX.callback {
     }
 }
 val bgfx_memory_t = struct(Module.BGFX, "BGFXMemory", nativeName = "bgfx_memory_t") {
-    documentation = "Memory obtained by calling #alloc(), #copy(), or #make_ref()."
+    documentation =
+        """
+        Memory must be obtained by calling #alloc(), #copy(), or #make_ref().
+
+        It is illegal to create this structure on stack and pass it to any bgfx API.
+        """
 
     uint8_t.p.member("data", "pointer to data")
     AutoSize("data")..uint32_t.member("size", "data size")
@@ -265,6 +270,7 @@ val bgfx_caps_limits_t = struct(Module.BGFX, "BGFXCapsLimits", nativeName = "bgf
     uint32_t.member("maxShaders", "maximum number of shader handles")
     uint32_t.member("maxTextures", "maximum number of texture handles")
     uint32_t.member("maxTextureSamplers", "maximum number of texture samplers")
+    uint32_t.member("maxComputeBindings", "maximum number of compute bindings")
     uint32_t.member("maxVertexDecls", "maximum number of vertex format declarations")
     uint32_t.member("maxVertexStreams", "maximum number of vertex streams")
     uint32_t.member("maxIndexBuffers", "maximum number of index buffer handles")
@@ -312,8 +318,10 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
             "This callback is called on unrecoverable errors.",
 
             _bgfx_callback_interface_t.p.IN("_this", "the callback interface"),
+            charASCII.const.p.IN("_filePath", ""),
+			uint16_t.IN("_line", ""),
             bgfx_fatal_t.IN("_code", "the error code"),
-            charASCII.p.IN("_str", "the error message")
+            charASCII.const.p.IN("_str", "the error message")
         ) {
             documentation =
                 """
@@ -459,9 +467,9 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
             _bgfx_callback_interface_t.p.IN("_this", "the callback interface"),
             uint32_t.IN("_width", "image width"),
             uint32_t.IN("_height", "image height"),
-            uint32_t.IN("_pitch", "number of bytes to skip to next line"),
+            uint32_t.IN("_pitch", "number of bytes to skip between the start of each horizontal line of the image"),
             bgfx_texture_format_t.IN("_format", "texture format"),
-            bool.IN("_yflip", "if true image origin is bottom left")
+            bool.IN("_yflip", "if true, image origin is bottom left")
         ) {
             documentation = "Called when video capture begins."
         }
@@ -536,9 +544,11 @@ val bgfx_allocator_interface_t = struct(Module.BGFX, "BGFXAllocatorInterface", n
 val bgfx_resolution_t = struct(Module.BGFX, "BGFXResolution", nativeName = "bgfx_resolution_t", skipBuffer = true) {
     documentation = "Backbuffer resolution and reset parameters."
 
+    bgfx_texture_format_t.member("format", "backbuffer format")
     uint32_t.member("width", "backbuffer width")
     uint32_t.member("height", "backbuffer height")
     uint32_t.member("reset", "reset parameters")
+    uint8_t.member("maxFrameLatency", "maximum frame latency")
 }
 
 val bgfx_init_limits_t = struct(Module.BGFX, "BGFXInitLimits", nativeName = "bgfx_init_limits_t", skipBuffer = true)  {

@@ -20,15 +20,17 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <pre><code>
  * void (*) (
  *     bgfx_callback_interface_t *_this,
+ *     char const *_filePath,
+ *     uint16_t _line,
  *     bgfx_fatal_t _code,
- *     char *_str
+ *     char const *_str
  * )</code></pre>
  */
 @FunctionalInterface
-@NativeType("void (*) (bgfx_callback_interface_t *, bgfx_fatal_t, char *)")
+@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, bgfx_fatal_t, char const *)")
 public interface BGFXFatalCallbackI extends CallbackI.V {
 
-    String SIGNATURE = "(pip)v";
+    String SIGNATURE = "(ppsip)v";
 
     @Override
     default String getSignature() { return SIGNATURE; }
@@ -37,6 +39,8 @@ public interface BGFXFatalCallbackI extends CallbackI.V {
     default void callback(long args) {
         invoke(
             dcbArgPointer(args),
+            dcbArgPointer(args),
+            dcbArgShort(args),
             dcbArgInt(args),
             dcbArgPointer(args)
         );
@@ -49,6 +53,6 @@ public interface BGFXFatalCallbackI extends CallbackI.V {
      * @param _code the error code
      * @param _str  the error message
      */
-    void invoke(@NativeType("bgfx_callback_interface_t *") long _this, @NativeType("bgfx_fatal_t") int _code, @NativeType("char *") long _str);
+    void invoke(@NativeType("bgfx_callback_interface_t *") long _this, @NativeType("char const *") long _filePath, @NativeType("uint16_t") short _line, @NativeType("bgfx_fatal_t") int _code, @NativeType("char const *") long _str);
 
 }

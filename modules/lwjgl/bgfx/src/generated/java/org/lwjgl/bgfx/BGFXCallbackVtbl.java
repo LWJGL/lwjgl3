@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct bgfx_callback_vtbl_t {
- *     void (*{@link BGFXFatalCallbackI fatal}) (bgfx_callback_interface_t *_this, bgfx_fatal_t _code, char *_str);
+ *     void (*{@link BGFXFatalCallbackI fatal}) (bgfx_callback_interface_t *_this, char const *_filePath, uint16_t _line, bgfx_fatal_t _code, char const *_str);
  *     void (*{@link BGFXTraceVarArgsCallbackI trace_vargs}) (bgfx_callback_interface_t *_this, char const *_filePath, uint16_t _line, char const *_format, va_list _argList);
  *     void (*{@link BGFXProfilerBeginI profiler_begin}) (bgfx_callback_interface_t *_this, char const *_name, uint32_t _abgr, char const *_filePath, uint16_t _line);
  *     void (*{@link BGFXProfilerBeginLiteralI profiler_begin_literal}) (bgfx_callback_interface_t *_this, char const *_name, uint32_t _abgr, char const *_filePath, uint16_t _line);
@@ -129,7 +129,7 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /** Returns the value of the {@code fatal} field. */
-    @NativeType("void (*) (bgfx_callback_interface_t *, bgfx_fatal_t, char *)")
+    @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, bgfx_fatal_t, char const *)")
     public BGFXFatalCallback fatal() { return nfatal(address()); }
     /** Returns the value of the {@code trace_vargs} field. */
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, char const *, va_list)")
@@ -166,7 +166,7 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
     public BGFXCaptureFrameCallback capture_frame() { return ncapture_frame(address()); }
 
     /** Sets the specified value to the {@code fatal} field. */
-    public BGFXCallbackVtbl fatal(@NativeType("void (*) (bgfx_callback_interface_t *, bgfx_fatal_t, char *)") BGFXFatalCallbackI value) { nfatal(address(), value); return this; }
+    public BGFXCallbackVtbl fatal(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, bgfx_fatal_t, char const *)") BGFXFatalCallbackI value) { nfatal(address(), value); return this; }
     /** Sets the specified value to the {@code trace_vargs} field. */
     public BGFXCallbackVtbl trace_vargs(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, char const *, va_list)") BGFXTraceVarArgsCallbackI value) { ntrace_vargs(address(), value); return this; }
     /** Sets the specified value to the {@code profiler_begin} field. */
