@@ -35,7 +35,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Cort Stratton @cdwfs</li>
+                <li>Cort Stratton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_validation_cache:%20&amp;body=@cdwfs%20">cdwfs</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

@@ -43,7 +43,7 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tobias Hector @tobski</li>
+                <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_bind_memory2:%20&amp;body=@tobski%20">tobski</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

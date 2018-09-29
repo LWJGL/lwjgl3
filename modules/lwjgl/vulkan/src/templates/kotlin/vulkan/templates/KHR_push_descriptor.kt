@@ -37,7 +37,7 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz @jeffbolznv</li>
+                <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_push_descriptor:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
@@ -229,7 +229,7 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 ￿
 ￿};
 ￿
-￿// create an descriptor update template for descriptor set updates
+￿// create a descriptor update template for descriptor set updates
 ￿const VkDescriptorUpdateTemplateCreateInfo createInfo =
 ￿{
 ￿    VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO,  // sType

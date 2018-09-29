@@ -35,7 +35,7 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones @cubanismo</li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_acquire_xlib_display:%20&amp;body=@cubanismo%20">cubanismo</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

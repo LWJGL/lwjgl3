@@ -81,7 +81,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Michael Worcester @michaelworcester</li>
+ * <li>Michael Worcester <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_maintenance2:%20&amp;body=@michaelworcester%20">michaelworcester</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-05</dd>

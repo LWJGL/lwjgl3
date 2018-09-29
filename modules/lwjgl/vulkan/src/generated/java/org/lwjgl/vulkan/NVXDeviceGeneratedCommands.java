@@ -134,7 +134,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Christoph Kubisch @pixeljetstream</li>
+ * <li>Christoph Kubisch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NVX_device_generated_commands:%20&amp;body=@pixeljetstream%20">pixeljetstream</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-07-25</dd>
@@ -213,7 +213,7 @@ public class NVXDeviceGeneratedCommands {
         VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX = 1000086001;
 
     /**
-     * VkIndirectCommandsLayoutUsageFlagBitsNVX - Bitmask specifying allowed usage of a indirect commands layout
+     * VkIndirectCommandsLayoutUsageFlagBitsNVX - Bitmask specifying allowed usage of an indirect commands layout
      * 
      * <h5>Description</h5>
      * 
@@ -538,7 +538,7 @@ public class NVXDeviceGeneratedCommands {
     }
 
     /**
-     * Destroy a object table.
+     * Destroy an object table.
      * 
      * <h5>C Specification</h5>
      * 
@@ -659,7 +659,7 @@ public class NVXDeviceGeneratedCommands {
     }
 
     /**
-     * Destroy a object table.
+     * Destroy an object table.
      * 
      * <h5>C Specification</h5>
      * 

@@ -87,7 +87,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Courtney Goeltzenleuchter @courtney-g</li>
+ * <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_debug_report:%20&amp;body=@courtney-g%20">courtney-g</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-12</dd>
@@ -110,8 +110,19 @@ public class EXTDebugReport {
     /** The extension name. */
     public static final String VK_EXT_DEBUG_REPORT_EXTENSION_NAME = "VK_EXT_debug_report";
 
-    /** Extends {@code VkStructureType}. */
-    public static final int VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT = 1000011000;
+    /**
+     * Extends {@code VkStructureType}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT}</li>
+     * </ul>
+     */
+    public static final int
+        VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT = 1000011000,
+        VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT          = 1000011000;
 
     /** Extends {@code VkResult}. */
     public static final int VK_ERROR_VALIDATION_FAILED_EXT = -1000011001;
@@ -130,8 +141,8 @@ public class EXTDebugReport {
      * </ul>
      */
     public static final int
-        VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT   = 1000011000,
-        VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT = 1000011000;
+        VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT   = 1000156000,
+        VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT = 1000085000;
 
     /**
      * VkDebugReportObjectTypeEXT - Specify the type of an object handle
@@ -192,7 +203,9 @@ public class EXTDebugReport {
      * <h5>Enum values:</h5>
      * 
      * <ul>
+     * <li>{@link #VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT}</li>
      * <li>{@link #VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT}</li>
+     * <li>{@link #VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT}</li>
      * </ul>
      */
     public static final int
@@ -225,11 +238,13 @@ public class EXTDebugReport {
         VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT                  = 26,
         VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT                = 27,
         VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT    = 28,
+        VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT                 = 28,
         VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT                  = 29,
         VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT             = 30,
         VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT             = 31,
         VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT = 32,
-        VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT         = 33;
+        VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT         = 33,
+        VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT             = 33;
 
     /**
      * VkDebugReportFlagBitsEXT - Bitmask specifying events which cause a debug report callback

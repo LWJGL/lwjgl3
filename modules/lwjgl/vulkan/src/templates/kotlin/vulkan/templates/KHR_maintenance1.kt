@@ -54,7 +54,7 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type 
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell @pdaniell-nv</li>
+                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_maintenance1:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

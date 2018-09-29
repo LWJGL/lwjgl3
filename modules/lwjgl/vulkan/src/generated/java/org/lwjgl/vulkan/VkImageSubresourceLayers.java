@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a image subresource layers.
+ * Structure specifying an image subresource layers.
  * 
  * <h5>Valid Usage</h5>
  * 

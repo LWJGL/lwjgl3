@@ -35,7 +35,7 @@ val NV_shader_subgroup_partitioned = "NVShaderSubgroupPartitioned".nativeClassVK
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz @jeffbolznv</li>
+                <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_shader_subgroup_partitioned:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

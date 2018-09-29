@@ -36,7 +36,7 @@ val EXT_conditional_rendering = "EXTConditionalRendering".nativeClassVK("EXT_con
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Vikram Kushwaha @vkushwaha</li>
+                <li>Vikram Kushwaha <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_conditional_rendering:%20&amp;body=@vkushwaha%20">vkushwaha</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

@@ -57,7 +57,7 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
             <dd>191</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>2</dd>
+            <dd>3</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -67,11 +67,11 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Vikram Kushwaha @vkushwaha</li>
+                <li>Vikram Kushwaha <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_vertex_attribute_divisor:%20&amp;body=@vkushwaha%20">vkushwaha</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2018-07-16</dd>
+            <dd>2018-08-03</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -87,7 +87,7 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VERTEX_ATTRIBUTE_DIVISOR_SPEC_VERSION".."2"
+        "EXT_VERTEX_ATTRIBUTE_DIVISOR_SPEC_VERSION".."3"
     )
 
     StringConstant(
@@ -100,6 +100,7 @@ val EXT_vertex_attribute_divisor = "EXTVertexAttributeDivisor".nativeClassVK("EX
         "Extends {@code VkStructureType}.",
 
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT".."1000190000",
-        "STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT".."1000190001"
+        "STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT".."1000190001",
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT".."1000190002"
     )
 }

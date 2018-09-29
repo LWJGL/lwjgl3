@@ -341,6 +341,22 @@ public class VKCapabilitiesDevice {
     public final long
         vkGetMemoryWin32HandleNV;
 
+    // NV_mesh_shader
+    public final long
+        vkCmdDrawMeshTasksNV,
+        vkCmdDrawMeshTasksIndirectNV,
+        vkCmdDrawMeshTasksIndirectCountNV;
+
+    // NV_scissor_exclusive
+    public final long
+        vkCmdSetExclusiveScissorNV;
+
+    // NV_shading_rate_image
+    public final long
+        vkCmdBindShadingRateImageNV,
+        vkCmdSetViewportShadingRatePaletteNV,
+        vkCmdSetCoarseSampleOrderNV;
+
     // NVX_device_generated_commands
     public final long
         vkCmdProcessCommandsNVX,
@@ -351,6 +367,22 @@ public class VKCapabilitiesDevice {
         vkDestroyObjectTableNVX,
         vkRegisterObjectsNVX,
         vkUnregisterObjectsNVX;
+
+    // NVX_raytracing
+    public final long
+        vkCreateAccelerationStructureNVX,
+        vkDestroyAccelerationStructureNVX,
+        vkGetAccelerationStructureMemoryRequirementsNVX,
+        vkGetAccelerationStructureScratchMemoryRequirementsNVX,
+        vkBindAccelerationStructureMemoryNVX,
+        vkCmdBuildAccelerationStructureNVX,
+        vkCmdCopyAccelerationStructureNVX,
+        vkCmdTraceRaysNVX,
+        vkCreateRaytracingPipelinesNVX,
+        vkGetRaytracingShaderHandlesNVX,
+        vkGetAccelerationStructureHandleNVX,
+        vkCmdWriteAccelerationStructurePropertiesNVX,
+        vkCompileDeferredNVX;
 
     /** The Vulkan API version number. */
     public final int apiVersion;
@@ -391,6 +423,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_AMD_shader_trinary_minmax;
     /** When true, {@link AMDTextureGatherBiasLod} is supported. */
     public final boolean VK_AMD_texture_gather_bias_lod;
+    /** When true, {@link EXTAstcDecodeMode} is supported. */
+    public final boolean VK_EXT_astc_decode_mode;
     /** When true, {@link EXTBlendOperationAdvanced} is supported. */
     public final boolean VK_EXT_blend_operation_advanced;
     /** When true, {@link EXTConditionalRendering} is supported. */
@@ -415,6 +449,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_global_priority;
     /** When true, {@link EXTHdrMetadata} is supported. */
     public final boolean VK_EXT_hdr_metadata;
+    /** When true, {@link EXTInlineUniformBlock} is supported. */
+    public final boolean VK_EXT_inline_uniform_block;
     /** When true, {@link EXTPostDepthCoverage} is supported. */
     public final boolean VK_EXT_post_depth_coverage;
     /** When true, {@link EXTQueueFamilyForeign} is supported. */
@@ -459,6 +495,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_display_swapchain;
     /** When true, {@link KHRDrawIndirectCount} is supported. */
     public final boolean VK_KHR_draw_indirect_count;
+    /** When true, {@link KHRDriverProperties} is supported. */
+    public final boolean VK_KHR_driver_properties;
     /** When true, {@link KHRExternalFence} is supported. */
     public final boolean VK_KHR_external_fence;
     /** When true, {@link KHRExternalFenceFd} is supported. */
@@ -499,6 +537,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_sampler_mirror_clamp_to_edge;
     /** When true, {@link KHRSamplerYcbcrConversion} is supported. */
     public final boolean VK_KHR_sampler_ycbcr_conversion;
+    /** When true, {@link KHRShaderAtomicInt64} is supported. */
+    public final boolean VK_KHR_shader_atomic_int64;
     /** When true, {@link KHRShaderDrawParameters} is supported. */
     public final boolean VK_KHR_shader_draw_parameters;
     /** When true, {@link KHRSharedPresentableImage} is supported. */
@@ -509,10 +549,16 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_swapchain;
     /** When true, {@link KHRVariablePointers} is supported. */
     public final boolean VK_KHR_variable_pointers;
+    /** When true, {@link KHRVulkanMemoryModel} is supported. */
+    public final boolean VK_KHR_vulkan_memory_model;
     /** When true, {@link KHRWin32KeyedMutex} is supported. */
     public final boolean VK_KHR_win32_keyed_mutex;
     /** When true, {@link NVClipSpaceWScaling} is supported. */
     public final boolean VK_NV_clip_space_w_scaling;
+    /** When true, {@link NVComputeShaderDerivatives} is supported. */
+    public final boolean VK_NV_compute_shader_derivatives;
+    /** When true, {@link NVCornerSampledImage} is supported. */
+    public final boolean VK_NV_corner_sampled_image;
     /** When true, {@link NVDedicatedAllocation} is supported. */
     public final boolean VK_NV_dedicated_allocation;
     /** When true, {@link NVDeviceDiagnosticCheckpoints} is supported. */
@@ -525,16 +571,28 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_fill_rectangle;
     /** When true, {@link NVFragmentCoverageToColor} is supported. */
     public final boolean VK_NV_fragment_coverage_to_color;
+    /** When true, {@link NVFragmentShaderBarycentric} is supported. */
+    public final boolean VK_NV_fragment_shader_barycentric;
     /** When true, {@link NVFramebufferMixedSamples} is supported. */
     public final boolean VK_NV_framebuffer_mixed_samples;
     /** When true, {@link NVGeometryShaderPassthrough} is supported. */
     public final boolean VK_NV_geometry_shader_passthrough;
     /** When true, {@link NVGLSLShader} is supported. */
     public final boolean VK_NV_glsl_shader;
+    /** When true, {@link NVMeshShader} is supported. */
+    public final boolean VK_NV_mesh_shader;
+    /** When true, {@link NVRepresentativeFragmentTest} is supported. */
+    public final boolean VK_NV_representative_fragment_test;
     /** When true, {@link NVSampleMaskOverrideCoverage} is supported. */
     public final boolean VK_NV_sample_mask_override_coverage;
+    /** When true, {@link NVScissorExclusive} is supported. */
+    public final boolean VK_NV_scissor_exclusive;
+    /** When true, {@link NVShaderImageFootprint} is supported. */
+    public final boolean VK_NV_shader_image_footprint;
     /** When true, {@link NVShaderSubgroupPartitioned} is supported. */
     public final boolean VK_NV_shader_subgroup_partitioned;
+    /** When true, {@link NVShadingRateImage} is supported. */
+    public final boolean VK_NV_shading_rate_image;
     /** When true, {@link NVViewportArray2} is supported. */
     public final boolean VK_NV_viewport_array2;
     /** When true, {@link NVViewportSwizzle} is supported. */
@@ -545,11 +603,13 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NVX_device_generated_commands;
     /** When true, {@link NVXMultiviewPerViewAttributes} is supported. */
     public final boolean VK_NVX_multiview_per_view_attributes;
+    /** When true, {@link NVXRaytracing} is supported. */
+    public final boolean VK_NVX_raytracing;
 
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(227);
+        Map<String, Long> caps = new HashMap<>(247);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -569,6 +629,7 @@ public class VKCapabilitiesDevice {
         VK_AMD_shader_info = AMDShaderInfo.checkCapsDevice(provider, caps, ext);
         VK_AMD_shader_trinary_minmax = ext.contains("VK_AMD_shader_trinary_minmax");
         VK_AMD_texture_gather_bias_lod = ext.contains("VK_AMD_texture_gather_bias_lod");
+        VK_EXT_astc_decode_mode = ext.contains("VK_EXT_astc_decode_mode");
         VK_EXT_blend_operation_advanced = ext.contains("VK_EXT_blend_operation_advanced");
         VK_EXT_conditional_rendering = EXTConditionalRendering.checkCapsDevice(provider, caps, ext);
         VK_EXT_conservative_rasterization = ext.contains("VK_EXT_conservative_rasterization");
@@ -582,6 +643,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_external_memory_host = EXTExternalMemoryHost.checkCapsDevice(provider, caps, ext);
         VK_EXT_global_priority = ext.contains("VK_EXT_global_priority");
         VK_EXT_hdr_metadata = EXTHdrMetadata.checkCapsDevice(provider, caps, ext);
+        VK_EXT_inline_uniform_block = ext.contains("VK_EXT_inline_uniform_block");
         VK_EXT_post_depth_coverage = ext.contains("VK_EXT_post_depth_coverage");
         VK_EXT_queue_family_foreign = ext.contains("VK_EXT_queue_family_foreign");
         VK_EXT_sample_locations = EXTSampleLocations.checkCapsDevice(provider, caps, ext);
@@ -604,6 +666,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_device_group = KHRDeviceGroup.checkCapsDevice(provider, caps, ext);
         VK_KHR_display_swapchain = KHRDisplaySwapchain.checkCapsDevice(provider, caps, ext);
         VK_KHR_draw_indirect_count = KHRDrawIndirectCount.checkCapsDevice(provider, caps, ext);
+        VK_KHR_driver_properties = ext.contains("VK_KHR_driver_properties");
         VK_KHR_external_fence = ext.contains("VK_KHR_external_fence");
         VK_KHR_external_fence_fd = KHRExternalFenceFd.checkCapsDevice(provider, caps, ext);
         VK_KHR_external_fence_win32 = KHRExternalFenceWin32.checkCapsDevice(provider, caps, ext);
@@ -624,29 +687,40 @@ public class VKCapabilitiesDevice {
         VK_KHR_relaxed_block_layout = ext.contains("VK_KHR_relaxed_block_layout");
         VK_KHR_sampler_mirror_clamp_to_edge = ext.contains("VK_KHR_sampler_mirror_clamp_to_edge");
         VK_KHR_sampler_ycbcr_conversion = KHRSamplerYcbcrConversion.checkCapsDevice(provider, caps, ext);
+        VK_KHR_shader_atomic_int64 = ext.contains("VK_KHR_shader_atomic_int64");
         VK_KHR_shader_draw_parameters = ext.contains("VK_KHR_shader_draw_parameters");
         VK_KHR_shared_presentable_image = KHRSharedPresentableImage.checkCapsDevice(provider, caps, ext);
         VK_KHR_storage_buffer_storage_class = ext.contains("VK_KHR_storage_buffer_storage_class");
         VK_KHR_swapchain = KHRSwapchain.checkCapsDevice(provider, caps, ext);
         VK_KHR_variable_pointers = ext.contains("VK_KHR_variable_pointers");
+        VK_KHR_vulkan_memory_model = ext.contains("VK_KHR_vulkan_memory_model");
         VK_KHR_win32_keyed_mutex = ext.contains("VK_KHR_win32_keyed_mutex");
         VK_NV_clip_space_w_scaling = NVClipSpaceWScaling.checkCapsDevice(provider, caps, ext);
+        VK_NV_compute_shader_derivatives = ext.contains("VK_NV_compute_shader_derivatives");
+        VK_NV_corner_sampled_image = ext.contains("VK_NV_corner_sampled_image");
         VK_NV_dedicated_allocation = ext.contains("VK_NV_dedicated_allocation");
         VK_NV_device_diagnostic_checkpoints = NVDeviceDiagnosticCheckpoints.checkCapsDevice(provider, caps, ext);
         VK_NV_external_memory = ext.contains("VK_NV_external_memory");
         VK_NV_external_memory_win32 = NVExternalMemoryWin32.checkCapsDevice(provider, caps, ext);
         VK_NV_fill_rectangle = ext.contains("VK_NV_fill_rectangle");
         VK_NV_fragment_coverage_to_color = ext.contains("VK_NV_fragment_coverage_to_color");
+        VK_NV_fragment_shader_barycentric = ext.contains("VK_NV_fragment_shader_barycentric");
         VK_NV_framebuffer_mixed_samples = ext.contains("VK_NV_framebuffer_mixed_samples");
         VK_NV_geometry_shader_passthrough = ext.contains("VK_NV_geometry_shader_passthrough");
         VK_NV_glsl_shader = ext.contains("VK_NV_glsl_shader");
+        VK_NV_mesh_shader = NVMeshShader.checkCapsDevice(provider, caps, ext);
+        VK_NV_representative_fragment_test = ext.contains("VK_NV_representative_fragment_test");
         VK_NV_sample_mask_override_coverage = ext.contains("VK_NV_sample_mask_override_coverage");
+        VK_NV_scissor_exclusive = NVScissorExclusive.checkCapsDevice(provider, caps, ext);
+        VK_NV_shader_image_footprint = ext.contains("VK_NV_shader_image_footprint");
         VK_NV_shader_subgroup_partitioned = ext.contains("VK_NV_shader_subgroup_partitioned");
+        VK_NV_shading_rate_image = NVShadingRateImage.checkCapsDevice(provider, caps, ext);
         VK_NV_viewport_array2 = ext.contains("VK_NV_viewport_array2");
         VK_NV_viewport_swizzle = ext.contains("VK_NV_viewport_swizzle");
         VK_NV_win32_keyed_mutex = ext.contains("VK_NV_win32_keyed_mutex");
         VK_NVX_device_generated_commands = NVXDeviceGeneratedCommands.checkCapsDevice(provider, caps, ext);
         VK_NVX_multiview_per_view_attributes = ext.contains("VK_NVX_multiview_per_view_attributes");
+        VK_NVX_raytracing = NVXRaytracing.checkCapsDevice(provider, caps, ext);
 
         vkGetDeviceProcAddr = VK.get(caps, "vkGetDeviceProcAddr");
         vkDestroyDevice = VK.get(caps, "vkDestroyDevice");
@@ -867,6 +941,13 @@ public class VKCapabilitiesDevice {
         vkCmdSetCheckpointNV = VK.get(caps, "vkCmdSetCheckpointNV");
         vkGetQueueCheckpointDataNV = VK.get(caps, "vkGetQueueCheckpointDataNV");
         vkGetMemoryWin32HandleNV = VK.get(caps, "vkGetMemoryWin32HandleNV");
+        vkCmdDrawMeshTasksNV = VK.get(caps, "vkCmdDrawMeshTasksNV");
+        vkCmdDrawMeshTasksIndirectNV = VK.get(caps, "vkCmdDrawMeshTasksIndirectNV");
+        vkCmdDrawMeshTasksIndirectCountNV = VK.get(caps, "vkCmdDrawMeshTasksIndirectCountNV");
+        vkCmdSetExclusiveScissorNV = VK.get(caps, "vkCmdSetExclusiveScissorNV");
+        vkCmdBindShadingRateImageNV = VK.get(caps, "vkCmdBindShadingRateImageNV");
+        vkCmdSetViewportShadingRatePaletteNV = VK.get(caps, "vkCmdSetViewportShadingRatePaletteNV");
+        vkCmdSetCoarseSampleOrderNV = VK.get(caps, "vkCmdSetCoarseSampleOrderNV");
         vkCmdProcessCommandsNVX = VK.get(caps, "vkCmdProcessCommandsNVX");
         vkCmdReserveSpaceForCommandsNVX = VK.get(caps, "vkCmdReserveSpaceForCommandsNVX");
         vkCreateIndirectCommandsLayoutNVX = VK.get(caps, "vkCreateIndirectCommandsLayoutNVX");
@@ -875,6 +956,19 @@ public class VKCapabilitiesDevice {
         vkDestroyObjectTableNVX = VK.get(caps, "vkDestroyObjectTableNVX");
         vkRegisterObjectsNVX = VK.get(caps, "vkRegisterObjectsNVX");
         vkUnregisterObjectsNVX = VK.get(caps, "vkUnregisterObjectsNVX");
+        vkCreateAccelerationStructureNVX = VK.get(caps, "vkCreateAccelerationStructureNVX");
+        vkDestroyAccelerationStructureNVX = VK.get(caps, "vkDestroyAccelerationStructureNVX");
+        vkGetAccelerationStructureMemoryRequirementsNVX = VK.get(caps, "vkGetAccelerationStructureMemoryRequirementsNVX");
+        vkGetAccelerationStructureScratchMemoryRequirementsNVX = VK.get(caps, "vkGetAccelerationStructureScratchMemoryRequirementsNVX");
+        vkBindAccelerationStructureMemoryNVX = VK.get(caps, "vkBindAccelerationStructureMemoryNVX");
+        vkCmdBuildAccelerationStructureNVX = VK.get(caps, "vkCmdBuildAccelerationStructureNVX");
+        vkCmdCopyAccelerationStructureNVX = VK.get(caps, "vkCmdCopyAccelerationStructureNVX");
+        vkCmdTraceRaysNVX = VK.get(caps, "vkCmdTraceRaysNVX");
+        vkCreateRaytracingPipelinesNVX = VK.get(caps, "vkCreateRaytracingPipelinesNVX");
+        vkGetRaytracingShaderHandlesNVX = VK.get(caps, "vkGetRaytracingShaderHandlesNVX");
+        vkGetAccelerationStructureHandleNVX = VK.get(caps, "vkGetAccelerationStructureHandleNVX");
+        vkCmdWriteAccelerationStructurePropertiesNVX = VK.get(caps, "vkCmdWriteAccelerationStructurePropertiesNVX");
+        vkCompileDeferredNVX = VK.get(caps, "vkCompileDeferredNVX");
     }
 
 }

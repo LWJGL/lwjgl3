@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the calling command&#8217;s {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}, then {@code dstOffset.z} <b>must</b> be 0 and {@code extent.depth} <b>must</b> be 1.</li>
  * <li>If the calling command&#8217;s {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then {@code srcOffset.z} <b>must</b> be 0.</li>
  * <li>If the calling command&#8217;s {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then {@code dstOffset.z} <b>must</b> be 0.</li>
- * <li>If both {@code srcImage} and {@code dstImage} are of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} then then {@code extent.depth} <b>must</b> be 1.</li>
+ * <li>If both {@code srcImage} and {@code dstImage} are of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} then {@code extent.depth} <b>must</b> be 1.</li>
  * <li>If the calling command&#8217;s {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, and the {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, then {@code extent.depth} <b>must</b> equal to the {@code layerCount} member of {@code srcSubresource}.</li>
  * <li>If the calling command&#8217;s {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, and the {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, then {@code extent.depth} <b>must</b> equal to the {@code layerCount} member of {@code dstSubresource}.</li>
  * <li>{@code dstOffset.x} and <code>(extent.width dstOffset.x)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the destination image subresource width</li>

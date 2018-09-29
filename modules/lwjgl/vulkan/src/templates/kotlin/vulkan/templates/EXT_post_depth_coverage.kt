@@ -43,7 +43,7 @@ val EXT_post_depth_coverage = "EXTPostDepthCoverage".nativeClassVK("EXT_post_dep
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Koch @dgkoch</li>
+                <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_post_depth_coverage:%20&amp;body=@dgkoch%20">dgkoch</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

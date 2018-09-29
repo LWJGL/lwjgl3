@@ -34,7 +34,7 @@ val KHR_external_semaphore_fd = "KHRExternalSemaphoreFd".nativeClassVK("KHR_exte
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones @cubanismo</li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_semaphore_fd:%20&amp;body=@cubanismo%20">cubanismo</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

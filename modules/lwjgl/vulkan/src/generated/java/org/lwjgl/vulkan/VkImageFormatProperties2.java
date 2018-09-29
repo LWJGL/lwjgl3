@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a image format properties.
+ * Structure specifying an image format properties.
  * 
  * <h5>Description</h5>
  * 

@@ -170,7 +170,7 @@ val NV_win32_keyed_mutex = "NVWin32KeyedMutex".nativeClassVK("NV_win32_keyed_mut
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Carsten Rohde @crohde</li>
+                <li>Carsten Rohde <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_win32_keyed_mutex:%20&amp;body=@crohde%20">crohde</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

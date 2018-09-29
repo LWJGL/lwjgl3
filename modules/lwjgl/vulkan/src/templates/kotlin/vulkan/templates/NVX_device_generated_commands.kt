@@ -131,7 +131,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Christoph Kubisch @pixeljetstream</li>
+                <li>Christoph Kubisch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NVX_device_generated_commands:%20&amp;body=@pixeljetstream%20">pixeljetstream</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
@@ -196,7 +196,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
 
     EnumConstant(
         """
-        VkIndirectCommandsLayoutUsageFlagBitsNVX - Bitmask specifying allowed usage of a indirect commands layout
+        VkIndirectCommandsLayoutUsageFlagBitsNVX - Bitmask specifying allowed usage of an indirect commands layout
 
         <h5>Description</h5>
         <ul>
@@ -433,7 +433,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
     void(
         "DestroyIndirectCommandsLayoutNVX",
         """
-        Destroy a object table.
+        Destroy an object table.
 
         <h5>C Specification</h5>
         Indirect command layouts are destroyed by:
@@ -518,7 +518,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
     void(
         "DestroyObjectTableNVX",
         """
-        Destroy a object table.
+        Destroy an object table.
 
         <h5>C Specification</h5>
         To destroy an object table, call:

@@ -39,7 +39,7 @@ val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_increme
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Ian Elliott @ianelliottus</li>
+                <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_incremental_present:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

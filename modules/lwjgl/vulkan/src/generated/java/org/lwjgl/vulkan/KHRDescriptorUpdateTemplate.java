@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Markus Tavenrath @mtavenrath</li>
+ * <li>Markus Tavenrath <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_descriptor_update_template:%20&amp;body=@mtavenrath%20">mtavenrath</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-05</dd>
@@ -243,7 +243,7 @@ public class KHRDescriptorUpdateTemplate {
      * 
      * };
      * 
-     * // create an descriptor update template for descriptor set updates
+     * // create a descriptor update template for descriptor set updates
      * const VkDescriptorUpdateTemplateCreateInfo createInfo =
      * {
      *     VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO,  // sType

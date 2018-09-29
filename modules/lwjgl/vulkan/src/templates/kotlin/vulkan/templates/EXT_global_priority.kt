@@ -41,7 +41,7 @@ val EXT_global_priority = "EXTGlobalPriority".nativeClassVK("EXT_global_priority
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Andres Rodriguez @lostgoat</li>
+                <li>Andres Rodriguez <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_global_priority:%20&amp;body=@lostgoat%20">lostgoat</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

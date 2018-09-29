@@ -42,7 +42,7 @@ val KHR_external_fence = "KHRExternalFence".nativeClassVK("KHR_external_fence", 
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jesse Hall @critsec</li>
+                <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_fence:%20&amp;body=@critsec%20">critsec</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

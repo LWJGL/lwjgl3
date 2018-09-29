@@ -22,6 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code descriptorCount} <b>must</b> be greater than 0</li>
+ * <li>If {@code type} is {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} then {@code descriptorCount} <b>must</b> be a multiple of 4</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -38,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} &ndash; the type of descriptor.</li>
- * <li>{@code descriptorCount} &ndash; the number of descriptors of that type to allocate.</li>
+ * <li>{@code descriptorCount} &ndash; the number of descriptors of that type to allocate. If {@code type} is {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} then {@code descriptorCount} is the number of bytes to allocate for descriptors of this type.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

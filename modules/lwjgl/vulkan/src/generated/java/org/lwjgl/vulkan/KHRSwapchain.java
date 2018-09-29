@@ -41,8 +41,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>James Jones @cubanismo</li>
- * <li>Ian Elliott @ianelliottus</li>
+ * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_swapchain:%20&amp;body=@cubanismo%20">cubanismo</a></li>
+ * <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_swapchain:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-10-06</dd>
@@ -129,12 +129,12 @@ public class KHRSwapchain {
      * </ul>
      */
     public static final int
-        VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR  = 1000001007,
-        VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR        = 1000001008,
-        VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR   = 1000001009,
-        VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR            = 1000001010,
-        VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR          = 1000001011,
-        VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR = 1000001012;
+        VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR  = 1000060007,
+        VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR        = 1000060008,
+        VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR   = 1000060009,
+        VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR            = 1000060010,
+        VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR          = 1000060011,
+        VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR = 1000060012;
 
     /**
      * Extends {@code VkSwapchainCreateFlagBitsKHR}.

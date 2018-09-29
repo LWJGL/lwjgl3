@@ -34,7 +34,7 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones @cubanismo</li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_display_surface_counter:%20&amp;body=@cubanismo%20">cubanismo</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
@@ -69,7 +69,8 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
-        "STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT".."1000090000"
+        "STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT".."1000090000",
+        "STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT".."1000090000"
     )
 
     EnumConstant(

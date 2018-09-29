@@ -54,7 +54,7 @@ val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasteri
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Rakos @drakos-amd</li>
+                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_rasterization_order:%20&amp;body=@drakos-amd%20">drakos-amd</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

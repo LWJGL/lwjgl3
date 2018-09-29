@@ -33,7 +33,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jan-Harald Fredriksen @janharaldfredriksen-arm</li>
+ * <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_16bit_storage:%20&amp;body=@janharaldfredriksen-arm%20">janharaldfredriksen-arm</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-05</dd>

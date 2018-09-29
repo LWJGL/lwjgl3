@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a image subresource range.
+ * Structure specifying an image subresource range.
  * 
  * <h5>Description</h5>
  * 

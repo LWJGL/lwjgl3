@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Ian Elliott @ianelliottus</li>
+ * <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_GOOGLE_display_timing:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-02-14</dd>
@@ -220,7 +220,7 @@ public class GOOGLEDisplayTiming {
      * @param device                   the device associated with {@code swapchain}.
      * @param swapchain                the swapchain to obtain presentation timing information duration for.
      * @param pPresentationTimingCount a pointer to an integer related to the number of {@link VkPastPresentationTimingGOOGLE} structures to query, as described below.
-     * @param pPresentationTimings     either {@code NULL} or a pointer to an an array of {@link VkPastPresentationTimingGOOGLE} structures.
+     * @param pPresentationTimings     either {@code NULL} or a pointer to an array of {@link VkPastPresentationTimingGOOGLE} structures.
      */
     @NativeType("VkResult")
     public static int vkGetPastPresentationTimingGOOGLE(VkDevice device, @NativeType("VkSwapchainKHR") long swapchain, @NativeType("uint32_t *") IntBuffer pPresentationTimingCount, @Nullable @NativeType("VkPastPresentationTimingGOOGLE *") VkPastPresentationTimingGOOGLE.Buffer pPresentationTimings) {

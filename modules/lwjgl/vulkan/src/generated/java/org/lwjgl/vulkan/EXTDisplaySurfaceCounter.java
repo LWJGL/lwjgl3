@@ -29,7 +29,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>James Jones @cubanismo</li>
+ * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_display_surface_counter:%20&amp;body=@cubanismo%20">cubanismo</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-12-13</dd>
@@ -53,8 +53,19 @@ public class EXTDisplaySurfaceCounter {
     /** The extension name. */
     public static final String VK_EXT_DISPLAY_SURFACE_COUNTER_EXTENSION_NAME = "VK_EXT_display_surface_counter";
 
-    /** Extends {@code VkStructureType}. */
-    public static final int VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT = 1000090000;
+    /**
+     * Extends {@code VkStructureType}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT}</li>
+     * </ul>
+     */
+    public static final int
+        VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT = 1000090000,
+        VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES2_EXT  = 1000090000;
 
     /**
      * VkSurfaceCounterFlagBitsEXT - Surface-relative counter types

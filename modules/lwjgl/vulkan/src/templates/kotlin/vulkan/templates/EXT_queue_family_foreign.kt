@@ -40,7 +40,7 @@ val EXT_queue_family_foreign = "EXTQueueFamilyForeign".nativeClassVK("EXT_queue_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Chad Versace @chadversary</li>
+                <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_queue_family_foreign:%20&amp;body=@chadversary%20">chadversary</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

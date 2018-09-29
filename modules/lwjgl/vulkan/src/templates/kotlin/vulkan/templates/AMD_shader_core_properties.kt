@@ -99,7 +99,7 @@ val AMD_shader_core_properties = "AMDShaderCoreProperties".nativeClassVK("AMD_sh
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Martin Dinkov @mdinkov</li>
+                <li>Martin Dinkov <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_shader_core_properties:%20&amp;body=@mdinkov%20">mdinkov</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

@@ -2671,7 +2671,7 @@ public class VK11 extends VK10 {
      *     },
      * };
      * 
-     * // create an descriptor update template for descriptor set updates
+     * // create a descriptor update template for descriptor set updates
      * const VkDescriptorUpdateTemplateCreateInfo createInfo =
      * {
      *     VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO,  // sType

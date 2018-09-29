@@ -55,7 +55,7 @@ val KHR_sampler_mirror_clamp_to_edge = "KHRSamplerMirrorClampToEdge".nativeClass
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tobias Hector @tobski</li>
+                <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_sampler_mirror_clamp_to_edge:%20&amp;body=@tobski%20">tobski</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

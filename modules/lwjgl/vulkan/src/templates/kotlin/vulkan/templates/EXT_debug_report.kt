@@ -86,7 +86,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Courtney Goeltzenleuchter @courtney-g</li>
+                <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_debug_report:%20&amp;body=@courtney-g%20">courtney-g</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
@@ -120,7 +120,8 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
-        "STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT".."1000011000"
+        "STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT".."1000011000",
+        "STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT".."1000011000"
     )
 
     EnumConstant(
@@ -138,8 +139,8 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
     EnumConstant(
         "Extends {@code VkDebugReportObjectTypeEXT}.",
 
-        "DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT".."1000011000",
-        "DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT".."1000011000"
+        "DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT".."1000156000",
+        "DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT".."1000085000"
     )
 
     EnumConstant(
@@ -225,11 +226,13 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         "DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT".."26",
         "DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT".."27",
         "DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT".."28",
+        "DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT".."28",
         "DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT".."29",
         "DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT".."30",
         "DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT".."31",
         "DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT".."32",
-        "DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT".."33"
+        "DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT".."33",
+        "DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT".."33"
     )
 
     EnumConstant(

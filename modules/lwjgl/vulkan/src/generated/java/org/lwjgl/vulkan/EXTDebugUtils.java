@@ -60,7 +60,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *             myOutputDebugString,                                      // pfnUserCallback
  *             NULL                                                      // pUserData
  *     };
- *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback1, &amp;cb1);
+ *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback1, NULL, &amp;cb1);
  *     if (res != VK_SUCCESS) {
  *        // Do error handling for VK_ERROR_OUT_OF_MEMORY
  *     }
@@ -68,7 +68,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     callback1.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
  *     callback1.pfnCallback = myDebugBreak;
  *     callback1.pUserData = NULL;
- *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback1, &amp;cb2);
+ *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback1, NULL, &amp;cb2);
  *     if (res != VK_SUCCESS) {
  *        // Do error handling for VK_ERROR_OUT_OF_MEMORY
  *     }
@@ -83,7 +83,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *             mystdOutLogger,                                           // pfnUserCallback
  *             NULL                                                      // pUserData
  *     };
- *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback3, &amp;cb3);
+ *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback3, NULL, &amp;cb3);
  *     if (res != VK_SUCCESS) {
  *        // Do error handling for VK_ERROR_OUT_OF_MEMORY
  *     }
@@ -91,9 +91,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     ...
  * 
  *     // Remove callbacks when cleaning up
- *     pfnDestroyDebugUtilsMessengerEXT(instance, cb1);
- *     pfnDestroyDebugUtilsMessengerEXT(instance, cb2);
- *     pfnDestroyDebugUtilsMessengerEXT(instance, cb3);</code></pre>
+ *     pfnDestroyDebugUtilsMessengerEXT(instance, cb1, NULL);
+ *     pfnDestroyDebugUtilsMessengerEXT(instance, cb2, NULL);
+ *     pfnDestroyDebugUtilsMessengerEXT(instance, cb3, NULL);</code></pre>
  * 
  * <p><b>Example 2</b></p>
  * 
@@ -234,7 +234,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Mark Young @marky-lunarg</li>
+ * <li>Mark Young <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_debug_utils:%20&amp;body=@marky-lunarg%20">marky-lunarg</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-14</dd>

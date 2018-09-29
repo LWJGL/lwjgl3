@@ -116,7 +116,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Eric Werness @ewerness-nv</li>
+ * <li>Eric Werness <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_clip_space_w_scaling:%20&amp;body=@ewerness-nv%20">ewerness-nv</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-02-15</dd>

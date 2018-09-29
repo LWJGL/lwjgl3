@@ -43,7 +43,7 @@ val KHR_relaxed_block_layout = "KHRRelaxedBlockLayout".nativeClassVK("KHR_relaxe
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>John Kessenich @johnkslang</li>
+                <li>John Kessenich <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_relaxed_block_layout:%20&amp;body=@johnkslang%20">johnkslang</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

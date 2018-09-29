@@ -13,7 +13,16 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
         """
         This extension provides a new entry point to create render passes in a way that can be easily extended by other extensions through the substructures of render pass creation. The Vulkan 1.0 render pass creation sub-structures do not include {@code sType}/{@code pNext} members. Additionally, the renderpass begin/next/end commands have been augmented with new extensible structures for passing additional subpass information.
 
-        Parameters from the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_multiview">VK_KHR_multiview</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_KHR_maintenance2">VK_KHR_maintenance2</a> extensions which previously extended ##VkRenderPassCreateInfo are folded into the new structures in more appropriate locations.
+        The ##VkRenderPassMultiviewCreateInfo and ##VkInputAttachmentAspectReference structures that extended the original ##VkRenderPassCreateInfo are not accepted into the new creation functions, and instead their parameters are folded into this extension as follows:
+
+        <ul>
+            <li>Elements of ##VkRenderPassMultiviewCreateInfo{@code ::pViewMasks} are now specified in ##VkSubpassDescription2KHR{@code ::viewMask}.</li>
+            <li>Elements of ##VkRenderPassMultiviewCreateInfo{@code ::pViewOffsets} are now specified in ##VkSubpassDependency2KHR{@code ::viewOffset}.</li>
+            <li>##VkRenderPassMultiviewCreateInfo{@code ::correlationMaskCount} and ##VkRenderPassMultiviewCreateInfo{@code ::pCorrelationMasks} are directly specified in slink::VkRenderPassCreateInfo2KHR.</li>
+            <li>##VkInputAttachmentAspectReference{@code ::aspectMask} is now specified in the relevant input attachment description in ##VkAttachmentDescription2KHR{@code ::aspectMask}</li>
+        </ul>
+
+        The details of these mappings are explained fully in the new structures.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -37,7 +46,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tobias Hector @tobias</li>
+                <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_create_renderpass2:%20&amp;body=@tobias%20">tobias</a></li>
             </ul></dd>
 
             <dt>Last Modified Date</dt>

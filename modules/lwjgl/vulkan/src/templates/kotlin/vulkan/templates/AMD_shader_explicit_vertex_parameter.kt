@@ -37,8 +37,7 @@ val AMD_shader_explicit_vertex_parameter = "AMDShaderExplicitVertexParameter".na
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Qun Lin</li>
-                <li>AMD @linqun</li>
+                <li>Qun Lin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_shader_explicit_vertex_parameter:%20&amp;body=@linqun%20">linqun</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

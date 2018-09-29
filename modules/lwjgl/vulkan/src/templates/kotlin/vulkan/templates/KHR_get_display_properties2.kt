@@ -34,7 +34,7 @@ val KHR_get_display_properties2 = "KHRGetDisplayProperties2".nativeClassVK("KHR_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones @cubanismo</li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_get_display_properties2:%20&amp;body=@cubanismo%20">cubanismo</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

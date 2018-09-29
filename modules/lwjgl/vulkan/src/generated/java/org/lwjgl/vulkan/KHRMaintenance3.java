@@ -44,7 +44,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Bolz @jeffbolznv</li>
+ * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_maintenance3:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
  * </ul></dd>
  * <dt><b>Status</b></dt>
  * <dd>Draft</dd>

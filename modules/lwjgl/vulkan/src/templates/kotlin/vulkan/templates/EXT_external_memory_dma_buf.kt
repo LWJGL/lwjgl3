@@ -34,7 +34,7 @@ val EXT_external_memory_dma_buf = "EXTExternalMemoryDmaBuf".nativeClassVK("EXT_e
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Chad Versace @chadversary</li>
+                <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_external_memory_dma_buf:%20&amp;body=@chadversary%20">chadversary</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

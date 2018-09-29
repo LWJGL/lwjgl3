@@ -39,8 +39,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones @cubanismo</li>
-                <li>Norbert Nopper @FslNopper</li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_display:%20&amp;body=@cubanismo%20">cubanismo</a></li>
+                <li>Norbert Nopper <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_display:%20&amp;body=@FslNopper%20">FslNopper</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

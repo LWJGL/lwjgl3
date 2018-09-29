@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure specifying a extension properties.
+ * Structure specifying an extension properties.
  * 
  * <h3>Member documentation</h3>
  * 

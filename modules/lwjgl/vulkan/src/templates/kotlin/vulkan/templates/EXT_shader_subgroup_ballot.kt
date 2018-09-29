@@ -74,7 +74,7 @@ val EXT_shader_subgroup_ballot = "EXTShaderSubgroupBallot".nativeClassVK("EXT_sh
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Koch @dgkoch</li>
+                <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_shader_subgroup_ballot:%20&amp;body=@dgkoch%20">dgkoch</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

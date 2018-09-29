@@ -50,7 +50,7 @@ val AMD_negative_viewport_height = "AMDNegativeViewportHeight".nativeClassVK("AM
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Matthaeus G. Chajdas @anteru</li>
+                <li>Matthaeus G. Chajdas <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_negative_viewport_height:%20&amp;body=@anteru%20">anteru</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

@@ -42,8 +42,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>James Jones @cubanismo</li>
- * <li>Ian Elliott @ianelliottus</li>
+ * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_surface:%20&amp;body=@cubanismo%20">cubanismo</a></li>
+ * <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_surface:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-08-25</dd>
@@ -198,8 +198,16 @@ public class KHRSurface {
      * <h5>See Also</h5>
      * 
      * <p>{@link VkSurfaceFormatKHR}, {@link VkSwapchainCreateInfoKHR}</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_COLORSPACE_SRGB_NONLINEAR_KHR COLORSPACE_SRGB_NONLINEAR_KHR}</li>
+     * </ul>
      */
-    public static final int VK_COLOR_SPACE_SRGB_NONLINEAR_KHR = 0;
+    public static final int
+        VK_COLOR_SPACE_SRGB_NONLINEAR_KHR = 0,
+        VK_COLORSPACE_SRGB_NONLINEAR_KHR  = 0;
 
     /**
      * VkPresentModeKHR - presentation mode supported for a surface

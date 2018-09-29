@@ -52,7 +52,7 @@ val IMG_filter_cubic = "IMGFilterCubic".nativeClassVK("IMG_filter_cubic", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tobias Hector @tobski</li>
+                <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_IMG_filter_cubic:%20&amp;body=@tobski%20">tobski</a></li>
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>

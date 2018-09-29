@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -35,6 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeaturesEXT}{@code ::descriptorBindingStorageBufferUpdateAfterBind} is not enabled, all bindings with descriptor type {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER} <b>must</b> not use {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT}</li>
  * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeaturesEXT}{@code ::descriptorBindingUniformTexelBufferUpdateAfterBind} is not enabled, all bindings with descriptor type {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} <b>must</b> not use {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT}</li>
  * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeaturesEXT}{@code ::descriptorBindingStorageTexelBufferUpdateAfterBind} is not enabled, all bindings with descriptor type {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} <b>must</b> not use {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT}</li>
+ * <li>If {@code VkPhysicalDeviceInlineUniformBlockFeatureEXT}{@code ::descriptorBindingInlineUniformBlockUpdateAfterBind} is not enabled, all bindings with descriptor type {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} <b>must</b> not use {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT}</li>
  * <li>All bindings with descriptor type {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT}, {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC}, or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC} <b>must</b> not use {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT}</li>
  * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeaturesEXT}{@code ::descriptorBindingUpdateUnusedWhilePending} is not enabled, all elements of {@code pBindingFlags} <b>must</b> not include {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT}</li>
  * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeaturesEXT}{@code ::descriptorBindingPartiallyBound} is not enabled, all elements of {@code pBindingFlags} <b>must</b> not include {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT}</li>
@@ -46,8 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTDescriptorIndexing#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT}</li>
- * <li>If {@code bindingCount} is not 0, {@code pBindingFlags} <b>must</b> be a valid pointer to an array of {@code bindingCount} valid combinations of {@code VkDescriptorBindingFlagBitsEXT} values</li>
- * <li>Each element of {@code pBindingFlags} <b>must</b> not be 0</li>
+ * <li>If {@code bindingCount} is not 0, and {@code pBindingFlags} is not {@code NULL}, {@code pBindingFlags} <b>must</b> be a valid pointer to an array of {@code bindingCount} valid combinations of {@code VkDescriptorBindingFlagBitsEXT} values</li>
  * </ul>
  * 
  * <h3>Member documentation</h3>
@@ -136,6 +135,8 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfoEXT extends Struct imple
     public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@code bindingCount} field. */
+    public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT bindingCount(@NativeType("uint32_t") int value) { nbindingCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@code pBindingFlags} field. */
     public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT pBindingFlags(@Nullable @NativeType("VkDescriptorBindingFlagsEXT const *") IntBuffer value) { npBindingFlags(address(), value); return this; }
 
@@ -143,10 +144,12 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfoEXT extends Struct imple
     public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT set(
         int sType,
         long pNext,
+        int bindingCount,
         @Nullable IntBuffer pBindingFlags
     ) {
         sType(sType);
         pNext(pNext);
+        bindingCount(bindingCount);
         pBindingFlags(pBindingFlags);
 
         return this;
@@ -321,30 +324,7 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfoEXT extends Struct imple
     /** Sets the specified value to the {@code bindingCount} field of the specified {@code struct}. */
     public static void nbindingCount(long struct, int value) { memPutInt(struct + VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.BINDINGCOUNT, value); }
     /** Unsafe version of {@link #pBindingFlags(IntBuffer) pBindingFlags}. */
-    public static void npBindingFlags(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.PBINDINGFLAGS, memAddressSafe(value)); nbindingCount(struct, value == null ? 0 : value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        if (nbindingCount(struct) != 0) {
-            check(memGetAddress(struct + VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.PBINDINGFLAGS));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
-        }
-    }
+    public static void npBindingFlags(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.PBINDINGFLAGS, memAddressSafe(value)); if (value != null) { nbindingCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -410,6 +390,8 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfoEXT extends Struct imple
         public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@code bindingCount} field. */
+        public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.Buffer bindingCount(@NativeType("uint32_t") int value) { VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.nbindingCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@code pBindingFlags} field. */
         public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.Buffer pBindingFlags(@Nullable @NativeType("VkDescriptorBindingFlagsEXT const *") IntBuffer value) { VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.npBindingFlags(address(), value); return this; }
 
