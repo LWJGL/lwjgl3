@@ -517,10 +517,6 @@ private fun readFile(file: Path) = Files.newByteChannel(file).use {
     buffer
 }
 
-private class LWJGLWriter(out: Writer) : PrintWriter(out) {
-    override fun println() = print('\n')
-}
-
 private fun <T> generateOutput(
     target: T,
     file: Path,
@@ -535,7 +531,7 @@ private fun <T> generateOutput(
     if (Files.isRegularFile(file)) {
         // Generate in-memory
         val baos = ByteArrayOutputStream(4 * 1024)
-        LWJGLWriter(OutputStreamWriter(baos, Charsets.UTF_8)).use {
+        PrintWriter(OutputStreamWriter(baos, Charsets.UTF_8)).use {
             target.generate(it)
         }
 
@@ -562,7 +558,7 @@ private fun <T> generateOutput(
         }
     } else {
         println("\tWRITING: $file")
-        LWJGLWriter(Files.newBufferedWriter(file, Charsets.UTF_8)).use {
+        PrintWriter(Files.newBufferedWriter(file, Charsets.UTF_8)).use {
             target.generate(it)
         }
     }

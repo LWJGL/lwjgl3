@@ -295,6 +295,7 @@
             </classpath>
 
             <jvmarg line="${generator.bindings}"/>
+            <jvmarg line="-Dfile.encoding=UTF8 -Dline.separator=&#10;"/>
 
             <arg value="${module.lwjgl}"/>
         </java>
@@ -718,7 +719,7 @@
             <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>
             <arg line="-notimestamp"/>
             <arg value="-html5" if:set="jdk9"/>
-            <arg line="-J-Dfile.encoding=UTF8"/>
+            <arg line="-J-Dfile.encoding=UTF8 -J-Dline.separator=&#10;"/>
             <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk9"/>
         </javadoc>
         <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${bin.javadoc}"/>
