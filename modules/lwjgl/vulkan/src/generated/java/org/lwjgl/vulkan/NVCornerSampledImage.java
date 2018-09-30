@@ -10,8 +10,8 @@ package org.lwjgl.vulkan;
  * 
  * <ul>
  * <li>Texels are centered on integer coordinates. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#textures-unnormalized-to-integer">Unnormalized Texel Coordinate Operations</a></li>
- * <li>Normalized coordinates are scaled using <code>coord <b> (dim - 1)</code> rather than <code>coord </b> dim</code>, where dim is the size of one dimension of the image. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#textures-normalized-to-unnormalized">normalized texel coordinate transform</a>.</li>
- * <li>Partial derivatives are scaled using <code>coord <b> (dim - 1)</code> rather than <code>coord </b> dim</code>. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#textures-scale-factor">Scale Factor Operation</a>.</li>
+ * <li>Normalized coordinates are scaled using <code>coord * (dim - 1)</code> rather than <code>coord * dim</code>, where dim is the size of one dimension of the image. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#textures-normalized-to-unnormalized">normalized texel coordinate transform</a>.</li>
+ * <li>Partial derivatives are scaled using <code>coord * (dim - 1)</code> rather than <code>coord * dim</code>. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#textures-scale-factor">Scale Factor Operation</a>.</li>
  * <li>Calculation of the next higher lod size goes according to <code>⌈dim / 2⌉</code> rather than <code>⌊dim / 2⌋</code>. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#resources-image-miplevel-sizing">Image Miplevel Sizing</a>.</li>
  * <li>The minimum level size is 2x2 for 2D images and 2x2x2 for 3D images. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#resources-image-miplevel-sizing">Image Miplevel Sizing</a>.</li>
  * </ul>

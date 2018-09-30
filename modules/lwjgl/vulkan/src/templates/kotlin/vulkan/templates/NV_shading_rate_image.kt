@@ -118,7 +118,7 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
         VkShadingRatePaletteEntryNV - Shading rate image palette entry types
 
         <h5>Description</h5>
-        The following table indicates the width and height (in pixels) of each fragment generated using the indicated shading rate, as well as the maximum number of fragment shader invocations launched for each fragment. When processing regions of a primitive that have a shading rate of #SHADING_RATE_PALETTE_ENTRY_NO_PIXELS_NV, no fragments will be generated in that region.
+        The following table indicates the width and height (in pixels) of each fragment generated using the indicated shading rate, as well as the maximum number of fragment shader invocations launched for each fragment. When processing regions of a primitive that have a shading rate of #SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV, no fragments will be generated in that region.
 
         <table class="lwjgl">
             <thead><tr><th>Shading Rate</th><th>Width</th><th>Height</th><th>Invocations</th></tr></thead>

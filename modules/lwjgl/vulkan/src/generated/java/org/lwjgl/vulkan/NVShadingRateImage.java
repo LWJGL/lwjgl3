@@ -113,7 +113,7 @@ public class NVShadingRateImage {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The following table indicates the width and height (in pixels) of each fragment generated using the indicated shading rate, as well as the maximum number of fragment shader invocations launched for each fragment. When processing regions of a primitive that have a shading rate of {@link #VK_SHADING_RATE_PALETTE_ENTRY_NO_PIXELS_NV SHADING_RATE_PALETTE_ENTRY_NO_PIXELS_NV}, no fragments will be generated in that region.</p>
+     * <p>The following table indicates the width and height (in pixels) of each fragment generated using the indicated shading rate, as well as the maximum number of fragment shader invocations launched for each fragment. When processing regions of a primitive that have a shading rate of {@link #VK_SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV}, no fragments will be generated in that region.</p>
      * 
      * <table class="lwjgl">
      * <thead><tr><th>Shading Rate</th><th>Width</th><th>Height</th><th>Invocations</th></tr></thead>

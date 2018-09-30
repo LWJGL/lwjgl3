@@ -1214,7 +1214,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
             <li>#BUFFER_USAGE_STORAGE_BUFFER_BIT specifies that the buffer <b>can</b> be used in a ##VkDescriptorBufferInfo suitable for occupying a {@code VkDescriptorSet} slot either of type #DESCRIPTOR_TYPE_STORAGE_BUFFER or #DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC.</li>
             <li>#BUFFER_USAGE_INDEX_BUFFER_BIT specifies that the buffer is suitable for passing as the {@code buffer} parameter to #CmdBindIndexBuffer().</li>
             <li>#BUFFER_USAGE_VERTEX_BUFFER_BIT specifies that the buffer is suitable for passing as an element of the {@code pBuffers} array to #CmdBindVertexBuffers().</li>
-            <li>#BUFFER_USAGE_INDIRECT_BUFFER_BIT specifies that the buffer is suitable for passing as the {@code buffer} parameter to #CmdDrawIndirect(), #CmdDrawIndexedIndirect(), #CmdDrawMeshTasksIndirectNV(), #CmdDrawMeshTasksIndirectCount(), or #CmdDispatchIndirect(). It is also suitable for passing as the {@code buffer} member of ##VkIndirectCommandsTokenNVX, or {@code sequencesCountBuffer} or {@code sequencesIndexBuffer} member of ##VkCmdProcessCommandsInfoNVX</li>
+            <li>#BUFFER_USAGE_INDIRECT_BUFFER_BIT specifies that the buffer is suitable for passing as the {@code buffer} parameter to #CmdDrawIndirect(), #CmdDrawIndexedIndirect(), #CmdDrawMeshTasksIndirectNV(), #CmdDrawMeshTasksIndirectCountNV(), or #CmdDispatchIndirect(). It is also suitable for passing as the {@code buffer} member of ##VkIndirectCommandsTokenNVX, or {@code sequencesCountBuffer} or {@code sequencesIndexBuffer} member of ##VkCmdProcessCommandsInfoNVX</li>
             <li>#BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT specifies that the buffer is suitable for passing as the {@code buffer} parameter to #CmdBeginConditionalRenderingEXT().</li>
         </ul>
 
@@ -2120,9 +2120,9 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
                 <tr><td>#ACCESS_INDIRECT_COMMAND_READ_BIT</td><td>#PIPELINE_STAGE_DRAW_INDIRECT_BIT</td></tr>
                 <tr><td>#ACCESS_INDEX_READ_BIT</td><td>#PIPELINE_STAGE_VERTEX_INPUT_BIT</td></tr>
                 <tr><td>#ACCESS_VERTEX_ATTRIBUTE_READ_BIT</td><td>#PIPELINE_STAGE_VERTEX_INPUT_BIT</td></tr>
-                <tr><td>#ACCESS_UNIFORM_READ_BIT</td><td>#PIPELINE_STAGE_TASK_SHADER_BIT, #PIPELINE_STAGE_MESH_SHADER_BIT, #PIPELINE_STAGE_VERTEX_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, #PIPELINE_STAGE_GEOMETRY_SHADER_BIT, #PIPELINE_STAGE_FRAGMENT_SHADER_BIT, or #PIPELINE_STAGE_COMPUTE_SHADER_BIT</td></tr>
-                <tr><td>#ACCESS_SHADER_READ_BIT</td><td>#PIPELINE_STAGE_TASK_SHADER_BIT, #PIPELINE_STAGE_MESH_SHADER_BIT, #PIPELINE_STAGE_VERTEX_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, #PIPELINE_STAGE_GEOMETRY_SHADER_BIT, #PIPELINE_STAGE_FRAGMENT_SHADER_BIT, or #PIPELINE_STAGE_COMPUTE_SHADER_BIT</td></tr>
-                <tr><td>#ACCESS_SHADER_WRITE_BIT</td><td>#PIPELINE_STAGE_TASK_SHADER_BIT, #PIPELINE_STAGE_MESH_SHADER_BIT, #PIPELINE_STAGE_VERTEX_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, #PIPELINE_STAGE_GEOMETRY_SHADER_BIT, #PIPELINE_STAGE_FRAGMENT_SHADER_BIT, or #PIPELINE_STAGE_COMPUTE_SHADER_BIT</td></tr>
+                <tr><td>#ACCESS_UNIFORM_READ_BIT</td><td>#PIPELINE_STAGE_TASK_SHADER_BIT_NV, #PIPELINE_STAGE_MESH_SHADER_BIT_NV, #PIPELINE_STAGE_VERTEX_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, #PIPELINE_STAGE_GEOMETRY_SHADER_BIT, #PIPELINE_STAGE_FRAGMENT_SHADER_BIT, or #PIPELINE_STAGE_COMPUTE_SHADER_BIT</td></tr>
+                <tr><td>#ACCESS_SHADER_READ_BIT</td><td>#PIPELINE_STAGE_TASK_SHADER_BIT_NV, #PIPELINE_STAGE_MESH_SHADER_BIT_NV, #PIPELINE_STAGE_VERTEX_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, #PIPELINE_STAGE_GEOMETRY_SHADER_BIT, #PIPELINE_STAGE_FRAGMENT_SHADER_BIT, or #PIPELINE_STAGE_COMPUTE_SHADER_BIT</td></tr>
+                <tr><td>#ACCESS_SHADER_WRITE_BIT</td><td>#PIPELINE_STAGE_TASK_SHADER_BIT_NV, #PIPELINE_STAGE_MESH_SHADER_BIT_NV, #PIPELINE_STAGE_VERTEX_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, #PIPELINE_STAGE_GEOMETRY_SHADER_BIT, #PIPELINE_STAGE_FRAGMENT_SHADER_BIT, or #PIPELINE_STAGE_COMPUTE_SHADER_BIT</td></tr>
                 <tr><td>#ACCESS_INPUT_ATTACHMENT_READ_BIT</td><td>#PIPELINE_STAGE_FRAGMENT_SHADER_BIT</td></tr>
                 <tr><td>#ACCESS_COLOR_ATTACHMENT_READ_BIT</td><td>#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</td></tr>
                 <tr><td>#ACCESS_COLOR_ATTACHMENT_WRITE_BIT</td><td>#PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</td></tr>
@@ -2138,7 +2138,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
                 <tr><td>#ACCESS_COMMAND_PROCESS_READ_BIT_NVX</td><td>#PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX</td></tr>
                 <tr><td>#ACCESS_COMMAND_PROCESS_WRITE_BIT_NVX</td><td>#PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX</td></tr>
                 <tr><td>#ACCESS_CONDITIONAL_RENDERING_READ_BIT_EXT</td><td>#PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT</td></tr>
-                <tr><td>#ACCESS_SHADING_RATE_IMAGE_BIT_NV</td><td>#PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</td></tr>
+                <tr><td>#ACCESS_SHADING_RATE_IMAGE_READ_BIT_NV</td><td>#PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</td></tr>
             </tbody>
         </table>
 
