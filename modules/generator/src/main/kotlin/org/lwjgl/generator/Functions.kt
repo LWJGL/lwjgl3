@@ -1466,7 +1466,7 @@ class Func(
                 null
             else
                 param.transformDeclarationOrElse(transforms, param.asJavaMethodParam(false), true).let {
-                    if (it != null && param.nativeType.isReference && param.has(nullable)) {
+                    if (it != null && param.nativeType.isReference && param.has(nullable) && transforms[param] !is SingleValueStructTransform) {
                         "@Nullable $it"
                     } else {
                         it

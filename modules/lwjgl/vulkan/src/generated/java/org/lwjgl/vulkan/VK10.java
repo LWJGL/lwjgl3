@@ -4310,7 +4310,7 @@ public class VK10 {
      * @param fence an optional: handle to a fence to be signaled once all submitted command buffers have completed execution. If {@code fence} is not {@link #VK_NULL_HANDLE NULL_HANDLE}, it defines a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#synchronization-fences-signaling">fence signal operation</a>.
      */
     @NativeType("VkResult")
-    public static int vkQueueSubmit(VkQueue queue, @Nullable @NativeType("VkSubmitInfo const *") VkSubmitInfo pSubmit, @NativeType("VkFence") long fence) {
+    public static int vkQueueSubmit(VkQueue queue, @NativeType("VkSubmitInfo const *") VkSubmitInfo pSubmit, @NativeType("VkFence") long fence) {
         return nvkQueueSubmit(queue, 1, pSubmit.address(), fence);
     }
 
@@ -5617,7 +5617,7 @@ public class VK10 {
      * @param fence     an optional: handle to a fence to be signaled. If {@code fence} is not {@link #VK_NULL_HANDLE NULL_HANDLE}, it defines a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#synchronization-fences-signaling">fence signal operation</a>.
      */
     @NativeType("VkResult")
-    public static int vkQueueBindSparse(VkQueue queue, @Nullable @NativeType("VkBindSparseInfo const *") VkBindSparseInfo pBindInfo, @NativeType("VkFence") long fence) {
+    public static int vkQueueBindSparse(VkQueue queue, @NativeType("VkBindSparseInfo const *") VkBindSparseInfo pBindInfo, @NativeType("VkFence") long fence) {
         return nvkQueueBindSparse(queue, 1, pBindInfo.address(), fence);
     }
 
