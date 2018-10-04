@@ -30,10 +30,6 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDeviceVariablePointerFeatures {
 
-    VkPhysicalDeviceVariablePointerFeaturesKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceVariablePointerFeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -41,7 +37,7 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceVariablePointerFeaturesKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -89,28 +85,29 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
 
     /** Returns a new {@link VkPhysicalDeviceVariablePointerFeaturesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceVariablePointerFeaturesKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceVariablePointerFeaturesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceVariablePointerFeaturesKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceVariablePointerFeaturesKHR} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR create() {
-        return new VkPhysicalDeviceVariablePointerFeaturesKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceVariablePointerFeaturesKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceVariablePointerFeaturesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR create(long address) {
-        return new VkPhysicalDeviceVariablePointerFeaturesKHR(address, null);
+        return wrap(VkPhysicalDeviceVariablePointerFeaturesKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceVariablePointerFeaturesKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceVariablePointerFeaturesKHR.class, address);
     }
 
     /**
@@ -119,7 +116,7 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -128,7 +125,7 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -137,7 +134,8 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -147,13 +145,13 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceVariablePointerFeaturesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -174,7 +172,7 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceVariablePointerFeaturesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -183,7 +181,7 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceVariablePointerFeaturesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -211,7 +209,7 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -221,13 +219,15 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeaturesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceVariablePointerFeaturesKHR} structs. */
     public static class Buffer extends VkPhysicalDeviceVariablePointerFeatures.Buffer {
+
+        private static final VkPhysicalDeviceVariablePointerFeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceVariablePointerFeaturesKHR.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceVariablePointerFeaturesKHR.Buffer} instance backed by the specified container.
@@ -256,13 +256,8 @@ public class VkPhysicalDeviceVariablePointerFeaturesKHR extends VkPhysicalDevice
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceVariablePointerFeaturesKHR newInstance(long address) {
-            return new VkPhysicalDeviceVariablePointerFeaturesKHR(address, container);
+        protected VkPhysicalDeviceVariablePointerFeaturesKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

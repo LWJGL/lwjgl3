@@ -84,10 +84,6 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
         STAGEFLAGS = layout.offsetof(3);
     }
 
-    VkObjectTablePushConstantEntryNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkObjectTablePushConstantEntryNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -95,7 +91,7 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkObjectTablePushConstantEntryNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -154,28 +150,29 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
 
     /** Returns a new {@link VkObjectTablePushConstantEntryNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkObjectTablePushConstantEntryNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkObjectTablePushConstantEntryNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkObjectTablePushConstantEntryNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkObjectTablePushConstantEntryNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkObjectTablePushConstantEntryNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkObjectTablePushConstantEntryNVX} instance allocated with {@link BufferUtils}. */
     public static VkObjectTablePushConstantEntryNVX create() {
-        return new VkObjectTablePushConstantEntryNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkObjectTablePushConstantEntryNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkObjectTablePushConstantEntryNVX} instance for the specified memory address. */
     public static VkObjectTablePushConstantEntryNVX create(long address) {
-        return new VkObjectTablePushConstantEntryNVX(address, null);
+        return wrap(VkObjectTablePushConstantEntryNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkObjectTablePushConstantEntryNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkObjectTablePushConstantEntryNVX.class, address);
     }
 
     /**
@@ -184,7 +181,7 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkObjectTablePushConstantEntryNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -193,7 +190,7 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkObjectTablePushConstantEntryNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -202,7 +199,8 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkObjectTablePushConstantEntryNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -212,13 +210,13 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkObjectTablePushConstantEntryNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkObjectTablePushConstantEntryNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -239,7 +237,7 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkObjectTablePushConstantEntryNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkObjectTablePushConstantEntryNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -248,7 +246,7 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkObjectTablePushConstantEntryNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkObjectTablePushConstantEntryNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -276,7 +274,7 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkObjectTablePushConstantEntryNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -286,33 +284,35 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkObjectTablePushConstantEntryNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return memGetInt(struct + VkObjectTablePushConstantEntryNVX.TYPE); }
+    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkObjectTablePushConstantEntryNVX.TYPE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkObjectTablePushConstantEntryNVX.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkObjectTablePushConstantEntryNVX.FLAGS); }
     /** Unsafe version of {@link #pipelineLayout}. */
-    public static long npipelineLayout(long struct) { return memGetLong(struct + VkObjectTablePushConstantEntryNVX.PIPELINELAYOUT); }
+    public static long npipelineLayout(long struct) { return UNSAFE.getLong(null, struct + VkObjectTablePushConstantEntryNVX.PIPELINELAYOUT); }
     /** Unsafe version of {@link #stageFlags}. */
-    public static int nstageFlags(long struct) { return memGetInt(struct + VkObjectTablePushConstantEntryNVX.STAGEFLAGS); }
+    public static int nstageFlags(long struct) { return UNSAFE.getInt(null, struct + VkObjectTablePushConstantEntryNVX.STAGEFLAGS); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { memPutInt(struct + VkObjectTablePushConstantEntryNVX.TYPE, value); }
+    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkObjectTablePushConstantEntryNVX.TYPE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkObjectTablePushConstantEntryNVX.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkObjectTablePushConstantEntryNVX.FLAGS, value); }
     /** Unsafe version of {@link #pipelineLayout(long) pipelineLayout}. */
-    public static void npipelineLayout(long struct, long value) { memPutLong(struct + VkObjectTablePushConstantEntryNVX.PIPELINELAYOUT, value); }
+    public static void npipelineLayout(long struct, long value) { UNSAFE.putLong(null, struct + VkObjectTablePushConstantEntryNVX.PIPELINELAYOUT, value); }
     /** Unsafe version of {@link #stageFlags(int) stageFlags}. */
-    public static void nstageFlags(long struct, int value) { memPutInt(struct + VkObjectTablePushConstantEntryNVX.STAGEFLAGS, value); }
+    public static void nstageFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkObjectTablePushConstantEntryNVX.STAGEFLAGS, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkObjectTablePushConstantEntryNVX} structs. */
     public static class Buffer extends StructBuffer<VkObjectTablePushConstantEntryNVX, Buffer> implements NativeResource {
+
+        private static final VkObjectTablePushConstantEntryNVX ELEMENT_FACTORY = VkObjectTablePushConstantEntryNVX.create(-1L);
 
         /**
          * Creates a new {@link VkObjectTablePushConstantEntryNVX.Buffer} instance backed by the specified container.
@@ -341,18 +341,8 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkObjectTablePushConstantEntryNVX newInstance(long address) {
-            return new VkObjectTablePushConstantEntryNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkObjectTablePushConstantEntryNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code type} field. */

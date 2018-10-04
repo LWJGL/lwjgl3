@@ -79,10 +79,6 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
         INDEXBUFFER = layout.offsetof(5);
     }
 
-    OVRViewportStencilMeshBuffer(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRViewportStencilMeshBuffer} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -90,7 +86,7 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRViewportStencilMeshBuffer(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -151,28 +147,29 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
 
     /** Returns a new {@link OVRViewportStencilMeshBuffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRViewportStencilMeshBuffer malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRViewportStencilMeshBuffer.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRViewportStencilMeshBuffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRViewportStencilMeshBuffer calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRViewportStencilMeshBuffer.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRViewportStencilMeshBuffer} instance allocated with {@link BufferUtils}. */
     public static OVRViewportStencilMeshBuffer create() {
-        return new OVRViewportStencilMeshBuffer(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRViewportStencilMeshBuffer.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRViewportStencilMeshBuffer} instance for the specified memory address. */
     public static OVRViewportStencilMeshBuffer create(long address) {
-        return new OVRViewportStencilMeshBuffer(address, null);
+        return wrap(OVRViewportStencilMeshBuffer.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRViewportStencilMeshBuffer createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRViewportStencilMeshBuffer.class, address);
     }
 
     /**
@@ -181,7 +178,7 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilMeshBuffer.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -190,7 +187,7 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilMeshBuffer.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -199,7 +196,8 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilMeshBuffer.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -209,13 +207,13 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilMeshBuffer.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRViewportStencilMeshBuffer.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -236,7 +234,7 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static OVRViewportStencilMeshBuffer mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRViewportStencilMeshBuffer.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -245,7 +243,7 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static OVRViewportStencilMeshBuffer callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRViewportStencilMeshBuffer.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -273,7 +271,7 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilMeshBuffer.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -283,34 +281,34 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilMeshBuffer.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #AllocVertexCount}. */
-    public static int nAllocVertexCount(long struct) { return memGetInt(struct + OVRViewportStencilMeshBuffer.ALLOCVERTEXCOUNT); }
+    public static int nAllocVertexCount(long struct) { return UNSAFE.getInt(null, struct + OVRViewportStencilMeshBuffer.ALLOCVERTEXCOUNT); }
     /** Unsafe version of {@link #UsedVertexCount}. */
-    public static int nUsedVertexCount(long struct) { return memGetInt(struct + OVRViewportStencilMeshBuffer.USEDVERTEXCOUNT); }
+    public static int nUsedVertexCount(long struct) { return UNSAFE.getInt(null, struct + OVRViewportStencilMeshBuffer.USEDVERTEXCOUNT); }
     /** Unsafe version of {@link #VertexBuffer}. */
     public static OVRVector2f.Buffer nVertexBuffer(long struct) { return OVRVector2f.create(memGetAddress(struct + OVRViewportStencilMeshBuffer.VERTEXBUFFER), nAllocVertexCount(struct)); }
     /** Unsafe version of {@link #AllocIndexCount}. */
-    public static int nAllocIndexCount(long struct) { return memGetInt(struct + OVRViewportStencilMeshBuffer.ALLOCINDEXCOUNT); }
+    public static int nAllocIndexCount(long struct) { return UNSAFE.getInt(null, struct + OVRViewportStencilMeshBuffer.ALLOCINDEXCOUNT); }
     /** Unsafe version of {@link #UsedIndexCount}. */
-    public static int nUsedIndexCount(long struct) { return memGetInt(struct + OVRViewportStencilMeshBuffer.USEDINDEXCOUNT); }
+    public static int nUsedIndexCount(long struct) { return UNSAFE.getInt(null, struct + OVRViewportStencilMeshBuffer.USEDINDEXCOUNT); }
     /** Unsafe version of {@link #IndexBuffer() IndexBuffer}. */
     public static ShortBuffer nIndexBuffer(long struct) { return memShortBuffer(memGetAddress(struct + OVRViewportStencilMeshBuffer.INDEXBUFFER), nAllocIndexCount(struct)); }
 
     /** Sets the specified value to the {@code AllocVertexCount} field of the specified {@code struct}. */
-    public static void nAllocVertexCount(long struct, int value) { memPutInt(struct + OVRViewportStencilMeshBuffer.ALLOCVERTEXCOUNT, value); }
+    public static void nAllocVertexCount(long struct, int value) { UNSAFE.putInt(null, struct + OVRViewportStencilMeshBuffer.ALLOCVERTEXCOUNT, value); }
     /** Unsafe version of {@link #UsedVertexCount(int) UsedVertexCount}. */
-    public static void nUsedVertexCount(long struct, int value) { memPutInt(struct + OVRViewportStencilMeshBuffer.USEDVERTEXCOUNT, value); }
+    public static void nUsedVertexCount(long struct, int value) { UNSAFE.putInt(null, struct + OVRViewportStencilMeshBuffer.USEDVERTEXCOUNT, value); }
     /** Unsafe version of {@link #VertexBuffer(OVRVector2f.Buffer) VertexBuffer}. */
     public static void nVertexBuffer(long struct, OVRVector2f.Buffer value) { memPutAddress(struct + OVRViewportStencilMeshBuffer.VERTEXBUFFER, value.address()); nAllocVertexCount(struct, value.remaining()); }
     /** Sets the specified value to the {@code AllocIndexCount} field of the specified {@code struct}. */
-    public static void nAllocIndexCount(long struct, int value) { memPutInt(struct + OVRViewportStencilMeshBuffer.ALLOCINDEXCOUNT, value); }
+    public static void nAllocIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + OVRViewportStencilMeshBuffer.ALLOCINDEXCOUNT, value); }
     /** Unsafe version of {@link #UsedIndexCount(int) UsedIndexCount}. */
-    public static void nUsedIndexCount(long struct, int value) { memPutInt(struct + OVRViewportStencilMeshBuffer.USEDINDEXCOUNT, value); }
+    public static void nUsedIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + OVRViewportStencilMeshBuffer.USEDINDEXCOUNT, value); }
     /** Unsafe version of {@link #IndexBuffer(ShortBuffer) IndexBuffer}. */
     public static void nIndexBuffer(long struct, ShortBuffer value) { memPutAddress(struct + OVRViewportStencilMeshBuffer.INDEXBUFFER, memAddress(value)); nAllocIndexCount(struct, value.remaining()); }
 
@@ -341,6 +339,8 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
     /** An array of {@link OVRViewportStencilMeshBuffer} structs. */
     public static class Buffer extends StructBuffer<OVRViewportStencilMeshBuffer, Buffer> implements NativeResource {
 
+        private static final OVRViewportStencilMeshBuffer ELEMENT_FACTORY = OVRViewportStencilMeshBuffer.create(-1L);
+
         /**
          * Creates a new {@link OVRViewportStencilMeshBuffer.Buffer} instance backed by the specified container.
          *
@@ -368,18 +368,8 @@ public class OVRViewportStencilMeshBuffer extends Struct implements NativeResour
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRViewportStencilMeshBuffer newInstance(long address) {
-            return new OVRViewportStencilMeshBuffer(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRViewportStencilMeshBuffer getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code AllocVertexCount} field. */

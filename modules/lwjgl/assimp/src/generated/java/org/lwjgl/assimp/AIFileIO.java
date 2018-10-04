@@ -67,10 +67,6 @@ public class AIFileIO extends Struct implements NativeResource {
         USERDATA = layout.offsetof(2);
     }
 
-    AIFileIO(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIFileIO} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -78,7 +74,7 @@ public class AIFileIO extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIFileIO(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -130,28 +126,29 @@ public class AIFileIO extends Struct implements NativeResource {
 
     /** Returns a new {@link AIFileIO} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIFileIO malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AIFileIO.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AIFileIO} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIFileIO calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AIFileIO.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AIFileIO} instance allocated with {@link BufferUtils}. */
     public static AIFileIO create() {
-        return new AIFileIO(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AIFileIO.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AIFileIO} instance for the specified memory address. */
     public static AIFileIO create(long address) {
-        return new AIFileIO(address, null);
+        return wrap(AIFileIO.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIFileIO createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIFileIO.class, address);
     }
 
     /**
@@ -160,7 +157,7 @@ public class AIFileIO extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFileIO.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -169,7 +166,7 @@ public class AIFileIO extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFileIO.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -178,7 +175,8 @@ public class AIFileIO extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFileIO.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -188,13 +186,13 @@ public class AIFileIO extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFileIO.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIFileIO.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -215,7 +213,7 @@ public class AIFileIO extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIFileIO mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AIFileIO.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -224,7 +222,7 @@ public class AIFileIO extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIFileIO callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AIFileIO.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -252,7 +250,7 @@ public class AIFileIO extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFileIO.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -262,7 +260,7 @@ public class AIFileIO extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFileIO.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -308,6 +306,8 @@ public class AIFileIO extends Struct implements NativeResource {
     /** An array of {@link AIFileIO} structs. */
     public static class Buffer extends StructBuffer<AIFileIO, Buffer> implements NativeResource {
 
+        private static final AIFileIO ELEMENT_FACTORY = AIFileIO.create(-1L);
+
         /**
          * Creates a new {@link AIFileIO.Buffer} instance backed by the specified container.
          *
@@ -335,18 +335,8 @@ public class AIFileIO extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIFileIO newInstance(long address) {
-            return new AIFileIO(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIFileIO getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code OpenProc} field. */

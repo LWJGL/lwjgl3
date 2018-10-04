@@ -109,10 +109,6 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
         SPACING = layout.offsetof(14);
     }
 
-    NkStyleWindowHeader(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkStyleWindowHeader} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -120,7 +116,7 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkStyleWindowHeader(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -278,28 +274,29 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
 
     /** Returns a new {@link NkStyleWindowHeader} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkStyleWindowHeader malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkStyleWindowHeader.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkStyleWindowHeader} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkStyleWindowHeader calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkStyleWindowHeader.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkStyleWindowHeader} instance allocated with {@link BufferUtils}. */
     public static NkStyleWindowHeader create() {
-        return new NkStyleWindowHeader(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkStyleWindowHeader.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkStyleWindowHeader} instance for the specified memory address. */
     public static NkStyleWindowHeader create(long address) {
-        return new NkStyleWindowHeader(address, null);
+        return wrap(NkStyleWindowHeader.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleWindowHeader createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkStyleWindowHeader.class, address);
     }
 
     /**
@@ -308,7 +305,7 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleWindowHeader.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -317,7 +314,7 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleWindowHeader.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -326,7 +323,8 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleWindowHeader.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -336,13 +334,13 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleWindowHeader.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleWindowHeader.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -363,7 +361,7 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleWindowHeader mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkStyleWindowHeader.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -372,7 +370,7 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleWindowHeader callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkStyleWindowHeader.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -400,7 +398,7 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleWindowHeader.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -410,7 +408,7 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleWindowHeader.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -426,11 +424,11 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
     /** Unsafe version of {@link #minimize_button}. */
     public static NkStyleButton nminimize_button(long struct) { return NkStyleButton.create(struct + NkStyleWindowHeader.MINIMIZE_BUTTON); }
     /** Unsafe version of {@link #close_symbol}. */
-    public static int nclose_symbol(long struct) { return memGetInt(struct + NkStyleWindowHeader.CLOSE_SYMBOL); }
+    public static int nclose_symbol(long struct) { return UNSAFE.getInt(null, struct + NkStyleWindowHeader.CLOSE_SYMBOL); }
     /** Unsafe version of {@link #minimize_symbol}. */
-    public static int nminimize_symbol(long struct) { return memGetInt(struct + NkStyleWindowHeader.MINIMIZE_SYMBOL); }
+    public static int nminimize_symbol(long struct) { return UNSAFE.getInt(null, struct + NkStyleWindowHeader.MINIMIZE_SYMBOL); }
     /** Unsafe version of {@link #maximize_symbol}. */
-    public static int nmaximize_symbol(long struct) { return memGetInt(struct + NkStyleWindowHeader.MAXIMIZE_SYMBOL); }
+    public static int nmaximize_symbol(long struct) { return UNSAFE.getInt(null, struct + NkStyleWindowHeader.MAXIMIZE_SYMBOL); }
     /** Unsafe version of {@link #label_normal}. */
     public static NkColor nlabel_normal(long struct) { return NkColor.create(struct + NkStyleWindowHeader.LABEL_NORMAL); }
     /** Unsafe version of {@link #label_hover}. */
@@ -438,7 +436,7 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
     /** Unsafe version of {@link #label_active}. */
     public static NkColor nlabel_active(long struct) { return NkColor.create(struct + NkStyleWindowHeader.LABEL_ACTIVE); }
     /** Unsafe version of {@link #align}. */
-    public static int nalign(long struct) { return memGetInt(struct + NkStyleWindowHeader.ALIGN); }
+    public static int nalign(long struct) { return UNSAFE.getInt(null, struct + NkStyleWindowHeader.ALIGN); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleWindowHeader.PADDING); }
     /** Unsafe version of {@link #label_padding}. */
@@ -457,11 +455,11 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
     /** Unsafe version of {@link #minimize_button(NkStyleButton) minimize_button}. */
     public static void nminimize_button(long struct, NkStyleButton value) { memCopy(value.address(), struct + NkStyleWindowHeader.MINIMIZE_BUTTON, NkStyleButton.SIZEOF); }
     /** Unsafe version of {@link #close_symbol(int) close_symbol}. */
-    public static void nclose_symbol(long struct, int value) { memPutInt(struct + NkStyleWindowHeader.CLOSE_SYMBOL, value); }
+    public static void nclose_symbol(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleWindowHeader.CLOSE_SYMBOL, value); }
     /** Unsafe version of {@link #minimize_symbol(int) minimize_symbol}. */
-    public static void nminimize_symbol(long struct, int value) { memPutInt(struct + NkStyleWindowHeader.MINIMIZE_SYMBOL, value); }
+    public static void nminimize_symbol(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleWindowHeader.MINIMIZE_SYMBOL, value); }
     /** Unsafe version of {@link #maximize_symbol(int) maximize_symbol}. */
-    public static void nmaximize_symbol(long struct, int value) { memPutInt(struct + NkStyleWindowHeader.MAXIMIZE_SYMBOL, value); }
+    public static void nmaximize_symbol(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleWindowHeader.MAXIMIZE_SYMBOL, value); }
     /** Unsafe version of {@link #label_normal(NkColor) label_normal}. */
     public static void nlabel_normal(long struct, NkColor value) { memCopy(value.address(), struct + NkStyleWindowHeader.LABEL_NORMAL, NkColor.SIZEOF); }
     /** Unsafe version of {@link #label_hover(NkColor) label_hover}. */
@@ -469,7 +467,7 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
     /** Unsafe version of {@link #label_active(NkColor) label_active}. */
     public static void nlabel_active(long struct, NkColor value) { memCopy(value.address(), struct + NkStyleWindowHeader.LABEL_ACTIVE, NkColor.SIZEOF); }
     /** Unsafe version of {@link #align(int) align}. */
-    public static void nalign(long struct, int value) { memPutInt(struct + NkStyleWindowHeader.ALIGN, value); }
+    public static void nalign(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleWindowHeader.ALIGN, value); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleWindowHeader.PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #label_padding(NkVec2) label_padding}. */
@@ -481,6 +479,8 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
 
     /** An array of {@link NkStyleWindowHeader} structs. */
     public static class Buffer extends StructBuffer<NkStyleWindowHeader, Buffer> implements NativeResource {
+
+        private static final NkStyleWindowHeader ELEMENT_FACTORY = NkStyleWindowHeader.create(-1L);
 
         /**
          * Creates a new {@link NkStyleWindowHeader.Buffer} instance backed by the specified container.
@@ -509,18 +509,8 @@ public class NkStyleWindowHeader extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkStyleWindowHeader newInstance(long address) {
-            return new NkStyleWindowHeader(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkStyleWindowHeader getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkStyleItem} view of the {@code normal} field. */

@@ -88,10 +88,6 @@ public class AIAnimation extends Struct implements NativeResource {
         MMESHCHANNELS = layout.offsetof(6);
     }
 
-    AIAnimation(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIAnimation} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -99,7 +95,7 @@ public class AIAnimation extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIAnimation(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -171,28 +167,29 @@ public class AIAnimation extends Struct implements NativeResource {
 
     /** Returns a new {@link AIAnimation} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIAnimation malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AIAnimation.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AIAnimation} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIAnimation calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AIAnimation.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AIAnimation} instance allocated with {@link BufferUtils}. */
     public static AIAnimation create() {
-        return new AIAnimation(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AIAnimation.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AIAnimation} instance for the specified memory address. */
     public static AIAnimation create(long address) {
-        return new AIAnimation(address, null);
+        return wrap(AIAnimation.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIAnimation createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIAnimation.class, address);
     }
 
     /**
@@ -201,7 +198,7 @@ public class AIAnimation extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIAnimation.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -210,7 +207,7 @@ public class AIAnimation extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIAnimation.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -219,7 +216,8 @@ public class AIAnimation extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIAnimation.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -229,13 +227,13 @@ public class AIAnimation extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIAnimation.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIAnimation.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -256,7 +254,7 @@ public class AIAnimation extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIAnimation mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AIAnimation.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -265,7 +263,7 @@ public class AIAnimation extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIAnimation callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AIAnimation.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -293,7 +291,7 @@ public class AIAnimation extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIAnimation.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -303,7 +301,7 @@ public class AIAnimation extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIAnimation.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -311,30 +309,30 @@ public class AIAnimation extends Struct implements NativeResource {
     /** Unsafe version of {@link #mName}. */
     public static AIString nmName(long struct) { return AIString.create(struct + AIAnimation.MNAME); }
     /** Unsafe version of {@link #mDuration}. */
-    public static double nmDuration(long struct) { return memGetDouble(struct + AIAnimation.MDURATION); }
+    public static double nmDuration(long struct) { return UNSAFE.getDouble(null, struct + AIAnimation.MDURATION); }
     /** Unsafe version of {@link #mTicksPerSecond}. */
-    public static double nmTicksPerSecond(long struct) { return memGetDouble(struct + AIAnimation.MTICKSPERSECOND); }
+    public static double nmTicksPerSecond(long struct) { return UNSAFE.getDouble(null, struct + AIAnimation.MTICKSPERSECOND); }
     /** Unsafe version of {@link #mNumChannels}. */
-    public static int nmNumChannels(long struct) { return memGetInt(struct + AIAnimation.MNUMCHANNELS); }
+    public static int nmNumChannels(long struct) { return UNSAFE.getInt(null, struct + AIAnimation.MNUMCHANNELS); }
     /** Unsafe version of {@link #mChannels() mChannels}. */
     public static PointerBuffer nmChannels(long struct) { return memPointerBuffer(memGetAddress(struct + AIAnimation.MCHANNELS), nmNumChannels(struct)); }
     /** Unsafe version of {@link #mNumMeshChannels}. */
-    public static int nmNumMeshChannels(long struct) { return memGetInt(struct + AIAnimation.MNUMMESHCHANNELS); }
+    public static int nmNumMeshChannels(long struct) { return UNSAFE.getInt(null, struct + AIAnimation.MNUMMESHCHANNELS); }
     /** Unsafe version of {@link #mMeshChannels() mMeshChannels}. */
     public static PointerBuffer nmMeshChannels(long struct) { return memPointerBuffer(memGetAddress(struct + AIAnimation.MMESHCHANNELS), nmNumMeshChannels(struct)); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIAnimation.MNAME, AIString.SIZEOF); }
     /** Unsafe version of {@link #mDuration(double) mDuration}. */
-    public static void nmDuration(long struct, double value) { memPutDouble(struct + AIAnimation.MDURATION, value); }
+    public static void nmDuration(long struct, double value) { UNSAFE.putDouble(null, struct + AIAnimation.MDURATION, value); }
     /** Unsafe version of {@link #mTicksPerSecond(double) mTicksPerSecond}. */
-    public static void nmTicksPerSecond(long struct, double value) { memPutDouble(struct + AIAnimation.MTICKSPERSECOND, value); }
+    public static void nmTicksPerSecond(long struct, double value) { UNSAFE.putDouble(null, struct + AIAnimation.MTICKSPERSECOND, value); }
     /** Sets the specified value to the {@code mNumChannels} field of the specified {@code struct}. */
-    public static void nmNumChannels(long struct, int value) { memPutInt(struct + AIAnimation.MNUMCHANNELS, value); }
+    public static void nmNumChannels(long struct, int value) { UNSAFE.putInt(null, struct + AIAnimation.MNUMCHANNELS, value); }
     /** Unsafe version of {@link #mChannels(PointerBuffer) mChannels}. */
     public static void nmChannels(long struct, PointerBuffer value) { memPutAddress(struct + AIAnimation.MCHANNELS, memAddress(value)); nmNumChannels(struct, value.remaining()); }
     /** Sets the specified value to the {@code mNumMeshChannels} field of the specified {@code struct}. */
-    public static void nmNumMeshChannels(long struct, int value) { memPutInt(struct + AIAnimation.MNUMMESHCHANNELS, value); }
+    public static void nmNumMeshChannels(long struct, int value) { UNSAFE.putInt(null, struct + AIAnimation.MNUMMESHCHANNELS, value); }
     /** Unsafe version of {@link #mMeshChannels(PointerBuffer) mMeshChannels}. */
     public static void nmMeshChannels(long struct, PointerBuffer value) { memPutAddress(struct + AIAnimation.MMESHCHANNELS, memAddress(value)); nmNumMeshChannels(struct, value.remaining()); }
 
@@ -365,6 +363,8 @@ public class AIAnimation extends Struct implements NativeResource {
     /** An array of {@link AIAnimation} structs. */
     public static class Buffer extends StructBuffer<AIAnimation, Buffer> implements NativeResource {
 
+        private static final AIAnimation ELEMENT_FACTORY = AIAnimation.create(-1L);
+
         /**
          * Creates a new {@link AIAnimation.Buffer} instance backed by the specified container.
          *
@@ -392,18 +392,8 @@ public class AIAnimation extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIAnimation newInstance(long address) {
-            return new AIAnimation(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIAnimation getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link AIString} view of the {@code mName} field. */

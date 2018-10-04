@@ -111,10 +111,6 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
         PROJECTIONDESC = layout.offsetof(7);
     }
 
-    OVRLayerEyeFovDepth(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRLayerEyeFovDepth} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -122,7 +118,7 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRLayerEyeFovDepth(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -235,28 +231,29 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
 
     /** Returns a new {@link OVRLayerEyeFovDepth} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRLayerEyeFovDepth malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRLayerEyeFovDepth.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRLayerEyeFovDepth} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRLayerEyeFovDepth calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRLayerEyeFovDepth.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRLayerEyeFovDepth} instance allocated with {@link BufferUtils}. */
     public static OVRLayerEyeFovDepth create() {
-        return new OVRLayerEyeFovDepth(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRLayerEyeFovDepth.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRLayerEyeFovDepth} instance for the specified memory address. */
     public static OVRLayerEyeFovDepth create(long address) {
-        return new OVRLayerEyeFovDepth(address, null);
+        return wrap(OVRLayerEyeFovDepth.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRLayerEyeFovDepth createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRLayerEyeFovDepth.class, address);
     }
 
     /**
@@ -265,7 +262,7 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRLayerEyeFovDepth.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -274,7 +271,7 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRLayerEyeFovDepth.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -283,7 +280,8 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRLayerEyeFovDepth.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -293,13 +291,13 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRLayerEyeFovDepth.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRLayerEyeFovDepth.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -320,7 +318,7 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRLayerEyeFovDepth mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRLayerEyeFovDepth.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -329,7 +327,7 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRLayerEyeFovDepth callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRLayerEyeFovDepth.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -357,7 +355,7 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRLayerEyeFovDepth.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -367,7 +365,7 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRLayerEyeFovDepth.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -399,7 +397,7 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
         return OVRPosef.create(struct + OVRLayerEyeFovDepth.RENDERPOSE + check(index, ovrEye_Count) * OVRPosef.SIZEOF);
     }
     /** Unsafe version of {@link #SensorSampleTime}. */
-    public static double nSensorSampleTime(long struct) { return memGetDouble(struct + OVRLayerEyeFovDepth.SENSORSAMPLETIME); }
+    public static double nSensorSampleTime(long struct) { return UNSAFE.getDouble(null, struct + OVRLayerEyeFovDepth.SENSORSAMPLETIME); }
     /** Unsafe version of {@link #DepthTexture}. */
     public static PointerBuffer nDepthTexture(long struct) { return memPointerBuffer(struct + OVRLayerEyeFovDepth.DEPTHTEXTURE, ovrEye_Count); }
     /** Unsafe version of {@link #DepthTexture(int) DepthTexture}. */
@@ -448,7 +446,7 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
         memCopy(value.address(), struct + OVRLayerEyeFovDepth.RENDERPOSE + check(index, ovrEye_Count) * OVRPosef.SIZEOF, OVRPosef.SIZEOF);
     }
     /** Unsafe version of {@link #SensorSampleTime(double) SensorSampleTime}. */
-    public static void nSensorSampleTime(long struct, double value) { memPutDouble(struct + OVRLayerEyeFovDepth.SENSORSAMPLETIME, value); }
+    public static void nSensorSampleTime(long struct, double value) { UNSAFE.putDouble(null, struct + OVRLayerEyeFovDepth.SENSORSAMPLETIME, value); }
     /** Unsafe version of {@link #DepthTexture(PointerBuffer) DepthTexture}. */
     public static void nDepthTexture(long struct, PointerBuffer value) {
         if (CHECKS) { checkGT(value, ovrEye_Count); }
@@ -488,6 +486,8 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
     /** An array of {@link OVRLayerEyeFovDepth} structs. */
     public static class Buffer extends StructBuffer<OVRLayerEyeFovDepth, Buffer> implements NativeResource {
 
+        private static final OVRLayerEyeFovDepth ELEMENT_FACTORY = OVRLayerEyeFovDepth.create(-1L);
+
         /**
          * Creates a new {@link OVRLayerEyeFovDepth.Buffer} instance backed by the specified container.
          *
@@ -515,18 +515,8 @@ public class OVRLayerEyeFovDepth extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRLayerEyeFovDepth newInstance(long address) {
-            return new OVRLayerEyeFovDepth(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRLayerEyeFovDepth getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */

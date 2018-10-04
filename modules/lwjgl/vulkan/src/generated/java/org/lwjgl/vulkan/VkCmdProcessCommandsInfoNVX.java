@@ -152,10 +152,6 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
         SEQUENCESINDEXOFFSET = layout.offsetof(11);
     }
 
-    VkCmdProcessCommandsInfoNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkCmdProcessCommandsInfoNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -163,7 +159,7 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkCmdProcessCommandsInfoNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -275,28 +271,29 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
 
     /** Returns a new {@link VkCmdProcessCommandsInfoNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkCmdProcessCommandsInfoNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkCmdProcessCommandsInfoNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkCmdProcessCommandsInfoNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkCmdProcessCommandsInfoNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkCmdProcessCommandsInfoNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkCmdProcessCommandsInfoNVX} instance allocated with {@link BufferUtils}. */
     public static VkCmdProcessCommandsInfoNVX create() {
-        return new VkCmdProcessCommandsInfoNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkCmdProcessCommandsInfoNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkCmdProcessCommandsInfoNVX} instance for the specified memory address. */
     public static VkCmdProcessCommandsInfoNVX create(long address) {
-        return new VkCmdProcessCommandsInfoNVX(address, null);
+        return wrap(VkCmdProcessCommandsInfoNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCmdProcessCommandsInfoNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkCmdProcessCommandsInfoNVX.class, address);
     }
 
     /**
@@ -305,7 +302,7 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkCmdProcessCommandsInfoNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -314,7 +311,7 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkCmdProcessCommandsInfoNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -323,7 +320,8 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkCmdProcessCommandsInfoNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -333,13 +331,13 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkCmdProcessCommandsInfoNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCmdProcessCommandsInfoNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -360,7 +358,7 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkCmdProcessCommandsInfoNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkCmdProcessCommandsInfoNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -369,7 +367,7 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkCmdProcessCommandsInfoNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkCmdProcessCommandsInfoNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -397,7 +395,7 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkCmdProcessCommandsInfoNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -407,60 +405,60 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkCmdProcessCommandsInfoNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkCmdProcessCommandsInfoNVX.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCmdProcessCommandsInfoNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCmdProcessCommandsInfoNVX.PNEXT); }
     /** Unsafe version of {@link #objectTable}. */
-    public static long nobjectTable(long struct) { return memGetLong(struct + VkCmdProcessCommandsInfoNVX.OBJECTTABLE); }
+    public static long nobjectTable(long struct) { return UNSAFE.getLong(null, struct + VkCmdProcessCommandsInfoNVX.OBJECTTABLE); }
     /** Unsafe version of {@link #indirectCommandsLayout}. */
-    public static long nindirectCommandsLayout(long struct) { return memGetLong(struct + VkCmdProcessCommandsInfoNVX.INDIRECTCOMMANDSLAYOUT); }
+    public static long nindirectCommandsLayout(long struct) { return UNSAFE.getLong(null, struct + VkCmdProcessCommandsInfoNVX.INDIRECTCOMMANDSLAYOUT); }
     /** Unsafe version of {@link #indirectCommandsTokenCount}. */
-    public static int nindirectCommandsTokenCount(long struct) { return memGetInt(struct + VkCmdProcessCommandsInfoNVX.INDIRECTCOMMANDSTOKENCOUNT); }
+    public static int nindirectCommandsTokenCount(long struct) { return UNSAFE.getInt(null, struct + VkCmdProcessCommandsInfoNVX.INDIRECTCOMMANDSTOKENCOUNT); }
     /** Unsafe version of {@link #pIndirectCommandsTokens}. */
     public static VkIndirectCommandsTokenNVX.Buffer npIndirectCommandsTokens(long struct) { return VkIndirectCommandsTokenNVX.create(memGetAddress(struct + VkCmdProcessCommandsInfoNVX.PINDIRECTCOMMANDSTOKENS), nindirectCommandsTokenCount(struct)); }
     /** Unsafe version of {@link #maxSequencesCount}. */
-    public static int nmaxSequencesCount(long struct) { return memGetInt(struct + VkCmdProcessCommandsInfoNVX.MAXSEQUENCESCOUNT); }
+    public static int nmaxSequencesCount(long struct) { return UNSAFE.getInt(null, struct + VkCmdProcessCommandsInfoNVX.MAXSEQUENCESCOUNT); }
     /** Unsafe version of {@link #targetCommandBuffer}. */
     public static long ntargetCommandBuffer(long struct) { return memGetAddress(struct + VkCmdProcessCommandsInfoNVX.TARGETCOMMANDBUFFER); }
     /** Unsafe version of {@link #sequencesCountBuffer}. */
-    public static long nsequencesCountBuffer(long struct) { return memGetLong(struct + VkCmdProcessCommandsInfoNVX.SEQUENCESCOUNTBUFFER); }
+    public static long nsequencesCountBuffer(long struct) { return UNSAFE.getLong(null, struct + VkCmdProcessCommandsInfoNVX.SEQUENCESCOUNTBUFFER); }
     /** Unsafe version of {@link #sequencesCountOffset}. */
-    public static long nsequencesCountOffset(long struct) { return memGetLong(struct + VkCmdProcessCommandsInfoNVX.SEQUENCESCOUNTOFFSET); }
+    public static long nsequencesCountOffset(long struct) { return UNSAFE.getLong(null, struct + VkCmdProcessCommandsInfoNVX.SEQUENCESCOUNTOFFSET); }
     /** Unsafe version of {@link #sequencesIndexBuffer}. */
-    public static long nsequencesIndexBuffer(long struct) { return memGetLong(struct + VkCmdProcessCommandsInfoNVX.SEQUENCESINDEXBUFFER); }
+    public static long nsequencesIndexBuffer(long struct) { return UNSAFE.getLong(null, struct + VkCmdProcessCommandsInfoNVX.SEQUENCESINDEXBUFFER); }
     /** Unsafe version of {@link #sequencesIndexOffset}. */
-    public static long nsequencesIndexOffset(long struct) { return memGetLong(struct + VkCmdProcessCommandsInfoNVX.SEQUENCESINDEXOFFSET); }
+    public static long nsequencesIndexOffset(long struct) { return UNSAFE.getLong(null, struct + VkCmdProcessCommandsInfoNVX.SEQUENCESINDEXOFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkCmdProcessCommandsInfoNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCmdProcessCommandsInfoNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCmdProcessCommandsInfoNVX.PNEXT, value); }
     /** Unsafe version of {@link #objectTable(long) objectTable}. */
-    public static void nobjectTable(long struct, long value) { memPutLong(struct + VkCmdProcessCommandsInfoNVX.OBJECTTABLE, value); }
+    public static void nobjectTable(long struct, long value) { UNSAFE.putLong(null, struct + VkCmdProcessCommandsInfoNVX.OBJECTTABLE, value); }
     /** Unsafe version of {@link #indirectCommandsLayout(long) indirectCommandsLayout}. */
-    public static void nindirectCommandsLayout(long struct, long value) { memPutLong(struct + VkCmdProcessCommandsInfoNVX.INDIRECTCOMMANDSLAYOUT, value); }
+    public static void nindirectCommandsLayout(long struct, long value) { UNSAFE.putLong(null, struct + VkCmdProcessCommandsInfoNVX.INDIRECTCOMMANDSLAYOUT, value); }
     /** Sets the specified value to the {@code indirectCommandsTokenCount} field of the specified {@code struct}. */
-    public static void nindirectCommandsTokenCount(long struct, int value) { memPutInt(struct + VkCmdProcessCommandsInfoNVX.INDIRECTCOMMANDSTOKENCOUNT, value); }
+    public static void nindirectCommandsTokenCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCmdProcessCommandsInfoNVX.INDIRECTCOMMANDSTOKENCOUNT, value); }
     /** Unsafe version of {@link #pIndirectCommandsTokens(VkIndirectCommandsTokenNVX.Buffer) pIndirectCommandsTokens}. */
     public static void npIndirectCommandsTokens(long struct, VkIndirectCommandsTokenNVX.Buffer value) { memPutAddress(struct + VkCmdProcessCommandsInfoNVX.PINDIRECTCOMMANDSTOKENS, value.address()); nindirectCommandsTokenCount(struct, value.remaining()); }
     /** Unsafe version of {@link #maxSequencesCount(int) maxSequencesCount}. */
-    public static void nmaxSequencesCount(long struct, int value) { memPutInt(struct + VkCmdProcessCommandsInfoNVX.MAXSEQUENCESCOUNT, value); }
+    public static void nmaxSequencesCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCmdProcessCommandsInfoNVX.MAXSEQUENCESCOUNT, value); }
     /** Unsafe version of {@link #targetCommandBuffer(VkCommandBuffer) targetCommandBuffer}. */
     public static void ntargetCommandBuffer(long struct, @Nullable VkCommandBuffer value) { memPutAddress(struct + VkCmdProcessCommandsInfoNVX.TARGETCOMMANDBUFFER, memAddressSafe(value)); }
     /** Unsafe version of {@link #sequencesCountBuffer(long) sequencesCountBuffer}. */
-    public static void nsequencesCountBuffer(long struct, long value) { memPutLong(struct + VkCmdProcessCommandsInfoNVX.SEQUENCESCOUNTBUFFER, value); }
+    public static void nsequencesCountBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkCmdProcessCommandsInfoNVX.SEQUENCESCOUNTBUFFER, value); }
     /** Unsafe version of {@link #sequencesCountOffset(long) sequencesCountOffset}. */
-    public static void nsequencesCountOffset(long struct, long value) { memPutLong(struct + VkCmdProcessCommandsInfoNVX.SEQUENCESCOUNTOFFSET, value); }
+    public static void nsequencesCountOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkCmdProcessCommandsInfoNVX.SEQUENCESCOUNTOFFSET, value); }
     /** Unsafe version of {@link #sequencesIndexBuffer(long) sequencesIndexBuffer}. */
-    public static void nsequencesIndexBuffer(long struct, long value) { memPutLong(struct + VkCmdProcessCommandsInfoNVX.SEQUENCESINDEXBUFFER, value); }
+    public static void nsequencesIndexBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkCmdProcessCommandsInfoNVX.SEQUENCESINDEXBUFFER, value); }
     /** Unsafe version of {@link #sequencesIndexOffset(long) sequencesIndexOffset}. */
-    public static void nsequencesIndexOffset(long struct, long value) { memPutLong(struct + VkCmdProcessCommandsInfoNVX.SEQUENCESINDEXOFFSET, value); }
+    public static void nsequencesIndexOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkCmdProcessCommandsInfoNVX.SEQUENCESINDEXOFFSET, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -487,6 +485,8 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
 
     /** An array of {@link VkCmdProcessCommandsInfoNVX} structs. */
     public static class Buffer extends StructBuffer<VkCmdProcessCommandsInfoNVX, Buffer> implements NativeResource {
+
+        private static final VkCmdProcessCommandsInfoNVX ELEMENT_FACTORY = VkCmdProcessCommandsInfoNVX.create(-1L);
 
         /**
          * Creates a new {@link VkCmdProcessCommandsInfoNVX.Buffer} instance backed by the specified container.
@@ -515,18 +515,8 @@ public class VkCmdProcessCommandsInfoNVX extends Struct implements NativeResourc
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkCmdProcessCommandsInfoNVX newInstance(long address) {
-            return new VkCmdProcessCommandsInfoNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkCmdProcessCommandsInfoNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

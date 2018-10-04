@@ -73,10 +73,6 @@ public class STBTTVertex extends Struct implements NativeResource {
         TYPE = layout.offsetof(6);
     }
 
-    STBTTVertex(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link STBTTVertex} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -84,7 +80,7 @@ public class STBTTVertex extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public STBTTVertex(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -116,28 +112,29 @@ public class STBTTVertex extends Struct implements NativeResource {
 
     /** Returns a new {@link STBTTVertex} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static STBTTVertex malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(STBTTVertex.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link STBTTVertex} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static STBTTVertex calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(STBTTVertex.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link STBTTVertex} instance allocated with {@link BufferUtils}. */
     public static STBTTVertex create() {
-        return new STBTTVertex(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(STBTTVertex.class, memAddress(container), container);
     }
 
     /** Returns a new {@link STBTTVertex} instance for the specified memory address. */
     public static STBTTVertex create(long address) {
-        return new STBTTVertex(address, null);
+        return wrap(STBTTVertex.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBTTVertex createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(STBTTVertex.class, address);
     }
 
     /**
@@ -146,7 +143,7 @@ public class STBTTVertex extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTVertex.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -155,7 +152,7 @@ public class STBTTVertex extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTVertex.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -164,7 +161,8 @@ public class STBTTVertex extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTVertex.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -174,13 +172,13 @@ public class STBTTVertex extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTVertex.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBTTVertex.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -201,7 +199,7 @@ public class STBTTVertex extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBTTVertex mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(STBTTVertex.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -210,7 +208,7 @@ public class STBTTVertex extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBTTVertex callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(STBTTVertex.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -238,7 +236,7 @@ public class STBTTVertex extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTVertex.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -248,30 +246,32 @@ public class STBTTVertex extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTVertex.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static short nx(long struct) { return memGetShort(struct + STBTTVertex.X); }
+    public static short nx(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.X); }
     /** Unsafe version of {@link #y}. */
-    public static short ny(long struct) { return memGetShort(struct + STBTTVertex.Y); }
+    public static short ny(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.Y); }
     /** Unsafe version of {@link #cx}. */
-    public static short ncx(long struct) { return memGetShort(struct + STBTTVertex.CX); }
+    public static short ncx(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.CX); }
     /** Unsafe version of {@link #cy}. */
-    public static short ncy(long struct) { return memGetShort(struct + STBTTVertex.CY); }
+    public static short ncy(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.CY); }
     /** Unsafe version of {@link #cx1}. */
-    public static short ncx1(long struct) { return memGetShort(struct + STBTTVertex.CX1); }
+    public static short ncx1(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.CX1); }
     /** Unsafe version of {@link #cy1}. */
-    public static short ncy1(long struct) { return memGetShort(struct + STBTTVertex.CY1); }
+    public static short ncy1(long struct) { return UNSAFE.getShort(null, struct + STBTTVertex.CY1); }
     /** Unsafe version of {@link #type}. */
-    public static byte ntype(long struct) { return memGetByte(struct + STBTTVertex.TYPE); }
+    public static byte ntype(long struct) { return UNSAFE.getByte(null, struct + STBTTVertex.TYPE); }
 
     // -----------------------------------
 
     /** An array of {@link STBTTVertex} structs. */
     public static class Buffer extends StructBuffer<STBTTVertex, Buffer> implements NativeResource {
+
+        private static final STBTTVertex ELEMENT_FACTORY = STBTTVertex.create(-1L);
 
         /**
          * Creates a new {@link STBTTVertex.Buffer} instance backed by the specified container.
@@ -300,18 +300,8 @@ public class STBTTVertex extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected STBTTVertex newInstance(long address) {
-            return new STBTTVertex(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected STBTTVertex getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x} field. */

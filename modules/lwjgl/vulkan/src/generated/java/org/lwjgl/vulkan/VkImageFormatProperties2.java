@@ -85,10 +85,6 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
         IMAGEFORMATPROPERTIES = layout.offsetof(2);
     }
 
-    VkImageFormatProperties2(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkImageFormatProperties2} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -96,7 +92,7 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkImageFormatProperties2(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -143,28 +139,29 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
 
     /** Returns a new {@link VkImageFormatProperties2} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageFormatProperties2 malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkImageFormatProperties2.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkImageFormatProperties2} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageFormatProperties2 calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkImageFormatProperties2.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkImageFormatProperties2} instance allocated with {@link BufferUtils}. */
     public static VkImageFormatProperties2 create() {
-        return new VkImageFormatProperties2(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkImageFormatProperties2.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkImageFormatProperties2} instance for the specified memory address. */
     public static VkImageFormatProperties2 create(long address) {
-        return new VkImageFormatProperties2(address, null);
+        return wrap(VkImageFormatProperties2.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageFormatProperties2 createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkImageFormatProperties2.class, address);
     }
 
     /**
@@ -173,7 +170,7 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageFormatProperties2.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -182,7 +179,7 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageFormatProperties2.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -191,7 +188,8 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageFormatProperties2.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -201,13 +199,13 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageFormatProperties2.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageFormatProperties2.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -228,7 +226,7 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkImageFormatProperties2 mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkImageFormatProperties2.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -237,7 +235,7 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkImageFormatProperties2 callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkImageFormatProperties2.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -265,7 +263,7 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageFormatProperties2.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -275,20 +273,20 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageFormatProperties2.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkImageFormatProperties2.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageFormatProperties2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageFormatProperties2.PNEXT); }
     /** Unsafe version of {@link #imageFormatProperties}. */
     public static VkImageFormatProperties nimageFormatProperties(long struct) { return VkImageFormatProperties.create(struct + VkImageFormatProperties2.IMAGEFORMATPROPERTIES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkImageFormatProperties2.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageFormatProperties2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageFormatProperties2.PNEXT, value); }
 
@@ -296,6 +294,8 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
 
     /** An array of {@link VkImageFormatProperties2} structs. */
     public static class Buffer extends StructBuffer<VkImageFormatProperties2, Buffer> implements NativeResource {
+
+        private static final VkImageFormatProperties2 ELEMENT_FACTORY = VkImageFormatProperties2.create(-1L);
 
         /**
          * Creates a new {@link VkImageFormatProperties2.Buffer} instance backed by the specified container.
@@ -324,18 +324,8 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkImageFormatProperties2 newInstance(long address) {
-            return new VkImageFormatProperties2(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkImageFormatProperties2 getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

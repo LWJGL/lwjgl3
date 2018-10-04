@@ -64,10 +64,6 @@ public class AIMetaData extends Struct implements NativeResource {
         MVALUES = layout.offsetof(2);
     }
 
-    AIMetaData(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIMetaData} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -75,7 +71,7 @@ public class AIMetaData extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIMetaData(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -127,28 +123,29 @@ public class AIMetaData extends Struct implements NativeResource {
 
     /** Returns a new {@link AIMetaData} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIMetaData malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AIMetaData.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AIMetaData} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIMetaData calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AIMetaData.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AIMetaData} instance allocated with {@link BufferUtils}. */
     public static AIMetaData create() {
-        return new AIMetaData(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AIMetaData.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AIMetaData} instance for the specified memory address. */
     public static AIMetaData create(long address) {
-        return new AIMetaData(address, null);
+        return wrap(AIMetaData.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIMetaData createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIMetaData.class, address);
     }
 
     /**
@@ -157,7 +154,7 @@ public class AIMetaData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMetaData.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -166,7 +163,7 @@ public class AIMetaData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMetaData.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -175,7 +172,8 @@ public class AIMetaData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMetaData.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -185,13 +183,13 @@ public class AIMetaData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMetaData.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIMetaData.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -212,7 +210,7 @@ public class AIMetaData extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIMetaData mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AIMetaData.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -221,7 +219,7 @@ public class AIMetaData extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIMetaData callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AIMetaData.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -249,7 +247,7 @@ public class AIMetaData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMetaData.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -259,20 +257,20 @@ public class AIMetaData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMetaData.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #mNumProperties}. */
-    public static int nmNumProperties(long struct) { return memGetInt(struct + AIMetaData.MNUMPROPERTIES); }
+    public static int nmNumProperties(long struct) { return UNSAFE.getInt(null, struct + AIMetaData.MNUMPROPERTIES); }
     /** Unsafe version of {@link #mKeys}. */
     public static AIString.Buffer nmKeys(long struct) { return AIString.create(memGetAddress(struct + AIMetaData.MKEYS), nmNumProperties(struct)); }
     /** Unsafe version of {@link #mValues}. */
     public static AIMetaDataEntry.Buffer nmValues(long struct) { return AIMetaDataEntry.create(memGetAddress(struct + AIMetaData.MVALUES), nmNumProperties(struct)); }
 
     /** Sets the specified value to the {@code mNumProperties} field of the specified {@code struct}. */
-    public static void nmNumProperties(long struct, int value) { memPutInt(struct + AIMetaData.MNUMPROPERTIES, value); }
+    public static void nmNumProperties(long struct, int value) { UNSAFE.putInt(null, struct + AIMetaData.MNUMPROPERTIES, value); }
     /** Unsafe version of {@link #mKeys(AIString.Buffer) mKeys}. */
     public static void nmKeys(long struct, AIString.Buffer value) { memPutAddress(struct + AIMetaData.MKEYS, value.address()); }
     /** Unsafe version of {@link #mValues(AIMetaDataEntry.Buffer) mValues}. */
@@ -308,6 +306,8 @@ public class AIMetaData extends Struct implements NativeResource {
     /** An array of {@link AIMetaData} structs. */
     public static class Buffer extends StructBuffer<AIMetaData, Buffer> implements NativeResource {
 
+        private static final AIMetaData ELEMENT_FACTORY = AIMetaData.create(-1L);
+
         /**
          * Creates a new {@link AIMetaData.Buffer} instance backed by the specified container.
          *
@@ -335,18 +335,8 @@ public class AIMetaData extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIMetaData newInstance(long address) {
-            return new AIMetaData(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIMetaData getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code mNumProperties} field. */

@@ -87,10 +87,6 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
         BLOCKCHECKSUMFLAG = layout.offsetof(6);
     }
 
-    LZ4FFrameInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link LZ4FFrameInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -98,7 +94,7 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public LZ4FFrameInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -178,28 +174,29 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link LZ4FFrameInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static LZ4FFrameInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(LZ4FFrameInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link LZ4FFrameInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static LZ4FFrameInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(LZ4FFrameInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link LZ4FFrameInfo} instance allocated with {@link BufferUtils}. */
     public static LZ4FFrameInfo create() {
-        return new LZ4FFrameInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(LZ4FFrameInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link LZ4FFrameInfo} instance for the specified memory address. */
     public static LZ4FFrameInfo create(long address) {
-        return new LZ4FFrameInfo(address, null);
+        return wrap(LZ4FFrameInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4FFrameInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(LZ4FFrameInfo.class, address);
     }
 
     /**
@@ -208,7 +205,7 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static LZ4FFrameInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -217,7 +214,7 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static LZ4FFrameInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -226,7 +223,8 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static LZ4FFrameInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -236,13 +234,13 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static LZ4FFrameInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4FFrameInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -263,7 +261,7 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static LZ4FFrameInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(LZ4FFrameInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -272,7 +270,7 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static LZ4FFrameInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(LZ4FFrameInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -300,7 +298,7 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static LZ4FFrameInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -310,45 +308,47 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static LZ4FFrameInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #blockSizeID}. */
-    public static int nblockSizeID(long struct) { return memGetInt(struct + LZ4FFrameInfo.BLOCKSIZEID); }
+    public static int nblockSizeID(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.BLOCKSIZEID); }
     /** Unsafe version of {@link #blockMode}. */
-    public static int nblockMode(long struct) { return memGetInt(struct + LZ4FFrameInfo.BLOCKMODE); }
+    public static int nblockMode(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.BLOCKMODE); }
     /** Unsafe version of {@link #contentChecksumFlag}. */
-    public static int ncontentChecksumFlag(long struct) { return memGetInt(struct + LZ4FFrameInfo.CONTENTCHECKSUMFLAG); }
+    public static int ncontentChecksumFlag(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.CONTENTCHECKSUMFLAG); }
     /** Unsafe version of {@link #frameType}. */
-    public static int nframeType(long struct) { return memGetInt(struct + LZ4FFrameInfo.FRAMETYPE); }
+    public static int nframeType(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.FRAMETYPE); }
     /** Unsafe version of {@link #contentSize}. */
-    public static long ncontentSize(long struct) { return memGetLong(struct + LZ4FFrameInfo.CONTENTSIZE); }
+    public static long ncontentSize(long struct) { return UNSAFE.getLong(null, struct + LZ4FFrameInfo.CONTENTSIZE); }
     /** Unsafe version of {@link #dictID}. */
-    public static int ndictID(long struct) { return memGetInt(struct + LZ4FFrameInfo.DICTID); }
+    public static int ndictID(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.DICTID); }
     /** Unsafe version of {@link #blockChecksumFlag}. */
-    public static int nblockChecksumFlag(long struct) { return memGetInt(struct + LZ4FFrameInfo.BLOCKCHECKSUMFLAG); }
+    public static int nblockChecksumFlag(long struct) { return UNSAFE.getInt(null, struct + LZ4FFrameInfo.BLOCKCHECKSUMFLAG); }
 
     /** Unsafe version of {@link #blockSizeID(int) blockSizeID}. */
-    public static void nblockSizeID(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.BLOCKSIZEID, value); }
+    public static void nblockSizeID(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.BLOCKSIZEID, value); }
     /** Unsafe version of {@link #blockMode(int) blockMode}. */
-    public static void nblockMode(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.BLOCKMODE, value); }
+    public static void nblockMode(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.BLOCKMODE, value); }
     /** Unsafe version of {@link #contentChecksumFlag(int) contentChecksumFlag}. */
-    public static void ncontentChecksumFlag(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.CONTENTCHECKSUMFLAG, value); }
+    public static void ncontentChecksumFlag(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.CONTENTCHECKSUMFLAG, value); }
     /** Unsafe version of {@link #frameType(int) frameType}. */
-    public static void nframeType(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.FRAMETYPE, value); }
+    public static void nframeType(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.FRAMETYPE, value); }
     /** Unsafe version of {@link #contentSize(long) contentSize}. */
-    public static void ncontentSize(long struct, long value) { memPutLong(struct + LZ4FFrameInfo.CONTENTSIZE, value); }
+    public static void ncontentSize(long struct, long value) { UNSAFE.putLong(null, struct + LZ4FFrameInfo.CONTENTSIZE, value); }
     /** Unsafe version of {@link #dictID(int) dictID}. */
-    public static void ndictID(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.DICTID, value); }
+    public static void ndictID(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.DICTID, value); }
     /** Unsafe version of {@link #blockChecksumFlag(int) blockChecksumFlag}. */
-    public static void nblockChecksumFlag(long struct, int value) { memPutInt(struct + LZ4FFrameInfo.BLOCKCHECKSUMFLAG, value); }
+    public static void nblockChecksumFlag(long struct, int value) { UNSAFE.putInt(null, struct + LZ4FFrameInfo.BLOCKCHECKSUMFLAG, value); }
 
     // -----------------------------------
 
     /** An array of {@link LZ4FFrameInfo} structs. */
     public static class Buffer extends StructBuffer<LZ4FFrameInfo, Buffer> implements NativeResource {
+
+        private static final LZ4FFrameInfo ELEMENT_FACTORY = LZ4FFrameInfo.create(-1L);
 
         /**
          * Creates a new {@link LZ4FFrameInfo.Buffer} instance backed by the specified container.
@@ -377,18 +377,8 @@ public class LZ4FFrameInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected LZ4FFrameInfo newInstance(long address) {
-            return new LZ4FFrameInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected LZ4FFrameInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code blockSizeID} field. */

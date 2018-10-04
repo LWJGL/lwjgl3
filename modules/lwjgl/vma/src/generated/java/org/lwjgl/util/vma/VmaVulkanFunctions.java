@@ -113,10 +113,6 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         VKGETIMAGEMEMORYREQUIREMENTS2KHR = layout.offsetof(15);
     }
 
-    VmaVulkanFunctions(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VmaVulkanFunctions} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -124,7 +120,7 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VmaVulkanFunctions(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -267,28 +263,29 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
 
     /** Returns a new {@link VmaVulkanFunctions} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VmaVulkanFunctions malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VmaVulkanFunctions.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VmaVulkanFunctions} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VmaVulkanFunctions calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VmaVulkanFunctions.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VmaVulkanFunctions} instance allocated with {@link BufferUtils}. */
     public static VmaVulkanFunctions create() {
-        return new VmaVulkanFunctions(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VmaVulkanFunctions.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VmaVulkanFunctions} instance for the specified memory address. */
     public static VmaVulkanFunctions create(long address) {
-        return new VmaVulkanFunctions(address, null);
+        return wrap(VmaVulkanFunctions.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VmaVulkanFunctions createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VmaVulkanFunctions.class, address);
     }
 
     // -----------------------------------
@@ -309,7 +306,7 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VmaVulkanFunctions mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VmaVulkanFunctions.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -318,7 +315,7 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VmaVulkanFunctions callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VmaVulkanFunctions.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     // -----------------------------------

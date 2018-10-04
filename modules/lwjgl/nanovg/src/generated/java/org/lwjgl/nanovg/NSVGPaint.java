@@ -57,10 +57,6 @@ public class NSVGPaint extends Struct {
         GRADIENT = layout.offsetof(3);
     }
 
-    NSVGPaint(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NSVGPaint} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -68,7 +64,7 @@ public class NSVGPaint extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NSVGPaint(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -88,13 +84,13 @@ public class NSVGPaint extends Struct {
 
     /** Returns a new {@link NSVGPaint} instance for the specified memory address. */
     public static NSVGPaint create(long address) {
-        return new NSVGPaint(address, null);
+        return wrap(NSVGPaint.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGPaint createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NSVGPaint.class, address);
     }
 
     /**
@@ -104,21 +100,21 @@ public class NSVGPaint extends Struct {
      * @param capacity the buffer capacity
      */
     public static NSVGPaint.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGPaint.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static byte ntype(long struct) { return memGetByte(struct + NSVGPaint.TYPE); }
+    public static byte ntype(long struct) { return UNSAFE.getByte(null, struct + NSVGPaint.TYPE); }
     /** Unsafe version of {@link #color}. */
-    public static int ncolor(long struct) { return memGetInt(struct + NSVGPaint.COLOR); }
+    public static int ncolor(long struct) { return UNSAFE.getInt(null, struct + NSVGPaint.COLOR); }
     /** Unsafe version of {@link #gradient}. */
     public static NSVGGradient ngradient(long struct) { return NSVGGradient.create(memGetAddress(struct + NSVGPaint.GRADIENT)); }
 
@@ -126,6 +122,8 @@ public class NSVGPaint extends Struct {
 
     /** An array of {@link NSVGPaint} structs. */
     public static class Buffer extends StructBuffer<NSVGPaint, Buffer> {
+
+        private static final NSVGPaint ELEMENT_FACTORY = NSVGPaint.create(-1L);
 
         /**
          * Creates a new {@link NSVGPaint.Buffer} instance backed by the specified container.
@@ -154,18 +152,8 @@ public class NSVGPaint extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NSVGPaint newInstance(long address) {
-            return new NSVGPaint(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NSVGPaint getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code type} field. */

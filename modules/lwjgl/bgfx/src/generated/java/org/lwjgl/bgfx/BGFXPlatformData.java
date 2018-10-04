@@ -80,10 +80,6 @@ public class BGFXPlatformData extends Struct implements NativeResource {
         SESSION = layout.offsetof(5);
     }
 
-    BGFXPlatformData(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXPlatformData} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -91,7 +87,7 @@ public class BGFXPlatformData extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXPlatformData(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -164,28 +160,29 @@ public class BGFXPlatformData extends Struct implements NativeResource {
 
     /** Returns a new {@link BGFXPlatformData} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXPlatformData malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(BGFXPlatformData.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link BGFXPlatformData} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXPlatformData calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(BGFXPlatformData.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link BGFXPlatformData} instance allocated with {@link BufferUtils}. */
     public static BGFXPlatformData create() {
-        return new BGFXPlatformData(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(BGFXPlatformData.class, memAddress(container), container);
     }
 
     /** Returns a new {@link BGFXPlatformData} instance for the specified memory address. */
     public static BGFXPlatformData create(long address) {
-        return new BGFXPlatformData(address, null);
+        return wrap(BGFXPlatformData.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXPlatformData createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXPlatformData.class, address);
     }
 
     // -----------------------------------
@@ -206,7 +203,7 @@ public class BGFXPlatformData extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXPlatformData mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(BGFXPlatformData.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -215,7 +212,7 @@ public class BGFXPlatformData extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXPlatformData callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(BGFXPlatformData.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     // -----------------------------------

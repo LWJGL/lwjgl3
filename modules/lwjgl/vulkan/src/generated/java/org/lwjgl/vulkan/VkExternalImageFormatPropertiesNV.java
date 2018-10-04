@@ -69,10 +69,6 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
         COMPATIBLEHANDLETYPES = layout.offsetof(3);
     }
 
-    VkExternalImageFormatPropertiesNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkExternalImageFormatPropertiesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -80,7 +76,7 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkExternalImageFormatPropertiesNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -102,28 +98,29 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
 
     /** Returns a new {@link VkExternalImageFormatPropertiesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkExternalImageFormatPropertiesNV malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkExternalImageFormatPropertiesNV.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkExternalImageFormatPropertiesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkExternalImageFormatPropertiesNV calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkExternalImageFormatPropertiesNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkExternalImageFormatPropertiesNV} instance allocated with {@link BufferUtils}. */
     public static VkExternalImageFormatPropertiesNV create() {
-        return new VkExternalImageFormatPropertiesNV(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkExternalImageFormatPropertiesNV.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkExternalImageFormatPropertiesNV} instance for the specified memory address. */
     public static VkExternalImageFormatPropertiesNV create(long address) {
-        return new VkExternalImageFormatPropertiesNV(address, null);
+        return wrap(VkExternalImageFormatPropertiesNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalImageFormatPropertiesNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkExternalImageFormatPropertiesNV.class, address);
     }
 
     /**
@@ -132,7 +129,7 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkExternalImageFormatPropertiesNV.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -141,7 +138,7 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkExternalImageFormatPropertiesNV.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -150,7 +147,8 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkExternalImageFormatPropertiesNV.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -160,13 +158,13 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkExternalImageFormatPropertiesNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalImageFormatPropertiesNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -187,7 +185,7 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkExternalImageFormatPropertiesNV mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkExternalImageFormatPropertiesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -196,7 +194,7 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkExternalImageFormatPropertiesNV callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkExternalImageFormatPropertiesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -224,7 +222,7 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkExternalImageFormatPropertiesNV.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -234,7 +232,7 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkExternalImageFormatPropertiesNV.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -242,16 +240,18 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
     /** Unsafe version of {@link #imageFormatProperties}. */
     public static VkImageFormatProperties nimageFormatProperties(long struct) { return VkImageFormatProperties.create(struct + VkExternalImageFormatPropertiesNV.IMAGEFORMATPROPERTIES); }
     /** Unsafe version of {@link #externalMemoryFeatures}. */
-    public static int nexternalMemoryFeatures(long struct) { return memGetInt(struct + VkExternalImageFormatPropertiesNV.EXTERNALMEMORYFEATURES); }
+    public static int nexternalMemoryFeatures(long struct) { return UNSAFE.getInt(null, struct + VkExternalImageFormatPropertiesNV.EXTERNALMEMORYFEATURES); }
     /** Unsafe version of {@link #exportFromImportedHandleTypes}. */
-    public static int nexportFromImportedHandleTypes(long struct) { return memGetInt(struct + VkExternalImageFormatPropertiesNV.EXPORTFROMIMPORTEDHANDLETYPES); }
+    public static int nexportFromImportedHandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalImageFormatPropertiesNV.EXPORTFROMIMPORTEDHANDLETYPES); }
     /** Unsafe version of {@link #compatibleHandleTypes}. */
-    public static int ncompatibleHandleTypes(long struct) { return memGetInt(struct + VkExternalImageFormatPropertiesNV.COMPATIBLEHANDLETYPES); }
+    public static int ncompatibleHandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalImageFormatPropertiesNV.COMPATIBLEHANDLETYPES); }
 
     // -----------------------------------
 
     /** An array of {@link VkExternalImageFormatPropertiesNV} structs. */
     public static class Buffer extends StructBuffer<VkExternalImageFormatPropertiesNV, Buffer> implements NativeResource {
+
+        private static final VkExternalImageFormatPropertiesNV ELEMENT_FACTORY = VkExternalImageFormatPropertiesNV.create(-1L);
 
         /**
          * Creates a new {@link VkExternalImageFormatPropertiesNV.Buffer} instance backed by the specified container.
@@ -280,18 +280,8 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkExternalImageFormatPropertiesNV newInstance(long address) {
-            return new VkExternalImageFormatPropertiesNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkExternalImageFormatPropertiesNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link VkImageFormatProperties} view of the {@code imageFormatProperties} field. */

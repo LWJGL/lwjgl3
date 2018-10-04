@@ -100,10 +100,6 @@ public class NkRowLayout extends Struct {
         TEMPLATES = layout.offsetof(12);
     }
 
-    NkRowLayout(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkRowLayout} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -111,7 +107,7 @@ public class NkRowLayout extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkRowLayout(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -160,13 +156,13 @@ public class NkRowLayout extends Struct {
 
     /** Returns a new {@link NkRowLayout} instance for the specified memory address. */
     public static NkRowLayout create(long address) {
-        return new NkRowLayout(address, null);
+        return wrap(NkRowLayout.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkRowLayout createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkRowLayout.class, address);
     }
 
     /**
@@ -176,52 +172,54 @@ public class NkRowLayout extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkRowLayout.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkRowLayout.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return memGetInt(struct + NkRowLayout.TYPE); }
+    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkRowLayout.TYPE); }
     /** Unsafe version of {@link #index}. */
-    public static int nindex(long struct) { return memGetInt(struct + NkRowLayout.INDEX); }
+    public static int nindex(long struct) { return UNSAFE.getInt(null, struct + NkRowLayout.INDEX); }
     /** Unsafe version of {@link #height}. */
-    public static float nheight(long struct) { return memGetFloat(struct + NkRowLayout.HEIGHT); }
+    public static float nheight(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.HEIGHT); }
     /** Unsafe version of {@link #min_height}. */
-    public static float nmin_height(long struct) { return memGetFloat(struct + NkRowLayout.MIN_HEIGHT); }
+    public static float nmin_height(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.MIN_HEIGHT); }
     /** Unsafe version of {@link #columns}. */
-    public static int ncolumns(long struct) { return memGetInt(struct + NkRowLayout.COLUMNS); }
+    public static int ncolumns(long struct) { return UNSAFE.getInt(null, struct + NkRowLayout.COLUMNS); }
     /** Unsafe version of {@link #ratio(int) ratio}. */
     public static FloatBuffer nratio(long struct, int capacity) { return memFloatBuffer(memGetAddress(struct + NkRowLayout.RATIO), capacity); }
     /** Unsafe version of {@link #item_width}. */
-    public static float nitem_width(long struct) { return memGetFloat(struct + NkRowLayout.ITEM_WIDTH); }
+    public static float nitem_width(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.ITEM_WIDTH); }
     /** Unsafe version of {@link #item_height}. */
-    public static float nitem_height(long struct) { return memGetFloat(struct + NkRowLayout.ITEM_HEIGHT); }
+    public static float nitem_height(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.ITEM_HEIGHT); }
     /** Unsafe version of {@link #item_offset}. */
-    public static float nitem_offset(long struct) { return memGetFloat(struct + NkRowLayout.ITEM_OFFSET); }
+    public static float nitem_offset(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.ITEM_OFFSET); }
     /** Unsafe version of {@link #filled}. */
-    public static float nfilled(long struct) { return memGetFloat(struct + NkRowLayout.FILLED); }
+    public static float nfilled(long struct) { return UNSAFE.getFloat(null, struct + NkRowLayout.FILLED); }
     /** Unsafe version of {@link #item}. */
     public static NkRect nitem(long struct) { return NkRect.create(struct + NkRowLayout.ITEM); }
     /** Unsafe version of {@link #tree_depth}. */
-    public static int ntree_depth(long struct) { return memGetInt(struct + NkRowLayout.TREE_DEPTH); }
+    public static int ntree_depth(long struct) { return UNSAFE.getInt(null, struct + NkRowLayout.TREE_DEPTH); }
     /** Unsafe version of {@link #templates}. */
     public static FloatBuffer ntemplates(long struct) { return memFloatBuffer(struct + NkRowLayout.TEMPLATES, 16); }
     /** Unsafe version of {@link #templates(int) templates}. */
     public static float ntemplates(long struct, int index) {
-        return memGetFloat(struct + NkRowLayout.TEMPLATES + check(index, 16) * 4);
+        return UNSAFE.getFloat(null, struct + NkRowLayout.TEMPLATES + check(index, 16) * 4);
     }
 
     // -----------------------------------
 
     /** An array of {@link NkRowLayout} structs. */
     public static class Buffer extends StructBuffer<NkRowLayout, Buffer> {
+
+        private static final NkRowLayout ELEMENT_FACTORY = NkRowLayout.create(-1L);
 
         /**
          * Creates a new {@link NkRowLayout.Buffer} instance backed by the specified container.
@@ -250,18 +248,8 @@ public class NkRowLayout extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkRowLayout newInstance(long address) {
-            return new NkRowLayout(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkRowLayout getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code type} field. */

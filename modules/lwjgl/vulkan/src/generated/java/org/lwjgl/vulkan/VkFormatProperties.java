@@ -79,10 +79,6 @@ public class VkFormatProperties extends Struct implements NativeResource {
         BUFFERFEATURES = layout.offsetof(2);
     }
 
-    VkFormatProperties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkFormatProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -90,7 +86,7 @@ public class VkFormatProperties extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkFormatProperties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -110,28 +106,29 @@ public class VkFormatProperties extends Struct implements NativeResource {
 
     /** Returns a new {@link VkFormatProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkFormatProperties malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkFormatProperties.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkFormatProperties} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkFormatProperties calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkFormatProperties.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkFormatProperties} instance allocated with {@link BufferUtils}. */
     public static VkFormatProperties create() {
-        return new VkFormatProperties(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkFormatProperties.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkFormatProperties} instance for the specified memory address. */
     public static VkFormatProperties create(long address) {
-        return new VkFormatProperties(address, null);
+        return wrap(VkFormatProperties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkFormatProperties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkFormatProperties.class, address);
     }
 
     /**
@@ -140,7 +137,7 @@ public class VkFormatProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkFormatProperties.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -149,7 +146,7 @@ public class VkFormatProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkFormatProperties.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -158,7 +155,8 @@ public class VkFormatProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkFormatProperties.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -168,13 +166,13 @@ public class VkFormatProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkFormatProperties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkFormatProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -195,7 +193,7 @@ public class VkFormatProperties extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkFormatProperties mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkFormatProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -204,7 +202,7 @@ public class VkFormatProperties extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkFormatProperties callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkFormatProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -232,7 +230,7 @@ public class VkFormatProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkFormatProperties.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -242,22 +240,24 @@ public class VkFormatProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkFormatProperties.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #linearTilingFeatures}. */
-    public static int nlinearTilingFeatures(long struct) { return memGetInt(struct + VkFormatProperties.LINEARTILINGFEATURES); }
+    public static int nlinearTilingFeatures(long struct) { return UNSAFE.getInt(null, struct + VkFormatProperties.LINEARTILINGFEATURES); }
     /** Unsafe version of {@link #optimalTilingFeatures}. */
-    public static int noptimalTilingFeatures(long struct) { return memGetInt(struct + VkFormatProperties.OPTIMALTILINGFEATURES); }
+    public static int noptimalTilingFeatures(long struct) { return UNSAFE.getInt(null, struct + VkFormatProperties.OPTIMALTILINGFEATURES); }
     /** Unsafe version of {@link #bufferFeatures}. */
-    public static int nbufferFeatures(long struct) { return memGetInt(struct + VkFormatProperties.BUFFERFEATURES); }
+    public static int nbufferFeatures(long struct) { return UNSAFE.getInt(null, struct + VkFormatProperties.BUFFERFEATURES); }
 
     // -----------------------------------
 
     /** An array of {@link VkFormatProperties} structs. */
     public static class Buffer extends StructBuffer<VkFormatProperties, Buffer> implements NativeResource {
+
+        private static final VkFormatProperties ELEMENT_FACTORY = VkFormatProperties.create(-1L);
 
         /**
          * Creates a new {@link VkFormatProperties.Buffer} instance backed by the specified container.
@@ -286,18 +286,8 @@ public class VkFormatProperties extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkFormatProperties newInstance(long address) {
-            return new VkFormatProperties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkFormatProperties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code linearTilingFeatures} field. */

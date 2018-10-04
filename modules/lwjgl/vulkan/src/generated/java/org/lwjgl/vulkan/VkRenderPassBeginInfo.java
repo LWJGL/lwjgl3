@@ -119,10 +119,6 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
         PCLEARVALUES = layout.offsetof(6);
     }
 
-    VkRenderPassBeginInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkRenderPassBeginInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -130,7 +126,7 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkRenderPassBeginInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -208,28 +204,29 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link VkRenderPassBeginInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkRenderPassBeginInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkRenderPassBeginInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkRenderPassBeginInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkRenderPassBeginInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkRenderPassBeginInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkRenderPassBeginInfo} instance allocated with {@link BufferUtils}. */
     public static VkRenderPassBeginInfo create() {
-        return new VkRenderPassBeginInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkRenderPassBeginInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkRenderPassBeginInfo} instance for the specified memory address. */
     public static VkRenderPassBeginInfo create(long address) {
-        return new VkRenderPassBeginInfo(address, null);
+        return wrap(VkRenderPassBeginInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkRenderPassBeginInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkRenderPassBeginInfo.class, address);
     }
 
     /**
@@ -238,7 +235,7 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassBeginInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -247,7 +244,7 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassBeginInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -256,7 +253,8 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassBeginInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -266,13 +264,13 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassBeginInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkRenderPassBeginInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -293,7 +291,7 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkRenderPassBeginInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkRenderPassBeginInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -302,7 +300,7 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkRenderPassBeginInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkRenderPassBeginInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -330,7 +328,7 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassBeginInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -340,38 +338,38 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassBeginInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkRenderPassBeginInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassBeginInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassBeginInfo.PNEXT); }
     /** Unsafe version of {@link #renderPass}. */
-    public static long nrenderPass(long struct) { return memGetLong(struct + VkRenderPassBeginInfo.RENDERPASS); }
+    public static long nrenderPass(long struct) { return UNSAFE.getLong(null, struct + VkRenderPassBeginInfo.RENDERPASS); }
     /** Unsafe version of {@link #framebuffer}. */
-    public static long nframebuffer(long struct) { return memGetLong(struct + VkRenderPassBeginInfo.FRAMEBUFFER); }
+    public static long nframebuffer(long struct) { return UNSAFE.getLong(null, struct + VkRenderPassBeginInfo.FRAMEBUFFER); }
     /** Unsafe version of {@link #renderArea}. */
     public static VkRect2D nrenderArea(long struct) { return VkRect2D.create(struct + VkRenderPassBeginInfo.RENDERAREA); }
     /** Unsafe version of {@link #clearValueCount}. */
-    public static int nclearValueCount(long struct) { return memGetInt(struct + VkRenderPassBeginInfo.CLEARVALUECOUNT); }
+    public static int nclearValueCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassBeginInfo.CLEARVALUECOUNT); }
     /** Unsafe version of {@link #pClearValues}. */
     @Nullable public static VkClearValue.Buffer npClearValues(long struct) { return VkClearValue.createSafe(memGetAddress(struct + VkRenderPassBeginInfo.PCLEARVALUES), nclearValueCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassBeginInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassBeginInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassBeginInfo.PNEXT, value); }
     /** Unsafe version of {@link #renderPass(long) renderPass}. */
-    public static void nrenderPass(long struct, long value) { memPutLong(struct + VkRenderPassBeginInfo.RENDERPASS, value); }
+    public static void nrenderPass(long struct, long value) { UNSAFE.putLong(null, struct + VkRenderPassBeginInfo.RENDERPASS, value); }
     /** Unsafe version of {@link #framebuffer(long) framebuffer}. */
-    public static void nframebuffer(long struct, long value) { memPutLong(struct + VkRenderPassBeginInfo.FRAMEBUFFER, value); }
+    public static void nframebuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkRenderPassBeginInfo.FRAMEBUFFER, value); }
     /** Unsafe version of {@link #renderArea(VkRect2D) renderArea}. */
     public static void nrenderArea(long struct, VkRect2D value) { memCopy(value.address(), struct + VkRenderPassBeginInfo.RENDERAREA, VkRect2D.SIZEOF); }
     /** Sets the specified value to the {@code clearValueCount} field of the specified {@code struct}. */
-    public static void nclearValueCount(long struct, int value) { memPutInt(struct + VkRenderPassBeginInfo.CLEARVALUECOUNT, value); }
+    public static void nclearValueCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassBeginInfo.CLEARVALUECOUNT, value); }
     /** Unsafe version of {@link #pClearValues(VkClearValue.Buffer) pClearValues}. */
     public static void npClearValues(long struct, @Nullable VkClearValue.Buffer value) { memPutAddress(struct + VkRenderPassBeginInfo.PCLEARVALUES, memAddressSafe(value)); nclearValueCount(struct, value == null ? 0 : value.remaining()); }
 
@@ -403,6 +401,8 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
     /** An array of {@link VkRenderPassBeginInfo} structs. */
     public static class Buffer extends StructBuffer<VkRenderPassBeginInfo, Buffer> implements NativeResource {
 
+        private static final VkRenderPassBeginInfo ELEMENT_FACTORY = VkRenderPassBeginInfo.create(-1L);
+
         /**
          * Creates a new {@link VkRenderPassBeginInfo.Buffer} instance backed by the specified container.
          *
@@ -430,18 +430,8 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkRenderPassBeginInfo newInstance(long address) {
-            return new VkRenderPassBeginInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkRenderPassBeginInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

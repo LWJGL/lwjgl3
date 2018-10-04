@@ -61,10 +61,6 @@ public class EXRAttribute extends Struct implements NativeResource {
         SIZE = layout.offsetof(3);
     }
 
-    EXRAttribute(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link EXRAttribute} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -72,7 +68,7 @@ public class EXRAttribute extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public EXRAttribute(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -133,28 +129,29 @@ public class EXRAttribute extends Struct implements NativeResource {
 
     /** Returns a new {@link EXRAttribute} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static EXRAttribute malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(EXRAttribute.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link EXRAttribute} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static EXRAttribute calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(EXRAttribute.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link EXRAttribute} instance allocated with {@link BufferUtils}. */
     public static EXRAttribute create() {
-        return new EXRAttribute(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(EXRAttribute.class, memAddress(container), container);
     }
 
     /** Returns a new {@link EXRAttribute} instance for the specified memory address. */
     public static EXRAttribute create(long address) {
-        return new EXRAttribute(address, null);
+        return wrap(EXRAttribute.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static EXRAttribute createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(EXRAttribute.class, address);
     }
 
     /**
@@ -163,7 +160,7 @@ public class EXRAttribute extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRAttribute.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -172,7 +169,7 @@ public class EXRAttribute extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRAttribute.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -181,7 +178,8 @@ public class EXRAttribute extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRAttribute.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -191,13 +189,13 @@ public class EXRAttribute extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRAttribute.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static EXRAttribute.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -218,7 +216,7 @@ public class EXRAttribute extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static EXRAttribute mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(EXRAttribute.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -227,7 +225,7 @@ public class EXRAttribute extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static EXRAttribute callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(EXRAttribute.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -255,7 +253,7 @@ public class EXRAttribute extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRAttribute.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -265,7 +263,7 @@ public class EXRAttribute extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRAttribute.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -281,7 +279,7 @@ public class EXRAttribute extends Struct implements NativeResource {
     /** Unsafe version of {@link #value() value}. */
     @Nullable public static ByteBuffer nvalue(long struct) { return memByteBufferSafe(memGetAddress(struct + EXRAttribute.VALUE), nsize(struct)); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return memGetInt(struct + EXRAttribute.SIZE); }
+    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + EXRAttribute.SIZE); }
 
     /** Unsafe version of {@link #name(ByteBuffer) name}. */
     public static void nname(long struct, ByteBuffer value) {
@@ -302,7 +300,7 @@ public class EXRAttribute extends Struct implements NativeResource {
     /** Unsafe version of {@link #value(ByteBuffer) value}. */
     public static void nvalue(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + EXRAttribute.VALUE, memAddressSafe(value)); nsize(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code size} field of the specified {@code struct}. */
-    public static void nsize(long struct, int value) { memPutInt(struct + EXRAttribute.SIZE, value); }
+    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + EXRAttribute.SIZE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -332,6 +330,8 @@ public class EXRAttribute extends Struct implements NativeResource {
     /** An array of {@link EXRAttribute} structs. */
     public static class Buffer extends StructBuffer<EXRAttribute, Buffer> implements NativeResource {
 
+        private static final EXRAttribute ELEMENT_FACTORY = EXRAttribute.create(-1L);
+
         /**
          * Creates a new {@link EXRAttribute.Buffer} instance backed by the specified container.
          *
@@ -359,18 +359,8 @@ public class EXRAttribute extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected EXRAttribute newInstance(long address) {
-            return new EXRAttribute(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected EXRAttribute getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link ByteBuffer} view of the {@code name} field. */

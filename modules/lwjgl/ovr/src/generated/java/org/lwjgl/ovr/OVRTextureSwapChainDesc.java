@@ -96,10 +96,6 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
         BINDFLAGS = layout.offsetof(9);
     }
 
-    OVRTextureSwapChainDesc(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRTextureSwapChainDesc} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -107,7 +103,7 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRTextureSwapChainDesc(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -203,28 +199,29 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
 
     /** Returns a new {@link OVRTextureSwapChainDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRTextureSwapChainDesc malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRTextureSwapChainDesc.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRTextureSwapChainDesc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRTextureSwapChainDesc calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRTextureSwapChainDesc.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRTextureSwapChainDesc} instance allocated with {@link BufferUtils}. */
     public static OVRTextureSwapChainDesc create() {
-        return new OVRTextureSwapChainDesc(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRTextureSwapChainDesc.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRTextureSwapChainDesc} instance for the specified memory address. */
     public static OVRTextureSwapChainDesc create(long address) {
-        return new OVRTextureSwapChainDesc(address, null);
+        return wrap(OVRTextureSwapChainDesc.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRTextureSwapChainDesc createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRTextureSwapChainDesc.class, address);
     }
 
     /**
@@ -233,7 +230,7 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRTextureSwapChainDesc.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -242,7 +239,7 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRTextureSwapChainDesc.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -251,7 +248,8 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRTextureSwapChainDesc.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -261,13 +259,13 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRTextureSwapChainDesc.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRTextureSwapChainDesc.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -288,7 +286,7 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRTextureSwapChainDesc mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRTextureSwapChainDesc.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -297,7 +295,7 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRTextureSwapChainDesc callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRTextureSwapChainDesc.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -325,7 +323,7 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRTextureSwapChainDesc.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -335,57 +333,59 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRTextureSwapChainDesc.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #Type}. */
-    public static int nType(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.TYPE); }
+    public static int nType(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.TYPE); }
     /** Unsafe version of {@link #Format}. */
-    public static int nFormat(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.FORMAT); }
+    public static int nFormat(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.FORMAT); }
     /** Unsafe version of {@link #ArraySize}. */
-    public static int nArraySize(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.ARRAYSIZE); }
+    public static int nArraySize(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.ARRAYSIZE); }
     /** Unsafe version of {@link #Width}. */
-    public static int nWidth(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.WIDTH); }
+    public static int nWidth(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.WIDTH); }
     /** Unsafe version of {@link #Height}. */
-    public static int nHeight(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.HEIGHT); }
+    public static int nHeight(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.HEIGHT); }
     /** Unsafe version of {@link #MipLevels}. */
-    public static int nMipLevels(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.MIPLEVELS); }
+    public static int nMipLevels(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.MIPLEVELS); }
     /** Unsafe version of {@link #SampleCount}. */
-    public static int nSampleCount(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.SAMPLECOUNT); }
+    public static int nSampleCount(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.SAMPLECOUNT); }
     /** Unsafe version of {@link #StaticImage}. */
-    public static boolean nStaticImage(long struct) { return memGetByte(struct + OVRTextureSwapChainDesc.STATICIMAGE) != 0; }
+    public static boolean nStaticImage(long struct) { return UNSAFE.getByte(null, struct + OVRTextureSwapChainDesc.STATICIMAGE) != 0; }
     /** Unsafe version of {@link #MiscFlags}. */
-    public static int nMiscFlags(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.MISCFLAGS); }
+    public static int nMiscFlags(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.MISCFLAGS); }
     /** Unsafe version of {@link #BindFlags}. */
-    public static int nBindFlags(long struct) { return memGetInt(struct + OVRTextureSwapChainDesc.BINDFLAGS); }
+    public static int nBindFlags(long struct) { return UNSAFE.getInt(null, struct + OVRTextureSwapChainDesc.BINDFLAGS); }
 
     /** Unsafe version of {@link #Type(int) Type}. */
-    public static void nType(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.TYPE, value); }
+    public static void nType(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.TYPE, value); }
     /** Unsafe version of {@link #Format(int) Format}. */
-    public static void nFormat(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.FORMAT, value); }
+    public static void nFormat(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.FORMAT, value); }
     /** Unsafe version of {@link #ArraySize(int) ArraySize}. */
-    public static void nArraySize(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.ARRAYSIZE, value); }
+    public static void nArraySize(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.ARRAYSIZE, value); }
     /** Unsafe version of {@link #Width(int) Width}. */
-    public static void nWidth(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.WIDTH, value); }
+    public static void nWidth(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.WIDTH, value); }
     /** Unsafe version of {@link #Height(int) Height}. */
-    public static void nHeight(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.HEIGHT, value); }
+    public static void nHeight(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.HEIGHT, value); }
     /** Unsafe version of {@link #MipLevels(int) MipLevels}. */
-    public static void nMipLevels(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.MIPLEVELS, value); }
+    public static void nMipLevels(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.MIPLEVELS, value); }
     /** Unsafe version of {@link #SampleCount(int) SampleCount}. */
-    public static void nSampleCount(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.SAMPLECOUNT, value); }
+    public static void nSampleCount(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.SAMPLECOUNT, value); }
     /** Unsafe version of {@link #StaticImage(boolean) StaticImage}. */
-    public static void nStaticImage(long struct, boolean value) { memPutByte(struct + OVRTextureSwapChainDesc.STATICIMAGE, value ? (byte)1 : (byte)0); }
+    public static void nStaticImage(long struct, boolean value) { UNSAFE.putByte(null, struct + OVRTextureSwapChainDesc.STATICIMAGE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #MiscFlags(int) MiscFlags}. */
-    public static void nMiscFlags(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.MISCFLAGS, value); }
+    public static void nMiscFlags(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.MISCFLAGS, value); }
     /** Unsafe version of {@link #BindFlags(int) BindFlags}. */
-    public static void nBindFlags(long struct, int value) { memPutInt(struct + OVRTextureSwapChainDesc.BINDFLAGS, value); }
+    public static void nBindFlags(long struct, int value) { UNSAFE.putInt(null, struct + OVRTextureSwapChainDesc.BINDFLAGS, value); }
 
     // -----------------------------------
 
     /** An array of {@link OVRTextureSwapChainDesc} structs. */
     public static class Buffer extends StructBuffer<OVRTextureSwapChainDesc, Buffer> implements NativeResource {
+
+        private static final OVRTextureSwapChainDesc ELEMENT_FACTORY = OVRTextureSwapChainDesc.create(-1L);
 
         /**
          * Creates a new {@link OVRTextureSwapChainDesc.Buffer} instance backed by the specified container.
@@ -414,18 +414,8 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRTextureSwapChainDesc newInstance(long address) {
-            return new OVRTextureSwapChainDesc(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRTextureSwapChainDesc getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code Type} field. */

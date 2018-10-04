@@ -276,10 +276,6 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
         INITIALLAYOUT = layout.offsetof(14);
     }
 
-    VkImageCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkImageCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -287,7 +283,7 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkImageCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -421,28 +417,29 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link VkImageCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkImageCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkImageCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkImageCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkImageCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkImageCreateInfo create() {
-        return new VkImageCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkImageCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkImageCreateInfo} instance for the specified memory address. */
     public static VkImageCreateInfo create(long address) {
-        return new VkImageCreateInfo(address, null);
+        return wrap(VkImageCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkImageCreateInfo.class, address);
     }
 
     /**
@@ -451,7 +448,7 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -460,7 +457,7 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -469,7 +466,8 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -479,13 +477,13 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -506,7 +504,7 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkImageCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkImageCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -515,7 +513,7 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkImageCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkImageCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -543,7 +541,7 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -553,72 +551,72 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkImageCreateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkImageCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.FLAGS); }
     /** Unsafe version of {@link #imageType}. */
-    public static int nimageType(long struct) { return memGetInt(struct + VkImageCreateInfo.IMAGETYPE); }
+    public static int nimageType(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.IMAGETYPE); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return memGetInt(struct + VkImageCreateInfo.FORMAT); }
+    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.FORMAT); }
     /** Unsafe version of {@link #extent}. */
     public static VkExtent3D nextent(long struct) { return VkExtent3D.create(struct + VkImageCreateInfo.EXTENT); }
     /** Unsafe version of {@link #mipLevels}. */
-    public static int nmipLevels(long struct) { return memGetInt(struct + VkImageCreateInfo.MIPLEVELS); }
+    public static int nmipLevels(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.MIPLEVELS); }
     /** Unsafe version of {@link #arrayLayers}. */
-    public static int narrayLayers(long struct) { return memGetInt(struct + VkImageCreateInfo.ARRAYLAYERS); }
+    public static int narrayLayers(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.ARRAYLAYERS); }
     /** Unsafe version of {@link #samples}. */
-    public static int nsamples(long struct) { return memGetInt(struct + VkImageCreateInfo.SAMPLES); }
+    public static int nsamples(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.SAMPLES); }
     /** Unsafe version of {@link #tiling}. */
-    public static int ntiling(long struct) { return memGetInt(struct + VkImageCreateInfo.TILING); }
+    public static int ntiling(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.TILING); }
     /** Unsafe version of {@link #usage}. */
-    public static int nusage(long struct) { return memGetInt(struct + VkImageCreateInfo.USAGE); }
+    public static int nusage(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.USAGE); }
     /** Unsafe version of {@link #sharingMode}. */
-    public static int nsharingMode(long struct) { return memGetInt(struct + VkImageCreateInfo.SHARINGMODE); }
+    public static int nsharingMode(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.SHARINGMODE); }
     /** Unsafe version of {@link #queueFamilyIndexCount}. */
-    public static int nqueueFamilyIndexCount(long struct) { return memGetInt(struct + VkImageCreateInfo.QUEUEFAMILYINDEXCOUNT); }
+    public static int nqueueFamilyIndexCount(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.QUEUEFAMILYINDEXCOUNT); }
     /** Unsafe version of {@link #pQueueFamilyIndices() pQueueFamilyIndices}. */
     @Nullable public static IntBuffer npQueueFamilyIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkImageCreateInfo.PQUEUEFAMILYINDICES), nqueueFamilyIndexCount(struct)); }
     /** Unsafe version of {@link #initialLayout}. */
-    public static int ninitialLayout(long struct) { return memGetInt(struct + VkImageCreateInfo.INITIALLAYOUT); }
+    public static int ninitialLayout(long struct) { return UNSAFE.getInt(null, struct + VkImageCreateInfo.INITIALLAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkImageCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkImageCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #imageType(int) imageType}. */
-    public static void nimageType(long struct, int value) { memPutInt(struct + VkImageCreateInfo.IMAGETYPE, value); }
+    public static void nimageType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.IMAGETYPE, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { memPutInt(struct + VkImageCreateInfo.FORMAT, value); }
+    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.FORMAT, value); }
     /** Unsafe version of {@link #extent(VkExtent3D) extent}. */
     public static void nextent(long struct, VkExtent3D value) { memCopy(value.address(), struct + VkImageCreateInfo.EXTENT, VkExtent3D.SIZEOF); }
     /** Unsafe version of {@link #mipLevels(int) mipLevels}. */
-    public static void nmipLevels(long struct, int value) { memPutInt(struct + VkImageCreateInfo.MIPLEVELS, value); }
+    public static void nmipLevels(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.MIPLEVELS, value); }
     /** Unsafe version of {@link #arrayLayers(int) arrayLayers}. */
-    public static void narrayLayers(long struct, int value) { memPutInt(struct + VkImageCreateInfo.ARRAYLAYERS, value); }
+    public static void narrayLayers(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.ARRAYLAYERS, value); }
     /** Unsafe version of {@link #samples(int) samples}. */
-    public static void nsamples(long struct, int value) { memPutInt(struct + VkImageCreateInfo.SAMPLES, value); }
+    public static void nsamples(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.SAMPLES, value); }
     /** Unsafe version of {@link #tiling(int) tiling}. */
-    public static void ntiling(long struct, int value) { memPutInt(struct + VkImageCreateInfo.TILING, value); }
+    public static void ntiling(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.TILING, value); }
     /** Unsafe version of {@link #usage(int) usage}. */
-    public static void nusage(long struct, int value) { memPutInt(struct + VkImageCreateInfo.USAGE, value); }
+    public static void nusage(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.USAGE, value); }
     /** Unsafe version of {@link #sharingMode(int) sharingMode}. */
-    public static void nsharingMode(long struct, int value) { memPutInt(struct + VkImageCreateInfo.SHARINGMODE, value); }
+    public static void nsharingMode(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.SHARINGMODE, value); }
     /** Sets the specified value to the {@code queueFamilyIndexCount} field of the specified {@code struct}. */
-    public static void nqueueFamilyIndexCount(long struct, int value) { memPutInt(struct + VkImageCreateInfo.QUEUEFAMILYINDEXCOUNT, value); }
+    public static void nqueueFamilyIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.QUEUEFAMILYINDEXCOUNT, value); }
     /** Unsafe version of {@link #pQueueFamilyIndices(IntBuffer) pQueueFamilyIndices}. */
     public static void npQueueFamilyIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkImageCreateInfo.PQUEUEFAMILYINDICES, memAddressSafe(value)); nqueueFamilyIndexCount(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #initialLayout(int) initialLayout}. */
-    public static void ninitialLayout(long struct, int value) { memPutInt(struct + VkImageCreateInfo.INITIALLAYOUT, value); }
+    public static void ninitialLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.INITIALLAYOUT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -648,6 +646,8 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
     /** An array of {@link VkImageCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VkImageCreateInfo, Buffer> implements NativeResource {
 
+        private static final VkImageCreateInfo ELEMENT_FACTORY = VkImageCreateInfo.create(-1L);
+
         /**
          * Creates a new {@link VkImageCreateInfo.Buffer} instance backed by the specified container.
          *
@@ -675,18 +675,8 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkImageCreateInfo newInstance(long address) {
-            return new VkImageCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkImageCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

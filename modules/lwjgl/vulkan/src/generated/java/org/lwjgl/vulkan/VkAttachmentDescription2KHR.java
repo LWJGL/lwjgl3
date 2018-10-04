@@ -133,10 +133,6 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
         FINALLAYOUT = layout.offsetof(10);
     }
 
-    VkAttachmentDescription2KHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkAttachmentDescription2KHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -144,7 +140,7 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkAttachmentDescription2KHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -252,28 +248,29 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
 
     /** Returns a new {@link VkAttachmentDescription2KHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkAttachmentDescription2KHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkAttachmentDescription2KHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkAttachmentDescription2KHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkAttachmentDescription2KHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkAttachmentDescription2KHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkAttachmentDescription2KHR} instance allocated with {@link BufferUtils}. */
     public static VkAttachmentDescription2KHR create() {
-        return new VkAttachmentDescription2KHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkAttachmentDescription2KHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkAttachmentDescription2KHR} instance for the specified memory address. */
     public static VkAttachmentDescription2KHR create(long address) {
-        return new VkAttachmentDescription2KHR(address, null);
+        return wrap(VkAttachmentDescription2KHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAttachmentDescription2KHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkAttachmentDescription2KHR.class, address);
     }
 
     /**
@@ -282,7 +279,7 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription2KHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -291,7 +288,7 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription2KHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -300,7 +297,8 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription2KHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -310,13 +308,13 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription2KHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAttachmentDescription2KHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -337,7 +335,7 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkAttachmentDescription2KHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkAttachmentDescription2KHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -346,7 +344,7 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkAttachmentDescription2KHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkAttachmentDescription2KHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -374,7 +372,7 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription2KHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -384,61 +382,63 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription2KHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkAttachmentDescription2KHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2KHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAttachmentDescription2KHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkAttachmentDescription2KHR.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2KHR.FLAGS); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return memGetInt(struct + VkAttachmentDescription2KHR.FORMAT); }
+    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2KHR.FORMAT); }
     /** Unsafe version of {@link #samples}. */
-    public static int nsamples(long struct) { return memGetInt(struct + VkAttachmentDescription2KHR.SAMPLES); }
+    public static int nsamples(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2KHR.SAMPLES); }
     /** Unsafe version of {@link #loadOp}. */
-    public static int nloadOp(long struct) { return memGetInt(struct + VkAttachmentDescription2KHR.LOADOP); }
+    public static int nloadOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2KHR.LOADOP); }
     /** Unsafe version of {@link #storeOp}. */
-    public static int nstoreOp(long struct) { return memGetInt(struct + VkAttachmentDescription2KHR.STOREOP); }
+    public static int nstoreOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2KHR.STOREOP); }
     /** Unsafe version of {@link #stencilLoadOp}. */
-    public static int nstencilLoadOp(long struct) { return memGetInt(struct + VkAttachmentDescription2KHR.STENCILLOADOP); }
+    public static int nstencilLoadOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2KHR.STENCILLOADOP); }
     /** Unsafe version of {@link #stencilStoreOp}. */
-    public static int nstencilStoreOp(long struct) { return memGetInt(struct + VkAttachmentDescription2KHR.STENCILSTOREOP); }
+    public static int nstencilStoreOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2KHR.STENCILSTOREOP); }
     /** Unsafe version of {@link #initialLayout}. */
-    public static int ninitialLayout(long struct) { return memGetInt(struct + VkAttachmentDescription2KHR.INITIALLAYOUT); }
+    public static int ninitialLayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2KHR.INITIALLAYOUT); }
     /** Unsafe version of {@link #finalLayout}. */
-    public static int nfinalLayout(long struct) { return memGetInt(struct + VkAttachmentDescription2KHR.FINALLAYOUT); }
+    public static int nfinalLayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription2KHR.FINALLAYOUT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkAttachmentDescription2KHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAttachmentDescription2KHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkAttachmentDescription2KHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2KHR.FLAGS, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { memPutInt(struct + VkAttachmentDescription2KHR.FORMAT, value); }
+    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2KHR.FORMAT, value); }
     /** Unsafe version of {@link #samples(int) samples}. */
-    public static void nsamples(long struct, int value) { memPutInt(struct + VkAttachmentDescription2KHR.SAMPLES, value); }
+    public static void nsamples(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2KHR.SAMPLES, value); }
     /** Unsafe version of {@link #loadOp(int) loadOp}. */
-    public static void nloadOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription2KHR.LOADOP, value); }
+    public static void nloadOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2KHR.LOADOP, value); }
     /** Unsafe version of {@link #storeOp(int) storeOp}. */
-    public static void nstoreOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription2KHR.STOREOP, value); }
+    public static void nstoreOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2KHR.STOREOP, value); }
     /** Unsafe version of {@link #stencilLoadOp(int) stencilLoadOp}. */
-    public static void nstencilLoadOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription2KHR.STENCILLOADOP, value); }
+    public static void nstencilLoadOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2KHR.STENCILLOADOP, value); }
     /** Unsafe version of {@link #stencilStoreOp(int) stencilStoreOp}. */
-    public static void nstencilStoreOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription2KHR.STENCILSTOREOP, value); }
+    public static void nstencilStoreOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2KHR.STENCILSTOREOP, value); }
     /** Unsafe version of {@link #initialLayout(int) initialLayout}. */
-    public static void ninitialLayout(long struct, int value) { memPutInt(struct + VkAttachmentDescription2KHR.INITIALLAYOUT, value); }
+    public static void ninitialLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2KHR.INITIALLAYOUT, value); }
     /** Unsafe version of {@link #finalLayout(int) finalLayout}. */
-    public static void nfinalLayout(long struct, int value) { memPutInt(struct + VkAttachmentDescription2KHR.FINALLAYOUT, value); }
+    public static void nfinalLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription2KHR.FINALLAYOUT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkAttachmentDescription2KHR} structs. */
     public static class Buffer extends StructBuffer<VkAttachmentDescription2KHR, Buffer> implements NativeResource {
+
+        private static final VkAttachmentDescription2KHR ELEMENT_FACTORY = VkAttachmentDescription2KHR.create(-1L);
 
         /**
          * Creates a new {@link VkAttachmentDescription2KHR.Buffer} instance backed by the specified container.
@@ -467,18 +467,8 @@ public class VkAttachmentDescription2KHR extends Struct implements NativeResourc
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkAttachmentDescription2KHR newInstance(long address) {
-            return new VkAttachmentDescription2KHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkAttachmentDescription2KHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

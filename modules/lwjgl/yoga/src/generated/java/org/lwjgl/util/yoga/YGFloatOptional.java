@@ -48,10 +48,6 @@ public class YGFloatOptional extends Struct {
         ISUNDEFINED = layout.offsetof(1);
     }
 
-    YGFloatOptional(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link YGFloatOptional} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -59,7 +55,7 @@ public class YGFloatOptional extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public YGFloatOptional(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -75,13 +71,13 @@ public class YGFloatOptional extends Struct {
 
     /** Returns a new {@link YGFloatOptional} instance for the specified memory address. */
     public static YGFloatOptional create(long address) {
-        return new YGFloatOptional(address, null);
+        return wrap(YGFloatOptional.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGFloatOptional createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(YGFloatOptional.class, address);
     }
 
     /**
@@ -91,26 +87,28 @@ public class YGFloatOptional extends Struct {
      * @param capacity the buffer capacity
      */
     public static YGFloatOptional.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGFloatOptional.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #value}. */
-    public static float nvalue(long struct) { return memGetFloat(struct + YGFloatOptional.VALUE); }
+    public static float nvalue(long struct) { return UNSAFE.getFloat(null, struct + YGFloatOptional.VALUE); }
     /** Unsafe version of {@link #isUndefined}. */
-    public static boolean nisUndefined(long struct) { return memGetByte(struct + YGFloatOptional.ISUNDEFINED) != 0; }
+    public static boolean nisUndefined(long struct) { return UNSAFE.getByte(null, struct + YGFloatOptional.ISUNDEFINED) != 0; }
 
     // -----------------------------------
 
     /** An array of {@link YGFloatOptional} structs. */
     public static class Buffer extends StructBuffer<YGFloatOptional, Buffer> {
+
+        private static final YGFloatOptional ELEMENT_FACTORY = YGFloatOptional.create(-1L);
 
         /**
          * Creates a new {@link YGFloatOptional.Buffer} instance backed by the specified container.
@@ -139,18 +137,8 @@ public class YGFloatOptional extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected YGFloatOptional newInstance(long address) {
-            return new YGFloatOptional(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected YGFloatOptional getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code value} field. */

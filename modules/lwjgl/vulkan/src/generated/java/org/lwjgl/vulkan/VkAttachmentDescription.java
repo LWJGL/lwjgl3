@@ -134,10 +134,6 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
         FINALLAYOUT = layout.offsetof(8);
     }
 
-    VkAttachmentDescription(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkAttachmentDescription} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -145,7 +141,7 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkAttachmentDescription(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -239,28 +235,29 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
 
     /** Returns a new {@link VkAttachmentDescription} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkAttachmentDescription malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkAttachmentDescription.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkAttachmentDescription} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkAttachmentDescription calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkAttachmentDescription.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkAttachmentDescription} instance allocated with {@link BufferUtils}. */
     public static VkAttachmentDescription create() {
-        return new VkAttachmentDescription(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkAttachmentDescription.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkAttachmentDescription} instance for the specified memory address. */
     public static VkAttachmentDescription create(long address) {
-        return new VkAttachmentDescription(address, null);
+        return wrap(VkAttachmentDescription.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAttachmentDescription createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkAttachmentDescription.class, address);
     }
 
     /**
@@ -269,7 +266,7 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -278,7 +275,7 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -287,7 +284,8 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -297,13 +295,13 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAttachmentDescription.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -324,7 +322,7 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkAttachmentDescription mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkAttachmentDescription.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -333,7 +331,7 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkAttachmentDescription callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkAttachmentDescription.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -361,7 +359,7 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -371,53 +369,55 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentDescription.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkAttachmentDescription.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription.FLAGS); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return memGetInt(struct + VkAttachmentDescription.FORMAT); }
+    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription.FORMAT); }
     /** Unsafe version of {@link #samples}. */
-    public static int nsamples(long struct) { return memGetInt(struct + VkAttachmentDescription.SAMPLES); }
+    public static int nsamples(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription.SAMPLES); }
     /** Unsafe version of {@link #loadOp}. */
-    public static int nloadOp(long struct) { return memGetInt(struct + VkAttachmentDescription.LOADOP); }
+    public static int nloadOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription.LOADOP); }
     /** Unsafe version of {@link #storeOp}. */
-    public static int nstoreOp(long struct) { return memGetInt(struct + VkAttachmentDescription.STOREOP); }
+    public static int nstoreOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription.STOREOP); }
     /** Unsafe version of {@link #stencilLoadOp}. */
-    public static int nstencilLoadOp(long struct) { return memGetInt(struct + VkAttachmentDescription.STENCILLOADOP); }
+    public static int nstencilLoadOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription.STENCILLOADOP); }
     /** Unsafe version of {@link #stencilStoreOp}. */
-    public static int nstencilStoreOp(long struct) { return memGetInt(struct + VkAttachmentDescription.STENCILSTOREOP); }
+    public static int nstencilStoreOp(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription.STENCILSTOREOP); }
     /** Unsafe version of {@link #initialLayout}. */
-    public static int ninitialLayout(long struct) { return memGetInt(struct + VkAttachmentDescription.INITIALLAYOUT); }
+    public static int ninitialLayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription.INITIALLAYOUT); }
     /** Unsafe version of {@link #finalLayout}. */
-    public static int nfinalLayout(long struct) { return memGetInt(struct + VkAttachmentDescription.FINALLAYOUT); }
+    public static int nfinalLayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentDescription.FINALLAYOUT); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkAttachmentDescription.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription.FLAGS, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { memPutInt(struct + VkAttachmentDescription.FORMAT, value); }
+    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription.FORMAT, value); }
     /** Unsafe version of {@link #samples(int) samples}. */
-    public static void nsamples(long struct, int value) { memPutInt(struct + VkAttachmentDescription.SAMPLES, value); }
+    public static void nsamples(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription.SAMPLES, value); }
     /** Unsafe version of {@link #loadOp(int) loadOp}. */
-    public static void nloadOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription.LOADOP, value); }
+    public static void nloadOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription.LOADOP, value); }
     /** Unsafe version of {@link #storeOp(int) storeOp}. */
-    public static void nstoreOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription.STOREOP, value); }
+    public static void nstoreOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription.STOREOP, value); }
     /** Unsafe version of {@link #stencilLoadOp(int) stencilLoadOp}. */
-    public static void nstencilLoadOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription.STENCILLOADOP, value); }
+    public static void nstencilLoadOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription.STENCILLOADOP, value); }
     /** Unsafe version of {@link #stencilStoreOp(int) stencilStoreOp}. */
-    public static void nstencilStoreOp(long struct, int value) { memPutInt(struct + VkAttachmentDescription.STENCILSTOREOP, value); }
+    public static void nstencilStoreOp(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription.STENCILSTOREOP, value); }
     /** Unsafe version of {@link #initialLayout(int) initialLayout}. */
-    public static void ninitialLayout(long struct, int value) { memPutInt(struct + VkAttachmentDescription.INITIALLAYOUT, value); }
+    public static void ninitialLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription.INITIALLAYOUT, value); }
     /** Unsafe version of {@link #finalLayout(int) finalLayout}. */
-    public static void nfinalLayout(long struct, int value) { memPutInt(struct + VkAttachmentDescription.FINALLAYOUT, value); }
+    public static void nfinalLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentDescription.FINALLAYOUT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkAttachmentDescription} structs. */
     public static class Buffer extends StructBuffer<VkAttachmentDescription, Buffer> implements NativeResource {
+
+        private static final VkAttachmentDescription ELEMENT_FACTORY = VkAttachmentDescription.create(-1L);
 
         /**
          * Creates a new {@link VkAttachmentDescription.Buffer} instance backed by the specified container.
@@ -446,18 +446,8 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkAttachmentDescription newInstance(long address) {
-            return new VkAttachmentDescription(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkAttachmentDescription getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code flags} field. */

@@ -67,10 +67,6 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
         PROJECTION32 = layout.offsetof(2);
     }
 
-    OVRTimewarpProjectionDesc(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRTimewarpProjectionDesc} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -78,7 +74,7 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRTimewarpProjectionDesc(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -95,28 +91,29 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
 
     /** Returns a new {@link OVRTimewarpProjectionDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRTimewarpProjectionDesc malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRTimewarpProjectionDesc.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRTimewarpProjectionDesc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRTimewarpProjectionDesc calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRTimewarpProjectionDesc.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRTimewarpProjectionDesc} instance allocated with {@link BufferUtils}. */
     public static OVRTimewarpProjectionDesc create() {
-        return new OVRTimewarpProjectionDesc(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRTimewarpProjectionDesc.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRTimewarpProjectionDesc} instance for the specified memory address. */
     public static OVRTimewarpProjectionDesc create(long address) {
-        return new OVRTimewarpProjectionDesc(address, null);
+        return wrap(OVRTimewarpProjectionDesc.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRTimewarpProjectionDesc createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRTimewarpProjectionDesc.class, address);
     }
 
     /**
@@ -125,7 +122,7 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static OVRTimewarpProjectionDesc.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -134,7 +131,7 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static OVRTimewarpProjectionDesc.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -143,7 +140,8 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static OVRTimewarpProjectionDesc.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -153,13 +151,13 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static OVRTimewarpProjectionDesc.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRTimewarpProjectionDesc.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -180,7 +178,7 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static OVRTimewarpProjectionDesc mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRTimewarpProjectionDesc.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -189,7 +187,7 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static OVRTimewarpProjectionDesc callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRTimewarpProjectionDesc.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -217,7 +215,7 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static OVRTimewarpProjectionDesc.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -227,22 +225,24 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static OVRTimewarpProjectionDesc.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #Projection22}. */
-    public static float nProjection22(long struct) { return memGetFloat(struct + OVRTimewarpProjectionDesc.PROJECTION22); }
+    public static float nProjection22(long struct) { return UNSAFE.getFloat(null, struct + OVRTimewarpProjectionDesc.PROJECTION22); }
     /** Unsafe version of {@link #Projection23}. */
-    public static float nProjection23(long struct) { return memGetFloat(struct + OVRTimewarpProjectionDesc.PROJECTION23); }
+    public static float nProjection23(long struct) { return UNSAFE.getFloat(null, struct + OVRTimewarpProjectionDesc.PROJECTION23); }
     /** Unsafe version of {@link #Projection32}. */
-    public static float nProjection32(long struct) { return memGetFloat(struct + OVRTimewarpProjectionDesc.PROJECTION32); }
+    public static float nProjection32(long struct) { return UNSAFE.getFloat(null, struct + OVRTimewarpProjectionDesc.PROJECTION32); }
 
     // -----------------------------------
 
     /** An array of {@link OVRTimewarpProjectionDesc} structs. */
     public static class Buffer extends StructBuffer<OVRTimewarpProjectionDesc, Buffer> implements NativeResource {
+
+        private static final OVRTimewarpProjectionDesc ELEMENT_FACTORY = OVRTimewarpProjectionDesc.create(-1L);
 
         /**
          * Creates a new {@link OVRTimewarpProjectionDesc.Buffer} instance backed by the specified container.
@@ -271,18 +271,8 @@ public class OVRTimewarpProjectionDesc extends Struct implements NativeResource 
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRTimewarpProjectionDesc newInstance(long address) {
-            return new OVRTimewarpProjectionDesc(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRTimewarpProjectionDesc getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code Projection22} field. */

@@ -86,10 +86,6 @@ public class STBTTPackRange extends Struct implements NativeResource {
         V_OVERSAMPLE = layout.offsetof(6);
     }
 
-    STBTTPackRange(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link STBTTPackRange} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -97,7 +93,7 @@ public class STBTTPackRange extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public STBTTPackRange(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -175,28 +171,29 @@ public class STBTTPackRange extends Struct implements NativeResource {
 
     /** Returns a new {@link STBTTPackRange} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static STBTTPackRange malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(STBTTPackRange.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link STBTTPackRange} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static STBTTPackRange calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(STBTTPackRange.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link STBTTPackRange} instance allocated with {@link BufferUtils}. */
     public static STBTTPackRange create() {
-        return new STBTTPackRange(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(STBTTPackRange.class, memAddress(container), container);
     }
 
     /** Returns a new {@link STBTTPackRange} instance for the specified memory address. */
     public static STBTTPackRange create(long address) {
-        return new STBTTPackRange(address, null);
+        return wrap(STBTTPackRange.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBTTPackRange createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(STBTTPackRange.class, address);
     }
 
     /**
@@ -205,7 +202,7 @@ public class STBTTPackRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackRange.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -214,7 +211,7 @@ public class STBTTPackRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackRange.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -223,7 +220,8 @@ public class STBTTPackRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackRange.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -233,13 +231,13 @@ public class STBTTPackRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackRange.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBTTPackRange.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -260,7 +258,7 @@ public class STBTTPackRange extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBTTPackRange mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(STBTTPackRange.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -269,7 +267,7 @@ public class STBTTPackRange extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBTTPackRange callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(STBTTPackRange.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -297,7 +295,7 @@ public class STBTTPackRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackRange.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -307,40 +305,40 @@ public class STBTTPackRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackRange.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #font_size}. */
-    public static float nfont_size(long struct) { return memGetFloat(struct + STBTTPackRange.FONT_SIZE); }
+    public static float nfont_size(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackRange.FONT_SIZE); }
     /** Unsafe version of {@link #first_unicode_codepoint_in_range}. */
-    public static int nfirst_unicode_codepoint_in_range(long struct) { return memGetInt(struct + STBTTPackRange.FIRST_UNICODE_CODEPOINT_IN_RANGE); }
+    public static int nfirst_unicode_codepoint_in_range(long struct) { return UNSAFE.getInt(null, struct + STBTTPackRange.FIRST_UNICODE_CODEPOINT_IN_RANGE); }
     /** Unsafe version of {@link #array_of_unicode_codepoints() array_of_unicode_codepoints}. */
     @Nullable public static IntBuffer narray_of_unicode_codepoints(long struct) { return memIntBufferSafe(memGetAddress(struct + STBTTPackRange.ARRAY_OF_UNICODE_CODEPOINTS), nnum_chars(struct)); }
     /** Unsafe version of {@link #num_chars}. */
-    public static int nnum_chars(long struct) { return memGetInt(struct + STBTTPackRange.NUM_CHARS); }
+    public static int nnum_chars(long struct) { return UNSAFE.getInt(null, struct + STBTTPackRange.NUM_CHARS); }
     /** Unsafe version of {@link #chardata_for_range}. */
     public static STBTTPackedchar.Buffer nchardata_for_range(long struct) { return STBTTPackedchar.create(memGetAddress(struct + STBTTPackRange.CHARDATA_FOR_RANGE), nnum_chars(struct)); }
     /** Unsafe version of {@link #h_oversample}. */
-    public static byte nh_oversample(long struct) { return memGetByte(struct + STBTTPackRange.H_OVERSAMPLE); }
+    public static byte nh_oversample(long struct) { return UNSAFE.getByte(null, struct + STBTTPackRange.H_OVERSAMPLE); }
     /** Unsafe version of {@link #v_oversample}. */
-    public static byte nv_oversample(long struct) { return memGetByte(struct + STBTTPackRange.V_OVERSAMPLE); }
+    public static byte nv_oversample(long struct) { return UNSAFE.getByte(null, struct + STBTTPackRange.V_OVERSAMPLE); }
 
     /** Unsafe version of {@link #font_size(float) font_size}. */
-    public static void nfont_size(long struct, float value) { memPutFloat(struct + STBTTPackRange.FONT_SIZE, value); }
+    public static void nfont_size(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackRange.FONT_SIZE, value); }
     /** Unsafe version of {@link #first_unicode_codepoint_in_range(int) first_unicode_codepoint_in_range}. */
-    public static void nfirst_unicode_codepoint_in_range(long struct, int value) { memPutInt(struct + STBTTPackRange.FIRST_UNICODE_CODEPOINT_IN_RANGE, value); }
+    public static void nfirst_unicode_codepoint_in_range(long struct, int value) { UNSAFE.putInt(null, struct + STBTTPackRange.FIRST_UNICODE_CODEPOINT_IN_RANGE, value); }
     /** Unsafe version of {@link #array_of_unicode_codepoints(IntBuffer) array_of_unicode_codepoints}. */
     public static void narray_of_unicode_codepoints(long struct, @Nullable IntBuffer value) { memPutAddress(struct + STBTTPackRange.ARRAY_OF_UNICODE_CODEPOINTS, memAddressSafe(value)); }
     /** Sets the specified value to the {@code num_chars} field of the specified {@code struct}. */
-    public static void nnum_chars(long struct, int value) { memPutInt(struct + STBTTPackRange.NUM_CHARS, value); }
+    public static void nnum_chars(long struct, int value) { UNSAFE.putInt(null, struct + STBTTPackRange.NUM_CHARS, value); }
     /** Unsafe version of {@link #chardata_for_range(STBTTPackedchar.Buffer) chardata_for_range}. */
     public static void nchardata_for_range(long struct, STBTTPackedchar.Buffer value) { memPutAddress(struct + STBTTPackRange.CHARDATA_FOR_RANGE, value.address()); }
     /** Unsafe version of {@link #h_oversample(byte) h_oversample}. */
-    public static void nh_oversample(long struct, byte value) { memPutByte(struct + STBTTPackRange.H_OVERSAMPLE, value); }
+    public static void nh_oversample(long struct, byte value) { UNSAFE.putByte(null, struct + STBTTPackRange.H_OVERSAMPLE, value); }
     /** Unsafe version of {@link #v_oversample(byte) v_oversample}. */
-    public static void nv_oversample(long struct, byte value) { memPutByte(struct + STBTTPackRange.V_OVERSAMPLE, value); }
+    public static void nv_oversample(long struct, byte value) { UNSAFE.putByte(null, struct + STBTTPackRange.V_OVERSAMPLE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -367,6 +365,8 @@ public class STBTTPackRange extends Struct implements NativeResource {
 
     /** An array of {@link STBTTPackRange} structs. */
     public static class Buffer extends StructBuffer<STBTTPackRange, Buffer> implements NativeResource {
+
+        private static final STBTTPackRange ELEMENT_FACTORY = STBTTPackRange.create(-1L);
 
         /**
          * Creates a new {@link STBTTPackRange.Buffer} instance backed by the specified container.
@@ -395,18 +395,8 @@ public class STBTTPackRange extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected STBTTPackRange newInstance(long address) {
-            return new STBTTPackRange(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected STBTTPackRange getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code font_size} field. */

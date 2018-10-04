@@ -84,10 +84,6 @@ public class MONITORINFOEX extends Struct implements NativeResource {
         SZDEVICE = layout.offsetof(4);
     }
 
-    MONITORINFOEX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link MONITORINFOEX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -95,7 +91,7 @@ public class MONITORINFOEX extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public MONITORINFOEX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -141,28 +137,29 @@ public class MONITORINFOEX extends Struct implements NativeResource {
 
     /** Returns a new {@link MONITORINFOEX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static MONITORINFOEX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(MONITORINFOEX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link MONITORINFOEX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static MONITORINFOEX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(MONITORINFOEX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link MONITORINFOEX} instance allocated with {@link BufferUtils}. */
     public static MONITORINFOEX create() {
-        return new MONITORINFOEX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(MONITORINFOEX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link MONITORINFOEX} instance for the specified memory address. */
     public static MONITORINFOEX create(long address) {
-        return new MONITORINFOEX(address, null);
+        return wrap(MONITORINFOEX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static MONITORINFOEX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(MONITORINFOEX.class, address);
     }
 
     /**
@@ -171,7 +168,7 @@ public class MONITORINFOEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MONITORINFOEX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -180,7 +177,7 @@ public class MONITORINFOEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MONITORINFOEX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -189,7 +186,8 @@ public class MONITORINFOEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MONITORINFOEX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -199,13 +197,13 @@ public class MONITORINFOEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MONITORINFOEX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static MONITORINFOEX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -226,7 +224,7 @@ public class MONITORINFOEX extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static MONITORINFOEX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(MONITORINFOEX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -235,7 +233,7 @@ public class MONITORINFOEX extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static MONITORINFOEX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(MONITORINFOEX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -263,7 +261,7 @@ public class MONITORINFOEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MONITORINFOEX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -273,31 +271,33 @@ public class MONITORINFOEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MONITORINFOEX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #cbSize}. */
-    public static int ncbSize(long struct) { return memGetInt(struct + MONITORINFOEX.CBSIZE); }
+    public static int ncbSize(long struct) { return UNSAFE.getInt(null, struct + MONITORINFOEX.CBSIZE); }
     /** Unsafe version of {@link #rcMonitor}. */
     public static RECT nrcMonitor(long struct) { return RECT.create(struct + MONITORINFOEX.RCMONITOR); }
     /** Unsafe version of {@link #rcWork}. */
     public static RECT nrcWork(long struct) { return RECT.create(struct + MONITORINFOEX.RCWORK); }
     /** Unsafe version of {@link #dwFlags}. */
-    public static int ndwFlags(long struct) { return memGetInt(struct + MONITORINFOEX.DWFLAGS); }
+    public static int ndwFlags(long struct) { return UNSAFE.getInt(null, struct + MONITORINFOEX.DWFLAGS); }
     /** Unsafe version of {@link #szDevice}. */
     public static ByteBuffer nszDevice(long struct) { return memByteBuffer(struct + MONITORINFOEX.SZDEVICE, 32 * 2); }
     /** Unsafe version of {@link #szDeviceString}. */
     public static String nszDeviceString(long struct) { return memUTF16(struct + MONITORINFOEX.SZDEVICE); }
 
     /** Unsafe version of {@link #cbSize(int) cbSize}. */
-    public static void ncbSize(long struct, int value) { memPutInt(struct + MONITORINFOEX.CBSIZE, value); }
+    public static void ncbSize(long struct, int value) { UNSAFE.putInt(null, struct + MONITORINFOEX.CBSIZE, value); }
 
     // -----------------------------------
 
     /** An array of {@link MONITORINFOEX} structs. */
     public static class Buffer extends StructBuffer<MONITORINFOEX, Buffer> implements NativeResource {
+
+        private static final MONITORINFOEX ELEMENT_FACTORY = MONITORINFOEX.create(-1L);
 
         /**
          * Creates a new {@link MONITORINFOEX.Buffer} instance backed by the specified container.
@@ -326,18 +326,8 @@ public class MONITORINFOEX extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected MONITORINFOEX newInstance(long address) {
-            return new MONITORINFOEX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected MONITORINFOEX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code cbSize} field. */

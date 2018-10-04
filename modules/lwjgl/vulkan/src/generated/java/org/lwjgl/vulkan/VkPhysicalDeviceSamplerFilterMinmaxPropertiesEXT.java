@@ -96,10 +96,6 @@ public class VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT extends Struct {
         FILTERMINMAXIMAGECOMPONENTMAPPING = layout.offsetof(3);
     }
 
-    VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -107,7 +103,7 @@ public class VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -158,13 +154,13 @@ public class VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT extends Struct {
 
     /** Returns a new {@link VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT create(long address) {
-        return new VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT(address, null);
+        return wrap(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.class, address);
     }
 
     /**
@@ -174,28 +170,28 @@ public class VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #filterMinmaxSingleComponentFormats}. */
-    public static int nfilterMinmaxSingleComponentFormats(long struct) { return memGetInt(struct + VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.FILTERMINMAXSINGLECOMPONENTFORMATS); }
+    public static int nfilterMinmaxSingleComponentFormats(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.FILTERMINMAXSINGLECOMPONENTFORMATS); }
     /** Unsafe version of {@link #filterMinmaxImageComponentMapping}. */
-    public static int nfilterMinmaxImageComponentMapping(long struct) { return memGetInt(struct + VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.FILTERMINMAXIMAGECOMPONENTMAPPING); }
+    public static int nfilterMinmaxImageComponentMapping(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.FILTERMINMAXIMAGECOMPONENTMAPPING); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.PNEXT, value); }
 
@@ -203,6 +199,8 @@ public class VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT extends Struct {
 
     /** An array of {@link VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT, Buffer> {
+
+        private static final VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.Buffer} instance backed by the specified container.
@@ -231,18 +229,8 @@ public class VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT newInstance(long address) {
-            return new VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

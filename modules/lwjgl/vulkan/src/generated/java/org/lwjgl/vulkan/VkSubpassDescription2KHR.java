@@ -159,10 +159,6 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
         PPRESERVEATTACHMENTS = layout.offsetof(12);
     }
 
-    VkSubpassDescription2KHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSubpassDescription2KHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -170,7 +166,7 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSubpassDescription2KHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -289,28 +285,29 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
 
     /** Returns a new {@link VkSubpassDescription2KHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSubpassDescription2KHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkSubpassDescription2KHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkSubpassDescription2KHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSubpassDescription2KHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkSubpassDescription2KHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkSubpassDescription2KHR} instance allocated with {@link BufferUtils}. */
     public static VkSubpassDescription2KHR create() {
-        return new VkSubpassDescription2KHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSubpassDescription2KHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkSubpassDescription2KHR} instance for the specified memory address. */
     public static VkSubpassDescription2KHR create(long address) {
-        return new VkSubpassDescription2KHR(address, null);
+        return wrap(VkSubpassDescription2KHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSubpassDescription2KHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSubpassDescription2KHR.class, address);
     }
 
     /**
@@ -319,7 +316,7 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDescription2KHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -328,7 +325,7 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDescription2KHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -337,7 +334,8 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDescription2KHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -347,13 +345,13 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDescription2KHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSubpassDescription2KHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -374,7 +372,7 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkSubpassDescription2KHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkSubpassDescription2KHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -383,7 +381,7 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkSubpassDescription2KHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkSubpassDescription2KHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -411,7 +409,7 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDescription2KHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -421,27 +419,27 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDescription2KHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSubpassDescription2KHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2KHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSubpassDescription2KHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkSubpassDescription2KHR.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2KHR.FLAGS); }
     /** Unsafe version of {@link #pipelineBindPoint}. */
-    public static int npipelineBindPoint(long struct) { return memGetInt(struct + VkSubpassDescription2KHR.PIPELINEBINDPOINT); }
+    public static int npipelineBindPoint(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2KHR.PIPELINEBINDPOINT); }
     /** Unsafe version of {@link #viewMask}. */
-    public static int nviewMask(long struct) { return memGetInt(struct + VkSubpassDescription2KHR.VIEWMASK); }
+    public static int nviewMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2KHR.VIEWMASK); }
     /** Unsafe version of {@link #inputAttachmentCount}. */
-    public static int ninputAttachmentCount(long struct) { return memGetInt(struct + VkSubpassDescription2KHR.INPUTATTACHMENTCOUNT); }
+    public static int ninputAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2KHR.INPUTATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pInputAttachments}. */
     @Nullable public static VkAttachmentReference2KHR.Buffer npInputAttachments(long struct) { return VkAttachmentReference2KHR.createSafe(memGetAddress(struct + VkSubpassDescription2KHR.PINPUTATTACHMENTS), ninputAttachmentCount(struct)); }
     /** Unsafe version of {@link #colorAttachmentCount}. */
-    public static int ncolorAttachmentCount(long struct) { return memGetInt(struct + VkSubpassDescription2KHR.COLORATTACHMENTCOUNT); }
+    public static int ncolorAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2KHR.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachments}. */
     @Nullable public static VkAttachmentReference2KHR.Buffer npColorAttachments(long struct) { return VkAttachmentReference2KHR.createSafe(memGetAddress(struct + VkSubpassDescription2KHR.PCOLORATTACHMENTS), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #pResolveAttachments}. */
@@ -449,26 +447,26 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #pDepthStencilAttachment}. */
     @Nullable public static VkAttachmentReference2KHR npDepthStencilAttachment(long struct) { return VkAttachmentReference2KHR.createSafe(memGetAddress(struct + VkSubpassDescription2KHR.PDEPTHSTENCILATTACHMENT)); }
     /** Unsafe version of {@link #preserveAttachmentCount}. */
-    public static int npreserveAttachmentCount(long struct) { return memGetInt(struct + VkSubpassDescription2KHR.PRESERVEATTACHMENTCOUNT); }
+    public static int npreserveAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDescription2KHR.PRESERVEATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pPreserveAttachments() pPreserveAttachments}. */
     @Nullable public static IntBuffer npPreserveAttachments(long struct) { return memIntBufferSafe(memGetAddress(struct + VkSubpassDescription2KHR.PPRESERVEATTACHMENTS), npreserveAttachmentCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSubpassDescription2KHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSubpassDescription2KHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkSubpassDescription2KHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2KHR.FLAGS, value); }
     /** Unsafe version of {@link #pipelineBindPoint(int) pipelineBindPoint}. */
-    public static void npipelineBindPoint(long struct, int value) { memPutInt(struct + VkSubpassDescription2KHR.PIPELINEBINDPOINT, value); }
+    public static void npipelineBindPoint(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2KHR.PIPELINEBINDPOINT, value); }
     /** Unsafe version of {@link #viewMask(int) viewMask}. */
-    public static void nviewMask(long struct, int value) { memPutInt(struct + VkSubpassDescription2KHR.VIEWMASK, value); }
+    public static void nviewMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2KHR.VIEWMASK, value); }
     /** Sets the specified value to the {@code inputAttachmentCount} field of the specified {@code struct}. */
-    public static void ninputAttachmentCount(long struct, int value) { memPutInt(struct + VkSubpassDescription2KHR.INPUTATTACHMENTCOUNT, value); }
+    public static void ninputAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2KHR.INPUTATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pInputAttachments(VkAttachmentReference2KHR.Buffer) pInputAttachments}. */
     public static void npInputAttachments(long struct, @Nullable VkAttachmentReference2KHR.Buffer value) { memPutAddress(struct + VkSubpassDescription2KHR.PINPUTATTACHMENTS, memAddressSafe(value)); ninputAttachmentCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
-    public static void ncolorAttachmentCount(long struct, int value) { memPutInt(struct + VkSubpassDescription2KHR.COLORATTACHMENTCOUNT, value); }
+    public static void ncolorAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2KHR.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachments(VkAttachmentReference2KHR.Buffer) pColorAttachments}. */
     public static void npColorAttachments(long struct, @Nullable VkAttachmentReference2KHR.Buffer value) { memPutAddress(struct + VkSubpassDescription2KHR.PCOLORATTACHMENTS, memAddressSafe(value)); }
     /** Unsafe version of {@link #pResolveAttachments(VkAttachmentReference2KHR.Buffer) pResolveAttachments}. */
@@ -476,7 +474,7 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #pDepthStencilAttachment(VkAttachmentReference2KHR) pDepthStencilAttachment}. */
     public static void npDepthStencilAttachment(long struct, @Nullable VkAttachmentReference2KHR value) { memPutAddress(struct + VkSubpassDescription2KHR.PDEPTHSTENCILATTACHMENT, memAddressSafe(value)); }
     /** Sets the specified value to the {@code preserveAttachmentCount} field of the specified {@code struct}. */
-    public static void npreserveAttachmentCount(long struct, int value) { memPutInt(struct + VkSubpassDescription2KHR.PRESERVEATTACHMENTCOUNT, value); }
+    public static void npreserveAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDescription2KHR.PRESERVEATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pPreserveAttachments(IntBuffer) pPreserveAttachments}. */
     public static void npPreserveAttachments(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkSubpassDescription2KHR.PPRESERVEATTACHMENTS, memAddressSafe(value)); npreserveAttachmentCount(struct, value == null ? 0 : value.remaining()); }
 
@@ -514,6 +512,8 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
     /** An array of {@link VkSubpassDescription2KHR} structs. */
     public static class Buffer extends StructBuffer<VkSubpassDescription2KHR, Buffer> implements NativeResource {
 
+        private static final VkSubpassDescription2KHR ELEMENT_FACTORY = VkSubpassDescription2KHR.create(-1L);
+
         /**
          * Creates a new {@link VkSubpassDescription2KHR.Buffer} instance backed by the specified container.
          *
@@ -541,18 +541,8 @@ public class VkSubpassDescription2KHR extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSubpassDescription2KHR newInstance(long address) {
-            return new VkSubpassDescription2KHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSubpassDescription2KHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

@@ -60,10 +60,6 @@ public class BGFXTransform extends Struct implements NativeResource {
         NUM = layout.offsetof(1);
     }
 
-    BGFXTransform(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXTransform} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -71,7 +67,7 @@ public class BGFXTransform extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXTransform(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -88,28 +84,29 @@ public class BGFXTransform extends Struct implements NativeResource {
 
     /** Returns a new {@link BGFXTransform} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXTransform malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(BGFXTransform.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link BGFXTransform} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXTransform calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(BGFXTransform.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link BGFXTransform} instance allocated with {@link BufferUtils}. */
     public static BGFXTransform create() {
-        return new BGFXTransform(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(BGFXTransform.class, memAddress(container), container);
     }
 
     /** Returns a new {@link BGFXTransform} instance for the specified memory address. */
     public static BGFXTransform create(long address) {
-        return new BGFXTransform(address, null);
+        return wrap(BGFXTransform.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXTransform createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXTransform.class, address);
     }
 
     /**
@@ -118,7 +115,7 @@ public class BGFXTransform extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXTransform.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -127,7 +124,7 @@ public class BGFXTransform extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXTransform.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -136,7 +133,8 @@ public class BGFXTransform extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXTransform.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -146,13 +144,13 @@ public class BGFXTransform extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXTransform.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXTransform.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -173,7 +171,7 @@ public class BGFXTransform extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXTransform mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(BGFXTransform.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -182,7 +180,7 @@ public class BGFXTransform extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXTransform callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(BGFXTransform.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -210,7 +208,7 @@ public class BGFXTransform extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXTransform.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -220,7 +218,7 @@ public class BGFXTransform extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXTransform.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -228,12 +226,14 @@ public class BGFXTransform extends Struct implements NativeResource {
     /** Unsafe version of {@link #data() data}. */
     public static FloatBuffer ndata(long struct) { return memFloatBuffer(memGetAddress(struct + BGFXTransform.DATA), (Short.toUnsignedInt(nnum(struct)) << 4)); }
     /** Unsafe version of {@link #num}. */
-    public static short nnum(long struct) { return memGetShort(struct + BGFXTransform.NUM); }
+    public static short nnum(long struct) { return UNSAFE.getShort(null, struct + BGFXTransform.NUM); }
 
     // -----------------------------------
 
     /** An array of {@link BGFXTransform} structs. */
     public static class Buffer extends StructBuffer<BGFXTransform, Buffer> implements NativeResource {
+
+        private static final BGFXTransform ELEMENT_FACTORY = BGFXTransform.create(-1L);
 
         /**
          * Creates a new {@link BGFXTransform.Buffer} instance backed by the specified container.
@@ -262,18 +262,8 @@ public class BGFXTransform extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected BGFXTransform newInstance(long address) {
-            return new BGFXTransform(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected BGFXTransform getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link FloatBuffer} view of the data pointed to by the {@code data} field. */

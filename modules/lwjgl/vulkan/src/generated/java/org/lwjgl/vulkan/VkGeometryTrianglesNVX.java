@@ -133,10 +133,6 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
         TRANSFORMOFFSET = layout.offsetof(12);
     }
 
-    VkGeometryTrianglesNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkGeometryTrianglesNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -144,7 +140,7 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkGeometryTrianglesNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -266,28 +262,29 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
 
     /** Returns a new {@link VkGeometryTrianglesNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkGeometryTrianglesNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkGeometryTrianglesNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkGeometryTrianglesNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkGeometryTrianglesNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkGeometryTrianglesNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkGeometryTrianglesNVX} instance allocated with {@link BufferUtils}. */
     public static VkGeometryTrianglesNVX create() {
-        return new VkGeometryTrianglesNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkGeometryTrianglesNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkGeometryTrianglesNVX} instance for the specified memory address. */
     public static VkGeometryTrianglesNVX create(long address) {
-        return new VkGeometryTrianglesNVX(address, null);
+        return wrap(VkGeometryTrianglesNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkGeometryTrianglesNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkGeometryTrianglesNVX.class, address);
     }
 
     /**
@@ -296,7 +293,7 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryTrianglesNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -305,7 +302,7 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryTrianglesNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -314,7 +311,8 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryTrianglesNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -324,13 +322,13 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryTrianglesNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkGeometryTrianglesNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -351,7 +349,7 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkGeometryTrianglesNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkGeometryTrianglesNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -360,7 +358,7 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkGeometryTrianglesNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkGeometryTrianglesNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -388,7 +386,7 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryTrianglesNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -398,69 +396,71 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryTrianglesNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkGeometryTrianglesNVX.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGeometryTrianglesNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGeometryTrianglesNVX.PNEXT); }
     /** Unsafe version of {@link #vertexData}. */
-    public static long nvertexData(long struct) { return memGetLong(struct + VkGeometryTrianglesNVX.VERTEXDATA); }
+    public static long nvertexData(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNVX.VERTEXDATA); }
     /** Unsafe version of {@link #vertexOffset}. */
-    public static long nvertexOffset(long struct) { return memGetLong(struct + VkGeometryTrianglesNVX.VERTEXOFFSET); }
+    public static long nvertexOffset(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNVX.VERTEXOFFSET); }
     /** Unsafe version of {@link #vertexCount}. */
-    public static int nvertexCount(long struct) { return memGetInt(struct + VkGeometryTrianglesNVX.VERTEXCOUNT); }
+    public static int nvertexCount(long struct) { return UNSAFE.getInt(null, struct + VkGeometryTrianglesNVX.VERTEXCOUNT); }
     /** Unsafe version of {@link #vertexStride}. */
-    public static long nvertexStride(long struct) { return memGetLong(struct + VkGeometryTrianglesNVX.VERTEXSTRIDE); }
+    public static long nvertexStride(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNVX.VERTEXSTRIDE); }
     /** Unsafe version of {@link #vertexFormat}. */
-    public static int nvertexFormat(long struct) { return memGetInt(struct + VkGeometryTrianglesNVX.VERTEXFORMAT); }
+    public static int nvertexFormat(long struct) { return UNSAFE.getInt(null, struct + VkGeometryTrianglesNVX.VERTEXFORMAT); }
     /** Unsafe version of {@link #indexData}. */
-    public static long nindexData(long struct) { return memGetLong(struct + VkGeometryTrianglesNVX.INDEXDATA); }
+    public static long nindexData(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNVX.INDEXDATA); }
     /** Unsafe version of {@link #indexOffset}. */
-    public static long nindexOffset(long struct) { return memGetLong(struct + VkGeometryTrianglesNVX.INDEXOFFSET); }
+    public static long nindexOffset(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNVX.INDEXOFFSET); }
     /** Unsafe version of {@link #indexCount}. */
-    public static int nindexCount(long struct) { return memGetInt(struct + VkGeometryTrianglesNVX.INDEXCOUNT); }
+    public static int nindexCount(long struct) { return UNSAFE.getInt(null, struct + VkGeometryTrianglesNVX.INDEXCOUNT); }
     /** Unsafe version of {@link #indexType}. */
-    public static int nindexType(long struct) { return memGetInt(struct + VkGeometryTrianglesNVX.INDEXTYPE); }
+    public static int nindexType(long struct) { return UNSAFE.getInt(null, struct + VkGeometryTrianglesNVX.INDEXTYPE); }
     /** Unsafe version of {@link #transformData}. */
-    public static long ntransformData(long struct) { return memGetLong(struct + VkGeometryTrianglesNVX.TRANSFORMDATA); }
+    public static long ntransformData(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNVX.TRANSFORMDATA); }
     /** Unsafe version of {@link #transformOffset}. */
-    public static long ntransformOffset(long struct) { return memGetLong(struct + VkGeometryTrianglesNVX.TRANSFORMOFFSET); }
+    public static long ntransformOffset(long struct) { return UNSAFE.getLong(null, struct + VkGeometryTrianglesNVX.TRANSFORMOFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkGeometryTrianglesNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryTrianglesNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGeometryTrianglesNVX.PNEXT, value); }
     /** Unsafe version of {@link #vertexData(long) vertexData}. */
-    public static void nvertexData(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNVX.VERTEXDATA, value); }
+    public static void nvertexData(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNVX.VERTEXDATA, value); }
     /** Unsafe version of {@link #vertexOffset(long) vertexOffset}. */
-    public static void nvertexOffset(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNVX.VERTEXOFFSET, value); }
+    public static void nvertexOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNVX.VERTEXOFFSET, value); }
     /** Unsafe version of {@link #vertexCount(int) vertexCount}. */
-    public static void nvertexCount(long struct, int value) { memPutInt(struct + VkGeometryTrianglesNVX.VERTEXCOUNT, value); }
+    public static void nvertexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryTrianglesNVX.VERTEXCOUNT, value); }
     /** Unsafe version of {@link #vertexStride(long) vertexStride}. */
-    public static void nvertexStride(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNVX.VERTEXSTRIDE, value); }
+    public static void nvertexStride(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNVX.VERTEXSTRIDE, value); }
     /** Unsafe version of {@link #vertexFormat(int) vertexFormat}. */
-    public static void nvertexFormat(long struct, int value) { memPutInt(struct + VkGeometryTrianglesNVX.VERTEXFORMAT, value); }
+    public static void nvertexFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryTrianglesNVX.VERTEXFORMAT, value); }
     /** Unsafe version of {@link #indexData(long) indexData}. */
-    public static void nindexData(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNVX.INDEXDATA, value); }
+    public static void nindexData(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNVX.INDEXDATA, value); }
     /** Unsafe version of {@link #indexOffset(long) indexOffset}. */
-    public static void nindexOffset(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNVX.INDEXOFFSET, value); }
+    public static void nindexOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNVX.INDEXOFFSET, value); }
     /** Unsafe version of {@link #indexCount(int) indexCount}. */
-    public static void nindexCount(long struct, int value) { memPutInt(struct + VkGeometryTrianglesNVX.INDEXCOUNT, value); }
+    public static void nindexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryTrianglesNVX.INDEXCOUNT, value); }
     /** Unsafe version of {@link #indexType(int) indexType}. */
-    public static void nindexType(long struct, int value) { memPutInt(struct + VkGeometryTrianglesNVX.INDEXTYPE, value); }
+    public static void nindexType(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryTrianglesNVX.INDEXTYPE, value); }
     /** Unsafe version of {@link #transformData(long) transformData}. */
-    public static void ntransformData(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNVX.TRANSFORMDATA, value); }
+    public static void ntransformData(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNVX.TRANSFORMDATA, value); }
     /** Unsafe version of {@link #transformOffset(long) transformOffset}. */
-    public static void ntransformOffset(long struct, long value) { memPutLong(struct + VkGeometryTrianglesNVX.TRANSFORMOFFSET, value); }
+    public static void ntransformOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkGeometryTrianglesNVX.TRANSFORMOFFSET, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkGeometryTrianglesNVX} structs. */
     public static class Buffer extends StructBuffer<VkGeometryTrianglesNVX, Buffer> implements NativeResource {
+
+        private static final VkGeometryTrianglesNVX ELEMENT_FACTORY = VkGeometryTrianglesNVX.create(-1L);
 
         /**
          * Creates a new {@link VkGeometryTrianglesNVX.Buffer} instance backed by the specified container.
@@ -489,18 +489,8 @@ public class VkGeometryTrianglesNVX extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkGeometryTrianglesNVX newInstance(long address) {
-            return new VkGeometryTrianglesNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkGeometryTrianglesNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

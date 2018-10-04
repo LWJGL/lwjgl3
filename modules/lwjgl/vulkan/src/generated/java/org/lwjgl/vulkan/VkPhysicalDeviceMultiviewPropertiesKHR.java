@@ -28,10 +28,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class VkPhysicalDeviceMultiviewPropertiesKHR extends VkPhysicalDeviceMultiviewProperties {
 
-    VkPhysicalDeviceMultiviewPropertiesKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceMultiviewPropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -39,7 +35,7 @@ public class VkPhysicalDeviceMultiviewPropertiesKHR extends VkPhysicalDeviceMult
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceMultiviewPropertiesKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -77,13 +73,13 @@ public class VkPhysicalDeviceMultiviewPropertiesKHR extends VkPhysicalDeviceMult
 
     /** Returns a new {@link VkPhysicalDeviceMultiviewPropertiesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceMultiviewPropertiesKHR create(long address) {
-        return new VkPhysicalDeviceMultiviewPropertiesKHR(address, null);
+        return wrap(VkPhysicalDeviceMultiviewPropertiesKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMultiviewPropertiesKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceMultiviewPropertiesKHR.class, address);
     }
 
     /**
@@ -93,19 +89,21 @@ public class VkPhysicalDeviceMultiviewPropertiesKHR extends VkPhysicalDeviceMult
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPropertiesKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMultiviewPropertiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceMultiviewPropertiesKHR} structs. */
     public static class Buffer extends VkPhysicalDeviceMultiviewProperties.Buffer {
+
+        private static final VkPhysicalDeviceMultiviewPropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceMultiviewPropertiesKHR.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceMultiviewPropertiesKHR.Buffer} instance backed by the specified container.
@@ -134,13 +132,8 @@ public class VkPhysicalDeviceMultiviewPropertiesKHR extends VkPhysicalDeviceMult
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceMultiviewPropertiesKHR newInstance(long address) {
-            return new VkPhysicalDeviceMultiviewPropertiesKHR(address, container);
+        protected VkPhysicalDeviceMultiviewPropertiesKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

@@ -235,10 +235,6 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
         BASEPIPELINEINDEX = layout.offsetof(18);
     }
 
-    VkGraphicsPipelineCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkGraphicsPipelineCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -246,7 +242,7 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkGraphicsPipelineCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -414,28 +410,29 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
 
     /** Returns a new {@link VkGraphicsPipelineCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkGraphicsPipelineCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkGraphicsPipelineCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkGraphicsPipelineCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkGraphicsPipelineCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkGraphicsPipelineCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkGraphicsPipelineCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkGraphicsPipelineCreateInfo create() {
-        return new VkGraphicsPipelineCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkGraphicsPipelineCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkGraphicsPipelineCreateInfo} instance for the specified memory address. */
     public static VkGraphicsPipelineCreateInfo create(long address) {
-        return new VkGraphicsPipelineCreateInfo(address, null);
+        return wrap(VkGraphicsPipelineCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkGraphicsPipelineCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkGraphicsPipelineCreateInfo.class, address);
     }
 
     /**
@@ -444,7 +441,7 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkGraphicsPipelineCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -453,7 +450,7 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkGraphicsPipelineCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -462,7 +459,8 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkGraphicsPipelineCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -472,13 +470,13 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkGraphicsPipelineCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkGraphicsPipelineCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -499,7 +497,7 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkGraphicsPipelineCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkGraphicsPipelineCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -508,7 +506,7 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkGraphicsPipelineCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkGraphicsPipelineCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -536,7 +534,7 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkGraphicsPipelineCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -546,19 +544,19 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkGraphicsPipelineCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkGraphicsPipelineCreateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGraphicsPipelineCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkGraphicsPipelineCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineCreateInfo.FLAGS); }
     /** Unsafe version of {@link #stageCount}. */
-    public static int nstageCount(long struct) { return memGetInt(struct + VkGraphicsPipelineCreateInfo.STAGECOUNT); }
+    public static int nstageCount(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineCreateInfo.STAGECOUNT); }
     /** Unsafe version of {@link #pStages}. */
     public static VkPipelineShaderStageCreateInfo.Buffer npStages(long struct) { return VkPipelineShaderStageCreateInfo.create(memGetAddress(struct + VkGraphicsPipelineCreateInfo.PSTAGES), nstageCount(struct)); }
     /** Unsafe version of {@link #pVertexInputState}. */
@@ -580,24 +578,24 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
     /** Unsafe version of {@link #pDynamicState}. */
     @Nullable public static VkPipelineDynamicStateCreateInfo npDynamicState(long struct) { return VkPipelineDynamicStateCreateInfo.createSafe(memGetAddress(struct + VkGraphicsPipelineCreateInfo.PDYNAMICSTATE)); }
     /** Unsafe version of {@link #layout}. */
-    public static long nlayout(long struct) { return memGetLong(struct + VkGraphicsPipelineCreateInfo.LAYOUT); }
+    public static long nlayout(long struct) { return UNSAFE.getLong(null, struct + VkGraphicsPipelineCreateInfo.LAYOUT); }
     /** Unsafe version of {@link #renderPass}. */
-    public static long nrenderPass(long struct) { return memGetLong(struct + VkGraphicsPipelineCreateInfo.RENDERPASS); }
+    public static long nrenderPass(long struct) { return UNSAFE.getLong(null, struct + VkGraphicsPipelineCreateInfo.RENDERPASS); }
     /** Unsafe version of {@link #subpass}. */
-    public static int nsubpass(long struct) { return memGetInt(struct + VkGraphicsPipelineCreateInfo.SUBPASS); }
+    public static int nsubpass(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineCreateInfo.SUBPASS); }
     /** Unsafe version of {@link #basePipelineHandle}. */
-    public static long nbasePipelineHandle(long struct) { return memGetLong(struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEHANDLE); }
+    public static long nbasePipelineHandle(long struct) { return UNSAFE.getLong(null, struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEHANDLE); }
     /** Unsafe version of {@link #basePipelineIndex}. */
-    public static int nbasePipelineIndex(long struct) { return memGetInt(struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEINDEX); }
+    public static int nbasePipelineIndex(long struct) { return UNSAFE.getInt(null, struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkGraphicsPipelineCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGraphicsPipelineCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkGraphicsPipelineCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineCreateInfo.FLAGS, value); }
     /** Sets the specified value to the {@code stageCount} field of the specified {@code struct}. */
-    public static void nstageCount(long struct, int value) { memPutInt(struct + VkGraphicsPipelineCreateInfo.STAGECOUNT, value); }
+    public static void nstageCount(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineCreateInfo.STAGECOUNT, value); }
     /** Unsafe version of {@link #pStages(VkPipelineShaderStageCreateInfo.Buffer) pStages}. */
     public static void npStages(long struct, VkPipelineShaderStageCreateInfo.Buffer value) { memPutAddress(struct + VkGraphicsPipelineCreateInfo.PSTAGES, value.address()); nstageCount(struct, value.remaining()); }
     /** Unsafe version of {@link #pVertexInputState(VkPipelineVertexInputStateCreateInfo) pVertexInputState}. */
@@ -619,15 +617,15 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
     /** Unsafe version of {@link #pDynamicState(VkPipelineDynamicStateCreateInfo) pDynamicState}. */
     public static void npDynamicState(long struct, @Nullable VkPipelineDynamicStateCreateInfo value) { memPutAddress(struct + VkGraphicsPipelineCreateInfo.PDYNAMICSTATE, memAddressSafe(value)); }
     /** Unsafe version of {@link #layout(long) layout}. */
-    public static void nlayout(long struct, long value) { memPutLong(struct + VkGraphicsPipelineCreateInfo.LAYOUT, value); }
+    public static void nlayout(long struct, long value) { UNSAFE.putLong(null, struct + VkGraphicsPipelineCreateInfo.LAYOUT, value); }
     /** Unsafe version of {@link #renderPass(long) renderPass}. */
-    public static void nrenderPass(long struct, long value) { memPutLong(struct + VkGraphicsPipelineCreateInfo.RENDERPASS, value); }
+    public static void nrenderPass(long struct, long value) { UNSAFE.putLong(null, struct + VkGraphicsPipelineCreateInfo.RENDERPASS, value); }
     /** Unsafe version of {@link #subpass(int) subpass}. */
-    public static void nsubpass(long struct, int value) { memPutInt(struct + VkGraphicsPipelineCreateInfo.SUBPASS, value); }
+    public static void nsubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineCreateInfo.SUBPASS, value); }
     /** Unsafe version of {@link #basePipelineHandle(long) basePipelineHandle}. */
-    public static void nbasePipelineHandle(long struct, long value) { memPutLong(struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEHANDLE, value); }
+    public static void nbasePipelineHandle(long struct, long value) { UNSAFE.putLong(null, struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEHANDLE, value); }
     /** Unsafe version of {@link #basePipelineIndex(int) basePipelineIndex}. */
-    public static void nbasePipelineIndex(long struct, int value) { memPutInt(struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEINDEX, value); }
+    public static void nbasePipelineIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkGraphicsPipelineCreateInfo.BASEPIPELINEINDEX, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -671,6 +669,8 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
     /** An array of {@link VkGraphicsPipelineCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VkGraphicsPipelineCreateInfo, Buffer> implements NativeResource {
 
+        private static final VkGraphicsPipelineCreateInfo ELEMENT_FACTORY = VkGraphicsPipelineCreateInfo.create(-1L);
+
         /**
          * Creates a new {@link VkGraphicsPipelineCreateInfo.Buffer} instance backed by the specified container.
          *
@@ -698,18 +698,8 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkGraphicsPipelineCreateInfo newInstance(long address) {
-            return new VkGraphicsPipelineCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkGraphicsPipelineCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

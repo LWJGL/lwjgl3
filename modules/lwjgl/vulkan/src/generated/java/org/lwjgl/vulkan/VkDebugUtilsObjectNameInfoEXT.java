@@ -100,10 +100,6 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
         POBJECTNAME = layout.offsetof(4);
     }
 
-    VkDebugUtilsObjectNameInfoEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDebugUtilsObjectNameInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -111,7 +107,7 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDebugUtilsObjectNameInfoEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -182,28 +178,29 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
 
     /** Returns a new {@link VkDebugUtilsObjectNameInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDebugUtilsObjectNameInfoEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDebugUtilsObjectNameInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDebugUtilsObjectNameInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDebugUtilsObjectNameInfoEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDebugUtilsObjectNameInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDebugUtilsObjectNameInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkDebugUtilsObjectNameInfoEXT create() {
-        return new VkDebugUtilsObjectNameInfoEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDebugUtilsObjectNameInfoEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDebugUtilsObjectNameInfoEXT} instance for the specified memory address. */
     public static VkDebugUtilsObjectNameInfoEXT create(long address) {
-        return new VkDebugUtilsObjectNameInfoEXT(address, null);
+        return wrap(VkDebugUtilsObjectNameInfoEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDebugUtilsObjectNameInfoEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDebugUtilsObjectNameInfoEXT.class, address);
     }
 
     /**
@@ -212,7 +209,7 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDebugUtilsObjectNameInfoEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -221,7 +218,7 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDebugUtilsObjectNameInfoEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -230,7 +227,8 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDebugUtilsObjectNameInfoEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -240,13 +238,13 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDebugUtilsObjectNameInfoEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDebugUtilsObjectNameInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -267,7 +265,7 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkDebugUtilsObjectNameInfoEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDebugUtilsObjectNameInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -276,7 +274,7 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkDebugUtilsObjectNameInfoEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDebugUtilsObjectNameInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -304,7 +302,7 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDebugUtilsObjectNameInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -314,32 +312,32 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDebugUtilsObjectNameInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDebugUtilsObjectNameInfoEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsObjectNameInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDebugUtilsObjectNameInfoEXT.PNEXT); }
     /** Unsafe version of {@link #objectType}. */
-    public static int nobjectType(long struct) { return memGetInt(struct + VkDebugUtilsObjectNameInfoEXT.OBJECTTYPE); }
+    public static int nobjectType(long struct) { return UNSAFE.getInt(null, struct + VkDebugUtilsObjectNameInfoEXT.OBJECTTYPE); }
     /** Unsafe version of {@link #objectHandle}. */
-    public static long nobjectHandle(long struct) { return memGetLong(struct + VkDebugUtilsObjectNameInfoEXT.OBJECTHANDLE); }
+    public static long nobjectHandle(long struct) { return UNSAFE.getLong(null, struct + VkDebugUtilsObjectNameInfoEXT.OBJECTHANDLE); }
     /** Unsafe version of {@link #pObjectName}. */
     @Nullable public static ByteBuffer npObjectName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VkDebugUtilsObjectNameInfoEXT.POBJECTNAME)); }
     /** Unsafe version of {@link #pObjectNameString}. */
     @Nullable public static String npObjectNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkDebugUtilsObjectNameInfoEXT.POBJECTNAME)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDebugUtilsObjectNameInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsObjectNameInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDebugUtilsObjectNameInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #objectType(int) objectType}. */
-    public static void nobjectType(long struct, int value) { memPutInt(struct + VkDebugUtilsObjectNameInfoEXT.OBJECTTYPE, value); }
+    public static void nobjectType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugUtilsObjectNameInfoEXT.OBJECTTYPE, value); }
     /** Unsafe version of {@link #objectHandle(long) objectHandle}. */
-    public static void nobjectHandle(long struct, long value) { memPutLong(struct + VkDebugUtilsObjectNameInfoEXT.OBJECTHANDLE, value); }
+    public static void nobjectHandle(long struct, long value) { UNSAFE.putLong(null, struct + VkDebugUtilsObjectNameInfoEXT.OBJECTHANDLE, value); }
     /** Unsafe version of {@link #pObjectName(ByteBuffer) pObjectName}. */
     public static void npObjectName(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) { checkNT1Safe(value); }
@@ -350,6 +348,8 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
 
     /** An array of {@link VkDebugUtilsObjectNameInfoEXT} structs. */
     public static class Buffer extends StructBuffer<VkDebugUtilsObjectNameInfoEXT, Buffer> implements NativeResource {
+
+        private static final VkDebugUtilsObjectNameInfoEXT ELEMENT_FACTORY = VkDebugUtilsObjectNameInfoEXT.create(-1L);
 
         /**
          * Creates a new {@link VkDebugUtilsObjectNameInfoEXT.Buffer} instance backed by the specified container.
@@ -378,18 +378,8 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDebugUtilsObjectNameInfoEXT newInstance(long address) {
-            return new VkDebugUtilsObjectNameInfoEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDebugUtilsObjectNameInfoEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

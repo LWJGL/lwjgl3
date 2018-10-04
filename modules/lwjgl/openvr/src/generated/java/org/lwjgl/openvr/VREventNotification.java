@@ -51,10 +51,6 @@ public class VREventNotification extends Struct {
         NOTIFICATIONID = layout.offsetof(1);
     }
 
-    VREventNotification(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventNotification} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -62,7 +58,7 @@ public class VREventNotification extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventNotification(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -79,13 +75,13 @@ public class VREventNotification extends Struct {
 
     /** Returns a new {@link VREventNotification} instance for the specified memory address. */
     public static VREventNotification create(long address) {
-        return new VREventNotification(address, null);
+        return wrap(VREventNotification.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventNotification createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventNotification.class, address);
     }
 
     /**
@@ -95,26 +91,28 @@ public class VREventNotification extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventNotification.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventNotification.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #ulUserValue}. */
-    public static long nulUserValue(long struct) { return memGetLong(struct + VREventNotification.ULUSERVALUE); }
+    public static long nulUserValue(long struct) { return UNSAFE.getLong(null, struct + VREventNotification.ULUSERVALUE); }
     /** Unsafe version of {@link #notificationId}. */
-    public static int nnotificationId(long struct) { return memGetInt(struct + VREventNotification.NOTIFICATIONID); }
+    public static int nnotificationId(long struct) { return UNSAFE.getInt(null, struct + VREventNotification.NOTIFICATIONID); }
 
     // -----------------------------------
 
     /** An array of {@link VREventNotification} structs. */
     public static class Buffer extends StructBuffer<VREventNotification, Buffer> {
+
+        private static final VREventNotification ELEMENT_FACTORY = VREventNotification.create(-1L);
 
         /**
          * Creates a new {@link VREventNotification.Buffer} instance backed by the specified container.
@@ -143,18 +141,8 @@ public class VREventNotification extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventNotification newInstance(long address) {
-            return new VREventNotification(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventNotification getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code ulUserValue} field. */

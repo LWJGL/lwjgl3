@@ -88,10 +88,6 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
         EXTRAPRIMITIVEOVERESTIMATIONSIZE = layout.offsetof(4);
     }
 
-    VkPipelineRasterizationConservativeStateCreateInfoEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -99,7 +95,7 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineRasterizationConservativeStateCreateInfoEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -164,28 +160,29 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
 
     /** Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPipelineRasterizationConservativeStateCreateInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPipelineRasterizationConservativeStateCreateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT create() {
-        return new VkPipelineRasterizationConservativeStateCreateInfoEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineRasterizationConservativeStateCreateInfoEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance for the specified memory address. */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT create(long address) {
-        return new VkPipelineRasterizationConservativeStateCreateInfoEXT(address, null);
+        return wrap(VkPipelineRasterizationConservativeStateCreateInfoEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPipelineRasterizationConservativeStateCreateInfoEXT.class, address);
     }
 
     /**
@@ -194,7 +191,7 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -203,7 +200,7 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -212,7 +209,8 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -222,13 +220,13 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -249,7 +247,7 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
      * @param stack the stack from which to allocate
      */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPipelineRasterizationConservativeStateCreateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -258,7 +256,7 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
      * @param stack the stack from which to allocate
      */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPipelineRasterizationConservativeStateCreateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -286,7 +284,7 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -296,37 +294,39 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.FLAGS); }
     /** Unsafe version of {@link #conservativeRasterizationMode}. */
-    public static int nconservativeRasterizationMode(long struct) { return memGetInt(struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.CONSERVATIVERASTERIZATIONMODE); }
+    public static int nconservativeRasterizationMode(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.CONSERVATIVERASTERIZATIONMODE); }
     /** Unsafe version of {@link #extraPrimitiveOverestimationSize}. */
-    public static float nextraPrimitiveOverestimationSize(long struct) { return memGetFloat(struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.EXTRAPRIMITIVEOVERESTIMATIONSIZE); }
+    public static float nextraPrimitiveOverestimationSize(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.EXTRAPRIMITIVEOVERESTIMATIONSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.FLAGS, value); }
     /** Unsafe version of {@link #conservativeRasterizationMode(int) conservativeRasterizationMode}. */
-    public static void nconservativeRasterizationMode(long struct, int value) { memPutInt(struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.CONSERVATIVERASTERIZATIONMODE, value); }
+    public static void nconservativeRasterizationMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.CONSERVATIVERASTERIZATIONMODE, value); }
     /** Unsafe version of {@link #extraPrimitiveOverestimationSize(float) extraPrimitiveOverestimationSize}. */
-    public static void nextraPrimitiveOverestimationSize(long struct, float value) { memPutFloat(struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.EXTRAPRIMITIVEOVERESTIMATIONSIZE, value); }
+    public static void nextraPrimitiveOverestimationSize(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineRasterizationConservativeStateCreateInfoEXT.EXTRAPRIMITIVEOVERESTIMATIONSIZE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} structs. */
     public static class Buffer extends StructBuffer<VkPipelineRasterizationConservativeStateCreateInfoEXT, Buffer> implements NativeResource {
+
+        private static final VkPipelineRasterizationConservativeStateCreateInfoEXT ELEMENT_FACTORY = VkPipelineRasterizationConservativeStateCreateInfoEXT.create(-1L);
 
         /**
          * Creates a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer} instance backed by the specified container.
@@ -355,18 +355,8 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPipelineRasterizationConservativeStateCreateInfoEXT newInstance(long address) {
-            return new VkPipelineRasterizationConservativeStateCreateInfoEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPipelineRasterizationConservativeStateCreateInfoEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

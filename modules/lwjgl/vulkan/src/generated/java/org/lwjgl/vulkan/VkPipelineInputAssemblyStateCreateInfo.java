@@ -99,10 +99,6 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
         PRIMITIVERESTARTENABLE = layout.offsetof(4);
     }
 
-    VkPipelineInputAssemblyStateCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPipelineInputAssemblyStateCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -110,7 +106,7 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineInputAssemblyStateCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -176,28 +172,29 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
 
     /** Returns a new {@link VkPipelineInputAssemblyStateCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineInputAssemblyStateCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPipelineInputAssemblyStateCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineInputAssemblyStateCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineInputAssemblyStateCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPipelineInputAssemblyStateCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineInputAssemblyStateCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkPipelineInputAssemblyStateCreateInfo create() {
-        return new VkPipelineInputAssemblyStateCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineInputAssemblyStateCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPipelineInputAssemblyStateCreateInfo} instance for the specified memory address. */
     public static VkPipelineInputAssemblyStateCreateInfo create(long address) {
-        return new VkPipelineInputAssemblyStateCreateInfo(address, null);
+        return wrap(VkPipelineInputAssemblyStateCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineInputAssemblyStateCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPipelineInputAssemblyStateCreateInfo.class, address);
     }
 
     /**
@@ -206,7 +203,7 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineInputAssemblyStateCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -215,7 +212,7 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineInputAssemblyStateCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -224,7 +221,8 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineInputAssemblyStateCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -234,13 +232,13 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineInputAssemblyStateCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineInputAssemblyStateCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -261,7 +259,7 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
      * @param stack the stack from which to allocate
      */
     public static VkPipelineInputAssemblyStateCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPipelineInputAssemblyStateCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -270,7 +268,7 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
      * @param stack the stack from which to allocate
      */
     public static VkPipelineInputAssemblyStateCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPipelineInputAssemblyStateCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -298,7 +296,7 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineInputAssemblyStateCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -308,37 +306,39 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineInputAssemblyStateCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPipelineInputAssemblyStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineInputAssemblyStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkPipelineInputAssemblyStateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #topology}. */
-    public static int ntopology(long struct) { return memGetInt(struct + VkPipelineInputAssemblyStateCreateInfo.TOPOLOGY); }
+    public static int ntopology(long struct) { return UNSAFE.getInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.TOPOLOGY); }
     /** Unsafe version of {@link #primitiveRestartEnable}. */
-    public static int nprimitiveRestartEnable(long struct) { return memGetInt(struct + VkPipelineInputAssemblyStateCreateInfo.PRIMITIVERESTARTENABLE); }
+    public static int nprimitiveRestartEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.PRIMITIVERESTARTENABLE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineInputAssemblyStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineInputAssemblyStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineInputAssemblyStateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #topology(int) topology}. */
-    public static void ntopology(long struct, int value) { memPutInt(struct + VkPipelineInputAssemblyStateCreateInfo.TOPOLOGY, value); }
+    public static void ntopology(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.TOPOLOGY, value); }
     /** Unsafe version of {@link #primitiveRestartEnable(boolean) primitiveRestartEnable}. */
-    public static void nprimitiveRestartEnable(long struct, int value) { memPutInt(struct + VkPipelineInputAssemblyStateCreateInfo.PRIMITIVERESTARTENABLE, value); }
+    public static void nprimitiveRestartEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineInputAssemblyStateCreateInfo.PRIMITIVERESTARTENABLE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPipelineInputAssemblyStateCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VkPipelineInputAssemblyStateCreateInfo, Buffer> implements NativeResource {
+
+        private static final VkPipelineInputAssemblyStateCreateInfo ELEMENT_FACTORY = VkPipelineInputAssemblyStateCreateInfo.create(-1L);
 
         /**
          * Creates a new {@link VkPipelineInputAssemblyStateCreateInfo.Buffer} instance backed by the specified container.
@@ -367,18 +367,8 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPipelineInputAssemblyStateCreateInfo newInstance(long address) {
-            return new VkPipelineInputAssemblyStateCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPipelineInputAssemblyStateCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

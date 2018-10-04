@@ -85,10 +85,6 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
         ADDITIONALLATENCYSECONDS = layout.offsetof(6);
     }
 
-    OVRCameraExtrinsics(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRCameraExtrinsics} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -96,7 +92,7 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRCameraExtrinsics(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -174,28 +170,29 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
 
     /** Returns a new {@link OVRCameraExtrinsics} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRCameraExtrinsics malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRCameraExtrinsics.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRCameraExtrinsics} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRCameraExtrinsics calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRCameraExtrinsics.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRCameraExtrinsics} instance allocated with {@link BufferUtils}. */
     public static OVRCameraExtrinsics create() {
-        return new OVRCameraExtrinsics(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRCameraExtrinsics.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRCameraExtrinsics} instance for the specified memory address. */
     public static OVRCameraExtrinsics create(long address) {
-        return new OVRCameraExtrinsics(address, null);
+        return wrap(OVRCameraExtrinsics.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRCameraExtrinsics createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRCameraExtrinsics.class, address);
     }
 
     /**
@@ -204,7 +201,7 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRCameraExtrinsics.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -213,7 +210,7 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRCameraExtrinsics.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -222,7 +219,8 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRCameraExtrinsics.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -232,13 +230,13 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRCameraExtrinsics.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRCameraExtrinsics.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -259,7 +257,7 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRCameraExtrinsics mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRCameraExtrinsics.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -268,7 +266,7 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRCameraExtrinsics callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRCameraExtrinsics.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -296,7 +294,7 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRCameraExtrinsics.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -306,45 +304,47 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRCameraExtrinsics.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #LastChangedTimeSeconds}. */
-    public static double nLastChangedTimeSeconds(long struct) { return memGetDouble(struct + OVRCameraExtrinsics.LASTCHANGEDTIMESECONDS); }
+    public static double nLastChangedTimeSeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRCameraExtrinsics.LASTCHANGEDTIMESECONDS); }
     /** Unsafe version of {@link #CameraStatusFlags}. */
-    public static int nCameraStatusFlags(long struct) { return memGetInt(struct + OVRCameraExtrinsics.CAMERASTATUSFLAGS); }
+    public static int nCameraStatusFlags(long struct) { return UNSAFE.getInt(null, struct + OVRCameraExtrinsics.CAMERASTATUSFLAGS); }
     /** Unsafe version of {@link #AttachedToDevice}. */
-    public static int nAttachedToDevice(long struct) { return memGetInt(struct + OVRCameraExtrinsics.ATTACHEDTODEVICE); }
+    public static int nAttachedToDevice(long struct) { return UNSAFE.getInt(null, struct + OVRCameraExtrinsics.ATTACHEDTODEVICE); }
     /** Unsafe version of {@link #RelativePose}. */
     public static OVRPosef nRelativePose(long struct) { return OVRPosef.create(struct + OVRCameraExtrinsics.RELATIVEPOSE); }
     /** Unsafe version of {@link #LastExposureTimeSeconds}. */
-    public static double nLastExposureTimeSeconds(long struct) { return memGetDouble(struct + OVRCameraExtrinsics.LASTEXPOSURETIMESECONDS); }
+    public static double nLastExposureTimeSeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRCameraExtrinsics.LASTEXPOSURETIMESECONDS); }
     /** Unsafe version of {@link #ExposureLatencySeconds}. */
-    public static double nExposureLatencySeconds(long struct) { return memGetDouble(struct + OVRCameraExtrinsics.EXPOSURELATENCYSECONDS); }
+    public static double nExposureLatencySeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRCameraExtrinsics.EXPOSURELATENCYSECONDS); }
     /** Unsafe version of {@link #AdditionalLatencySeconds}. */
-    public static double nAdditionalLatencySeconds(long struct) { return memGetDouble(struct + OVRCameraExtrinsics.ADDITIONALLATENCYSECONDS); }
+    public static double nAdditionalLatencySeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRCameraExtrinsics.ADDITIONALLATENCYSECONDS); }
 
     /** Unsafe version of {@link #LastChangedTimeSeconds(double) LastChangedTimeSeconds}. */
-    public static void nLastChangedTimeSeconds(long struct, double value) { memPutDouble(struct + OVRCameraExtrinsics.LASTCHANGEDTIMESECONDS, value); }
+    public static void nLastChangedTimeSeconds(long struct, double value) { UNSAFE.putDouble(null, struct + OVRCameraExtrinsics.LASTCHANGEDTIMESECONDS, value); }
     /** Unsafe version of {@link #CameraStatusFlags(int) CameraStatusFlags}. */
-    public static void nCameraStatusFlags(long struct, int value) { memPutInt(struct + OVRCameraExtrinsics.CAMERASTATUSFLAGS, value); }
+    public static void nCameraStatusFlags(long struct, int value) { UNSAFE.putInt(null, struct + OVRCameraExtrinsics.CAMERASTATUSFLAGS, value); }
     /** Unsafe version of {@link #AttachedToDevice(int) AttachedToDevice}. */
-    public static void nAttachedToDevice(long struct, int value) { memPutInt(struct + OVRCameraExtrinsics.ATTACHEDTODEVICE, value); }
+    public static void nAttachedToDevice(long struct, int value) { UNSAFE.putInt(null, struct + OVRCameraExtrinsics.ATTACHEDTODEVICE, value); }
     /** Unsafe version of {@link #RelativePose(OVRPosef) RelativePose}. */
     public static void nRelativePose(long struct, OVRPosef value) { memCopy(value.address(), struct + OVRCameraExtrinsics.RELATIVEPOSE, OVRPosef.SIZEOF); }
     /** Unsafe version of {@link #LastExposureTimeSeconds(double) LastExposureTimeSeconds}. */
-    public static void nLastExposureTimeSeconds(long struct, double value) { memPutDouble(struct + OVRCameraExtrinsics.LASTEXPOSURETIMESECONDS, value); }
+    public static void nLastExposureTimeSeconds(long struct, double value) { UNSAFE.putDouble(null, struct + OVRCameraExtrinsics.LASTEXPOSURETIMESECONDS, value); }
     /** Unsafe version of {@link #ExposureLatencySeconds(double) ExposureLatencySeconds}. */
-    public static void nExposureLatencySeconds(long struct, double value) { memPutDouble(struct + OVRCameraExtrinsics.EXPOSURELATENCYSECONDS, value); }
+    public static void nExposureLatencySeconds(long struct, double value) { UNSAFE.putDouble(null, struct + OVRCameraExtrinsics.EXPOSURELATENCYSECONDS, value); }
     /** Unsafe version of {@link #AdditionalLatencySeconds(double) AdditionalLatencySeconds}. */
-    public static void nAdditionalLatencySeconds(long struct, double value) { memPutDouble(struct + OVRCameraExtrinsics.ADDITIONALLATENCYSECONDS, value); }
+    public static void nAdditionalLatencySeconds(long struct, double value) { UNSAFE.putDouble(null, struct + OVRCameraExtrinsics.ADDITIONALLATENCYSECONDS, value); }
 
     // -----------------------------------
 
     /** An array of {@link OVRCameraExtrinsics} structs. */
     public static class Buffer extends StructBuffer<OVRCameraExtrinsics, Buffer> implements NativeResource {
+
+        private static final OVRCameraExtrinsics ELEMENT_FACTORY = OVRCameraExtrinsics.create(-1L);
 
         /**
          * Creates a new {@link OVRCameraExtrinsics.Buffer} instance backed by the specified container.
@@ -373,18 +373,8 @@ public class OVRCameraExtrinsics extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRCameraExtrinsics newInstance(long address) {
-            return new OVRCameraExtrinsics(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRCameraExtrinsics getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code LastChangedTimeSeconds} field. */

@@ -72,10 +72,6 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
         SHADERDRAWPARAMETERS = layout.offsetof(2);
     }
 
-    VkPhysicalDeviceShaderDrawParameterFeatures(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceShaderDrawParameterFeatures} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -83,7 +79,7 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceShaderDrawParameterFeatures(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -135,28 +131,29 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
 
     /** Returns a new {@link VkPhysicalDeviceShaderDrawParameterFeatures} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShaderDrawParameterFeatures malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceShaderDrawParameterFeatures.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceShaderDrawParameterFeatures} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShaderDrawParameterFeatures calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceShaderDrawParameterFeatures.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceShaderDrawParameterFeatures} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceShaderDrawParameterFeatures create() {
-        return new VkPhysicalDeviceShaderDrawParameterFeatures(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceShaderDrawParameterFeatures.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceShaderDrawParameterFeatures} instance for the specified memory address. */
     public static VkPhysicalDeviceShaderDrawParameterFeatures create(long address) {
-        return new VkPhysicalDeviceShaderDrawParameterFeatures(address, null);
+        return wrap(VkPhysicalDeviceShaderDrawParameterFeatures.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShaderDrawParameterFeatures createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceShaderDrawParameterFeatures.class, address);
     }
 
     /**
@@ -165,7 +162,7 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderDrawParameterFeatures.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -174,7 +171,7 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderDrawParameterFeatures.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -183,7 +180,8 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderDrawParameterFeatures.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -193,13 +191,13 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderDrawParameterFeatures.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShaderDrawParameterFeatures.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -220,7 +218,7 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceShaderDrawParameterFeatures mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceShaderDrawParameterFeatures.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -229,7 +227,7 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceShaderDrawParameterFeatures callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceShaderDrawParameterFeatures.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -257,7 +255,7 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderDrawParameterFeatures.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -267,29 +265,31 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderDrawParameterFeatures.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderDrawParameterFeatures.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderDrawParameterFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderDrawParameterFeatures.PNEXT); }
     /** Unsafe version of {@link #shaderDrawParameters}. */
-    public static int nshaderDrawParameters(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderDrawParameterFeatures.SHADERDRAWPARAMETERS); }
+    public static int nshaderDrawParameters(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderDrawParameterFeatures.SHADERDRAWPARAMETERS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderDrawParameterFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderDrawParameterFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderDrawParameterFeatures.PNEXT, value); }
     /** Unsafe version of {@link #shaderDrawParameters(boolean) shaderDrawParameters}. */
-    public static void nshaderDrawParameters(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderDrawParameterFeatures.SHADERDRAWPARAMETERS, value); }
+    public static void nshaderDrawParameters(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderDrawParameterFeatures.SHADERDRAWPARAMETERS, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceShaderDrawParameterFeatures} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceShaderDrawParameterFeatures, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceShaderDrawParameterFeatures ELEMENT_FACTORY = VkPhysicalDeviceShaderDrawParameterFeatures.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceShaderDrawParameterFeatures.Buffer} instance backed by the specified container.
@@ -318,18 +318,8 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends Struct implemen
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceShaderDrawParameterFeatures newInstance(long address) {
-            return new VkPhysicalDeviceShaderDrawParameterFeatures(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceShaderDrawParameterFeatures getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

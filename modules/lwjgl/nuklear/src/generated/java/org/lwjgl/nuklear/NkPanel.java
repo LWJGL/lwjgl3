@@ -119,10 +119,6 @@ public class NkPanel extends Struct {
         PARENT = layout.offsetof(17);
     }
 
-    NkPanel(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkPanel} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -130,7 +126,7 @@ public class NkPanel extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkPanel(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -201,13 +197,13 @@ public class NkPanel extends Struct {
 
     /** Returns a new {@link NkPanel} instance for the specified memory address. */
     public static NkPanel create(long address) {
-        return new NkPanel(address, null);
+        return wrap(NkPanel.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkPanel createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkPanel.class, address);
     }
 
     /**
@@ -217,21 +213,21 @@ public class NkPanel extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkPanel.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkPanel.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return memGetInt(struct + NkPanel.TYPE); }
+    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkPanel.TYPE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + NkPanel.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + NkPanel.FLAGS); }
     /** Unsafe version of {@link #bounds}. */
     public static NkRect nbounds(long struct) { return NkRect.create(struct + NkPanel.BOUNDS); }
     /** Unsafe version of {@link #offset_x(int) offset_x}. */
@@ -239,19 +235,19 @@ public class NkPanel extends Struct {
     /** Unsafe version of {@link #offset_y(int) offset_y}. */
     public static IntBuffer noffset_y(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + NkPanel.OFFSET_Y), capacity); }
     /** Unsafe version of {@link #at_x}. */
-    public static float nat_x(long struct) { return memGetFloat(struct + NkPanel.AT_X); }
+    public static float nat_x(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.AT_X); }
     /** Unsafe version of {@link #at_y}. */
-    public static float nat_y(long struct) { return memGetFloat(struct + NkPanel.AT_Y); }
+    public static float nat_y(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.AT_Y); }
     /** Unsafe version of {@link #max_x}. */
-    public static float nmax_x(long struct) { return memGetFloat(struct + NkPanel.MAX_X); }
+    public static float nmax_x(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.MAX_X); }
     /** Unsafe version of {@link #footer_height}. */
-    public static float nfooter_height(long struct) { return memGetFloat(struct + NkPanel.FOOTER_HEIGHT); }
+    public static float nfooter_height(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.FOOTER_HEIGHT); }
     /** Unsafe version of {@link #header_height}. */
-    public static float nheader_height(long struct) { return memGetFloat(struct + NkPanel.HEADER_HEIGHT); }
+    public static float nheader_height(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.HEADER_HEIGHT); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return memGetFloat(struct + NkPanel.BORDER); }
+    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkPanel.BORDER); }
     /** Unsafe version of {@link #has_scrolling}. */
-    public static int nhas_scrolling(long struct) { return memGetInt(struct + NkPanel.HAS_SCROLLING); }
+    public static int nhas_scrolling(long struct) { return UNSAFE.getInt(null, struct + NkPanel.HAS_SCROLLING); }
     /** Unsafe version of {@link #clip}. */
     public static NkRect nclip(long struct) { return NkRect.create(struct + NkPanel.CLIP); }
     /** Unsafe version of {@link #menu}. */
@@ -269,6 +265,8 @@ public class NkPanel extends Struct {
 
     /** An array of {@link NkPanel} structs. */
     public static class Buffer extends StructBuffer<NkPanel, Buffer> {
+
+        private static final NkPanel ELEMENT_FACTORY = NkPanel.create(-1L);
 
         /**
          * Creates a new {@link NkPanel.Buffer} instance backed by the specified container.
@@ -297,18 +295,8 @@ public class NkPanel extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkPanel newInstance(long address) {
-            return new NkPanel(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkPanel getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code type} field. */

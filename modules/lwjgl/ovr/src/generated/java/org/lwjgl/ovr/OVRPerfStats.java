@@ -106,10 +106,6 @@ public class OVRPerfStats extends Struct implements NativeResource {
         VISIBLEPROCESSID = layout.offsetof(5);
     }
 
-    OVRPerfStats(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRPerfStats} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -117,7 +113,7 @@ public class OVRPerfStats extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRPerfStats(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -147,28 +143,29 @@ public class OVRPerfStats extends Struct implements NativeResource {
 
     /** Returns a new {@link OVRPerfStats} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRPerfStats malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRPerfStats.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRPerfStats} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRPerfStats calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRPerfStats.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRPerfStats} instance allocated with {@link BufferUtils}. */
     public static OVRPerfStats create() {
-        return new OVRPerfStats(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRPerfStats.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRPerfStats} instance for the specified memory address. */
     public static OVRPerfStats create(long address) {
-        return new OVRPerfStats(address, null);
+        return wrap(OVRPerfStats.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRPerfStats createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRPerfStats.class, address);
     }
 
     /**
@@ -177,7 +174,7 @@ public class OVRPerfStats extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRPerfStats.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -186,7 +183,7 @@ public class OVRPerfStats extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRPerfStats.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -195,7 +192,8 @@ public class OVRPerfStats extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRPerfStats.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -205,13 +203,13 @@ public class OVRPerfStats extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRPerfStats.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRPerfStats.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -232,7 +230,7 @@ public class OVRPerfStats extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRPerfStats mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRPerfStats.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -241,7 +239,7 @@ public class OVRPerfStats extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRPerfStats callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRPerfStats.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -269,7 +267,7 @@ public class OVRPerfStats extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRPerfStats.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -279,7 +277,7 @@ public class OVRPerfStats extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRPerfStats.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -291,20 +289,22 @@ public class OVRPerfStats extends Struct implements NativeResource {
         return OVRPerfStatsPerCompositorFrame.create(struct + OVRPerfStats.FRAMESTATS + check(index, nFrameStatsCount(struct)) * OVRPerfStatsPerCompositorFrame.SIZEOF);
     }
     /** Unsafe version of {@link #FrameStatsCount}. */
-    public static int nFrameStatsCount(long struct) { return memGetInt(struct + OVRPerfStats.FRAMESTATSCOUNT); }
+    public static int nFrameStatsCount(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStats.FRAMESTATSCOUNT); }
     /** Unsafe version of {@link #AnyFrameStatsDropped}. */
-    public static boolean nAnyFrameStatsDropped(long struct) { return memGetByte(struct + OVRPerfStats.ANYFRAMESTATSDROPPED) != 0; }
+    public static boolean nAnyFrameStatsDropped(long struct) { return UNSAFE.getByte(null, struct + OVRPerfStats.ANYFRAMESTATSDROPPED) != 0; }
     /** Unsafe version of {@link #AdaptiveGpuPerformanceScale}. */
-    public static float nAdaptiveGpuPerformanceScale(long struct) { return memGetFloat(struct + OVRPerfStats.ADAPTIVEGPUPERFORMANCESCALE); }
+    public static float nAdaptiveGpuPerformanceScale(long struct) { return UNSAFE.getFloat(null, struct + OVRPerfStats.ADAPTIVEGPUPERFORMANCESCALE); }
     /** Unsafe version of {@link #AswIsAvailable}. */
-    public static boolean nAswIsAvailable(long struct) { return memGetByte(struct + OVRPerfStats.ASWISAVAILABLE) != 0; }
+    public static boolean nAswIsAvailable(long struct) { return UNSAFE.getByte(null, struct + OVRPerfStats.ASWISAVAILABLE) != 0; }
     /** Unsafe version of {@link #VisibleProcessId}. */
-    public static int nVisibleProcessId(long struct) { return memGetInt(struct + OVRPerfStats.VISIBLEPROCESSID); }
+    public static int nVisibleProcessId(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStats.VISIBLEPROCESSID); }
 
     // -----------------------------------
 
     /** An array of {@link OVRPerfStats} structs. */
     public static class Buffer extends StructBuffer<OVRPerfStats, Buffer> implements NativeResource {
+
+        private static final OVRPerfStats ELEMENT_FACTORY = OVRPerfStats.create(-1L);
 
         /**
          * Creates a new {@link OVRPerfStats.Buffer} instance backed by the specified container.
@@ -333,18 +333,8 @@ public class OVRPerfStats extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRPerfStats newInstance(long address) {
-            return new OVRPerfStats(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRPerfStats getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link OVRPerfStatsPerCompositorFrame}.Buffer view of the {@code FrameStats} field. */

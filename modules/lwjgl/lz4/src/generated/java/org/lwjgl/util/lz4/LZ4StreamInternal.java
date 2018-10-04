@@ -72,10 +72,6 @@ public class LZ4StreamInternal extends Struct {
         DICTSIZE = layout.offsetof(6);
     }
 
-    LZ4StreamInternal(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link LZ4StreamInternal} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -83,7 +79,7 @@ public class LZ4StreamInternal extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public LZ4StreamInternal(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -122,13 +118,13 @@ public class LZ4StreamInternal extends Struct {
 
     /** Returns a new {@link LZ4StreamInternal} instance for the specified memory address. */
     public static LZ4StreamInternal create(long address) {
-        return new LZ4StreamInternal(address, null);
+        return wrap(LZ4StreamInternal.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4StreamInternal createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(LZ4StreamInternal.class, address);
     }
 
     /**
@@ -138,13 +134,13 @@ public class LZ4StreamInternal extends Struct {
      * @param capacity the buffer capacity
      */
     public static LZ4StreamInternal.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4StreamInternal.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -153,25 +149,27 @@ public class LZ4StreamInternal extends Struct {
     public static IntBuffer nhashTable(long struct) { return memIntBuffer(struct + LZ4StreamInternal.HASHTABLE, LZ4_HASH_SIZE_U32); }
     /** Unsafe version of {@link #hashTable(int) hashTable}. */
     public static int nhashTable(long struct, int index) {
-        return memGetInt(struct + LZ4StreamInternal.HASHTABLE + check(index, LZ4_HASH_SIZE_U32) * 4);
+        return UNSAFE.getInt(null, struct + LZ4StreamInternal.HASHTABLE + check(index, LZ4_HASH_SIZE_U32) * 4);
     }
     /** Unsafe version of {@link #currentOffset}. */
-    public static int ncurrentOffset(long struct) { return memGetInt(struct + LZ4StreamInternal.CURRENTOFFSET); }
+    public static int ncurrentOffset(long struct) { return UNSAFE.getInt(null, struct + LZ4StreamInternal.CURRENTOFFSET); }
     /** Unsafe version of {@link #initCheck}. */
-    public static int ninitCheck(long struct) { return memGetInt(struct + LZ4StreamInternal.INITCHECK); }
+    public static int ninitCheck(long struct) { return UNSAFE.getInt(null, struct + LZ4StreamInternal.INITCHECK); }
     /** Unsafe version of {@link #tableType}. */
-    public static short ntableType(long struct) { return memGetShort(struct + LZ4StreamInternal.TABLETYPE); }
+    public static short ntableType(long struct) { return UNSAFE.getShort(null, struct + LZ4StreamInternal.TABLETYPE); }
     /** Unsafe version of {@link #dictionary(int) dictionary}. */
     public static ByteBuffer ndictionary(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4StreamInternal.DICTIONARY), capacity); }
     /** Unsafe version of {@link #dictCtx}. */
     public static LZ4StreamInternal ndictCtx(long struct) { return LZ4StreamInternal.create(memGetAddress(struct + LZ4StreamInternal.DICTCTX)); }
     /** Unsafe version of {@link #dictSize}. */
-    public static int ndictSize(long struct) { return memGetInt(struct + LZ4StreamInternal.DICTSIZE); }
+    public static int ndictSize(long struct) { return UNSAFE.getInt(null, struct + LZ4StreamInternal.DICTSIZE); }
 
     // -----------------------------------
 
     /** An array of {@link LZ4StreamInternal} structs. */
     public static class Buffer extends StructBuffer<LZ4StreamInternal, Buffer> {
+
+        private static final LZ4StreamInternal ELEMENT_FACTORY = LZ4StreamInternal.create(-1L);
 
         /**
          * Creates a new {@link LZ4StreamInternal.Buffer} instance backed by the specified container.
@@ -200,18 +198,8 @@ public class LZ4StreamInternal extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected LZ4StreamInternal newInstance(long address) {
-            return new LZ4StreamInternal(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected LZ4StreamInternal getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link IntBuffer} view of the {@code hashTable} field. */

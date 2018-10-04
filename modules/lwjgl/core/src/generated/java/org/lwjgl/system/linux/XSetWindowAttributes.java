@@ -104,10 +104,6 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
         CURSOR = layout.offsetof(14);
     }
 
-    XSetWindowAttributes(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link XSetWindowAttributes} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -115,7 +111,7 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public XSetWindowAttributes(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -246,28 +242,29 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
 
     /** Returns a new {@link XSetWindowAttributes} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XSetWindowAttributes malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(XSetWindowAttributes.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link XSetWindowAttributes} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XSetWindowAttributes calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(XSetWindowAttributes.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link XSetWindowAttributes} instance allocated with {@link BufferUtils}. */
     public static XSetWindowAttributes create() {
-        return new XSetWindowAttributes(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(XSetWindowAttributes.class, memAddress(container), container);
     }
 
     /** Returns a new {@link XSetWindowAttributes} instance for the specified memory address. */
     public static XSetWindowAttributes create(long address) {
-        return new XSetWindowAttributes(address, null);
+        return wrap(XSetWindowAttributes.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XSetWindowAttributes createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(XSetWindowAttributes.class, address);
     }
 
     /**
@@ -276,7 +273,7 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XSetWindowAttributes.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -285,7 +282,7 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XSetWindowAttributes.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -294,7 +291,8 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XSetWindowAttributes.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -304,13 +302,13 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XSetWindowAttributes.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XSetWindowAttributes.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -331,7 +329,7 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XSetWindowAttributes mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(XSetWindowAttributes.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -340,7 +338,7 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XSetWindowAttributes callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(XSetWindowAttributes.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -368,7 +366,7 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XSetWindowAttributes.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -378,7 +376,7 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XSetWindowAttributes.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -392,23 +390,23 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
     /** Unsafe version of {@link #border_pixel}. */
     public static long nborder_pixel(long struct) { return memGetAddress(struct + XSetWindowAttributes.BORDER_PIXEL); }
     /** Unsafe version of {@link #bit_gravity}. */
-    public static int nbit_gravity(long struct) { return memGetInt(struct + XSetWindowAttributes.BIT_GRAVITY); }
+    public static int nbit_gravity(long struct) { return UNSAFE.getInt(null, struct + XSetWindowAttributes.BIT_GRAVITY); }
     /** Unsafe version of {@link #win_gravity}. */
-    public static int nwin_gravity(long struct) { return memGetInt(struct + XSetWindowAttributes.WIN_GRAVITY); }
+    public static int nwin_gravity(long struct) { return UNSAFE.getInt(null, struct + XSetWindowAttributes.WIN_GRAVITY); }
     /** Unsafe version of {@link #backing_store}. */
-    public static int nbacking_store(long struct) { return memGetInt(struct + XSetWindowAttributes.BACKING_STORE); }
+    public static int nbacking_store(long struct) { return UNSAFE.getInt(null, struct + XSetWindowAttributes.BACKING_STORE); }
     /** Unsafe version of {@link #backing_planes}. */
     public static long nbacking_planes(long struct) { return memGetAddress(struct + XSetWindowAttributes.BACKING_PLANES); }
     /** Unsafe version of {@link #backing_pixel}. */
     public static long nbacking_pixel(long struct) { return memGetAddress(struct + XSetWindowAttributes.BACKING_PIXEL); }
     /** Unsafe version of {@link #save_under}. */
-    public static int nsave_under(long struct) { return memGetInt(struct + XSetWindowAttributes.SAVE_UNDER); }
+    public static int nsave_under(long struct) { return UNSAFE.getInt(null, struct + XSetWindowAttributes.SAVE_UNDER); }
     /** Unsafe version of {@link #event_mask}. */
     public static long nevent_mask(long struct) { return memGetAddress(struct + XSetWindowAttributes.EVENT_MASK); }
     /** Unsafe version of {@link #do_not_propagate_mask}. */
     public static long ndo_not_propagate_mask(long struct) { return memGetAddress(struct + XSetWindowAttributes.DO_NOT_PROPAGATE_MASK); }
     /** Unsafe version of {@link #override_redirect}. */
-    public static int noverride_redirect(long struct) { return memGetInt(struct + XSetWindowAttributes.OVERRIDE_REDIRECT); }
+    public static int noverride_redirect(long struct) { return UNSAFE.getInt(null, struct + XSetWindowAttributes.OVERRIDE_REDIRECT); }
     /** Unsafe version of {@link #colormap}. */
     public static long ncolormap(long struct) { return memGetAddress(struct + XSetWindowAttributes.COLORMAP); }
     /** Unsafe version of {@link #cursor}. */
@@ -423,23 +421,23 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
     /** Unsafe version of {@link #border_pixel(long) border_pixel}. */
     public static void nborder_pixel(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.BORDER_PIXEL, value); }
     /** Unsafe version of {@link #bit_gravity(int) bit_gravity}. */
-    public static void nbit_gravity(long struct, int value) { memPutInt(struct + XSetWindowAttributes.BIT_GRAVITY, value); }
+    public static void nbit_gravity(long struct, int value) { UNSAFE.putInt(null, struct + XSetWindowAttributes.BIT_GRAVITY, value); }
     /** Unsafe version of {@link #win_gravity(int) win_gravity}. */
-    public static void nwin_gravity(long struct, int value) { memPutInt(struct + XSetWindowAttributes.WIN_GRAVITY, value); }
+    public static void nwin_gravity(long struct, int value) { UNSAFE.putInt(null, struct + XSetWindowAttributes.WIN_GRAVITY, value); }
     /** Unsafe version of {@link #backing_store(int) backing_store}. */
-    public static void nbacking_store(long struct, int value) { memPutInt(struct + XSetWindowAttributes.BACKING_STORE, value); }
+    public static void nbacking_store(long struct, int value) { UNSAFE.putInt(null, struct + XSetWindowAttributes.BACKING_STORE, value); }
     /** Unsafe version of {@link #backing_planes(long) backing_planes}. */
     public static void nbacking_planes(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.BACKING_PLANES, value); }
     /** Unsafe version of {@link #backing_pixel(long) backing_pixel}. */
     public static void nbacking_pixel(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.BACKING_PIXEL, value); }
     /** Unsafe version of {@link #save_under(boolean) save_under}. */
-    public static void nsave_under(long struct, int value) { memPutInt(struct + XSetWindowAttributes.SAVE_UNDER, value); }
+    public static void nsave_under(long struct, int value) { UNSAFE.putInt(null, struct + XSetWindowAttributes.SAVE_UNDER, value); }
     /** Unsafe version of {@link #event_mask(long) event_mask}. */
     public static void nevent_mask(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.EVENT_MASK, value); }
     /** Unsafe version of {@link #do_not_propagate_mask(long) do_not_propagate_mask}. */
     public static void ndo_not_propagate_mask(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.DO_NOT_PROPAGATE_MASK, value); }
     /** Unsafe version of {@link #override_redirect(boolean) override_redirect}. */
-    public static void noverride_redirect(long struct, int value) { memPutInt(struct + XSetWindowAttributes.OVERRIDE_REDIRECT, value); }
+    public static void noverride_redirect(long struct, int value) { UNSAFE.putInt(null, struct + XSetWindowAttributes.OVERRIDE_REDIRECT, value); }
     /** Unsafe version of {@link #colormap(long) colormap}. */
     public static void ncolormap(long struct, long value) { memPutAddress(struct + XSetWindowAttributes.COLORMAP, value); }
     /** Unsafe version of {@link #cursor(long) cursor}. */
@@ -449,6 +447,8 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
 
     /** An array of {@link XSetWindowAttributes} structs. */
     public static class Buffer extends StructBuffer<XSetWindowAttributes, Buffer> implements NativeResource {
+
+        private static final XSetWindowAttributes ELEMENT_FACTORY = XSetWindowAttributes.create(-1L);
 
         /**
          * Creates a new {@link XSetWindowAttributes.Buffer} instance backed by the specified container.
@@ -477,18 +477,8 @@ public class XSetWindowAttributes extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected XSetWindowAttributes newInstance(long address) {
-            return new XSetWindowAttributes(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected XSetWindowAttributes getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code background_pixmap} field. */

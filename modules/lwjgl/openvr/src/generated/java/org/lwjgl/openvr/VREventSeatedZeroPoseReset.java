@@ -45,10 +45,6 @@ public class VREventSeatedZeroPoseReset extends Struct {
         BRESETBYSYSTEMMENU = layout.offsetof(0);
     }
 
-    VREventSeatedZeroPoseReset(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventSeatedZeroPoseReset} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -56,7 +52,7 @@ public class VREventSeatedZeroPoseReset extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventSeatedZeroPoseReset(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -70,13 +66,13 @@ public class VREventSeatedZeroPoseReset extends Struct {
 
     /** Returns a new {@link VREventSeatedZeroPoseReset} instance for the specified memory address. */
     public static VREventSeatedZeroPoseReset create(long address) {
-        return new VREventSeatedZeroPoseReset(address, null);
+        return wrap(VREventSeatedZeroPoseReset.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventSeatedZeroPoseReset createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventSeatedZeroPoseReset.class, address);
     }
 
     /**
@@ -86,24 +82,26 @@ public class VREventSeatedZeroPoseReset extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventSeatedZeroPoseReset.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventSeatedZeroPoseReset.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #bResetBySystemMenu}. */
-    public static boolean nbResetBySystemMenu(long struct) { return memGetByte(struct + VREventSeatedZeroPoseReset.BRESETBYSYSTEMMENU) != 0; }
+    public static boolean nbResetBySystemMenu(long struct) { return UNSAFE.getByte(null, struct + VREventSeatedZeroPoseReset.BRESETBYSYSTEMMENU) != 0; }
 
     // -----------------------------------
 
     /** An array of {@link VREventSeatedZeroPoseReset} structs. */
     public static class Buffer extends StructBuffer<VREventSeatedZeroPoseReset, Buffer> {
+
+        private static final VREventSeatedZeroPoseReset ELEMENT_FACTORY = VREventSeatedZeroPoseReset.create(-1L);
 
         /**
          * Creates a new {@link VREventSeatedZeroPoseReset.Buffer} instance backed by the specified container.
@@ -132,18 +130,8 @@ public class VREventSeatedZeroPoseReset extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventSeatedZeroPoseReset newInstance(long address) {
-            return new VREventSeatedZeroPoseReset(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventSeatedZeroPoseReset getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code bResetBySystemMenu} field. */

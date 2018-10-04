@@ -151,10 +151,6 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
         FORCEEXPLICITRECONSTRUCTION = layout.offsetof(9);
     }
 
-    VkSamplerYcbcrConversionCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSamplerYcbcrConversionCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -162,7 +158,7 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSamplerYcbcrConversionCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -264,28 +260,29 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
 
     /** Returns a new {@link VkSamplerYcbcrConversionCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSamplerYcbcrConversionCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkSamplerYcbcrConversionCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkSamplerYcbcrConversionCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSamplerYcbcrConversionCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkSamplerYcbcrConversionCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkSamplerYcbcrConversionCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkSamplerYcbcrConversionCreateInfo create() {
-        return new VkSamplerYcbcrConversionCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSamplerYcbcrConversionCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkSamplerYcbcrConversionCreateInfo} instance for the specified memory address. */
     public static VkSamplerYcbcrConversionCreateInfo create(long address) {
-        return new VkSamplerYcbcrConversionCreateInfo(address, null);
+        return wrap(VkSamplerYcbcrConversionCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSamplerYcbcrConversionCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSamplerYcbcrConversionCreateInfo.class, address);
     }
 
     /**
@@ -294,7 +291,7 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -303,7 +300,7 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -312,7 +309,8 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -322,13 +320,13 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSamplerYcbcrConversionCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -349,7 +347,7 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkSamplerYcbcrConversionCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkSamplerYcbcrConversionCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -358,7 +356,7 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkSamplerYcbcrConversionCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkSamplerYcbcrConversionCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -386,7 +384,7 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -396,57 +394,59 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionCreateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSamplerYcbcrConversionCreateInfo.PNEXT); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionCreateInfo.FORMAT); }
+    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionCreateInfo.FORMAT); }
     /** Unsafe version of {@link #ycbcrModel}. */
-    public static int nycbcrModel(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionCreateInfo.YCBCRMODEL); }
+    public static int nycbcrModel(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionCreateInfo.YCBCRMODEL); }
     /** Unsafe version of {@link #ycbcrRange}. */
-    public static int nycbcrRange(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionCreateInfo.YCBCRRANGE); }
+    public static int nycbcrRange(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionCreateInfo.YCBCRRANGE); }
     /** Unsafe version of {@link #components}. */
     public static VkComponentMapping ncomponents(long struct) { return VkComponentMapping.create(struct + VkSamplerYcbcrConversionCreateInfo.COMPONENTS); }
     /** Unsafe version of {@link #xChromaOffset}. */
-    public static int nxChromaOffset(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionCreateInfo.XCHROMAOFFSET); }
+    public static int nxChromaOffset(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionCreateInfo.XCHROMAOFFSET); }
     /** Unsafe version of {@link #yChromaOffset}. */
-    public static int nyChromaOffset(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionCreateInfo.YCHROMAOFFSET); }
+    public static int nyChromaOffset(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionCreateInfo.YCHROMAOFFSET); }
     /** Unsafe version of {@link #chromaFilter}. */
-    public static int nchromaFilter(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionCreateInfo.CHROMAFILTER); }
+    public static int nchromaFilter(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionCreateInfo.CHROMAFILTER); }
     /** Unsafe version of {@link #forceExplicitReconstruction}. */
-    public static int nforceExplicitReconstruction(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionCreateInfo.FORCEEXPLICITRECONSTRUCTION); }
+    public static int nforceExplicitReconstruction(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionCreateInfo.FORCEEXPLICITRECONSTRUCTION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSamplerYcbcrConversionCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionCreateInfo.FORMAT, value); }
+    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionCreateInfo.FORMAT, value); }
     /** Unsafe version of {@link #ycbcrModel(int) ycbcrModel}. */
-    public static void nycbcrModel(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionCreateInfo.YCBCRMODEL, value); }
+    public static void nycbcrModel(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionCreateInfo.YCBCRMODEL, value); }
     /** Unsafe version of {@link #ycbcrRange(int) ycbcrRange}. */
-    public static void nycbcrRange(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionCreateInfo.YCBCRRANGE, value); }
+    public static void nycbcrRange(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionCreateInfo.YCBCRRANGE, value); }
     /** Unsafe version of {@link #components(VkComponentMapping) components}. */
     public static void ncomponents(long struct, VkComponentMapping value) { memCopy(value.address(), struct + VkSamplerYcbcrConversionCreateInfo.COMPONENTS, VkComponentMapping.SIZEOF); }
     /** Unsafe version of {@link #xChromaOffset(int) xChromaOffset}. */
-    public static void nxChromaOffset(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionCreateInfo.XCHROMAOFFSET, value); }
+    public static void nxChromaOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionCreateInfo.XCHROMAOFFSET, value); }
     /** Unsafe version of {@link #yChromaOffset(int) yChromaOffset}. */
-    public static void nyChromaOffset(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionCreateInfo.YCHROMAOFFSET, value); }
+    public static void nyChromaOffset(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionCreateInfo.YCHROMAOFFSET, value); }
     /** Unsafe version of {@link #chromaFilter(int) chromaFilter}. */
-    public static void nchromaFilter(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionCreateInfo.CHROMAFILTER, value); }
+    public static void nchromaFilter(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionCreateInfo.CHROMAFILTER, value); }
     /** Unsafe version of {@link #forceExplicitReconstruction(boolean) forceExplicitReconstruction}. */
-    public static void nforceExplicitReconstruction(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionCreateInfo.FORCEEXPLICITRECONSTRUCTION, value); }
+    public static void nforceExplicitReconstruction(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionCreateInfo.FORCEEXPLICITRECONSTRUCTION, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkSamplerYcbcrConversionCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VkSamplerYcbcrConversionCreateInfo, Buffer> implements NativeResource {
+
+        private static final VkSamplerYcbcrConversionCreateInfo ELEMENT_FACTORY = VkSamplerYcbcrConversionCreateInfo.create(-1L);
 
         /**
          * Creates a new {@link VkSamplerYcbcrConversionCreateInfo.Buffer} instance backed by the specified container.
@@ -475,18 +475,8 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSamplerYcbcrConversionCreateInfo newInstance(long address) {
-            return new VkSamplerYcbcrConversionCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSamplerYcbcrConversionCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

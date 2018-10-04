@@ -28,10 +28,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequirements {
 
-    VkMemoryDedicatedRequirementsKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkMemoryDedicatedRequirementsKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -39,7 +35,7 @@ public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequireme
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkMemoryDedicatedRequirementsKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -77,13 +73,13 @@ public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequireme
 
     /** Returns a new {@link VkMemoryDedicatedRequirementsKHR} instance for the specified memory address. */
     public static VkMemoryDedicatedRequirementsKHR create(long address) {
-        return new VkMemoryDedicatedRequirementsKHR(address, null);
+        return wrap(VkMemoryDedicatedRequirementsKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryDedicatedRequirementsKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkMemoryDedicatedRequirementsKHR.class, address);
     }
 
     /**
@@ -93,19 +89,21 @@ public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequireme
      * @param capacity the buffer capacity
      */
     public static VkMemoryDedicatedRequirementsKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryDedicatedRequirementsKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkMemoryDedicatedRequirementsKHR} structs. */
     public static class Buffer extends VkMemoryDedicatedRequirements.Buffer {
+
+        private static final VkMemoryDedicatedRequirementsKHR ELEMENT_FACTORY = VkMemoryDedicatedRequirementsKHR.create(-1L);
 
         /**
          * Creates a new {@link VkMemoryDedicatedRequirementsKHR.Buffer} instance backed by the specified container.
@@ -134,13 +132,8 @@ public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequireme
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkMemoryDedicatedRequirementsKHR newInstance(long address) {
-            return new VkMemoryDedicatedRequirementsKHR(address, container);
+        protected VkMemoryDedicatedRequirementsKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

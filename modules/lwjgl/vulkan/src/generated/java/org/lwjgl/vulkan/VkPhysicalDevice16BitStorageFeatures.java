@@ -85,10 +85,6 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
         STORAGEINPUTOUTPUT16 = layout.offsetof(5);
     }
 
-    VkPhysicalDevice16BitStorageFeatures(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDevice16BitStorageFeatures} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -96,7 +92,7 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDevice16BitStorageFeatures(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -169,28 +165,29 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
 
     /** Returns a new {@link VkPhysicalDevice16BitStorageFeatures} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevice16BitStorageFeatures malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDevice16BitStorageFeatures.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDevice16BitStorageFeatures} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevice16BitStorageFeatures calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDevice16BitStorageFeatures.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDevice16BitStorageFeatures} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDevice16BitStorageFeatures create() {
-        return new VkPhysicalDevice16BitStorageFeatures(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDevice16BitStorageFeatures.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDevice16BitStorageFeatures} instance for the specified memory address. */
     public static VkPhysicalDevice16BitStorageFeatures create(long address) {
-        return new VkPhysicalDevice16BitStorageFeatures(address, null);
+        return wrap(VkPhysicalDevice16BitStorageFeatures.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevice16BitStorageFeatures createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDevice16BitStorageFeatures.class, address);
     }
 
     /**
@@ -199,7 +196,7 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevice16BitStorageFeatures.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -208,7 +205,7 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevice16BitStorageFeatures.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -217,7 +214,8 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevice16BitStorageFeatures.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -227,13 +225,13 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevice16BitStorageFeatures.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevice16BitStorageFeatures.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -254,7 +252,7 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevice16BitStorageFeatures mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDevice16BitStorageFeatures.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -263,7 +261,7 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevice16BitStorageFeatures callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDevice16BitStorageFeatures.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -291,7 +289,7 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevice16BitStorageFeatures.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -301,41 +299,43 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevice16BitStorageFeatures.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevice16BitStorageFeatures.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevice16BitStorageFeatures.PNEXT); }
     /** Unsafe version of {@link #storageBuffer16BitAccess}. */
-    public static int nstorageBuffer16BitAccess(long struct) { return memGetInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEBUFFER16BITACCESS); }
+    public static int nstorageBuffer16BitAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEBUFFER16BITACCESS); }
     /** Unsafe version of {@link #uniformAndStorageBuffer16BitAccess}. */
-    public static int nuniformAndStorageBuffer16BitAccess(long struct) { return memGetInt(struct + VkPhysicalDevice16BitStorageFeatures.UNIFORMANDSTORAGEBUFFER16BITACCESS); }
+    public static int nuniformAndStorageBuffer16BitAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice16BitStorageFeatures.UNIFORMANDSTORAGEBUFFER16BITACCESS); }
     /** Unsafe version of {@link #storagePushConstant16}. */
-    public static int nstoragePushConstant16(long struct) { return memGetInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEPUSHCONSTANT16); }
+    public static int nstoragePushConstant16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEPUSHCONSTANT16); }
     /** Unsafe version of {@link #storageInputOutput16}. */
-    public static int nstorageInputOutput16(long struct) { return memGetInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEINPUTOUTPUT16); }
+    public static int nstorageInputOutput16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEINPUTOUTPUT16); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevice16BitStorageFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevice16BitStorageFeatures.PNEXT, value); }
     /** Unsafe version of {@link #storageBuffer16BitAccess(boolean) storageBuffer16BitAccess}. */
-    public static void nstorageBuffer16BitAccess(long struct, int value) { memPutInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEBUFFER16BITACCESS, value); }
+    public static void nstorageBuffer16BitAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEBUFFER16BITACCESS, value); }
     /** Unsafe version of {@link #uniformAndStorageBuffer16BitAccess(boolean) uniformAndStorageBuffer16BitAccess}. */
-    public static void nuniformAndStorageBuffer16BitAccess(long struct, int value) { memPutInt(struct + VkPhysicalDevice16BitStorageFeatures.UNIFORMANDSTORAGEBUFFER16BITACCESS, value); }
+    public static void nuniformAndStorageBuffer16BitAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice16BitStorageFeatures.UNIFORMANDSTORAGEBUFFER16BITACCESS, value); }
     /** Unsafe version of {@link #storagePushConstant16(boolean) storagePushConstant16}. */
-    public static void nstoragePushConstant16(long struct, int value) { memPutInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEPUSHCONSTANT16, value); }
+    public static void nstoragePushConstant16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEPUSHCONSTANT16, value); }
     /** Unsafe version of {@link #storageInputOutput16(boolean) storageInputOutput16}. */
-    public static void nstorageInputOutput16(long struct, int value) { memPutInt(struct + VkPhysicalDevice16BitStorageFeatures.STORAGEINPUTOUTPUT16, value); }
+    public static void nstorageInputOutput16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevice16BitStorageFeatures.STORAGEINPUTOUTPUT16, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDevice16BitStorageFeatures} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDevice16BitStorageFeatures, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDevice16BitStorageFeatures ELEMENT_FACTORY = VkPhysicalDevice16BitStorageFeatures.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDevice16BitStorageFeatures.Buffer} instance backed by the specified container.
@@ -364,18 +364,8 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDevice16BitStorageFeatures newInstance(long address) {
-            return new VkPhysicalDevice16BitStorageFeatures(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDevice16BitStorageFeatures getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

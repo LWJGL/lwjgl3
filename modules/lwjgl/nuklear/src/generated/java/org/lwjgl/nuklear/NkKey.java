@@ -49,10 +49,6 @@ public class NkKey extends Struct {
         CLICKED = layout.offsetof(1);
     }
 
-    NkKey(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkKey} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -60,7 +56,7 @@ public class NkKey extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkKey(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -76,13 +72,13 @@ public class NkKey extends Struct {
 
     /** Returns a new {@link NkKey} instance for the specified memory address. */
     public static NkKey create(long address) {
-        return new NkKey(address, null);
+        return wrap(NkKey.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkKey createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkKey.class, address);
     }
 
     /**
@@ -92,26 +88,28 @@ public class NkKey extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkKey.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkKey.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #down}. */
-    public static int ndown(long struct) { return memGetInt(struct + NkKey.DOWN); }
+    public static int ndown(long struct) { return UNSAFE.getInt(null, struct + NkKey.DOWN); }
     /** Unsafe version of {@link #clicked}. */
-    public static int nclicked(long struct) { return memGetInt(struct + NkKey.CLICKED); }
+    public static int nclicked(long struct) { return UNSAFE.getInt(null, struct + NkKey.CLICKED); }
 
     // -----------------------------------
 
     /** An array of {@link NkKey} structs. */
     public static class Buffer extends StructBuffer<NkKey, Buffer> {
+
+        private static final NkKey ELEMENT_FACTORY = NkKey.create(-1L);
 
         /**
          * Creates a new {@link NkKey.Buffer} instance backed by the specified container.
@@ -140,18 +138,8 @@ public class NkKey extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkKey newInstance(long address) {
-            return new NkKey(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkKey getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code down} field. */

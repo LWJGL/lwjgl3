@@ -31,10 +31,6 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
 
-    VkExternalFencePropertiesKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkExternalFencePropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -42,7 +38,7 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkExternalFencePropertiesKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -80,28 +76,29 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
 
     /** Returns a new {@link VkExternalFencePropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkExternalFencePropertiesKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkExternalFencePropertiesKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkExternalFencePropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkExternalFencePropertiesKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkExternalFencePropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkExternalFencePropertiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkExternalFencePropertiesKHR create() {
-        return new VkExternalFencePropertiesKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkExternalFencePropertiesKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkExternalFencePropertiesKHR} instance for the specified memory address. */
     public static VkExternalFencePropertiesKHR create(long address) {
-        return new VkExternalFencePropertiesKHR(address, null);
+        return wrap(VkExternalFencePropertiesKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalFencePropertiesKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkExternalFencePropertiesKHR.class, address);
     }
 
     /**
@@ -110,7 +107,7 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
      * @param capacity the buffer capacity
      */
     public static VkExternalFencePropertiesKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -119,7 +116,7 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
      * @param capacity the buffer capacity
      */
     public static VkExternalFencePropertiesKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -128,7 +125,8 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
      * @param capacity the buffer capacity
      */
     public static VkExternalFencePropertiesKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -138,13 +136,13 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
      * @param capacity the buffer capacity
      */
     public static VkExternalFencePropertiesKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalFencePropertiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -165,7 +163,7 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
      * @param stack the stack from which to allocate
      */
     public static VkExternalFencePropertiesKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkExternalFencePropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -174,7 +172,7 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
      * @param stack the stack from which to allocate
      */
     public static VkExternalFencePropertiesKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkExternalFencePropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -202,7 +200,7 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
      * @param capacity the buffer capacity
      */
     public static VkExternalFencePropertiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -212,13 +210,15 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
      * @param capacity the buffer capacity
      */
     public static VkExternalFencePropertiesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkExternalFencePropertiesKHR} structs. */
     public static class Buffer extends VkExternalFenceProperties.Buffer {
+
+        private static final VkExternalFencePropertiesKHR ELEMENT_FACTORY = VkExternalFencePropertiesKHR.create(-1L);
 
         /**
          * Creates a new {@link VkExternalFencePropertiesKHR.Buffer} instance backed by the specified container.
@@ -247,13 +247,8 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkExternalFencePropertiesKHR newInstance(long address) {
-            return new VkExternalFencePropertiesKHR(address, container);
+        protected VkExternalFencePropertiesKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

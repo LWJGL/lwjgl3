@@ -75,10 +75,6 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
         DOMAINORIGIN = layout.offsetof(2);
     }
 
-    VkPipelineTessellationDomainOriginStateCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPipelineTessellationDomainOriginStateCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -86,7 +82,7 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineTessellationDomainOriginStateCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -138,28 +134,29 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
 
     /** Returns a new {@link VkPipelineTessellationDomainOriginStateCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineTessellationDomainOriginStateCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPipelineTessellationDomainOriginStateCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineTessellationDomainOriginStateCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineTessellationDomainOriginStateCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPipelineTessellationDomainOriginStateCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineTessellationDomainOriginStateCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkPipelineTessellationDomainOriginStateCreateInfo create() {
-        return new VkPipelineTessellationDomainOriginStateCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineTessellationDomainOriginStateCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPipelineTessellationDomainOriginStateCreateInfo} instance for the specified memory address. */
     public static VkPipelineTessellationDomainOriginStateCreateInfo create(long address) {
-        return new VkPipelineTessellationDomainOriginStateCreateInfo(address, null);
+        return wrap(VkPipelineTessellationDomainOriginStateCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineTessellationDomainOriginStateCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPipelineTessellationDomainOriginStateCreateInfo.class, address);
     }
 
     /**
@@ -168,7 +165,7 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineTessellationDomainOriginStateCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -177,7 +174,7 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineTessellationDomainOriginStateCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -186,7 +183,8 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineTessellationDomainOriginStateCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -196,13 +194,13 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineTessellationDomainOriginStateCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineTessellationDomainOriginStateCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -223,7 +221,7 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
      * @param stack the stack from which to allocate
      */
     public static VkPipelineTessellationDomainOriginStateCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPipelineTessellationDomainOriginStateCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -232,7 +230,7 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
      * @param stack the stack from which to allocate
      */
     public static VkPipelineTessellationDomainOriginStateCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPipelineTessellationDomainOriginStateCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -260,7 +258,7 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineTessellationDomainOriginStateCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -270,29 +268,31 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineTessellationDomainOriginStateCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPipelineTessellationDomainOriginStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineTessellationDomainOriginStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineTessellationDomainOriginStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #domainOrigin}. */
-    public static int ndomainOrigin(long struct) { return memGetInt(struct + VkPipelineTessellationDomainOriginStateCreateInfo.DOMAINORIGIN); }
+    public static int ndomainOrigin(long struct) { return UNSAFE.getInt(null, struct + VkPipelineTessellationDomainOriginStateCreateInfo.DOMAINORIGIN); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineTessellationDomainOriginStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineTessellationDomainOriginStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineTessellationDomainOriginStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #domainOrigin(int) domainOrigin}. */
-    public static void ndomainOrigin(long struct, int value) { memPutInt(struct + VkPipelineTessellationDomainOriginStateCreateInfo.DOMAINORIGIN, value); }
+    public static void ndomainOrigin(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineTessellationDomainOriginStateCreateInfo.DOMAINORIGIN, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPipelineTessellationDomainOriginStateCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VkPipelineTessellationDomainOriginStateCreateInfo, Buffer> implements NativeResource {
+
+        private static final VkPipelineTessellationDomainOriginStateCreateInfo ELEMENT_FACTORY = VkPipelineTessellationDomainOriginStateCreateInfo.create(-1L);
 
         /**
          * Creates a new {@link VkPipelineTessellationDomainOriginStateCreateInfo.Buffer} instance backed by the specified container.
@@ -321,18 +321,8 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPipelineTessellationDomainOriginStateCreateInfo newInstance(long address) {
-            return new VkPipelineTessellationDomainOriginStateCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPipelineTessellationDomainOriginStateCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

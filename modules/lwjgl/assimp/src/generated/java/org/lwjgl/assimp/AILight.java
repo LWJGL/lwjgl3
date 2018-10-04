@@ -152,10 +152,6 @@ public class AILight extends Struct {
         MSIZE = layout.offsetof(13);
     }
 
-    AILight(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AILight} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -163,7 +159,7 @@ public class AILight extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AILight(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -219,13 +215,13 @@ public class AILight extends Struct {
 
     /** Returns a new {@link AILight} instance for the specified memory address. */
     public static AILight create(long address) {
-        return new AILight(address, null);
+        return wrap(AILight.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AILight createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AILight.class, address);
     }
 
     /**
@@ -235,13 +231,13 @@ public class AILight extends Struct {
      * @param capacity the buffer capacity
      */
     public static AILight.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AILight.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -249,7 +245,7 @@ public class AILight extends Struct {
     /** Unsafe version of {@link #mName}. */
     public static AIString nmName(long struct) { return AIString.create(struct + AILight.MNAME); }
     /** Unsafe version of {@link #mType}. */
-    public static int nmType(long struct) { return memGetInt(struct + AILight.MTYPE); }
+    public static int nmType(long struct) { return UNSAFE.getInt(null, struct + AILight.MTYPE); }
     /** Unsafe version of {@link #mPosition}. */
     public static AIVector3D nmPosition(long struct) { return AIVector3D.create(struct + AILight.MPOSITION); }
     /** Unsafe version of {@link #mDirection}. */
@@ -257,11 +253,11 @@ public class AILight extends Struct {
     /** Unsafe version of {@link #mUp}. */
     public static AIVector3D nmUp(long struct) { return AIVector3D.create(struct + AILight.MUP); }
     /** Unsafe version of {@link #mAttenuationConstant}. */
-    public static float nmAttenuationConstant(long struct) { return memGetFloat(struct + AILight.MATTENUATIONCONSTANT); }
+    public static float nmAttenuationConstant(long struct) { return UNSAFE.getFloat(null, struct + AILight.MATTENUATIONCONSTANT); }
     /** Unsafe version of {@link #mAttenuationLinear}. */
-    public static float nmAttenuationLinear(long struct) { return memGetFloat(struct + AILight.MATTENUATIONLINEAR); }
+    public static float nmAttenuationLinear(long struct) { return UNSAFE.getFloat(null, struct + AILight.MATTENUATIONLINEAR); }
     /** Unsafe version of {@link #mAttenuationQuadratic}. */
-    public static float nmAttenuationQuadratic(long struct) { return memGetFloat(struct + AILight.MATTENUATIONQUADRATIC); }
+    public static float nmAttenuationQuadratic(long struct) { return UNSAFE.getFloat(null, struct + AILight.MATTENUATIONQUADRATIC); }
     /** Unsafe version of {@link #mColorDiffuse}. */
     public static AIColor3D nmColorDiffuse(long struct) { return AIColor3D.create(struct + AILight.MCOLORDIFFUSE); }
     /** Unsafe version of {@link #mColorSpecular}. */
@@ -269,9 +265,9 @@ public class AILight extends Struct {
     /** Unsafe version of {@link #mColorAmbient}. */
     public static AIColor3D nmColorAmbient(long struct) { return AIColor3D.create(struct + AILight.MCOLORAMBIENT); }
     /** Unsafe version of {@link #mAngleInnerCone}. */
-    public static float nmAngleInnerCone(long struct) { return memGetFloat(struct + AILight.MANGLEINNERCONE); }
+    public static float nmAngleInnerCone(long struct) { return UNSAFE.getFloat(null, struct + AILight.MANGLEINNERCONE); }
     /** Unsafe version of {@link #mAngleOuterCone}. */
-    public static float nmAngleOuterCone(long struct) { return memGetFloat(struct + AILight.MANGLEOUTERCONE); }
+    public static float nmAngleOuterCone(long struct) { return UNSAFE.getFloat(null, struct + AILight.MANGLEOUTERCONE); }
     /** Unsafe version of {@link #mSize}. */
     public static AIVector2D nmSize(long struct) { return AIVector2D.create(struct + AILight.MSIZE); }
 
@@ -279,6 +275,8 @@ public class AILight extends Struct {
 
     /** An array of {@link AILight} structs. */
     public static class Buffer extends StructBuffer<AILight, Buffer> {
+
+        private static final AILight ELEMENT_FACTORY = AILight.create(-1L);
 
         /**
          * Creates a new {@link AILight.Buffer} instance backed by the specified container.
@@ -307,18 +305,8 @@ public class AILight extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AILight newInstance(long address) {
-            return new AILight(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AILight getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link AIString} view of the {@code mName} field. */

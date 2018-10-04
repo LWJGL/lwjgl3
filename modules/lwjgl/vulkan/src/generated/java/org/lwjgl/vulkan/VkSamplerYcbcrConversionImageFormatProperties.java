@@ -68,10 +68,6 @@ public class VkSamplerYcbcrConversionImageFormatProperties extends Struct {
         COMBINEDIMAGESAMPLERDESCRIPTORCOUNT = layout.offsetof(2);
     }
 
-    VkSamplerYcbcrConversionImageFormatProperties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSamplerYcbcrConversionImageFormatProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -79,7 +75,7 @@ public class VkSamplerYcbcrConversionImageFormatProperties extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSamplerYcbcrConversionImageFormatProperties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -127,13 +123,13 @@ public class VkSamplerYcbcrConversionImageFormatProperties extends Struct {
 
     /** Returns a new {@link VkSamplerYcbcrConversionImageFormatProperties} instance for the specified memory address. */
     public static VkSamplerYcbcrConversionImageFormatProperties create(long address) {
-        return new VkSamplerYcbcrConversionImageFormatProperties(address, null);
+        return wrap(VkSamplerYcbcrConversionImageFormatProperties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSamplerYcbcrConversionImageFormatProperties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSamplerYcbcrConversionImageFormatProperties.class, address);
     }
 
     /**
@@ -143,26 +139,26 @@ public class VkSamplerYcbcrConversionImageFormatProperties extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionImageFormatProperties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSamplerYcbcrConversionImageFormatProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionImageFormatProperties.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionImageFormatProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSamplerYcbcrConversionImageFormatProperties.PNEXT); }
     /** Unsafe version of {@link #combinedImageSamplerDescriptorCount}. */
-    public static int ncombinedImageSamplerDescriptorCount(long struct) { return memGetInt(struct + VkSamplerYcbcrConversionImageFormatProperties.COMBINEDIMAGESAMPLERDESCRIPTORCOUNT); }
+    public static int ncombinedImageSamplerDescriptorCount(long struct) { return UNSAFE.getInt(null, struct + VkSamplerYcbcrConversionImageFormatProperties.COMBINEDIMAGESAMPLERDESCRIPTORCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSamplerYcbcrConversionImageFormatProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSamplerYcbcrConversionImageFormatProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSamplerYcbcrConversionImageFormatProperties.PNEXT, value); }
 
@@ -170,6 +166,8 @@ public class VkSamplerYcbcrConversionImageFormatProperties extends Struct {
 
     /** An array of {@link VkSamplerYcbcrConversionImageFormatProperties} structs. */
     public static class Buffer extends StructBuffer<VkSamplerYcbcrConversionImageFormatProperties, Buffer> {
+
+        private static final VkSamplerYcbcrConversionImageFormatProperties ELEMENT_FACTORY = VkSamplerYcbcrConversionImageFormatProperties.create(-1L);
 
         /**
          * Creates a new {@link VkSamplerYcbcrConversionImageFormatProperties.Buffer} instance backed by the specified container.
@@ -198,18 +196,8 @@ public class VkSamplerYcbcrConversionImageFormatProperties extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSamplerYcbcrConversionImageFormatProperties newInstance(long address) {
-            return new VkSamplerYcbcrConversionImageFormatProperties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSamplerYcbcrConversionImageFormatProperties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

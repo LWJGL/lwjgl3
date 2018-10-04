@@ -72,10 +72,6 @@ public class VkPhysicalDevicePointClippingProperties extends Struct {
         POINTCLIPPINGBEHAVIOR = layout.offsetof(2);
     }
 
-    VkPhysicalDevicePointClippingProperties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDevicePointClippingProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -83,7 +79,7 @@ public class VkPhysicalDevicePointClippingProperties extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDevicePointClippingProperties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -131,13 +127,13 @@ public class VkPhysicalDevicePointClippingProperties extends Struct {
 
     /** Returns a new {@link VkPhysicalDevicePointClippingProperties} instance for the specified memory address. */
     public static VkPhysicalDevicePointClippingProperties create(long address) {
-        return new VkPhysicalDevicePointClippingProperties(address, null);
+        return wrap(VkPhysicalDevicePointClippingProperties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePointClippingProperties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDevicePointClippingProperties.class, address);
     }
 
     /**
@@ -147,26 +143,26 @@ public class VkPhysicalDevicePointClippingProperties extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePointClippingProperties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePointClippingProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePointClippingProperties.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePointClippingProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePointClippingProperties.PNEXT); }
     /** Unsafe version of {@link #pointClippingBehavior}. */
-    public static int npointClippingBehavior(long struct) { return memGetInt(struct + VkPhysicalDevicePointClippingProperties.POINTCLIPPINGBEHAVIOR); }
+    public static int npointClippingBehavior(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePointClippingProperties.POINTCLIPPINGBEHAVIOR); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePointClippingProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePointClippingProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePointClippingProperties.PNEXT, value); }
 
@@ -174,6 +170,8 @@ public class VkPhysicalDevicePointClippingProperties extends Struct {
 
     /** An array of {@link VkPhysicalDevicePointClippingProperties} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDevicePointClippingProperties, Buffer> {
+
+        private static final VkPhysicalDevicePointClippingProperties ELEMENT_FACTORY = VkPhysicalDevicePointClippingProperties.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDevicePointClippingProperties.Buffer} instance backed by the specified container.
@@ -202,18 +200,8 @@ public class VkPhysicalDevicePointClippingProperties extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDevicePointClippingProperties newInstance(long address) {
-            return new VkPhysicalDevicePointClippingProperties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDevicePointClippingProperties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

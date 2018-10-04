@@ -113,10 +113,6 @@ public class NkWindow extends Struct {
         PARENT = layout.offsetof(17);
     }
 
-    NkWindow(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkWindow} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -124,7 +120,7 @@ public class NkWindow extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkWindow(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -193,13 +189,13 @@ public class NkWindow extends Struct {
 
     /** Returns a new {@link NkWindow} instance for the specified memory address. */
     public static NkWindow create(long address) {
-        return new NkWindow(address, null);
+        return wrap(NkWindow.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkWindow createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkWindow.class, address);
     }
 
     /**
@@ -209,27 +205,27 @@ public class NkWindow extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkWindow.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkWindow.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #seq}. */
-    public static int nseq(long struct) { return memGetInt(struct + NkWindow.SEQ); }
+    public static int nseq(long struct) { return UNSAFE.getInt(null, struct + NkWindow.SEQ); }
     /** Unsafe version of {@link #name}. */
-    public static int nname(long struct) { return memGetInt(struct + NkWindow.NAME); }
+    public static int nname(long struct) { return UNSAFE.getInt(null, struct + NkWindow.NAME); }
     /** Unsafe version of {@link #name_string}. */
     public static ByteBuffer nname_string(long struct) { return memByteBuffer(struct + NkWindow.NAME_STRING, 64); }
     /** Unsafe version of {@link #name_stringString}. */
     public static String nname_stringString(long struct) { return memUTF8(struct + NkWindow.NAME_STRING); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + NkWindow.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + NkWindow.FLAGS); }
     /** Unsafe version of {@link #bounds}. */
     public static NkRect nbounds(long struct) { return NkRect.create(struct + NkWindow.BOUNDS); }
     /** Unsafe version of {@link #scrollbar}. */
@@ -239,7 +235,7 @@ public class NkWindow extends Struct {
     /** Unsafe version of {@link #layout}. */
     public static NkPanel nlayout(long struct) { return NkPanel.create(memGetAddress(struct + NkWindow.LAYOUT)); }
     /** Unsafe version of {@link #scrollbar_hiding_timer}. */
-    public static float nscrollbar_hiding_timer(long struct) { return memGetFloat(struct + NkWindow.SCROLLBAR_HIDING_TIMER); }
+    public static float nscrollbar_hiding_timer(long struct) { return UNSAFE.getFloat(null, struct + NkWindow.SCROLLBAR_HIDING_TIMER); }
     /** Unsafe version of {@link #property}. */
     public static NkPropertyState nproperty(long struct) { return NkPropertyState.create(struct + NkWindow.PROPERTY); }
     /** Unsafe version of {@link #popup}. */
@@ -247,11 +243,11 @@ public class NkWindow extends Struct {
     /** Unsafe version of {@link #edit}. */
     public static NkEditState nedit(long struct) { return NkEditState.create(struct + NkWindow.EDIT); }
     /** Unsafe version of {@link #scrolled}. */
-    public static int nscrolled(long struct) { return memGetInt(struct + NkWindow.SCROLLED); }
+    public static int nscrolled(long struct) { return UNSAFE.getInt(null, struct + NkWindow.SCROLLED); }
     /** Unsafe version of {@link #tables}. */
     public static long ntables(long struct) { return memGetAddress(struct + NkWindow.TABLES); }
     /** Unsafe version of {@link #table_count}. */
-    public static int ntable_count(long struct) { return memGetInt(struct + NkWindow.TABLE_COUNT); }
+    public static int ntable_count(long struct) { return UNSAFE.getInt(null, struct + NkWindow.TABLE_COUNT); }
     /** Unsafe version of {@link #next}. */
     public static NkWindow nnext(long struct) { return NkWindow.create(memGetAddress(struct + NkWindow.NEXT)); }
     /** Unsafe version of {@link #prev}. */
@@ -263,6 +259,8 @@ public class NkWindow extends Struct {
 
     /** An array of {@link NkWindow} structs. */
     public static class Buffer extends StructBuffer<NkWindow, Buffer> {
+
+        private static final NkWindow ELEMENT_FACTORY = NkWindow.create(-1L);
 
         /**
          * Creates a new {@link NkWindow.Buffer} instance backed by the specified container.
@@ -291,18 +289,8 @@ public class NkWindow extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkWindow newInstance(long address) {
-            return new NkWindow(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkWindow getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code seq} field. */

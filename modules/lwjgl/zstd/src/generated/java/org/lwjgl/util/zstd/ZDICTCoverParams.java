@@ -76,10 +76,6 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
         ZPARAMS = layout.offsetof(4);
     }
 
-    ZDICTCoverParams(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link ZDICTCoverParams} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -87,7 +83,7 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public ZDICTCoverParams(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -155,28 +151,29 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
 
     /** Returns a new {@link ZDICTCoverParams} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static ZDICTCoverParams malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(ZDICTCoverParams.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link ZDICTCoverParams} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static ZDICTCoverParams calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(ZDICTCoverParams.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link ZDICTCoverParams} instance allocated with {@link BufferUtils}. */
     public static ZDICTCoverParams create() {
-        return new ZDICTCoverParams(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(ZDICTCoverParams.class, memAddress(container), container);
     }
 
     /** Returns a new {@link ZDICTCoverParams} instance for the specified memory address. */
     public static ZDICTCoverParams create(long address) {
-        return new ZDICTCoverParams(address, null);
+        return wrap(ZDICTCoverParams.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ZDICTCoverParams createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(ZDICTCoverParams.class, address);
     }
 
     /**
@@ -185,7 +182,7 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTCoverParams.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -194,7 +191,7 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTCoverParams.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -203,7 +200,8 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTCoverParams.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -213,13 +211,13 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTCoverParams.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ZDICTCoverParams.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -240,7 +238,7 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ZDICTCoverParams mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(ZDICTCoverParams.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -249,7 +247,7 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ZDICTCoverParams callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(ZDICTCoverParams.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -277,7 +275,7 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTCoverParams.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -287,30 +285,30 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTCoverParams.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #k}. */
-    public static int nk(long struct) { return memGetInt(struct + ZDICTCoverParams.K); }
+    public static int nk(long struct) { return UNSAFE.getInt(null, struct + ZDICTCoverParams.K); }
     /** Unsafe version of {@link #d}. */
-    public static int nd(long struct) { return memGetInt(struct + ZDICTCoverParams.D); }
+    public static int nd(long struct) { return UNSAFE.getInt(null, struct + ZDICTCoverParams.D); }
     /** Unsafe version of {@link #steps}. */
-    public static int nsteps(long struct) { return memGetInt(struct + ZDICTCoverParams.STEPS); }
+    public static int nsteps(long struct) { return UNSAFE.getInt(null, struct + ZDICTCoverParams.STEPS); }
     /** Unsafe version of {@link #nbThreads}. */
-    public static int nnbThreads(long struct) { return memGetInt(struct + ZDICTCoverParams.NBTHREADS); }
+    public static int nnbThreads(long struct) { return UNSAFE.getInt(null, struct + ZDICTCoverParams.NBTHREADS); }
     /** Unsafe version of {@link #zParams}. */
     public static ZDICTParams nzParams(long struct) { return ZDICTParams.create(struct + ZDICTCoverParams.ZPARAMS); }
 
     /** Unsafe version of {@link #k(int) k}. */
-    public static void nk(long struct, int value) { memPutInt(struct + ZDICTCoverParams.K, value); }
+    public static void nk(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTCoverParams.K, value); }
     /** Unsafe version of {@link #d(int) d}. */
-    public static void nd(long struct, int value) { memPutInt(struct + ZDICTCoverParams.D, value); }
+    public static void nd(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTCoverParams.D, value); }
     /** Unsafe version of {@link #steps(int) steps}. */
-    public static void nsteps(long struct, int value) { memPutInt(struct + ZDICTCoverParams.STEPS, value); }
+    public static void nsteps(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTCoverParams.STEPS, value); }
     /** Unsafe version of {@link #nbThreads(int) nbThreads}. */
-    public static void nnbThreads(long struct, int value) { memPutInt(struct + ZDICTCoverParams.NBTHREADS, value); }
+    public static void nnbThreads(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTCoverParams.NBTHREADS, value); }
     /** Unsafe version of {@link #zParams(ZDICTParams) zParams}. */
     public static void nzParams(long struct, ZDICTParams value) { memCopy(value.address(), struct + ZDICTCoverParams.ZPARAMS, ZDICTParams.SIZEOF); }
 
@@ -318,6 +316,8 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
 
     /** An array of {@link ZDICTCoverParams} structs. */
     public static class Buffer extends StructBuffer<ZDICTCoverParams, Buffer> implements NativeResource {
+
+        private static final ZDICTCoverParams ELEMENT_FACTORY = ZDICTCoverParams.create(-1L);
 
         /**
          * Creates a new {@link ZDICTCoverParams.Buffer} instance backed by the specified container.
@@ -346,18 +346,8 @@ public class ZDICTCoverParams extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected ZDICTCoverParams newInstance(long address) {
-            return new ZDICTCoverParams(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected ZDICTCoverParams getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code k} field. */

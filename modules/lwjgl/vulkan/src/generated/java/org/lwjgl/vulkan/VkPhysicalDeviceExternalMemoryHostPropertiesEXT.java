@@ -70,10 +70,6 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
         MINIMPORTEDHOSTPOINTERALIGNMENT = layout.offsetof(2);
     }
 
-    VkPhysicalDeviceExternalMemoryHostPropertiesEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -81,7 +77,7 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceExternalMemoryHostPropertiesEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -133,28 +129,29 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
 
     /** Returns a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT create() {
-        return new VkPhysicalDeviceExternalMemoryHostPropertiesEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT create(long address) {
-        return new VkPhysicalDeviceExternalMemoryHostPropertiesEXT(address, null);
+        return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, address);
     }
 
     /**
@@ -163,7 +160,7 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -172,7 +169,7 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -181,7 +178,8 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -191,13 +189,13 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -218,7 +216,7 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -227,7 +225,7 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -255,7 +253,7 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -265,29 +263,31 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #minImportedHostPointerAlignment}. */
-    public static long nminImportedHostPointerAlignment(long struct) { return memGetLong(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.MINIMPORTEDHOSTPOINTERALIGNMENT); }
+    public static long nminImportedHostPointerAlignment(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.MINIMPORTEDHOSTPOINTERALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.PNEXT, value); }
     /** Unsafe version of {@link #minImportedHostPointerAlignment(long) minImportedHostPointerAlignment}. */
-    public static void nminImportedHostPointerAlignment(long struct, long value) { memPutLong(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.MINIMPORTEDHOSTPOINTERALIGNMENT, value); }
+    public static void nminImportedHostPointerAlignment(long struct, long value) { UNSAFE.putLong(null, struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.MINIMPORTEDHOSTPOINTERALIGNMENT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceExternalMemoryHostPropertiesEXT, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceExternalMemoryHostPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceExternalMemoryHostPropertiesEXT.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer} instance backed by the specified container.
@@ -316,18 +316,8 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceExternalMemoryHostPropertiesEXT newInstance(long address) {
-            return new VkPhysicalDeviceExternalMemoryHostPropertiesEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceExternalMemoryHostPropertiesEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

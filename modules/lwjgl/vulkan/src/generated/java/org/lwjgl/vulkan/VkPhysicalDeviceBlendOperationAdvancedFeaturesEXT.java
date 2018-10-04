@@ -72,10 +72,6 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
         ADVANCEDBLENDCOHERENTOPERATIONS = layout.offsetof(2);
     }
 
-    VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -83,7 +79,7 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -135,28 +131,29 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
 
     /** Returns a new {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT create() {
-        return new VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT create(long address) {
-        return new VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT(address, null);
+        return wrap(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.class, address);
     }
 
     /**
@@ -165,7 +162,7 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -174,7 +171,7 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -183,7 +180,8 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -193,13 +191,13 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -220,7 +218,7 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -229,7 +227,7 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -257,7 +255,7 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -267,29 +265,31 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #advancedBlendCoherentOperations}. */
-    public static int nadvancedBlendCoherentOperations(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.ADVANCEDBLENDCOHERENTOPERATIONS); }
+    public static int nadvancedBlendCoherentOperations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.ADVANCEDBLENDCOHERENTOPERATIONS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.PNEXT, value); }
     /** Unsafe version of {@link #advancedBlendCoherentOperations(boolean) advancedBlendCoherentOperations}. */
-    public static void nadvancedBlendCoherentOperations(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.ADVANCEDBLENDCOHERENTOPERATIONS, value); }
+    public static void nadvancedBlendCoherentOperations(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.ADVANCEDBLENDCOHERENTOPERATIONS, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer} instance backed by the specified container.
@@ -318,18 +318,8 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT newInstance(long address) {
-            return new VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

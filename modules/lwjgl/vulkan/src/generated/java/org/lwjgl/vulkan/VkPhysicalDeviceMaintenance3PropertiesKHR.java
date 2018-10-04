@@ -28,10 +28,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceMaintenance3Properties {
 
-    VkPhysicalDeviceMaintenance3PropertiesKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceMaintenance3PropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -39,7 +35,7 @@ public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceM
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceMaintenance3PropertiesKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -77,13 +73,13 @@ public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceM
 
     /** Returns a new {@link VkPhysicalDeviceMaintenance3PropertiesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceMaintenance3PropertiesKHR create(long address) {
-        return new VkPhysicalDeviceMaintenance3PropertiesKHR(address, null);
+        return wrap(VkPhysicalDeviceMaintenance3PropertiesKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMaintenance3PropertiesKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceMaintenance3PropertiesKHR.class, address);
     }
 
     /**
@@ -93,19 +89,21 @@ public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceM
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceMaintenance3PropertiesKHR} structs. */
     public static class Buffer extends VkPhysicalDeviceMaintenance3Properties.Buffer {
+
+        private static final VkPhysicalDeviceMaintenance3PropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceMaintenance3PropertiesKHR.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer} instance backed by the specified container.
@@ -134,13 +132,8 @@ public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceM
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceMaintenance3PropertiesKHR newInstance(long address) {
-            return new VkPhysicalDeviceMaintenance3PropertiesKHR(address, container);
+        protected VkPhysicalDeviceMaintenance3PropertiesKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

@@ -72,10 +72,6 @@ public class VkExternalImageFormatProperties extends Struct {
         EXTERNALMEMORYPROPERTIES = layout.offsetof(2);
     }
 
-    VkExternalImageFormatProperties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkExternalImageFormatProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -83,7 +79,7 @@ public class VkExternalImageFormatProperties extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkExternalImageFormatProperties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -130,13 +126,13 @@ public class VkExternalImageFormatProperties extends Struct {
 
     /** Returns a new {@link VkExternalImageFormatProperties} instance for the specified memory address. */
     public static VkExternalImageFormatProperties create(long address) {
-        return new VkExternalImageFormatProperties(address, null);
+        return wrap(VkExternalImageFormatProperties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalImageFormatProperties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkExternalImageFormatProperties.class, address);
     }
 
     /**
@@ -146,26 +142,26 @@ public class VkExternalImageFormatProperties extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkExternalImageFormatProperties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalImageFormatProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkExternalImageFormatProperties.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExternalImageFormatProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExternalImageFormatProperties.PNEXT); }
     /** Unsafe version of {@link #externalMemoryProperties}. */
     public static VkExternalMemoryProperties nexternalMemoryProperties(long struct) { return VkExternalMemoryProperties.create(struct + VkExternalImageFormatProperties.EXTERNALMEMORYPROPERTIES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkExternalImageFormatProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExternalImageFormatProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExternalImageFormatProperties.PNEXT, value); }
 
@@ -173,6 +169,8 @@ public class VkExternalImageFormatProperties extends Struct {
 
     /** An array of {@link VkExternalImageFormatProperties} structs. */
     public static class Buffer extends StructBuffer<VkExternalImageFormatProperties, Buffer> {
+
+        private static final VkExternalImageFormatProperties ELEMENT_FACTORY = VkExternalImageFormatProperties.create(-1L);
 
         /**
          * Creates a new {@link VkExternalImageFormatProperties.Buffer} instance backed by the specified container.
@@ -201,18 +199,8 @@ public class VkExternalImageFormatProperties extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkExternalImageFormatProperties newInstance(long address) {
-            return new VkExternalImageFormatProperties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkExternalImageFormatProperties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

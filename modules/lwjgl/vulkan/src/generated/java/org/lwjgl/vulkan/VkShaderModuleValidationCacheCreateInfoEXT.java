@@ -71,10 +71,6 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
         VALIDATIONCACHE = layout.offsetof(2);
     }
 
-    VkShaderModuleValidationCacheCreateInfoEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkShaderModuleValidationCacheCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -82,7 +78,7 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkShaderModuleValidationCacheCreateInfoEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -134,28 +130,29 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
 
     /** Returns a new {@link VkShaderModuleValidationCacheCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkShaderModuleValidationCacheCreateInfoEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkShaderModuleValidationCacheCreateInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkShaderModuleValidationCacheCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkShaderModuleValidationCacheCreateInfoEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkShaderModuleValidationCacheCreateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkShaderModuleValidationCacheCreateInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkShaderModuleValidationCacheCreateInfoEXT create() {
-        return new VkShaderModuleValidationCacheCreateInfoEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkShaderModuleValidationCacheCreateInfoEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkShaderModuleValidationCacheCreateInfoEXT} instance for the specified memory address. */
     public static VkShaderModuleValidationCacheCreateInfoEXT create(long address) {
-        return new VkShaderModuleValidationCacheCreateInfoEXT(address, null);
+        return wrap(VkShaderModuleValidationCacheCreateInfoEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkShaderModuleValidationCacheCreateInfoEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkShaderModuleValidationCacheCreateInfoEXT.class, address);
     }
 
     /**
@@ -164,7 +161,7 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkShaderModuleValidationCacheCreateInfoEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -173,7 +170,7 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkShaderModuleValidationCacheCreateInfoEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -182,7 +179,8 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkShaderModuleValidationCacheCreateInfoEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -192,13 +190,13 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkShaderModuleValidationCacheCreateInfoEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkShaderModuleValidationCacheCreateInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -219,7 +217,7 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkShaderModuleValidationCacheCreateInfoEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkShaderModuleValidationCacheCreateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -228,7 +226,7 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkShaderModuleValidationCacheCreateInfoEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkShaderModuleValidationCacheCreateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -256,7 +254,7 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkShaderModuleValidationCacheCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -266,29 +264,31 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkShaderModuleValidationCacheCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkShaderModuleValidationCacheCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkShaderModuleValidationCacheCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkShaderModuleValidationCacheCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #validationCache}. */
-    public static long nvalidationCache(long struct) { return memGetLong(struct + VkShaderModuleValidationCacheCreateInfoEXT.VALIDATIONCACHE); }
+    public static long nvalidationCache(long struct) { return UNSAFE.getLong(null, struct + VkShaderModuleValidationCacheCreateInfoEXT.VALIDATIONCACHE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkShaderModuleValidationCacheCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkShaderModuleValidationCacheCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkShaderModuleValidationCacheCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #validationCache(long) validationCache}. */
-    public static void nvalidationCache(long struct, long value) { memPutLong(struct + VkShaderModuleValidationCacheCreateInfoEXT.VALIDATIONCACHE, value); }
+    public static void nvalidationCache(long struct, long value) { UNSAFE.putLong(null, struct + VkShaderModuleValidationCacheCreateInfoEXT.VALIDATIONCACHE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkShaderModuleValidationCacheCreateInfoEXT} structs. */
     public static class Buffer extends StructBuffer<VkShaderModuleValidationCacheCreateInfoEXT, Buffer> implements NativeResource {
+
+        private static final VkShaderModuleValidationCacheCreateInfoEXT ELEMENT_FACTORY = VkShaderModuleValidationCacheCreateInfoEXT.create(-1L);
 
         /**
          * Creates a new {@link VkShaderModuleValidationCacheCreateInfoEXT.Buffer} instance backed by the specified container.
@@ -317,18 +317,8 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkShaderModuleValidationCacheCreateInfoEXT newInstance(long address) {
-            return new VkShaderModuleValidationCacheCreateInfoEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkShaderModuleValidationCacheCreateInfoEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

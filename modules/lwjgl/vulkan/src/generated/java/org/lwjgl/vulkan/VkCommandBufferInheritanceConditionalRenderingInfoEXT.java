@@ -80,10 +80,6 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
         CONDITIONALRENDERINGENABLE = layout.offsetof(2);
     }
 
-    VkCommandBufferInheritanceConditionalRenderingInfoEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -91,7 +87,7 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkCommandBufferInheritanceConditionalRenderingInfoEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -143,28 +139,29 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
 
     /** Returns a new {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkCommandBufferInheritanceConditionalRenderingInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkCommandBufferInheritanceConditionalRenderingInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT create() {
-        return new VkCommandBufferInheritanceConditionalRenderingInfoEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkCommandBufferInheritanceConditionalRenderingInfoEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT} instance for the specified memory address. */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT create(long address) {
-        return new VkCommandBufferInheritanceConditionalRenderingInfoEXT(address, null);
+        return wrap(VkCommandBufferInheritanceConditionalRenderingInfoEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkCommandBufferInheritanceConditionalRenderingInfoEXT.class, address);
     }
 
     /**
@@ -173,7 +170,7 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -182,7 +179,7 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -191,7 +188,8 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -201,13 +199,13 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -228,7 +226,7 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
      * @param stack the stack from which to allocate
      */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkCommandBufferInheritanceConditionalRenderingInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -237,7 +235,7 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
      * @param stack the stack from which to allocate
      */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkCommandBufferInheritanceConditionalRenderingInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -265,7 +263,7 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -275,29 +273,31 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.PNEXT); }
     /** Unsafe version of {@link #conditionalRenderingEnable}. */
-    public static int nconditionalRenderingEnable(long struct) { return memGetInt(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.CONDITIONALRENDERINGENABLE); }
+    public static int nconditionalRenderingEnable(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.CONDITIONALRENDERINGENABLE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #conditionalRenderingEnable(boolean) conditionalRenderingEnable}. */
-    public static void nconditionalRenderingEnable(long struct, int value) { memPutInt(struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.CONDITIONALRENDERINGENABLE, value); }
+    public static void nconditionalRenderingEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceConditionalRenderingInfoEXT.CONDITIONALRENDERINGENABLE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT} structs. */
     public static class Buffer extends StructBuffer<VkCommandBufferInheritanceConditionalRenderingInfoEXT, Buffer> implements NativeResource {
+
+        private static final VkCommandBufferInheritanceConditionalRenderingInfoEXT ELEMENT_FACTORY = VkCommandBufferInheritanceConditionalRenderingInfoEXT.create(-1L);
 
         /**
          * Creates a new {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer} instance backed by the specified container.
@@ -326,18 +326,8 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkCommandBufferInheritanceConditionalRenderingInfoEXT newInstance(long address) {
-            return new VkCommandBufferInheritanceConditionalRenderingInfoEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkCommandBufferInheritanceConditionalRenderingInfoEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

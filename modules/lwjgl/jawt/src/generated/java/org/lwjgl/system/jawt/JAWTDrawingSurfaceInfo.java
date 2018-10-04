@@ -74,10 +74,6 @@ public class JAWTDrawingSurfaceInfo extends Struct {
         CLIP = layout.offsetof(4);
     }
 
-    JAWTDrawingSurfaceInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link JAWTDrawingSurfaceInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -85,7 +81,7 @@ public class JAWTDrawingSurfaceInfo extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public JAWTDrawingSurfaceInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -113,13 +109,13 @@ public class JAWTDrawingSurfaceInfo extends Struct {
 
     /** Returns a new {@link JAWTDrawingSurfaceInfo} instance for the specified memory address. */
     public static JAWTDrawingSurfaceInfo create(long address) {
-        return new JAWTDrawingSurfaceInfo(address, null);
+        return wrap(JAWTDrawingSurfaceInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static JAWTDrawingSurfaceInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(JAWTDrawingSurfaceInfo.class, address);
     }
 
     /**
@@ -129,13 +125,13 @@ public class JAWTDrawingSurfaceInfo extends Struct {
      * @param capacity the buffer capacity
      */
     public static JAWTDrawingSurfaceInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static JAWTDrawingSurfaceInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -147,7 +143,7 @@ public class JAWTDrawingSurfaceInfo extends Struct {
     /** Unsafe version of {@link #bounds}. */
     public static JAWTRectangle nbounds(long struct) { return JAWTRectangle.create(struct + JAWTDrawingSurfaceInfo.BOUNDS); }
     /** Unsafe version of {@link #clipSize}. */
-    public static int nclipSize(long struct) { return memGetInt(struct + JAWTDrawingSurfaceInfo.CLIPSIZE); }
+    public static int nclipSize(long struct) { return UNSAFE.getInt(null, struct + JAWTDrawingSurfaceInfo.CLIPSIZE); }
     /** Unsafe version of {@link #clip}. */
     public static JAWTRectangle.Buffer nclip(long struct) { return JAWTRectangle.create(memGetAddress(struct + JAWTDrawingSurfaceInfo.CLIP), nclipSize(struct)); }
 
@@ -155,6 +151,8 @@ public class JAWTDrawingSurfaceInfo extends Struct {
 
     /** An array of {@link JAWTDrawingSurfaceInfo} structs. */
     public static class Buffer extends StructBuffer<JAWTDrawingSurfaceInfo, Buffer> {
+
+        private static final JAWTDrawingSurfaceInfo ELEMENT_FACTORY = JAWTDrawingSurfaceInfo.create(-1L);
 
         /**
          * Creates a new {@link JAWTDrawingSurfaceInfo.Buffer} instance backed by the specified container.
@@ -183,18 +181,8 @@ public class JAWTDrawingSurfaceInfo extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected JAWTDrawingSurfaceInfo newInstance(long address) {
-            return new JAWTDrawingSurfaceInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected JAWTDrawingSurfaceInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code platformInfo} field. */

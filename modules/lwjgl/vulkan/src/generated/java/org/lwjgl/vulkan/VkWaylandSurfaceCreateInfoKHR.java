@@ -96,10 +96,6 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
         SURFACE = layout.offsetof(4);
     }
 
-    VkWaylandSurfaceCreateInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkWaylandSurfaceCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -107,7 +103,7 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkWaylandSurfaceCreateInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -173,28 +169,29 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
 
     /** Returns a new {@link VkWaylandSurfaceCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkWaylandSurfaceCreateInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkWaylandSurfaceCreateInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkWaylandSurfaceCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkWaylandSurfaceCreateInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkWaylandSurfaceCreateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkWaylandSurfaceCreateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkWaylandSurfaceCreateInfoKHR create() {
-        return new VkWaylandSurfaceCreateInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkWaylandSurfaceCreateInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkWaylandSurfaceCreateInfoKHR} instance for the specified memory address. */
     public static VkWaylandSurfaceCreateInfoKHR create(long address) {
-        return new VkWaylandSurfaceCreateInfoKHR(address, null);
+        return wrap(VkWaylandSurfaceCreateInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWaylandSurfaceCreateInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkWaylandSurfaceCreateInfoKHR.class, address);
     }
 
     /**
@@ -203,7 +200,7 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkWaylandSurfaceCreateInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -212,7 +209,7 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkWaylandSurfaceCreateInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -221,7 +218,8 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkWaylandSurfaceCreateInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -231,13 +229,13 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkWaylandSurfaceCreateInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWaylandSurfaceCreateInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -258,7 +256,7 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkWaylandSurfaceCreateInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkWaylandSurfaceCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -267,7 +265,7 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkWaylandSurfaceCreateInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkWaylandSurfaceCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -295,7 +293,7 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkWaylandSurfaceCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -305,28 +303,28 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkWaylandSurfaceCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkWaylandSurfaceCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkWaylandSurfaceCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkWaylandSurfaceCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkWaylandSurfaceCreateInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkWaylandSurfaceCreateInfoKHR.FLAGS); }
     /** Unsafe version of {@link #display}. */
     public static long ndisplay(long struct) { return memGetAddress(struct + VkWaylandSurfaceCreateInfoKHR.DISPLAY); }
     /** Unsafe version of {@link #surface}. */
     public static long nsurface(long struct) { return memGetAddress(struct + VkWaylandSurfaceCreateInfoKHR.SURFACE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkWaylandSurfaceCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkWaylandSurfaceCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkWaylandSurfaceCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkWaylandSurfaceCreateInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkWaylandSurfaceCreateInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + VkWaylandSurfaceCreateInfoKHR.DISPLAY, check(value)); }
     /** Unsafe version of {@link #surface(long) surface}. */
@@ -359,6 +357,8 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
     /** An array of {@link VkWaylandSurfaceCreateInfoKHR} structs. */
     public static class Buffer extends StructBuffer<VkWaylandSurfaceCreateInfoKHR, Buffer> implements NativeResource {
 
+        private static final VkWaylandSurfaceCreateInfoKHR ELEMENT_FACTORY = VkWaylandSurfaceCreateInfoKHR.create(-1L);
+
         /**
          * Creates a new {@link VkWaylandSurfaceCreateInfoKHR.Buffer} instance backed by the specified container.
          *
@@ -386,18 +386,8 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkWaylandSurfaceCreateInfoKHR newInstance(long address) {
-            return new VkWaylandSurfaceCreateInfoKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkWaylandSurfaceCreateInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

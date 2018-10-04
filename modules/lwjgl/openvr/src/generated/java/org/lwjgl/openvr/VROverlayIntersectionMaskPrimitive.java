@@ -51,10 +51,6 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
         M_PRIMITIVE = layout.offsetof(1);
     }
 
-    VROverlayIntersectionMaskPrimitive(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VROverlayIntersectionMaskPrimitive} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -62,7 +58,7 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VROverlayIntersectionMaskPrimitive(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -109,28 +105,29 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
 
     /** Returns a new {@link VROverlayIntersectionMaskPrimitive} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VROverlayIntersectionMaskPrimitive malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VROverlayIntersectionMaskPrimitive.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VROverlayIntersectionMaskPrimitive} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VROverlayIntersectionMaskPrimitive calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VROverlayIntersectionMaskPrimitive.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VROverlayIntersectionMaskPrimitive} instance allocated with {@link BufferUtils}. */
     public static VROverlayIntersectionMaskPrimitive create() {
-        return new VROverlayIntersectionMaskPrimitive(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VROverlayIntersectionMaskPrimitive.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VROverlayIntersectionMaskPrimitive} instance for the specified memory address. */
     public static VROverlayIntersectionMaskPrimitive create(long address) {
-        return new VROverlayIntersectionMaskPrimitive(address, null);
+        return wrap(VROverlayIntersectionMaskPrimitive.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VROverlayIntersectionMaskPrimitive createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VROverlayIntersectionMaskPrimitive.class, address);
     }
 
     /**
@@ -139,7 +136,7 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionMaskPrimitive.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -148,7 +145,7 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionMaskPrimitive.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -157,7 +154,8 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionMaskPrimitive.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -167,13 +165,13 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionMaskPrimitive.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VROverlayIntersectionMaskPrimitive.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -194,7 +192,7 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VROverlayIntersectionMaskPrimitive mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VROverlayIntersectionMaskPrimitive.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -203,7 +201,7 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VROverlayIntersectionMaskPrimitive callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VROverlayIntersectionMaskPrimitive.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -231,7 +229,7 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionMaskPrimitive.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -241,18 +239,18 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionMaskPrimitive.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #m_nPrimitiveType}. */
-    public static int nm_nPrimitiveType(long struct) { return memGetInt(struct + VROverlayIntersectionMaskPrimitive.M_NPRIMITIVETYPE); }
+    public static int nm_nPrimitiveType(long struct) { return UNSAFE.getInt(null, struct + VROverlayIntersectionMaskPrimitive.M_NPRIMITIVETYPE); }
     /** Unsafe version of {@link #m_Primitive}. */
     public static VROverlayIntersectionMaskPrimitiveData nm_Primitive(long struct) { return VROverlayIntersectionMaskPrimitiveData.create(struct + VROverlayIntersectionMaskPrimitive.M_PRIMITIVE); }
 
     /** Unsafe version of {@link #m_nPrimitiveType(int) m_nPrimitiveType}. */
-    public static void nm_nPrimitiveType(long struct, int value) { memPutInt(struct + VROverlayIntersectionMaskPrimitive.M_NPRIMITIVETYPE, value); }
+    public static void nm_nPrimitiveType(long struct, int value) { UNSAFE.putInt(null, struct + VROverlayIntersectionMaskPrimitive.M_NPRIMITIVETYPE, value); }
     /** Unsafe version of {@link #m_Primitive(VROverlayIntersectionMaskPrimitiveData) m_Primitive}. */
     public static void nm_Primitive(long struct, VROverlayIntersectionMaskPrimitiveData value) { memCopy(value.address(), struct + VROverlayIntersectionMaskPrimitive.M_PRIMITIVE, VROverlayIntersectionMaskPrimitiveData.SIZEOF); }
 
@@ -260,6 +258,8 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
 
     /** An array of {@link VROverlayIntersectionMaskPrimitive} structs. */
     public static class Buffer extends StructBuffer<VROverlayIntersectionMaskPrimitive, Buffer> implements NativeResource {
+
+        private static final VROverlayIntersectionMaskPrimitive ELEMENT_FACTORY = VROverlayIntersectionMaskPrimitive.create(-1L);
 
         /**
          * Creates a new {@link VROverlayIntersectionMaskPrimitive.Buffer} instance backed by the specified container.
@@ -288,18 +288,8 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VROverlayIntersectionMaskPrimitive newInstance(long address) {
-            return new VROverlayIntersectionMaskPrimitive(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VROverlayIntersectionMaskPrimitive getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code m_nPrimitiveType} field. */

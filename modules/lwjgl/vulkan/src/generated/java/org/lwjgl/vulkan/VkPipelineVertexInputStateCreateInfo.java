@@ -109,10 +109,6 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
         PVERTEXATTRIBUTEDESCRIPTIONS = layout.offsetof(6);
     }
 
-    VkPipelineVertexInputStateCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPipelineVertexInputStateCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -120,7 +116,7 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineVertexInputStateCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -194,28 +190,29 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
 
     /** Returns a new {@link VkPipelineVertexInputStateCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineVertexInputStateCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPipelineVertexInputStateCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineVertexInputStateCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineVertexInputStateCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPipelineVertexInputStateCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineVertexInputStateCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkPipelineVertexInputStateCreateInfo create() {
-        return new VkPipelineVertexInputStateCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineVertexInputStateCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPipelineVertexInputStateCreateInfo} instance for the specified memory address. */
     public static VkPipelineVertexInputStateCreateInfo create(long address) {
-        return new VkPipelineVertexInputStateCreateInfo(address, null);
+        return wrap(VkPipelineVertexInputStateCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineVertexInputStateCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPipelineVertexInputStateCreateInfo.class, address);
     }
 
     /**
@@ -224,7 +221,7 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPipelineVertexInputStateCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -233,7 +230,7 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPipelineVertexInputStateCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -242,7 +239,8 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPipelineVertexInputStateCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -252,13 +250,13 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPipelineVertexInputStateCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineVertexInputStateCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -279,7 +277,7 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkPipelineVertexInputStateCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPipelineVertexInputStateCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -288,7 +286,7 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkPipelineVertexInputStateCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPipelineVertexInputStateCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -316,7 +314,7 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPipelineVertexInputStateCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -326,38 +324,38 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPipelineVertexInputStateCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPipelineVertexInputStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineVertexInputStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineVertexInputStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkPipelineVertexInputStateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineVertexInputStateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #vertexBindingDescriptionCount}. */
-    public static int nvertexBindingDescriptionCount(long struct) { return memGetInt(struct + VkPipelineVertexInputStateCreateInfo.VERTEXBINDINGDESCRIPTIONCOUNT); }
+    public static int nvertexBindingDescriptionCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineVertexInputStateCreateInfo.VERTEXBINDINGDESCRIPTIONCOUNT); }
     /** Unsafe version of {@link #pVertexBindingDescriptions}. */
     @Nullable public static VkVertexInputBindingDescription.Buffer npVertexBindingDescriptions(long struct) { return VkVertexInputBindingDescription.createSafe(memGetAddress(struct + VkPipelineVertexInputStateCreateInfo.PVERTEXBINDINGDESCRIPTIONS), nvertexBindingDescriptionCount(struct)); }
     /** Unsafe version of {@link #vertexAttributeDescriptionCount}. */
-    public static int nvertexAttributeDescriptionCount(long struct) { return memGetInt(struct + VkPipelineVertexInputStateCreateInfo.VERTEXATTRIBUTEDESCRIPTIONCOUNT); }
+    public static int nvertexAttributeDescriptionCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineVertexInputStateCreateInfo.VERTEXATTRIBUTEDESCRIPTIONCOUNT); }
     /** Unsafe version of {@link #pVertexAttributeDescriptions}. */
     @Nullable public static VkVertexInputAttributeDescription.Buffer npVertexAttributeDescriptions(long struct) { return VkVertexInputAttributeDescription.createSafe(memGetAddress(struct + VkPipelineVertexInputStateCreateInfo.PVERTEXATTRIBUTEDESCRIPTIONS), nvertexAttributeDescriptionCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineVertexInputStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineVertexInputStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineVertexInputStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineVertexInputStateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineVertexInputStateCreateInfo.FLAGS, value); }
     /** Sets the specified value to the {@code vertexBindingDescriptionCount} field of the specified {@code struct}. */
-    public static void nvertexBindingDescriptionCount(long struct, int value) { memPutInt(struct + VkPipelineVertexInputStateCreateInfo.VERTEXBINDINGDESCRIPTIONCOUNT, value); }
+    public static void nvertexBindingDescriptionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineVertexInputStateCreateInfo.VERTEXBINDINGDESCRIPTIONCOUNT, value); }
     /** Unsafe version of {@link #pVertexBindingDescriptions(VkVertexInputBindingDescription.Buffer) pVertexBindingDescriptions}. */
     public static void npVertexBindingDescriptions(long struct, @Nullable VkVertexInputBindingDescription.Buffer value) { memPutAddress(struct + VkPipelineVertexInputStateCreateInfo.PVERTEXBINDINGDESCRIPTIONS, memAddressSafe(value)); nvertexBindingDescriptionCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code vertexAttributeDescriptionCount} field of the specified {@code struct}. */
-    public static void nvertexAttributeDescriptionCount(long struct, int value) { memPutInt(struct + VkPipelineVertexInputStateCreateInfo.VERTEXATTRIBUTEDESCRIPTIONCOUNT, value); }
+    public static void nvertexAttributeDescriptionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineVertexInputStateCreateInfo.VERTEXATTRIBUTEDESCRIPTIONCOUNT, value); }
     /** Unsafe version of {@link #pVertexAttributeDescriptions(VkVertexInputAttributeDescription.Buffer) pVertexAttributeDescriptions}. */
     public static void npVertexAttributeDescriptions(long struct, @Nullable VkVertexInputAttributeDescription.Buffer value) { memPutAddress(struct + VkPipelineVertexInputStateCreateInfo.PVERTEXATTRIBUTEDESCRIPTIONS, memAddressSafe(value)); nvertexAttributeDescriptionCount(struct, value == null ? 0 : value.remaining()); }
 
@@ -392,6 +390,8 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
     /** An array of {@link VkPipelineVertexInputStateCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VkPipelineVertexInputStateCreateInfo, Buffer> implements NativeResource {
 
+        private static final VkPipelineVertexInputStateCreateInfo ELEMENT_FACTORY = VkPipelineVertexInputStateCreateInfo.create(-1L);
+
         /**
          * Creates a new {@link VkPipelineVertexInputStateCreateInfo.Buffer} instance backed by the specified container.
          *
@@ -419,18 +419,8 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPipelineVertexInputStateCreateInfo newInstance(long address) {
-            return new VkPipelineVertexInputStateCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPipelineVertexInputStateCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

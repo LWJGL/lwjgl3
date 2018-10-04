@@ -57,10 +57,6 @@ public class ImuSample extends Struct {
         UNOFFSCALEFLAGS = layout.offsetof(3);
     }
 
-    ImuSample(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link ImuSample} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -68,7 +64,7 @@ public class ImuSample extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public ImuSample(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -94,13 +90,13 @@ public class ImuSample extends Struct {
 
     /** Returns a new {@link ImuSample} instance for the specified memory address. */
     public static ImuSample create(long address) {
-        return new ImuSample(address, null);
+        return wrap(ImuSample.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ImuSample createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(ImuSample.class, address);
     }
 
     /**
@@ -110,30 +106,32 @@ public class ImuSample extends Struct {
      * @param capacity the buffer capacity
      */
     public static ImuSample.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ImuSample.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #fSampleTime}. */
-    public static double nfSampleTime(long struct) { return memGetDouble(struct + ImuSample.FSAMPLETIME); }
+    public static double nfSampleTime(long struct) { return UNSAFE.getDouble(null, struct + ImuSample.FSAMPLETIME); }
     /** Unsafe version of {@link #vAccel}. */
     public static HmdVector3d nvAccel(long struct) { return HmdVector3d.create(struct + ImuSample.VACCEL); }
     /** Unsafe version of {@link #vGyro}. */
     public static HmdVector3d nvGyro(long struct) { return HmdVector3d.create(struct + ImuSample.VGYRO); }
     /** Unsafe version of {@link #unOffScaleFlags}. */
-    public static int nunOffScaleFlags(long struct) { return memGetInt(struct + ImuSample.UNOFFSCALEFLAGS); }
+    public static int nunOffScaleFlags(long struct) { return UNSAFE.getInt(null, struct + ImuSample.UNOFFSCALEFLAGS); }
 
     // -----------------------------------
 
     /** An array of {@link ImuSample} structs. */
     public static class Buffer extends StructBuffer<ImuSample, Buffer> {
+
+        private static final ImuSample ELEMENT_FACTORY = ImuSample.create(-1L);
 
         /**
          * Creates a new {@link ImuSample.Buffer} instance backed by the specified container.
@@ -162,18 +160,8 @@ public class ImuSample extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected ImuSample newInstance(long address) {
-            return new ImuSample(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected ImuSample getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code fSampleTime} field. */

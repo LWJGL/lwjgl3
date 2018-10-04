@@ -78,10 +78,6 @@ public class XXH64State extends Struct implements NativeResource {
         RESERVED = layout.offsetof(7);
     }
 
-    XXH64State(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link XXH64State} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -89,7 +85,7 @@ public class XXH64State extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public XXH64State(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -186,28 +182,29 @@ public class XXH64State extends Struct implements NativeResource {
 
     /** Returns a new {@link XXH64State} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XXH64State malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(XXH64State.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link XXH64State} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XXH64State calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(XXH64State.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link XXH64State} instance allocated with {@link BufferUtils}. */
     public static XXH64State create() {
-        return new XXH64State(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(XXH64State.class, memAddress(container), container);
     }
 
     /** Returns a new {@link XXH64State} instance for the specified memory address. */
     public static XXH64State create(long address) {
-        return new XXH64State(address, null);
+        return wrap(XXH64State.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XXH64State createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(XXH64State.class, address);
     }
 
     /**
@@ -216,7 +213,7 @@ public class XXH64State extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XXH64State.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -225,7 +222,7 @@ public class XXH64State extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XXH64State.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -234,7 +231,8 @@ public class XXH64State extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XXH64State.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -244,13 +242,13 @@ public class XXH64State extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XXH64State.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XXH64State.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -271,7 +269,7 @@ public class XXH64State extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XXH64State mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(XXH64State.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -280,7 +278,7 @@ public class XXH64State extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XXH64State callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(XXH64State.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -308,7 +306,7 @@ public class XXH64State extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XXH64State.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -318,46 +316,46 @@ public class XXH64State extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XXH64State.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #total_len}. */
-    public static long ntotal_len(long struct) { return memGetLong(struct + XXH64State.TOTAL_LEN); }
+    public static long ntotal_len(long struct) { return UNSAFE.getLong(null, struct + XXH64State.TOTAL_LEN); }
     /** Unsafe version of {@link #v1}. */
-    public static long nv1(long struct) { return memGetLong(struct + XXH64State.V1); }
+    public static long nv1(long struct) { return UNSAFE.getLong(null, struct + XXH64State.V1); }
     /** Unsafe version of {@link #v2}. */
-    public static long nv2(long struct) { return memGetLong(struct + XXH64State.V2); }
+    public static long nv2(long struct) { return UNSAFE.getLong(null, struct + XXH64State.V2); }
     /** Unsafe version of {@link #v3}. */
-    public static long nv3(long struct) { return memGetLong(struct + XXH64State.V3); }
+    public static long nv3(long struct) { return UNSAFE.getLong(null, struct + XXH64State.V3); }
     /** Unsafe version of {@link #v4}. */
-    public static long nv4(long struct) { return memGetLong(struct + XXH64State.V4); }
+    public static long nv4(long struct) { return UNSAFE.getLong(null, struct + XXH64State.V4); }
     /** Unsafe version of {@link #mem64}. */
     public static LongBuffer nmem64(long struct) { return memLongBuffer(struct + XXH64State.MEM64, 4); }
     /** Unsafe version of {@link #mem64(int) mem64}. */
     public static long nmem64(long struct, int index) {
-        return memGetLong(struct + XXH64State.MEM64 + check(index, 4) * 8);
+        return UNSAFE.getLong(null, struct + XXH64State.MEM64 + check(index, 4) * 8);
     }
     /** Unsafe version of {@link #memsize}. */
-    public static int nmemsize(long struct) { return memGetInt(struct + XXH64State.MEMSIZE); }
+    public static int nmemsize(long struct) { return UNSAFE.getInt(null, struct + XXH64State.MEMSIZE); }
     /** Unsafe version of {@link #reserved}. */
     public static IntBuffer nreserved(long struct) { return memIntBuffer(struct + XXH64State.RESERVED, 2); }
     /** Unsafe version of {@link #reserved(int) reserved}. */
     public static int nreserved(long struct, int index) {
-        return memGetInt(struct + XXH64State.RESERVED + check(index, 2) * 4);
+        return UNSAFE.getInt(null, struct + XXH64State.RESERVED + check(index, 2) * 4);
     }
 
     /** Unsafe version of {@link #total_len(long) total_len}. */
-    public static void ntotal_len(long struct, long value) { memPutLong(struct + XXH64State.TOTAL_LEN, value); }
+    public static void ntotal_len(long struct, long value) { UNSAFE.putLong(null, struct + XXH64State.TOTAL_LEN, value); }
     /** Unsafe version of {@link #v1(long) v1}. */
-    public static void nv1(long struct, long value) { memPutLong(struct + XXH64State.V1, value); }
+    public static void nv1(long struct, long value) { UNSAFE.putLong(null, struct + XXH64State.V1, value); }
     /** Unsafe version of {@link #v2(long) v2}. */
-    public static void nv2(long struct, long value) { memPutLong(struct + XXH64State.V2, value); }
+    public static void nv2(long struct, long value) { UNSAFE.putLong(null, struct + XXH64State.V2, value); }
     /** Unsafe version of {@link #v3(long) v3}. */
-    public static void nv3(long struct, long value) { memPutLong(struct + XXH64State.V3, value); }
+    public static void nv3(long struct, long value) { UNSAFE.putLong(null, struct + XXH64State.V3, value); }
     /** Unsafe version of {@link #v4(long) v4}. */
-    public static void nv4(long struct, long value) { memPutLong(struct + XXH64State.V4, value); }
+    public static void nv4(long struct, long value) { UNSAFE.putLong(null, struct + XXH64State.V4, value); }
     /** Unsafe version of {@link #mem64(LongBuffer) mem64}. */
     public static void nmem64(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 4); }
@@ -365,10 +363,10 @@ public class XXH64State extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #mem64(int, long) mem64}. */
     public static void nmem64(long struct, int index, long value) {
-        memPutLong(struct + XXH64State.MEM64 + check(index, 4) * 8, value);
+        UNSAFE.putLong(null, struct + XXH64State.MEM64 + check(index, 4) * 8, value);
     }
     /** Unsafe version of {@link #memsize(int) memsize}. */
-    public static void nmemsize(long struct, int value) { memPutInt(struct + XXH64State.MEMSIZE, value); }
+    public static void nmemsize(long struct, int value) { UNSAFE.putInt(null, struct + XXH64State.MEMSIZE, value); }
     /** Unsafe version of {@link #reserved(IntBuffer) reserved}. */
     public static void nreserved(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
@@ -376,13 +374,15 @@ public class XXH64State extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #reserved(int, int) reserved}. */
     public static void nreserved(long struct, int index, int value) {
-        memPutInt(struct + XXH64State.RESERVED + check(index, 2) * 4, value);
+        UNSAFE.putInt(null, struct + XXH64State.RESERVED + check(index, 2) * 4, value);
     }
 
     // -----------------------------------
 
     /** An array of {@link XXH64State} structs. */
     public static class Buffer extends StructBuffer<XXH64State, Buffer> implements NativeResource {
+
+        private static final XXH64State ELEMENT_FACTORY = XXH64State.create(-1L);
 
         /**
          * Creates a new {@link XXH64State.Buffer} instance backed by the specified container.
@@ -411,18 +411,8 @@ public class XXH64State extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected XXH64State newInstance(long address) {
-            return new XXH64State(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected XXH64State getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code total_len} field. */

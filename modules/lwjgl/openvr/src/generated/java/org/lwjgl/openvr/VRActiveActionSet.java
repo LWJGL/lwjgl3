@@ -74,10 +74,6 @@ public class VRActiveActionSet extends Struct implements NativeResource {
         NPRIORITY = layout.offsetof(4);
     }
 
-    VRActiveActionSet(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VRActiveActionSet} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -85,7 +81,7 @@ public class VRActiveActionSet extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VRActiveActionSet(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -144,28 +140,29 @@ public class VRActiveActionSet extends Struct implements NativeResource {
 
     /** Returns a new {@link VRActiveActionSet} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VRActiveActionSet malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VRActiveActionSet.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VRActiveActionSet} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VRActiveActionSet calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VRActiveActionSet.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VRActiveActionSet} instance allocated with {@link BufferUtils}. */
     public static VRActiveActionSet create() {
-        return new VRActiveActionSet(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VRActiveActionSet.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VRActiveActionSet} instance for the specified memory address. */
     public static VRActiveActionSet create(long address) {
-        return new VRActiveActionSet(address, null);
+        return wrap(VRActiveActionSet.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VRActiveActionSet createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VRActiveActionSet.class, address);
     }
 
     /**
@@ -174,7 +171,7 @@ public class VRActiveActionSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRActiveActionSet.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -183,7 +180,7 @@ public class VRActiveActionSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRActiveActionSet.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -192,7 +189,8 @@ public class VRActiveActionSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRActiveActionSet.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -202,13 +200,13 @@ public class VRActiveActionSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRActiveActionSet.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VRActiveActionSet.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -229,7 +227,7 @@ public class VRActiveActionSet extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VRActiveActionSet mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VRActiveActionSet.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -238,7 +236,7 @@ public class VRActiveActionSet extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VRActiveActionSet callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VRActiveActionSet.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -266,7 +264,7 @@ public class VRActiveActionSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRActiveActionSet.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -276,33 +274,35 @@ public class VRActiveActionSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRActiveActionSet.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #ulActionSet}. */
-    public static long nulActionSet(long struct) { return memGetLong(struct + VRActiveActionSet.ULACTIONSET); }
+    public static long nulActionSet(long struct) { return UNSAFE.getLong(null, struct + VRActiveActionSet.ULACTIONSET); }
     /** Unsafe version of {@link #ulRestrictedToDevice}. */
-    public static long nulRestrictedToDevice(long struct) { return memGetLong(struct + VRActiveActionSet.ULRESTRICTEDTODEVICE); }
+    public static long nulRestrictedToDevice(long struct) { return UNSAFE.getLong(null, struct + VRActiveActionSet.ULRESTRICTEDTODEVICE); }
     /** Unsafe version of {@link #ulSecondaryActionSet}. */
-    public static long nulSecondaryActionSet(long struct) { return memGetLong(struct + VRActiveActionSet.ULSECONDARYACTIONSET); }
+    public static long nulSecondaryActionSet(long struct) { return UNSAFE.getLong(null, struct + VRActiveActionSet.ULSECONDARYACTIONSET); }
     /** Unsafe version of {@link #nPriority}. */
-    public static int nnPriority(long struct) { return memGetInt(struct + VRActiveActionSet.NPRIORITY); }
+    public static int nnPriority(long struct) { return UNSAFE.getInt(null, struct + VRActiveActionSet.NPRIORITY); }
 
     /** Unsafe version of {@link #ulActionSet(long) ulActionSet}. */
-    public static void nulActionSet(long struct, long value) { memPutLong(struct + VRActiveActionSet.ULACTIONSET, value); }
+    public static void nulActionSet(long struct, long value) { UNSAFE.putLong(null, struct + VRActiveActionSet.ULACTIONSET, value); }
     /** Unsafe version of {@link #ulRestrictedToDevice(long) ulRestrictedToDevice}. */
-    public static void nulRestrictedToDevice(long struct, long value) { memPutLong(struct + VRActiveActionSet.ULRESTRICTEDTODEVICE, value); }
+    public static void nulRestrictedToDevice(long struct, long value) { UNSAFE.putLong(null, struct + VRActiveActionSet.ULRESTRICTEDTODEVICE, value); }
     /** Unsafe version of {@link #ulSecondaryActionSet(long) ulSecondaryActionSet}. */
-    public static void nulSecondaryActionSet(long struct, long value) { memPutLong(struct + VRActiveActionSet.ULSECONDARYACTIONSET, value); }
+    public static void nulSecondaryActionSet(long struct, long value) { UNSAFE.putLong(null, struct + VRActiveActionSet.ULSECONDARYACTIONSET, value); }
     /** Unsafe version of {@link #nPriority(int) nPriority}. */
-    public static void nnPriority(long struct, int value) { memPutInt(struct + VRActiveActionSet.NPRIORITY, value); }
+    public static void nnPriority(long struct, int value) { UNSAFE.putInt(null, struct + VRActiveActionSet.NPRIORITY, value); }
 
     // -----------------------------------
 
     /** An array of {@link VRActiveActionSet} structs. */
     public static class Buffer extends StructBuffer<VRActiveActionSet, Buffer> implements NativeResource {
+
+        private static final VRActiveActionSet ELEMENT_FACTORY = VRActiveActionSet.create(-1L);
 
         /**
          * Creates a new {@link VRActiveActionSet.Buffer} instance backed by the specified container.
@@ -331,18 +331,8 @@ public class VRActiveActionSet extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VRActiveActionSet newInstance(long address) {
-            return new VRActiveActionSet(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VRActiveActionSet getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code ulActionSet} field. */

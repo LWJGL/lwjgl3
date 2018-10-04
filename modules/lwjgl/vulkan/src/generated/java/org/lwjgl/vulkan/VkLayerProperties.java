@@ -71,10 +71,6 @@ public class VkLayerProperties extends Struct implements NativeResource {
         DESCRIPTION = layout.offsetof(3);
     }
 
-    VkLayerProperties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkLayerProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -82,7 +78,7 @@ public class VkLayerProperties extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkLayerProperties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -111,28 +107,29 @@ public class VkLayerProperties extends Struct implements NativeResource {
 
     /** Returns a new {@link VkLayerProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkLayerProperties malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkLayerProperties.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkLayerProperties} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkLayerProperties calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkLayerProperties.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkLayerProperties} instance allocated with {@link BufferUtils}. */
     public static VkLayerProperties create() {
-        return new VkLayerProperties(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkLayerProperties.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkLayerProperties} instance for the specified memory address. */
     public static VkLayerProperties create(long address) {
-        return new VkLayerProperties(address, null);
+        return wrap(VkLayerProperties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkLayerProperties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkLayerProperties.class, address);
     }
 
     /**
@@ -141,7 +138,7 @@ public class VkLayerProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkLayerProperties.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -150,7 +147,7 @@ public class VkLayerProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkLayerProperties.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -159,7 +156,8 @@ public class VkLayerProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkLayerProperties.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -169,13 +167,13 @@ public class VkLayerProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkLayerProperties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkLayerProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -196,7 +194,7 @@ public class VkLayerProperties extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkLayerProperties mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkLayerProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -205,7 +203,7 @@ public class VkLayerProperties extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkLayerProperties callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkLayerProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -233,7 +231,7 @@ public class VkLayerProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkLayerProperties.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -243,7 +241,7 @@ public class VkLayerProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkLayerProperties.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -253,9 +251,9 @@ public class VkLayerProperties extends Struct implements NativeResource {
     /** Unsafe version of {@link #layerNameString}. */
     public static String nlayerNameString(long struct) { return memUTF8(struct + VkLayerProperties.LAYERNAME); }
     /** Unsafe version of {@link #specVersion}. */
-    public static int nspecVersion(long struct) { return memGetInt(struct + VkLayerProperties.SPECVERSION); }
+    public static int nspecVersion(long struct) { return UNSAFE.getInt(null, struct + VkLayerProperties.SPECVERSION); }
     /** Unsafe version of {@link #implementationVersion}. */
-    public static int nimplementationVersion(long struct) { return memGetInt(struct + VkLayerProperties.IMPLEMENTATIONVERSION); }
+    public static int nimplementationVersion(long struct) { return UNSAFE.getInt(null, struct + VkLayerProperties.IMPLEMENTATIONVERSION); }
     /** Unsafe version of {@link #description}. */
     public static ByteBuffer ndescription(long struct) { return memByteBuffer(struct + VkLayerProperties.DESCRIPTION, VK_MAX_DESCRIPTION_SIZE); }
     /** Unsafe version of {@link #descriptionString}. */
@@ -265,6 +263,8 @@ public class VkLayerProperties extends Struct implements NativeResource {
 
     /** An array of {@link VkLayerProperties} structs. */
     public static class Buffer extends StructBuffer<VkLayerProperties, Buffer> implements NativeResource {
+
+        private static final VkLayerProperties ELEMENT_FACTORY = VkLayerProperties.create(-1L);
 
         /**
          * Creates a new {@link VkLayerProperties.Buffer} instance backed by the specified container.
@@ -293,18 +293,8 @@ public class VkLayerProperties extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkLayerProperties newInstance(long address) {
-            return new VkLayerProperties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkLayerProperties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link ByteBuffer} view of the {@code layerName} field. */

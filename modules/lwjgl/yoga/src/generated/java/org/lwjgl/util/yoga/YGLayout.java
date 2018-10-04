@@ -109,10 +109,6 @@ public class YGLayout extends Struct {
         DOESLEGACYSTRETCHFLAGAFFECTSLAYOUT = layout.offsetof(16);
     }
 
-    YGLayout(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link YGLayout} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -120,7 +116,7 @@ public class YGLayout extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public YGLayout(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -194,13 +190,13 @@ public class YGLayout extends Struct {
 
     /** Returns a new {@link YGLayout} instance for the specified memory address. */
     public static YGLayout create(long address) {
-        return new YGLayout(address, null);
+        return wrap(YGLayout.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGLayout createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(YGLayout.class, address);
     }
 
     /**
@@ -210,13 +206,13 @@ public class YGLayout extends Struct {
      * @param capacity the buffer capacity
      */
     public static YGLayout.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGLayout.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -225,46 +221,46 @@ public class YGLayout extends Struct {
     public static FloatBuffer npositions(long struct) { return memFloatBuffer(struct + YGLayout.POSITIONS, 4); }
     /** Unsafe version of {@link #positions(int) positions}. */
     public static float npositions(long struct, int index) {
-        return memGetFloat(struct + YGLayout.POSITIONS + check(index, 4) * 4);
+        return UNSAFE.getFloat(null, struct + YGLayout.POSITIONS + check(index, 4) * 4);
     }
     /** Unsafe version of {@link #dimensions}. */
     public static FloatBuffer ndimensions(long struct) { return memFloatBuffer(struct + YGLayout.DIMENSIONS, 2); }
     /** Unsafe version of {@link #dimensions(int) dimensions}. */
     public static float ndimensions(long struct, int index) {
-        return memGetFloat(struct + YGLayout.DIMENSIONS + check(index, 2) * 4);
+        return UNSAFE.getFloat(null, struct + YGLayout.DIMENSIONS + check(index, 2) * 4);
     }
     /** Unsafe version of {@link #margin}. */
     public static FloatBuffer nmargin(long struct) { return memFloatBuffer(struct + YGLayout.MARGIN, 6); }
     /** Unsafe version of {@link #margin(int) margin}. */
     public static float nmargin(long struct, int index) {
-        return memGetFloat(struct + YGLayout.MARGIN + check(index, 6) * 4);
+        return UNSAFE.getFloat(null, struct + YGLayout.MARGIN + check(index, 6) * 4);
     }
     /** Unsafe version of {@link #border}. */
     public static FloatBuffer nborder(long struct) { return memFloatBuffer(struct + YGLayout.BORDER, 6); }
     /** Unsafe version of {@link #border(int) border}. */
     public static float nborder(long struct, int index) {
-        return memGetFloat(struct + YGLayout.BORDER + check(index, 6) * 4);
+        return UNSAFE.getFloat(null, struct + YGLayout.BORDER + check(index, 6) * 4);
     }
     /** Unsafe version of {@link #padding}. */
     public static FloatBuffer npadding(long struct) { return memFloatBuffer(struct + YGLayout.PADDING, 6); }
     /** Unsafe version of {@link #padding(int) padding}. */
     public static float npadding(long struct, int index) {
-        return memGetFloat(struct + YGLayout.PADDING + check(index, 6) * 4);
+        return UNSAFE.getFloat(null, struct + YGLayout.PADDING + check(index, 6) * 4);
     }
     /** Unsafe version of {@link #direction}. */
-    public static int ndirection(long struct) { return memGetInt(struct + YGLayout.DIRECTION); }
+    public static int ndirection(long struct) { return UNSAFE.getInt(null, struct + YGLayout.DIRECTION); }
     /** Unsafe version of {@link #computedFlexBasisGeneration}. */
-    public static int ncomputedFlexBasisGeneration(long struct) { return memGetInt(struct + YGLayout.COMPUTEDFLEXBASISGENERATION); }
+    public static int ncomputedFlexBasisGeneration(long struct) { return UNSAFE.getInt(null, struct + YGLayout.COMPUTEDFLEXBASISGENERATION); }
     /** Unsafe version of {@link #computedFlexBasis}. */
     public static YGFloatOptional ncomputedFlexBasis(long struct) { return YGFloatOptional.create(struct + YGLayout.COMPUTEDFLEXBASIS); }
     /** Unsafe version of {@link #hadOverflow}. */
-    public static boolean nhadOverflow(long struct) { return memGetByte(struct + YGLayout.HADOVERFLOW) != 0; }
+    public static boolean nhadOverflow(long struct) { return UNSAFE.getByte(null, struct + YGLayout.HADOVERFLOW) != 0; }
     /** Unsafe version of {@link #generationCount}. */
-    public static int ngenerationCount(long struct) { return memGetInt(struct + YGLayout.GENERATIONCOUNT); }
+    public static int ngenerationCount(long struct) { return UNSAFE.getInt(null, struct + YGLayout.GENERATIONCOUNT); }
     /** Unsafe version of {@link #lastOwnerDirection}. */
-    public static int nlastOwnerDirection(long struct) { return memGetInt(struct + YGLayout.LASTOWNERDIRECTION); }
+    public static int nlastOwnerDirection(long struct) { return UNSAFE.getInt(null, struct + YGLayout.LASTOWNERDIRECTION); }
     /** Unsafe version of {@link #nextCachedMeasurementsIndex}. */
-    public static int nnextCachedMeasurementsIndex(long struct) { return memGetInt(struct + YGLayout.NEXTCACHEDMEASUREMENTSINDEX); }
+    public static int nnextCachedMeasurementsIndex(long struct) { return UNSAFE.getInt(null, struct + YGLayout.NEXTCACHEDMEASUREMENTSINDEX); }
     /** Unsafe version of {@link #cachedMeasurements}. */
     public static YGCachedMeasurement.Buffer ncachedMeasurements(long struct) { return YGCachedMeasurement.create(struct + YGLayout.CACHEDMEASUREMENTS, 16); }
     /** Unsafe version of {@link #cachedMeasurements(int) cachedMeasurements}. */
@@ -275,19 +271,21 @@ public class YGLayout extends Struct {
     public static FloatBuffer nmeasuredDimensions(long struct) { return memFloatBuffer(struct + YGLayout.MEASUREDDIMENSIONS, 2); }
     /** Unsafe version of {@link #measuredDimensions(int) measuredDimensions}. */
     public static float nmeasuredDimensions(long struct, int index) {
-        return memGetFloat(struct + YGLayout.MEASUREDDIMENSIONS + check(index, 2) * 4);
+        return UNSAFE.getFloat(null, struct + YGLayout.MEASUREDDIMENSIONS + check(index, 2) * 4);
     }
     /** Unsafe version of {@link #cachedLayout}. */
     public static YGCachedMeasurement ncachedLayout(long struct) { return YGCachedMeasurement.create(struct + YGLayout.CACHEDLAYOUT); }
     /** Unsafe version of {@link #didUseLegacyFlag}. */
-    public static boolean ndidUseLegacyFlag(long struct) { return memGetByte(struct + YGLayout.DIDUSELEGACYFLAG) != 0; }
+    public static boolean ndidUseLegacyFlag(long struct) { return UNSAFE.getByte(null, struct + YGLayout.DIDUSELEGACYFLAG) != 0; }
     /** Unsafe version of {@link #doesLegacyStretchFlagAffectsLayout}. */
-    public static boolean ndoesLegacyStretchFlagAffectsLayout(long struct) { return memGetByte(struct + YGLayout.DOESLEGACYSTRETCHFLAGAFFECTSLAYOUT) != 0; }
+    public static boolean ndoesLegacyStretchFlagAffectsLayout(long struct) { return UNSAFE.getByte(null, struct + YGLayout.DOESLEGACYSTRETCHFLAGAFFECTSLAYOUT) != 0; }
 
     // -----------------------------------
 
     /** An array of {@link YGLayout} structs. */
     public static class Buffer extends StructBuffer<YGLayout, Buffer> {
+
+        private static final YGLayout ELEMENT_FACTORY = YGLayout.create(-1L);
 
         /**
          * Creates a new {@link YGLayout.Buffer} instance backed by the specified container.
@@ -316,18 +314,8 @@ public class YGLayout extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected YGLayout newInstance(long address) {
-            return new YGLayout(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected YGLayout getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link FloatBuffer} view of the {@code positions} field. */

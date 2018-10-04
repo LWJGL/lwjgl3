@@ -64,10 +64,6 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
         MEMORYTYPEBITS = layout.offsetof(2);
     }
 
-    VkMemoryRequirements(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkMemoryRequirements} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -75,7 +71,7 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkMemoryRequirements(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -95,28 +91,29 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
 
     /** Returns a new {@link VkMemoryRequirements} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkMemoryRequirements malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkMemoryRequirements.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkMemoryRequirements} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkMemoryRequirements calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkMemoryRequirements.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkMemoryRequirements} instance allocated with {@link BufferUtils}. */
     public static VkMemoryRequirements create() {
-        return new VkMemoryRequirements(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkMemoryRequirements.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkMemoryRequirements} instance for the specified memory address. */
     public static VkMemoryRequirements create(long address) {
-        return new VkMemoryRequirements(address, null);
+        return wrap(VkMemoryRequirements.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryRequirements createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkMemoryRequirements.class, address);
     }
 
     /**
@@ -125,7 +122,7 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryRequirements.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -134,7 +131,7 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryRequirements.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -143,7 +140,8 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryRequirements.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -153,13 +151,13 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryRequirements.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryRequirements.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -180,7 +178,7 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkMemoryRequirements mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkMemoryRequirements.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -189,7 +187,7 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkMemoryRequirements callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkMemoryRequirements.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -217,7 +215,7 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryRequirements.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -227,22 +225,24 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryRequirements.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return memGetLong(struct + VkMemoryRequirements.SIZE); }
+    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkMemoryRequirements.SIZE); }
     /** Unsafe version of {@link #alignment}. */
-    public static long nalignment(long struct) { return memGetLong(struct + VkMemoryRequirements.ALIGNMENT); }
+    public static long nalignment(long struct) { return UNSAFE.getLong(null, struct + VkMemoryRequirements.ALIGNMENT); }
     /** Unsafe version of {@link #memoryTypeBits}. */
-    public static int nmemoryTypeBits(long struct) { return memGetInt(struct + VkMemoryRequirements.MEMORYTYPEBITS); }
+    public static int nmemoryTypeBits(long struct) { return UNSAFE.getInt(null, struct + VkMemoryRequirements.MEMORYTYPEBITS); }
 
     // -----------------------------------
 
     /** An array of {@link VkMemoryRequirements} structs. */
     public static class Buffer extends StructBuffer<VkMemoryRequirements, Buffer> implements NativeResource {
+
+        private static final VkMemoryRequirements ELEMENT_FACTORY = VkMemoryRequirements.create(-1L);
 
         /**
          * Creates a new {@link VkMemoryRequirements.Buffer} instance backed by the specified container.
@@ -271,18 +271,8 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkMemoryRequirements newInstance(long address) {
-            return new VkMemoryRequirements(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkMemoryRequirements getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code size} field. */

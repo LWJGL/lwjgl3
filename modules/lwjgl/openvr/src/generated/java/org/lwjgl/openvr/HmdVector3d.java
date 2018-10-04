@@ -48,10 +48,6 @@ public class HmdVector3d extends Struct implements NativeResource {
         V = layout.offsetof(0);
     }
 
-    HmdVector3d(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link HmdVector3d} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -59,7 +55,7 @@ public class HmdVector3d extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public HmdVector3d(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -92,28 +88,29 @@ public class HmdVector3d extends Struct implements NativeResource {
 
     /** Returns a new {@link HmdVector3d} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static HmdVector3d malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(HmdVector3d.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link HmdVector3d} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static HmdVector3d calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(HmdVector3d.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link HmdVector3d} instance allocated with {@link BufferUtils}. */
     public static HmdVector3d create() {
-        return new HmdVector3d(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(HmdVector3d.class, memAddress(container), container);
     }
 
     /** Returns a new {@link HmdVector3d} instance for the specified memory address. */
     public static HmdVector3d create(long address) {
-        return new HmdVector3d(address, null);
+        return wrap(HmdVector3d.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static HmdVector3d createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(HmdVector3d.class, address);
     }
 
     /**
@@ -122,7 +119,7 @@ public class HmdVector3d extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector3d.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -131,7 +128,7 @@ public class HmdVector3d extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector3d.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -140,7 +137,8 @@ public class HmdVector3d extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector3d.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -150,13 +148,13 @@ public class HmdVector3d extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector3d.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static HmdVector3d.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -177,7 +175,7 @@ public class HmdVector3d extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static HmdVector3d mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(HmdVector3d.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -186,7 +184,7 @@ public class HmdVector3d extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static HmdVector3d callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(HmdVector3d.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -214,7 +212,7 @@ public class HmdVector3d extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector3d.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -224,7 +222,7 @@ public class HmdVector3d extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector3d.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -233,7 +231,7 @@ public class HmdVector3d extends Struct implements NativeResource {
     public static DoubleBuffer nv(long struct) { return memDoubleBuffer(struct + HmdVector3d.V, 3); }
     /** Unsafe version of {@link #v(int) v}. */
     public static double nv(long struct, int index) {
-        return memGetDouble(struct + HmdVector3d.V + check(index, 3) * 8);
+        return UNSAFE.getDouble(null, struct + HmdVector3d.V + check(index, 3) * 8);
     }
 
     /** Unsafe version of {@link #v(DoubleBuffer) v}. */
@@ -243,13 +241,15 @@ public class HmdVector3d extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #v(int, double) v}. */
     public static void nv(long struct, int index, double value) {
-        memPutDouble(struct + HmdVector3d.V + check(index, 3) * 8, value);
+        UNSAFE.putDouble(null, struct + HmdVector3d.V + check(index, 3) * 8, value);
     }
 
     // -----------------------------------
 
     /** An array of {@link HmdVector3d} structs. */
     public static class Buffer extends StructBuffer<HmdVector3d, Buffer> implements NativeResource {
+
+        private static final HmdVector3d ELEMENT_FACTORY = HmdVector3d.create(-1L);
 
         /**
          * Creates a new {@link HmdVector3d.Buffer} instance backed by the specified container.
@@ -278,18 +278,8 @@ public class HmdVector3d extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected HmdVector3d newInstance(long address) {
-            return new HmdVector3d(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected HmdVector3d getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link DoubleBuffer} view of the {@code v} field. */

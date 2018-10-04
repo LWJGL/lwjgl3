@@ -129,10 +129,6 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
         DEVICEMASK = layout.offsetof(6);
     }
 
-    VkAcquireNextImageInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkAcquireNextImageInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -140,7 +136,7 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkAcquireNextImageInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -220,28 +216,29 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
 
     /** Returns a new {@link VkAcquireNextImageInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkAcquireNextImageInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkAcquireNextImageInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkAcquireNextImageInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkAcquireNextImageInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkAcquireNextImageInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkAcquireNextImageInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkAcquireNextImageInfoKHR create() {
-        return new VkAcquireNextImageInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkAcquireNextImageInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkAcquireNextImageInfoKHR} instance for the specified memory address. */
     public static VkAcquireNextImageInfoKHR create(long address) {
-        return new VkAcquireNextImageInfoKHR(address, null);
+        return wrap(VkAcquireNextImageInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAcquireNextImageInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkAcquireNextImageInfoKHR.class, address);
     }
 
     /**
@@ -250,7 +247,7 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkAcquireNextImageInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -259,7 +256,7 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkAcquireNextImageInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -268,7 +265,8 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkAcquireNextImageInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -278,13 +276,13 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkAcquireNextImageInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAcquireNextImageInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -305,7 +303,7 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static VkAcquireNextImageInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkAcquireNextImageInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -314,7 +312,7 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static VkAcquireNextImageInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkAcquireNextImageInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -342,7 +340,7 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkAcquireNextImageInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -352,45 +350,47 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkAcquireNextImageInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkAcquireNextImageInfoKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAcquireNextImageInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAcquireNextImageInfoKHR.PNEXT); }
     /** Unsafe version of {@link #swapchain}. */
-    public static long nswapchain(long struct) { return memGetLong(struct + VkAcquireNextImageInfoKHR.SWAPCHAIN); }
+    public static long nswapchain(long struct) { return UNSAFE.getLong(null, struct + VkAcquireNextImageInfoKHR.SWAPCHAIN); }
     /** Unsafe version of {@link #timeout}. */
-    public static long ntimeout(long struct) { return memGetLong(struct + VkAcquireNextImageInfoKHR.TIMEOUT); }
+    public static long ntimeout(long struct) { return UNSAFE.getLong(null, struct + VkAcquireNextImageInfoKHR.TIMEOUT); }
     /** Unsafe version of {@link #semaphore}. */
-    public static long nsemaphore(long struct) { return memGetLong(struct + VkAcquireNextImageInfoKHR.SEMAPHORE); }
+    public static long nsemaphore(long struct) { return UNSAFE.getLong(null, struct + VkAcquireNextImageInfoKHR.SEMAPHORE); }
     /** Unsafe version of {@link #fence}. */
-    public static long nfence(long struct) { return memGetLong(struct + VkAcquireNextImageInfoKHR.FENCE); }
+    public static long nfence(long struct) { return UNSAFE.getLong(null, struct + VkAcquireNextImageInfoKHR.FENCE); }
     /** Unsafe version of {@link #deviceMask}. */
-    public static int ndeviceMask(long struct) { return memGetInt(struct + VkAcquireNextImageInfoKHR.DEVICEMASK); }
+    public static int ndeviceMask(long struct) { return UNSAFE.getInt(null, struct + VkAcquireNextImageInfoKHR.DEVICEMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkAcquireNextImageInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAcquireNextImageInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAcquireNextImageInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #swapchain(long) swapchain}. */
-    public static void nswapchain(long struct, long value) { memPutLong(struct + VkAcquireNextImageInfoKHR.SWAPCHAIN, value); }
+    public static void nswapchain(long struct, long value) { UNSAFE.putLong(null, struct + VkAcquireNextImageInfoKHR.SWAPCHAIN, value); }
     /** Unsafe version of {@link #timeout(long) timeout}. */
-    public static void ntimeout(long struct, long value) { memPutLong(struct + VkAcquireNextImageInfoKHR.TIMEOUT, value); }
+    public static void ntimeout(long struct, long value) { UNSAFE.putLong(null, struct + VkAcquireNextImageInfoKHR.TIMEOUT, value); }
     /** Unsafe version of {@link #semaphore(long) semaphore}. */
-    public static void nsemaphore(long struct, long value) { memPutLong(struct + VkAcquireNextImageInfoKHR.SEMAPHORE, value); }
+    public static void nsemaphore(long struct, long value) { UNSAFE.putLong(null, struct + VkAcquireNextImageInfoKHR.SEMAPHORE, value); }
     /** Unsafe version of {@link #fence(long) fence}. */
-    public static void nfence(long struct, long value) { memPutLong(struct + VkAcquireNextImageInfoKHR.FENCE, value); }
+    public static void nfence(long struct, long value) { UNSAFE.putLong(null, struct + VkAcquireNextImageInfoKHR.FENCE, value); }
     /** Unsafe version of {@link #deviceMask(int) deviceMask}. */
-    public static void ndeviceMask(long struct, int value) { memPutInt(struct + VkAcquireNextImageInfoKHR.DEVICEMASK, value); }
+    public static void ndeviceMask(long struct, int value) { UNSAFE.putInt(null, struct + VkAcquireNextImageInfoKHR.DEVICEMASK, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkAcquireNextImageInfoKHR} structs. */
     public static class Buffer extends StructBuffer<VkAcquireNextImageInfoKHR, Buffer> implements NativeResource {
+
+        private static final VkAcquireNextImageInfoKHR ELEMENT_FACTORY = VkAcquireNextImageInfoKHR.create(-1L);
 
         /**
          * Creates a new {@link VkAcquireNextImageInfoKHR.Buffer} instance backed by the specified container.
@@ -419,18 +419,8 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkAcquireNextImageInfoKHR newInstance(long address) {
-            return new VkAcquireNextImageInfoKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkAcquireNextImageInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

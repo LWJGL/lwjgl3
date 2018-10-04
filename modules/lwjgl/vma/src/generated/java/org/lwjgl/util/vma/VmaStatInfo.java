@@ -96,10 +96,6 @@ public class VmaStatInfo extends Struct {
         UNUSEDRANGESIZEMAX = layout.offsetof(10);
     }
 
-    VmaStatInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VmaStatInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -107,7 +103,7 @@ public class VmaStatInfo extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VmaStatInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -151,13 +147,13 @@ public class VmaStatInfo extends Struct {
 
     /** Returns a new {@link VmaStatInfo} instance for the specified memory address. */
     public static VmaStatInfo create(long address) {
-        return new VmaStatInfo(address, null);
+        return wrap(VmaStatInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VmaStatInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VmaStatInfo.class, address);
     }
 
     /**
@@ -167,44 +163,46 @@ public class VmaStatInfo extends Struct {
      * @param capacity the buffer capacity
      */
     public static VmaStatInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VmaStatInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #blockCount}. */
-    public static int nblockCount(long struct) { return memGetInt(struct + VmaStatInfo.BLOCKCOUNT); }
+    public static int nblockCount(long struct) { return UNSAFE.getInt(null, struct + VmaStatInfo.BLOCKCOUNT); }
     /** Unsafe version of {@link #allocationCount}. */
-    public static int nallocationCount(long struct) { return memGetInt(struct + VmaStatInfo.ALLOCATIONCOUNT); }
+    public static int nallocationCount(long struct) { return UNSAFE.getInt(null, struct + VmaStatInfo.ALLOCATIONCOUNT); }
     /** Unsafe version of {@link #unusedRangeCount}. */
-    public static int nunusedRangeCount(long struct) { return memGetInt(struct + VmaStatInfo.UNUSEDRANGECOUNT); }
+    public static int nunusedRangeCount(long struct) { return UNSAFE.getInt(null, struct + VmaStatInfo.UNUSEDRANGECOUNT); }
     /** Unsafe version of {@link #usedBytes}. */
-    public static long nusedBytes(long struct) { return memGetLong(struct + VmaStatInfo.USEDBYTES); }
+    public static long nusedBytes(long struct) { return UNSAFE.getLong(null, struct + VmaStatInfo.USEDBYTES); }
     /** Unsafe version of {@link #unusedBytes}. */
-    public static long nunusedBytes(long struct) { return memGetLong(struct + VmaStatInfo.UNUSEDBYTES); }
+    public static long nunusedBytes(long struct) { return UNSAFE.getLong(null, struct + VmaStatInfo.UNUSEDBYTES); }
     /** Unsafe version of {@link #allocationSizeMin}. */
-    public static long nallocationSizeMin(long struct) { return memGetLong(struct + VmaStatInfo.ALLOCATIONSIZEMIN); }
+    public static long nallocationSizeMin(long struct) { return UNSAFE.getLong(null, struct + VmaStatInfo.ALLOCATIONSIZEMIN); }
     /** Unsafe version of {@link #allocationSizeAvg}. */
-    public static long nallocationSizeAvg(long struct) { return memGetLong(struct + VmaStatInfo.ALLOCATIONSIZEAVG); }
+    public static long nallocationSizeAvg(long struct) { return UNSAFE.getLong(null, struct + VmaStatInfo.ALLOCATIONSIZEAVG); }
     /** Unsafe version of {@link #allocationSizeMax}. */
-    public static long nallocationSizeMax(long struct) { return memGetLong(struct + VmaStatInfo.ALLOCATIONSIZEMAX); }
+    public static long nallocationSizeMax(long struct) { return UNSAFE.getLong(null, struct + VmaStatInfo.ALLOCATIONSIZEMAX); }
     /** Unsafe version of {@link #unusedRangeSizeMin}. */
-    public static long nunusedRangeSizeMin(long struct) { return memGetLong(struct + VmaStatInfo.UNUSEDRANGESIZEMIN); }
+    public static long nunusedRangeSizeMin(long struct) { return UNSAFE.getLong(null, struct + VmaStatInfo.UNUSEDRANGESIZEMIN); }
     /** Unsafe version of {@link #unusedRangeSizeAvg}. */
-    public static long nunusedRangeSizeAvg(long struct) { return memGetLong(struct + VmaStatInfo.UNUSEDRANGESIZEAVG); }
+    public static long nunusedRangeSizeAvg(long struct) { return UNSAFE.getLong(null, struct + VmaStatInfo.UNUSEDRANGESIZEAVG); }
     /** Unsafe version of {@link #unusedRangeSizeMax}. */
-    public static long nunusedRangeSizeMax(long struct) { return memGetLong(struct + VmaStatInfo.UNUSEDRANGESIZEMAX); }
+    public static long nunusedRangeSizeMax(long struct) { return UNSAFE.getLong(null, struct + VmaStatInfo.UNUSEDRANGESIZEMAX); }
 
     // -----------------------------------
 
     /** An array of {@link VmaStatInfo} structs. */
     public static class Buffer extends StructBuffer<VmaStatInfo, Buffer> {
+
+        private static final VmaStatInfo ELEMENT_FACTORY = VmaStatInfo.create(-1L);
 
         /**
          * Creates a new {@link VmaStatInfo.Buffer} instance backed by the specified container.
@@ -233,18 +231,8 @@ public class VmaStatInfo extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VmaStatInfo newInstance(long address) {
-            return new VmaStatInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VmaStatInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code blockCount} field. */

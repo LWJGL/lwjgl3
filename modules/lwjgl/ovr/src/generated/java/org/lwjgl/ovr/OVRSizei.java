@@ -60,10 +60,6 @@ public class OVRSizei extends Struct implements NativeResource {
         H = layout.offsetof(1);
     }
 
-    OVRSizei(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRSizei} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -71,7 +67,7 @@ public class OVRSizei extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRSizei(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -114,28 +110,29 @@ public class OVRSizei extends Struct implements NativeResource {
 
     /** Returns a new {@link OVRSizei} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRSizei malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRSizei.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRSizei} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRSizei calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRSizei.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRSizei} instance allocated with {@link BufferUtils}. */
     public static OVRSizei create() {
-        return new OVRSizei(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRSizei.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRSizei} instance for the specified memory address. */
     public static OVRSizei create(long address) {
-        return new OVRSizei(address, null);
+        return wrap(OVRSizei.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRSizei createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRSizei.class, address);
     }
 
     /**
@@ -144,7 +141,7 @@ public class OVRSizei extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRSizei.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -153,7 +150,7 @@ public class OVRSizei extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRSizei.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -162,7 +159,8 @@ public class OVRSizei extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRSizei.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -172,13 +170,13 @@ public class OVRSizei extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRSizei.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRSizei.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -199,7 +197,7 @@ public class OVRSizei extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRSizei mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRSizei.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -208,7 +206,7 @@ public class OVRSizei extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRSizei callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRSizei.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -236,7 +234,7 @@ public class OVRSizei extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRSizei.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -246,25 +244,27 @@ public class OVRSizei extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRSizei.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #w}. */
-    public static int nw(long struct) { return memGetInt(struct + OVRSizei.W); }
+    public static int nw(long struct) { return UNSAFE.getInt(null, struct + OVRSizei.W); }
     /** Unsafe version of {@link #h}. */
-    public static int nh(long struct) { return memGetInt(struct + OVRSizei.H); }
+    public static int nh(long struct) { return UNSAFE.getInt(null, struct + OVRSizei.H); }
 
     /** Unsafe version of {@link #w(int) w}. */
-    public static void nw(long struct, int value) { memPutInt(struct + OVRSizei.W, value); }
+    public static void nw(long struct, int value) { UNSAFE.putInt(null, struct + OVRSizei.W, value); }
     /** Unsafe version of {@link #h(int) h}. */
-    public static void nh(long struct, int value) { memPutInt(struct + OVRSizei.H, value); }
+    public static void nh(long struct, int value) { UNSAFE.putInt(null, struct + OVRSizei.H, value); }
 
     // -----------------------------------
 
     /** An array of {@link OVRSizei} structs. */
     public static class Buffer extends StructBuffer<OVRSizei, Buffer> implements NativeResource {
+
+        private static final OVRSizei ELEMENT_FACTORY = OVRSizei.create(-1L);
 
         /**
          * Creates a new {@link OVRSizei.Buffer} instance backed by the specified container.
@@ -293,18 +293,8 @@ public class OVRSizei extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRSizei newInstance(long address) {
-            return new OVRSizei(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRSizei getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code w} field. */

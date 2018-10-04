@@ -62,10 +62,6 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
         FRACTION = layout.offsetof(4);
     }
 
-    SQL_DAY_SECOND_STRUCT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link SQL_DAY_SECOND_STRUCT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -73,7 +69,7 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public SQL_DAY_SECOND_STRUCT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -139,28 +135,29 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
 
     /** Returns a new {@link SQL_DAY_SECOND_STRUCT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static SQL_DAY_SECOND_STRUCT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(SQL_DAY_SECOND_STRUCT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link SQL_DAY_SECOND_STRUCT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static SQL_DAY_SECOND_STRUCT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(SQL_DAY_SECOND_STRUCT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link SQL_DAY_SECOND_STRUCT} instance allocated with {@link BufferUtils}. */
     public static SQL_DAY_SECOND_STRUCT create() {
-        return new SQL_DAY_SECOND_STRUCT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(SQL_DAY_SECOND_STRUCT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link SQL_DAY_SECOND_STRUCT} instance for the specified memory address. */
     public static SQL_DAY_SECOND_STRUCT create(long address) {
-        return new SQL_DAY_SECOND_STRUCT(address, null);
+        return wrap(SQL_DAY_SECOND_STRUCT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static SQL_DAY_SECOND_STRUCT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(SQL_DAY_SECOND_STRUCT.class, address);
     }
 
     /**
@@ -169,7 +166,7 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_DAY_SECOND_STRUCT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +175,7 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_DAY_SECOND_STRUCT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -187,7 +184,8 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_DAY_SECOND_STRUCT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -197,13 +195,13 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_DAY_SECOND_STRUCT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static SQL_DAY_SECOND_STRUCT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -224,7 +222,7 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static SQL_DAY_SECOND_STRUCT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(SQL_DAY_SECOND_STRUCT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -233,7 +231,7 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static SQL_DAY_SECOND_STRUCT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(SQL_DAY_SECOND_STRUCT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -261,7 +259,7 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_DAY_SECOND_STRUCT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -271,37 +269,39 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_DAY_SECOND_STRUCT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #day}. */
-    public static int nday(long struct) { return memGetInt(struct + SQL_DAY_SECOND_STRUCT.DAY); }
+    public static int nday(long struct) { return UNSAFE.getInt(null, struct + SQL_DAY_SECOND_STRUCT.DAY); }
     /** Unsafe version of {@link #hour}. */
-    public static int nhour(long struct) { return memGetInt(struct + SQL_DAY_SECOND_STRUCT.HOUR); }
+    public static int nhour(long struct) { return UNSAFE.getInt(null, struct + SQL_DAY_SECOND_STRUCT.HOUR); }
     /** Unsafe version of {@link #minute}. */
-    public static int nminute(long struct) { return memGetInt(struct + SQL_DAY_SECOND_STRUCT.MINUTE); }
+    public static int nminute(long struct) { return UNSAFE.getInt(null, struct + SQL_DAY_SECOND_STRUCT.MINUTE); }
     /** Unsafe version of {@link #second}. */
-    public static int nsecond(long struct) { return memGetInt(struct + SQL_DAY_SECOND_STRUCT.SECOND); }
+    public static int nsecond(long struct) { return UNSAFE.getInt(null, struct + SQL_DAY_SECOND_STRUCT.SECOND); }
     /** Unsafe version of {@link #fraction}. */
-    public static int nfraction(long struct) { return memGetInt(struct + SQL_DAY_SECOND_STRUCT.FRACTION); }
+    public static int nfraction(long struct) { return UNSAFE.getInt(null, struct + SQL_DAY_SECOND_STRUCT.FRACTION); }
 
     /** Unsafe version of {@link #day(int) day}. */
-    public static void nday(long struct, int value) { memPutInt(struct + SQL_DAY_SECOND_STRUCT.DAY, value); }
+    public static void nday(long struct, int value) { UNSAFE.putInt(null, struct + SQL_DAY_SECOND_STRUCT.DAY, value); }
     /** Unsafe version of {@link #hour(int) hour}. */
-    public static void nhour(long struct, int value) { memPutInt(struct + SQL_DAY_SECOND_STRUCT.HOUR, value); }
+    public static void nhour(long struct, int value) { UNSAFE.putInt(null, struct + SQL_DAY_SECOND_STRUCT.HOUR, value); }
     /** Unsafe version of {@link #minute(int) minute}. */
-    public static void nminute(long struct, int value) { memPutInt(struct + SQL_DAY_SECOND_STRUCT.MINUTE, value); }
+    public static void nminute(long struct, int value) { UNSAFE.putInt(null, struct + SQL_DAY_SECOND_STRUCT.MINUTE, value); }
     /** Unsafe version of {@link #second(int) second}. */
-    public static void nsecond(long struct, int value) { memPutInt(struct + SQL_DAY_SECOND_STRUCT.SECOND, value); }
+    public static void nsecond(long struct, int value) { UNSAFE.putInt(null, struct + SQL_DAY_SECOND_STRUCT.SECOND, value); }
     /** Unsafe version of {@link #fraction(int) fraction}. */
-    public static void nfraction(long struct, int value) { memPutInt(struct + SQL_DAY_SECOND_STRUCT.FRACTION, value); }
+    public static void nfraction(long struct, int value) { UNSAFE.putInt(null, struct + SQL_DAY_SECOND_STRUCT.FRACTION, value); }
 
     // -----------------------------------
 
     /** An array of {@link SQL_DAY_SECOND_STRUCT} structs. */
     public static class Buffer extends StructBuffer<SQL_DAY_SECOND_STRUCT, Buffer> implements NativeResource {
+
+        private static final SQL_DAY_SECOND_STRUCT ELEMENT_FACTORY = SQL_DAY_SECOND_STRUCT.create(-1L);
 
         /**
          * Creates a new {@link SQL_DAY_SECOND_STRUCT.Buffer} instance backed by the specified container.
@@ -330,18 +330,8 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected SQL_DAY_SECOND_STRUCT newInstance(long address) {
-            return new SQL_DAY_SECOND_STRUCT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected SQL_DAY_SECOND_STRUCT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code day} field. */

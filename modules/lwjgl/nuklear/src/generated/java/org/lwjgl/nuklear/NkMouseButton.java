@@ -53,10 +53,6 @@ public class NkMouseButton extends Struct {
         CLICKED_POS = layout.offsetof(2);
     }
 
-    NkMouseButton(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkMouseButton} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -64,7 +60,7 @@ public class NkMouseButton extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkMouseButton(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -85,13 +81,13 @@ public class NkMouseButton extends Struct {
 
     /** Returns a new {@link NkMouseButton} instance for the specified memory address. */
     public static NkMouseButton create(long address) {
-        return new NkMouseButton(address, null);
+        return wrap(NkMouseButton.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkMouseButton createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkMouseButton.class, address);
     }
 
     /**
@@ -101,21 +97,21 @@ public class NkMouseButton extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkMouseButton.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkMouseButton.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #down}. */
-    public static int ndown(long struct) { return memGetInt(struct + NkMouseButton.DOWN); }
+    public static int ndown(long struct) { return UNSAFE.getInt(null, struct + NkMouseButton.DOWN); }
     /** Unsafe version of {@link #clicked}. */
-    public static int nclicked(long struct) { return memGetInt(struct + NkMouseButton.CLICKED); }
+    public static int nclicked(long struct) { return UNSAFE.getInt(null, struct + NkMouseButton.CLICKED); }
     /** Unsafe version of {@link #clicked_pos}. */
     public static NkVec2 nclicked_pos(long struct) { return NkVec2.create(struct + NkMouseButton.CLICKED_POS); }
 
@@ -123,6 +119,8 @@ public class NkMouseButton extends Struct {
 
     /** An array of {@link NkMouseButton} structs. */
     public static class Buffer extends StructBuffer<NkMouseButton, Buffer> {
+
+        private static final NkMouseButton ELEMENT_FACTORY = NkMouseButton.create(-1L);
 
         /**
          * Creates a new {@link NkMouseButton.Buffer} instance backed by the specified container.
@@ -151,18 +149,8 @@ public class NkMouseButton extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkMouseButton newInstance(long address) {
-            return new NkMouseButton(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkMouseButton getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code down} field. */

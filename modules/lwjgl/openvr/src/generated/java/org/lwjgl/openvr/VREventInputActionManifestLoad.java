@@ -57,10 +57,6 @@ public class VREventInputActionManifestLoad extends Struct {
         PATHMANIFESTPATH = layout.offsetof(3);
     }
 
-    VREventInputActionManifestLoad(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventInputActionManifestLoad} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -68,7 +64,7 @@ public class VREventInputActionManifestLoad extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventInputActionManifestLoad(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -91,13 +87,13 @@ public class VREventInputActionManifestLoad extends Struct {
 
     /** Returns a new {@link VREventInputActionManifestLoad} instance for the specified memory address. */
     public static VREventInputActionManifestLoad create(long address) {
-        return new VREventInputActionManifestLoad(address, null);
+        return wrap(VREventInputActionManifestLoad.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventInputActionManifestLoad createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventInputActionManifestLoad.class, address);
     }
 
     /**
@@ -107,30 +103,32 @@ public class VREventInputActionManifestLoad extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventInputActionManifestLoad.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventInputActionManifestLoad.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #pathAppKey}. */
-    public static long npathAppKey(long struct) { return memGetLong(struct + VREventInputActionManifestLoad.PATHAPPKEY); }
+    public static long npathAppKey(long struct) { return UNSAFE.getLong(null, struct + VREventInputActionManifestLoad.PATHAPPKEY); }
     /** Unsafe version of {@link #pathMessage}. */
-    public static long npathMessage(long struct) { return memGetLong(struct + VREventInputActionManifestLoad.PATHMESSAGE); }
+    public static long npathMessage(long struct) { return UNSAFE.getLong(null, struct + VREventInputActionManifestLoad.PATHMESSAGE); }
     /** Unsafe version of {@link #pathMessageParam}. */
-    public static long npathMessageParam(long struct) { return memGetLong(struct + VREventInputActionManifestLoad.PATHMESSAGEPARAM); }
+    public static long npathMessageParam(long struct) { return UNSAFE.getLong(null, struct + VREventInputActionManifestLoad.PATHMESSAGEPARAM); }
     /** Unsafe version of {@link #pathManifestPath}. */
-    public static long npathManifestPath(long struct) { return memGetLong(struct + VREventInputActionManifestLoad.PATHMANIFESTPATH); }
+    public static long npathManifestPath(long struct) { return UNSAFE.getLong(null, struct + VREventInputActionManifestLoad.PATHMANIFESTPATH); }
 
     // -----------------------------------
 
     /** An array of {@link VREventInputActionManifestLoad} structs. */
     public static class Buffer extends StructBuffer<VREventInputActionManifestLoad, Buffer> {
+
+        private static final VREventInputActionManifestLoad ELEMENT_FACTORY = VREventInputActionManifestLoad.create(-1L);
 
         /**
          * Creates a new {@link VREventInputActionManifestLoad.Buffer} instance backed by the specified container.
@@ -159,18 +157,8 @@ public class VREventInputActionManifestLoad extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventInputActionManifestLoad newInstance(long address) {
-            return new VREventInputActionManifestLoad(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventInputActionManifestLoad getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code pathAppKey} field. */

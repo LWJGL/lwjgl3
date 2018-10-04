@@ -95,10 +95,6 @@ public class AITexture extends Struct {
         MFILENAME = layout.offsetof(4);
     }
 
-    AITexture(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AITexture} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -106,7 +102,7 @@ public class AITexture extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AITexture(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -141,13 +137,13 @@ public class AITexture extends Struct {
 
     /** Returns a new {@link AITexture} instance for the specified memory address. */
     public static AITexture create(long address) {
-        return new AITexture(address, null);
+        return wrap(AITexture.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AITexture createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AITexture.class, address);
     }
 
     /**
@@ -157,21 +153,21 @@ public class AITexture extends Struct {
      * @param capacity the buffer capacity
      */
     public static AITexture.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AITexture.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #mWidth}. */
-    public static int nmWidth(long struct) { return memGetInt(struct + AITexture.MWIDTH); }
+    public static int nmWidth(long struct) { return UNSAFE.getInt(null, struct + AITexture.MWIDTH); }
     /** Unsafe version of {@link #mHeight}. */
-    public static int nmHeight(long struct) { return memGetInt(struct + AITexture.MHEIGHT); }
+    public static int nmHeight(long struct) { return UNSAFE.getInt(null, struct + AITexture.MHEIGHT); }
     /** Unsafe version of {@link #achFormatHint}. */
     public static ByteBuffer nachFormatHint(long struct) { return memByteBuffer(struct + AITexture.ACHFORMATHINT, 4); }
     /** Unsafe version of {@link #achFormatHintString}. */
@@ -185,6 +181,8 @@ public class AITexture extends Struct {
 
     /** An array of {@link AITexture} structs. */
     public static class Buffer extends StructBuffer<AITexture, Buffer> {
+
+        private static final AITexture ELEMENT_FACTORY = AITexture.create(-1L);
 
         /**
          * Creates a new {@link AITexture.Buffer} instance backed by the specified container.
@@ -213,18 +211,8 @@ public class AITexture extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AITexture newInstance(long address) {
-            return new AITexture(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AITexture getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code mWidth} field. */

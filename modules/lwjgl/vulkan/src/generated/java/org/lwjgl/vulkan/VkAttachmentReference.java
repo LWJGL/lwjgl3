@@ -75,10 +75,6 @@ public class VkAttachmentReference extends Struct implements NativeResource {
         LAYOUT = layout.offsetof(1);
     }
 
-    VkAttachmentReference(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkAttachmentReference} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -86,7 +82,7 @@ public class VkAttachmentReference extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkAttachmentReference(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -131,28 +127,29 @@ public class VkAttachmentReference extends Struct implements NativeResource {
 
     /** Returns a new {@link VkAttachmentReference} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkAttachmentReference malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkAttachmentReference.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkAttachmentReference} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkAttachmentReference calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkAttachmentReference.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkAttachmentReference} instance allocated with {@link BufferUtils}. */
     public static VkAttachmentReference create() {
-        return new VkAttachmentReference(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkAttachmentReference.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkAttachmentReference} instance for the specified memory address. */
     public static VkAttachmentReference create(long address) {
-        return new VkAttachmentReference(address, null);
+        return wrap(VkAttachmentReference.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAttachmentReference createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkAttachmentReference.class, address);
     }
 
     /**
@@ -161,7 +158,7 @@ public class VkAttachmentReference extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentReference.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -170,7 +167,7 @@ public class VkAttachmentReference extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentReference.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -179,7 +176,8 @@ public class VkAttachmentReference extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentReference.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -189,13 +187,13 @@ public class VkAttachmentReference extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentReference.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAttachmentReference.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -216,7 +214,7 @@ public class VkAttachmentReference extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkAttachmentReference mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkAttachmentReference.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -225,7 +223,7 @@ public class VkAttachmentReference extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkAttachmentReference callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkAttachmentReference.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -253,7 +251,7 @@ public class VkAttachmentReference extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentReference.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -263,25 +261,27 @@ public class VkAttachmentReference extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkAttachmentReference.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #attachment}. */
-    public static int nattachment(long struct) { return memGetInt(struct + VkAttachmentReference.ATTACHMENT); }
+    public static int nattachment(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentReference.ATTACHMENT); }
     /** Unsafe version of {@link #layout}. */
-    public static int nlayout(long struct) { return memGetInt(struct + VkAttachmentReference.LAYOUT); }
+    public static int nlayout(long struct) { return UNSAFE.getInt(null, struct + VkAttachmentReference.LAYOUT); }
 
     /** Unsafe version of {@link #attachment(int) attachment}. */
-    public static void nattachment(long struct, int value) { memPutInt(struct + VkAttachmentReference.ATTACHMENT, value); }
+    public static void nattachment(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentReference.ATTACHMENT, value); }
     /** Unsafe version of {@link #layout(int) layout}. */
-    public static void nlayout(long struct, int value) { memPutInt(struct + VkAttachmentReference.LAYOUT, value); }
+    public static void nlayout(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentReference.LAYOUT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkAttachmentReference} structs. */
     public static class Buffer extends StructBuffer<VkAttachmentReference, Buffer> implements NativeResource {
+
+        private static final VkAttachmentReference ELEMENT_FACTORY = VkAttachmentReference.create(-1L);
 
         /**
          * Creates a new {@link VkAttachmentReference.Buffer} instance backed by the specified container.
@@ -310,18 +310,8 @@ public class VkAttachmentReference extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkAttachmentReference newInstance(long address) {
-            return new VkAttachmentReference(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkAttachmentReference getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code attachment} field. */

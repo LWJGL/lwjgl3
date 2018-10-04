@@ -97,10 +97,6 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         FRAMEINUSECOUNT = layout.offsetof(5);
     }
 
-    VmaPoolCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VmaPoolCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -108,7 +104,7 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VmaPoolCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -181,28 +177,29 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link VmaPoolCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VmaPoolCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VmaPoolCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VmaPoolCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VmaPoolCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VmaPoolCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VmaPoolCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VmaPoolCreateInfo create() {
-        return new VmaPoolCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VmaPoolCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VmaPoolCreateInfo} instance for the specified memory address. */
     public static VmaPoolCreateInfo create(long address) {
-        return new VmaPoolCreateInfo(address, null);
+        return wrap(VmaPoolCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VmaPoolCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VmaPoolCreateInfo.class, address);
     }
 
     /**
@@ -211,7 +208,7 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaPoolCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -220,7 +217,7 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaPoolCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -229,7 +226,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaPoolCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -239,13 +237,13 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaPoolCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VmaPoolCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -266,7 +264,7 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VmaPoolCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VmaPoolCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -275,7 +273,7 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VmaPoolCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VmaPoolCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -303,7 +301,7 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaPoolCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -313,41 +311,43 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaPoolCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #memoryTypeIndex}. */
-    public static int nmemoryTypeIndex(long struct) { return memGetInt(struct + VmaPoolCreateInfo.MEMORYTYPEINDEX); }
+    public static int nmemoryTypeIndex(long struct) { return UNSAFE.getInt(null, struct + VmaPoolCreateInfo.MEMORYTYPEINDEX); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VmaPoolCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VmaPoolCreateInfo.FLAGS); }
     /** Unsafe version of {@link #blockSize}. */
-    public static long nblockSize(long struct) { return memGetLong(struct + VmaPoolCreateInfo.BLOCKSIZE); }
+    public static long nblockSize(long struct) { return UNSAFE.getLong(null, struct + VmaPoolCreateInfo.BLOCKSIZE); }
     /** Unsafe version of {@link #minBlockCount}. */
     public static long nminBlockCount(long struct) { return memGetAddress(struct + VmaPoolCreateInfo.MINBLOCKCOUNT); }
     /** Unsafe version of {@link #maxBlockCount}. */
     public static long nmaxBlockCount(long struct) { return memGetAddress(struct + VmaPoolCreateInfo.MAXBLOCKCOUNT); }
     /** Unsafe version of {@link #frameInUseCount}. */
-    public static int nframeInUseCount(long struct) { return memGetInt(struct + VmaPoolCreateInfo.FRAMEINUSECOUNT); }
+    public static int nframeInUseCount(long struct) { return UNSAFE.getInt(null, struct + VmaPoolCreateInfo.FRAMEINUSECOUNT); }
 
     /** Unsafe version of {@link #memoryTypeIndex(int) memoryTypeIndex}. */
-    public static void nmemoryTypeIndex(long struct, int value) { memPutInt(struct + VmaPoolCreateInfo.MEMORYTYPEINDEX, value); }
+    public static void nmemoryTypeIndex(long struct, int value) { UNSAFE.putInt(null, struct + VmaPoolCreateInfo.MEMORYTYPEINDEX, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VmaPoolCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaPoolCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #blockSize(long) blockSize}. */
-    public static void nblockSize(long struct, long value) { memPutLong(struct + VmaPoolCreateInfo.BLOCKSIZE, value); }
+    public static void nblockSize(long struct, long value) { UNSAFE.putLong(null, struct + VmaPoolCreateInfo.BLOCKSIZE, value); }
     /** Unsafe version of {@link #minBlockCount(long) minBlockCount}. */
     public static void nminBlockCount(long struct, long value) { memPutAddress(struct + VmaPoolCreateInfo.MINBLOCKCOUNT, value); }
     /** Unsafe version of {@link #maxBlockCount(long) maxBlockCount}. */
     public static void nmaxBlockCount(long struct, long value) { memPutAddress(struct + VmaPoolCreateInfo.MAXBLOCKCOUNT, value); }
     /** Unsafe version of {@link #frameInUseCount(int) frameInUseCount}. */
-    public static void nframeInUseCount(long struct, int value) { memPutInt(struct + VmaPoolCreateInfo.FRAMEINUSECOUNT, value); }
+    public static void nframeInUseCount(long struct, int value) { UNSAFE.putInt(null, struct + VmaPoolCreateInfo.FRAMEINUSECOUNT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VmaPoolCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VmaPoolCreateInfo, Buffer> implements NativeResource {
+
+        private static final VmaPoolCreateInfo ELEMENT_FACTORY = VmaPoolCreateInfo.create(-1L);
 
         /**
          * Creates a new {@link VmaPoolCreateInfo.Buffer} instance backed by the specified container.
@@ -376,18 +376,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VmaPoolCreateInfo newInstance(long address) {
-            return new VmaPoolCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VmaPoolCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code memoryTypeIndex} field. */

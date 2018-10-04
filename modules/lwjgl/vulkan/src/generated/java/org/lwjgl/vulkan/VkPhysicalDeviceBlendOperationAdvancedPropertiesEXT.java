@@ -93,10 +93,6 @@ public class VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT extends Struct 
         ADVANCEDBLENDALLOPERATIONS = layout.offsetof(7);
     }
 
-    VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -104,7 +100,7 @@ public class VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT extends Struct 
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -167,13 +163,13 @@ public class VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT extends Struct 
 
     /** Returns a new {@link VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT create(long address) {
-        return new VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT(address, null);
+        return wrap(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.class, address);
     }
 
     /**
@@ -183,36 +179,36 @@ public class VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #advancedBlendMaxColorAttachments}. */
-    public static int nadvancedBlendMaxColorAttachments(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDMAXCOLORATTACHMENTS); }
+    public static int nadvancedBlendMaxColorAttachments(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDMAXCOLORATTACHMENTS); }
     /** Unsafe version of {@link #advancedBlendIndependentBlend}. */
-    public static int nadvancedBlendIndependentBlend(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDINDEPENDENTBLEND); }
+    public static int nadvancedBlendIndependentBlend(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDINDEPENDENTBLEND); }
     /** Unsafe version of {@link #advancedBlendNonPremultipliedSrcColor}. */
-    public static int nadvancedBlendNonPremultipliedSrcColor(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDNONPREMULTIPLIEDSRCCOLOR); }
+    public static int nadvancedBlendNonPremultipliedSrcColor(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDNONPREMULTIPLIEDSRCCOLOR); }
     /** Unsafe version of {@link #advancedBlendNonPremultipliedDstColor}. */
-    public static int nadvancedBlendNonPremultipliedDstColor(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDNONPREMULTIPLIEDDSTCOLOR); }
+    public static int nadvancedBlendNonPremultipliedDstColor(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDNONPREMULTIPLIEDDSTCOLOR); }
     /** Unsafe version of {@link #advancedBlendCorrelatedOverlap}. */
-    public static int nadvancedBlendCorrelatedOverlap(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDCORRELATEDOVERLAP); }
+    public static int nadvancedBlendCorrelatedOverlap(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDCORRELATEDOVERLAP); }
     /** Unsafe version of {@link #advancedBlendAllOperations}. */
-    public static int nadvancedBlendAllOperations(long struct) { return memGetInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDALLOPERATIONS); }
+    public static int nadvancedBlendAllOperations(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.ADVANCEDBLENDALLOPERATIONS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.PNEXT, value); }
 
@@ -220,6 +216,8 @@ public class VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT extends Struct 
 
     /** An array of {@link VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT, Buffer> {
+
+        private static final VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.Buffer} instance backed by the specified container.
@@ -248,18 +246,8 @@ public class VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT extends Struct 
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT newInstance(long address) {
-            return new VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

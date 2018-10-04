@@ -59,10 +59,6 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
         FDISTANCE = layout.offsetof(3);
     }
 
-    VROverlayIntersectionResults(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VROverlayIntersectionResults} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -70,7 +66,7 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VROverlayIntersectionResults(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -98,28 +94,29 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
 
     /** Returns a new {@link VROverlayIntersectionResults} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VROverlayIntersectionResults malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VROverlayIntersectionResults.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VROverlayIntersectionResults} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VROverlayIntersectionResults calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VROverlayIntersectionResults.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VROverlayIntersectionResults} instance allocated with {@link BufferUtils}. */
     public static VROverlayIntersectionResults create() {
-        return new VROverlayIntersectionResults(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VROverlayIntersectionResults.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VROverlayIntersectionResults} instance for the specified memory address. */
     public static VROverlayIntersectionResults create(long address) {
-        return new VROverlayIntersectionResults(address, null);
+        return wrap(VROverlayIntersectionResults.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VROverlayIntersectionResults createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VROverlayIntersectionResults.class, address);
     }
 
     /**
@@ -128,7 +125,7 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionResults.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -137,7 +134,7 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionResults.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -146,7 +143,8 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionResults.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -156,13 +154,13 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionResults.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VROverlayIntersectionResults.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -183,7 +181,7 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VROverlayIntersectionResults mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VROverlayIntersectionResults.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -192,7 +190,7 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VROverlayIntersectionResults callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VROverlayIntersectionResults.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -220,7 +218,7 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionResults.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -230,7 +228,7 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VROverlayIntersectionResults.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -242,12 +240,14 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
     /** Unsafe version of {@link #vUVs}. */
     public static HmdVector2 nvUVs(long struct) { return HmdVector2.create(struct + VROverlayIntersectionResults.VUVS); }
     /** Unsafe version of {@link #fDistance}. */
-    public static float nfDistance(long struct) { return memGetFloat(struct + VROverlayIntersectionResults.FDISTANCE); }
+    public static float nfDistance(long struct) { return UNSAFE.getFloat(null, struct + VROverlayIntersectionResults.FDISTANCE); }
 
     // -----------------------------------
 
     /** An array of {@link VROverlayIntersectionResults} structs. */
     public static class Buffer extends StructBuffer<VROverlayIntersectionResults, Buffer> implements NativeResource {
+
+        private static final VROverlayIntersectionResults ELEMENT_FACTORY = VROverlayIntersectionResults.create(-1L);
 
         /**
          * Creates a new {@link VROverlayIntersectionResults.Buffer} instance backed by the specified container.
@@ -276,18 +276,8 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VROverlayIntersectionResults newInstance(long address) {
-            return new VROverlayIntersectionResults(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VROverlayIntersectionResults getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link HmdVector3} view of the {@code vPoint} field. */

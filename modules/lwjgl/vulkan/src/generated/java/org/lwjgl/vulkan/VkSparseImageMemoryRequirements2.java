@@ -75,10 +75,6 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
         MEMORYREQUIREMENTS = layout.offsetof(2);
     }
 
-    VkSparseImageMemoryRequirements2(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSparseImageMemoryRequirements2} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -86,7 +82,7 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSparseImageMemoryRequirements2(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -133,28 +129,29 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
 
     /** Returns a new {@link VkSparseImageMemoryRequirements2} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSparseImageMemoryRequirements2 malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkSparseImageMemoryRequirements2.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkSparseImageMemoryRequirements2} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSparseImageMemoryRequirements2 calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkSparseImageMemoryRequirements2.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkSparseImageMemoryRequirements2} instance allocated with {@link BufferUtils}. */
     public static VkSparseImageMemoryRequirements2 create() {
-        return new VkSparseImageMemoryRequirements2(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSparseImageMemoryRequirements2.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkSparseImageMemoryRequirements2} instance for the specified memory address. */
     public static VkSparseImageMemoryRequirements2 create(long address) {
-        return new VkSparseImageMemoryRequirements2(address, null);
+        return wrap(VkSparseImageMemoryRequirements2.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSparseImageMemoryRequirements2 createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSparseImageMemoryRequirements2.class, address);
     }
 
     /**
@@ -163,7 +160,7 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSparseImageMemoryRequirements2.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -172,7 +169,7 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSparseImageMemoryRequirements2.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -181,7 +178,8 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSparseImageMemoryRequirements2.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -191,13 +189,13 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSparseImageMemoryRequirements2.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSparseImageMemoryRequirements2.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -218,7 +216,7 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkSparseImageMemoryRequirements2 mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkSparseImageMemoryRequirements2.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -227,7 +225,7 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkSparseImageMemoryRequirements2 callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkSparseImageMemoryRequirements2.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -255,7 +253,7 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSparseImageMemoryRequirements2.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -265,20 +263,20 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSparseImageMemoryRequirements2.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSparseImageMemoryRequirements2.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSparseImageMemoryRequirements2.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSparseImageMemoryRequirements2.PNEXT); }
     /** Unsafe version of {@link #memoryRequirements}. */
     public static VkSparseImageMemoryRequirements nmemoryRequirements(long struct) { return VkSparseImageMemoryRequirements.create(struct + VkSparseImageMemoryRequirements2.MEMORYREQUIREMENTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSparseImageMemoryRequirements2.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSparseImageMemoryRequirements2.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSparseImageMemoryRequirements2.PNEXT, value); }
 
@@ -286,6 +284,8 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
 
     /** An array of {@link VkSparseImageMemoryRequirements2} structs. */
     public static class Buffer extends StructBuffer<VkSparseImageMemoryRequirements2, Buffer> implements NativeResource {
+
+        private static final VkSparseImageMemoryRequirements2 ELEMENT_FACTORY = VkSparseImageMemoryRequirements2.create(-1L);
 
         /**
          * Creates a new {@link VkSparseImageMemoryRequirements2.Buffer} instance backed by the specified container.
@@ -314,18 +314,8 @@ public class VkSparseImageMemoryRequirements2 extends Struct implements NativeRe
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSparseImageMemoryRequirements2 newInstance(long address) {
-            return new VkSparseImageMemoryRequirements2(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSparseImageMemoryRequirements2 getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

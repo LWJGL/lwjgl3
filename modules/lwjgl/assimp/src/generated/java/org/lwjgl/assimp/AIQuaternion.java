@@ -70,10 +70,6 @@ public class AIQuaternion extends Struct implements NativeResource {
         Z = layout.offsetof(3);
     }
 
-    AIQuaternion(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIQuaternion} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -81,7 +77,7 @@ public class AIQuaternion extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIQuaternion(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -136,28 +132,29 @@ public class AIQuaternion extends Struct implements NativeResource {
 
     /** Returns a new {@link AIQuaternion} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIQuaternion malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AIQuaternion.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AIQuaternion} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIQuaternion calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AIQuaternion.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AIQuaternion} instance allocated with {@link BufferUtils}. */
     public static AIQuaternion create() {
-        return new AIQuaternion(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AIQuaternion.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AIQuaternion} instance for the specified memory address. */
     public static AIQuaternion create(long address) {
-        return new AIQuaternion(address, null);
+        return wrap(AIQuaternion.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIQuaternion createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIQuaternion.class, address);
     }
 
     /**
@@ -166,7 +163,7 @@ public class AIQuaternion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuaternion.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -175,7 +172,7 @@ public class AIQuaternion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuaternion.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -184,7 +181,8 @@ public class AIQuaternion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuaternion.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -194,13 +192,13 @@ public class AIQuaternion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuaternion.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIQuaternion.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -221,7 +219,7 @@ public class AIQuaternion extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIQuaternion mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AIQuaternion.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -230,7 +228,7 @@ public class AIQuaternion extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIQuaternion callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AIQuaternion.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -258,7 +256,7 @@ public class AIQuaternion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuaternion.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -268,33 +266,35 @@ public class AIQuaternion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuaternion.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #w}. */
-    public static float nw(long struct) { return memGetFloat(struct + AIQuaternion.W); }
+    public static float nw(long struct) { return UNSAFE.getFloat(null, struct + AIQuaternion.W); }
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return memGetFloat(struct + AIQuaternion.X); }
+    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + AIQuaternion.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return memGetFloat(struct + AIQuaternion.Y); }
+    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + AIQuaternion.Y); }
     /** Unsafe version of {@link #z}. */
-    public static float nz(long struct) { return memGetFloat(struct + AIQuaternion.Z); }
+    public static float nz(long struct) { return UNSAFE.getFloat(null, struct + AIQuaternion.Z); }
 
     /** Unsafe version of {@link #w(float) w}. */
-    public static void nw(long struct, float value) { memPutFloat(struct + AIQuaternion.W, value); }
+    public static void nw(long struct, float value) { UNSAFE.putFloat(null, struct + AIQuaternion.W, value); }
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { memPutFloat(struct + AIQuaternion.X, value); }
+    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + AIQuaternion.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { memPutFloat(struct + AIQuaternion.Y, value); }
+    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + AIQuaternion.Y, value); }
     /** Unsafe version of {@link #z(float) z}. */
-    public static void nz(long struct, float value) { memPutFloat(struct + AIQuaternion.Z, value); }
+    public static void nz(long struct, float value) { UNSAFE.putFloat(null, struct + AIQuaternion.Z, value); }
 
     // -----------------------------------
 
     /** An array of {@link AIQuaternion} structs. */
     public static class Buffer extends StructBuffer<AIQuaternion, Buffer> implements NativeResource {
+
+        private static final AIQuaternion ELEMENT_FACTORY = AIQuaternion.create(-1L);
 
         /**
          * Creates a new {@link AIQuaternion.Buffer} instance backed by the specified container.
@@ -323,18 +323,8 @@ public class AIQuaternion extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIQuaternion newInstance(long address) {
-            return new AIQuaternion(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIQuaternion getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code w} field. */

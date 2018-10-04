@@ -63,10 +63,6 @@ public class BGFXInitLimits extends Struct implements NativeResource {
         TRANSIENTIBSIZE = layout.offsetof(2);
     }
 
-    BGFXInitLimits(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXInitLimits} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -74,7 +70,7 @@ public class BGFXInitLimits extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXInitLimits(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -126,28 +122,29 @@ public class BGFXInitLimits extends Struct implements NativeResource {
 
     /** Returns a new {@link BGFXInitLimits} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXInitLimits malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(BGFXInitLimits.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link BGFXInitLimits} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXInitLimits calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(BGFXInitLimits.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link BGFXInitLimits} instance allocated with {@link BufferUtils}. */
     public static BGFXInitLimits create() {
-        return new BGFXInitLimits(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(BGFXInitLimits.class, memAddress(container), container);
     }
 
     /** Returns a new {@link BGFXInitLimits} instance for the specified memory address. */
     public static BGFXInitLimits create(long address) {
-        return new BGFXInitLimits(address, null);
+        return wrap(BGFXInitLimits.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXInitLimits createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXInitLimits.class, address);
     }
 
     // -----------------------------------
@@ -168,7 +165,7 @@ public class BGFXInitLimits extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXInitLimits mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(BGFXInitLimits.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -177,23 +174,23 @@ public class BGFXInitLimits extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXInitLimits callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(BGFXInitLimits.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #maxEncoders}. */
-    public static short nmaxEncoders(long struct) { return memGetShort(struct + BGFXInitLimits.MAXENCODERS); }
+    public static short nmaxEncoders(long struct) { return UNSAFE.getShort(null, struct + BGFXInitLimits.MAXENCODERS); }
     /** Unsafe version of {@link #transientVbSize}. */
-    public static int ntransientVbSize(long struct) { return memGetInt(struct + BGFXInitLimits.TRANSIENTVBSIZE); }
+    public static int ntransientVbSize(long struct) { return UNSAFE.getInt(null, struct + BGFXInitLimits.TRANSIENTVBSIZE); }
     /** Unsafe version of {@link #transientIbSize}. */
-    public static int ntransientIbSize(long struct) { return memGetInt(struct + BGFXInitLimits.TRANSIENTIBSIZE); }
+    public static int ntransientIbSize(long struct) { return UNSAFE.getInt(null, struct + BGFXInitLimits.TRANSIENTIBSIZE); }
 
     /** Unsafe version of {@link #maxEncoders(short) maxEncoders}. */
-    public static void nmaxEncoders(long struct, short value) { memPutShort(struct + BGFXInitLimits.MAXENCODERS, value); }
+    public static void nmaxEncoders(long struct, short value) { UNSAFE.putShort(null, struct + BGFXInitLimits.MAXENCODERS, value); }
     /** Unsafe version of {@link #transientVbSize(int) transientVbSize}. */
-    public static void ntransientVbSize(long struct, int value) { memPutInt(struct + BGFXInitLimits.TRANSIENTVBSIZE, value); }
+    public static void ntransientVbSize(long struct, int value) { UNSAFE.putInt(null, struct + BGFXInitLimits.TRANSIENTVBSIZE, value); }
     /** Unsafe version of {@link #transientIbSize(int) transientIbSize}. */
-    public static void ntransientIbSize(long struct, int value) { memPutInt(struct + BGFXInitLimits.TRANSIENTIBSIZE, value); }
+    public static void ntransientIbSize(long struct, int value) { UNSAFE.putInt(null, struct + BGFXInitLimits.TRANSIENTIBSIZE, value); }
 
 }

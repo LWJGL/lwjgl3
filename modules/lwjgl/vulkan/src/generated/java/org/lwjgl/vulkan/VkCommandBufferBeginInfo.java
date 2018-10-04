@@ -89,10 +89,6 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
         PINHERITANCEINFO = layout.offsetof(3);
     }
 
-    VkCommandBufferBeginInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkCommandBufferBeginInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -100,7 +96,7 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkCommandBufferBeginInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -160,28 +156,29 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link VkCommandBufferBeginInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkCommandBufferBeginInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkCommandBufferBeginInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkCommandBufferBeginInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkCommandBufferBeginInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkCommandBufferBeginInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkCommandBufferBeginInfo} instance allocated with {@link BufferUtils}. */
     public static VkCommandBufferBeginInfo create() {
-        return new VkCommandBufferBeginInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkCommandBufferBeginInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkCommandBufferBeginInfo} instance for the specified memory address. */
     public static VkCommandBufferBeginInfo create(long address) {
-        return new VkCommandBufferBeginInfo(address, null);
+        return wrap(VkCommandBufferBeginInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCommandBufferBeginInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkCommandBufferBeginInfo.class, address);
     }
 
     /**
@@ -190,7 +187,7 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferBeginInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -199,7 +196,7 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferBeginInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -208,7 +205,8 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferBeginInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -218,13 +216,13 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferBeginInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCommandBufferBeginInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -245,7 +243,7 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkCommandBufferBeginInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkCommandBufferBeginInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -254,7 +252,7 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkCommandBufferBeginInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkCommandBufferBeginInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -282,7 +280,7 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferBeginInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -292,26 +290,26 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCommandBufferBeginInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkCommandBufferBeginInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferBeginInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCommandBufferBeginInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkCommandBufferBeginInfo.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferBeginInfo.FLAGS); }
     /** Unsafe version of {@link #pInheritanceInfo}. */
     @Nullable public static VkCommandBufferInheritanceInfo npInheritanceInfo(long struct) { return VkCommandBufferInheritanceInfo.createSafe(memGetAddress(struct + VkCommandBufferBeginInfo.PINHERITANCEINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkCommandBufferBeginInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferBeginInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkCommandBufferBeginInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkCommandBufferBeginInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferBeginInfo.FLAGS, value); }
     /** Unsafe version of {@link #pInheritanceInfo(VkCommandBufferInheritanceInfo) pInheritanceInfo}. */
     public static void npInheritanceInfo(long struct, @Nullable VkCommandBufferInheritanceInfo value) { memPutAddress(struct + VkCommandBufferBeginInfo.PINHERITANCEINFO, memAddressSafe(value)); }
 
@@ -319,6 +317,8 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
 
     /** An array of {@link VkCommandBufferBeginInfo} structs. */
     public static class Buffer extends StructBuffer<VkCommandBufferBeginInfo, Buffer> implements NativeResource {
+
+        private static final VkCommandBufferBeginInfo ELEMENT_FACTORY = VkCommandBufferBeginInfo.create(-1L);
 
         /**
          * Creates a new {@link VkCommandBufferBeginInfo.Buffer} instance backed by the specified container.
@@ -347,18 +347,8 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkCommandBufferBeginInfo newInstance(long address) {
-            return new VkCommandBufferBeginInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkCommandBufferBeginInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

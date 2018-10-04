@@ -109,10 +109,6 @@ public class AICamera extends Struct implements NativeResource {
         MASPECT = layout.offsetof(7);
     }
 
-    AICamera(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AICamera} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -120,7 +116,7 @@ public class AICamera extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AICamera(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -211,28 +207,29 @@ public class AICamera extends Struct implements NativeResource {
 
     /** Returns a new {@link AICamera} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AICamera malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AICamera.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AICamera} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AICamera calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AICamera.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AICamera} instance allocated with {@link BufferUtils}. */
     public static AICamera create() {
-        return new AICamera(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AICamera.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AICamera} instance for the specified memory address. */
     public static AICamera create(long address) {
-        return new AICamera(address, null);
+        return wrap(AICamera.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AICamera createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AICamera.class, address);
     }
 
     /**
@@ -241,7 +238,7 @@ public class AICamera extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AICamera.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -250,7 +247,7 @@ public class AICamera extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AICamera.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -259,7 +256,8 @@ public class AICamera extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AICamera.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -269,13 +267,13 @@ public class AICamera extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AICamera.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AICamera.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -296,7 +294,7 @@ public class AICamera extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AICamera mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AICamera.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -305,7 +303,7 @@ public class AICamera extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AICamera callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AICamera.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -333,7 +331,7 @@ public class AICamera extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AICamera.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -343,7 +341,7 @@ public class AICamera extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AICamera.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -357,13 +355,13 @@ public class AICamera extends Struct implements NativeResource {
     /** Unsafe version of {@link #mLookAt}. */
     public static AIVector3D nmLookAt(long struct) { return AIVector3D.create(struct + AICamera.MLOOKAT); }
     /** Unsafe version of {@link #mHorizontalFOV}. */
-    public static float nmHorizontalFOV(long struct) { return memGetFloat(struct + AICamera.MHORIZONTALFOV); }
+    public static float nmHorizontalFOV(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MHORIZONTALFOV); }
     /** Unsafe version of {@link #mClipPlaneNear}. */
-    public static float nmClipPlaneNear(long struct) { return memGetFloat(struct + AICamera.MCLIPPLANENEAR); }
+    public static float nmClipPlaneNear(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MCLIPPLANENEAR); }
     /** Unsafe version of {@link #mClipPlaneFar}. */
-    public static float nmClipPlaneFar(long struct) { return memGetFloat(struct + AICamera.MCLIPPLANEFAR); }
+    public static float nmClipPlaneFar(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MCLIPPLANEFAR); }
     /** Unsafe version of {@link #mAspect}. */
-    public static float nmAspect(long struct) { return memGetFloat(struct + AICamera.MASPECT); }
+    public static float nmAspect(long struct) { return UNSAFE.getFloat(null, struct + AICamera.MASPECT); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AICamera.MNAME, AIString.SIZEOF); }
@@ -374,18 +372,20 @@ public class AICamera extends Struct implements NativeResource {
     /** Unsafe version of {@link #mLookAt(AIVector3D) mLookAt}. */
     public static void nmLookAt(long struct, AIVector3D value) { memCopy(value.address(), struct + AICamera.MLOOKAT, AIVector3D.SIZEOF); }
     /** Unsafe version of {@link #mHorizontalFOV(float) mHorizontalFOV}. */
-    public static void nmHorizontalFOV(long struct, float value) { memPutFloat(struct + AICamera.MHORIZONTALFOV, value); }
+    public static void nmHorizontalFOV(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MHORIZONTALFOV, value); }
     /** Unsafe version of {@link #mClipPlaneNear(float) mClipPlaneNear}. */
-    public static void nmClipPlaneNear(long struct, float value) { memPutFloat(struct + AICamera.MCLIPPLANENEAR, value); }
+    public static void nmClipPlaneNear(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MCLIPPLANENEAR, value); }
     /** Unsafe version of {@link #mClipPlaneFar(float) mClipPlaneFar}. */
-    public static void nmClipPlaneFar(long struct, float value) { memPutFloat(struct + AICamera.MCLIPPLANEFAR, value); }
+    public static void nmClipPlaneFar(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MCLIPPLANEFAR, value); }
     /** Unsafe version of {@link #mAspect(float) mAspect}. */
-    public static void nmAspect(long struct, float value) { memPutFloat(struct + AICamera.MASPECT, value); }
+    public static void nmAspect(long struct, float value) { UNSAFE.putFloat(null, struct + AICamera.MASPECT, value); }
 
     // -----------------------------------
 
     /** An array of {@link AICamera} structs. */
     public static class Buffer extends StructBuffer<AICamera, Buffer> implements NativeResource {
+
+        private static final AICamera ELEMENT_FACTORY = AICamera.create(-1L);
 
         /**
          * Creates a new {@link AICamera.Buffer} instance backed by the specified container.
@@ -414,18 +414,8 @@ public class AICamera extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AICamera newInstance(long address) {
-            return new AICamera(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AICamera getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link AIString} view of the {@code mName} field. */

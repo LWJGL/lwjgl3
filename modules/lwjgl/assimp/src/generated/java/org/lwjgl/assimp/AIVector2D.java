@@ -49,10 +49,6 @@ public class AIVector2D extends Struct {
         Y = layout.offsetof(1);
     }
 
-    AIVector2D(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIVector2D} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -60,7 +56,7 @@ public class AIVector2D extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIVector2D(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -75,13 +71,13 @@ public class AIVector2D extends Struct {
 
     /** Returns a new {@link AIVector2D} instance for the specified memory address. */
     public static AIVector2D create(long address) {
-        return new AIVector2D(address, null);
+        return wrap(AIVector2D.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIVector2D createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIVector2D.class, address);
     }
 
     /**
@@ -91,26 +87,28 @@ public class AIVector2D extends Struct {
      * @param capacity the buffer capacity
      */
     public static AIVector2D.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIVector2D.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return memGetFloat(struct + AIVector2D.X); }
+    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + AIVector2D.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return memGetFloat(struct + AIVector2D.Y); }
+    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + AIVector2D.Y); }
 
     // -----------------------------------
 
     /** An array of {@link AIVector2D} structs. */
     public static class Buffer extends StructBuffer<AIVector2D, Buffer> {
+
+        private static final AIVector2D ELEMENT_FACTORY = AIVector2D.create(-1L);
 
         /**
          * Creates a new {@link AIVector2D.Buffer} instance backed by the specified container.
@@ -139,18 +137,8 @@ public class AIVector2D extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIVector2D newInstance(long address) {
-            return new AIVector2D(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIVector2D getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x} field. */

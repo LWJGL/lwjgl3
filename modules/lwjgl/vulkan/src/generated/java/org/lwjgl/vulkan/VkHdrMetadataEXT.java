@@ -110,10 +110,6 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
         MAXFRAMEAVERAGELIGHTLEVEL = layout.offsetof(9);
     }
 
-    VkHdrMetadataEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkHdrMetadataEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -121,7 +117,7 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkHdrMetadataEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -222,28 +218,29 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
 
     /** Returns a new {@link VkHdrMetadataEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkHdrMetadataEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkHdrMetadataEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkHdrMetadataEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkHdrMetadataEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkHdrMetadataEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkHdrMetadataEXT} instance allocated with {@link BufferUtils}. */
     public static VkHdrMetadataEXT create() {
-        return new VkHdrMetadataEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkHdrMetadataEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkHdrMetadataEXT} instance for the specified memory address. */
     public static VkHdrMetadataEXT create(long address) {
-        return new VkHdrMetadataEXT(address, null);
+        return wrap(VkHdrMetadataEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkHdrMetadataEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkHdrMetadataEXT.class, address);
     }
 
     /**
@@ -252,7 +249,7 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkHdrMetadataEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -261,7 +258,7 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkHdrMetadataEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -270,7 +267,8 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkHdrMetadataEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -280,13 +278,13 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkHdrMetadataEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkHdrMetadataEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -307,7 +305,7 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkHdrMetadataEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkHdrMetadataEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -316,7 +314,7 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkHdrMetadataEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkHdrMetadataEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -344,7 +342,7 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkHdrMetadataEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -354,13 +352,13 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkHdrMetadataEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkHdrMetadataEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkHdrMetadataEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkHdrMetadataEXT.PNEXT); }
     /** Unsafe version of {@link #displayPrimaryRed}. */
@@ -372,16 +370,16 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
     /** Unsafe version of {@link #whitePoint}. */
     public static VkXYColorEXT nwhitePoint(long struct) { return VkXYColorEXT.create(struct + VkHdrMetadataEXT.WHITEPOINT); }
     /** Unsafe version of {@link #maxLuminance}. */
-    public static float nmaxLuminance(long struct) { return memGetFloat(struct + VkHdrMetadataEXT.MAXLUMINANCE); }
+    public static float nmaxLuminance(long struct) { return UNSAFE.getFloat(null, struct + VkHdrMetadataEXT.MAXLUMINANCE); }
     /** Unsafe version of {@link #minLuminance}. */
-    public static float nminLuminance(long struct) { return memGetFloat(struct + VkHdrMetadataEXT.MINLUMINANCE); }
+    public static float nminLuminance(long struct) { return UNSAFE.getFloat(null, struct + VkHdrMetadataEXT.MINLUMINANCE); }
     /** Unsafe version of {@link #maxContentLightLevel}. */
-    public static float nmaxContentLightLevel(long struct) { return memGetFloat(struct + VkHdrMetadataEXT.MAXCONTENTLIGHTLEVEL); }
+    public static float nmaxContentLightLevel(long struct) { return UNSAFE.getFloat(null, struct + VkHdrMetadataEXT.MAXCONTENTLIGHTLEVEL); }
     /** Unsafe version of {@link #maxFrameAverageLightLevel}. */
-    public static float nmaxFrameAverageLightLevel(long struct) { return memGetFloat(struct + VkHdrMetadataEXT.MAXFRAMEAVERAGELIGHTLEVEL); }
+    public static float nmaxFrameAverageLightLevel(long struct) { return UNSAFE.getFloat(null, struct + VkHdrMetadataEXT.MAXFRAMEAVERAGELIGHTLEVEL); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkHdrMetadataEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkHdrMetadataEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkHdrMetadataEXT.PNEXT, value); }
     /** Unsafe version of {@link #displayPrimaryRed(VkXYColorEXT) displayPrimaryRed}. */
@@ -393,18 +391,20 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
     /** Unsafe version of {@link #whitePoint(VkXYColorEXT) whitePoint}. */
     public static void nwhitePoint(long struct, VkXYColorEXT value) { memCopy(value.address(), struct + VkHdrMetadataEXT.WHITEPOINT, VkXYColorEXT.SIZEOF); }
     /** Unsafe version of {@link #maxLuminance(float) maxLuminance}. */
-    public static void nmaxLuminance(long struct, float value) { memPutFloat(struct + VkHdrMetadataEXT.MAXLUMINANCE, value); }
+    public static void nmaxLuminance(long struct, float value) { UNSAFE.putFloat(null, struct + VkHdrMetadataEXT.MAXLUMINANCE, value); }
     /** Unsafe version of {@link #minLuminance(float) minLuminance}. */
-    public static void nminLuminance(long struct, float value) { memPutFloat(struct + VkHdrMetadataEXT.MINLUMINANCE, value); }
+    public static void nminLuminance(long struct, float value) { UNSAFE.putFloat(null, struct + VkHdrMetadataEXT.MINLUMINANCE, value); }
     /** Unsafe version of {@link #maxContentLightLevel(float) maxContentLightLevel}. */
-    public static void nmaxContentLightLevel(long struct, float value) { memPutFloat(struct + VkHdrMetadataEXT.MAXCONTENTLIGHTLEVEL, value); }
+    public static void nmaxContentLightLevel(long struct, float value) { UNSAFE.putFloat(null, struct + VkHdrMetadataEXT.MAXCONTENTLIGHTLEVEL, value); }
     /** Unsafe version of {@link #maxFrameAverageLightLevel(float) maxFrameAverageLightLevel}. */
-    public static void nmaxFrameAverageLightLevel(long struct, float value) { memPutFloat(struct + VkHdrMetadataEXT.MAXFRAMEAVERAGELIGHTLEVEL, value); }
+    public static void nmaxFrameAverageLightLevel(long struct, float value) { UNSAFE.putFloat(null, struct + VkHdrMetadataEXT.MAXFRAMEAVERAGELIGHTLEVEL, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkHdrMetadataEXT} structs. */
     public static class Buffer extends StructBuffer<VkHdrMetadataEXT, Buffer> implements NativeResource {
+
+        private static final VkHdrMetadataEXT ELEMENT_FACTORY = VkHdrMetadataEXT.create(-1L);
 
         /**
          * Creates a new {@link VkHdrMetadataEXT.Buffer} instance backed by the specified container.
@@ -433,18 +433,8 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkHdrMetadataEXT newInstance(long address) {
-            return new VkHdrMetadataEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkHdrMetadataEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

@@ -31,10 +31,6 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
 
-    VkBindImageMemoryInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkBindImageMemoryInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -42,7 +38,7 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkBindImageMemoryInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -95,28 +91,29 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
 
     /** Returns a new {@link VkBindImageMemoryInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkBindImageMemoryInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkBindImageMemoryInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkBindImageMemoryInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkBindImageMemoryInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkBindImageMemoryInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkBindImageMemoryInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkBindImageMemoryInfoKHR create() {
-        return new VkBindImageMemoryInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkBindImageMemoryInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkBindImageMemoryInfoKHR} instance for the specified memory address. */
     public static VkBindImageMemoryInfoKHR create(long address) {
-        return new VkBindImageMemoryInfoKHR(address, null);
+        return wrap(VkBindImageMemoryInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBindImageMemoryInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkBindImageMemoryInfoKHR.class, address);
     }
 
     /**
@@ -125,7 +122,7 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -134,7 +131,7 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -143,7 +140,8 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -153,13 +151,13 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBindImageMemoryInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -180,7 +178,7 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
      * @param stack the stack from which to allocate
      */
     public static VkBindImageMemoryInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkBindImageMemoryInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -189,7 +187,7 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
      * @param stack the stack from which to allocate
      */
     public static VkBindImageMemoryInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkBindImageMemoryInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -217,7 +215,7 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -227,13 +225,15 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkBindImageMemoryInfoKHR} structs. */
     public static class Buffer extends VkBindImageMemoryInfo.Buffer {
+
+        private static final VkBindImageMemoryInfoKHR ELEMENT_FACTORY = VkBindImageMemoryInfoKHR.create(-1L);
 
         /**
          * Creates a new {@link VkBindImageMemoryInfoKHR.Buffer} instance backed by the specified container.
@@ -262,13 +262,8 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkBindImageMemoryInfoKHR newInstance(long address) {
-            return new VkBindImageMemoryInfoKHR(address, container);
+        protected VkBindImageMemoryInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

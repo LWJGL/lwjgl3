@@ -84,10 +84,6 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
         DESCRIPTORSET = layout.offsetof(3);
     }
 
-    VkObjectTableDescriptorSetEntryNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkObjectTableDescriptorSetEntryNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -95,7 +91,7 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkObjectTableDescriptorSetEntryNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -154,28 +150,29 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
 
     /** Returns a new {@link VkObjectTableDescriptorSetEntryNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkObjectTableDescriptorSetEntryNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkObjectTableDescriptorSetEntryNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkObjectTableDescriptorSetEntryNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkObjectTableDescriptorSetEntryNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkObjectTableDescriptorSetEntryNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkObjectTableDescriptorSetEntryNVX} instance allocated with {@link BufferUtils}. */
     public static VkObjectTableDescriptorSetEntryNVX create() {
-        return new VkObjectTableDescriptorSetEntryNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkObjectTableDescriptorSetEntryNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkObjectTableDescriptorSetEntryNVX} instance for the specified memory address. */
     public static VkObjectTableDescriptorSetEntryNVX create(long address) {
-        return new VkObjectTableDescriptorSetEntryNVX(address, null);
+        return wrap(VkObjectTableDescriptorSetEntryNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkObjectTableDescriptorSetEntryNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkObjectTableDescriptorSetEntryNVX.class, address);
     }
 
     /**
@@ -184,7 +181,7 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkObjectTableDescriptorSetEntryNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -193,7 +190,7 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkObjectTableDescriptorSetEntryNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -202,7 +199,8 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkObjectTableDescriptorSetEntryNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -212,13 +210,13 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkObjectTableDescriptorSetEntryNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkObjectTableDescriptorSetEntryNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -239,7 +237,7 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkObjectTableDescriptorSetEntryNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkObjectTableDescriptorSetEntryNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -248,7 +246,7 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkObjectTableDescriptorSetEntryNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkObjectTableDescriptorSetEntryNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -276,7 +274,7 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkObjectTableDescriptorSetEntryNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -286,33 +284,35 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkObjectTableDescriptorSetEntryNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return memGetInt(struct + VkObjectTableDescriptorSetEntryNVX.TYPE); }
+    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkObjectTableDescriptorSetEntryNVX.TYPE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkObjectTableDescriptorSetEntryNVX.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkObjectTableDescriptorSetEntryNVX.FLAGS); }
     /** Unsafe version of {@link #pipelineLayout}. */
-    public static long npipelineLayout(long struct) { return memGetLong(struct + VkObjectTableDescriptorSetEntryNVX.PIPELINELAYOUT); }
+    public static long npipelineLayout(long struct) { return UNSAFE.getLong(null, struct + VkObjectTableDescriptorSetEntryNVX.PIPELINELAYOUT); }
     /** Unsafe version of {@link #descriptorSet}. */
-    public static long ndescriptorSet(long struct) { return memGetLong(struct + VkObjectTableDescriptorSetEntryNVX.DESCRIPTORSET); }
+    public static long ndescriptorSet(long struct) { return UNSAFE.getLong(null, struct + VkObjectTableDescriptorSetEntryNVX.DESCRIPTORSET); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { memPutInt(struct + VkObjectTableDescriptorSetEntryNVX.TYPE, value); }
+    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkObjectTableDescriptorSetEntryNVX.TYPE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkObjectTableDescriptorSetEntryNVX.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkObjectTableDescriptorSetEntryNVX.FLAGS, value); }
     /** Unsafe version of {@link #pipelineLayout(long) pipelineLayout}. */
-    public static void npipelineLayout(long struct, long value) { memPutLong(struct + VkObjectTableDescriptorSetEntryNVX.PIPELINELAYOUT, value); }
+    public static void npipelineLayout(long struct, long value) { UNSAFE.putLong(null, struct + VkObjectTableDescriptorSetEntryNVX.PIPELINELAYOUT, value); }
     /** Unsafe version of {@link #descriptorSet(long) descriptorSet}. */
-    public static void ndescriptorSet(long struct, long value) { memPutLong(struct + VkObjectTableDescriptorSetEntryNVX.DESCRIPTORSET, value); }
+    public static void ndescriptorSet(long struct, long value) { UNSAFE.putLong(null, struct + VkObjectTableDescriptorSetEntryNVX.DESCRIPTORSET, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkObjectTableDescriptorSetEntryNVX} structs. */
     public static class Buffer extends StructBuffer<VkObjectTableDescriptorSetEntryNVX, Buffer> implements NativeResource {
+
+        private static final VkObjectTableDescriptorSetEntryNVX ELEMENT_FACTORY = VkObjectTableDescriptorSetEntryNVX.create(-1L);
 
         /**
          * Creates a new {@link VkObjectTableDescriptorSetEntryNVX.Buffer} instance backed by the specified container.
@@ -341,18 +341,8 @@ public class VkObjectTableDescriptorSetEntryNVX extends Struct implements Native
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkObjectTableDescriptorSetEntryNVX newInstance(long address) {
-            return new VkObjectTableDescriptorSetEntryNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkObjectTableDescriptorSetEntryNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code type} field. */

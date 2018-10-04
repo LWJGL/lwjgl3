@@ -74,10 +74,6 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
         XADVANCE = layout.offsetof(4);
     }
 
-    NkUserFontGlyph(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkUserFontGlyph} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -85,7 +81,7 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkUserFontGlyph(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -155,28 +151,29 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
 
     /** Returns a new {@link NkUserFontGlyph} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkUserFontGlyph malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkUserFontGlyph.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkUserFontGlyph} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkUserFontGlyph calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkUserFontGlyph.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkUserFontGlyph} instance allocated with {@link BufferUtils}. */
     public static NkUserFontGlyph create() {
-        return new NkUserFontGlyph(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkUserFontGlyph.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkUserFontGlyph} instance for the specified memory address. */
     public static NkUserFontGlyph create(long address) {
-        return new NkUserFontGlyph(address, null);
+        return wrap(NkUserFontGlyph.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkUserFontGlyph createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkUserFontGlyph.class, address);
     }
 
     /**
@@ -185,7 +182,7 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkUserFontGlyph.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -194,7 +191,7 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkUserFontGlyph.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -203,7 +200,8 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkUserFontGlyph.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -213,13 +211,13 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkUserFontGlyph.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkUserFontGlyph.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -240,7 +238,7 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkUserFontGlyph mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkUserFontGlyph.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -249,7 +247,7 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkUserFontGlyph callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkUserFontGlyph.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -277,7 +275,7 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkUserFontGlyph.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -287,7 +285,7 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkUserFontGlyph.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -301,11 +299,11 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
     /** Unsafe version of {@link #offset}. */
     public static NkVec2 noffset(long struct) { return NkVec2.create(struct + NkUserFontGlyph.OFFSET); }
     /** Unsafe version of {@link #width}. */
-    public static float nwidth(long struct) { return memGetFloat(struct + NkUserFontGlyph.WIDTH); }
+    public static float nwidth(long struct) { return UNSAFE.getFloat(null, struct + NkUserFontGlyph.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static float nheight(long struct) { return memGetFloat(struct + NkUserFontGlyph.HEIGHT); }
+    public static float nheight(long struct) { return UNSAFE.getFloat(null, struct + NkUserFontGlyph.HEIGHT); }
     /** Unsafe version of {@link #xadvance}. */
-    public static float nxadvance(long struct) { return memGetFloat(struct + NkUserFontGlyph.XADVANCE); }
+    public static float nxadvance(long struct) { return UNSAFE.getFloat(null, struct + NkUserFontGlyph.XADVANCE); }
 
     /** Unsafe version of {@link #uv(NkVec2.Buffer) uv}. */
     public static void nuv(long struct, NkVec2.Buffer value) {
@@ -319,16 +317,18 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
     /** Unsafe version of {@link #offset(NkVec2) offset}. */
     public static void noffset(long struct, NkVec2 value) { memCopy(value.address(), struct + NkUserFontGlyph.OFFSET, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #width(float) width}. */
-    public static void nwidth(long struct, float value) { memPutFloat(struct + NkUserFontGlyph.WIDTH, value); }
+    public static void nwidth(long struct, float value) { UNSAFE.putFloat(null, struct + NkUserFontGlyph.WIDTH, value); }
     /** Unsafe version of {@link #height(float) height}. */
-    public static void nheight(long struct, float value) { memPutFloat(struct + NkUserFontGlyph.HEIGHT, value); }
+    public static void nheight(long struct, float value) { UNSAFE.putFloat(null, struct + NkUserFontGlyph.HEIGHT, value); }
     /** Unsafe version of {@link #xadvance(float) xadvance}. */
-    public static void nxadvance(long struct, float value) { memPutFloat(struct + NkUserFontGlyph.XADVANCE, value); }
+    public static void nxadvance(long struct, float value) { UNSAFE.putFloat(null, struct + NkUserFontGlyph.XADVANCE, value); }
 
     // -----------------------------------
 
     /** An array of {@link NkUserFontGlyph} structs. */
     public static class Buffer extends StructBuffer<NkUserFontGlyph, Buffer> implements NativeResource {
+
+        private static final NkUserFontGlyph ELEMENT_FACTORY = NkUserFontGlyph.create(-1L);
 
         /**
          * Creates a new {@link NkUserFontGlyph.Buffer} instance backed by the specified container.
@@ -357,18 +357,8 @@ public class NkUserFontGlyph extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkUserFontGlyph newInstance(long address) {
-            return new NkUserFontGlyph(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkUserFontGlyph getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkVec2}.Buffer view of the {@code uv} field. */

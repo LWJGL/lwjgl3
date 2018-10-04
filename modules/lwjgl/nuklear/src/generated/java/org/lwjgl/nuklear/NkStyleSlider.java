@@ -150,10 +150,6 @@ public class NkStyleSlider extends Struct implements NativeResource {
         DRAW_END = layout.offsetof(24);
     }
 
-    NkStyleSlider(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkStyleSlider} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -161,7 +157,7 @@ public class NkStyleSlider extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkStyleSlider(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -399,28 +395,29 @@ public class NkStyleSlider extends Struct implements NativeResource {
 
     /** Returns a new {@link NkStyleSlider} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkStyleSlider malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkStyleSlider.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkStyleSlider} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkStyleSlider calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkStyleSlider.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkStyleSlider} instance allocated with {@link BufferUtils}. */
     public static NkStyleSlider create() {
-        return new NkStyleSlider(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkStyleSlider.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkStyleSlider} instance for the specified memory address. */
     public static NkStyleSlider create(long address) {
-        return new NkStyleSlider(address, null);
+        return wrap(NkStyleSlider.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleSlider createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkStyleSlider.class, address);
     }
 
     /**
@@ -429,7 +426,7 @@ public class NkStyleSlider extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleSlider.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -438,7 +435,7 @@ public class NkStyleSlider extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleSlider.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -447,7 +444,8 @@ public class NkStyleSlider extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleSlider.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -457,13 +455,13 @@ public class NkStyleSlider extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleSlider.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleSlider.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -484,7 +482,7 @@ public class NkStyleSlider extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleSlider mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkStyleSlider.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -493,7 +491,7 @@ public class NkStyleSlider extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleSlider callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkStyleSlider.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -521,7 +519,7 @@ public class NkStyleSlider extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleSlider.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -531,7 +529,7 @@ public class NkStyleSlider extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleSlider.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -559,11 +557,11 @@ public class NkStyleSlider extends Struct implements NativeResource {
     /** Unsafe version of {@link #cursor_active}. */
     public static NkStyleItem ncursor_active(long struct) { return NkStyleItem.create(struct + NkStyleSlider.CURSOR_ACTIVE); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return memGetFloat(struct + NkStyleSlider.BORDER); }
+    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkStyleSlider.BORDER); }
     /** Unsafe version of {@link #rounding}. */
-    public static float nrounding(long struct) { return memGetFloat(struct + NkStyleSlider.ROUNDING); }
+    public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleSlider.ROUNDING); }
     /** Unsafe version of {@link #bar_height}. */
-    public static float nbar_height(long struct) { return memGetFloat(struct + NkStyleSlider.BAR_HEIGHT); }
+    public static float nbar_height(long struct) { return UNSAFE.getFloat(null, struct + NkStyleSlider.BAR_HEIGHT); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleSlider.PADDING); }
     /** Unsafe version of {@link #spacing}. */
@@ -571,15 +569,15 @@ public class NkStyleSlider extends Struct implements NativeResource {
     /** Unsafe version of {@link #cursor_size}. */
     public static NkVec2 ncursor_size(long struct) { return NkVec2.create(struct + NkStyleSlider.CURSOR_SIZE); }
     /** Unsafe version of {@link #show_buttons}. */
-    public static int nshow_buttons(long struct) { return memGetInt(struct + NkStyleSlider.SHOW_BUTTONS); }
+    public static int nshow_buttons(long struct) { return UNSAFE.getInt(null, struct + NkStyleSlider.SHOW_BUTTONS); }
     /** Unsafe version of {@link #inc_button}. */
     public static NkStyleButton ninc_button(long struct) { return NkStyleButton.create(struct + NkStyleSlider.INC_BUTTON); }
     /** Unsafe version of {@link #dec_button}. */
     public static NkStyleButton ndec_button(long struct) { return NkStyleButton.create(struct + NkStyleSlider.DEC_BUTTON); }
     /** Unsafe version of {@link #inc_symbol}. */
-    public static int ninc_symbol(long struct) { return memGetInt(struct + NkStyleSlider.INC_SYMBOL); }
+    public static int ninc_symbol(long struct) { return UNSAFE.getInt(null, struct + NkStyleSlider.INC_SYMBOL); }
     /** Unsafe version of {@link #dec_symbol}. */
-    public static int ndec_symbol(long struct) { return memGetInt(struct + NkStyleSlider.DEC_SYMBOL); }
+    public static int ndec_symbol(long struct) { return UNSAFE.getInt(null, struct + NkStyleSlider.DEC_SYMBOL); }
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkStyleSlider.USERDATA); }
     /** Unsafe version of {@link #draw_begin}. */
@@ -610,11 +608,11 @@ public class NkStyleSlider extends Struct implements NativeResource {
     /** Unsafe version of {@link #cursor_active(NkStyleItem) cursor_active}. */
     public static void ncursor_active(long struct, NkStyleItem value) { memCopy(value.address(), struct + NkStyleSlider.CURSOR_ACTIVE, NkStyleItem.SIZEOF); }
     /** Unsafe version of {@link #border(float) border}. */
-    public static void nborder(long struct, float value) { memPutFloat(struct + NkStyleSlider.BORDER, value); }
+    public static void nborder(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleSlider.BORDER, value); }
     /** Unsafe version of {@link #rounding(float) rounding}. */
-    public static void nrounding(long struct, float value) { memPutFloat(struct + NkStyleSlider.ROUNDING, value); }
+    public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleSlider.ROUNDING, value); }
     /** Unsafe version of {@link #bar_height(float) bar_height}. */
-    public static void nbar_height(long struct, float value) { memPutFloat(struct + NkStyleSlider.BAR_HEIGHT, value); }
+    public static void nbar_height(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleSlider.BAR_HEIGHT, value); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleSlider.PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #spacing(NkVec2) spacing}. */
@@ -622,15 +620,15 @@ public class NkStyleSlider extends Struct implements NativeResource {
     /** Unsafe version of {@link #cursor_size(NkVec2) cursor_size}. */
     public static void ncursor_size(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleSlider.CURSOR_SIZE, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #show_buttons(int) show_buttons}. */
-    public static void nshow_buttons(long struct, int value) { memPutInt(struct + NkStyleSlider.SHOW_BUTTONS, value); }
+    public static void nshow_buttons(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleSlider.SHOW_BUTTONS, value); }
     /** Unsafe version of {@link #inc_button(NkStyleButton) inc_button}. */
     public static void ninc_button(long struct, NkStyleButton value) { memCopy(value.address(), struct + NkStyleSlider.INC_BUTTON, NkStyleButton.SIZEOF); }
     /** Unsafe version of {@link #dec_button(NkStyleButton) dec_button}. */
     public static void ndec_button(long struct, NkStyleButton value) { memCopy(value.address(), struct + NkStyleSlider.DEC_BUTTON, NkStyleButton.SIZEOF); }
     /** Unsafe version of {@link #inc_symbol(int) inc_symbol}. */
-    public static void ninc_symbol(long struct, int value) { memPutInt(struct + NkStyleSlider.INC_SYMBOL, value); }
+    public static void ninc_symbol(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleSlider.INC_SYMBOL, value); }
     /** Unsafe version of {@link #dec_symbol(int) dec_symbol}. */
-    public static void ndec_symbol(long struct, int value) { memPutInt(struct + NkStyleSlider.DEC_SYMBOL, value); }
+    public static void ndec_symbol(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleSlider.DEC_SYMBOL, value); }
     /** Unsafe version of {@link #userdata(NkHandle) userdata}. */
     public static void nuserdata(long struct, NkHandle value) { memCopy(value.address(), struct + NkStyleSlider.USERDATA, NkHandle.SIZEOF); }
     /** Unsafe version of {@link #draw_begin(NkDrawBeginCallbackI) draw_begin}. */
@@ -642,6 +640,8 @@ public class NkStyleSlider extends Struct implements NativeResource {
 
     /** An array of {@link NkStyleSlider} structs. */
     public static class Buffer extends StructBuffer<NkStyleSlider, Buffer> implements NativeResource {
+
+        private static final NkStyleSlider ELEMENT_FACTORY = NkStyleSlider.create(-1L);
 
         /**
          * Creates a new {@link NkStyleSlider.Buffer} instance backed by the specified container.
@@ -670,18 +670,8 @@ public class NkStyleSlider extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkStyleSlider newInstance(long address) {
-            return new NkStyleSlider(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkStyleSlider getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkStyleItem} view of the {@code normal} field. */

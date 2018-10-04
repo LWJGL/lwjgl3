@@ -84,10 +84,6 @@ public class NVGColor extends Struct implements NativeResource {
         A = layout.offsetof(6);
     }
 
-    NVGColor(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NVGColor} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -95,7 +91,7 @@ public class NVGColor extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NVGColor(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -144,28 +140,29 @@ public class NVGColor extends Struct implements NativeResource {
 
     /** Returns a new {@link NVGColor} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NVGColor malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NVGColor.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NVGColor} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NVGColor calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NVGColor.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NVGColor} instance allocated with {@link BufferUtils}. */
     public static NVGColor create() {
-        return new NVGColor(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NVGColor.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NVGColor} instance for the specified memory address. */
     public static NVGColor create(long address) {
-        return new NVGColor(address, null);
+        return wrap(NVGColor.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NVGColor createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NVGColor.class, address);
     }
 
     /**
@@ -174,7 +171,7 @@ public class NVGColor extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGColor.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -183,7 +180,7 @@ public class NVGColor extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGColor.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -192,7 +189,8 @@ public class NVGColor extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGColor.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -202,13 +200,13 @@ public class NVGColor extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGColor.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NVGColor.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -229,7 +227,7 @@ public class NVGColor extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NVGColor mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NVGColor.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -238,7 +236,7 @@ public class NVGColor extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NVGColor callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NVGColor.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -266,7 +264,7 @@ public class NVGColor extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGColor.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -276,7 +274,7 @@ public class NVGColor extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGColor.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -285,16 +283,16 @@ public class NVGColor extends Struct implements NativeResource {
     public static FloatBuffer nrgba(long struct) { return memFloatBuffer(struct + NVGColor.RGBA, 4); }
     /** Unsafe version of {@link #rgba(int) rgba}. */
     public static float nrgba(long struct, int index) {
-        return memGetFloat(struct + NVGColor.RGBA + check(index, 4) * 4);
+        return UNSAFE.getFloat(null, struct + NVGColor.RGBA + check(index, 4) * 4);
     }
     /** Unsafe version of {@link #r}. */
-    public static float nr(long struct) { return memGetFloat(struct + NVGColor.R); }
+    public static float nr(long struct) { return UNSAFE.getFloat(null, struct + NVGColor.R); }
     /** Unsafe version of {@link #g}. */
-    public static float ng(long struct) { return memGetFloat(struct + NVGColor.G); }
+    public static float ng(long struct) { return UNSAFE.getFloat(null, struct + NVGColor.G); }
     /** Unsafe version of {@link #b}. */
-    public static float nb(long struct) { return memGetFloat(struct + NVGColor.B); }
+    public static float nb(long struct) { return UNSAFE.getFloat(null, struct + NVGColor.B); }
     /** Unsafe version of {@link #a}. */
-    public static float na(long struct) { return memGetFloat(struct + NVGColor.A); }
+    public static float na(long struct) { return UNSAFE.getFloat(null, struct + NVGColor.A); }
 
     /** Unsafe version of {@link #rgba(FloatBuffer) rgba}. */
     public static void nrgba(long struct, FloatBuffer value) {
@@ -303,21 +301,23 @@ public class NVGColor extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #rgba(int, float) rgba}. */
     public static void nrgba(long struct, int index, float value) {
-        memPutFloat(struct + NVGColor.RGBA + check(index, 4) * 4, value);
+        UNSAFE.putFloat(null, struct + NVGColor.RGBA + check(index, 4) * 4, value);
     }
     /** Unsafe version of {@link #r(float) r}. */
-    public static void nr(long struct, float value) { memPutFloat(struct + NVGColor.R, value); }
+    public static void nr(long struct, float value) { UNSAFE.putFloat(null, struct + NVGColor.R, value); }
     /** Unsafe version of {@link #g(float) g}. */
-    public static void ng(long struct, float value) { memPutFloat(struct + NVGColor.G, value); }
+    public static void ng(long struct, float value) { UNSAFE.putFloat(null, struct + NVGColor.G, value); }
     /** Unsafe version of {@link #b(float) b}. */
-    public static void nb(long struct, float value) { memPutFloat(struct + NVGColor.B, value); }
+    public static void nb(long struct, float value) { UNSAFE.putFloat(null, struct + NVGColor.B, value); }
     /** Unsafe version of {@link #a(float) a}. */
-    public static void na(long struct, float value) { memPutFloat(struct + NVGColor.A, value); }
+    public static void na(long struct, float value) { UNSAFE.putFloat(null, struct + NVGColor.A, value); }
 
     // -----------------------------------
 
     /** An array of {@link NVGColor} structs. */
     public static class Buffer extends StructBuffer<NVGColor, Buffer> implements NativeResource {
+
+        private static final NVGColor ELEMENT_FACTORY = NVGColor.create(-1L);
 
         /**
          * Creates a new {@link NVGColor.Buffer} instance backed by the specified container.
@@ -346,18 +346,8 @@ public class NVGColor extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NVGColor newInstance(long address) {
-            return new NVGColor(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NVGColor getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link FloatBuffer} view of the {@code rgba} field. */

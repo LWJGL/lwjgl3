@@ -92,10 +92,6 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
         MODES = layout.offsetof(3);
     }
 
-    VkDeviceGroupPresentCapabilitiesKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDeviceGroupPresentCapabilitiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -103,7 +99,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceGroupPresentCapabilitiesKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -157,28 +153,29 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
 
     /** Returns a new {@link VkDeviceGroupPresentCapabilitiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDeviceGroupPresentCapabilitiesKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDeviceGroupPresentCapabilitiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDeviceGroupPresentCapabilitiesKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDeviceGroupPresentCapabilitiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkDeviceGroupPresentCapabilitiesKHR create() {
-        return new VkDeviceGroupPresentCapabilitiesKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDeviceGroupPresentCapabilitiesKHR} instance for the specified memory address. */
     public static VkDeviceGroupPresentCapabilitiesKHR create(long address) {
-        return new VkDeviceGroupPresentCapabilitiesKHR(address, null);
+        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceGroupPresentCapabilitiesKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDeviceGroupPresentCapabilitiesKHR.class, address);
     }
 
     /**
@@ -187,7 +184,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -196,7 +193,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -205,7 +202,8 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -215,13 +213,13 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -242,7 +240,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static VkDeviceGroupPresentCapabilitiesKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -251,7 +249,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static VkDeviceGroupPresentCapabilitiesKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -279,7 +277,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -289,26 +287,26 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDeviceGroupPresentCapabilitiesKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupPresentCapabilitiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceGroupPresentCapabilitiesKHR.PNEXT); }
     /** Unsafe version of {@link #presentMask}. */
     public static IntBuffer npresentMask(long struct) { return memIntBuffer(struct + VkDeviceGroupPresentCapabilitiesKHR.PRESENTMASK, VK_MAX_DEVICE_GROUP_SIZE); }
     /** Unsafe version of {@link #presentMask(int) presentMask}. */
     public static int npresentMask(long struct, int index) {
-        return memGetInt(struct + VkDeviceGroupPresentCapabilitiesKHR.PRESENTMASK + check(index, VK_MAX_DEVICE_GROUP_SIZE) * 4);
+        return UNSAFE.getInt(null, struct + VkDeviceGroupPresentCapabilitiesKHR.PRESENTMASK + check(index, VK_MAX_DEVICE_GROUP_SIZE) * 4);
     }
     /** Unsafe version of {@link #modes}. */
-    public static int nmodes(long struct) { return memGetInt(struct + VkDeviceGroupPresentCapabilitiesKHR.MODES); }
+    public static int nmodes(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupPresentCapabilitiesKHR.MODES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceGroupPresentCapabilitiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupPresentCapabilitiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceGroupPresentCapabilitiesKHR.PNEXT, value); }
 
@@ -316,6 +314,8 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
 
     /** An array of {@link VkDeviceGroupPresentCapabilitiesKHR} structs. */
     public static class Buffer extends StructBuffer<VkDeviceGroupPresentCapabilitiesKHR, Buffer> implements NativeResource {
+
+        private static final VkDeviceGroupPresentCapabilitiesKHR ELEMENT_FACTORY = VkDeviceGroupPresentCapabilitiesKHR.create(-1L);
 
         /**
          * Creates a new {@link VkDeviceGroupPresentCapabilitiesKHR.Buffer} instance backed by the specified container.
@@ -344,18 +344,8 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDeviceGroupPresentCapabilitiesKHR newInstance(long address) {
-            return new VkDeviceGroupPresentCapabilitiesKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDeviceGroupPresentCapabilitiesKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

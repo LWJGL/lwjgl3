@@ -118,10 +118,6 @@ public class VkPhysicalDeviceIDProperties extends Struct {
         DEVICELUIDVALID = layout.offsetof(6);
     }
 
-    VkPhysicalDeviceIDProperties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceIDProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -129,7 +125,7 @@ public class VkPhysicalDeviceIDProperties extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceIDProperties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -198,13 +194,13 @@ public class VkPhysicalDeviceIDProperties extends Struct {
 
     /** Returns a new {@link VkPhysicalDeviceIDProperties} instance for the specified memory address. */
     public static VkPhysicalDeviceIDProperties create(long address) {
-        return new VkPhysicalDeviceIDProperties(address, null);
+        return wrap(VkPhysicalDeviceIDProperties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceIDProperties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceIDProperties.class, address);
     }
 
     /**
@@ -214,46 +210,46 @@ public class VkPhysicalDeviceIDProperties extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceIDProperties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceIDProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceIDProperties.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceIDProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceIDProperties.PNEXT); }
     /** Unsafe version of {@link #deviceUUID}. */
     public static ByteBuffer ndeviceUUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceIDProperties.DEVICEUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #deviceUUID(int) deviceUUID}. */
     public static byte ndeviceUUID(long struct, int index) {
-        return memGetByte(struct + VkPhysicalDeviceIDProperties.DEVICEUUID + check(index, VK_UUID_SIZE) * 1);
+        return UNSAFE.getByte(null, struct + VkPhysicalDeviceIDProperties.DEVICEUUID + check(index, VK_UUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #driverUUID}. */
     public static ByteBuffer ndriverUUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceIDProperties.DRIVERUUID, VK_UUID_SIZE); }
     /** Unsafe version of {@link #driverUUID(int) driverUUID}. */
     public static byte ndriverUUID(long struct, int index) {
-        return memGetByte(struct + VkPhysicalDeviceIDProperties.DRIVERUUID + check(index, VK_UUID_SIZE) * 1);
+        return UNSAFE.getByte(null, struct + VkPhysicalDeviceIDProperties.DRIVERUUID + check(index, VK_UUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #deviceLUID}. */
     public static ByteBuffer ndeviceLUID(long struct) { return memByteBuffer(struct + VkPhysicalDeviceIDProperties.DEVICELUID, VK_LUID_SIZE); }
     /** Unsafe version of {@link #deviceLUID(int) deviceLUID}. */
     public static byte ndeviceLUID(long struct, int index) {
-        return memGetByte(struct + VkPhysicalDeviceIDProperties.DEVICELUID + check(index, VK_LUID_SIZE) * 1);
+        return UNSAFE.getByte(null, struct + VkPhysicalDeviceIDProperties.DEVICELUID + check(index, VK_LUID_SIZE) * 1);
     }
     /** Unsafe version of {@link #deviceNodeMask}. */
-    public static int ndeviceNodeMask(long struct) { return memGetInt(struct + VkPhysicalDeviceIDProperties.DEVICENODEMASK); }
+    public static int ndeviceNodeMask(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceIDProperties.DEVICENODEMASK); }
     /** Unsafe version of {@link #deviceLUIDValid}. */
-    public static int ndeviceLUIDValid(long struct) { return memGetInt(struct + VkPhysicalDeviceIDProperties.DEVICELUIDVALID); }
+    public static int ndeviceLUIDValid(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceIDProperties.DEVICELUIDVALID); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceIDProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceIDProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceIDProperties.PNEXT, value); }
 
@@ -261,6 +257,8 @@ public class VkPhysicalDeviceIDProperties extends Struct {
 
     /** An array of {@link VkPhysicalDeviceIDProperties} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceIDProperties, Buffer> {
+
+        private static final VkPhysicalDeviceIDProperties ELEMENT_FACTORY = VkPhysicalDeviceIDProperties.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceIDProperties.Buffer} instance backed by the specified container.
@@ -289,18 +287,8 @@ public class VkPhysicalDeviceIDProperties extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceIDProperties newInstance(long address) {
-            return new VkPhysicalDeviceIDProperties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceIDProperties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

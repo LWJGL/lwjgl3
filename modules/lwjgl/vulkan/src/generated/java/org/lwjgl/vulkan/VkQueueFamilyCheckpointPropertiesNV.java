@@ -68,10 +68,6 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct {
         CHECKPOINTEXECUTIONSTAGEMASK = layout.offsetof(2);
     }
 
-    VkQueueFamilyCheckpointPropertiesNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkQueueFamilyCheckpointPropertiesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -79,7 +75,7 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkQueueFamilyCheckpointPropertiesNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -127,13 +123,13 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct {
 
     /** Returns a new {@link VkQueueFamilyCheckpointPropertiesNV} instance for the specified memory address. */
     public static VkQueueFamilyCheckpointPropertiesNV create(long address) {
-        return new VkQueueFamilyCheckpointPropertiesNV(address, null);
+        return wrap(VkQueueFamilyCheckpointPropertiesNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkQueueFamilyCheckpointPropertiesNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkQueueFamilyCheckpointPropertiesNV.class, address);
     }
 
     /**
@@ -143,26 +139,26 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyCheckpointPropertiesNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkQueueFamilyCheckpointPropertiesNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkQueueFamilyCheckpointPropertiesNV.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyCheckpointPropertiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkQueueFamilyCheckpointPropertiesNV.PNEXT); }
     /** Unsafe version of {@link #checkpointExecutionStageMask}. */
-    public static int ncheckpointExecutionStageMask(long struct) { return memGetInt(struct + VkQueueFamilyCheckpointPropertiesNV.CHECKPOINTEXECUTIONSTAGEMASK); }
+    public static int ncheckpointExecutionStageMask(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyCheckpointPropertiesNV.CHECKPOINTEXECUTIONSTAGEMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkQueueFamilyCheckpointPropertiesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyCheckpointPropertiesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueueFamilyCheckpointPropertiesNV.PNEXT, value); }
 
@@ -170,6 +166,8 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct {
 
     /** An array of {@link VkQueueFamilyCheckpointPropertiesNV} structs. */
     public static class Buffer extends StructBuffer<VkQueueFamilyCheckpointPropertiesNV, Buffer> {
+
+        private static final VkQueueFamilyCheckpointPropertiesNV ELEMENT_FACTORY = VkQueueFamilyCheckpointPropertiesNV.create(-1L);
 
         /**
          * Creates a new {@link VkQueueFamilyCheckpointPropertiesNV.Buffer} instance backed by the specified container.
@@ -198,18 +196,8 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkQueueFamilyCheckpointPropertiesNV newInstance(long address) {
-            return new VkQueueFamilyCheckpointPropertiesNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkQueueFamilyCheckpointPropertiesNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

@@ -86,10 +86,6 @@ public class NVGPaint extends Struct implements NativeResource {
         IMAGE = layout.offsetof(6);
     }
 
-    NVGPaint(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NVGPaint} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -97,7 +93,7 @@ public class NVGPaint extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NVGPaint(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -186,28 +182,29 @@ public class NVGPaint extends Struct implements NativeResource {
 
     /** Returns a new {@link NVGPaint} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NVGPaint malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NVGPaint.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NVGPaint} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NVGPaint calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NVGPaint.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NVGPaint} instance allocated with {@link BufferUtils}. */
     public static NVGPaint create() {
-        return new NVGPaint(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NVGPaint.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NVGPaint} instance for the specified memory address. */
     public static NVGPaint create(long address) {
-        return new NVGPaint(address, null);
+        return wrap(NVGPaint.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NVGPaint createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NVGPaint.class, address);
     }
 
     /**
@@ -216,7 +213,7 @@ public class NVGPaint extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGPaint.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -225,7 +222,7 @@ public class NVGPaint extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGPaint.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -234,7 +231,8 @@ public class NVGPaint extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGPaint.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -244,13 +242,13 @@ public class NVGPaint extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGPaint.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NVGPaint.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -271,7 +269,7 @@ public class NVGPaint extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NVGPaint mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NVGPaint.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -280,7 +278,7 @@ public class NVGPaint extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NVGPaint callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NVGPaint.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -308,7 +306,7 @@ public class NVGPaint extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGPaint.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -318,7 +316,7 @@ public class NVGPaint extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGPaint.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -327,24 +325,24 @@ public class NVGPaint extends Struct implements NativeResource {
     public static FloatBuffer nxform(long struct) { return memFloatBuffer(struct + NVGPaint.XFORM, 6); }
     /** Unsafe version of {@link #xform(int) xform}. */
     public static float nxform(long struct, int index) {
-        return memGetFloat(struct + NVGPaint.XFORM + check(index, 6) * 4);
+        return UNSAFE.getFloat(null, struct + NVGPaint.XFORM + check(index, 6) * 4);
     }
     /** Unsafe version of {@link #extent}. */
     public static FloatBuffer nextent(long struct) { return memFloatBuffer(struct + NVGPaint.EXTENT, 2); }
     /** Unsafe version of {@link #extent(int) extent}. */
     public static float nextent(long struct, int index) {
-        return memGetFloat(struct + NVGPaint.EXTENT + check(index, 2) * 4);
+        return UNSAFE.getFloat(null, struct + NVGPaint.EXTENT + check(index, 2) * 4);
     }
     /** Unsafe version of {@link #radius}. */
-    public static float nradius(long struct) { return memGetFloat(struct + NVGPaint.RADIUS); }
+    public static float nradius(long struct) { return UNSAFE.getFloat(null, struct + NVGPaint.RADIUS); }
     /** Unsafe version of {@link #feather}. */
-    public static float nfeather(long struct) { return memGetFloat(struct + NVGPaint.FEATHER); }
+    public static float nfeather(long struct) { return UNSAFE.getFloat(null, struct + NVGPaint.FEATHER); }
     /** Unsafe version of {@link #innerColor}. */
     public static NVGColor ninnerColor(long struct) { return NVGColor.create(struct + NVGPaint.INNERCOLOR); }
     /** Unsafe version of {@link #outerColor}. */
     public static NVGColor nouterColor(long struct) { return NVGColor.create(struct + NVGPaint.OUTERCOLOR); }
     /** Unsafe version of {@link #image}. */
-    public static int nimage(long struct) { return memGetInt(struct + NVGPaint.IMAGE); }
+    public static int nimage(long struct) { return UNSAFE.getInt(null, struct + NVGPaint.IMAGE); }
 
     /** Unsafe version of {@link #xform(FloatBuffer) xform}. */
     public static void nxform(long struct, FloatBuffer value) {
@@ -353,7 +351,7 @@ public class NVGPaint extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #xform(int, float) xform}. */
     public static void nxform(long struct, int index, float value) {
-        memPutFloat(struct + NVGPaint.XFORM + check(index, 6) * 4, value);
+        UNSAFE.putFloat(null, struct + NVGPaint.XFORM + check(index, 6) * 4, value);
     }
     /** Unsafe version of {@link #extent(FloatBuffer) extent}. */
     public static void nextent(long struct, FloatBuffer value) {
@@ -362,23 +360,25 @@ public class NVGPaint extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #extent(int, float) extent}. */
     public static void nextent(long struct, int index, float value) {
-        memPutFloat(struct + NVGPaint.EXTENT + check(index, 2) * 4, value);
+        UNSAFE.putFloat(null, struct + NVGPaint.EXTENT + check(index, 2) * 4, value);
     }
     /** Unsafe version of {@link #radius(float) radius}. */
-    public static void nradius(long struct, float value) { memPutFloat(struct + NVGPaint.RADIUS, value); }
+    public static void nradius(long struct, float value) { UNSAFE.putFloat(null, struct + NVGPaint.RADIUS, value); }
     /** Unsafe version of {@link #feather(float) feather}. */
-    public static void nfeather(long struct, float value) { memPutFloat(struct + NVGPaint.FEATHER, value); }
+    public static void nfeather(long struct, float value) { UNSAFE.putFloat(null, struct + NVGPaint.FEATHER, value); }
     /** Unsafe version of {@link #innerColor(NVGColor) innerColor}. */
     public static void ninnerColor(long struct, NVGColor value) { memCopy(value.address(), struct + NVGPaint.INNERCOLOR, NVGColor.SIZEOF); }
     /** Unsafe version of {@link #outerColor(NVGColor) outerColor}. */
     public static void nouterColor(long struct, NVGColor value) { memCopy(value.address(), struct + NVGPaint.OUTERCOLOR, NVGColor.SIZEOF); }
     /** Unsafe version of {@link #image(int) image}. */
-    public static void nimage(long struct, int value) { memPutInt(struct + NVGPaint.IMAGE, value); }
+    public static void nimage(long struct, int value) { UNSAFE.putInt(null, struct + NVGPaint.IMAGE, value); }
 
     // -----------------------------------
 
     /** An array of {@link NVGPaint} structs. */
     public static class Buffer extends StructBuffer<NVGPaint, Buffer> implements NativeResource {
+
+        private static final NVGPaint ELEMENT_FACTORY = NVGPaint.create(-1L);
 
         /**
          * Creates a new {@link NVGPaint.Buffer} instance backed by the specified container.
@@ -407,18 +407,8 @@ public class NVGPaint extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NVGPaint newInstance(long address) {
-            return new NVGPaint(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NVGPaint getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link FloatBuffer} view of the {@code xform} field. */

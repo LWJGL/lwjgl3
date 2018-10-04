@@ -49,10 +49,6 @@ public class VREventScreenshot extends Struct {
         TYPE = layout.offsetof(1);
     }
 
-    VREventScreenshot(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventScreenshot} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -60,7 +56,7 @@ public class VREventScreenshot extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventScreenshot(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -77,13 +73,13 @@ public class VREventScreenshot extends Struct {
 
     /** Returns a new {@link VREventScreenshot} instance for the specified memory address. */
     public static VREventScreenshot create(long address) {
-        return new VREventScreenshot(address, null);
+        return wrap(VREventScreenshot.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventScreenshot createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventScreenshot.class, address);
     }
 
     /**
@@ -93,26 +89,28 @@ public class VREventScreenshot extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventScreenshot.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventScreenshot.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #handle}. */
-    public static int nhandle(long struct) { return memGetInt(struct + VREventScreenshot.HANDLE); }
+    public static int nhandle(long struct) { return UNSAFE.getInt(null, struct + VREventScreenshot.HANDLE); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return memGetInt(struct + VREventScreenshot.TYPE); }
+    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VREventScreenshot.TYPE); }
 
     // -----------------------------------
 
     /** An array of {@link VREventScreenshot} structs. */
     public static class Buffer extends StructBuffer<VREventScreenshot, Buffer> {
+
+        private static final VREventScreenshot ELEMENT_FACTORY = VREventScreenshot.create(-1L);
 
         /**
          * Creates a new {@link VREventScreenshot.Buffer} instance backed by the specified container.
@@ -141,18 +139,8 @@ public class VREventScreenshot extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventScreenshot newInstance(long address) {
-            return new VREventScreenshot(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventScreenshot getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code handle} field. */

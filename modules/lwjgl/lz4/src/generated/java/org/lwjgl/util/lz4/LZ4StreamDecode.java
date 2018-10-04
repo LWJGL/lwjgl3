@@ -52,10 +52,6 @@ public class LZ4StreamDecode extends Struct {
         INTERNAL_DONOTUSE = layout.offsetof(1);
     }
 
-    LZ4StreamDecode(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link LZ4StreamDecode} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -63,7 +59,7 @@ public class LZ4StreamDecode extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public LZ4StreamDecode(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -83,13 +79,13 @@ public class LZ4StreamDecode extends Struct {
 
     /** Returns a new {@link LZ4StreamDecode} instance for the specified memory address. */
     public static LZ4StreamDecode create(long address) {
-        return new LZ4StreamDecode(address, null);
+        return wrap(LZ4StreamDecode.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4StreamDecode createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(LZ4StreamDecode.class, address);
     }
 
     /**
@@ -99,13 +95,13 @@ public class LZ4StreamDecode extends Struct {
      * @param capacity the buffer capacity
      */
     public static LZ4StreamDecode.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4StreamDecode.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -114,7 +110,7 @@ public class LZ4StreamDecode extends Struct {
     public static LongBuffer ntable(long struct) { return memLongBuffer(struct + LZ4StreamDecode.TABLE, LZ4_STREAMDECODESIZE_U64); }
     /** Unsafe version of {@link #table(int) table}. */
     public static long ntable(long struct, int index) {
-        return memGetLong(struct + LZ4StreamDecode.TABLE + check(index, LZ4_STREAMDECODESIZE_U64) * 8);
+        return UNSAFE.getLong(null, struct + LZ4StreamDecode.TABLE + check(index, LZ4_STREAMDECODESIZE_U64) * 8);
     }
     /** Unsafe version of {@link #internal_donotuse}. */
     public static LZ4StreamDecodeInternal ninternal_donotuse(long struct) { return LZ4StreamDecodeInternal.create(struct + LZ4StreamDecode.INTERNAL_DONOTUSE); }
@@ -123,6 +119,8 @@ public class LZ4StreamDecode extends Struct {
 
     /** An array of {@link LZ4StreamDecode} structs. */
     public static class Buffer extends StructBuffer<LZ4StreamDecode, Buffer> {
+
+        private static final LZ4StreamDecode ELEMENT_FACTORY = LZ4StreamDecode.create(-1L);
 
         /**
          * Creates a new {@link LZ4StreamDecode.Buffer} instance backed by the specified container.
@@ -151,18 +149,8 @@ public class LZ4StreamDecode extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected LZ4StreamDecode newInstance(long address) {
-            return new LZ4StreamDecode(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected LZ4StreamDecode getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link LongBuffer} view of the {@code table} field. */

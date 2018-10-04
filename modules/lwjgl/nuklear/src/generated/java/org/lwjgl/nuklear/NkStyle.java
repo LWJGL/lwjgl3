@@ -134,10 +134,6 @@ public class NkStyle extends Struct implements NativeResource {
         WINDOW = layout.offsetof(21);
     }
 
-    NkStyle(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkStyle} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -145,7 +141,7 @@ public class NkStyle extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkStyle(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -373,28 +369,29 @@ public class NkStyle extends Struct implements NativeResource {
 
     /** Returns a new {@link NkStyle} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkStyle malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkStyle.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkStyle} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkStyle calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkStyle.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkStyle} instance allocated with {@link BufferUtils}. */
     public static NkStyle create() {
-        return new NkStyle(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkStyle.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkStyle} instance for the specified memory address. */
     public static NkStyle create(long address) {
-        return new NkStyle(address, null);
+        return wrap(NkStyle.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyle createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkStyle.class, address);
     }
 
     /**
@@ -403,7 +400,7 @@ public class NkStyle extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyle.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -412,7 +409,7 @@ public class NkStyle extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyle.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -421,7 +418,8 @@ public class NkStyle extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyle.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -431,13 +429,13 @@ public class NkStyle extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyle.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyle.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -458,7 +456,7 @@ public class NkStyle extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyle mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkStyle.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -467,7 +465,7 @@ public class NkStyle extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyle callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkStyle.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -495,7 +493,7 @@ public class NkStyle extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyle.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -505,7 +503,7 @@ public class NkStyle extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyle.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -523,7 +521,7 @@ public class NkStyle extends Struct implements NativeResource {
     /** Unsafe version of {@link #cursor_last}. */
     @Nullable public static NkCursor ncursor_last(long struct) { return NkCursor.createSafe(memGetAddress(struct + NkStyle.CURSOR_LAST)); }
     /** Unsafe version of {@link #cursor_visible}. */
-    public static int ncursor_visible(long struct) { return memGetInt(struct + NkStyle.CURSOR_VISIBLE); }
+    public static int ncursor_visible(long struct) { return UNSAFE.getInt(null, struct + NkStyle.CURSOR_VISIBLE); }
     /** Unsafe version of {@link #text}. */
     public static NkStyleText ntext(long struct) { return NkStyleText.create(struct + NkStyle.TEXT); }
     /** Unsafe version of {@link #button}. */
@@ -575,7 +573,7 @@ public class NkStyle extends Struct implements NativeResource {
     /** Unsafe version of {@link #cursor_last(NkCursor) cursor_last}. */
     public static void ncursor_last(long struct, @Nullable NkCursor value) { memPutAddress(struct + NkStyle.CURSOR_LAST, memAddressSafe(value)); }
     /** Unsafe version of {@link #cursor_visible(boolean) cursor_visible}. */
-    public static void ncursor_visible(long struct, int value) { memPutInt(struct + NkStyle.CURSOR_VISIBLE, value); }
+    public static void ncursor_visible(long struct, int value) { UNSAFE.putInt(null, struct + NkStyle.CURSOR_VISIBLE, value); }
     /** Unsafe version of {@link #text(NkStyleText) text}. */
     public static void ntext(long struct, NkStyleText value) { memCopy(value.address(), struct + NkStyle.TEXT, NkStyleText.SIZEOF); }
     /** Unsafe version of {@link #button(NkStyleButton) button}. */
@@ -616,6 +614,8 @@ public class NkStyle extends Struct implements NativeResource {
     /** An array of {@link NkStyle} structs. */
     public static class Buffer extends StructBuffer<NkStyle, Buffer> implements NativeResource {
 
+        private static final NkStyle ELEMENT_FACTORY = NkStyle.create(-1L);
+
         /**
          * Creates a new {@link NkStyle.Buffer} instance backed by the specified container.
          *
@@ -643,18 +643,8 @@ public class NkStyle extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkStyle newInstance(long address) {
-            return new NkStyle(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkStyle getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkUserFont} view of the struct pointed to by the {@code font} field. */

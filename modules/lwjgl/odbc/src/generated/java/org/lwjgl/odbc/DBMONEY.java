@@ -50,10 +50,6 @@ public class DBMONEY extends Struct implements NativeResource {
         MNYLOW = layout.offsetof(1);
     }
 
-    DBMONEY(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link DBMONEY} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -61,7 +57,7 @@ public class DBMONEY extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public DBMONEY(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -106,28 +102,29 @@ public class DBMONEY extends Struct implements NativeResource {
 
     /** Returns a new {@link DBMONEY} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static DBMONEY malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(DBMONEY.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link DBMONEY} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static DBMONEY calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(DBMONEY.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link DBMONEY} instance allocated with {@link BufferUtils}. */
     public static DBMONEY create() {
-        return new DBMONEY(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(DBMONEY.class, memAddress(container), container);
     }
 
     /** Returns a new {@link DBMONEY} instance for the specified memory address. */
     public static DBMONEY create(long address) {
-        return new DBMONEY(address, null);
+        return wrap(DBMONEY.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DBMONEY createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(DBMONEY.class, address);
     }
 
     /**
@@ -136,7 +133,7 @@ public class DBMONEY extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBMONEY.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -145,7 +142,7 @@ public class DBMONEY extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBMONEY.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -154,7 +151,8 @@ public class DBMONEY extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBMONEY.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -164,13 +162,13 @@ public class DBMONEY extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBMONEY.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DBMONEY.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -191,7 +189,7 @@ public class DBMONEY extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static DBMONEY mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(DBMONEY.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -200,7 +198,7 @@ public class DBMONEY extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static DBMONEY callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(DBMONEY.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -228,7 +226,7 @@ public class DBMONEY extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBMONEY.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -238,25 +236,27 @@ public class DBMONEY extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBMONEY.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #mnyhigh}. */
-    public static int nmnyhigh(long struct) { return memGetInt(struct + DBMONEY.MNYHIGH); }
+    public static int nmnyhigh(long struct) { return UNSAFE.getInt(null, struct + DBMONEY.MNYHIGH); }
     /** Unsafe version of {@link #mnylow}. */
-    public static int nmnylow(long struct) { return memGetInt(struct + DBMONEY.MNYLOW); }
+    public static int nmnylow(long struct) { return UNSAFE.getInt(null, struct + DBMONEY.MNYLOW); }
 
     /** Unsafe version of {@link #mnyhigh(int) mnyhigh}. */
-    public static void nmnyhigh(long struct, int value) { memPutInt(struct + DBMONEY.MNYHIGH, value); }
+    public static void nmnyhigh(long struct, int value) { UNSAFE.putInt(null, struct + DBMONEY.MNYHIGH, value); }
     /** Unsafe version of {@link #mnylow(int) mnylow}. */
-    public static void nmnylow(long struct, int value) { memPutInt(struct + DBMONEY.MNYLOW, value); }
+    public static void nmnylow(long struct, int value) { UNSAFE.putInt(null, struct + DBMONEY.MNYLOW, value); }
 
     // -----------------------------------
 
     /** An array of {@link DBMONEY} structs. */
     public static class Buffer extends StructBuffer<DBMONEY, Buffer> implements NativeResource {
+
+        private static final DBMONEY ELEMENT_FACTORY = DBMONEY.create(-1L);
 
         /**
          * Creates a new {@link DBMONEY.Buffer} instance backed by the specified container.
@@ -285,18 +285,8 @@ public class DBMONEY extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected DBMONEY newInstance(long address) {
-            return new DBMONEY(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected DBMONEY getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code mnyhigh} field. */

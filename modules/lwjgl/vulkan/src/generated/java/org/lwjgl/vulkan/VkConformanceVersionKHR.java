@@ -69,10 +69,6 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
         PATCH = layout.offsetof(3);
     }
 
-    VkConformanceVersionKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkConformanceVersionKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -80,7 +76,7 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkConformanceVersionKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -139,28 +135,29 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
 
     /** Returns a new {@link VkConformanceVersionKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkConformanceVersionKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkConformanceVersionKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkConformanceVersionKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkConformanceVersionKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkConformanceVersionKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkConformanceVersionKHR} instance allocated with {@link BufferUtils}. */
     public static VkConformanceVersionKHR create() {
-        return new VkConformanceVersionKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkConformanceVersionKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkConformanceVersionKHR} instance for the specified memory address. */
     public static VkConformanceVersionKHR create(long address) {
-        return new VkConformanceVersionKHR(address, null);
+        return wrap(VkConformanceVersionKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkConformanceVersionKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkConformanceVersionKHR.class, address);
     }
 
     /**
@@ -169,7 +166,7 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkConformanceVersionKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +175,7 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkConformanceVersionKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -187,7 +184,8 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkConformanceVersionKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -197,13 +195,13 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkConformanceVersionKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkConformanceVersionKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -224,7 +222,7 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkConformanceVersionKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkConformanceVersionKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -233,7 +231,7 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkConformanceVersionKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkConformanceVersionKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -261,7 +259,7 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkConformanceVersionKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -271,33 +269,35 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkConformanceVersionKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #major}. */
-    public static byte nmajor(long struct) { return memGetByte(struct + VkConformanceVersionKHR.MAJOR); }
+    public static byte nmajor(long struct) { return UNSAFE.getByte(null, struct + VkConformanceVersionKHR.MAJOR); }
     /** Unsafe version of {@link #minor}. */
-    public static byte nminor(long struct) { return memGetByte(struct + VkConformanceVersionKHR.MINOR); }
+    public static byte nminor(long struct) { return UNSAFE.getByte(null, struct + VkConformanceVersionKHR.MINOR); }
     /** Unsafe version of {@link #subminor}. */
-    public static byte nsubminor(long struct) { return memGetByte(struct + VkConformanceVersionKHR.SUBMINOR); }
+    public static byte nsubminor(long struct) { return UNSAFE.getByte(null, struct + VkConformanceVersionKHR.SUBMINOR); }
     /** Unsafe version of {@link #patch}. */
-    public static byte npatch(long struct) { return memGetByte(struct + VkConformanceVersionKHR.PATCH); }
+    public static byte npatch(long struct) { return UNSAFE.getByte(null, struct + VkConformanceVersionKHR.PATCH); }
 
     /** Unsafe version of {@link #major(byte) major}. */
-    public static void nmajor(long struct, byte value) { memPutByte(struct + VkConformanceVersionKHR.MAJOR, value); }
+    public static void nmajor(long struct, byte value) { UNSAFE.putByte(null, struct + VkConformanceVersionKHR.MAJOR, value); }
     /** Unsafe version of {@link #minor(byte) minor}. */
-    public static void nminor(long struct, byte value) { memPutByte(struct + VkConformanceVersionKHR.MINOR, value); }
+    public static void nminor(long struct, byte value) { UNSAFE.putByte(null, struct + VkConformanceVersionKHR.MINOR, value); }
     /** Unsafe version of {@link #subminor(byte) subminor}. */
-    public static void nsubminor(long struct, byte value) { memPutByte(struct + VkConformanceVersionKHR.SUBMINOR, value); }
+    public static void nsubminor(long struct, byte value) { UNSAFE.putByte(null, struct + VkConformanceVersionKHR.SUBMINOR, value); }
     /** Unsafe version of {@link #patch(byte) patch}. */
-    public static void npatch(long struct, byte value) { memPutByte(struct + VkConformanceVersionKHR.PATCH, value); }
+    public static void npatch(long struct, byte value) { UNSAFE.putByte(null, struct + VkConformanceVersionKHR.PATCH, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkConformanceVersionKHR} structs. */
     public static class Buffer extends StructBuffer<VkConformanceVersionKHR, Buffer> implements NativeResource {
+
+        private static final VkConformanceVersionKHR ELEMENT_FACTORY = VkConformanceVersionKHR.create(-1L);
 
         /**
          * Creates a new {@link VkConformanceVersionKHR.Buffer} instance backed by the specified container.
@@ -326,18 +326,8 @@ public class VkConformanceVersionKHR extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkConformanceVersionKHR newInstance(long address) {
-            return new VkConformanceVersionKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkConformanceVersionKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code major} field. */

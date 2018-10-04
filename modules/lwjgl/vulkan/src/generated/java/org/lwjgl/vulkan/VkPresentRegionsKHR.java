@@ -87,10 +87,6 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
         PREGIONS = layout.offsetof(3);
     }
 
-    VkPresentRegionsKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPresentRegionsKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -98,7 +94,7 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPresentRegionsKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -158,28 +154,29 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
 
     /** Returns a new {@link VkPresentRegionsKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPresentRegionsKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPresentRegionsKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPresentRegionsKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPresentRegionsKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPresentRegionsKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPresentRegionsKHR} instance allocated with {@link BufferUtils}. */
     public static VkPresentRegionsKHR create() {
-        return new VkPresentRegionsKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPresentRegionsKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPresentRegionsKHR} instance for the specified memory address. */
     public static VkPresentRegionsKHR create(long address) {
-        return new VkPresentRegionsKHR(address, null);
+        return wrap(VkPresentRegionsKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPresentRegionsKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPresentRegionsKHR.class, address);
     }
 
     /**
@@ -188,7 +185,7 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPresentRegionsKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -197,7 +194,7 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPresentRegionsKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -206,7 +203,8 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPresentRegionsKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -216,13 +214,13 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPresentRegionsKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPresentRegionsKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -243,7 +241,7 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkPresentRegionsKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPresentRegionsKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -252,7 +250,7 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkPresentRegionsKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPresentRegionsKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -280,7 +278,7 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPresentRegionsKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -290,26 +288,26 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPresentRegionsKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPresentRegionsKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPresentRegionsKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPresentRegionsKHR.PNEXT); }
     /** Unsafe version of {@link #swapchainCount}. */
-    public static int nswapchainCount(long struct) { return memGetInt(struct + VkPresentRegionsKHR.SWAPCHAINCOUNT); }
+    public static int nswapchainCount(long struct) { return UNSAFE.getInt(null, struct + VkPresentRegionsKHR.SWAPCHAINCOUNT); }
     /** Unsafe version of {@link #pRegions}. */
     @Nullable public static VkPresentRegionKHR.Buffer npRegions(long struct) { return VkPresentRegionKHR.createSafe(memGetAddress(struct + VkPresentRegionsKHR.PREGIONS), nswapchainCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPresentRegionsKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentRegionsKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPresentRegionsKHR.PNEXT, value); }
     /** Sets the specified value to the {@code swapchainCount} field of the specified {@code struct}. */
-    public static void nswapchainCount(long struct, int value) { memPutInt(struct + VkPresentRegionsKHR.SWAPCHAINCOUNT, value); }
+    public static void nswapchainCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPresentRegionsKHR.SWAPCHAINCOUNT, value); }
     /** Unsafe version of {@link #pRegions(VkPresentRegionKHR.Buffer) pRegions}. */
     public static void npRegions(long struct, @Nullable VkPresentRegionKHR.Buffer value) { memPutAddress(struct + VkPresentRegionsKHR.PREGIONS, memAddressSafe(value)); if (value != null) { nswapchainCount(struct, value.remaining()); } }
 
@@ -317,6 +315,8 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
 
     /** An array of {@link VkPresentRegionsKHR} structs. */
     public static class Buffer extends StructBuffer<VkPresentRegionsKHR, Buffer> implements NativeResource {
+
+        private static final VkPresentRegionsKHR ELEMENT_FACTORY = VkPresentRegionsKHR.create(-1L);
 
         /**
          * Creates a new {@link VkPresentRegionsKHR.Buffer} instance backed by the specified container.
@@ -345,18 +345,8 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPresentRegionsKHR newInstance(long address) {
-            return new VkPresentRegionsKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPresentRegionsKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

@@ -80,10 +80,6 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
         Z = layout.offsetof(2);
     }
 
-    VkDispatchIndirectCommand(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDispatchIndirectCommand} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -91,7 +87,7 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDispatchIndirectCommand(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -143,28 +139,29 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
 
     /** Returns a new {@link VkDispatchIndirectCommand} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDispatchIndirectCommand malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDispatchIndirectCommand.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDispatchIndirectCommand} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDispatchIndirectCommand calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDispatchIndirectCommand.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDispatchIndirectCommand} instance allocated with {@link BufferUtils}. */
     public static VkDispatchIndirectCommand create() {
-        return new VkDispatchIndirectCommand(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDispatchIndirectCommand.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDispatchIndirectCommand} instance for the specified memory address. */
     public static VkDispatchIndirectCommand create(long address) {
-        return new VkDispatchIndirectCommand(address, null);
+        return wrap(VkDispatchIndirectCommand.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDispatchIndirectCommand createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDispatchIndirectCommand.class, address);
     }
 
     /**
@@ -173,7 +170,7 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkDispatchIndirectCommand.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -182,7 +179,7 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkDispatchIndirectCommand.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -191,7 +188,8 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkDispatchIndirectCommand.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -201,13 +199,13 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkDispatchIndirectCommand.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDispatchIndirectCommand.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -228,7 +226,7 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static VkDispatchIndirectCommand mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDispatchIndirectCommand.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -237,7 +235,7 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static VkDispatchIndirectCommand callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDispatchIndirectCommand.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -265,7 +263,7 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkDispatchIndirectCommand.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -275,29 +273,31 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkDispatchIndirectCommand.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return memGetInt(struct + VkDispatchIndirectCommand.X); }
+    public static int nx(long struct) { return UNSAFE.getInt(null, struct + VkDispatchIndirectCommand.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return memGetInt(struct + VkDispatchIndirectCommand.Y); }
+    public static int ny(long struct) { return UNSAFE.getInt(null, struct + VkDispatchIndirectCommand.Y); }
     /** Unsafe version of {@link #z}. */
-    public static int nz(long struct) { return memGetInt(struct + VkDispatchIndirectCommand.Z); }
+    public static int nz(long struct) { return UNSAFE.getInt(null, struct + VkDispatchIndirectCommand.Z); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { memPutInt(struct + VkDispatchIndirectCommand.X, value); }
+    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + VkDispatchIndirectCommand.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { memPutInt(struct + VkDispatchIndirectCommand.Y, value); }
+    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + VkDispatchIndirectCommand.Y, value); }
     /** Unsafe version of {@link #z(int) z}. */
-    public static void nz(long struct, int value) { memPutInt(struct + VkDispatchIndirectCommand.Z, value); }
+    public static void nz(long struct, int value) { UNSAFE.putInt(null, struct + VkDispatchIndirectCommand.Z, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkDispatchIndirectCommand} structs. */
     public static class Buffer extends StructBuffer<VkDispatchIndirectCommand, Buffer> implements NativeResource {
+
+        private static final VkDispatchIndirectCommand ELEMENT_FACTORY = VkDispatchIndirectCommand.create(-1L);
 
         /**
          * Creates a new {@link VkDispatchIndirectCommand.Buffer} instance backed by the specified container.
@@ -326,18 +326,8 @@ public class VkDispatchIndirectCommand extends Struct implements NativeResource 
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDispatchIndirectCommand newInstance(long address) {
-            return new VkDispatchIndirectCommand(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDispatchIndirectCommand getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x} field. */

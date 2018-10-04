@@ -113,10 +113,6 @@ public class TOUCHINPUT extends Struct implements NativeResource {
         CYCONTACT = layout.offsetof(9);
     }
 
-    TOUCHINPUT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link TOUCHINPUT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -124,7 +120,7 @@ public class TOUCHINPUT extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public TOUCHINPUT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -165,28 +161,29 @@ public class TOUCHINPUT extends Struct implements NativeResource {
 
     /** Returns a new {@link TOUCHINPUT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static TOUCHINPUT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(TOUCHINPUT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link TOUCHINPUT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static TOUCHINPUT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(TOUCHINPUT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link TOUCHINPUT} instance allocated with {@link BufferUtils}. */
     public static TOUCHINPUT create() {
-        return new TOUCHINPUT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(TOUCHINPUT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link TOUCHINPUT} instance for the specified memory address. */
     public static TOUCHINPUT create(long address) {
-        return new TOUCHINPUT(address, null);
+        return wrap(TOUCHINPUT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static TOUCHINPUT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(TOUCHINPUT.class, address);
     }
 
     /**
@@ -195,7 +192,7 @@ public class TOUCHINPUT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static TOUCHINPUT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -204,7 +201,7 @@ public class TOUCHINPUT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static TOUCHINPUT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -213,7 +210,8 @@ public class TOUCHINPUT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static TOUCHINPUT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -223,13 +221,13 @@ public class TOUCHINPUT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static TOUCHINPUT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static TOUCHINPUT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -250,7 +248,7 @@ public class TOUCHINPUT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static TOUCHINPUT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(TOUCHINPUT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -259,7 +257,7 @@ public class TOUCHINPUT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static TOUCHINPUT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(TOUCHINPUT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -287,7 +285,7 @@ public class TOUCHINPUT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static TOUCHINPUT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -297,36 +295,38 @@ public class TOUCHINPUT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static TOUCHINPUT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return memGetInt(struct + TOUCHINPUT.X); }
+    public static int nx(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return memGetInt(struct + TOUCHINPUT.Y); }
+    public static int ny(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.Y); }
     /** Unsafe version of {@link #hSource}. */
     public static long nhSource(long struct) { return memGetAddress(struct + TOUCHINPUT.HSOURCE); }
     /** Unsafe version of {@link #dwID}. */
-    public static int ndwID(long struct) { return memGetInt(struct + TOUCHINPUT.DWID); }
+    public static int ndwID(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.DWID); }
     /** Unsafe version of {@link #dwFlags}. */
-    public static int ndwFlags(long struct) { return memGetInt(struct + TOUCHINPUT.DWFLAGS); }
+    public static int ndwFlags(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.DWFLAGS); }
     /** Unsafe version of {@link #dwMask}. */
-    public static int ndwMask(long struct) { return memGetInt(struct + TOUCHINPUT.DWMASK); }
+    public static int ndwMask(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.DWMASK); }
     /** Unsafe version of {@link #dwTime}. */
-    public static int ndwTime(long struct) { return memGetInt(struct + TOUCHINPUT.DWTIME); }
+    public static int ndwTime(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.DWTIME); }
     /** Unsafe version of {@link #dwExtraInfo}. */
     public static long ndwExtraInfo(long struct) { return memGetAddress(struct + TOUCHINPUT.DWEXTRAINFO); }
     /** Unsafe version of {@link #cxContact}. */
-    public static int ncxContact(long struct) { return memGetInt(struct + TOUCHINPUT.CXCONTACT); }
+    public static int ncxContact(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.CXCONTACT); }
     /** Unsafe version of {@link #cyContact}. */
-    public static int ncyContact(long struct) { return memGetInt(struct + TOUCHINPUT.CYCONTACT); }
+    public static int ncyContact(long struct) { return UNSAFE.getInt(null, struct + TOUCHINPUT.CYCONTACT); }
 
     // -----------------------------------
 
     /** An array of {@link TOUCHINPUT} structs. */
     public static class Buffer extends StructBuffer<TOUCHINPUT, Buffer> implements NativeResource {
+
+        private static final TOUCHINPUT ELEMENT_FACTORY = TOUCHINPUT.create(-1L);
 
         /**
          * Creates a new {@link TOUCHINPUT.Buffer} instance backed by the specified container.
@@ -355,18 +355,8 @@ public class TOUCHINPUT extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected TOUCHINPUT newInstance(long address) {
-            return new TOUCHINPUT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected TOUCHINPUT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x} field. */

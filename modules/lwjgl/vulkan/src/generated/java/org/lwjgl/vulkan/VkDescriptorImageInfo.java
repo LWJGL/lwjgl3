@@ -87,10 +87,6 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
         IMAGELAYOUT = layout.offsetof(2);
     }
 
-    VkDescriptorImageInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDescriptorImageInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -98,7 +94,7 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDescriptorImageInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -150,28 +146,29 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link VkDescriptorImageInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDescriptorImageInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDescriptorImageInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDescriptorImageInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDescriptorImageInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDescriptorImageInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDescriptorImageInfo} instance allocated with {@link BufferUtils}. */
     public static VkDescriptorImageInfo create() {
-        return new VkDescriptorImageInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDescriptorImageInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDescriptorImageInfo} instance for the specified memory address. */
     public static VkDescriptorImageInfo create(long address) {
-        return new VkDescriptorImageInfo(address, null);
+        return wrap(VkDescriptorImageInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorImageInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDescriptorImageInfo.class, address);
     }
 
     /**
@@ -180,7 +177,7 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorImageInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -189,7 +186,7 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorImageInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -198,7 +195,8 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorImageInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -208,13 +206,13 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorImageInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorImageInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -235,7 +233,7 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorImageInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDescriptorImageInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -244,7 +242,7 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorImageInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDescriptorImageInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -272,7 +270,7 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorImageInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -282,29 +280,31 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorImageInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sampler}. */
-    public static long nsampler(long struct) { return memGetLong(struct + VkDescriptorImageInfo.SAMPLER); }
+    public static long nsampler(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorImageInfo.SAMPLER); }
     /** Unsafe version of {@link #imageView}. */
-    public static long nimageView(long struct) { return memGetLong(struct + VkDescriptorImageInfo.IMAGEVIEW); }
+    public static long nimageView(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorImageInfo.IMAGEVIEW); }
     /** Unsafe version of {@link #imageLayout}. */
-    public static int nimageLayout(long struct) { return memGetInt(struct + VkDescriptorImageInfo.IMAGELAYOUT); }
+    public static int nimageLayout(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorImageInfo.IMAGELAYOUT); }
 
     /** Unsafe version of {@link #sampler(long) sampler}. */
-    public static void nsampler(long struct, long value) { memPutLong(struct + VkDescriptorImageInfo.SAMPLER, value); }
+    public static void nsampler(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorImageInfo.SAMPLER, value); }
     /** Unsafe version of {@link #imageView(long) imageView}. */
-    public static void nimageView(long struct, long value) { memPutLong(struct + VkDescriptorImageInfo.IMAGEVIEW, value); }
+    public static void nimageView(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorImageInfo.IMAGEVIEW, value); }
     /** Unsafe version of {@link #imageLayout(int) imageLayout}. */
-    public static void nimageLayout(long struct, int value) { memPutInt(struct + VkDescriptorImageInfo.IMAGELAYOUT, value); }
+    public static void nimageLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorImageInfo.IMAGELAYOUT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkDescriptorImageInfo} structs. */
     public static class Buffer extends StructBuffer<VkDescriptorImageInfo, Buffer> implements NativeResource {
+
+        private static final VkDescriptorImageInfo ELEMENT_FACTORY = VkDescriptorImageInfo.create(-1L);
 
         /**
          * Creates a new {@link VkDescriptorImageInfo.Buffer} instance backed by the specified container.
@@ -333,18 +333,8 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDescriptorImageInfo newInstance(long address) {
-            return new VkDescriptorImageInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDescriptorImageInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sampler} field. */

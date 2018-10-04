@@ -116,10 +116,6 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
         PSPLITINSTANCEBINDREGIONS = layout.offsetof(5);
     }
 
-    VkBindImageMemoryDeviceGroupInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkBindImageMemoryDeviceGroupInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -127,7 +123,7 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkBindImageMemoryDeviceGroupInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -194,28 +190,29 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
 
     /** Returns a new {@link VkBindImageMemoryDeviceGroupInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkBindImageMemoryDeviceGroupInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkBindImageMemoryDeviceGroupInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkBindImageMemoryDeviceGroupInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkBindImageMemoryDeviceGroupInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkBindImageMemoryDeviceGroupInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkBindImageMemoryDeviceGroupInfo} instance allocated with {@link BufferUtils}. */
     public static VkBindImageMemoryDeviceGroupInfo create() {
-        return new VkBindImageMemoryDeviceGroupInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkBindImageMemoryDeviceGroupInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkBindImageMemoryDeviceGroupInfo} instance for the specified memory address. */
     public static VkBindImageMemoryDeviceGroupInfo create(long address) {
-        return new VkBindImageMemoryDeviceGroupInfo(address, null);
+        return wrap(VkBindImageMemoryDeviceGroupInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBindImageMemoryDeviceGroupInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkBindImageMemoryDeviceGroupInfo.class, address);
     }
 
     /**
@@ -224,7 +221,7 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryDeviceGroupInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -233,7 +230,7 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryDeviceGroupInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -242,7 +239,8 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryDeviceGroupInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -252,13 +250,13 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryDeviceGroupInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBindImageMemoryDeviceGroupInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -279,7 +277,7 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkBindImageMemoryDeviceGroupInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkBindImageMemoryDeviceGroupInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -288,7 +286,7 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkBindImageMemoryDeviceGroupInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkBindImageMemoryDeviceGroupInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -316,7 +314,7 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryDeviceGroupInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -326,34 +324,34 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryDeviceGroupInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkBindImageMemoryDeviceGroupInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemoryDeviceGroupInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindImageMemoryDeviceGroupInfo.PNEXT); }
     /** Unsafe version of {@link #deviceIndexCount}. */
-    public static int ndeviceIndexCount(long struct) { return memGetInt(struct + VkBindImageMemoryDeviceGroupInfo.DEVICEINDEXCOUNT); }
+    public static int ndeviceIndexCount(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemoryDeviceGroupInfo.DEVICEINDEXCOUNT); }
     /** Unsafe version of {@link #pDeviceIndices() pDeviceIndices}. */
     @Nullable public static IntBuffer npDeviceIndices(long struct) { return memIntBufferSafe(memGetAddress(struct + VkBindImageMemoryDeviceGroupInfo.PDEVICEINDICES), ndeviceIndexCount(struct)); }
     /** Unsafe version of {@link #splitInstanceBindRegionCount}. */
-    public static int nsplitInstanceBindRegionCount(long struct) { return memGetInt(struct + VkBindImageMemoryDeviceGroupInfo.SPLITINSTANCEBINDREGIONCOUNT); }
+    public static int nsplitInstanceBindRegionCount(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemoryDeviceGroupInfo.SPLITINSTANCEBINDREGIONCOUNT); }
     /** Unsafe version of {@link #pSplitInstanceBindRegions}. */
     @Nullable public static VkRect2D.Buffer npSplitInstanceBindRegions(long struct) { return VkRect2D.createSafe(memGetAddress(struct + VkBindImageMemoryDeviceGroupInfo.PSPLITINSTANCEBINDREGIONS), nsplitInstanceBindRegionCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkBindImageMemoryDeviceGroupInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemoryDeviceGroupInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindImageMemoryDeviceGroupInfo.PNEXT, value); }
     /** Sets the specified value to the {@code deviceIndexCount} field of the specified {@code struct}. */
-    public static void ndeviceIndexCount(long struct, int value) { memPutInt(struct + VkBindImageMemoryDeviceGroupInfo.DEVICEINDEXCOUNT, value); }
+    public static void ndeviceIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemoryDeviceGroupInfo.DEVICEINDEXCOUNT, value); }
     /** Unsafe version of {@link #pDeviceIndices(IntBuffer) pDeviceIndices}. */
     public static void npDeviceIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkBindImageMemoryDeviceGroupInfo.PDEVICEINDICES, memAddressSafe(value)); ndeviceIndexCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code splitInstanceBindRegionCount} field of the specified {@code struct}. */
-    public static void nsplitInstanceBindRegionCount(long struct, int value) { memPutInt(struct + VkBindImageMemoryDeviceGroupInfo.SPLITINSTANCEBINDREGIONCOUNT, value); }
+    public static void nsplitInstanceBindRegionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemoryDeviceGroupInfo.SPLITINSTANCEBINDREGIONCOUNT, value); }
     /** Unsafe version of {@link #pSplitInstanceBindRegions(VkRect2D.Buffer) pSplitInstanceBindRegions}. */
     public static void npSplitInstanceBindRegions(long struct, @Nullable VkRect2D.Buffer value) { memPutAddress(struct + VkBindImageMemoryDeviceGroupInfo.PSPLITINSTANCEBINDREGIONS, memAddressSafe(value)); nsplitInstanceBindRegionCount(struct, value == null ? 0 : value.remaining()); }
 
@@ -388,6 +386,8 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
     /** An array of {@link VkBindImageMemoryDeviceGroupInfo} structs. */
     public static class Buffer extends StructBuffer<VkBindImageMemoryDeviceGroupInfo, Buffer> implements NativeResource {
 
+        private static final VkBindImageMemoryDeviceGroupInfo ELEMENT_FACTORY = VkBindImageMemoryDeviceGroupInfo.create(-1L);
+
         /**
          * Creates a new {@link VkBindImageMemoryDeviceGroupInfo.Buffer} instance backed by the specified container.
          *
@@ -415,18 +415,8 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkBindImageMemoryDeviceGroupInfo newInstance(long address) {
-            return new VkBindImageMemoryDeviceGroupInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkBindImageMemoryDeviceGroupInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

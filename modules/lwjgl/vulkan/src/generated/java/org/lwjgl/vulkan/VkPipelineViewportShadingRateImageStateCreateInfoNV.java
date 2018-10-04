@@ -98,10 +98,6 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
         PSHADINGRATEPALETTES = layout.offsetof(4);
     }
 
-    VkPipelineViewportShadingRateImageStateCreateInfoNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPipelineViewportShadingRateImageStateCreateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -109,7 +105,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineViewportShadingRateImageStateCreateInfoNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -176,28 +172,29 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
 
     /** Returns a new {@link VkPipelineViewportShadingRateImageStateCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPipelineViewportShadingRateImageStateCreateInfoNV.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineViewportShadingRateImageStateCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPipelineViewportShadingRateImageStateCreateInfoNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineViewportShadingRateImageStateCreateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV create() {
-        return new VkPipelineViewportShadingRateImageStateCreateInfoNV(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineViewportShadingRateImageStateCreateInfoNV.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPipelineViewportShadingRateImageStateCreateInfoNV} instance for the specified memory address. */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV create(long address) {
-        return new VkPipelineViewportShadingRateImageStateCreateInfoNV(address, null);
+        return wrap(VkPipelineViewportShadingRateImageStateCreateInfoNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPipelineViewportShadingRateImageStateCreateInfoNV.class, address);
     }
 
     /**
@@ -206,7 +203,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -215,7 +212,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -224,7 +221,8 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -234,13 +232,13 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -261,7 +259,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
      * @param stack the stack from which to allocate
      */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPipelineViewportShadingRateImageStateCreateInfoNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -270,7 +268,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
      * @param stack the stack from which to allocate
      */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPipelineViewportShadingRateImageStateCreateInfoNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -298,7 +296,7 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -308,30 +306,30 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #shadingRateImageEnable}. */
-    public static int nshadingRateImageEnable(long struct) { return memGetInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.SHADINGRATEIMAGEENABLE); }
+    public static int nshadingRateImageEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.SHADINGRATEIMAGEENABLE); }
     /** Unsafe version of {@link #viewportCount}. */
-    public static int nviewportCount(long struct) { return memGetInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.VIEWPORTCOUNT); }
+    public static int nviewportCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.VIEWPORTCOUNT); }
     /** Unsafe version of {@link #pShadingRatePalettes}. */
     @Nullable public static VkShadingRatePaletteNV.Buffer npShadingRatePalettes(long struct) { return VkShadingRatePaletteNV.createSafe(memGetAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PSHADINGRATEPALETTES), nviewportCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #shadingRateImageEnable(boolean) shadingRateImageEnable}. */
-    public static void nshadingRateImageEnable(long struct, int value) { memPutInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.SHADINGRATEIMAGEENABLE, value); }
+    public static void nshadingRateImageEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.SHADINGRATEIMAGEENABLE, value); }
     /** Sets the specified value to the {@code viewportCount} field of the specified {@code struct}. */
-    public static void nviewportCount(long struct, int value) { memPutInt(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.VIEWPORTCOUNT, value); }
+    public static void nviewportCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.VIEWPORTCOUNT, value); }
     /** Unsafe version of {@link #pShadingRatePalettes(VkShadingRatePaletteNV.Buffer) pShadingRatePalettes}. */
     public static void npShadingRatePalettes(long struct, @Nullable VkShadingRatePaletteNV.Buffer value) { memPutAddress(struct + VkPipelineViewportShadingRateImageStateCreateInfoNV.PSHADINGRATEPALETTES, memAddressSafe(value)); if (value != null) { nviewportCount(struct, value.remaining()); } }
 
@@ -339,6 +337,8 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
 
     /** An array of {@link VkPipelineViewportShadingRateImageStateCreateInfoNV} structs. */
     public static class Buffer extends StructBuffer<VkPipelineViewportShadingRateImageStateCreateInfoNV, Buffer> implements NativeResource {
+
+        private static final VkPipelineViewportShadingRateImageStateCreateInfoNV ELEMENT_FACTORY = VkPipelineViewportShadingRateImageStateCreateInfoNV.create(-1L);
 
         /**
          * Creates a new {@link VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer} instance backed by the specified container.
@@ -367,18 +367,8 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPipelineViewportShadingRateImageStateCreateInfoNV newInstance(long address) {
-            return new VkPipelineViewportShadingRateImageStateCreateInfoNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPipelineViewportShadingRateImageStateCreateInfoNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

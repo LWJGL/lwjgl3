@@ -80,10 +80,6 @@ public class JAWTDrawingSurface extends Struct {
         UNLOCK = layout.offsetof(5);
     }
 
-    JAWTDrawingSurface(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link JAWTDrawingSurface} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -91,7 +87,7 @@ public class JAWTDrawingSurface extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public JAWTDrawingSurface(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -120,13 +116,13 @@ public class JAWTDrawingSurface extends Struct {
 
     /** Returns a new {@link JAWTDrawingSurface} instance for the specified memory address. */
     public static JAWTDrawingSurface create(long address) {
-        return new JAWTDrawingSurface(address, null);
+        return wrap(JAWTDrawingSurface.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static JAWTDrawingSurface createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(JAWTDrawingSurface.class, address);
     }
 
     /**
@@ -136,13 +132,13 @@ public class JAWTDrawingSurface extends Struct {
      * @param capacity the buffer capacity
      */
     public static JAWTDrawingSurface.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static JAWTDrawingSurface.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -164,6 +160,8 @@ public class JAWTDrawingSurface extends Struct {
 
     /** An array of {@link JAWTDrawingSurface} structs. */
     public static class Buffer extends StructBuffer<JAWTDrawingSurface, Buffer> {
+
+        private static final JAWTDrawingSurface ELEMENT_FACTORY = JAWTDrawingSurface.create(-1L);
 
         /**
          * Creates a new {@link JAWTDrawingSurface.Buffer} instance backed by the specified container.
@@ -192,18 +190,8 @@ public class JAWTDrawingSurface extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected JAWTDrawingSurface newInstance(long address) {
-            return new JAWTDrawingSurface(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected JAWTDrawingSurface getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code env} field. */

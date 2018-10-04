@@ -71,10 +71,6 @@ public class NkListView extends Struct implements NativeResource {
         SCROLL_VALUE = layout.offsetof(6);
     }
 
-    NkListView(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkListView} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -82,7 +78,7 @@ public class NkListView extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkListView(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -99,28 +95,29 @@ public class NkListView extends Struct implements NativeResource {
 
     /** Returns a new {@link NkListView} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkListView malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkListView.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkListView} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkListView calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkListView.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkListView} instance allocated with {@link BufferUtils}. */
     public static NkListView create() {
-        return new NkListView(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkListView.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkListView} instance for the specified memory address. */
     public static NkListView create(long address) {
-        return new NkListView(address, null);
+        return wrap(NkListView.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkListView createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkListView.class, address);
     }
 
     /**
@@ -129,7 +126,7 @@ public class NkListView extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkListView.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -138,7 +135,7 @@ public class NkListView extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkListView.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -147,7 +144,8 @@ public class NkListView extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkListView.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -157,13 +155,13 @@ public class NkListView extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkListView.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkListView.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -184,7 +182,7 @@ public class NkListView extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkListView mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkListView.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -193,7 +191,7 @@ public class NkListView extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkListView callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkListView.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -221,7 +219,7 @@ public class NkListView extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkListView.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,26 +229,28 @@ public class NkListView extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkListView.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #begin}. */
-    public static int nbegin(long struct) { return memGetInt(struct + NkListView.BEGIN); }
+    public static int nbegin(long struct) { return UNSAFE.getInt(null, struct + NkListView.BEGIN); }
     /** Unsafe version of {@link #end}. */
-    public static int nend(long struct) { return memGetInt(struct + NkListView.END); }
+    public static int nend(long struct) { return UNSAFE.getInt(null, struct + NkListView.END); }
     /** Unsafe version of {@link #count}. */
-    public static int ncount(long struct) { return memGetInt(struct + NkListView.COUNT); }
-    public static int ntotal_height(long struct) { return memGetInt(struct + NkListView.TOTAL_HEIGHT); }
+    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + NkListView.COUNT); }
+    public static int ntotal_height(long struct) { return UNSAFE.getInt(null, struct + NkListView.TOTAL_HEIGHT); }
     public static NkContext nctx(long struct) { return NkContext.create(memGetAddress(struct + NkListView.CTX)); }
     public static IntBuffer nscroll_pointer(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + NkListView.SCROLL_POINTER), capacity); }
-    public static int nscroll_value(long struct) { return memGetInt(struct + NkListView.SCROLL_VALUE); }
+    public static int nscroll_value(long struct) { return UNSAFE.getInt(null, struct + NkListView.SCROLL_VALUE); }
 
     // -----------------------------------
 
     /** An array of {@link NkListView} structs. */
     public static class Buffer extends StructBuffer<NkListView, Buffer> implements NativeResource {
+
+        private static final NkListView ELEMENT_FACTORY = NkListView.create(-1L);
 
         /**
          * Creates a new {@link NkListView.Buffer} instance backed by the specified container.
@@ -279,18 +279,8 @@ public class NkListView extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkListView newInstance(long address) {
-            return new NkListView(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkListView getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code begin} field. */

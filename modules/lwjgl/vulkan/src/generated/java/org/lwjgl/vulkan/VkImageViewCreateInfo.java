@@ -178,10 +178,6 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
         SUBRESOURCERANGE = layout.offsetof(7);
     }
 
-    VkImageViewCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkImageViewCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -189,7 +185,7 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkImageViewCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -278,28 +274,29 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link VkImageViewCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageViewCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkImageViewCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkImageViewCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageViewCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkImageViewCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkImageViewCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkImageViewCreateInfo create() {
-        return new VkImageViewCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkImageViewCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkImageViewCreateInfo} instance for the specified memory address. */
     public static VkImageViewCreateInfo create(long address) {
-        return new VkImageViewCreateInfo(address, null);
+        return wrap(VkImageViewCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageViewCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkImageViewCreateInfo.class, address);
     }
 
     /**
@@ -308,7 +305,7 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageViewCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -317,7 +314,7 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageViewCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -326,7 +323,8 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageViewCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -336,13 +334,13 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageViewCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageViewCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -363,7 +361,7 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkImageViewCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkImageViewCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -372,7 +370,7 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkImageViewCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkImageViewCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -400,7 +398,7 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageViewCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -410,40 +408,40 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImageViewCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkImageViewCreateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageViewCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkImageViewCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkImageViewCreateInfo.FLAGS); }
     /** Unsafe version of {@link #image}. */
-    public static long nimage(long struct) { return memGetLong(struct + VkImageViewCreateInfo.IMAGE); }
+    public static long nimage(long struct) { return UNSAFE.getLong(null, struct + VkImageViewCreateInfo.IMAGE); }
     /** Unsafe version of {@link #viewType}. */
-    public static int nviewType(long struct) { return memGetInt(struct + VkImageViewCreateInfo.VIEWTYPE); }
+    public static int nviewType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewCreateInfo.VIEWTYPE); }
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return memGetInt(struct + VkImageViewCreateInfo.FORMAT); }
+    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkImageViewCreateInfo.FORMAT); }
     /** Unsafe version of {@link #components}. */
     public static VkComponentMapping ncomponents(long struct) { return VkComponentMapping.create(struct + VkImageViewCreateInfo.COMPONENTS); }
     /** Unsafe version of {@link #subresourceRange}. */
     public static VkImageSubresourceRange nsubresourceRange(long struct) { return VkImageSubresourceRange.create(struct + VkImageViewCreateInfo.SUBRESOURCERANGE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkImageViewCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageViewCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkImageViewCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #image(long) image}. */
-    public static void nimage(long struct, long value) { memPutLong(struct + VkImageViewCreateInfo.IMAGE, value); }
+    public static void nimage(long struct, long value) { UNSAFE.putLong(null, struct + VkImageViewCreateInfo.IMAGE, value); }
     /** Unsafe version of {@link #viewType(int) viewType}. */
-    public static void nviewType(long struct, int value) { memPutInt(struct + VkImageViewCreateInfo.VIEWTYPE, value); }
+    public static void nviewType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewCreateInfo.VIEWTYPE, value); }
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { memPutInt(struct + VkImageViewCreateInfo.FORMAT, value); }
+    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewCreateInfo.FORMAT, value); }
     /** Unsafe version of {@link #components(VkComponentMapping) components}. */
     public static void ncomponents(long struct, VkComponentMapping value) { memCopy(value.address(), struct + VkImageViewCreateInfo.COMPONENTS, VkComponentMapping.SIZEOF); }
     /** Unsafe version of {@link #subresourceRange(VkImageSubresourceRange) subresourceRange}. */
@@ -453,6 +451,8 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
 
     /** An array of {@link VkImageViewCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VkImageViewCreateInfo, Buffer> implements NativeResource {
+
+        private static final VkImageViewCreateInfo ELEMENT_FACTORY = VkImageViewCreateInfo.create(-1L);
 
         /**
          * Creates a new {@link VkImageViewCreateInfo.Buffer} instance backed by the specified container.
@@ -481,18 +481,8 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkImageViewCreateInfo newInstance(long address) {
-            return new VkImageViewCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkImageViewCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

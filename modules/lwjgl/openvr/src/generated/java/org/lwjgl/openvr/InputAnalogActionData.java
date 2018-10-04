@@ -93,10 +93,6 @@ public class InputAnalogActionData extends Struct implements NativeResource {
         FUPDATETIME = layout.offsetof(8);
     }
 
-    InputAnalogActionData(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link InputAnalogActionData} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -104,7 +100,7 @@ public class InputAnalogActionData extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public InputAnalogActionData(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -135,28 +131,29 @@ public class InputAnalogActionData extends Struct implements NativeResource {
 
     /** Returns a new {@link InputAnalogActionData} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static InputAnalogActionData malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(InputAnalogActionData.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link InputAnalogActionData} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static InputAnalogActionData calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(InputAnalogActionData.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link InputAnalogActionData} instance allocated with {@link BufferUtils}. */
     public static InputAnalogActionData create() {
-        return new InputAnalogActionData(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(InputAnalogActionData.class, memAddress(container), container);
     }
 
     /** Returns a new {@link InputAnalogActionData} instance for the specified memory address. */
     public static InputAnalogActionData create(long address) {
-        return new InputAnalogActionData(address, null);
+        return wrap(InputAnalogActionData.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static InputAnalogActionData createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(InputAnalogActionData.class, address);
     }
 
     /**
@@ -165,7 +162,7 @@ public class InputAnalogActionData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static InputAnalogActionData.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -174,7 +171,7 @@ public class InputAnalogActionData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static InputAnalogActionData.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -183,7 +180,8 @@ public class InputAnalogActionData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static InputAnalogActionData.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -193,13 +191,13 @@ public class InputAnalogActionData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static InputAnalogActionData.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static InputAnalogActionData.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -220,7 +218,7 @@ public class InputAnalogActionData extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static InputAnalogActionData mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(InputAnalogActionData.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -229,7 +227,7 @@ public class InputAnalogActionData extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static InputAnalogActionData callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(InputAnalogActionData.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -257,7 +255,7 @@ public class InputAnalogActionData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static InputAnalogActionData.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -267,34 +265,36 @@ public class InputAnalogActionData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static InputAnalogActionData.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #bActive}. */
-    public static boolean nbActive(long struct) { return memGetByte(struct + InputAnalogActionData.BACTIVE) != 0; }
+    public static boolean nbActive(long struct) { return UNSAFE.getByte(null, struct + InputAnalogActionData.BACTIVE) != 0; }
     /** Unsafe version of {@link #activeOrigin}. */
-    public static long nactiveOrigin(long struct) { return memGetLong(struct + InputAnalogActionData.ACTIVEORIGIN); }
+    public static long nactiveOrigin(long struct) { return UNSAFE.getLong(null, struct + InputAnalogActionData.ACTIVEORIGIN); }
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return memGetFloat(struct + InputAnalogActionData.X); }
+    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return memGetFloat(struct + InputAnalogActionData.Y); }
+    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.Y); }
     /** Unsafe version of {@link #z}. */
-    public static float nz(long struct) { return memGetFloat(struct + InputAnalogActionData.Z); }
+    public static float nz(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.Z); }
     /** Unsafe version of {@link #deltaX}. */
-    public static float ndeltaX(long struct) { return memGetFloat(struct + InputAnalogActionData.DELTAX); }
+    public static float ndeltaX(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.DELTAX); }
     /** Unsafe version of {@link #deltaY}. */
-    public static float ndeltaY(long struct) { return memGetFloat(struct + InputAnalogActionData.DELTAY); }
+    public static float ndeltaY(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.DELTAY); }
     /** Unsafe version of {@link #deltaZ}. */
-    public static float ndeltaZ(long struct) { return memGetFloat(struct + InputAnalogActionData.DELTAZ); }
+    public static float ndeltaZ(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.DELTAZ); }
     /** Unsafe version of {@link #fUpdateTime}. */
-    public static float nfUpdateTime(long struct) { return memGetFloat(struct + InputAnalogActionData.FUPDATETIME); }
+    public static float nfUpdateTime(long struct) { return UNSAFE.getFloat(null, struct + InputAnalogActionData.FUPDATETIME); }
 
     // -----------------------------------
 
     /** An array of {@link InputAnalogActionData} structs. */
     public static class Buffer extends StructBuffer<InputAnalogActionData, Buffer> implements NativeResource {
+
+        private static final InputAnalogActionData ELEMENT_FACTORY = InputAnalogActionData.create(-1L);
 
         /**
          * Creates a new {@link InputAnalogActionData.Buffer} instance backed by the specified container.
@@ -323,18 +323,8 @@ public class InputAnalogActionData extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected InputAnalogActionData newInstance(long address) {
-            return new InputAnalogActionData(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected InputAnalogActionData getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code bActive} field. */

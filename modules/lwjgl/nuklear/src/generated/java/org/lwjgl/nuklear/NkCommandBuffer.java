@@ -69,10 +69,6 @@ public class NkCommandBuffer extends Struct {
         LAST = layout.offsetof(6);
     }
 
-    NkCommandBuffer(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkCommandBuffer} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -80,7 +76,7 @@ public class NkCommandBuffer extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkCommandBuffer(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -116,13 +112,13 @@ public class NkCommandBuffer extends Struct {
 
     /** Returns a new {@link NkCommandBuffer} instance for the specified memory address. */
     public static NkCommandBuffer create(long address) {
-        return new NkCommandBuffer(address, null);
+        return wrap(NkCommandBuffer.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkCommandBuffer createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkCommandBuffer.class, address);
     }
 
     /**
@@ -132,13 +128,13 @@ public class NkCommandBuffer extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkCommandBuffer.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkCommandBuffer.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -148,7 +144,7 @@ public class NkCommandBuffer extends Struct {
     /** Unsafe version of {@link #clip}. */
     public static NkRect nclip(long struct) { return NkRect.create(struct + NkCommandBuffer.CLIP); }
     /** Unsafe version of {@link #use_clipping}. */
-    public static int nuse_clipping(long struct) { return memGetInt(struct + NkCommandBuffer.USE_CLIPPING); }
+    public static int nuse_clipping(long struct) { return UNSAFE.getInt(null, struct + NkCommandBuffer.USE_CLIPPING); }
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkCommandBuffer.USERDATA); }
     /** Unsafe version of {@link #begin}. */
@@ -162,6 +158,8 @@ public class NkCommandBuffer extends Struct {
 
     /** An array of {@link NkCommandBuffer} structs. */
     public static class Buffer extends StructBuffer<NkCommandBuffer, Buffer> {
+
+        private static final NkCommandBuffer ELEMENT_FACTORY = NkCommandBuffer.create(-1L);
 
         /**
          * Creates a new {@link NkCommandBuffer.Buffer} instance backed by the specified container.
@@ -190,18 +188,8 @@ public class NkCommandBuffer extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkCommandBuffer newInstance(long address) {
-            return new NkCommandBuffer(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkCommandBuffer getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkBuffer} view of the struct pointed to by the {@code base} field. */

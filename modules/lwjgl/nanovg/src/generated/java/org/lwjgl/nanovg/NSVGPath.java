@@ -72,10 +72,6 @@ public class NSVGPath extends Struct {
         NEXT = layout.offsetof(4);
     }
 
-    NSVGPath(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NSVGPath} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -83,7 +79,7 @@ public class NSVGPath extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NSVGPath(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -110,13 +106,13 @@ public class NSVGPath extends Struct {
 
     /** Returns a new {@link NSVGPath} instance for the specified memory address. */
     public static NSVGPath create(long address) {
-        return new NSVGPath(address, null);
+        return wrap(NSVGPath.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGPath createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NSVGPath.class, address);
     }
 
     /**
@@ -126,13 +122,13 @@ public class NSVGPath extends Struct {
      * @param capacity the buffer capacity
      */
     public static NSVGPath.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGPath.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -140,14 +136,14 @@ public class NSVGPath extends Struct {
     /** Unsafe version of {@link #pts() pts}. */
     public static FloatBuffer npts(long struct) { return memFloatBuffer(memGetAddress(struct + NSVGPath.PTS), nnpts(struct)); }
     /** Unsafe version of {@link #npts}. */
-    public static int nnpts(long struct) { return memGetInt(struct + NSVGPath.NPTS); }
+    public static int nnpts(long struct) { return UNSAFE.getInt(null, struct + NSVGPath.NPTS); }
     /** Unsafe version of {@link #closed}. */
-    public static byte nclosed(long struct) { return memGetByte(struct + NSVGPath.CLOSED); }
+    public static byte nclosed(long struct) { return UNSAFE.getByte(null, struct + NSVGPath.CLOSED); }
     /** Unsafe version of {@link #bounds}. */
     public static FloatBuffer nbounds(long struct) { return memFloatBuffer(struct + NSVGPath.BOUNDS, 4); }
     /** Unsafe version of {@link #bounds(int) bounds}. */
     public static float nbounds(long struct, int index) {
-        return memGetFloat(struct + NSVGPath.BOUNDS + check(index, 4) * 4);
+        return UNSAFE.getFloat(null, struct + NSVGPath.BOUNDS + check(index, 4) * 4);
     }
     /** Unsafe version of {@link #next}. */
     public static NSVGPath nnext(long struct) { return NSVGPath.create(memGetAddress(struct + NSVGPath.NEXT)); }
@@ -156,6 +152,8 @@ public class NSVGPath extends Struct {
 
     /** An array of {@link NSVGPath} structs. */
     public static class Buffer extends StructBuffer<NSVGPath, Buffer> {
+
+        private static final NSVGPath ELEMENT_FACTORY = NSVGPath.create(-1L);
 
         /**
          * Creates a new {@link NSVGPath.Buffer} instance backed by the specified container.
@@ -184,18 +182,8 @@ public class NSVGPath extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NSVGPath newInstance(long address) {
-            return new NSVGPath(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NSVGPath getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link FloatBuffer} view of the data pointed to by the {@code pts} field. */

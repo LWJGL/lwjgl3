@@ -48,10 +48,6 @@ public class HmdVector2 extends Struct implements NativeResource {
         V = layout.offsetof(0);
     }
 
-    HmdVector2(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link HmdVector2} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -59,7 +55,7 @@ public class HmdVector2 extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public HmdVector2(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -92,28 +88,29 @@ public class HmdVector2 extends Struct implements NativeResource {
 
     /** Returns a new {@link HmdVector2} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static HmdVector2 malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(HmdVector2.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link HmdVector2} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static HmdVector2 calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(HmdVector2.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link HmdVector2} instance allocated with {@link BufferUtils}. */
     public static HmdVector2 create() {
-        return new HmdVector2(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(HmdVector2.class, memAddress(container), container);
     }
 
     /** Returns a new {@link HmdVector2} instance for the specified memory address. */
     public static HmdVector2 create(long address) {
-        return new HmdVector2(address, null);
+        return wrap(HmdVector2.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static HmdVector2 createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(HmdVector2.class, address);
     }
 
     /**
@@ -122,7 +119,7 @@ public class HmdVector2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector2.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -131,7 +128,7 @@ public class HmdVector2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector2.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -140,7 +137,8 @@ public class HmdVector2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector2.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -150,13 +148,13 @@ public class HmdVector2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector2.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static HmdVector2.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -177,7 +175,7 @@ public class HmdVector2 extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static HmdVector2 mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(HmdVector2.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -186,7 +184,7 @@ public class HmdVector2 extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static HmdVector2 callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(HmdVector2.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -214,7 +212,7 @@ public class HmdVector2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector2.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -224,7 +222,7 @@ public class HmdVector2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static HmdVector2.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -233,7 +231,7 @@ public class HmdVector2 extends Struct implements NativeResource {
     public static FloatBuffer nv(long struct) { return memFloatBuffer(struct + HmdVector2.V, 2); }
     /** Unsafe version of {@link #v(int) v}. */
     public static float nv(long struct, int index) {
-        return memGetFloat(struct + HmdVector2.V + check(index, 2) * 4);
+        return UNSAFE.getFloat(null, struct + HmdVector2.V + check(index, 2) * 4);
     }
 
     /** Unsafe version of {@link #v(FloatBuffer) v}. */
@@ -243,13 +241,15 @@ public class HmdVector2 extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #v(int, float) v}. */
     public static void nv(long struct, int index, float value) {
-        memPutFloat(struct + HmdVector2.V + check(index, 2) * 4, value);
+        UNSAFE.putFloat(null, struct + HmdVector2.V + check(index, 2) * 4, value);
     }
 
     // -----------------------------------
 
     /** An array of {@link HmdVector2} structs. */
     public static class Buffer extends StructBuffer<HmdVector2, Buffer> implements NativeResource {
+
+        private static final HmdVector2 ELEMENT_FACTORY = HmdVector2.create(-1L);
 
         /**
          * Creates a new {@link HmdVector2.Buffer} instance backed by the specified container.
@@ -278,18 +278,8 @@ public class HmdVector2 extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected HmdVector2 newInstance(long address) {
-            return new HmdVector2(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected HmdVector2 getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link FloatBuffer} view of the {@code v} field. */

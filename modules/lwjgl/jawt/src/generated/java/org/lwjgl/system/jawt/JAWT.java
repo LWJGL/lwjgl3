@@ -86,10 +86,6 @@ public class JAWT extends Struct implements NativeResource {
         SYNTHESIZEWINDOWACTIVATION = layout.offsetof(8);
     }
 
-    JAWT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link JAWT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -97,7 +93,7 @@ public class JAWT extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public JAWT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -191,28 +187,29 @@ public class JAWT extends Struct implements NativeResource {
 
     /** Returns a new {@link JAWT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static JAWT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(JAWT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link JAWT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static JAWT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(JAWT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link JAWT} instance allocated with {@link BufferUtils}. */
     public static JAWT create() {
-        return new JAWT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(JAWT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link JAWT} instance for the specified memory address. */
     public static JAWT create(long address) {
-        return new JAWT(address, null);
+        return wrap(JAWT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static JAWT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(JAWT.class, address);
     }
 
     // -----------------------------------
@@ -233,7 +230,7 @@ public class JAWT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static JAWT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(JAWT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -242,13 +239,13 @@ public class JAWT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static JAWT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(JAWT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #version}. */
-    public static int nversion(long struct) { return memGetInt(struct + JAWT.VERSION); }
+    public static int nversion(long struct) { return UNSAFE.getInt(null, struct + JAWT.VERSION); }
     /** Unsafe version of {@link #GetDrawingSurface}. */
     public static long nGetDrawingSurface(long struct) { return memGetAddress(struct + JAWT.GETDRAWINGSURFACE); }
     /** Unsafe version of {@link #FreeDrawingSurface}. */
@@ -267,7 +264,7 @@ public class JAWT extends Struct implements NativeResource {
     public static long nSynthesizeWindowActivation(long struct) { return memGetAddress(struct + JAWT.SYNTHESIZEWINDOWACTIVATION); }
 
     /** Unsafe version of {@link #version(int) version}. */
-    public static void nversion(long struct, int value) { memPutInt(struct + JAWT.VERSION, value); }
+    public static void nversion(long struct, int value) { UNSAFE.putInt(null, struct + JAWT.VERSION, value); }
     /** Unsafe version of {@link #GetDrawingSurface(long) GetDrawingSurface}. */
     public static void nGetDrawingSurface(long struct, long value) { memPutAddress(struct + JAWT.GETDRAWINGSURFACE, value); }
     /** Unsafe version of {@link #FreeDrawingSurface(long) FreeDrawingSurface}. */

@@ -94,10 +94,6 @@ public class AINode extends Struct implements NativeResource {
         MMETADATA = layout.offsetof(7);
     }
 
-    AINode(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AINode} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -105,7 +101,7 @@ public class AINode extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AINode(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -192,28 +188,29 @@ public class AINode extends Struct implements NativeResource {
 
     /** Returns a new {@link AINode} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AINode malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AINode.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AINode} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AINode calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AINode.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AINode} instance allocated with {@link BufferUtils}. */
     public static AINode create() {
-        return new AINode(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AINode.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AINode} instance for the specified memory address. */
     public static AINode create(long address) {
-        return new AINode(address, null);
+        return wrap(AINode.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AINode createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AINode.class, address);
     }
 
     /**
@@ -222,7 +219,7 @@ public class AINode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AINode.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -231,7 +228,7 @@ public class AINode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AINode.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -240,7 +237,8 @@ public class AINode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AINode.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -250,13 +248,13 @@ public class AINode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AINode.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AINode.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -277,7 +275,7 @@ public class AINode extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AINode mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AINode.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -286,7 +284,7 @@ public class AINode extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AINode callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AINode.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -314,7 +312,7 @@ public class AINode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AINode.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -324,7 +322,7 @@ public class AINode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AINode.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -336,11 +334,11 @@ public class AINode extends Struct implements NativeResource {
     /** Unsafe version of {@link #mParent}. */
     @Nullable public static AINode nmParent(long struct) { return AINode.createSafe(memGetAddress(struct + AINode.MPARENT)); }
     /** Unsafe version of {@link #mNumChildren}. */
-    public static int nmNumChildren(long struct) { return memGetInt(struct + AINode.MNUMCHILDREN); }
+    public static int nmNumChildren(long struct) { return UNSAFE.getInt(null, struct + AINode.MNUMCHILDREN); }
     /** Unsafe version of {@link #mChildren() mChildren}. */
     @Nullable public static PointerBuffer nmChildren(long struct) { return memPointerBufferSafe(memGetAddress(struct + AINode.MCHILDREN), nmNumChildren(struct)); }
     /** Unsafe version of {@link #mNumMeshes}. */
-    public static int nmNumMeshes(long struct) { return memGetInt(struct + AINode.MNUMMESHES); }
+    public static int nmNumMeshes(long struct) { return UNSAFE.getInt(null, struct + AINode.MNUMMESHES); }
     /** Unsafe version of {@link #mMeshes() mMeshes}. */
     @Nullable public static IntBuffer nmMeshes(long struct) { return memIntBufferSafe(memGetAddress(struct + AINode.MMESHES), nmNumMeshes(struct)); }
     /** Unsafe version of {@link #mMetadata}. */
@@ -353,11 +351,11 @@ public class AINode extends Struct implements NativeResource {
     /** Unsafe version of {@link #mParent(AINode) mParent}. */
     public static void nmParent(long struct, @Nullable AINode value) { memPutAddress(struct + AINode.MPARENT, memAddressSafe(value)); }
     /** Sets the specified value to the {@code mNumChildren} field of the specified {@code struct}. */
-    public static void nmNumChildren(long struct, int value) { memPutInt(struct + AINode.MNUMCHILDREN, value); }
+    public static void nmNumChildren(long struct, int value) { UNSAFE.putInt(null, struct + AINode.MNUMCHILDREN, value); }
     /** Unsafe version of {@link #mChildren(PointerBuffer) mChildren}. */
     public static void nmChildren(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AINode.MCHILDREN, memAddressSafe(value)); nmNumChildren(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code mNumMeshes} field of the specified {@code struct}. */
-    public static void nmNumMeshes(long struct, int value) { memPutInt(struct + AINode.MNUMMESHES, value); }
+    public static void nmNumMeshes(long struct, int value) { UNSAFE.putInt(null, struct + AINode.MNUMMESHES, value); }
     /** Unsafe version of {@link #mMeshes(IntBuffer) mMeshes}. */
     public static void nmMeshes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + AINode.MMESHES, memAddressSafe(value)); nmNumMeshes(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #mMetadata(AIMetaData) mMetadata}. */
@@ -398,6 +396,8 @@ public class AINode extends Struct implements NativeResource {
     /** An array of {@link AINode} structs. */
     public static class Buffer extends StructBuffer<AINode, Buffer> implements NativeResource {
 
+        private static final AINode ELEMENT_FACTORY = AINode.create(-1L);
+
         /**
          * Creates a new {@link AINode.Buffer} instance backed by the specified container.
          *
@@ -425,18 +425,8 @@ public class AINode extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AINode newInstance(long address) {
-            return new AINode(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AINode getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link AIString} view of the {@code mName} field. */

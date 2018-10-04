@@ -114,10 +114,6 @@ public class VkApplicationInfo extends Struct implements NativeResource {
         APIVERSION = layout.offsetof(6);
     }
 
-    VkApplicationInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkApplicationInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -125,7 +121,7 @@ public class VkApplicationInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkApplicationInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -215,28 +211,29 @@ public class VkApplicationInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link VkApplicationInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkApplicationInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkApplicationInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkApplicationInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkApplicationInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkApplicationInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkApplicationInfo} instance allocated with {@link BufferUtils}. */
     public static VkApplicationInfo create() {
-        return new VkApplicationInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkApplicationInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkApplicationInfo} instance for the specified memory address. */
     public static VkApplicationInfo create(long address) {
-        return new VkApplicationInfo(address, null);
+        return wrap(VkApplicationInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkApplicationInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkApplicationInfo.class, address);
     }
 
     /**
@@ -245,7 +242,7 @@ public class VkApplicationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkApplicationInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -254,7 +251,7 @@ public class VkApplicationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkApplicationInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -263,7 +260,8 @@ public class VkApplicationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkApplicationInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -273,13 +271,13 @@ public class VkApplicationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkApplicationInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkApplicationInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -300,7 +298,7 @@ public class VkApplicationInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkApplicationInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkApplicationInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -309,7 +307,7 @@ public class VkApplicationInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkApplicationInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkApplicationInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -337,7 +335,7 @@ public class VkApplicationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkApplicationInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -347,13 +345,13 @@ public class VkApplicationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkApplicationInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkApplicationInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkApplicationInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkApplicationInfo.PNEXT); }
     /** Unsafe version of {@link #pApplicationName}. */
@@ -361,18 +359,18 @@ public class VkApplicationInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #pApplicationNameString}. */
     @Nullable public static String npApplicationNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkApplicationInfo.PAPPLICATIONNAME)); }
     /** Unsafe version of {@link #applicationVersion}. */
-    public static int napplicationVersion(long struct) { return memGetInt(struct + VkApplicationInfo.APPLICATIONVERSION); }
+    public static int napplicationVersion(long struct) { return UNSAFE.getInt(null, struct + VkApplicationInfo.APPLICATIONVERSION); }
     /** Unsafe version of {@link #pEngineName}. */
     @Nullable public static ByteBuffer npEngineName(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + VkApplicationInfo.PENGINENAME)); }
     /** Unsafe version of {@link #pEngineNameString}. */
     @Nullable public static String npEngineNameString(long struct) { return memUTF8Safe(memGetAddress(struct + VkApplicationInfo.PENGINENAME)); }
     /** Unsafe version of {@link #engineVersion}. */
-    public static int nengineVersion(long struct) { return memGetInt(struct + VkApplicationInfo.ENGINEVERSION); }
+    public static int nengineVersion(long struct) { return UNSAFE.getInt(null, struct + VkApplicationInfo.ENGINEVERSION); }
     /** Unsafe version of {@link #apiVersion}. */
-    public static int napiVersion(long struct) { return memGetInt(struct + VkApplicationInfo.APIVERSION); }
+    public static int napiVersion(long struct) { return UNSAFE.getInt(null, struct + VkApplicationInfo.APIVERSION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkApplicationInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkApplicationInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkApplicationInfo.PNEXT, value); }
     /** Unsafe version of {@link #pApplicationName(ByteBuffer) pApplicationName}. */
@@ -381,21 +379,23 @@ public class VkApplicationInfo extends Struct implements NativeResource {
         memPutAddress(struct + VkApplicationInfo.PAPPLICATIONNAME, memAddressSafe(value));
     }
     /** Unsafe version of {@link #applicationVersion(int) applicationVersion}. */
-    public static void napplicationVersion(long struct, int value) { memPutInt(struct + VkApplicationInfo.APPLICATIONVERSION, value); }
+    public static void napplicationVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkApplicationInfo.APPLICATIONVERSION, value); }
     /** Unsafe version of {@link #pEngineName(ByteBuffer) pEngineName}. */
     public static void npEngineName(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) { checkNT1Safe(value); }
         memPutAddress(struct + VkApplicationInfo.PENGINENAME, memAddressSafe(value));
     }
     /** Unsafe version of {@link #engineVersion(int) engineVersion}. */
-    public static void nengineVersion(long struct, int value) { memPutInt(struct + VkApplicationInfo.ENGINEVERSION, value); }
+    public static void nengineVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkApplicationInfo.ENGINEVERSION, value); }
     /** Unsafe version of {@link #apiVersion(int) apiVersion}. */
-    public static void napiVersion(long struct, int value) { memPutInt(struct + VkApplicationInfo.APIVERSION, value); }
+    public static void napiVersion(long struct, int value) { UNSAFE.putInt(null, struct + VkApplicationInfo.APIVERSION, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkApplicationInfo} structs. */
     public static class Buffer extends StructBuffer<VkApplicationInfo, Buffer> implements NativeResource {
+
+        private static final VkApplicationInfo ELEMENT_FACTORY = VkApplicationInfo.create(-1L);
 
         /**
          * Creates a new {@link VkApplicationInfo.Buffer} instance backed by the specified container.
@@ -424,18 +424,8 @@ public class VkApplicationInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkApplicationInfo newInstance(long address) {
-            return new VkApplicationInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkApplicationInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

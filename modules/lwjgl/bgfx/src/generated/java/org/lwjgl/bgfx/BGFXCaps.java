@@ -101,10 +101,6 @@ public class BGFXCaps extends Struct {
         FORMATS = layout.offsetof(9);
     }
 
-    BGFXCaps(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXCaps} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -112,7 +108,7 @@ public class BGFXCaps extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXCaps(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -159,31 +155,31 @@ public class BGFXCaps extends Struct {
 
     /** Returns a new {@link BGFXCaps} instance for the specified memory address. */
     public static BGFXCaps create(long address) {
-        return new BGFXCaps(address, null);
+        return wrap(BGFXCaps.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXCaps createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXCaps.class, address);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #rendererType}. */
-    public static int nrendererType(long struct) { return memGetInt(struct + BGFXCaps.RENDERERTYPE); }
+    public static int nrendererType(long struct) { return UNSAFE.getInt(null, struct + BGFXCaps.RENDERERTYPE); }
     /** Unsafe version of {@link #supported}. */
-    public static long nsupported(long struct) { return memGetLong(struct + BGFXCaps.SUPPORTED); }
+    public static long nsupported(long struct) { return UNSAFE.getLong(null, struct + BGFXCaps.SUPPORTED); }
     /** Unsafe version of {@link #vendorId}. */
-    public static short nvendorId(long struct) { return memGetShort(struct + BGFXCaps.VENDORID); }
+    public static short nvendorId(long struct) { return UNSAFE.getShort(null, struct + BGFXCaps.VENDORID); }
     /** Unsafe version of {@link #deviceId}. */
-    public static short ndeviceId(long struct) { return memGetShort(struct + BGFXCaps.DEVICEID); }
+    public static short ndeviceId(long struct) { return UNSAFE.getShort(null, struct + BGFXCaps.DEVICEID); }
     /** Unsafe version of {@link #homogeneousDepth}. */
-    public static boolean nhomogeneousDepth(long struct) { return memGetByte(struct + BGFXCaps.HOMOGENEOUSDEPTH) != 0; }
+    public static boolean nhomogeneousDepth(long struct) { return UNSAFE.getByte(null, struct + BGFXCaps.HOMOGENEOUSDEPTH) != 0; }
     /** Unsafe version of {@link #originBottomLeft}. */
-    public static boolean noriginBottomLeft(long struct) { return memGetByte(struct + BGFXCaps.ORIGINBOTTOMLEFT) != 0; }
+    public static boolean noriginBottomLeft(long struct) { return UNSAFE.getByte(null, struct + BGFXCaps.ORIGINBOTTOMLEFT) != 0; }
     /** Unsafe version of {@link #numGPUs}. */
-    public static byte nnumGPUs(long struct) { return memGetByte(struct + BGFXCaps.NUMGPUS); }
+    public static byte nnumGPUs(long struct) { return UNSAFE.getByte(null, struct + BGFXCaps.NUMGPUS); }
     /** Unsafe version of {@link #gpu}. */
     public static BGFXCapsGPU.Buffer ngpu(long struct) { return BGFXCapsGPU.create(struct + BGFXCaps.GPU, Byte.toUnsignedInt(nnumGPUs(struct))); }
     /** Unsafe version of {@link #gpu(int) gpu}. */
@@ -196,7 +192,7 @@ public class BGFXCaps extends Struct {
     public static ShortBuffer nformats(long struct) { return memShortBuffer(struct + BGFXCaps.FORMATS, BGFX_TEXTURE_FORMAT_COUNT); }
     /** Unsafe version of {@link #formats(int) formats}. */
     public static short nformats(long struct, int index) {
-        return memGetShort(struct + BGFXCaps.FORMATS + check(index, BGFX_TEXTURE_FORMAT_COUNT) * 2);
+        return UNSAFE.getShort(null, struct + BGFXCaps.FORMATS + check(index, BGFX_TEXTURE_FORMAT_COUNT) * 2);
     }
 
 }

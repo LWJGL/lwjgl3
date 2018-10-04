@@ -115,10 +115,6 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
         M_NNUMREPROJECTEDFRAMESTIMEDOUT = layout.offsetof(14);
     }
 
-    CompositorCumulativeStats(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link CompositorCumulativeStats} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -126,7 +122,7 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public CompositorCumulativeStats(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -182,28 +178,29 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
 
     /** Returns a new {@link CompositorCumulativeStats} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CompositorCumulativeStats malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(CompositorCumulativeStats.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link CompositorCumulativeStats} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CompositorCumulativeStats calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(CompositorCumulativeStats.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link CompositorCumulativeStats} instance allocated with {@link BufferUtils}. */
     public static CompositorCumulativeStats create() {
-        return new CompositorCumulativeStats(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(CompositorCumulativeStats.class, memAddress(container), container);
     }
 
     /** Returns a new {@link CompositorCumulativeStats} instance for the specified memory address. */
     public static CompositorCumulativeStats create(long address) {
-        return new CompositorCumulativeStats(address, null);
+        return wrap(CompositorCumulativeStats.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CompositorCumulativeStats createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(CompositorCumulativeStats.class, address);
     }
 
     /**
@@ -212,7 +209,7 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorCumulativeStats.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -221,7 +218,7 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorCumulativeStats.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -230,7 +227,8 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorCumulativeStats.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -240,13 +238,13 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorCumulativeStats.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CompositorCumulativeStats.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -267,7 +265,7 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static CompositorCumulativeStats mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(CompositorCumulativeStats.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -276,7 +274,7 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static CompositorCumulativeStats callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(CompositorCumulativeStats.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -304,7 +302,7 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorCumulativeStats.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -314,46 +312,48 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorCumulativeStats.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #m_nPid}. */
-    public static int nm_nPid(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NPID); }
+    public static int nm_nPid(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NPID); }
     /** Unsafe version of {@link #m_nNumFramePresents}. */
-    public static int nm_nNumFramePresents(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTS); }
+    public static int nm_nNumFramePresents(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTS); }
     /** Unsafe version of {@link #m_nNumDroppedFrames}. */
-    public static int nm_nNumDroppedFrames(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMES); }
+    public static int nm_nNumDroppedFrames(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMES); }
     /** Unsafe version of {@link #m_nNumReprojectedFrames}. */
-    public static int nm_nNumReprojectedFrames(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMES); }
+    public static int nm_nNumReprojectedFrames(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMES); }
     /** Unsafe version of {@link #m_nNumFramePresentsOnStartup}. */
-    public static int nm_nNumFramePresentsOnStartup(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSONSTARTUP); }
+    public static int nm_nNumFramePresentsOnStartup(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSONSTARTUP); }
     /** Unsafe version of {@link #m_nNumDroppedFramesOnStartup}. */
-    public static int nm_nNumDroppedFramesOnStartup(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESONSTARTUP); }
+    public static int nm_nNumDroppedFramesOnStartup(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESONSTARTUP); }
     /** Unsafe version of {@link #m_nNumReprojectedFramesOnStartup}. */
-    public static int nm_nNumReprojectedFramesOnStartup(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESONSTARTUP); }
+    public static int nm_nNumReprojectedFramesOnStartup(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESONSTARTUP); }
     /** Unsafe version of {@link #m_nNumLoading}. */
-    public static int nm_nNumLoading(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMLOADING); }
+    public static int nm_nNumLoading(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMLOADING); }
     /** Unsafe version of {@link #m_nNumFramePresentsLoading}. */
-    public static int nm_nNumFramePresentsLoading(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSLOADING); }
+    public static int nm_nNumFramePresentsLoading(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSLOADING); }
     /** Unsafe version of {@link #m_nNumDroppedFramesLoading}. */
-    public static int nm_nNumDroppedFramesLoading(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESLOADING); }
+    public static int nm_nNumDroppedFramesLoading(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESLOADING); }
     /** Unsafe version of {@link #m_nNumReprojectedFramesLoading}. */
-    public static int nm_nNumReprojectedFramesLoading(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESLOADING); }
+    public static int nm_nNumReprojectedFramesLoading(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESLOADING); }
     /** Unsafe version of {@link #m_nNumTimedOut}. */
-    public static int nm_nNumTimedOut(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMTIMEDOUT); }
+    public static int nm_nNumTimedOut(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMTIMEDOUT); }
     /** Unsafe version of {@link #m_nNumFramePresentsTimedOut}. */
-    public static int nm_nNumFramePresentsTimedOut(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSTIMEDOUT); }
+    public static int nm_nNumFramePresentsTimedOut(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMFRAMEPRESENTSTIMEDOUT); }
     /** Unsafe version of {@link #m_nNumDroppedFramesTimedOut}. */
-    public static int nm_nNumDroppedFramesTimedOut(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESTIMEDOUT); }
+    public static int nm_nNumDroppedFramesTimedOut(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMDROPPEDFRAMESTIMEDOUT); }
     /** Unsafe version of {@link #m_nNumReprojectedFramesTimedOut}. */
-    public static int nm_nNumReprojectedFramesTimedOut(long struct) { return memGetInt(struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESTIMEDOUT); }
+    public static int nm_nNumReprojectedFramesTimedOut(long struct) { return UNSAFE.getInt(null, struct + CompositorCumulativeStats.M_NNUMREPROJECTEDFRAMESTIMEDOUT); }
 
     // -----------------------------------
 
     /** An array of {@link CompositorCumulativeStats} structs. */
     public static class Buffer extends StructBuffer<CompositorCumulativeStats, Buffer> implements NativeResource {
+
+        private static final CompositorCumulativeStats ELEMENT_FACTORY = CompositorCumulativeStats.create(-1L);
 
         /**
          * Creates a new {@link CompositorCumulativeStats.Buffer} instance backed by the specified container.
@@ -382,18 +382,8 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected CompositorCumulativeStats newInstance(long address) {
-            return new CompositorCumulativeStats(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected CompositorCumulativeStats getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code m_nPid} field. */

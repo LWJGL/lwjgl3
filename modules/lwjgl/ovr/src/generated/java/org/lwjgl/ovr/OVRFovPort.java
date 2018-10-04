@@ -73,10 +73,6 @@ public class OVRFovPort extends Struct implements NativeResource {
         RIGHTTAN = layout.offsetof(3);
     }
 
-    OVRFovPort(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRFovPort} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -84,7 +80,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRFovPort(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -139,28 +135,29 @@ public class OVRFovPort extends Struct implements NativeResource {
 
     /** Returns a new {@link OVRFovPort} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRFovPort malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRFovPort.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRFovPort} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRFovPort calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRFovPort.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRFovPort} instance allocated with {@link BufferUtils}. */
     public static OVRFovPort create() {
-        return new OVRFovPort(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRFovPort.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRFovPort} instance for the specified memory address. */
     public static OVRFovPort create(long address) {
-        return new OVRFovPort(address, null);
+        return wrap(OVRFovPort.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRFovPort createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRFovPort.class, address);
     }
 
     /**
@@ -169,7 +166,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRFovPort.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +175,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRFovPort.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -187,7 +184,8 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRFovPort.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -197,13 +195,13 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRFovPort.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRFovPort.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -224,7 +222,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRFovPort mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRFovPort.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -233,7 +231,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRFovPort callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRFovPort.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -261,7 +259,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRFovPort.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -271,33 +269,35 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRFovPort.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #UpTan}. */
-    public static float nUpTan(long struct) { return memGetFloat(struct + OVRFovPort.UPTAN); }
+    public static float nUpTan(long struct) { return UNSAFE.getFloat(null, struct + OVRFovPort.UPTAN); }
     /** Unsafe version of {@link #DownTan}. */
-    public static float nDownTan(long struct) { return memGetFloat(struct + OVRFovPort.DOWNTAN); }
+    public static float nDownTan(long struct) { return UNSAFE.getFloat(null, struct + OVRFovPort.DOWNTAN); }
     /** Unsafe version of {@link #LeftTan}. */
-    public static float nLeftTan(long struct) { return memGetFloat(struct + OVRFovPort.LEFTTAN); }
+    public static float nLeftTan(long struct) { return UNSAFE.getFloat(null, struct + OVRFovPort.LEFTTAN); }
     /** Unsafe version of {@link #RightTan}. */
-    public static float nRightTan(long struct) { return memGetFloat(struct + OVRFovPort.RIGHTTAN); }
+    public static float nRightTan(long struct) { return UNSAFE.getFloat(null, struct + OVRFovPort.RIGHTTAN); }
 
     /** Unsafe version of {@link #UpTan(float) UpTan}. */
-    public static void nUpTan(long struct, float value) { memPutFloat(struct + OVRFovPort.UPTAN, value); }
+    public static void nUpTan(long struct, float value) { UNSAFE.putFloat(null, struct + OVRFovPort.UPTAN, value); }
     /** Unsafe version of {@link #DownTan(float) DownTan}. */
-    public static void nDownTan(long struct, float value) { memPutFloat(struct + OVRFovPort.DOWNTAN, value); }
+    public static void nDownTan(long struct, float value) { UNSAFE.putFloat(null, struct + OVRFovPort.DOWNTAN, value); }
     /** Unsafe version of {@link #LeftTan(float) LeftTan}. */
-    public static void nLeftTan(long struct, float value) { memPutFloat(struct + OVRFovPort.LEFTTAN, value); }
+    public static void nLeftTan(long struct, float value) { UNSAFE.putFloat(null, struct + OVRFovPort.LEFTTAN, value); }
     /** Unsafe version of {@link #RightTan(float) RightTan}. */
-    public static void nRightTan(long struct, float value) { memPutFloat(struct + OVRFovPort.RIGHTTAN, value); }
+    public static void nRightTan(long struct, float value) { UNSAFE.putFloat(null, struct + OVRFovPort.RIGHTTAN, value); }
 
     // -----------------------------------
 
     /** An array of {@link OVRFovPort} structs. */
     public static class Buffer extends StructBuffer<OVRFovPort, Buffer> implements NativeResource {
+
+        private static final OVRFovPort ELEMENT_FACTORY = OVRFovPort.create(-1L);
 
         /**
          * Creates a new {@link OVRFovPort.Buffer} instance backed by the specified container.
@@ -326,18 +326,8 @@ public class OVRFovPort extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRFovPort newInstance(long address) {
-            return new OVRFovPort(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRFovPort getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code UpTan} field. */

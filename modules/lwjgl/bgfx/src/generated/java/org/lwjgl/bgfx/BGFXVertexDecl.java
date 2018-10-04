@@ -71,10 +71,6 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
         ATTRIBUTES = layout.offsetof(3);
     }
 
-    BGFXVertexDecl(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXVertexDecl} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -82,7 +78,7 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXVertexDecl(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -151,28 +147,29 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
 
     /** Returns a new {@link BGFXVertexDecl} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXVertexDecl malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(BGFXVertexDecl.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link BGFXVertexDecl} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXVertexDecl calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(BGFXVertexDecl.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link BGFXVertexDecl} instance allocated with {@link BufferUtils}. */
     public static BGFXVertexDecl create() {
-        return new BGFXVertexDecl(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(BGFXVertexDecl.class, memAddress(container), container);
     }
 
     /** Returns a new {@link BGFXVertexDecl} instance for the specified memory address. */
     public static BGFXVertexDecl create(long address) {
-        return new BGFXVertexDecl(address, null);
+        return wrap(BGFXVertexDecl.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXVertexDecl createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXVertexDecl.class, address);
     }
 
     /**
@@ -181,7 +178,7 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXVertexDecl.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -190,7 +187,7 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXVertexDecl.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -199,7 +196,8 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXVertexDecl.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -209,13 +207,13 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXVertexDecl.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXVertexDecl.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -236,7 +234,7 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXVertexDecl mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(BGFXVertexDecl.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -245,7 +243,7 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXVertexDecl callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(BGFXVertexDecl.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -273,7 +271,7 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXVertexDecl.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -283,32 +281,32 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXVertexDecl.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #hash}. */
-    public static int nhash(long struct) { return memGetInt(struct + BGFXVertexDecl.HASH); }
+    public static int nhash(long struct) { return UNSAFE.getInt(null, struct + BGFXVertexDecl.HASH); }
     /** Unsafe version of {@link #stride}. */
-    public static short nstride(long struct) { return memGetShort(struct + BGFXVertexDecl.STRIDE); }
+    public static short nstride(long struct) { return UNSAFE.getShort(null, struct + BGFXVertexDecl.STRIDE); }
     /** Unsafe version of {@link #offset}. */
     public static ShortBuffer noffset(long struct) { return memShortBuffer(struct + BGFXVertexDecl.OFFSET, BGFX_ATTRIB_COUNT); }
     /** Unsafe version of {@link #offset(int) offset}. */
     public static short noffset(long struct, int index) {
-        return memGetShort(struct + BGFXVertexDecl.OFFSET + check(index, BGFX_ATTRIB_COUNT) * 2);
+        return UNSAFE.getShort(null, struct + BGFXVertexDecl.OFFSET + check(index, BGFX_ATTRIB_COUNT) * 2);
     }
     /** Unsafe version of {@link #attributes}. */
     public static ShortBuffer nattributes(long struct) { return memShortBuffer(struct + BGFXVertexDecl.ATTRIBUTES, BGFX_ATTRIB_COUNT); }
     /** Unsafe version of {@link #attributes(int) attributes}. */
     public static short nattributes(long struct, int index) {
-        return memGetShort(struct + BGFXVertexDecl.ATTRIBUTES + check(index, BGFX_ATTRIB_COUNT) * 2);
+        return UNSAFE.getShort(null, struct + BGFXVertexDecl.ATTRIBUTES + check(index, BGFX_ATTRIB_COUNT) * 2);
     }
 
     /** Unsafe version of {@link #hash(int) hash}. */
-    public static void nhash(long struct, int value) { memPutInt(struct + BGFXVertexDecl.HASH, value); }
+    public static void nhash(long struct, int value) { UNSAFE.putInt(null, struct + BGFXVertexDecl.HASH, value); }
     /** Unsafe version of {@link #stride(short) stride}. */
-    public static void nstride(long struct, short value) { memPutShort(struct + BGFXVertexDecl.STRIDE, value); }
+    public static void nstride(long struct, short value) { UNSAFE.putShort(null, struct + BGFXVertexDecl.STRIDE, value); }
     /** Unsafe version of {@link #offset(ShortBuffer) offset}. */
     public static void noffset(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, BGFX_ATTRIB_COUNT); }
@@ -316,7 +314,7 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #offset(int, short) offset}. */
     public static void noffset(long struct, int index, short value) {
-        memPutShort(struct + BGFXVertexDecl.OFFSET + check(index, BGFX_ATTRIB_COUNT) * 2, value);
+        UNSAFE.putShort(null, struct + BGFXVertexDecl.OFFSET + check(index, BGFX_ATTRIB_COUNT) * 2, value);
     }
     /** Unsafe version of {@link #attributes(ShortBuffer) attributes}. */
     public static void nattributes(long struct, ShortBuffer value) {
@@ -325,13 +323,15 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #attributes(int, short) attributes}. */
     public static void nattributes(long struct, int index, short value) {
-        memPutShort(struct + BGFXVertexDecl.ATTRIBUTES + check(index, BGFX_ATTRIB_COUNT) * 2, value);
+        UNSAFE.putShort(null, struct + BGFXVertexDecl.ATTRIBUTES + check(index, BGFX_ATTRIB_COUNT) * 2, value);
     }
 
     // -----------------------------------
 
     /** An array of {@link BGFXVertexDecl} structs. */
     public static class Buffer extends StructBuffer<BGFXVertexDecl, Buffer> implements NativeResource {
+
+        private static final BGFXVertexDecl ELEMENT_FACTORY = BGFXVertexDecl.create(-1L);
 
         /**
          * Creates a new {@link BGFXVertexDecl.Buffer} instance backed by the specified container.
@@ -360,18 +360,8 @@ public class BGFXVertexDecl extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected BGFXVertexDecl newInstance(long address) {
-            return new BGFXVertexDecl(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected BGFXVertexDecl getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code hash} field. */

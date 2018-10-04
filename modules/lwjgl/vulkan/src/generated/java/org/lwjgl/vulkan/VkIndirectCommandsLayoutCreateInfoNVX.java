@@ -128,10 +128,6 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
         PTOKENS = layout.offsetof(5);
     }
 
-    VkIndirectCommandsLayoutCreateInfoNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkIndirectCommandsLayoutCreateInfoNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -139,7 +135,7 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkIndirectCommandsLayoutCreateInfoNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -208,28 +204,29 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
 
     /** Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkIndirectCommandsLayoutCreateInfoNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkIndirectCommandsLayoutCreateInfoNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkIndirectCommandsLayoutCreateInfoNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkIndirectCommandsLayoutCreateInfoNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance allocated with {@link BufferUtils}. */
     public static VkIndirectCommandsLayoutCreateInfoNVX create() {
-        return new VkIndirectCommandsLayoutCreateInfoNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkIndirectCommandsLayoutCreateInfoNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance for the specified memory address. */
     public static VkIndirectCommandsLayoutCreateInfoNVX create(long address) {
-        return new VkIndirectCommandsLayoutCreateInfoNVX(address, null);
+        return wrap(VkIndirectCommandsLayoutCreateInfoNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkIndirectCommandsLayoutCreateInfoNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkIndirectCommandsLayoutCreateInfoNVX.class, address);
     }
 
     /**
@@ -238,7 +235,7 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutCreateInfoNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -247,7 +244,7 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutCreateInfoNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -256,7 +253,8 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutCreateInfoNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -266,13 +264,13 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutCreateInfoNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkIndirectCommandsLayoutCreateInfoNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -293,7 +291,7 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static VkIndirectCommandsLayoutCreateInfoNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkIndirectCommandsLayoutCreateInfoNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -302,7 +300,7 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static VkIndirectCommandsLayoutCreateInfoNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkIndirectCommandsLayoutCreateInfoNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -330,7 +328,7 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutCreateInfoNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -340,34 +338,34 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutCreateInfoNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutCreateInfoNVX.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutCreateInfoNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkIndirectCommandsLayoutCreateInfoNVX.PNEXT); }
     /** Unsafe version of {@link #pipelineBindPoint}. */
-    public static int npipelineBindPoint(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutCreateInfoNVX.PIPELINEBINDPOINT); }
+    public static int npipelineBindPoint(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutCreateInfoNVX.PIPELINEBINDPOINT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutCreateInfoNVX.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutCreateInfoNVX.FLAGS); }
     /** Unsafe version of {@link #tokenCount}. */
-    public static int ntokenCount(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutCreateInfoNVX.TOKENCOUNT); }
+    public static int ntokenCount(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutCreateInfoNVX.TOKENCOUNT); }
     /** Unsafe version of {@link #pTokens}. */
     public static VkIndirectCommandsLayoutTokenNVX.Buffer npTokens(long struct) { return VkIndirectCommandsLayoutTokenNVX.create(memGetAddress(struct + VkIndirectCommandsLayoutCreateInfoNVX.PTOKENS), ntokenCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutCreateInfoNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutCreateInfoNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkIndirectCommandsLayoutCreateInfoNVX.PNEXT, value); }
     /** Unsafe version of {@link #pipelineBindPoint(int) pipelineBindPoint}. */
-    public static void npipelineBindPoint(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutCreateInfoNVX.PIPELINEBINDPOINT, value); }
+    public static void npipelineBindPoint(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutCreateInfoNVX.PIPELINEBINDPOINT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutCreateInfoNVX.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutCreateInfoNVX.FLAGS, value); }
     /** Sets the specified value to the {@code tokenCount} field of the specified {@code struct}. */
-    public static void ntokenCount(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutCreateInfoNVX.TOKENCOUNT, value); }
+    public static void ntokenCount(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutCreateInfoNVX.TOKENCOUNT, value); }
     /** Unsafe version of {@link #pTokens(VkIndirectCommandsLayoutTokenNVX.Buffer) pTokens}. */
     public static void npTokens(long struct, VkIndirectCommandsLayoutTokenNVX.Buffer value) { memPutAddress(struct + VkIndirectCommandsLayoutCreateInfoNVX.PTOKENS, value.address()); ntokenCount(struct, value.remaining()); }
 
@@ -397,6 +395,8 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
     /** An array of {@link VkIndirectCommandsLayoutCreateInfoNVX} structs. */
     public static class Buffer extends StructBuffer<VkIndirectCommandsLayoutCreateInfoNVX, Buffer> implements NativeResource {
 
+        private static final VkIndirectCommandsLayoutCreateInfoNVX ELEMENT_FACTORY = VkIndirectCommandsLayoutCreateInfoNVX.create(-1L);
+
         /**
          * Creates a new {@link VkIndirectCommandsLayoutCreateInfoNVX.Buffer} instance backed by the specified container.
          *
@@ -424,18 +424,8 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkIndirectCommandsLayoutCreateInfoNVX newInstance(long address) {
-            return new VkIndirectCommandsLayoutCreateInfoNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkIndirectCommandsLayoutCreateInfoNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

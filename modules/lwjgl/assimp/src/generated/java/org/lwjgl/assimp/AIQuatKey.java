@@ -60,10 +60,6 @@ public class AIQuatKey extends Struct implements NativeResource {
         MVALUE = layout.offsetof(1);
     }
 
-    AIQuatKey(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIQuatKey} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -71,7 +67,7 @@ public class AIQuatKey extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIQuatKey(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -117,28 +113,29 @@ public class AIQuatKey extends Struct implements NativeResource {
 
     /** Returns a new {@link AIQuatKey} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIQuatKey malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AIQuatKey.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AIQuatKey} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIQuatKey calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AIQuatKey.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AIQuatKey} instance allocated with {@link BufferUtils}. */
     public static AIQuatKey create() {
-        return new AIQuatKey(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AIQuatKey.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AIQuatKey} instance for the specified memory address. */
     public static AIQuatKey create(long address) {
-        return new AIQuatKey(address, null);
+        return wrap(AIQuatKey.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIQuatKey createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIQuatKey.class, address);
     }
 
     /**
@@ -147,7 +144,7 @@ public class AIQuatKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuatKey.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -156,7 +153,7 @@ public class AIQuatKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuatKey.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -165,7 +162,8 @@ public class AIQuatKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuatKey.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -175,13 +173,13 @@ public class AIQuatKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuatKey.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIQuatKey.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -202,7 +200,7 @@ public class AIQuatKey extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIQuatKey mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AIQuatKey.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -211,7 +209,7 @@ public class AIQuatKey extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIQuatKey callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AIQuatKey.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -239,7 +237,7 @@ public class AIQuatKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuatKey.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -249,18 +247,18 @@ public class AIQuatKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIQuatKey.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #mTime}. */
-    public static double nmTime(long struct) { return memGetDouble(struct + AIQuatKey.MTIME); }
+    public static double nmTime(long struct) { return UNSAFE.getDouble(null, struct + AIQuatKey.MTIME); }
     /** Unsafe version of {@link #mValue}. */
     public static AIQuaternion nmValue(long struct) { return AIQuaternion.create(struct + AIQuatKey.MVALUE); }
 
     /** Unsafe version of {@link #mTime(double) mTime}. */
-    public static void nmTime(long struct, double value) { memPutDouble(struct + AIQuatKey.MTIME, value); }
+    public static void nmTime(long struct, double value) { UNSAFE.putDouble(null, struct + AIQuatKey.MTIME, value); }
     /** Unsafe version of {@link #mValue(AIQuaternion) mValue}. */
     public static void nmValue(long struct, AIQuaternion value) { memCopy(value.address(), struct + AIQuatKey.MVALUE, AIQuaternion.SIZEOF); }
 
@@ -268,6 +266,8 @@ public class AIQuatKey extends Struct implements NativeResource {
 
     /** An array of {@link AIQuatKey} structs. */
     public static class Buffer extends StructBuffer<AIQuatKey, Buffer> implements NativeResource {
+
+        private static final AIQuatKey ELEMENT_FACTORY = AIQuatKey.create(-1L);
 
         /**
          * Creates a new {@link AIQuatKey.Buffer} instance backed by the specified container.
@@ -296,18 +296,8 @@ public class AIQuatKey extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIQuatKey newInstance(long address) {
-            return new AIQuatKey(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIQuatKey getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code mTime} field. */

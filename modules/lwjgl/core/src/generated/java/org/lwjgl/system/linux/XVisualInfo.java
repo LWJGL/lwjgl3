@@ -85,10 +85,6 @@ public class XVisualInfo extends Struct implements NativeResource {
         BITS_PER_RGB = layout.offsetof(9);
     }
 
-    XVisualInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link XVisualInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -96,7 +92,7 @@ public class XVisualInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public XVisualInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -192,28 +188,29 @@ public class XVisualInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link XVisualInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XVisualInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(XVisualInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link XVisualInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XVisualInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(XVisualInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link XVisualInfo} instance allocated with {@link BufferUtils}. */
     public static XVisualInfo create() {
-        return new XVisualInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(XVisualInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link XVisualInfo} instance for the specified memory address. */
     public static XVisualInfo create(long address) {
-        return new XVisualInfo(address, null);
+        return wrap(XVisualInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XVisualInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(XVisualInfo.class, address);
     }
 
     /**
@@ -222,7 +219,7 @@ public class XVisualInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XVisualInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -231,7 +228,7 @@ public class XVisualInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XVisualInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -240,7 +237,8 @@ public class XVisualInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XVisualInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -250,13 +248,13 @@ public class XVisualInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XVisualInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XVisualInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -277,7 +275,7 @@ public class XVisualInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XVisualInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(XVisualInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -286,7 +284,7 @@ public class XVisualInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XVisualInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(XVisualInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -314,7 +312,7 @@ public class XVisualInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XVisualInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -324,7 +322,7 @@ public class XVisualInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XVisualInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -334,11 +332,11 @@ public class XVisualInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #visualid}. */
     public static long nvisualid(long struct) { return memGetAddress(struct + XVisualInfo.VISUALID); }
     /** Unsafe version of {@link #screen}. */
-    public static int nscreen(long struct) { return memGetInt(struct + XVisualInfo.SCREEN); }
+    public static int nscreen(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.SCREEN); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return memGetInt(struct + XVisualInfo.DEPTH); }
+    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.DEPTH); }
     /** Unsafe version of {@link #class$}. */
-    public static int nclass$(long struct) { return memGetInt(struct + XVisualInfo.CLASS); }
+    public static int nclass$(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.CLASS); }
     /** Unsafe version of {@link #red_mask}. */
     public static long nred_mask(long struct) { return memGetAddress(struct + XVisualInfo.RED_MASK); }
     /** Unsafe version of {@link #green_mask}. */
@@ -346,20 +344,20 @@ public class XVisualInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #blue_mask}. */
     public static long nblue_mask(long struct) { return memGetAddress(struct + XVisualInfo.BLUE_MASK); }
     /** Unsafe version of {@link #colormap_size}. */
-    public static int ncolormap_size(long struct) { return memGetInt(struct + XVisualInfo.COLORMAP_SIZE); }
+    public static int ncolormap_size(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.COLORMAP_SIZE); }
     /** Unsafe version of {@link #bits_per_rgb}. */
-    public static int nbits_per_rgb(long struct) { return memGetInt(struct + XVisualInfo.BITS_PER_RGB); }
+    public static int nbits_per_rgb(long struct) { return UNSAFE.getInt(null, struct + XVisualInfo.BITS_PER_RGB); }
 
     /** Unsafe version of {@link #visual(Visual) visual}. */
     public static void nvisual(long struct, Visual value) { memPutAddress(struct + XVisualInfo.VISUAL, value.address()); }
     /** Unsafe version of {@link #visualid(long) visualid}. */
     public static void nvisualid(long struct, long value) { memPutAddress(struct + XVisualInfo.VISUALID, value); }
     /** Unsafe version of {@link #screen(int) screen}. */
-    public static void nscreen(long struct, int value) { memPutInt(struct + XVisualInfo.SCREEN, value); }
+    public static void nscreen(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.SCREEN, value); }
     /** Unsafe version of {@link #depth(int) depth}. */
-    public static void ndepth(long struct, int value) { memPutInt(struct + XVisualInfo.DEPTH, value); }
+    public static void ndepth(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.DEPTH, value); }
     /** Unsafe version of {@link #class$(int) class$}. */
-    public static void nclass$(long struct, int value) { memPutInt(struct + XVisualInfo.CLASS, value); }
+    public static void nclass$(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.CLASS, value); }
     /** Unsafe version of {@link #red_mask(long) red_mask}. */
     public static void nred_mask(long struct, long value) { memPutAddress(struct + XVisualInfo.RED_MASK, value); }
     /** Unsafe version of {@link #green_mask(long) green_mask}. */
@@ -367,9 +365,9 @@ public class XVisualInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #blue_mask(long) blue_mask}. */
     public static void nblue_mask(long struct, long value) { memPutAddress(struct + XVisualInfo.BLUE_MASK, value); }
     /** Unsafe version of {@link #colormap_size(int) colormap_size}. */
-    public static void ncolormap_size(long struct, int value) { memPutInt(struct + XVisualInfo.COLORMAP_SIZE, value); }
+    public static void ncolormap_size(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.COLORMAP_SIZE, value); }
     /** Unsafe version of {@link #bits_per_rgb(int) bits_per_rgb}. */
-    public static void nbits_per_rgb(long struct, int value) { memPutInt(struct + XVisualInfo.BITS_PER_RGB, value); }
+    public static void nbits_per_rgb(long struct, int value) { UNSAFE.putInt(null, struct + XVisualInfo.BITS_PER_RGB, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -396,6 +394,8 @@ public class XVisualInfo extends Struct implements NativeResource {
 
     /** An array of {@link XVisualInfo} structs. */
     public static class Buffer extends StructBuffer<XVisualInfo, Buffer> implements NativeResource {
+
+        private static final XVisualInfo ELEMENT_FACTORY = XVisualInfo.create(-1L);
 
         /**
          * Creates a new {@link XVisualInfo.Buffer} instance backed by the specified container.
@@ -424,18 +424,8 @@ public class XVisualInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected XVisualInfo newInstance(long address) {
-            return new XVisualInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected XVisualInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link Visual} view of the struct pointed to by the {@code visual} field. */

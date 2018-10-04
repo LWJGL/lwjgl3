@@ -118,10 +118,6 @@ public class WNDCLASSEX extends Struct implements NativeResource {
         HICONSM = layout.offsetof(11);
     }
 
-    WNDCLASSEX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link WNDCLASSEX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -129,7 +125,7 @@ public class WNDCLASSEX extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public WNDCLASSEX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -250,28 +246,29 @@ public class WNDCLASSEX extends Struct implements NativeResource {
 
     /** Returns a new {@link WNDCLASSEX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static WNDCLASSEX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(WNDCLASSEX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link WNDCLASSEX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static WNDCLASSEX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(WNDCLASSEX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link WNDCLASSEX} instance allocated with {@link BufferUtils}. */
     public static WNDCLASSEX create() {
-        return new WNDCLASSEX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(WNDCLASSEX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link WNDCLASSEX} instance for the specified memory address. */
     public static WNDCLASSEX create(long address) {
-        return new WNDCLASSEX(address, null);
+        return wrap(WNDCLASSEX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static WNDCLASSEX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(WNDCLASSEX.class, address);
     }
 
     /**
@@ -280,7 +277,7 @@ public class WNDCLASSEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static WNDCLASSEX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -289,7 +286,7 @@ public class WNDCLASSEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static WNDCLASSEX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -298,7 +295,8 @@ public class WNDCLASSEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static WNDCLASSEX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -308,13 +306,13 @@ public class WNDCLASSEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static WNDCLASSEX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static WNDCLASSEX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -335,7 +333,7 @@ public class WNDCLASSEX extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static WNDCLASSEX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(WNDCLASSEX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -344,7 +342,7 @@ public class WNDCLASSEX extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static WNDCLASSEX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(WNDCLASSEX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -372,7 +370,7 @@ public class WNDCLASSEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static WNDCLASSEX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -382,21 +380,21 @@ public class WNDCLASSEX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static WNDCLASSEX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #cbSize}. */
-    public static int ncbSize(long struct) { return memGetInt(struct + WNDCLASSEX.CBSIZE); }
+    public static int ncbSize(long struct) { return UNSAFE.getInt(null, struct + WNDCLASSEX.CBSIZE); }
     /** Unsafe version of {@link #style}. */
-    public static int nstyle(long struct) { return memGetInt(struct + WNDCLASSEX.STYLE); }
+    public static int nstyle(long struct) { return UNSAFE.getInt(null, struct + WNDCLASSEX.STYLE); }
     /** Unsafe version of {@link #lpfnWndProc}. */
     public static WindowProc nlpfnWndProc(long struct) { return WindowProc.create(memGetAddress(struct + WNDCLASSEX.LPFNWNDPROC)); }
     /** Unsafe version of {@link #cbClsExtra}. */
-    public static int ncbClsExtra(long struct) { return memGetInt(struct + WNDCLASSEX.CBCLSEXTRA); }
+    public static int ncbClsExtra(long struct) { return UNSAFE.getInt(null, struct + WNDCLASSEX.CBCLSEXTRA); }
     /** Unsafe version of {@link #cbWndExtra}. */
-    public static int ncbWndExtra(long struct) { return memGetInt(struct + WNDCLASSEX.CBWNDEXTRA); }
+    public static int ncbWndExtra(long struct) { return UNSAFE.getInt(null, struct + WNDCLASSEX.CBWNDEXTRA); }
     /** Unsafe version of {@link #hInstance}. */
     public static long nhInstance(long struct) { return memGetAddress(struct + WNDCLASSEX.HINSTANCE); }
     /** Unsafe version of {@link #hIcon}. */
@@ -417,15 +415,15 @@ public class WNDCLASSEX extends Struct implements NativeResource {
     public static long nhIconSm(long struct) { return memGetAddress(struct + WNDCLASSEX.HICONSM); }
 
     /** Unsafe version of {@link #cbSize(int) cbSize}. */
-    public static void ncbSize(long struct, int value) { memPutInt(struct + WNDCLASSEX.CBSIZE, value); }
+    public static void ncbSize(long struct, int value) { UNSAFE.putInt(null, struct + WNDCLASSEX.CBSIZE, value); }
     /** Unsafe version of {@link #style(int) style}. */
-    public static void nstyle(long struct, int value) { memPutInt(struct + WNDCLASSEX.STYLE, value); }
+    public static void nstyle(long struct, int value) { UNSAFE.putInt(null, struct + WNDCLASSEX.STYLE, value); }
     /** Unsafe version of {@link #lpfnWndProc(WindowProcI) lpfnWndProc}. */
     public static void nlpfnWndProc(long struct, WindowProcI value) { memPutAddress(struct + WNDCLASSEX.LPFNWNDPROC, value.address()); }
     /** Unsafe version of {@link #cbClsExtra(int) cbClsExtra}. */
-    public static void ncbClsExtra(long struct, int value) { memPutInt(struct + WNDCLASSEX.CBCLSEXTRA, value); }
+    public static void ncbClsExtra(long struct, int value) { UNSAFE.putInt(null, struct + WNDCLASSEX.CBCLSEXTRA, value); }
     /** Unsafe version of {@link #cbWndExtra(int) cbWndExtra}. */
-    public static void ncbWndExtra(long struct, int value) { memPutInt(struct + WNDCLASSEX.CBWNDEXTRA, value); }
+    public static void ncbWndExtra(long struct, int value) { UNSAFE.putInt(null, struct + WNDCLASSEX.CBWNDEXTRA, value); }
     /** Unsafe version of {@link #hInstance(long) hInstance}. */
     public static void nhInstance(long struct, long value) { memPutAddress(struct + WNDCLASSEX.HINSTANCE, check(value)); }
     /** Unsafe version of {@link #hIcon(long) hIcon}. */
@@ -475,6 +473,8 @@ public class WNDCLASSEX extends Struct implements NativeResource {
     /** An array of {@link WNDCLASSEX} structs. */
     public static class Buffer extends StructBuffer<WNDCLASSEX, Buffer> implements NativeResource {
 
+        private static final WNDCLASSEX ELEMENT_FACTORY = WNDCLASSEX.create(-1L);
+
         /**
          * Creates a new {@link WNDCLASSEX.Buffer} instance backed by the specified container.
          *
@@ -502,18 +502,8 @@ public class WNDCLASSEX extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected WNDCLASSEX newInstance(long address) {
-            return new WNDCLASSEX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected WNDCLASSEX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code cbSize} field. */

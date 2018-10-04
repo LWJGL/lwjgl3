@@ -58,10 +58,6 @@ public class BGFXInternalData extends Struct {
         CONTEXT = layout.offsetof(1);
     }
 
-    BGFXInternalData(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXInternalData} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -69,7 +65,7 @@ public class BGFXInternalData extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXInternalData(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -86,13 +82,13 @@ public class BGFXInternalData extends Struct {
 
     /** Returns a new {@link BGFXInternalData} instance for the specified memory address. */
     public static BGFXInternalData create(long address) {
-        return new BGFXInternalData(address, null);
+        return wrap(BGFXInternalData.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXInternalData createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXInternalData.class, address);
     }
 
     // -----------------------------------

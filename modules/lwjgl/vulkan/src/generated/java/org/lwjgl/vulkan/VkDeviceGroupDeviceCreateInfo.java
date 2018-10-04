@@ -91,10 +91,6 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
         PPHYSICALDEVICES = layout.offsetof(3);
     }
 
-    VkDeviceGroupDeviceCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDeviceGroupDeviceCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -102,7 +98,7 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceGroupDeviceCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -158,28 +154,29 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
 
     /** Returns a new {@link VkDeviceGroupDeviceCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDeviceGroupDeviceCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDeviceGroupDeviceCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDeviceGroupDeviceCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDeviceGroupDeviceCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDeviceGroupDeviceCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDeviceGroupDeviceCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkDeviceGroupDeviceCreateInfo create() {
-        return new VkDeviceGroupDeviceCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDeviceGroupDeviceCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDeviceGroupDeviceCreateInfo} instance for the specified memory address. */
     public static VkDeviceGroupDeviceCreateInfo create(long address) {
-        return new VkDeviceGroupDeviceCreateInfo(address, null);
+        return wrap(VkDeviceGroupDeviceCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceGroupDeviceCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDeviceGroupDeviceCreateInfo.class, address);
     }
 
     /**
@@ -188,7 +185,7 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupDeviceCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -197,7 +194,7 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupDeviceCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -206,7 +203,8 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupDeviceCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -216,13 +214,13 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupDeviceCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceGroupDeviceCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -243,7 +241,7 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkDeviceGroupDeviceCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDeviceGroupDeviceCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -252,7 +250,7 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkDeviceGroupDeviceCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDeviceGroupDeviceCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -280,7 +278,7 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupDeviceCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -290,26 +288,26 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupDeviceCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDeviceGroupDeviceCreateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupDeviceCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceGroupDeviceCreateInfo.PNEXT); }
     /** Unsafe version of {@link #physicalDeviceCount}. */
-    public static int nphysicalDeviceCount(long struct) { return memGetInt(struct + VkDeviceGroupDeviceCreateInfo.PHYSICALDEVICECOUNT); }
+    public static int nphysicalDeviceCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupDeviceCreateInfo.PHYSICALDEVICECOUNT); }
     /** Unsafe version of {@link #pPhysicalDevices() pPhysicalDevices}. */
     @Nullable public static PointerBuffer npPhysicalDevices(long struct) { return memPointerBufferSafe(memGetAddress(struct + VkDeviceGroupDeviceCreateInfo.PPHYSICALDEVICES), nphysicalDeviceCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceGroupDeviceCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupDeviceCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceGroupDeviceCreateInfo.PNEXT, value); }
     /** Sets the specified value to the {@code physicalDeviceCount} field of the specified {@code struct}. */
-    public static void nphysicalDeviceCount(long struct, int value) { memPutInt(struct + VkDeviceGroupDeviceCreateInfo.PHYSICALDEVICECOUNT, value); }
+    public static void nphysicalDeviceCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupDeviceCreateInfo.PHYSICALDEVICECOUNT, value); }
     /** Unsafe version of {@link #pPhysicalDevices(PointerBuffer) pPhysicalDevices}. */
     public static void npPhysicalDevices(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + VkDeviceGroupDeviceCreateInfo.PPHYSICALDEVICES, memAddressSafe(value)); nphysicalDeviceCount(struct, value == null ? 0 : value.remaining()); }
 
@@ -341,6 +339,8 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
     /** An array of {@link VkDeviceGroupDeviceCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VkDeviceGroupDeviceCreateInfo, Buffer> implements NativeResource {
 
+        private static final VkDeviceGroupDeviceCreateInfo ELEMENT_FACTORY = VkDeviceGroupDeviceCreateInfo.create(-1L);
+
         /**
          * Creates a new {@link VkDeviceGroupDeviceCreateInfo.Buffer} instance backed by the specified container.
          *
@@ -368,18 +368,8 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDeviceGroupDeviceCreateInfo newInstance(long address) {
-            return new VkDeviceGroupDeviceCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDeviceGroupDeviceCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

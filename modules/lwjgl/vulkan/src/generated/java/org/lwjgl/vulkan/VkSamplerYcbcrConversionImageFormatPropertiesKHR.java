@@ -27,10 +27,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class VkSamplerYcbcrConversionImageFormatPropertiesKHR extends VkSamplerYcbcrConversionImageFormatProperties {
 
-    VkSamplerYcbcrConversionImageFormatPropertiesKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSamplerYcbcrConversionImageFormatPropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -38,7 +34,7 @@ public class VkSamplerYcbcrConversionImageFormatPropertiesKHR extends VkSamplerY
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSamplerYcbcrConversionImageFormatPropertiesKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -76,13 +72,13 @@ public class VkSamplerYcbcrConversionImageFormatPropertiesKHR extends VkSamplerY
 
     /** Returns a new {@link VkSamplerYcbcrConversionImageFormatPropertiesKHR} instance for the specified memory address. */
     public static VkSamplerYcbcrConversionImageFormatPropertiesKHR create(long address) {
-        return new VkSamplerYcbcrConversionImageFormatPropertiesKHR(address, null);
+        return wrap(VkSamplerYcbcrConversionImageFormatPropertiesKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSamplerYcbcrConversionImageFormatPropertiesKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSamplerYcbcrConversionImageFormatPropertiesKHR.class, address);
     }
 
     /**
@@ -92,19 +88,21 @@ public class VkSamplerYcbcrConversionImageFormatPropertiesKHR extends VkSamplerY
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionImageFormatPropertiesKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSamplerYcbcrConversionImageFormatPropertiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkSamplerYcbcrConversionImageFormatPropertiesKHR} structs. */
     public static class Buffer extends VkSamplerYcbcrConversionImageFormatProperties.Buffer {
+
+        private static final VkSamplerYcbcrConversionImageFormatPropertiesKHR ELEMENT_FACTORY = VkSamplerYcbcrConversionImageFormatPropertiesKHR.create(-1L);
 
         /**
          * Creates a new {@link VkSamplerYcbcrConversionImageFormatPropertiesKHR.Buffer} instance backed by the specified container.
@@ -133,13 +131,8 @@ public class VkSamplerYcbcrConversionImageFormatPropertiesKHR extends VkSamplerY
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSamplerYcbcrConversionImageFormatPropertiesKHR newInstance(long address) {
-            return new VkSamplerYcbcrConversionImageFormatPropertiesKHR(address, container);
+        protected VkSamplerYcbcrConversionImageFormatPropertiesKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

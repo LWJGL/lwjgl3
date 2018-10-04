@@ -96,10 +96,6 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
         HWND = layout.offsetof(4);
     }
 
-    VkWin32SurfaceCreateInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkWin32SurfaceCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -107,7 +103,7 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkWin32SurfaceCreateInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -173,28 +169,29 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
 
     /** Returns a new {@link VkWin32SurfaceCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkWin32SurfaceCreateInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkWin32SurfaceCreateInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkWin32SurfaceCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkWin32SurfaceCreateInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkWin32SurfaceCreateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkWin32SurfaceCreateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkWin32SurfaceCreateInfoKHR create() {
-        return new VkWin32SurfaceCreateInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkWin32SurfaceCreateInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkWin32SurfaceCreateInfoKHR} instance for the specified memory address. */
     public static VkWin32SurfaceCreateInfoKHR create(long address) {
-        return new VkWin32SurfaceCreateInfoKHR(address, null);
+        return wrap(VkWin32SurfaceCreateInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWin32SurfaceCreateInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkWin32SurfaceCreateInfoKHR.class, address);
     }
 
     /**
@@ -203,7 +200,7 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkWin32SurfaceCreateInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -212,7 +209,7 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkWin32SurfaceCreateInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -221,7 +218,8 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkWin32SurfaceCreateInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -231,13 +229,13 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkWin32SurfaceCreateInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWin32SurfaceCreateInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -258,7 +256,7 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkWin32SurfaceCreateInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkWin32SurfaceCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -267,7 +265,7 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkWin32SurfaceCreateInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkWin32SurfaceCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -295,7 +293,7 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkWin32SurfaceCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -305,28 +303,28 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkWin32SurfaceCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkWin32SurfaceCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkWin32SurfaceCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkWin32SurfaceCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkWin32SurfaceCreateInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkWin32SurfaceCreateInfoKHR.FLAGS); }
     /** Unsafe version of {@link #hinstance}. */
     public static long nhinstance(long struct) { return memGetAddress(struct + VkWin32SurfaceCreateInfoKHR.HINSTANCE); }
     /** Unsafe version of {@link #hwnd}. */
     public static long nhwnd(long struct) { return memGetAddress(struct + VkWin32SurfaceCreateInfoKHR.HWND); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkWin32SurfaceCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkWin32SurfaceCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkWin32SurfaceCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkWin32SurfaceCreateInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkWin32SurfaceCreateInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #hinstance(long) hinstance}. */
     public static void nhinstance(long struct, long value) { memPutAddress(struct + VkWin32SurfaceCreateInfoKHR.HINSTANCE, check(value)); }
     /** Unsafe version of {@link #hwnd(long) hwnd}. */
@@ -359,6 +357,8 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
     /** An array of {@link VkWin32SurfaceCreateInfoKHR} structs. */
     public static class Buffer extends StructBuffer<VkWin32SurfaceCreateInfoKHR, Buffer> implements NativeResource {
 
+        private static final VkWin32SurfaceCreateInfoKHR ELEMENT_FACTORY = VkWin32SurfaceCreateInfoKHR.create(-1L);
+
         /**
          * Creates a new {@link VkWin32SurfaceCreateInfoKHR.Buffer} instance backed by the specified container.
          *
@@ -386,18 +386,8 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkWin32SurfaceCreateInfoKHR newInstance(long address) {
-            return new VkWin32SurfaceCreateInfoKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkWin32SurfaceCreateInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

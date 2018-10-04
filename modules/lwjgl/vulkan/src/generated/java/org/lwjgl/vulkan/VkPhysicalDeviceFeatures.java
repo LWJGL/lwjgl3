@@ -454,10 +454,6 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
         INHERITEDQUERIES = layout.offsetof(54);
     }
 
-    VkPhysicalDeviceFeatures(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceFeatures} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -465,7 +461,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceFeatures(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -881,28 +877,29 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
 
     /** Returns a new {@link VkPhysicalDeviceFeatures} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceFeatures malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceFeatures.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceFeatures} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceFeatures calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceFeatures.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceFeatures} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceFeatures create() {
-        return new VkPhysicalDeviceFeatures(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceFeatures.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceFeatures} instance for the specified memory address. */
     public static VkPhysicalDeviceFeatures create(long address) {
-        return new VkPhysicalDeviceFeatures(address, null);
+        return wrap(VkPhysicalDeviceFeatures.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceFeatures createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceFeatures.class, address);
     }
 
     /**
@@ -911,7 +908,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFeatures.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -920,7 +917,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFeatures.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -929,7 +926,8 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFeatures.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -939,13 +937,13 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFeatures.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceFeatures.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -966,7 +964,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceFeatures mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceFeatures.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -975,7 +973,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceFeatures callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceFeatures.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -1003,7 +1001,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFeatures.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -1013,237 +1011,239 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFeatures.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #robustBufferAccess}. */
-    public static int nrobustBufferAccess(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.ROBUSTBUFFERACCESS); }
+    public static int nrobustBufferAccess(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.ROBUSTBUFFERACCESS); }
     /** Unsafe version of {@link #fullDrawIndexUint32}. */
-    public static int nfullDrawIndexUint32(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.FULLDRAWINDEXUINT32); }
+    public static int nfullDrawIndexUint32(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.FULLDRAWINDEXUINT32); }
     /** Unsafe version of {@link #imageCubeArray}. */
-    public static int nimageCubeArray(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.IMAGECUBEARRAY); }
+    public static int nimageCubeArray(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.IMAGECUBEARRAY); }
     /** Unsafe version of {@link #independentBlend}. */
-    public static int nindependentBlend(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.INDEPENDENTBLEND); }
+    public static int nindependentBlend(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.INDEPENDENTBLEND); }
     /** Unsafe version of {@link #geometryShader}. */
-    public static int ngeometryShader(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.GEOMETRYSHADER); }
+    public static int ngeometryShader(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.GEOMETRYSHADER); }
     /** Unsafe version of {@link #tessellationShader}. */
-    public static int ntessellationShader(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.TESSELLATIONSHADER); }
+    public static int ntessellationShader(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.TESSELLATIONSHADER); }
     /** Unsafe version of {@link #sampleRateShading}. */
-    public static int nsampleRateShading(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SAMPLERATESHADING); }
+    public static int nsampleRateShading(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SAMPLERATESHADING); }
     /** Unsafe version of {@link #dualSrcBlend}. */
-    public static int ndualSrcBlend(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.DUALSRCBLEND); }
+    public static int ndualSrcBlend(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.DUALSRCBLEND); }
     /** Unsafe version of {@link #logicOp}. */
-    public static int nlogicOp(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.LOGICOP); }
+    public static int nlogicOp(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.LOGICOP); }
     /** Unsafe version of {@link #multiDrawIndirect}. */
-    public static int nmultiDrawIndirect(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.MULTIDRAWINDIRECT); }
+    public static int nmultiDrawIndirect(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.MULTIDRAWINDIRECT); }
     /** Unsafe version of {@link #drawIndirectFirstInstance}. */
-    public static int ndrawIndirectFirstInstance(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.DRAWINDIRECTFIRSTINSTANCE); }
+    public static int ndrawIndirectFirstInstance(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.DRAWINDIRECTFIRSTINSTANCE); }
     /** Unsafe version of {@link #depthClamp}. */
-    public static int ndepthClamp(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.DEPTHCLAMP); }
+    public static int ndepthClamp(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.DEPTHCLAMP); }
     /** Unsafe version of {@link #depthBiasClamp}. */
-    public static int ndepthBiasClamp(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.DEPTHBIASCLAMP); }
+    public static int ndepthBiasClamp(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.DEPTHBIASCLAMP); }
     /** Unsafe version of {@link #fillModeNonSolid}. */
-    public static int nfillModeNonSolid(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.FILLMODENONSOLID); }
+    public static int nfillModeNonSolid(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.FILLMODENONSOLID); }
     /** Unsafe version of {@link #depthBounds}. */
-    public static int ndepthBounds(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.DEPTHBOUNDS); }
+    public static int ndepthBounds(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.DEPTHBOUNDS); }
     /** Unsafe version of {@link #wideLines}. */
-    public static int nwideLines(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.WIDELINES); }
+    public static int nwideLines(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.WIDELINES); }
     /** Unsafe version of {@link #largePoints}. */
-    public static int nlargePoints(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.LARGEPOINTS); }
+    public static int nlargePoints(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.LARGEPOINTS); }
     /** Unsafe version of {@link #alphaToOne}. */
-    public static int nalphaToOne(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.ALPHATOONE); }
+    public static int nalphaToOne(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.ALPHATOONE); }
     /** Unsafe version of {@link #multiViewport}. */
-    public static int nmultiViewport(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.MULTIVIEWPORT); }
+    public static int nmultiViewport(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.MULTIVIEWPORT); }
     /** Unsafe version of {@link #samplerAnisotropy}. */
-    public static int nsamplerAnisotropy(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SAMPLERANISOTROPY); }
+    public static int nsamplerAnisotropy(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SAMPLERANISOTROPY); }
     /** Unsafe version of {@link #textureCompressionETC2}. */
-    public static int ntextureCompressionETC2(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONETC2); }
+    public static int ntextureCompressionETC2(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONETC2); }
     /** Unsafe version of {@link #textureCompressionASTC_LDR}. */
-    public static int ntextureCompressionASTC_LDR(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONASTC_LDR); }
+    public static int ntextureCompressionASTC_LDR(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONASTC_LDR); }
     /** Unsafe version of {@link #textureCompressionBC}. */
-    public static int ntextureCompressionBC(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONBC); }
+    public static int ntextureCompressionBC(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONBC); }
     /** Unsafe version of {@link #occlusionQueryPrecise}. */
-    public static int nocclusionQueryPrecise(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.OCCLUSIONQUERYPRECISE); }
+    public static int nocclusionQueryPrecise(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.OCCLUSIONQUERYPRECISE); }
     /** Unsafe version of {@link #pipelineStatisticsQuery}. */
-    public static int npipelineStatisticsQuery(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.PIPELINESTATISTICSQUERY); }
+    public static int npipelineStatisticsQuery(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.PIPELINESTATISTICSQUERY); }
     /** Unsafe version of {@link #vertexPipelineStoresAndAtomics}. */
-    public static int nvertexPipelineStoresAndAtomics(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.VERTEXPIPELINESTORESANDATOMICS); }
+    public static int nvertexPipelineStoresAndAtomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.VERTEXPIPELINESTORESANDATOMICS); }
     /** Unsafe version of {@link #fragmentStoresAndAtomics}. */
-    public static int nfragmentStoresAndAtomics(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.FRAGMENTSTORESANDATOMICS); }
+    public static int nfragmentStoresAndAtomics(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.FRAGMENTSTORESANDATOMICS); }
     /** Unsafe version of {@link #shaderTessellationAndGeometryPointSize}. */
-    public static int nshaderTessellationAndGeometryPointSize(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERTESSELLATIONANDGEOMETRYPOINTSIZE); }
+    public static int nshaderTessellationAndGeometryPointSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERTESSELLATIONANDGEOMETRYPOINTSIZE); }
     /** Unsafe version of {@link #shaderImageGatherExtended}. */
-    public static int nshaderImageGatherExtended(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERIMAGEGATHEREXTENDED); }
+    public static int nshaderImageGatherExtended(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERIMAGEGATHEREXTENDED); }
     /** Unsafe version of {@link #shaderStorageImageExtendedFormats}. */
-    public static int nshaderStorageImageExtendedFormats(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEEXTENDEDFORMATS); }
+    public static int nshaderStorageImageExtendedFormats(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEEXTENDEDFORMATS); }
     /** Unsafe version of {@link #shaderStorageImageMultisample}. */
-    public static int nshaderStorageImageMultisample(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEMULTISAMPLE); }
+    public static int nshaderStorageImageMultisample(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEMULTISAMPLE); }
     /** Unsafe version of {@link #shaderStorageImageReadWithoutFormat}. */
-    public static int nshaderStorageImageReadWithoutFormat(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEREADWITHOUTFORMAT); }
+    public static int nshaderStorageImageReadWithoutFormat(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEREADWITHOUTFORMAT); }
     /** Unsafe version of {@link #shaderStorageImageWriteWithoutFormat}. */
-    public static int nshaderStorageImageWriteWithoutFormat(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEWRITEWITHOUTFORMAT); }
+    public static int nshaderStorageImageWriteWithoutFormat(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEWRITEWITHOUTFORMAT); }
     /** Unsafe version of {@link #shaderUniformBufferArrayDynamicIndexing}. */
-    public static int nshaderUniformBufferArrayDynamicIndexing(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERUNIFORMBUFFERARRAYDYNAMICINDEXING); }
+    public static int nshaderUniformBufferArrayDynamicIndexing(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERUNIFORMBUFFERARRAYDYNAMICINDEXING); }
     /** Unsafe version of {@link #shaderSampledImageArrayDynamicIndexing}. */
-    public static int nshaderSampledImageArrayDynamicIndexing(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERSAMPLEDIMAGEARRAYDYNAMICINDEXING); }
+    public static int nshaderSampledImageArrayDynamicIndexing(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERSAMPLEDIMAGEARRAYDYNAMICINDEXING); }
     /** Unsafe version of {@link #shaderStorageBufferArrayDynamicIndexing}. */
-    public static int nshaderStorageBufferArrayDynamicIndexing(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEBUFFERARRAYDYNAMICINDEXING); }
+    public static int nshaderStorageBufferArrayDynamicIndexing(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEBUFFERARRAYDYNAMICINDEXING); }
     /** Unsafe version of {@link #shaderStorageImageArrayDynamicIndexing}. */
-    public static int nshaderStorageImageArrayDynamicIndexing(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEARRAYDYNAMICINDEXING); }
+    public static int nshaderStorageImageArrayDynamicIndexing(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEARRAYDYNAMICINDEXING); }
     /** Unsafe version of {@link #shaderClipDistance}. */
-    public static int nshaderClipDistance(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERCLIPDISTANCE); }
+    public static int nshaderClipDistance(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERCLIPDISTANCE); }
     /** Unsafe version of {@link #shaderCullDistance}. */
-    public static int nshaderCullDistance(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERCULLDISTANCE); }
+    public static int nshaderCullDistance(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERCULLDISTANCE); }
     /** Unsafe version of {@link #shaderFloat64}. */
-    public static int nshaderFloat64(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERFLOAT64); }
+    public static int nshaderFloat64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERFLOAT64); }
     /** Unsafe version of {@link #shaderInt64}. */
-    public static int nshaderInt64(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERINT64); }
+    public static int nshaderInt64(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERINT64); }
     /** Unsafe version of {@link #shaderInt16}. */
-    public static int nshaderInt16(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERINT16); }
+    public static int nshaderInt16(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERINT16); }
     /** Unsafe version of {@link #shaderResourceResidency}. */
-    public static int nshaderResourceResidency(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERRESOURCERESIDENCY); }
+    public static int nshaderResourceResidency(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERRESOURCERESIDENCY); }
     /** Unsafe version of {@link #shaderResourceMinLod}. */
-    public static int nshaderResourceMinLod(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SHADERRESOURCEMINLOD); }
+    public static int nshaderResourceMinLod(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SHADERRESOURCEMINLOD); }
     /** Unsafe version of {@link #sparseBinding}. */
-    public static int nsparseBinding(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SPARSEBINDING); }
+    public static int nsparseBinding(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SPARSEBINDING); }
     /** Unsafe version of {@link #sparseResidencyBuffer}. */
-    public static int nsparseResidencyBuffer(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYBUFFER); }
+    public static int nsparseResidencyBuffer(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYBUFFER); }
     /** Unsafe version of {@link #sparseResidencyImage2D}. */
-    public static int nsparseResidencyImage2D(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYIMAGE2D); }
+    public static int nsparseResidencyImage2D(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYIMAGE2D); }
     /** Unsafe version of {@link #sparseResidencyImage3D}. */
-    public static int nsparseResidencyImage3D(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYIMAGE3D); }
+    public static int nsparseResidencyImage3D(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYIMAGE3D); }
     /** Unsafe version of {@link #sparseResidency2Samples}. */
-    public static int nsparseResidency2Samples(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY2SAMPLES); }
+    public static int nsparseResidency2Samples(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY2SAMPLES); }
     /** Unsafe version of {@link #sparseResidency4Samples}. */
-    public static int nsparseResidency4Samples(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY4SAMPLES); }
+    public static int nsparseResidency4Samples(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY4SAMPLES); }
     /** Unsafe version of {@link #sparseResidency8Samples}. */
-    public static int nsparseResidency8Samples(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY8SAMPLES); }
+    public static int nsparseResidency8Samples(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY8SAMPLES); }
     /** Unsafe version of {@link #sparseResidency16Samples}. */
-    public static int nsparseResidency16Samples(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY16SAMPLES); }
+    public static int nsparseResidency16Samples(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY16SAMPLES); }
     /** Unsafe version of {@link #sparseResidencyAliased}. */
-    public static int nsparseResidencyAliased(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYALIASED); }
+    public static int nsparseResidencyAliased(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYALIASED); }
     /** Unsafe version of {@link #variableMultisampleRate}. */
-    public static int nvariableMultisampleRate(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.VARIABLEMULTISAMPLERATE); }
+    public static int nvariableMultisampleRate(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.VARIABLEMULTISAMPLERATE); }
     /** Unsafe version of {@link #inheritedQueries}. */
-    public static int ninheritedQueries(long struct) { return memGetInt(struct + VkPhysicalDeviceFeatures.INHERITEDQUERIES); }
+    public static int ninheritedQueries(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFeatures.INHERITEDQUERIES); }
 
     /** Unsafe version of {@link #robustBufferAccess(boolean) robustBufferAccess}. */
-    public static void nrobustBufferAccess(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.ROBUSTBUFFERACCESS, value); }
+    public static void nrobustBufferAccess(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.ROBUSTBUFFERACCESS, value); }
     /** Unsafe version of {@link #fullDrawIndexUint32(boolean) fullDrawIndexUint32}. */
-    public static void nfullDrawIndexUint32(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.FULLDRAWINDEXUINT32, value); }
+    public static void nfullDrawIndexUint32(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.FULLDRAWINDEXUINT32, value); }
     /** Unsafe version of {@link #imageCubeArray(boolean) imageCubeArray}. */
-    public static void nimageCubeArray(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.IMAGECUBEARRAY, value); }
+    public static void nimageCubeArray(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.IMAGECUBEARRAY, value); }
     /** Unsafe version of {@link #independentBlend(boolean) independentBlend}. */
-    public static void nindependentBlend(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.INDEPENDENTBLEND, value); }
+    public static void nindependentBlend(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.INDEPENDENTBLEND, value); }
     /** Unsafe version of {@link #geometryShader(boolean) geometryShader}. */
-    public static void ngeometryShader(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.GEOMETRYSHADER, value); }
+    public static void ngeometryShader(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.GEOMETRYSHADER, value); }
     /** Unsafe version of {@link #tessellationShader(boolean) tessellationShader}. */
-    public static void ntessellationShader(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.TESSELLATIONSHADER, value); }
+    public static void ntessellationShader(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.TESSELLATIONSHADER, value); }
     /** Unsafe version of {@link #sampleRateShading(boolean) sampleRateShading}. */
-    public static void nsampleRateShading(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SAMPLERATESHADING, value); }
+    public static void nsampleRateShading(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SAMPLERATESHADING, value); }
     /** Unsafe version of {@link #dualSrcBlend(boolean) dualSrcBlend}. */
-    public static void ndualSrcBlend(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.DUALSRCBLEND, value); }
+    public static void ndualSrcBlend(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.DUALSRCBLEND, value); }
     /** Unsafe version of {@link #logicOp(boolean) logicOp}. */
-    public static void nlogicOp(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.LOGICOP, value); }
+    public static void nlogicOp(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.LOGICOP, value); }
     /** Unsafe version of {@link #multiDrawIndirect(boolean) multiDrawIndirect}. */
-    public static void nmultiDrawIndirect(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.MULTIDRAWINDIRECT, value); }
+    public static void nmultiDrawIndirect(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.MULTIDRAWINDIRECT, value); }
     /** Unsafe version of {@link #drawIndirectFirstInstance(boolean) drawIndirectFirstInstance}. */
-    public static void ndrawIndirectFirstInstance(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.DRAWINDIRECTFIRSTINSTANCE, value); }
+    public static void ndrawIndirectFirstInstance(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.DRAWINDIRECTFIRSTINSTANCE, value); }
     /** Unsafe version of {@link #depthClamp(boolean) depthClamp}. */
-    public static void ndepthClamp(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.DEPTHCLAMP, value); }
+    public static void ndepthClamp(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.DEPTHCLAMP, value); }
     /** Unsafe version of {@link #depthBiasClamp(boolean) depthBiasClamp}. */
-    public static void ndepthBiasClamp(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.DEPTHBIASCLAMP, value); }
+    public static void ndepthBiasClamp(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.DEPTHBIASCLAMP, value); }
     /** Unsafe version of {@link #fillModeNonSolid(boolean) fillModeNonSolid}. */
-    public static void nfillModeNonSolid(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.FILLMODENONSOLID, value); }
+    public static void nfillModeNonSolid(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.FILLMODENONSOLID, value); }
     /** Unsafe version of {@link #depthBounds(boolean) depthBounds}. */
-    public static void ndepthBounds(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.DEPTHBOUNDS, value); }
+    public static void ndepthBounds(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.DEPTHBOUNDS, value); }
     /** Unsafe version of {@link #wideLines(boolean) wideLines}. */
-    public static void nwideLines(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.WIDELINES, value); }
+    public static void nwideLines(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.WIDELINES, value); }
     /** Unsafe version of {@link #largePoints(boolean) largePoints}. */
-    public static void nlargePoints(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.LARGEPOINTS, value); }
+    public static void nlargePoints(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.LARGEPOINTS, value); }
     /** Unsafe version of {@link #alphaToOne(boolean) alphaToOne}. */
-    public static void nalphaToOne(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.ALPHATOONE, value); }
+    public static void nalphaToOne(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.ALPHATOONE, value); }
     /** Unsafe version of {@link #multiViewport(boolean) multiViewport}. */
-    public static void nmultiViewport(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.MULTIVIEWPORT, value); }
+    public static void nmultiViewport(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.MULTIVIEWPORT, value); }
     /** Unsafe version of {@link #samplerAnisotropy(boolean) samplerAnisotropy}. */
-    public static void nsamplerAnisotropy(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SAMPLERANISOTROPY, value); }
+    public static void nsamplerAnisotropy(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SAMPLERANISOTROPY, value); }
     /** Unsafe version of {@link #textureCompressionETC2(boolean) textureCompressionETC2}. */
-    public static void ntextureCompressionETC2(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONETC2, value); }
+    public static void ntextureCompressionETC2(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONETC2, value); }
     /** Unsafe version of {@link #textureCompressionASTC_LDR(boolean) textureCompressionASTC_LDR}. */
-    public static void ntextureCompressionASTC_LDR(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONASTC_LDR, value); }
+    public static void ntextureCompressionASTC_LDR(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONASTC_LDR, value); }
     /** Unsafe version of {@link #textureCompressionBC(boolean) textureCompressionBC}. */
-    public static void ntextureCompressionBC(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONBC, value); }
+    public static void ntextureCompressionBC(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.TEXTURECOMPRESSIONBC, value); }
     /** Unsafe version of {@link #occlusionQueryPrecise(boolean) occlusionQueryPrecise}. */
-    public static void nocclusionQueryPrecise(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.OCCLUSIONQUERYPRECISE, value); }
+    public static void nocclusionQueryPrecise(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.OCCLUSIONQUERYPRECISE, value); }
     /** Unsafe version of {@link #pipelineStatisticsQuery(boolean) pipelineStatisticsQuery}. */
-    public static void npipelineStatisticsQuery(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.PIPELINESTATISTICSQUERY, value); }
+    public static void npipelineStatisticsQuery(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.PIPELINESTATISTICSQUERY, value); }
     /** Unsafe version of {@link #vertexPipelineStoresAndAtomics(boolean) vertexPipelineStoresAndAtomics}. */
-    public static void nvertexPipelineStoresAndAtomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.VERTEXPIPELINESTORESANDATOMICS, value); }
+    public static void nvertexPipelineStoresAndAtomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.VERTEXPIPELINESTORESANDATOMICS, value); }
     /** Unsafe version of {@link #fragmentStoresAndAtomics(boolean) fragmentStoresAndAtomics}. */
-    public static void nfragmentStoresAndAtomics(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.FRAGMENTSTORESANDATOMICS, value); }
+    public static void nfragmentStoresAndAtomics(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.FRAGMENTSTORESANDATOMICS, value); }
     /** Unsafe version of {@link #shaderTessellationAndGeometryPointSize(boolean) shaderTessellationAndGeometryPointSize}. */
-    public static void nshaderTessellationAndGeometryPointSize(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERTESSELLATIONANDGEOMETRYPOINTSIZE, value); }
+    public static void nshaderTessellationAndGeometryPointSize(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERTESSELLATIONANDGEOMETRYPOINTSIZE, value); }
     /** Unsafe version of {@link #shaderImageGatherExtended(boolean) shaderImageGatherExtended}. */
-    public static void nshaderImageGatherExtended(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERIMAGEGATHEREXTENDED, value); }
+    public static void nshaderImageGatherExtended(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERIMAGEGATHEREXTENDED, value); }
     /** Unsafe version of {@link #shaderStorageImageExtendedFormats(boolean) shaderStorageImageExtendedFormats}. */
-    public static void nshaderStorageImageExtendedFormats(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEEXTENDEDFORMATS, value); }
+    public static void nshaderStorageImageExtendedFormats(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEEXTENDEDFORMATS, value); }
     /** Unsafe version of {@link #shaderStorageImageMultisample(boolean) shaderStorageImageMultisample}. */
-    public static void nshaderStorageImageMultisample(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEMULTISAMPLE, value); }
+    public static void nshaderStorageImageMultisample(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEMULTISAMPLE, value); }
     /** Unsafe version of {@link #shaderStorageImageReadWithoutFormat(boolean) shaderStorageImageReadWithoutFormat}. */
-    public static void nshaderStorageImageReadWithoutFormat(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEREADWITHOUTFORMAT, value); }
+    public static void nshaderStorageImageReadWithoutFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEREADWITHOUTFORMAT, value); }
     /** Unsafe version of {@link #shaderStorageImageWriteWithoutFormat(boolean) shaderStorageImageWriteWithoutFormat}. */
-    public static void nshaderStorageImageWriteWithoutFormat(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEWRITEWITHOUTFORMAT, value); }
+    public static void nshaderStorageImageWriteWithoutFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEWRITEWITHOUTFORMAT, value); }
     /** Unsafe version of {@link #shaderUniformBufferArrayDynamicIndexing(boolean) shaderUniformBufferArrayDynamicIndexing}. */
-    public static void nshaderUniformBufferArrayDynamicIndexing(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERUNIFORMBUFFERARRAYDYNAMICINDEXING, value); }
+    public static void nshaderUniformBufferArrayDynamicIndexing(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERUNIFORMBUFFERARRAYDYNAMICINDEXING, value); }
     /** Unsafe version of {@link #shaderSampledImageArrayDynamicIndexing(boolean) shaderSampledImageArrayDynamicIndexing}. */
-    public static void nshaderSampledImageArrayDynamicIndexing(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERSAMPLEDIMAGEARRAYDYNAMICINDEXING, value); }
+    public static void nshaderSampledImageArrayDynamicIndexing(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERSAMPLEDIMAGEARRAYDYNAMICINDEXING, value); }
     /** Unsafe version of {@link #shaderStorageBufferArrayDynamicIndexing(boolean) shaderStorageBufferArrayDynamicIndexing}. */
-    public static void nshaderStorageBufferArrayDynamicIndexing(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEBUFFERARRAYDYNAMICINDEXING, value); }
+    public static void nshaderStorageBufferArrayDynamicIndexing(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEBUFFERARRAYDYNAMICINDEXING, value); }
     /** Unsafe version of {@link #shaderStorageImageArrayDynamicIndexing(boolean) shaderStorageImageArrayDynamicIndexing}. */
-    public static void nshaderStorageImageArrayDynamicIndexing(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEARRAYDYNAMICINDEXING, value); }
+    public static void nshaderStorageImageArrayDynamicIndexing(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERSTORAGEIMAGEARRAYDYNAMICINDEXING, value); }
     /** Unsafe version of {@link #shaderClipDistance(boolean) shaderClipDistance}. */
-    public static void nshaderClipDistance(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERCLIPDISTANCE, value); }
+    public static void nshaderClipDistance(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERCLIPDISTANCE, value); }
     /** Unsafe version of {@link #shaderCullDistance(boolean) shaderCullDistance}. */
-    public static void nshaderCullDistance(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERCULLDISTANCE, value); }
+    public static void nshaderCullDistance(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERCULLDISTANCE, value); }
     /** Unsafe version of {@link #shaderFloat64(boolean) shaderFloat64}. */
-    public static void nshaderFloat64(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERFLOAT64, value); }
+    public static void nshaderFloat64(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERFLOAT64, value); }
     /** Unsafe version of {@link #shaderInt64(boolean) shaderInt64}. */
-    public static void nshaderInt64(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERINT64, value); }
+    public static void nshaderInt64(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERINT64, value); }
     /** Unsafe version of {@link #shaderInt16(boolean) shaderInt16}. */
-    public static void nshaderInt16(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERINT16, value); }
+    public static void nshaderInt16(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERINT16, value); }
     /** Unsafe version of {@link #shaderResourceResidency(boolean) shaderResourceResidency}. */
-    public static void nshaderResourceResidency(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERRESOURCERESIDENCY, value); }
+    public static void nshaderResourceResidency(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERRESOURCERESIDENCY, value); }
     /** Unsafe version of {@link #shaderResourceMinLod(boolean) shaderResourceMinLod}. */
-    public static void nshaderResourceMinLod(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SHADERRESOURCEMINLOD, value); }
+    public static void nshaderResourceMinLod(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SHADERRESOURCEMINLOD, value); }
     /** Unsafe version of {@link #sparseBinding(boolean) sparseBinding}. */
-    public static void nsparseBinding(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SPARSEBINDING, value); }
+    public static void nsparseBinding(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SPARSEBINDING, value); }
     /** Unsafe version of {@link #sparseResidencyBuffer(boolean) sparseResidencyBuffer}. */
-    public static void nsparseResidencyBuffer(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYBUFFER, value); }
+    public static void nsparseResidencyBuffer(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYBUFFER, value); }
     /** Unsafe version of {@link #sparseResidencyImage2D(boolean) sparseResidencyImage2D}. */
-    public static void nsparseResidencyImage2D(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYIMAGE2D, value); }
+    public static void nsparseResidencyImage2D(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYIMAGE2D, value); }
     /** Unsafe version of {@link #sparseResidencyImage3D(boolean) sparseResidencyImage3D}. */
-    public static void nsparseResidencyImage3D(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYIMAGE3D, value); }
+    public static void nsparseResidencyImage3D(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYIMAGE3D, value); }
     /** Unsafe version of {@link #sparseResidency2Samples(boolean) sparseResidency2Samples}. */
-    public static void nsparseResidency2Samples(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY2SAMPLES, value); }
+    public static void nsparseResidency2Samples(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY2SAMPLES, value); }
     /** Unsafe version of {@link #sparseResidency4Samples(boolean) sparseResidency4Samples}. */
-    public static void nsparseResidency4Samples(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY4SAMPLES, value); }
+    public static void nsparseResidency4Samples(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY4SAMPLES, value); }
     /** Unsafe version of {@link #sparseResidency8Samples(boolean) sparseResidency8Samples}. */
-    public static void nsparseResidency8Samples(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY8SAMPLES, value); }
+    public static void nsparseResidency8Samples(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY8SAMPLES, value); }
     /** Unsafe version of {@link #sparseResidency16Samples(boolean) sparseResidency16Samples}. */
-    public static void nsparseResidency16Samples(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY16SAMPLES, value); }
+    public static void nsparseResidency16Samples(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCY16SAMPLES, value); }
     /** Unsafe version of {@link #sparseResidencyAliased(boolean) sparseResidencyAliased}. */
-    public static void nsparseResidencyAliased(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYALIASED, value); }
+    public static void nsparseResidencyAliased(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.SPARSERESIDENCYALIASED, value); }
     /** Unsafe version of {@link #variableMultisampleRate(boolean) variableMultisampleRate}. */
-    public static void nvariableMultisampleRate(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.VARIABLEMULTISAMPLERATE, value); }
+    public static void nvariableMultisampleRate(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.VARIABLEMULTISAMPLERATE, value); }
     /** Unsafe version of {@link #inheritedQueries(boolean) inheritedQueries}. */
-    public static void ninheritedQueries(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFeatures.INHERITEDQUERIES, value); }
+    public static void ninheritedQueries(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFeatures.INHERITEDQUERIES, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceFeatures} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceFeatures, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceFeatures ELEMENT_FACTORY = VkPhysicalDeviceFeatures.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceFeatures.Buffer} instance backed by the specified container.
@@ -1272,18 +1272,8 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceFeatures newInstance(long address) {
-            return new VkPhysicalDeviceFeatures(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceFeatures getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code robustBufferAccess} field. */

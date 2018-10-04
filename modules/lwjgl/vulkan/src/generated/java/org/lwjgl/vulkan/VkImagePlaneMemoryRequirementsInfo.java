@@ -77,10 +77,6 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
         PLANEASPECT = layout.offsetof(2);
     }
 
-    VkImagePlaneMemoryRequirementsInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkImagePlaneMemoryRequirementsInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -88,7 +84,7 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkImagePlaneMemoryRequirementsInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -140,28 +136,29 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
 
     /** Returns a new {@link VkImagePlaneMemoryRequirementsInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImagePlaneMemoryRequirementsInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkImagePlaneMemoryRequirementsInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkImagePlaneMemoryRequirementsInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImagePlaneMemoryRequirementsInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkImagePlaneMemoryRequirementsInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkImagePlaneMemoryRequirementsInfo} instance allocated with {@link BufferUtils}. */
     public static VkImagePlaneMemoryRequirementsInfo create() {
-        return new VkImagePlaneMemoryRequirementsInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkImagePlaneMemoryRequirementsInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkImagePlaneMemoryRequirementsInfo} instance for the specified memory address. */
     public static VkImagePlaneMemoryRequirementsInfo create(long address) {
-        return new VkImagePlaneMemoryRequirementsInfo(address, null);
+        return wrap(VkImagePlaneMemoryRequirementsInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImagePlaneMemoryRequirementsInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkImagePlaneMemoryRequirementsInfo.class, address);
     }
 
     /**
@@ -170,7 +167,7 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkImagePlaneMemoryRequirementsInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -179,7 +176,7 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkImagePlaneMemoryRequirementsInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -188,7 +185,8 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkImagePlaneMemoryRequirementsInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -198,13 +196,13 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkImagePlaneMemoryRequirementsInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImagePlaneMemoryRequirementsInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -225,7 +223,7 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkImagePlaneMemoryRequirementsInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkImagePlaneMemoryRequirementsInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -234,7 +232,7 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkImagePlaneMemoryRequirementsInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkImagePlaneMemoryRequirementsInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -262,7 +260,7 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkImagePlaneMemoryRequirementsInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -272,29 +270,31 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkImagePlaneMemoryRequirementsInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkImagePlaneMemoryRequirementsInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImagePlaneMemoryRequirementsInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImagePlaneMemoryRequirementsInfo.PNEXT); }
     /** Unsafe version of {@link #planeAspect}. */
-    public static int nplaneAspect(long struct) { return memGetInt(struct + VkImagePlaneMemoryRequirementsInfo.PLANEASPECT); }
+    public static int nplaneAspect(long struct) { return UNSAFE.getInt(null, struct + VkImagePlaneMemoryRequirementsInfo.PLANEASPECT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkImagePlaneMemoryRequirementsInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImagePlaneMemoryRequirementsInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImagePlaneMemoryRequirementsInfo.PNEXT, value); }
     /** Unsafe version of {@link #planeAspect(int) planeAspect}. */
-    public static void nplaneAspect(long struct, int value) { memPutInt(struct + VkImagePlaneMemoryRequirementsInfo.PLANEASPECT, value); }
+    public static void nplaneAspect(long struct, int value) { UNSAFE.putInt(null, struct + VkImagePlaneMemoryRequirementsInfo.PLANEASPECT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkImagePlaneMemoryRequirementsInfo} structs. */
     public static class Buffer extends StructBuffer<VkImagePlaneMemoryRequirementsInfo, Buffer> implements NativeResource {
+
+        private static final VkImagePlaneMemoryRequirementsInfo ELEMENT_FACTORY = VkImagePlaneMemoryRequirementsInfo.create(-1L);
 
         /**
          * Creates a new {@link VkImagePlaneMemoryRequirementsInfo.Buffer} instance backed by the specified container.
@@ -323,18 +323,8 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkImagePlaneMemoryRequirementsInfo newInstance(long address) {
-            return new VkImagePlaneMemoryRequirementsInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkImagePlaneMemoryRequirementsInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

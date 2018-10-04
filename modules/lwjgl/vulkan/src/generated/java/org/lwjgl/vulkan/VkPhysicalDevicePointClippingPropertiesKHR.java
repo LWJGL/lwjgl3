@@ -27,10 +27,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class VkPhysicalDevicePointClippingPropertiesKHR extends VkPhysicalDevicePointClippingProperties {
 
-    VkPhysicalDevicePointClippingPropertiesKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDevicePointClippingPropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -38,7 +34,7 @@ public class VkPhysicalDevicePointClippingPropertiesKHR extends VkPhysicalDevice
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDevicePointClippingPropertiesKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -76,13 +72,13 @@ public class VkPhysicalDevicePointClippingPropertiesKHR extends VkPhysicalDevice
 
     /** Returns a new {@link VkPhysicalDevicePointClippingPropertiesKHR} instance for the specified memory address. */
     public static VkPhysicalDevicePointClippingPropertiesKHR create(long address) {
-        return new VkPhysicalDevicePointClippingPropertiesKHR(address, null);
+        return wrap(VkPhysicalDevicePointClippingPropertiesKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePointClippingPropertiesKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDevicePointClippingPropertiesKHR.class, address);
     }
 
     /**
@@ -92,19 +88,21 @@ public class VkPhysicalDevicePointClippingPropertiesKHR extends VkPhysicalDevice
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePointClippingPropertiesKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePointClippingPropertiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDevicePointClippingPropertiesKHR} structs. */
     public static class Buffer extends VkPhysicalDevicePointClippingProperties.Buffer {
+
+        private static final VkPhysicalDevicePointClippingPropertiesKHR ELEMENT_FACTORY = VkPhysicalDevicePointClippingPropertiesKHR.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDevicePointClippingPropertiesKHR.Buffer} instance backed by the specified container.
@@ -133,13 +131,8 @@ public class VkPhysicalDevicePointClippingPropertiesKHR extends VkPhysicalDevice
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDevicePointClippingPropertiesKHR newInstance(long address) {
-            return new VkPhysicalDevicePointClippingPropertiesKHR(address, container);
+        protected VkPhysicalDevicePointClippingPropertiesKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

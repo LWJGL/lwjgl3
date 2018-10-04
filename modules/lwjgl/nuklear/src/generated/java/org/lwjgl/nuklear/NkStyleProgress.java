@@ -107,10 +107,6 @@ public class NkStyleProgress extends Struct implements NativeResource {
         DRAW_END = layout.offsetof(15);
     }
 
-    NkStyleProgress(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkStyleProgress} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -118,7 +114,7 @@ public class NkStyleProgress extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkStyleProgress(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -279,28 +275,29 @@ public class NkStyleProgress extends Struct implements NativeResource {
 
     /** Returns a new {@link NkStyleProgress} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkStyleProgress malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkStyleProgress.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkStyleProgress} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkStyleProgress calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkStyleProgress.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkStyleProgress} instance allocated with {@link BufferUtils}. */
     public static NkStyleProgress create() {
-        return new NkStyleProgress(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkStyleProgress.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkStyleProgress} instance for the specified memory address. */
     public static NkStyleProgress create(long address) {
-        return new NkStyleProgress(address, null);
+        return wrap(NkStyleProgress.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleProgress createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkStyleProgress.class, address);
     }
 
     /**
@@ -309,7 +306,7 @@ public class NkStyleProgress extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleProgress.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -318,7 +315,7 @@ public class NkStyleProgress extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleProgress.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -327,7 +324,8 @@ public class NkStyleProgress extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleProgress.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -337,13 +335,13 @@ public class NkStyleProgress extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleProgress.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleProgress.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -364,7 +362,7 @@ public class NkStyleProgress extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleProgress mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkStyleProgress.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -373,7 +371,7 @@ public class NkStyleProgress extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleProgress callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkStyleProgress.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -401,7 +399,7 @@ public class NkStyleProgress extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleProgress.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -411,7 +409,7 @@ public class NkStyleProgress extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleProgress.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -433,13 +431,13 @@ public class NkStyleProgress extends Struct implements NativeResource {
     /** Unsafe version of {@link #cursor_border_color}. */
     public static NkColor ncursor_border_color(long struct) { return NkColor.create(struct + NkStyleProgress.CURSOR_BORDER_COLOR); }
     /** Unsafe version of {@link #rounding}. */
-    public static float nrounding(long struct) { return memGetFloat(struct + NkStyleProgress.ROUNDING); }
+    public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProgress.ROUNDING); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return memGetFloat(struct + NkStyleProgress.BORDER); }
+    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProgress.BORDER); }
     /** Unsafe version of {@link #cursor_border}. */
-    public static float ncursor_border(long struct) { return memGetFloat(struct + NkStyleProgress.CURSOR_BORDER); }
+    public static float ncursor_border(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProgress.CURSOR_BORDER); }
     /** Unsafe version of {@link #cursor_rounding}. */
-    public static float ncursor_rounding(long struct) { return memGetFloat(struct + NkStyleProgress.CURSOR_ROUNDING); }
+    public static float ncursor_rounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleProgress.CURSOR_ROUNDING); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleProgress.PADDING); }
     /** Unsafe version of {@link #userdata}. */
@@ -466,13 +464,13 @@ public class NkStyleProgress extends Struct implements NativeResource {
     /** Unsafe version of {@link #cursor_border_color(NkColor) cursor_border_color}. */
     public static void ncursor_border_color(long struct, NkColor value) { memCopy(value.address(), struct + NkStyleProgress.CURSOR_BORDER_COLOR, NkColor.SIZEOF); }
     /** Unsafe version of {@link #rounding(float) rounding}. */
-    public static void nrounding(long struct, float value) { memPutFloat(struct + NkStyleProgress.ROUNDING, value); }
+    public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProgress.ROUNDING, value); }
     /** Unsafe version of {@link #border(float) border}. */
-    public static void nborder(long struct, float value) { memPutFloat(struct + NkStyleProgress.BORDER, value); }
+    public static void nborder(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProgress.BORDER, value); }
     /** Unsafe version of {@link #cursor_border(float) cursor_border}. */
-    public static void ncursor_border(long struct, float value) { memPutFloat(struct + NkStyleProgress.CURSOR_BORDER, value); }
+    public static void ncursor_border(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProgress.CURSOR_BORDER, value); }
     /** Unsafe version of {@link #cursor_rounding(float) cursor_rounding}. */
-    public static void ncursor_rounding(long struct, float value) { memPutFloat(struct + NkStyleProgress.CURSOR_ROUNDING, value); }
+    public static void ncursor_rounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleProgress.CURSOR_ROUNDING, value); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleProgress.PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #userdata(NkHandle) userdata}. */
@@ -486,6 +484,8 @@ public class NkStyleProgress extends Struct implements NativeResource {
 
     /** An array of {@link NkStyleProgress} structs. */
     public static class Buffer extends StructBuffer<NkStyleProgress, Buffer> implements NativeResource {
+
+        private static final NkStyleProgress ELEMENT_FACTORY = NkStyleProgress.create(-1L);
 
         /**
          * Creates a new {@link NkStyleProgress.Buffer} instance backed by the specified container.
@@ -514,18 +514,8 @@ public class NkStyleProgress extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkStyleProgress newInstance(long address) {
-            return new NkStyleProgress(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkStyleProgress getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkStyleItem} view of the {@code normal} field. */

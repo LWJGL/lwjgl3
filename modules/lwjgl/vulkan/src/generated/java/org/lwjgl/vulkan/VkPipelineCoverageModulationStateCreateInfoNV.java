@@ -123,10 +123,6 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
         PCOVERAGEMODULATIONTABLE = layout.offsetof(6);
     }
 
-    VkPipelineCoverageModulationStateCreateInfoNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPipelineCoverageModulationStateCreateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -134,7 +130,7 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineCoverageModulationStateCreateInfoNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -215,28 +211,29 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
 
     /** Returns a new {@link VkPipelineCoverageModulationStateCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineCoverageModulationStateCreateInfoNV malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPipelineCoverageModulationStateCreateInfoNV.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineCoverageModulationStateCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineCoverageModulationStateCreateInfoNV calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPipelineCoverageModulationStateCreateInfoNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineCoverageModulationStateCreateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkPipelineCoverageModulationStateCreateInfoNV create() {
-        return new VkPipelineCoverageModulationStateCreateInfoNV(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineCoverageModulationStateCreateInfoNV.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPipelineCoverageModulationStateCreateInfoNV} instance for the specified memory address. */
     public static VkPipelineCoverageModulationStateCreateInfoNV create(long address) {
-        return new VkPipelineCoverageModulationStateCreateInfoNV(address, null);
+        return wrap(VkPipelineCoverageModulationStateCreateInfoNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineCoverageModulationStateCreateInfoNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPipelineCoverageModulationStateCreateInfoNV.class, address);
     }
 
     /**
@@ -245,7 +242,7 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPipelineCoverageModulationStateCreateInfoNV.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -254,7 +251,7 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPipelineCoverageModulationStateCreateInfoNV.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -263,7 +260,8 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPipelineCoverageModulationStateCreateInfoNV.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -273,13 +271,13 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPipelineCoverageModulationStateCreateInfoNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineCoverageModulationStateCreateInfoNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -300,7 +298,7 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPipelineCoverageModulationStateCreateInfoNV mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPipelineCoverageModulationStateCreateInfoNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -309,7 +307,7 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPipelineCoverageModulationStateCreateInfoNV callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPipelineCoverageModulationStateCreateInfoNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -337,7 +335,7 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPipelineCoverageModulationStateCreateInfoNV.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -347,38 +345,38 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPipelineCoverageModulationStateCreateInfoNV.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineCoverageModulationStateCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.FLAGS); }
     /** Unsafe version of {@link #coverageModulationMode}. */
-    public static int ncoverageModulationMode(long struct) { return memGetInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONMODE); }
+    public static int ncoverageModulationMode(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONMODE); }
     /** Unsafe version of {@link #coverageModulationTableEnable}. */
-    public static int ncoverageModulationTableEnable(long struct) { return memGetInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLEENABLE); }
+    public static int ncoverageModulationTableEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLEENABLE); }
     /** Unsafe version of {@link #coverageModulationTableCount}. */
-    public static int ncoverageModulationTableCount(long struct) { return memGetInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLECOUNT); }
+    public static int ncoverageModulationTableCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLECOUNT); }
     /** Unsafe version of {@link #pCoverageModulationTable() pCoverageModulationTable}. */
     @Nullable public static FloatBuffer npCoverageModulationTable(long struct) { return memFloatBufferSafe(memGetAddress(struct + VkPipelineCoverageModulationStateCreateInfoNV.PCOVERAGEMODULATIONTABLE), ncoverageModulationTableCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineCoverageModulationStateCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.FLAGS, value); }
     /** Unsafe version of {@link #coverageModulationMode(int) coverageModulationMode}. */
-    public static void ncoverageModulationMode(long struct, int value) { memPutInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONMODE, value); }
+    public static void ncoverageModulationMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONMODE, value); }
     /** Unsafe version of {@link #coverageModulationTableEnable(boolean) coverageModulationTableEnable}. */
-    public static void ncoverageModulationTableEnable(long struct, int value) { memPutInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLEENABLE, value); }
+    public static void ncoverageModulationTableEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLEENABLE, value); }
     /** Sets the specified value to the {@code coverageModulationTableCount} field of the specified {@code struct}. */
-    public static void ncoverageModulationTableCount(long struct, int value) { memPutInt(struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLECOUNT, value); }
+    public static void ncoverageModulationTableCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCoverageModulationStateCreateInfoNV.COVERAGEMODULATIONTABLECOUNT, value); }
     /** Unsafe version of {@link #pCoverageModulationTable(FloatBuffer) pCoverageModulationTable}. */
     public static void npCoverageModulationTable(long struct, @Nullable FloatBuffer value) { memPutAddress(struct + VkPipelineCoverageModulationStateCreateInfoNV.PCOVERAGEMODULATIONTABLE, memAddressSafe(value)); if (value != null) { ncoverageModulationTableCount(struct, value.remaining()); } }
 
@@ -386,6 +384,8 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
 
     /** An array of {@link VkPipelineCoverageModulationStateCreateInfoNV} structs. */
     public static class Buffer extends StructBuffer<VkPipelineCoverageModulationStateCreateInfoNV, Buffer> implements NativeResource {
+
+        private static final VkPipelineCoverageModulationStateCreateInfoNV ELEMENT_FACTORY = VkPipelineCoverageModulationStateCreateInfoNV.create(-1L);
 
         /**
          * Creates a new {@link VkPipelineCoverageModulationStateCreateInfoNV.Buffer} instance backed by the specified container.
@@ -414,18 +414,8 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPipelineCoverageModulationStateCreateInfoNV newInstance(long address) {
-            return new VkPipelineCoverageModulationStateCreateInfoNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPipelineCoverageModulationStateCreateInfoNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

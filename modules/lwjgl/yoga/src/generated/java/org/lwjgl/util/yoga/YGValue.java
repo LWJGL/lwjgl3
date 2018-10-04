@@ -50,10 +50,6 @@ public class YGValue extends Struct implements NativeResource {
         UNIT = layout.offsetof(1);
     }
 
-    YGValue(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link YGValue} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -61,7 +57,7 @@ public class YGValue extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public YGValue(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -105,28 +101,29 @@ public class YGValue extends Struct implements NativeResource {
 
     /** Returns a new {@link YGValue} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static YGValue malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(YGValue.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link YGValue} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static YGValue calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(YGValue.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link YGValue} instance allocated with {@link BufferUtils}. */
     public static YGValue create() {
-        return new YGValue(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(YGValue.class, memAddress(container), container);
     }
 
     /** Returns a new {@link YGValue} instance for the specified memory address. */
     public static YGValue create(long address) {
-        return new YGValue(address, null);
+        return wrap(YGValue.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGValue createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(YGValue.class, address);
     }
 
     /**
@@ -135,7 +132,7 @@ public class YGValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGValue.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -144,7 +141,7 @@ public class YGValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGValue.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -153,7 +150,8 @@ public class YGValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGValue.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -163,13 +161,13 @@ public class YGValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGValue.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGValue.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -190,7 +188,7 @@ public class YGValue extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static YGValue mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(YGValue.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -199,7 +197,7 @@ public class YGValue extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static YGValue callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(YGValue.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -227,7 +225,7 @@ public class YGValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGValue.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -237,25 +235,27 @@ public class YGValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGValue.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #value}. */
-    public static float nvalue(long struct) { return memGetFloat(struct + YGValue.VALUE); }
+    public static float nvalue(long struct) { return UNSAFE.getFloat(null, struct + YGValue.VALUE); }
     /** Unsafe version of {@link #unit}. */
-    public static int nunit(long struct) { return memGetInt(struct + YGValue.UNIT); }
+    public static int nunit(long struct) { return UNSAFE.getInt(null, struct + YGValue.UNIT); }
 
     /** Unsafe version of {@link #value(float) value}. */
-    public static void nvalue(long struct, float value) { memPutFloat(struct + YGValue.VALUE, value); }
+    public static void nvalue(long struct, float value) { UNSAFE.putFloat(null, struct + YGValue.VALUE, value); }
     /** Unsafe version of {@link #unit(int) unit}. */
-    public static void nunit(long struct, int value) { memPutInt(struct + YGValue.UNIT, value); }
+    public static void nunit(long struct, int value) { UNSAFE.putInt(null, struct + YGValue.UNIT, value); }
 
     // -----------------------------------
 
     /** An array of {@link YGValue} structs. */
     public static class Buffer extends StructBuffer<YGValue, Buffer> implements NativeResource {
+
+        private static final YGValue ELEMENT_FACTORY = YGValue.create(-1L);
 
         /**
          * Creates a new {@link YGValue.Buffer} instance backed by the specified container.
@@ -284,18 +284,8 @@ public class YGValue extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected YGValue newInstance(long address) {
-            return new YGValue(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected YGValue getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code value} field. */

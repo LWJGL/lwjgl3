@@ -153,10 +153,6 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
         MEMORYHEAPS = layout.offsetof(3);
     }
 
-    VkPhysicalDeviceMemoryProperties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceMemoryProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -164,7 +160,7 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceMemoryProperties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -191,28 +187,29 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
 
     /** Returns a new {@link VkPhysicalDeviceMemoryProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMemoryProperties malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceMemoryProperties.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceMemoryProperties} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMemoryProperties calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceMemoryProperties.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceMemoryProperties} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceMemoryProperties create() {
-        return new VkPhysicalDeviceMemoryProperties(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceMemoryProperties.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceMemoryProperties} instance for the specified memory address. */
     public static VkPhysicalDeviceMemoryProperties create(long address) {
-        return new VkPhysicalDeviceMemoryProperties(address, null);
+        return wrap(VkPhysicalDeviceMemoryProperties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMemoryProperties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceMemoryProperties.class, address);
     }
 
     /**
@@ -221,7 +218,7 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryProperties.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -230,7 +227,7 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryProperties.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -239,7 +236,8 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryProperties.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -249,13 +247,13 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryProperties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMemoryProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -276,7 +274,7 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceMemoryProperties mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceMemoryProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -285,7 +283,7 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceMemoryProperties callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceMemoryProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -313,7 +311,7 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryProperties.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -323,13 +321,13 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryProperties.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #memoryTypeCount}. */
-    public static int nmemoryTypeCount(long struct) { return memGetInt(struct + VkPhysicalDeviceMemoryProperties.MEMORYTYPECOUNT); }
+    public static int nmemoryTypeCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMemoryProperties.MEMORYTYPECOUNT); }
     /** Unsafe version of {@link #memoryTypes}. */
     public static VkMemoryType.Buffer nmemoryTypes(long struct) { return VkMemoryType.create(struct + VkPhysicalDeviceMemoryProperties.MEMORYTYPES, nmemoryTypeCount(struct)); }
     /** Unsafe version of {@link #memoryTypes(int) memoryTypes}. */
@@ -337,7 +335,7 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
         return VkMemoryType.create(struct + VkPhysicalDeviceMemoryProperties.MEMORYTYPES + check(index, nmemoryTypeCount(struct)) * VkMemoryType.SIZEOF);
     }
     /** Unsafe version of {@link #memoryHeapCount}. */
-    public static int nmemoryHeapCount(long struct) { return memGetInt(struct + VkPhysicalDeviceMemoryProperties.MEMORYHEAPCOUNT); }
+    public static int nmemoryHeapCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMemoryProperties.MEMORYHEAPCOUNT); }
     /** Unsafe version of {@link #memoryHeaps}. */
     public static VkMemoryHeap.Buffer nmemoryHeaps(long struct) { return VkMemoryHeap.create(struct + VkPhysicalDeviceMemoryProperties.MEMORYHEAPS, nmemoryHeapCount(struct)); }
     /** Unsafe version of {@link #memoryHeaps(int) memoryHeaps}. */
@@ -349,6 +347,8 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
 
     /** An array of {@link VkPhysicalDeviceMemoryProperties} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceMemoryProperties, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceMemoryProperties ELEMENT_FACTORY = VkPhysicalDeviceMemoryProperties.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceMemoryProperties.Buffer} instance backed by the specified container.
@@ -377,18 +377,8 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceMemoryProperties newInstance(long address) {
-            return new VkPhysicalDeviceMemoryProperties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceMemoryProperties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code memoryTypeCount} field. */

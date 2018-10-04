@@ -51,10 +51,6 @@ public class NkStyleItemData extends Struct implements NativeResource {
         COLOR = layout.offsetof(1);
     }
 
-    NkStyleItemData(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkStyleItemData} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -62,7 +58,7 @@ public class NkStyleItemData extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkStyleItemData(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -100,28 +96,29 @@ public class NkStyleItemData extends Struct implements NativeResource {
 
     /** Returns a new {@link NkStyleItemData} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkStyleItemData malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkStyleItemData.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkStyleItemData} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkStyleItemData calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkStyleItemData.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkStyleItemData} instance allocated with {@link BufferUtils}. */
     public static NkStyleItemData create() {
-        return new NkStyleItemData(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkStyleItemData.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkStyleItemData} instance for the specified memory address. */
     public static NkStyleItemData create(long address) {
-        return new NkStyleItemData(address, null);
+        return wrap(NkStyleItemData.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleItemData createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkStyleItemData.class, address);
     }
 
     /**
@@ -130,7 +127,7 @@ public class NkStyleItemData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleItemData.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -139,7 +136,7 @@ public class NkStyleItemData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleItemData.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -148,7 +145,8 @@ public class NkStyleItemData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleItemData.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -158,13 +156,13 @@ public class NkStyleItemData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleItemData.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleItemData.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -185,7 +183,7 @@ public class NkStyleItemData extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleItemData mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkStyleItemData.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -194,7 +192,7 @@ public class NkStyleItemData extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleItemData callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkStyleItemData.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -222,7 +220,7 @@ public class NkStyleItemData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleItemData.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -232,7 +230,7 @@ public class NkStyleItemData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleItemData.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -251,6 +249,8 @@ public class NkStyleItemData extends Struct implements NativeResource {
 
     /** An array of {@link NkStyleItemData} structs. */
     public static class Buffer extends StructBuffer<NkStyleItemData, Buffer> implements NativeResource {
+
+        private static final NkStyleItemData ELEMENT_FACTORY = NkStyleItemData.create(-1L);
 
         /**
          * Creates a new {@link NkStyleItemData.Buffer} instance backed by the specified container.
@@ -279,18 +279,8 @@ public class NkStyleItemData extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkStyleItemData newInstance(long address) {
-            return new NkStyleItemData(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkStyleItemData getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkImage} view of the {@code image} field. */

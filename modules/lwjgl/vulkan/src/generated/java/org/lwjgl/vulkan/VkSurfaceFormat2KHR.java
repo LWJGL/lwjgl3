@@ -75,10 +75,6 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
         SURFACEFORMAT = layout.offsetof(2);
     }
 
-    VkSurfaceFormat2KHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSurfaceFormat2KHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -86,7 +82,7 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSurfaceFormat2KHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -133,28 +129,29 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
 
     /** Returns a new {@link VkSurfaceFormat2KHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSurfaceFormat2KHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkSurfaceFormat2KHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkSurfaceFormat2KHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSurfaceFormat2KHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkSurfaceFormat2KHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkSurfaceFormat2KHR} instance allocated with {@link BufferUtils}. */
     public static VkSurfaceFormat2KHR create() {
-        return new VkSurfaceFormat2KHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSurfaceFormat2KHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkSurfaceFormat2KHR} instance for the specified memory address. */
     public static VkSurfaceFormat2KHR create(long address) {
-        return new VkSurfaceFormat2KHR(address, null);
+        return wrap(VkSurfaceFormat2KHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSurfaceFormat2KHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSurfaceFormat2KHR.class, address);
     }
 
     /**
@@ -163,7 +160,7 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSurfaceFormat2KHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -172,7 +169,7 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSurfaceFormat2KHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -181,7 +178,8 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSurfaceFormat2KHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -191,13 +189,13 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSurfaceFormat2KHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSurfaceFormat2KHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -218,7 +216,7 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkSurfaceFormat2KHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkSurfaceFormat2KHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -227,7 +225,7 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkSurfaceFormat2KHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkSurfaceFormat2KHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -255,7 +253,7 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSurfaceFormat2KHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -265,20 +263,20 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSurfaceFormat2KHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSurfaceFormat2KHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceFormat2KHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSurfaceFormat2KHR.PNEXT); }
     /** Unsafe version of {@link #surfaceFormat}. */
     public static VkSurfaceFormatKHR nsurfaceFormat(long struct) { return VkSurfaceFormatKHR.create(struct + VkSurfaceFormat2KHR.SURFACEFORMAT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfaceFormat2KHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceFormat2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfaceFormat2KHR.PNEXT, value); }
 
@@ -286,6 +284,8 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
 
     /** An array of {@link VkSurfaceFormat2KHR} structs. */
     public static class Buffer extends StructBuffer<VkSurfaceFormat2KHR, Buffer> implements NativeResource {
+
+        private static final VkSurfaceFormat2KHR ELEMENT_FACTORY = VkSurfaceFormat2KHR.create(-1L);
 
         /**
          * Creates a new {@link VkSurfaceFormat2KHR.Buffer} instance backed by the specified container.
@@ -314,18 +314,8 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSurfaceFormat2KHR newInstance(long address) {
-            return new VkSurfaceFormat2KHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSurfaceFormat2KHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

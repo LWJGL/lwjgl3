@@ -137,10 +137,6 @@ public class VREventData extends Struct {
         INPUTBINDING = layout.offsetof(23);
     }
 
-    VREventData(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventData} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -148,7 +144,7 @@ public class VREventData extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventData(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -231,13 +227,13 @@ public class VREventData extends Struct {
 
     /** Returns a new {@link VREventData} instance for the specified memory address. */
     public static VREventData create(long address) {
-        return new VREventData(address, null);
+        return wrap(VREventData.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventData createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventData.class, address);
     }
 
     /**
@@ -247,13 +243,13 @@ public class VREventData extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventData.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventData.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -312,6 +308,8 @@ public class VREventData extends Struct {
     /** An array of {@link VREventData} structs. */
     public static class Buffer extends StructBuffer<VREventData, Buffer> {
 
+        private static final VREventData ELEMENT_FACTORY = VREventData.create(-1L);
+
         /**
          * Creates a new {@link VREventData.Buffer} instance backed by the specified container.
          *
@@ -339,18 +337,8 @@ public class VREventData extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventData newInstance(long address) {
-            return new VREventData(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventData getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link VREventReserved} view of the {@code reserved} field. */

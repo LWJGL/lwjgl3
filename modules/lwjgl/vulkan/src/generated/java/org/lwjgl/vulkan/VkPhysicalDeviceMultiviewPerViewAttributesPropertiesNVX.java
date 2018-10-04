@@ -68,10 +68,6 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
         PERVIEWPOSITIONALLCOMPONENTS = layout.offsetof(2);
     }
 
-    VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -79,7 +75,7 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -127,13 +123,13 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
 
     /** Returns a new {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX} instance for the specified memory address. */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX create(long address) {
-        return new VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(address, null);
+        return wrap(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.class, address);
     }
 
     /**
@@ -143,26 +139,26 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.PNEXT); }
     /** Unsafe version of {@link #perViewPositionAllComponents}. */
-    public static int nperViewPositionAllComponents(long struct) { return memGetInt(struct + VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.PERVIEWPOSITIONALLCOMPONENTS); }
+    public static int nperViewPositionAllComponents(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.PERVIEWPOSITIONALLCOMPONENTS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.PNEXT, value); }
 
@@ -170,6 +166,8 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
 
     /** An array of {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX, Buffer> {
+
+        private static final VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX ELEMENT_FACTORY = VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer} instance backed by the specified container.
@@ -198,18 +196,8 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX newInstance(long address) {
-            return new VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

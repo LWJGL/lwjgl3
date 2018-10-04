@@ -73,10 +73,6 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
         RASTERIZATIONORDER = layout.offsetof(2);
     }
 
-    VkPipelineRasterizationStateRasterizationOrderAMD(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPipelineRasterizationStateRasterizationOrderAMD} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -84,7 +80,7 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineRasterizationStateRasterizationOrderAMD(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -136,28 +132,29 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
 
     /** Returns a new {@link VkPipelineRasterizationStateRasterizationOrderAMD} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineRasterizationStateRasterizationOrderAMD malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPipelineRasterizationStateRasterizationOrderAMD.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineRasterizationStateRasterizationOrderAMD} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineRasterizationStateRasterizationOrderAMD calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPipelineRasterizationStateRasterizationOrderAMD.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineRasterizationStateRasterizationOrderAMD} instance allocated with {@link BufferUtils}. */
     public static VkPipelineRasterizationStateRasterizationOrderAMD create() {
-        return new VkPipelineRasterizationStateRasterizationOrderAMD(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineRasterizationStateRasterizationOrderAMD.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPipelineRasterizationStateRasterizationOrderAMD} instance for the specified memory address. */
     public static VkPipelineRasterizationStateRasterizationOrderAMD create(long address) {
-        return new VkPipelineRasterizationStateRasterizationOrderAMD(address, null);
+        return wrap(VkPipelineRasterizationStateRasterizationOrderAMD.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineRasterizationStateRasterizationOrderAMD createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPipelineRasterizationStateRasterizationOrderAMD.class, address);
     }
 
     /**
@@ -166,7 +163,7 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateRasterizationOrderAMD.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -175,7 +172,7 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateRasterizationOrderAMD.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -184,7 +181,8 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateRasterizationOrderAMD.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -194,13 +192,13 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateRasterizationOrderAMD.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineRasterizationStateRasterizationOrderAMD.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -221,7 +219,7 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
      * @param stack the stack from which to allocate
      */
     public static VkPipelineRasterizationStateRasterizationOrderAMD mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPipelineRasterizationStateRasterizationOrderAMD.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -230,7 +228,7 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
      * @param stack the stack from which to allocate
      */
     public static VkPipelineRasterizationStateRasterizationOrderAMD callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPipelineRasterizationStateRasterizationOrderAMD.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -258,7 +256,7 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateRasterizationOrderAMD.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -268,29 +266,31 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateRasterizationOrderAMD.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPipelineRasterizationStateRasterizationOrderAMD.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateRasterizationOrderAMD.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineRasterizationStateRasterizationOrderAMD.PNEXT); }
     /** Unsafe version of {@link #rasterizationOrder}. */
-    public static int nrasterizationOrder(long struct) { return memGetInt(struct + VkPipelineRasterizationStateRasterizationOrderAMD.RASTERIZATIONORDER); }
+    public static int nrasterizationOrder(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateRasterizationOrderAMD.RASTERIZATIONORDER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateRasterizationOrderAMD.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateRasterizationOrderAMD.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineRasterizationStateRasterizationOrderAMD.PNEXT, value); }
     /** Unsafe version of {@link #rasterizationOrder(int) rasterizationOrder}. */
-    public static void nrasterizationOrder(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateRasterizationOrderAMD.RASTERIZATIONORDER, value); }
+    public static void nrasterizationOrder(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateRasterizationOrderAMD.RASTERIZATIONORDER, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPipelineRasterizationStateRasterizationOrderAMD} structs. */
     public static class Buffer extends StructBuffer<VkPipelineRasterizationStateRasterizationOrderAMD, Buffer> implements NativeResource {
+
+        private static final VkPipelineRasterizationStateRasterizationOrderAMD ELEMENT_FACTORY = VkPipelineRasterizationStateRasterizationOrderAMD.create(-1L);
 
         /**
          * Creates a new {@link VkPipelineRasterizationStateRasterizationOrderAMD.Buffer} instance backed by the specified container.
@@ -319,18 +319,8 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPipelineRasterizationStateRasterizationOrderAMD newInstance(long address) {
-            return new VkPipelineRasterizationStateRasterizationOrderAMD(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPipelineRasterizationStateRasterizationOrderAMD getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

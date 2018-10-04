@@ -57,10 +57,6 @@ class NkTextUndoRecord extends Struct {
         CHAR_STORAGE = layout.offsetof(3);
     }
 
-    NkTextUndoRecord(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkTextUndoRecord} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -68,7 +64,7 @@ class NkTextUndoRecord extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     NkTextUndoRecord(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -87,13 +83,13 @@ class NkTextUndoRecord extends Struct {
 
     /** Returns a new {@link NkTextUndoRecord} instance for the specified memory address. */
     public static NkTextUndoRecord create(long address) {
-        return new NkTextUndoRecord(address, null);
+        return wrap(NkTextUndoRecord.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkTextUndoRecord createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkTextUndoRecord.class, address);
     }
 
     /**
@@ -103,30 +99,32 @@ class NkTextUndoRecord extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkTextUndoRecord.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkTextUndoRecord.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #where}. */
-    public static int nwhere(long struct) { return memGetInt(struct + NkTextUndoRecord.WHERE); }
+    public static int nwhere(long struct) { return UNSAFE.getInt(null, struct + NkTextUndoRecord.WHERE); }
     /** Unsafe version of {@link #insert_length}. */
-    public static short ninsert_length(long struct) { return memGetShort(struct + NkTextUndoRecord.INSERT_LENGTH); }
+    public static short ninsert_length(long struct) { return UNSAFE.getShort(null, struct + NkTextUndoRecord.INSERT_LENGTH); }
     /** Unsafe version of {@link #delete_length}. */
-    public static short ndelete_length(long struct) { return memGetShort(struct + NkTextUndoRecord.DELETE_LENGTH); }
+    public static short ndelete_length(long struct) { return UNSAFE.getShort(null, struct + NkTextUndoRecord.DELETE_LENGTH); }
     /** Unsafe version of {@link #char_storage}. */
-    public static short nchar_storage(long struct) { return memGetShort(struct + NkTextUndoRecord.CHAR_STORAGE); }
+    public static short nchar_storage(long struct) { return UNSAFE.getShort(null, struct + NkTextUndoRecord.CHAR_STORAGE); }
 
     // -----------------------------------
 
     /** An array of {@link NkTextUndoRecord} structs. */
     public static class Buffer extends StructBuffer<NkTextUndoRecord, Buffer> {
+
+        private static final NkTextUndoRecord ELEMENT_FACTORY = NkTextUndoRecord.create(-1L);
 
         /**
          * Creates a new {@link NkTextUndoRecord.Buffer} instance backed by the specified container.
@@ -155,18 +153,8 @@ class NkTextUndoRecord extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkTextUndoRecord newInstance(long address) {
-            return new NkTextUndoRecord(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkTextUndoRecord getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code where} field. */

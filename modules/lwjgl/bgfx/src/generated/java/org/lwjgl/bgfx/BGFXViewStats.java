@@ -68,10 +68,6 @@ public class BGFXViewStats extends Struct {
         GPUTIMEELAPSED = layout.offsetof(3);
     }
 
-    BGFXViewStats(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXViewStats} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -79,7 +75,7 @@ public class BGFXViewStats extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXViewStats(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -105,13 +101,13 @@ public class BGFXViewStats extends Struct {
 
     /** Returns a new {@link BGFXViewStats} instance for the specified memory address. */
     public static BGFXViewStats create(long address) {
-        return new BGFXViewStats(address, null);
+        return wrap(BGFXViewStats.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXViewStats createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXViewStats.class, address);
     }
 
     /**
@@ -121,13 +117,13 @@ public class BGFXViewStats extends Struct {
      * @param capacity the buffer capacity
      */
     public static BGFXViewStats.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXViewStats.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -137,16 +133,18 @@ public class BGFXViewStats extends Struct {
     /** Unsafe version of {@link #nameString}. */
     public static String nnameString(long struct) { return memASCII(struct + BGFXViewStats.NAME); }
     /** Unsafe version of {@link #view}. */
-    public static short nview(long struct) { return memGetShort(struct + BGFXViewStats.VIEW); }
+    public static short nview(long struct) { return UNSAFE.getShort(null, struct + BGFXViewStats.VIEW); }
     /** Unsafe version of {@link #cpuTimeElapsed}. */
-    public static long ncpuTimeElapsed(long struct) { return memGetLong(struct + BGFXViewStats.CPUTIMEELAPSED); }
+    public static long ncpuTimeElapsed(long struct) { return UNSAFE.getLong(null, struct + BGFXViewStats.CPUTIMEELAPSED); }
     /** Unsafe version of {@link #gpuTimeElapsed}. */
-    public static long ngpuTimeElapsed(long struct) { return memGetLong(struct + BGFXViewStats.GPUTIMEELAPSED); }
+    public static long ngpuTimeElapsed(long struct) { return UNSAFE.getLong(null, struct + BGFXViewStats.GPUTIMEELAPSED); }
 
     // -----------------------------------
 
     /** An array of {@link BGFXViewStats} structs. */
     public static class Buffer extends StructBuffer<BGFXViewStats, Buffer> {
+
+        private static final BGFXViewStats ELEMENT_FACTORY = BGFXViewStats.create(-1L);
 
         /**
          * Creates a new {@link BGFXViewStats.Buffer} instance backed by the specified container.
@@ -175,18 +173,8 @@ public class BGFXViewStats extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected BGFXViewStats newInstance(long address) {
-            return new BGFXViewStats(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected BGFXViewStats getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link ByteBuffer} view of the {@code name} field. */

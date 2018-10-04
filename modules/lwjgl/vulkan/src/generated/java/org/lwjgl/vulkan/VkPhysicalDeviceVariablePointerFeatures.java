@@ -83,10 +83,6 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
         VARIABLEPOINTERS = layout.offsetof(3);
     }
 
-    VkPhysicalDeviceVariablePointerFeatures(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceVariablePointerFeatures} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -94,7 +90,7 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceVariablePointerFeatures(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -153,28 +149,29 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
 
     /** Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVariablePointerFeatures malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceVariablePointerFeatures.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVariablePointerFeatures calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceVariablePointerFeatures.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceVariablePointerFeatures create() {
-        return new VkPhysicalDeviceVariablePointerFeatures(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceVariablePointerFeatures.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance for the specified memory address. */
     public static VkPhysicalDeviceVariablePointerFeatures create(long address) {
-        return new VkPhysicalDeviceVariablePointerFeatures(address, null);
+        return wrap(VkPhysicalDeviceVariablePointerFeatures.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceVariablePointerFeatures createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceVariablePointerFeatures.class, address);
     }
 
     /**
@@ -183,7 +180,7 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeatures.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -192,7 +189,7 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeatures.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -201,7 +198,8 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeatures.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -211,13 +209,13 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeatures.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceVariablePointerFeatures.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -238,7 +236,7 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceVariablePointerFeatures mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceVariablePointerFeatures.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -247,7 +245,7 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceVariablePointerFeatures callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceVariablePointerFeatures.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -275,7 +273,7 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeatures.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -285,33 +283,35 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVariablePointerFeatures.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVariablePointerFeatures.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVariablePointerFeatures.PNEXT); }
     /** Unsafe version of {@link #variablePointersStorageBuffer}. */
-    public static int nvariablePointersStorageBuffer(long struct) { return memGetInt(struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERSSTORAGEBUFFER); }
+    public static int nvariablePointersStorageBuffer(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERSSTORAGEBUFFER); }
     /** Unsafe version of {@link #variablePointers}. */
-    public static int nvariablePointers(long struct) { return memGetInt(struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERS); }
+    public static int nvariablePointers(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVariablePointerFeatures.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVariablePointerFeatures.PNEXT, value); }
     /** Unsafe version of {@link #variablePointersStorageBuffer(boolean) variablePointersStorageBuffer}. */
-    public static void nvariablePointersStorageBuffer(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERSSTORAGEBUFFER, value); }
+    public static void nvariablePointersStorageBuffer(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERSSTORAGEBUFFER, value); }
     /** Unsafe version of {@link #variablePointers(boolean) variablePointers}. */
-    public static void nvariablePointers(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERS, value); }
+    public static void nvariablePointers(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVariablePointerFeatures.VARIABLEPOINTERS, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceVariablePointerFeatures} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceVariablePointerFeatures, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceVariablePointerFeatures ELEMENT_FACTORY = VkPhysicalDeviceVariablePointerFeatures.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceVariablePointerFeatures.Buffer} instance backed by the specified container.
@@ -340,18 +340,8 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceVariablePointerFeatures newInstance(long address) {
-            return new VkPhysicalDeviceVariablePointerFeatures(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceVariablePointerFeatures getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

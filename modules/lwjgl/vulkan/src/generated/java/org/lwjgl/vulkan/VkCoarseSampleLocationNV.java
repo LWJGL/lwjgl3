@@ -76,10 +76,6 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
         SAMPLE = layout.offsetof(2);
     }
 
-    VkCoarseSampleLocationNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkCoarseSampleLocationNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -87,7 +83,7 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkCoarseSampleLocationNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -139,28 +135,29 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
 
     /** Returns a new {@link VkCoarseSampleLocationNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkCoarseSampleLocationNV malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkCoarseSampleLocationNV.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkCoarseSampleLocationNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkCoarseSampleLocationNV calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkCoarseSampleLocationNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkCoarseSampleLocationNV} instance allocated with {@link BufferUtils}. */
     public static VkCoarseSampleLocationNV create() {
-        return new VkCoarseSampleLocationNV(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkCoarseSampleLocationNV.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkCoarseSampleLocationNV} instance for the specified memory address. */
     public static VkCoarseSampleLocationNV create(long address) {
-        return new VkCoarseSampleLocationNV(address, null);
+        return wrap(VkCoarseSampleLocationNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCoarseSampleLocationNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkCoarseSampleLocationNV.class, address);
     }
 
     /**
@@ -169,7 +166,7 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCoarseSampleLocationNV.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +175,7 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCoarseSampleLocationNV.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -187,7 +184,8 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCoarseSampleLocationNV.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -197,13 +195,13 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCoarseSampleLocationNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCoarseSampleLocationNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -224,7 +222,7 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkCoarseSampleLocationNV mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkCoarseSampleLocationNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -233,7 +231,7 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkCoarseSampleLocationNV callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkCoarseSampleLocationNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -261,7 +259,7 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCoarseSampleLocationNV.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -271,29 +269,31 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkCoarseSampleLocationNV.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #pixelX}. */
-    public static int npixelX(long struct) { return memGetInt(struct + VkCoarseSampleLocationNV.PIXELX); }
+    public static int npixelX(long struct) { return UNSAFE.getInt(null, struct + VkCoarseSampleLocationNV.PIXELX); }
     /** Unsafe version of {@link #pixelY}. */
-    public static int npixelY(long struct) { return memGetInt(struct + VkCoarseSampleLocationNV.PIXELY); }
+    public static int npixelY(long struct) { return UNSAFE.getInt(null, struct + VkCoarseSampleLocationNV.PIXELY); }
     /** Unsafe version of {@link #sample}. */
-    public static int nsample(long struct) { return memGetInt(struct + VkCoarseSampleLocationNV.SAMPLE); }
+    public static int nsample(long struct) { return UNSAFE.getInt(null, struct + VkCoarseSampleLocationNV.SAMPLE); }
 
     /** Unsafe version of {@link #pixelX(int) pixelX}. */
-    public static void npixelX(long struct, int value) { memPutInt(struct + VkCoarseSampleLocationNV.PIXELX, value); }
+    public static void npixelX(long struct, int value) { UNSAFE.putInt(null, struct + VkCoarseSampleLocationNV.PIXELX, value); }
     /** Unsafe version of {@link #pixelY(int) pixelY}. */
-    public static void npixelY(long struct, int value) { memPutInt(struct + VkCoarseSampleLocationNV.PIXELY, value); }
+    public static void npixelY(long struct, int value) { UNSAFE.putInt(null, struct + VkCoarseSampleLocationNV.PIXELY, value); }
     /** Unsafe version of {@link #sample(int) sample}. */
-    public static void nsample(long struct, int value) { memPutInt(struct + VkCoarseSampleLocationNV.SAMPLE, value); }
+    public static void nsample(long struct, int value) { UNSAFE.putInt(null, struct + VkCoarseSampleLocationNV.SAMPLE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkCoarseSampleLocationNV} structs. */
     public static class Buffer extends StructBuffer<VkCoarseSampleLocationNV, Buffer> implements NativeResource {
+
+        private static final VkCoarseSampleLocationNV ELEMENT_FACTORY = VkCoarseSampleLocationNV.create(-1L);
 
         /**
          * Creates a new {@link VkCoarseSampleLocationNV.Buffer} instance backed by the specified container.
@@ -322,18 +322,8 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkCoarseSampleLocationNV newInstance(long address) {
-            return new VkCoarseSampleLocationNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkCoarseSampleLocationNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code pixelX} field. */

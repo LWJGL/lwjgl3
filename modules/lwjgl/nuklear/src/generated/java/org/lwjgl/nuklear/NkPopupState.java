@@ -87,10 +87,6 @@ public class NkPopupState extends Struct {
         HEADER = layout.offsetof(9);
     }
 
-    NkPopupState(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkPopupState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -98,7 +94,7 @@ public class NkPopupState extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkPopupState(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -140,13 +136,13 @@ public class NkPopupState extends Struct {
 
     /** Returns a new {@link NkPopupState} instance for the specified memory address. */
     public static NkPopupState create(long address) {
-        return new NkPopupState(address, null);
+        return wrap(NkPopupState.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkPopupState createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkPopupState.class, address);
     }
 
     /**
@@ -156,13 +152,13 @@ public class NkPopupState extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkPopupState.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkPopupState.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -170,21 +166,21 @@ public class NkPopupState extends Struct {
     /** Unsafe version of {@link #win}. */
     public static NkWindow nwin(long struct) { return NkWindow.create(memGetAddress(struct + NkPopupState.WIN)); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return memGetInt(struct + NkPopupState.TYPE); }
+    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.TYPE); }
     /** Unsafe version of {@link #buf}. */
     public static NkPopupBuffer nbuf(long struct) { return NkPopupBuffer.create(struct + NkPopupState.BUF); }
     /** Unsafe version of {@link #name}. */
-    public static int nname(long struct) { return memGetInt(struct + NkPopupState.NAME); }
+    public static int nname(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.NAME); }
     /** Unsafe version of {@link #active}. */
-    public static int nactive(long struct) { return memGetInt(struct + NkPopupState.ACTIVE); }
+    public static int nactive(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.ACTIVE); }
     /** Unsafe version of {@link #combo_count}. */
-    public static int ncombo_count(long struct) { return memGetInt(struct + NkPopupState.COMBO_COUNT); }
+    public static int ncombo_count(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.COMBO_COUNT); }
     /** Unsafe version of {@link #con_count}. */
-    public static int ncon_count(long struct) { return memGetInt(struct + NkPopupState.CON_COUNT); }
+    public static int ncon_count(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.CON_COUNT); }
     /** Unsafe version of {@link #con_old}. */
-    public static int ncon_old(long struct) { return memGetInt(struct + NkPopupState.CON_OLD); }
+    public static int ncon_old(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.CON_OLD); }
     /** Unsafe version of {@link #active_con}. */
-    public static int nactive_con(long struct) { return memGetInt(struct + NkPopupState.ACTIVE_CON); }
+    public static int nactive_con(long struct) { return UNSAFE.getInt(null, struct + NkPopupState.ACTIVE_CON); }
     /** Unsafe version of {@link #header}. */
     public static NkRect nheader(long struct) { return NkRect.create(struct + NkPopupState.HEADER); }
 
@@ -192,6 +188,8 @@ public class NkPopupState extends Struct {
 
     /** An array of {@link NkPopupState} structs. */
     public static class Buffer extends StructBuffer<NkPopupState, Buffer> {
+
+        private static final NkPopupState ELEMENT_FACTORY = NkPopupState.create(-1L);
 
         /**
          * Creates a new {@link NkPopupState.Buffer} instance backed by the specified container.
@@ -220,18 +218,8 @@ public class NkPopupState extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkPopupState newInstance(long address) {
-            return new NkPopupState(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkPopupState getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkWindow} view of the struct pointed to by the {@code win} field. */

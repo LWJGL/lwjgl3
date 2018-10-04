@@ -95,10 +95,6 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
         MINCOMMANDSTOKENBUFFEROFFSETALIGNMENT = layout.offsetof(6);
     }
 
-    VkDeviceGeneratedCommandsLimitsNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDeviceGeneratedCommandsLimitsNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -106,7 +102,7 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceGeneratedCommandsLimitsNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -186,28 +182,29 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
 
     /** Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDeviceGeneratedCommandsLimitsNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDeviceGeneratedCommandsLimitsNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDeviceGeneratedCommandsLimitsNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDeviceGeneratedCommandsLimitsNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance allocated with {@link BufferUtils}. */
     public static VkDeviceGeneratedCommandsLimitsNVX create() {
-        return new VkDeviceGeneratedCommandsLimitsNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDeviceGeneratedCommandsLimitsNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance for the specified memory address. */
     public static VkDeviceGeneratedCommandsLimitsNVX create(long address) {
-        return new VkDeviceGeneratedCommandsLimitsNVX(address, null);
+        return wrap(VkDeviceGeneratedCommandsLimitsNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceGeneratedCommandsLimitsNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDeviceGeneratedCommandsLimitsNVX.class, address);
     }
 
     /**
@@ -216,7 +213,7 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkDeviceGeneratedCommandsLimitsNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -225,7 +222,7 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkDeviceGeneratedCommandsLimitsNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -234,7 +231,8 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkDeviceGeneratedCommandsLimitsNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -244,13 +242,13 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkDeviceGeneratedCommandsLimitsNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceGeneratedCommandsLimitsNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -271,7 +269,7 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkDeviceGeneratedCommandsLimitsNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDeviceGeneratedCommandsLimitsNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -280,7 +278,7 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkDeviceGeneratedCommandsLimitsNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDeviceGeneratedCommandsLimitsNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -308,7 +306,7 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkDeviceGeneratedCommandsLimitsNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -318,45 +316,47 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkDeviceGeneratedCommandsLimitsNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDeviceGeneratedCommandsLimitsNVX.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceGeneratedCommandsLimitsNVX.PNEXT); }
     /** Unsafe version of {@link #maxIndirectCommandsLayoutTokenCount}. */
-    public static int nmaxIndirectCommandsLayoutTokenCount(long struct) { return memGetInt(struct + VkDeviceGeneratedCommandsLimitsNVX.MAXINDIRECTCOMMANDSLAYOUTTOKENCOUNT); }
+    public static int nmaxIndirectCommandsLayoutTokenCount(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.MAXINDIRECTCOMMANDSLAYOUTTOKENCOUNT); }
     /** Unsafe version of {@link #maxObjectEntryCounts}. */
-    public static int nmaxObjectEntryCounts(long struct) { return memGetInt(struct + VkDeviceGeneratedCommandsLimitsNVX.MAXOBJECTENTRYCOUNTS); }
+    public static int nmaxObjectEntryCounts(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.MAXOBJECTENTRYCOUNTS); }
     /** Unsafe version of {@link #minSequenceCountBufferOffsetAlignment}. */
-    public static int nminSequenceCountBufferOffsetAlignment(long struct) { return memGetInt(struct + VkDeviceGeneratedCommandsLimitsNVX.MINSEQUENCECOUNTBUFFEROFFSETALIGNMENT); }
+    public static int nminSequenceCountBufferOffsetAlignment(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.MINSEQUENCECOUNTBUFFEROFFSETALIGNMENT); }
     /** Unsafe version of {@link #minSequenceIndexBufferOffsetAlignment}. */
-    public static int nminSequenceIndexBufferOffsetAlignment(long struct) { return memGetInt(struct + VkDeviceGeneratedCommandsLimitsNVX.MINSEQUENCEINDEXBUFFEROFFSETALIGNMENT); }
+    public static int nminSequenceIndexBufferOffsetAlignment(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.MINSEQUENCEINDEXBUFFEROFFSETALIGNMENT); }
     /** Unsafe version of {@link #minCommandsTokenBufferOffsetAlignment}. */
-    public static int nminCommandsTokenBufferOffsetAlignment(long struct) { return memGetInt(struct + VkDeviceGeneratedCommandsLimitsNVX.MINCOMMANDSTOKENBUFFEROFFSETALIGNMENT); }
+    public static int nminCommandsTokenBufferOffsetAlignment(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.MINCOMMANDSTOKENBUFFEROFFSETALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceGeneratedCommandsLimitsNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceGeneratedCommandsLimitsNVX.PNEXT, value); }
     /** Unsafe version of {@link #maxIndirectCommandsLayoutTokenCount(int) maxIndirectCommandsLayoutTokenCount}. */
-    public static void nmaxIndirectCommandsLayoutTokenCount(long struct, int value) { memPutInt(struct + VkDeviceGeneratedCommandsLimitsNVX.MAXINDIRECTCOMMANDSLAYOUTTOKENCOUNT, value); }
+    public static void nmaxIndirectCommandsLayoutTokenCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.MAXINDIRECTCOMMANDSLAYOUTTOKENCOUNT, value); }
     /** Unsafe version of {@link #maxObjectEntryCounts(int) maxObjectEntryCounts}. */
-    public static void nmaxObjectEntryCounts(long struct, int value) { memPutInt(struct + VkDeviceGeneratedCommandsLimitsNVX.MAXOBJECTENTRYCOUNTS, value); }
+    public static void nmaxObjectEntryCounts(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.MAXOBJECTENTRYCOUNTS, value); }
     /** Unsafe version of {@link #minSequenceCountBufferOffsetAlignment(int) minSequenceCountBufferOffsetAlignment}. */
-    public static void nminSequenceCountBufferOffsetAlignment(long struct, int value) { memPutInt(struct + VkDeviceGeneratedCommandsLimitsNVX.MINSEQUENCECOUNTBUFFEROFFSETALIGNMENT, value); }
+    public static void nminSequenceCountBufferOffsetAlignment(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.MINSEQUENCECOUNTBUFFEROFFSETALIGNMENT, value); }
     /** Unsafe version of {@link #minSequenceIndexBufferOffsetAlignment(int) minSequenceIndexBufferOffsetAlignment}. */
-    public static void nminSequenceIndexBufferOffsetAlignment(long struct, int value) { memPutInt(struct + VkDeviceGeneratedCommandsLimitsNVX.MINSEQUENCEINDEXBUFFEROFFSETALIGNMENT, value); }
+    public static void nminSequenceIndexBufferOffsetAlignment(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.MINSEQUENCEINDEXBUFFEROFFSETALIGNMENT, value); }
     /** Unsafe version of {@link #minCommandsTokenBufferOffsetAlignment(int) minCommandsTokenBufferOffsetAlignment}. */
-    public static void nminCommandsTokenBufferOffsetAlignment(long struct, int value) { memPutInt(struct + VkDeviceGeneratedCommandsLimitsNVX.MINCOMMANDSTOKENBUFFEROFFSETALIGNMENT, value); }
+    public static void nminCommandsTokenBufferOffsetAlignment(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGeneratedCommandsLimitsNVX.MINCOMMANDSTOKENBUFFEROFFSETALIGNMENT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkDeviceGeneratedCommandsLimitsNVX} structs. */
     public static class Buffer extends StructBuffer<VkDeviceGeneratedCommandsLimitsNVX, Buffer> implements NativeResource {
+
+        private static final VkDeviceGeneratedCommandsLimitsNVX ELEMENT_FACTORY = VkDeviceGeneratedCommandsLimitsNVX.create(-1L);
 
         /**
          * Creates a new {@link VkDeviceGeneratedCommandsLimitsNVX.Buffer} instance backed by the specified container.
@@ -385,18 +385,8 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDeviceGeneratedCommandsLimitsNVX newInstance(long address) {
-            return new VkDeviceGeneratedCommandsLimitsNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDeviceGeneratedCommandsLimitsNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

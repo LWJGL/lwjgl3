@@ -65,10 +65,6 @@ public class OVRVector3f extends Struct implements NativeResource {
         Z = layout.offsetof(2);
     }
 
-    OVRVector3f(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRVector3f} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -76,7 +72,7 @@ public class OVRVector3f extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRVector3f(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -125,28 +121,29 @@ public class OVRVector3f extends Struct implements NativeResource {
 
     /** Returns a new {@link OVRVector3f} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRVector3f malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRVector3f.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRVector3f} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRVector3f calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRVector3f.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRVector3f} instance allocated with {@link BufferUtils}. */
     public static OVRVector3f create() {
-        return new OVRVector3f(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRVector3f.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRVector3f} instance for the specified memory address. */
     public static OVRVector3f create(long address) {
-        return new OVRVector3f(address, null);
+        return wrap(OVRVector3f.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRVector3f createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRVector3f.class, address);
     }
 
     /**
@@ -155,7 +152,7 @@ public class OVRVector3f extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRVector3f.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -164,7 +161,7 @@ public class OVRVector3f extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRVector3f.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -173,7 +170,8 @@ public class OVRVector3f extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRVector3f.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -183,13 +181,13 @@ public class OVRVector3f extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRVector3f.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRVector3f.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -210,7 +208,7 @@ public class OVRVector3f extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRVector3f mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRVector3f.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -219,7 +217,7 @@ public class OVRVector3f extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRVector3f callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRVector3f.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -247,7 +245,7 @@ public class OVRVector3f extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRVector3f.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -257,29 +255,31 @@ public class OVRVector3f extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRVector3f.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return memGetFloat(struct + OVRVector3f.X); }
+    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + OVRVector3f.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return memGetFloat(struct + OVRVector3f.Y); }
+    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + OVRVector3f.Y); }
     /** Unsafe version of {@link #z}. */
-    public static float nz(long struct) { return memGetFloat(struct + OVRVector3f.Z); }
+    public static float nz(long struct) { return UNSAFE.getFloat(null, struct + OVRVector3f.Z); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { memPutFloat(struct + OVRVector3f.X, value); }
+    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + OVRVector3f.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { memPutFloat(struct + OVRVector3f.Y, value); }
+    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + OVRVector3f.Y, value); }
     /** Unsafe version of {@link #z(float) z}. */
-    public static void nz(long struct, float value) { memPutFloat(struct + OVRVector3f.Z, value); }
+    public static void nz(long struct, float value) { UNSAFE.putFloat(null, struct + OVRVector3f.Z, value); }
 
     // -----------------------------------
 
     /** An array of {@link OVRVector3f} structs. */
     public static class Buffer extends StructBuffer<OVRVector3f, Buffer> implements NativeResource {
+
+        private static final OVRVector3f ELEMENT_FACTORY = OVRVector3f.create(-1L);
 
         /**
          * Creates a new {@link OVRVector3f.Buffer} instance backed by the specified container.
@@ -308,18 +308,8 @@ public class OVRVector3f extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRVector3f newInstance(long address) {
-            return new OVRVector3f(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRVector3f getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x} field. */

@@ -84,10 +84,6 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
             PCIE_FUNCTION = layout.offsetof(8);
     }
 
-    CLDeviceTopologyAMD(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link CLDeviceTopologyAMD} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -95,7 +91,7 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public CLDeviceTopologyAMD(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -127,28 +123,29 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
 
     /** Returns a new {@link CLDeviceTopologyAMD} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CLDeviceTopologyAMD malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(CLDeviceTopologyAMD.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link CLDeviceTopologyAMD} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CLDeviceTopologyAMD calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(CLDeviceTopologyAMD.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link CLDeviceTopologyAMD} instance allocated with {@link BufferUtils}. */
     public static CLDeviceTopologyAMD create() {
-        return new CLDeviceTopologyAMD(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(CLDeviceTopologyAMD.class, memAddress(container), container);
     }
 
     /** Returns a new {@link CLDeviceTopologyAMD} instance for the specified memory address. */
     public static CLDeviceTopologyAMD create(long address) {
-        return new CLDeviceTopologyAMD(address, null);
+        return wrap(CLDeviceTopologyAMD.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CLDeviceTopologyAMD createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(CLDeviceTopologyAMD.class, address);
     }
 
     /**
@@ -157,7 +154,7 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLDeviceTopologyAMD.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -166,7 +163,7 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLDeviceTopologyAMD.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -175,7 +172,8 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLDeviceTopologyAMD.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -185,13 +183,13 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLDeviceTopologyAMD.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CLDeviceTopologyAMD.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -212,7 +210,7 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CLDeviceTopologyAMD mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(CLDeviceTopologyAMD.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -221,7 +219,7 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CLDeviceTopologyAMD callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(CLDeviceTopologyAMD.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -249,7 +247,7 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLDeviceTopologyAMD.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -259,32 +257,34 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLDeviceTopologyAMD.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #raw_type}. */
-    public static int nraw_type(long struct) { return memGetInt(struct + CLDeviceTopologyAMD.RAW_TYPE); }
+    public static int nraw_type(long struct) { return UNSAFE.getInt(null, struct + CLDeviceTopologyAMD.RAW_TYPE); }
     /** Unsafe version of {@link #raw_data}. */
     public static IntBuffer nraw_data(long struct) { return memIntBuffer(struct + CLDeviceTopologyAMD.RAW_DATA, 5); }
     /** Unsafe version of {@link #raw_data(int) raw_data}. */
     public static int nraw_data(long struct, int index) {
-        return memGetInt(struct + CLDeviceTopologyAMD.RAW_DATA + check(index, 5) * 4);
+        return UNSAFE.getInt(null, struct + CLDeviceTopologyAMD.RAW_DATA + check(index, 5) * 4);
     }
     /** Unsafe version of {@link #pcie_type}. */
-    public static int npcie_type(long struct) { return memGetInt(struct + CLDeviceTopologyAMD.PCIE_TYPE); }
+    public static int npcie_type(long struct) { return UNSAFE.getInt(null, struct + CLDeviceTopologyAMD.PCIE_TYPE); }
     /** Unsafe version of {@link #pcie_bus}. */
-    public static byte npcie_bus(long struct) { return memGetByte(struct + CLDeviceTopologyAMD.PCIE_BUS); }
+    public static byte npcie_bus(long struct) { return UNSAFE.getByte(null, struct + CLDeviceTopologyAMD.PCIE_BUS); }
     /** Unsafe version of {@link #pcie_device}. */
-    public static byte npcie_device(long struct) { return memGetByte(struct + CLDeviceTopologyAMD.PCIE_DEVICE); }
+    public static byte npcie_device(long struct) { return UNSAFE.getByte(null, struct + CLDeviceTopologyAMD.PCIE_DEVICE); }
     /** Unsafe version of {@link #pcie_function}. */
-    public static byte npcie_function(long struct) { return memGetByte(struct + CLDeviceTopologyAMD.PCIE_FUNCTION); }
+    public static byte npcie_function(long struct) { return UNSAFE.getByte(null, struct + CLDeviceTopologyAMD.PCIE_FUNCTION); }
 
     // -----------------------------------
 
     /** An array of {@link CLDeviceTopologyAMD} structs. */
     public static class Buffer extends StructBuffer<CLDeviceTopologyAMD, Buffer> implements NativeResource {
+
+        private static final CLDeviceTopologyAMD ELEMENT_FACTORY = CLDeviceTopologyAMD.create(-1L);
 
         /**
          * Creates a new {@link CLDeviceTopologyAMD.Buffer} instance backed by the specified container.
@@ -313,18 +313,8 @@ public class CLDeviceTopologyAMD extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected CLDeviceTopologyAMD newInstance(long address) {
-            return new CLDeviceTopologyAMD(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected CLDeviceTopologyAMD getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code raw.type} field. */

@@ -77,10 +77,6 @@ public class VREventTouchPadMove extends Struct {
         FVALUEYRAW = layout.offsetof(5);
     }
 
-    VREventTouchPadMove(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventTouchPadMove} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -88,7 +84,7 @@ public class VREventTouchPadMove extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventTouchPadMove(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -112,13 +108,13 @@ public class VREventTouchPadMove extends Struct {
 
     /** Returns a new {@link VREventTouchPadMove} instance for the specified memory address. */
     public static VREventTouchPadMove create(long address) {
-        return new VREventTouchPadMove(address, null);
+        return wrap(VREventTouchPadMove.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventTouchPadMove createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventTouchPadMove.class, address);
     }
 
     /**
@@ -128,34 +124,36 @@ public class VREventTouchPadMove extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventTouchPadMove.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventTouchPadMove.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #bFingerDown}. */
-    public static boolean nbFingerDown(long struct) { return memGetByte(struct + VREventTouchPadMove.BFINGERDOWN) != 0; }
+    public static boolean nbFingerDown(long struct) { return UNSAFE.getByte(null, struct + VREventTouchPadMove.BFINGERDOWN) != 0; }
     /** Unsafe version of {@link #flSecondsFingerDown}. */
-    public static float nflSecondsFingerDown(long struct) { return memGetFloat(struct + VREventTouchPadMove.FLSECONDSFINGERDOWN); }
+    public static float nflSecondsFingerDown(long struct) { return UNSAFE.getFloat(null, struct + VREventTouchPadMove.FLSECONDSFINGERDOWN); }
     /** Unsafe version of {@link #fValueXFirst}. */
-    public static float nfValueXFirst(long struct) { return memGetFloat(struct + VREventTouchPadMove.FVALUEXFIRST); }
+    public static float nfValueXFirst(long struct) { return UNSAFE.getFloat(null, struct + VREventTouchPadMove.FVALUEXFIRST); }
     /** Unsafe version of {@link #fValueYFirst}. */
-    public static float nfValueYFirst(long struct) { return memGetFloat(struct + VREventTouchPadMove.FVALUEYFIRST); }
+    public static float nfValueYFirst(long struct) { return UNSAFE.getFloat(null, struct + VREventTouchPadMove.FVALUEYFIRST); }
     /** Unsafe version of {@link #fValueXRaw}. */
-    public static float nfValueXRaw(long struct) { return memGetFloat(struct + VREventTouchPadMove.FVALUEXRAW); }
+    public static float nfValueXRaw(long struct) { return UNSAFE.getFloat(null, struct + VREventTouchPadMove.FVALUEXRAW); }
     /** Unsafe version of {@link #fValueYRaw}. */
-    public static float nfValueYRaw(long struct) { return memGetFloat(struct + VREventTouchPadMove.FVALUEYRAW); }
+    public static float nfValueYRaw(long struct) { return UNSAFE.getFloat(null, struct + VREventTouchPadMove.FVALUEYRAW); }
 
     // -----------------------------------
 
     /** An array of {@link VREventTouchPadMove} structs. */
     public static class Buffer extends StructBuffer<VREventTouchPadMove, Buffer> {
+
+        private static final VREventTouchPadMove ELEMENT_FACTORY = VREventTouchPadMove.create(-1L);
 
         /**
          * Creates a new {@link VREventTouchPadMove.Buffer} instance backed by the specified container.
@@ -184,18 +182,8 @@ public class VREventTouchPadMove extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventTouchPadMove newInstance(long address) {
-            return new VREventTouchPadMove(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventTouchPadMove getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code bFingerDown} field. */

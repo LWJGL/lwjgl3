@@ -79,10 +79,6 @@ public class EXRTile extends Struct implements NativeResource {
         IMAGES = layout.offsetof(6);
     }
 
-    EXRTile(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link EXRTile} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -90,7 +86,7 @@ public class EXRTile extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public EXRTile(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -168,28 +164,29 @@ public class EXRTile extends Struct implements NativeResource {
 
     /** Returns a new {@link EXRTile} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static EXRTile malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(EXRTile.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link EXRTile} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static EXRTile calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(EXRTile.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link EXRTile} instance allocated with {@link BufferUtils}. */
     public static EXRTile create() {
-        return new EXRTile(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(EXRTile.class, memAddress(container), container);
     }
 
     /** Returns a new {@link EXRTile} instance for the specified memory address. */
     public static EXRTile create(long address) {
-        return new EXRTile(address, null);
+        return wrap(EXRTile.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static EXRTile createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(EXRTile.class, address);
     }
 
     /**
@@ -198,7 +195,7 @@ public class EXRTile extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRTile.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -207,7 +204,7 @@ public class EXRTile extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRTile.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -216,7 +213,8 @@ public class EXRTile extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRTile.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -226,13 +224,13 @@ public class EXRTile extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRTile.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static EXRTile.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -253,7 +251,7 @@ public class EXRTile extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static EXRTile mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(EXRTile.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -262,7 +260,7 @@ public class EXRTile extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static EXRTile callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(EXRTile.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -290,7 +288,7 @@ public class EXRTile extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRTile.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -300,38 +298,38 @@ public class EXRTile extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRTile.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #offset_x}. */
-    public static int noffset_x(long struct) { return memGetInt(struct + EXRTile.OFFSET_X); }
+    public static int noffset_x(long struct) { return UNSAFE.getInt(null, struct + EXRTile.OFFSET_X); }
     /** Unsafe version of {@link #offset_y}. */
-    public static int noffset_y(long struct) { return memGetInt(struct + EXRTile.OFFSET_Y); }
+    public static int noffset_y(long struct) { return UNSAFE.getInt(null, struct + EXRTile.OFFSET_Y); }
     /** Unsafe version of {@link #level_x}. */
-    public static int nlevel_x(long struct) { return memGetInt(struct + EXRTile.LEVEL_X); }
+    public static int nlevel_x(long struct) { return UNSAFE.getInt(null, struct + EXRTile.LEVEL_X); }
     /** Unsafe version of {@link #level_y}. */
-    public static int nlevel_y(long struct) { return memGetInt(struct + EXRTile.LEVEL_Y); }
+    public static int nlevel_y(long struct) { return UNSAFE.getInt(null, struct + EXRTile.LEVEL_Y); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return memGetInt(struct + EXRTile.WIDTH); }
+    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + EXRTile.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return memGetInt(struct + EXRTile.HEIGHT); }
+    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + EXRTile.HEIGHT); }
     /** Unsafe version of {@link #images(int) images}. */
     public static PointerBuffer nimages(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + EXRTile.IMAGES), capacity); }
 
     /** Unsafe version of {@link #offset_x(int) offset_x}. */
-    public static void noffset_x(long struct, int value) { memPutInt(struct + EXRTile.OFFSET_X, value); }
+    public static void noffset_x(long struct, int value) { UNSAFE.putInt(null, struct + EXRTile.OFFSET_X, value); }
     /** Unsafe version of {@link #offset_y(int) offset_y}. */
-    public static void noffset_y(long struct, int value) { memPutInt(struct + EXRTile.OFFSET_Y, value); }
+    public static void noffset_y(long struct, int value) { UNSAFE.putInt(null, struct + EXRTile.OFFSET_Y, value); }
     /** Unsafe version of {@link #level_x(int) level_x}. */
-    public static void nlevel_x(long struct, int value) { memPutInt(struct + EXRTile.LEVEL_X, value); }
+    public static void nlevel_x(long struct, int value) { UNSAFE.putInt(null, struct + EXRTile.LEVEL_X, value); }
     /** Unsafe version of {@link #level_y(int) level_y}. */
-    public static void nlevel_y(long struct, int value) { memPutInt(struct + EXRTile.LEVEL_Y, value); }
+    public static void nlevel_y(long struct, int value) { UNSAFE.putInt(null, struct + EXRTile.LEVEL_Y, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { memPutInt(struct + EXRTile.WIDTH, value); }
+    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + EXRTile.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { memPutInt(struct + EXRTile.HEIGHT, value); }
+    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + EXRTile.HEIGHT, value); }
     /** Unsafe version of {@link #images(PointerBuffer) images}. */
     public static void nimages(long struct, PointerBuffer value) { memPutAddress(struct + EXRTile.IMAGES, memAddress(value)); }
 
@@ -361,6 +359,8 @@ public class EXRTile extends Struct implements NativeResource {
     /** An array of {@link EXRTile} structs. */
     public static class Buffer extends StructBuffer<EXRTile, Buffer> implements NativeResource {
 
+        private static final EXRTile ELEMENT_FACTORY = EXRTile.create(-1L);
+
         /**
          * Creates a new {@link EXRTile.Buffer} instance backed by the specified container.
          *
@@ -388,18 +388,8 @@ public class EXRTile extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected EXRTile newInstance(long address) {
-            return new EXRTile(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected EXRTile getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code offset_x} field. */

@@ -62,10 +62,6 @@ public class AIMeshKey extends Struct implements NativeResource {
         MVALUE = layout.offsetof(1);
     }
 
-    AIMeshKey(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIMeshKey} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -73,7 +69,7 @@ public class AIMeshKey extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIMeshKey(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -117,28 +113,29 @@ public class AIMeshKey extends Struct implements NativeResource {
 
     /** Returns a new {@link AIMeshKey} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIMeshKey malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AIMeshKey.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AIMeshKey} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIMeshKey calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AIMeshKey.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AIMeshKey} instance allocated with {@link BufferUtils}. */
     public static AIMeshKey create() {
-        return new AIMeshKey(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AIMeshKey.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AIMeshKey} instance for the specified memory address. */
     public static AIMeshKey create(long address) {
-        return new AIMeshKey(address, null);
+        return wrap(AIMeshKey.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIMeshKey createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIMeshKey.class, address);
     }
 
     /**
@@ -147,7 +144,7 @@ public class AIMeshKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMeshKey.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -156,7 +153,7 @@ public class AIMeshKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMeshKey.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -165,7 +162,8 @@ public class AIMeshKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMeshKey.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -175,13 +173,13 @@ public class AIMeshKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMeshKey.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIMeshKey.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -202,7 +200,7 @@ public class AIMeshKey extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIMeshKey mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AIMeshKey.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -211,7 +209,7 @@ public class AIMeshKey extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIMeshKey callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AIMeshKey.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -239,7 +237,7 @@ public class AIMeshKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMeshKey.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -249,25 +247,27 @@ public class AIMeshKey extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMeshKey.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #mTime}. */
-    public static double nmTime(long struct) { return memGetDouble(struct + AIMeshKey.MTIME); }
+    public static double nmTime(long struct) { return UNSAFE.getDouble(null, struct + AIMeshKey.MTIME); }
     /** Unsafe version of {@link #mValue}. */
-    public static int nmValue(long struct) { return memGetInt(struct + AIMeshKey.MVALUE); }
+    public static int nmValue(long struct) { return UNSAFE.getInt(null, struct + AIMeshKey.MVALUE); }
 
     /** Unsafe version of {@link #mTime(double) mTime}. */
-    public static void nmTime(long struct, double value) { memPutDouble(struct + AIMeshKey.MTIME, value); }
+    public static void nmTime(long struct, double value) { UNSAFE.putDouble(null, struct + AIMeshKey.MTIME, value); }
     /** Unsafe version of {@link #mValue(int) mValue}. */
-    public static void nmValue(long struct, int value) { memPutInt(struct + AIMeshKey.MVALUE, value); }
+    public static void nmValue(long struct, int value) { UNSAFE.putInt(null, struct + AIMeshKey.MVALUE, value); }
 
     // -----------------------------------
 
     /** An array of {@link AIMeshKey} structs. */
     public static class Buffer extends StructBuffer<AIMeshKey, Buffer> implements NativeResource {
+
+        private static final AIMeshKey ELEMENT_FACTORY = AIMeshKey.create(-1L);
 
         /**
          * Creates a new {@link AIMeshKey.Buffer} instance backed by the specified container.
@@ -296,18 +296,8 @@ public class AIMeshKey extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIMeshKey newInstance(long address) {
-            return new AIMeshKey(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIMeshKey getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code mTime} field. */

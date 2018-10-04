@@ -68,10 +68,6 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct {
         SHAREDPRESENTSUPPORTEDUSAGEFLAGS = layout.offsetof(2);
     }
 
-    VkSharedPresentSurfaceCapabilitiesKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSharedPresentSurfaceCapabilitiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -79,7 +75,7 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSharedPresentSurfaceCapabilitiesKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -127,13 +123,13 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct {
 
     /** Returns a new {@link VkSharedPresentSurfaceCapabilitiesKHR} instance for the specified memory address. */
     public static VkSharedPresentSurfaceCapabilitiesKHR create(long address) {
-        return new VkSharedPresentSurfaceCapabilitiesKHR(address, null);
+        return wrap(VkSharedPresentSurfaceCapabilitiesKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSharedPresentSurfaceCapabilitiesKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSharedPresentSurfaceCapabilitiesKHR.class, address);
     }
 
     /**
@@ -143,26 +139,26 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkSharedPresentSurfaceCapabilitiesKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSharedPresentSurfaceCapabilitiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSharedPresentSurfaceCapabilitiesKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSharedPresentSurfaceCapabilitiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSharedPresentSurfaceCapabilitiesKHR.PNEXT); }
     /** Unsafe version of {@link #sharedPresentSupportedUsageFlags}. */
-    public static int nsharedPresentSupportedUsageFlags(long struct) { return memGetInt(struct + VkSharedPresentSurfaceCapabilitiesKHR.SHAREDPRESENTSUPPORTEDUSAGEFLAGS); }
+    public static int nsharedPresentSupportedUsageFlags(long struct) { return UNSAFE.getInt(null, struct + VkSharedPresentSurfaceCapabilitiesKHR.SHAREDPRESENTSUPPORTEDUSAGEFLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSharedPresentSurfaceCapabilitiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSharedPresentSurfaceCapabilitiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSharedPresentSurfaceCapabilitiesKHR.PNEXT, value); }
 
@@ -170,6 +166,8 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct {
 
     /** An array of {@link VkSharedPresentSurfaceCapabilitiesKHR} structs. */
     public static class Buffer extends StructBuffer<VkSharedPresentSurfaceCapabilitiesKHR, Buffer> {
+
+        private static final VkSharedPresentSurfaceCapabilitiesKHR ELEMENT_FACTORY = VkSharedPresentSurfaceCapabilitiesKHR.create(-1L);
 
         /**
          * Creates a new {@link VkSharedPresentSurfaceCapabilitiesKHR.Buffer} instance backed by the specified container.
@@ -198,18 +196,8 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSharedPresentSurfaceCapabilitiesKHR newInstance(long address) {
-            return new VkSharedPresentSurfaceCapabilitiesKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSharedPresentSurfaceCapabilitiesKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

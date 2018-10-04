@@ -59,10 +59,6 @@ public class VkOffset2D extends Struct implements NativeResource {
         Y = layout.offsetof(1);
     }
 
-    VkOffset2D(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkOffset2D} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -70,7 +66,7 @@ public class VkOffset2D extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkOffset2D(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -115,28 +111,29 @@ public class VkOffset2D extends Struct implements NativeResource {
 
     /** Returns a new {@link VkOffset2D} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkOffset2D malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkOffset2D.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkOffset2D} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkOffset2D calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkOffset2D.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkOffset2D} instance allocated with {@link BufferUtils}. */
     public static VkOffset2D create() {
-        return new VkOffset2D(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkOffset2D.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkOffset2D} instance for the specified memory address. */
     public static VkOffset2D create(long address) {
-        return new VkOffset2D(address, null);
+        return wrap(VkOffset2D.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkOffset2D createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkOffset2D.class, address);
     }
 
     /**
@@ -145,7 +142,7 @@ public class VkOffset2D extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkOffset2D.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -154,7 +151,7 @@ public class VkOffset2D extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkOffset2D.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -163,7 +160,8 @@ public class VkOffset2D extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkOffset2D.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -173,13 +171,13 @@ public class VkOffset2D extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkOffset2D.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkOffset2D.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -200,7 +198,7 @@ public class VkOffset2D extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkOffset2D mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkOffset2D.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -209,7 +207,7 @@ public class VkOffset2D extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkOffset2D callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkOffset2D.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -237,7 +235,7 @@ public class VkOffset2D extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkOffset2D.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -247,25 +245,27 @@ public class VkOffset2D extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkOffset2D.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return memGetInt(struct + VkOffset2D.X); }
+    public static int nx(long struct) { return UNSAFE.getInt(null, struct + VkOffset2D.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return memGetInt(struct + VkOffset2D.Y); }
+    public static int ny(long struct) { return UNSAFE.getInt(null, struct + VkOffset2D.Y); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { memPutInt(struct + VkOffset2D.X, value); }
+    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + VkOffset2D.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { memPutInt(struct + VkOffset2D.Y, value); }
+    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + VkOffset2D.Y, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkOffset2D} structs. */
     public static class Buffer extends StructBuffer<VkOffset2D, Buffer> implements NativeResource {
+
+        private static final VkOffset2D ELEMENT_FACTORY = VkOffset2D.create(-1L);
 
         /**
          * Creates a new {@link VkOffset2D.Buffer} instance backed by the specified container.
@@ -294,18 +294,8 @@ public class VkOffset2D extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkOffset2D newInstance(long address) {
-            return new VkOffset2D(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkOffset2D getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x} field. */

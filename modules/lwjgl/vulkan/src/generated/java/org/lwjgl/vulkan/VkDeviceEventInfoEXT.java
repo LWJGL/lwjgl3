@@ -75,10 +75,6 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
         DEVICEEVENT = layout.offsetof(2);
     }
 
-    VkDeviceEventInfoEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDeviceEventInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -86,7 +82,7 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceEventInfoEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -138,28 +134,29 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
 
     /** Returns a new {@link VkDeviceEventInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDeviceEventInfoEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDeviceEventInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDeviceEventInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDeviceEventInfoEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDeviceEventInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDeviceEventInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkDeviceEventInfoEXT create() {
-        return new VkDeviceEventInfoEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDeviceEventInfoEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDeviceEventInfoEXT} instance for the specified memory address. */
     public static VkDeviceEventInfoEXT create(long address) {
-        return new VkDeviceEventInfoEXT(address, null);
+        return wrap(VkDeviceEventInfoEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceEventInfoEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDeviceEventInfoEXT.class, address);
     }
 
     /**
@@ -168,7 +165,7 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDeviceEventInfoEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -177,7 +174,7 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDeviceEventInfoEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -186,7 +183,8 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDeviceEventInfoEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -196,13 +194,13 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDeviceEventInfoEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceEventInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -223,7 +221,7 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDeviceEventInfoEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDeviceEventInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -232,7 +230,7 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDeviceEventInfoEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDeviceEventInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -260,7 +258,7 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDeviceEventInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -270,29 +268,31 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDeviceEventInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDeviceEventInfoEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceEventInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceEventInfoEXT.PNEXT); }
     /** Unsafe version of {@link #deviceEvent}. */
-    public static int ndeviceEvent(long struct) { return memGetInt(struct + VkDeviceEventInfoEXT.DEVICEEVENT); }
+    public static int ndeviceEvent(long struct) { return UNSAFE.getInt(null, struct + VkDeviceEventInfoEXT.DEVICEEVENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceEventInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceEventInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceEventInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #deviceEvent(int) deviceEvent}. */
-    public static void ndeviceEvent(long struct, int value) { memPutInt(struct + VkDeviceEventInfoEXT.DEVICEEVENT, value); }
+    public static void ndeviceEvent(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceEventInfoEXT.DEVICEEVENT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkDeviceEventInfoEXT} structs. */
     public static class Buffer extends StructBuffer<VkDeviceEventInfoEXT, Buffer> implements NativeResource {
+
+        private static final VkDeviceEventInfoEXT ELEMENT_FACTORY = VkDeviceEventInfoEXT.create(-1L);
 
         /**
          * Creates a new {@link VkDeviceEventInfoEXT.Buffer} instance backed by the specified container.
@@ -321,18 +321,8 @@ public class VkDeviceEventInfoEXT extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDeviceEventInfoEXT newInstance(long address) {
-            return new VkDeviceEventInfoEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDeviceEventInfoEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

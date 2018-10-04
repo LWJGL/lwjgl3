@@ -45,10 +45,6 @@ public class VREventSpatialAnchor extends Struct {
         UNHANDLE = layout.offsetof(0);
     }
 
-    VREventSpatialAnchor(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventSpatialAnchor} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -56,7 +52,7 @@ public class VREventSpatialAnchor extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventSpatialAnchor(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -70,13 +66,13 @@ public class VREventSpatialAnchor extends Struct {
 
     /** Returns a new {@link VREventSpatialAnchor} instance for the specified memory address. */
     public static VREventSpatialAnchor create(long address) {
-        return new VREventSpatialAnchor(address, null);
+        return wrap(VREventSpatialAnchor.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventSpatialAnchor createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventSpatialAnchor.class, address);
     }
 
     /**
@@ -86,24 +82,26 @@ public class VREventSpatialAnchor extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventSpatialAnchor.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventSpatialAnchor.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #unHandle}. */
-    public static int nunHandle(long struct) { return memGetInt(struct + VREventSpatialAnchor.UNHANDLE); }
+    public static int nunHandle(long struct) { return UNSAFE.getInt(null, struct + VREventSpatialAnchor.UNHANDLE); }
 
     // -----------------------------------
 
     /** An array of {@link VREventSpatialAnchor} structs. */
     public static class Buffer extends StructBuffer<VREventSpatialAnchor, Buffer> {
+
+        private static final VREventSpatialAnchor ELEMENT_FACTORY = VREventSpatialAnchor.create(-1L);
 
         /**
          * Creates a new {@link VREventSpatialAnchor.Buffer} instance backed by the specified container.
@@ -132,18 +130,8 @@ public class VREventSpatialAnchor extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventSpatialAnchor newInstance(long address) {
-            return new VREventSpatialAnchor(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventSpatialAnchor getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code unHandle} field. */

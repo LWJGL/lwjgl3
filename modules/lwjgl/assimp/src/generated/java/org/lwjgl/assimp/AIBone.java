@@ -80,10 +80,6 @@ public class AIBone extends Struct implements NativeResource {
         MOFFSETMATRIX = layout.offsetof(3);
     }
 
-    AIBone(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIBone} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -91,7 +87,7 @@ public class AIBone extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIBone(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -150,28 +146,29 @@ public class AIBone extends Struct implements NativeResource {
 
     /** Returns a new {@link AIBone} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIBone malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AIBone.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AIBone} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIBone calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AIBone.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AIBone} instance allocated with {@link BufferUtils}. */
     public static AIBone create() {
-        return new AIBone(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AIBone.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AIBone} instance for the specified memory address. */
     public static AIBone create(long address) {
-        return new AIBone(address, null);
+        return wrap(AIBone.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIBone createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIBone.class, address);
     }
 
     /**
@@ -180,7 +177,7 @@ public class AIBone extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIBone.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -189,7 +186,7 @@ public class AIBone extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIBone.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -198,7 +195,8 @@ public class AIBone extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIBone.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -208,13 +206,13 @@ public class AIBone extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIBone.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIBone.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -235,7 +233,7 @@ public class AIBone extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIBone mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AIBone.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -244,7 +242,7 @@ public class AIBone extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIBone callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AIBone.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -272,7 +270,7 @@ public class AIBone extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIBone.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -282,7 +280,7 @@ public class AIBone extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIBone.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -290,7 +288,7 @@ public class AIBone extends Struct implements NativeResource {
     /** Unsafe version of {@link #mName}. */
     public static AIString nmName(long struct) { return AIString.create(struct + AIBone.MNAME); }
     /** Unsafe version of {@link #mNumWeights}. */
-    public static int nmNumWeights(long struct) { return memGetInt(struct + AIBone.MNUMWEIGHTS); }
+    public static int nmNumWeights(long struct) { return UNSAFE.getInt(null, struct + AIBone.MNUMWEIGHTS); }
     /** Unsafe version of {@link #mWeights}. */
     public static AIVertexWeight.Buffer nmWeights(long struct) { return AIVertexWeight.create(memGetAddress(struct + AIBone.MWEIGHTS), nmNumWeights(struct)); }
     /** Unsafe version of {@link #mOffsetMatrix}. */
@@ -299,7 +297,7 @@ public class AIBone extends Struct implements NativeResource {
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIBone.MNAME, AIString.SIZEOF); }
     /** Sets the specified value to the {@code mNumWeights} field of the specified {@code struct}. */
-    public static void nmNumWeights(long struct, int value) { memPutInt(struct + AIBone.MNUMWEIGHTS, value); }
+    public static void nmNumWeights(long struct, int value) { UNSAFE.putInt(null, struct + AIBone.MNUMWEIGHTS, value); }
     /** Unsafe version of {@link #mWeights(AIVertexWeight.Buffer) mWeights}. */
     public static void nmWeights(long struct, AIVertexWeight.Buffer value) { memPutAddress(struct + AIBone.MWEIGHTS, value.address()); nmNumWeights(struct, value.remaining()); }
     /** Unsafe version of {@link #mOffsetMatrix(AIMatrix4x4) mOffsetMatrix}. */
@@ -331,6 +329,8 @@ public class AIBone extends Struct implements NativeResource {
     /** An array of {@link AIBone} structs. */
     public static class Buffer extends StructBuffer<AIBone, Buffer> implements NativeResource {
 
+        private static final AIBone ELEMENT_FACTORY = AIBone.create(-1L);
+
         /**
          * Creates a new {@link AIBone.Buffer} instance backed by the specified container.
          *
@@ -358,18 +358,8 @@ public class AIBone extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIBone newInstance(long address) {
-            return new AIBone(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIBone getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link AIString} view of the {@code mName} field. */

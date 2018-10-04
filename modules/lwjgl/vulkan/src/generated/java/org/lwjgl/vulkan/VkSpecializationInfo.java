@@ -92,10 +92,6 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
         PDATA = layout.offsetof(3);
     }
 
-    VkSpecializationInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSpecializationInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -103,7 +99,7 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSpecializationInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -156,28 +152,29 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link VkSpecializationInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSpecializationInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkSpecializationInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkSpecializationInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSpecializationInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkSpecializationInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkSpecializationInfo} instance allocated with {@link BufferUtils}. */
     public static VkSpecializationInfo create() {
-        return new VkSpecializationInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSpecializationInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkSpecializationInfo} instance for the specified memory address. */
     public static VkSpecializationInfo create(long address) {
-        return new VkSpecializationInfo(address, null);
+        return wrap(VkSpecializationInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSpecializationInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSpecializationInfo.class, address);
     }
 
     /**
@@ -186,7 +183,7 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSpecializationInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -195,7 +192,7 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSpecializationInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -204,7 +201,8 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSpecializationInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -214,13 +212,13 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSpecializationInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSpecializationInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -241,7 +239,7 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkSpecializationInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkSpecializationInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -250,7 +248,7 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkSpecializationInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkSpecializationInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -278,7 +276,7 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSpecializationInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -288,13 +286,13 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSpecializationInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #mapEntryCount}. */
-    public static int nmapEntryCount(long struct) { return memGetInt(struct + VkSpecializationInfo.MAPENTRYCOUNT); }
+    public static int nmapEntryCount(long struct) { return UNSAFE.getInt(null, struct + VkSpecializationInfo.MAPENTRYCOUNT); }
     /** Unsafe version of {@link #pMapEntries}. */
     @Nullable public static VkSpecializationMapEntry.Buffer npMapEntries(long struct) { return VkSpecializationMapEntry.createSafe(memGetAddress(struct + VkSpecializationInfo.PMAPENTRIES), nmapEntryCount(struct)); }
     /** Unsafe version of {@link #dataSize}. */
@@ -303,7 +301,7 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
     @Nullable public static ByteBuffer npData(long struct) { return memByteBufferSafe(memGetAddress(struct + VkSpecializationInfo.PDATA), (int)ndataSize(struct)); }
 
     /** Sets the specified value to the {@code mapEntryCount} field of the specified {@code struct}. */
-    public static void nmapEntryCount(long struct, int value) { memPutInt(struct + VkSpecializationInfo.MAPENTRYCOUNT, value); }
+    public static void nmapEntryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSpecializationInfo.MAPENTRYCOUNT, value); }
     /** Unsafe version of {@link #pMapEntries(VkSpecializationMapEntry.Buffer) pMapEntries}. */
     public static void npMapEntries(long struct, @Nullable VkSpecializationMapEntry.Buffer value) { memPutAddress(struct + VkSpecializationInfo.PMAPENTRIES, memAddressSafe(value)); nmapEntryCount(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code dataSize} field of the specified {@code struct}. */
@@ -342,6 +340,8 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
     /** An array of {@link VkSpecializationInfo} structs. */
     public static class Buffer extends StructBuffer<VkSpecializationInfo, Buffer> implements NativeResource {
 
+        private static final VkSpecializationInfo ELEMENT_FACTORY = VkSpecializationInfo.create(-1L);
+
         /**
          * Creates a new {@link VkSpecializationInfo.Buffer} instance backed by the specified container.
          *
@@ -369,18 +369,8 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSpecializationInfo newInstance(long address) {
-            return new VkSpecializationInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSpecializationInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code mapEntryCount} field. */

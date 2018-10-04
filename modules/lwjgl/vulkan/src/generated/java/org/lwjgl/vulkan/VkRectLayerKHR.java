@@ -77,10 +77,6 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
         LAYER = layout.offsetof(2);
     }
 
-    VkRectLayerKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkRectLayerKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -88,7 +84,7 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkRectLayerKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -142,28 +138,29 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
 
     /** Returns a new {@link VkRectLayerKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkRectLayerKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkRectLayerKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkRectLayerKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkRectLayerKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkRectLayerKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkRectLayerKHR} instance allocated with {@link BufferUtils}. */
     public static VkRectLayerKHR create() {
-        return new VkRectLayerKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkRectLayerKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkRectLayerKHR} instance for the specified memory address. */
     public static VkRectLayerKHR create(long address) {
-        return new VkRectLayerKHR(address, null);
+        return wrap(VkRectLayerKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkRectLayerKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkRectLayerKHR.class, address);
     }
 
     /**
@@ -172,7 +169,7 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRectLayerKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -181,7 +178,7 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRectLayerKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -190,7 +187,8 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRectLayerKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -200,13 +198,13 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRectLayerKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkRectLayerKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -227,7 +225,7 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkRectLayerKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkRectLayerKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -236,7 +234,7 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkRectLayerKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkRectLayerKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -264,7 +262,7 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRectLayerKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -274,7 +272,7 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRectLayerKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -284,19 +282,21 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #extent}. */
     public static VkExtent2D nextent(long struct) { return VkExtent2D.create(struct + VkRectLayerKHR.EXTENT); }
     /** Unsafe version of {@link #layer}. */
-    public static int nlayer(long struct) { return memGetInt(struct + VkRectLayerKHR.LAYER); }
+    public static int nlayer(long struct) { return UNSAFE.getInt(null, struct + VkRectLayerKHR.LAYER); }
 
     /** Unsafe version of {@link #offset(VkOffset2D) offset}. */
     public static void noffset(long struct, VkOffset2D value) { memCopy(value.address(), struct + VkRectLayerKHR.OFFSET, VkOffset2D.SIZEOF); }
     /** Unsafe version of {@link #extent(VkExtent2D) extent}. */
     public static void nextent(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkRectLayerKHR.EXTENT, VkExtent2D.SIZEOF); }
     /** Unsafe version of {@link #layer(int) layer}. */
-    public static void nlayer(long struct, int value) { memPutInt(struct + VkRectLayerKHR.LAYER, value); }
+    public static void nlayer(long struct, int value) { UNSAFE.putInt(null, struct + VkRectLayerKHR.LAYER, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkRectLayerKHR} structs. */
     public static class Buffer extends StructBuffer<VkRectLayerKHR, Buffer> implements NativeResource {
+
+        private static final VkRectLayerKHR ELEMENT_FACTORY = VkRectLayerKHR.create(-1L);
 
         /**
          * Creates a new {@link VkRectLayerKHR.Buffer} instance backed by the specified container.
@@ -325,18 +325,8 @@ public class VkRectLayerKHR extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkRectLayerKHR newInstance(long address) {
-            return new VkRectLayerKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkRectLayerKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link VkOffset2D} view of the {@code offset} field. */

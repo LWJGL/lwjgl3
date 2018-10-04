@@ -104,10 +104,6 @@ public class NkDrawList extends Struct implements NativeResource {
         USERDATA = layout.offsetof(14);
     }
 
-    NkDrawList(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkDrawList} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -115,7 +111,7 @@ public class NkDrawList extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkDrawList(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -183,28 +179,29 @@ public class NkDrawList extends Struct implements NativeResource {
 
     /** Returns a new {@link NkDrawList} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkDrawList malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkDrawList.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkDrawList} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkDrawList calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkDrawList.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkDrawList} instance allocated with {@link BufferUtils}. */
     public static NkDrawList create() {
-        return new NkDrawList(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkDrawList.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkDrawList} instance for the specified memory address. */
     public static NkDrawList create(long address) {
-        return new NkDrawList(address, null);
+        return wrap(NkDrawList.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkDrawList createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkDrawList.class, address);
     }
 
     /**
@@ -213,7 +210,7 @@ public class NkDrawList extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkDrawList.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -222,7 +219,7 @@ public class NkDrawList extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkDrawList.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +228,8 @@ public class NkDrawList extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkDrawList.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -241,13 +239,13 @@ public class NkDrawList extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkDrawList.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkDrawList.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -268,7 +266,7 @@ public class NkDrawList extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkDrawList mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkDrawList.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -277,7 +275,7 @@ public class NkDrawList extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkDrawList callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkDrawList.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -305,7 +303,7 @@ public class NkDrawList extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkDrawList.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -315,7 +313,7 @@ public class NkDrawList extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkDrawList.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -337,21 +335,21 @@ public class NkDrawList extends Struct implements NativeResource {
     /** Unsafe version of {@link #elements}. */
     @Nullable public static NkBuffer nelements(long struct) { return NkBuffer.createSafe(memGetAddress(struct + NkDrawList.ELEMENTS)); }
     /** Unsafe version of {@link #element_count}. */
-    public static int nelement_count(long struct) { return memGetInt(struct + NkDrawList.ELEMENT_COUNT); }
+    public static int nelement_count(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.ELEMENT_COUNT); }
     /** Unsafe version of {@link #vertex_count}. */
-    public static int nvertex_count(long struct) { return memGetInt(struct + NkDrawList.VERTEX_COUNT); }
+    public static int nvertex_count(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.VERTEX_COUNT); }
     /** Unsafe version of {@link #cmd_count}. */
-    public static int ncmd_count(long struct) { return memGetInt(struct + NkDrawList.CMD_COUNT); }
+    public static int ncmd_count(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.CMD_COUNT); }
     /** Unsafe version of {@link #cmd_offset}. */
     public static long ncmd_offset(long struct) { return memGetAddress(struct + NkDrawList.CMD_OFFSET); }
     /** Unsafe version of {@link #path_count}. */
-    public static int npath_count(long struct) { return memGetInt(struct + NkDrawList.PATH_COUNT); }
+    public static int npath_count(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.PATH_COUNT); }
     /** Unsafe version of {@link #path_offset}. */
-    public static int npath_offset(long struct) { return memGetInt(struct + NkDrawList.PATH_OFFSET); }
+    public static int npath_offset(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.PATH_OFFSET); }
     /** Unsafe version of {@link #line_AA}. */
-    public static int nline_AA(long struct) { return memGetInt(struct + NkDrawList.LINE_AA); }
+    public static int nline_AA(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.LINE_AA); }
     /** Unsafe version of {@link #shape_AA}. */
-    public static int nshape_AA(long struct) { return memGetInt(struct + NkDrawList.SHAPE_AA); }
+    public static int nshape_AA(long struct) { return UNSAFE.getInt(null, struct + NkDrawList.SHAPE_AA); }
     /** Unsafe version of {@link #userdata}. */
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkDrawList.USERDATA); }
 
@@ -359,6 +357,8 @@ public class NkDrawList extends Struct implements NativeResource {
 
     /** An array of {@link NkDrawList} structs. */
     public static class Buffer extends StructBuffer<NkDrawList, Buffer> implements NativeResource {
+
+        private static final NkDrawList ELEMENT_FACTORY = NkDrawList.create(-1L);
 
         /**
          * Creates a new {@link NkDrawList.Buffer} instance backed by the specified container.
@@ -387,18 +387,8 @@ public class NkDrawList extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkDrawList newInstance(long address) {
-            return new NkDrawList(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkDrawList getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkRect} view of the {@code clip_rect} field. */

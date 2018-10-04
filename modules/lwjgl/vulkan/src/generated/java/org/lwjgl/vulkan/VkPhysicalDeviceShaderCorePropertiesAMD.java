@@ -132,10 +132,6 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct {
         VGPRALLOCATIONGRANULARITY = layout.offsetof(15);
     }
 
-    VkPhysicalDeviceShaderCorePropertiesAMD(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceShaderCorePropertiesAMD} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -143,7 +139,7 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceShaderCorePropertiesAMD(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -230,13 +226,13 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct {
 
     /** Returns a new {@link VkPhysicalDeviceShaderCorePropertiesAMD} instance for the specified memory address. */
     public static VkPhysicalDeviceShaderCorePropertiesAMD create(long address) {
-        return new VkPhysicalDeviceShaderCorePropertiesAMD(address, null);
+        return wrap(VkPhysicalDeviceShaderCorePropertiesAMD.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShaderCorePropertiesAMD createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceShaderCorePropertiesAMD.class, address);
     }
 
     /**
@@ -246,52 +242,52 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderCorePropertiesAMD.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShaderCorePropertiesAMD.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderCorePropertiesAMD.PNEXT); }
     /** Unsafe version of {@link #shaderEngineCount}. */
-    public static int nshaderEngineCount(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.SHADERENGINECOUNT); }
+    public static int nshaderEngineCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.SHADERENGINECOUNT); }
     /** Unsafe version of {@link #shaderArraysPerEngineCount}. */
-    public static int nshaderArraysPerEngineCount(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.SHADERARRAYSPERENGINECOUNT); }
+    public static int nshaderArraysPerEngineCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.SHADERARRAYSPERENGINECOUNT); }
     /** Unsafe version of {@link #computeUnitsPerShaderArray}. */
-    public static int ncomputeUnitsPerShaderArray(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.COMPUTEUNITSPERSHADERARRAY); }
+    public static int ncomputeUnitsPerShaderArray(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.COMPUTEUNITSPERSHADERARRAY); }
     /** Unsafe version of {@link #simdPerComputeUnit}. */
-    public static int nsimdPerComputeUnit(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.SIMDPERCOMPUTEUNIT); }
+    public static int nsimdPerComputeUnit(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.SIMDPERCOMPUTEUNIT); }
     /** Unsafe version of {@link #wavefrontsPerSimd}. */
-    public static int nwavefrontsPerSimd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.WAVEFRONTSPERSIMD); }
+    public static int nwavefrontsPerSimd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.WAVEFRONTSPERSIMD); }
     /** Unsafe version of {@link #wavefrontSize}. */
-    public static int nwavefrontSize(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.WAVEFRONTSIZE); }
+    public static int nwavefrontSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.WAVEFRONTSIZE); }
     /** Unsafe version of {@link #sgprsPerSimd}. */
-    public static int nsgprsPerSimd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.SGPRSPERSIMD); }
+    public static int nsgprsPerSimd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.SGPRSPERSIMD); }
     /** Unsafe version of {@link #minSgprAllocation}. */
-    public static int nminSgprAllocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.MINSGPRALLOCATION); }
+    public static int nminSgprAllocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.MINSGPRALLOCATION); }
     /** Unsafe version of {@link #maxSgprAllocation}. */
-    public static int nmaxSgprAllocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.MAXSGPRALLOCATION); }
+    public static int nmaxSgprAllocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.MAXSGPRALLOCATION); }
     /** Unsafe version of {@link #sgprAllocationGranularity}. */
-    public static int nsgprAllocationGranularity(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.SGPRALLOCATIONGRANULARITY); }
+    public static int nsgprAllocationGranularity(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.SGPRALLOCATIONGRANULARITY); }
     /** Unsafe version of {@link #vgprsPerSimd}. */
-    public static int nvgprsPerSimd(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.VGPRSPERSIMD); }
+    public static int nvgprsPerSimd(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.VGPRSPERSIMD); }
     /** Unsafe version of {@link #minVgprAllocation}. */
-    public static int nminVgprAllocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.MINVGPRALLOCATION); }
+    public static int nminVgprAllocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.MINVGPRALLOCATION); }
     /** Unsafe version of {@link #maxVgprAllocation}. */
-    public static int nmaxVgprAllocation(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.MAXVGPRALLOCATION); }
+    public static int nmaxVgprAllocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.MAXVGPRALLOCATION); }
     /** Unsafe version of {@link #vgprAllocationGranularity}. */
-    public static int nvgprAllocationGranularity(long struct) { return memGetInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.VGPRALLOCATIONGRANULARITY); }
+    public static int nvgprAllocationGranularity(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.VGPRALLOCATIONGRANULARITY); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShaderCorePropertiesAMD.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderCorePropertiesAMD.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderCorePropertiesAMD.PNEXT, value); }
 
@@ -299,6 +295,8 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct {
 
     /** An array of {@link VkPhysicalDeviceShaderCorePropertiesAMD} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceShaderCorePropertiesAMD, Buffer> {
+
+        private static final VkPhysicalDeviceShaderCorePropertiesAMD ELEMENT_FACTORY = VkPhysicalDeviceShaderCorePropertiesAMD.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceShaderCorePropertiesAMD.Buffer} instance backed by the specified container.
@@ -327,18 +325,8 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceShaderCorePropertiesAMD newInstance(long address) {
-            return new VkPhysicalDeviceShaderCorePropertiesAMD(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceShaderCorePropertiesAMD getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

@@ -57,10 +57,6 @@ public class VREventInputBindingLoad extends Struct {
         PATHCONTROLLERTYPE = layout.offsetof(3);
     }
 
-    VREventInputBindingLoad(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventInputBindingLoad} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -68,7 +64,7 @@ public class VREventInputBindingLoad extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventInputBindingLoad(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -91,13 +87,13 @@ public class VREventInputBindingLoad extends Struct {
 
     /** Returns a new {@link VREventInputBindingLoad} instance for the specified memory address. */
     public static VREventInputBindingLoad create(long address) {
-        return new VREventInputBindingLoad(address, null);
+        return wrap(VREventInputBindingLoad.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventInputBindingLoad createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventInputBindingLoad.class, address);
     }
 
     /**
@@ -107,30 +103,32 @@ public class VREventInputBindingLoad extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventInputBindingLoad.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventInputBindingLoad.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #ulAppContainer}. */
-    public static long nulAppContainer(long struct) { return memGetLong(struct + VREventInputBindingLoad.ULAPPCONTAINER); }
+    public static long nulAppContainer(long struct) { return UNSAFE.getLong(null, struct + VREventInputBindingLoad.ULAPPCONTAINER); }
     /** Unsafe version of {@link #pathMessage}. */
-    public static long npathMessage(long struct) { return memGetLong(struct + VREventInputBindingLoad.PATHMESSAGE); }
+    public static long npathMessage(long struct) { return UNSAFE.getLong(null, struct + VREventInputBindingLoad.PATHMESSAGE); }
     /** Unsafe version of {@link #pathUrl}. */
-    public static long npathUrl(long struct) { return memGetLong(struct + VREventInputBindingLoad.PATHURL); }
+    public static long npathUrl(long struct) { return UNSAFE.getLong(null, struct + VREventInputBindingLoad.PATHURL); }
     /** Unsafe version of {@link #pathControllerType}. */
-    public static long npathControllerType(long struct) { return memGetLong(struct + VREventInputBindingLoad.PATHCONTROLLERTYPE); }
+    public static long npathControllerType(long struct) { return UNSAFE.getLong(null, struct + VREventInputBindingLoad.PATHCONTROLLERTYPE); }
 
     // -----------------------------------
 
     /** An array of {@link VREventInputBindingLoad} structs. */
     public static class Buffer extends StructBuffer<VREventInputBindingLoad, Buffer> {
+
+        private static final VREventInputBindingLoad ELEMENT_FACTORY = VREventInputBindingLoad.create(-1L);
 
         /**
          * Creates a new {@link VREventInputBindingLoad.Buffer} instance backed by the specified container.
@@ -159,18 +157,8 @@ public class VREventInputBindingLoad extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventInputBindingLoad newInstance(long address) {
-            return new VREventInputBindingLoad(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventInputBindingLoad getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code ulAppContainer} field. */

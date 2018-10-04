@@ -58,10 +58,6 @@ public class BGFXCapsGPU extends Struct {
         DEVICEID = layout.offsetof(1);
     }
 
-    BGFXCapsGPU(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXCapsGPU} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -69,7 +65,7 @@ public class BGFXCapsGPU extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXCapsGPU(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -86,13 +82,13 @@ public class BGFXCapsGPU extends Struct {
 
     /** Returns a new {@link BGFXCapsGPU} instance for the specified memory address. */
     public static BGFXCapsGPU create(long address) {
-        return new BGFXCapsGPU(address, null);
+        return wrap(BGFXCapsGPU.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXCapsGPU createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXCapsGPU.class, address);
     }
 
     /**
@@ -102,26 +98,28 @@ public class BGFXCapsGPU extends Struct {
      * @param capacity the buffer capacity
      */
     public static BGFXCapsGPU.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXCapsGPU.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #vendorId}. */
-    public static short nvendorId(long struct) { return memGetShort(struct + BGFXCapsGPU.VENDORID); }
+    public static short nvendorId(long struct) { return UNSAFE.getShort(null, struct + BGFXCapsGPU.VENDORID); }
     /** Unsafe version of {@link #deviceId}. */
-    public static short ndeviceId(long struct) { return memGetShort(struct + BGFXCapsGPU.DEVICEID); }
+    public static short ndeviceId(long struct) { return UNSAFE.getShort(null, struct + BGFXCapsGPU.DEVICEID); }
 
     // -----------------------------------
 
     /** An array of {@link BGFXCapsGPU} structs. */
     public static class Buffer extends StructBuffer<BGFXCapsGPU, Buffer> {
+
+        private static final BGFXCapsGPU ELEMENT_FACTORY = BGFXCapsGPU.create(-1L);
 
         /**
          * Creates a new {@link BGFXCapsGPU.Buffer} instance backed by the specified container.
@@ -150,18 +148,8 @@ public class BGFXCapsGPU extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected BGFXCapsGPU newInstance(long address) {
-            return new BGFXCapsGPU(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected BGFXCapsGPU getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code vendorId} field. */

@@ -82,10 +82,6 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
         W = layout.offsetof(3);
     }
 
-    VkViewportSwizzleNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkViewportSwizzleNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -93,7 +89,7 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkViewportSwizzleNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -152,28 +148,29 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
 
     /** Returns a new {@link VkViewportSwizzleNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkViewportSwizzleNV malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkViewportSwizzleNV.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkViewportSwizzleNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkViewportSwizzleNV calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkViewportSwizzleNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkViewportSwizzleNV} instance allocated with {@link BufferUtils}. */
     public static VkViewportSwizzleNV create() {
-        return new VkViewportSwizzleNV(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkViewportSwizzleNV.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkViewportSwizzleNV} instance for the specified memory address. */
     public static VkViewportSwizzleNV create(long address) {
-        return new VkViewportSwizzleNV(address, null);
+        return wrap(VkViewportSwizzleNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkViewportSwizzleNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkViewportSwizzleNV.class, address);
     }
 
     /**
@@ -182,7 +179,7 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewportSwizzleNV.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -191,7 +188,7 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewportSwizzleNV.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -200,7 +197,8 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewportSwizzleNV.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -210,13 +208,13 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewportSwizzleNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkViewportSwizzleNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -237,7 +235,7 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkViewportSwizzleNV mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkViewportSwizzleNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -246,7 +244,7 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkViewportSwizzleNV callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkViewportSwizzleNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -274,7 +272,7 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewportSwizzleNV.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -284,33 +282,35 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewportSwizzleNV.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static int nx(long struct) { return memGetInt(struct + VkViewportSwizzleNV.X); }
+    public static int nx(long struct) { return UNSAFE.getInt(null, struct + VkViewportSwizzleNV.X); }
     /** Unsafe version of {@link #y}. */
-    public static int ny(long struct) { return memGetInt(struct + VkViewportSwizzleNV.Y); }
+    public static int ny(long struct) { return UNSAFE.getInt(null, struct + VkViewportSwizzleNV.Y); }
     /** Unsafe version of {@link #z}. */
-    public static int nz(long struct) { return memGetInt(struct + VkViewportSwizzleNV.Z); }
+    public static int nz(long struct) { return UNSAFE.getInt(null, struct + VkViewportSwizzleNV.Z); }
     /** Unsafe version of {@link #w}. */
-    public static int nw(long struct) { return memGetInt(struct + VkViewportSwizzleNV.W); }
+    public static int nw(long struct) { return UNSAFE.getInt(null, struct + VkViewportSwizzleNV.W); }
 
     /** Unsafe version of {@link #x(int) x}. */
-    public static void nx(long struct, int value) { memPutInt(struct + VkViewportSwizzleNV.X, value); }
+    public static void nx(long struct, int value) { UNSAFE.putInt(null, struct + VkViewportSwizzleNV.X, value); }
     /** Unsafe version of {@link #y(int) y}. */
-    public static void ny(long struct, int value) { memPutInt(struct + VkViewportSwizzleNV.Y, value); }
+    public static void ny(long struct, int value) { UNSAFE.putInt(null, struct + VkViewportSwizzleNV.Y, value); }
     /** Unsafe version of {@link #z(int) z}. */
-    public static void nz(long struct, int value) { memPutInt(struct + VkViewportSwizzleNV.Z, value); }
+    public static void nz(long struct, int value) { UNSAFE.putInt(null, struct + VkViewportSwizzleNV.Z, value); }
     /** Unsafe version of {@link #w(int) w}. */
-    public static void nw(long struct, int value) { memPutInt(struct + VkViewportSwizzleNV.W, value); }
+    public static void nw(long struct, int value) { UNSAFE.putInt(null, struct + VkViewportSwizzleNV.W, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkViewportSwizzleNV} structs. */
     public static class Buffer extends StructBuffer<VkViewportSwizzleNV, Buffer> implements NativeResource {
+
+        private static final VkViewportSwizzleNV ELEMENT_FACTORY = VkViewportSwizzleNV.create(-1L);
 
         /**
          * Creates a new {@link VkViewportSwizzleNV.Buffer} instance backed by the specified container.
@@ -339,18 +339,8 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkViewportSwizzleNV newInstance(long address) {
-            return new VkViewportSwizzleNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkViewportSwizzleNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x} field. */

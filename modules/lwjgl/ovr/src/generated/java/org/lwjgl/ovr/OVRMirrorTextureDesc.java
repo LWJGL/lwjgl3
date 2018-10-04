@@ -68,10 +68,6 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
         MISCFLAGS = layout.offsetof(3);
     }
 
-    OVRMirrorTextureDesc(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRMirrorTextureDesc} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -79,7 +75,7 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRMirrorTextureDesc(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -136,28 +132,29 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
 
     /** Returns a new {@link OVRMirrorTextureDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRMirrorTextureDesc malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRMirrorTextureDesc.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRMirrorTextureDesc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRMirrorTextureDesc calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRMirrorTextureDesc.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRMirrorTextureDesc} instance allocated with {@link BufferUtils}. */
     public static OVRMirrorTextureDesc create() {
-        return new OVRMirrorTextureDesc(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRMirrorTextureDesc.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRMirrorTextureDesc} instance for the specified memory address. */
     public static OVRMirrorTextureDesc create(long address) {
-        return new OVRMirrorTextureDesc(address, null);
+        return wrap(OVRMirrorTextureDesc.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRMirrorTextureDesc createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRMirrorTextureDesc.class, address);
     }
 
     /**
@@ -166,7 +163,7 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRMirrorTextureDesc.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -175,7 +172,7 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRMirrorTextureDesc.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -184,7 +181,8 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRMirrorTextureDesc.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -194,13 +192,13 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRMirrorTextureDesc.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRMirrorTextureDesc.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -221,7 +219,7 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRMirrorTextureDesc mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRMirrorTextureDesc.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -230,7 +228,7 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRMirrorTextureDesc callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRMirrorTextureDesc.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -258,7 +256,7 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRMirrorTextureDesc.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -268,33 +266,35 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRMirrorTextureDesc.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #Format}. */
-    public static int nFormat(long struct) { return memGetInt(struct + OVRMirrorTextureDesc.FORMAT); }
+    public static int nFormat(long struct) { return UNSAFE.getInt(null, struct + OVRMirrorTextureDesc.FORMAT); }
     /** Unsafe version of {@link #Width}. */
-    public static int nWidth(long struct) { return memGetInt(struct + OVRMirrorTextureDesc.WIDTH); }
+    public static int nWidth(long struct) { return UNSAFE.getInt(null, struct + OVRMirrorTextureDesc.WIDTH); }
     /** Unsafe version of {@link #Height}. */
-    public static int nHeight(long struct) { return memGetInt(struct + OVRMirrorTextureDesc.HEIGHT); }
+    public static int nHeight(long struct) { return UNSAFE.getInt(null, struct + OVRMirrorTextureDesc.HEIGHT); }
     /** Unsafe version of {@link #MiscFlags}. */
-    public static int nMiscFlags(long struct) { return memGetInt(struct + OVRMirrorTextureDesc.MISCFLAGS); }
+    public static int nMiscFlags(long struct) { return UNSAFE.getInt(null, struct + OVRMirrorTextureDesc.MISCFLAGS); }
 
     /** Unsafe version of {@link #Format(int) Format}. */
-    public static void nFormat(long struct, int value) { memPutInt(struct + OVRMirrorTextureDesc.FORMAT, value); }
+    public static void nFormat(long struct, int value) { UNSAFE.putInt(null, struct + OVRMirrorTextureDesc.FORMAT, value); }
     /** Unsafe version of {@link #Width(int) Width}. */
-    public static void nWidth(long struct, int value) { memPutInt(struct + OVRMirrorTextureDesc.WIDTH, value); }
+    public static void nWidth(long struct, int value) { UNSAFE.putInt(null, struct + OVRMirrorTextureDesc.WIDTH, value); }
     /** Unsafe version of {@link #Height(int) Height}. */
-    public static void nHeight(long struct, int value) { memPutInt(struct + OVRMirrorTextureDesc.HEIGHT, value); }
+    public static void nHeight(long struct, int value) { UNSAFE.putInt(null, struct + OVRMirrorTextureDesc.HEIGHT, value); }
     /** Unsafe version of {@link #MiscFlags(int) MiscFlags}. */
-    public static void nMiscFlags(long struct, int value) { memPutInt(struct + OVRMirrorTextureDesc.MISCFLAGS, value); }
+    public static void nMiscFlags(long struct, int value) { UNSAFE.putInt(null, struct + OVRMirrorTextureDesc.MISCFLAGS, value); }
 
     // -----------------------------------
 
     /** An array of {@link OVRMirrorTextureDesc} structs. */
     public static class Buffer extends StructBuffer<OVRMirrorTextureDesc, Buffer> implements NativeResource {
+
+        private static final OVRMirrorTextureDesc ELEMENT_FACTORY = OVRMirrorTextureDesc.create(-1L);
 
         /**
          * Creates a new {@link OVRMirrorTextureDesc.Buffer} instance backed by the specified container.
@@ -323,18 +323,8 @@ public class OVRMirrorTextureDesc extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRMirrorTextureDesc newInstance(long address) {
-            return new OVRMirrorTextureDesc(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRMirrorTextureDesc getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code Format} field. */

@@ -99,10 +99,6 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
         PLANEINDEX = layout.offsetof(3);
     }
 
-    VkDisplayPlaneInfo2KHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDisplayPlaneInfo2KHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -110,7 +106,7 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDisplayPlaneInfo2KHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -169,28 +165,29 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
 
     /** Returns a new {@link VkDisplayPlaneInfo2KHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDisplayPlaneInfo2KHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDisplayPlaneInfo2KHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDisplayPlaneInfo2KHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDisplayPlaneInfo2KHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDisplayPlaneInfo2KHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDisplayPlaneInfo2KHR} instance allocated with {@link BufferUtils}. */
     public static VkDisplayPlaneInfo2KHR create() {
-        return new VkDisplayPlaneInfo2KHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDisplayPlaneInfo2KHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDisplayPlaneInfo2KHR} instance for the specified memory address. */
     public static VkDisplayPlaneInfo2KHR create(long address) {
-        return new VkDisplayPlaneInfo2KHR(address, null);
+        return wrap(VkDisplayPlaneInfo2KHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDisplayPlaneInfo2KHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDisplayPlaneInfo2KHR.class, address);
     }
 
     /**
@@ -199,7 +196,7 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPlaneInfo2KHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -208,7 +205,7 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPlaneInfo2KHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -217,7 +214,8 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPlaneInfo2KHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -227,13 +225,13 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPlaneInfo2KHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDisplayPlaneInfo2KHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -254,7 +252,7 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDisplayPlaneInfo2KHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDisplayPlaneInfo2KHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -263,7 +261,7 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDisplayPlaneInfo2KHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDisplayPlaneInfo2KHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -291,7 +289,7 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPlaneInfo2KHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -301,33 +299,35 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPlaneInfo2KHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDisplayPlaneInfo2KHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDisplayPlaneInfo2KHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDisplayPlaneInfo2KHR.PNEXT); }
     /** Unsafe version of {@link #mode}. */
-    public static long nmode(long struct) { return memGetLong(struct + VkDisplayPlaneInfo2KHR.MODE); }
+    public static long nmode(long struct) { return UNSAFE.getLong(null, struct + VkDisplayPlaneInfo2KHR.MODE); }
     /** Unsafe version of {@link #planeIndex}. */
-    public static int nplaneIndex(long struct) { return memGetInt(struct + VkDisplayPlaneInfo2KHR.PLANEINDEX); }
+    public static int nplaneIndex(long struct) { return UNSAFE.getInt(null, struct + VkDisplayPlaneInfo2KHR.PLANEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDisplayPlaneInfo2KHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplayPlaneInfo2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDisplayPlaneInfo2KHR.PNEXT, value); }
     /** Unsafe version of {@link #mode(long) mode}. */
-    public static void nmode(long struct, long value) { memPutLong(struct + VkDisplayPlaneInfo2KHR.MODE, value); }
+    public static void nmode(long struct, long value) { UNSAFE.putLong(null, struct + VkDisplayPlaneInfo2KHR.MODE, value); }
     /** Unsafe version of {@link #planeIndex(int) planeIndex}. */
-    public static void nplaneIndex(long struct, int value) { memPutInt(struct + VkDisplayPlaneInfo2KHR.PLANEINDEX, value); }
+    public static void nplaneIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplayPlaneInfo2KHR.PLANEINDEX, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkDisplayPlaneInfo2KHR} structs. */
     public static class Buffer extends StructBuffer<VkDisplayPlaneInfo2KHR, Buffer> implements NativeResource {
+
+        private static final VkDisplayPlaneInfo2KHR ELEMENT_FACTORY = VkDisplayPlaneInfo2KHR.create(-1L);
 
         /**
          * Creates a new {@link VkDisplayPlaneInfo2KHR.Buffer} instance backed by the specified container.
@@ -356,18 +356,8 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDisplayPlaneInfo2KHR newInstance(long address) {
-            return new VkDisplayPlaneInfo2KHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDisplayPlaneInfo2KHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

@@ -82,10 +82,6 @@ public class VkComponentMapping extends Struct implements NativeResource {
         A = layout.offsetof(3);
     }
 
-    VkComponentMapping(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkComponentMapping} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -93,7 +89,7 @@ public class VkComponentMapping extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkComponentMapping(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -152,28 +148,29 @@ public class VkComponentMapping extends Struct implements NativeResource {
 
     /** Returns a new {@link VkComponentMapping} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkComponentMapping malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkComponentMapping.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkComponentMapping} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkComponentMapping calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkComponentMapping.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkComponentMapping} instance allocated with {@link BufferUtils}. */
     public static VkComponentMapping create() {
-        return new VkComponentMapping(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkComponentMapping.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkComponentMapping} instance for the specified memory address. */
     public static VkComponentMapping create(long address) {
-        return new VkComponentMapping(address, null);
+        return wrap(VkComponentMapping.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkComponentMapping createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkComponentMapping.class, address);
     }
 
     /**
@@ -182,7 +179,7 @@ public class VkComponentMapping extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkComponentMapping.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -191,7 +188,7 @@ public class VkComponentMapping extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkComponentMapping.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -200,7 +197,8 @@ public class VkComponentMapping extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkComponentMapping.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -210,13 +208,13 @@ public class VkComponentMapping extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkComponentMapping.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkComponentMapping.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -237,7 +235,7 @@ public class VkComponentMapping extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkComponentMapping mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkComponentMapping.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -246,7 +244,7 @@ public class VkComponentMapping extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkComponentMapping callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkComponentMapping.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -274,7 +272,7 @@ public class VkComponentMapping extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkComponentMapping.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -284,33 +282,35 @@ public class VkComponentMapping extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkComponentMapping.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #r}. */
-    public static int nr(long struct) { return memGetInt(struct + VkComponentMapping.R); }
+    public static int nr(long struct) { return UNSAFE.getInt(null, struct + VkComponentMapping.R); }
     /** Unsafe version of {@link #g}. */
-    public static int ng(long struct) { return memGetInt(struct + VkComponentMapping.G); }
+    public static int ng(long struct) { return UNSAFE.getInt(null, struct + VkComponentMapping.G); }
     /** Unsafe version of {@link #b}. */
-    public static int nb(long struct) { return memGetInt(struct + VkComponentMapping.B); }
+    public static int nb(long struct) { return UNSAFE.getInt(null, struct + VkComponentMapping.B); }
     /** Unsafe version of {@link #a}. */
-    public static int na(long struct) { return memGetInt(struct + VkComponentMapping.A); }
+    public static int na(long struct) { return UNSAFE.getInt(null, struct + VkComponentMapping.A); }
 
     /** Unsafe version of {@link #r(int) r}. */
-    public static void nr(long struct, int value) { memPutInt(struct + VkComponentMapping.R, value); }
+    public static void nr(long struct, int value) { UNSAFE.putInt(null, struct + VkComponentMapping.R, value); }
     /** Unsafe version of {@link #g(int) g}. */
-    public static void ng(long struct, int value) { memPutInt(struct + VkComponentMapping.G, value); }
+    public static void ng(long struct, int value) { UNSAFE.putInt(null, struct + VkComponentMapping.G, value); }
     /** Unsafe version of {@link #b(int) b}. */
-    public static void nb(long struct, int value) { memPutInt(struct + VkComponentMapping.B, value); }
+    public static void nb(long struct, int value) { UNSAFE.putInt(null, struct + VkComponentMapping.B, value); }
     /** Unsafe version of {@link #a(int) a}. */
-    public static void na(long struct, int value) { memPutInt(struct + VkComponentMapping.A, value); }
+    public static void na(long struct, int value) { UNSAFE.putInt(null, struct + VkComponentMapping.A, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkComponentMapping} structs. */
     public static class Buffer extends StructBuffer<VkComponentMapping, Buffer> implements NativeResource {
+
+        private static final VkComponentMapping ELEMENT_FACTORY = VkComponentMapping.create(-1L);
 
         /**
          * Creates a new {@link VkComponentMapping.Buffer} instance backed by the specified container.
@@ -339,18 +339,8 @@ public class VkComponentMapping extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkComponentMapping newInstance(long address) {
-            return new VkComponentMapping(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkComponentMapping getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code r} field. */

@@ -113,10 +113,6 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
         MEMORYOFFSET = layout.offsetof(4);
     }
 
-    VkBindImageMemoryInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkBindImageMemoryInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -124,7 +120,7 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkBindImageMemoryInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -190,28 +186,29 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link VkBindImageMemoryInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkBindImageMemoryInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkBindImageMemoryInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkBindImageMemoryInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkBindImageMemoryInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkBindImageMemoryInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkBindImageMemoryInfo} instance allocated with {@link BufferUtils}. */
     public static VkBindImageMemoryInfo create() {
-        return new VkBindImageMemoryInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkBindImageMemoryInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkBindImageMemoryInfo} instance for the specified memory address. */
     public static VkBindImageMemoryInfo create(long address) {
-        return new VkBindImageMemoryInfo(address, null);
+        return wrap(VkBindImageMemoryInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBindImageMemoryInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkBindImageMemoryInfo.class, address);
     }
 
     /**
@@ -220,7 +217,7 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -229,7 +226,7 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -238,7 +235,8 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -248,13 +246,13 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBindImageMemoryInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -275,7 +273,7 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkBindImageMemoryInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkBindImageMemoryInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -284,7 +282,7 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkBindImageMemoryInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkBindImageMemoryInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -312,7 +310,7 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -322,37 +320,39 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemoryInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkBindImageMemoryInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemoryInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindImageMemoryInfo.PNEXT); }
     /** Unsafe version of {@link #image}. */
-    public static long nimage(long struct) { return memGetLong(struct + VkBindImageMemoryInfo.IMAGE); }
+    public static long nimage(long struct) { return UNSAFE.getLong(null, struct + VkBindImageMemoryInfo.IMAGE); }
     /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return memGetLong(struct + VkBindImageMemoryInfo.MEMORY); }
+    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VkBindImageMemoryInfo.MEMORY); }
     /** Unsafe version of {@link #memoryOffset}. */
-    public static long nmemoryOffset(long struct) { return memGetLong(struct + VkBindImageMemoryInfo.MEMORYOFFSET); }
+    public static long nmemoryOffset(long struct) { return UNSAFE.getLong(null, struct + VkBindImageMemoryInfo.MEMORYOFFSET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkBindImageMemoryInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemoryInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindImageMemoryInfo.PNEXT, value); }
     /** Unsafe version of {@link #image(long) image}. */
-    public static void nimage(long struct, long value) { memPutLong(struct + VkBindImageMemoryInfo.IMAGE, value); }
+    public static void nimage(long struct, long value) { UNSAFE.putLong(null, struct + VkBindImageMemoryInfo.IMAGE, value); }
     /** Unsafe version of {@link #memory(long) memory}. */
-    public static void nmemory(long struct, long value) { memPutLong(struct + VkBindImageMemoryInfo.MEMORY, value); }
+    public static void nmemory(long struct, long value) { UNSAFE.putLong(null, struct + VkBindImageMemoryInfo.MEMORY, value); }
     /** Unsafe version of {@link #memoryOffset(long) memoryOffset}. */
-    public static void nmemoryOffset(long struct, long value) { memPutLong(struct + VkBindImageMemoryInfo.MEMORYOFFSET, value); }
+    public static void nmemoryOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBindImageMemoryInfo.MEMORYOFFSET, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkBindImageMemoryInfo} structs. */
     public static class Buffer extends StructBuffer<VkBindImageMemoryInfo, Buffer> implements NativeResource {
+
+        private static final VkBindImageMemoryInfo ELEMENT_FACTORY = VkBindImageMemoryInfo.create(-1L);
 
         /**
          * Creates a new {@link VkBindImageMemoryInfo.Buffer} instance backed by the specified container.
@@ -381,18 +381,8 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkBindImageMemoryInfo newInstance(long address) {
-            return new VkBindImageMemoryInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkBindImageMemoryInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

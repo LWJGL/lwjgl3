@@ -63,10 +63,6 @@ public class BGFXMemory extends Struct implements NativeResource {
         SIZE = layout.offsetof(1);
     }
 
-    BGFXMemory(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXMemory} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -74,7 +70,7 @@ public class BGFXMemory extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXMemory(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -106,28 +102,29 @@ public class BGFXMemory extends Struct implements NativeResource {
 
     /** Returns a new {@link BGFXMemory} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXMemory malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(BGFXMemory.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link BGFXMemory} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXMemory calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(BGFXMemory.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link BGFXMemory} instance allocated with {@link BufferUtils}. */
     public static BGFXMemory create() {
-        return new BGFXMemory(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(BGFXMemory.class, memAddress(container), container);
     }
 
     /** Returns a new {@link BGFXMemory} instance for the specified memory address. */
     public static BGFXMemory create(long address) {
-        return new BGFXMemory(address, null);
+        return wrap(BGFXMemory.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXMemory createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXMemory.class, address);
     }
 
     /**
@@ -136,7 +133,7 @@ public class BGFXMemory extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXMemory.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -145,7 +142,7 @@ public class BGFXMemory extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXMemory.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -154,7 +151,8 @@ public class BGFXMemory extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXMemory.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -164,13 +162,13 @@ public class BGFXMemory extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXMemory.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXMemory.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -191,7 +189,7 @@ public class BGFXMemory extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXMemory mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(BGFXMemory.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -200,7 +198,7 @@ public class BGFXMemory extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXMemory callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(BGFXMemory.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -228,7 +226,7 @@ public class BGFXMemory extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXMemory.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -238,7 +236,7 @@ public class BGFXMemory extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXMemory.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -246,12 +244,12 @@ public class BGFXMemory extends Struct implements NativeResource {
     /** Unsafe version of {@link #data() data}. */
     public static ByteBuffer ndata(long struct) { return memByteBuffer(memGetAddress(struct + BGFXMemory.DATA), nsize(struct)); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return memGetInt(struct + BGFXMemory.SIZE); }
+    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + BGFXMemory.SIZE); }
 
     /** Unsafe version of {@link #data(ByteBuffer) data}. */
     public static void ndata(long struct, ByteBuffer value) { memPutAddress(struct + BGFXMemory.DATA, memAddress(value)); nsize(struct, value.remaining()); }
     /** Sets the specified value to the {@code size} field of the specified {@code struct}. */
-    public static void nsize(long struct, int value) { memPutInt(struct + BGFXMemory.SIZE, value); }
+    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + BGFXMemory.SIZE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -278,6 +276,8 @@ public class BGFXMemory extends Struct implements NativeResource {
 
     /** An array of {@link BGFXMemory} structs. */
     public static class Buffer extends StructBuffer<BGFXMemory, Buffer> implements NativeResource {
+
+        private static final BGFXMemory ELEMENT_FACTORY = BGFXMemory.create(-1L);
 
         /**
          * Creates a new {@link BGFXMemory.Buffer} instance backed by the specified container.
@@ -306,18 +306,8 @@ public class BGFXMemory extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected BGFXMemory newInstance(long address) {
-            return new BGFXMemory(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected BGFXMemory getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */

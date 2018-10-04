@@ -79,10 +79,6 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
         SHADINGRATECOARSESAMPLEORDER = layout.offsetof(3);
     }
 
-    VkPhysicalDeviceShadingRateImageFeaturesNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -90,7 +86,7 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceShadingRateImageFeaturesNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -149,28 +145,29 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
 
     /** Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceShadingRateImageFeaturesNV.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceShadingRateImageFeaturesNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV create() {
-        return new VkPhysicalDeviceShadingRateImageFeaturesNV(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceShadingRateImageFeaturesNV.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV create(long address) {
-        return new VkPhysicalDeviceShadingRateImageFeaturesNV(address, null);
+        return wrap(VkPhysicalDeviceShadingRateImageFeaturesNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShadingRateImageFeaturesNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceShadingRateImageFeaturesNV.class, address);
     }
 
     /**
@@ -179,7 +176,7 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -188,7 +185,7 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -197,7 +194,8 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -207,13 +205,13 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -234,7 +232,7 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceShadingRateImageFeaturesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -243,7 +241,7 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceShadingRateImageFeaturesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -271,7 +269,7 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -281,33 +279,35 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShadingRateImageFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShadingRateImageFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShadingRateImageFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #shadingRateImage}. */
-    public static int nshadingRateImage(long struct) { return memGetInt(struct + VkPhysicalDeviceShadingRateImageFeaturesNV.SHADINGRATEIMAGE); }
+    public static int nshadingRateImage(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShadingRateImageFeaturesNV.SHADINGRATEIMAGE); }
     /** Unsafe version of {@link #shadingRateCoarseSampleOrder}. */
-    public static int nshadingRateCoarseSampleOrder(long struct) { return memGetInt(struct + VkPhysicalDeviceShadingRateImageFeaturesNV.SHADINGRATECOARSESAMPLEORDER); }
+    public static int nshadingRateCoarseSampleOrder(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShadingRateImageFeaturesNV.SHADINGRATECOARSESAMPLEORDER); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShadingRateImageFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShadingRateImageFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShadingRateImageFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #shadingRateImage(boolean) shadingRateImage}. */
-    public static void nshadingRateImage(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShadingRateImageFeaturesNV.SHADINGRATEIMAGE, value); }
+    public static void nshadingRateImage(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShadingRateImageFeaturesNV.SHADINGRATEIMAGE, value); }
     /** Unsafe version of {@link #shadingRateCoarseSampleOrder(boolean) shadingRateCoarseSampleOrder}. */
-    public static void nshadingRateCoarseSampleOrder(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShadingRateImageFeaturesNV.SHADINGRATECOARSESAMPLEORDER, value); }
+    public static void nshadingRateCoarseSampleOrder(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShadingRateImageFeaturesNV.SHADINGRATECOARSESAMPLEORDER, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceShadingRateImageFeaturesNV} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceShadingRateImageFeaturesNV, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceShadingRateImageFeaturesNV ELEMENT_FACTORY = VkPhysicalDeviceShadingRateImageFeaturesNV.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer} instance backed by the specified container.
@@ -336,18 +336,8 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceShadingRateImageFeaturesNV newInstance(long address) {
-            return new VkPhysicalDeviceShadingRateImageFeaturesNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceShadingRateImageFeaturesNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

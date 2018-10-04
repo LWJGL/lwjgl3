@@ -65,10 +65,6 @@ public class EXRChannelInfo extends Struct implements NativeResource {
         P_LINEAR = layout.offsetof(4);
     }
 
-    EXRChannelInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link EXRChannelInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -76,7 +72,7 @@ public class EXRChannelInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public EXRChannelInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -142,28 +138,29 @@ public class EXRChannelInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link EXRChannelInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static EXRChannelInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(EXRChannelInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link EXRChannelInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static EXRChannelInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(EXRChannelInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link EXRChannelInfo} instance allocated with {@link BufferUtils}. */
     public static EXRChannelInfo create() {
-        return new EXRChannelInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(EXRChannelInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link EXRChannelInfo} instance for the specified memory address. */
     public static EXRChannelInfo create(long address) {
-        return new EXRChannelInfo(address, null);
+        return wrap(EXRChannelInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static EXRChannelInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(EXRChannelInfo.class, address);
     }
 
     /**
@@ -172,7 +169,7 @@ public class EXRChannelInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRChannelInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -181,7 +178,7 @@ public class EXRChannelInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRChannelInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -190,7 +187,8 @@ public class EXRChannelInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRChannelInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -200,13 +198,13 @@ public class EXRChannelInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRChannelInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static EXRChannelInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -227,7 +225,7 @@ public class EXRChannelInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static EXRChannelInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(EXRChannelInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -236,7 +234,7 @@ public class EXRChannelInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static EXRChannelInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(EXRChannelInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -264,7 +262,7 @@ public class EXRChannelInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRChannelInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -274,7 +272,7 @@ public class EXRChannelInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRChannelInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -284,13 +282,13 @@ public class EXRChannelInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #nameString}. */
     public static String nnameString(long struct) { return memASCII(struct + EXRChannelInfo.NAME); }
     /** Unsafe version of {@link #pixel_type}. */
-    public static int npixel_type(long struct) { return memGetInt(struct + EXRChannelInfo.PIXEL_TYPE); }
+    public static int npixel_type(long struct) { return UNSAFE.getInt(null, struct + EXRChannelInfo.PIXEL_TYPE); }
     /** Unsafe version of {@link #x_sampling}. */
-    public static int nx_sampling(long struct) { return memGetInt(struct + EXRChannelInfo.X_SAMPLING); }
+    public static int nx_sampling(long struct) { return UNSAFE.getInt(null, struct + EXRChannelInfo.X_SAMPLING); }
     /** Unsafe version of {@link #y_sampling}. */
-    public static int ny_sampling(long struct) { return memGetInt(struct + EXRChannelInfo.Y_SAMPLING); }
+    public static int ny_sampling(long struct) { return UNSAFE.getInt(null, struct + EXRChannelInfo.Y_SAMPLING); }
     /** Unsafe version of {@link #p_linear}. */
-    public static byte np_linear(long struct) { return memGetByte(struct + EXRChannelInfo.P_LINEAR); }
+    public static byte np_linear(long struct) { return UNSAFE.getByte(null, struct + EXRChannelInfo.P_LINEAR); }
 
     /** Unsafe version of {@link #name(ByteBuffer) name}. */
     public static void nname(long struct, ByteBuffer value) {
@@ -301,18 +299,20 @@ public class EXRChannelInfo extends Struct implements NativeResource {
         memCopy(memAddress(value), struct + EXRChannelInfo.NAME, value.remaining());
     }
     /** Unsafe version of {@link #pixel_type(int) pixel_type}. */
-    public static void npixel_type(long struct, int value) { memPutInt(struct + EXRChannelInfo.PIXEL_TYPE, value); }
+    public static void npixel_type(long struct, int value) { UNSAFE.putInt(null, struct + EXRChannelInfo.PIXEL_TYPE, value); }
     /** Unsafe version of {@link #x_sampling(int) x_sampling}. */
-    public static void nx_sampling(long struct, int value) { memPutInt(struct + EXRChannelInfo.X_SAMPLING, value); }
+    public static void nx_sampling(long struct, int value) { UNSAFE.putInt(null, struct + EXRChannelInfo.X_SAMPLING, value); }
     /** Unsafe version of {@link #y_sampling(int) y_sampling}. */
-    public static void ny_sampling(long struct, int value) { memPutInt(struct + EXRChannelInfo.Y_SAMPLING, value); }
+    public static void ny_sampling(long struct, int value) { UNSAFE.putInt(null, struct + EXRChannelInfo.Y_SAMPLING, value); }
     /** Unsafe version of {@link #p_linear(byte) p_linear}. */
-    public static void np_linear(long struct, byte value) { memPutByte(struct + EXRChannelInfo.P_LINEAR, value); }
+    public static void np_linear(long struct, byte value) { UNSAFE.putByte(null, struct + EXRChannelInfo.P_LINEAR, value); }
 
     // -----------------------------------
 
     /** An array of {@link EXRChannelInfo} structs. */
     public static class Buffer extends StructBuffer<EXRChannelInfo, Buffer> implements NativeResource {
+
+        private static final EXRChannelInfo ELEMENT_FACTORY = EXRChannelInfo.create(-1L);
 
         /**
          * Creates a new {@link EXRChannelInfo.Buffer} instance backed by the specified container.
@@ -341,18 +341,8 @@ public class EXRChannelInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected EXRChannelInfo newInstance(long address) {
-            return new EXRChannelInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected EXRChannelInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link ByteBuffer} view of the {@code name} field. */

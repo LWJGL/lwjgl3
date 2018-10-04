@@ -79,10 +79,6 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
         SAMPLELOCATIONSINFO = layout.offsetof(1);
     }
 
-    VkSubpassSampleLocationsEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSubpassSampleLocationsEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -90,7 +86,7 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSubpassSampleLocationsEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -136,28 +132,29 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
 
     /** Returns a new {@link VkSubpassSampleLocationsEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSubpassSampleLocationsEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkSubpassSampleLocationsEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkSubpassSampleLocationsEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSubpassSampleLocationsEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkSubpassSampleLocationsEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkSubpassSampleLocationsEXT} instance allocated with {@link BufferUtils}. */
     public static VkSubpassSampleLocationsEXT create() {
-        return new VkSubpassSampleLocationsEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSubpassSampleLocationsEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkSubpassSampleLocationsEXT} instance for the specified memory address. */
     public static VkSubpassSampleLocationsEXT create(long address) {
-        return new VkSubpassSampleLocationsEXT(address, null);
+        return wrap(VkSubpassSampleLocationsEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSubpassSampleLocationsEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSubpassSampleLocationsEXT.class, address);
     }
 
     /**
@@ -166,7 +163,7 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkSubpassSampleLocationsEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -175,7 +172,7 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkSubpassSampleLocationsEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -184,7 +181,8 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkSubpassSampleLocationsEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -194,13 +192,13 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkSubpassSampleLocationsEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSubpassSampleLocationsEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -221,7 +219,7 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkSubpassSampleLocationsEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkSubpassSampleLocationsEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -230,7 +228,7 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkSubpassSampleLocationsEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkSubpassSampleLocationsEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -258,7 +256,7 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkSubpassSampleLocationsEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -268,18 +266,18 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkSubpassSampleLocationsEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #subpassIndex}. */
-    public static int nsubpassIndex(long struct) { return memGetInt(struct + VkSubpassSampleLocationsEXT.SUBPASSINDEX); }
+    public static int nsubpassIndex(long struct) { return UNSAFE.getInt(null, struct + VkSubpassSampleLocationsEXT.SUBPASSINDEX); }
     /** Unsafe version of {@link #sampleLocationsInfo}. */
     public static VkSampleLocationsInfoEXT nsampleLocationsInfo(long struct) { return VkSampleLocationsInfoEXT.create(struct + VkSubpassSampleLocationsEXT.SAMPLELOCATIONSINFO); }
 
     /** Unsafe version of {@link #subpassIndex(int) subpassIndex}. */
-    public static void nsubpassIndex(long struct, int value) { memPutInt(struct + VkSubpassSampleLocationsEXT.SUBPASSINDEX, value); }
+    public static void nsubpassIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassSampleLocationsEXT.SUBPASSINDEX, value); }
     /** Unsafe version of {@link #sampleLocationsInfo(VkSampleLocationsInfoEXT) sampleLocationsInfo}. */
     public static void nsampleLocationsInfo(long struct, VkSampleLocationsInfoEXT value) { memCopy(value.address(), struct + VkSubpassSampleLocationsEXT.SAMPLELOCATIONSINFO, VkSampleLocationsInfoEXT.SIZEOF); }
 
@@ -309,6 +307,8 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
     /** An array of {@link VkSubpassSampleLocationsEXT} structs. */
     public static class Buffer extends StructBuffer<VkSubpassSampleLocationsEXT, Buffer> implements NativeResource {
 
+        private static final VkSubpassSampleLocationsEXT ELEMENT_FACTORY = VkSubpassSampleLocationsEXT.create(-1L);
+
         /**
          * Creates a new {@link VkSubpassSampleLocationsEXT.Buffer} instance backed by the specified container.
          *
@@ -336,18 +336,8 @@ public class VkSubpassSampleLocationsEXT extends Struct implements NativeResourc
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSubpassSampleLocationsEXT newInstance(long address) {
-            return new VkSubpassSampleLocationsEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSubpassSampleLocationsEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code subpassIndex} field. */

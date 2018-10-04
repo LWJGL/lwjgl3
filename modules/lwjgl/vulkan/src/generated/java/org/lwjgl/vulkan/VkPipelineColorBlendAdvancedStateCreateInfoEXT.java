@@ -93,10 +93,6 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
         BLENDOVERLAP = layout.offsetof(4);
     }
 
-    VkPipelineColorBlendAdvancedStateCreateInfoEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -104,7 +100,7 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineColorBlendAdvancedStateCreateInfoEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -170,28 +166,29 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
 
     /** Returns a new {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPipelineColorBlendAdvancedStateCreateInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPipelineColorBlendAdvancedStateCreateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT create() {
-        return new VkPipelineColorBlendAdvancedStateCreateInfoEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineColorBlendAdvancedStateCreateInfoEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT} instance for the specified memory address. */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT create(long address) {
-        return new VkPipelineColorBlendAdvancedStateCreateInfoEXT(address, null);
+        return wrap(VkPipelineColorBlendAdvancedStateCreateInfoEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPipelineColorBlendAdvancedStateCreateInfoEXT.class, address);
     }
 
     /**
@@ -200,7 +197,7 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -209,7 +206,7 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -218,7 +215,8 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -228,13 +226,13 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -255,7 +253,7 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
      * @param stack the stack from which to allocate
      */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPipelineColorBlendAdvancedStateCreateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -264,7 +262,7 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
      * @param stack the stack from which to allocate
      */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPipelineColorBlendAdvancedStateCreateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -292,7 +290,7 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -302,37 +300,39 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #srcPremultiplied}. */
-    public static int nsrcPremultiplied(long struct) { return memGetInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.SRCPREMULTIPLIED); }
+    public static int nsrcPremultiplied(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.SRCPREMULTIPLIED); }
     /** Unsafe version of {@link #dstPremultiplied}. */
-    public static int ndstPremultiplied(long struct) { return memGetInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.DSTPREMULTIPLIED); }
+    public static int ndstPremultiplied(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.DSTPREMULTIPLIED); }
     /** Unsafe version of {@link #blendOverlap}. */
-    public static int nblendOverlap(long struct) { return memGetInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.BLENDOVERLAP); }
+    public static int nblendOverlap(long struct) { return UNSAFE.getInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.BLENDOVERLAP); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #srcPremultiplied(boolean) srcPremultiplied}. */
-    public static void nsrcPremultiplied(long struct, int value) { memPutInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.SRCPREMULTIPLIED, value); }
+    public static void nsrcPremultiplied(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.SRCPREMULTIPLIED, value); }
     /** Unsafe version of {@link #dstPremultiplied(boolean) dstPremultiplied}. */
-    public static void ndstPremultiplied(long struct, int value) { memPutInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.DSTPREMULTIPLIED, value); }
+    public static void ndstPremultiplied(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.DSTPREMULTIPLIED, value); }
     /** Unsafe version of {@link #blendOverlap(int) blendOverlap}. */
-    public static void nblendOverlap(long struct, int value) { memPutInt(struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.BLENDOVERLAP, value); }
+    public static void nblendOverlap(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineColorBlendAdvancedStateCreateInfoEXT.BLENDOVERLAP, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT} structs. */
     public static class Buffer extends StructBuffer<VkPipelineColorBlendAdvancedStateCreateInfoEXT, Buffer> implements NativeResource {
+
+        private static final VkPipelineColorBlendAdvancedStateCreateInfoEXT ELEMENT_FACTORY = VkPipelineColorBlendAdvancedStateCreateInfoEXT.create(-1L);
 
         /**
          * Creates a new {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer} instance backed by the specified container.
@@ -361,18 +361,8 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPipelineColorBlendAdvancedStateCreateInfoEXT newInstance(long address) {
-            return new VkPipelineColorBlendAdvancedStateCreateInfoEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPipelineColorBlendAdvancedStateCreateInfoEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

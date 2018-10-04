@@ -68,10 +68,6 @@ public class VREventHapticVibration extends Struct {
         FAMPLITUDE = layout.offsetof(4);
     }
 
-    VREventHapticVibration(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventHapticVibration} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -79,7 +75,7 @@ public class VREventHapticVibration extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventHapticVibration(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -102,13 +98,13 @@ public class VREventHapticVibration extends Struct {
 
     /** Returns a new {@link VREventHapticVibration} instance for the specified memory address. */
     public static VREventHapticVibration create(long address) {
-        return new VREventHapticVibration(address, null);
+        return wrap(VREventHapticVibration.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventHapticVibration createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventHapticVibration.class, address);
     }
 
     /**
@@ -118,32 +114,34 @@ public class VREventHapticVibration extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventHapticVibration.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventHapticVibration.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #containerHandle}. */
-    public static long ncontainerHandle(long struct) { return memGetLong(struct + VREventHapticVibration.CONTAINERHANDLE); }
+    public static long ncontainerHandle(long struct) { return UNSAFE.getLong(null, struct + VREventHapticVibration.CONTAINERHANDLE); }
     /** Unsafe version of {@link #componentHandle}. */
-    public static long ncomponentHandle(long struct) { return memGetLong(struct + VREventHapticVibration.COMPONENTHANDLE); }
+    public static long ncomponentHandle(long struct) { return UNSAFE.getLong(null, struct + VREventHapticVibration.COMPONENTHANDLE); }
     /** Unsafe version of {@link #fDurationSeconds}. */
-    public static float nfDurationSeconds(long struct) { return memGetFloat(struct + VREventHapticVibration.FDURATIONSECONDS); }
+    public static float nfDurationSeconds(long struct) { return UNSAFE.getFloat(null, struct + VREventHapticVibration.FDURATIONSECONDS); }
     /** Unsafe version of {@link #fFrequency}. */
-    public static float nfFrequency(long struct) { return memGetFloat(struct + VREventHapticVibration.FFREQUENCY); }
+    public static float nfFrequency(long struct) { return UNSAFE.getFloat(null, struct + VREventHapticVibration.FFREQUENCY); }
     /** Unsafe version of {@link #fAmplitude}. */
-    public static float nfAmplitude(long struct) { return memGetFloat(struct + VREventHapticVibration.FAMPLITUDE); }
+    public static float nfAmplitude(long struct) { return UNSAFE.getFloat(null, struct + VREventHapticVibration.FAMPLITUDE); }
 
     // -----------------------------------
 
     /** An array of {@link VREventHapticVibration} structs. */
     public static class Buffer extends StructBuffer<VREventHapticVibration, Buffer> {
+
+        private static final VREventHapticVibration ELEMENT_FACTORY = VREventHapticVibration.create(-1L);
 
         /**
          * Creates a new {@link VREventHapticVibration.Buffer} instance backed by the specified container.
@@ -172,18 +170,8 @@ public class VREventHapticVibration extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventHapticVibration newInstance(long address) {
-            return new VREventHapticVibration(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventHapticVibration getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code containerHandle} field. */

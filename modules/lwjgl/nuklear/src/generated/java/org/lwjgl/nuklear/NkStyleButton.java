@@ -111,10 +111,6 @@ public class NkStyleButton extends Struct implements NativeResource {
         DRAW_END = layout.offsetof(16);
     }
 
-    NkStyleButton(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkStyleButton} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -122,7 +118,7 @@ public class NkStyleButton extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkStyleButton(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -296,28 +292,29 @@ public class NkStyleButton extends Struct implements NativeResource {
 
     /** Returns a new {@link NkStyleButton} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkStyleButton malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkStyleButton.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkStyleButton} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkStyleButton calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkStyleButton.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkStyleButton} instance allocated with {@link BufferUtils}. */
     public static NkStyleButton create() {
-        return new NkStyleButton(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkStyleButton.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkStyleButton} instance for the specified memory address. */
     public static NkStyleButton create(long address) {
-        return new NkStyleButton(address, null);
+        return wrap(NkStyleButton.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleButton createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkStyleButton.class, address);
     }
 
     /**
@@ -326,7 +323,7 @@ public class NkStyleButton extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleButton.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -335,7 +332,7 @@ public class NkStyleButton extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleButton.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -344,7 +341,8 @@ public class NkStyleButton extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleButton.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -354,13 +352,13 @@ public class NkStyleButton extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleButton.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleButton.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -381,7 +379,7 @@ public class NkStyleButton extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleButton mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkStyleButton.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -390,7 +388,7 @@ public class NkStyleButton extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleButton callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkStyleButton.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -418,7 +416,7 @@ public class NkStyleButton extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleButton.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -428,7 +426,7 @@ public class NkStyleButton extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleButton.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -450,11 +448,11 @@ public class NkStyleButton extends Struct implements NativeResource {
     /** Unsafe version of {@link #text_active}. */
     public static NkColor ntext_active(long struct) { return NkColor.create(struct + NkStyleButton.TEXT_ACTIVE); }
     /** Unsafe version of {@link #text_alignment}. */
-    public static int ntext_alignment(long struct) { return memGetInt(struct + NkStyleButton.TEXT_ALIGNMENT); }
+    public static int ntext_alignment(long struct) { return UNSAFE.getInt(null, struct + NkStyleButton.TEXT_ALIGNMENT); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return memGetFloat(struct + NkStyleButton.BORDER); }
+    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkStyleButton.BORDER); }
     /** Unsafe version of {@link #rounding}. */
-    public static float nrounding(long struct) { return memGetFloat(struct + NkStyleButton.ROUNDING); }
+    public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleButton.ROUNDING); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleButton.PADDING); }
     /** Unsafe version of {@link #image_padding}. */
@@ -485,11 +483,11 @@ public class NkStyleButton extends Struct implements NativeResource {
     /** Unsafe version of {@link #text_active(NkColor) text_active}. */
     public static void ntext_active(long struct, NkColor value) { memCopy(value.address(), struct + NkStyleButton.TEXT_ACTIVE, NkColor.SIZEOF); }
     /** Unsafe version of {@link #text_alignment(int) text_alignment}. */
-    public static void ntext_alignment(long struct, int value) { memPutInt(struct + NkStyleButton.TEXT_ALIGNMENT, value); }
+    public static void ntext_alignment(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleButton.TEXT_ALIGNMENT, value); }
     /** Unsafe version of {@link #border(float) border}. */
-    public static void nborder(long struct, float value) { memPutFloat(struct + NkStyleButton.BORDER, value); }
+    public static void nborder(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleButton.BORDER, value); }
     /** Unsafe version of {@link #rounding(float) rounding}. */
-    public static void nrounding(long struct, float value) { memPutFloat(struct + NkStyleButton.ROUNDING, value); }
+    public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleButton.ROUNDING, value); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleButton.PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #image_padding(NkVec2) image_padding}. */
@@ -507,6 +505,8 @@ public class NkStyleButton extends Struct implements NativeResource {
 
     /** An array of {@link NkStyleButton} structs. */
     public static class Buffer extends StructBuffer<NkStyleButton, Buffer> implements NativeResource {
+
+        private static final NkStyleButton ELEMENT_FACTORY = NkStyleButton.create(-1L);
 
         /**
          * Creates a new {@link NkStyleButton.Buffer} instance backed by the specified container.
@@ -535,18 +535,8 @@ public class NkStyleButton extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkStyleButton newInstance(long address) {
-            return new NkStyleButton(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkStyleButton getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkStyleItem} view of the {@code normal} field. */

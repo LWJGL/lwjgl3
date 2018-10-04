@@ -174,10 +174,6 @@ public class SQLPERF extends Struct implements NativeResource {
         MSNETWORKSERVERTIME = layout.offsetof(32);
     }
 
-    SQLPERF(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link SQLPERF} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -185,7 +181,7 @@ public class SQLPERF extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public SQLPERF(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -447,28 +443,29 @@ public class SQLPERF extends Struct implements NativeResource {
 
     /** Returns a new {@link SQLPERF} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static SQLPERF malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(SQLPERF.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link SQLPERF} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static SQLPERF calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(SQLPERF.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link SQLPERF} instance allocated with {@link BufferUtils}. */
     public static SQLPERF create() {
-        return new SQLPERF(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(SQLPERF.class, memAddress(container), container);
     }
 
     /** Returns a new {@link SQLPERF} instance for the specified memory address. */
     public static SQLPERF create(long address) {
-        return new SQLPERF(address, null);
+        return wrap(SQLPERF.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static SQLPERF createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(SQLPERF.class, address);
     }
 
     /**
@@ -477,7 +474,7 @@ public class SQLPERF extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQLPERF.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -486,7 +483,7 @@ public class SQLPERF extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQLPERF.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -495,7 +492,8 @@ public class SQLPERF extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQLPERF.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -505,13 +503,13 @@ public class SQLPERF extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQLPERF.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static SQLPERF.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -532,7 +530,7 @@ public class SQLPERF extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static SQLPERF mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(SQLPERF.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -541,7 +539,7 @@ public class SQLPERF extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static SQLPERF callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(SQLPERF.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -569,7 +567,7 @@ public class SQLPERF extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQLPERF.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -579,149 +577,151 @@ public class SQLPERF extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQLPERF.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #TimerResolution}. */
-    public static int nTimerResolution(long struct) { return memGetInt(struct + SQLPERF.TIMERRESOLUTION); }
+    public static int nTimerResolution(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.TIMERRESOLUTION); }
     /** Unsafe version of {@link #SQLidu}. */
-    public static int nSQLidu(long struct) { return memGetInt(struct + SQLPERF.SQLIDU); }
+    public static int nSQLidu(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SQLIDU); }
     /** Unsafe version of {@link #SQLiduRows}. */
-    public static int nSQLiduRows(long struct) { return memGetInt(struct + SQLPERF.SQLIDUROWS); }
+    public static int nSQLiduRows(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SQLIDUROWS); }
     /** Unsafe version of {@link #SQLSelects}. */
-    public static int nSQLSelects(long struct) { return memGetInt(struct + SQLPERF.SQLSELECTS); }
+    public static int nSQLSelects(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SQLSELECTS); }
     /** Unsafe version of {@link #SQLSelectRows}. */
-    public static int nSQLSelectRows(long struct) { return memGetInt(struct + SQLPERF.SQLSELECTROWS); }
+    public static int nSQLSelectRows(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SQLSELECTROWS); }
     /** Unsafe version of {@link #Transactions}. */
-    public static int nTransactions(long struct) { return memGetInt(struct + SQLPERF.TRANSACTIONS); }
+    public static int nTransactions(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.TRANSACTIONS); }
     /** Unsafe version of {@link #SQLPrepares}. */
-    public static int nSQLPrepares(long struct) { return memGetInt(struct + SQLPERF.SQLPREPARES); }
+    public static int nSQLPrepares(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SQLPREPARES); }
     /** Unsafe version of {@link #ExecDirects}. */
-    public static int nExecDirects(long struct) { return memGetInt(struct + SQLPERF.EXECDIRECTS); }
+    public static int nExecDirects(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.EXECDIRECTS); }
     /** Unsafe version of {@link #SQLExecutes}. */
-    public static int nSQLExecutes(long struct) { return memGetInt(struct + SQLPERF.SQLEXECUTES); }
+    public static int nSQLExecutes(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SQLEXECUTES); }
     /** Unsafe version of {@link #CursorOpens}. */
-    public static int nCursorOpens(long struct) { return memGetInt(struct + SQLPERF.CURSOROPENS); }
+    public static int nCursorOpens(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.CURSOROPENS); }
     /** Unsafe version of {@link #CursorSize}. */
-    public static int nCursorSize(long struct) { return memGetInt(struct + SQLPERF.CURSORSIZE); }
+    public static int nCursorSize(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.CURSORSIZE); }
     /** Unsafe version of {@link #CursorUsed}. */
-    public static int nCursorUsed(long struct) { return memGetInt(struct + SQLPERF.CURSORUSED); }
+    public static int nCursorUsed(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.CURSORUSED); }
     /** Unsafe version of {@link #PercentCursorUsed}. */
-    public static double nPercentCursorUsed(long struct) { return memGetDouble(struct + SQLPERF.PERCENTCURSORUSED); }
+    public static double nPercentCursorUsed(long struct) { return UNSAFE.getDouble(null, struct + SQLPERF.PERCENTCURSORUSED); }
     /** Unsafe version of {@link #AvgFetchTime}. */
-    public static double nAvgFetchTime(long struct) { return memGetDouble(struct + SQLPERF.AVGFETCHTIME); }
+    public static double nAvgFetchTime(long struct) { return UNSAFE.getDouble(null, struct + SQLPERF.AVGFETCHTIME); }
     /** Unsafe version of {@link #AvgCursorSize}. */
-    public static double nAvgCursorSize(long struct) { return memGetDouble(struct + SQLPERF.AVGCURSORSIZE); }
+    public static double nAvgCursorSize(long struct) { return UNSAFE.getDouble(null, struct + SQLPERF.AVGCURSORSIZE); }
     /** Unsafe version of {@link #AvgCursorUsed}. */
-    public static double nAvgCursorUsed(long struct) { return memGetDouble(struct + SQLPERF.AVGCURSORUSED); }
+    public static double nAvgCursorUsed(long struct) { return UNSAFE.getDouble(null, struct + SQLPERF.AVGCURSORUSED); }
     /** Unsafe version of {@link #SQLFetchTime}. */
-    public static int nSQLFetchTime(long struct) { return memGetInt(struct + SQLPERF.SQLFETCHTIME); }
+    public static int nSQLFetchTime(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SQLFETCHTIME); }
     /** Unsafe version of {@link #SQLFetchCount}. */
-    public static int nSQLFetchCount(long struct) { return memGetInt(struct + SQLPERF.SQLFETCHCOUNT); }
+    public static int nSQLFetchCount(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SQLFETCHCOUNT); }
     /** Unsafe version of {@link #CurrentStmtCount}. */
-    public static int nCurrentStmtCount(long struct) { return memGetInt(struct + SQLPERF.CURRENTSTMTCOUNT); }
+    public static int nCurrentStmtCount(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.CURRENTSTMTCOUNT); }
     /** Unsafe version of {@link #MaxOpenStmt}. */
-    public static int nMaxOpenStmt(long struct) { return memGetInt(struct + SQLPERF.MAXOPENSTMT); }
+    public static int nMaxOpenStmt(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.MAXOPENSTMT); }
     /** Unsafe version of {@link #SumOpenStmt}. */
-    public static int nSumOpenStmt(long struct) { return memGetInt(struct + SQLPERF.SUMOPENSTMT); }
+    public static int nSumOpenStmt(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SUMOPENSTMT); }
     /** Unsafe version of {@link #CurrentConnectionCount}. */
-    public static int nCurrentConnectionCount(long struct) { return memGetInt(struct + SQLPERF.CURRENTCONNECTIONCOUNT); }
+    public static int nCurrentConnectionCount(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.CURRENTCONNECTIONCOUNT); }
     /** Unsafe version of {@link #MaxConnectionsOpened}. */
-    public static int nMaxConnectionsOpened(long struct) { return memGetInt(struct + SQLPERF.MAXCONNECTIONSOPENED); }
+    public static int nMaxConnectionsOpened(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.MAXCONNECTIONSOPENED); }
     /** Unsafe version of {@link #SumConnectionsOpened}. */
-    public static int nSumConnectionsOpened(long struct) { return memGetInt(struct + SQLPERF.SUMCONNECTIONSOPENED); }
+    public static int nSumConnectionsOpened(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SUMCONNECTIONSOPENED); }
     /** Unsafe version of {@link #SumConnectiontime}. */
-    public static int nSumConnectiontime(long struct) { return memGetInt(struct + SQLPERF.SUMCONNECTIONTIME); }
+    public static int nSumConnectiontime(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SUMCONNECTIONTIME); }
     /** Unsafe version of {@link #AvgTimeOpened}. */
-    public static double nAvgTimeOpened(long struct) { return memGetDouble(struct + SQLPERF.AVGTIMEOPENED); }
+    public static double nAvgTimeOpened(long struct) { return UNSAFE.getDouble(null, struct + SQLPERF.AVGTIMEOPENED); }
     /** Unsafe version of {@link #ServerRndTrips}. */
-    public static int nServerRndTrips(long struct) { return memGetInt(struct + SQLPERF.SERVERRNDTRIPS); }
+    public static int nServerRndTrips(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.SERVERRNDTRIPS); }
     /** Unsafe version of {@link #BuffersSent}. */
-    public static int nBuffersSent(long struct) { return memGetInt(struct + SQLPERF.BUFFERSSENT); }
+    public static int nBuffersSent(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.BUFFERSSENT); }
     /** Unsafe version of {@link #BuffersRec}. */
-    public static int nBuffersRec(long struct) { return memGetInt(struct + SQLPERF.BUFFERSREC); }
+    public static int nBuffersRec(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.BUFFERSREC); }
     /** Unsafe version of {@link #BytesSent}. */
-    public static int nBytesSent(long struct) { return memGetInt(struct + SQLPERF.BYTESSENT); }
+    public static int nBytesSent(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.BYTESSENT); }
     /** Unsafe version of {@link #BytesRec}. */
-    public static int nBytesRec(long struct) { return memGetInt(struct + SQLPERF.BYTESREC); }
+    public static int nBytesRec(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.BYTESREC); }
     /** Unsafe version of {@link #msExecutionTime}. */
-    public static int nmsExecutionTime(long struct) { return memGetInt(struct + SQLPERF.MSEXECUTIONTIME); }
+    public static int nmsExecutionTime(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.MSEXECUTIONTIME); }
     /** Unsafe version of {@link #msNetWorkServerTime}. */
-    public static int nmsNetWorkServerTime(long struct) { return memGetInt(struct + SQLPERF.MSNETWORKSERVERTIME); }
+    public static int nmsNetWorkServerTime(long struct) { return UNSAFE.getInt(null, struct + SQLPERF.MSNETWORKSERVERTIME); }
 
     /** Unsafe version of {@link #TimerResolution(int) TimerResolution}. */
-    public static void nTimerResolution(long struct, int value) { memPutInt(struct + SQLPERF.TIMERRESOLUTION, value); }
+    public static void nTimerResolution(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.TIMERRESOLUTION, value); }
     /** Unsafe version of {@link #SQLidu(int) SQLidu}. */
-    public static void nSQLidu(long struct, int value) { memPutInt(struct + SQLPERF.SQLIDU, value); }
+    public static void nSQLidu(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SQLIDU, value); }
     /** Unsafe version of {@link #SQLiduRows(int) SQLiduRows}. */
-    public static void nSQLiduRows(long struct, int value) { memPutInt(struct + SQLPERF.SQLIDUROWS, value); }
+    public static void nSQLiduRows(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SQLIDUROWS, value); }
     /** Unsafe version of {@link #SQLSelects(int) SQLSelects}. */
-    public static void nSQLSelects(long struct, int value) { memPutInt(struct + SQLPERF.SQLSELECTS, value); }
+    public static void nSQLSelects(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SQLSELECTS, value); }
     /** Unsafe version of {@link #SQLSelectRows(int) SQLSelectRows}. */
-    public static void nSQLSelectRows(long struct, int value) { memPutInt(struct + SQLPERF.SQLSELECTROWS, value); }
+    public static void nSQLSelectRows(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SQLSELECTROWS, value); }
     /** Unsafe version of {@link #Transactions(int) Transactions}. */
-    public static void nTransactions(long struct, int value) { memPutInt(struct + SQLPERF.TRANSACTIONS, value); }
+    public static void nTransactions(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.TRANSACTIONS, value); }
     /** Unsafe version of {@link #SQLPrepares(int) SQLPrepares}. */
-    public static void nSQLPrepares(long struct, int value) { memPutInt(struct + SQLPERF.SQLPREPARES, value); }
+    public static void nSQLPrepares(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SQLPREPARES, value); }
     /** Unsafe version of {@link #ExecDirects(int) ExecDirects}. */
-    public static void nExecDirects(long struct, int value) { memPutInt(struct + SQLPERF.EXECDIRECTS, value); }
+    public static void nExecDirects(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.EXECDIRECTS, value); }
     /** Unsafe version of {@link #SQLExecutes(int) SQLExecutes}. */
-    public static void nSQLExecutes(long struct, int value) { memPutInt(struct + SQLPERF.SQLEXECUTES, value); }
+    public static void nSQLExecutes(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SQLEXECUTES, value); }
     /** Unsafe version of {@link #CursorOpens(int) CursorOpens}. */
-    public static void nCursorOpens(long struct, int value) { memPutInt(struct + SQLPERF.CURSOROPENS, value); }
+    public static void nCursorOpens(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.CURSOROPENS, value); }
     /** Unsafe version of {@link #CursorSize(int) CursorSize}. */
-    public static void nCursorSize(long struct, int value) { memPutInt(struct + SQLPERF.CURSORSIZE, value); }
+    public static void nCursorSize(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.CURSORSIZE, value); }
     /** Unsafe version of {@link #CursorUsed(int) CursorUsed}. */
-    public static void nCursorUsed(long struct, int value) { memPutInt(struct + SQLPERF.CURSORUSED, value); }
+    public static void nCursorUsed(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.CURSORUSED, value); }
     /** Unsafe version of {@link #PercentCursorUsed(double) PercentCursorUsed}. */
-    public static void nPercentCursorUsed(long struct, double value) { memPutDouble(struct + SQLPERF.PERCENTCURSORUSED, value); }
+    public static void nPercentCursorUsed(long struct, double value) { UNSAFE.putDouble(null, struct + SQLPERF.PERCENTCURSORUSED, value); }
     /** Unsafe version of {@link #AvgFetchTime(double) AvgFetchTime}. */
-    public static void nAvgFetchTime(long struct, double value) { memPutDouble(struct + SQLPERF.AVGFETCHTIME, value); }
+    public static void nAvgFetchTime(long struct, double value) { UNSAFE.putDouble(null, struct + SQLPERF.AVGFETCHTIME, value); }
     /** Unsafe version of {@link #AvgCursorSize(double) AvgCursorSize}. */
-    public static void nAvgCursorSize(long struct, double value) { memPutDouble(struct + SQLPERF.AVGCURSORSIZE, value); }
+    public static void nAvgCursorSize(long struct, double value) { UNSAFE.putDouble(null, struct + SQLPERF.AVGCURSORSIZE, value); }
     /** Unsafe version of {@link #AvgCursorUsed(double) AvgCursorUsed}. */
-    public static void nAvgCursorUsed(long struct, double value) { memPutDouble(struct + SQLPERF.AVGCURSORUSED, value); }
+    public static void nAvgCursorUsed(long struct, double value) { UNSAFE.putDouble(null, struct + SQLPERF.AVGCURSORUSED, value); }
     /** Unsafe version of {@link #SQLFetchTime(int) SQLFetchTime}. */
-    public static void nSQLFetchTime(long struct, int value) { memPutInt(struct + SQLPERF.SQLFETCHTIME, value); }
+    public static void nSQLFetchTime(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SQLFETCHTIME, value); }
     /** Unsafe version of {@link #SQLFetchCount(int) SQLFetchCount}. */
-    public static void nSQLFetchCount(long struct, int value) { memPutInt(struct + SQLPERF.SQLFETCHCOUNT, value); }
+    public static void nSQLFetchCount(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SQLFETCHCOUNT, value); }
     /** Unsafe version of {@link #CurrentStmtCount(int) CurrentStmtCount}. */
-    public static void nCurrentStmtCount(long struct, int value) { memPutInt(struct + SQLPERF.CURRENTSTMTCOUNT, value); }
+    public static void nCurrentStmtCount(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.CURRENTSTMTCOUNT, value); }
     /** Unsafe version of {@link #MaxOpenStmt(int) MaxOpenStmt}. */
-    public static void nMaxOpenStmt(long struct, int value) { memPutInt(struct + SQLPERF.MAXOPENSTMT, value); }
+    public static void nMaxOpenStmt(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.MAXOPENSTMT, value); }
     /** Unsafe version of {@link #SumOpenStmt(int) SumOpenStmt}. */
-    public static void nSumOpenStmt(long struct, int value) { memPutInt(struct + SQLPERF.SUMOPENSTMT, value); }
+    public static void nSumOpenStmt(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SUMOPENSTMT, value); }
     /** Unsafe version of {@link #CurrentConnectionCount(int) CurrentConnectionCount}. */
-    public static void nCurrentConnectionCount(long struct, int value) { memPutInt(struct + SQLPERF.CURRENTCONNECTIONCOUNT, value); }
+    public static void nCurrentConnectionCount(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.CURRENTCONNECTIONCOUNT, value); }
     /** Unsafe version of {@link #MaxConnectionsOpened(int) MaxConnectionsOpened}. */
-    public static void nMaxConnectionsOpened(long struct, int value) { memPutInt(struct + SQLPERF.MAXCONNECTIONSOPENED, value); }
+    public static void nMaxConnectionsOpened(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.MAXCONNECTIONSOPENED, value); }
     /** Unsafe version of {@link #SumConnectionsOpened(int) SumConnectionsOpened}. */
-    public static void nSumConnectionsOpened(long struct, int value) { memPutInt(struct + SQLPERF.SUMCONNECTIONSOPENED, value); }
+    public static void nSumConnectionsOpened(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SUMCONNECTIONSOPENED, value); }
     /** Unsafe version of {@link #SumConnectiontime(int) SumConnectiontime}. */
-    public static void nSumConnectiontime(long struct, int value) { memPutInt(struct + SQLPERF.SUMCONNECTIONTIME, value); }
+    public static void nSumConnectiontime(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SUMCONNECTIONTIME, value); }
     /** Unsafe version of {@link #AvgTimeOpened(double) AvgTimeOpened}. */
-    public static void nAvgTimeOpened(long struct, double value) { memPutDouble(struct + SQLPERF.AVGTIMEOPENED, value); }
+    public static void nAvgTimeOpened(long struct, double value) { UNSAFE.putDouble(null, struct + SQLPERF.AVGTIMEOPENED, value); }
     /** Unsafe version of {@link #ServerRndTrips(int) ServerRndTrips}. */
-    public static void nServerRndTrips(long struct, int value) { memPutInt(struct + SQLPERF.SERVERRNDTRIPS, value); }
+    public static void nServerRndTrips(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.SERVERRNDTRIPS, value); }
     /** Unsafe version of {@link #BuffersSent(int) BuffersSent}. */
-    public static void nBuffersSent(long struct, int value) { memPutInt(struct + SQLPERF.BUFFERSSENT, value); }
+    public static void nBuffersSent(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.BUFFERSSENT, value); }
     /** Unsafe version of {@link #BuffersRec(int) BuffersRec}. */
-    public static void nBuffersRec(long struct, int value) { memPutInt(struct + SQLPERF.BUFFERSREC, value); }
+    public static void nBuffersRec(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.BUFFERSREC, value); }
     /** Unsafe version of {@link #BytesSent(int) BytesSent}. */
-    public static void nBytesSent(long struct, int value) { memPutInt(struct + SQLPERF.BYTESSENT, value); }
+    public static void nBytesSent(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.BYTESSENT, value); }
     /** Unsafe version of {@link #BytesRec(int) BytesRec}. */
-    public static void nBytesRec(long struct, int value) { memPutInt(struct + SQLPERF.BYTESREC, value); }
+    public static void nBytesRec(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.BYTESREC, value); }
     /** Unsafe version of {@link #msExecutionTime(int) msExecutionTime}. */
-    public static void nmsExecutionTime(long struct, int value) { memPutInt(struct + SQLPERF.MSEXECUTIONTIME, value); }
+    public static void nmsExecutionTime(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.MSEXECUTIONTIME, value); }
     /** Unsafe version of {@link #msNetWorkServerTime(int) msNetWorkServerTime}. */
-    public static void nmsNetWorkServerTime(long struct, int value) { memPutInt(struct + SQLPERF.MSNETWORKSERVERTIME, value); }
+    public static void nmsNetWorkServerTime(long struct, int value) { UNSAFE.putInt(null, struct + SQLPERF.MSNETWORKSERVERTIME, value); }
 
     // -----------------------------------
 
     /** An array of {@link SQLPERF} structs. */
     public static class Buffer extends StructBuffer<SQLPERF, Buffer> implements NativeResource {
+
+        private static final SQLPERF ELEMENT_FACTORY = SQLPERF.create(-1L);
 
         /**
          * Creates a new {@link SQLPERF.Buffer} instance backed by the specified container.
@@ -750,18 +750,8 @@ public class SQLPERF extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected SQLPERF newInstance(long address) {
-            return new SQLPERF(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected SQLPERF getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code TimerResolution} field. */

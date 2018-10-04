@@ -68,10 +68,6 @@ public class AITexel extends Struct {
         A = layout.offsetof(3);
     }
 
-    AITexel(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AITexel} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -79,7 +75,7 @@ public class AITexel extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AITexel(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -102,13 +98,13 @@ public class AITexel extends Struct {
 
     /** Returns a new {@link AITexel} instance for the specified memory address. */
     public static AITexel create(long address) {
-        return new AITexel(address, null);
+        return wrap(AITexel.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AITexel createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AITexel.class, address);
     }
 
     /**
@@ -118,30 +114,32 @@ public class AITexel extends Struct {
      * @param capacity the buffer capacity
      */
     public static AITexel.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AITexel.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #b}. */
-    public static byte nb(long struct) { return memGetByte(struct + AITexel.B); }
+    public static byte nb(long struct) { return UNSAFE.getByte(null, struct + AITexel.B); }
     /** Unsafe version of {@link #g}. */
-    public static byte ng(long struct) { return memGetByte(struct + AITexel.G); }
+    public static byte ng(long struct) { return UNSAFE.getByte(null, struct + AITexel.G); }
     /** Unsafe version of {@link #r}. */
-    public static byte nr(long struct) { return memGetByte(struct + AITexel.R); }
+    public static byte nr(long struct) { return UNSAFE.getByte(null, struct + AITexel.R); }
     /** Unsafe version of {@link #a}. */
-    public static byte na(long struct) { return memGetByte(struct + AITexel.A); }
+    public static byte na(long struct) { return UNSAFE.getByte(null, struct + AITexel.A); }
 
     // -----------------------------------
 
     /** An array of {@link AITexel} structs. */
     public static class Buffer extends StructBuffer<AITexel, Buffer> {
+
+        private static final AITexel ELEMENT_FACTORY = AITexel.create(-1L);
 
         /**
          * Creates a new {@link AITexel.Buffer} instance backed by the specified container.
@@ -170,18 +168,8 @@ public class AITexel extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AITexel newInstance(long address) {
-            return new AITexel(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AITexel getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code b} field. */

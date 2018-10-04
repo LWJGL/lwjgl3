@@ -57,10 +57,6 @@ public class VkMemoryHeap extends Struct {
         FLAGS = layout.offsetof(1);
     }
 
-    VkMemoryHeap(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkMemoryHeap} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -68,7 +64,7 @@ public class VkMemoryHeap extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkMemoryHeap(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -85,13 +81,13 @@ public class VkMemoryHeap extends Struct {
 
     /** Returns a new {@link VkMemoryHeap} instance for the specified memory address. */
     public static VkMemoryHeap create(long address) {
-        return new VkMemoryHeap(address, null);
+        return wrap(VkMemoryHeap.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryHeap createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkMemoryHeap.class, address);
     }
 
     /**
@@ -101,26 +97,28 @@ public class VkMemoryHeap extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkMemoryHeap.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryHeap.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return memGetLong(struct + VkMemoryHeap.SIZE); }
+    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkMemoryHeap.SIZE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkMemoryHeap.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkMemoryHeap.FLAGS); }
 
     // -----------------------------------
 
     /** An array of {@link VkMemoryHeap} structs. */
     public static class Buffer extends StructBuffer<VkMemoryHeap, Buffer> {
+
+        private static final VkMemoryHeap ELEMENT_FACTORY = VkMemoryHeap.create(-1L);
 
         /**
          * Creates a new {@link VkMemoryHeap.Buffer} instance backed by the specified container.
@@ -149,18 +147,8 @@ public class VkMemoryHeap extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkMemoryHeap newInstance(long address) {
-            return new VkMemoryHeap(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkMemoryHeap getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code size} field. */

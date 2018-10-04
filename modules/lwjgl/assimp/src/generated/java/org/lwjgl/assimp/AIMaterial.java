@@ -70,10 +70,6 @@ public class AIMaterial extends Struct implements NativeResource {
         MNUMALLOCATED = layout.offsetof(2);
     }
 
-    AIMaterial(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIMaterial} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -81,7 +77,7 @@ public class AIMaterial extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIMaterial(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -129,28 +125,29 @@ public class AIMaterial extends Struct implements NativeResource {
 
     /** Returns a new {@link AIMaterial} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIMaterial malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AIMaterial.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AIMaterial} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIMaterial calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AIMaterial.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AIMaterial} instance allocated with {@link BufferUtils}. */
     public static AIMaterial create() {
-        return new AIMaterial(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AIMaterial.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AIMaterial} instance for the specified memory address. */
     public static AIMaterial create(long address) {
-        return new AIMaterial(address, null);
+        return wrap(AIMaterial.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIMaterial createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIMaterial.class, address);
     }
 
     /**
@@ -159,7 +156,7 @@ public class AIMaterial extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMaterial.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -168,7 +165,7 @@ public class AIMaterial extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMaterial.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +174,8 @@ public class AIMaterial extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMaterial.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -187,13 +185,13 @@ public class AIMaterial extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMaterial.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIMaterial.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -214,7 +212,7 @@ public class AIMaterial extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIMaterial mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AIMaterial.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -223,7 +221,7 @@ public class AIMaterial extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIMaterial callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AIMaterial.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -251,7 +249,7 @@ public class AIMaterial extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMaterial.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -261,7 +259,7 @@ public class AIMaterial extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIMaterial.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -269,16 +267,16 @@ public class AIMaterial extends Struct implements NativeResource {
     /** Unsafe version of {@link #mProperties() mProperties}. */
     public static PointerBuffer nmProperties(long struct) { return memPointerBuffer(memGetAddress(struct + AIMaterial.MPROPERTIES), nmNumProperties(struct)); }
     /** Unsafe version of {@link #mNumProperties}. */
-    public static int nmNumProperties(long struct) { return memGetInt(struct + AIMaterial.MNUMPROPERTIES); }
+    public static int nmNumProperties(long struct) { return UNSAFE.getInt(null, struct + AIMaterial.MNUMPROPERTIES); }
     /** Unsafe version of {@link #mNumAllocated}. */
-    public static int nmNumAllocated(long struct) { return memGetInt(struct + AIMaterial.MNUMALLOCATED); }
+    public static int nmNumAllocated(long struct) { return UNSAFE.getInt(null, struct + AIMaterial.MNUMALLOCATED); }
 
     /** Unsafe version of {@link #mProperties(PointerBuffer) mProperties}. */
     public static void nmProperties(long struct, PointerBuffer value) { memPutAddress(struct + AIMaterial.MPROPERTIES, memAddress(value)); nmNumProperties(struct, value.remaining()); }
     /** Sets the specified value to the {@code mNumProperties} field of the specified {@code struct}. */
-    public static void nmNumProperties(long struct, int value) { memPutInt(struct + AIMaterial.MNUMPROPERTIES, value); }
+    public static void nmNumProperties(long struct, int value) { UNSAFE.putInt(null, struct + AIMaterial.MNUMPROPERTIES, value); }
     /** Unsafe version of {@link #mNumAllocated(int) mNumAllocated}. */
-    public static void nmNumAllocated(long struct, int value) { memPutInt(struct + AIMaterial.MNUMALLOCATED, value); }
+    public static void nmNumAllocated(long struct, int value) { UNSAFE.putInt(null, struct + AIMaterial.MNUMALLOCATED, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -305,6 +303,8 @@ public class AIMaterial extends Struct implements NativeResource {
 
     /** An array of {@link AIMaterial} structs. */
     public static class Buffer extends StructBuffer<AIMaterial, Buffer> implements NativeResource {
+
+        private static final AIMaterial ELEMENT_FACTORY = AIMaterial.create(-1L);
 
         /**
          * Creates a new {@link AIMaterial.Buffer} instance backed by the specified container.
@@ -333,18 +333,8 @@ public class AIMaterial extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIMaterial newInstance(long address) {
-            return new AIMaterial(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIMaterial getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mProperties} field. */

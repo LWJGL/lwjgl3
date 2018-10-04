@@ -107,10 +107,6 @@ public class YGNode extends Struct implements NativeResource {
         RESOLVEDDIMENSIONS = layout.offsetof(15);
     }
 
-    YGNode(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link YGNode} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -118,7 +114,7 @@ public class YGNode extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public YGNode(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -265,28 +261,29 @@ public class YGNode extends Struct implements NativeResource {
 
     /** Returns a new {@link YGNode} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static YGNode malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(YGNode.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link YGNode} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static YGNode calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(YGNode.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link YGNode} instance allocated with {@link BufferUtils}. */
     public static YGNode create() {
-        return new YGNode(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(YGNode.class, memAddress(container), container);
     }
 
     /** Returns a new {@link YGNode} instance for the specified memory address. */
     public static YGNode create(long address) {
-        return new YGNode(address, null);
+        return wrap(YGNode.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGNode createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(YGNode.class, address);
     }
 
     /**
@@ -295,7 +292,7 @@ public class YGNode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGNode.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -304,7 +301,7 @@ public class YGNode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGNode.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -313,7 +310,8 @@ public class YGNode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGNode.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -323,13 +321,13 @@ public class YGNode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGNode.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGNode.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -350,7 +348,7 @@ public class YGNode extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static YGNode mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(YGNode.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -359,7 +357,7 @@ public class YGNode extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static YGNode callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(YGNode.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -387,7 +385,7 @@ public class YGNode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGNode.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -397,7 +395,7 @@ public class YGNode extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static YGNode.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -407,9 +405,9 @@ public class YGNode extends Struct implements NativeResource {
     /** Unsafe version of {@link #print}. */
     @Nullable public static YGPrintFunc nprint(long struct) { return YGPrintFunc.createSafe(memGetAddress(struct + YGNode.PRINT)); }
     /** Unsafe version of {@link #hasNewLayout}. */
-    public static boolean nhasNewLayout(long struct) { return memGetByte(struct + YGNode.HASNEWLAYOUT) != 0; }
+    public static boolean nhasNewLayout(long struct) { return UNSAFE.getByte(null, struct + YGNode.HASNEWLAYOUT) != 0; }
     /** Unsafe version of {@link #nodeType}. */
-    public static int nnodeType(long struct) { return memGetInt(struct + YGNode.NODETYPE); }
+    public static int nnodeType(long struct) { return UNSAFE.getInt(null, struct + YGNode.NODETYPE); }
     /** Unsafe version of {@link #measure}. */
     @Nullable public static YGMeasureFunc nmeasure(long struct) { return YGMeasureFunc.createSafe(memGetAddress(struct + YGNode.MEASURE)); }
     /** Unsafe version of {@link #baseline}. */
@@ -421,7 +419,7 @@ public class YGNode extends Struct implements NativeResource {
     /** Unsafe version of {@link #layout}. */
     public static YGLayout nlayout(long struct) { return YGLayout.create(struct + YGNode.LAYOUT); }
     /** Unsafe version of {@link #lineIndex}. */
-    public static int nlineIndex(long struct) { return memGetInt(struct + YGNode.LINEINDEX); }
+    public static int nlineIndex(long struct) { return UNSAFE.getInt(null, struct + YGNode.LINEINDEX); }
     /** Unsafe version of {@link #owner}. */
     public static long nowner(long struct) { return memGetAddress(struct + YGNode.OWNER); }
     /** Unsafe version of {@link #children}. */
@@ -431,7 +429,7 @@ public class YGNode extends Struct implements NativeResource {
     /** Unsafe version of {@link #config}. */
     public static long nconfig(long struct) { return memGetAddress(struct + YGNode.CONFIG); }
     /** Unsafe version of {@link #isDirty}. */
-    public static boolean nisDirty(long struct) { return memGetByte(struct + YGNode.ISDIRTY) != 0; }
+    public static boolean nisDirty(long struct) { return UNSAFE.getByte(null, struct + YGNode.ISDIRTY) != 0; }
     /** Unsafe version of {@link #resolvedDimensions}. */
     public static PointerBuffer nresolvedDimensions(long struct) { return memPointerBuffer(struct + YGNode.RESOLVEDDIMENSIONS, 2); }
     /** Unsafe version of {@link #resolvedDimensions(int) resolvedDimensions}. */
@@ -444,9 +442,9 @@ public class YGNode extends Struct implements NativeResource {
     /** Unsafe version of {@link #print(YGPrintFuncI) print}. */
     public static void nprint(long struct, @Nullable YGPrintFuncI value) { memPutAddress(struct + YGNode.PRINT, memAddressSafe(value)); }
     /** Unsafe version of {@link #hasNewLayout(boolean) hasNewLayout}. */
-    public static void nhasNewLayout(long struct, boolean value) { memPutByte(struct + YGNode.HASNEWLAYOUT, value ? (byte)1 : (byte)0); }
+    public static void nhasNewLayout(long struct, boolean value) { UNSAFE.putByte(null, struct + YGNode.HASNEWLAYOUT, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #nodeType(int) nodeType}. */
-    public static void nnodeType(long struct, int value) { memPutInt(struct + YGNode.NODETYPE, value); }
+    public static void nnodeType(long struct, int value) { UNSAFE.putInt(null, struct + YGNode.NODETYPE, value); }
     /** Unsafe version of {@link #measure(YGMeasureFuncI) measure}. */
     public static void nmeasure(long struct, @Nullable YGMeasureFuncI value) { memPutAddress(struct + YGNode.MEASURE, memAddressSafe(value)); }
     /** Unsafe version of {@link #baseline(YGBaselineFuncI) baseline}. */
@@ -458,7 +456,7 @@ public class YGNode extends Struct implements NativeResource {
     /** Unsafe version of {@link #layout(YGLayout) layout}. */
     public static void nlayout(long struct, YGLayout value) { memCopy(value.address(), struct + YGNode.LAYOUT, YGLayout.SIZEOF); }
     /** Unsafe version of {@link #lineIndex(int) lineIndex}. */
-    public static void nlineIndex(long struct, int value) { memPutInt(struct + YGNode.LINEINDEX, value); }
+    public static void nlineIndex(long struct, int value) { UNSAFE.putInt(null, struct + YGNode.LINEINDEX, value); }
     /** Unsafe version of {@link #owner(long) owner}. */
     public static void nowner(long struct, long value) { memPutAddress(struct + YGNode.OWNER, value); }
     /** Unsafe version of {@link #children(long) children}. */
@@ -468,7 +466,7 @@ public class YGNode extends Struct implements NativeResource {
     /** Unsafe version of {@link #config(long) config}. */
     public static void nconfig(long struct, long value) { memPutAddress(struct + YGNode.CONFIG, value); }
     /** Unsafe version of {@link #isDirty(boolean) isDirty}. */
-    public static void nisDirty(long struct, boolean value) { memPutByte(struct + YGNode.ISDIRTY, value ? (byte)1 : (byte)0); }
+    public static void nisDirty(long struct, boolean value) { UNSAFE.putByte(null, struct + YGNode.ISDIRTY, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #resolvedDimensions(PointerBuffer) resolvedDimensions}. */
     public static void nresolvedDimensions(long struct, PointerBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
@@ -505,6 +503,8 @@ public class YGNode extends Struct implements NativeResource {
     /** An array of {@link YGNode} structs. */
     public static class Buffer extends StructBuffer<YGNode, Buffer> implements NativeResource {
 
+        private static final YGNode ELEMENT_FACTORY = YGNode.create(-1L);
+
         /**
          * Creates a new {@link YGNode.Buffer} instance backed by the specified container.
          *
@@ -532,18 +532,8 @@ public class YGNode extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected YGNode newInstance(long address) {
-            return new YGNode(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected YGNode getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code context} field. */

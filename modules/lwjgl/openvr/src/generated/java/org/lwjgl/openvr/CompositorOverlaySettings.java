@@ -107,10 +107,6 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
         TRANSFORM = layout.offsetof(13);
     }
 
-    CompositorOverlaySettings(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link CompositorOverlaySettings} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -118,7 +114,7 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public CompositorOverlaySettings(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -239,28 +235,29 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
 
     /** Returns a new {@link CompositorOverlaySettings} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CompositorOverlaySettings malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(CompositorOverlaySettings.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link CompositorOverlaySettings} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CompositorOverlaySettings calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(CompositorOverlaySettings.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link CompositorOverlaySettings} instance allocated with {@link BufferUtils}. */
     public static CompositorOverlaySettings create() {
-        return new CompositorOverlaySettings(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(CompositorOverlaySettings.class, memAddress(container), container);
     }
 
     /** Returns a new {@link CompositorOverlaySettings} instance for the specified memory address. */
     public static CompositorOverlaySettings create(long address) {
-        return new CompositorOverlaySettings(address, null);
+        return wrap(CompositorOverlaySettings.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CompositorOverlaySettings createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(CompositorOverlaySettings.class, address);
     }
 
     /**
@@ -269,7 +266,7 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorOverlaySettings.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -278,7 +275,7 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorOverlaySettings.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -287,7 +284,8 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorOverlaySettings.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -297,13 +295,13 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorOverlaySettings.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CompositorOverlaySettings.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -324,7 +322,7 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static CompositorOverlaySettings mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(CompositorOverlaySettings.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -333,7 +331,7 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static CompositorOverlaySettings callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(CompositorOverlaySettings.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -361,7 +359,7 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorOverlaySettings.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -371,66 +369,66 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static CompositorOverlaySettings.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return memGetInt(struct + CompositorOverlaySettings.SIZE); }
+    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + CompositorOverlaySettings.SIZE); }
     /** Unsafe version of {@link #curved}. */
-    public static boolean ncurved(long struct) { return memGetByte(struct + CompositorOverlaySettings.CURVED) != 0; }
+    public static boolean ncurved(long struct) { return UNSAFE.getByte(null, struct + CompositorOverlaySettings.CURVED) != 0; }
     /** Unsafe version of {@link #antialias}. */
-    public static boolean nantialias(long struct) { return memGetByte(struct + CompositorOverlaySettings.ANTIALIAS) != 0; }
+    public static boolean nantialias(long struct) { return UNSAFE.getByte(null, struct + CompositorOverlaySettings.ANTIALIAS) != 0; }
     /** Unsafe version of {@link #scale}. */
-    public static float nscale(long struct) { return memGetFloat(struct + CompositorOverlaySettings.SCALE); }
+    public static float nscale(long struct) { return UNSAFE.getFloat(null, struct + CompositorOverlaySettings.SCALE); }
     /** Unsafe version of {@link #distance}. */
-    public static float ndistance(long struct) { return memGetFloat(struct + CompositorOverlaySettings.DISTANCE); }
+    public static float ndistance(long struct) { return UNSAFE.getFloat(null, struct + CompositorOverlaySettings.DISTANCE); }
     /** Unsafe version of {@link #alpha}. */
-    public static float nalpha(long struct) { return memGetFloat(struct + CompositorOverlaySettings.ALPHA); }
+    public static float nalpha(long struct) { return UNSAFE.getFloat(null, struct + CompositorOverlaySettings.ALPHA); }
     /** Unsafe version of {@link #uOffset}. */
-    public static float nuOffset(long struct) { return memGetFloat(struct + CompositorOverlaySettings.UOFFSET); }
+    public static float nuOffset(long struct) { return UNSAFE.getFloat(null, struct + CompositorOverlaySettings.UOFFSET); }
     /** Unsafe version of {@link #vOffset}. */
-    public static float nvOffset(long struct) { return memGetFloat(struct + CompositorOverlaySettings.VOFFSET); }
+    public static float nvOffset(long struct) { return UNSAFE.getFloat(null, struct + CompositorOverlaySettings.VOFFSET); }
     /** Unsafe version of {@link #uScale}. */
-    public static float nuScale(long struct) { return memGetFloat(struct + CompositorOverlaySettings.USCALE); }
+    public static float nuScale(long struct) { return UNSAFE.getFloat(null, struct + CompositorOverlaySettings.USCALE); }
     /** Unsafe version of {@link #vScale}. */
-    public static float nvScale(long struct) { return memGetFloat(struct + CompositorOverlaySettings.VSCALE); }
+    public static float nvScale(long struct) { return UNSAFE.getFloat(null, struct + CompositorOverlaySettings.VSCALE); }
     /** Unsafe version of {@link #gridDivs}. */
-    public static float ngridDivs(long struct) { return memGetFloat(struct + CompositorOverlaySettings.GRIDDIVS); }
+    public static float ngridDivs(long struct) { return UNSAFE.getFloat(null, struct + CompositorOverlaySettings.GRIDDIVS); }
     /** Unsafe version of {@link #gridWidth}. */
-    public static float ngridWidth(long struct) { return memGetFloat(struct + CompositorOverlaySettings.GRIDWIDTH); }
+    public static float ngridWidth(long struct) { return UNSAFE.getFloat(null, struct + CompositorOverlaySettings.GRIDWIDTH); }
     /** Unsafe version of {@link #gridScale}. */
-    public static float ngridScale(long struct) { return memGetFloat(struct + CompositorOverlaySettings.GRIDSCALE); }
+    public static float ngridScale(long struct) { return UNSAFE.getFloat(null, struct + CompositorOverlaySettings.GRIDSCALE); }
     /** Unsafe version of {@link #transform}. */
     public static HmdMatrix44 ntransform(long struct) { return HmdMatrix44.create(struct + CompositorOverlaySettings.TRANSFORM); }
 
     /** Unsafe version of {@link #size(int) size}. */
-    public static void nsize(long struct, int value) { memPutInt(struct + CompositorOverlaySettings.SIZE, value); }
+    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + CompositorOverlaySettings.SIZE, value); }
     /** Unsafe version of {@link #curved(boolean) curved}. */
-    public static void ncurved(long struct, boolean value) { memPutByte(struct + CompositorOverlaySettings.CURVED, value ? (byte)1 : (byte)0); }
+    public static void ncurved(long struct, boolean value) { UNSAFE.putByte(null, struct + CompositorOverlaySettings.CURVED, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #antialias(boolean) antialias}. */
-    public static void nantialias(long struct, boolean value) { memPutByte(struct + CompositorOverlaySettings.ANTIALIAS, value ? (byte)1 : (byte)0); }
+    public static void nantialias(long struct, boolean value) { UNSAFE.putByte(null, struct + CompositorOverlaySettings.ANTIALIAS, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #scale(float) scale}. */
-    public static void nscale(long struct, float value) { memPutFloat(struct + CompositorOverlaySettings.SCALE, value); }
+    public static void nscale(long struct, float value) { UNSAFE.putFloat(null, struct + CompositorOverlaySettings.SCALE, value); }
     /** Unsafe version of {@link #distance(float) distance}. */
-    public static void ndistance(long struct, float value) { memPutFloat(struct + CompositorOverlaySettings.DISTANCE, value); }
+    public static void ndistance(long struct, float value) { UNSAFE.putFloat(null, struct + CompositorOverlaySettings.DISTANCE, value); }
     /** Unsafe version of {@link #alpha(float) alpha}. */
-    public static void nalpha(long struct, float value) { memPutFloat(struct + CompositorOverlaySettings.ALPHA, value); }
+    public static void nalpha(long struct, float value) { UNSAFE.putFloat(null, struct + CompositorOverlaySettings.ALPHA, value); }
     /** Unsafe version of {@link #uOffset(float) uOffset}. */
-    public static void nuOffset(long struct, float value) { memPutFloat(struct + CompositorOverlaySettings.UOFFSET, value); }
+    public static void nuOffset(long struct, float value) { UNSAFE.putFloat(null, struct + CompositorOverlaySettings.UOFFSET, value); }
     /** Unsafe version of {@link #vOffset(float) vOffset}. */
-    public static void nvOffset(long struct, float value) { memPutFloat(struct + CompositorOverlaySettings.VOFFSET, value); }
+    public static void nvOffset(long struct, float value) { UNSAFE.putFloat(null, struct + CompositorOverlaySettings.VOFFSET, value); }
     /** Unsafe version of {@link #uScale(float) uScale}. */
-    public static void nuScale(long struct, float value) { memPutFloat(struct + CompositorOverlaySettings.USCALE, value); }
+    public static void nuScale(long struct, float value) { UNSAFE.putFloat(null, struct + CompositorOverlaySettings.USCALE, value); }
     /** Unsafe version of {@link #vScale(float) vScale}. */
-    public static void nvScale(long struct, float value) { memPutFloat(struct + CompositorOverlaySettings.VSCALE, value); }
+    public static void nvScale(long struct, float value) { UNSAFE.putFloat(null, struct + CompositorOverlaySettings.VSCALE, value); }
     /** Unsafe version of {@link #gridDivs(float) gridDivs}. */
-    public static void ngridDivs(long struct, float value) { memPutFloat(struct + CompositorOverlaySettings.GRIDDIVS, value); }
+    public static void ngridDivs(long struct, float value) { UNSAFE.putFloat(null, struct + CompositorOverlaySettings.GRIDDIVS, value); }
     /** Unsafe version of {@link #gridWidth(float) gridWidth}. */
-    public static void ngridWidth(long struct, float value) { memPutFloat(struct + CompositorOverlaySettings.GRIDWIDTH, value); }
+    public static void ngridWidth(long struct, float value) { UNSAFE.putFloat(null, struct + CompositorOverlaySettings.GRIDWIDTH, value); }
     /** Unsafe version of {@link #gridScale(float) gridScale}. */
-    public static void ngridScale(long struct, float value) { memPutFloat(struct + CompositorOverlaySettings.GRIDSCALE, value); }
+    public static void ngridScale(long struct, float value) { UNSAFE.putFloat(null, struct + CompositorOverlaySettings.GRIDSCALE, value); }
     /** Unsafe version of {@link #transform(HmdMatrix44) transform}. */
     public static void ntransform(long struct, HmdMatrix44 value) { memCopy(value.address(), struct + CompositorOverlaySettings.TRANSFORM, HmdMatrix44.SIZEOF); }
 
@@ -438,6 +436,8 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
 
     /** An array of {@link CompositorOverlaySettings} structs. */
     public static class Buffer extends StructBuffer<CompositorOverlaySettings, Buffer> implements NativeResource {
+
+        private static final CompositorOverlaySettings ELEMENT_FACTORY = CompositorOverlaySettings.create(-1L);
 
         /**
          * Creates a new {@link CompositorOverlaySettings.Buffer} instance backed by the specified container.
@@ -466,18 +466,8 @@ public class CompositorOverlaySettings extends Struct implements NativeResource 
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected CompositorOverlaySettings newInstance(long address) {
-            return new CompositorOverlaySettings(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected CompositorOverlaySettings getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code size} field. */

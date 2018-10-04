@@ -29,10 +29,6 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
 
-    VkImageViewUsageCreateInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkImageViewUsageCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -40,7 +36,7 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkImageViewUsageCreateInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -83,28 +79,29 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
 
     /** Returns a new {@link VkImageViewUsageCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageViewUsageCreateInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkImageViewUsageCreateInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkImageViewUsageCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageViewUsageCreateInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkImageViewUsageCreateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkImageViewUsageCreateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkImageViewUsageCreateInfoKHR create() {
-        return new VkImageViewUsageCreateInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkImageViewUsageCreateInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkImageViewUsageCreateInfoKHR} instance for the specified memory address. */
     public static VkImageViewUsageCreateInfoKHR create(long address) {
-        return new VkImageViewUsageCreateInfoKHR(address, null);
+        return wrap(VkImageViewUsageCreateInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageViewUsageCreateInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkImageViewUsageCreateInfoKHR.class, address);
     }
 
     /**
@@ -113,7 +110,7 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkImageViewUsageCreateInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -122,7 +119,7 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkImageViewUsageCreateInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -131,7 +128,8 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkImageViewUsageCreateInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -141,13 +139,13 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkImageViewUsageCreateInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageViewUsageCreateInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -168,7 +166,7 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
      * @param stack the stack from which to allocate
      */
     public static VkImageViewUsageCreateInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkImageViewUsageCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -177,7 +175,7 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
      * @param stack the stack from which to allocate
      */
     public static VkImageViewUsageCreateInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkImageViewUsageCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -205,7 +203,7 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkImageViewUsageCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -215,13 +213,15 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkImageViewUsageCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkImageViewUsageCreateInfoKHR} structs. */
     public static class Buffer extends VkImageViewUsageCreateInfo.Buffer {
+
+        private static final VkImageViewUsageCreateInfoKHR ELEMENT_FACTORY = VkImageViewUsageCreateInfoKHR.create(-1L);
 
         /**
          * Creates a new {@link VkImageViewUsageCreateInfoKHR.Buffer} instance backed by the specified container.
@@ -250,13 +250,8 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkImageViewUsageCreateInfoKHR newInstance(long address) {
-            return new VkImageViewUsageCreateInfoKHR(address, container);
+        protected VkImageViewUsageCreateInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

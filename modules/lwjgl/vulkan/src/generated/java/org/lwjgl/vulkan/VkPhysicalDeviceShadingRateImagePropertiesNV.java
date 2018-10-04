@@ -82,10 +82,6 @@ public class VkPhysicalDeviceShadingRateImagePropertiesNV extends Struct {
         SHADINGRATEMAXCOARSESAMPLES = layout.offsetof(4);
     }
 
-    VkPhysicalDeviceShadingRateImagePropertiesNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceShadingRateImagePropertiesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -93,7 +89,7 @@ public class VkPhysicalDeviceShadingRateImagePropertiesNV extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceShadingRateImagePropertiesNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -148,13 +144,13 @@ public class VkPhysicalDeviceShadingRateImagePropertiesNV extends Struct {
 
     /** Returns a new {@link VkPhysicalDeviceShadingRateImagePropertiesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceShadingRateImagePropertiesNV create(long address) {
-        return new VkPhysicalDeviceShadingRateImagePropertiesNV(address, null);
+        return wrap(VkPhysicalDeviceShadingRateImagePropertiesNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShadingRateImagePropertiesNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceShadingRateImagePropertiesNV.class, address);
     }
 
     /**
@@ -164,30 +160,30 @@ public class VkPhysicalDeviceShadingRateImagePropertiesNV extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShadingRateImagePropertiesNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShadingRateImagePropertiesNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceShadingRateImagePropertiesNV.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShadingRateImagePropertiesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShadingRateImagePropertiesNV.PNEXT); }
     /** Unsafe version of {@link #shadingRateTexelSize}. */
     public static VkExtent2D nshadingRateTexelSize(long struct) { return VkExtent2D.create(struct + VkPhysicalDeviceShadingRateImagePropertiesNV.SHADINGRATETEXELSIZE); }
     /** Unsafe version of {@link #shadingRatePaletteSize}. */
-    public static int nshadingRatePaletteSize(long struct) { return memGetInt(struct + VkPhysicalDeviceShadingRateImagePropertiesNV.SHADINGRATEPALETTESIZE); }
+    public static int nshadingRatePaletteSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShadingRateImagePropertiesNV.SHADINGRATEPALETTESIZE); }
     /** Unsafe version of {@link #shadingRateMaxCoarseSamples}. */
-    public static int nshadingRateMaxCoarseSamples(long struct) { return memGetInt(struct + VkPhysicalDeviceShadingRateImagePropertiesNV.SHADINGRATEMAXCOARSESAMPLES); }
+    public static int nshadingRateMaxCoarseSamples(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShadingRateImagePropertiesNV.SHADINGRATEMAXCOARSESAMPLES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceShadingRateImagePropertiesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShadingRateImagePropertiesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShadingRateImagePropertiesNV.PNEXT, value); }
 
@@ -195,6 +191,8 @@ public class VkPhysicalDeviceShadingRateImagePropertiesNV extends Struct {
 
     /** An array of {@link VkPhysicalDeviceShadingRateImagePropertiesNV} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceShadingRateImagePropertiesNV, Buffer> {
+
+        private static final VkPhysicalDeviceShadingRateImagePropertiesNV ELEMENT_FACTORY = VkPhysicalDeviceShadingRateImagePropertiesNV.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceShadingRateImagePropertiesNV.Buffer} instance backed by the specified container.
@@ -223,18 +221,8 @@ public class VkPhysicalDeviceShadingRateImagePropertiesNV extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceShadingRateImagePropertiesNV newInstance(long address) {
-            return new VkPhysicalDeviceShadingRateImagePropertiesNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceShadingRateImagePropertiesNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

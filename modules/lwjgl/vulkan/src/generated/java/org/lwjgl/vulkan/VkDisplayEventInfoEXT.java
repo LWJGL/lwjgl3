@@ -76,10 +76,6 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
         DISPLAYEVENT = layout.offsetof(2);
     }
 
-    VkDisplayEventInfoEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDisplayEventInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -87,7 +83,7 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDisplayEventInfoEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -139,28 +135,29 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
 
     /** Returns a new {@link VkDisplayEventInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDisplayEventInfoEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDisplayEventInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDisplayEventInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDisplayEventInfoEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDisplayEventInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDisplayEventInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkDisplayEventInfoEXT create() {
-        return new VkDisplayEventInfoEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDisplayEventInfoEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDisplayEventInfoEXT} instance for the specified memory address. */
     public static VkDisplayEventInfoEXT create(long address) {
-        return new VkDisplayEventInfoEXT(address, null);
+        return wrap(VkDisplayEventInfoEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDisplayEventInfoEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDisplayEventInfoEXT.class, address);
     }
 
     /**
@@ -169,7 +166,7 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayEventInfoEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +175,7 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayEventInfoEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -187,7 +184,8 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayEventInfoEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -197,13 +195,13 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayEventInfoEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDisplayEventInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -224,7 +222,7 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDisplayEventInfoEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDisplayEventInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -233,7 +231,7 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDisplayEventInfoEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDisplayEventInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -261,7 +259,7 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayEventInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -271,29 +269,31 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayEventInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDisplayEventInfoEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDisplayEventInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDisplayEventInfoEXT.PNEXT); }
     /** Unsafe version of {@link #displayEvent}. */
-    public static int ndisplayEvent(long struct) { return memGetInt(struct + VkDisplayEventInfoEXT.DISPLAYEVENT); }
+    public static int ndisplayEvent(long struct) { return UNSAFE.getInt(null, struct + VkDisplayEventInfoEXT.DISPLAYEVENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDisplayEventInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplayEventInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDisplayEventInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #displayEvent(int) displayEvent}. */
-    public static void ndisplayEvent(long struct, int value) { memPutInt(struct + VkDisplayEventInfoEXT.DISPLAYEVENT, value); }
+    public static void ndisplayEvent(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplayEventInfoEXT.DISPLAYEVENT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkDisplayEventInfoEXT} structs. */
     public static class Buffer extends StructBuffer<VkDisplayEventInfoEXT, Buffer> implements NativeResource {
+
+        private static final VkDisplayEventInfoEXT ELEMENT_FACTORY = VkDisplayEventInfoEXT.create(-1L);
 
         /**
          * Creates a new {@link VkDisplayEventInfoEXT.Buffer} instance backed by the specified container.
@@ -322,18 +322,8 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDisplayEventInfoEXT newInstance(long address) {
-            return new VkDisplayEventInfoEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDisplayEventInfoEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

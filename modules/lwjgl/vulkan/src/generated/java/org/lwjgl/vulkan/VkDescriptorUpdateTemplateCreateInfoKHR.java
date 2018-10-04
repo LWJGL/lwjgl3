@@ -37,10 +37,6 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateTemplateCreateInfo {
 
-    VkDescriptorUpdateTemplateCreateInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDescriptorUpdateTemplateCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -48,7 +44,7 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDescriptorUpdateTemplateCreateInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -121,28 +117,29 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
 
     /** Returns a new {@link VkDescriptorUpdateTemplateCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDescriptorUpdateTemplateCreateInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDescriptorUpdateTemplateCreateInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDescriptorUpdateTemplateCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDescriptorUpdateTemplateCreateInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDescriptorUpdateTemplateCreateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDescriptorUpdateTemplateCreateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkDescriptorUpdateTemplateCreateInfoKHR create() {
-        return new VkDescriptorUpdateTemplateCreateInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDescriptorUpdateTemplateCreateInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDescriptorUpdateTemplateCreateInfoKHR} instance for the specified memory address. */
     public static VkDescriptorUpdateTemplateCreateInfoKHR create(long address) {
-        return new VkDescriptorUpdateTemplateCreateInfoKHR(address, null);
+        return wrap(VkDescriptorUpdateTemplateCreateInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorUpdateTemplateCreateInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDescriptorUpdateTemplateCreateInfoKHR.class, address);
     }
 
     /**
@@ -151,7 +148,7 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -160,7 +157,7 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -169,7 +166,8 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -179,13 +177,13 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorUpdateTemplateCreateInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -206,7 +204,7 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorUpdateTemplateCreateInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDescriptorUpdateTemplateCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -215,7 +213,7 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorUpdateTemplateCreateInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDescriptorUpdateTemplateCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -243,7 +241,7 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -253,13 +251,15 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkDescriptorUpdateTemplateCreateInfoKHR} structs. */
     public static class Buffer extends VkDescriptorUpdateTemplateCreateInfo.Buffer {
+
+        private static final VkDescriptorUpdateTemplateCreateInfoKHR ELEMENT_FACTORY = VkDescriptorUpdateTemplateCreateInfoKHR.create(-1L);
 
         /**
          * Creates a new {@link VkDescriptorUpdateTemplateCreateInfoKHR.Buffer} instance backed by the specified container.
@@ -288,13 +288,8 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDescriptorUpdateTemplateCreateInfoKHR newInstance(long address) {
-            return new VkDescriptorUpdateTemplateCreateInfoKHR(address, container);
+        protected VkDescriptorUpdateTemplateCreateInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

@@ -182,10 +182,6 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
         ASWFAILEDFRAMECOUNT = layout.offsetof(17);
     }
 
-    OVRPerfStatsPerCompositorFrame(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRPerfStatsPerCompositorFrame} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -193,7 +189,7 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRPerfStatsPerCompositorFrame(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -241,13 +237,13 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
 
     /** Returns a new {@link OVRPerfStatsPerCompositorFrame} instance for the specified memory address. */
     public static OVRPerfStatsPerCompositorFrame create(long address) {
-        return new OVRPerfStatsPerCompositorFrame(address, null);
+        return wrap(OVRPerfStatsPerCompositorFrame.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRPerfStatsPerCompositorFrame createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRPerfStatsPerCompositorFrame.class, address);
     }
 
     /**
@@ -257,58 +253,60 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
      * @param capacity the buffer capacity
      */
     public static OVRPerfStatsPerCompositorFrame.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRPerfStatsPerCompositorFrame.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #HmdVsyncIndex}. */
-    public static int nHmdVsyncIndex(long struct) { return memGetInt(struct + OVRPerfStatsPerCompositorFrame.HMDVSYNCINDEX); }
+    public static int nHmdVsyncIndex(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStatsPerCompositorFrame.HMDVSYNCINDEX); }
     /** Unsafe version of {@link #AppFrameIndex}. */
-    public static int nAppFrameIndex(long struct) { return memGetInt(struct + OVRPerfStatsPerCompositorFrame.APPFRAMEINDEX); }
+    public static int nAppFrameIndex(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStatsPerCompositorFrame.APPFRAMEINDEX); }
     /** Unsafe version of {@link #AppDroppedFrameCount}. */
-    public static int nAppDroppedFrameCount(long struct) { return memGetInt(struct + OVRPerfStatsPerCompositorFrame.APPDROPPEDFRAMECOUNT); }
+    public static int nAppDroppedFrameCount(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStatsPerCompositorFrame.APPDROPPEDFRAMECOUNT); }
     /** Unsafe version of {@link #AppMotionToPhotonLatency}. */
-    public static float nAppMotionToPhotonLatency(long struct) { return memGetFloat(struct + OVRPerfStatsPerCompositorFrame.APPMOTIONTOPHOTONLATENCY); }
+    public static float nAppMotionToPhotonLatency(long struct) { return UNSAFE.getFloat(null, struct + OVRPerfStatsPerCompositorFrame.APPMOTIONTOPHOTONLATENCY); }
     /** Unsafe version of {@link #AppQueueAheadTime}. */
-    public static float nAppQueueAheadTime(long struct) { return memGetFloat(struct + OVRPerfStatsPerCompositorFrame.APPQUEUEAHEADTIME); }
+    public static float nAppQueueAheadTime(long struct) { return UNSAFE.getFloat(null, struct + OVRPerfStatsPerCompositorFrame.APPQUEUEAHEADTIME); }
     /** Unsafe version of {@link #AppCpuElapsedTime}. */
-    public static float nAppCpuElapsedTime(long struct) { return memGetFloat(struct + OVRPerfStatsPerCompositorFrame.APPCPUELAPSEDTIME); }
+    public static float nAppCpuElapsedTime(long struct) { return UNSAFE.getFloat(null, struct + OVRPerfStatsPerCompositorFrame.APPCPUELAPSEDTIME); }
     /** Unsafe version of {@link #AppGpuElapsedTime}. */
-    public static float nAppGpuElapsedTime(long struct) { return memGetFloat(struct + OVRPerfStatsPerCompositorFrame.APPGPUELAPSEDTIME); }
+    public static float nAppGpuElapsedTime(long struct) { return UNSAFE.getFloat(null, struct + OVRPerfStatsPerCompositorFrame.APPGPUELAPSEDTIME); }
     /** Unsafe version of {@link #CompositorFrameIndex}. */
-    public static int nCompositorFrameIndex(long struct) { return memGetInt(struct + OVRPerfStatsPerCompositorFrame.COMPOSITORFRAMEINDEX); }
+    public static int nCompositorFrameIndex(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStatsPerCompositorFrame.COMPOSITORFRAMEINDEX); }
     /** Unsafe version of {@link #CompositorDroppedFrameCount}. */
-    public static int nCompositorDroppedFrameCount(long struct) { return memGetInt(struct + OVRPerfStatsPerCompositorFrame.COMPOSITORDROPPEDFRAMECOUNT); }
+    public static int nCompositorDroppedFrameCount(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStatsPerCompositorFrame.COMPOSITORDROPPEDFRAMECOUNT); }
     /** Unsafe version of {@link #CompositorLatency}. */
-    public static float nCompositorLatency(long struct) { return memGetFloat(struct + OVRPerfStatsPerCompositorFrame.COMPOSITORLATENCY); }
+    public static float nCompositorLatency(long struct) { return UNSAFE.getFloat(null, struct + OVRPerfStatsPerCompositorFrame.COMPOSITORLATENCY); }
     /** Unsafe version of {@link #CompositorCpuElapsedTime}. */
-    public static float nCompositorCpuElapsedTime(long struct) { return memGetFloat(struct + OVRPerfStatsPerCompositorFrame.COMPOSITORCPUELAPSEDTIME); }
+    public static float nCompositorCpuElapsedTime(long struct) { return UNSAFE.getFloat(null, struct + OVRPerfStatsPerCompositorFrame.COMPOSITORCPUELAPSEDTIME); }
     /** Unsafe version of {@link #CompositorGpuElapsedTime}. */
-    public static float nCompositorGpuElapsedTime(long struct) { return memGetFloat(struct + OVRPerfStatsPerCompositorFrame.COMPOSITORGPUELAPSEDTIME); }
+    public static float nCompositorGpuElapsedTime(long struct) { return UNSAFE.getFloat(null, struct + OVRPerfStatsPerCompositorFrame.COMPOSITORGPUELAPSEDTIME); }
     /** Unsafe version of {@link #CompositorCpuStartToGpuEndElapsedTime}. */
-    public static float nCompositorCpuStartToGpuEndElapsedTime(long struct) { return memGetFloat(struct + OVRPerfStatsPerCompositorFrame.COMPOSITORCPUSTARTTOGPUENDELAPSEDTIME); }
+    public static float nCompositorCpuStartToGpuEndElapsedTime(long struct) { return UNSAFE.getFloat(null, struct + OVRPerfStatsPerCompositorFrame.COMPOSITORCPUSTARTTOGPUENDELAPSEDTIME); }
     /** Unsafe version of {@link #CompositorGpuEndToVsyncElapsedTime}. */
-    public static float nCompositorGpuEndToVsyncElapsedTime(long struct) { return memGetFloat(struct + OVRPerfStatsPerCompositorFrame.COMPOSITORGPUENDTOVSYNCELAPSEDTIME); }
+    public static float nCompositorGpuEndToVsyncElapsedTime(long struct) { return UNSAFE.getFloat(null, struct + OVRPerfStatsPerCompositorFrame.COMPOSITORGPUENDTOVSYNCELAPSEDTIME); }
     /** Unsafe version of {@link #AswIsActive}. */
-    public static boolean nAswIsActive(long struct) { return memGetByte(struct + OVRPerfStatsPerCompositorFrame.ASWISACTIVE) != 0; }
+    public static boolean nAswIsActive(long struct) { return UNSAFE.getByte(null, struct + OVRPerfStatsPerCompositorFrame.ASWISACTIVE) != 0; }
     /** Unsafe version of {@link #AswActivatedToggleCount}. */
-    public static int nAswActivatedToggleCount(long struct) { return memGetInt(struct + OVRPerfStatsPerCompositorFrame.ASWACTIVATEDTOGGLECOUNT); }
+    public static int nAswActivatedToggleCount(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStatsPerCompositorFrame.ASWACTIVATEDTOGGLECOUNT); }
     /** Unsafe version of {@link #AswPresentedFrameCount}. */
-    public static int nAswPresentedFrameCount(long struct) { return memGetInt(struct + OVRPerfStatsPerCompositorFrame.ASWPRESENTEDFRAMECOUNT); }
+    public static int nAswPresentedFrameCount(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStatsPerCompositorFrame.ASWPRESENTEDFRAMECOUNT); }
     /** Unsafe version of {@link #AswFailedFrameCount}. */
-    public static int nAswFailedFrameCount(long struct) { return memGetInt(struct + OVRPerfStatsPerCompositorFrame.ASWFAILEDFRAMECOUNT); }
+    public static int nAswFailedFrameCount(long struct) { return UNSAFE.getInt(null, struct + OVRPerfStatsPerCompositorFrame.ASWFAILEDFRAMECOUNT); }
 
     // -----------------------------------
 
     /** An array of {@link OVRPerfStatsPerCompositorFrame} structs. */
     public static class Buffer extends StructBuffer<OVRPerfStatsPerCompositorFrame, Buffer> {
+
+        private static final OVRPerfStatsPerCompositorFrame ELEMENT_FACTORY = OVRPerfStatsPerCompositorFrame.create(-1L);
 
         /**
          * Creates a new {@link OVRPerfStatsPerCompositorFrame.Buffer} instance backed by the specified container.
@@ -337,18 +335,8 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRPerfStatsPerCompositorFrame newInstance(long address) {
-            return new OVRPerfStatsPerCompositorFrame(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRPerfStatsPerCompositorFrame getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code HmdVsyncIndex} field. */

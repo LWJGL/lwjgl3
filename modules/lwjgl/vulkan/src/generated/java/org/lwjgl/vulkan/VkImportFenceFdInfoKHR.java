@@ -127,10 +127,6 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
         FD = layout.offsetof(5);
     }
 
-    VkImportFenceFdInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkImportFenceFdInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -138,7 +134,7 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkImportFenceFdInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -210,28 +206,29 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
 
     /** Returns a new {@link VkImportFenceFdInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImportFenceFdInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkImportFenceFdInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkImportFenceFdInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImportFenceFdInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkImportFenceFdInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkImportFenceFdInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkImportFenceFdInfoKHR create() {
-        return new VkImportFenceFdInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkImportFenceFdInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkImportFenceFdInfoKHR} instance for the specified memory address. */
     public static VkImportFenceFdInfoKHR create(long address) {
-        return new VkImportFenceFdInfoKHR(address, null);
+        return wrap(VkImportFenceFdInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImportFenceFdInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkImportFenceFdInfoKHR.class, address);
     }
 
     /**
@@ -240,7 +237,7 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImportFenceFdInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -249,7 +246,7 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImportFenceFdInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -258,7 +255,8 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImportFenceFdInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -268,13 +266,13 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImportFenceFdInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImportFenceFdInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -295,7 +293,7 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkImportFenceFdInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkImportFenceFdInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -304,7 +302,7 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkImportFenceFdInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkImportFenceFdInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -332,7 +330,7 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImportFenceFdInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -342,41 +340,43 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkImportFenceFdInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkImportFenceFdInfoKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImportFenceFdInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImportFenceFdInfoKHR.PNEXT); }
     /** Unsafe version of {@link #fence}. */
-    public static long nfence(long struct) { return memGetLong(struct + VkImportFenceFdInfoKHR.FENCE); }
+    public static long nfence(long struct) { return UNSAFE.getLong(null, struct + VkImportFenceFdInfoKHR.FENCE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkImportFenceFdInfoKHR.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkImportFenceFdInfoKHR.FLAGS); }
     /** Unsafe version of {@link #handleType}. */
-    public static int nhandleType(long struct) { return memGetInt(struct + VkImportFenceFdInfoKHR.HANDLETYPE); }
+    public static int nhandleType(long struct) { return UNSAFE.getInt(null, struct + VkImportFenceFdInfoKHR.HANDLETYPE); }
     /** Unsafe version of {@link #fd}. */
-    public static int nfd(long struct) { return memGetInt(struct + VkImportFenceFdInfoKHR.FD); }
+    public static int nfd(long struct) { return UNSAFE.getInt(null, struct + VkImportFenceFdInfoKHR.FD); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkImportFenceFdInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportFenceFdInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImportFenceFdInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #fence(long) fence}. */
-    public static void nfence(long struct, long value) { memPutLong(struct + VkImportFenceFdInfoKHR.FENCE, value); }
+    public static void nfence(long struct, long value) { UNSAFE.putLong(null, struct + VkImportFenceFdInfoKHR.FENCE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkImportFenceFdInfoKHR.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkImportFenceFdInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #handleType(int) handleType}. */
-    public static void nhandleType(long struct, int value) { memPutInt(struct + VkImportFenceFdInfoKHR.HANDLETYPE, value); }
+    public static void nhandleType(long struct, int value) { UNSAFE.putInt(null, struct + VkImportFenceFdInfoKHR.HANDLETYPE, value); }
     /** Unsafe version of {@link #fd(int) fd}. */
-    public static void nfd(long struct, int value) { memPutInt(struct + VkImportFenceFdInfoKHR.FD, value); }
+    public static void nfd(long struct, int value) { UNSAFE.putInt(null, struct + VkImportFenceFdInfoKHR.FD, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkImportFenceFdInfoKHR} structs. */
     public static class Buffer extends StructBuffer<VkImportFenceFdInfoKHR, Buffer> implements NativeResource {
+
+        private static final VkImportFenceFdInfoKHR ELEMENT_FACTORY = VkImportFenceFdInfoKHR.create(-1L);
 
         /**
          * Creates a new {@link VkImportFenceFdInfoKHR.Buffer} instance backed by the specified container.
@@ -405,18 +405,8 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkImportFenceFdInfoKHR newInstance(long address) {
-            return new VkImportFenceFdInfoKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkImportFenceFdInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

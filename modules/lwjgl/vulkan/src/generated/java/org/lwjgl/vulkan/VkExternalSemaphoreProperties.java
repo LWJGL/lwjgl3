@@ -87,10 +87,6 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
         EXTERNALSEMAPHOREFEATURES = layout.offsetof(4);
     }
 
-    VkExternalSemaphoreProperties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkExternalSemaphoreProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -98,7 +94,7 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkExternalSemaphoreProperties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -152,28 +148,29 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
 
     /** Returns a new {@link VkExternalSemaphoreProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkExternalSemaphoreProperties malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkExternalSemaphoreProperties.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkExternalSemaphoreProperties} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkExternalSemaphoreProperties calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkExternalSemaphoreProperties.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkExternalSemaphoreProperties} instance allocated with {@link BufferUtils}. */
     public static VkExternalSemaphoreProperties create() {
-        return new VkExternalSemaphoreProperties(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkExternalSemaphoreProperties.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkExternalSemaphoreProperties} instance for the specified memory address. */
     public static VkExternalSemaphoreProperties create(long address) {
-        return new VkExternalSemaphoreProperties(address, null);
+        return wrap(VkExternalSemaphoreProperties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalSemaphoreProperties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkExternalSemaphoreProperties.class, address);
     }
 
     /**
@@ -182,7 +179,7 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkExternalSemaphoreProperties.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -191,7 +188,7 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkExternalSemaphoreProperties.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -200,7 +197,8 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkExternalSemaphoreProperties.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -210,13 +208,13 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkExternalSemaphoreProperties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalSemaphoreProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -237,7 +235,7 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkExternalSemaphoreProperties mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkExternalSemaphoreProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -246,7 +244,7 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkExternalSemaphoreProperties callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkExternalSemaphoreProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -274,7 +272,7 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkExternalSemaphoreProperties.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -284,24 +282,24 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkExternalSemaphoreProperties.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkExternalSemaphoreProperties.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExternalSemaphoreProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExternalSemaphoreProperties.PNEXT); }
     /** Unsafe version of {@link #exportFromImportedHandleTypes}. */
-    public static int nexportFromImportedHandleTypes(long struct) { return memGetInt(struct + VkExternalSemaphoreProperties.EXPORTFROMIMPORTEDHANDLETYPES); }
+    public static int nexportFromImportedHandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalSemaphoreProperties.EXPORTFROMIMPORTEDHANDLETYPES); }
     /** Unsafe version of {@link #compatibleHandleTypes}. */
-    public static int ncompatibleHandleTypes(long struct) { return memGetInt(struct + VkExternalSemaphoreProperties.COMPATIBLEHANDLETYPES); }
+    public static int ncompatibleHandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalSemaphoreProperties.COMPATIBLEHANDLETYPES); }
     /** Unsafe version of {@link #externalSemaphoreFeatures}. */
-    public static int nexternalSemaphoreFeatures(long struct) { return memGetInt(struct + VkExternalSemaphoreProperties.EXTERNALSEMAPHOREFEATURES); }
+    public static int nexternalSemaphoreFeatures(long struct) { return UNSAFE.getInt(null, struct + VkExternalSemaphoreProperties.EXTERNALSEMAPHOREFEATURES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkExternalSemaphoreProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExternalSemaphoreProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExternalSemaphoreProperties.PNEXT, value); }
 
@@ -309,6 +307,8 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
 
     /** An array of {@link VkExternalSemaphoreProperties} structs. */
     public static class Buffer extends StructBuffer<VkExternalSemaphoreProperties, Buffer> implements NativeResource {
+
+        private static final VkExternalSemaphoreProperties ELEMENT_FACTORY = VkExternalSemaphoreProperties.create(-1L);
 
         /**
          * Creates a new {@link VkExternalSemaphoreProperties.Buffer} instance backed by the specified container.
@@ -337,18 +337,8 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkExternalSemaphoreProperties newInstance(long address) {
-            return new VkExternalSemaphoreProperties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkExternalSemaphoreProperties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

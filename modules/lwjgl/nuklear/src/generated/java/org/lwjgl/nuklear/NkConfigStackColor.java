@@ -50,10 +50,6 @@ class NkConfigStackColor extends Struct {
         ELEMENTS = layout.offsetof(1);
     }
 
-    NkConfigStackColor(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkConfigStackColor} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -61,7 +57,7 @@ class NkConfigStackColor extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     NkConfigStackColor(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -80,13 +76,13 @@ class NkConfigStackColor extends Struct {
 
     /** Returns a new {@link NkConfigStackColor} instance for the specified memory address. */
     public static NkConfigStackColor create(long address) {
-        return new NkConfigStackColor(address, null);
+        return wrap(NkConfigStackColor.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigStackColor createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkConfigStackColor.class, address);
     }
 
     /**
@@ -96,19 +92,19 @@ class NkConfigStackColor extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkConfigStackColor.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigStackColor.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #head}. */
-    public static int nhead(long struct) { return memGetInt(struct + NkConfigStackColor.HEAD); }
+    public static int nhead(long struct) { return UNSAFE.getInt(null, struct + NkConfigStackColor.HEAD); }
     /** Unsafe version of {@link #elements}. */
     public static NkConfigStackColorElement.Buffer nelements(long struct) { return NkConfigStackColorElement.create(struct + NkConfigStackColor.ELEMENTS, 32); }
     /** Unsafe version of {@link #elements(int) elements}. */
@@ -120,6 +116,8 @@ class NkConfigStackColor extends Struct {
 
     /** An array of {@link NkConfigStackColor} structs. */
     public static class Buffer extends StructBuffer<NkConfigStackColor, Buffer> {
+
+        private static final NkConfigStackColor ELEMENT_FACTORY = NkConfigStackColor.create(-1L);
 
         /**
          * Creates a new {@link NkConfigStackColor.Buffer} instance backed by the specified container.
@@ -148,18 +146,8 @@ class NkConfigStackColor extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkConfigStackColor newInstance(long address) {
-            return new NkConfigStackColor(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkConfigStackColor getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code head} field. */

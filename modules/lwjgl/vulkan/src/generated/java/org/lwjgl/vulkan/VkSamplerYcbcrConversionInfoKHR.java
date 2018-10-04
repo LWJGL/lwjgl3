@@ -29,10 +29,6 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInfo {
 
-    VkSamplerYcbcrConversionInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSamplerYcbcrConversionInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -40,7 +36,7 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSamplerYcbcrConversionInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -83,28 +79,29 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
 
     /** Returns a new {@link VkSamplerYcbcrConversionInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSamplerYcbcrConversionInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkSamplerYcbcrConversionInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkSamplerYcbcrConversionInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSamplerYcbcrConversionInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkSamplerYcbcrConversionInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkSamplerYcbcrConversionInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkSamplerYcbcrConversionInfoKHR create() {
-        return new VkSamplerYcbcrConversionInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSamplerYcbcrConversionInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkSamplerYcbcrConversionInfoKHR} instance for the specified memory address. */
     public static VkSamplerYcbcrConversionInfoKHR create(long address) {
-        return new VkSamplerYcbcrConversionInfoKHR(address, null);
+        return wrap(VkSamplerYcbcrConversionInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSamplerYcbcrConversionInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSamplerYcbcrConversionInfoKHR.class, address);
     }
 
     /**
@@ -113,7 +110,7 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -122,7 +119,7 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -131,7 +128,8 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -141,13 +139,13 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSamplerYcbcrConversionInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -168,7 +166,7 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
      * @param stack the stack from which to allocate
      */
     public static VkSamplerYcbcrConversionInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkSamplerYcbcrConversionInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -177,7 +175,7 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
      * @param stack the stack from which to allocate
      */
     public static VkSamplerYcbcrConversionInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkSamplerYcbcrConversionInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -205,7 +203,7 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -215,13 +213,15 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
      * @param capacity the buffer capacity
      */
     public static VkSamplerYcbcrConversionInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkSamplerYcbcrConversionInfoKHR} structs. */
     public static class Buffer extends VkSamplerYcbcrConversionInfo.Buffer {
+
+        private static final VkSamplerYcbcrConversionInfoKHR ELEMENT_FACTORY = VkSamplerYcbcrConversionInfoKHR.create(-1L);
 
         /**
          * Creates a new {@link VkSamplerYcbcrConversionInfoKHR.Buffer} instance backed by the specified container.
@@ -250,13 +250,8 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSamplerYcbcrConversionInfoKHR newInstance(long address) {
-            return new VkSamplerYcbcrConversionInfoKHR(address, container);
+        protected VkSamplerYcbcrConversionInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

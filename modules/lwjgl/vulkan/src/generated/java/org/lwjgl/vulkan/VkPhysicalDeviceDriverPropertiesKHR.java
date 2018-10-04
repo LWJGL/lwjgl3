@@ -93,10 +93,6 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct {
         CONFORMANCEVERSION = layout.offsetof(5);
     }
 
-    VkPhysicalDeviceDriverPropertiesKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceDriverPropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -104,7 +100,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceDriverPropertiesKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -168,13 +164,13 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct {
 
     /** Returns a new {@link VkPhysicalDeviceDriverPropertiesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceDriverPropertiesKHR create(long address) {
-        return new VkPhysicalDeviceDriverPropertiesKHR(address, null);
+        return wrap(VkPhysicalDeviceDriverPropertiesKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceDriverPropertiesKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceDriverPropertiesKHR.class, address);
     }
 
     /**
@@ -184,23 +180,23 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceDriverPropertiesKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceDriverPropertiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceDriverPropertiesKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDriverPropertiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceDriverPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #driverID}. */
-    public static int ndriverID(long struct) { return memGetInt(struct + VkPhysicalDeviceDriverPropertiesKHR.DRIVERID); }
+    public static int ndriverID(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDriverPropertiesKHR.DRIVERID); }
     /** Unsafe version of {@link #driverName}. */
     public static ByteBuffer ndriverName(long struct) { return memByteBuffer(struct + VkPhysicalDeviceDriverPropertiesKHR.DRIVERNAME, VK_MAX_DRIVER_NAME_SIZE_KHR); }
     /** Unsafe version of {@link #driverNameString}. */
@@ -213,7 +209,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct {
     public static VkConformanceVersionKHR nconformanceVersion(long struct) { return VkConformanceVersionKHR.create(struct + VkPhysicalDeviceDriverPropertiesKHR.CONFORMANCEVERSION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceDriverPropertiesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDriverPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDriverPropertiesKHR.PNEXT, value); }
 
@@ -221,6 +217,8 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct {
 
     /** An array of {@link VkPhysicalDeviceDriverPropertiesKHR} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceDriverPropertiesKHR, Buffer> {
+
+        private static final VkPhysicalDeviceDriverPropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceDriverPropertiesKHR.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceDriverPropertiesKHR.Buffer} instance backed by the specified container.
@@ -249,18 +247,8 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceDriverPropertiesKHR newInstance(long address) {
-            return new VkPhysicalDeviceDriverPropertiesKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceDriverPropertiesKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

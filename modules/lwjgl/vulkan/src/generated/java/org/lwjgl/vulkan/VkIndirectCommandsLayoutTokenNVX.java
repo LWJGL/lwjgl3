@@ -86,10 +86,6 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
         DIVISOR = layout.offsetof(3);
     }
 
-    VkIndirectCommandsLayoutTokenNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkIndirectCommandsLayoutTokenNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -97,7 +93,7 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkIndirectCommandsLayoutTokenNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -156,28 +152,29 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
 
     /** Returns a new {@link VkIndirectCommandsLayoutTokenNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkIndirectCommandsLayoutTokenNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkIndirectCommandsLayoutTokenNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkIndirectCommandsLayoutTokenNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkIndirectCommandsLayoutTokenNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkIndirectCommandsLayoutTokenNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkIndirectCommandsLayoutTokenNVX} instance allocated with {@link BufferUtils}. */
     public static VkIndirectCommandsLayoutTokenNVX create() {
-        return new VkIndirectCommandsLayoutTokenNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkIndirectCommandsLayoutTokenNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkIndirectCommandsLayoutTokenNVX} instance for the specified memory address. */
     public static VkIndirectCommandsLayoutTokenNVX create(long address) {
-        return new VkIndirectCommandsLayoutTokenNVX(address, null);
+        return wrap(VkIndirectCommandsLayoutTokenNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkIndirectCommandsLayoutTokenNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkIndirectCommandsLayoutTokenNVX.class, address);
     }
 
     /**
@@ -186,7 +183,7 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutTokenNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -195,7 +192,7 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutTokenNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -204,7 +201,8 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutTokenNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -214,13 +212,13 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutTokenNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkIndirectCommandsLayoutTokenNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -241,7 +239,7 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkIndirectCommandsLayoutTokenNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkIndirectCommandsLayoutTokenNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -250,7 +248,7 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkIndirectCommandsLayoutTokenNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkIndirectCommandsLayoutTokenNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -278,7 +276,7 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutTokenNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -288,33 +286,35 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkIndirectCommandsLayoutTokenNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #tokenType}. */
-    public static int ntokenType(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNVX.TOKENTYPE); }
+    public static int ntokenType(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNVX.TOKENTYPE); }
     /** Unsafe version of {@link #bindingUnit}. */
-    public static int nbindingUnit(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNVX.BINDINGUNIT); }
+    public static int nbindingUnit(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNVX.BINDINGUNIT); }
     /** Unsafe version of {@link #dynamicCount}. */
-    public static int ndynamicCount(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNVX.DYNAMICCOUNT); }
+    public static int ndynamicCount(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNVX.DYNAMICCOUNT); }
     /** Unsafe version of {@link #divisor}. */
-    public static int ndivisor(long struct) { return memGetInt(struct + VkIndirectCommandsLayoutTokenNVX.DIVISOR); }
+    public static int ndivisor(long struct) { return UNSAFE.getInt(null, struct + VkIndirectCommandsLayoutTokenNVX.DIVISOR); }
 
     /** Unsafe version of {@link #tokenType(int) tokenType}. */
-    public static void ntokenType(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNVX.TOKENTYPE, value); }
+    public static void ntokenType(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNVX.TOKENTYPE, value); }
     /** Unsafe version of {@link #bindingUnit(int) bindingUnit}. */
-    public static void nbindingUnit(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNVX.BINDINGUNIT, value); }
+    public static void nbindingUnit(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNVX.BINDINGUNIT, value); }
     /** Unsafe version of {@link #dynamicCount(int) dynamicCount}. */
-    public static void ndynamicCount(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNVX.DYNAMICCOUNT, value); }
+    public static void ndynamicCount(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNVX.DYNAMICCOUNT, value); }
     /** Unsafe version of {@link #divisor(int) divisor}. */
-    public static void ndivisor(long struct, int value) { memPutInt(struct + VkIndirectCommandsLayoutTokenNVX.DIVISOR, value); }
+    public static void ndivisor(long struct, int value) { UNSAFE.putInt(null, struct + VkIndirectCommandsLayoutTokenNVX.DIVISOR, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkIndirectCommandsLayoutTokenNVX} structs. */
     public static class Buffer extends StructBuffer<VkIndirectCommandsLayoutTokenNVX, Buffer> implements NativeResource {
+
+        private static final VkIndirectCommandsLayoutTokenNVX ELEMENT_FACTORY = VkIndirectCommandsLayoutTokenNVX.create(-1L);
 
         /**
          * Creates a new {@link VkIndirectCommandsLayoutTokenNVX.Buffer} instance backed by the specified container.
@@ -343,18 +343,8 @@ public class VkIndirectCommandsLayoutTokenNVX extends Struct implements NativeRe
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkIndirectCommandsLayoutTokenNVX newInstance(long address) {
-            return new VkIndirectCommandsLayoutTokenNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkIndirectCommandsLayoutTokenNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code tokenType} field. */

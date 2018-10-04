@@ -105,10 +105,6 @@ class NkTextEdit extends Struct implements NativeResource {
         UNDO = layout.offsetof(15);
     }
 
-    NkTextEdit(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkTextEdit} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -116,7 +112,7 @@ class NkTextEdit extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     NkTextEdit(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -173,28 +169,29 @@ class NkTextEdit extends Struct implements NativeResource {
 
     /** Returns a new {@link NkTextEdit} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkTextEdit malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkTextEdit.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkTextEdit} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkTextEdit calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkTextEdit.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkTextEdit} instance allocated with {@link BufferUtils}. */
     public static NkTextEdit create() {
-        return new NkTextEdit(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkTextEdit.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkTextEdit} instance for the specified memory address. */
     public static NkTextEdit create(long address) {
-        return new NkTextEdit(address, null);
+        return wrap(NkTextEdit.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkTextEdit createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkTextEdit.class, address);
     }
 
     /**
@@ -203,7 +200,7 @@ class NkTextEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkTextEdit.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -212,7 +209,7 @@ class NkTextEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkTextEdit.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -221,7 +218,8 @@ class NkTextEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkTextEdit.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -231,13 +229,13 @@ class NkTextEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkTextEdit.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkTextEdit.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -258,7 +256,7 @@ class NkTextEdit extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkTextEdit mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkTextEdit.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -267,7 +265,7 @@ class NkTextEdit extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkTextEdit callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkTextEdit.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -295,7 +293,7 @@ class NkTextEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkTextEdit.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -305,7 +303,7 @@ class NkTextEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkTextEdit.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -319,25 +317,25 @@ class NkTextEdit extends Struct implements NativeResource {
     /** Unsafe version of {@link #scrollbar}. */
     public static NkVec2 nscrollbar(long struct) { return NkVec2.create(struct + NkTextEdit.SCROLLBAR); }
     /** Unsafe version of {@link #cursor}. */
-    public static int ncursor(long struct) { return memGetInt(struct + NkTextEdit.CURSOR); }
+    public static int ncursor(long struct) { return UNSAFE.getInt(null, struct + NkTextEdit.CURSOR); }
     /** Unsafe version of {@link #select_start}. */
-    public static int nselect_start(long struct) { return memGetInt(struct + NkTextEdit.SELECT_START); }
+    public static int nselect_start(long struct) { return UNSAFE.getInt(null, struct + NkTextEdit.SELECT_START); }
     /** Unsafe version of {@link #select_end}. */
-    public static int nselect_end(long struct) { return memGetInt(struct + NkTextEdit.SELECT_END); }
+    public static int nselect_end(long struct) { return UNSAFE.getInt(null, struct + NkTextEdit.SELECT_END); }
     /** Unsafe version of {@link #mode}. */
-    public static byte nmode(long struct) { return memGetByte(struct + NkTextEdit.MODE); }
+    public static byte nmode(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.MODE); }
     /** Unsafe version of {@link #cursor_at_end_of_line}. */
-    public static boolean ncursor_at_end_of_line(long struct) { return memGetByte(struct + NkTextEdit.CURSOR_AT_END_OF_LINE) != 0; }
+    public static boolean ncursor_at_end_of_line(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.CURSOR_AT_END_OF_LINE) != 0; }
     /** Unsafe version of {@link #initialized}. */
-    public static boolean ninitialized(long struct) { return memGetByte(struct + NkTextEdit.INITIALIZED) != 0; }
+    public static boolean ninitialized(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.INITIALIZED) != 0; }
     /** Unsafe version of {@link #has_preferred_x}. */
-    public static boolean nhas_preferred_x(long struct) { return memGetByte(struct + NkTextEdit.HAS_PREFERRED_X) != 0; }
+    public static boolean nhas_preferred_x(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.HAS_PREFERRED_X) != 0; }
     /** Unsafe version of {@link #single_line}. */
-    public static boolean nsingle_line(long struct) { return memGetByte(struct + NkTextEdit.SINGLE_LINE) != 0; }
+    public static boolean nsingle_line(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.SINGLE_LINE) != 0; }
     /** Unsafe version of {@link #active}. */
-    public static boolean nactive(long struct) { return memGetByte(struct + NkTextEdit.ACTIVE) != 0; }
+    public static boolean nactive(long struct) { return UNSAFE.getByte(null, struct + NkTextEdit.ACTIVE) != 0; }
     /** Unsafe version of {@link #preferred_x}. */
-    public static float npreferred_x(long struct) { return memGetFloat(struct + NkTextEdit.PREFERRED_X); }
+    public static float npreferred_x(long struct) { return UNSAFE.getFloat(null, struct + NkTextEdit.PREFERRED_X); }
     /** Unsafe version of {@link #undo}. */
     public static NkTextUndoState nundo(long struct) { return NkTextUndoState.create(struct + NkTextEdit.UNDO); }
 
@@ -345,6 +343,8 @@ class NkTextEdit extends Struct implements NativeResource {
 
     /** An array of {@link NkTextEdit} structs. */
     public static class Buffer extends StructBuffer<NkTextEdit, Buffer> implements NativeResource {
+
+        private static final NkTextEdit ELEMENT_FACTORY = NkTextEdit.create(-1L);
 
         /**
          * Creates a new {@link NkTextEdit.Buffer} instance backed by the specified container.
@@ -373,18 +373,8 @@ class NkTextEdit extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkTextEdit newInstance(long address) {
-            return new NkTextEdit(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkTextEdit getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkClipboard} view of the {@code clip} field. */

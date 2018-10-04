@@ -71,10 +71,6 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
         HANDLETYPES = layout.offsetof(2);
     }
 
-    VkExternalMemoryBufferCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkExternalMemoryBufferCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -82,7 +78,7 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkExternalMemoryBufferCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -134,28 +130,29 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
 
     /** Returns a new {@link VkExternalMemoryBufferCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkExternalMemoryBufferCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkExternalMemoryBufferCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkExternalMemoryBufferCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkExternalMemoryBufferCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkExternalMemoryBufferCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkExternalMemoryBufferCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkExternalMemoryBufferCreateInfo create() {
-        return new VkExternalMemoryBufferCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkExternalMemoryBufferCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkExternalMemoryBufferCreateInfo} instance for the specified memory address. */
     public static VkExternalMemoryBufferCreateInfo create(long address) {
-        return new VkExternalMemoryBufferCreateInfo(address, null);
+        return wrap(VkExternalMemoryBufferCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalMemoryBufferCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkExternalMemoryBufferCreateInfo.class, address);
     }
 
     /**
@@ -164,7 +161,7 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryBufferCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -173,7 +170,7 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryBufferCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -182,7 +179,8 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryBufferCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -192,13 +190,13 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryBufferCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalMemoryBufferCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -219,7 +217,7 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkExternalMemoryBufferCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkExternalMemoryBufferCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -228,7 +226,7 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkExternalMemoryBufferCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkExternalMemoryBufferCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -256,7 +254,7 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryBufferCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -266,29 +264,31 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryBufferCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkExternalMemoryBufferCreateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExternalMemoryBufferCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExternalMemoryBufferCreateInfo.PNEXT); }
     /** Unsafe version of {@link #handleTypes}. */
-    public static int nhandleTypes(long struct) { return memGetInt(struct + VkExternalMemoryBufferCreateInfo.HANDLETYPES); }
+    public static int nhandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExternalMemoryBufferCreateInfo.HANDLETYPES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkExternalMemoryBufferCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExternalMemoryBufferCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExternalMemoryBufferCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #handleTypes(int) handleTypes}. */
-    public static void nhandleTypes(long struct, int value) { memPutInt(struct + VkExternalMemoryBufferCreateInfo.HANDLETYPES, value); }
+    public static void nhandleTypes(long struct, int value) { UNSAFE.putInt(null, struct + VkExternalMemoryBufferCreateInfo.HANDLETYPES, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkExternalMemoryBufferCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VkExternalMemoryBufferCreateInfo, Buffer> implements NativeResource {
+
+        private static final VkExternalMemoryBufferCreateInfo ELEMENT_FACTORY = VkExternalMemoryBufferCreateInfo.create(-1L);
 
         /**
          * Creates a new {@link VkExternalMemoryBufferCreateInfo.Buffer} instance backed by the specified container.
@@ -317,18 +317,8 @@ public class VkExternalMemoryBufferCreateInfo extends Struct implements NativeRe
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkExternalMemoryBufferCreateInfo newInstance(long address) {
-            return new VkExternalMemoryBufferCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkExternalMemoryBufferCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

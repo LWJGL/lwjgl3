@@ -131,10 +131,6 @@ public class NkStyleEdit extends Struct implements NativeResource {
         ROW_PADDING = layout.offsetof(21);
     }
 
-    NkStyleEdit(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkStyleEdit} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -142,7 +138,7 @@ public class NkStyleEdit extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkStyleEdit(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -359,28 +355,29 @@ public class NkStyleEdit extends Struct implements NativeResource {
 
     /** Returns a new {@link NkStyleEdit} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkStyleEdit malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkStyleEdit.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkStyleEdit} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkStyleEdit calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkStyleEdit.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkStyleEdit} instance allocated with {@link BufferUtils}. */
     public static NkStyleEdit create() {
-        return new NkStyleEdit(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkStyleEdit.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkStyleEdit} instance for the specified memory address. */
     public static NkStyleEdit create(long address) {
-        return new NkStyleEdit(address, null);
+        return wrap(NkStyleEdit.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleEdit createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkStyleEdit.class, address);
     }
 
     /**
@@ -389,7 +386,7 @@ public class NkStyleEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleEdit.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -398,7 +395,7 @@ public class NkStyleEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleEdit.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -407,7 +404,8 @@ public class NkStyleEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleEdit.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -417,13 +415,13 @@ public class NkStyleEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleEdit.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleEdit.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -444,7 +442,7 @@ public class NkStyleEdit extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleEdit mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkStyleEdit.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -453,7 +451,7 @@ public class NkStyleEdit extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleEdit callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkStyleEdit.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -481,7 +479,7 @@ public class NkStyleEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleEdit.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -491,7 +489,7 @@ public class NkStyleEdit extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleEdit.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -529,17 +527,17 @@ public class NkStyleEdit extends Struct implements NativeResource {
     /** Unsafe version of {@link #selected_text_hover}. */
     public static NkColor nselected_text_hover(long struct) { return NkColor.create(struct + NkStyleEdit.SELECTED_TEXT_HOVER); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return memGetFloat(struct + NkStyleEdit.BORDER); }
+    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkStyleEdit.BORDER); }
     /** Unsafe version of {@link #rounding}. */
-    public static float nrounding(long struct) { return memGetFloat(struct + NkStyleEdit.ROUNDING); }
+    public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleEdit.ROUNDING); }
     /** Unsafe version of {@link #cursor_size}. */
-    public static float ncursor_size(long struct) { return memGetFloat(struct + NkStyleEdit.CURSOR_SIZE); }
+    public static float ncursor_size(long struct) { return UNSAFE.getFloat(null, struct + NkStyleEdit.CURSOR_SIZE); }
     /** Unsafe version of {@link #scrollbar_size}. */
     public static NkVec2 nscrollbar_size(long struct) { return NkVec2.create(struct + NkStyleEdit.SCROLLBAR_SIZE); }
     /** Unsafe version of {@link #padding}. */
     public static NkVec2 npadding(long struct) { return NkVec2.create(struct + NkStyleEdit.PADDING); }
     /** Unsafe version of {@link #row_padding}. */
-    public static float nrow_padding(long struct) { return memGetFloat(struct + NkStyleEdit.ROW_PADDING); }
+    public static float nrow_padding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleEdit.ROW_PADDING); }
 
     /** Unsafe version of {@link #normal(NkStyleItem) normal}. */
     public static void nnormal(long struct, NkStyleItem value) { memCopy(value.address(), struct + NkStyleEdit.NORMAL, NkStyleItem.SIZEOF); }
@@ -574,22 +572,24 @@ public class NkStyleEdit extends Struct implements NativeResource {
     /** Unsafe version of {@link #selected_text_hover(NkColor) selected_text_hover}. */
     public static void nselected_text_hover(long struct, NkColor value) { memCopy(value.address(), struct + NkStyleEdit.SELECTED_TEXT_HOVER, NkColor.SIZEOF); }
     /** Unsafe version of {@link #border(float) border}. */
-    public static void nborder(long struct, float value) { memPutFloat(struct + NkStyleEdit.BORDER, value); }
+    public static void nborder(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleEdit.BORDER, value); }
     /** Unsafe version of {@link #rounding(float) rounding}. */
-    public static void nrounding(long struct, float value) { memPutFloat(struct + NkStyleEdit.ROUNDING, value); }
+    public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleEdit.ROUNDING, value); }
     /** Unsafe version of {@link #cursor_size(float) cursor_size}. */
-    public static void ncursor_size(long struct, float value) { memPutFloat(struct + NkStyleEdit.CURSOR_SIZE, value); }
+    public static void ncursor_size(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleEdit.CURSOR_SIZE, value); }
     /** Unsafe version of {@link #scrollbar_size(NkVec2) scrollbar_size}. */
     public static void nscrollbar_size(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleEdit.SCROLLBAR_SIZE, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #padding(NkVec2) padding}. */
     public static void npadding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleEdit.PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #row_padding(float) row_padding}. */
-    public static void nrow_padding(long struct, float value) { memPutFloat(struct + NkStyleEdit.ROW_PADDING, value); }
+    public static void nrow_padding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleEdit.ROW_PADDING, value); }
 
     // -----------------------------------
 
     /** An array of {@link NkStyleEdit} structs. */
     public static class Buffer extends StructBuffer<NkStyleEdit, Buffer> implements NativeResource {
+
+        private static final NkStyleEdit ELEMENT_FACTORY = NkStyleEdit.create(-1L);
 
         /**
          * Creates a new {@link NkStyleEdit.Buffer} instance backed by the specified container.
@@ -618,18 +618,8 @@ public class NkStyleEdit extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkStyleEdit newInstance(long address) {
-            return new NkStyleEdit(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkStyleEdit getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkStyleItem} view of the {@code normal} field. */

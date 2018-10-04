@@ -73,10 +73,6 @@ public class STBTTBakedChar extends Struct implements NativeResource {
         XADVANCE = layout.offsetof(6);
     }
 
-    STBTTBakedChar(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link STBTTBakedChar} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -84,7 +80,7 @@ public class STBTTBakedChar extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public STBTTBakedChar(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -113,28 +109,29 @@ public class STBTTBakedChar extends Struct implements NativeResource {
 
     /** Returns a new {@link STBTTBakedChar} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static STBTTBakedChar malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(STBTTBakedChar.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link STBTTBakedChar} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static STBTTBakedChar calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(STBTTBakedChar.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link STBTTBakedChar} instance allocated with {@link BufferUtils}. */
     public static STBTTBakedChar create() {
-        return new STBTTBakedChar(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(STBTTBakedChar.class, memAddress(container), container);
     }
 
     /** Returns a new {@link STBTTBakedChar} instance for the specified memory address. */
     public static STBTTBakedChar create(long address) {
-        return new STBTTBakedChar(address, null);
+        return wrap(STBTTBakedChar.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBTTBakedChar createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(STBTTBakedChar.class, address);
     }
 
     /**
@@ -143,7 +140,7 @@ public class STBTTBakedChar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTBakedChar.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -152,7 +149,7 @@ public class STBTTBakedChar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTBakedChar.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -161,7 +158,8 @@ public class STBTTBakedChar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTBakedChar.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -171,13 +169,13 @@ public class STBTTBakedChar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTBakedChar.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBTTBakedChar.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -198,7 +196,7 @@ public class STBTTBakedChar extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBTTBakedChar mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(STBTTBakedChar.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -207,7 +205,7 @@ public class STBTTBakedChar extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBTTBakedChar callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(STBTTBakedChar.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -235,7 +233,7 @@ public class STBTTBakedChar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTBakedChar.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -245,30 +243,32 @@ public class STBTTBakedChar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTBakedChar.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x0}. */
-    public static short nx0(long struct) { return memGetShort(struct + STBTTBakedChar.X0); }
+    public static short nx0(long struct) { return UNSAFE.getShort(null, struct + STBTTBakedChar.X0); }
     /** Unsafe version of {@link #y0}. */
-    public static short ny0(long struct) { return memGetShort(struct + STBTTBakedChar.Y0); }
+    public static short ny0(long struct) { return UNSAFE.getShort(null, struct + STBTTBakedChar.Y0); }
     /** Unsafe version of {@link #x1}. */
-    public static short nx1(long struct) { return memGetShort(struct + STBTTBakedChar.X1); }
+    public static short nx1(long struct) { return UNSAFE.getShort(null, struct + STBTTBakedChar.X1); }
     /** Unsafe version of {@link #y1}. */
-    public static short ny1(long struct) { return memGetShort(struct + STBTTBakedChar.Y1); }
+    public static short ny1(long struct) { return UNSAFE.getShort(null, struct + STBTTBakedChar.Y1); }
     /** Unsafe version of {@link #xoff}. */
-    public static float nxoff(long struct) { return memGetFloat(struct + STBTTBakedChar.XOFF); }
+    public static float nxoff(long struct) { return UNSAFE.getFloat(null, struct + STBTTBakedChar.XOFF); }
     /** Unsafe version of {@link #yoff}. */
-    public static float nyoff(long struct) { return memGetFloat(struct + STBTTBakedChar.YOFF); }
+    public static float nyoff(long struct) { return UNSAFE.getFloat(null, struct + STBTTBakedChar.YOFF); }
     /** Unsafe version of {@link #xadvance}. */
-    public static float nxadvance(long struct) { return memGetFloat(struct + STBTTBakedChar.XADVANCE); }
+    public static float nxadvance(long struct) { return UNSAFE.getFloat(null, struct + STBTTBakedChar.XADVANCE); }
 
     // -----------------------------------
 
     /** An array of {@link STBTTBakedChar} structs. */
     public static class Buffer extends StructBuffer<STBTTBakedChar, Buffer> implements NativeResource {
+
+        private static final STBTTBakedChar ELEMENT_FACTORY = STBTTBakedChar.create(-1L);
 
         /**
          * Creates a new {@link STBTTBakedChar.Buffer} instance backed by the specified container.
@@ -297,18 +297,8 @@ public class STBTTBakedChar extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected STBTTBakedChar newInstance(long address) {
-            return new STBTTBakedChar(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected STBTTBakedChar getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x0} field. */

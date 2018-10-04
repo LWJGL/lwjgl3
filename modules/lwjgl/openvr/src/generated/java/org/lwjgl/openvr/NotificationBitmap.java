@@ -62,10 +62,6 @@ public class NotificationBitmap extends Struct implements NativeResource {
         M_NBYTESPERPIXEL = layout.offsetof(3);
     }
 
-    NotificationBitmap(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NotificationBitmap} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -73,7 +69,7 @@ public class NotificationBitmap extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NotificationBitmap(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -136,28 +132,29 @@ public class NotificationBitmap extends Struct implements NativeResource {
 
     /** Returns a new {@link NotificationBitmap} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NotificationBitmap malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NotificationBitmap.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NotificationBitmap} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NotificationBitmap calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NotificationBitmap.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NotificationBitmap} instance allocated with {@link BufferUtils}. */
     public static NotificationBitmap create() {
-        return new NotificationBitmap(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NotificationBitmap.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NotificationBitmap} instance for the specified memory address. */
     public static NotificationBitmap create(long address) {
-        return new NotificationBitmap(address, null);
+        return wrap(NotificationBitmap.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NotificationBitmap createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NotificationBitmap.class, address);
     }
 
     /**
@@ -166,7 +163,7 @@ public class NotificationBitmap extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NotificationBitmap.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -175,7 +172,7 @@ public class NotificationBitmap extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NotificationBitmap.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -184,7 +181,8 @@ public class NotificationBitmap extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NotificationBitmap.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -194,13 +192,13 @@ public class NotificationBitmap extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NotificationBitmap.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NotificationBitmap.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -221,7 +219,7 @@ public class NotificationBitmap extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NotificationBitmap mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NotificationBitmap.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -230,7 +228,7 @@ public class NotificationBitmap extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NotificationBitmap callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NotificationBitmap.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -258,7 +256,7 @@ public class NotificationBitmap extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NotificationBitmap.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -268,7 +266,7 @@ public class NotificationBitmap extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NotificationBitmap.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -276,20 +274,20 @@ public class NotificationBitmap extends Struct implements NativeResource {
     /** Unsafe version of {@link #m_pImageData(int) m_pImageData}. */
     public static ByteBuffer nm_pImageData(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + NotificationBitmap.M_PIMAGEDATA), capacity); }
     /** Unsafe version of {@link #m_nWidth}. */
-    public static int nm_nWidth(long struct) { return memGetInt(struct + NotificationBitmap.M_NWIDTH); }
+    public static int nm_nWidth(long struct) { return UNSAFE.getInt(null, struct + NotificationBitmap.M_NWIDTH); }
     /** Unsafe version of {@link #m_nHeight}. */
-    public static int nm_nHeight(long struct) { return memGetInt(struct + NotificationBitmap.M_NHEIGHT); }
+    public static int nm_nHeight(long struct) { return UNSAFE.getInt(null, struct + NotificationBitmap.M_NHEIGHT); }
     /** Unsafe version of {@link #m_nBytesPerPixel}. */
-    public static int nm_nBytesPerPixel(long struct) { return memGetInt(struct + NotificationBitmap.M_NBYTESPERPIXEL); }
+    public static int nm_nBytesPerPixel(long struct) { return UNSAFE.getInt(null, struct + NotificationBitmap.M_NBYTESPERPIXEL); }
 
     /** Unsafe version of {@link #m_pImageData(ByteBuffer) m_pImageData}. */
     public static void nm_pImageData(long struct, ByteBuffer value) { memPutAddress(struct + NotificationBitmap.M_PIMAGEDATA, memAddress(value)); }
     /** Unsafe version of {@link #m_nWidth(int) m_nWidth}. */
-    public static void nm_nWidth(long struct, int value) { memPutInt(struct + NotificationBitmap.M_NWIDTH, value); }
+    public static void nm_nWidth(long struct, int value) { UNSAFE.putInt(null, struct + NotificationBitmap.M_NWIDTH, value); }
     /** Unsafe version of {@link #m_nHeight(int) m_nHeight}. */
-    public static void nm_nHeight(long struct, int value) { memPutInt(struct + NotificationBitmap.M_NHEIGHT, value); }
+    public static void nm_nHeight(long struct, int value) { UNSAFE.putInt(null, struct + NotificationBitmap.M_NHEIGHT, value); }
     /** Unsafe version of {@link #m_nBytesPerPixel(int) m_nBytesPerPixel}. */
-    public static void nm_nBytesPerPixel(long struct, int value) { memPutInt(struct + NotificationBitmap.M_NBYTESPERPIXEL, value); }
+    public static void nm_nBytesPerPixel(long struct, int value) { UNSAFE.putInt(null, struct + NotificationBitmap.M_NBYTESPERPIXEL, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -316,6 +314,8 @@ public class NotificationBitmap extends Struct implements NativeResource {
 
     /** An array of {@link NotificationBitmap} structs. */
     public static class Buffer extends StructBuffer<NotificationBitmap, Buffer> implements NativeResource {
+
+        private static final NotificationBitmap ELEMENT_FACTORY = NotificationBitmap.create(-1L);
 
         /**
          * Creates a new {@link NotificationBitmap.Buffer} instance backed by the specified container.
@@ -344,18 +344,8 @@ public class NotificationBitmap extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NotificationBitmap newInstance(long address) {
-            return new NotificationBitmap(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NotificationBitmap getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /**

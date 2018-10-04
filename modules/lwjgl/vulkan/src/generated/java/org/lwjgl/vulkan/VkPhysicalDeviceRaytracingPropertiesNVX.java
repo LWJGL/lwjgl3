@@ -82,10 +82,6 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
         MAXGEOMETRYCOUNT = layout.offsetof(4);
     }
 
-    VkPhysicalDeviceRaytracingPropertiesNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceRaytracingPropertiesNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -93,7 +89,7 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceRaytracingPropertiesNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -159,28 +155,29 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
 
     /** Returns a new {@link VkPhysicalDeviceRaytracingPropertiesNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceRaytracingPropertiesNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceRaytracingPropertiesNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceRaytracingPropertiesNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceRaytracingPropertiesNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceRaytracingPropertiesNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceRaytracingPropertiesNVX} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceRaytracingPropertiesNVX create() {
-        return new VkPhysicalDeviceRaytracingPropertiesNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceRaytracingPropertiesNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceRaytracingPropertiesNVX} instance for the specified memory address. */
     public static VkPhysicalDeviceRaytracingPropertiesNVX create(long address) {
-        return new VkPhysicalDeviceRaytracingPropertiesNVX(address, null);
+        return wrap(VkPhysicalDeviceRaytracingPropertiesNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceRaytracingPropertiesNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceRaytracingPropertiesNVX.class, address);
     }
 
     /**
@@ -189,7 +186,7 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRaytracingPropertiesNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -198,7 +195,7 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRaytracingPropertiesNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -207,7 +204,8 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRaytracingPropertiesNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -217,13 +215,13 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRaytracingPropertiesNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceRaytracingPropertiesNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -244,7 +242,7 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceRaytracingPropertiesNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceRaytracingPropertiesNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -253,7 +251,7 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceRaytracingPropertiesNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceRaytracingPropertiesNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -281,7 +279,7 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRaytracingPropertiesNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -291,37 +289,39 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRaytracingPropertiesNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRaytracingPropertiesNVX.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRaytracingPropertiesNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRaytracingPropertiesNVX.PNEXT); }
     /** Unsafe version of {@link #shaderHeaderSize}. */
-    public static int nshaderHeaderSize(long struct) { return memGetInt(struct + VkPhysicalDeviceRaytracingPropertiesNVX.SHADERHEADERSIZE); }
+    public static int nshaderHeaderSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRaytracingPropertiesNVX.SHADERHEADERSIZE); }
     /** Unsafe version of {@link #maxRecursionDepth}. */
-    public static int nmaxRecursionDepth(long struct) { return memGetInt(struct + VkPhysicalDeviceRaytracingPropertiesNVX.MAXRECURSIONDEPTH); }
+    public static int nmaxRecursionDepth(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRaytracingPropertiesNVX.MAXRECURSIONDEPTH); }
     /** Unsafe version of {@link #maxGeometryCount}. */
-    public static int nmaxGeometryCount(long struct) { return memGetInt(struct + VkPhysicalDeviceRaytracingPropertiesNVX.MAXGEOMETRYCOUNT); }
+    public static int nmaxGeometryCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceRaytracingPropertiesNVX.MAXGEOMETRYCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRaytracingPropertiesNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRaytracingPropertiesNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRaytracingPropertiesNVX.PNEXT, value); }
     /** Unsafe version of {@link #shaderHeaderSize(int) shaderHeaderSize}. */
-    public static void nshaderHeaderSize(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRaytracingPropertiesNVX.SHADERHEADERSIZE, value); }
+    public static void nshaderHeaderSize(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRaytracingPropertiesNVX.SHADERHEADERSIZE, value); }
     /** Unsafe version of {@link #maxRecursionDepth(int) maxRecursionDepth}. */
-    public static void nmaxRecursionDepth(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRaytracingPropertiesNVX.MAXRECURSIONDEPTH, value); }
+    public static void nmaxRecursionDepth(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRaytracingPropertiesNVX.MAXRECURSIONDEPTH, value); }
     /** Unsafe version of {@link #maxGeometryCount(int) maxGeometryCount}. */
-    public static void nmaxGeometryCount(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRaytracingPropertiesNVX.MAXGEOMETRYCOUNT, value); }
+    public static void nmaxGeometryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRaytracingPropertiesNVX.MAXGEOMETRYCOUNT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceRaytracingPropertiesNVX} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceRaytracingPropertiesNVX, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceRaytracingPropertiesNVX ELEMENT_FACTORY = VkPhysicalDeviceRaytracingPropertiesNVX.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceRaytracingPropertiesNVX.Buffer} instance backed by the specified container.
@@ -350,18 +350,8 @@ public class VkPhysicalDeviceRaytracingPropertiesNVX extends Struct implements N
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceRaytracingPropertiesNVX newInstance(long address) {
-            return new VkPhysicalDeviceRaytracingPropertiesNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceRaytracingPropertiesNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

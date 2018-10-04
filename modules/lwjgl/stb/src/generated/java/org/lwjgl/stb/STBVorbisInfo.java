@@ -69,10 +69,6 @@ public class STBVorbisInfo extends Struct implements NativeResource {
         MAX_FRAME_SIZE = layout.offsetof(5);
     }
 
-    STBVorbisInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link STBVorbisInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -80,7 +76,7 @@ public class STBVorbisInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public STBVorbisInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -107,28 +103,29 @@ public class STBVorbisInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link STBVorbisInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static STBVorbisInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(STBVorbisInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link STBVorbisInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static STBVorbisInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(STBVorbisInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link STBVorbisInfo} instance allocated with {@link BufferUtils}. */
     public static STBVorbisInfo create() {
-        return new STBVorbisInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(STBVorbisInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link STBVorbisInfo} instance for the specified memory address. */
     public static STBVorbisInfo create(long address) {
-        return new STBVorbisInfo(address, null);
+        return wrap(STBVorbisInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBVorbisInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(STBVorbisInfo.class, address);
     }
 
     /**
@@ -137,7 +134,7 @@ public class STBVorbisInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBVorbisInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -146,7 +143,7 @@ public class STBVorbisInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBVorbisInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -155,7 +152,8 @@ public class STBVorbisInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBVorbisInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -165,13 +163,13 @@ public class STBVorbisInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBVorbisInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBVorbisInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -192,7 +190,7 @@ public class STBVorbisInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBVorbisInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(STBVorbisInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -201,7 +199,7 @@ public class STBVorbisInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBVorbisInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(STBVorbisInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -229,7 +227,7 @@ public class STBVorbisInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBVorbisInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -239,28 +237,30 @@ public class STBVorbisInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBVorbisInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sample_rate}. */
-    public static int nsample_rate(long struct) { return memGetInt(struct + STBVorbisInfo.SAMPLE_RATE); }
+    public static int nsample_rate(long struct) { return UNSAFE.getInt(null, struct + STBVorbisInfo.SAMPLE_RATE); }
     /** Unsafe version of {@link #channels}. */
-    public static int nchannels(long struct) { return memGetInt(struct + STBVorbisInfo.CHANNELS); }
+    public static int nchannels(long struct) { return UNSAFE.getInt(null, struct + STBVorbisInfo.CHANNELS); }
     /** Unsafe version of {@link #setup_memory_required}. */
-    public static int nsetup_memory_required(long struct) { return memGetInt(struct + STBVorbisInfo.SETUP_MEMORY_REQUIRED); }
+    public static int nsetup_memory_required(long struct) { return UNSAFE.getInt(null, struct + STBVorbisInfo.SETUP_MEMORY_REQUIRED); }
     /** Unsafe version of {@link #setup_temp_memory_required}. */
-    public static int nsetup_temp_memory_required(long struct) { return memGetInt(struct + STBVorbisInfo.SETUP_TEMP_MEMORY_REQUIRED); }
+    public static int nsetup_temp_memory_required(long struct) { return UNSAFE.getInt(null, struct + STBVorbisInfo.SETUP_TEMP_MEMORY_REQUIRED); }
     /** Unsafe version of {@link #temp_memory_required}. */
-    public static int ntemp_memory_required(long struct) { return memGetInt(struct + STBVorbisInfo.TEMP_MEMORY_REQUIRED); }
+    public static int ntemp_memory_required(long struct) { return UNSAFE.getInt(null, struct + STBVorbisInfo.TEMP_MEMORY_REQUIRED); }
     /** Unsafe version of {@link #max_frame_size}. */
-    public static int nmax_frame_size(long struct) { return memGetInt(struct + STBVorbisInfo.MAX_FRAME_SIZE); }
+    public static int nmax_frame_size(long struct) { return UNSAFE.getInt(null, struct + STBVorbisInfo.MAX_FRAME_SIZE); }
 
     // -----------------------------------
 
     /** An array of {@link STBVorbisInfo} structs. */
     public static class Buffer extends StructBuffer<STBVorbisInfo, Buffer> implements NativeResource {
+
+        private static final STBVorbisInfo ELEMENT_FACTORY = STBVorbisInfo.create(-1L);
 
         /**
          * Creates a new {@link STBVorbisInfo.Buffer} instance backed by the specified container.
@@ -289,18 +289,8 @@ public class STBVorbisInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected STBVorbisInfo newInstance(long address) {
-            return new STBVorbisInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected STBVorbisInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sample_rate} field. */

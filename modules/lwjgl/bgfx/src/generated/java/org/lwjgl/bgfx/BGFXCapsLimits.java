@@ -163,10 +163,6 @@ public class BGFXCapsLimits extends Struct {
         TRANSIENTIBSIZE = layout.offsetof(22);
     }
 
-    BGFXCapsLimits(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXCapsLimits} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -174,7 +170,7 @@ public class BGFXCapsLimits extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXCapsLimits(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -254,13 +250,13 @@ public class BGFXCapsLimits extends Struct {
 
     /** Returns a new {@link BGFXCapsLimits} instance for the specified memory address. */
     public static BGFXCapsLimits create(long address) {
-        return new BGFXCapsLimits(address, null);
+        return wrap(BGFXCapsLimits.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXCapsLimits createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXCapsLimits.class, address);
     }
 
     /**
@@ -270,68 +266,70 @@ public class BGFXCapsLimits extends Struct {
      * @param capacity the buffer capacity
      */
     public static BGFXCapsLimits.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXCapsLimits.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #maxDrawCalls}. */
-    public static int nmaxDrawCalls(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXDRAWCALLS); }
+    public static int nmaxDrawCalls(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXDRAWCALLS); }
     /** Unsafe version of {@link #maxBlits}. */
-    public static int nmaxBlits(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXBLITS); }
+    public static int nmaxBlits(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXBLITS); }
     /** Unsafe version of {@link #maxTextureSize}. */
-    public static int nmaxTextureSize(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXTEXTURESIZE); }
+    public static int nmaxTextureSize(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXTEXTURESIZE); }
     /** Unsafe version of {@link #maxTextureLayers}. */
-    public static int nmaxTextureLayers(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXTEXTURELAYERS); }
+    public static int nmaxTextureLayers(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXTEXTURELAYERS); }
     /** Unsafe version of {@link #maxViews}. */
-    public static int nmaxViews(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXVIEWS); }
+    public static int nmaxViews(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXVIEWS); }
     /** Unsafe version of {@link #maxFrameBuffers}. */
-    public static int nmaxFrameBuffers(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXFRAMEBUFFERS); }
+    public static int nmaxFrameBuffers(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXFRAMEBUFFERS); }
     /** Unsafe version of {@link #maxFBAttachments}. */
-    public static int nmaxFBAttachments(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXFBATTACHMENTS); }
+    public static int nmaxFBAttachments(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXFBATTACHMENTS); }
     /** Unsafe version of {@link #maxPrograms}. */
-    public static int nmaxPrograms(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXPROGRAMS); }
+    public static int nmaxPrograms(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXPROGRAMS); }
     /** Unsafe version of {@link #maxShaders}. */
-    public static int nmaxShaders(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXSHADERS); }
+    public static int nmaxShaders(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXSHADERS); }
     /** Unsafe version of {@link #maxTextures}. */
-    public static int nmaxTextures(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXTEXTURES); }
+    public static int nmaxTextures(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXTEXTURES); }
     /** Unsafe version of {@link #maxTextureSamplers}. */
-    public static int nmaxTextureSamplers(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXTEXTURESAMPLERS); }
+    public static int nmaxTextureSamplers(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXTEXTURESAMPLERS); }
     /** Unsafe version of {@link #maxComputeBindings}. */
-    public static int nmaxComputeBindings(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXCOMPUTEBINDINGS); }
+    public static int nmaxComputeBindings(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXCOMPUTEBINDINGS); }
     /** Unsafe version of {@link #maxVertexDecls}. */
-    public static int nmaxVertexDecls(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXVERTEXDECLS); }
+    public static int nmaxVertexDecls(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXVERTEXDECLS); }
     /** Unsafe version of {@link #maxVertexStreams}. */
-    public static int nmaxVertexStreams(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXVERTEXSTREAMS); }
+    public static int nmaxVertexStreams(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXVERTEXSTREAMS); }
     /** Unsafe version of {@link #maxIndexBuffers}. */
-    public static int nmaxIndexBuffers(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXINDEXBUFFERS); }
+    public static int nmaxIndexBuffers(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXINDEXBUFFERS); }
     /** Unsafe version of {@link #maxVertexBuffers}. */
-    public static int nmaxVertexBuffers(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXVERTEXBUFFERS); }
+    public static int nmaxVertexBuffers(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXVERTEXBUFFERS); }
     /** Unsafe version of {@link #maxDynamicIndexBuffers}. */
-    public static int nmaxDynamicIndexBuffers(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXDYNAMICINDEXBUFFERS); }
+    public static int nmaxDynamicIndexBuffers(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXDYNAMICINDEXBUFFERS); }
     /** Unsafe version of {@link #maxDynamicVertexBuffers}. */
-    public static int nmaxDynamicVertexBuffers(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXDYNAMICVERTEXBUFFERS); }
+    public static int nmaxDynamicVertexBuffers(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXDYNAMICVERTEXBUFFERS); }
     /** Unsafe version of {@link #maxUniforms}. */
-    public static int nmaxUniforms(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXUNIFORMS); }
+    public static int nmaxUniforms(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXUNIFORMS); }
     /** Unsafe version of {@link #maxOcclusionQueries}. */
-    public static int nmaxOcclusionQueries(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXOCCLUSIONQUERIES); }
+    public static int nmaxOcclusionQueries(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXOCCLUSIONQUERIES); }
     /** Unsafe version of {@link #maxEncoders}. */
-    public static int nmaxEncoders(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXENCODERS); }
+    public static int nmaxEncoders(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.MAXENCODERS); }
     /** Unsafe version of {@link #transientVbSize}. */
-    public static int ntransientVbSize(long struct) { return memGetInt(struct + BGFXCapsLimits.TRANSIENTVBSIZE); }
+    public static int ntransientVbSize(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.TRANSIENTVBSIZE); }
     /** Unsafe version of {@link #transientIbSize}. */
-    public static int ntransientIbSize(long struct) { return memGetInt(struct + BGFXCapsLimits.TRANSIENTIBSIZE); }
+    public static int ntransientIbSize(long struct) { return UNSAFE.getInt(null, struct + BGFXCapsLimits.TRANSIENTIBSIZE); }
 
     // -----------------------------------
 
     /** An array of {@link BGFXCapsLimits} structs. */
     public static class Buffer extends StructBuffer<BGFXCapsLimits, Buffer> {
+
+        private static final BGFXCapsLimits ELEMENT_FACTORY = BGFXCapsLimits.create(-1L);
 
         /**
          * Creates a new {@link BGFXCapsLimits.Buffer} instance backed by the specified container.
@@ -360,18 +358,8 @@ public class BGFXCapsLimits extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected BGFXCapsLimits newInstance(long address) {
-            return new BGFXCapsLimits(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected BGFXCapsLimits getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code maxDrawCalls} field. */

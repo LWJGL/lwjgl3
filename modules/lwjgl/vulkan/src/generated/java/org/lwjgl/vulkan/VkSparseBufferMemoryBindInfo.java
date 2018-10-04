@@ -77,10 +77,6 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
         PBINDS = layout.offsetof(2);
     }
 
-    VkSparseBufferMemoryBindInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSparseBufferMemoryBindInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -88,7 +84,7 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSparseBufferMemoryBindInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -136,28 +132,29 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
 
     /** Returns a new {@link VkSparseBufferMemoryBindInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSparseBufferMemoryBindInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkSparseBufferMemoryBindInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkSparseBufferMemoryBindInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSparseBufferMemoryBindInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkSparseBufferMemoryBindInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkSparseBufferMemoryBindInfo} instance allocated with {@link BufferUtils}. */
     public static VkSparseBufferMemoryBindInfo create() {
-        return new VkSparseBufferMemoryBindInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSparseBufferMemoryBindInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkSparseBufferMemoryBindInfo} instance for the specified memory address. */
     public static VkSparseBufferMemoryBindInfo create(long address) {
-        return new VkSparseBufferMemoryBindInfo(address, null);
+        return wrap(VkSparseBufferMemoryBindInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSparseBufferMemoryBindInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSparseBufferMemoryBindInfo.class, address);
     }
 
     /**
@@ -166,7 +163,7 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkSparseBufferMemoryBindInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -175,7 +172,7 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkSparseBufferMemoryBindInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -184,7 +181,8 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkSparseBufferMemoryBindInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -194,13 +192,13 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkSparseBufferMemoryBindInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSparseBufferMemoryBindInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -221,7 +219,7 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkSparseBufferMemoryBindInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkSparseBufferMemoryBindInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -230,7 +228,7 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkSparseBufferMemoryBindInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkSparseBufferMemoryBindInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -258,7 +256,7 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkSparseBufferMemoryBindInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -268,22 +266,22 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkSparseBufferMemoryBindInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #buffer}. */
-    public static long nbuffer(long struct) { return memGetLong(struct + VkSparseBufferMemoryBindInfo.BUFFER); }
+    public static long nbuffer(long struct) { return UNSAFE.getLong(null, struct + VkSparseBufferMemoryBindInfo.BUFFER); }
     /** Unsafe version of {@link #bindCount}. */
-    public static int nbindCount(long struct) { return memGetInt(struct + VkSparseBufferMemoryBindInfo.BINDCOUNT); }
+    public static int nbindCount(long struct) { return UNSAFE.getInt(null, struct + VkSparseBufferMemoryBindInfo.BINDCOUNT); }
     /** Unsafe version of {@link #pBinds}. */
     public static VkSparseMemoryBind.Buffer npBinds(long struct) { return VkSparseMemoryBind.create(memGetAddress(struct + VkSparseBufferMemoryBindInfo.PBINDS), nbindCount(struct)); }
 
     /** Unsafe version of {@link #buffer(long) buffer}. */
-    public static void nbuffer(long struct, long value) { memPutLong(struct + VkSparseBufferMemoryBindInfo.BUFFER, value); }
+    public static void nbuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkSparseBufferMemoryBindInfo.BUFFER, value); }
     /** Sets the specified value to the {@code bindCount} field of the specified {@code struct}. */
-    public static void nbindCount(long struct, int value) { memPutInt(struct + VkSparseBufferMemoryBindInfo.BINDCOUNT, value); }
+    public static void nbindCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSparseBufferMemoryBindInfo.BINDCOUNT, value); }
     /** Unsafe version of {@link #pBinds(VkSparseMemoryBind.Buffer) pBinds}. */
     public static void npBinds(long struct, VkSparseMemoryBind.Buffer value) { memPutAddress(struct + VkSparseBufferMemoryBindInfo.PBINDS, value.address()); nbindCount(struct, value.remaining()); }
 
@@ -313,6 +311,8 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
     /** An array of {@link VkSparseBufferMemoryBindInfo} structs. */
     public static class Buffer extends StructBuffer<VkSparseBufferMemoryBindInfo, Buffer> implements NativeResource {
 
+        private static final VkSparseBufferMemoryBindInfo ELEMENT_FACTORY = VkSparseBufferMemoryBindInfo.create(-1L);
+
         /**
          * Creates a new {@link VkSparseBufferMemoryBindInfo.Buffer} instance backed by the specified container.
          *
@@ -340,18 +340,8 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSparseBufferMemoryBindInfo newInstance(long address) {
-            return new VkSparseBufferMemoryBindInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSparseBufferMemoryBindInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code buffer} field. */

@@ -82,10 +82,6 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
         DECODEMODE = layout.offsetof(2);
     }
 
-    VkImageViewASTCDecodeModeEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkImageViewASTCDecodeModeEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -93,7 +89,7 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkImageViewASTCDecodeModeEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -145,28 +141,29 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
 
     /** Returns a new {@link VkImageViewASTCDecodeModeEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageViewASTCDecodeModeEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkImageViewASTCDecodeModeEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkImageViewASTCDecodeModeEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageViewASTCDecodeModeEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkImageViewASTCDecodeModeEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkImageViewASTCDecodeModeEXT} instance allocated with {@link BufferUtils}. */
     public static VkImageViewASTCDecodeModeEXT create() {
-        return new VkImageViewASTCDecodeModeEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkImageViewASTCDecodeModeEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkImageViewASTCDecodeModeEXT} instance for the specified memory address. */
     public static VkImageViewASTCDecodeModeEXT create(long address) {
-        return new VkImageViewASTCDecodeModeEXT(address, null);
+        return wrap(VkImageViewASTCDecodeModeEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageViewASTCDecodeModeEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkImageViewASTCDecodeModeEXT.class, address);
     }
 
     /**
@@ -175,7 +172,7 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkImageViewASTCDecodeModeEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -184,7 +181,7 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkImageViewASTCDecodeModeEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -193,7 +190,8 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkImageViewASTCDecodeModeEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -203,13 +201,13 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkImageViewASTCDecodeModeEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageViewASTCDecodeModeEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -230,7 +228,7 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkImageViewASTCDecodeModeEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkImageViewASTCDecodeModeEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -239,7 +237,7 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkImageViewASTCDecodeModeEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkImageViewASTCDecodeModeEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -267,7 +265,7 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkImageViewASTCDecodeModeEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -277,29 +275,31 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkImageViewASTCDecodeModeEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkImageViewASTCDecodeModeEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageViewASTCDecodeModeEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageViewASTCDecodeModeEXT.PNEXT); }
     /** Unsafe version of {@link #decodeMode}. */
-    public static int ndecodeMode(long struct) { return memGetInt(struct + VkImageViewASTCDecodeModeEXT.DECODEMODE); }
+    public static int ndecodeMode(long struct) { return UNSAFE.getInt(null, struct + VkImageViewASTCDecodeModeEXT.DECODEMODE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkImageViewASTCDecodeModeEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewASTCDecodeModeEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageViewASTCDecodeModeEXT.PNEXT, value); }
     /** Unsafe version of {@link #decodeMode(int) decodeMode}. */
-    public static void ndecodeMode(long struct, int value) { memPutInt(struct + VkImageViewASTCDecodeModeEXT.DECODEMODE, value); }
+    public static void ndecodeMode(long struct, int value) { UNSAFE.putInt(null, struct + VkImageViewASTCDecodeModeEXT.DECODEMODE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkImageViewASTCDecodeModeEXT} structs. */
     public static class Buffer extends StructBuffer<VkImageViewASTCDecodeModeEXT, Buffer> implements NativeResource {
+
+        private static final VkImageViewASTCDecodeModeEXT ELEMENT_FACTORY = VkImageViewASTCDecodeModeEXT.create(-1L);
 
         /**
          * Creates a new {@link VkImageViewASTCDecodeModeEXT.Buffer} instance backed by the specified container.
@@ -328,18 +328,8 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkImageViewASTCDecodeModeEXT newInstance(long address) {
-            return new VkImageViewASTCDecodeModeEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkImageViewASTCDecodeModeEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

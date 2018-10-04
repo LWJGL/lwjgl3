@@ -76,10 +76,6 @@ public class DeepImage extends Struct implements NativeResource {
         HEIGHT = layout.offsetof(5);
     }
 
-    DeepImage(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link DeepImage} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -87,7 +83,7 @@ public class DeepImage extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public DeepImage(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -161,28 +157,29 @@ public class DeepImage extends Struct implements NativeResource {
 
     /** Returns a new {@link DeepImage} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static DeepImage malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(DeepImage.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link DeepImage} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static DeepImage calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(DeepImage.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link DeepImage} instance allocated with {@link BufferUtils}. */
     public static DeepImage create() {
-        return new DeepImage(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(DeepImage.class, memAddress(container), container);
     }
 
     /** Returns a new {@link DeepImage} instance for the specified memory address. */
     public static DeepImage create(long address) {
-        return new DeepImage(address, null);
+        return wrap(DeepImage.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DeepImage createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(DeepImage.class, address);
     }
 
     /**
@@ -191,7 +188,7 @@ public class DeepImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DeepImage.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -200,7 +197,7 @@ public class DeepImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DeepImage.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -209,7 +206,8 @@ public class DeepImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DeepImage.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -219,13 +217,13 @@ public class DeepImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DeepImage.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DeepImage.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -246,7 +244,7 @@ public class DeepImage extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static DeepImage mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(DeepImage.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -255,7 +253,7 @@ public class DeepImage extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static DeepImage callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(DeepImage.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -283,7 +281,7 @@ public class DeepImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DeepImage.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -293,7 +291,7 @@ public class DeepImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DeepImage.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -305,11 +303,11 @@ public class DeepImage extends Struct implements NativeResource {
     /** Unsafe version of {@link #offset_table(int) offset_table}. */
     public static PointerBuffer noffset_table(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + DeepImage.OFFSET_TABLE), capacity); }
     /** Unsafe version of {@link #num_channels}. */
-    public static int nnum_channels(long struct) { return memGetInt(struct + DeepImage.NUM_CHANNELS); }
+    public static int nnum_channels(long struct) { return UNSAFE.getInt(null, struct + DeepImage.NUM_CHANNELS); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return memGetInt(struct + DeepImage.WIDTH); }
+    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + DeepImage.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return memGetInt(struct + DeepImage.HEIGHT); }
+    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + DeepImage.HEIGHT); }
 
     /** Unsafe version of {@link #channel_names(PointerBuffer) channel_names}. */
     public static void nchannel_names(long struct, PointerBuffer value) { memPutAddress(struct + DeepImage.CHANNEL_NAMES, memAddress(value)); }
@@ -318,11 +316,11 @@ public class DeepImage extends Struct implements NativeResource {
     /** Unsafe version of {@link #offset_table(PointerBuffer) offset_table}. */
     public static void noffset_table(long struct, PointerBuffer value) { memPutAddress(struct + DeepImage.OFFSET_TABLE, memAddress(value)); }
     /** Sets the specified value to the {@code num_channels} field of the specified {@code struct}. */
-    public static void nnum_channels(long struct, int value) { memPutInt(struct + DeepImage.NUM_CHANNELS, value); }
+    public static void nnum_channels(long struct, int value) { UNSAFE.putInt(null, struct + DeepImage.NUM_CHANNELS, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { memPutInt(struct + DeepImage.WIDTH, value); }
+    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + DeepImage.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { memPutInt(struct + DeepImage.HEIGHT, value); }
+    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + DeepImage.HEIGHT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -352,6 +350,8 @@ public class DeepImage extends Struct implements NativeResource {
     /** An array of {@link DeepImage} structs. */
     public static class Buffer extends StructBuffer<DeepImage, Buffer> implements NativeResource {
 
+        private static final DeepImage ELEMENT_FACTORY = DeepImage.create(-1L);
+
         /**
          * Creates a new {@link DeepImage.Buffer} instance backed by the specified container.
          *
@@ -379,18 +379,8 @@ public class DeepImage extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected DeepImage newInstance(long address) {
-            return new DeepImage(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected DeepImage getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code channel_names} field. */

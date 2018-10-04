@@ -85,10 +85,6 @@ public class STBTTPackContext extends Struct implements NativeResource {
         NODES = layout.offsetof(9);
     }
 
-    STBTTPackContext(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link STBTTPackContext} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -96,7 +92,7 @@ public class STBTTPackContext extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public STBTTPackContext(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -141,28 +137,29 @@ public class STBTTPackContext extends Struct implements NativeResource {
 
     /** Returns a new {@link STBTTPackContext} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static STBTTPackContext malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(STBTTPackContext.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link STBTTPackContext} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static STBTTPackContext calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(STBTTPackContext.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link STBTTPackContext} instance allocated with {@link BufferUtils}. */
     public static STBTTPackContext create() {
-        return new STBTTPackContext(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(STBTTPackContext.class, memAddress(container), container);
     }
 
     /** Returns a new {@link STBTTPackContext} instance for the specified memory address. */
     public static STBTTPackContext create(long address) {
-        return new STBTTPackContext(address, null);
+        return wrap(STBTTPackContext.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBTTPackContext createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(STBTTPackContext.class, address);
     }
 
     /**
@@ -171,7 +168,7 @@ public class STBTTPackContext extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackContext.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -180,7 +177,7 @@ public class STBTTPackContext extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackContext.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -189,7 +186,8 @@ public class STBTTPackContext extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackContext.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -199,13 +197,13 @@ public class STBTTPackContext extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackContext.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBTTPackContext.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -226,7 +224,7 @@ public class STBTTPackContext extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBTTPackContext mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(STBTTPackContext.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -235,7 +233,7 @@ public class STBTTPackContext extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBTTPackContext callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(STBTTPackContext.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -263,7 +261,7 @@ public class STBTTPackContext extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackContext.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -273,7 +271,7 @@ public class STBTTPackContext extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackContext.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -283,17 +281,17 @@ public class STBTTPackContext extends Struct implements NativeResource {
     /** Unsafe version of {@link #pack_info}. */
     public static STBRPContext npack_info(long struct) { return STBRPContext.create(memGetAddress(struct + STBTTPackContext.PACK_INFO)); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return memGetInt(struct + STBTTPackContext.WIDTH); }
+    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + STBTTPackContext.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return memGetInt(struct + STBTTPackContext.HEIGHT); }
+    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + STBTTPackContext.HEIGHT); }
     /** Unsafe version of {@link #stride_in_bytes}. */
-    public static int nstride_in_bytes(long struct) { return memGetInt(struct + STBTTPackContext.STRIDE_IN_BYTES); }
+    public static int nstride_in_bytes(long struct) { return UNSAFE.getInt(null, struct + STBTTPackContext.STRIDE_IN_BYTES); }
     /** Unsafe version of {@link #padding}. */
-    public static int npadding(long struct) { return memGetInt(struct + STBTTPackContext.PADDING); }
+    public static int npadding(long struct) { return UNSAFE.getInt(null, struct + STBTTPackContext.PADDING); }
     /** Unsafe version of {@link #h_oversample}. */
-    public static int nh_oversample(long struct) { return memGetInt(struct + STBTTPackContext.H_OVERSAMPLE); }
+    public static int nh_oversample(long struct) { return UNSAFE.getInt(null, struct + STBTTPackContext.H_OVERSAMPLE); }
     /** Unsafe version of {@link #v_oversample}. */
-    public static int nv_oversample(long struct) { return memGetInt(struct + STBTTPackContext.V_OVERSAMPLE); }
+    public static int nv_oversample(long struct) { return UNSAFE.getInt(null, struct + STBTTPackContext.V_OVERSAMPLE); }
     /** Unsafe version of {@link #pixels(int) pixels}. */
     public static ByteBuffer npixels(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + STBTTPackContext.PIXELS), capacity); }
     /** Unsafe version of {@link #nodes}. */
@@ -303,6 +301,8 @@ public class STBTTPackContext extends Struct implements NativeResource {
 
     /** An array of {@link STBTTPackContext} structs. */
     public static class Buffer extends StructBuffer<STBTTPackContext, Buffer> implements NativeResource {
+
+        private static final STBTTPackContext ELEMENT_FACTORY = STBTTPackContext.create(-1L);
 
         /**
          * Creates a new {@link STBTTPackContext.Buffer} instance backed by the specified container.
@@ -331,18 +331,8 @@ public class STBTTPackContext extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected STBTTPackContext newInstance(long address) {
-            return new STBTTPackContext(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected STBTTPackContext getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code user_allocator_context} field. */

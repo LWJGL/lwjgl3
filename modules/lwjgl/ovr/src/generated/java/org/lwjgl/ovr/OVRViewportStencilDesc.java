@@ -66,10 +66,6 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
         HMDTOEYEROTATION = layout.offsetof(3);
     }
 
-    OVRViewportStencilDesc(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRViewportStencilDesc} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -77,7 +73,7 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRViewportStencilDesc(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -140,28 +136,29 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
 
     /** Returns a new {@link OVRViewportStencilDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRViewportStencilDesc malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRViewportStencilDesc.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRViewportStencilDesc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRViewportStencilDesc calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRViewportStencilDesc.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRViewportStencilDesc} instance allocated with {@link BufferUtils}. */
     public static OVRViewportStencilDesc create() {
-        return new OVRViewportStencilDesc(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRViewportStencilDesc.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRViewportStencilDesc} instance for the specified memory address. */
     public static OVRViewportStencilDesc create(long address) {
-        return new OVRViewportStencilDesc(address, null);
+        return wrap(OVRViewportStencilDesc.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRViewportStencilDesc createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRViewportStencilDesc.class, address);
     }
 
     /**
@@ -170,7 +167,7 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilDesc.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -179,7 +176,7 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilDesc.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -188,7 +185,8 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilDesc.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -198,13 +196,13 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilDesc.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRViewportStencilDesc.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -225,7 +223,7 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRViewportStencilDesc mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRViewportStencilDesc.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -234,7 +232,7 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRViewportStencilDesc callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRViewportStencilDesc.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -262,7 +260,7 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilDesc.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -272,24 +270,24 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRViewportStencilDesc.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #StencilType}. */
-    public static int nStencilType(long struct) { return memGetInt(struct + OVRViewportStencilDesc.STENCILTYPE); }
+    public static int nStencilType(long struct) { return UNSAFE.getInt(null, struct + OVRViewportStencilDesc.STENCILTYPE); }
     /** Unsafe version of {@link #Eye}. */
-    public static int nEye(long struct) { return memGetInt(struct + OVRViewportStencilDesc.EYE); }
+    public static int nEye(long struct) { return UNSAFE.getInt(null, struct + OVRViewportStencilDesc.EYE); }
     /** Unsafe version of {@link #FovPort}. */
     public static OVRFovPort nFovPort(long struct) { return OVRFovPort.create(struct + OVRViewportStencilDesc.FOVPORT); }
     /** Unsafe version of {@link #HmdToEyeRotation}. */
     public static OVRQuatf nHmdToEyeRotation(long struct) { return OVRQuatf.create(struct + OVRViewportStencilDesc.HMDTOEYEROTATION); }
 
     /** Unsafe version of {@link #StencilType(int) StencilType}. */
-    public static void nStencilType(long struct, int value) { memPutInt(struct + OVRViewportStencilDesc.STENCILTYPE, value); }
+    public static void nStencilType(long struct, int value) { UNSAFE.putInt(null, struct + OVRViewportStencilDesc.STENCILTYPE, value); }
     /** Unsafe version of {@link #Eye(int) Eye}. */
-    public static void nEye(long struct, int value) { memPutInt(struct + OVRViewportStencilDesc.EYE, value); }
+    public static void nEye(long struct, int value) { UNSAFE.putInt(null, struct + OVRViewportStencilDesc.EYE, value); }
     /** Unsafe version of {@link #FovPort(OVRFovPort) FovPort}. */
     public static void nFovPort(long struct, OVRFovPort value) { memCopy(value.address(), struct + OVRViewportStencilDesc.FOVPORT, OVRFovPort.SIZEOF); }
     /** Unsafe version of {@link #HmdToEyeRotation(OVRQuatf) HmdToEyeRotation}. */
@@ -299,6 +297,8 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
 
     /** An array of {@link OVRViewportStencilDesc} structs. */
     public static class Buffer extends StructBuffer<OVRViewportStencilDesc, Buffer> implements NativeResource {
+
+        private static final OVRViewportStencilDesc ELEMENT_FACTORY = OVRViewportStencilDesc.create(-1L);
 
         /**
          * Creates a new {@link OVRViewportStencilDesc.Buffer} instance backed by the specified container.
@@ -327,18 +327,8 @@ public class OVRViewportStencilDesc extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRViewportStencilDesc newInstance(long address) {
-            return new OVRViewportStencilDesc(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRViewportStencilDesc getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code StencilType} field. */

@@ -97,10 +97,6 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
         HANDLETYPE = layout.offsetof(3);
     }
 
-    VkSemaphoreGetWin32HandleInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSemaphoreGetWin32HandleInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -108,7 +104,7 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSemaphoreGetWin32HandleInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -167,28 +163,29 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
 
     /** Returns a new {@link VkSemaphoreGetWin32HandleInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSemaphoreGetWin32HandleInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkSemaphoreGetWin32HandleInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkSemaphoreGetWin32HandleInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSemaphoreGetWin32HandleInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkSemaphoreGetWin32HandleInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkSemaphoreGetWin32HandleInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkSemaphoreGetWin32HandleInfoKHR create() {
-        return new VkSemaphoreGetWin32HandleInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSemaphoreGetWin32HandleInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkSemaphoreGetWin32HandleInfoKHR} instance for the specified memory address. */
     public static VkSemaphoreGetWin32HandleInfoKHR create(long address) {
-        return new VkSemaphoreGetWin32HandleInfoKHR(address, null);
+        return wrap(VkSemaphoreGetWin32HandleInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSemaphoreGetWin32HandleInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSemaphoreGetWin32HandleInfoKHR.class, address);
     }
 
     /**
@@ -197,7 +194,7 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSemaphoreGetWin32HandleInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -206,7 +203,7 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSemaphoreGetWin32HandleInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -215,7 +212,8 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSemaphoreGetWin32HandleInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -225,13 +223,13 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSemaphoreGetWin32HandleInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSemaphoreGetWin32HandleInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -252,7 +250,7 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkSemaphoreGetWin32HandleInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkSemaphoreGetWin32HandleInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -261,7 +259,7 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkSemaphoreGetWin32HandleInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkSemaphoreGetWin32HandleInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -289,7 +287,7 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSemaphoreGetWin32HandleInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -299,33 +297,35 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkSemaphoreGetWin32HandleInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSemaphoreGetWin32HandleInfoKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreGetWin32HandleInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSemaphoreGetWin32HandleInfoKHR.PNEXT); }
     /** Unsafe version of {@link #semaphore}. */
-    public static long nsemaphore(long struct) { return memGetLong(struct + VkSemaphoreGetWin32HandleInfoKHR.SEMAPHORE); }
+    public static long nsemaphore(long struct) { return UNSAFE.getLong(null, struct + VkSemaphoreGetWin32HandleInfoKHR.SEMAPHORE); }
     /** Unsafe version of {@link #handleType}. */
-    public static int nhandleType(long struct) { return memGetInt(struct + VkSemaphoreGetWin32HandleInfoKHR.HANDLETYPE); }
+    public static int nhandleType(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreGetWin32HandleInfoKHR.HANDLETYPE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSemaphoreGetWin32HandleInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreGetWin32HandleInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSemaphoreGetWin32HandleInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #semaphore(long) semaphore}. */
-    public static void nsemaphore(long struct, long value) { memPutLong(struct + VkSemaphoreGetWin32HandleInfoKHR.SEMAPHORE, value); }
+    public static void nsemaphore(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreGetWin32HandleInfoKHR.SEMAPHORE, value); }
     /** Unsafe version of {@link #handleType(int) handleType}. */
-    public static void nhandleType(long struct, int value) { memPutInt(struct + VkSemaphoreGetWin32HandleInfoKHR.HANDLETYPE, value); }
+    public static void nhandleType(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreGetWin32HandleInfoKHR.HANDLETYPE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkSemaphoreGetWin32HandleInfoKHR} structs. */
     public static class Buffer extends StructBuffer<VkSemaphoreGetWin32HandleInfoKHR, Buffer> implements NativeResource {
+
+        private static final VkSemaphoreGetWin32HandleInfoKHR ELEMENT_FACTORY = VkSemaphoreGetWin32HandleInfoKHR.create(-1L);
 
         /**
          * Creates a new {@link VkSemaphoreGetWin32HandleInfoKHR.Buffer} instance backed by the specified container.
@@ -354,18 +354,8 @@ public class VkSemaphoreGetWin32HandleInfoKHR extends Struct implements NativeRe
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSemaphoreGetWin32HandleInfoKHR newInstance(long address) {
-            return new VkSemaphoreGetWin32HandleInfoKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSemaphoreGetWin32HandleInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

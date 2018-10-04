@@ -53,10 +53,6 @@ public class NkCommand extends Struct {
         USERDATA = layout.offsetof(2);
     }
 
-    NkCommand(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkCommand} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -64,7 +60,7 @@ public class NkCommand extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkCommand(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -86,13 +82,13 @@ public class NkCommand extends Struct {
 
     /** Returns a new {@link NkCommand} instance for the specified memory address. */
     public static NkCommand create(long address) {
-        return new NkCommand(address, null);
+        return wrap(NkCommand.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkCommand createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkCommand.class, address);
     }
 
     /**
@@ -102,19 +98,19 @@ public class NkCommand extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkCommand.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkCommand.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return memGetInt(struct + NkCommand.TYPE); }
+    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkCommand.TYPE); }
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + NkCommand.NEXT); }
     /** Unsafe version of {@link #userdata}. */
@@ -124,6 +120,8 @@ public class NkCommand extends Struct {
 
     /** An array of {@link NkCommand} structs. */
     public static class Buffer extends StructBuffer<NkCommand, Buffer> {
+
+        private static final NkCommand ELEMENT_FACTORY = NkCommand.create(-1L);
 
         /**
          * Creates a new {@link NkCommand.Buffer} instance backed by the specified container.
@@ -152,18 +150,8 @@ public class NkCommand extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkCommand newInstance(long address) {
-            return new NkCommand(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkCommand getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code type} field. */

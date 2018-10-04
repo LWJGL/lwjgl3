@@ -50,10 +50,6 @@ public class DBDATETIME extends Struct implements NativeResource {
         DTTIME = layout.offsetof(1);
     }
 
-    DBDATETIME(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link DBDATETIME} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -61,7 +57,7 @@ public class DBDATETIME extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public DBDATETIME(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -106,28 +102,29 @@ public class DBDATETIME extends Struct implements NativeResource {
 
     /** Returns a new {@link DBDATETIME} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static DBDATETIME malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(DBDATETIME.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link DBDATETIME} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static DBDATETIME calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(DBDATETIME.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link DBDATETIME} instance allocated with {@link BufferUtils}. */
     public static DBDATETIME create() {
-        return new DBDATETIME(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(DBDATETIME.class, memAddress(container), container);
     }
 
     /** Returns a new {@link DBDATETIME} instance for the specified memory address. */
     public static DBDATETIME create(long address) {
-        return new DBDATETIME(address, null);
+        return wrap(DBDATETIME.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DBDATETIME createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(DBDATETIME.class, address);
     }
 
     /**
@@ -136,7 +133,7 @@ public class DBDATETIME extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBDATETIME.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -145,7 +142,7 @@ public class DBDATETIME extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBDATETIME.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -154,7 +151,8 @@ public class DBDATETIME extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBDATETIME.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -164,13 +162,13 @@ public class DBDATETIME extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBDATETIME.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DBDATETIME.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -191,7 +189,7 @@ public class DBDATETIME extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static DBDATETIME mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(DBDATETIME.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -200,7 +198,7 @@ public class DBDATETIME extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static DBDATETIME callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(DBDATETIME.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -228,7 +226,7 @@ public class DBDATETIME extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBDATETIME.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -238,25 +236,27 @@ public class DBDATETIME extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DBDATETIME.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #dtdays}. */
-    public static int ndtdays(long struct) { return memGetInt(struct + DBDATETIME.DTDAYS); }
+    public static int ndtdays(long struct) { return UNSAFE.getInt(null, struct + DBDATETIME.DTDAYS); }
     /** Unsafe version of {@link #dttime}. */
-    public static int ndttime(long struct) { return memGetInt(struct + DBDATETIME.DTTIME); }
+    public static int ndttime(long struct) { return UNSAFE.getInt(null, struct + DBDATETIME.DTTIME); }
 
     /** Unsafe version of {@link #dtdays(int) dtdays}. */
-    public static void ndtdays(long struct, int value) { memPutInt(struct + DBDATETIME.DTDAYS, value); }
+    public static void ndtdays(long struct, int value) { UNSAFE.putInt(null, struct + DBDATETIME.DTDAYS, value); }
     /** Unsafe version of {@link #dttime(int) dttime}. */
-    public static void ndttime(long struct, int value) { memPutInt(struct + DBDATETIME.DTTIME, value); }
+    public static void ndttime(long struct, int value) { UNSAFE.putInt(null, struct + DBDATETIME.DTTIME, value); }
 
     // -----------------------------------
 
     /** An array of {@link DBDATETIME} structs. */
     public static class Buffer extends StructBuffer<DBDATETIME, Buffer> implements NativeResource {
+
+        private static final DBDATETIME ELEMENT_FACTORY = DBDATETIME.create(-1L);
 
         /**
          * Creates a new {@link DBDATETIME.Buffer} instance backed by the specified container.
@@ -285,18 +285,8 @@ public class DBDATETIME extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected DBDATETIME newInstance(long address) {
-            return new DBDATETIME(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected DBDATETIME getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code dtdays} field. */

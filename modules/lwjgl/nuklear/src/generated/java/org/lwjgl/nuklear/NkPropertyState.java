@@ -88,10 +88,6 @@ public class NkPropertyState extends Struct {
         STATE = layout.offsetof(10);
     }
 
-    NkPropertyState(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkPropertyState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -99,7 +95,7 @@ public class NkPropertyState extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkPropertyState(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -139,13 +135,13 @@ public class NkPropertyState extends Struct {
 
     /** Returns a new {@link NkPropertyState} instance for the specified memory address. */
     public static NkPropertyState create(long address) {
-        return new NkPropertyState(address, null);
+        return wrap(NkPropertyState.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkPropertyState createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkPropertyState.class, address);
     }
 
     /**
@@ -155,48 +151,50 @@ public class NkPropertyState extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkPropertyState.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkPropertyState.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #active}. */
-    public static int nactive(long struct) { return memGetInt(struct + NkPropertyState.ACTIVE); }
+    public static int nactive(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.ACTIVE); }
     /** Unsafe version of {@link #prev}. */
-    public static int nprev(long struct) { return memGetInt(struct + NkPropertyState.PREV); }
+    public static int nprev(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.PREV); }
     /** Unsafe version of {@link #buffer}. */
     public static ByteBuffer nbuffer(long struct) { return memByteBuffer(struct + NkPropertyState.BUFFER, NK_MAX_NUMBER_BUFFER); }
     /** Unsafe version of {@link #buffer(int) buffer}. */
     public static byte nbuffer(long struct, int index) {
-        return memGetByte(struct + NkPropertyState.BUFFER + check(index, NK_MAX_NUMBER_BUFFER) * 1);
+        return UNSAFE.getByte(null, struct + NkPropertyState.BUFFER + check(index, NK_MAX_NUMBER_BUFFER) * 1);
     }
     /** Unsafe version of {@link #length}. */
-    public static int nlength(long struct) { return memGetInt(struct + NkPropertyState.LENGTH); }
+    public static int nlength(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.LENGTH); }
     /** Unsafe version of {@link #cursor}. */
-    public static int ncursor(long struct) { return memGetInt(struct + NkPropertyState.CURSOR); }
+    public static int ncursor(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.CURSOR); }
     /** Unsafe version of {@link #select_start}. */
-    public static int nselect_start(long struct) { return memGetInt(struct + NkPropertyState.SELECT_START); }
+    public static int nselect_start(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.SELECT_START); }
     /** Unsafe version of {@link #select_end}. */
-    public static int nselect_end(long struct) { return memGetInt(struct + NkPropertyState.SELECT_END); }
+    public static int nselect_end(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.SELECT_END); }
     /** Unsafe version of {@link #name}. */
-    public static int nname(long struct) { return memGetInt(struct + NkPropertyState.NAME); }
+    public static int nname(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.NAME); }
     /** Unsafe version of {@link #seq}. */
-    public static int nseq(long struct) { return memGetInt(struct + NkPropertyState.SEQ); }
+    public static int nseq(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.SEQ); }
     /** Unsafe version of {@link #old}. */
-    public static int nold(long struct) { return memGetInt(struct + NkPropertyState.OLD); }
+    public static int nold(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.OLD); }
     /** Unsafe version of {@link #state}. */
-    public static int nstate(long struct) { return memGetInt(struct + NkPropertyState.STATE); }
+    public static int nstate(long struct) { return UNSAFE.getInt(null, struct + NkPropertyState.STATE); }
 
     // -----------------------------------
 
     /** An array of {@link NkPropertyState} structs. */
     public static class Buffer extends StructBuffer<NkPropertyState, Buffer> {
+
+        private static final NkPropertyState ELEMENT_FACTORY = NkPropertyState.create(-1L);
 
         /**
          * Creates a new {@link NkPropertyState.Buffer} instance backed by the specified container.
@@ -225,18 +223,8 @@ public class NkPropertyState extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkPropertyState newInstance(long address) {
-            return new NkPropertyState(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkPropertyState getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code active} field. */

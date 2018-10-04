@@ -129,10 +129,6 @@ public class YGStyle extends Struct {
         ASPECTRATIO = layout.offsetof(21);
     }
 
-    YGStyle(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link YGStyle} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -140,7 +136,7 @@ public class YGStyle extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public YGStyle(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -228,13 +224,13 @@ public class YGStyle extends Struct {
 
     /** Returns a new {@link YGStyle} instance for the specified memory address. */
     public static YGStyle create(long address) {
-        return new YGStyle(address, null);
+        return wrap(YGStyle.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGStyle createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(YGStyle.class, address);
     }
 
     /**
@@ -244,37 +240,37 @@ public class YGStyle extends Struct {
      * @param capacity the buffer capacity
      */
     public static YGStyle.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGStyle.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #direction}. */
-    public static int ndirection(long struct) { return memGetInt(struct + YGStyle.DIRECTION); }
+    public static int ndirection(long struct) { return UNSAFE.getInt(null, struct + YGStyle.DIRECTION); }
     /** Unsafe version of {@link #flexDirection}. */
-    public static int nflexDirection(long struct) { return memGetInt(struct + YGStyle.FLEXDIRECTION); }
+    public static int nflexDirection(long struct) { return UNSAFE.getInt(null, struct + YGStyle.FLEXDIRECTION); }
     /** Unsafe version of {@link #justifyContent}. */
-    public static int njustifyContent(long struct) { return memGetInt(struct + YGStyle.JUSTIFYCONTENT); }
+    public static int njustifyContent(long struct) { return UNSAFE.getInt(null, struct + YGStyle.JUSTIFYCONTENT); }
     /** Unsafe version of {@link #alignContent}. */
-    public static int nalignContent(long struct) { return memGetInt(struct + YGStyle.ALIGNCONTENT); }
+    public static int nalignContent(long struct) { return UNSAFE.getInt(null, struct + YGStyle.ALIGNCONTENT); }
     /** Unsafe version of {@link #alignItems}. */
-    public static int nalignItems(long struct) { return memGetInt(struct + YGStyle.ALIGNITEMS); }
+    public static int nalignItems(long struct) { return UNSAFE.getInt(null, struct + YGStyle.ALIGNITEMS); }
     /** Unsafe version of {@link #alignSelf}. */
-    public static int nalignSelf(long struct) { return memGetInt(struct + YGStyle.ALIGNSELF); }
+    public static int nalignSelf(long struct) { return UNSAFE.getInt(null, struct + YGStyle.ALIGNSELF); }
     /** Unsafe version of {@link #positionType}. */
-    public static int npositionType(long struct) { return memGetInt(struct + YGStyle.POSITIONTYPE); }
+    public static int npositionType(long struct) { return UNSAFE.getInt(null, struct + YGStyle.POSITIONTYPE); }
     /** Unsafe version of {@link #flexWrap}. */
-    public static int nflexWrap(long struct) { return memGetInt(struct + YGStyle.FLEXWRAP); }
+    public static int nflexWrap(long struct) { return UNSAFE.getInt(null, struct + YGStyle.FLEXWRAP); }
     /** Unsafe version of {@link #overflow}. */
-    public static int noverflow(long struct) { return memGetInt(struct + YGStyle.OVERFLOW); }
+    public static int noverflow(long struct) { return UNSAFE.getInt(null, struct + YGStyle.OVERFLOW); }
     /** Unsafe version of {@link #display}. */
-    public static int ndisplay(long struct) { return memGetInt(struct + YGStyle.DISPLAY); }
+    public static int ndisplay(long struct) { return UNSAFE.getInt(null, struct + YGStyle.DISPLAY); }
     /** Unsafe version of {@link #flex}. */
     public static YGFloatOptional nflex(long struct) { return YGFloatOptional.create(struct + YGStyle.FLEX); }
     /** Unsafe version of {@link #flexGrow}. */
@@ -333,6 +329,8 @@ public class YGStyle extends Struct {
     /** An array of {@link YGStyle} structs. */
     public static class Buffer extends StructBuffer<YGStyle, Buffer> {
 
+        private static final YGStyle ELEMENT_FACTORY = YGStyle.create(-1L);
+
         /**
          * Creates a new {@link YGStyle.Buffer} instance backed by the specified container.
          *
@@ -360,18 +358,8 @@ public class YGStyle extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected YGStyle newInstance(long address) {
-            return new YGStyle(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected YGStyle getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code direction} field. */

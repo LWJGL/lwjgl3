@@ -92,10 +92,6 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
         PVIEWPORTSWIZZLES = layout.offsetof(4);
     }
 
-    VkPipelineViewportSwizzleStateCreateInfoNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPipelineViewportSwizzleStateCreateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -103,7 +99,7 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineViewportSwizzleStateCreateInfoNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -170,28 +166,29 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
 
     /** Returns a new {@link VkPipelineViewportSwizzleStateCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportSwizzleStateCreateInfoNV malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPipelineViewportSwizzleStateCreateInfoNV.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineViewportSwizzleStateCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportSwizzleStateCreateInfoNV calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPipelineViewportSwizzleStateCreateInfoNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineViewportSwizzleStateCreateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkPipelineViewportSwizzleStateCreateInfoNV create() {
-        return new VkPipelineViewportSwizzleStateCreateInfoNV(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineViewportSwizzleStateCreateInfoNV.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPipelineViewportSwizzleStateCreateInfoNV} instance for the specified memory address. */
     public static VkPipelineViewportSwizzleStateCreateInfoNV create(long address) {
-        return new VkPipelineViewportSwizzleStateCreateInfoNV(address, null);
+        return wrap(VkPipelineViewportSwizzleStateCreateInfoNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineViewportSwizzleStateCreateInfoNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPipelineViewportSwizzleStateCreateInfoNV.class, address);
     }
 
     /**
@@ -200,7 +197,7 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportSwizzleStateCreateInfoNV.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -209,7 +206,7 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportSwizzleStateCreateInfoNV.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -218,7 +215,8 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportSwizzleStateCreateInfoNV.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -228,13 +226,13 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportSwizzleStateCreateInfoNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineViewportSwizzleStateCreateInfoNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -255,7 +253,7 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkPipelineViewportSwizzleStateCreateInfoNV mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPipelineViewportSwizzleStateCreateInfoNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -264,7 +262,7 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkPipelineViewportSwizzleStateCreateInfoNV callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPipelineViewportSwizzleStateCreateInfoNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -292,7 +290,7 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportSwizzleStateCreateInfoNV.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -302,30 +300,30 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportSwizzleStateCreateInfoNV.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.FLAGS); }
     /** Unsafe version of {@link #viewportCount}. */
-    public static int nviewportCount(long struct) { return memGetInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.VIEWPORTCOUNT); }
+    public static int nviewportCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.VIEWPORTCOUNT); }
     /** Unsafe version of {@link #pViewportSwizzles}. */
     @Nullable public static VkViewportSwizzleNV.Buffer npViewportSwizzles(long struct) { return VkViewportSwizzleNV.createSafe(memGetAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PVIEWPORTSWIZZLES), nviewportCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.FLAGS, value); }
     /** Sets the specified value to the {@code viewportCount} field of the specified {@code struct}. */
-    public static void nviewportCount(long struct, int value) { memPutInt(struct + VkPipelineViewportSwizzleStateCreateInfoNV.VIEWPORTCOUNT, value); }
+    public static void nviewportCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.VIEWPORTCOUNT, value); }
     /** Unsafe version of {@link #pViewportSwizzles(VkViewportSwizzleNV.Buffer) pViewportSwizzles}. */
     public static void npViewportSwizzles(long struct, @Nullable VkViewportSwizzleNV.Buffer value) { memPutAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PVIEWPORTSWIZZLES, memAddressSafe(value)); if (value != null) { nviewportCount(struct, value.remaining()); } }
 
@@ -333,6 +331,8 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
 
     /** An array of {@link VkPipelineViewportSwizzleStateCreateInfoNV} structs. */
     public static class Buffer extends StructBuffer<VkPipelineViewportSwizzleStateCreateInfoNV, Buffer> implements NativeResource {
+
+        private static final VkPipelineViewportSwizzleStateCreateInfoNV ELEMENT_FACTORY = VkPipelineViewportSwizzleStateCreateInfoNV.create(-1L);
 
         /**
          * Creates a new {@link VkPipelineViewportSwizzleStateCreateInfoNV.Buffer} instance backed by the specified container.
@@ -361,18 +361,8 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPipelineViewportSwizzleStateCreateInfoNV newInstance(long address) {
-            return new VkPipelineViewportSwizzleStateCreateInfoNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPipelineViewportSwizzleStateCreateInfoNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

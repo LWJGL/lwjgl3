@@ -105,10 +105,6 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
         MINIMAGETRANSFERGRANULARITY = layout.offsetof(3);
     }
 
-    VkQueueFamilyProperties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkQueueFamilyProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -116,7 +112,7 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkQueueFamilyProperties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -140,28 +136,29 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
 
     /** Returns a new {@link VkQueueFamilyProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkQueueFamilyProperties malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkQueueFamilyProperties.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkQueueFamilyProperties} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkQueueFamilyProperties calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkQueueFamilyProperties.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkQueueFamilyProperties} instance allocated with {@link BufferUtils}. */
     public static VkQueueFamilyProperties create() {
-        return new VkQueueFamilyProperties(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkQueueFamilyProperties.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkQueueFamilyProperties} instance for the specified memory address. */
     public static VkQueueFamilyProperties create(long address) {
-        return new VkQueueFamilyProperties(address, null);
+        return wrap(VkQueueFamilyProperties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkQueueFamilyProperties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkQueueFamilyProperties.class, address);
     }
 
     /**
@@ -170,7 +167,7 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyProperties.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -179,7 +176,7 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyProperties.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -188,7 +185,8 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyProperties.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -198,13 +196,13 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyProperties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkQueueFamilyProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -225,7 +223,7 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkQueueFamilyProperties mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkQueueFamilyProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -234,7 +232,7 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkQueueFamilyProperties callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkQueueFamilyProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -262,7 +260,7 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyProperties.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -272,17 +270,17 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyProperties.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #queueFlags}. */
-    public static int nqueueFlags(long struct) { return memGetInt(struct + VkQueueFamilyProperties.QUEUEFLAGS); }
+    public static int nqueueFlags(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyProperties.QUEUEFLAGS); }
     /** Unsafe version of {@link #queueCount}. */
-    public static int nqueueCount(long struct) { return memGetInt(struct + VkQueueFamilyProperties.QUEUECOUNT); }
+    public static int nqueueCount(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyProperties.QUEUECOUNT); }
     /** Unsafe version of {@link #timestampValidBits}. */
-    public static int ntimestampValidBits(long struct) { return memGetInt(struct + VkQueueFamilyProperties.TIMESTAMPVALIDBITS); }
+    public static int ntimestampValidBits(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyProperties.TIMESTAMPVALIDBITS); }
     /** Unsafe version of {@link #minImageTransferGranularity}. */
     public static VkExtent3D nminImageTransferGranularity(long struct) { return VkExtent3D.create(struct + VkQueueFamilyProperties.MINIMAGETRANSFERGRANULARITY); }
 
@@ -290,6 +288,8 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
 
     /** An array of {@link VkQueueFamilyProperties} structs. */
     public static class Buffer extends StructBuffer<VkQueueFamilyProperties, Buffer> implements NativeResource {
+
+        private static final VkQueueFamilyProperties ELEMENT_FACTORY = VkQueueFamilyProperties.create(-1L);
 
         /**
          * Creates a new {@link VkQueueFamilyProperties.Buffer} instance backed by the specified container.
@@ -318,18 +318,8 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkQueueFamilyProperties newInstance(long address) {
-            return new VkQueueFamilyProperties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkQueueFamilyProperties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code queueFlags} field. */

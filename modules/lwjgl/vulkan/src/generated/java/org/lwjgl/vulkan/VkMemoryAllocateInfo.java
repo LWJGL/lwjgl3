@@ -120,10 +120,6 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
         MEMORYTYPEINDEX = layout.offsetof(3);
     }
 
-    VkMemoryAllocateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkMemoryAllocateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -131,7 +127,7 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkMemoryAllocateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -190,28 +186,29 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
 
     /** Returns a new {@link VkMemoryAllocateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkMemoryAllocateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkMemoryAllocateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkMemoryAllocateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkMemoryAllocateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkMemoryAllocateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkMemoryAllocateInfo} instance allocated with {@link BufferUtils}. */
     public static VkMemoryAllocateInfo create() {
-        return new VkMemoryAllocateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkMemoryAllocateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkMemoryAllocateInfo} instance for the specified memory address. */
     public static VkMemoryAllocateInfo create(long address) {
-        return new VkMemoryAllocateInfo(address, null);
+        return wrap(VkMemoryAllocateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryAllocateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkMemoryAllocateInfo.class, address);
     }
 
     /**
@@ -220,7 +217,7 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryAllocateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -229,7 +226,7 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryAllocateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -238,7 +235,8 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryAllocateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -248,13 +246,13 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryAllocateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryAllocateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -275,7 +273,7 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkMemoryAllocateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkMemoryAllocateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -284,7 +282,7 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkMemoryAllocateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkMemoryAllocateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -312,7 +310,7 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryAllocateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -322,33 +320,35 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkMemoryAllocateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkMemoryAllocateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryAllocateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryAllocateInfo.PNEXT); }
     /** Unsafe version of {@link #allocationSize}. */
-    public static long nallocationSize(long struct) { return memGetLong(struct + VkMemoryAllocateInfo.ALLOCATIONSIZE); }
+    public static long nallocationSize(long struct) { return UNSAFE.getLong(null, struct + VkMemoryAllocateInfo.ALLOCATIONSIZE); }
     /** Unsafe version of {@link #memoryTypeIndex}. */
-    public static int nmemoryTypeIndex(long struct) { return memGetInt(struct + VkMemoryAllocateInfo.MEMORYTYPEINDEX); }
+    public static int nmemoryTypeIndex(long struct) { return UNSAFE.getInt(null, struct + VkMemoryAllocateInfo.MEMORYTYPEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryAllocateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryAllocateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryAllocateInfo.PNEXT, value); }
     /** Unsafe version of {@link #allocationSize(long) allocationSize}. */
-    public static void nallocationSize(long struct, long value) { memPutLong(struct + VkMemoryAllocateInfo.ALLOCATIONSIZE, value); }
+    public static void nallocationSize(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryAllocateInfo.ALLOCATIONSIZE, value); }
     /** Unsafe version of {@link #memoryTypeIndex(int) memoryTypeIndex}. */
-    public static void nmemoryTypeIndex(long struct, int value) { memPutInt(struct + VkMemoryAllocateInfo.MEMORYTYPEINDEX, value); }
+    public static void nmemoryTypeIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryAllocateInfo.MEMORYTYPEINDEX, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkMemoryAllocateInfo} structs. */
     public static class Buffer extends StructBuffer<VkMemoryAllocateInfo, Buffer> implements NativeResource {
+
+        private static final VkMemoryAllocateInfo ELEMENT_FACTORY = VkMemoryAllocateInfo.create(-1L);
 
         /**
          * Creates a new {@link VkMemoryAllocateInfo.Buffer} instance backed by the specified container.
@@ -377,18 +377,8 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkMemoryAllocateInfo newInstance(long address) {
-            return new VkMemoryAllocateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkMemoryAllocateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

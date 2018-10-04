@@ -49,10 +49,6 @@ public class VREventApplicationLaunch extends Struct {
         UNARGSHANDLE = layout.offsetof(1);
     }
 
-    VREventApplicationLaunch(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventApplicationLaunch} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -60,7 +56,7 @@ public class VREventApplicationLaunch extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventApplicationLaunch(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -77,13 +73,13 @@ public class VREventApplicationLaunch extends Struct {
 
     /** Returns a new {@link VREventApplicationLaunch} instance for the specified memory address. */
     public static VREventApplicationLaunch create(long address) {
-        return new VREventApplicationLaunch(address, null);
+        return wrap(VREventApplicationLaunch.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventApplicationLaunch createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventApplicationLaunch.class, address);
     }
 
     /**
@@ -93,26 +89,28 @@ public class VREventApplicationLaunch extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventApplicationLaunch.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventApplicationLaunch.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #pid}. */
-    public static int npid(long struct) { return memGetInt(struct + VREventApplicationLaunch.PID); }
+    public static int npid(long struct) { return UNSAFE.getInt(null, struct + VREventApplicationLaunch.PID); }
     /** Unsafe version of {@link #unArgsHandle}. */
-    public static int nunArgsHandle(long struct) { return memGetInt(struct + VREventApplicationLaunch.UNARGSHANDLE); }
+    public static int nunArgsHandle(long struct) { return UNSAFE.getInt(null, struct + VREventApplicationLaunch.UNARGSHANDLE); }
 
     // -----------------------------------
 
     /** An array of {@link VREventApplicationLaunch} structs. */
     public static class Buffer extends StructBuffer<VREventApplicationLaunch, Buffer> {
+
+        private static final VREventApplicationLaunch ELEMENT_FACTORY = VREventApplicationLaunch.create(-1L);
 
         /**
          * Creates a new {@link VREventApplicationLaunch.Buffer} instance backed by the specified container.
@@ -141,18 +139,8 @@ public class VREventApplicationLaunch extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventApplicationLaunch newInstance(long address) {
-            return new VREventApplicationLaunch(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventApplicationLaunch getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code pid} field. */

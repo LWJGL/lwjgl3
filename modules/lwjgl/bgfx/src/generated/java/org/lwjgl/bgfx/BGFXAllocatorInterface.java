@@ -56,10 +56,6 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
         VTBL = layout.offsetof(0);
     }
 
-    BGFXAllocatorInterface(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXAllocatorInterface} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -67,7 +63,7 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXAllocatorInterface(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -96,28 +92,29 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
 
     /** Returns a new {@link BGFXAllocatorInterface} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXAllocatorInterface malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(BGFXAllocatorInterface.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link BGFXAllocatorInterface} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXAllocatorInterface calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(BGFXAllocatorInterface.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link BGFXAllocatorInterface} instance allocated with {@link BufferUtils}. */
     public static BGFXAllocatorInterface create() {
-        return new BGFXAllocatorInterface(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(BGFXAllocatorInterface.class, memAddress(container), container);
     }
 
     /** Returns a new {@link BGFXAllocatorInterface} instance for the specified memory address. */
     public static BGFXAllocatorInterface create(long address) {
-        return new BGFXAllocatorInterface(address, null);
+        return wrap(BGFXAllocatorInterface.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXAllocatorInterface createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXAllocatorInterface.class, address);
     }
 
     // -----------------------------------
@@ -138,7 +135,7 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXAllocatorInterface mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(BGFXAllocatorInterface.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -147,7 +144,7 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXAllocatorInterface callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(BGFXAllocatorInterface.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     // -----------------------------------

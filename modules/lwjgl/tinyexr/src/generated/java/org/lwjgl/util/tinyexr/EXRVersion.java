@@ -72,10 +72,6 @@ public class EXRVersion extends Struct implements NativeResource {
         MULTIPART = layout.offsetof(4);
     }
 
-    EXRVersion(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link EXRVersion} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -83,7 +79,7 @@ public class EXRVersion extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public EXRVersion(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -148,28 +144,29 @@ public class EXRVersion extends Struct implements NativeResource {
 
     /** Returns a new {@link EXRVersion} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static EXRVersion malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(EXRVersion.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link EXRVersion} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static EXRVersion calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(EXRVersion.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link EXRVersion} instance allocated with {@link BufferUtils}. */
     public static EXRVersion create() {
-        return new EXRVersion(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(EXRVersion.class, memAddress(container), container);
     }
 
     /** Returns a new {@link EXRVersion} instance for the specified memory address. */
     public static EXRVersion create(long address) {
-        return new EXRVersion(address, null);
+        return wrap(EXRVersion.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static EXRVersion createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(EXRVersion.class, address);
     }
 
     /**
@@ -178,7 +175,7 @@ public class EXRVersion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRVersion.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -187,7 +184,7 @@ public class EXRVersion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRVersion.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -196,7 +193,8 @@ public class EXRVersion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRVersion.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -206,13 +204,13 @@ public class EXRVersion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRVersion.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static EXRVersion.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -233,7 +231,7 @@ public class EXRVersion extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static EXRVersion mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(EXRVersion.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -242,7 +240,7 @@ public class EXRVersion extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static EXRVersion callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(EXRVersion.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -270,7 +268,7 @@ public class EXRVersion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRVersion.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -280,37 +278,39 @@ public class EXRVersion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static EXRVersion.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #version}. */
-    public static int nversion(long struct) { return memGetInt(struct + EXRVersion.VERSION); }
+    public static int nversion(long struct) { return UNSAFE.getInt(null, struct + EXRVersion.VERSION); }
     /** Unsafe version of {@link #tiled}. */
-    public static int ntiled(long struct) { return memGetInt(struct + EXRVersion.TILED); }
+    public static int ntiled(long struct) { return UNSAFE.getInt(null, struct + EXRVersion.TILED); }
     /** Unsafe version of {@link #long_name}. */
-    public static int nlong_name(long struct) { return memGetInt(struct + EXRVersion.LONG_NAME); }
+    public static int nlong_name(long struct) { return UNSAFE.getInt(null, struct + EXRVersion.LONG_NAME); }
     /** Unsafe version of {@link #non_image}. */
-    public static int nnon_image(long struct) { return memGetInt(struct + EXRVersion.NON_IMAGE); }
+    public static int nnon_image(long struct) { return UNSAFE.getInt(null, struct + EXRVersion.NON_IMAGE); }
     /** Unsafe version of {@link #multipart}. */
-    public static int nmultipart(long struct) { return memGetInt(struct + EXRVersion.MULTIPART); }
+    public static int nmultipart(long struct) { return UNSAFE.getInt(null, struct + EXRVersion.MULTIPART); }
 
     /** Unsafe version of {@link #version(int) version}. */
-    public static void nversion(long struct, int value) { memPutInt(struct + EXRVersion.VERSION, value); }
+    public static void nversion(long struct, int value) { UNSAFE.putInt(null, struct + EXRVersion.VERSION, value); }
     /** Unsafe version of {@link #tiled(boolean) tiled}. */
-    public static void ntiled(long struct, int value) { memPutInt(struct + EXRVersion.TILED, value); }
+    public static void ntiled(long struct, int value) { UNSAFE.putInt(null, struct + EXRVersion.TILED, value); }
     /** Unsafe version of {@link #long_name(boolean) long_name}. */
-    public static void nlong_name(long struct, int value) { memPutInt(struct + EXRVersion.LONG_NAME, value); }
+    public static void nlong_name(long struct, int value) { UNSAFE.putInt(null, struct + EXRVersion.LONG_NAME, value); }
     /** Unsafe version of {@link #non_image(boolean) non_image}. */
-    public static void nnon_image(long struct, int value) { memPutInt(struct + EXRVersion.NON_IMAGE, value); }
+    public static void nnon_image(long struct, int value) { UNSAFE.putInt(null, struct + EXRVersion.NON_IMAGE, value); }
     /** Unsafe version of {@link #multipart(boolean) multipart}. */
-    public static void nmultipart(long struct, int value) { memPutInt(struct + EXRVersion.MULTIPART, value); }
+    public static void nmultipart(long struct, int value) { UNSAFE.putInt(null, struct + EXRVersion.MULTIPART, value); }
 
     // -----------------------------------
 
     /** An array of {@link EXRVersion} structs. */
     public static class Buffer extends StructBuffer<EXRVersion, Buffer> implements NativeResource {
+
+        private static final EXRVersion ELEMENT_FACTORY = EXRVersion.create(-1L);
 
         /**
          * Creates a new {@link EXRVersion.Buffer} instance backed by the specified container.
@@ -339,18 +339,8 @@ public class EXRVersion extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected EXRVersion newInstance(long address) {
-            return new EXRVersion(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected EXRVersion getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code version} field. */

@@ -61,10 +61,6 @@ public class NkMenuState extends Struct {
         OFFSET = layout.offsetof(4);
     }
 
-    NkMenuState(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkMenuState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -72,7 +68,7 @@ public class NkMenuState extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkMenuState(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -94,13 +90,13 @@ public class NkMenuState extends Struct {
 
     /** Returns a new {@link NkMenuState} instance for the specified memory address. */
     public static NkMenuState create(long address) {
-        return new NkMenuState(address, null);
+        return wrap(NkMenuState.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkMenuState createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkMenuState.class, address);
     }
 
     /**
@@ -110,25 +106,25 @@ public class NkMenuState extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkMenuState.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkMenuState.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return memGetFloat(struct + NkMenuState.X); }
+    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + NkMenuState.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return memGetFloat(struct + NkMenuState.Y); }
+    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + NkMenuState.Y); }
     /** Unsafe version of {@link #w}. */
-    public static float nw(long struct) { return memGetFloat(struct + NkMenuState.W); }
+    public static float nw(long struct) { return UNSAFE.getFloat(null, struct + NkMenuState.W); }
     /** Unsafe version of {@link #h}. */
-    public static float nh(long struct) { return memGetFloat(struct + NkMenuState.H); }
+    public static float nh(long struct) { return UNSAFE.getFloat(null, struct + NkMenuState.H); }
     /** Unsafe version of {@link #offset}. */
     public static NkScroll noffset(long struct) { return NkScroll.create(struct + NkMenuState.OFFSET); }
 
@@ -136,6 +132,8 @@ public class NkMenuState extends Struct {
 
     /** An array of {@link NkMenuState} structs. */
     public static class Buffer extends StructBuffer<NkMenuState, Buffer> {
+
+        private static final NkMenuState ELEMENT_FACTORY = NkMenuState.create(-1L);
 
         /**
          * Creates a new {@link NkMenuState.Buffer} instance backed by the specified container.
@@ -164,18 +162,8 @@ public class NkMenuState extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkMenuState newInstance(long address) {
-            return new NkMenuState(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkMenuState getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x} field. */

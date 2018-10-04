@@ -151,10 +151,6 @@ public class VkSubpassDependency extends Struct implements NativeResource {
         DEPENDENCYFLAGS = layout.offsetof(6);
     }
 
-    VkSubpassDependency(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSubpassDependency} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -162,7 +158,7 @@ public class VkSubpassDependency extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSubpassDependency(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -242,28 +238,29 @@ public class VkSubpassDependency extends Struct implements NativeResource {
 
     /** Returns a new {@link VkSubpassDependency} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSubpassDependency malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkSubpassDependency.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkSubpassDependency} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSubpassDependency calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkSubpassDependency.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkSubpassDependency} instance allocated with {@link BufferUtils}. */
     public static VkSubpassDependency create() {
-        return new VkSubpassDependency(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSubpassDependency.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkSubpassDependency} instance for the specified memory address. */
     public static VkSubpassDependency create(long address) {
-        return new VkSubpassDependency(address, null);
+        return wrap(VkSubpassDependency.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSubpassDependency createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSubpassDependency.class, address);
     }
 
     /**
@@ -272,7 +269,7 @@ public class VkSubpassDependency extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDependency.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -281,7 +278,7 @@ public class VkSubpassDependency extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDependency.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -290,7 +287,8 @@ public class VkSubpassDependency extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDependency.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -300,13 +298,13 @@ public class VkSubpassDependency extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDependency.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSubpassDependency.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -327,7 +325,7 @@ public class VkSubpassDependency extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkSubpassDependency mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkSubpassDependency.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -336,7 +334,7 @@ public class VkSubpassDependency extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkSubpassDependency callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkSubpassDependency.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -364,7 +362,7 @@ public class VkSubpassDependency extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDependency.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -374,45 +372,47 @@ public class VkSubpassDependency extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkSubpassDependency.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #srcSubpass}. */
-    public static int nsrcSubpass(long struct) { return memGetInt(struct + VkSubpassDependency.SRCSUBPASS); }
+    public static int nsrcSubpass(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency.SRCSUBPASS); }
     /** Unsafe version of {@link #dstSubpass}. */
-    public static int ndstSubpass(long struct) { return memGetInt(struct + VkSubpassDependency.DSTSUBPASS); }
+    public static int ndstSubpass(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency.DSTSUBPASS); }
     /** Unsafe version of {@link #srcStageMask}. */
-    public static int nsrcStageMask(long struct) { return memGetInt(struct + VkSubpassDependency.SRCSTAGEMASK); }
+    public static int nsrcStageMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency.SRCSTAGEMASK); }
     /** Unsafe version of {@link #dstStageMask}. */
-    public static int ndstStageMask(long struct) { return memGetInt(struct + VkSubpassDependency.DSTSTAGEMASK); }
+    public static int ndstStageMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency.DSTSTAGEMASK); }
     /** Unsafe version of {@link #srcAccessMask}. */
-    public static int nsrcAccessMask(long struct) { return memGetInt(struct + VkSubpassDependency.SRCACCESSMASK); }
+    public static int nsrcAccessMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency.SRCACCESSMASK); }
     /** Unsafe version of {@link #dstAccessMask}. */
-    public static int ndstAccessMask(long struct) { return memGetInt(struct + VkSubpassDependency.DSTACCESSMASK); }
+    public static int ndstAccessMask(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency.DSTACCESSMASK); }
     /** Unsafe version of {@link #dependencyFlags}. */
-    public static int ndependencyFlags(long struct) { return memGetInt(struct + VkSubpassDependency.DEPENDENCYFLAGS); }
+    public static int ndependencyFlags(long struct) { return UNSAFE.getInt(null, struct + VkSubpassDependency.DEPENDENCYFLAGS); }
 
     /** Unsafe version of {@link #srcSubpass(int) srcSubpass}. */
-    public static void nsrcSubpass(long struct, int value) { memPutInt(struct + VkSubpassDependency.SRCSUBPASS, value); }
+    public static void nsrcSubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency.SRCSUBPASS, value); }
     /** Unsafe version of {@link #dstSubpass(int) dstSubpass}. */
-    public static void ndstSubpass(long struct, int value) { memPutInt(struct + VkSubpassDependency.DSTSUBPASS, value); }
+    public static void ndstSubpass(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency.DSTSUBPASS, value); }
     /** Unsafe version of {@link #srcStageMask(int) srcStageMask}. */
-    public static void nsrcStageMask(long struct, int value) { memPutInt(struct + VkSubpassDependency.SRCSTAGEMASK, value); }
+    public static void nsrcStageMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency.SRCSTAGEMASK, value); }
     /** Unsafe version of {@link #dstStageMask(int) dstStageMask}. */
-    public static void ndstStageMask(long struct, int value) { memPutInt(struct + VkSubpassDependency.DSTSTAGEMASK, value); }
+    public static void ndstStageMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency.DSTSTAGEMASK, value); }
     /** Unsafe version of {@link #srcAccessMask(int) srcAccessMask}. */
-    public static void nsrcAccessMask(long struct, int value) { memPutInt(struct + VkSubpassDependency.SRCACCESSMASK, value); }
+    public static void nsrcAccessMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency.SRCACCESSMASK, value); }
     /** Unsafe version of {@link #dstAccessMask(int) dstAccessMask}. */
-    public static void ndstAccessMask(long struct, int value) { memPutInt(struct + VkSubpassDependency.DSTACCESSMASK, value); }
+    public static void ndstAccessMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency.DSTACCESSMASK, value); }
     /** Unsafe version of {@link #dependencyFlags(int) dependencyFlags}. */
-    public static void ndependencyFlags(long struct, int value) { memPutInt(struct + VkSubpassDependency.DEPENDENCYFLAGS, value); }
+    public static void ndependencyFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkSubpassDependency.DEPENDENCYFLAGS, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkSubpassDependency} structs. */
     public static class Buffer extends StructBuffer<VkSubpassDependency, Buffer> implements NativeResource {
+
+        private static final VkSubpassDependency ELEMENT_FACTORY = VkSubpassDependency.create(-1L);
 
         /**
          * Creates a new {@link VkSubpassDependency.Buffer} instance backed by the specified container.
@@ -441,18 +441,8 @@ public class VkSubpassDependency extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSubpassDependency newInstance(long address) {
-            return new VkSubpassDependency(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSubpassDependency getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code srcSubpass} field. */

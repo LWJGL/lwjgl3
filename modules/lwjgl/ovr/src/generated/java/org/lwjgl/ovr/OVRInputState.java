@@ -119,10 +119,6 @@ public class OVRInputState extends Struct implements NativeResource {
         THUMBSTICKRAW = layout.offsetof(12);
     }
 
-    OVRInputState(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link OVRInputState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -130,7 +126,7 @@ public class OVRInputState extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public OVRInputState(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -200,28 +196,29 @@ public class OVRInputState extends Struct implements NativeResource {
 
     /** Returns a new {@link OVRInputState} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRInputState malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(OVRInputState.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link OVRInputState} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRInputState calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(OVRInputState.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link OVRInputState} instance allocated with {@link BufferUtils}. */
     public static OVRInputState create() {
-        return new OVRInputState(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(OVRInputState.class, memAddress(container), container);
     }
 
     /** Returns a new {@link OVRInputState} instance for the specified memory address. */
     public static OVRInputState create(long address) {
-        return new OVRInputState(address, null);
+        return wrap(OVRInputState.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRInputState createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(OVRInputState.class, address);
     }
 
     /**
@@ -230,7 +227,7 @@ public class OVRInputState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRInputState.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -239,7 +236,7 @@ public class OVRInputState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRInputState.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -248,7 +245,8 @@ public class OVRInputState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRInputState.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -258,13 +256,13 @@ public class OVRInputState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRInputState.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRInputState.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -285,7 +283,7 @@ public class OVRInputState extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRInputState mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(OVRInputState.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -294,7 +292,7 @@ public class OVRInputState extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRInputState callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(OVRInputState.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -322,7 +320,7 @@ public class OVRInputState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRInputState.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -332,28 +330,28 @@ public class OVRInputState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRInputState.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #TimeInSeconds}. */
-    public static double nTimeInSeconds(long struct) { return memGetDouble(struct + OVRInputState.TIMEINSECONDS); }
+    public static double nTimeInSeconds(long struct) { return UNSAFE.getDouble(null, struct + OVRInputState.TIMEINSECONDS); }
     /** Unsafe version of {@link #Buttons}. */
-    public static int nButtons(long struct) { return memGetInt(struct + OVRInputState.BUTTONS); }
+    public static int nButtons(long struct) { return UNSAFE.getInt(null, struct + OVRInputState.BUTTONS); }
     /** Unsafe version of {@link #Touches}. */
-    public static int nTouches(long struct) { return memGetInt(struct + OVRInputState.TOUCHES); }
+    public static int nTouches(long struct) { return UNSAFE.getInt(null, struct + OVRInputState.TOUCHES); }
     /** Unsafe version of {@link #IndexTrigger}. */
     public static FloatBuffer nIndexTrigger(long struct) { return memFloatBuffer(struct + OVRInputState.INDEXTRIGGER, ovrHand_Count); }
     /** Unsafe version of {@link #IndexTrigger(int) IndexTrigger}. */
     public static float nIndexTrigger(long struct, int index) {
-        return memGetFloat(struct + OVRInputState.INDEXTRIGGER + check(index, ovrHand_Count) * 4);
+        return UNSAFE.getFloat(null, struct + OVRInputState.INDEXTRIGGER + check(index, ovrHand_Count) * 4);
     }
     /** Unsafe version of {@link #HandTrigger}. */
     public static FloatBuffer nHandTrigger(long struct) { return memFloatBuffer(struct + OVRInputState.HANDTRIGGER, ovrHand_Count); }
     /** Unsafe version of {@link #HandTrigger(int) HandTrigger}. */
     public static float nHandTrigger(long struct, int index) {
-        return memGetFloat(struct + OVRInputState.HANDTRIGGER + check(index, ovrHand_Count) * 4);
+        return UNSAFE.getFloat(null, struct + OVRInputState.HANDTRIGGER + check(index, ovrHand_Count) * 4);
     }
     /** Unsafe version of {@link #Thumbstick}. */
     public static OVRVector2f.Buffer nThumbstick(long struct) { return OVRVector2f.create(struct + OVRInputState.THUMBSTICK, ovrHand_Count); }
@@ -362,18 +360,18 @@ public class OVRInputState extends Struct implements NativeResource {
         return OVRVector2f.create(struct + OVRInputState.THUMBSTICK + check(index, ovrHand_Count) * OVRVector2f.SIZEOF);
     }
     /** Unsafe version of {@link #ControllerType}. */
-    public static int nControllerType(long struct) { return memGetInt(struct + OVRInputState.CONTROLLERTYPE); }
+    public static int nControllerType(long struct) { return UNSAFE.getInt(null, struct + OVRInputState.CONTROLLERTYPE); }
     /** Unsafe version of {@link #IndexTriggerNoDeadzone}. */
     public static FloatBuffer nIndexTriggerNoDeadzone(long struct) { return memFloatBuffer(struct + OVRInputState.INDEXTRIGGERNODEADZONE, ovrHand_Count); }
     /** Unsafe version of {@link #IndexTriggerNoDeadzone(int) IndexTriggerNoDeadzone}. */
     public static float nIndexTriggerNoDeadzone(long struct, int index) {
-        return memGetFloat(struct + OVRInputState.INDEXTRIGGERNODEADZONE + check(index, ovrHand_Count) * 4);
+        return UNSAFE.getFloat(null, struct + OVRInputState.INDEXTRIGGERNODEADZONE + check(index, ovrHand_Count) * 4);
     }
     /** Unsafe version of {@link #HandTriggerNoDeadzone}. */
     public static FloatBuffer nHandTriggerNoDeadzone(long struct) { return memFloatBuffer(struct + OVRInputState.HANDTRIGGERNODEADZONE, ovrHand_Count); }
     /** Unsafe version of {@link #HandTriggerNoDeadzone(int) HandTriggerNoDeadzone}. */
     public static float nHandTriggerNoDeadzone(long struct, int index) {
-        return memGetFloat(struct + OVRInputState.HANDTRIGGERNODEADZONE + check(index, ovrHand_Count) * 4);
+        return UNSAFE.getFloat(null, struct + OVRInputState.HANDTRIGGERNODEADZONE + check(index, ovrHand_Count) * 4);
     }
     /** Unsafe version of {@link #ThumbstickNoDeadzone}. */
     public static OVRVector2f.Buffer nThumbstickNoDeadzone(long struct) { return OVRVector2f.create(struct + OVRInputState.THUMBSTICKNODEADZONE, ovrHand_Count); }
@@ -385,13 +383,13 @@ public class OVRInputState extends Struct implements NativeResource {
     public static FloatBuffer nIndexTriggerRaw(long struct) { return memFloatBuffer(struct + OVRInputState.INDEXTRIGGERRAW, ovrHand_Count); }
     /** Unsafe version of {@link #IndexTriggerRaw(int) IndexTriggerRaw}. */
     public static float nIndexTriggerRaw(long struct, int index) {
-        return memGetFloat(struct + OVRInputState.INDEXTRIGGERRAW + check(index, ovrHand_Count) * 4);
+        return UNSAFE.getFloat(null, struct + OVRInputState.INDEXTRIGGERRAW + check(index, ovrHand_Count) * 4);
     }
     /** Unsafe version of {@link #HandTriggerRaw}. */
     public static FloatBuffer nHandTriggerRaw(long struct) { return memFloatBuffer(struct + OVRInputState.HANDTRIGGERRAW, ovrHand_Count); }
     /** Unsafe version of {@link #HandTriggerRaw(int) HandTriggerRaw}. */
     public static float nHandTriggerRaw(long struct, int index) {
-        return memGetFloat(struct + OVRInputState.HANDTRIGGERRAW + check(index, ovrHand_Count) * 4);
+        return UNSAFE.getFloat(null, struct + OVRInputState.HANDTRIGGERRAW + check(index, ovrHand_Count) * 4);
     }
     /** Unsafe version of {@link #ThumbstickRaw}. */
     public static OVRVector2f.Buffer nThumbstickRaw(long struct) { return OVRVector2f.create(struct + OVRInputState.THUMBSTICKRAW, ovrHand_Count); }
@@ -404,6 +402,8 @@ public class OVRInputState extends Struct implements NativeResource {
 
     /** An array of {@link OVRInputState} structs. */
     public static class Buffer extends StructBuffer<OVRInputState, Buffer> implements NativeResource {
+
+        private static final OVRInputState ELEMENT_FACTORY = OVRInputState.create(-1L);
 
         /**
          * Creates a new {@link OVRInputState.Buffer} instance backed by the specified container.
@@ -432,18 +432,8 @@ public class OVRInputState extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected OVRInputState newInstance(long address) {
-            return new OVRInputState(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected OVRInputState getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code TimeInSeconds} field. */

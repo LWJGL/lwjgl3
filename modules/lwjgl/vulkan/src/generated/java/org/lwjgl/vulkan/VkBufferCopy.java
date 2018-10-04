@@ -74,10 +74,6 @@ public class VkBufferCopy extends Struct implements NativeResource {
         SIZE = layout.offsetof(2);
     }
 
-    VkBufferCopy(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkBufferCopy} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -85,7 +81,7 @@ public class VkBufferCopy extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkBufferCopy(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -137,28 +133,29 @@ public class VkBufferCopy extends Struct implements NativeResource {
 
     /** Returns a new {@link VkBufferCopy} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkBufferCopy malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkBufferCopy.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkBufferCopy} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkBufferCopy calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkBufferCopy.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkBufferCopy} instance allocated with {@link BufferUtils}. */
     public static VkBufferCopy create() {
-        return new VkBufferCopy(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkBufferCopy.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkBufferCopy} instance for the specified memory address. */
     public static VkBufferCopy create(long address) {
-        return new VkBufferCopy(address, null);
+        return wrap(VkBufferCopy.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBufferCopy createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkBufferCopy.class, address);
     }
 
     /**
@@ -167,7 +164,7 @@ public class VkBufferCopy extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBufferCopy.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -176,7 +173,7 @@ public class VkBufferCopy extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBufferCopy.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -185,7 +182,8 @@ public class VkBufferCopy extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBufferCopy.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -195,13 +193,13 @@ public class VkBufferCopy extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBufferCopy.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBufferCopy.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -222,7 +220,7 @@ public class VkBufferCopy extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkBufferCopy mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkBufferCopy.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -231,7 +229,7 @@ public class VkBufferCopy extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkBufferCopy callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkBufferCopy.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -259,7 +257,7 @@ public class VkBufferCopy extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBufferCopy.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -269,29 +267,31 @@ public class VkBufferCopy extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkBufferCopy.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #srcOffset}. */
-    public static long nsrcOffset(long struct) { return memGetLong(struct + VkBufferCopy.SRCOFFSET); }
+    public static long nsrcOffset(long struct) { return UNSAFE.getLong(null, struct + VkBufferCopy.SRCOFFSET); }
     /** Unsafe version of {@link #dstOffset}. */
-    public static long ndstOffset(long struct) { return memGetLong(struct + VkBufferCopy.DSTOFFSET); }
+    public static long ndstOffset(long struct) { return UNSAFE.getLong(null, struct + VkBufferCopy.DSTOFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return memGetLong(struct + VkBufferCopy.SIZE); }
+    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkBufferCopy.SIZE); }
 
     /** Unsafe version of {@link #srcOffset(long) srcOffset}. */
-    public static void nsrcOffset(long struct, long value) { memPutLong(struct + VkBufferCopy.SRCOFFSET, value); }
+    public static void nsrcOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferCopy.SRCOFFSET, value); }
     /** Unsafe version of {@link #dstOffset(long) dstOffset}. */
-    public static void ndstOffset(long struct, long value) { memPutLong(struct + VkBufferCopy.DSTOFFSET, value); }
+    public static void ndstOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferCopy.DSTOFFSET, value); }
     /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { memPutLong(struct + VkBufferCopy.SIZE, value); }
+    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferCopy.SIZE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkBufferCopy} structs. */
     public static class Buffer extends StructBuffer<VkBufferCopy, Buffer> implements NativeResource {
+
+        private static final VkBufferCopy ELEMENT_FACTORY = VkBufferCopy.create(-1L);
 
         /**
          * Creates a new {@link VkBufferCopy.Buffer} instance backed by the specified container.
@@ -320,18 +320,8 @@ public class VkBufferCopy extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkBufferCopy newInstance(long address) {
-            return new VkBufferCopy(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkBufferCopy getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code srcOffset} field. */

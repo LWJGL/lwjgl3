@@ -61,10 +61,6 @@ public class VRTextureBounds extends Struct implements NativeResource {
         VMAX = layout.offsetof(3);
     }
 
-    VRTextureBounds(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VRTextureBounds} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -72,7 +68,7 @@ public class VRTextureBounds extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VRTextureBounds(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -127,28 +123,29 @@ public class VRTextureBounds extends Struct implements NativeResource {
 
     /** Returns a new {@link VRTextureBounds} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VRTextureBounds malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VRTextureBounds.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VRTextureBounds} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VRTextureBounds calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VRTextureBounds.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VRTextureBounds} instance allocated with {@link BufferUtils}. */
     public static VRTextureBounds create() {
-        return new VRTextureBounds(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VRTextureBounds.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VRTextureBounds} instance for the specified memory address. */
     public static VRTextureBounds create(long address) {
-        return new VRTextureBounds(address, null);
+        return wrap(VRTextureBounds.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VRTextureBounds createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VRTextureBounds.class, address);
     }
 
     /**
@@ -157,7 +154,7 @@ public class VRTextureBounds extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRTextureBounds.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -166,7 +163,7 @@ public class VRTextureBounds extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRTextureBounds.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -175,7 +172,8 @@ public class VRTextureBounds extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRTextureBounds.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -185,13 +183,13 @@ public class VRTextureBounds extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRTextureBounds.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VRTextureBounds.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -212,7 +210,7 @@ public class VRTextureBounds extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VRTextureBounds mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VRTextureBounds.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -221,7 +219,7 @@ public class VRTextureBounds extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VRTextureBounds callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VRTextureBounds.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -249,7 +247,7 @@ public class VRTextureBounds extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRTextureBounds.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -259,33 +257,35 @@ public class VRTextureBounds extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRTextureBounds.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #uMin}. */
-    public static float nuMin(long struct) { return memGetFloat(struct + VRTextureBounds.UMIN); }
+    public static float nuMin(long struct) { return UNSAFE.getFloat(null, struct + VRTextureBounds.UMIN); }
     /** Unsafe version of {@link #vMin}. */
-    public static float nvMin(long struct) { return memGetFloat(struct + VRTextureBounds.VMIN); }
+    public static float nvMin(long struct) { return UNSAFE.getFloat(null, struct + VRTextureBounds.VMIN); }
     /** Unsafe version of {@link #uMax}. */
-    public static float nuMax(long struct) { return memGetFloat(struct + VRTextureBounds.UMAX); }
+    public static float nuMax(long struct) { return UNSAFE.getFloat(null, struct + VRTextureBounds.UMAX); }
     /** Unsafe version of {@link #vMax}. */
-    public static float nvMax(long struct) { return memGetFloat(struct + VRTextureBounds.VMAX); }
+    public static float nvMax(long struct) { return UNSAFE.getFloat(null, struct + VRTextureBounds.VMAX); }
 
     /** Unsafe version of {@link #uMin(float) uMin}. */
-    public static void nuMin(long struct, float value) { memPutFloat(struct + VRTextureBounds.UMIN, value); }
+    public static void nuMin(long struct, float value) { UNSAFE.putFloat(null, struct + VRTextureBounds.UMIN, value); }
     /** Unsafe version of {@link #vMin(float) vMin}. */
-    public static void nvMin(long struct, float value) { memPutFloat(struct + VRTextureBounds.VMIN, value); }
+    public static void nvMin(long struct, float value) { UNSAFE.putFloat(null, struct + VRTextureBounds.VMIN, value); }
     /** Unsafe version of {@link #uMax(float) uMax}. */
-    public static void nuMax(long struct, float value) { memPutFloat(struct + VRTextureBounds.UMAX, value); }
+    public static void nuMax(long struct, float value) { UNSAFE.putFloat(null, struct + VRTextureBounds.UMAX, value); }
     /** Unsafe version of {@link #vMax(float) vMax}. */
-    public static void nvMax(long struct, float value) { memPutFloat(struct + VRTextureBounds.VMAX, value); }
+    public static void nvMax(long struct, float value) { UNSAFE.putFloat(null, struct + VRTextureBounds.VMAX, value); }
 
     // -----------------------------------
 
     /** An array of {@link VRTextureBounds} structs. */
     public static class Buffer extends StructBuffer<VRTextureBounds, Buffer> implements NativeResource {
+
+        private static final VRTextureBounds ELEMENT_FACTORY = VRTextureBounds.create(-1L);
 
         /**
          * Creates a new {@link VRTextureBounds.Buffer} instance backed by the specified container.
@@ -314,18 +314,8 @@ public class VRTextureBounds extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VRTextureBounds newInstance(long address) {
-            return new VRTextureBounds(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VRTextureBounds getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code uMin} field. */

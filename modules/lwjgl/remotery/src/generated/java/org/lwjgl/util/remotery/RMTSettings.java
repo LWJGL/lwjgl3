@@ -123,10 +123,6 @@ public class RMTSettings extends Struct implements NativeResource {
         LOGFILENAME = layout.offsetof(12);
     }
 
-    RMTSettings(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link RMTSettings} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -134,7 +130,7 @@ public class RMTSettings extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public RMTSettings(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -259,28 +255,29 @@ public class RMTSettings extends Struct implements NativeResource {
 
     /** Returns a new {@link RMTSettings} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static RMTSettings malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(RMTSettings.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link RMTSettings} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static RMTSettings calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(RMTSettings.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link RMTSettings} instance allocated with {@link BufferUtils}. */
     public static RMTSettings create() {
-        return new RMTSettings(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(RMTSettings.class, memAddress(container), container);
     }
 
     /** Returns a new {@link RMTSettings} instance for the specified memory address. */
     public static RMTSettings create(long address) {
-        return new RMTSettings(address, null);
+        return wrap(RMTSettings.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static RMTSettings createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(RMTSettings.class, address);
     }
 
     // -----------------------------------
@@ -301,7 +298,7 @@ public class RMTSettings extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static RMTSettings mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(RMTSettings.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -310,23 +307,23 @@ public class RMTSettings extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static RMTSettings callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(RMTSettings.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #port}. */
-    public static short nport(long struct) { return memGetShort(struct + RMTSettings.PORT); }
+    public static short nport(long struct) { return UNSAFE.getShort(null, struct + RMTSettings.PORT); }
     /** Unsafe version of {@link #reuse_open_port}. */
-    public static int nreuse_open_port(long struct) { return memGetInt(struct + RMTSettings.REUSE_OPEN_PORT); }
+    public static int nreuse_open_port(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.REUSE_OPEN_PORT); }
     /** Unsafe version of {@link #limit_connections_to_localhost}. */
-    public static int nlimit_connections_to_localhost(long struct) { return memGetInt(struct + RMTSettings.LIMIT_CONNECTIONS_TO_LOCALHOST); }
+    public static int nlimit_connections_to_localhost(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.LIMIT_CONNECTIONS_TO_LOCALHOST); }
     /** Unsafe version of {@link #msSleepBetweenServerUpdates}. */
-    public static int nmsSleepBetweenServerUpdates(long struct) { return memGetInt(struct + RMTSettings.MSSLEEPBETWEENSERVERUPDATES); }
+    public static int nmsSleepBetweenServerUpdates(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.MSSLEEPBETWEENSERVERUPDATES); }
     /** Unsafe version of {@link #messageQueueSizeInBytes}. */
-    public static int nmessageQueueSizeInBytes(long struct) { return memGetInt(struct + RMTSettings.MESSAGEQUEUESIZEINBYTES); }
+    public static int nmessageQueueSizeInBytes(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.MESSAGEQUEUESIZEINBYTES); }
     /** Unsafe version of {@link #maxNbMessagesPerUpdate}. */
-    public static int nmaxNbMessagesPerUpdate(long struct) { return memGetInt(struct + RMTSettings.MAXNBMESSAGESPERUPDATE); }
+    public static int nmaxNbMessagesPerUpdate(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.MAXNBMESSAGESPERUPDATE); }
     /** Unsafe version of {@link #_malloc}. */
     public static RMTMalloc n_malloc(long struct) { return RMTMalloc.create(memGetAddress(struct + RMTSettings._MALLOC)); }
     /** Unsafe version of {@link #realloc}. */
@@ -345,17 +342,17 @@ public class RMTSettings extends Struct implements NativeResource {
     public static String nlogFilenameString(long struct) { return memASCII(memGetAddress(struct + RMTSettings.LOGFILENAME)); }
 
     /** Unsafe version of {@link #port(short) port}. */
-    public static void nport(long struct, short value) { memPutShort(struct + RMTSettings.PORT, value); }
+    public static void nport(long struct, short value) { UNSAFE.putShort(null, struct + RMTSettings.PORT, value); }
     /** Unsafe version of {@link #reuse_open_port(int) reuse_open_port}. */
-    public static void nreuse_open_port(long struct, int value) { memPutInt(struct + RMTSettings.REUSE_OPEN_PORT, value); }
+    public static void nreuse_open_port(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.REUSE_OPEN_PORT, value); }
     /** Unsafe version of {@link #limit_connections_to_localhost(int) limit_connections_to_localhost}. */
-    public static void nlimit_connections_to_localhost(long struct, int value) { memPutInt(struct + RMTSettings.LIMIT_CONNECTIONS_TO_LOCALHOST, value); }
+    public static void nlimit_connections_to_localhost(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.LIMIT_CONNECTIONS_TO_LOCALHOST, value); }
     /** Unsafe version of {@link #msSleepBetweenServerUpdates(int) msSleepBetweenServerUpdates}. */
-    public static void nmsSleepBetweenServerUpdates(long struct, int value) { memPutInt(struct + RMTSettings.MSSLEEPBETWEENSERVERUPDATES, value); }
+    public static void nmsSleepBetweenServerUpdates(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.MSSLEEPBETWEENSERVERUPDATES, value); }
     /** Unsafe version of {@link #messageQueueSizeInBytes(int) messageQueueSizeInBytes}. */
-    public static void nmessageQueueSizeInBytes(long struct, int value) { memPutInt(struct + RMTSettings.MESSAGEQUEUESIZEINBYTES, value); }
+    public static void nmessageQueueSizeInBytes(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.MESSAGEQUEUESIZEINBYTES, value); }
     /** Unsafe version of {@link #maxNbMessagesPerUpdate(int) maxNbMessagesPerUpdate}. */
-    public static void nmaxNbMessagesPerUpdate(long struct, int value) { memPutInt(struct + RMTSettings.MAXNBMESSAGESPERUPDATE, value); }
+    public static void nmaxNbMessagesPerUpdate(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.MAXNBMESSAGESPERUPDATE, value); }
     /** Unsafe version of {@link #_malloc(RMTMallocI) _malloc}. */
     public static void n_malloc(long struct, RMTMallocI value) { memPutAddress(struct + RMTSettings._MALLOC, value.address()); }
     /** Unsafe version of {@link #realloc(RMTReallocI) realloc}. */

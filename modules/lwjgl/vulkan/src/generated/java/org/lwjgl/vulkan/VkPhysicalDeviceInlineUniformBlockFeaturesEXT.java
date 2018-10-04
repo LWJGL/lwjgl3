@@ -75,10 +75,6 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
         DESCRIPTORBINDINGINLINEUNIFORMBLOCKUPDATEAFTERBIND = layout.offsetof(3);
     }
 
-    VkPhysicalDeviceInlineUniformBlockFeaturesEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -86,7 +82,7 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceInlineUniformBlockFeaturesEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -137,13 +133,13 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
 
     /** Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT create(long address) {
-        return new VkPhysicalDeviceInlineUniformBlockFeaturesEXT(address, null);
+        return wrap(VkPhysicalDeviceInlineUniformBlockFeaturesEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceInlineUniformBlockFeaturesEXT.class, address);
     }
 
     /**
@@ -153,28 +149,28 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.PNEXT); }
     /** Unsafe version of {@link #inlineUniformBlock}. */
-    public static int ninlineUniformBlock(long struct) { return memGetInt(struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.INLINEUNIFORMBLOCK); }
+    public static int ninlineUniformBlock(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.INLINEUNIFORMBLOCK); }
     /** Unsafe version of {@link #descriptorBindingInlineUniformBlockUpdateAfterBind}. */
-    public static int ndescriptorBindingInlineUniformBlockUpdateAfterBind(long struct) { return memGetInt(struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.DESCRIPTORBINDINGINLINEUNIFORMBLOCKUPDATEAFTERBIND); }
+    public static int ndescriptorBindingInlineUniformBlockUpdateAfterBind(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.DESCRIPTORBINDINGINLINEUNIFORMBLOCKUPDATEAFTERBIND); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.PNEXT, value); }
 
@@ -182,6 +178,8 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
 
     /** An array of {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceInlineUniformBlockFeaturesEXT, Buffer> {
+
+        private static final VkPhysicalDeviceInlineUniformBlockFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceInlineUniformBlockFeaturesEXT.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer} instance backed by the specified container.
@@ -210,18 +208,8 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceInlineUniformBlockFeaturesEXT newInstance(long address) {
-            return new VkPhysicalDeviceInlineUniformBlockFeaturesEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceInlineUniformBlockFeaturesEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

@@ -83,10 +83,6 @@ public class GPU_DEVICE extends Struct implements NativeResource {
         RCVIRTUALSCREEN = layout.offsetof(4);
     }
 
-    GPU_DEVICE(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link GPU_DEVICE} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -94,7 +90,7 @@ public class GPU_DEVICE extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public GPU_DEVICE(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -127,28 +123,29 @@ public class GPU_DEVICE extends Struct implements NativeResource {
 
     /** Returns a new {@link GPU_DEVICE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static GPU_DEVICE malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(GPU_DEVICE.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link GPU_DEVICE} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static GPU_DEVICE calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(GPU_DEVICE.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link GPU_DEVICE} instance allocated with {@link BufferUtils}. */
     public static GPU_DEVICE create() {
-        return new GPU_DEVICE(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(GPU_DEVICE.class, memAddress(container), container);
     }
 
     /** Returns a new {@link GPU_DEVICE} instance for the specified memory address. */
     public static GPU_DEVICE create(long address) {
-        return new GPU_DEVICE(address, null);
+        return wrap(GPU_DEVICE.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static GPU_DEVICE createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(GPU_DEVICE.class, address);
     }
 
     /**
@@ -157,7 +154,7 @@ public class GPU_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static GPU_DEVICE.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -166,7 +163,7 @@ public class GPU_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static GPU_DEVICE.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -175,7 +172,8 @@ public class GPU_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static GPU_DEVICE.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -185,13 +183,13 @@ public class GPU_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static GPU_DEVICE.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static GPU_DEVICE.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -212,7 +210,7 @@ public class GPU_DEVICE extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static GPU_DEVICE mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(GPU_DEVICE.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -221,7 +219,7 @@ public class GPU_DEVICE extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static GPU_DEVICE callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(GPU_DEVICE.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -249,7 +247,7 @@ public class GPU_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static GPU_DEVICE.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -259,13 +257,13 @@ public class GPU_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static GPU_DEVICE.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #cb}. */
-    public static int ncb(long struct) { return memGetInt(struct + GPU_DEVICE.CB); }
+    public static int ncb(long struct) { return UNSAFE.getInt(null, struct + GPU_DEVICE.CB); }
     /** Unsafe version of {@link #DeviceName}. */
     public static ByteBuffer nDeviceName(long struct) { return memByteBuffer(struct + GPU_DEVICE.DEVICENAME, 32); }
     /** Unsafe version of {@link #DeviceNameString}. */
@@ -275,7 +273,7 @@ public class GPU_DEVICE extends Struct implements NativeResource {
     /** Unsafe version of {@link #DeviceStringString}. */
     public static String nDeviceStringString(long struct) { return memASCII(struct + GPU_DEVICE.DEVICESTRING); }
     /** Unsafe version of {@link #Flags}. */
-    public static int nFlags(long struct) { return memGetInt(struct + GPU_DEVICE.FLAGS); }
+    public static int nFlags(long struct) { return UNSAFE.getInt(null, struct + GPU_DEVICE.FLAGS); }
     /** Unsafe version of {@link #rcVirtualScreen}. */
     public static RECT nrcVirtualScreen(long struct) { return RECT.create(struct + GPU_DEVICE.RCVIRTUALSCREEN); }
 
@@ -283,6 +281,8 @@ public class GPU_DEVICE extends Struct implements NativeResource {
 
     /** An array of {@link GPU_DEVICE} structs. */
     public static class Buffer extends StructBuffer<GPU_DEVICE, Buffer> implements NativeResource {
+
+        private static final GPU_DEVICE ELEMENT_FACTORY = GPU_DEVICE.create(-1L);
 
         /**
          * Creates a new {@link GPU_DEVICE.Buffer} instance backed by the specified container.
@@ -311,18 +311,8 @@ public class GPU_DEVICE extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected GPU_DEVICE newInstance(long address) {
-            return new GPU_DEVICE(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected GPU_DEVICE getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code cb} field. */

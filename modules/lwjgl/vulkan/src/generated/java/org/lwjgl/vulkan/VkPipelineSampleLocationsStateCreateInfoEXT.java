@@ -80,10 +80,6 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
         SAMPLELOCATIONSINFO = layout.offsetof(3);
     }
 
-    VkPipelineSampleLocationsStateCreateInfoEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPipelineSampleLocationsStateCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -91,7 +87,7 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineSampleLocationsStateCreateInfoEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -151,28 +147,29 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
 
     /** Returns a new {@link VkPipelineSampleLocationsStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineSampleLocationsStateCreateInfoEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPipelineSampleLocationsStateCreateInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineSampleLocationsStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineSampleLocationsStateCreateInfoEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPipelineSampleLocationsStateCreateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineSampleLocationsStateCreateInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkPipelineSampleLocationsStateCreateInfoEXT create() {
-        return new VkPipelineSampleLocationsStateCreateInfoEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineSampleLocationsStateCreateInfoEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPipelineSampleLocationsStateCreateInfoEXT} instance for the specified memory address. */
     public static VkPipelineSampleLocationsStateCreateInfoEXT create(long address) {
-        return new VkPipelineSampleLocationsStateCreateInfoEXT(address, null);
+        return wrap(VkPipelineSampleLocationsStateCreateInfoEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineSampleLocationsStateCreateInfoEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPipelineSampleLocationsStateCreateInfoEXT.class, address);
     }
 
     /**
@@ -181,7 +178,7 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPipelineSampleLocationsStateCreateInfoEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -190,7 +187,7 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPipelineSampleLocationsStateCreateInfoEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -199,7 +196,8 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPipelineSampleLocationsStateCreateInfoEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -209,13 +207,13 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPipelineSampleLocationsStateCreateInfoEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineSampleLocationsStateCreateInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -236,7 +234,7 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkPipelineSampleLocationsStateCreateInfoEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPipelineSampleLocationsStateCreateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -245,7 +243,7 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkPipelineSampleLocationsStateCreateInfoEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPipelineSampleLocationsStateCreateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -273,7 +271,7 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPipelineSampleLocationsStateCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -283,26 +281,26 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPipelineSampleLocationsStateCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPipelineSampleLocationsStateCreateInfoEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineSampleLocationsStateCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineSampleLocationsStateCreateInfoEXT.PNEXT); }
     /** Unsafe version of {@link #sampleLocationsEnable}. */
-    public static int nsampleLocationsEnable(long struct) { return memGetInt(struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSENABLE); }
+    public static int nsampleLocationsEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSENABLE); }
     /** Unsafe version of {@link #sampleLocationsInfo}. */
     public static VkSampleLocationsInfoEXT nsampleLocationsInfo(long struct) { return VkSampleLocationsInfoEXT.create(struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSINFO); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineSampleLocationsStateCreateInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineSampleLocationsStateCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineSampleLocationsStateCreateInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #sampleLocationsEnable(boolean) sampleLocationsEnable}. */
-    public static void nsampleLocationsEnable(long struct, int value) { memPutInt(struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSENABLE, value); }
+    public static void nsampleLocationsEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSENABLE, value); }
     /** Unsafe version of {@link #sampleLocationsInfo(VkSampleLocationsInfoEXT) sampleLocationsInfo}. */
     public static void nsampleLocationsInfo(long struct, VkSampleLocationsInfoEXT value) { memCopy(value.address(), struct + VkPipelineSampleLocationsStateCreateInfoEXT.SAMPLELOCATIONSINFO, VkSampleLocationsInfoEXT.SIZEOF); }
 
@@ -332,6 +330,8 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
     /** An array of {@link VkPipelineSampleLocationsStateCreateInfoEXT} structs. */
     public static class Buffer extends StructBuffer<VkPipelineSampleLocationsStateCreateInfoEXT, Buffer> implements NativeResource {
 
+        private static final VkPipelineSampleLocationsStateCreateInfoEXT ELEMENT_FACTORY = VkPipelineSampleLocationsStateCreateInfoEXT.create(-1L);
+
         /**
          * Creates a new {@link VkPipelineSampleLocationsStateCreateInfoEXT.Buffer} instance backed by the specified container.
          *
@@ -359,18 +359,8 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPipelineSampleLocationsStateCreateInfoEXT newInstance(long address) {
-            return new VkPipelineSampleLocationsStateCreateInfoEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPipelineSampleLocationsStateCreateInfoEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

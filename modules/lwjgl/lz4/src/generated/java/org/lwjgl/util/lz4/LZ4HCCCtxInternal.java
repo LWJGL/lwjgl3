@@ -99,10 +99,6 @@ public class LZ4HCCCtxInternal extends Struct {
         DICTCTX = layout.offsetof(10);
     }
 
-    LZ4HCCCtxInternal(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link LZ4HCCCtxInternal} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -110,7 +106,7 @@ public class LZ4HCCCtxInternal extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public LZ4HCCCtxInternal(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -170,13 +166,13 @@ public class LZ4HCCCtxInternal extends Struct {
 
     /** Returns a new {@link LZ4HCCCtxInternal} instance for the specified memory address. */
     public static LZ4HCCCtxInternal create(long address) {
-        return new LZ4HCCCtxInternal(address, null);
+        return wrap(LZ4HCCCtxInternal.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4HCCCtxInternal createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(LZ4HCCCtxInternal.class, address);
     }
 
     /**
@@ -186,13 +182,13 @@ public class LZ4HCCCtxInternal extends Struct {
      * @param capacity the buffer capacity
      */
     public static LZ4HCCCtxInternal.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4HCCCtxInternal.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -201,13 +197,13 @@ public class LZ4HCCCtxInternal extends Struct {
     public static IntBuffer nhashTable(long struct) { return memIntBuffer(struct + LZ4HCCCtxInternal.HASHTABLE, LZ4HC_HASHTABLESIZE); }
     /** Unsafe version of {@link #hashTable(int) hashTable}. */
     public static int nhashTable(long struct, int index) {
-        return memGetInt(struct + LZ4HCCCtxInternal.HASHTABLE + check(index, LZ4HC_HASHTABLESIZE) * 4);
+        return UNSAFE.getInt(null, struct + LZ4HCCCtxInternal.HASHTABLE + check(index, LZ4HC_HASHTABLESIZE) * 4);
     }
     /** Unsafe version of {@link #chainTable}. */
     public static ShortBuffer nchainTable(long struct) { return memShortBuffer(struct + LZ4HCCCtxInternal.CHAINTABLE, LZ4HC_MAXD); }
     /** Unsafe version of {@link #chainTable(int) chainTable}. */
     public static short nchainTable(long struct, int index) {
-        return memGetShort(struct + LZ4HCCCtxInternal.CHAINTABLE + check(index, LZ4HC_MAXD) * 2);
+        return UNSAFE.getShort(null, struct + LZ4HCCCtxInternal.CHAINTABLE + check(index, LZ4HC_MAXD) * 2);
     }
     /** Unsafe version of {@link #end(int) end}. */
     public static ByteBuffer nend(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4HCCCtxInternal.END), capacity); }
@@ -216,15 +212,15 @@ public class LZ4HCCCtxInternal extends Struct {
     /** Unsafe version of {@link #dictBase(int) dictBase}. */
     public static ByteBuffer ndictBase(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4HCCCtxInternal.DICTBASE), capacity); }
     /** Unsafe version of {@link #dictLimit}. */
-    public static int ndictLimit(long struct) { return memGetInt(struct + LZ4HCCCtxInternal.DICTLIMIT); }
+    public static int ndictLimit(long struct) { return UNSAFE.getInt(null, struct + LZ4HCCCtxInternal.DICTLIMIT); }
     /** Unsafe version of {@link #lowLimit}. */
-    public static int nlowLimit(long struct) { return memGetInt(struct + LZ4HCCCtxInternal.LOWLIMIT); }
+    public static int nlowLimit(long struct) { return UNSAFE.getInt(null, struct + LZ4HCCCtxInternal.LOWLIMIT); }
     /** Unsafe version of {@link #nextToUpdate}. */
-    public static int nnextToUpdate(long struct) { return memGetInt(struct + LZ4HCCCtxInternal.NEXTTOUPDATE); }
+    public static int nnextToUpdate(long struct) { return UNSAFE.getInt(null, struct + LZ4HCCCtxInternal.NEXTTOUPDATE); }
     /** Unsafe version of {@link #compressionLevel}. */
-    public static short ncompressionLevel(long struct) { return memGetShort(struct + LZ4HCCCtxInternal.COMPRESSIONLEVEL); }
+    public static short ncompressionLevel(long struct) { return UNSAFE.getShort(null, struct + LZ4HCCCtxInternal.COMPRESSIONLEVEL); }
     /** Unsafe version of {@link #favorDecSpeed}. */
-    public static short nfavorDecSpeed(long struct) { return memGetShort(struct + LZ4HCCCtxInternal.FAVORDECSPEED); }
+    public static short nfavorDecSpeed(long struct) { return UNSAFE.getShort(null, struct + LZ4HCCCtxInternal.FAVORDECSPEED); }
     /** Unsafe version of {@link #dictCtx}. */
     public static LZ4HCCCtxInternal ndictCtx(long struct) { return LZ4HCCCtxInternal.create(memGetAddress(struct + LZ4HCCCtxInternal.DICTCTX)); }
 
@@ -232,6 +228,8 @@ public class LZ4HCCCtxInternal extends Struct {
 
     /** An array of {@link LZ4HCCCtxInternal} structs. */
     public static class Buffer extends StructBuffer<LZ4HCCCtxInternal, Buffer> {
+
+        private static final LZ4HCCCtxInternal ELEMENT_FACTORY = LZ4HCCCtxInternal.create(-1L);
 
         /**
          * Creates a new {@link LZ4HCCCtxInternal.Buffer} instance backed by the specified container.
@@ -260,18 +258,8 @@ public class LZ4HCCCtxInternal extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected LZ4HCCCtxInternal newInstance(long address) {
-            return new LZ4HCCCtxInternal(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected LZ4HCCCtxInternal getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link IntBuffer} view of the {@code hashTable} field. */

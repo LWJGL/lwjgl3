@@ -72,10 +72,6 @@ public class VkPhysicalDeviceSparseProperties extends Struct {
         RESIDENCYNONRESIDENTSTRICT = layout.offsetof(4);
     }
 
-    VkPhysicalDeviceSparseProperties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceSparseProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -83,7 +79,7 @@ public class VkPhysicalDeviceSparseProperties extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceSparseProperties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -109,13 +105,13 @@ public class VkPhysicalDeviceSparseProperties extends Struct {
 
     /** Returns a new {@link VkPhysicalDeviceSparseProperties} instance for the specified memory address. */
     public static VkPhysicalDeviceSparseProperties create(long address) {
-        return new VkPhysicalDeviceSparseProperties(address, null);
+        return wrap(VkPhysicalDeviceSparseProperties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSparseProperties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceSparseProperties.class, address);
     }
 
     /**
@@ -125,32 +121,34 @@ public class VkPhysicalDeviceSparseProperties extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSparseProperties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSparseProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #residencyStandard2DBlockShape}. */
-    public static int nresidencyStandard2DBlockShape(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD2DBLOCKSHAPE); }
+    public static int nresidencyStandard2DBlockShape(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD2DBLOCKSHAPE); }
     /** Unsafe version of {@link #residencyStandard2DMultisampleBlockShape}. */
-    public static int nresidencyStandard2DMultisampleBlockShape(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD2DMULTISAMPLEBLOCKSHAPE); }
+    public static int nresidencyStandard2DMultisampleBlockShape(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD2DMULTISAMPLEBLOCKSHAPE); }
     /** Unsafe version of {@link #residencyStandard3DBlockShape}. */
-    public static int nresidencyStandard3DBlockShape(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD3DBLOCKSHAPE); }
+    public static int nresidencyStandard3DBlockShape(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseProperties.RESIDENCYSTANDARD3DBLOCKSHAPE); }
     /** Unsafe version of {@link #residencyAlignedMipSize}. */
-    public static int nresidencyAlignedMipSize(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseProperties.RESIDENCYALIGNEDMIPSIZE); }
+    public static int nresidencyAlignedMipSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseProperties.RESIDENCYALIGNEDMIPSIZE); }
     /** Unsafe version of {@link #residencyNonResidentStrict}. */
-    public static int nresidencyNonResidentStrict(long struct) { return memGetInt(struct + VkPhysicalDeviceSparseProperties.RESIDENCYNONRESIDENTSTRICT); }
+    public static int nresidencyNonResidentStrict(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSparseProperties.RESIDENCYNONRESIDENTSTRICT); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceSparseProperties} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceSparseProperties, Buffer> {
+
+        private static final VkPhysicalDeviceSparseProperties ELEMENT_FACTORY = VkPhysicalDeviceSparseProperties.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceSparseProperties.Buffer} instance backed by the specified container.
@@ -179,18 +177,8 @@ public class VkPhysicalDeviceSparseProperties extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceSparseProperties newInstance(long address) {
-            return new VkPhysicalDeviceSparseProperties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceSparseProperties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code residencyStandard2DBlockShape} field. */

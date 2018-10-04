@@ -80,10 +80,6 @@ public class NVGTextRow extends Struct implements NativeResource {
         MAXX = layout.offsetof(5);
     }
 
-    NVGTextRow(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NVGTextRow} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -91,7 +87,7 @@ public class NVGTextRow extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NVGTextRow(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -117,28 +113,29 @@ public class NVGTextRow extends Struct implements NativeResource {
 
     /** Returns a new {@link NVGTextRow} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NVGTextRow malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NVGTextRow.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NVGTextRow} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NVGTextRow calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NVGTextRow.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NVGTextRow} instance allocated with {@link BufferUtils}. */
     public static NVGTextRow create() {
-        return new NVGTextRow(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NVGTextRow.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NVGTextRow} instance for the specified memory address. */
     public static NVGTextRow create(long address) {
-        return new NVGTextRow(address, null);
+        return wrap(NVGTextRow.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NVGTextRow createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NVGTextRow.class, address);
     }
 
     /**
@@ -147,7 +144,7 @@ public class NVGTextRow extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGTextRow.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -156,7 +153,7 @@ public class NVGTextRow extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGTextRow.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -165,7 +162,8 @@ public class NVGTextRow extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGTextRow.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -175,13 +173,13 @@ public class NVGTextRow extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGTextRow.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NVGTextRow.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -202,7 +200,7 @@ public class NVGTextRow extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NVGTextRow mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NVGTextRow.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -211,7 +209,7 @@ public class NVGTextRow extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NVGTextRow callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NVGTextRow.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -239,7 +237,7 @@ public class NVGTextRow extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGTextRow.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -249,7 +247,7 @@ public class NVGTextRow extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGTextRow.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -261,16 +259,18 @@ public class NVGTextRow extends Struct implements NativeResource {
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + NVGTextRow.NEXT); }
     /** Unsafe version of {@link #width}. */
-    public static float nwidth(long struct) { return memGetFloat(struct + NVGTextRow.WIDTH); }
+    public static float nwidth(long struct) { return UNSAFE.getFloat(null, struct + NVGTextRow.WIDTH); }
     /** Unsafe version of {@link #minx}. */
-    public static float nminx(long struct) { return memGetFloat(struct + NVGTextRow.MINX); }
+    public static float nminx(long struct) { return UNSAFE.getFloat(null, struct + NVGTextRow.MINX); }
     /** Unsafe version of {@link #maxx}. */
-    public static float nmaxx(long struct) { return memGetFloat(struct + NVGTextRow.MAXX); }
+    public static float nmaxx(long struct) { return UNSAFE.getFloat(null, struct + NVGTextRow.MAXX); }
 
     // -----------------------------------
 
     /** An array of {@link NVGTextRow} structs. */
     public static class Buffer extends StructBuffer<NVGTextRow, Buffer> implements NativeResource {
+
+        private static final NVGTextRow ELEMENT_FACTORY = NVGTextRow.create(-1L);
 
         /**
          * Creates a new {@link NVGTextRow.Buffer} instance backed by the specified container.
@@ -299,18 +299,8 @@ public class NVGTextRow extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NVGTextRow newInstance(long address) {
-            return new NVGTextRow(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NVGTextRow getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code start} field. */

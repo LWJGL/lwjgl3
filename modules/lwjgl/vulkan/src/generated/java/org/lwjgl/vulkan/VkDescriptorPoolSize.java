@@ -76,10 +76,6 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
         DESCRIPTORCOUNT = layout.offsetof(1);
     }
 
-    VkDescriptorPoolSize(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDescriptorPoolSize} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -87,7 +83,7 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDescriptorPoolSize(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -132,28 +128,29 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
 
     /** Returns a new {@link VkDescriptorPoolSize} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDescriptorPoolSize malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDescriptorPoolSize.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDescriptorPoolSize} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDescriptorPoolSize calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDescriptorPoolSize.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDescriptorPoolSize} instance allocated with {@link BufferUtils}. */
     public static VkDescriptorPoolSize create() {
-        return new VkDescriptorPoolSize(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDescriptorPoolSize.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDescriptorPoolSize} instance for the specified memory address. */
     public static VkDescriptorPoolSize create(long address) {
-        return new VkDescriptorPoolSize(address, null);
+        return wrap(VkDescriptorPoolSize.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorPoolSize createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDescriptorPoolSize.class, address);
     }
 
     /**
@@ -162,7 +159,7 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorPoolSize.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -171,7 +168,7 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorPoolSize.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -180,7 +177,8 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorPoolSize.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -190,13 +188,13 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorPoolSize.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorPoolSize.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -217,7 +215,7 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorPoolSize mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDescriptorPoolSize.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -226,7 +224,7 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorPoolSize callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDescriptorPoolSize.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -254,7 +252,7 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorPoolSize.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -264,25 +262,27 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDescriptorPoolSize.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return memGetInt(struct + VkDescriptorPoolSize.TYPE); }
+    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolSize.TYPE); }
     /** Unsafe version of {@link #descriptorCount}. */
-    public static int ndescriptorCount(long struct) { return memGetInt(struct + VkDescriptorPoolSize.DESCRIPTORCOUNT); }
+    public static int ndescriptorCount(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolSize.DESCRIPTORCOUNT); }
 
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { memPutInt(struct + VkDescriptorPoolSize.TYPE, value); }
+    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolSize.TYPE, value); }
     /** Unsafe version of {@link #descriptorCount(int) descriptorCount}. */
-    public static void ndescriptorCount(long struct, int value) { memPutInt(struct + VkDescriptorPoolSize.DESCRIPTORCOUNT, value); }
+    public static void ndescriptorCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolSize.DESCRIPTORCOUNT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkDescriptorPoolSize} structs. */
     public static class Buffer extends StructBuffer<VkDescriptorPoolSize, Buffer> implements NativeResource {
+
+        private static final VkDescriptorPoolSize ELEMENT_FACTORY = VkDescriptorPoolSize.create(-1L);
 
         /**
          * Creates a new {@link VkDescriptorPoolSize.Buffer} instance backed by the specified container.
@@ -311,18 +311,8 @@ public class VkDescriptorPoolSize extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDescriptorPoolSize newInstance(long address) {
-            return new VkDescriptorPoolSize(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDescriptorPoolSize getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code type} field. */

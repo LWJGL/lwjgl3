@@ -84,10 +84,6 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
         PRESENTMARGIN = layout.offsetof(4);
     }
 
-    VkPastPresentationTimingGOOGLE(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPastPresentationTimingGOOGLE} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -95,7 +91,7 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPastPresentationTimingGOOGLE(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -121,28 +117,29 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
 
     /** Returns a new {@link VkPastPresentationTimingGOOGLE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPastPresentationTimingGOOGLE malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPastPresentationTimingGOOGLE.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPastPresentationTimingGOOGLE} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPastPresentationTimingGOOGLE calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPastPresentationTimingGOOGLE.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPastPresentationTimingGOOGLE} instance allocated with {@link BufferUtils}. */
     public static VkPastPresentationTimingGOOGLE create() {
-        return new VkPastPresentationTimingGOOGLE(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPastPresentationTimingGOOGLE.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPastPresentationTimingGOOGLE} instance for the specified memory address. */
     public static VkPastPresentationTimingGOOGLE create(long address) {
-        return new VkPastPresentationTimingGOOGLE(address, null);
+        return wrap(VkPastPresentationTimingGOOGLE.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPastPresentationTimingGOOGLE createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPastPresentationTimingGOOGLE.class, address);
     }
 
     /**
@@ -151,7 +148,7 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkPastPresentationTimingGOOGLE.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -160,7 +157,7 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkPastPresentationTimingGOOGLE.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -169,7 +166,8 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkPastPresentationTimingGOOGLE.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -179,13 +177,13 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkPastPresentationTimingGOOGLE.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPastPresentationTimingGOOGLE.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -206,7 +204,7 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static VkPastPresentationTimingGOOGLE mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPastPresentationTimingGOOGLE.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -215,7 +213,7 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static VkPastPresentationTimingGOOGLE callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPastPresentationTimingGOOGLE.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -243,7 +241,7 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkPastPresentationTimingGOOGLE.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -253,26 +251,28 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkPastPresentationTimingGOOGLE.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #presentID}. */
-    public static int npresentID(long struct) { return memGetInt(struct + VkPastPresentationTimingGOOGLE.PRESENTID); }
+    public static int npresentID(long struct) { return UNSAFE.getInt(null, struct + VkPastPresentationTimingGOOGLE.PRESENTID); }
     /** Unsafe version of {@link #desiredPresentTime}. */
-    public static long ndesiredPresentTime(long struct) { return memGetLong(struct + VkPastPresentationTimingGOOGLE.DESIREDPRESENTTIME); }
+    public static long ndesiredPresentTime(long struct) { return UNSAFE.getLong(null, struct + VkPastPresentationTimingGOOGLE.DESIREDPRESENTTIME); }
     /** Unsafe version of {@link #actualPresentTime}. */
-    public static long nactualPresentTime(long struct) { return memGetLong(struct + VkPastPresentationTimingGOOGLE.ACTUALPRESENTTIME); }
+    public static long nactualPresentTime(long struct) { return UNSAFE.getLong(null, struct + VkPastPresentationTimingGOOGLE.ACTUALPRESENTTIME); }
     /** Unsafe version of {@link #earliestPresentTime}. */
-    public static long nearliestPresentTime(long struct) { return memGetLong(struct + VkPastPresentationTimingGOOGLE.EARLIESTPRESENTTIME); }
+    public static long nearliestPresentTime(long struct) { return UNSAFE.getLong(null, struct + VkPastPresentationTimingGOOGLE.EARLIESTPRESENTTIME); }
     /** Unsafe version of {@link #presentMargin}. */
-    public static long npresentMargin(long struct) { return memGetLong(struct + VkPastPresentationTimingGOOGLE.PRESENTMARGIN); }
+    public static long npresentMargin(long struct) { return UNSAFE.getLong(null, struct + VkPastPresentationTimingGOOGLE.PRESENTMARGIN); }
 
     // -----------------------------------
 
     /** An array of {@link VkPastPresentationTimingGOOGLE} structs. */
     public static class Buffer extends StructBuffer<VkPastPresentationTimingGOOGLE, Buffer> implements NativeResource {
+
+        private static final VkPastPresentationTimingGOOGLE ELEMENT_FACTORY = VkPastPresentationTimingGOOGLE.create(-1L);
 
         /**
          * Creates a new {@link VkPastPresentationTimingGOOGLE.Buffer} instance backed by the specified container.
@@ -301,18 +301,8 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPastPresentationTimingGOOGLE newInstance(long address) {
-            return new VkPastPresentationTimingGOOGLE(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPastPresentationTimingGOOGLE getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code presentID} field. */

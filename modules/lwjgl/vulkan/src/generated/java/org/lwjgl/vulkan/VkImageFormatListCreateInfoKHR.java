@@ -89,10 +89,6 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
         PVIEWFORMATS = layout.offsetof(3);
     }
 
-    VkImageFormatListCreateInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkImageFormatListCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -100,7 +96,7 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkImageFormatListCreateInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -156,28 +152,29 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
 
     /** Returns a new {@link VkImageFormatListCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageFormatListCreateInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkImageFormatListCreateInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkImageFormatListCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageFormatListCreateInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkImageFormatListCreateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkImageFormatListCreateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkImageFormatListCreateInfoKHR create() {
-        return new VkImageFormatListCreateInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkImageFormatListCreateInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkImageFormatListCreateInfoKHR} instance for the specified memory address. */
     public static VkImageFormatListCreateInfoKHR create(long address) {
-        return new VkImageFormatListCreateInfoKHR(address, null);
+        return wrap(VkImageFormatListCreateInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageFormatListCreateInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkImageFormatListCreateInfoKHR.class, address);
     }
 
     /**
@@ -186,7 +183,7 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkImageFormatListCreateInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -195,7 +192,7 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkImageFormatListCreateInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -204,7 +201,8 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkImageFormatListCreateInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -214,13 +212,13 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkImageFormatListCreateInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageFormatListCreateInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -241,7 +239,7 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static VkImageFormatListCreateInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkImageFormatListCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -250,7 +248,7 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static VkImageFormatListCreateInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkImageFormatListCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -278,7 +276,7 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkImageFormatListCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -288,26 +286,26 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkImageFormatListCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkImageFormatListCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkImageFormatListCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkImageFormatListCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #viewFormatCount}. */
-    public static int nviewFormatCount(long struct) { return memGetInt(struct + VkImageFormatListCreateInfoKHR.VIEWFORMATCOUNT); }
+    public static int nviewFormatCount(long struct) { return UNSAFE.getInt(null, struct + VkImageFormatListCreateInfoKHR.VIEWFORMATCOUNT); }
     /** Unsafe version of {@link #pViewFormats() pViewFormats}. */
     @Nullable public static IntBuffer npViewFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkImageFormatListCreateInfoKHR.PVIEWFORMATS), nviewFormatCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkImageFormatListCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkImageFormatListCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkImageFormatListCreateInfoKHR.PNEXT, value); }
     /** Sets the specified value to the {@code viewFormatCount} field of the specified {@code struct}. */
-    public static void nviewFormatCount(long struct, int value) { memPutInt(struct + VkImageFormatListCreateInfoKHR.VIEWFORMATCOUNT, value); }
+    public static void nviewFormatCount(long struct, int value) { UNSAFE.putInt(null, struct + VkImageFormatListCreateInfoKHR.VIEWFORMATCOUNT, value); }
     /** Unsafe version of {@link #pViewFormats(IntBuffer) pViewFormats}. */
     public static void npViewFormats(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkImageFormatListCreateInfoKHR.PVIEWFORMATS, memAddressSafe(value)); nviewFormatCount(struct, value == null ? 0 : value.remaining()); }
 
@@ -339,6 +337,8 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
     /** An array of {@link VkImageFormatListCreateInfoKHR} structs. */
     public static class Buffer extends StructBuffer<VkImageFormatListCreateInfoKHR, Buffer> implements NativeResource {
 
+        private static final VkImageFormatListCreateInfoKHR ELEMENT_FACTORY = VkImageFormatListCreateInfoKHR.create(-1L);
+
         /**
          * Creates a new {@link VkImageFormatListCreateInfoKHR.Buffer} instance backed by the specified container.
          *
@@ -366,18 +366,8 @@ public class VkImageFormatListCreateInfoKHR extends Struct implements NativeReso
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkImageFormatListCreateInfoKHR newInstance(long address) {
-            return new VkImageFormatListCreateInfoKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkImageFormatListCreateInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

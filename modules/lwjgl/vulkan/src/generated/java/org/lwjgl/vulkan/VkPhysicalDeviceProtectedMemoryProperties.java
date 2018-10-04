@@ -74,10 +74,6 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
         PROTECTEDNOFAULT = layout.offsetof(2);
     }
 
-    VkPhysicalDeviceProtectedMemoryProperties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceProtectedMemoryProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -85,7 +81,7 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceProtectedMemoryProperties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -137,28 +133,29 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
 
     /** Returns a new {@link VkPhysicalDeviceProtectedMemoryProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceProtectedMemoryProperties malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceProtectedMemoryProperties} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceProtectedMemoryProperties calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceProtectedMemoryProperties} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceProtectedMemoryProperties create() {
-        return new VkPhysicalDeviceProtectedMemoryProperties(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceProtectedMemoryProperties} instance for the specified memory address. */
     public static VkPhysicalDeviceProtectedMemoryProperties create(long address) {
-        return new VkPhysicalDeviceProtectedMemoryProperties(address, null);
+        return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceProtectedMemoryProperties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceProtectedMemoryProperties.class, address);
     }
 
     /**
@@ -167,7 +164,7 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceProtectedMemoryProperties.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -176,7 +173,7 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceProtectedMemoryProperties.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -185,7 +182,8 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceProtectedMemoryProperties.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -195,13 +193,13 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceProtectedMemoryProperties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceProtectedMemoryProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -222,7 +220,7 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceProtectedMemoryProperties mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -231,7 +229,7 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceProtectedMemoryProperties callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -259,7 +257,7 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceProtectedMemoryProperties.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -269,29 +267,31 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceProtectedMemoryProperties.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceProtectedMemoryProperties.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProtectedMemoryProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceProtectedMemoryProperties.PNEXT); }
     /** Unsafe version of {@link #protectedNoFault}. */
-    public static int nprotectedNoFault(long struct) { return memGetInt(struct + VkPhysicalDeviceProtectedMemoryProperties.PROTECTEDNOFAULT); }
+    public static int nprotectedNoFault(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProtectedMemoryProperties.PROTECTEDNOFAULT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceProtectedMemoryProperties.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceProtectedMemoryProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceProtectedMemoryProperties.PNEXT, value); }
     /** Unsafe version of {@link #protectedNoFault(boolean) protectedNoFault}. */
-    public static void nprotectedNoFault(long struct, int value) { memPutInt(struct + VkPhysicalDeviceProtectedMemoryProperties.PROTECTEDNOFAULT, value); }
+    public static void nprotectedNoFault(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceProtectedMemoryProperties.PROTECTEDNOFAULT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceProtectedMemoryProperties} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceProtectedMemoryProperties, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceProtectedMemoryProperties ELEMENT_FACTORY = VkPhysicalDeviceProtectedMemoryProperties.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceProtectedMemoryProperties.Buffer} instance backed by the specified container.
@@ -320,18 +320,8 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceProtectedMemoryProperties newInstance(long address) {
-            return new VkPhysicalDeviceProtectedMemoryProperties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceProtectedMemoryProperties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

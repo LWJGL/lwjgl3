@@ -59,10 +59,6 @@ public class VREventKeyboard extends Struct {
         UUSERVALUE = layout.offsetof(1);
     }
 
-    VREventKeyboard(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventKeyboard} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -70,7 +66,7 @@ public class VREventKeyboard extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventKeyboard(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -90,13 +86,13 @@ public class VREventKeyboard extends Struct {
 
     /** Returns a new {@link VREventKeyboard} instance for the specified memory address. */
     public static VREventKeyboard create(long address) {
-        return new VREventKeyboard(address, null);
+        return wrap(VREventKeyboard.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventKeyboard createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventKeyboard.class, address);
     }
 
     /**
@@ -106,13 +102,13 @@ public class VREventKeyboard extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventKeyboard.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventKeyboard.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -121,15 +117,17 @@ public class VREventKeyboard extends Struct {
     public static ByteBuffer ncNewInput(long struct) { return memByteBuffer(struct + VREventKeyboard.CNEWINPUT, 8); }
     /** Unsafe version of {@link #cNewInput(int) cNewInput}. */
     public static byte ncNewInput(long struct, int index) {
-        return memGetByte(struct + VREventKeyboard.CNEWINPUT + check(index, 8) * 1);
+        return UNSAFE.getByte(null, struct + VREventKeyboard.CNEWINPUT + check(index, 8) * 1);
     }
     /** Unsafe version of {@link #uUserValue}. */
-    public static long nuUserValue(long struct) { return memGetLong(struct + VREventKeyboard.UUSERVALUE); }
+    public static long nuUserValue(long struct) { return UNSAFE.getLong(null, struct + VREventKeyboard.UUSERVALUE); }
 
     // -----------------------------------
 
     /** An array of {@link VREventKeyboard} structs. */
     public static class Buffer extends StructBuffer<VREventKeyboard, Buffer> {
+
+        private static final VREventKeyboard ELEMENT_FACTORY = VREventKeyboard.create(-1L);
 
         /**
          * Creates a new {@link VREventKeyboard.Buffer} instance backed by the specified container.
@@ -158,18 +156,8 @@ public class VREventKeyboard extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventKeyboard newInstance(long address) {
-            return new VREventKeyboard(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventKeyboard getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link ByteBuffer} view of the {@code cNewInput} field. */

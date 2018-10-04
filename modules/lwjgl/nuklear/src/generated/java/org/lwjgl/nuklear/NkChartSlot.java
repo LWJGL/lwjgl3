@@ -77,10 +77,6 @@ public class NkChartSlot extends Struct {
         INDEX = layout.offsetof(8);
     }
 
-    NkChartSlot(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkChartSlot} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -88,7 +84,7 @@ public class NkChartSlot extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkChartSlot(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -127,13 +123,13 @@ public class NkChartSlot extends Struct {
 
     /** Returns a new {@link NkChartSlot} instance for the specified memory address. */
     public static NkChartSlot create(long address) {
-        return new NkChartSlot(address, null);
+        return wrap(NkChartSlot.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkChartSlot createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkChartSlot.class, address);
     }
 
     /**
@@ -143,40 +139,42 @@ public class NkChartSlot extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkChartSlot.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkChartSlot.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return memGetInt(struct + NkChartSlot.TYPE); }
+    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + NkChartSlot.TYPE); }
     /** Unsafe version of {@link #color}. */
     public static NkColor ncolor(long struct) { return NkColor.create(struct + NkChartSlot.COLOR); }
     /** Unsafe version of {@link #highlight}. */
     public static NkColor nhighlight(long struct) { return NkColor.create(struct + NkChartSlot.HIGHLIGHT); }
     /** Unsafe version of {@link #min}. */
-    public static float nmin(long struct) { return memGetFloat(struct + NkChartSlot.MIN); }
+    public static float nmin(long struct) { return UNSAFE.getFloat(null, struct + NkChartSlot.MIN); }
     /** Unsafe version of {@link #max}. */
-    public static float nmax(long struct) { return memGetFloat(struct + NkChartSlot.MAX); }
+    public static float nmax(long struct) { return UNSAFE.getFloat(null, struct + NkChartSlot.MAX); }
     /** Unsafe version of {@link #range}. */
-    public static float nrange(long struct) { return memGetFloat(struct + NkChartSlot.RANGE); }
+    public static float nrange(long struct) { return UNSAFE.getFloat(null, struct + NkChartSlot.RANGE); }
     /** Unsafe version of {@link #count}. */
-    public static int ncount(long struct) { return memGetInt(struct + NkChartSlot.COUNT); }
+    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + NkChartSlot.COUNT); }
     /** Unsafe version of {@link #last}. */
     public static NkVec2 nlast(long struct) { return NkVec2.create(struct + NkChartSlot.LAST); }
     /** Unsafe version of {@link #index}. */
-    public static int nindex(long struct) { return memGetInt(struct + NkChartSlot.INDEX); }
+    public static int nindex(long struct) { return UNSAFE.getInt(null, struct + NkChartSlot.INDEX); }
 
     // -----------------------------------
 
     /** An array of {@link NkChartSlot} structs. */
     public static class Buffer extends StructBuffer<NkChartSlot, Buffer> {
+
+        private static final NkChartSlot ELEMENT_FACTORY = NkChartSlot.create(-1L);
 
         /**
          * Creates a new {@link NkChartSlot.Buffer} instance backed by the specified container.
@@ -205,18 +203,8 @@ public class NkChartSlot extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkChartSlot newInstance(long address) {
-            return new NkChartSlot(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkChartSlot getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code type} field. */

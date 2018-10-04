@@ -71,10 +71,6 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
         HANDLETYPES = layout.offsetof(2);
     }
 
-    VkExportMemoryAllocateInfoNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkExportMemoryAllocateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -82,7 +78,7 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkExportMemoryAllocateInfoNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -134,28 +130,29 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
 
     /** Returns a new {@link VkExportMemoryAllocateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkExportMemoryAllocateInfoNV malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkExportMemoryAllocateInfoNV.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkExportMemoryAllocateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkExportMemoryAllocateInfoNV calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkExportMemoryAllocateInfoNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkExportMemoryAllocateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkExportMemoryAllocateInfoNV create() {
-        return new VkExportMemoryAllocateInfoNV(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkExportMemoryAllocateInfoNV.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkExportMemoryAllocateInfoNV} instance for the specified memory address. */
     public static VkExportMemoryAllocateInfoNV create(long address) {
-        return new VkExportMemoryAllocateInfoNV(address, null);
+        return wrap(VkExportMemoryAllocateInfoNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExportMemoryAllocateInfoNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkExportMemoryAllocateInfoNV.class, address);
     }
 
     /**
@@ -164,7 +161,7 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkExportMemoryAllocateInfoNV.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -173,7 +170,7 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkExportMemoryAllocateInfoNV.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -182,7 +179,8 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkExportMemoryAllocateInfoNV.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -192,13 +190,13 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkExportMemoryAllocateInfoNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExportMemoryAllocateInfoNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -219,7 +217,7 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkExportMemoryAllocateInfoNV mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkExportMemoryAllocateInfoNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -228,7 +226,7 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkExportMemoryAllocateInfoNV callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkExportMemoryAllocateInfoNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -256,7 +254,7 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkExportMemoryAllocateInfoNV.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -266,29 +264,31 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkExportMemoryAllocateInfoNV.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkExportMemoryAllocateInfoNV.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkExportMemoryAllocateInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkExportMemoryAllocateInfoNV.PNEXT); }
     /** Unsafe version of {@link #handleTypes}. */
-    public static int nhandleTypes(long struct) { return memGetInt(struct + VkExportMemoryAllocateInfoNV.HANDLETYPES); }
+    public static int nhandleTypes(long struct) { return UNSAFE.getInt(null, struct + VkExportMemoryAllocateInfoNV.HANDLETYPES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkExportMemoryAllocateInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkExportMemoryAllocateInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkExportMemoryAllocateInfoNV.PNEXT, value); }
     /** Unsafe version of {@link #handleTypes(int) handleTypes}. */
-    public static void nhandleTypes(long struct, int value) { memPutInt(struct + VkExportMemoryAllocateInfoNV.HANDLETYPES, value); }
+    public static void nhandleTypes(long struct, int value) { UNSAFE.putInt(null, struct + VkExportMemoryAllocateInfoNV.HANDLETYPES, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkExportMemoryAllocateInfoNV} structs. */
     public static class Buffer extends StructBuffer<VkExportMemoryAllocateInfoNV, Buffer> implements NativeResource {
+
+        private static final VkExportMemoryAllocateInfoNV ELEMENT_FACTORY = VkExportMemoryAllocateInfoNV.create(-1L);
 
         /**
          * Creates a new {@link VkExportMemoryAllocateInfoNV.Buffer} instance backed by the specified container.
@@ -317,18 +317,8 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkExportMemoryAllocateInfoNV newInstance(long address) {
-            return new VkExportMemoryAllocateInfoNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkExportMemoryAllocateInfoNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

@@ -76,10 +76,6 @@ public class Visual extends Struct implements NativeResource {
         MAP_ENTRIES = layout.offsetof(7);
     }
 
-    Visual(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link Visual} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -87,7 +83,7 @@ public class Visual extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public Visual(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -171,28 +167,29 @@ public class Visual extends Struct implements NativeResource {
 
     /** Returns a new {@link Visual} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static Visual malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(Visual.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link Visual} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static Visual calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(Visual.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link Visual} instance allocated with {@link BufferUtils}. */
     public static Visual create() {
-        return new Visual(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(Visual.class, memAddress(container), container);
     }
 
     /** Returns a new {@link Visual} instance for the specified memory address. */
     public static Visual create(long address) {
-        return new Visual(address, null);
+        return wrap(Visual.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Visual createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(Visual.class, address);
     }
 
     /**
@@ -201,7 +198,7 @@ public class Visual extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static Visual.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -210,7 +207,7 @@ public class Visual extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static Visual.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -219,7 +216,8 @@ public class Visual extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static Visual.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -229,13 +227,13 @@ public class Visual extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static Visual.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Visual.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -256,7 +254,7 @@ public class Visual extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static Visual mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(Visual.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -265,7 +263,7 @@ public class Visual extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static Visual callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(Visual.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -293,7 +291,7 @@ public class Visual extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static Visual.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -303,7 +301,7 @@ public class Visual extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static Visual.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -313,7 +311,7 @@ public class Visual extends Struct implements NativeResource {
     /** Unsafe version of {@link #visualid}. */
     public static long nvisualid(long struct) { return memGetAddress(struct + Visual.VISUALID); }
     /** Unsafe version of {@link #class$}. */
-    public static int nclass$(long struct) { return memGetInt(struct + Visual.CLASS); }
+    public static int nclass$(long struct) { return UNSAFE.getInt(null, struct + Visual.CLASS); }
     /** Unsafe version of {@link #red_mask}. */
     public static long nred_mask(long struct) { return memGetAddress(struct + Visual.RED_MASK); }
     /** Unsafe version of {@link #green_mask}. */
@@ -321,16 +319,16 @@ public class Visual extends Struct implements NativeResource {
     /** Unsafe version of {@link #blue_mask}. */
     public static long nblue_mask(long struct) { return memGetAddress(struct + Visual.BLUE_MASK); }
     /** Unsafe version of {@link #bits_per_rgb}. */
-    public static int nbits_per_rgb(long struct) { return memGetInt(struct + Visual.BITS_PER_RGB); }
+    public static int nbits_per_rgb(long struct) { return UNSAFE.getInt(null, struct + Visual.BITS_PER_RGB); }
     /** Unsafe version of {@link #map_entries}. */
-    public static int nmap_entries(long struct) { return memGetInt(struct + Visual.MAP_ENTRIES); }
+    public static int nmap_entries(long struct) { return UNSAFE.getInt(null, struct + Visual.MAP_ENTRIES); }
 
     /** Unsafe version of {@link #ext_data(long) ext_data}. */
     public static void next_data(long struct, long value) { memPutAddress(struct + Visual.EXT_DATA, value); }
     /** Unsafe version of {@link #visualid(long) visualid}. */
     public static void nvisualid(long struct, long value) { memPutAddress(struct + Visual.VISUALID, value); }
     /** Unsafe version of {@link #class$(int) class$}. */
-    public static void nclass$(long struct, int value) { memPutInt(struct + Visual.CLASS, value); }
+    public static void nclass$(long struct, int value) { UNSAFE.putInt(null, struct + Visual.CLASS, value); }
     /** Unsafe version of {@link #red_mask(long) red_mask}. */
     public static void nred_mask(long struct, long value) { memPutAddress(struct + Visual.RED_MASK, value); }
     /** Unsafe version of {@link #green_mask(long) green_mask}. */
@@ -338,14 +336,16 @@ public class Visual extends Struct implements NativeResource {
     /** Unsafe version of {@link #blue_mask(long) blue_mask}. */
     public static void nblue_mask(long struct, long value) { memPutAddress(struct + Visual.BLUE_MASK, value); }
     /** Unsafe version of {@link #bits_per_rgb(int) bits_per_rgb}. */
-    public static void nbits_per_rgb(long struct, int value) { memPutInt(struct + Visual.BITS_PER_RGB, value); }
+    public static void nbits_per_rgb(long struct, int value) { UNSAFE.putInt(null, struct + Visual.BITS_PER_RGB, value); }
     /** Unsafe version of {@link #map_entries(int) map_entries}. */
-    public static void nmap_entries(long struct, int value) { memPutInt(struct + Visual.MAP_ENTRIES, value); }
+    public static void nmap_entries(long struct, int value) { UNSAFE.putInt(null, struct + Visual.MAP_ENTRIES, value); }
 
     // -----------------------------------
 
     /** An array of {@link Visual} structs. */
     public static class Buffer extends StructBuffer<Visual, Buffer> implements NativeResource {
+
+        private static final Visual ELEMENT_FACTORY = Visual.create(-1L);
 
         /**
          * Creates a new {@link Visual.Buffer} instance backed by the specified container.
@@ -374,18 +374,8 @@ public class Visual extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected Visual newInstance(long address) {
-            return new Visual(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected Visual getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code ext_data} field. */

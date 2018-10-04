@@ -85,10 +85,6 @@ public class NkEditState extends Struct {
         SINGLE_LINE = layout.offsetof(10);
     }
 
-    NkEditState(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkEditState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -96,7 +92,7 @@ public class NkEditState extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkEditState(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -135,13 +131,13 @@ public class NkEditState extends Struct {
 
     /** Returns a new {@link NkEditState} instance for the specified memory address. */
     public static NkEditState create(long address) {
-        return new NkEditState(address, null);
+        return wrap(NkEditState.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkEditState createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkEditState.class, address);
     }
 
     /**
@@ -151,44 +147,46 @@ public class NkEditState extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkEditState.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkEditState.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #name}. */
-    public static int nname(long struct) { return memGetInt(struct + NkEditState.NAME); }
+    public static int nname(long struct) { return UNSAFE.getInt(null, struct + NkEditState.NAME); }
     /** Unsafe version of {@link #seq}. */
-    public static int nseq(long struct) { return memGetInt(struct + NkEditState.SEQ); }
+    public static int nseq(long struct) { return UNSAFE.getInt(null, struct + NkEditState.SEQ); }
     /** Unsafe version of {@link #old}. */
-    public static int nold(long struct) { return memGetInt(struct + NkEditState.OLD); }
+    public static int nold(long struct) { return UNSAFE.getInt(null, struct + NkEditState.OLD); }
     /** Unsafe version of {@link #active}. */
-    public static int nactive(long struct) { return memGetInt(struct + NkEditState.ACTIVE); }
+    public static int nactive(long struct) { return UNSAFE.getInt(null, struct + NkEditState.ACTIVE); }
     /** Unsafe version of {@link #prev}. */
-    public static int nprev(long struct) { return memGetInt(struct + NkEditState.PREV); }
+    public static int nprev(long struct) { return UNSAFE.getInt(null, struct + NkEditState.PREV); }
     /** Unsafe version of {@link #cursor}. */
-    public static int ncursor(long struct) { return memGetInt(struct + NkEditState.CURSOR); }
+    public static int ncursor(long struct) { return UNSAFE.getInt(null, struct + NkEditState.CURSOR); }
     /** Unsafe version of {@link #sel_start}. */
-    public static int nsel_start(long struct) { return memGetInt(struct + NkEditState.SEL_START); }
+    public static int nsel_start(long struct) { return UNSAFE.getInt(null, struct + NkEditState.SEL_START); }
     /** Unsafe version of {@link #sel_end}. */
-    public static int nsel_end(long struct) { return memGetInt(struct + NkEditState.SEL_END); }
+    public static int nsel_end(long struct) { return UNSAFE.getInt(null, struct + NkEditState.SEL_END); }
     /** Unsafe version of {@link #scrollbar}. */
     public static NkScroll nscrollbar(long struct) { return NkScroll.create(struct + NkEditState.SCROLLBAR); }
     /** Unsafe version of {@link #mode}. */
-    public static byte nmode(long struct) { return memGetByte(struct + NkEditState.MODE); }
+    public static byte nmode(long struct) { return UNSAFE.getByte(null, struct + NkEditState.MODE); }
     /** Unsafe version of {@link #single_line}. */
-    public static boolean nsingle_line(long struct) { return memGetByte(struct + NkEditState.SINGLE_LINE) != 0; }
+    public static boolean nsingle_line(long struct) { return UNSAFE.getByte(null, struct + NkEditState.SINGLE_LINE) != 0; }
 
     // -----------------------------------
 
     /** An array of {@link NkEditState} structs. */
     public static class Buffer extends StructBuffer<NkEditState, Buffer> {
+
+        private static final NkEditState ELEMENT_FACTORY = NkEditState.create(-1L);
 
         /**
          * Creates a new {@link NkEditState.Buffer} instance backed by the specified container.
@@ -217,18 +215,8 @@ public class NkEditState extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkEditState newInstance(long address) {
-            return new NkEditState(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkEditState getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code name} field. */

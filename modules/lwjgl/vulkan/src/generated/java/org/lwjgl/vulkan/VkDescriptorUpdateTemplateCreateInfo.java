@@ -126,10 +126,6 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
         SET = layout.offsetof(9);
     }
 
-    VkDescriptorUpdateTemplateCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDescriptorUpdateTemplateCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -137,7 +133,7 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDescriptorUpdateTemplateCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -234,28 +230,29 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
 
     /** Returns a new {@link VkDescriptorUpdateTemplateCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDescriptorUpdateTemplateCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDescriptorUpdateTemplateCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDescriptorUpdateTemplateCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDescriptorUpdateTemplateCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDescriptorUpdateTemplateCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDescriptorUpdateTemplateCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkDescriptorUpdateTemplateCreateInfo create() {
-        return new VkDescriptorUpdateTemplateCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDescriptorUpdateTemplateCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDescriptorUpdateTemplateCreateInfo} instance for the specified memory address. */
     public static VkDescriptorUpdateTemplateCreateInfo create(long address) {
-        return new VkDescriptorUpdateTemplateCreateInfo(address, null);
+        return wrap(VkDescriptorUpdateTemplateCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorUpdateTemplateCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDescriptorUpdateTemplateCreateInfo.class, address);
     }
 
     /**
@@ -264,7 +261,7 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -273,7 +270,7 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -282,7 +279,8 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -292,13 +290,13 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorUpdateTemplateCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -319,7 +317,7 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorUpdateTemplateCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDescriptorUpdateTemplateCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -328,7 +326,7 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorUpdateTemplateCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDescriptorUpdateTemplateCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -356,7 +354,7 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -366,52 +364,52 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkDescriptorUpdateTemplateCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorUpdateTemplateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorUpdateTemplateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkDescriptorUpdateTemplateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #descriptorUpdateEntryCount}. */
-    public static int ndescriptorUpdateEntryCount(long struct) { return memGetInt(struct + VkDescriptorUpdateTemplateCreateInfo.DESCRIPTORUPDATEENTRYCOUNT); }
+    public static int ndescriptorUpdateEntryCount(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.DESCRIPTORUPDATEENTRYCOUNT); }
     /** Unsafe version of {@link #pDescriptorUpdateEntries}. */
     public static VkDescriptorUpdateTemplateEntry.Buffer npDescriptorUpdateEntries(long struct) { return VkDescriptorUpdateTemplateEntry.create(memGetAddress(struct + VkDescriptorUpdateTemplateCreateInfo.PDESCRIPTORUPDATEENTRIES), ndescriptorUpdateEntryCount(struct)); }
     /** Unsafe version of {@link #templateType}. */
-    public static int ntemplateType(long struct) { return memGetInt(struct + VkDescriptorUpdateTemplateCreateInfo.TEMPLATETYPE); }
+    public static int ntemplateType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.TEMPLATETYPE); }
     /** Unsafe version of {@link #descriptorSetLayout}. */
-    public static long ndescriptorSetLayout(long struct) { return memGetLong(struct + VkDescriptorUpdateTemplateCreateInfo.DESCRIPTORSETLAYOUT); }
+    public static long ndescriptorSetLayout(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorUpdateTemplateCreateInfo.DESCRIPTORSETLAYOUT); }
     /** Unsafe version of {@link #pipelineBindPoint}. */
-    public static int npipelineBindPoint(long struct) { return memGetInt(struct + VkDescriptorUpdateTemplateCreateInfo.PIPELINEBINDPOINT); }
+    public static int npipelineBindPoint(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.PIPELINEBINDPOINT); }
     /** Unsafe version of {@link #pipelineLayout}. */
-    public static long npipelineLayout(long struct) { return memGetLong(struct + VkDescriptorUpdateTemplateCreateInfo.PIPELINELAYOUT); }
+    public static long npipelineLayout(long struct) { return UNSAFE.getLong(null, struct + VkDescriptorUpdateTemplateCreateInfo.PIPELINELAYOUT); }
     /** Unsafe version of {@link #set}. */
-    public static int nset(long struct) { return memGetInt(struct + VkDescriptorUpdateTemplateCreateInfo.SET); }
+    public static int nset(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.SET); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorUpdateTemplateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorUpdateTemplateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkDescriptorUpdateTemplateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.FLAGS, value); }
     /** Sets the specified value to the {@code descriptorUpdateEntryCount} field of the specified {@code struct}. */
-    public static void ndescriptorUpdateEntryCount(long struct, int value) { memPutInt(struct + VkDescriptorUpdateTemplateCreateInfo.DESCRIPTORUPDATEENTRYCOUNT, value); }
+    public static void ndescriptorUpdateEntryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.DESCRIPTORUPDATEENTRYCOUNT, value); }
     /** Unsafe version of {@link #pDescriptorUpdateEntries(VkDescriptorUpdateTemplateEntry.Buffer) pDescriptorUpdateEntries}. */
     public static void npDescriptorUpdateEntries(long struct, VkDescriptorUpdateTemplateEntry.Buffer value) { memPutAddress(struct + VkDescriptorUpdateTemplateCreateInfo.PDESCRIPTORUPDATEENTRIES, value.address()); ndescriptorUpdateEntryCount(struct, value.remaining()); }
     /** Unsafe version of {@link #templateType(int) templateType}. */
-    public static void ntemplateType(long struct, int value) { memPutInt(struct + VkDescriptorUpdateTemplateCreateInfo.TEMPLATETYPE, value); }
+    public static void ntemplateType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.TEMPLATETYPE, value); }
     /** Unsafe version of {@link #descriptorSetLayout(long) descriptorSetLayout}. */
-    public static void ndescriptorSetLayout(long struct, long value) { memPutLong(struct + VkDescriptorUpdateTemplateCreateInfo.DESCRIPTORSETLAYOUT, value); }
+    public static void ndescriptorSetLayout(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorUpdateTemplateCreateInfo.DESCRIPTORSETLAYOUT, value); }
     /** Unsafe version of {@link #pipelineBindPoint(int) pipelineBindPoint}. */
-    public static void npipelineBindPoint(long struct, int value) { memPutInt(struct + VkDescriptorUpdateTemplateCreateInfo.PIPELINEBINDPOINT, value); }
+    public static void npipelineBindPoint(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.PIPELINEBINDPOINT, value); }
     /** Unsafe version of {@link #pipelineLayout(long) pipelineLayout}. */
-    public static void npipelineLayout(long struct, long value) { memPutLong(struct + VkDescriptorUpdateTemplateCreateInfo.PIPELINELAYOUT, value); }
+    public static void npipelineLayout(long struct, long value) { UNSAFE.putLong(null, struct + VkDescriptorUpdateTemplateCreateInfo.PIPELINELAYOUT, value); }
     /** Unsafe version of {@link #set(int) set}. */
-    public static void nset(long struct, int value) { memPutInt(struct + VkDescriptorUpdateTemplateCreateInfo.SET, value); }
+    public static void nset(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorUpdateTemplateCreateInfo.SET, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -438,6 +436,8 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
 
     /** An array of {@link VkDescriptorUpdateTemplateCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VkDescriptorUpdateTemplateCreateInfo, Buffer> implements NativeResource {
+
+        private static final VkDescriptorUpdateTemplateCreateInfo ELEMENT_FACTORY = VkDescriptorUpdateTemplateCreateInfo.create(-1L);
 
         /**
          * Creates a new {@link VkDescriptorUpdateTemplateCreateInfo.Buffer} instance backed by the specified container.
@@ -466,18 +466,8 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDescriptorUpdateTemplateCreateInfo newInstance(long address) {
-            return new VkDescriptorUpdateTemplateCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDescriptorUpdateTemplateCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

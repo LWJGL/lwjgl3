@@ -76,10 +76,6 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
         MODES = layout.offsetof(2);
     }
 
-    VkDeviceGroupSwapchainCreateInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDeviceGroupSwapchainCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -87,7 +83,7 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceGroupSwapchainCreateInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -139,28 +135,29 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
 
     /** Returns a new {@link VkDeviceGroupSwapchainCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDeviceGroupSwapchainCreateInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDeviceGroupSwapchainCreateInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDeviceGroupSwapchainCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDeviceGroupSwapchainCreateInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDeviceGroupSwapchainCreateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDeviceGroupSwapchainCreateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkDeviceGroupSwapchainCreateInfoKHR create() {
-        return new VkDeviceGroupSwapchainCreateInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDeviceGroupSwapchainCreateInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDeviceGroupSwapchainCreateInfoKHR} instance for the specified memory address. */
     public static VkDeviceGroupSwapchainCreateInfoKHR create(long address) {
-        return new VkDeviceGroupSwapchainCreateInfoKHR(address, null);
+        return wrap(VkDeviceGroupSwapchainCreateInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceGroupSwapchainCreateInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDeviceGroupSwapchainCreateInfoKHR.class, address);
     }
 
     /**
@@ -169,7 +166,7 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupSwapchainCreateInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +175,7 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupSwapchainCreateInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -187,7 +184,8 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupSwapchainCreateInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -197,13 +195,13 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupSwapchainCreateInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceGroupSwapchainCreateInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -224,7 +222,7 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static VkDeviceGroupSwapchainCreateInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDeviceGroupSwapchainCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -233,7 +231,7 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static VkDeviceGroupSwapchainCreateInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDeviceGroupSwapchainCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -261,7 +259,7 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupSwapchainCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -271,29 +269,31 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupSwapchainCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDeviceGroupSwapchainCreateInfoKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupSwapchainCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceGroupSwapchainCreateInfoKHR.PNEXT); }
     /** Unsafe version of {@link #modes}. */
-    public static int nmodes(long struct) { return memGetInt(struct + VkDeviceGroupSwapchainCreateInfoKHR.MODES); }
+    public static int nmodes(long struct) { return UNSAFE.getInt(null, struct + VkDeviceGroupSwapchainCreateInfoKHR.MODES); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceGroupSwapchainCreateInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupSwapchainCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceGroupSwapchainCreateInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #modes(int) modes}. */
-    public static void nmodes(long struct, int value) { memPutInt(struct + VkDeviceGroupSwapchainCreateInfoKHR.MODES, value); }
+    public static void nmodes(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceGroupSwapchainCreateInfoKHR.MODES, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkDeviceGroupSwapchainCreateInfoKHR} structs. */
     public static class Buffer extends StructBuffer<VkDeviceGroupSwapchainCreateInfoKHR, Buffer> implements NativeResource {
+
+        private static final VkDeviceGroupSwapchainCreateInfoKHR ELEMENT_FACTORY = VkDeviceGroupSwapchainCreateInfoKHR.create(-1L);
 
         /**
          * Creates a new {@link VkDeviceGroupSwapchainCreateInfoKHR.Buffer} instance backed by the specified container.
@@ -322,18 +322,8 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDeviceGroupSwapchainCreateInfoKHR newInstance(long address) {
-            return new VkDeviceGroupSwapchainCreateInfoKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDeviceGroupSwapchainCreateInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

@@ -97,10 +97,6 @@ public class VkMemoryDedicatedRequirements extends Struct {
         REQUIRESDEDICATEDALLOCATION = layout.offsetof(3);
     }
 
-    VkMemoryDedicatedRequirements(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkMemoryDedicatedRequirements} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -108,7 +104,7 @@ public class VkMemoryDedicatedRequirements extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkMemoryDedicatedRequirements(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -159,13 +155,13 @@ public class VkMemoryDedicatedRequirements extends Struct {
 
     /** Returns a new {@link VkMemoryDedicatedRequirements} instance for the specified memory address. */
     public static VkMemoryDedicatedRequirements create(long address) {
-        return new VkMemoryDedicatedRequirements(address, null);
+        return wrap(VkMemoryDedicatedRequirements.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryDedicatedRequirements createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkMemoryDedicatedRequirements.class, address);
     }
 
     /**
@@ -175,28 +171,28 @@ public class VkMemoryDedicatedRequirements extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkMemoryDedicatedRequirements.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryDedicatedRequirements.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkMemoryDedicatedRequirements.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkMemoryDedicatedRequirements.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryDedicatedRequirements.PNEXT); }
     /** Unsafe version of {@link #prefersDedicatedAllocation}. */
-    public static int nprefersDedicatedAllocation(long struct) { return memGetInt(struct + VkMemoryDedicatedRequirements.PREFERSDEDICATEDALLOCATION); }
+    public static int nprefersDedicatedAllocation(long struct) { return UNSAFE.getInt(null, struct + VkMemoryDedicatedRequirements.PREFERSDEDICATEDALLOCATION); }
     /** Unsafe version of {@link #requiresDedicatedAllocation}. */
-    public static int nrequiresDedicatedAllocation(long struct) { return memGetInt(struct + VkMemoryDedicatedRequirements.REQUIRESDEDICATEDALLOCATION); }
+    public static int nrequiresDedicatedAllocation(long struct) { return UNSAFE.getInt(null, struct + VkMemoryDedicatedRequirements.REQUIRESDEDICATEDALLOCATION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkMemoryDedicatedRequirements.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryDedicatedRequirements.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryDedicatedRequirements.PNEXT, value); }
 
@@ -204,6 +200,8 @@ public class VkMemoryDedicatedRequirements extends Struct {
 
     /** An array of {@link VkMemoryDedicatedRequirements} structs. */
     public static class Buffer extends StructBuffer<VkMemoryDedicatedRequirements, Buffer> {
+
+        private static final VkMemoryDedicatedRequirements ELEMENT_FACTORY = VkMemoryDedicatedRequirements.create(-1L);
 
         /**
          * Creates a new {@link VkMemoryDedicatedRequirements.Buffer} instance backed by the specified container.
@@ -232,18 +230,8 @@ public class VkMemoryDedicatedRequirements extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkMemoryDedicatedRequirements newInstance(long address) {
-            return new VkMemoryDedicatedRequirements(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkMemoryDedicatedRequirements getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

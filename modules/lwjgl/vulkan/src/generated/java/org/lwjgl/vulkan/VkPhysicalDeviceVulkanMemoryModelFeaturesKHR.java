@@ -73,10 +73,6 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct {
         VULKANMEMORYMODELDEVICESCOPE = layout.offsetof(3);
     }
 
-    VkPhysicalDeviceVulkanMemoryModelFeaturesKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -84,7 +80,7 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -135,13 +131,13 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct {
 
     /** Returns a new {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceVulkanMemoryModelFeaturesKHR create(long address) {
-        return new VkPhysicalDeviceVulkanMemoryModelFeaturesKHR(address, null);
+        return wrap(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceVulkanMemoryModelFeaturesKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.class, address);
     }
 
     /**
@@ -151,28 +147,28 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.PNEXT); }
     /** Unsafe version of {@link #vulkanMemoryModel}. */
-    public static int nvulkanMemoryModel(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.VULKANMEMORYMODEL); }
+    public static int nvulkanMemoryModel(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.VULKANMEMORYMODEL); }
     /** Unsafe version of {@link #vulkanMemoryModelDeviceScope}. */
-    public static int nvulkanMemoryModelDeviceScope(long struct) { return memGetInt(struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.VULKANMEMORYMODELDEVICESCOPE); }
+    public static int nvulkanMemoryModelDeviceScope(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.VULKANMEMORYMODELDEVICESCOPE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.PNEXT, value); }
 
@@ -180,6 +176,8 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct {
 
     /** An array of {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceVulkanMemoryModelFeaturesKHR, Buffer> {
+
+        private static final VkPhysicalDeviceVulkanMemoryModelFeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.Buffer} instance backed by the specified container.
@@ -208,18 +206,8 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceVulkanMemoryModelFeaturesKHR newInstance(long address) {
-            return new VkPhysicalDeviceVulkanMemoryModelFeaturesKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceVulkanMemoryModelFeaturesKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

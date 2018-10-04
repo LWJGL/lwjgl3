@@ -94,10 +94,6 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
         IMAGEINDEX = layout.offsetof(3);
     }
 
-    VkBindImageMemorySwapchainInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkBindImageMemorySwapchainInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -105,7 +101,7 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkBindImageMemorySwapchainInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -164,28 +160,29 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
 
     /** Returns a new {@link VkBindImageMemorySwapchainInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkBindImageMemorySwapchainInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkBindImageMemorySwapchainInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkBindImageMemorySwapchainInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkBindImageMemorySwapchainInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkBindImageMemorySwapchainInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkBindImageMemorySwapchainInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkBindImageMemorySwapchainInfoKHR create() {
-        return new VkBindImageMemorySwapchainInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkBindImageMemorySwapchainInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkBindImageMemorySwapchainInfoKHR} instance for the specified memory address. */
     public static VkBindImageMemorySwapchainInfoKHR create(long address) {
-        return new VkBindImageMemorySwapchainInfoKHR(address, null);
+        return wrap(VkBindImageMemorySwapchainInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBindImageMemorySwapchainInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkBindImageMemorySwapchainInfoKHR.class, address);
     }
 
     /**
@@ -194,7 +191,7 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemorySwapchainInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -203,7 +200,7 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemorySwapchainInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -212,7 +209,8 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemorySwapchainInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -222,13 +220,13 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemorySwapchainInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBindImageMemorySwapchainInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -249,7 +247,7 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkBindImageMemorySwapchainInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkBindImageMemorySwapchainInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -258,7 +256,7 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkBindImageMemorySwapchainInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkBindImageMemorySwapchainInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -286,7 +284,7 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemorySwapchainInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -296,33 +294,35 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkBindImageMemorySwapchainInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkBindImageMemorySwapchainInfoKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemorySwapchainInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkBindImageMemorySwapchainInfoKHR.PNEXT); }
     /** Unsafe version of {@link #swapchain}. */
-    public static long nswapchain(long struct) { return memGetLong(struct + VkBindImageMemorySwapchainInfoKHR.SWAPCHAIN); }
+    public static long nswapchain(long struct) { return UNSAFE.getLong(null, struct + VkBindImageMemorySwapchainInfoKHR.SWAPCHAIN); }
     /** Unsafe version of {@link #imageIndex}. */
-    public static int nimageIndex(long struct) { return memGetInt(struct + VkBindImageMemorySwapchainInfoKHR.IMAGEINDEX); }
+    public static int nimageIndex(long struct) { return UNSAFE.getInt(null, struct + VkBindImageMemorySwapchainInfoKHR.IMAGEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkBindImageMemorySwapchainInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemorySwapchainInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkBindImageMemorySwapchainInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #swapchain(long) swapchain}. */
-    public static void nswapchain(long struct, long value) { memPutLong(struct + VkBindImageMemorySwapchainInfoKHR.SWAPCHAIN, value); }
+    public static void nswapchain(long struct, long value) { UNSAFE.putLong(null, struct + VkBindImageMemorySwapchainInfoKHR.SWAPCHAIN, value); }
     /** Unsafe version of {@link #imageIndex(int) imageIndex}. */
-    public static void nimageIndex(long struct, int value) { memPutInt(struct + VkBindImageMemorySwapchainInfoKHR.IMAGEINDEX, value); }
+    public static void nimageIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkBindImageMemorySwapchainInfoKHR.IMAGEINDEX, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkBindImageMemorySwapchainInfoKHR} structs. */
     public static class Buffer extends StructBuffer<VkBindImageMemorySwapchainInfoKHR, Buffer> implements NativeResource {
+
+        private static final VkBindImageMemorySwapchainInfoKHR ELEMENT_FACTORY = VkBindImageMemorySwapchainInfoKHR.create(-1L);
 
         /**
          * Creates a new {@link VkBindImageMemorySwapchainInfoKHR.Buffer} instance backed by the specified container.
@@ -351,18 +351,8 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkBindImageMemorySwapchainInfoKHR newInstance(long address) {
-            return new VkBindImageMemorySwapchainInfoKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkBindImageMemorySwapchainInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

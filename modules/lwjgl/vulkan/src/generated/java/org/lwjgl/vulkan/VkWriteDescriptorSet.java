@@ -164,10 +164,6 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
         PTEXELBUFFERVIEW = layout.offsetof(9);
     }
 
-    VkWriteDescriptorSet(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkWriteDescriptorSet} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -175,7 +171,7 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkWriteDescriptorSet(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -275,28 +271,29 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
 
     /** Returns a new {@link VkWriteDescriptorSet} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkWriteDescriptorSet malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkWriteDescriptorSet.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkWriteDescriptorSet} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkWriteDescriptorSet calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkWriteDescriptorSet.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkWriteDescriptorSet} instance allocated with {@link BufferUtils}. */
     public static VkWriteDescriptorSet create() {
-        return new VkWriteDescriptorSet(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkWriteDescriptorSet.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkWriteDescriptorSet} instance for the specified memory address. */
     public static VkWriteDescriptorSet create(long address) {
-        return new VkWriteDescriptorSet(address, null);
+        return wrap(VkWriteDescriptorSet.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWriteDescriptorSet createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkWriteDescriptorSet.class, address);
     }
 
     /**
@@ -305,7 +302,7 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSet.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -314,7 +311,7 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSet.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -323,7 +320,8 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSet.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -333,13 +331,13 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSet.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWriteDescriptorSet.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -360,7 +358,7 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkWriteDescriptorSet mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkWriteDescriptorSet.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -369,7 +367,7 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkWriteDescriptorSet callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkWriteDescriptorSet.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -397,7 +395,7 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSet.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -407,25 +405,25 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSet.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkWriteDescriptorSet.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSet.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkWriteDescriptorSet.PNEXT); }
     /** Unsafe version of {@link #dstSet}. */
-    public static long ndstSet(long struct) { return memGetLong(struct + VkWriteDescriptorSet.DSTSET); }
+    public static long ndstSet(long struct) { return UNSAFE.getLong(null, struct + VkWriteDescriptorSet.DSTSET); }
     /** Unsafe version of {@link #dstBinding}. */
-    public static int ndstBinding(long struct) { return memGetInt(struct + VkWriteDescriptorSet.DSTBINDING); }
+    public static int ndstBinding(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSet.DSTBINDING); }
     /** Unsafe version of {@link #dstArrayElement}. */
-    public static int ndstArrayElement(long struct) { return memGetInt(struct + VkWriteDescriptorSet.DSTARRAYELEMENT); }
+    public static int ndstArrayElement(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSet.DSTARRAYELEMENT); }
     /** Unsafe version of {@link #descriptorCount}. */
-    public static int ndescriptorCount(long struct) { return memGetInt(struct + VkWriteDescriptorSet.DESCRIPTORCOUNT); }
+    public static int ndescriptorCount(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSet.DESCRIPTORCOUNT); }
     /** Unsafe version of {@link #descriptorType}. */
-    public static int ndescriptorType(long struct) { return memGetInt(struct + VkWriteDescriptorSet.DESCRIPTORTYPE); }
+    public static int ndescriptorType(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSet.DESCRIPTORTYPE); }
     /** Unsafe version of {@link #pImageInfo}. */
     @Nullable public static VkDescriptorImageInfo.Buffer npImageInfo(long struct) { return VkDescriptorImageInfo.createSafe(memGetAddress(struct + VkWriteDescriptorSet.PIMAGEINFO), ndescriptorCount(struct)); }
     /** Unsafe version of {@link #pBufferInfo}. */
@@ -434,19 +432,19 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
     @Nullable public static LongBuffer npTexelBufferView(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWriteDescriptorSet.PTEXELBUFFERVIEW), ndescriptorCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkWriteDescriptorSet.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSet.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkWriteDescriptorSet.PNEXT, value); }
     /** Unsafe version of {@link #dstSet(long) dstSet}. */
-    public static void ndstSet(long struct, long value) { memPutLong(struct + VkWriteDescriptorSet.DSTSET, value); }
+    public static void ndstSet(long struct, long value) { UNSAFE.putLong(null, struct + VkWriteDescriptorSet.DSTSET, value); }
     /** Unsafe version of {@link #dstBinding(int) dstBinding}. */
-    public static void ndstBinding(long struct, int value) { memPutInt(struct + VkWriteDescriptorSet.DSTBINDING, value); }
+    public static void ndstBinding(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSet.DSTBINDING, value); }
     /** Unsafe version of {@link #dstArrayElement(int) dstArrayElement}. */
-    public static void ndstArrayElement(long struct, int value) { memPutInt(struct + VkWriteDescriptorSet.DSTARRAYELEMENT, value); }
+    public static void ndstArrayElement(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSet.DSTARRAYELEMENT, value); }
     /** Sets the specified value to the {@code descriptorCount} field of the specified {@code struct}. */
-    public static void ndescriptorCount(long struct, int value) { memPutInt(struct + VkWriteDescriptorSet.DESCRIPTORCOUNT, value); }
+    public static void ndescriptorCount(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSet.DESCRIPTORCOUNT, value); }
     /** Unsafe version of {@link #descriptorType(int) descriptorType}. */
-    public static void ndescriptorType(long struct, int value) { memPutInt(struct + VkWriteDescriptorSet.DESCRIPTORTYPE, value); }
+    public static void ndescriptorType(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSet.DESCRIPTORTYPE, value); }
     /** Unsafe version of {@link #pImageInfo(VkDescriptorImageInfo.Buffer) pImageInfo}. */
     public static void npImageInfo(long struct, @Nullable VkDescriptorImageInfo.Buffer value) { memPutAddress(struct + VkWriteDescriptorSet.PIMAGEINFO, memAddressSafe(value)); if (value != null) { ndescriptorCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #pBufferInfo(VkDescriptorBufferInfo.Buffer) pBufferInfo}. */
@@ -488,6 +486,8 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
     /** An array of {@link VkWriteDescriptorSet} structs. */
     public static class Buffer extends StructBuffer<VkWriteDescriptorSet, Buffer> implements NativeResource {
 
+        private static final VkWriteDescriptorSet ELEMENT_FACTORY = VkWriteDescriptorSet.create(-1L);
+
         /**
          * Creates a new {@link VkWriteDescriptorSet.Buffer} instance backed by the specified container.
          *
@@ -515,18 +515,8 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkWriteDescriptorSet newInstance(long address) {
-            return new VkWriteDescriptorSet(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkWriteDescriptorSet getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

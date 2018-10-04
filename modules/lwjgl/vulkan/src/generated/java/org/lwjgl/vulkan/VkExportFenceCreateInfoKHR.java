@@ -29,10 +29,6 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
 
-    VkExportFenceCreateInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkExportFenceCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -40,7 +36,7 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkExportFenceCreateInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -83,28 +79,29 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
 
     /** Returns a new {@link VkExportFenceCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkExportFenceCreateInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkExportFenceCreateInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkExportFenceCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkExportFenceCreateInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkExportFenceCreateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkExportFenceCreateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkExportFenceCreateInfoKHR create() {
-        return new VkExportFenceCreateInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkExportFenceCreateInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkExportFenceCreateInfoKHR} instance for the specified memory address. */
     public static VkExportFenceCreateInfoKHR create(long address) {
-        return new VkExportFenceCreateInfoKHR(address, null);
+        return wrap(VkExportFenceCreateInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExportFenceCreateInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkExportFenceCreateInfoKHR.class, address);
     }
 
     /**
@@ -113,7 +110,7 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkExportFenceCreateInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -122,7 +119,7 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkExportFenceCreateInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -131,7 +128,8 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkExportFenceCreateInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -141,13 +139,13 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkExportFenceCreateInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExportFenceCreateInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -168,7 +166,7 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
      * @param stack the stack from which to allocate
      */
     public static VkExportFenceCreateInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkExportFenceCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -177,7 +175,7 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
      * @param stack the stack from which to allocate
      */
     public static VkExportFenceCreateInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkExportFenceCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -205,7 +203,7 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkExportFenceCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -215,13 +213,15 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
      * @param capacity the buffer capacity
      */
     public static VkExportFenceCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkExportFenceCreateInfoKHR} structs. */
     public static class Buffer extends VkExportFenceCreateInfo.Buffer {
+
+        private static final VkExportFenceCreateInfoKHR ELEMENT_FACTORY = VkExportFenceCreateInfoKHR.create(-1L);
 
         /**
          * Creates a new {@link VkExportFenceCreateInfoKHR.Buffer} instance backed by the specified container.
@@ -250,13 +250,8 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkExportFenceCreateInfoKHR newInstance(long address) {
-            return new VkExportFenceCreateInfoKHR(address, container);
+        protected VkExportFenceCreateInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code sType} field. */

@@ -68,10 +68,6 @@ public class AIFace extends Struct implements NativeResource {
         MINDICES = layout.offsetof(1);
     }
 
-    AIFace(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIFace} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -79,7 +75,7 @@ public class AIFace extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIFace(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -111,28 +107,29 @@ public class AIFace extends Struct implements NativeResource {
 
     /** Returns a new {@link AIFace} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIFace malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AIFace.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AIFace} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIFace calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AIFace.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AIFace} instance allocated with {@link BufferUtils}. */
     public static AIFace create() {
-        return new AIFace(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AIFace.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AIFace} instance for the specified memory address. */
     public static AIFace create(long address) {
-        return new AIFace(address, null);
+        return wrap(AIFace.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIFace createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIFace.class, address);
     }
 
     /**
@@ -141,7 +138,7 @@ public class AIFace extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFace.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -150,7 +147,7 @@ public class AIFace extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFace.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -159,7 +156,8 @@ public class AIFace extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFace.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -169,13 +167,13 @@ public class AIFace extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFace.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIFace.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -196,7 +194,7 @@ public class AIFace extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIFace mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AIFace.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -205,7 +203,7 @@ public class AIFace extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIFace callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AIFace.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -233,7 +231,7 @@ public class AIFace extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFace.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -243,18 +241,18 @@ public class AIFace extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIFace.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #mNumIndices}. */
-    public static int nmNumIndices(long struct) { return memGetInt(struct + AIFace.MNUMINDICES); }
+    public static int nmNumIndices(long struct) { return UNSAFE.getInt(null, struct + AIFace.MNUMINDICES); }
     /** Unsafe version of {@link #mIndices() mIndices}. */
     public static IntBuffer nmIndices(long struct) { return memIntBuffer(memGetAddress(struct + AIFace.MINDICES), nmNumIndices(struct)); }
 
     /** Sets the specified value to the {@code mNumIndices} field of the specified {@code struct}. */
-    public static void nmNumIndices(long struct, int value) { memPutInt(struct + AIFace.MNUMINDICES, value); }
+    public static void nmNumIndices(long struct, int value) { UNSAFE.putInt(null, struct + AIFace.MNUMINDICES, value); }
     /** Unsafe version of {@link #mIndices(IntBuffer) mIndices}. */
     public static void nmIndices(long struct, IntBuffer value) { memPutAddress(struct + AIFace.MINDICES, memAddress(value)); nmNumIndices(struct, value.remaining()); }
 
@@ -284,6 +282,8 @@ public class AIFace extends Struct implements NativeResource {
     /** An array of {@link AIFace} structs. */
     public static class Buffer extends StructBuffer<AIFace, Buffer> implements NativeResource {
 
+        private static final AIFace ELEMENT_FACTORY = AIFace.create(-1L);
+
         /**
          * Creates a new {@link AIFace.Buffer} instance backed by the specified container.
          *
@@ -311,18 +311,8 @@ public class AIFace extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIFace newInstance(long address) {
-            return new AIFace(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIFace getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code mNumIndices} field. */

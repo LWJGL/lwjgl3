@@ -75,10 +75,6 @@ public class VkPhysicalDeviceMaintenance3Properties extends Struct {
         MAXMEMORYALLOCATIONSIZE = layout.offsetof(3);
     }
 
-    VkPhysicalDeviceMaintenance3Properties(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceMaintenance3Properties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -86,7 +82,7 @@ public class VkPhysicalDeviceMaintenance3Properties extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceMaintenance3Properties(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -137,13 +133,13 @@ public class VkPhysicalDeviceMaintenance3Properties extends Struct {
 
     /** Returns a new {@link VkPhysicalDeviceMaintenance3Properties} instance for the specified memory address. */
     public static VkPhysicalDeviceMaintenance3Properties create(long address) {
-        return new VkPhysicalDeviceMaintenance3Properties(address, null);
+        return wrap(VkPhysicalDeviceMaintenance3Properties.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMaintenance3Properties createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceMaintenance3Properties.class, address);
     }
 
     /**
@@ -153,28 +149,28 @@ public class VkPhysicalDeviceMaintenance3Properties extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMaintenance3Properties.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMaintenance3Properties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance3Properties.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance3Properties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMaintenance3Properties.PNEXT); }
     /** Unsafe version of {@link #maxPerSetDescriptors}. */
-    public static int nmaxPerSetDescriptors(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance3Properties.MAXPERSETDESCRIPTORS); }
+    public static int nmaxPerSetDescriptors(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceMaintenance3Properties.MAXPERSETDESCRIPTORS); }
     /** Unsafe version of {@link #maxMemoryAllocationSize}. */
-    public static long nmaxMemoryAllocationSize(long struct) { return memGetLong(struct + VkPhysicalDeviceMaintenance3Properties.MAXMEMORYALLOCATIONSIZE); }
+    public static long nmaxMemoryAllocationSize(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceMaintenance3Properties.MAXMEMORYALLOCATIONSIZE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance3Properties.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceMaintenance3Properties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMaintenance3Properties.PNEXT, value); }
 
@@ -182,6 +178,8 @@ public class VkPhysicalDeviceMaintenance3Properties extends Struct {
 
     /** An array of {@link VkPhysicalDeviceMaintenance3Properties} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceMaintenance3Properties, Buffer> {
+
+        private static final VkPhysicalDeviceMaintenance3Properties ELEMENT_FACTORY = VkPhysicalDeviceMaintenance3Properties.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceMaintenance3Properties.Buffer} instance backed by the specified container.
@@ -210,18 +208,8 @@ public class VkPhysicalDeviceMaintenance3Properties extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceMaintenance3Properties newInstance(long address) {
-            return new VkPhysicalDeviceMaintenance3Properties(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceMaintenance3Properties getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

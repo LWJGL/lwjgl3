@@ -79,10 +79,6 @@ public class MSG extends Struct implements NativeResource {
         PT = layout.offsetof(5);
     }
 
-    MSG(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link MSG} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -90,7 +86,7 @@ public class MSG extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public MSG(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -164,28 +160,29 @@ public class MSG extends Struct implements NativeResource {
 
     /** Returns a new {@link MSG} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static MSG malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(MSG.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link MSG} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static MSG calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(MSG.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link MSG} instance allocated with {@link BufferUtils}. */
     public static MSG create() {
-        return new MSG(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(MSG.class, memAddress(container), container);
     }
 
     /** Returns a new {@link MSG} instance for the specified memory address. */
     public static MSG create(long address) {
-        return new MSG(address, null);
+        return wrap(MSG.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static MSG createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(MSG.class, address);
     }
 
     /**
@@ -194,7 +191,7 @@ public class MSG extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MSG.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -203,7 +200,7 @@ public class MSG extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MSG.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -212,7 +209,8 @@ public class MSG extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MSG.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -222,13 +220,13 @@ public class MSG extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MSG.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static MSG.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -249,7 +247,7 @@ public class MSG extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static MSG mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(MSG.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -258,7 +256,7 @@ public class MSG extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static MSG callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(MSG.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -286,7 +284,7 @@ public class MSG extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MSG.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -296,7 +294,7 @@ public class MSG extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MSG.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -304,26 +302,26 @@ public class MSG extends Struct implements NativeResource {
     /** Unsafe version of {@link #hwnd}. */
     public static long nhwnd(long struct) { return memGetAddress(struct + MSG.HWND); }
     /** Unsafe version of {@link #message}. */
-    public static int nmessage(long struct) { return memGetInt(struct + MSG.MESSAGE); }
+    public static int nmessage(long struct) { return UNSAFE.getInt(null, struct + MSG.MESSAGE); }
     /** Unsafe version of {@link #wParam}. */
     public static long nwParam(long struct) { return memGetAddress(struct + MSG.WPARAM); }
     /** Unsafe version of {@link #lParam}. */
     public static long nlParam(long struct) { return memGetAddress(struct + MSG.LPARAM); }
     /** Unsafe version of {@link #time}. */
-    public static int ntime(long struct) { return memGetInt(struct + MSG.TIME); }
+    public static int ntime(long struct) { return UNSAFE.getInt(null, struct + MSG.TIME); }
     /** Unsafe version of {@link #pt}. */
     public static POINT npt(long struct) { return POINT.create(struct + MSG.PT); }
 
     /** Unsafe version of {@link #hwnd(long) hwnd}. */
     public static void nhwnd(long struct, long value) { memPutAddress(struct + MSG.HWND, value); }
     /** Unsafe version of {@link #message(int) message}. */
-    public static void nmessage(long struct, int value) { memPutInt(struct + MSG.MESSAGE, value); }
+    public static void nmessage(long struct, int value) { UNSAFE.putInt(null, struct + MSG.MESSAGE, value); }
     /** Unsafe version of {@link #wParam(long) wParam}. */
     public static void nwParam(long struct, long value) { memPutAddress(struct + MSG.WPARAM, value); }
     /** Unsafe version of {@link #lParam(long) lParam}. */
     public static void nlParam(long struct, long value) { memPutAddress(struct + MSG.LPARAM, value); }
     /** Unsafe version of {@link #time(int) time}. */
-    public static void ntime(long struct, int value) { memPutInt(struct + MSG.TIME, value); }
+    public static void ntime(long struct, int value) { UNSAFE.putInt(null, struct + MSG.TIME, value); }
     /** Unsafe version of {@link #pt(POINT) pt}. */
     public static void npt(long struct, POINT value) { memCopy(value.address(), struct + MSG.PT, POINT.SIZEOF); }
 
@@ -331,6 +329,8 @@ public class MSG extends Struct implements NativeResource {
 
     /** An array of {@link MSG} structs. */
     public static class Buffer extends StructBuffer<MSG, Buffer> implements NativeResource {
+
+        private static final MSG ELEMENT_FACTORY = MSG.create(-1L);
 
         /**
          * Creates a new {@link MSG.Buffer} instance backed by the specified container.
@@ -359,18 +359,8 @@ public class MSG extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected MSG newInstance(long address) {
-            return new MSG(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected MSG getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code hwnd} field. */

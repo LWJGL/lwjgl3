@@ -121,10 +121,6 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
         SUPPORTEDSURFACECOUNTERS = layout.offsetof(12);
     }
 
-    VkSurfaceCapabilities2EXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkSurfaceCapabilities2EXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -132,7 +128,7 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSurfaceCapabilities2EXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -213,28 +209,29 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
 
     /** Returns a new {@link VkSurfaceCapabilities2EXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSurfaceCapabilities2EXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkSurfaceCapabilities2EXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkSurfaceCapabilities2EXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSurfaceCapabilities2EXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkSurfaceCapabilities2EXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkSurfaceCapabilities2EXT} instance allocated with {@link BufferUtils}. */
     public static VkSurfaceCapabilities2EXT create() {
-        return new VkSurfaceCapabilities2EXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSurfaceCapabilities2EXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkSurfaceCapabilities2EXT} instance for the specified memory address. */
     public static VkSurfaceCapabilities2EXT create(long address) {
-        return new VkSurfaceCapabilities2EXT(address, null);
+        return wrap(VkSurfaceCapabilities2EXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSurfaceCapabilities2EXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkSurfaceCapabilities2EXT.class, address);
     }
 
     /**
@@ -243,7 +240,7 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkSurfaceCapabilities2EXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -252,7 +249,7 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkSurfaceCapabilities2EXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -261,7 +258,8 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkSurfaceCapabilities2EXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -271,13 +269,13 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkSurfaceCapabilities2EXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSurfaceCapabilities2EXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -298,7 +296,7 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static VkSurfaceCapabilities2EXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkSurfaceCapabilities2EXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -307,7 +305,7 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static VkSurfaceCapabilities2EXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkSurfaceCapabilities2EXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -335,7 +333,7 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkSurfaceCapabilities2EXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -345,19 +343,19 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkSurfaceCapabilities2EXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkSurfaceCapabilities2EXT.PNEXT); }
     /** Unsafe version of {@link #minImageCount}. */
-    public static int nminImageCount(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.MINIMAGECOUNT); }
+    public static int nminImageCount(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.MINIMAGECOUNT); }
     /** Unsafe version of {@link #maxImageCount}. */
-    public static int nmaxImageCount(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.MAXIMAGECOUNT); }
+    public static int nmaxImageCount(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.MAXIMAGECOUNT); }
     /** Unsafe version of {@link #currentExtent}. */
     public static VkExtent2D ncurrentExtent(long struct) { return VkExtent2D.create(struct + VkSurfaceCapabilities2EXT.CURRENTEXTENT); }
     /** Unsafe version of {@link #minImageExtent}. */
@@ -365,20 +363,20 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
     /** Unsafe version of {@link #maxImageExtent}. */
     public static VkExtent2D nmaxImageExtent(long struct) { return VkExtent2D.create(struct + VkSurfaceCapabilities2EXT.MAXIMAGEEXTENT); }
     /** Unsafe version of {@link #maxImageArrayLayers}. */
-    public static int nmaxImageArrayLayers(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.MAXIMAGEARRAYLAYERS); }
+    public static int nmaxImageArrayLayers(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.MAXIMAGEARRAYLAYERS); }
     /** Unsafe version of {@link #supportedTransforms}. */
-    public static int nsupportedTransforms(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.SUPPORTEDTRANSFORMS); }
+    public static int nsupportedTransforms(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.SUPPORTEDTRANSFORMS); }
     /** Unsafe version of {@link #currentTransform}. */
-    public static int ncurrentTransform(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.CURRENTTRANSFORM); }
+    public static int ncurrentTransform(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.CURRENTTRANSFORM); }
     /** Unsafe version of {@link #supportedCompositeAlpha}. */
-    public static int nsupportedCompositeAlpha(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.SUPPORTEDCOMPOSITEALPHA); }
+    public static int nsupportedCompositeAlpha(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.SUPPORTEDCOMPOSITEALPHA); }
     /** Unsafe version of {@link #supportedUsageFlags}. */
-    public static int nsupportedUsageFlags(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.SUPPORTEDUSAGEFLAGS); }
+    public static int nsupportedUsageFlags(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.SUPPORTEDUSAGEFLAGS); }
     /** Unsafe version of {@link #supportedSurfaceCounters}. */
-    public static int nsupportedSurfaceCounters(long struct) { return memGetInt(struct + VkSurfaceCapabilities2EXT.SUPPORTEDSURFACECOUNTERS); }
+    public static int nsupportedSurfaceCounters(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilities2EXT.SUPPORTEDSURFACECOUNTERS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfaceCapabilities2EXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceCapabilities2EXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfaceCapabilities2EXT.PNEXT, value); }
 
@@ -386,6 +384,8 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
 
     /** An array of {@link VkSurfaceCapabilities2EXT} structs. */
     public static class Buffer extends StructBuffer<VkSurfaceCapabilities2EXT, Buffer> implements NativeResource {
+
+        private static final VkSurfaceCapabilities2EXT ELEMENT_FACTORY = VkSurfaceCapabilities2EXT.create(-1L);
 
         /**
          * Creates a new {@link VkSurfaceCapabilities2EXT.Buffer} instance backed by the specified container.
@@ -414,18 +414,8 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkSurfaceCapabilities2EXT newInstance(long address) {
-            return new VkSurfaceCapabilities2EXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkSurfaceCapabilities2EXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

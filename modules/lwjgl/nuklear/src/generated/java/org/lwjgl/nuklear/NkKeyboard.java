@@ -56,10 +56,6 @@ public class NkKeyboard extends Struct {
         TEXT_LEN = layout.offsetof(2);
     }
 
-    NkKeyboard(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkKeyboard} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -67,7 +63,7 @@ public class NkKeyboard extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkKeyboard(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -92,13 +88,13 @@ public class NkKeyboard extends Struct {
 
     /** Returns a new {@link NkKeyboard} instance for the specified memory address. */
     public static NkKeyboard create(long address) {
-        return new NkKeyboard(address, null);
+        return wrap(NkKeyboard.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkKeyboard createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkKeyboard.class, address);
     }
 
     /**
@@ -108,13 +104,13 @@ public class NkKeyboard extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkKeyboard.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkKeyboard.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -129,15 +125,17 @@ public class NkKeyboard extends Struct {
     public static ByteBuffer ntext(long struct) { return memByteBuffer(struct + NkKeyboard.TEXT, NK_INPUT_MAX); }
     /** Unsafe version of {@link #text(int) text}. */
     public static byte ntext(long struct, int index) {
-        return memGetByte(struct + NkKeyboard.TEXT + check(index, NK_INPUT_MAX) * 1);
+        return UNSAFE.getByte(null, struct + NkKeyboard.TEXT + check(index, NK_INPUT_MAX) * 1);
     }
     /** Unsafe version of {@link #text_len}. */
-    public static int ntext_len(long struct) { return memGetInt(struct + NkKeyboard.TEXT_LEN); }
+    public static int ntext_len(long struct) { return UNSAFE.getInt(null, struct + NkKeyboard.TEXT_LEN); }
 
     // -----------------------------------
 
     /** An array of {@link NkKeyboard} structs. */
     public static class Buffer extends StructBuffer<NkKeyboard, Buffer> {
+
+        private static final NkKeyboard ELEMENT_FACTORY = NkKeyboard.create(-1L);
 
         /**
          * Creates a new {@link NkKeyboard.Buffer} instance backed by the specified container.
@@ -166,18 +164,8 @@ public class NkKeyboard extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkKeyboard newInstance(long address) {
-            return new NkKeyboard(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkKeyboard getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkKey}.Buffer view of the {@code keys} field. */

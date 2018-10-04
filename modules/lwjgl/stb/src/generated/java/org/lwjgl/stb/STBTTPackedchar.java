@@ -81,10 +81,6 @@ public class STBTTPackedchar extends Struct implements NativeResource {
         YOFF2 = layout.offsetof(8);
     }
 
-    STBTTPackedchar(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link STBTTPackedchar} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -92,7 +88,7 @@ public class STBTTPackedchar extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public STBTTPackedchar(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -181,28 +177,29 @@ public class STBTTPackedchar extends Struct implements NativeResource {
 
     /** Returns a new {@link STBTTPackedchar} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static STBTTPackedchar malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(STBTTPackedchar.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link STBTTPackedchar} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static STBTTPackedchar calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(STBTTPackedchar.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link STBTTPackedchar} instance allocated with {@link BufferUtils}. */
     public static STBTTPackedchar create() {
-        return new STBTTPackedchar(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(STBTTPackedchar.class, memAddress(container), container);
     }
 
     /** Returns a new {@link STBTTPackedchar} instance for the specified memory address. */
     public static STBTTPackedchar create(long address) {
-        return new STBTTPackedchar(address, null);
+        return wrap(STBTTPackedchar.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBTTPackedchar createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(STBTTPackedchar.class, address);
     }
 
     /**
@@ -211,7 +208,7 @@ public class STBTTPackedchar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackedchar.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -220,7 +217,7 @@ public class STBTTPackedchar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackedchar.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -229,7 +226,8 @@ public class STBTTPackedchar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackedchar.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -239,13 +237,13 @@ public class STBTTPackedchar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackedchar.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBTTPackedchar.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -266,7 +264,7 @@ public class STBTTPackedchar extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBTTPackedchar mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(STBTTPackedchar.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -275,7 +273,7 @@ public class STBTTPackedchar extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static STBTTPackedchar callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(STBTTPackedchar.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -303,7 +301,7 @@ public class STBTTPackedchar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackedchar.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -313,53 +311,55 @@ public class STBTTPackedchar extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static STBTTPackedchar.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x0}. */
-    public static short nx0(long struct) { return memGetShort(struct + STBTTPackedchar.X0); }
+    public static short nx0(long struct) { return UNSAFE.getShort(null, struct + STBTTPackedchar.X0); }
     /** Unsafe version of {@link #y0}. */
-    public static short ny0(long struct) { return memGetShort(struct + STBTTPackedchar.Y0); }
+    public static short ny0(long struct) { return UNSAFE.getShort(null, struct + STBTTPackedchar.Y0); }
     /** Unsafe version of {@link #x1}. */
-    public static short nx1(long struct) { return memGetShort(struct + STBTTPackedchar.X1); }
+    public static short nx1(long struct) { return UNSAFE.getShort(null, struct + STBTTPackedchar.X1); }
     /** Unsafe version of {@link #y1}. */
-    public static short ny1(long struct) { return memGetShort(struct + STBTTPackedchar.Y1); }
+    public static short ny1(long struct) { return UNSAFE.getShort(null, struct + STBTTPackedchar.Y1); }
     /** Unsafe version of {@link #xoff}. */
-    public static float nxoff(long struct) { return memGetFloat(struct + STBTTPackedchar.XOFF); }
+    public static float nxoff(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackedchar.XOFF); }
     /** Unsafe version of {@link #yoff}. */
-    public static float nyoff(long struct) { return memGetFloat(struct + STBTTPackedchar.YOFF); }
+    public static float nyoff(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackedchar.YOFF); }
     /** Unsafe version of {@link #xadvance}. */
-    public static float nxadvance(long struct) { return memGetFloat(struct + STBTTPackedchar.XADVANCE); }
+    public static float nxadvance(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackedchar.XADVANCE); }
     /** Unsafe version of {@link #xoff2}. */
-    public static float nxoff2(long struct) { return memGetFloat(struct + STBTTPackedchar.XOFF2); }
+    public static float nxoff2(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackedchar.XOFF2); }
     /** Unsafe version of {@link #yoff2}. */
-    public static float nyoff2(long struct) { return memGetFloat(struct + STBTTPackedchar.YOFF2); }
+    public static float nyoff2(long struct) { return UNSAFE.getFloat(null, struct + STBTTPackedchar.YOFF2); }
 
     /** Unsafe version of {@link #x0(short) x0}. */
-    public static void nx0(long struct, short value) { memPutShort(struct + STBTTPackedchar.X0, value); }
+    public static void nx0(long struct, short value) { UNSAFE.putShort(null, struct + STBTTPackedchar.X0, value); }
     /** Unsafe version of {@link #y0(short) y0}. */
-    public static void ny0(long struct, short value) { memPutShort(struct + STBTTPackedchar.Y0, value); }
+    public static void ny0(long struct, short value) { UNSAFE.putShort(null, struct + STBTTPackedchar.Y0, value); }
     /** Unsafe version of {@link #x1(short) x1}. */
-    public static void nx1(long struct, short value) { memPutShort(struct + STBTTPackedchar.X1, value); }
+    public static void nx1(long struct, short value) { UNSAFE.putShort(null, struct + STBTTPackedchar.X1, value); }
     /** Unsafe version of {@link #y1(short) y1}. */
-    public static void ny1(long struct, short value) { memPutShort(struct + STBTTPackedchar.Y1, value); }
+    public static void ny1(long struct, short value) { UNSAFE.putShort(null, struct + STBTTPackedchar.Y1, value); }
     /** Unsafe version of {@link #xoff(float) xoff}. */
-    public static void nxoff(long struct, float value) { memPutFloat(struct + STBTTPackedchar.XOFF, value); }
+    public static void nxoff(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackedchar.XOFF, value); }
     /** Unsafe version of {@link #yoff(float) yoff}. */
-    public static void nyoff(long struct, float value) { memPutFloat(struct + STBTTPackedchar.YOFF, value); }
+    public static void nyoff(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackedchar.YOFF, value); }
     /** Unsafe version of {@link #xadvance(float) xadvance}. */
-    public static void nxadvance(long struct, float value) { memPutFloat(struct + STBTTPackedchar.XADVANCE, value); }
+    public static void nxadvance(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackedchar.XADVANCE, value); }
     /** Unsafe version of {@link #xoff2(float) xoff2}. */
-    public static void nxoff2(long struct, float value) { memPutFloat(struct + STBTTPackedchar.XOFF2, value); }
+    public static void nxoff2(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackedchar.XOFF2, value); }
     /** Unsafe version of {@link #yoff2(float) yoff2}. */
-    public static void nyoff2(long struct, float value) { memPutFloat(struct + STBTTPackedchar.YOFF2, value); }
+    public static void nyoff2(long struct, float value) { UNSAFE.putFloat(null, struct + STBTTPackedchar.YOFF2, value); }
 
     // -----------------------------------
 
     /** An array of {@link STBTTPackedchar} structs. */
     public static class Buffer extends StructBuffer<STBTTPackedchar, Buffer> implements NativeResource {
+
+        private static final STBTTPackedchar ELEMENT_FACTORY = STBTTPackedchar.create(-1L);
 
         /**
          * Creates a new {@link STBTTPackedchar.Buffer} instance backed by the specified container.
@@ -388,18 +388,8 @@ public class STBTTPackedchar extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected STBTTPackedchar newInstance(long address) {
-            return new STBTTPackedchar(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected STBTTPackedchar getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x0} field. */

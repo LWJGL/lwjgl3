@@ -94,10 +94,6 @@ public class AIMaterialProperty extends Struct {
         MDATA = layout.offsetof(5);
     }
 
-    AIMaterialProperty(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIMaterialProperty} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -105,7 +101,7 @@ public class AIMaterialProperty extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIMaterialProperty(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -136,13 +132,13 @@ public class AIMaterialProperty extends Struct {
 
     /** Returns a new {@link AIMaterialProperty} instance for the specified memory address. */
     public static AIMaterialProperty create(long address) {
-        return new AIMaterialProperty(address, null);
+        return wrap(AIMaterialProperty.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIMaterialProperty createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIMaterialProperty.class, address);
     }
 
     /**
@@ -152,13 +148,13 @@ public class AIMaterialProperty extends Struct {
      * @param capacity the buffer capacity
      */
     public static AIMaterialProperty.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIMaterialProperty.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -166,13 +162,13 @@ public class AIMaterialProperty extends Struct {
     /** Unsafe version of {@link #mKey}. */
     public static AIString nmKey(long struct) { return AIString.create(struct + AIMaterialProperty.MKEY); }
     /** Unsafe version of {@link #mSemantic}. */
-    public static int nmSemantic(long struct) { return memGetInt(struct + AIMaterialProperty.MSEMANTIC); }
+    public static int nmSemantic(long struct) { return UNSAFE.getInt(null, struct + AIMaterialProperty.MSEMANTIC); }
     /** Unsafe version of {@link #mIndex}. */
-    public static int nmIndex(long struct) { return memGetInt(struct + AIMaterialProperty.MINDEX); }
+    public static int nmIndex(long struct) { return UNSAFE.getInt(null, struct + AIMaterialProperty.MINDEX); }
     /** Unsafe version of {@link #mDataLength}. */
-    public static int nmDataLength(long struct) { return memGetInt(struct + AIMaterialProperty.MDATALENGTH); }
+    public static int nmDataLength(long struct) { return UNSAFE.getInt(null, struct + AIMaterialProperty.MDATALENGTH); }
     /** Unsafe version of {@link #mType}. */
-    public static int nmType(long struct) { return memGetInt(struct + AIMaterialProperty.MTYPE); }
+    public static int nmType(long struct) { return UNSAFE.getInt(null, struct + AIMaterialProperty.MTYPE); }
     /** Unsafe version of {@link #mData() mData}. */
     public static ByteBuffer nmData(long struct) { return memByteBuffer(memGetAddress(struct + AIMaterialProperty.MDATA), nmDataLength(struct)); }
 
@@ -180,6 +176,8 @@ public class AIMaterialProperty extends Struct {
 
     /** An array of {@link AIMaterialProperty} structs. */
     public static class Buffer extends StructBuffer<AIMaterialProperty, Buffer> {
+
+        private static final AIMaterialProperty ELEMENT_FACTORY = AIMaterialProperty.create(-1L);
 
         /**
          * Creates a new {@link AIMaterialProperty.Buffer} instance backed by the specified container.
@@ -208,18 +206,8 @@ public class AIMaterialProperty extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIMaterialProperty newInstance(long address) {
-            return new AIMaterialProperty(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIMaterialProperty getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link AIString} view of the {@code mKey} field. */

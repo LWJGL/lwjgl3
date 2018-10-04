@@ -60,10 +60,6 @@ public class NkImage extends Struct implements NativeResource {
         REGION = layout.offsetof(3);
     }
 
-    NkImage(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkImage} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -71,7 +67,7 @@ public class NkImage extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkImage(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -137,28 +133,29 @@ public class NkImage extends Struct implements NativeResource {
 
     /** Returns a new {@link NkImage} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkImage malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkImage.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkImage} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkImage calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkImage.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkImage} instance allocated with {@link BufferUtils}. */
     public static NkImage create() {
-        return new NkImage(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkImage.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkImage} instance for the specified memory address. */
     public static NkImage create(long address) {
-        return new NkImage(address, null);
+        return wrap(NkImage.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkImage createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkImage.class, address);
     }
 
     /**
@@ -167,7 +164,7 @@ public class NkImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkImage.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -176,7 +173,7 @@ public class NkImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkImage.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -185,7 +182,8 @@ public class NkImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkImage.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -195,13 +193,13 @@ public class NkImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkImage.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkImage.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -222,7 +220,7 @@ public class NkImage extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkImage mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkImage.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -231,7 +229,7 @@ public class NkImage extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkImage callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkImage.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -259,7 +257,7 @@ public class NkImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkImage.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -269,7 +267,7 @@ public class NkImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkImage.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -277,22 +275,22 @@ public class NkImage extends Struct implements NativeResource {
     /** Unsafe version of {@link #handle}. */
     public static NkHandle nhandle(long struct) { return NkHandle.create(struct + NkImage.HANDLE); }
     /** Unsafe version of {@link #w}. */
-    public static short nw(long struct) { return memGetShort(struct + NkImage.W); }
+    public static short nw(long struct) { return UNSAFE.getShort(null, struct + NkImage.W); }
     /** Unsafe version of {@link #h}. */
-    public static short nh(long struct) { return memGetShort(struct + NkImage.H); }
+    public static short nh(long struct) { return UNSAFE.getShort(null, struct + NkImage.H); }
     /** Unsafe version of {@link #region}. */
     public static ShortBuffer nregion(long struct) { return memShortBuffer(struct + NkImage.REGION, 4); }
     /** Unsafe version of {@link #region(int) region}. */
     public static short nregion(long struct, int index) {
-        return memGetShort(struct + NkImage.REGION + check(index, 4) * 2);
+        return UNSAFE.getShort(null, struct + NkImage.REGION + check(index, 4) * 2);
     }
 
     /** Unsafe version of {@link #handle(NkHandle) handle}. */
     public static void nhandle(long struct, NkHandle value) { memCopy(value.address(), struct + NkImage.HANDLE, NkHandle.SIZEOF); }
     /** Unsafe version of {@link #w(short) w}. */
-    public static void nw(long struct, short value) { memPutShort(struct + NkImage.W, value); }
+    public static void nw(long struct, short value) { UNSAFE.putShort(null, struct + NkImage.W, value); }
     /** Unsafe version of {@link #h(short) h}. */
-    public static void nh(long struct, short value) { memPutShort(struct + NkImage.H, value); }
+    public static void nh(long struct, short value) { UNSAFE.putShort(null, struct + NkImage.H, value); }
     /** Unsafe version of {@link #region(ShortBuffer) region}. */
     public static void nregion(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, 4); }
@@ -300,13 +298,15 @@ public class NkImage extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #region(int, short) region}. */
     public static void nregion(long struct, int index, short value) {
-        memPutShort(struct + NkImage.REGION + check(index, 4) * 2, value);
+        UNSAFE.putShort(null, struct + NkImage.REGION + check(index, 4) * 2, value);
     }
 
     // -----------------------------------
 
     /** An array of {@link NkImage} structs. */
     public static class Buffer extends StructBuffer<NkImage, Buffer> implements NativeResource {
+
+        private static final NkImage ELEMENT_FACTORY = NkImage.create(-1L);
 
         /**
          * Creates a new {@link NkImage.Buffer} instance backed by the specified container.
@@ -335,18 +335,8 @@ public class NkImage extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkImage newInstance(long address) {
-            return new NkImage(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkImage getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkHandle} view of the {@code handle} field. */

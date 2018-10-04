@@ -96,10 +96,6 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
         PERSISTENT = layout.offsetof(4);
     }
 
-    VkDisplayPresentInfoKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDisplayPresentInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -107,7 +103,7 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDisplayPresentInfoKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -175,28 +171,29 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
 
     /** Returns a new {@link VkDisplayPresentInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDisplayPresentInfoKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDisplayPresentInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDisplayPresentInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDisplayPresentInfoKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDisplayPresentInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDisplayPresentInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkDisplayPresentInfoKHR create() {
-        return new VkDisplayPresentInfoKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDisplayPresentInfoKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDisplayPresentInfoKHR} instance for the specified memory address. */
     public static VkDisplayPresentInfoKHR create(long address) {
-        return new VkDisplayPresentInfoKHR(address, null);
+        return wrap(VkDisplayPresentInfoKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDisplayPresentInfoKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDisplayPresentInfoKHR.class, address);
     }
 
     /**
@@ -205,7 +202,7 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPresentInfoKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -214,7 +211,7 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPresentInfoKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -223,7 +220,8 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPresentInfoKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -233,13 +231,13 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPresentInfoKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDisplayPresentInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -260,7 +258,7 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDisplayPresentInfoKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDisplayPresentInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -269,7 +267,7 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDisplayPresentInfoKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDisplayPresentInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -297,7 +295,7 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPresentInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -307,13 +305,13 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPresentInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDisplayPresentInfoKHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDisplayPresentInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDisplayPresentInfoKHR.PNEXT); }
     /** Unsafe version of {@link #srcRect}. */
@@ -321,10 +319,10 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #dstRect}. */
     public static VkRect2D ndstRect(long struct) { return VkRect2D.create(struct + VkDisplayPresentInfoKHR.DSTRECT); }
     /** Unsafe version of {@link #persistent}. */
-    public static int npersistent(long struct) { return memGetInt(struct + VkDisplayPresentInfoKHR.PERSISTENT); }
+    public static int npersistent(long struct) { return UNSAFE.getInt(null, struct + VkDisplayPresentInfoKHR.PERSISTENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDisplayPresentInfoKHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplayPresentInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDisplayPresentInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #srcRect(VkRect2D) srcRect}. */
@@ -332,12 +330,14 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #dstRect(VkRect2D) dstRect}. */
     public static void ndstRect(long struct, VkRect2D value) { memCopy(value.address(), struct + VkDisplayPresentInfoKHR.DSTRECT, VkRect2D.SIZEOF); }
     /** Unsafe version of {@link #persistent(boolean) persistent}. */
-    public static void npersistent(long struct, int value) { memPutInt(struct + VkDisplayPresentInfoKHR.PERSISTENT, value); }
+    public static void npersistent(long struct, int value) { UNSAFE.putInt(null, struct + VkDisplayPresentInfoKHR.PERSISTENT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkDisplayPresentInfoKHR} structs. */
     public static class Buffer extends StructBuffer<VkDisplayPresentInfoKHR, Buffer> implements NativeResource {
+
+        private static final VkDisplayPresentInfoKHR ELEMENT_FACTORY = VkDisplayPresentInfoKHR.create(-1L);
 
         /**
          * Creates a new {@link VkDisplayPresentInfoKHR.Buffer} instance backed by the specified container.
@@ -366,18 +366,8 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDisplayPresentInfoKHR newInstance(long address) {
-            return new VkDisplayPresentInfoKHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDisplayPresentInfoKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

@@ -66,10 +66,6 @@ public class NSVGGradient extends Struct {
         PSTOPS = layout.offsetof(5);
     }
 
-    NSVGGradient(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NSVGGradient} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -77,7 +73,7 @@ public class NSVGGradient extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NSVGGradient(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -108,13 +104,13 @@ public class NSVGGradient extends Struct {
 
     /** Returns a new {@link NSVGGradient} instance for the specified memory address. */
     public static NSVGGradient create(long address) {
-        return new NSVGGradient(address, null);
+        return wrap(NSVGGradient.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGGradient createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NSVGGradient.class, address);
     }
 
     /**
@@ -124,13 +120,13 @@ public class NSVGGradient extends Struct {
      * @param capacity the buffer capacity
      */
     public static NSVGGradient.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGGradient.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -139,16 +135,16 @@ public class NSVGGradient extends Struct {
     public static FloatBuffer nxform(long struct) { return memFloatBuffer(struct + NSVGGradient.XFORM, 6); }
     /** Unsafe version of {@link #xform(int) xform}. */
     public static float nxform(long struct, int index) {
-        return memGetFloat(struct + NSVGGradient.XFORM + check(index, 6) * 4);
+        return UNSAFE.getFloat(null, struct + NSVGGradient.XFORM + check(index, 6) * 4);
     }
     /** Unsafe version of {@link #spread}. */
-    public static byte nspread(long struct) { return memGetByte(struct + NSVGGradient.SPREAD); }
+    public static byte nspread(long struct) { return UNSAFE.getByte(null, struct + NSVGGradient.SPREAD); }
     /** Unsafe version of {@link #fx}. */
-    public static float nfx(long struct) { return memGetFloat(struct + NSVGGradient.FX); }
+    public static float nfx(long struct) { return UNSAFE.getFloat(null, struct + NSVGGradient.FX); }
     /** Unsafe version of {@link #fy}. */
-    public static float nfy(long struct) { return memGetFloat(struct + NSVGGradient.FY); }
+    public static float nfy(long struct) { return UNSAFE.getFloat(null, struct + NSVGGradient.FY); }
     /** Unsafe version of {@link #nstops}. */
-    public static int nnstops(long struct) { return memGetInt(struct + NSVGGradient.NSTOPS); }
+    public static int nnstops(long struct) { return UNSAFE.getInt(null, struct + NSVGGradient.NSTOPS); }
     /** Unsafe version of {@link #pstops}. */
     public static NSVGGradientStop.Buffer npstops(long struct) { return NSVGGradientStop.create(struct + NSVGGradient.PSTOPS, nnstops(struct)); }
     /** Unsafe version of {@link #pstops(int) pstops}. */
@@ -160,6 +156,8 @@ public class NSVGGradient extends Struct {
 
     /** An array of {@link NSVGGradient} structs. */
     public static class Buffer extends StructBuffer<NSVGGradient, Buffer> {
+
+        private static final NSVGGradient ELEMENT_FACTORY = NSVGGradient.create(-1L);
 
         /**
          * Creates a new {@link NSVGGradient.Buffer} instance backed by the specified container.
@@ -188,18 +186,8 @@ public class NSVGGradient extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NSVGGradient newInstance(long address) {
-            return new NSVGGradient(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NSVGGradient getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link FloatBuffer} view of the {@code xform} field. */

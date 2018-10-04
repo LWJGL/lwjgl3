@@ -84,10 +84,6 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
         PACCELERATIONSTRUCTURES = layout.offsetof(3);
     }
 
-    VkDescriptorAccelerationStructureInfoNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDescriptorAccelerationStructureInfoNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -95,7 +91,7 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDescriptorAccelerationStructureInfoNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -150,28 +146,29 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
 
     /** Returns a new {@link VkDescriptorAccelerationStructureInfoNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDescriptorAccelerationStructureInfoNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDescriptorAccelerationStructureInfoNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDescriptorAccelerationStructureInfoNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDescriptorAccelerationStructureInfoNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDescriptorAccelerationStructureInfoNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDescriptorAccelerationStructureInfoNVX} instance allocated with {@link BufferUtils}. */
     public static VkDescriptorAccelerationStructureInfoNVX create() {
-        return new VkDescriptorAccelerationStructureInfoNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDescriptorAccelerationStructureInfoNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDescriptorAccelerationStructureInfoNVX} instance for the specified memory address. */
     public static VkDescriptorAccelerationStructureInfoNVX create(long address) {
-        return new VkDescriptorAccelerationStructureInfoNVX(address, null);
+        return wrap(VkDescriptorAccelerationStructureInfoNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorAccelerationStructureInfoNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDescriptorAccelerationStructureInfoNVX.class, address);
     }
 
     /**
@@ -180,7 +177,7 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkDescriptorAccelerationStructureInfoNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -189,7 +186,7 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkDescriptorAccelerationStructureInfoNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -198,7 +195,8 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkDescriptorAccelerationStructureInfoNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -208,13 +206,13 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkDescriptorAccelerationStructureInfoNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorAccelerationStructureInfoNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -235,7 +233,7 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorAccelerationStructureInfoNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDescriptorAccelerationStructureInfoNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -244,7 +242,7 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorAccelerationStructureInfoNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDescriptorAccelerationStructureInfoNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -272,7 +270,7 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkDescriptorAccelerationStructureInfoNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -282,26 +280,26 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkDescriptorAccelerationStructureInfoNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDescriptorAccelerationStructureInfoNVX.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorAccelerationStructureInfoNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorAccelerationStructureInfoNVX.PNEXT); }
     /** Unsafe version of {@link #accelerationStructureCount}. */
-    public static int naccelerationStructureCount(long struct) { return memGetInt(struct + VkDescriptorAccelerationStructureInfoNVX.ACCELERATIONSTRUCTURECOUNT); }
+    public static int naccelerationStructureCount(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorAccelerationStructureInfoNVX.ACCELERATIONSTRUCTURECOUNT); }
     /** Unsafe version of {@link #pAccelerationStructures() pAccelerationStructures}. */
     public static LongBuffer npAccelerationStructures(long struct) { return memLongBuffer(memGetAddress(struct + VkDescriptorAccelerationStructureInfoNVX.PACCELERATIONSTRUCTURES), naccelerationStructureCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDescriptorAccelerationStructureInfoNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorAccelerationStructureInfoNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorAccelerationStructureInfoNVX.PNEXT, value); }
     /** Sets the specified value to the {@code accelerationStructureCount} field of the specified {@code struct}. */
-    public static void naccelerationStructureCount(long struct, int value) { memPutInt(struct + VkDescriptorAccelerationStructureInfoNVX.ACCELERATIONSTRUCTURECOUNT, value); }
+    public static void naccelerationStructureCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorAccelerationStructureInfoNVX.ACCELERATIONSTRUCTURECOUNT, value); }
     /** Unsafe version of {@link #pAccelerationStructures(LongBuffer) pAccelerationStructures}. */
     public static void npAccelerationStructures(long struct, LongBuffer value) { memPutAddress(struct + VkDescriptorAccelerationStructureInfoNVX.PACCELERATIONSTRUCTURES, memAddress(value)); naccelerationStructureCount(struct, value.remaining()); }
 
@@ -331,6 +329,8 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
     /** An array of {@link VkDescriptorAccelerationStructureInfoNVX} structs. */
     public static class Buffer extends StructBuffer<VkDescriptorAccelerationStructureInfoNVX, Buffer> implements NativeResource {
 
+        private static final VkDescriptorAccelerationStructureInfoNVX ELEMENT_FACTORY = VkDescriptorAccelerationStructureInfoNVX.create(-1L);
+
         /**
          * Creates a new {@link VkDescriptorAccelerationStructureInfoNVX.Buffer} instance backed by the specified container.
          *
@@ -358,18 +358,8 @@ public class VkDescriptorAccelerationStructureInfoNVX extends Struct implements 
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDescriptorAccelerationStructureInfoNVX newInstance(long address) {
-            return new VkDescriptorAccelerationStructureInfoNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDescriptorAccelerationStructureInfoNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

@@ -95,10 +95,6 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
         M_NSAMPLECOUNT = layout.offsetof(9);
     }
 
-    VRVulkanTextureData(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VRVulkanTextureData} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -106,7 +102,7 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VRVulkanTextureData(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -207,28 +203,29 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
 
     /** Returns a new {@link VRVulkanTextureData} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VRVulkanTextureData malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VRVulkanTextureData.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VRVulkanTextureData} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VRVulkanTextureData calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VRVulkanTextureData.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VRVulkanTextureData} instance allocated with {@link BufferUtils}. */
     public static VRVulkanTextureData create() {
-        return new VRVulkanTextureData(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VRVulkanTextureData.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VRVulkanTextureData} instance for the specified memory address. */
     public static VRVulkanTextureData create(long address) {
-        return new VRVulkanTextureData(address, null);
+        return wrap(VRVulkanTextureData.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VRVulkanTextureData createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VRVulkanTextureData.class, address);
     }
 
     /**
@@ -237,7 +234,7 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRVulkanTextureData.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -246,7 +243,7 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRVulkanTextureData.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -255,7 +252,8 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRVulkanTextureData.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -265,13 +263,13 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRVulkanTextureData.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VRVulkanTextureData.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -292,7 +290,7 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VRVulkanTextureData mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VRVulkanTextureData.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -301,7 +299,7 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VRVulkanTextureData callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VRVulkanTextureData.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -329,7 +327,7 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRVulkanTextureData.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -339,13 +337,13 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VRVulkanTextureData.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #m_nImage}. */
-    public static long nm_nImage(long struct) { return memGetLong(struct + VRVulkanTextureData.M_NIMAGE); }
+    public static long nm_nImage(long struct) { return UNSAFE.getLong(null, struct + VRVulkanTextureData.M_NIMAGE); }
     /** Unsafe version of {@link #m_pDevice}. */
     public static long nm_pDevice(long struct) { return memGetAddress(struct + VRVulkanTextureData.M_PDEVICE); }
     /** Unsafe version of {@link #m_pPhysicalDevice}. */
@@ -355,18 +353,18 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
     /** Unsafe version of {@link #m_pQueue}. */
     public static long nm_pQueue(long struct) { return memGetAddress(struct + VRVulkanTextureData.M_PQUEUE); }
     /** Unsafe version of {@link #m_nQueueFamilyIndex}. */
-    public static int nm_nQueueFamilyIndex(long struct) { return memGetInt(struct + VRVulkanTextureData.M_NQUEUEFAMILYINDEX); }
+    public static int nm_nQueueFamilyIndex(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureData.M_NQUEUEFAMILYINDEX); }
     /** Unsafe version of {@link #m_nWidth}. */
-    public static int nm_nWidth(long struct) { return memGetInt(struct + VRVulkanTextureData.M_NWIDTH); }
+    public static int nm_nWidth(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureData.M_NWIDTH); }
     /** Unsafe version of {@link #m_nHeight}. */
-    public static int nm_nHeight(long struct) { return memGetInt(struct + VRVulkanTextureData.M_NHEIGHT); }
+    public static int nm_nHeight(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureData.M_NHEIGHT); }
     /** Unsafe version of {@link #m_nFormat}. */
-    public static int nm_nFormat(long struct) { return memGetInt(struct + VRVulkanTextureData.M_NFORMAT); }
+    public static int nm_nFormat(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureData.M_NFORMAT); }
     /** Unsafe version of {@link #m_nSampleCount}. */
-    public static int nm_nSampleCount(long struct) { return memGetInt(struct + VRVulkanTextureData.M_NSAMPLECOUNT); }
+    public static int nm_nSampleCount(long struct) { return UNSAFE.getInt(null, struct + VRVulkanTextureData.M_NSAMPLECOUNT); }
 
     /** Unsafe version of {@link #m_nImage(long) m_nImage}. */
-    public static void nm_nImage(long struct, long value) { memPutLong(struct + VRVulkanTextureData.M_NIMAGE, value); }
+    public static void nm_nImage(long struct, long value) { UNSAFE.putLong(null, struct + VRVulkanTextureData.M_NIMAGE, value); }
     /** Unsafe version of {@link #m_pDevice(long) m_pDevice}. */
     public static void nm_pDevice(long struct, long value) { memPutAddress(struct + VRVulkanTextureData.M_PDEVICE, check(value)); }
     /** Unsafe version of {@link #m_pPhysicalDevice(long) m_pPhysicalDevice}. */
@@ -376,15 +374,15 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
     /** Unsafe version of {@link #m_pQueue(long) m_pQueue}. */
     public static void nm_pQueue(long struct, long value) { memPutAddress(struct + VRVulkanTextureData.M_PQUEUE, check(value)); }
     /** Unsafe version of {@link #m_nQueueFamilyIndex(int) m_nQueueFamilyIndex}. */
-    public static void nm_nQueueFamilyIndex(long struct, int value) { memPutInt(struct + VRVulkanTextureData.M_NQUEUEFAMILYINDEX, value); }
+    public static void nm_nQueueFamilyIndex(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureData.M_NQUEUEFAMILYINDEX, value); }
     /** Unsafe version of {@link #m_nWidth(int) m_nWidth}. */
-    public static void nm_nWidth(long struct, int value) { memPutInt(struct + VRVulkanTextureData.M_NWIDTH, value); }
+    public static void nm_nWidth(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureData.M_NWIDTH, value); }
     /** Unsafe version of {@link #m_nHeight(int) m_nHeight}. */
-    public static void nm_nHeight(long struct, int value) { memPutInt(struct + VRVulkanTextureData.M_NHEIGHT, value); }
+    public static void nm_nHeight(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureData.M_NHEIGHT, value); }
     /** Unsafe version of {@link #m_nFormat(int) m_nFormat}. */
-    public static void nm_nFormat(long struct, int value) { memPutInt(struct + VRVulkanTextureData.M_NFORMAT, value); }
+    public static void nm_nFormat(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureData.M_NFORMAT, value); }
     /** Unsafe version of {@link #m_nSampleCount(int) m_nSampleCount}. */
-    public static void nm_nSampleCount(long struct, int value) { memPutInt(struct + VRVulkanTextureData.M_NSAMPLECOUNT, value); }
+    public static void nm_nSampleCount(long struct, int value) { UNSAFE.putInt(null, struct + VRVulkanTextureData.M_NSAMPLECOUNT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -415,6 +413,8 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
     /** An array of {@link VRVulkanTextureData} structs. */
     public static class Buffer extends StructBuffer<VRVulkanTextureData, Buffer> implements NativeResource {
 
+        private static final VRVulkanTextureData ELEMENT_FACTORY = VRVulkanTextureData.create(-1L);
+
         /**
          * Creates a new {@link VRVulkanTextureData.Buffer} instance backed by the specified container.
          *
@@ -442,18 +442,8 @@ public class VRVulkanTextureData extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VRVulkanTextureData newInstance(long address) {
-            return new VRVulkanTextureData(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VRVulkanTextureData getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code m_nImage} field. */

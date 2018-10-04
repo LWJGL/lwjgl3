@@ -50,10 +50,6 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
         MONTH = layout.offsetof(1);
     }
 
-    SQL_YEAR_MONTH_STRUCT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link SQL_YEAR_MONTH_STRUCT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -61,7 +57,7 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public SQL_YEAR_MONTH_STRUCT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -106,28 +102,29 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
 
     /** Returns a new {@link SQL_YEAR_MONTH_STRUCT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static SQL_YEAR_MONTH_STRUCT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(SQL_YEAR_MONTH_STRUCT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link SQL_YEAR_MONTH_STRUCT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static SQL_YEAR_MONTH_STRUCT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(SQL_YEAR_MONTH_STRUCT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link SQL_YEAR_MONTH_STRUCT} instance allocated with {@link BufferUtils}. */
     public static SQL_YEAR_MONTH_STRUCT create() {
-        return new SQL_YEAR_MONTH_STRUCT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(SQL_YEAR_MONTH_STRUCT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link SQL_YEAR_MONTH_STRUCT} instance for the specified memory address. */
     public static SQL_YEAR_MONTH_STRUCT create(long address) {
-        return new SQL_YEAR_MONTH_STRUCT(address, null);
+        return wrap(SQL_YEAR_MONTH_STRUCT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static SQL_YEAR_MONTH_STRUCT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(SQL_YEAR_MONTH_STRUCT.class, address);
     }
 
     /**
@@ -136,7 +133,7 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_YEAR_MONTH_STRUCT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -145,7 +142,7 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_YEAR_MONTH_STRUCT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -154,7 +151,8 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_YEAR_MONTH_STRUCT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -164,13 +162,13 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_YEAR_MONTH_STRUCT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static SQL_YEAR_MONTH_STRUCT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -191,7 +189,7 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static SQL_YEAR_MONTH_STRUCT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(SQL_YEAR_MONTH_STRUCT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -200,7 +198,7 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static SQL_YEAR_MONTH_STRUCT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(SQL_YEAR_MONTH_STRUCT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -228,7 +226,7 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_YEAR_MONTH_STRUCT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -238,25 +236,27 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static SQL_YEAR_MONTH_STRUCT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #year}. */
-    public static int nyear(long struct) { return memGetInt(struct + SQL_YEAR_MONTH_STRUCT.YEAR); }
+    public static int nyear(long struct) { return UNSAFE.getInt(null, struct + SQL_YEAR_MONTH_STRUCT.YEAR); }
     /** Unsafe version of {@link #month}. */
-    public static int nmonth(long struct) { return memGetInt(struct + SQL_YEAR_MONTH_STRUCT.MONTH); }
+    public static int nmonth(long struct) { return UNSAFE.getInt(null, struct + SQL_YEAR_MONTH_STRUCT.MONTH); }
 
     /** Unsafe version of {@link #year(int) year}. */
-    public static void nyear(long struct, int value) { memPutInt(struct + SQL_YEAR_MONTH_STRUCT.YEAR, value); }
+    public static void nyear(long struct, int value) { UNSAFE.putInt(null, struct + SQL_YEAR_MONTH_STRUCT.YEAR, value); }
     /** Unsafe version of {@link #month(int) month}. */
-    public static void nmonth(long struct, int value) { memPutInt(struct + SQL_YEAR_MONTH_STRUCT.MONTH, value); }
+    public static void nmonth(long struct, int value) { UNSAFE.putInt(null, struct + SQL_YEAR_MONTH_STRUCT.MONTH, value); }
 
     // -----------------------------------
 
     /** An array of {@link SQL_YEAR_MONTH_STRUCT} structs. */
     public static class Buffer extends StructBuffer<SQL_YEAR_MONTH_STRUCT, Buffer> implements NativeResource {
+
+        private static final SQL_YEAR_MONTH_STRUCT ELEMENT_FACTORY = SQL_YEAR_MONTH_STRUCT.create(-1L);
 
         /**
          * Creates a new {@link SQL_YEAR_MONTH_STRUCT.Buffer} instance backed by the specified container.
@@ -285,18 +285,8 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected SQL_YEAR_MONTH_STRUCT newInstance(long address) {
-            return new SQL_YEAR_MONTH_STRUCT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected SQL_YEAR_MONTH_STRUCT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code year} field. */

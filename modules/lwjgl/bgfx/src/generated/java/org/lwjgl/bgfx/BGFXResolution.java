@@ -75,10 +75,6 @@ public class BGFXResolution extends Struct implements NativeResource {
         MAXFRAMELATENCY = layout.offsetof(4);
     }
 
-    BGFXResolution(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXResolution} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -86,7 +82,7 @@ public class BGFXResolution extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXResolution(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -152,28 +148,29 @@ public class BGFXResolution extends Struct implements NativeResource {
 
     /** Returns a new {@link BGFXResolution} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXResolution malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(BGFXResolution.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link BGFXResolution} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXResolution calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(BGFXResolution.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link BGFXResolution} instance allocated with {@link BufferUtils}. */
     public static BGFXResolution create() {
-        return new BGFXResolution(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(BGFXResolution.class, memAddress(container), container);
     }
 
     /** Returns a new {@link BGFXResolution} instance for the specified memory address. */
     public static BGFXResolution create(long address) {
-        return new BGFXResolution(address, null);
+        return wrap(BGFXResolution.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXResolution createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXResolution.class, address);
     }
 
     // -----------------------------------
@@ -194,7 +191,7 @@ public class BGFXResolution extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXResolution mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(BGFXResolution.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -203,31 +200,31 @@ public class BGFXResolution extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXResolution callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(BGFXResolution.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #format}. */
-    public static int nformat(long struct) { return memGetInt(struct + BGFXResolution.FORMAT); }
+    public static int nformat(long struct) { return UNSAFE.getInt(null, struct + BGFXResolution.FORMAT); }
     /** Unsafe version of {@link #width}. */
-    public static int nwidth(long struct) { return memGetInt(struct + BGFXResolution.WIDTH); }
+    public static int nwidth(long struct) { return UNSAFE.getInt(null, struct + BGFXResolution.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static int nheight(long struct) { return memGetInt(struct + BGFXResolution.HEIGHT); }
+    public static int nheight(long struct) { return UNSAFE.getInt(null, struct + BGFXResolution.HEIGHT); }
     /** Unsafe version of {@link #reset}. */
-    public static int nreset(long struct) { return memGetInt(struct + BGFXResolution.RESET); }
+    public static int nreset(long struct) { return UNSAFE.getInt(null, struct + BGFXResolution.RESET); }
     /** Unsafe version of {@link #maxFrameLatency}. */
-    public static byte nmaxFrameLatency(long struct) { return memGetByte(struct + BGFXResolution.MAXFRAMELATENCY); }
+    public static byte nmaxFrameLatency(long struct) { return UNSAFE.getByte(null, struct + BGFXResolution.MAXFRAMELATENCY); }
 
     /** Unsafe version of {@link #format(int) format}. */
-    public static void nformat(long struct, int value) { memPutInt(struct + BGFXResolution.FORMAT, value); }
+    public static void nformat(long struct, int value) { UNSAFE.putInt(null, struct + BGFXResolution.FORMAT, value); }
     /** Unsafe version of {@link #width(int) width}. */
-    public static void nwidth(long struct, int value) { memPutInt(struct + BGFXResolution.WIDTH, value); }
+    public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + BGFXResolution.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
-    public static void nheight(long struct, int value) { memPutInt(struct + BGFXResolution.HEIGHT, value); }
+    public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + BGFXResolution.HEIGHT, value); }
     /** Unsafe version of {@link #reset(int) reset}. */
-    public static void nreset(long struct, int value) { memPutInt(struct + BGFXResolution.RESET, value); }
+    public static void nreset(long struct, int value) { UNSAFE.putInt(null, struct + BGFXResolution.RESET, value); }
     /** Unsafe version of {@link #maxFrameLatency(byte) maxFrameLatency}. */
-    public static void nmaxFrameLatency(long struct, byte value) { memPutByte(struct + BGFXResolution.MAXFRAMELATENCY, value); }
+    public static void nmaxFrameLatency(long struct, byte value) { UNSAFE.putByte(null, struct + BGFXResolution.MAXFRAMELATENCY, value); }
 
 }

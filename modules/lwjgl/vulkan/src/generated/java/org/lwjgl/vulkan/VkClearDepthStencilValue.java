@@ -69,10 +69,6 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
         STENCIL = layout.offsetof(1);
     }
 
-    VkClearDepthStencilValue(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkClearDepthStencilValue} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -80,7 +76,7 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkClearDepthStencilValue(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -124,28 +120,29 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
 
     /** Returns a new {@link VkClearDepthStencilValue} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkClearDepthStencilValue malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkClearDepthStencilValue.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkClearDepthStencilValue} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkClearDepthStencilValue calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkClearDepthStencilValue.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkClearDepthStencilValue} instance allocated with {@link BufferUtils}. */
     public static VkClearDepthStencilValue create() {
-        return new VkClearDepthStencilValue(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkClearDepthStencilValue.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkClearDepthStencilValue} instance for the specified memory address. */
     public static VkClearDepthStencilValue create(long address) {
-        return new VkClearDepthStencilValue(address, null);
+        return wrap(VkClearDepthStencilValue.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkClearDepthStencilValue createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkClearDepthStencilValue.class, address);
     }
 
     /**
@@ -154,7 +151,7 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkClearDepthStencilValue.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -163,7 +160,7 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkClearDepthStencilValue.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -172,7 +169,8 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkClearDepthStencilValue.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -182,13 +180,13 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkClearDepthStencilValue.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkClearDepthStencilValue.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -209,7 +207,7 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkClearDepthStencilValue mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkClearDepthStencilValue.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -218,7 +216,7 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkClearDepthStencilValue callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkClearDepthStencilValue.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -246,7 +244,7 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkClearDepthStencilValue.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -256,25 +254,27 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkClearDepthStencilValue.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #depth}. */
-    public static float ndepth(long struct) { return memGetFloat(struct + VkClearDepthStencilValue.DEPTH); }
+    public static float ndepth(long struct) { return UNSAFE.getFloat(null, struct + VkClearDepthStencilValue.DEPTH); }
     /** Unsafe version of {@link #stencil}. */
-    public static int nstencil(long struct) { return memGetInt(struct + VkClearDepthStencilValue.STENCIL); }
+    public static int nstencil(long struct) { return UNSAFE.getInt(null, struct + VkClearDepthStencilValue.STENCIL); }
 
     /** Unsafe version of {@link #depth(float) depth}. */
-    public static void ndepth(long struct, float value) { memPutFloat(struct + VkClearDepthStencilValue.DEPTH, value); }
+    public static void ndepth(long struct, float value) { UNSAFE.putFloat(null, struct + VkClearDepthStencilValue.DEPTH, value); }
     /** Unsafe version of {@link #stencil(int) stencil}. */
-    public static void nstencil(long struct, int value) { memPutInt(struct + VkClearDepthStencilValue.STENCIL, value); }
+    public static void nstencil(long struct, int value) { UNSAFE.putInt(null, struct + VkClearDepthStencilValue.STENCIL, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkClearDepthStencilValue} structs. */
     public static class Buffer extends StructBuffer<VkClearDepthStencilValue, Buffer> implements NativeResource {
+
+        private static final VkClearDepthStencilValue ELEMENT_FACTORY = VkClearDepthStencilValue.create(-1L);
 
         /**
          * Creates a new {@link VkClearDepthStencilValue.Buffer} instance backed by the specified container.
@@ -303,18 +303,8 @@ public class VkClearDepthStencilValue extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkClearDepthStencilValue newInstance(long address) {
-            return new VkClearDepthStencilValue(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkClearDepthStencilValue getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code depth} field. */

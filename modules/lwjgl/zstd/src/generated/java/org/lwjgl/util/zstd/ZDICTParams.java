@@ -63,10 +63,6 @@ public class ZDICTParams extends Struct implements NativeResource {
         DICTID = layout.offsetof(2);
     }
 
-    ZDICTParams(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link ZDICTParams} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -74,7 +70,7 @@ public class ZDICTParams extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public ZDICTParams(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -125,28 +121,29 @@ public class ZDICTParams extends Struct implements NativeResource {
 
     /** Returns a new {@link ZDICTParams} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static ZDICTParams malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(ZDICTParams.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link ZDICTParams} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static ZDICTParams calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(ZDICTParams.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link ZDICTParams} instance allocated with {@link BufferUtils}. */
     public static ZDICTParams create() {
-        return new ZDICTParams(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(ZDICTParams.class, memAddress(container), container);
     }
 
     /** Returns a new {@link ZDICTParams} instance for the specified memory address. */
     public static ZDICTParams create(long address) {
-        return new ZDICTParams(address, null);
+        return wrap(ZDICTParams.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ZDICTParams createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(ZDICTParams.class, address);
     }
 
     /**
@@ -155,7 +152,7 @@ public class ZDICTParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTParams.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -164,7 +161,7 @@ public class ZDICTParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTParams.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -173,7 +170,8 @@ public class ZDICTParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTParams.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -183,13 +181,13 @@ public class ZDICTParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTParams.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ZDICTParams.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -210,7 +208,7 @@ public class ZDICTParams extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ZDICTParams mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(ZDICTParams.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -219,7 +217,7 @@ public class ZDICTParams extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ZDICTParams callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(ZDICTParams.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -247,7 +245,7 @@ public class ZDICTParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTParams.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -257,29 +255,31 @@ public class ZDICTParams extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZDICTParams.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #compressionLevel}. */
-    public static int ncompressionLevel(long struct) { return memGetInt(struct + ZDICTParams.COMPRESSIONLEVEL); }
+    public static int ncompressionLevel(long struct) { return UNSAFE.getInt(null, struct + ZDICTParams.COMPRESSIONLEVEL); }
     /** Unsafe version of {@link #notificationLevel}. */
-    public static int nnotificationLevel(long struct) { return memGetInt(struct + ZDICTParams.NOTIFICATIONLEVEL); }
+    public static int nnotificationLevel(long struct) { return UNSAFE.getInt(null, struct + ZDICTParams.NOTIFICATIONLEVEL); }
     /** Unsafe version of {@link #dictID}. */
-    public static int ndictID(long struct) { return memGetInt(struct + ZDICTParams.DICTID); }
+    public static int ndictID(long struct) { return UNSAFE.getInt(null, struct + ZDICTParams.DICTID); }
 
     /** Unsafe version of {@link #compressionLevel(int) compressionLevel}. */
-    public static void ncompressionLevel(long struct, int value) { memPutInt(struct + ZDICTParams.COMPRESSIONLEVEL, value); }
+    public static void ncompressionLevel(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTParams.COMPRESSIONLEVEL, value); }
     /** Unsafe version of {@link #notificationLevel(int) notificationLevel}. */
-    public static void nnotificationLevel(long struct, int value) { memPutInt(struct + ZDICTParams.NOTIFICATIONLEVEL, value); }
+    public static void nnotificationLevel(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTParams.NOTIFICATIONLEVEL, value); }
     /** Unsafe version of {@link #dictID(int) dictID}. */
-    public static void ndictID(long struct, int value) { memPutInt(struct + ZDICTParams.DICTID, value); }
+    public static void ndictID(long struct, int value) { UNSAFE.putInt(null, struct + ZDICTParams.DICTID, value); }
 
     // -----------------------------------
 
     /** An array of {@link ZDICTParams} structs. */
     public static class Buffer extends StructBuffer<ZDICTParams, Buffer> implements NativeResource {
+
+        private static final ZDICTParams ELEMENT_FACTORY = ZDICTParams.create(-1L);
 
         /**
          * Creates a new {@link ZDICTParams.Buffer} instance backed by the specified container.
@@ -308,18 +308,8 @@ public class ZDICTParams extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected ZDICTParams newInstance(long address) {
-            return new ZDICTParams(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected ZDICTParams getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code compressionLevel} field. */

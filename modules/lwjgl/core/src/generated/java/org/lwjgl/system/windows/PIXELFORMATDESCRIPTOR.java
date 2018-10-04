@@ -185,10 +185,6 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
         DWDAMAGEMASK = layout.offsetof(25);
     }
 
-    PIXELFORMATDESCRIPTOR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link PIXELFORMATDESCRIPTOR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -196,7 +192,7 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public PIXELFORMATDESCRIPTOR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -409,28 +405,29 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
 
     /** Returns a new {@link PIXELFORMATDESCRIPTOR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static PIXELFORMATDESCRIPTOR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(PIXELFORMATDESCRIPTOR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link PIXELFORMATDESCRIPTOR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static PIXELFORMATDESCRIPTOR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(PIXELFORMATDESCRIPTOR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link PIXELFORMATDESCRIPTOR} instance allocated with {@link BufferUtils}. */
     public static PIXELFORMATDESCRIPTOR create() {
-        return new PIXELFORMATDESCRIPTOR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(PIXELFORMATDESCRIPTOR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link PIXELFORMATDESCRIPTOR} instance for the specified memory address. */
     public static PIXELFORMATDESCRIPTOR create(long address) {
-        return new PIXELFORMATDESCRIPTOR(address, null);
+        return wrap(PIXELFORMATDESCRIPTOR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static PIXELFORMATDESCRIPTOR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(PIXELFORMATDESCRIPTOR.class, address);
     }
 
     /**
@@ -439,7 +436,7 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static PIXELFORMATDESCRIPTOR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -448,7 +445,7 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static PIXELFORMATDESCRIPTOR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -457,7 +454,8 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static PIXELFORMATDESCRIPTOR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -467,13 +465,13 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static PIXELFORMATDESCRIPTOR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static PIXELFORMATDESCRIPTOR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -494,7 +492,7 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static PIXELFORMATDESCRIPTOR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(PIXELFORMATDESCRIPTOR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -503,7 +501,7 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static PIXELFORMATDESCRIPTOR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(PIXELFORMATDESCRIPTOR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -531,7 +529,7 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static PIXELFORMATDESCRIPTOR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -541,121 +539,123 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static PIXELFORMATDESCRIPTOR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #nSize}. */
-    public static short nnSize(long struct) { return memGetShort(struct + PIXELFORMATDESCRIPTOR.NSIZE); }
+    public static short nnSize(long struct) { return UNSAFE.getShort(null, struct + PIXELFORMATDESCRIPTOR.NSIZE); }
     /** Unsafe version of {@link #nVersion}. */
-    public static short nnVersion(long struct) { return memGetShort(struct + PIXELFORMATDESCRIPTOR.NVERSION); }
+    public static short nnVersion(long struct) { return UNSAFE.getShort(null, struct + PIXELFORMATDESCRIPTOR.NVERSION); }
     /** Unsafe version of {@link #dwFlags}. */
-    public static int ndwFlags(long struct) { return memGetInt(struct + PIXELFORMATDESCRIPTOR.DWFLAGS); }
+    public static int ndwFlags(long struct) { return UNSAFE.getInt(null, struct + PIXELFORMATDESCRIPTOR.DWFLAGS); }
     /** Unsafe version of {@link #iPixelType}. */
-    public static byte niPixelType(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.IPIXELTYPE); }
+    public static byte niPixelType(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.IPIXELTYPE); }
     /** Unsafe version of {@link #cColorBits}. */
-    public static byte ncColorBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CCOLORBITS); }
+    public static byte ncColorBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CCOLORBITS); }
     /** Unsafe version of {@link #cRedBits}. */
-    public static byte ncRedBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CREDBITS); }
+    public static byte ncRedBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CREDBITS); }
     /** Unsafe version of {@link #cRedShift}. */
-    public static byte ncRedShift(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CREDSHIFT); }
+    public static byte ncRedShift(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CREDSHIFT); }
     /** Unsafe version of {@link #cGreenBits}. */
-    public static byte ncGreenBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CGREENBITS); }
+    public static byte ncGreenBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CGREENBITS); }
     /** Unsafe version of {@link #cGreenShift}. */
-    public static byte ncGreenShift(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CGREENSHIFT); }
+    public static byte ncGreenShift(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CGREENSHIFT); }
     /** Unsafe version of {@link #cBlueBits}. */
-    public static byte ncBlueBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CBLUEBITS); }
+    public static byte ncBlueBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CBLUEBITS); }
     /** Unsafe version of {@link #cBlueShift}. */
-    public static byte ncBlueShift(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CBLUESHIFT); }
+    public static byte ncBlueShift(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CBLUESHIFT); }
     /** Unsafe version of {@link #cAlphaBits}. */
-    public static byte ncAlphaBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CALPHABITS); }
+    public static byte ncAlphaBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CALPHABITS); }
     /** Unsafe version of {@link #cAlphaShift}. */
-    public static byte ncAlphaShift(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CALPHASHIFT); }
+    public static byte ncAlphaShift(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CALPHASHIFT); }
     /** Unsafe version of {@link #cAccumBits}. */
-    public static byte ncAccumBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CACCUMBITS); }
+    public static byte ncAccumBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CACCUMBITS); }
     /** Unsafe version of {@link #cAccumRedBits}. */
-    public static byte ncAccumRedBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CACCUMREDBITS); }
+    public static byte ncAccumRedBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CACCUMREDBITS); }
     /** Unsafe version of {@link #cAccumGreenBits}. */
-    public static byte ncAccumGreenBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CACCUMGREENBITS); }
+    public static byte ncAccumGreenBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CACCUMGREENBITS); }
     /** Unsafe version of {@link #cAccumBlueBits}. */
-    public static byte ncAccumBlueBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CACCUMBLUEBITS); }
+    public static byte ncAccumBlueBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CACCUMBLUEBITS); }
     /** Unsafe version of {@link #cAccumAlphaBits}. */
-    public static byte ncAccumAlphaBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CACCUMALPHABITS); }
+    public static byte ncAccumAlphaBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CACCUMALPHABITS); }
     /** Unsafe version of {@link #cDepthBits}. */
-    public static byte ncDepthBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CDEPTHBITS); }
+    public static byte ncDepthBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CDEPTHBITS); }
     /** Unsafe version of {@link #cStencilBits}. */
-    public static byte ncStencilBits(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CSTENCILBITS); }
+    public static byte ncStencilBits(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CSTENCILBITS); }
     /** Unsafe version of {@link #cAuxBuffers}. */
-    public static byte ncAuxBuffers(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.CAUXBUFFERS); }
+    public static byte ncAuxBuffers(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.CAUXBUFFERS); }
     /** Unsafe version of {@link #iLayerType}. */
-    public static byte niLayerType(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.ILAYERTYPE); }
+    public static byte niLayerType(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.ILAYERTYPE); }
     /** Unsafe version of {@link #bReserved}. */
-    public static byte nbReserved(long struct) { return memGetByte(struct + PIXELFORMATDESCRIPTOR.BRESERVED); }
+    public static byte nbReserved(long struct) { return UNSAFE.getByte(null, struct + PIXELFORMATDESCRIPTOR.BRESERVED); }
     /** Unsafe version of {@link #dwLayerMask}. */
-    public static int ndwLayerMask(long struct) { return memGetInt(struct + PIXELFORMATDESCRIPTOR.DWLAYERMASK); }
+    public static int ndwLayerMask(long struct) { return UNSAFE.getInt(null, struct + PIXELFORMATDESCRIPTOR.DWLAYERMASK); }
     /** Unsafe version of {@link #dwVisibleMask}. */
-    public static int ndwVisibleMask(long struct) { return memGetInt(struct + PIXELFORMATDESCRIPTOR.DWVISIBLEMASK); }
+    public static int ndwVisibleMask(long struct) { return UNSAFE.getInt(null, struct + PIXELFORMATDESCRIPTOR.DWVISIBLEMASK); }
     /** Unsafe version of {@link #dwDamageMask}. */
-    public static int ndwDamageMask(long struct) { return memGetInt(struct + PIXELFORMATDESCRIPTOR.DWDAMAGEMASK); }
+    public static int ndwDamageMask(long struct) { return UNSAFE.getInt(null, struct + PIXELFORMATDESCRIPTOR.DWDAMAGEMASK); }
 
     /** Unsafe version of {@link #nSize(short) nSize}. */
-    public static void nnSize(long struct, short value) { memPutShort(struct + PIXELFORMATDESCRIPTOR.NSIZE, value); }
+    public static void nnSize(long struct, short value) { UNSAFE.putShort(null, struct + PIXELFORMATDESCRIPTOR.NSIZE, value); }
     /** Unsafe version of {@link #nVersion(short) nVersion}. */
-    public static void nnVersion(long struct, short value) { memPutShort(struct + PIXELFORMATDESCRIPTOR.NVERSION, value); }
+    public static void nnVersion(long struct, short value) { UNSAFE.putShort(null, struct + PIXELFORMATDESCRIPTOR.NVERSION, value); }
     /** Unsafe version of {@link #dwFlags(int) dwFlags}. */
-    public static void ndwFlags(long struct, int value) { memPutInt(struct + PIXELFORMATDESCRIPTOR.DWFLAGS, value); }
+    public static void ndwFlags(long struct, int value) { UNSAFE.putInt(null, struct + PIXELFORMATDESCRIPTOR.DWFLAGS, value); }
     /** Unsafe version of {@link #iPixelType(byte) iPixelType}. */
-    public static void niPixelType(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.IPIXELTYPE, value); }
+    public static void niPixelType(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.IPIXELTYPE, value); }
     /** Unsafe version of {@link #cColorBits(byte) cColorBits}. */
-    public static void ncColorBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CCOLORBITS, value); }
+    public static void ncColorBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CCOLORBITS, value); }
     /** Unsafe version of {@link #cRedBits(byte) cRedBits}. */
-    public static void ncRedBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CREDBITS, value); }
+    public static void ncRedBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CREDBITS, value); }
     /** Unsafe version of {@link #cRedShift(byte) cRedShift}. */
-    public static void ncRedShift(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CREDSHIFT, value); }
+    public static void ncRedShift(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CREDSHIFT, value); }
     /** Unsafe version of {@link #cGreenBits(byte) cGreenBits}. */
-    public static void ncGreenBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CGREENBITS, value); }
+    public static void ncGreenBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CGREENBITS, value); }
     /** Unsafe version of {@link #cGreenShift(byte) cGreenShift}. */
-    public static void ncGreenShift(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CGREENSHIFT, value); }
+    public static void ncGreenShift(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CGREENSHIFT, value); }
     /** Unsafe version of {@link #cBlueBits(byte) cBlueBits}. */
-    public static void ncBlueBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CBLUEBITS, value); }
+    public static void ncBlueBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CBLUEBITS, value); }
     /** Unsafe version of {@link #cBlueShift(byte) cBlueShift}. */
-    public static void ncBlueShift(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CBLUESHIFT, value); }
+    public static void ncBlueShift(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CBLUESHIFT, value); }
     /** Unsafe version of {@link #cAlphaBits(byte) cAlphaBits}. */
-    public static void ncAlphaBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CALPHABITS, value); }
+    public static void ncAlphaBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CALPHABITS, value); }
     /** Unsafe version of {@link #cAlphaShift(byte) cAlphaShift}. */
-    public static void ncAlphaShift(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CALPHASHIFT, value); }
+    public static void ncAlphaShift(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CALPHASHIFT, value); }
     /** Unsafe version of {@link #cAccumBits(byte) cAccumBits}. */
-    public static void ncAccumBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CACCUMBITS, value); }
+    public static void ncAccumBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CACCUMBITS, value); }
     /** Unsafe version of {@link #cAccumRedBits(byte) cAccumRedBits}. */
-    public static void ncAccumRedBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CACCUMREDBITS, value); }
+    public static void ncAccumRedBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CACCUMREDBITS, value); }
     /** Unsafe version of {@link #cAccumGreenBits(byte) cAccumGreenBits}. */
-    public static void ncAccumGreenBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CACCUMGREENBITS, value); }
+    public static void ncAccumGreenBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CACCUMGREENBITS, value); }
     /** Unsafe version of {@link #cAccumBlueBits(byte) cAccumBlueBits}. */
-    public static void ncAccumBlueBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CACCUMBLUEBITS, value); }
+    public static void ncAccumBlueBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CACCUMBLUEBITS, value); }
     /** Unsafe version of {@link #cAccumAlphaBits(byte) cAccumAlphaBits}. */
-    public static void ncAccumAlphaBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CACCUMALPHABITS, value); }
+    public static void ncAccumAlphaBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CACCUMALPHABITS, value); }
     /** Unsafe version of {@link #cDepthBits(byte) cDepthBits}. */
-    public static void ncDepthBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CDEPTHBITS, value); }
+    public static void ncDepthBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CDEPTHBITS, value); }
     /** Unsafe version of {@link #cStencilBits(byte) cStencilBits}. */
-    public static void ncStencilBits(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CSTENCILBITS, value); }
+    public static void ncStencilBits(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CSTENCILBITS, value); }
     /** Unsafe version of {@link #cAuxBuffers(byte) cAuxBuffers}. */
-    public static void ncAuxBuffers(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.CAUXBUFFERS, value); }
+    public static void ncAuxBuffers(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.CAUXBUFFERS, value); }
     /** Unsafe version of {@link #iLayerType(byte) iLayerType}. */
-    public static void niLayerType(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.ILAYERTYPE, value); }
+    public static void niLayerType(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.ILAYERTYPE, value); }
     /** Unsafe version of {@link #bReserved(byte) bReserved}. */
-    public static void nbReserved(long struct, byte value) { memPutByte(struct + PIXELFORMATDESCRIPTOR.BRESERVED, value); }
+    public static void nbReserved(long struct, byte value) { UNSAFE.putByte(null, struct + PIXELFORMATDESCRIPTOR.BRESERVED, value); }
     /** Unsafe version of {@link #dwLayerMask(int) dwLayerMask}. */
-    public static void ndwLayerMask(long struct, int value) { memPutInt(struct + PIXELFORMATDESCRIPTOR.DWLAYERMASK, value); }
+    public static void ndwLayerMask(long struct, int value) { UNSAFE.putInt(null, struct + PIXELFORMATDESCRIPTOR.DWLAYERMASK, value); }
     /** Unsafe version of {@link #dwVisibleMask(int) dwVisibleMask}. */
-    public static void ndwVisibleMask(long struct, int value) { memPutInt(struct + PIXELFORMATDESCRIPTOR.DWVISIBLEMASK, value); }
+    public static void ndwVisibleMask(long struct, int value) { UNSAFE.putInt(null, struct + PIXELFORMATDESCRIPTOR.DWVISIBLEMASK, value); }
     /** Unsafe version of {@link #dwDamageMask(int) dwDamageMask}. */
-    public static void ndwDamageMask(long struct, int value) { memPutInt(struct + PIXELFORMATDESCRIPTOR.DWDAMAGEMASK, value); }
+    public static void ndwDamageMask(long struct, int value) { UNSAFE.putInt(null, struct + PIXELFORMATDESCRIPTOR.DWDAMAGEMASK, value); }
 
     // -----------------------------------
 
     /** An array of {@link PIXELFORMATDESCRIPTOR} structs. */
     public static class Buffer extends StructBuffer<PIXELFORMATDESCRIPTOR, Buffer> implements NativeResource {
+
+        private static final PIXELFORMATDESCRIPTOR ELEMENT_FACTORY = PIXELFORMATDESCRIPTOR.create(-1L);
 
         /**
          * Creates a new {@link PIXELFORMATDESCRIPTOR.Buffer} instance backed by the specified container.
@@ -684,18 +684,8 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected PIXELFORMATDESCRIPTOR newInstance(long address) {
-            return new PIXELFORMATDESCRIPTOR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected PIXELFORMATDESCRIPTOR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code nSize} field. */

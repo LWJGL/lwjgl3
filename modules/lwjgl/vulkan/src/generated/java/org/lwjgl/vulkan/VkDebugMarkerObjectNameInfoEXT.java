@@ -100,10 +100,6 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
         POBJECTNAME = layout.offsetof(4);
     }
 
-    VkDebugMarkerObjectNameInfoEXT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkDebugMarkerObjectNameInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -111,7 +107,7 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDebugMarkerObjectNameInfoEXT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -180,28 +176,29 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
 
     /** Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDebugMarkerObjectNameInfoEXT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkDebugMarkerObjectNameInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDebugMarkerObjectNameInfoEXT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkDebugMarkerObjectNameInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkDebugMarkerObjectNameInfoEXT create() {
-        return new VkDebugMarkerObjectNameInfoEXT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkDebugMarkerObjectNameInfoEXT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance for the specified memory address. */
     public static VkDebugMarkerObjectNameInfoEXT create(long address) {
-        return new VkDebugMarkerObjectNameInfoEXT(address, null);
+        return wrap(VkDebugMarkerObjectNameInfoEXT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDebugMarkerObjectNameInfoEXT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkDebugMarkerObjectNameInfoEXT.class, address);
     }
 
     /**
@@ -210,7 +207,7 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkDebugMarkerObjectNameInfoEXT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -219,7 +216,7 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkDebugMarkerObjectNameInfoEXT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -228,7 +225,8 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkDebugMarkerObjectNameInfoEXT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -238,13 +236,13 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkDebugMarkerObjectNameInfoEXT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDebugMarkerObjectNameInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -265,7 +263,7 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static VkDebugMarkerObjectNameInfoEXT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkDebugMarkerObjectNameInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -274,7 +272,7 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static VkDebugMarkerObjectNameInfoEXT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkDebugMarkerObjectNameInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -302,7 +300,7 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkDebugMarkerObjectNameInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -312,32 +310,32 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static VkDebugMarkerObjectNameInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkDebugMarkerObjectNameInfoEXT.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDebugMarkerObjectNameInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkDebugMarkerObjectNameInfoEXT.PNEXT); }
     /** Unsafe version of {@link #objectType}. */
-    public static int nobjectType(long struct) { return memGetInt(struct + VkDebugMarkerObjectNameInfoEXT.OBJECTTYPE); }
+    public static int nobjectType(long struct) { return UNSAFE.getInt(null, struct + VkDebugMarkerObjectNameInfoEXT.OBJECTTYPE); }
     /** Unsafe version of {@link #object}. */
-    public static long nobject(long struct) { return memGetLong(struct + VkDebugMarkerObjectNameInfoEXT.OBJECT); }
+    public static long nobject(long struct) { return UNSAFE.getLong(null, struct + VkDebugMarkerObjectNameInfoEXT.OBJECT); }
     /** Unsafe version of {@link #pObjectName}. */
     public static ByteBuffer npObjectName(long struct) { return memByteBufferNT1(memGetAddress(struct + VkDebugMarkerObjectNameInfoEXT.POBJECTNAME)); }
     /** Unsafe version of {@link #pObjectNameString}. */
     public static String npObjectNameString(long struct) { return memUTF8(memGetAddress(struct + VkDebugMarkerObjectNameInfoEXT.POBJECTNAME)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkDebugMarkerObjectNameInfoEXT.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugMarkerObjectNameInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDebugMarkerObjectNameInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #objectType(int) objectType}. */
-    public static void nobjectType(long struct, int value) { memPutInt(struct + VkDebugMarkerObjectNameInfoEXT.OBJECTTYPE, value); }
+    public static void nobjectType(long struct, int value) { UNSAFE.putInt(null, struct + VkDebugMarkerObjectNameInfoEXT.OBJECTTYPE, value); }
     /** Unsafe version of {@link #object(long) object}. */
-    public static void nobject(long struct, long value) { memPutLong(struct + VkDebugMarkerObjectNameInfoEXT.OBJECT, value); }
+    public static void nobject(long struct, long value) { UNSAFE.putLong(null, struct + VkDebugMarkerObjectNameInfoEXT.OBJECT, value); }
     /** Unsafe version of {@link #pObjectName(ByteBuffer) pObjectName}. */
     public static void npObjectName(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }
@@ -370,6 +368,8 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
     /** An array of {@link VkDebugMarkerObjectNameInfoEXT} structs. */
     public static class Buffer extends StructBuffer<VkDebugMarkerObjectNameInfoEXT, Buffer> implements NativeResource {
 
+        private static final VkDebugMarkerObjectNameInfoEXT ELEMENT_FACTORY = VkDebugMarkerObjectNameInfoEXT.create(-1L);
+
         /**
          * Creates a new {@link VkDebugMarkerObjectNameInfoEXT.Buffer} instance backed by the specified container.
          *
@@ -397,18 +397,8 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkDebugMarkerObjectNameInfoEXT newInstance(long address) {
-            return new VkDebugMarkerObjectNameInfoEXT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkDebugMarkerObjectNameInfoEXT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

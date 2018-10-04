@@ -70,10 +70,6 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
         MAXX = layout.offsetof(3);
     }
 
-    NVGGlyphPosition(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NVGGlyphPosition} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -81,7 +77,7 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NVGGlyphPosition(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -101,28 +97,29 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
 
     /** Returns a new {@link NVGGlyphPosition} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NVGGlyphPosition malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NVGGlyphPosition.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NVGGlyphPosition} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NVGGlyphPosition calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NVGGlyphPosition.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NVGGlyphPosition} instance allocated with {@link BufferUtils}. */
     public static NVGGlyphPosition create() {
-        return new NVGGlyphPosition(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NVGGlyphPosition.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NVGGlyphPosition} instance for the specified memory address. */
     public static NVGGlyphPosition create(long address) {
-        return new NVGGlyphPosition(address, null);
+        return wrap(NVGGlyphPosition.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NVGGlyphPosition createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NVGGlyphPosition.class, address);
     }
 
     /**
@@ -131,7 +128,7 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGGlyphPosition.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -140,7 +137,7 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGGlyphPosition.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -149,7 +146,8 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGGlyphPosition.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -159,13 +157,13 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGGlyphPosition.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NVGGlyphPosition.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -186,7 +184,7 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NVGGlyphPosition mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NVGGlyphPosition.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -195,7 +193,7 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NVGGlyphPosition callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NVGGlyphPosition.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -223,7 +221,7 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGGlyphPosition.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -233,7 +231,7 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NVGGlyphPosition.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -241,16 +239,18 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
     /** Unsafe version of {@link #str}. */
     public static long nstr(long struct) { return memGetAddress(struct + NVGGlyphPosition.STR); }
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return memGetFloat(struct + NVGGlyphPosition.X); }
+    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + NVGGlyphPosition.X); }
     /** Unsafe version of {@link #minx}. */
-    public static float nminx(long struct) { return memGetFloat(struct + NVGGlyphPosition.MINX); }
+    public static float nminx(long struct) { return UNSAFE.getFloat(null, struct + NVGGlyphPosition.MINX); }
     /** Unsafe version of {@link #maxx}. */
-    public static float nmaxx(long struct) { return memGetFloat(struct + NVGGlyphPosition.MAXX); }
+    public static float nmaxx(long struct) { return UNSAFE.getFloat(null, struct + NVGGlyphPosition.MAXX); }
 
     // -----------------------------------
 
     /** An array of {@link NVGGlyphPosition} structs. */
     public static class Buffer extends StructBuffer<NVGGlyphPosition, Buffer> implements NativeResource {
+
+        private static final NVGGlyphPosition ELEMENT_FACTORY = NVGGlyphPosition.create(-1L);
 
         /**
          * Creates a new {@link NVGGlyphPosition.Buffer} instance backed by the specified container.
@@ -279,18 +279,8 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NVGGlyphPosition newInstance(long address) {
-            return new NVGGlyphPosition(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NVGGlyphPosition getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code str} field. */

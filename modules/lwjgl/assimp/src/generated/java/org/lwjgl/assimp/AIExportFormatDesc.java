@@ -69,10 +69,6 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
         FILEEXTENSION = layout.offsetof(2);
     }
 
-    AIExportFormatDesc(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link AIExportFormatDesc} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -80,7 +76,7 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public AIExportFormatDesc(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -141,28 +137,29 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
 
     /** Returns a new {@link AIExportFormatDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIExportFormatDesc malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(AIExportFormatDesc.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link AIExportFormatDesc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIExportFormatDesc calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(AIExportFormatDesc.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link AIExportFormatDesc} instance allocated with {@link BufferUtils}. */
     public static AIExportFormatDesc create() {
-        return new AIExportFormatDesc(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(AIExportFormatDesc.class, memAddress(container), container);
     }
 
     /** Returns a new {@link AIExportFormatDesc} instance for the specified memory address. */
     public static AIExportFormatDesc create(long address) {
-        return new AIExportFormatDesc(address, null);
+        return wrap(AIExportFormatDesc.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIExportFormatDesc createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(AIExportFormatDesc.class, address);
     }
 
     /**
@@ -171,7 +168,7 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIExportFormatDesc.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -180,7 +177,7 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIExportFormatDesc.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -189,7 +186,8 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIExportFormatDesc.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -199,13 +197,13 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIExportFormatDesc.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIExportFormatDesc.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -226,7 +224,7 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIExportFormatDesc mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(AIExportFormatDesc.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -235,7 +233,7 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIExportFormatDesc callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(AIExportFormatDesc.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -263,7 +261,7 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIExportFormatDesc.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -273,7 +271,7 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIExportFormatDesc.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -335,6 +333,8 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
     /** An array of {@link AIExportFormatDesc} structs. */
     public static class Buffer extends StructBuffer<AIExportFormatDesc, Buffer> implements NativeResource {
 
+        private static final AIExportFormatDesc ELEMENT_FACTORY = AIExportFormatDesc.create(-1L);
+
         /**
          * Creates a new {@link AIExportFormatDesc.Buffer} instance backed by the specified container.
          *
@@ -362,18 +362,8 @@ public class AIExportFormatDesc extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected AIExportFormatDesc newInstance(long address) {
-            return new AIExportFormatDesc(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected AIExportFormatDesc getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code id} field. */

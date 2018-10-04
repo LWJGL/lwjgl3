@@ -131,10 +131,6 @@ public class NkContext extends Struct implements NativeResource {
         SEQ = layout.offsetof(21);
     }
 
-    NkContext(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkContext} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -142,7 +138,7 @@ public class NkContext extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkContext(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -180,28 +176,29 @@ public class NkContext extends Struct implements NativeResource {
 
     /** Returns a new {@link NkContext} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkContext malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkContext.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkContext} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkContext calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkContext.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkContext} instance allocated with {@link BufferUtils}. */
     public static NkContext create() {
-        return new NkContext(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkContext.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkContext} instance for the specified memory address. */
     public static NkContext create(long address) {
-        return new NkContext(address, null);
+        return wrap(NkContext.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkContext createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkContext.class, address);
     }
 
     // -----------------------------------
@@ -222,7 +219,7 @@ public class NkContext extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkContext mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkContext.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -231,7 +228,7 @@ public class NkContext extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkContext callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkContext.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     // -----------------------------------
@@ -245,26 +242,26 @@ public class NkContext extends Struct implements NativeResource {
     /** Unsafe version of {@link #clip}. */
     public static NkClipboard nclip(long struct) { return NkClipboard.create(struct + NkContext.CLIP); }
     /** Unsafe version of {@link #last_widget_state}. */
-    public static int nlast_widget_state(long struct) { return memGetInt(struct + NkContext.LAST_WIDGET_STATE); }
+    public static int nlast_widget_state(long struct) { return UNSAFE.getInt(null, struct + NkContext.LAST_WIDGET_STATE); }
     /** Unsafe version of {@link #button_behavior}. */
-    public static int nbutton_behavior(long struct) { return memGetInt(struct + NkContext.BUTTON_BEHAVIOR); }
+    public static int nbutton_behavior(long struct) { return UNSAFE.getInt(null, struct + NkContext.BUTTON_BEHAVIOR); }
     /** Unsafe version of {@link #stacks}. */
     public static NkConfigurationStacks nstacks(long struct) { return NkConfigurationStacks.create(struct + NkContext.STACKS); }
     /** Unsafe version of {@link #delta_time_seconds}. */
-    public static float ndelta_time_seconds(long struct) { return memGetFloat(struct + NkContext.DELTA_TIME_SECONDS); }
+    public static float ndelta_time_seconds(long struct) { return UNSAFE.getFloat(null, struct + NkContext.DELTA_TIME_SECONDS); }
     public static NkDrawList ndraw_list(long struct) { return NkDrawList.create(struct + NkContext.DRAW_LIST); }
     public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkContext.USERDATA); }
     public static NkTextEdit ntext_edit(long struct) { return NkTextEdit.create(struct + NkContext.TEXT_EDIT); }
     public static NkCommandBuffer noverlay(long struct) { return NkCommandBuffer.create(struct + NkContext.OVERLAY); }
-    public static int nbuild(long struct) { return memGetInt(struct + NkContext.BUILD); }
-    public static int nuse_pool(long struct) { return memGetInt(struct + NkContext.USE_POOL); }
+    public static int nbuild(long struct) { return UNSAFE.getInt(null, struct + NkContext.BUILD); }
+    public static int nuse_pool(long struct) { return UNSAFE.getInt(null, struct + NkContext.USE_POOL); }
     public static NkPool npool(long struct) { return NkPool.create(struct + NkContext.POOL); }
     @Nullable public static NkWindow nbegin(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.BEGIN)); }
     @Nullable public static NkWindow nend(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.END)); }
     @Nullable public static NkWindow nactive(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.ACTIVE)); }
     @Nullable public static NkWindow ncurrent(long struct) { return NkWindow.createSafe(memGetAddress(struct + NkContext.CURRENT)); }
     public static long nfreelist(long struct) { return memGetAddress(struct + NkContext.FREELIST); }
-    public static int ncount(long struct) { return memGetInt(struct + NkContext.COUNT); }
-    public static int nseq(long struct) { return memGetInt(struct + NkContext.SEQ); }
+    public static int ncount(long struct) { return UNSAFE.getInt(null, struct + NkContext.COUNT); }
+    public static int nseq(long struct) { return UNSAFE.getInt(null, struct + NkContext.SEQ); }
 
 }

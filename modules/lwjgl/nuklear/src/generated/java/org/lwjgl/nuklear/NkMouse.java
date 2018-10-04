@@ -76,10 +76,6 @@ public class NkMouse extends Struct {
         UNGRAB = layout.offsetof(7);
     }
 
-    NkMouse(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkMouse} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -87,7 +83,7 @@ public class NkMouse extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkMouse(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -133,13 +129,13 @@ public class NkMouse extends Struct {
 
     /** Returns a new {@link NkMouse} instance for the specified memory address. */
     public static NkMouse create(long address) {
-        return new NkMouse(address, null);
+        return wrap(NkMouse.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkMouse createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkMouse.class, address);
     }
 
     /**
@@ -149,13 +145,13 @@ public class NkMouse extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkMouse.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkMouse.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -175,16 +171,18 @@ public class NkMouse extends Struct {
     /** Unsafe version of {@link #scroll_delta}. */
     public static NkVec2 nscroll_delta(long struct) { return NkVec2.create(struct + NkMouse.SCROLL_DELTA); }
     /** Unsafe version of {@link #grab}. */
-    public static boolean ngrab(long struct) { return memGetByte(struct + NkMouse.GRAB) != 0; }
+    public static boolean ngrab(long struct) { return UNSAFE.getByte(null, struct + NkMouse.GRAB) != 0; }
     /** Unsafe version of {@link #grabbed}. */
-    public static boolean ngrabbed(long struct) { return memGetByte(struct + NkMouse.GRABBED) != 0; }
+    public static boolean ngrabbed(long struct) { return UNSAFE.getByte(null, struct + NkMouse.GRABBED) != 0; }
     /** Unsafe version of {@link #ungrab}. */
-    public static boolean nungrab(long struct) { return memGetByte(struct + NkMouse.UNGRAB) != 0; }
+    public static boolean nungrab(long struct) { return UNSAFE.getByte(null, struct + NkMouse.UNGRAB) != 0; }
 
     // -----------------------------------
 
     /** An array of {@link NkMouse} structs. */
     public static class Buffer extends StructBuffer<NkMouse, Buffer> {
+
+        private static final NkMouse ELEMENT_FACTORY = NkMouse.create(-1L);
 
         /**
          * Creates a new {@link NkMouse.Buffer} instance backed by the specified container.
@@ -213,18 +211,8 @@ public class NkMouse extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkMouse newInstance(long address) {
-            return new NkMouse(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkMouse getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkMouseButton}.Buffer view of the {@code buttons} field. */

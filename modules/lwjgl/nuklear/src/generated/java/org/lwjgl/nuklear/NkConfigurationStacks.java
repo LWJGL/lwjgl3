@@ -69,10 +69,6 @@ class NkConfigurationStacks extends Struct {
         BUTTON_BEHAVIORS = layout.offsetof(6);
     }
 
-    NkConfigurationStacks(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkConfigurationStacks} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -80,7 +76,7 @@ class NkConfigurationStacks extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     NkConfigurationStacks(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -112,13 +108,13 @@ class NkConfigurationStacks extends Struct {
 
     /** Returns a new {@link NkConfigurationStacks} instance for the specified memory address. */
     public static NkConfigurationStacks create(long address) {
-        return new NkConfigurationStacks(address, null);
+        return wrap(NkConfigurationStacks.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigurationStacks createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkConfigurationStacks.class, address);
     }
 
     // -----------------------------------

@@ -111,10 +111,6 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
         CAPTURE_FRAME = layout.offsetof(11);
     }
 
-    BGFXCallbackVtbl(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link BGFXCallbackVtbl} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -122,7 +118,7 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public BGFXCallbackVtbl(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -237,28 +233,29 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
 
     /** Returns a new {@link BGFXCallbackVtbl} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXCallbackVtbl malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(BGFXCallbackVtbl.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link BGFXCallbackVtbl} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXCallbackVtbl calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(BGFXCallbackVtbl.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link BGFXCallbackVtbl} instance allocated with {@link BufferUtils}. */
     public static BGFXCallbackVtbl create() {
-        return new BGFXCallbackVtbl(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(BGFXCallbackVtbl.class, memAddress(container), container);
     }
 
     /** Returns a new {@link BGFXCallbackVtbl} instance for the specified memory address. */
     public static BGFXCallbackVtbl create(long address) {
-        return new BGFXCallbackVtbl(address, null);
+        return wrap(BGFXCallbackVtbl.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXCallbackVtbl createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(BGFXCallbackVtbl.class, address);
     }
 
     // -----------------------------------
@@ -279,7 +276,7 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXCallbackVtbl mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(BGFXCallbackVtbl.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -288,7 +285,7 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXCallbackVtbl callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(BGFXCallbackVtbl.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     // -----------------------------------

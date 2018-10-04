@@ -81,10 +81,6 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
         INPUTRATE = layout.offsetof(2);
     }
 
-    VkVertexInputBindingDescription(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkVertexInputBindingDescription} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -92,7 +88,7 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkVertexInputBindingDescription(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -144,28 +140,29 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
 
     /** Returns a new {@link VkVertexInputBindingDescription} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkVertexInputBindingDescription malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkVertexInputBindingDescription.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkVertexInputBindingDescription} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkVertexInputBindingDescription calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkVertexInputBindingDescription.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkVertexInputBindingDescription} instance allocated with {@link BufferUtils}. */
     public static VkVertexInputBindingDescription create() {
-        return new VkVertexInputBindingDescription(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkVertexInputBindingDescription.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkVertexInputBindingDescription} instance for the specified memory address. */
     public static VkVertexInputBindingDescription create(long address) {
-        return new VkVertexInputBindingDescription(address, null);
+        return wrap(VkVertexInputBindingDescription.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVertexInputBindingDescription createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkVertexInputBindingDescription.class, address);
     }
 
     /**
@@ -174,7 +171,7 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVertexInputBindingDescription.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -183,7 +180,7 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVertexInputBindingDescription.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -192,7 +189,8 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVertexInputBindingDescription.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -202,13 +200,13 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVertexInputBindingDescription.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVertexInputBindingDescription.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -229,7 +227,7 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkVertexInputBindingDescription mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkVertexInputBindingDescription.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -238,7 +236,7 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkVertexInputBindingDescription callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkVertexInputBindingDescription.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -266,7 +264,7 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVertexInputBindingDescription.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -276,29 +274,31 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVertexInputBindingDescription.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #binding}. */
-    public static int nbinding(long struct) { return memGetInt(struct + VkVertexInputBindingDescription.BINDING); }
+    public static int nbinding(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputBindingDescription.BINDING); }
     /** Unsafe version of {@link #stride}. */
-    public static int nstride(long struct) { return memGetInt(struct + VkVertexInputBindingDescription.STRIDE); }
+    public static int nstride(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputBindingDescription.STRIDE); }
     /** Unsafe version of {@link #inputRate}. */
-    public static int ninputRate(long struct) { return memGetInt(struct + VkVertexInputBindingDescription.INPUTRATE); }
+    public static int ninputRate(long struct) { return UNSAFE.getInt(null, struct + VkVertexInputBindingDescription.INPUTRATE); }
 
     /** Unsafe version of {@link #binding(int) binding}. */
-    public static void nbinding(long struct, int value) { memPutInt(struct + VkVertexInputBindingDescription.BINDING, value); }
+    public static void nbinding(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputBindingDescription.BINDING, value); }
     /** Unsafe version of {@link #stride(int) stride}. */
-    public static void nstride(long struct, int value) { memPutInt(struct + VkVertexInputBindingDescription.STRIDE, value); }
+    public static void nstride(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputBindingDescription.STRIDE, value); }
     /** Unsafe version of {@link #inputRate(int) inputRate}. */
-    public static void ninputRate(long struct, int value) { memPutInt(struct + VkVertexInputBindingDescription.INPUTRATE, value); }
+    public static void ninputRate(long struct, int value) { UNSAFE.putInt(null, struct + VkVertexInputBindingDescription.INPUTRATE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkVertexInputBindingDescription} structs. */
     public static class Buffer extends StructBuffer<VkVertexInputBindingDescription, Buffer> implements NativeResource {
+
+        private static final VkVertexInputBindingDescription ELEMENT_FACTORY = VkVertexInputBindingDescription.create(-1L);
 
         /**
          * Creates a new {@link VkVertexInputBindingDescription.Buffer} instance backed by the specified container.
@@ -327,18 +327,8 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkVertexInputBindingDescription newInstance(long address) {
-            return new VkVertexInputBindingDescription(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkVertexInputBindingDescription getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code binding} field. */

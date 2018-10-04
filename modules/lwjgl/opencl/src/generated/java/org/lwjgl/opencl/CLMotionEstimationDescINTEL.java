@@ -73,10 +73,6 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
         SEARCH_PATH_TYPE = layout.offsetof(3);
     }
 
-    CLMotionEstimationDescINTEL(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link CLMotionEstimationDescINTEL} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -84,7 +80,7 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public CLMotionEstimationDescINTEL(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -143,28 +139,29 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
 
     /** Returns a new {@link CLMotionEstimationDescINTEL} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CLMotionEstimationDescINTEL malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(CLMotionEstimationDescINTEL.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link CLMotionEstimationDescINTEL} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CLMotionEstimationDescINTEL calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(CLMotionEstimationDescINTEL.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link CLMotionEstimationDescINTEL} instance allocated with {@link BufferUtils}. */
     public static CLMotionEstimationDescINTEL create() {
-        return new CLMotionEstimationDescINTEL(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(CLMotionEstimationDescINTEL.class, memAddress(container), container);
     }
 
     /** Returns a new {@link CLMotionEstimationDescINTEL} instance for the specified memory address. */
     public static CLMotionEstimationDescINTEL create(long address) {
-        return new CLMotionEstimationDescINTEL(address, null);
+        return wrap(CLMotionEstimationDescINTEL.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CLMotionEstimationDescINTEL createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(CLMotionEstimationDescINTEL.class, address);
     }
 
     /**
@@ -173,7 +170,7 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static CLMotionEstimationDescINTEL.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -182,7 +179,7 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static CLMotionEstimationDescINTEL.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -191,7 +188,8 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static CLMotionEstimationDescINTEL.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -201,13 +199,13 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static CLMotionEstimationDescINTEL.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CLMotionEstimationDescINTEL.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -228,7 +226,7 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static CLMotionEstimationDescINTEL mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(CLMotionEstimationDescINTEL.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -237,7 +235,7 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static CLMotionEstimationDescINTEL callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(CLMotionEstimationDescINTEL.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -265,7 +263,7 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static CLMotionEstimationDescINTEL.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -275,33 +273,35 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static CLMotionEstimationDescINTEL.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #mb_block_type}. */
-    public static int nmb_block_type(long struct) { return memGetInt(struct + CLMotionEstimationDescINTEL.MB_BLOCK_TYPE); }
+    public static int nmb_block_type(long struct) { return UNSAFE.getInt(null, struct + CLMotionEstimationDescINTEL.MB_BLOCK_TYPE); }
     /** Unsafe version of {@link #subpixel_mode}. */
-    public static int nsubpixel_mode(long struct) { return memGetInt(struct + CLMotionEstimationDescINTEL.SUBPIXEL_MODE); }
+    public static int nsubpixel_mode(long struct) { return UNSAFE.getInt(null, struct + CLMotionEstimationDescINTEL.SUBPIXEL_MODE); }
     /** Unsafe version of {@link #sad_adjust_mode}. */
-    public static int nsad_adjust_mode(long struct) { return memGetInt(struct + CLMotionEstimationDescINTEL.SAD_ADJUST_MODE); }
+    public static int nsad_adjust_mode(long struct) { return UNSAFE.getInt(null, struct + CLMotionEstimationDescINTEL.SAD_ADJUST_MODE); }
     /** Unsafe version of {@link #search_path_type}. */
-    public static int nsearch_path_type(long struct) { return memGetInt(struct + CLMotionEstimationDescINTEL.SEARCH_PATH_TYPE); }
+    public static int nsearch_path_type(long struct) { return UNSAFE.getInt(null, struct + CLMotionEstimationDescINTEL.SEARCH_PATH_TYPE); }
 
     /** Unsafe version of {@link #mb_block_type(int) mb_block_type}. */
-    public static void nmb_block_type(long struct, int value) { memPutInt(struct + CLMotionEstimationDescINTEL.MB_BLOCK_TYPE, value); }
+    public static void nmb_block_type(long struct, int value) { UNSAFE.putInt(null, struct + CLMotionEstimationDescINTEL.MB_BLOCK_TYPE, value); }
     /** Unsafe version of {@link #subpixel_mode(int) subpixel_mode}. */
-    public static void nsubpixel_mode(long struct, int value) { memPutInt(struct + CLMotionEstimationDescINTEL.SUBPIXEL_MODE, value); }
+    public static void nsubpixel_mode(long struct, int value) { UNSAFE.putInt(null, struct + CLMotionEstimationDescINTEL.SUBPIXEL_MODE, value); }
     /** Unsafe version of {@link #sad_adjust_mode(int) sad_adjust_mode}. */
-    public static void nsad_adjust_mode(long struct, int value) { memPutInt(struct + CLMotionEstimationDescINTEL.SAD_ADJUST_MODE, value); }
+    public static void nsad_adjust_mode(long struct, int value) { UNSAFE.putInt(null, struct + CLMotionEstimationDescINTEL.SAD_ADJUST_MODE, value); }
     /** Unsafe version of {@link #search_path_type(int) search_path_type}. */
-    public static void nsearch_path_type(long struct, int value) { memPutInt(struct + CLMotionEstimationDescINTEL.SEARCH_PATH_TYPE, value); }
+    public static void nsearch_path_type(long struct, int value) { UNSAFE.putInt(null, struct + CLMotionEstimationDescINTEL.SEARCH_PATH_TYPE, value); }
 
     // -----------------------------------
 
     /** An array of {@link CLMotionEstimationDescINTEL} structs. */
     public static class Buffer extends StructBuffer<CLMotionEstimationDescINTEL, Buffer> implements NativeResource {
+
+        private static final CLMotionEstimationDescINTEL ELEMENT_FACTORY = CLMotionEstimationDescINTEL.create(-1L);
 
         /**
          * Creates a new {@link CLMotionEstimationDescINTEL.Buffer} instance backed by the specified container.
@@ -330,18 +330,8 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected CLMotionEstimationDescINTEL newInstance(long address) {
-            return new CLMotionEstimationDescINTEL(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected CLMotionEstimationDescINTEL getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code mb_block_type} field. */

@@ -80,10 +80,6 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
         SURFACE = layout.offsetof(2);
     }
 
-    VkPhysicalDeviceSurfaceInfo2KHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceSurfaceInfo2KHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -91,7 +87,7 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceSurfaceInfo2KHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -143,28 +139,29 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
 
     /** Returns a new {@link VkPhysicalDeviceSurfaceInfo2KHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceSurfaceInfo2KHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceSurfaceInfo2KHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceSurfaceInfo2KHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceSurfaceInfo2KHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceSurfaceInfo2KHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceSurfaceInfo2KHR} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceSurfaceInfo2KHR create() {
-        return new VkPhysicalDeviceSurfaceInfo2KHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceSurfaceInfo2KHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceSurfaceInfo2KHR} instance for the specified memory address. */
     public static VkPhysicalDeviceSurfaceInfo2KHR create(long address) {
-        return new VkPhysicalDeviceSurfaceInfo2KHR(address, null);
+        return wrap(VkPhysicalDeviceSurfaceInfo2KHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSurfaceInfo2KHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceSurfaceInfo2KHR.class, address);
     }
 
     /**
@@ -173,7 +170,7 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSurfaceInfo2KHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -182,7 +179,7 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSurfaceInfo2KHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -191,7 +188,8 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSurfaceInfo2KHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -201,13 +199,13 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSurfaceInfo2KHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSurfaceInfo2KHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -228,7 +226,7 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceSurfaceInfo2KHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceSurfaceInfo2KHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -237,7 +235,7 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceSurfaceInfo2KHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceSurfaceInfo2KHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -265,7 +263,7 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSurfaceInfo2KHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -275,29 +273,31 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSurfaceInfo2KHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceSurfaceInfo2KHR.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSurfaceInfo2KHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSurfaceInfo2KHR.PNEXT); }
     /** Unsafe version of {@link #surface}. */
-    public static long nsurface(long struct) { return memGetLong(struct + VkPhysicalDeviceSurfaceInfo2KHR.SURFACE); }
+    public static long nsurface(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceSurfaceInfo2KHR.SURFACE); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSurfaceInfo2KHR.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSurfaceInfo2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSurfaceInfo2KHR.PNEXT, value); }
     /** Unsafe version of {@link #surface(long) surface}. */
-    public static void nsurface(long struct, long value) { memPutLong(struct + VkPhysicalDeviceSurfaceInfo2KHR.SURFACE, value); }
+    public static void nsurface(long struct, long value) { UNSAFE.putLong(null, struct + VkPhysicalDeviceSurfaceInfo2KHR.SURFACE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceSurfaceInfo2KHR} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceSurfaceInfo2KHR, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceSurfaceInfo2KHR ELEMENT_FACTORY = VkPhysicalDeviceSurfaceInfo2KHR.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceSurfaceInfo2KHR.Buffer} instance backed by the specified container.
@@ -326,18 +326,8 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceSurfaceInfo2KHR newInstance(long address) {
-            return new VkPhysicalDeviceSurfaceInfo2KHR(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceSurfaceInfo2KHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

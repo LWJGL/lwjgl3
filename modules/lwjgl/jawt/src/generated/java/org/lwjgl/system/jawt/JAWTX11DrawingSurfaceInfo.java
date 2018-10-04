@@ -73,10 +73,6 @@ public class JAWTX11DrawingSurfaceInfo extends Struct {
         DEPTH = layout.offsetof(4);
     }
 
-    JAWTX11DrawingSurfaceInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link JAWTX11DrawingSurfaceInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -84,7 +80,7 @@ public class JAWTX11DrawingSurfaceInfo extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public JAWTX11DrawingSurfaceInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -109,13 +105,13 @@ public class JAWTX11DrawingSurfaceInfo extends Struct {
 
     /** Returns a new {@link JAWTX11DrawingSurfaceInfo} instance for the specified memory address. */
     public static JAWTX11DrawingSurfaceInfo create(long address) {
-        return new JAWTX11DrawingSurfaceInfo(address, null);
+        return wrap(JAWTX11DrawingSurfaceInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static JAWTX11DrawingSurfaceInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(JAWTX11DrawingSurfaceInfo.class, address);
     }
 
     /**
@@ -125,13 +121,13 @@ public class JAWTX11DrawingSurfaceInfo extends Struct {
      * @param capacity the buffer capacity
      */
     public static JAWTX11DrawingSurfaceInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static JAWTX11DrawingSurfaceInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -145,12 +141,14 @@ public class JAWTX11DrawingSurfaceInfo extends Struct {
     /** Unsafe version of {@link #colormapID}. */
     public static long ncolormapID(long struct) { return memGetAddress(struct + JAWTX11DrawingSurfaceInfo.COLORMAPID); }
     /** Unsafe version of {@link #depth}. */
-    public static int ndepth(long struct) { return memGetInt(struct + JAWTX11DrawingSurfaceInfo.DEPTH); }
+    public static int ndepth(long struct) { return UNSAFE.getInt(null, struct + JAWTX11DrawingSurfaceInfo.DEPTH); }
 
     // -----------------------------------
 
     /** An array of {@link JAWTX11DrawingSurfaceInfo} structs. */
     public static class Buffer extends StructBuffer<JAWTX11DrawingSurfaceInfo, Buffer> {
+
+        private static final JAWTX11DrawingSurfaceInfo ELEMENT_FACTORY = JAWTX11DrawingSurfaceInfo.create(-1L);
 
         /**
          * Creates a new {@link JAWTX11DrawingSurfaceInfo.Buffer} instance backed by the specified container.
@@ -179,18 +177,8 @@ public class JAWTX11DrawingSurfaceInfo extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected JAWTX11DrawingSurfaceInfo newInstance(long address) {
-            return new JAWTX11DrawingSurfaceInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected JAWTX11DrawingSurfaceInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code drawable} field. */

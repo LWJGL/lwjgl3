@@ -64,10 +64,6 @@ public class YGCachedMeasurement extends Struct {
         COMPUTEDHEIGHT = layout.offsetof(5);
     }
 
-    YGCachedMeasurement(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link YGCachedMeasurement} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -75,7 +71,7 @@ public class YGCachedMeasurement extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public YGCachedMeasurement(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -100,13 +96,13 @@ public class YGCachedMeasurement extends Struct {
 
     /** Returns a new {@link YGCachedMeasurement} instance for the specified memory address. */
     public static YGCachedMeasurement create(long address) {
-        return new YGCachedMeasurement(address, null);
+        return wrap(YGCachedMeasurement.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGCachedMeasurement createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(YGCachedMeasurement.class, address);
     }
 
     /**
@@ -116,34 +112,36 @@ public class YGCachedMeasurement extends Struct {
      * @param capacity the buffer capacity
      */
     public static YGCachedMeasurement.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGCachedMeasurement.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #availableWidth}. */
-    public static float navailableWidth(long struct) { return memGetFloat(struct + YGCachedMeasurement.AVAILABLEWIDTH); }
+    public static float navailableWidth(long struct) { return UNSAFE.getFloat(null, struct + YGCachedMeasurement.AVAILABLEWIDTH); }
     /** Unsafe version of {@link #availableHeight}. */
-    public static float navailableHeight(long struct) { return memGetFloat(struct + YGCachedMeasurement.AVAILABLEHEIGHT); }
+    public static float navailableHeight(long struct) { return UNSAFE.getFloat(null, struct + YGCachedMeasurement.AVAILABLEHEIGHT); }
     /** Unsafe version of {@link #widthMeasureMode}. */
-    public static int nwidthMeasureMode(long struct) { return memGetInt(struct + YGCachedMeasurement.WIDTHMEASUREMODE); }
+    public static int nwidthMeasureMode(long struct) { return UNSAFE.getInt(null, struct + YGCachedMeasurement.WIDTHMEASUREMODE); }
     /** Unsafe version of {@link #heightMeasureMode}. */
-    public static int nheightMeasureMode(long struct) { return memGetInt(struct + YGCachedMeasurement.HEIGHTMEASUREMODE); }
+    public static int nheightMeasureMode(long struct) { return UNSAFE.getInt(null, struct + YGCachedMeasurement.HEIGHTMEASUREMODE); }
     /** Unsafe version of {@link #computedWidth}. */
-    public static float ncomputedWidth(long struct) { return memGetFloat(struct + YGCachedMeasurement.COMPUTEDWIDTH); }
+    public static float ncomputedWidth(long struct) { return UNSAFE.getFloat(null, struct + YGCachedMeasurement.COMPUTEDWIDTH); }
     /** Unsafe version of {@link #computedHeight}. */
-    public static float ncomputedHeight(long struct) { return memGetFloat(struct + YGCachedMeasurement.COMPUTEDHEIGHT); }
+    public static float ncomputedHeight(long struct) { return UNSAFE.getFloat(null, struct + YGCachedMeasurement.COMPUTEDHEIGHT); }
 
     // -----------------------------------
 
     /** An array of {@link YGCachedMeasurement} structs. */
     public static class Buffer extends StructBuffer<YGCachedMeasurement, Buffer> {
+
+        private static final YGCachedMeasurement ELEMENT_FACTORY = YGCachedMeasurement.create(-1L);
 
         /**
          * Creates a new {@link YGCachedMeasurement.Buffer} instance backed by the specified container.
@@ -172,18 +170,8 @@ public class YGCachedMeasurement extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected YGCachedMeasurement newInstance(long address) {
-            return new YGCachedMeasurement(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected YGCachedMeasurement getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code availableWidth} field. */

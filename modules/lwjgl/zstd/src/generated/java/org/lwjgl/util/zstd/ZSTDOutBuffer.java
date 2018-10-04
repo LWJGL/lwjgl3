@@ -64,10 +64,6 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
         POS = layout.offsetof(2);
     }
 
-    ZSTDOutBuffer(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link ZSTDOutBuffer} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -75,7 +71,7 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public ZSTDOutBuffer(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -123,28 +119,29 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
 
     /** Returns a new {@link ZSTDOutBuffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static ZSTDOutBuffer malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(ZSTDOutBuffer.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link ZSTDOutBuffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static ZSTDOutBuffer calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(ZSTDOutBuffer.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link ZSTDOutBuffer} instance allocated with {@link BufferUtils}. */
     public static ZSTDOutBuffer create() {
-        return new ZSTDOutBuffer(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(ZSTDOutBuffer.class, memAddress(container), container);
     }
 
     /** Returns a new {@link ZSTDOutBuffer} instance for the specified memory address. */
     public static ZSTDOutBuffer create(long address) {
-        return new ZSTDOutBuffer(address, null);
+        return wrap(ZSTDOutBuffer.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ZSTDOutBuffer createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(ZSTDOutBuffer.class, address);
     }
 
     /**
@@ -153,7 +150,7 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZSTDOutBuffer.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -162,7 +159,7 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZSTDOutBuffer.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -171,7 +168,8 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZSTDOutBuffer.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -181,13 +179,13 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZSTDOutBuffer.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ZSTDOutBuffer.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -208,7 +206,7 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ZSTDOutBuffer mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(ZSTDOutBuffer.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -217,7 +215,7 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ZSTDOutBuffer callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(ZSTDOutBuffer.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -245,7 +243,7 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZSTDOutBuffer.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -255,7 +253,7 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ZSTDOutBuffer.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -300,6 +298,8 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
     /** An array of {@link ZSTDOutBuffer} structs. */
     public static class Buffer extends StructBuffer<ZSTDOutBuffer, Buffer> implements NativeResource {
 
+        private static final ZSTDOutBuffer ELEMENT_FACTORY = ZSTDOutBuffer.create(-1L);
+
         /**
          * Creates a new {@link ZSTDOutBuffer.Buffer} instance backed by the specified container.
          *
@@ -327,18 +327,8 @@ public class ZSTDOutBuffer extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected ZSTDOutBuffer newInstance(long address) {
-            return new ZSTDOutBuffer(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected ZSTDOutBuffer getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code dst} field. */

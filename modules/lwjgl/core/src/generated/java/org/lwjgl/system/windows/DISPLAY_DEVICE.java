@@ -83,10 +83,6 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
         DEVICEKEY = layout.offsetof(5);
     }
 
-    DISPLAY_DEVICE(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link DISPLAY_DEVICE} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -94,7 +90,7 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public DISPLAY_DEVICE(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -150,28 +146,29 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
 
     /** Returns a new {@link DISPLAY_DEVICE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static DISPLAY_DEVICE malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(DISPLAY_DEVICE.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link DISPLAY_DEVICE} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static DISPLAY_DEVICE calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(DISPLAY_DEVICE.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link DISPLAY_DEVICE} instance allocated with {@link BufferUtils}. */
     public static DISPLAY_DEVICE create() {
-        return new DISPLAY_DEVICE(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(DISPLAY_DEVICE.class, memAddress(container), container);
     }
 
     /** Returns a new {@link DISPLAY_DEVICE} instance for the specified memory address. */
     public static DISPLAY_DEVICE create(long address) {
-        return new DISPLAY_DEVICE(address, null);
+        return wrap(DISPLAY_DEVICE.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DISPLAY_DEVICE createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(DISPLAY_DEVICE.class, address);
     }
 
     /**
@@ -180,7 +177,7 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DISPLAY_DEVICE.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -189,7 +186,7 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DISPLAY_DEVICE.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -198,7 +195,8 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DISPLAY_DEVICE.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -208,13 +206,13 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DISPLAY_DEVICE.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DISPLAY_DEVICE.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -235,7 +233,7 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static DISPLAY_DEVICE mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(DISPLAY_DEVICE.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -244,7 +242,7 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static DISPLAY_DEVICE callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(DISPLAY_DEVICE.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -272,7 +270,7 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DISPLAY_DEVICE.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -282,13 +280,13 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DISPLAY_DEVICE.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #cb}. */
-    public static int ncb(long struct) { return memGetInt(struct + DISPLAY_DEVICE.CB); }
+    public static int ncb(long struct) { return UNSAFE.getInt(null, struct + DISPLAY_DEVICE.CB); }
     /** Unsafe version of {@link #DeviceName}. */
     public static ByteBuffer nDeviceName(long struct) { return memByteBuffer(struct + DISPLAY_DEVICE.DEVICENAME, 32 * 2); }
     /** Unsafe version of {@link #DeviceNameString}. */
@@ -298,7 +296,7 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
     /** Unsafe version of {@link #DeviceStringString}. */
     public static String nDeviceStringString(long struct) { return memUTF16(struct + DISPLAY_DEVICE.DEVICESTRING); }
     /** Unsafe version of {@link #StateFlags}. */
-    public static int nStateFlags(long struct) { return memGetInt(struct + DISPLAY_DEVICE.STATEFLAGS); }
+    public static int nStateFlags(long struct) { return UNSAFE.getInt(null, struct + DISPLAY_DEVICE.STATEFLAGS); }
     /** Unsafe version of {@link #DeviceID}. */
     public static ByteBuffer nDeviceID(long struct) { return memByteBuffer(struct + DISPLAY_DEVICE.DEVICEID, 128 * 2); }
     /** Unsafe version of {@link #DeviceIDString}. */
@@ -309,12 +307,14 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
     public static String nDeviceKeyString(long struct) { return memUTF16(struct + DISPLAY_DEVICE.DEVICEKEY); }
 
     /** Unsafe version of {@link #cb(int) cb}. */
-    public static void ncb(long struct, int value) { memPutInt(struct + DISPLAY_DEVICE.CB, value); }
+    public static void ncb(long struct, int value) { UNSAFE.putInt(null, struct + DISPLAY_DEVICE.CB, value); }
 
     // -----------------------------------
 
     /** An array of {@link DISPLAY_DEVICE} structs. */
     public static class Buffer extends StructBuffer<DISPLAY_DEVICE, Buffer> implements NativeResource {
+
+        private static final DISPLAY_DEVICE ELEMENT_FACTORY = DISPLAY_DEVICE.create(-1L);
 
         /**
          * Creates a new {@link DISPLAY_DEVICE.Buffer} instance backed by the specified container.
@@ -343,18 +343,8 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected DISPLAY_DEVICE newInstance(long address) {
-            return new DISPLAY_DEVICE(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected DISPLAY_DEVICE getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code cb} field. */

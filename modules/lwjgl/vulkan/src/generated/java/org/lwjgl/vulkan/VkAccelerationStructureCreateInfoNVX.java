@@ -110,10 +110,6 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
         PGEOMETRIES = layout.offsetof(7);
     }
 
-    VkAccelerationStructureCreateInfoNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkAccelerationStructureCreateInfoNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -121,7 +117,7 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkAccelerationStructureCreateInfoNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -205,28 +201,29 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
 
     /** Returns a new {@link VkAccelerationStructureCreateInfoNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkAccelerationStructureCreateInfoNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkAccelerationStructureCreateInfoNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkAccelerationStructureCreateInfoNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkAccelerationStructureCreateInfoNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkAccelerationStructureCreateInfoNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkAccelerationStructureCreateInfoNVX} instance allocated with {@link BufferUtils}. */
     public static VkAccelerationStructureCreateInfoNVX create() {
-        return new VkAccelerationStructureCreateInfoNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkAccelerationStructureCreateInfoNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkAccelerationStructureCreateInfoNVX} instance for the specified memory address. */
     public static VkAccelerationStructureCreateInfoNVX create(long address) {
-        return new VkAccelerationStructureCreateInfoNVX(address, null);
+        return wrap(VkAccelerationStructureCreateInfoNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAccelerationStructureCreateInfoNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkAccelerationStructureCreateInfoNVX.class, address);
     }
 
     /**
@@ -235,7 +232,7 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureCreateInfoNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -244,7 +241,7 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureCreateInfoNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -253,7 +250,8 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureCreateInfoNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -263,13 +261,13 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureCreateInfoNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAccelerationStructureCreateInfoNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -290,7 +288,7 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkAccelerationStructureCreateInfoNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkAccelerationStructureCreateInfoNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -299,7 +297,7 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkAccelerationStructureCreateInfoNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkAccelerationStructureCreateInfoNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -327,7 +325,7 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureCreateInfoNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -337,42 +335,42 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureCreateInfoNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkAccelerationStructureCreateInfoNVX.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureCreateInfoNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkAccelerationStructureCreateInfoNVX.PNEXT); }
     /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return memGetInt(struct + VkAccelerationStructureCreateInfoNVX.TYPE); }
+    public static int ntype(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureCreateInfoNVX.TYPE); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkAccelerationStructureCreateInfoNVX.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureCreateInfoNVX.FLAGS); }
     /** Unsafe version of {@link #compactedSize}. */
-    public static long ncompactedSize(long struct) { return memGetLong(struct + VkAccelerationStructureCreateInfoNVX.COMPACTEDSIZE); }
+    public static long ncompactedSize(long struct) { return UNSAFE.getLong(null, struct + VkAccelerationStructureCreateInfoNVX.COMPACTEDSIZE); }
     /** Unsafe version of {@link #instanceCount}. */
-    public static int ninstanceCount(long struct) { return memGetInt(struct + VkAccelerationStructureCreateInfoNVX.INSTANCECOUNT); }
+    public static int ninstanceCount(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureCreateInfoNVX.INSTANCECOUNT); }
     /** Unsafe version of {@link #geometryCount}. */
-    public static int ngeometryCount(long struct) { return memGetInt(struct + VkAccelerationStructureCreateInfoNVX.GEOMETRYCOUNT); }
+    public static int ngeometryCount(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureCreateInfoNVX.GEOMETRYCOUNT); }
     /** Unsafe version of {@link #pGeometries}. */
     @Nullable public static VkGeometryNVX.Buffer npGeometries(long struct) { return VkGeometryNVX.createSafe(memGetAddress(struct + VkAccelerationStructureCreateInfoNVX.PGEOMETRIES), ngeometryCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkAccelerationStructureCreateInfoNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureCreateInfoNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkAccelerationStructureCreateInfoNVX.PNEXT, value); }
     /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { memPutInt(struct + VkAccelerationStructureCreateInfoNVX.TYPE, value); }
+    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureCreateInfoNVX.TYPE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkAccelerationStructureCreateInfoNVX.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureCreateInfoNVX.FLAGS, value); }
     /** Unsafe version of {@link #compactedSize(long) compactedSize}. */
-    public static void ncompactedSize(long struct, long value) { memPutLong(struct + VkAccelerationStructureCreateInfoNVX.COMPACTEDSIZE, value); }
+    public static void ncompactedSize(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureCreateInfoNVX.COMPACTEDSIZE, value); }
     /** Unsafe version of {@link #instanceCount(int) instanceCount}. */
-    public static void ninstanceCount(long struct, int value) { memPutInt(struct + VkAccelerationStructureCreateInfoNVX.INSTANCECOUNT, value); }
+    public static void ninstanceCount(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureCreateInfoNVX.INSTANCECOUNT, value); }
     /** Sets the specified value to the {@code geometryCount} field of the specified {@code struct}. */
-    public static void ngeometryCount(long struct, int value) { memPutInt(struct + VkAccelerationStructureCreateInfoNVX.GEOMETRYCOUNT, value); }
+    public static void ngeometryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureCreateInfoNVX.GEOMETRYCOUNT, value); }
     /** Unsafe version of {@link #pGeometries(VkGeometryNVX.Buffer) pGeometries}. */
     public static void npGeometries(long struct, @Nullable VkGeometryNVX.Buffer value) { memPutAddress(struct + VkAccelerationStructureCreateInfoNVX.PGEOMETRIES, memAddressSafe(value)); ngeometryCount(struct, value == null ? 0 : value.remaining()); }
 
@@ -404,6 +402,8 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
     /** An array of {@link VkAccelerationStructureCreateInfoNVX} structs. */
     public static class Buffer extends StructBuffer<VkAccelerationStructureCreateInfoNVX, Buffer> implements NativeResource {
 
+        private static final VkAccelerationStructureCreateInfoNVX ELEMENT_FACTORY = VkAccelerationStructureCreateInfoNVX.create(-1L);
+
         /**
          * Creates a new {@link VkAccelerationStructureCreateInfoNVX.Buffer} instance backed by the specified container.
          *
@@ -431,18 +431,8 @@ public class VkAccelerationStructureCreateInfoNVX extends Struct implements Nati
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkAccelerationStructureCreateInfoNVX newInstance(long address) {
-            return new VkAccelerationStructureCreateInfoNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkAccelerationStructureCreateInfoNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

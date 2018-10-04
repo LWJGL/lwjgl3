@@ -142,10 +142,6 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
         LINEWIDTH = layout.offsetof(12);
     }
 
-    VkPipelineRasterizationStateCreateInfo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPipelineRasterizationStateCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -153,7 +149,7 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineRasterizationStateCreateInfo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -271,28 +267,29 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
 
     /** Returns a new {@link VkPipelineRasterizationStateCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineRasterizationStateCreateInfo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPipelineRasterizationStateCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineRasterizationStateCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineRasterizationStateCreateInfo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPipelineRasterizationStateCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPipelineRasterizationStateCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkPipelineRasterizationStateCreateInfo create() {
-        return new VkPipelineRasterizationStateCreateInfo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineRasterizationStateCreateInfo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPipelineRasterizationStateCreateInfo} instance for the specified memory address. */
     public static VkPipelineRasterizationStateCreateInfo create(long address) {
-        return new VkPipelineRasterizationStateCreateInfo(address, null);
+        return wrap(VkPipelineRasterizationStateCreateInfo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineRasterizationStateCreateInfo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPipelineRasterizationStateCreateInfo.class, address);
     }
 
     /**
@@ -301,7 +298,7 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateCreateInfo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -310,7 +307,7 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateCreateInfo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -319,7 +316,8 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateCreateInfo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -329,13 +327,13 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateCreateInfo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineRasterizationStateCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -356,7 +354,7 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
      * @param stack the stack from which to allocate
      */
     public static VkPipelineRasterizationStateCreateInfo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPipelineRasterizationStateCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -365,7 +363,7 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
      * @param stack the stack from which to allocate
      */
     public static VkPipelineRasterizationStateCreateInfo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPipelineRasterizationStateCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -393,7 +391,7 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -403,69 +401,71 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationStateCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPipelineRasterizationStateCreateInfo.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.FLAGS); }
     /** Unsafe version of {@link #depthClampEnable}. */
-    public static int ndepthClampEnable(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.DEPTHCLAMPENABLE); }
+    public static int ndepthClampEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHCLAMPENABLE); }
     /** Unsafe version of {@link #rasterizerDiscardEnable}. */
-    public static int nrasterizerDiscardEnable(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.RASTERIZERDISCARDENABLE); }
+    public static int nrasterizerDiscardEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.RASTERIZERDISCARDENABLE); }
     /** Unsafe version of {@link #polygonMode}. */
-    public static int npolygonMode(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.POLYGONMODE); }
+    public static int npolygonMode(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.POLYGONMODE); }
     /** Unsafe version of {@link #cullMode}. */
-    public static int ncullMode(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.CULLMODE); }
+    public static int ncullMode(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.CULLMODE); }
     /** Unsafe version of {@link #frontFace}. */
-    public static int nfrontFace(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.FRONTFACE); }
+    public static int nfrontFace(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.FRONTFACE); }
     /** Unsafe version of {@link #depthBiasEnable}. */
-    public static int ndepthBiasEnable(long struct) { return memGetInt(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASENABLE); }
+    public static int ndepthBiasEnable(long struct) { return UNSAFE.getInt(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASENABLE); }
     /** Unsafe version of {@link #depthBiasConstantFactor}. */
-    public static float ndepthBiasConstantFactor(long struct) { return memGetFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCONSTANTFACTOR); }
+    public static float ndepthBiasConstantFactor(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCONSTANTFACTOR); }
     /** Unsafe version of {@link #depthBiasClamp}. */
-    public static float ndepthBiasClamp(long struct) { return memGetFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCLAMP); }
+    public static float ndepthBiasClamp(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCLAMP); }
     /** Unsafe version of {@link #depthBiasSlopeFactor}. */
-    public static float ndepthBiasSlopeFactor(long struct) { return memGetFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASSLOPEFACTOR); }
+    public static float ndepthBiasSlopeFactor(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASSLOPEFACTOR); }
     /** Unsafe version of {@link #lineWidth}. */
-    public static float nlineWidth(long struct) { return memGetFloat(struct + VkPipelineRasterizationStateCreateInfo.LINEWIDTH); }
+    public static float nlineWidth(long struct) { return UNSAFE.getFloat(null, struct + VkPipelineRasterizationStateCreateInfo.LINEWIDTH); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPipelineRasterizationStateCreateInfo.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.FLAGS, value); }
     /** Unsafe version of {@link #depthClampEnable(boolean) depthClampEnable}. */
-    public static void ndepthClampEnable(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.DEPTHCLAMPENABLE, value); }
+    public static void ndepthClampEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHCLAMPENABLE, value); }
     /** Unsafe version of {@link #rasterizerDiscardEnable(boolean) rasterizerDiscardEnable}. */
-    public static void nrasterizerDiscardEnable(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.RASTERIZERDISCARDENABLE, value); }
+    public static void nrasterizerDiscardEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.RASTERIZERDISCARDENABLE, value); }
     /** Unsafe version of {@link #polygonMode(int) polygonMode}. */
-    public static void npolygonMode(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.POLYGONMODE, value); }
+    public static void npolygonMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.POLYGONMODE, value); }
     /** Unsafe version of {@link #cullMode(int) cullMode}. */
-    public static void ncullMode(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.CULLMODE, value); }
+    public static void ncullMode(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.CULLMODE, value); }
     /** Unsafe version of {@link #frontFace(int) frontFace}. */
-    public static void nfrontFace(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.FRONTFACE, value); }
+    public static void nfrontFace(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.FRONTFACE, value); }
     /** Unsafe version of {@link #depthBiasEnable(boolean) depthBiasEnable}. */
-    public static void ndepthBiasEnable(long struct, int value) { memPutInt(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASENABLE, value); }
+    public static void ndepthBiasEnable(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASENABLE, value); }
     /** Unsafe version of {@link #depthBiasConstantFactor(float) depthBiasConstantFactor}. */
-    public static void ndepthBiasConstantFactor(long struct, float value) { memPutFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCONSTANTFACTOR, value); }
+    public static void ndepthBiasConstantFactor(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCONSTANTFACTOR, value); }
     /** Unsafe version of {@link #depthBiasClamp(float) depthBiasClamp}. */
-    public static void ndepthBiasClamp(long struct, float value) { memPutFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCLAMP, value); }
+    public static void ndepthBiasClamp(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASCLAMP, value); }
     /** Unsafe version of {@link #depthBiasSlopeFactor(float) depthBiasSlopeFactor}. */
-    public static void ndepthBiasSlopeFactor(long struct, float value) { memPutFloat(struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASSLOPEFACTOR, value); }
+    public static void ndepthBiasSlopeFactor(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineRasterizationStateCreateInfo.DEPTHBIASSLOPEFACTOR, value); }
     /** Unsafe version of {@link #lineWidth(float) lineWidth}. */
-    public static void nlineWidth(long struct, float value) { memPutFloat(struct + VkPipelineRasterizationStateCreateInfo.LINEWIDTH, value); }
+    public static void nlineWidth(long struct, float value) { UNSAFE.putFloat(null, struct + VkPipelineRasterizationStateCreateInfo.LINEWIDTH, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPipelineRasterizationStateCreateInfo} structs. */
     public static class Buffer extends StructBuffer<VkPipelineRasterizationStateCreateInfo, Buffer> implements NativeResource {
+
+        private static final VkPipelineRasterizationStateCreateInfo ELEMENT_FACTORY = VkPipelineRasterizationStateCreateInfo.create(-1L);
 
         /**
          * Creates a new {@link VkPipelineRasterizationStateCreateInfo.Buffer} instance backed by the specified container.
@@ -494,18 +494,8 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPipelineRasterizationStateCreateInfo newInstance(long address) {
-            return new VkPipelineRasterizationStateCreateInfo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPipelineRasterizationStateCreateInfo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

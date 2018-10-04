@@ -285,10 +285,6 @@ public class DEVMODE extends Struct implements NativeResource {
         DMPANNINGHEIGHT = layout.offsetof(41);
     }
 
-    DEVMODE(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link DEVMODE} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -296,7 +292,7 @@ public class DEVMODE extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public DEVMODE(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -434,28 +430,29 @@ public class DEVMODE extends Struct implements NativeResource {
 
     /** Returns a new {@link DEVMODE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static DEVMODE malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(DEVMODE.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link DEVMODE} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static DEVMODE calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(DEVMODE.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link DEVMODE} instance allocated with {@link BufferUtils}. */
     public static DEVMODE create() {
-        return new DEVMODE(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(DEVMODE.class, memAddress(container), container);
     }
 
     /** Returns a new {@link DEVMODE} instance for the specified memory address. */
     public static DEVMODE create(long address) {
-        return new DEVMODE(address, null);
+        return wrap(DEVMODE.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DEVMODE createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(DEVMODE.class, address);
     }
 
     /**
@@ -464,7 +461,7 @@ public class DEVMODE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DEVMODE.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -473,7 +470,7 @@ public class DEVMODE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DEVMODE.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -482,7 +479,8 @@ public class DEVMODE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DEVMODE.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -492,13 +490,13 @@ public class DEVMODE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DEVMODE.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DEVMODE.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -519,7 +517,7 @@ public class DEVMODE extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static DEVMODE mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(DEVMODE.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -528,7 +526,7 @@ public class DEVMODE extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static DEVMODE callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(DEVMODE.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -556,7 +554,7 @@ public class DEVMODE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DEVMODE.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -566,7 +564,7 @@ public class DEVMODE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static DEVMODE.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -576,93 +574,95 @@ public class DEVMODE extends Struct implements NativeResource {
     /** Unsafe version of {@link #dmDeviceNameString}. */
     public static String ndmDeviceNameString(long struct) { return memUTF16(struct + DEVMODE.DMDEVICENAME); }
     /** Unsafe version of {@link #dmSpecVersion}. */
-    public static short ndmSpecVersion(long struct) { return memGetShort(struct + DEVMODE.DMSPECVERSION); }
+    public static short ndmSpecVersion(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMSPECVERSION); }
     /** Unsafe version of {@link #dmDriverVersion}. */
-    public static short ndmDriverVersion(long struct) { return memGetShort(struct + DEVMODE.DMDRIVERVERSION); }
+    public static short ndmDriverVersion(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMDRIVERVERSION); }
     /** Unsafe version of {@link #dmSize}. */
-    public static short ndmSize(long struct) { return memGetShort(struct + DEVMODE.DMSIZE); }
+    public static short ndmSize(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMSIZE); }
     /** Unsafe version of {@link #dmDriverExtra}. */
-    public static short ndmDriverExtra(long struct) { return memGetShort(struct + DEVMODE.DMDRIVEREXTRA); }
+    public static short ndmDriverExtra(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMDRIVEREXTRA); }
     /** Unsafe version of {@link #dmFields}. */
-    public static int ndmFields(long struct) { return memGetInt(struct + DEVMODE.DMFIELDS); }
+    public static int ndmFields(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMFIELDS); }
     /** Unsafe version of {@link #dmOrientation}. */
-    public static short ndmOrientation(long struct) { return memGetShort(struct + DEVMODE.DMORIENTATION); }
+    public static short ndmOrientation(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMORIENTATION); }
     /** Unsafe version of {@link #dmPaperSize}. */
-    public static short ndmPaperSize(long struct) { return memGetShort(struct + DEVMODE.DMPAPERSIZE); }
+    public static short ndmPaperSize(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMPAPERSIZE); }
     /** Unsafe version of {@link #dmPaperLength}. */
-    public static short ndmPaperLength(long struct) { return memGetShort(struct + DEVMODE.DMPAPERLENGTH); }
+    public static short ndmPaperLength(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMPAPERLENGTH); }
     /** Unsafe version of {@link #dmPaperWidth}. */
-    public static short ndmPaperWidth(long struct) { return memGetShort(struct + DEVMODE.DMPAPERWIDTH); }
+    public static short ndmPaperWidth(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMPAPERWIDTH); }
     /** Unsafe version of {@link #dmScale}. */
-    public static short ndmScale(long struct) { return memGetShort(struct + DEVMODE.DMSCALE); }
+    public static short ndmScale(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMSCALE); }
     /** Unsafe version of {@link #dmCopies}. */
-    public static short ndmCopies(long struct) { return memGetShort(struct + DEVMODE.DMCOPIES); }
+    public static short ndmCopies(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMCOPIES); }
     /** Unsafe version of {@link #dmDefaultSource}. */
-    public static short ndmDefaultSource(long struct) { return memGetShort(struct + DEVMODE.DMDEFAULTSOURCE); }
+    public static short ndmDefaultSource(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMDEFAULTSOURCE); }
     /** Unsafe version of {@link #dmPrintQuality}. */
-    public static short ndmPrintQuality(long struct) { return memGetShort(struct + DEVMODE.DMPRINTQUALITY); }
+    public static short ndmPrintQuality(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMPRINTQUALITY); }
     /** Unsafe version of {@link #dmPosition}. */
     public static POINTL ndmPosition(long struct) { return POINTL.create(struct + DEVMODE.DMPOSITION); }
     /** Unsafe version of {@link #dmDisplayOrientation}. */
-    public static int ndmDisplayOrientation(long struct) { return memGetInt(struct + DEVMODE.DMDISPLAYORIENTATION); }
+    public static int ndmDisplayOrientation(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMDISPLAYORIENTATION); }
     /** Unsafe version of {@link #dmDisplayFixedOutput}. */
-    public static int ndmDisplayFixedOutput(long struct) { return memGetInt(struct + DEVMODE.DMDISPLAYFIXEDOUTPUT); }
+    public static int ndmDisplayFixedOutput(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMDISPLAYFIXEDOUTPUT); }
     /** Unsafe version of {@link #dmColor}. */
-    public static short ndmColor(long struct) { return memGetShort(struct + DEVMODE.DMCOLOR); }
+    public static short ndmColor(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMCOLOR); }
     /** Unsafe version of {@link #dmDuplex}. */
-    public static short ndmDuplex(long struct) { return memGetShort(struct + DEVMODE.DMDUPLEX); }
+    public static short ndmDuplex(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMDUPLEX); }
     /** Unsafe version of {@link #dmYResolution}. */
-    public static short ndmYResolution(long struct) { return memGetShort(struct + DEVMODE.DMYRESOLUTION); }
+    public static short ndmYResolution(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMYRESOLUTION); }
     /** Unsafe version of {@link #dmTTOption}. */
-    public static short ndmTTOption(long struct) { return memGetShort(struct + DEVMODE.DMTTOPTION); }
+    public static short ndmTTOption(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMTTOPTION); }
     /** Unsafe version of {@link #dmCollate}. */
-    public static short ndmCollate(long struct) { return memGetShort(struct + DEVMODE.DMCOLLATE); }
+    public static short ndmCollate(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMCOLLATE); }
     /** Unsafe version of {@link #dmFormName}. */
     public static ByteBuffer ndmFormName(long struct) { return memByteBuffer(struct + DEVMODE.DMFORMNAME, 32 * 2); }
     /** Unsafe version of {@link #dmFormNameString}. */
     public static String ndmFormNameString(long struct) { return memUTF16(struct + DEVMODE.DMFORMNAME); }
     /** Unsafe version of {@link #dmLogPixels}. */
-    public static short ndmLogPixels(long struct) { return memGetShort(struct + DEVMODE.DMLOGPIXELS); }
+    public static short ndmLogPixels(long struct) { return UNSAFE.getShort(null, struct + DEVMODE.DMLOGPIXELS); }
     /** Unsafe version of {@link #dmBitsPerPel}. */
-    public static int ndmBitsPerPel(long struct) { return memGetInt(struct + DEVMODE.DMBITSPERPEL); }
+    public static int ndmBitsPerPel(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMBITSPERPEL); }
     /** Unsafe version of {@link #dmPelsWidth}. */
-    public static int ndmPelsWidth(long struct) { return memGetInt(struct + DEVMODE.DMPELSWIDTH); }
+    public static int ndmPelsWidth(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMPELSWIDTH); }
     /** Unsafe version of {@link #dmPelsHeight}. */
-    public static int ndmPelsHeight(long struct) { return memGetInt(struct + DEVMODE.DMPELSHEIGHT); }
+    public static int ndmPelsHeight(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMPELSHEIGHT); }
     /** Unsafe version of {@link #dmDisplayFlags}. */
-    public static int ndmDisplayFlags(long struct) { return memGetInt(struct + DEVMODE.DMDISPLAYFLAGS); }
+    public static int ndmDisplayFlags(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMDISPLAYFLAGS); }
     /** Unsafe version of {@link #dmNup}. */
-    public static int ndmNup(long struct) { return memGetInt(struct + DEVMODE.DMNUP); }
+    public static int ndmNup(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMNUP); }
     /** Unsafe version of {@link #dmDisplayFrequency}. */
-    public static int ndmDisplayFrequency(long struct) { return memGetInt(struct + DEVMODE.DMDISPLAYFREQUENCY); }
+    public static int ndmDisplayFrequency(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMDISPLAYFREQUENCY); }
     /** Unsafe version of {@link #dmICMMethod}. */
-    public static int ndmICMMethod(long struct) { return memGetInt(struct + DEVMODE.DMICMMETHOD); }
+    public static int ndmICMMethod(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMICMMETHOD); }
     /** Unsafe version of {@link #dmICMIntent}. */
-    public static int ndmICMIntent(long struct) { return memGetInt(struct + DEVMODE.DMICMINTENT); }
+    public static int ndmICMIntent(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMICMINTENT); }
     /** Unsafe version of {@link #dmMediaType}. */
-    public static int ndmMediaType(long struct) { return memGetInt(struct + DEVMODE.DMMEDIATYPE); }
+    public static int ndmMediaType(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMMEDIATYPE); }
     /** Unsafe version of {@link #dmDitherType}. */
-    public static int ndmDitherType(long struct) { return memGetInt(struct + DEVMODE.DMDITHERTYPE); }
+    public static int ndmDitherType(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMDITHERTYPE); }
     /** Unsafe version of {@link #dmReserved1}. */
-    public static int ndmReserved1(long struct) { return memGetInt(struct + DEVMODE.DMRESERVED1); }
+    public static int ndmReserved1(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMRESERVED1); }
     /** Unsafe version of {@link #dmReserved2}. */
-    public static int ndmReserved2(long struct) { return memGetInt(struct + DEVMODE.DMRESERVED2); }
+    public static int ndmReserved2(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMRESERVED2); }
     /** Unsafe version of {@link #dmPanningWidth}. */
-    public static int ndmPanningWidth(long struct) { return memGetInt(struct + DEVMODE.DMPANNINGWIDTH); }
+    public static int ndmPanningWidth(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMPANNINGWIDTH); }
     /** Unsafe version of {@link #dmPanningHeight}. */
-    public static int ndmPanningHeight(long struct) { return memGetInt(struct + DEVMODE.DMPANNINGHEIGHT); }
+    public static int ndmPanningHeight(long struct) { return UNSAFE.getInt(null, struct + DEVMODE.DMPANNINGHEIGHT); }
 
     /** Unsafe version of {@link #dmSpecVersion(short) dmSpecVersion}. */
-    public static void ndmSpecVersion(long struct, short value) { memPutShort(struct + DEVMODE.DMSPECVERSION, value); }
+    public static void ndmSpecVersion(long struct, short value) { UNSAFE.putShort(null, struct + DEVMODE.DMSPECVERSION, value); }
     /** Unsafe version of {@link #dmSize(short) dmSize}. */
-    public static void ndmSize(long struct, short value) { memPutShort(struct + DEVMODE.DMSIZE, value); }
+    public static void ndmSize(long struct, short value) { UNSAFE.putShort(null, struct + DEVMODE.DMSIZE, value); }
     /** Unsafe version of {@link #dmDriverExtra(short) dmDriverExtra}. */
-    public static void ndmDriverExtra(long struct, short value) { memPutShort(struct + DEVMODE.DMDRIVEREXTRA, value); }
+    public static void ndmDriverExtra(long struct, short value) { UNSAFE.putShort(null, struct + DEVMODE.DMDRIVEREXTRA, value); }
 
     // -----------------------------------
 
     /** An array of {@link DEVMODE} structs. */
     public static class Buffer extends StructBuffer<DEVMODE, Buffer> implements NativeResource {
+
+        private static final DEVMODE ELEMENT_FACTORY = DEVMODE.create(-1L);
 
         /**
          * Creates a new {@link DEVMODE.Buffer} instance backed by the specified container.
@@ -691,18 +691,8 @@ public class DEVMODE extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected DEVMODE newInstance(long address) {
-            return new DEVMODE(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected DEVMODE getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link ByteBuffer} view of the {@code dmDeviceName} field. */

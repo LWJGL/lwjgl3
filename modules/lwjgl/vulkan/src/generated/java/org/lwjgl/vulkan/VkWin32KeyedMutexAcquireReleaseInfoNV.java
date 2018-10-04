@@ -105,10 +105,6 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
         PRELEASEKEYS = layout.offsetof(8);
     }
 
-    VkWin32KeyedMutexAcquireReleaseInfoNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkWin32KeyedMutexAcquireReleaseInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -116,7 +112,7 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkWin32KeyedMutexAcquireReleaseInfoNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -215,28 +211,29 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
 
     /** Returns a new {@link VkWin32KeyedMutexAcquireReleaseInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkWin32KeyedMutexAcquireReleaseInfoNV.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkWin32KeyedMutexAcquireReleaseInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkWin32KeyedMutexAcquireReleaseInfoNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkWin32KeyedMutexAcquireReleaseInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV create() {
-        return new VkWin32KeyedMutexAcquireReleaseInfoNV(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkWin32KeyedMutexAcquireReleaseInfoNV.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkWin32KeyedMutexAcquireReleaseInfoNV} instance for the specified memory address. */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV create(long address) {
-        return new VkWin32KeyedMutexAcquireReleaseInfoNV(address, null);
+        return wrap(VkWin32KeyedMutexAcquireReleaseInfoNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWin32KeyedMutexAcquireReleaseInfoNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkWin32KeyedMutexAcquireReleaseInfoNV.class, address);
     }
 
     /**
@@ -245,7 +242,7 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -254,7 +251,7 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -263,7 +260,8 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -273,13 +271,13 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWin32KeyedMutexAcquireReleaseInfoNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -300,7 +298,7 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkWin32KeyedMutexAcquireReleaseInfoNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -309,7 +307,7 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkWin32KeyedMutexAcquireReleaseInfoNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -337,7 +335,7 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -347,17 +345,17 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkWin32KeyedMutexAcquireReleaseInfoNV.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PNEXT); }
     /** Unsafe version of {@link #acquireCount}. */
-    public static int nacquireCount(long struct) { return memGetInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.ACQUIRECOUNT); }
+    public static int nacquireCount(long struct) { return UNSAFE.getInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.ACQUIRECOUNT); }
     /** Unsafe version of {@link #pAcquireSyncs() pAcquireSyncs}. */
     @Nullable public static LongBuffer npAcquireSyncs(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PACQUIRESYNCS), nacquireCount(struct)); }
     /** Unsafe version of {@link #pAcquireKeys() pAcquireKeys}. */
@@ -365,18 +363,18 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
     /** Unsafe version of {@link #pAcquireTimeoutMilliseconds() pAcquireTimeoutMilliseconds}. */
     @Nullable public static IntBuffer npAcquireTimeoutMilliseconds(long struct) { return memIntBufferSafe(memGetAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PACQUIRETIMEOUTMILLISECONDS), nacquireCount(struct)); }
     /** Unsafe version of {@link #releaseCount}. */
-    public static int nreleaseCount(long struct) { return memGetInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.RELEASECOUNT); }
+    public static int nreleaseCount(long struct) { return UNSAFE.getInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.RELEASECOUNT); }
     /** Unsafe version of {@link #pReleaseSyncs() pReleaseSyncs}. */
     @Nullable public static LongBuffer npReleaseSyncs(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PRELEASESYNCS), nreleaseCount(struct)); }
     /** Unsafe version of {@link #pReleaseKeys() pReleaseKeys}. */
     @Nullable public static LongBuffer npReleaseKeys(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PRELEASEKEYS), nreleaseCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PNEXT, value); }
     /** Sets the specified value to the {@code acquireCount} field of the specified {@code struct}. */
-    public static void nacquireCount(long struct, int value) { memPutInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.ACQUIRECOUNT, value); }
+    public static void nacquireCount(long struct, int value) { UNSAFE.putInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.ACQUIRECOUNT, value); }
     /** Unsafe version of {@link #pAcquireSyncs(LongBuffer) pAcquireSyncs}. */
     public static void npAcquireSyncs(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PACQUIRESYNCS, memAddressSafe(value)); }
     /** Unsafe version of {@link #pAcquireKeys(LongBuffer) pAcquireKeys}. */
@@ -384,7 +382,7 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
     /** Unsafe version of {@link #pAcquireTimeoutMilliseconds(IntBuffer) pAcquireTimeoutMilliseconds}. */
     public static void npAcquireTimeoutMilliseconds(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PACQUIRETIMEOUTMILLISECONDS, memAddressSafe(value)); }
     /** Sets the specified value to the {@code releaseCount} field of the specified {@code struct}. */
-    public static void nreleaseCount(long struct, int value) { memPutInt(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.RELEASECOUNT, value); }
+    public static void nreleaseCount(long struct, int value) { UNSAFE.putInt(null, struct + VkWin32KeyedMutexAcquireReleaseInfoNV.RELEASECOUNT, value); }
     /** Unsafe version of {@link #pReleaseSyncs(LongBuffer) pReleaseSyncs}. */
     public static void npReleaseSyncs(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkWin32KeyedMutexAcquireReleaseInfoNV.PRELEASESYNCS, memAddressSafe(value)); }
     /** Unsafe version of {@link #pReleaseKeys(LongBuffer) pReleaseKeys}. */
@@ -424,6 +422,8 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
     /** An array of {@link VkWin32KeyedMutexAcquireReleaseInfoNV} structs. */
     public static class Buffer extends StructBuffer<VkWin32KeyedMutexAcquireReleaseInfoNV, Buffer> implements NativeResource {
 
+        private static final VkWin32KeyedMutexAcquireReleaseInfoNV ELEMENT_FACTORY = VkWin32KeyedMutexAcquireReleaseInfoNV.create(-1L);
+
         /**
          * Creates a new {@link VkWin32KeyedMutexAcquireReleaseInfoNV.Buffer} instance backed by the specified container.
          *
@@ -451,18 +451,8 @@ public class VkWin32KeyedMutexAcquireReleaseInfoNV extends Struct implements Nat
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkWin32KeyedMutexAcquireReleaseInfoNV newInstance(long address) {
-            return new VkWin32KeyedMutexAcquireReleaseInfoNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkWin32KeyedMutexAcquireReleaseInfoNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

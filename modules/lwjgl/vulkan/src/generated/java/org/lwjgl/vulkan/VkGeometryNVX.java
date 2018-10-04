@@ -90,10 +90,6 @@ public class VkGeometryNVX extends Struct implements NativeResource {
         FLAGS = layout.offsetof(4);
     }
 
-    VkGeometryNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkGeometryNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -101,7 +97,7 @@ public class VkGeometryNVX extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkGeometryNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -168,28 +164,29 @@ public class VkGeometryNVX extends Struct implements NativeResource {
 
     /** Returns a new {@link VkGeometryNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkGeometryNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkGeometryNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkGeometryNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkGeometryNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkGeometryNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkGeometryNVX} instance allocated with {@link BufferUtils}. */
     public static VkGeometryNVX create() {
-        return new VkGeometryNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkGeometryNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkGeometryNVX} instance for the specified memory address. */
     public static VkGeometryNVX create(long address) {
-        return new VkGeometryNVX(address, null);
+        return wrap(VkGeometryNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkGeometryNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkGeometryNVX.class, address);
     }
 
     /**
@@ -198,7 +195,7 @@ public class VkGeometryNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -207,7 +204,7 @@ public class VkGeometryNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -216,7 +213,8 @@ public class VkGeometryNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -226,13 +224,13 @@ public class VkGeometryNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkGeometryNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -253,7 +251,7 @@ public class VkGeometryNVX extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkGeometryNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkGeometryNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -262,7 +260,7 @@ public class VkGeometryNVX extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkGeometryNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkGeometryNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -290,7 +288,7 @@ public class VkGeometryNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -300,37 +298,39 @@ public class VkGeometryNVX extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkGeometryNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkGeometryNVX.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkGeometryNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkGeometryNVX.PNEXT); }
     /** Unsafe version of {@link #geometryType}. */
-    public static int ngeometryType(long struct) { return memGetInt(struct + VkGeometryNVX.GEOMETRYTYPE); }
+    public static int ngeometryType(long struct) { return UNSAFE.getInt(null, struct + VkGeometryNVX.GEOMETRYTYPE); }
     /** Unsafe version of {@link #geometry}. */
     public static VkGeometryDataNVX ngeometry(long struct) { return VkGeometryDataNVX.create(struct + VkGeometryNVX.GEOMETRY); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkGeometryNVX.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkGeometryNVX.FLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkGeometryNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkGeometryNVX.PNEXT, value); }
     /** Unsafe version of {@link #geometryType(int) geometryType}. */
-    public static void ngeometryType(long struct, int value) { memPutInt(struct + VkGeometryNVX.GEOMETRYTYPE, value); }
+    public static void ngeometryType(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryNVX.GEOMETRYTYPE, value); }
     /** Unsafe version of {@link #geometry(VkGeometryDataNVX) geometry}. */
     public static void ngeometry(long struct, VkGeometryDataNVX value) { memCopy(value.address(), struct + VkGeometryNVX.GEOMETRY, VkGeometryDataNVX.SIZEOF); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkGeometryNVX.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkGeometryNVX.FLAGS, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkGeometryNVX} structs. */
     public static class Buffer extends StructBuffer<VkGeometryNVX, Buffer> implements NativeResource {
+
+        private static final VkGeometryNVX ELEMENT_FACTORY = VkGeometryNVX.create(-1L);
 
         /**
          * Creates a new {@link VkGeometryNVX.Buffer} instance backed by the specified container.
@@ -359,18 +359,8 @@ public class VkGeometryNVX extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkGeometryNVX newInstance(long address) {
-            return new VkGeometryNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkGeometryNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

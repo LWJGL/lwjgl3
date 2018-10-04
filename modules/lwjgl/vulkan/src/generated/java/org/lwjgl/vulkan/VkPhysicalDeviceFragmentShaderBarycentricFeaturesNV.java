@@ -74,10 +74,6 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
         FRAGMENTSHADERBARYCENTRIC = layout.offsetof(2);
     }
 
-    VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -85,7 +81,7 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -137,28 +133,29 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
 
     /** Returns a new {@link VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV create() {
-        return new VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV create(long address) {
-        return new VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV(address, null);
+        return wrap(VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.class, address);
     }
 
     /**
@@ -167,7 +164,7 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -176,7 +173,7 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -185,7 +182,8 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -195,13 +193,13 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -222,7 +220,7 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -231,7 +229,7 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -259,7 +257,7 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -269,29 +267,31 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.PNEXT); }
     /** Unsafe version of {@link #fragmentShaderBarycentric}. */
-    public static int nfragmentShaderBarycentric(long struct) { return memGetInt(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.FRAGMENTSHADERBARYCENTRIC); }
+    public static int nfragmentShaderBarycentric(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.FRAGMENTSHADERBARYCENTRIC); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.PNEXT, value); }
     /** Unsafe version of {@link #fragmentShaderBarycentric(boolean) fragmentShaderBarycentric}. */
-    public static void nfragmentShaderBarycentric(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.FRAGMENTSHADERBARYCENTRIC, value); }
+    public static void nfragmentShaderBarycentric(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.FRAGMENTSHADERBARYCENTRIC, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV} structs. */
     public static class Buffer extends StructBuffer<VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV ELEMENT_FACTORY = VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.create(-1L);
 
         /**
          * Creates a new {@link VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.Buffer} instance backed by the specified container.
@@ -320,18 +320,8 @@ public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends Struct 
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV newInstance(long address) {
-            return new VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

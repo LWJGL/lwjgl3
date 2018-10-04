@@ -119,10 +119,6 @@ public class NkStyleCombo extends Struct implements NativeResource {
         SPACING = layout.offsetof(18);
     }
 
-    NkStyleCombo(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkStyleCombo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -130,7 +126,7 @@ public class NkStyleCombo extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public NkStyleCombo(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -320,28 +316,29 @@ public class NkStyleCombo extends Struct implements NativeResource {
 
     /** Returns a new {@link NkStyleCombo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkStyleCombo malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(NkStyleCombo.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link NkStyleCombo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkStyleCombo calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(NkStyleCombo.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link NkStyleCombo} instance allocated with {@link BufferUtils}. */
     public static NkStyleCombo create() {
-        return new NkStyleCombo(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(NkStyleCombo.class, memAddress(container), container);
     }
 
     /** Returns a new {@link NkStyleCombo} instance for the specified memory address. */
     public static NkStyleCombo create(long address) {
-        return new NkStyleCombo(address, null);
+        return wrap(NkStyleCombo.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleCombo createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkStyleCombo.class, address);
     }
 
     /**
@@ -350,7 +347,7 @@ public class NkStyleCombo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleCombo.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -359,7 +356,7 @@ public class NkStyleCombo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleCombo.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -368,7 +365,8 @@ public class NkStyleCombo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleCombo.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -378,13 +376,13 @@ public class NkStyleCombo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleCombo.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleCombo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -405,7 +403,7 @@ public class NkStyleCombo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleCombo mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(NkStyleCombo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -414,7 +412,7 @@ public class NkStyleCombo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleCombo callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(NkStyleCombo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -442,7 +440,7 @@ public class NkStyleCombo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleCombo.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -452,7 +450,7 @@ public class NkStyleCombo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleCombo.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -480,15 +478,15 @@ public class NkStyleCombo extends Struct implements NativeResource {
     /** Unsafe version of {@link #button}. */
     public static NkStyleButton nbutton(long struct) { return NkStyleButton.create(struct + NkStyleCombo.BUTTON); }
     /** Unsafe version of {@link #sym_normal}. */
-    public static int nsym_normal(long struct) { return memGetInt(struct + NkStyleCombo.SYM_NORMAL); }
+    public static int nsym_normal(long struct) { return UNSAFE.getInt(null, struct + NkStyleCombo.SYM_NORMAL); }
     /** Unsafe version of {@link #sym_hover}. */
-    public static int nsym_hover(long struct) { return memGetInt(struct + NkStyleCombo.SYM_HOVER); }
+    public static int nsym_hover(long struct) { return UNSAFE.getInt(null, struct + NkStyleCombo.SYM_HOVER); }
     /** Unsafe version of {@link #sym_active}. */
-    public static int nsym_active(long struct) { return memGetInt(struct + NkStyleCombo.SYM_ACTIVE); }
+    public static int nsym_active(long struct) { return UNSAFE.getInt(null, struct + NkStyleCombo.SYM_ACTIVE); }
     /** Unsafe version of {@link #border}. */
-    public static float nborder(long struct) { return memGetFloat(struct + NkStyleCombo.BORDER); }
+    public static float nborder(long struct) { return UNSAFE.getFloat(null, struct + NkStyleCombo.BORDER); }
     /** Unsafe version of {@link #rounding}. */
-    public static float nrounding(long struct) { return memGetFloat(struct + NkStyleCombo.ROUNDING); }
+    public static float nrounding(long struct) { return UNSAFE.getFloat(null, struct + NkStyleCombo.ROUNDING); }
     /** Unsafe version of {@link #content_padding}. */
     public static NkVec2 ncontent_padding(long struct) { return NkVec2.create(struct + NkStyleCombo.CONTENT_PADDING); }
     /** Unsafe version of {@link #button_padding}. */
@@ -519,15 +517,15 @@ public class NkStyleCombo extends Struct implements NativeResource {
     /** Unsafe version of {@link #button(NkStyleButton) button}. */
     public static void nbutton(long struct, NkStyleButton value) { memCopy(value.address(), struct + NkStyleCombo.BUTTON, NkStyleButton.SIZEOF); }
     /** Unsafe version of {@link #sym_normal(int) sym_normal}. */
-    public static void nsym_normal(long struct, int value) { memPutInt(struct + NkStyleCombo.SYM_NORMAL, value); }
+    public static void nsym_normal(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleCombo.SYM_NORMAL, value); }
     /** Unsafe version of {@link #sym_hover(int) sym_hover}. */
-    public static void nsym_hover(long struct, int value) { memPutInt(struct + NkStyleCombo.SYM_HOVER, value); }
+    public static void nsym_hover(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleCombo.SYM_HOVER, value); }
     /** Unsafe version of {@link #sym_active(int) sym_active}. */
-    public static void nsym_active(long struct, int value) { memPutInt(struct + NkStyleCombo.SYM_ACTIVE, value); }
+    public static void nsym_active(long struct, int value) { UNSAFE.putInt(null, struct + NkStyleCombo.SYM_ACTIVE, value); }
     /** Unsafe version of {@link #border(float) border}. */
-    public static void nborder(long struct, float value) { memPutFloat(struct + NkStyleCombo.BORDER, value); }
+    public static void nborder(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleCombo.BORDER, value); }
     /** Unsafe version of {@link #rounding(float) rounding}. */
-    public static void nrounding(long struct, float value) { memPutFloat(struct + NkStyleCombo.ROUNDING, value); }
+    public static void nrounding(long struct, float value) { UNSAFE.putFloat(null, struct + NkStyleCombo.ROUNDING, value); }
     /** Unsafe version of {@link #content_padding(NkVec2) content_padding}. */
     public static void ncontent_padding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleCombo.CONTENT_PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #button_padding(NkVec2) button_padding}. */
@@ -539,6 +537,8 @@ public class NkStyleCombo extends Struct implements NativeResource {
 
     /** An array of {@link NkStyleCombo} structs. */
     public static class Buffer extends StructBuffer<NkStyleCombo, Buffer> implements NativeResource {
+
+        private static final NkStyleCombo ELEMENT_FACTORY = NkStyleCombo.create(-1L);
 
         /**
          * Creates a new {@link NkStyleCombo.Buffer} instance backed by the specified container.
@@ -567,18 +567,8 @@ public class NkStyleCombo extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkStyleCombo newInstance(long address) {
-            return new NkStyleCombo(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkStyleCombo getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns a {@link NkStyleItem} view of the {@code normal} field. */

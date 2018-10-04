@@ -56,10 +56,6 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
         PFNFREE = layout.offsetof(1);
     }
 
-    VmaDeviceMemoryCallbacks(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VmaDeviceMemoryCallbacks} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -67,7 +63,7 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VmaDeviceMemoryCallbacks(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -114,28 +110,29 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
 
     /** Returns a new {@link VmaDeviceMemoryCallbacks} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VmaDeviceMemoryCallbacks malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VmaDeviceMemoryCallbacks.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VmaDeviceMemoryCallbacks} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VmaDeviceMemoryCallbacks calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VmaDeviceMemoryCallbacks.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VmaDeviceMemoryCallbacks} instance allocated with {@link BufferUtils}. */
     public static VmaDeviceMemoryCallbacks create() {
-        return new VmaDeviceMemoryCallbacks(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VmaDeviceMemoryCallbacks.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VmaDeviceMemoryCallbacks} instance for the specified memory address. */
     public static VmaDeviceMemoryCallbacks create(long address) {
-        return new VmaDeviceMemoryCallbacks(address, null);
+        return wrap(VmaDeviceMemoryCallbacks.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VmaDeviceMemoryCallbacks createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VmaDeviceMemoryCallbacks.class, address);
     }
 
     /**
@@ -144,7 +141,7 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaDeviceMemoryCallbacks.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -153,7 +150,7 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaDeviceMemoryCallbacks.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -162,7 +159,8 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaDeviceMemoryCallbacks.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -172,13 +170,13 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaDeviceMemoryCallbacks.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VmaDeviceMemoryCallbacks.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -199,7 +197,7 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VmaDeviceMemoryCallbacks mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VmaDeviceMemoryCallbacks.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -208,7 +206,7 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VmaDeviceMemoryCallbacks callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VmaDeviceMemoryCallbacks.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -236,7 +234,7 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaDeviceMemoryCallbacks.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -246,7 +244,7 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaDeviceMemoryCallbacks.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -265,6 +263,8 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
 
     /** An array of {@link VmaDeviceMemoryCallbacks} structs. */
     public static class Buffer extends StructBuffer<VmaDeviceMemoryCallbacks, Buffer> implements NativeResource {
+
+        private static final VmaDeviceMemoryCallbacks ELEMENT_FACTORY = VmaDeviceMemoryCallbacks.create(-1L);
 
         /**
          * Creates a new {@link VmaDeviceMemoryCallbacks.Buffer} instance backed by the specified container.
@@ -293,18 +293,8 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VmaDeviceMemoryCallbacks newInstance(long address) {
-            return new VmaDeviceMemoryCallbacks(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VmaDeviceMemoryCallbacks getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code pfnAllocate} field. */

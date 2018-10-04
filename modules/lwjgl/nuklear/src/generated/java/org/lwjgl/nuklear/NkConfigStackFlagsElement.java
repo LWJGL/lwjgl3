@@ -49,10 +49,6 @@ class NkConfigStackFlagsElement extends Struct {
         OLD_VALUE = layout.offsetof(1);
     }
 
-    NkConfigStackFlagsElement(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link NkConfigStackFlagsElement} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -60,7 +56,7 @@ class NkConfigStackFlagsElement extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     NkConfigStackFlagsElement(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -81,13 +77,13 @@ class NkConfigStackFlagsElement extends Struct {
 
     /** Returns a new {@link NkConfigStackFlagsElement} instance for the specified memory address. */
     public static NkConfigStackFlagsElement create(long address) {
-        return new NkConfigStackFlagsElement(address, null);
+        return wrap(NkConfigStackFlagsElement.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigStackFlagsElement createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(NkConfigStackFlagsElement.class, address);
     }
 
     /**
@@ -97,13 +93,13 @@ class NkConfigStackFlagsElement extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkConfigStackFlagsElement.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigStackFlagsElement.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -111,12 +107,14 @@ class NkConfigStackFlagsElement extends Struct {
     /** Unsafe version of {@link #pValues(int) pValues}. */
     public static IntBuffer npValues(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + NkConfigStackFlagsElement.PVALUES), capacity); }
     /** Unsafe version of {@link #old_value}. */
-    public static int nold_value(long struct) { return memGetInt(struct + NkConfigStackFlagsElement.OLD_VALUE); }
+    public static int nold_value(long struct) { return UNSAFE.getInt(null, struct + NkConfigStackFlagsElement.OLD_VALUE); }
 
     // -----------------------------------
 
     /** An array of {@link NkConfigStackFlagsElement} structs. */
     public static class Buffer extends StructBuffer<NkConfigStackFlagsElement, Buffer> {
+
+        private static final NkConfigStackFlagsElement ELEMENT_FACTORY = NkConfigStackFlagsElement.create(-1L);
 
         /**
          * Creates a new {@link NkConfigStackFlagsElement.Buffer} instance backed by the specified container.
@@ -145,18 +143,8 @@ class NkConfigStackFlagsElement extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected NkConfigStackFlagsElement newInstance(long address) {
-            return new NkConfigStackFlagsElement(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected NkConfigStackFlagsElement getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /**

@@ -70,10 +70,6 @@ public class VREventDualAnalog extends Struct {
         WHICH = layout.offsetof(4);
     }
 
-    VREventDualAnalog(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventDualAnalog} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -81,7 +77,7 @@ public class VREventDualAnalog extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventDualAnalog(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -103,13 +99,13 @@ public class VREventDualAnalog extends Struct {
 
     /** Returns a new {@link VREventDualAnalog} instance for the specified memory address. */
     public static VREventDualAnalog create(long address) {
-        return new VREventDualAnalog(address, null);
+        return wrap(VREventDualAnalog.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventDualAnalog createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventDualAnalog.class, address);
     }
 
     /**
@@ -119,32 +115,34 @@ public class VREventDualAnalog extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventDualAnalog.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventDualAnalog.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return memGetFloat(struct + VREventDualAnalog.X); }
+    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + VREventDualAnalog.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return memGetFloat(struct + VREventDualAnalog.Y); }
+    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + VREventDualAnalog.Y); }
     /** Unsafe version of {@link #transformedX}. */
-    public static float ntransformedX(long struct) { return memGetFloat(struct + VREventDualAnalog.TRANSFORMEDX); }
+    public static float ntransformedX(long struct) { return UNSAFE.getFloat(null, struct + VREventDualAnalog.TRANSFORMEDX); }
     /** Unsafe version of {@link #transformedY}. */
-    public static float ntransformedY(long struct) { return memGetFloat(struct + VREventDualAnalog.TRANSFORMEDY); }
+    public static float ntransformedY(long struct) { return UNSAFE.getFloat(null, struct + VREventDualAnalog.TRANSFORMEDY); }
     /** Unsafe version of {@link #which}. */
-    public static int nwhich(long struct) { return memGetInt(struct + VREventDualAnalog.WHICH); }
+    public static int nwhich(long struct) { return UNSAFE.getInt(null, struct + VREventDualAnalog.WHICH); }
 
     // -----------------------------------
 
     /** An array of {@link VREventDualAnalog} structs. */
     public static class Buffer extends StructBuffer<VREventDualAnalog, Buffer> {
+
+        private static final VREventDualAnalog ELEMENT_FACTORY = VREventDualAnalog.create(-1L);
 
         /**
          * Creates a new {@link VREventDualAnalog.Buffer} instance backed by the specified container.
@@ -173,18 +171,8 @@ public class VREventDualAnalog extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventDualAnalog newInstance(long address) {
-            return new VREventDualAnalog(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventDualAnalog getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x} field. */

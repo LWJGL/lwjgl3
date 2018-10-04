@@ -120,10 +120,6 @@ public class VkViewport extends Struct implements NativeResource {
         MAXDEPTH = layout.offsetof(5);
     }
 
-    VkViewport(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkViewport} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -131,7 +127,7 @@ public class VkViewport extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkViewport(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -198,28 +194,29 @@ public class VkViewport extends Struct implements NativeResource {
 
     /** Returns a new {@link VkViewport} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkViewport malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkViewport.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkViewport} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkViewport calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkViewport.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkViewport} instance allocated with {@link BufferUtils}. */
     public static VkViewport create() {
-        return new VkViewport(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkViewport.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkViewport} instance for the specified memory address. */
     public static VkViewport create(long address) {
-        return new VkViewport(address, null);
+        return wrap(VkViewport.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkViewport createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkViewport.class, address);
     }
 
     /**
@@ -228,7 +225,7 @@ public class VkViewport extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewport.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -237,7 +234,7 @@ public class VkViewport extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewport.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -246,7 +243,8 @@ public class VkViewport extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewport.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -256,13 +254,13 @@ public class VkViewport extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewport.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkViewport.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -283,7 +281,7 @@ public class VkViewport extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkViewport mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkViewport.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -292,7 +290,7 @@ public class VkViewport extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkViewport callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkViewport.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -320,7 +318,7 @@ public class VkViewport extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewport.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -330,41 +328,43 @@ public class VkViewport extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkViewport.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static float nx(long struct) { return memGetFloat(struct + VkViewport.X); }
+    public static float nx(long struct) { return UNSAFE.getFloat(null, struct + VkViewport.X); }
     /** Unsafe version of {@link #y}. */
-    public static float ny(long struct) { return memGetFloat(struct + VkViewport.Y); }
+    public static float ny(long struct) { return UNSAFE.getFloat(null, struct + VkViewport.Y); }
     /** Unsafe version of {@link #width}. */
-    public static float nwidth(long struct) { return memGetFloat(struct + VkViewport.WIDTH); }
+    public static float nwidth(long struct) { return UNSAFE.getFloat(null, struct + VkViewport.WIDTH); }
     /** Unsafe version of {@link #height}. */
-    public static float nheight(long struct) { return memGetFloat(struct + VkViewport.HEIGHT); }
+    public static float nheight(long struct) { return UNSAFE.getFloat(null, struct + VkViewport.HEIGHT); }
     /** Unsafe version of {@link #minDepth}. */
-    public static float nminDepth(long struct) { return memGetFloat(struct + VkViewport.MINDEPTH); }
+    public static float nminDepth(long struct) { return UNSAFE.getFloat(null, struct + VkViewport.MINDEPTH); }
     /** Unsafe version of {@link #maxDepth}. */
-    public static float nmaxDepth(long struct) { return memGetFloat(struct + VkViewport.MAXDEPTH); }
+    public static float nmaxDepth(long struct) { return UNSAFE.getFloat(null, struct + VkViewport.MAXDEPTH); }
 
     /** Unsafe version of {@link #x(float) x}. */
-    public static void nx(long struct, float value) { memPutFloat(struct + VkViewport.X, value); }
+    public static void nx(long struct, float value) { UNSAFE.putFloat(null, struct + VkViewport.X, value); }
     /** Unsafe version of {@link #y(float) y}. */
-    public static void ny(long struct, float value) { memPutFloat(struct + VkViewport.Y, value); }
+    public static void ny(long struct, float value) { UNSAFE.putFloat(null, struct + VkViewport.Y, value); }
     /** Unsafe version of {@link #width(float) width}. */
-    public static void nwidth(long struct, float value) { memPutFloat(struct + VkViewport.WIDTH, value); }
+    public static void nwidth(long struct, float value) { UNSAFE.putFloat(null, struct + VkViewport.WIDTH, value); }
     /** Unsafe version of {@link #height(float) height}. */
-    public static void nheight(long struct, float value) { memPutFloat(struct + VkViewport.HEIGHT, value); }
+    public static void nheight(long struct, float value) { UNSAFE.putFloat(null, struct + VkViewport.HEIGHT, value); }
     /** Unsafe version of {@link #minDepth(float) minDepth}. */
-    public static void nminDepth(long struct, float value) { memPutFloat(struct + VkViewport.MINDEPTH, value); }
+    public static void nminDepth(long struct, float value) { UNSAFE.putFloat(null, struct + VkViewport.MINDEPTH, value); }
     /** Unsafe version of {@link #maxDepth(float) maxDepth}. */
-    public static void nmaxDepth(long struct, float value) { memPutFloat(struct + VkViewport.MAXDEPTH, value); }
+    public static void nmaxDepth(long struct, float value) { UNSAFE.putFloat(null, struct + VkViewport.MAXDEPTH, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkViewport} structs. */
     public static class Buffer extends StructBuffer<VkViewport, Buffer> implements NativeResource {
+
+        private static final VkViewport ELEMENT_FACTORY = VkViewport.create(-1L);
 
         /**
          * Creates a new {@link VkViewport.Buffer} instance backed by the specified container.
@@ -393,18 +393,8 @@ public class VkViewport extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkViewport newInstance(long address) {
-            return new VkViewport(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkViewport getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code x} field. */

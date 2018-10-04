@@ -78,10 +78,6 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
         TIMEZONE_MINUTE = layout.offsetof(8);
     }
 
-    SQL_SS_TIMESTAMPOFFSET_STRUCT(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link SQL_SS_TIMESTAMPOFFSET_STRUCT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -89,7 +85,7 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public SQL_SS_TIMESTAMPOFFSET_STRUCT(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -183,28 +179,29 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
 
     /** Returns a new {@link SQL_SS_TIMESTAMPOFFSET_STRUCT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(SQL_SS_TIMESTAMPOFFSET_STRUCT.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link SQL_SS_TIMESTAMPOFFSET_STRUCT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(SQL_SS_TIMESTAMPOFFSET_STRUCT.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link SQL_SS_TIMESTAMPOFFSET_STRUCT} instance allocated with {@link BufferUtils}. */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT create() {
-        return new SQL_SS_TIMESTAMPOFFSET_STRUCT(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(SQL_SS_TIMESTAMPOFFSET_STRUCT.class, memAddress(container), container);
     }
 
     /** Returns a new {@link SQL_SS_TIMESTAMPOFFSET_STRUCT} instance for the specified memory address. */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT create(long address) {
-        return new SQL_SS_TIMESTAMPOFFSET_STRUCT(address, null);
+        return wrap(SQL_SS_TIMESTAMPOFFSET_STRUCT.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(SQL_SS_TIMESTAMPOFFSET_STRUCT.class, address);
     }
 
     /**
@@ -213,7 +210,7 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -222,7 +219,7 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +228,8 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -241,13 +239,13 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -268,7 +266,7 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(SQL_SS_TIMESTAMPOFFSET_STRUCT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -277,7 +275,7 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(SQL_SS_TIMESTAMPOFFSET_STRUCT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -305,7 +303,7 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -315,53 +313,55 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static SQL_SS_TIMESTAMPOFFSET_STRUCT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #year}. */
-    public static short nyear(long struct) { return memGetShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.YEAR); }
+    public static short nyear(long struct) { return UNSAFE.getShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.YEAR); }
     /** Unsafe version of {@link #month}. */
-    public static short nmonth(long struct) { return memGetShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.MONTH); }
+    public static short nmonth(long struct) { return UNSAFE.getShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.MONTH); }
     /** Unsafe version of {@link #day}. */
-    public static short nday(long struct) { return memGetShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.DAY); }
+    public static short nday(long struct) { return UNSAFE.getShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.DAY); }
     /** Unsafe version of {@link #hour}. */
-    public static short nhour(long struct) { return memGetShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.HOUR); }
+    public static short nhour(long struct) { return UNSAFE.getShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.HOUR); }
     /** Unsafe version of {@link #minute}. */
-    public static short nminute(long struct) { return memGetShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.MINUTE); }
+    public static short nminute(long struct) { return UNSAFE.getShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.MINUTE); }
     /** Unsafe version of {@link #second}. */
-    public static short nsecond(long struct) { return memGetShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.SECOND); }
+    public static short nsecond(long struct) { return UNSAFE.getShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.SECOND); }
     /** Unsafe version of {@link #fraction}. */
-    public static int nfraction(long struct) { return memGetInt(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.FRACTION); }
+    public static int nfraction(long struct) { return UNSAFE.getInt(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.FRACTION); }
     /** Unsafe version of {@link #timezone_hour}. */
-    public static short ntimezone_hour(long struct) { return memGetShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.TIMEZONE_HOUR); }
+    public static short ntimezone_hour(long struct) { return UNSAFE.getShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.TIMEZONE_HOUR); }
     /** Unsafe version of {@link #timezone_minute}. */
-    public static short ntimezone_minute(long struct) { return memGetShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.TIMEZONE_MINUTE); }
+    public static short ntimezone_minute(long struct) { return UNSAFE.getShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.TIMEZONE_MINUTE); }
 
     /** Unsafe version of {@link #year(short) year}. */
-    public static void nyear(long struct, short value) { memPutShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.YEAR, value); }
+    public static void nyear(long struct, short value) { UNSAFE.putShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.YEAR, value); }
     /** Unsafe version of {@link #month(short) month}. */
-    public static void nmonth(long struct, short value) { memPutShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.MONTH, value); }
+    public static void nmonth(long struct, short value) { UNSAFE.putShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.MONTH, value); }
     /** Unsafe version of {@link #day(short) day}. */
-    public static void nday(long struct, short value) { memPutShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.DAY, value); }
+    public static void nday(long struct, short value) { UNSAFE.putShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.DAY, value); }
     /** Unsafe version of {@link #hour(short) hour}. */
-    public static void nhour(long struct, short value) { memPutShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.HOUR, value); }
+    public static void nhour(long struct, short value) { UNSAFE.putShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.HOUR, value); }
     /** Unsafe version of {@link #minute(short) minute}. */
-    public static void nminute(long struct, short value) { memPutShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.MINUTE, value); }
+    public static void nminute(long struct, short value) { UNSAFE.putShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.MINUTE, value); }
     /** Unsafe version of {@link #second(short) second}. */
-    public static void nsecond(long struct, short value) { memPutShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.SECOND, value); }
+    public static void nsecond(long struct, short value) { UNSAFE.putShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.SECOND, value); }
     /** Unsafe version of {@link #fraction(int) fraction}. */
-    public static void nfraction(long struct, int value) { memPutInt(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.FRACTION, value); }
+    public static void nfraction(long struct, int value) { UNSAFE.putInt(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.FRACTION, value); }
     /** Unsafe version of {@link #timezone_hour(short) timezone_hour}. */
-    public static void ntimezone_hour(long struct, short value) { memPutShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.TIMEZONE_HOUR, value); }
+    public static void ntimezone_hour(long struct, short value) { UNSAFE.putShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.TIMEZONE_HOUR, value); }
     /** Unsafe version of {@link #timezone_minute(short) timezone_minute}. */
-    public static void ntimezone_minute(long struct, short value) { memPutShort(struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.TIMEZONE_MINUTE, value); }
+    public static void ntimezone_minute(long struct, short value) { UNSAFE.putShort(null, struct + SQL_SS_TIMESTAMPOFFSET_STRUCT.TIMEZONE_MINUTE, value); }
 
     // -----------------------------------
 
     /** An array of {@link SQL_SS_TIMESTAMPOFFSET_STRUCT} structs. */
     public static class Buffer extends StructBuffer<SQL_SS_TIMESTAMPOFFSET_STRUCT, Buffer> implements NativeResource {
+
+        private static final SQL_SS_TIMESTAMPOFFSET_STRUCT ELEMENT_FACTORY = SQL_SS_TIMESTAMPOFFSET_STRUCT.create(-1L);
 
         /**
          * Creates a new {@link SQL_SS_TIMESTAMPOFFSET_STRUCT.Buffer} instance backed by the specified container.
@@ -390,18 +390,8 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected SQL_SS_TIMESTAMPOFFSET_STRUCT newInstance(long address) {
-            return new SQL_SS_TIMESTAMPOFFSET_STRUCT(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected SQL_SS_TIMESTAMPOFFSET_STRUCT getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code year} field. */

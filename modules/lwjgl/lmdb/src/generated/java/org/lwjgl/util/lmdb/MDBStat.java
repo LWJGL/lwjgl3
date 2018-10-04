@@ -80,10 +80,6 @@ public class MDBStat extends Struct implements NativeResource {
         MS_ENTRIES = layout.offsetof(5);
     }
 
-    MDBStat(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link MDBStat} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -91,7 +87,7 @@ public class MDBStat extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public MDBStat(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -120,28 +116,29 @@ public class MDBStat extends Struct implements NativeResource {
 
     /** Returns a new {@link MDBStat} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static MDBStat malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(MDBStat.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link MDBStat} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static MDBStat calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(MDBStat.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link MDBStat} instance allocated with {@link BufferUtils}. */
     public static MDBStat create() {
-        return new MDBStat(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(MDBStat.class, memAddress(container), container);
     }
 
     /** Returns a new {@link MDBStat} instance for the specified memory address. */
     public static MDBStat create(long address) {
-        return new MDBStat(address, null);
+        return wrap(MDBStat.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static MDBStat createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(MDBStat.class, address);
     }
 
     /**
@@ -150,7 +147,7 @@ public class MDBStat extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MDBStat.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -159,7 +156,7 @@ public class MDBStat extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MDBStat.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -168,7 +165,8 @@ public class MDBStat extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MDBStat.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -178,13 +176,13 @@ public class MDBStat extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MDBStat.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static MDBStat.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -205,7 +203,7 @@ public class MDBStat extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static MDBStat mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(MDBStat.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -214,7 +212,7 @@ public class MDBStat extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static MDBStat callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(MDBStat.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -242,7 +240,7 @@ public class MDBStat extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MDBStat.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -252,15 +250,15 @@ public class MDBStat extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static MDBStat.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #ms_psize}. */
-    public static int nms_psize(long struct) { return memGetInt(struct + MDBStat.MS_PSIZE); }
+    public static int nms_psize(long struct) { return UNSAFE.getInt(null, struct + MDBStat.MS_PSIZE); }
     /** Unsafe version of {@link #ms_depth}. */
-    public static int nms_depth(long struct) { return memGetInt(struct + MDBStat.MS_DEPTH); }
+    public static int nms_depth(long struct) { return UNSAFE.getInt(null, struct + MDBStat.MS_DEPTH); }
     /** Unsafe version of {@link #ms_branch_pages}. */
     public static long nms_branch_pages(long struct) { return memGetAddress(struct + MDBStat.MS_BRANCH_PAGES); }
     /** Unsafe version of {@link #ms_leaf_pages}. */
@@ -274,6 +272,8 @@ public class MDBStat extends Struct implements NativeResource {
 
     /** An array of {@link MDBStat} structs. */
     public static class Buffer extends StructBuffer<MDBStat, Buffer> implements NativeResource {
+
+        private static final MDBStat ELEMENT_FACTORY = MDBStat.create(-1L);
 
         /**
          * Creates a new {@link MDBStat.Buffer} instance backed by the specified container.
@@ -302,18 +302,8 @@ public class MDBStat extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected MDBStat newInstance(long address) {
-            return new MDBStat(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected MDBStat getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code ms_psize} field. */

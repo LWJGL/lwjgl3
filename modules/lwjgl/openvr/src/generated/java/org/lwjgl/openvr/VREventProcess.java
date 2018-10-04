@@ -55,10 +55,6 @@ public class VREventProcess extends Struct {
         BFORCED = layout.offsetof(2);
     }
 
-    VREventProcess(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VREventProcess} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -66,7 +62,7 @@ public class VREventProcess extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VREventProcess(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -86,13 +82,13 @@ public class VREventProcess extends Struct {
 
     /** Returns a new {@link VREventProcess} instance for the specified memory address. */
     public static VREventProcess create(long address) {
-        return new VREventProcess(address, null);
+        return wrap(VREventProcess.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventProcess createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VREventProcess.class, address);
     }
 
     /**
@@ -102,28 +98,30 @@ public class VREventProcess extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventProcess.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventProcess.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #pid}. */
-    public static int npid(long struct) { return memGetInt(struct + VREventProcess.PID); }
+    public static int npid(long struct) { return UNSAFE.getInt(null, struct + VREventProcess.PID); }
     /** Unsafe version of {@link #oldPid}. */
-    public static int noldPid(long struct) { return memGetInt(struct + VREventProcess.OLDPID); }
+    public static int noldPid(long struct) { return UNSAFE.getInt(null, struct + VREventProcess.OLDPID); }
     /** Unsafe version of {@link #bForced}. */
-    public static boolean nbForced(long struct) { return memGetByte(struct + VREventProcess.BFORCED) != 0; }
+    public static boolean nbForced(long struct) { return UNSAFE.getByte(null, struct + VREventProcess.BFORCED) != 0; }
 
     // -----------------------------------
 
     /** An array of {@link VREventProcess} structs. */
     public static class Buffer extends StructBuffer<VREventProcess, Buffer> {
+
+        private static final VREventProcess ELEMENT_FACTORY = VREventProcess.create(-1L);
 
         /**
          * Creates a new {@link VREventProcess.Buffer} instance backed by the specified container.
@@ -152,18 +150,8 @@ public class VREventProcess extends Struct {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VREventProcess newInstance(long address) {
-            return new VREventProcess(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VREventProcess getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code pid} field. */

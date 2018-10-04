@@ -121,10 +121,6 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
         BASEPIPELINEINDEX = layout.offsetof(9);
     }
 
-    VkRaytracingPipelineCreateInfoNVX(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkRaytracingPipelineCreateInfoNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -132,7 +128,7 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkRaytracingPipelineCreateInfoNVX(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -233,28 +229,29 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
 
     /** Returns a new {@link VkRaytracingPipelineCreateInfoNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkRaytracingPipelineCreateInfoNVX malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkRaytracingPipelineCreateInfoNVX.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkRaytracingPipelineCreateInfoNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkRaytracingPipelineCreateInfoNVX calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkRaytracingPipelineCreateInfoNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkRaytracingPipelineCreateInfoNVX} instance allocated with {@link BufferUtils}. */
     public static VkRaytracingPipelineCreateInfoNVX create() {
-        return new VkRaytracingPipelineCreateInfoNVX(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkRaytracingPipelineCreateInfoNVX.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkRaytracingPipelineCreateInfoNVX} instance for the specified memory address. */
     public static VkRaytracingPipelineCreateInfoNVX create(long address) {
-        return new VkRaytracingPipelineCreateInfoNVX(address, null);
+        return wrap(VkRaytracingPipelineCreateInfoNVX.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkRaytracingPipelineCreateInfoNVX createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkRaytracingPipelineCreateInfoNVX.class, address);
     }
 
     /**
@@ -263,7 +260,7 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkRaytracingPipelineCreateInfoNVX.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -272,7 +269,7 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkRaytracingPipelineCreateInfoNVX.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -281,7 +278,8 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkRaytracingPipelineCreateInfoNVX.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -291,13 +289,13 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkRaytracingPipelineCreateInfoNVX.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkRaytracingPipelineCreateInfoNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -318,7 +316,7 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkRaytracingPipelineCreateInfoNVX mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkRaytracingPipelineCreateInfoNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -327,7 +325,7 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkRaytracingPipelineCreateInfoNVX callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkRaytracingPipelineCreateInfoNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -355,7 +353,7 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkRaytracingPipelineCreateInfoNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -365,52 +363,52 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkRaytracingPipelineCreateInfoNVX.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkRaytracingPipelineCreateInfoNVX.STYPE); }
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRaytracingPipelineCreateInfoNVX.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkRaytracingPipelineCreateInfoNVX.PNEXT); }
     /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return memGetInt(struct + VkRaytracingPipelineCreateInfoNVX.FLAGS); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkRaytracingPipelineCreateInfoNVX.FLAGS); }
     /** Unsafe version of {@link #stageCount}. */
-    public static int nstageCount(long struct) { return memGetInt(struct + VkRaytracingPipelineCreateInfoNVX.STAGECOUNT); }
+    public static int nstageCount(long struct) { return UNSAFE.getInt(null, struct + VkRaytracingPipelineCreateInfoNVX.STAGECOUNT); }
     /** Unsafe version of {@link #pStages}. */
     public static VkPipelineShaderStageCreateInfo.Buffer npStages(long struct) { return VkPipelineShaderStageCreateInfo.create(memGetAddress(struct + VkRaytracingPipelineCreateInfoNVX.PSTAGES), nstageCount(struct)); }
     /** Unsafe version of {@link #pGroupNumbers() pGroupNumbers}. */
     public static IntBuffer npGroupNumbers(long struct) { return memIntBuffer(memGetAddress(struct + VkRaytracingPipelineCreateInfoNVX.PGROUPNUMBERS), nstageCount(struct)); }
     /** Unsafe version of {@link #maxRecursionDepth}. */
-    public static int nmaxRecursionDepth(long struct) { return memGetInt(struct + VkRaytracingPipelineCreateInfoNVX.MAXRECURSIONDEPTH); }
+    public static int nmaxRecursionDepth(long struct) { return UNSAFE.getInt(null, struct + VkRaytracingPipelineCreateInfoNVX.MAXRECURSIONDEPTH); }
     /** Unsafe version of {@link #layout}. */
-    public static long nlayout(long struct) { return memGetLong(struct + VkRaytracingPipelineCreateInfoNVX.LAYOUT); }
+    public static long nlayout(long struct) { return UNSAFE.getLong(null, struct + VkRaytracingPipelineCreateInfoNVX.LAYOUT); }
     /** Unsafe version of {@link #basePipelineHandle}. */
-    public static long nbasePipelineHandle(long struct) { return memGetLong(struct + VkRaytracingPipelineCreateInfoNVX.BASEPIPELINEHANDLE); }
+    public static long nbasePipelineHandle(long struct) { return UNSAFE.getLong(null, struct + VkRaytracingPipelineCreateInfoNVX.BASEPIPELINEHANDLE); }
     /** Unsafe version of {@link #basePipelineIndex}. */
-    public static int nbasePipelineIndex(long struct) { return memGetInt(struct + VkRaytracingPipelineCreateInfoNVX.BASEPIPELINEINDEX); }
+    public static int nbasePipelineIndex(long struct) { return UNSAFE.getInt(null, struct + VkRaytracingPipelineCreateInfoNVX.BASEPIPELINEINDEX); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkRaytracingPipelineCreateInfoNVX.STYPE, value); }
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRaytracingPipelineCreateInfoNVX.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRaytracingPipelineCreateInfoNVX.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { memPutInt(struct + VkRaytracingPipelineCreateInfoNVX.FLAGS, value); }
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkRaytracingPipelineCreateInfoNVX.FLAGS, value); }
     /** Sets the specified value to the {@code stageCount} field of the specified {@code struct}. */
-    public static void nstageCount(long struct, int value) { memPutInt(struct + VkRaytracingPipelineCreateInfoNVX.STAGECOUNT, value); }
+    public static void nstageCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRaytracingPipelineCreateInfoNVX.STAGECOUNT, value); }
     /** Unsafe version of {@link #pStages(VkPipelineShaderStageCreateInfo.Buffer) pStages}. */
     public static void npStages(long struct, VkPipelineShaderStageCreateInfo.Buffer value) { memPutAddress(struct + VkRaytracingPipelineCreateInfoNVX.PSTAGES, value.address()); }
     /** Unsafe version of {@link #pGroupNumbers(IntBuffer) pGroupNumbers}. */
     public static void npGroupNumbers(long struct, IntBuffer value) { memPutAddress(struct + VkRaytracingPipelineCreateInfoNVX.PGROUPNUMBERS, memAddress(value)); }
     /** Unsafe version of {@link #maxRecursionDepth(int) maxRecursionDepth}. */
-    public static void nmaxRecursionDepth(long struct, int value) { memPutInt(struct + VkRaytracingPipelineCreateInfoNVX.MAXRECURSIONDEPTH, value); }
+    public static void nmaxRecursionDepth(long struct, int value) { UNSAFE.putInt(null, struct + VkRaytracingPipelineCreateInfoNVX.MAXRECURSIONDEPTH, value); }
     /** Unsafe version of {@link #layout(long) layout}. */
-    public static void nlayout(long struct, long value) { memPutLong(struct + VkRaytracingPipelineCreateInfoNVX.LAYOUT, value); }
+    public static void nlayout(long struct, long value) { UNSAFE.putLong(null, struct + VkRaytracingPipelineCreateInfoNVX.LAYOUT, value); }
     /** Unsafe version of {@link #basePipelineHandle(long) basePipelineHandle}. */
-    public static void nbasePipelineHandle(long struct, long value) { memPutLong(struct + VkRaytracingPipelineCreateInfoNVX.BASEPIPELINEHANDLE, value); }
+    public static void nbasePipelineHandle(long struct, long value) { UNSAFE.putLong(null, struct + VkRaytracingPipelineCreateInfoNVX.BASEPIPELINEHANDLE, value); }
     /** Unsafe version of {@link #basePipelineIndex(int) basePipelineIndex}. */
-    public static void nbasePipelineIndex(long struct, int value) { memPutInt(struct + VkRaytracingPipelineCreateInfoNVX.BASEPIPELINEINDEX, value); }
+    public static void nbasePipelineIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkRaytracingPipelineCreateInfoNVX.BASEPIPELINEINDEX, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -442,6 +440,8 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
     /** An array of {@link VkRaytracingPipelineCreateInfoNVX} structs. */
     public static class Buffer extends StructBuffer<VkRaytracingPipelineCreateInfoNVX, Buffer> implements NativeResource {
 
+        private static final VkRaytracingPipelineCreateInfoNVX ELEMENT_FACTORY = VkRaytracingPipelineCreateInfoNVX.create(-1L);
+
         /**
          * Creates a new {@link VkRaytracingPipelineCreateInfoNVX.Buffer} instance backed by the specified container.
          *
@@ -469,18 +469,8 @@ public class VkRaytracingPipelineCreateInfoNVX extends Struct implements NativeR
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkRaytracingPipelineCreateInfoNVX newInstance(long address) {
-            return new VkRaytracingPipelineCreateInfoNVX(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkRaytracingPipelineCreateInfoNVX getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code sType} field. */

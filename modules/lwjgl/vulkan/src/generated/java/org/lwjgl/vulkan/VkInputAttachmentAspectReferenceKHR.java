@@ -29,10 +29,6 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspectReference {
 
-    VkInputAttachmentAspectReferenceKHR(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkInputAttachmentAspectReferenceKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -40,7 +36,7 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkInputAttachmentAspectReferenceKHR(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
     /** Sets the specified value to the {@code subpass} field. */
@@ -83,28 +79,29 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
 
     /** Returns a new {@link VkInputAttachmentAspectReferenceKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkInputAttachmentAspectReferenceKHR malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkInputAttachmentAspectReferenceKHR.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkInputAttachmentAspectReferenceKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkInputAttachmentAspectReferenceKHR calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkInputAttachmentAspectReferenceKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkInputAttachmentAspectReferenceKHR} instance allocated with {@link BufferUtils}. */
     public static VkInputAttachmentAspectReferenceKHR create() {
-        return new VkInputAttachmentAspectReferenceKHR(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkInputAttachmentAspectReferenceKHR.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkInputAttachmentAspectReferenceKHR} instance for the specified memory address. */
     public static VkInputAttachmentAspectReferenceKHR create(long address) {
-        return new VkInputAttachmentAspectReferenceKHR(address, null);
+        return wrap(VkInputAttachmentAspectReferenceKHR.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkInputAttachmentAspectReferenceKHR createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkInputAttachmentAspectReferenceKHR.class, address);
     }
 
     /**
@@ -113,7 +110,7 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
      * @param capacity the buffer capacity
      */
     public static VkInputAttachmentAspectReferenceKHR.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -122,7 +119,7 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
      * @param capacity the buffer capacity
      */
     public static VkInputAttachmentAspectReferenceKHR.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -131,7 +128,8 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
      * @param capacity the buffer capacity
      */
     public static VkInputAttachmentAspectReferenceKHR.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -141,13 +139,13 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
      * @param capacity the buffer capacity
      */
     public static VkInputAttachmentAspectReferenceKHR.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkInputAttachmentAspectReferenceKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -168,7 +166,7 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
      * @param stack the stack from which to allocate
      */
     public static VkInputAttachmentAspectReferenceKHR mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkInputAttachmentAspectReferenceKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -177,7 +175,7 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
      * @param stack the stack from which to allocate
      */
     public static VkInputAttachmentAspectReferenceKHR callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkInputAttachmentAspectReferenceKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -205,7 +203,7 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
      * @param capacity the buffer capacity
      */
     public static VkInputAttachmentAspectReferenceKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -215,13 +213,15 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
      * @param capacity the buffer capacity
      */
     public static VkInputAttachmentAspectReferenceKHR.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** An array of {@link VkInputAttachmentAspectReferenceKHR} structs. */
     public static class Buffer extends VkInputAttachmentAspectReference.Buffer {
+
+        private static final VkInputAttachmentAspectReferenceKHR ELEMENT_FACTORY = VkInputAttachmentAspectReferenceKHR.create(-1L);
 
         /**
          * Creates a new {@link VkInputAttachmentAspectReferenceKHR.Buffer} instance backed by the specified container.
@@ -250,13 +250,8 @@ public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspect
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkInputAttachmentAspectReferenceKHR newInstance(long address) {
-            return new VkInputAttachmentAspectReferenceKHR(address, container);
+        protected VkInputAttachmentAspectReferenceKHR getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Sets the specified value to the {@code subpass} field. */

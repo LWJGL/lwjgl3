@@ -97,10 +97,6 @@ public class VkStencilOpState extends Struct implements NativeResource {
         REFERENCE = layout.offsetof(6);
     }
 
-    VkStencilOpState(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkStencilOpState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -108,7 +104,7 @@ public class VkStencilOpState extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkStencilOpState(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -188,28 +184,29 @@ public class VkStencilOpState extends Struct implements NativeResource {
 
     /** Returns a new {@link VkStencilOpState} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkStencilOpState malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkStencilOpState.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkStencilOpState} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkStencilOpState calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkStencilOpState.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkStencilOpState} instance allocated with {@link BufferUtils}. */
     public static VkStencilOpState create() {
-        return new VkStencilOpState(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkStencilOpState.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkStencilOpState} instance for the specified memory address. */
     public static VkStencilOpState create(long address) {
-        return new VkStencilOpState(address, null);
+        return wrap(VkStencilOpState.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkStencilOpState createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkStencilOpState.class, address);
     }
 
     /**
@@ -218,7 +215,7 @@ public class VkStencilOpState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkStencilOpState.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -227,7 +224,7 @@ public class VkStencilOpState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkStencilOpState.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -236,7 +233,8 @@ public class VkStencilOpState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkStencilOpState.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -246,13 +244,13 @@ public class VkStencilOpState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkStencilOpState.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkStencilOpState.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -273,7 +271,7 @@ public class VkStencilOpState extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkStencilOpState mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkStencilOpState.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -282,7 +280,7 @@ public class VkStencilOpState extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkStencilOpState callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkStencilOpState.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -310,7 +308,7 @@ public class VkStencilOpState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkStencilOpState.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -320,45 +318,47 @@ public class VkStencilOpState extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkStencilOpState.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #failOp}. */
-    public static int nfailOp(long struct) { return memGetInt(struct + VkStencilOpState.FAILOP); }
+    public static int nfailOp(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.FAILOP); }
     /** Unsafe version of {@link #passOp}. */
-    public static int npassOp(long struct) { return memGetInt(struct + VkStencilOpState.PASSOP); }
+    public static int npassOp(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.PASSOP); }
     /** Unsafe version of {@link #depthFailOp}. */
-    public static int ndepthFailOp(long struct) { return memGetInt(struct + VkStencilOpState.DEPTHFAILOP); }
+    public static int ndepthFailOp(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.DEPTHFAILOP); }
     /** Unsafe version of {@link #compareOp}. */
-    public static int ncompareOp(long struct) { return memGetInt(struct + VkStencilOpState.COMPAREOP); }
+    public static int ncompareOp(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.COMPAREOP); }
     /** Unsafe version of {@link #compareMask}. */
-    public static int ncompareMask(long struct) { return memGetInt(struct + VkStencilOpState.COMPAREMASK); }
+    public static int ncompareMask(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.COMPAREMASK); }
     /** Unsafe version of {@link #writeMask}. */
-    public static int nwriteMask(long struct) { return memGetInt(struct + VkStencilOpState.WRITEMASK); }
+    public static int nwriteMask(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.WRITEMASK); }
     /** Unsafe version of {@link #reference}. */
-    public static int nreference(long struct) { return memGetInt(struct + VkStencilOpState.REFERENCE); }
+    public static int nreference(long struct) { return UNSAFE.getInt(null, struct + VkStencilOpState.REFERENCE); }
 
     /** Unsafe version of {@link #failOp(int) failOp}. */
-    public static void nfailOp(long struct, int value) { memPutInt(struct + VkStencilOpState.FAILOP, value); }
+    public static void nfailOp(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.FAILOP, value); }
     /** Unsafe version of {@link #passOp(int) passOp}. */
-    public static void npassOp(long struct, int value) { memPutInt(struct + VkStencilOpState.PASSOP, value); }
+    public static void npassOp(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.PASSOP, value); }
     /** Unsafe version of {@link #depthFailOp(int) depthFailOp}. */
-    public static void ndepthFailOp(long struct, int value) { memPutInt(struct + VkStencilOpState.DEPTHFAILOP, value); }
+    public static void ndepthFailOp(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.DEPTHFAILOP, value); }
     /** Unsafe version of {@link #compareOp(int) compareOp}. */
-    public static void ncompareOp(long struct, int value) { memPutInt(struct + VkStencilOpState.COMPAREOP, value); }
+    public static void ncompareOp(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.COMPAREOP, value); }
     /** Unsafe version of {@link #compareMask(int) compareMask}. */
-    public static void ncompareMask(long struct, int value) { memPutInt(struct + VkStencilOpState.COMPAREMASK, value); }
+    public static void ncompareMask(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.COMPAREMASK, value); }
     /** Unsafe version of {@link #writeMask(int) writeMask}. */
-    public static void nwriteMask(long struct, int value) { memPutInt(struct + VkStencilOpState.WRITEMASK, value); }
+    public static void nwriteMask(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.WRITEMASK, value); }
     /** Unsafe version of {@link #reference(int) reference}. */
-    public static void nreference(long struct, int value) { memPutInt(struct + VkStencilOpState.REFERENCE, value); }
+    public static void nreference(long struct, int value) { UNSAFE.putInt(null, struct + VkStencilOpState.REFERENCE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkStencilOpState} structs. */
     public static class Buffer extends StructBuffer<VkStencilOpState, Buffer> implements NativeResource {
+
+        private static final VkStencilOpState ELEMENT_FACTORY = VkStencilOpState.create(-1L);
 
         /**
          * Creates a new {@link VkStencilOpState.Buffer} instance backed by the specified container.
@@ -387,18 +387,8 @@ public class VkStencilOpState extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkStencilOpState newInstance(long address) {
-            return new VkStencilOpState(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkStencilOpState getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code failOp} field. */

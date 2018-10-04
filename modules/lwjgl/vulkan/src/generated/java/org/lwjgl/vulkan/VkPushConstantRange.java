@@ -85,10 +85,6 @@ public class VkPushConstantRange extends Struct implements NativeResource {
         SIZE = layout.offsetof(2);
     }
 
-    VkPushConstantRange(long address, @Nullable ByteBuffer container) {
-        super(address, container);
-    }
-
     /**
      * Creates a {@link VkPushConstantRange} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -96,7 +92,7 @@ public class VkPushConstantRange extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPushConstantRange(ByteBuffer container) {
-        this(memAddress(container), __checkContainer(container, SIZEOF));
+        super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
     @Override
@@ -148,28 +144,29 @@ public class VkPushConstantRange extends Struct implements NativeResource {
 
     /** Returns a new {@link VkPushConstantRange} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPushConstantRange malloc() {
-        return create(nmemAllocChecked(SIZEOF));
+        return wrap(VkPushConstantRange.class, nmemAllocChecked(SIZEOF));
     }
 
     /** Returns a new {@link VkPushConstantRange} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPushConstantRange calloc() {
-        return create(nmemCallocChecked(1, SIZEOF));
+        return wrap(VkPushConstantRange.class, nmemCallocChecked(1, SIZEOF));
     }
 
     /** Returns a new {@link VkPushConstantRange} instance allocated with {@link BufferUtils}. */
     public static VkPushConstantRange create() {
-        return new VkPushConstantRange(BufferUtils.createByteBuffer(SIZEOF));
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPushConstantRange.class, memAddress(container), container);
     }
 
     /** Returns a new {@link VkPushConstantRange} instance for the specified memory address. */
     public static VkPushConstantRange create(long address) {
-        return new VkPushConstantRange(address, null);
+        return wrap(VkPushConstantRange.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPushConstantRange createSafe(long address) {
-        return address == NULL ? null : create(address);
+        return address == NULL ? null : wrap(VkPushConstantRange.class, address);
     }
 
     /**
@@ -178,7 +175,7 @@ public class VkPushConstantRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPushConstantRange.Buffer malloc(int capacity) {
-        return create(__malloc(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -187,7 +184,7 @@ public class VkPushConstantRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPushConstantRange.Buffer calloc(int capacity) {
-        return create(nmemCallocChecked(capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -196,7 +193,8 @@ public class VkPushConstantRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPushConstantRange.Buffer create(int capacity) {
-        return new Buffer(__create(capacity, SIZEOF));
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -206,13 +204,13 @@ public class VkPushConstantRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPushConstantRange.Buffer create(long address, int capacity) {
-        return new Buffer(address, capacity);
+        return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPushConstantRange.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : create(address, capacity);
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     // -----------------------------------
@@ -233,7 +231,7 @@ public class VkPushConstantRange extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkPushConstantRange mallocStack(MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, SIZEOF));
+        return wrap(VkPushConstantRange.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
@@ -242,7 +240,7 @@ public class VkPushConstantRange extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkPushConstantRange callocStack(MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return wrap(VkPushConstantRange.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
@@ -270,7 +268,7 @@ public class VkPushConstantRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPushConstantRange.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return create(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -280,29 +278,31 @@ public class VkPushConstantRange extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPushConstantRange.Buffer callocStack(int capacity, MemoryStack stack) {
-        return create(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
     /** Unsafe version of {@link #stageFlags}. */
-    public static int nstageFlags(long struct) { return memGetInt(struct + VkPushConstantRange.STAGEFLAGS); }
+    public static int nstageFlags(long struct) { return UNSAFE.getInt(null, struct + VkPushConstantRange.STAGEFLAGS); }
     /** Unsafe version of {@link #offset}. */
-    public static int noffset(long struct) { return memGetInt(struct + VkPushConstantRange.OFFSET); }
+    public static int noffset(long struct) { return UNSAFE.getInt(null, struct + VkPushConstantRange.OFFSET); }
     /** Unsafe version of {@link #size}. */
-    public static int nsize(long struct) { return memGetInt(struct + VkPushConstantRange.SIZE); }
+    public static int nsize(long struct) { return UNSAFE.getInt(null, struct + VkPushConstantRange.SIZE); }
 
     /** Unsafe version of {@link #stageFlags(int) stageFlags}. */
-    public static void nstageFlags(long struct, int value) { memPutInt(struct + VkPushConstantRange.STAGEFLAGS, value); }
+    public static void nstageFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkPushConstantRange.STAGEFLAGS, value); }
     /** Unsafe version of {@link #offset(int) offset}. */
-    public static void noffset(long struct, int value) { memPutInt(struct + VkPushConstantRange.OFFSET, value); }
+    public static void noffset(long struct, int value) { UNSAFE.putInt(null, struct + VkPushConstantRange.OFFSET, value); }
     /** Unsafe version of {@link #size(int) size}. */
-    public static void nsize(long struct, int value) { memPutInt(struct + VkPushConstantRange.SIZE, value); }
+    public static void nsize(long struct, int value) { UNSAFE.putInt(null, struct + VkPushConstantRange.SIZE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPushConstantRange} structs. */
     public static class Buffer extends StructBuffer<VkPushConstantRange, Buffer> implements NativeResource {
+
+        private static final VkPushConstantRange ELEMENT_FACTORY = VkPushConstantRange.create(-1L);
 
         /**
          * Creates a new {@link VkPushConstantRange.Buffer} instance backed by the specified container.
@@ -331,18 +331,8 @@ public class VkPushConstantRange extends Struct implements NativeResource {
         }
 
         @Override
-        protected Buffer newBufferInstance(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
-            return new Buffer(address, container, mark, pos, lim, cap);
-        }
-
-        @Override
-        protected VkPushConstantRange newInstance(long address) {
-            return new VkPushConstantRange(address, container);
-        }
-
-        @Override
-        public int sizeof() {
-            return SIZEOF;
+        protected VkPushConstantRange getElementFactory() {
+            return ELEMENT_FACTORY;
         }
 
         /** Returns the value of the {@code stageFlags} field. */
