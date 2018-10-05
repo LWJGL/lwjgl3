@@ -335,9 +335,6 @@
                 <pathelement path="${module.lwjgl}/core/src/generated/java/"/>
             </src>
             <include name="**"/>
-
-            <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
-            <compilerarg value="-XDignore.symbol.file=true"/>
         </lwjgl.javac>
 
         <mkdir dir="${bin.lwjgl}/core/META-INF/versions/9" if:set="jdk9"/>
@@ -615,6 +612,7 @@
 
             <!-- Benchmarks -->
             <include name="org/lwjgl/jmh/**"/>
+            <exclude name="org/lwjgl/jmh/VarHandle*" unless:set="jdk9"/>
         </lwjgl.javac>
     </target>
 
@@ -721,7 +719,7 @@
                 <pathelement path="${lib}/java/jsr305.jar"/>
             </classpath>
 
-            <arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
+            <arg value="-XDignore.symbol.file"/> <!-- Suppresses internal API (e.g. Unsafe) usage warnings -->
 
             <arg line="-Xdoclint:html,reference,syntax"/>
             <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>
@@ -955,7 +953,7 @@
                 <fileset dir="${module.lwjgl}/@{name}/src/main/java" includes="**" if:set="hasMain"/>
                 <fileset dir="${module.lwjgl}/@{name}/src/generated/java" includes="**"/>
 
-                <arg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
+                <arg value="-XDignore.symbol.file"/> <!-- Suppresses internal API (e.g. Unsafe) usage warnings -->
 
                 <arg line="-Xdoclint:html,reference,syntax"/>
                 <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>

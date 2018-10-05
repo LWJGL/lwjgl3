@@ -141,6 +141,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <javac sourcepath="" debug="yes" source="8" target="8" encoding="UTF-8">
             <compilerarg line='--boot-class-path "${env.JAVA8_HOME}/jre/lib/rt.jar"' if:set="set-boot-class-path"/>
             <compilerarg value="-Xlint:all"/>
+            <compilerarg value="-XDignore.symbol.file"/> <!-- Suppresses internal API (e.g. Unsafe) usage warnings -->
         </javac>
     </presetdef>
 
@@ -148,6 +149,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <javac sourcepath="" debug="yes" encoding="UTF-8">
             <compilerarg line="--release 9"/>
             <compilerarg value="-Xlint:all"/>
+            <compilerarg value="-XDignore.symbol.file"/>
         </javac>
     </presetdef>
 
