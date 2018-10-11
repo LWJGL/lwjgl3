@@ -116,6 +116,8 @@ extern "C" {
 #define TINYEXR_ERROR_UNSUPPORTED_FORMAT (-7)
 #define TINYEXR_ERROR_INVALID_HEADER (-8)
 #define TINYEXR_ERROR_UNSUPPORTED_FEATURE (-9)
+#define TINYEXR_ERROR_CANT_WRITE_FILE (-10)
+#define TINYEXR_ERROR_SERIALZATION_FAILED (-11)
 
 // @note { OpenEXR file format: http://www.openexr.com/openexrfilelayout.pdf }
 
@@ -280,9 +282,11 @@ extern int LoadEXR(float **out_rgba, int *width, int *height,
 // value.
 // Save image as fp32(FLOAT) format when `save_as_fp16` is 0.
 // Use ZIP compression by default.
+// Returns negative value and may set error string in `err` when there's an
+// error
 extern int SaveEXR(const float *data, const int width, const int height,
                    const int components, const int save_as_fp16,
-                   const char *filename);
+                   const char *filename, const char **err);
 
 // Initialize EXRHeader struct
 extern void InitEXRHeader(EXRHeader *exr_header);
@@ -2527,10 +2531,10 @@ tinfl_status tinfl_decompress(tinfl_decompressor *r,
   tinfl_status status = TINFL_STATUS_FAILED;
   mz_uint32 num_bits, dist, counter, num_extra;
   tinfl_bit_buf_t bit_buf;
-  const mz_uint8 *pIn_buf_cur = pIn_buf_next, *const pIn_buf_end =
-                                                  pIn_buf_next + *pIn_buf_size;
-  mz_uint8 *pOut_buf_cur = pOut_buf_next, *const pOut_buf_end =
-                                              pOut_buf_next + *pOut_buf_size;
+  const mz_uint8 *pIn_buf_cur = pIn_buf_next,
+                 *const pIn_buf_end = pIn_buf_next + *pIn_buf_size;
+  mz_uint8 *pOut_buf_cur = pOut_buf_next,
+           *const pOut_buf_end = pOut_buf_next + *pOut_buf_size;
   size_t out_buf_size_mask =
              (decomp_flags & TINFL_FLAG_USING_NON_WRAPPING_OUTPUT_BUF)
                  ? (size_t)-1
@@ -2947,9 +2951,8 @@ void *tinfl_decompress_mem_to_heap(const void *pSrc_buf, size_t src_buf_len,
     tinfl_status status = tinfl_decompress(
         &decomp, (const mz_uint8 *)pSrc_buf + src_buf_ofs, &src_buf_size,
         (mz_uint8 *)pBuf, pBuf ? (mz_uint8 *)pBuf + *pOut_len : NULL,
-        &dst_buf_size,
-        (flags & ~TINFL_FLAG_HAS_MORE_INPUT) |
-            TINFL_FLAG_USING_NON_WRAPPING_OUTPUT_BUF);
+        &dst_buf_size, (flags & ~TINFL_FLAG_HAS_MORE_INPUT) |
+                           TINFL_FLAG_USING_NON_WRAPPING_OUTPUT_BUF);
     if ((status < 0) || (status == TINFL_STATUS_NEEDS_MORE_INPUT)) {
       MZ_FREE(pBuf);
       *pOut_len = 0;
@@ -3002,8 +3005,9 @@ int tinfl_decompress_mem_to_callback(const void *pIn_buf, size_t *pIn_buf_size,
     tinfl_status status =
         tinfl_decompress(&decomp, (const mz_uint8 *)pIn_buf + in_buf_ofs,
                          &in_buf_size, pDict, pDict + dict_ofs, &dst_buf_size,
-                         (flags & ~(TINFL_FLAG_HAS_MORE_INPUT |
-                                    TINFL_FLAG_USING_NON_WRAPPING_OUTPUT_BUF)));
+                         (flags &
+                          ~(TINFL_FLAG_HAS_MORE_INPUT |
+                            TINFL_FLAG_USING_NON_WRAPPING_OUTPUT_BUF)));
     in_buf_ofs += in_buf_size;
     if ((dst_buf_size) &&
         (!(*pPut_buf_func)(pDict + dict_ofs, (int)dst_buf_size, pPut_buf_user)))
@@ -3128,9 +3132,7 @@ static const mz_uint8 s_tdefl_large_dist_extra[128] = {
 
 // Radix sorts tdefl_sym_freq[] array by 16-bit key m_key. Returns ptr to sorted
 // values.
-typedef struct {
-  mz_uint16 m_key, m_sym_index;
-} tdefl_sym_freq;
+typedef struct { mz_uint16 m_key, m_sym_index; } tdefl_sym_freq;
 static tdefl_sym_freq *tdefl_radix_sort_syms(mz_uint num_syms,
                                              tdefl_sym_freq *pSyms0,
                                              tdefl_sym_freq *pSyms1) {
@@ -5274,10 +5276,9 @@ mz_bool mz_zip_reader_file_stat(mz_zip_archive *pZip, mz_uint file_index,
   n = MZ_READ_LE16(p + MZ_ZIP_CDH_COMMENT_LEN_OFS);
   n = MZ_MIN(n, MZ_ZIP_MAX_ARCHIVE_FILE_COMMENT_SIZE - 1);
   pStat->m_comment_size = n;
-  memcpy(pStat->m_comment,
-         p + MZ_ZIP_CENTRAL_DIR_HEADER_SIZE +
-             MZ_READ_LE16(p + MZ_ZIP_CDH_FILENAME_LEN_OFS) +
-             MZ_READ_LE16(p + MZ_ZIP_CDH_EXTRA_LEN_OFS),
+  memcpy(pStat->m_comment, p + MZ_ZIP_CENTRAL_DIR_HEADER_SIZE +
+                               MZ_READ_LE16(p + MZ_ZIP_CDH_FILENAME_LEN_OFS) +
+                               MZ_READ_LE16(p + MZ_ZIP_CDH_EXTRA_LEN_OFS),
          n);
   pStat->m_comment[n] = '\0';
 
@@ -10098,7 +10099,8 @@ static bool DecodePixelData(/* out */ unsigned char **out_images,
             if (line_order == 0) {
               outLine += (size_t(y) + v) * size_t(x_stride);
             } else {
-              outLine += (size_t(height) - 1 - (size_t(y) + v)) * size_t(x_stride);
+              outLine +=
+                  (size_t(height) - 1 - (size_t(y) + v)) * size_t(x_stride);
             }
 
             for (int u = 0; u < width; u++) {
@@ -10116,7 +10118,8 @@ static bool DecodePixelData(/* out */ unsigned char **out_images,
             if (line_order == 0) {
               outLine += (size_t(y) + v) * size_t(x_stride);
             } else {
-              outLine += (size_t(height) - 1 - (size_t(y) + v)) * size_t(x_stride);
+              outLine +=
+                  (size_t(height) - 1 - (size_t(y) + v)) * size_t(x_stride);
             }
 
             if (reinterpret_cast<const unsigned char *>(line_ptr + width) >
@@ -10151,7 +10154,8 @@ static bool DecodePixelData(/* out */ unsigned char **out_images,
           if (line_order == 0) {
             outLine += (size_t(y) + v) * size_t(x_stride);
           } else {
-            outLine += (size_t(height) - 1 - (size_t(y) + v)) * size_t(x_stride);
+            outLine +=
+                (size_t(height) - 1 - (size_t(y) + v)) * size_t(x_stride);
           }
 
           if (reinterpret_cast<const unsigned char *>(line_ptr + width) >
@@ -10178,7 +10182,8 @@ static bool DecodePixelData(/* out */ unsigned char **out_images,
           if (line_order == 0) {
             outLine += (size_t(y) + v) * size_t(x_stride);
           } else {
-            outLine += (size_t(height) - 1 - (size_t(y) + v)) * size_t(x_stride);
+            outLine +=
+                (size_t(height) - 1 - (size_t(y) + v)) * size_t(x_stride);
           }
 
           for (int u = 0; u < width; u++) {
@@ -11496,7 +11501,7 @@ size_t SaveEXRImageToMemory(const EXRImage *exr_image,
   if (exr_image == NULL || memory_out == NULL ||
       exr_header->compression_type < 0) {
     tinyexr::SetErrorMessage("Invalid argument for SaveEXRImageToMemory", err);
-    return 0;  // @fixme
+    return 0;
   }
 
 #if !TINYEXR_USE_PIZ
@@ -11907,7 +11912,7 @@ size_t SaveEXRImageToMemory(const EXRImage *exr_image,
       unsigned int bufLen =
           8192 + static_cast<unsigned int>(
                      2 * static_cast<unsigned int>(
-                               buf.size()));  // @fixme { compute good bound. }
+                             buf.size()));  // @fixme { compute good bound. }
       std::vector<unsigned char> block(bufLen);
       unsigned int outSize = static_cast<unsigned int>(block.size());
 
@@ -11965,13 +11970,13 @@ size_t SaveEXRImageToMemory(const EXRImage *exr_image,
     }
   }  // omp parallel
 
-  for ( size_t i = 0; i < static_cast<size_t>(num_blocks); i++ ) {
-	  offsets[i] = offset;
-	  tinyexr::swap8( reinterpret_cast<tinyexr::tinyexr_uint64 *>(&offsets[i]) );
-	  offset += data_list[i].size();
+  for (size_t i = 0; i < static_cast<size_t>(num_blocks); i++) {
+    offsets[i] = offset;
+    tinyexr::swap8(reinterpret_cast<tinyexr::tinyexr_uint64 *>(&offsets[i]));
+    offset += data_list[i].size();
   }
 
-  size_t totalSize = static_cast<size_t>( offset );
+  size_t totalSize = static_cast<size_t>(offset);
   {
     memory.insert(
         memory.end(), reinterpret_cast<unsigned char *>(&offsets.at(0)),
@@ -11984,13 +11989,13 @@ size_t SaveEXRImageToMemory(const EXRImage *exr_image,
     return 0;
   }
 
-  (*memory_out) = static_cast<unsigned char *>(malloc( totalSize ));
-  memcpy( (*memory_out), &memory.at( 0 ), memory.size() );
+  (*memory_out) = static_cast<unsigned char *>(malloc(totalSize));
+  memcpy((*memory_out), &memory.at(0), memory.size());
   unsigned char *memory_ptr = *memory_out + memory.size();
 
-  for ( size_t i = 0; i < static_cast<size_t>(num_blocks); i++ ) {
-	  memcpy( memory_ptr, &data_list[i].at(0), data_list[i].size() );
-	  memory_ptr += data_list[i].size();
+  for (size_t i = 0; i < static_cast<size_t>(num_blocks); i++) {
+    memcpy(memory_ptr, &data_list[i].at(0), data_list[i].size());
+    memory_ptr += data_list[i].size();
   }
 
   return totalSize;  // OK
@@ -12008,7 +12013,7 @@ int SaveEXRImageToFile(const EXRImage *exr_image, const EXRHeader *exr_header,
   if (exr_header->compression_type == TINYEXR_COMPRESSIONTYPE_PIZ) {
     tinyexr::SetErrorMessage("PIZ compression is not supported in this build",
                              err);
-    return 0;
+    return TINYEXR_ERROR_UNSUPPORTED_FEATURE;
   }
 #endif
 
@@ -12016,7 +12021,7 @@ int SaveEXRImageToFile(const EXRImage *exr_image, const EXRHeader *exr_header,
   if (exr_header->compression_type == TINYEXR_COMPRESSIONTYPE_ZFP) {
     tinyexr::SetErrorMessage("ZFP compression is not supported in this build",
                              err);
-    return 0;
+    return TINYEXR_ERROR_UNSUPPORTED_FEATURE;
   }
 #endif
 
@@ -12028,18 +12033,27 @@ int SaveEXRImageToFile(const EXRImage *exr_image, const EXRHeader *exr_header,
 #endif
   if (!fp) {
     tinyexr::SetErrorMessage("Cannot write a file", err);
-    return TINYEXR_ERROR_CANT_OPEN_FILE;
+    return TINYEXR_ERROR_CANT_WRITE_FILE;
   }
 
   unsigned char *mem = NULL;
   size_t mem_size = SaveEXRImageToMemory(exr_image, exr_header, &mem, err);
+  if (mem_size == 0) {
+    return TINYEXR_ERROR_SERIALZATION_FAILED;
+  }
 
+  size_t written_size = 0;
   if ((mem_size > 0) && mem) {
-    fwrite(mem, 1, mem_size, fp);
+    written_size = fwrite(mem, 1, mem_size, fp);
   }
   free(mem);
 
   fclose(fp);
+
+  if (written_size != mem_size) {
+    tinyexr::SetErrorMessage("Cannot write a file", err);
+    return TINYEXR_ERROR_CANT_WRITE_FILE;
+  }
 
   return TINYEXR_SUCCESS;
 }
@@ -12909,10 +12923,14 @@ int LoadEXRMultipartImageFromFile(EXRImage *exr_images,
 }
 
 int SaveEXR(const float *data, int width, int height, int components,
-            const int save_as_fp16, const char *outfilename) {
+            const int save_as_fp16, const char *outfilename, const char **err) {
   if ((components == 1) || components == 3 || components == 4) {
     // OK
   } else {
+    std::stringstream ss;
+    ss << "Unsupported component value : " << components << std::endl;
+
+    tinyexr::SetErrorMessage(ss.str(), err);
     return TINYEXR_ERROR_INVALID_ARGUMENT;
   }
 
@@ -13031,8 +13049,7 @@ int SaveEXR(const float *data, int width, int height, int components,
     }
   }
 
-  const char *err;
-  int ret = SaveEXRImageToFile(&image, &header, outfilename, &err);
+  int ret = SaveEXRImageToFile(&image, &header, outfilename, err);
   if (ret != TINYEXR_SUCCESS) {
     return ret;
   }

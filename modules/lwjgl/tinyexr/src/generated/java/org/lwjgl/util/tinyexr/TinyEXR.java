@@ -34,7 +34,9 @@ public class TinyEXR {
         TINYEXR_ERROR_CANT_OPEN_FILE       = -6,
         TINYEXR_ERROR_UNSUPPORTED_FORMAT   = -7,
         TINYEXR_ERROR_INVALID_HEADER       = -8,
-        TINYEXR_ERROR_UNSUPPORTED_FEATURE  = -9;
+        TINYEXR_ERROR_UNSUPPORTED_FEATURE  = -9,
+        TINYEXR_ERROR_CANT_WRITE_FILE      = -10,
+        TINYEXR_ERROR_SERIALZATION_FAILED  = -11;
 
     /** Pixel types. */
     public static final int
