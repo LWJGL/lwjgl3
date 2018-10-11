@@ -15,20 +15,22 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to <a target="_blank" href="http://lz4.github.io/lz4/">LZ4</a>, a lossless compression algorithm, providing compression speed at 400 MB/s per core,
+ * Native bindings to <a target="_blank" href="http://lz4.github.io/lz4/">LZ4</a>, a lossless compression algorithm, providing compression speed > 500 MB/s per core,
  * scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on
  * multi-core systems.
  * 
- * <p>Speed can be tuned dynamically, selecting an "acceleration" factor which trades compression ratio for more speed up. On the other end, a high
+ * <p>Speed can be tuned dynamically, selecting an "acceleration" factor which trades compression ratio for faster speed. On the other end, a high
  * compression derivative, {@code LZ4_HC}, is also provided, trading CPU time for improved compression ratio. All versions feature the same decompression
  * speed.</p>
  * 
+ * <p>LZ4 is also compatible with <a target="_blank" href="https://github.com/facebook/{@link zstd#the}-case-for-small-data-compression">dictionary compression</a>, and can ingest
+ * any input file as dictionary, including those created by <a target="_blank" href="https://github.com/facebook/zstd/blob/v1.3.5/programs/zstd.1.{@link md#dictionary}-builder">Zstandard Dictionary Builder</a>. (note: only the final 64KB are used).</p>
+ * 
  * <p>The raw LZ4 block compression format is detailed within <a href="https://github.com/lz4/lz4/blob/dev/doc/lz4_Block_format.md">lz4_Block_format</a>.</p>
  * 
- * <p>To compress an arbitrarily long file or data stream, multiple blocks are required. Organizing these blocks and providing a common header format to
- * handle their content is the purpose of the Frame format, defined into
- * <a href="https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md">lz4_Frame_format</a>. Interoperable versions of LZ4 must respect this frame
- * format.</p>
+ * <p>Arbitrarily long files or data streams are compressed using multiple blocks, for streaming requirements. These blocks are organized into a frame,
+ * defined into <a target="_blank" href="https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md">lz4_Frame_format</a>. Interoperable versions of LZ4 must also respect
+ * the frame format.</p>
  */
 public class LZ4 {
 
@@ -36,7 +38,7 @@ public class LZ4 {
     public static final int
         LZ4_VERSION_MAJOR   = 1,
         LZ4_VERSION_MINOR   = 8,
-        LZ4_VERSION_RELEASE = 2;
+        LZ4_VERSION_RELEASE = 3;
 
     /** Version number. */
     public static final int LZ4_VERSION_NUMBER = (LZ4_VERSION_MAJOR *100*100 + LZ4_VERSION_MINOR *100 + LZ4_VERSION_RELEASE);
@@ -204,7 +206,7 @@ public class LZ4 {
     /**
      * Unsafe version of: {@link #LZ4_compress_destSize compress_destSize}
      *
-     * @param srcSizePtr will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; old value.
+     * @param srcSizePtr will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; input value.
      */
     public static native int nLZ4_compress_destSize(long src, long dst, long srcSizePtr, int targetDstSize);
 
@@ -213,9 +215,9 @@ public class LZ4 {
      * {@code targetDstSize}.
      * 
      * <p>This function either compresses the entire {@code src} content into {@code dst} if it's large enough, or fill {@code dst} buffer completely with as
-     * much data as possible from {@code src}.</p>
+     * much data as possible from {@code src}. Note: acceleration parameter is fixed to {@code "default"}.</p>
      *
-     * @param srcSizePtr will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; old value.
+     * @param srcSizePtr will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; input value.
      *
      * @return nb bytes written into {@code dest} (necessarily &le; {@code targetDestSize}) or 0 if compression fails
      */
@@ -232,18 +234,19 @@ public class LZ4 {
     /**
      * Unsafe version of: {@link #LZ4_decompress_fast decompress_fast}
      *
-     * @param originalSize is the uncompressed size to regenerate. Destination buffer must be already allocated, and its size must be &ge; {@code originalSize} bytes.
+     * @param originalSize is the uncompressed size to regenerate. {@code dst} must be already allocated, its size must be &ge; {@code originalSize} bytes.
      */
     public static native int nLZ4_decompress_fast(long src, long dst, int originalSize);
 
     /**
-     * This function is a bit faster than {@link #LZ4_decompress_safe decompress_safe}, but it may misbehave on malformed input because it doesn't perform full validation of compressed
-     * data.
+     * This function used to be a bit faster than {@link #LZ4_decompress_safe decompress_safe}, though situation has changed in recent versions, and now {@code LZ4_decompress_safe()}
+     * can be as fast and sometimes faster than {@code LZ4_decompress_fast()}. Moreover, {@code LZ4_decompress_fast()} is not protected vs malformed input, as
+     * it doesn't perform full validation of compressed data. As a consequence, this function is no longer recommended, and may be deprecated in future
+     * versions. It's only remaining specificity is that it can decompress data without knowing its compressed size.
      * 
-     * <p>This function is only usable if the {@code originalSize} of uncompressed data is known in advance. The caller should also check that all the compressed
-     * input has been consumed properly, i.e. that the return value matches the size of the buffer with compressed input. The function never writes past the
-     * output buffer. However, since it doesn't know its {@code src} size, it may read past the intended input. Also, because match offsets are not validated
-     * during decoding, reads from {@code src} may underflow. Use this function in trusted environment <b>only</b>.</p>
+     * <p>This function requires uncompressed {@code originalSize} to be known in advance. The function never writes past the output buffer. However, since it
+     * doesn't know its {@code src} size, it may read past the intended input. Also, because match offsets are not validated during decoding, reads from
+     * {@code src} may underflow. Use this function in trusted environment <b>only</b>.</p>
      *
      * @return the number of bytes read from the source buffer (== the compressed size). If the source stream is detected malformed, the function stops decoding and
      *         return a negative result. Destination buffer must be already allocated. Its size must be &ge; {@code originalSize} bytes.
@@ -258,18 +261,20 @@ public class LZ4 {
     public static native int nLZ4_decompress_safe_partial(long src, long dst, int compressedSize, int targetOutputSize, int dstCapacity);
 
     /**
-     * This function decompress a compressed block of size {@code compressedSize} at position {@code src} into destination buffer {@code dst} of size
-     * {@code dstCapacity}.
+     * Decompresses an LZ4 compressed block, of size {@code srcSize} at position {@code src}, into destination buffer {@code dst} of size {@code dstCapacity}.
+     * Up to {@code targetOutputSize} bytes will be decoded. The function stops decoding on reaching this objective, which can boost performance when only the
+     * beginning of a block is required.
      * 
-     * <p>The function will decompress a minimum of {@code targetOutputSize} bytes, and stop after that. However, it's not accurate, and may write more than
-     * {@code targetOutputSize} (but always &le; {@code dstCapacity}).</p>
-     * 
-     * <p>This function never writes outside of output buffer, and never reads outside of input buffer. It is therefore protected against malicious data packets.</p>
+     * <p>Note: this function features 2 parameters, {@code targetOutputSize} and {@code dstCapacity}, and expects {@code targetOutputSize &le; dstCapacity}. It
+     * effectively stops decoding on reaching {@code targetOutputSize}, so {@code dstCapacity} is kind of redundant. This is because in a previous version of
+     * this function, decoding operation would not "break" a sequence in the middle. As a consequence, there was no guarantee that decoding would stop at
+     * exactly {@code targetOutputSize}, it could write more bytes, though only up to {@code dstCapacity}. Some "margin" used to be required for this
+     * operation to work properly. This is no longer necessary. The function nonetheless keeps its signature, in an effort to not break API.</p>
      *
-     * @return the number of bytes decoded in the destination buffer (necessarily &le; {@code dstCapacity})
+     * @return the number of bytes decoded in {@code dst} (necessarily &le; {@code dstCapacity}). If source stream is detected malformed, function returns a negative
+     *         result.
      *         
-     *         <p>Note: this number can also be &lt; {@code targetOutputSize}, if compressed block contains less data. Therefore, always control how many bytes were
-     *         decoded. If source stream is detected malformed, function returns a negative result. This function is protected against malicious data packets.</p>
+     *         <p>Note: can be &lt; {@code targetOutputSize}, if compressed block contains less data.</p>
      */
     public static int LZ4_decompress_safe_partial(@NativeType("char const *") ByteBuffer src, @NativeType("char *") ByteBuffer dst, int targetOutputSize) {
         return nLZ4_decompress_safe_partial(memAddress(src), memAddress(dst), src.remaining(), targetOutputSize, dst.remaining());
@@ -335,16 +340,16 @@ public class LZ4 {
      * <p>{@code dst} buffer must be already allocated. If {@code dstCapacity} &ge; {@link #LZ4_compressBound compressBound}{@code (srcSize)}, compression is guaranteed to succeed, and
      * runs faster.</p>
      * 
-     * <p>Important: The previous 64KB of compressed data is assumed to remain present and unmodified in memory! If less than 64KB has been compressed all the
-     * data must be present.</p>
+     * <p>Note 1: Each invocation to {@code LZ4_compress_fast_continue()} generates a new block. Each block has precise boundaries. It's not possible to append
+     * blocks together and expect a single invocation of {@code LZ4_decompress_*()} to decompress them together. Each block must be decompressed separately,
+     * calling {@code LZ4_decompress_*()} with associated metadata.</p>
      * 
-     * <p>Special:</p>
+     * <p>Note 2: The previous 64KB of source data is <em>assumed</em> to remain present, unmodified, at same address in memory!</p>
      * 
-     * <ol>
-     * <li>When input is a double-buffer, they can have any size, including &lt; 64 KB. Make sure that buffers are separated by at least one byte. This way,
-     * each block only depends on previous block.</li>
-     * <li>If input buffer is a ring-buffer, it can have any size, including &lt; 64 KB.</li>
-     * </ol>
+     * <p>Note 3: When input is structured as a double-buffer, each buffer can have any size, including &lt; 64 KB. Make sure that buffers are separated, by at
+     * least one byte. This construction ensures that each block only depends on previous block.</p>
+     * 
+     * <p>Note 4: If input buffer is a ring-buffer, it can have any size, including &lt; 64 KB.</p>
      *
      * @return size of compressed block or 0 if there is an error (typically, cannot fit into {@code dst}). After an error, the stream status is invalid, it can only
      *         be reset or freed.
@@ -408,7 +413,7 @@ public class LZ4 {
      * An {@code LZ4_streamDecode_t} context can be allocated once and re-used multiple times. Use this function to start decompression of a new stream of
      * blocks.
      * 
-     * <p>A dictionary can optionnally be set. Use {@code NULL} or size 0 for a reset order. Dictionary is presumed stable: it must remain accessible and unmodified
+     * <p>A dictionary can optionally be set. Use {@code NULL} or size 0 for a reset order. Dictionary is presumed stable: it must remain accessible and unmodified
      * during next decompression.</p>
      *
      * @return 1 if OK, 0 if error

@@ -16,10 +16,19 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to the frame API of <a target="_blank" href="http://lz4.github.io/lz4/">LZ4</a>. */
+/**
+ * Native bindings to the frame API of <a target="_blank" href="http://lz4.github.io/lz4/">LZ4</a>.
+ * 
+ * <p>LZ4F is a stand-alone API to create LZ4-compressed frames conformant with specification v1.6.1. It also offers streaming capabilities. {@code lz4.h} is
+ * not required when using {@code lz4frame.h}, except to get constant such as {@link LZ4#LZ4_VERSION_NUMBER VERSION_NUMBER}.</p>
+ */
 public class LZ4Frame {
 
-    /** Version number. */
+    /**
+     * Version number.
+     * 
+     * <p>This number can be used to check for an incompatible API breaking change.</p>
+     */
     public static final int LZ4F_VERSION = 100;
 
     /** Maximum header size. */

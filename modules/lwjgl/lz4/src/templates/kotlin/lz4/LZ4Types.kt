@@ -12,13 +12,9 @@ fun config() {
     packageInfo(
         Module.LZ4,
         """
-        Contains bindings to ${url("http://lz4.github.io/lz4/", "LZ4")}, a lossless compression algorithm, providing compression speed at 400 MB/s per core,
+        Contains bindings to ${url("http://lz4.github.io/lz4/", "LZ4")}, a lossless compression algorithm, providing compression speed > 500 MB/s per core,
         scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on
         multi-core systems.
-
-        Speed can be tuned dynamically, selecting an "acceleration" factor which trades compression ratio for more speed up. On the other end, a high
-        compression derivative, {@code LZ4_HC}, is also provided, trading CPU time for improved compression ratio. All versions feature the same decompression
-        speed.
         """
     )
 
@@ -45,15 +41,12 @@ val unsigned_long_long = IntegerType("unsigned long long", PrimitiveMapping.LONG
 val LZ4F_cctx = "LZ4F_cctx".opaque
 val LZ4F_dctx = "LZ4F_dctx".opaque
 
-/*! LZ4F_frameInfo_t :
- *  makes it possible to set or read frame parameters.
- *   */
 val LZ4F_frameInfo_t = struct(Module.LZ4, "LZ4FFrameInfo", nativeName = "LZ4F_frameInfo_t") {
     documentation =
         """
         Makes it possible to set or read frame parameters.
 
-        It's not required to set all fields, as long as the structure was initially {@code memset()} to zero. For all fields, 0 sets it to default value.
+        Structure must be first init to 0, using {@code memset()}, setting all parameters to default. It's then possible to update selectively some parameter.
         """
     LZ4F_blockSizeID_t.member("blockSizeID", "{@code 0 == default}").links("max\\d+\\w+")
     LZ4F_blockMode_t.member("blockMode", "{@code 0 == default}").links("block\\w+")
@@ -64,17 +57,18 @@ val LZ4F_frameInfo_t = struct(Module.LZ4, "LZ4FFrameInfo", nativeName = "LZ4F_fr
     LZ4F_blockChecksum_t.member("blockChecksumFlag", "1: each block followed by a checksum of block's compressed data; 0: disabled (default)")
 }
 
-/*! LZ4F_preferences_t :
- *  makes it possible to supply detailed compression parameters to the stream interface.
- *  It's not required to set all fields, as long as the structure was initially memset() to zero.
- *  All reserved fields must be set to zero. */
 val LZ4F_preferences_t = struct(Module.LZ4, "LZ4FPreferences", nativeName = "LZ4F_preferences_t") {
+    documentation =
+        """
+        Makes it possible to supply advanced compression instructions to streaming interface. Structure must be first init to 0, using {@code memset()},
+        setting all parameters to default. All reserved fields must be set to zero.
+        """
     LZ4F_frameInfo_t.member("frameInfo", "")
     int.member(
         "compressionLevel",
         "0: default (fast mode); values &gt; #CLEVEL_MAX count as #CLEVEL_MAX; values &gt; 0 trigger \"fast acceleration\""
     )
-    unsigned.member("autoFlush", "1: always flush, to reduce usage of internal buffers")
+    unsigned.member("autoFlush", "1: always flush, reduces usage of internal buffers")
     unsigned.member("favorDecSpeed", "1: parser favors decompression speed vs compression ratio. Only works for high compression modes (&ge; #CLEVEL_OPT_MIN). Since version 1.8.2.")
     unsigned.array("reserved", "must be zero for forward compatibility", size = 3)
 }

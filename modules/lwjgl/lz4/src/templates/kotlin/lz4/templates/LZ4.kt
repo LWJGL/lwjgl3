@@ -16,20 +16,23 @@ ENABLE_WARNINGS()""")
 
     documentation =
         """
-        Native bindings to ${url("http://lz4.github.io/lz4/", "LZ4")}, a lossless compression algorithm, providing compression speed at 400 MB/s per core,
+        Native bindings to ${url("http://lz4.github.io/lz4/", "LZ4")}, a lossless compression algorithm, providing compression speed > 500 MB/s per core,
         scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on
         multi-core systems.
 
-        Speed can be tuned dynamically, selecting an "acceleration" factor which trades compression ratio for more speed up. On the other end, a high
+        Speed can be tuned dynamically, selecting an "acceleration" factor which trades compression ratio for faster speed. On the other end, a high
         compression derivative, {@code LZ4_HC}, is also provided, trading CPU time for improved compression ratio. All versions feature the same decompression
         speed.
 
+        LZ4 is also compatible with ${url("https://github.com/facebook/zstd#the-case-for-small-data-compression", "dictionary compression")}, and can ingest
+        any input file as dictionary, including those created by ${url("https://github.com/facebook/zstd/blob/v1.3.5/programs/zstd.1.md#dictionary-builder",
+        "Zstandard Dictionary Builder")}. (note: only the final 64KB are used).
+
         The raw LZ4 block compression format is detailed within <a href="https://github.com/lz4/lz4/blob/dev/doc/lz4_Block_format.md">lz4_Block_format</a>.
 
-        To compress an arbitrarily long file or data stream, multiple blocks are required. Organizing these blocks and providing a common header format to
-        handle their content is the purpose of the Frame format, defined into
-        <a href="https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md">lz4_Frame_format</a>. Interoperable versions of LZ4 must respect this frame
-        format.
+        Arbitrarily long files or data streams are compressed using multiple blocks, for streaming requirements. These blocks are organized into a frame,
+        defined into ${url("https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md", "lz4_Frame_format")}. Interoperable versions of LZ4 must also respect
+        the frame format.
         """
 
     IntConstant(
@@ -37,7 +40,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."8",
-        "VERSION_RELEASE".."2"
+        "VERSION_RELEASE".."3"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(LZ4_VERSION_MAJOR *100*100 + LZ4_VERSION_MINOR *100 + LZ4_VERSION_RELEASE)")
@@ -180,14 +183,14 @@ ENABLE_WARNINGS()""")
         {@code targetDstSize}.
 
         This function either compresses the entire {@code src} content into {@code dst} if it's large enough, or fill {@code dst} buffer completely with as
-        much data as possible from {@code src}.
+        much data as possible from {@code src}. Note: acceleration parameter is fixed to {@code "default"}.
         """,
 
         char.const.p.IN("src", ""),
         char.p.OUT("dst", ""),
         AutoSize("src")..Check(1)..int.p.INOUT(
             "srcSizePtr",
-            "will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; old value."
+            "will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; input value."
         ),
         AutoSize("dst")..int.IN("targetDstSize", ""),
 
@@ -197,20 +200,21 @@ ENABLE_WARNINGS()""")
     int(
         "decompress_fast",
         """
-        This function is a bit faster than #decompress_safe(), but it may misbehave on malformed input because it doesn't perform full validation of compressed
-        data.
+        This function used to be a bit faster than #decompress_safe(), though situation has changed in recent versions, and now {@code LZ4_decompress_safe()}
+        can be as fast and sometimes faster than {@code LZ4_decompress_fast()}. Moreover, {@code LZ4_decompress_fast()} is not protected vs malformed input, as
+        it doesn't perform full validation of compressed data. As a consequence, this function is no longer recommended, and may be deprecated in future
+        versions. It's only remaining specificity is that it can decompress data without knowing its compressed size.
 
-        This function is only usable if the {@code originalSize} of uncompressed data is known in advance. The caller should also check that all the compressed
-        input has been consumed properly, i.e. that the return value matches the size of the buffer with compressed input. The function never writes past the
-        output buffer. However, since it doesn't know its {@code src} size, it may read past the intended input. Also, because match offsets are not validated
-        during decoding, reads from {@code src} may underflow. Use this function in trusted environment <b>only</b>.
+        This function requires uncompressed {@code originalSize} to be known in advance. The function never writes past the output buffer. However, since it
+        doesn't know its {@code src} size, it may read past the intended input. Also, because match offsets are not validated during decoding, reads from
+        {@code src} may underflow. Use this function in trusted environment <b>only</b>.
         """,
 
         Unsafe..char.const.p.IN("src", ""),
         char.p.OUT("dst", ""),
         AutoSize("dst")..int.IN(
             "originalSize",
-            "is the uncompressed size to regenerate. Destination buffer must be already allocated, and its size must be &ge; {@code originalSize} bytes."),
+            "is the uncompressed size to regenerate. {@code dst} must be already allocated, its size must be &ge; {@code originalSize} bytes."),
 
         returnDoc =
         """
@@ -222,13 +226,15 @@ ENABLE_WARNINGS()""")
     int(
         "decompress_safe_partial",
         """
-        This function decompress a compressed block of size {@code compressedSize} at position {@code src} into destination buffer {@code dst} of size
-        {@code dstCapacity}.
+        Decompresses an LZ4 compressed block, of size {@code srcSize} at position {@code src}, into destination buffer {@code dst} of size {@code dstCapacity}.
+        Up to {@code targetOutputSize} bytes will be decoded. The function stops decoding on reaching this objective, which can boost performance when only the
+        beginning of a block is required.
 
-        The function will decompress a minimum of {@code targetOutputSize} bytes, and stop after that. However, it's not accurate, and may write more than
-        {@code targetOutputSize} (but always &le; {@code dstCapacity}).
-
-        This function never writes outside of output buffer, and never reads outside of input buffer. It is therefore protected against malicious data packets.
+        Note: this function features 2 parameters, {@code targetOutputSize} and {@code dstCapacity}, and expects {@code targetOutputSize &le; dstCapacity}. It
+        effectively stops decoding on reaching {@code targetOutputSize}, so {@code dstCapacity} is kind of redundant. This is because in a previous version of
+        this function, decoding operation would not "break" a sequence in the middle. As a consequence, there was no guarantee that decoding would stop at
+        exactly {@code targetOutputSize}, it could write more bytes, though only up to {@code dstCapacity}. Some "margin" used to be required for this
+        operation to work properly. This is no longer necessary. The function nonetheless keeps its signature, in an effort to not break API.
         """,
 
         char.const.p.IN("src", ""),
@@ -239,10 +245,10 @@ ENABLE_WARNINGS()""")
 
         returnDoc =
         """
-        the number of bytes decoded in the destination buffer (necessarily &le; {@code dstCapacity})
+        the number of bytes decoded in {@code dst} (necessarily &le; {@code dstCapacity}). If source stream is detected malformed, function returns a negative
+        result.
 
-        Note: this number can also be &lt; {@code targetOutputSize}, if compressed block contains less data. Therefore, always control how many bytes were
-        decoded. If source stream is detected malformed, function returns a negative result. This function is protected against malicious data packets.
+        Note: can be &lt; {@code targetOutputSize}, if compressed block contains less data.
         """
     )
 
@@ -286,17 +292,16 @@ ENABLE_WARNINGS()""")
         {@code dst} buffer must be already allocated. If {@code dstCapacity} &ge; #compressBound(){@code (srcSize)}, compression is guaranteed to succeed, and
         runs faster.
 
-        Important: The previous 64KB of compressed data is assumed to remain present and unmodified in memory! If less than 64KB has been compressed all the
-        data must be present.
+        Note 1: Each invocation to {@code LZ4_compress_fast_continue()} generates a new block. Each block has precise boundaries. It's not possible to append
+        blocks together and expect a single invocation of {@code LZ4_decompress_*()} to decompress them together. Each block must be decompressed separately,
+        calling {@code LZ4_decompress_*()} with associated metadata.
 
-        Special:
-        ${ol(
-            """
-            When input is a double-buffer, they can have any size, including &lt; 64 KB. Make sure that buffers are separated by at least one byte. This way,
-            each block only depends on previous block.
-            """,
-            "If input buffer is a ring-buffer, it can have any size, including &lt; 64 KB."
-        )}
+        Note 2: The previous 64KB of source data is <em>assumed</em> to remain present, unmodified, at same address in memory!
+
+        Note 3: When input is structured as a double-buffer, each buffer can have any size, including &lt; 64 KB. Make sure that buffers are separated, by at
+        least one byte. This construction ensures that each block only depends on previous block.
+
+        Note 4: If input buffer is a ring-buffer, it can have any size, including &lt; 64 KB.
         """,
 
         LZ4_stream_t.p.IN("streamPtr", ""),
@@ -351,7 +356,7 @@ ENABLE_WARNINGS()""")
         An {@code LZ4_streamDecode_t} context can be allocated once and re-used multiple times. Use this function to start decompression of a new stream of
         blocks.
 
-        A dictionary can optionnally be set. Use #NULL or size 0 for a reset order. Dictionary is presumed stable: it must remain accessible and unmodified
+        A dictionary can optionally be set. Use #NULL or size 0 for a reset order. Dictionary is presumed stable: it must remain accessible and unmodified
         during next decompression.
         """,
 

@@ -14,10 +14,20 @@ val LZ4Frame = "LZ4Frame".nativeClass(Module.LZ4, prefix = "LZ4F", prefixMethod 
 #include "lz4frame.h"
 ENABLE_WARNINGS()""")
 
-    documentation =  "Native bindings to the frame API of ${url("http://lz4.github.io/lz4/", "LZ4")}."
+    documentation =
+        """
+        Native bindings to the frame API of ${url("http://lz4.github.io/lz4/", "LZ4")}.
+
+        LZ4F is a stand-alone API to create LZ4-compressed frames conformant with specification v1.6.1. It also offers streaming capabilities. {@code lz4.h} is
+        not required when using {@code lz4frame.h}, except to get constant such as #VERSION_NUMBER.
+        """
 
     IntConstant(
-        "Version number.",
+        """
+        Version number.
+
+        This number can be used to check for an incompatible API breaking change.
+        """,
 
         "VERSION".."100"
     )

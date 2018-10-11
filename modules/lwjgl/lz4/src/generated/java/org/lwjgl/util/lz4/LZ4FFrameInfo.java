@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Makes it possible to set or read frame parameters.
  * 
- * <p>It's not required to set all fields, as long as the structure was initially {@code memset()} to zero. For all fields, 0 sets it to default value.</p>
+ * <p>Structure must be first init to 0, using {@code memset()}, setting all parameters to default. It's then possible to update selectively some parameter.</p>
  * 
  * <h3>Member documentation</h3>
  * 
