@@ -24,7 +24,7 @@ import static org.lwjgl.system.Pointer.*;
 public class BGFX {
 
     /** API version */
-    public static final int BGFX_API_VERSION = 84;
+    public static final int BGFX_API_VERSION = 88;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -422,6 +422,11 @@ public class BGFX {
         BGFX_SUBMIT_EYE_MASK       = 0x3,
         BGFX_SUBMIT_RESERVED_SHIFT = 7,
         BGFX_SUBMIT_RESERVED_MASK  = (byte)0x80;
+
+    /** Resolve flags. */
+    public static final byte
+        BGFX_RESOLVE_NONE          = 0x0,
+        BGFX_RESOLVE_AUTO_GEN_MIPS = 0x1;
 
     /** PCI */
     public static final short
@@ -4327,7 +4332,7 @@ public class BGFX {
      * @param _depth         depth for sorting
      * @param _preserveState preserve internal draw state for next draw call submit
      */
-    public static void bgfx_submit(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("int32_t") int _depth, @NativeType("bool") boolean _preserveState) {
+    public static void bgfx_submit(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
         nbgfx_submit((short)_id, _handle, _depth, _preserveState);
     }
 
@@ -4348,7 +4353,7 @@ public class BGFX {
      * @param _depth          depth for sorting
      * @param _preserveState  preserve internal draw state for next draw call submit
      */
-    public static void bgfx_submit_occlusion_query(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_occlusion_query_handle_t") short _occlusionQuery, @NativeType("int32_t") int _depth, @NativeType("bool") boolean _preserveState) {
+    public static void bgfx_submit_occlusion_query(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_occlusion_query_handle_t") short _occlusionQuery, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
         nbgfx_submit_occlusion_query((short)_id, _program, _occlusionQuery, _depth, _preserveState);
     }
 
@@ -4371,7 +4376,7 @@ public class BGFX {
      * @param _depth          depth for sorting
      * @param _preserveState  preserve internal draw state for next draw call submit
      */
-    public static void bgfx_submit_indirect(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num, @NativeType("int32_t") int _depth, @NativeType("bool") boolean _preserveState) {
+    public static void bgfx_submit_indirect(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
         nbgfx_submit_indirect((short)_id, _handle, _indirectHandle, (short)_start, (short)_num, _depth, _preserveState);
     }
 
@@ -5200,7 +5205,7 @@ public class BGFX {
      * @param _depth         depth for sorting
      * @param _preserveState preserve internal draw state for next draw call submit
      */
-    public static void bgfx_encoder_submit(@NativeType("struct bgfx_encoder_s *") long _encoder, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("int32_t") int _depth, @NativeType("bool") boolean _preserveState) {
+    public static void bgfx_encoder_submit(@NativeType("struct bgfx_encoder_s *") long _encoder, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
         nbgfx_encoder_submit(_encoder, (short)_id, _handle, _depth, _preserveState);
     }
 
@@ -5225,7 +5230,7 @@ public class BGFX {
      * @param _depth          depth for sorting
      * @param _preserveState  preserve internal draw state for next draw call submit
      */
-    public static void bgfx_encoder_submit_occlusion_query(@NativeType("struct bgfx_encoder_s *") long _encoder, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_occlusion_query_handle_t") short _occlusionQuery, @NativeType("int32_t") int _depth, @NativeType("bool") boolean _preserveState) {
+    public static void bgfx_encoder_submit_occlusion_query(@NativeType("struct bgfx_encoder_s *") long _encoder, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _program, @NativeType("bgfx_occlusion_query_handle_t") short _occlusionQuery, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
         nbgfx_encoder_submit_occlusion_query(_encoder, (short)_id, _program, _occlusionQuery, _depth, _preserveState);
     }
 
@@ -5252,7 +5257,7 @@ public class BGFX {
      * @param _depth          depth for sorting
      * @param _preserveState  preserve internal draw state for next draw call submit
      */
-    public static void bgfx_encoder_submit_indirect(@NativeType("struct bgfx_encoder_s *") long _encoder, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num, @NativeType("int32_t") int _depth, @NativeType("bool") boolean _preserveState) {
+    public static void bgfx_encoder_submit_indirect(@NativeType("struct bgfx_encoder_s *") long _encoder, @NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_program_handle_t") short _handle, @NativeType("bgfx_indirect_buffer_handle_t") short _indirectHandle, @NativeType("uint16_t") int _start, @NativeType("uint16_t") int _num, @NativeType("uint32_t") int _depth, @NativeType("bool") boolean _preserveState) {
         nbgfx_encoder_submit_indirect(_encoder, (short)_id, _handle, _indirectHandle, (short)_start, (short)_num, _depth, _preserveState);
     }
 

@@ -24,6 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code handle} &ndash; texture handle</li>
  * <li>{@code mip} &ndash; mip level</li>
  * <li>{@code layer} &ndash; cubemap side or depth layer/slice</li>
+ * <li>{@code resolve} &ndash; resolve flags. One of:<br><table><tr><td>{@link BGFX#BGFX_RESOLVE_NONE RESOLVE_NONE}</td><td>{@link BGFX#BGFX_RESOLVE_AUTO_GEN_MIPS RESOLVE_AUTO_GEN_MIPS}</td></tr></table></li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -33,6 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     bgfx_texture_handle_t handle;
  *     uint16_t mip;
  *     uint16_t layer;
+ *     uint8_t resolve;
  * }</code></pre>
  */
 @NativeType("struct bgfx_attachment_t")
@@ -48,13 +50,15 @@ public class BGFXAttachment extends Struct implements NativeResource {
     public static final int
         HANDLE,
         MIP,
-        LAYER;
+        LAYER,
+        RESOLVE;
 
     static {
         Layout layout = __struct(
             __member(2),
             __member(2),
-            __member(2)
+            __member(2),
+            __member(1)
         );
 
         SIZEOF = layout.getSize();
@@ -63,6 +67,7 @@ public class BGFXAttachment extends Struct implements NativeResource {
         HANDLE = layout.offsetof(0);
         MIP = layout.offsetof(1);
         LAYER = layout.offsetof(2);
+        RESOLVE = layout.offsetof(3);
     }
 
     /**
@@ -87,6 +92,9 @@ public class BGFXAttachment extends Struct implements NativeResource {
     /** Returns the value of the {@code layer} field. */
     @NativeType("uint16_t")
     public short layer() { return nlayer(address()); }
+    /** Returns the value of the {@code resolve} field. */
+    @NativeType("uint8_t")
+    public byte resolve() { return nresolve(address()); }
 
     /** Sets the specified value to the {@code handle} field. */
     public BGFXAttachment handle(@NativeType("bgfx_texture_handle_t") short value) { nhandle(address(), value); return this; }
@@ -94,16 +102,20 @@ public class BGFXAttachment extends Struct implements NativeResource {
     public BGFXAttachment mip(@NativeType("uint16_t") short value) { nmip(address(), value); return this; }
     /** Sets the specified value to the {@code layer} field. */
     public BGFXAttachment layer(@NativeType("uint16_t") short value) { nlayer(address(), value); return this; }
+    /** Sets the specified value to the {@code resolve} field. */
+    public BGFXAttachment resolve(@NativeType("uint8_t") byte value) { nresolve(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public BGFXAttachment set(
         short handle,
         short mip,
-        short layer
+        short layer,
+        byte resolve
     ) {
         handle(handle);
         mip(mip);
         layer(layer);
+        resolve(resolve);
 
         return this;
     }
@@ -269,6 +281,8 @@ public class BGFXAttachment extends Struct implements NativeResource {
     public static short nmip(long struct) { return UNSAFE.getShort(null, struct + BGFXAttachment.MIP); }
     /** Unsafe version of {@link #layer}. */
     public static short nlayer(long struct) { return UNSAFE.getShort(null, struct + BGFXAttachment.LAYER); }
+    /** Unsafe version of {@link #resolve}. */
+    public static byte nresolve(long struct) { return UNSAFE.getByte(null, struct + BGFXAttachment.RESOLVE); }
 
     /** Unsafe version of {@link #handle(short) handle}. */
     public static void nhandle(long struct, short value) { UNSAFE.putShort(null, struct + BGFXAttachment.HANDLE, value); }
@@ -276,6 +290,8 @@ public class BGFXAttachment extends Struct implements NativeResource {
     public static void nmip(long struct, short value) { UNSAFE.putShort(null, struct + BGFXAttachment.MIP, value); }
     /** Unsafe version of {@link #layer(short) layer}. */
     public static void nlayer(long struct, short value) { UNSAFE.putShort(null, struct + BGFXAttachment.LAYER, value); }
+    /** Unsafe version of {@link #resolve(byte) resolve}. */
+    public static void nresolve(long struct, byte value) { UNSAFE.putByte(null, struct + BGFXAttachment.RESOLVE, value); }
 
     // -----------------------------------
 
@@ -324,6 +340,9 @@ public class BGFXAttachment extends Struct implements NativeResource {
         /** Returns the value of the {@code layer} field. */
         @NativeType("uint16_t")
         public short layer() { return BGFXAttachment.nlayer(address()); }
+        /** Returns the value of the {@code resolve} field. */
+        @NativeType("uint8_t")
+        public byte resolve() { return BGFXAttachment.nresolve(address()); }
 
         /** Sets the specified value to the {@code handle} field. */
         public BGFXAttachment.Buffer handle(@NativeType("bgfx_texture_handle_t") short value) { BGFXAttachment.nhandle(address(), value); return this; }
@@ -331,6 +350,8 @@ public class BGFXAttachment extends Struct implements NativeResource {
         public BGFXAttachment.Buffer mip(@NativeType("uint16_t") short value) { BGFXAttachment.nmip(address(), value); return this; }
         /** Sets the specified value to the {@code layer} field. */
         public BGFXAttachment.Buffer layer(@NativeType("uint16_t") short value) { BGFXAttachment.nlayer(address(), value); return this; }
+        /** Sets the specified value to the {@code resolve} field. */
+        public BGFXAttachment.Buffer resolve(@NativeType("uint8_t") byte value) { BGFXAttachment.nresolve(address(), value); return this; }
 
     }
 

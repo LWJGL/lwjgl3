@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."84"
+        "API_VERSION".."88"
     )
 
     ShortConstant(
@@ -488,6 +488,13 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
 
         "SUBMIT_RESERVED_SHIFT".."7",
         "SUBMIT_RESERVED_MASK".."(byte)0x80"
+    )
+
+    ByteConstant(
+        "Resolve flags.",
+
+        "RESOLVE_NONE"..0x00.b,
+        "RESOLVE_AUTO_GEN_MIPS"..0x01.b
     )
 
     ShortConstant(
@@ -2237,7 +2244,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
 
         MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_handle", "program"),
-        int32_t.IN("_depth", "depth for sorting"),
+        uint32_t.IN("_depth", "depth for sorting"),
         bool.IN("_preserveState", "preserve internal draw state for next draw call submit")
     )
 
@@ -2248,7 +2255,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_program", "program"),
         bgfx_occlusion_query_handle_t.IN("_occlusionQuery", "occlusion query"),
-        int32_t.IN("_depth", "depth for sorting"),
+        uint32_t.IN("_depth", "depth for sorting"),
         bool.IN("_preserveState", "preserve internal draw state for next draw call submit")
     )
 
@@ -2261,7 +2268,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_indirect_buffer_handle_t.IN("_indirectHandle", "indirect buffer"),
         MapToInt..uint16_t.IN("_start", "first element in indirect buffer"),
         MapToInt..uint16_t.IN("_num", "number of dispatches"),
-        int32_t.IN("_depth", "depth for sorting"),
+        uint32_t.IN("_depth", "depth for sorting"),
         bool.IN("_preserveState", "preserve internal draw state for next draw call submit")
     )
 
@@ -2663,7 +2670,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_encoder_s.p.IN("_encoder", "the encoder"),
         MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_handle", "program"),
-        int32_t.IN("_depth", "depth for sorting"),
+        uint32_t.IN("_depth", "depth for sorting"),
         bool.IN("_preserveState", "preserve internal draw state for next draw call submit")
     )
 
@@ -2675,7 +2682,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         MapToInt..bgfx_view_id_t.IN("_id", "view id"),
         bgfx_program_handle_t.IN("_program", "program"),
         bgfx_occlusion_query_handle_t.IN("_occlusionQuery", "occlusion query"),
-        int32_t.IN("_depth", "depth for sorting"),
+        uint32_t.IN("_depth", "depth for sorting"),
         bool.IN("_preserveState", "preserve internal draw state for next draw call submit")
     )
 
@@ -2689,7 +2696,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_indirect_buffer_handle_t.IN("_indirectHandle", "indirect buffer"),
         MapToInt..uint16_t.IN("_start", "first element in indirect buffer"),
         MapToInt..uint16_t.IN("_num", "number of dispatches"),
-        int32_t.IN("_depth", "depth for sorting"),
+        uint32_t.IN("_depth", "depth for sorting"),
         bool.IN("_preserveState", "preserve internal draw state for next draw call submit")
     )
 

@@ -142,6 +142,7 @@ val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t",
 
     uint32_t.member("numDraw", "number of draw calls submitted")
     uint32_t.member("numCompute", "number of compute calls submitted")
+    uint32_t.member("numBlit", "number of blit calls submitted")
     uint32_t.member("maxGpuLatency", "GPU driver latency")
 
     uint16_t.member("numDynamicIndexBuffers", "number of used dynamic index buffers")
@@ -247,6 +248,7 @@ val bgfx_attachment_t = struct(Module.BGFX, "BGFXAttachment", nativeName = "bgfx
     bgfx_texture_handle_t.member("handle", "texture handle")
     uint16_t.member("mip", "mip level")
     uint16_t.member("layer", "cubemap side or depth layer/slice")
+    uint8_t.member("resolve", "resolve flags").links("RESOLVE_\\w+")
 }
 
 val bgfx_caps_gpu_t = struct(Module.BGFX, "BGFXCapsGPU", nativeName = "bgfx_caps_gpu_t", mutable = false) {
@@ -318,8 +320,8 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
             "This callback is called on unrecoverable errors.",
 
             _bgfx_callback_interface_t.p.IN("_this", "the callback interface"),
-            charASCII.const.p.IN("_filePath", ""),
-			uint16_t.IN("_line", ""),
+            charASCII.const.p.IN("_filePath", "file path where fatal message was generated"),
+			uint16_t.IN("_line", "line where fatal message was generated"),
             bgfx_fatal_t.IN("_code", "the error code"),
             charASCII.const.p.IN("_str", "the error message")
         ) {
@@ -548,6 +550,7 @@ val bgfx_resolution_t = struct(Module.BGFX, "BGFXResolution", nativeName = "bgfx
     uint32_t.member("width", "backbuffer width")
     uint32_t.member("height", "backbuffer height")
     uint32_t.member("reset", "reset parameters")
+    uint8_t.member("numBackBuffers", "number of back buffers")
     uint8_t.member("maxFrameLatency", "maximum frame latency")
 }
 

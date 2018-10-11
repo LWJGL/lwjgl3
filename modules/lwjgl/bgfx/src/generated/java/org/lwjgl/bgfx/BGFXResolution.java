@@ -25,6 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code width} &ndash; backbuffer width</li>
  * <li>{@code height} &ndash; backbuffer height</li>
  * <li>{@code reset} &ndash; reset parameters</li>
+ * <li>{@code numBackBuffers} &ndash; number of back buffers</li>
  * <li>{@code maxFrameLatency} &ndash; maximum frame latency</li>
  * </ul>
  * 
@@ -36,6 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t width;
  *     uint32_t height;
  *     uint32_t reset;
+ *     uint8_t numBackBuffers;
  *     uint8_t maxFrameLatency;
  * }</code></pre>
  */
@@ -54,6 +56,7 @@ public class BGFXResolution extends Struct implements NativeResource {
         WIDTH,
         HEIGHT,
         RESET,
+        NUMBACKBUFFERS,
         MAXFRAMELATENCY;
 
     static {
@@ -62,6 +65,7 @@ public class BGFXResolution extends Struct implements NativeResource {
             __member(4),
             __member(4),
             __member(4),
+            __member(1),
             __member(1)
         );
 
@@ -72,7 +76,8 @@ public class BGFXResolution extends Struct implements NativeResource {
         WIDTH = layout.offsetof(1);
         HEIGHT = layout.offsetof(2);
         RESET = layout.offsetof(3);
-        MAXFRAMELATENCY = layout.offsetof(4);
+        NUMBACKBUFFERS = layout.offsetof(4);
+        MAXFRAMELATENCY = layout.offsetof(5);
     }
 
     /**
@@ -100,6 +105,9 @@ public class BGFXResolution extends Struct implements NativeResource {
     /** Returns the value of the {@code reset} field. */
     @NativeType("uint32_t")
     public int reset() { return nreset(address()); }
+    /** Returns the value of the {@code numBackBuffers} field. */
+    @NativeType("uint8_t")
+    public byte numBackBuffers() { return nnumBackBuffers(address()); }
     /** Returns the value of the {@code maxFrameLatency} field. */
     @NativeType("uint8_t")
     public byte maxFrameLatency() { return nmaxFrameLatency(address()); }
@@ -112,6 +120,8 @@ public class BGFXResolution extends Struct implements NativeResource {
     public BGFXResolution height(@NativeType("uint32_t") int value) { nheight(address(), value); return this; }
     /** Sets the specified value to the {@code reset} field. */
     public BGFXResolution reset(@NativeType("uint32_t") int value) { nreset(address(), value); return this; }
+    /** Sets the specified value to the {@code numBackBuffers} field. */
+    public BGFXResolution numBackBuffers(@NativeType("uint8_t") byte value) { nnumBackBuffers(address(), value); return this; }
     /** Sets the specified value to the {@code maxFrameLatency} field. */
     public BGFXResolution maxFrameLatency(@NativeType("uint8_t") byte value) { nmaxFrameLatency(address(), value); return this; }
 
@@ -121,12 +131,14 @@ public class BGFXResolution extends Struct implements NativeResource {
         int width,
         int height,
         int reset,
+        byte numBackBuffers,
         byte maxFrameLatency
     ) {
         format(format);
         width(width);
         height(height);
         reset(reset);
+        numBackBuffers(numBackBuffers);
         maxFrameLatency(maxFrameLatency);
 
         return this;
@@ -213,6 +225,8 @@ public class BGFXResolution extends Struct implements NativeResource {
     public static int nheight(long struct) { return UNSAFE.getInt(null, struct + BGFXResolution.HEIGHT); }
     /** Unsafe version of {@link #reset}. */
     public static int nreset(long struct) { return UNSAFE.getInt(null, struct + BGFXResolution.RESET); }
+    /** Unsafe version of {@link #numBackBuffers}. */
+    public static byte nnumBackBuffers(long struct) { return UNSAFE.getByte(null, struct + BGFXResolution.NUMBACKBUFFERS); }
     /** Unsafe version of {@link #maxFrameLatency}. */
     public static byte nmaxFrameLatency(long struct) { return UNSAFE.getByte(null, struct + BGFXResolution.MAXFRAMELATENCY); }
 
@@ -224,6 +238,8 @@ public class BGFXResolution extends Struct implements NativeResource {
     public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + BGFXResolution.HEIGHT, value); }
     /** Unsafe version of {@link #reset(int) reset}. */
     public static void nreset(long struct, int value) { UNSAFE.putInt(null, struct + BGFXResolution.RESET, value); }
+    /** Unsafe version of {@link #numBackBuffers(byte) numBackBuffers}. */
+    public static void nnumBackBuffers(long struct, byte value) { UNSAFE.putByte(null, struct + BGFXResolution.NUMBACKBUFFERS, value); }
     /** Unsafe version of {@link #maxFrameLatency(byte) maxFrameLatency}. */
     public static void nmaxFrameLatency(long struct, byte value) { UNSAFE.putByte(null, struct + BGFXResolution.MAXFRAMELATENCY, value); }
 

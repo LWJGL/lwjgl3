@@ -49,9 +49,11 @@ public interface BGFXFatalCallbackI extends CallbackI.V {
     /**
      * This callback is called on unrecoverable errors.
      *
-     * @param _this the callback interface
-     * @param _code the error code
-     * @param _str  the error message
+     * @param _this     the callback interface
+     * @param _filePath file path where fatal message was generated
+     * @param _line     line where fatal message was generated
+     * @param _code     the error code
+     * @param _str      the error message
      */
     void invoke(@NativeType("bgfx_callback_interface_t *") long _this, @NativeType("char const *") long _filePath, @NativeType("uint16_t") short _line, @NativeType("bgfx_fatal_t") int _code, @NativeType("char const *") long _str);
 
