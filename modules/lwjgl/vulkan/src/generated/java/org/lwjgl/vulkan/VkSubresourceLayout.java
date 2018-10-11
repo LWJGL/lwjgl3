@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * // (x,y,z,layer) are in compressed texel block coordinates
  * address(x,y,z,layer) = layer*arrayPitch + z*depthPitch + y*rowPitch + x*compressedTexelBlockByteSize + offset;</code></pre>
  * 
- * <p>{@code arrayPitch} is undefined for images that were not created as arrays. {@code depthPitch} is defined only for 3D images.</p>
+ * <p>The value of {@code arrayPitch} is undefined for images that were not created as arrays. {@code depthPitch} is defined only for 3D images.</p>
  * 
  * <p>If the image has a <em>single-plane</em> color format , then the {@code aspectMask} member of {@link VkImageSubresource} <b>must</b> be {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}.</p>
  * 

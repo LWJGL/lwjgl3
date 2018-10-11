@@ -80,8 +80,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>2018-09-11</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NVX/SPV_NVX_raytracing.html">SPV_NVX_raytracing</a> SPIR-V extension.</li>
- * <li>This extension requires the <a target="_blank" href="https://github.com/KhronosGroup/GLSL/tree/master/extensions/NVX/GL_NVX_raytracing.txt">GL_NVX_raytracing</a> extension for GLSL source languages.</li>
+ * <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NVX_raytracing.html">SPV_NVX_raytracing</a> SPIR-V extension.</li>
+ * <li>This extension requires the <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nvx/GLSL_NVX_raytracing.txt">GL_NVX_raytracing</a> extension for GLSL source languages.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

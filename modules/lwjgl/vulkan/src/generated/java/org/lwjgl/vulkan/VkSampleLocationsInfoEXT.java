@@ -36,9 +36,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTSampleLocations#VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT}</li>
- * <li>{@code sampleLocationsPerPixel} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
- * <li>{@code pSampleLocations} <b>must</b> be a valid pointer to an array of {@code sampleLocationsCount} {@link VkSampleLocationEXT} structures</li>
- * <li>{@code sampleLocationsCount} <b>must</b> be greater than 0</li>
+ * <li>If {@code sampleLocationsPerPixel} is not 0, {@code sampleLocationsPerPixel} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
+ * <li>If {@code sampleLocationsCount} is not 0, {@code pSampleLocations} <b>must</b> be a valid pointer to an array of {@code sampleLocationsCount} {@link VkSampleLocationEXT} structures</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -136,6 +135,7 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
     @NativeType("uint32_t")
     public int sampleLocationsCount() { return nsampleLocationsCount(address()); }
     /** Returns a {@link VkSampleLocationEXT.Buffer} view of the struct array pointed to by the {@code pSampleLocations} field. */
+    @Nullable
     @NativeType("VkSampleLocationEXT const *")
     public VkSampleLocationEXT.Buffer pSampleLocations() { return npSampleLocations(address()); }
 
@@ -148,7 +148,7 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
     /** Copies the specified {@link VkExtent2D} to the {@code sampleLocationGridSize} field. */
     public VkSampleLocationsInfoEXT sampleLocationGridSize(VkExtent2D value) { nsampleLocationGridSize(address(), value); return this; }
     /** Sets the address of the specified {@link VkSampleLocationEXT.Buffer} to the {@code pSampleLocations} field. */
-    public VkSampleLocationsInfoEXT pSampleLocations(@NativeType("VkSampleLocationEXT const *") VkSampleLocationEXT.Buffer value) { npSampleLocations(address(), value); return this; }
+    public VkSampleLocationsInfoEXT pSampleLocations(@Nullable @NativeType("VkSampleLocationEXT const *") VkSampleLocationEXT.Buffer value) { npSampleLocations(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkSampleLocationsInfoEXT set(
@@ -156,7 +156,7 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
         long pNext,
         int sampleLocationsPerPixel,
         VkExtent2D sampleLocationGridSize,
-        VkSampleLocationEXT.Buffer pSampleLocations
+        @Nullable VkSampleLocationEXT.Buffer pSampleLocations
     ) {
         sType(sType);
         pNext(pNext);
@@ -333,7 +333,7 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
     /** Unsafe version of {@link #sampleLocationsCount}. */
     public static int nsampleLocationsCount(long struct) { return UNSAFE.getInt(null, struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONSCOUNT); }
     /** Unsafe version of {@link #pSampleLocations}. */
-    public static VkSampleLocationEXT.Buffer npSampleLocations(long struct) { return VkSampleLocationEXT.create(memGetAddress(struct + VkSampleLocationsInfoEXT.PSAMPLELOCATIONS), nsampleLocationsCount(struct)); }
+    @Nullable public static VkSampleLocationEXT.Buffer npSampleLocations(long struct) { return VkSampleLocationEXT.createSafe(memGetAddress(struct + VkSampleLocationsInfoEXT.PSAMPLELOCATIONS), nsampleLocationsCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSampleLocationsInfoEXT.STYPE, value); }
@@ -346,7 +346,7 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
     /** Sets the specified value to the {@code sampleLocationsCount} field of the specified {@code struct}. */
     public static void nsampleLocationsCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSampleLocationsInfoEXT.SAMPLELOCATIONSCOUNT, value); }
     /** Unsafe version of {@link #pSampleLocations(VkSampleLocationEXT.Buffer) pSampleLocations}. */
-    public static void npSampleLocations(long struct, VkSampleLocationEXT.Buffer value) { memPutAddress(struct + VkSampleLocationsInfoEXT.PSAMPLELOCATIONS, value.address()); nsampleLocationsCount(struct, value.remaining()); }
+    public static void npSampleLocations(long struct, @Nullable VkSampleLocationEXT.Buffer value) { memPutAddress(struct + VkSampleLocationsInfoEXT.PSAMPLELOCATIONS, memAddressSafe(value)); nsampleLocationsCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -354,7 +354,9 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + VkSampleLocationsInfoEXT.PSAMPLELOCATIONS));
+        if (nsampleLocationsCount(struct) != 0) {
+            check(memGetAddress(struct + VkSampleLocationsInfoEXT.PSAMPLELOCATIONS));
+        }
     }
 
     /**
@@ -424,6 +426,7 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
         @NativeType("uint32_t")
         public int sampleLocationsCount() { return VkSampleLocationsInfoEXT.nsampleLocationsCount(address()); }
         /** Returns a {@link VkSampleLocationEXT.Buffer} view of the struct array pointed to by the {@code pSampleLocations} field. */
+        @Nullable
         @NativeType("VkSampleLocationEXT const *")
         public VkSampleLocationEXT.Buffer pSampleLocations() { return VkSampleLocationsInfoEXT.npSampleLocations(address()); }
 
@@ -436,7 +439,7 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
         /** Copies the specified {@link VkExtent2D} to the {@code sampleLocationGridSize} field. */
         public VkSampleLocationsInfoEXT.Buffer sampleLocationGridSize(VkExtent2D value) { VkSampleLocationsInfoEXT.nsampleLocationGridSize(address(), value); return this; }
         /** Sets the address of the specified {@link VkSampleLocationEXT.Buffer} to the {@code pSampleLocations} field. */
-        public VkSampleLocationsInfoEXT.Buffer pSampleLocations(@NativeType("VkSampleLocationEXT const *") VkSampleLocationEXT.Buffer value) { VkSampleLocationsInfoEXT.npSampleLocations(address(), value); return this; }
+        public VkSampleLocationsInfoEXT.Buffer pSampleLocations(@Nullable @NativeType("VkSampleLocationEXT const *") VkSampleLocationEXT.Buffer value) { VkSampleLocationsInfoEXT.npSampleLocations(address(), value); return this; }
 
     }
 

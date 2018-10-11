@@ -58,7 +58,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code queueFlags} &ndash; a bitmask of {@code VkQueueFlagBits} indicating capabilities of the queues in this queue family.</li>
- * <li>{@code queueCount} &ndash; the unsigned integer count of queues in this queue family.</li>
+ * <li>{@code queueCount} &ndash; the unsigned integer count of queues in this queue family. Each queue family <b>must</b> support at least one queue.</li>
  * <li>{@code timestampValidBits} &ndash; the unsigned integer count of meaningful bits in the timestamps written via {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp}. The valid range for the count is 36..64 bits, or a value of 0, indicating no support for timestamps. Bits outside the valid range are guaranteed to be zeros.</li>
  * <li>{@code minImageTransferGranularity} &ndash; the minimum granularity supported for image transfer operations on the queues in this queue family.</li>
  * </ul>

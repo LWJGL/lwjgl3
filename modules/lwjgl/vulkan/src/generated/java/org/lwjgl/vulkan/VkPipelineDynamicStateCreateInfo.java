@@ -31,8 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * <li>{@code flags} <b>must</b> be 0</li>
- * <li>{@code pDynamicStates} <b>must</b> be a valid pointer to an array of {@code dynamicStateCount} valid {@code VkDynamicState} values</li>
- * <li>{@code dynamicStateCount} <b>must</b> be greater than 0</li>
+ * <li>If {@code dynamicStateCount} is not 0, {@code pDynamicStates} <b>must</b> be a valid pointer to an array of {@code dynamicStateCount} valid {@code VkDynamicState} values</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -121,6 +120,7 @@ public class VkPipelineDynamicStateCreateInfo extends Struct implements NativeRe
     @NativeType("uint32_t")
     public int dynamicStateCount() { return ndynamicStateCount(address()); }
     /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDynamicStates} field. */
+    @Nullable
     @NativeType("VkDynamicState const *")
     public IntBuffer pDynamicStates() { return npDynamicStates(address()); }
 
@@ -131,14 +131,14 @@ public class VkPipelineDynamicStateCreateInfo extends Struct implements NativeRe
     /** Sets the specified value to the {@code flags} field. */
     public VkPipelineDynamicStateCreateInfo flags(@NativeType("VkPipelineDynamicStateCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@code pDynamicStates} field. */
-    public VkPipelineDynamicStateCreateInfo pDynamicStates(@NativeType("VkDynamicState const *") IntBuffer value) { npDynamicStates(address(), value); return this; }
+    public VkPipelineDynamicStateCreateInfo pDynamicStates(@Nullable @NativeType("VkDynamicState const *") IntBuffer value) { npDynamicStates(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPipelineDynamicStateCreateInfo set(
         int sType,
         long pNext,
         int flags,
-        IntBuffer pDynamicStates
+        @Nullable IntBuffer pDynamicStates
     ) {
         sType(sType);
         pNext(pNext);
@@ -312,7 +312,7 @@ public class VkPipelineDynamicStateCreateInfo extends Struct implements NativeRe
     /** Unsafe version of {@link #dynamicStateCount}. */
     public static int ndynamicStateCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineDynamicStateCreateInfo.DYNAMICSTATECOUNT); }
     /** Unsafe version of {@link #pDynamicStates() pDynamicStates}. */
-    public static IntBuffer npDynamicStates(long struct) { return memIntBuffer(memGetAddress(struct + VkPipelineDynamicStateCreateInfo.PDYNAMICSTATES), ndynamicStateCount(struct)); }
+    @Nullable public static IntBuffer npDynamicStates(long struct) { return memIntBufferSafe(memGetAddress(struct + VkPipelineDynamicStateCreateInfo.PDYNAMICSTATES), ndynamicStateCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDynamicStateCreateInfo.STYPE, value); }
@@ -323,7 +323,7 @@ public class VkPipelineDynamicStateCreateInfo extends Struct implements NativeRe
     /** Sets the specified value to the {@code dynamicStateCount} field of the specified {@code struct}. */
     public static void ndynamicStateCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineDynamicStateCreateInfo.DYNAMICSTATECOUNT, value); }
     /** Unsafe version of {@link #pDynamicStates(IntBuffer) pDynamicStates}. */
-    public static void npDynamicStates(long struct, IntBuffer value) { memPutAddress(struct + VkPipelineDynamicStateCreateInfo.PDYNAMICSTATES, memAddress(value)); ndynamicStateCount(struct, value.remaining()); }
+    public static void npDynamicStates(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkPipelineDynamicStateCreateInfo.PDYNAMICSTATES, memAddressSafe(value)); ndynamicStateCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -331,7 +331,9 @@ public class VkPipelineDynamicStateCreateInfo extends Struct implements NativeRe
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + VkPipelineDynamicStateCreateInfo.PDYNAMICSTATES));
+        if (ndynamicStateCount(struct) != 0) {
+            check(memGetAddress(struct + VkPipelineDynamicStateCreateInfo.PDYNAMICSTATES));
+        }
     }
 
     /**
@@ -397,6 +399,7 @@ public class VkPipelineDynamicStateCreateInfo extends Struct implements NativeRe
         @NativeType("uint32_t")
         public int dynamicStateCount() { return VkPipelineDynamicStateCreateInfo.ndynamicStateCount(address()); }
         /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDynamicStates} field. */
+        @Nullable
         @NativeType("VkDynamicState const *")
         public IntBuffer pDynamicStates() { return VkPipelineDynamicStateCreateInfo.npDynamicStates(address()); }
 
@@ -407,7 +410,7 @@ public class VkPipelineDynamicStateCreateInfo extends Struct implements NativeRe
         /** Sets the specified value to the {@code flags} field. */
         public VkPipelineDynamicStateCreateInfo.Buffer flags(@NativeType("VkPipelineDynamicStateCreateFlags") int value) { VkPipelineDynamicStateCreateInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@code pDynamicStates} field. */
-        public VkPipelineDynamicStateCreateInfo.Buffer pDynamicStates(@NativeType("VkDynamicState const *") IntBuffer value) { VkPipelineDynamicStateCreateInfo.npDynamicStates(address(), value); return this; }
+        public VkPipelineDynamicStateCreateInfo.Buffer pDynamicStates(@Nullable @NativeType("VkDynamicState const *") IntBuffer value) { VkPipelineDynamicStateCreateInfo.npDynamicStates(address(), value); return this; }
 
     }
 

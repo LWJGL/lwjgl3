@@ -4369,9 +4369,8 @@ val VkSampleLocationsInfoEXT = struct(Module.VULKAN, "VkSampleLocationsInfoEXT")
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT</li>
-            <li>{@code sampleLocationsPerPixel} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
-            <li>{@code pSampleLocations} <b>must</b> be a valid pointer to an array of {@code sampleLocationsCount} ##VkSampleLocationEXT structures</li>
-            <li>{@code sampleLocationsCount} <b>must</b> be greater than 0</li>
+            <li>If {@code sampleLocationsPerPixel} is not 0, {@code sampleLocationsPerPixel} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
+            <li>If {@code sampleLocationsCount} is not 0, {@code pSampleLocations} <b>must</b> be a valid pointer to an array of {@code sampleLocationsCount} ##VkSampleLocationEXT structures</li>
         </ul>
 
         <h5>See Also</h5>
@@ -4382,7 +4381,7 @@ val VkSampleLocationsInfoEXT = struct(Module.VULKAN, "VkSampleLocationsInfoEXT")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSampleCountFlagBits.member("sampleLocationsPerPixel", "a {@code VkSampleCountFlagBits} specifying the number of sample locations per pixel.")
     VkExtent2D.member("sampleLocationGridSize", "the size of the sample location grid to select custom sample locations for.")
-    AutoSize("pSampleLocations")..uint32_t.member("sampleLocationsCount", "the number of sample locations in {@code pSampleLocations}.")
+    AutoSize("pSampleLocations", optional = true)..uint32_t.member("sampleLocationsCount", "the number of sample locations in {@code pSampleLocations}.")
     VkSampleLocationEXT.const.p.buffer("pSampleLocations", "an array of {@code sampleLocationsCount} ##VkSampleLocationEXT structures.")
 }
 

@@ -587,7 +587,7 @@ val VkPhysicalDeviceFeatures = struct(Module.VULKAN, "VkPhysicalDeviceFeatures")
             <li>#FORMAT_EAC_R11G11_SNORM_BLOCK</li>
         </ul>
 
-        #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for additional supported properties of individual formats.""")
+        To query for additional properties, or if the feature is not enabled, #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for supported properties of individual formats as normal.""")
     VkBool32.member("textureCompressionASTC_LDR", """specifies whether all of the ASTC LDR compressed texture formats are supported. If this feature is enabled, then the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, #FORMAT_FEATURE_BLIT_SRC_BIT and #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
 
         <ul>
@@ -621,7 +621,7 @@ val VkPhysicalDeviceFeatures = struct(Module.VULKAN, "VkPhysicalDeviceFeatures")
             <li>#FORMAT_ASTC_12x12_SRGB_BLOCK</li>
         </ul>
 
-        #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for additional supported properties of individual formats.""")
+        To query for additional properties, or if the feature is not enabled, #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for supported properties of individual formats as normal.""")
     VkBool32.member("textureCompressionBC", """specifies whether all of the BC compressed texture formats are supported. If this feature is enabled, then the #FORMAT_FEATURE_SAMPLED_IMAGE_BIT, #FORMAT_FEATURE_BLIT_SRC_BIT and #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
 
         <ul>
@@ -643,7 +643,7 @@ val VkPhysicalDeviceFeatures = struct(Module.VULKAN, "VkPhysicalDeviceFeatures")
             <li>#FORMAT_BC7_SRGB_BLOCK</li>
         </ul>
 
-        #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for additional supported properties of individual formats.""")
+        To query for additional properties, or if the feature is not enabled, #GetPhysicalDeviceFormatProperties() and #GetPhysicalDeviceImageFormatProperties() <b>can</b> be used to check for supported properties of individual formats as normal.""")
     VkBool32.member("occlusionQueryPrecise", "specifies whether occlusion queries returning actual sample counts are supported. Occlusion queries are created in a {@code VkQueryPool} by specifying the {@code queryType} of #QUERY_TYPE_OCCLUSION in the ##VkQueryPoolCreateInfo structure which is passed to #CreateQueryPool(). If this feature is enabled, queries of this type <b>can</b> enable #QUERY_CONTROL_PRECISE_BIT in the {@code flags} parameter to #CmdBeginQuery(). If this feature is not supported, the implementation supports only boolean occlusion queries. When any samples are passed, boolean queries will return a non-zero result value, otherwise a result value of zero is returned. When this feature is enabled and #QUERY_CONTROL_PRECISE_BIT is set, occlusion queries will report the actual number of samples passed.")
     VkBool32.member("pipelineStatisticsQuery", "specifies whether the pipeline statistics queries are supported. If this feature is not enabled, queries of type #QUERY_TYPE_PIPELINE_STATISTICS <b>cannot</b> be created, and none of the {@code VkQueryPipelineStatisticFlagBits} bits <b>can</b> be set in the {@code pipelineStatistics} member of the ##VkQueryPoolCreateInfo structure.")
     VkBool32.member("vertexPipelineStoresAndAtomics", "specifies whether storage buffers and images support stores and atomic operations in the vertex, tessellation, and geometry shader stages. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by these stages in shader modules <b>must</b> be decorated with the {@code NonWritable} decoration (or the {@code readonly} memory qualifier in GLSL).")
@@ -981,7 +981,7 @@ val VkQueueFamilyProperties = struct(Module.VULKAN, "VkQueueFamilyProperties", m
         """
 
     VkQueueFlags.member("queueFlags", "a bitmask of {@code VkQueueFlagBits} indicating capabilities of the queues in this queue family.")
-    uint32_t.member("queueCount", "the unsigned integer count of queues in this queue family.")
+    uint32_t.member("queueCount", "the unsigned integer count of queues in this queue family. Each queue family <b>must</b> support at least one queue.")
     uint32_t.member("timestampValidBits", "the unsigned integer count of meaningful bits in the timestamps written via #CmdWriteTimestamp(). The valid range for the count is 36..64 bits, or a value of 0, indicating no support for timestamps. Bits outside the valid range are guaranteed to be zeros.")
     VkExtent3D.member("minImageTransferGranularity", "the minimum granularity supported for image transfer operations on the queues in this queue family.")
 }
@@ -1847,7 +1847,7 @@ val VkImageCreateInfo = struct(Module.VULKAN, "VkImageCreateInfo") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>Each of the following values (as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-creation-limits">Image Creation Limits</a>) <b>must</b> not be undefined: {@code imageCreateMaxMipLevels}, {@code imageCreateMaxArrayLayers}, {@code imageCreateMaxExtent}, and {@code imageCreateSampleCounts}.</li>
+            <li>Each of the following values (as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-creation-limits">Image Creation Limits</a>) <b>must</b> not be undefined {@code imageCreateMaxMipLevels}, {@code imageCreateMaxArrayLayers}, {@code imageCreateMaxExtent}, and {@code imageCreateSampleCounts}.</li>
             <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code pQueueFamilyIndices} <b>must</b> be a valid pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
             <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, {@code queueFamilyIndexCount} <b>must</b> be greater than 1</li>
             <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, each element of {@code pQueueFamilyIndices} <b>must</b> be unique and <b>must</b> be less than {@code pQueueFamilyPropertyCount} returned by either #GetPhysicalDeviceQueueFamilyProperties() or #GetPhysicalDeviceQueueFamilyProperties2() for the {@code physicalDevice} that was used to create {@code device}</li>
@@ -1974,7 +1974,7 @@ val VkSubresourceLayout = struct(Module.VULKAN, "VkSubresourceLayout", mutable =
 ￿// (x,y,z,layer) are in compressed texel block coordinates
 ￿address(x,y,z,layer) = layer*arrayPitch + z*depthPitch + y*rowPitch + x*compressedTexelBlockByteSize + offset;</code></pre>
 
-        {@code arrayPitch} is undefined for images that were not created as arrays. {@code depthPitch} is defined only for 3D images.
+        The value of {@code arrayPitch} is undefined for images that were not created as arrays. {@code depthPitch} is defined only for 3D images.
 
         If the image has a <em>single-plane</em> color format , then the {@code aspectMask} member of ##VkImageSubresource <b>must</b> be #IMAGE_ASPECT_COLOR_BIT.
 
@@ -2850,8 +2850,7 @@ val VkPipelineDynamicStateCreateInfo = struct(Module.VULKAN, "VkPipelineDynamicS
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>{@code flags} <b>must</b> be 0</li>
-            <li>{@code pDynamicStates} <b>must</b> be a valid pointer to an array of {@code dynamicStateCount} valid {@code VkDynamicState} values</li>
-            <li>{@code dynamicStateCount} <b>must</b> be greater than 0</li>
+            <li>If {@code dynamicStateCount} is not 0, {@code pDynamicStates} <b>must</b> be a valid pointer to an array of {@code dynamicStateCount} valid {@code VkDynamicState} values</li>
         </ul>
 
         <h5>See Also</h5>
@@ -2861,7 +2860,7 @@ val VkPipelineDynamicStateCreateInfo = struct(Module.VULKAN, "VkPipelineDynamicS
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkPipelineDynamicStateCreateFlags.member("flags", "reserved for future use.")
-    AutoSize("pDynamicStates")..uint32_t.member("dynamicStateCount", "the number of elements in the {@code pDynamicStates} array.")
+    AutoSize("pDynamicStates", optional = true)..uint32_t.member("dynamicStateCount", "the number of elements in the {@code pDynamicStates} array.")
     VkDynamicState.const.p.member("pDynamicStates", "an array of {@code VkDynamicState} values specifying which pieces of pipeline state will use the values from dynamic state commands rather than from pipeline state creation info.")
 }
 
@@ -3047,7 +3046,7 @@ val VkPushConstantRange = struct(Module.VULKAN, "VkPushConstantRange") {
         ##VkPipelineLayoutCreateInfo
         """
 
-    VkShaderStageFlags.member("stageFlags", "a set of stage flags describing the shader stages that will access a range of push constants. If a particular stage is not included in the range, then accessing members of that range of push constants from the corresponding shader stage will result in undefined data being read.")
+    VkShaderStageFlags.member("stageFlags", "a set of stage flags describing the shader stages that will access a range of push constants. If a particular stage is not included in the range, then accessing members of that range of push constants from the corresponding shader stage will return undefined values.")
     uint32_t.member("offset", "{@code offset} and {@code size} are the start offset and size, respectively, consumed by the range. Both {@code offset} and {@code size} are in units of bytes and <b>must</b> be a multiple of 4. The layout of the push constant variables is specified in the shader.")
     uint32_t.member("size", "see {@code offset}")
 }
@@ -3235,7 +3234,7 @@ val VkDescriptorSetLayoutBinding = struct(Module.VULKAN, "VkDescriptorSetLayoutB
         Structure specifying a descriptor set layout binding.
 
         <h5>Description</h5>
-        The above layout definition allows the descriptor bindings to be specified sparsely such that not all binding numbers between 0 and the maximum binding number need to be specified in the {@code pBindings} array. Bindings that are not specified have a {@code descriptorCount} and {@code stageFlags} of zero, and the {@code descriptorType} is treated as undefined. However, all binding numbers between 0 and the maximum binding number in the ##VkDescriptorSetLayoutCreateInfo{@code ::pBindings} array <b>may</b> consume memory in the descriptor set layout even if not all descriptor bindings are used, though it <b>should</b> not consume additional memory from the descriptor pool.
+        The above layout definition allows the descriptor bindings to be specified sparsely such that not all binding numbers between 0 and the maximum binding number need to be specified in the {@code pBindings} array. Bindings that are not specified have a {@code descriptorCount} and {@code stageFlags} of zero, and the value of {@code descriptorType} is undefined. However, all binding numbers between 0 and the maximum binding number in the ##VkDescriptorSetLayoutCreateInfo{@code ::pBindings} array <b>may</b> consume memory in the descriptor set layout even if not all descriptor bindings are used, though it <b>should</b> not consume additional memory from the descriptor pool.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         The maximum binding number specified <b>should</b> be as compact as possible to avoid wasted memory.
@@ -4203,7 +4202,7 @@ val VkBufferImageCopy = struct(Module.VULKAN, "VkBufferImageCopy") {
         To copy both the depth and stencil aspects of a depth/stencil format, two entries in {@code pRegions} <b>can</b> be used, where one specifies the depth aspect in {@code imageSubresource}, and the other specifies the stencil aspect.
         </div>
 
-        Because depth or stencil aspect buffer to image copies <b>may</b> require format conversions on some implementations, they are not supported on queues that do not support graphics. When copying to a depth aspect, the data in buffer memory <b>must</b> be in the the range <code>[0,1]</code> or undefined results occur.
+        Because depth or stencil aspect buffer to image copies <b>may</b> require format conversions on some implementations, they are not supported on queues that do not support graphics.
 
         Copies are done layer by layer starting with image layer {@code baseArrayLayer} member of {@code imageSubresource}. {@code layerCount} layers are copied from the source image or to the destination image.
 
@@ -4230,7 +4229,6 @@ val VkBufferImageCopy = struct(Module.VULKAN, "VkBufferImageCopy") {
             <li>If the calling command&#8217;s {@code VkImage} parameter&#8217;s format is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>, then the {@code aspectMask} member of {@code imageSubresource} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT, or #IMAGE_ASPECT_PLANE_2_BIT (with #IMAGE_ASPECT_PLANE_2_BIT valid only for image formats with three planes)</li>
             <li>The {@code aspectMask} member of {@code imageSubresource} <b>must</b> only have a single bit set</li>
             <li>If the calling command&#8217;s {@code VkImage} parameter is of {@code VkImageType} #IMAGE_TYPE_3D, the {@code baseArrayLayer} and {@code layerCount} members of {@code imageSubresource} <b>must</b> be 0 and 1, respectively</li>
-            <li>When copying to the depth aspect of an image subresource, the data in the source buffer <b>must</b> be in the range <code>[0,1]</code></li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -4563,7 +4561,7 @@ val VkRenderPassBeginInfo = struct(Module.VULKAN, "VkRenderPassBeginInfo") {
         Structure specifying render pass begin info.
 
         <h5>Description</h5>
-        {@code renderArea} is the render area that is affected by the render pass instance. The effects of attachment load, store and multisample resolve operations are restricted to the pixels whose x and y coordinates fall within the render area on all attachments. The render area extends to all layers of {@code framebuffer}. The application <b>must</b> ensure (using scissor if necessary) that all rendering is contained within the render area, otherwise the pixels outside of the render area become undefined and shader side effects <b>may</b> occur for fragments outside the render area. The render area <b>must</b> be contained within the framebuffer dimensions.
+        {@code renderArea} is the render area that is affected by the render pass instance. The effects of attachment load, store and multisample resolve operations are restricted to the pixels whose x and y coordinates fall within the render area on all attachments. The render area extends to all layers of {@code framebuffer}. The application <b>must</b> ensure (using scissor if necessary) that all rendering is contained within the render area. The render area <b>must</b> be contained within the framebuffer dimensions.
 
         When multiview is enabled, the resolve operation at the end of a subpass applies to all views in the view mask.
 
@@ -5787,7 +5785,7 @@ val VkPhysicalDeviceProtectedMemoryProperties = struct(Module.VULKAN, "VkPhysica
 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkBool32.member("protectedNoFault", "specifies whether the undefined behavior will not include process termination or device loss. If {@code protectedNoFault} is #FALSE, undefined behavior <b>may</b> include process termination or device loss. If {@code protectedNoFault} is #TRUE, undefined behavior will not include process termination or device loss.")
+    VkBool32.member("protectedNoFault", "specifies whether the undefined behavior <b>may</b> include process termination or device loss. If {@code protectedNoFault} is #FALSE, undefined behavior <b>may</b> include process termination or device loss. If {@code protectedNoFault} is #TRUE, undefined behavior will not include process termination or device loss.")
 }
 
 val VkDeviceQueueInfo2 = struct(Module.VULKAN, "VkDeviceQueueInfo2") {
@@ -6204,7 +6202,7 @@ val VkPhysicalDeviceIDProperties = struct(Module.VULKAN, "VkPhysicalDeviceIDProp
             <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#external-fence-handle-types-compatibility">External fence handle types compatibility</a></li>
         </ul>
 
-        If {@code deviceLUIDValid} is #FALSE, the contents of {@code deviceLUID} and {@code deviceNodeMask} are undefined. If {@code deviceLUIDValid} is #TRUE and Vulkan is running on the Windows operating system, the contents of {@code deviceLUID} <b>can</b> be cast to an {@code LUID} object and <b>must</b> be equal to the locally unique identifier of a {@code IDXGIAdapter1} object that corresponds to {@code physicalDevice}. If {@code deviceLUIDValid} is #TRUE, {@code deviceNodeMask} <b>must</b> contain exactly one bit. If Vulkan is running on an operating system that supports the Direct3D 12 API and {@code physicalDevice} corresponds to an individual device in a linked device adapter, {@code deviceNodeMask} identifies the Direct3D 12 node corresponding to {@code physicalDevice}. Otherwise, {@code deviceNodeMask} <b>must</b> be 1.
+        If {@code deviceLUIDValid} is #FALSE, the values of {@code deviceLUID} and {@code deviceNodeMask} are undefined. If {@code deviceLUIDValid} is #TRUE and Vulkan is running on the Windows operating system, the contents of {@code deviceLUID} <b>can</b> be cast to an {@code LUID} object and <b>must</b> be equal to the locally unique identifier of a {@code IDXGIAdapter1} object that corresponds to {@code physicalDevice}. If {@code deviceLUIDValid} is #TRUE, {@code deviceNodeMask} <b>must</b> contain exactly one bit. If Vulkan is running on an operating system that supports the Direct3D 12 API and {@code physicalDevice} corresponds to an individual device in a linked device adapter, {@code deviceNodeMask} identifies the Direct3D 12 node corresponding to {@code physicalDevice}. Otherwise, {@code deviceNodeMask} <b>must</b> be 1.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Although they have identical descriptions, ##VkPhysicalDeviceIDProperties{@code ::deviceUUID} may differ from ##VkPhysicalDeviceProperties2{@code ::pipelineCacheUUID}. The former is intended to identify and correlate devices across API and driver boundaries, while the latter is used to identify a compatible device and driver combination to use when serializing and de-serializing pipeline state.

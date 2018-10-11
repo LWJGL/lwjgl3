@@ -11,7 +11,7 @@ import vulkan.*
 val KHR_shader_atomic_int64 = "KHRShaderAtomicInt64".nativeClassVK("KHR_shader_atomic_int64", type = "device", postfix = KHR) {
     documentation =
         """
-        This extension advertises the SPIR-V <b>Int64Atomics</b> capability for Vulkan, which allows a shader to contain 64-bit atomic operations on signed and unsigned integers. The supported operations include OpAtomicMin, OpAtomicMax, OpAtomicAnd, OpAtomicOr, OpAtomicXor, OpAtomicAdd, OpAtomicExchange, and OpAtomicCompSwap.
+        This extension advertises the SPIR-V <b>Int64Atomics</b> capability for Vulkan, which allows a shader to contain 64-bit atomic operations on signed and unsigned integers. The supported operations include OpAtomicMin, OpAtomicMax, OpAtomicAnd, OpAtomicOr, OpAtomicXor, OpAtomicAdd, OpAtomicExchange, and OpAtomicCompareExchange.
 
         <dl>
             <dt><b>Name String</b></dt>
@@ -37,7 +37,7 @@ val KHR_shader_atomic_int64 = "KHRShaderAtomicInt64".nativeClassVK("KHR_shader_a
                 <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_atomic_int64:%20&amp;body=@ahagan%20">ahagan</a></li>
             </ul></dd>
 
-            <dt><b>Last Modified Data</b></dt>
+            <dt><b>Last Modified Date</b></dt>
             <dd>2018-07-05</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
