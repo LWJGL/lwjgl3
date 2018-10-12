@@ -502,7 +502,7 @@ typedef struct HiddenAreaMesh_t
         ETrackingUniverseOrigin.IN("eOrigin", "the tracking coordinate system to return the pose in", "ETrackingUniverseOrigin_\\w+"),
         TrackedDeviceIndex_t.IN("unControllerDeviceIndex", "the tracked device index of the controller to get the state of"),
         VRControllerState_t.p.OUT("pControllerState", "a struct to fill with the controller state"),
-        uint32_t.IN("unControllerStateSize", "the size in bytes of the ##VRControllerState struct"),
+        Expression("VRControllerState.SIZEOF")..uint32_t.IN("unControllerStateSize", "the size in bytes of the ##VRControllerState struct"),
         TrackedDevicePose_t.p.OUT("pTrackedDevicePose", "a pose struct to fill with the pose of the controller when the last button event occurred")
     )
 

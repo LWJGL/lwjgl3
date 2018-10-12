@@ -1007,6 +1007,22 @@ public class VRSystem {
         return nVRSystem_GetControllerStateWithPose(eOrigin, unControllerDeviceIndex, pControllerState.address(), unControllerStateSize, pTrackedDevicePose.address());
     }
 
+    /**
+     * Fills the supplied struct with the current state of the controller and the provided pose with the pose of the controller when the controller state was
+     * updated most recently. Use this form if you need a precise controller pose as input to your application when the user presses or releases a button.
+     * 
+     * <p>This function is deprecated in favor of the new {@code IVRInput} system.</p>
+     *
+     * @param eOrigin                 the tracking coordinate system to return the pose in. One of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table>
+     * @param unControllerDeviceIndex the tracked device index of the controller to get the state of
+     * @param pControllerState        a struct to fill with the controller state
+     * @param pTrackedDevicePose      a pose struct to fill with the pose of the controller when the last button event occurred
+     */
+    @NativeType("bool")
+    public static boolean VRSystem_GetControllerStateWithPose(@NativeType("ETrackingUniverseOrigin") int eOrigin, @NativeType("TrackedDeviceIndex_t") int unControllerDeviceIndex, @NativeType("VRControllerState_t *") VRControllerState pControllerState, @NativeType("TrackedDevicePose_t *") TrackedDevicePose pTrackedDevicePose) {
+        return nVRSystem_GetControllerStateWithPose(eOrigin, unControllerDeviceIndex, pControllerState.address(), VRControllerState.SIZEOF, pTrackedDevicePose.address());
+    }
+
     // --- [ VRSystem_TriggerHapticPulse ] ---
 
     /**

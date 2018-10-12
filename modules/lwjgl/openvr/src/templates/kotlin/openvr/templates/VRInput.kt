@@ -75,7 +75,7 @@ val VRInput = "VRInput".nativeClass(
 
         VRActionHandle_t.IN("action", ""),
         InputDigitalActionData_t.p.OUT("pActionData", ""),
-        AutoSize("pActionData")..uint32_t.IN("unActionDataSize", ""),
+        Expression("InputDigitalActionData.SIZEOF")..uint32_t.IN("unActionDataSize", ""),
         VRInputValueHandle_t.IN("ulRestrictToDevice", "")
     )
 
@@ -88,7 +88,7 @@ val VRInput = "VRInput".nativeClass(
 
         VRActionHandle_t.IN("action", ""),
         InputAnalogActionData_t.p.OUT("pActionData", ""),
-        AutoSize("pActionData")..uint32_t.IN("unActionDataSize", ""),
+        Expression("InputAnalogActionData.SIZEOF")..uint32_t.IN("unActionDataSize", ""),
         VRInputValueHandle_t.IN("ulRestrictToDevice", "")
     )
 
@@ -100,23 +100,9 @@ val VRInput = "VRInput".nativeClass(
         ETrackingUniverseOrigin.IN("eOrigin", "", "ETrackingUniverseOrigin_\\w+"),
         float.IN("fPredictedSecondsFromNow", ""),
         InputPoseActionData_t.p.OUT("pActionData", ""),
-        AutoSize("pActionData")..uint32_t.IN("unActionDataSize", ""),
+        Expression("InputPoseActionData.SIZEOF")..uint32_t.IN("unActionDataSize", ""),
         VRInputValueHandle_t.IN("ulRestrictToDevice", "")
     )
-
-    /*
-	EVRInputError (OPENVR_FNTABLE_CALLTYPE *GetSkeletalActionData)(
-	    VRActionHandle_t action,
-	    struct InputSkeletalActionData_t * pActionData,
-	    uint32_t unActionDataSize,
-	    VRInputValueHandle_t ulRestrictToDevice
-    );
-	EVRInputError (OPENVR_FNTABLE_CALLTYPE *GetSkeletalBoneData)(VRActionHandle_t action, EVRSkeletalTransformSpace eTransformSpace, EVRSkeletalMotionRange eMotionRange, struct VRBoneTransform_t * pTransformArray, uint32_t unTransformArrayCount, VRInputValueHandle_t ulRestrictToDevice);
-	EVRInputError (OPENVR_FNTABLE_CALLTYPE *GetSkeletalBoneDataCompressed)(VRActionHandle_t action, EVRSkeletalTransformSpace eTransformSpace, EVRSkeletalMotionRange eMotionRange, void * pvCompressedData, uint32_t unCompressedSize, uint32_t * punRequiredCompressedSize, VRInputValueHandle_t ulRestrictToDevice);
-	EVRInputError (OPENVR_FNTABLE_CALLTYPE *DecompressSkeletalBoneData)(void * pvCompressedBuffer, uint32_t unCompressedBufferSize, EVRSkeletalTransformSpace * peTransformSpace, struct VRBoneTransform_t * pTransformArray, uint32_t unTransformArrayCount);
-	EVRInputError (OPENVR_FNTABLE_CALLTYPE *TriggerHapticVibrationAction)(VRActionHandle_t action, float fStartSecondsFromNow, float fDurationSeconds, float fFrequency, float fAmplitude, VRInputValueHandle_t ulRestrictToDevice);
-
-     */
 
     EVRInputError(
         "GetSkeletalActionData",
@@ -124,7 +110,7 @@ val VRInput = "VRInput".nativeClass(
 
         VRActionHandle_t.IN("action", ""),
         InputSkeletalActionData_t.p.OUT("pActionData", ""),
-        AutoSize("pActionData")..uint32_t.IN("unActionDataSize", ""),
+        Expression("InputSkeletalActionData.SIZEOF")..uint32_t.IN("unActionDataSize", ""),
         VRInputValueHandle_t.IN("ulRestrictToDevice", "")
     )
 
@@ -157,7 +143,7 @@ val VRInput = "VRInput".nativeClass(
     )
 
     EVRInputError(
-        "UncompressSkeletalActionData",
+        "DecompressSkeletalBoneData",
         "Turns a compressed buffer from #GetSkeletalBoneDataCompressed() and turns it back into a bone transform array.",
 
         void.p.IN("pvCompressedBuffer", ""),
@@ -204,7 +190,7 @@ val VRInput = "VRInput".nativeClass(
 
         VRInputValueHandle_t.IN("origin", ""),
         InputOriginInfo_t.p.OUT("pOriginInfo", ""),
-        AutoSize("pOriginInfo")..uint32_t.IN("unOriginInfoSize", "")
+        Expression("InputOriginInfo.SIZEOF")..uint32_t.IN("unOriginInfoSize", "")
     )
 
     EVRInputError(

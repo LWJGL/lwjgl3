@@ -210,8 +210,17 @@ public class VRInput {
      * than digital.
      */
     @NativeType("EVRInputError")
-    public static int VRInput_GetDigitalActionData(@NativeType("VRActionHandle_t") long action, @NativeType("InputDigitalActionData_t *") InputDigitalActionData.Buffer pActionData, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
-        return nVRInput_GetDigitalActionData(action, pActionData.address(), pActionData.remaining(), ulRestrictToDevice);
+    public static int VRInput_GetDigitalActionData(@NativeType("VRActionHandle_t") long action, @NativeType("InputDigitalActionData_t *") InputDigitalActionData pActionData, @NativeType("uint32_t") int unActionDataSize, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetDigitalActionData(action, pActionData.address(), unActionDataSize, ulRestrictToDevice);
+    }
+
+    /**
+     * Reads the state of a digital action given its handle. This will return {@link VR#EVRInputError_VRInputError_WrongType} if the type of action is something other
+     * than digital.
+     */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetDigitalActionData(@NativeType("VRActionHandle_t") long action, @NativeType("InputDigitalActionData_t *") InputDigitalActionData pActionData, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetDigitalActionData(action, pActionData.address(), InputDigitalActionData.SIZEOF, ulRestrictToDevice);
     }
 
     // --- [ VRInput_GetAnalogActionData ] ---
@@ -230,8 +239,17 @@ public class VRInput {
      * than analog.
      */
     @NativeType("EVRInputError")
-    public static int VRInput_GetAnalogActionData(@NativeType("VRActionHandle_t") long action, @NativeType("InputAnalogActionData_t *") InputAnalogActionData.Buffer pActionData, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
-        return nVRInput_GetAnalogActionData(action, pActionData.address(), pActionData.remaining(), ulRestrictToDevice);
+    public static int VRInput_GetAnalogActionData(@NativeType("VRActionHandle_t") long action, @NativeType("InputAnalogActionData_t *") InputAnalogActionData pActionData, @NativeType("uint32_t") int unActionDataSize, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetAnalogActionData(action, pActionData.address(), unActionDataSize, ulRestrictToDevice);
+    }
+
+    /**
+     * Reads the state of an analog action given its handle. This will return {@link VR#EVRInputError_VRInputError_WrongType} if the type of action is something other
+     * than analog.
+     */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetAnalogActionData(@NativeType("VRActionHandle_t") long action, @NativeType("InputAnalogActionData_t *") InputAnalogActionData pActionData, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetAnalogActionData(action, pActionData.address(), InputAnalogActionData.SIZEOF, ulRestrictToDevice);
     }
 
     // --- [ VRInput_GetPoseActionData ] ---
@@ -251,8 +269,18 @@ public class VRInput {
      * @param eOrigin one of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table>
      */
     @NativeType("EVRInputError")
-    public static int VRInput_GetPoseActionData(@NativeType("VRActionHandle_t") long action, @NativeType("ETrackingUniverseOrigin") int eOrigin, float fPredictedSecondsFromNow, @NativeType("InputPoseActionData_t *") InputPoseActionData.Buffer pActionData, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
-        return nVRInput_GetPoseActionData(action, eOrigin, fPredictedSecondsFromNow, pActionData.address(), pActionData.remaining(), ulRestrictToDevice);
+    public static int VRInput_GetPoseActionData(@NativeType("VRActionHandle_t") long action, @NativeType("ETrackingUniverseOrigin") int eOrigin, float fPredictedSecondsFromNow, @NativeType("InputPoseActionData_t *") InputPoseActionData pActionData, @NativeType("uint32_t") int unActionDataSize, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetPoseActionData(action, eOrigin, fPredictedSecondsFromNow, pActionData.address(), unActionDataSize, ulRestrictToDevice);
+    }
+
+    /**
+     * Reads the state of a pose action given its handle.
+     *
+     * @param eOrigin one of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table>
+     */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetPoseActionData(@NativeType("VRActionHandle_t") long action, @NativeType("ETrackingUniverseOrigin") int eOrigin, float fPredictedSecondsFromNow, @NativeType("InputPoseActionData_t *") InputPoseActionData pActionData, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetPoseActionData(action, eOrigin, fPredictedSecondsFromNow, pActionData.address(), InputPoseActionData.SIZEOF, ulRestrictToDevice);
     }
 
     // --- [ VRInput_GetSkeletalActionData ] ---
@@ -268,8 +296,14 @@ public class VRInput {
 
     /** Reads the state of a skeletal action given its handle. */
     @NativeType("EVRInputError")
-    public static int VRInput_GetSkeletalActionData(@NativeType("VRActionHandle_t") long action, @NativeType("InputSkeletalActionData_t *") InputSkeletalActionData.Buffer pActionData, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
-        return nVRInput_GetSkeletalActionData(action, pActionData.address(), pActionData.remaining(), ulRestrictToDevice);
+    public static int VRInput_GetSkeletalActionData(@NativeType("VRActionHandle_t") long action, @NativeType("InputSkeletalActionData_t *") InputSkeletalActionData pActionData, @NativeType("uint32_t") int unActionDataSize, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetSkeletalActionData(action, pActionData.address(), unActionDataSize, ulRestrictToDevice);
+    }
+
+    /** Reads the state of a skeletal action given its handle. */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetSkeletalActionData(@NativeType("VRActionHandle_t") long action, @NativeType("InputSkeletalActionData_t *") InputSkeletalActionData pActionData, @NativeType("VRInputValueHandle_t") long ulRestrictToDevice) {
+        return nVRInput_GetSkeletalActionData(action, pActionData.address(), InputSkeletalActionData.SIZEOF, ulRestrictToDevice);
     }
 
     // --- [ VRInput_GetSkeletalBoneData ] ---
@@ -320,11 +354,11 @@ public class VRInput {
         return nVRInput_GetSkeletalBoneDataCompressed(action, eTransformSpace, eMotionRange, memAddressSafe(pvCompressedData), remainingSafe(pvCompressedData), memAddressSafe(punRequiredCompressedSize), ulRestrictToDevice);
     }
 
-    // --- [ VRInput_UncompressSkeletalActionData ] ---
+    // --- [ VRInput_DecompressSkeletalBoneData ] ---
 
-    /** Unsafe version of: {@link #VRInput_UncompressSkeletalActionData UncompressSkeletalActionData} */
-    public static int nVRInput_UncompressSkeletalActionData(long pvCompressedBuffer, int unCompressedBufferSize, long peTransformSpace, long pTransformArray, int unTransformArrayCount) {
-        long __functionAddress = OpenVR.VRInput.UncompressSkeletalActionData;
+    /** Unsafe version of: {@link #VRInput_DecompressSkeletalBoneData DecompressSkeletalBoneData} */
+    public static int nVRInput_DecompressSkeletalBoneData(long pvCompressedBuffer, int unCompressedBufferSize, long peTransformSpace, long pTransformArray, int unTransformArrayCount) {
+        long __functionAddress = OpenVR.VRInput.DecompressSkeletalBoneData;
         if (CHECKS) {
             check(__functionAddress);
         }
@@ -333,11 +367,11 @@ public class VRInput {
 
     /** Turns a compressed buffer from {@link #VRInput_GetSkeletalBoneDataCompressed GetSkeletalBoneDataCompressed} and turns it back into a bone transform array. */
     @NativeType("EVRInputError")
-    public static int VRInput_UncompressSkeletalActionData(@NativeType("void *") ByteBuffer pvCompressedBuffer, @NativeType("EVRSkeletalTransformSpace *") IntBuffer peTransformSpace, @NativeType("VRBoneTransform_t *") VRBoneTransform.Buffer pTransformArray) {
+    public static int VRInput_DecompressSkeletalBoneData(@NativeType("void *") ByteBuffer pvCompressedBuffer, @NativeType("EVRSkeletalTransformSpace *") IntBuffer peTransformSpace, @NativeType("VRBoneTransform_t *") VRBoneTransform.Buffer pTransformArray) {
         if (CHECKS) {
             check(peTransformSpace, 1);
         }
-        return nVRInput_UncompressSkeletalActionData(memAddress(pvCompressedBuffer), pvCompressedBuffer.remaining(), memAddress(peTransformSpace), pTransformArray.address(), pTransformArray.remaining());
+        return nVRInput_DecompressSkeletalBoneData(memAddress(pvCompressedBuffer), pvCompressedBuffer.remaining(), memAddress(peTransformSpace), pTransformArray.address(), pTransformArray.remaining());
     }
 
     // --- [ VRInput_TriggerHapticVibrationAction ] ---
@@ -399,8 +433,14 @@ public class VRInput {
 
     /** Retrieves useful information for the origin of this action. */
     @NativeType("EVRInputError")
-    public static int VRInput_GetOriginTrackedDeviceInfo(@NativeType("VRInputValueHandle_t") long origin, @NativeType("InputOriginInfo_t *") InputOriginInfo.Buffer pOriginInfo) {
-        return nVRInput_GetOriginTrackedDeviceInfo(origin, pOriginInfo.address(), pOriginInfo.remaining());
+    public static int VRInput_GetOriginTrackedDeviceInfo(@NativeType("VRInputValueHandle_t") long origin, @NativeType("InputOriginInfo_t *") InputOriginInfo pOriginInfo, @NativeType("uint32_t") int unOriginInfoSize) {
+        return nVRInput_GetOriginTrackedDeviceInfo(origin, pOriginInfo.address(), unOriginInfoSize);
+    }
+
+    /** Retrieves useful information for the origin of this action. */
+    @NativeType("EVRInputError")
+    public static int VRInput_GetOriginTrackedDeviceInfo(@NativeType("VRInputValueHandle_t") long origin, @NativeType("InputOriginInfo_t *") InputOriginInfo pOriginInfo) {
+        return nVRInput_GetOriginTrackedDeviceInfo(origin, pOriginInfo.address(), InputOriginInfo.SIZEOF);
     }
 
     // --- [ VRInput_ShowActionOrigins ] ---

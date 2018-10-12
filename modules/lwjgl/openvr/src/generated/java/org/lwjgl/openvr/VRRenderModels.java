@@ -437,12 +437,12 @@ public class VRRenderModels {
     // --- [ VRRenderModels_GetComponentStateForDevicePath ] ---
 
     /** Unsafe version of: {@link #VRRenderModels_GetComponentStateForDevicePath GetComponentStateForDevicePath} */
-    public static int nVRRenderModels_GetComponentStateForDevicePath(long pchRenderModelName, long pchComponentName, long devicePath, long pState, long pComponentState) {
+    public static boolean nVRRenderModels_GetComponentStateForDevicePath(long pchRenderModelName, long pchComponentName, long devicePath, long pState, long pComponentState) {
         long __functionAddress = OpenVR.VRRenderModels.GetComponentStateForDevicePath;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPJPPI(__functionAddress, pchRenderModelName, pchComponentName, devicePath, pState, pComponentState);
+        return callPPJPPZ(__functionAddress, pchRenderModelName, pchComponentName, devicePath, pState, pComponentState);
     }
 
     /**
@@ -450,8 +450,8 @@ public class VRRenderModels {
      *         return true Note: For dynamic objects, visibility may be dynamic. (I.e., true/false will be returned based on controller state and controller mode
      *         state).
      */
-    @NativeType("uint32_t")
-    public static int VRRenderModels_GetComponentStateForDevicePath(@NativeType("char const *") ByteBuffer pchRenderModelName, @NativeType("char const *") ByteBuffer pchComponentName, @NativeType("VRInputValueHandle_t") long devicePath, @NativeType("RenderModel_ControllerMode_State_t const *") RenderModelControllerModeState pState, @NativeType("RenderModel_ComponentState_t *") RenderModelComponentState pComponentState) {
+    @NativeType("bool")
+    public static boolean VRRenderModels_GetComponentStateForDevicePath(@NativeType("char const *") ByteBuffer pchRenderModelName, @NativeType("char const *") ByteBuffer pchComponentName, @NativeType("VRInputValueHandle_t") long devicePath, @NativeType("RenderModel_ControllerMode_State_t const *") RenderModelControllerModeState pState, @NativeType("RenderModel_ComponentState_t *") RenderModelComponentState pComponentState) {
         if (CHECKS) {
             checkNT1(pchRenderModelName);
             checkNT1(pchComponentName);
@@ -464,8 +464,8 @@ public class VRRenderModels {
      *         return true Note: For dynamic objects, visibility may be dynamic. (I.e., true/false will be returned based on controller state and controller mode
      *         state).
      */
-    @NativeType("uint32_t")
-    public static int VRRenderModels_GetComponentStateForDevicePath(@NativeType("char const *") CharSequence pchRenderModelName, @NativeType("char const *") CharSequence pchComponentName, @NativeType("VRInputValueHandle_t") long devicePath, @NativeType("RenderModel_ControllerMode_State_t const *") RenderModelControllerModeState pState, @NativeType("RenderModel_ComponentState_t *") RenderModelComponentState pComponentState) {
+    @NativeType("bool")
+    public static boolean VRRenderModels_GetComponentStateForDevicePath(@NativeType("char const *") CharSequence pchRenderModelName, @NativeType("char const *") CharSequence pchComponentName, @NativeType("VRInputValueHandle_t") long devicePath, @NativeType("RenderModel_ControllerMode_State_t const *") RenderModelControllerModeState pState, @NativeType("RenderModel_ComponentState_t *") RenderModelComponentState pComponentState) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             ByteBuffer pchRenderModelNameEncoded = stack.ASCII(pchRenderModelName);

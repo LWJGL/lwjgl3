@@ -148,7 +148,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         AutoSize("pchComponentRenderModelName")..uint32_t.IN("unComponentRenderModelNameLen", "")
     )
 
-    uint32_t(
+    bool(
         "GetComponentStateForDevicePath",
         "",
 

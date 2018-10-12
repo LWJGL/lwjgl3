@@ -852,7 +852,7 @@ public final class OpenVR {
             GetSkeletalActionData,
             GetSkeletalBoneData,
             GetSkeletalBoneDataCompressed,
-            UncompressSkeletalActionData,
+            DecompressSkeletalBoneData,
             TriggerHapticVibrationAction,
             GetActionOrigins,
             GetOriginLocalizedName,
@@ -873,7 +873,7 @@ public final class OpenVR {
             GetSkeletalActionData = table.get(8);
             GetSkeletalBoneData = table.get(9);
             GetSkeletalBoneDataCompressed = table.get(10);
-            UncompressSkeletalActionData = table.get(11);
+            DecompressSkeletalBoneData = table.get(11);
             TriggerHapticVibrationAction = table.get(12);
             GetActionOrigins = table.get(13);
             GetOriginLocalizedName = table.get(14);
