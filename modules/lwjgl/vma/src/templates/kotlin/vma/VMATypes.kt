@@ -87,6 +87,7 @@ val VmaAllocator = "VmaAllocator".handle
 val VmaAllocation = "VmaAllocation".handle
 val VmaPool = "VmaPool".handle
 
+val VmaRecordFlags = "VmaRecordFlags".enumType
 val VmaAllocatorCreateFlags = "VmaAllocatorCreateFlags".enumType
 val VmaAllocationCreateFlags = "VmaAllocationCreateFlags".enumType
 val VmaMemoryUsage = "VmaMemoryUsage".enumType
@@ -152,6 +153,8 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
     "PFN_vkFreeMemory".handle.member("vkFreeMemory", "")
     "PFN_vkMapMemory".handle.member("vkMapMemory", "")
     "PFN_vkUnmapMemory".handle.member("vkUnmapMemory", "")
+    "PFN_vkFlushMappedMemoryRanges".handle.member("vkFlushMappedMemoryRanges", "")
+    "PFN_vkInvalidateMappedMemoryRanges".handle.member("vkInvalidateMappedMemoryRanges", "")
     "PFN_vkBindBufferMemory".handle.member("vkBindBufferMemory", "")
     "PFN_vkBindImageMemory".handle.member("vkBindImageMemory", "")
     "PFN_vkGetBufferMemoryRequirements".handle.member("vkGetBufferMemoryRequirements", "")
@@ -180,6 +183,8 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
             .vkFreeMemory(dc.vkFreeMemory)
             .vkMapMemory(dc.vkMapMemory)
             .vkUnmapMemory(dc.vkUnmapMemory)
+            .vkFlushMappedMemoryRanges(dc.vkFlushMappedMemoryRanges)
+            .vkInvalidateMappedMemoryRanges(dc.vkInvalidateMappedMemoryRanges)
             .vkBindBufferMemory(dc.vkBindBufferMemory)
             .vkBindImageMemory(dc.vkBindImageMemory)
             .vkGetBufferMemoryRequirements(dc.vkGetBufferMemoryRequirements)
@@ -192,6 +197,19 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
             .vkGetImageMemoryRequirements2KHR(dc.vkGetImageMemoryRequirements2 != NULL ? dc.vkGetImageMemoryRequirements2 : dc.vkGetImageMemoryRequirements2KHR);
         return this;
     }""")
+}
+
+val VmaRecordSettings = struct(Module.VMA, "VmaRecordSettings") {
+    VmaRecordFlags.member("flags", "flags for recording").links("RECORD_\\w+")
+    charASCII.const.p.member(
+        "pFilePath",
+        """
+        path to the file that should be written by the recording.
+
+        Suggested extension: "csv". If the file already exists, it will be overwritten. It will be opened for the whole time {@code VmaAllocator} object is
+        alive. If opening this file fails, creation of the whole allocator object fails.
+        """
+    )
 }
 
 val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBuffer = true) {
@@ -256,6 +274,15 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
         """
     )
     VmaVulkanFunctions.const.p.member("pVulkanFunctions", "pointers to Vulkan functions")
+    nullable..VmaRecordSettings.const.p.member(
+        "pRecordSettings",
+        """
+        parameters for recording of VMA calls. Can be null.
+
+        If not null, it enables recording of calls to VMA functions to a file. If support for recording is not enabled using {@code VMA_RECORDING_ENABLED}
+        macro, creation of the allocator object fails with {@code VK_ERROR_FEATURE_NOT_PRESENT}.
+        """
+    )
 }
 
 val VmaStatInfo = struct(Module.VMA, "VmaStatInfo", mutable = false) {
@@ -348,9 +375,10 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
     VkDeviceSize.member(
         "blockSize",
         """
-        size of a single {@code VkDeviceMemory} block to be allocated as part of this pool, in bytes.
+        size of a single {@code VkDeviceMemory} block to be allocated as part of this pool, in bytes. Optional.
 
-        Optional. Leave 0 to use default.
+        Specify nonzero to set explicit, constant size of memory blocks used by this pool. Leave 0 to use default and let the library manage block sizes
+        automatically. Sizes of particular blocks may vary.
         """
     )
     size_t.member(
@@ -358,17 +386,16 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
         """
         minimum number of blocks to be always allocated in this pool, even if they stay empty.
 
-        Set to 0 to have no preallocated blocks and let the pool be completely empty.
+        Set to 0 to have no preallocated blocks and allow the pool be completely empty.
         """
     )
     size_t.member(
         "maxBlockCount",
         """
-        maximum number of blocks that can be allocated in this pool.
+        maximum number of blocks that can be allocated in this pool. Optional.
 
-        Optional. Set to 0 to use {@code SIZE_MAX}, which means no limit.
-
-        Set to same value as {@code minBlockCount} to have fixed amount of memory allocated throuout whole lifetime of this pool.
+        Set to 0 to use default, which is {@code SIZE_MAX}, which means no limit. Set to same value as ##VmaPoolCreateInfo{@code ::minBlockCount} to have fixed
+        amount of memory allocated throughout whole lifetime of this pool.
         """
     )
     uint32_t.member(
@@ -395,12 +422,13 @@ val VmaPoolStats = struct(Module.VMA, "VmaPoolStats", mutable = false) {
     VkDeviceSize.member(
         "unusedRangeSizeMax",
         """
-        size of the largest continuous free memory region.
+        size of the largest continuous free memory region available for new allocation.
 
         Making a new allocation of that size is not guaranteed to succeed because of possible additional margin required to respect alignment and buffer/imag
         granularity.
         """
     )
+    size_t.member("blockCount", "number of {@code VkDeviceMemory} blocks allocated for this pool")
 }
 
 val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false) {

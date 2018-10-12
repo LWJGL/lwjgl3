@@ -24,10 +24,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code allocationCount} &ndash; number of {@code VmaAllocation} objects created from this pool that were not destroyed or lost</li>
  * <li>{@code unusedRangeCount} &ndash; number of continuous memory ranges in the pool not used by any {@code VmaAllocation}</li>
  * <li>{@code unusedRangeSizeMax} &ndash; 
- * size of the largest continuous free memory region.
+ * size of the largest continuous free memory region available for new allocation.
  * 
  * <p>Making a new allocation of that size is not guaranteed to succeed because of possible additional margin required to respect alignment and buffer/imag
  * granularity.</p></li>
+ * <li>{@code blockCount} &ndash; number of {@code VkDeviceMemory} blocks allocated for this pool</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -39,6 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t allocationCount;
  *     size_t unusedRangeCount;
  *     VkDeviceSize unusedRangeSizeMax;
+ *     size_t blockCount;
  * }</code></pre>
  */
 public class VmaPoolStats extends Struct implements NativeResource {
@@ -55,7 +57,8 @@ public class VmaPoolStats extends Struct implements NativeResource {
         UNUSEDSIZE,
         ALLOCATIONCOUNT,
         UNUSEDRANGECOUNT,
-        UNUSEDRANGESIZEMAX;
+        UNUSEDRANGESIZEMAX,
+        BLOCKCOUNT;
 
     static {
         Layout layout = __struct(
@@ -63,7 +66,8 @@ public class VmaPoolStats extends Struct implements NativeResource {
             __member(8),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(8)
+            __member(8),
+            __member(POINTER_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -74,6 +78,7 @@ public class VmaPoolStats extends Struct implements NativeResource {
         ALLOCATIONCOUNT = layout.offsetof(2);
         UNUSEDRANGECOUNT = layout.offsetof(3);
         UNUSEDRANGESIZEMAX = layout.offsetof(4);
+        BLOCKCOUNT = layout.offsetof(5);
     }
 
     /**
@@ -104,6 +109,9 @@ public class VmaPoolStats extends Struct implements NativeResource {
     /** Returns the value of the {@code unusedRangeSizeMax} field. */
     @NativeType("VkDeviceSize")
     public long unusedRangeSizeMax() { return nunusedRangeSizeMax(address()); }
+    /** Returns the value of the {@code blockCount} field. */
+    @NativeType("size_t")
+    public long blockCount() { return nblockCount(address()); }
 
     // -----------------------------------
 
@@ -258,6 +266,8 @@ public class VmaPoolStats extends Struct implements NativeResource {
     public static long nunusedRangeCount(long struct) { return memGetAddress(struct + VmaPoolStats.UNUSEDRANGECOUNT); }
     /** Unsafe version of {@link #unusedRangeSizeMax}. */
     public static long nunusedRangeSizeMax(long struct) { return UNSAFE.getLong(null, struct + VmaPoolStats.UNUSEDRANGESIZEMAX); }
+    /** Unsafe version of {@link #blockCount}. */
+    public static long nblockCount(long struct) { return memGetAddress(struct + VmaPoolStats.BLOCKCOUNT); }
 
     // -----------------------------------
 
@@ -312,6 +322,9 @@ public class VmaPoolStats extends Struct implements NativeResource {
         /** Returns the value of the {@code unusedRangeSizeMax} field. */
         @NativeType("VkDeviceSize")
         public long unusedRangeSizeMax() { return VmaPoolStats.nunusedRangeSizeMax(address()); }
+        /** Returns the value of the {@code blockCount} field. */
+        @NativeType("size_t")
+        public long blockCount() { return VmaPoolStats.nblockCount(address()); }
 
     }
 

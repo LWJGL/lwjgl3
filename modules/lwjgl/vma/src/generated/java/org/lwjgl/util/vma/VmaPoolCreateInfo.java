@@ -20,21 +20,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code memoryTypeIndex} &ndash; Vulkan memory type index to allocate this pool from</li>
- * <li>{@code flags} &ndash; Use combination of {@code VmaPoolCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT}</td></tr></table></li>
+ * <li>{@code flags} &ndash; Use combination of {@code VmaPoolCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT}</td><td>{@link Vma#VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT}</td></tr></table></li>
  * <li>{@code blockSize} &ndash; 
- * size of a single {@code VkDeviceMemory} block to be allocated as part of this pool, in bytes.
+ * size of a single {@code VkDeviceMemory} block to be allocated as part of this pool, in bytes. Optional.
  * 
- * <p>Optional. Leave 0 to use default.</p></li>
+ * <p>Specify nonzero to set explicit, constant size of memory blocks used by this pool. Leave 0 to use default and let the library manage block sizes
+ * automatically. Sizes of particular blocks may vary.</p></li>
  * <li>{@code minBlockCount} &ndash; 
  * minimum number of blocks to be always allocated in this pool, even if they stay empty.
  * 
- * <p>Set to 0 to have no preallocated blocks and let the pool be completely empty.</p></li>
+ * <p>Set to 0 to have no preallocated blocks and allow the pool be completely empty.</p></li>
  * <li>{@code maxBlockCount} &ndash; 
- * maximum number of blocks that can be allocated in this pool.
+ * maximum number of blocks that can be allocated in this pool. Optional.
  * 
- * <p>Optional. Set to 0 to use {@code SIZE_MAX}, which means no limit.</p>
- * 
- * <p>Set to same value as {@code minBlockCount} to have fixed amount of memory allocated throuout whole lifetime of this pool.</p></li>
+ * <p>Set to 0 to use default, which is {@code SIZE_MAX}, which means no limit. Set to same value as {@link VmaPoolCreateInfo}{@code ::minBlockCount} to have fixed
+ * amount of memory allocated throughout whole lifetime of this pool.</p></li>
  * <li>{@code frameInUseCount} &ndash; 
  * maximum number of additional frames that are in use at the same time as current frame.
  * 

@@ -63,6 +63,11 @@ import org.lwjgl.vulkan.*;
  * allocations with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY} result when memory capacity is exceeded. It may return success and just silently migrate some
  * device memory blocks to system RAM.</p></li>
  * <li>{@code pVulkanFunctions} &ndash; pointers to Vulkan functions</li>
+ * <li>{@code pRecordSettings} &ndash; 
+ * parameters for recording of VMA calls. Can be null.
+ * 
+ * <p>If not null, it enables recording of calls to VMA functions to a file. If support for recording is not enabled using {@code VMA_RECORDING_ENABLED}
+ * macro, creation of the allocator object fails with {@code VK_ERROR_FEATURE_NOT_PRESENT}.</p></li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -78,6 +83,7 @@ import org.lwjgl.vulkan.*;
  *     uint32_t frameInUseCount;
  *     VkDeviceSize const * pHeapSizeLimit;
  *     {@link VmaVulkanFunctions VmaVulkanFunctions const} * pVulkanFunctions;
+ *     {@link VmaRecordSettings VmaRecordSettings const} * pRecordSettings;
  * }</code></pre>
  */
 public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
@@ -98,7 +104,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         PDEVICEMEMORYCALLBACKS,
         FRAMEINUSECOUNT,
         PHEAPSIZELIMIT,
-        PVULKANFUNCTIONS;
+        PVULKANFUNCTIONS,
+        PRECORDSETTINGS;
 
     static {
         Layout layout = __struct(
@@ -109,6 +116,7 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(4),
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)
         );
@@ -125,6 +133,7 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         FRAMEINUSECOUNT = layout.offsetof(6);
         PHEAPSIZELIMIT = layout.offsetof(7);
         PVULKANFUNCTIONS = layout.offsetof(8);
+        PRECORDSETTINGS = layout.offsetof(9);
     }
 
     /**
@@ -174,6 +183,10 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     /** Returns a {@link VmaVulkanFunctions} view of the struct pointed to by the {@code pVulkanFunctions} field. */
     @NativeType("VmaVulkanFunctions const *")
     public VmaVulkanFunctions pVulkanFunctions() { return npVulkanFunctions(address()); }
+    /** Returns a {@link VmaRecordSettings} view of the struct pointed to by the {@code pRecordSettings} field. */
+    @Nullable
+    @NativeType("VmaRecordSettings const *")
+    public VmaRecordSettings pRecordSettings() { return npRecordSettings(address()); }
 
     /** Sets the specified value to the {@code flags} field. */
     public VmaAllocatorCreateInfo flags(@NativeType("VmaAllocatorCreateFlags") int value) { nflags(address(), value); return this; }
@@ -193,6 +206,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     public VmaAllocatorCreateInfo pHeapSizeLimit(@Nullable @NativeType("VkDeviceSize const *") LongBuffer value) { npHeapSizeLimit(address(), value); return this; }
     /** Sets the address of the specified {@link VmaVulkanFunctions} to the {@code pVulkanFunctions} field. */
     public VmaAllocatorCreateInfo pVulkanFunctions(@NativeType("VmaVulkanFunctions const *") VmaVulkanFunctions value) { npVulkanFunctions(address(), value); return this; }
+    /** Sets the address of the specified {@link VmaRecordSettings} to the {@code pRecordSettings} field. */
+    public VmaAllocatorCreateInfo pRecordSettings(@Nullable @NativeType("VmaRecordSettings const *") VmaRecordSettings value) { npRecordSettings(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaAllocatorCreateInfo set(
@@ -204,7 +219,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         @Nullable VmaDeviceMemoryCallbacks pDeviceMemoryCallbacks,
         int frameInUseCount,
         @Nullable LongBuffer pHeapSizeLimit,
-        VmaVulkanFunctions pVulkanFunctions
+        VmaVulkanFunctions pVulkanFunctions,
+        @Nullable VmaRecordSettings pRecordSettings
     ) {
         flags(flags);
         physicalDevice(physicalDevice);
@@ -215,6 +231,7 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         frameInUseCount(frameInUseCount);
         pHeapSizeLimit(pHeapSizeLimit);
         pVulkanFunctions(pVulkanFunctions);
+        pRecordSettings(pRecordSettings);
 
         return this;
     }
@@ -310,6 +327,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     @Nullable public static LongBuffer npHeapSizeLimit(long struct, int capacity) { return memLongBufferSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PHEAPSIZELIMIT), capacity); }
     /** Unsafe version of {@link #pVulkanFunctions}. */
     public static VmaVulkanFunctions npVulkanFunctions(long struct) { return VmaVulkanFunctions.create(memGetAddress(struct + VmaAllocatorCreateInfo.PVULKANFUNCTIONS)); }
+    /** Unsafe version of {@link #pRecordSettings}. */
+    @Nullable public static VmaRecordSettings npRecordSettings(long struct) { return VmaRecordSettings.createSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PRECORDSETTINGS)); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocatorCreateInfo.FLAGS, value); }
@@ -329,6 +348,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     public static void npHeapSizeLimit(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VmaAllocatorCreateInfo.PHEAPSIZELIMIT, memAddressSafe(value)); }
     /** Unsafe version of {@link #pVulkanFunctions(VmaVulkanFunctions) pVulkanFunctions}. */
     public static void npVulkanFunctions(long struct, VmaVulkanFunctions value) { memPutAddress(struct + VmaAllocatorCreateInfo.PVULKANFUNCTIONS, value.address()); }
+    /** Unsafe version of {@link #pRecordSettings(VmaRecordSettings) pRecordSettings}. */
+    public static void npRecordSettings(long struct, @Nullable VmaRecordSettings value) { memPutAddress(struct + VmaAllocatorCreateInfo.PRECORDSETTINGS, memAddressSafe(value)); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -345,6 +366,10 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         long pVulkanFunctions = memGetAddress(struct + VmaAllocatorCreateInfo.PVULKANFUNCTIONS);
         check(pVulkanFunctions);
         VmaVulkanFunctions.validate(pVulkanFunctions);
+        long pRecordSettings = memGetAddress(struct + VmaAllocatorCreateInfo.PRECORDSETTINGS);
+        if (pRecordSettings != NULL) {
+            VmaRecordSettings.validate(pRecordSettings);
+        }
     }
 
     /**
