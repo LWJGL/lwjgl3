@@ -217,6 +217,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1getFrameProgression
     *((ZSTD_frameProgression*)(intptr_t)__result) = ZSTD_getFrameProgression(cctx);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1toFlushNow(JNIEnv *__env, jclass clazz, jlong cctxAddress) {
+    ZSTD_CCtx *cctx = (ZSTD_CCtx *)(intptr_t)cctxAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)ZSTD_toFlushNow(cctx);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1getFrameHeader(JNIEnv *__env, jclass clazz, jlong zfhPtrAddress, jlong srcAddress, jlong srcSize) {
     ZSTD_frameHeader *zfhPtr = (ZSTD_frameHeader *)(intptr_t)zfhPtrAddress;
     void const *src = (void const *)(intptr_t)srcAddress;

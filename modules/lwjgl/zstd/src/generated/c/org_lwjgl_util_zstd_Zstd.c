@@ -5,6 +5,7 @@
  */
 #include "common_tools.h"
 DISABLE_WARNINGS()
+#define ZSTD_STATIC_LINKING_ONLY
 #include "zstd.h"
 ENABLE_WARNINGS()
 

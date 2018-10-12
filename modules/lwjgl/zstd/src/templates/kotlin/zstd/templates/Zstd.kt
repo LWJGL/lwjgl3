@@ -10,6 +10,7 @@ import zstd.*
 val Zstd = "Zstd".nativeClass(Module.ZSTD, prefix = "ZSTD", prefixMethod = "ZSTD_", library = ZSTD_LIBRARY) {
     nativeDirective(
         """DISABLE_WARNINGS()
+#define ZSTD_STATIC_LINKING_ONLY
 #include "zstd.h"
 ENABLE_WARNINGS()""")
 
@@ -21,8 +22,11 @@ ENABLE_WARNINGS()""")
         <h3>Introduction</h3>
 
         zstd, short for Zstandard, is a fast lossless compression algorithm, targeting real-time compression scenarios at zlib-level and better compression
-        ratios. The zstd compression library provides in-memory compression and decompression functions. The library supports compression levels from 1 up to
-        #maxCLevel() which is currently 22. Levels &ge; 20, labeled {@code --ultra}, should be used with caution, as they require more memory.
+        ratios. The zstd compression library provides in-memory compression and decompression functions.
+
+        The library supports regular compression levels from 1 up to #maxCLevel(), which is currently 22. Levels &ge; 20, labeled {@code --ultra}, should be
+        used with caution, as they require more memory. The library also offers negative compression levels, which extend the range of speed vs. ratio
+        preferences. The lower the level, the faster the speed (at the cost of compression).
 
         Compression can be done in:
         ${ul(
@@ -31,14 +35,15 @@ ENABLE_WARNINGS()""")
             "unbounded multiple steps (described as Streaming compression)"
         )}
 
-        The compression ratio achievable on small data can be highly improved using a dictionary in:
+        The compression ratio achievable on small data can be highly improved using a dictionary. Dictionary compression can be performed in:
         ${ul(
             "a single step (described as Simple dictionary API)",
             "a single step, reusing a dictionary (described as Bulk-processing dictionary API)"
         )}
 
         Advanced experimental functions can be accessed using {@code \#define ZSTD_STATIC_LINKING_ONLY} before including {@code zstd.h}. Advanced experimental
-        APIs shall never be used with a dynamic library. They are not "stable", their definition may change in the future. Only static linking is allowed.
+        APIs should never be used with a dynamically-linked library. They are not "stable", their definitions or signatures may change in the future. Only
+        static linking is allowed.
 
         <h3>Streaming compression - HowTo</h3>
 
@@ -81,7 +86,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."3",
-        "VERSION_RELEASE".."5"
+        "VERSION_RELEASE".."6"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
@@ -341,6 +346,8 @@ ENABLE_WARNINGS()""")
         can be created once and shared by multiple threads concurrently, since its usage is read-only.
 
         {@code dictBuffer} can be released after {@code ZSTD_CDict} creation, since its content is copied within CDict.
+
+        Note: A {@code ZSTD_CDict} can be created with an empty dictionary, but it is inefficient for small data.
         """,
 
         void.const.p.IN("dictBuffer", ""),
@@ -362,6 +369,9 @@ ENABLE_WARNINGS()""")
 
         Faster startup than #compress_usingDict(), recommended when same dictionary is used multiple times. Note that compression level is decided during
         dictionary creation. Frame parameters are hardcoded ({@code dictID=yes, contentSize=yes, checksum=no})
+
+        Note: {@code ZSTD_compress_usingCDict()} can be used with a {@code ZSTD_CDict} created from an empty dictionary. But it is inefficient for small data,
+        and it is recommended to use #compressCCtx().
         """,
 
         ZSTD_CCtx.p.IN("cctx", ""),

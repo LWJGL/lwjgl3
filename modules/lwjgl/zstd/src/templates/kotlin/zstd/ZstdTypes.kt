@@ -101,9 +101,12 @@ val ZSTD_frameHeader = struct(Module.ZSTD, "ZSTDFrameHeader", nativeName = "ZSTD
 }
 
 val ZSTD_frameProgression = struct(Module.ZSTD, "ZSTDFrameProgression", nativeName = "ZSTD_frameProgression", mutable = false) {
-    unsigned_long_long.member("ingested", "")
-    unsigned_long_long.member("consumed", "")
-    unsigned_long_long.member("produced", "")
+    unsigned_long_long.member("ingested", "nb input bytes read and buffered")
+    unsigned_long_long.member("consumed", "nb input bytes actually compressed")
+    unsigned_long_long.member("produced", "nb of compressed bytes generated and buffered")
+    unsigned_long_long.member("flushed", "nb of compressed bytes flushed: not provided; can be tracked from caller side")
+    unsigned.member("currentJobID", "MT only: latest started job nb")
+    unsigned.member("nbActiveWorkers", "MT only: nb of workers actively compressing at probe time")
 }
 
 // zstd_errors.h

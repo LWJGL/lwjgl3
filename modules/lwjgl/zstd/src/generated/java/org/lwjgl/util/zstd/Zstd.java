@@ -21,8 +21,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Introduction</h3>
  * 
  * <p>zstd, short for Zstandard, is a fast lossless compression algorithm, targeting real-time compression scenarios at zlib-level and better compression
- * ratios. The zstd compression library provides in-memory compression and decompression functions. The library supports compression levels from 1 up to
- * {@link #ZSTD_maxCLevel maxCLevel} which is currently 22. Levels &ge; 20, labeled {@code --ultra}, should be used with caution, as they require more memory.</p>
+ * ratios. The zstd compression library provides in-memory compression and decompression functions.</p>
+ * 
+ * <p>The library supports regular compression levels from 1 up to {@link #ZSTD_maxCLevel maxCLevel}, which is currently 22. Levels &ge; 20, labeled {@code --ultra}, should be
+ * used with caution, as they require more memory. The library also offers negative compression levels, which extend the range of speed vs. ratio
+ * preferences. The lower the level, the faster the speed (at the cost of compression).</p>
  * 
  * <p>Compression can be done in:</p>
  * 
@@ -32,7 +35,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>unbounded multiple steps (described as Streaming compression)</li>
  * </ul>
  * 
- * <p>The compression ratio achievable on small data can be highly improved using a dictionary in:</p>
+ * <p>The compression ratio achievable on small data can be highly improved using a dictionary. Dictionary compression can be performed in:</p>
  * 
  * <ul>
  * <li>a single step (described as Simple dictionary API)</li>
@@ -40,7 +43,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul>
  * 
  * <p>Advanced experimental functions can be accessed using {@code #define ZSTD_STATIC_LINKING_ONLY} before including {@code zstd.h}. Advanced experimental
- * APIs shall never be used with a dynamic library. They are not "stable", their definition may change in the future. Only static linking is allowed.</p>
+ * APIs should never be used with a dynamically-linked library. They are not "stable", their definitions or signatures may change in the future. Only
+ * static linking is allowed.</p>
  * 
  * <h3>Streaming compression - HowTo</h3>
  * 
@@ -83,7 +87,7 @@ public class Zstd {
     public static final int
         ZSTD_VERSION_MAJOR   = 1,
         ZSTD_VERSION_MINOR   = 3,
-        ZSTD_VERSION_RELEASE = 5;
+        ZSTD_VERSION_RELEASE = 6;
 
     /** Version number. */
     public static final int ZSTD_VERSION_NUMBER = (ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE);
@@ -364,6 +368,8 @@ public class Zstd {
      * can be created once and shared by multiple threads concurrently, since its usage is read-only.</p>
      * 
      * <p>{@code dictBuffer} can be released after {@code ZSTD_CDict} creation, since its content is copied within CDict.</p>
+     * 
+     * <p>Note: A {@code ZSTD_CDict} can be created with an empty dictionary, but it is inefficient for small data.</p>
      */
     @NativeType("ZSTD_CDict *")
     public static long ZSTD_createCDict(@NativeType("void const *") ByteBuffer dictBuffer, int compressionLevel) {
@@ -394,6 +400,9 @@ public class Zstd {
      * 
      * <p>Faster startup than {@link #ZSTD_compress_usingDict compress_usingDict}, recommended when same dictionary is used multiple times. Note that compression level is decided during
      * dictionary creation. Frame parameters are hardcoded ({@code dictID=yes, contentSize=yes, checksum=no})</p>
+     * 
+     * <p>Note: {@code ZSTD_compress_usingCDict()} can be used with a {@code ZSTD_CDict} created from an empty dictionary. But it is inefficient for small data,
+     * and it is recommended to use {@link #ZSTD_compressCCtx compressCCtx}.</p>
      */
     @NativeType("size_t")
     public static long ZSTD_compress_usingCDict(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src, @NativeType("ZSTD_CDict const *") long cdict) {

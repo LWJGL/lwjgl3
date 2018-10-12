@@ -68,6 +68,11 @@ public class ZstdX {
         ZSTD_MAGIC_SKIPPABLE_START = 0x184D2A50,
         ZSTD_MAGIC_DICTIONARY      = 0xEC30A437;
 
+    /** Block size constant. */
+    public static final int
+        ZSTD_BLOCKSIZELOG_MAX = 17,
+        ZSTD_BLOCKSIZE_MAX    = (1<<ZSTD_BLOCKSIZELOG_MAX);
+
     /** Constant. */
     public static final int
         ZSTD_WINDOWLOG_MAX_32       = 30,
@@ -85,8 +90,10 @@ public class ZstdX {
         ZSTD_SEARCHLOG_MIN          = 1,
         ZSTD_SEARCHLENGTH_MAX       = 7,
         ZSTD_SEARCHLENGTH_MIN       = 3,
-        ZSTD_LDM_MINMATCH_MIN       = 4,
+        ZSTD_TARGETLENGTH_MAX       = ZSTD_BLOCKSIZE_MAX,
+        ZSTD_TARGETLENGTH_MIN       = 0,
         ZSTD_LDM_MINMATCH_MAX       = 4096,
+        ZSTD_LDM_MINMATCH_MIN       = 4,
         ZSTD_LDM_BUCKETSIZELOG_MAX  = 8,
         ZSTD_FRAMEHEADERSIZE_PREFIX = 5,
         ZSTD_FRAMEHEADERSIZE_MIN    = 6,
@@ -409,11 +416,6 @@ public class ZstdX {
         ZSTD_e_continue = 0,
         ZSTD_e_flush    = 1,
         ZSTD_e_end      = 2;
-
-    /** Block size constant. */
-    public static final int
-        ZSTD_BLOCKSIZELOG_MAX = 17,
-        ZSTD_BLOCKSIZE_MAX    = (1<<ZSTD_BLOCKSIZELOG_MAX);
 
     static { LibZstd.initialize(); }
 
@@ -966,9 +968,10 @@ public class ZstdX {
 
     /**
      * Tells how much data has been {@code ingested} (read from input) {@code consumed} (input actually compressed) and {@code produced} (output) for current
-     * frame. Therefore, {@code (ingested - consumed)} is amount of input data buffered internally, not yet compressed.
+     * frame.
      * 
-     * <p>Can report progression inside worker threads (multi-threading and non-blocking mode).</p>
+     * <p>Note: {@code (ingested - consumed)} is amount of input data buffered internally, not yet compressed. Aggregates progression inside active worker
+     * threads.</p>
      */
     @NativeType("ZSTD_frameProgression")
     public static ZSTDFrameProgression ZSTD_getFrameProgression(@NativeType("ZSTD_CCtx const *") long cctx, ZSTDFrameProgression __result) {
@@ -977,6 +980,33 @@ public class ZstdX {
         }
         nZSTD_getFrameProgression(cctx, __result.address());
         return __result;
+    }
+
+    // --- [ ZSTD_toFlushNow ] ---
+
+    /** Unsafe version of: {@link #ZSTD_toFlushNow toFlushNow} */
+    public static native long nZSTD_toFlushNow(long cctx);
+
+    /**
+     * Tells how many bytes are ready to be flushed immediately.
+     * 
+     * <p>Useful for multithreading scenarios ({@code nbWorkers} &ge; 1). Probe the oldest active job, defined as oldest job not yet entirely flushed, and check
+     * its output buffer.</p>
+     *
+     * @return amount of data stored in oldest job and ready to be flushed immediately. If {@code @return == 0}, it means either:
+     *         
+     *         <ul>
+     *         <li>there is no active job (could be checked with {@link #ZSTD_getFrameProgression getFrameProgression}), or</li>
+     *         <li>oldest job is still actively compressing data, but everything it has produced has also been flushed so far, therefore flushing speed is currently
+     *         limited by production speed of oldest job irrespective of the speed of concurrent newer jobs.</li>
+     *         </ul>
+     */
+    @NativeType("size_t")
+    public static long ZSTD_toFlushNow(@NativeType("ZSTD_CCtx *") long cctx) {
+        if (CHECKS) {
+            check(cctx);
+        }
+        return nZSTD_toFlushNow(cctx);
     }
 
     // --- [ ZSTD_getFrameHeader ] ---
@@ -1187,7 +1217,9 @@ public class ZstdX {
     /**
      * Reference a prefix (single-usage dictionary) for next compression job.
      * 
-     * <p>Decompression need same prefix to properly regenerate data. Prefix is <b>only used once</b>. Tables are discarded at end of compression job. ({@link #ZSTD_e_end e_end})</p>
+     * <p>Decompression will need same prefix to properly regenerate data. Compressing with a prefix is similar in outcome as performing a diff and compressing
+     * it, but performs much faster, especially during decompression (compression speed is tunable with compression level). Note that prefix is <b>only used
+     * once</b>. Tables are discarded at end of compression job ({@link #ZSTD_e_end e_end}).</p>
      * 
      * <p>Special: Adding any prefix (including {@code NULL}) invalidates any previous prefix or dictionary.</p>
      * 
@@ -1195,6 +1227,8 @@ public class ZstdX {
      * 
      * <ol>
      * <li>Prefix buffer is referenced. It <b>must</b> outlive compression job. Its content must remain unmodified up to end of compression ({@link #ZSTD_e_end e_end}).</li>
+     * <li>If the intention is to diff some large {@code src} data blob with some prior version of itself, ensure that the window size is large enough to
+     * contain the entire source. See {@link #ZSTD_p_windowLog p_windowLog}.</li>
      * <li>Referencing a prefix involves building tables, which are dependent on compression parameters. It's a CPU consuming operation, with non-negligible
      * impact on latency. If there is a need to use same prefix multiple times, consider {@link #ZSTD_CCtx_loadDictionary CCtx_loadDictionary} instead.</li>
      * <li>By default, the prefix is treated as raw content ({@code ZSTD_dm_rawContent}). Use {@link #ZSTD_CCtx_refPrefix_advanced CCtx_refPrefix_advanced} to alter {@code dictMode}.</li>
@@ -1541,6 +1575,8 @@ public class ZstdX {
 
     /**
      * Reference a prefix (single-usage dictionary) for next compression job.
+     * 
+     * <p>This is the reverse operation of {@link #ZSTD_CCtx_refPrefix CCtx_refPrefix}, and must use the same prefix as the one used during compression.</p>
      * 
      * <p>Prefix is <b>only used once</b>. Reference is discarded at end of frame. End of frame is reached when {@code ZSTD_DCtx_decompress_generic()} returns 0.</p>
      * 

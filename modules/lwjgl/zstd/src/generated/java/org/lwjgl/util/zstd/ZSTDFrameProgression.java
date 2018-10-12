@@ -16,6 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * <h3>Member documentation</h3>
+ * 
+ * <ul>
+ * <li>{@code ingested} &ndash; nb input bytes read and buffered</li>
+ * <li>{@code consumed} &ndash; nb input bytes actually compressed</li>
+ * <li>{@code produced} &ndash; nb of compressed bytes generated and buffered</li>
+ * <li>{@code flushed} &ndash; nb of compressed bytes flushed: not provided; can be tracked from caller side</li>
+ * <li>{@code currentJobID} &ndash; MT only: latest started job nb</li>
+ * <li>{@code nbActiveWorkers} &ndash; MT only: nb of workers actively compressing at probe time</li>
+ * </ul>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -23,6 +34,9 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned long long ingested;
  *     unsigned long long consumed;
  *     unsigned long long produced;
+ *     unsigned long long flushed;
+ *     unsigned currentJobID;
+ *     unsigned nbActiveWorkers;
  * }</code></pre>
  */
 @NativeType("struct ZSTD_frameProgression")
@@ -38,13 +52,19 @@ public class ZSTDFrameProgression extends Struct implements NativeResource {
     public static final int
         INGESTED,
         CONSUMED,
-        PRODUCED;
+        PRODUCED,
+        FLUSHED,
+        CURRENTJOBID,
+        NBACTIVEWORKERS;
 
     static {
         Layout layout = __struct(
             __member(8),
             __member(8),
-            __member(8)
+            __member(8),
+            __member(8),
+            __member(4),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -53,6 +73,9 @@ public class ZSTDFrameProgression extends Struct implements NativeResource {
         INGESTED = layout.offsetof(0);
         CONSUMED = layout.offsetof(1);
         PRODUCED = layout.offsetof(2);
+        FLUSHED = layout.offsetof(3);
+        CURRENTJOBID = layout.offsetof(4);
+        NBACTIVEWORKERS = layout.offsetof(5);
     }
 
     /**
@@ -77,6 +100,15 @@ public class ZSTDFrameProgression extends Struct implements NativeResource {
     /** Returns the value of the {@code produced} field. */
     @NativeType("unsigned long long")
     public long produced() { return nproduced(address()); }
+    /** Returns the value of the {@code flushed} field. */
+    @NativeType("unsigned long long")
+    public long flushed() { return nflushed(address()); }
+    /** Returns the value of the {@code currentJobID} field. */
+    @NativeType("unsigned")
+    public int currentJobID() { return ncurrentJobID(address()); }
+    /** Returns the value of the {@code nbActiveWorkers} field. */
+    @NativeType("unsigned")
+    public int nbActiveWorkers() { return nnbActiveWorkers(address()); }
 
     // -----------------------------------
 
@@ -227,6 +259,12 @@ public class ZSTDFrameProgression extends Struct implements NativeResource {
     public static long nconsumed(long struct) { return UNSAFE.getLong(null, struct + ZSTDFrameProgression.CONSUMED); }
     /** Unsafe version of {@link #produced}. */
     public static long nproduced(long struct) { return UNSAFE.getLong(null, struct + ZSTDFrameProgression.PRODUCED); }
+    /** Unsafe version of {@link #flushed}. */
+    public static long nflushed(long struct) { return UNSAFE.getLong(null, struct + ZSTDFrameProgression.FLUSHED); }
+    /** Unsafe version of {@link #currentJobID}. */
+    public static int ncurrentJobID(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameProgression.CURRENTJOBID); }
+    /** Unsafe version of {@link #nbActiveWorkers}. */
+    public static int nnbActiveWorkers(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameProgression.NBACTIVEWORKERS); }
 
     // -----------------------------------
 
@@ -275,6 +313,15 @@ public class ZSTDFrameProgression extends Struct implements NativeResource {
         /** Returns the value of the {@code produced} field. */
         @NativeType("unsigned long long")
         public long produced() { return ZSTDFrameProgression.nproduced(address()); }
+        /** Returns the value of the {@code flushed} field. */
+        @NativeType("unsigned long long")
+        public long flushed() { return ZSTDFrameProgression.nflushed(address()); }
+        /** Returns the value of the {@code currentJobID} field. */
+        @NativeType("unsigned")
+        public int currentJobID() { return ZSTDFrameProgression.ncurrentJobID(address()); }
+        /** Returns the value of the {@code nbActiveWorkers} field. */
+        @NativeType("unsigned")
+        public int nbActiveWorkers() { return ZSTDFrameProgression.nnbActiveWorkers(address()); }
 
     }
 

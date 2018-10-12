@@ -53,6 +53,24 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zdict_nZDICT_1optimizeTrainFrom
     return (jlong)ZDICT_optimizeTrainFromBuffer_cover(dictBuffer, (size_t)dictBufferCapacity, samplesBuffer, samplesSizes, (unsigned int)nbSamples, parameters);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zdict_nZDICT_1trainFromBuffer_1fastCover(JNIEnv *__env, jclass clazz, jlong dictBufferAddress, jlong dictBufferCapacity, jlong samplesBufferAddress, jlong samplesSizesAddress, jint nbSamples, jlong parametersAddress) {
+    void *dictBuffer = (void *)(intptr_t)dictBufferAddress;
+    void const *samplesBuffer = (void const *)(intptr_t)samplesBufferAddress;
+    size_t const *samplesSizes = (size_t const *)(intptr_t)samplesSizesAddress;
+    ZDICT_fastCover_params_t *parameters = (ZDICT_fastCover_params_t *)(intptr_t)parametersAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)ZDICT_trainFromBuffer_fastCover(dictBuffer, (size_t)dictBufferCapacity, samplesBuffer, samplesSizes, (unsigned)nbSamples, *parameters);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zdict_nZDICT_1optimizeTrainFromBuffer_1fastCover(JNIEnv *__env, jclass clazz, jlong dictBufferAddress, jlong dictBufferCapacity, jlong samplesBufferAddress, jlong samplesSizesAddress, jint nbSamples, jlong parametersAddress) {
+    void *dictBuffer = (void *)(intptr_t)dictBufferAddress;
+    void const *samplesBuffer = (void const *)(intptr_t)samplesBufferAddress;
+    size_t const *samplesSizes = (size_t const *)(intptr_t)samplesSizesAddress;
+    ZDICT_fastCover_params_t *parameters = (ZDICT_fastCover_params_t *)(intptr_t)parametersAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)ZDICT_optimizeTrainFromBuffer_fastCover(dictBuffer, (size_t)dictBufferCapacity, samplesBuffer, samplesSizes, (unsigned int)nbSamples, parameters);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zdict_nZDICT_1finalizeDictionary(JNIEnv *__env, jclass clazz, jlong dictBufferAddress, jlong dictBufferCapacity, jlong dictContentAddress, jlong dictContentSize, jlong samplesBufferAddress, jlong samplesSizesAddress, jint nbSamples, jlong parametersAddress) {
     void *dictBuffer = (void *)(intptr_t)dictBufferAddress;
     void const *dictContent = (void const *)(intptr_t)dictContentAddress;

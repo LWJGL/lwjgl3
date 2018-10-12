@@ -75,6 +75,13 @@ ENABLE_WARNINGS()""")
     )
 
     IntConstant(
+        "Block size constant.",
+
+        "BLOCKSIZELOG_MAX".."17",
+        "BLOCKSIZE_MAX".."(1<<ZSTD_BLOCKSIZELOG_MAX)"
+    )
+
+    IntConstant(
         "Constant.",
 
         "WINDOWLOG_MAX_32".."30",
@@ -92,8 +99,10 @@ ENABLE_WARNINGS()""")
         "SEARCHLOG_MIN".."1",
         "SEARCHLENGTH_MAX".."7",
         "SEARCHLENGTH_MIN".."3",
-        "LDM_MINMATCH_MIN".."4",
+        "TARGETLENGTH_MAX".."ZSTD_BLOCKSIZE_MAX",
+        "TARGETLENGTH_MIN".."0",
         "LDM_MINMATCH_MAX".."4096",
+        "LDM_MINMATCH_MIN".."4",
         "LDM_BUCKETSIZELOG_MAX".."8",
         "FRAMEHEADERSIZE_PREFIX".."5",
         "FRAMEHEADERSIZE_MIN".."6",
@@ -773,12 +782,36 @@ ENABLE_WARNINGS()""")
         "getFrameProgression",
         """
         Tells how much data has been {@code ingested} (read from input) {@code consumed} (input actually compressed) and {@code produced} (output) for current
-        frame. Therefore, {@code (ingested - consumed)} is amount of input data buffered internally, not yet compressed.
+        frame.
 
-        Can report progression inside worker threads (multi-threading and non-blocking mode).
+        Note: {@code (ingested - consumed)} is amount of input data buffered internally, not yet compressed. Aggregates progression inside active worker
+        threads.
         """,
 
         ZSTD_CCtx.const.p.IN("cctx", "")
+    )
+
+    size_t("toFlushNow",
+        """
+        Tells how many bytes are ready to be flushed immediately.
+
+        Useful for multithreading scenarios ({@code nbWorkers} &ge; 1). Probe the oldest active job, defined as oldest job not yet entirely flushed, and check
+        its output buffer.
+        """,
+
+        ZSTD_CCtx.p.IN("cctx", ""),
+
+        returnDoc =
+        """
+        amount of data stored in oldest job and ready to be flushed immediately. If {@code @return == 0}, it means either:
+        ${ul(
+            "there is no active job (could be checked with #getFrameProgression()), or",
+            """
+            oldest job is still actively compressing data, but everything it has produced has also been flushed so far, therefore flushing speed is currently
+            limited by production speed of oldest job irrespective of the speed of concurrent newer jobs.
+            """
+        )}
+        """
     )
 
     size_t(
@@ -939,13 +972,19 @@ ENABLE_WARNINGS()""")
         """
         Reference a prefix (single-usage dictionary) for next compression job.
 
-        Decompression need same prefix to properly regenerate data. Prefix is <b>only used once</b>. Tables are discarded at end of compression job. (#e_end)
+        Decompression will need same prefix to properly regenerate data. Compressing with a prefix is similar in outcome as performing a diff and compressing
+        it, but performs much faster, especially during decompression (compression speed is tunable with compression level). Note that prefix is <b>only used
+        once</b>. Tables are discarded at end of compression job (#e_end).
 
         Special: Adding any prefix (including #NULL) invalidates any previous prefix or dictionary.
 
         Notes:
         ${ol(
             "Prefix buffer is referenced. It <b>must</b> outlive compression job. Its content must remain unmodified up to end of compression (#e_end).",
+            """
+            If the intention is to diff some large {@code src} data blob with some prior version of itself, ensure that the window size is large enough to
+            contain the entire source. See #p_windowLog.
+            """,
             """
             Referencing a prefix involves building tables, which are dependent on compression parameters. It's a CPU consuming operation, with non-negligible
             impact on latency. If there is a need to use same prefix multiple times, consider #CCtx_loadDictionary() instead.
@@ -1195,6 +1234,8 @@ ENABLE_WARNINGS()""")
         """
         Reference a prefix (single-usage dictionary) for next compression job.
 
+        This is the reverse operation of #CCtx_refPrefix(), and must use the same prefix as the one used during compression.
+
         Prefix is <b>only used once</b>. Reference is discarded at end of frame. End of frame is reached when {@code ZSTD_DCtx_decompress_generic()} returns 0.
 
         Notes:
@@ -1307,13 +1348,6 @@ ENABLE_WARNINGS()""")
     /* ============================ */
     /**       Block level API       */
     /* ============================ */
-
-    IntConstant(
-        "Block size constant.",
-
-        "BLOCKSIZELOG_MAX".."17",
-        "BLOCKSIZE_MAX".."(1<<ZSTD_BLOCKSIZELOG_MAX)"
-    )
 
     size_t(
         "getBlockSize",
