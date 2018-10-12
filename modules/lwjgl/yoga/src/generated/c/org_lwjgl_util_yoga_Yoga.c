@@ -165,6 +165,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeSetContext(JNIEnv *_
     YGNodeSetContext(node, context);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigSetPrintTreeFlag(JNIEnv *__env, jclass clazz, jlong configAddress, jboolean enabled) {
+    YGConfigRef config = (YGConfigRef)(intptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    YGConfigSetPrintTreeFlag(config, (bool)enabled);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeGetMeasureFunc(JNIEnv *__env, jclass clazz, jlong nodeAddress) {
     YGNodeRef const node = (YGNodeRef const)(intptr_t)nodeAddress;
     UNUSED_PARAMS(__env, clazz)

@@ -641,6 +641,17 @@ public class Yoga {
         nYGNodeSetContext(node, context);
     }
 
+    // --- [ YGConfigSetPrintTreeFlag ] ---
+
+    public static native void nYGConfigSetPrintTreeFlag(long config, boolean enabled);
+
+    public static void YGConfigSetPrintTreeFlag(@NativeType("YGConfigRef") long config, @NativeType("bool") boolean enabled) {
+        if (CHECKS) {
+            check(config);
+        }
+        nYGConfigSetPrintTreeFlag(config, enabled);
+    }
+
     // --- [ YGNodeGetMeasureFunc ] ---
 
     public static native long nYGNodeGetMeasureFunc(long node);

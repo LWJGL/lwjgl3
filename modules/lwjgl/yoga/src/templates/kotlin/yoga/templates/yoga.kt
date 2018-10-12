@@ -419,6 +419,14 @@ div {
         opaque_p.IN("context", "")
     )
 
+    void(
+        "ConfigSetPrintTreeFlag",
+        "",
+
+        YGConfigRef.IN("config", ""),
+        bool.IN("enabled", "")
+    )
+
     YGMeasureFunc(
         "NodeGetMeasureFunc",
         "",
