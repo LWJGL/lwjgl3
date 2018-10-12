@@ -2043,6 +2043,16 @@ public final class GLCapabilities {
         glVertexAttribs3hvNV,
         glVertexAttribs4hvNV,
         glGetInternalformatSampleivNV,
+        glGetMemoryObjectDetachedResourcesuivNV,
+        glResetMemoryObjectParameterNV,
+        glTexAttachMemoryNV,
+        glBufferAttachMemoryNV,
+        glTextureAttachMemoryNV,
+        glNamedBufferAttachMemoryNV,
+        glDrawMeshTasksNV,
+        glDrawMeshTasksIndirectNV,
+        glMultiDrawMeshTasksIndirectNV,
+        glMultiDrawMeshTasksIndirectCountNV,
         glPathCommandsNV,
         glPathCoordsNV,
         glPathSubCommandsNV,
@@ -2120,6 +2130,8 @@ public final class GLCapabilities {
         glFramebufferSampleLocationsfvNV,
         glNamedFramebufferSampleLocationsfvNV,
         glResolveDepthValuesNV,
+        glScissorExclusiveArrayvNV,
+        glScissorExclusiveNV,
         glMakeBufferResidentNV,
         glMakeBufferNonResidentNV,
         glIsBufferResidentNV,
@@ -2134,6 +2146,13 @@ public final class GLCapabilities {
         glGetUniformui64vNV,
         glProgramUniformui64NV,
         glProgramUniformui64vNV,
+        glBindShadingRateImageNV,
+        glShadingRateImagePaletteNV,
+        glGetShadingRateImagePaletteNV,
+        glShadingRateImageBarrierNV,
+        glShadingRateSampleOrderNV,
+        glShadingRateSampleOrderCustomNV,
+        glGetShadingRateSampleLocationivNV,
         glTextureBarrierNV,
         glTexImage2DMultisampleCoverageNV,
         glTexImage3DMultisampleCoverageNV,
@@ -3704,6 +3723,19 @@ public final class GLCapabilities {
     public final boolean GL_NV_clip_space_w_scaling;
     /** When true, {@link NVCommandList} is supported. */
     public final boolean GL_NV_command_list;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_compute_shader_derivatives.txt">NV_compute_shader_derivatives</a> extension is supported.
+     * 
+     * <p>This extension adds OpenGL API support for the OpenGL Shading Language (GLSL) extension {@code "NV_compute_shader_derivatives"}.</p>
+     * 
+     * <p>That extension, when enabled, allows applications to use derivatives in compute shaders. It adds compute shader support for explicit derivative
+     * built-in functions like {@code dFdx()}, automatic derivative computation in texture lookup functions like {@code texture()}, use of the optional LOD
+     * bias parameter to adjust the computed level of detail values in texture lookup functions, and the texture level of detail query function
+     * {@code textureQueryLod()}.</p>
+     * 
+     * <p>Requires {@link GL45 OpenGL 4.5}.</p>
+     */
+    public final boolean GL_NV_compute_shader_derivatives;
     /** When true, {@link NVConditionalRender} is supported. */
     public final boolean GL_NV_conditional_render;
     /** When true, {@link NVConservativeRaster} is supported. */
@@ -3757,6 +3789,16 @@ public final class GLCapabilities {
     public final boolean GL_NV_fragment_program4;
     /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_program_option.txt">NV_fragment_program_option</a> extension is supported. */
     public final boolean GL_NV_fragment_program_option;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_shader_barycentric.txt">NV_fragment_shader_barycentric</a> extension is supported.
+     * 
+     * <p>This extension advertises OpenGL support for the OpenGL Shading Language (GLSL) extension {@code "NV_fragment_shader_barycentric"}, which provides
+     * fragment shader built-in variables holding barycentric weight vectors that identify the location of the fragment within its primitive. Additionally,
+     * the GLSL extension allows fragment the ability to read raw attribute values for each of the vertices of the primitive that produced the fragment.</p>
+     * 
+     * <p>Requires {@link GL45 OpenGL 4.5}.</p>
+     */
+    public final boolean GL_NV_fragment_shader_barycentric;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_shader_interlock.txt">NV_fragment_shader_interlock</a> extension is supported.
      * 
@@ -3831,6 +3873,10 @@ public final class GLCapabilities {
     public final boolean GL_NV_internalformat_sample_query;
     /** When true, {@link NVLightMaxExponent} is supported. */
     public final boolean GL_NV_light_max_exponent;
+    /** When true, {@link NVMemoryAttachment} is supported. */
+    public final boolean GL_NV_memory_attachment;
+    /** When true, {@link NVMeshShader} is supported. */
+    public final boolean GL_NV_mesh_shader;
     /** When true, {@link NVMultisampleCoverage} is supported. */
     public final boolean GL_NV_multisample_coverage;
     /** When true, {@link NVMultisampleFilterHint} is supported. */
@@ -3851,6 +3897,8 @@ public final class GLCapabilities {
     public final boolean GL_NV_query_resource;
     /** When true, {@link NVQueryResourceTag} is supported. */
     public final boolean GL_NV_query_resource_tag;
+    /** When true, {@link NVRepresentativeFragmentTest} is supported. */
+    public final boolean GL_NV_representative_fragment_test;
     /** When true, {@link NVRobustnessVideoMemoryPurge} is supported. */
     public final boolean GL_NV_robustness_video_memory_purge;
     /** When true, {@link NVSampleLocations} is supported. */
@@ -3862,6 +3910,8 @@ public final class GLCapabilities {
      * primitive, or that failed the early depth/stencil tests.</p>
      */
     public final boolean GL_NV_sample_mask_override_coverage;
+    /** When true, {@link NVScissorExclusive} is supported. */
+    public final boolean GL_NV_scissor_exclusive;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_atomic_float.txt">NV_shader_atomic_float</a> extension is supported.
      * 
@@ -3909,6 +3959,38 @@ public final class GLCapabilities {
     public final boolean GL_NV_shader_buffer_load;
     /** When true, {@link NVShaderBufferStore} is supported. */
     public final boolean GL_NV_shader_buffer_store;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_texture_footprint.txt">NV_shader_texture_footprint</a> extension is supported.
+     * 
+     * <p>This extension adds OpenGL API support for the OpenGL Shading Language (GLSL) extension {@code "NV_shader_texture_footprint"}. That extension adds a
+     * new set of texture query functions ({@code "textureFootprint*NV"}) to GLSL. These built-in functions prepare to perform a filtered texture lookup based
+     * on coordinates and other parameters passed in by the calling code. However, instead of returning data from the provided texture image, these query
+     * functions instead return data identifying the <em>texture footprint</em> for an equivalent texture access. The texture footprint identifies a set of
+     * texels that may be accessed in order to return a filtered result for the texture access.</p>
+     * 
+     * <p>The footprint itself is a structure that includes integer values that identify a small neighborhood of texels in the texture being accessed and a
+     * bitfield that indicates which texels in that neighborhood would be used. Each bit in the returned bitfield identifies whether any texel in a small
+     * aligned block of texels would be fetched by the texture lookup. The size of each block is specified by an access <em>granularity</em> provided by the
+     * shader. The minimum granularity supported by this extension is 2x2 (for 2D textures) and 2x2x2 (for 3D textures); the maximum granularity is 256x256
+     * (for 2D textures) or 64x32x32 (for 3D textures). Each footprint query returns the footprint from a single texture level. When using minification
+     * filters that combine accesses from multiple mipmap levels, shaders must perform separate queries for the two levels accessed ("fine" and "coarse"). The
+     * footprint query also returns a flag indicating if the texture lookup would access texels from only one mipmap level or from two neighboring levels.</p>
+     * 
+     * <p>This extension should be useful for multi-pass rendering operations that do an initial expensive rendering pass to produce a first image that is then
+     * used as a texture for a second pass. If the second pass ends up accessing only portions of the first image (e.g., due to visibility), the work spent
+     * rendering the non-accessed portion of the first image was wasted. With this feature, an application can limit this waste using an initial pass over the
+     * geometry in the second image that performs a footprint query for each visible pixel to determine the set of pixels that it needs from the first image.
+     * This pass would accumulate an aggregate footprint of all visible pixels into a separate "footprint texture" using shader atomics. Then, when rendering
+     * the first image, the application can kill all shading work for pixels not in this aggregate footprint.</p>
+     * 
+     * <p>The implementation of this extension has a number of limitations. The texture footprint query functions are only supported for two- and
+     * three-dimensional textures ({@link GL11#GL_TEXTURE_2D TEXTURE_2D}, {@link GL12#GL_TEXTURE_3D TEXTURE_3D}). Texture footprint evaluation only supports the {@link GL12#GL_CLAMP_TO_EDGE CLAMP_TO_EDGE} wrap mode; results are undefined
+     * for all other wrap modes. The implementation supports only a limited set of granularity values and does not support separate coverage information for
+     * each texel in the original texture.</p>
+     * 
+     * <p>Requires {@link GL45 OpenGL 4.5}.</p>
+     */
+    public final boolean GL_NV_shader_texture_footprint;
     /** When true, {@link NVShaderThreadGroup} is supported. */
     public final boolean GL_NV_shader_thread_group;
     /**
@@ -3921,6 +4003,8 @@ public final class GLCapabilities {
      * <p>Requires {@link GL43 OpenGL 4.3} and GLSL 4.3.</p>
      */
     public final boolean GL_NV_shader_thread_shuffle;
+    /** When true, {@link NVShadingRateImage} is supported. */
+    public final boolean GL_NV_shading_rate_image;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_stereo_view_rendering.txt">NV_stereo_view_rendering</a> extension is supported.
      * 
@@ -6056,6 +6140,16 @@ public final class GLCapabilities {
         glVertexAttribs3hvNV = provider.getFunctionAddress("glVertexAttribs3hvNV");
         glVertexAttribs4hvNV = provider.getFunctionAddress("glVertexAttribs4hvNV");
         glGetInternalformatSampleivNV = provider.getFunctionAddress("glGetInternalformatSampleivNV");
+        glGetMemoryObjectDetachedResourcesuivNV = provider.getFunctionAddress("glGetMemoryObjectDetachedResourcesuivNV");
+        glResetMemoryObjectParameterNV = provider.getFunctionAddress("glResetMemoryObjectParameterNV");
+        glTexAttachMemoryNV = provider.getFunctionAddress("glTexAttachMemoryNV");
+        glBufferAttachMemoryNV = provider.getFunctionAddress("glBufferAttachMemoryNV");
+        glTextureAttachMemoryNV = provider.getFunctionAddress("glTextureAttachMemoryNV");
+        glNamedBufferAttachMemoryNV = provider.getFunctionAddress("glNamedBufferAttachMemoryNV");
+        glDrawMeshTasksNV = provider.getFunctionAddress("glDrawMeshTasksNV");
+        glDrawMeshTasksIndirectNV = provider.getFunctionAddress("glDrawMeshTasksIndirectNV");
+        glMultiDrawMeshTasksIndirectNV = provider.getFunctionAddress("glMultiDrawMeshTasksIndirectNV");
+        glMultiDrawMeshTasksIndirectCountNV = provider.getFunctionAddress("glMultiDrawMeshTasksIndirectCountNV");
         glPathCommandsNV = provider.getFunctionAddress("glPathCommandsNV");
         glPathCoordsNV = provider.getFunctionAddress("glPathCoordsNV");
         glPathSubCommandsNV = provider.getFunctionAddress("glPathSubCommandsNV");
@@ -6133,6 +6227,8 @@ public final class GLCapabilities {
         glFramebufferSampleLocationsfvNV = provider.getFunctionAddress("glFramebufferSampleLocationsfvNV");
         glNamedFramebufferSampleLocationsfvNV = provider.getFunctionAddress("glNamedFramebufferSampleLocationsfvNV");
         glResolveDepthValuesNV = provider.getFunctionAddress("glResolveDepthValuesNV");
+        glScissorExclusiveArrayvNV = provider.getFunctionAddress("glScissorExclusiveArrayvNV");
+        glScissorExclusiveNV = provider.getFunctionAddress("glScissorExclusiveNV");
         glMakeBufferResidentNV = provider.getFunctionAddress("glMakeBufferResidentNV");
         glMakeBufferNonResidentNV = provider.getFunctionAddress("glMakeBufferNonResidentNV");
         glIsBufferResidentNV = provider.getFunctionAddress("glIsBufferResidentNV");
@@ -6147,6 +6243,13 @@ public final class GLCapabilities {
         glGetUniformui64vNV = provider.getFunctionAddress("glGetUniformui64vNV");
         glProgramUniformui64NV = provider.getFunctionAddress("glProgramUniformui64NV");
         glProgramUniformui64vNV = provider.getFunctionAddress("glProgramUniformui64vNV");
+        glBindShadingRateImageNV = provider.getFunctionAddress("glBindShadingRateImageNV");
+        glShadingRateImagePaletteNV = provider.getFunctionAddress("glShadingRateImagePaletteNV");
+        glGetShadingRateImagePaletteNV = provider.getFunctionAddress("glGetShadingRateImagePaletteNV");
+        glShadingRateImageBarrierNV = provider.getFunctionAddress("glShadingRateImageBarrierNV");
+        glShadingRateSampleOrderNV = provider.getFunctionAddress("glShadingRateSampleOrderNV");
+        glShadingRateSampleOrderCustomNV = provider.getFunctionAddress("glShadingRateSampleOrderCustomNV");
+        glGetShadingRateSampleLocationivNV = provider.getFunctionAddress("glGetShadingRateSampleLocationivNV");
         glTextureBarrierNV = provider.getFunctionAddress("glTextureBarrierNV");
         glTexImage2DMultisampleCoverageNV = provider.getFunctionAddress("glTexImage2DMultisampleCoverageNV");
         glTexImage3DMultisampleCoverageNV = provider.getFunctionAddress("glTexImage3DMultisampleCoverageNV");
@@ -6542,6 +6645,7 @@ public final class GLCapabilities {
         GL_NV_blend_square = ext.contains("GL_NV_blend_square");
         GL_NV_clip_space_w_scaling = ext.contains("GL_NV_clip_space_w_scaling") && checkExtension("GL_NV_clip_space_w_scaling", NVClipSpaceWScaling.isAvailable(this));
         GL_NV_command_list = ext.contains("GL_NV_command_list") && checkExtension("GL_NV_command_list", NVCommandList.isAvailable(this));
+        GL_NV_compute_shader_derivatives = ext.contains("GL_NV_compute_shader_derivatives");
         GL_NV_conditional_render = ext.contains("GL_NV_conditional_render") && checkExtension("GL_NV_conditional_render", NVConditionalRender.isAvailable(this));
         GL_NV_conservative_raster = ext.contains("GL_NV_conservative_raster") && checkExtension("GL_NV_conservative_raster", NVConservativeRaster.isAvailable(this));
         GL_NV_conservative_raster_dilate = ext.contains("GL_NV_conservative_raster_dilate") && checkExtension("GL_NV_conservative_raster_dilate", NVConservativeRasterDilate.isAvailable(this));
@@ -6564,6 +6668,7 @@ public final class GLCapabilities {
         GL_NV_fragment_coverage_to_color = ext.contains("GL_NV_fragment_coverage_to_color") && checkExtension("GL_NV_fragment_coverage_to_color", NVFragmentCoverageToColor.isAvailable(this));
         GL_NV_fragment_program4 = ext.contains("GL_NV_fragment_program4");
         GL_NV_fragment_program_option = ext.contains("GL_NV_fragment_program_option");
+        GL_NV_fragment_shader_barycentric = ext.contains("GL_NV_fragment_shader_barycentric");
         GL_NV_fragment_shader_interlock = ext.contains("GL_NV_fragment_shader_interlock");
         GL_NV_framebuffer_mixed_samples = ext.contains("GL_NV_framebuffer_mixed_samples") && checkExtension("GL_NV_framebuffer_mixed_samples", NVFramebufferMixedSamples.isAvailable(this));
         GL_NV_framebuffer_multisample_coverage = ext.contains("GL_NV_framebuffer_multisample_coverage") && checkExtension("GL_NV_framebuffer_multisample_coverage", NVFramebufferMultisampleCoverage.isAvailable(this));
@@ -6574,6 +6679,8 @@ public final class GLCapabilities {
         GL_NV_half_float = ext.contains("GL_NV_half_float") && checkExtension("GL_NV_half_float", NVHalfFloat.isAvailable(this, ext));
         GL_NV_internalformat_sample_query = ext.contains("GL_NV_internalformat_sample_query") && checkExtension("GL_NV_internalformat_sample_query", NVInternalformatSampleQuery.isAvailable(this));
         GL_NV_light_max_exponent = ext.contains("GL_NV_light_max_exponent");
+        GL_NV_memory_attachment = ext.contains("GL_NV_memory_attachment") && checkExtension("GL_NV_memory_attachment", NVMemoryAttachment.isAvailable(this, ext));
+        GL_NV_mesh_shader = ext.contains("GL_NV_mesh_shader") && checkExtension("GL_NV_mesh_shader", NVMeshShader.isAvailable(this));
         GL_NV_multisample_coverage = ext.contains("GL_NV_multisample_coverage");
         GL_NV_multisample_filter_hint = ext.contains("GL_NV_multisample_filter_hint");
         GL_NV_packed_depth_stencil = ext.contains("GL_NV_packed_depth_stencil");
@@ -6584,17 +6691,21 @@ public final class GLCapabilities {
         GL_NV_primitive_restart = ext.contains("GL_NV_primitive_restart") && checkExtension("GL_NV_primitive_restart", NVPrimitiveRestart.isAvailable(this));
         GL_NV_query_resource = ext.contains("GL_NV_query_resource") && checkExtension("GL_NV_query_resource", NVQueryResource.isAvailable(this));
         GL_NV_query_resource_tag = ext.contains("GL_NV_query_resource_tag") && checkExtension("GL_NV_query_resource_tag", NVQueryResourceTag.isAvailable(this));
+        GL_NV_representative_fragment_test = ext.contains("GL_NV_representative_fragment_test");
         GL_NV_robustness_video_memory_purge = ext.contains("GL_NV_robustness_video_memory_purge");
         GL_NV_sample_locations = ext.contains("GL_NV_sample_locations") && checkExtension("GL_NV_sample_locations", NVSampleLocations.isAvailable(this));
         GL_NV_sample_mask_override_coverage = ext.contains("GL_NV_sample_mask_override_coverage");
+        GL_NV_scissor_exclusive = ext.contains("GL_NV_scissor_exclusive") && checkExtension("GL_NV_scissor_exclusive", NVScissorExclusive.isAvailable(this));
         GL_NV_shader_atomic_float = ext.contains("GL_NV_shader_atomic_float");
         GL_NV_shader_atomic_float64 = ext.contains("GL_NV_shader_atomic_float64");
         GL_NV_shader_atomic_fp16_vector = ext.contains("GL_NV_shader_atomic_fp16_vector");
         GL_NV_shader_atomic_int64 = ext.contains("GL_NV_shader_atomic_int64");
         GL_NV_shader_buffer_load = ext.contains("GL_NV_shader_buffer_load") && checkExtension("GL_NV_shader_buffer_load", NVShaderBufferLoad.isAvailable(this));
         GL_NV_shader_buffer_store = ext.contains("GL_NV_shader_buffer_store");
+        GL_NV_shader_texture_footprint = ext.contains("GL_NV_shader_texture_footprint");
         GL_NV_shader_thread_group = ext.contains("GL_NV_shader_thread_group");
         GL_NV_shader_thread_shuffle = ext.contains("GL_NV_shader_thread_shuffle");
+        GL_NV_shading_rate_image = ext.contains("GL_NV_shading_rate_image") && checkExtension("GL_NV_shading_rate_image", NVShadingRateImage.isAvailable(this));
         GL_NV_stereo_view_rendering = ext.contains("GL_NV_stereo_view_rendering");
         GL_NV_texgen_reflection = ext.contains("GL_NV_texgen_reflection");
         GL_NV_texture_barrier = ext.contains("GL_NV_texture_barrier") && checkExtension("GL_NV_texture_barrier", NVTextureBarrier.isAvailable(this));

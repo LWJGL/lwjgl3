@@ -37,6 +37,6 @@ val WGL_ATI_pixel_format_float = "WGLATIPixelFormatFloat".nativeClassWGL("WGL_AT
         {@code piValues} parameter array of wglGetPixelFormatAttribivARB, and the {@code pfValues} parameter array of wglGetPixelFormatAttribfvARB.
         """,
 
-        "WGL_TYPE_RGBA_FLOAT_ATI"..0x21A0
+        "TYPE_RGBA_FLOAT_ATI"..0x21A0
     )
 }

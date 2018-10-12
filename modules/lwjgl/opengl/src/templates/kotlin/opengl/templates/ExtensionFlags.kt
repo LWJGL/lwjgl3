@@ -1119,6 +1119,21 @@ val KHR_texture_compression_astc_sliced_3d = EXT_FLAG.nativeClassGL("KHR_texture
 }
 
 val NV_blend_square = EXT_FLAG.nativeClassGL("NV_blend_square", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
+val NV_compute_shader_derivatives = EXT_FLAG.nativeClassGL("NV_compute_shader_derivatives", postfix = NV) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension adds OpenGL API support for the OpenGL Shading Language (GLSL) extension {@code "NV_compute_shader_derivatives"}.
+
+        That extension, when enabled, allows applications to use derivatives in compute shaders. It adds compute shader support for explicit derivative
+        built-in functions like {@code dFdx()}, automatic derivative computation in texture lookup functions like {@code texture()}, use of the optional LOD
+        bias parameter to adjust the computed level of detail values in texture lookup functions, and the texture level of detail query function
+        {@code textureQueryLod()}.
+
+        Requires ${GL45.core}.
+        """
+}
 val NV_conservative_raster_underestimation = EXT_FLAG.nativeClassGL("NV_conservative_raster_underestimation", postfix = NV) {
     documentation =
         """
@@ -1135,6 +1150,19 @@ val NV_conservative_raster_underestimation = EXT_FLAG.nativeClassGL("NV_conserva
 val NV_ES3_1_compatibility = EXT_FLAG.nativeClassGL("NV_ES3_1_compatibility", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
 val NV_fragment_program4 = EXT_FLAG.nativeClassGL("NV_fragment_program4", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
 val NV_fragment_program_option = EXT_FLAG.nativeClassGL("NV_fragment_program_option", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
+val NV_fragment_shader_barycentric = EXT_FLAG.nativeClassGL("NV_fragment_shader_barycentric", postfix = NV) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension advertises OpenGL support for the OpenGL Shading Language (GLSL) extension {@code "NV_fragment_shader_barycentric"}, which provides
+        fragment shader built-in variables holding barycentric weight vectors that identify the location of the fragment within its primitive. Additionally,
+        the GLSL extension allows fragment the ability to read raw attribute values for each of the vertices of the primitive that produced the fragment.
+
+        Requires ${GL45.core}.
+        """
+}
+
 val NV_fragment_shader_interlock = EXT_FLAG.nativeClassGL("NV_fragment_shader_interlock", postfix = NV) {
     documentation =
         """
@@ -1260,6 +1288,40 @@ val NV_shader_atomic_int64 = EXT_FLAG.nativeClassGL("NV_shader_atomic_int64", po
 
         This extension provides additional GLSL built-in functions and assembly opcodes allowing shaders to perform additional atomic read-modify-write
         operations on 64-bit signed and unsigned integers stored in buffer object memory.
+        """
+}
+val NV_shader_texture_footprint = EXT_FLAG.nativeClassGL("NV_shader_texture_footprint", postfix = NV) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension adds OpenGL API support for the OpenGL Shading Language (GLSL) extension {@code "NV_shader_texture_footprint"}. That extension adds a
+        new set of texture query functions ({@code "textureFootprint*NV"}) to GLSL. These built-in functions prepare to perform a filtered texture lookup based
+        on coordinates and other parameters passed in by the calling code. However, instead of returning data from the provided texture image, these query
+        functions instead return data identifying the <em>texture footprint</em> for an equivalent texture access. The texture footprint identifies a set of
+        texels that may be accessed in order to return a filtered result for the texture access.
+
+        The footprint itself is a structure that includes integer values that identify a small neighborhood of texels in the texture being accessed and a
+        bitfield that indicates which texels in that neighborhood would be used. Each bit in the returned bitfield identifies whether any texel in a small
+        aligned block of texels would be fetched by the texture lookup. The size of each block is specified by an access <em>granularity</em> provided by the
+        shader. The minimum granularity supported by this extension is 2x2 (for 2D textures) and 2x2x2 (for 3D textures); the maximum granularity is 256x256
+        (for 2D textures) or 64x32x32 (for 3D textures). Each footprint query returns the footprint from a single texture level. When using minification
+        filters that combine accesses from multiple mipmap levels, shaders must perform separate queries for the two levels accessed ("fine" and "coarse"). The
+        footprint query also returns a flag indicating if the texture lookup would access texels from only one mipmap level or from two neighboring levels.
+
+        This extension should be useful for multi-pass rendering operations that do an initial expensive rendering pass to produce a first image that is then
+        used as a texture for a second pass. If the second pass ends up accessing only portions of the first image (e.g., due to visibility), the work spent
+        rendering the non-accessed portion of the first image was wasted. With this feature, an application can limit this waste using an initial pass over the
+        geometry in the second image that performs a footprint query for each visible pixel to determine the set of pixels that it needs from the first image.
+        This pass would accumulate an aggregate footprint of all visible pixels into a separate "footprint texture" using shader atomics. Then, when rendering
+        the first image, the application can kill all shading work for pixels not in this aggregate footprint.
+
+        The implementation of this extension has a number of limitations. The texture footprint query functions are only supported for two- and
+        three-dimensional textures (#TEXTURE_2D, #TEXTURE_3D). Texture footprint evaluation only supports the #CLAMP_TO_EDGE wrap mode; results are undefined
+        for all other wrap modes. The implementation supports only a limited set of granularity values and does not support separate coverage information for
+        each texel in the original texture.
+
+        Requires ${GL45.core}.
         """
 }
 val NV_shader_thread_shuffle = EXT_FLAG.nativeClassGL("NV_shader_thread_shuffle", postfix = NV) {

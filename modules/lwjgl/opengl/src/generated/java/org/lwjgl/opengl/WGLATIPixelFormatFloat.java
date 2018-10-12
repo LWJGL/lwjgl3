@@ -30,7 +30,7 @@ public final class WGLATIPixelFormatFloat {
      * Accepted as a value in the {@code piAttribIList} and {@code pfAttribFList} parameter arrays of wglChoosePixelFormatARB, and returned in the
      * {@code piValues} parameter array of wglGetPixelFormatAttribivARB, and the {@code pfValues} parameter array of wglGetPixelFormatAttribfvARB.
      */
-    public static final int WGL_WGL_TYPE_RGBA_FLOAT_ATI = 0x21A0;
+    public static final int WGL_TYPE_RGBA_FLOAT_ATI = 0x21A0;
 
     private WGLATIPixelFormatFloat() {}
 

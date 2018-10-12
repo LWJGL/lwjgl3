@@ -688,6 +688,12 @@ public final class GLESCapabilities {
         glProgramUniform4ui64vNV,
         glVertexAttribDivisorNV,
         glGetInternalformatSampleivNV,
+        glGetMemoryObjectDetachedResourcesuivNV,
+        glResetMemoryObjectParameterNV,
+        glTexAttachMemoryNV,
+        glBufferAttachMemoryNV,
+        glTextureAttachMemoryNV,
+        glNamedBufferAttachMemoryNV,
         glUniformMatrix2x3fvNV,
         glUniformMatrix3x2fvNV,
         glUniformMatrix2x4fvNV,
@@ -1667,6 +1673,8 @@ public final class GLESCapabilities {
     public final boolean GL_NV_instanced_arrays;
     /** When true, {@link NVInternalformatSampleQuery} is supported. */
     public final boolean GL_NV_internalformat_sample_query;
+    /** When true, {@link NVMemoryAttachment} is supported. */
+    public final boolean GL_NV_memory_attachment;
     /** When true, {@link NVNonSquareMatrices} is supported. */
     public final boolean GL_NV_non_square_matrices;
     /** When true, {@link NVPathRendering} is supported. */
@@ -2151,6 +2159,8 @@ public final class GLESCapabilities {
     public final boolean GL_QCOM_shader_framebuffer_fetch_rate;
     /** When true, {@link QCOMTextureFoveated} is supported. */
     public final boolean GL_QCOM_texture_foveated;
+    /** When true, {@link QCOMTextureFoveatedSubsampledLayout} is supported. */
+    public final boolean GL_QCOM_texture_foveated_subsampled_layout;
     /** When true, {@link QCOMTiledRendering} is supported. */
     public final boolean GL_QCOM_tiled_rendering;
     /** When true, {@link QCOMWriteonlyRendering} is supported. */
@@ -2834,6 +2844,12 @@ public final class GLESCapabilities {
         glProgramUniform4ui64vNV = provider.getFunctionAddress("glProgramUniform4ui64vNV");
         glVertexAttribDivisorNV = provider.getFunctionAddress("glVertexAttribDivisorNV");
         glGetInternalformatSampleivNV = provider.getFunctionAddress("glGetInternalformatSampleivNV");
+        glGetMemoryObjectDetachedResourcesuivNV = provider.getFunctionAddress("glGetMemoryObjectDetachedResourcesuivNV");
+        glResetMemoryObjectParameterNV = provider.getFunctionAddress("glResetMemoryObjectParameterNV");
+        glTexAttachMemoryNV = provider.getFunctionAddress("glTexAttachMemoryNV");
+        glBufferAttachMemoryNV = provider.getFunctionAddress("glBufferAttachMemoryNV");
+        glTextureAttachMemoryNV = provider.getFunctionAddress("glTextureAttachMemoryNV");
+        glNamedBufferAttachMemoryNV = provider.getFunctionAddress("glNamedBufferAttachMemoryNV");
         glUniformMatrix2x3fvNV = provider.getFunctionAddress("glUniformMatrix2x3fvNV");
         glUniformMatrix3x2fvNV = provider.getFunctionAddress("glUniformMatrix3x2fvNV");
         glUniformMatrix2x4fvNV = provider.getFunctionAddress("glUniformMatrix2x4fvNV");
@@ -3193,6 +3209,7 @@ public final class GLESCapabilities {
         GL_NV_image_formats = ext.contains("GL_NV_image_formats");
         GL_NV_instanced_arrays = ext.contains("GL_NV_instanced_arrays") && checkExtension("GL_NV_instanced_arrays", NVInstancedArrays.isAvailable(this));
         GL_NV_internalformat_sample_query = ext.contains("GL_NV_internalformat_sample_query") && checkExtension("GL_NV_internalformat_sample_query", NVInternalformatSampleQuery.isAvailable(this));
+        GL_NV_memory_attachment = ext.contains("GL_NV_memory_attachment") && checkExtension("GL_NV_memory_attachment", NVMemoryAttachment.isAvailable(this, ext));
         GL_NV_non_square_matrices = ext.contains("GL_NV_non_square_matrices") && checkExtension("GL_NV_non_square_matrices", NVNonSquareMatrices.isAvailable(this));
         GL_NV_path_rendering = ext.contains("GL_NV_path_rendering") && checkExtension("GL_NV_path_rendering", NVPathRendering.isAvailable(this));
         GL_NV_path_rendering_shared_edge = ext.contains("GL_NV_path_rendering_shared_edge");
@@ -3285,6 +3302,7 @@ public final class GLESCapabilities {
         GL_QCOM_shader_framebuffer_fetch_noncoherent = ext.contains("GL_QCOM_shader_framebuffer_fetch_noncoherent") && checkExtension("GL_QCOM_shader_framebuffer_fetch_noncoherent", QCOMShaderFramebufferFetchNoncoherent.isAvailable(this));
         GL_QCOM_shader_framebuffer_fetch_rate = ext.contains("GL_QCOM_shader_framebuffer_fetch_rate");
         GL_QCOM_texture_foveated = ext.contains("GL_QCOM_texture_foveated") && checkExtension("GL_QCOM_texture_foveated", QCOMTextureFoveated.isAvailable(this));
+        GL_QCOM_texture_foveated_subsampled_layout = ext.contains("GL_QCOM_texture_foveated_subsampled_layout");
         GL_QCOM_tiled_rendering = ext.contains("GL_QCOM_tiled_rendering") && checkExtension("GL_QCOM_tiled_rendering", QCOMTiledRendering.isAvailable(this));
         GL_QCOM_writeonly_rendering = ext.contains("GL_QCOM_writeonly_rendering");
         GL_VIV_shader_binary = ext.contains("GL_VIV_shader_binary");

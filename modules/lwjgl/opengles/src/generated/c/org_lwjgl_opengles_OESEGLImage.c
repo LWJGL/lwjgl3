@@ -12,14 +12,14 @@ typedef void (APIENTRY *glEGLImageTargetRenderbufferStorageOESPROC) (jint, intpt
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESEGLImage_nglEGLImageTargetTexture2DOES(JNIEnv *__env, jclass clazz, jint target, jlong imageAddress) {
-    glEGLImageTargetTexture2DOESPROC glEGLImageTargetTexture2DOES = (glEGLImageTargetTexture2DOESPROC)tlsGetFunction(773);
+    glEGLImageTargetTexture2DOESPROC glEGLImageTargetTexture2DOES = (glEGLImageTargetTexture2DOESPROC)tlsGetFunction(779);
     intptr_t image = (intptr_t)imageAddress;
     UNUSED_PARAM(clazz)
     glEGLImageTargetTexture2DOES(target, image);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESEGLImage_nglEGLImageTargetRenderbufferStorageOES(JNIEnv *__env, jclass clazz, jint target, jlong imageAddress) {
-    glEGLImageTargetRenderbufferStorageOESPROC glEGLImageTargetRenderbufferStorageOES = (glEGLImageTargetRenderbufferStorageOESPROC)tlsGetFunction(774);
+    glEGLImageTargetRenderbufferStorageOESPROC glEGLImageTargetRenderbufferStorageOES = (glEGLImageTargetRenderbufferStorageOESPROC)tlsGetFunction(780);
     intptr_t image = (intptr_t)imageAddress;
     UNUSED_PARAM(clazz)
     glEGLImageTargetRenderbufferStorageOES(target, image);

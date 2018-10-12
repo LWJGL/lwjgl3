@@ -11,7 +11,7 @@ typedef void (APIENTRY *glTexStorage3DMultisampleOESPROC) (jint, jint, jint, jin
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESTextureStorageMultisample2DArray_glTexStorage3DMultisampleOES(JNIEnv *__env, jclass clazz, jint target, jint samples, jint internalformat, jint width, jint height, jint depth, jboolean fixedsamplelocations) {
-    glTexStorage3DMultisampleOESPROC glTexStorage3DMultisampleOES = (glTexStorage3DMultisampleOESPROC)tlsGetFunction(800);
+    glTexStorage3DMultisampleOESPROC glTexStorage3DMultisampleOES = (glTexStorage3DMultisampleOESPROC)tlsGetFunction(806);
     UNUSED_PARAM(clazz)
     glTexStorage3DMultisampleOES(target, samples, internalformat, width, height, depth, fixedsamplelocations);
 }
