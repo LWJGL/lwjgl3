@@ -1473,7 +1473,7 @@ TootleResult TOOTLE_DLL TootleMeasureOverdraw(const void*             pVB,
     }
 
 #ifdef _SOFTWARE_ONLY_VERSION
-    eOverdrawOptimizer;  // satisfy unused parameter warning message
+    (void)(eOverdrawOptimizer);  // satisfy unused parameter warning message
     return TootleMeasureOverdrawRaytrace(pVB, pnIB, nVertices, nFaces, nVBStride, pfViewpoint, nViewpoints,
                                          eFrontWinding, pfAvgODOut, pfMaxODOut);
 #else

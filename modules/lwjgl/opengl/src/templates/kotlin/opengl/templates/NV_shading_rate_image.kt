@@ -29,7 +29,7 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassGL("NV_shading_rate_
         When this extension is advertised by an OpenGL implementation, the implementation must also support the GLSL extension
         {@code "GL_NV_shading_rate_image"} (documented separately), which provides new built-in variables that allow fragment shaders to determine the
         effective shading rate used for each fragment. Additionally, the GLSL extension also provides new layout qualifiers allowing the interlock
-        functionality provided by ${ARB_fragment_shader_interlock.link} to guarantee mutual exclusion across an entire fragment when the shading rate specifies
+        functionality provided by ${ARB_fragment_shader_interlock.registryLink} to guarantee mutual exclusion across an entire fragment when the shading rate specifies
         multiple pixels per fragment shader invocation.
 
         Note that this extension requires the use of a framebuffer object; the shading rate image and related state are ignored when rendering to the default

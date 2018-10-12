@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Features:</p>
  * 
  * <ul>
- * <li>decode from memory <s>or through FILE (define STBI_NO_STDIO to remove code)</s></li>
+ * <li>decode from memory</li>
  * <li>decode from arbitrary I/O callbacks</li>
  * <li>SIMD acceleration on x86/x64 (SSE2) and ARM (NEON)</li>
  * </ul>

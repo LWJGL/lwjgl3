@@ -144,7 +144,7 @@ extern int cacheflush(char *addr, int nbytes, int cache);
 #define LMDB_FREE(p)              org_lwjgl_free(p)
 #define LMDB_ALIGNED_ALLOC(al,sz) org_lwjgl_aligned_alloc(al,sz)
 #define LMDB_ALIGNED_FREE(p)      org_lwjgl_aligned_free(p)
-static char * LMDB_strdup(char * s) {
+static char * LMDB_strdup(const char * s) {
     char *t = (char *)LMDB_MALLOC(strlen(s) + 1);
     if (t != NULL) {
         strcpy(t, s);

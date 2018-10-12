@@ -949,7 +949,7 @@ import org.lwjgl.vulkan.*;
  * 
  * <ul>
  * <li><i>{@code vkBindBufferMemory()}: Binding memory to buffer {@code 0xeb8e4} but {@code vkGetBufferMemoryRequirements()} has not been called on that
- * buffer.<i>
+ * buffer.</i>
  * 
  * <p>It happens when {@code VK_KHR_dedicated_allocation} extension is enabled. {@code vkGetBufferMemoryRequirements2KHR} function is used instead, while
  * validation layer seems to be unaware of it.</p></li>

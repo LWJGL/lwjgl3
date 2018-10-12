@@ -12,7 +12,7 @@ fun config() {
     packageInfo(
         Module.LZ4,
         """
-        Contains bindings to ${url("http://lz4.github.io/lz4/", "LZ4")}, a lossless compression algorithm, providing compression speed > 500 MB/s per core,
+        Contains bindings to ${url("http://lz4.github.io/lz4/", "LZ4")}, a lossless compression algorithm, providing compression speed &gt; 500 MB/s per core,
         scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on
         multi-core systems.
         """

@@ -42,7 +42,7 @@ val stb_image = "STBImage".nativeClass(Module.STB, prefix = "STBI_", library = S
 
         Features:
         ${ul(
-            "decode from memory <s>or through FILE (define STBI_NO_STDIO to remove code)</s>",
+            "decode from memory",
             "decode from arbitrary I/O callbacks",
             "SIMD acceleration on x86/x64 (SSE2) and ARM (NEON)"
         )}

@@ -53,7 +53,7 @@ ComputeResolution(float* resolution, bool force)
 {
     const int nf = static_cast<int> (t().size());
 
-    if (nf < 1 || r > 0.0 && !force)
+    if (nf < 1 || (r > 0.0 && !force))
     {
         *resolution = r;
         return 1;

@@ -985,7 +985,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         ${ul(
             """
             <i>{@code vkBindBufferMemory()}: Binding memory to buffer {@code 0xeb8e4} but {@code vkGetBufferMemoryRequirements()} has not been called on that
-            buffer.<i>
+            buffer.</i>
 
             It happens when {@code VK_KHR_dedicated_allocation} extension is enabled. {@code vkGetBufferMemoryRequirements2KHR} function is used instead, while
             validation layer seems to be unaware of it.
