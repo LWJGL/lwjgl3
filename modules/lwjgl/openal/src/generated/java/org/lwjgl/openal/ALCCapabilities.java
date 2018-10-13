@@ -36,6 +36,7 @@ public final class ALCCapabilities {
 		alcCaptureSamples,
 		alcSetThreadContext,
 		alcGetThreadContext,
+		alcGetInteger64vSOFT,
 		alcGetStringiSOFT,
 		alcResetDeviceSOFT,
 		alcLoopbackOpenDeviceSOFT,
@@ -70,6 +71,8 @@ public final class ALCCapabilities {
 	public final boolean ALC_EXT_thread_local_context;
     /** When true, {@link LOKIAudioChannel} is supported. */
 	public final boolean ALC_LOKI_audio_channel;
+    /** When true, {@link SOFTDeviceClock} is supported. */
+	public final boolean ALC_SOFT_device_clock;
     /** When true, {@link SOFTHRTF} is supported. */
 	public final boolean ALC_SOFT_HRTF;
     /** When true, {@link SOFTLoopback} is supported. */
@@ -102,6 +105,7 @@ public final class ALCCapabilities {
 		alcCaptureSamples = provider.getFunctionAddress("alcCaptureSamples");
 		alcSetThreadContext = provider.getFunctionAddress(device, "alcSetThreadContext");
 		alcGetThreadContext = provider.getFunctionAddress(device, "alcGetThreadContext");
+		alcGetInteger64vSOFT = provider.getFunctionAddress(device, "alcGetInteger64vSOFT");
 		alcGetStringiSOFT = provider.getFunctionAddress(device, "alcGetStringiSOFT");
 		alcResetDeviceSOFT = provider.getFunctionAddress(device, "alcResetDeviceSOFT");
 		alcLoopbackOpenDeviceSOFT = provider.getFunctionAddress(device, "alcLoopbackOpenDeviceSOFT");
@@ -121,6 +125,7 @@ public final class ALCCapabilities {
 		ALC_EXT_EFX = ext.contains("ALC_EXT_EFX");
 		ALC_EXT_thread_local_context = ext.contains("ALC_EXT_thread_local_context") && checkExtension("ALC_EXT_thread_local_context", EXTThreadLocalContext.isAvailable(this));
 		ALC_LOKI_audio_channel = ext.contains("ALC_LOKI_audio_channel");
+		ALC_SOFT_device_clock = ext.contains("ALC_SOFT_device_clock") && checkExtension("ALC_SOFT_device_clock", SOFTDeviceClock.isAvailable(this));
 		ALC_SOFT_HRTF = ext.contains("ALC_SOFT_HRTF") && checkExtension("ALC_SOFT_HRTF", SOFTHRTF.isAvailable(this));
 		ALC_SOFT_loopback = ext.contains("ALC_SOFT_loopback") && checkExtension("ALC_SOFT_loopback", SOFTLoopback.isAvailable(this));
 		ALC_SOFT_output_limiter = ext.contains("ALC_SOFT_output_limiter");

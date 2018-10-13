@@ -21,6 +21,9 @@ val ALCuint = IntegerType("ALCuint", PrimitiveMapping.INT, unsigned = true)
 val ALCsizei = IntegerType("ALCsizei", PrimitiveMapping.INT)
 val ALCenum = IntegerType("ALCenum", PrimitiveMapping.INT)
 
+val ALCint64SOFT = IntegerType("ALCint64SOFT", PrimitiveMapping.LONG)
+val ALCuint64SOFT = IntegerType("ALCuint64SOFT", PrimitiveMapping.LONG, unsigned = true)
+
 // strings
 
 val ALCcharASCII = CharType("ALCchar", CharMapping.ASCII)
