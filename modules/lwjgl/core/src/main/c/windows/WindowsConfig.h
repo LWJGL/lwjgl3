@@ -10,5 +10,5 @@
     __pragma(warning(pop))
 
 #ifndef __cplusplus
-    #define inline __inline
+    #define inline __forceinline
 #endif
