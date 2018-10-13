@@ -49,7 +49,7 @@ import static org.lwjgl.vulkan.KHRDriverProperties.*;
  * struct VkPhysicalDeviceDriverPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     uint32_t driverID;
+ *     VkDriverIdKHR driverID;
  *     char driverName[VK_MAX_DRIVER_NAME_SIZE_KHR];
  *     char driverInfo[VK_MAX_DRIVER_INFO_SIZE_KHR];
  *     {@link VkConformanceVersionKHR VkConformanceVersionKHR} conformanceVersion;
@@ -113,7 +113,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct {
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** Returns the value of the {@code driverID} field. */
-    @NativeType("uint32_t")
+    @NativeType("VkDriverIdKHR")
     public int driverID() { return ndriverID(address()); }
     /** Returns a {@link ByteBuffer} view of the {@code driverName} field. */
     @NativeType("char[VK_MAX_DRIVER_NAME_SIZE_KHR]")
@@ -258,7 +258,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends Struct {
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDriverPropertiesKHR.npNext(address()); }
         /** Returns the value of the {@code driverID} field. */
-        @NativeType("uint32_t")
+        @NativeType("VkDriverIdKHR")
         public int driverID() { return VkPhysicalDeviceDriverPropertiesKHR.ndriverID(address()); }
         /** Returns a {@link ByteBuffer} view of the {@code driverName} field. */
         @NativeType("char[VK_MAX_DRIVER_NAME_SIZE_KHR]")

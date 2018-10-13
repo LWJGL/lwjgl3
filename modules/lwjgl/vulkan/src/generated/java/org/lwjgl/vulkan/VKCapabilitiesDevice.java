@@ -167,6 +167,10 @@ public class VKCapabilitiesDevice {
     public final long
         vkGetShaderInfoAMD;
 
+    // EXT_calibrated_timestamps
+    public final long
+        vkGetCalibratedTimestampsEXT;
+
     // EXT_conditional_rendering
     public final long
         vkCmdBeginConditionalRenderingEXT,
@@ -210,9 +214,22 @@ public class VKCapabilitiesDevice {
     public final long
         vkSetHdrMetadataEXT;
 
+    // EXT_image_drm_format_modifier
+    public final long
+        vkGetImageDrmFormatModifierPropertiesEXT;
+
     // EXT_sample_locations
     public final long
         vkCmdSetSampleLocationsEXT;
+
+    // EXT_transform_feedback
+    public final long
+        vkCmdBindTransformFeedbackBuffersEXT,
+        vkCmdBeginTransformFeedbackEXT,
+        vkCmdEndTransformFeedbackEXT,
+        vkCmdBeginQueryIndexedEXT,
+        vkCmdEndQueryIndexedEXT,
+        vkCmdDrawIndirectByteCountEXT;
 
     // EXT_validation_cache
     public final long
@@ -427,6 +444,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_astc_decode_mode;
     /** When true, {@link EXTBlendOperationAdvanced} is supported. */
     public final boolean VK_EXT_blend_operation_advanced;
+    /** When true, {@link EXTCalibratedTimestamps} is supported. */
+    public final boolean VK_EXT_calibrated_timestamps;
     /** When true, {@link EXTConditionalRendering} is supported. */
     public final boolean VK_EXT_conditional_rendering;
     /** When true, {@link EXTConservativeRasterization} is supported. */
@@ -449,8 +468,12 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_global_priority;
     /** When true, {@link EXTHdrMetadata} is supported. */
     public final boolean VK_EXT_hdr_metadata;
+    /** When true, {@link EXTImageDrmFormatModifier} is supported. */
+    public final boolean VK_EXT_image_drm_format_modifier;
     /** When true, {@link EXTInlineUniformBlock} is supported. */
     public final boolean VK_EXT_inline_uniform_block;
+    /** When true, {@link EXTPciBusInfo} is supported. */
+    public final boolean VK_EXT_pci_bus_info;
     /** When true, {@link EXTPostDepthCoverage} is supported. */
     public final boolean VK_EXT_post_depth_coverage;
     /** When true, {@link EXTQueueFamilyForeign} is supported. */
@@ -467,12 +490,18 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_shader_subgroup_vote;
     /** When true, {@link EXTShaderViewportIndexLayer} is supported. */
     public final boolean VK_EXT_shader_viewport_index_layer;
+    /** When true, {@link EXTTransformFeedback} is supported. */
+    public final boolean VK_EXT_transform_feedback;
     /** When true, {@link EXTValidationCache} is supported. */
     public final boolean VK_EXT_validation_cache;
     /** When true, {@link EXTVertexAttributeDivisor} is supported. */
     public final boolean VK_EXT_vertex_attribute_divisor;
+    /** When true, {@link GOOGLEDecorateString} is supported. */
+    public final boolean VK_GOOGLE_decorate_string;
     /** When true, {@link GOOGLEDisplayTiming} is supported. */
     public final boolean VK_GOOGLE_display_timing;
+    /** When true, {@link GOOGLEHlslFunctionality1} is supported. */
+    public final boolean VK_GOOGLE_hlsl_functionality1;
     /** When true, {@link IMGFilterCubic} is supported. */
     public final boolean VK_IMG_filter_cubic;
     /** When true, {@link IMGFormatPVRTC} is supported. */
@@ -609,7 +638,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(247);
+        Map<String, Long> caps = new HashMap<>(255);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -631,6 +660,7 @@ public class VKCapabilitiesDevice {
         VK_AMD_texture_gather_bias_lod = ext.contains("VK_AMD_texture_gather_bias_lod");
         VK_EXT_astc_decode_mode = ext.contains("VK_EXT_astc_decode_mode");
         VK_EXT_blend_operation_advanced = ext.contains("VK_EXT_blend_operation_advanced");
+        VK_EXT_calibrated_timestamps = EXTCalibratedTimestamps.checkCapsDevice(provider, caps, ext);
         VK_EXT_conditional_rendering = EXTConditionalRendering.checkCapsDevice(provider, caps, ext);
         VK_EXT_conservative_rasterization = ext.contains("VK_EXT_conservative_rasterization");
         VK_EXT_debug_marker = EXTDebugMarker.checkCapsDevice(provider, caps, ext);
@@ -643,7 +673,9 @@ public class VKCapabilitiesDevice {
         VK_EXT_external_memory_host = EXTExternalMemoryHost.checkCapsDevice(provider, caps, ext);
         VK_EXT_global_priority = ext.contains("VK_EXT_global_priority");
         VK_EXT_hdr_metadata = EXTHdrMetadata.checkCapsDevice(provider, caps, ext);
+        VK_EXT_image_drm_format_modifier = EXTImageDrmFormatModifier.checkCapsDevice(provider, caps, ext);
         VK_EXT_inline_uniform_block = ext.contains("VK_EXT_inline_uniform_block");
+        VK_EXT_pci_bus_info = ext.contains("VK_EXT_pci_bus_info");
         VK_EXT_post_depth_coverage = ext.contains("VK_EXT_post_depth_coverage");
         VK_EXT_queue_family_foreign = ext.contains("VK_EXT_queue_family_foreign");
         VK_EXT_sample_locations = EXTSampleLocations.checkCapsDevice(provider, caps, ext);
@@ -652,9 +684,12 @@ public class VKCapabilitiesDevice {
         VK_EXT_shader_subgroup_ballot = ext.contains("VK_EXT_shader_subgroup_ballot");
         VK_EXT_shader_subgroup_vote = ext.contains("VK_EXT_shader_subgroup_vote");
         VK_EXT_shader_viewport_index_layer = ext.contains("VK_EXT_shader_viewport_index_layer");
+        VK_EXT_transform_feedback = EXTTransformFeedback.checkCapsDevice(provider, caps, ext);
         VK_EXT_validation_cache = EXTValidationCache.checkCapsDevice(provider, caps, ext);
         VK_EXT_vertex_attribute_divisor = ext.contains("VK_EXT_vertex_attribute_divisor");
+        VK_GOOGLE_decorate_string = ext.contains("VK_GOOGLE_decorate_string");
         VK_GOOGLE_display_timing = GOOGLEDisplayTiming.checkCapsDevice(provider, caps, ext);
+        VK_GOOGLE_hlsl_functionality1 = ext.contains("VK_GOOGLE_hlsl_functionality1");
         VK_IMG_filter_cubic = ext.contains("VK_IMG_filter_cubic");
         VK_IMG_format_pvrtc = ext.contains("VK_IMG_format_pvrtc");
         VK_KHR_16bit_storage = ext.contains("VK_KHR_16bit_storage");
@@ -863,6 +898,7 @@ public class VKCapabilitiesDevice {
         vkCmdDrawIndirectCountAMD = VK.get(caps, "vkCmdDrawIndirectCountAMD");
         vkCmdDrawIndexedIndirectCountAMD = VK.get(caps, "vkCmdDrawIndexedIndirectCountAMD");
         vkGetShaderInfoAMD = VK.get(caps, "vkGetShaderInfoAMD");
+        vkGetCalibratedTimestampsEXT = VK.get(caps, "vkGetCalibratedTimestampsEXT");
         vkCmdBeginConditionalRenderingEXT = VK.get(caps, "vkCmdBeginConditionalRenderingEXT");
         vkCmdEndConditionalRenderingEXT = VK.get(caps, "vkCmdEndConditionalRenderingEXT");
         vkDebugMarkerSetObjectTagEXT = VK.get(caps, "vkDebugMarkerSetObjectTagEXT");
@@ -885,7 +921,14 @@ public class VKCapabilitiesDevice {
         vkGetSwapchainCounterEXT = VK.get(caps, "vkGetSwapchainCounterEXT");
         vkGetMemoryHostPointerPropertiesEXT = VK.get(caps, "vkGetMemoryHostPointerPropertiesEXT");
         vkSetHdrMetadataEXT = VK.get(caps, "vkSetHdrMetadataEXT");
+        vkGetImageDrmFormatModifierPropertiesEXT = VK.get(caps, "vkGetImageDrmFormatModifierPropertiesEXT");
         vkCmdSetSampleLocationsEXT = VK.get(caps, "vkCmdSetSampleLocationsEXT");
+        vkCmdBindTransformFeedbackBuffersEXT = VK.get(caps, "vkCmdBindTransformFeedbackBuffersEXT");
+        vkCmdBeginTransformFeedbackEXT = VK.get(caps, "vkCmdBeginTransformFeedbackEXT");
+        vkCmdEndTransformFeedbackEXT = VK.get(caps, "vkCmdEndTransformFeedbackEXT");
+        vkCmdBeginQueryIndexedEXT = VK.get(caps, "vkCmdBeginQueryIndexedEXT");
+        vkCmdEndQueryIndexedEXT = VK.get(caps, "vkCmdEndQueryIndexedEXT");
+        vkCmdDrawIndirectByteCountEXT = VK.get(caps, "vkCmdDrawIndirectByteCountEXT");
         vkCreateValidationCacheEXT = VK.get(caps, "vkCreateValidationCacheEXT");
         vkDestroyValidationCacheEXT = VK.get(caps, "vkDestroyValidationCacheEXT");
         vkMergeValidationCachesEXT = VK.get(caps, "vkMergeValidationCachesEXT");

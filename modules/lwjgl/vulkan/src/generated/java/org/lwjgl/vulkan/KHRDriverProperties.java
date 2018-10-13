@@ -76,7 +76,7 @@ public final class KHRDriverProperties {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>No cross-references are available</p>
+     * <p>{@link VkPhysicalDeviceDriverPropertiesKHR}</p>
      * 
      * <h5>Enum values:</h5>
      * 

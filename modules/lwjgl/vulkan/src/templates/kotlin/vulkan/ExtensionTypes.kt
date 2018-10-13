@@ -63,6 +63,7 @@ val VkAccelerationStructureTypeNVX = "VkAccelerationStructureTypeNVX".enumType
 val VkBuildAccelerationStructureFlagBitsNVX = "VkBuildAccelerationStructureFlagBitsNVX".enumType
 val VkCopyAccelerationStructureModeNVX = "VkCopyAccelerationStructureModeNVX".enumType
 val VkQueueGlobalPriorityEXT = "VkQueueGlobalPriorityEXT".enumType
+val VkTimeDomainEXT = "VkTimeDomainEXT".enumType
 val VkDriverIdKHR = "VkDriverIdKHR".enumType
 
 // Bitmask types
@@ -77,6 +78,7 @@ val VkXlibSurfaceCreateFlagsKHR = typedef(VkFlags, "VkXlibSurfaceCreateFlagsKHR"
 val VkWaylandSurfaceCreateFlagsKHR = typedef(VkFlags, "VkWaylandSurfaceCreateFlagsKHR")
 val VkWin32SurfaceCreateFlagsKHR = typedef(VkFlags, "VkWin32SurfaceCreateFlagsKHR")
 val VkDebugReportFlagsEXT = typedef(VkFlags, "VkDebugReportFlagsEXT")
+val VkPipelineRasterizationStateStreamCreateFlagsEXT = typedef(VkFlags, "VkPipelineRasterizationStateStreamCreateFlagsEXT")
 val VkExternalMemoryHandleTypeFlagsNV = typedef(VkFlags, "VkExternalMemoryHandleTypeFlagsNV")
 val VkExternalMemoryFeatureFlagsNV = typedef(VkFlags, "VkExternalMemoryFeatureFlagsNV")
 val VkPeerMemoryFeatureFlagsKHR = typedef(VkFlags, "VkPeerMemoryFeatureFlagsKHR")
@@ -166,7 +168,7 @@ val PFN_vkDebugUtilsMessengerCallbackEXT = Module.VULKAN.callback {
         "Application-defined debug messenger callback function.",
 
         VkDebugUtilsMessageSeverityFlagBitsEXT.IN("messageSeverity", "specifies the {@code VkDebugUtilsMessageSeverityFlagBitsEXT} that triggered this callback."),
-        VkDebugUtilsMessageTypeFlagsEXT.IN("messageType", ""),
+        VkDebugUtilsMessageTypeFlagsEXT.IN("messageTypes", "a bitmask of {@code VkDebugUtilsMessageTypeFlagBitsEXT} specifying which type of event(s) triggered this callback."),
         _VkDebugUtilsMessengerCallbackDataEXT.const.p.IN("pCallbackData", "contains all the callback related data in the ##VkDebugUtilsMessengerCallbackDataEXT structure."),
         opaque_p.IN("pUserData", "the user data provided when the {@code VkDebugUtilsMessengerEXT} was created."),
 
@@ -182,7 +184,7 @@ val PFN_vkDebugUtilsMessengerCallbackEXT = Module.VULKAN.callback {
         <pre><code>
 ￿typedef VkBool32 (VKAPI_PTR *PFN_vkDebugUtilsMessengerCallbackEXT)(
 ￿    VkDebugUtilsMessageSeverityFlagBitsEXT           messageSeverity,
-￿    VkDebugUtilsMessageTypeFlagsEXT                  messageType,
+￿    VkDebugUtilsMessageTypeFlagsEXT                  messageTypes,
 ￿    const VkDebugUtilsMessengerCallbackDataEXT*      pCallbackData,
 ￿    void*                                            pUserData);</code></pre>
 
@@ -674,7 +676,7 @@ val VkDisplayPlanePropertiesKHR = struct(Module.VULKAN, "VkDisplayPlanePropertie
         Structure describing display plane properties.
         """
 
-    VkDisplayKHR.member("currentDisplay", "the handle of the display the plane is currently associated with. If the plane is not currently attached to any displays, this will be {@code VK_NULL_HANDLE}.")
+    VkDisplayKHR.member("currentDisplay", "the handle of the display the plane is currently associated with. If the plane is not currently attached to any displays, this will be #NULL_HANDLE.")
     uint32_t.member("currentStackIndex", "the current z-order of the plane. This will be between 0 and the value returned by #GetPhysicalDeviceDisplayPlanePropertiesKHR() in {@code pPropertyCount}.")
 }
 
@@ -1061,6 +1063,81 @@ val VkDedicatedAllocationMemoryAllocateInfoNV = struct(Module.VULKAN, "VkDedicat
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkImage.member("image", "#NULL_HANDLE or a handle of an image which this memory will be bound to.")
     VkBuffer.member("buffer", "#NULL_HANDLE or a handle of a buffer which this memory will be bound to.")
+}
+
+val VkPhysicalDeviceTransformFeedbackFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceTransformFeedbackFeaturesEXT") {
+    documentation =
+        """
+        Structure describing transform feedback features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceTransformFeedbackFeaturesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether each feature is supported. ##VkPhysicalDeviceTransformFeedbackFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "")
+    nullable..opaque_p.member("pNext", "")
+    VkBool32.member("transformFeedback", "indicates whether the implementation supports transform feedback and shader modules <b>can</b> declare the {@code TransformFeedback} capability.")
+    VkBool32.member("geometryStreams", "indicates whether the implementation supports the {@code GeometryStreams} SPIR-V capability.")
+}
+
+val VkPhysicalDeviceTransformFeedbackPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceTransformFeedbackPropertiesEXT", mutable = false) {
+    documentation =
+        """
+        Structure describing transform feedback properties that can be supported by an implementation.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT</li>
+        </ul>
+
+        If the ##VkPhysicalDeviceTransformFeedbackPropertiesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2KHR, it is filled with the implementation-dependent limits and properties.
+        """
+
+    VkStructureType.member("sType", "").mutable()
+    nullable..opaque_p.member("pNext", "").mutable()
+    uint32_t.member("maxTransformFeedbackStreams", "the maximum number of vertex streams that can be output from geometry shaders declared with the {@code GeometryStreams} capability. If the implementation does not support ##VkPhysicalDeviceTransformFeedbackFeaturesEXT{@code ::geometryStreams} then {@code maxTransformFeedbackStreams} <b>must</b> be set to 1.")
+    uint32_t.member("maxTransformFeedbackBuffers", "the maximum number of transform feedback buffers that can be bound for capturing shader outputs from the last vertex processing stage.")
+    VkDeviceSize.member("maxTransformFeedbackBufferSize", "the maximum size that can be specified when binding a buffer for transform feedback in #CmdBindTransformFeedbackBuffersEXT().")
+    uint32_t.member("maxTransformFeedbackStreamDataSize", "the maximum amount of data in bytes for each vertex that captured to one or more transform feedback buffers associated with a specific vertex stream.")
+    uint32_t.member("maxTransformFeedbackBufferDataSize", "the maximum amount of data in bytes for each vertex that can be captured to a specific transform feedback buffer.")
+    uint32_t.member("maxTransformFeedbackBufferDataStride", "the maximum stride between each capture of vertex data to the buffer.")
+    VkBool32.member("transformFeedbackQueries", "true if the implementation supports the #QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT query type. {@code transformFeedbackQueries} is false if queries of this type <b>cannot</b> be created.")
+    VkBool32.member("transformFeedbackStreamsLinesTriangles", "true if the implementation supports the geometry shader {@code OpExecutionMode} of {@code OutputLineStrip} and {@code OutputTriangleStrip} in addition to {@code OutputPoints} when more than one vertex stream is output. If {@code transformFeedbackStreamsLinesTriangles} is false the implementation only supports an {@code OpExecutionMode} of {@code OutputPoints} when more than one vertex stream is output from the geometry shader.")
+    VkBool32.member("transformFeedbackRasterizationStreamSelect", "true if the implementation supports the {@code GeometryStreams} SPIR-V capability and the application can use ##VkPipelineRasterizationStateStreamCreateInfoEXT to modify which vertex stream output is used for rasterization. Otherwise vertex stream 0 <b>must</b> always be used for rasterization.")
+    VkBool32.member("transformFeedbackDraw", "true if the implementation supports the #CmdDrawIndirectByteCountEXT() function otherwise the function <b>must</b> not be called.")
+}
+
+val VkPipelineRasterizationStateStreamCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRasterizationStateStreamCreateInfoEXT") {
+    documentation =
+        """
+        Structure defining the geometry stream used for rasterization.
+
+        <h5>Description</h5>
+        If this structure is not present, {@code rasterizationStream} is assumed to be zero.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>##VkPhysicalDeviceTransformFeedbackFeaturesEXT{@code ::geometryStreams} <b>must</b> be enabled</li>
+            <li>{@code rasterizationStream} <b>must</b> be less than ##VkPhysicalDeviceTransformFeedbackPropertiesEXT{@code ::maxTransformFeedbackStreams}</li>
+            <li>{@code rasterizationStream} <b>must</b> be zero if ##VkPhysicalDeviceTransformFeedbackPropertiesEXT{@code ::transformFeedbackRasterizationStreamSelect} is #FALSE</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT</li>
+            <li>{@code flags} <b>must</b> be 0</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkPipelineRasterizationStateStreamCreateFlagsEXT.member("flags", "reserved for future use.")
+    uint32_t.member("rasterizationStream", "the vertex stream selected for rasterization.")
 }
 
 val VkTextureLODGatherFormatPropertiesAMD = struct(Module.VULKAN, "VkTextureLODGatherFormatPropertiesAMD", mutable = false) {
@@ -3382,6 +3459,7 @@ val VkRenderPassCreateInfo2KHR = struct(Module.VULKAN, "VkRenderPassCreateInfo2K
             <li>The ##VkSubpassDescription2KHR{@code ::viewMask} member of all elements of {@code pSubpasses} <b>must</b> either all be 0, or all not be 0</li>
             <li>If the ##VkSubpassDescription2KHR{@code ::viewMask} member of all elements of {@code pSubpasses} is 0, the {@code dependencyFlags} member of any element of {@code pDependencies} <b>must</b> not include #DEPENDENCY_VIEW_LOCAL_BIT</li>
             <li>For any element of {@code pDependencies} where its {@code srcSubpass} member equals its {@code dstSubpass} member, if the {@code viewMask} member of the corresponding element of {@code pSubpasses} includes more than one bit, its {@code dependencyFlags} member <b>must</b> include #DEPENDENCY_VIEW_LOCAL_BIT</li>
+            <li>If any two subpasses activate transform feedback to the same bound transform feedback buffers a subpass dependency <b>must</b> be included (either directly or via some intermediate subpasses) between them</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -4136,7 +4214,7 @@ val VkDebugUtilsMessengerCreateInfoEXT = struct(Module.VULKAN, "VkDebugUtilsMess
         Structure specifying parameters of a newly created debug messenger.
 
         <h5>Description</h5>
-        For each {@code VkDebugUtilsMessengerEXT} that is created the ##VkDebugUtilsMessengerCreateInfoEXT{@code ::messageSeverity} and ##VkDebugUtilsMessengerCreateInfoEXT{@code ::messageTypes} determine when that ##VkDebugUtilsMessengerCreateInfoEXT{@code ::pfnUserCallback} is called. The process to determine if the user's pfnUserCallback is triggered when an event occurs is as follows:
+        For each {@code VkDebugUtilsMessengerEXT} that is created the ##VkDebugUtilsMessengerCreateInfoEXT{@code ::messageSeverity} and ##VkDebugUtilsMessengerCreateInfoEXT{@code ::messageType} determine when that ##VkDebugUtilsMessengerCreateInfoEXT{@code ::pfnUserCallback} is called. The process to determine if the user's pfnUserCallback is triggered when an event occurs is as follows:
 
         <ul>
             <li>
@@ -4183,7 +4261,7 @@ val VkDebugUtilsMessengerCreateInfoEXT = struct(Module.VULKAN, "VkDebugUtilsMess
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkDebugUtilsMessengerCreateFlagsEXT.member("flags", "0 and reserved for future use.")
     VkDebugUtilsMessageSeverityFlagsEXT.member("messageSeverity", "a bitmask of {@code VkDebugUtilsMessageSeverityFlagBitsEXT} specifying which severity of event(s) will cause this callback to be called.")
-    VkDebugUtilsMessageTypeFlagsEXT.member("messageType", "")
+    VkDebugUtilsMessageTypeFlagsEXT.member("messageType", "a bitmask of {@code VkDebugUtilsMessageTypeFlagBitsEXT} specifying which type of event(s) will cause this callback to be called.")
     PFN_vkDebugUtilsMessengerCallbackEXT.member("pfnUserCallback", "the application callback function to call.")
     nullable..opaque_p.member("pUserData", "user data to be passed to the callback.")
 }
@@ -4823,6 +4901,176 @@ val VkBindImageMemoryInfoKHR = struct(Module.VULKAN, "VkBindImageMemoryInfoKHR",
     VkImage.member("image", "")
     VkDeviceMemory.member("memory", "")
     VkDeviceSize.member("memoryOffset", "")
+}
+
+val VkDrmFormatModifierPropertiesEXT = struct(Module.VULKAN, "VkDrmFormatModifierPropertiesEXT", mutable = false) {
+    documentation =
+        """
+        Structure specifying properties of a format when combined with a DRM format modifier.
+
+        <h5>Description</h5>
+        The returned {@code drmFormatModifierTilingFeatures} <b>must</b> contain at least one bit.
+
+        The implementation <b>must</b> not return {@code DRM_FORMAT_MOD_INVALID} in {@code drmFormatModifier}.
+
+        An image's <em>memory planecount</em> (as returned by {@code drmFormatModifierPlaneCount}) is distinct from its <em>format planecount</em> (in the sense of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-formats-requiring-sampler-ycbcr-conversion">multi-planar</a> Y'C<sub>B</sub>C<sub>R</sub> formats). In {@code VkImageAspectFlags}, each {@code VK_IMAGE_ASPECT_MEMORY_PLANE___i___BIT_EXT} represents a <em>memory plane</em> and each {@code VK_IMAGE_ASPECT_PLANE___i___BIT} a <em>format plane</em>.
+
+        An image's set of <em>format planes</em> is an ordered partition of the image's <b>content</b> into separable groups of format channels. The ordered partition is encoded in the name of each {@code VkFormat}. For example, #FORMAT_G8_B8R8_2PLANE_420_UNORM contains two <em>format planes</em>; the first plane contains the green channel and the second plane contains the blue channel and red channel. If the format name does not contain {@code PLANE}, then the format contains a single plane; for example, #FORMAT_R8G8B8A8_UNORM. Some commands, such as #CmdBufferToImage(), do not operate on all format channels in the image, but instead operate only on the <em>format planes</em> explicitly chosen by the application and operate on each <em>format plane</em> independently.
+
+        An image's set of <em>memory planes</em> is an ordered partition of the image's <b>memory</b> rather than the image's <b>content</b>. Each <em>memory plane</em> is a contiguous range of memory. The union of an image's <em>memory planes</em> is not necessarily contiguous.
+
+        If an image is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#glossary-linear-resource">linear</a>, then the partition is the same for <em>memory planes</em> and for <em>format planes</em>. Therefore, if the returned {@code drmFormatModifier} is {@code DRM_FORMAT_MOD_LINEAR}, then {@code drmFormatModifierPlaneCount} <b>must</b> equal the <em>format planecount</em>, and {@code drmFormatModifierTilingFeatures} <b>must</b> be identical to the ##VkFormatProperties2{@code ::linearTilingFeatures} returned in the same {@code pNext} chain.
+
+        If an image is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#glossary-linear-resource">non-linear</a>, then the partition of the image's <b>memory</b> into <em>memory planes</em> is implementation-specific and <b>may</b> be unrelated to the partition of the image's <b>content</b> into <em>format planes</em>. For example, consider an image whose {@code format} is #FORMAT_G8_B8_R8_3PLANE_420_UNORM, {@code tiling} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, whose {@code drmFormatModifier} is not {@code DRM_FORMAT_MOD_LINEAR}, and {@code flags} lacks #IMAGE_CREATE_DISJOINT_BIT. The image has 3 <em>format planes</em>, and commands such #CmdCopyBufferToImage() act on each <em>format plane</em> independently as if the data of each <em>format plane</em> were separable from the data of the other planes. In a straightforward implementation, the implementation <b>may</b> store the image's content in 3 adjacent <em>memory planes</em> where each <em>memory plane</em> corresponds exactly to a <em>format plane</em>. However, the implementation <b>may</b> also store the image's content in a single <em>memory plane</em> where all format channels are combined using an implementation-private block-compressed format; or the implementation <b>may</b> store the image's content in a collection of 7 adjacent <em>memory planes</em> using an implementation-private sharding technique. Because the image is non-linear and non-disjoint, the implementation has much freedom when choosing the image's placement in memory.
+
+        The <em>memory planecount</em> applies to function parameters and structures only when the API specifies an explicit requirement on {@code drmFormatModifierPlaneCount}. In all other cases, the <em>memory planecount</em> is ignored.
+
+        <h5>See Also</h5>
+        ##VkDrmFormatModifierPropertiesListEXT
+        """
+
+    uint64_t.member("drmFormatModifier", "a <em>Linux DRM format modifier</em>.")
+    uint32_t.member("drmFormatModifierPlaneCount", "the number of <em>memory planes</em> in any image created with {@code format} and {@code drmFormatModifier}. An image&#8217;s <em>memory planecount</em> is distinct from its <em>format planecount</em>, as explained below.")
+    VkFormatFeatureFlags.member("drmFormatModifierTilingFeatures", "a bitmask of {@code VkFormatFeatureFlagBits} that are supported by any image created with {@code format} and {@code drmFormatModifier}.")
+}
+
+val VkDrmFormatModifierPropertiesListEXT = struct(Module.VULKAN, "VkDrmFormatModifierPropertiesListEXT") {
+    documentation =
+        """
+        Structure specifying the list of DRM format modifiers supported for a format.
+
+        <h5>Description</h5>
+        If {@code pDrmFormatModifierProperties} is {@code NULL}, then the function returns in {@code drmFormatModifierCount} the number of modifiers compatible with the queried {@code format}. Otherwise, the application <b>must</b> set {@code drmFormatModifierCount} to the length of the array {@code pDrmFormatModifierProperties}; the function will write at most {@code drmFormatModifierCount} elements to the array, and will return in {@code drmFormatModifierCount} the number of elements written.
+
+        Among the elements in array {@code pDrmFormatModifierProperties}, each returned {@code drmFormatModifier} <b>must</b> be unique.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT</li>
+            <li>If {@code drmFormatModifierCount} is not 0, and {@code pDrmFormatModifierProperties} is not {@code NULL}, {@code pDrmFormatModifierProperties} <b>must</b> be a valid pointer to an array of {@code drmFormatModifierCount} ##VkDrmFormatModifierPropertiesEXT structures</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkDrmFormatModifierPropertiesEXT
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    AutoSize("pDrmFormatModifierProperties", optional = true)..uint32_t.member("drmFormatModifierCount", "an inout parameter related to the number of modifiers compatible with the {@code format}, as descibed below.")
+    nullable..VkDrmFormatModifierPropertiesEXT.p.buffer("pDrmFormatModifierProperties", "either {@code NULL} or an array of ##VkDrmFormatModifierPropertiesEXT structures.")
+}
+
+val VkPhysicalDeviceImageDrmFormatModifierInfoEXT = struct(Module.VULKAN, "VkPhysicalDeviceImageDrmFormatModifierInfoEXT") {
+    documentation =
+        """
+        Structure specifying a DRM format modifier as image creation parameter.
+
+        <h5>Description</h5>
+        If the {@code drmFormatModifier} is incompatible with the parameters specified in ##VkPhysicalDeviceImageFormatInfo2 and its {@code pNext} chain, then #GetPhysicalDeviceImageFormatProperties2() returns #ERROR_FORMAT_NOT_SUPPORTED. The implementation <b>must</b> support the query of any {@code drmFormatModifier}, including unknown and invalid modifier values.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, then {@code pQueueFamilyIndices} <b>must</b> be a valid pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values.</li>
+            <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, then {@code queueFamilyIndexCount} <b>must</b> be greater than 1.</li>
+            <li>If {@code sharingMode} is #SHARING_MODE_CONCURRENT, each element of {@code pQueueFamilyIndices} <b>must</b> be unique and <b>must</b> be less than the {@code pQueueFamilyPropertyCount} returned by #GetPhysicalDeviceQueueFamilyProperties2() for the {@code physicalDevice} that was used to create {@code device}.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT</li>
+            <li>{@code sharingMode} <b>must</b> be a valid {@code VkSharingMode} value</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    uint64_t.member("drmFormatModifier", "the image&#8217;s <em>Linux DRM format modifier</em>, corresponding to ##VkImageDrmFormatModifierExplicitCreateInfoEXT{@code ::modifier} or to ##VkImageDrmFormatModifierListCreateInfoEXT{@code ::pModifiers}.")
+    VkSharingMode.member("sharingMode", "specifies how the image will be accessed by multiple queue families.")
+    AutoSize("pQueueFamilyIndices", optional = true)..uint32_t.member("queueFamilyIndexCount", "the number of entries in the {@code pQueueFamilyIndices} array.")
+    uint32_t.const.p.member("pQueueFamilyIndices", "a list of queue families that will access the image (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT).")
+}
+
+val VkImageDrmFormatModifierListCreateInfoEXT = struct(Module.VULKAN, "VkImageDrmFormatModifierListCreateInfoEXT") {
+    documentation =
+        """
+        Specify that an image must be created with a DRM format modifier from the provided list.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>Each <em>modifier</em> in {@code pDrmFormatModifiers} must be compatible with the parameters in ##VkImageCreateInfo and its {@code pNext} chain, as determined by querying ##VkPhysicalDeviceImageFormatInfo2 extended with ##VkPhysicalDeviceImageDrmFormatModifierInfoEXT.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT</li>
+            <li>{@code pDrmFormatModifiers} <b>must</b> be a valid pointer to an array of {@code drmFormatModifierCount} {@code uint64_t} values</li>
+            <li>{@code drmFormatModifierCount} <b>must</b> be greater than 0</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    AutoSize("pDrmFormatModifiers")..uint32_t.member("drmFormatModifierCount", "the length of the {@code pDrmFormatModifiers} array.")
+    uint64_t.const.p.member("pDrmFormatModifiers", "an array of <em>Linux DRM format modifiers</em>.")
+}
+
+val VkImageDrmFormatModifierExplicitCreateInfoEXT = struct(Module.VULKAN, "VkImageDrmFormatModifierExplicitCreateInfoEXT") {
+    documentation =
+        """
+        Specify that an image be created with the provided DRM format modifier and explicit memory layout.
+
+        <h5>Description</h5>
+        The i<sup>th</sup> member of {@code pPlaneLayouts} describes the layout of the image's i<sup>th</sup> <em>memory plane</em> (that is, {@code VK_IMAGE_ASPECT_MEMORY_PLANE___i___BIT_EXT}). In each element of {@code pPlaneLayouts}, the implementation <b>must</b> ignore {@code size}. The implementation calculates the size of each plane, which the application <b>can</b> query with #GetImageSubresourceLayout().
+
+        When creating an image with ##VkImageDrmFormatModifierExplicitCreateInfoEXT, it is the application's responsibility to satisfy all +Valid Usage+ requirements. However, the implementation <b>must</b> validate that the provided {@code pPlaneLayouts}, when combined with the provided {@code drmFormatModifier} and other creation parameters in ##VkImageCreateInfo and its {@code pNext} chain, produce a valid image. (This validation is necessarily implementation-dependent and outside the scope of Vulkan, and therefore not described by +Valid Usage+ requirements). If this validation fails, then #CreateImage() returns #ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code drmFormatModifier} must be compatible with the parameters in ##VkImageCreateInfo and its {@code pNext} chain, as determined by querying ##VkPhysicalDeviceImageFormatInfo2KHR extended with ##VkPhysicalDeviceImageDrmFormatModifierInfoEXT.</li>
+            <li>{@code drmFormatModifierPlaneCount} <b>must</b> be equal to the ##VkDrmFormatModifierPropertiesEXT{@code ::drmFormatModifierPlaneCount} associated with ##VkImageCreateInfo{@code ::format} and {@code drmFormatModifier}, as found by querying ##VkDrmFormatModifierPropertiesListEXT.</li>
+            <li>For each element of {@code pPlaneLayouts}, {@code size} <b>must</b> be 0</li>
+            <li>For each element of {@code pPlaneLayouts}, {@code arrayPitch} <b>must</b> be 0 if ##VkImageCreateInfo{@code ::arrayLayers} is 1.</li>
+            <li>For each element of {@code pPlaneLayouts}, {@code depthPitch} <b>must</b> be 0 if ##VkImageCreateInfo{@code ::extent}{@code ::depth} is 1.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_EXCPLICIT_DRM_FORMAT_MODIFIER_CREATE_INFO_EXT</li>
+            <li>If {@code drmFormatModifierPlaneCount} is not 0, {@code pPlaneLayouts} <b>must</b> be a valid pointer to an array of {@code drmFormatModifierPlaneCount} ##VkSubresourceLayout structures</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkSubresourceLayout
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    uint64_t.member("drmFormatModifier", "the <em>Linux DRM format modifier</em> with which the image will be created.")
+    AutoSize("pPlaneLayouts", optional = true)..uint32_t.member("drmFormatModifierPlaneCount", "the number of <em>memory planes</em> in the image (as reported by ##VkDrmFormatModifierPropertiesEXT) as well as the length of the {@code pPlaneLayouts} array.")
+    VkSubresourceLayout.const.p.buffer("pPlaneLayouts", "an array of ##VkSubresourceLayout structures that describe the image&#8217;s <em>memory planes</em>.")
+}
+
+val VkImageDrmFormatModifierPropertiesEXT = struct(Module.VULKAN, "VkImageDrmFormatModifierPropertiesEXT", mutable = false) {
+    documentation =
+        """
+        Properties of an image's Linux DRM format modifier.
+
+        <h5>Description</h5>
+        If the {@code image} was created with ##VkImageDrmFormatModifierListCreateInfoEXT, then the returned {@code drmFormatModifier} <b>must</b> belong to the list of modifiers provided at time of image creation in ##VkImageDrmFormatModifierListCreateInfoEXT{@code ::pDrmFormatModifiers}. If the {@code image} was created with ##VkImageDrmFormatModifierExplicitCreateInfoEXT, then the returned {@code drmFormatModifier} <b>must</b> be the modifier provided at time of image creation in ##VkImageDrmFormatModifierExplicitCreateInfoEXT{@code ::drmFormatModifier}.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetImageDrmFormatModifierPropertiesEXT()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    uint64_t.member("drmFormatModifier", "returns the image&#8217;s <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#glossary-drm-format-modifier\">Linux DRM format modifier</a>.")
 }
 
 val VkValidationCacheCreateInfoEXT = struct(Module.VULKAN, "VkValidationCacheCreateInfoEXT") {
@@ -5689,6 +5937,32 @@ val VkPhysicalDeviceShaderAtomicInt64FeaturesKHR = struct(Module.VULKAN, "VkPhys
     VkBool32.member("shaderSharedInt64Atomics", "indicates whether shaders <b>can</b> support 64-bit unsigned and signed integer atomic operations on shared memory.")
 }
 
+val VkCalibratedTimestampInfoEXT = struct(Module.VULKAN, "VkCalibratedTimestampInfoEXT") {
+    documentation =
+        """
+        Structure specifying the input parameters of a calibrated timestamp query.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code timeDomain} <b>must</b> be one of the {@code VkTimeDomainEXT} values returned by #GetPhysicalDeviceCalibrateableTimeDomainsEXT()</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code timeDomain} <b>must</b> be a valid {@code VkTimeDomainEXT} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetCalibratedTimestampsEXT()
+        """
+
+    VkStructureType.member("sType", "the type of this structure.")
+    nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkTimeDomainEXT.member("timeDomain", "a {@code VkTimeDomainEXT} value specifying the time domain from which the calibrated timestamp value should be returned.")
+}
+
 val VkPhysicalDeviceShaderCorePropertiesAMD = struct(Module.VULKAN, "VkPhysicalDeviceShaderCorePropertiesAMD", mutable = false) {
     documentation =
         """
@@ -5835,7 +6109,7 @@ val VkPhysicalDeviceDriverPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDevic
 
     VkStructureType.member("sType", "the type of this structure.").mutable()
     nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension specific structure.").mutable()
-    uint32_t.member("driverID", "a unique identifier for the driver of the physical device.")
+    VkDriverIdKHR.member("driverID", "a unique identifier for the driver of the physical device.")
     charUTF8.array("driverName", "a null-terminated UTF-8 string containing the name of the driver.", size = "VK_MAX_DRIVER_NAME_SIZE_KHR")
     charUTF8.array("driverInfo", "a null-terminated UTF-8 string containing additional information about the driver.", size = "VK_MAX_DRIVER_INFO_SIZE_KHR")
     VkConformanceVersionKHR.member("conformanceVersion", "the version of the Vulkan conformance test this driver is conformant against (see ##VkConformanceVersionKHR).")
@@ -6084,4 +6358,23 @@ val VkPhysicalDeviceVulkanMemoryModelFeaturesKHR = struct(Module.VULKAN, "VkPhys
     nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     VkBool32.member("vulkanMemoryModel", "indicates whether the Vulkan Memory Model is supported, as defined in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-model\">Vulkan Memory Model</a>. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModelKHR} capability.")
     VkBool32.member("vulkanMemoryModelDeviceScope", "indicates whether the Vulkan Memory Model can use {@code Device} scope synchronization. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModelDeviceScopeKHR} capability.")
+}
+
+val VkPhysicalDevicePCIBusInfoPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDevicePCIBusInfoPropertiesEXT", mutable = false) {
+    documentation =
+        """
+        Structure containing PCI bus information of a physical device.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT</li>
+        </ul>
+        """
+
+    VkStructureType.member("sType", "the type of this structure.").mutable()
+    nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    uint16_t.member("pciDomain", "the PCI bus domain.")
+    uint8_t.member("pciBus", "the PCI bus identifier.")
+    uint8_t.member("pciDevice", "the PCI device identifier.")
+    uint8_t.member("pciFunction", "the PCI device function identifier.")
 }

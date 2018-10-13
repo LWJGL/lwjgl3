@@ -19,7 +19,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <pre><code>
  * typedef VkBool32 (VKAPI_PTR *PFN_vkDebugUtilsMessengerCallbackEXT)(
  *     VkDebugUtilsMessageSeverityFlagBitsEXT           messageSeverity,
- *     VkDebugUtilsMessageTypeFlagsEXT                  messageType,
+ *     VkDebugUtilsMessageTypeFlagsEXT                  messageTypes,
  *     const VkDebugUtilsMessengerCallbackDataEXT*      pCallbackData,
  *     void*                                            pUserData);</code></pre>
  * 
@@ -56,9 +56,10 @@ public interface VkDebugUtilsMessengerCallbackEXTI extends CallbackI.I {
      * Application-defined debug messenger callback function.
      *
      * @param messageSeverity specifies the {@code VkDebugUtilsMessageSeverityFlagBitsEXT} that triggered this callback.
+     * @param messageTypes    a bitmask of {@code VkDebugUtilsMessageTypeFlagBitsEXT} specifying which type of event(s) triggered this callback.
      * @param pCallbackData   contains all the callback related data in the {@link VkDebugUtilsMessengerCallbackDataEXT} structure.
      * @param pUserData       the user data provided when the {@code VkDebugUtilsMessengerEXT} was created.
      */
-    @NativeType("VkBool32") int invoke(@NativeType("VkDebugUtilsMessageSeverityFlagBitsEXT") int messageSeverity, @NativeType("VkDebugUtilsMessageTypeFlagsEXT") int messageType, @NativeType("VkDebugUtilsMessengerCallbackDataEXT const *") long pCallbackData, @NativeType("void *") long pUserData);
+    @NativeType("VkBool32") int invoke(@NativeType("VkDebugUtilsMessageSeverityFlagBitsEXT") int messageSeverity, @NativeType("VkDebugUtilsMessageTypeFlagsEXT") int messageTypes, @NativeType("VkDebugUtilsMessengerCallbackDataEXT const *") long pCallbackData, @NativeType("void *") long pUserData);
 
 }

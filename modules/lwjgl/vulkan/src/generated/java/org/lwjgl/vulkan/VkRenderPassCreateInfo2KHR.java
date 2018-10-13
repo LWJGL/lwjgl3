@@ -42,6 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@link VkSubpassDescription2KHR}{@code ::viewMask} member of all elements of {@code pSubpasses} <b>must</b> either all be 0, or all not be 0</li>
  * <li>If the {@link VkSubpassDescription2KHR}{@code ::viewMask} member of all elements of {@code pSubpasses} is 0, the {@code dependencyFlags} member of any element of {@code pDependencies} <b>must</b> not include {@link VK11#VK_DEPENDENCY_VIEW_LOCAL_BIT DEPENDENCY_VIEW_LOCAL_BIT}</li>
  * <li>For any element of {@code pDependencies} where its {@code srcSubpass} member equals its {@code dstSubpass} member, if the {@code viewMask} member of the corresponding element of {@code pSubpasses} includes more than one bit, its {@code dependencyFlags} member <b>must</b> include {@link VK11#VK_DEPENDENCY_VIEW_LOCAL_BIT DEPENDENCY_VIEW_LOCAL_BIT}</li>
+ * <li>If any two subpasses activate transform feedback to the same bound transform feedback buffers a subpass dependency <b>must</b> be included (either directly or via some intermediate subpasses) between them</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

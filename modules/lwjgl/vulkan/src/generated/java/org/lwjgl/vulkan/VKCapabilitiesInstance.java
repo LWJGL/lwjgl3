@@ -46,6 +46,10 @@ public class VKCapabilitiesInstance {
         vkAcquireXlibDisplayEXT,
         vkGetRandROutputDisplayEXT;
 
+    // EXT_calibrated_timestamps
+    public final long
+        vkGetPhysicalDeviceCalibrateableTimeDomainsEXT;
+
     // EXT_debug_report
     public final long
         vkCreateDebugReportCallbackEXT,
@@ -210,11 +214,12 @@ public class VKCapabilitiesInstance {
     VKCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(73);
+        Map<String, Long> caps = new HashMap<>(74);
 
         Vulkan10 = VK10.checkCapsInstance(provider, caps, ext);
         Vulkan11 = VK11.checkCapsInstance(provider, caps, ext);
         VK_EXT_acquire_xlib_display = EXTAcquireXlibDisplay.checkCapsInstance(provider, caps, ext);
+        EXTCalibratedTimestamps.checkCapsInstance(provider, caps, deviceExt);
         VK_EXT_debug_report = EXTDebugReport.checkCapsInstance(provider, caps, ext);
         VK_EXT_debug_utils = EXTDebugUtils.checkCapsInstance(provider, caps, ext);
         VK_EXT_direct_mode_display = EXTDirectModeDisplay.checkCapsInstance(provider, caps, ext);
@@ -265,6 +270,7 @@ public class VKCapabilitiesInstance {
         vkGetPhysicalDeviceExternalSemaphoreProperties = VK.get(caps, "vkGetPhysicalDeviceExternalSemaphoreProperties");
         vkAcquireXlibDisplayEXT = VK.get(caps, "vkAcquireXlibDisplayEXT");
         vkGetRandROutputDisplayEXT = VK.get(caps, "vkGetRandROutputDisplayEXT");
+        vkGetPhysicalDeviceCalibrateableTimeDomainsEXT = VK.get(caps, "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT");
         vkCreateDebugReportCallbackEXT = VK.get(caps, "vkCreateDebugReportCallbackEXT");
         vkDestroyDebugReportCallbackEXT = VK.get(caps, "vkDestroyDebugReportCallbackEXT");
         vkDebugReportMessageEXT = VK.get(caps, "vkDebugReportMessageEXT");

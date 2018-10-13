@@ -44,6 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties}{@code ::tiling} was {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}</li>
+ * <li>{@link VkPhysicalDeviceImageFormatInfo2}{@code ::tiling} was {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}</li>
  * <li>the {@link VkPhysicalDeviceImageFormatInfo2}{@code ::pNext} chain included an instance of {@link VkPhysicalDeviceExternalImageFormatInfo} with a handle type included in the {@code handleTypes} member for which mipmap image support is not required</li>
  * </ul></li>
  * <li>{@code maxArrayLayers} &ndash; the maximum number of array layers.
@@ -52,6 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code tiling} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}, then {@code maxArrayLayers} <b>must</b> either be equal to 1 or be no less than {@link VkPhysicalDeviceLimits}{@code ::maxImageArrayLayers}.</li>
  * <li>If {@code tiling} is {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL} and {@code type} is {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, then {@code maxArrayLayers} <b>must</b> either be equal to 1 or be no less than {@link VkPhysicalDeviceLimits}{@code ::maxImageArrayLayers}.</li>
  * <li>If {@code tiling} is {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL} and {@code type} is not {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, then {@code maxArrayLayers} <b>must</b> be no less than {@link VkPhysicalDeviceLimits}{@code ::maxImageArrayLayers}.</li>
+ * <li>If {@code tiling} is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then {@code maxArrayLayers} <b>must</b> not be 0.</li>
  * </ul></li>
  * <li>{@code sampleCounts} &ndash; a bitmask of {@code VkSampleCountFlagBits} specifying all the supported sample counts for this image as described <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#features-supported-sample-counts">below</a>.</li>
  * <li>{@code maxResourceSize} &ndash; an upper bound on the total image size in bytes, inclusive of all image subresources. Implementations <b>may</b> have an address space limit on total size of a resource, which is advertised by this property. {@code maxResourceSize} <b>must</b> be at least 2<sup>31</sup>.</li>

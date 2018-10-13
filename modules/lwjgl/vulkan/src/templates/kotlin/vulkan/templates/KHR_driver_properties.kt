@@ -100,7 +100,7 @@ val KHR_driver_properties = "KHRDriverProperties".nativeClassVK("KHR_driver_prop
         </div>
 
         <h5>See Also</h5>
-        No cross-references are available
+        ##VkPhysicalDeviceDriverPropertiesKHR
         """,
 
         "DRIVER_ID_AMD_PROPRIETARY_KHR".."1",

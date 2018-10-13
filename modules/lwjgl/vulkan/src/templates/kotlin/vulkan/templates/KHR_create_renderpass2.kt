@@ -214,6 +214,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
         <h5>Valid Usage</h5>
         <ul>
             <li>The current subpass index <b>must</b> be less than the number of subpasses in the render pass minus one</li>
+            <li>This command <b>must</b> not be recorded when transform feedback is active</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -267,6 +268,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
         <h5>Valid Usage</h5>
         <ul>
             <li>The current subpass index <b>must</b> be equal to the number of subpasses in the render pass minus one</li>
+            <li>This command <b>must</b> not be recorded when transform feedback is active</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

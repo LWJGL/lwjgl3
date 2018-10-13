@@ -22,8 +22,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If {@code image} was created with a <em>multi-planar</em> format and the {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} flag, there <b>must</b> be a {@link VkImagePlaneMemoryRequirementsInfo} in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
+ * <li>If {@code image} was created with {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} and with {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then there <b>must</b> be a {@link VkImagePlaneMemoryRequirementsInfo} in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
  * <li>If {@code image} was not created with the {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} flag, there <b>must</b> not be a {@link VkImagePlaneMemoryRequirementsInfo} in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
- * <li>If {@code image} was created with a single-plane format, there <b>must</b> not be a {@link VkImagePlaneMemoryRequirementsInfo} in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
+ * <li>If {@code image} was created with a single-plane format and with any {@code tiling} other than {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then there <b>must</b> not be a {@link VkImagePlaneMemoryRequirementsInfo} in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

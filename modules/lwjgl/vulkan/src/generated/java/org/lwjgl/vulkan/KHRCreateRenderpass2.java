@@ -284,6 +284,7 @@ public class KHRCreateRenderpass2 {
      * 
      * <ul>
      * <li>The current subpass index <b>must</b> be less than the number of subpasses in the render pass minus one</li>
+     * <li>This command <b>must</b> not be recorded when transform feedback is active</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -355,6 +356,7 @@ public class KHRCreateRenderpass2 {
      * 
      * <ul>
      * <li>The current subpass index <b>must</b> be equal to the number of subpasses in the render pass minus one</li>
+     * <li>This command <b>must</b> not be recorded when transform feedback is active</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
