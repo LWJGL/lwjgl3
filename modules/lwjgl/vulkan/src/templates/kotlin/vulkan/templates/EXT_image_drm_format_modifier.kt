@@ -58,7 +58,7 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
 
                 The application creates the image by chaining ##VkImageDrmFormatModifierListCreateInfoEXT and ##VkExternalMemoryImageCreateInfo onto ##VkImageCreateInfo. The protocol and APIs by which the application will share the image with external consumers will likely determine the value of ##VkExternalMemoryImageCreateInfo{@code ::handleTypes}. The implementation chooses for the image an optimal <em>modifier</em> from ##VkImageDrmFormatModifierListCreateInfoEXT{@code ::pDrmFormatModifiers}. The application then queries the implementation-chosen <em>modifier</em> with #GetImageDrmFormatModifierPropertiesEXT(), and queries the memory layout of each plane with #GetImageSubresourceLayout().
 
-                The application then allocates the image's memory with ##VkMemoryAllocateInfo, adding chained extension structures for external memory; binds it to the image; and exports the memory, for example, with #GetMemoryFd().
+                The application then allocates the image's memory with ##VkMemoryAllocateInfo, adding chained extension structures for external memory; binds it to the image; and exports the memory, for example, with #GetMemoryFdKHR().
 
                 Finally, the application sends the image's creation parameters, its <em>modifier</em>, its per-plane memory layout, and the exported memory handle to the external consumers. The details of how the application transmits this information to external consumers is outside the scope of this specification.
             </li>

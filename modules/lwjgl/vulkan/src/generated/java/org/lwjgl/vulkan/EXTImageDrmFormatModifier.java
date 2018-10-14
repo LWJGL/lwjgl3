@@ -59,7 +59,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>The application creates the image by chaining {@link VkImageDrmFormatModifierListCreateInfoEXT} and {@link VkExternalMemoryImageCreateInfo} onto {@link VkImageCreateInfo}. The protocol and APIs by which the application will share the image with external consumers will likely determine the value of {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes}. The implementation chooses for the image an optimal <em>modifier</em> from {@link VkImageDrmFormatModifierListCreateInfoEXT}{@code ::pDrmFormatModifiers}. The application then queries the implementation-chosen <em>modifier</em> with {@link #vkGetImageDrmFormatModifierPropertiesEXT GetImageDrmFormatModifierPropertiesEXT}, and queries the memory layout of each plane with {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}.</p>
  * 
- * <p>The application then allocates the image's memory with {@link VkMemoryAllocateInfo}, adding chained extension structures for external memory; binds it to the image; and exports the memory, for example, with {@link #vkGetMemoryFd GetMemoryFd}.</p>
+ * <p>The application then allocates the image's memory with {@link VkMemoryAllocateInfo}, adding chained extension structures for external memory; binds it to the image; and exports the memory, for example, with {@link KHRExternalMemoryFd#vkGetMemoryFdKHR GetMemoryFdKHR}.</p>
  * 
  * <p>Finally, the application sends the image's creation parameters, its <em>modifier</em>, its per-plane memory layout, and the exported memory handle to the external consumers. The details of how the application transmits this information to external consumers is outside the scope of this specification.</p>
  * </li>

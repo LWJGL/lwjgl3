@@ -20,7 +20,10 @@ import static org.testng.Assert.*;
 @Test
 public class OpusTest {
 
-    public void testchannels() {
+    /**
+     * Bindings of encode/decode functions depend on internal codec state. This method tests if LWJGL reads the channel count from the correct struct offsets.
+     */
+    public void testChannels() {
         try (MemoryStack stack = stackPush()) {
             IntBuffer error = stack.callocInt(1);
 
