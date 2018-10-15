@@ -3,7 +3,7 @@
  * License terms: https://www.lwjgl.org/license
  */
 module org.lwjgl {
-    requires jdk.unsupported;
+    requires transitive jdk.unsupported;
 
     exports org.lwjgl;
     exports org.lwjgl.system;
