@@ -52,6 +52,7 @@ enum class Module(
     GLFW("binding.glfw", "org.lwjgl.glfw"),
     JAWT("binding.jawt", "org.lwjgl.system.jawt", CallingConvention.STDCALL),
     JEMALLOC("binding.jemalloc", "org.lwjgl.system.jemalloc"),
+    LIBDIVIDE("binding.libdivide", "org.lwjgl.util.libdivide", arrayOverloads = false),
     LMDB("binding.lmdb", "org.lwjgl.util.lmdb"),
     LZ4("binding.lz4", "org.lwjgl.util.lz4", arrayOverloads = false),
     NANOVG("binding.nanovg", "org.lwjgl.nanovg"),

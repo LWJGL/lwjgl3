@@ -367,6 +367,7 @@
             <compileBinding binding="egl"/>
             <compileBinding binding="jawt"/>
             <compileBinding binding="jemalloc"/>
+            <compileBinding binding="libdivide"/>
             <compileBinding binding="lmdb"/>
             <compileBinding binding="lz4"/>
             <compileBinding binding="nanovg"/>
@@ -1097,6 +1098,9 @@
 
         <!-- jemalloc -->
         <release-module package="org.lwjgl.system.jemalloc" name="jemalloc" native-library="jemalloc" title="jemalloc" if:true="${binding.jemalloc}"/>
+
+        <!-- libdivide -->
+        <release-module package="org.lwjgl.util.libdivide" name="libdivide" native-library="lwjgl_libdivide" title="libdivide" if:true="${binding.libdivide}"/>
 
         <!-- LMDB -->
         <release-module package="org.lwjgl.util.lmdb" name="lmdb" native-library="lwjgl_lmdb" title="LMDB" if:true="${binding.lmdb}"/>

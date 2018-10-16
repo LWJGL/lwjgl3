@@ -4,9 +4,14 @@
  */
 package org.lwjgl.system;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 final class MultiReleaseMemCopy {
+
+    static {
+        apiLog("Java 10 memcpy enabled");
+    }
 
     private MultiReleaseMemCopy() {
     }

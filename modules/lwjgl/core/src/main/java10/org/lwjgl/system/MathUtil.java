@@ -4,12 +4,20 @@
  */
 package org.lwjgl.system;
 
+import static java.lang.Math.*;
+import static org.lwjgl.system.APIUtil.*;
+
 /**
  * Math utility class.
  *
  * <p>Method names in this class are prefixed with {@code math} to avoid ambiguities when used with static imports.</p>
  */
 public final class MathUtil {
+
+    static {
+        apiLog("Java 10 multiplyHigh enabled");
+    }
+
 
     private MathUtil() {
     }
@@ -65,14 +73,14 @@ public final class MathUtil {
      * @return the result
      */
     public static long mathMultiplyHighU64(long x, long y) {
-        long x0 = x & 0xFFFF_FFFFL;
-        long x1 = x >>> 32;
-        long y0 = y & 0xFFFF_FFFFL;
-        long y1 = y >>> 32;
-
-        long t = x1 * y0 + ((x0 * y0) >>> 32);
-
-        return x1 * y1 + (t >>> 32) + (((t & 0xFFFF_FFFFL) + x0 * y1) >>> 32);
+        long result = multiplyHigh(x, y);
+        if (x < 0) {
+            result += y;
+        }
+        if (y < 0) {
+            result += x;
+        }
+        return result;
     }
 
     /**
@@ -84,14 +92,7 @@ public final class MathUtil {
      * @return the result
      */
     public static long mathMultiplyHighS64(long x, long y) {
-        long x0 = x & 0xFFFF_FFFFL;
-        long x1 = x >> 32;
-        long y0 = y & 0xFFFF_FFFFL;
-        long y1 = y >> 32;
-
-        long t = x1 * y0 + ((x0 * y0) >>> 32);
-
-        return x1 * y1 + (t >> 32) + (((t & 0xFFFF_FFFFL) + x0 * y1) >> 32);
+        return multiplyHigh(x, y);
     }
 
 }

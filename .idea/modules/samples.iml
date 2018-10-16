@@ -21,6 +21,7 @@
     <orderEntry type="module" module-name="glfw" scope="TEST" />
     <orderEntry type="module" module-name="jawt" scope="TEST" />
     <orderEntry type="module" module-name="jemalloc" scope="TEST" />
+    <orderEntry type="module" module-name="libdivide" scope="TEST" />
     <orderEntry type="module" module-name="lmdb" scope="TEST" />
     <orderEntry type="module" module-name="lz4" scope="TEST" />
     <orderEntry type="module" module-name="nanovg" scope="TEST" />

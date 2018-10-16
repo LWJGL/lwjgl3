@@ -13,6 +13,11 @@
             <package name="org.lwjgl.system.libc"/>
         </packages>
     </test>
+    <test name="libdivide" parallel="methods" thread-count="4">
+        <packages>
+            <package name="org.lwjgl.util.libdivide"/>
+        </packages>
+    </test>
     <test name="opencl">
         <packages>
             <package name="org.lwjgl.opencl"/>

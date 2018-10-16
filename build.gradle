@@ -95,6 +95,11 @@ enum Artifacts {
         "A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.",
         Platforms.ALL
     ),
+    LIBDIVIDE(
+        "lwjgl-libdivide", "LWJGL - libdivide bindings",
+        "A library that replaces expensive integer divides with comparatively cheap multiplication and bitshifts.",
+        Platforms.ALL
+    ),
     LMDB(
         "lwjgl-lmdb", "LWJGL - LMDB bindings",
         "A compact, fast, powerful, and robust database that implements a simplified variant of the BerkeleyDB (BDB) API.",
