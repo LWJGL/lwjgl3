@@ -165,7 +165,7 @@ improve the chances of a quick and useful response.
 |Library|Description|
 |-------|-----------|
 |[dyncall](http://www.dyncall.org/)|Encapsulates architecture-, OS- and compiler-specific function call semantics in a virtual bind argument parameters from left to right and then call interface allowing programmers to call C functions in a completely dynamic manner.|
-|[jemalloc](http://www.canonware.com/jemalloc/)|A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.|
+|[jemalloc](http://jemalloc.net/)|A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.|
 |[LMDB](https://symas.com/products/lightning-memory-mapped-database/)|An extraordinarily fast, memory-efficient database. With memory-mapped files, it has the read performance of a pure in-memory database while retaining the persistence of standard disk-based databases.|
 |[LZ4](http://lz4.github.io/lz4/)|A lossless data compression algorithm that is focused on compression and decompression speed.|
 |[ODBC](https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc)|A C programming language interface that makes it possible for applications to access data from a variety of database management systems (DBMSs).|
