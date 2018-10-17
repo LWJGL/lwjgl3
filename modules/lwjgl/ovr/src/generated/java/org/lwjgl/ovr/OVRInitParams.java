@@ -44,7 +44,6 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link OVRLogCallbackI ovrLogCallback} LogCallback;
  *     uintptr_t UserData;
  *     uint32_t ConnectionTimeoutMS;
- *     char[4];
  * }</code></pre>
  */
 @NativeType("struct ovrInitParams")
@@ -70,8 +69,7 @@ public class OVRInitParams extends Struct implements NativeResource {
             __member(4),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(4),
-            __padding(4, Pointer.BITS64)
+            __member(4)
         );
 
         SIZEOF = layout.getSize();

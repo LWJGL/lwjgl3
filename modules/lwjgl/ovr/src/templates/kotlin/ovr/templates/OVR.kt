@@ -292,15 +292,36 @@ ENABLE_WARNINGS()""")
         ),
         "MirrorOption_IncludeGuardian".enum("Shows the boundary system aka Guardian on the mirror texture.", 0x0008),
         "MirrorOption_IncludeNotifications".enum("Shows system notifications the user receives on the mirror texture.", 0x0010),
-        "MirrorOption_IncludeSystemGui".enum("Shows the system menu (triggered by hitting the Home button) on the mirror texture.", 0x0020)
+        "MirrorOption_IncludeSystemGui".enum("Shows the system menu (triggered by hitting the Home button) on the mirror texture.", 0x0020),
+        "MirrorOption_ForceSymmetricFov".enum(
+            """
+            Forces mirror output to use max symmetric FOV instead of asymmetric full FOV used by HMD.
+
+            Only valid for rectilinear mirrors i.e. using #MirrorOption_PostDistortion with {@code ovrMirrorOption_ForceSymmetricFov} will result in
+            #Error_InvalidParameter error.
+            """,
+            0x0040
+        )
     )
 
     EnumConstant(
-        "{@code ovrViewportStencilType}",
+        "Viewport stencil types provided by the #GetFovStencil() call. {@code ovrFovStencilType}",
 
-        "ViewportStencil_HiddenArea".enum("Triangle mesh covering parts that are hidden to users.", "0"),
-        "ViewportStencil_VisibleArea".enum("Triangle mesh covering parts that are visible to users.", "1"),
-        "ViewportStencil_BorderLine".enum("Line buffer that draws the boundary visible to users.", "2")
+        "FovStencil_HiddenArea".enum("Triangle list covering parts that are hidden to users.", "0"),
+        "FovStencil_VisibleArea".enum("Triangle list covering parts that are visible to users.", "1"),
+        "FovStencil_BorderLine".enum("Line list that draws the boundary visible to users.", "2")
+    )
+
+    EnumConstant(
+        "Flags used by ##OVRFovStencilDesc and which are passed to #GetFovStencil(). ({@code ovrFovStencilFlags}",
+
+        "FovStencilFlag_MeshOriginAtBottomLeft".enum(
+            """
+            When used, flips the Y component of the provided 2D mesh coordinates, such that Y increases upwards. When not used, places mesh origin at top-left
+            where Y increases downwards.
+            """,
+            0x01
+        )
     )
 
     EnumConstant(
@@ -1298,12 +1319,36 @@ ovrSizei eyeSizeRight = ovr_GetFovTextureSize(session, ovrEye_Right, hmdDesc.Def
     )
 
     ovrResult(
-        "GetViewportStencil",
-        "",
+        "GetFovStencil",
+        """
+        Returns a viewport stencil mesh to be used for defining the area or outline the user can see through the lens on an area defined by a given
+        {@code ovrFovPort}.
+
+        To find out how big the vertex and index buffers in {@code meshBuffer} buffer should be, first call this function setting {@code AllocVertexCount}
+        &amp; {@code AllocIndexCount} to 0 while also sending in {@code nullptr} for {@code VertexBuffer} &amp; {@code IndexBuffer}. The SDK will populate
+        {@code UsedVertexCount} &amp; {@code UsedIndexCount} values.
+
+        If {@code Alloc*Count} fields in {@code meshBuffer} are smaller than the expected {@code Used*Count} fields, (except when they are 0) then the SDK will
+        return #Error_InvalidParameter and leave {@code VertexBuffer} and {@code IndexBuffer} untouched.
+
+        2D positions provided in the buffer will be in the {@code [0,1]} range where Y increases downward, similar to texture-UV space. If Y coordinates need
+        to be flipped upside down, use the #FovStencilFlag_MeshOriginAtBottomLeft.
+        """,
 
         session,
-        ovrViewportStencilDesc.const.p.IN("viewportStencilDesc", ""),
-        ovrViewportStencilMeshBuffer.p.INOUT("outMeshBuffer", "")
+        ovrFovStencilDesc.const.p.IN("fovStencilDesc", "info provided by caller necessary to generate a stencil mesh"),
+        ovrFovStencilMeshBuffer.p.INOUT("meshBuffer", "mesh buffer to be partially filled in and returned by the SDK"),
+
+        returnDoc =
+        """
+        an ovrResult indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information. Return values include but aren't
+        limited to:
+        ${ul(
+            "#Success: Completed successfully.",
+            "#Error_ServiceConnection: The service connection was lost and the application must destroy the session.",
+            "#Error_InvalidParameter: One or more of the parameters"
+        )}
+        """
     )
 
     ovrResult(

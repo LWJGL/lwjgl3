@@ -317,12 +317,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_ovr_OVR_novr_1GetRenderDesc(JNIEnv *__env,
     *((ovrEyeRenderDesc*)(intptr_t)__result) = ovr_GetRenderDesc(session, (ovrEyeType)eyeType, *fov);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_ovr_OVR_novr_1GetViewportStencil(JNIEnv *__env, jclass clazz, jlong sessionAddress, jlong viewportStencilDescAddress, jlong outMeshBufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_ovr_OVR_novr_1GetFovStencil(JNIEnv *__env, jclass clazz, jlong sessionAddress, jlong fovStencilDescAddress, jlong meshBufferAddress) {
     ovrSession session = (ovrSession)(intptr_t)sessionAddress;
-    ovrViewportStencilDesc const *viewportStencilDesc = (ovrViewportStencilDesc const *)(intptr_t)viewportStencilDescAddress;
-    ovrViewportStencilMeshBuffer *outMeshBuffer = (ovrViewportStencilMeshBuffer *)(intptr_t)outMeshBufferAddress;
+    ovrFovStencilDesc const *fovStencilDesc = (ovrFovStencilDesc const *)(intptr_t)fovStencilDescAddress;
+    ovrFovStencilMeshBuffer *meshBuffer = (ovrFovStencilMeshBuffer *)(intptr_t)meshBufferAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)ovr_GetViewportStencil(session, viewportStencilDesc, outMeshBuffer);
+    return (jint)ovr_GetFovStencil(session, fovStencilDesc, meshBuffer);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_ovr_OVR_novr_1WaitToBeginFrame(JNIEnv *__env, jclass clazz, jlong sessionAddress, jlong frameIndex) {

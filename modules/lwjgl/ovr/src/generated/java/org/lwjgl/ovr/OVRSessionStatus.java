@@ -32,7 +32,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * background (but possibly still visible) should hide any input representations such as hands.</li>
  * <li>{@code OverlayPresent} &ndash; 
  * True if a system overlay is present, such as a dashboard. In this case the application (if visible) should pause while still drawing, avoid drawing
- * near-field graphics so they don't visually fight with the system overlay, and consume fewer CPU and GPU resources.</li>
+ * near-field graphics so they don't visually fight with the system overlay, and consume fewer CPU and GPU resources.
+ * 
+ * <p>Deprecated, do not use.</p></li>
  * <li>{@code DepthRequested} &ndash; True if runtime is requesting that the application provide depth buffers with projection layers.</li>
  * </ul>
  * 

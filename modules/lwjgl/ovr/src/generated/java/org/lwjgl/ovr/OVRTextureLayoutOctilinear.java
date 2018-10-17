@@ -112,6 +112,7 @@ public class OVRTextureLayoutOctilinear extends Struct implements NativeResource
 
     static {
         Layout layout = __struct(
+            DEFAULT_PACK_ALIGNMENT, POINTER_SIZE,
             __member(4),
             __member(4),
             __member(4),

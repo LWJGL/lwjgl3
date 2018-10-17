@@ -102,6 +102,8 @@ val ovrSessionStatus = struct(Module.OVR, "OVRSessionStatus", nativeName = "ovrS
         """
         True if a system overlay is present, such as a dashboard. In this case the application (if visible) should pause while still drawing, avoid drawing
         near-field graphics so they don't visually fight with the system overlay, and consume fewer CPU and GPU resources.
+
+        Deprecated, do not use.
         """
     )
     ovrBool.member("DepthRequested", "True if runtime is requesting that the application provide depth buffers with projection layers.")
@@ -137,7 +139,6 @@ val ovrInitParams = struct(Module.OVR, "OVRInitParams", nativeName = "ovrInitPar
         "ConnectionTimeoutMS",
         "relative number of milliseconds to wait for a connection to the server before failing. Use 0 for the default timeout."
     )
-    padding(4, condition = "Pointer.BITS64")
 }
 
 val ovrColorf = struct(Module.OVR, "OVRColorf", nativeName = "ovrColorf") {
@@ -257,12 +258,16 @@ val ovrGraphicsLuid = struct(Module.OVR, "OVRGraphicsLuid", nativeName = "ovrGra
         For Windows this is a LUID type.
         """
 
+    alignas("POINTER_SIZE")
+
     char.array("Reserved", "public definition reserves space for graphics API-specific implementation.", size = 8)
 }
 
 val ovrHmdDesc = struct(Module.OVR, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false, skipBuffer = true) {
     javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
     documentation = "A complete descriptor of the HMD."
+
+    alignas("POINTER_SIZE")
 
     ovrHmdType.member("Type", "this HMD's type").links("Hmd_\\w+")
     padding(4, "Pointer.BITS64")
@@ -284,11 +289,12 @@ val ovrHmdDesc = struct(Module.OVR, "OVRHmdDesc", nativeName = "ovrHmdDesc", mut
 
     ovrSizei.member("Resolution", "resolution of the full HMD screen (both eyes) in pixels")
     float.member("DisplayRefreshRate", "refresh rate of the display in cycles per second at the time of HMD creation")
-    padding(4, "Pointer.BITS64")
 }
 
 val ovrTrackerDesc = struct(Module.OVR, "OVRTrackerDesc", nativeName = "ovrTrackerDesc", mutable = false) {
     documentation = "Specifies the description of a single sensor."
+
+    alignas("POINTER_SIZE")
 
     float.member("FrustumHFovInRadians", "sensor frustum horizontal field-of-view (if present).")
     float.member("FrustumVFovInRadians", "sensor frustum vertical field-of-view (if present).")
@@ -299,6 +305,8 @@ val ovrTrackerDesc = struct(Module.OVR, "OVRTrackerDesc", nativeName = "ovrTrack
 val ovrTrackerPose = struct(Module.OVR, "OVRTrackerPose", nativeName = "ovrTrackerPose", mutable = false) {
     documentation = "Specifies the pose for a single sensor."
 
+    alignas(8)
+
     unsigned_int.member("TrackerFlags", "{@code ovrTrackerFlags}.")
     ovrPosef.member("Pose", "the sensor's pose. This pose includes sensor tilt (roll and pitch). For a leveled coordinate system use {@code LeveledPose}.")
     ovrPosef.member(
@@ -308,7 +316,6 @@ val ovrTrackerPose = struct(Module.OVR, "OVRTrackerPose", nativeName = "ovrTrack
         reference point to render real-world objects in the correct location.
         """
     )
-    padding(4)
 }
 
 val ovrTrackingState = struct(Module.OVR, "OVRTrackingState", nativeName = "ovrTrackingState", mutable = false) {
@@ -406,7 +413,7 @@ val ovrTextureFormat = "ovrTextureFormat".enumType
 val ovrTextureSwapChainDesc = struct(Module.OVR, "OVRTextureSwapChainDesc", nativeName = "ovrTextureSwapChainDesc") {
     documentation = "Description used to create a texture swap chain."
 
-    ovrTextureType.member("Type", "Must not be {@code ovrTexture_Window}").links("Texture_\\w+")
+    ovrTextureType.member("Type", "").links("#Texture_2D")
     ovrTextureFormat.member("Format", "").links("OVR_FORMAT_\\w+")
     int.member("ArraySize", "must be 6 for #Texture_Cube, 1 for other types")
     int.member("Width", "")
@@ -430,27 +437,36 @@ val ovrMirrorTextureDesc = struct(Module.OVR, "OVRMirrorTextureDesc", nativeName
 val ovrTextureSwapChain = "ovrTextureSwapChain".handle
 val ovrMirrorTexture = "ovrMirrorTexture".handle
 
-val ovrViewportStencilType = "ovrViewportStencilType".enumType
-val ovrViewportStencilDesc = struct(Module.OVR, "OVRViewportStencilDesc", nativeName = "ovrViewportStencilDesc") {
-  ovrViewportStencilType.member("StencilType", "")
-  ovrEyeType.member("Eye", "")
-  ovrFovPort.member("FovPort", "typically Fov obtained from #GetRenderDesc()")
-  ovrQuatf.member("HmdToEyeRotation", "typically {@code HmdToEyePose.Orientation} obtained from #GetRenderDesc()")
-}
-val ovrViewportStencilMeshBuffer = struct(Module.OVR, "OVRViewportStencilMeshBuffer", nativeName = "ovrViewportStencilMeshBuffer") {
-  /// Vertex info
-  AutoSize("VertexBuffer")..int.member("AllocVertexCount", "to be filled in by caller of #GetViewportStencil()")
-  int.member("UsedVertexCount", "to be filled in by SDK and returned to caller")
-  ovrVector2f.p.buffer("VertexBuffer", "to be allocated by caller and filled in by SDK")
+val ovrFovStencilType = "ovrFovStencilType".enumType
+val ovrFovStencilDesc = struct(Module.OVR, "OVRFovStencilDesc", nativeName = "ovrFovStencilDesc") {
+    documentation = "Fov-stencil mesh descriptor passed into the function #GetFovStencil()."
 
-  /// Index info
-  AutoSize("IndexBuffer")..int.member("AllocIndexCount", "to be filled in by caller of #GetViewportStencil()")
-  int.member("UsedIndexCount", "to be filled in by SDK and returned to caller")
-  uint16_t.p.member("IndexBuffer", "to be allocated by caller and filled in by SDK")
+    alignas("POINTER_SIZE")
+
+    ovrFovStencilType.member("StencilType", "").links("FovStencil_\\w+")
+    uint32_t.member("StencilFlags", "").links("FovStencilFlag_\\w+", LinkMode.BITFIELD)
+    ovrEyeType.member("Eye", "")
+    ovrFovPort.member("FovPort", "typically Fov obtained from #GetRenderDesc()")
+    ovrQuatf.member("HmdToEyeRotation", "typically {@code HmdToEyePose.Orientation} obtained from #GetRenderDesc()")
+}
+val ovrFovStencilMeshBuffer = struct(Module.OVR, "OVRFovStencilMeshBuffer", nativeName = "ovrFovStencilMeshBuffer") {
+    documentation = "Contains the data for the fov-stencil mesh. Parts of the struct are filled by the caller while some parts are filled by the SDK."
+
+    /// Vertex info
+    AutoSize("VertexBuffer")..int.member("AllocVertexCount", "to be filled in by caller of #GetFovStencil()")
+    int.member("UsedVertexCount", "to be filled in by SDK and returned to caller")
+    nullable..ovrVector2f.p.buffer("VertexBuffer", "to be allocated by caller and filled in by SDK")
+
+    /// Index info
+    AutoSize("IndexBuffer")..int.member("AllocIndexCount", "to be filled in by caller of #GetFovStencil()")
+    int.member("UsedIndexCount", "to be filled in by SDK and returned to caller")
+    nullable..uint16_t.p.member("IndexBuffer", "to be allocated by caller and filled in by SDK")
 }
 
 val ovrTouchHapticsDesc = struct(Module.OVR, "OVRTouchHapticsDesc", nativeName = "ovrTouchHapticsDesc", mutable = false) {
     documentation = "Describes the Touch Haptics engine."
+
+    alignas("POINTER_SIZE")
 
     int.member("SampleRateHz", "Haptics engine frequency/sample-rate, sample time in seconds equals {@code 1.0/sampleRateHz}")
     int.member("SampleSizeInBytes", "Size of each Haptics sample, sample value range is {@code [0, 2^(Bytes*8)-1]}")
@@ -620,6 +636,8 @@ val ovrLayerHeader = struct(Module.OVR, "OVRLayerHeader", nativeName = "ovrLayer
         #LayerType_Disabled.
         """
 
+    alignas("POINTER_SIZE")
+
     ovrLayerType.member("Type", "described by {@code ovrLayerType}").links("LayerType_\\w+")
     unsigned_int.member("Flags", "described by {@code ovrLayerFlags}")
 
@@ -775,6 +793,8 @@ and the scissor rectangle for quadrant 1 will be:
  Right  = SizeLeft + SizeRight
  Bottom = SizeUp""")}
         """
+
+    alignas("POINTER_SIZE")
 
     float.member("WarpLeft", "left W warping")
     float.member("WarpRight", "right W warping")

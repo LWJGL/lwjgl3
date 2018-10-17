@@ -63,7 +63,6 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  *     {@link OVRFovPort ovrFovPort} MaxEyeFov[ovrEye_Count];
  *     {@link OVRSizei ovrSizei} Resolution;
  *     float DisplayRefreshRate;
- *     char[4];
  * }</code></pre>
  */
 @NativeType("struct ovrHmdDesc")
@@ -96,6 +95,7 @@ public class OVRHmdDesc extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
+            DEFAULT_PACK_ALIGNMENT, POINTER_SIZE,
             __member(4),
             __padding(4, Pointer.BITS64),
             __array(1, 64),
@@ -112,8 +112,7 @@ public class OVRHmdDesc extends Struct implements NativeResource {
             __array(OVRFovPort.SIZEOF, OVRFovPort.ALIGNOF, ovrEye_Count),
             __array(OVRFovPort.SIZEOF, OVRFovPort.ALIGNOF, ovrEye_Count),
             __member(OVRSizei.SIZEOF, OVRSizei.ALIGNOF),
-            __member(4),
-            __padding(4, Pointer.BITS64)
+            __member(4)
         );
 
         SIZEOF = layout.getSize();

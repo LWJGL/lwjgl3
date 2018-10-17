@@ -379,6 +379,12 @@ public class OVR {
      * <li>{@link #ovrMirrorOption_IncludeGuardian MirrorOption_IncludeGuardian} - Shows the boundary system aka Guardian on the mirror texture.</li>
      * <li>{@link #ovrMirrorOption_IncludeNotifications MirrorOption_IncludeNotifications} - Shows system notifications the user receives on the mirror texture.</li>
      * <li>{@link #ovrMirrorOption_IncludeSystemGui MirrorOption_IncludeSystemGui} - Shows the system menu (triggered by hitting the Home button) on the mirror texture.</li>
+     * <li>{@link #ovrMirrorOption_ForceSymmetricFov MirrorOption_ForceSymmetricFov} - 
+     * Forces mirror output to use max symmetric FOV instead of asymmetric full FOV used by HMD.
+     * 
+     * <p>Only valid for rectilinear mirrors i.e. using {@link #ovrMirrorOption_PostDistortion MirrorOption_PostDistortion} with {@code ovrMirrorOption_ForceSymmetricFov} will result in
+     * {@link OVRErrorCode#ovrError_InvalidParameter Error_InvalidParameter} error.</p>
+     * </li>
      * </ul>
      */
     public static final int
@@ -388,23 +394,38 @@ public class OVR {
         ovrMirrorOption_RightEyeOnly         = 0x4,
         ovrMirrorOption_IncludeGuardian      = 0x8,
         ovrMirrorOption_IncludeNotifications = 0x10,
-        ovrMirrorOption_IncludeSystemGui     = 0x20;
+        ovrMirrorOption_IncludeSystemGui     = 0x20,
+        ovrMirrorOption_ForceSymmetricFov    = 0x40;
 
     /**
-     * {@code ovrViewportStencilType}
+     * Viewport stencil types provided by the {@link #ovr_GetFovStencil GetFovStencil} call. {@code ovrFovStencilType}
      * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #ovrViewportStencil_HiddenArea ViewportStencil_HiddenArea} - Triangle mesh covering parts that are hidden to users.</li>
-     * <li>{@link #ovrViewportStencil_VisibleArea ViewportStencil_VisibleArea} - Triangle mesh covering parts that are visible to users.</li>
-     * <li>{@link #ovrViewportStencil_BorderLine ViewportStencil_BorderLine} - Line buffer that draws the boundary visible to users.</li>
+     * <li>{@link #ovrFovStencil_HiddenArea FovStencil_HiddenArea} - Triangle list covering parts that are hidden to users.</li>
+     * <li>{@link #ovrFovStencil_VisibleArea FovStencil_VisibleArea} - Triangle list covering parts that are visible to users.</li>
+     * <li>{@link #ovrFovStencil_BorderLine FovStencil_BorderLine} - Line list that draws the boundary visible to users.</li>
      * </ul>
      */
     public static final int
-        ovrViewportStencil_HiddenArea  = 0,
-        ovrViewportStencil_VisibleArea = 1,
-        ovrViewportStencil_BorderLine  = 2;
+        ovrFovStencil_HiddenArea  = 0,
+        ovrFovStencil_VisibleArea = 1,
+        ovrFovStencil_BorderLine  = 2;
+
+    /**
+     * Flags used by {@link OVRFovStencilDesc} and which are passed to {@link #ovr_GetFovStencil GetFovStencil}. ({@code ovrFovStencilFlags}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #ovrFovStencilFlag_MeshOriginAtBottomLeft FovStencilFlag_MeshOriginAtBottomLeft} - 
+     * When used, flips the Y component of the provided 2D mesh coordinates, such that Y increases upwards. When not used, places mesh origin at top-left
+     * where Y increases downwards.
+     * </li>
+     * </ul>
+     */
+    public static final int ovrFovStencilFlag_MeshOriginAtBottomLeft = 0x1;
 
     /**
      * Describes button input types.({@code ovrButton})
@@ -2034,19 +2055,44 @@ public class OVR {
         return __result;
     }
 
-    // --- [ ovr_GetViewportStencil ] ---
+    // --- [ ovr_GetFovStencil ] ---
 
-    /** Unsafe version of: {@link #ovr_GetViewportStencil GetViewportStencil} */
-    public static native int novr_GetViewportStencil(long session, long viewportStencilDesc, long outMeshBuffer);
+    /** Unsafe version of: {@link #ovr_GetFovStencil GetFovStencil} */
+    public static native int novr_GetFovStencil(long session, long fovStencilDesc, long meshBuffer);
 
-    /** @param session an {@code ovrSession} previously returned by {@link #ovr_Create Create} */
+    /**
+     * Returns a viewport stencil mesh to be used for defining the area or outline the user can see through the lens on an area defined by a given
+     * {@code ovrFovPort}.
+     * 
+     * <p>To find out how big the vertex and index buffers in {@code meshBuffer} buffer should be, first call this function setting {@code AllocVertexCount}
+     * &amp; {@code AllocIndexCount} to 0 while also sending in {@code nullptr} for {@code VertexBuffer} &amp; {@code IndexBuffer}. The SDK will populate
+     * {@code UsedVertexCount} &amp; {@code UsedIndexCount} values.</p>
+     * 
+     * <p>If {@code Alloc*Count} fields in {@code meshBuffer} are smaller than the expected {@code Used*Count} fields, (except when they are 0) then the SDK will
+     * return {@link OVRErrorCode#ovrError_InvalidParameter Error_InvalidParameter} and leave {@code VertexBuffer} and {@code IndexBuffer} untouched.</p>
+     * 
+     * <p>2D positions provided in the buffer will be in the {@code [0,1]} range where Y increases downward, similar to texture-UV space. If Y coordinates need
+     * to be flipped upside down, use the {@link #ovrFovStencilFlag_MeshOriginAtBottomLeft FovStencilFlag_MeshOriginAtBottomLeft}.</p>
+     *
+     * @param session        an {@code ovrSession} previously returned by {@link #ovr_Create Create}
+     * @param fovStencilDesc info provided by caller necessary to generate a stencil mesh
+     * @param meshBuffer     mesh buffer to be partially filled in and returned by the SDK
+     *
+     * @return an ovrResult indicating success or failure. In the case of failure, use {@link #ovr_GetLastErrorInfo GetLastErrorInfo} to get more information. Return values include but aren't
+     *         limited to:
+     *         
+     *         <ul>
+     *         <li>{@link OVRErrorCode#ovrSuccess Success}: Completed successfully.</li>
+     *         <li>{@link OVRErrorCode#ovrError_ServiceConnection Error_ServiceConnection}: The service connection was lost and the application must destroy the session.</li>
+     *         <li>{@link OVRErrorCode#ovrError_InvalidParameter Error_InvalidParameter}: One or more of the parameters</li>
+     *         </ul>
+     */
     @NativeType("ovrResult")
-    public static int ovr_GetViewportStencil(@NativeType("ovrSession") long session, @NativeType("ovrViewportStencilDesc const *") OVRViewportStencilDesc viewportStencilDesc, @NativeType("ovrViewportStencilMeshBuffer *") OVRViewportStencilMeshBuffer outMeshBuffer) {
+    public static int ovr_GetFovStencil(@NativeType("ovrSession") long session, @NativeType("ovrFovStencilDesc const *") OVRFovStencilDesc fovStencilDesc, @NativeType("ovrFovStencilMeshBuffer *") OVRFovStencilMeshBuffer meshBuffer) {
         if (CHECKS) {
             check(session);
-            OVRViewportStencilMeshBuffer.validate(outMeshBuffer.address());
         }
-        return novr_GetViewportStencil(session, viewportStencilDesc.address(), outMeshBuffer.address());
+        return novr_GetFovStencil(session, fovStencilDesc.address(), meshBuffer.address());
     }
 
     // --- [ ovr_WaitToBeginFrame ] ---
