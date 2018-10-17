@@ -799,16 +799,6 @@ public final class MemoryUtil {
 
     // --- [ Buffer allocation ] ---
 
-    private static long checkAlignment(long address, int mask) {
-        if (CHECKS && address == NULL) {
-            throw new NullPointerException();
-        }
-        if (DEBUG && (address & mask) != 0L) {
-            throw new IllegalArgumentException("Unaligned memory address");
-        }
-        return address;
-    }
-
     /**
      * Creates a new direct ByteBuffer that starts at the specified memory address and has the specified capacity. The returned ByteBuffer instance will be set
      * to the native {@link ByteOrder}.
@@ -822,7 +812,6 @@ public final class MemoryUtil {
         if (CHECKS) {
             check(address);
         }
-
         return wrap(BUFFER_BYTE, address, capacity).order(NATIVE_ORDER);
     }
 
@@ -843,13 +832,16 @@ public final class MemoryUtil {
      * @return the new ShortBuffer
      */
     public static ShortBuffer memShortBuffer(long address, int capacity) {
-        return wrap(BUFFER_SHORT, checkAlignment(address, 2 - 1), capacity);
+        if (CHECKS) {
+            check(address);
+        }
+        return wrap(BUFFER_SHORT, address, capacity);
     }
 
     /** Like {@link #memShortBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
     @Nullable
     public static ShortBuffer memShortBufferSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(BUFFER_SHORT, checkAlignment(address, 2 - 1), capacity);
+        return address == NULL ? null : wrap(BUFFER_SHORT, address, capacity);
     }
 
     /**
@@ -863,13 +855,16 @@ public final class MemoryUtil {
      * @return the new CharBuffer
      */
     public static CharBuffer memCharBuffer(long address, int capacity) {
-        return wrap(BUFFER_CHAR, checkAlignment(address, 2 - 1), capacity);
+        if (CHECKS) {
+            check(address);
+        }
+        return wrap(BUFFER_CHAR, address, capacity);
     }
 
     /** Like {@link #memCharBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
     @Nullable
     public static CharBuffer memCharBufferSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(BUFFER_CHAR, checkAlignment(address, 2 - 1), capacity);
+        return address == NULL ? null : wrap(BUFFER_CHAR, address, capacity);
     }
 
     /**
@@ -883,13 +878,16 @@ public final class MemoryUtil {
      * @return the new IntBuffer
      */
     public static IntBuffer memIntBuffer(long address, int capacity) {
-        return wrap(BUFFER_INT, checkAlignment(address, 4 - 1), capacity);
+        if (CHECKS) {
+            check(address);
+        }
+        return wrap(BUFFER_INT, address, capacity);
     }
 
     /** Like {@link #memIntBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
     @Nullable
     public static IntBuffer memIntBufferSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(BUFFER_INT, checkAlignment(address, 4 - 1), capacity);
+        return address == NULL ? null : wrap(BUFFER_INT, address, capacity);
     }
 
     /**
@@ -903,13 +901,16 @@ public final class MemoryUtil {
      * @return the new LongBuffer
      */
     public static LongBuffer memLongBuffer(long address, int capacity) {
-        return wrap(BUFFER_LONG, checkAlignment(address, 8 - 1), capacity);
+        if (CHECKS) {
+            check(address);
+        }
+        return wrap(BUFFER_LONG, address, capacity);
     }
 
     /** Like {@link #memLongBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
     @Nullable
     public static LongBuffer memLongBufferSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(BUFFER_LONG, checkAlignment(address, 8 - 1), capacity);
+        return address == NULL ? null : wrap(BUFFER_LONG, address, capacity);
     }
 
     /**
@@ -923,13 +924,16 @@ public final class MemoryUtil {
      * @return the new FloatBuffer
      */
     public static FloatBuffer memFloatBuffer(long address, int capacity) {
-        return wrap(BUFFER_FLOAT, checkAlignment(address, 4 - 1), capacity);
+        if (CHECKS) {
+            check(address);
+        }
+        return wrap(BUFFER_FLOAT, address, capacity);
     }
 
     /** Like {@link #memFloatBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
     @Nullable
     public static FloatBuffer memFloatBufferSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(BUFFER_FLOAT, checkAlignment(address, 4 - 1), capacity);
+        return address == NULL ? null : wrap(BUFFER_FLOAT, address, capacity);
     }
 
     /**
@@ -943,13 +947,16 @@ public final class MemoryUtil {
      * @return the new DoubleBuffer
      */
     public static DoubleBuffer memDoubleBuffer(long address, int capacity) {
-        return wrap(BUFFER_DOUBLE, checkAlignment(address, 8 - 1), capacity);
+        if (CHECKS) {
+            check(address);
+        }
+        return wrap(BUFFER_DOUBLE, address, capacity);
     }
 
     /** Like {@link #memDoubleBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
     @Nullable
     public static DoubleBuffer memDoubleBufferSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(BUFFER_DOUBLE, checkAlignment(address, 8 - 1), capacity);
+        return address == NULL ? null : wrap(BUFFER_DOUBLE, address, capacity);
     }
 
     /**
@@ -964,13 +971,16 @@ public final class MemoryUtil {
      * @return the new PointerBuffer
      */
     public static PointerBuffer memPointerBuffer(long address, int capacity) {
-        return Pointer.Default.wrap(PointerBuffer.class, checkAlignment(address, POINTER_SIZE - 1), capacity);
+        if (CHECKS) {
+            check(address);
+        }
+        return Pointer.Default.wrap(PointerBuffer.class, address, capacity);
     }
 
     /** Like {@link #memPointerBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
     @Nullable
     public static PointerBuffer memPointerBufferSafe(long address, int capacity) {
-        return address == NULL ? null : Pointer.Default.wrap(PointerBuffer.class, checkAlignment(address, POINTER_SIZE - 1), capacity);
+        return address == NULL ? null : Pointer.Default.wrap(PointerBuffer.class, address, capacity);
     }
 
     // --- [ Buffer duplication ] ---
