@@ -51,6 +51,7 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
+            Platform.get() == Platform.LINUX || Platform.get() == Platform.MACOSX ? 4 : DEFAULT_PACK_ALIGNMENT,
             __member(2),
             __member(2),
             __member(POINTER_SIZE)

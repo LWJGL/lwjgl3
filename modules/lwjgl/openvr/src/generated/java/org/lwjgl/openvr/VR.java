@@ -50,6 +50,7 @@ public class VR {
         k_unHapticVibrationPropertyTag   = 35,
         k_unSkeletonPropertyTag          = 36,
         k_unSpatialAnchorPosePropertyTag = 40,
+        k_unJsonPropertyTag              = 41,
         k_unOpenVRInternalReserved_Start = 1000,
         k_unOpenVRInternalReserved_End   = 10000,
         k_unScreenshotHandleInvalid      = 0,
@@ -97,7 +98,7 @@ public class VR {
     public static final String
         IVRSystem_Version                                              = "IVRSystem_019",
         IVRExtendedDisplay_Version                                     = "IVRExtendedDisplay_001",
-        IVRTrackedCamera_Version                                       = "IVRTrackedCamera_003",
+        IVRTrackedCamera_Version                                       = "IVRTrackedCamera_004",
         k_pch_MimeType_HomeApp                                         = "vr/home",
         k_pch_MimeType_GameTheater                                     = "vr/game_theater",
         IVRApplications_Version                                        = "IVRApplications_006",
@@ -140,13 +141,15 @@ public class VR {
         k_pch_SteamVR_BaseStationPowerManagement_Bool                  = "basestationPowerManagement",
         k_pch_SteamVR_NeverKillProcesses_Bool                          = "neverKillProcesses",
         k_pch_SteamVR_SupersampleScale_Float                           = "supersampleScale",
+        k_pch_SteamVR_MaxRecommendedResolution_Int32                   = "maxRecommendedResolution",
         k_pch_SteamVR_AllowAsyncReprojection_Bool                      = "allowAsyncReprojection",
         k_pch_SteamVR_AllowReprojection_Bool                           = "allowInterleavedReprojection",
         k_pch_SteamVR_ForceReprojection_Bool                           = "forceReprojection",
         k_pch_SteamVR_ForceFadeOnBadTracking_Bool                      = "forceFadeOnBadTracking",
-        k_pch_SteamVR_DefaultMirrorView_Int32                          = "defaultMirrorView",
+        k_pch_SteamVR_DefaultMirrorView_Int32                          = "mirrorView",
         k_pch_SteamVR_ShowMirrorView_Bool                              = "showMirrorView",
         k_pch_SteamVR_MirrorViewGeometry_String                        = "mirrorViewGeometry",
+        k_pch_SteamVR_MirrorViewGeometryMaximized_String               = "mirrorViewGeometryMaximized",
         k_pch_SteamVR_StartMonitorFromAppLaunch                        = "startMonitorFromAppLaunch",
         k_pch_SteamVR_StartCompositorFromAppLaunch_Bool                = "startCompositorFromAppLaunch",
         k_pch_SteamVR_StartDashboardFromAppLaunch_Bool                 = "startDashboardFromAppLaunch",
@@ -175,6 +178,7 @@ public class VR {
         k_pch_Lighthouse_DBHistory_Bool                                = "dbhistory",
         k_pch_Lighthouse_EnableBluetooth_Bool                          = "enableBluetooth",
         k_pch_Lighthouse_PowerManagedBaseStations_String               = "PowerManagedBaseStations",
+        k_pch_Lighthouse_EnableImuFallback_Bool                        = "enableImuFallback",
         k_pch_Null_Section                                             = "driver_null",
         k_pch_Null_SerialNumber_String                                 = "serialNumber",
         k_pch_Null_ModelNumber_String                                  = "modelNumber",
@@ -189,6 +193,7 @@ public class VR {
         k_pch_UserInterface_Section                                    = "userinterface",
         k_pch_UserInterface_StatusAlwaysOnTop_Bool                     = "StatusAlwaysOnTop",
         k_pch_UserInterface_MinimizeToTray_Bool                        = "MinimizeToTray",
+        k_pch_UserInterface_HidePopupsWhenStatusMinimized_Bool         = "HidePopupsWhenStatusMinimized",
         k_pch_UserInterface_Screenshots_Bool                           = "screenshots",
         k_pch_UserInterface_ScreenshotType_Int                         = "screenshotType",
         k_pch_Notifications_Section                                    = "notifications",
@@ -202,9 +207,7 @@ public class VR {
         k_pch_Keyboard_OffsetY                                         = "OffsetY",
         k_pch_Keyboard_Smoothing                                       = "Smoothing",
         k_pch_Perf_Section                                             = "perfcheck",
-        k_pch_Perf_HeuristicActive_Bool                                = "heuristicActive",
-        k_pch_Perf_NotifyInHMD_Bool                                    = "warnInHMD",
-        k_pch_Perf_NotifyOnlyOnce_Bool                                 = "warnOnlyOnce",
+        k_pch_Perf_PerfGraphInHMD_Bool                                 = "perfGraphInHMD",
         k_pch_Perf_AllowTimingStore_Bool                               = "allowTimingStore",
         k_pch_Perf_SaveTimingsOnExit_Bool                              = "saveTimingsOnExit",
         k_pch_Perf_TestData_Float                                      = "perfTestData",
@@ -255,6 +258,9 @@ public class VR {
         k_pch_WebInterface_Section                                     = "WebInterface",
         k_pch_WebInterface_WebEnable_Bool                              = "WebEnable",
         k_pch_WebInterface_WebPort_String                              = "WebPort",
+        k_pch_VRWebHelper_Section                                      = "VRWebHelper",
+        k_pch_VRWebHelper_DebuggerEnabled_Bool                         = "DebuggerEnabled",
+        k_pch_VRWebHelper_DebuggerPort_Int32                           = "DebuggerPort",
         k_pch_TrackingOverride_Section                                 = "TrackingOverrides",
         k_pch_App_BindingAutosaveURLSuffix_String                      = "AutosaveURL",
         k_pch_App_BindingCurrentURLSuffix_String                       = "CurrentURL",
@@ -341,6 +347,7 @@ public class VR {
      * <li>{@link #ETrackingResult_TrackingResult_Calibrating_OutOfRange ETrackingResult_TrackingResult_Calibrating_OutOfRange}</li>
      * <li>{@link #ETrackingResult_TrackingResult_Running_OK ETrackingResult_TrackingResult_Running_OK}</li>
      * <li>{@link #ETrackingResult_TrackingResult_Running_OutOfRange ETrackingResult_TrackingResult_Running_OutOfRange}</li>
+     * <li>{@link #ETrackingResult_TrackingResult_Fallback_RotationOnly ETrackingResult_TrackingResult_Fallback_RotationOnly}</li>
      * </ul>
      */
     public static final int
@@ -348,7 +355,8 @@ public class VR {
         ETrackingResult_TrackingResult_Calibrating_InProgress = 100,
         ETrackingResult_TrackingResult_Calibrating_OutOfRange = 101,
         ETrackingResult_TrackingResult_Running_OK             = 200,
-        ETrackingResult_TrackingResult_Running_OutOfRange     = 201;
+        ETrackingResult_TrackingResult_Running_OutOfRange     = 201,
+        ETrackingResult_TrackingResult_Fallback_RotationOnly  = 300;
 
     /**
      * {@code ETrackedDeviceClass}: Describes what kind of object is being tracked at a given ID.
@@ -462,6 +470,7 @@ public class VR {
      * <li>{@link #ETrackedDeviceProperty_Prop_NeverTracked_Bool ETrackedDeviceProperty_Prop_NeverTracked_Bool} - used for devices that will never have a valid pose by design.</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_NumCameras_Int32 ETrackedDeviceProperty_Prop_NumCameras_Int32}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_CameraFrameLayout_Int32 ETrackedDeviceProperty_Prop_CameraFrameLayout_Int32} - {@code EVRTrackedCameraFrameLayout} value</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_CameraStreamFormat_Int32 ETrackedDeviceProperty_Prop_CameraStreamFormat_Int32} - {@code ECameraVideoStreamFormat} value</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_ReportsTimeSinceVSync_Bool ETrackedDeviceProperty_Prop_ReportsTimeSinceVSync_Bool}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_SecondsFromVsyncToPhotons_Float ETrackedDeviceProperty_Prop_SecondsFromVsyncToPhotons_Float}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_DisplayFrequency_Float ETrackedDeviceProperty_Prop_DisplayFrequency_Float}</li>
@@ -575,6 +584,7 @@ public class VR {
      * <li>{@link #ETrackedDeviceProperty_Prop_HasSpatialAnchorsSupport_Bool ETrackedDeviceProperty_Prop_HasSpatialAnchorsSupport_Bool}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_ControllerType_String ETrackedDeviceProperty_Prop_ControllerType_String}</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_LegacyInputProfile_String ETrackedDeviceProperty_Prop_LegacyInputProfile_String}</li>
+     * <li>{@link #ETrackedDeviceProperty_Prop_ControllerHandSelectionPriority_Int32 ETrackedDeviceProperty_Prop_ControllerHandSelectionPriority_Int32} - Allows hand assignments to prefer some controllers over others. High numbers are selected over low numbers.</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_VendorSpecific_Reserved_Start ETrackedDeviceProperty_Prop_VendorSpecific_Reserved_Start} - PNG for static icon, or GIF for animation, 50x32 for headsets and 32x32 for others</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_VendorSpecific_Reserved_End ETrackedDeviceProperty_Prop_VendorSpecific_Reserved_End} - PNG for static icon, or GIF for animation, 50x32 for headsets and 32x32 for others</li>
      * <li>{@link #ETrackedDeviceProperty_Prop_TrackedDeviceProperty_Max ETrackedDeviceProperty_Prop_TrackedDeviceProperty_Max}</li>
@@ -623,6 +633,7 @@ public class VR {
         ETrackedDeviceProperty_Prop_NeverTracked_Bool                              = 1038,
         ETrackedDeviceProperty_Prop_NumCameras_Int32                               = 1039,
         ETrackedDeviceProperty_Prop_CameraFrameLayout_Int32                        = 1040,
+        ETrackedDeviceProperty_Prop_CameraStreamFormat_Int32                       = 1041,
         ETrackedDeviceProperty_Prop_ReportsTimeSinceVSync_Bool                     = 2000,
         ETrackedDeviceProperty_Prop_SecondsFromVsyncToPhotons_Float                = 2001,
         ETrackedDeviceProperty_Prop_DisplayFrequency_Float                         = 2002,
@@ -736,6 +747,7 @@ public class VR {
         ETrackedDeviceProperty_Prop_HasSpatialAnchorsSupport_Bool                  = 6007,
         ETrackedDeviceProperty_Prop_ControllerType_String                          = 7000,
         ETrackedDeviceProperty_Prop_LegacyInputProfile_String                      = 7001,
+        ETrackedDeviceProperty_Prop_ControllerHandSelectionPriority_Int32          = 7002,
         ETrackedDeviceProperty_Prop_VendorSpecific_Reserved_Start                  = 10000,
         ETrackedDeviceProperty_Prop_VendorSpecific_Reserved_End                    = 10999,
         ETrackedDeviceProperty_Prop_TrackedDeviceProperty_Max                      = 1000000;
@@ -759,6 +771,7 @@ public class VR {
      * <li>{@link #ETrackedPropertyError_TrackedProp_PermissionDenied ETrackedPropertyError_TrackedProp_PermissionDenied}</li>
      * <li>{@link #ETrackedPropertyError_TrackedProp_InvalidOperation ETrackedPropertyError_TrackedProp_InvalidOperation}</li>
      * <li>{@link #ETrackedPropertyError_TrackedProp_CannotWriteToWildcards ETrackedPropertyError_TrackedProp_CannotWriteToWildcards}</li>
+     * <li>{@link #ETrackedPropertyError_TrackedProp_IPCReadFailure ETrackedPropertyError_TrackedProp_IPCReadFailure}</li>
      * </ul>
      */
     public static final int
@@ -774,7 +787,8 @@ public class VR {
         ETrackedPropertyError_TrackedProp_NotYetAvailable            = 9,
         ETrackedPropertyError_TrackedProp_PermissionDenied           = 10,
         ETrackedPropertyError_TrackedProp_InvalidOperation           = 11,
-        ETrackedPropertyError_TrackedProp_CannotWriteToWildcards     = 12;
+        ETrackedPropertyError_TrackedProp_CannotWriteToWildcards     = 12,
+        ETrackedPropertyError_TrackedProp_IPCReadFailure             = 13;
 
     /**
      * {@code EVRSubmitFlags}: Allows the application to control how scene textures are used by the compositor when calling {@link VRCompositor#VRCompositor_Submit Submit}.
@@ -986,6 +1000,7 @@ public class VR {
      * <li>{@link #EVREventType_VREvent_Input_BindingLoadSuccessful EVREventType_VREvent_Input_BindingLoadSuccessful} - data is inputBinding</li>
      * <li>{@link #EVREventType_VREvent_Input_ActionManifestReloaded EVREventType_VREvent_Input_ActionManifestReloaded} - no data</li>
      * <li>{@link #EVREventType_VREvent_Input_ActionManifestLoadFailed EVREventType_VREvent_Input_ActionManifestLoadFailed} - data is actionManifest</li>
+     * <li>{@link #EVREventType_VREvent_Input_TrackerActivated EVREventType_VREvent_Input_TrackerActivated}</li>
      * <li>{@link #EVREventType_VREvent_SpatialAnchors_PoseUpdated EVREventType_VREvent_SpatialAnchors_PoseUpdated} - data is spatialAnchor. broadcast</li>
      * <li>{@link #EVREventType_VREvent_SpatialAnchors_DescriptorUpdated EVREventType_VREvent_SpatialAnchors_DescriptorUpdated} - data is spatialAnchor. broadcast</li>
      * <li>{@link #EVREventType_VREvent_SpatialAnchors_RequestPoseUpdate EVREventType_VREvent_SpatialAnchors_RequestPoseUpdate} - data is spatialAnchor. sent to specific driver</li>
@@ -1137,6 +1152,7 @@ public class VR {
         EVREventType_VREvent_Input_BindingLoadSuccessful               = 1702,
         EVREventType_VREvent_Input_ActionManifestReloaded              = 1703,
         EVREventType_VREvent_Input_ActionManifestLoadFailed            = 1704,
+        EVREventType_VREvent_Input_TrackerActivated                    = 1706,
         EVREventType_VREvent_SpatialAnchors_PoseUpdated                = 1800,
         EVREventType_VREvent_SpatialAnchors_DescriptorUpdated          = 1801,
         EVREventType_VREvent_SpatialAnchors_RequestPoseUpdate          = 1802,

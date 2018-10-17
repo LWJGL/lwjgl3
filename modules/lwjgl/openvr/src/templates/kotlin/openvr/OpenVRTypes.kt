@@ -383,10 +383,14 @@ val VREvent_Data_t = union(Module.OPENVR, "VREventData", nativeName = "VREvent_D
     VREvent_HapticVibration_t.member("hapticVibration", "")
     VREvent_WebConsole_t.member("webConsole", "")
     VREvent_InputBindingLoad_t.member("inputBinding", "")
+	VREvent_InputActionManifestLoad_t.member("actionManifest", "")
+	VREvent_SpatialAnchor_t.member("spatialAnchor", "")
 }
 
 val VREvent_t = struct(Module.OPENVR, "VREvent", nativeName = "VREvent_t", mutable = false) {
     documentation = "An event posted by the server to all running applications."
+
+    pack("Platform.get() == Platform.LINUX || Platform.get() == Platform.MACOSX ? 4 : DEFAULT_PACK_ALIGNMENT")
 
     uint32_t.member("eventType", "the type of the event").links("EVREventType_\\w+")
     TrackedDeviceIndex_t.member(
@@ -589,6 +593,9 @@ val Compositor_FrameTiming = struct(Module.OPENVR, "CompositorFrameTiming", nati
     float.member("m_flCompositorRenderStartMs", "")
 
     TrackedDevicePose_t.member("m_HmdPose", "pose used by app to render this frame")
+
+    uint32_t.member("m_nNumVSyncsReadyForUse", "")
+	uint32_t.member("m_nNumVSyncsToFirstView", "")
 }
 
 val Compositor_CumulativeStats = struct(Module.OPENVR, "CompositorCumulativeStats", nativeName = "Compositor_CumulativeStats", mutable = false) {
@@ -706,6 +713,8 @@ val RenderModel_Vertex_t = struct(Module.OPENVR, "RenderModelVertex", nativeName
 }
 
 val RenderModel_t = struct(Module.OPENVR, "RenderModel", nativeName = "RenderModel_t", mutable = false) {
+    pack("Platform.get() == Platform.LINUX || Platform.get() == Platform.MACOSX ? 4 : DEFAULT_PACK_ALIGNMENT")
+
     RenderModel_Vertex_t.const.p.buffer("rVertexData", "Vertex data for the mesh")
     AutoSize("rVertexData")..uint32_t.member("unVertexCount", "Number of vertices in the vertex data")
     uint16_t.const.p.member("IndexData", "Indices into the vertex data for each triangle")
@@ -718,6 +727,9 @@ val RenderModel_t = struct(Module.OPENVR, "RenderModel", nativeName = "RenderMod
 
 val RenderModel_TextureMap_t = struct(Module.OPENVR, "RenderModelTextureMap", nativeName = "RenderModel_TextureMap_t", mutable = false) {
     documentation = "A texture map for use on a render model."
+
+    pack("Platform.get() == Platform.LINUX || Platform.get() == Platform.MACOSX ? 4 : DEFAULT_PACK_ALIGNMENT")
+
     uint16_t.member("unWidth", "")
     uint16_t.member("unHeight", "width and height of the texture map in pixels")
     uint8_t.const.p.member(
@@ -748,6 +760,7 @@ val CameraVideoStreamFrameHeader_t = struct(Module.OPENVR, "CameraVideoStreamFra
     uint32_t.member("nFrameSequence", "")
 
     TrackedDevicePose_t.member("standingTrackedDevicePose", "")
+    uint64_t.member("ulFrameExposureTime", "mid-point of the exposure of the image in host system ticks")
 }
 
 val DriverDirectMode_FrameTiming = struct(Module.OPENVR, "DriverDirectModeFrameTiming", nativeName = "DriverDirectMode_FrameTiming", mutable = false) {

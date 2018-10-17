@@ -16,6 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * <h3>Member documentation</h3>
+ * 
+ * <ul>
+ * <li>{@code ulFrameExposureTime} &ndash; mid-point of the exposure of the image in host system ticks</li>
+ * </ul>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -26,6 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t nBytesPerPixel;
  *     uint32_t nFrameSequence;
  *     {@link TrackedDevicePose TrackedDevicePose_t} standingTrackedDevicePose;
+ *     uint64_t ulFrameExposureTime;
  * }</code></pre>
  */
 @NativeType("struct CameraVideoStreamFrameHeader_t")
@@ -44,7 +51,8 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
         NHEIGHT,
         NBYTESPERPIXEL,
         NFRAMESEQUENCE,
-        STANDINGTRACKEDDEVICEPOSE;
+        STANDINGTRACKEDDEVICEPOSE,
+        ULFRAMEEXPOSURETIME;
 
     static {
         Layout layout = __struct(
@@ -53,7 +61,8 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
             __member(4),
             __member(4),
             __member(4),
-            __member(TrackedDevicePose.SIZEOF, TrackedDevicePose.ALIGNOF)
+            __member(TrackedDevicePose.SIZEOF, TrackedDevicePose.ALIGNOF),
+            __member(8)
         );
 
         SIZEOF = layout.getSize();
@@ -65,6 +74,7 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
         NBYTESPERPIXEL = layout.offsetof(3);
         NFRAMESEQUENCE = layout.offsetof(4);
         STANDINGTRACKEDDEVICEPOSE = layout.offsetof(5);
+        ULFRAMEEXPOSURETIME = layout.offsetof(6);
     }
 
     /**
@@ -100,6 +110,9 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
     public TrackedDevicePose standingTrackedDevicePose() { return nstandingTrackedDevicePose(address()); }
     /** Passes the {@code standingTrackedDevicePose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public CameraVideoStreamFrameHeader standingTrackedDevicePose(java.util.function.Consumer<TrackedDevicePose> consumer) { consumer.accept(standingTrackedDevicePose()); return this; }
+    /** Returns the value of the {@code ulFrameExposureTime} field. */
+    @NativeType("uint64_t")
+    public long ulFrameExposureTime() { return nulFrameExposureTime(address()); }
 
     // -----------------------------------
 
@@ -256,6 +269,8 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
     public static int nnFrameSequence(long struct) { return UNSAFE.getInt(null, struct + CameraVideoStreamFrameHeader.NFRAMESEQUENCE); }
     /** Unsafe version of {@link #standingTrackedDevicePose}. */
     public static TrackedDevicePose nstandingTrackedDevicePose(long struct) { return TrackedDevicePose.create(struct + CameraVideoStreamFrameHeader.STANDINGTRACKEDDEVICEPOSE); }
+    /** Unsafe version of {@link #ulFrameExposureTime}. */
+    public static long nulFrameExposureTime(long struct) { return UNSAFE.getLong(null, struct + CameraVideoStreamFrameHeader.ULFRAMEEXPOSURETIME); }
 
     // -----------------------------------
 
@@ -315,6 +330,9 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
         public TrackedDevicePose standingTrackedDevicePose() { return CameraVideoStreamFrameHeader.nstandingTrackedDevicePose(address()); }
         /** Passes the {@code standingTrackedDevicePose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public CameraVideoStreamFrameHeader.Buffer standingTrackedDevicePose(java.util.function.Consumer<TrackedDevicePose> consumer) { consumer.accept(standingTrackedDevicePose()); return this; }
+        /** Returns the value of the {@code ulFrameExposureTime} field. */
+        @NativeType("uint64_t")
+        public long ulFrameExposureTime() { return CameraVideoStreamFrameHeader.nulFrameExposureTime(address()); }
 
     }
 

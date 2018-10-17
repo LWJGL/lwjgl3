@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code vVelocity} &ndash; velocity in tracker space in m/s</li>
  * <li>{@code vAngularVelocity} &ndash; angular velocity in radians/s</li>
- * <li>{@code eTrackingResult} &ndash; one of:<br><table><tr><td>{@link VR#ETrackingResult_TrackingResult_Uninitialized}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Calibrating_InProgress}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Calibrating_OutOfRange}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Running_OK}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Running_OutOfRange}</td></tr></table></li>
+ * <li>{@code eTrackingResult} &ndash; one of:<br><table><tr><td>{@link VR#ETrackingResult_TrackingResult_Uninitialized}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Calibrating_InProgress}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Calibrating_OutOfRange}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Running_OK}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Running_OutOfRange}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Fallback_RotationOnly}</td></tr></table></li>
  * <li>{@code bDeviceIsConnected} &ndash; This indicates that there is a device connected for this spot in the pose array. It could go from true to false if the user unplugs the device.</li>
  * </ul>
  * 

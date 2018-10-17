@@ -42,6 +42,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link VREventHapticVibration VREvent_HapticVibration_t} hapticVibration;
  *     {@link VREventWebConsole VREvent_WebConsole_t} webConsole;
  *     {@link VREventInputBindingLoad VREvent_InputBindingLoad_t} inputBinding;
+ *     {@link VREventInputActionManifestLoad VREvent_InputActionManifestLoad_t} actionManifest;
+ *     {@link VREventSpatialAnchor VREvent_SpatialAnchor_t} spatialAnchor;
  * }</code></pre>
  */
 @NativeType("union VREvent_Data_t")
@@ -78,7 +80,9 @@ public class VREventData extends Struct {
         DUALANALOG,
         HAPTICVIBRATION,
         WEBCONSOLE,
-        INPUTBINDING;
+        INPUTBINDING,
+        ACTIONMANIFEST,
+        SPATIALANCHOR;
 
     static {
         Layout layout = __union(
@@ -105,7 +109,9 @@ public class VREventData extends Struct {
             __member(VREventDualAnalog.SIZEOF, VREventDualAnalog.ALIGNOF),
             __member(VREventHapticVibration.SIZEOF, VREventHapticVibration.ALIGNOF),
             __member(VREventWebConsole.SIZEOF, VREventWebConsole.ALIGNOF),
-            __member(VREventInputBindingLoad.SIZEOF, VREventInputBindingLoad.ALIGNOF)
+            __member(VREventInputBindingLoad.SIZEOF, VREventInputBindingLoad.ALIGNOF),
+            __member(VREventInputActionManifestLoad.SIZEOF, VREventInputActionManifestLoad.ALIGNOF),
+            __member(VREventSpatialAnchor.SIZEOF, VREventSpatialAnchor.ALIGNOF)
         );
 
         SIZEOF = layout.getSize();
@@ -135,6 +141,8 @@ public class VREventData extends Struct {
         HAPTICVIBRATION = layout.offsetof(21);
         WEBCONSOLE = layout.offsetof(22);
         INPUTBINDING = layout.offsetof(23);
+        ACTIONMANIFEST = layout.offsetof(24);
+        SPATIALANCHOR = layout.offsetof(25);
     }
 
     /**
@@ -222,6 +230,12 @@ public class VREventData extends Struct {
     /** Returns a {@link VREventInputBindingLoad} view of the {@code inputBinding} field. */
     @NativeType("VREvent_InputBindingLoad_t")
     public VREventInputBindingLoad inputBinding() { return ninputBinding(address()); }
+    /** Returns a {@link VREventInputActionManifestLoad} view of the {@code actionManifest} field. */
+    @NativeType("VREvent_InputActionManifestLoad_t")
+    public VREventInputActionManifestLoad actionManifest() { return nactionManifest(address()); }
+    /** Returns a {@link VREventSpatialAnchor} view of the {@code spatialAnchor} field. */
+    @NativeType("VREvent_SpatialAnchor_t")
+    public VREventSpatialAnchor spatialAnchor() { return nspatialAnchor(address()); }
 
     // -----------------------------------
 
@@ -302,6 +316,10 @@ public class VREventData extends Struct {
     public static VREventWebConsole nwebConsole(long struct) { return VREventWebConsole.create(struct + VREventData.WEBCONSOLE); }
     /** Unsafe version of {@link #inputBinding}. */
     public static VREventInputBindingLoad ninputBinding(long struct) { return VREventInputBindingLoad.create(struct + VREventData.INPUTBINDING); }
+    /** Unsafe version of {@link #actionManifest}. */
+    public static VREventInputActionManifestLoad nactionManifest(long struct) { return VREventInputActionManifestLoad.create(struct + VREventData.ACTIONMANIFEST); }
+    /** Unsafe version of {@link #spatialAnchor}. */
+    public static VREventSpatialAnchor nspatialAnchor(long struct) { return VREventSpatialAnchor.create(struct + VREventData.SPATIALANCHOR); }
 
     // -----------------------------------
 
@@ -413,6 +431,12 @@ public class VREventData extends Struct {
         /** Returns a {@link VREventInputBindingLoad} view of the {@code inputBinding} field. */
         @NativeType("VREvent_InputBindingLoad_t")
         public VREventInputBindingLoad inputBinding() { return VREventData.ninputBinding(address()); }
+        /** Returns a {@link VREventInputActionManifestLoad} view of the {@code actionManifest} field. */
+        @NativeType("VREvent_InputActionManifestLoad_t")
+        public VREventInputActionManifestLoad actionManifest() { return VREventData.nactionManifest(address()); }
+        /** Returns a {@link VREventSpatialAnchor} view of the {@code spatialAnchor} field. */
+        @NativeType("VREvent_SpatialAnchor_t")
+        public VREventSpatialAnchor spatialAnchor() { return VREventData.nspatialAnchor(address()); }
 
     }
 

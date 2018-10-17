@@ -68,6 +68,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float m_flCompositorUpdateEndMs;
  *     float m_flCompositorRenderStartMs;
  *     {@link TrackedDevicePose TrackedDevicePose_t} m_HmdPose;
+ *     uint32_t m_nNumVSyncsReadyForUse;
+ *     uint32_t m_nNumVSyncsToFirstView;
  * }</code></pre>
  */
 @NativeType("struct Compositor_FrameTiming")
@@ -104,7 +106,9 @@ public class CompositorFrameTiming extends Struct implements NativeResource {
         M_FLCOMPOSITORUPDATESTARTMS,
         M_FLCOMPOSITORUPDATEENDMS,
         M_FLCOMPOSITORRENDERSTARTMS,
-        M_HMDPOSE;
+        M_HMDPOSE,
+        M_NNUMVSYNCSREADYFORUSE,
+        M_NNUMVSYNCSTOFIRSTVIEW;
 
     static {
         Layout layout = __struct(
@@ -131,7 +135,9 @@ public class CompositorFrameTiming extends Struct implements NativeResource {
             __member(4),
             __member(4),
             __member(4),
-            __member(TrackedDevicePose.SIZEOF, TrackedDevicePose.ALIGNOF)
+            __member(TrackedDevicePose.SIZEOF, TrackedDevicePose.ALIGNOF),
+            __member(4),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -161,6 +167,8 @@ public class CompositorFrameTiming extends Struct implements NativeResource {
         M_FLCOMPOSITORUPDATEENDMS = layout.offsetof(21);
         M_FLCOMPOSITORRENDERSTARTMS = layout.offsetof(22);
         M_HMDPOSE = layout.offsetof(23);
+        M_NNUMVSYNCSREADYFORUSE = layout.offsetof(24);
+        M_NNUMVSYNCSTOFIRSTVIEW = layout.offsetof(25);
     }
 
     /**
@@ -233,6 +241,12 @@ public class CompositorFrameTiming extends Struct implements NativeResource {
     public TrackedDevicePose m_HmdPose() { return nm_HmdPose(address()); }
     /** Passes the {@code m_HmdPose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public CompositorFrameTiming m_HmdPose(java.util.function.Consumer<TrackedDevicePose> consumer) { consumer.accept(m_HmdPose()); return this; }
+    /** Returns the value of the {@code m_nNumVSyncsReadyForUse} field. */
+    @NativeType("uint32_t")
+    public int m_nNumVSyncsReadyForUse() { return nm_nNumVSyncsReadyForUse(address()); }
+    /** Returns the value of the {@code m_nNumVSyncsToFirstView} field. */
+    @NativeType("uint32_t")
+    public int m_nNumVSyncsToFirstView() { return nm_nNumVSyncsToFirstView(address()); }
 
     // -----------------------------------
 
@@ -425,6 +439,10 @@ public class CompositorFrameTiming extends Struct implements NativeResource {
     public static float nm_flCompositorRenderStartMs(long struct) { return UNSAFE.getFloat(null, struct + CompositorFrameTiming.M_FLCOMPOSITORRENDERSTARTMS); }
     /** Unsafe version of {@link #m_HmdPose}. */
     public static TrackedDevicePose nm_HmdPose(long struct) { return TrackedDevicePose.create(struct + CompositorFrameTiming.M_HMDPOSE); }
+    /** Unsafe version of {@link #m_nNumVSyncsReadyForUse}. */
+    public static int nm_nNumVSyncsReadyForUse(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NNUMVSYNCSREADYFORUSE); }
+    /** Unsafe version of {@link #m_nNumVSyncsToFirstView}. */
+    public static int nm_nNumVSyncsToFirstView(long struct) { return UNSAFE.getInt(null, struct + CompositorFrameTiming.M_NNUMVSYNCSTOFIRSTVIEW); }
 
     // -----------------------------------
 
@@ -521,6 +539,12 @@ public class CompositorFrameTiming extends Struct implements NativeResource {
         public TrackedDevicePose m_HmdPose() { return CompositorFrameTiming.nm_HmdPose(address()); }
         /** Passes the {@code m_HmdPose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public CompositorFrameTiming.Buffer m_HmdPose(java.util.function.Consumer<TrackedDevicePose> consumer) { consumer.accept(m_HmdPose()); return this; }
+        /** Returns the value of the {@code m_nNumVSyncsReadyForUse} field. */
+        @NativeType("uint32_t")
+        public int m_nNumVSyncsReadyForUse() { return CompositorFrameTiming.nm_nNumVSyncsReadyForUse(address()); }
+        /** Returns the value of the {@code m_nNumVSyncsToFirstView} field. */
+        @NativeType("uint32_t")
+        public int m_nNumVSyncsToFirstView() { return CompositorFrameTiming.nm_nNumVSyncsToFirstView(address()); }
 
     }
 
