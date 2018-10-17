@@ -8,12 +8,15 @@ import javax.annotation.*;
 import java.nio.*;
 import java.util.*;
 
+import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Base class of all struct implementations. */
 public abstract class Struct extends Pointer.Default {
+
+    protected static final int DEFAULT_PACK_ALIGNMENT = Platform.get() == Platform.WINDOWS ? 8 : 0x4000_0000;
 
     private static final long CONTAINER;
 
@@ -204,14 +207,15 @@ public abstract class Struct extends Pointer.Default {
         return new Member(size * length, alignment);
     }
 
-    protected static Layout __union(Member... members) {
+    protected static Layout __union(Member... members) { return __union(DEFAULT_PACK_ALIGNMENT, members); }
+    protected static Layout __union(int packAlignment, Member... members) {
         List<Member> union = new ArrayList<>(members.length);
 
         int size      = 0;
         int alignment = 0;
         for (int i = 0; i < members.length; i++) {
-            size = Math.max(size, members[i].size);
-            alignment = Math.max(alignment, members[i].alignment);
+            size = max(size, members[i].size);
+            alignment = max(alignment, min(members[i].alignment, packAlignment));
 
             members[i].offset = 0;
             union.add(members[i]);
@@ -223,7 +227,8 @@ public abstract class Struct extends Pointer.Default {
         return new Layout(size, alignment, union.toArray(new Member[0]));
     }
 
-    protected static Layout __struct(Member... members) {
+    protected static Layout __struct(Member... members) { return __struct(DEFAULT_PACK_ALIGNMENT, members); }
+    protected static Layout __struct(int packAlignment, Member... members) {
         List<Member> struct = new ArrayList<>(members.length);
 
         int size      = 0;
@@ -231,8 +236,10 @@ public abstract class Struct extends Pointer.Default {
         for (int i = 0; i < members.length; i++) {
             Member m = members[i];
 
-            size = (m.offset = align(size, m.alignment)) + m.size;
-            alignment = Math.max(alignment, m.alignment);
+            int memberAlignment = min(m.alignment, packAlignment);
+
+            size = (m.offset = align(size, memberAlignment)) + m.size;
+            alignment = max(alignment, memberAlignment);
 
             struct.add(m);
             if (m instanceof Layout) {

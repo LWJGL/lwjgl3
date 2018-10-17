@@ -186,6 +186,14 @@ class Struct(
         static = expression
     }
 
+    private var pack: String? = null
+    fun pack(expression: String) {
+        pack = expression
+    }
+    fun pack(alignment: Int) {
+        pack = alignment.toString()
+    }
+
     private val customMethods = ArrayList<String>()
 
     private val members = ArrayList<StructMember>()
@@ -1108,6 +1116,9 @@ ${validations.joinToString("\n")}
         parentField: String = ""
     ) {
         println("__${if (struct.union) "union" else "struct"}(")
+        if (pack != null) {
+            println("$indentation$t$pack,")
+        }
         struct.members.forEachWithMore { it, more ->
             val field = it.offsetField(parentField)
 
