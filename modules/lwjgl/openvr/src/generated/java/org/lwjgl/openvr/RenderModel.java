@@ -56,7 +56,7 @@ public class RenderModel extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
-            Platform.get() == Platform.LINUX || Platform.get() == Platform.MACOSX ? 4 : DEFAULT_PACK_ALIGNMENT,
+            Platform.get() == Platform.LINUX || Platform.get() == Platform.MACOSX ? 4 : DEFAULT_PACK_ALIGNMENT, DEFAULT_ALIGN_AS,
             __member(POINTER_SIZE),
             __member(4),
             __member(POINTER_SIZE),

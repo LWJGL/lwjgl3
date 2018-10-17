@@ -194,6 +194,14 @@ class Struct(
         pack = alignment.toString()
     }
 
+    private var alignas: String? = null
+    fun alignas(expression: String) {
+        alignas = expression
+    }
+    fun alignas(alignment: Int) {
+        alignas = alignment.toString()
+    }
+
     private val customMethods = ArrayList<String>()
 
     private val members = ArrayList<StructMember>()
@@ -1116,8 +1124,8 @@ ${validations.joinToString("\n")}
         parentField: String = ""
     ) {
         println("__${if (struct.union) "union" else "struct"}(")
-        if (pack != null) {
-            println("$indentation$t$pack,")
+        if (pack != null || alignas != null) {
+            println("$indentation$t${pack ?: "DEFAULT_PACK_ALIGNMENT"}, ${alignas ?: "DEFAULT_ALIGN_AS"},")
         }
         struct.members.forEachWithMore { it, more ->
             val field = it.offsetField(parentField)

@@ -17,6 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public abstract class Struct extends Pointer.Default {
 
     protected static final int DEFAULT_PACK_ALIGNMENT = Platform.get() == Platform.WINDOWS ? 8 : 0x4000_0000;
+    protected static final int DEFAULT_ALIGN_AS       = 0;
 
     private static final long CONTAINER;
 
@@ -156,14 +157,16 @@ public abstract class Struct extends Pointer.Default {
     // ---------------- Struct Member Layout ----------------
 
     protected static class Member {
-        final int size;
-        final int alignment;
+        final int     size;
+        final int     alignment;
+        final boolean forcedAlignment;
 
         int offset;
 
-        protected Member(int size, int alignment) {
+        Member(int size, int alignment, boolean forcedAlignment) {
             this.size = size;
             this.alignment = alignment;
+            this.forcedAlignment = forcedAlignment;
         }
 
         public int getSize() {
@@ -173,13 +176,17 @@ public abstract class Struct extends Pointer.Default {
         public int getAlignment() {
             return alignment;
         }
+
+        public int getAlignment(int packAlignment) {
+            return forcedAlignment ? alignment : min(alignment, packAlignment);
+        }
     }
 
     protected static class Layout extends Member {
-        public final Member[] members;
+        final Member[] members;
 
-        public Layout(int size, int alignment, Member[] members) {
-            super(size, alignment);
+        Layout(int size, int alignment, boolean forceAlignment, Member[] members) {
+            super(size, alignment, forceAlignment);
             this.members = members;
         }
 
@@ -197,46 +204,46 @@ public abstract class Struct extends Pointer.Default {
     }
 
     protected static Member __member(int size, int alignment) {
-        return new Member(size, alignment);
+        return new Member(size, alignment, false);
     }
 
     protected static Member __array(int size, int length) {
         return __array(size, size, length);
     }
     protected static Member __array(int size, int alignment, int length) {
-        return new Member(size * length, alignment);
+        return new Member(size * length, alignment, false);
     }
 
-    protected static Layout __union(Member... members) { return __union(DEFAULT_PACK_ALIGNMENT, members); }
-    protected static Layout __union(int packAlignment, Member... members) {
+    protected static Layout __union(Member... members) { return __union(DEFAULT_PACK_ALIGNMENT, DEFAULT_ALIGN_AS, members); }
+    protected static Layout __union(int packAlignment, int alignas, Member... members) {
         List<Member> union = new ArrayList<>(members.length);
 
         int size      = 0;
-        int alignment = 0;
-        for (int i = 0; i < members.length; i++) {
-            size = max(size, members[i].size);
-            alignment = max(alignment, min(members[i].alignment, packAlignment));
+        int alignment = alignas;
+        for (Member m : members) {
+            size = max(size, m.size);
+            alignment = max(alignment, m.getAlignment(packAlignment));
 
-            members[i].offset = 0;
-            union.add(members[i]);
-            if (members[i] instanceof Layout) {
-                addNestedMembers(members[i], union, 0);
+            m.offset = 0;
+            union.add(m);
+            if (m instanceof Layout) {
+                addNestedMembers(m, union, 0);
             }
         }
 
-        return new Layout(size, alignment, union.toArray(new Member[0]));
+        return new Layout(size, alignment, alignas != 0, union.toArray(new Member[0]));
     }
 
-    protected static Layout __struct(Member... members) { return __struct(DEFAULT_PACK_ALIGNMENT, members); }
-    protected static Layout __struct(int packAlignment, Member... members) {
+    protected static Layout __struct(Member... members) { return __struct(DEFAULT_PACK_ALIGNMENT, DEFAULT_ALIGN_AS, members); }
+    protected static Layout __struct(int packAlignment, int alignas, Member... members) {
         List<Member> struct = new ArrayList<>(members.length);
 
         int size      = 0;
-        int alignment = 0;
+        int alignment = alignas;
         for (int i = 0; i < members.length; i++) {
             Member m = members[i];
 
-            int memberAlignment = min(m.alignment, packAlignment);
+            int memberAlignment = m.getAlignment(packAlignment);
 
             size = (m.offset = align(size, memberAlignment)) + m.size;
             alignment = max(alignment, memberAlignment);
@@ -250,7 +257,7 @@ public abstract class Struct extends Pointer.Default {
         // tail padding
         size = align(size, alignment);
 
-        return new Layout(size, alignment, struct.toArray(new Member[0]));
+        return new Layout(size, alignment, alignas != 0, struct.toArray(new Member[0]));
     }
 
     private static void addNestedMembers(Member nested, List<Member> members, int offset) {
