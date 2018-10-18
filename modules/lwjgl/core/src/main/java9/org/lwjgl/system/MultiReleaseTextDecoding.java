@@ -32,9 +32,9 @@ final class MultiReleaseTextDecoding {
             return "";
         }
 
-        byte[] bytes = new byte[length];
-        memByteBuffer(source, length).get(bytes);
-        return new String(bytes, StandardCharsets.UTF_8);
+        byte[] bytes = length <= ARRAY_TLC_SIZE ? ARRAY_TLC_BYTE.get() : new byte[length];
+        memByteBuffer(source, length).get(bytes, 0, length);
+        return new String(bytes, 0, length, StandardCharsets.UTF_8);
     }
 
 }

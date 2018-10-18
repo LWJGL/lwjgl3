@@ -58,6 +58,11 @@ public final class MemoryUtil {
     /** The cache-line size, in bytes. This value is always a power-of-two. */
     public static final int CACHE_LINE_SIZE;
 
+    static final int ARRAY_TLC_SIZE = Configuration.ARRAY_TLC_SIZE.get(8192);
+
+    static final ThreadLocal<byte[]> ARRAY_TLC_BYTE = ThreadLocal.withInitial(() -> new byte[ARRAY_TLC_SIZE]);
+    static final ThreadLocal<char[]> ARRAY_TLC_CHAR = ThreadLocal.withInitial(() -> new char[ARRAY_TLC_SIZE]);
+
     static final sun.misc.Unsafe UNSAFE;
 
     static final ByteOrder NATIVE_ORDER = ByteOrder.nativeOrder();
@@ -2305,10 +2310,6 @@ public final class MemoryUtil {
      */
     public static ByteBuffer memByteBufferNT2(long address, int maxLength) {
         if (DEBUG) {
-            if ((address & 1L) != 0L) {
-                throw new IllegalArgumentException("The string address is not aligned.");
-            }
-
             if ((maxLength & 1) != 0) {
                 throw new IllegalArgumentException("The maximum length must be an even number.");
             }
@@ -2353,9 +2354,9 @@ public final class MemoryUtil {
             return "";
         }
 
-        byte[] ascii = new byte[length];
-        memByteBuffer(address, length).get(ascii);
-        return new String(ascii, 0, 0, ascii.length);
+        byte[] ascii = length <= ARRAY_TLC_SIZE ? ARRAY_TLC_BYTE.get() : new byte[length];
+        memByteBuffer(address, length).get(ascii, 0, length);
+        return new String(ascii, 0, 0, length);
     }
 
     /**
@@ -2514,19 +2515,16 @@ public final class MemoryUtil {
         }
 
         if (DEBUG) {
-            if ((address & 1L) != 0L) {
-                throw new IllegalArgumentException("The string address is not aligned.");
-            }
-
             // The implementation below does no codepoint validation.
-            byte[] bytes = new byte[length << 1];
-            memByteBuffer(address, bytes.length).get(bytes);
-            return new String(bytes, UTF16);
+            int    len   = length << 1;
+            byte[] bytes = len <= ARRAY_TLC_SIZE ? ARRAY_TLC_BYTE.get() : new byte[len];
+            memByteBuffer(address, len).get(bytes, 0, len);
+            return new String(bytes, 0, len, UTF16);
         }
 
-        char[] chars = new char[length];
-        memCharBuffer(address, length).get(chars);
-        return new String(chars);
+        char[] chars = length <= ARRAY_TLC_SIZE ? ARRAY_TLC_CHAR.get() : new char[length];
+        memCharBuffer(address, length).get(chars, 0, length);
+        return new String(chars, 0, length);
     }
 
     /**

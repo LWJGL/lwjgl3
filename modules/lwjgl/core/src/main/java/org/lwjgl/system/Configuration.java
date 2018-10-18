@@ -124,6 +124,20 @@ public class Configuration<T> {
     public static final Configuration<Integer> STACK_SIZE = new Configuration<>("org.lwjgl.system.stackSize", StateInit.INT);
 
     /**
+     * Sets the size of arrays cached in thread-local storage to minimize allocations while decoding text.
+     *
+     * <p>The memory cost for the cache is up to two arrays per thread that does text decoding. When the text length is up to this value, a cached array will
+     * be used. When the text length is longer than this value, a new array buffer will be allocated.</p>
+     *
+     * <p>If this option is not set, it defaults to 8192. Setting the value to 0 will disable the array cache.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.system.arrayTLCSize</b><br>
+     * &nbsp; &nbsp;Usage: Static</p>
+     */
+    public static final Configuration<Integer> ARRAY_TLC_SIZE = new Configuration<>("org.lwjgl.system.arrayTLCSize", StateInit.INT);
+
+    /**
      * Set to true to disable LWJGL's basic checks. These are trivial checks that LWJGL performs to avoid JVM crashes, very useful during development.
      * Their performance impact is usually minimal, but they may be disabled for release builds.
      *
