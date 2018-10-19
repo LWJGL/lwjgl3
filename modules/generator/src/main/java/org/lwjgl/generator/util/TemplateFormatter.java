@@ -395,6 +395,7 @@ public class TemplateFormatter {
         "(?:\\s+const)?(?:\\s*[*]+\\s*|\\s+)" + // pointer. This is a little funny because we can have whitespace on either side of *
         "(?:/[*]\\s*)?" + // name may be wrapped in comments /*
         "[0-9a-zA-Z_]+" + // function or parameter name
+        "(?:\\s*\\[[^]]*])?" + // array
         "(?:\\s*[*]/)?"
     );
 
@@ -415,6 +416,7 @@ public class TemplateFormatter {
         "(\\s+const)?\\s*([*]+)?\\s*" +
         "(?:/[*]\\s*)?" +
         "([0-9a-zA-Z_]+)" +
+        "(\\s*\\[[^]]*])?" +
         "(?:\\s*[*]/)?",
         Pattern.MULTILINE
     );
@@ -460,9 +462,7 @@ public class TemplateFormatter {
                         builder.append(".const");
                     }
                     // pointer
-                    if (paramMatcher.group(5) != null) {
-                        writerPointer(builder, paramMatcher);
-                    }
+                    writePointer(builder, paramMatcher);
                     builder.append("(\n");
                     builder.append("        \"");
                     builder.append(strip(paramMatcher.group(6), prefix));
@@ -488,8 +488,7 @@ public class TemplateFormatter {
                         builder.append(".const");
                     }
                     // pointer
-                    if (paramMatcher.group(5) != null) {
-                        writerPointer(builder, paramMatcher);
+                    if (writePointer(builder, paramMatcher) != 0) {
                         builder.append(
                             paramMatcher.group(1) != null || paramMatcher.group(4) != null // const
                                 ? ".IN(\""
@@ -509,10 +508,21 @@ public class TemplateFormatter {
         return builder.toString();
     }
 
-    private static void writerPointer(StringBuilder builder, Matcher paramMatcher) {
-        for (int i = 0; i < paramMatcher.group(5).length(); i++) {
+    private static int writePointer(StringBuilder builder, Matcher paramMatcher) {
+        int indirections = 0;
+
+        if (paramMatcher.group(5) != null) {
+            indirections += paramMatcher.group(5).length();
+        }
+        if (paramMatcher.group(7) != null) {
+            indirections++;
+        }
+
+        for (int i = 0; i < indirections; i++) {
             builder.append(".p");
         }
+
+        return indirections;
     }
 
     // ---[ DOCUMENTATION FORMATTING ]----
