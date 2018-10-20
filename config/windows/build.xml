@@ -31,7 +31,7 @@
                 <arg value="/I${src.main}" if:true="@{simple}"/>
 
                 <source/>
-                <fileset dir="." includes="${src.generated}/*.c" if:true="@{simple}"/>
+                <fileset dir="." includes="${src.generated}/*" if:true="@{simple}"/>
 
                 <regexpmapper from="(\w+)\.c(?:c|pp)?$" to="\1.obj"/>
             </apply>
