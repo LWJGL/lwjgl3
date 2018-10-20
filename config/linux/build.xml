@@ -121,6 +121,7 @@
                 <arg line="-z noexecstack"/>
                 <arg line="-O3 -flto -fPIC -pthread -o ${lib}/lib${name}${LIB_POSTFIX}.so"/>
 
+                <arg line="-Wl,--no-undefined"/>
                 <arg line="-Wl,--version-script,${version.script}"/>
                 <arg line="-Wl,--wrap,memcpy" if:true="${build.arch.x64}"/>
                 <fileset dir="${bin.native}" includes="wrap_memcpy.o" if:true="${build.arch.x64}"/>
@@ -174,6 +175,7 @@
                 <fileset dir="${lib}/${platform}/${build.arch}/">
                     <include name="libdyn*.a"/>
                 </fileset>
+                <arg value="-ldl"/>
             </link>
         </build>
 
@@ -205,6 +207,9 @@
             <source>
                 <arg value="-isystem${module.lwjgl.rel}/stb/src/main/c"/>
             </source>
+            <link>
+                <arg value="-lm"/>
+            </link>
         </build>
 
         <!-- NativeFileDialog -->
@@ -228,12 +233,18 @@
                 <arg value="-I${src.main.rel}/include"/>
             </source>
             <link>
+                <arg value="-lglib-2.0"/>
+                <arg value="-lgobject-2.0"/>
                 <arg value="-lgtk-3"/>
             </link>
         </build>
 
         <!-- Nuklear -->
-        <build_simple module="nuklear"/>
+        <build simple="true" module="nuklear">
+            <link>
+                <arg value="-lm"/>
+            </link>
+        </build>
 
         <!-- OpenGL -->
         <build_simple module="opengl"/>
@@ -245,7 +256,11 @@
         <build_simple module="openvr"/>
 
         <!-- ParShapes -->
-        <build_simple module="par"/>
+        <build simple="true" module="par">
+            <link>
+                <arg value="-lm"/>
+            </link>
+        </build>
 
         <!-- Remotery -->
         <build module="remotery" if:true="${binding.remotery}">
@@ -253,6 +268,10 @@
                 <arg value="-I${src.main.rel}"/>
                 <fileset dir="." includes="${src.generated}/*.c" excludes="**/*Metal.c"/>
             </source>
+            <link>
+                <arg value="-ldl"/>
+                <arg value="-lGL"/>
+            </link>
         </build>
 
         <!-- rpmalloc -->
@@ -271,6 +290,9 @@
                 <arg value="-isystem${src.main.rel}"/>
                 <fileset dir="." includes="${src.generated}/*.c"/>
             </source>
+            <link>
+                <arg value="-lm"/>
+            </link>
         </build>
 
         <!-- tinyexr -->
