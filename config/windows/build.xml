@@ -165,6 +165,34 @@ EXPORTS
             </link>
         </build>
 
+        <!-- BULLET -->
+        <build module="bullet" simple="true" if:true="${binding.bullet}">
+            <beforeLink>
+                <mkdir dir="${lib}/${platform}/${build.arch}/bullet"/>
+                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
+                    <update-dependency name="Bullet3Common" artifact="${build.arch}/bullet/Bullet3Common.lib"/>
+                    <update-dependency name="BulletCollision" artifact="${build.arch}/bullet/BulletCollision.lib"/>
+                    <update-dependency name="BulletDynamics" artifact="${build.arch}/bullet/BulletDynamics.lib"/>
+                    <update-dependency name="BulletFileLoader" artifact="${build.arch}/bullet/BulletFileLoader.lib"/>
+                    <update-dependency name="BulletInverseDynamics" artifact="${build.arch}/bullet/BulletInverseDynamics.lib"/>
+                    <update-dependency name="BulletInverseDynamicsUtils" artifact="${build.arch}/bullet/BulletInverseDynamicsUtils.lib"/>
+                    <update-dependency name="BulletRobotics" artifact="${build.arch}/bullet/BulletRobotics.lib"/>
+                    <update-dependency name="BulletSoftBody" artifact="${build.arch}/bullet/BulletSoftBody.lib"/>
+                    <update-dependency name="BulletWorldImporter" artifact="${build.arch}/bullet/BulletWorldImporter.lib"/>
+                    <update-dependency name="LinearMath" artifact="${build.arch}/bullet/LinearMath.lib"/>
+                </parallel>
+            </beforeLink>
+            <link>
+                <fileset dir="${lib}/${platform}/${build.arch}/bullet">
+                    <include name="*.lib"/>
+                </fileset>
+            </link>
+            <linkargs>
+                <arg value="winmm.lib"/>
+                <arg value="ws2_32.lib"/>
+            </linkargs>
+        </build>
+
         <!-- LIBDIVIDE -->
         <build_simple module="libdivide"/>
 

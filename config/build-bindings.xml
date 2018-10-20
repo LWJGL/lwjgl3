@@ -16,6 +16,7 @@ This script is included in /config/build-definitions.xml.
 
     <property name="binding.assimp" value="true"/>
     <property name="binding.bgfx" value="true"/>
+    <property name="binding.bullet" value="true"/>
     <property name="binding.egl" value="true"/>
     <property name="binding.glfw" value="true"/>
     <property name="binding.jawt" value="true"/>

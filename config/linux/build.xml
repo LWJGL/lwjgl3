@@ -164,11 +164,11 @@
                 </fileset>
             </source>
             <beforeLink>
-                <mkdir dir="${lib}/${platform}/x64"/>
+                <mkdir dir="${lib}/${platform}/${build.arch}"/>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
-                    <update-dependency name="dyncall" artifact="x64/libdyncall_s.a"/>
-                    <update-dependency name="dyncallback" artifact="x64/libdyncallback_s.a"/>
-                    <update-dependency name="dynload" artifact="x64/libdynload_s.a"/>
+                    <update-dependency name="dyncall" artifact="${build.arch}/libdyncall_s.a"/>
+                    <update-dependency name="dyncallback" artifact="${build.arch}/libdyncallback_s.a"/>
+                    <update-dependency name="dynload" artifact="${build.arch}/libdynload_s.a"/>
                 </parallel>
             </beforeLink>
             <link>
@@ -176,6 +176,40 @@
                     <include name="libdyn*.a"/>
                 </fileset>
                 <arg value="-ldl"/>
+            </link>
+        </build>
+
+        <!-- BULLET -->
+        <build module="bullet" simple="true" linker="g++" if:true="${binding.bullet}">
+            <beforeLink>
+                <mkdir dir="${lib}/${platform}/${build.arch}/bullet"/>
+                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-uptodate">
+                    <update-dependency name="Bullet3Common" artifact="${build.arch}/bullet/libBullet3Common.a"/>
+                    <update-dependency name="BulletCollision" artifact="${build.arch}/bullet/libBulletCollision.a"/>
+                    <update-dependency name="BulletDynamics" artifact="${build.arch}/bullet/libBulletDynamics.a"/>
+                    <update-dependency name="BulletFileLoader" artifact="${build.arch}/bullet/libBulletFileLoader.a"/>
+                    <update-dependency name="BulletInverseDynamics" artifact="${build.arch}/bullet/libBulletInverseDynamics.a"/>
+                    <update-dependency name="BulletInverseDynamicsUtils" artifact="${build.arch}/bullet/libBulletInverseDynamicsUtils.a"/>
+                    <update-dependency name="BulletRobotics" artifact="${build.arch}/bullet/libBulletRobotics.a"/>
+                    <update-dependency name="BulletSoftBody" artifact="${build.arch}/bullet/libBulletSoftBody.a"/>
+                    <update-dependency name="BulletWorldImporter" artifact="${build.arch}/bullet/libBulletWorldImporter.a"/>
+                    <update-dependency name="LinearMath" artifact="${build.arch}/bullet/libLinearMath.a"/>
+                </parallel>
+            </beforeLink>
+            <link>
+                <arg value="-ldl"/>
+                <arg value="-L${lib}/${platform}/${build.arch}/bullet"/>
+                <!-- Order is important -->
+                <arg value="-lBulletWorldImporter"/>
+                <arg value="-lBulletSoftBody"/>
+                <arg value="-lBulletDynamics"/>
+                <arg value="-lBulletCollision"/>
+                <arg value="-lBulletFileLoader"/>
+                <arg value="-lBulletInverseDynamics"/>
+                <arg value="-lBulletInverseDynamicsUtils"/>
+                <arg value="-lBullet3Common"/>
+                <arg value="-lLinearMath"/>
+                <arg value="-lBulletRobotics"/>
             </link>
         </build>
 
@@ -410,14 +444,14 @@
 
             <parallel threadsPerProcessor="4" failonany="true">
 
-            <update-dependency name="Assimp" artifact="x64/libassimp.so" dest="${lib}" if:true="${binding.assimp}"/>
-            <update-dependency name="bgfx" artifact="x64/libbgfx.so" dest="${lib}" if:true="${binding.bgfx}"/>
-            <update-dependency name="jemalloc" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.jemalloc}"/>
-            <update-dependency name="GLFW" artifact="x64/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
-            <update-dependency name="GLFW" artifact="x64/libglfw_wayland.so" dest="${lib}" if:true="${binding.glfw}"/>
-            <update-dependency name="OpenAL32" artifact="x64/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
-            <update-dependency name="OpenVR" artifact="x64/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>
-            <update-dependency name="Opus" artifact="x64/libopus.so" dest="${lib}" if:true="${binding.opus}"/>
+            <update-dependency name="Assimp" artifact="${build.arch}/libassimp.so" dest="${lib}" if:true="${binding.assimp}"/>
+            <update-dependency name="bgfx" artifact="${build.arch}/libbgfx.so" dest="${lib}" if:true="${binding.bgfx}"/>
+            <update-dependency name="jemalloc" artifact="${build.arch}/libjemalloc.so" dest="${lib}" if:true="${binding.jemalloc}"/>
+            <update-dependency name="GLFW" artifact="${build.arch}/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
+            <update-dependency name="GLFW" artifact="${build.arch}/libglfw_wayland.so" dest="${lib}" if:true="${binding.glfw}"/>
+            <update-dependency name="OpenAL32" artifact="${build.arch}/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
+            <update-dependency name="OpenVR" artifact="${build.arch}/libopenvr_api.so" dest="${lib}" if:true="${binding.openvr}"/>
+            <update-dependency name="Opus" artifact="${build.arch}/libopus.so" dest="${lib}" if:true="${binding.opus}"/>
 
             </parallel>
 

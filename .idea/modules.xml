@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/assimp-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/assimp-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/bgfx.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/bgfx.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/bgfx-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/bgfx-templates.iml" group="TEMPLATES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/bullet.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/bullet.iml" group="MODULES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/bullet-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/bullet-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/core.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/core.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/core-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/core-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/core10.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/core10.iml" group="MODULES" />

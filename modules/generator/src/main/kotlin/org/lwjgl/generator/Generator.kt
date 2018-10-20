@@ -48,6 +48,7 @@ enum class Module(
 
     ASSIMP("binding.assimp", "org.lwjgl.assimp"),
     BGFX("binding.bgfx", "org.lwjgl.bgfx"),
+    BULLET("binding.bullet", "org.lwjgl.bullet", arrayOverloads = false),
     EGL("binding.egl", "org.lwjgl.egl", CallingConvention.STDCALL),
     GLFW("binding.glfw", "org.lwjgl.glfw"),
     JAWT("binding.jawt", "org.lwjgl.system.jawt", CallingConvention.STDCALL),
