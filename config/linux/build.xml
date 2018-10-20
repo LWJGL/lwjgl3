@@ -179,6 +179,9 @@
             </link>
         </build>
 
+        <!-- LIBDIVIDE -->
+        <build_simple module="libdivide"/>
+
         <!-- LMDB -->
         <build module="lmdb" simple="true" if:true="${binding.lmdb}">
             <beforeCompile>
