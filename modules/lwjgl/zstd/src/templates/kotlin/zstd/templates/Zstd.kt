@@ -86,7 +86,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."3",
-        "VERSION_RELEASE".."6"
+        "VERSION_RELEASE".."7"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
@@ -423,7 +423,15 @@ ENABLE_WARNINGS()""")
 
     ZSTD_CStream.p(
         "createCStream",
-        ""
+        """
+        A {@code ZSTD_CStream} object is required to track streaming operation.
+
+        Use {@code ZSTD_createCStream()} and #freeCStream() to create/release resources.
+
+        {@code ZSTD_CStream} objects can be reused multiple times on consecutive compression operations. It is recommended to re-use {@code ZSTD_CStream} in
+        situations where many streaming operations will be achieved consecutively, since it will play nicer with system's memory, by re-using already allocated
+        memory. Use one separate {@code ZSTD_CStream} per thread for parallel execution.
+        """.trimIndent()
     )
 
     size_t(
@@ -435,7 +443,7 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "initCStream",
-        "",
+        "Use {@code ZSTD_initCStream()} to start a new compression operation.",
 
         ZSTD_CStream.p.IN("zcs", ""),
         int.IN("compressionLevel", "")
@@ -443,7 +451,14 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "compressStream",
-        "",
+        """
+        Use {@code ZSTD_compressStream()} as many times as necessary to consume input stream.
+
+        The function will automatically update both {@code pos} fields within {@code input} and {@code output}. Note that the function may not consume the
+        entire input, for example, because the output buffer is already full, in which case {@code input.pos < input.size}. The caller must check if input has
+        been entirely consumed. If not, the caller must make some room to receive more compressed data, typically by emptying output buffer, or allocating a
+        new output buffer, and then present again remaining input data.
+        """,
 
         ZSTD_CStream.p.IN("zcs", ""),
         ZSTD_outBuffer.p.IN("output", ""),
@@ -463,17 +478,34 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "flushStream",
-        "",
+        """
+        At any moment, it's possible to flush whatever data might remain stuck within internal buffer, using {@code ZSTD_flushStream()}.
+
+        {@code output->pos} will be updated. Note that, if {@code output->size} is too small, a single invocation of {@code ZSTD_flushStream()} might not be
+        enough (return code &gt; 0). In which case, make some room to receive more compressed data, and call again {@code ZSTD_flushStream()}.
+        """.trimIndent(),
 
         ZSTD_CStream.p.IN("zcs", ""),
         ZSTD_outBuffer.p.IN("output", ""),
 
-        returnDoc = "{@code nb} of bytes still present within internal buffer (0 if it's empty) or an error code, which can be tested using #isError()"
+        returnDoc =
+        """
+        ${ul(
+            "0 if internal buffers are entirely flushed,",
+            "&gt;0 if some data still present within internal buffer (the value is minimal estimation of remaining size),",
+            "or an error code, which can be tested using #isError()"
+        )}
+        """
     )
 
     size_t(
         "endStream",
-        "",
+        """
+        {@code ZSTD_endStream()} instructs to finish a frame.
+
+        It will perform a flush and write frame epilogue. The epilogue is required for decoders to consider a frame completed. {@code flush()} operation is the
+        same, and follows same rules as #flushStream().
+        """.trimIndent(),
 
         ZSTD_CStream.p.IN("zcs", ""),
         ZSTD_outBuffer.p.IN("output", ""),
@@ -497,7 +529,11 @@ ENABLE_WARNINGS()""")
 
     ZSTD_DStream.p(
         "createDStream",
-        ""
+        """
+        A {@code ZSTD_DStream} object is required to track streaming operations.
+
+        Use {@code ZSTD_createDStream()} and #freeDStream() to create/release resources. {@code ZSTD_DStream} objects can be re-used multiple times.
+        """
     )
 
     size_t(
@@ -509,7 +545,7 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "initDStream",
-        "",
+        "Use {@code ZSTD_initDStream()} to start a new decompression operation.",
 
         ZSTD_DStream.p.IN("zds", ""),
 
@@ -518,7 +554,15 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "decompressStream",
-        "",
+        """
+        Use {@code ZSTD_decompressStream()} repetitively to consume your input.
+
+        The function will update both {@code pos} fields. If {@code input.pos < input.size}, some input has not been consumed. It's up to the caller to present
+        again remaining data. The function tries to flush all data decoded immediately, respecting buffer sizes.  If {@code output.pos < output.size}, decoder
+        has flushed everything it could. But if {@code output.pos == output.size}, there is no such guarantee, it's likely that some decoded data was not
+        flushed and still remains within internal buffers. In which case, call {@code ZSTD_decompressStream()} again to flush whatever remains in the buffer.
+        When no additional input is provided, amount of data flushed is necessarily &le; #BLOCKSIZE_MAX.
+        """,
 
         ZSTD_DStream.p.IN("zds", ""),
         ZSTD_outBuffer.p.IN("output", ""),

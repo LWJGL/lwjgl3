@@ -49,6 +49,8 @@ val ZSTD_DStream = "ZSTD_DStream".opaque
 
 // Experimental API
 
+val ZSTD_strategy = "ZSTD_strategy".enumType
+val ZSTD_nextInputType_e = "ZSTD_nextInputType_e".enumType
 val ZSTD_format_e = "ZSTD_format_e".enumType
 val ZSTD_cParameter = "ZSTD_cParameter".enumType
 val ZSTD_dictLoadMethod_e = "ZSTD_dictLoadMethod_e".enumType
@@ -82,6 +84,27 @@ val ZSTD_freeFunction = Module.ZSTD.callback {
 
         nativeType = "ZSTD_freeFunction"
     )
+}
+
+val ZSTD_compressionParameters = struct(Module.ZSTD, "ZSTDCompressionParameters", nativeName = "ZSTD_compressionParameters") {
+    unsigned.member("windowLog", "largest match distance : larger == more compression, more memory needed during decompression")
+    unsigned.member("chainLog", "fully searched segment : larger == more compression, slower, more memory (useless for fast)")
+    unsigned.member("hashLog", "dispatch table : larger == faster, more memory")
+    unsigned.member("searchLog", "nb of searches : larger == more compression, slower")
+    unsigned.member("searchLength", "match length searched : larger == faster decompression, sometimes less compression")
+    unsigned.member("targetLength", "acceptable match size for optimal parser (only) : larger == more compression, slower")
+    ZSTD_strategy.member("strategy", "")
+}
+
+val ZSTD_frameParameters = struct(Module.ZSTD, "ZSTDFrameParameters", nativeName = "ZSTD_frameParameters") {
+    unsignedb.member("contentSizeFlag", "1: content size will be in frame header (when known)")
+    unsignedb.member("checksumFlag", "1: generate a 32-bits checksum at end of frame, for error detection")
+    unsignedb.member("noDictIDFlag", "1: no dictID will be saved into frame header (if dictionary compression)")
+}
+
+val ZSTD_parameters = struct(Module.ZSTD, "ZSTDParameters", nativeName = "ZSTD_parameters") {
+    ZSTD_compressionParameters.member("cParams", "")
+    ZSTD_frameParameters.member("fParams", "")
 }
 
 val ZSTD_customMem = struct(Module.ZSTD, "ZSTDCustomMem", nativeName = "ZSTD_customMem") {
