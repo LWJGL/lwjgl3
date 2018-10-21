@@ -10,6 +10,7 @@ import org.openjdk.jmh.annotations.*;
 
 import java.util.concurrent.*;
 
+import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.util.libdivide.LibDivide.*;
 import static org.testng.Assert.*;
@@ -278,7 +279,7 @@ public class LibDivideTest {
     public long u64() {
         long sum = 0;
         for (long n : numers64) {
-            sum += Long.divideUnsigned(n, denom);
+            sum += mathDivideUnsigned(n, denom);
         }
         return sum;
     }

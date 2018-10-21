@@ -4,6 +4,8 @@
  */
 package org.lwjgl.system;
 
+import java.math.*;
+
 import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
 
@@ -93,6 +95,80 @@ public final class MathUtil {
      */
     public static long mathMultiplyHighS64(long x, long y) {
         return multiplyHigh(x, y);
+    }
+
+    /**
+     * Returns the unsigned quotient of dividing the first argument by the second where each argument and the result is interpreted as an unsigned value.
+     *
+     * <p>When either argument is negative (i.e. a {@code uint64_t} value higher than {@code 0x8000_0000_0000_0000L}), this method uses bit twiddling to
+     * implement the division. The JDK implementation uses {@link BigInteger} for this case, which has a negative impact on performance.</p>
+     *
+     * @param dividend the value to be divided
+     * @param divisor  the value doing the dividing
+     *
+     * @return the unsigned quotient of the first argument divided by the second argument
+     */
+    public static long mathDivideUnsigned(long dividend, long divisor) {
+        if (0L <= divisor) {
+            if (0L <= dividend) {
+                return dividend / divisor;
+            } else {
+                return udivdi3(dividend, divisor);
+            }
+        } else {
+            return Long.compareUnsigned(dividend, divisor) < 0 ? 0L : 1L;
+        }
+    }
+
+    /**
+     * Returns the unsigned remainder from dividing the first argument by the second where each argument and the result is interpreted as an unsigned value.
+     *
+     * <p>When either argument is negative (i.e. a {@code uint64_t} value higher than {@code 0x8000_0000_0000_0000L}), this method uses bit twiddling to
+     * implement the remainder. The JDK implementation uses {@link BigInteger} for this case, which has a negative impact on performance.</p>
+     *
+     * @param dividend the value to be divided
+     * @param divisor  the value doing the dividing
+     *
+     * @return the unsigned remainder of the first argument divided by the second argument
+     */
+    public static long mathRemainderUnsigned(long dividend, long divisor) {
+        if (0L < dividend && 0L < divisor) {
+            return dividend % divisor;
+        } else {
+            return Long.compareUnsigned(dividend, divisor) < 0
+                ? dividend
+                : dividend - divisor * udivdi3(dividend, divisor);
+        }
+    }
+
+    // Implements uint64_t / uint64_t ==> uint64_t division
+    // Ported from Hacker's Delight (https://github.com/hcs0/Hackers-Delight/blob/master/divDouble.c.txt)
+    private static long udivdi3(long u, long v) {
+        if (v >>> 32 == 0) {
+            // u < 0L in here
+            if (u >>> 32 < v) {
+                long q0 = (((u >>> 1) / v) << Long.numberOfLeadingZeros(v)) >>> 31;
+                if ((u - q0 * v) >= v) {
+                    q0++;
+                }
+                return q0;
+            } else {
+                long u1 = u >>> 32;
+                long q1 = u1 / v;
+                long q0 = (((u1 - q1 * v) << 32) | (u & 0xFFFF_FFFFL)) / v;
+                return (q1 << 32) | q0;
+            }
+        }
+
+        int  n  = Long.numberOfLeadingZeros(v);
+        long q0 = (((u >>> 1) / ((v << n) >>> 32)) << n) >>> 31;
+        if (q0 != 0) {
+            q0--;
+        }
+        if (Long.compareUnsigned((u - q0 * v), v) >= 0) {
+            q0++;
+        }
+        return q0;
     }
 
 }
