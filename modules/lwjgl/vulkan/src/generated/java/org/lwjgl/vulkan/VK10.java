@@ -2480,15 +2480,18 @@ public class VK10 {
      * <tr><td>{@link #VK_OBJECT_TYPE_DESCRIPTOR_SET OBJECT_TYPE_DESCRIPTOR_SET}</td><td>{@code VkDescriptorSet}</td></tr>
      * <tr><td>{@link #VK_OBJECT_TYPE_FRAMEBUFFER OBJECT_TYPE_FRAMEBUFFER}</td><td>{@code VkFramebuffer}</td></tr>
      * <tr><td>{@link #VK_OBJECT_TYPE_COMMAND_POOL OBJECT_TYPE_COMMAND_POOL}</td><td>{@code VkCommandPool}</td></tr>
+     * <tr><td>{@link VK11#VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION}</td><td>{@code VkSamplerYcbcrConversion}</td></tr>
+     * <tr><td>{@link VK11#VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE}</td><td>{@code VkDescriptorUpdateTemplate}</td></tr>
      * <tr><td>{@link KHRSurface#VK_OBJECT_TYPE_SURFACE_KHR OBJECT_TYPE_SURFACE_KHR}</td><td>{@code VkSurfaceKHR}</td></tr>
      * <tr><td>{@link KHRSwapchain#VK_OBJECT_TYPE_SWAPCHAIN_KHR OBJECT_TYPE_SWAPCHAIN_KHR}</td><td>{@code VkSwapchainKHR}</td></tr>
      * <tr><td>{@link KHRDisplay#VK_OBJECT_TYPE_DISPLAY_KHR OBJECT_TYPE_DISPLAY_KHR}</td><td>{@code VkDisplayKHR}</td></tr>
      * <tr><td>{@link KHRDisplay#VK_OBJECT_TYPE_DISPLAY_MODE_KHR OBJECT_TYPE_DISPLAY_MODE_KHR}</td><td>{@code VkDisplayModeKHR}</td></tr>
      * <tr><td>{@link EXTDebugReport#VK_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT}</td><td>{@code VkDebugReportCallbackEXT}</td></tr>
-     * <tr><td>{@link VK11#VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE}</td><td>{@code VkDescriptorUpdateTemplate}</td></tr>
      * <tr><td>{@link NVXDeviceGeneratedCommands#VK_OBJECT_TYPE_OBJECT_TABLE_NVX OBJECT_TYPE_OBJECT_TABLE_NVX}</td><td>{@code VkObjectTableNVX}</td></tr>
      * <tr><td>{@link NVXDeviceGeneratedCommands#VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX}</td><td>{@code VkIndirectCommandsLayoutNVX}</td></tr>
+     * <tr><td>{@link EXTDebugUtils#VK_OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT}</td><td>{@code VkDebugUtilsMessengerEXT}</td></tr>
      * <tr><td>{@link EXTValidationCache#VK_OBJECT_TYPE_VALIDATION_CACHE_EXT OBJECT_TYPE_VALIDATION_CACHE_EXT}</td><td>{@code VkValidationCacheEXT}</td></tr>
+     * <tr><td>{@link NVXRaytracing#VK_OBJECT_TYPE_ACCELERATION_STRUCTURE_NVX OBJECT_TYPE_ACCELERATION_STRUCTURE_NVX}</td><td>{@code VkAccelerationStructureNVX}</td></tr>
      * </tbody>
      * </table>
      * 
@@ -2562,7 +2565,7 @@ public class VK10 {
     public static final int VK_API_VERSION_1_0 = VK_MAKE_VERSION(1, 0, 0);
 
     /** The Vulkan registry version used to generate the LWJGL bindings. */
-    public static final int VK_HEADER_VERSION = 88;
+    public static final int VK_HEADER_VERSION = 89;
 
     /**
      * The reserved handle {@code VK_NULL_HANDLE} <b>can</b> be passed in place of valid object handles when explicitly called out in the specification. Any

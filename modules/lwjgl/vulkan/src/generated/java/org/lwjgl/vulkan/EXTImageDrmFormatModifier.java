@@ -224,6 +224,15 @@ public class EXTImageDrmFormatModifier {
      * <li>{@code image} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * </ul>
      * 
+     * <h5>Return Codes</h5>
+     * 
+     * <dl>
+     * <dt>On success, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
+     * </ul></dd>
+     * </dl>
+     * 
      * <h5>See Also</h5>
      * 
      * <p>{@link VkImageDrmFormatModifierPropertiesEXT}</p>

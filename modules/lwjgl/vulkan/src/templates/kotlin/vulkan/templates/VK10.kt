@@ -2399,15 +2399,18 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
                 <tr><td>#OBJECT_TYPE_DESCRIPTOR_SET</td><td>{@code VkDescriptorSet}</td></tr>
                 <tr><td>#OBJECT_TYPE_FRAMEBUFFER</td><td>{@code VkFramebuffer}</td></tr>
                 <tr><td>#OBJECT_TYPE_COMMAND_POOL</td><td>{@code VkCommandPool}</td></tr>
+                <tr><td>#OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION</td><td>{@code VkSamplerYcbcrConversion}</td></tr>
+                <tr><td>#OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE</td><td>{@code VkDescriptorUpdateTemplate}</td></tr>
                 <tr><td>#OBJECT_TYPE_SURFACE_KHR</td><td>{@code VkSurfaceKHR}</td></tr>
                 <tr><td>#OBJECT_TYPE_SWAPCHAIN_KHR</td><td>{@code VkSwapchainKHR}</td></tr>
                 <tr><td>#OBJECT_TYPE_DISPLAY_KHR</td><td>{@code VkDisplayKHR}</td></tr>
                 <tr><td>#OBJECT_TYPE_DISPLAY_MODE_KHR</td><td>{@code VkDisplayModeKHR}</td></tr>
                 <tr><td>#OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT</td><td>{@code VkDebugReportCallbackEXT}</td></tr>
-                <tr><td>#OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE</td><td>{@code VkDescriptorUpdateTemplate}</td></tr>
                 <tr><td>#OBJECT_TYPE_OBJECT_TABLE_NVX</td><td>{@code VkObjectTableNVX}</td></tr>
                 <tr><td>#OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX</td><td>{@code VkIndirectCommandsLayoutNVX}</td></tr>
+                <tr><td>#OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT</td><td>{@code VkDebugUtilsMessengerEXT}</td></tr>
                 <tr><td>#OBJECT_TYPE_VALIDATION_CACHE_EXT</td><td>{@code VkValidationCacheEXT}</td></tr>
+                <tr><td>#OBJECT_TYPE_ACCELERATION_STRUCTURE_NVX</td><td>{@code VkAccelerationStructureNVX}</td></tr>
             </tbody>
         </table>
 

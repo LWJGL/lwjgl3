@@ -1057,7 +1057,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿    uint32_t                                    deviceMask);</code></pre>
 
         <h5>Description</h5>
-        {@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask.
+        {@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask, except commands beginning a render pass instance, commands transitioning to the next subpass in the render pass instance, and commands ending a render pass instance, which always execute on the set of physical devices whose bit indices are included in the {@code deviceMask} member of the instance of the ##VkDeviceGroupRenderPassBeginInfoKHR structure passed to the command beginning the corresponding render pass instance.
 
         <h5>Valid Usage</h5>
         <ul>

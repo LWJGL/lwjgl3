@@ -1372,7 +1372,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask.</p>
+     * <p>{@code deviceMask} is used to filter out subsequent commands from executing on all physical devices whose bit indices are not set in the mask, except commands beginning a render pass instance, commands transitioning to the next subpass in the render pass instance, and commands ending a render pass instance, which always execute on the set of physical devices whose bit indices are included in the {@code deviceMask} member of the instance of the {@link VkDeviceGroupRenderPassBeginInfoKHR} structure passed to the command beginning the corresponding render pass instance.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

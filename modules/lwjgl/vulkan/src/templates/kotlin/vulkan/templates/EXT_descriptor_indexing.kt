@@ -16,7 +16,7 @@ val EXT_descriptor_indexing = "EXTDescriptorIndexing".nativeClassVK("EXT_descrip
         <ul>
             <li>Descriptors can be updated after they are bound to a command buffer, such that the execution of the command buffer reflects the most recent update to the descriptors.</li>
             <li>Descriptors that are not used by any pending command buffers can be updated, which enables writing new descriptors for frame N+1 while frame N is executing.</li>
-            <li>Relax the requirement that all descriptors in a binding that is "statically used" must be valid, such that descriptors that are not accessed by a submission need not be valid and can be updated while that submission is executing.</li>
+            <li>Relax the requirement that all descriptors in a binding that is “statically used” must be valid, such that descriptors that are not accessed by a submission need not be valid and can be updated while that submission is executing.</li>
             <li>The final binding in a descriptor set layout can have a variable size (and unsized arrays of resources are allowed in the GL_EXT_nonuniform_qualifier and SPV_EXT_descriptor_indexing extensions).</li>
         </ul>
 

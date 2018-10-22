@@ -205,6 +205,14 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
             <li>{@code image} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+            </ul></dd>
+        </dl>
+
         <h5>See Also</h5>
         ##VkImageDrmFormatModifierPropertiesEXT
         """,
