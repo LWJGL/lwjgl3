@@ -147,11 +147,13 @@ This script is included in /config/build-definitions.xml.
         <sequential>
             <parallel threadsPerProcessor="1">
                 <sequential if:set="binding.assimp"><local name="module"/><property name="module" value="assimp"/><body/></sequential>
+                <sequential if:set="binding.bullet"><local name="module"/><property name="module" value="bullet"/><body/></sequential>
                 <sequential if:set="binding.bgfx"><local name="module"/><property name="module" value="bgfx"/><body/></sequential>
                 <sequential if:set="binding.egl"><local name="module"/><property name="module" value="egl"/><body/></sequential>
                 <sequential if:set="binding.glfw"><local name="module"/><property name="module" value="glfw"/><body/></sequential>
                 <sequential if:set="binding.jawt"><local name="module"/><property name="module" value="jawt"/><body/></sequential>
                 <sequential if:set="binding.jemalloc"><local name="module"/><property name="module" value="jemalloc"/><body/></sequential>
+                <sequential if:set="binding.libdivide"><local name="module"/><property name="module" value="libdivide"/><body/></sequential>
                 <sequential if:set="binding.lmdb"><local name="module"/><property name="module" value="lmdb"/><body/></sequential>
                 <sequential if:set="binding.lz4"><local name="module"/><property name="module" value="lz4"/><body/></sequential>
                 <sequential if:set="binding.nanovg"><local name="module"/><property name="module" value="nanovg"/><body/></sequential>
