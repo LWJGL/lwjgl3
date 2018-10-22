@@ -2529,7 +2529,7 @@ public class ObjCRuntime {
      *                         <p>If the protocol does not contain the specified method, returns an objc_method_description structure with the value {@code {NULL, NULL}}.</p>
      */
     @NativeType("struct objc_method_description")
-    public static ObjCMethodDescription protocol_getMethodDescription(@NativeType("Protocol *") long p, @NativeType("SEL") long aSel, @NativeType("BOOL") boolean isRequiredMethod, @NativeType("BOOL") boolean isInstanceMethod, ObjCMethodDescription __result) {
+    public static ObjCMethodDescription protocol_getMethodDescription(@NativeType("Protocol *") long p, @NativeType("SEL") long aSel, @NativeType("BOOL") boolean isRequiredMethod, @NativeType("BOOL") boolean isInstanceMethod, @NativeType("struct objc_method_description") ObjCMethodDescription __result) {
         nprotocol_getMethodDescription(p, aSel, isRequiredMethod, isInstanceMethod, __result.address());
         return __result;
     }

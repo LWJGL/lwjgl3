@@ -299,7 +299,7 @@ public class VRCompositor {
 
     /** Get current fade color value. */
     @NativeType("HmdColor_t")
-    public static HmdColor VRCompositor_GetCurrentFadeColor(@NativeType("bool") boolean bBackground, HmdColor __result) {
+    public static HmdColor VRCompositor_GetCurrentFadeColor(@NativeType("bool") boolean bBackground, @NativeType("HmdColor_t") HmdColor __result) {
         nVRCompositor_GetCurrentFadeColor(bBackground, __result.address());
         return __result;
     }

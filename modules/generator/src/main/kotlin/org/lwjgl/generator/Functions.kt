@@ -844,7 +844,7 @@ class Func(
 
         if (returns.isStructValue && !hasParam { it has ReturnParam }) {
             if (!parameters.isEmpty()) print(", ")
-            print("${returns.nativeType.javaMethodType} $RESULT")
+            print("${returns.nativeType.annotate(retType)} $RESULT")
         }
 
         println(") {")
@@ -1488,7 +1488,7 @@ class Func(
         }
         if (returns.isStructValue) {
             if (!parameters.isEmpty()) print(", ")
-            print("${returns.nativeType.javaMethodType} $RESULT")
+            print("${returns.nativeType.annotate(retType)} $RESULT")
         }
         println(") {")
 

@@ -1470,7 +1470,7 @@ public class Nuklear {
      * @param ctx the nuklear context
      */
     @NativeType("struct nk_rect")
-    public static NkRect nk_window_get_bounds(@NativeType("struct nk_context const *") NkContext ctx, NkRect __result) {
+    public static NkRect nk_window_get_bounds(@NativeType("struct nk_context const *") NkContext ctx, @NativeType("struct nk_rect") NkRect __result) {
         nnk_window_get_bounds(ctx.address(), __result.address());
         return __result;
     }
@@ -1486,7 +1486,7 @@ public class Nuklear {
      * @param ctx the nuklear context
      */
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_window_get_position(@NativeType("struct nk_context const *") NkContext ctx, NkVec2 __result) {
+    public static NkVec2 nk_window_get_position(@NativeType("struct nk_context const *") NkContext ctx, @NativeType("struct nk_vec2") NkVec2 __result) {
         nnk_window_get_position(ctx.address(), __result.address());
         return __result;
     }
@@ -1502,7 +1502,7 @@ public class Nuklear {
      * @param ctx the nuklear context
      */
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_window_get_size(@NativeType("struct nk_context const *") NkContext ctx, NkVec2 __result) {
+    public static NkVec2 nk_window_get_size(@NativeType("struct nk_context const *") NkContext ctx, @NativeType("struct nk_vec2") NkVec2 __result) {
         nnk_window_get_size(ctx.address(), __result.address());
         return __result;
     }
@@ -1563,7 +1563,7 @@ public class Nuklear {
      * @param ctx the nuklear context
      */
     @NativeType("struct nk_rect")
-    public static NkRect nk_window_get_content_region(@NativeType("struct nk_context *") NkContext ctx, NkRect __result) {
+    public static NkRect nk_window_get_content_region(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_rect") NkRect __result) {
         nnk_window_get_content_region(ctx.address(), __result.address());
         return __result;
     }
@@ -1579,7 +1579,7 @@ public class Nuklear {
      * @param ctx the nuklear context
      */
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_window_get_content_region_min(@NativeType("struct nk_context *") NkContext ctx, NkVec2 __result) {
+    public static NkVec2 nk_window_get_content_region_min(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_vec2") NkVec2 __result) {
         nnk_window_get_content_region_min(ctx.address(), __result.address());
         return __result;
     }
@@ -1595,7 +1595,7 @@ public class Nuklear {
      * @param ctx the nuklear context
      */
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_window_get_content_region_max(@NativeType("struct nk_context *") NkContext ctx, NkVec2 __result) {
+    public static NkVec2 nk_window_get_content_region_max(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_vec2") NkVec2 __result) {
         nnk_window_get_content_region_max(ctx.address(), __result.address());
         return __result;
     }
@@ -1611,7 +1611,7 @@ public class Nuklear {
      * @param ctx the nuklear context
      */
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_window_get_content_region_size(@NativeType("struct nk_context *") NkContext ctx, NkVec2 __result) {
+    public static NkVec2 nk_window_get_content_region_size(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_vec2") NkVec2 __result) {
         nnk_window_get_content_region_size(ctx.address(), __result.address());
         return __result;
     }
@@ -2182,7 +2182,7 @@ public class Nuklear {
      * @param ctx the nuklear context
      */
     @NativeType("struct nk_rect")
-    public static NkRect nk_layout_widget_bounds(@NativeType("struct nk_context *") NkContext ctx, NkRect __result) {
+    public static NkRect nk_layout_widget_bounds(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_rect") NkRect __result) {
         nnk_layout_widget_bounds(ctx.address(), __result.address());
         return __result;
     }
@@ -2433,7 +2433,7 @@ public class Nuklear {
      * @param ctx the nuklear context
      */
     @NativeType("struct nk_rect")
-    public static NkRect nk_layout_space_bounds(@NativeType("struct nk_context *") NkContext ctx, NkRect __result) {
+    public static NkRect nk_layout_space_bounds(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_rect") NkRect __result) {
         nnk_layout_space_bounds(ctx.address(), __result.address());
         return __result;
     }
@@ -6587,7 +6587,7 @@ public class Nuklear {
 
     /** @param ctx the nuklear context */
     @NativeType("struct nk_rect")
-    public static NkRect nk_widget_bounds(@NativeType("struct nk_context *") NkContext ctx, NkRect __result) {
+    public static NkRect nk_widget_bounds(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_rect") NkRect __result) {
         nnk_widget_bounds(ctx.address(), __result.address());
         return __result;
     }
@@ -6599,7 +6599,7 @@ public class Nuklear {
 
     /** @param ctx the nuklear context */
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_widget_position(@NativeType("struct nk_context *") NkContext ctx, NkVec2 __result) {
+    public static NkVec2 nk_widget_position(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_vec2") NkVec2 __result) {
         nnk_widget_position(ctx.address(), __result.address());
         return __result;
     }
@@ -6611,7 +6611,7 @@ public class Nuklear {
 
     /** @param ctx the nuklear context */
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_widget_size(@NativeType("struct nk_context *") NkContext ctx, NkVec2 __result) {
+    public static NkVec2 nk_widget_size(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_vec2") NkVec2 __result) {
         nnk_widget_size(ctx.address(), __result.address());
         return __result;
     }
@@ -6709,7 +6709,7 @@ public class Nuklear {
     public static native void nnk_rgb(int r, int g, int b, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgb(int r, int g, int b, NkColor __result) {
+    public static NkColor nk_rgb(int r, int g, int b, @NativeType("struct nk_color") NkColor __result) {
         nnk_rgb(r, g, b, __result.address());
         return __result;
     }
@@ -6719,7 +6719,7 @@ public class Nuklear {
     public static native void nnk_rgb_iv(long rgb, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgb_iv(@NativeType("int const *") IntBuffer rgb, NkColor __result) {
+    public static NkColor nk_rgb_iv(@NativeType("int const *") IntBuffer rgb, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgb, 3);
         }
@@ -6732,7 +6732,7 @@ public class Nuklear {
     public static native void nnk_rgb_bv(long rgb, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgb_bv(@NativeType("nk_byte const *") ByteBuffer rgb, NkColor __result) {
+    public static NkColor nk_rgb_bv(@NativeType("nk_byte const *") ByteBuffer rgb, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgb, 3);
         }
@@ -6745,7 +6745,7 @@ public class Nuklear {
     public static native void nnk_rgb_f(float r, float g, float b, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgb_f(float r, float g, float b, NkColor __result) {
+    public static NkColor nk_rgb_f(float r, float g, float b, @NativeType("struct nk_color") NkColor __result) {
         nnk_rgb_f(r, g, b, __result.address());
         return __result;
     }
@@ -6755,7 +6755,7 @@ public class Nuklear {
     public static native void nnk_rgb_fv(long rgb, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgb_fv(@NativeType("float const *") FloatBuffer rgb, NkColor __result) {
+    public static NkColor nk_rgb_fv(@NativeType("float const *") FloatBuffer rgb, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgb, 3);
         }
@@ -6768,7 +6768,7 @@ public class Nuklear {
     public static native void nnk_rgb_cf(long c, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgb_cf(@NativeType("struct nk_colorf") NkColorf c, NkColor __result) {
+    public static NkColor nk_rgb_cf(@NativeType("struct nk_colorf") NkColorf c, @NativeType("struct nk_color") NkColor __result) {
         nnk_rgb_cf(c.address(), __result.address());
         return __result;
     }
@@ -6778,7 +6778,7 @@ public class Nuklear {
     public static native void nnk_rgb_hex(long rgb, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgb_hex(@NativeType("char const *") ByteBuffer rgb, NkColor __result) {
+    public static NkColor nk_rgb_hex(@NativeType("char const *") ByteBuffer rgb, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgb, 6);
         }
@@ -6787,7 +6787,7 @@ public class Nuklear {
     }
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgb_hex(@NativeType("char const *") CharSequence rgb, NkColor __result) {
+    public static NkColor nk_rgb_hex(@NativeType("char const *") CharSequence rgb, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgb, 6);
         }
@@ -6806,7 +6806,7 @@ public class Nuklear {
     public static native void nnk_rgba(int r, int g, int b, int a, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgba(int r, int g, int b, int a, NkColor __result) {
+    public static NkColor nk_rgba(int r, int g, int b, int a, @NativeType("struct nk_color") NkColor __result) {
         nnk_rgba(r, g, b, a, __result.address());
         return __result;
     }
@@ -6816,7 +6816,7 @@ public class Nuklear {
     public static native void nnk_rgba_u32(int in, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgba_u32(@NativeType("nk_uint") int in, NkColor __result) {
+    public static NkColor nk_rgba_u32(@NativeType("nk_uint") int in, @NativeType("struct nk_color") NkColor __result) {
         nnk_rgba_u32(in, __result.address());
         return __result;
     }
@@ -6826,7 +6826,7 @@ public class Nuklear {
     public static native void nnk_rgba_iv(long rgba, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgba_iv(@NativeType("int const *") IntBuffer rgba, NkColor __result) {
+    public static NkColor nk_rgba_iv(@NativeType("int const *") IntBuffer rgba, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgba, 4);
         }
@@ -6839,7 +6839,7 @@ public class Nuklear {
     public static native void nnk_rgba_bv(long rgba, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgba_bv(@NativeType("nk_byte const *") ByteBuffer rgba, NkColor __result) {
+    public static NkColor nk_rgba_bv(@NativeType("nk_byte const *") ByteBuffer rgba, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgba, 4);
         }
@@ -6852,7 +6852,7 @@ public class Nuklear {
     public static native void nnk_rgba_f(float r, float g, float b, float a, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgba_f(float r, float g, float b, float a, NkColor __result) {
+    public static NkColor nk_rgba_f(float r, float g, float b, float a, @NativeType("struct nk_color") NkColor __result) {
         nnk_rgba_f(r, g, b, a, __result.address());
         return __result;
     }
@@ -6862,7 +6862,7 @@ public class Nuklear {
     public static native void nnk_rgba_fv(long rgba, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgba_fv(@NativeType("float const *") FloatBuffer rgba, NkColor __result) {
+    public static NkColor nk_rgba_fv(@NativeType("float const *") FloatBuffer rgba, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgba, 4);
         }
@@ -6875,7 +6875,7 @@ public class Nuklear {
     public static native void nnk_rgba_cf(long c, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgba_cf(@NativeType("struct nk_colorf") NkColorf c, NkColor __result) {
+    public static NkColor nk_rgba_cf(@NativeType("struct nk_colorf") NkColorf c, @NativeType("struct nk_color") NkColor __result) {
         nnk_rgba_cf(c.address(), __result.address());
         return __result;
     }
@@ -6885,7 +6885,7 @@ public class Nuklear {
     public static native void nnk_rgba_hex(long rgba, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgba_hex(@NativeType("char const *") ByteBuffer rgba, NkColor __result) {
+    public static NkColor nk_rgba_hex(@NativeType("char const *") ByteBuffer rgba, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgba, 8);
         }
@@ -6894,7 +6894,7 @@ public class Nuklear {
     }
 
     @NativeType("struct nk_color")
-    public static NkColor nk_rgba_hex(@NativeType("char const *") CharSequence rgba, NkColor __result) {
+    public static NkColor nk_rgba_hex(@NativeType("char const *") CharSequence rgba, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgba, 8);
         }
@@ -6913,7 +6913,7 @@ public class Nuklear {
     public static native void nnk_hsva_colorf(float h, float s, float v, float a, long __result);
 
     @NativeType("struct nk_colorf")
-    public static NkColorf nk_hsva_colorf(float h, float s, float v, float a, NkColorf __result) {
+    public static NkColorf nk_hsva_colorf(float h, float s, float v, float a, @NativeType("struct nk_colorf") NkColorf __result) {
         nnk_hsva_colorf(h, s, v, a, __result.address());
         return __result;
     }
@@ -6923,7 +6923,7 @@ public class Nuklear {
     public static native void nnk_hsva_colorfv(long c, long __result);
 
     @NativeType("struct nk_colorf")
-    public static NkColorf nk_hsva_colorfv(@NativeType("float *") FloatBuffer c, NkColorf __result) {
+    public static NkColorf nk_hsva_colorfv(@NativeType("float *") FloatBuffer c, @NativeType("struct nk_colorf") NkColorf __result) {
         if (CHECKS) {
             check(c, 4);
         }
@@ -6961,7 +6961,7 @@ public class Nuklear {
     public static native void nnk_hsv(int h, int s, int v, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_hsv(int h, int s, int v, NkColor __result) {
+    public static NkColor nk_hsv(int h, int s, int v, @NativeType("struct nk_color") NkColor __result) {
         nnk_hsv(h, s, v, __result.address());
         return __result;
     }
@@ -6971,7 +6971,7 @@ public class Nuklear {
     public static native void nnk_hsv_iv(long hsv, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_hsv_iv(@NativeType("int const *") IntBuffer hsv, NkColor __result) {
+    public static NkColor nk_hsv_iv(@NativeType("int const *") IntBuffer hsv, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(hsv, 3);
         }
@@ -6984,7 +6984,7 @@ public class Nuklear {
     public static native void nnk_hsv_bv(long hsv, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_hsv_bv(@NativeType("nk_byte const *") ByteBuffer hsv, NkColor __result) {
+    public static NkColor nk_hsv_bv(@NativeType("nk_byte const *") ByteBuffer hsv, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(hsv, 3);
         }
@@ -6997,7 +6997,7 @@ public class Nuklear {
     public static native void nnk_hsv_f(float h, float s, float v, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_hsv_f(float h, float s, float v, NkColor __result) {
+    public static NkColor nk_hsv_f(float h, float s, float v, @NativeType("struct nk_color") NkColor __result) {
         nnk_hsv_f(h, s, v, __result.address());
         return __result;
     }
@@ -7007,7 +7007,7 @@ public class Nuklear {
     public static native void nnk_hsv_fv(long hsv, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_hsv_fv(@NativeType("float const *") FloatBuffer hsv, NkColor __result) {
+    public static NkColor nk_hsv_fv(@NativeType("float const *") FloatBuffer hsv, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(hsv, 3);
         }
@@ -7020,7 +7020,7 @@ public class Nuklear {
     public static native void nnk_hsva(int h, int s, int v, int a, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_hsva(int h, int s, int v, int a, NkColor __result) {
+    public static NkColor nk_hsva(int h, int s, int v, int a, @NativeType("struct nk_color") NkColor __result) {
         nnk_hsva(h, s, v, a, __result.address());
         return __result;
     }
@@ -7030,7 +7030,7 @@ public class Nuklear {
     public static native void nnk_hsva_iv(long hsva, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_hsva_iv(@NativeType("int const *") IntBuffer hsva, NkColor __result) {
+    public static NkColor nk_hsva_iv(@NativeType("int const *") IntBuffer hsva, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(hsva, 4);
         }
@@ -7043,7 +7043,7 @@ public class Nuklear {
     public static native void nnk_hsva_bv(long hsva, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_hsva_bv(@NativeType("nk_byte const *") ByteBuffer hsva, NkColor __result) {
+    public static NkColor nk_hsva_bv(@NativeType("nk_byte const *") ByteBuffer hsva, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(hsva, 4);
         }
@@ -7056,7 +7056,7 @@ public class Nuklear {
     public static native void nnk_hsva_f(float h, float s, float v, float a, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_hsva_f(float h, float s, float v, float a, NkColor __result) {
+    public static NkColor nk_hsva_f(float h, float s, float v, float a, @NativeType("struct nk_color") NkColor __result) {
         nnk_hsva_f(h, s, v, a, __result.address());
         return __result;
     }
@@ -7066,7 +7066,7 @@ public class Nuklear {
     public static native void nnk_hsva_fv(long hsva, long __result);
 
     @NativeType("struct nk_color")
-    public static NkColor nk_hsva_fv(@NativeType("float const *") FloatBuffer hsva, NkColor __result) {
+    public static NkColor nk_hsva_fv(@NativeType("float const *") FloatBuffer hsva, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(hsva, 4);
         }
@@ -7104,7 +7104,7 @@ public class Nuklear {
     public static native void nnk_color_cf(long color, long __result);
 
     @NativeType("struct nk_colorf")
-    public static NkColorf nk_color_cf(@NativeType("struct nk_color") NkColor color, NkColorf __result) {
+    public static NkColorf nk_color_cf(@NativeType("struct nk_color") NkColor color, @NativeType("struct nk_colorf") NkColorf __result) {
         nnk_color_cf(color.address(), __result.address());
         return __result;
     }
@@ -7317,7 +7317,7 @@ public class Nuklear {
     public static native void nnk_handle_ptr(long ptr, long __result);
 
     @NativeType("nk_handle")
-    public static NkHandle nk_handle_ptr(@NativeType("void *") long ptr, NkHandle __result) {
+    public static NkHandle nk_handle_ptr(@NativeType("void *") long ptr, @NativeType("nk_handle") NkHandle __result) {
         if (CHECKS) {
             check(ptr);
         }
@@ -7330,7 +7330,7 @@ public class Nuklear {
     public static native void nnk_handle_id(int id, long __result);
 
     @NativeType("nk_handle")
-    public static NkHandle nk_handle_id(int id, NkHandle __result) {
+    public static NkHandle nk_handle_id(int id, @NativeType("nk_handle") NkHandle __result) {
         nnk_handle_id(id, __result.address());
         return __result;
     }
@@ -7340,7 +7340,7 @@ public class Nuklear {
     public static native void nnk_image_handle(long handle, long __result);
 
     @NativeType("struct nk_image")
-    public static NkImage nk_image_handle(@NativeType("nk_handle") NkHandle handle, NkImage __result) {
+    public static NkImage nk_image_handle(@NativeType("nk_handle") NkHandle handle, @NativeType("struct nk_image") NkImage __result) {
         nnk_image_handle(handle.address(), __result.address());
         return __result;
     }
@@ -7350,7 +7350,7 @@ public class Nuklear {
     public static native void nnk_image_ptr(long ptr, long __result);
 
     @NativeType("struct nk_image")
-    public static NkImage nk_image_ptr(@NativeType("void *") long ptr, NkImage __result) {
+    public static NkImage nk_image_ptr(@NativeType("void *") long ptr, @NativeType("struct nk_image") NkImage __result) {
         if (CHECKS) {
             check(ptr);
         }
@@ -7363,7 +7363,7 @@ public class Nuklear {
     public static native void nnk_image_id(int id, long __result);
 
     @NativeType("struct nk_image")
-    public static NkImage nk_image_id(int id, NkImage __result) {
+    public static NkImage nk_image_id(int id, @NativeType("struct nk_image") NkImage __result) {
         nnk_image_id(id, __result.address());
         return __result;
     }
@@ -7382,7 +7382,7 @@ public class Nuklear {
     public static native void nnk_subimage_ptr(long ptr, short w, short h, long sub_region, long __result);
 
     @NativeType("struct nk_image")
-    public static NkImage nk_subimage_ptr(@NativeType("void *") long ptr, @NativeType("unsigned short") short w, @NativeType("unsigned short") short h, @NativeType("struct nk_rect") NkRect sub_region, NkImage __result) {
+    public static NkImage nk_subimage_ptr(@NativeType("void *") long ptr, @NativeType("unsigned short") short w, @NativeType("unsigned short") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("struct nk_image") NkImage __result) {
         if (CHECKS) {
             check(ptr);
         }
@@ -7395,7 +7395,7 @@ public class Nuklear {
     public static native void nnk_subimage_id(int id, short w, short h, long sub_region, long __result);
 
     @NativeType("struct nk_image")
-    public static NkImage nk_subimage_id(int id, @NativeType("unsigned short") short w, @NativeType("unsigned short") short h, @NativeType("struct nk_rect") NkRect sub_region, NkImage __result) {
+    public static NkImage nk_subimage_id(int id, @NativeType("unsigned short") short w, @NativeType("unsigned short") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("struct nk_image") NkImage __result) {
         nnk_subimage_id(id, w, h, sub_region.address(), __result.address());
         return __result;
     }
@@ -7405,7 +7405,7 @@ public class Nuklear {
     public static native void nnk_subimage_handle(long handle, short w, short h, long sub_region, long __result);
 
     @NativeType("struct nk_image")
-    public static NkImage nk_subimage_handle(@NativeType("nk_handle") NkHandle handle, @NativeType("unsigned short") short w, @NativeType("unsigned short") short h, @NativeType("struct nk_rect") NkRect sub_region, NkImage __result) {
+    public static NkImage nk_subimage_handle(@NativeType("nk_handle") NkHandle handle, @NativeType("unsigned short") short w, @NativeType("unsigned short") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("struct nk_image") NkImage __result) {
         nnk_subimage_handle(handle.address(), w, h, sub_region.address(), __result.address());
         return __result;
     }
@@ -7434,7 +7434,7 @@ public class Nuklear {
     public static native void nnk_vec2(float x, float y, long __result);
 
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_vec2(float x, float y, NkVec2 __result) {
+    public static NkVec2 nk_vec2(float x, float y, @NativeType("struct nk_vec2") NkVec2 __result) {
         nnk_vec2(x, y, __result.address());
         return __result;
     }
@@ -7444,7 +7444,7 @@ public class Nuklear {
     public static native void nnk_vec2i(int x, int y, long __result);
 
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_vec2i(int x, int y, NkVec2 __result) {
+    public static NkVec2 nk_vec2i(int x, int y, @NativeType("struct nk_vec2") NkVec2 __result) {
         nnk_vec2i(x, y, __result.address());
         return __result;
     }
@@ -7454,7 +7454,7 @@ public class Nuklear {
     public static native void nnk_vec2v(long xy, long __result);
 
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_vec2v(@NativeType("float const *") FloatBuffer xy, NkVec2 __result) {
+    public static NkVec2 nk_vec2v(@NativeType("float const *") FloatBuffer xy, @NativeType("struct nk_vec2") NkVec2 __result) {
         if (CHECKS) {
             check(xy, 2);
         }
@@ -7467,7 +7467,7 @@ public class Nuklear {
     public static native void nnk_vec2iv(long xy, long __result);
 
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_vec2iv(@NativeType("int const *") IntBuffer xy, NkVec2 __result) {
+    public static NkVec2 nk_vec2iv(@NativeType("int const *") IntBuffer xy, @NativeType("struct nk_vec2") NkVec2 __result) {
         if (CHECKS) {
             check(xy, 2);
         }
@@ -7480,7 +7480,7 @@ public class Nuklear {
     public static native void nnk_get_null_rect(long __result);
 
     @NativeType("struct nk_rect")
-    public static NkRect nk_get_null_rect(NkRect __result) {
+    public static NkRect nk_get_null_rect(@NativeType("struct nk_rect") NkRect __result) {
         nnk_get_null_rect(__result.address());
         return __result;
     }
@@ -7490,7 +7490,7 @@ public class Nuklear {
     public static native void nnk_rect(float x, float y, float w, float h, long __result);
 
     @NativeType("struct nk_rect")
-    public static NkRect nk_rect(float x, float y, float w, float h, NkRect __result) {
+    public static NkRect nk_rect(float x, float y, float w, float h, @NativeType("struct nk_rect") NkRect __result) {
         nnk_rect(x, y, w, h, __result.address());
         return __result;
     }
@@ -7500,7 +7500,7 @@ public class Nuklear {
     public static native void nnk_recti(int x, int y, int w, int h, long __result);
 
     @NativeType("struct nk_rect")
-    public static NkRect nk_recti(int x, int y, int w, int h, NkRect __result) {
+    public static NkRect nk_recti(int x, int y, int w, int h, @NativeType("struct nk_rect") NkRect __result) {
         nnk_recti(x, y, w, h, __result.address());
         return __result;
     }
@@ -7510,7 +7510,7 @@ public class Nuklear {
     public static native void nnk_recta(long pos, long size, long __result);
 
     @NativeType("struct nk_rect")
-    public static NkRect nk_recta(@NativeType("struct nk_vec2") NkVec2 pos, @NativeType("struct nk_vec2") NkVec2 size, NkRect __result) {
+    public static NkRect nk_recta(@NativeType("struct nk_vec2") NkVec2 pos, @NativeType("struct nk_vec2") NkVec2 size, @NativeType("struct nk_rect") NkRect __result) {
         nnk_recta(pos.address(), size.address(), __result.address());
         return __result;
     }
@@ -7520,7 +7520,7 @@ public class Nuklear {
     public static native void nnk_rectv(long xywh, long __result);
 
     @NativeType("struct nk_rect")
-    public static NkRect nk_rectv(@NativeType("float const *") FloatBuffer xywh, NkRect __result) {
+    public static NkRect nk_rectv(@NativeType("float const *") FloatBuffer xywh, @NativeType("struct nk_rect") NkRect __result) {
         if (CHECKS) {
             check(xywh, 4);
         }
@@ -7533,7 +7533,7 @@ public class Nuklear {
     public static native void nnk_rectiv(long xywh, long __result);
 
     @NativeType("struct nk_rect")
-    public static NkRect nk_rectiv(@NativeType("int const *") IntBuffer xywh, NkRect __result) {
+    public static NkRect nk_rectiv(@NativeType("int const *") IntBuffer xywh, @NativeType("struct nk_rect") NkRect __result) {
         if (CHECKS) {
             check(xywh, 4);
         }
@@ -7546,7 +7546,7 @@ public class Nuklear {
     public static native void nnk_rect_pos(long r, long __result);
 
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_rect_pos(@NativeType("struct nk_rect") NkRect r, NkVec2 __result) {
+    public static NkVec2 nk_rect_pos(@NativeType("struct nk_rect") NkRect r, @NativeType("struct nk_vec2") NkVec2 __result) {
         nnk_rect_pos(r.address(), __result.address());
         return __result;
     }
@@ -7556,7 +7556,7 @@ public class Nuklear {
     public static native void nnk_rect_size(long r, long __result);
 
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_rect_size(@NativeType("struct nk_rect") NkRect r, NkVec2 __result) {
+    public static NkVec2 nk_rect_size(@NativeType("struct nk_rect") NkRect r, @NativeType("struct nk_vec2") NkVec2 __result) {
         nnk_rect_size(r.address(), __result.address());
         return __result;
     }
@@ -9071,7 +9071,7 @@ public class Nuklear {
     public static native void nnk_style_item_image(long img, long __result);
 
     @NativeType("struct nk_style_item")
-    public static NkStyleItem nk_style_item_image(@NativeType("struct nk_image") NkImage img, NkStyleItem __result) {
+    public static NkStyleItem nk_style_item_image(@NativeType("struct nk_image") NkImage img, @NativeType("struct nk_style_item") NkStyleItem __result) {
         nnk_style_item_image(img.address(), __result.address());
         return __result;
     }
@@ -9081,7 +9081,7 @@ public class Nuklear {
     public static native void nnk_style_item_color(long color, long __result);
 
     @NativeType("struct nk_style_item")
-    public static NkStyleItem nk_style_item_color(@NativeType("struct nk_color") NkColor color, NkStyleItem __result) {
+    public static NkStyleItem nk_style_item_color(@NativeType("struct nk_color") NkColor color, @NativeType("struct nk_style_item") NkStyleItem __result) {
         nnk_style_item_color(color.address(), __result.address());
         return __result;
     }
@@ -9091,7 +9091,7 @@ public class Nuklear {
     public static native void nnk_style_item_hide(long __result);
 
     @NativeType("struct nk_style_item")
-    public static NkStyleItem nk_style_item_hide(NkStyleItem __result) {
+    public static NkStyleItem nk_style_item_hide(@NativeType("struct nk_style_item") NkStyleItem __result) {
         nnk_style_item_hide(__result.address());
         return __result;
     }
@@ -9817,7 +9817,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_rgb_iv rgb_iv} */
     @NativeType("struct nk_color")
-    public static NkColor nk_rgb_iv(@NativeType("int const *") int[] rgb, NkColor __result) {
+    public static NkColor nk_rgb_iv(@NativeType("int const *") int[] rgb, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgb, 3);
         }
@@ -9830,7 +9830,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_rgb_fv rgb_fv} */
     @NativeType("struct nk_color")
-    public static NkColor nk_rgb_fv(@NativeType("float const *") float[] rgb, NkColor __result) {
+    public static NkColor nk_rgb_fv(@NativeType("float const *") float[] rgb, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgb, 3);
         }
@@ -9843,7 +9843,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_rgba_iv rgba_iv} */
     @NativeType("struct nk_color")
-    public static NkColor nk_rgba_iv(@NativeType("int const *") int[] rgba, NkColor __result) {
+    public static NkColor nk_rgba_iv(@NativeType("int const *") int[] rgba, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgba, 4);
         }
@@ -9856,7 +9856,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_rgba_fv rgba_fv} */
     @NativeType("struct nk_color")
-    public static NkColor nk_rgba_fv(@NativeType("float const *") float[] rgba, NkColor __result) {
+    public static NkColor nk_rgba_fv(@NativeType("float const *") float[] rgba, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(rgba, 4);
         }
@@ -9869,7 +9869,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_hsva_colorfv hsva_colorfv} */
     @NativeType("struct nk_colorf")
-    public static NkColorf nk_hsva_colorfv(@NativeType("float *") float[] c, NkColorf __result) {
+    public static NkColorf nk_hsva_colorfv(@NativeType("float *") float[] c, @NativeType("struct nk_colorf") NkColorf __result) {
         if (CHECKS) {
             check(c, 4);
         }
@@ -9907,7 +9907,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_hsv_iv hsv_iv} */
     @NativeType("struct nk_color")
-    public static NkColor nk_hsv_iv(@NativeType("int const *") int[] hsv, NkColor __result) {
+    public static NkColor nk_hsv_iv(@NativeType("int const *") int[] hsv, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(hsv, 3);
         }
@@ -9920,7 +9920,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_hsv_fv hsv_fv} */
     @NativeType("struct nk_color")
-    public static NkColor nk_hsv_fv(@NativeType("float const *") float[] hsv, NkColor __result) {
+    public static NkColor nk_hsv_fv(@NativeType("float const *") float[] hsv, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(hsv, 3);
         }
@@ -9933,7 +9933,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_hsva_iv hsva_iv} */
     @NativeType("struct nk_color")
-    public static NkColor nk_hsva_iv(@NativeType("int const *") int[] hsva, NkColor __result) {
+    public static NkColor nk_hsva_iv(@NativeType("int const *") int[] hsva, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(hsva, 4);
         }
@@ -9946,7 +9946,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_hsva_fv hsva_fv} */
     @NativeType("struct nk_color")
-    public static NkColor nk_hsva_fv(@NativeType("float const *") float[] hsva, NkColor __result) {
+    public static NkColor nk_hsva_fv(@NativeType("float const *") float[] hsva, @NativeType("struct nk_color") NkColor __result) {
         if (CHECKS) {
             check(hsva, 4);
         }
@@ -10107,7 +10107,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_vec2v vec2v} */
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_vec2v(@NativeType("float const *") float[] xy, NkVec2 __result) {
+    public static NkVec2 nk_vec2v(@NativeType("float const *") float[] xy, @NativeType("struct nk_vec2") NkVec2 __result) {
         if (CHECKS) {
             check(xy, 2);
         }
@@ -10120,7 +10120,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_vec2iv vec2iv} */
     @NativeType("struct nk_vec2")
-    public static NkVec2 nk_vec2iv(@NativeType("int const *") int[] xy, NkVec2 __result) {
+    public static NkVec2 nk_vec2iv(@NativeType("int const *") int[] xy, @NativeType("struct nk_vec2") NkVec2 __result) {
         if (CHECKS) {
             check(xy, 2);
         }
@@ -10133,7 +10133,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_rectv rectv} */
     @NativeType("struct nk_rect")
-    public static NkRect nk_rectv(@NativeType("float const *") float[] xywh, NkRect __result) {
+    public static NkRect nk_rectv(@NativeType("float const *") float[] xywh, @NativeType("struct nk_rect") NkRect __result) {
         if (CHECKS) {
             check(xywh, 4);
         }
@@ -10146,7 +10146,7 @@ public class Nuklear {
 
     /** Array version of: {@link #nk_rectiv rectiv} */
     @NativeType("struct nk_rect")
-    public static NkRect nk_rectiv(@NativeType("int const *") int[] xywh, NkRect __result) {
+    public static NkRect nk_rectiv(@NativeType("int const *") int[] xywh, @NativeType("struct nk_rect") NkRect __result) {
         if (CHECKS) {
             check(xywh, 4);
         }

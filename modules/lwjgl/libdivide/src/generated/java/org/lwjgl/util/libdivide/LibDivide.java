@@ -57,7 +57,7 @@ public class LibDivide {
     static native void nlibdivide_s32_gen_ref(int denom, long __result);
 
     @NativeType("struct libdivide_s32_t")
-    static LibDivideS32 libdivide_s32_gen_ref(@NativeType("int32_t") int denom, LibDivideS32 __result) {
+    static LibDivideS32 libdivide_s32_gen_ref(@NativeType("int32_t") int denom, @NativeType("struct libdivide_s32_t") LibDivideS32 __result) {
         nlibdivide_s32_gen_ref(denom, __result.address());
         return __result;
     }
@@ -67,7 +67,7 @@ public class LibDivide {
     static native void nlibdivide_u32_gen_ref(int denom, long __result);
 
     @NativeType("struct libdivide_u32_t")
-    static LibDivideU32 libdivide_u32_gen_ref(@NativeType("uint32_t") int denom, LibDivideU32 __result) {
+    static LibDivideU32 libdivide_u32_gen_ref(@NativeType("uint32_t") int denom, @NativeType("struct libdivide_u32_t") LibDivideU32 __result) {
         nlibdivide_u32_gen_ref(denom, __result.address());
         return __result;
     }
@@ -77,7 +77,7 @@ public class LibDivide {
     static native void nlibdivide_s64_gen_ref(long denom, long __result);
 
     @NativeType("struct libdivide_s64_t")
-    static LibDivideS64 libdivide_s64_gen_ref(@NativeType("int64_t") long denom, LibDivideS64 __result) {
+    static LibDivideS64 libdivide_s64_gen_ref(@NativeType("int64_t") long denom, @NativeType("struct libdivide_s64_t") LibDivideS64 __result) {
         nlibdivide_s64_gen_ref(denom, __result.address());
         return __result;
     }
@@ -87,7 +87,7 @@ public class LibDivide {
     static native void nlibdivide_u64_gen_ref(long denom, long __result);
 
     @NativeType("struct libdivide_u64_t")
-    static LibDivideU64 libdivide_u64_gen_ref(@NativeType("uint64_t") long denom, LibDivideU64 __result) {
+    static LibDivideU64 libdivide_u64_gen_ref(@NativeType("uint64_t") long denom, @NativeType("struct libdivide_u64_t") LibDivideU64 __result) {
         nlibdivide_u64_gen_ref(denom, __result.address());
         return __result;
     }
@@ -97,7 +97,7 @@ public class LibDivide {
     static native void nlibdivide_s32_branchfree_gen_ref(int denom, long __result);
 
     @NativeType("struct libdivide_s32_branchfree_t")
-    static LibDivideS32BranchFree libdivide_s32_branchfree_gen_ref(@NativeType("int32_t") int denom, LibDivideS32BranchFree __result) {
+    static LibDivideS32BranchFree libdivide_s32_branchfree_gen_ref(@NativeType("int32_t") int denom, @NativeType("struct libdivide_s32_branchfree_t") LibDivideS32BranchFree __result) {
         nlibdivide_s32_branchfree_gen_ref(denom, __result.address());
         return __result;
     }
@@ -107,7 +107,7 @@ public class LibDivide {
     static native void nlibdivide_u32_branchfree_gen_ref(int denom, long __result);
 
     @NativeType("struct libdivide_u32_branchfree_t")
-    static LibDivideU32BranchFree libdivide_u32_branchfree_gen_ref(@NativeType("uint32_t") int denom, LibDivideU32BranchFree __result) {
+    static LibDivideU32BranchFree libdivide_u32_branchfree_gen_ref(@NativeType("uint32_t") int denom, @NativeType("struct libdivide_u32_branchfree_t") LibDivideU32BranchFree __result) {
         nlibdivide_u32_branchfree_gen_ref(denom, __result.address());
         return __result;
     }
@@ -117,7 +117,7 @@ public class LibDivide {
     static native void nlibdivide_s64_branchfree_gen_ref(long denom, long __result);
 
     @NativeType("struct libdivide_s64_branchfree_t")
-    static LibDivideS64BranchFree libdivide_s64_branchfree_gen_ref(@NativeType("int64_t") long denom, LibDivideS64BranchFree __result) {
+    static LibDivideS64BranchFree libdivide_s64_branchfree_gen_ref(@NativeType("int64_t") long denom, @NativeType("struct libdivide_s64_branchfree_t") LibDivideS64BranchFree __result) {
         nlibdivide_s64_branchfree_gen_ref(denom, __result.address());
         return __result;
     }
@@ -127,7 +127,7 @@ public class LibDivide {
     static native void nlibdivide_u64_branchfree_gen_ref(long denom, long __result);
 
     @NativeType("struct libdivide_u64_branchfree_t")
-    static LibDivideU64BranchFree libdivide_u64_branchfree_gen_ref(@NativeType("uint64_t") long denom, LibDivideU64BranchFree __result) {
+    static LibDivideU64BranchFree libdivide_u64_branchfree_gen_ref(@NativeType("uint64_t") long denom, @NativeType("struct libdivide_u64_branchfree_t") LibDivideU64BranchFree __result) {
         nlibdivide_u64_branchfree_gen_ref(denom, __result.address());
         return __result;
     }

@@ -119,7 +119,7 @@ public class STBVorbis {
      * @param f an ogg vorbis file decoder
      */
     @NativeType("stb_vorbis_info")
-    public static STBVorbisInfo stb_vorbis_get_info(@NativeType("stb_vorbis *") long f, STBVorbisInfo __result) {
+    public static STBVorbisInfo stb_vorbis_get_info(@NativeType("stb_vorbis *") long f, @NativeType("stb_vorbis_info") STBVorbisInfo __result) {
         if (CHECKS) {
             check(f);
         }

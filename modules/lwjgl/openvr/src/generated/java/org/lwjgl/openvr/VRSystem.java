@@ -80,7 +80,7 @@ public class VRSystem {
      * @param fFarZ  distance to the far clip plane in meters
      */
     @NativeType("HmdMatrix44_t")
-    public static HmdMatrix44 VRSystem_GetProjectionMatrix(@NativeType("EVREye") int eEye, float fNearZ, float fFarZ, HmdMatrix44 __result) {
+    public static HmdMatrix44 VRSystem_GetProjectionMatrix(@NativeType("EVREye") int eEye, float fNearZ, float fFarZ, @NativeType("HmdMatrix44_t") HmdMatrix44 __result) {
         nVRSystem_GetProjectionMatrix(eEye, fNearZ, fFarZ, __result.address());
         return __result;
     }
@@ -164,7 +164,7 @@ public class VRSystem {
      * @param eEye determines which eye the function should return the eye matrix for. One of:<br><table><tr><td>{@link VR#EVREye_Eye_Left}</td><td>{@link VR#EVREye_Eye_Right}</td></tr></table>
      */
     @NativeType("HmdMatrix34_t")
-    public static HmdMatrix34 VRSystem_GetEyeToHeadTransform(@NativeType("EVREye") int eEye, HmdMatrix34 __result) {
+    public static HmdMatrix34 VRSystem_GetEyeToHeadTransform(@NativeType("EVREye") int eEye, @NativeType("HmdMatrix34_t") HmdMatrix34 __result) {
         nVRSystem_GetEyeToHeadTransform(eEye, __result.address());
         return __result;
     }
@@ -396,7 +396,7 @@ public class VRSystem {
      * has set from the Dashboard settings and previous calls to {@link #VRSystem_ResetSeatedZeroPose ResetSeatedZeroPose}.</p>
      */
     @NativeType("HmdMatrix34_t")
-    public static HmdMatrix34 VRSystem_GetSeatedZeroPoseToStandingAbsoluteTrackingPose(HmdMatrix34 __result) {
+    public static HmdMatrix34 VRSystem_GetSeatedZeroPoseToStandingAbsoluteTrackingPose(@NativeType("HmdMatrix34_t") HmdMatrix34 __result) {
         nVRSystem_GetSeatedZeroPoseToStandingAbsoluteTrackingPose(__result.address());
         return __result;
     }
@@ -420,7 +420,7 @@ public class VRSystem {
      * the calibrated standing coordinate system.
      */
     @NativeType("HmdMatrix34_t")
-    public static HmdMatrix34 VRSystem_GetRawZeroPoseToStandingAbsoluteTrackingPose(HmdMatrix34 __result) {
+    public static HmdMatrix34 VRSystem_GetRawZeroPoseToStandingAbsoluteTrackingPose(@NativeType("HmdMatrix34_t") HmdMatrix34 __result) {
         nVRSystem_GetRawZeroPoseToStandingAbsoluteTrackingPose(__result.address());
         return __result;
     }
@@ -675,7 +675,7 @@ public class VRSystem {
      * @param pError        the error returned when attempting to fetch this property. This can be {@code NULL} if the caller doesn't care about the source of a property error.
      */
     @NativeType("HmdMatrix34_t")
-    public static HmdMatrix34 VRSystem_GetMatrix34TrackedDeviceProperty(@NativeType("TrackedDeviceIndex_t") int unDeviceIndex, @NativeType("ETrackedDeviceProperty") int prop, @Nullable @NativeType("ETrackedPropertyError *") IntBuffer pError, HmdMatrix34 __result) {
+    public static HmdMatrix34 VRSystem_GetMatrix34TrackedDeviceProperty(@NativeType("TrackedDeviceIndex_t") int unDeviceIndex, @NativeType("ETrackedDeviceProperty") int prop, @Nullable @NativeType("ETrackedPropertyError *") IntBuffer pError, @NativeType("HmdMatrix34_t") HmdMatrix34 __result) {
         if (CHECKS) {
             checkSafe(pError, 1);
         }
@@ -932,7 +932,7 @@ public class VRSystem {
      * @param type one of:<br><table><tr><td>{@link VR#EHiddenAreaMeshType_k_eHiddenAreaMesh_Standard}</td></tr><tr><td>{@link VR#EHiddenAreaMeshType_k_eHiddenAreaMesh_Inverse}</td></tr><tr><td>{@link VR#EHiddenAreaMeshType_k_eHiddenAreaMesh_LineLoop}</td></tr><tr><td>{@link VR#EHiddenAreaMeshType_k_eHiddenAreaMesh_Max}</td></tr></table>
      */
     @NativeType("HiddenAreaMesh_t")
-    public static HiddenAreaMesh VRSystem_GetHiddenAreaMesh(@NativeType("EVREye") int eEye, @NativeType("EHiddenAreaMeshType") int type, HiddenAreaMesh __result) {
+    public static HiddenAreaMesh VRSystem_GetHiddenAreaMesh(@NativeType("EVREye") int eEye, @NativeType("EHiddenAreaMeshType") int type, @NativeType("HiddenAreaMesh_t") HiddenAreaMesh __result) {
         nVRSystem_GetHiddenAreaMesh(eEye, type, __result.address());
         return __result;
     }

@@ -89,7 +89,7 @@ public class OVRUtil {
      * @param timeoutMilliseconds a timeout to wait for HMD to be attached or 0 to poll
      */
     @NativeType("ovrDetectResult")
-    public static OVRDetectResult ovr_Detect(int timeoutMilliseconds, OVRDetectResult __result) {
+    public static OVRDetectResult ovr_Detect(int timeoutMilliseconds, @NativeType("ovrDetectResult") OVRDetectResult __result) {
         novr_Detect(timeoutMilliseconds, __result.address());
         return __result;
     }
@@ -109,7 +109,7 @@ public class OVRUtil {
      * @param __result           the calculated projection matrix
      */
     @NativeType("ovrMatrix4f")
-    public static OVRMatrix4f ovrMatrix4f_Projection(@NativeType("ovrFovPort") OVRFovPort fov, float znear, float zfar, @NativeType("unsigned int") int projectionModFlags, OVRMatrix4f __result) {
+    public static OVRMatrix4f ovrMatrix4f_Projection(@NativeType("ovrFovPort") OVRFovPort fov, float znear, float zfar, @NativeType("unsigned int") int projectionModFlags, @NativeType("ovrMatrix4f") OVRMatrix4f __result) {
         novrMatrix4f_Projection(fov.address(), znear, zfar, projectionModFlags, __result.address());
         return __result;
     }
@@ -127,7 +127,7 @@ public class OVRUtil {
      * @param __result           the extracted ovrTimewarpProjectionDesc
      */
     @NativeType("ovrTimewarpProjectionDesc")
-    public static OVRTimewarpProjectionDesc ovrTimewarpProjectionDesc_FromProjection(@NativeType("ovrMatrix4f") OVRMatrix4f projection, @NativeType("unsigned int") int projectionModFlags, OVRTimewarpProjectionDesc __result) {
+    public static OVRTimewarpProjectionDesc ovrTimewarpProjectionDesc_FromProjection(@NativeType("ovrMatrix4f") OVRMatrix4f projection, @NativeType("unsigned int") int projectionModFlags, @NativeType("ovrTimewarpProjectionDesc") OVRTimewarpProjectionDesc __result) {
         novrTimewarpProjectionDesc_FromProjection(projection.address(), projectionModFlags, __result.address());
         return __result;
     }
@@ -149,7 +149,7 @@ public class OVRUtil {
      * @param __result        the calculated projection matrix
      */
     @NativeType("ovrMatrix4f")
-    public static OVRMatrix4f ovrMatrix4f_OrthoSubProjection(@NativeType("ovrMatrix4f") OVRMatrix4f projection, @NativeType("ovrVector2f") OVRVector2f orthoScale, float orthoDistance, float HmdToEyeOffsetX, OVRMatrix4f __result) {
+    public static OVRMatrix4f ovrMatrix4f_OrthoSubProjection(@NativeType("ovrMatrix4f") OVRMatrix4f projection, @NativeType("ovrVector2f") OVRVector2f orthoScale, float orthoDistance, float HmdToEyeOffsetX, @NativeType("ovrMatrix4f") OVRMatrix4f __result) {
         novrMatrix4f_OrthoSubProjection(projection.address(), orthoScale.address(), orthoDistance, HmdToEyeOffsetX, __result.address());
         return __result;
     }

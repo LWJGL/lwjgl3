@@ -1062,7 +1062,7 @@ public class OVR {
      * @param __result an {@link OVRHmdDesc}. If invoked with {@code NULL} session argument, {@code ovrHmdDesc::Type} to {@link #ovrHmd_None Hmd_None} indicates that the HMD is not connected.
      */
     @NativeType("ovrHmdDesc")
-    public static OVRHmdDesc ovr_GetHmdDesc(@NativeType("ovrSession") long session, OVRHmdDesc __result) {
+    public static OVRHmdDesc ovr_GetHmdDesc(@NativeType("ovrSession") long session, @NativeType("ovrHmdDesc") OVRHmdDesc __result) {
         novr_GetHmdDesc(session, __result.address());
         return __result;
     }
@@ -1103,7 +1103,7 @@ public class OVR {
      * @param __result         an {@link OVRTrackerDesc}. An empty {@code OVRTrackerDesc} will be returned if {@code trackerDescIndex} is out of range.
      */
     @NativeType("ovrTrackerDesc")
-    public static OVRTrackerDesc ovr_GetTrackerDesc(@NativeType("ovrSession") long session, @NativeType("unsigned int") int trackerDescIndex, OVRTrackerDesc __result) {
+    public static OVRTrackerDesc ovr_GetTrackerDesc(@NativeType("ovrSession") long session, @NativeType("unsigned int") int trackerDescIndex, @NativeType("ovrTrackerDesc") OVRTrackerDesc __result) {
         if (CHECKS) {
             check(session);
         }
@@ -1373,7 +1373,7 @@ public class OVR {
      * @param __result      the {@link OVRTrackingState} that is predicted for the given {@code absTime}
      */
     @NativeType("ovrTrackingState")
-    public static OVRTrackingState ovr_GetTrackingState(@NativeType("ovrSession") long session, double absTime, @NativeType("ovrBool") boolean latencyMarker, OVRTrackingState __result) {
+    public static OVRTrackingState ovr_GetTrackingState(@NativeType("ovrSession") long session, double absTime, @NativeType("ovrBool") boolean latencyMarker, @NativeType("ovrTrackingState") OVRTrackingState __result) {
         if (CHECKS) {
             check(session);
         }
@@ -1424,7 +1424,7 @@ public class OVR {
      * @param trackerPoseIndex index of the tracker being requested.
      */
     @NativeType("ovrTrackerPose")
-    public static OVRTrackerPose ovr_GetTrackerPose(@NativeType("ovrSession") long session, @NativeType("unsigned int") int trackerPoseIndex, OVRTrackerPose __result) {
+    public static OVRTrackerPose ovr_GetTrackerPose(@NativeType("ovrSession") long session, @NativeType("unsigned int") int trackerPoseIndex, @NativeType("ovrTrackerPose") OVRTrackerPose __result) {
         if (CHECKS) {
             check(session);
         }
@@ -1486,7 +1486,7 @@ public class OVR {
      * @param __result       an {@link OVRTouchHapticsDesc}
      */
     @NativeType("ovrTouchHapticsDesc")
-    public static OVRTouchHapticsDesc ovr_GetTouchHapticsDesc(@NativeType("ovrSession") long session, @NativeType("ovrControllerType") int controllerType, OVRTouchHapticsDesc __result) {
+    public static OVRTouchHapticsDesc ovr_GetTouchHapticsDesc(@NativeType("ovrSession") long session, @NativeType("ovrControllerType") int controllerType, @NativeType("ovrTouchHapticsDesc") OVRTouchHapticsDesc __result) {
         if (CHECKS) {
             check(session);
         }
@@ -2025,7 +2025,7 @@ public class OVR {
      * @param __result              the texture width and height size
      */
     @NativeType("ovrSizei")
-    public static OVRSizei ovr_GetFovTextureSize(@NativeType("ovrSession") long session, @NativeType("ovrEyeType") int eye, @NativeType("ovrFovPort") OVRFovPort fov, float pixelsPerDisplayPixel, OVRSizei __result) {
+    public static OVRSizei ovr_GetFovTextureSize(@NativeType("ovrSession") long session, @NativeType("ovrEyeType") int eye, @NativeType("ovrFovPort") OVRFovPort fov, float pixelsPerDisplayPixel, @NativeType("ovrSizei") OVRSizei __result) {
         if (CHECKS) {
             check(session);
         }
@@ -2047,7 +2047,7 @@ public class OVR {
      * @param __result the computed {@link OVREyeRenderDesc} for the given {@code eyeType} and field of view
      */
     @NativeType("ovrEyeRenderDesc")
-    public static OVREyeRenderDesc ovr_GetRenderDesc(@NativeType("ovrSession") long session, @NativeType("ovrEyeType") int eyeType, @NativeType("ovrFovPort") OVRFovPort fov, OVREyeRenderDesc __result) {
+    public static OVREyeRenderDesc ovr_GetRenderDesc(@NativeType("ovrSession") long session, @NativeType("ovrEyeType") int eyeType, @NativeType("ovrFovPort") OVRFovPort fov, @NativeType("ovrEyeRenderDesc") OVREyeRenderDesc __result) {
         if (CHECKS) {
             check(session);
         }

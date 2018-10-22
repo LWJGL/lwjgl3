@@ -961,7 +961,7 @@ public class ZstdX {
     public static native void nZSTD_getCParams(int compressionLevel, long estimatedSrcSize, long dictSize, long __result);
 
     @NativeType("ZSTD_compressionParameters")
-    public static ZSTDCompressionParameters ZSTD_getCParams(int compressionLevel, @NativeType("unsigned long long") long estimatedSrcSize, @NativeType("size_t") long dictSize, ZSTDCompressionParameters __result) {
+    public static ZSTDCompressionParameters ZSTD_getCParams(int compressionLevel, @NativeType("unsigned long long") long estimatedSrcSize, @NativeType("size_t") long dictSize, @NativeType("ZSTD_compressionParameters") ZSTDCompressionParameters __result) {
         nZSTD_getCParams(compressionLevel, estimatedSrcSize, dictSize, __result.address());
         return __result;
     }
@@ -971,7 +971,7 @@ public class ZstdX {
     public static native void nZSTD_getParams(int compressionLevel, long estimatedSrcSize, long dictSize, long __result);
 
     @NativeType("ZSTD_parameters")
-    public static ZSTDParameters ZSTD_getParams(int compressionLevel, @NativeType("unsigned long long") long estimatedSrcSize, @NativeType("size_t") long dictSize, ZSTDParameters __result) {
+    public static ZSTDParameters ZSTD_getParams(int compressionLevel, @NativeType("unsigned long long") long estimatedSrcSize, @NativeType("size_t") long dictSize, @NativeType("ZSTD_parameters") ZSTDParameters __result) {
         nZSTD_getParams(compressionLevel, estimatedSrcSize, dictSize, __result.address());
         return __result;
     }
@@ -990,7 +990,7 @@ public class ZstdX {
     public static native void nZSTD_adjustCParams(long cPar, long srcSize, long dictSize, long __result);
 
     @NativeType("ZSTD_compressionParameters")
-    public static ZSTDCompressionParameters ZSTD_adjustCParams(@NativeType("ZSTD_compressionParameters") ZSTDCompressionParameters cPar, @NativeType("unsigned long long") long srcSize, @NativeType("size_t") long dictSize, ZSTDCompressionParameters __result) {
+    public static ZSTDCompressionParameters ZSTD_adjustCParams(@NativeType("ZSTD_compressionParameters") ZSTDCompressionParameters cPar, @NativeType("unsigned long long") long srcSize, @NativeType("size_t") long dictSize, @NativeType("ZSTD_compressionParameters") ZSTDCompressionParameters __result) {
         nZSTD_adjustCParams(cPar.address(), srcSize, dictSize, __result.address());
         return __result;
     }
@@ -1196,7 +1196,7 @@ public class ZstdX {
      * threads.</p>
      */
     @NativeType("ZSTD_frameProgression")
-    public static ZSTDFrameProgression ZSTD_getFrameProgression(@NativeType("ZSTD_CCtx const *") long cctx, ZSTDFrameProgression __result) {
+    public static ZSTDFrameProgression ZSTD_getFrameProgression(@NativeType("ZSTD_CCtx const *") long cctx, @NativeType("ZSTD_frameProgression") ZSTDFrameProgression __result) {
         if (CHECKS) {
             check(cctx);
         }
