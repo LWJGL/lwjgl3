@@ -71,6 +71,34 @@ public class LibDivideS32 extends Struct implements NativeResource {
     @NativeType("uint8_t")
     public byte more() { return nmore(address()); }
 
+    /** Sets the specified value to the {@code magic} field. */
+    public LibDivideS32 magic(@NativeType("int32_t") int value) { nmagic(address(), value); return this; }
+    /** Sets the specified value to the {@code more} field. */
+    public LibDivideS32 more(@NativeType("uint8_t") byte value) { nmore(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public LibDivideS32 set(
+        int magic,
+        byte more
+    ) {
+        magic(magic);
+        more(more);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public LibDivideS32 set(LibDivideS32 src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
     // -----------------------------------
 
     /** Returns a new {@link LibDivideS32} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -219,6 +247,11 @@ public class LibDivideS32 extends Struct implements NativeResource {
     /** Unsafe version of {@link #more}. */
     public static byte nmore(long struct) { return UNSAFE.getByte(null, struct + LibDivideS32.MORE); }
 
+    /** Unsafe version of {@link #magic(int) magic}. */
+    public static void nmagic(long struct, int value) { UNSAFE.putInt(null, struct + LibDivideS32.MAGIC, value); }
+    /** Unsafe version of {@link #more(byte) more}. */
+    public static void nmore(long struct, byte value) { UNSAFE.putByte(null, struct + LibDivideS32.MORE, value); }
+
     // -----------------------------------
 
     /** An array of {@link LibDivideS32} structs. */
@@ -263,6 +296,11 @@ public class LibDivideS32 extends Struct implements NativeResource {
         /** Returns the value of the {@code more} field. */
         @NativeType("uint8_t")
         public byte more() { return LibDivideS32.nmore(address()); }
+
+        /** Sets the specified value to the {@code magic} field. */
+        public LibDivideS32.Buffer magic(@NativeType("int32_t") int value) { LibDivideS32.nmagic(address(), value); return this; }
+        /** Sets the specified value to the {@code more} field. */
+        public LibDivideS32.Buffer more(@NativeType("uint8_t") byte value) { LibDivideS32.nmore(address(), value); return this; }
 
     }
 

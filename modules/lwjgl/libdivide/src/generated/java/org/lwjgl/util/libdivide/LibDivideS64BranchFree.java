@@ -71,6 +71,34 @@ public class LibDivideS64BranchFree extends Struct implements NativeResource {
     @NativeType("uint8_t")
     public byte more() { return nmore(address()); }
 
+    /** Sets the specified value to the {@code magic} field. */
+    public LibDivideS64BranchFree magic(@NativeType("int64_t") long value) { nmagic(address(), value); return this; }
+    /** Sets the specified value to the {@code more} field. */
+    public LibDivideS64BranchFree more(@NativeType("uint8_t") byte value) { nmore(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public LibDivideS64BranchFree set(
+        long magic,
+        byte more
+    ) {
+        magic(magic);
+        more(more);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public LibDivideS64BranchFree set(LibDivideS64BranchFree src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
     // -----------------------------------
 
     /** Returns a new {@link LibDivideS64BranchFree} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -219,6 +247,11 @@ public class LibDivideS64BranchFree extends Struct implements NativeResource {
     /** Unsafe version of {@link #more}. */
     public static byte nmore(long struct) { return UNSAFE.getByte(null, struct + LibDivideS64BranchFree.MORE); }
 
+    /** Unsafe version of {@link #magic(long) magic}. */
+    public static void nmagic(long struct, long value) { UNSAFE.putLong(null, struct + LibDivideS64BranchFree.MAGIC, value); }
+    /** Unsafe version of {@link #more(byte) more}. */
+    public static void nmore(long struct, byte value) { UNSAFE.putByte(null, struct + LibDivideS64BranchFree.MORE, value); }
+
     // -----------------------------------
 
     /** An array of {@link LibDivideS64BranchFree} structs. */
@@ -263,6 +296,11 @@ public class LibDivideS64BranchFree extends Struct implements NativeResource {
         /** Returns the value of the {@code more} field. */
         @NativeType("uint8_t")
         public byte more() { return LibDivideS64BranchFree.nmore(address()); }
+
+        /** Sets the specified value to the {@code magic} field. */
+        public LibDivideS64BranchFree.Buffer magic(@NativeType("int64_t") long value) { LibDivideS64BranchFree.nmagic(address(), value); return this; }
+        /** Sets the specified value to the {@code more} field. */
+        public LibDivideS64BranchFree.Buffer more(@NativeType("uint8_t") byte value) { LibDivideS64BranchFree.nmore(address(), value); return this; }
 
     }
 

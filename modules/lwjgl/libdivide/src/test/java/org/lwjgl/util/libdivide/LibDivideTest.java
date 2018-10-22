@@ -233,21 +233,18 @@ public class LibDivideTest {
         int apply(int numer, int denom);
     }
 
-    private static <T extends Struct> void test(Function<MemoryStack, T> malloc, Gen32<T> gen32, Native32 doNative, Do32<T> doRef, Do32<T> doJava, boolean branchFree) {
+    private static <T extends Struct> void test(Function<MemoryStack, T> malloc, Gen32<T> gen, Native32 doNative, Do32<T> doRef, Do32<T> doJava, boolean branchFree) {
         try (MemoryStack stack = stackPush()) {
             T magic = malloc.apply(stack);
 
             // Corner cases
-            if (!branchFree) {
-                test(magic, gen32, doNative, doRef, doJava, -1, 0, -1, 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
-                test(magic, gen32, doNative, doRef, doJava, 1, 0, -1, 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            int[] numers = {0, -1, 1, -2, 2, -3, 3, Integer.MIN_VALUE, Integer.MAX_VALUE};
+            for (int d : numers) {
+                if (d == 0 || (branchFree && abs(d) == 1)) {
+                    continue;
+                }
+                test(magic, gen, doNative, doRef, doJava, d, numers);
             }
-            test(magic, gen32, doNative, doRef, doJava, -2, 0, -1, 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            test(magic, gen32, doNative, doRef, doJava, 2, 0, -1, 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            test(magic, gen32, doNative, doRef, doJava, -3, 0, -1, 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            test(magic, gen32, doNative, doRef, doJava, 3, 0, -1, 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            test(magic, gen32, doNative, doRef, doJava, Integer.MIN_VALUE, 0, -1, 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            test(magic, gen32, doNative, doRef, doJava, Integer.MAX_VALUE, 0, -1, 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
             // Random
             ThreadLocalRandom rand = ThreadLocalRandom.current();
@@ -257,7 +254,7 @@ public class LibDivideTest {
                     d = rand.nextInt();
                 } while (branchFree && abs(d) == 1);
 
-                gen32.apply(d, magic);
+                gen.apply(d, magic);
 
                 for (int j = 0; j < RANDOM_NUMERS; j++) {
                     test(magic, doNative, doRef, doJava, d, rand.nextInt());
@@ -266,8 +263,8 @@ public class LibDivideTest {
         }
     }
 
-    private static <T extends Struct> void test(T magic, Gen32<T> gen32, Native32 doNative, Do32<T> doRef, Do32<T> doJava, int d, int... numers) {
-        gen32.apply(d, magic);
+    private static <T extends Struct> void test(T magic, Gen32<T> gen, Native32 doNative, Do32<T> doRef, Do32<T> doJava, int d, int... numers) {
+        gen.apply(d, magic);
         for (int n : numers) {
             test(magic, doNative, doRef, doJava, d, n);
         }
@@ -299,24 +296,19 @@ public class LibDivideTest {
         long apply(long numer, long denom);
     }
 
-    private static <T extends Struct> void test(Function<MemoryStack, T> malloc, Gen64<T> gen64, Native64 doNative, Do64<T> doRef, Do64<T> doJava, boolean branchFree) {
+    private static <T extends Struct> void test(Function<MemoryStack, T> malloc, Gen64<T> gen, Native64 doNative, Do64<T> doRef, Do64<T> doJava, boolean branchFree) {
         try (MemoryStack stack = stackPush()) {
 
             T magic = malloc.apply(stack);
 
             // Corner cases
-            if (!branchFree) {
-                test(magic, gen64, doNative, doRef, doJava, -1L, 0L, -1L, 1L, Integer.MIN_VALUE, Integer.MAX_VALUE);
-                test(magic, gen64, doNative, doRef, doJava, 1L, 0L, -1L, 1L, Long.MIN_VALUE, Long.MAX_VALUE);
+            long[] numers = {0L, -1L, 1L, -2L, 2L, -3L, 3L, Integer.MIN_VALUE, Integer.MAX_VALUE, Long.MIN_VALUE, Long.MAX_VALUE};
+            for (long d : numers) {
+                if (d == 0L || (branchFree && abs(d) == 1L)) {
+                    continue;
+                }
+                test(magic, gen, doNative, doRef, doJava, d, numers);
             }
-            test(magic, gen64, doNative, doRef, doJava, -2L, 0L, -1L, 1L, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            test(magic, gen64, doNative, doRef, doJava, 2L, 0L, -1L, 1L, Long.MIN_VALUE, Long.MAX_VALUE);
-            test(magic, gen64, doNative, doRef, doJava, -3L, 0L, -1L, 1L, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            test(magic, gen64, doNative, doRef, doJava, 3L, 0L, -1L, 1L, Long.MIN_VALUE, Long.MAX_VALUE);
-            test(magic, gen64, doNative, doRef, doJava, Integer.MIN_VALUE, 0L, -1L, 1L, Long.MIN_VALUE, Long.MAX_VALUE);
-            test(magic, gen64, doNative, doRef, doJava, Integer.MAX_VALUE, 0L, -1L, 1L, Long.MIN_VALUE, Long.MAX_VALUE);
-            test(magic, gen64, doNative, doRef, doJava, Long.MIN_VALUE, 0L, -1L, 1L, Long.MIN_VALUE, Long.MAX_VALUE);
-            test(magic, gen64, doNative, doRef, doJava, Long.MAX_VALUE, 0L, -1L, 1L, Long.MIN_VALUE, Long.MAX_VALUE);
 
             // Random
             ThreadLocalRandom rand = ThreadLocalRandom.current();
@@ -326,7 +318,7 @@ public class LibDivideTest {
                     d = rand.nextLong();
                 } while (branchFree && abs(d) == 1L);
 
-                gen64.apply(d, magic);
+                gen.apply(d, magic);
                 for (int j = 0; j < RANDOM_NUMERS; j++) {
                     test(magic, doNative, doRef, doJava, d, rand.nextLong());
                 }
@@ -334,8 +326,8 @@ public class LibDivideTest {
         }
     }
 
-    private static <T extends Struct> void test(T magic, Gen64<T> gen64, Native64 doNative, Do64<T> doRef, Do64<T> doJava, long d, long... numers) {
-        gen64.apply(d, magic);
+    private static <T extends Struct> void test(T magic, Gen64<T> gen, Native64 doNative, Do64<T> doRef, Do64<T> doJava, long d, long... numers) {
+        gen.apply(d, magic);
         for (long n : numers) {
             test(magic, doNative, doRef, doJava, d, n);
         }

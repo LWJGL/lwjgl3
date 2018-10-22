@@ -17,42 +17,42 @@ fun config() {
     Generator.registerLibraryInit(Module.LIBDIVIDE, "LibDivideBoot", "libdivide")
 }
 
-val libdivide_u32_t = struct(Module.LIBDIVIDE, "LibDivideU32", nativeName = "struct libdivide_u32_t", mutable = false) {
+val libdivide_u32_t = struct(Module.LIBDIVIDE, "LibDivideU32", nativeName = "struct libdivide_u32_t") {
     uint32_t.member("magic", "")
     uint8_t.member("more", "")
 }
 
-val libdivide_s32_t = struct(Module.LIBDIVIDE, "LibDivideS32", nativeName = "struct libdivide_s32_t", mutable = false) {
+val libdivide_s32_t = struct(Module.LIBDIVIDE, "LibDivideS32", nativeName = "struct libdivide_s32_t") {
     int32_t.member("magic", "")
     uint8_t.member("more", "")
 }
 
-val libdivide_u32_branchfree_t = struct(Module.LIBDIVIDE, "LibDivideU32BranchFree", nativeName = "struct libdivide_u32_branchfree_t", mutable = false) {
+val libdivide_u32_branchfree_t = struct(Module.LIBDIVIDE, "LibDivideU32BranchFree", nativeName = "struct libdivide_u32_branchfree_t") {
     uint32_t.member("magic", "")
     uint8_t.member("more", "")
 }
 
-val libdivide_s32_branchfree_t = struct(Module.LIBDIVIDE, "LibDivideS32BranchFree", nativeName = "struct libdivide_s32_branchfree_t", mutable = false) {
+val libdivide_s32_branchfree_t = struct(Module.LIBDIVIDE, "LibDivideS32BranchFree", nativeName = "struct libdivide_s32_branchfree_t") {
     int32_t.member("magic", "")
     uint8_t.member("more", "")
 }
 
-val libdivide_u64_t = struct(Module.LIBDIVIDE, "LibDivideU64", nativeName = "struct libdivide_u64_t", mutable = false) {
+val libdivide_u64_t = struct(Module.LIBDIVIDE, "LibDivideU64", nativeName = "struct libdivide_u64_t") {
     uint64_t.member("magic", "")
     uint8_t.member("more", "")
 }
 
-val libdivide_s64_t = struct(Module.LIBDIVIDE, "LibDivideS64", nativeName = "struct libdivide_s64_t", mutable = false) {
+val libdivide_s64_t = struct(Module.LIBDIVIDE, "LibDivideS64", nativeName = "struct libdivide_s64_t") {
     int64_t.member("magic", "")
     uint8_t.member("more", "")
 }
 
-val libdivide_u64_branchfree_t = struct(Module.LIBDIVIDE, "LibDivideU64BranchFree", nativeName = "struct libdivide_u64_branchfree_t", mutable = false) {
+val libdivide_u64_branchfree_t = struct(Module.LIBDIVIDE, "LibDivideU64BranchFree", nativeName = "struct libdivide_u64_branchfree_t") {
     uint64_t.member("magic", "")
     uint8_t.member("more", "")
 }
 
-val libdivide_s64_branchfree_t = struct(Module.LIBDIVIDE, "LibDivideS64BranchFree", nativeName = "struct libdivide_s64_branchfree_t", mutable = false) {
+val libdivide_s64_branchfree_t = struct(Module.LIBDIVIDE, "LibDivideS64BranchFree", nativeName = "struct libdivide_s64_branchfree_t") {
     int64_t.member("magic", "")
     uint8_t.member("more", "")
 }
