@@ -229,7 +229,7 @@ public class XXHash {
      * @param seed  the seed that can be used to alter the result predictably
      */
     @NativeType("XXH32_hash_t")
-    public static long XXH64(@NativeType("void const *") ByteBuffer input, @NativeType("long long") long seed) {
+    public static long XXH64(@NativeType("void const *") ByteBuffer input, @NativeType("unsigned long long") long seed) {
         return nXXH64(memAddress(input), input.remaining(), seed);
     }
 
@@ -281,7 +281,7 @@ public class XXHash {
      * @param seed     the seed that can be used to alter the hashing result predictably
      */
     @NativeType("XXH_errorcode")
-    public static int XXH64_reset(@NativeType("XXH64_state_t *") XXH64State statePtr, @NativeType("long long") long seed) {
+    public static int XXH64_reset(@NativeType("XXH64_state_t *") XXH64State statePtr, @NativeType("unsigned long long") long seed) {
         return nXXH64_reset(statePtr.address(), seed);
     }
 

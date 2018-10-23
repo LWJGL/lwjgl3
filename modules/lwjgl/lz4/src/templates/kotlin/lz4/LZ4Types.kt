@@ -36,8 +36,6 @@ val LZ4F_contentChecksum_t = "LZ4F_contentChecksum_t".enumType
 val LZ4F_frameType_t = "LZ4F_frameType_t".enumType
 val LZ4F_blockChecksum_t = "LZ4F_blockChecksum_t".enumType
 
-val unsigned_long_long = IntegerType("unsigned long long", PrimitiveMapping.LONG, unsigned = true)
-
 val LZ4F_cctx = "LZ4F_cctx".opaque
 val LZ4F_dctx = "LZ4F_dctx".opaque
 

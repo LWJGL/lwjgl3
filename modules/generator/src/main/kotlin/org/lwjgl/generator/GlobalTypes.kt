@@ -36,6 +36,8 @@ val va_list = "va_list".handle
 val unsigned_char = IntegerType("unsigned char", PrimitiveMapping.BYTE, unsigned = true)
 val unsigned_short = IntegerType("unsigned short", PrimitiveMapping.SHORT, unsigned = true)
 val unsigned_int = IntegerType("unsigned int", PrimitiveMapping.INT, unsigned = true)
+val unsigned_intb = PrimitiveType("unsigned int", PrimitiveMapping.BOOLEAN4)
+val unsigned_long_long = IntegerType("unsigned long long", PrimitiveMapping.LONG, unsigned = true)
 
 // strings
 

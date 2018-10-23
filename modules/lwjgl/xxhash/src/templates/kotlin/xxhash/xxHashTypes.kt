@@ -20,8 +20,6 @@ fun config() {
     Generator.registerLibraryInit(Module.XXHASH, "LibXXHash", "xxhash", setupAllocator = true)
 }
 
-val unsigned_long_long = IntegerType("long long", PrimitiveMapping.LONG, unsigned = true)
-
 val XXH32_hash_t = typedef(unsigned_int, "XXH32_hash_t")
 val XXH64_hash_t = typedef(unsigned_long_long, "XXH32_hash_t")
 

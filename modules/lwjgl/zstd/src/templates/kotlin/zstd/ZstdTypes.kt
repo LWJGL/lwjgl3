@@ -24,9 +24,6 @@ fun config() {
     Generator.registerLibraryInit(Module.ZSTD, "LibZstd", "zstd")
 }
 
-val unsigned_intb = PrimitiveType("unsigned int", PrimitiveMapping.BOOLEAN4)
-val unsigned_long_long = IntegerType("unsigned long long", PrimitiveMapping.LONG, unsigned = true)
-
 val ZSTD_CCtx = "ZSTD_CCtx".opaque
 val ZSTD_DCtx = "ZSTD_DCtx".opaque
 val ZSTD_CDict = "ZSTD_CDict".opaque

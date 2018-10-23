@@ -70,7 +70,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH32_1hashFromCanonic
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH64(JNIEnv *__env, jclass clazz, jlong inputAddress, jlong length, jlong seed) {
     void const *input = (void const *)(intptr_t)inputAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)XXH64(input, (size_t)length, (long long)seed);
+    return (jlong)XXH64(input, (size_t)length, (unsigned long long)seed);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH64_1createState(JNIEnv *__env, jclass clazz) {
@@ -94,7 +94,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH64_1copyState(JNIEn
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH64_1reset(JNIEnv *__env, jclass clazz, jlong statePtrAddress, jlong seed) {
     XXH64_state_t *statePtr = (XXH64_state_t *)(intptr_t)statePtrAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)XXH64_reset(statePtr, (long long)seed);
+    return (jint)XXH64_reset(statePtr, (unsigned long long)seed);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH64_1update(JNIEnv *__env, jclass clazz, jlong statePtrAddress, jlong inputAddress, jlong length) {
