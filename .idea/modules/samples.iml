@@ -18,6 +18,7 @@
     <orderEntry type="module" module-name="assimp" scope="TEST" />
     <orderEntry type="module" module-name="bgfx" scope="TEST" />
     <orderEntry type="module" module-name="bullet" scope="TEST" />
+    <orderEntry type="module" module-name="cuda" scope="TEST" />
     <orderEntry type="module" module-name="egl" scope="TEST" />
     <orderEntry type="module" module-name="glfw" scope="TEST" />
     <orderEntry type="module" module-name="jawt" scope="TEST" />

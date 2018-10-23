@@ -365,6 +365,7 @@
             <compileBinding binding="assimp"/>
             <compileBinding binding="bgfx"/>
             <compileBinding binding="bullet"/>
+            <compileBinding binding="cuda"/>
             <compileBinding binding="egl"/>
             <compileBinding binding="jawt"/>
             <compileBinding binding="jemalloc"/>
@@ -590,6 +591,7 @@
             <include name="org/lwjgl/demo/assimp/**" if:true="${binding.assimp}"/>
             <include name="org/lwjgl/demo/bgfx/**" if:set="test.bgfx"/>
             <include name="org/lwjgl/demo/bullet/**" if:true="${binding.bullet}"/>
+            <include name="org/lwjgl/demo/cuda/**" if:true="${binding.cuda}"/>
             <include name="org/lwjgl/demo/egl/**" if:set="test.egl"/>
             <include name="org/lwjgl/demo/glfw/**" if:set="test.glfw"/>
             <include name="org/lwjgl/demo/nanovg/**" if:set="test.nanovg"/>
@@ -1077,6 +1079,9 @@
 
         <!-- Bullet -->
         <release-module package="org.lwjgl.bullet" name="bullet" native-library="lwjgl_bullet" title="bullet" if:true="${binding.bullet}"/>
+
+        <!-- cuda -->
+        <release-module package="org.lwjgl.cuda" name="cuda" title="cuda" if:true="${binding.cuda}"/>
 
         <!-- EGL -->
         <release-module package="org.lwjgl.egl" name="egl" title="EGL" license="khronos" if:true="${binding.egl}"/>

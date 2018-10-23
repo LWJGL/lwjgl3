@@ -17,6 +17,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.assimp" value="true"/>
     <property name="binding.bgfx" value="true"/>
     <property name="binding.bullet" value="true"/>
+    <property name="binding.cuda" value="true"/>
     <property name="binding.egl" value="true"/>
     <property name="binding.glfw" value="true"/>
     <property name="binding.jawt" value="true"/>
@@ -49,6 +50,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.zstd" value="true"/>
 
     <!-- TODO: automate -->
+    <property name="java-only.binding.cuda" value="true"/>
     <property name="java-only.binding.egl" value="true"/>
     <property name="java-only.binding.jawt" value="true"/>
     <property name="java-only.binding.odbc" value="true"/>
@@ -149,6 +151,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:set="binding.assimp"><local name="module"/><property name="module" value="assimp"/><body/></sequential>
                 <sequential if:set="binding.bullet"><local name="module"/><property name="module" value="bullet"/><body/></sequential>
                 <sequential if:set="binding.bgfx"><local name="module"/><property name="module" value="bgfx"/><body/></sequential>
+                <sequential if:set="binding.cuda"><local name="module"/><property name="module" value="cuda"/><body/></sequential>
                 <sequential if:set="binding.egl"><local name="module"/><property name="module" value="egl"/><body/></sequential>
                 <sequential if:set="binding.glfw"><local name="module"/><property name="module" value="glfw"/><body/></sequential>
                 <sequential if:set="binding.jawt"><local name="module"/><property name="module" value="jawt"/><body/></sequential>

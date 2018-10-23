@@ -12,6 +12,7 @@
     <orderEntry type="module" module-name="bgfx-templates" />
     <orderEntry type="module" module-name="bullet-templates" />
     <orderEntry type="module" module-name="core-templates" />
+    <orderEntry type="module" module-name="cuda-templates" />
     <orderEntry type="module" module-name="egl-templates" />
     <orderEntry type="module" module-name="glfw-templates" />
     <orderEntry type="module" module-name="jawt-templates" />

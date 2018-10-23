@@ -418,6 +418,11 @@ public final class Checks {
             checkBuffer(buf.remaining(), size);
         }
     }
+    public static void checkSafe(@Nullable CustomBuffer<?> buf, long size) {
+        if (buf != null) {
+            checkBuffer(buf.remaining(), (int)size);
+        }
+    }
 
     public static void check(Object[] array, int size) {
         checkBuffer(array.length, size);
