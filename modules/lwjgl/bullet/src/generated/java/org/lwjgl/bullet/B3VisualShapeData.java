@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.bullet.PhysicsClient.*;
+
 /**
  * <h3>Layout</h3>
  * 
@@ -25,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int m_linkIndex;
  *     int m_visualGeometryType;
  *     double m_dimensions[3];
- *     char m_meshAssetFileName[1024];
+ *     char m_meshAssetFileName[VISUAL_SHAPE_MAX_PATH_LEN];
  *     double m_localVisualFrame[7];
  *     double m_rgbaColor[4];
  *     int m_tinyRendererTextureId;
@@ -61,7 +63,7 @@ public class B3VisualShapeData extends Struct implements NativeResource {
             __member(4),
             __member(4),
             __array(8, 3),
-            __array(1, 1024),
+            __array(1, VISUAL_SHAPE_MAX_PATH_LEN),
             __array(8, 7),
             __array(8, 4),
             __member(4),
@@ -109,10 +111,10 @@ public class B3VisualShapeData extends Struct implements NativeResource {
     /** Returns the value at the specified index of the {@code m_dimensions} field. */
     public double m_dimensions(int index) { return nm_dimensions(address(), index); }
     /** Returns a {@link ByteBuffer} view of the {@code m_meshAssetFileName} field. */
-    @NativeType("char[1024]")
+    @NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]")
     public ByteBuffer m_meshAssetFileName() { return nm_meshAssetFileName(address()); }
     /** Decodes the null-terminated string stored in the {@code m_meshAssetFileName} field. */
-    @NativeType("char[1024]")
+    @NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]")
     public String m_meshAssetFileNameString() { return nm_meshAssetFileNameString(address()); }
     /** Returns a {@link DoubleBuffer} view of the {@code m_localVisualFrame} field. */
     @NativeType("double[7]")
@@ -142,7 +144,7 @@ public class B3VisualShapeData extends Struct implements NativeResource {
     /** Sets the specified value at the specified index of the {@code m_dimensions} field. */
     public B3VisualShapeData m_dimensions(int index, double value) { nm_dimensions(address(), index, value); return this; }
     /** Copies the specified encoded string to the {@code m_meshAssetFileName} field. */
-    public B3VisualShapeData m_meshAssetFileName(@NativeType("char[1024]") ByteBuffer value) { nm_meshAssetFileName(address(), value); return this; }
+    public B3VisualShapeData m_meshAssetFileName(@NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]") ByteBuffer value) { nm_meshAssetFileName(address(), value); return this; }
     /** Copies the specified {@link DoubleBuffer} to the {@code m_localVisualFrame} field. */
     public B3VisualShapeData m_localVisualFrame(@NativeType("double[7]") DoubleBuffer value) { nm_localVisualFrame(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code m_localVisualFrame} field. */
@@ -353,7 +355,7 @@ public class B3VisualShapeData extends Struct implements NativeResource {
         return UNSAFE.getDouble(null, struct + B3VisualShapeData.M_DIMENSIONS + check(index, 3) * 8);
     }
     /** Unsafe version of {@link #m_meshAssetFileName}. */
-    public static ByteBuffer nm_meshAssetFileName(long struct) { return memByteBuffer(struct + B3VisualShapeData.M_MESHASSETFILENAME, 1024); }
+    public static ByteBuffer nm_meshAssetFileName(long struct) { return memByteBuffer(struct + B3VisualShapeData.M_MESHASSETFILENAME, VISUAL_SHAPE_MAX_PATH_LEN); }
     /** Unsafe version of {@link #m_meshAssetFileNameString}. */
     public static String nm_meshAssetFileNameString(long struct) { return memASCII(struct + B3VisualShapeData.M_MESHASSETFILENAME); }
     /** Unsafe version of {@link #m_localVisualFrame}. */
@@ -394,7 +396,7 @@ public class B3VisualShapeData extends Struct implements NativeResource {
     public static void nm_meshAssetFileName(long struct, ByteBuffer value) {
         if (CHECKS) {
             checkNT1(value);
-            checkGT(value, 1024);
+            checkGT(value, VISUAL_SHAPE_MAX_PATH_LEN);
         }
         memCopy(memAddress(value), struct + B3VisualShapeData.M_MESHASSETFILENAME, value.remaining());
     }
@@ -473,10 +475,10 @@ public class B3VisualShapeData extends Struct implements NativeResource {
         /** Returns the value at the specified index of the {@code m_dimensions} field. */
         public double m_dimensions(int index) { return B3VisualShapeData.nm_dimensions(address(), index); }
         /** Returns a {@link ByteBuffer} view of the {@code m_meshAssetFileName} field. */
-        @NativeType("char[1024]")
+        @NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]")
         public ByteBuffer m_meshAssetFileName() { return B3VisualShapeData.nm_meshAssetFileName(address()); }
         /** Decodes the null-terminated string stored in the {@code m_meshAssetFileName} field. */
-        @NativeType("char[1024]")
+        @NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]")
         public String m_meshAssetFileNameString() { return B3VisualShapeData.nm_meshAssetFileNameString(address()); }
         /** Returns a {@link DoubleBuffer} view of the {@code m_localVisualFrame} field. */
         @NativeType("double[7]")
@@ -506,7 +508,7 @@ public class B3VisualShapeData extends Struct implements NativeResource {
         /** Sets the specified value at the specified index of the {@code m_dimensions} field. */
         public B3VisualShapeData.Buffer m_dimensions(int index, double value) { B3VisualShapeData.nm_dimensions(address(), index, value); return this; }
         /** Copies the specified encoded string to the {@code m_meshAssetFileName} field. */
-        public B3VisualShapeData.Buffer m_meshAssetFileName(@NativeType("char[1024]") ByteBuffer value) { B3VisualShapeData.nm_meshAssetFileName(address(), value); return this; }
+        public B3VisualShapeData.Buffer m_meshAssetFileName(@NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]") ByteBuffer value) { B3VisualShapeData.nm_meshAssetFileName(address(), value); return this; }
         /** Copies the specified {@link DoubleBuffer} to the {@code m_localVisualFrame} field. */
         public B3VisualShapeData.Buffer m_localVisualFrame(@NativeType("double[7]") DoubleBuffer value) { B3VisualShapeData.nm_localVisualFrame(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code m_localVisualFrame} field. */

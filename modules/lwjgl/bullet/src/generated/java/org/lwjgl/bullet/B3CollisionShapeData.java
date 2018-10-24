@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.bullet.PhysicsClient.*;
+
 /**
  * <h3>Layout</h3>
  * 
@@ -26,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int m_collisionGeometryType;
  *     double m_dimensions[3];
  *     double m_localCollisionFrame[7];
- *     char m_meshAssetFileName[1024];
+ *     char m_meshAssetFileName[VISUAL_SHAPE_MAX_PATH_LEN];
  * }</code></pre>
  */
 @NativeType("struct b3CollisionShapeData")
@@ -54,7 +56,7 @@ public class B3CollisionShapeData extends Struct implements NativeResource {
             __member(4),
             __array(8, 3),
             __array(8, 7),
-            __array(1, 1024)
+            __array(1, VISUAL_SHAPE_MAX_PATH_LEN)
         );
 
         SIZEOF = layout.getSize();
@@ -98,10 +100,10 @@ public class B3CollisionShapeData extends Struct implements NativeResource {
     /** Returns the value at the specified index of the {@code m_localCollisionFrame} field. */
     public double m_localCollisionFrame(int index) { return nm_localCollisionFrame(address(), index); }
     /** Returns a {@link ByteBuffer} view of the {@code m_meshAssetFileName} field. */
-    @NativeType("char[1024]")
+    @NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]")
     public ByteBuffer m_meshAssetFileName() { return nm_meshAssetFileName(address()); }
     /** Decodes the null-terminated string stored in the {@code m_meshAssetFileName} field. */
-    @NativeType("char[1024]")
+    @NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]")
     public String m_meshAssetFileNameString() { return nm_meshAssetFileNameString(address()); }
 
     /** Sets the specified value to the {@code m_objectUniqueId} field. */
@@ -119,7 +121,7 @@ public class B3CollisionShapeData extends Struct implements NativeResource {
     /** Sets the specified value at the specified index of the {@code m_localCollisionFrame} field. */
     public B3CollisionShapeData m_localCollisionFrame(int index, double value) { nm_localCollisionFrame(address(), index, value); return this; }
     /** Copies the specified encoded string to the {@code m_meshAssetFileName} field. */
-    public B3CollisionShapeData m_meshAssetFileName(@NativeType("char[1024]") ByteBuffer value) { nm_meshAssetFileName(address(), value); return this; }
+    public B3CollisionShapeData m_meshAssetFileName(@NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]") ByteBuffer value) { nm_meshAssetFileName(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public B3CollisionShapeData set(
@@ -314,7 +316,7 @@ public class B3CollisionShapeData extends Struct implements NativeResource {
         return UNSAFE.getDouble(null, struct + B3CollisionShapeData.M_LOCALCOLLISIONFRAME + check(index, 7) * 8);
     }
     /** Unsafe version of {@link #m_meshAssetFileName}. */
-    public static ByteBuffer nm_meshAssetFileName(long struct) { return memByteBuffer(struct + B3CollisionShapeData.M_MESHASSETFILENAME, 1024); }
+    public static ByteBuffer nm_meshAssetFileName(long struct) { return memByteBuffer(struct + B3CollisionShapeData.M_MESHASSETFILENAME, VISUAL_SHAPE_MAX_PATH_LEN); }
     /** Unsafe version of {@link #m_meshAssetFileNameString}. */
     public static String nm_meshAssetFileNameString(long struct) { return memASCII(struct + B3CollisionShapeData.M_MESHASSETFILENAME); }
 
@@ -346,7 +348,7 @@ public class B3CollisionShapeData extends Struct implements NativeResource {
     public static void nm_meshAssetFileName(long struct, ByteBuffer value) {
         if (CHECKS) {
             checkNT1(value);
-            checkGT(value, 1024);
+            checkGT(value, VISUAL_SHAPE_MAX_PATH_LEN);
         }
         memCopy(memAddress(value), struct + B3CollisionShapeData.M_MESHASSETFILENAME, value.remaining());
     }
@@ -406,10 +408,10 @@ public class B3CollisionShapeData extends Struct implements NativeResource {
         /** Returns the value at the specified index of the {@code m_localCollisionFrame} field. */
         public double m_localCollisionFrame(int index) { return B3CollisionShapeData.nm_localCollisionFrame(address(), index); }
         /** Returns a {@link ByteBuffer} view of the {@code m_meshAssetFileName} field. */
-        @NativeType("char[1024]")
+        @NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]")
         public ByteBuffer m_meshAssetFileName() { return B3CollisionShapeData.nm_meshAssetFileName(address()); }
         /** Decodes the null-terminated string stored in the {@code m_meshAssetFileName} field. */
-        @NativeType("char[1024]")
+        @NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]")
         public String m_meshAssetFileNameString() { return B3CollisionShapeData.nm_meshAssetFileNameString(address()); }
 
         /** Sets the specified value to the {@code m_objectUniqueId} field. */
@@ -427,7 +429,7 @@ public class B3CollisionShapeData extends Struct implements NativeResource {
         /** Sets the specified value at the specified index of the {@code m_localCollisionFrame} field. */
         public B3CollisionShapeData.Buffer m_localCollisionFrame(int index, double value) { B3CollisionShapeData.nm_localCollisionFrame(address(), index, value); return this; }
         /** Copies the specified encoded string to the {@code m_meshAssetFileName} field. */
-        public B3CollisionShapeData.Buffer m_meshAssetFileName(@NativeType("char[1024]") ByteBuffer value) { B3CollisionShapeData.nm_meshAssetFileName(address(), value); return this; }
+        public B3CollisionShapeData.Buffer m_meshAssetFileName(@NativeType("char[VISUAL_SHAPE_MAX_PATH_LEN]") ByteBuffer value) { B3CollisionShapeData.nm_meshAssetFileName(address(), value); return this; }
 
     }
 

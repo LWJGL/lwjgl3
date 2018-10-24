@@ -158,13 +158,14 @@ val b3AABBOverlapData = struct(Module.BULLET, "B3AABBOverlapData", nativeName = 
 	b3OverlappingObject.p.buffer("m_overlappingObjects", "")
 }
 
-private const val VISUAL_SHAPE_MAX_PATH_LEN = 1024
 val b3VisualShapeData = struct(Module.BULLET, "B3VisualShapeData", nativeName = "struct b3VisualShapeData") {
+    javaImport("static org.lwjgl.bullet.PhysicsClient.*")
+
     int.member("m_objectUniqueId", "")
 	int.member("m_linkIndex", "")
 	int.member("m_visualGeometryType", "")  //box primitive, sphere primitive, triangle mesh
 	double.array("m_dimensions", "", size = 3)    //meaning depends on.member("m_visualGeometryType", "")
-	charASCII.array("m_meshAssetFileName", "", size = VISUAL_SHAPE_MAX_PATH_LEN)
+	charASCII.array("m_meshAssetFileName", "", size = "VISUAL_SHAPE_MAX_PATH_LEN")
 	double.array("m_localVisualFrame", "", size = 7)  //pos[3], orn[4]
 								   //todo: add more data if necessary (material color etc, although material can be in asset file .obj file)
 	double.array("m_rgbaColor", "", size = 4)
@@ -178,12 +179,14 @@ val b3VisualShapeInformation = struct(Module.BULLET, "B3VisualShapeInformation",
 }
 
 val b3CollisionShapeData = struct(Module.BULLET, "B3CollisionShapeData", nativeName = "struct b3CollisionShapeData") {
+    javaImport("static org.lwjgl.bullet.PhysicsClient.*")
+
     int.member("m_objectUniqueId", "")
 	int.member("m_linkIndex", "")
 	int.member("m_collisionGeometryType", "")      //GEOM_BOX, GEOM_SPHERE etc
 	double.array("m_dimensions", "", size = 3)           //meaning depends on m_visualGeometryType GEOM_BOX: extents, GEOM_SPHERE: radius, GEOM_CAPSULE+GEOM_CYLINDER:length, radius, GEOM_MESH: mesh scale
 	double.array("m_localCollisionFrame", "", size = 7)  //pos[3], orn[4]
-	charASCII.array("m_meshAssetFileName", "", size = VISUAL_SHAPE_MAX_PATH_LEN)
+	charASCII.array("m_meshAssetFileName", "", size = "VISUAL_SHAPE_MAX_PATH_LEN")
 }
 val b3CollisionShapeInformation = struct(Module.BULLET, "B3CollisionShapeInformation", nativeName = "struct b3CollisionShapeInformation") {
 	AutoSize("m_collisionShapeData")..int.member("m_numCollisionShapes", "")
@@ -262,9 +265,9 @@ val b3RaycastInformation = struct(Module.BULLET, "B3RaycastInformation", nativeN
 	b3RayHitInfo.p.buffer("m_rayHits", "")
 }
 
-private const val MAX_VR_ANALOG_AXIS = 5
-private const val MAX_VR_BUTTONS = 64
 val b3VRControllerEvent = struct(Module.BULLET, "B3VRControllerEvent", nativeName = "struct b3VRControllerEvent") {
+	javaImport("static org.lwjgl.bullet.PhysicsClient.*")
+
 	int.member("m_controllerId", "")  //valid for VR_CONTROLLER_MOVE_EVENT and VR_CONTROLLER_BUTTON_EVENT
 	int.member("m_deviceType", "")
 	int.member("m_numMoveEvents", "")
@@ -274,8 +277,8 @@ val b3VRControllerEvent = struct(Module.BULLET, "B3VRControllerEvent", nativeNam
 	float.array("m_orn", "", size = 4)  //valid for VR_CONTROLLER_MOVE_EVENT and VR_CONTROLLER_BUTTON_EVENT
 
 	float.member("m_analogAxis", "")                             //valid if VR_CONTROLLER_MOVE_EVENT
-	float.array("m_auxAnalogAxis", "", size = MAX_VR_ANALOG_AXIS * 2)  //store x,y per axis, only valid if VR_CONTROLLER_MOVE_EVENT
-	int.array("m_buttons", "", size = MAX_VR_BUTTONS)                  //valid if VR_CONTROLLER_BUTTON_EVENT, see b3VRButtonInfo
+	float.array("m_auxAnalogAxis", "", size = "MAX_VR_ANALOG_AXIS * 2")  //store x,y per axis, only valid if VR_CONTROLLER_MOVE_EVENT
+	int.array("m_buttons", "", size = "MAX_VR_BUTTONS")                  //valid if VR_CONTROLLER_BUTTON_EVENT, see b3VRButtonInfo
 }
 
 val b3VREventsData = struct(Module.BULLET, "B3VREventsData", nativeName = "struct b3VREventsData") {

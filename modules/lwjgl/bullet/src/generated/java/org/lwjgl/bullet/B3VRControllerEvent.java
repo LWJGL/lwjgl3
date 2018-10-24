@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.bullet.PhysicsClient.*;
+
 /**
  * <h3>Layout</h3>
  * 
@@ -28,8 +30,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float m_pos[4];
  *     float m_orn[4];
  *     float m_analogAxis;
- *     float m_auxAnalogAxis[10];
- *     int m_buttons[64];
+ *     float m_auxAnalogAxis[MAX_VR_ANALOG_AXIS * 2];
+ *     int m_buttons[MAX_VR_BUTTONS];
  * }</code></pre>
  */
 @NativeType("struct b3VRControllerEvent")
@@ -62,8 +64,8 @@ public class B3VRControllerEvent extends Struct implements NativeResource {
             __array(4, 4),
             __array(4, 4),
             __member(4),
-            __array(4, 10),
-            __array(4, 64)
+            __array(4, MAX_VR_ANALOG_AXIS * 2),
+            __array(4, MAX_VR_BUTTONS)
         );
 
         SIZEOF = layout.getSize();
@@ -114,12 +116,12 @@ public class B3VRControllerEvent extends Struct implements NativeResource {
     /** Returns the value of the {@code m_analogAxis} field. */
     public float m_analogAxis() { return nm_analogAxis(address()); }
     /** Returns a {@link FloatBuffer} view of the {@code m_auxAnalogAxis} field. */
-    @NativeType("float[10]")
+    @NativeType("float[MAX_VR_ANALOG_AXIS * 2]")
     public FloatBuffer m_auxAnalogAxis() { return nm_auxAnalogAxis(address()); }
     /** Returns the value at the specified index of the {@code m_auxAnalogAxis} field. */
     public float m_auxAnalogAxis(int index) { return nm_auxAnalogAxis(address(), index); }
     /** Returns a {@link IntBuffer} view of the {@code m_buttons} field. */
-    @NativeType("int[64]")
+    @NativeType("int[MAX_VR_BUTTONS]")
     public IntBuffer m_buttons() { return nm_buttons(address()); }
     /** Returns the value at the specified index of the {@code m_buttons} field. */
     public int m_buttons(int index) { return nm_buttons(address(), index); }
@@ -143,11 +145,11 @@ public class B3VRControllerEvent extends Struct implements NativeResource {
     /** Sets the specified value to the {@code m_analogAxis} field. */
     public B3VRControllerEvent m_analogAxis(float value) { nm_analogAxis(address(), value); return this; }
     /** Copies the specified {@link FloatBuffer} to the {@code m_auxAnalogAxis} field. */
-    public B3VRControllerEvent m_auxAnalogAxis(@NativeType("float[10]") FloatBuffer value) { nm_auxAnalogAxis(address(), value); return this; }
+    public B3VRControllerEvent m_auxAnalogAxis(@NativeType("float[MAX_VR_ANALOG_AXIS * 2]") FloatBuffer value) { nm_auxAnalogAxis(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code m_auxAnalogAxis} field. */
     public B3VRControllerEvent m_auxAnalogAxis(int index, float value) { nm_auxAnalogAxis(address(), index, value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code m_buttons} field. */
-    public B3VRControllerEvent m_buttons(@NativeType("int[64]") IntBuffer value) { nm_buttons(address(), value); return this; }
+    public B3VRControllerEvent m_buttons(@NativeType("int[MAX_VR_BUTTONS]") IntBuffer value) { nm_buttons(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code m_buttons} field. */
     public B3VRControllerEvent m_buttons(int index, int value) { nm_buttons(address(), index, value); return this; }
 
@@ -354,16 +356,16 @@ public class B3VRControllerEvent extends Struct implements NativeResource {
     /** Unsafe version of {@link #m_analogAxis}. */
     public static float nm_analogAxis(long struct) { return UNSAFE.getFloat(null, struct + B3VRControllerEvent.M_ANALOGAXIS); }
     /** Unsafe version of {@link #m_auxAnalogAxis}. */
-    public static FloatBuffer nm_auxAnalogAxis(long struct) { return memFloatBuffer(struct + B3VRControllerEvent.M_AUXANALOGAXIS, 10); }
+    public static FloatBuffer nm_auxAnalogAxis(long struct) { return memFloatBuffer(struct + B3VRControllerEvent.M_AUXANALOGAXIS, MAX_VR_ANALOG_AXIS * 2); }
     /** Unsafe version of {@link #m_auxAnalogAxis(int) m_auxAnalogAxis}. */
     public static float nm_auxAnalogAxis(long struct, int index) {
-        return UNSAFE.getFloat(null, struct + B3VRControllerEvent.M_AUXANALOGAXIS + check(index, 10) * 4);
+        return UNSAFE.getFloat(null, struct + B3VRControllerEvent.M_AUXANALOGAXIS + check(index, MAX_VR_ANALOG_AXIS * 2) * 4);
     }
     /** Unsafe version of {@link #m_buttons}. */
-    public static IntBuffer nm_buttons(long struct) { return memIntBuffer(struct + B3VRControllerEvent.M_BUTTONS, 64); }
+    public static IntBuffer nm_buttons(long struct) { return memIntBuffer(struct + B3VRControllerEvent.M_BUTTONS, MAX_VR_BUTTONS); }
     /** Unsafe version of {@link #m_buttons(int) m_buttons}. */
     public static int nm_buttons(long struct, int index) {
-        return UNSAFE.getInt(null, struct + B3VRControllerEvent.M_BUTTONS + check(index, 64) * 4);
+        return UNSAFE.getInt(null, struct + B3VRControllerEvent.M_BUTTONS + check(index, MAX_VR_BUTTONS) * 4);
     }
 
     /** Unsafe version of {@link #m_controllerId(int) m_controllerId}. */
@@ -396,21 +398,21 @@ public class B3VRControllerEvent extends Struct implements NativeResource {
     public static void nm_analogAxis(long struct, float value) { UNSAFE.putFloat(null, struct + B3VRControllerEvent.M_ANALOGAXIS, value); }
     /** Unsafe version of {@link #m_auxAnalogAxis(FloatBuffer) m_auxAnalogAxis}. */
     public static void nm_auxAnalogAxis(long struct, FloatBuffer value) {
-        if (CHECKS) { checkGT(value, 10); }
+        if (CHECKS) { checkGT(value, MAX_VR_ANALOG_AXIS * 2); }
         memCopy(memAddress(value), struct + B3VRControllerEvent.M_AUXANALOGAXIS, value.remaining() * 4);
     }
     /** Unsafe version of {@link #m_auxAnalogAxis(int, float) m_auxAnalogAxis}. */
     public static void nm_auxAnalogAxis(long struct, int index, float value) {
-        UNSAFE.putFloat(null, struct + B3VRControllerEvent.M_AUXANALOGAXIS + check(index, 10) * 4, value);
+        UNSAFE.putFloat(null, struct + B3VRControllerEvent.M_AUXANALOGAXIS + check(index, MAX_VR_ANALOG_AXIS * 2) * 4, value);
     }
     /** Unsafe version of {@link #m_buttons(IntBuffer) m_buttons}. */
     public static void nm_buttons(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 64); }
+        if (CHECKS) { checkGT(value, MAX_VR_BUTTONS); }
         memCopy(memAddress(value), struct + B3VRControllerEvent.M_BUTTONS, value.remaining() * 4);
     }
     /** Unsafe version of {@link #m_buttons(int, int) m_buttons}. */
     public static void nm_buttons(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + B3VRControllerEvent.M_BUTTONS + check(index, 64) * 4, value);
+        UNSAFE.putInt(null, struct + B3VRControllerEvent.M_BUTTONS + check(index, MAX_VR_BUTTONS) * 4, value);
     }
 
     // -----------------------------------
@@ -472,12 +474,12 @@ public class B3VRControllerEvent extends Struct implements NativeResource {
         /** Returns the value of the {@code m_analogAxis} field. */
         public float m_analogAxis() { return B3VRControllerEvent.nm_analogAxis(address()); }
         /** Returns a {@link FloatBuffer} view of the {@code m_auxAnalogAxis} field. */
-        @NativeType("float[10]")
+        @NativeType("float[MAX_VR_ANALOG_AXIS * 2]")
         public FloatBuffer m_auxAnalogAxis() { return B3VRControllerEvent.nm_auxAnalogAxis(address()); }
         /** Returns the value at the specified index of the {@code m_auxAnalogAxis} field. */
         public float m_auxAnalogAxis(int index) { return B3VRControllerEvent.nm_auxAnalogAxis(address(), index); }
         /** Returns a {@link IntBuffer} view of the {@code m_buttons} field. */
-        @NativeType("int[64]")
+        @NativeType("int[MAX_VR_BUTTONS]")
         public IntBuffer m_buttons() { return B3VRControllerEvent.nm_buttons(address()); }
         /** Returns the value at the specified index of the {@code m_buttons} field. */
         public int m_buttons(int index) { return B3VRControllerEvent.nm_buttons(address(), index); }
@@ -501,11 +503,11 @@ public class B3VRControllerEvent extends Struct implements NativeResource {
         /** Sets the specified value to the {@code m_analogAxis} field. */
         public B3VRControllerEvent.Buffer m_analogAxis(float value) { B3VRControllerEvent.nm_analogAxis(address(), value); return this; }
         /** Copies the specified {@link FloatBuffer} to the {@code m_auxAnalogAxis} field. */
-        public B3VRControllerEvent.Buffer m_auxAnalogAxis(@NativeType("float[10]") FloatBuffer value) { B3VRControllerEvent.nm_auxAnalogAxis(address(), value); return this; }
+        public B3VRControllerEvent.Buffer m_auxAnalogAxis(@NativeType("float[MAX_VR_ANALOG_AXIS * 2]") FloatBuffer value) { B3VRControllerEvent.nm_auxAnalogAxis(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code m_auxAnalogAxis} field. */
         public B3VRControllerEvent.Buffer m_auxAnalogAxis(int index, float value) { B3VRControllerEvent.nm_auxAnalogAxis(address(), index, value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code m_buttons} field. */
-        public B3VRControllerEvent.Buffer m_buttons(@NativeType("int[64]") IntBuffer value) { B3VRControllerEvent.nm_buttons(address(), value); return this; }
+        public B3VRControllerEvent.Buffer m_buttons(@NativeType("int[MAX_VR_BUTTONS]") IntBuffer value) { B3VRControllerEvent.nm_buttons(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code m_buttons} field. */
         public B3VRControllerEvent.Buffer m_buttons(int index, int value) { B3VRControllerEvent.nm_buttons(address(), index, value); return this; }
 
