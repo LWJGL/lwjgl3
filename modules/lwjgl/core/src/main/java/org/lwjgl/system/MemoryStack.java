@@ -344,14 +344,14 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         if (DEBUG) {
             checkAlignment(alignment);
         }
-        return MemoryUtil.wrap(BUFFER_BYTE, nmalloc(alignment, size), size);
+        return MemoryUtil.wrap(BUFFER_BYTE, nmalloc(alignment, size), size).order(NATIVE_ORDER);
     }
     /** Calloc version of {@link #malloc(int, int)}. */
     public ByteBuffer calloc(int alignment, int size) {
         if (DEBUG) {
             checkAlignment(alignment);
         }
-        return MemoryUtil.wrap(BUFFER_BYTE, ncalloc(alignment, size, 1), size);
+        return MemoryUtil.wrap(BUFFER_BYTE, ncalloc(alignment, size, 1), size).order(NATIVE_ORDER);
     }
 
     /**
@@ -367,27 +367,27 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
 
     /** Single value version of {@link #malloc}. */
     public ByteBuffer bytes(byte x) {
-        return malloc(1).put(0, x);
+        return malloc(1, 1).put(0, x);
     }
 
     /** Two value version of {@link #malloc}. */
     public ByteBuffer bytes(byte x, byte y) {
-        return malloc(2).put(0, x).put(1, y);
+        return malloc(1, 2).put(0, x).put(1, y);
     }
 
     /** Three value version of {@link #malloc}. */
     public ByteBuffer bytes(byte x, byte y, byte z) {
-        return malloc(3).put(0, x).put(1, y).put(2, z);
+        return malloc(1, 3).put(0, x).put(1, y).put(2, z);
     }
 
     /** Four value version of {@link #malloc}. */
     public ByteBuffer bytes(byte x, byte y, byte z, byte w) {
-        return malloc(4).put(0, x).put(1, y).put(2, z).put(3, w);
+        return malloc(1, 4).put(0, x).put(1, y).put(2, z).put(3, w);
     }
 
     /** Vararg version of {@link #malloc}. */
     public ByteBuffer bytes(byte... values) {
-        ByteBuffer buffer = malloc(values.length).put(values);
+        ByteBuffer buffer = malloc(1, values.length).put(values);
         buffer.flip();
         return buffer;
     }
