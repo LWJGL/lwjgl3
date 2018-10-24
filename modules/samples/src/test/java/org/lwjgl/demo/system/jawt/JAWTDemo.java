@@ -4,11 +4,15 @@
  */
 package org.lwjgl.demo.system.jawt;
 
+import org.lwjgl.glfw.*;
 import org.lwjgl.system.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 /** AWT integration demo using jawt. */
 public final class JAWTDemo {
@@ -19,6 +23,11 @@ public final class JAWTDemo {
     public static void main(String[] args) {
         if (Platform.get() != Platform.WINDOWS) {
             throw new UnsupportedOperationException("This demo can only run on Windows.");
+        }
+
+        GLFWErrorCallback.createPrint().set();
+        if (!glfwInit()) {
+            throw new IllegalStateException("Unable to initialize glfw");
         }
 
         LWJGLCanvas canvas = new LWJGLCanvas();
@@ -37,6 +46,10 @@ public final class JAWTDemo {
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(e -> {
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 frame.dispose();
+
+                glfwTerminate();
+                Objects.requireNonNull(glfwSetErrorCallback(null)).free();
+
                 return true;
             }
 

@@ -9,7 +9,6 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
-import org.lwjgl.system.windows.*;
 
 import java.io.*;
 import java.nio.*;
@@ -24,7 +23,6 @@ import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.windows.User32.*;
 
 /** GLFW events demo. */
 public final class Events {
@@ -76,14 +74,6 @@ public final class Events {
     }
 
     private static void demo() {
-        if (Platform.get() == Platform.WINDOWS) {
-            if (User32.Functions.SetThreadDpiAwarenessContext != NULL) {
-                SetThreadDpiAwarenessContext(IsValidDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)
-                    ? DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2
-                    : DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE);
-            }
-        }
-
         int WIDTH  = 640;
         int HEIGHT = 480;
 
@@ -115,11 +105,6 @@ public final class Events {
                 float xscale = px.get(0);
                 float yscale = py.get(0);
 
-                if (primaryMonitor == monitor && Platform.get() != Platform.MACOSX) {
-                    WIDTH = round(WIDTH * xscale);
-                    HEIGHT = round(HEIGHT * yscale);
-                }
-
                 double MM_TO_INCH = 0.0393701;
 
                 GLFWVidMode mode = Objects.requireNonNull(glfwGetVideoMode(monitor));
@@ -144,6 +129,10 @@ public final class Events {
 
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
+        if (Platform.get() == Platform.MACOSX) {
+            glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+        }
 
         long window = glfwCreateWindow(WIDTH, HEIGHT, "GLFW Event Demo", NULL, NULL);
         if (window == NULL) {
@@ -247,7 +236,7 @@ public final class Events {
         glfwSetWindowFocusCallback(window, (windowHnd, focused) -> printEvent(focused ? "gained focus" : "lost focus", windowHnd));
         glfwSetWindowIconifyCallback(window, (windowHnd, iconified) -> printEvent(iconified ? "iconified" : "restored", windowHnd));
         glfwSetWindowMaximizeCallback(window, (windowHnd, maximized) -> printEvent(maximized ? "maximized" : "restored", windowHnd));
-        glfwSetWindowContentScaleCallback(window, (windowHnd, xscale, yscale) -> printEvent("content scale changed to %d x %d", windowHnd, xscale, yscale));
+        glfwSetWindowContentScaleCallback(window, (windowHnd, xscale, yscale) -> printEvent("content scale changed to %f x %f", windowHnd, xscale, yscale));
 
         glfwSetFramebufferSizeCallback(window, (windowHnd, width, height) -> printEvent("framebuffer resized to %d x %d", windowHnd, width, height));
 

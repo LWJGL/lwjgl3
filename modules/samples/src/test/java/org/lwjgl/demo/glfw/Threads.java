@@ -6,13 +6,16 @@ package org.lwjgl.demo.glfw;
 
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
 
+import java.nio.*;
 import java.util.*;
 import java.util.concurrent.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11C.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -40,6 +43,19 @@ public final class Threads {
         }
 
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
+        if (Platform.get() == Platform.MACOSX) {
+            glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+        }
+
+        int scaleX;
+        try (MemoryStack s = stackPush()) {
+            FloatBuffer px = s.mallocFloat(1);
+
+            glfwGetMonitorContentScale(glfwGetPrimaryMonitor(), px, null);
+
+            scaleX = (int)px.get(0);
+        }
 
         CountDownLatch quit = new CountDownLatch(1);
 
@@ -55,7 +71,7 @@ public final class Threads {
                     glfwSetWindowShouldClose(windowHnd, true);
                 }
             });
-            glfwSetWindowPos(window, 200 + 250 * i, 200);
+            glfwSetWindowPos(window, 200 + i * (200 * scaleX + 50), 200);
             glfwShowWindow(window);
 
             threads[i] = new GLFWThread(window, i, quit);

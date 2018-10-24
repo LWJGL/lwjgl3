@@ -20,7 +20,7 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(Module.GLFW, nativeSubPath =
         """,
 
         GLFWmonitor.p.IN("monitor", "the GLFW monitor"),
-        returnDoc = "The UTF-8 encoded adapter device name (for example `\\\\.\\DISPLAY1`) of the specified monitor, or #NULL if an error occurred.",
+        returnDoc = """the UTF-8 encoded adapter device name (for example `\\.\DISPLAY1`) of the specified monitor, or #NULL if an error occurred""",
         since = "version 3.1"
     )
 
@@ -33,7 +33,7 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(Module.GLFW, nativeSubPath =
         """,
 
         GLFWmonitor.p.IN("monitor", "the GLFW monitor"),
-        returnDoc = "The UTF-8 encoded display device name (for example `\\\\.\\DISPLAY1\\Monitor0`) of the specified monitor, or #NULL if an error occurred.",
+        returnDoc = """the UTF-8 encoded display device name (for example `\\.\DISPLAY1\Monitor0`) of the specified monitor, or #NULL if an error occurred""",
         since = "version 3.1"
     )
 
@@ -46,7 +46,27 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(Module.GLFW, nativeSubPath =
         """,
 
         GLFWwindow.p.IN("window", "the GLFW window"),
-        returnDoc = "The {@code HWND} of the specified window, or #NULL if an error occurred.",
+        returnDoc = "the {@code HWND} of the specified window, or #NULL if an error occurred",
         since = "version 3.0"
+    )
+
+    GLFWwindow.p(
+        "AttachWin32Window",
+        """
+        Wraps an existing {@code HWND} in a new GLFW window object.
+
+        This function creates a GLFW window object and its associated OpenGL or OpenGL ES context for an existing {@code HWND}. The {@code HWND} is not
+        destroyed by GLFW.
+
+        This function may be called from any thread.
+
+        <b>LWJGL</b>: This functionality is experimental and not officially supported by GLFW yet.
+        """,
+
+        HWND.IN("handle", "the {@code HWND} to attach to the window object"),
+        nullable..GLFWwindow.p.IN("share", "the window whose context to share resources with, or #NULL to not share resources"),
+
+        returnDoc = "the handle of the created window, or #NULL if an error occurred",
+        since = "version 3.3"
     )
 }

@@ -595,6 +595,9 @@ public class GLFW {
      * <li>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR} - 
      * {@code WindowHint}: Specifies whether the window content area should be resized based on the monitor content scale of any monitor it is placed on.
      * This includes the initial placement when the window is created. Possible values are {@link #GLFW_TRUE TRUE} and {@link #GLFW_FALSE FALSE}.
+     * 
+     * <p>This hint only has an effect on platforms where screen coordinates and pixels always map 1:1 such as Windows and X11. On platforms like macOS the
+     * resolution of the framebuffer is changed independently of the window size.</p>
      * </li>
      * </ul>
      */
@@ -4305,7 +4308,6 @@ public class GLFW {
      * 
      * <ul>
      * <li>This function must only be called from the main thread.</li>
-     * <li><b>Wayland</b>: Clipboard is currently unimplemented.</li>
      * </ul>
      *
      * @param window deprecated, any valid window or {@code NULL}.
@@ -4329,7 +4331,6 @@ public class GLFW {
      * 
      * <ul>
      * <li>This function must only be called from the main thread.</li>
-     * <li><b>Wayland</b>: Clipboard is currently unimplemented.</li>
      * </ul>
      *
      * @param window deprecated, any valid window or {@code NULL}.
@@ -4368,7 +4369,6 @@ public class GLFW {
      * <li>This function must only be called from the main thread.</li>
      * <li>The returned string is allocated and freed by GLFW.  You should not free it yourself.</li>
      * <li>The returned string is valid only until the next call to {@link #glfwGetClipboardString GetClipboardString} or {@link #glfwSetClipboardString SetClipboardString}.</li>
-     * <li><b>Wayland</b>: Clipboard is currently unimplemented.</li>
      * </ul></div>
      *
      * @param window deprecated, any valid window or {@code NULL}.

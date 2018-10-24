@@ -6,13 +6,16 @@ package org.lwjgl.demo.glfw;
 
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
 
+import java.nio.*;
 import java.util.*;
 import java.util.concurrent.atomic.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11C.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** GLFW demo that showcases rendering to multiple windows from a single thread. */
@@ -39,6 +42,21 @@ public final class MultipleWindows {
     private static void demo() {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
+        if (Platform.get() == Platform.MACOSX) {
+            glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+        }
+
+        int scaleX, scaleY;
+        try (MemoryStack s = stackPush()) {
+            FloatBuffer px = s.mallocFloat(1);
+            FloatBuffer py = s.mallocFloat(1);
+
+            glfwGetMonitorContentScale(glfwGetPrimaryMonitor(), px, py);
+
+            scaleX = (int)px.get(0);
+            scaleY = (int)py.get(0);
+        }
 
         Window[] windows = new Window[4];
 
@@ -74,7 +92,7 @@ public final class MultipleWindows {
             glClearColor((i & 1), (i >> 1), (i == 1) ? 0.f : 1.f, 0.f);
 
             glfwShowWindow(handle);
-            glfwSetWindowPos(handle, 100 + (i & 1) * 400, 100 + (i >> 1) * 400);
+            glfwSetWindowPos(handle, 100 + (i & 1) * (300 * scaleX + 100), 100 + (i >> 1) * (200 * scaleY + 100));
 
             windows[i] = window;
         }

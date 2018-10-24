@@ -8,20 +8,20 @@ import org.lwjgl.demo.opengl.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.jawt.JAWT;
 import org.lwjgl.system.jawt.*;
-import org.lwjgl.system.windows.*;
 
 import java.awt.*;
+import java.awt.event.*;
 
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFWNativeWin32.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.WGL.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jawt.JAWTFunctions.*;
-import static org.lwjgl.system.windows.GDI32.*;
 
 /**
  * A Canvas component that uses OpenGL for rendering.
  *
- * <p>This implementation supports Windows only and is no way complete or robust enough for production use.</p>
+ * <p>This implementation supports Windows only.</p>
  */
 @SuppressWarnings("serial")
 public class LWJGLCanvas extends Canvas {
@@ -30,7 +30,8 @@ public class LWJGLCanvas extends Canvas {
 
     private final AbstractGears gears;
 
-    private long hglrc;
+    private long    glfwWindow;
+    private boolean resized;
 
     private GLCapabilities caps;
 
@@ -42,6 +43,12 @@ public class LWJGLCanvas extends Canvas {
         }
 
         gears = new AbstractGears();
+
+        this.addComponentListener(new ComponentAdapter() {
+            @Override public void componentResized(ComponentEvent e) {
+                resized = true;
+            }
+        });
     }
 
     @Override
@@ -74,32 +81,44 @@ public class LWJGLCanvas extends Canvas {
                 try {
                     // Get the platform-specific drawing info
                     JAWTWin32DrawingSurfaceInfo dsi_win = JAWTWin32DrawingSurfaceInfo.create(dsi.platformInfo());
-                    long                        hdc     = dsi_win.hdc();
+
+                    long hdc = dsi_win.hdc();
                     if (hdc != NULL) {
-                        if (hglrc == NULL) {
-                            createContext(dsi_win);
-                            gears.initGLState();
-                        } else {
-                            if (!wglMakeCurrent(hdc, hglrc)) {
-                                throw new IllegalStateException("wglMakeCurrent() failed");
+                        if (glfwWindow == NULL) {
+                            // glfwWindowHint can be used here to configure the GL context
+                            glfwWindow = glfwAttachWin32Window(dsi_win.hwnd(), NULL);
+                            if (glfwWindow == NULL) {
+                                throw new IllegalStateException("Failed to attach win32 window.");
                             }
 
+                            glfwMakeContextCurrent(glfwWindow);
+                            caps = GL.createCapabilities();
+
+                            gears.initGLState();
+                            resized = true;
+                        } else {
+                            glfwMakeContextCurrent(glfwWindow);
                             GL.setCapabilities(caps);
                         }
 
-                        glViewport(0, 0, getWidth(), getHeight());
+                        if (resized) {
+                            glfwSetWindowSize(glfwWindow, getWidth(), getHeight());
+                            glViewport(0, 0, getWidth(), getHeight());
 
-                        float f = getHeight() / (float)getWidth();
+                            float f = getHeight() / (float)getWidth();
 
-                        glMatrixMode(GL_PROJECTION);
-                        glLoadIdentity();
-                        glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
-                        glMatrixMode(GL_MODELVIEW);
+                            glMatrixMode(GL_PROJECTION);
+                            glLoadIdentity();
+                            glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
+                            glMatrixMode(GL_MODELVIEW);
+
+                            resized = false;
+                        }
 
                         gears.renderLoop();
-                        SwapBuffers(hdc);
+                        glfwSwapBuffers(glfwWindow);
 
-                        wglMakeCurrent(NULL, NULL);
+                        glfwMakeContextCurrent(NULL);
                         GL.setCapabilities(null);
                     }
                 } finally {
@@ -118,56 +137,11 @@ public class LWJGLCanvas extends Canvas {
         repaint();
     }
 
-    // Simplest possible context creation.
-    private void createContext(JAWTWin32DrawingSurfaceInfo dsi_win) {
-        long hdc = dsi_win.hdc();
-
-        try (
-            PIXELFORMATDESCRIPTOR pfd = PIXELFORMATDESCRIPTOR.calloc()
-                .nSize((byte)PIXELFORMATDESCRIPTOR.SIZEOF)
-                .nVersion((short)1)
-                .dwFlags(PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER)
-                .iPixelType(PFD_TYPE_RGBA)
-                .cColorBits((byte)32)
-                .cAlphaBits((byte)8)
-                .cDepthBits((byte)24)
-                .iLayerType(PFD_MAIN_PLANE)
-        ) {
-            int pixelFormat = GetPixelFormat(hdc);
-            if (pixelFormat != 0) {
-                if (DescribePixelFormat(hdc, pixelFormat, pfd) == 0) {
-                    throw new IllegalStateException("DescribePixelFormat() failed: " + WinBase.getLastError());
-                }
-            } else {
-                pixelFormat = ChoosePixelFormat(hdc, pfd);
-                if (pixelFormat < 1) {
-                    throw new IllegalStateException("ChoosePixelFormat() failed: " + WinBase.getLastError());
-                }
-
-                if (!SetPixelFormat(hdc, pixelFormat, null)) {
-                    throw new IllegalStateException("SetPixelFormat() failed: " + WinBase.getLastError());
-                }
-            }
-        }
-
-        hglrc = wglCreateContext(hdc);
-
-        if (hglrc == NULL) {
-            throw new IllegalStateException("wglCreateContext() failed");
-        }
-
-        if (!wglMakeCurrent(hdc, hglrc)) {
-            throw new IllegalStateException("wglMakeCurrent() failed");
-        }
-
-        caps = GL.createCapabilities();
-    }
-
     public void destroy() {
         awt.free();
 
-        if (hglrc != NULL) {
-            wglDeleteContext(hglrc);
+        if (glfwWindow != NULL) {
+            glfwDestroyWindow(glfwWindow);
         }
     }
 

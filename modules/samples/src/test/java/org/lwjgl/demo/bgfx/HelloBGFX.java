@@ -28,8 +28,8 @@ public final class HelloBGFX {
 
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static void main(String[] args) {
-        int width  = 1280;
-        int height = 720;
+        int width  = 1024;
+        int height = 480;
 
         if (!glfwInit()) {
             throw new RuntimeException("Error initializing GLFW");
@@ -37,6 +37,10 @@ public final class HelloBGFX {
 
         // the client (renderer) API is managed by bgfx
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
+        if (Platform.get() == Platform.MACOSX) {
+            glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+        }
 
         long window = glfwCreateWindow(width, height, "25-C99", 0, 0);
         if (window == NULL) {

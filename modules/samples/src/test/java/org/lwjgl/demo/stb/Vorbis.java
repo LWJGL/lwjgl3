@@ -21,7 +21,6 @@ import static java.lang.Math.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFWNativeWin32.*;
 import static org.lwjgl.openal.AL11.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.EXTThreadLocalContext.*;
@@ -58,8 +57,7 @@ public final class Vorbis implements AutoCloseable {
 
     private ProgressUpdater progressUpdater;
 
-    private final long     window;
-    private final Callback windowProc;
+    private final long window;
 
     private int
         clientW = 640,
@@ -109,74 +107,35 @@ public final class Vorbis implements AutoCloseable {
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
-
-        long monitor = glfwGetPrimaryMonitor();
-
+        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
         if (Platform.get() == Platform.MACOSX) {
             glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
-
-            framebufferW = clientW;
-            framebufferH = clientH;
-            scaleX = 1.0f;
-            scaleY = 1.0f;
-        } else {
-            // Emulating GLFW_COCOA_RETINA_FRAMEBUFFER == GLFW_FALSE:
-            //     * Client coordinates are the same, regardless of window dpi.
-            //     * Normally we'd render to an FBO and upscale to the window framebuffer. We simply use a scaled glOrtho in this demo.
-            try (MemoryStack s = stackPush()) {
-                FloatBuffer px = s.mallocFloat(1);
-                FloatBuffer py = s.mallocFloat(1);
-
-                glfwGetMonitorContentScale(monitor, px, py);
-
-                scaleX = px.get(0);
-                scaleY = py.get(0);
-
-                framebufferW = round(clientW * scaleX);
-                framebufferH = round(clientH * scaleY);
-            }
         }
 
-        window = glfwCreateWindow(framebufferW, framebufferH, "stb_vorbis demo", NULL, NULL);
+        window = glfwCreateWindow(clientW, clientH, "stb_vorbis demo", NULL, NULL);
         if (window == NULL) {
             throw new RuntimeException("Failed to create the GLFW window");
         }
 
         // Center window
+        long monitor = glfwGetPrimaryMonitor();
+
+        try (MemoryStack s = stackPush()) {
+            FloatBuffer px = s.mallocFloat(1);
+            FloatBuffer py = s.mallocFloat(1);
+
+            glfwGetMonitorContentScale(monitor, px, py);
+
+            scaleX = px.get(0);
+            scaleY = py.get(0);
+        }
+
         GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(monitor));
         glfwSetWindowPos(
             window,
-            (vidmode.width() - framebufferW) / 2,
-            (vidmode.height() - framebufferH) / 2
+            (vidmode.width() - (int)(clientW * scaleX)) / 2,
+            (vidmode.height() - (int)(clientH * scaleY)) / 2
         );
-
-        // TODO: Remove if GLFW#1115 is merged
-        if (Platform.get() == Platform.WINDOWS) {
-            long hwnd = glfwGetWin32Window(window);
-
-            long glfwProc = GetWindowLongPtr(hwnd, GWL_WNDPROC);
-            windowProc = new WindowProc() {
-                @Override public long invoke(long hwnd, int uMsg, long wParam, long lParam) {
-                    switch (uMsg) {
-                        case 0x02E0: // WM_DPICHANGED
-                            RECT rect = RECT.create(lParam);
-                            SetWindowPos(hwnd, NULL,
-                                rect.left(),
-                                rect.top(),
-                                rect.right() - rect.left(),
-                                rect.bottom() - rect.top(),
-                                SWP_NOZORDER | SWP_NOACTIVATE
-                            );
-                            return 0;
-                    }
-                    return nCallWindowProc(glfwProc, hwnd, uMsg, wParam, lParam);
-                }
-            };
-
-            SetWindowLongPtr(hwnd, GWL_WNDPROC, windowProc.address());
-        } else {
-            windowProc = null;
-        }
 
         glfwSetFramebufferSizeCallback(window, (window, width, height) -> {
             this.framebufferW = width;
@@ -253,10 +212,6 @@ public final class Vorbis implements AutoCloseable {
 
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
-
-        if (windowProc != null) {
-            windowProc.free();
-        }
 
         glfwTerminate();
         Objects.requireNonNull(glfwSetErrorCallback(null)).free();

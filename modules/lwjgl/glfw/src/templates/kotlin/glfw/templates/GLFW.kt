@@ -679,6 +679,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             """
             {@code WindowHint}: Specifies whether the window content area should be resized based on the monitor content scale of any monitor it is placed on.
             This includes the initial placement when the window is created. Possible values are #TRUE and #FALSE.
+
+            This hint only has an effect on platforms where screen coordinates and pixels always map 1:1 such as Windows and X11. On platforms like macOS the
+            resolution of the framebuffer is changed independently of the window size.
             """,
             0x0002200C
         )
@@ -3068,8 +3071,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
 
         Notes:
         ${ul(
-            "This function must only be called from the main thread.",
-            "<b>Wayland</b>: Clipboard is currently unimplemented."
+            "This function must only be called from the main thread."
         )}
         """,
 
@@ -3091,8 +3093,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         ${note(ul(
             "This function must only be called from the main thread.",
             "The returned string is allocated and freed by GLFW.  You should not free it yourself.",
-            "The returned string is valid only until the next call to #GetClipboardString() or #SetClipboardString().",
-            "<b>Wayland</b>: Clipboard is currently unimplemented."
+            "The returned string is valid only until the next call to #GetClipboardString() or #SetClipboardString()."
         ))}
         """,
 
