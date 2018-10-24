@@ -1322,7 +1322,7 @@ public class ZstdX {
     public static native long nZSTD_compressBegin_usingCDict_advanced(long cctx, long cdict, long fParams, long pledgedSrcSize);
 
     @NativeType("size_t")
-    public static long ZSTD_compressBegin_usingCDict_advanced(@NativeType("ZSTD_CCtx const *") long cctx, @NativeType("ZSTD_CDict const * const") long cdict, @NativeType("ZSTD_frameParameters const") ZSTDFrameParameters fParams, @NativeType("unsigned long long") long pledgedSrcSize) {
+    public static long ZSTD_compressBegin_usingCDict_advanced(@NativeType("ZSTD_CCtx * const") long cctx, @NativeType("ZSTD_CDict const * const") long cdict, @NativeType("ZSTD_frameParameters const") ZSTDFrameParameters fParams, @NativeType("unsigned long long") long pledgedSrcSize) {
         if (CHECKS) {
             check(cctx);
             check(cdict);

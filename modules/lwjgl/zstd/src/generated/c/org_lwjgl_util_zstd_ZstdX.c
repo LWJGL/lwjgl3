@@ -400,7 +400,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1compressBegin_1usi
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1compressBegin_1usingCDict_1advanced(JNIEnv *__env, jclass clazz, jlong cctxAddress, jlong cdictAddress, jlong fParamsAddress, jlong pledgedSrcSize) {
-    ZSTD_CCtx const *cctx = (ZSTD_CCtx const *)(intptr_t)cctxAddress;
+    ZSTD_CCtx * const cctx = (ZSTD_CCtx * const)(intptr_t)cctxAddress;
     ZSTD_CDict const * const cdict = (ZSTD_CDict const * const)(intptr_t)cdictAddress;
     ZSTD_frameParameters const *fParams = (ZSTD_frameParameters const *)(intptr_t)fParamsAddress;
     UNUSED_PARAMS(__env, clazz)

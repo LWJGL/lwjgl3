@@ -1077,7 +1077,7 @@ ENABLE_WARNINGS()""")
         "compressBegin_usingCDict_advanced",
         "",
 
-        ZSTD_CCtx.const.p.IN("cctx", ""),
+        ZSTD_CCtx.p.const.IN("cctx", ""),
         ZSTD_CDict.const.p.const.IN("cdict", ""),
         ZSTD_frameParameters.const.IN("fParams", ""),
         unsigned_long_long.IN("pledgedSrcSize", "")
