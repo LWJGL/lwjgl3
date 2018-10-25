@@ -168,7 +168,7 @@ public final class APIUtil {
     }
 
     /** A data class for API versioning information. */
-    public static class APIVersion {
+    public static class APIVersion implements Comparable<APIVersion> {
 
         /** Returns the API major version. */
         public final int major;
@@ -204,6 +204,19 @@ public final class APIUtil {
                 sb.append(" (").append(implementation).append(')');
             }
             return sb.toString();
+        }
+
+        @Override
+        public int compareTo(APIVersion other) {
+            if (this.major != other.major) {
+                return Integer.compare(this.major, other.major);
+            }
+
+            if (this.minor != other.minor) {
+                return Integer.compare(this.minor, other.minor);
+            }
+
+            return 0;
         }
     }
 
