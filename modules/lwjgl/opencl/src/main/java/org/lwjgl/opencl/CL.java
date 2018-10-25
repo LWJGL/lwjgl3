@@ -57,8 +57,9 @@ public final class CL {
                 CL = Library.loadNative(CL.class, Configuration.OPENCL_LIBRARY_NAME, "OpenCL");
                 break;
             case MACOSX:
-                CL = Configuration.OPENCL_LIBRARY_NAME.get() != null
-                    ? Library.loadNative(CL.class, Configuration.OPENCL_LIBRARY_NAME)
+                String override = Configuration.OPENCL_LIBRARY_NAME.get();
+                CL = override != null
+                    ? Library.loadNative(CL.class, override)
                     : MacOSXLibrary.getWithIdentifier("com.apple.opencl");
                 break;
             default:

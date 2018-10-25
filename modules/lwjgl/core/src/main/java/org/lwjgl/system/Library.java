@@ -201,8 +201,12 @@ public final class Library {
      *
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
-    @SuppressWarnings("try")
     public static SharedLibrary loadNative(Class<?> context, String name, boolean bundledWithLWJGL) {
+        return loadNative(context, name, bundledWithLWJGL, true);
+    }
+
+    @SuppressWarnings("try")
+    private static SharedLibrary loadNative(Class<?> context, String name, boolean bundledWithLWJGL, boolean printError) {
         apiLog("Loading library: " + name);
 
         // METHOD 1: absolute path
@@ -289,7 +293,9 @@ public final class Library {
             }
         }
 
-        printError(bundledWithLWJGL);
+        if (printError) {
+            printError(bundledWithLWJGL);
+        }
         throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
     }
 
@@ -340,33 +346,54 @@ public final class Library {
      * {@link #loadNative(String)} will be called with the names specified by {@code defaultNames}. The first successful will be returned.
      *
      * @param name         a {@link Configuration} that specifies the library name
-     * @param defaultNames the default library name
+     * @param defaultNames the default library name(s)
      *
      * @return the shared library
      *
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
     public static SharedLibrary loadNative(Class<?> context, Configuration<String> name, String... defaultNames) {
+        return loadNative(context, name, null, defaultNames);
+    }
+
+    /**
+     * Loads a shared library using {@link #loadNative(String)} with the name specified by {@code name}. If {@code name} is not set,
+     * {@link #loadNative(String)} will be called with the names specified by {@code defaultNames}. The first successful will be returned. If the library could
+     * not be loaded, the {@code fallback} will be called.
+     *
+     * @param name         a {@link Configuration} that specifies the library name
+     * @param fallback     fallback to use if everything else fails
+     * @param defaultNames the default library name(s)
+     *
+     * @return the shared library
+     *
+     * @throws UnsatisfiedLinkError if the library could not be loaded
+     */
+    public static SharedLibrary loadNative(Class<?> context, Configuration<String> name, @Nullable Supplier<SharedLibrary> fallback, String... defaultNames) {
+        if (defaultNames.length == 0) {
+            throw new IllegalArgumentException("No default names specified.");
+        }
+
         String libraryName = name.get();
         if (libraryName != null) {
             return loadNative(context, libraryName);
         }
 
-        if (defaultNames.length <= 1) {
-            if (defaultNames.length == 0) {
-                throw new RuntimeException("No default names specified.");
-            }
+        if (fallback == null && defaultNames.length <= 1) {
             return loadNative(context, defaultNames[0]);
         }
 
         try {
-            return loadNative(context, defaultNames[0]); // try first
+            return loadNative(context, defaultNames[0], false, false); // try first
         } catch (Throwable t) {
             for (int i = 1; i < defaultNames.length; i++) { // try alternatives
                 try {
-                    return loadNative(context, defaultNames[i]);
+                    return loadNative(context, defaultNames[i], false, fallback == null && i == defaultNames.length - 1);
                 } catch (Throwable ignored) {
                 }
+            }
+            if (fallback != null) {
+                return fallback.get();
             }
             throw t; // original error
         }
