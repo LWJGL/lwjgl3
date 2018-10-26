@@ -9,7 +9,16 @@ import org.lwjgl.generator.*
 const val BULLET_LIBRARY = "LibBullet.initialize();"
 
 fun config() {
-    packageInfo(Module.BULLET, "Contains bindings to the ${url("http://bulletphysics.org/", "Bullet")} library.")
+    packageInfo(
+		Module.BULLET,
+		"""
+		Contains bindings to the ${url("http://bulletphysics.org/", "Bullet")} library.
+
+		<h3>UNSTABLE API</h3>
+
+        Until these bindings are sufficiently tested, this API should be considered unstable.
+		"""
+	)
 
 	Generator.registerLibraryInit(Module.BULLET, "LibBullet", "bullet")
 }
