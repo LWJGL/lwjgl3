@@ -57,6 +57,7 @@ enum class Module(
     LIBDIVIDE("binding.libdivide", "org.lwjgl.util.libdivide", arrayOverloads = false),
     LMDB("binding.lmdb", "org.lwjgl.util.lmdb"),
     LZ4("binding.lz4", "org.lwjgl.util.lz4", arrayOverloads = false),
+    MEOW("binding.meow", "org.lwjgl.util.meow", arrayOverloads = false),
     NANOVG("binding.nanovg", "org.lwjgl.nanovg"),
     NFD("binding.nfd", "org.lwjgl.util.nfd"),
     NUKLEAR("binding.nuklear", "org.lwjgl.nuklear"),

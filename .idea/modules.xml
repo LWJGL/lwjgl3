@@ -29,6 +29,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/lmdb-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/lmdb-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lz4.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lz4.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/lz4-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/lz4-templates.iml" group="TEMPLATES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/meow.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/meow.iml" group="MODULES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/meow-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/meow-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/nanovg.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/nanovg.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/nanovg-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/nanovg-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/nfd.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/nfd.iml" group="MODULES" />

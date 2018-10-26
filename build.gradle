@@ -120,6 +120,11 @@ enum Artifacts {
         "A lossless data compression algorithm that is focused on compression and decompression speed.",
         Platforms.ALL
     ),
+    MEOW(
+        "lwjgl-meow", "LWJGL - Meow hash bindings",
+        "An extremely fast non-cryptographic hash.",
+        Platforms.ALL
+    ),
     NANOVG(
         "lwjgl-nanovg", "LWJGL - NanoVG & NanoSVG bindings",
         "A small antialiased vector graphics rendering library for OpenGL. Also includes NanoSVG, a simple SVG parser.",

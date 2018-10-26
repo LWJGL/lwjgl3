@@ -372,6 +372,7 @@
             <compileBinding binding="libdivide"/>
             <compileBinding binding="lmdb"/>
             <compileBinding binding="lz4"/>
+            <compileBinding binding="meow"/>
             <compileBinding binding="nanovg"/>
             <compileBinding binding="nfd"/>
             <compileBinding binding="nuklear"/>
@@ -616,6 +617,7 @@
             <include name="org/lwjgl/demo/util/*.java"/>
             <include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
             <include name="org/lwjgl/demo/util/lz4/**" if:true="${binding.lz4}"/>
+            <include name="org/lwjgl/demo/util/meow/**" if:true="${binding.meow}"/>
             <include name="org/lwjgl/demo/util/nfd/**" if:set="test.nfd"/>
             <include name="org/lwjgl/demo/util/par/**" if:set="test.par"/>
             <include name="org/lwjgl/demo/util/tinyexr/**" if:set="test.tinyexr"/>
@@ -1117,6 +1119,9 @@
 
         <!-- lz4 -->
         <release-module package="org.lwjgl.util.lz4" name="lz4" native-library="lwjgl_lz4" title="lz4" if:true="${binding.lz4}"/>
+
+        <!-- Meow hash -->
+        <release-module package="org.lwjgl.util.meow" name="meow" native-library="lwjgl_meow" title="Meow hash" if:true="${binding.meow}"/>
 
         <!-- NanoVG -->
         <release-module package="org.lwjgl.nanovg" name="nanovg" native-library="lwjgl_nanovg" title="NanoVG" license="nano" if:true="${binding.nanovg}"/>

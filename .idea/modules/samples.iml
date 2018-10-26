@@ -26,6 +26,7 @@
     <orderEntry type="module" module-name="libdivide" scope="TEST" />
     <orderEntry type="module" module-name="lmdb" scope="TEST" />
     <orderEntry type="module" module-name="lz4" scope="TEST" />
+    <orderEntry type="module" module-name="meow" scope="TEST" />
     <orderEntry type="module" module-name="nanovg" scope="TEST" />
     <orderEntry type="module" module-name="nfd" scope="TEST" />
     <orderEntry type="module" module-name="nuklear" scope="TEST" />

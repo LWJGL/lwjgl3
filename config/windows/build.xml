@@ -92,7 +92,7 @@ EXPORTS
 </header>
                 <!-- For each source file -->
                 <source/>
-                <fileset dir="." includes="${src.generated}/*.c" if:true="@{simple}"/>
+                <fileset dir="." includes="${src.generated}/*" if:true="@{simple}"/>
                 <filterchain>
                     <!-- For each line with a JNICALL -->
                     <linecontainsregexp>
@@ -225,6 +225,9 @@ EXPORTS
                 </compile>
             </beforeCompile>
         </build>
+
+        <!-- Meow -->
+        <build_simple module="meow"/>
 
         <!-- NanoVG -->
         <build module="nanovg" simple="true" if:true="${binding.nanovg}">

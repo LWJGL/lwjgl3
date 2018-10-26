@@ -20,6 +20,7 @@
     <orderEntry type="module" module-name="libdivide-templates" />
     <orderEntry type="module" module-name="lmdb-templates" />
     <orderEntry type="module" module-name="lz4-templates" />
+    <orderEntry type="module" module-name="meow-templates" />
     <orderEntry type="module" module-name="nanovg-templates" />
     <orderEntry type="module" module-name="nfd-templates" />
     <orderEntry type="module" module-name="nuklear-templates" />

@@ -15,6 +15,7 @@ import java.util.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.xxhash.XXHash.*;
+import static org.testng.Assert.*;
 
 public final class XXHashDemo {
 
@@ -35,9 +36,8 @@ public final class XXHashDemo {
         int  hash32 = XXH32(buffer, SEED);
         long hash64 = XXH64(buffer, SEED);
 
-        if (hash32 != 0xC5C8C208 || hash64 != 0x656D889F290F0BCCL) {
-            throw new IllegalStateException();
-        }
+        assertEquals(hash32, 0xC5C8C208);
+        assertEquals(hash64, 0x656D889F290F0BCCL);
 
         System.out.format("test %d-bit hash = 0x%X\n", 32, hash32);
         System.out.format("test %d-bit hash = 0x%X\n", 64, hash64);
@@ -71,7 +71,7 @@ public final class XXHashDemo {
         // init
         XXH64_reset(state, SEED);
         try (
-            InputStream stream = XXHashDemo.class.getClassLoader().getResourceAsStream(resource);
+            InputStream stream = Objects.requireNonNull(XXHashDemo.class.getClassLoader().getResourceAsStream(resource));
             ReadableByteChannel rbc = Channels.newChannel(stream)
         ) {
             while (true) {
