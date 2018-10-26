@@ -7,7 +7,7 @@ package libdivide.templates
 import org.lwjgl.generator.*
 import libdivide.*
 
-val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBDIVIDE_", prefixMethod = "libdivide_", library = LIBDIVIDE_LIBRARY) {
+val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBDIVIDE_", prefixMethod = "libdivide_", library = "lwjgl_libdivide") {
     nativeImport("libdivide.h")
     javaImport("static org.lwjgl.system.MathUtil.*")
     javaImport("static org.lwjgl.system.MemoryUtil.*")

@@ -13,8 +13,6 @@ fun config() {
         Module.LIBDIVIDE,
         "Contains bindings to ${url("https://libdivide.com/", "libdivide")}."
     )
-
-    Generator.registerLibraryInit(Module.LIBDIVIDE, "LibDivideBoot", "libdivide")
 }
 
 val libdivide_u32_t = struct(Module.LIBDIVIDE, "LibDivideU32", nativeName = "struct libdivide_u32_t") {
