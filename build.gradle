@@ -83,7 +83,7 @@ enum Artifacts {
     CUDA(
         "lwjgl-cuda", "LWJGL - CUDA bindings",
         "A parallel computing platform and programming model developed by NVIDIA for general computing on GPUs.",
-        Platforms.ALL
+        Platforms.JAVA_ONLY
     ),
     EGL(
         "lwjgl-egl", "LWJGL - EGL bindings",
