@@ -12242,7 +12242,7 @@ public class VK10 {
      * @param pData         a pointer to the source data for the buffer update, and <b>must</b> be at least {@code dataSize} bytes in size.
      */
     public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") ShortBuffer pData) {
-        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, pData.remaining() << 1, memAddress(pData));
+        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 1, memAddress(pData));
     }
 
     /**
@@ -12324,7 +12324,7 @@ public class VK10 {
      * @param pData         a pointer to the source data for the buffer update, and <b>must</b> be at least {@code dataSize} bytes in size.
      */
     public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") IntBuffer pData) {
-        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, pData.remaining() << 2, memAddress(pData));
+        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 2, memAddress(pData));
     }
 
     /**
@@ -12406,7 +12406,7 @@ public class VK10 {
      * @param pData         a pointer to the source data for the buffer update, and <b>must</b> be at least {@code dataSize} bytes in size.
      */
     public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") LongBuffer pData) {
-        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, pData.remaining() << 3, memAddress(pData));
+        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 3, memAddress(pData));
     }
 
     /**
@@ -12488,7 +12488,7 @@ public class VK10 {
      * @param pData         a pointer to the source data for the buffer update, and <b>must</b> be at least {@code dataSize} bytes in size.
      */
     public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") FloatBuffer pData) {
-        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, pData.remaining() << 2, memAddress(pData));
+        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 2, memAddress(pData));
     }
 
     /**
@@ -12570,7 +12570,7 @@ public class VK10 {
      * @param pData         a pointer to the source data for the buffer update, and <b>must</b> be at least {@code dataSize} bytes in size.
      */
     public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") DoubleBuffer pData) {
-        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, pData.remaining() << 3, memAddress(pData));
+        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 3, memAddress(pData));
     }
 
     // --- [ vkCmdFillBuffer ] ---
@@ -15293,31 +15293,31 @@ public class VK10 {
     /** Array version of: {@link #vkCmdUpdateBuffer CmdUpdateBuffer} */
     public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") short[] pData) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
-        callPJJJPV(__functionAddress, commandBuffer.address(), dstBuffer, dstOffset, (long)(pData.length << 1), pData);
+        callPJJJPV(__functionAddress, commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 1, pData);
     }
 
     /** Array version of: {@link #vkCmdUpdateBuffer CmdUpdateBuffer} */
     public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") int[] pData) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
-        callPJJJPV(__functionAddress, commandBuffer.address(), dstBuffer, dstOffset, (long)(pData.length << 2), pData);
+        callPJJJPV(__functionAddress, commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 2, pData);
     }
 
     /** Array version of: {@link #vkCmdUpdateBuffer CmdUpdateBuffer} */
     public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") long[] pData) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
-        callPJJJPV(__functionAddress, commandBuffer.address(), dstBuffer, dstOffset, (long)(pData.length << 3), pData);
+        callPJJJPV(__functionAddress, commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 3, pData);
     }
 
     /** Array version of: {@link #vkCmdUpdateBuffer CmdUpdateBuffer} */
     public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") float[] pData) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
-        callPJJJPV(__functionAddress, commandBuffer.address(), dstBuffer, dstOffset, (long)(pData.length << 2), pData);
+        callPJJJPV(__functionAddress, commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 2, pData);
     }
 
     /** Array version of: {@link #vkCmdUpdateBuffer CmdUpdateBuffer} */
     public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") double[] pData) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
-        callPJJJPV(__functionAddress, commandBuffer.address(), dstBuffer, dstOffset, (long)(pData.length << 3), pData);
+        callPJJJPV(__functionAddress, commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 3, pData);
     }
 
     /** Array version of: {@link #vkCmdWaitEvents CmdWaitEvents} */

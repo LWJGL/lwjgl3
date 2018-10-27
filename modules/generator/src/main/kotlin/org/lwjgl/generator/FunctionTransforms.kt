@@ -49,21 +49,23 @@ internal open class AutoSizeTransform(
                 "${bufferParam.name}.remaining()"
         }
 
+        val type = param.nativeType
+
         var relaxedCast = relaxedCast
 
         val factor = param.get<AutoSize>().factor
         if (applyFactor && factor != null) {
-            if (param.nativeType.isPointer) {
+            if (type.isPointer || type.mapping === PrimitiveMapping.LONG) {
                 expression = "Integer.toUnsignedLong($expression)"
                 relaxedCast = true
             }
             expression = factor.scale(expression)
         }
 
-        if (param.nativeType is PointerType<*>)
+        if (type is PointerType<*>)
             expression = "memAddress${if (bufferParam has nullable) "Safe" else ""}(${bufferParam.name}) + $expression"
-        else if ((param.nativeType.mapping as PrimitiveMapping).bytes.let { if (relaxedCast) it < 4 else it != 4 })
-            expression = "(${param.nativeType.javaMethodType})${if (expression.contains(' ')) "($expression)" else expression}"
+        else if ((type.mapping as PrimitiveMapping).bytes.let { if (relaxedCast) it < 4 else it != 4 })
+            expression = "(${type.javaMethodType})${if (expression.contains(' ')) "($expression)" else expression}"
 
         return expression
     }
@@ -78,11 +80,13 @@ private class AutoSizeBytesTransform(
     val byteShift: String
 ) : AutoSizeTransform(bufferParam, relaxedCast) {
     override fun transformCall(param: Parameter, original: String): String {
+        val type = param.nativeType
+
         var expression = if (bufferParam has nullable)
             "remainingSafe(${bufferParam.name})"
         else
             "${bufferParam.name}.remaining()"
-        if (param.nativeType.isPointer) {
+        if (type.isPointer || type.mapping === PrimitiveMapping.LONG) {
             expression = "Integer.toUnsignedLong($expression)"
         }
         val factor = param.get<AutoSize>().factor
@@ -104,15 +108,15 @@ private class AutoSizeBytesTransform(
                 }
             } catch(e: NumberFormatException) {
                 // non-numeric expressions
-                expression = if (param.nativeType.mapping.let { it === PrimitiveMapping.POINTER || it === PrimitiveMapping.LONG })
+                expression = if (type.mapping.let { it === PrimitiveMapping.POINTER || it === PrimitiveMapping.LONG })
                     "($expression << $byteShift) ${factor.operator} ${factor.expression}"
                 else
-                    "(${param.nativeType.javaMethodType})(((long)$expression << $byteShift) ${factor.operator} ${factor.expression})"
+                    "(${type.javaMethodType})(((long)$expression << $byteShift) ${factor.operator} ${factor.expression})"
             }
         }
 
-        if ((param.nativeType.mapping as PrimitiveMapping).bytes.let { if (relaxedCast) it < 4 else it != 4 })
-            expression = "(${param.nativeType.javaMethodType})($expression)"
+        if ((type.mapping as PrimitiveMapping).bytes.let { if (relaxedCast) it < 4 else it != 4 })
+            expression = "(${type.javaMethodType})($expression)"
 
         return expression
     }
