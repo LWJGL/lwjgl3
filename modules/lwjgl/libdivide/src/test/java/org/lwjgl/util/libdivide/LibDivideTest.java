@@ -12,6 +12,7 @@ import java.util.function.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.libdivide.LibDivide.*;
 import static org.testng.Assert.*;
 
@@ -48,8 +49,9 @@ public class LibDivideTest {
     public void testS32() {
         Native32 doNative = (numer, denom) -> numer / denom;
 
-        test(
+        test32(
             LibDivideS32::mallocStack,
+            LibDivide::libdivide_s32_gen_ref,
             LibDivide::libdivide_s32_gen,
             doNative,
             LibDivide::libdivide_s32_do_ref,
@@ -57,8 +59,9 @@ public class LibDivideTest {
             false
         );
 
-        test(
+        test32(
             LibDivideS32BranchFree::mallocStack,
+            LibDivide::libdivide_s32_branchfree_gen_ref,
             LibDivide::libdivide_s32_branchfree_gen,
             doNative,
             LibDivide::libdivide_s32_branchfree_do_ref,
@@ -66,8 +69,9 @@ public class LibDivideTest {
             true
         );
 
-        test(
+        test32(
             LibDivideS32::mallocStack,
+            LibDivide::libdivide_s32_gen_ref,
             LibDivide::libdivide_s32_gen,
             doNative,
             LibDivide::libdivide_s32_do_ref,
@@ -94,8 +98,9 @@ public class LibDivideTest {
     public void testU32() {
         Native32 doNative = Integer::divideUnsigned;
 
-        test(
+        test32(
             LibDivideU32::mallocStack,
+            LibDivide::libdivide_u32_gen_ref,
             LibDivide::libdivide_u32_gen,
             doNative,
             LibDivide::libdivide_u32_do_ref,
@@ -103,8 +108,9 @@ public class LibDivideTest {
             false
         );
 
-        test(
+        test32(
             LibDivideU32BranchFree::mallocStack,
+            LibDivide::libdivide_u32_branchfree_gen_ref,
             LibDivide::libdivide_u32_branchfree_gen,
             doNative,
             LibDivide::libdivide_u32_branchfree_do_ref,
@@ -112,8 +118,9 @@ public class LibDivideTest {
             true
         );
 
-        test(
+        test32(
             LibDivideU32::mallocStack,
+            LibDivide::libdivide_u32_gen_ref,
             LibDivide::libdivide_u32_gen,
             doNative,
             LibDivide::libdivide_u32_do_ref,
@@ -136,8 +143,9 @@ public class LibDivideTest {
     public void testS64() {
         Native64 doNative = (numer, denom) -> numer / denom;
 
-        test(
+        test64(
             LibDivideS64::mallocStack,
+            LibDivide::libdivide_s64_gen_ref,
             LibDivide::libdivide_s64_gen,
             doNative,
             LibDivide::libdivide_s64_do_ref,
@@ -145,8 +153,9 @@ public class LibDivideTest {
             false
         );
 
-        test(
+        test64(
             LibDivideS64BranchFree::mallocStack,
+            LibDivide::libdivide_s64_branchfree_gen_ref,
             LibDivide::libdivide_s64_branchfree_gen,
             doNative,
             LibDivide::libdivide_s64_branchfree_do_ref,
@@ -154,8 +163,9 @@ public class LibDivideTest {
             true
         );
 
-        test(
+        test64(
             LibDivideS64::mallocStack,
+            LibDivide::libdivide_s64_gen_ref,
             LibDivide::libdivide_s64_gen,
             doNative,
             LibDivide::libdivide_s64_do_ref,
@@ -182,8 +192,9 @@ public class LibDivideTest {
     public void testU64() {
         Native64 doNative = Long::divideUnsigned;
 
-        test(
+        test64(
             LibDivideU64::mallocStack,
+            LibDivide::libdivide_u64_gen_ref,
             LibDivide::libdivide_u64_gen,
             doNative,
             LibDivide::libdivide_u64_do_ref,
@@ -191,8 +202,9 @@ public class LibDivideTest {
             false
         );
 
-        test(
+        test64(
             LibDivideU64BranchFree::mallocStack,
+            LibDivide::libdivide_u64_branchfree_gen_ref,
             LibDivide::libdivide_u64_branchfree_gen,
             doNative,
             LibDivide::libdivide_u64_branchfree_do_ref,
@@ -200,8 +212,9 @@ public class LibDivideTest {
             true
         );
 
-        test(
+        test64(
             LibDivideU64::mallocStack,
+            LibDivide::libdivide_u64_gen_ref,
             LibDivide::libdivide_u64_gen,
             doNative,
             LibDivide::libdivide_u64_do_ref,
@@ -233,7 +246,12 @@ public class LibDivideTest {
         int apply(int numer, int denom);
     }
 
-    private static <T extends Struct> void test(Function<MemoryStack, T> malloc, Gen32<T> gen, Native32 doNative, Do32<T> doRef, Do32<T> doJava, boolean branchFree) {
+    private static <T extends Struct> void test32(
+        Function<MemoryStack, T> malloc,
+        Gen32<T> genRef, Gen32<T> gen,
+        Native32 doNative, Do32<T> doRef, Do32<T> doJava,
+        boolean branchFree
+    ) {
         try (MemoryStack stack = stackPush()) {
             T magic = malloc.apply(stack);
 
@@ -243,7 +261,10 @@ public class LibDivideTest {
                 if (d == 0 || (branchFree && abs(d) == 1)) {
                     continue;
                 }
-                test(magic, gen, doNative, doRef, doJava, d, numers);
+                test32(magic, genRef, gen, d);
+                for (int n : numers) {
+                    test32(magic, doNative, doRef, doJava, d, n);
+                }
             }
 
             // Random
@@ -254,23 +275,30 @@ public class LibDivideTest {
                     d = rand.nextInt();
                 } while (branchFree && abs(d) == 1);
 
-                gen.apply(d, magic);
-
+                test32(magic, genRef, gen, d);
                 for (int j = 0; j < RANDOM_NUMERS; j++) {
-                    test(magic, doNative, doRef, doJava, d, rand.nextInt());
+                    test32(magic, doNative, doRef, doJava, d, rand.nextInt());
                 }
             }
         }
     }
 
-    private static <T extends Struct> void test(T magic, Gen32<T> gen, Native32 doNative, Do32<T> doRef, Do32<T> doJava, int d, int... numers) {
+    private static <T extends Struct> void test32(T magic, Gen32<T> genRef, Gen32<T> gen, int d) {
+        genRef.apply(d, magic);
+
+        int  m = memGetInt(magic.address());
+        byte b = memGetByte(magic.address() + 4);
+
+        memPutInt(magic.address(), 0);
+        memPutByte(magic.address() + 4, (byte)0);
+
         gen.apply(d, magic);
-        for (int n : numers) {
-            test(magic, doNative, doRef, doJava, d, n);
-        }
+
+        assertEquals(memGetInt(magic.address()), m);
+        assertEquals(memGetByte(magic.address() + 4), b);
     }
 
-    private static <T extends Struct> void test(T magic, Native32 doNative, Do32<T> doRef, Do32<T> doJava, int d, int n) {
+    private static <T extends Struct> void test32(T magic, Native32 doNative, Do32<T> doRef, Do32<T> doJava, int d, int n) {
         int refNative = doNative.apply(n, d);
 
         int ref = doRef.apply(n, magic);
@@ -296,7 +324,12 @@ public class LibDivideTest {
         long apply(long numer, long denom);
     }
 
-    private static <T extends Struct> void test(Function<MemoryStack, T> malloc, Gen64<T> gen, Native64 doNative, Do64<T> doRef, Do64<T> doJava, boolean branchFree) {
+    private static <T extends Struct> void test64(
+        Function<MemoryStack, T> malloc,
+        Gen64<T> genRef, Gen64<T> gen,
+        Native64 doNative, Do64<T> doRef, Do64<T> doJava,
+        boolean branchFree
+    ) {
         try (MemoryStack stack = stackPush()) {
 
             T magic = malloc.apply(stack);
@@ -307,7 +340,10 @@ public class LibDivideTest {
                 if (d == 0L || (branchFree && abs(d) == 1L)) {
                     continue;
                 }
-                test(magic, gen, doNative, doRef, doJava, d, numers);
+                test64(magic, genRef, gen, d);
+                for (long n : numers) {
+                    test64(magic, doNative, doRef, doJava, d, n);
+                }
             }
 
             // Random
@@ -318,22 +354,30 @@ public class LibDivideTest {
                     d = rand.nextLong();
                 } while (branchFree && abs(d) == 1L);
 
-                gen.apply(d, magic);
+                test64(magic, genRef, gen, d);
                 for (int j = 0; j < RANDOM_NUMERS; j++) {
-                    test(magic, doNative, doRef, doJava, d, rand.nextLong());
+                    test64(magic, doNative, doRef, doJava, d, rand.nextLong());
                 }
             }
         }
     }
 
-    private static <T extends Struct> void test(T magic, Gen64<T> gen, Native64 doNative, Do64<T> doRef, Do64<T> doJava, long d, long... numers) {
+    private static <T extends Struct> void test64(T magic, Gen64<T> genRef, Gen64<T> gen, long d) {
+        genRef.apply(d, magic);
+
+        long m = memGetLong(magic.address());
+        byte b = memGetByte(magic.address() + 8);
+
+        memPutLong(magic.address(), 0);
+        memPutByte(magic.address() + 8, (byte)0);
+
         gen.apply(d, magic);
-        for (long n : numers) {
-            test(magic, doNative, doRef, doJava, d, n);
-        }
+
+        assertEquals(memGetLong(magic.address()), m);
+        assertEquals(memGetByte(magic.address() + 8), b);
     }
 
-    private static <T extends Struct> void test(T magic, Native64 doNative, Do64<T> doRef, Do64<T> doJava, long d, long n) {
+    private static <T extends Struct> void test64(T magic, Native64 doNative, Do64<T> doRef, Do64<T> doJava, long d, long n) {
         long refNative = doNative.apply(n, d);
 
         long ref = doRef.apply(n, magic);

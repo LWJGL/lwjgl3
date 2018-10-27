@@ -508,7 +508,7 @@ public class LibDivide {
         }
 
         __result.magic(magic);
-        __result.more((byte)more);
+        __result.more((byte)(more & LIBDIVIDE_32_SHIFT_MASK));
         return __result;
     }
 
@@ -576,7 +576,7 @@ public class LibDivide {
         }
 
         __result.magic(magic);
-        __result.more((byte)more);
+        __result.more((byte)(more & LIBDIVIDE_64_SHIFT_MASK));
         return __result;
     }
 

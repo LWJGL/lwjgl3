@@ -280,7 +280,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         }
 
         __result.magic(magic);
-        __result.more((byte)more);
+        __result.more((byte)(more & LIBDIVIDE_32_SHIFT_MASK));
         return __result;
     }""")
 
@@ -353,7 +353,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         }
 
         __result.magic(magic);
-        __result.more((byte)more);
+        __result.more((byte)(more & LIBDIVIDE_64_SHIFT_MASK));
         return __result;
     }""")
 
