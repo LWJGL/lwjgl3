@@ -71,7 +71,7 @@ public class OVRLayerQuad extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
-            __member(OVRLayerHeader.SIZEOF, OVRLayerHeader.ALIGNOF),
+            __member(OVRLayerHeader.SIZEOF, OVRLayerHeader.ALIGNOF, true),
             __member(POINTER_SIZE),
             __member(OVRRecti.SIZEOF, OVRRecti.ALIGNOF),
             __member(OVRPosef.SIZEOF, OVRPosef.ALIGNOF),

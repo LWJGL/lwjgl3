@@ -204,7 +204,11 @@ public abstract class Struct extends Pointer.Default {
     }
 
     protected static Member __member(int size, int alignment) {
-        return new Member(size, alignment, false);
+        return __member(size, alignment, false);
+    }
+
+    protected static Member __member(int size, int alignment, boolean forceAlignment) {
+        return new Member(size, alignment, forceAlignment);
     }
 
     protected static Member __array(int size, int length) {
@@ -212,6 +216,9 @@ public abstract class Struct extends Pointer.Default {
     }
     protected static Member __array(int size, int alignment, int length) {
         return new Member(size * length, alignment, false);
+    }
+    protected static Member __array(int size, int alignment, boolean forceAlignment, int length) {
+        return new Member(size * length, alignment, forceAlignment);
     }
 
     protected static Layout __union(Member... members) { return __union(DEFAULT_PACK_ALIGNMENT, DEFAULT_ALIGN_AS, members); }
@@ -245,7 +252,9 @@ public abstract class Struct extends Pointer.Default {
 
             int memberAlignment = m.getAlignment(packAlignment);
 
-            size = (m.offset = align(size, memberAlignment)) + m.size;
+            m.offset = align(size, memberAlignment);
+
+            size = m.offset + m.size;
             alignment = max(alignment, memberAlignment);
 
             struct.add(m);

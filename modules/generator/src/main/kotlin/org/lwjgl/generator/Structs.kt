@@ -194,6 +194,7 @@ class Struct(
         pack = alignment.toString()
     }
 
+    // TODO: add alignas support to non-struct members if necessary
     private var alignas: String? = null
     fun alignas(expression: String) {
         alignas = expression
@@ -1144,7 +1145,7 @@ ${validations.joinToString("\n")}
 
                 if (it.nativeType is StructType) {
                     size = "${it.nativeType.javaMethodType}.SIZEOF"
-                    alignment = "${it.nativeType.javaMethodType}.ALIGNOF"
+                    alignment = "${it.nativeType.javaMethodType}.ALIGNOF${if (it.nativeType.definition.alignas != null) ", true" else ""}"
                 } else {
                     size = if (it.nativeType.isPointer)
                         "POINTER_SIZE"

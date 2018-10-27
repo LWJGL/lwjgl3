@@ -60,7 +60,7 @@ public class OVRLayerUnion extends Struct implements NativeResource {
 
     static {
         Layout layout = __union(
-            __member(OVRLayerHeader.SIZEOF, OVRLayerHeader.ALIGNOF),
+            __member(OVRLayerHeader.SIZEOF, OVRLayerHeader.ALIGNOF, true),
             __member(OVRLayerEyeFov.SIZEOF, OVRLayerEyeFov.ALIGNOF),
             __member(OVRLayerEyeFovDepth.SIZEOF, OVRLayerEyeFovDepth.ALIGNOF),
             __member(OVRLayerEyeMatrix.SIZEOF, OVRLayerEyeMatrix.ALIGNOF),

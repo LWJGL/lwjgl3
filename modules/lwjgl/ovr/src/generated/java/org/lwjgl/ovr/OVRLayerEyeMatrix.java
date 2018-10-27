@@ -89,7 +89,7 @@ public class OVRLayerEyeMatrix extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
-            __member(OVRLayerHeader.SIZEOF, OVRLayerHeader.ALIGNOF),
+            __member(OVRLayerHeader.SIZEOF, OVRLayerHeader.ALIGNOF, true),
             __array(POINTER_SIZE, ovrEye_Count),
             __array(OVRRecti.SIZEOF, OVRRecti.ALIGNOF, ovrEye_Count),
             __array(OVRPosef.SIZEOF, OVRPosef.ALIGNOF, ovrEye_Count),

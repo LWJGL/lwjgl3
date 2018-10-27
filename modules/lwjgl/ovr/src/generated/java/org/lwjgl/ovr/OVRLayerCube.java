@@ -57,7 +57,7 @@ public class OVRLayerCube extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
-            __member(OVRLayerHeader.SIZEOF, OVRLayerHeader.ALIGNOF),
+            __member(OVRLayerHeader.SIZEOF, OVRLayerHeader.ALIGNOF, true),
             __member(OVRQuatf.SIZEOF, OVRQuatf.ALIGNOF),
             __member(POINTER_SIZE)
         );

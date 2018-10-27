@@ -43,7 +43,7 @@ public class OVRTextureLayoutDescUnion extends Struct implements NativeResource 
 
     static {
         Layout layout = __union(
-            __array(OVRTextureLayoutOctilinear.SIZEOF, OVRTextureLayoutOctilinear.ALIGNOF, ovrEye_Count)
+            __array(OVRTextureLayoutOctilinear.SIZEOF, OVRTextureLayoutOctilinear.ALIGNOF, true, ovrEye_Count)
         );
 
         SIZEOF = layout.getSize();
