@@ -81,7 +81,7 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "CtxSetCurrent",
         "",
 
-        CUcontext.IN("ctx", "")
+        nullable..CUcontext.IN("ctx", "")
     )
 
     CUresult(
@@ -141,7 +141,7 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         CUdeviceptr.IN("dst", ""),
         CUdeviceptr.IN("src", ""),
         size_t.IN("ByteCount", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -153,7 +153,7 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         CUdeviceptr.IN("srcDevice", ""),
         CUcontext.IN("srcContext", ""),
         size_t.IN("ByteCount", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -161,7 +161,7 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         CUDA_MEMCPY3D_PEER.const.p.IN("pCopy", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(

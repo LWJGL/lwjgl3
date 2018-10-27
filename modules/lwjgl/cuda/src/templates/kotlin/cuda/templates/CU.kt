@@ -1091,8 +1091,8 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "CtxGetStreamPriorityRange",
         "",
 
-        Check(1)..int.p.OUT("leastPriority", ""),
-        Check(1)..int.p.OUT("greatestPriority", "")
+        Check(1)..nullable..int.p.OUT("leastPriority", ""),
+        Check(1)..nullable..int.p.OUT("greatestPriority", "")
     )
 
     CUresult(
@@ -1165,8 +1165,8 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "ModuleGetGlobal",
         "",
 
-        Check(1)..CUdeviceptr.p.OUT("dptr", ""),
-        Check(1)..size_t.p.OUT("bytes", ""),
+        Check(1)..nullable..CUdeviceptr.p.OUT("dptr", ""),
+        Check(1)..nullable..size_t.p.OUT("bytes", ""),
         CUmodule.IN("hmod", ""),
         charASCII.const.p.IN("name", "")
     ).versioned()
@@ -1227,8 +1227,8 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemGetAddressRange",
         "",
 
-        Check(1)..CUdeviceptr.p.OUT("pbase", ""),
-        Check(1)..size_t.p.OUT("psize", ""),
+        Check(1)..nullable..CUdeviceptr.p.OUT("pbase", ""),
+        Check(1)..nullable..size_t.p.OUT("psize", ""),
         CUdeviceptr.IN("dptr", "")
     ).versioned()
 
@@ -1379,7 +1379,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         CUdeviceptr.IN("dstDevice", ""),
         MultiTypeAll..void.const.p.IN("srcHost", ""),
         AutoSize("srcHost")..size_t.IN("ByteCount", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz(2)
 
     CUresult(
@@ -1389,7 +1389,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         MultiTypeAll..void.p.OUT("dstHost", ""),
         CUdeviceptr.IN("srcDevice", ""),
         AutoSize("dstHost")..size_t.IN("ByteCount", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz(2)
 
     CUresult(
@@ -1399,7 +1399,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         CUdeviceptr.IN("dstDevice", ""),
         CUdeviceptr.IN("srcDevice", ""),
         size_t.IN("ByteCount", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz(2)
 
     CUresult(
@@ -1410,7 +1410,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         size_t.IN("dstOffset", ""),
         MultiTypeAll..void.const.p.IN("srcHost", ""),
         AutoSize("srcHost")..size_t.IN("ByteCount", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz(2)
 
     CUresult(
@@ -1421,7 +1421,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         CUarray.IN("srcArray", ""),
         size_t.IN("srcOffset", ""),
         AutoSize("dstHost")..size_t.IN("ByteCount", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz(2)
 
     CUresult(
@@ -1429,7 +1429,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "",
 
         CUDA_MEMCPY2D.const.p.IN("pCopy", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz(2)
 
     CUresult(
@@ -1437,7 +1437,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "",
 
         CUDA_MEMCPY3D.const.p.IN("pCopy", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz(2)
 
     CUresult(
@@ -1507,7 +1507,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         CUdeviceptr.IN("dstDevice", ""),
         unsigned_char.IN("uc", ""),
         size_t.IN("N", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -1517,7 +1517,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         CUdeviceptr.IN("dstDevice", ""),
         unsigned_short.IN("us", ""),
         size_t.IN("N", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -1527,7 +1527,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         CUdeviceptr.IN("dstDevice", ""),
         unsigned_int.IN("ui", ""),
         size_t.IN("N", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -1539,7 +1539,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         unsigned_char.IN("uc", ""),
         size_t.IN("Width", ""),
         size_t.IN("Height", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -1551,7 +1551,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         unsigned_short.IN("us", ""),
         size_t.IN("Width", ""),
         size_t.IN("Height", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -1563,7 +1563,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         unsigned_int.IN("ui", ""),
         size_t.IN("Width", ""),
         size_t.IN("Height", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -1642,7 +1642,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "StreamWaitEvent",
         "",
 
-        CUstream.IN("hStream", ""),
+        nullable..CUstream.IN("hStream", ""),
         CUevent.IN("hEvent", ""),
         unsigned_int.IN("Flags", "")
     ).ptsz()
@@ -1651,7 +1651,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "StreamAddCallback",
         "",
 
-        CUstream.IN("hStream", ""),
+        nullable..CUstream.IN("hStream", ""),
         CUstreamCallback.IN("callback", ""),
         opaque_p.IN("userData", ""),
         unsigned_int.IN("flags", "")
@@ -1661,14 +1661,14 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "StreamQuery",
         "",
 
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
         "StreamSynchronize",
         "",
 
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -1684,7 +1684,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "",
 
         CUevent.IN("hEvent", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -1804,7 +1804,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         CUfunction.IN("f", ""),
         int.IN("grid_width", ""),
         int.IN("grid_height", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     )
 
     CUresult(
@@ -1838,7 +1838,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefSetAddress",
         "",
 
-        Check(1)..size_t.p.OUT("ByteOffset", ""),
+        Check(1)..nullable..size_t.p.OUT("ByteOffset", ""),
         CUtexref.IN("hTexRef", ""),
         CUdeviceptr.IN("dptr", ""),
         size_t.IN("bytes", "")
@@ -1974,8 +1974,8 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetFormat",
         "",
 
-        Check(1)..CUarray_format.p.OUT("pFormat", ""),
-        Check(1)..int.p.OUT("pNumChannels", ""),
+        Check(1)..nullable..CUarray_format.p.OUT("pFormat", ""),
+        Check(1)..nullable..int.p.OUT("pNumChannels", ""),
         CUtexref.IN("hTexRef", "")
     )
 
@@ -2099,7 +2099,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
 
         AutoSize("resources")..unsigned_int.IN("count", ""),
         CUgraphicsResource.p.IN("resources", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -2108,7 +2108,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
 
         AutoSize("resources")..unsigned_int.IN("count", ""),
         CUgraphicsResource.p.IN("resources", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(

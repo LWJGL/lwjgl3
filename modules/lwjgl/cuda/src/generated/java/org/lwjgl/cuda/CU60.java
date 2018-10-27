@@ -90,7 +90,6 @@ public class CU60 extends CU55 {
     public static int cuStreamAttachMemAsync(@NativeType("CUstream") long hStream, @NativeType("CUdeviceptr") long dptr, @NativeType("size_t") long length, @NativeType("unsigned int") int flags) {
         long __functionAddress = Functions.StreamAttachMemAsync;
         if (CHECKS) {
-            check(hStream);
             check(dptr);
         }
         return callPPPI(__functionAddress, hStream, dptr, length, flags);

@@ -191,7 +191,6 @@ public class CU80 extends CU70 {
         long __functionAddress = Functions.MemPrefetchAsync;
         if (CHECKS) {
             check(devPtr);
-            check(hStream);
         }
         return callPPPI(__functionAddress, devPtr, count, dstDevice, hStream);
     }
@@ -247,7 +246,6 @@ public class CU80 extends CU70 {
     public static int cuStreamWaitValue32(@NativeType("CUstream") long stream, @NativeType("CUdeviceptr") long addr, @NativeType("cuuint32_t") int value, @NativeType("unsigned int") int flags) {
         long __functionAddress = Functions.StreamWaitValue32;
         if (CHECKS) {
-            check(stream);
             check(addr);
         }
         return callPPI(__functionAddress, stream, addr, value, flags);
@@ -259,7 +257,6 @@ public class CU80 extends CU70 {
     public static int cuStreamWaitValue64(@NativeType("CUstream") long stream, @NativeType("CUdeviceptr") long addr, @NativeType("cuuint64_t") long value, @NativeType("unsigned int") int flags) {
         long __functionAddress = Functions.StreamWaitValue64;
         if (CHECKS) {
-            check(stream);
             check(addr);
         }
         return callPPJI(__functionAddress, stream, addr, value, flags);
@@ -271,7 +268,6 @@ public class CU80 extends CU70 {
     public static int cuStreamWriteValue32(@NativeType("CUstream") long stream, @NativeType("CUdeviceptr") long addr, @NativeType("cuuint32_t") int value, @NativeType("unsigned int") int flags) {
         long __functionAddress = Functions.StreamWriteValue32;
         if (CHECKS) {
-            check(stream);
             check(addr);
         }
         return callPPI(__functionAddress, stream, addr, value, flags);
@@ -283,7 +279,6 @@ public class CU80 extends CU70 {
     public static int cuStreamWriteValue64(@NativeType("CUstream") long stream, @NativeType("CUdeviceptr") long addr, @NativeType("cuuint64_t") long value, @NativeType("unsigned int") int flags) {
         long __functionAddress = Functions.StreamWriteValue64;
         if (CHECKS) {
-            check(stream);
             check(addr);
         }
         return callPPJI(__functionAddress, stream, addr, value, flags);
@@ -293,9 +288,6 @@ public class CU80 extends CU70 {
 
     public static int ncuStreamBatchMemOp(long stream, int count, long paramArray, int flags) {
         long __functionAddress = Functions.StreamBatchMemOp;
-        if (CHECKS) {
-            check(stream);
-        }
         return callPPI(__functionAddress, stream, count, paramArray, flags);
     }
 

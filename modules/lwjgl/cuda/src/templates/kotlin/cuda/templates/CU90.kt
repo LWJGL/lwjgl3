@@ -52,7 +52,7 @@ val CU90 = "CU90".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         unsigned_int.IN("blockDimY", ""),
         unsigned_int.IN("blockDimZ", ""),
         unsigned_int.IN("sharedMemBytes", ""),
-        CUstream.IN("hStream", ""),
+        nullable..CUstream.IN("hStream", ""),
         Unsafe..nullable..void.p.p.IN("kernelParams", "")
     ).ptsz()
 

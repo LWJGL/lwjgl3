@@ -73,7 +73,6 @@ public class CU90 extends CU80 {
         long __functionAddress = Functions.LaunchCooperativeKernel;
         if (CHECKS) {
             check(f);
-            check(hStream);
         }
         return callPPPI(__functionAddress, f, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, hStream, kernelParams);
     }

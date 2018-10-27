@@ -110,7 +110,7 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         CUdeviceptr.IN("devPtr", ""),
         size_t.IN("count", ""),
         CUdevice.IN("dstDevice", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -150,7 +150,7 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "StreamWaitValue32",
         "",
 
-        CUstream.IN("stream", ""),
+        nullable..CUstream.IN("stream", ""),
         CUdeviceptr.IN("addr", ""),
         cuuint32_t.IN("value", ""),
         unsigned_int.IN("flags", "")
@@ -160,7 +160,7 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "StreamWaitValue64",
         "",
 
-        CUstream.IN("stream", ""),
+        nullable..CUstream.IN("stream", ""),
         CUdeviceptr.IN("addr", ""),
         cuuint64_t.IN("value", ""),
         unsigned_int.IN("flags", "")
@@ -170,7 +170,7 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "StreamWriteValue32",
         "",
 
-        CUstream.IN("stream", ""),
+        nullable..CUstream.IN("stream", ""),
         CUdeviceptr.IN("addr", ""),
         cuuint32_t.IN("value", ""),
         unsigned_int.IN("flags", "")
@@ -180,7 +180,7 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "StreamWriteValue64",
         "",
 
-        CUstream.IN("stream", ""),
+        nullable..CUstream.IN("stream", ""),
         CUdeviceptr.IN("addr", ""),
         cuuint64_t.IN("value", ""),
         unsigned_int.IN("flags", "")
@@ -190,7 +190,7 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "StreamBatchMemOp",
         "",
 
-        CUstream.IN("stream", ""),
+        nullable..CUstream.IN("stream", ""),
         AutoSize("paramArray")..unsigned_int.IN("count", ""),
         CUstreamBatchMemOpParams.p.IN("paramArray", ""),
         unsigned_int.IN("flags", "")

@@ -148,9 +148,6 @@ public class CU40 extends CU {
     @NativeType("CUresult")
     public static int cuCtxSetCurrent(@NativeType("CUcontext") long ctx) {
         long __functionAddress = Functions.CtxSetCurrent;
-        if (CHECKS) {
-            check(ctx);
-        }
         return callPI(__functionAddress, ctx);
     }
 
@@ -242,7 +239,6 @@ public class CU40 extends CU {
         if (CHECKS) {
             check(dst);
             check(src);
-            check(hStream);
         }
         return callPPPPI(__functionAddress, dst, src, ByteCount, hStream);
     }
@@ -257,7 +253,6 @@ public class CU40 extends CU {
             check(dstContext);
             check(srcDevice);
             check(srcContext);
-            check(hStream);
         }
         return callPPPPPPI(__functionAddress, dstDevice, dstContext, srcDevice, srcContext, ByteCount, hStream);
     }
@@ -268,7 +263,6 @@ public class CU40 extends CU {
         long __functionAddress = Functions.Memcpy3DPeerAsync;
         if (CHECKS) {
             CUDA_MEMCPY3D_PEER.validate(pCopy);
-            check(hStream);
         }
         return callPPI(__functionAddress, pCopy, hStream);
     }

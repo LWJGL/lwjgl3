@@ -5,6 +5,8 @@
  */
 package org.lwjgl.cuda;
 
+import javax.annotation.*;
+
 import java.nio.*;
 
 import org.lwjgl.system.*;
@@ -96,12 +98,12 @@ public class CU65 extends CU60 {
     }
 
     @NativeType("CUresult")
-    public static int cuOccupancyMaxPotentialBlockSize(@NativeType("int *") IntBuffer minGridSize, @NativeType("int *") IntBuffer blockSize, @NativeType("CUfunction") long func, @NativeType("size_t (*) (int)") CUoccupancyB2DSizeI blockSizeToDynamicSMemSize, @NativeType("size_t") long dynamicSMemSize, int blockSizeLimit) {
+    public static int cuOccupancyMaxPotentialBlockSize(@NativeType("int *") IntBuffer minGridSize, @NativeType("int *") IntBuffer blockSize, @NativeType("CUfunction") long func, @Nullable @NativeType("size_t (*) (int)") CUoccupancyB2DSizeI blockSizeToDynamicSMemSize, @NativeType("size_t") long dynamicSMemSize, int blockSizeLimit) {
         if (CHECKS) {
             check(minGridSize, 1);
             check(blockSize, 1);
         }
-        return ncuOccupancyMaxPotentialBlockSize(memAddress(minGridSize), memAddress(blockSize), func, blockSizeToDynamicSMemSize.address(), dynamicSMemSize, blockSizeLimit);
+        return ncuOccupancyMaxPotentialBlockSize(memAddress(minGridSize), memAddress(blockSize), func, memAddressSafe(blockSizeToDynamicSMemSize), dynamicSMemSize, blockSizeLimit);
     }
 
     // --- [ cuOccupancyMaxPotentialBlockSizeWithFlags ] ---

@@ -184,9 +184,6 @@ public class CU100 extends CU92 {
     @NativeType("CUresult")
     public static int cuStreamBeginCapture(@NativeType("CUstream") long hStream) {
         long __functionAddress = Functions.StreamBeginCapture;
-        if (CHECKS) {
-            check(hStream);
-        }
         return callPI(__functionAddress, hStream);
     }
 
@@ -194,9 +191,6 @@ public class CU100 extends CU92 {
 
     public static int ncuStreamEndCapture(long hStream, long phGraph) {
         long __functionAddress = Functions.StreamEndCapture;
-        if (CHECKS) {
-            check(hStream);
-        }
         return callPPI(__functionAddress, hStream, phGraph);
     }
 
@@ -212,9 +206,6 @@ public class CU100 extends CU92 {
 
     public static int ncuStreamIsCapturing(long hStream, long captureStatus) {
         long __functionAddress = Functions.StreamIsCapturing;
-        if (CHECKS) {
-            check(hStream);
-        }
         return callPPI(__functionAddress, hStream, captureStatus);
     }
 
@@ -307,9 +298,6 @@ public class CU100 extends CU92 {
 
     public static int ncuSignalExternalSemaphoresAsync(long extSemArray, long paramsArray, int numExtSems, long stream) {
         long __functionAddress = Functions.SignalExternalSemaphoresAsync;
-        if (CHECKS) {
-            check(stream);
-        }
         return callPPPI(__functionAddress, extSemArray, paramsArray, numExtSems, stream);
     }
 
@@ -325,9 +313,6 @@ public class CU100 extends CU92 {
 
     public static int ncuWaitExternalSemaphoresAsync(long extSemArray, long paramsArray, int numExtSems, long stream) {
         long __functionAddress = Functions.WaitExternalSemaphoresAsync;
-        if (CHECKS) {
-            check(stream);
-        }
         return callPPPI(__functionAddress, extSemArray, paramsArray, numExtSems, stream);
     }
 
@@ -355,7 +340,6 @@ public class CU100 extends CU92 {
     public static int ncuLaunchHostFunc(long hStream, long fn, long userData) {
         long __functionAddress = Functions.LaunchHostFunc;
         if (CHECKS) {
-            check(hStream);
             check(userData);
         }
         return callPPPI(__functionAddress, hStream, fn, userData);
@@ -862,7 +846,6 @@ public class CU100 extends CU92 {
         long __functionAddress = Functions.GraphLaunch;
         if (CHECKS) {
             check(hGraphExec);
-            check(hStream);
         }
         return callPPI(__functionAddress, hGraphExec, hStream);
     }

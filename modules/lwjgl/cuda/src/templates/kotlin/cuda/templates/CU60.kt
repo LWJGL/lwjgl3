@@ -42,7 +42,7 @@ val CU60 = "CU60".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "StreamAttachMemAsync",
         "",
 
-        CUstream.IN("hStream", ""),
+        nullable..CUstream.IN("hStream", ""),
         CUdeviceptr.IN("dptr", ""),
         size_t.IN("length", ""),
         unsigned_int.IN("flags", "")

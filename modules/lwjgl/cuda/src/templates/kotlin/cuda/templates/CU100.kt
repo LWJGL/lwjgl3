@@ -69,14 +69,14 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "StreamBeginCapture",
         "",
 
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(
         "StreamEndCapture",
         "",
 
-        CUstream.IN("hStream", ""),
+        nullable..CUstream.IN("hStream", ""),
         Check(1)..CUgraph.p.OUT("phGraph", "")
     ).ptsz()
 
@@ -84,7 +84,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "StreamIsCapturing",
         "",
 
-        CUstream.IN("hStream", ""),
+        nullable..CUstream.IN("hStream", ""),
         Check(1)..CUstreamCaptureStatus.p.OUT("captureStatus", "")
     ).ptsz()
 
@@ -136,7 +136,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         CUexternalSemaphore.const.p.IN("extSemArray", ""),
         nullable..CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.const.p.IN("paramsArray", ""),
         AutoSize("extSemArray", "paramsArray")..unsigned_int.IN("numExtSems", ""),
-        CUstream.IN("stream", "")
+        nullable..CUstream.IN("stream", "")
     ).ptsz()
 
     CUresult(
@@ -146,7 +146,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         CUexternalSemaphore.const.p.IN("extSemArray", ""),
         nullable..CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.const.p.IN("paramsArray", ""),
         AutoSize("extSemArray", "paramsArray")..unsigned_int.IN("numExtSems", ""),
-        CUstream.IN("stream", "")
+        nullable..CUstream.IN("stream", "")
     ).ptsz()
 
     CUresult(
@@ -160,7 +160,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "LaunchHostFunc",
         "",
 
-        CUstream.IN("hStream", ""),
+        nullable..CUstream.IN("hStream", ""),
         CUhostFn.IN("fn", ""),
         opaque_p.IN("userData", "")
     ).ptsz()
@@ -426,7 +426,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         CUgraphExec.IN("hGraphExec", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz()
 
     CUresult(

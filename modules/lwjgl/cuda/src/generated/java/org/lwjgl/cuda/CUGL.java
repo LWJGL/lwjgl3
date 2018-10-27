@@ -168,9 +168,6 @@ public class CUGL {
 
     public static int ncuGLMapBufferObjectAsync(long dptr, long size, int buffer, long hStream) {
         long __functionAddress = Functions.GLMapBufferObjectAsync;
-        if (CHECKS) {
-            check(hStream);
-        }
         return callPPPI(__functionAddress, dptr, size, buffer, hStream);
     }
 
@@ -188,9 +185,6 @@ public class CUGL {
     @NativeType("CUresult")
     public static int cuGLUnmapBufferObjectAsync(@NativeType("GLuint") int buffer, @NativeType("CUstream") long hStream) {
         long __functionAddress = Functions.GLUnmapBufferObjectAsync;
-        if (CHECKS) {
-            check(hStream);
-        }
         return callPI(__functionAddress, buffer, hStream);
     }
 

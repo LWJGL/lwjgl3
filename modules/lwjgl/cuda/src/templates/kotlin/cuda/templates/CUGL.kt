@@ -101,7 +101,7 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         Check(1)..CUdeviceptr.p.OUT("dptr", ""),
         Check(1)..size_t.p.OUT("size", ""),
         GLuint.IN("buffer", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     ).ptsz(2)
 
     CUresult(
@@ -109,6 +109,6 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         GLuint.IN("buffer", ""),
-        CUstream.IN("hStream", "")
+        nullable..CUstream.IN("hStream", "")
     )
 }

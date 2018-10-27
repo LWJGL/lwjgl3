@@ -46,7 +46,7 @@ val CU65 = "CU65".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         Check(1)..int.p.OUT("minGridSize", ""),
         Check(1)..int.p.OUT("blockSize", ""),
         CUfunction.IN("func", ""),
-        CUoccupancyB2DSize.IN("blockSizeToDynamicSMemSize", ""),
+        nullable..CUoccupancyB2DSize.IN("blockSizeToDynamicSMemSize", ""),
         size_t.IN("dynamicSMemSize", ""),
         int.IN("blockSizeLimit", "")
     )
