@@ -42,27 +42,15 @@ public class StackTest {
 
         assertEquals(stack.getPointer(), size);
 
-        try (MemoryStack frame = stack.push()) {
-            frame.malloc(1);
-            assertEquals(frame.getPointer(), size - 1);
-        }
-
-        try (MemoryStack frame = stack.push()) {
-            frame.malloc(1);
-            frame.mallocShort(1);
-            assertEquals(frame.getPointer(), size - 4);
-        }
-
-        try (MemoryStack frame = stack.push()) {
-            frame.malloc(1);
-            frame.mallocInt(1);
-            assertEquals(frame.getPointer(), size - 8);
-        }
-
-        try (MemoryStack frame = stack.push()) {
-            frame.malloc(1);
-            frame.mallocLong(1);
-            assertEquals(frame.getPointer(), size - 16);
+        for (int i = 0; i < 32; i++) {
+            int pot = 1 << i;
+            if (size <= pot) {
+                break;
+            }
+            try (MemoryStack frame = stack.push()) {
+                frame.nmalloc(1);
+                assertEquals(frame.nmalloc(pot, pot) & (pot - 1), 0);
+            }
         }
     }
 

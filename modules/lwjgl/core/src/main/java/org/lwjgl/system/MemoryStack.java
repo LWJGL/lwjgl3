@@ -302,15 +302,15 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @return the memory address on the stack for the requested allocation
      */
     public long nmalloc(int alignment, int size) {
-        int newPointer = pointer - size;
-        if (CHECKS && newPointer < 0) {
+        // Align address to the specified alignment
+        long address = (this.address + pointer - size) & ~(long)(alignment - 1);
+
+        pointer = (int)(address - this.address);
+        if (CHECKS && pointer < 0) {
             throw new OutOfMemoryError("Out of stack space.");
         }
 
-        // Align pointer to the specified alignment
-        pointer = newPointer & ~(alignment - 1);
-
-        return this.address + ((long)pointer & 0xFFFF_FFFFL);
+        return address;
     }
 
     /**
