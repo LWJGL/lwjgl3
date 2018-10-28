@@ -57,8 +57,6 @@ val ZSTD_frameType_e = "ZSTD_frameType_e".enumType
 
 val ZSTD_CCtx_params = "ZSTD_CCtx_params".opaque
 
-val unsignedb = PrimitiveType("unsigned", PrimitiveMapping.BOOLEAN4)
-
 val ZSTD_allocFunction = Module.ZSTD.callback {
     void.p(
         "ZSTDAllocFunction",

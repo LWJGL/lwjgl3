@@ -26,8 +26,6 @@ val LZ4_streamDecode_t = "LZ4_streamDecode_t".opaque
 
 // lz4frame.h
 
-val unsignedb = PrimitiveType("unsigned", PrimitiveMapping.BOOLEAN4)
-
 val LZ4F_errorCode_t = typedef(size_t, "LZ4F_errorCode_t")
 
 val LZ4F_blockSizeID_t = "LZ4F_blockSizeID_t".enumType
