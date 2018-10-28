@@ -1082,8 +1082,8 @@
         <!-- Bullet -->
         <release-module package="org.lwjgl.bullet" name="bullet" native-library="lwjgl_bullet" title="bullet" if:true="${binding.bullet}"/>
 
-        <!-- cuda -->
-        <release-module package="org.lwjgl.cuda" name="cuda" title="cuda" if:true="${binding.cuda}"/>
+        <!-- CUDA -->
+        <release-module package="org.lwjgl.cuda" name="cuda" title="CUDA" if:true="${binding.cuda}"/>
 
         <!-- EGL -->
         <release-module package="org.lwjgl.egl" name="egl" title="EGL" license="khronos" if:true="${binding.egl}"/>
