@@ -357,8 +357,5 @@ class UserData(
         if (!(param.nativeType is PointerType<*> && param.nativeType.elementType is OpaqueType)) {
             throw IllegalArgumentException("The UserData modifier can only be applied to opaque pointer parameters.")
         }
-        if (!param.isInput) {
-            throw IllegalArgumentException("The UserData modifier can only be applied to input parameters.")
-        }
     }
 }

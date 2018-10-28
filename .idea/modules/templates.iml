@@ -18,6 +18,7 @@
     <orderEntry type="module" module-name="jawt-templates" />
     <orderEntry type="module" module-name="jemalloc-templates" />
     <orderEntry type="module" module-name="libdivide-templates" />
+    <orderEntry type="module" module-name="llvm-templates" />
     <orderEntry type="module" module-name="lmdb-templates" />
     <orderEntry type="module" module-name="lz4-templates" />
     <orderEntry type="module" module-name="meow-templates" />

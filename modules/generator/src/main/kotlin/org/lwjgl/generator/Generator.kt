@@ -55,6 +55,7 @@ enum class Module(
     JAWT("binding.jawt", "org.lwjgl.system.jawt", CallingConvention.STDCALL),
     JEMALLOC("binding.jemalloc", "org.lwjgl.system.jemalloc"),
     LIBDIVIDE("binding.libdivide", "org.lwjgl.util.libdivide", arrayOverloads = false),
+    LLVM("binding.llvm", "org.lwjgl.llvm", arrayOverloads = false),
     LMDB("binding.lmdb", "org.lwjgl.util.lmdb"),
     LZ4("binding.lz4", "org.lwjgl.util.lz4", arrayOverloads = false),
     MEOW("binding.meow", "org.lwjgl.util.meow", arrayOverloads = false),

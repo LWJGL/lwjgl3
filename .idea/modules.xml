@@ -25,6 +25,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/jemalloc-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/jemalloc-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/libdivide.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/libdivide.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/libdivide-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/libdivide-templates.iml" group="TEMPLATES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/llvm.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/llvm.iml" group="MODULES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/llvm-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/llvm-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lmdb.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lmdb.iml" group="MODULES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/lmdb-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/lmdb-templates.iml" group="TEMPLATES" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lz4.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lz4.iml" group="MODULES" />

@@ -370,6 +370,7 @@
             <compileBinding binding="jawt"/>
             <compileBinding binding="jemalloc"/>
             <compileBinding binding="libdivide"/>
+            <compileBinding binding="llvm"/>
             <compileBinding binding="lmdb"/>
             <compileBinding binding="lz4"/>
             <compileBinding binding="meow"/>
@@ -595,6 +596,7 @@
             <include name="org/lwjgl/demo/cuda/**" if:true="${binding.cuda}"/>
             <include name="org/lwjgl/demo/egl/**" if:set="test.egl"/>
             <include name="org/lwjgl/demo/glfw/**" if:set="test.glfw"/>
+            <include name="org/lwjgl/demo/llvm/**" if:true="${binding.llvm}"/>
             <include name="org/lwjgl/demo/nanovg/**" if:set="test.nanovg"/>
             <include name="org/lwjgl/demo/nuklear/**" if:set="test.nuklear"/>
 
@@ -1114,6 +1116,9 @@
 
         <!-- libdivide -->
         <release-module package="org.lwjgl.util.libdivide" name="libdivide" native-library="lwjgl_libdivide" title="libdivide" if:true="${binding.libdivide}"/>
+
+        <!-- LLVM -->
+        <release-module package="org.lwjgl.llvm" name="llvm" title="LLVM/Clang" if:true="${binding.llvm}"/>
 
         <!-- LMDB -->
         <release-module package="org.lwjgl.util.lmdb" name="lmdb" native-library="lwjgl_lmdb" title="LMDB" if:true="${binding.lmdb}"/>

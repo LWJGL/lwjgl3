@@ -169,6 +169,7 @@ improve the chances of a quick and useful response.
 |[dyncall](http://www.dyncall.org/)|Encapsulates architecture-, OS- and compiler-specific function call semantics in a virtual bind argument parameters from left to right and then call interface allowing programmers to call C functions in a completely dynamic manner.|
 |[jemalloc](http://jemalloc.net/)|A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.|
 |[libdivide](https://libdivide.com/)|A library that replaces expensive integer divides with comparatively cheap multiplication and bitshifts.|
+|[LLVM](https://llvm.org/)|A collection of modular and reusable compiler and toolchain technologies.|
 |[LMDB](https://symas.com/products/lightning-memory-mapped-database/)|An extraordinarily fast, memory-efficient database. With memory-mapped files, it has the read performance of a pure in-memory database while retaining the persistence of standard disk-based databases.|
 |[LZ4](http://lz4.github.io/lz4/)|A lossless data compression algorithm that is focused on compression and decompression speed.|
 |[Meow hash](https://github.com/cmuratori/meow_hash)|An extremely fast non-cryptographic hash.|

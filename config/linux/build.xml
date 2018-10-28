@@ -216,6 +216,9 @@
         <!-- LIBDIVIDE -->
         <build_simple module="libdivide"/>
 
+        <!-- LLVM -->
+        <build_simple module="llvm"/>
+
         <!-- LMDB -->
         <build module="lmdb" simple="true" if:true="${binding.lmdb}">
             <beforeCompile>

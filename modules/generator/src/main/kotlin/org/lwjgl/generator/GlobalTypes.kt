@@ -15,6 +15,7 @@ val int = IntegerType("int", PrimitiveMapping.INT)
 val intb = PrimitiveType("int", PrimitiveMapping.BOOLEAN4) // integer mapped to boolean
 val unsigned = IntegerType("unsigned", PrimitiveMapping.INT, unsigned = true)
 val unsignedb = PrimitiveType("unsigned", PrimitiveMapping.BOOLEAN4)
+val long = IntegerType("long", PrimitiveMapping.INT)
 val float = PrimitiveType("float", PrimitiveMapping.FLOAT)
 val double = PrimitiveType("double", PrimitiveMapping.DOUBLE)
 

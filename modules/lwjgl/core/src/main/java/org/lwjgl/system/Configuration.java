@@ -335,6 +335,17 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the jemalloc library (<b>org.lwjgl.system.jemalloc.libname</b>). */
     public static final Configuration<String> JEMALLOC_LIBRARY_NAME = new Configuration<>("org.lwjgl.system.jemalloc.libname", StateInit.STRING);
 
+    // -- LLVM
+
+    /** Similar to {@link #LIBRARY_NAME} for the LLVM library (<b>org.lwjgl.llvm.libname</b>). */
+    public static final Configuration<String> LLVM_LIBRARY_NAME = new Configuration<>("org.lwjgl.llvm.libname", StateInit.STRING);
+
+    /** Similar to {@link #LIBRARY_NAME} for the LLVM/Clang Library (<b>org.lwjgl.llvm.clang.libname</b>). */
+    public static final Configuration<String> LLVM_CLANG_LIBRARY_NAME = new Configuration<>("org.lwjgl.llvm.clang.libname", StateInit.STRING);
+
+    /** Similar to {@link #LIBRARY_NAME} for the LLVM/LTO library (<b>org.lwjgl.llvm.clang.libname</b>). */
+    public static final Configuration<String> LLVM_LTO_LIBRARY_NAME = new Configuration<>("org.lwjgl.llvm.lto.libname", StateInit.STRING);
+
     // -- ODBC
 
     /** Similar to {@link #LIBRARY_NAME} for the ODBC library (<b>org.lwjgl.odbc.libname</b>). */
