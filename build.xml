@@ -133,7 +133,7 @@
             <compilerarg value="-Xno-call-assertions"/>
             <compilerarg value="-Xno-param-assertions"/>
             <compilerarg value="-Xreport-perf"/>
-            <compilerarg value="-Xprogressive"/>
+            <compilerarg value="-progressive"/>
 
             <src path="${src.generator}/kotlin"/>
         </kotlinc>
@@ -208,7 +208,7 @@
             <compilerarg value="-Xno-call-assertions"/>
             <compilerarg value="-Xno-param-assertions"/>
             <compilerarg value="-Xreport-perf"/>
-            <compilerarg value="-Xprogressive"/>
+            <compilerarg value="-progressive"/>
 
             <src path="${core.kotlin.path}/dyncall"/>
             <src path="${core.kotlin.path}/jni"/>
@@ -291,7 +291,7 @@
             <classpath>
                 <pathelement path="${bin.generator}"/>
                 <pathelement path="${bin.templates}"/>
-                <pathelement path="${kotlinc}/lib/kotlin-runtime.jar"/>
+                <pathelement path="${kotlinc}/lib/kotlin-stdlib.jar"/>
             </classpath>
 
             <jvmarg line="${generator.bindings}"/>

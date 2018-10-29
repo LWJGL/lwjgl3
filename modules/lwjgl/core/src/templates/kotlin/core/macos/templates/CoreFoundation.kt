@@ -181,7 +181,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(Module.CORE_MACOS, nativeSubPa
             """
         ),
         CFURLPathStyle.IN("pathStyle", "the operating system path style used in {@code filePath}", PathStyles),
-        Boolean.IN(
+        core.macos.Boolean.IN(
             "isDirectory",
             """
             a Boolean value that specifies whether filePath is treated as a directory path when resolving against relative path components. Pass true if the

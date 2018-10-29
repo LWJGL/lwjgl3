@@ -82,7 +82,9 @@ class Func(
         getParams { (withJNIEnv || it !== JNI_ENV) && (withExplicitFunctionAddress || it !== EXPLICIT_FUNCTION_ADDRESS) && !it.has<Virtual>() }
 
     /** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
-    internal inline fun <reified T> getReferenceParam(reference: String) where T : ParameterModifier, T : ReferenceModifier = parameters.asSequence().firstOrNull {
+    internal inline fun <reified T> getReferenceParam(reference: String)
+        where T : ParameterModifier,
+              T : ReferenceModifier = parameters.asSequence().firstOrNull {
         it.has<T>(reference)
     } // Assumes at most 1 parameter will be found that references the specified parameter
 
@@ -188,9 +190,15 @@ class Func(
     internal val returnsNull
         get() = !(has(Nonnull) || has(Address) || (has<Macro>() && !get<Macro>().function))
 
-    private fun hasAutoSizePredicate(reference: Parameter): (Parameter) -> Boolean = { it.has<AutoSize>() && it.get<AutoSize>().hasReference(reference.name) }
+    private inline fun <reified T> hasReference(reference: Parameter): (Parameter) -> Boolean
+        where T : ParameterModifier,
+              T : ReferenceModifier = { it.has<T>() && it.get<T>().hasReference(reference.name) }
 
-    internal fun hasAutoSizeFor(reference: Parameter) = hasParam(hasAutoSizePredicate(reference))
+    private inline fun <reified T> hasReferenceFor(reference: Parameter)
+        where T : ParameterModifier,
+              T : ReferenceModifier = hasParam(hasReference<T>(reference))
+
+    internal fun hasAutoSizeFor(reference: Parameter) = hasReferenceFor<AutoSize>(reference)
 
     internal val hideAutoSizeResultParam = returns.nativeType is PointerType<*> && getParams { it.isAutoSizeResultOut }.count() == 1
 
@@ -210,7 +218,7 @@ class Func(
                 javaMethodType
         ).let {
             if (annotate) {
-                nativeType.annotate(it).let {annotatedType ->
+                nativeType.annotate(it).let { annotatedType ->
                     if (nativeType.isReference && has(nullable)) {
                         "@Nullable $annotatedType"
                     } else {
@@ -237,7 +245,7 @@ class Func(
             }
         }
 
-    private fun Parameter.asNativeMethodCallParam(mode: GenerationMode) = when {
+    private fun Parameter.asNativeMethodArgument(mode: GenerationMode) = when {
         nativeType.dereference is StructType || nativeType is ObjectType
                                                          ->
             if (has(nullable))
@@ -899,7 +907,7 @@ class Func(
                 hasStack || code.hasStatements(code.javaFinally, ApplyTo.NORMAL)
             ) {
                 printList(getNativeParams()) {
-                    it.asNativeMethodCallParam(NORMAL)
+                    it.asNativeMethodArgument(NORMAL)
                 }
             }
         }
@@ -1134,7 +1142,7 @@ class Func(
                 val hasAutoSize = hasAutoSizeFor(it)
                 it.apply {
                     if (hasAutoSize)
-                        getParams(hasAutoSizePredicate(this)).forEach { param -> transforms[param] = AutoSizeCharSequenceTransform(this) }
+                        getParams(hasReference<AutoSize>(this)).forEach { param -> transforms[param] = AutoSizeCharSequenceTransform(this) }
                 }
                 transforms[it] = CharSequenceTransform(!hasAutoSize)
                 true
@@ -1147,7 +1155,7 @@ class Func(
             transforms[returns] = PrimitiveValueReturnTransform(param.nativeType as PointerType<*>, param.name)
 
             // Transform the AutoSize parameter, if there is one
-            getParams(hasAutoSizePredicate(param)).forEach {
+            getParams(hasReference<AutoSize>(param)).forEach {
                 transforms[it] = Expression1Transform
             }
 
@@ -1168,7 +1176,7 @@ class Func(
                     }
                 } else if (it.nativeType is CharSequenceType) {
                     // Remove any transform from the maxLength parameter
-                    val maxLengthParam = getParam(hasAutoSizePredicate(it))
+                    val maxLengthParam = getParam(hasReference<AutoSize>(it))
                     transforms.remove(maxLengthParam)
 
                     // Hide length parameter and use the stack
@@ -1272,7 +1280,7 @@ class Func(
                         }
                         singleValueParams.forEach {
                             // Transform the AutoSize parameter
-                            val autoSizeParam = getParam(hasAutoSizePredicate(it)) // required
+                            val autoSizeParam = getParam(hasReference<AutoSize>(it)) // required
                             transforms[autoSizeParam] = ExpressionTransform("(1 << ${autoType.byteShift}) * $i")
 
                             val singleValue = it.get<SingleValue>()
@@ -1283,7 +1291,7 @@ class Func(
                 }
 
                 singleValueParams.forEach {
-                    transforms.remove(getParam(hasAutoSizePredicate(it)))
+                    transforms.remove(getParam(hasReference<AutoSize>(it)))
                 }
             }
 
@@ -1361,7 +1369,7 @@ class Func(
                 getParams { param -> param has ReturnParam }.forEach(::applyReturnValueTransforms)
 
                 // Transform the AutoSize parameter, if there is one
-                getParams(hasAutoSizePredicate(it)).forEach { param ->
+                getParams(hasReference<AutoSize>(it)).forEach { param ->
                     transforms[param] = Expression1Transform
                 }
 
@@ -1588,7 +1596,7 @@ class Func(
         val returnLater = code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE) || transforms[returns] is ReturnLaterTransform
         generateNativeMethodCall(returnLater, hasFinally) {
             printList(getNativeParams()) {
-                it.transformCallOrElse(transforms, it.asNativeMethodCallParam(ALTERNATIVE))
+                it.transformCallOrElse(transforms, it.asNativeMethodArgument(ALTERNATIVE))
             }
         }
 
@@ -1678,7 +1686,7 @@ class Func(
         }) {
             val t = transforms[it]
             if (t is ExpressionTransform)
-                t.transformCall(it, it.asNativeMethodCallParam(ALTERNATIVE))
+                t.transformCall(it, it.asNativeMethodArgument(ALTERNATIVE))
             else
                 it.name
         }

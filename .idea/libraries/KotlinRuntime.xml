@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="KotlinRuntime">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-runtime.jar!/" />
       <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-reflect.jar!/" />
       <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-stdlib.jar!/" />
       <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-stdlib-jdk7.jar!/" />
@@ -9,7 +8,6 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-runtime-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-reflect-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-stdlib-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-stdlib-jdk7-sources.jar!/" />

@@ -504,7 +504,7 @@ class NativeClass internal constructor(
 
         val documentation = super.documentation
         if (!documentation.isNullOrBlank())
-            println(processDocumentation(documentation!!).toJavaDoc(indentation = ""))
+            println(processDocumentation(documentation).toJavaDoc(indentation = ""))
         val isOpen = access === Access.PUBLIC && (hasFunctions || extends != null)
         print("${access.modifier}${if (isOpen) "" else "final "}class $className")
         extends.let {
