@@ -175,11 +175,6 @@ abstract class GeneratorTarget(
         return this
     }
 
-    fun <T : GeneratorTarget> T.nativeImport(vararg files: String): T {
-        preamble.nativeImport(*files)
-        return this
-    }
-
     protected fun linksFromRegex(pattern: String) = pattern.toRegex().let { regex ->
         Generator.tokens[module]!!
             .asSequence()
@@ -328,6 +323,11 @@ abstract class GeneratorTargetNative(
 
     open val skipNative = false
     var cpp = false
+
+    fun <T : GeneratorTargetNative> T.nativeImport(vararg files: String): T {
+        preamble.nativeImport(*files)
+        return this
+    }
 
     protected fun PrintWriter.generateNativePreamble() {
         print(HEADER)

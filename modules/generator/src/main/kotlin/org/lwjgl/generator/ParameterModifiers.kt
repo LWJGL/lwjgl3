@@ -186,7 +186,9 @@ class Expression(
     /** The expression to use instead of the parameter name. */
     val value: String,
     /** If true, the parameter will not be removed from the method signature. */
-    val keepParam: Boolean = false
+    val keepParam: Boolean = false,
+    /** If true, the normal method overload (without the applied Expression) will not be generated. */
+    val skipNormal: Boolean = false
 ) : ParameterModifier {
     override val isSpecial = true
 }
@@ -326,5 +328,20 @@ class PointerArray(
 
         if (param.paramType != ParameterType.IN)
             throw IllegalArgumentException("The PointerArray modifier can only be applied on input parameters.")
+    }
+}
+
+/** Marks a callback parameter as the "user data" parameter. */
+class UserData(
+    override val reference: String = ""
+) : ParameterModifier, ReferenceModifier {
+    override val isSpecial = false
+    override fun validate(param: Parameter) {
+        if (!(param.nativeType is PointerType<*> && param.nativeType.elementType is OpaqueType)) {
+            throw IllegalArgumentException("The UserData modifier can only be applied on opaque pointer parameters.")
+        }
+        if (param.paramType != ParameterType.IN) {
+            throw IllegalArgumentException("The UserData modifier can only be applied on input parameters.")
+        }
     }
 }

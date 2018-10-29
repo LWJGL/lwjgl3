@@ -12,7 +12,15 @@ class CallbackFunction internal constructor(
     nativeType: String,
     val returns: NativeType,
     vararg val signature: Parameter
-) : GeneratorTarget(module, className) {
+) : GeneratorTargetNative(module, className) {
+
+    init {
+        if (!skipNative && signature.singleOrNull { it.has<UserData>() } == null) {
+            throw IllegalArgumentException("Callbacks with struct-by-value results or parameters must specify the user data parameter. [$className, module: ${module.java}]")
+        }
+    }
+
+    val javaSignature = signature.asSequence().filter { !it.has<UserData>() }
 
     internal var functionDoc: (CallbackFunction) -> String = { "" }
     var additionalCode = ""
@@ -39,8 +47,8 @@ class CallbackFunction internal constructor(
 
     private val NativeType.dyncall
         get() = when (this) {
-            is PointerType<*>   -> 'p'
-            is PrimitiveType -> when (mapping) {
+            is PointerType<*> -> 'p'
+            is PrimitiveType  -> when (mapping) {
                 PrimitiveMapping.BOOLEAN -> 'B'
                 PrimitiveMapping.BYTE    -> 'c'
                 PrimitiveMapping.SHORT   -> 's'
@@ -52,7 +60,8 @@ class CallbackFunction internal constructor(
                 PrimitiveMapping.DOUBLE  -> 'd'
                 else                     -> throw IllegalArgumentException("Unsupported callback native type: $this")
             }
-            else             -> if (mapping === TypeMapping.VOID) 'v' else throw IllegalArgumentException("Unsupported callback native type: $this")
+            is StructType     -> 'p'
+            else              -> if (mapping === TypeMapping.VOID) 'v' else throw IllegalArgumentException("Unsupported callback native type: $this")
         }
 
     private val NativeType.argType
@@ -106,8 +115,14 @@ import static org.lwjgl.system.MemoryUtil.*;
         preamble.printJava(this)
 
         generateDocumentation(true)
-        print("""${access.modifier}abstract class $className extends Callback implements ${className}I {
+        println("""${access.modifier}abstract class $className extends Callback implements ${className}I {""")
+        if (!skipNative) {
+            println("""
+    public static final long DELEGATE = getDelegate();
 
+    private static native long getDelegate();""")
+        }
+        print("""
     /**
      * Creates a {@code $className} instance from the specified function pointer.
      *
@@ -158,10 +173,14 @@ import static org.lwjgl.system.MemoryUtil.*;
         }
 
         @Override
-        public ${returns.nativeMethodType} invoke(${signature.asSequence().joinToString(", ") {
-            "${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else it.nativeType.nativeMethodType} ${it.name}"
-        }}) {
-            ${if (returns.mapping != TypeMapping.VOID) "return " else ""}delegate.invoke(${signature.asSequence().map { it.name }.joinToString(", ")});
+        public ${returns.nativeMethodType} invoke(${javaSignature.joinToString(", ") {
+                "${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean"
+                else if (it.nativeType is StructType)
+                    it.nativeType.definition.className
+                else
+                    it.nativeType.nativeMethodType} ${it.name}"
+            }}) {
+            ${if (returns.mapping != TypeMapping.VOID) "return " else ""}delegate.invoke(${javaSignature.map { it.name }.joinToString(", ")});
         }
 
     }
@@ -183,7 +202,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
 @NativeType("$nativeType")
 ${access.modifier}interface ${className}I extends CallbackI.${returns.jniSignature} {
 
-    String SIGNATURE = ${"\"(${signature.asSequence().map { it.nativeType.dyncall }.joinToString("")})${returns.dyncall}\"".let {
+    String SIGNATURE = ${"\"(${javaSignature.map { it.nativeType.dyncall }.joinToString("")})${returns.dyncall}\"".let {
             if (module.callingConvention === CallingConvention.STDCALL) "Callback.__stdcall($it)" else it
         }};
 
@@ -196,8 +215,9 @@ ${access.modifier}interface ${className}I extends CallbackI.${returns.jniSignatu
         if (returns.mapping != TypeMapping.VOID)
             print("return ")
         print("""invoke(
-${signature.asSequence().map {
-            "$t$t${t}dcbArg${it.nativeType.argType}(args)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}"
+${javaSignature.map {
+            val arg = "dcbArg${it.nativeType.argType}(args)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}"
+            "$t$t$t${if (it.nativeType is StructType) "${it.nativeType.definition.className}.create($arg)" else arg}"
         }.joinToString(",\n")}
         );
     }
@@ -208,11 +228,40 @@ ${signature.asSequence().map {
             print(doc)
         }
         print("""
-    ${returns.annotate(returns.nativeMethodType)} invoke(${signature.asSequence().joinToString(", ") {
-            "${it.nativeType.annotate(if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else it.nativeType.nativeMethodType)} ${it.name}"
+    ${returns.annotate(returns.nativeMethodType)} invoke(${javaSignature.joinToString(", ") {
+            "${it.nativeType.annotate(if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else if (it.nativeType is StructType) it.nativeType.definition.className else it.nativeType.nativeMethodType)} ${it.name}"
         }});
 
 }""")
+    }
+
+    override val skipNative: Boolean
+        get() = returns !is StructType && signature.none { it.nativeType is StructType }
+
+    override fun PrintWriter.generateNative() {
+        print(HEADER)
+        preamble.printNative(this)
+
+        println(
+            """
+static ${returns.jniFunctionType} delegate(${signature.asSequence().joinToString(", ") {
+    "${it.nativeType.name} ${it.name}"
+}}) {
+    ${if (returns.mapping === TypeMapping.VOID) "" else "return "}((${returns.name} (*)(${javaSignature.joinToString(", ") {
+        "${it.toNativeType(null)}${if (it.nativeType is StructType) " *" else ""}"
+    }}))(uintptr_t)${signature.single { it.has<UserData>() }.name})(${javaSignature.joinToString(", ") {
+        "${if (it.nativeType is StructType) "&" else ""}${it.name}"
+    }});
+}
+
+EXTERN_C_ENTER
+
+JNIEXPORT jlong JNICALL Java_${nativeFileNameJNI}_getDelegate(JNIEnv *env, jclass clazz) {
+    UNUSED_PARAMS(env, clazz);
+    return (intptr_t)delegate;
+}
+
+EXTERN_C_EXIT""")
     }
 
 }
