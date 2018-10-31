@@ -14,7 +14,7 @@ import java.util.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-/** AWT integration demo using jawt. */
+/** GLFW canvas embedded in AWT using jawt. */
 public final class JAWTDemo {
 
     private JAWTDemo() {

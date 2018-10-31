@@ -28,6 +28,8 @@ public class LWJGLCanvas extends Canvas {
 
     private final JAWT awt;
 
+    private JAWTDrawingSurface ds;
+
     private final AbstractGears gears;
 
     private long    glfwWindow;
@@ -58,86 +60,86 @@ public class LWJGLCanvas extends Canvas {
 
     @Override
     public void paint(Graphics g) {
-        // Get the drawing surface
-        JAWTDrawingSurface ds = JAWT_GetDrawingSurface(awt.GetDrawingSurface(), this);
         if (ds == null) {
-            throw new IllegalStateException("awt->GetDrawingSurface() failed");
+            // Get the drawing surface
+            ds = JAWT_GetDrawingSurface(awt.GetDrawingSurface(), this);
+            if (ds == null) {
+                throw new IllegalStateException("awt->GetDrawingSurface() failed");
+            }
+        }
+
+        // Lock the drawing surface
+        int lock = JAWT_DrawingSurface_Lock(ds.Lock(), ds);
+        if ((lock & JAWT_LOCK_ERROR) != 0) {
+            throw new IllegalStateException("ds->Lock() failed");
         }
 
         try {
-            // Lock the drawing surface
-            int lock = JAWT_DrawingSurface_Lock(ds.Lock(), ds);
-            if ((lock & JAWT_LOCK_ERROR) != 0) {
-                throw new IllegalStateException("ds->Lock() failed");
+            // Get the drawing surface info
+            JAWTDrawingSurfaceInfo dsi = JAWT_DrawingSurface_GetDrawingSurfaceInfo(ds.GetDrawingSurfaceInfo(), ds);
+            if (dsi == null) {
+                throw new IllegalStateException("ds->GetDrawingSurfaceInfo() failed");
             }
 
             try {
-                // Get the drawing surface info
-                JAWTDrawingSurfaceInfo dsi = JAWT_DrawingSurface_GetDrawingSurfaceInfo(ds.GetDrawingSurfaceInfo(), ds);
-                if (dsi == null) {
-                    throw new IllegalStateException("ds->GetDrawingSurfaceInfo() failed");
-                }
+                // Get the platform-specific drawing info
+                JAWTWin32DrawingSurfaceInfo dsi_win = JAWTWin32DrawingSurfaceInfo.create(dsi.platformInfo());
 
-                try {
-                    // Get the platform-specific drawing info
-                    JAWTWin32DrawingSurfaceInfo dsi_win = JAWTWin32DrawingSurfaceInfo.create(dsi.platformInfo());
-
-                    long hdc = dsi_win.hdc();
-                    if (hdc != NULL) {
+                long hdc = dsi_win.hdc();
+                if (hdc != NULL) {
+                    if (glfwWindow == NULL) {
+                        // glfwWindowHint can be used here to configure the GL context
+                        glfwWindow = glfwAttachWin32Window(dsi_win.hwnd(), NULL);
                         if (glfwWindow == NULL) {
-                            // glfwWindowHint can be used here to configure the GL context
-                            glfwWindow = glfwAttachWin32Window(dsi_win.hwnd(), NULL);
-                            if (glfwWindow == NULL) {
-                                throw new IllegalStateException("Failed to attach win32 window.");
-                            }
-
-                            glfwMakeContextCurrent(glfwWindow);
-                            caps = GL.createCapabilities();
-
-                            gears.initGLState();
-                            resized = true;
-                        } else {
-                            glfwMakeContextCurrent(glfwWindow);
-                            GL.setCapabilities(caps);
+                            throw new IllegalStateException("Failed to attach win32 window.");
                         }
 
-                        if (resized) {
-                            glfwSetWindowSize(glfwWindow, getWidth(), getHeight());
-                            glViewport(0, 0, getWidth(), getHeight());
+                        glfwMakeContextCurrent(glfwWindow);
+                        caps = GL.createCapabilities();
 
-                            float f = getHeight() / (float)getWidth();
-
-                            glMatrixMode(GL_PROJECTION);
-                            glLoadIdentity();
-                            glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
-                            glMatrixMode(GL_MODELVIEW);
-
-                            resized = false;
-                        }
-
-                        gears.renderLoop();
-                        glfwSwapBuffers(glfwWindow);
-
-                        glfwMakeContextCurrent(NULL);
-                        GL.setCapabilities(null);
+                        gears.initGLState();
+                        resized = true;
+                    } else {
+                        glfwMakeContextCurrent(glfwWindow);
+                        GL.setCapabilities(caps);
                     }
-                } finally {
-                    // Free the drawing surface info
-                    JAWT_DrawingSurface_FreeDrawingSurfaceInfo(ds.FreeDrawingSurfaceInfo(), dsi);
+
+                    if (resized) {
+                        glfwSetWindowSize(glfwWindow, getWidth(), getHeight());
+                        glViewport(0, 0, getWidth(), getHeight());
+
+                        float f = getHeight() / (float)getWidth();
+
+                        glMatrixMode(GL_PROJECTION);
+                        glLoadIdentity();
+                        glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
+                        glMatrixMode(GL_MODELVIEW);
+
+                        resized = false;
+                    }
+
+                    gears.renderLoop();
+                    glfwSwapBuffers(glfwWindow);
+
+                    glfwMakeContextCurrent(NULL);
+                    GL.setCapabilities(null);
                 }
             } finally {
-                // Unlock the drawing surface
-                JAWT_DrawingSurface_Unlock(ds.Unlock(), ds);
+                // Free the drawing surface info
+                JAWT_DrawingSurface_FreeDrawingSurfaceInfo(ds.FreeDrawingSurfaceInfo(), dsi);
             }
         } finally {
-            // Free the drawing surface
-            JAWT_FreeDrawingSurface(awt.FreeDrawingSurface(), ds);
+            // Unlock the drawing surface
+            JAWT_DrawingSurface_Unlock(ds.Unlock(), ds);
         }
 
         repaint();
     }
 
     public void destroy() {
+        // Free the drawing surface
+        JAWT_FreeDrawingSurface(awt.FreeDrawingSurface(), ds);
+
         awt.free();
 
         if (glfwWindow != NULL) {
