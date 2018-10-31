@@ -1404,8 +1404,18 @@ public final class MemoryUtil {
      *
      * @param ptr   the starting memory address
      * @param value the value to set (memSet will convert it to unsigned byte)
+     * @param <T>   the buffer type
      */
     public static <T extends CustomBuffer<T>> void memSet(T ptr, int value) { memSet(memAddress(ptr), value, Integer.toUnsignedLong(ptr.remaining()) * ptr.sizeof()); }
+
+    /**
+     * Sets all bytes in a specified block of memory to a fixed value (usually zero).
+     *
+     * @param ptr   the starting memory address
+     * @param value the value to set (memSet will convert it to unsigned byte)
+     * @param <T>   the struct type
+     */
+    public static <T extends Struct> void memSet(T ptr, int value) { memSet(ptr.address, value, ptr.sizeof()); }
 
     // --- [ memcpy ] ---
 
@@ -1505,12 +1515,24 @@ public final class MemoryUtil {
      *
      * @param src the source memory address
      * @param dst the destination memory address
+     * @param <T> the buffer type
      */
     public static <T extends CustomBuffer<T>> void memCopy(T src, T dst) {
         if (CHECKS) {
             check(dst, src.remaining());
         }
         MultiReleaseMemCopy.copy(memAddress(src), memAddress(dst), Integer.toUnsignedLong(src.remaining()) * src.sizeof());
+    }
+
+    /**
+     * Sets all bytes of a struct to a copy of another struct.
+     *
+     * @param src the source struct
+     * @param dst the destination struct
+     * @param <T> the struct type
+     */
+    public static <T extends Struct> void memCopy(T src, T dst) {
+        MultiReleaseMemCopy.copy(src.address, dst.address, src.sizeof());
     }
 
     /*  -------------------------------------
