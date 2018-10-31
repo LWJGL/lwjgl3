@@ -6,29 +6,33 @@ The LWJGL core.
 * `modules/lwjgl/core/src/main/c`
 * `modules/lwjgl/core/src/main/java`
 * `modules/lwjgl/core/src/main/java9` (multi-release)
+* `modules/lwjgl/core/src/main/java10` (multi-release)
+* `modules/lwjgl/core/src/main/resources` (module-info)
 * `modules/lwjgl/core/src/templates/kotlin` (native binding templates)
 * `modules/lwjgl/core/src/generated/c`
 * `modules/lwjgl/core/src/generated/java`
-* `modules/lwjgl/core/src/test`
+* `modules/lwjgl/core/src/test/java`
 
-Module dependencies: n/a (but the Generator has to execute successfully first)
-Compile dependencies: n/a
+Module dependencies: n/a (but the Generator has to execute successfully first)  
+Compile dependencies: n/a  
 Test dependencies: TestNG, JCommander
 
 ### Bindings
 A module per LWJGL binding.
 * `modules/lwjgl/<binding>/src/main/c` (optional)
 * `modules/lwjgl/<binding>/src/main/java` (optional)
+* `modules/lwjgl/<binding>/src/main/resources` (module-info)
 * `modules/lwjgl/<binding>/src/templates/kotlin`
 * `modules/lwjgl/<binding>/src/generated/c` (optional)
 * `modules/lwjgl/<binding>/src/generated/java`
-* `modules/lwjgl/<binding>/src/test` (optional)
+* `modules/lwjgl/<binding>/src/test/java` (optional)
 
 Module dependencies: the core module
 
 ### Samples
-The LWJGL demo suite.
-* `modules/samples/src/test/java` (demo/tutorial code)
+The LWJGL demo & benchmarking suite.
+* `modules/samples/src/test/java/org/lwjgl/demo` (demo/tutorial code)
+* `modules/samples/src/test/java/org/lwjgl/jmh` (JMH benchmarks)
 * `modules/samples/src/test/resources` (images and other resources used in demos)
 
 Module dependencies: all core and binding modules
@@ -38,7 +42,7 @@ The source code Generator and related tools.
 * `modules/generator/src/main/java`
 * `modules/generator/src/main/kotlin`
 
-Module dependencies: n/a
+Module dependencies: n/a  
 Compile dependencies: Kotlin runtime, JDK tools
 
 # INSTALLATION
