@@ -129,47 +129,6 @@ public class JAWT extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@code version} field. */
     public JAWT version(@NativeType("jint") int value) { nversion(address(), value); return this; }
-    /** Sets the specified value to the {@code GetDrawingSurface} field. */
-    public JAWT GetDrawingSurface(@NativeType("void *") long value) { nGetDrawingSurface(address(), value); return this; }
-    /** Sets the specified value to the {@code FreeDrawingSurface} field. */
-    public JAWT FreeDrawingSurface(@NativeType("void *") long value) { nFreeDrawingSurface(address(), value); return this; }
-    /** Sets the specified value to the {@code Lock} field. */
-    public JAWT Lock(@NativeType("void *") long value) { nLock(address(), value); return this; }
-    /** Sets the specified value to the {@code Unlock} field. */
-    public JAWT Unlock(@NativeType("void *") long value) { nUnlock(address(), value); return this; }
-    /** Sets the specified value to the {@code GetComponent} field. */
-    public JAWT GetComponent(@NativeType("void *") long value) { nGetComponent(address(), value); return this; }
-    /** Sets the specified value to the {@code CreateEmbeddedFrame} field. */
-    public JAWT CreateEmbeddedFrame(@NativeType("void *") long value) { nCreateEmbeddedFrame(address(), value); return this; }
-    /** Sets the specified value to the {@code SetBounds} field. */
-    public JAWT SetBounds(@NativeType("void *") long value) { nSetBounds(address(), value); return this; }
-    /** Sets the specified value to the {@code SynthesizeWindowActivation} field. */
-    public JAWT SynthesizeWindowActivation(@NativeType("void *") long value) { nSynthesizeWindowActivation(address(), value); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public JAWT set(
-        int version,
-        long GetDrawingSurface,
-        long FreeDrawingSurface,
-        long Lock,
-        long Unlock,
-        long GetComponent,
-        long CreateEmbeddedFrame,
-        long SetBounds,
-        long SynthesizeWindowActivation
-    ) {
-        version(version);
-        GetDrawingSurface(GetDrawingSurface);
-        FreeDrawingSurface(FreeDrawingSurface);
-        Lock(Lock);
-        Unlock(Unlock);
-        GetComponent(GetComponent);
-        CreateEmbeddedFrame(CreateEmbeddedFrame);
-        SetBounds(SetBounds);
-        SynthesizeWindowActivation(SynthesizeWindowActivation);
-
-        return this;
-    }
 
     /**
      * Copies the specified struct data to this struct.
@@ -265,21 +224,5 @@ public class JAWT extends Struct implements NativeResource {
 
     /** Unsafe version of {@link #version(int) version}. */
     public static void nversion(long struct, int value) { UNSAFE.putInt(null, struct + JAWT.VERSION, value); }
-    /** Unsafe version of {@link #GetDrawingSurface(long) GetDrawingSurface}. */
-    public static void nGetDrawingSurface(long struct, long value) { memPutAddress(struct + JAWT.GETDRAWINGSURFACE, value); }
-    /** Unsafe version of {@link #FreeDrawingSurface(long) FreeDrawingSurface}. */
-    public static void nFreeDrawingSurface(long struct, long value) { memPutAddress(struct + JAWT.FREEDRAWINGSURFACE, value); }
-    /** Unsafe version of {@link #Lock(long) Lock}. */
-    public static void nLock(long struct, long value) { memPutAddress(struct + JAWT.LOCK, value); }
-    /** Unsafe version of {@link #Unlock(long) Unlock}. */
-    public static void nUnlock(long struct, long value) { memPutAddress(struct + JAWT.UNLOCK, value); }
-    /** Unsafe version of {@link #GetComponent(long) GetComponent}. */
-    public static void nGetComponent(long struct, long value) { memPutAddress(struct + JAWT.GETCOMPONENT, value); }
-    /** Unsafe version of {@link #CreateEmbeddedFrame(long) CreateEmbeddedFrame}. */
-    public static void nCreateEmbeddedFrame(long struct, long value) { memPutAddress(struct + JAWT.CREATEEMBEDDEDFRAME, value); }
-    /** Unsafe version of {@link #SetBounds(long) SetBounds}. */
-    public static void nSetBounds(long struct, long value) { memPutAddress(struct + JAWT.SETBOUNDS, value); }
-    /** Unsafe version of {@link #SynthesizeWindowActivation(long) SynthesizeWindowActivation}. */
-    public static void nSynthesizeWindowActivation(long struct, long value) { memPutAddress(struct + JAWT.SYNTHESIZEWINDOWACTIVATION, value); }
 
 }

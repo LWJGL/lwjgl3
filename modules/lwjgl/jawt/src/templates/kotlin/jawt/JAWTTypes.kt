@@ -57,10 +57,10 @@ val JAWT_DrawingSurfaceInfo = struct(Module.JAWT, "JAWTDrawingSurfaceInfo", nati
     JAWT_Rectangle.p.buffer("clip", "Clip rectangle array.")
 }
 
-val JAWT = struct(Module.JAWT, "JAWT", skipBuffer = true) {
+val JAWT = struct(Module.JAWT, "JAWT", skipBuffer = true, mutable = false) {
     documentation = "Structure for containing native AWT functions."
 
-    jint.member("version", "Version of this structure. This must always be set before calling JAWT_GetAWT()")
+    jint.member("version", "Version of this structure. This must always be set before calling JAWT_GetAWT()").mutable()
     nullable..opaque_p.member("GetDrawingSurface", "")
     nullable..opaque_p.member("FreeDrawingSurface", "")
     nullable..opaque_p.member("Lock", "")
