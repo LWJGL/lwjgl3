@@ -366,25 +366,13 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public ByteBuffer calloc(int size) { return calloc(1, size); }
 
     /** Single value version of {@link #malloc}. */
-    public ByteBuffer bytes(byte x) {
-        return malloc(1, 1).put(0, x);
-    }
-
+    public ByteBuffer bytes(byte x) { return malloc(1, 1).put(0, x); }
     /** Two value version of {@link #malloc}. */
-    public ByteBuffer bytes(byte x, byte y) {
-        return malloc(1, 2).put(0, x).put(1, y);
-    }
-
+    public ByteBuffer bytes(byte x, byte y) { return malloc(1, 2).put(0, x).put(1, y); }
     /** Three value version of {@link #malloc}. */
-    public ByteBuffer bytes(byte x, byte y, byte z) {
-        return malloc(1, 3).put(0, x).put(1, y).put(2, z);
-    }
-
+    public ByteBuffer bytes(byte x, byte y, byte z) { return malloc(1, 3).put(0, x).put(1, y).put(2, z); }
     /** Four value version of {@link #malloc}. */
-    public ByteBuffer bytes(byte x, byte y, byte z, byte w) {
-        return malloc(1, 4).put(0, x).put(1, y).put(2, z).put(3, w);
-    }
-
+    public ByteBuffer bytes(byte x, byte y, byte z, byte w) { return malloc(1, 4).put(0, x).put(1, y).put(2, z).put(3, w); }
     /** Vararg version of {@link #malloc}. */
     public ByteBuffer bytes(byte... values) {
         ByteBuffer buffer = malloc(1, values.length).put(values);
@@ -412,7 +400,6 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public ShortBuffer shorts(short x, short y, short z) { return mallocShort(3).put(0, x).put(1, y).put(2, z); }
     /** Four value version of {@link #mallocShort}. */
     public ShortBuffer shorts(short x, short y, short z, short w) { return mallocShort(4).put(0, x).put(1, y).put(2, z).put(3, w); }
-
     /** Vararg version of {@link #mallocShort}. */
     public ShortBuffer shorts(short... values) {
         ShortBuffer buffer = mallocShort(values.length).put(values);
@@ -424,7 +411,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
 
     /** Int version of {@link #malloc(int)}. */
     public IntBuffer mallocInt(int size) { return MemoryUtil.wrap(BUFFER_INT, nmalloc(4, size << 2), size); }
-
+    /** Int version of {@link #calloc(int)}. */
     public IntBuffer callocInt(int size) {
         int  bytes   = size * 4;
         long address = nmalloc(4, bytes);
@@ -440,7 +427,6 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public IntBuffer ints(int x, int y, int z) { return mallocInt(3).put(0, x).put(1, y).put(2, z); }
     /** Four value version of {@link #mallocInt}. */
     public IntBuffer ints(int x, int y, int z, int w) { return mallocInt(4).put(0, x).put(1, y).put(2, z).put(3, w); }
-
     /** Vararg version of {@link #mallocInt}. */
     public IntBuffer ints(int... values) {
         IntBuffer buffer = mallocInt(values.length).put(values);
@@ -468,7 +454,6 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public LongBuffer longs(long x, long y, long z) { return mallocLong(3).put(0, x).put(1, y).put(2, z); }
     /** Four value version of {@link #mallocLong}. */
     public LongBuffer longs(long x, long y, long z, long w) { return mallocLong(4).put(0, x).put(1, y).put(2, z).put(3, w); }
-
     /** Vararg version of {@link #mallocLong}. */
     public LongBuffer longs(long... more) {
         LongBuffer buffer = mallocLong(more.length).put(more);
@@ -496,7 +481,6 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public FloatBuffer floats(float x, float y, float z) { return mallocFloat(3).put(0, x).put(1, y).put(2, z); }
     /** Four value version of {@link #mallocFloat}. */
     public FloatBuffer floats(float x, float y, float z, float w) { return mallocFloat(4).put(0, x).put(1, y).put(2, z).put(3, w); }
-
     /** Vararg version of {@link #mallocFloat}. */
     public FloatBuffer floats(float... values) {
         FloatBuffer buffer = mallocFloat(values.length).put(values);
@@ -524,7 +508,6 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public DoubleBuffer doubles(double x, double y, double z) { return mallocDouble(3).put(0, x).put(1, y).put(2, z); }
     /** Four value version of {@link #mallocDouble}. */
     public DoubleBuffer doubles(double x, double y, double z, double w) { return mallocDouble(4).put(0, x).put(1, y).put(2, z).put(3, w); }
-
     /** Vararg version of {@link #mallocDouble}. */
     public DoubleBuffer doubles(double... values) {
         DoubleBuffer buffer = mallocDouble(values.length).put(values);
@@ -552,7 +535,6 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public PointerBuffer pointers(long x, long y, long z) { return mallocPointer(3).put(0, x).put(1, y).put(2, z); }
     /** Four value version of {@link #mallocPointer}. */
     public PointerBuffer pointers(long x, long y, long z, long w) { return mallocPointer(4).put(0, x).put(1, y).put(2, z).put(3, w); }
-
     /** Vararg version of {@link #mallocPointer}. */
     public PointerBuffer pointers(long... values) {
         PointerBuffer buffer = mallocPointer(values.length).put(values);
@@ -568,12 +550,46 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public PointerBuffer pointers(Pointer x, Pointer y, Pointer z) { return mallocPointer(3).put(0, x).put(1, y).put(2, z); }
     /** Four value version of {@link #mallocPointer}. */
     public PointerBuffer pointers(Pointer x, Pointer y, Pointer z, Pointer w) { return mallocPointer(4).put(0, x).put(1, y).put(2, z).put(3, w); }
-
     /** Vararg version of {@link #mallocPointer}. */
     public PointerBuffer pointers(Pointer... values) {
         PointerBuffer buffer = mallocPointer(values.length);
         for (int i = 0; i < values.length; i++) {
             buffer.put(i, values[i]);
+        }
+        return buffer;
+    }
+
+    /** Single value version of {@link #mallocPointer}. */
+    public PointerBuffer pointers(Buffer x) {
+        return mallocPointer(1)
+            .put(0, memAddress(x));
+    }
+    /** Two value version of {@link #mallocPointer}. */
+    public PointerBuffer pointers(Buffer x, Buffer y) {
+        return mallocPointer(2)
+            .put(0, memAddress(x))
+            .put(1, memAddress(y));
+    }
+    /** Three value version of {@link #mallocPointer}. */
+    public PointerBuffer pointers(Buffer x, Buffer y, Buffer z) {
+        return mallocPointer(3)
+            .put(0, memAddress(x))
+            .put(1, memAddress(y))
+            .put(2, memAddress(z));
+    }
+    /** Four value version of {@link #mallocPointer}. */
+    public PointerBuffer pointers(Buffer x, Buffer y, Buffer z, Buffer w) {
+        return mallocPointer(4)
+            .put(0, memAddress(x))
+            .put(1, memAddress(y))
+            .put(2, memAddress(z))
+            .put(3, memAddress(w));
+    }
+    /** Vararg version of {@link #mallocPointer}. */
+    public PointerBuffer pointers(Buffer... values) {
+        PointerBuffer buffer = mallocPointer(values.length);
+        for (int i = 0; i < values.length; i++) {
+            buffer.put(i, memAddress(values[i]));
         }
         return buffer;
     }

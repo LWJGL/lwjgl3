@@ -719,8 +719,8 @@ public final class MemoryUtil {
         return memAddress0(buffer) + Integer.toUnsignedLong(position);
     }
 
-    private static long address(long position, int elementShift, long address) {
-        return address + (position << elementShift);
+    private static long address(int position, int elementShift, long address) {
+        return address + ((position & 0xFFFF_FFFFL) << elementShift);
     }
 
     /** ShortBuffer version of {@link #memAddress(ByteBuffer)}. */
@@ -728,7 +728,7 @@ public final class MemoryUtil {
     /** ShortBuffer version of {@link #memAddress(ByteBuffer, int)}. */
     public static long memAddress(ShortBuffer buffer, int position) {
         Objects.requireNonNull(buffer);
-        return address(Integer.toUnsignedLong(position), 1, memAddress0(buffer));
+        return address(position, 1, memAddress0(buffer));
     }
 
     /** CharBuffer version of {@link #memAddress(ByteBuffer)}. */
@@ -736,7 +736,7 @@ public final class MemoryUtil {
     /** CharBuffer version of {@link #memAddress(ByteBuffer, int)}. */
     public static long memAddress(CharBuffer buffer, int position) {
         Objects.requireNonNull(buffer);
-        return address(Integer.toUnsignedLong(position), 1, memAddress0(buffer));
+        return address(position, 1, memAddress0(buffer));
     }
 
     /** IntBuffer version of {@link #memAddress(ByteBuffer)}. */
@@ -744,7 +744,7 @@ public final class MemoryUtil {
     /** IntBuffer version of {@link #memAddress(ByteBuffer, int)}. */
     public static long memAddress(IntBuffer buffer, int position) {
         Objects.requireNonNull(buffer);
-        return address(Integer.toUnsignedLong(position), 2, memAddress0(buffer));
+        return address(position, 2, memAddress0(buffer));
     }
 
     /** FloatBuffer version of {@link #memAddress(ByteBuffer)}. */
@@ -752,7 +752,7 @@ public final class MemoryUtil {
     /** FloatBuffer version of {@link #memAddress(ByteBuffer, int)}. */
     public static long memAddress(FloatBuffer buffer, int position) {
         Objects.requireNonNull(buffer);
-        return address(Integer.toUnsignedLong(position), 2, memAddress0(buffer));
+        return address(position, 2, memAddress0(buffer));
     }
 
     /** LongBuffer version of {@link #memAddress(ByteBuffer)}. */
@@ -760,7 +760,7 @@ public final class MemoryUtil {
     /** LongBuffer version of {@link #memAddress(ByteBuffer, int)}. */
     public static long memAddress(LongBuffer buffer, int position) {
         Objects.requireNonNull(buffer);
-        return address(Integer.toUnsignedLong(position), 3, memAddress0(buffer));
+        return address(position, 3, memAddress0(buffer));
     }
 
     /** DoubleBuffer version of {@link #memAddress(ByteBuffer)}. */
@@ -768,7 +768,22 @@ public final class MemoryUtil {
     /** DoubleBuffer version of {@link #memAddress(ByteBuffer, int)}. */
     public static long memAddress(DoubleBuffer buffer, int position) {
         Objects.requireNonNull(buffer);
-        return address(Integer.toUnsignedLong(position), 3, memAddress0(buffer));
+        return address(position, 3, memAddress0(buffer));
+    }
+
+    /** Polymorphic version of {@link #memAddress(ByteBuffer)}. */
+    public static long memAddress(Buffer buffer) {
+        int elementShift;
+        if (buffer instanceof ByteBuffer) {
+            elementShift = 0;
+        } else if (buffer instanceof ShortBuffer || buffer instanceof CharBuffer) {
+            elementShift = 1;
+        } else if (buffer instanceof IntBuffer || buffer instanceof FloatBuffer) {
+            elementShift = 2;
+        } else {
+            elementShift = 3;
+        }
+        return address(buffer.position(), elementShift, memAddress0(buffer));
     }
 
     /** CustomBuffer version of {@link #memAddress(ByteBuffer)}. */
