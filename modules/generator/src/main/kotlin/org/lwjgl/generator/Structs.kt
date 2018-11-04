@@ -245,11 +245,21 @@ class Struct(
     }
 
     // Array field
-    fun DataType.array(name: String, documentation: String, size: Int, validSize: Int = size)
-        = array(name, documentation, size.toString(), validSize.toString())
+    fun DataType.array(name: String, documentation: String, size: Int, validSize: Int = size) =
+        array(name, documentation, size.toString(), validSize.toString())
 
-    fun DataType.array(name: String, documentation: String, size: String, validSize: String = size)
-        = add(StructMemberArray(this, name, documentation, size, validSize))
+    fun DataType.array(name: String, documentation: String, size: String, validSize: String = size) =
+        add(StructMemberArray(this, name, documentation, size, validSize))
+
+    operator fun StructMember.get(size: Int, validSize: Int = size): StructMember {
+        this@Struct.members.remove(this)
+        return add(StructMemberArray(this.nativeType, this.name, this.documentation, size.toString(), validSize.toString()))
+    }
+
+    operator fun StructMember.get(size: String, validSize: String = size): StructMember {
+        this@Struct.members.remove(this)
+        return add(StructMemberArray(this.nativeType, this.name, this.documentation, size, validSize))
+    }
 
     // CharSequence special-case
     fun CharType.array(name: String, documentation: String, size: Int) = array(name, documentation, size.toString())
@@ -260,23 +270,23 @@ class Struct(
     fun padding(size: String, condition: String? = null) = add(StructMemberPadding(size, condition))
 
     /** Anonymous nested member struct definition. */
-    fun struct(init: Struct.() -> Unit): StructMember = struct(ANONYMOUS, ANONYMOUS, init)
-
-    /** Nested member struct definition. */
-    fun struct(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
+    fun struct(init: Struct.() -> Unit): StructMember {
         val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, false, false, mutable, null, false, false)
         struct.init()
-        return StructType(struct).member(name, documentation)
+        return StructType(struct).member(ANONYMOUS, ANONYMOUS)
     }
 
     /** Anonymous nested member union definition. */
-    fun union(init: Struct.() -> Unit): StructMember = union(ANONYMOUS, ANONYMOUS, init)
-
-    /** Nested member union definition. */
-    fun union(name: String, documentation: String, init: Struct.() -> Unit): StructMember {
+    fun union(init: Struct.() -> Unit): StructMember {
         val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, false, false)
         struct.init()
-        return StructType(struct).member(name, documentation)
+        return StructType(struct).member(ANONYMOUS, ANONYMOUS)
+    }
+
+    /** Named nested struct/union. */
+    fun StructMember.member(name: String, documentation: String): StructMember {
+        this@Struct.members.remove(this)
+        return this.nativeType.member(name, documentation)
     }
 
     fun customMethod(method: String) {
@@ -1386,7 +1396,6 @@ ${validations.joinToString("\n")}
                         println("${t}public static void n$setter(long $STRUCT, ${it.nullable(it.nativeType.javaMethodType)} value) { memPutAddress($STRUCT + $field, ${it.addressValue}); }")
                     } else {
                         val javaType = it.nativeType.nativeMethodType
-                        val bufferMethod = getBufferMethod("put", it, javaType)
 
                         if (it.public)
                             println(

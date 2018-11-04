@@ -432,7 +432,8 @@ val DEVMODE = struct(Module.CORE_WINDOWS, "DEVMODE", mutable = false) {
                 image somewhere in the interior of the 1024 x 768 screen space or stretch the 640 x 480 image to fill the larger screen space. If
                 #DM_DISPLAYFIXEDOUTPUT is not set, this member must be zero. If #DM_DISPLAYFIXEDOUTPUT is set, this member must be one of the
                 following values:<br>#DMDFO_DEFAULT, #DMDFO_CENTER, #DMDFO_STRETCH
-                """)
+                """
+            )
         }
     }
     short.member("dmColor", PRINTER_ONLY)

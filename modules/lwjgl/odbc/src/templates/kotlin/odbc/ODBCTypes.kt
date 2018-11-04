@@ -105,10 +105,10 @@ val SQLINTERVAL = typedef(int, "SQLINTERVAL")
 val SQL_INTERVAL_STRUCT = struct(Module.ODBC, "SQL_INTERVAL_STRUCT") {
     SQLINTERVAL.member("interval_type", "")
     SQLSMALLINT.member("interval_sign", "")
-    struct("intval", "") {
+    struct {
         SQL_YEAR_MONTH_STRUCT.member("year_month", "")
         SQL_DAY_SECOND_STRUCT.member("day_second", "")
-    }
+    }.member("intval", "")
 }
 
 val SQL_NUMERIC_STRUCT = struct(Module.ODBC, "SQL_NUMERIC_STRUCT") {

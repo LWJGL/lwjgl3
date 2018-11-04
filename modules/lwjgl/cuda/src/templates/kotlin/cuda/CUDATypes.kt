@@ -250,9 +250,12 @@ val CUDA_EXTERNAL_MEMORY_HANDLE_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_MEMORY
     documentation = "External memory handle descriptor."
 
     CUexternalMemoryHandleType.member("type", "Type of the handle")
-    union("handle", "") {
+    union {
         int.member("fd", "File descriptor referencing the memory object. Valid when type is ::CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD")
-        struct(
+        struct {
+            nullable..opaque_p.member("handle", "Valid NT handle. Must be NULL if 'name' is non-NULL")
+            nullable..opaque_const_p.member("name", "Name of a valid memory object. Must be NULL if 'handle' is non-NULL.")
+        }.member(
             "win32",
             """
             Win32 handle referencing the semaphore object. Valid when type is one of the following:
@@ -262,11 +265,8 @@ val CUDA_EXTERNAL_MEMORY_HANDLE_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_MEMORY
              - ::CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE
              Exactly one of 'handle' and 'name' must be non-NULL. If type is ::CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT then 'name' must be #NULL.
             """
-        ) {
-            nullable..opaque_p.member("handle", "Valid NT handle. Must be NULL if 'name' is non-NULL")
-            nullable..opaque_const_p.member("name", "Name of a valid memory object. Must be NULL if 'handle' is non-NULL.")
-        }
-    }
+        )
+    }.member("handle", "")
     unsigned_long_long.member("size", "Size of the memory allocation")
     unsigned_int.member("flags", "Flags must either be zero or ::CUDA_EXTERNAL_MEMORY_DEDICATED")
     unsigned_int.array("reserved", "", size = 16)
@@ -290,17 +290,16 @@ val CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC = struct(Module.CUDA, "CUDA_EXTERN
     unsigned_int.array("reserved", "", size = 16)
 }
 
-/**
- * External semaphore handle descriptor
- */
-val CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC"){
-    /**
-     * Type of the handle
-     */
-    CUexternalSemaphoreHandleType.member("type", "")
-    union("handle", "") {
+val CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC") {
+    documentation = "External semaphore handle descriptor."
+
+    CUexternalSemaphoreHandleType.member("type", "type of the handle")
+    union {
         int.member("fd", "File descriptor referencing the semaphore object. Valid when type is ::CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD")
-        struct(
+        struct {
+            nullable..opaque_p.member("handle", "Valid NT handle. Must be NULL if 'name' is non-NULL")
+            nullable..opaque_const_p.member("name", "Name of a valid synchronization primitive. Must be NULL if 'handle' is non-NULL.")
+        }.member(
             "win32",
             """
             Win32 handle referencing the semaphore object. Valid when type is one of the following:
@@ -309,11 +308,8 @@ val CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_SEM
              - ::CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE
              Exactly one of 'handle' and 'name' must be non-NULL. If type is ::CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT then 'name' must be NULL.
             """
-        ) {
-            nullable..opaque_p.member("handle", "Valid NT handle. Must be NULL if 'name' is non-NULL")
-            nullable..opaque_const_p.member("name", "Name of a valid synchronization primitive. Must be NULL if 'handle' is non-NULL.")
-        }
-    }
+        )
+    }.member("handle", "")
     unsigned_int.member("flags", "Flags reserved for the future. Must be zero.")
     unsigned_int.array("reserved", "", size = 16)
 }
@@ -321,12 +317,12 @@ val CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_SEM
 val CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS = struct(Module.CUDA, "CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS") {
     documentation = "External semaphore signal parameters."
 
-    struct("params", "Parameters for fence objects") {
-        struct("fence", "Value of fence to be signaled") {
+    struct {
+        struct {
             unsigned_long_long.member("value", "")
-        }
+        }.member("fence", "Value of fence to be signaled")
         unsigned_int.array("reserved", "", size = 16)
-    }
+    }.member("params", "Parameters for fence objects")
     unsigned_int.member("flags", "Flags reserved for the future. Must be zero.")
     unsigned_int.array("reserved", "", size = 16)
 }
@@ -334,12 +330,12 @@ val CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS = struct(Module.CUDA, "CUDA_EXTERNAL_S
 val CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS = struct(Module.CUDA, "CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS") {
     documentation = "External semaphore wait parameters"
 
-    struct("params", "Parameters for fence objects") {
-        struct("fence", "Value of fence to be waited on") {
+    struct {
+        struct {
             unsigned_long_long.member("value", "")
-        }
+        }.member("fence", "Value of fence to be waited on")
         unsigned_int.array("reserved", "", size = 16)
-    }
+    }.member("params", "Parameters for fence objects")
     unsigned_int.member("flags", "Flags reserved for the future. Must be zero.")
     unsigned_int.array("reserved", "", size = 16)
 }
@@ -348,7 +344,7 @@ val CUstreamBatchMemOpParams = union(Module.CUDA, "CUstreamBatchMemOpParams") {
     documentation = "Per-operation parameters for ::cuStreamBatchMemOp."
 
     CUstreamBatchMemOpType.member("operation", "")
-    struct("waitValue", "") {
+    struct {
         CUstreamBatchMemOpType.member("operation", "")
         CUdeviceptr.member("address", "")
         union {
@@ -357,8 +353,8 @@ val CUstreamBatchMemOpParams = union(Module.CUDA, "CUstreamBatchMemOpParams") {
         }
         unsigned_int.member("flags", "")
         CUdeviceptr.member("alias", "For driver internal use. Initial value is unimportant.")
-    }
-    struct("writeValue", "") {
+    }.member("waitValue", "")
+    struct {
         CUstreamBatchMemOpType.member("operation", "")
         CUdeviceptr.member("address", "")
         union {
@@ -367,11 +363,11 @@ val CUstreamBatchMemOpParams = union(Module.CUDA, "CUstreamBatchMemOpParams") {
         }
         unsigned_int.member("flags", "")
         CUdeviceptr.member("alias", "For driver internal use. Initial value is unimportant.")
-    }
-    struct("flushRemoteWrites", "") {
+    }.member("writeValue", "")
+    struct {
         CUstreamBatchMemOpType.member("operation", "")
         unsigned_int.member("flags", "")
-    }
+    }.member("flushRemoteWrites", "")
     cuuint64_t.array("pad", "", size = 6)
 }
 
@@ -427,31 +423,31 @@ val CUDA_RESOURCE_DESC = struct(Module.CUDA, "CUDA_RESOURCE_DESC") {
     documentation = "CUDA Resource descriptor."
 
     CUresourcetype.member("resType", "Resource type")
-    union("res", "") {
-        struct("array", "") {
+    union {
+        struct {
             CUarray.member("hArray", "CUDA array")
-        }
-        struct("mipmap", "") {
+        }.member("array", "")
+        struct {
             CUmipmappedArray.member("hMipmappedArray", "CUDA mipmapped array")
-        }
-        struct("linear", "") {
+        }.member("mipmap", "")
+        struct {
             CUdeviceptr.member("devPtr", "Device pointer")
             CUarray_format.member("format", "Array format")
             unsigned_int.member("numChannels", "Channels per array element")
             size_t.member("sizeInBytes", "Size in bytes")
-        }
-        struct("pitch2D", "") {
+        }.member("linear", "")
+        struct {
             CUdeviceptr.member("devPtr", "Device pointer")
             CUarray_format.member("format", "Array format")
             unsigned_int.member("numChannels", "Channels per array element")
             size_t.member("width", "Width of the array in elements")
             size_t.member("height", "Height of the array in elements")
             size_t.member("pitchInBytes", "Pitch between two rows in bytes")
-        }
-        struct("reserved", "") {
+        }.member("pitch2D", "")
+        struct {
             int.array("reserved", "", size = 32)
-        }
-    }
+        }.member("reserved", "")
+    }.member("res", "")
 
     unsigned_int.member("flags", "Flags (must be zero)")
 }

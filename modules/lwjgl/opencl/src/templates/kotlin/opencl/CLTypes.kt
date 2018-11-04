@@ -205,17 +205,17 @@ fun config() {
         documentation =
             "The struct returned by #GetDeviceInfo() with {@code param_name} set to #DEVICE_TOPOLOGY_AMD."
 
-        struct("raw", "") {
+        struct {
             cl_uint.member("type", "")
             cl_uint.array("data", "", size = 5)
-        }
-        struct("pcie", "") {
+        }.member("raw", "")
+        struct {
             cl_uint.member("type", "")
             padding(17)
             cl_char.member("bus", "")
             cl_char.member("device", "")
             cl_char.member("function", "")
-        }
+        }.member("pcie", "")
     }.definition.hasUsageOutput()
 
     struct(Module.OPENCL, "CLMotionEstimationDescINTEL", nativeName = "cl_motion_estimation_desc_intel") {
