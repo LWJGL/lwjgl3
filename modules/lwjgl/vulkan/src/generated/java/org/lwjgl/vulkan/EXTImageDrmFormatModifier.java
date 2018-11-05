@@ -19,7 +19,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <h5>Introduction to DRM Format Modifiers</h5>
  * 
- * <p>A <em>DRM format modifier</em> is a 64-bit, vendor-prefixed, semi-opaque unsigned integer. Most <em>modifiers</em> represent a concrete, vendor-specific tiling format for images. Some exceptions are {@code DRM_FORMAT_MOD_LINEAR} (which is not vendor-specific); {@code DRM_FORMAT_MOD_NONE} (which is an alias of {@code DRM_FORMAT_MOD_LINEAR} due to historical accident); and {@code DRM_FORMAT_MOD_INVALID} (which does not represent a tiling format). The <em>modifier's</em> vendor prefix consists of the 8 most signficant bits. The canonical list of <em>modifiers</em> and vendor prefixes is found in <a target="_blank" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/uapi/drm/drm_fourcc.h">{@code drm_fourcc.h}</a> in the Linux kernel source. The other dominant source of <em>modifiers</em> are vendor kernel trees.</p>
+ * <p>A <em>DRM format modifier</em> is a 64-bit, vendor-prefixed, semi-opaque unsigned integer. Most <em>modifiers</em> represent a concrete, vendor-specific tiling format for images. Some exceptions are {@code DRM_FORMAT_MOD_LINEAR} (which is not vendor-specific); {@code DRM_FORMAT_MOD_NONE} (which is an alias of {@code DRM_FORMAT_MOD_LINEAR} due to historical accident); and {@code DRM_FORMAT_MOD_INVALID} (which does not represent a tiling format). The <em>modifier's</em> vendor prefix consists of the 8 most significant bits. The canonical list of <em>modifiers</em> and vendor prefixes is found in <a target="_blank" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/uapi/drm/drm_fourcc.h">{@code drm_fourcc.h}</a> in the Linux kernel source. The other dominant source of <em>modifiers</em> are vendor kernel trees.</p>
  * 
  * <p>One goal of <em>modifiers</em> in the Linux ecosystem is to enumerate for each vendor a reasonably sized set of tiling formats that are appropriate for images shared across processes, APIs, and/or devices, where each participating component may possibly be from different vendors. A non-goal is to enumerate all tiling formats supported by all vendors. Some tiling formats used internally by vendors are inappropriate for sharing; no <em>modifiers</em> should be assigned to such tiling formats.</p>
  * 
@@ -142,17 +142,17 @@ public class EXTImageDrmFormatModifier {
      * <li>{@link #VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_IMAGE_EXCPLICIT_DRM_FORMAT_MODIFIER_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_EXCPLICIT_DRM_FORMAT_MODIFIER_CREATE_INFO_EXT}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT}</li>
      * </ul>
      */
     public static final int
-        VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT             = 1000158000,
-        VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT                  = 1000158001,
-        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT  = 1000158002,
-        VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT      = 1000158003,
-        VK_STRUCTURE_TYPE_IMAGE_EXCPLICIT_DRM_FORMAT_MODIFIER_CREATE_INFO_EXT = 1000158004,
-        VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT            = 1000158005;
+        VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT            = 1000158000,
+        VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT                 = 1000158001,
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT = 1000158002,
+        VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT     = 1000158003,
+        VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT = 1000158004,
+        VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT           = 1000158005;
 
     /** Extends {@code VkImageTiling}. */
     public static final int VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT = 1000158000;

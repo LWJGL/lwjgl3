@@ -364,6 +364,21 @@ public class VKCapabilitiesDevice {
         vkCmdDrawMeshTasksIndirectNV,
         vkCmdDrawMeshTasksIndirectCountNV;
 
+    // NV_ray_tracing
+    public final long
+        vkCreateAccelerationStructureNV,
+        vkDestroyAccelerationStructureNV,
+        vkGetAccelerationStructureMemoryRequirementsNV,
+        vkBindAccelerationStructureMemoryNV,
+        vkCmdBuildAccelerationStructureNV,
+        vkCmdCopyAccelerationStructureNV,
+        vkCmdTraceRaysNV,
+        vkCreateRayTracingPipelinesNV,
+        vkGetRayTracingShaderGroupHandlesNV,
+        vkGetAccelerationStructureHandleNV,
+        vkCmdWriteAccelerationStructuresPropertiesNV,
+        vkCompileDeferredNV;
+
     // NV_scissor_exclusive
     public final long
         vkCmdSetExclusiveScissorNV;
@@ -385,22 +400,6 @@ public class VKCapabilitiesDevice {
         vkRegisterObjectsNVX,
         vkUnregisterObjectsNVX;
 
-    // NVX_raytracing
-    public final long
-        vkCreateAccelerationStructureNVX,
-        vkDestroyAccelerationStructureNVX,
-        vkGetAccelerationStructureMemoryRequirementsNVX,
-        vkGetAccelerationStructureScratchMemoryRequirementsNVX,
-        vkBindAccelerationStructureMemoryNVX,
-        vkCmdBuildAccelerationStructureNVX,
-        vkCmdCopyAccelerationStructureNVX,
-        vkCmdTraceRaysNVX,
-        vkCreateRaytracingPipelinesNVX,
-        vkGetRaytracingShaderHandlesNVX,
-        vkGetAccelerationStructureHandleNVX,
-        vkCmdWriteAccelerationStructurePropertiesNVX,
-        vkCompileDeferredNVX;
-
     /** The Vulkan API version number. */
     public final int apiVersion;
 
@@ -418,6 +417,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_AMD_gpu_shader_half_float;
     /** When true, {@link AMDGPUShaderInt16} is supported. */
     public final boolean VK_AMD_gpu_shader_int16;
+    /** When true, {@link AMDMemoryOverallocationBehavior} is supported. */
+    public final boolean VK_AMD_memory_overallocation_behavior;
     /** When true, {@link AMDMixedAttachmentSamples} is supported. */
     public final boolean VK_AMD_mixed_attachment_samples;
     /** When true, {@link AMDNegativeViewportHeight} is supported. */
@@ -610,6 +611,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_glsl_shader;
     /** When true, {@link NVMeshShader} is supported. */
     public final boolean VK_NV_mesh_shader;
+    /** When true, {@link NVRayTracing} is supported. */
+    public final boolean VK_NV_ray_tracing;
     /** When true, {@link NVRepresentativeFragmentTest} is supported. */
     public final boolean VK_NV_representative_fragment_test;
     /** When true, {@link NVSampleMaskOverrideCoverage} is supported. */
@@ -632,13 +635,11 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NVX_device_generated_commands;
     /** When true, {@link NVXMultiviewPerViewAttributes} is supported. */
     public final boolean VK_NVX_multiview_per_view_attributes;
-    /** When true, {@link NVXRaytracing} is supported. */
-    public final boolean VK_NVX_raytracing;
 
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(255);
+        Map<String, Long> caps = new HashMap<>(254);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -647,6 +648,7 @@ public class VKCapabilitiesDevice {
         VK_AMD_gcn_shader = ext.contains("VK_AMD_gcn_shader");
         VK_AMD_gpu_shader_half_float = ext.contains("VK_AMD_gpu_shader_half_float");
         VK_AMD_gpu_shader_int16 = ext.contains("VK_AMD_gpu_shader_int16");
+        VK_AMD_memory_overallocation_behavior = ext.contains("VK_AMD_memory_overallocation_behavior");
         VK_AMD_mixed_attachment_samples = ext.contains("VK_AMD_mixed_attachment_samples");
         VK_AMD_negative_viewport_height = ext.contains("VK_AMD_negative_viewport_height");
         VK_AMD_rasterization_order = ext.contains("VK_AMD_rasterization_order");
@@ -744,6 +746,7 @@ public class VKCapabilitiesDevice {
         VK_NV_geometry_shader_passthrough = ext.contains("VK_NV_geometry_shader_passthrough");
         VK_NV_glsl_shader = ext.contains("VK_NV_glsl_shader");
         VK_NV_mesh_shader = NVMeshShader.checkCapsDevice(provider, caps, ext);
+        VK_NV_ray_tracing = NVRayTracing.checkCapsDevice(provider, caps, ext);
         VK_NV_representative_fragment_test = ext.contains("VK_NV_representative_fragment_test");
         VK_NV_sample_mask_override_coverage = ext.contains("VK_NV_sample_mask_override_coverage");
         VK_NV_scissor_exclusive = NVScissorExclusive.checkCapsDevice(provider, caps, ext);
@@ -755,7 +758,6 @@ public class VKCapabilitiesDevice {
         VK_NV_win32_keyed_mutex = ext.contains("VK_NV_win32_keyed_mutex");
         VK_NVX_device_generated_commands = NVXDeviceGeneratedCommands.checkCapsDevice(provider, caps, ext);
         VK_NVX_multiview_per_view_attributes = ext.contains("VK_NVX_multiview_per_view_attributes");
-        VK_NVX_raytracing = NVXRaytracing.checkCapsDevice(provider, caps, ext);
 
         vkGetDeviceProcAddr = VK.get(caps, "vkGetDeviceProcAddr");
         vkDestroyDevice = VK.get(caps, "vkDestroyDevice");
@@ -987,6 +989,18 @@ public class VKCapabilitiesDevice {
         vkCmdDrawMeshTasksNV = VK.get(caps, "vkCmdDrawMeshTasksNV");
         vkCmdDrawMeshTasksIndirectNV = VK.get(caps, "vkCmdDrawMeshTasksIndirectNV");
         vkCmdDrawMeshTasksIndirectCountNV = VK.get(caps, "vkCmdDrawMeshTasksIndirectCountNV");
+        vkCreateAccelerationStructureNV = VK.get(caps, "vkCreateAccelerationStructureNV");
+        vkDestroyAccelerationStructureNV = VK.get(caps, "vkDestroyAccelerationStructureNV");
+        vkGetAccelerationStructureMemoryRequirementsNV = VK.get(caps, "vkGetAccelerationStructureMemoryRequirementsNV");
+        vkBindAccelerationStructureMemoryNV = VK.get(caps, "vkBindAccelerationStructureMemoryNV");
+        vkCmdBuildAccelerationStructureNV = VK.get(caps, "vkCmdBuildAccelerationStructureNV");
+        vkCmdCopyAccelerationStructureNV = VK.get(caps, "vkCmdCopyAccelerationStructureNV");
+        vkCmdTraceRaysNV = VK.get(caps, "vkCmdTraceRaysNV");
+        vkCreateRayTracingPipelinesNV = VK.get(caps, "vkCreateRayTracingPipelinesNV");
+        vkGetRayTracingShaderGroupHandlesNV = VK.get(caps, "vkGetRayTracingShaderGroupHandlesNV");
+        vkGetAccelerationStructureHandleNV = VK.get(caps, "vkGetAccelerationStructureHandleNV");
+        vkCmdWriteAccelerationStructuresPropertiesNV = VK.get(caps, "vkCmdWriteAccelerationStructuresPropertiesNV");
+        vkCompileDeferredNV = VK.get(caps, "vkCompileDeferredNV");
         vkCmdSetExclusiveScissorNV = VK.get(caps, "vkCmdSetExclusiveScissorNV");
         vkCmdBindShadingRateImageNV = VK.get(caps, "vkCmdBindShadingRateImageNV");
         vkCmdSetViewportShadingRatePaletteNV = VK.get(caps, "vkCmdSetViewportShadingRatePaletteNV");
@@ -999,19 +1013,6 @@ public class VKCapabilitiesDevice {
         vkDestroyObjectTableNVX = VK.get(caps, "vkDestroyObjectTableNVX");
         vkRegisterObjectsNVX = VK.get(caps, "vkRegisterObjectsNVX");
         vkUnregisterObjectsNVX = VK.get(caps, "vkUnregisterObjectsNVX");
-        vkCreateAccelerationStructureNVX = VK.get(caps, "vkCreateAccelerationStructureNVX");
-        vkDestroyAccelerationStructureNVX = VK.get(caps, "vkDestroyAccelerationStructureNVX");
-        vkGetAccelerationStructureMemoryRequirementsNVX = VK.get(caps, "vkGetAccelerationStructureMemoryRequirementsNVX");
-        vkGetAccelerationStructureScratchMemoryRequirementsNVX = VK.get(caps, "vkGetAccelerationStructureScratchMemoryRequirementsNVX");
-        vkBindAccelerationStructureMemoryNVX = VK.get(caps, "vkBindAccelerationStructureMemoryNVX");
-        vkCmdBuildAccelerationStructureNVX = VK.get(caps, "vkCmdBuildAccelerationStructureNVX");
-        vkCmdCopyAccelerationStructureNVX = VK.get(caps, "vkCmdCopyAccelerationStructureNVX");
-        vkCmdTraceRaysNVX = VK.get(caps, "vkCmdTraceRaysNVX");
-        vkCreateRaytracingPipelinesNVX = VK.get(caps, "vkCreateRaytracingPipelinesNVX");
-        vkGetRaytracingShaderHandlesNVX = VK.get(caps, "vkGetRaytracingShaderHandlesNVX");
-        vkGetAccelerationStructureHandleNVX = VK.get(caps, "vkGetAccelerationStructureHandleNVX");
-        vkCmdWriteAccelerationStructurePropertiesNVX = VK.get(caps, "vkCmdWriteAccelerationStructurePropertiesNVX");
-        vkCompileDeferredNVX = VK.get(caps, "vkCompileDeferredNVX");
     }
 
 }

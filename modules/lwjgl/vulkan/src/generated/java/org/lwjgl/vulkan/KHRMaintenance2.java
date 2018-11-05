@@ -23,7 +23,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>Input attachment specification allows an application to specify which aspect of a multi-aspect image (e.g. a combined depth stencil format) will be accessed via a {@code subpassLoad} operation.</p>
  * 
- * <p>On some implementations there <b>may</b> be a performance penalty if the implementation does not know (at {@link VK10#vkCreateRenderPass CreateRenderPass} time) which aspect(s) of multi-aspect images <b>can</b> be be accessed as input attachments.</p>
+ * <p>On some implementations there <b>may</b> be a performance penalty if the implementation does not know (at {@link VK10#vkCreateRenderPass CreateRenderPass} time) which aspect(s) of multi-aspect images <b>can</b> be accessed as input attachments.</p>
  * 
  * <h5>Promotion to Vulkan 1.1</h5>
  * 

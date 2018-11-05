@@ -59,7 +59,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkComputePipelineCreateInfo}, {@link VkGraphicsPipelineCreateInfo}, {@link VkRaytracingPipelineCreateInfoNVX}, {@link VkSpecializationInfo}</p>
+ * <p>{@link VkComputePipelineCreateInfo}, {@link VkGraphicsPipelineCreateInfo}, {@link VkRayTracingPipelineCreateInfoNV}, {@link VkSpecializationInfo}</p>
  * 
  * <h3>Member documentation</h3>
  * 
