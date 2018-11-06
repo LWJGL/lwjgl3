@@ -99,7 +99,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
         EGLDisplay("dpy", ""),
         EGLSync("sync", ""),
         EGLint("attribute", ""),
-        Check(1)..EGLAttrib.const.p.OUT("value", "")
+        Check(1)..EGLAttrib.const.p("value", "")
     )
 
     EGLImage(

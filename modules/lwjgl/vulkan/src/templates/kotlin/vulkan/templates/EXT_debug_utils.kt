@@ -695,7 +695,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         VkInstance("instance", "the instance the messenger will be used with."),
         VkDebugUtilsMessengerCreateInfoEXT.const.p("pCreateInfo", "points to a ##VkDebugUtilsMessengerCreateInfoEXT structure which contains the callback pointer as well as defines the conditions under which this messenger will trigger the callback."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkDebugUtilsMessengerEXT.p.OUT("pMessenger", "a pointer to record the {@code VkDebugUtilsMessengerEXT} object created.")
+        Check(1)..VkDebugUtilsMessengerEXT.p("pMessenger", "a pointer to record the {@code VkDebugUtilsMessengerEXT} object created.")
     )
 
     void(

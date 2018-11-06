@@ -27,7 +27,7 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "GraphicsGLRegisterBuffer",
         "",
 
-        Check(1)..CUgraphicsResource.p.OUT("pCudaResource", ""),
+        Check(1)..CUgraphicsResource.p("pCudaResource", ""),
         GLuint("buffer", ""),
         unsigned_int("Flags", "")
     )
@@ -36,7 +36,7 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "GraphicsGLRegisterImage",
         "",
 
-        Check(1)..CUgraphicsResource.p.OUT("pCudaResource", ""),
+        Check(1)..CUgraphicsResource.p("pCudaResource", ""),
         GLuint("image", ""),
         GLenum("target", ""),
         unsigned_int("Flags", "")
@@ -46,7 +46,7 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "GLCtxCreate",
         "",
 
-        Check(1)..CUcontext.p.OUT("pCtx", ""),
+        Check(1)..CUcontext.p("pCtx", ""),
         unsigned_int("Flags", ""),
         CUdevice("device", "")
     ).versioned()
@@ -64,8 +64,8 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "GLMapBufferObject",
         "",
 
-        Check(1)..CUdeviceptr.p.OUT("dptr", ""),
-        Check(1)..size_t.p.OUT("size", ""),
+        Check(1)..CUdeviceptr.p("dptr", ""),
+        Check(1)..size_t.p("size", ""),
         GLuint("buffer", "")
     ).ptds(2)
 
@@ -95,8 +95,8 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "GLMapBufferObjectAsync",
         "",
 
-        Check(1)..CUdeviceptr.p.OUT("dptr", ""),
-        Check(1)..size_t.p.OUT("size", ""),
+        Check(1)..CUdeviceptr.p("dptr", ""),
+        Check(1)..size_t.p("size", ""),
         GLuint("buffer", ""),
         nullable..CUstream("hStream", "")
     ).ptsz(2)

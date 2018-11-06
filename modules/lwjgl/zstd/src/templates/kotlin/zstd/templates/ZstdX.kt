@@ -699,7 +699,7 @@ ENABLE_WARNINGS()""")
         "initStaticCDict",
         "",
 
-        void.p.OUT("workspace", ""),
+        void.p("workspace", ""),
         AutoSize("workspace")..size_t("workspaceSize", ""),
         void.const.p("dict", ""),
         AutoSize("dict")..size_t("dictSize", ""),
@@ -828,8 +828,8 @@ ENABLE_WARNINGS()""")
         "compress_advanced",
         "",
 
-        ZSTD_CCtx.p.OUT("cctx", ""),
-        void.p.OUT("dst", ""),
+        ZSTD_CCtx.p("cctx", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t("dstCapacity", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", ""),
@@ -842,8 +842,8 @@ ENABLE_WARNINGS()""")
         "compress_usingCDict_advanced",
         "",
 
-        ZSTD_CCtx.p.OUT("cctx", ""),
-        void.p.OUT("dst", ""),
+        ZSTD_CCtx.p("cctx", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t("dstCapacity", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", ""),
@@ -1103,7 +1103,7 @@ ENABLE_WARNINGS()""")
         "",
 
         ZSTD_CCtx.p("cctx", ""),
-        void.p.OUT("dst", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t("dstCapacity", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", "")
@@ -1114,7 +1114,7 @@ ENABLE_WARNINGS()""")
         "",
 
         ZSTD_CCtx.p("cctx", ""),
-        void.p.OUT("dst", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t("dstCapacity", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", "")
@@ -1128,7 +1128,7 @@ ENABLE_WARNINGS()""")
         Doesn't consume input.
         """,
 
-        ZSTD_frameHeader.p.OUT("zfhPtr", ""),
+        ZSTD_frameHeader.p("zfhPtr", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", ""),
 
@@ -1183,7 +1183,7 @@ ENABLE_WARNINGS()""")
         "",
 
         ZSTD_DCtx.p("dctx", ""),
-        void.p.OUT("dst", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t("dstCapacity", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", "")
@@ -1230,7 +1230,7 @@ ENABLE_WARNINGS()""")
 
         ZSTD_CCtx.p("cctx", ""),
         ZSTD_cParameter("param", "", cParameters),
-        Check(1)..unsigned.p.OUT("value", ""),
+        Check(1)..unsigned.p("value", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())."
     )
@@ -1428,8 +1428,8 @@ ENABLE_WARNINGS()""")
          """,
 
         ZSTD_CCtx.p("cctx", ""),
-        ZSTD_outBuffer.p("output", ""),
-        ZSTD_inBuffer.p("input", ""),
+        Input..ZSTD_outBuffer.p("output", ""),
+        Input..ZSTD_inBuffer.p("input", ""),
         ZSTD_EndDirective("endOp", "", endDirectives),
 
         returnDoc =
@@ -1445,12 +1445,12 @@ ENABLE_WARNINGS()""")
         "Same as #compress_generic(), but using only integral types as arguments.",
 
         ZSTD_CCtx.p("cctx", ""),
-        void.p.OUT("dst", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t("dstCapacity", ""),
-        Check(1)..size_t.p.INOUT("dstPos", ""),
+        Check(1)..size_t.p("dstPos", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", ""),
-        Check(1)..size_t.p.INOUT("srcPos", ""),
+        Check(1)..size_t.p("srcPos", ""),
         ZSTD_EndDirective("endOp", "", endDirectives)
     )
 
@@ -1512,7 +1512,7 @@ ENABLE_WARNINGS()""")
 
         ZSTD_CCtx_params.p("params", ""),
         ZSTD_cParameter("param", "", cParameters),
-        Check(1)..unsigned.p.OUT("value", ""),
+        Check(1)..unsigned.p("value", ""),
 
         returnDoc = "0, or an error code (which can be tested with #isError())."
     )
@@ -1663,7 +1663,7 @@ ENABLE_WARNINGS()""")
         "getFrameHeader_advanced",
         "Same as #getFrameHeader(), with added capability to select a format (like #f_zstd1_magicless).",
 
-        ZSTD_frameHeader.p.OUT("zfhPtr", ""),
+        ZSTD_frameHeader.p("zfhPtr", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", ""),
         ZSTD_format_e("format", "", formats)
@@ -1678,8 +1678,8 @@ ENABLE_WARNINGS()""")
         """,
 
         ZSTD_DCtx.p("dctx", ""),
-        ZSTD_outBuffer.p("output", ""),
-        ZSTD_inBuffer.p("input", ""),
+        Input..ZSTD_outBuffer.p("output", ""),
+        Input..ZSTD_inBuffer.p("input", ""),
 
         returnDoc =
         """
@@ -1693,12 +1693,12 @@ ENABLE_WARNINGS()""")
         "Same as #decompress_generic(), but using only integral types as arguments.",
 
         ZSTD_DCtx.p("dctx", ""),
-        void.p.OUT("dst", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t("dstCapacity", ""),
-        Check(1)..size_t.p.INOUT("dstPos", ""),
+        Check(1)..size_t.p("dstPos", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", ""),
-        Check(1)..size_t.p.INOUT("srcPos", "")
+        Check(1)..size_t.p("srcPos", "")
     )
 
     void(
@@ -1729,7 +1729,7 @@ ENABLE_WARNINGS()""")
         "",
 
         ZSTD_CCtx.p("cctx", ""),
-        void.p.OUT("dst", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t("dstCapacity", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", "")
@@ -1740,7 +1740,7 @@ ENABLE_WARNINGS()""")
         "",
 
         ZSTD_DCtx.p("dctx", ""),
-        void.p.OUT("dst", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t("dstCapacity", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", "")

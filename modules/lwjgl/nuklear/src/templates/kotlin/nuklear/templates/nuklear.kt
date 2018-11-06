@@ -1240,7 +1240,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_list_view.p.OUT("view", ""),
+            nk_list_view.p("view", ""),
             charUTF8.const.p("title", ""),
             nk_flags("flags", ""),
             int("row_height", ""),
@@ -1250,7 +1250,7 @@ nk_style_pop_vec2(ctx);""")}
             "list_view_end",
             "",
 
-            nk_list_view.p.OUT("view", "")
+            nk_list_view.p("view", "")
         )
 
         val tree_push_hashed = intb(
@@ -1291,7 +1291,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             tree_push_hashed["type"],
             tree_push_hashed["title"],
-            Check(1)..nk_collapse_states.p.INOUT("state", "persistent state to update")
+            Check(1)..nk_collapse_states.p("state", "persistent state to update")
         )
         intb(
             "tree_state_image_push",
@@ -1301,7 +1301,7 @@ nk_style_pop_vec2(ctx);""")}
             tree_push_hashed["type"],
             nk_image("image", "image to display inside the header on the left of the label"),
             tree_push_hashed["title"],
-            Check(1)..nk_collapse_states.p.INOUT("state", "")
+            Check(1)..nk_collapse_states.p("state", "")
         )
         void("tree_state_pop", "Ends a collapsable UI section.", ctx)
 
@@ -1313,7 +1313,7 @@ nk_style_pop_vec2(ctx);""")}
             tree_push_hashed["type"],
             tree_push_hashed["title"],
             nk_collapse_states("initial_state", ""),
-            Check(1)..intb.p.INOUT("selected", ""),
+            Check(1)..intb.p("selected", ""),
             char.const.p("hash", ""),
             AutoSize("hash")..int("len", ""),
             int("seed", "")
@@ -1327,7 +1327,7 @@ nk_style_pop_vec2(ctx);""")}
             nk_image("img", ""),
             tree_push_hashed["title"],
             nk_collapse_states("initial_state", ""),
-            Check(1)..intb.p.INOUT("selected", ""),
+            Check(1)..intb.p("selected", ""),
             char.const.p("hash", ""),
             AutoSize("hash")..int("len", ""),
             int("seed", "")
@@ -1662,7 +1662,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             charUTF8.const.p("str", ""),
-            Check(1)..int.p.INOUT("active", "")
+            Check(1)..int.p("active", "")
         )
 
         intb(
@@ -1672,7 +1672,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             charUTF8.const.p("str", ""),
             AutoSize("str")..int("len", ""),
-            Check(1)..int.p.INOUT("active", "")
+            Check(1)..int.p("active", "")
         )
 
         intb(
@@ -1681,7 +1681,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             charUTF8.const.p("str", ""),
-            Check(1)..unsigned_int.p.INOUT("flags", ""),
+            Check(1)..unsigned_int.p("flags", ""),
             unsigned_int("value", "")
         )
 
@@ -1692,7 +1692,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             charUTF8.const.p("str", ""),
             AutoSize("str")..int("len", ""),
-            Check(1)..unsigned_int.p.INOUT("flags", ""),
+            Check(1)..unsigned_int.p("flags", ""),
             unsigned_int("value", "")
         )
 
@@ -1702,7 +1702,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             charUTF8.const.p("str", ""),
-            Check(1)..int.p.INOUT("active", "")
+            Check(1)..int.p("active", "")
         )
 
         intb(
@@ -1712,7 +1712,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             charUTF8.const.p("str", ""),
             AutoSize("str")..int("len", ""),
-            Check(1)..int.p.INOUT("active", "")
+            Check(1)..int.p("active", "")
         )
 
         intb(
@@ -1741,7 +1741,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             charUTF8.const.p("str", ""),
             nk_flags("align", "", TextAlignments),
-            Check(1)..int.p.INOUT("value", "")
+            Check(1)..int.p("value", "")
         )
 
         intb(
@@ -1752,7 +1752,7 @@ nk_style_pop_vec2(ctx);""")}
             charUTF8.const.p("str", ""),
             AutoSize("str")..int("len", ""),
             nk_flags("align", "", TextAlignments),
-            Check(1)..int.p.INOUT("value", "")
+            Check(1)..int.p("value", "")
         )
 
         intb(
@@ -1763,7 +1763,7 @@ nk_style_pop_vec2(ctx);""")}
             nk_image("img", ""),
             charUTF8.const.p("str", ""),
             nk_flags("align", "", TextAlignments),
-            Check(1)..int.p.INOUT("value", "")
+            Check(1)..int.p("value", "")
         )
 
         intb(
@@ -1775,7 +1775,7 @@ nk_style_pop_vec2(ctx);""")}
             charUTF8.const.p("str", ""),
             AutoSize("str")..int("len", ""),
             nk_flags("align", "", TextAlignments),
-            Check(1)..int.p.INOUT("value", "")
+            Check(1)..int.p("value", "")
         )
 
         intb(
@@ -1786,7 +1786,7 @@ nk_style_pop_vec2(ctx);""")}
             nk_symbol_type("symbol", "", SymbolTypes),
             charUTF8.const.p("str", ""),
             nk_flags("align", "", TextAlignments),
-            Check(1)..int.p.INOUT("value", "")
+            Check(1)..int.p("value", "")
         )
 
         intb(
@@ -1798,7 +1798,7 @@ nk_style_pop_vec2(ctx);""")}
             charUTF8.const.p("str", ""),
             AutoSize("str")..int("len", ""),
             nk_flags("align", "", TextAlignments),
-            Check(1)..int.p.INOUT("value", "")
+            Check(1)..int.p("value", "")
         )
 
         intb(
@@ -1896,7 +1896,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             float("min", ""),
-            Check(1)..float.p.OUT("val", ""),
+            Check(1)..float.p("val", ""),
             float("max", ""),
             float("step", "")
         )
@@ -1907,7 +1907,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             int("min", ""),
-            Check(1)..int.p.OUT("val", ""),
+            Check(1)..int.p("val", ""),
             int("max", ""),
             int("step", "")
         )
@@ -1917,7 +1917,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            Check(1)..nk_size.p.INOUT("cur", ""),
+            Check(1)..nk_size.p("cur", ""),
             nk_size("max", ""),
             intb("modifyable", "")
         )
@@ -1946,7 +1946,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_colorf.p.INOUT("color", ""),
+            nk_colorf.p("color", ""),
             nk_color_format("fmt", "", ColorFormats)
         )
 
@@ -1957,7 +1957,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             charUTF8.const.p("name", ""),
             int("min", ""),
-            Check(1)..int.p.INOUT("val", ""),
+            Check(1)..int.p("val", ""),
             int("max", ""),
             int("step", ""),
             float("inc_per_pixel", "")
@@ -1970,7 +1970,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             charUTF8.const.p("name", ""),
             float("min", ""),
-            Check(1)..float.p.INOUT("val", ""),
+            Check(1)..float.p("val", ""),
             float("max", ""),
             float("step", ""),
             float("inc_per_pixel", "")
@@ -1983,7 +1983,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             charUTF8.const.p("name", ""),
             double("min", ""),
-            Check(1)..double.p.INOUT("val", ""),
+            Check(1)..double.p("val", ""),
             double("max", ""),
             double("step", ""),
             float("inc_per_pixel", "")
@@ -2049,8 +2049,8 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_flags("flags", "", EditFlags),
-            charUTF8.p("memory", ""),
-            Check(1)..int.p.OUT("len", ""),
+            Input..charUTF8.p("memory", ""),
+            Check(1)..int.p("len", ""),
             int("max", ""),
             nullable..nk_plugin_filter("filter", "")
         )
@@ -2071,7 +2071,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_flags("flags", "", EditFlags),
-            charUTF8.p("buffer", ""),
+            Input..charUTF8.p("buffer", ""),
             int("max", ""),
             nullable..nk_plugin_filter("filter", "")
         )
@@ -2239,7 +2239,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             charUTF8.const.p.p("items", ""),
             AutoSize("items")..int("count", ""),
-            Check(1)..int.p.INOUT("selected", ""),
+            Check(1)..int.p("selected", ""),
             int("item_height", ""),
             nk_vec2("size", "")
         )
@@ -2250,7 +2250,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             charUTF8.const.p("items_separated_by_zeros", ""),
-            Check(1)..int.p.INOUT("selected", ""),
+            Check(1)..int.p("selected", ""),
             int("count", ""),
             int("item_height", ""),
             nk_vec2("size", "")
@@ -2263,7 +2263,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             charUTF8.const.p("items_separated_by_separator", ""),
             int("separator", ""),
-            Check(1)..int.p.INOUT("selected", ""),
+            Check(1)..int.p("selected", ""),
             int("count", ""),
             int("item_height", ""),
             nk_vec2("size", "")
@@ -2276,7 +2276,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             nk_item_getter("item_getter", ""),
             opaque_p("userdata", ""),
-            Check(1)..int.p.INOUT("selected", ""),
+            Check(1)..int.p("selected", ""),
             int("count", ""),
             int("item_height", ""),
             nk_vec2("size", "")
@@ -3073,10 +3073,10 @@ nk_style_pop_vec2(ctx);""")}
             "colorf_hsva_f",
             "",
 
-            Check(1)..float.p.OUT("out_h", ""),
-            Check(1)..float.p.OUT("out_s", ""),
-            Check(1)..float.p.OUT("out_v", ""),
-            Check(1)..float.p.OUT("out_a", ""),
+            Check(1)..float.p("out_h", ""),
+            Check(1)..float.p("out_s", ""),
+            Check(1)..float.p("out_v", ""),
+            Check(1)..float.p("out_a", ""),
             nk_colorf("in", "")
         )
 
@@ -3084,7 +3084,7 @@ nk_style_pop_vec2(ctx);""")}
             "colorf_hsva_fv",
             "",
 
-            Check(4)..float.p.OUT("hsva", ""),
+            Check(4)..float.p("hsva", ""),
             nk_colorf("in", "")
         )
 
@@ -3172,10 +3172,10 @@ nk_style_pop_vec2(ctx);""")}
             "color_f",
             "",
 
-            Check(1)..float.p.OUT("r", ""),
-            Check(1)..float.p.OUT("g", ""),
-            Check(1)..float.p.OUT("b", ""),
-            Check(1)..float.p.OUT("a", ""),
+            Check(1)..float.p("r", ""),
+            Check(1)..float.p("g", ""),
+            Check(1)..float.p("b", ""),
+            Check(1)..float.p("a", ""),
             nk_color("color", "")
         )
 
@@ -3183,7 +3183,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_fv",
             "",
 
-            Check(4)..float.p.OUT("rgba_out", ""),
+            Check(4)..float.p("rgba_out", ""),
             nk_color("color", "")
         )
 
@@ -3198,10 +3198,10 @@ nk_style_pop_vec2(ctx);""")}
             "color_d",
             "",
 
-            Check(1)..double.p.OUT("r", ""),
-            Check(1)..double.p.OUT("g", ""),
-            Check(1)..double.p.OUT("b", ""),
-            Check(1)..double.p.OUT("a", ""),
+            Check(1)..double.p("r", ""),
+            Check(1)..double.p("g", ""),
+            Check(1)..double.p("b", ""),
+            Check(1)..double.p("a", ""),
             nk_color("color", "")
         )
 
@@ -3209,7 +3209,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_dv",
             "",
 
-            Check(4)..double.p.OUT("rgba_out", ""),
+            Check(4)..double.p("rgba_out", ""),
             nk_color("color", "")
         )
 
@@ -3224,7 +3224,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hex_rgba",
             "",
 
-            Check(8)..char.p.OUT("output", ""),
+            Check(8)..char.p("output", ""),
             nk_color("color", "")
         )
 
@@ -3232,7 +3232,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hex_rgb",
             "",
 
-            Check(6)..char.p.OUT("output", ""),
+            Check(6)..char.p("output", ""),
             nk_color("color", "")
         )
 
@@ -3240,9 +3240,9 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_i",
             "",
 
-            Check(1)..int.p.OUT("out_h", ""),
-            Check(1)..int.p.OUT("out_s", ""),
-            Check(1)..int.p.OUT("out_v", ""),
+            Check(1)..int.p("out_h", ""),
+            Check(1)..int.p("out_s", ""),
+            Check(1)..int.p("out_v", ""),
             nk_color("color", "")
         )
 
@@ -3250,9 +3250,9 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_b",
             "",
 
-            Check(1)..nk_byte.p.OUT("out_h", ""),
-            Check(1)..nk_byte.p.OUT("out_s", ""),
-            Check(1)..nk_byte.p.OUT("out_v", ""),
+            Check(1)..nk_byte.p("out_h", ""),
+            Check(1)..nk_byte.p("out_s", ""),
+            Check(1)..nk_byte.p("out_v", ""),
             nk_color("color", "")
         )
 
@@ -3260,7 +3260,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_iv",
             "",
 
-            Check(3)..int.p.OUT("hsv_out", ""),
+            Check(3)..int.p("hsv_out", ""),
             nk_color("color", "")
         )
 
@@ -3268,7 +3268,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_bv",
             "",
 
-            Check(3)..nk_byte.p.OUT("hsv_out", ""),
+            Check(3)..nk_byte.p("hsv_out", ""),
             nk_color("color", "")
         )
 
@@ -3276,9 +3276,9 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_f",
             "",
 
-            Check(1)..float.p.OUT("out_h", ""),
-            Check(1)..float.p.OUT("out_s", ""),
-            Check(1)..float.p.OUT("out_v", ""),
+            Check(1)..float.p("out_h", ""),
+            Check(1)..float.p("out_s", ""),
+            Check(1)..float.p("out_v", ""),
             nk_color("color", "")
         )
 
@@ -3286,7 +3286,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsv_fv",
             "",
 
-            Check(3)..float.p.OUT("hsv_out", ""),
+            Check(3)..float.p("hsv_out", ""),
             nk_color("color", "")
         )
 
@@ -3294,10 +3294,10 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_i",
             "",
 
-            Check(1)..int.p.OUT("h", ""),
-            Check(1)..int.p.OUT("s", ""),
-            Check(1)..int.p.OUT("v", ""),
-            Check(1)..int.p.OUT("a", ""),
+            Check(1)..int.p("h", ""),
+            Check(1)..int.p("s", ""),
+            Check(1)..int.p("v", ""),
+            Check(1)..int.p("a", ""),
             nk_color("color", "")
         )
 
@@ -3305,10 +3305,10 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_b",
             "",
 
-            Check(1)..nk_byte.p.OUT("h", ""),
-            Check(1)..nk_byte.p.OUT("s", ""),
-            Check(1)..nk_byte.p.OUT("v", ""),
-            Check(1)..nk_byte.p.OUT("a", ""),
+            Check(1)..nk_byte.p("h", ""),
+            Check(1)..nk_byte.p("s", ""),
+            Check(1)..nk_byte.p("v", ""),
+            Check(1)..nk_byte.p("a", ""),
             nk_color("color", "")
         )
 
@@ -3316,7 +3316,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_iv",
             "",
 
-            Check(4)..int.p.OUT("hsva_out", ""),
+            Check(4)..int.p("hsva_out", ""),
             nk_color("color", "")
         )
 
@@ -3324,7 +3324,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_bv",
             "",
 
-            Check(4)..nk_byte.p.OUT("hsva_out", ""),
+            Check(4)..nk_byte.p("hsva_out", ""),
             nk_color("color", "")
         )
 
@@ -3332,10 +3332,10 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_f",
             "",
 
-            Check(1)..float.p.OUT("out_h", ""),
-            Check(1)..float.p.OUT("out_s", ""),
-            Check(1)..float.p.OUT("out_v", ""),
-            Check(1)..float.p.OUT("out_a", ""),
+            Check(1)..float.p("out_h", ""),
+            Check(1)..float.p("out_s", ""),
+            Check(1)..float.p("out_v", ""),
+            Check(1)..float.p("out_a", ""),
             nk_color("color", "")
         )
 
@@ -3343,7 +3343,7 @@ nk_style_pop_vec2(ctx);""")}
             "color_hsva_fv",
             "",
 
-            Check(4)..float.p.OUT("hsva_out", ""),
+            Check(4)..float.p("hsva_out", ""),
             nk_color("color", "")
         )
 
@@ -3432,7 +3432,7 @@ nk_style_pop_vec2(ctx);""")}
             "triangle_from_direction",
             "",
 
-            nk_vec2.p.OUT("result", ""),
+            nk_vec2.p("result", ""),
             nk_rect("r", ""),
             float("pad_x", ""),
             float("pad_y", ""),
@@ -3558,7 +3558,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             charUTF8.const.p("str", ""),
-            Check(1)..charUTF8.const.p.p.OUT("endptr", "")
+            Check(1)..charUTF8.const.p.p("endptr", "")
         )
 
         float(
@@ -3566,7 +3566,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             charUTF8.const.p("str", ""),
-            Check(1)..charUTF8.const.p.p.OUT("endptr", "")
+            Check(1)..charUTF8.const.p.p("endptr", "")
         )
 
         double(
@@ -3574,7 +3574,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             charUTF8.const.p("str", ""),
-            Check(1)..charUTF8.const.p.p.OUT("endptr", "")
+            Check(1)..charUTF8.const.p.p("endptr", "")
         )
 
         intb(
@@ -3603,7 +3603,7 @@ nk_style_pop_vec2(ctx);""")}
 
             charUTF8.const.p("str", ""),
             charUTF8.const.p("pattern", ""),
-            Check(1)..int.p.OUT("out_score", "")
+            Check(1)..int.p("out_score", "")
         )
 
         int(
@@ -3613,7 +3613,7 @@ nk_style_pop_vec2(ctx);""")}
             charUTF8.const.p("txt", ""),
             AutoSize("txt")..int("txt_len", ""),
             charUTF8.const.p("pattern", ""),
-            Check(1)..int.p.OUT("out_score", "")
+            Check(1)..int.p("out_score", "")
         )
 
         int(
@@ -3621,7 +3621,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             char.const.p("c", ""),
-            Check(1)..nk_rune.p.OUT("u", ""),
+            Check(1)..nk_rune.p("u", ""),
             AutoSize("c")..int("clen", "")
         )
 
@@ -3649,8 +3649,8 @@ nk_style_pop_vec2(ctx);""")}
             char.const.p("buffer", ""),
             AutoSize("buffer")..int("length", ""),
             int("index", ""),
-            Check(1)..nk_rune.p.OUT("unicode", ""),
-            AutoSizeResult..int.p.OUT("len", "")
+            Check(1)..nk_rune.p("unicode", ""),
+            AutoSizeResult..int.p("len", "")
         )
 
         void(
@@ -3675,7 +3675,7 @@ nk_style_pop_vec2(ctx);""")}
             "buffer_info",
             "",
 
-            nk_memory_status.p.OUT("status", ""),
+            nk_memory_status.p("status", ""),
             nk_buffer_p("buffer", "")
         )
 
@@ -3949,8 +3949,8 @@ nk_style_pop_vec2(ctx);""")}
 
             nk_str.p("s", ""),
             int("pos", ""),
-            Check(1)..nk_rune.p.OUT("unicode", ""),
-            AutoSizeResult..int.p.OUT("len", "")
+            Check(1)..nk_rune.p("unicode", ""),
+            AutoSizeResult..int.p("len", "")
         )
 
         nk_rune(
@@ -3975,8 +3975,8 @@ nk_style_pop_vec2(ctx);""")}
 
             nk_str.const.p("s", ""),
             int("pos", ""),
-            Check(1)..nk_rune.p.OUT("unicode", ""),
-            AutoSizeResult..int.p.OUT("len", "")
+            Check(1)..nk_rune.p("unicode", ""),
+            AutoSizeResult..int.p("len", "")
         )
 
         charUTF8.p(
@@ -4152,11 +4152,12 @@ nk_style_pop_vec2(ctx);""")}
     }();
 
     {
+        val cmd = Input..nk_command_buffer.p("b", "")
         void(
             "stroke_line",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             float("x0", ""),
             float("y0", ""),
             float("x1", ""),
@@ -4169,7 +4170,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_curve",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             float("ax", ""),
             float("ay", ""),
             float("ctrl0x", ""),
@@ -4186,7 +4187,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_rect",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             nk_rect("rect", ""),
             float("rounding", ""),
             float("line_thickness", ""),
@@ -4197,7 +4198,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_circle",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             nk_rect("rect", ""),
             float("line_thickness", ""),
             nk_color("color", "")
@@ -4207,7 +4208,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_arc",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             float("cx", ""),
             float("cy", ""),
             float("radius", ""),
@@ -4221,7 +4222,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_triangle",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             float("x0", ""),
             float("y0", ""),
             float("x1", ""),
@@ -4236,7 +4237,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_polyline",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             float.p("points", ""),
             AutoSize("points")..int("point_count", ""),
             float("line_thickness", ""),
@@ -4247,7 +4248,7 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_polygon",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             float.p("points", ""),
             AutoSize("points")..int("point_count", ""),
             float("line_thickness", ""),
@@ -4258,7 +4259,7 @@ nk_style_pop_vec2(ctx);""")}
             "fill_rect",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             nk_rect("rect", ""),
             float("rounding", ""),
             nk_color("color", "")
@@ -4268,7 +4269,7 @@ nk_style_pop_vec2(ctx);""")}
             "fill_rect_multi_color",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             nk_rect("rect", ""),
             nk_color("left", ""),
             nk_color("top", ""),
@@ -4280,7 +4281,7 @@ nk_style_pop_vec2(ctx);""")}
             "fill_circle",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             nk_rect("rect", ""),
             nk_color("color", "")
         )
@@ -4289,7 +4290,7 @@ nk_style_pop_vec2(ctx);""")}
             "fill_arc",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             float("cx", ""),
             float("cy", ""),
             float("radius", ""),
@@ -4302,7 +4303,7 @@ nk_style_pop_vec2(ctx);""")}
             "fill_triangle",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             float("x0", ""),
             float("y0", ""),
             float("x1", ""),
@@ -4316,7 +4317,7 @@ nk_style_pop_vec2(ctx);""")}
             "fill_polygon",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             float.p("points", ""),
             AutoSize("points")..int("point_count", ""),
             nk_color("color", "")
@@ -4326,7 +4327,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_image",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             nk_rect("rect", ""),
             nk_image.const.p("img", ""),
             nk_color("color", "")
@@ -4336,7 +4337,7 @@ nk_style_pop_vec2(ctx);""")}
             "draw_text",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             nk_rect("rect", ""),
             charUTF8.const.p("string", ""),
             AutoSize("string")..int("length", ""),
@@ -4349,7 +4350,7 @@ nk_style_pop_vec2(ctx);""")}
             "push_scissor",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             nk_rect("rect", "")
         )
 
@@ -4357,7 +4358,7 @@ nk_style_pop_vec2(ctx);""")}
             "push_custom",
             "",
 
-            nk_command_buffer.p("b", ""),
+            cmd,
             nk_rect("rect", ""),
             nk_command_custom_callback("callback", ""),
             nk_handle("usr", "")

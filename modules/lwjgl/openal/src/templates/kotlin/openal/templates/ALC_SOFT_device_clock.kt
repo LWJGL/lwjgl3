@@ -98,6 +98,6 @@ val ALC_SOFT_device_clock = "SOFTDeviceClock".nativeClassALC("SOFT_device_clock"
             """
         ),
         AutoSize("values")..ALsizei("size", ""),
-        ReturnParam..ALCint64SOFT.p.OUT("values", "")
+        ReturnParam..ALCint64SOFT.p("values", "")
     )
 }

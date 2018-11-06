@@ -5,7 +5,6 @@
 package org.lwjgl.generator
 
 import org.lwjgl.generator.GenerationMode.*
-import org.lwjgl.generator.ParameterType.*
 import java.io.*
 
 /*
@@ -283,10 +282,10 @@ class Func(
         parameters.forEachIndexed { i, it ->
             it.nativeType.dereference.let { type ->
                 if (type is StructType) {
-                    if (it.paramType === OUT)
-                        type.definition.hasUsageOutput()
-                    else
+                    if (it.isInput)
                         type.definition.hasUsageInput()
+                    else
+                        type.definition.hasUsageOutput()
                 }
             }
 
@@ -482,14 +481,12 @@ class Func(
 
             var Safe = if (it.has<Nullable>()) "Safe" else ""
 
-            if (it.paramType === IN) {
-                if (it.nativeType is CharSequenceType && !it.has<Check>() && !hasAutoSizeFor(it) && transforms?.get(it) == null)
-                    checks.add("checkNT${it.nativeType.charMapping.bytes}$Safe(${it.name});")
+            if (it.nativeType is CharSequenceType && !it.has<Check>() && !hasAutoSizeFor(it) && transforms?.get(it) == null)
+                checks.add("checkNT${it.nativeType.charMapping.bytes}$Safe(${it.name});")
 
-                if (it.has<Terminated>()) {
-                    val postfix = if ((it.nativeType.mapping as PointerMapping).isMultiByte) "" else "1"
-                    checks.add("checkNT$postfix$Safe(${it.name}${it.get<Terminated>().let { terminated -> if (terminated === NullTerminated) "" else ", ${terminated.value}" }});")
-                }
+            if (it.has<Terminated>()) {
+                val postfix = if ((it.nativeType.mapping as PointerMapping).isMultiByte) "" else "1"
+                checks.add("checkNT$postfix$Safe(${it.name}${it.get<Terminated>().let { terminated -> if (terminated === NullTerminated) "" else ", ${terminated.value}" }});")
             }
 
             if (it.has<Check>()) {
@@ -506,9 +503,9 @@ class Func(
 
             if (it.has<AutoSize>()) {
                 val autoSize = it.get<AutoSize>()
-                if (mode === NORMAL || it.paramType === INOUT) {
+                if (mode === NORMAL || !it.isInput) {
                     var expression = it.name
-                    if (it.paramType === INOUT) {
+                    if (!it.isInput) {
                         expression += if (it.nativeType is ArrayType<*>)
                             "[0]"
                         else
@@ -558,7 +555,7 @@ class Func(
 
         // Second pass
         getNativeParams()
-            .filter { it.paramType != OUT && it.nativeType.hasStructValidation && !hasUnsafeMethod }
+            .filter { it.isInput && it.nativeType.hasStructValidation && !hasUnsafeMethod }
             .forEach {
                 // Do this after the AutoSize check
                 checks.add(
@@ -622,7 +619,7 @@ class Func(
             if (hasUnsafeMethod)
                 writer.generateUnsafeMethod(constantMacro, hasReuse)
 
-            if ((returns.nativeType !is CharSequenceType || has<Address>()) && parameters.none { (it.has<AutoSize>() && it.paramType == IN) || (it.has<Expression>() && it.get<Expression>().skipNormal) })
+            if ((returns.nativeType !is CharSequenceType || has<Address>()) && parameters.none { (it.has<AutoSize>() && it.isInput) || (it.has<Expression>() && it.get<Expression>().skipNormal) })
                 writer.generateJavaMethod(constantMacro, hasReuse)
 
             writer.generateAlternativeMethods()
@@ -776,7 +773,7 @@ class Func(
             getNativeParams().forEach {
                 if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType)
                     checks.add("check(${it.name});")
-                else if (it.paramType != OUT && it.nativeType.hasStructValidation)
+                else if (it.isInput && it.nativeType.hasStructValidation)
                     checks.add(
                         "${it.nativeType.javaMethodType}.validate(${it.name}${sequenceOf(
                             if (it.has<Check>()) it.get<Check>().expression else null,
@@ -1004,7 +1001,7 @@ class Func(
     }
 
     private fun getAutoSizeResultExpression(single: Boolean, param: Parameter) =
-        if (param.paramType === IN)
+        if (param.isInput)
             param.name.let {
                 val custom = param.get<AutoSizeResultParam>().expression
                 custom?.replace("\$original", it) ?: it.let { expression -> if (param.nativeType.mapping === PrimitiveMapping.INT) expression else "(int)$expression" }
@@ -1128,21 +1125,19 @@ class Func(
 
         // Apply basic transformations
         parameters.forEach {
-            if (it.paramType === IN) {
-                if (it.has<AutoSize>()) {
-                    val autoSize = it.get<AutoSize>()
-                    val param = paramMap[autoSize.reference]!! // TODO: Check dependent too?
-                    // Check if there's also an optional on the referenced parameter. Skip if so.
-                    if (!(param has optional))
-                        transforms[it] = AutoSizeTransform(param, hasCustomJNI || hasUnsafeMethod)
-                } else if (it has optional) {
-                    transforms[it] = ExpressionTransform("NULL")
-                } else if (it.has<Expression>()) {
-                    // We do this here in case another transform applies too.
-                    // We overwrite the value with the expression but use the type of the other transform.
-                    val expression = it.get<Expression>()
-                    transforms[it] = ExpressionTransform(expression.value, expression.keepParam, @Suppress("UNCHECKED_CAST") (transforms[it] as FunctionTransform<Parameter>?))
-                }
+            if (it.has<AutoSize>() && it.isInput) {
+                val autoSize = it.get<AutoSize>()
+                val param = paramMap[autoSize.reference]!! // TODO: Check dependent too?
+                // Check if there's also an optional on the referenced parameter. Skip if so.
+                if (!(param has optional))
+                    transforms[it] = AutoSizeTransform(param, hasCustomJNI || hasUnsafeMethod)
+            } else if (it has optional) {
+                transforms[it] = ExpressionTransform("NULL")
+            } else if (it.has<Expression>()) {
+                // We do this here in case another transform applies too.
+                // We overwrite the value with the expression but use the type of the other transform.
+                val expression = it.get<Expression>()
+                transforms[it] = ExpressionTransform(expression.value, expression.keepParam, @Suppress("UNCHECKED_CAST") (transforms[it] as FunctionTransform<Parameter>?))
             }
         }
 
@@ -1161,7 +1156,7 @@ class Func(
 
         // Apply any CharSequenceTransforms. These can be combined with any of the other transformations.
         if (parameters.count {
-            if (it.paramType === OUT || it.nativeType !is CharSequenceType)
+            if (!it.isInput || it.nativeType !is CharSequenceType)
                 false
             else {
                 val hasAutoSize = hasAutoSizeFor(it)

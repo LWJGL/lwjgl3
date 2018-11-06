@@ -45,7 +45,7 @@ val EXT_occlusion_query_boolean = "EXTOcclusionQueryBoolean".nativeClassGLES("EX
         "",
 
         AutoSize("ids")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("ids", "")
+        ReturnParam..GLuint.p("ids", "")
     )
 
     void(
@@ -84,7 +84,7 @@ val EXT_occlusion_query_boolean = "EXTOcclusionQueryBoolean".nativeClassGLES("EX
 
         GLenum("target", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     void(
@@ -93,6 +93,6 @@ val EXT_occlusion_query_boolean = "EXTOcclusionQueryBoolean".nativeClassGLES("EX
 
         GLuint("id", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLuint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLuint.p("params", "")
     )
 }

@@ -86,6 +86,6 @@ val KHR_reusable_sync = "KHRReusableSync".nativeClassEGL("KHR_reusable_sync", po
         EGLDisplay("dpy", ""),
         EGLSyncKHR("sync", ""),
         EGLint("attribute", ""),
-        Check(1)..EGLint.p.OUT("value", "")
+        Check(1)..EGLint.p("value", "")
     )
 }

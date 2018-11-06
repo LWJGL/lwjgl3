@@ -88,8 +88,8 @@ val GL41C = "GL41C".nativeClassGL("GL41C") {
 
         GLenum("shadertype", "the type of shader whose precision to query", "#VERTEX_SHADER #FRAGMENT_SHADER"),
         GLenum("precisiontype", "the numeric format whose precision and range to query"),
-        Check(2)..GLint.p.OUT("range", "the address of array of two integers into which encodings of the implementation's numeric range are returned"),
-        Check(1)..ReturnParam..GLint.p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
+        Check(2)..GLint.p("range", "the address of array of two integers into which encodings of the implementation's numeric range are returned"),
+        Check(1)..ReturnParam..GLint.p("precision", "the address of an integer into which the numeric precision of the implementation is written")
     )
 
     void(
@@ -134,9 +134,9 @@ val GL41C = "GL41C".nativeClassGL("GL41C") {
 
         GLuint("program", "the name of a program object whose binary representation to retrieve"),
         AutoSize("binary")..GLsizei("bufSize", "the size of the buffer whose address is given by {@code binary}"),
-        Check(1)..nullable..GLsizei.p.OUT("length", "the address of a variable to receive the number of bytes written into {@code binary}"),
-        Check(1)..GLenum.p.OUT("binaryFormat", "a variable to receive a token indicating the format of the binary data returned by the GL"),
-        void.p.OUT(
+        Check(1)..nullable..GLsizei.p("length", "the address of a variable to receive the number of bytes written into {@code binary}"),
+        Check(1)..GLenum.p("binaryFormat", "a variable to receive a token indicating the format of the binary data returned by the GL"),
+        void.p(
             "binary",
             "an array into which the GL will return {@code program}'s binary representation"
         )
@@ -269,7 +269,7 @@ if (shader) {
         "Reserves program pipeline object names.",
 
         AutoSize("pipelines")..GLsizei("n", "the number of program pipeline object names to reserve"),
-        ReturnParam..GLuint.p.OUT("pipelines", "an array of into which the reserved names will be written")
+        ReturnParam..GLuint.p("pipelines", "an array of into which the reserved names will be written")
     )
 
     GLboolean(
@@ -289,7 +289,7 @@ if (shader) {
             "the name of the parameter to retrieve",
             "#ACTIVE_PROGRAM #INFO_LOG_LENGTH $SHADER_TYPES"
         ),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
+        Check(1)..ReturnParam..GLint.p("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
     )
 
     // ProgramUniform JavaDoc
@@ -846,12 +846,12 @@ if (shader) {
 
         GLuint("pipeline", "the name of a program pipeline object from which to retrieve the info log"),
         AutoSize("infoLog")..GLsizei("bufSize", "the maximum number of characters, including the null terminator, that may be written into {@code infoLog}"),
-        Check(1)..nullable..GLsizei.p.OUT("length", "a variable into which will be written the number of characters written into {@code infoLog}"),
+        Check(1)..nullable..GLsizei.p("length", "a variable into which will be written the number of characters written into {@code infoLog}"),
         Return(
             "length",
             "glGetProgramPipelinei(pipeline, GL20.GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8.p.OUT("infoLog", "an array of characters into which will be written the info log for {@code pipeline}")
+        )..GLcharUTF8.p("infoLog", "an array of characters into which will be written the info log for {@code pipeline}")
     )
 
     // ARB_vertex_attrib_64bit
@@ -1037,7 +1037,7 @@ if (shader) {
 
         GLenum("target", "the indexed state to query"),
         GLuint("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLfloat.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLfloat.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -1046,6 +1046,6 @@ if (shader) {
 
         GLenum("target", "the indexed state to query"),
         GLuint("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLdouble.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLdouble.p("data", "a scalar or buffer in which to place the returned data")
     )
 }

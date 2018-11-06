@@ -242,7 +242,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
         GLenum("target", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     void(
@@ -252,7 +252,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         GLuint("program", ""),
         GLenum("programInterface", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     GLuint(
@@ -272,11 +272,11 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         GLenum("programInterface", ""),
         GLuint("index", ""),
         AutoSize("name")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p.OUT("length", ""),
+        Check(1)..nullable..GLsizei.p("length", ""),
         Return(
             "length",
             "glGetProgramInterfacei(program, programInterface, GL_MAX_NAME_LENGTH)"
-        )..GLcharASCII.p.OUT("name", "")
+        )..GLcharASCII.p("name", "")
     )
 
     void(
@@ -289,8 +289,8 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         AutoSize("props")..GLsizei("propCount", ""),
         GLenum.const.p("props", ""),
         AutoSize("params")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p.OUT("length", ""),
-        GLint.p.OUT("params", "")
+        Check(1)..nullable..GLsizei.p("length", ""),
+        GLint.p("params", "")
     )
 
     GLint(
@@ -348,7 +348,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "",
 
         AutoSize("pipelines")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("pipelines", "")
+        ReturnParam..GLuint.p("pipelines", "")
     )
 
     GLboolean(
@@ -364,7 +364,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
         GLuint("pipeline", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     void(
@@ -725,12 +725,12 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
         GLuint("pipeline", ""),
         AutoSize("infoLog")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p.OUT("length", ""),
+        Check(1)..nullable..GLsizei.p("length", ""),
         Return(
             "length",
             "glGetProgramPipelinei(pipeline, GLES20.GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8.p.OUT("infoLog", "")
+        )..GLcharUTF8.p("infoLog", "")
     )
 
     void(
@@ -752,7 +752,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
         GLenum("target", ""),
         GLuint("index", ""),
-        ReturnParam..Check(1)..GLboolean.p.OUT("data", "")
+        ReturnParam..Check(1)..GLboolean.p("data", "")
     )
 
     void(
@@ -787,7 +787,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
         GLenum("pname", ""),
         GLuint("index", ""),
-        ReturnParam..Check(1)..GLfloat.p.OUT("val", "")
+        ReturnParam..Check(1)..GLfloat.p("val", "")
     )
 
     void(
@@ -805,7 +805,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         GLenum("target", ""),
         GLint("level", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     void(
@@ -815,7 +815,7 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         GLenum("target", ""),
         GLint("level", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLfloat.p.OUT("params", "")
+        ReturnParam..Check(1)..GLfloat.p("params", "")
     )
 
     void(

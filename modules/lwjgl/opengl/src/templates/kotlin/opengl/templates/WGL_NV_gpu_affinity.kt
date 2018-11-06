@@ -51,7 +51,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
         """,
 
         UINT("gpuIndex", "an index value that specifies a GPU"),
-        Check(1)..HGPUNV.p.OUT("gpu", "returns a handle for GPU number {@code gpuIndex}. The first GPU will be index 0.")
+        Check(1)..HGPUNV.p("gpu", "returns a handle for GPU number {@code gpuIndex}. The first GPU will be index 0.")
     )
 
     BOOL(
@@ -60,7 +60,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 
         HGPUNV("gpu", "a handle to the GPU to query"),
         UINT("deviceIndex", "an index value that specifies a display device, supported by {@code gpu}, to query. The first display device will be index 0."),
-        PGPU_DEVICE.OUT("gpuDevice", "a ##GPU_DEVICE structure which will receive information about the display device at index {@code deviceIndex}.")
+        PGPU_DEVICE("gpuDevice", "a ##GPU_DEVICE structure which will receive information about the display device at index {@code deviceIndex}.")
     )
 
     HDC(
@@ -89,7 +89,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 
         HDC("affinityDC", "a handle of the affinity-DC to query"),
         UINT("gpuIndex", "an index value of the GPU handle in the affinity mask of {@code affinityDC} to query"),
-        Check(1)..HGPUNV.p.OUT("gpu", "returns a handle for  GPU number {@code gpuIndex}. The first GPU will be at index 0.")
+        Check(1)..HGPUNV.p("gpu", "returns a handle for  GPU number {@code gpuIndex}. The first GPU will be at index 0.")
     )
 
     BOOL(

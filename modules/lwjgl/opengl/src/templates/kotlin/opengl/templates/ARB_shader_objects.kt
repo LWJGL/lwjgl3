@@ -441,7 +441,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
         GLhandleARB("obj", "the object to query"),
         GLenum("pname", "the parameter to query"),
-        Check(1)..GLfloat.p.OUT("params", "a buffer in which to return the parameter value")
+        Check(1)..GLfloat.p("params", "a buffer in which to return the parameter value")
     )
 
     void(
@@ -450,7 +450,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
         GLhandleARB("obj", "the object to query"),
         GLenum("pname", "the parameter to query", Parameters),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a buffer in which to return the parameter value")
+        Check(1)..ReturnParam..GLint.p("params", "a buffer in which to return the parameter value")
     )
 
     void(
@@ -472,7 +472,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
         GLhandleARB("obj", "the shader object to query"),
         AutoSize("infoLog")..GLsizei("maxLength", "the maximum number of characters the GL is allowed to write into {@code infoLog}"),
-        Check(1)..nullable..GLsizei.p.OUT(
+        Check(1)..nullable..GLsizei.p(
             "length",
             """
             the actual number of characters written by the GL into {@code infoLog} is returned in {@code length}, excluding the null termination. If
@@ -483,7 +483,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
             "length",
             "glGetObjectParameteriARB(obj, GL_OBJECT_INFO_LOG_LENGTH_ARB)",
             heapAllocate = true
-        )..GLcharARB.p.OUT("infoLog", "a buffer in which to return the info log")
+        )..GLcharARB.p("infoLog", "a buffer in which to return the info log")
     )
 
     void(
@@ -496,11 +496,11 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
         GLhandleARB("containerObj", "the container object to query"),
         AutoSize("obj")..GLsizei("maxCount", "the maximum number of handles the GL is allowed to write into {@code obj}"),
-        Check(1)..nullable..GLsizei.p.OUT(
+        Check(1)..nullable..GLsizei.p(
             "count",
             "a buffer in which to return the actual number of object handles written by the GL into {@code obj}. If #NULL then the GL ignores this parameter."
         ),
-        GLhandleARB.p.OUT("obj", "a buffer in which to return the attached object handles")
+        GLhandleARB.p("obj", "a buffer in which to return the attached object handles")
     )
 
     GLint(
@@ -565,12 +565,12 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
             {@code length} is #NULL then the GL ignores this parameter.
             """
         ),
-        Check(1)..GLint.p.OUT("size", "a buffer in which to return the uniform size. The size is in units of the type returned in {@code type}."),
-        Check(1)..GLenum.p.OUT("type", "a buffer in which to return the uniform type"),
+        Check(1)..GLint.p("size", "a buffer in which to return the uniform size. The size is in units of the type returned in {@code type}."),
+        Check(1)..GLenum.p("type", "a buffer in which to return the uniform type"),
         Return(
             "length",
             "glGetObjectParameteriARB(programObj, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB)"
-        )..GLcharARB.p.OUT("name", "a buffer in which to return the uniform name")
+        )..GLcharARB.p("name", "a buffer in which to return the uniform name")
     )
 
     void(
@@ -579,7 +579,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
         GLhandleARB("programObj", "the program object to query"),
         uniformLocation,
-        Check(1)..ReturnParam..GLfloat.p.OUT("params", "a buffer in which to return the uniform values")
+        Check(1)..ReturnParam..GLfloat.p("params", "a buffer in which to return the uniform values")
     )
 
     void(
@@ -588,7 +588,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
         GLhandleARB("programObj", "the program object to query"),
         uniformLocation,
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a buffer in which to return the uniform values")
+        Check(1)..ReturnParam..GLint.p("params", "a buffer in which to return the uniform values")
     )
 
     void(
@@ -603,7 +603,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
         GLhandleARB("obj", "the shader object to query"),
         AutoSize("source")..GLsizei("maxLength", "the maximum number of characters the GL is allowed to write into {@code source}"),
-        Check(1)..nullable..GLsizei.p.OUT(
+        Check(1)..nullable..GLsizei.p(
             "length",
             """
             a buffer in which to return the actual number of characters written by the GL into {@code source}, excluding the null termination. If
@@ -614,6 +614,6 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
             "length",
             "glGetObjectParameteriARB(obj, GL_OBJECT_SHADER_SOURCE_LENGTH_ARB)",
             heapAllocate = true
-        )..GLcharARB.p.OUT("source", "a buffer in which to return the shader object source")
+        )..GLcharARB.p("source", "a buffer in which to return the shader object source")
     )
 }

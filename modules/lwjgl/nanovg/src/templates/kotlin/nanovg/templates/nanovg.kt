@@ -554,14 +554,14 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        Check(6)..float.p.OUT("xform", "the destination buffer")
+        Check(6)..float.p("xform", "the destination buffer")
     )
 
     val TransformIdentity = void(
         "TransformIdentity",
         "Sets the transform to identity matrix.",
 
-        Check(6)..float.p.OUT("dst", "the destination buffer")
+        Check(6)..float.p("dst", "the destination buffer")
     )
 
     void(
@@ -636,8 +636,8 @@ nvgFill(vg);""")}
         "TransformPoint",
         "Transform a point by given transform.",
 
-        Check(1)..float.p.OUT("dstx", "returns the transformed X axis coordinate"),
-        Check(1)..float.p.OUT("dsty", "returns the transformed Y axis coordinate"),
+        Check(1)..float.p("dstx", "returns the transformed X axis coordinate"),
+        Check(1)..float.p("dsty", "returns the transformed Y axis coordinate"),
         Check(6)..float.const.p("xform", "the transformation matrix"),
         float("srcx", "the point X axis coordinate"),
         float("srcy", "the point Y axis coordinate")
@@ -712,8 +712,8 @@ nvgFill(vg);""")}
 
         ctx,
         int("image", "the image handle"),
-        Check(1)..int.p.OUT("w", "returns the image width"),
-        Check(1)..int.p.OUT("h", "returns the image height")
+        Check(1)..int.p("w", "returns the image width"),
+        Check(1)..int.p("h", "returns the image height")
     )
 
     void(
@@ -1160,7 +1160,7 @@ nvgFill(vg);""")}
         float("y", "the text Y axis coordinate"),
         charUTF8.const.p("string", "the text string to measure"),
         AutoSize("string")..nullable..charptr.const.p("end", "a pointer to the end of the sub-string to measure, or #NULL"),
-        nullable..Check(4)..float.p.OUT("bounds", "returns the bounding box of the text"),
+        nullable..Check(4)..float.p("bounds", "returns the bounding box of the text"),
 
         returnDoc = "the horizontal advance of the measured text (i.e. where the next character should drawn)"
     )
@@ -1182,7 +1182,7 @@ nvgFill(vg);""")}
         float("breakRowWidth", "the maximum row width"),
         charUTF8.const.p("string", "the text string to measure"),
         AutoSize("string")..nullable..charptr.const.p("end", "a pointer to the end of the sub-string to measure, or #NULL"),
-        nullable..Check(4)..float.p.OUT("bounds", "returns the bounding box of the text box")
+        nullable..Check(4)..float.p("bounds", "returns the bounding box of the text box")
     )
 
     int(
@@ -1198,7 +1198,7 @@ nvgFill(vg);""")}
         float("y", "the text Y axis coordinate"),
         charUTF8.const.p("string", "the text string to measure"),
         AutoSize("string")..nullable..charptr.const.p("end", "a pointer to the end of the sub-string to measure, or #NULL"),
-        NVGglyphPosition.p.OUT("positions", "returns the glyph x positions"),
+        NVGglyphPosition.p("positions", "returns the glyph x positions"),
         AutoSize("positions")..int("maxPositions", "the maximum number of glyph positions to return")
     )
 
@@ -1211,9 +1211,9 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        nullable..Check(1)..float.p.OUT("ascender", "the line ascend"),
-        nullable..Check(1)..float.p.OUT("descender", "the line descend"),
-        nullable..Check(1)..float.p.OUT("lineh", "the line height")
+        nullable..Check(1)..float.p("ascender", "the line ascend"),
+        nullable..Check(1)..float.p("descender", "the line descend"),
+        nullable..Check(1)..float.p("lineh", "the line height")
     )
 
     int(
@@ -1229,7 +1229,7 @@ nvgFill(vg);""")}
         charUTF8.const.p("string", "the text string to measure"),
         AutoSize("string")..nullable..charptr.const.p("end", "a pointer to the end of the sub-string to measure, or #NULL"),
         float("breakRowWidth", "the maximum row width"),
-        NVGtextRow.p.OUT("rows", "returns the text rows"),
+        NVGtextRow.p("rows", "returns the text rows"),
         AutoSize("rows")..int("maxRows", "the maximum number of text rows to return")
     )
 }

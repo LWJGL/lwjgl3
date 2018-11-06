@@ -97,7 +97,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query"),
-        ReturnParam..Check(1)..ALdouble.p.OUT("value", "the parameter values")
+        ReturnParam..Check(1)..ALdouble.p("value", "the parameter values")
     )
 
     ALvoid(
@@ -106,9 +106,9 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALdouble.p.OUT("value1", "the first value"),
-        Check(1)..ALdouble.p.OUT("value2", "the second value"),
-        Check(1)..ALdouble.p.OUT("value3", "the third value")
+        Check(1)..ALdouble.p("value1", "the first value"),
+        Check(1)..ALdouble.p("value2", "the second value"),
+        Check(1)..ALdouble.p("value3", "the third value")
     )
 
     ALvoid(
@@ -117,7 +117,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALdouble.p.OUT("values", "the parameter values")
+        Check(1)..ALdouble.p("values", "the parameter values")
     )
 
     ALvoid(
@@ -155,7 +155,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query"),
-        ReturnParam..Check(1)..ALint64SOFT.p.OUT("value", "the parameter values")
+        ReturnParam..Check(1)..ALint64SOFT.p("value", "the parameter values")
     )
 
     ALvoid(
@@ -164,9 +164,9 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALint64SOFT.p.OUT("value1", "the first value"),
-        Check(1)..ALint64SOFT.p.OUT("value2", "the second value"),
-        Check(1)..ALint64SOFT.p.OUT("value3", "the third value")
+        Check(1)..ALint64SOFT.p("value1", "the first value"),
+        Check(1)..ALint64SOFT.p("value2", "the second value"),
+        Check(1)..ALint64SOFT.p("value3", "the third value")
     )
 
     ALvoid(
@@ -175,6 +175,6 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 
         ALuint("source", "the source to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALint64SOFT.p.OUT("values", "the parameter values")
+        Check(1)..ALint64SOFT.p("values", "the parameter values")
     )
 }

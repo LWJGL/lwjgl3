@@ -33,8 +33,8 @@ val VRChaperone = "VRChaperone".nativeClass(
         "GetPlayAreaSize",
         "Returns the width and depth of the Play Area (formerly named Soft Bounds) in X and Z. Tracking space center(0, 0, 0) is the center of the Play Area.",
 
-        Check(1)..float.p.OUT("pSizeX", ""),
-        Check(1)..float.p.OUT("pSizeZ", "")
+        Check(1)..float.p("pSizeX", ""),
+        Check(1)..float.p("pSizeZ", "")
     )
 
     bool(
@@ -46,7 +46,7 @@ val VRChaperone = "VRChaperone".nativeClass(
         and 2 sides are parallel to the Z axis. Height of every corner is 0Y (on the floor).
         """,
 
-        HmdQuad_t.p.OUT("rect", "")
+        HmdQuad_t.p("rect", "")
     )
 
     void(
@@ -65,10 +65,10 @@ val VRChaperone = "VRChaperone".nativeClass(
         "GetBoundsColor",
         "Get the current chaperone bounds draw color and brightness.",
 
-        HmdColor_t.p.OUT("pOutputColorArray", ""),
+        HmdColor_t.p("pOutputColorArray", ""),
         AutoSize("pOutputColorArray")..int("nNumOutputColors", ""),
         float("flCollisionBoundsFadeDistance", ""),
-        HmdColor_t.p.OUT("pOutputCameraColor", "")
+        HmdColor_t.p("pOutputCameraColor", "")
     )
 
     bool(

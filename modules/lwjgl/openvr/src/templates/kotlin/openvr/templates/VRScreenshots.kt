@@ -32,7 +32,7 @@ val VRScreenshots = "VRScreenshots".nativeClass(
         the correct one for the format which is currently .png.
         """,
 
-        Check(1)..ScreenshotHandle_t.p.OUT("pOutScreenshotHandle", ""),
+        Check(1)..ScreenshotHandle_t.p("pOutScreenshotHandle", ""),
         EVRScreenshotType("type", "", "EVRScreenshotType_\\w+"),
         charASCII.const.p("pchPreviewFilename", ""),
         charASCII.const.p("pchVRFilename", "")
@@ -56,7 +56,7 @@ val VRScreenshots = "VRScreenshots".nativeClass(
         "When your application receives a #EVREventType_VREvent_RequestScreenshot event, call these functions to get the details of the screenshot request.",
 
         ScreenshotHandle_t("screenshotHandle", ""),
-        Check(1)..EVRScreenshotError.p.OUT("pError", "")
+        Check(1)..EVRScreenshotError.p("pError", "")
     )
 
     uint32_t(
@@ -65,9 +65,9 @@ val VRScreenshots = "VRScreenshots".nativeClass(
 
         ScreenshotHandle_t("screenshotHandle", ""),
         EVRScreenshotPropertyFilenames("filenameType", "", "EVRScreenshotPropertyFilenames_\\w+"),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchFilename", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchFilename", ""),
         AutoSize("pchFilename")..uint32_t("cchFilename", ""),
-        Check(1)..EVRScreenshotError.p.OUT("pError", ""),
+        Check(1)..EVRScreenshotError.p("pError", ""),
 
         returnDoc = "the size of the string"
     )
@@ -92,7 +92,7 @@ val VRScreenshots = "VRScreenshots".nativeClass(
         This is similiar to request screenshot, but doesn't ever talk to the application, just takes the shot and submits.
         """,
 
-        Check(1)..ScreenshotHandle_t.p.OUT("pOutScreenshotHandle", ""),
+        Check(1)..ScreenshotHandle_t.p("pOutScreenshotHandle", ""),
         charASCII.const.p("pchPreviewFilename", ""),
         charASCII.const.p("pchVRFilename", "")
     )

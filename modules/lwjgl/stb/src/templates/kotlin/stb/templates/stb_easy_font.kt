@@ -49,7 +49,7 @@ void print_string(float x, float y, char *text, float r, float g, float b)
         "easy_font_width",
         "Takes a string and returns the horizontal size.",
 
-        charASCII.p("text", "an ASCII string"),
+        Input..charASCII.p("text", "an ASCII string"),
 
         returnDoc = "the horizontal size, in pixels"
     )
@@ -58,7 +58,7 @@ void print_string(float x, float y, char *text, float r, float g, float b)
         "easy_font_height",
         "Takes a string and returns the vertical size (which can vary if {@code text} has newlines).",
 
-        charASCII.p("text", "an ASCII string"),
+        Input..charASCII.p("text", "an ASCII string"),
 
         returnDoc = "the vertical size, in pixels"
     )
@@ -89,9 +89,9 @@ color:uint8[4]""")}
 
         float("x", "the x offset"),
         float("y", "the y offset"),
-        charASCII.p("text", "an ASCII string"),
+        Input..charASCII.p("text", "an ASCII string"),
         nullable..Check(4)..unsigned_char.p("color", "the text color, in RGBA (4 bytes)"),
-        void.p.OUT("vertex_buffer", "a pointer to memory in which to store the vertex data"),
+        void.p("vertex_buffer", "a pointer to memory in which to store the vertex data"),
         AutoSize("vertex_buffer")..int("vbuf_size", "the {@code vertex_buffer} size, in bytes"),
 
         returnDoc = "the number of quads"

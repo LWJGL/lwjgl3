@@ -136,7 +136,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..void.p.OUT("pixels", "a buffer in which to place the returned pixel data")
+        )..void.p("pixels", "a buffer in which to place the returned pixel data")
     )
 
     void(
@@ -146,7 +146,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
         GLuint("program", "the program object"),
         GLint("location", "the uniform location"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
+        ReturnParam..GLfloat.p("params", "the buffer in which to place the returned data")
     )
 
     void(
@@ -156,7 +156,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
         GLuint("program", "the program object"),
         GLint("location", "the uniform location"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
+        ReturnParam..GLfloat.p("params", "the buffer in which to place the returned data")
     )
 
     void(
@@ -166,6 +166,6 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
         GLuint("program", "the program object"),
         GLint("location", "the uniform location"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
+        ReturnParam..GLfloat.p("params", "the buffer in which to place the returned data")
     )
 }

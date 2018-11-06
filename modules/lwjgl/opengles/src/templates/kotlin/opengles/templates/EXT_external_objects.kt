@@ -91,7 +91,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         "",
 
         GLenum("pname", ""),
-        Unsafe..GLubyte.p.OUT("data", "")
+        Unsafe..GLubyte.p("data", "")
     )
 
     void(
@@ -100,7 +100,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
 
         GLenum("target", ""),
         GLuint("index", ""),
-        Unsafe..GLubyte.p.OUT("data", "")
+        Unsafe..GLubyte.p("data", "")
     )
 
     void(
@@ -123,7 +123,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         "",
 
         AutoSize("memoryObjects")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("memoryObjects", "")
+        ReturnParam..GLuint.p("memoryObjects", "")
     )
 
     void(
@@ -141,7 +141,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
 
         GLuint("memoryObject", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     void(
@@ -341,7 +341,7 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGLES("EXT_semaphore", postfix = EX
         "",
 
         AutoSize("semaphores")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("semaphores", "")
+        ReturnParam..GLuint.p("semaphores", "")
     )
 
     void(
@@ -374,7 +374,7 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGLES("EXT_semaphore", postfix = EX
 
         GLuint("semaphore", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLuint64.p.OUT("params", "")
+        ReturnParam..Check(1)..GLuint64.p("params", "")
     )
 
     void(

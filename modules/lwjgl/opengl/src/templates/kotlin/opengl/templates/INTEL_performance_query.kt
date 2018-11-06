@@ -103,7 +103,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_perfo
         "",
 
         GLuint("queryId", ""),
-        Check(1)..ReturnParam..GLuint.p.OUT("queryHandle", "")
+        Check(1)..ReturnParam..GLuint.p("queryHandle", "")
     )
 
     void(
@@ -124,7 +124,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_perfo
         "GetFirstPerfQueryIdINTEL",
         "",
 
-        Check(1)..ReturnParam..GLuint.p.OUT("queryId", "")
+        Check(1)..ReturnParam..GLuint.p("queryId", "")
     )
 
     void(
@@ -132,7 +132,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_perfo
         "",
 
         GLuint("queryId", ""),
-        Check(1)..ReturnParam..GLuint.p.OUT("nextQueryId", "")
+        Check(1)..ReturnParam..GLuint.p("nextQueryId", "")
     )
 
     void(
@@ -142,14 +142,14 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_perfo
         GLuint("queryId", ""),
         GLuint("counterId", ""),
         AutoSize("counterName")..GLuint("counterNameLength", ""),
-        GLcharASCII.p.OUT("counterName", ""),
+        GLcharASCII.p("counterName", ""),
         AutoSize("counterDesc")..GLuint("counterDescLength", ""),
-        GLcharASCII.p.OUT("counterDesc", ""),
-        Check(1)..GLuint.p.OUT("counterOffset", ""),
-        Check(1)..GLuint.p.OUT("counterDataSize", ""),
-        Check(1)..GLuint.p.OUT("counterTypeEnum", ""),
-        Check(1)..GLuint.p.OUT("counterDataTypeEnum", ""),
-        Check(1)..GLuint64.p.OUT("rawCounterMaxValue", "")
+        GLcharASCII.p("counterDesc", ""),
+        Check(1)..GLuint.p("counterOffset", ""),
+        Check(1)..GLuint.p("counterDataSize", ""),
+        Check(1)..GLuint.p("counterTypeEnum", ""),
+        Check(1)..GLuint.p("counterDataTypeEnum", ""),
+        Check(1)..GLuint64.p("rawCounterMaxValue", "")
     )
 
     void(
@@ -159,16 +159,16 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_perfo
         GLuint("queryHandle", ""),
         GLuint("flags", ""),
         AutoSize("data")..GLsizei("dataSize", ""),
-        void.p.OUT("data", ""),
-        Check(1)..GLuint.p.OUT("bytesWritten", "")
+        void.p("data", ""),
+        Check(1)..GLuint.p("bytesWritten", "")
     )
 
     void(
         "GetPerfQueryIdByNameINTEL",
         "",
 
-        GLcharASCII.p("queryName", ""),
-        Check(1)..ReturnParam..GLuint.p.OUT("queryId", "")
+        Input..GLcharASCII.p("queryName", ""),
+        Check(1)..ReturnParam..GLuint.p("queryId", "")
     )
 
     void(
@@ -177,10 +177,10 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_perfo
 
         GLuint("queryId", ""),
         AutoSize("queryName")..GLuint("queryNameLength", ""),
-        GLcharASCII.p.OUT("queryName", ""),
-        Check(1)..GLuint.p.OUT("dataSize", ""),
-        Check(1)..GLuint.p.OUT("noCounters", ""),
-        Check(1)..GLuint.p.OUT("noInstances", ""),
-        Check(1)..GLuint.p.OUT("capsMask", "")
+        GLcharASCII.p("queryName", ""),
+        Check(1)..GLuint.p("dataSize", ""),
+        Check(1)..GLuint.p("noCounters", ""),
+        Check(1)..GLuint.p("noInstances", ""),
+        Check(1)..GLuint.p("capsMask", "")
     )
 }

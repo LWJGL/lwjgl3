@@ -149,7 +149,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
 
             JNI_ENV,
             AutoSizeResult("\$original.length")..arrayType("array", "the primitive array"),
-            Check(1)..nullable..jboolean.p.OUT("isCopy", "a pointer to a boolean"),
+            Check(1)..nullable..jboolean.p("isCopy", "a pointer to a boolean"),
 
             returnDoc = "a pointer to the array elements, or #NULL if the operation fails"
         )
@@ -197,7 +197,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
             arrayType("array", "a Java array"),
             jsize("start", "the starting index"),
             AutoSize("buf")..jsize("len", "the number of elements to be copied"),
-            elementType.p.OUT("buf", "the destination buffer")
+            elementType.p("buf", "the destination buffer")
         )
 
         OffHeapOnly..void(
@@ -259,7 +259,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         """,
 
         JNI_ENV,
-        Check(1)..JavaVM.p.p.OUT("vm", "a pointer to where the result should be placed")
+        Check(1)..JavaVM.p.p("vm", "a pointer to where the result should be placed")
     )
 
     void(
@@ -270,7 +270,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         jstring("str", ""),
         jsize("start", ""),
         AutoSize("buf")..jsize("len", ""),
-        jchar.p.OUT("buf", "")
+        jchar.p("buf", "")
     )
 
     void(
@@ -284,7 +284,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         jstring("str", ""),
         jsize("start", ""),
         jsize("len", ""),
-        Check("len")..char.p.OUT("buf", "")
+        Check("len")..char.p("buf", "")
     )
 
     opaque_p(

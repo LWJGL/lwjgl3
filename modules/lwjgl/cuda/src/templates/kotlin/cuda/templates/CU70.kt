@@ -35,7 +35,7 @@ val CU70 = "CU70".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "DevicePrimaryCtxRetain",
         "",
 
-        Check(1)..CUcontext.p.OUT("pctx", ""),
+        Check(1)..CUcontext.p("pctx", ""),
         CUdevice("dev", "")
     )
 
@@ -59,8 +59,8 @@ val CU70 = "CU70".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         CUdevice("dev", ""),
-        Check(1)..unsigned_int.p.OUT("flags", ""),
-        Check(1)..int.p.OUT("active", "")
+        Check(1)..unsigned_int.p("flags", ""),
+        Check(1)..int.p("active", "")
     )
 
     CUresult(
@@ -74,7 +74,7 @@ val CU70 = "CU70".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "CtxGetFlags",
         "",
 
-        Check(1)..unsigned_int.p.OUT("flags", "")
+        Check(1)..unsigned_int.p("flags", "")
     )
 
     CUresult(
@@ -83,7 +83,7 @@ val CU70 = "CU70".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
 
         AutoSize("attributes", "data")..unsigned_int("numAttributes", ""),
         CUpointer_attribute.p("attributes", ""),
-        void.p.p.OUT("data", ""),
+        void.p.p("data", ""),
         CUdeviceptr("ptr", "")
     )
 }

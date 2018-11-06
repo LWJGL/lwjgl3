@@ -242,7 +242,7 @@ public class VROverlay {
 
     /** Sets the name to use for this overlay. */
     @NativeType("EVROverlayError")
-    public static int VROverlay_SetOverlayName(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char *") ByteBuffer pchName) {
+    public static int VROverlay_SetOverlayName(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char const *") ByteBuffer pchName) {
         if (CHECKS) {
             checkNT1(pchName);
         }
@@ -251,7 +251,7 @@ public class VROverlay {
 
     /** Sets the name to use for this overlay. */
     @NativeType("EVROverlayError")
-    public static int VROverlay_SetOverlayName(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char *") CharSequence pchName) {
+    public static int VROverlay_SetOverlayName(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char const *") CharSequence pchName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             ByteBuffer pchNameEncoded = stack.ASCII(pchName);
@@ -694,7 +694,7 @@ public class VROverlay {
     }
 
     @NativeType("EVROverlayError")
-    public static int VROverlay_SetOverlayRenderModel(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char *") ByteBuffer pchRenderModel, @NativeType("HmdColor_t *") HmdColor pColor) {
+    public static int VROverlay_SetOverlayRenderModel(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char const *") ByteBuffer pchRenderModel, @NativeType("HmdColor_t *") HmdColor pColor) {
         if (CHECKS) {
             checkNT1(pchRenderModel);
         }
@@ -702,7 +702,7 @@ public class VROverlay {
     }
 
     @NativeType("EVROverlayError")
-    public static int VROverlay_SetOverlayRenderModel(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char *") CharSequence pchRenderModel, @NativeType("HmdColor_t *") HmdColor pColor) {
+    public static int VROverlay_SetOverlayRenderModel(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("char const *") CharSequence pchRenderModel, @NativeType("HmdColor_t *") HmdColor pColor) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             ByteBuffer pchRenderModelEncoded = stack.ASCII(pchRenderModel);

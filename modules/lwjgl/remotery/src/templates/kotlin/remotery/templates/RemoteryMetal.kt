@@ -32,7 +32,7 @@ val RemoteryMetal = "RemoteryMetal".nativeClass(Module.REMOTERY, prefix = "RMT_"
         "",
 
         rmtPStr("name", ""),
-        Check(1)..nullable..rmtU32.p.INOUT("hash_cache", "")
+        Check(1)..nullable..rmtU32.p("hash_cache", "")
     )
 
     void(

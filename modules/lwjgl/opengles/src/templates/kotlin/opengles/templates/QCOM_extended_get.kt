@@ -39,36 +39,36 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
         "ExtGetTexturesQCOM",
         "",
 
-        nullable..GLuint.p.OUT("textures", ""),
+        nullable..GLuint.p("textures", ""),
         AutoSize("textures")..GLint("maxTextures", ""),
-        nullable..Check(1)..GLint.p.OUT("numTextures", "")
+        nullable..Check(1)..GLint.p("numTextures", "")
     )
 
     void(
         "ExtGetBuffersQCOM",
         "",
 
-        nullable..GLuint.p.OUT("buffers", ""),
+        nullable..GLuint.p("buffers", ""),
         AutoSize("buffers")..GLint("maxBuffers", ""),
-        nullable..Check(1)..GLint.p.OUT("numBuffers", "")
+        nullable..Check(1)..GLint.p("numBuffers", "")
     )
 
     void(
         "ExtGetRenderbuffersQCOM",
         "",
 
-        nullable..GLuint.p.OUT("renderbuffers", ""),
+        nullable..GLuint.p("renderbuffers", ""),
         AutoSize("renderbuffers")..GLint("maxRenderbuffers", ""),
-        nullable..Check(1)..GLint.p.OUT("numRenderbuffers", "")
+        nullable..Check(1)..GLint.p("numRenderbuffers", "")
     )
 
     void(
         "ExtGetFramebuffersQCOM",
         "",
 
-        nullable..GLuint.p.OUT("framebuffers", ""),
+        nullable..GLuint.p("framebuffers", ""),
         AutoSize("framebuffers")..GLint("maxFramebuffers", ""),
-        nullable..Check(1)..GLint.p.OUT("numFramebuffers", "")
+        nullable..Check(1)..GLint.p("numFramebuffers", "")
     )
 
     void(
@@ -79,7 +79,7 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
         GLenum("face", ""),
         GLint("level", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     void(
@@ -105,7 +105,7 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
         GLsizei("depth", ""),
         GLenum("format", ""),
         GLenum("type", ""),
-        Unsafe..void.p.OUT("texels", "")
+        Unsafe..void.p("texels", "")
     )
 
     void(
@@ -113,6 +113,6 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
         "",
 
         GLenum("target", ""),
-        ReturnParam..Check(1)..void.p.p.OUT("params", "")
+        ReturnParam..Check(1)..void.p.p("params", "")
     )
 }

@@ -63,7 +63,7 @@ val qcom_ext_host_ptr = "QCOMEXTHostPtr".nativeClassCL("qcom_ext_host_ptr", QCOM
         PARAM_VALUE_SIZE,
         MultiType(
             PointerMapping.DATA_INT
-        )..nullable..void.p.OUT("param_value", param_value),
+        )..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET
     )
 }

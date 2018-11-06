@@ -739,7 +739,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "",
 
         AutoSize("buffers")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("buffers", "")
+        ReturnParam..GLuint.p("buffers", "")
     )
 
     void(
@@ -754,7 +754,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "",
 
         AutoSize("framebuffers")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("framebuffers", "")
+        ReturnParam..GLuint.p("framebuffers", "")
     )
 
     void(
@@ -762,7 +762,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "",
 
         AutoSize("renderbuffers")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("renderbuffers", "")
+        ReturnParam..GLuint.p("renderbuffers", "")
     )
 
     void(
@@ -770,7 +770,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "",
 
         AutoSize("textures")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("textures", "")
+        ReturnParam..GLuint.p("textures", "")
     )
 
     void(
@@ -780,13 +780,13 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         GLuint("program", ""),
         GLuint("index", ""),
         AutoSize("name")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p.OUT("length", ""),
-        Check(1)..GLint.p.OUT("size", ""),
-        Check(1)..GLenum.p.OUT("type", ""),
+        Check(1)..nullable..GLsizei.p("length", ""),
+        Check(1)..GLint.p("size", ""),
+        Check(1)..GLenum.p("type", ""),
         Return(
             "length",
             "glGetProgrami(program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH)"
-        )..GLcharASCII.p.OUT("name", "")
+        )..GLcharASCII.p("name", "")
     )
 
     void(
@@ -796,13 +796,13 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         GLuint("program", ""),
         GLuint("index", ""),
         AutoSize("name")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p.OUT("length", ""),
-        Check(1)..GLint.p.OUT("size", ""),
-        Check(1)..GLenum.p.OUT("type", ""),
+        Check(1)..nullable..GLsizei.p("length", ""),
+        Check(1)..GLint.p("size", ""),
+        Check(1)..GLenum.p("type", ""),
         Return(
             "length",
             "glGetProgrami(program, GL_ACTIVE_UNIFORM_MAX_LENGTH)"
-        )..GLcharASCII.p.OUT("name", "")
+        )..GLcharASCII.p("name", "")
     )
 
     void(
@@ -811,8 +811,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLuint("program", ""),
         AutoSize("shaders")..GLsizei("maxCount", ""),
-        Check(1)..nullable..GLsizei.p.OUT("count", ""),
-        GLuint.p.OUT("shaders", "")
+        Check(1)..nullable..GLsizei.p("count", ""),
+        GLuint.p("shaders", "")
     )
 
     GLint(
@@ -828,7 +828,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "",
 
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLboolean.p.OUT("data", "")
+        ReturnParam..Check(1)..GLboolean.p("data", "")
     )
 
     void(
@@ -837,7 +837,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLenum("target", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     GLenum("GetError", "", void())
@@ -847,7 +847,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "",
 
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLfloat.p.OUT("data", "")
+        ReturnParam..Check(1)..GLfloat.p("data", "")
     )
 
     void(
@@ -857,7 +857,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         GLenum("target", ""),
         GLenum("attachment", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     void(
@@ -865,7 +865,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "",
 
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("data", "")
+        ReturnParam..Check(1)..GLint.p("data", "")
     )
 
     void(
@@ -874,7 +874,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLuint("program", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     void(
@@ -883,12 +883,12 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLuint("program", ""),
         AutoSize("infoLog")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p.OUT("length", ""),
+        Check(1)..nullable..GLsizei.p("length", ""),
         Return(
             "length",
             "glGetProgrami(program, GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8.p.OUT("infoLog", "")
+        )..GLcharUTF8.p("infoLog", "")
     )
 
     void(
@@ -897,7 +897,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLenum("target", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     void(
@@ -906,7 +906,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLuint("shader", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     void(
@@ -915,12 +915,12 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLuint("shader", ""),
         AutoSize("infoLog")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p.OUT("length", ""),
+        Check(1)..nullable..GLsizei.p("length", ""),
         Return(
             "length",
             "glGetShaderi(shader, GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8.p.OUT("infoLog", "")
+        )..GLcharUTF8.p("infoLog", "")
     )
 
     void(
@@ -929,8 +929,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLenum("shadertype", ""),
         GLenum("precisiontype", ""),
-        Check(2)..GLint.p.OUT("range", ""),
-        Check(2)..GLint.p.OUT("precision", "")
+        Check(2)..GLint.p("range", ""),
+        Check(2)..GLint.p("precision", "")
     )
 
     void(
@@ -939,8 +939,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLuint("shader", ""),
         AutoSize("source")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p.OUT("length", ""),
-        Return("length", "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)", heapAllocate = true)..GLcharUTF8.p.OUT("source", "")
+        Check(1)..nullable..GLsizei.p("length", ""),
+        Return("length", "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)", heapAllocate = true)..GLcharUTF8.p("source", "")
     )
 
     GLubyteUTF8.const.p(
@@ -956,7 +956,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLenum("target", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLfloat.p.OUT("params", "")
+        ReturnParam..Check(1)..GLfloat.p("params", "")
     )
 
     void(
@@ -965,7 +965,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLenum("target", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     void(
@@ -974,7 +974,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLuint("program", ""),
         GLint("location", ""),
-        ReturnParam..Check(1)..GLfloat.p.OUT("params", "")
+        ReturnParam..Check(1)..GLfloat.p("params", "")
     )
 
     void(
@@ -983,7 +983,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLuint("program", ""),
         GLint("location", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     GLint(
@@ -1000,7 +1000,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLuint("index", ""),
         GLenum("pname", ""),
-        Check(4)..GLfloat.p.OUT("params", "")
+        Check(4)..GLfloat.p("params", "")
     )
 
     void(
@@ -1009,7 +1009,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLuint("index", ""),
         GLenum("pname", ""),
-        Check(4)..GLint.p.OUT("params", "")
+        Check(4)..GLint.p("params", "")
     )
 
     void(
@@ -1018,7 +1018,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
         GLuint("index", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..void.p.p.OUT("pointer", "")
+        ReturnParam..Check(1)..void.p.p("pointer", "")
     )
 
     void(
@@ -1122,7 +1122,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "")
+        )..Unsafe..PIXEL_PACK_BUFFER..void.p("pixels", "")
     )
 
     void(

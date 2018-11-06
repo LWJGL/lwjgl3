@@ -167,8 +167,8 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
 
         messageBox["aTitle"],
         nullable..charASCII.const.p("aDefaultHexRGB", "#NULL or \"\\#FF0000\""),
-        nullable..Check(3)..unsigned_char.p.INOUT("aDefaultRGB", "{ 0 , 255 , 255 }. Used only if {@code aDefaultHexRGB} is #NULL."),
-        Check(3)..unsigned_char.p.OUT("aoResultRGB", "returns the selected color. {@code aDefaultRGB} and {@code aoResultRGB} can be the same array."),
+        nullable..Check(3)..unsigned_char.p("aDefaultRGB", "{ 0 , 255 , 255 }. Used only if {@code aDefaultHexRGB} is #NULL."),
+        Check(3)..unsigned_char.p("aoResultRGB", "returns the selected color. {@code aDefaultRGB} and {@code aoResultRGB} can be the same array."),
 
         returnDoc = "the selected hexcolor as a string \"\\#FF0000\" or #NULL on cancel"
     )

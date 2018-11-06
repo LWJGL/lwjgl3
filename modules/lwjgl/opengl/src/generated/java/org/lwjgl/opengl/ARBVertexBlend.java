@@ -260,7 +260,7 @@ public class ARBVertexBlend {
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the weight data
      */
-    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void *") ByteBuffer pointer) {
+    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") ByteBuffer pointer) {
         nglWeightPointerARB(size, type, stride, memAddress(pointer));
     }
 
@@ -272,7 +272,7 @@ public class ARBVertexBlend {
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the weight data
      */
-    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void *") long pointer) {
+    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") long pointer) {
         nglWeightPointerARB(size, type, stride, pointer);
     }
 
@@ -284,7 +284,7 @@ public class ARBVertexBlend {
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the weight data
      */
-    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void *") ShortBuffer pointer) {
+    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") ShortBuffer pointer) {
         nglWeightPointerARB(size, type, stride, memAddress(pointer));
     }
 
@@ -296,7 +296,7 @@ public class ARBVertexBlend {
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the weight data
      */
-    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void *") IntBuffer pointer) {
+    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") IntBuffer pointer) {
         nglWeightPointerARB(size, type, stride, memAddress(pointer));
     }
 
@@ -308,7 +308,7 @@ public class ARBVertexBlend {
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the weight data
      */
-    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void *") FloatBuffer pointer) {
+    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") FloatBuffer pointer) {
         nglWeightPointerARB(size, type, stride, memAddress(pointer));
     }
 
@@ -376,7 +376,7 @@ public class ARBVertexBlend {
     }
 
     /** Array version of: {@link #glWeightPointerARB WeightPointerARB} */
-    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void *") short[] pointer) {
+    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") short[] pointer) {
         long __functionAddress = GL.getICD().glWeightPointerARB;
         if (CHECKS) {
             check(__functionAddress);
@@ -385,7 +385,7 @@ public class ARBVertexBlend {
     }
 
     /** Array version of: {@link #glWeightPointerARB WeightPointerARB} */
-    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void *") int[] pointer) {
+    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") int[] pointer) {
         long __functionAddress = GL.getICD().glWeightPointerARB;
         if (CHECKS) {
             check(__functionAddress);
@@ -394,7 +394,7 @@ public class ARBVertexBlend {
     }
 
     /** Array version of: {@link #glWeightPointerARB WeightPointerARB} */
-    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void *") float[] pointer) {
+    public static void glWeightPointerARB(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") float[] pointer) {
         long __functionAddress = GL.getICD().glWeightPointerARB;
         if (CHECKS) {
             check(__functionAddress);

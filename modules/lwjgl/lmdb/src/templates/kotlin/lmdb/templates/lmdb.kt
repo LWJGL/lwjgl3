@@ -239,9 +239,9 @@ ENABLE_WARNINGS()""")
         "version",
         "Returns the LMDB library version information.",
 
-        Check(1)..nullable..int.p.OUT("major", "if non-#NULL, the library major version number is copied here"),
-        Check(1)..nullable..int.p.OUT("minor", "if non-#NULL, the library minor version number is copied here"),
-        Check(1)..nullable..int.p.OUT("patch", "if non-#NULL, the library patch version number is copied here"),
+        Check(1)..nullable..int.p("major", "if non-#NULL, the library major version number is copied here"),
+        Check(1)..nullable..int.p("minor", "if non-#NULL, the library minor version number is copied here"),
+        Check(1)..nullable..int.p("patch", "if non-#NULL, the library patch version number is copied here"),
 
         returnDoc = "the library version as a string"
     )
@@ -271,7 +271,7 @@ ENABLE_WARNINGS()""")
         #env_set_mapsize(), #env_set_maxreaders(), #env_set_maxdbs(), depending on usage requirements.
         """,
 
-        Check(1)..MDB_env.p.p.OUT("env", "the address where the new handle will be stored"),
+        Check(1)..MDB_env.p.p("env", "the address where the new handle will be stored"),
 
         returnDoc = "a non-zero error value on failure and 0 on success"
     )
@@ -480,7 +480,7 @@ ENABLE_WARNINGS()""")
         "Returns statistics about the LMDB environment.",
 
         env_open["env"],
-        MDB_stat.p.OUT("stat", "the address of an ##MDBStat structure where the statistics will be copied"),
+        MDB_stat.p("stat", "the address of an ##MDBStat structure where the statistics will be copied"),
 
         returnDoc = "a non-zero error value on failure and 0 on success"
     )
@@ -490,7 +490,7 @@ ENABLE_WARNINGS()""")
         "Returns information about the LMDB environment.",
 
         env_open["env"],
-        MDB_envinfo.p.OUT("stat", "the address of an ##MDBEnvInfo structure where the information will be copied"),
+        MDB_envinfo.p("stat", "the address of an ##MDBEnvInfo structure where the information will be copied"),
 
         returnDoc = "a non-zero error value on failure and 0 on success"
     )
@@ -564,7 +564,7 @@ ENABLE_WARNINGS()""")
         "Gets environment flags.",
 
         env_open["env"],
-        Check(1)..unsigned_int.p.OUT("flags", "the address of an integer to store the flags"),
+        Check(1)..unsigned_int.p("flags", "the address of an integer to store the flags"),
 
         returnDoc = "a non-zero error value on failure and 0 on success"
     )
@@ -574,7 +574,7 @@ ENABLE_WARNINGS()""")
         "Returns the path that was used in #env_open().",
 
         env_open["env"],
-        Check(1)..charUTF8.const.p.p.OUT(
+        Check(1)..charUTF8.const.p.p(
             "path",
             "address of a string pointer to contain the path. This is the actual string in the environment, not a copy. It should not be altered in any way."
         ),
@@ -587,7 +587,7 @@ ENABLE_WARNINGS()""")
         "",
 
         MDB_env_p("env", ""),
-        mdb_filehandle_t_p.OUT("fd", "")
+        mdb_filehandle_t_p("fd", "")
     )*/
 
     int(
@@ -652,7 +652,7 @@ ENABLE_WARNINGS()""")
         "Gets the maximum number of threads/reader slots for the environment.",
 
         env_open["env"],
-        Check(1)..unsigned_int.p.OUT("readers", "address of an integer to store the number of readers"),
+        Check(1)..unsigned_int.p("readers", "address of an integer to store the number of readers"),
 
         returnDoc = "a non-zero error value on failure and 0 on success"
     )
@@ -714,7 +714,7 @@ ENABLE_WARNINGS()""")
         "",
 
         MDB_env_p("env", ""),
-        MDB_assert_func_p.OUT("func", "")
+        MDB_assert_func_p("func", "")
     )*/
 
     int(
@@ -750,7 +750,7 @@ ENABLE_WARNINGS()""")
             )}
             """
         ),
-        Check(1)..MDB_txn.p.p.OUT("txn", "address where the new {@code MDB_txn} handle will be stored"),
+        Check(1)..MDB_txn.p.p("txn", "address where the new {@code MDB_txn} handle will be stored"),
 
         returnDoc =
         """
@@ -919,7 +919,7 @@ ENABLE_WARNINGS()""")
             )}
             """
         ),
-        Check(1)..MDB_dbi.p.OUT("dbi", "address where the new {@code MDB_dbi} handle will be stored"),
+        Check(1)..MDB_dbi.p("dbi", "address where the new {@code MDB_dbi} handle will be stored"),
 
         returnDoc =
         """
@@ -937,7 +937,7 @@ ENABLE_WARNINGS()""")
 
         txn_env["txn"],
         MDB_dbi("dbi", "a database handle returned by #dbi_open()"),
-        MDB_stat.p.OUT("stat", "the address of an ##MDBStat structure where the statistics will be copied")
+        MDB_stat.p("stat", "the address of an ##MDBStat structure where the statistics will be copied")
     )
 
     int(
@@ -946,7 +946,7 @@ ENABLE_WARNINGS()""")
 
         txn_env["txn"],
         stat["dbi"],
-        Check(1)..unsigned_int.p.OUT("flags", "address where the flags will be returned")
+        Check(1)..unsigned_int.p("flags", "address where the flags will be returned")
     )
 
     void(
@@ -1075,7 +1075,7 @@ ENABLE_WARNINGS()""")
         txn_env["txn"],
         stat["dbi"],
         MDB_val.p("key", "the key to search for in the database"),
-        MDB_val.p.OUT("data", "the data corresponding to the key")
+        MDB_val.p("data", "the data corresponding to the key")
     )
 
     int(
@@ -1163,7 +1163,7 @@ ENABLE_WARNINGS()""")
 
         txn_env["txn"],
         stat["dbi"],
-        Check(1)..MDB_cursor.p.p.OUT("cursor", "address where the new {@code MDB_cursor} handle will be stored")
+        Check(1)..MDB_cursor.p.p("cursor", "address where the new {@code MDB_cursor} handle will be stored")
     )
 
     val cursor_close = void(
@@ -1219,7 +1219,7 @@ ENABLE_WARNINGS()""")
 
         cursor_close["cursor"],
         MDB_val.p("key", "the key for a retrieved item"),
-        MDB_val.p.OUT("data", "the data of a retrieved item"),
+        MDB_val.p("data", "the data of a retrieved item"),
         MDB_cursor_op("op", "a cursor operation {@code MDB_cursor_op}", CursorOps)
     )
 
@@ -1308,7 +1308,7 @@ ENABLE_WARNINGS()""")
         """,
 
         cursor_close["cursor"],
-        Check(1)..mdb_size_t.p.OUT("countp", "address where the count will be stored")
+        Check(1)..mdb_size_t.p("countp", "address where the count will be stored")
     )
 
     int(
@@ -1357,6 +1357,6 @@ ENABLE_WARNINGS()""")
         "Checks for stale entries in the reader lock table.",
 
         env_open["env"],
-        Check(1)..int.p.OUT("dead", "number of stale slots that were cleared")
+        Check(1)..int.p("dead", "number of stale slots that were cleared")
     )
 }

@@ -104,7 +104,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
             than zero.
             """
         ),
-        nullable..cl_device_id.p.OUT(
+        nullable..cl_device_id.p(
             "devices",
             """
             returns a list of OpenCL devices found. The {@code cl_device_id} values returned in {@code devices} can be used to identify a specific OpenCL
@@ -112,7 +112,7 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
             {@code num_entries} and the number of OpenCL devices corresponding to {@code media_adapter}.
             """
         ),
-        Check(1)..nullable..cl_uint.p.OUT(
+        Check(1)..nullable..cl_uint.p(
             "num_devices",
             "returns the number of OpenCL devices available that correspond to {@code media_adapter}. If {@code num_devices} is #NULL, this argument is ignored."
         )

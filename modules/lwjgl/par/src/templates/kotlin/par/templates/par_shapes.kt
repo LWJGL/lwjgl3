@@ -46,7 +46,7 @@ par_shapes_free_mesh(m);""")}
         "free_mesh",
         "Frees the specified ##ParShapesMesh structure.",
 
-        par_shapes_mesh.p("mesh", "the mesh to free")
+        Input..par_shapes_mesh.p("mesh", "the mesh to free")
     )
 
     val shapes_create_ss = par_shapes_mesh.p(
@@ -211,7 +211,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "Takes a pointer to 6 floats and sets them to min xyz, max xyz.",
 
         par_shapes_mesh.const.p("mesh", "the mesh to query"),
-        Check(6)..float.p.OUT("aabb", "a pointer to an array of 6 floats in which the AABB will be written")
+        Check(6)..float.p("aabb", "a pointer to an array of 6 floats in which the AABB will be written")
     )
 
     par_shapes_mesh.p(
@@ -219,14 +219,14 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "Makes a deep copy of a mesh. To make a brand new copy, pass #NULL to {@code target}. To avoid memory churn, pass an existing mesh to {@code target}.",
 
         par_shapes_mesh.const.p("mesh", "the mesh to copy"),
-        nullable..par_shapes_mesh.p.INOUT("target", "the target mesh")
+        Input..nullable..par_shapes_mesh.p("target", "the target mesh")
     )
 
     void(
         "merge",
         "Merges two shapes.",
 
-        par_shapes_mesh.p.INOUT("dst", "the destination mesh"),
+        Input..par_shapes_mesh.p("dst", "the destination mesh"),
         par_shapes_mesh.const.p("src", "the source mesh")
     )
 
@@ -234,7 +234,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "translate",
         "Translates the specified mesh.",
 
-        par_shapes_mesh.p.INOUT("mesh", "the mesh to translate"),
+        Input..par_shapes_mesh.p("mesh", "the mesh to translate"),
         float("x", "the X axis translation amount"),
         float("y", "the Y axis translation amount"),
         float("z", "the Z axis translation amount")
@@ -244,7 +244,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "rotate",
         "Rotates the specified mesh.",
 
-        par_shapes_mesh.p.INOUT("mesh", "the mesh to rotate"),
+        Input..par_shapes_mesh.p("mesh", "the mesh to rotate"),
         float("radians", "the rotation angle, in radians"),
         Check(3)..float.const.p("axis", "the rotation axis")
     )
@@ -253,7 +253,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "scale",
         "Scales the specified mesh.",
 
-        par_shapes_mesh.p.INOUT("mesh", "the mesh to scale"),
+        Input..par_shapes_mesh.p("mesh", "the mesh to scale"),
         float("x", "the X axis scale factor"),
         float("y", "the Y axis scale factor"),
         float("z", "the Z axis scale factor")
@@ -263,15 +263,15 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "merge_and_free",
         "Merges two shapes and frees the source shape.",
 
-        par_shapes_mesh.p.INOUT("dst", "the destination mesh"),
-        par_shapes_mesh.p("src", "the source mesh")
+        Input..par_shapes_mesh.p("dst", "the destination mesh"),
+        Input..par_shapes_mesh.p("src", "the source mesh")
     )
 
     void(
         "invert",
         "Reverses the winding of a run of faces. Useful when drawing the inside of a Cornell Box. Pass 0 for {@code nfaces} to reverse every face in the mesh.",
 
-        par_shapes_mesh.p.INOUT("mesh", "the mesh to reverse"),
+        Input..par_shapes_mesh.p("mesh", "the mesh to reverse"),
         int("startface", "the index of the first face to reverse"),
         int("nfaces", "the number of faces to reverse")
     )
@@ -280,7 +280,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "remove_degenerate",
         "Removes all triangles whose area is less than {@code minarea}.",
 
-        par_shapes_mesh.p.INOUT("mesh", "the mesh to cleanup"),
+        Input..par_shapes_mesh.p("mesh", "the mesh to cleanup"),
         float("minarea", "triangles with an area below this value will be removed")
     )
 
@@ -293,7 +293,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         generated.
         """,
 
-        par_shapes_mesh.p.INOUT("mesh", "the mesh to unweld"),
+        Input..par_shapes_mesh.p("mesh", "the mesh to unweld"),
         bool("create_indices", "if an index buffer should be generated")
     )
 
@@ -303,7 +303,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
 
         par_shapes_mesh.const.p("mesh", "the mesh to weld"),
         float("epsilon", "the maximum distance to consider when welding vertices"),
-        Check("mesh.npoints()")..nullable..PAR_SHAPES_T.p.OUT(
+        Check("mesh.npoints()")..nullable..PAR_SHAPES_T.p(
             "mapping",
             "null, or a pointer to {@code npoints} 32-bit integers, which gets filled with the mapping from old vertex indices to new indices"
         )
@@ -313,6 +313,6 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "compute_normals",
         "Computes smooth normals by averaging adjacent facet normals.",
 
-        par_shapes_mesh.p.INOUT("mesh", "the mesh")
+        Input..par_shapes_mesh.p("mesh", "the mesh")
     )
 }

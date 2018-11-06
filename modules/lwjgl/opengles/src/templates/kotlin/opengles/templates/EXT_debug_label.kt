@@ -50,7 +50,7 @@ val EXT_debug_label = "EXTDebugLabel".nativeClassGLES("EXT_debug_label", postfix
         GLenum("type", ""),
         GLuint("object", ""),
         AutoSize("label")..GLsizei("bufSize", ""),
-        Check(1)..GLsizei.p.OUT("length", ""),
-        Return("length")..GLcharUTF8.p.OUT("label", "")
+        Check(1)..GLsizei.p("length", ""),
+        Return("length")..GLcharUTF8.p("label", "")
     )
 }

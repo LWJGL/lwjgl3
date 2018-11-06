@@ -49,6 +49,6 @@ val KHR_stream_fifo = "KHRStreamFIFO".nativeClassEGL("KHR_stream_fifo", postfix 
         EGLDisplay("dpy", ""),
         EGLStreamKHR("stream", ""),
         EGLenum("attribute", ""),
-        Check(1)..EGLTimeKHR.p.OUT("value", "")
+        Check(1)..EGLTimeKHR.p("value", "")
     )
 }

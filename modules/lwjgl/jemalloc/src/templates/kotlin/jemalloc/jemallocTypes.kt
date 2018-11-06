@@ -154,8 +154,8 @@ val extent_alloc_t = Module.JEMALLOC.callback {
         nullable..void.p("new_addr", ""),
         size_t("size", ""),
         size_t("alignment", ""),
-        Check(1)..bool.p.INOUT("zero", ""),
-        Check(1)..bool.p.INOUT("commit", ""),
+        Check(1)..bool.p("zero", ""),
+        Check(1)..bool.p("commit", ""),
         unsigned_int("arena_ind", ""),
 
         nativeType = "extent_alloc_t"

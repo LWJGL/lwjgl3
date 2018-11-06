@@ -97,14 +97,14 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         """,
 
         cl_device_id("device", "a device returned by #GetDeviceIDs()"),
-        Check(1)..cl_ulong.p.OUT(
+        Check(1)..cl_ulong.p(
             "device_timestamp",
             """
             will be updated with the value of the device timer in nanoseconds. The resolution of the timer is the same as the device profiling timer returned
             by #GetDeviceInfo() and the #DEVICE_PROFILING_TIMER_RESOLUTION query.
             """
         ),
-        Check(1)..cl_ulong.p.OUT(
+        Check(1)..cl_ulong.p(
             "host_timestamp",
             """
             will be updated with the value of the host timer in nanoseconds at the closest possible point in time to that at which {@code device_timestamp} was
@@ -135,7 +135,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         """,
 
         cl_device_id("device", "a device returned by #GetDeviceIDs()"),
-        Check(1)..cl_ulong.p.OUT(
+        Check(1)..cl_ulong.p(
             "host_timestamp",
             """
             will be updated with the value of the current timer in nanoseconds. The resolution of the timer may be queried via #GetPlatformInfo() and the

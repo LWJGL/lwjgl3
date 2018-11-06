@@ -234,19 +234,19 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
         GLhandleARB("programObj", "the program object to be queried"),
         GLuint("index", "the index of the attribute variable to be queried"),
         AutoSize("name")..GLsizei("maxLength", "the maximum number of characters OpenGL is allowed to write in the character buffer indicated by {@code name}"),
-        Check(1)..nullable..GLsizei.p.OUT(
+        Check(1)..nullable..GLsizei.p(
             "length",
             """
             the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than
             #NULL is passed
             """
         ),
-        Check(1)..GLint.p.OUT("size", "the size of the attribute variable"),
-        Check(1)..GLenum.p.OUT("type", "the data type of the attribute variable"),
+        Check(1)..GLint.p("size", "the size of the attribute variable"),
+        Check(1)..GLenum.p("type", "the data type of the attribute variable"),
         Return(
             "length",
             "ARBShaderObjects.glGetObjectParameteriARB(programObj, GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB)"
-        )..GLcharASCII.p.OUT("name", "a null terminated string containing the name of the attribute variable")
+        )..GLcharASCII.p("name", "a null terminated string containing the name of the attribute variable")
     )
 
     GLint(
@@ -267,7 +267,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
             "the symbolic name of the vertex attribute parameter to be queried",
             "#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING $VERTEX_ATTRIBUTES #VERTEX_ATTRIB_ARRAY_INTEGER #VERTEX_ATTRIB_ARRAY_DIVISOR"
         ),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "returns the requested data")
+        Check(1)..ReturnParam..GLint.p("params", "returns the requested data")
     )
 
     void(
@@ -276,7 +276,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 
         GLuint("index", "the generic vertex attribute parameter to be queried"),
         GLenum("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-        Check(4)..GLfloat.p.OUT("params", "returns the requested data")
+        Check(4)..GLfloat.p("params", "returns the requested data")
     )
 
     void(
@@ -285,7 +285,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 
         GLuint("index", "the generic vertex attribute parameter to be queried"),
         GLenum("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-        Check(4)..GLdouble.p.OUT("params", "returns the requested data")
+        Check(4)..GLdouble.p("params", "returns the requested data")
     )
 
 
@@ -295,6 +295,6 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 
         GLuint("index", "the generic vertex attribute parameter to be queried"),
         GLenum("pname", "the symbolic name of the generic vertex attribute parameter to be returned", "#VERTEX_ATTRIB_ARRAY_POINTER_ARB"),
-        Check(1)..ReturnParam..void.p.p.OUT("pointer", "the pointer value")
+        Check(1)..ReturnParam..void.p.p("pointer", "the pointer value")
     )
 }

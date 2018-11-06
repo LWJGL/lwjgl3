@@ -118,7 +118,7 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
             """,
 
             size_t("size", "the number of bytes to map"),
-            Check(1)..size_t.p.OUT("offset", "the alignment offset")
+            Check(1)..size_t.p("offset", "the alignment offset")
         ) {
             documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
         }

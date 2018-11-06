@@ -4,8 +4,6 @@
  */
 package org.lwjgl.generator
 
-import org.lwjgl.generator.ParameterType.*
-
 /** A parameter or return value. */
 interface QualifiedType {
     val nativeType: NativeType
@@ -52,28 +50,19 @@ class ReturnValue private constructor(override val nativeType: NativeType) : Qua
 
 }
 
-enum class ParameterType {
-    IN,
-    OUT,
-    INOUT
-}
-
 class Parameter(
     override val nativeType: NativeType,
     val name: String,
-    val paramType: ParameterType = IN,
     val documentation: (() -> String)?
 ) : ModifierTarget<ParameterModifier>(), QualifiedType {
 
-    constructor(nativeType: NativeType, name: String, javadoc: String) : this(nativeType, name, IN, javadoc)
     constructor(
         nativeType: NativeType,
         name: String,
-        paramType: ParameterType,
         javadoc: String,
         links: String = "",
         linkMode: LinkMode = LinkMode.SINGLE
-    ) : this(nativeType, name, paramType, if (javadoc.isNotEmpty() || links.isNotEmpty()) {
+    ) : this(nativeType, name, if (javadoc.isNotEmpty() || links.isNotEmpty()) {
         val documentation: (() -> String)? = { if (links.isEmpty()) javadoc else linkMode.appendLinks(javadoc, links) }
         documentation
     } else
@@ -99,9 +88,18 @@ class Parameter(
             else                          -> false
         } || modifiers.any { it.value.isSpecial }
 
+    private val NativeType.isInput: Boolean
+        get() =
+            this !is PointerType<*> ||
+            this.elementType.name.endsWith(" const") ||
+            this.elementType is PointerType<*> && this.elementType.isInput
+
+    val isInput
+        get() = nativeType.isInput || has<Input>()
+
     /** Returns true if this is an output parameter with the AutoSizeResult modifier. */
     internal val isAutoSizeResultOut
-        get() = paramType === OUT && has<AutoSizeResultParam>()
+        get() = has<AutoSizeResultParam>() && !isInput
 
     internal fun isArrayParameter(autoSizeResultOutParams: Int) = nativeType.isArray && (!isAutoSizeResultOut || autoSizeResultOutParams != 1)
 
@@ -125,7 +123,6 @@ class Parameter(
     internal fun copy(nativeType: NativeType = this.nativeType) = Parameter(
         nativeType,
         name,
-        paramType,
         documentation
     ).copyModifiers(this)
 

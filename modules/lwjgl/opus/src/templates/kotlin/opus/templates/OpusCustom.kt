@@ -44,7 +44,7 @@ val OpusCustom = "OpusCustom".nativeClass(Module.OPUS, prefix = "OPUS", prefixMe
             number of samples (per channel) to encode in each packet (64 - 1024, prime factorization must contain zero or more 2s, 3s, or 5s and no other primes
             """
         ),
-        Check(1)..nullable..int.p.OUT("error", "returned error code (if #NULL, no error will be returned)")
+        Check(1)..nullable..int.p("error", "returned error code (if #NULL, no error will be returned)")
     )
 
     void(
@@ -98,7 +98,7 @@ val OpusCustom = "OpusCustom".nativeClass(Module.OPUS, prefix = "OPUS", prefixMe
             "contains all the information about the characteristics of the stream (must be the same characteristics as used for the decoder)"
         ),
         int("channels", "number of channels"),
-        Check(1)..nullable..int.p.OUT("error", "returns an error code"),
+        Check(1)..nullable..int.p("error", "returns an error code"),
 
         returnDoc = "newly created encoder state"
     )
@@ -127,7 +127,7 @@ val OpusCustom = "OpusCustom".nativeClass(Module.OPUS, prefix = "OPUS", prefixMe
             """
         ),
         int("frame_size", "number of samples per frame of input signal"),
-        unsigned_char.p.OUT(
+        unsigned_char.p(
             "compressed",
             "the compressed data is written here. This may not alias {@code pcm} and must be at least {@code maxCompressedBytes} long."
         ),
@@ -146,7 +146,7 @@ val OpusCustom = "OpusCustom".nativeClass(Module.OPUS, prefix = "OPUS", prefixMe
             "frame_size * memGetInt(st + Pointer.POINTER_SIZE)"
         )..opus_int16.const.p("pcm", "PCM audio in signed 16-bit format (native endian). (There must be exactly {@code frame_size} samples per channel.)"),
         int("frame_size", "number of samples per frame of input signal"),
-        unsigned_char.p.OUT(
+        unsigned_char.p(
             "compressed",
             "the compressed data is written here. This may not alias {@code pcm} and must be at least {@code maxCompressedBytes} long."
         ),
@@ -206,7 +206,7 @@ val OpusCustom = "OpusCustom".nativeClass(Module.OPUS, prefix = "OPUS", prefixMe
             "contains all the information about the characteristics of the stream (must be the same characteristics as used for the encoder)"
         ),
         int("channels", "number of channels"),
-        Check(1)..nullable..int.p.OUT("error", "returns an error code"),
+        Check(1)..nullable..int.p("error", "returns an error code"),
 
         returnDoc = "newly created decoder state"
     )
@@ -228,7 +228,7 @@ val OpusCustom = "OpusCustom".nativeClass(Module.OPUS, prefix = "OPUS", prefixMe
         Check(
             // Reading OpusCustomDecoder internal state here
             "frame_size * memGetInt(st + (Pointer.POINTER_SIZE + 4))"
-        )..float.p.OUT("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(float)}"),
+        )..float.p("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(float)}"),
         int("frame_size", "number of samples per channel of available space in {@code pcm}"),
 
         returnDoc = "number of decoded samples, or a negative error code"
@@ -244,7 +244,7 @@ val OpusCustom = "OpusCustom".nativeClass(Module.OPUS, prefix = "OPUS", prefixMe
         Check(
             // Reading OpusCustomDecoder internal state here
             "frame_size * memGetInt(st + (Pointer.POINTER_SIZE + 4))"
-        )..opus_int16.p.OUT("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)}"),
+        )..opus_int16.p("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)}"),
         int("frame_size", "number of samples per channel of available space in {@code pcm}"),
 
         returnDoc = "number of decoded samples, or a negative error code"

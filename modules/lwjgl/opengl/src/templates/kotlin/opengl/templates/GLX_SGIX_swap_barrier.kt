@@ -36,7 +36,7 @@ val GLX_SGIX_swap_barrier = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap_b
 
         DISPLAY,
         int("screen", "the screen"),
-        Check(1)..int.p.OUT("max", "returns the maximum number of barriers")
+        Check(1)..int.p("max", "returns the maximum number of barriers")
     )
 
 }

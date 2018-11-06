@@ -20,7 +20,7 @@ val VROverlay = "VROverlay".nativeClass(
         "Finds an existing overlay with the specified key.",
 
         charASCII.const.p("pchOverlayKey", ""),
-        Check(1)..VROverlayHandle_t.p.OUT("pOverlayHandle", "")
+        Check(1)..VROverlayHandle_t.p("pOverlayHandle", "")
     )
 
     EVROverlayError(
@@ -29,7 +29,7 @@ val VROverlay = "VROverlay".nativeClass(
 
         charASCII.const.p("pchOverlayKey", ""),
         charASCII.const.p("pchOverlayName", ""),
-        Check(1)..VROverlayHandle_t.p.OUT("pOverlayHandle", "")
+        Check(1)..VROverlayHandle_t.p("pOverlayHandle", "")
     )
 
     EVROverlayError(
@@ -70,9 +70,9 @@ val VROverlay = "VROverlay".nativeClass(
         """,
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchValue", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchValue", ""),
         AutoSize("pchValue")..uint32_t("unBufferSize", ""),
-        Check(1)..EVROverlayError.p.OUT("pError", "")
+        Check(1)..EVROverlayError.p("pError", "")
     )
 
     uint32_t(
@@ -83,9 +83,9 @@ val VROverlay = "VROverlay".nativeClass(
         """,
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchValue", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchValue", ""),
         AutoSize("pchValue")..uint32_t("unBufferSize", ""),
-        Check(1)..EVROverlayError.p.OUT("pError", "")
+        Check(1)..EVROverlayError.p("pError", "")
     )
 
     EVROverlayError(
@@ -93,7 +93,7 @@ val VROverlay = "VROverlay".nativeClass(
         "Sets the name to use for this overlay.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        charASCII.p("pchName", "")
+        charASCII.const.p("pchName", "")
     )
 
     EVROverlayError(
@@ -104,10 +104,10 @@ val VROverlay = "VROverlay".nativeClass(
         """,
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        void.p.OUT("pvBuffer", ""),
+        void.p("pvBuffer", ""),
         AutoSize("pvBuffer")..uint32_t("unBufferSize", ""),
-        Check(1)..uint32_t.p.OUT("punWidth", ""),
-        Check(1)..uint32_t.p.OUT("punHeight", "")
+        Check(1)..uint32_t.p("punWidth", ""),
+        Check(1)..uint32_t.p("punHeight", "")
     )
 
     charASCII.const.p(
@@ -150,7 +150,7 @@ val VROverlay = "VROverlay".nativeClass(
 
         VROverlayHandle_t("ulOverlayHandle", ""),
         VROverlayFlags("eOverlayFlag", "", "VROverlayFlags_\\w+"),
-        Check(1)..bool.p.OUT("pbEnabled", "")
+        Check(1)..bool.p("pbEnabled", "")
     )
 
     EVROverlayError(
@@ -168,9 +168,9 @@ val VROverlay = "VROverlay".nativeClass(
         "Gets the color tint of the overlay quad.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..float.p.OUT("pfRed", ""),
-        Check(1)..float.p.OUT("pfGreen", ""),
-        Check(1)..float.p.OUT("pfBlue", "")
+        Check(1)..float.p("pfRed", ""),
+        Check(1)..float.p("pfGreen", ""),
+        Check(1)..float.p("pfBlue", "")
     )
 
     EVROverlayError(
@@ -186,7 +186,7 @@ val VROverlay = "VROverlay".nativeClass(
         "Gets the alpha of the overlay quad. By default overlays are rendering at 100 percent alpha (1.0).",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..float.p.OUT("pfAlpha", "")
+        Check(1)..float.p("pfAlpha", "")
     )
 
     EVROverlayError(
@@ -206,7 +206,7 @@ val VROverlay = "VROverlay".nativeClass(
         "Gets the aspect ratio of the texels in the overlay. Defaults to 1.0.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..float.p.OUT("pfTexelAspect", "")
+        Check(1)..float.p("pfTexelAspect", "")
     )
 
     EVROverlayError(
@@ -233,7 +233,7 @@ val VROverlay = "VROverlay".nativeClass(
         "Gets the sort order of the overlay. See #SetOverlaySortOrder() for how this works.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..uint32_t.p.OUT("punSortOrder", "")
+        Check(1)..uint32_t.p("punSortOrder", "")
     )
 
     EVROverlayError(
@@ -249,7 +249,7 @@ val VROverlay = "VROverlay".nativeClass(
         "Returns the width of the overlay quad in meters. By default overlays are rendered on a quad that is 1 meter across.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..float.p.OUT("pfWidthInMeters", "")
+        Check(1)..float.p("pfWidthInMeters", "")
     )
 
     EVROverlayError(
@@ -272,8 +272,8 @@ val VROverlay = "VROverlay".nativeClass(
         """,
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..float.p.OUT("pfMinDistanceInMeters", ""),
-        Check(1)..float.p.OUT("pfMaxDistanceInMeters", "")
+        Check(1)..float.p("pfMinDistanceInMeters", ""),
+        Check(1)..float.p("pfMaxDistanceInMeters", "")
     )
 
     EVROverlayError(
@@ -292,7 +292,7 @@ val VROverlay = "VROverlay".nativeClass(
         "Gets the overlay's current colorspace setting.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..EColorSpace.p.OUT("peTextureColorSpace", "")
+        Check(1)..EColorSpace.p("peTextureColorSpace", "")
     )
 
     EVROverlayError(
@@ -308,7 +308,7 @@ val VROverlay = "VROverlay".nativeClass(
         "Gets the part of the texture to use for the overlay. UV Min is the upper left corner and UV Max is the lower right corner.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        VRTextureBounds_t.p.OUT("pOverlayTextureBounds", "")
+        VRTextureBounds_t.p("pOverlayTextureBounds", "")
     )
 
     uint32_t(
@@ -316,10 +316,10 @@ val VROverlay = "VROverlay".nativeClass(
         "Gets render model to draw behind this overlay.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        charASCII.p.OUT("pchValue", ""),
+        charASCII.p("pchValue", ""),
         AutoSize("pchValue")..uint32_t("unBufferSize", ""),
-        HmdColor_t.p.OUT("pColor", ""),
-        Check(1)..EVROverlayError.p.OUT("pError", "")
+        HmdColor_t.p("pColor", ""),
+        Check(1)..EVROverlayError.p("pError", "")
     )
 
     EVROverlayError(
@@ -327,7 +327,7 @@ val VROverlay = "VROverlay".nativeClass(
         "",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        charASCII.p("pchRenderModel", ""),
+        charASCII.const.p("pchRenderModel", ""),
         HmdColor_t.p("pColor", "")
     )
 
@@ -336,7 +336,7 @@ val VROverlay = "VROverlay".nativeClass(
         "Returns the transform type of this overlay.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..VROverlayTransformType.p.OUT("peTransformType", "")
+        Check(1)..VROverlayTransformType.p("peTransformType", "")
     )
 
     EVROverlayError(
@@ -353,8 +353,8 @@ val VROverlay = "VROverlay".nativeClass(
         "Gets the transform if it is absolute. Returns an error if the transform is some other type.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..ETrackingUniverseOrigin.p.OUT("peTrackingOrigin", ""),
-        HmdMatrix34_t.p.OUT("pmatTrackingOriginToOverlayTransform", "")
+        Check(1)..ETrackingUniverseOrigin.p("peTrackingOrigin", ""),
+        HmdMatrix34_t.p("pmatTrackingOriginToOverlayTransform", "")
     )
 
     EVROverlayError(
@@ -371,8 +371,8 @@ val VROverlay = "VROverlay".nativeClass(
         "Gets the transform if it is relative to a tracked device. Returns an error if the transform is some other type.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..TrackedDeviceIndex_t.p.OUT("punTrackedDevice", ""),
-        HmdMatrix34_t.p.OUT("pmatTrackedDeviceToOverlayTransform", "")
+        Check(1)..TrackedDeviceIndex_t.p("punTrackedDevice", ""),
+        HmdMatrix34_t.p("pmatTrackedDeviceToOverlayTransform", "")
     )
 
     EVROverlayError(
@@ -392,8 +392,8 @@ val VROverlay = "VROverlay".nativeClass(
         "Gets the transform information when the overlay is rendering on a component.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..TrackedDeviceIndex_t.p.OUT("punDeviceIndex", ""),
-        char.p.OUT("pchComponentName", ""),
+        Check(1)..TrackedDeviceIndex_t.p("punDeviceIndex", ""),
+        char.p("pchComponentName", ""),
         AutoSize("pchComponentName")..uint32_t("unComponentNameSize", "")
     )
 
@@ -402,8 +402,8 @@ val VROverlay = "VROverlay".nativeClass(
         "",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..VROverlayHandle_t.p.OUT("ulOverlayHandleParent", ""),
-        HmdMatrix34_t.p.OUT("pmatParentOverlayToOverlayTransform", "")
+        Check(1)..VROverlayHandle_t.p("ulOverlayHandleParent", ""),
+        HmdMatrix34_t.p("pmatParentOverlayToOverlayTransform", "")
     )
 
     EVROverlayError(
@@ -446,7 +446,7 @@ val VROverlay = "VROverlay".nativeClass(
         VROverlayHandle_t("ulOverlayHandle", ""),
         ETrackingUniverseOrigin("eTrackingOrigin", "", "ETrackingUniverseOrigin_\\w+"),
         HmdVector2_t("coordinatesInOverlay", ""),
-        HmdMatrix34_t.p.OUT("pmatTransform", "")
+        HmdMatrix34_t.p("pmatTransform", "")
     )
 
     bool(
@@ -458,7 +458,7 @@ val VROverlay = "VROverlay".nativeClass(
         """,
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        VREvent_t.p.OUT("pEvent", ""),
+        VREvent_t.p("pEvent", ""),
         Expression("VREvent.SIZEOF")..uint32_t("uncbVREvent", "")
     )
 
@@ -467,7 +467,7 @@ val VROverlay = "VROverlay".nativeClass(
         "Returns the current input settings for the specified overlay.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..VROverlayInputMethod.p.OUT("peInputMethod", "")
+        Check(1)..VROverlayInputMethod.p("peInputMethod", "")
     )
 
     EVROverlayError(
@@ -486,7 +486,7 @@ val VROverlay = "VROverlay".nativeClass(
         """,
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        HmdVector2_t.p.OUT("pvecMouseScale", "")
+        HmdVector2_t.p("pvecMouseScale", "")
     )
 
     EVROverlayError(
@@ -509,7 +509,7 @@ val VROverlay = "VROverlay".nativeClass(
 
         VROverlayHandle_t("ulOverlayHandle", ""),
         VROverlayIntersectionParams_t.const.p("pParams", ""),
-        VROverlayIntersectionResults_t.p.OUT("pResults", "")
+        VROverlayIntersectionResults_t.p("pResults", "")
     )
 
     bool(
@@ -573,8 +573,8 @@ val VROverlay = "VROverlay".nativeClass(
 
         VROverlayHandle_t("ulOverlay", ""),
         EDualAnalogWhich("eWhich", "", "EDualAnalogWhich_\\w+"),
-        HmdVector2_t.p.OUT("pvCenter", ""),
-        Check(1)..float.p.OUT("pfRadius", "")
+        HmdVector2_t.p("pvCenter", ""),
+        Check(1)..float.p("pfRadius", "")
     )
 
     EVROverlayError(
@@ -634,14 +634,14 @@ val VROverlay = "VROverlay".nativeClass(
         """,
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..void.p.p.OUT("pNativeTextureHandle", ""),
+        Check(1)..void.p.p("pNativeTextureHandle", ""),
         opaque_p("pNativeTextureRef", ""),
-        Check(1)..uint32_t.p.OUT("pWidth", ""),
-        Check(1)..uint32_t.p.OUT("pHeight", ""),
-        Check(1)..uint32_t.p.OUT("pNativeFormat", ""),
-        Check(1)..ETextureType.p.OUT("pAPIType", ""),
-        Check(1)..EColorSpace.p.OUT("pColorSpace", ""),
-        VRTextureBounds_t.p.OUT("pTextureBounds", "")
+        Check(1)..uint32_t.p("pWidth", ""),
+        Check(1)..uint32_t.p("pHeight", ""),
+        Check(1)..uint32_t.p("pNativeFormat", ""),
+        Check(1)..ETextureType.p("pAPIType", ""),
+        Check(1)..EColorSpace.p("pColorSpace", ""),
+        VRTextureBounds_t.p("pTextureBounds", "")
     )
 
     EVROverlayError(
@@ -660,8 +660,8 @@ val VROverlay = "VROverlay".nativeClass(
         "Get the size of the overlay texture.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..uint32_t.p.OUT("pWidth", ""),
-        Check(1)..uint32_t.p.OUT("pHeight", "")
+        Check(1)..uint32_t.p("pWidth", ""),
+        Check(1)..uint32_t.p("pHeight", "")
     )
 
     EVROverlayError(
@@ -670,8 +670,8 @@ val VROverlay = "VROverlay".nativeClass(
 
         charASCII.const.p("pchOverlayKey", ""),
         charASCII.const.p("pchOverlayFriendlyName", ""),
-        Check(1)..VROverlayHandle_t.p.OUT("pMainHandle", ""),
-        Check(1)..VROverlayHandle_t.p.OUT("pThumbnailHandle", "")
+        Check(1)..VROverlayHandle_t.p("pMainHandle", ""),
+        Check(1)..VROverlayHandle_t.p("pThumbnailHandle", "")
     )
 
     bool(
@@ -700,7 +700,7 @@ val VROverlay = "VROverlay".nativeClass(
         "Gets the process ID that this dashboard overlay requires to have scene focus.",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..uint32_t.p.OUT("punProcessId", "")
+        Check(1)..uint32_t.p("punProcessId", "")
     )
 
     void(
@@ -747,7 +747,7 @@ val VROverlay = "VROverlay".nativeClass(
         "GetKeyboardText",
         "Get the text that was entered into the text input.",
 
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchText", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchText", ""),
         AutoSize("pchText")..uint32_t("cchText", "")
     )
 
@@ -787,7 +787,7 @@ val VROverlay = "VROverlay".nativeClass(
         "",
 
         VROverlayHandle_t("ulOverlayHandle", ""),
-        Check(1)..uint32_t.p.OUT("pFlags", "")
+        Check(1)..uint32_t.p("pFlags", "")
     )
 
     VRMessageOverlayResponse(

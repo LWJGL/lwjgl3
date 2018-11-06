@@ -55,7 +55,7 @@ val NV_fence = "NVFence".nativeClassGL("NV_fence", postfix = NV) {
         "",
 
         AutoSize("fences")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("fences", "")
+        ReturnParam..GLuint.p("fences", "")
     )
 
     GLboolean(
@@ -78,7 +78,7 @@ val NV_fence = "NVFence".nativeClassGL("NV_fence", postfix = NV) {
 
         GLuint("fence", ""),
         GLenum("pname", ""),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "")
+        Check(1)..ReturnParam..GLint.p("params", "")
     )
 
     void(

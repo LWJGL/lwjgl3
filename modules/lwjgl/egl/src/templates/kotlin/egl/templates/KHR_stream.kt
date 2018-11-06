@@ -100,7 +100,7 @@ val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
         EGLDisplay("dpy", ""),
         EGLStreamKHR("stream", ""),
         EGLenum("attribute", ""),
-        Check(1)..EGLint.p.OUT("value", "")
+        Check(1)..EGLint.p("value", "")
     )
 
     EGLBoolean(
@@ -110,7 +110,7 @@ val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
         EGLDisplay("dpy", ""),
         EGLStreamKHR("stream", ""),
         EGLenum("attribute", ""),
-        Check(1)..EGLuint64KHR.p.OUT("value", "")
+        Check(1)..EGLuint64KHR.p("value", "")
     )
 }
 
@@ -142,7 +142,7 @@ val KHR_stream_attrib = "KHRStreamAttrib".nativeClassEGL("KHR_stream_attrib", po
         EGLDisplay("dpy", ""),
         EGLStreamKHR("stream", ""),
         EGLenum("attribute", ""),
-        Check(1)..EGLAttrib.p.OUT("value", "")
+        Check(1)..EGLAttrib.p("value", "")
     )
 
     EGLBoolean(

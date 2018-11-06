@@ -133,9 +133,9 @@ N=\#channels_in_file     components
         """,
 
         charASCII.const.p("filename", "the file name"),
-        Check(1)..AutoSizeResult..int.p.OUT("x", "outputs the image width in pixels"),
-        Check(1)..AutoSizeResult..int.p.OUT("y", "outputs the image height in pixels"),
-        Check(1)..AutoSizeResult("(desired_channels != 0 ? desired_channels : \$original)")..int.p.OUT(
+        Check(1)..AutoSizeResult..int.p("x", "outputs the image width in pixels"),
+        Check(1)..AutoSizeResult..int.p("y", "outputs the image height in pixels"),
+        Check(1)..AutoSizeResult("(desired_channels != 0 ? desired_channels : \$original)")..int.p(
             "channels_in_file",
             "outputs number of components in image"
         ),
@@ -180,10 +180,10 @@ N=\#channels_in_file     components
 
         load_from_memory["buffer"],
         load_from_memory["len"],
-        Check(1)..int.p.p.OUT("delays", "output the delays of each layer in the image"),
+        Check(1)..int.p.p("delays", "output the delays of each layer in the image"),
         load["x"],
         load["y"],
-        Check(1)..AutoSizeResult..int.p.OUT("z", "outputs the number of layers in the image"),
+        Check(1)..AutoSizeResult..int.p("z", "outputs the number of layers in the image"),
         load["channels_in_file"],
         load["desired_channels"]
     )
@@ -325,9 +325,9 @@ N=\#channels_in_file     components
         "Returns image dimensions &amp; components without fully decoding the image.",
 
         load["filename"],
-        Check(1)..int.p.OUT("x", "outputs the image width in pixels"),
-        Check(1)..int.p.OUT("y", "outputs the image height in pixels"),
-        Check(1)..int.p.OUT("comp", "outputs number of components in image"),
+        Check(1)..int.p("x", "outputs the image width in pixels"),
+        Check(1)..int.p("y", "outputs the image height in pixels"),
+        Check(1)..int.p("comp", "outputs number of components in image"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -338,9 +338,9 @@ N=\#channels_in_file     components
 
         load_from_memory["buffer"],
         load_from_memory["len"],
-        Check(1)..int.p.OUT("x", "outputs the image width in pixels"),
-        Check(1)..int.p.OUT("y", "outputs the image height in pixels"),
-        Check(1)..int.p.OUT("comp", "outputs number of components in image")
+        Check(1)..int.p("x", "outputs the image width in pixels"),
+        Check(1)..int.p("y", "outputs the image height in pixels"),
+        Check(1)..int.p("comp", "outputs number of components in image")
     )
 
     intb(
@@ -349,9 +349,9 @@ N=\#channels_in_file     components
 
         load_from_callbacks["clbk"],
         load_from_callbacks["user"],
-        Check(1)..int.p.OUT("x", "outputs the image width in pixels"),
-        Check(1)..int.p.OUT("y", "outputs the image height in pixels"),
-        Check(1)..int.p.OUT("comp", "outputs number of components in image")
+        Check(1)..int.p("x", "outputs the image width in pixels"),
+        Check(1)..int.p("y", "outputs the image height in pixels"),
+        Check(1)..int.p("comp", "outputs number of components in image")
     )
 
     intb(
@@ -408,7 +408,7 @@ N=\#channels_in_file     components
         char.const.p("buffer", ""),
         AutoSize("buffer")..int("len", ""),
         int("initial_size", ""),
-        AutoSizeResult..int.p.OUT("outlen", "")
+        AutoSizeResult..int.p("outlen", "")
     )
 
     char.p(
@@ -418,7 +418,7 @@ N=\#channels_in_file     components
         char.const.p("buffer", ""),
         AutoSize("buffer")..int("len", ""),
         int("initial_size", ""),
-        AutoSizeResult..int.p.OUT("outlen", ""),
+        AutoSizeResult..int.p("outlen", ""),
         intb("parse_header", "")
     )
 
@@ -428,14 +428,14 @@ N=\#channels_in_file     components
 
         char.const.p("buffer", ""),
         AutoSize("buffer")..int("len", ""),
-        AutoSizeResult..int.p.OUT("outlen", "")
+        AutoSizeResult..int.p("outlen", "")
     )
 
     int(
         "zlib_decode_buffer",
         "ZLIB client - used by PNG, available for other purposes",
 
-        char.p.OUT("obuffer", ""),
+        char.p("obuffer", ""),
         AutoSize("obuffer")..int("olen", ""),
         char.const.p("ibuffer", ""),
         AutoSize("ibuffer")..int("ilen", "")
@@ -447,14 +447,14 @@ N=\#channels_in_file     components
 
         char.const.p("buffer", ""),
         AutoSize("buffer")..int("len", ""),
-        AutoSizeResult..int.p.OUT("outlen", "")
+        AutoSizeResult..int.p("outlen", "")
     )
 
     int(
         "zlib_decode_noheader_buffer",
         "ZLIB client - used by PNG, available for other purposes",
 
-        char.p.OUT("obuffer", ""),
+        char.p("obuffer", ""),
         AutoSize("obuffer")..int("olen", ""),
         char.const.p("ibuffer", ""),
         AutoSize("ibuffer")..int("ilen", "")

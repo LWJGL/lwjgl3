@@ -1090,7 +1090,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         retrieval. Unlike GetMessage, the #PeekMessage() function does not wait for a message to be posted before returning.
         """,
 
-        LPMSG.OUT("lpMsg", "a pointer to an ##MSG structure that receives message information from the thread's message queue"),
+        LPMSG("lpMsg", "a pointer to an ##MSG structure that receives message information from the thread's message queue"),
         nullable..HWND(
             "hWnd",
             """
@@ -1112,7 +1112,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "PeekMessage",
         "Dispatches incoming sent messages, checks the thread message queue for a posted message, and retrieves the message (if any exist).",
 
-        LPMSG.OUT("lpMsg", "a pointer to an ##MSG structure that receives message information"),
+        LPMSG("lpMsg", "a pointer to an ##MSG structure that receives message information"),
         GetMessage["hWnd"],
         GetMessage["wMsgFilterMin"],
         GetMessage["wMsgFilterMax"],
@@ -1227,7 +1227,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         """,
 
         HWND("hWnd", "a handle to the window"),
-        LPRECT.OUT("lpRect", "a pointer to a ##RECT structure that receives the screen coordinates of the upper-left and lower-right corners of the window")
+        LPRECT("lpRect", "a pointer to a ##RECT structure that receives the screen coordinates of the upper-left and lower-right corners of the window")
     )
 
     SaveLastError..BOOL(
@@ -1265,7 +1265,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "Retrieves the show state and the restored, minimized, and maximized positions of the specified window.",
 
         HWND("hWnd", "a handle to the window"),
-        WINDOWPLACEMENT.p.INOUT(
+        Input..WINDOWPLACEMENT.p(
             "lpwndpl",
             """
             a pointer to the ##WINDOWPLACEMENT structure that receives the show state and position information.
@@ -1681,7 +1681,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             window.
             """
         ),
-        Check(1)..nullable..PULONG.OUT(
+        Check(1)..nullable..PULONG(
             "pulFlags",
             "an optional address of the {@code ULONG} variable to receive the modifier flags for the specified window's touch capability."
         ),
@@ -1709,7 +1709,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             populate the {@code pInputs} buffer with information about {@code cInputs} touch points.
             """
         ),
-        PTOUCHINPUT.OUT(
+        PTOUCHINPUT(
             "pInputs",
             "a pointer to an array of ##TOUCHINPUT structures to receive information about the touch points associated with the specified touch input handle"
         ),
@@ -1767,7 +1767,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "Retrieves information about a display monitor.",
 
         HMONITOR("hMonitor", "a handle to the display monitor of interest"),
-        LPMONITORINFOEX.OUT(
+        LPMONITORINFOEX(
             "lpmi",
             """
             a pointer to a ##MONITORINFOEX structure that receives information about the specified display monitor.
@@ -1847,7 +1847,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             at 0. If the current session has three display devices, for example, they are specified by the index values 0, 1, and 2.
             """
         ),
-        PDISPLAY_DEVICE.OUT(
+        PDISPLAY_DEVICE(
             "lpDisplayDevice",
             """
             a pointer to a ##DISPLAY_DEVICE structure that receives information about the display device specified by {@code iDevNum}.
@@ -1901,7 +1901,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             EnumDisplaySettingsMode,
             LinkMode.SINGLE_CNT
         ),
-        DEVMODE.p.OUT(
+        DEVMODE.p(
             "lpDevMode",
             """
             a pointer to a ##DEVMODE structure into which the function stores information about the specified graphics mode. Before calling
@@ -1956,7 +1956,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GetCursorPos",
         "Retrieves the position of the mouse cursor, in screen coordinates.",
 
-        LPPOINT.OUT("point", "a pointer to a {@link POINT} structure that receives the screen coordinates of the cursor")
+        LPPOINT("point", "a pointer to a {@link POINT} structure that receives the screen coordinates of the cursor")
     )
 
     BOOL(

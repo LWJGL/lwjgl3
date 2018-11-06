@@ -89,7 +89,7 @@ ENABLE_WARNINGS()""")
         """,
 
         char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("src")..int("srcSize", "max supported value is #MAX_INPUT_SIZE"),
         AutoSize("dst")..int("dstCapacity", "size of buffer {@code dst} (which must be already allocated)"),
 
@@ -107,7 +107,7 @@ ENABLE_WARNINGS()""")
         """,
 
         char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("src")..int("compressedSize", "is the exact complete size of the compressed block"),
         AutoSize("dst")..int("dstCapacity", "is the size of destination buffer, which must be already allocated"),
 
@@ -148,7 +148,7 @@ ENABLE_WARNINGS()""")
         """,
 
         char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("src")..int("srcSize", ""),
         AutoSize("dst")..int("dstCapacity", ""),
         int("acceleration", "")
@@ -165,9 +165,9 @@ ENABLE_WARNINGS()""")
         it as {@code void* state} to compression function.
         """,
 
-        Unsafe..void.p.OUT("state", ""),
+        Unsafe..void.p("state", ""),
         char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("src")..int("srcSize", ""),
         AutoSize("dst")..int("dstCapacity", ""),
         int("acceleration", "")
@@ -184,8 +184,8 @@ ENABLE_WARNINGS()""")
         """,
 
         char.const.p("src", ""),
-        char.p.OUT("dst", ""),
-        AutoSize("src")..Check(1)..int.p.INOUT(
+        char.p("dst", ""),
+        AutoSize("src")..Check(1)..int.p(
             "srcSizePtr",
             "will be modified to indicate how many bytes where read from {@code source} to fill {@code dest}. New value is necessarily &le; input value."
         ),
@@ -208,7 +208,7 @@ ENABLE_WARNINGS()""")
         """,
 
         Unsafe..char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("dst")..int(
             "originalSize",
             "is the uncompressed size to regenerate. {@code dst} must be already allocated, its size must be &ge; {@code originalSize} bytes."),
@@ -235,7 +235,7 @@ ENABLE_WARNINGS()""")
         """,
 
         char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("src")..int("compressedSize", ""),
         int("targetOutputSize", ""),
         AutoSize("dst")..int("dstCapacity", ""),
@@ -304,7 +304,7 @@ ENABLE_WARNINGS()""")
 
         LZ4_stream_t.p("streamPtr", ""),
         char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("src")..int("srcSize", ""),
         AutoSize("dst")..int("dstCapacity", ""),
         int("acceleration", ""),
@@ -326,7 +326,7 @@ ENABLE_WARNINGS()""")
         """,
 
         LZ4_stream_t.p("streamPtr", ""),
-        char.p.OUT("safeBuffer", ""),
+        char.p("safeBuffer", ""),
         AutoSize("safeBuffer")..int("maxDictSize", ""),
 
         returnDoc = "saved dictionary size in bytes (necessarily &le; {@code maxDictSize}), or 0 if error"
@@ -419,7 +419,7 @@ ENABLE_WARNINGS()""")
 
         LZ4_streamDecode_t.p("LZ4_streamDecode", ""),
         char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("src")..int("srcSize", ""),
         AutoSize("dst")..int("dstCapacity", "")
     )
@@ -430,7 +430,7 @@ ENABLE_WARNINGS()""")
 
         LZ4_streamDecode_t.p("LZ4_streamDecode", ""),
         Unsafe..char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("dst")..int("originalSize", "")
     )
 
@@ -444,7 +444,7 @@ ENABLE_WARNINGS()""")
         """,
 
         char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("src")..int("srcSize", ""),
         AutoSize("dst")..int("dstCapacity", ""),
         char.const.p("dictStart", ""),
@@ -456,7 +456,7 @@ ENABLE_WARNINGS()""")
         "See {@code decompress_safe_usingDict}.",
 
         Unsafe..char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("dst")..int("originalSize", ""),
         char.const.p("dictStart", ""),
         AutoSize("dictStart")..int("dictSize", "")
@@ -494,7 +494,7 @@ ENABLE_WARNINGS()""")
         #resetStream().
         """,
 
-        LZ4_stream_t.p.OUT("streamPtr", "")
+        LZ4_stream_t.p("streamPtr", "")
     )
 
     int(
@@ -507,9 +507,9 @@ ENABLE_WARNINGS()""")
         initializes the provided state with a call to something like #resetStream_fast() while #compress_fast_extState() starts with a call to #resetStream().
         """,
 
-        Unsafe..void.p.OUT("state", ""),
+        Unsafe..void.p("state", ""),
         char.const.p("src", ""),
-        char.p.OUT("dst", ""),
+        char.p("dst", ""),
         AutoSize("src")..int("srcSize", ""),
         AutoSize("dst")..int("dstCapacity", ""),
         int("acceleration", "")
@@ -536,7 +536,7 @@ ENABLE_WARNINGS()""")
         stream (and source buffer) must remain in-place / accessible / unchanged through the completion of the first compression call on the stream.
         """,
 
-        LZ4_stream_t.p.OUT("working_stream", ""),
+        LZ4_stream_t.p("working_stream", ""),
         nullable..LZ4_stream_t.const.p("dictionary_stream", "")
     )
 }

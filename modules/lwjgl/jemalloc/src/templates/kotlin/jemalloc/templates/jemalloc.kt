@@ -159,7 +159,7 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         the value pointed to by {@code memptr}. The requested alignment must be a power of 2 at least as large as {@code sizeof(void *)}.
         """,
 
-        Check(1)..void.p.p.OUT("memptr", "returns the allocated memory"),
+        Check(1)..void.p.p("memptr", "returns the allocated memory"),
         size_t("alignment", "the allocation alignment, in bytes"),
         size_t("size", "the number of bytes to allocate")
     )
@@ -287,8 +287,8 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         """,
 
         charASCII.const.p("name", "the namespace location"),
-        Unsafe..nullable..void.p.OUT("oldp", "returns a value"),
-        Check(1)..nullable..size_t.p.OUT("oldlenp", "returns the value length"),
+        Unsafe..nullable..void.p("oldp", "returns a value"),
+        Check(1)..nullable..size_t.p("oldlenp", "returns the value length"),
         nullable..void.p("newp", "the new value"),
         AutoSize("newp")..size_t("newlen", "the new value length")
     )
@@ -324,7 +324,7 @@ for (i = 0; i < nbins; i++) {
 
         charASCII.const.p("name", "the namespace location"),
         size_t.p("mibp", "an array of integers"),
-        AutoSize("mibp")..Check(1)..size_t.p.INOUT("miblenp", "the number of components in {@code mibp}")
+        AutoSize("mibp")..Check(1)..size_t.p("miblenp", "the number of components in {@code mibp}")
     )
 
     int(
@@ -333,8 +333,8 @@ for (i = 0; i < nbins; i++) {
 
         size_t.const.p("mib", "a MIB"),
         AutoSize("mib")..size_t("miblen", "the number of elements in {@code mib}"),
-        Unsafe..nullable..void.p.OUT("oldp", "returns a value"),
-        Check(1)..nullable..size_t.p.OUT("oldlenp", "returns the value length"),
+        Unsafe..nullable..void.p("oldp", "returns a value"),
+        Check(1)..nullable..size_t.p("oldlenp", "returns the value length"),
         nullable..void.p("newp", "the new value"),
         AutoSize("newp")..size_t("newlen", "the new value length")
     )

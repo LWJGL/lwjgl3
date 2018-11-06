@@ -54,7 +54,7 @@ val QCOM_framebuffer_foveated = "QCOMFramebufferFoveated".nativeClassGLES("QCOM_
         GLuint("numLayers", ""),
         GLuint("focalPointsPerLayer", ""),
         GLuint("requestedFeatures", ""),
-        Check(1)..GLuint.p.OUT("providedFeatures", "")
+        Check(1)..GLuint.p("providedFeatures", "")
     )
 
     void(

@@ -44,9 +44,9 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGL("AMD_perform
         "GetPerfMonitorGroupsAMD",
         "",
 
-        nullable..Check(1)..GLint.p.OUT("numGroups", ""),
+        nullable..Check(1)..GLint.p("numGroups", ""),
         AutoSize("groups")..GLsizei("groupsSize", ""),
-        nullable..GLuint.p.OUT("groups", "")
+        nullable..GLuint.p("groups", "")
     )
 
     void(
@@ -54,10 +54,10 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGL("AMD_perform
         "",
 
         GLuint("group", ""),
-        Check(1)..GLint.p.OUT("numCounters", ""),
-        Check(1)..GLint.p.OUT("maxActiveCounters", ""),
+        Check(1)..GLint.p("numCounters", ""),
+        Check(1)..GLint.p("maxActiveCounters", ""),
         AutoSize("counters")..GLsizei("counterSize", ""),
-        GLuint.p.OUT("counters", "")
+        GLuint.p("counters", "")
     )
 
     void(
@@ -66,8 +66,8 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGL("AMD_perform
 
         GLuint("group", ""),
         AutoSize("groupString")..GLsizei("bufSize", ""),
-        Check(1)..GLsizei.p.OUT("length", ""),
-        GLcharASCII.p.OUT("groupString", "")
+        Check(1)..GLsizei.p("length", ""),
+        GLcharASCII.p("groupString", "")
     )
 
     void(
@@ -77,8 +77,8 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGL("AMD_perform
         GLuint("group", ""),
         GLuint("counter", ""),
         AutoSize("counterString")..GLsizei("bufSize", ""),
-        nullable..Check(1)..GLsizei.p.OUT("length", ""),
-        nullable..GLcharASCII.p.OUT("counterString", "")
+        nullable..Check(1)..GLsizei.p("length", ""),
+        nullable..GLcharASCII.p("counterString", "")
     )
 
     void(
@@ -88,7 +88,7 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGL("AMD_perform
         GLuint("group", ""),
         GLuint("counter", ""),
         GLenum("pname", ""),
-        Check(4)..MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..void.p.OUT("data", "")
+        Check(4)..MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..void.p("data", "")
     )
 
     void(
@@ -96,7 +96,7 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGL("AMD_perform
         "",
 
         AutoSize("monitors")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("monitors", "")
+        ReturnParam..GLuint.p("monitors", "")
     )
 
     void(
@@ -139,7 +139,7 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGL("AMD_perform
         GLuint("monitor", ""),
         GLenum("pname", ""),
         AutoSize("data")..GLsizei("dataSize", ""),
-        GLuint.p.OUT("data", ""),
-        Check(1)..nullable..GLint.p.OUT("bytesWritten", "")
+        GLuint.p("data", ""),
+        Check(1)..nullable..GLint.p("bytesWritten", "")
     )
 }

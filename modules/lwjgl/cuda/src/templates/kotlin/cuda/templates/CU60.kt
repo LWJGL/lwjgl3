@@ -24,7 +24,7 @@ val CU60 = "CU60".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "MemAllocManaged",
         "",
 
-        Check(1)..CUdeviceptr.p.OUT("dptr", ""),
+        Check(1)..CUdeviceptr.p("dptr", ""),
         size_t("bytesize", ""),
         unsigned_int("flags", "")
     )

@@ -427,7 +427,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         VkDevice("device", "the logical device that creates the indirect command layout."),
         VkIndirectCommandsLayoutCreateInfoNVX.const.p("pCreateInfo", "a pointer to an instance of the ##VkIndirectCommandsLayoutCreateInfoNVX structure containing parameters affecting creation of the indirect command layout."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkIndirectCommandsLayoutNVX.p.OUT("pIndirectCommandsLayout", "points to a {@code VkIndirectCommandsLayoutNVX} handle in which the resulting indirect command layout is returned.")
+        Check(1)..VkIndirectCommandsLayoutNVX.p("pIndirectCommandsLayout", "points to a {@code VkIndirectCommandsLayoutNVX} handle in which the resulting indirect command layout is returned.")
     )
 
     void(
@@ -512,7 +512,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         VkDevice("device", "the logical device that creates the object table."),
         VkObjectTableCreateInfoNVX.const.p("pCreateInfo", "a pointer to an instance of the ##VkObjectTableCreateInfoNVX structure containing parameters affecting creation of the table."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkObjectTableNVX.p.OUT("pObjectTable", "points to a {@code VkObjectTableNVX} handle in which the resulting object table is returned.")
+        Check(1)..VkObjectTableNVX.p("pObjectTable", "points to a {@code VkObjectTableNVX} handle in which the resulting object table is returned.")
     )
 
     void(
@@ -707,7 +707,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         """,
 
         VkPhysicalDevice("physicalDevice", "the handle to the physical device whose properties will be queried."),
-        VkDeviceGeneratedCommandsFeaturesNVX.p.OUT("pFeatures", "points to an instance of the ##VkDeviceGeneratedCommandsFeaturesNVX structure, that will be filled with returned information."),
-        VkDeviceGeneratedCommandsLimitsNVX.p.OUT("pLimits", "points to an instance of the ##VkDeviceGeneratedCommandsLimitsNVX structure, that will be filled with returned information.")
+        VkDeviceGeneratedCommandsFeaturesNVX.p("pFeatures", "points to an instance of the ##VkDeviceGeneratedCommandsFeaturesNVX structure, that will be filled with returned information."),
+        VkDeviceGeneratedCommandsLimitsNVX.p("pLimits", "points to an instance of the ##VkDeviceGeneratedCommandsLimitsNVX structure, that will be filled with returned information.")
     )
 }

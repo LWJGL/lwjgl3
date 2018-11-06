@@ -711,7 +711,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        int.p.OUT("bodyIndicesOut", ""),
+        int.p("bodyIndicesOut", ""),
         AutoSize("bodyIndicesOut")..int("bodyIndicesCapacity", "")
     )
 
@@ -727,13 +727,13 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        Check(1)..nullable..int.p.OUT("bodyUniqueId", ""),
-        Check(1)..nullable..int.p.OUT("numDegreeOfFreedomQ", ""),
-        Check(1)..nullable..int.p.OUT("numDegreeOfFreedomU", ""),
-        Check(1)..nullable..double.const.p.p.OUT("rootLocalInertialFrame", ""),
-        Check(1)..nullable..double.const.p.p.OUT("actualStateQ", ""),
-        Check(1)..nullable..double.const.p.p.OUT("actualStateQdot", ""),
-        Check(1)..nullable..double.const.p.p.OUT("jointReactionForces", "")
+        Check(1)..nullable..int.p("bodyUniqueId", ""),
+        Check(1)..nullable..int.p("numDegreeOfFreedomQ", ""),
+        Check(1)..nullable..int.p("numDegreeOfFreedomU", ""),
+        Check(1)..nullable..double.const.p.p("rootLocalInertialFrame", ""),
+        Check(1)..nullable..double.const.p.p("actualStateQ", ""),
+        Check(1)..nullable..double.const.p.p("actualStateQdot", ""),
+        Check(1)..nullable..double.const.p.p("jointReactionForces", "")
     )
 
 	int(
@@ -741,18 +741,18 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        Check(1)..nullable..int.p.OUT("bodyUniqueId", ""),
-        Check(1)..nullable..int.p.OUT("numLinks", ""),
-        Check(1)..nullable..int.p.OUT("numDegreeOfFreedomQ", ""),
-        Check(1)..nullable..int.p.OUT("numDegreeOfFreedomU", ""),
-        Check(1)..nullable..double.const.p.p.OUT("rootLocalInertialFrame", ""),
-        Check(1)..nullable..double.const.p.p.OUT("actualStateQ", ""),
-        Check(1)..nullable..double.const.p.p.OUT("actualStateQdot", ""),
-        Check(1)..nullable..double.const.p.p.OUT("jointReactionForces", ""),
-        Check(1)..nullable..double.const.p.p.OUT("linkLocalInertialFrames", ""),
-        Check(1)..nullable..double.const.p.p.OUT("jointMotorForces", ""),
-        Check(1)..nullable..double.const.p.p.OUT("linkStates", ""),
-        Check(1)..nullable..double.const.p.p.OUT("linkWorldVelocities", "")
+        Check(1)..nullable..int.p("bodyUniqueId", ""),
+        Check(1)..nullable..int.p("numLinks", ""),
+        Check(1)..nullable..int.p("numDegreeOfFreedomQ", ""),
+        Check(1)..nullable..int.p("numDegreeOfFreedomU", ""),
+        Check(1)..nullable..double.const.p.p("rootLocalInertialFrame", ""),
+        Check(1)..nullable..double.const.p.p("actualStateQ", ""),
+        Check(1)..nullable..double.const.p.p("actualStateQdot", ""),
+        Check(1)..nullable..double.const.p.p("jointReactionForces", ""),
+        Check(1)..nullable..double.const.p.p("linkLocalInertialFrames", ""),
+        Check(1)..nullable..double.const.p.p("jointMotorForces", ""),
+        Check(1)..nullable..double.const.p.p("linkStates", ""),
+        Check(1)..nullable..double.const.p.p("linkWorldVelocities", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -769,8 +769,8 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
         int("linkIndex", ""),
-        Check(3)..double.p.OUT("aabbMin", ""),
-        Check(3)..double.p.OUT("aabbMax", "")
+        Check(3)..double.p("aabbMin", ""),
+        Check(3)..double.p("aabbMax", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -809,7 +809,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
 
         b3PhysicsClientHandle("physClient", ""),
         int("bodyUniqueId", ""),
-        b3BodyInfo.p.OUT("info", "")
+        b3BodyInfo.p("info", "")
     )
 
     int(
@@ -835,7 +835,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         b3PhysicsClientHandle("physClient", ""),
         int("bodyUniqueId", ""),
         int("jointIndex", ""),
-        b3JointInfo.p.OUT("info", "")
+        b3JointInfo.p("info", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -873,7 +873,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
 
         b3PhysicsClientHandle("physClient", ""),
         int("userDataId", ""),
-        b3UserDataValue.p.OUT("valueOut", "")
+        b3UserDataValue.p("valueOut", "")
     )
 
     int(
@@ -909,10 +909,10 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         b3PhysicsClientHandle("physClient", ""),
         int("bodyUniqueId", ""),
         int("userDataIndex", ""),
-        Check(1)..charASCII.const.p.p.OUT("keyOut", ""),
-        Check(1)..int.p.OUT("userDataIdOut", ""),
-        Check(1)..int.p.OUT("linkIndexOut", ""),
-        Check(1)..int.p.OUT("visualShapeIndexOut", "")
+        Check(1)..charASCII.const.p.p("keyOut", ""),
+        Check(1)..int.p("userDataIdOut", ""),
+        Check(1)..int.p("linkIndexOut", ""),
+        Check(1)..int.p("visualShapeIndexOut", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -938,7 +938,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "Given a body unique id and link index, return the dynamics information.",
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        b3DynamicsInfo.p.OUT("info", "")
+        b3DynamicsInfo.p("info", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -1092,7 +1092,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         int("parentJointIndex", ""),
         int("childBodyUniqueId", ""),
         int("childJointIndex", ""),
-        b3JointInfo.p.OUT("info", "")
+        b3JointInfo.p("info", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -1104,7 +1104,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         int("parentJointIndex", ""),
         int("childBodyUniqueId", ""),
         int("childJointIndex", ""),
-        b3JointInfo.p.OUT("info", "")
+        b3JointInfo.p("info", "")
     )
 
     int(
@@ -1206,7 +1206,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        b3UserConstraintState.p.OUT("constraintState", "")
+        b3UserConstraintState.p("constraintState", "")
     )
 
     int(
@@ -1215,7 +1215,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
 
         b3PhysicsClientHandle("physClient", ""),
         int.const("raintUniqueId", ""),
-        b3UserConstraint.p.OUT("info", "")
+        b3UserConstraint.p("info", "")
     )
 
     int(
@@ -1239,7 +1239,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3PhysicsClientHandle("physClient", ""),
-        b3DebugLines.p.OUT("lines", "")
+        b3DebugLines.p("lines", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -1288,7 +1288,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        b3OpenGLVisualizerCameraInfo.p.OUT("camera", "")
+        b3OpenGLVisualizerCameraInfo.p("camera", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -1372,7 +1372,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        Check(1)..double.p.OUT("paramValue", "")
+        Check(1)..double.p("paramValue", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -1532,7 +1532,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3PhysicsClientHandle("physClient", ""),
-        b3CameraImageData.p.OUT("imageData", "")
+        b3CameraImageData.p("imageData", "")
     )
 
     void(
@@ -1551,7 +1551,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         Check(3)..float.const.p("cameraPosition", ""),
         Check(3)..float.const.p("cameraTargetPosition", ""),
         Check(3)..float.const.p("cameraUp", ""),
-        Check(16)..float.p.OUT("viewMatrix", "")
+        Check(16)..float.p("viewMatrix", "")
     )
 
     void(
@@ -1564,7 +1564,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         float("pitch", ""),
         float("roll", ""),
         int("upAxis", ""),
-        Check(16)..float.p.OUT("viewMatrix", "")
+        Check(16)..float.p("viewMatrix", "")
     )
 
     void(
@@ -1572,9 +1572,9 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         Check(16)..float.const.p("viewMatrix", ""),
-        Check(3)..float.p.OUT("cameraPosition", ""),
-        Check(3)..float.p.OUT("cameraTargetPosition", ""),
-        Check(3)..float.p.OUT("cameraUp", "")
+        Check(3)..float.p("cameraPosition", ""),
+        Check(3)..float.p("cameraTargetPosition", ""),
+        Check(3)..float.p("cameraUp", "")
     )
 
     void(
@@ -1587,7 +1587,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         float("top", ""),
         float("nearVal", ""),
         float("farVal", ""),
-        Check(16)..float.p.OUT("projectionMatrix", "")
+        Check(16)..float.p("projectionMatrix", "")
     )
 
     void(
@@ -1598,7 +1598,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         float("aspect", ""),
         float("nearVal", ""),
         float("farVal", ""),
-        Check(16)..float.p.OUT("projectionMatrix", "")
+        Check(16)..float.p("projectionMatrix", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -1645,7 +1645,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3PhysicsClientHandle("physClient", ""),
-        b3ContactInformation.p.OUT("contactPointData", "")
+        b3ContactInformation.p("contactPointData", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -1748,7 +1748,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3PhysicsClientHandle("physClient", ""),
-        b3ContactInformation.p.OUT("contactPointInfo", "")
+        b3ContactInformation.p("contactPointInfo", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -1765,7 +1765,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3PhysicsClientHandle("physClient", ""),
-        b3AABBOverlapData.p.OUT("data", "")
+        b3AABBOverlapData.p("data", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -1781,7 +1781,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3PhysicsClientHandle("physClient", ""),
-        b3VisualShapeInformation.p.OUT("visualShapeInfo", "")
+        b3VisualShapeInformation.p("visualShapeInfo", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -1798,7 +1798,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3PhysicsClientHandle("physClient", ""),
-        b3CollisionShapeInformation.p.OUT("collisionShapeInfo", "")
+        b3CollisionShapeInformation.p("collisionShapeInfo", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -2090,7 +2090,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        b3PhysicsSimulationParameters.p.OUT("params", "")
+        b3PhysicsSimulationParameters.p("params", "")
     )
 
     int(
@@ -2291,9 +2291,9 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        Check(1)..nullable..int.p.OUT("bodyUniqueId", ""),
-        Check(1)..nullable..int.p.OUT("dofCount", ""),
-        Unsafe..nullable..double.p.OUT("jointForces", "")
+        Check(1)..nullable..int.p("bodyUniqueId", ""),
+        Check(1)..nullable..int.p("dofCount", ""),
+        Unsafe..nullable..double.p("jointForces", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -2314,9 +2314,9 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        Check(1)..nullable..int.p.OUT("dofCount", ""),
-        Unsafe..double.p.OUT("linearJacobian", ""),
-        Unsafe..double.p.OUT("angularJacobian", "")
+        Check(1)..nullable..int.p("dofCount", ""),
+        Unsafe..double.p("linearJacobian", ""),
+        Unsafe..double.p("angularJacobian", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -2334,8 +2334,8 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
 
         b3PhysicsClientHandle("physClient", ""),
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        Check(1)..nullable..int.p.OUT("dofCount", ""),
-        Unsafe..nullable..double.p.OUT("massMatrix", "")
+        Check(1)..nullable..int.p("dofCount", ""),
+        Unsafe..nullable..double.p("massMatrix", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -2416,9 +2416,9 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3SharedMemoryStatusHandle("statusHandle", ""),
-        Check(1)..nullable..int.p.OUT("bodyUniqueId", ""),
-        Check(1)..nullable..int.p.OUT("dofCount", ""),
-        Unsafe..nullable..double.p.OUT("jointPositions", "")
+        Check(1)..nullable..int.p("bodyUniqueId", ""),
+        Check(1)..nullable..int.p("dofCount", ""),
+        Unsafe..nullable..double.p("jointPositions", "")
     )
 
     void(
@@ -3096,7 +3096,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         b3PhysicsClientHandle("physClient", ""),
         b3SharedMemoryStatusHandle("statusHandle", ""),
         int("jointIndex", ""),
-        b3JointSensorState.p.OUT("state", "")
+        b3JointSensorState.p("state", "")
     )
 
     int(
@@ -3106,7 +3106,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         b3PhysicsClientHandle("physClient", ""),
         b3SharedMemoryStatusHandle("statusHandle", ""),
         int("linkIndex", ""),
-        b3LinkState.p.OUT("state", "")
+        b3LinkState.p("state", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -3204,7 +3204,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3PhysicsClientHandle("physClient", ""),
-        b3RaycastInformation.p.OUT("raycastInfo", "")
+        b3RaycastInformation.p("raycastInfo", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -3289,7 +3289,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3PhysicsClientHandle("physClient", ""),
-        b3VREventsData.p.OUT("vrEventsData", "")
+        b3VREventsData.p("vrEventsData", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -3350,7 +3350,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3PhysicsClientHandle("physClient", ""),
-        b3KeyboardEventsData.p.OUT("keyboardEventsData", "")
+        b3KeyboardEventsData.p("keyboardEventsData", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -3365,7 +3365,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "",
 
         b3PhysicsClientHandle("physClient", ""),
-        b3MouseEventsData.p.OUT("mouseEventsData", "")
+        b3MouseEventsData.p("mouseEventsData", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -3525,8 +3525,8 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         Check(4)..double.const.p("ornA", ""),
         Check(3)..double.const.p("posB", ""),
         Check(4)..double.const.p("ornB", ""),
-        Check(3)..double.p.OUT("outPos", ""),
-        Check(4)..double.p.OUT("outOrn", "")
+        Check(3)..double.p("outPos", ""),
+        Check(4)..double.p("outOrn", "")
     )
 
     void(
@@ -3535,7 +3535,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
 
         Check(3)..double.const.p("pos", ""),
         Check(4)..double.const.p("orn", ""),
-        Check(3)..double.p.OUT("outPos", ""),
-        Check(4)..double.p.OUT("outOrn", "")
+        Check(3)..double.p("outPos", ""),
+        Check(4)..double.p("outOrn", "")
     )
 }

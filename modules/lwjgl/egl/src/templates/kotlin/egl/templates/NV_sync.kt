@@ -93,6 +93,6 @@ val NV_sync = "NVSync".nativeClassEGL("NV_sync", postfix = NV) {
 
         EGLSyncNV("sync", ""),
         EGLint("attribute", ""),
-        Check(1)..EGLint.p.OUT("value", "")
+        Check(1)..EGLint.p("value", "")
     )
 }

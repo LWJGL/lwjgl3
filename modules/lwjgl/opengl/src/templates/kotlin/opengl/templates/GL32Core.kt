@@ -58,7 +58,7 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
 
         GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
         GLenum("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLint64.p.OUT("params", "the requested parameter")
+        Check(1)..ReturnParam..GLint64.p("params", "the requested parameter")
     )
 
     // ARB_draw_elements_base_vertex
@@ -292,7 +292,7 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
 
         GLenum("pname", "the sample parameter name", "#SAMPLE_POSITION"),
         GLuint("index", "the index of the sample whose position to query"),
-        Check(1)..ReturnParam..GLfloat.p.OUT("val", "an array to receive the position of the sample")
+        Check(1)..ReturnParam..GLfloat.p("val", "an array to receive the position of the sample")
     )
 
     void(
@@ -506,7 +506,7 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "Returns the 64bit integer value or values of a selected parameter.",
 
         GLenum("pname", "the parameter value to be returned"),
-        Check(1)..ReturnParam..GLint64.p.OUT("params", "the value or values of the specified parameter")
+        Check(1)..ReturnParam..GLint64.p("params", "the value or values of the specified parameter")
     )
 
     void(
@@ -515,7 +515,7 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
 
         GLenum("pname", "the indexed state to query"),
         GLuint("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLint64.p.OUT("params", "the value or values of the specified parameter")
+        Check(1)..ReturnParam..GLint64.p("params", "the value or values of the specified parameter")
     )
 
     void(
@@ -525,7 +525,7 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         GLsync("sync", "the sync object whose properties to query"),
         GLenum("pname", "the parameter whose value to retrieve from the sync object specified in {@code sync}", SyncProperties),
         AutoSize("values")..GLsizei("bufSize", "the size of the buffer whose address is given in {@code values}"),
-        Check(1)..nullable..GLsizei.p.OUT("length", "the address of an variable to receive the number of integers placed in {@code values}"),
-        ReturnParam..GLint.p.OUT("values", "the address of an array to receive the values of the queried parameter")
+        Check(1)..nullable..GLsizei.p("length", "the address of an variable to receive the number of integers placed in {@code values}"),
+        ReturnParam..GLint.p("values", "the address of an array to receive the values of the queried parameter")
     )
 }

@@ -64,7 +64,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
         "",
 
         AutoSize("v")..GLsizei("bufsize", ""),
-        GLfloat.p.OUT("v", "")
+        GLfloat.p("v", "")
     )
 
     void(

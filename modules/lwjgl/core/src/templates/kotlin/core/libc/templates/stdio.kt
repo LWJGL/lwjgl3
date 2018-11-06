@@ -43,7 +43,7 @@ val stdio = "LibCStdio".nativeClass(Module.CORE_LIBC) {
         buffer.
         """,
 
-        nullable..char.p.OUT("buffer", "pointer to a character string to write to"),
+        nullable..char.p("buffer", "pointer to a character string to write to"),
         AutoSize("buffer")..size_t("buf_size", "up to {@code buf_size - 1} characters may be written, plus the null terminator"),
         charASCII.const.p("format", "pointer to a null-terminated character string specifying how to interpret the data"),
         va_list("vlist", "variable argument list containing the data to print"),

@@ -142,7 +142,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 
         GLuint("index", ""),
         GLenum("pname", ""),
-        Check(4)..GLdouble.p.OUT("params", "")
+        Check(4)..GLdouble.p("params", "")
     )
 
     ARB_vertex_attrib_64bit reuse "VertexArrayVertexAttribLOffsetEXT"

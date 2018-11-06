@@ -632,7 +632,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
         """,
 
         AutoSize("textures")..GLsizei("n", "the number of textures to create"),
-        ReturnParam..GLuint.p.OUT("textures", "a scalar or buffer in which to place the returned texture names")
+        ReturnParam..GLuint.p("textures", "a scalar or buffer in which to place the returned texture names")
     )
 
     void(
@@ -662,7 +662,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
         """,
 
         GLenum("pname", "the state variable"),
-        Check(1)..ReturnParam..GLboolean.p.OUT("params", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLboolean.p("params", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -676,7 +676,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
         """,
 
         GLenum("pname", "the state variable"),
-        Check(1)..ReturnParam..GLfloat.p.OUT("params", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLfloat.p("params", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -690,7 +690,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
         """,
 
         GLenum("pname", "the state variable"),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLint.p("params", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -704,7 +704,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
         """,
 
         GLenum("pname", "the state variable"),
-        Check(1)..ReturnParam..GLdouble.p.OUT("params", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLdouble.p("params", "a scalar or buffer in which to place the returned data")
     )
 
     GLenum(
@@ -725,7 +725,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
         "Returns a pointer in the current GL context.",
 
         GLenum("pname", "the pointer to return", "#DEBUG_CALLBACK_FUNCTION #DEBUG_CALLBACK_USER_PARAM"),
-        Check(1)..ReturnParam..void.p.p.OUT("params", "a buffer in which to place the returned pointer")
+        Check(1)..ReturnParam..void.p.p("params", "a buffer in which to place the returned pointer")
     )
 
     GLubyteUTF8.const.p(
@@ -752,7 +752,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "the buffer in which to place the returned data")
+        )..Unsafe..PIXEL_PACK_BUFFER..void.p("pixels", "the buffer in which to place the returned data")
     )
 
     void(
@@ -782,7 +782,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
             #TEXTURE_BUFFER_DATA_STORE_BINDING #TEXTURE_BUFFER_OFFSET #TEXTURE_BUFFER_SIZE
             """
         ),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLint.p("params", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -792,7 +792,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
         GLenum("target", "the texture image target"),
         GLint("level", "the level-of-detail number"),
         GLenum("pname", "the parameter to query"),
-        Check(1)..ReturnParam..GLfloat.p.OUT("params", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLfloat.p("params", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -815,7 +815,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
             #TEXTURE_VIEW_NUM_LEVELS #TEXTURE_VIEW_MIN_LAYER #TEXTURE_VIEW_NUM_LAYERS
             """
         ),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLint.p("params", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -824,7 +824,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
 
         GLenum("target", "the texture target"),
         GLenum("pname", "the parameter to query"),
-        Check(1)..ReturnParam..GLfloat.p.OUT("params", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLfloat.p("params", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -968,7 +968,7 @@ val GL11C = "GL11C".nativeClassGL("GL11C") {
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "a buffer in which to place the returned pixel data")
+        )..Unsafe..PIXEL_PACK_BUFFER..void.p("pixels", "a buffer in which to place the returned pixel data")
     )
 
     void(

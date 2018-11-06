@@ -110,7 +110,7 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassGL("NV_shading_rate_
 
         GLuint("viewport", ""),
         GLuint("entry", ""),
-        Check(1)..GLenum.p.OUT("rate", "")
+        Check(1)..GLenum.p("rate", "")
     )
 
     void(
@@ -143,6 +143,6 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassGL("NV_shading_rate_
         GLenum("rate", ""),
         GLuint("samples", ""),
         GLuint("index", ""),
-        Check(3)..GLint.p.OUT("location", "")
+        Check(3)..GLint.p("location", "")
     )
 }

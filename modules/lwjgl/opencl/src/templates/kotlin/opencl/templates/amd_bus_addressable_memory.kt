@@ -128,7 +128,7 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
         AutoSize("mem_objects", "bus_addresses")..cl_uint("num_mem_objs", "the number of memory objects in {@code mem_objects}"),
         cl_mem.const.p("mem_objects", "a pointer to a list of memory objects created with #MEM_BUS_ADDRESSABLE_AMD flag"),
         cl_bool("blocking_make_resident", "indicates if read operation is <em>blocking</em> or <em>non-blocking</em>"),
-        cl_bus_address_amd.p.OUT("bus_addresses", "a pointer to a list of ##CLBusAddressAMD structures"),
+        cl_bus_address_amd.p("bus_addresses", "a pointer to a list of ##CLBusAddressAMD structures"),
         NEWL,
         EWL,
         EVENT,

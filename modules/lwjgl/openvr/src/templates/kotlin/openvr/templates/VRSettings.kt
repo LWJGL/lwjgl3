@@ -29,7 +29,7 @@ val VRSettings = "VRSettings".nativeClass(
         "Returns true if file sync occurred (force or settings dirty).",
 
         bool("bForce", ""),
-        Check(1)..EVRSettingsError.p.OUT("peError", "")
+        Check(1)..EVRSettingsError.p("peError", "")
     )
 
     void(
@@ -39,7 +39,7 @@ val VRSettings = "VRSettings".nativeClass(
         charASCII.const.p("pchSection", ""),
         charASCII.const.p("pchSettingsKey", ""),
         bool("bValue", ""),
-        Check(1)..EVRSettingsError.p.OUT("peError", "")
+        Check(1)..EVRSettingsError.p("peError", "")
     )
 
     void(
@@ -49,7 +49,7 @@ val VRSettings = "VRSettings".nativeClass(
         charASCII.const.p("pchSection", ""),
         charASCII.const.p("pchSettingsKey", ""),
         int32_t("nValue", ""),
-        Check(1)..EVRSettingsError.p.OUT("peError", "")
+        Check(1)..EVRSettingsError.p("peError", "")
     )
 
     void(
@@ -59,7 +59,7 @@ val VRSettings = "VRSettings".nativeClass(
         charASCII.const.p("pchSection", ""),
         charASCII.const.p("pchSettingsKey", ""),
         float("flValue", ""),
-        Check(1)..EVRSettingsError.p.OUT("peError", "")
+        Check(1)..EVRSettingsError.p("peError", "")
     )
 
     void(
@@ -69,7 +69,7 @@ val VRSettings = "VRSettings".nativeClass(
         charASCII.const.p("pchSection", ""),
         charASCII.const.p("pchSettingsKey", ""),
         charASCII.const.p("pchValue", ""),
-        Check(1)..EVRSettingsError.p.OUT("peError", "")
+        Check(1)..EVRSettingsError.p("peError", "")
     )
 
     bool(
@@ -78,7 +78,7 @@ val VRSettings = "VRSettings".nativeClass(
 
         charASCII.const.p("pchSection", ""),
         charASCII.const.p("pchSettingsKey", ""),
-        Check(1)..EVRSettingsError.p.OUT("peError", "")
+        Check(1)..EVRSettingsError.p("peError", "")
     )
 
     int32_t(
@@ -87,7 +87,7 @@ val VRSettings = "VRSettings".nativeClass(
 
         charASCII.const.p("pchSection", ""),
         charASCII.const.p("pchSettingsKey", ""),
-        Check(1)..EVRSettingsError.p.OUT("peError", "")
+        Check(1)..EVRSettingsError.p("peError", "")
     )
 
     float(
@@ -96,7 +96,7 @@ val VRSettings = "VRSettings".nativeClass(
 
         charASCII.const.p("pchSection", ""),
         charASCII.const.p("pchSettingsKey", ""),
-        Check(1)..EVRSettingsError.p.OUT("peError", "")
+        Check(1)..EVRSettingsError.p("peError", "")
     )
 
     void(
@@ -105,9 +105,9 @@ val VRSettings = "VRSettings".nativeClass(
 
         charASCII.const.p("pchSection", ""),
         charASCII.const.p("pchSettingsKey", ""),
-        char.p.OUT("pchValue", ""),
+        char.p("pchValue", ""),
         AutoSize("pchValue")..uint32_t("unValueLen", ""),
-        Check(1)..EVRSettingsError.p.OUT("peError", "")
+        Check(1)..EVRSettingsError.p("peError", "")
     )
 
     void(
@@ -115,7 +115,7 @@ val VRSettings = "VRSettings".nativeClass(
         "",
 
         charASCII.const.p("pchSection", ""),
-        Check(1)..EVRSettingsError.p.OUT("peError", "")
+        Check(1)..EVRSettingsError.p("peError", "")
     )
 
     void(
@@ -124,6 +124,6 @@ val VRSettings = "VRSettings".nativeClass(
 
         charASCII.const.p("pchSection", ""),
         charASCII.const.p("pchSettingsKey", ""),
-        Check(1)..EVRSettingsError.p.OUT("peError", "")
+        Check(1)..EVRSettingsError.p("peError", "")
     )
 }

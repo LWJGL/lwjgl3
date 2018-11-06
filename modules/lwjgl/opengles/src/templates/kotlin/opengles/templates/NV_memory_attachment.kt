@@ -66,7 +66,7 @@ val NV_memory_attachment = "NVMemoryAttachment".nativeClassGLES("NV_memory_attac
         GLenum("pname", ""),
         GLint("first", ""),
         AutoSize("params")..GLsizei("count", ""),
-        GLuint.p.OUT("params", "")
+        GLuint.p("params", "")
     )
 
     void(

@@ -153,6 +153,6 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
         VkPhysicalDevice("physicalDevice", "The physical device to query the display handle on."),
         Display.p("dpy", "A connection to the X11 server from which {@code rrOutput} was queried."),
         RROutput("rrOutput", "An X11 RandR output ID."),
-        Check(1)..VkDisplayKHR.p.OUT("pDisplay", "The corresponding {@code VkDisplayKHR} handle will be returned here.")
+        Check(1)..VkDisplayKHR.p("pDisplay", "The corresponding {@code VkDisplayKHR} handle will be returned here.")
     )
 }

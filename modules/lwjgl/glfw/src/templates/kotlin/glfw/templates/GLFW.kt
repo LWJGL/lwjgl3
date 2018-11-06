@@ -838,9 +838,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        nullable..Check(1)..int.p.OUT("major", "where to store the major version number, or #NULL"),
-        nullable..Check(1)..int.p.OUT("minor", "where to store the minor version number, or #NULL"),
-        nullable..Check(1)..int.p.OUT("rev", "where to store the revision number, or #NULL"),
+        nullable..Check(1)..int.p("major", "where to store the major version number, or #NULL"),
+        nullable..Check(1)..int.p("minor", "where to store the minor version number, or #NULL"),
+        nullable..Check(1)..int.p("rev", "where to store the revision number, or #NULL"),
         since = "version 1.0"
     )
 
@@ -882,7 +882,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        Check("1")..nullable..charUTF8.const.p.p.OUT("description", "where to store the error description pointer, or #NULL"),
+        Check("1")..nullable..charUTF8.const.p.p("description", "where to store the error description pointer, or #NULL"),
 
         returnDoc = "the last error code for the calling thread, or #NO_ERROR (zero)",
         since = "version 3.3"
@@ -927,7 +927,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         This function must only be called from the main thread.
         """,
 
-        AutoSizeResult..int.p.OUT("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
+        AutoSizeResult..int.p("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
 
         returnDoc = "an array of monitor handlers, or #NULL if no monitors were found or if an error occurred",
         since = "version 3.0"
@@ -958,8 +958,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWmonitor.p("monitor", "the monitor to query"),
-        nullable..Check(1)..int.p.OUT("xpos", "where to store the monitor x-coordinate, or #NULL"),
-        nullable..Check(1)..int.p.OUT("ypos", "where to store the monitor y-coordinate, or #NULL"),
+        nullable..Check(1)..int.p("xpos", "where to store the monitor x-coordinate, or #NULL"),
+        nullable..Check(1)..int.p("ypos", "where to store the monitor y-coordinate, or #NULL"),
         since = "version 3.0"
     )
 
@@ -983,8 +983,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWmonitor.p("monitor", "the monitor to query"),
-        nullable..Check(1)..int.p.OUT("widthMM", "where to store the width, in millimetres, of the monitor's display area, or #NULL"),
-        nullable..Check(1)..int.p.OUT("heightMM", "where to store the height, in millimetres, of the monitor's display area, or #NULL"),
+        nullable..Check(1)..int.p("widthMM", "where to store the width, in millimetres, of the monitor's display area, or #NULL"),
+        nullable..Check(1)..int.p("heightMM", "where to store the height, in millimetres, of the monitor's display area, or #NULL"),
         since = "version 3.0"
     )
 
@@ -1004,8 +1004,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWmonitor.p("monitor", "the monitor to query"),
-        nullable..Check(1)..float.p.OUT("xscale", "where to store the x-axis content scale, or #NULL"),
-        nullable..Check(1)..float.p.OUT("yscale", "where to store the y-axis content scale, or #NULL"),
+        nullable..Check(1)..float.p("xscale", "where to store the x-axis content scale, or #NULL"),
+        nullable..Check(1)..float.p("yscale", "where to store the y-axis content scale, or #NULL"),
 
         since = "version 3.3"
     )
@@ -1092,7 +1092,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWmonitor.p("monitor", "the monitor to query"),
-        AutoSizeResult..int.p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
+        AutoSizeResult..int.p("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
 
         returnDoc = "an array of video modes, or #NULL if an error occurred",
         since = "version 1.0"
@@ -1533,8 +1533,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the window to query"),
-        nullable..Check(1)..int.p.OUT("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or #NULL"),
-        nullable..Check(1)..int.p.OUT("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or #NULL"),
+        nullable..Check(1)..int.p("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or #NULL"),
+        nullable..Check(1)..int.p("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or #NULL"),
 
         since = "version 3.0"
     )
@@ -1576,8 +1576,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the window whose size to retrieve"),
-        nullable..Check(1)..int.p.OUT("width", "where to store the width, in screen coordinates, of the client area, or #NULL"),
-        nullable..Check(1)..int.p.OUT("height", "where to store the height, in screen coordinates, of the client area, or #NULL"),
+        nullable..Check(1)..int.p("width", "where to store the width, in screen coordinates, of the client area, or #NULL"),
+        nullable..Check(1)..int.p("height", "where to store the height, in screen coordinates, of the client area, or #NULL"),
 
         since = "version 1.0"
     )
@@ -1673,8 +1673,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the window whose framebuffer to query"),
-        nullable..Check(1)..int.p.OUT("width", "where to store the width, in pixels, of the framebuffer, or #NULL"),
-        nullable..Check(1)..int.p.OUT("height", "where to store the height, in pixels, of the framebuffer, or #NULL"),
+        nullable..Check(1)..int.p("width", "where to store the width, in pixels, of the framebuffer, or #NULL"),
+        nullable..Check(1)..int.p("height", "where to store the height, in pixels, of the framebuffer, or #NULL"),
 
         since = "version 3.0"
     )
@@ -1695,10 +1695,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the window whose frame size to query"),
-        Check(1)..nullable..int.p.OUT("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or #NULL"),
-        Check(1)..nullable..int.p.OUT("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or #NULL"),
-        Check(1)..nullable..int.p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or #NULL"),
-        Check(1)..nullable..int.p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or #NULL"),
+        Check(1)..nullable..int.p("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or #NULL"),
+        Check(1)..nullable..int.p("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or #NULL"),
+        Check(1)..nullable..int.p("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or #NULL"),
+        Check(1)..nullable..int.p("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or #NULL"),
 
         since = "version 3.1"
     )
@@ -1717,8 +1717,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the window to query"),
-        nullable..Check(1)..float.p.OUT("xscale", "where to store the x-axis content scale, or #NULL"),
-        nullable..Check(1)..float.p.OUT("yscale", "where to store the y-axis content scale, or #NULL"),
+        nullable..Check(1)..float.p("xscale", "where to store the x-axis content scale, or #NULL"),
+        nullable..Check(1)..float.p("yscale", "where to store the y-axis content scale, or #NULL"),
 
         since = "version 3.3"
     )
@@ -2498,8 +2498,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the desired window"),
-        nullable..Check(1)..double.p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or #NULL"),
-        nullable..Check(1)..double.p.OUT("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or #NULL."),
+        nullable..Check(1)..double.p("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or #NULL"),
+        nullable..Check(1)..double.p("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or #NULL."),
 
         since = "version 1.0"
     )
@@ -2792,7 +2792,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         int("jid", "the joystick to query"),
-        AutoSizeResult..int.p.OUT(
+        AutoSizeResult..int.p(
             "count",
             "where to store the number of axis values in the returned array. This is set to zero if the joystick is not present or an error occurred."
         ),
@@ -2820,7 +2820,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         int("jid", "the joystick to query"),
-        AutoSizeResult..int.p.OUT(
+        AutoSizeResult..int.p(
             "count",
             "where to store the number of button states in the returned array. This is set to zero if the joystick is not present or an error occurred."
         ),
@@ -2868,7 +2868,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         """,
 
         int("jid", "the joystick to query"),
-        AutoSizeResult..int.p.OUT(
+        AutoSizeResult..int.p(
             "count",
             "where to store the number of hat states in the returned array. This is set to zero if the joystick is not present or an error occurred."
         ),
@@ -3056,7 +3056,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         """,
 
         int("jid", "the joystick to query"),
-        GLFWgamepadstate.p.OUT("state", "the gamepad input state of the joystick"),
+        GLFWgamepadstate.p("state", "the gamepad input state of the joystick"),
 
         returnDoc = "{@code true} if successful, or {@code false} if no joystick is connected, it has no gamepad mapping or an error occurred",
         since = "version 3.3"

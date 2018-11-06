@@ -53,7 +53,7 @@ val rmtS32 = typedef(int32_t, "rmtS32")
 val rmtS64 = typedef(int64_t, "rmtS64")
 
 // Const, null-terminated string pointer
-val rmtPStr = typedef(charASCII.p, "rmtPStr")
+val rmtPStr = typedef(charASCII.const.p, "rmtPStr")
 
 // Handle to the main remotery instance
 val Remotery = "Remotery".opaque

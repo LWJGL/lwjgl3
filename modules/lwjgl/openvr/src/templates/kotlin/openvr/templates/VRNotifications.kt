@@ -33,7 +33,7 @@ val VRNotifications = "VRNotifications".nativeClass(
         charASCII.const.p("pchText", ""),
         EVRNotificationStyle("style", "", "EVRNotificationStyle_\\w+"),
         nullable..NotificationBitmap_t.const.p("pImage", ""),
-        Check(1)..VRNotificationId.p.OUT("pNotificationId", "")
+        Check(1)..VRNotificationId.p("pNotificationId", "")
     )
 
     EVRNotificationError(

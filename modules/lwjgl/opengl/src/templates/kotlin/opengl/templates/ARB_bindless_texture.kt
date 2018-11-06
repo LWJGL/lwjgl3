@@ -260,6 +260,6 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 
         GLuint("index", "the generic vertex attribute index"),
         GLenum("pname", "the parameter to query"),
-        Check(1)..ReturnParam..GLuint64.p.OUT("params", "a buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLuint64.p("params", "a buffer in which to place the returned data")
     )
 }

@@ -117,7 +117,7 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
 
         GLenum("target", ""),
         GLuint("index", ""),
-        ReturnParam..Check(1)..GLfloat.p.OUT("data", "")
+        ReturnParam..Check(1)..GLfloat.p("data", "")
     )
 
     void(

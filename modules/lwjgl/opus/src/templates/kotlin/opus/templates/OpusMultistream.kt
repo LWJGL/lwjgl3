@@ -113,7 +113,7 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
             """
         ),
         int("application", "the target encoder application"),
-        Check(1)..nullable..int.p.OUT("error", "returns #OK on success, or a negative error code on failure")
+        Check(1)..nullable..int.p("error", "returns #OK on success, or a negative error code on failure")
     )
 
     OpusMSEncoder.p(
@@ -123,11 +123,11 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
         opus_int32("Fs", ""),
         AutoSize("mapping")..int("channels", ""),
         int("mapping_family", ""),
-        Check(1)..int.p.OUT("streams", ""),
-        Check(1)..int.p.OUT("coupled_streams", ""),
-        unsigned_char.p.OUT("mapping", ""),
+        Check(1)..int.p("streams", ""),
+        Check(1)..int.p("coupled_streams", ""),
+        unsigned_char.p("mapping", ""),
         int("application", ""),
-        Check(1)..nullable..int.p.OUT("error", "")
+        Check(1)..nullable..int.p("error", "")
     )
 
     int(
@@ -177,9 +177,9 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
         OpusMSEncoder.p("st", ""),
         opus_int32("Fs", ""),
         AutoSize("mapping")..int("channels", ""),
-        Check(1)..int.p.OUT("streams", ""),
-        Check(1)..int.p.OUT("coupled_streams", ""),
-        unsigned_char.const.p.OUT("mapping", ""),
+        Check(1)..int.p("streams", ""),
+        Check(1)..int.p("coupled_streams", ""),
+        unsigned_char.const.p("mapping", ""),
         int("application", "")
     )
 
@@ -199,7 +199,7 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
             from using the LPC or hybrid modes.
             """
         ),
-        unsigned_char.p.OUT("data", "output payload. This must contain storage for at {@code max_data_bytes}."),
+        unsigned_char.p("data", "output payload. This must contain storage for at {@code max_data_bytes}."),
         AutoSize("data")..opus_int32(
             "max_data_bytes",
             """
@@ -234,7 +234,7 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
             from using the LPC or hybrid modes.
             """
         ),
-        unsigned_char.p.OUT("data", "output payload. This must contain storage for at {@code max_data_bytes}."),
+        unsigned_char.p("data", "output payload. This must contain storage for at {@code max_data_bytes}."),
         AutoSize("data")..opus_int32(
             "max_data_bytes",
             """
@@ -295,7 +295,7 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
             """
         ),
         unsigned_char.const.p("mapping", "mapping from coded channels to output channels"),
-        Check(1)..nullable..int.p.OUT("error", "returns #OK on success, or a negative error code on failure")
+        Check(1)..nullable..int.p("error", "returns #OK on success, or a negative error code on failure")
     )
 
     int(
@@ -335,7 +335,7 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
         Check(
             // Reading OpusMSDecoder internal state here
             "frame_size * memGetInt(st)"
-        )..opus_int16.p.OUT("pcm", "output signal, with interleaved samples. This must contain room for {@code frame_size*channels} samples."),
+        )..opus_int16.p("pcm", "output signal, with interleaved samples. This must contain room for {@code frame_size*channels} samples."),
         int(
             "frame_size",
             """
@@ -368,7 +368,7 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
         Check(
             // Reading OpusMSDecoder internal state here
             "frame_size * memGetInt(st)"
-        )..float.p.OUT("pcm", "output signal, with interleaved samples. (This must contain room for {@code frame_size*channels} samples.)"),
+        )..float.p("pcm", "output signal, with interleaved samples. (This must contain room for {@code frame_size*channels} samples.)"),
         int(
             "frame_size",
             """

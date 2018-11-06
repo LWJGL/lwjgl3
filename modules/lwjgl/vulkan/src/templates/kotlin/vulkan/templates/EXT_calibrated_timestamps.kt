@@ -134,8 +134,8 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
         """,
 
         VkPhysicalDevice("physicalDevice", "the physical device from which to query the set of calibrateable time domains."),
-        AutoSize("pTimeDomains")..Check(1)..uint32_t.p.INOUT("pTimeDomainCount", "a pointer to an integer related to the number of calibrateable time domains available or queried, as described below."),
-        nullable..VkTimeDomainEXT.p.OUT("pTimeDomains", "either {@code NULL} or a pointer to an array of {@code VkTimeDomainEXT} values, indicating the supported calibrateable time domains.")
+        AutoSize("pTimeDomains")..Check(1)..uint32_t.p("pTimeDomainCount", "a pointer to an integer related to the number of calibrateable time domains available or queried, as described below."),
+        nullable..VkTimeDomainEXT.p("pTimeDomains", "either {@code NULL} or a pointer to an array of {@code VkTimeDomainEXT} values, indicating the supported calibrateable time domains.")
     )
 
     VkResult(
@@ -193,7 +193,7 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
         VkDevice("device", "the logical device used to perform the query."),
         AutoSize("pTimestampInfos", "pTimestamps")..uint32_t("timestampCount", "the number of timestamps to query."),
         VkCalibratedTimestampInfoEXT.const.p("pTimestampInfos", "a pointer to an array of {@code timestampCount} number of structures of type ##VkCalibratedTimestampInfoEXT, describing the time domains the calibrated timestamps should be captured from."),
-        uint64_t.p.OUT("pTimestamps", "a pointer to an array of {@code timestampCount} number of 64-bit unsigned integer values in which the requested calibrated timestamp values are returned."),
-        Check(1)..uint64_t.p.OUT("pMaxDeviation", "a pointer to a 64-bit unsigned integer value in which the strictly positive maximum deviation, in nanoseconds, of the calibrated timestamp values is returned.")
+        uint64_t.p("pTimestamps", "a pointer to an array of {@code timestampCount} number of 64-bit unsigned integer values in which the requested calibrated timestamp values are returned."),
+        Check(1)..uint64_t.p("pMaxDeviation", "a pointer to a 64-bit unsigned integer value in which the strictly positive maximum deviation, in nanoseconds, of the calibrated timestamp values is returned.")
     )
 }

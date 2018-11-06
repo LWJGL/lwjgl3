@@ -149,7 +149,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 
         GLenum("target", ""),
         GLenum("pname", ""),
-        Check(1)..ReturnParam..GLuint64EXT.p.OUT("params", "")
+        Check(1)..ReturnParam..GLuint64EXT.p("params", "")
     )
 
     void(
@@ -158,7 +158,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 
         GLuint("buffer", ""),
         GLenum("pname", ""),
-        Check(1)..ReturnParam..GLuint64EXT.p.OUT("params", "")
+        Check(1)..ReturnParam..GLuint64EXT.p("params", "")
     )
 
     void(
@@ -166,7 +166,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
         "",
 
         GLenum("value", ""),
-        Check(1)..ReturnParam..GLuint64EXT.p.OUT("result", "")
+        Check(1)..ReturnParam..GLuint64EXT.p("result", "")
     )
 
     void(
@@ -192,7 +192,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 
         GLuint("program", ""),
         GLint("location", ""),
-        Check(1)..ReturnParam..GLuint64EXT.p.OUT("params", "")
+        Check(1)..ReturnParam..GLuint64EXT.p("params", "")
     )
 
     void(

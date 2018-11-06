@@ -93,7 +93,6 @@ val EWL = nullable..Parameter(
 val EVENT = Check(1)..nullable..Parameter(
     cl_event.p,
     "event",
-    ParameterType.OUT,
     """
     Returns an event object that identifies this particular command and can be used to query or queue a wait for this particular command to complete.
     {@code event} can be #NULL in which case it will not be possible for the application to query the status of this command or queue a wait for this command to
@@ -105,7 +104,6 @@ val EVENT = Check(1)..nullable..Parameter(
 val ERROR_RET = Check(1)..nullable..Parameter(
     cl_int.p,
     "errcode_ret",
-    ParameterType.OUT,
     "will return an appropriate error code. If $errcode_ret is #NULL, no error code is returned."
 )
 
@@ -118,7 +116,6 @@ val PARAM_VALUE_SIZE = AutoSize("param_value")..Parameter(
 val PARAM_VALUE_SIZE_RET = Check(1)..nullable..Parameter(
     size_t.p,
     "param_value_size_ret",
-    ParameterType.OUT,
     "the actual size in bytes of data being queried by {@code param_value}. If #NULL, it is ignored."
 )
 
@@ -565,7 +562,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
             be greater than zero.
             """
         ),
-        nullable..cl_platform_id.p.OUT(
+        nullable..cl_platform_id.p(
             "platforms",
             """
             returns a list of OpenCL platforms found. The {@code cl_platform_id} values returned in {@code platforms} can be used to identify a specific OpenCL
@@ -573,7 +570,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
             specified by {@code num_entries} or the number of OpenCL platforms available.
             """
         ),
-        Check(1)..nullable..cl_uint.p.OUT(
+        Check(1)..nullable..cl_uint.p(
             "num_platforms",
             "returns the number of OpenCL platforms available. If {@code num_platforms} is #NULL, this argument is ignored."
         ),
@@ -600,7 +597,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         PARAM_VALUE_SIZE,
         MultiType(
             PointerMapping.DATA_LONG
-        )..nullable..void.p.OUT("param_value", "the memory location where appropriate values for a given {@code param_name} will be returned"),
+        )..nullable..void.p("param_value", "the memory location where appropriate values for a given {@code param_name} will be returned"),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -637,7 +634,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
             than zero.
             """
         ),
-        nullable..cl_device_id.p.OUT(
+        nullable..cl_device_id.p(
             "devices",
             """
             returns a list of OpenCL devices found. The {@code cl_device_id} values returned in {@code devices} can be used to identify a specific OpenCL
@@ -645,7 +642,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
             by {@code num_entries} or the number of OpenCL devices whose type matches {@code device_type}.
             """
         ),
-        Check(1)..nullable..cl_uint.p.OUT(
+        Check(1)..nullable..cl_uint.p(
             "num_devices",
             "returns the number of OpenCL devices available that match {@code device_type}. If {@code num_devices} is #NULL, this argument is ignored."
         ),
@@ -680,7 +677,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         PARAM_VALUE_SIZE,
         MultiType(
             PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER
-        )..nullable..void.p.OUT("param_value", param_value),
+        )..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -825,7 +822,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         cl_context("context", "the OpenCL context being queried"),
         cl_context_info("param_name", "an enumeration constant that specifies the information to query", ContextInfo),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p.OUT("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -936,7 +933,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         cl_command_queue("command_queue", "the command-queue being queried"),
         cl_command_queue_info("param_name", "the information to query", CommandQueueInfo),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER)..nullable..void.p.OUT("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -1040,7 +1037,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         AutoSize("ptr")..size_t("size", "the size in bytes of data being read"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..void.p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
+        )..void.p("ptr", "the pointer to buffer in host memory where data is to be read into"),
         NEWL,
         EWL,
         EVENT,
@@ -1424,14 +1421,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
             "num_entries",
             "the number of entries that can be returned in the memory location given by {@code image_formats}"
         ),
-        nullable..cl_image_format.p.OUT(
+        nullable..cl_image_format.p(
             "image_formats",
             """
             a pointer to a memory location where the list of supported image formats are returned. Each entry describes a ##CLImageFormat structure
             supported by the OpenCL implementation. If {@code image_formats} is #NULL, it is ignored.
             """
         ),
-        Check(1)..nullable..cl_uint.p.OUT(
+        Check(1)..nullable..cl_uint.p(
             "num_image_formats",
             """
             the actual number of supported image formats for a specific context and values specified by {@code flags}. If {@code num_image_formats} is #NULL, it
@@ -1523,7 +1520,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         ),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..void.p.OUT("ptr", "the pointer to a buffer in host memory where image data is to be read to"),
+        )..Unsafe..void.p("ptr", "the pointer to a buffer in host memory where image data is to be read to"),
         NEWL,
         EWL,
         EVENT,
@@ -2035,8 +2032,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
             must be 1. If {@code image} is a 1D image array object, {@code region[2]} must be 1. The values in {@code region} cannot be 0.
             """
         ),
-        Check(1)..size_t.p.OUT("image_row_pitch", "the scan-line pitch in bytes for the mapped region. This must be a non-#NULL value."),
-        Check(1)..nullable..size_t.p.OUT(
+        Check(1)..size_t.p("image_row_pitch", "the scan-line pitch in bytes for the mapped region. This must be a non-#NULL value."),
+        Check(1)..nullable..size_t.p(
             "image_slice_pitch",
             """
             returns the size in bytes of each 2D slice of a 3D image or the size of each 1D or 2D image in a 1D or 2D image array for the mapped region. For a
@@ -2110,7 +2107,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         MultiType(
             PointerMapping.DATA_INT,
             PointerMapping.DATA_POINTER
-        )..nullable..void.p.OUT("param_value", param_value),
+        )..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -2220,7 +2217,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
             PointerMapping.DATA_INT,
             PointerMapping.DATA_LONG,
             PointerMapping.DATA_POINTER
-        )..nullable..void.p.OUT("param_value", param_value),
+        )..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -2321,7 +2318,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         MultiType(
             PointerMapping.DATA_INT,
             PointerMapping.DATA_POINTER
-        )..nullable..void.p.OUT("param_value", param_value),
+        )..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -2420,7 +2417,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
             {@code lengths[i]}. {@code lengths[i]} cannot be zero and {@code binaries[i]} cannot be a #NULL pointer.
             """
         ),
-        nullable..cl_int.p.OUT(
+        nullable..cl_int.p(
             "binary_status",
             """
             returns whether the program binary for each device specified in device_list was loaded successfully or not. It is an array of {@code num_devices}
@@ -2576,7 +2573,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         cl_program("program", "the program object being queried"),
         cl_program_info("param_name", "the information to query", ProgramInfo),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p.OUT("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -2606,7 +2603,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         cl_device_id("device", "the device for which build information is being queried. {@code device} must be a valid device associated with {@code program}."),
         cl_program_info("param_name", "the information to query", ProgramBuildInfo),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p.OUT("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -2676,14 +2673,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
         cl_program("program", "a program object with a successfully built executable"),
         AutoSize("kernels")..cl_uint("num_kernels", "the size of memory pointed to by kernels specified as the number of cl_kernel entries"),
-        nullable..cl_kernel.p.OUT(
+        nullable..cl_kernel.p(
             "kernels",
             """
             the buffer where the kernel objects for kernels in {@code program} will be returned. If {@code kernels} is #NULL, it is ignored. If {@code kernels}
             is not #NULL, {@code num_kernels} must be greater than or equal to the number of kernels in {@code program}.
             """
         ),
-        Check(1)..nullable..cl_uint.p.OUT(
+        Check(1)..nullable..cl_uint.p(
             "num_kernels_ret",
             "the number of kernels in {@code program}. If {@code num_kernels_ret} is #NULL, it is ignored."
         ),
@@ -2850,7 +2847,7 @@ kernel void image_filter (
         cl_kernel("kernel", "the kernel object being queried"),
         cl_kernel_info("param_name", "the information to query", KernelInfo),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p.OUT("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -2882,7 +2879,7 @@ kernel void image_filter (
         ),
         cl_kernel_work_group_info("param_name", "the information to query", KernelWorkGroupInfo),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER)..nullable..void.p.OUT("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -3158,7 +3155,7 @@ kernel void image_filter (
         cl_event("event", "the event object being queried"),
         cl_event_info("param_name", "the information to query", EventInfo),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p.OUT("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -3296,7 +3293,7 @@ kernel void image_filter (
         cl_event("event", "the event object"),
         cl_profiling_info("param_name", "the profiling data to query", ProfilingInfo),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_LONG)..nullable..void.p.OUT("param_value", param_value),
+        MultiType(PointerMapping.DATA_LONG)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =

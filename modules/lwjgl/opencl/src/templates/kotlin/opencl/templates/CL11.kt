@@ -301,7 +301,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         BufferRectHostSlicePitch,
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..void.p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
+        )..Unsafe..void.p("ptr", "the pointer to buffer in host memory where data is to be read into"),
         NEWL,
         EWL,
         EVENT,

@@ -51,9 +51,9 @@ typedef struct HmdColor_t
         start rendering.
         """,
 
-        TrackedDevicePose_t.p.OUT("pRenderPoseArray", ""),
+        TrackedDevicePose_t.p("pRenderPoseArray", ""),
         AutoSize("pRenderPoseArray")..uint32_t("unRenderPoseArrayCount", ""),
-        nullable..TrackedDevicePose_t.p.OUT("pGamePoseArray", ""),
+        nullable..TrackedDevicePose_t.p("pGamePoseArray", ""),
         AutoSize("pGamePoseArray")..uint32_t("unGamePoseArrayCount", "")
     )
 
@@ -61,9 +61,9 @@ typedef struct HmdColor_t
         "GetLastPoses",
         "Get the last set of poses returned by #WaitGetPoses().",
 
-        TrackedDevicePose_t.p.OUT("pRenderPoseArray", ""),
+        TrackedDevicePose_t.p("pRenderPoseArray", ""),
         AutoSize("pRenderPoseArray")..uint32_t("unRenderPoseArrayCount", ""),
-        TrackedDevicePose_t.p.OUT("pGamePoseArray", ""),
+        TrackedDevicePose_t.p("pGamePoseArray", ""),
         AutoSize("pGamePoseArray")..uint32_t("unGamePoseArrayCount", "")
     )
 
@@ -76,8 +76,8 @@ typedef struct HmdColor_t
         """,
 
         TrackedDeviceIndex_t("unDeviceIndex", ""),
-        nullable..TrackedDevicePose_t.p.OUT("pOutputPose", ""),
-        nullable..TrackedDevicePose_t.p.OUT("pOutputGamePose", ""),
+        nullable..TrackedDevicePose_t.p("pOutputPose", ""),
+        nullable..TrackedDevicePose_t.p("pOutputGamePose", ""),
 
         returnDoc =
         """
@@ -143,7 +143,7 @@ typedef struct HmdColor_t
         Be sure to set {@code timing.size = sizeof(Compositor_FrameTiming)} on struct passed in before calling this function.
         """,
 
-        Compositor_FrameTiming.p.OUT("pTiming", ""),
+        Compositor_FrameTiming.p("pTiming", ""),
         AutoSize("pTiming")..uint32_t("unFramesAgo", "")
     )
 
@@ -154,7 +154,7 @@ typedef struct HmdColor_t
         the first entry's {@code m_nSize} needs to be set, as the rest will be inferred from that. Returns total number of entries filled out.
         """,
 
-        Compositor_FrameTiming.p.OUT("pTiming", ""),
+        Compositor_FrameTiming.p("pTiming", ""),
         AutoSize("pTiming")..uint32_t("nFrames", "")
     )
 
@@ -172,7 +172,7 @@ typedef struct HmdColor_t
         "GetCumulativeStats",
         "Fills out stats accumulated for the last connected application.",
 
-        Compositor_CumulativeStats.p.OUT("pStats", ""),
+        Compositor_CumulativeStats.p("pStats", ""),
         Expression("CompositorCumulativeStats.SIZEOF")..uint32_t("nStatsSizeInBytes", "must be {@code sizeof( Compositor_CumulativeStats )}")
     )
 
@@ -223,7 +223,7 @@ typedef struct HmdColor_t
         a lat-long stereo pair.
         """,
 
-        Texture_t.p("pTextures", ""),
+        Texture_t.const.p("pTextures", ""),
         AutoSize("pTextures")..uint32_t("unTextureCount", "")
     )
 
@@ -336,7 +336,7 @@ typedef struct HmdColor_t
 
         EVREye("eEye", ""),
         opaque_p("pD3D11DeviceOrResource", ""),
-        Check(1)..void.p.p.OUT("ppD3D11ShaderResourceView", "")
+        Check(1)..void.p.p("ppD3D11ShaderResourceView", "")
     )
 
     void(
@@ -351,8 +351,8 @@ typedef struct HmdColor_t
         "Access to mirror textures from OpenGL.",
 
         EVREye("eEye", ""),
-        Check(1)..glUInt_t.p.OUT("pglTextureId", ""),
-        Check(1)..glSharedTextureHandle_t.p.OUT("pglSharedTextureHandle", "")
+        Check(1)..glUInt_t.p("pglTextureId", ""),
+        Check(1)..glSharedTextureHandle_t.p("pglSharedTextureHandle", "")
     )
 
     bool(
@@ -384,7 +384,7 @@ typedef struct HmdColor_t
         separated list of-required instance extensions to enable in {@code VkCreateInstance}.
         """,
 
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchValue", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchValue", ""),
         AutoSize("pchValue")..uint32_t("unBufferSize", "")
     )
 
@@ -396,7 +396,7 @@ typedef struct HmdColor_t
         """,
 
         VkPhysicalDevice_T.p("pPhysicalDevice", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchValue", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchValue", ""),
         AutoSize("pchValue")..uint32_t("unBufferSize", "")
     )
 

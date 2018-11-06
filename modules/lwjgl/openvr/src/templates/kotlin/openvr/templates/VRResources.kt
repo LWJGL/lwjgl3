@@ -20,7 +20,7 @@ val VRResources = "VRResources".nativeClass(
         "Loads the specified resource into the provided buffer if large enough.",
 
         charASCII.const.p("pchResourceName", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchBuffer", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchBuffer", ""),
         AutoSize("pchBuffer")..uint32_t("unBufferLen", ""),
 
         returnDoc = "the size in bytes of the buffer required to hold the specified resource"
@@ -35,7 +35,7 @@ val VRResources = "VRResources".nativeClass(
 
         charASCII.const.p("pchResourceName", ""),
         charASCII.const.p("pchResourceTypeDirectory", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchPathBuffer", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchPathBuffer", ""),
         AutoSize("pchPathBuffer")..uint32_t("unBufferLen", "")
     )
 }

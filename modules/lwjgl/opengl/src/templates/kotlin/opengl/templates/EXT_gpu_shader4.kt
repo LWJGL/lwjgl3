@@ -195,7 +195,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 
         GLuint("index", vertexAttribIndex),
         GLenum("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-        Check(4)..ReturnParam..GLint.p.OUT("params", "returns the requested data")
+        Check(4)..ReturnParam..GLint.p("params", "returns the requested data")
     )
 
     void(
@@ -204,7 +204,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 
         GLuint("index", vertexAttribIndex),
         GLenum("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-        Check(4)..ReturnParam..GLuint.p.OUT("params", "returns the requested data")
+        Check(4)..ReturnParam..GLuint.p("params", "returns the requested data")
     )
 
     void(
@@ -213,7 +213,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 
         GLuint("program", ""),
         GLint("location", ""),
-        Check(1)..ReturnParam..GLuint.p.OUT("params", "")
+        Check(1)..ReturnParam..GLuint.p("params", "")
     )
 
     void(

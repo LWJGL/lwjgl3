@@ -307,12 +307,12 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 
         GLuint("count", "the number of debug messages to retrieve from the log"),
         AutoSize("messageLog")..GLsizei("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
-        Check("count")..nullable..GLenum.p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
-        Check("count")..nullable..GLenum.p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
-        Check("count")..nullable..GLuint.p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
-        Check("count")..nullable..GLenum.p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
-        Check("count")..nullable..GLsizei.p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
-        nullable..GLcharUTF8.p.OUT("messageLog", "an array of characters that will receive the messages")
+        Check("count")..nullable..GLenum.p("sources", "an array of variables to receive the sources of the retrieved messages"),
+        Check("count")..nullable..GLenum.p("types", "an array of variables to receive the types of the retrieved messages"),
+        Check("count")..nullable..GLuint.p("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
+        Check("count")..nullable..GLenum.p("severities", "an array of variables to receive the severites of the retrieved messages"),
+        Check("count")..nullable..GLsizei.p("lengths", "an array of variables to receive the lengths of the received messages"),
+        nullable..GLcharUTF8.p("messageLog", "an array of characters that will receive the messages")
     )
 
     void(
@@ -320,7 +320,7 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
         "",
 
         GLenum("pname", ""),
-        ReturnParam..Check(1)..void.p.p.OUT("params", "")
+        ReturnParam..Check(1)..void.p.p("params", "")
     )
 
     void(
@@ -384,8 +384,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
         ),
         GLuint("name", "the name of the object whose label to retrieve"),
         AutoSize("label")..GLsizei("bufSize", "the length of the buffer whose address is in {@code label}"),
-        Check(1)..nullable..GLsizei.p.OUT("length", "the address of a variable to receive the length of the object label"),
-        Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH_KHR)")..GLcharUTF8.p.OUT("label", "a string that will receive the object label")
+        Check(1)..nullable..GLsizei.p("length", "the address of a variable to receive the length of the object label"),
+        Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH_KHR)")..GLcharUTF8.p("label", "a string that will receive the object label")
     )
 
     void(
@@ -403,7 +403,7 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 
         opaque_p("ptr", "the name of the sync object whose label to retrieve"),
         AutoSize("label")..GLsizei("bufSize", "the length of the buffer whose address is in {@code label}"),
-        Check(1)..nullable..GLsizei.p.OUT("length", "a variable to receive the length of the object label"),
-        Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH_KHR)")..GLcharUTF8.p.OUT("label", "a string that will receive the object label")
+        Check(1)..nullable..GLsizei.p("length", "a variable to receive the length of the object label"),
+        Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH_KHR)")..GLcharUTF8.p("label", "a string that will receive the object label")
     )
 }

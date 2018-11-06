@@ -164,7 +164,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
         GLint("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
         Check(
             expression = "GL11.glGetTexLevelParameteri(target, level, GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB)", debug = true
-        )..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "a buffer in which to return the compressed texture image")
+        )..PIXEL_PACK_BUFFER..void.p("pixels", "a buffer in which to return the compressed texture image")
     )
 
 }

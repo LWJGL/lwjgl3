@@ -394,7 +394,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
 
         GLuint("shader", "the shader object to be queried"),
         GLenum("pname", "the object parameter", "#SHADER_TYPE #DELETE_STATUS #COMPILE_STATUS #INFO_LOG_LENGTH #SHADER_SOURCE_LENGTH"),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested object parameter")
+        Check(1)..ReturnParam..GLint.p("params", "the requested object parameter")
     )
 
     void(
@@ -413,7 +413,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
             #ACTIVE_ATOMIC_COUNTER_BUFFERS  #COMPUTE_WORK_GROUP_SIZE
             """
         ),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested object parameter")
+        Check(1)..ReturnParam..GLint.p("params", "the requested object parameter")
     )
 
     void(
@@ -422,12 +422,12 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
 
         GLuint("shader", "the shader object whose information log is to be queried"),
         AutoSize("infoLog")..GLsizei("maxLength", "the size of the character buffer for storing the returned information log"),
-        Check(1)..nullable..GLsizei.p.OUT("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
+        Check(1)..nullable..GLsizei.p("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
         Return(
             "length",
             "glGetShaderi(shader, GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8.p.OUT("infoLog", "an array of characters that is used to return the information log")
+        )..GLcharUTF8.p("infoLog", "an array of characters that is used to return the information log")
     )
 
     void(
@@ -436,12 +436,12 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
 
         GLuint("program", "the program object whose information log is to be queried"),
         AutoSize("infoLog")..GLsizei("maxLength", "the size of the character buffer for storing the returned information log"),
-        Check(1)..nullable..GLsizei.p.OUT("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
+        Check(1)..nullable..GLsizei.p("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
         Return(
             "length",
             "glGetProgrami(program, GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8.p.OUT("infoLog", "an array of characters that is used to return the information log")
+        )..GLcharUTF8.p("infoLog", "an array of characters that is used to return the information log")
     )
 
     void(
@@ -451,7 +451,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
         GLuint("program", "the program object to be queried"),
         AutoSize("shaders")..GLsizei("maxCount", "the size of the array for storing the returned object names"),
         Check(1)..nullable..GLsizei.p("count", "the number of names actually returned in {@code shaders}"),
-        GLuint.p.OUT("shaders", "an array that is used to return the names of attached shader objects")
+        GLuint.p("shaders", "an array that is used to return the names of attached shader objects")
     )
 
     GLint(
@@ -470,12 +470,12 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
         GLuint("index", "the index of the uniform variable to be queried"),
         AutoSize("name")..GLsizei("maxLength", "the maximum number of characters OpenGL is allowed to write in the character buffer indicated by {@code name}"),
         Check(1)..nullable..GLsizei.p("length", "the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than NULL is passed"),
-        Check(1)..GLint.p.OUT("size", "the size of the uniform variable"),
-        Check(1)..GLenum.p.OUT("type", "the data type of the uniform variable"),
+        Check(1)..GLint.p("size", "the size of the uniform variable"),
+        Check(1)..GLenum.p("type", "the data type of the uniform variable"),
         Return(
             "length",
             "glGetProgrami(program, GL_ACTIVE_UNIFORM_MAX_LENGTH)"
-        )..GLcharASCII.p.OUT("name", "a null terminated string containing the name of the uniform variable")
+        )..GLcharASCII.p("name", "a null terminated string containing the name of the uniform variable")
     )
 
     void(
@@ -484,7 +484,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
 
         GLuint("program", "the program object to be queried"),
         GLint("location", "the location of the uniform variable to be queried"),
-        Check(1)..ReturnParam..GLfloat.p.OUT("params", "the value of the specified uniform variable")
+        Check(1)..ReturnParam..GLfloat.p("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -493,7 +493,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
 
         GLuint("program", "the program object to be queried"),
         GLint("location", "the location of the uniform variable to be queried"),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "the value of the specified uniform variable")
+        Check(1)..ReturnParam..GLint.p("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -507,7 +507,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
             "length",
             "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8.p.OUT("source", "an array of characters that is used to return the source code string")
+        )..GLcharUTF8.p("source", "an array of characters that is used to return the source code string")
     )
 
     // ARB_vertex_shader
@@ -705,19 +705,19 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
         GLuint("program", "the program object to be queried"),
         GLuint("index", "the index of the attribute variable to be queried"),
         AutoSize("name")..GLsizei("maxLength", "the maximum number of characters OpenGL is allowed to write in the character buffer indicated by {@code name}"),
-        Check(1)..nullable..GLsizei.p.OUT(
+        Check(1)..nullable..GLsizei.p(
             "length",
             """
             the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than
             #NULL is passed
             """
         ),
-        Check(1)..GLint.p.OUT("size", "the size of the attribute variable"),
-        Check(1)..GLenum.p.OUT("type", "the data type of the attribute variable"),
+        Check(1)..GLint.p("size", "the size of the attribute variable"),
+        Check(1)..GLenum.p("type", "the data type of the attribute variable"),
         Return(
             "length",
             "glGetProgrami(program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH)"
-        )..GLcharASCII.p.OUT("name", "a null terminated string containing the name of the attribute variable")
+        )..GLcharASCII.p("name", "a null terminated string containing the name of the attribute variable")
     )
 
     GLint(
@@ -738,7 +738,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
             "the symbolic name of the vertex attribute parameter to be queried",
             "#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING $VERTEX_ATTRIBUTES #VERTEX_ATTRIB_ARRAY_INTEGER #VERTEX_ATTRIB_ARRAY_DIVISOR"
         ),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "returns the requested data")
+        Check(1)..ReturnParam..GLint.p("params", "returns the requested data")
     )
 
     void(
@@ -747,7 +747,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
 
         GLuint("index", "the generic vertex attribute parameter to be queried"),
         GLenum("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-        Check(4)..GLfloat.p.OUT("params", "returns the requested data")
+        Check(4)..GLfloat.p("params", "returns the requested data")
     )
 
     void(
@@ -756,7 +756,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
 
         GLuint("index", "the generic vertex attribute parameter to be queried"),
         GLenum("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-        Check(4)..GLdouble.p.OUT("params", "returns the requested data")
+        Check(4)..GLdouble.p("params", "returns the requested data")
     )
 
 
@@ -766,7 +766,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
 
         GLuint("index", "the generic vertex attribute parameter to be queried"),
         GLenum("pname", "the symbolic name of the generic vertex attribute parameter to be returned", "#VERTEX_ATTRIB_ARRAY_POINTER"),
-        Check(1)..ReturnParam..void.p.p.OUT("pointer", "the pointer value")
+        Check(1)..ReturnParam..void.p.p("pointer", "the pointer value")
     )
 
     // ARB_fragment_shader

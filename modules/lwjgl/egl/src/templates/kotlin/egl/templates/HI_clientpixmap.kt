@@ -27,6 +27,6 @@ val HI_clientpixmap = "HIClientpixmap".nativeClassEGL("HI_clientpixmap", postfix
 
         EGLDisplay("dpy", ""),
         EGLConfig("config", ""),
-        EGLClientPixmapHI.p("pixmap", "")
+        Input..EGLClientPixmapHI.p("pixmap", "")
     )
 }

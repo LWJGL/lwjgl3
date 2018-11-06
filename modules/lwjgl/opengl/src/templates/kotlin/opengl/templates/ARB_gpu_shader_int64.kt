@@ -148,7 +148,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
         GLuint("program", "the program object to be queried"),
         GLint("location", "the location of the uniform variable to be queried"),
-        ReturnParam..Check(1)..GLint64.p.OUT("params", "the value of the specified uniform variable")
+        ReturnParam..Check(1)..GLint64.p("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -157,7 +157,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
         GLuint("program", "the program object to be queried"),
         GLint("location", "the location of the uniform variable to be queried"),
-        ReturnParam..Check(1)..GLuint64.p.OUT("params", "the value of the specified uniform variable")
+        ReturnParam..Check(1)..GLuint64.p("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -167,7 +167,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
         GLuint("program", "the program object to be queried"),
         GLint("location", "the location of the uniform variable to be queried"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of values to write in {@code params}"),
-        ReturnParam..GLint64.p.OUT("params", "the value of the specified uniform variable")
+        ReturnParam..GLint64.p("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -177,6 +177,6 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
         GLuint("program", "the program object to be queried"),
         GLint("location", "the location of the uniform variable to be queried"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of values to write in {@code params}"),
-        ReturnParam..GLuint64.p.OUT("params", "the value of the specified uniform variable")
+        ReturnParam..GLuint64.p("params", "the value of the specified uniform variable")
     )
 }

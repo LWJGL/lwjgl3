@@ -97,7 +97,7 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NA
         Important note: changes the string.
         """,
 
-        charASCII.p("input", ""),
+        Input..charASCII.p("input", ""),
         charASCII.const.p("units", ""),
         float("dpi", "")
     )
@@ -106,14 +106,14 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NA
         "DuplicatePath",
         "Duplicates a path.",
 
-        NSVGpath.p("p", "")
+        Input..NSVGpath.p("p", "")
     )
 
     void(
         "Delete",
         "Deletes an image.",
 
-        NSVGimage.p("image", "")
+        Input..NSVGimage.p("image", "")
     )
 
     // nanosvgrast.h
@@ -129,11 +129,11 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NA
         "Rasterizes SVG image, returns RGBA image (non-premultiplied alpha).",
 
         NSVGrasterizer.p("r", "pointer to rasterizer context"),
-        NSVGimage.p("image", "pointer to image to rasterize"),
+        Input..NSVGimage.p("image", "pointer to image to rasterize"),
         float("tx", "image x offset (applied after scaling)"),
         float("ty", "image y offset (applied after scaling)"),
         float("scale", "image scale"),
-        Check("h * stride")..unsigned_char.p.OUT("dst", "pointer to destination image data, 4 bytes per pixel (RGBA)"),
+        Check("h * stride")..unsigned_char.p("dst", "pointer to destination image data, 4 bytes per pixel (RGBA)"),
         int("w", "width of the image to render"),
         int("h", "height of the image to render"),
         int("stride", "number of bytes per scaleline in the destination buffer")

@@ -35,7 +35,7 @@ val VRInput = "VRInput".nativeClass(
         "Returns a handle for an action set. This handle is used for all performance-sensitive calls.",
 
         charASCII.const.p("pchActionSetName", ""),
-        Check(1)..VRActionSetHandle_t.p.OUT("pHandle", "")
+        Check(1)..VRActionSetHandle_t.p("pHandle", "")
     )
 
     EVRInputError(
@@ -43,7 +43,7 @@ val VRInput = "VRInput".nativeClass(
         "Returns a handle for an action. This handle is used for all performance-sensitive calls.",
 
         charASCII.const.p("pchActionName", ""),
-        Check(1)..VRActionHandle_t.p.OUT("pHandle", "")
+        Check(1)..VRActionHandle_t.p("pHandle", "")
     )
 
     EVRInputError(
@@ -51,7 +51,7 @@ val VRInput = "VRInput".nativeClass(
         "Returns a handle for any path in the input system. E.g. {@code /user/hand/right}.",
 
         charASCII.const.p("pchInputSourcePath", ""),
-        Check(1)..VRInputValueHandle_t.p.OUT("pHandle", "")
+        Check(1)..VRInputValueHandle_t.p("pHandle", "")
     )
 
     EVRInputError(
@@ -61,7 +61,7 @@ val VRInput = "VRInput".nativeClass(
         {@code UpdateActionState}.
         """,
 
-        VRActiveActionSet_t.p.INOUT("pSets", ""),
+        VRActiveActionSet_t.p("pSets", ""),
         uint32_t("unSizeOfVRSelectedActionSet_t", ""),
         AutoSize("pSets")..uint32_t("unSetCount", "")
     )
@@ -74,7 +74,7 @@ val VRInput = "VRInput".nativeClass(
         """,
 
         VRActionHandle_t("action", ""),
-        InputDigitalActionData_t.p.OUT("pActionData", ""),
+        InputDigitalActionData_t.p("pActionData", ""),
         Expression("InputDigitalActionData.SIZEOF")..uint32_t("unActionDataSize", ""),
         VRInputValueHandle_t("ulRestrictToDevice", "")
     )
@@ -87,7 +87,7 @@ val VRInput = "VRInput".nativeClass(
         """,
 
         VRActionHandle_t("action", ""),
-        InputAnalogActionData_t.p.OUT("pActionData", ""),
+        InputAnalogActionData_t.p("pActionData", ""),
         Expression("InputAnalogActionData.SIZEOF")..uint32_t("unActionDataSize", ""),
         VRInputValueHandle_t("ulRestrictToDevice", "")
     )
@@ -99,7 +99,7 @@ val VRInput = "VRInput".nativeClass(
         VRActionHandle_t("action", ""),
         ETrackingUniverseOrigin("eOrigin", "", "ETrackingUniverseOrigin_\\w+"),
         float("fPredictedSecondsFromNow", ""),
-        InputPoseActionData_t.p.OUT("pActionData", ""),
+        InputPoseActionData_t.p("pActionData", ""),
         Expression("InputPoseActionData.SIZEOF")..uint32_t("unActionDataSize", ""),
         VRInputValueHandle_t("ulRestrictToDevice", "")
     )
@@ -109,7 +109,7 @@ val VRInput = "VRInput".nativeClass(
         "Reads the state of a skeletal action given its handle.",
 
         VRActionHandle_t("action", ""),
-        InputSkeletalActionData_t.p.OUT("pActionData", ""),
+        InputSkeletalActionData_t.p("pActionData", ""),
         Expression("InputSkeletalActionData.SIZEOF")..uint32_t("unActionDataSize", ""),
         VRInputValueHandle_t("ulRestrictToDevice", "")
     )
@@ -121,7 +121,7 @@ val VRInput = "VRInput".nativeClass(
         VRActionHandle_t("action", ""),
         EVRSkeletalTransformSpace("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
         EVRSkeletalMotionRange("eMotionRange", "", "EVRSkeletalMotionRange_\\w+"),
-        VRBoneTransform_t.p.OUT("pTransformArray", ""),
+        VRBoneTransform_t.p("pTransformArray", ""),
         AutoSize("pTransformArray")..uint32_t("unTransformArrayCount", ""),
         VRInputValueHandle_t("ulRestrictToDevice", "")
     )
@@ -136,9 +136,9 @@ val VRInput = "VRInput".nativeClass(
         VRActionHandle_t("action", ""),
         EVRSkeletalTransformSpace("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
         EVRSkeletalMotionRange("eMotionRange", "", "EVRSkeletalMotionRange_\\w+"),
-        nullable..void.p.OUT("pvCompressedData", ""),
+        nullable..void.p("pvCompressedData", ""),
         AutoSize("pvCompressedData")..uint32_t("unCompressedSize", ""),
-        Check(1)..nullable..uint32_t.p.OUT("punRequiredCompressedSize", ""),
+        Check(1)..nullable..uint32_t.p("punRequiredCompressedSize", ""),
         VRInputValueHandle_t("ulRestrictToDevice", "")
     )
 
@@ -148,8 +148,8 @@ val VRInput = "VRInput".nativeClass(
 
         void.p("pvCompressedBuffer", ""),
         AutoSize("pvCompressedBuffer")..uint32_t("unCompressedBufferSize", ""),
-        Check(1)..EVRSkeletalTransformSpace.p.OUT("peTransformSpace", ""),
-        VRBoneTransform_t.p.OUT("pTransformArray", ""),
+        Check(1)..EVRSkeletalTransformSpace.p("peTransformSpace", ""),
+        VRBoneTransform_t.p("pTransformArray", ""),
         AutoSize("pTransformArray")..uint32_t("unTransformArrayCount", "")
     )
 
@@ -171,7 +171,7 @@ val VRInput = "VRInput".nativeClass(
 
         VRActionSetHandle_t("actionSetHandle", ""),
         VRActionHandle_t("digitalActionHandle", ""),
-        VRInputValueHandle_t.p.OUT("originsOut", ""),
+        VRInputValueHandle_t.p("originsOut", ""),
         AutoSize("originsOut")..uint32_t("originOutCount", "")
     )
 
@@ -180,7 +180,7 @@ val VRInput = "VRInput".nativeClass(
         "Retrieves the name of the origin in the current language.",
 
         VRInputValueHandle_t("origin", ""),
-        charASCII.p.OUT("pchNameArray", ""),
+        charASCII.p("pchNameArray", ""),
         AutoSize("pchNameArray")..uint32_t("unNameArraySize", "")
     )
 
@@ -189,7 +189,7 @@ val VRInput = "VRInput".nativeClass(
         "Retrieves useful information for the origin of this action.",
 
         VRInputValueHandle_t("origin", ""),
-        InputOriginInfo_t.p.OUT("pOriginInfo", ""),
+        InputOriginInfo_t.p("pOriginInfo", ""),
         Expression("InputOriginInfo.SIZEOF")..uint32_t("unOriginInfoSize", "")
     )
 

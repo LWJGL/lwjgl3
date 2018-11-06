@@ -80,7 +80,7 @@ public class VRDriverManager {
      * @param pchDriverName the driver name
      */
     @NativeType("DriverHandle_t")
-    public static long VRDriverManager_GetDriverHandle(@NativeType("char *") ByteBuffer pchDriverName) {
+    public static long VRDriverManager_GetDriverHandle(@NativeType("char const *") ByteBuffer pchDriverName) {
         if (CHECKS) {
             checkNT1(pchDriverName);
         }
@@ -93,7 +93,7 @@ public class VRDriverManager {
      * @param pchDriverName the driver name
      */
     @NativeType("DriverHandle_t")
-    public static long VRDriverManager_GetDriverHandle(@NativeType("char *") CharSequence pchDriverName) {
+    public static long VRDriverManager_GetDriverHandle(@NativeType("char const *") CharSequence pchDriverName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             ByteBuffer pchDriverNameEncoded = stack.ASCII(pchDriverName);

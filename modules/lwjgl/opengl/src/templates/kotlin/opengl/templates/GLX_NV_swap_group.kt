@@ -46,8 +46,8 @@ val GLX_NV_swap_group = "GLXNVSwapGroup".nativeClassGLX("GLX_NV_swap_group", pos
 
         DISPLAY,
         GLXDrawable("drawable", ""),
-        Check(1)..GLuint.p.OUT("group", ""),
-        Check(1)..GLuint.p.OUT("barrier", "")
+        Check(1)..GLuint.p("group", ""),
+        Check(1)..GLuint.p("barrier", "")
     )
 
     Bool(
@@ -56,8 +56,8 @@ val GLX_NV_swap_group = "GLXNVSwapGroup".nativeClassGLX("GLX_NV_swap_group", pos
 
         DISPLAY,
         int("screen", ""),
-        Check(1)..GLuint.p.OUT("maxGroups", ""),
-        Check(1)..GLuint.p.OUT("maxBarriers", "")
+        Check(1)..GLuint.p("maxGroups", ""),
+        Check(1)..GLuint.p("maxBarriers", "")
     )
 
     Bool(
@@ -66,7 +66,7 @@ val GLX_NV_swap_group = "GLXNVSwapGroup".nativeClassGLX("GLX_NV_swap_group", pos
 
         DISPLAY,
         int("screen", ""),
-        Check(1)..GLuint.p.OUT("count", "")
+        Check(1)..GLuint.p("count", "")
     )
 
     Bool(

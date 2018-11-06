@@ -1373,19 +1373,6 @@ public class Vma {
         nvmaFreeStatsString(allocator, memAddress(pStatsString));
     }
 
-    public static void vmaFreeStatsString(@NativeType("VmaAllocator") long allocator, @NativeType("char *") CharSequence pStatsString) {
-        if (CHECKS) {
-            check(allocator);
-        }
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            ByteBuffer pStatsStringEncoded = stack.ASCII(pStatsString);
-            nvmaFreeStatsString(allocator, memAddress(pStatsStringEncoded));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
     // --- [ vmaFindMemoryTypeIndex ] ---
 
     /** Unsafe version of: {@link #vmaFindMemoryTypeIndex FindMemoryTypeIndex} */

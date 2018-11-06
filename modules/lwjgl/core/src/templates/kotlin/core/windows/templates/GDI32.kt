@@ -167,7 +167,7 @@ val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", 
             {@code bytes} bytes of data to that structure. Set this value to PIXELFORMATDESCRIPTOR#SIZEOF.
             """
         ),
-        nullable..LPPIXELFORMATDESCRIPTOR.OUT(
+        nullable..LPPIXELFORMATDESCRIPTOR(
             "pixelFormatDescriptor",
             """
             a ##PIXELFORMATDESCRIPTOR structure whose members the function sets with pixel format data. The function stores the number of bytes copied to

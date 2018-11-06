@@ -28,7 +28,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         """,
 
         charASCII.const.p("pchRenderModelName", ""),
-        Check(1)..RenderModel_t.p.p.OUT("ppRenderModel", "")
+        Check(1)..RenderModel_t.p.p("ppRenderModel", "")
     )
 
     void(
@@ -43,7 +43,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         "Loads and returns a texture for use in the application.",
 
         TextureID_t("textureId", ""),
-        Check(1)..RenderModel_TextureMap_t.p.p.OUT("ppTexture", "")
+        Check(1)..RenderModel_TextureMap_t.p.p("ppTexture", "")
     )
 
     void(
@@ -59,7 +59,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
 
         TextureID_t("textureId", ""),
         opaque_p("pD3D11Device", ""),
-        Check(1)..void.p.p.OUT("ppD3D11Texture2D", "")
+        Check(1)..void.p.p("ppD3D11Texture2D", "")
     )
 
     EVRRenderModelError(
@@ -86,7 +86,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         """,
 
         uint32_t("unRenderModelIndex", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchRenderModelName", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchRenderModelName", ""),
         AutoSize("pchRenderModelName")..uint32_t("unRenderModelNameLen", "")
     )
 
@@ -117,7 +117,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
 
         charASCII.const.p("pchRenderModelName", ""),
         uint32_t("unComponentIndex", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchComponentName", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchComponentName", ""),
         AutoSize("pchComponentName")..uint32_t("unComponentNameLen", "")
     )
 
@@ -145,7 +145,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
 
         charASCII.const.p("pchRenderModelName", ""),
         charASCII.const.p("pchComponentName", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchComponentRenderModelName", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchComponentRenderModelName", ""),
         AutoSize("pchComponentRenderModelName")..uint32_t("unComponentRenderModelNameLen", "")
     )
 
@@ -157,7 +157,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         charASCII.const.p("pchComponentName", ""),
         VRInputValueHandle_t("devicePath", ""),
         RenderModel_ControllerMode_State_t.const.p("pState", ""),
-        RenderModel_ComponentState_t.p.OUT("pComponentState", ""),
+        RenderModel_ComponentState_t.p("pComponentState", ""),
 
         returnDoc =
         """
@@ -178,7 +178,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         charASCII.const.p("pchComponentName", ""),
         VRControllerState_t.const.p("pControllerState", ""),
         RenderModel_ControllerMode_State_t.const.p("pState", ""),
-        RenderModel_ComponentState_t.p.OUT("pComponentState", "")
+        RenderModel_ComponentState_t.p("pComponentState", "")
     )
 
     bool(
@@ -194,9 +194,9 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         "Returns the URL of the thumbnail image for this rendermodel.",
 
         charASCII.const.p("pchRenderModelName", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchThumbnailURL", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchThumbnailURL", ""),
         AutoSize("pchThumbnailURL")..uint32_t("unThumbnailURLLen", ""),
-        Check(1)..EVRRenderModelError.p.OUT("peError", "")
+        Check(1)..EVRRenderModelError.p("peError", "")
     )
 
     uint32_t(
@@ -207,9 +207,9 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         """,
 
         charASCII.const.p("pchRenderModelName", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchOriginalPath", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchOriginalPath", ""),
         AutoSize("pchOriginalPath")..uint32_t("unOriginalPathLen", ""),
-        Check(1)..EVRRenderModelError.p.OUT("peError", "")
+        Check(1)..EVRRenderModelError.p("peError", "")
     )
 
     charASCII.const.p(

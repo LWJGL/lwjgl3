@@ -73,7 +73,7 @@ ENABLE_WARNINGS()""")
         "32_copyState",
         "",
 
-        XXH32_state_t.p.OUT("dst_state", ""),
+        XXH32_state_t.p("dst_state", ""),
         XXH32_state_t.const.p("src_state", "")
     )
 
@@ -127,7 +127,7 @@ ENABLE_WARNINGS()""")
         result into and from its canonical format. This way, hash values can be written into a file / memory, remaining comparable across different systems.
         """,
 
-        XXH32_canonical_t.p.OUT("dst", "the destination canonical representation"),
+        XXH32_canonical_t.p("dst", "the destination canonical representation"),
         XXH32_hash_t("hash", "the source hash")
     )
 
@@ -170,7 +170,7 @@ ENABLE_WARNINGS()""")
         "64_copyState",
         "",
 
-        XXH64_state_t.p.OUT("dst_state", ""),
+        XXH64_state_t.p("dst_state", ""),
         XXH64_state_t.const.p("src_state", "")
     )
 
@@ -202,7 +202,7 @@ ENABLE_WARNINGS()""")
         "64_canonicalFromHash",
         "64-bit version of #32_canonicalFromHash().",
 
-        XXH64_canonical_t.p.OUT("dst", "the destination canonical representation"),
+        XXH64_canonical_t.p("dst", "the destination canonical representation"),
         XXH64_hash_t("hash", "the source hash")
     )
 

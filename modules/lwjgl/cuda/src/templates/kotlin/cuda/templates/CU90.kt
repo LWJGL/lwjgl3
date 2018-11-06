@@ -60,7 +60,7 @@ val CU90 = "CU90".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "LaunchCooperativeKernelMultiDevice",
         "",
 
-        CUDA_LAUNCH_PARAMS.p("launchParamsList", ""),
+        Input..CUDA_LAUNCH_PARAMS.p("launchParamsList", ""),
         AutoSize("launchParamsList")..unsigned_int("numDevices", ""),
         unsigned_int("flags", "")
     )

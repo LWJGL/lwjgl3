@@ -25,7 +25,7 @@ val VRIOBuffer = "VRIOBuffer".nativeClass(
         EIOBufferMode("mode", "", "EIOBufferMode_\\w+"),
         uint32_t("unElementSize", ""),
         uint32_t("unElements", ""),
-        Check(1)..IOBufferHandle_t.p.OUT("pulBuffer", "")
+        Check(1)..IOBufferHandle_t.p("pulBuffer", "")
     )
 
     EIOBufferError(
@@ -40,9 +40,9 @@ val VRIOBuffer = "VRIOBuffer".nativeClass(
         "Reads up to {@code unBytes} from buffer into {@code *pDst}, returning number of bytes read in {@code *punRead}",
 
         IOBufferHandle_t("ulBuffer", ""),
-        void.p.OUT("pDst", ""),
+        void.p("pDst", ""),
         AutoSize("pDst")..uint32_t("unBytes", ""),
-        Check(1)..uint32_t.p.OUT("punRead", "")
+        Check(1)..uint32_t.p("punRead", "")
     )
 
     EIOBufferError(
@@ -50,7 +50,7 @@ val VRIOBuffer = "VRIOBuffer".nativeClass(
         "Writes {@code unBytes} of data from {@code *pSrc} into a buffer.",
 
         IOBufferHandle_t("ulBuffer", ""),
-        void.p.OUT("pSrc", ""),
+        void.p("pSrc", ""),
         AutoSize("pSrc")..uint32_t("unBytes", "")
     )
 

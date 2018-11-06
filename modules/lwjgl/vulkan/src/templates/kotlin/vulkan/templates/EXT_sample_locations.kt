@@ -169,6 +169,6 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
 
         VkPhysicalDevice("physicalDevice", "the physical device from which to query the additional multisampling capabilities."),
         VkSampleCountFlagBits("samples", "the sample count to query the capabilities for."),
-        VkMultisamplePropertiesEXT.p.OUT("pMultisampleProperties", "a pointer to a structure of type ##VkMultisamplePropertiesEXT, in which information about the additional multisampling capabilities specific to the sample count is returned.")
+        VkMultisamplePropertiesEXT.p("pMultisampleProperties", "a pointer to a structure of type ##VkMultisamplePropertiesEXT, in which information about the additional multisampling capabilities specific to the sample count is returned.")
     )
 }

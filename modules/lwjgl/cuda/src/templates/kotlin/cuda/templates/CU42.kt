@@ -31,7 +31,7 @@ val CU42 = "CU42".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "CtxGetSharedMemConfig",
         "",
 
-        Check(1)..CUsharedconfig.p.OUT("pConfig", "")
+        Check(1)..CUsharedconfig.p("pConfig", "")
     )
 
     CUresult(

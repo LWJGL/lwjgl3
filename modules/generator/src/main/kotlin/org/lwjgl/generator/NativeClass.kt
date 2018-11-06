@@ -187,6 +187,7 @@ class NativeClass internal constructor(
 ) : GeneratorTargetNative(module, className, nativeSubPath) {
     companion object {
         private val JDOC_LINK_PATTERN = """(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""".toRegex()
+        private val VOID_ARGS = Parameter(void, ANONYMOUS, "", "")
     }
 
     var extends: NativeClass? = null
@@ -458,7 +459,7 @@ class NativeClass internal constructor(
                         it.has<SingleValue>() ||
                         (it.isAutoSizeResultOut && func.hideAutoSizeResultParam) ||
                         it.has<PointerArray>() ||
-                        (it.nativeType is CharSequenceType && it.paramType !== ParameterType.OUT)
+                        (it.nativeType is CharSequenceType && it.isInput)
                     )
                 }
             }
@@ -666,24 +667,12 @@ class NativeClass internal constructor(
         Constant(this, EnumValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
 
     operator fun DataType.invoke(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) =
-        createParameter(name, ParameterType.IN, javadoc, links, linkMode)
-    fun PointerType<*>.OUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) =
-        createParameter(name, ParameterType.OUT, javadoc, links, linkMode)
-    fun <T : DataType> PointerType<T>.INOUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) =
-        createParameter(name, ParameterType.INOUT, javadoc, links, linkMode)
+        if (links.isEmpty() || !links.contains('+'))
+            Parameter(this, name, javadoc, links, linkMode)
+        else
+            Parameter(this, name) { linkMode.appendLinks(javadoc, linksFromRegex(links)) }
 
-    private fun NativeType.createParameter(
-        name: String,
-        paramType: ParameterType,
-        javadoc: String,
-        links: String,
-        linkMode: LinkMode = LinkMode.SINGLE
-    ) = if (links.isEmpty() || !links.contains('+'))
-        Parameter(this, name, paramType, javadoc, links, linkMode)
-    else
-        Parameter(this, name, paramType) { linkMode.appendLinks(javadoc, linksFromRegex(links)) }
-
-    operator fun VoidType.invoke() = void.createParameter(ANONYMOUS, ParameterType.IN, "", "")
+    operator fun VoidType.invoke() = VOID_ARGS
     operator fun VoidType.invoke(
         className: String,
         functionDoc: String,

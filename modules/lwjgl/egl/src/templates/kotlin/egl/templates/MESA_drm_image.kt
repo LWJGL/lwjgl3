@@ -44,8 +44,8 @@ val MESA_drm_image = "MESADRMImage".nativeClassEGL("MESA_drm_image", postfix = M
 
         EGLDisplay("dpy", ""),
         EGLImageKHR("image", ""),
-        nullable..Check(1)..EGLint.p.OUT("name", ""),
-        nullable..Check(1)..EGLint.p.OUT("handle", ""),
-        nullable..Check(1)..EGLint.p.OUT("stride", "")
+        nullable..Check(1)..EGLint.p("name", ""),
+        nullable..Check(1)..EGLint.p("handle", ""),
+        nullable..Check(1)..EGLint.p("stride", "")
     )
 }

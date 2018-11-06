@@ -113,6 +113,6 @@ val KHR_external_semaphore_capabilities = "KHRExternalSemaphoreCapabilities".nat
 
         VkPhysicalDevice("physicalDevice", "the physical device from which to query the semaphore capabilities."),
         VkPhysicalDeviceExternalSemaphoreInfo.const.p("pExternalSemaphoreInfo", "points to an instance of the ##VkPhysicalDeviceExternalSemaphoreInfo structure, describing the parameters that would be consumed by #CreateSemaphore()."),
-        VkExternalSemaphoreProperties.p.OUT("pExternalSemaphoreProperties", "points to an instance of the ##VkExternalSemaphoreProperties structure in which capabilities are returned.")
+        VkExternalSemaphoreProperties.p("pExternalSemaphoreProperties", "points to an instance of the ##VkExternalSemaphoreProperties structure in which capabilities are returned.")
     )
 }

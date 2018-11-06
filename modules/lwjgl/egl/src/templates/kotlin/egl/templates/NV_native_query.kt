@@ -20,7 +20,7 @@ val NV_native_query = "NVNativeQuery".nativeClassEGL("NV_native_query", postfix 
         "",
 
         EGLDisplay("dpy", ""),
-        Check(1)..EGLNativeDisplayType.p.OUT("display_id", "")
+        Check(1)..EGLNativeDisplayType.p("display_id", "")
     )
 
     EGLBoolean(
@@ -29,7 +29,7 @@ val NV_native_query = "NVNativeQuery".nativeClassEGL("NV_native_query", postfix 
 
         EGLDisplay("dpy", ""),
         EGLSurface("surf", ""),
-        Check(1)..EGLNativeWindowType.p.OUT("window", "")
+        Check(1)..EGLNativeWindowType.p("window", "")
     )
 
     EGLBoolean(
@@ -38,6 +38,6 @@ val NV_native_query = "NVNativeQuery".nativeClassEGL("NV_native_query", postfix 
 
         EGLDisplay("dpy", ""),
         EGLSurface("surf", ""),
-        Check(1)..EGLNativePixmapType.p.OUT("pixmap", "")
+        Check(1)..EGLNativePixmapType.p("pixmap", "")
     )
 }

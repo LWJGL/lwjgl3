@@ -105,7 +105,7 @@ val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_", library
         "CreateGlobalInstance",
         "",
 
-        Check(1)..Remotery.p.p.OUT("remotery", "")
+        Check(1)..Remotery.p.p("remotery", "")
     )
 
     void(
@@ -146,7 +146,7 @@ val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_", library
 
         rmtPStr("name", ""),
         rmtU32("flags", "", rmtSampleFlags),
-        Check(1)..nullable..rmtU32.p.INOUT("hash_cache", "")
+        Check(1)..nullable..rmtU32.p("hash_cache", "")
     )
 
     void(

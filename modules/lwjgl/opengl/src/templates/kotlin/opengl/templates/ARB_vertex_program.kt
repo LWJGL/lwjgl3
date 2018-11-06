@@ -287,7 +287,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         """,
 
         AutoSize("programs")..GLsizei("n", "the number of program names to genereate"),
-        ReturnParam..GLuint.p.OUT("programs", "an array in which to return the generated program names")
+        ReturnParam..GLuint.p("programs", "an array in which to return the generated program names")
     )
 
     val VP_INDEX = GLuint("index", "the environment parameter index")
@@ -337,7 +337,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
         TARGET,
         VP_INDEX,
-        Check(4)..GLfloat.p.OUT("params", "a buffer in which to place the current parameter value")
+        Check(4)..GLfloat.p("params", "a buffer in which to place the current parameter value")
     )
 
     void(
@@ -346,7 +346,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
         TARGET,
         VP_INDEX,
-        Check(4)..GLdouble.p.OUT("params", "a buffer in which to place the current parameter value")
+        Check(4)..GLdouble.p("params", "a buffer in which to place the current parameter value")
     )
 
     void(
@@ -358,7 +358,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
         TARGET,
         VP_INDEX,
-        Check(4)..GLfloat.p.OUT("params", "a buffer in which to place the current parameter value")
+        Check(4)..GLfloat.p("params", "a buffer in which to place the current parameter value")
     )
 
     void(
@@ -367,7 +367,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
         TARGET,
         VP_INDEX,
-        Check(4)..GLdouble.p.OUT("params", "a buffer in which to place the current parameter value")
+        Check(4)..GLdouble.p("params", "a buffer in which to place the current parameter value")
     )
 
     void(
@@ -379,7 +379,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
         TARGET,
         GLenum("pname", "the parameter to query", PARAMS),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "an array in which to place the parameter value")
+        ReturnParam..Check(1)..GLint.p("params", "an array in which to place the parameter value")
     )
 
     void(
@@ -393,7 +393,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
         TARGET,
         GLenum("pname", "the parameter to query", "#PROGRAM_STRING_ARB"),
-        Check("glGetProgramiARB(target, GL_PROGRAM_LENGTH_ARB)", debug = true)..void.p.OUT("string", "an array in which to place the program string")
+        Check("glGetProgramiARB(target, GL_PROGRAM_LENGTH_ARB)", debug = true)..void.p("string", "an array in which to place the program string")
     )
 
     ARB_vertex_shader reuse "GetVertexAttribfvARB"

@@ -47,9 +47,9 @@ val EXT_output_base = "EXTOutputBase".nativeClassEGL("EXT_output_base", postfix 
 
         EGLDisplay("dpy", ""),
         nullable..noneTerminated..EGLAttrib.const.p("attrib_list", ""),
-        nullable..EGLOutputLayerEXT.p.OUT("layers", ""),
+        nullable..EGLOutputLayerEXT.p("layers", ""),
         AutoSize("layers")..EGLint("max_layers", ""),
-        Check(1)..EGLint.p.OUT("num_layers", "")
+        Check(1)..EGLint.p("num_layers", "")
     )
 
     EGLBoolean(
@@ -58,9 +58,9 @@ val EXT_output_base = "EXTOutputBase".nativeClassEGL("EXT_output_base", postfix 
 
         EGLDisplay("dpy", ""),
         nullable..noneTerminated..EGLAttrib.const.p("attrib_list", ""),
-        nullable..EGLOutputPortEXT.p.OUT("ports", ""),
+        nullable..EGLOutputPortEXT.p("ports", ""),
         AutoSize("ports")..EGLint("max_ports", ""),
-        Check(1)..EGLint.p.OUT("num_ports", "")
+        Check(1)..EGLint.p("num_ports", "")
     )
 
     EGLBoolean(
@@ -80,7 +80,7 @@ val EXT_output_base = "EXTOutputBase".nativeClassEGL("EXT_output_base", postfix 
         EGLDisplay("dpy", ""),
         EGLOutputLayerEXT("layer", ""),
         EGLint("attribute", ""),
-        Check(1)..EGLAttrib.p.OUT("value", "")
+        Check(1)..EGLAttrib.p("value", "")
     )
 
     charASCII.p(
@@ -109,7 +109,7 @@ val EXT_output_base = "EXTOutputBase".nativeClassEGL("EXT_output_base", postfix 
         EGLDisplay("dpy", ""),
         EGLOutputPortEXT("port", ""),
         EGLint("attribute", ""),
-        Check(1)..EGLAttrib.p.OUT("value", "")
+        Check(1)..EGLAttrib.p("value", "")
     )
 
     charASCII.p(

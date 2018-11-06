@@ -435,7 +435,7 @@ if (nb_packets > 0)
         opus_int32("Fs", "sampling rate of input signal (Hz)", "8000 12000 16000 24000 48000"),
         int("channels", "number of channels in input signal", "1 2"),
         int("application", "coding mode", CodingModes),
-        Check(1)..nullable..int.p.OUT("error", "", ErrorCodes)
+        Check(1)..nullable..int.p("error", "", ErrorCodes)
     )
 
     int(
@@ -474,7 +474,7 @@ if (nb_packets > 0)
             from using the LPC or hybrid modes.
             """
         ),
-        unsigned_char.p.OUT("data", "output payload"),
+        unsigned_char.p("data", "output payload"),
         AutoSize("data")..opus_int32(
             "max_data_bytes",
             """
@@ -509,7 +509,7 @@ if (nb_packets > 0)
             from using the LPC or hybrid modes.
             """
         ),
-        unsigned_char.p.OUT("data", "output payload"),
+        unsigned_char.p("data", "output payload"),
         AutoSize("data")..opus_int32(
             "max_data_bytes",
             """
@@ -557,7 +557,7 @@ if (nb_packets > 0)
 
         opus_int32("Fs", "sampling rate of input signal (Hz)", "8000 12000 16000 24000 48000"),
         int("channels", "number of channels to decode", "1 2"),
-        Check(1)..nullable..int.p.OUT("error", "", ErrorCodes)
+        Check(1)..nullable..int.p("error", "", ErrorCodes)
     )
 
     int(
@@ -588,7 +588,7 @@ if (nb_packets > 0)
         Check(
             // Reading OpusDecoder internal state here
             "frame_size * memGetInt(st + 8)"
-        )..opus_int16.p.OUT("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)}"),
+        )..opus_int16.p("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)}"),
         int(
             "frame_size",
             """
@@ -621,7 +621,7 @@ if (nb_packets > 0)
         Check(
             // Reading OpusDecoder internal state here
             "frame_size * memGetInt(st + 8)"
-        )..opus_int16.p.OUT("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)}"),
+        )..opus_int16.p("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)}"),
         int(
             "frame_size",
             """
@@ -670,10 +670,10 @@ if (nb_packets > 0)
 
         unsigned_char.const.p("data", "Opus packet to be parsed"),
         AutoSize("data")..opus_int32("len", "size of data"),
-        Check(1)..nullable..unsigned_char.p.OUT("out_toc", "TOC pointer"),
-        Check(48)..nullable..unsigned_char.const.p.p.OUT("frames", "encapsulated frames"),
-        Check(48)..opus_int16.p.OUT("size", "sizes of the encapsulated frames"),
-        Check(1)..nullable..int.p.OUT("payload_offset", "returns the position of the payload within the packet (in bytes)")
+        Check(1)..nullable..unsigned_char.p("out_toc", "TOC pointer"),
+        Check(48)..nullable..unsigned_char.const.p.p("frames", "encapsulated frames"),
+        Check(48)..opus_int16.p("size", "sizes of the encapsulated frames"),
+        Check(1)..nullable..int.p("payload_offset", "returns the position of the payload within the packet (in bytes)")
     )
 
     int(
@@ -756,10 +756,10 @@ if (nb_packets > 0)
         in the process.
         """,
 
-        Check("frame_size * softclip_mem.remaining()")..float.p.INOUT("pcm", "input PCM and modified PCM"),
+        Check("frame_size * softclip_mem.remaining()")..float.p("pcm", "input PCM and modified PCM"),
         int("frame_size", "number of samples per channel to process"),
         AutoSize("softclip_mem")..int("channels", "number of channels"),
-        float.p.INOUT("softclip_mem", "state memory for the soft clipping process (one float per channel, initialized to zero)")
+        float.p("softclip_mem", "state memory for the soft clipping process (one float per channel, initialized to zero)")
     )
 
     int(
@@ -835,7 +835,7 @@ if (nb_packets > 0)
         OpusRepacketizer.p("rp", "the repacketizer state from which to construct the new packet"),
         int("begin", "the index of the first frame in the current repacketizer state to include in the output"),
         int("end", "one past the index of the last frame in the current repacketizer state to include in the output"),
-        unsigned_char.const.p.OUT("data", "the buffer in which to store the output packet"),
+        unsigned_char.const.p("data", "the buffer in which to store the output packet"),
         AutoSize("data")..opus_int32(
             "maxlen",
             """
@@ -877,7 +877,7 @@ if (nb_packets > 0)
         """,
 
         OpusRepacketizer.p("rp", "the repacketizer state from which to construct the new packet"),
-        unsigned_char.const.p.OUT("data", "the buffer in which to store the output packet"),
+        unsigned_char.const.p("data", "the buffer in which to store the output packet"),
         AutoSize("data")..opus_int32(
             "maxlen",
             """
@@ -894,7 +894,7 @@ if (nb_packets > 0)
         "packet_pad",
         "Pads a given Opus packet to a larger size (possibly changing the TOC sequence).",
 
-        Check("Math.max(len, new_len)")..unsigned_char.const.p.INOUT("data", "the buffer containing the packet to pad"),
+        Check("Math.max(len, new_len)")..unsigned_char.const.p("data", "the buffer containing the packet to pad"),
         opus_int32("len", "the size of the packet. This must be at least 1."),
         opus_int32("new_len", "the desired size of the packet after padding. This must be at least as large as {@code len}."),
 
@@ -909,7 +909,7 @@ if (nb_packets > 0)
         "packet_unpad",
         "Removes all padding from a given Opus packet and rewrite the TOC sequence to minimize space usage.",
 
-        Check("len")..unsigned_char.const.p.INOUT("data", "the buffer containing the packet to strip"),
+        Check("len")..unsigned_char.const.p("data", "the buffer containing the packet to strip"),
         opus_int32("len", "the size of the packet. This must be at least 1."),
 
         returnDoc =
@@ -923,7 +923,7 @@ if (nb_packets > 0)
         "multistream_packet_pad",
         "Pads a given Opus multi-stream packet to a larger size (possibly changing the TOC sequence).",
 
-        Check("Math.max(len, new_len)")..unsigned_char.const.p.INOUT("data", "the buffer containing the packet to pad"),
+        Check("Math.max(len, new_len)")..unsigned_char.const.p("data", "the buffer containing the packet to pad"),
         opus_int32("len", "the size of the packet. This must be at least 1."),
         opus_int32("new_len", "the desired size of the packet after padding. This must be at least 1."),
         int("nb_streams", "the number of streams (not channels) in the packet. This must be at least as large as {@code len}."),
@@ -939,7 +939,7 @@ if (nb_packets > 0)
         "multistream_packet_unpad",
         "Removes all padding from a given Opus multi-stream packet and rewrite the TOC sequence to minimize space usage.",
 
-        Check("len")..unsigned_char.const.p.INOUT("data", "the buffer containing the packet to strip"),
+        Check("len")..unsigned_char.const.p("data", "the buffer containing the packet to strip"),
         opus_int32("len", "the size of the packet. This must be at least 1."),
         int("nb_streams", "the number of streams (not channels) in the packet. This must be at least 1."),
 

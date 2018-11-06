@@ -146,7 +146,7 @@ val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeCla
         """,
 
         VkQueue("queue", "the {@code VkQueue} object the caller would like to retrieve checkpoint data for"),
-        AutoSize("pCheckpointData")..Check(1)..uint32_t.p.INOUT("pCheckpointDataCount", "a pointer to an integer related to the number of checkpoint markers available or queried, as described below."),
-        nullable..VkCheckpointDataNV.p.OUT("pCheckpointData", "either {@code NULL} or a pointer to an array of ##VkCheckpointDataNV structures.")
+        AutoSize("pCheckpointData")..Check(1)..uint32_t.p("pCheckpointDataCount", "a pointer to an integer related to the number of checkpoint markers available or queried, as described below."),
+        nullable..VkCheckpointDataNV.p("pCheckpointData", "either {@code NULL} or a pointer to an array of ##VkCheckpointDataNV structures.")
     )
 }

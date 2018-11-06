@@ -74,8 +74,8 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Ascertains if the GLX extension is defined for an X server.",
 
         DISPLAY,
-        Check(1)..int.p.OUT("error_base", "returns the value of the first error code"),
-        Check(1)..int.p.OUT("event_base", "returns the value of the first event code")
+        Check(1)..int.p("error_base", "returns the value of the first error code"),
+        Check(1)..int.p("event_base", "returns the value of the first event code")
     )
 
     Bool(
@@ -83,8 +83,8 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Queries the GLX version supported.",
 
         DISPLAY,
-        Check(1)..int.p.OUT("major", "returns the major version"),
-        Check(1)..int.p.OUT("minor", "returns the minor version")
+        Check(1)..int.p("major", "returns the major version"),
+        Check(1)..int.p("minor", "returns the minor version")
     )
 
     int(
@@ -92,9 +92,9 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Returns a description of an OpenGL attribute exported by a Visual.",
 
         DISPLAY,
-        XVisualInfo.p("visual", "a pointer to an ##XVisualInfo structure"),
+        Input..XVisualInfo.p("visual", "a pointer to an ##XVisualInfo structure"),
         int("attribute", "the attribute to query"),
-        Check(1)..int.p.OUT("value", "returns the attribute value")
+        Check(1)..int.p("value", "returns the attribute value")
     )
 
     XVisualInfo.p(
@@ -117,7 +117,7 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Creates an OpenGL context.",
 
         DISPLAY,
-        XVisualInfo.p("visual", "a pointer to an ##XVisualInfo structure"),
+        Input..XVisualInfo.p("visual", "a pointer to an ##XVisualInfo structure"),
         nullable..GLXContext("share_list", "the GLXContext to share objects with"),
         Bool("direct", "whether direct rendering is requested")
     )
@@ -228,7 +228,7 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Creates a GLXPixmap from a Pixmap.",
 
         DISPLAY,
-        XVisualInfo.p("visual", "a pointer to a ##XVisualInfo structure"),
+        Input..XVisualInfo.p("visual", "a pointer to a ##XVisualInfo structure"),
         Pixmap("pixmap", "the Pixmap")
     )
 

@@ -27,7 +27,7 @@ val EXT_swap_buffers_with_damage = "EXTSwapBuffersWithDamage".nativeClassEGL("EX
 
         EGLDisplay("dpy", ""),
         EGLSurface("surface", ""),
-        nullable..EGLint.p.OUT("rects", ""),
+        nullable..EGLint.p("rects", ""),
         AutoSize("rects")..EGLint("n_rects", "")
     )
 }

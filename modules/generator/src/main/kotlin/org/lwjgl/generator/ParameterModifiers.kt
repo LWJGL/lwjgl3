@@ -10,6 +10,28 @@ object Virtual : ParameterModifier {
     override val isSpecial = false
 }
 
+/** Marks a pointer-to-not-const parameter as an input parameter. */
+object Input : ParameterModifier {
+    override val isSpecial = false
+    override fun validate(param: Parameter) {
+        if (param.nativeType !is PointerType<*>) {
+            throw IllegalArgumentException("The Input modifier can only be applied to pointer parameters.")
+        }
+
+        if (!param.nativeType.elementType.let { it is StructType || it is CharType }) {
+            throw IllegalArgumentException("The Input modifier is only necessary on struct or string parameters.")
+        }
+
+        if (isInput(param.nativeType)) {
+            throw IllegalArgumentException("The Input modifier is not necessary on pointer-to-const parameters.")
+        }
+    }
+
+    private fun isInput(type: PointerType<*>): Boolean =
+        type.elementType.name.endsWith(" const") ||
+        (type.elementType is PointerType<*> && isInput(type.elementType))
+}
+
 object MapToInt : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
@@ -67,30 +89,29 @@ class AutoSize(
     override fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 
     override fun validate(param: Parameter) {
-        when (param.paramType) {
-            ParameterType.IN    ->
-                if (param.nativeType is PointerType<*>) {
-                    if (dependent.isNotEmpty())
-                        throw IllegalArgumentException("IN pointer parameters with the AutoSize modifier cannot reference dependent parameters.")
-                } else if (when (param.nativeType.mapping) {
-                    PrimitiveMapping.BYTE,
-                    PrimitiveMapping.SHORT,
-                    PrimitiveMapping.INT,
-                    PrimitiveMapping.LONG,
-                    PrimitiveMapping.POINTER -> false
-                    else                     -> true
-                })
-                    throw IllegalArgumentException("IN parameters with the AutoSize modifier must be integer primitive types.")
-            ParameterType.INOUT -> {
-                if (param.nativeType !is PointerType<*> || when (param.nativeType.mapping) {
+        if (param.nativeType is PointerType<*>) {
+            if (param.isInput) {
+                if (dependent.isNotEmpty()) {
+                    throw IllegalArgumentException("Input pointer parameters with the AutoSize modifier cannot reference dependent parameters.")
+                }
+            } else {
+                when (param.nativeType.mapping) {
                     PointerMapping.DATA_INT,
-                    PointerMapping.DATA_POINTER -> false
-                    else                        -> true
-                })
-                    throw IllegalArgumentException("INOUT parameters with the AutoSize modifier must be integer pointer types.")
+                    PointerMapping.DATA_POINTER -> {
+                    }
+                    else                        -> throw IllegalArgumentException("Output pointer parameters with the AutoSize modifier must be integer pointer types.")
+                }
             }
-            else                ->
-                throw IllegalArgumentException("The AutoSize modifier can only be applied to IN or INOUT parameters.")
+        } else {
+            when (param.nativeType.mapping) {
+                PrimitiveMapping.BYTE,
+                PrimitiveMapping.SHORT,
+                PrimitiveMapping.INT,
+                PrimitiveMapping.LONG,
+                PrimitiveMapping.POINTER -> {
+                }
+                else                     -> throw IllegalArgumentException("Value parameters with the AutoSize modifier must be integer primitive types.")
+            }
         }
     }
 }
@@ -98,18 +119,7 @@ class AutoSize(
 class AutoSizeResultParam(val expression: String?) : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
-        if (param.paramType === ParameterType.IN) {
-            if (param.nativeType.mapping.nativeMethodType.isPrimitive) {
-                when (param.nativeType.mapping) {
-                    PrimitiveMapping.INT,
-                    PrimitiveMapping.POINTER -> {
-                    }
-                    else                     -> {
-                        throw IllegalArgumentException("The AutoSizeResult modifier on input parameters can only be applied to integer primitive types.")
-                    }
-                }
-            }
-        } else if (param.paramType === ParameterType.OUT) {
+        if (param.nativeType is PointerType<*>) {
             when (param.nativeType.mapping) {
                 PointerMapping.DATA_INT,
                 PointerMapping.DATA_POINTER -> {
@@ -121,8 +131,18 @@ class AutoSizeResultParam(val expression: String?) : ParameterModifier {
 
             if (param has nullable)
                 throw IllegalArgumentException("The AutoSizeResult modifier cannot be applied to nullable parameters.")
-        } else
-            throw IllegalArgumentException("The AutoSizeResult modifier cannot be used on in/out parameters.")
+        } else {
+            if (param.nativeType.mapping.nativeMethodType.isPrimitive) {
+                when (param.nativeType.mapping) {
+                    PrimitiveMapping.INT,
+                    PrimitiveMapping.POINTER -> {
+                    }
+                    else                     -> {
+                        throw IllegalArgumentException("The AutoSizeResult modifier on input parameters can only be applied to integer primitive types.")
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -270,7 +290,7 @@ class Return(
     override val isSpecial = true
     override fun validate(param: Parameter) {
         if (param.nativeType is PointerType<*>) {
-            if (param.paramType !== ParameterType.OUT)
+            if (param.isInput)
                 throw IllegalArgumentException("The Return modifier can only be applied to output parameters.")
 
             if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
@@ -303,9 +323,6 @@ class SingleValue(val newName: String) : ParameterModifier {
 
         if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
             throw IllegalArgumentException("The SingleValue modifier cannot be applied to opaque pointer types.")
-
-        if (param.paramType != ParameterType.IN)
-            throw IllegalArgumentException("The SingleValue modifier can only be applied to input parameters.")
     }
 }
 
@@ -326,7 +343,7 @@ class PointerArray(
         if (param.nativeType.mapping != PointerMapping.DATA_POINTER)
             throw IllegalArgumentException("The PointerArray modifier can only be applied to pointer-to-pointer types.")
 
-        if (param.paramType != ParameterType.IN)
+        if (!param.isInput)
             throw IllegalArgumentException("The PointerArray modifier can only be applied to input parameters.")
     }
 }
@@ -340,7 +357,7 @@ class UserData(
         if (!(param.nativeType is PointerType<*> && param.nativeType.elementType is OpaqueType)) {
             throw IllegalArgumentException("The UserData modifier can only be applied to opaque pointer parameters.")
         }
-        if (param.paramType != ParameterType.IN) {
+        if (!param.isInput) {
             throw IllegalArgumentException("The UserData modifier can only be applied to input parameters.")
         }
     }

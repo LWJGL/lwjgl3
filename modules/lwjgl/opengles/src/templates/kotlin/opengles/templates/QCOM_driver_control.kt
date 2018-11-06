@@ -26,9 +26,9 @@ val QCOM_driver_control = "QCOMDriverControl".nativeClassGLES("QCOM_driver_contr
         "GetDriverControlsQCOM",
         "",
 
-        nullable..Check(1)..GLint.p.OUT("num", ""),
+        nullable..Check(1)..GLint.p("num", ""),
         AutoSize("driverControls")..GLsizei("size", ""),
-        nullable..GLuint.p.OUT("driverControls", "")
+        nullable..GLuint.p("driverControls", "")
     )
 
     void(
@@ -37,8 +37,8 @@ val QCOM_driver_control = "QCOMDriverControl".nativeClassGLES("QCOM_driver_contr
 
         GLuint("driverControl", ""),
         AutoSize("driverControlString")..GLsizei("bufSize", ""),
-        nullable..Check(1)..GLsizei.p.OUT("length", ""),
-        Return("length")..nullable..GLcharASCII.p.OUT("driverControlString", "")
+        nullable..Check(1)..GLsizei.p("length", ""),
+        Return("length")..nullable..GLcharASCII.p("driverControlString", "")
     )
 
     void(

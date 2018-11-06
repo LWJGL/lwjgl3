@@ -147,7 +147,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         VkDevice("device", "the logical device that creates the validation cache object."),
         VkValidationCacheCreateInfoEXT.const.p("pCreateInfo", "a pointer to a ##VkValidationCacheCreateInfoEXT structure that contains the initial parameters for the validation cache object."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkValidationCacheEXT.p.OUT("pValidationCache", "a pointer to a {@code VkValidationCacheEXT} handle in which the resulting validation cache object is returned.")
+        Check(1)..VkValidationCacheEXT.p("pValidationCache", "a pointer to a {@code VkValidationCacheEXT} handle in which the resulting validation cache object is returned.")
     )
 
     void(
@@ -320,7 +320,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
 
         VkDevice("device", "the logical device that owns the validation cache."),
         VkValidationCacheEXT("validationCache", "the validation cache to retrieve data from."),
-        AutoSize("pData")..Check(1)..size_t.p.INOUT("pDataSize", "a pointer to a value related to the amount of data in the validation cache, as described below."),
-        nullable..void.p.OUT("pData", "either {@code NULL} or a pointer to a buffer.")
+        AutoSize("pData")..Check(1)..size_t.p("pDataSize", "a pointer to a value related to the amount of data in the validation cache, as described below."),
+        nullable..void.p("pData", "either {@code NULL} or a pointer to a buffer.")
     )
 }

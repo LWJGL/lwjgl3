@@ -271,12 +271,12 @@ int main(int arg, char **argv)
         Unsafe..unsigned_char.const.p("data", "the font data"),
         Expression("0")..int("offset", "the font data offset, use 0 for plain .ttf files"),
         float("pixel_height", "the font height, in pixels"),
-        Check("pw * ph")..unsigned_char.p.OUT("pixels", "a buffer in which to write the font bitmap"),
+        Check("pw * ph")..unsigned_char.p("pixels", "a buffer in which to write the font bitmap"),
         int("pw", "the bitmap width, in pixels"),
         int("ph", "the bitmap height, in pixels"),
         int("first_char", "the first character to bake"),
         AutoSize("chardata")..int("num_chars", "the number of characters to bake, starting at {@code first_char}"),
-        stbtt_bakedchar.p.OUT("chardata", "an array of ##STBTTBakedChar structs, it's {@code num_chars} long"),
+        stbtt_bakedchar.p("chardata", "an array of ##STBTTBakedChar structs, it's {@code num_chars} long"),
 
         returnDoc =
         """
@@ -298,8 +298,8 @@ int main(int arg, char **argv)
         int("pw", "the bitmap width, in pixels"),
         int("ph", "the bitmap height, in pixels"),
         int("char_index", "the character index in the {@code chardata} array"),
-        Check(1)..float.p.INOUT("xpos", "the current x position, in screen pixel space"),
-        Check(1)..float.p.INOUT("ypos", "the current y position, in screen pixel space"),
+        Check(1)..float.p("xpos", "the current x position, in screen pixel space"),
+        Check(1)..float.p("ypos", "the current y position, in screen pixel space"),
         stbtt_aligned_quad.p("q", "an ##STBTTAlignedQuad struct in which to return the quad to draw"),
         intb("opengl_fillrule", "1 if opengl fill rule; 0 if DX9 or earlier")
     )
@@ -314,7 +314,7 @@ int main(int arg, char **argv)
         """,
 
         stbtt_pack_context.p("spc", "an ##STBTTPackContext struct"),
-        Check("(stride_in_bytes != 0 ? stride_in_bytes : width) * height")..nullable..unsigned_char.p.OUT(
+        Check("(stride_in_bytes != 0 ? stride_in_bytes : width) * height")..nullable..unsigned_char.p(
             "pixels",
             "a buffer in which to store the bitmap data"
         ),
@@ -373,7 +373,7 @@ int main(int arg, char **argv)
         ),
         int("first_unicode_char_in_range", "the first unicode code point in the range"),
         AutoSize("chardata_for_range")..int("num_chars_in_range", "the number of unicode code points in the range"),
-        stbtt_packedchar.p.OUT("chardata_for_range", "an array of ##STBTTPackedchar structs"),
+        stbtt_packedchar.p("chardata_for_range", "an array of ##STBTTPackedchar structs"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -388,7 +388,7 @@ int main(int arg, char **argv)
         stbtt_pack_context.p("spc", "an ##STBTTPackContext struct"),
         Unsafe..unsigned_char.const.p("fontdata", "the font data"),
         int("font_index", "the font index (use 0 if you don't know what that is"),
-        stbtt_pack_range.p.INOUT("ranges", "an array of ##STBTTPackRange structs"),
+        Input..stbtt_pack_range.p("ranges", "an array of ##STBTTPackRange structs"),
         AutoSize("ranges")..int("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
 
         returnDoc = "1 on success, 0 on failure"
@@ -426,9 +426,9 @@ int main(int arg, char **argv)
         int("pw", "the bitmap width, in pixels"),
         int("ph", "the bitmap height, in pixels"),
         int("char_index", "the character index in the {@code chardata} array"),
-        Check(1)..float.p.INOUT("xpos", "the current x position, in screen pixel space"),
-        Check(1)..float.p.INOUT("ypos", "the current y position, in screen pixel space"),
-        stbtt_aligned_quad.p.OUT("q", "an ##STBTTAlignedQuad struct in which to return the quad to draw"),
+        Check(1)..float.p("xpos", "the current x position, in screen pixel space"),
+        Check(1)..float.p("ypos", "the current y position, in screen pixel space"),
+        stbtt_aligned_quad.p("q", "an ##STBTTAlignedQuad struct in which to return the quad to draw"),
         intb("align_to_integer", "1 to align the quad to integer coordinates")
     )
 
@@ -443,9 +443,9 @@ int main(int arg, char **argv)
 
         stbtt_pack_context.p("spc", "an ##STBTTPackContext struct"),
         stbtt_fontinfo.p("info", "an ##STBTTFontinfo struct"),
-        stbtt_pack_range.p("ranges", "an array of ##STBTTPackRange structs"),
+        Input..stbtt_pack_range.p("ranges", "an array of ##STBTTPackRange structs"),
         AutoSize("ranges")..int("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
-        Unsafe..stbrp_rect.p.OUT("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges."),
+        Unsafe..stbrp_rect.p("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges."),
 
         returnDoc = "the number of structs written in {@code rects}"
     )
@@ -455,7 +455,7 @@ int main(int arg, char **argv)
         "See #PackFontRangesGatherRects().",
 
         stbtt_pack_context.p("spc", "an ##STBTTPackContext struct"),
-        stbrp_rect.p.INOUT("rects", "an array of ##STBRPRect structs"),
+        stbrp_rect.p("rects", "an array of ##STBRPRect structs"),
         AutoSize("rects")..int("num_rects", "the number of structs in {@code rects}")
     )
 
@@ -465,9 +465,9 @@ int main(int arg, char **argv)
 
         stbtt_pack_context.p("spc", "an ##STBTTPackContext struct"),
         stbtt_fontinfo.p("info", "an ##STBTTFontinfo struct"),
-        stbtt_pack_range.p("ranges", "an array of ##STBTTPackRange structs"),
+        Input..stbtt_pack_range.p("ranges", "an array of ##STBTTPackRange structs"),
         AutoSize("ranges")..int("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
-        Unsafe..stbrp_rect.p.OUT("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges."),
+        Unsafe..stbrp_rect.p("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges."),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -567,9 +567,9 @@ int main(int arg, char **argv)
         """,
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
-        nullable..Check(1)..int.p.OUT("ascent", "returns the coordinate above the baseline the font extends"),
-        nullable..Check(1)..int.p.OUT("descent", "returns the coordinate below the baseline the font extends (i.e. it is typically negative)"),
-        nullable..Check(1)..int.p.OUT("lineGap", "returns the spacing between one row's descent and the next row's ascent")
+        nullable..Check(1)..int.p("ascent", "returns the coordinate above the baseline the font extends"),
+        nullable..Check(1)..int.p("descent", "returns the coordinate below the baseline the font extends (i.e. it is typically negative)"),
+        nullable..Check(1)..int.p("lineGap", "returns the spacing between one row's descent and the next row's ascent")
     )
 
     intb(
@@ -577,9 +577,9 @@ int main(int arg, char **argv)
         "Analogous to #GetFontVMetrics(), but returns the \"typographic\" values from the OS/2 table (specific to MS/Windows TTF files).",
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
-        nullable..Check(1)..int.p.OUT("typoAscent", "returns the coordinate above the baseline the font extends"),
-        nullable..Check(1)..int.p.OUT("typoDescent", "returns the coordinate below the baseline the font extends (i.e. it is typically negative)"),
-        nullable..Check(1)..int.p.OUT("typoLineGap", "returns the spacing between one row's descent and the next row's ascent"),
+        nullable..Check(1)..int.p("typoAscent", "returns the coordinate above the baseline the font extends"),
+        nullable..Check(1)..int.p("typoDescent", "returns the coordinate below the baseline the font extends (i.e. it is typically negative)"),
+        nullable..Check(1)..int.p("typoLineGap", "returns the spacing between one row's descent and the next row's ascent"),
 
         returnDoc = "1 on success (table present), 0 on failure"
     )
@@ -589,10 +589,10 @@ int main(int arg, char **argv)
         "Returns the bounding box around all possible characters.",
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
-        Check(1)..int.p.OUT("x0", "the left coordinate"),
-        Check(1)..int.p.OUT("y0", "the bottom coordinate"),
-        Check(1)..int.p.OUT("x1", "the right coordinate"),
-        Check(1)..int.p.OUT("y1", "the top coordinate")
+        Check(1)..int.p("x0", "the left coordinate"),
+        Check(1)..int.p("y0", "the bottom coordinate"),
+        Check(1)..int.p("x1", "the right coordinate"),
+        Check(1)..int.p("y1", "the top coordinate")
     )
 
     void(
@@ -605,8 +605,8 @@ int main(int arg, char **argv)
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
         int("codepoint", "the unicode codepoint"),
-        nullable..Check(1)..int.p.OUT("advanceWidth", "the offset from the current horizontal position to the next horizontal position"),
-        nullable..Check(1)..int.p.OUT("leftSideBearing", "the offset from the current horizontal position to the left edge of the character")
+        nullable..Check(1)..int.p("advanceWidth", "the offset from the current horizontal position to the next horizontal position"),
+        nullable..Check(1)..int.p("leftSideBearing", "the offset from the current horizontal position to the left edge of the character")
     )
 
     int(
@@ -624,10 +624,10 @@ int main(int arg, char **argv)
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
         int("codepoint", "the unicode codepoint"),
-        nullable..Check(1)..int.p.OUT("x0", "returns the left coordinate"),
-        nullable..Check(1)..int.p.OUT("y0", "returns the bottom coordinate"),
-        nullable..Check(1)..int.p.OUT("x1", "returns the right coordinate"),
-        nullable..Check(1)..int.p.OUT("y1", "returns the top coordinate")
+        nullable..Check(1)..int.p("x0", "returns the left coordinate"),
+        nullable..Check(1)..int.p("y0", "returns the bottom coordinate"),
+        nullable..Check(1)..int.p("x1", "returns the right coordinate"),
+        nullable..Check(1)..int.p("y1", "returns the top coordinate")
     )
 
     void(
@@ -636,8 +636,8 @@ int main(int arg, char **argv)
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
         int("glyph_index", "the glyph index"),
-        nullable..Check(1)..int.p.OUT("advanceWidth", "the offset from the current horizontal position to the next horizontal position"),
-        nullable..Check(1)..int.p.OUT("leftSideBearing", "the offset from the current horizontal position to the left edge of the character")
+        nullable..Check(1)..int.p("advanceWidth", "the offset from the current horizontal position to the next horizontal position"),
+        nullable..Check(1)..int.p("leftSideBearing", "the offset from the current horizontal position to the left edge of the character")
     )
 
     int(
@@ -655,10 +655,10 @@ int main(int arg, char **argv)
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
         int("glyph_index", "the glyph index"),
-        nullable..Check(1)..int.p.OUT("x0", "returns the left coordinate"),
-        nullable..Check(1)..int.p.OUT("y0", "returns the bottom coordinate"),
-        nullable..Check(1)..int.p.OUT("x1", "returns the right coordinate"),
-        nullable..Check(1)..int.p.OUT("y1", "returns the top coordinate")
+        nullable..Check(1)..int.p("x0", "returns the left coordinate"),
+        nullable..Check(1)..int.p("y0", "returns the bottom coordinate"),
+        nullable..Check(1)..int.p("x1", "returns the right coordinate"),
+        nullable..Check(1)..int.p("y1", "returns the top coordinate")
     )
 
     // GLYPH SHAPES
@@ -694,7 +694,7 @@ int main(int arg, char **argv)
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
         int("unicode_codepoint", "the unicode codepoint"),
-        Check(1)..Return(RESULT)..stbtt_vertex.p.p.OUT("vertices", "returns a pointer to an array of ##STBTTVertex structs")
+        Check(1)..Return(RESULT)..stbtt_vertex.p.p("vertices", "returns a pointer to an array of ##STBTTVertex structs")
     )
 
     int(
@@ -703,7 +703,7 @@ int main(int arg, char **argv)
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
         int("glyph_index", "the unicode codepoint"),
-        Check(1)..Return(RESULT)..stbtt_vertex.p.p.OUT("vertices", "returns a pointer to an array of ##STBTTVertex structs")
+        Check(1)..Return(RESULT)..stbtt_vertex.p.p("vertices", "returns a pointer to an array of ##STBTTVertex structs")
     )
 
     void(
@@ -732,10 +732,10 @@ int main(int arg, char **argv)
         float("scale_x", "the horizontal scale"),
         float("scale_y", "the vertical scale"),
         int("codepoint", "the unicode codepoint to render"),
-        Check(1)..AutoSizeResult..int.p.OUT("width", "returns the bitmap width"),
-        Check(1)..AutoSizeResult..int.p.OUT("height", "returns the bitmap height"),
-        nullable..Check(1)..int.p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
-        nullable..Check(1)..int.p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
+        Check(1)..AutoSizeResult..int.p("width", "returns the bitmap width"),
+        Check(1)..AutoSizeResult..int.p("height", "returns the bitmap height"),
+        nullable..Check(1)..int.p("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
+        nullable..Check(1)..int.p("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
     )
 
     unsigned_char.p(
@@ -748,10 +748,10 @@ int main(int arg, char **argv)
         float("shift_x", "the horizontal subpixel shift"),
         float("shift_y", "the vertical subpixel shift"),
         int("codepoint", "the unicode codepoint to render"),
-        Check(1)..AutoSizeResult..int.p.OUT("width", "returns the bitmap width"),
-        Check(1)..AutoSizeResult..int.p.OUT("height", "returns the bitmap height"),
-        nullable..Check(1)..int.p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
-        nullable..Check(1)..int.p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
+        Check(1)..AutoSizeResult..int.p("width", "returns the bitmap width"),
+        Check(1)..AutoSizeResult..int.p("height", "returns the bitmap height"),
+        nullable..Check(1)..int.p("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
+        nullable..Check(1)..int.p("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
     )
 
     void(
@@ -762,7 +762,7 @@ int main(int arg, char **argv)
         """,
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
-        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p("output", "the bitmap storage"),
         int("out_w", "the bitmap width"),
         int("out_h", "the bitmap height"),
         int("out_stride", "the row stride, in bytes"),
@@ -776,7 +776,7 @@ int main(int arg, char **argv)
         "Same as #MakeCodepointBitmap(), but you can specify a subpixel shift for the character.",
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
-        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p("output", "the bitmap storage"),
         int("out_w", "the bitmap width"),
         int("out_h", "the bitmap height"),
         int("out_stride", "the row stride, in bytes"),
@@ -792,7 +792,7 @@ int main(int arg, char **argv)
         "Same as #MakeCodepointBitmapSubpixel(), but prefiltering is performed (see #PackSetOversampling()).",
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
-        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p("output", "the bitmap storage"),
         int("out_w", "the bitmap width"),
         int("out_h", "the bitmap height"),
         int("out_stride", "the row stride, in bytes"),
@@ -802,8 +802,8 @@ int main(int arg, char **argv)
         float("shift_y", "the vertical subpixel shift"),
         int("oversample_x", "the horizontal oversampling amount"),
         int("oversample_y", "the vertical oversampling amount"),
-        Check(1)..float.p.OUT("sub_x", "returns the horizontal oversample shift"),
-        Check(1)..float.p.OUT("sub_y", "returns the vertical oversample shift"),
+        Check(1)..float.p("sub_x", "returns the horizontal oversample shift"),
+        Check(1)..float.p("sub_y", "returns the vertical oversample shift"),
         int("codepoint", "the unicode codepoint to render")
     )
 
@@ -820,10 +820,10 @@ int main(int arg, char **argv)
         int("codepoint", "the unicode codepoint"),
         float("scale_x", "the horizontal scale"),
         float("scale_y", "the vertical scale"),
-        nullable..Check(1)..int.p.OUT("ix0", "returns the left coordinate"),
-        nullable..Check(1)..int.p.OUT("iy0", "returns the bottom coordinate"),
-        nullable..Check(1)..int.p.OUT("ix1", "returns the right coordinate"),
-        nullable..Check(1)..int.p.OUT("iy1", "returns the top coordinate")
+        nullable..Check(1)..int.p("ix0", "returns the left coordinate"),
+        nullable..Check(1)..int.p("iy0", "returns the bottom coordinate"),
+        nullable..Check(1)..int.p("ix1", "returns the right coordinate"),
+        nullable..Check(1)..int.p("iy1", "returns the top coordinate")
     )
 
     void(
@@ -836,10 +836,10 @@ int main(int arg, char **argv)
         float("scale_y", "the vertical scale"),
         float("shift_x", "the horizontal subpixel shift"),
         float("shift_y", "the vertical subpixel shift"),
-        nullable..Check(1)..int.p.OUT("ix0", "returns the left coordinate"),
-        nullable..Check(1)..int.p.OUT("iy0", "returns the bottom coordinate"),
-        nullable..Check(1)..int.p.OUT("ix1", "returns the right coordinate"),
-        nullable..Check(1)..int.p.OUT("iy1", "returns the top coordinate")
+        nullable..Check(1)..int.p("ix0", "returns the left coordinate"),
+        nullable..Check(1)..int.p("iy0", "returns the bottom coordinate"),
+        nullable..Check(1)..int.p("ix1", "returns the right coordinate"),
+        nullable..Check(1)..int.p("iy1", "returns the top coordinate")
     )
 
     unsigned_char.p(
@@ -850,10 +850,10 @@ int main(int arg, char **argv)
         float("scale_x", "the horizontal scale"),
         float("scale_y", "the vertical scale"),
         int("glyph", "the glyph index to render"),
-        Check(1)..AutoSizeResult..int.p.OUT("width", "returns the bitmap width"),
-        Check(1)..AutoSizeResult..int.p.OUT("height", "returns the bitmap height"),
-        nullable..Check(1)..int.p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
-        nullable..Check(1)..int.p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
+        Check(1)..AutoSizeResult..int.p("width", "returns the bitmap width"),
+        Check(1)..AutoSizeResult..int.p("height", "returns the bitmap height"),
+        nullable..Check(1)..int.p("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
+        nullable..Check(1)..int.p("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
     )
 
     unsigned_char.p(
@@ -866,10 +866,10 @@ int main(int arg, char **argv)
         float("shift_x", "the horizontal subpixel shift"),
         float("shift_y", "the vertical subpixel shift"),
         int("glyph", "the glyph index to render"),
-        Check(1)..AutoSizeResult..int.p.OUT("width", "returns the bitmap width"),
-        Check(1)..AutoSizeResult..int.p.OUT("height", "returns the bitmap height"),
-        nullable..Check(1)..int.p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
-        nullable..Check(1)..int.p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
+        Check(1)..AutoSizeResult..int.p("width", "returns the bitmap width"),
+        Check(1)..AutoSizeResult..int.p("height", "returns the bitmap height"),
+        nullable..Check(1)..int.p("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
+        nullable..Check(1)..int.p("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
     )
 
     void(
@@ -880,7 +880,7 @@ int main(int arg, char **argv)
         """,
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
-        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p("output", "the bitmap storage"),
         int("out_w", "the bitmap width"),
         int("out_h", "the bitmap height"),
         int("out_stride", "the row stride, in bytes"),
@@ -894,7 +894,7 @@ int main(int arg, char **argv)
         "Same as #MakeGlyphBitmap(), but you can specify a subpixel shift for the character.",
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
-        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p("output", "the bitmap storage"),
         int("out_w", "the bitmap width"),
         int("out_h", "the bitmap height"),
         int("out_stride", "the row stride, in bytes"),
@@ -910,7 +910,7 @@ int main(int arg, char **argv)
         "Same as #MakeGlyphBitmapSubpixel(), but prefiltering is performed (see #PackSetOversampling()).",
 
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
-        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p.OUT("output", "the bitmap storage"),
+        Check("(out_stride != 0 ? out_stride : out_w) * out_h")..unsigned_char.p("output", "the bitmap storage"),
         int("out_w", "the bitmap width"),
         int("out_h", "the bitmap height"),
         int("out_stride", "the row stride, in bytes"),
@@ -920,8 +920,8 @@ int main(int arg, char **argv)
         float("shift_y", "the vertical subpixel shift"),
         int("oversample_x", "the horizontal oversampling amount"),
         int("oversample_y", "the vertical oversampling amount"),
-        Check(1)..float.p.OUT("sub_x", "returns the horizontal oversample shift"),
-        Check(1)..float.p.OUT("sub_y", "returns the vertical oversample shift"),
+        Check(1)..float.p("sub_x", "returns the horizontal oversample shift"),
+        Check(1)..float.p("sub_y", "returns the vertical oversample shift"),
         int("glyph", "the glyph index to render")
     )
 
@@ -938,10 +938,10 @@ int main(int arg, char **argv)
         int("glyph", "the glyph index"),
         float("scale_x", "the horizontal scale"),
         float("scale_y", "the vertical scale"),
-        nullable..Check(1)..int.p.OUT("ix0", "returns the left coordinate"),
-        nullable..Check(1)..int.p.OUT("iy0", "returns the bottom coordinate"),
-        nullable..Check(1)..int.p.OUT("ix1", "returns the right coordinate"),
-        nullable..Check(1)..int.p.OUT("iy1", "returns the top coordinate")
+        nullable..Check(1)..int.p("ix0", "returns the left coordinate"),
+        nullable..Check(1)..int.p("iy0", "returns the bottom coordinate"),
+        nullable..Check(1)..int.p("ix1", "returns the right coordinate"),
+        nullable..Check(1)..int.p("iy1", "returns the top coordinate")
     )
 
     void(
@@ -954,17 +954,17 @@ int main(int arg, char **argv)
         float("scale_y", "the vertical scale"),
         float("shift_x", "the horizontal subpixel shift"),
         float("shift_y", "the vertical subpixel shift"),
-        nullable..Check(1)..int.p.OUT("ix0", "returns the left coordinate"),
-        nullable..Check(1)..int.p.OUT("iy0", "returns the bottom coordinate"),
-        nullable..Check(1)..int.p.OUT("ix1", "returns the right coordinate"),
-        nullable..Check(1)..int.p.OUT("iy1", "returns the top coordinate")
+        nullable..Check(1)..int.p("ix0", "returns the left coordinate"),
+        nullable..Check(1)..int.p("iy0", "returns the bottom coordinate"),
+        nullable..Check(1)..int.p("ix1", "returns the right coordinate"),
+        nullable..Check(1)..int.p("iy1", "returns the top coordinate")
     )
 
     void(
         "Rasterize",
         "Rasterize a shape with quadratic beziers into a bitmap.",
 
-        stbtt__bitmap.p.OUT("result", "1-channel bitmap to draw into"),
+        stbtt__bitmap.p("result", "1-channel bitmap to draw into"),
         float("flatness_in_pixels", "allowable error of curve in pixels"),
         stbtt_vertex.p("vertices", "array of vertices defining shape"),
         AutoSize("vertices")..int("num_verts", "number of vertices in above array"),
@@ -1032,10 +1032,10 @@ pixel_dist_scale = 180/5.0 = 36.0""")}
             what value the SDF should increase by when moving one SDF "pixel" away from the edge (on the 0..255 scale). If positive, &gt; {@code onedge_value}
             is inside; if negative, &lt; {@code onedge_value} is inside.
             """),
-        AutoSizeResult..Check(1)..int.p.OUT("width", "output width of the SDF bitmap (including padding)"),
-        AutoSizeResult..Check(1)..int.p.OUT("height", "output height of the SDF bitmap (including padding)"),
-        Check(1)..int.p.OUT("xoff", "output horizontal origin of the character"),
-        Check(1)..int.p.OUT("yoff", "output vertical origin of the character")
+        AutoSizeResult..Check(1)..int.p("width", "output width of the SDF bitmap (including padding)"),
+        AutoSizeResult..Check(1)..int.p("height", "output height of the SDF bitmap (including padding)"),
+        Check(1)..int.p("xoff", "output horizontal origin of the character"),
+        Check(1)..int.p("yoff", "output vertical origin of the character")
     )
 
     unsigned_char.p(
@@ -1056,10 +1056,10 @@ pixel_dist_scale = 180/5.0 = 36.0""")}
             what value the SDF should increase by when moving one SDF "pixel" away from the edge (on the 0..255 scale). If positive, &gt; {@code onedge_value}
             is inside; if negative, &lt; {@code onedge_value} is inside.
             """),
-        AutoSizeResult..Check(1)..int.p.OUT("width", "output width of the SDF bitmap (including padding)"),
-        AutoSizeResult..Check(1)..int.p.OUT("height", "output height of the SDF bitmap (including padding)"),
-        Check(1)..int.p.OUT("xoff", "output horizontal origin of the character"),
-        Check(1)..int.p.OUT("yoff", "output vertical origin of the character")
+        AutoSizeResult..Check(1)..int.p("width", "output width of the SDF bitmap (including padding)"),
+        AutoSizeResult..Check(1)..int.p("height", "output height of the SDF bitmap (including padding)"),
+        Check(1)..int.p("xoff", "output horizontal origin of the character"),
+        Check(1)..int.p("yoff", "output vertical origin of the character")
     )
 
     // Finding the right font...
@@ -1191,7 +1191,7 @@ pixel_dist_scale = 180/5.0 = 36.0""")}
         """,
 
         stbtt_fontinfo.const.p("font", "an ##STBTTFontinfo struct"),
-        AutoSizeResult..int.p.OUT("length", "returns the string length, in bytes"),
+        AutoSizeResult..int.p("length", "returns the string length, in bytes"),
         int("platformID", "the platform ID", PlatformIDs),
         int("encodingID", "the encoding ID", "$EncodingIDsUnicode $EncodingIDsMicrosoft $EncodingIDsMac"),
         int("languageID", "the language ID", "$LanguageIDsMicrosoft $LanguageIDsMac"),

@@ -1488,7 +1488,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "InitInternal",
         "Initializes the connection to the VR hardware.",
 
-        Check(1)..EVRInitError.p.OUT("peError", "a buffer in which to store the error code"),
+        Check(1)..EVRInitError.p("peError", "a buffer in which to store the error code"),
         EVRApplicationType("eType", "the application type", "EVRApplicationType_\\w+"),
 
         returnDoc = "a VR interface handles token"
@@ -1523,7 +1523,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         """,
 
         charASCII.const.p("pchInterfaceVersion", "the interface name and version"),
-        Check(1)..EVRInitError.p.OUT("peError", "a buffer in which to store the error code")
+        Check(1)..EVRInitError.p("peError", "a buffer in which to store the error code")
     )
 
     bool(

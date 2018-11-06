@@ -967,14 +967,14 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "DriverGetVersion",
         "",
 
-        Check(1)..int.p.OUT("driverVersion", "")
+        Check(1)..int.p("driverVersion", "")
     )
 
     CUresult(
         "DeviceGet",
         "",
 
-        Check(1)..CUdevice.p.OUT("device", ""),
+        Check(1)..CUdevice.p("device", ""),
         int("ordinal", "")
     )
 
@@ -982,14 +982,14 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "DeviceGetCount",
         "",
 
-        Check(1)..int.p.OUT("count", "")
+        Check(1)..int.p("count", "")
     )
 
     CUresult(
         "DeviceGetName",
         "",
 
-        charASCII.p.OUT("name", ""),
+        charASCII.p("name", ""),
         AutoSize("name")..int("len", ""),
         CUdevice("dev", "")
     )
@@ -998,7 +998,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "DeviceTotalMem",
         "",
 
-        Check(1)..size_t.p.OUT("bytes", ""),
+        Check(1)..size_t.p("bytes", ""),
         CUdevice("dev", "")
     ).versioned()
 
@@ -1006,7 +1006,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "DeviceGetAttribute",
         "",
 
-        Check(1)..int.p.OUT("pi", ""),
+        Check(1)..int.p("pi", ""),
         CUdevice_attribute("attrib", ""),
         CUdevice("dev", "")
     )
@@ -1015,7 +1015,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "DeviceGetProperties",
         "",
 
-        CUdevprop.p.OUT("prop", ""),
+        CUdevprop.p("prop", ""),
         CUdevice("dev", "")
     )
 
@@ -1023,8 +1023,8 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "DeviceComputeCapability",
         "",
 
-        Check(1)..int.p.OUT("major", ""),
-        Check(1)..int.p.OUT("minor", ""),
+        Check(1)..int.p("major", ""),
+        Check(1)..int.p("minor", ""),
         CUdevice("dev", "")
     )
 
@@ -1032,7 +1032,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "CtxCreate",
         "",
 
-        Check(1)..CUcontext.p.OUT("pctx", ""),
+        Check(1)..CUcontext.p("pctx", ""),
         unsigned_int("flags", ""),
         CUdevice("dev", "")
     ).versioned()
@@ -1041,7 +1041,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "CtxGetDevice",
         "",
 
-        Check(1)..CUdevice.p.OUT("device", "")
+        Check(1)..CUdevice.p("device", "")
     )
 
     CUresult("CtxSynchronize", "", void())
@@ -1058,7 +1058,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "CtxGetLimit",
         "",
 
-        Check(1)..size_t.p.OUT("pvalue", ""),
+        Check(1)..size_t.p("pvalue", ""),
         CUlimit("limit", "")
     )
 
@@ -1066,7 +1066,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "CtxGetCacheConfig",
         "",
 
-        Check(1)..CUfunc_cache.p.OUT("pconfig", "")
+        Check(1)..CUfunc_cache.p("pconfig", "")
     )
 
     CUresult(
@@ -1081,22 +1081,22 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "",
 
         nullable..CUcontext("ctx", ""),
-        Check(1)..unsigned_int.p.OUT("version", "")
+        Check(1)..unsigned_int.p("version", "")
     )
 
     CUresult(
         "CtxGetStreamPriorityRange",
         "",
 
-        Check(1)..nullable..int.p.OUT("leastPriority", ""),
-        Check(1)..nullable..int.p.OUT("greatestPriority", "")
+        Check(1)..nullable..int.p("leastPriority", ""),
+        Check(1)..nullable..int.p("greatestPriority", "")
     )
 
     CUresult(
         "CtxAttach",
         "",
 
-        Check(1)..CUcontext.p.OUT("pctx", ""),
+        Check(1)..CUcontext.p("pctx", ""),
         unsigned_int("flags", "")
     )
 
@@ -1111,7 +1111,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "ModuleLoad",
         "",
 
-        Check(1)..CUmodule.p.OUT("module", ""),
+        Check(1)..CUmodule.p("module", ""),
         charASCII.const.p("fname", "")
     )
 
@@ -1119,7 +1119,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "ModuleLoadData",
         "",
 
-        Check(1)..CUmodule.p.OUT("module", ""),
+        Check(1)..CUmodule.p("module", ""),
         Unsafe..void.const.p("image", "")
     )
 
@@ -1127,7 +1127,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "ModuleLoadDataEx",
         "",
 
-        Check(1)..CUmodule.p.OUT("module", ""),
+        Check(1)..CUmodule.p("module", ""),
         Unsafe..void.const.p("image", ""),
         AutoSize("options", "optionValues")..unsigned_int("numOptions", ""),
         nullable..CUjit_option.p("options", ""),
@@ -1138,7 +1138,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "ModuleLoadFatBinary",
         "",
 
-        Check(1)..CUmodule.p.OUT("module", ""),
+        Check(1)..CUmodule.p("module", ""),
         Unsafe..void.const.p("fatCubin", "")
     )
 
@@ -1153,7 +1153,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "ModuleGetFunction",
         "",
 
-        Check(1)..CUfunction.p.OUT("hfunc", ""),
+        Check(1)..CUfunction.p("hfunc", ""),
         CUmodule("hmod", ""),
         charASCII.const.p("name", "")
     )
@@ -1162,8 +1162,8 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "ModuleGetGlobal",
         "",
 
-        Check(1)..nullable..CUdeviceptr.p.OUT("dptr", ""),
-        Check(1)..nullable..size_t.p.OUT("bytes", ""),
+        Check(1)..nullable..CUdeviceptr.p("dptr", ""),
+        Check(1)..nullable..size_t.p("bytes", ""),
         CUmodule("hmod", ""),
         charASCII.const.p("name", "")
     ).versioned()
@@ -1172,7 +1172,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "ModuleGetTexRef",
         "",
 
-        Check(1)..CUtexref.p.OUT("pTexRef", ""),
+        Check(1)..CUtexref.p("pTexRef", ""),
         CUmodule("hmod", ""),
         charASCII.const.p("name", "")
     )
@@ -1181,7 +1181,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "ModuleGetSurfRef",
         "",
 
-        Check(1)..CUsurfref.p.OUT("pSurfRef", ""),
+        Check(1)..CUsurfref.p("pSurfRef", ""),
         CUmodule("hmod", ""),
         charASCII.const.p("name", "")
     )
@@ -1190,15 +1190,15 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemGetInfo",
         "",
 
-        Check(1)..size_t.p.OUT("free", ""),
-        Check(1)..size_t.p.OUT("total", "")
+        Check(1)..size_t.p("free", ""),
+        Check(1)..size_t.p("total", "")
     ).versioned()
 
     CUresult(
         "MemAlloc",
         "",
 
-        Check(1)..CUdeviceptr.p.OUT("dptr", ""),
+        Check(1)..CUdeviceptr.p("dptr", ""),
         size_t("bytesize", "")
     ).versioned()
 
@@ -1206,8 +1206,8 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemAllocPitch",
         "",
 
-        Check(1)..CUdeviceptr.p.OUT("dptr", ""),
-        Check(1)..size_t.p.OUT("pPitch", ""),
+        Check(1)..CUdeviceptr.p("dptr", ""),
+        Check(1)..size_t.p("pPitch", ""),
         size_t("WidthInBytes", ""),
         size_t("Height", ""),
         unsigned_int("ElementSizeBytes", "")
@@ -1224,8 +1224,8 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemGetAddressRange",
         "",
 
-        Check(1)..nullable..CUdeviceptr.p.OUT("pbase", ""),
-        Check(1)..nullable..size_t.p.OUT("psize", ""),
+        Check(1)..nullable..CUdeviceptr.p("pbase", ""),
+        Check(1)..nullable..size_t.p("psize", ""),
         CUdeviceptr("dptr", "")
     ).versioned()
 
@@ -1233,7 +1233,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemAllocHost",
         "",
 
-        Check(1)..void.p.p.OUT("pp", ""),
+        Check(1)..void.p.p("pp", ""),
         size_t("bytesize", "")
     ).versioned()
 
@@ -1248,7 +1248,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemHostAlloc",
         "",
 
-        Check(1)..void.p.p.OUT("pp", ""),
+        Check(1)..void.p.p("pp", ""),
         size_t("bytesize", ""),
         unsigned_int("Flags", "")
     )
@@ -1257,7 +1257,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemHostGetDevicePointer",
         "",
 
-        Check(1)..CUdeviceptr.p.OUT("pdptr", ""),
+        Check(1)..CUdeviceptr.p("pdptr", ""),
         Unsafe..void.p("p", ""),
         unsigned_int("Flags", "")
     ).versioned()
@@ -1266,7 +1266,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemHostGetFlags",
         "",
 
-        Check(1)..unsigned_int.p.OUT("pFlags", ""),
+        Check(1)..unsigned_int.p("pFlags", ""),
         Unsafe..void.p("p", "")
     )
 
@@ -1283,7 +1283,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemcpyDtoH",
         "",
 
-        MultiTypeAll..void.p.OUT("dstHost", ""),
+        MultiTypeAll..void.p("dstHost", ""),
         CUdeviceptr("srcDevice", ""),
         AutoSize("dstHost")..size_t("ByteCount", "")
     ).ptds(2)
@@ -1331,7 +1331,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemcpyAtoH",
         "",
 
-        MultiTypeAll..void.p.OUT("dstHost", ""),
+        MultiTypeAll..void.p("dstHost", ""),
         CUarray("srcArray", ""),
         size_t("srcOffset", ""),
         AutoSize("dstHost")..size_t("ByteCount", "")
@@ -1383,7 +1383,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemcpyDtoHAsync",
         "",
 
-        MultiTypeAll..void.p.OUT("dstHost", ""),
+        MultiTypeAll..void.p("dstHost", ""),
         CUdeviceptr("srcDevice", ""),
         AutoSize("dstHost")..size_t("ByteCount", ""),
         nullable..CUstream("hStream", "")
@@ -1414,7 +1414,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "MemcpyAtoHAsync",
         "",
 
-        MultiTypeAll..void.p.OUT("dstHost", ""),
+        MultiTypeAll..void.p("dstHost", ""),
         CUarray("srcArray", ""),
         size_t("srcOffset", ""),
         AutoSize("dstHost")..size_t("ByteCount", ""),
@@ -1567,7 +1567,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "ArrayCreate",
         "",
 
-        Check(1)..CUarray.p.OUT("pHandle", ""),
+        Check(1)..CUarray.p("pHandle", ""),
         CUDA_ARRAY_DESCRIPTOR.const.p("pAllocateArray", "")
     ).versioned()
 
@@ -1575,7 +1575,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "ArrayGetDescriptor",
         "",
 
-        CUDA_ARRAY_DESCRIPTOR.p.OUT("pArrayDescriptor", ""),
+        CUDA_ARRAY_DESCRIPTOR.p("pArrayDescriptor", ""),
         CUarray("hArray", "")
     ).versioned()
 
@@ -1590,7 +1590,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "Array3DCreate",
         "",
 
-        Check(1)..CUarray.p.OUT("pHandle", ""),
+        Check(1)..CUarray.p("pHandle", ""),
         CUDA_ARRAY3D_DESCRIPTOR.const.p("pAllocateArray", "")
     ).versioned()
 
@@ -1598,7 +1598,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "Array3DGetDescriptor",
         "",
 
-        CUDA_ARRAY3D_DESCRIPTOR.p.OUT("pArrayDescriptor", ""),
+        CUDA_ARRAY3D_DESCRIPTOR.p("pArrayDescriptor", ""),
         CUarray("hArray", "")
     ).versioned()
 
@@ -1606,7 +1606,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "StreamCreate",
         "",
 
-        Check(1)..CUstream.p.OUT("phStream", ""),
+        Check(1)..CUstream.p("phStream", ""),
         unsigned_int("Flags", "")
     )
 
@@ -1614,7 +1614,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "StreamCreateWithPriority",
         "",
 
-        Check(1)..CUstream.p.OUT("phStream", ""),
+        Check(1)..CUstream.p("phStream", ""),
         unsigned_int("flags", ""),
         int("priority", "")
     )
@@ -1624,7 +1624,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "",
 
         CUstream("hStream", ""),
-        Check(1)..int.p.OUT("priority", "")
+        Check(1)..int.p("priority", "")
     ).ptsz()
 
     CUresult(
@@ -1632,7 +1632,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "",
 
         CUstream("hStream", ""),
-        Check(1)..unsigned_int.p.OUT("flags", "")
+        Check(1)..unsigned_int.p("flags", "")
     ).ptsz()
 
     CUresult(
@@ -1672,7 +1672,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "EventCreate",
         "",
 
-        Check(1)..CUevent.p.OUT("phEvent", ""),
+        Check(1)..CUevent.p("phEvent", ""),
         unsigned_int("Flags", "")
     )
 
@@ -1702,7 +1702,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "EventElapsedTime",
         "",
 
-        Check(1)..float.p.OUT("pMilliseconds", ""),
+        Check(1)..float.p("pMilliseconds", ""),
         CUevent("hStart", ""),
         CUevent("hEnd", "")
     )
@@ -1711,7 +1711,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "FuncGetAttribute",
         "",
 
-        Check(1)..int.p.OUT("pi", ""),
+        Check(1)..int.p("pi", ""),
         CUfunction_attribute("attrib", ""),
         CUfunction("hfunc", "")
     )
@@ -1835,7 +1835,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefSetAddress",
         "",
 
-        Check(1)..nullable..size_t.p.OUT("ByteOffset", ""),
+        Check(1)..nullable..size_t.p("ByteOffset", ""),
         CUtexref("hTexRef", ""),
         CUdeviceptr("dptr", ""),
         size_t("bytes", "")
@@ -1930,7 +1930,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetAddress",
         "",
 
-        Check(1)..CUdeviceptr.p.OUT("pdptr", ""),
+        Check(1)..CUdeviceptr.p("pdptr", ""),
         CUtexref("hTexRef", "")
     ).versioned()
 
@@ -1938,7 +1938,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetArray",
         "",
 
-        Check(1)..CUarray.p.OUT("phArray", ""),
+        Check(1)..CUarray.p("phArray", ""),
         CUtexref("hTexRef", "")
     )
 
@@ -1946,7 +1946,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetMipmappedArray",
         "",
 
-        Check(1)..CUmipmappedArray.p.OUT("phMipmappedArray", ""),
+        Check(1)..CUmipmappedArray.p("phMipmappedArray", ""),
         CUtexref("hTexRef", "")
     )
 
@@ -1954,7 +1954,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetAddressMode",
         "",
 
-        Check(1)..CUaddress_mode.p.OUT("pam", ""),
+        Check(1)..CUaddress_mode.p("pam", ""),
         CUtexref("hTexRef", ""),
         int("dim", "")
     )
@@ -1963,7 +1963,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetFilterMode",
         "",
 
-        Check(1)..CUfilter_mode.p.OUT("pfm", ""),
+        Check(1)..CUfilter_mode.p("pfm", ""),
         CUtexref("hTexRef", "")
     )
 
@@ -1971,8 +1971,8 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetFormat",
         "",
 
-        Check(1)..nullable..CUarray_format.p.OUT("pFormat", ""),
-        Check(1)..nullable..int.p.OUT("pNumChannels", ""),
+        Check(1)..nullable..CUarray_format.p("pFormat", ""),
+        Check(1)..nullable..int.p("pNumChannels", ""),
         CUtexref("hTexRef", "")
     )
 
@@ -1980,7 +1980,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetMipmapFilterMode",
         "",
 
-        Check(1)..CUfilter_mode.p.OUT("pfm", ""),
+        Check(1)..CUfilter_mode.p("pfm", ""),
         CUtexref("hTexRef", "")
     )
 
@@ -1988,7 +1988,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetMipmapLevelBias",
         "",
 
-        Check(1)..float.p.OUT("pbias", ""),
+        Check(1)..float.p("pbias", ""),
         CUtexref("hTexRef", "")
     )
 
@@ -1996,8 +1996,8 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetMipmapLevelClamp",
         "",
 
-        Check(1)..float.p.OUT("pminMipmapLevelClamp", ""),
-        Check(1)..float.p.OUT("pmaxMipmapLevelClamp", ""),
+        Check(1)..float.p("pminMipmapLevelClamp", ""),
+        Check(1)..float.p("pmaxMipmapLevelClamp", ""),
         CUtexref("hTexRef", "")
     )
 
@@ -2005,7 +2005,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetMaxAnisotropy",
         "",
 
-        Check(1)..int.p.OUT("pmaxAniso", ""),
+        Check(1)..int.p("pmaxAniso", ""),
         CUtexref("hTexRef", "")
     )
 
@@ -2013,7 +2013,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetBorderColor",
         "",
 
-        Check(4)..float.p.OUT("pBorderColor", ""),
+        Check(4)..float.p("pBorderColor", ""),
         CUtexref("hTexRef", "")
     )
 
@@ -2021,7 +2021,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefGetFlags",
         "",
 
-        Check(1)..unsigned_int.p.OUT("pFlags", ""),
+        Check(1)..unsigned_int.p("pFlags", ""),
         CUtexref("hTexRef", "")
     )
 
@@ -2029,7 +2029,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "TexRefCreate",
         "",
 
-        Check(1)..CUtexref.p.OUT("pTexRef", "")
+        Check(1)..CUtexref.p("pTexRef", "")
     )
 
     CUresult(
@@ -2052,7 +2052,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "SurfRefGetArray",
         "",
 
-        Check(1)..CUarray.p.OUT("phArray", ""),
+        Check(1)..CUarray.p("phArray", ""),
         CUsurfref("hSurfRef", "")
     )
 
@@ -2067,7 +2067,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "GraphicsSubResourceGetMappedArray",
         "",
 
-        Check(1)..CUarray.p.OUT("pArray", ""),
+        Check(1)..CUarray.p("pArray", ""),
         CUgraphicsResource("resource", ""),
         unsigned_int("arrayIndex", ""),
         unsigned_int("mipLevel", "")
@@ -2077,8 +2077,8 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "GraphicsResourceGetMappedPointer",
         "",
 
-        Check(1)..CUdeviceptr.p.OUT("pDevPtr", ""),
-        Check(1)..size_t.p.OUT("pSize", ""),
+        Check(1)..CUdeviceptr.p("pDevPtr", ""),
+        Check(1)..size_t.p("pSize", ""),
         CUgraphicsResource("resource", "")
     ).versioned()
 

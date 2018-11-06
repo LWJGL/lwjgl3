@@ -175,6 +175,6 @@ val KHR_external_semaphore_fd = "KHRExternalSemaphoreFd".nativeClassVK("KHR_exte
 
         VkDevice("device", "the logical device that created the semaphore being exported."),
         VkSemaphoreGetFdInfoKHR.const.p("pGetFdInfo", "a pointer to an instance of the ##VkSemaphoreGetFdInfoKHR structure containing parameters of the export operation."),
-        Check(1)..int.p.OUT("pFd", "will return the file descriptor representing the semaphore payload.")
+        Check(1)..int.p("pFd", "will return the file descriptor representing the semaphore payload.")
     )
 }

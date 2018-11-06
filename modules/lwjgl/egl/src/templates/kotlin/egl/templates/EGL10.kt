@@ -86,9 +86,9 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
 
         EGLDisplay("dpy", ""),
         nullable..noneTerminated..EGLint.const.p("attrib_list", ""),
-        nullable..EGLConfig.p.OUT("configs", ""),
+        nullable..EGLConfig.p("configs", ""),
         AutoSize("configs")..EGLint("config_size", ""),
-        Check(1)..EGLint.p.OUT("num_config", "")
+        Check(1)..EGLint.p("num_config", "")
     )
 
     EGLBoolean(
@@ -162,7 +162,7 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         EGLDisplay("dpy", ""),
         EGLConfig("config", ""),
         EGLint("attribute", ""),
-        Check(1)..EGLint.p.OUT("value", "")
+        Check(1)..EGLint.p("value", "")
     )
 
     EGLBoolean(
@@ -170,9 +170,9 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         "",
 
         EGLDisplay("dpy", ""),
-        nullable..EGLConfig.p.OUT("configs", ""),
+        nullable..EGLConfig.p("configs", ""),
         AutoSize("configs")..EGLint("config_size", ""),
-        Check(1)..EGLint.p.OUT("num_config", "")
+        Check(1)..EGLint.p("num_config", "")
     )
 
     EGLDisplay("GetCurrentDisplay", "", void())
@@ -205,8 +205,8 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         "",
 
         EGLDisplay("dpy", ""),
-        Check(1)..EGLint.p.OUT("major", ""),
-        Check(1)..EGLint.p.OUT("minor", "")
+        Check(1)..EGLint.p("major", ""),
+        Check(1)..EGLint.p("minor", "")
     )
 
     EGLBoolean(
@@ -226,7 +226,7 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         EGLDisplay("dpy", ""),
         EGLContext("ctx", ""),
         EGLint("attribute", ""),
-        Check(1)..EGLint.p.OUT("value", "")
+        Check(1)..EGLint.p("value", "")
     )
 
     charASCII.p(
@@ -244,7 +244,7 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         EGLDisplay("dpy", ""),
         EGLSurface("surface", ""),
         EGLint("attribute", ""),
-        Check(1)..EGLint.p.OUT("value", "")
+        Check(1)..EGLint.p("value", "")
     )
 
     EGLBoolean(

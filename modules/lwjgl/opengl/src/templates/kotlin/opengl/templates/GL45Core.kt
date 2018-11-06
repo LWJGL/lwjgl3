@@ -102,7 +102,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         "Returns {@code n} previously unused transform feedback object names in {@code ids}, each representing a new state vector.",
 
         AutoSize("ids")..GLsizei("n", "the number of transform feedback object names to create"),
-        ReturnParam..GLuint.p.OUT("ids", "the buffer in which to return the names")
+        ReturnParam..GLuint.p("ids", "the buffer in which to return the names")
     )
 
     void(
@@ -131,7 +131,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
 
         GLuint("xfb", "zero or the name of an existing transform feedback object"),
         GLenum("pname", "the parameter to query", "#TRANSFORM_FEEDBACK_PAUSED #TRANSFORM_FEEDBACK_ACTIVE"),
-        Check(1)..ReturnParam..GLint.p.OUT("param", "the buffer in which to return the parameter value")
+        Check(1)..ReturnParam..GLint.p("param", "the buffer in which to return the parameter value")
     )
 
     void(
@@ -141,7 +141,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLuint("xfb", "zero or the name of an existing transform feedback object"),
         GLenum("pname", "the parameter to query", "#TRANSFORM_FEEDBACK_BUFFER_BINDING"),
         GLuint("index", "the transform feedback stream index"),
-        Check(1)..ReturnParam..GLint.p.OUT("param", "the buffer in which to return the parameter value")
+        Check(1)..ReturnParam..GLint.p("param", "the buffer in which to return the parameter value")
     )
 
     void(
@@ -151,7 +151,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLuint("xfb", "zero or the name of an existing transform feedback object"),
         GLenum("pname", "the parameter to query", "#TRANSFORM_FEEDBACK_BUFFER_START #TRANSFORM_FEEDBACK_BUFFER_SIZE"),
         GLuint("index", "the transform feedback stream index"),
-        Check(1)..ReturnParam..GLint64.p.OUT("param", "the buffer in which to return the parameter value")
+        Check(1)..ReturnParam..GLint64.p("param", "the buffer in which to return the parameter value")
     )
 
     void(
@@ -162,7 +162,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         """,
 
         AutoSize("buffers")..GLsizei("n", "the number of buffer names to create"),
-        ReturnParam..GLuint.p.OUT("buffers", "the buffer in which to return the names")
+        ReturnParam..GLuint.p("buffers", "the buffer in which to return the names")
     )
 
     var src = GL44["BufferStorage"]
@@ -321,7 +321,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         "Returns {@code n} previously unused framebuffer names in {@code framebuffers}, each representing a new framebuffer object.",
 
         AutoSize("framebuffers")..GLsizei("n", "the number of framebuffer names to create"),
-        ReturnParam..GLuint.p.OUT("framebuffers", "the buffer in which to store the framebuffer names")
+        ReturnParam..GLuint.p("framebuffers", "the buffer in which to store the framebuffer names")
     )
 
     val FRAMEBUFFER = GLuint("framebuffer", "the framebuffer name")
@@ -521,7 +521,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         "Returns {@code n} previously unused renderbuffer names in {@code renderbuffers}, each representing a new renderbuffer object.",
 
         AutoSize("renderbuffers")..GLsizei("n", "the number of renderbuffer names to create"),
-        ReturnParam..GLuint.p.OUT("renderbuffers", "the buffer in which to store the created renderbuffer names")
+        ReturnParam..GLuint.p("renderbuffers", "the buffer in which to store the created renderbuffer names")
     )
 
     src = GL30["RenderbufferStorage"]
@@ -567,7 +567,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
             "#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS #TEXTURE_BUFFER #TEXTURE_2D_MULTISAMPLE #TEXTURE_2D_MULTISAMPLE_ARRAY"
         ),
         AutoSize("textures")..GLsizei("n", "the number of texture names to create"),
-        ReturnParam..GLuint.p.OUT("textures", "the buffer in which to store the created texture names")
+        ReturnParam..GLuint.p("textures", "the buffer in which to store the created texture names")
     )
 
     val TEXTURE = GLuint("texture", "the texture name")
@@ -902,7 +902,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         AutoSize("pixels")..GLsizei("bufSize", "the size of the buffer to receive the retrieved pixel data"),
         Check(
             expression = "glGetTextureLevelParameteri(texture, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
-        )..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "a buffer in which to return the compressed texture image")
+        )..PIXEL_PACK_BUFFER..void.p("pixels", "a buffer in which to return the compressed texture image")
     )
 
     src = GL11C["GetTexLevelParameterfv"]
@@ -972,7 +972,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         "Returns {@code n} previously unused vertex array object names in {@code arrays}.",
 
         AutoSize("arrays")..GLsizei("n", "the number of vertex array object names to create"),
-        ReturnParam..GLuint.p.OUT("arrays", "the buffer in which to return the created vertex array object names")
+        ReturnParam..GLuint.p("arrays", "the buffer in which to return the created vertex array object names")
     )
 
     src = GL20["DisableVertexAttribArray"]
@@ -1089,7 +1089,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
 
         GLuint("vaobj", "the vertex array object name"),
         GLenum("pname", "the parameter to query", "#ELEMENT_ARRAY_BUFFER_BINDING"),
-        Check(1)..ReturnParam..GLint.p.OUT("param", "the buffer in which to return the parameter values")
+        Check(1)..ReturnParam..GLint.p("param", "the buffer in which to return the parameter values")
     )
 
     void(
@@ -1107,7 +1107,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
             #VERTEX_ATTRIB_RELATIVE_OFFSET
             """
         ),
-        Check(1)..ReturnParam..GLint.p.OUT("param", "the buffer in which to return the parameter values")
+        Check(1)..ReturnParam..GLint.p("param", "the buffer in which to return the parameter values")
     )
 
     void(
@@ -1117,7 +1117,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLuint("vaobj", "the vertex array object name"),
         GLuint("index", "the attribute to query"),
         GLenum("pname", "the parameter to query", "#VERTEX_BINDING_OFFSET"),
-        Check(1)..ReturnParam..GLint64.p.OUT("param", "the buffer in which to return the parameter values")
+        Check(1)..ReturnParam..GLint64.p("param", "the buffer in which to return the parameter values")
     )
 
     void(
@@ -1125,7 +1125,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         "Returns {@code n} previously unused sampler names in {@code samplers}, each representing a new sampler object.",
 
         AutoSize("samplers")..GLsizei("n", "the number of sampler object names to create"),
-        ReturnParam..GLuint.p.OUT("samplers", "the buffer in which to return the created sampler object names")
+        ReturnParam..GLuint.p("samplers", "the buffer in which to return the created sampler object names")
     )
 
     void(
@@ -1133,7 +1133,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         "Returns {@code n} previously unused program pipeline names in {@code pipelines}, each representing a new program pipeline object.",
 
         AutoSize("pipelines")..GLsizei("n", "the number of program pipeline names to create"),
-        ReturnParam..GLuint.p.OUT("pipelines", "the buffer in which to return the created program pipeline names")
+        ReturnParam..GLuint.p("pipelines", "the buffer in which to return the created program pipeline names")
     )
 
     void(
@@ -1142,7 +1142,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
 
         GLenum("target", "the query target", QUERY_TARGETS),
         AutoSize("ids")..GLsizei("n", "the number of query object names to create"),
-        ReturnParam..GLuint.p.OUT("ids", "the buffer in which to return the created query object names")
+        ReturnParam..GLuint.p("ids", "the buffer in which to return the created query object names")
     )
 
     void(
@@ -1233,7 +1233,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLenum("format", "the pixel format", PIXEL_DATA_FORMATS),
         GLenum("type", "the pixel type", PIXEL_DATA_TYPES),
         AutoSize("pixels")..GLsizei("bufSize", "the size of the buffer to receive the retrieved pixel data"),
-        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "the buffer in which to place the returned data")
+        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..PIXEL_PACK_BUFFER..void.p("pixels", "the buffer in which to place the returned data")
     )
 
     void(
@@ -1249,7 +1249,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLsizei("height", "the subregion height"),
         GLsizei("depth", "the subregion depth"),
         AutoSize("pixels")..GLsizei("bufSize", "the size of the buffer to receive the retrieved pixel data"),
-        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "the buffer in which to place the returned data")
+        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..PIXEL_PACK_BUFFER..void.p("pixels", "the buffer in which to place the returned data")
     )
 
     // ARB_texture_barrier
@@ -1359,7 +1359,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         src["format"],
         src["type"],
         AutoSize("img")..GLsizei("bufSize", "the maximum number of bytes to write into {@code img}"),
-        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..PIXEL_PACK_BUFFER..void.p.OUT("img", "a buffer in which to place the returned data")
+        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..PIXEL_PACK_BUFFER..void.p("img", "a buffer in which to place the returned data")
     )
 
     void(
@@ -1373,7 +1373,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLenum("format", "the pixel format", PIXEL_DATA_FORMATS),
         GLenum("type", "the pixel type", PIXEL_DATA_TYPES),
         AutoSize("pixels")..GLsizei("bufSize", "the maximum number of bytes to write into {@code data}"),
-        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "a buffer in which to place the returned pixel data")
+        MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..PIXEL_PACK_BUFFER..void.p("pixels", "a buffer in which to place the returned pixel data")
     )
 
     src = GL13C["GetCompressedTexImage"]
@@ -1386,7 +1386,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         AutoSize("img")..GLsizei("bufSize", "the maximum number of bytes to write into {@code img}"),
         Check(
             expression = "GL11.glGetTexLevelParameteri(target, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
-        )..PIXEL_PACK_BUFFER..void.p.OUT("img", "a buffer in which to place the returned data")
+        )..PIXEL_PACK_BUFFER..void.p("img", "a buffer in which to place the returned data")
     )
 
     void(
@@ -1396,7 +1396,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLuint("program", "the program object"),
         GLint("location", "the uniform location"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
+        ReturnParam..GLfloat.p("params", "the buffer in which to place the returned data")
     )
 
     IgnoreMissing..void(
@@ -1406,7 +1406,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLuint("program", "the program object"),
         GLint("location", "the uniform location"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLdouble.p.OUT("params", "the buffer in which to place the returned data")
+        ReturnParam..GLdouble.p("params", "the buffer in which to place the returned data")
     )
 
     void(
@@ -1416,7 +1416,7 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLuint("program", "the program object"),
         GLint("location", "the uniform location"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
+        ReturnParam..GLfloat.p("params", "the buffer in which to place the returned data")
     )
 
     void(
@@ -1426,6 +1426,6 @@ val GL45C = "GL45C".nativeClassGL("GL45C") {
         GLuint("program", "the program object"),
         GLint("location", "the uniform location"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
-        ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
+        ReturnParam..GLfloat.p("params", "the buffer in which to place the returned data")
     )
 }

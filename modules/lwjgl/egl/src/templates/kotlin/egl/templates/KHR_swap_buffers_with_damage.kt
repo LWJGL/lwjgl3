@@ -27,7 +27,7 @@ val KHR_swap_buffers_with_damage = "KHRSwapBuffersWithDamage".nativeClassEGL("KH
 
         EGLDisplay("dpy", ""),
         EGLSurface("surface", ""),
-        nullable..EGLint.p.OUT("rects", ""),
+        nullable..EGLint.p("rects", ""),
         AutoSize("rects")..EGLint("n_rects", "")
     )
 }

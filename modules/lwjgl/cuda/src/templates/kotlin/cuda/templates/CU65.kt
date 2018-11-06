@@ -22,7 +22,7 @@ val CU65 = "CU65".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "OccupancyMaxActiveBlocksPerMultiprocessor",
         "",
 
-        Check(1)..int.p.OUT("numBlocks", ""),
+        Check(1)..int.p("numBlocks", ""),
         CUfunction("func", ""),
         int("blockSize", ""),
         size_t("dynamicSMemSize", "")
@@ -32,7 +32,7 @@ val CU65 = "CU65".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "OccupancyMaxActiveBlocksPerMultiprocessorWithFlags",
         "",
 
-        Check(1)..int.p.OUT("numBlocks", ""),
+        Check(1)..int.p("numBlocks", ""),
         CUfunction("func", ""),
         int("blockSize", ""),
         size_t("dynamicSMemSize", ""),
@@ -43,8 +43,8 @@ val CU65 = "CU65".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "OccupancyMaxPotentialBlockSize",
         "",
 
-        Check(1)..int.p.OUT("minGridSize", ""),
-        Check(1)..int.p.OUT("blockSize", ""),
+        Check(1)..int.p("minGridSize", ""),
+        Check(1)..int.p("blockSize", ""),
         CUfunction("func", ""),
         nullable..CUoccupancyB2DSize("blockSizeToDynamicSMemSize", ""),
         size_t("dynamicSMemSize", ""),
@@ -55,8 +55,8 @@ val CU65 = "CU65".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "OccupancyMaxPotentialBlockSizeWithFlags",
         "",
 
-        Check(1)..int.p.OUT("minGridSize", ""),
-        Check(1)..int.p.OUT("blockSize", ""),
+        Check(1)..int.p("minGridSize", ""),
+        Check(1)..int.p("blockSize", ""),
         CUfunction("func", ""),
         CUoccupancyB2DSize("blockSizeToDynamicSMemSize", ""),
         size_t("dynamicSMemSize", ""),

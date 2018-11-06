@@ -127,7 +127,7 @@ ENABLE_WARNINGS()""")
         The {@code LZ4F_preferences_t} structure is optional: you can provide #NULL as argument. All preferences will be set to default.
         """,
 
-        void.p.OUT("dstBuffer", ""),
+        void.p("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t("dstCapacity", "MUST be &ge; #compressFrameBound(){@code (srcSize, preferencesPtr)}"),
         void.const.p("srcBuffer", ""),
         AutoSize("srcBuffer")..size_t("srcSize", ""),
@@ -147,7 +147,7 @@ ENABLE_WARNINGS()""")
         The function will provide a pointer to a fully allocated {@code LZ4F_cctx} object. Object can release its memory using #freeCompressionContext();
         """,
 
-        Check(1)..LZ4F_cctx.p.p.OUT("cctxPtr", ""),
+        Check(1)..LZ4F_cctx.p.p("cctxPtr", ""),
         unsigned("version", "MUST be #VERSION. It is intended to track potential version mismatch, notably when using DLL.", "#VERSION"),
 
         returnDoc = "if {@code != zero}, there was an error during context creation."
@@ -165,7 +165,7 @@ ENABLE_WARNINGS()""")
         "Will write the frame header into {@code dstBuffer}.",
 
         LZ4F_cctx.p("cctx", ""),
-        void.p.OUT("dstBuffer", ""),
+        void.p("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t("dstCapacity", "must be &ge; #HEADER_SIZE_MAX bytes"),
         nullable..LZ4F_preferences_t.const.p("prefsPtr", "optional: you can provide #NULL as argument, all preferences will then be set to default"),
 
@@ -205,7 +205,7 @@ ENABLE_WARNINGS()""")
         """,
 
         LZ4F_cctx.p("cctx", ""),
-        void.p.OUT("dstBuffer", ""),
+        void.p("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t("dstCapacity", ""),
         void.const.p("srcBuffer", ""),
         AutoSize("srcBuffer")..size_t("srcSize", ""),
@@ -226,7 +226,7 @@ ENABLE_WARNINGS()""")
         """,
 
         LZ4F_cctx.p("cctx", ""),
-        void.p.OUT("dstBuffer", ""),
+        void.p("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t("dstCapacity", "must be large enough to ensure the operation will be successful"),
         nullable..LZ4F_compressOptions_t.const.p("cOptPtr", "optional: it's possible to provide #NULL, all options will be set to default"),
 
@@ -245,7 +245,7 @@ ENABLE_WARNINGS()""")
         """,
 
         LZ4F_cctx.p("cctx", ""),
-        void.p.OUT("dstBuffer", ""),
+        void.p("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t("dstCapacity", ""),
         nullable..LZ4F_compressOptions_t.const.p("cOptPtr", "optional: #NULL can be provided, in which case all options will be set to default"),
 
@@ -266,7 +266,7 @@ ENABLE_WARNINGS()""")
         #freeDecompressionContext().
         """,
 
-        Check(1)..LZ4F_dctx.p.p.OUT("dctxPtr", ""),
+        Check(1)..LZ4F_dctx.p.p("dctxPtr", ""),
         unsigned("version", "", "#VERSION"),
 
         returnDoc = "an errorCode, which can be tested using #isError()"
@@ -316,9 +316,9 @@ ENABLE_WARNINGS()""")
         """,
 
         LZ4F_dctx.p("dctx", ""),
-        LZ4F_frameInfo_t.p.OUT("frameInfoPtr", ""),
+        LZ4F_frameInfo_t.p("frameInfoPtr", ""),
         void.const.p("srcBuffer", ""),
-        AutoSize("srcBuffer")..Check(1)..size_t.p.INOUT("srcSizePtr", ""),
+        AutoSize("srcBuffer")..Check(1)..size_t.p("srcSizePtr", ""),
 
         returnDoc = "an hint about how many srcSize bytes LZ4F_decompress() expects for next call, or an error code which can be tested using LZ4F_isError()"
     )
@@ -345,10 +345,10 @@ ENABLE_WARNINGS()""")
         """,
 
         LZ4F_dctx.p("dctx", ""),
-        void.p.OUT("dstBuffer", ""),
-        AutoSize("dstBuffer")..Check(1)..size_t.p.INOUT("dstSizePtr", ""),
+        void.p("dstBuffer", ""),
+        AutoSize("dstBuffer")..Check(1)..size_t.p("dstSizePtr", ""),
         void.const.p("srcBuffer", ""),
-        AutoSize("srcBuffer")..Check(1)..size_t.p.INOUT("srcSizePtr", ""),
+        AutoSize("srcBuffer")..Check(1)..size_t.p("srcSizePtr", ""),
         LZ4F_decompressOptions_t.const.p("dOptPtr", ""),
 
         returnDoc =
@@ -446,7 +446,7 @@ ENABLE_WARNINGS()""")
         """,
 
         LZ4F_cctx.p("cctx", "must point to a context created by #createCompressionContext()."),
-        void.p.OUT("dst", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t("dstCapacity", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", ""),
@@ -468,7 +468,7 @@ ENABLE_WARNINGS()""")
         """,
 
         LZ4F_cctx.p("cctx", ""),
-        void.p.OUT("dstBuffer", ""),
+        void.p("dstBuffer", ""),
         AutoSize("dstBuffer")..size_t("dstCapacity", ""),
         LZ4F_CDict.const.p("cdict", ""),
         LZ4F_preferences_t.const.p(
@@ -488,10 +488,10 @@ ENABLE_WARNINGS()""")
         """,
 
         LZ4F_dctx.p("dctxPtr", ""),
-        void.p.OUT("dstBuffer", ""),
-        AutoSize("dstBuffer")..Check(1)..size_t.p.INOUT("dstSizePtr", ""),
+        void.p("dstBuffer", ""),
+        AutoSize("dstBuffer")..Check(1)..size_t.p("dstSizePtr", ""),
         void.const.p("srcBuffer", ""),
-        AutoSize("srcBuffer")..Check(1)..size_t.p.INOUT("srcSizePtr", ""),
+        AutoSize("srcBuffer")..Check(1)..size_t.p("srcSizePtr", ""),
         void.const.p("dict", ""),
         AutoSize("dict")..size_t("dictSize", ""),
         LZ4F_decompressOptions_t.const.p("decompressOptionsPtr", "")

@@ -181,6 +181,6 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
         VkImageUsageFlags("usage", "the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}."),
         VkImageCreateFlags("flags", "a bitmask describing additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}."),
         VkExternalMemoryHandleTypeFlagsNV("externalHandleType", "either one of the bits from {@code VkExternalMemoryHandleTypeFlagBitsNV}, or 0."),
-        VkExternalImageFormatPropertiesNV.p.OUT("pExternalImageFormatProperties", "points to an instance of the ##VkExternalImageFormatPropertiesNV structure in which capabilities are returned.")
+        VkExternalImageFormatPropertiesNV.p("pExternalImageFormatProperties", "points to an instance of the ##VkExternalImageFormatPropertiesNV structure in which capabilities are returned.")
     )
 }

@@ -56,7 +56,7 @@ val DynLoad = "DynLoad".nativeClass(Module.CORE_DYNCALL, prefix = "DL") {
         """,
 
         DLLib.p("pLib", "the dynamic library"),
-        Return(RESULT, includesNT = true)..charASCII.p.OUT("sOut", "pointer to a buffer where the library path will be stored"),
+        Return(RESULT, includesNT = true)..charASCII.p("sOut", "pointer to a buffer where the library path will be stored"),
         AutoSize("sOut")..int("bufSize", "the size of {@code sOut}, in bytes")
     )
 

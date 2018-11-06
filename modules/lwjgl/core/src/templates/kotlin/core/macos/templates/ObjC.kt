@@ -198,7 +198,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
 
         id("obj", "a pointer to an instance of a class. Pass the object containing the instance variable whose value you wish to obtain"),
         charUTF8.const.p("name", "a C string. Pass the name of the instance variable whose value you wish to obtain"),
-        Check(1)..void.p.p.OUT("outValue", "on return, contains a pointer to the value of the instance variable"),
+        Check(1)..void.p.p("outValue", "on return, contains a pointer to the value of the instance variable"),
 
         returnDoc = "a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name"
     )
@@ -277,7 +277,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         classes without detecting that the method is implemented first.
         """,
 
-        nullable..Class.p.OUT(
+        nullable..Class.p(
             "buffer",
             """
             an array of Class values. On output, each Class value points to one class definition, up to either {@code bufferCount} or the total number of
@@ -300,7 +300,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         "objc_copyClassList",
         "Creates and returns a list of pointers to all registered class definitions.",
 
-        AutoSizeResult..unsigned_int.p.OUT(
+        AutoSizeResult..unsigned_int.p(
             "outCount",
             "an integer pointer used to store the number of classes returned by this function in the list. This parameter may be #nil"
         ),
@@ -408,7 +408,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         "Describes the instance variables declared by a class.",
 
         nullable..Class("cls", "the class to inspect"),
-        AutoSizeResult..unsigned_int.p.OUT(
+        AutoSizeResult..unsigned_int.p(
             "outCount",
             "on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
         ),
@@ -497,7 +497,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         "Describes the instance methods implemented by a class.",
 
         nullable..Class("cls", "the class you want to inspect"),
-        AutoSizeResult..unsigned_int.p.OUT(
+        AutoSizeResult..unsigned_int.p(
             "outCount",
             "on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
         ),
@@ -530,7 +530,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         "Describes the protocols adopted by a class.",
 
         nullable..Class("cls", "the class you want to inspect"),
-        AutoSizeResult..unsigned_int.p.OUT(
+        AutoSizeResult..unsigned_int.p(
             "outCount",
             "on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
         ),
@@ -563,7 +563,7 @@ long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread
         "Describes the properties declared by a class.",
 
         nullable..Class("cls", "the class you want to inspect"),
-        AutoSizeResult..unsigned_int.p.OUT(
+        AutoSizeResult..unsigned_int.p(
             "outCount",
             "on return, contains the length of the returned array. If {@code outCount} is #NULL, the length is not returned"
         ),
@@ -909,7 +909,7 @@ void myMethodIMP(id self, SEL _cmd)
         """,
 
         Method("m", "the method to inspect"),
-        ReturnParam..charUTF8.p.OUT("dst", "the reference string to store the description"),
+        ReturnParam..charUTF8.p("dst", "the reference string to store the description"),
         AutoSize("dst")..size_t("dst_len", "the maximum number of characters that can be stored in {@code dst}")
     )
 
@@ -924,7 +924,7 @@ void myMethodIMP(id self, SEL _cmd)
 
         Method("m", "the method you want to inquire about"),
         unsigned_int("index", "the index of the parameter you want to inquire about"),
-        ReturnParam..charUTF8.p.OUT("dst", "the reference string to store the description"),
+        ReturnParam..charUTF8.p("dst", "the reference string to store the description"),
         AutoSize("dst")..size_t("dst_len", "the maximum number of characters that can be stored in {@code dst}")
     )
 
@@ -1005,7 +1005,7 @@ void myMethodIMP(id self, SEL _cmd)
         "Returns an array of property attributes for a given property.",
 
         objc_property_t("property", "the property whose attributes you want to copy"),
-        AutoSizeResult..unsigned_int.p.OUT("outCount", "the number of attributes returned in the array"),
+        AutoSizeResult..unsigned_int.p("outCount", "the number of attributes returned in the array"),
 
         returnDoc = "an array of property attributes. You must free the array with free()."
     )
@@ -1043,7 +1043,7 @@ void myMethodIMP(id self, SEL _cmd)
         "objc_copyProtocolList",
         "Returns an array of all the protocols known to the runtime.",
 
-        AutoSizeResult..unsigned_int.p.OUT("outCount", "upon return, contains the number of protocols in the returned array"),
+        AutoSizeResult..unsigned_int.p("outCount", "upon return, contains the number of protocols in the returned array"),
 
         returnDoc =
         """
@@ -1120,7 +1120,7 @@ void myMethodIMP(id self, SEL _cmd)
         Protocol.p("p", "a protocol"),
         BOOL("isRequiredMethod", "a Boolean value that indicates whether returned methods should be required methods (pass #YES to specify required methods)"),
         BOOL("isInstanceMethod", "a Boolean value that indicates whether returned methods should be instance methods (pass #YES to specify instance methods)"),
-        AutoSizeResult..unsigned_int.p.OUT("outCount", "upon return, contains the number of method description structures in the returned array"),
+        AutoSizeResult..unsigned_int.p("outCount", "upon return, contains the number of method description structures in the returned array"),
 
         returnDoc =
         """
@@ -1152,7 +1152,7 @@ void myMethodIMP(id self, SEL _cmd)
         "Returns an array of the properties declared by a protocol.",
 
         Protocol.p("proto", "a protocol"),
-        AutoSizeResult..unsigned_int.p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
+        AutoSizeResult..unsigned_int.p("outCount", "upon return, contains the number of elements in the returned array"),
 
         returnDoc =
         """
@@ -1168,7 +1168,7 @@ void myMethodIMP(id self, SEL _cmd)
         "eturns an array of the protocols adopted by a protocol.",
 
         Protocol.p("proto", "a protocol"),
-        AutoSizeResult..unsigned_int.p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
+        AutoSizeResult..unsigned_int.p("outCount", "upon return, contains the number of elements in the returned array"),
 
         returnDoc =
         """
@@ -1279,7 +1279,7 @@ void myMethodIMP(id self, SEL _cmd)
         "objc_copyImageNames",
         "Returns the names of all the loaded Objective-C frameworks and dynamic libraries.",
 
-        AutoSizeResult..unsigned_int.p.OUT("outCount", "the number of names in the returned array"),
+        AutoSizeResult..unsigned_int.p("outCount", "the number of names in the returned array"),
 
         returnDoc = "an array of C strings representing the names of all the loaded Objective-C frameworks and dynamic libraries"
     )
@@ -1298,7 +1298,7 @@ void myMethodIMP(id self, SEL _cmd)
         "Returns the names of all the classes within a specified library or framework.",
 
         charUTF8.const.p("image", "the library or framework you are inquiring about"),
-        AutoSizeResult..unsigned_int.p.OUT("outCount", "the number of names in the returned array"),
+        AutoSizeResult..unsigned_int.p("outCount", "the number of names in the returned array"),
 
         returnDoc = "an array of C strings representing all of the class names within the specified library or framework"
     )

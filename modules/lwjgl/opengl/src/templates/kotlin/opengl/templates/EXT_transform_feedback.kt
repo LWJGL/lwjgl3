@@ -155,12 +155,12 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
         GLuint("program", ""),
         GLuint("index", ""),
         AutoSize("name")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p.OUT("length", ""),
-        Check(1)..GLsizei.p.OUT("size", ""),
-        Check(1)..GLenum.p.OUT("type", ""),
+        Check(1)..nullable..GLsizei.p("length", ""),
+        Check(1)..GLsizei.p("size", ""),
+        Check(1)..GLenum.p("type", ""),
         Return("length", """GL.getCapabilities().OpenGL20
             ? GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)
-            : ARBShaderObjects.glGetObjectParameteriARB(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)""")..GLcharASCII.p.OUT("name", "")
+            : ARBShaderObjects.glGetObjectParameteriARB(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)""")..GLcharASCII.p("name", "")
     )
 
     EXT_draw_buffers2 reuse "GetIntegerIndexedvEXT"

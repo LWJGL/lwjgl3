@@ -677,7 +677,7 @@ val nk_draw_begin = Module.NUKLEAR.callback {
         "NkDrawBeginCallback",
         "",
 
-        nk_command_buffer.p("buffer", ""),
+        Input..nk_command_buffer.p("buffer", ""),
         nk_handle_in_callback("userdata", ""),
 
         nativeType = "nk_draw_begin"
@@ -691,7 +691,7 @@ val nk_draw_end = Module.NUKLEAR.callback {
         "NkDrawEndCallback",
         "",
 
-        nk_command_buffer.p("buffer", ""),
+        Input..nk_command_buffer.p("buffer", ""),
         nk_handle_in_callback("userdata", ""),
 
         nativeType = "nk_draw_end"

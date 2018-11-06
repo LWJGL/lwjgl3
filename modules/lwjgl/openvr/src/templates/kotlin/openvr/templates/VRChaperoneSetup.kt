@@ -43,8 +43,8 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         of the Play Area.
         """,
 
-        Check(1)..float.p.OUT("pSizeX", ""),
-        Check(1)..float.p.OUT("pSizeZ", "")
+        Check(1)..float.p("pSizeX", ""),
+        Check(1)..float.p("pSizeZ", "")
     )
 
     bool(
@@ -56,37 +56,37 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         2 sides are parallel to the Z axis. Height of every corner is 0Y (on the floor).
         """,
 
-        HmdQuad_t.p.OUT("rect", "")
+        HmdQuad_t.p("rect", "")
     )
 
     bool(
         "GetWorkingCollisionBoundsInfo",
         "Returns the number of Quads if the buffer points to null. Otherwise it returns Quads into the buffer up to the max specified from the working copy.",
 
-        nullable..HmdQuad_t.p.OUT("pQuadsBuffer", ""),
-        AutoSize("pQuadsBuffer")..Check(1)..uint32_t.p.INOUT("punQuadsCount", "")
+        nullable..HmdQuad_t.p("pQuadsBuffer", ""),
+        AutoSize("pQuadsBuffer")..Check(1)..uint32_t.p("punQuadsCount", "")
     )
 
     bool(
         "GetLiveCollisionBoundsInfo",
         "Returns the number of Quads if the buffer points to null. Otherwise it returns Quads into the buffer up to the max specified.",
 
-        nullable..HmdQuad_t.p.OUT("pQuadsBuffer", ""),
-        AutoSize("pQuadsBuffer")..Check(1)..uint32_t.p.INOUT("punQuadsCount", "")
+        nullable..HmdQuad_t.p("pQuadsBuffer", ""),
+        AutoSize("pQuadsBuffer")..Check(1)..uint32_t.p("punQuadsCount", "")
     )
 
     bool(
         "GetWorkingSeatedZeroPoseToRawTrackingPose",
         "Returns the preferred seated position from the working copy.",
 
-        HmdMatrix34_t.p.OUT("pmatSeatedZeroPoseToRawTrackingPose", "")
+        HmdMatrix34_t.p("pmatSeatedZeroPoseToRawTrackingPose", "")
     )
 
     bool(
         "GetWorkingStandingZeroPoseToRawTrackingPose",
         "Returns the standing origin from the working copy.",
 
-        HmdMatrix34_t.p.OUT("pmatStandingZeroPoseToRawTrackingPose", "")
+        HmdMatrix34_t.p("pmatStandingZeroPoseToRawTrackingPose", "")
     )
 
     void(
@@ -130,7 +130,7 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         "GetLiveSeatedZeroPoseToRawTrackingPose",
         "Returns the preferred seated position.",
 
-        HmdMatrix34_t.p.OUT("pmatSeatedZeroPoseToRawTrackingPose", "")
+        HmdMatrix34_t.p("pmatSeatedZeroPoseToRawTrackingPose", "")
     )
 
     void(
@@ -145,8 +145,8 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         "GetLiveCollisionBoundsTagsInfo",
         "",
 
-        nullable..uint8_t.p.OUT("pTagsBuffer", ""),
-        AutoSize("pTagsBuffer")..Check(1)..uint32_t.p.INOUT("punTagCount", "")
+        nullable..uint8_t.p("pTagsBuffer", ""),
+        AutoSize("pTagsBuffer")..Check(1)..uint32_t.p("punTagCount", "")
     )
 
     bool(
@@ -161,16 +161,16 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         "GetLivePhysicalBoundsInfo",
         "",
 
-        nullable..HmdQuad_t.p.OUT("pQuadsBuffer", ""),
-        AutoSize("pQuadsBuffer")..Check(1)..uint32_t.p.INOUT("punQuadsCount", "")
+        nullable..HmdQuad_t.p("pQuadsBuffer", ""),
+        AutoSize("pQuadsBuffer")..Check(1)..uint32_t.p("punQuadsCount", "")
     )
 
     bool(
         "ExportLiveToBuffer",
         "",
 
-        nullable..char.p.OUT("pBuffer", ""),
-        AutoSize("pBuffer")..Check(1)..uint32_t.p.INOUT("pnBufferLength", "")
+        nullable..char.p("pBuffer", ""),
+        AutoSize("pBuffer")..Check(1)..uint32_t.p("pnBufferLength", "")
     )
 
     bool(

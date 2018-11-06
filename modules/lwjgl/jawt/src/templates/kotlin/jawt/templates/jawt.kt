@@ -95,7 +95,7 @@ ENABLE_WARNINGS()
         "Locks the surface of the target component for native rendering. When finished drawing, the surface must be unlocked with #DrawingSurface_Unlock().",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface.p("ds", "the surface to lock"),
+        Input..JAWT_DrawingSurface.p("ds", "the surface to lock"),
 
         returnDoc =
         """
@@ -121,7 +121,7 @@ ENABLE_WARNINGS()
         """,
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface.p("ds", "the {@link JAWTDrawingSurface} to free"),
+        Input..JAWT_DrawingSurface.p("ds", "the {@link JAWTDrawingSurface} to free"),
 
         returnDoc = "#NULL if an error has occurred."
     )
@@ -131,7 +131,7 @@ ENABLE_WARNINGS()
         "Frees the drawing surface info.",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurfaceInfo.p("dsi", "the {@link JAWTDrawingSurfaceInfo} to free")
+        Input..JAWT_DrawingSurfaceInfo.p("dsi", "the {@link JAWTDrawingSurfaceInfo} to free")
     )
 
     void(
@@ -139,7 +139,7 @@ ENABLE_WARNINGS()
         "Unlocks the drawing surface of the target component for native rendering.",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface.p("ds", "the surface to unlock")
+        Input..JAWT_DrawingSurface.p("ds", "the surface to unlock")
     )
 
     // JAWT struct functions
@@ -167,7 +167,7 @@ ENABLE_WARNINGS()
         "Frees the drawing surface allocated in #GetDrawingSurface().",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface.p("ds", "the {@link JAWTDrawingSurface} to free")
+        Input..JAWT_DrawingSurface.p("ds", "the {@link JAWTDrawingSurface} to free")
     )
 
     void(

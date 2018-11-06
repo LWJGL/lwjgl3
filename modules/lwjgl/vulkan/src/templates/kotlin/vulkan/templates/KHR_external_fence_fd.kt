@@ -178,6 +178,6 @@ val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fen
 
         VkDevice("device", "the logical device that created the fence being exported."),
         VkFenceGetFdInfoKHR.const.p("pGetFdInfo", "a pointer to an instance of the ##VkFenceGetFdInfoKHR structure containing parameters of the export operation."),
-        Check(1)..int.p.OUT("pFd", "will return the file descriptor representing the fence payload.")
+        Check(1)..int.p("pFd", "will return the file descriptor representing the fence payload.")
     )
 }

@@ -142,7 +142,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
         AutoSize("name")..GLint("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
         GLcharASCII.const.p("name", "the name associated with the string"),
         AutoSize("string")..GLsizei("bufSize", "the maximum number of characters that may be written into {@code string}, including the null terminator"),
-        nullable..Check(1)..GLint.p.OUT(
+        nullable..Check(1)..GLint.p(
             "stringlen",
             """
             a buffer in which to place the actual number of characters written into {@code string}, excluding the null terminator. If #NULL, no length is
@@ -152,7 +152,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
         Return(
             "stringlen",
             "glGetNamedStringiARB(name, GL_NAMED_STRING_LENGTH_ARB)"
-        )..GLcharUTF8.p.OUT("string", "a buffer in which to place the returned string")
+        )..GLcharUTF8.p("string", "a buffer in which to place the returned string")
     )
 
     void(
@@ -162,6 +162,6 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
         AutoSize("name")..GLint("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
         GLcharASCII.const.p("name", "the name associated with the string"),
         GLenum("pname", "the parameter to query", "#NAMED_STRING_LENGTH_ARB #NAMED_STRING_TYPE_ARB"),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a buffer in which to place the returned value")
+        Check(1)..ReturnParam..GLint.p("params", "a buffer in which to place the returned value")
     )
 }

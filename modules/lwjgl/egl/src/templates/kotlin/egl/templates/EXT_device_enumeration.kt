@@ -30,7 +30,7 @@ val EXT_device_enumeration = "EXTDeviceEnumeration".nativeClassEGL("EXT_device_e
         "",
 
         AutoSize("devices")..EGLint("max_devices", ""),
-        nullable..EGLDeviceEXT.p.OUT("devices", ""),
-        Check(1)..EGLint.p.OUT("num_devices", "")
+        nullable..EGLDeviceEXT.p("devices", ""),
+        Check(1)..EGLint.p("num_devices", "")
     )
 }

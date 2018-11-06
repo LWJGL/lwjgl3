@@ -108,7 +108,7 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
         int("property", "", properties),
         GLenum("dataType", ""),
         AutoSize("data")..unsigned_int("size", ""),
-        void.p.OUT("data", "")
+        void.p("data", "")
     )
 
     Bool(

@@ -43,7 +43,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         "Returns the integer values of the specified listener parameter.",
 
         ALenum("param", "the parameter to query"),
-        Check(1)..ALint.p.OUT("values", "the parameter values")
+        Check(1)..ALint.p("values", "the parameter values")
     )
 
     ALvoid(
@@ -138,7 +138,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
         ALuint("buffer", "the buffer to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALint.p.OUT("values", "the parameter values")
+        Check(1)..ALint.p("values", "the parameter values")
     )
 
     ALvoid(
@@ -147,7 +147,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
         ALuint("buffer", "the buffer to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALfloat.p.OUT("values", "the parameter values")
+        Check(1)..ALfloat.p("values", "the parameter values")
     )
 
     ALvoid(

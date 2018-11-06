@@ -51,7 +51,7 @@ val VRApplications = "VRApplications".nativeClass(
         """,
 
         uint32_t("unApplicationIndex", ""),
-        nullable..char.p.OUT("pchAppKeyBuffer", ""),
+        nullable..char.p("pchAppKeyBuffer", ""),
         AutoSize("pchAppKeyBuffer")..uint32_t("unAppKeyBufferLen", "")
     )
 
@@ -62,7 +62,7 @@ val VRApplications = "VRApplications".nativeClass(
         """,
 
         uint32_t("unProcessId", ""),
-        nullable..char.p.OUT("pchAppKeyBuffer", ""),
+        nullable..char.p("pchAppKeyBuffer", ""),
         AutoSize("pchAppKeyBuffer")..uint32_t("unAppKeyBufferLen", "")
     )
 
@@ -147,9 +147,9 @@ val VRApplications = "VRApplications".nativeClass(
 
         charASCII.const.p("pchAppKey", ""),
         EVRApplicationProperty("eProperty", "", "EVRApplicationProperty_\\w+_String"),
-        Return(RESULT, "VR.k_unMaxPropertyStringSize", includesNT = true)..nullable..charASCII.p.OUT("pchPropertyValueBuffer", ""),
+        Return(RESULT, "VR.k_unMaxPropertyStringSize", includesNT = true)..nullable..charASCII.p("pchPropertyValueBuffer", ""),
         AutoSize("pchPropertyValueBuffer")..uint32_t("unPropertyValueBufferLen", ""),
-        Check(1)..EVRApplicationError.p.OUT("peError", "")
+        Check(1)..EVRApplicationError.p("peError", "")
     )
 
     bool(
@@ -158,7 +158,7 @@ val VRApplications = "VRApplications".nativeClass(
 
         charASCII.const.p("pchAppKey", ""),
         EVRApplicationProperty("eProperty", "", "EVRApplicationProperty_\\w+_Bool"),
-        Check(1)..EVRApplicationError.p.OUT("peError", "")
+        Check(1)..EVRApplicationError.p("peError", "")
     )
 
     uint64_t(
@@ -167,7 +167,7 @@ val VRApplications = "VRApplications".nativeClass(
 
         charASCII.const.p("pchAppKey", ""),
         EVRApplicationProperty("eProperty", "", "EVRApplicationProperty_\\w+_Uint64"),
-        Check(1)..EVRApplicationError.p.OUT("peError", "")
+        Check(1)..EVRApplicationError.p("peError", "")
     )
 
     EVRApplicationError(
@@ -204,7 +204,7 @@ val VRApplications = "VRApplications".nativeClass(
         "Return the app key that will open this mime type.",
 
         charASCII.const.p("pchMimeType", ""),
-        nullable..char.p.OUT("pchAppKeyBuffer", ""),
+        nullable..char.p("pchAppKeyBuffer", ""),
         AutoSize("pchAppKeyBuffer")..uint32_t("unAppKeyBufferLen", "")
     )
 
@@ -213,7 +213,7 @@ val VRApplications = "VRApplications".nativeClass(
         "Get the list of supported mime types for this application, comma-delimited.",
 
         charASCII.const.p("pchAppKey", ""),
-        nullable..char.p.OUT("pchMimeTypesBuffer", ""),
+        nullable..char.p("pchMimeTypesBuffer", ""),
         AutoSize("pchMimeTypesBuffer")..uint32_t("unMimeTypesBuffer", "")
     )
 
@@ -222,7 +222,7 @@ val VRApplications = "VRApplications".nativeClass(
         "Get the list of app-keys that support this mime type, comma-delimited, the return value is number of bytes you need to return the full string.",
 
         charASCII.const.p("pchMimeType", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchAppKeysThatSupportBuffer", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchAppKeysThatSupportBuffer", ""),
         AutoSize("pchAppKeysThatSupportBuffer")..uint32_t("unAppKeysThatSupportBuffer", "")
     )
 
@@ -231,7 +231,7 @@ val VRApplications = "VRApplications".nativeClass(
         "Get the args list from an app launch that had the process already running, you call this when you get a #EVREventType_VREvent_ApplicationMimeTypeLoad.",
 
         uint32_t("unHandle", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchArgs", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchArgs", ""),
         AutoSize("pchArgs")..uint32_t("unArgs", "")
     )
 
@@ -239,7 +239,7 @@ val VRApplications = "VRApplications".nativeClass(
         "GetStartingApplication",
         "Returns the app key for the application that is starting up.",
 
-        char.p.OUT("pchAppKeyBuffer", ""),
+        char.p("pchAppKeyBuffer", ""),
         AutoSize("pchAppKeyBuffer")..uint32_t("unAppKeyBufferLen", "")
     )
 

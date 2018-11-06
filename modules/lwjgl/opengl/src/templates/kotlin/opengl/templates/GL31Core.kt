@@ -327,7 +327,7 @@ val GL31C = "GL31C".nativeClassGL("GL31C") {
             "uniformNames",
             "an array of pointers to buffers containing the names of the queried uniforms"
         ),
-        ReturnParam..GLuint.p.OUT("uniformIndices", "an array that will receive the indices of the uniforms")
+        ReturnParam..GLuint.p("uniformIndices", "an array that will receive the indices of the uniforms")
     )
 
     void(
@@ -341,7 +341,7 @@ val GL31C = "GL31C".nativeClassGL("GL31C") {
         ),
         SingleValue("uniformIndex")..GLuint.const.p("uniformIndices", "an array of {@code uniformCount} integers containing the indices of uniforms within {@code program}"),
         GLenum("pname", "the property of the each uniform in {@code uniformIndices} that should be written into the corresponding element of {@code params}"),
-        ReturnParam..GLint.p.OUT("params", "an array of {@code uniformCount} integers which are to receive the value of {@code pname} for each uniform in {@code uniformIndices}")
+        ReturnParam..GLint.p("params", "an array of {@code uniformCount} integers which are to receive the value of {@code pname} for each uniform in {@code uniformIndices}")
     )
 
     void(
@@ -354,11 +354,11 @@ val GL31C = "GL31C".nativeClassGL("GL31C") {
             "bufSize",
             "the size of the buffer, in units of {@code GLchar}, of the buffer whose address is specified in {@code uniformName}"
         ),
-        Check(1)..nullable..GLsizei.p.OUT(
+        Check(1)..nullable..GLsizei.p(
             "length",
             "the address of a variable that will receive the number of characters that were or would have been written to the buffer addressed by {@code uniformName}"
         ),
-        Return("length", "glGetActiveUniformsi(program, uniformIndex, GL_UNIFORM_NAME_LENGTH)")..GLcharASCII.p.OUT(
+        Return("length", "glGetActiveUniformsi(program, uniformIndex, GL_UNIFORM_NAME_LENGTH)")..GLcharASCII.p(
             "uniformName",
             "the address of a buffer into which the GL will place the name of the active uniform at {@code uniformIndex} within {@code program}"
         )
@@ -379,7 +379,7 @@ val GL31C = "GL31C".nativeClassGL("GL31C") {
         GLuint("program", "the name of a program containing the uniform block"),
         GLuint("uniformBlockIndex", "the index of the uniform block within {@code program}"),
         GLenum("pname", "the name of the parameter to query", UniformBlockParameters),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "the address of a variable to receive the result of the query")
+        Check(1)..ReturnParam..GLint.p("params", "the address of a variable to receive the result of the query")
     )
 
     void(
@@ -389,8 +389,8 @@ val GL31C = "GL31C".nativeClassGL("GL31C") {
         GLuint("program", "the name of a program containing the uniform block"),
         GLuint("uniformBlockIndex", "the index of the uniform block within {@code program}"),
         AutoSize("uniformBlockName")..GLsizei("bufSize", "the size of the buffer addressed by {@code uniformBlockName}"),
-        Check(1)..nullable..GLsizei.p.OUT("length", "the address of a variable to receive the number of characters that were written to {@code uniformBlockName}"),
-        Return("length", "glGetActiveUniformBlocki(program, uniformBlockIndex, GL_UNIFORM_BLOCK_NAME_LENGTH)")..GLcharASCII.p.OUT(
+        Check(1)..nullable..GLsizei.p("length", "the address of a variable to receive the number of characters that were written to {@code uniformBlockName}"),
+        Return("length", "glGetActiveUniformBlocki(program, uniformBlockIndex, GL_UNIFORM_BLOCK_NAME_LENGTH)")..GLcharASCII.p(
             "uniformBlockName",
             "an array of characters to receive the name of the uniform block at {@code uniformBlockIndex}"
         )

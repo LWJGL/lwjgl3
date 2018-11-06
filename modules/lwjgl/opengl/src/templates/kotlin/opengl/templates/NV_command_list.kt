@@ -178,7 +178,7 @@ typedef struct {
         "Returns {@code n} previously unused state object names in {@code states}, and creates a state object in the initial state for each name.",
 
         AutoSize("states")..GLsizei("n", "the number of state object names to create"),
-        ReturnParam..GLuint.p.OUT("states", "the buffer in which to write the created state object names")
+        ReturnParam..GLuint.p("states", "the buffer in which to write the created state object names")
     )
 
     void(
@@ -324,7 +324,7 @@ typedef struct {
         "Returns {@code n} previously unused command list names in {@code lists}, and creates a command list in the initial state for each name.",
 
         AutoSize("lists")..GLsizei("n", "the number of command list names to create"),
-        ReturnParam..GLuint.p.OUT("lists", "the buffer in which to return the created command list names")
+        ReturnParam..GLuint.p("lists", "the buffer in which to return the created command list names")
     )
 
     void(

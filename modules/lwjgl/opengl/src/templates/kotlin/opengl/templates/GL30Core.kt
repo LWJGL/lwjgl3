@@ -236,7 +236,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
 
         GLuint("index", vertexAttribIndex),
         GLenum("pname", "the symbolic name of the vertex attribute parameter to be queried", "#CURRENT_VERTEX_ATTRIB"),
-        Check(4)..ReturnParam..GLint.p.OUT("params", "returns the requested data")
+        Check(4)..ReturnParam..GLint.p("params", "returns the requested data")
     )
 
     void(
@@ -245,7 +245,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
 
         GLuint("index", vertexAttribIndex),
         GLenum("pname", "the symbolic name of the vertex attribute parameter to be queried", "#CURRENT_VERTEX_ATTRIB"),
-        Check(4)..ReturnParam..GLuint.p.OUT("params", "returns the requested data")
+        Check(4)..ReturnParam..GLuint.p("params", "returns the requested data")
     )
 
     // Uniform functions javadoc
@@ -335,7 +335,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
 
         GLuint("program", "the program object to be queried"),
         GLint("location", "the location of the uniform variable to be queried"),
-        Check(1)..ReturnParam..GLuint.p.OUT("params", "the value of the specified uniform variable")
+        Check(1)..ReturnParam..GLuint.p("params", "the value of the specified uniform variable")
     )
 
     void(
@@ -747,7 +747,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
         "Generates renderbuffer object names.",
 
         AutoSize("renderbuffers")..GLsizei("n", "the number of renderbuffer object names to generate"),
-        ReturnParam..GLuint.p.OUT("renderbuffers", "a buffer in which the generated renderbuffer object names are stored")
+        ReturnParam..GLuint.p("renderbuffers", "a buffer in which the generated renderbuffer object names are stored")
     )
 
     void(
@@ -781,7 +781,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
 
         GLenum("target", "the target of the query operation", "#RENDERBUFFER"),
         GLenum("pname", "the parameter whose value to retrieve from the renderbuffer bound to {@code target}", RenderbufferParameters),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "an array to receive the value of the queried parameter")
+        Check(1)..ReturnParam..GLint.p("params", "an array to receive the value of the queried parameter")
     )
 
     GLboolean(
@@ -812,7 +812,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
         "Generates framebuffer object names.",
 
         AutoSize("framebuffers")..GLsizei("n", "the number of framebuffer object names to generate"),
-        ReturnParam..GLuint.p.OUT("framebuffers", "a buffer in which the generated framebuffer object names are stored")
+        ReturnParam..GLuint.p("framebuffers", "a buffer in which the generated framebuffer object names are stored")
     )
 
     GLenum(
@@ -884,7 +884,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
         GLenum("target", "the target of the query operation", FramebufferTargets),
         GLenum("attachment", "the attachment within {@code target}", FramebufferAttachments),
         GLenum("pname", "the parameter of {@code attachment} to query", FramebufferParameters),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "an array to receive the value of the queried parameter")
+        Check(1)..ReturnParam..GLint.p("params", "an array to receive the value of the queried parameter")
     )
 
     void(
@@ -990,7 +990,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
 
         GLenum("target", "the texture target"),
         GLenum("pname", "the symbolic name of a texture parameter"),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "returns the texture parameter value")
+        Check(1)..ReturnParam..GLint.p("params", "returns the texture parameter value")
     )
 
     void(
@@ -999,7 +999,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
 
         GLenum("target", "the texture target"),
         GLenum("pname", "the symbolic name of a texture parameter"),
-        Check(1)..ReturnParam..GLuint.p.OUT("params", "returns the texture parameter value")
+        Check(1)..ReturnParam..GLuint.p("params", "returns the texture parameter value")
     )
 
     // EXT_texture_array
@@ -1053,7 +1053,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
 
         GLenum("target", "the indexed state to query"),
         GLuint("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLboolean.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLboolean.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -1062,7 +1062,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
 
         GLenum("target", "the indexed state to query"),
         GLuint("index", "the index of the element being queried"),
-        Check(1)..ReturnParam..GLint.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLint.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     void(
@@ -1266,10 +1266,10 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
         GLuint("program", "the target program object"),
         GLuint("index", "the index of the varying variable whose information to retrieve"),
         AutoSize("name")..GLsizei("bufSize", "the maximum number of characters, including the null terminator, that may be written into {@code name}"),
-        Check(1)..nullable..GLsizei.p.OUT("length", "a variable which will receive the number of characters written into {@code name}, excluding the null-terminator. If {@code length} is NULL no length is returned."),
-        Check(1)..GLsizei.p.OUT("size", "a variable that will receive the size of the varying"),
-        Check(1)..GLenum.p.OUT("type", "a variable that will receive the type of the varying"),
-        Return("length", "GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH)")..GLcharASCII.p.OUT(
+        Check(1)..nullable..GLsizei.p("length", "a variable which will receive the number of characters written into {@code name}, excluding the null-terminator. If {@code length} is NULL no length is returned."),
+        Check(1)..GLsizei.p("size", "a variable that will receive the size of the varying"),
+        Check(1)..GLenum.p("type", "a variable that will receive the type of the varying"),
+        Return("length", "GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH)")..GLcharASCII.p(
             "name",
             "a buffer into which will be written the name of the varying"
         )
@@ -1303,7 +1303,7 @@ val GL30C = "GL30C".nativeClassGL("GL30C") {
         "Generates vertex array object names.",
 
         AutoSize("arrays")..GLsizei("n", "the number of vertex array object names to generate"),
-        ReturnParam..GLuint.p.OUT("arrays", "a buffer in which the generated vertex array object names are stored")
+        ReturnParam..GLuint.p("arrays", "a buffer in which the generated vertex array object names are stored")
     )
 
     GLboolean(

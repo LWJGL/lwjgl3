@@ -38,7 +38,7 @@ val EXT_draw_buffers2 = "EXTDrawBuffers2".nativeClassGL("EXT_draw_buffers2", pos
 
         GLenum("target", ""),
         GLuint("index", ""),
-        Check(1)..ReturnParam..GLboolean.p.OUT("data", "")
+        Check(1)..ReturnParam..GLboolean.p("data", "")
     )
 
     void(
@@ -47,7 +47,7 @@ val EXT_draw_buffers2 = "EXTDrawBuffers2".nativeClassGL("EXT_draw_buffers2", pos
 
         GLenum("target", ""),
         GLuint("index", ""),
-        Check(1)..ReturnParam..GLint.p.OUT("data", "")
+        Check(1)..ReturnParam..GLint.p("data", "")
     )
 
     void(

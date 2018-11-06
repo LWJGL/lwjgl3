@@ -139,7 +139,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_PACK_BUFFER..void.p.OUT("table", "the color table data")
+        )..Unsafe..PIXEL_PACK_BUFFER..void.p("table", "the color table data")
     )
 
     DeprecatedGL..void(
@@ -148,7 +148,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
         GLenum("target", "the color table target", "$COLOR_TABLE_TARGETS $PROXY_COLOR_TABLE_TARGETS"),
         GLenum("pname", "the parameter to query", "$COLOR_TABLE_PARAMS $COLOR_TABLE_PROPERTIES"),
-        Check(4)..ReturnParam..GLint.p.OUT("params", "a buffer in which to place the returned value")
+        Check(4)..ReturnParam..GLint.p("params", "a buffer in which to place the returned value")
     )
 
     DeprecatedGL..void(
@@ -157,7 +157,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
         GLenum("target", "the color table target"),
         GLenum("pname", "the parameter to query"),
-        Check(4)..ReturnParam..GLfloat.p.OUT("params", "a buffer in which to place the returned value")
+        Check(4)..ReturnParam..GLfloat.p("params", "a buffer in which to place the returned value")
     )
 
     // EXT_color_subtable
@@ -329,7 +329,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         GLenum("target", "the convolution target", "#CONVOLUTION_1D #CONVOLUTION_2D"),
         GLenum("format", "the filter data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the filter data type", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_PACK_BUFFER..void.p.OUT("image", "the filter data")
+        Unsafe..PIXEL_PACK_BUFFER..void.p("image", "the filter data")
     )
 
     DeprecatedGL..void(
@@ -353,8 +353,8 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         GLenum("target", "the filter target", "#SEPARABLE_2D"),
         GLenum("format", "the filter data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the filter data type", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_PACK_BUFFER..void.p.OUT("row", "a buffer in which to return the filter row"),
-        Unsafe..PIXEL_PACK_BUFFER..void.p.OUT("column", "a buffer in which to return the filter column"),
+        Unsafe..PIXEL_PACK_BUFFER..void.p("row", "a buffer in which to return the filter row"),
+        Unsafe..PIXEL_PACK_BUFFER..void.p("column", "a buffer in which to return the filter column"),
         Unsafe..nullable..void.p("span", "unused")
     )
 
@@ -400,7 +400,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
         GLenum("target", "the filter target", "#CONVOLUTION_1D #CONVOLUTION_2D #SEPARABLE_2D"),
         GLenum("pname", "the parameter to query", CONVOLUTION_FILTER_PROPERTIES),
-        ReturnParam..Check(4)..GLint.p.OUT("params", "a buffer in which to return the parameter value")
+        ReturnParam..Check(4)..GLint.p("params", "a buffer in which to return the parameter value")
     )
 
     DeprecatedGL..void(
@@ -409,7 +409,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
         GLenum("target", "the filter target"),
         GLenum("pname", "the parameter to query"),
-        ReturnParam..Check(4)..GLfloat.p.OUT("params", "a buffer in which to return the parameter value")
+        ReturnParam..Check(4)..GLfloat.p("params", "a buffer in which to return the parameter value")
     )
 
     // HP_convolution_border_modes
@@ -534,7 +534,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         ),
         GLenum("format", "the pixel data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the pixel data types", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_PACK_BUFFER..void.p.OUT("values", "the pixel data")
+        Unsafe..PIXEL_PACK_BUFFER..void.p("values", "the pixel data")
     )
 
     DeprecatedGL..void(
@@ -543,7 +543,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
         GLenum("target", "the histogram target", "#HISTOGRAM"),
         GLenum("pname", "the parameter to query", HISTOGRAM_PROPERTIES),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "a buffer in which to return the parameter values")
+        ReturnParam..Check(1)..GLint.p("params", "a buffer in which to return the parameter values")
     )
 
     DeprecatedGL..void(
@@ -552,7 +552,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
         GLenum("target", "the histogram target"),
         GLenum("pname", "the parameter to query"),
-        ReturnParam..Check(1)..GLfloat.p.OUT("params", "a buffer in which to place the returned value")
+        ReturnParam..Check(1)..GLfloat.p("params", "a buffer in which to place the returned value")
     )
 
     DeprecatedGL..void(
@@ -588,7 +588,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
         ),
         GLenum("format", "the pixel data format", PIXEL_DATA_FORMATS),
         GLenum("type", "the pixel data type", PIXEL_DATA_TYPES),
-        Unsafe..PIXEL_PACK_BUFFER..void.p.OUT("values", "a buffer in which to place the minmax values")
+        Unsafe..PIXEL_PACK_BUFFER..void.p("values", "a buffer in which to place the minmax values")
     )
 
     DeprecatedGL..void(
@@ -597,7 +597,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
         GLenum("target", "the minmax target", "#MINMAX"),
         GLenum("pname", "the parameter to query"),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "a buffer in which to place the returned value")
+        ReturnParam..Check(1)..GLint.p("params", "a buffer in which to place the returned value")
     )
 
     DeprecatedGL..void(
@@ -606,7 +606,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
         GLenum("target", "the minmax target", "#MINMAX"),
         GLenum("pname", "the parameter to query"),
-        ReturnParam..Check(1)..GLfloat.p.OUT("params", "a buffer in which to place the returned value")
+        ReturnParam..Check(1)..GLfloat.p("params", "a buffer in which to place the returned value")
     )
 
     // EXT_blend_color

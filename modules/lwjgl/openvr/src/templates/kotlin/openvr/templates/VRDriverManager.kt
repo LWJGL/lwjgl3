@@ -24,7 +24,7 @@ val VRDriverManager = "VRDriverManager".nativeClass(
         "",
 
         DriverId_t("nDriver", ""),
-        Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchValue", ""),
+        Return(RESULT, includesNT = true)..nullable..charASCII.p("pchValue", ""),
         AutoSize("pchValue")..uint32_t("unBufferSize", ""),
 
         returnDoc = "the length of the number of bytes necessary to hold this string including the trailing null"
@@ -34,6 +34,6 @@ val VRDriverManager = "VRDriverManager".nativeClass(
         "GetDriverHandle",
         "Returns the property container handle for the specified driver.",
 
-        charASCII.p("pchDriverName", "the driver name")
+        charASCII.const.p("pchDriverName", "the driver name")
     )
 }

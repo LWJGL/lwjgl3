@@ -241,7 +241,7 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
             """,
             "#FONT_LINES #FONT_POLYGONS"
         ),
-        nullable..LPGLYPHMETRICSFLOAT.OUT(
+        nullable..LPGLYPHMETRICSFLOAT(
             "glyphMetrics",
             """
             an array of {@code count} ##GLYPHMETRICSFLOAT structures that is to receive the metrics of the glyphs. When {@code glyphMetrics} is #NULL, no

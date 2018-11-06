@@ -147,7 +147,7 @@ val stbi_zlib_compress = Module.STB.callback {
 
         unsigned_char.p("data", "the data to compress"),
         AutoSize("data")..int("data_len", "the data length, in bytes"),
-        AutoSizeResult..Check(1)..int.p.OUT("out_len", "returns the compressed data length, in bytes"),
+        AutoSizeResult..Check(1)..int.p("out_len", "returns the compressed data length, in bytes"),
         int("quality", "the compression quality to use"),
 
         returnDoc = "the compressed data"

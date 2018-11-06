@@ -206,7 +206,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         VkDevice("device", "the device to create the swapchain for."),
         VkSwapchainCreateInfoKHR.const.p("pCreateInfo", "a pointer to an instance of the ##VkSwapchainCreateInfoKHR structure specifying the parameters of the created swapchain."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the swapchain object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
-        Check(1)..VkSwapchainKHR.p.OUT("pSwapchain", "a pointer to a {@code VkSwapchainKHR} handle in which the created swapchain object will be returned.")
+        Check(1)..VkSwapchainKHR.p("pSwapchain", "a pointer to a {@code VkSwapchainKHR} handle in which the created swapchain object will be returned.")
     )
 
     void(
@@ -302,8 +302,8 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         VkDevice("device", "the device associated with {@code swapchain}."),
         VkSwapchainKHR("swapchain", "the swapchain to query."),
-        AutoSize("pSwapchainImages")..Check(1)..uint32_t.p.INOUT("pSwapchainImageCount", "a pointer to an integer related to the number of presentable images available or queried, as described below."),
-        nullable..VkImage.p.OUT("pSwapchainImages", "either {@code NULL} or a pointer to an array of {@code VkImage} handles.")
+        AutoSize("pSwapchainImages")..Check(1)..uint32_t.p("pSwapchainImageCount", "a pointer to an integer related to the number of presentable images available or queried, as described below."),
+        nullable..VkImage.p("pSwapchainImages", "either {@code NULL} or a pointer to an array of {@code VkImage} handles.")
     )
 
     VkResult(
@@ -378,7 +378,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         uint64_t("timeout", "specifies how long the function waits, in nanoseconds, if no image is available."),
         VkSemaphore("semaphore", "#NULL_HANDLE or a semaphore to signal."),
         VkFence("fence", "#NULL_HANDLE or a fence to signal."),
-        Check(1)..uint32_t.p.OUT("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use (i.e. an index into the array of images returned by #GetSwapchainImagesKHR()).")
+        Check(1)..uint32_t.p("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use (i.e. an index into the array of images returned by #GetSwapchainImagesKHR()).")
     )
 
     VkResult(
@@ -502,7 +502,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         """,
 
         VkDevice("device", "the logical device."),
-        VkDeviceGroupPresentCapabilitiesKHR.p.OUT("pDeviceGroupPresentCapabilities", "a pointer to a structure of type ##VkDeviceGroupPresentCapabilitiesKHR that is filled with the logical device&#8217;s capabilities.")
+        VkDeviceGroupPresentCapabilitiesKHR.p("pDeviceGroupPresentCapabilities", "a pointer to a structure of type ##VkDeviceGroupPresentCapabilitiesKHR that is filled with the logical device&#8217;s capabilities.")
     )
 
     DependsOn("Vulkan11")..VkResult(
@@ -555,7 +555,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         VkDevice("device", "the logical device."),
         VkSurfaceKHR("surface", "the surface."),
-        Check(1)..VkDeviceGroupPresentModeFlagsKHR.p.INOUT("pModes", "a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHR} that is filled with the supported device group present modes for the surface.")
+        Check(1)..VkDeviceGroupPresentModeFlagsKHR.p("pModes", "a pointer to a value of type {@code VkDeviceGroupPresentModeFlagsKHR} that is filled with the supported device group present modes for the surface.")
     )
 
     DependsOn("Vulkan11")..VkResult(
@@ -617,8 +617,8 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         VkPhysicalDevice("physicalDevice", "the physical device."),
         VkSurfaceKHR("surface", "the surface."),
-        AutoSize("pRects")..Check(1)..uint32_t.p.INOUT("pRectCount", "a pointer to an integer related to the number of rectangles available or queried, as described below."),
-        nullable..VkRect2D.p.OUT("pRects", "either {@code NULL} or a pointer to an array of ##VkRect2D structures.")
+        AutoSize("pRects")..Check(1)..uint32_t.p("pRectCount", "a pointer to an integer related to the number of rectangles available or queried, as described below."),
+        nullable..VkRect2D.p("pRects", "either {@code NULL} or a pointer to an array of ##VkRect2D structures.")
     )
 
     DependsOn("Vulkan11")..VkResult(
@@ -673,6 +673,6 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         VkDevice("device", "the device associated with {@code swapchain}."),
         VkAcquireNextImageInfoKHR.const.p("pAcquireInfo", "a pointer to a structure of type ##VkAcquireNextImageInfoKHR containing parameters of the acquire."),
-        Check(1)..uint32_t.p.OUT("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use.")
+        Check(1)..uint32_t.p("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use.")
     )
 }

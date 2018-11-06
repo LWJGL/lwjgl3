@@ -746,7 +746,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "Requests a number of effects.",
 
         AutoSize("effects")..ALsizei("n", "the number of effects be to generated"),
-        ReturnParam..ALuint.p.OUT("effects", "the buffer that will receive the effects")
+        ReturnParam..ALuint.p("effects", "the buffer that will receive the effects")
     )
 
     ALvoid(
@@ -806,7 +806,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("effect", "the effect to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALint.p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALint.p("value", "the parameter value")
     )
 
     ALvoid(
@@ -815,7 +815,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("effect", "the effect to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALint.p.OUT("values", "the parameter values")
+        Check(1)..ALint.p("values", "the parameter values")
     )
 
     ALvoid(
@@ -824,7 +824,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("effect", "the effect to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALfloat.p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
     )
 
     ALvoid(
@@ -833,7 +833,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("effect", "the effect to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALfloat.p.OUT("values", "the parameter values")
+        Check(1)..ALfloat.p("values", "the parameter values")
     )
 
     ALvoid(
@@ -841,7 +841,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "Requests a number of filters.",
 
         AutoSize("filters")..ALsizei("n", "the number of filters be to generated"),
-        ReturnParam..ALuint.p.OUT("filters", "the buffer that will receive the filters")
+        ReturnParam..ALuint.p("filters", "the buffer that will receive the filters")
     )
 
     ALvoid(
@@ -901,7 +901,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("filter", "the filter to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALint.p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALint.p("value", "the parameter value")
     )
 
     ALvoid(
@@ -910,7 +910,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("filter", "the filter to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALint.p.OUT("values", "the parameter values")
+        Check(1)..ALint.p("values", "the parameter values")
     )
 
     ALvoid(
@@ -919,7 +919,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("filter", "the effect to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALfloat.p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
     )
 
     ALvoid(
@@ -928,7 +928,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("filter", "the effect to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALfloat.p.OUT("values", "the parameter values")
+        Check(1)..ALfloat.p("values", "the parameter values")
     )
 
     ALvoid(
@@ -936,7 +936,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "Requests a number of effect slots.",
 
         AutoSize("effectSlots")..ALsizei("n", "the number of effect slots be to generated"),
-        ReturnParam..ALuint.p.OUT("effectSlots", "the buffer that will receive the effect slots")
+        ReturnParam..ALuint.p("effectSlots", "the buffer that will receive the effect slots")
     )
 
     ALvoid(
@@ -996,7 +996,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("effectSlot", "the effect slot to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALint.p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALint.p("value", "the parameter value")
     )
 
     ALvoid(
@@ -1005,7 +1005,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("effectSlot", "the effect slot to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALint.p.OUT("values", "the parameter values")
+        Check(1)..ALint.p("values", "the parameter values")
     )
 
     ALvoid(
@@ -1014,7 +1014,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("effectSlot", "the effect slot to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALfloat.p.OUT("value", "the parameter value")
+        Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
     )
 
     ALvoid(
@@ -1023,7 +1023,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
         ALuint("effectSlot", "the effect to query"),
         ALenum("param", "the parameter to query"),
-        Check(1)..ALfloat.p.OUT("values", "the parameter values")
+        Check(1)..ALfloat.p("values", "the parameter values")
     )
 
     ALCBinding.addClass(this)

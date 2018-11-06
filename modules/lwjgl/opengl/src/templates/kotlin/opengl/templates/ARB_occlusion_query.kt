@@ -82,7 +82,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
         "Generates query object names.",
 
         AutoSize("ids")..GLsizei("n", "the number of query object names to be generated"),
-        ReturnParam..GLuint.p.OUT("ids", "a buffer in which the generated query object names are stored")
+        ReturnParam..GLuint.p("ids", "a buffer in which the generated query object names are stored")
     )
 
     void(
@@ -121,7 +121,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
         GLenum("target", "the query object target", QUERY_TARGETS),
         GLenum("pname", "the symbolic name of a query object target parameter", QUERY_PARAMETERS),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested data")
+        Check(1)..ReturnParam..GLint.p("params", "the requested data")
     )
 
     void(
@@ -130,7 +130,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
         GLuint("id", "the name of a query object"),
         GLenum("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested data")
+        Check(1)..ReturnParam..GLint.p("params", "the requested data")
     )
 
     void(
@@ -139,7 +139,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
         GLuint("id", "the name of a query object"),
         GLenum("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLuint.p.OUT("params", "the requested data")
+        Check(1)..ReturnParam..GLuint.p("params", "the requested data")
     )
 
 }

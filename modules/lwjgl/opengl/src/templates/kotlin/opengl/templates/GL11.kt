@@ -893,7 +893,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         AutoSize("textures", "residences")..(GLsizei("n", "the number of texture objects in {@code textures}")),
         SingleValue("texture")..GLuint.const.p("textures", "an array of texture objects"),
-        GLboolean.p.OUT("residences", "returns the residences of each texture object")
+        GLboolean.p("residences", "returns the residences of each texture object")
     )
 
     DeprecatedGL..void(
@@ -1292,7 +1292,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         AutoSize("buffer")..GLsizei("size", "the maximum number of values that can be written to {@code buffer}"),
         GLenum("type", "the type of information to feed back for each vertex", "#2D #3D #3D_COLOR #3D_COLOR_TEXTURE #4D_COLOR_TEXTURE"),
-        GLfloat.p.OUT("buffer", "an array of floating-point values into which feedback information will be placed")
+        GLfloat.p("buffer", "an array of floating-point values into which feedback information will be placed")
     )
 
     GL11C reuse "Finish"
@@ -1355,7 +1355,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         """,
 
         GLenum("plane", "the clip plane"),
-        Check(4)..GLdouble.p.OUT("equation", "a buffer in which to place the returned values")
+        Check(4)..GLdouble.p("equation", "a buffer in which to place the returned values")
     )
 
     GL11C reuse "GetBooleanv"
@@ -1377,7 +1377,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
             #SPOT_DIRECTION #SPOT_EXPONENT #SPOT_CUTOFF
             """
         ),
-        Check(4)..ReturnParam..GLint.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(4)..ReturnParam..GLint.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1386,7 +1386,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("light", "the light for which to return information"),
         GLenum("pname", "the light parameter to query"),
-        Check(4)..ReturnParam..GLfloat.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(4)..ReturnParam..GLfloat.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1395,7 +1395,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("target", "the evaluator target", "$MAP1_TARGETS $MAP2_TARGETS"),
         GLenum("query", "the information to query", "#ORDER #COEFF #DOMAIN"),
-        Check(4)..ReturnParam..GLint.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(4)..ReturnParam..GLint.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1404,7 +1404,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("target", "the evaluator map"),
         GLenum("query", "the information to query"),
-        Check(4)..ReturnParam..GLfloat.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(4)..ReturnParam..GLfloat.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1413,7 +1413,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("target", "the evaluator map"),
         GLenum("query", "the information to query"),
-        Check(4)..ReturnParam..GLdouble.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(4)..ReturnParam..GLdouble.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1422,7 +1422,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("face", "the material face for which to return information", "#FRONT #BACK"),
         GLenum("pname", "the information to query", "#AMBIENT #DIFFUSE #SPECULAR #EMISSION #SHININESS"),
-        Check(1)..GLint.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..GLint.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1431,7 +1431,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("face", "the material face for which to return information"),
         GLenum("pname", "the information to query"),
-        Check(1)..GLfloat.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..GLfloat.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1439,7 +1439,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "Returns all float values in the pixel map {@code map} in {@code data}.",
 
         GLenum("map", "the pixel map parameter to query", PIXEL_MAP_NAMES),
-        Check(32)..PIXEL_PACK_BUFFER..GLfloat.p.OUT("data", "a buffer in which to place the returned data")
+        Check(32)..PIXEL_PACK_BUFFER..GLfloat.p("data", "a buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1447,7 +1447,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "Unsigned short version of #GetPixelMapfv().",
 
         GLenum("map", "the pixel map parameter to query"),
-        Check(32)..PIXEL_PACK_BUFFER..GLushort.p.OUT("data", "a buffer in which to place the returned data")
+        Check(32)..PIXEL_PACK_BUFFER..GLushort.p("data", "a buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1455,7 +1455,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "Unsigned integer version of #GetPixelMapfv().",
 
         GLenum("map", "the pixel map parameter to query"),
-        Check(32)..PIXEL_PACK_BUFFER..GLuint.p.OUT("data", "a buffer in which to place the returned data")
+        Check(32)..PIXEL_PACK_BUFFER..GLuint.p("data", "a buffer in which to place the returned data")
     )
 
     GL11C reuse "GetPointerv"
@@ -1464,7 +1464,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "GetPolygonStipple",
         "Obtains the polygon stipple.",
 
-        Check(128)..PIXEL_PACK_BUFFER..void.p.OUT("pattern", "a buffer in which to place the returned data")
+        Check(128)..PIXEL_PACK_BUFFER..void.p("pattern", "a buffer in which to place the returned data")
     )
 
     GL11C reuse "GetString"
@@ -1483,7 +1483,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
             #OPERAND2_RGB #OPERAND0_ALPHA #OPERAND1_ALPHA #OPERAND2_ALPHA #RGB_SCALE #ALPHA_SCALE
             """
         ),
-        Check(1)..ReturnParam..GLint.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLint.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1492,7 +1492,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("env", "the texture environment to query"),
         GLenum("pname", "the parameter to query"),
-        Check(1)..ReturnParam..GLfloat.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLfloat.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1501,7 +1501,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("coord", "the coord to query", TEX_COORDS),
         GLenum("pname", "the parameter to query", "#EYE_PLANE #OBJECT_PLANE #TEXTURE_GEN_MODE"),
-        Check(1)..ReturnParam..GLint.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(1)..ReturnParam..GLint.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1510,7 +1510,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("coord", "the coord to query"),
         GLenum("pname", "the parameter to query"),
-        Check(4)..ReturnParam..GLfloat.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(4)..ReturnParam..GLfloat.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     DeprecatedGL..void(
@@ -1519,7 +1519,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
         GLenum("coord", "the coord to query"),
         GLenum("pname", "the parameter to query"),
-        Check(4)..ReturnParam..GLdouble.p.OUT("data", "a scalar or buffer in which to place the returned data")
+        Check(4)..ReturnParam..GLdouble.p("data", "a scalar or buffer in which to place the returned data")
     )
 
     GL11C reuse "GetTexImage"
@@ -2405,7 +2405,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "Sets the selection array.",
 
         AutoSize("buffer")..GLsizei("size", "the maximum number of values that can be stored in {@code buffer}"),
-        GLuint.p.OUT("buffer", "an array of unsigned integers to be potentially filled names")
+        GLuint.p("buffer", "an array of unsigned integers to be potentially filled names")
     )
 
     DeprecatedGL..void(

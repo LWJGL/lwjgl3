@@ -110,7 +110,7 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         "Generates buffer object names.",
 
         AutoSize("buffers")..GLsizei("n", "the number of buffer object names to be generated"),
-        ReturnParam..GLuint.p.OUT("buffers", "a buffer in which the generated buffer object names are stored")
+        ReturnParam..GLuint.p("buffers", "a buffer in which the generated buffer object names are stored")
     )
 
     GLboolean(
@@ -227,7 +227,7 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
 
         GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
         GLenum("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested parameter")
+        Check(1)..ReturnParam..GLint.p("params", "the requested parameter")
     )
 
     void(
@@ -236,7 +236,7 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
 
         GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
         GLenum("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER"),
-        Check(1)..ReturnParam..void.p.p.OUT("params", "the pointer value specified by {@code pname}")
+        Check(1)..ReturnParam..void.p.p("params", "the pointer value specified by {@code pname}")
     )
 
     // ARB_occlusion_query
@@ -266,7 +266,7 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         "Generates query object names.",
 
         AutoSize("ids")..GLsizei("n", "the number of query object names to be generated"),
-        ReturnParam..GLuint.p.OUT("ids", "a buffer in which the generated query object names are stored")
+        ReturnParam..GLuint.p("ids", "a buffer in which the generated query object names are stored")
     )
 
     void(
@@ -305,7 +305,7 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
 
         GLenum("target", "the query object target", QUERY_TARGETS),
         GLenum("pname", "the symbolic name of a query object target parameter", QUERY_PARAMETERS),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested data")
+        Check(1)..ReturnParam..GLint.p("params", "the requested data")
     )
 
     void(
@@ -314,7 +314,7 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
 
         GLuint("id", "the name of a query object"),
         GLenum("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "the requested data")
+        Check(1)..ReturnParam..GLint.p("params", "the requested data")
     )
 
     void(
@@ -323,6 +323,6 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
 
         GLuint("id", "the name of a query object"),
         GLenum("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-        Check(1)..ReturnParam..GLuint.p.OUT("params", "the requested data")
+        Check(1)..ReturnParam..GLuint.p("params", "the requested data")
     )
 }

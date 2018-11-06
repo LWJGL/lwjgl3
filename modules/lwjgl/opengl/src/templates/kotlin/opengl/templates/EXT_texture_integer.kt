@@ -151,7 +151,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
         GLenum("target", ""),
         GLenum("pname", ""),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "")
+        Check(1)..ReturnParam..GLint.p("params", "")
     )
 
     void(
@@ -160,6 +160,6 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
         GLenum("target", ""),
         GLenum("pname", ""),
-        Check(1)..ReturnParam..GLuint.p.OUT("params", "")
+        Check(1)..ReturnParam..GLuint.p("params", "")
     )
 }

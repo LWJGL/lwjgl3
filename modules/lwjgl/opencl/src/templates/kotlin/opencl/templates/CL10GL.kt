@@ -302,12 +302,12 @@ val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
         """,
 
         cl_mem("memobj", "the memory object being queried"),
-        Check(1)..nullable..cl_gl_object_type.p.OUT(
+        Check(1)..nullable..cl_gl_object_type.p(
             "gl_object_type",
             "returns the type of GL object attached to {@code memobj}. If {@code gl_object_type} is #NULL, it is ignored.",
             GLObjectTypes
         ),
-        Check(1)..nullable..GLuint.p.OUT("gl_object_name", "the GL object name used to create {@code memobj}. If {@code gl_object_name} is #NULL, it is ignored."),
+        Check(1)..nullable..GLuint.p("gl_object_name", "the GL object name used to create {@code memobj}. If {@code gl_object_name} is #NULL, it is ignored."),
 
         returnDoc =
         """

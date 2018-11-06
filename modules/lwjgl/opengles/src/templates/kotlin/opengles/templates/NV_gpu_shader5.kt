@@ -242,7 +242,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGLES("NV_gpu_shader5", postfix = 
 
         GLuint("program", ""),
         GLint("location", ""),
-        Check(1)..ReturnParam..GLint64.p.OUT("params", "")
+        Check(1)..ReturnParam..GLint64.p("params", "")
     )
 
     void(
@@ -251,7 +251,7 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGLES("NV_gpu_shader5", postfix = 
 
         GLuint("program", ""),
         GLint("location", ""),
-        Check(1)..ReturnParam..GLint64.p.OUT("params", "")
+        Check(1)..ReturnParam..GLint64.p("params", "")
     )
 
     void(

@@ -70,14 +70,14 @@ ENABLE_WARNINGS()""")
         "malloc_thread_statistics",
         "Gets per-thread statistics.",
 
-        rpmalloc_thread_statistics_t.p.OUT("stats", "")
+        rpmalloc_thread_statistics_t.p("stats", "")
     )
 
     void(
         "malloc_global_statistics",
         "Gets global statistics.",
 
-        rpmalloc_global_statistics_t.p.OUT("stats", "")
+        rpmalloc_global_statistics_t.p("stats", "")
     )
 
     void.p(
@@ -141,7 +141,7 @@ ENABLE_WARNINGS()""")
         "posix_memalign",
         "Allocates a memory block of at least the given size and alignment.",
 
-        Check(1)..void.p.p.OUT("memptr", ""),
+        Check(1)..void.p.p("memptr", ""),
         size_t("alignment", ""),
         size_t("size", "")
     )

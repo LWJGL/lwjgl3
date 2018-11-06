@@ -835,10 +835,10 @@ RGBA16S
 
         bgfx_vertex_decl_t.const.p("_decl", "the vertex declaration"),
         bgfx_attrib_t("_attrib", "the attribute to decode"),
-        Check(1)..uint8_t.p.OUT("_num", "number of elements"),
-        Check(1)..bgfx_attrib_type_t.p.OUT("_type", "element type"),
-        Check(1)..bool.p.OUT("_normalized", "normalized flag"),
-        Check(1)..bool.p.OUT("_asInt", "packaging flag")
+        Check(1)..uint8_t.p("_num", "number of elements"),
+        Check(1)..bgfx_attrib_type_t.p("_type", "element type"),
+        Check(1)..bool.p("_normalized", "normalized flag"),
+        Check(1)..bool.p("_asInt", "packaging flag")
     )
 
     bool(
@@ -880,7 +880,7 @@ RGBA16S
         "vertex_unpack",
         "Unpacks vertex attribute from vertex stream format.",
 
-        Check(4)..float.p.OUT("_output", "result of unpacking"),
+        Check(4)..float.p("_output", "result of unpacking"),
         bgfx_attrib_t("_attr", "attribute to unpack", Attrib),
         bgfx_vertex_decl_t.const.p("_decl", "vertex stream declaration"),
         Unsafe..void.const.p("_data", "source vertex stream from where data will be unpacked"),
@@ -902,7 +902,7 @@ RGBA16S
         "weld_vertices",
         "Welds vertices.",
 
-        uint16_t.p.OUT("_output", "welded vertices remapping table. The size of buffer be the same as number of vertices."),
+        uint16_t.p("_output", "welded vertices remapping table. The size of buffer be the same as number of vertices."),
         bgfx_vertex_decl_t.const.p("_decl", "vertex stream declaration"),
         Unsafe..void.const.p("_data", "vertex stream"),
         AutoSize("_output")..uint16_t("_num", "number of vertices in vertex stream"),
@@ -945,7 +945,7 @@ RGBA16S
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT
-        )..void.p.OUT("_dst", "destination index buffer"),
+        )..void.p("_dst", "destination index buffer"),
         AutoSize("_dst")..uint32_t(
             "_dstSize",
             """
@@ -989,7 +989,7 @@ RGBA16S
         "init_ctor",
         "Updates the specified initialization parameters with default values.",
 
-        bgfx_init_t.p.OUT("_init", "initialization parameters")
+        bgfx_init_t.p("_init", "initialization parameters")
     )
 
     bool(
@@ -1305,7 +1305,7 @@ RGBA16S
         Only 16-bit index buffer is supported.
         """,
 
-        bgfx_transient_index_buffer_t.p.OUT(
+        bgfx_transient_index_buffer_t.p(
             "_tib",
             "##BGFXTransientIndexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
         ),
@@ -1316,7 +1316,7 @@ RGBA16S
         "alloc_transient_vertex_buffer",
         "Allocates transient vertex buffer.",
 
-        bgfx_transient_vertex_buffer_t.p.OUT(
+        bgfx_transient_vertex_buffer_t.p(
             "_tvb",
             "##BGFXTransientVertexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
         ),
@@ -1332,13 +1332,13 @@ RGBA16S
         Only 16-bit index buffer is supported.
         """,
 
-        bgfx_transient_vertex_buffer_t.p.OUT(
+        bgfx_transient_vertex_buffer_t.p(
             "_tvb",
             "##BGFXTransientVertexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
         ),
         bgfx_vertex_decl_t.const.p("_decl", "vertex declaration"),
         uint32_t("_numVertices", "number of vertices to allocate"),
-        bgfx_transient_index_buffer_t.p.OUT(
+        bgfx_transient_index_buffer_t.p(
             "_tib",
             "##BGFXTransientIndexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
         ),
@@ -1349,7 +1349,7 @@ RGBA16S
         "alloc_instance_data_buffer",
         "Allocates instance data buffer.",
 
-        bgfx_instance_data_buffer_t.p.OUT(
+        bgfx_instance_data_buffer_t.p(
             "_idb",
             "##BGFXInstanceDataBuffer structure is filled and is valid for duration of frame, and it can be reused for multiple draw calls"
         ),
@@ -1387,7 +1387,7 @@ RGBA16S
         """,
 
         bgfx_shader_handle_t("_handle", "shader handle"),
-        bgfx_uniform_handle_t.p.OUT("_uniforms", "{@code bgfx_uniform_handle_t} array where data will be stored"),
+        bgfx_uniform_handle_t.p("_uniforms", "{@code bgfx_uniform_handle_t} array where data will be stored"),
         AutoSize("_uniforms")..uint16_t("_max", "maximum capacity of {@code _uniforms}"),
 
         returnDoc = "number of uniforms used by shader"
@@ -1453,7 +1453,7 @@ RGBA16S
         "calc_texture_size",
         "Calculates amount of memory required for texture.",
 
-        bgfx_texture_info_t_p.OUT("_info", "resulting texture info structure"),
+        bgfx_texture_info_t_p("_info", "resulting texture info structure"),
         MapToInt..uint16_t("_width", "width"),
         MapToInt..uint16_t("_height", "height"),
         MapToInt..uint16_t("_depth", "depth dimension of volume texture"),
@@ -1474,7 +1474,7 @@ RGBA16S
             "$TextureFlags $SamplerFlags", LinkMode.BITFIELD
         ),
         MapToInt..uint8_t("_skip", "skip top level mips when parsing texture"),
-        nullable..bgfx_texture_info_t_p.OUT("_info", "when non-#NULL is specified it returns parsed texture information")
+        nullable..bgfx_texture_info_t_p("_info", "when non-#NULL is specified it returns parsed texture information")
     )
 
     bgfx_texture_handle_t(
@@ -1798,7 +1798,7 @@ RGBA16S
         "Retrieves uniform info.",
 
         bgfx_uniform_handle_t("_handle", "handle to uniform object"),
-        bgfx_uniform_info_t_p.OUT("_info", "uniform info")
+        bgfx_uniform_info_t_p("_info", "uniform info")
     )
 
     void(
@@ -1820,7 +1820,7 @@ RGBA16S
         "Retrieves occlusion query result from previous frame.",
 
         bgfx_occlusion_query_handle_t("_handle", "handle to occlusion query object"),
-        Check(1)..nullable..int32_t.p.OUT(
+        Check(1)..nullable..int32_t.p(
             "_result",
             "number of pixels that passed test. This argument can be #NULL if result of occlusion query is not needed."
         ),

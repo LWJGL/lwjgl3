@@ -109,11 +109,11 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             #DEFAULT_VCACHE_SIZE. This value must be non-zero.
             """
         ),
-        nullable..unsigned_int.p.OUT(
+        nullable..unsigned_int.p(
             "pnIBOut",
             "a pointer that will be filled with an optimized index buffer. May be #NULL. May equal {@code pnIB}."
         ),
-        Check("nFaces")..nullable..unsigned_int.p.OUT(
+        Check("nFaces")..nullable..unsigned_int.p(
             "pnFaceRemapOut",
             """
             a pointer to an array that will be filled with a face re-mapping. May be #NULL. This is an array of {@code nFaces} elements.
@@ -159,18 +159,18 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             Passing 0 for this value causes Tootle to use an automatic method to determine when to stop creating clusters.
             """
         ),
-        unsigned_int.p.OUT(
+        unsigned_int.p(
             "pnClusteredIBOut",
             "an array that will receive a copy of the index buffer, sorted by cluster ID. May not be #NULL. May equal {@code pnIB}."
         ),
-        Check("nFaces + 1")..unsigned_int.p.OUT(
+        Check("nFaces + 1")..unsigned_int.p(
             "pnFaceClustersOut",
             """
             an array of {@code nFaces+1} unsigned ints, that will be filled with the cluster ID that was assigned to each face in the output index buffer. The
             last element of the array contains the number of cluster. This is of a full format type. May not be #NULL.
             """
         ),
-        Check("nFaces")..nullable..unsigned_int.p.OUT(
+        Check("nFaces")..nullable..unsigned_int.p(
             "pnFaceRemapOut",
             """
             an array that will receive a face re-mapping. May be #NULL. If not #NULL, must be an array of size {@code nFaces}. The {@code i}'th element of the
@@ -192,8 +192,8 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
         UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int("nFaces", "the number of faces in the index buffer"),
         unsigned_int("nVertices", "the number of vertices in the vertex buffer"),
         unsigned_int("nCacheSize", "hardware cache size (12 to 24 are good options)"),
-        unsigned_int.p.OUT("pnIBOut", "the updated index buffer (the output). May not be #NULL. May equal {@code pnIB}."),
-        Check("nFaces + 1")..unsigned_int.p.OUT(
+        unsigned_int.p("pnIBOut", "the updated index buffer (the output). May not be #NULL. May equal {@code pnIB}."),
+        Check("nFaces + 1")..unsigned_int.p(
             "pnClustersOut",
             """
             the output clusters which is an array of {@code nFaces+1} {@code unsigned ints}. It is of a compact format type. Entry {@code i} and {@code i+1}
@@ -201,7 +201,7 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             This has to be pre-allocated of size {@code nFaces+1}.
             """
         ),
-        Check(1)..unsigned_int.p.OUT("pnNumClustersOut", "the total number of clusters in {@code pnClustersOut}"),
+        Check(1)..unsigned_int.p("pnNumClustersOut", "the total number of clusters in {@code pnClustersOut}"),
         float("fAlpha", "a linear parameter to compute lambda term from the algorithm. Pass #DEFAULT_ALPHA as a default."),
 
         returnDoc = "one of: #OK, #OUT_OF_MEMORY, #INVALID_ARGS"
@@ -257,8 +257,8 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             For both formats, the last entry of the array ( {@code pnFaceClusters[ nFaces ]} ) should contains the number of total clusters.
             """
         ),
-        nullable..unsigned_int.p.OUT("pnIBOut", "an array that will receive the re-ordered index buffer. May be #NULL. May equal {@code pnIB}."),
-        Check("pnFaceClusters.get(nFaces)")..nullable..unsigned_int.p.OUT(
+        nullable..unsigned_int.p("pnIBOut", "an array that will receive the re-ordered index buffer. May be #NULL. May equal {@code pnIB}."),
+        Check("pnFaceClusters.get(nFaces)")..nullable..unsigned_int.p(
             "pnClusterRemapOut",
             """
             an array that will receive the cluster ordering. May be #NULL. If non-null, the size of the array must be equal to the number of clusters in the
@@ -318,8 +318,8 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
         ),
         AutoSize(3, "pViewpoints")..unsigned_int("nViewpoints", "the number of viewpoints in the viewpoint array"),
         TootleFaceWinding("eFrontWinding", "the winding order of front-faces in the model", TootleFaceWindings),
-        unsigned_int.p.OUT("pnIBOut", "a pointer that will be filled with an optimized index buffer. May not be #NULL. May equal {@code pIB}."),
-        Check(1)..nullable..unsigned_int.p.OUT("pnNumClustersOut", "the number of clusters generated by the algorithm. May be #NULL if the output is not requested."),
+        unsigned_int.p("pnIBOut", "a pointer that will be filled with an optimized index buffer. May not be #NULL. May equal {@code pIB}."),
+        Check(1)..nullable..unsigned_int.p("pnNumClustersOut", "the number of clusters generated by the algorithm. May be #NULL if the output is not requested."),
         TootleVCacheOptimizer("eVCacheOptimizer", "the selection for choosing the algorithm to optimize vertex cache", TootleVCacheOptimizers),
         TootleOverdrawOptimizer("eOverdrawOptimizer", "the algorithm selection for optimizing overdraw", TootleOverdrawOptimizers),
 
@@ -352,8 +352,8 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
         ),
         unsigned_int("nCacheSize", "hardware cache size (12 to 24 are good options)"),
         TootleFaceWinding("eFrontWinding", "the winding order of front-faces in the model", TootleFaceWindings),
-        unsigned_int.p.OUT("pnIBOut", "the updated index buffer (the output). May not be #NULL. May equal {@code pnIB}."),
-        Check(1)..nullable..unsigned_int.p.OUT("pnNumClustersOut", "the number of output clusters. May be #NULL if not requested."),
+        unsigned_int.p("pnIBOut", "the updated index buffer (the output). May not be #NULL. May equal {@code pnIB}."),
+        Check(1)..nullable..unsigned_int.p("pnNumClustersOut", "the number of output clusters. May be #NULL if not requested."),
         float("fAlpha", "a linear parameter to compute lambda term from the algorithm. Pass #DEFAULT_ALPHA as a default."),
 
         returnDoc = "one of: #OK, #OUT_OF_MEMORY, #INVALID_ARGS"
@@ -383,8 +383,8 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             array. It should be of size {@code nFaces+1}.
             """
         ),
-        nullable..unsigned_int.p.OUT("pnIBOut", "a pointer that will be filled with an optimized index buffer. May be #NULL. May equal {@code pnIB}."),
-        Check("nFaces")..nullable..unsigned_int.p.OUT(
+        nullable..unsigned_int.p("pnIBOut", "a pointer that will be filled with an optimized index buffer. May be #NULL. May equal {@code pnIB}."),
+        Check("nFaces")..nullable..unsigned_int.p(
             "pnFaceRemapOut",
             """
             a pointer to an array that will be filled with a face re-mapping. May be #NULL. This is an array of {@code nFaces} elements.
@@ -412,7 +412,7 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             "nCacheSize",
             "the number of vertices that will fit in cache. If the application doesn't know or care, it should use #DEFAULT_VCACHE_SIZE."
         ),
-        Check(1)..float.p.OUT("pfEfficiencyOut", "a pointer to receive the vertex cache efficiency. This is defined as the number of cache misses per triangle."),
+        Check(1)..float.p("pfEfficiencyOut", "a pointer to receive the vertex cache efficiency. This is defined as the number of cache misses per triangle."),
 
         returnDoc = "one of: #OK, #OUT_OF_MEMORY, #INVALID_ARGS"
     )
@@ -450,8 +450,8 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
         ),
         AutoSize(3, "pfViewpoint")..unsigned_int("nViewpoints", "the number of viewpoints in the viewpoint array"),
         TootleFaceWinding("eFrontWinding", "the winding order of front-faces in the model"),
-        Check(1)..nullable..float.p.OUT("pfAvgODOut", "a pointer to a variable to receive the average overdraw per pixel. May be #NULL."),
-        Check(1)..nullable..float.p.OUT("pfMaxODOut", "a pointer to a variable to receive the maximum overdraw per pixel. May be #NULL."),
+        Check(1)..nullable..float.p("pfAvgODOut", "a pointer to a variable to receive the average overdraw per pixel. May be #NULL."),
+        Check(1)..nullable..float.p("pfMaxODOut", "a pointer to a variable to receive the maximum overdraw per pixel. May be #NULL."),
         TootleOverdrawOptimizer("eOverdrawOptimizer", "the algorithm selection for optimizing overdraw", TootleOverdrawOptimizers),
 
         returnDoc = "one of: #OK, #OUT_OF_MEMORY, #INVALID_ARGS, #NOT_INITIALIZED"
@@ -486,9 +486,9 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
         ),
         MultiType(
             PointerMapping.DATA_FLOAT
-        )..void.p.OUT("pVBOut", "the output vertex buffer. May be #NULL. May equal {@code pVB}."),
-        unsigned_int.p.OUT("pnIBOut", "the output index buffer. May not be #NULL. May equal {@code pnIB}."),
-        Check("nVertices")..nullable..unsigned_int.p.OUT(
+        )..void.p("pVBOut", "the output vertex buffer. May be #NULL. May equal {@code pVB}."),
+        unsigned_int.p("pnIBOut", "the output index buffer. May not be #NULL. May equal {@code pnIB}."),
+        Check("nVertices")..nullable..unsigned_int.p(
             "pnVertexRemapOut",
             """
             an array that will receive a vertex re-mapping. May be #NULL if the output is not requested. If not #NULL, must be an array of size

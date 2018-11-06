@@ -125,7 +125,7 @@ val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixCon
             the two position vectors for each eye   .
             """
         ),
-        Check(2)..ovrPosef.p.OUT(
+        Check(2)..ovrPosef.p(
             "outEyePoses",
             """
             if {@code outEyePoses} are used for rendering, they should be passed to #SubmitFrame() in ##OVRLayerEyeFov{@code ::RenderPose} or
@@ -160,8 +160,8 @@ val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixCon
             average of the two position vectors for each eye.
             """
         ),
-        Check(2)..ovrPosef.p.OUT("outEyePoses", "the predicted eye poses"),
-        Check(1)..nullable..double.p.OUT("outSensorSampleTime", "the time when this function was called. May be NULL, in which case it is ignored.")
+        Check(2)..ovrPosef.p("outEyePoses", "the predicted eye poses"),
+        Check(1)..nullable..double.p("outSensorSampleTime", "the time when this function was called. May be NULL, in which case it is ignored.")
     )
 
     void(
@@ -175,7 +175,7 @@ val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixCon
         """,
 
         ovrPosef.const.p("inPose", "a pose that is right-handed"),
-        ovrPosef.p.OUT("outPose", "the pose that is requested to be left-handed (can be the same pointer to {@code inPose})")
+        ovrPosef.p("outPose", "the pose that is requested to be left-handed (can be the same pointer to {@code inPose})")
     )
 
     ovrResult(
@@ -189,7 +189,7 @@ val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixCon
         Supported formats: PCM 8b, 16b, 32b and IEEE float (little-endian only).
         """,
 
-        ovrAudioChannelData.p.OUT("outAudioChannel", "output audio channel data"),
+        ovrAudioChannelData.p("outAudioChannel", "output audio channel data"),
         void.const.p("inputData", "a binary buffer representing a valid Wav file data"),
         AutoSize("inputData")..int("dataSizeInBytes", "size of the buffer in bytes"),
         int("stereoChannelToUse", "audio channel index to extract (0 for mono)")
@@ -199,7 +199,7 @@ val OVR_Util = "OVRUtil".nativeClass(Module.OVR, prefixMethod = "ovr", prefixCon
         "_GenHapticsFromAudioData",
         "Generates playable Touch Haptics data from an audio channel.",
 
-        ovrHapticsClip.p.OUT("outHapticsClip", "generated Haptics clip"),
+        ovrHapticsClip.p("outHapticsClip", "generated Haptics clip"),
         ovrAudioChannelData.const.p("audioChannel", "input audio channel data"),
         ovrHapticsGenMode("genMode", "mode used to convert and audio channel data to Haptics data", "#HapticsGenMode_PointSample")
     )

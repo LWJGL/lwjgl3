@@ -271,6 +271,6 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
         Check("count")..nullable..GLuint.p("ids", "a buffer in which to place the returned message IDs"),
         Check("count")..nullable..GLenum.p("severities", "a buffer in which to place the returned message severity levels"),
         Check("count")..nullable..GLsizei.p("lengths", "a buffer in which to place the returned message lengths"),
-        nullable..GLcharUTF8.p.OUT("messageLog", "a buffer in which to place the returned messages")
+        nullable..GLcharUTF8.p("messageLog", "a buffer in which to place the returned messages")
     )
 }

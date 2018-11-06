@@ -564,7 +564,7 @@ ENABLE_WARNINGS()""")
         the interim.
         """,
 
-        ovrErrorInfo.p.OUT("errorInfo", "The last ##OVRErrorInfo for the current thread")
+        ovrErrorInfo.p("errorInfo", "The last ##OVRErrorInfo for the current thread")
     )
 
     Nonnull..charUTF8.const.p(
@@ -685,8 +685,8 @@ ovr_IdentifyClient(
         in an error return value if the previous session has not been destroyed.
         """,
 
-        Check(1)..ovrSession.p.OUT("pSession", "a pointer to an {@code ovrSession} which will be written to upon success"),
-        ovrGraphicsLuid.p.OUT(
+        Check(1)..ovrSession.p("pSession", "a pointer to an {@code ovrSession} which will be written to upon success"),
+        ovrGraphicsLuid.p(
             "pLuid",
             """
             a system specific graphics adapter identifier that locates which graphics adapter has the HMD attached. This must match the adapter used by the
@@ -710,7 +710,7 @@ ovr_IdentifyClient(
         "Returns status information for the application.",
 
         session,
-        ovrSessionStatus.p.OUT("sessionStatus", "an ##OVRSessionStatus that is filled in")
+        ovrSessionStatus.p("sessionStatus", "an ##OVRSessionStatus that is filled in")
     )
 
     ovrResult(
@@ -719,7 +719,7 @@ ovr_IdentifyClient(
 
         session,
         ovrExtensions("extension", "extension to query"),
-        Check(1)..ovrBool.p.OUT("outExtensionSupported", "set to extension support status. #True if supported."),
+        Check(1)..ovrBool.p("outExtensionSupported", "set to extension support status. #True if supported."),
 
         returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure use #GetLastErrorInfo() to get more information."
     )
@@ -871,7 +871,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
             "absTime",
             "specifies the absolute future time to predict the return {@code ovrTrackingState} value. Use 0 to request the most recent tracking state."
         ),
-        ovrPoseStatef.p.OUT("outDevicePoses", "array of poses, one for each device type in {@code deviceTypes} arrays"),
+        ovrPoseStatef.p("outDevicePoses", "array of poses, one for each device type in {@code deviceTypes} arrays"),
 
         returnDoc = "an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success"
     )
@@ -893,7 +893,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         ovrControllerType("controllerType", "which controllers the input will be returned for"),
-        ovrInputState.p.OUT("inputState", "the input state that will be filled in"),
+        ovrInputState.p("inputState", "the input state that will be filled in"),
 
         returnDoc = "#Success if the new state was successfully obtained"
     )
@@ -968,7 +968,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         ovrControllerType("controllerType", "the controller where the Haptics buffer will be played"),
-        ovrHapticsPlaybackState.p.OUT("outState", "the state of the haptics engine"),
+        ovrHapticsPlaybackState.p("outState", "the state of the haptics engine"),
 
         returnDoc =
         """
@@ -991,7 +991,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
         session,
         ovrTrackedDeviceType("deviceBitmask", "bitmask of one or more tracked devices to test", TrackedDeviceTypes, LinkMode.BITFIELD),
         ovrBoundaryType("boundaryType", "the boundary type", BoundaryTypes),
-        ovrBoundaryTestResult.p.OUT("outTestResult", "result of collision/proximity test, contains information such as distance and closest point"),
+        ovrBoundaryTestResult.p("outTestResult", "result of collision/proximity test, contains information such as distance and closest point"),
 
         returnDoc =
         """
@@ -1011,7 +1011,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
         session,
         ovrVector3f.const.p("point", "the 3D point to test"),
         ovrBoundaryType("singleBoundaryType", "the boundary type", BoundaryTypes),
-        ovrBoundaryTestResult.p.OUT("outTestResult", "result of collision/proximity test, contains information such as distance and closest point"),
+        ovrBoundaryTestResult.p("outTestResult", "result of collision/proximity test, contains information such as distance and closest point"),
 
         returnDoc =
         """
@@ -1048,11 +1048,11 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         TestBoundary["boundaryType"],
-        nullable..ovrVector3f.p.OUT(
+        nullable..ovrVector3f.p(
             "outFloorPoints",
             "an array of 3D points (in clockwise order) defining the boundary at floor height (can be #NULL to retrieve only the number of points)"
         ),
-        Check(1)..nullable..int.p.OUT("outFloorPointsCount", "the number of 3D points returned in the array"),
+        Check(1)..nullable..int.p("outFloorPointsCount", "the number of 3D points returned in the array"),
 
         returnDoc =
         """
@@ -1070,7 +1070,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         TestBoundary["boundaryType"],
-        ovrVector3f.p.OUT("outDimensions", "dimensions of the axis aligned bounding box that encloses the area in meters (width, height and length)"),
+        ovrVector3f.p("outDimensions", "dimensions of the axis aligned bounding box that encloses the area in meters (width, height and length)"),
 
         returnDoc =
         """
@@ -1092,7 +1092,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
         """,
 
         session,
-        Check(1)..ovrBool.p.OUT("outIsVisible", "#True, if the boundary is visible"),
+        Check(1)..ovrBool.p("outIsVisible", "#True, if the boundary is visible"),
 
         returnDoc =
         """
@@ -1125,11 +1125,11 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
         "Returns the number of camera properties of all cameras",
 
         session,
-        nullable..ovrExternalCamera.p.OUT(
+        nullable..ovrExternalCamera.p(
             "cameras",
             "pointer to the array. If null and the provided array capacity is sufficient, will return {@code ovrError_NullArrayPointer}."
         ),
-        AutoSize("cameras")..Check(1)..unsigned_int.p.INOUT(
+        AutoSize("cameras")..Check(1)..unsigned_int.p(
             "inoutCameraCount",
             """
             supply the array capacity, will return the actual \\# of cameras defined. If {@code *inoutCameraCount} is too small, will return
@@ -1227,7 +1227,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         ovrTextureSwapChain("chain", "the {@code ovrTextureSwapChain} for which the length should be retrieved"),
-        Check(1)..int.p.OUT("out_Length", "returns the number of buffers in the specified chain")
+        Check(1)..int.p("out_Length", "returns the number of buffers in the specified chain")
     )
 
     ovrResult(
@@ -1236,7 +1236,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         ovrTextureSwapChain("chain", "the {@code ovrTextureSwapChain} for which the index should be retrieved"),
-        Check(1)..int.p.OUT("out_Index", "returns the current (free) index in specified chain")
+        Check(1)..int.p("out_Index", "returns the current (free) index in specified chain")
     )
 
     ovrResult(
@@ -1245,7 +1245,7 @@ ovr_SpecifyTrackingOrigin(session, ts.HeadPose.ThePose);""")}
 
         session,
         ovrTextureSwapChain("chain", "the {@code ovrTextureSwapChain} for which the description should be retrieved"),
-        ovrTextureSwapChainDesc.p.OUT("out_Desc", "returns the description of the specified chain")
+        ovrTextureSwapChainDesc.p("out_Desc", "returns the description of the specified chain")
     )
 
     ovrResult(
@@ -1337,7 +1337,7 @@ ovrSizei eyeSizeRight = ovr_GetFovTextureSize(session, ovrEye_Right, hmdDesc.Def
 
         session,
         ovrFovStencilDesc.const.p("fovStencilDesc", "info provided by caller necessary to generate a stencil mesh"),
-        ovrFovStencilMeshBuffer.p.INOUT("meshBuffer", "mesh buffer to be partially filled in and returned by the SDK"),
+        Input..ovrFovStencilMeshBuffer.p("meshBuffer", "mesh buffer to be partially filled in and returned by the SDK"),
 
         returnDoc =
         """
@@ -1588,7 +1588,7 @@ ovrResult result = ovr_SubmitFrame(session, frameIndex, nullptr, layers, 2);""")
         """,
 
         session,
-        ovrPerfStats.p.OUT("outStats", "contains the performance stats for the application and SDK compositor"),
+        ovrPerfStats.p("outStats", "contains the performance stats for the application and SDK compositor"),
 
         returnDoc = "an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon success"
     )
@@ -1783,7 +1783,7 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
 
         session,
         charASCII.const.p("propertyName", "the name of the property, which needs to be valid only for the call"),
-        float.p.OUT("values", "an array of float to write to"),
+        float.p("values", "an array of float to write to"),
         AutoSize("values")..unsigned_int("valuesCapacity", "the maximum number of elements to write to the values array"),
 
         returnDoc = "the number of elements read, or 0 if property doesn't exist or is empty"
@@ -1795,7 +1795,7 @@ ovr_SetInt(session, OVR_DEBUG_HUD_STEREO_MODE, (int)DebugHudMode);""")}
 
         session,
         charASCII.const.p("propertyName", "the name of the property, which needs to be valid only for the call"),
-        float.p.OUT("values", "an array of float to write from"),
+        float.p("values", "an array of float to write from"),
         AutoSize("values")..unsigned_int("valuesSize", "the number of elements to write"),
 
         returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."

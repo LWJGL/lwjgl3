@@ -117,9 +117,6 @@ public class TinyEXR {
 
     /** Free's internal data of {@link EXRImage} struct */
     public static int FreeEXRImage(@NativeType("EXRImage *") EXRImage exr_image) {
-        if (CHECKS) {
-            EXRImage.validate(exr_image.address());
-        }
         return nFreeEXRImage(exr_image.address());
     }
 

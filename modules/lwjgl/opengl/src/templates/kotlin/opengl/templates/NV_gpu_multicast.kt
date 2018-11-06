@@ -178,7 +178,7 @@ val NV_gpu_multicast = "NVGPUMulticast".nativeClassGL("NV_gpu_multicast", postfi
         GLuint("gpu", ""),
         GLuint("id", ""),
         GLenum("pname", ""),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "")
+        Check(1)..ReturnParam..GLint.p("params", "")
     )
 
     void(
@@ -188,7 +188,7 @@ val NV_gpu_multicast = "NVGPUMulticast".nativeClassGL("NV_gpu_multicast", postfi
         GLuint("gpu", ""),
         GLuint("id", ""),
         GLenum("pname", ""),
-        Check(1)..ReturnParam..GLuint.p.OUT("params", "")
+        Check(1)..ReturnParam..GLuint.p("params", "")
     )
 
     void(
@@ -198,7 +198,7 @@ val NV_gpu_multicast = "NVGPUMulticast".nativeClassGL("NV_gpu_multicast", postfi
         GLuint("gpu", ""),
         GLuint("id", ""),
         GLenum("pname", ""),
-        Check(1)..ReturnParam..GLint64.p.OUT("params", "")
+        Check(1)..ReturnParam..GLint64.p("params", "")
     )
 
     void(
@@ -208,6 +208,6 @@ val NV_gpu_multicast = "NVGPUMulticast".nativeClassGL("NV_gpu_multicast", postfi
         GLuint("gpu", ""),
         GLuint("id", ""),
         GLenum("pname", ""),
-        Check(1)..ReturnParam..GLuint64.p.OUT("params", "")
+        Check(1)..ReturnParam..GLuint64.p("params", "")
     )
 }

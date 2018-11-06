@@ -24,7 +24,7 @@ val NV_query_resource_tag = "NVQueryResourceTag".nativeClassGL("NV_query_resourc
         "",
 
         AutoSize("tagIds")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("tagIds", "")
+        ReturnParam..GLuint.p("tagIds", "")
     )
 
     void(

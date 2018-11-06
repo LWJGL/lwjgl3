@@ -193,10 +193,10 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 
         GLuint("count", "the number of debug messages to retrieve from the log"),
         AutoSize("messageLog")..GLsizei("bufsize", "the maximum number of characters that can be written in the {@code message} array"),
-        Check("count")..nullable..GLenum.p.OUT("categories", "an array of variables to receive the categories of the retrieved messages"),
-        Check("count")..nullable..GLuint.p.OUT("severities", "an array of variables to receive the severities of the retrieved messages"),
-        Check("count")..nullable..GLuint.p.OUT("ids", "an array of variables to receive the ids of the retrieved messages"),
-        Check("count")..nullable..GLsizei.p.OUT("lengths", "an array of variables to receive the lengths of the retrieved messages"),
-        nullable..GLcharUTF8.p.OUT("messageLog", "an array of characters that will receive the messages")
+        Check("count")..nullable..GLenum.p("categories", "an array of variables to receive the categories of the retrieved messages"),
+        Check("count")..nullable..GLuint.p("severities", "an array of variables to receive the severities of the retrieved messages"),
+        Check("count")..nullable..GLuint.p("ids", "an array of variables to receive the ids of the retrieved messages"),
+        Check("count")..nullable..GLsizei.p("lengths", "an array of variables to receive the lengths of the retrieved messages"),
+        nullable..GLcharUTF8.p("messageLog", "an array of characters that will receive the messages")
     )
 }

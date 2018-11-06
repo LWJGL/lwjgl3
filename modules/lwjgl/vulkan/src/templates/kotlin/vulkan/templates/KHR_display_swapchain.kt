@@ -143,6 +143,6 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
         AutoSize("pCreateInfos", "pSwapchains")..uint32_t("swapchainCount", "the number of swapchains to create."),
         VkSwapchainCreateInfoKHR.const.p("pCreateInfos", "a pointer to an array of ##VkSwapchainCreateInfoKHR structures specifying the parameters of the created swapchains."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the swapchain objects when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
-        VkSwapchainKHR.p.OUT("pSwapchains", "a pointer to an array of {@code VkSwapchainKHR} handles in which the created swapchain objects will be returned.")
+        VkSwapchainKHR.p("pSwapchains", "a pointer to an array of {@code VkSwapchainKHR} handles in which the created swapchain objects will be returned.")
     )
 }

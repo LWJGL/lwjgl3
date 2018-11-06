@@ -69,6 +69,6 @@ val KHR_lock_surface3 = "KHRLockSurface3".nativeClassEGL("KHR_lock_surface3", po
         EGLDisplay("dpy", ""),
         EGLSurface("surface", ""),
         EGLint("attribute", ""),
-        Check(1)..EGLAttribKHR.p.OUT("value", "")
+        Check(1)..EGLAttribKHR.p("value", "")
     )
 }

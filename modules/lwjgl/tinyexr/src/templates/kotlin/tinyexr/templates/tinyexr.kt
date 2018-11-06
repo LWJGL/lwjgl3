@@ -90,21 +90,21 @@ ENABLE_WARNINGS()""")
         "InitEXRHeader",
         "Initialize ##EXRHeader struct.",
 
-        EXRHeader.p.OUT("exr_header", "")
+        EXRHeader.p("exr_header", "")
     )
 
     void(
         "InitEXRImage",
         "Initialize ##EXRImage struct.",
 
-        EXRImage.p.OUT("exr_image", "")
+        EXRImage.p("exr_image", "")
     )
 
     int(
         "FreeEXRHeader",
         "Free's internal data of ##EXRHeader struct",
 
-        EXRHeader.p.OUT("exr_header", "")
+        EXRHeader.p("exr_header", "")
     )
 
     int(
@@ -125,7 +125,7 @@ ENABLE_WARNINGS()""")
         "ParseEXRVersionFromFile",
         "Parse EXR version header of a file.",
 
-        EXRVersion.p.OUT("version", ""),
+        EXRVersion.p("version", ""),
         charASCII.const.p("filename", "")
     )
 
@@ -133,7 +133,7 @@ ENABLE_WARNINGS()""")
         "ParseEXRVersionFromMemory",
         "Parse EXR version header from memory-mapped EXR data.",
 
-        EXRVersion.p.OUT("version", ""),
+        EXRVersion.p("version", ""),
         unsigned_char.const.p("memory", ""),
         AutoSize("memory")..size_t("size", "")
     )
@@ -146,7 +146,7 @@ ENABLE_WARNINGS()""")
         When there was an error message, Application must free {@code err} with #FreeEXRErrorMessage().
         """,
 
-        EXRHeader.p.OUT("header", ""),
+        EXRHeader.p("header", ""),
         EXRVersion.const.p("version", ""),
         charASCII.const.p("filename", ""),
         Check(1)..charASCII.const.p.p("err", "")
@@ -160,7 +160,7 @@ ENABLE_WARNINGS()""")
         When there was an error message, Application must free {@code err} with #FreeEXRErrorMessage().
         """,
 
-        EXRHeader.p.OUT("header", ""),
+        EXRHeader.p("header", ""),
         EXRVersion.const.p("version", ""),
         unsigned_char.const.p("memory", ""),
         AutoSize("memory")..size_t("size", ""),
@@ -175,8 +175,8 @@ ENABLE_WARNINGS()""")
         When there was an error message, Application must free {@code err} with #FreeEXRErrorMessage().
         """,
 
-        Check(1)..EXRHeader.p.p.p.OUT("headers", ""),
-        Check(1)..int.p.OUT("num_headers", ""),
+        Check(1)..EXRHeader.p.p.p("headers", ""),
+        Check(1)..int.p("num_headers", ""),
         EXRVersion.const.p("version", ""),
         charASCII.const.p("filename", ""),
         Check(1)..charASCII.const.p.p("err", "")
@@ -190,8 +190,8 @@ ENABLE_WARNINGS()""")
         When there was an error message, Application must free {@code err} with #FreeEXRErrorMessage().
         """,
 
-        Check(1)..EXRHeader.p.p.p.OUT("headers", ""),
-        Check(1)..int.p.OUT("num_headers", ""),
+        Check(1)..EXRHeader.p.p.p("headers", ""),
+        Check(1)..int.p("num_headers", ""),
         EXRVersion.const.p("version", ""),
         unsigned_char.const.p("memory", ""),
         AutoSize("memory")..size_t("size", ""),
@@ -208,7 +208,7 @@ ENABLE_WARNINGS()""")
         Application can free EXRImage using #FreeEXRImage(). When there was an error message, Application must free {@code err} with #FreeEXRErrorMessage().
         """,
 
-        EXRImage.p.OUT("image", ""),
+        EXRImage.p("image", ""),
         EXRHeader.const.p("header", ""),
         charASCII.const.p("filename", ""),
         Check(1)..charASCII.const.p.p("err", ""),
@@ -226,7 +226,7 @@ ENABLE_WARNINGS()""")
         Application can free EXRImage using #FreeEXRImage(). When there was an error message, Application must free {@code err} with #FreeEXRErrorMessage().
         """,
 
-        EXRImage.p.OUT("image", ""),
+        EXRImage.p("image", ""),
         EXRHeader.const.p("header", ""),
         unsigned_char.const.p("memory", ""),
         AutoSize("memory")..size_t("size", ""),
@@ -245,7 +245,7 @@ ENABLE_WARNINGS()""")
         Application can free EXRImage using #FreeEXRImage(). When there was an error message, Application must free {@code err} with #FreeEXRErrorMessage().
         """,
 
-        EXRImage.p.OUT("images", ""),
+        EXRImage.p("images", ""),
         EXRHeader.const.p.p("headers", ""),
         AutoSize("images", "headers")..unsigned_int("num_parts", ""),
         charASCII.const.p("filename", ""),
@@ -264,7 +264,7 @@ ENABLE_WARNINGS()""")
         Application can free EXRImage using #FreeEXRImage(). When there was an error message, Application must free {@code err} with #FreeEXRErrorMessage().
         """,
 
-        EXRImage.p.OUT("images", ""),
+        EXRImage.p("images", ""),
         EXRHeader.const.p.p("headers", ""),
         AutoSize("images", "headers")..unsigned_int("num_parts", ""),
         unsigned_char.const.p("memory", ""),
@@ -302,7 +302,7 @@ ENABLE_WARNINGS()""")
 
         EXRImage.const.p("image", ""),
         EXRHeader.const.p("exr_header", ""),
-        Check(1)..unsigned_char.p.p.OUT("memory", ""),
+        Check(1)..unsigned_char.p.p("memory", ""),
         Check(1)..charASCII.const.p.p("err", ""),
 
         returnDoc = "the number of bytes if success or zero and may set error string in {@code err} when there's an error"
@@ -318,7 +318,7 @@ ENABLE_WARNINGS()""")
         When there was an error message, Application must free {@code err} with #FreeEXRErrorMessage().
         """,
 
-        DeepImage.p.OUT("out_image", ""),
+        DeepImage.p("out_image", ""),
         charASCII.const.p("filename", ""),
         Check(1)..charASCII.const.p.p("err", ""),
 
@@ -344,7 +344,7 @@ ENABLE_WARNINGS()""")
         Application must free memory of variables in {@code DeepImage(image, offset_table)}.
         """,
 
-        DeepImage_p.p.OUT("out_image", ""),
+        DeepImage_p.p("out_image", ""),
         AutoSize("out_image")..int("num_parts", ""),
         const..charASCII_p("filename", ""),
         Check(1)..const..charASCII_pp("err", "")

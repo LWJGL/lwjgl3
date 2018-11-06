@@ -97,7 +97,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
         int("layerPlane", "the plane being queried"),
         AutoSize("attributes", "values")..UINT("n", "the number of attributes being queried"),
         SingleValue("attribute")..int.const.p("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
-        int.p.OUT("values", "a buffer into which the results of the query will be placed")
+        int.p("values", "a buffer into which the results of the query will be placed")
     )
 
     BOOL(
@@ -109,7 +109,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
         int("layerPlane", "the plane being queried"),
         AutoSize("attributes", "values")..UINT("n", "the number of attributes being queried"),
         SingleValue("attribute")..int.const.p("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
-        FLOAT.p.OUT("values", "a buffer into which the results of the query will be placed")
+        FLOAT.p("values", "a buffer into which the results of the query will be placed")
     )
 
     BOOL(
@@ -131,7 +131,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
             head of the list.
             """
         ),
-        Check(1)..UINT.p.OUT("numFormats", "returns the number of matching formats")
+        Check(1)..UINT.p("numFormats", "returns the number of matching formats")
     )
 
 }

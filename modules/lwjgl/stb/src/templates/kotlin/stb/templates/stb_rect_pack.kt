@@ -50,7 +50,7 @@ val stb_rect_pack = "STBRectPack".nativeClass(Module.STB, prefix = "STBRP", pref
         """,
 
         stbrp_context.p("context", "an ##STBRPContext struct"),
-        stbrp_rect.p.INOUT("rects", "an array of ##STBRPRect structs"),
+        stbrp_rect.p("rects", "an array of ##STBRPRect structs"),
         AutoSize("rects")..int("num_rects", "the number of structs in {@code rects}"),
 
         returnDoc = "1 if all of the rectangles were successfully packed and 0 otherwise"

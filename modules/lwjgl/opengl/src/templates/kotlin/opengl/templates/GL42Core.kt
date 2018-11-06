@@ -151,7 +151,7 @@ val GL42C = "GL42C".nativeClassGL("GL42C") {
         GLuint("program", "the name of a program object for which the command #LinkProgram() has been issued in the past"),
         GLuint("bufferIndex", "the index of an active atomic counter buffer"),
         GLenum("pname", "the parameter to query", AtomicCounterBufferParameters),
-        Check(1)..ReturnParam..GLint.p.OUT("params", "a buffer in which to place the returned value")
+        Check(1)..ReturnParam..GLint.p("params", "a buffer in which to place the returned value")
     )
 
     // ARB_texture_storage
@@ -404,7 +404,7 @@ val GL42C = "GL42C".nativeClassGL("GL42C") {
         GLenum("internalformat", "the internal format about which to retrieve information"),
         GLenum("pname", "the type of information to query"),
         AutoSize("params")..GLsizei("bufSize", "the maximum number of values that may be written to params by the function"),
-        ReturnParam..GLint.p.OUT("params", "a variable into which to write the retrieved information")
+        ReturnParam..GLint.p("params", "a variable into which to write the retrieved information")
     )
 
     // ARB_map_buffer_alignment

@@ -39,7 +39,7 @@ val GLX_EXT_import_context = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_impor
         DISPLAY,
         GLXContext("context", "the context being queried"),
         int("attribute", "the attribute to query"),
-        Check(1)..int.p.OUT("value", "returns the attribute value")
+        Check(1)..int.p("value", "returns the attribute value")
     )
 
     GLXContextID(

@@ -86,7 +86,7 @@ val INTEL_map_texture = "INTELMapTexture".nativeClassGL("INTEL_map_texture", pos
         GLuint("texture", "the texture to map"),
         GLint("level", "the mipmap level-of-detail of the texture"),
         GLbitfield("access", "the type of access that will be performed by the application", "#MAP_READ_BIT #MAP_WRITE_BIT"),
-        Check(1)..GLint.p.OUT("stride", "returns the distance in bytes between subsequent rows in the texture"),
-        Check(1)..GLenum.p.OUT("layout", "returns the internal layout of the texture in the graphics memory")
+        Check(1)..GLint.p("stride", "returns the distance in bytes between subsequent rows in the texture"),
+        Check(1)..GLenum.p("layout", "returns the internal layout of the texture in the graphics memory")
     )
 }

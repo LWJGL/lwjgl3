@@ -1220,7 +1220,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         """,
 
         aiScene.const.p("pIn", "Valid scene to be copied"),
-        ReturnParam..Check(1)..aiScene.p.p.OUT("pOut", "Receives a modifiable copy of the scene. Use #FreeScene() to delete it again.")
+        ReturnParam..Check(1)..aiScene.p.p("pOut", "Receives a modifiable copy of the scene. Use #FreeScene() to delete it again.")
     )
 
     void(
@@ -1366,7 +1366,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
         ImportFile["pFile"],
         ImportFile["pFlags"],
-        nullable..aiFileIO.p(
+        Input..nullable..aiFileIO.p(
             "pFS",
             "Will be used to open the model file itself and any other files the loader needs to open. Pass #NULL to use the default implementation."
         ),
@@ -1587,7 +1587,7 @@ aiAttachLogStream(&c);""")}
         This is the counterpart of #AttachLogStream(). If you attached a stream, don't forget to detach it again.
         """,
 
-        aiLogStream.p("stream", "The log stream to be detached."),
+        aiLogStream.const.p("stream", "The log stream to be detached."),
 
         returnDoc = "#Return_SUCCESS if the log stream has been detached successfully."
     )
@@ -1642,7 +1642,7 @@ aiAttachLogStream(&c);""")}
         If a file extension is contained in the list this does, of course, not mean that ASSIMP is able to load all files with this extension.
         """,
 
-        aiString.p.OUT(
+        aiString.p(
             "szOut",
             "String to receive the extension list. Format of the list: \"*.3ds;*.obj;*.dae\". #NULL is not a valid parameter."
         )
@@ -1653,7 +1653,7 @@ aiAttachLogStream(&c);""")}
         "Get the approximated storage required by an imported asset.",
 
         aiScene.const.p("pIn", "Input asset."),
-        aiMemoryInfo.p.OUT("in", "Data structure to be filled.")
+        aiMemoryInfo.p("in", "Data structure to be filled.")
     )
 
     aiPropertyStore.p(
@@ -1730,7 +1730,7 @@ aiAttachLogStream(&c);""")}
         "CreateQuaternionFromMatrix",
         "Construct a quaternion from a 3x3 rotation matrix.",
 
-        aiQuaternion.p.OUT("quat", "Receives the output quaternion."),
+        aiQuaternion.p("quat", "Receives the output quaternion."),
         aiMatrix3x3.const.p("mat", "Matrix to 'quaternionize'.")
     )
 
@@ -1739,30 +1739,30 @@ aiAttachLogStream(&c);""")}
         "Decompose a transformation matrix into its rotational, translational and scaling components.",
 
         aiMatrix4x4.const.p("mat", "Matrix to decompose"),
-        aiVector3D.p.OUT("scaling", "Receives the scaling component"),
-        aiQuaternion.p.OUT("rotation", "Receives the rotational component"),
-        aiVector3D.p.OUT("position", "Receives the translational component.")
+        aiVector3D.p("scaling", "Receives the scaling component"),
+        aiQuaternion.p("rotation", "Receives the rotational component"),
+        aiVector3D.p("position", "Receives the translational component.")
     )
 
     void(
         "TransposeMatrix4",
         "Transpose a 4x4 matrix.",
 
-        aiMatrix4x4.p.INOUT("mat", "Pointer to the matrix to be transposed")
+        Input..aiMatrix4x4.p("mat", "Pointer to the matrix to be transposed")
     )
 
     void(
         "TransposeMatrix3",
         "Transpose a 3x3 matrix.",
 
-        aiMatrix3x3.p.INOUT("mat", "Pointer to the matrix to be transposed")
+        Input..aiMatrix3x3.p("mat", "Pointer to the matrix to be transposed")
     )
 
     void(
         "TransformVecByMatrix3",
         "Transform a vector by a 3x3 matrix",
 
-        aiVector3D.p.INOUT("vec", "Vector to be transformed."),
+        Input..aiVector3D.p("vec", "Vector to be transformed."),
         aiMatrix3x3.const.p("mat", "Matrix to transform the vector with.")
     )
 
@@ -1770,7 +1770,7 @@ aiAttachLogStream(&c);""")}
         "TransformVecByMatrix4",
         "Transform a vector by a 4x4 matrix",
 
-        aiVector3D.p.INOUT("vec", "Vector to be transformed."),
+        Input..aiVector3D.p("vec", "Vector to be transformed."),
         aiMatrix4x4.const.p("mat", "Matrix to transform the vector with.")
     )
 
@@ -1778,7 +1778,7 @@ aiAttachLogStream(&c);""")}
         "MultiplyMatrix4",
         "Multiply two 4x4 matrices.",
 
-        aiMatrix4x4.p.INOUT("dst", "First factor, receives result."),
+        Input..aiMatrix4x4.p("dst", "First factor, receives result."),
         aiMatrix4x4.const.p("src", "Matrix to be multiplied with 'dst'.")
     )
 
@@ -1786,7 +1786,7 @@ aiAttachLogStream(&c);""")}
         "MultiplyMatrix3",
         "Multiply two 3x3 matrices.",
 
-        aiMatrix3x3.p.INOUT("dst", "First factor, receives result."),
+        Input..aiMatrix3x3.p("dst", "First factor, receives result."),
         aiMatrix3x3.const.p("src", "Matrix to be multiplied with 'dst'.")
     )
 
@@ -1794,14 +1794,14 @@ aiAttachLogStream(&c);""")}
         "IdentityMatrix3",
         "Get a 3x3 identity matrix.",
 
-        aiMatrix3x3.p.OUT("mat", "Matrix to receive its personal identity")
+        aiMatrix3x3.p("mat", "Matrix to receive its personal identity")
     )
 
     void(
         "IdentityMatrix4",
         "Get a 4x4 identity matrix.",
 
-        aiMatrix4x4.p.OUT("mat", "Matrix to receive its personal identity")
+        aiMatrix4x4.p("mat", "Matrix to receive its personal identity")
     )
 
     size_t(
@@ -2170,11 +2170,11 @@ aiAttachLogStream(&c);""")}
         "GetMaterialProperty",
         "Retrieve a material property with a specific key from the material.",
 
-        aiMaterial.p("pMat", "Pointer to the input material. May not be #NULL"),
-        charASCII.p("pKey", "Key to search for. One of the AI_MATKEY_XXX constants."),
+        aiMaterial.const.p("pMat", "Pointer to the input material. May not be #NULL"),
+        charASCII.const.p("pKey", "Key to search for. One of the AI_MATKEY_XXX constants."),
         unsigned_int("type", "Specifies the type of the texture to be retrieved", TextureTypes),
         unsigned_int("index", "Index of the texture to be retrieved."),
-        Check(1)..aiMaterialProperty.p.p.OUT(
+        Check(1)..aiMaterialProperty.const.p.p(
             "mPropOut",
             "Pointer to receive a pointer to a valid ##AIMaterialProperty structure or #NULL if the key has not been found."
         ),
@@ -2202,8 +2202,8 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pKey"],
         GetMaterialProperty["type"],
         GetMaterialProperty["index"],
-        float.p.OUT("pOut", "Pointer to a buffer to receive the result."),
-        AutoSize("pOut")..Check(1)..nullable..unsigned_int.p.INOUT(
+        float.p("pOut", "Pointer to a buffer to receive the result."),
+        AutoSize("pOut")..Check(1)..nullable..unsigned_int.p(
             "pMax",
             "Specifies the size of the given buffer, in float's. Receives the number of values (not bytes!) read."
         ),
@@ -2219,8 +2219,8 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pKey"],
         GetMaterialProperty["type"],
         GetMaterialProperty["index"],
-        int.p.OUT("pOut", "Pointer to a buffer to receive the result."),
-        AutoSize("pOut")..Check(1)..nullable..unsigned_int.p.INOUT(
+        int.p("pOut", "Pointer to a buffer to receive the result."),
+        AutoSize("pOut")..Check(1)..nullable..unsigned_int.p(
             "pMax",
             "Specifies the size of the given buffer, in int's. Receives the number of values (not bytes!) read."
         ),
@@ -2236,7 +2236,7 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pKey"],
         GetMaterialProperty["type"],
         GetMaterialProperty["index"],
-        aiColor4D.p.OUT("pOut", "Pointer to a color to receive the result."),
+        aiColor4D.p("pOut", "Pointer to a color to receive the result."),
 
         returnDoc = "Specifies whether the key has been found. If not, the output struct remains unmodified."
     )
@@ -2249,7 +2249,7 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pKey"],
         GetMaterialProperty["type"],
         GetMaterialProperty["index"],
-        aiUVTransform.p.OUT("pOut", "Pointer to a ##AIUVTransform to receive the result."),
+        aiUVTransform.p("pOut", "Pointer to a ##AIUVTransform to receive the result."),
 
         returnDoc = "Specifies whether the key has been found. If not, the output struct remains unmodified."
     )
@@ -2262,7 +2262,7 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pKey"],
         GetMaterialProperty["type"],
         GetMaterialProperty["index"],
-        aiString.p.OUT("pOut", "Pointer to a string to receive the result."),
+        aiString.p("pOut", "Pointer to a string to receive the result."),
 
         returnDoc = "Specifies whether the key has been found. If not, the output struct remains unmodified."
     )
@@ -2291,24 +2291,24 @@ aiAttachLogStream(&c);""")}
         GetMaterialProperty["pMat"],
         aiTextureType("type", "Specifies the texture stack to read from (e.g. diffuse, specular, height map ...).", TextureTypes),
         unsigned_int("index", "Index of the texture. The function fails if the requested index is not available for this texture type."),
-        aiString.p.OUT("path", "Receives the output path. This parameter must be non-null."),
+        aiString.p("path", "Receives the output path. This parameter must be non-null."),
         Check(1)..nullable..aiTextureMapping.p("mapping", "The texture mapping mode to be used. Pass #NULL if you're not interested in this information."),
-        Check(1)..nullable..unsigned_int.p.OUT("uvindex", "For UV-mapped textures: receives the index of the UV source channel. Unmodified otherwise."),
-        Check(1)..nullable..float.p.OUT("blend", "Receives the blend factor for the texture. Pass #NULL if you're not interested in this information."),
-        Check(1)..nullable..aiTextureOp.p.OUT(
+        Check(1)..nullable..unsigned_int.p("uvindex", "For UV-mapped textures: receives the index of the UV source channel. Unmodified otherwise."),
+        Check(1)..nullable..float.p("blend", "Receives the blend factor for the texture. Pass #NULL if you're not interested in this information."),
+        Check(1)..nullable..aiTextureOp.p(
             "op",
             """
             Receives the texture blend operation to be perform between this texture and the previous texture. Pass #NULL if you're not interested in this
             information.
             """),
-        Check(1)..nullable..aiTextureMapMode.p.OUT(
+        Check(1)..nullable..aiTextureMapMode.p(
             "mapmode",
             """
             Receives the mapping modes to be used for the texture. Pass #NULL if you're not interested in this information. Otherwise, pass a pointer to an
             array of two {@code aiTextureMapMode}'s (one for each axis, UV order).
             """
         ),
-        Check(1)..nullable..unsigned_int.p.OUT("flags", "Receives the texture flags."),
+        Check(1)..nullable..unsigned_int.p("flags", "Receives the texture flags."),
 
         returnDoc = "#Return_SUCCESS on success, otherwise something else. Have fun."
     )

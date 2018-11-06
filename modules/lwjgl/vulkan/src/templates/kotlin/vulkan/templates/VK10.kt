@@ -2528,7 +2528,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkInstanceCreateInfo.const.p("pCreateInfo", "points to an instance of ##VkInstanceCreateInfo controlling creation of the instance."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkInstance.p.OUT("pInstance", "points a {@code VkInstance} handle in which the resulting instance is returned.")
+        Check(1)..VkInstance.p("pInstance", "points a {@code VkInstance} handle in which the resulting instance is returned.")
     )
 
     void(
@@ -2612,8 +2612,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         """,
 
         VkInstance("instance", "a handle to a Vulkan instance previously created with #CreateInstance()."),
-        AutoSize("pPhysicalDevices")..Check(1)..uint32_t.p.INOUT("pPhysicalDeviceCount", "a pointer to an integer related to the number of physical devices available or queried, as described below."),
-        nullable..VkPhysicalDevice.p.OUT("pPhysicalDevices", "either {@code NULL} or a pointer to an array of {@code VkPhysicalDevice} handles.")
+        AutoSize("pPhysicalDevices")..Check(1)..uint32_t.p("pPhysicalDeviceCount", "a pointer to an integer related to the number of physical devices available or queried, as described below."),
+        nullable..VkPhysicalDevice.p("pPhysicalDevices", "either {@code NULL} or a pointer to an array of {@code VkPhysicalDevice} handles.")
     )
 
     void(
@@ -2640,7 +2640,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         """,
 
         VkPhysicalDevice("physicalDevice", "the physical device from which to query the supported features."),
-        VkPhysicalDeviceFeatures.p.OUT("pFeatures", "a pointer to a ##VkPhysicalDeviceFeatures structure in which the physical device features are returned. For each feature, a value of #TRUE specifies that the feature is supported on this physical device, and #FALSE specifies that the feature is not supported.")
+        VkPhysicalDeviceFeatures.p("pFeatures", "a pointer to a ##VkPhysicalDeviceFeatures structure in which the physical device features are returned. For each feature, a value of #TRUE specifies that the feature is supported on this physical device, and #FALSE specifies that the feature is not supported.")
     )
 
     void(
@@ -2670,7 +2670,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkPhysicalDevice("physicalDevice", "the physical device from which to query the format properties."),
         VkFormat("format", "the format whose properties are queried."),
-        VkFormatProperties.p.OUT("pFormatProperties", "a pointer to a ##VkFormatProperties structure in which physical device properties for {@code format} are returned.")
+        VkFormatProperties.p("pFormatProperties", "a pointer to a ##VkFormatProperties structure in which physical device properties for {@code format} are returned.")
     )
 
     VkResult(
@@ -2740,7 +2740,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkImageTiling("tiling", "a {@code VkImageTiling} value specifying the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}."),
         VkImageUsageFlags("usage", "a bitmask of {@code VkImageUsageFlagBits} specifying the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}."),
         VkImageCreateFlags("flags", "a bitmask of {@code VkImageCreateFlagBits} specifying additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}."),
-        VkImageFormatProperties.p.OUT("pImageFormatProperties", "points to an instance of the ##VkImageFormatProperties structure in which capabilities are returned.")
+        VkImageFormatProperties.p("pImageFormatProperties", "points to an instance of the ##VkImageFormatProperties structure in which capabilities are returned.")
     )
 
     void(
@@ -2767,7 +2767,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         """,
 
         VkPhysicalDevice("physicalDevice", "the handle to the physical device whose properties will be queried."),
-        VkPhysicalDeviceProperties.p.OUT("pProperties", "points to an instance of the ##VkPhysicalDeviceProperties structure, that will be filled with returned information.")
+        VkPhysicalDeviceProperties.p("pProperties", "points to an instance of the ##VkPhysicalDeviceProperties structure, that will be filled with returned information.")
     )
 
     void(
@@ -2799,8 +2799,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         """,
 
         VkPhysicalDevice("physicalDevice", "the handle to the physical device whose properties will be queried."),
-        AutoSize("pQueueFamilyProperties")..Check(1)..uint32_t.p.INOUT("pQueueFamilyPropertyCount", "a pointer to an integer related to the number of queue families available or queried, as described below."),
-        nullable..VkQueueFamilyProperties.p.OUT("pQueueFamilyProperties", "either {@code NULL} or a pointer to an array of ##VkQueueFamilyProperties structures.")
+        AutoSize("pQueueFamilyProperties")..Check(1)..uint32_t.p("pQueueFamilyPropertyCount", "a pointer to an integer related to the number of queue families available or queried, as described below."),
+        nullable..VkQueueFamilyProperties.p("pQueueFamilyProperties", "either {@code NULL} or a pointer to an array of ##VkQueueFamilyProperties structures.")
     )
 
     void(
@@ -2827,7 +2827,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         """,
 
         VkPhysicalDevice("physicalDevice", "the handle to the device to query."),
-        VkPhysicalDeviceMemoryProperties.p.OUT("pMemoryProperties", "points to an instance of ##VkPhysicalDeviceMemoryProperties structure in which the properties are returned.")
+        VkPhysicalDeviceMemoryProperties.p("pMemoryProperties", "points to an instance of ##VkPhysicalDeviceMemoryProperties structure in which the properties are returned.")
     )
 
     GlobalCommand..PFN_vkVoidFunction(
@@ -2996,7 +2996,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkPhysicalDevice("physicalDevice", "<b>must</b> be one of the device handles returned from a call to #EnumeratePhysicalDevices() (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#devsandqueues-physical-device-enumeration\">Physical Device Enumeration</a>)."),
         VkDeviceCreateInfo.const.p("pCreateInfo", "a pointer to a ##VkDeviceCreateInfo structure containing information about how to create the device."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkDevice.p.OUT("pDevice", "points to a handle in which the created {@code VkDevice} is returned.")
+        Check(1)..VkDevice.p("pDevice", "points to a handle in which the created {@code VkDevice} is returned.")
     )
 
     void(
@@ -3096,8 +3096,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         """,
 
         nullable..charUTF8.const.p("pLayerName", "either {@code NULL} or a pointer to a null-terminated UTF-8 string naming the layer to retrieve extensions from."),
-        AutoSize("pProperties")..Check(1)..uint32_t.p.INOUT("pPropertyCount", "a pointer to an integer related to the number of extension properties available or queried, as described below."),
-        nullable..VkExtensionProperties.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkExtensionProperties structures.")
+        AutoSize("pProperties")..Check(1)..uint32_t.p("pPropertyCount", "a pointer to an integer related to the number of extension properties available or queried, as described below."),
+        nullable..VkExtensionProperties.p("pProperties", "either {@code NULL} or a pointer to an array of ##VkExtensionProperties structures.")
     )
 
     VkResult(
@@ -3148,8 +3148,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkPhysicalDevice("physicalDevice", "the physical device that will be queried."),
         nullable..charUTF8.const.p("pLayerName", "either {@code NULL} or a pointer to a null-terminated UTF-8 string naming the layer to retrieve extensions from."),
-        AutoSize("pProperties")..Check(1)..uint32_t.p.INOUT("pPropertyCount", "a pointer to an integer related to the number of extension properties available or queried, and is treated in the same fashion as the #EnumerateInstanceExtensionProperties(){@code ::pPropertyCount} parameter."),
-        nullable..VkExtensionProperties.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkExtensionProperties structures.")
+        AutoSize("pProperties")..Check(1)..uint32_t.p("pPropertyCount", "a pointer to an integer related to the number of extension properties available or queried, and is treated in the same fashion as the #EnumerateInstanceExtensionProperties(){@code ::pPropertyCount} parameter."),
+        nullable..VkExtensionProperties.p("pProperties", "either {@code NULL} or a pointer to an array of ##VkExtensionProperties structures.")
     )
 
     // Layer discovery commands
@@ -3197,8 +3197,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         ##VkLayerProperties
         """,
 
-        AutoSize("pProperties")..Check(1)..uint32_t.p.INOUT("pPropertyCount", "a pointer to an integer related to the number of layer properties available or queried, as described below."),
-        nullable..VkLayerProperties.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkLayerProperties structures.")
+        AutoSize("pProperties")..Check(1)..uint32_t.p("pPropertyCount", "a pointer to an integer related to the number of layer properties available or queried, as described below."),
+        nullable..VkLayerProperties.p("pProperties", "either {@code NULL} or a pointer to an array of ##VkLayerProperties structures.")
     )
 
     VkResult(
@@ -3247,8 +3247,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         """,
 
         VkPhysicalDevice("physicalDevice", ""),
-        AutoSize("pProperties")..Check(1)..uint32_t.p.INOUT("pPropertyCount", "a pointer to an integer related to the number of layer properties available or queried."),
-        nullable..VkLayerProperties.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkLayerProperties structures.")
+        AutoSize("pProperties")..Check(1)..uint32_t.p("pPropertyCount", "a pointer to an integer related to the number of layer properties available or queried."),
+        nullable..VkLayerProperties.p("pProperties", "either {@code NULL} or a pointer to an array of ##VkLayerProperties structures.")
     )
 
     // queue commands
@@ -3288,7 +3288,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that owns the queue."),
         uint32_t("queueFamilyIndex", "the index of the queue family to which the queue belongs."),
         uint32_t("queueIndex", "the index within this queue family of the queue to retrieve."),
-        Check(1)..VkQueue.p.OUT("pQueue", "a pointer to a {@code VkQueue} object that will be filled with the handle for the requested queue.")
+        Check(1)..VkQueue.p("pQueue", "a pointer to a {@code VkQueue} object that will be filled with the handle for the requested queue.")
     )
 
     VkResult(
@@ -3554,7 +3554,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that owns the memory."),
         VkMemoryAllocateInfo.const.p("pAllocateInfo", "a pointer to an instance of the ##VkMemoryAllocateInfo structure describing parameters of the allocation. A successful returned allocation <b>must</b> use the requested parameters&#8201;&#8212;&#8201;no substitution is permitted by the implementation."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkDeviceMemory.p.OUT("pMemory", "a pointer to a {@code VkDeviceMemory} handle in which information about the allocated memory is returned.")
+        Check(1)..VkDeviceMemory.p("pMemory", "a pointer to a {@code VkDeviceMemory} handle in which information about the allocated memory is returned.")
     )
 
     void(
@@ -3686,7 +3686,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDeviceSize("offset", "a zero-based byte offset from the beginning of the memory object."),
         VkDeviceSize("size", "the size of the memory range to map, or #WHOLE_SIZE to map from {@code offset} to the end of the allocation."),
         VkMemoryMapFlags("flags", "reserved for future use."),
-        Check(1)..void.p.p.INOUT("ppData", "points to a pointer in which is returned a host-accessible pointer to the beginning of the mapped range. This pointer minus {@code offset} <b>must</b> be aligned to at least ##VkPhysicalDeviceLimits{@code ::minMemoryMapAlignment}.")
+        Check(1)..void.p.p("ppData", "points to a pointer in which is returned a host-accessible pointer to the beginning of the mapped range. This pointer minus {@code offset} <b>must</b> be aligned to at least ##VkPhysicalDeviceLimits{@code ::minMemoryMapAlignment}.")
     )
 
     void(
@@ -3867,7 +3867,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkDevice("device", "the logical device that owns the memory."),
         VkDeviceMemory("memory", "the memory object being queried."),
-        Check(1)..VkDeviceSize.p.OUT("pCommittedMemoryInBytes", "a pointer to a {@code VkDeviceSize} value in which the number of bytes currently committed is returned, on success.")
+        Check(1)..VkDeviceSize.p("pCommittedMemoryInBytes", "a pointer to a {@code VkDeviceSize} value in which the number of bytes currently committed is returned, on success.")
     )
 
     // Memory management API commands
@@ -4037,7 +4037,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkDevice("device", "the logical device that owns the buffer."),
         VkBuffer("buffer", "the buffer to query."),
-        VkMemoryRequirements.p.OUT("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements structure in which the memory requirements of the buffer object are returned.")
+        VkMemoryRequirements.p("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements structure in which the memory requirements of the buffer object are returned.")
     )
 
     void(
@@ -4073,7 +4073,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkDevice("device", "the logical device that owns the image."),
         VkImage("image", "the image to query."),
-        VkMemoryRequirements.p.OUT("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements structure in which the memory requirements of the image object are returned.")
+        VkMemoryRequirements.p("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements structure in which the memory requirements of the image object are returned.")
     )
 
     // Sparse resource memory management API commands
@@ -4117,8 +4117,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkDevice("device", "the logical device that owns the image."),
         VkImage("image", "the {@code VkImage} object to get the memory requirements for."),
-        AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t.p.INOUT("pSparseMemoryRequirementCount", "a pointer to an integer related to the number of sparse memory requirements available or queried, as described below."),
-        nullable..VkSparseImageMemoryRequirements.p.OUT("pSparseMemoryRequirements", "either {@code NULL} or a pointer to an array of ##VkSparseImageMemoryRequirements structures.")
+        AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t.p("pSparseMemoryRequirementCount", "a pointer to an integer related to the number of sparse memory requirements available or queried, as described below."),
+        nullable..VkSparseImageMemoryRequirements.p("pSparseMemoryRequirements", "either {@code NULL} or a pointer to an array of ##VkSparseImageMemoryRequirements structures.")
     )
 
     void(
@@ -4177,8 +4177,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkSampleCountFlagBits("samples", "the number of samples per texel as defined in {@code VkSampleCountFlagBits}."),
         VkImageUsageFlags("usage", "a bitmask describing the intended usage of the image."),
         VkImageTiling("tiling", "the tiling arrangement of the data elements in memory."),
-        AutoSize("pProperties")..Check(1)..uint32_t.p.INOUT("pPropertyCount", "a pointer to an integer related to the number of sparse format properties available or queried, as described below."),
-        nullable..VkSparseImageFormatProperties.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkSparseImageFormatProperties structures.")
+        AutoSize("pProperties")..Check(1)..uint32_t.p("pPropertyCount", "a pointer to an integer related to the number of sparse format properties available or queried, as described below."),
+        nullable..VkSparseImageFormatProperties.p("pProperties", "either {@code NULL} or a pointer to an array of ##VkSparseImageFormatProperties structures.")
     )
 
     VkResult(
@@ -4311,7 +4311,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the fence."),
         VkFenceCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkFenceCreateInfo structure which contains information about how the fence is to be created."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned.")
+        Check(1)..VkFence.p("pFence", "points to a handle in which the resulting fence object is returned.")
     )
 
     void(
@@ -4584,7 +4584,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the semaphore."),
         VkSemaphoreCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkSemaphoreCreateInfo structure which contains information about how the semaphore is to be created."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkSemaphore.p.OUT("pSemaphore", "points to a handle in which the resulting semaphore object is returned.")
+        Check(1)..VkSemaphore.p("pSemaphore", "points to a handle in which the resulting semaphore object is returned.")
     )
 
     void(
@@ -4679,7 +4679,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the event."),
         VkEventCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkEventCreateInfo structure which contains information about how the event is to be created."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkEvent.p.OUT("pEvent", "points to a handle in which the resulting event object is returned.")
+        Check(1)..VkEvent.p("pEvent", "points to a handle in which the resulting event object is returned.")
     )
 
     void(
@@ -4931,7 +4931,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the query pool."),
         VkQueryPoolCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkQueryPoolCreateInfo structure containing the number and type of queries to be managed by the pool."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkQueryPool.p.OUT("pQueryPool", "a pointer to a {@code VkQueryPool} handle in which the resulting query pool object is returned.")
+        Check(1)..VkQueryPool.p("pQueryPool", "a pointer to a {@code VkQueryPool} handle in which the resulting query pool object is returned.")
     )
 
     void(
@@ -5069,7 +5069,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         uint32_t("firstQuery", "the initial query index."),
         uint32_t("queryCount", "the number of queries. {@code firstQuery} and {@code queryCount} together define a range of queries. For pipeline statistics queries, each query index in the pool contains one integer value for each bit that is enabled in ##VkQueryPoolCreateInfo{@code ::pipelineStatistics} when the pool is created."),
         AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
-        void.p.OUT("pData", "a pointer to a user-allocated buffer where the results will be written"),
+        void.p("pData", "a pointer to a user-allocated buffer where the results will be written"),
         VkDeviceSize("stride", "the stride in bytes between results for individual queries within {@code pData}."),
         VkQueryResultFlags("flags", "a bitmask of {@code VkQueryResultFlagBits} specifying how and when results are returned.")
     )
@@ -5125,7 +5125,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the buffer object."),
         VkBufferCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkBufferCreateInfo structure containing parameters affecting creation of the buffer."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkBuffer.p.OUT("pBuffer", "points to a {@code VkBuffer} handle in which the resulting buffer object is returned.")
+        Check(1)..VkBuffer.p("pBuffer", "points to a {@code VkBuffer} handle in which the resulting buffer object is returned.")
     )
 
     void(
@@ -5217,7 +5217,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the buffer view."),
         VkBufferViewCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkBufferViewCreateInfo structure containing parameters to be used to create the buffer."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkBufferView.p.OUT("pView", "points to a {@code VkBufferView} handle in which the resulting buffer view object is returned.")
+        Check(1)..VkBufferView.p("pView", "points to a {@code VkBufferView} handle in which the resulting buffer view object is returned.")
     )
 
     void(
@@ -5314,7 +5314,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the image."),
         VkImageCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkImageCreateInfo structure containing parameters to be used to create the image."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkImage.p.OUT("pImage", "points to a {@code VkImage} handle in which the resulting image object is returned.")
+        Check(1)..VkImage.p("pImage", "points to a {@code VkImage} handle in which the resulting image object is returned.")
     )
 
     void(
@@ -5409,7 +5409,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that owns the image."),
         VkImage("image", "the image whose layout is being queried."),
         VkImageSubresource.const.p("pSubresource", "a pointer to a ##VkImageSubresource structure selecting a specific image for the image subresource."),
-        VkSubresourceLayout.p.OUT("pLayout", "points to a ##VkSubresourceLayout structure in which the layout is returned.")
+        VkSubresourceLayout.p("pLayout", "points to a ##VkSubresourceLayout structure in which the layout is returned.")
     )
 
     // Image view commands
@@ -5463,7 +5463,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the image view."),
         VkImageViewCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkImageViewCreateInfo structure containing parameters to be used to create the image view."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkImageView.p.OUT("pView", "points to a {@code VkImageView} handle in which the resulting image view object is returned.")
+        Check(1)..VkImageView.p("pView", "points to a {@code VkImageView} handle in which the resulting image view object is returned.")
     )
 
     void(
@@ -5561,7 +5561,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the shader module."),
         VkShaderModuleCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkShaderModuleCreateInfo structure."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkShaderModule.p.OUT("pShaderModule", "points to a {@code VkShaderModule} handle in which the resulting shader module object is returned.")
+        Check(1)..VkShaderModule.p("pShaderModule", "points to a {@code VkShaderModule} handle in which the resulting shader module object is returned.")
     )
 
     void(
@@ -5666,7 +5666,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the pipeline cache object."),
         VkPipelineCacheCreateInfo.const.p("pCreateInfo", "a pointer to a ##VkPipelineCacheCreateInfo structure that contains the initial parameters for the pipeline cache object."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkPipelineCache.p.OUT("pPipelineCache", "a pointer to a {@code VkPipelineCache} handle in which the resulting pipeline cache object is returned.")
+        Check(1)..VkPipelineCache.p("pPipelineCache", "a pointer to a {@code VkPipelineCache} handle in which the resulting pipeline cache object is returned.")
     )
 
     void(
@@ -5780,8 +5780,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkDevice("device", "the logical device that owns the pipeline cache."),
         VkPipelineCache("pipelineCache", "the pipeline cache to retrieve data from."),
-        AutoSize("pData")..Check(1)..size_t.p.INOUT("pDataSize", "a pointer to a value related to the amount of data in the pipeline cache, as described below."),
-        nullable..void.p.OUT("pData", "either {@code NULL} or a pointer to a buffer.")
+        AutoSize("pData")..Check(1)..size_t.p("pDataSize", "a pointer to a value related to the amount of data in the pipeline cache, as described below."),
+        nullable..void.p("pData", "either {@code NULL} or a pointer to a buffer.")
     )
 
     VkResult(
@@ -5908,7 +5908,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         AutoSize("pCreateInfos", "pPipelines")..uint32_t("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays."),
         VkGraphicsPipelineCreateInfo.const.p("pCreateInfos", "an array of ##VkGraphicsPipelineCreateInfo structures."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        VkPipeline.p.OUT("pPipelines", "a pointer to an array in which the resulting graphics pipeline objects are returned.")
+        VkPipeline.p("pPipelines", "a pointer to an array in which the resulting graphics pipeline objects are returned.")
     )
 
     VkResult(
@@ -5969,7 +5969,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         AutoSize("pCreateInfos", "pPipelines")..uint32_t("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays."),
         VkComputePipelineCreateInfo.const.p("pCreateInfos", "an array of ##VkComputePipelineCreateInfo structures."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        VkPipeline.p.OUT("pPipelines", "a pointer to an array in which the resulting compute pipeline objects are returned.")
+        VkPipeline.p("pPipelines", "a pointer to an array in which the resulting compute pipeline objects are returned.")
     )
 
     void(
@@ -6061,7 +6061,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the pipeline layout."),
         VkPipelineLayoutCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkPipelineLayoutCreateInfo structure specifying the state of the pipeline layout object."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkPipelineLayout.p.OUT("pPipelineLayout", "points to a {@code VkPipelineLayout} handle in which the resulting pipeline layout object is returned.")
+        Check(1)..VkPipelineLayout.p("pPipelineLayout", "points to a {@code VkPipelineLayout} handle in which the resulting pipeline layout object is returned.")
     )
 
     void(
@@ -6154,7 +6154,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the sampler."),
         VkSamplerCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkSamplerCreateInfo structure specifying the state of the sampler object."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkSampler.p.OUT("pSampler", "points to a {@code VkSampler} handle in which the resulting sampler object is returned.")
+        Check(1)..VkSampler.p("pSampler", "points to a {@code VkSampler} handle in which the resulting sampler object is returned.")
     )
 
     void(
@@ -6246,7 +6246,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the descriptor set layout."),
         VkDescriptorSetLayoutCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkDescriptorSetLayoutCreateInfo structure specifying the state of the descriptor set layout object."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkDescriptorSetLayout.p.OUT("pSetLayout", "points to a {@code VkDescriptorSetLayout} handle in which the resulting descriptor set layout object is returned.")
+        Check(1)..VkDescriptorSetLayout.p("pSetLayout", "points to a {@code VkDescriptorSetLayout} handle in which the resulting descriptor set layout object is returned.")
     )
 
     void(
@@ -6341,7 +6341,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the descriptor pool."),
         VkDescriptorPoolCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkDescriptorPoolCreateInfo structure specifying the state of the descriptor pool object."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkDescriptorPool.p.OUT("pDescriptorPool", "points to a {@code VkDescriptorPool} handle in which the resulting descriptor pool object is returned.")
+        Check(1)..VkDescriptorPool.p("pDescriptorPool", "points to a {@code VkDescriptorPool} handle in which the resulting descriptor pool object is returned.")
     )
 
     void(
@@ -6507,7 +6507,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkDevice("device", "the logical device that owns the descriptor pool."),
         VkDescriptorSetAllocateInfo.const.p("pAllocateInfo", "a pointer to an instance of the ##VkDescriptorSetAllocateInfo structure describing parameters of the allocation."),
-        Check("pAllocateInfo.descriptorSetCount()")..VkDescriptorSet.p.OUT("pDescriptorSets", "a pointer to an array of {@code VkDescriptorSet} handles in which the resulting descriptor set objects are returned.")
+        Check("pAllocateInfo.descriptorSetCount()")..VkDescriptorSet.p("pDescriptorSets", "a pointer to an array of {@code VkDescriptorSet} handles in which the resulting descriptor set objects are returned.")
     )
 
     VkResult(
@@ -6672,7 +6672,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the framebuffer."),
         VkFramebufferCreateInfo.const.p("pCreateInfo", "points to a ##VkFramebufferCreateInfo structure which describes additional information about framebuffer creation."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkFramebuffer.p.OUT("pFramebuffer", "points to a {@code VkFramebuffer} handle in which the resulting framebuffer object is returned.")
+        Check(1)..VkFramebuffer.p("pFramebuffer", "points to a {@code VkFramebuffer} handle in which the resulting framebuffer object is returned.")
     )
 
     void(
@@ -6762,7 +6762,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the render pass."),
         VkRenderPassCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkRenderPassCreateInfo structure that describes the parameters of the render pass."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkRenderPass.p.OUT("pRenderPass", "points to a {@code VkRenderPass} handle in which the resulting render pass object is returned.")
+        Check(1)..VkRenderPass.p("pRenderPass", "points to a {@code VkRenderPass} handle in which the resulting render pass object is returned.")
     )
 
     void(
@@ -6848,7 +6848,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkDevice("device", "the logical device that owns the render pass."),
         VkRenderPass("renderPass", "a handle to a render pass."),
-        VkExtent2D.p.OUT("pGranularity", "points to a ##VkExtent2D structure in which the granularity is returned.")
+        VkExtent2D.p("pGranularity", "points to a ##VkExtent2D structure in which the granularity is returned.")
     )
 
     // Command pool commands
@@ -6902,7 +6902,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that creates the command pool."),
         VkCommandPoolCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkCommandPoolCreateInfo structure specifying the state of the command pool object."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkCommandPool.p.OUT("pCommandPool", "points to a {@code VkCommandPool} handle in which the created pool is returned.")
+        Check(1)..VkCommandPool.p("pCommandPool", "points to a {@code VkCommandPool} handle in which the created pool is returned.")
     )
 
     void(
@@ -7063,7 +7063,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkDevice("device", "the logical device that owns the command pool."),
         VkCommandBufferAllocateInfo.const.p("pAllocateInfo", "a pointer to an instance of the ##VkCommandBufferAllocateInfo structure describing parameters of the allocation."),
-        Check("pAllocateInfo.commandBufferCount()")..VkCommandBuffer.p.OUT("pCommandBuffers", "a pointer to an array of {@code VkCommandBuffer} handles in which the resulting command buffer objects are returned. The array <b>must</b> be at least the length specified by the {@code commandBufferCount} member of {@code pAllocateInfo}. Each allocated command buffer begins in the initial state.")
+        Check("pAllocateInfo.commandBufferCount()")..VkCommandBuffer.p("pCommandBuffers", "a pointer to an array of {@code VkCommandBuffer} handles in which the resulting command buffer objects are returned. The array <b>must</b> be at least the length specified by the {@code commandBufferCount} member of {@code pAllocateInfo}. Each allocated command buffer begins in the initial state.")
     )
 
     void(

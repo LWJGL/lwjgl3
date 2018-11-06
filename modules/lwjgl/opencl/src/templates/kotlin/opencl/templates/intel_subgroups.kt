@@ -73,7 +73,7 @@ val intel_subgroups = "INTELSubgroups".nativeClassCL("intel_subgroups", INTEL) {
             "a pointer to memory where the appropriate parameterization of the query is passed from. If {@code input_value} is #NULL it is ignored."
         ),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_POINTER)..nullable..void.p.OUT("param_value", param_value),
+        MultiType(PointerMapping.DATA_POINTER)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET
     )
 }

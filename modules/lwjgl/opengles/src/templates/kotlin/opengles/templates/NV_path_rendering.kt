@@ -803,7 +803,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
         GLuint("path", ""),
         GLenum("pname", "", "$PathParameters $GetPathParameters"),
-        ReturnParam..Check(1)..GLint.p.OUT("value", "")
+        ReturnParam..Check(1)..GLint.p("value", "")
     )
 
     void(
@@ -812,7 +812,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
         GLuint("path", ""),
         this["GetPathParameterivNV"]["pname"],
-        ReturnParam..Check(1)..GLfloat.p.OUT("value", "")
+        ReturnParam..Check(1)..GLfloat.p("value", "")
     )
 
     void(
@@ -820,7 +820,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
         "",
 
         GLuint("path", ""),
-        Check("glGetPathParameteriNV(path, GL_PATH_COMMAND_COUNT_NV)", debug = true)..GLubyte.p.OUT("commands", "")
+        Check("glGetPathParameteriNV(path, GL_PATH_COMMAND_COUNT_NV)", debug = true)..GLubyte.p("commands", "")
     )
 
     void(
@@ -828,7 +828,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
         "",
 
         GLuint("path", ""),
-        Check("glGetPathParameteriNV(path, GL_PATH_COORD_COUNT_NV)", debug = true)..GLfloat.p.OUT("coords", "")
+        Check("glGetPathParameteriNV(path, GL_PATH_COORD_COUNT_NV)", debug = true)..GLfloat.p("coords", "")
     )
 
     void(
@@ -836,7 +836,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
         "",
 
         GLuint("path", ""),
-        Check("glGetPathParameteriNV(path, GL_PATH_DASH_ARRAY_COUNT_NV)", debug = true)..GLfloat.p.OUT("dashArray", "")
+        Check("glGetPathParameteriNV(path, GL_PATH_DASH_ARRAY_COUNT_NV)", debug = true)..GLfloat.p("dashArray", "")
     )
 
     void(
@@ -849,7 +849,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
         StencilFillPathInstancedNV["paths"],
         StencilFillPathInstancedNV["pathBase"],
         GLsizei("stride", ""),
-        Check("numPaths * (stride == 0 ? Integer.bitCount(metricQueryMask) : (stride >> 2))")..GLfloat.p.OUT("metrics", "")
+        Check("numPaths * (stride == 0 ? Integer.bitCount(metricQueryMask) : (stride >> 2))")..GLfloat.p("metrics", "")
     )
 
     void(
@@ -875,7 +875,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
         GLfloat("advanceScale", ""),
         GLfloat("kerningScale", ""),
         GLenum("transformType", "", "#TRANSLATE_X_NV #TRANSLATE_2D_NV"),
-        Check("(numPaths - 1) * (transformType == GL_TRANSLATE_X_NV ? 1 : 2)")..GLfloat.p.OUT("returnedSpacing", "")
+        Check("(numPaths - 1) * (transformType == GL_TRANSLATE_X_NV ? 1 : 2)")..GLfloat.p("returnedSpacing", "")
     )
 
     GLboolean(
@@ -914,10 +914,10 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
         GLsizei("startSegment", ""),
         GLsizei("numSegments", ""),
         GLfloat("distance", ""),
-        nullable..Check(1)..GLfloat.p.OUT("x", ""),
-        nullable..Check(1)..GLfloat.p.OUT("y", ""),
-        nullable..Check(1)..GLfloat.p.OUT("tangentX", ""),
-        nullable..Check(1)..GLfloat.p.OUT("tangentY", "")
+        nullable..Check(1)..GLfloat.p("x", ""),
+        nullable..Check(1)..GLfloat.p("y", ""),
+        nullable..Check(1)..GLfloat.p("tangentX", ""),
+        nullable..Check(1)..GLfloat.p("tangentY", "")
     )
 
     IgnoreMissing..void(
@@ -978,8 +978,8 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
         AutoSize("props")..GLsizei("propCount", ""),
         GLenum.const.p("props", ""),
         AutoSize("params")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p.OUT("length", ""),
-        GLfloat.p.OUT("params", "")
+        Check(1)..nullable..GLsizei.p("length", ""),
+        GLfloat.p("params", "")
     )
 
     customMethod("""

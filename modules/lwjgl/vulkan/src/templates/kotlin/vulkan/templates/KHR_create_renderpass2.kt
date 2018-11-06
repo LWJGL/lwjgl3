@@ -131,7 +131,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
         VkDevice("device", "the logical device that creates the render pass."),
         VkRenderPassCreateInfo2KHR.const.p("pCreateInfo", "a pointer to an instance of the ##VkRenderPassCreateInfo2KHR structure that describes the parameters of the render pass."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkRenderPass.p.OUT("pRenderPass", "points to a {@code VkRenderPass} handle in which the resulting render pass object is returned.")
+        Check(1)..VkRenderPass.p("pRenderPass", "points to a {@code VkRenderPass} handle in which the resulting render pass object is returned.")
     )
 
     void(

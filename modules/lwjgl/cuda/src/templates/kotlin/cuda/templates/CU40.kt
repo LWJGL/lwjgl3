@@ -74,7 +74,7 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "CtxPopCurrent",
         "",
 
-        Check(1)..CUcontext.p.OUT("pctx", "")
+        Check(1)..CUcontext.p("pctx", "")
     ).versioned()
 
     CUresult(
@@ -88,14 +88,14 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "CtxGetCurrent",
         "",
 
-        Check(1)..CUcontext.p.OUT("pctx", "")
+        Check(1)..CUcontext.p("pctx", "")
     )
 
     CUresult(
         "MemHostRegister",
         "",
 
-        void.p.OUT("p", ""),
+        void.p("p", ""),
         AutoSize("p")..size_t("bytesize", ""),
         unsigned_int("Flags", "")
     ).versioned()
@@ -168,7 +168,7 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "PointerGetAttribute",
         "",
 
-        Unsafe..void.p.OUT("data", ""),
+        Unsafe..void.p("data", ""),
         CUpointer_attribute("attribute", ""),
         CUdeviceptr("ptr", "")
     )
@@ -208,7 +208,7 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "DeviceCanAccessPeer",
         "",
 
-        Check(1)..int.p.OUT("canAccessPeer", ""),
+        Check(1)..int.p("canAccessPeer", ""),
         CUdevice("dev", ""),
         CUdevice("peerDev", "")
     )

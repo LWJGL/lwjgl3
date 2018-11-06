@@ -127,7 +127,7 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "MemRangeGetAttribute",
         "",
 
-        void.p.OUT("data", ""),
+        void.p("data", ""),
         AutoSize("data")..size_t("dataSize", ""),
         CUmem_range_attribute("attribute", ""),
         CUdeviceptr("devPtr", ""),
@@ -138,8 +138,8 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "MemRangeGetAttributes",
         "",
 
-        void.p.p.OUT("data", ""),
-        size_t.p.OUT("dataSizes", ""),
+        void.p.p("data", ""),
+        size_t.p("dataSizes", ""),
         CUmem_range_attribute.p("attributes", ""),
         AutoSize("attributes", "data", "dataSizes")..size_t("numAttributes", ""),
         CUdeviceptr("devPtr", ""),
@@ -200,7 +200,7 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "DeviceGetP2PAttribute",
         "",
 
-        Check(1)..int.p.OUT("value", ""),
+        Check(1)..int.p("value", ""),
         CUdevice_P2PAttribute("attrib", ""),
         CUdevice("srcDevice", ""),
         CUdevice("dstDevice", "")

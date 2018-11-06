@@ -362,7 +362,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             "num_devices",
             "the size of memory pointed to by {@code out_devices} specified as the number of {@code cl_device_id} entries."
         ),
-        nullable..cl_device_id.p.OUT(
+        nullable..cl_device_id.p(
             "out_devices",
             """
             the buffer where the OpenCL sub-devices will be returned. If {@code out_devices} is #NULL, this argument is ignored. If {@code out_devices} is not
@@ -370,7 +370,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             partitioning scheme specified in {@code properties}.
             """
         ),
-        Check(1)..nullable..cl_uint.p.OUT(
+        Check(1)..nullable..cl_uint.p(
             "num_devices_ret",
             """
             the number of sub-devices that device may be partitioned into according to the partitioning scheme specified in {@code properties}. If {@code num_devices_ret}

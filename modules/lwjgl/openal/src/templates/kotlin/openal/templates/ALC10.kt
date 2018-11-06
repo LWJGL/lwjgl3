@@ -232,7 +232,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         nullable..ALCdevice.p("deviceHandle", "the device to query"),
         ALCenum("token", "the information to query", IntegerQueries),
         AutoSize("dest")..ALCsizei("size", "the size of the {@code dest} buffer"),
-        ReturnParam..ALCint.p.OUT("dest", "the destination buffer")
+        ReturnParam..ALCint.p("dest", "the destination buffer")
     )
 
 }

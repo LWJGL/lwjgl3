@@ -417,7 +417,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         VkDevice("device", "the logical device that creates the buffer object."),
         VkAccelerationStructureCreateInfoNV.const.p("pCreateInfo", "a pointer to an instance of the ##VkAccelerationStructureCreateInfoNV structure containing parameters affecting creation of the acceleration structure."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkAccelerationStructureNV.p.OUT("pAccelerationStructure", "points to a {@code VkAccelerationStructureNV} handle in which the resulting acceleration structure object is returned.")
+        Check(1)..VkAccelerationStructureNV.p("pAccelerationStructure", "points to a {@code VkAccelerationStructureNV} handle in which the resulting acceleration structure object is returned.")
     )
 
     void(
@@ -487,7 +487,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
 
         VkDevice("device", "the logical device on which the acceleration structure was created."),
         VkAccelerationStructureMemoryRequirementsInfoNV.const.p("pInfo", "specifies the acceleration structure to get memory requirements for."),
-        VkMemoryRequirements2KHR.p.OUT("pMemoryRequirements", "returns the requested acceleration structure memory requirements.")
+        VkMemoryRequirements2KHR.p("pMemoryRequirements", "returns the requested acceleration structure memory requirements.")
     )
 
     VkResult(
@@ -827,7 +827,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         AutoSize("pCreateInfos", "pPipelines")..uint32_t("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays."),
         VkRayTracingPipelineCreateInfoNV.const.p("pCreateInfos", "an array of ##VkRayTracingPipelineCreateInfoNV structures."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        VkPipeline.p.OUT("pPipelines", "a pointer to an array in which the resulting compute pipeline objects are returned.")
+        VkPipeline.p("pPipelines", "a pointer to an array in which the resulting compute pipeline objects are returned.")
     )
 
     VkResult(
@@ -882,7 +882,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         uint32_t("firstGroup", "the index of the first group to retrieve a handle for from the ##VkPipelineShaderStageCreateInfo{@code ::pGroups} array."),
         uint32_t("groupCount", "the number of shader handles to retrieve."),
         AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by pData."),
-        void.p.OUT("pData", "a pointer to a user-allocated buffer where the results will be written.")
+        void.p("pData", "a pointer to a user-allocated buffer where the results will be written.")
     )
 
     VkResult(
@@ -932,7 +932,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         VkDevice("device", "the logical device that owns the acceleration structures."),
         VkAccelerationStructureNV("accelerationStructure", "the acceleration structure."),
         AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
-        void.p.OUT("pData", "a pointer to a user-allocated buffer where the results will be written")
+        void.p("pData", "a pointer to a user-allocated buffer where the results will be written")
     )
 
     void(

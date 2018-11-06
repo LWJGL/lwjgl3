@@ -111,7 +111,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
         "",
 
         AutoSize("pipelines")..GLsizei("n", ""),
-        ReturnParam..GLuint.p.OUT("pipelines", "")
+        ReturnParam..GLuint.p("pipelines", "")
     )
 
     void(
@@ -120,12 +120,12 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
 
         GLuint("pipeline", ""),
         AutoSize("infoLog")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p.OUT("length", ""),
+        Check(1)..nullable..GLsizei.p("length", ""),
         Return(
             "length",
             "glGetProgramPipelineiEXT(pipeline, GLES20.GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8.p.OUT("infoLog", "")
+        )..GLcharUTF8.p("infoLog", "")
     )
 
     void(
@@ -134,7 +134,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
 
         GLuint("pipeline", ""),
         GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p.OUT("params", "")
+        ReturnParam..Check(1)..GLint.p("params", "")
     )
 
     GLboolean(

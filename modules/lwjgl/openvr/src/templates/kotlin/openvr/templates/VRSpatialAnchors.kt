@@ -25,7 +25,7 @@ val VRSpatialAnchors = "VRSpatialAnchors".nativeClass(
         """,
 
         charASCII.const.p("pchDescriptor", ""),
-        Check(1)..SpatialAnchorHandle_t.p.OUT("pHandleOut", "")
+        Check(1)..SpatialAnchorHandle_t.p("pHandleOut", "")
     )
 
     EVRSpatialAnchorError(
@@ -48,7 +48,7 @@ val VRSpatialAnchors = "VRSpatialAnchors".nativeClass(
         TrackedDeviceIndex_t("unDeviceIndex", ""),
         ETrackingUniverseOrigin("eOrigin", ""),
         SpatialAnchorPose_t.p("pPose", ""),
-        Check(1)..SpatialAnchorHandle_t.p.OUT("pHandleOut", "")
+        Check(1)..SpatialAnchorHandle_t.p("pHandleOut", "")
     )
 
     EVRSpatialAnchorError(
@@ -62,7 +62,7 @@ val VRSpatialAnchors = "VRSpatialAnchors".nativeClass(
 
         SpatialAnchorHandle_t("unHandle", ""),
         ETrackingUniverseOrigin("eOrigin", ""),
-        SpatialAnchorPose_t.p.OUT("pPoseOut", "")
+        SpatialAnchorPose_t.p("pPoseOut", "")
     )
 
     EVRSpatialAnchorError(
@@ -76,8 +76,8 @@ val VRSpatialAnchors = "VRSpatialAnchors".nativeClass(
         """,
 
         SpatialAnchorHandle_t("unHandle", ""),
-        charASCII.p.OUT("pchDescriptorOut", ""),
-        AutoSize("pchDescriptorOut")..Check(1)..uint32_t.p.INOUT("punDescriptorBufferLenInOut", ""),
+        charASCII.p("pchDescriptorOut", ""),
+        AutoSize("pchDescriptorOut")..Check(1)..uint32_t.p("punDescriptorBufferLenInOut", ""),
 
         returnDoc = "true if the descriptor fits into the buffer, else false. Buffer size should be at least {@code k_unMaxSpatialAnchorDescriptorSize}"
     )

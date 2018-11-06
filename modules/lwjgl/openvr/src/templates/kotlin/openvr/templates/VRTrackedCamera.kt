@@ -29,7 +29,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         "For convenience, same as tracked property request #ETrackedDeviceProperty_Prop_HasCamera_Bool.",
 
         TrackedDeviceIndex_t("nDeviceIndex", ""),
-        Check(1)..bool.p.OUT("pHasCamera", "")
+        Check(1)..bool.p("pHasCamera", "")
     )
 
     EVRTrackedCameraError(
@@ -38,9 +38,9 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
 
         TrackedDeviceIndex_t("nDeviceIndex", ""),
         EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
-        Check(1)..uint32_t.p.OUT("pnWidth", ""),
-        Check(1)..uint32_t.p.OUT("pnHeight", ""),
-        Check(1)..uint32_t.p.OUT("pnFrameBufferSize", "")
+        Check(1)..uint32_t.p("pnWidth", ""),
+        Check(1)..uint32_t.p("pnHeight", ""),
+        Check(1)..uint32_t.p("pnFrameBufferSize", "")
     )
 
     EVRTrackedCameraError(
@@ -49,8 +49,8 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
 
         TrackedDeviceIndex_t("nDeviceIndex", ""),
         EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
-        Check(1)..HmdVector2_t.p.OUT("pFocalLength", ""),
-        Check(1)..HmdVector2_t.p.OUT("pCenter", "")
+        Check(1)..HmdVector2_t.p("pFocalLength", ""),
+        Check(1)..HmdVector2_t.p("pCenter", "")
     )
 
     EVRTrackedCameraError(
@@ -61,7 +61,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
         float("flZNear", ""),
         float("flZFar", ""),
-        HmdMatrix44_t.p.OUT("pProjection", "")
+        HmdMatrix44_t.p("pProjection", "")
     )
 
     EVRTrackedCameraError(
@@ -74,7 +74,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         """,
 
         TrackedDeviceIndex_t("nDeviceIndex", ""),
-        Check(1)..TrackedCameraHandle_t.p.OUT("pHandle", "")
+        Check(1)..TrackedCameraHandle_t.p("pHandle", "")
     )
 
     EVRTrackedCameraError(
@@ -95,9 +95,9 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
 
         TrackedCameraHandle_t("hTrackedCamera", ""),
         EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
-        void.p.OUT("pFrameBuffer", ""),
+        void.p("pFrameBuffer", ""),
         AutoSize("pFrameBuffer")..uint32_t("nFrameBufferSize", ""),
-        CameraVideoStreamFrameHeader_t.p.OUT("pFrameHeader", ""),
+        CameraVideoStreamFrameHeader_t.p("pFrameHeader", ""),
         Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t("nFrameHeaderSize", "")
     )
 
@@ -107,9 +107,9 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
 
         TrackedDeviceIndex_t("nDeviceIndex", ""),
         EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
-        VRTextureBounds_t.p.OUT("pTextureBounds", ""),
-        Check(1)..uint32_t.p.OUT("pnWidth", ""),
-        Check(1)..uint32_t.p.OUT("pnHeight", "")
+        VRTextureBounds_t.p("pTextureBounds", ""),
+        Check(1)..uint32_t.p("pnWidth", ""),
+        Check(1)..uint32_t.p("pnHeight", "")
     )
 
     EVRTrackedCameraError(
@@ -129,8 +129,8 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         TrackedCameraHandle_t("hTrackedCamera", ""),
         EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
         opaque_p("pD3D11DeviceOrResource", ""),
-        Check(1)..void.p.p.OUT("ppD3D11ShaderResourceView", ""),
-        CameraVideoStreamFrameHeader_t.p.OUT("pFrameHeader", ""),
+        Check(1)..void.p.p("ppD3D11ShaderResourceView", ""),
+        CameraVideoStreamFrameHeader_t.p("pFrameHeader", ""),
         Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t("nFrameHeaderSize", "")
     )
 
@@ -140,8 +140,8 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
 
         TrackedCameraHandle_t("hTrackedCamera", ""),
         EVRTrackedCameraFrameType("eFrameType", ""),
-        Check(1)..glUInt_t.p.OUT("pglTextureId", ""),
-        CameraVideoStreamFrameHeader_t.p.OUT("pFrameHeader", ""),
+        Check(1)..glUInt_t.p("pglTextureId", ""),
+        CameraVideoStreamFrameHeader_t.p("pFrameHeader", ""),
         Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t("nFrameHeaderSize", "")
     )
 

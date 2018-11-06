@@ -120,7 +120,7 @@ ENABLE_WARNINGS()""")
         Hint: compression runs faster if {@code dstCapacity} &ge; #compressBound(){@code (srcSize)}
         """,
 
-        void.p.OUT("dst", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t("dstCapacity", ""),
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", ""),
@@ -133,7 +133,7 @@ ENABLE_WARNINGS()""")
         "decompress",
         "",
 
-        void.p.OUT("dst", ""),
+        void.p("dst", ""),
         AutoSize("dst")..size_t(
             "dstCapacity",
             """
@@ -461,8 +461,8 @@ ENABLE_WARNINGS()""")
         """,
 
         ZSTD_CStream.p("zcs", ""),
-        ZSTD_outBuffer.p("output", ""),
-        ZSTD_inBuffer.p("input", ""),
+        Input..ZSTD_outBuffer.p("output", ""),
+        Input..ZSTD_inBuffer.p("input", ""),
 
         returnDoc =
         """
@@ -486,7 +486,7 @@ ENABLE_WARNINGS()""")
         """.trimIndent(),
 
         ZSTD_CStream.p("zcs", ""),
-        ZSTD_outBuffer.p("output", ""),
+        Input..ZSTD_outBuffer.p("output", ""),
 
         returnDoc =
         """
@@ -508,7 +508,7 @@ ENABLE_WARNINGS()""")
         """.trimIndent(),
 
         ZSTD_CStream.p("zcs", ""),
-        ZSTD_outBuffer.p("output", ""),
+        Input..ZSTD_outBuffer.p("output", ""),
 
         returnDoc =
         """
@@ -568,8 +568,8 @@ ENABLE_WARNINGS()""")
         """,
 
         ZSTD_DStream.p("zds", ""),
-        ZSTD_outBuffer.p("output", ""),
-        ZSTD_inBuffer.p("input", ""),
+        Input..ZSTD_outBuffer.p("output", ""),
+        Input..ZSTD_inBuffer.p("input", ""),
 
         returnDoc =
         """

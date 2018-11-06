@@ -345,7 +345,7 @@ public class VRCompositor {
      * a lat-long stereo pair.</p>
      */
     @NativeType("EVRCompositorError")
-    public static int VRCompositor_SetSkyboxOverride(@NativeType("Texture_t *") Texture.Buffer pTextures) {
+    public static int VRCompositor_SetSkyboxOverride(@NativeType("Texture_t const *") Texture.Buffer pTextures) {
         return nVRCompositor_SetSkyboxOverride(pTextures.address(), pTextures.remaining());
     }
 

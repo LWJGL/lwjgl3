@@ -64,7 +64,7 @@ val CU50 = "CU50".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "MipmappedArrayCreate",
         "",
 
-        Check(1)..CUmipmappedArray.p.OUT("pHandle", ""),
+        Check(1)..CUmipmappedArray.p("pHandle", ""),
         CUDA_ARRAY3D_DESCRIPTOR.const.p("pMipmappedArrayDesc", ""),
         unsigned_int("numMipmapLevels", "")
     )
@@ -73,7 +73,7 @@ val CU50 = "CU50".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "MipmappedArrayGetLevel",
         "",
 
-        Check(1)..CUarray.p.OUT("pLevelArray", ""),
+        Check(1)..CUarray.p("pLevelArray", ""),
         CUmipmappedArray("hMipmappedArray", ""),
         unsigned_int("level", "")
     )
@@ -89,7 +89,7 @@ val CU50 = "CU50".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "TexObjectCreate",
         "",
 
-        Check(1)..CUtexObject.p.OUT("pTexObject", ""),
+        Check(1)..CUtexObject.p("pTexObject", ""),
         CUDA_RESOURCE_DESC.const.p("pResDesc", ""),
         CUDA_TEXTURE_DESC.const.p("pTexDesc", ""),
         CUDA_RESOURCE_VIEW_DESC.const.p("pResViewDesc", "")
@@ -106,7 +106,7 @@ val CU50 = "CU50".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "TexObjectGetResourceDesc",
         "",
 
-        CUDA_RESOURCE_DESC.p.OUT("pResDesc", ""),
+        CUDA_RESOURCE_DESC.p("pResDesc", ""),
         CUtexObject("texObject", "")
     )
 
@@ -114,7 +114,7 @@ val CU50 = "CU50".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "TexObjectGetTextureDesc",
         "",
 
-        CUDA_TEXTURE_DESC.p.OUT("pTexDesc", ""),
+        CUDA_TEXTURE_DESC.p("pTexDesc", ""),
         CUtexObject("texObject", "")
     )
 
@@ -122,7 +122,7 @@ val CU50 = "CU50".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "TexObjectGetResourceViewDesc",
         "",
 
-        CUDA_RESOURCE_VIEW_DESC.p.OUT("pResViewDesc", ""),
+        CUDA_RESOURCE_VIEW_DESC.p("pResViewDesc", ""),
         CUtexObject("texObject", "")
     )
 
@@ -130,7 +130,7 @@ val CU50 = "CU50".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "SurfObjectCreate",
         "",
 
-        Check(1)..CUsurfObject.p.OUT("pSurfObject", ""),
+        Check(1)..CUsurfObject.p("pSurfObject", ""),
         CUDA_RESOURCE_DESC.const.p("pResDesc", "")
     )
 
@@ -145,7 +145,7 @@ val CU50 = "CU50".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "SurfObjectGetResourceDesc",
         "",
 
-        CUDA_RESOURCE_DESC.p.OUT("pResDesc", ""),
+        CUDA_RESOURCE_DESC.p("pResDesc", ""),
         CUsurfObject("surfObject", "")
     )
 
@@ -153,7 +153,7 @@ val CU50 = "CU50".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "GraphicsResourceGetMappedMipmappedArray",
         "",
 
-        Check(1)..CUmipmappedArray.p.OUT("pMipmappedArray", ""),
+        Check(1)..CUmipmappedArray.p("pMipmappedArray", ""),
         CUgraphicsResource("resource", "")
     )
 }

@@ -16,7 +16,7 @@ val CU92 = "CU92".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "DeviceGetUuid",
         "",
 
-        CUuuid.p.OUT("uuid", ""),
+        CUuuid.p("uuid", ""),
         CUdevice("dev", "")
     )
 
@@ -25,6 +25,6 @@ val CU92 = "CU92".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         CUstream("hStream", ""),
-        Check(1)..CUcontext.p.OUT("pctx", "")
+        Check(1)..CUcontext.p("pctx", "")
     ).ptsz()
 }

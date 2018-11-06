@@ -56,7 +56,7 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        void.p.OUT("dictBuffer", ""),
+        void.p("dictBuffer", ""),
         AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
         Check(
             "getSamplesBufferSize(samplesSizes)", debug = true
@@ -114,7 +114,7 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        void.p.OUT("dictBuffer", ""),
+        void.p("dictBuffer", ""),
         AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
         Check(
             "getSamplesBufferSize(samplesSizes)", debug = true
@@ -145,7 +145,7 @@ ENABLE_WARNINGS()""")
         each byte of memory for each thread.
         """,
 
-        void.p.OUT("dictBuffer", ""),
+        void.p("dictBuffer", ""),
         AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
         Check(
             "getSamplesBufferSize(samplesSizes)", debug = true
@@ -178,7 +178,7 @@ ENABLE_WARNINGS()""")
         size of all samples be about {@code ~x100} times the target size of dictionary.
         """,
 
-        void.p.OUT("dictBuffer", ""),
+        void.p("dictBuffer", ""),
         AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
         Check(
             "getSamplesBufferSize(samplesSizes)", debug = true
@@ -211,14 +211,14 @@ ENABLE_WARNINGS()""")
         bytes of memory for each thread.
         """,
 
-        void.p.OUT("dictBuffer", ""),
+        void.p("dictBuffer", ""),
         AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
         Check(
             "getSamplesBufferSize(samplesSizes)", debug = true
         )..void.const.p("samplesBuffer", ""),
         size_t.const.p("samplesSizes", ""),
         AutoSize("samplesSizes")..unsigned_int("nbSamples", ""),
-        ZDICT_fastCover_params_t.p.OUT("parameters", ""),
+        ZDICT_fastCover_params_t.p("parameters", ""),
 
         returnDoc =
         """
@@ -244,7 +244,7 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        void.p.OUT("dictBuffer", ""),
+        void.p("dictBuffer", ""),
         AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
         void.const.p("dictContent", ""),
         AutoSize("dictContent")..size_t("dictContentSize", ""),

@@ -43,15 +43,15 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "Version",
         "",
 
-        Check(1)..int.p.OUT("major", ""),
-        Check(1)..int.p.OUT("minor", "")
+        Check(1)..int.p("major", ""),
+        Check(1)..int.p("minor", "")
     )
 
     nvrtcResult(
         "CreateProgram",
         "",
 
-        Check(1)..nvrtcProgram.p.OUT("prog", ""),
+        Check(1)..nvrtcProgram.p("prog", ""),
         charASCII.const.p("src", ""),
         nullable..charASCII.const.p("name", ""),
         AutoSize("headers", "includeNames")..int("numHeaders", ""),
@@ -80,7 +80,7 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "",
 
         nvrtcProgram("prog", ""),
-        Check(1)..size_t.p.OUT("ptxSizeRet", "")
+        Check(1)..size_t.p("ptxSizeRet", "")
     )
 
     nvrtcResult(
@@ -88,7 +88,7 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "",
 
         nvrtcProgram("prog", ""),
-        charASCII.p.OUT("ptx", "")
+        Unsafe..char.p("ptx", "")
     )
 
     nvrtcResult(
@@ -96,7 +96,7 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "",
 
         nvrtcProgram("prog", ""),
-        Check(1)..size_t.p.OUT("logSizeRet", "")
+        Check(1)..size_t.p("logSizeRet", "")
     )
 
     nvrtcResult(
@@ -104,7 +104,7 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "",
 
         nvrtcProgram("prog", ""),
-        charASCII.p.OUT("log", "")
+        Unsafe..char.p("log", "")
     )
 
     nvrtcResult(

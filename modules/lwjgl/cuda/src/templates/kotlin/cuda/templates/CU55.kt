@@ -64,7 +64,7 @@ val CU55 = "CU55".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         AutoSize("options", "optionValues")..unsigned_int("numOptions", ""),
         nullable..CUjit_option.p("options", ""),
         nullable..void.p.p("optionValues", ""),
-        Check(1)..CUlinkState.p.OUT("stateOut", "")
+        Check(1)..CUlinkState.p("stateOut", "")
     ).versioned()
 
     CUresult(
@@ -98,8 +98,8 @@ val CU55 = "CU55".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         CUlinkState("state", ""),
-        Check(1)..void.p.p.OUT("cubinOut", ""),
-        Check(1)..size_t.p.OUT("sizeOut", "")
+        Check(1)..void.p.p("cubinOut", ""),
+        Check(1)..size_t.p("sizeOut", "")
     )
 
     CUresult(

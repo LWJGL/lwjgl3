@@ -14,11 +14,11 @@ class BufferObject(val binding: String) : ParameterModifier {
 
         when (this) {
             PIXEL_PACK_BUFFER, QUERY_BUFFER_AMD -> {
-                if (param.paramType !== ParameterType.OUT)
+                if (param.isInput)
                     throw IllegalArgumentException("The specified BufferObject modifier can only be applied to output parameters.")
             }
             else                                -> {
-                if (param.paramType !== ParameterType.IN)
+                if (!param.isInput)
                     throw IllegalArgumentException("The specified BufferObject modifier can only be applied to input parameters.")
             }
         }

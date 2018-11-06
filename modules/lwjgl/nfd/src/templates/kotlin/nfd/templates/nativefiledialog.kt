@@ -72,7 +72,7 @@ val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_
 
         nullable..nfdchar_t.const.p("filterList", "an optional filter list"),
         nullable..nfdchar_t.const.p("defaultPath", "an optional default path"),
-        Check(1)..nfdchar_t.p.p.OUT("outPath", "returns the selected file path")
+        Check(1)..nfdchar_t.p.p("outPath", "returns the selected file path")
     )
 
     nfdresult_t(
@@ -86,7 +86,7 @@ val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_
 
         OpenDialog["filterList"],
         OpenDialog["defaultPath"],
-        nfdpathset_t.p.OUT("outPaths", "a path set that will be filled with the selected files")
+        nfdpathset_t.p("outPaths", "a path set that will be filled with the selected files")
     )
 
     nfdresult_t(
