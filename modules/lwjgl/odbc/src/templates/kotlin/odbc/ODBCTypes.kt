@@ -67,131 +67,131 @@ val RETCODE = IntegerType("RETCODE", PrimitiveMapping.SHORT)
 // sqltypes.h structs
 
 val SQL_DATE_STRUCT = struct(Module.ODBC, "SQL_DATE_STRUCT") {
-    SQLSMALLINT.member("year", "")
-    SQLUSMALLINT.member("month", "")
-    SQLUSMALLINT.member("day", "")
+    SQLSMALLINT("year", "")
+    SQLUSMALLINT("month", "")
+    SQLUSMALLINT("day", "")
 }
 
 val SQL_TIME_STRUCT = struct(Module.ODBC, "SQL_TIME_STRUCT") {
-    SQLUSMALLINT.member("hour", "")
-    SQLUSMALLINT.member("minute", "")
-    SQLUSMALLINT.member("second", "")
+    SQLUSMALLINT("hour", "")
+    SQLUSMALLINT("minute", "")
+    SQLUSMALLINT("second", "")
 }
 
 val SQL_TIMESTAMP_STRUCT = struct(Module.ODBC, "SQL_TIMESTAMP_STRUCT") {
-    SQLSMALLINT.member("year", "")
-    SQLUSMALLINT.member("month", "")
-    SQLUSMALLINT.member("day", "")
-    SQLUSMALLINT.member("hour", "")
-    SQLUSMALLINT.member("minute", "")
-    SQLUSMALLINT.member("second", "")
-    SQLUINTEGER.member("fraction", "")
+    SQLSMALLINT("year", "")
+    SQLUSMALLINT("month", "")
+    SQLUSMALLINT("day", "")
+    SQLUSMALLINT("hour", "")
+    SQLUSMALLINT("minute", "")
+    SQLUSMALLINT("second", "")
+    SQLUINTEGER("fraction", "")
 }
 
 val SQL_YEAR_MONTH_STRUCT = struct(Module.ODBC, "SQL_YEAR_MONTH_STRUCT") {
-    SQLUINTEGER.member("year", "")
-    SQLUINTEGER.member("month", "")
+    SQLUINTEGER("year", "")
+    SQLUINTEGER("month", "")
 }
 
 val SQL_DAY_SECOND_STRUCT = struct(Module.ODBC, "SQL_DAY_SECOND_STRUCT") {
-    SQLUINTEGER.member("day", "")
-    SQLUINTEGER.member("hour", "")
-    SQLUINTEGER.member("minute", "")
-    SQLUINTEGER.member("second", "")
-    SQLUINTEGER.member("fraction", "")
+    SQLUINTEGER("day", "")
+    SQLUINTEGER("hour", "")
+    SQLUINTEGER("minute", "")
+    SQLUINTEGER("second", "")
+    SQLUINTEGER("fraction", "")
 }
 
 val SQLINTERVAL = typedef(int, "SQLINTERVAL")
 val SQL_INTERVAL_STRUCT = struct(Module.ODBC, "SQL_INTERVAL_STRUCT") {
-    SQLINTERVAL.member("interval_type", "")
-    SQLSMALLINT.member("interval_sign", "")
+    SQLINTERVAL("interval_type", "")
+    SQLSMALLINT("interval_sign", "")
     struct {
-        SQL_YEAR_MONTH_STRUCT.member("year_month", "")
-        SQL_DAY_SECOND_STRUCT.member("day_second", "")
-    }.member("intval", "")
+        SQL_YEAR_MONTH_STRUCT("year_month", "")
+        SQL_DAY_SECOND_STRUCT("day_second", "")
+    }("intval", "")
 }
 
 val SQL_NUMERIC_STRUCT = struct(Module.ODBC, "SQL_NUMERIC_STRUCT") {
     javaImport("static org.lwjgl.odbc.SQL.*")
 
-    SQLCHAR.member("precision", "")
-    SQLSCHAR.member("scale", "")
-    SQLCHAR.member("sign", "")
-    SQLCHAR.member("val", "")["SQL_MAX_NUMERIC_LEN"]
+    SQLCHAR("precision", "")
+    SQLSCHAR("scale", "")
+    SQLCHAR("sign", "")
+    SQLCHAR("val", "")["SQL_MAX_NUMERIC_LEN"]
 }
 
 // sqlncli.h structs
 
 val DBMONEY = struct(Module.ODBC, "DBMONEY") {
-    LONG.member("mnyhigh", "")
-    ULONG.member("mnylow", "")
+    LONG("mnyhigh", "")
+    ULONG("mnylow", "")
 }
 
 val DBDATETIME = struct(Module.ODBC, "DBDATETIME") {
-    LONG.member("dtdays", "")
-    ULONG.member("dttime", "")
+    LONG("dtdays", "")
+    ULONG("dttime", "")
 }
 
 val DBDATETIM4 = struct(Module.ODBC, "DBDATETIM4") {
-    USHORT.member("numdays", "")
-    USHORT.member("nummins", "")
+    USHORT("numdays", "")
+    USHORT("nummins", "")
 }
 
 val SQL_SS_TIME2_STRUCT = struct(Module.ODBC, "SQL_SS_TIME2_STRUCT") {
-    SQLUSMALLINT.member("hour", "")
-    SQLUSMALLINT.member("minute", "")
-    SQLUSMALLINT.member("second", "")
-    SQLUINTEGER.member("fraction", "")
+    SQLUSMALLINT("hour", "")
+    SQLUSMALLINT("minute", "")
+    SQLUSMALLINT("second", "")
+    SQLUINTEGER("fraction", "")
 }
 
 val SQL_SS_TIMESTAMPOFFSET_STRUCT = struct(Module.ODBC, "SQL_SS_TIMESTAMPOFFSET_STRUCT") {
-    SQLSMALLINT.member("year", "")
-    SQLUSMALLINT.member("month", "")
-    SQLUSMALLINT.member("day", "")
-    SQLUSMALLINT.member("hour", "")
-    SQLUSMALLINT.member("minute", "")
-    SQLUSMALLINT.member("second", "")
-    SQLUINTEGER.member("fraction", "")
-    SQLSMALLINT.member("timezone_hour", "")
-    SQLSMALLINT.member("timezone_minute", "")
+    SQLSMALLINT("year", "")
+    SQLUSMALLINT("month", "")
+    SQLUSMALLINT("day", "")
+    SQLUSMALLINT("hour", "")
+    SQLUSMALLINT("minute", "")
+    SQLUSMALLINT("second", "")
+    SQLUINTEGER("fraction", "")
+    SQLSMALLINT("timezone_hour", "")
+    SQLSMALLINT("timezone_minute", "")
 }
 
 val SQLPERF = struct(Module.ODBC, "SQLPERF") {
     // Application Profile Statistics
-    DWORD.member("TimerResolution", "")
-    DWORD.member("SQLidu", "")
-    DWORD.member("SQLiduRows", "")
-    DWORD.member("SQLSelects", "")
-    DWORD.member("SQLSelectRows", "")
-    DWORD.member("Transactions", "")
-    DWORD.member("SQLPrepares", "")
-    DWORD.member("ExecDirects", "")
-    DWORD.member("SQLExecutes", "")
-    DWORD.member("CursorOpens", "")
-    DWORD.member("CursorSize", "")
-    DWORD.member("CursorUsed", "")
-    LDOUBLE.member("PercentCursorUsed", "")
-    LDOUBLE.member("AvgFetchTime", "")
-    LDOUBLE.member("AvgCursorSize", "")
-    LDOUBLE.member("AvgCursorUsed", "")
-    DWORD.member("SQLFetchTime", "")
-    DWORD.member("SQLFetchCount", "")
-    DWORD.member("CurrentStmtCount", "")
-    DWORD.member("MaxOpenStmt", "")
-    DWORD.member("SumOpenStmt", "")
+    DWORD("TimerResolution", "")
+    DWORD("SQLidu", "")
+    DWORD("SQLiduRows", "")
+    DWORD("SQLSelects", "")
+    DWORD("SQLSelectRows", "")
+    DWORD("Transactions", "")
+    DWORD("SQLPrepares", "")
+    DWORD("ExecDirects", "")
+    DWORD("SQLExecutes", "")
+    DWORD("CursorOpens", "")
+    DWORD("CursorSize", "")
+    DWORD("CursorUsed", "")
+    LDOUBLE("PercentCursorUsed", "")
+    LDOUBLE("AvgFetchTime", "")
+    LDOUBLE("AvgCursorSize", "")
+    LDOUBLE("AvgCursorUsed", "")
+    DWORD("SQLFetchTime", "")
+    DWORD("SQLFetchCount", "")
+    DWORD("CurrentStmtCount", "")
+    DWORD("MaxOpenStmt", "")
+    DWORD("SumOpenStmt", "")
     // Connection Statistics
-    DWORD.member("CurrentConnectionCount", "")
-    DWORD.member("MaxConnectionsOpened", "")
-    DWORD.member("SumConnectionsOpened", "")
-    DWORD.member("SumConnectiontime", "")
-    LDOUBLE.member("AvgTimeOpened", "")
+    DWORD("CurrentConnectionCount", "")
+    DWORD("MaxConnectionsOpened", "")
+    DWORD("SumConnectionsOpened", "")
+    DWORD("SumConnectiontime", "")
+    LDOUBLE("AvgTimeOpened", "")
     // Network Statistics
-    DWORD.member("ServerRndTrips", "")
-    DWORD.member("BuffersSent", "")
-    DWORD.member("BuffersRec", "")
-    DWORD.member("BytesSent", "")
-    DWORD.member("BytesRec", "")
+    DWORD("ServerRndTrips", "")
+    DWORD("BuffersSent", "")
+    DWORD("BuffersRec", "")
+    DWORD("BytesSent", "")
+    DWORD("BytesRec", "")
     // Time Statistics
-    DWORD.member("msExecutionTime", "")
-    DWORD.member("msNetWorkServerTime", "")
+    DWORD("msExecutionTime", "")
+    DWORD("msNetWorkServerTime", "")
 }

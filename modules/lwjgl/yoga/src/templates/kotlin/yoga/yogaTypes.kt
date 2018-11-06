@@ -65,13 +65,13 @@ val YGUnit = "YGUnit".enumType
 val YGWrap = "YGWrap".enumType
 
 val YGSize = struct(Module.YOGA, "YGSize") {
-    float.member("width", "")
-    float.member("height", "")
+    float("width", "")
+    float("height", "")
 }
 
 val YGValue = struct(Module.YOGA, "YGValue") {
-    float.member("value", "")
-    YGUnit.member("unit", "")
+    float("value", "")
+    YGUnit("unit", "")
 }
 
 // TODO: Returns struct by value
@@ -163,93 +163,93 @@ val YGCloneNodeFunc = Module.YOGA.callback {
 // Internal API, exposed for efficiency.
 
 val YGCachedMeasurement = struct(Module.YOGA, "YGCachedMeasurement", mutable = false) {
-    float.member("availableWidth", "")
-    float.member("availableHeight", "")
-    YGMeasureMode.member("widthMeasureMode", "")
-    YGMeasureMode.member("heightMeasureMode", "")
+    float("availableWidth", "")
+    float("availableHeight", "")
+    YGMeasureMode("widthMeasureMode", "")
+    YGMeasureMode("heightMeasureMode", "")
 
-    float.member("computedWidth", "")
-    float.member("computedHeight", "")
+    float("computedWidth", "")
+    float("computedHeight", "")
 }
 
 val YGFloatOptional = struct(Module.YOGA, "YGFloatOptional", mutable = false) {
-    float.member("value", "")
-    bool.member("isUndefined", "")
+    float("value", "")
+    bool("isUndefined", "")
 }
 
 const val YG_MAX_CACHED_RESULT_COUNT = 16
 val YGLayout = struct(Module.YOGA, "YGLayout", mutable = false) {
-    float.member("positions", "")[4]
-    float.member("dimensions", "")[2]
-    float.member("margin", "")[6]
-    float.member("border", "")[6]
-    float.member("padding", "")[6]
-    YGDirection.member("direction", "")
+    float("positions", "")[4]
+    float("dimensions", "")[2]
+    float("margin", "")[6]
+    float("border", "")[6]
+    float("padding", "")[6]
+    YGDirection("direction", "")
 
-    uint32_t.member("computedFlexBasisGeneration", "")
-    YGFloatOptional.member("computedFlexBasis", "")
-    bool.member("hadOverflow", "")
+    uint32_t("computedFlexBasisGeneration", "")
+    YGFloatOptional("computedFlexBasis", "")
+    bool("hadOverflow", "")
 
-    uint32_t.member("generationCount", "")
-    YGDirection.member("lastOwnerDirection", "")
+    uint32_t("generationCount", "")
+    YGDirection("lastOwnerDirection", "")
 
-    uint32_t.member("nextCachedMeasurementsIndex", "")
-    YGCachedMeasurement.member("cachedMeasurements", "")[YG_MAX_CACHED_RESULT_COUNT]
-    float.member("measuredDimensions", "")[2]
+    uint32_t("nextCachedMeasurementsIndex", "")
+    YGCachedMeasurement("cachedMeasurements", "")[YG_MAX_CACHED_RESULT_COUNT]
+    float("measuredDimensions", "")[2]
 
-    YGCachedMeasurement.member("cachedLayout", "")
-    bool.member("didUseLegacyFlag", "")
-    bool.member("doesLegacyStretchFlagAffectsLayout", "")
+    YGCachedMeasurement("cachedLayout", "")
+    bool("didUseLegacyFlag", "")
+    bool("doesLegacyStretchFlagAffectsLayout", "")
 }
 
 const val YGEdgeCount = 9
 val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
-    YGDirection.member("direction", "")
-    YGFlexDirection.member("flexDirection", "")
-    YGJustify.member("justifyContent", "")
-    YGAlign.member("alignContent", "")
-    YGAlign.member("alignItems", "")
-    YGAlign.member("alignSelf", "")
-    YGPositionType.member("positionType", "")
-    YGWrap.member("flexWrap", "")
-    YGOverflow.member("overflow", "")
-    YGDisplay.member("display", "")
-    YGFloatOptional.member("flex", "")
-    YGFloatOptional.member("flexGrow", "")
-    YGFloatOptional.member("flexShrink", "")
-    YGValue.member("flexBasis", "")
-    YGValue.member("margin", "")[YGEdgeCount]
-    YGValue.member("positions", "")[YGEdgeCount]
-    YGValue.member("padding", "")[YGEdgeCount]
-    YGValue.member("border", "")[YGEdgeCount]
-    YGValue.member("dimensions", "")[2]
-    YGValue.member("minDimensions", "")[2]
-    YGValue.member("maxDimensions", "")[2]
+    YGDirection("direction", "")
+    YGFlexDirection("flexDirection", "")
+    YGJustify("justifyContent", "")
+    YGAlign("alignContent", "")
+    YGAlign("alignItems", "")
+    YGAlign("alignSelf", "")
+    YGPositionType("positionType", "")
+    YGWrap("flexWrap", "")
+    YGOverflow("overflow", "")
+    YGDisplay("display", "")
+    YGFloatOptional("flex", "")
+    YGFloatOptional("flexGrow", "")
+    YGFloatOptional("flexShrink", "")
+    YGValue("flexBasis", "")
+    YGValue("margin", "")[YGEdgeCount]
+    YGValue("positions", "")[YGEdgeCount]
+    YGValue("padding", "")[YGEdgeCount]
+    YGValue("border", "")[YGEdgeCount]
+    YGValue("dimensions", "")[2]
+    YGValue("minDimensions", "")[2]
+    YGValue("maxDimensions", "")[2]
 
     // Yoga specific properties, not compatible with flexbox specification
-    YGFloatOptional.member("aspectRatio", "")
+    YGFloatOptional("aspectRatio", "")
 }
 
 private val YGNodeListRef = "YGNodeListRef".handle
 private val _YGNode = struct(Module.YOGA, "YGNode")
 val YGNode = struct(Module.YOGA, "YGNode") {
-    nullable..opaque_p.member("context", "")
-    nullable..YGPrintFunc.member("print", "")
-    bool.member("hasNewLayout", "")
-    YGNodeType.member("nodeType", "")
-    nullable..YGMeasureFunc.member("measure", "")
-    nullable..YGBaselineFunc.member("baseline", "")
-    nullable..YGDirtiedFunc.member("dirtied", "")
+    nullable..opaque_p("context", "")
+    nullable..YGPrintFunc("print", "")
+    bool("hasNewLayout", "")
+    YGNodeType("nodeType", "")
+    nullable..YGMeasureFunc("measure", "")
+    nullable..YGBaselineFunc("baseline", "")
+    nullable..YGDirtiedFunc("dirtied", "")
 
-    YGStyle.member("style", "")
-    YGLayout.member("layout", "")
-    uint32_t.member("lineIndex", "")
+    YGStyle("style", "")
+    YGLayout("layout", "")
+    uint32_t("lineIndex", "")
 
-    nullable..YGNodeRef.member("owner", "")
-    nullable..YGNodeListRef.member("children", "")
-    nullable.._YGNode.p.member("nextChild", "")
+    nullable..YGNodeRef("owner", "")
+    nullable..YGNodeListRef("children", "")
+    nullable.._YGNode.p("nextChild", "")
 
-    nullable..YGConfigRef.member("config", "")
-    bool.member("isDirty", "")
-    YGValue.p.member("resolvedDimensions", "")[2]
+    nullable..YGConfigRef("config", "")
+    bool("isDirty", "")
+    YGValue.p("resolvedDimensions", "")[2]
 }

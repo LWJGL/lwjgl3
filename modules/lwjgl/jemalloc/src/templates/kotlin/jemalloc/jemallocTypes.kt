@@ -350,13 +350,13 @@ val extent_hooks_t = struct(Module.JEMALLOC, "ExtentHooks", nativeName = "extent
         returning failure.
         """
 
-    extent_alloc_t.member("alloc", "the extent allocation hook")
-    nullable..extent_dalloc_t.member("dalloc", "the extent deallocation hook")
-    nullable..extent_destroy_t.member("destroy", "the extent destruction hook")
-    nullable..extent_commit_t.member("commit", "the extent commit hook")
-    nullable..extent_decommit_t.member("decommit", "the extent decommit hook")
-    nullable..extent_purge_t.member("purge_lazy", "the extent lazy purge hook")
-    nullable..extent_purge_t.member("purge_forced", "the extent forced purge hook")
-    nullable..extent_split_t.member("split", "the extent split hook")
-    nullable..extent_merge_t.member("merge", "the extent merge hook")
+    extent_alloc_t("alloc", "the extent allocation hook")
+    nullable..extent_dalloc_t("dalloc", "the extent deallocation hook")
+    nullable..extent_destroy_t("destroy", "the extent destruction hook")
+    nullable..extent_commit_t("commit", "the extent commit hook")
+    nullable..extent_decommit_t("decommit", "the extent decommit hook")
+    nullable..extent_purge_t("purge_lazy", "the extent lazy purge hook")
+    nullable..extent_purge_t("purge_forced", "the extent forced purge hook")
+    nullable..extent_split_t("split", "the extent split hook")
+    nullable..extent_merge_t("merge", "the extent merge hook")
 }

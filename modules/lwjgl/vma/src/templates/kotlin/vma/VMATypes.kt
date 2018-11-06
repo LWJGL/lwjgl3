@@ -134,8 +134,8 @@ val VmaDeviceMemoryCallbacks = struct(Module.VMA, "VmaDeviceMemoryCallbacks") {
 
         Used in ##VmaAllocatorCreateInfo{@code ::pDeviceMemoryCallbacks}.
         """
-    nullable..PFN_vmaAllocateDeviceMemoryFunction.member("pfnAllocate", "")
-    nullable..PFN_vmaFreeDeviceMemoryFunction.member("pfnFree", "")
+    nullable..PFN_vmaAllocateDeviceMemoryFunction("pfnAllocate", "")
+    nullable..PFN_vmaFreeDeviceMemoryFunction("pfnFree", "")
 }
 
 val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = true) {
@@ -147,24 +147,24 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
         Used in ##VmaAllocatorCreateInfo{@code ::pVulkanFunctions}.
         """
 
-    "PFN_vkGetPhysicalDeviceProperties".handle.member("vkGetPhysicalDeviceProperties", "")
-    "PFN_vkGetPhysicalDeviceMemoryProperties".handle.member("vkGetPhysicalDeviceMemoryProperties", "")
-    "PFN_vkAllocateMemory".handle.member("vkAllocateMemory", "")
-    "PFN_vkFreeMemory".handle.member("vkFreeMemory", "")
-    "PFN_vkMapMemory".handle.member("vkMapMemory", "")
-    "PFN_vkUnmapMemory".handle.member("vkUnmapMemory", "")
-    "PFN_vkFlushMappedMemoryRanges".handle.member("vkFlushMappedMemoryRanges", "")
-    "PFN_vkInvalidateMappedMemoryRanges".handle.member("vkInvalidateMappedMemoryRanges", "")
-    "PFN_vkBindBufferMemory".handle.member("vkBindBufferMemory", "")
-    "PFN_vkBindImageMemory".handle.member("vkBindImageMemory", "")
-    "PFN_vkGetBufferMemoryRequirements".handle.member("vkGetBufferMemoryRequirements", "")
-    "PFN_vkGetImageMemoryRequirements".handle.member("vkGetImageMemoryRequirements", "")
-    "PFN_vkCreateBuffer".handle.member("vkCreateBuffer", "")
-    "PFN_vkDestroyBuffer".handle.member("vkDestroyBuffer", "")
-    "PFN_vkCreateImage".handle.member("vkCreateImage", "")
-    "PFN_vkDestroyImage".handle.member("vkDestroyImage", "")
-    nullable.."PFN_vkGetBufferMemoryRequirements2KHR".handle.member("vkGetBufferMemoryRequirements2KHR", "")
-    nullable.."PFN_vkGetImageMemoryRequirements2KHR".handle.member("vkGetImageMemoryRequirements2KHR", "")
+    "PFN_vkGetPhysicalDeviceProperties".handle("vkGetPhysicalDeviceProperties", "")
+    "PFN_vkGetPhysicalDeviceMemoryProperties".handle("vkGetPhysicalDeviceMemoryProperties", "")
+    "PFN_vkAllocateMemory".handle("vkAllocateMemory", "")
+    "PFN_vkFreeMemory".handle("vkFreeMemory", "")
+    "PFN_vkMapMemory".handle("vkMapMemory", "")
+    "PFN_vkUnmapMemory".handle("vkUnmapMemory", "")
+    "PFN_vkFlushMappedMemoryRanges".handle("vkFlushMappedMemoryRanges", "")
+    "PFN_vkInvalidateMappedMemoryRanges".handle("vkInvalidateMappedMemoryRanges", "")
+    "PFN_vkBindBufferMemory".handle("vkBindBufferMemory", "")
+    "PFN_vkBindImageMemory".handle("vkBindImageMemory", "")
+    "PFN_vkGetBufferMemoryRequirements".handle("vkGetBufferMemoryRequirements", "")
+    "PFN_vkGetImageMemoryRequirements".handle("vkGetImageMemoryRequirements", "")
+    "PFN_vkCreateBuffer".handle("vkCreateBuffer", "")
+    "PFN_vkDestroyBuffer".handle("vkDestroyBuffer", "")
+    "PFN_vkCreateImage".handle("vkCreateImage", "")
+    "PFN_vkDestroyImage".handle("vkDestroyImage", "")
+    nullable.."PFN_vkGetBufferMemoryRequirements2KHR".handle("vkGetBufferMemoryRequirements2KHR", "")
+    nullable.."PFN_vkGetImageMemoryRequirements2KHR".handle("vkGetImageMemoryRequirements2KHR", "")
 
     customMethod("""
     /**
@@ -200,8 +200,8 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
 }
 
 val VmaRecordSettings = struct(Module.VMA, "VmaRecordSettings") {
-    VmaRecordFlags.member("flags", "flags for recording").links("RECORD_\\w+")
-    charASCII.const.p.member(
+    VmaRecordFlags("flags", "flags for recording").links("RECORD_\\w+")
+    charASCII.const.p(
         "pFilePath",
         """
         path to the file that should be written by the recording.
@@ -216,25 +216,25 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
     javaImport("org.lwjgl.vulkan.*")
     documentation = "Description of an Allocator to be created."
 
-    VmaAllocatorCreateFlags.member("flags", "flags for created allocator. Use {@code VmaAllocatorCreateFlagBits} enum.").links("ALLOCATOR_CREATE_\\w+")
-    VkPhysicalDevice.member("physicalDevice", "Vulkan physical device. It must be valid throughout whole lifetime of created allocator.")
-    VkDevice.member("device", "Vulkan device. It must be valid throughout whole lifetime of created allocator.")
-    VkDeviceSize.member(
+    VmaAllocatorCreateFlags("flags", "flags for created allocator. Use {@code VmaAllocatorCreateFlagBits} enum.").links("ALLOCATOR_CREATE_\\w+")
+    VkPhysicalDevice("physicalDevice", "Vulkan physical device. It must be valid throughout whole lifetime of created allocator.")
+    VkDevice("device", "Vulkan device. It must be valid throughout whole lifetime of created allocator.")
+    VkDeviceSize(
         "preferredLargeHeapBlockSize",
         """
         preferred size of a single {@code VkDeviceMemory} block to be allocated from large heaps &gt; 1 GiB. Set to 0 to use default, which is currently 256
         MiB. Optional.
         """
     )
-    nullable..VkAllocationCallbacks.const.p.member(
+    nullable..VkAllocationCallbacks.const.p(
         "pAllocationCallbacks",
         "custom CPU memory allocation callbacks. Optional, can be null. When specified, will also be used for all CPU-side memory allocations. Optional."
     )
-    nullable..VmaDeviceMemoryCallbacks.const.p.member(
+    nullable..VmaDeviceMemoryCallbacks.const.p(
         "pDeviceMemoryCallbacks",
         "informative callbacks for {@code vkAllocateMemory}, {@code vkFreeMemory}. Optional."
     )
-    uint32_t.member(
+    uint32_t(
         "frameInUseCount",
         """
         Maximum number of additional frames that are in use at the same time as current frame.
@@ -248,7 +248,7 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
         If you want to allow any allocations other than used in the current frame to become lost, set this value to 0.
         """
     )
-    nullable..VkDeviceSize.const.p.member(
+    nullable..VkDeviceSize.const.p(
         "pHeapSizeLimit",
         """
         Either #NULL or a pointer to an array of limits on maximum number of bytes that can be allocated out of particular Vulkan memory heap.
@@ -273,8 +273,8 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
         device memory blocks to system RAM.
         """
     )
-    VmaVulkanFunctions.const.p.member("pVulkanFunctions", "pointers to Vulkan functions")
-    nullable..VmaRecordSettings.const.p.member(
+    VmaVulkanFunctions.const.p("pVulkanFunctions", "pointers to Vulkan functions")
+    nullable..VmaRecordSettings.const.p(
         "pRecordSettings",
         """
         parameters for recording of VMA calls. Can be null.
@@ -288,17 +288,17 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
 val VmaStatInfo = struct(Module.VMA, "VmaStatInfo", mutable = false) {
     documentation = "Calculated statistics of memory usage in entire allocator."
 
-    uint32_t.member("blockCount", "number of {@code VkDeviceMemory} Vulkan memory blocks allocated")
-    uint32_t.member("allocationCount", "number of {@code VmaAllocation} allocation objects allocated")
-    uint32_t.member("unusedRangeCount", "number of free ranges of memory between allocations")
-    VkDeviceSize.member("usedBytes", "total number of bytes occupied by all allocations")
-    VkDeviceSize.member("unusedBytes", "total number of bytes occupied by unused ranges")
-    VkDeviceSize.member("allocationSizeMin", "")
-    VkDeviceSize.member("allocationSizeAvg", "")
-    VkDeviceSize.member("allocationSizeMax", "")
-    VkDeviceSize.member("unusedRangeSizeMin", "")
-    VkDeviceSize.member("unusedRangeSizeAvg", "")
-    VkDeviceSize.member("unusedRangeSizeMax", "")
+    uint32_t("blockCount", "number of {@code VkDeviceMemory} Vulkan memory blocks allocated")
+    uint32_t("allocationCount", "number of {@code VmaAllocation} allocation objects allocated")
+    uint32_t("unusedRangeCount", "number of free ranges of memory between allocations")
+    VkDeviceSize("usedBytes", "total number of bytes occupied by all allocations")
+    VkDeviceSize("unusedBytes", "total number of bytes occupied by unused ranges")
+    VkDeviceSize("allocationSizeMin", "")
+    VkDeviceSize("allocationSizeAvg", "")
+    VkDeviceSize("allocationSizeMax", "")
+    VkDeviceSize("unusedRangeSizeMin", "")
+    VkDeviceSize("unusedRangeSizeAvg", "")
+    VkDeviceSize("unusedRangeSizeMax", "")
 }
 
 private const val VK_MAX_MEMORY_TYPES = 32
@@ -308,14 +308,14 @@ private const val VK_MAX_MEMORY_HEAPS = 16
 val VmaStats = struct(Module.VMA, "VmaStats", mutable = false) {
     documentation = "General statistics from current state of Allocator."
 
-    VmaStatInfo.member("memoryType", "")[VK_MAX_MEMORY_TYPES]
-    VmaStatInfo.member("memoryHeap", "")[VK_MAX_MEMORY_HEAPS]
-    VmaStatInfo.member("total", "")
+    VmaStatInfo("memoryType", "")[VK_MAX_MEMORY_TYPES]
+    VmaStatInfo("memoryHeap", "")[VK_MAX_MEMORY_HEAPS]
+    VmaStatInfo("total", "")
 }
 
 val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
-    VmaAllocationCreateFlags.member("flags", "use {@code VmaAllocationCreateFlagBits} enum").links("ALLOCATION_CREATE_\\w+", LinkMode.BITFIELD)
-    VmaMemoryUsage.member(
+    VmaAllocationCreateFlags("flags", "use {@code VmaAllocationCreateFlagBits} enum").links("ALLOCATION_CREATE_\\w+", LinkMode.BITFIELD)
+    VmaMemoryUsage(
         "usage",
         """
         intended usage of memory.
@@ -323,7 +323,7 @@ val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
         You can leave #MEMORY_USAGE_UNKNOWN if you specify memory requirements in other way. If {@code pool} is not null, this member is ignored.
         """
     ).links("MEMORY_USAGE_\\w+")
-    VkMemoryPropertyFlags.member(
+    VkMemoryPropertyFlags(
         "requiredFlags",
         """
         flags that must be set in a Memory Type chosen for an allocation.
@@ -331,7 +331,7 @@ val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
         Leave 0 if you specify memory requirements in other way. If {@code pool} is not null, this member is ignored.
         """
     )
-    VkMemoryPropertyFlags.member(
+    VkMemoryPropertyFlags(
         "preferredFlags",
         """
         flags that preferably should be set in a memory type chosen for an allocation.
@@ -339,7 +339,7 @@ val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
         Set to 0 if no additional flags are prefered. If {@code pool} is not null, this member is ignored.
         """
     )
-    uint32_t.member(
+    uint32_t(
         "memoryTypeBits",
         """
         bitmask containing one bit set for every memory type acceptable for this allocation.
@@ -348,7 +348,7 @@ val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
         further restrictions on memory type index. If {@code pool} is not null, this member is ignored.
         """
     )
-    nullable..VmaPool.member(
+    nullable..VmaPool(
         "pool",
         """
         pool that this allocation should be created in.
@@ -357,7 +357,7 @@ val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
         {@code memoryTypeBits} are ignored.
         """
     )
-    nullable..opaque_p.member(
+    nullable..opaque_p(
         "pUserData",
         """
         custom general-purpose pointer that will be stored in {@code VmaAllocation}, can be read as ##VmaAllocationInfo{@code ::pUserData} and changed using
@@ -370,9 +370,9 @@ val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
 }
 
 val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
-    uint32_t.member("memoryTypeIndex", "Vulkan memory type index to allocate this pool from")
-    VmaPoolCreateFlags.member("flags", "Use combination of {@code VmaPoolCreateFlagBits}.").links("POOL_CREATE_\\w+", LinkMode.BITFIELD)
-    VkDeviceSize.member(
+    uint32_t("memoryTypeIndex", "Vulkan memory type index to allocate this pool from")
+    VmaPoolCreateFlags("flags", "Use combination of {@code VmaPoolCreateFlagBits}.").links("POOL_CREATE_\\w+", LinkMode.BITFIELD)
+    VkDeviceSize(
         "blockSize",
         """
         size of a single {@code VkDeviceMemory} block to be allocated as part of this pool, in bytes. Optional.
@@ -381,7 +381,7 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
         automatically. Sizes of particular blocks may vary.
         """
     )
-    size_t.member(
+    size_t(
         "minBlockCount",
         """
         minimum number of blocks to be always allocated in this pool, even if they stay empty.
@@ -389,7 +389,7 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
         Set to 0 to have no preallocated blocks and allow the pool be completely empty.
         """
     )
-    size_t.member(
+    size_t(
         "maxBlockCount",
         """
         maximum number of blocks that can be allocated in this pool. Optional.
@@ -398,7 +398,7 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
         amount of memory allocated throughout whole lifetime of this pool.
         """
     )
-    uint32_t.member(
+    uint32_t(
         "frameInUseCount",
         """
         maximum number of additional frames that are in use at the same time as current frame.
@@ -415,11 +415,11 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
 }
 
 val VmaPoolStats = struct(Module.VMA, "VmaPoolStats", mutable = false) {
-    VkDeviceSize.member("size", "total amount of {@code VkDeviceMemory} allocated from Vulkan for this pool, in bytes")
-    VkDeviceSize.member("unusedSize", "total number of bytes in the pool not used by any {@code VmaAllocation}")
-    size_t.member("allocationCount", "number of {@code VmaAllocation} objects created from this pool that were not destroyed or lost")
-    size_t.member("unusedRangeCount", "number of continuous memory ranges in the pool not used by any {@code VmaAllocation}")
-    VkDeviceSize.member(
+    VkDeviceSize("size", "total amount of {@code VkDeviceMemory} allocated from Vulkan for this pool, in bytes")
+    VkDeviceSize("unusedSize", "total number of bytes in the pool not used by any {@code VmaAllocation}")
+    size_t("allocationCount", "number of {@code VmaAllocation} objects created from this pool that were not destroyed or lost")
+    size_t("unusedRangeCount", "number of continuous memory ranges in the pool not used by any {@code VmaAllocation}")
+    VkDeviceSize(
         "unusedRangeSizeMax",
         """
         size of the largest continuous free memory region available for new allocation.
@@ -428,11 +428,11 @@ val VmaPoolStats = struct(Module.VMA, "VmaPoolStats", mutable = false) {
         granularity.
         """
     )
-    size_t.member("blockCount", "number of {@code VkDeviceMemory} blocks allocated for this pool")
+    size_t("blockCount", "number of {@code VkDeviceMemory} blocks allocated for this pool")
 }
 
 val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false) {
-    uint32_t.member(
+    uint32_t(
         "memoryType",
         """
         memory type index that this allocation was allocated from.
@@ -440,7 +440,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
         It never changes.
         """
     )
-    VkDeviceMemory.member(
+    VkDeviceMemory(
         "deviceMemory",
         """
         handle to Vulkan memory object.
@@ -452,7 +452,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
         If the allocation is lost, it is equal to {@code VK_NULL_HANDLE}.
         """
     )
-    VkDeviceSize.member(
+    VkDeviceSize(
         "offset",
         """
         offset into {@code deviceMemory} object to the beginning of this allocation, in bytes. ({@code deviceMemory}, {@code offset}) pair is unique to this
@@ -461,7 +461,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
         It can change after call to #Defragment() if this allocation is passed to the function, or if allocation is lost.
         """
     )
-    VkDeviceSize.member(
+    VkDeviceSize(
         "size",
         """
         size of this allocation, in bytes.
@@ -469,7 +469,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
         It never changes, unless allocation is lost.
         """
     )
-    nullable..opaque_p.member(
+    nullable..opaque_p(
         "pMappedData",
         """
         pointer to the beginning of this allocation as mapped data.
@@ -479,7 +479,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
         It can change after call to #MapMemory(), #UnmapMemory(). It can also change after call to #Defragment() if this allocation is passed to the function.
         """
     )
-    nullable..opaque_p.member(
+    nullable..opaque_p(
         "pUserData",
         """
         custom general-purpose pointer that was passed as ##VmaAllocationCreateInfo{@code ::pUserData} or set using #SetAllocationUserData().
@@ -490,7 +490,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
 }
 
 val VmaDefragmentationInfo = struct(Module.VMA, "VmaDefragmentationInfo") {
-    VkDeviceSize.member(
+    VkDeviceSize(
         "maxBytesToMove",
         """
         maximum total numbers of bytes that can be copied while moving allocations to different places.
@@ -498,7 +498,7 @@ val VmaDefragmentationInfo = struct(Module.VMA, "VmaDefragmentationInfo") {
         Default is {@code VK_WHOLE_SIZ}E, which means no limit.
         """
     )
-    uint32_t.member(
+    uint32_t(
         "maxAllocationsToMove",
         """
         maximum number of allocations that can be moved to different place.
@@ -511,8 +511,8 @@ val VmaDefragmentationInfo = struct(Module.VMA, "VmaDefragmentationInfo") {
 val VmaDefragmentationStats = struct(Module.VMA, "VmaDefragmentationStats", mutable = false) {
     documentation = "Statistics returned by function #Defragment()."
 
-    VkDeviceSize.member("bytesMoved", "total number of bytes that have been copied while moving allocations to different places")
-    VkDeviceSize.member("bytesFreed", "total number of bytes that have been released to the system by freeing empty {@code VkDeviceMemory} objects")
-    uint32_t.member("allocationsMoved", "tumber of allocations that have been moved to different places")
-    uint32_t.member("deviceMemoryBlocksFreed", "number of empty {@code VkDeviceMemory} objects that have been released to the system")
+    VkDeviceSize("bytesMoved", "total number of bytes that have been copied while moving allocations to different places")
+    VkDeviceSize("bytesFreed", "total number of bytes that have been released to the system by freeing empty {@code VkDeviceMemory} objects")
+    uint32_t("allocationsMoved", "tumber of allocations that have been moved to different places")
+    uint32_t("deviceMemoryBlocksFreed", "number of empty {@code VkDeviceMemory} objects that have been released to the system")
 }

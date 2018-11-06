@@ -35,8 +35,8 @@ val nk_rune = typedef(uint32_t, "nk_rune")
 val nk_byte = typedef(uint8_t, "nk_byte")
 
 val nk_handle = union(Module.NUKLEAR, "NkHandle", nativeName = "nk_handle") {
-    nullable..opaque_p.member("ptr", "")
-    int.member("id", "")
+    nullable..opaque_p("ptr", "")
+    int("id", "")
 }
 // Struct values are currently not supported in callbacks
 val nk_handle_in_callback = "nk_handle".handle
@@ -74,47 +74,47 @@ val nk_draw_vertex_layout_format = "enum nk_draw_vertex_layout_format".enumType
 // API
 
 val nk_color = struct(Module.NUKLEAR, "NkColor", nativeName = "struct nk_color") {
-    nk_byte.member("r", "")
-    nk_byte.member("g", "")
-    nk_byte.member("b", "")
-    nk_byte.member("a", "")
+    nk_byte("r", "")
+    nk_byte("g", "")
+    nk_byte("b", "")
+    nk_byte("a", "")
 }
 
 val nk_colorf = struct(Module.NUKLEAR, "NkColorf", nativeName = "struct nk_colorf") {
-    float.member("r", "")
-    float.member("g", "")
-    float.member("b", "")
-    float.member("a", "")
+    float("r", "")
+    float("g", "")
+    float("b", "")
+    float("a", "")
 }
 
 val nk_vec2 = struct(Module.NUKLEAR, "NkVec2", nativeName = "struct nk_vec2") {
-    float.member("x", "")
-    float.member("y", "")
+    float("x", "")
+    float("y", "")
 }
 
 val nk_rect = struct(Module.NUKLEAR, "NkRect", nativeName = "struct nk_rect") {
-    float.member("x", "")
-    float.member("y", "")
-    float.member("w", "")
-    float.member("h", "")
+    float("x", "")
+    float("y", "")
+    float("w", "")
+    float("h", "")
 }
 
 val nk_image = struct(Module.NUKLEAR, "NkImage", nativeName = "struct nk_image") {
-    nk_handle.member("handle", "")
-    unsigned_short.member("w", "")
-    unsigned_short.member("h", "")
-    unsigned_short.member("region", "")[4]
+    nk_handle("handle", "")
+    unsigned_short("w", "")
+    unsigned_short("h", "")
+    unsigned_short("region", "")[4]
 }
 
 val nk_cursor = struct(Module.NUKLEAR, "NkCursor", nativeName = "struct nk_cursor") {
-    nk_image.member("img", "")
-    nk_vec2.member("size", "")
-    nk_vec2.member("offset", "")
+    nk_image("img", "")
+    nk_vec2("size", "")
+    nk_vec2("offset", "")
 }
 
 val nk_scroll = struct(Module.NUKLEAR, "NkScroll", nativeName = "struct nk_scroll", mutable = false) {
-    nk_uint.member("x", "")
-    nk_uint.member("y", "")
+    nk_uint("x", "")
+    nk_uint("y", "")
 }
 
 val nk_plugin_alloc = Module.NUKLEAR.callback {
@@ -143,77 +143,77 @@ val nk_plugin_free = Module.NUKLEAR.callback {
 }
 
 val nk_allocator = struct(Module.NUKLEAR, "NkAllocator", nativeName = "struct nk_allocator") {
-    nk_handle.member("userdata", "")
-    nullable..nk_plugin_alloc.member("alloc", "")
-    nullable..nk_plugin_free.member("mfree", "")
+    nk_handle("userdata", "")
+    nullable..nk_plugin_alloc("alloc", "")
+    nullable..nk_plugin_free("mfree", "")
 }
 
 val nk_draw_null_texture = struct(Module.NUKLEAR, "NkDrawNullTexture", nativeName = "struct nk_draw_null_texture") {
-    nk_handle.member("texture", "texture handle to a texture with a white pixel")
-    nk_vec2.member("uv", "coordinates to a white pixel in the texture")
+    nk_handle("texture", "texture handle to a texture with a white pixel")
+    nk_vec2("uv", "coordinates to a white pixel in the texture")
 }
 
 val nk_draw_vertex_layout_element = struct(Module.NUKLEAR, "NkDrawVertexLayoutElement", nativeName = "struct nk_draw_vertex_layout_element") {
-    nk_draw_vertex_layout_attribute.member("attribute", "the vertex attribute").links("VERTEX_\\w+")
-    nk_draw_vertex_layout_format.member("format", "the vertex attribute format").links("FORMAT_(?!COUNT)\\w+")
-    nk_size.member("offset", "the vertex attribute offset")
+    nk_draw_vertex_layout_attribute("attribute", "the vertex attribute").links("VERTEX_\\w+")
+    nk_draw_vertex_layout_format("format", "the vertex attribute format").links("FORMAT_(?!COUNT)\\w+")
+    nk_size("offset", "the vertex attribute offset")
 }
 
 val nk_convert_config = struct(Module.NUKLEAR, "NkConvertConfig", nativeName = "struct nk_convert_config") {
-    float.member("global_alpha", "global alpha value")
-    nk_anti_aliasing.member("line_AA", "line anti-aliasing flag can be turned off if you are tight on memory").links("ANTI_ALIASING_\\w+")
-    nk_anti_aliasing.member("shape_AA", "shape anti-aliasing flag can be turned off if you are tight on memory").links("ANTI_ALIASING_\\w+")
-    unsigned_int.member("circle_segment_count", "number of segments used for circles: default to 22")
-    unsigned_int.member("arc_segment_count", "number of segments used for arcs: default to 22")
-    unsigned_int.member("curve_segment_count", "number of segments used for curves: default to 22")
-    nk_draw_null_texture.member("null_texture", "handle to texture with a white pixel for shape drawing")
-    Unsafe..nk_draw_vertex_layout_element.p.member("vertex_layout", "describes the vertex output format and packing")
-    nk_size.member("vertex_size", "sizeof one vertex for vertex packing")
-    nk_size.member("vertex_alignment", "vertex alignment: Can be optained by NK_ALIGNOF")
+    float("global_alpha", "global alpha value")
+    nk_anti_aliasing("line_AA", "line anti-aliasing flag can be turned off if you are tight on memory").links("ANTI_ALIASING_\\w+")
+    nk_anti_aliasing("shape_AA", "shape anti-aliasing flag can be turned off if you are tight on memory").links("ANTI_ALIASING_\\w+")
+    unsigned_int("circle_segment_count", "number of segments used for circles: default to 22")
+    unsigned_int("arc_segment_count", "number of segments used for arcs: default to 22")
+    unsigned_int("curve_segment_count", "number of segments used for curves: default to 22")
+    nk_draw_null_texture("null_texture", "handle to texture with a white pixel for shape drawing")
+    Unsafe..nk_draw_vertex_layout_element.p("vertex_layout", "describes the vertex output format and packing")
+    nk_size("vertex_size", "sizeof one vertex for vertex packing")
+    nk_size("vertex_alignment", "vertex alignment: Can be optained by NK_ALIGNOF")
 }
 
 val nk_list_view = struct(Module.NUKLEAR, "NkListView", nativeName = "struct nk_list_view", mutable = false) {
-    int.member("begin", "")
-    int.member("end", "")
-    int.member("count", "")
+    int("begin", "")
+    int("end", "")
+    int("count", "")
 
-    int.member("total_height", "").private()
-    struct(Module.NUKLEAR, "NkContext", nativeName = "struct nk_context").p.member("ctx", "").private()
-    nk_uint.p.member("scroll_pointer", "").private()
-    nk_uint.member("scroll_value", "").private()
+    int("total_height", "").private()
+    struct(Module.NUKLEAR, "NkContext", nativeName = "struct nk_context").p("ctx", "").private()
+    nk_uint.p("scroll_pointer", "").private()
+    nk_uint("scroll_value", "").private()
 }
 
 // MEMORY BUFFER
 
 val nk_memory_status = struct(Module.NUKLEAR, "NkMemoryStatus", nativeName = "struct nk_memory_status", mutable = false) {
-    void.p.member("memory", "")
-    unsigned_int.member("type", "")
-    AutoSize("memory")..nk_size.member("size", "")
-    nk_size.member("allocated", "")
-    nk_size.member("needed", "")
-    nk_size.member("calls", "")
+    void.p("memory", "")
+    unsigned_int("type", "")
+    AutoSize("memory")..nk_size("size", "")
+    nk_size("allocated", "")
+    nk_size("needed", "")
+    nk_size("calls", "")
 }
 
 val nk_buffer_marker = struct(Module.NUKLEAR, "NkBufferMarker", nativeName = "struct nk_buffer_marker", mutable = false) {
-    int.member("active", "")
-    nk_size.member("offset", "")
+    int("active", "")
+    nk_size("offset", "")
 }
 
 val nk_memory = struct(Module.NUKLEAR, "NkMemory", nativeName = "struct nk_memory", mutable = false) {
-    nullable..void.p.member("ptr", "")
-    AutoSize("ptr")..nk_size.member("size", "")
+    nullable..void.p("ptr", "")
+    AutoSize("ptr")..nk_size("size", "")
 }
 
 val nk_buffer = struct(Module.NUKLEAR, "NkBuffer", nativeName = "struct nk_buffer", mutable = false) {
-    nk_buffer_marker.member("marker", "buffer marker to free a buffer to a certain offset")[2]
-    nk_allocator.member("pool", "allocator callback for dynamic buffers")
-    nk_allocation_type.member("type", "memory management type")
-    nk_memory.member("memory", "memory and size of the current memory block")
-    float.member("grow_factor", "growing factor for dynamic memory management")
-    nk_size.member("allocated", "total amount of memory allocated")
-    nk_size.member("needed", "totally consumed memory given that enough memory is present")
-    nk_size.member("calls", "number of allocation calls")
-    nk_size.member("size", "current size of the buffer")
+    nk_buffer_marker("marker", "buffer marker to free a buffer to a certain offset")[2]
+    nk_allocator("pool", "allocator callback for dynamic buffers")
+    nk_allocation_type("type", "memory management type")
+    nk_memory("memory", "memory and size of the current memory block")
+    float("grow_factor", "growing factor for dynamic memory management")
+    nk_size("allocated", "total amount of memory allocated")
+    nk_size("needed", "totally consumed memory given that enough memory is present")
+    nk_size("calls", "number of allocation calls")
+    nk_size("size", "current size of the buffer")
 }
 val nk_buffer_p = nk_buffer.p
 
@@ -227,8 +227,8 @@ val nk_str = struct(Module.NUKLEAR, "NkStr", nativeName = "struct nk_str", mutab
         should have any contact with this API is if you interact with an ##NkTextEdit object inside one of the copy and
         paste functions and even there only for more advanced cases.
         """
-    nk_buffer.member("buffer", "")
-    int.member("len", "in codepoints/runes/glyphs")
+    nk_buffer("buffer", "")
+    int("len", "in codepoints/runes/glyphs")
 }
 
 // TEXT EDITOR
@@ -278,18 +278,18 @@ val nk_plugin_copy = Module.NUKLEAR.callback {
 }
 
 val nk_clipboard = struct(Module.NUKLEAR, "NkClipboard", nativeName = "struct nk_clipboard") {
-    nk_handle.member("userdata", "")
-    nullable..nk_plugin_paste.member("paste", "")
-    nullable..nk_plugin_copy.member("copy", "")
+    nk_handle("userdata", "")
+    nullable..nk_plugin_paste("paste", "")
+    nullable..nk_plugin_copy("copy", "")
 }
 
 val nk_text_undo_record = struct(Module.NUKLEAR, "NkTextUndoRecord", nativeName = "struct nk_text_undo_record", mutable = false) {
     access = Access.INTERNAL
 
-    int.member("where", "")
-    short.member("insert_length", "")
-    short.member("delete_length", "")
-    short.member("char_storage", "")
+    int("where", "")
+    short("insert_length", "")
+    short("delete_length", "")
+    short("char_storage", "")
 }
 
 const val NK_TEXTEDIT_UNDOSTATECOUNT = 99
@@ -297,44 +297,44 @@ const val NK_TEXTEDIT_UNDOCHARCOUNT = 999
 val nk_text_undo_state = struct(Module.NUKLEAR, "NkTextUndoState", nativeName = "struct nk_text_undo_state", mutable = false) {
     access = Access.INTERNAL
 
-    nk_text_undo_record.member("undo_rec", "")[NK_TEXTEDIT_UNDOSTATECOUNT]
-    nk_rune.member("undo_char", "")[NK_TEXTEDIT_UNDOCHARCOUNT]
-    short.member("undo_point", "")
-    short.member("redo_point", "")
-    short.member("undo_char_point", "")
-    short.member("redo_char_point", "")
+    nk_text_undo_record("undo_rec", "")[NK_TEXTEDIT_UNDOSTATECOUNT]
+    nk_rune("undo_char", "")[NK_TEXTEDIT_UNDOCHARCOUNT]
+    short("undo_point", "")
+    short("redo_point", "")
+    short("undo_char_point", "")
+    short("redo_char_point", "")
 }
 
 val nk_text_edit = struct(Module.NUKLEAR, "NkTextEdit", nativeName = "struct nk_text_edit", mutable = false) {
     access = Access.INTERNAL
 
-    nk_clipboard.member("clip", "")
-    nk_str.member("string", "")
-    nullable..nk_plugin_filter.member("filter", "")
-    nk_vec2.member("scrollbar", "")
+    nk_clipboard("clip", "")
+    nk_str("string", "")
+    nullable..nk_plugin_filter("filter", "")
+    nk_vec2("scrollbar", "")
 
-    int.member("cursor", "")
-    int.member("select_start", "")
-    int.member("select_end", "")
-    unsigned_char.member("mode", "")
-    bool.member("cursor_at_end_of_line", "")
-    bool.member("initialized", "")
-    bool.member("has_preferred_x", "")
-    bool.member("single_line", "")
-    bool.member("active", "")
+    int("cursor", "")
+    int("select_start", "")
+    int("select_end", "")
+    unsigned_char("mode", "")
+    bool("cursor_at_end_of_line", "")
+    bool("initialized", "")
+    bool("has_preferred_x", "")
+    bool("single_line", "")
+    bool("active", "")
     padding(1)
-    float.member("preferred_x", "")
-    nk_text_undo_state.member("undo", "")
+    float("preferred_x", "")
+    nk_text_undo_state("undo", "")
 }
 
 // FONT
 
 val nk_user_font_glyph = struct(Module.NUKLEAR, "NkUserFontGlyph", nativeName = "struct nk_user_font_glyph") {
-    nk_vec2.member("uv", "texture coordinates")[2]
-    nk_vec2.member("offset", "offset between top left and glyph")
-    float.member("width", "width of the glyph")
-    float.member("height", "height of the glyph")
-    float.member("xadvance", "offset to the next glyph")
+    nk_vec2("uv", "texture coordinates")[2]
+    nk_vec2("offset", "offset between top left and glyph")
+    float("width", "width of the glyph")
+    float("height", "height of the glyph")
+    float("xadvance", "offset to the next glyph")
 }
 
 val nk_text_width_f = Module.NUKLEAR.callback {
@@ -371,178 +371,178 @@ val nk_query_font_glyph_f = Module.NUKLEAR.callback {
 }
 
 val nk_user_font = struct(Module.NUKLEAR, "NkUserFont", nativeName = "struct nk_user_font") {
-    nk_handle.member("userdata", "user provided font handle")
-    float.member("height", "max height of the font")
-    nullable..nk_text_width_f.member("width", "font string width in pixel callback")
-    nullable..nk_query_font_glyph_f.member("query", "font glyph callback to query drawing info")
-    nk_handle.member("texture", "texture handle to the used font atlas or texture")
+    nk_handle("userdata", "user provided font handle")
+    float("height", "max height of the font")
+    nullable..nk_text_width_f("width", "font string width in pixel callback")
+    nullable..nk_query_font_glyph_f("query", "font glyph callback to query drawing info")
+    nk_handle("texture", "texture handle to the used font atlas or texture")
 }
 
 // DRAWING
 val nk_command = struct(Module.NUKLEAR, "NkCommand", nativeName = "struct nk_command", mutable = false) {
-    nk_command_type.member("type", "")
-    nk_size.member("next", "")
-    nk_handle.member("userdata", "")
+    nk_command_type("type", "")
+    nk_size("next", "")
+    nk_handle("userdata", "")
 }
 
 /*val nk_command_scissor = struct(Binding.NUKLEAR, "NkCommandScissor", nativeName = "struct nk_command_scissor") {
-    nk_command.member("header", "")
-    short.member("x", "")
-    short.member("y", "")
-    unsigned_short.member("w", "")
-    unsigned_short.member("h", "")
+    nk_command("header", "")
+    short("x", "")
+    short("y", "")
+    unsigned_short("w", "")
+    unsigned_short("h", "")
 }
 
 val nk_command_line = struct(Binding.NUKLEAR, "NkCommandLine", nativeName = "struct nk_command_line") {
-    nk_command.member("header", "")
-    unsigned_short.member("line_thickness", "")
-    nk_vec2i.member("begin", "")
-    nk_vec2i.member("end", "")
-    nk_color.member("color", "")
+    nk_command("header", "")
+    unsigned_short("line_thickness", "")
+    nk_vec2i("begin", "")
+    nk_vec2i("end", "")
+    nk_color("color", "")
 }
 
 val nk_command_curve = struct(Binding.NUKLEAR, "NkCommandCurve", nativeName = "struct nk_command_curve") {
-    nk_command.member("header", "")
-    unsigned_short.member("line_thickness", "")
-    nk_vec2i.member("begin", "")
-    nk_vec2i.member("end", "")
-    nk_vec2i.member("ctrl", "")[2]
-    nk_color.member("color", "")
+    nk_command("header", "")
+    unsigned_short("line_thickness", "")
+    nk_vec2i("begin", "")
+    nk_vec2i("end", "")
+    nk_vec2i("ctrl", "")[2]
+    nk_color("color", "")
 }
 
 val nk_command_rect = struct(Binding.NUKLEAR, "NkCommandRect", nativeName = "struct nk_command_rect") {
-    nk_command.member("header", "")
-    unsigned_short.member("rounding", "")
-    unsigned_short.member("line_thickness", "")
-    short.member("x", "")
-    short.member("y", "")
-    unsigned_short.member("w", "")
-    unsigned_short.member("h", "")
-    nk_color.member("color", "")
+    nk_command("header", "")
+    unsigned_short("rounding", "")
+    unsigned_short("line_thickness", "")
+    short("x", "")
+    short("y", "")
+    unsigned_short("w", "")
+    unsigned_short("h", "")
+    nk_color("color", "")
 }
 
 val nk_command_rect_filled = struct(Binding.NUKLEAR, "NkCmmandRectFilled", nativeName = "struct nk_command_rect_filled") {
-    nk_command.member("header", "")
-    unsigned_short.member("rounding", "")
-    short.member("x", "")
-    short.member("y", "")
-    unsigned_short.member("w", "")
-    unsigned_short.member("h", "")
-    nk_color.member("color", "")
+    nk_command("header", "")
+    unsigned_short("rounding", "")
+    short("x", "")
+    short("y", "")
+    unsigned_short("w", "")
+    unsigned_short("h", "")
+    nk_color("color", "")
 }
 
 val nk_command_rect_multi_color = struct(Binding.NUKLEAR, "NkCommandRectMultiColor", nativeName = "struct nk_command_rect_multi_color") {
-    nk_command.member("header", "")
-    short.member("x", "")
-    short.member("y", "")
-    unsigned_short.member("w", "")
-    unsigned_short.member("h", "")
-    nk_color.member("left", "")
-    nk_color.member("top", "")
-    nk_color.member("bottom", "")
-    nk_color.member("right", "")
+    nk_command("header", "")
+    short("x", "")
+    short("y", "")
+    unsigned_short("w", "")
+    unsigned_short("h", "")
+    nk_color("left", "")
+    nk_color("top", "")
+    nk_color("bottom", "")
+    nk_color("right", "")
 }
 
 val nk_command_triangle = struct(Binding.NUKLEAR, "NkCommandTriangle", nativeName = "struct nk_command_triangle") {
-    nk_command.member("header", "")
-    unsigned_short.member("line_thickness", "")
-    nk_vec2i.member("a", "")
-    nk_vec2i.member("b", "")
-    nk_vec2i.member("c", "")
-    nk_color.member("color", "")
+    nk_command("header", "")
+    unsigned_short("line_thickness", "")
+    nk_vec2i("a", "")
+    nk_vec2i("b", "")
+    nk_vec2i("c", "")
+    nk_color("color", "")
 }
 
 val nk_command_triangle_filled = struct(Binding.NUKLEAR, "NkCommandTriangleFilled", nativeName = "struct nk_command_triangle_filled") {
-    nk_command.member("header", "")
-    nk_vec2i.member("a", "")
-    nk_vec2i.member("b", "")
-    nk_vec2i.member("c", "")
-    nk_color.member("color", "")
+    nk_command("header", "")
+    nk_vec2i("a", "")
+    nk_vec2i("b", "")
+    nk_vec2i("c", "")
+    nk_color("color", "")
 }
 
 val nk_command_circle = struct(Binding.NUKLEAR, "NkCommandCircle", nativeName = "struct nk_command_circle") {
-    nk_command.member("header", "")
-    short.member("x", "")
-    short.member("y", "")
-    unsigned_short.member("line_thickness", "")
-    unsigned_short.member("w", "")
-    unsigned_short.member("h", "")
-    nk_color.member("color", "")
+    nk_command("header", "")
+    short("x", "")
+    short("y", "")
+    unsigned_short("line_thickness", "")
+    unsigned_short("w", "")
+    unsigned_short("h", "")
+    nk_color("color", "")
 }
 
 val nk_command_circle_filled = struct(Binding.NUKLEAR, "NkCommandCircleFilled", nativeName = "struct nk_command_circle_filled") {
-    nk_command.member("header", "")
-    short.member("x", "")
-    short.member("y", "")
-    unsigned_short.member("w", "")
-    unsigned_short.member("h", "")
-    nk_color.member("color", "")
+    nk_command("header", "")
+    short("x", "")
+    short("y", "")
+    unsigned_short("w", "")
+    unsigned_short("h", "")
+    nk_color("color", "")
 }
 
 val nk_command_arc = struct(Binding.NUKLEAR, "NkCommandArc", nativeName = "struct nk_command_arc") {
-    nk_command.member("header", "")
-    short.member("cx", "")
-    short.member("cy", "")
-    unsigned_short.member("r", "")
-    unsigned_short.member("line_thickness", "")
-    float.member("a", "")[2]
-    nk_color.member("color", "")
+    nk_command("header", "")
+    short("cx", "")
+    short("cy", "")
+    unsigned_short("r", "")
+    unsigned_short("line_thickness", "")
+    float("a", "")[2]
+    nk_color("color", "")
 }
 
 val nk_command_arc_filled = struct(Binding.NUKLEAR, "NkCommandArcFilled", nativeName = "struct nk_command_arc_filled") {
-    nk_command.member("header", "")
-    short.member("cx", "")
-    short.member("cy", "")
-    unsigned_short.member("r", "")
-    float.member("a", "")[2]
-    nk_color.member("color", "")
+    nk_command("header", "")
+    short("cx", "")
+    short("cy", "")
+    unsigned_short("r", "")
+    float("a", "")[2]
+    nk_color("color", "")
 }
 
 val nk_command_polygon = struct(Binding.NUKLEAR, "NkCommandPolygon", nativeName = "struct nk_command_polygon") {
-    nk_command.member("header", "")
-    nk_color.member("color", "")
-    unsigned_short.member("line_thickness", "")
-    unsigned_short.member("point_count", "")
-    nk_vec2i.member("points", "")[1]
+    nk_command("header", "")
+    nk_color("color", "")
+    unsigned_short("line_thickness", "")
+    unsigned_short("point_count", "")
+    nk_vec2i("points", "")[1]
 }
 
 val nk_command_polygon_filled = struct(Binding.NUKLEAR, "NkCommandPolygonFilled", nativeName = "struct nk_command_polygon_filled") {
-    nk_command.member("header", "")
-    nk_color.member("color", "")
-    unsigned_short.member("point_count", "")
-    nk_vec2i.member("points", "")[1]
+    nk_command("header", "")
+    nk_color("color", "")
+    unsigned_short("point_count", "")
+    nk_vec2i("points", "")[1]
 }
 
 val nk_command_polyline = struct(Binding.NUKLEAR, "NkCommandPolyline", nativeName = "struct nk_command_polyline") {
-    nk_command.member("header", "")
-    nk_color.member("color", "")
-    unsigned_short.member("line_thickness", "")
-    unsigned_short.member("point_count", "")
-    nk_vec2i.member("points", "")[1]
+    nk_command("header", "")
+    nk_color("color", "")
+    unsigned_short("line_thickness", "")
+    unsigned_short("point_count", "")
+    nk_vec2i("points", "")[1]
 }
 
 val nk_command_image = struct(Binding.NUKLEAR, "NkCommandImage", nativeName = "struct nk_command_image") {
-    nk_command.member("header", "")
-    short.member("x", "")
-    short.member("y", "")
-    unsigned_short.member("w", "")
-    unsigned_short.member("h", "")
-    nk_image.member("img", "")
-    nk_color.member("col", "")
+    nk_command("header", "")
+    short("x", "")
+    short("y", "")
+    unsigned_short("w", "")
+    unsigned_short("h", "")
+    nk_image("img", "")
+    nk_color("col", "")
 }
 
 val nk_command_text = struct(Binding.NUKLEAR, "NkCommandText", nativeName = "struct nk_command_text") {
-    nk_command.member("header", "")
-    const..nk_user_font.p.member("font", "")
-    nk_color.member("background", "")
-    nk_color.member("foreground", "")
-    short.member("x", "")
-    short.member("y", "")
-    unsigned_short.member("w", "")
-    unsigned_short.member("h", "")
-    float.member("height", "")
-    int.member("length", "")
-    char.member("string", "")[1]
+    nk_command("header", "")
+    const..nk_user_font.p("font", "")
+    nk_color("background", "")
+    nk_color("foreground", "")
+    short("x", "")
+    short("y", "")
+    unsigned_short("w", "")
+    unsigned_short("h", "")
+    float("height", "")
+    int("length", "")
+    char("string", "")[1]
 }*/
 
 val nk_command_custom_callback = Module.NUKLEAR.callback {
@@ -562,114 +562,114 @@ val nk_command_custom_callback = Module.NUKLEAR.callback {
 }
 
 /*val nk_command_custom = struct(Binding.NUKLEAR, "NkCommandCustom", nativeName = "struct nk_command_custom") {
-    nk_command.member("header", "")
-    short.member("x", "")
-    short.member("y", "")
-    unsigned_short.member("w", "")
-    unsigned_short.member("h", "")
-    nk_handle.member("callback_data", "")
-    nk_command_custom_callback.member("callback", "")
+    nk_command("header", "")
+    short("x", "")
+    short("y", "")
+    unsigned_short("w", "")
+    unsigned_short("h", "")
+    nk_handle("callback_data", "")
+    nk_command_custom_callback("callback", "")
 }*/
 
 val nk_command_buffer = struct(Module.NUKLEAR, "NkCommandBuffer", nativeName = "struct nk_command_buffer", mutable = false) {
-    nullable..nk_buffer_p.member("base", "")
-    nk_rect.member("clip", "")
-    int.member("use_clipping", "")
-    nk_handle.member("userdata", "")
-    nk_size.member("begin", "")
-    nk_size.member("end", "")
-    nk_size.member("last", "")
+    nullable..nk_buffer_p("base", "")
+    nk_rect("clip", "")
+    int("use_clipping", "")
+    nk_handle("userdata", "")
+    nk_size("begin", "")
+    nk_size("end", "")
+    nk_size("last", "")
 }
 
 // INPUT
 
 val nk_mouse_button = struct(Module.NUKLEAR, "NkMouseButton", nativeName = "struct nk_mouse_button", mutable = false) {
-    int.member("down", "")
-    unsigned_int.member("clicked", "")
-    nk_vec2.member("clicked_pos", "")
+    int("down", "")
+    unsigned_int("clicked", "")
+    nk_vec2("clicked_pos", "")
 }
 
 val nk_mouse = struct(Module.NUKLEAR, "NkMouse", nativeName = "struct nk_mouse", mutable = false) {
     javaImport("static org.lwjgl.nuklear.Nuklear.NK_BUTTON_MAX")
 
-    nk_mouse_button.member("buttons", "")["NK_BUTTON_MAX"]
-    nk_vec2.member("pos", "")
-    nk_vec2.member("prev", "")
-    nk_vec2.member("delta", "")
-    nk_vec2.member("scroll_delta", "")
-    bool.member("grab", "")
-    bool.member("grabbed", "")
-    bool.member("ungrab", "")
+    nk_mouse_button("buttons", "")["NK_BUTTON_MAX"]
+    nk_vec2("pos", "")
+    nk_vec2("prev", "")
+    nk_vec2("delta", "")
+    nk_vec2("scroll_delta", "")
+    bool("grab", "")
+    bool("grabbed", "")
+    bool("ungrab", "")
 }
 
 val nk_key = struct(Module.NUKLEAR, "NkKey", nativeName = "struct nk_key", mutable = false) {
-    int.member("down", "")
-    unsigned_int.member("clicked", "")
+    int("down", "")
+    unsigned_int("clicked", "")
 }
 
 val nk_keyboard = struct(Module.NUKLEAR, "NkKeyboard", nativeName = "struct nk_keyboard", mutable = false) {
     javaImport("static org.lwjgl.nuklear.Nuklear.*")
 
-    nk_key.member("keys", "")["NK_KEY_MAX"]
-    char.member("text", "")["NK_INPUT_MAX"]
-    int.member("text_len", "")
+    nk_key("keys", "")["NK_KEY_MAX"]
+    char("text", "")["NK_INPUT_MAX"]
+    int("text_len", "")
 }
 
 val nk_input = struct(Module.NUKLEAR, "NkInput", nativeName = "struct nk_input", mutable = false) {
-    nk_keyboard.member("keyboard", "")
-    nk_mouse.member("mouse", "")
+    nk_keyboard("keyboard", "")
+    nk_mouse("mouse", "")
 }
 
 // DRAW LIST
 
 val nk_draw_command = struct(Module.NUKLEAR, "NkDrawCommand", nativeName = "struct nk_draw_command", mutable = false) {
-    unsigned_int.member("elem_count", "")
+    unsigned_int("elem_count", "")
     /* number of elements in the current draw batch */
-    nk_rect.member("clip_rect", "")
+    nk_rect("clip_rect", "")
     /* current screen clipping rectangle */
-    nk_handle.member("texture", "")
+    nk_handle("texture", "")
     /* current texture to set */
-    nk_handle.member("userdata", "")
+    nk_handle("userdata", "")
 }
 
 val nk_draw_list = struct(Module.NUKLEAR, "NkDrawList", nativeName = "struct nk_draw_list", mutable = false) {
-    nk_rect.member("clip_rect", "")
-    nk_vec2.member("circle_vtx", "")[12]
-    nk_convert_config.member("config", "")
+    nk_rect("clip_rect", "")
+    nk_vec2("circle_vtx", "")[12]
+    nk_convert_config("config", "")
 
-    nullable..nk_buffer_p.member("buffer", "")
-    nullable..nk_buffer_p.member("vertices", "")
-    nullable..nk_buffer_p.member("elements", "")
+    nullable..nk_buffer_p("buffer", "")
+    nullable..nk_buffer_p("vertices", "")
+    nullable..nk_buffer_p("elements", "")
 
-    unsigned_int.member("element_count", "")
-    unsigned_int.member("vertex_count", "")
-    unsigned_int.member("cmd_count", "")
-    nk_size.member("cmd_offset", "")
+    unsigned_int("element_count", "")
+    unsigned_int("vertex_count", "")
+    unsigned_int("cmd_count", "")
+    nk_size("cmd_offset", "")
 
-    unsigned_int.member("path_count", "")
-    unsigned_int.member("path_offset", "")
+    unsigned_int("path_count", "")
+    unsigned_int("path_offset", "")
 
-    nk_anti_aliasing.member("line_AA", "")
-    nk_anti_aliasing.member("shape_AA", "")
+    nk_anti_aliasing("line_AA", "")
+    nk_anti_aliasing("shape_AA", "")
 
-    nk_handle.member("userdata", "")
+    nk_handle("userdata", "")
 }
 
 // GUI
 
 val nk_style_item_data = union(Module.NUKLEAR, "NkStyleItemData", nativeName = "union nk_style_item_data") {
-    nk_image.member("image", "")
-    nk_color.member("color", "")
+    nk_image("image", "")
+    nk_color("color", "")
 }
 
 val nk_style_item = struct(Module.NUKLEAR, "NkStyleItem", nativeName = "struct nk_style_item") {
-    nk_style_item_type.member("type", "the style type").links("STYLE_ITEM_\\w+")
-    nk_style_item_data.member("data", "the style data")
+    nk_style_item_type("type", "the style type").links("STYLE_ITEM_\\w+")
+    nk_style_item_data("data", "the style data")
 }
 
 val nk_style_text = struct(Module.NUKLEAR, "NkStyleText", nativeName = "struct nk_style_text") {
-    nk_color.member("color", "")
-    nk_vec2.member("padding", "")
+    nk_color("color", "")
+    nk_vec2("padding", "")
 }
 
 val nk_draw_begin = Module.NUKLEAR.callback {
@@ -702,578 +702,578 @@ val nk_draw_end = Module.NUKLEAR.callback {
 
 val nk_style_button = struct(Module.NUKLEAR, "NkStyleButton", nativeName = "struct nk_style_button") {
     /* background */
-    nk_style_item.member("normal", "")
-    nk_style_item.member("hover", "")
-    nk_style_item.member("active", "")
-    nk_color.member("border_color", "")
+    nk_style_item("normal", "")
+    nk_style_item("hover", "")
+    nk_style_item("active", "")
+    nk_color("border_color", "")
 
     /* text */
-    nk_color.member("text_background", "")
-    nk_color.member("text_normal", "")
-    nk_color.member("text_hover", "")
-    nk_color.member("text_active", "")
-    nk_flags.member("text_alignment", "")
+    nk_color("text_background", "")
+    nk_color("text_normal", "")
+    nk_color("text_hover", "")
+    nk_color("text_active", "")
+    nk_flags("text_alignment", "")
 
     /* properties */
-    float.member("border", "")
-    float.member("rounding", "")
-    nk_vec2.member("padding", "")
-    nk_vec2.member("image_padding", "")
-    nk_vec2.member("touch_padding", "")
+    float("border", "")
+    float("rounding", "")
+    nk_vec2("padding", "")
+    nk_vec2("image_padding", "")
+    nk_vec2("touch_padding", "")
 
     /* optional user callbacks */
-    nk_handle.member("userdata", "")
-    nullable..nk_draw_begin.member("draw_begin", "")
-    nullable..nk_draw_end.member("draw_end", "")
+    nk_handle("userdata", "")
+    nullable..nk_draw_begin("draw_begin", "")
+    nullable..nk_draw_end("draw_end", "")
 }
 
 val nk_style_toggle = struct(Module.NUKLEAR, "NkStyleToggle", nativeName = "struct nk_style_toggle") {
     /* background */
-    nk_style_item.member("normal", "")
-    nk_style_item.member("hover", "")
-    nk_style_item.member("active", "")
-    nk_color.member("border_color", "")
+    nk_style_item("normal", "")
+    nk_style_item("hover", "")
+    nk_style_item("active", "")
+    nk_color("border_color", "")
 
     /* cursor */
-    nk_style_item.member("cursor_normal", "")
-    nk_style_item.member("cursor_hover", "")
+    nk_style_item("cursor_normal", "")
+    nk_style_item("cursor_hover", "")
 
     /* text */
-    nk_color.member("text_normal", "")
-    nk_color.member("text_hover", "")
-    nk_color.member("text_active", "")
-    nk_color.member("text_background", "")
-    nk_flags.member("text_alignment", "")
+    nk_color("text_normal", "")
+    nk_color("text_hover", "")
+    nk_color("text_active", "")
+    nk_color("text_background", "")
+    nk_flags("text_alignment", "")
 
     /* properties */
-    nk_vec2.member("padding", "")
-    nk_vec2.member("touch_padding", "")
-    float.member("spacing", "")
-    float.member("border", "")
+    nk_vec2("padding", "")
+    nk_vec2("touch_padding", "")
+    float("spacing", "")
+    float("border", "")
 
     /* optional user callbacks */
-    nk_handle.member("userdata", "")
-    nullable..nk_draw_begin.member("draw_begin", "")
-    nullable..nk_draw_end.member("draw_end", "")
+    nk_handle("userdata", "")
+    nullable..nk_draw_begin("draw_begin", "")
+    nullable..nk_draw_end("draw_end", "")
 }
 
 val nk_style_selectable = struct(Module.NUKLEAR, "NkStyleSelectable", nativeName = "struct nk_style_selectable") {
     /* background (inactive) */
-    nk_style_item.member("normal", "")
-    nk_style_item.member("hover", "")
-    nk_style_item.member("pressed", "")
+    nk_style_item("normal", "")
+    nk_style_item("hover", "")
+    nk_style_item("pressed", "")
 
     /* background (active) */
-    nk_style_item.member("normal_active", "")
-    nk_style_item.member("hover_active", "")
-    nk_style_item.member("pressed_active", "")
+    nk_style_item("normal_active", "")
+    nk_style_item("hover_active", "")
+    nk_style_item("pressed_active", "")
 
     /* text color (inactive) */
-    nk_color.member("text_normal", "")
-    nk_color.member("text_hover", "")
-    nk_color.member("text_pressed", "")
+    nk_color("text_normal", "")
+    nk_color("text_hover", "")
+    nk_color("text_pressed", "")
 
     /* text color (active) */
-    nk_color.member("text_normal_active", "")
-    nk_color.member("text_hover_active", "")
-    nk_color.member("text_pressed_active", "")
-    nk_color.member("text_background", "")
-    nk_flags.member("text_alignment", "")
+    nk_color("text_normal_active", "")
+    nk_color("text_hover_active", "")
+    nk_color("text_pressed_active", "")
+    nk_color("text_background", "")
+    nk_flags("text_alignment", "")
 
     /* properties */
-    float.member("rounding", "")
-    nk_vec2.member("padding", "")
-    nk_vec2.member("touch_padding", "")
-    nk_vec2.member("image_padding", "")
+    float("rounding", "")
+    nk_vec2("padding", "")
+    nk_vec2("touch_padding", "")
+    nk_vec2("image_padding", "")
 
     /* optional user callbacks */
-    nk_handle.member("userdata", "")
-    nullable..nk_draw_begin.member("draw_begin", "")
-    nullable..nk_draw_end.member("draw_end", "")
+    nk_handle("userdata", "")
+    nullable..nk_draw_begin("draw_begin", "")
+    nullable..nk_draw_end("draw_end", "")
 }
 
 val nk_style_slider = struct(Module.NUKLEAR, "NkStyleSlider", nativeName = "struct nk_style_slider") {
     /* background */
-    nk_style_item.member("normal", "")
-    nk_style_item.member("hover", "")
-    nk_style_item.member("active", "")
-    nk_color.member("border_color", "")
+    nk_style_item("normal", "")
+    nk_style_item("hover", "")
+    nk_style_item("active", "")
+    nk_color("border_color", "")
 
     /* background bar */
-    nk_color.member("bar_normal", "")
-    nk_color.member("bar_hover", "")
-    nk_color.member("bar_active", "")
-    nk_color.member("bar_filled", "")
+    nk_color("bar_normal", "")
+    nk_color("bar_hover", "")
+    nk_color("bar_active", "")
+    nk_color("bar_filled", "")
 
     /* cursor */
-    nk_style_item.member("cursor_normal", "")
-    nk_style_item.member("cursor_hover", "")
-    nk_style_item.member("cursor_active", "")
+    nk_style_item("cursor_normal", "")
+    nk_style_item("cursor_hover", "")
+    nk_style_item("cursor_active", "")
 
     /* properties */
-    float.member("border", "")
-    float.member("rounding", "")
-    float.member("bar_height", "")
-    nk_vec2.member("padding", "")
-    nk_vec2.member("spacing", "")
-    nk_vec2.member("cursor_size", "")
+    float("border", "")
+    float("rounding", "")
+    float("bar_height", "")
+    nk_vec2("padding", "")
+    nk_vec2("spacing", "")
+    nk_vec2("cursor_size", "")
 
     /* optional buttons */
-    int.member("show_buttons", "")
-    nk_style_button.member("inc_button", "")
-    nk_style_button.member("dec_button", "")
-    nk_symbol_type.member("inc_symbol", "").links("SYMBOL_\\w+")
-    nk_symbol_type.member("dec_symbol", "see {@code inc_symbol}")
+    int("show_buttons", "")
+    nk_style_button("inc_button", "")
+    nk_style_button("dec_button", "")
+    nk_symbol_type("inc_symbol", "").links("SYMBOL_\\w+")
+    nk_symbol_type("dec_symbol", "see {@code inc_symbol}")
 
     /* optional user callbacks */
-    nk_handle.member("userdata", "")
-    nullable..nk_draw_begin.member("draw_begin", "")
-    nullable..nk_draw_end.member("draw_end", "")
+    nk_handle("userdata", "")
+    nullable..nk_draw_begin("draw_begin", "")
+    nullable..nk_draw_end("draw_end", "")
 }
 
 val nk_style_progress = struct(Module.NUKLEAR, "NkStyleProgress", nativeName = "struct nk_style_progress") {
     /* background */
-    nk_style_item.member("normal", "")
-    nk_style_item.member("hover", "")
-    nk_style_item.member("active", "")
-    nk_color.member("border_color", "")
+    nk_style_item("normal", "")
+    nk_style_item("hover", "")
+    nk_style_item("active", "")
+    nk_color("border_color", "")
 
     /* cursor */
-    nk_style_item.member("cursor_normal", "")
-    nk_style_item.member("cursor_hover", "")
-    nk_style_item.member("cursor_active", "")
-    nk_color.member("cursor_border_color", "")
+    nk_style_item("cursor_normal", "")
+    nk_style_item("cursor_hover", "")
+    nk_style_item("cursor_active", "")
+    nk_color("cursor_border_color", "")
 
     /* properties */
-    float.member("rounding", "")
-    float.member("border", "")
-    float.member("cursor_border", "")
-    float.member("cursor_rounding", "")
-    nk_vec2.member("padding", "")
+    float("rounding", "")
+    float("border", "")
+    float("cursor_border", "")
+    float("cursor_rounding", "")
+    nk_vec2("padding", "")
 
     /* optional user callbacks */
-    nk_handle.member("userdata", "")
-    nullable..nk_draw_begin.member("draw_begin", "")
-    nullable..nk_draw_end.member("draw_end", "")
+    nk_handle("userdata", "")
+    nullable..nk_draw_begin("draw_begin", "")
+    nullable..nk_draw_end("draw_end", "")
 }
 
 val nk_style_scrollbar = struct(Module.NUKLEAR, "NkStyleScrollbar", nativeName = "struct nk_style_scrollbar") {
     /* background */
-    nk_style_item.member("normal", "")
-    nk_style_item.member("hover", "")
-    nk_style_item.member("active", "")
-    nk_color.member("border_color", "")
+    nk_style_item("normal", "")
+    nk_style_item("hover", "")
+    nk_style_item("active", "")
+    nk_color("border_color", "")
 
     /* cursor */
-    nk_style_item.member("cursor_normal", "")
-    nk_style_item.member("cursor_hover", "")
-    nk_style_item.member("cursor_active", "")
-    nk_color.member("cursor_border_color", "")
+    nk_style_item("cursor_normal", "")
+    nk_style_item("cursor_hover", "")
+    nk_style_item("cursor_active", "")
+    nk_color("cursor_border_color", "")
 
     /* properties */
-    float.member("border", "")
-    float.member("rounding", "")
-    float.member("border_cursor", "")
-    float.member("rounding_cursor", "")
-    nk_vec2.member("padding", "")
+    float("border", "")
+    float("rounding", "")
+    float("border_cursor", "")
+    float("rounding_cursor", "")
+    nk_vec2("padding", "")
 
     /* optional buttons */
-    int.member("show_buttons", "")
-    nk_style_button.member("inc_button", "")
-    nk_style_button.member("dec_button", "")
-    nk_symbol_type.member("inc_symbol", "").links("SYMBOL_\\w+")
-    nk_symbol_type.member("dec_symbol", "see {@code inc_symbol}")
+    int("show_buttons", "")
+    nk_style_button("inc_button", "")
+    nk_style_button("dec_button", "")
+    nk_symbol_type("inc_symbol", "").links("SYMBOL_\\w+")
+    nk_symbol_type("dec_symbol", "see {@code inc_symbol}")
 
     /* optional user callbacks */
-    nk_handle.member("userdata", "")
-    nullable..nk_draw_begin.member("draw_begin", "")
-    nullable..nk_draw_end.member("draw_end", "")
+    nk_handle("userdata", "")
+    nullable..nk_draw_begin("draw_begin", "")
+    nullable..nk_draw_end("draw_end", "")
 }
 
 val nk_style_edit = struct(Module.NUKLEAR, "NkStyleEdit", nativeName = "struct nk_style_edit") {
     /* background */
-    nk_style_item.member("normal", "")
-    nk_style_item.member("hover", "")
-    nk_style_item.member("active", "")
-    nk_color.member("border_color", "")
-    nk_style_scrollbar.member("scrollbar", "")
+    nk_style_item("normal", "")
+    nk_style_item("hover", "")
+    nk_style_item("active", "")
+    nk_color("border_color", "")
+    nk_style_scrollbar("scrollbar", "")
 
     /* cursor  */
-    nk_color.member("cursor_normal", "")
-    nk_color.member("cursor_hover", "")
-    nk_color.member("cursor_text_normal", "")
-    nk_color.member("cursor_text_hover", "")
+    nk_color("cursor_normal", "")
+    nk_color("cursor_hover", "")
+    nk_color("cursor_text_normal", "")
+    nk_color("cursor_text_hover", "")
 
     /* text (unselected) */
-    nk_color.member("text_normal", "")
-    nk_color.member("text_hover", "")
-    nk_color.member("text_active", "")
+    nk_color("text_normal", "")
+    nk_color("text_hover", "")
+    nk_color("text_active", "")
 
     /* text (selected) */
-    nk_color.member("selected_normal", "")
-    nk_color.member("selected_hover", "")
-    nk_color.member("selected_text_normal", "")
-    nk_color.member("selected_text_hover", "")
+    nk_color("selected_normal", "")
+    nk_color("selected_hover", "")
+    nk_color("selected_text_normal", "")
+    nk_color("selected_text_hover", "")
 
     /* properties */
-    float.member("border", "")
-    float.member("rounding", "")
-    float.member("cursor_size", "")
-    nk_vec2.member("scrollbar_size", "")
-    nk_vec2.member("padding", "")
-    float.member("row_padding", "")
+    float("border", "")
+    float("rounding", "")
+    float("cursor_size", "")
+    nk_vec2("scrollbar_size", "")
+    nk_vec2("padding", "")
+    float("row_padding", "")
 }
 
 val nk_style_property = struct(Module.NUKLEAR, "NkStyleProperty", nativeName = "struct nk_style_property") {
     /* background */
-    nk_style_item.member("normal", "")
-    nk_style_item.member("hover", "")
-    nk_style_item.member("active", "")
-    nk_color.member("border_color", "")
+    nk_style_item("normal", "")
+    nk_style_item("hover", "")
+    nk_style_item("active", "")
+    nk_color("border_color", "")
 
     /* text */
-    nk_color.member("label_normal", "")
-    nk_color.member("label_hover", "")
-    nk_color.member("label_active", "")
+    nk_color("label_normal", "")
+    nk_color("label_hover", "")
+    nk_color("label_active", "")
 
     /* symbols */
-    nk_symbol_type.member("sym_left", "").links("SYMBOL_\\w+")
-    nk_symbol_type.member("sym_right", "see {@code sym_left}")
+    nk_symbol_type("sym_left", "").links("SYMBOL_\\w+")
+    nk_symbol_type("sym_right", "see {@code sym_left}")
 
     /* properties */
-    float.member("border", "")
-    float.member("rounding", "")
-    nk_vec2.member("padding", "")
+    float("border", "")
+    float("rounding", "")
+    nk_vec2("padding", "")
 
-    nk_style_edit.member("edit", "")
-    nk_style_button.member("inc_button", "")
-    nk_style_button.member("dec_button", "")
+    nk_style_edit("edit", "")
+    nk_style_button("inc_button", "")
+    nk_style_button("dec_button", "")
 
     /* optional user callbacks */
-    nk_handle.member("userdata", "")
-    nullable..nk_draw_begin.member("draw_begin", "")
-    nullable..nk_draw_end.member("draw_end", "")
+    nk_handle("userdata", "")
+    nullable..nk_draw_begin("draw_begin", "")
+    nullable..nk_draw_end("draw_end", "")
 }
 
 val nk_style_chart = struct(Module.NUKLEAR, "NkStyleChart", nativeName = "struct nk_style_chart") {
     /* colors */
-    nk_style_item.member("background", "")
-    nk_color.member("border_color", "")
-    nk_color.member("selected_color", "")
-    nk_color.member("color", "")
+    nk_style_item("background", "")
+    nk_color("border_color", "")
+    nk_color("selected_color", "")
+    nk_color("color", "")
 
     /* properties */
-    float.member("border", "")
-    float.member("rounding", "")
-    nk_vec2.member("padding", "")
+    float("border", "")
+    float("rounding", "")
+    nk_vec2("padding", "")
 }
 
 val nk_style_combo = struct(Module.NUKLEAR, "NkStyleCombo", nativeName = "struct nk_style_combo") {
     /* background */
-    nk_style_item.member("normal", "")
-    nk_style_item.member("hover", "")
-    nk_style_item.member("active", "")
-    nk_color.member("border_color", "")
+    nk_style_item("normal", "")
+    nk_style_item("hover", "")
+    nk_style_item("active", "")
+    nk_color("border_color", "")
 
     /* label */
-    nk_color.member("label_normal", "")
-    nk_color.member("label_hover", "")
-    nk_color.member("label_active", "")
+    nk_color("label_normal", "")
+    nk_color("label_hover", "")
+    nk_color("label_active", "")
 
     /* symbol */
-    nk_color.member("symbol_normal", "")
-    nk_color.member("symbol_hover", "")
-    nk_color.member("symbol_active", "")
+    nk_color("symbol_normal", "")
+    nk_color("symbol_hover", "")
+    nk_color("symbol_active", "")
 
     /* button */
-    nk_style_button.member("button", "")
-    nk_symbol_type.member("sym_normal", "")
-    nk_symbol_type.member("sym_hover", "")
-    nk_symbol_type.member("sym_active", "")
+    nk_style_button("button", "")
+    nk_symbol_type("sym_normal", "")
+    nk_symbol_type("sym_hover", "")
+    nk_symbol_type("sym_active", "")
 
     /* properties */
-    float.member("border", "")
-    float.member("rounding", "")
-    nk_vec2.member("content_padding", "")
-    nk_vec2.member("button_padding", "")
-    nk_vec2.member("spacing", "")
+    float("border", "")
+    float("rounding", "")
+    nk_vec2("content_padding", "")
+    nk_vec2("button_padding", "")
+    nk_vec2("spacing", "")
 }
 
 val nk_style_tab = struct(Module.NUKLEAR, "NkStyleTab", nativeName = "struct nk_style_tab") {
     /* background */
-    nk_style_item.member("background", "")
-    nk_color.member("border_color", "")
-    nk_color.member("text", "")
+    nk_style_item("background", "")
+    nk_color("border_color", "")
+    nk_color("text", "")
 
     /* button */
-    nk_style_button.member("tab_maximize_button", "")
-    nk_style_button.member("tab_minimize_button", "")
-    nk_style_button.member("node_maximize_button", "")
-    nk_style_button.member("node_minimize_button", "")
-    nk_symbol_type.member("sym_minimize", "")
-    nk_symbol_type.member("sym_maximize", "")
+    nk_style_button("tab_maximize_button", "")
+    nk_style_button("tab_minimize_button", "")
+    nk_style_button("node_maximize_button", "")
+    nk_style_button("node_minimize_button", "")
+    nk_symbol_type("sym_minimize", "")
+    nk_symbol_type("sym_maximize", "")
 
     /* properties */
-    float.member("border", "")
-    float.member("rounding", "")
-    float.member("indent", "")
-    nk_vec2.member("padding", "")
-    nk_vec2.member("spacing", "")
+    float("border", "")
+    float("rounding", "")
+    float("indent", "")
+    nk_vec2("padding", "")
+    nk_vec2("spacing", "")
 }
 
 val nk_style_window_header = struct(Module.NUKLEAR, "NkStyleWindowHeader", nativeName = "struct nk_style_window_header") {
     /* background */
-    nk_style_item.member("normal", "")
-    nk_style_item.member("hover", "")
-    nk_style_item.member("active", "")
+    nk_style_item("normal", "")
+    nk_style_item("hover", "")
+    nk_style_item("active", "")
 
     /* button */
-    nk_style_button.member("close_button", "")
-    nk_style_button.member("minimize_button", "")
-    nk_symbol_type.member("close_symbol", "")
-    nk_symbol_type.member("minimize_symbol", "")
-    nk_symbol_type.member("maximize_symbol", "")
+    nk_style_button("close_button", "")
+    nk_style_button("minimize_button", "")
+    nk_symbol_type("close_symbol", "")
+    nk_symbol_type("minimize_symbol", "")
+    nk_symbol_type("maximize_symbol", "")
 
     /* title */
-    nk_color.member("label_normal", "")
-    nk_color.member("label_hover", "")
-    nk_color.member("label_active", "")
+    nk_color("label_normal", "")
+    nk_color("label_hover", "")
+    nk_color("label_active", "")
 
     /* properties */
-    nk_style_header_align.member("align", "").links("HEADER_\\w+")
-    nk_vec2.member("padding", "")
-    nk_vec2.member("label_padding", "")
-    nk_vec2.member("spacing", "")
+    nk_style_header_align("align", "").links("HEADER_\\w+")
+    nk_vec2("padding", "")
+    nk_vec2("label_padding", "")
+    nk_vec2("spacing", "")
 }
 
 val nk_style_window = struct(Module.NUKLEAR, "NkStyleWindow", nativeName = "struct nk_style_window") {
-    nk_style_window_header.member("header", "")
-    nk_style_item.member("fixed_background", "")
-    nk_color.member("background", "")
+    nk_style_window_header("header", "")
+    nk_style_item("fixed_background", "")
+    nk_color("background", "")
 
-    nk_color.member("border_color", "")
-    nk_color.member("popup_border_color", "")
-    nk_color.member("combo_border_color", "")
-    nk_color.member("contextual_border_color", "")
-    nk_color.member("menu_border_color", "")
-    nk_color.member("group_border_color", "")
-    nk_color.member("tooltip_border_color", "")
-    nk_style_item.member("scaler", "")
+    nk_color("border_color", "")
+    nk_color("popup_border_color", "")
+    nk_color("combo_border_color", "")
+    nk_color("contextual_border_color", "")
+    nk_color("menu_border_color", "")
+    nk_color("group_border_color", "")
+    nk_color("tooltip_border_color", "")
+    nk_style_item("scaler", "")
 
-    float.member("border", "")
-    float.member("combo_border", "")
-    float.member("contextual_border", "")
-    float.member("menu_border", "")
-    float.member("group_border", "")
-    float.member("tooltip_border", "")
-    float.member("popup_border", "")
-    float.member("min_row_height_padding", "")
+    float("border", "")
+    float("combo_border", "")
+    float("contextual_border", "")
+    float("menu_border", "")
+    float("group_border", "")
+    float("tooltip_border", "")
+    float("popup_border", "")
+    float("min_row_height_padding", "")
 
-    float.member("rounding", "")
-    nk_vec2.member("spacing", "")
-    nk_vec2.member("scrollbar_size", "")
-    nk_vec2.member("min_size", "")
+    float("rounding", "")
+    nk_vec2("spacing", "")
+    nk_vec2("scrollbar_size", "")
+    nk_vec2("min_size", "")
 
-    nk_vec2.member("padding", "")
-    nk_vec2.member("group_padding", "")
-    nk_vec2.member("popup_padding", "")
-    nk_vec2.member("combo_padding", "")
-    nk_vec2.member("contextual_padding", "")
-    nk_vec2.member("menu_padding", "")
-    nk_vec2.member("tooltip_padding", "")
+    nk_vec2("padding", "")
+    nk_vec2("group_padding", "")
+    nk_vec2("popup_padding", "")
+    nk_vec2("combo_padding", "")
+    nk_vec2("contextual_padding", "")
+    nk_vec2("menu_padding", "")
+    nk_vec2("tooltip_padding", "")
 }
 
 val nk_style = struct(Module.NUKLEAR, "NkStyle", nativeName = "struct nk_style") {
     javaImport("static org.lwjgl.nuklear.Nuklear.NK_CURSOR_COUNT")
 
-    nullable..nk_user_font.p.member("font", "")
-    nullable..nk_cursor.p.member("cursors", "")["NK_CURSOR_COUNT"]
-    nullable..nk_cursor.p.member("cursor_active", "")
-    nullable..nk_cursor.p.member("cursor_last", "")
-    intb.member("cursor_visible", "")
+    nullable..nk_user_font.p("font", "")
+    nullable..nk_cursor.p("cursors", "")["NK_CURSOR_COUNT"]
+    nullable..nk_cursor.p("cursor_active", "")
+    nullable..nk_cursor.p("cursor_last", "")
+    intb("cursor_visible", "")
 
-    nk_style_text.member("text", "")
-    nk_style_button.member("button", "")
-    nk_style_button.member("contextual_button", "")
-    nk_style_button.member("menu_button", "")
-    nk_style_toggle.member("option", "")
-    nk_style_toggle.member("checkbox", "")
-    nk_style_selectable.member("selectable", "")
-    nk_style_slider.member("slider", "")
-    nk_style_progress.member("progress", "")
-    nk_style_property.member("property", "")
-    nk_style_edit.member("edit", "")
-    nk_style_chart.member("chart", "")
-    nk_style_scrollbar.member("scrollh", "")
-    nk_style_scrollbar.member("scrollv", "")
-    nk_style_tab.member("tab", "")
-    nk_style_combo.member("combo", "")
-    nk_style_window.member("window", "")
+    nk_style_text("text", "")
+    nk_style_button("button", "")
+    nk_style_button("contextual_button", "")
+    nk_style_button("menu_button", "")
+    nk_style_toggle("option", "")
+    nk_style_toggle("checkbox", "")
+    nk_style_selectable("selectable", "")
+    nk_style_slider("slider", "")
+    nk_style_progress("progress", "")
+    nk_style_property("property", "")
+    nk_style_edit("edit", "")
+    nk_style_chart("chart", "")
+    nk_style_scrollbar("scrollh", "")
+    nk_style_scrollbar("scrollv", "")
+    nk_style_tab("tab", "")
+    nk_style_combo("combo", "")
+    nk_style_window("window", "")
 }
 
 // PANEL
 
 val nk_chart_slot = struct(Module.NUKLEAR, "NkChartSlot", nativeName = "struct nk_chart_slot", mutable = false) {
-    nk_chart_type.member("type", "")
-    nk_color.member("color", "")
-    nk_color.member("highlight", "")
-    float.member("min", "")
-    float.member("max", "")
-    float.member("range", "")
-    int.member("count", "")
-    nk_vec2.member("last", "")
-    int.member("index", "")
+    nk_chart_type("type", "")
+    nk_color("color", "")
+    nk_color("highlight", "")
+    float("min", "")
+    float("max", "")
+    float("range", "")
+    int("count", "")
+    nk_vec2("last", "")
+    int("index", "")
 }
 
 const val NK_CHART_MAX_SLOT = 4
 val nk_chart = struct(Module.NUKLEAR, "NkChart", nativeName = "struct nk_chart", mutable = false) {
-    int.member("slot", "")
-    float.member("x", "")
-    float.member("y", "")
-    float.member("w", "")
-    float.member("h", "")
-    nk_chart_slot.member("slots", "")[NK_CHART_MAX_SLOT]
+    int("slot", "")
+    float("x", "")
+    float("y", "")
+    float("w", "")
+    float("h", "")
+    nk_chart_slot("slots", "")[NK_CHART_MAX_SLOT]
 }
 
 const val NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS = 16
 val nk_row_layout = struct(Module.NUKLEAR, "NkRowLayout", nativeName = "struct nk_row_layout", mutable = false) {
-    nk_panel_row_layout_type.member("type", "").links("LAYOUT_\\w+")
-    int.member("index", "")
-    float.member("height", "")
-    float.member("min_height", "")
-    int.member("columns", "")
-    float.const.p.member("ratio", "")
-    float.member("item_width", "")
-    float.member("item_height", "")
-    float.member("item_offset", "")
-    float.member("filled", "")
-    nk_rect.member("item", "")
-    int.member("tree_depth", "")
-    float.member("templates", "")[NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS]
+    nk_panel_row_layout_type("type", "").links("LAYOUT_\\w+")
+    int("index", "")
+    float("height", "")
+    float("min_height", "")
+    int("columns", "")
+    float.const.p("ratio", "")
+    float("item_width", "")
+    float("item_height", "")
+    float("item_offset", "")
+    float("filled", "")
+    nk_rect("item", "")
+    int("tree_depth", "")
+    float("templates", "")[NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS]
 }
 
 val nk_popup_buffer = struct(Module.NUKLEAR, "NkPopupBuffer", nativeName = "struct nk_popup_buffer", mutable = false) {
-    nk_size.member("begin", "")
-    nk_size.member("parent", "")
-    nk_size.member("last", "")
-    nk_size.member("end", "")
-    int.member("active", "")
+    nk_size("begin", "")
+    nk_size("parent", "")
+    nk_size("last", "")
+    nk_size("end", "")
+    int("active", "")
 }
 
 val nk_menu_state = struct(Module.NUKLEAR, "NkMenuState", nativeName = "struct nk_menu_state", mutable = false) {
-    float.member("x", "")
-    float.member("y", "")
-    float.member("w", "")
-    float.member("h", "")
-    nk_scroll.member("offset", "")
+    float("x", "")
+    float("y", "")
+    float("w", "")
+    float("h", "")
+    nk_scroll("offset", "")
 }
 
 private val _nk_panel = struct(Module.NUKLEAR, "NkPanel", nativeName = "struct nk_panel")
 val nk_panel = struct(Module.NUKLEAR, "NkPanel", nativeName = "struct nk_panel", mutable = false) {
-    nk_panel_type.member("type", "").links("PANEL_\\w+")
-    nk_flags.member("flags", "")
-    nk_rect.member("bounds", "")
-    nk_uint.p.member("offset_x", "")
-    nk_uint.p.member("offset_y", "")
-    float.member("at_x", "")
-    float.member("at_y", "")
-    float.member("max_x", "")
-    float.member("footer_height", "")
-    float.member("header_height", "")
-    float.member("border", "")
-    unsigned_int.member("has_scrolling", "")
-    nk_rect.member("clip", "")
-    nk_menu_state.member("menu", "")
-    nk_row_layout.member("row", "")
-    nk_chart.member("chart", "")
-    nk_command_buffer.p.member("buffer", "")
-    _nk_panel.p.member("parent", "")
+    nk_panel_type("type", "").links("PANEL_\\w+")
+    nk_flags("flags", "")
+    nk_rect("bounds", "")
+    nk_uint.p("offset_x", "")
+    nk_uint.p("offset_y", "")
+    float("at_x", "")
+    float("at_y", "")
+    float("max_x", "")
+    float("footer_height", "")
+    float("header_height", "")
+    float("border", "")
+    unsigned_int("has_scrolling", "")
+    nk_rect("clip", "")
+    nk_menu_state("menu", "")
+    nk_row_layout("row", "")
+    nk_chart("chart", "")
+    nk_command_buffer.p("buffer", "")
+    _nk_panel.p("parent", "")
 }
 
 // WINDOW
 
 private val _nk_window = struct(Module.NUKLEAR, "NkWindow", nativeName = "struct nk_window")
 val nk_popup_state = struct(Module.NUKLEAR, "NkPopupState", nativeName = "struct nk_popup_state", mutable = false) {
-    _nk_window.p.member("win", "")
-    nk_panel_type.member("type", "").links("PANEL_\\w+")
-    nk_popup_buffer.member("buf", "")
-    nk_hash.member("name", "")
-    int.member("active", "")
-    unsigned.member("combo_count", "")
-    unsigned.member("con_count", "")
-    unsigned.member("con_old", "")
-    unsigned.member("active_con", "")
-    nk_rect.member("header", "")
+    _nk_window.p("win", "")
+    nk_panel_type("type", "").links("PANEL_\\w+")
+    nk_popup_buffer("buf", "")
+    nk_hash("name", "")
+    int("active", "")
+    unsigned("combo_count", "")
+    unsigned("con_count", "")
+    unsigned("con_old", "")
+    unsigned("active_con", "")
+    nk_rect("header", "")
 }
 
 val nk_edit_state = struct(Module.NUKLEAR, "NkEditState", nativeName = "struct nk_edit_state", mutable = false) {
-    nk_hash.member("name", "")
-    unsigned_int.member("seq", "")
-    unsigned_int.member("old", "")
-    int.member("active", "")
-    int.member("prev", "")
-    int.member("cursor", "")
-    int.member("sel_start", "")
-    int.member("sel_end", "")
-    nk_scroll.member("scrollbar", "")
-    unsigned_char.member("mode", "")
-    bool.member("single_line", "")
+    nk_hash("name", "")
+    unsigned_int("seq", "")
+    unsigned_int("old", "")
+    int("active", "")
+    int("prev", "")
+    int("cursor", "")
+    int("sel_start", "")
+    int("sel_end", "")
+    nk_scroll("scrollbar", "")
+    unsigned_char("mode", "")
+    bool("single_line", "")
 }
 
 val nk_property_state = struct(Module.NUKLEAR, "NkPropertyState", nativeName = "struct nk_property_state", mutable = false) {
     javaImport("static org.lwjgl.nuklear.Nuklear.NK_MAX_NUMBER_BUFFER")
 
-    int.member("active", "")
-    int.member("prev", "")
-    char.member("buffer", "")["NK_MAX_NUMBER_BUFFER"]
-    int.member("length", "")
-    int.member("cursor", "")
-    int.member("select_start", "")
-    int.member("select_end", "")
-    nk_hash.member("name", "")
-    unsigned_int.member("seq", "")
-    unsigned_int.member("old", "")
-    int.member("state", "")
+    int("active", "")
+    int("prev", "")
+    char("buffer", "")["NK_MAX_NUMBER_BUFFER"]
+    int("length", "")
+    int("cursor", "")
+    int("select_start", "")
+    int("select_end", "")
+    nk_hash("name", "")
+    unsigned_int("seq", "")
+    unsigned_int("old", "")
+    int("state", "")
 }
 
 const val NK_WINDOW_MAX_NAME = 64
 val nk_window = struct(Module.NUKLEAR, "NkWindow", nativeName = "struct nk_window", mutable = false) {
-    unsigned_int.member("seq", "")
-    nk_hash.member("name", "")
-    charUTF8.member("name_string", "")[NK_WINDOW_MAX_NAME]
-    nk_flags.member("flags", "")
-    nk_rect.member("bounds", "")
-    nk_scroll.member("scrollbar", "")
-    nk_command_buffer.member("buffer", "")
-    nk_panel.p.member("layout", "")
-    float.member("scrollbar_hiding_timer", "")
+    unsigned_int("seq", "")
+    nk_hash("name", "")
+    charUTF8("name_string", "")[NK_WINDOW_MAX_NAME]
+    nk_flags("flags", "")
+    nk_rect("bounds", "")
+    nk_scroll("scrollbar", "")
+    nk_command_buffer("buffer", "")
+    nk_panel.p("layout", "")
+    float("scrollbar_hiding_timer", "")
 
     /* persistent widget state */
-    nk_property_state.member("property", "")
-    nk_popup_state.member("popup", "")
-    nk_edit_state.member("edit", "")
-    unsigned_int.member("scrolled", "")
+    nk_property_state("property", "")
+    nk_popup_state("popup", "")
+    nk_edit_state("edit", "")
+    unsigned_int("scrolled", "")
 
-    "struct nk_table".opaque.p.member("tables", "") // TODO: private API?
-    unsigned_int.member("table_count", "")
+    "struct nk_table".opaque.p("tables", "") // TODO: private API?
+    unsigned_int("table_count", "")
 
     /* window list hooks */
-    _nk_window.p.member("next", "")
-    _nk_window.p.member("prev", "")
-    _nk_window.p.member("parent", "")
+    _nk_window.p("next", "")
+    _nk_window.p("prev", "")
+    _nk_window.p("parent", "")
 }
 
 val nk_pool = struct(Module.NUKLEAR, "NkPool", nativeName = "struct nk_pool", mutable = false) {
     access = Access.INTERNAL
 
-    nk_allocator.member("alloc", "")
-    nk_allocation_type.member("type", "")
-    unsigned_int.member("page_count", "")
-    "struct nk_page".opaque.p.member("pages", "")
-    "struct nk_page_element".opaque.p.member("freelist", "")
-    unsigned.member("capacity", "")
-    nk_size.member("size", "")
-    nk_size.member("cap", "")
+    nk_allocator("alloc", "")
+    nk_allocation_type("type", "")
+    unsigned_int("page_count", "")
+    "struct nk_page".opaque.p("pages", "")
+    "struct nk_page_element".opaque.p("freelist", "")
+    unsigned("capacity", "")
+    nk_size("size", "")
+    nk_size("cap", "")
 }
 
 fun NK_CONFIGURATION_STACK(address: PointerType<*>, old_value: DataType, javaName: String, name: String, size: Int): StructType {
@@ -1283,67 +1283,67 @@ fun NK_CONFIGURATION_STACK(address: PointerType<*>, old_value: DataType, javaNam
     val element = struct(Module.NUKLEAR, "NkConfigStack${javaName}Element", nativeName = "struct nk_config_stack_${name}_element", mutable = false) {
         access = Access.INTERNAL
 
-        address.member("pValues", "") // address
-        old_value.member("old_value", "")
+        address("pValues", "") // address
+        old_value("old_value", "")
     }
 
     return struct(Module.NUKLEAR, "NkConfigStack$javaName", nativeName = "struct nk_config_stack_$name", mutable = false) {
         access = Access.INTERNAL
 
-        int.member("head", "")
-        element.member("elements", "")[size]
+        int("head", "")
+        element("elements", "")[size]
     }
 }
 
 val nk_configuration_stacks = struct(Module.NUKLEAR, "NkConfigurationStacks", nativeName = "struct nk_configuration_stacks", mutable = false, skipBuffer = true) {
     access = Access.INTERNAL
 
-    NK_CONFIGURATION_STACK(nk_style_item.p, nk_style_item, "StyleItem", "style_item", size = 16).member("style_items", "")
-    NK_CONFIGURATION_STACK(float.p, float, "Float", "float", size = 32).member("floats", "")
-    NK_CONFIGURATION_STACK(nk_vec2.p, nk_vec2, "Vec2", "vec2", size = 16).member("vectors", "")
-    NK_CONFIGURATION_STACK(nk_flags.p, nk_flags, "Flags", "flags", size = 32).member("flags", "")
-    NK_CONFIGURATION_STACK(nk_color.p, nk_color, "Color", "color", size = 32).member("colors", "")
-    NK_CONFIGURATION_STACK(nk_user_font.p.p, nk_user_font.p, "UserFont", "user_font", size = 8).member("fonts", "")
-    NK_CONFIGURATION_STACK(nk_button_behavior.p, nk_button_behavior, "ButtonBehavior", "button_behavior", size = 8).member("button_behaviors", "")
+    NK_CONFIGURATION_STACK(nk_style_item.p, nk_style_item, "StyleItem", "style_item", size = 16)("style_items", "")
+    NK_CONFIGURATION_STACK(float.p, float, "Float", "float", size = 32)("floats", "")
+    NK_CONFIGURATION_STACK(nk_vec2.p, nk_vec2, "Vec2", "vec2", size = 16)("vectors", "")
+    NK_CONFIGURATION_STACK(nk_flags.p, nk_flags, "Flags", "flags", size = 32)("flags", "")
+    NK_CONFIGURATION_STACK(nk_color.p, nk_color, "Color", "color", size = 32)("colors", "")
+    NK_CONFIGURATION_STACK(nk_user_font.p.p, nk_user_font.p, "UserFont", "user_font", size = 8)("fonts", "")
+    NK_CONFIGURATION_STACK(nk_button_behavior.p, nk_button_behavior, "ButtonBehavior", "button_behavior", size = 8)("button_behaviors", "")
 }
 
 val nk_context = struct(Module.NUKLEAR, "NkContext", nativeName = "struct nk_context", mutable = false, skipBuffer = true) {
     documentation = ""
 
 /* public: can be accessed freely */
-    nk_input.member("input", "")
-    nk_style.member("style", "")
-    nk_buffer.member("memory", "")
-    nk_clipboard.member("clip", "")
-    nk_flags.member("last_widget_state", "")
-    nk_button_behavior.member("button_behavior", "")
-    nk_configuration_stacks.member("stacks", "")
-    float.member("delta_time_seconds", "")
+    nk_input("input", "")
+    nk_style("style", "")
+    nk_buffer("memory", "")
+    nk_clipboard("clip", "")
+    nk_flags("last_widget_state", "")
+    nk_button_behavior("button_behavior", "")
+    nk_configuration_stacks("stacks", "")
+    float("delta_time_seconds", "")
 
 /* private:
     should only be accessed if you
     know what you are doing */
-    nk_draw_list.member("draw_list", "").private()
-    nk_handle.member("userdata", "").private()
+    nk_draw_list("draw_list", "").private()
+    nk_handle("userdata", "").private()
 
     /* text editor objects are quite big because of an internal
      * undo/redo stack. Therefore does not make sense to have one for
      * each window for temporary use cases, so I only provide *one* instance
      * for all windows. This works because the content is cleared anyway */
-    nk_text_edit.member("text_edit", "").private()
-    nk_command_buffer.member("overlay", "").private()
+    nk_text_edit("text_edit", "").private()
+    nk_command_buffer("overlay", "").private()
 
     /* windows */
-    int.member("build", "").private()
-    intb.member("use_pool", "").private()
-    nk_pool.member("pool", "").private()
-    (nullable..nk_window.p.member("begin", "")).private()
-    (nullable..nk_window.p.member("end", "")).private()
-    (nullable..nk_window.p.member("active", "")).private()
-    (nullable..nk_window.p.member("current", "")).private()
-    (nullable.."struct nk_page_element".opaque.p.member("freelist", "")).private()
-    unsigned_int.member("count", "").private()
-    unsigned_int.member("seq", "").private()
+    int("build", "").private()
+    intb("use_pool", "").private()
+    nk_pool("pool", "").private()
+    (nullable..nk_window.p("begin", "")).private()
+    (nullable..nk_window.p("end", "")).private()
+    (nullable..nk_window.p("active", "")).private()
+    (nullable..nk_window.p("current", "")).private()
+    (nullable.."struct nk_page_element".opaque.p("freelist", "")).private()
+    unsigned_int("count", "").private()
+    unsigned_int("seq", "").private()
 }
 
 val nk_value_getter = Module.NUKLEAR.callback {

@@ -27,10 +27,10 @@ val par_shapes_mesh = struct(Module.PAR, "ParShapesMesh", nativeName = "par_shap
         <b>LWJGL note</b>: in the default build, {@code PAR_SHAPES_T} is {@code uint32_t}.
         """
 
-    float.p.member("points", "a flat list of 3-tuples (X Y Z X Y Z...) for the vertex positions")
-    int.member("npoints", "the number of points")
-    PAR_SHAPES_T.p.member("triangles", "flat list of 3-tuples (I J K I J K...)")
-    int.member("ntriangles", "the number of triangles")
-    nullable..float.p.member("normals", "an optional list of 3-tuples (X Y Z X Y Z...) for the vertex normals")
-    nullable..float.p.member("tcoords", "an optional list of 2-tuples (U V U V U V...) for the vertex texture coordinates")
+    float.p("points", "a flat list of 3-tuples (X Y Z X Y Z...) for the vertex positions")
+    int("npoints", "the number of points")
+    PAR_SHAPES_T.p("triangles", "flat list of 3-tuples (I J K I J K...)")
+    int("ntriangles", "the number of triangles")
+    nullable..float.p("normals", "an optional list of 3-tuples (X Y Z X Y Z...) for the vertex normals")
+    nullable..float.p("tcoords", "an optional list of 2-tuples (U V U V U V...) for the vertex texture coordinates")
 }

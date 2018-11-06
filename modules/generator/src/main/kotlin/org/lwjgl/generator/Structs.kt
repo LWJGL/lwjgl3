@@ -222,7 +222,7 @@ class Struct(
     }
 
     // Plain struct member
-    fun DataType.member(name: String, documentation: String) = add(StructMember(this, name, documentation))
+    operator fun DataType.invoke(name: String, documentation: String) = add(StructMember(this, name, documentation))
 
     // Converts a plain member to an array member
     operator fun StructMember.get(size: Int, validSize: Int = size): StructMember {
@@ -241,20 +241,20 @@ class Struct(
     fun struct(init: Struct.() -> Unit): StructMember {
         val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, false, false, mutable, null, false, false)
         struct.init()
-        return StructType(struct).member(ANONYMOUS, ANONYMOUS)
+        return StructType(struct).invoke(ANONYMOUS, ANONYMOUS)
     }
 
     /** Anonymous nested member union definition. */
     fun union(init: Struct.() -> Unit): StructMember {
         val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, false, false)
         struct.init()
-        return StructType(struct).member(ANONYMOUS, ANONYMOUS)
+        return StructType(struct).invoke(ANONYMOUS, ANONYMOUS)
     }
 
     /** Named nested struct/union. */
-    fun StructMember.member(name: String, documentation: String): StructMember {
+    operator fun StructMember.invoke(name: String, documentation: String): StructMember {
         this@Struct.members.remove(this)
-        return this.nativeType.member(name, documentation)
+        return this.nativeType.invoke(name, documentation)
     }
 
     fun customMethod(method: String) {

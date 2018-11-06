@@ -26,28 +26,28 @@ val XXH64_hash_t = typedef(unsigned_long_long, "XXH32_hash_t")
 val XXH32_state_t = struct(Module.XXHASH, "XXH32State", nativeName = "XXH32_state_t") {
     documentation = "32-bit XXH state for stack allocation. Unstable API."
 
-    unsigned.member("total_len_32", "")
-    unsigned.member("large_len", "")
-    unsigned.member("v1", "")
-    unsigned.member("v2", "")
-    unsigned.member("v3", "")
-    unsigned.member("v4", "")
-    unsigned.member("mem32", "")[4]
-    unsigned.member("memsize", "")
-    unsigned.member("reserved", "")
+    unsigned("total_len_32", "")
+    unsigned("large_len", "")
+    unsigned("v1", "")
+    unsigned("v2", "")
+    unsigned("v3", "")
+    unsigned("v4", "")
+    unsigned("mem32", "")[4]
+    unsigned("memsize", "")
+    unsigned("reserved", "")
 }
 
 val XXH64_state_t = struct(Module.XXHASH, "XXH64State", nativeName = "XXH64_state_t") {
     documentation = "64-bit XXH state for stack allocation. Unstable API."
 
-    unsigned_long_long.member("total_len", "")
-    unsigned_long_long.member("v1", "")
-    unsigned_long_long.member("v2", "")
-    unsigned_long_long.member("v3", "")
-    unsigned_long_long.member("v4", "")
-    unsigned_long_long.member("mem64", "")[4]
-    unsigned.member("memsize", "")
-    unsigned.member("reserved", "")[2]
+    unsigned_long_long("total_len", "")
+    unsigned_long_long("v1", "")
+    unsigned_long_long("v2", "")
+    unsigned_long_long("v3", "")
+    unsigned_long_long("v4", "")
+    unsigned_long_long("mem64", "")[4]
+    unsigned("memsize", "")
+    unsigned("reserved", "")[2]
 }
 
 val XXH_errorcode = "XXH_errorcode".enumType
@@ -55,11 +55,11 @@ val XXH_errorcode = "XXH_errorcode".enumType
 val XXH32_canonical_t = struct(Module.XXHASH, "XXH32Canonical", nativeName = "XXH32_canonical_t", mutable = false) {
     documentation = "32-bit canonical representation."
 
-    unsigned_char.member("digest", "the digest in canonical representation")[4]
+    unsigned_char("digest", "the digest in canonical representation")[4]
 }
 
 val XXH64_canonical_t = struct(Module.XXHASH, "XXH64Canonical", nativeName = "XXH64_canonical_t", mutable = false) {
     documentation = "64-bit canonical representation."
 
-    unsigned_char.member("digest", "the digest in canonical representation")[8]
+    unsigned_char("digest", "the digest in canonical representation")[8]
 }

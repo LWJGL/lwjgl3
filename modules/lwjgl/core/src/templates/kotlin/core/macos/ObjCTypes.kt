@@ -26,16 +26,16 @@ val objc_property_t = "objc_property_t".handle
 val objc_property_attribute_t = struct(Module.CORE_MACOS, "ObjCPropertyAttribute", nativeName = "objc_property_attribute_t") {
     documentation = "Defines a property attribute."
 
-    charUTF8.p.member("name", "the name of the attribute")
-    charUTF8.p.member("value", "the value of the attribute (usually empty)")
+    charUTF8.p("name", "the name of the attribute")
+    charUTF8.p("value", "the value of the attribute (usually empty)")
 }
 
 // Defines a method
 val objc_method_description = struct(Module.CORE_MACOS, "ObjCMethodDescription", nativeName = "struct objc_method_description", mutable = false) {
     documentation = "Defines a method."
 
-    SEL.member("name", "the name of the method at runtime")
-    charUTF8.p.member("types", "the types of the method arguments")
+    SEL("name", "the name of the method at runtime")
+    charUTF8.p("types", "the types of the method arguments")
 }
 
 val EnumerationMutationHandler = Module.CORE_MACOS.callback {

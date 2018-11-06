@@ -44,13 +44,13 @@ val LZ4F_frameInfo_t = struct(Module.LZ4, "LZ4FFrameInfo", nativeName = "LZ4F_fr
 
         Structure must be first init to 0, using {@code memset()}, setting all parameters to default. It's then possible to update selectively some parameter.
         """
-    LZ4F_blockSizeID_t.member("blockSizeID", "{@code 0 == default}").links("max\\d+\\w+")
-    LZ4F_blockMode_t.member("blockMode", "{@code 0 == default}").links("block\\w+")
-    LZ4F_contentChecksum_t.member("contentChecksumFlag", "1: frame terminated with 32-bit checksum of decompressed data; 0: disabled (default) ")
-    LZ4F_frameType_t.member("frameType", "read-only field").links("#frame #skippableFrame")
-    unsigned_long_long.member("contentSize", "size of uncompressed content ; {@code 0 == unknown}")
-    unsigned.member("dictID", "dictionary ID, sent by compressor to help decoder select correct dictionary; 0 == no {@code dictID} provided")
-    LZ4F_blockChecksum_t.member("blockChecksumFlag", "1: each block followed by a checksum of block's compressed data; 0: disabled (default)")
+    LZ4F_blockSizeID_t("blockSizeID", "{@code 0 == default}").links("max\\d+\\w+")
+    LZ4F_blockMode_t("blockMode", "{@code 0 == default}").links("block\\w+")
+    LZ4F_contentChecksum_t("contentChecksumFlag", "1: frame terminated with 32-bit checksum of decompressed data; 0: disabled (default) ")
+    LZ4F_frameType_t("frameType", "read-only field").links("#frame #skippableFrame")
+    unsigned_long_long("contentSize", "size of uncompressed content ; {@code 0 == unknown}")
+    unsigned("dictID", "dictionary ID, sent by compressor to help decoder select correct dictionary; 0 == no {@code dictID} provided")
+    LZ4F_blockChecksum_t("blockChecksumFlag", "1: each block followed by a checksum of block's compressed data; 0: disabled (default)")
 }
 
 val LZ4F_preferences_t = struct(Module.LZ4, "LZ4FPreferences", nativeName = "LZ4F_preferences_t") {
@@ -59,30 +59,30 @@ val LZ4F_preferences_t = struct(Module.LZ4, "LZ4FPreferences", nativeName = "LZ4
         Makes it possible to supply advanced compression instructions to streaming interface. Structure must be first init to 0, using {@code memset()},
         setting all parameters to default. All reserved fields must be set to zero.
         """
-    LZ4F_frameInfo_t.member("frameInfo", "")
-    int.member(
+    LZ4F_frameInfo_t("frameInfo", "")
+    int(
         "compressionLevel",
         "0: default (fast mode); values &gt; #CLEVEL_MAX count as #CLEVEL_MAX; values &gt; 0 trigger \"fast acceleration\""
     )
-    unsigned.member("autoFlush", "1: always flush, reduces usage of internal buffers")
-    unsigned.member("favorDecSpeed", "1: parser favors decompression speed vs compression ratio. Only works for high compression modes (&ge; #CLEVEL_OPT_MIN). Since version 1.8.2.")
-    unsigned.member("reserved", "must be zero for forward compatibility")[3]
+    unsigned("autoFlush", "1: always flush, reduces usage of internal buffers")
+    unsigned("favorDecSpeed", "1: parser favors decompression speed vs compression ratio. Only works for high compression modes (&ge; #CLEVEL_OPT_MIN). Since version 1.8.2.")
+    unsigned("reserved", "must be zero for forward compatibility")[3]
 }
 
 val LZ4F_compressOptions_t = struct(Module.LZ4, "LZ4FCompressOptions", nativeName = "LZ4F_compressOptions_t") {
-    unsigned.member(
+    unsigned(
         "stableSrc",
         "{@code 1 == src} content will remain present on future calls to {@code LZ4F_compress()}; skip copying {@code src} content within {@code tmp} buffer"
     )
-    unsigned.member("reserved", "")[3]
+    unsigned("reserved", "")[3]
 }
 
 val LZ4F_decompressOptions_t = struct(Module.LZ4, "LZ4FDecompressOptions", nativeName = "LZ4F_decompressOptions_t") {
-    unsigned.member(
+    unsigned(
         "stableDst",
         "pledges that last 64KB decompressed data will remain available unmodified. This optimization skips storage operations in tmp buffers."
     )
-    unsigned.member("reserved", "must be set to zero for forward compatibility")[3]
+    unsigned("reserved", "must be set to zero for forward compatibility")[3]
 }
 
 // lz4frame_static.h

@@ -36,22 +36,22 @@ val GLFWwindow = "GLFWwindow".opaque
 val GLFWvidmode = struct(Module.GLFW, "GLFWVidMode", nativeName = "GLFWvidmode", mutable = false) {
     documentation = "Describes a single video mode."
 
-    int.member("width", "the width, in screen coordinates, of the video mode")
-    int.member("height", "the height, in screen coordinates, of the video mode")
-    int.member("redBits", "the bit depth of the red channel of the video mode")
-    int.member("greenBits", "the bit depth of the green channel of the video mode")
-    int.member("blueBits", "the bit depth of the blue channel of the video mode")
-    int.member("refreshRate", "the refresh rate, in Hz, of the video mode")
+    int("width", "the width, in screen coordinates, of the video mode")
+    int("height", "the height, in screen coordinates, of the video mode")
+    int("redBits", "the bit depth of the red channel of the video mode")
+    int("greenBits", "the bit depth of the green channel of the video mode")
+    int("blueBits", "the bit depth of the blue channel of the video mode")
+    int("refreshRate", "the refresh rate, in Hz, of the video mode")
 }
 
 val GLFWgammaramp = struct(Module.GLFW, "GLFWGammaRamp", nativeName = "GLFWgammaramp") {
     documentation = "Describes the gamma ramp for a monitor."
     since = "version 3.0"
 
-    unsigned_short.p.member("red", "an array of values describing the response of the red channel")
-    unsigned_short.p.member("green", "an array of values describing the response of the green channel")
-    unsigned_short.p.member("blue", "an array of values describing the response of the blue channel")
-    AutoSize("red", "green", "blue")..unsigned_int.member("size", "the number of elements in each array")
+    unsigned_short.p("red", "an array of values describing the response of the red channel")
+    unsigned_short.p("green", "an array of values describing the response of the green channel")
+    unsigned_short.p("blue", "an array of values describing the response of the blue channel")
+    AutoSize("red", "green", "blue")..unsigned_int("size", "the number of elements in each array")
 }
 
 val GLFWcursor = "GLFWcursor".opaque
@@ -65,17 +65,17 @@ val GLFWimage = struct(Module.GLFW, "GLFWImage", nativeName = "GLFWimage") {
         """
     since = "version 2.1"
 
-    int.member("width", "the width, in pixels, of this image")
-    int.member("height", "the height, in pixels, of this image")
-    unsigned_char.p.member("pixels", "the pixel data of this image, arranged left-to-right, top-to-bottom")
+    int("width", "the width, in pixels, of this image")
+    int("height", "the height, in pixels, of this image")
+    unsigned_char.p("pixels", "the pixel data of this image, arranged left-to-right, top-to-bottom")
 }
 
 val GLFWgamepadstate = struct(Module.GLFW, "GLFWGamepadState", nativeName = "GLFWgamepadstate") {
     documentation = "Describes the input state of a gamepad."
     since = "version 3.3"
 
-    unsigned_char.member("buttons", "the states of each gamepad button, #PRESS or #RELEASE")[15]
-    float.member("axes", "the states of each gamepad axis, in the range -1.0 to 1.0 inclusive")[6]
+    unsigned_char("buttons", "the states of each gamepad button, #PRESS or #RELEASE")[15]
+    float("axes", "the states of each gamepad axis, in the range -1.0 to 1.0 inclusive")[6]
 }
 
 // callback functions

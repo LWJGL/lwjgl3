@@ -32,65 +32,65 @@ val ASSIMP_BINDING = simpleBinding(
 /*val aiPlane = struct(Binding.ASSIMP, "AIPlane", nativeName = "struct aiPlane") {
     documentation = "Represents a plane in a three-dimensional, euclidean space."
 
-    float.member("a", "Plane equation")
-    float.member("b", "Plane equation")
-    float.member("c", "Plane equation")
-    float.member("d", "Plane equation")
+    float("a", "Plane equation")
+    float("b", "Plane equation")
+    float("c", "Plane equation")
+    float("d", "Plane equation")
 }*/
 
 val aiVector2D = struct(Module.ASSIMP, "AIVector2D", nativeName = "struct aiVector2D", mutable = false) {
-    float.member("x", "")
-    float.member("y", "")
+    float("x", "")
+    float("y", "")
 }
 
 val aiVector3D = struct(Module.ASSIMP, "AIVector3D", nativeName = "struct aiVector3D") {
-    float.member("x", "")
-    float.member("y", "")
-    float.member("z", "")
+    float("x", "")
+    float("y", "")
+    float("z", "")
 }
 
 /*val aiRay = struct(Binding.ASSIMP, "AIRay", nativeName = "struct aiRay") {
     documentation = "Represents a ray."
 
-    aiVector3D.member("pos", "Position of the ray")
-    aiVector3D.member("dir", "Direction of the ray")
+    aiVector3D("pos", "Position of the ray")
+    aiVector3D("dir", "Direction of the ray")
 }*/
 
 val aiColor3D = struct(Module.ASSIMP, "AIColor3D", nativeName = "struct aiColor3D", mutable = false) {
     documentation = "Represents a color in Red-Green-Blue space."
 
-    float.member("r", "The red color value")
-    float.member("g", "The green color value")
-    float.member("b", "The blue color value")
+    float("r", "The red color value")
+    float("g", "The green color value")
+    float("b", "The blue color value")
 }
 
 val aiString = struct(Module.ASSIMP, "AIString", nativeName = "struct aiString") {
     documentation = "Represents an UTF-8 string, zero byte terminated."
 
-    AutoSize("data")..size_t.member("length", "Binary length of the string excluding the terminal 0.")
-    charUTF8.member("data", "String buffer.")["Assimp.MAXLEN"]
+    AutoSize("data")..size_t("length", "Binary length of the string excluding the terminal 0.")
+    charUTF8("data", "String buffer.")["Assimp.MAXLEN"]
 }
 
 val aiMemoryInfo = struct(Module.ASSIMP, "AIMemoryInfo", nativeName = "struct aiMemoryInfo", mutable = false) {
     documentation = "Stores the memory requirements for different components (e.g. meshes, materials, animations) of an import. All sizes are in bytes."
 
-    unsigned_int.member("textures", "Storage allocated for texture data")
-    unsigned_int.member("materials", "Storage allocated for material data")
-    unsigned_int.member("meshes", "Storage allocated for mesh data")
-    unsigned_int.member("nodes", "Storage allocated for node data")
-    unsigned_int.member("animations", "Storage allocated for animation data")
-    unsigned_int.member("cameras", "Storage allocated for camera data")
-    unsigned_int.member("lights", "Storage allocated for light data")
-    unsigned_int.member("total", "Total storage allocated for the full import.")
+    unsigned_int("textures", "Storage allocated for texture data")
+    unsigned_int("materials", "Storage allocated for material data")
+    unsigned_int("meshes", "Storage allocated for mesh data")
+    unsigned_int("nodes", "Storage allocated for node data")
+    unsigned_int("animations", "Storage allocated for animation data")
+    unsigned_int("cameras", "Storage allocated for camera data")
+    unsigned_int("lights", "Storage allocated for light data")
+    unsigned_int("total", "Total storage allocated for the full import.")
 }
 
 val aiTexel = struct(Module.ASSIMP, "AITexel", nativeName = "struct aiTexel", mutable = false) {
     documentation = "Helper structure to represent a texel in a ARGB8888 format. Used by aiTexture."
 
-    unsigned_char.member("b", "The blue color component")
-    unsigned_char.member("g", "The green color component")
-    unsigned_char.member("r", "The red color component")
-    unsigned_char.member("a", "The alpha color component")
+    unsigned_char("b", "The blue color component")
+    unsigned_char("g", "The green color component")
+    unsigned_char("r", "The red color component")
+    unsigned_char("a", "The alpha color component")
 }
 
 val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTexture", mutable = false) {
@@ -112,18 +112,18 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
         zero-based index of the texture in the ##AIScene{@code ::mTextures} array).
         """
 
-    unsigned_int.member(
+    unsigned_int(
         "mWidth",
         """
         Width of the texture, in pixels. If {@code mHeight} is zero the texture is compressed in a format like JPEG. In this case {@code mWidth} specifies the
         size of the memory area {@code pcData} is pointing to, in bytes.
         """
     )
-    unsigned_int.member(
+    unsigned_int(
         "mHeight",
         "Height of the texture, in pixels. If this value is zero, {@code pcData} points to an compressed texture in any format (e.g. JPEG)."
     )
-    charASCII.member(
+    charASCII(
         "achFormatHint",
         """
         A hint from the loader to make it easier for applications to determine the type of embedded compressed textures. If {@code mHeight != 0} this member is
@@ -132,7 +132,7 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
         'jpeg'). E.g. 'dds\0', 'pcx\0', 'jpg\0'. All characters are lower-case. The fourth character will always be '\0'.
         """
     )[4]
-    Unsafe..aiTexel.p.member(
+    Unsafe..aiTexel.p(
         "pcData",
         """
         Data of the texture. Points to an array of {@code mWidth * mHeight} ##AITexel's. The format of the texture data is always ARGB8888 to make the
@@ -140,73 +140,73 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
         compressed texture data. Good luck, have fun!
         """
     )
-    aiString.member("mFilename", "texture original filename. Used to get the texture reference.")
+    aiString("mFilename", "texture original filename. Used to get the texture reference.")
 }
 
 val aiColor4D = struct(Module.ASSIMP, "AIColor4D", nativeName = "struct aiColor4D") {
     documentation = "Represents a color in Red-Green-Blue space including an alpha component. Color values range from 0 to 1."
 
-    float.member("r", "The red color component")
-    float.member("g", "The green color component")
-    float.member("b", "The blue color component")
-    float.member("a", "The alpha color component")
+    float("r", "The red color component")
+    float("g", "The green color component")
+    float("b", "The blue color component")
+    float("a", "The alpha color component")
 }
 
 val aiMatrix4x4 = struct(Module.ASSIMP, "AIMatrix4x4", nativeName = "struct aiMatrix4x4") {
     documentation = "Represents a row-major 4x4 matrix, use this for homogeneous coordinates."
 
-    float.member("a1", "")
-    float.member("a2", "")
-    float.member("a3", "")
-    float.member("a4", "")
+    float("a1", "")
+    float("a2", "")
+    float("a3", "")
+    float("a4", "")
 
-    float.member("b1", "")
-    float.member("b2", "")
-    float.member("b3", "")
-    float.member("b4", "")
+    float("b1", "")
+    float("b2", "")
+    float("b3", "")
+    float("b4", "")
 
-    float.member("c1", "")
-    float.member("c2", "")
-    float.member("c3", "")
-    float.member("c4", "")
+    float("c1", "")
+    float("c2", "")
+    float("c3", "")
+    float("c4", "")
 
-    float.member("d1", "")
-    float.member("d2", "")
-    float.member("d3", "")
-    float.member("d4", "")
+    float("d1", "")
+    float("d2", "")
+    float("d3", "")
+    float("d4", "")
 }
 
 val aiMatrix3x3 = struct(Module.ASSIMP, "AIMatrix3x3", nativeName = "struct aiMatrix3x3") {
     documentation = "Represents a row-major 3x3 matrix."
 
-    float.member("a1", "")
-    float.member("a2", "")
-    float.member("a3", "")
+    float("a1", "")
+    float("a2", "")
+    float("a3", "")
 
-    float.member("b1", "")
-    float.member("b2", "")
-    float.member("b3", "")
+    float("b1", "")
+    float("b2", "")
+    float("b3", "")
 
-    float.member("c1", "")
-    float.member("c2", "")
-    float.member("c3", "")
+    float("c1", "")
+    float("c2", "")
+    float("c3", "")
 
-    float.member("d1", "")
-    float.member("d2", "")
-    float.member("d3", "")
+    float("d1", "")
+    float("d2", "")
+    float("d3", "")
 }
 
 val aiMetadataType = "aiMetadataType".enumType
 
 val aiMetadataEntry = struct(Module.ASSIMP, "AIMetaDataEntry", nativeName = "struct aiMetadataEntry") {
-    aiMetadataType.member("mType", "")
-    void.p.member("mData", "")
+    aiMetadataType("mType", "")
+    void.p("mData", "")
 }
 
 val aiMetadata = struct(Module.ASSIMP, "AIMetaData", nativeName = "struct aiMetadata") {
-    AutoSize("mKeys", "mValues")..unsigned_int.member("mNumProperties", "Length of the {@code mKeys} and {@code mValues} arrays, respectively")
-    aiString.p.member("mKeys", "Arrays of keys, may not be #NULL. Entries in this array may not be #NULL as well.")
-    aiMetadataEntry.p.member(
+    AutoSize("mKeys", "mValues")..unsigned_int("mNumProperties", "Length of the {@code mKeys} and {@code mValues} arrays, respectively")
+    aiString.p("mKeys", "Arrays of keys, may not be #NULL. Entries in this array may not be #NULL as well.")
+    aiMetadataEntry.p(
         "mValues",
         "Arrays of values, may not be #NULL. Entries in this array may be #NULL if the corresponding property key has no assigned value."
     )
@@ -222,14 +222,14 @@ val aiNode = struct(Module.ASSIMP, "AINode", nativeName = "struct aiNode") {
         formats don't support hierarchical structures - for these formats the imported scene does consist of only a single root node without children.
         """
 
-    aiString.member("mName", "The name of the node.")
-    aiMatrix4x4.member("mTransformation", "The transformation relative to the node's parent.")
-    nullable.._aiNode.p.member("mParent", "Parent node. #NULL if this node is the root node.")
-    AutoSize("mChildren", optional = true)..unsigned_int.member("mNumChildren", "The number of child nodes of this node.")
-    _aiNode.p.p.member("mChildren", "The child nodes of this node. #NULL if {@code mNumChildren} is 0.")
-    AutoSize("mMeshes", optional = true)..unsigned_int.member("mNumMeshes", "The number of meshes of this node.")
-    unsigned_int.p.member("mMeshes", "The meshes of this node. Each entry is an index into the mesh list of the aiScene.")
-    nullable..aiMetadata.p.member("mMetadata", "Metadata associated with this node or #NULL if there is no metadata.")
+    aiString("mName", "The name of the node.")
+    aiMatrix4x4("mTransformation", "The transformation relative to the node's parent.")
+    nullable.._aiNode.p("mParent", "Parent node. #NULL if this node is the root node.")
+    AutoSize("mChildren", optional = true)..unsigned_int("mNumChildren", "The number of child nodes of this node.")
+    _aiNode.p.p("mChildren", "The child nodes of this node. #NULL if {@code mNumChildren} is 0.")
+    AutoSize("mMeshes", optional = true)..unsigned_int("mNumMeshes", "The number of meshes of this node.")
+    unsigned_int.p("mMeshes", "The meshes of this node. Each entry is an index into the mesh list of the aiScene.")
+    nullable..aiMetadata.p("mMetadata", "Metadata associated with this node or #NULL if there is no metadata.")
 }
 
 val aiFace = struct(Module.ASSIMP, "AIFace", nativeName = "struct aiFace") {
@@ -245,18 +245,18 @@ val aiFace = struct(Module.ASSIMP, "AIFace", nativeName = "struct aiFace") {
         primitives from the imported scene, completely and forever.
         """
 
-    AutoSize("mIndices")..unsigned_int.member(
+    AutoSize("mIndices")..unsigned_int(
         "mNumIndices",
         "Number of indices defining this face. The maximum value for this member is #AI_MAX_FACE_INDICES."
     )
-    unsigned_int.p.member("mIndices", "Pointer to the indices array. Size of the array is given in {@code numIndices}.")
+    unsigned_int.p("mIndices", "Pointer to the indices array. Size of the array is given in {@code numIndices}.")
 }
 
 val aiVertexWeight = struct(Module.ASSIMP, "AIVertexWeight", nativeName = "struct aiVertexWeight") {
     documentation = "A single influence of a bone on a vertex."
 
-    unsigned_int.member("mVertexId", "Index of the vertex which is influenced by the bone.")
-    float.member("mWeight", "The strength of the influence in the range (0...1). The influence from all bones at one vertex amounts to 1.")
+    unsigned_int("mVertexId", "Index of the vertex which is influenced by the bone.")
+    float("mWeight", "The strength of the influence in the range (0...1). The influence from all bones at one vertex amounts to 1.")
 }
 
 val aiBone = struct(Module.ASSIMP, "AIBone", nativeName = "struct aiBone") {
@@ -268,13 +268,13 @@ val aiBone = struct(Module.ASSIMP, "AIBone", nativeName = "struct aiBone") {
         influences on vertices, and a matrix relating the mesh position to the position of the bone at the time of binding.
         """
 
-    aiString.member("mName", "the name of the bone.")
-    AutoSize("mWeights")..unsigned_int.member(
+    aiString("mName", "the name of the bone.")
+    AutoSize("mWeights")..unsigned_int(
         "mNumWeights",
         "the number of vertices affected by this bone. The maximum value for this member is #AI_MAX_BONE_WEIGHTS."
     )
-    aiVertexWeight.p.member("mWeights", "the influence weights of this bone, by vertex index")
-    aiMatrix4x4.member(
+    aiVertexWeight.p("mWeights", "the influence weights of this bone, by vertex index")
+    aiMatrix4x4(
         "mOffsetMatrix",
         """
         matrix that transforms from bone space to mesh space in bind pose.
@@ -297,7 +297,7 @@ val aiAnimMesh = struct(Module.ASSIMP, "AIAnimMesh", nativeName = "struct aiAnim
         {@code aiMeshAnim}, which references singular mesh attachments by their ID and binds them to a time offset.
         """
 
-    nullable..aiVector3D.p.member(
+    nullable..aiVector3D.p(
         "mVertices",
         """
         Replacement for ##AIMesh{@code ::mVertices}. If this array is non-#NULL, it *must* contain {@code mNumVertices} entries. The corresponding array in the
@@ -305,16 +305,16 @@ val aiAnimMesh = struct(Module.ASSIMP, "AIAnimMesh", nativeName = "struct aiAnim
         corresponding source array is not, the source data is taken instead).
         """
     )
-    nullable..aiVector3D.p.member("mNormals", "Replacement for ##AIMesh{@code ::mNormals}.")
-    nullable..aiVector3D.p.member("mTangents", "Replacement for ##AIMesh{@code ::mTangents}.")
-    nullable..aiVector3D.p.member("mBitangents", "Replacement for ##AIMesh{@code ::mBitangents}.")
-    nullable..aiColor4D.p.member("mColors", "Replacement for ##AIMesh{@code ::mColors}")["Assimp.AI_MAX_NUMBER_OF_COLOR_SETS"]
-    nullable..aiVector3D.p.member("mTextureCoords", "Replacement for ##AIMesh{@code ::mTextureCoords}")["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
+    nullable..aiVector3D.p("mNormals", "Replacement for ##AIMesh{@code ::mNormals}.")
+    nullable..aiVector3D.p("mTangents", "Replacement for ##AIMesh{@code ::mTangents}.")
+    nullable..aiVector3D.p("mBitangents", "Replacement for ##AIMesh{@code ::mBitangents}.")
+    nullable..aiColor4D.p("mColors", "Replacement for ##AIMesh{@code ::mColors}")["Assimp.AI_MAX_NUMBER_OF_COLOR_SETS"]
+    nullable..aiVector3D.p("mTextureCoords", "Replacement for ##AIMesh{@code ::mTextureCoords}")["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
     AutoSize(
         "mVertices", "mNormals", "mTangents", "mBitangents"
     )..AutoSizeIndirect(
         "mColors", "mTextureCoords"
-    )..unsigned_int.member(
+    )..unsigned_int(
         "mNumVertices",
         """
         The number of vertices in the {@code aiAnimMesh}, and thus the length of all the member arrays. This has always the same value as the
@@ -336,7 +336,7 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         A Mesh uses only a single material which is referenced by a material ID.
         """
 
-    unsigned_int.member(
+    unsigned_int(
         "mPrimitiveTypes",
         """
         Bitwise combination of the members of the {@code aiPrimitiveType} enum. This specifies which types of primitives are present in the mesh. The
@@ -347,21 +347,21 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         "mVertices", "mNormals", "mTangents", "mBitangents"
     )..AutoSizeIndirect(
         "mColors", "mTextureCoords"
-    )..unsigned_int.member(
+    )..unsigned_int(
         "mNumVertices",
         """
         The number of vertices in this mesh. This is also the size of all of the per-vertex data arrays. The maximum value for this member is #AI_MAX_VERTICES.
         """
     )
-    AutoSize("mFaces")..unsigned_int.member(
+    AutoSize("mFaces")..unsigned_int(
         "mNumFaces",
         """
         The number of primitives (triangles, polygons, lines) in this mesh. This is also the size of the {@code mFaces} array. The maximum value for this
         member is #AI_MAX_FACES.
         """
     )
-    aiVector3D.p.member("mVertices", "Vertex positions. This array is always present in a mesh. The array is {@code mNumVertices} in size.")
-    nullable..aiVector3D.p.member(
+    aiVector3D.p("mVertices", "Vertex positions. This array is always present in a mesh. The array is {@code mNumVertices} in size.")
+    nullable..aiVector3D.p(
         "mNormals",
         """
         Vertex normals. The array contains normalized vectors, #NULL if not present. The array is {@code mNumVertices} in size. Normals are undefined for point
@@ -369,7 +369,7 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         triangles) may have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and set to {@code qNaN}.
         """
     )
-    nullable..aiVector3D.p.member(
+    nullable..aiVector3D.p(
         "mTangents",
         """
         Vertex tangents. The tangent of a vertex points in the direction of the positive X texture axis. The array contains normalized vectors, #NULL if not
@@ -378,28 +378,28 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         set to {@code qNaN}.
         """
     )
-    nullable..aiVector3D.p.member(
+    nullable..aiVector3D.p(
         "mBitangents",
         """
         Vertex bitangents. The bitangent of a vertex points in the direction of the positive Y texture axis. The array contains normalized vectors, #NULL if
         not present. The array is {@code mNumVertices} in size.
         """
     )
-    nullable..aiColor4D.p.member(
+    nullable..aiColor4D.p(
         "mColors",
         """
         Vertex color sets. A mesh may contain 0 to #AI_MAX_NUMBER_OF_COLOR_SETS vertex colors per vertex. #NULL if not present. Each array is
         {@code mNumVertices} in size if present.
         """
     )["Assimp.AI_MAX_NUMBER_OF_COLOR_SETS"]
-    nullable..aiVector3D.p.member(
+    nullable..aiVector3D.p(
         "mTextureCoords",
         """
         Vertex texture coords, also known as UV channels. A mesh may contain 0 to #AI_MAX_NUMBER_OF_TEXTURECOORDS per vertex. #NULL if not present. The array
         is {@code mNumVertices} in size.
         """
     )["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
-    unsigned_int.member(
+    unsigned_int(
         "mNumUVComponents",
         """
         Specifies the number of components for a given UV channel. Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is
@@ -407,26 +407,26 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         is set to 0.0f, too.
         """
     )["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
-    aiFace.p.member(
+    aiFace.p(
         "mFaces",
         """
         The faces the mesh is constructed from. Each face refers to a number of vertices by their indices. This array is always present in a mesh, its size is
         given in {@code mNumFaces}. If the #AI_SCENE_FLAGS_NON_VERBOSE_FORMAT is NOT set each face references an unique set of vertices.
         """
     )
-    AutoSize("mBones", optional = true)..unsigned_int.member("mNumBones", "The number of bones this mesh contains. Can be 0, in which case the {@code mBones} array is #NULL.")
-    aiBone.p.p.member(
+    AutoSize("mBones", optional = true)..unsigned_int("mNumBones", "The number of bones this mesh contains. Can be 0, in which case the {@code mBones} array is #NULL.")
+    aiBone.p.p(
         "mBones",
         "The bones of this mesh. A bone consists of a name by which it can be found in the frame hierarchy and a set of vertex weights."
     )
-    unsigned_int.member(
+    unsigned_int(
         "mMaterialIndex",
         """
         The material used by this mesh. A mesh uses only a single material. If an imported model uses multiple materials, the import splits up the mesh. Use
         this value as index into the scene's material list.
         """
     )
-    aiString.member(
+    aiString(
         "mName",
         """
         Name of the mesh. Meshes can be named, but this is not a requirement and leaving this field empty is totally fine. There are mainly three uses for mesh
@@ -435,8 +435,8 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         their names.
         """
     )
-    AutoSize("mAnimMeshes", optional = true)..unsigned_int.member("mNumAnimMeshes", "NOT CURRENTLY IN USE. The number of attachment meshes")
-    aiAnimMesh.p.p.member(
+    AutoSize("mAnimMeshes", optional = true)..unsigned_int("mNumAnimMeshes", "NOT CURRENTLY IN USE. The number of attachment meshes")
+    aiAnimMesh.p.p(
         "mAnimMeshes",
         """
         NOT CURRENTLY IN USE. Attachment meshes for this mesh, for vertex-based animation. Attachment meshes carry replacement data for some of the mesh'es
@@ -456,9 +456,9 @@ val aiUVTransform = struct(Module.ASSIMP, "AIUVTransform", nativeName = "struct 
         and optimize UV transformations internally.
         """
 
-    aiVector2D.member("mTranslation", "Translation on the u and v axes. The default value is (0|0).")
-    aiVector2D.member("mScaling", "Scaling on the u and v axes. The default value is (1|1).")
-    float.member(
+    aiVector2D("mTranslation", "Translation on the u and v axes. The default value is (0|0).")
+    aiVector2D("mScaling", "Scaling on the u and v axes. The default value is (1|1).")
+    float(
         "mRotation",
         "Rotation - in counter-clockwise direction. The rotation angle is specified in radians. The rotation center is 0.5f|0.5f. The default value 0.f."
     )
@@ -486,21 +486,21 @@ $&lt;name&gt;
     """)}
         """
 
-    aiString.member("mKey", "Specifies the name of the property (key). Keys are generally case insensitive.")
-    unsigned_int.member(
+    aiString("mKey", "Specifies the name of the property (key). Keys are generally case insensitive.")
+    unsigned_int(
         "mSemantic",
         "Textures: Specifies their exact usage semantic. For non-texture properties, this member is always 0 (or, better-said, #TextureType_NONE)."
     )
-    unsigned_int.member("mIndex", "Textures: Specifies the index of the texture. For non-texture properties, this member is always 0.")
-    AutoSize("mData")..unsigned_int.member("mDataLength", "Size of the buffer {@code mData} is pointing to, in bytes. This value may not be 0.")
-    aiPropertyTypeInfo.member(
+    unsigned_int("mIndex", "Textures: Specifies the index of the texture. For non-texture properties, this member is always 0.")
+    AutoSize("mData")..unsigned_int("mDataLength", "Size of the buffer {@code mData} is pointing to, in bytes. This value may not be 0.")
+    aiPropertyTypeInfo(
         "mType",
         """
         Type information for the property. Defines the data layout inside the data buffer. This is used by the library internally to perform debug checks and
         to utilize proper type conversions. (It's probably a hacky solution, but it works.)
         """
     )
-    char.p.member("mData", "Binary buffer to hold the property's value. The size of the buffer is always mDataLength.")
+    char.p("mData", "Binary buffer to hold the property's value. The size of the buffer is always mDataLength.")
 }
 
 val aiMaterial = struct(Module.ASSIMP, "AIMaterial", nativeName = "struct aiMaterial") {
@@ -513,39 +513,39 @@ val aiMaterial = struct(Module.ASSIMP, "AIMaterial", nativeName = "struct aiMate
         The library defines a set of standard keys (AI_MATKEY_XXX).
         """
 
-    aiMaterialProperty.p.p.member("mProperties", "List of all material properties loaded.")
-    AutoSize("mProperties")..unsigned_int.member("mNumProperties", "Number of properties in the data base")
-    unsigned_int.member("mNumAllocated", "Storage allocated")
+    aiMaterialProperty.p.p("mProperties", "List of all material properties loaded.")
+    AutoSize("mProperties")..unsigned_int("mNumProperties", "Number of properties in the data base")
+    unsigned_int("mNumAllocated", "Storage allocated")
 }
 
 val aiQuaternion = struct(Module.ASSIMP, "AIQuaternion", nativeName = "struct aiQuaternion") {
     documentation = "Represents a quaternion in a 4D vector."
 
-    float.member("w", "The w component")
-    float.member("x", "The x component")
-    float.member("y", "The y component")
-    float.member("z", "The z component")
+    float("w", "The w component")
+    float("x", "The x component")
+    float("y", "The y component")
+    float("z", "The z component")
 }
 
 val aiVectorKey = struct(Module.ASSIMP, "AIVectorKey", nativeName = "struct aiVectorKey") {
     documentation = "A time-value pair specifying a certain 3D vector for the given time."
 
-    double.member("mTime", "The time of this key")
-    aiVector3D.member("mValue", "The value of this key")
+    double("mTime", "The time of this key")
+    aiVector3D("mValue", "The value of this key")
 }
 
 val aiQuatKey = struct(Module.ASSIMP, "AIQuatKey", nativeName = "struct aiQuatKey") {
     documentation = "A time-value pair specifying a rotation for the given time. Rotations are expressed with quaternions."
 
-    double.member("mTime", "The time of this key")
-    aiQuaternion.member("mValue", "The value of this key")
+    double("mTime", "The time of this key")
+    aiQuaternion("mValue", "The value of this key")
 }
 
 val aiMeshKey = struct(Module.ASSIMP, "AIMeshKey", nativeName = "struct aiMeshKey") {
     documentation = "Binds a anim mesh to a specific point in time."
 
-    double.member("mTime", "The time of this key")
-    unsigned_int.member(
+    double("mTime", "The time of this key")
+    unsigned_int(
         "mValue",
         """
         Index into the ##AIMesh{@code ::mAnimMeshes} array of the mesh coresponding to the ##AIMeshAnim hosting this key frame. The referenced anim mesh is
@@ -572,39 +572,39 @@ val aiNodeAnim = struct(Module.ASSIMP, "AINodeAnim", nativeName = "struct aiNode
         values, but they are not forbidden also ( so implementations need to cope with them! )
         """
 
-    aiString.member("mNodeName", "The name of the node affected by this animation. The node must exist and it must be unique.")
-    AutoSize("mPositionKeys", optional = true)..unsigned_int.member("mNumPositionKeys", "The number of position keys")
-    aiVectorKey.p.member(
+    aiString("mNodeName", "The name of the node affected by this animation. The node must exist and it must be unique.")
+    AutoSize("mPositionKeys", optional = true)..unsigned_int("mNumPositionKeys", "The number of position keys")
+    aiVectorKey.p(
         "mPositionKeys",
         """
         The position keys of this animation channel. Positions are specified as 3D vector. The array is {@code mNumPositionKeys} in size. If there are position
         keys, there will also be at least one scaling and one rotation key.
         """
     )
-    AutoSize("mRotationKeys", optional = true)..unsigned_int.member("mNumRotationKeys", "The number of rotation keys")
-    aiQuatKey.p.member(
+    AutoSize("mRotationKeys", optional = true)..unsigned_int("mNumRotationKeys", "The number of rotation keys")
+    aiQuatKey.p(
         "mRotationKeys",
         """
         The rotation keys of this animation channel. Rotations are given as quaternions,  which are 4D vectors. The array is {@code mNumRotationKeys} in size.
         If there are rotation keys, there will also be at least one scaling and one position key.
         """
     )
-    AutoSize("mScalingKeys", optional = true)..unsigned_int.member("mNumScalingKeys", "The number of scaling keys")
-    aiVectorKey.p.member(
+    AutoSize("mScalingKeys", optional = true)..unsigned_int("mNumScalingKeys", "The number of scaling keys")
+    aiVectorKey.p(
         "mScalingKeys",
         """
         The scaling keys of this animation channel. Scalings are specified as 3D vector. The array is {@code mNumScalingKeys} in size. If there are scaling
         keys, there will also be at least one position and one rotation key.
         """
     )
-    aiAnimBehaviour.member(
+    aiAnimBehaviour(
         "mPreState",
         """
         Defines how the animation behaves before the first key is encountered. The default value is aiAnimBehaviour_DEFAULT (the original transformation matrix
         of the affected node is used).
         """
     )
-    aiAnimBehaviour.member(
+    aiAnimBehaviour(
         "mPostState",
         """
         Defines how the animation behaves after the last key was processed. The default value is aiAnimBehaviour_DEFAULT (the original transformation matrix of
@@ -621,14 +621,14 @@ val aiMeshAnim = struct(Module.ASSIMP, "AIMeshAnim", nativeName = "struct aiMesh
         time.
         """
 
-    aiString.member(
+    aiString(
         "mName",
         """
         Name of the mesh to be animated. An empty string is not allowed, animated meshes need to be named (not necessarily uniquely, the name can basically
         serve as wildcard to select a group of meshes with similar animation setup)
         """)
-    AutoSize("mKeys")..unsigned_int.member("mNumKeys", "Size of the {@code mKeys} array. Must be 1, at least.")
-    aiMeshKey.p.member("mKeys", "Key frames of the animation. May not be #NULL.")
+    AutoSize("mKeys")..unsigned_int("mNumKeys", "Size of the {@code mKeys} array. Must be 1, at least.")
+    aiMeshKey.p("mKeys", "Key frames of the animation. May not be #NULL.")
 }
 
 val aiAnimation = struct(Module.ASSIMP, "AIAnimation", nativeName = "struct aiAnimation") {
@@ -637,22 +637,22 @@ val aiAnimation = struct(Module.ASSIMP, "AIAnimation", nativeName = "struct aiAn
         An animation consists of keyframe data for a number of nodes. For each node affected by the animation a separate series of data is given.
         """
 
-    aiString.member(
+    aiString(
         "mName",
         """
         The name of the animation. If the modeling package this data was exported from does support only a single animation channel, this name is usually empty
         (length is zero).
         """
     )
-    double.member("mDuration", "Duration of the animation in ticks.")
-    double.member("mTicksPerSecond", "Ticks per second. 0 if not specified in the imported file")
-    AutoSize("mChannels")..unsigned_int.member("mNumChannels", "The number of bone animation channels. Each channel affects a single node.")
-    aiNodeAnim.p.p.member("mChannels", "The node animation channels. Each channel affects a single node. The array is {@code mNumChannels} in size.")
-    AutoSize("mMeshChannels")..unsigned_int.member(
+    double("mDuration", "Duration of the animation in ticks.")
+    double("mTicksPerSecond", "Ticks per second. 0 if not specified in the imported file")
+    AutoSize("mChannels")..unsigned_int("mNumChannels", "The number of bone animation channels. Each channel affects a single node.")
+    aiNodeAnim.p.p("mChannels", "The node animation channels. Each channel affects a single node. The array is {@code mNumChannels} in size.")
+    AutoSize("mMeshChannels")..unsigned_int(
         "mNumMeshChannels",
         "The number of mesh animation channels. Each channel affects a single mesh and defines vertex-based animation."
     )
-    aiMeshAnim.p.p.member("mMeshChannels", "The mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMeshChannels} in size.")
+    aiMeshAnim.p.p("mMeshChannels", "The mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMeshChannels} in size.")
 }
 
 val aiLightSourceType = "aiLightSourceType".enumType
@@ -668,36 +668,36 @@ val aiLight = struct(Module.ASSIMP, "AILight", nativeName = "struct aiLight", mu
         additional information then, the transformation tracks of the main node make the spot light already point in the right direction.
         """
 
-    aiString.member(
+    aiString(
         "mName",
         """
         The name of the light source. There must be a node in the scenegraph with the same name. This node specifies the position of the light in the scene
         hierarchy and can be animated.
         """
     )
-    aiLightSourceType.member("mType", "The type of the light source. #LightSource_UNDEFINED is not a valid value for this member.")
-    aiVector3D.member(
+    aiLightSourceType("mType", "The type of the light source. #LightSource_UNDEFINED is not a valid value for this member.")
+    aiVector3D(
         "mPosition",
         """
         Position of the light source in space. Relative to the transformation of the node corresponding to the light. The position is undefined for directional
         lights.
         """
     )
-    aiVector3D.member(
+    aiVector3D(
         "mDirection",
         """
         Direction of the light source in space. Relative to the transformation of the node corresponding to the light. The direction is undefined for point
         lights. The vector may be normalized, but it needn't.
         """
     )
-    aiVector3D.member(
+    aiVector3D(
         "mUp",
         """
         Up direction of the light source in space. Relative to the transformation of the node corresponding to the light. The direction is undefined for point
         lights. The vector may be normalized, but it needn't.
         """
     )
-    float.member(
+    float(
         "mAttenuationConstant",
         """
         Constant light attenuation factor. The intensity of the light source at a given distance 'd' from the light's position is
@@ -705,7 +705,7 @@ val aiLight = struct(Module.ASSIMP, "AILight", nativeName = "struct aiLight", mu
         lights.
         """
     )
-    float.member(
+    float(
         "mAttenuationLinear",
         """
         Linear light attenuation factor. The intensity of the light source at a given distance 'd' from the light's position is
@@ -713,7 +713,7 @@ val aiLight = struct(Module.ASSIMP, "AILight", nativeName = "struct aiLight", mu
         lights.
         """
     )
-    float.member(
+    float(
         "mAttenuationQuadratic",
         """
         Quadratic light attenuation factor. The intensity of the light source at a given distance 'd' from the light's position is
@@ -721,21 +721,21 @@ val aiLight = struct(Module.ASSIMP, "AILight", nativeName = "struct aiLight", mu
         lights.
         """
     )
-    aiColor3D.member(
+    aiColor3D(
         "mColorDiffuse",
         """
         Diffuse color of the light source. The diffuse light color is multiplied with the diffuse material color to obtain the final color that contributes to
         the diffuse shading term.
         """
     )
-    aiColor3D.member(
+    aiColor3D(
         "mColorSpecular",
         """
         Specular color of the light source. The specular light color is multiplied with the specular material color to obtain the final color that contributes
         to the specular shading term.
         """
     )
-    aiColor3D.member(
+    aiColor3D(
         "mColorAmbient",
         """
         Ambient color of the light source. The ambient light color is multiplied with the ambient material color to obtain the final color that contributes to
@@ -743,14 +743,14 @@ val aiLight = struct(Module.ASSIMP, "AILight", nativeName = "struct aiLight", mu
         many file formats.
         """
     )
-    float.member(
+    float(
         "mAngleInnerCone",
         """
         Inner angle of a spot light's light cone. The spot light has maximum influence on objects inside this angle. The angle is given in radians. It is 2PI
         for point lights and undefined for directional lights.
         """
     )
-    float.member(
+    float(
         "mAngleOuterCone",
         """
         Outer angle of a spot light's light cone. The spot light does not affect objects outside this angle. The angle is given in radians. It is 2PI for point
@@ -758,7 +758,7 @@ val aiLight = struct(Module.ASSIMP, "AILight", nativeName = "struct aiLight", mu
         a smooth interpolation between the inner and the outer cone of the spot light.
         """
     )
-    aiVector2D.member("mSize", "Size of area light source.")
+    aiVector2D("mSize", "Size of area light source.")
 }
 
 val aiCamera = struct(Module.ASSIMP, "AICamera", nativeName = "struct aiCamera") {
@@ -772,50 +772,50 @@ val aiCamera = struct(Module.ASSIMP, "AICamera", nativeName = "struct aiCamera")
         {@code aiCamera}, but beware, they could also be encoded in the node transformation.
         """
 
-    aiString.member(
+    aiString(
         "mName",
         """
         The name of the camera. There must be a node in the scenegraph with the same name. This node specifies the position of the camera in the scene
         hierarchy and can be animated.
         """
     )
-    aiVector3D.member("mPosition", "Position of the camera relative to the coordinate space defined by the corresponding node. The default value is 0|0|0.")
-    aiVector3D.member(
+    aiVector3D("mPosition", "Position of the camera relative to the coordinate space defined by the corresponding node. The default value is 0|0|0.")
+    aiVector3D(
         "mUp",
         """
         'Up' - vector of the camera coordinate system relative to the coordinate space defined by the corresponding node. The 'right' vector of the camera
         coordinate system is the cross product of  the up and lookAt vectors. The default value is 0|1|0. The vector may be normalized, but it needn't.
         """
     )
-    aiVector3D.member(
+    aiVector3D(
         "mLookAt",
         """
         'LookAt' - vector of the camera coordinate system relative to the coordinate space defined by the corresponding node. This is the viewing direction of
         the user. The default value is 0|0|1. The vector may be normalized, but it needn't.
         """
     )
-    float.member(
+    float(
         "mHorizontalFOV",
         """
         Half horizontal field of view angle, in radians. The field of view angle is the angle between the center line of the screen and the left or right
         border. The default value is 1/4PI.
         """
     )
-    float.member(
+    float(
         "mClipPlaneNear",
         """
         Distance of the near clipping plane from the camera. The value may not be 0.f (for arithmetic reasons to prevent a division through zero). The default
         value is 0.1f.
         """
     )
-    float.member(
+    float(
         "mClipPlaneFar",
         """Distance of the far clipping plane from the camera. The far clipping plane must, of course, be further away than the near clipping plane. The
         default value is 1000.f. The ratio between the near and the far plane should not be too large (between 1000-10000 should be ok) to avoid floating-point
         inaccuracies which could lead to z-fighting.
         """
     )
-    float.member(
+    float(
         "mAspect",
         """
         Screen aspect ratio. This is the ration between the width and the height of the screen. Typical values are 4/3, 1/2 or 1/1. This value is 0 if the
@@ -833,69 +833,69 @@ val aiScene = struct(Module.ASSIMP, "AIScene", nativeName = "struct aiScene") {
         the caller. You shouldn't want to instance it, nor should you ever try to delete a given scene on your own.
         """
 
-    unsigned_int.member(
+    unsigned_int(
         "mFlags",
         """
         Any combination of the AI_SCENE_FLAGS_XXX flags. By default this value is 0, no flags are set. Most applications will want to reject all scenes with
         the AI_SCENE_FLAGS_INCOMPLETE bit set.
         """
     ).links("AI_SCENE_FLAGS_\\w+", LinkMode.BITFIELD)
-    nullable..aiNode.p.member(
+    nullable..aiNode.p(
         "mRootNode",
         """
         The root node of the hierarchy. There will always be at least the root node if the import was successful (and no special flags have been set). Presence
         of further nodes depends on the format and content of the imported file.
         """
     )
-    AutoSize("mMeshes", optional = true)..unsigned_int.member("mNumMeshes", "The number of meshes in the scene.")
-    aiMesh.p.p.member(
+    AutoSize("mMeshes", optional = true)..unsigned_int("mNumMeshes", "The number of meshes in the scene.")
+    aiMesh.p.p(
         "mMeshes",
         """
         The array of meshes. Use the indices given in the ##AINode structure to access this array. The array is {@code mNumMeshes} in size. If the
         #AI_SCENE_FLAGS_INCOMPLETE flag is not set there will always be at least ONE material.
         """
     )
-    AutoSize("mMaterials", optional = true)..unsigned_int.member("mNumMaterials", "The number of materials in the scene.")
-    aiMaterial.p.p.member(
+    AutoSize("mMaterials", optional = true)..unsigned_int("mNumMaterials", "The number of materials in the scene.")
+    aiMaterial.p.p(
         "mMaterials",
         """
         The array of materials. Use the index given in each ##AIMesh structure to access this array. The array is {@code mNumMaterials} in size. If the
         #AI_SCENE_FLAGS_INCOMPLETE flag is not set there will always be at least ONE material.
         """
     )
-    AutoSize("mAnimations", optional = true)..unsigned_int.member("mNumAnimations", "The number of animations in the scene.")
-    aiAnimation.p.p.member(
+    AutoSize("mAnimations", optional = true)..unsigned_int("mNumAnimations", "The number of animations in the scene.")
+    aiAnimation.p.p(
         "mAnimations",
         "The array of animations. All animations imported from the given file are listed here. The array is {@code mNumAnimations} in size."
     )
-    AutoSize("mTextures", optional = true)..unsigned_int.member("mNumTextures", "The number of textures embedded into the file")
-    aiTexture.p.p.member(
+    AutoSize("mTextures", optional = true)..unsigned_int("mNumTextures", "The number of textures embedded into the file")
+    aiTexture.p.p(
         "mTextures",
         """
         The array of embedded textures. Not many file formats embed their textures into the file. An example is Quake's MDL format (which is also used by some
         GameStudio versions)
         """
     )
-    AutoSize("mLights", optional = true)..unsigned_int.member(
+    AutoSize("mLights", optional = true)..unsigned_int(
         "mNumLights",
         "The number of light sources in the scene. Light sources are fully optional, in most cases this attribute will be 0"
     )
-    aiLight.p.p.member(
+    aiLight.p.p(
         "mLights",
         "The array of light sources. All light sources imported from the given file are listed here. The array is {@code mNumLights} in size."
     )
-    AutoSize("mCameras", optional = true)..unsigned_int.member(
+    AutoSize("mCameras", optional = true)..unsigned_int(
         "mNumCameras",
         "The number of cameras in the scene. Cameras are fully optional, in most cases this attribute will be 0"
     )
-    aiCamera.p.p.member(
+    aiCamera.p.p(
         "mCameras",
         """
         The array of cameras. All cameras imported from the given file are listed here. The array is {@code mNumCameras} in size. The first camera in the array
         (if existing) is the default camera view into the scene.
         """
     )
-    nullable..aiMetadata.p.member(
+    nullable..aiMetadata.p(
         "mMetaData",
         """
         The global metadata assigned to the scene itself.
@@ -905,7 +905,7 @@ val aiScene = struct(Module.ASSIMP, "AIScene", nativeName = "struct aiScene") {
         """
     )
 
-    char.p.member("mPrivate", "Internal use only, do not touch!").private()
+    char.p("mPrivate", "Internal use only, do not touch!").private()
 }
 
 val aiReturn = "aiReturn".enumType
@@ -923,18 +923,18 @@ val aiImporterDesc = struct(Module.ASSIMP, "AIImporterDesc", nativeName = "struc
         characteristics.
         """
 
-    charASCII.const.p.member("mName", "Full name of the importer (i.e. Blender3D importer)")
-    charUTF8.const.p.member("mAuthor", "Original author (left blank if unknown or whole assimp team)")
-    charUTF8.const.p.member("mMaintainer", "Current maintainer, left blank if the author maintains")
-    charUTF8.const.p.member("mComments", "Implementation comments, i.e. unimplemented features")
+    charASCII.const.p("mName", "Full name of the importer (i.e. Blender3D importer)")
+    charUTF8.const.p("mAuthor", "Original author (left blank if unknown or whole assimp team)")
+    charUTF8.const.p("mMaintainer", "Current maintainer, left blank if the author maintains")
+    charUTF8.const.p("mComments", "Implementation comments, i.e. unimplemented features")
 
-    unsigned_int.member("mFlags", "These flags indicate some characteristics common to many importers.")
-    unsigned_int.member("mMinMajor", "Minimum major format that can be loaded in major.minor style.")
-    unsigned_int.member("mMinMinor", "Minimum minor format that can be loaded in major.minor style.")
-    unsigned_int.member("mMaxMajor", "Maximum major format that can be loaded in major.minor style.")
-    unsigned_int.member("mMaxMinor", "Maximum minor format that can be loaded in major.minor style.")
+    unsigned_int("mFlags", "These flags indicate some characteristics common to many importers.")
+    unsigned_int("mMinMajor", "Minimum major format that can be loaded in major.minor style.")
+    unsigned_int("mMinMinor", "Minimum minor format that can be loaded in major.minor style.")
+    unsigned_int("mMaxMajor", "Maximum major format that can be loaded in major.minor style.")
+    unsigned_int("mMaxMinor", "Maximum minor format that can be loaded in major.minor style.")
 
-    charASCII.const.p.member(
+    charASCII.const.p(
         "mFileExtensions",
         """
         List of file extensions this importer can handle. List entries are separated by space characters. All entries are lower case without a leading dot
@@ -1048,9 +1048,9 @@ val aiFileIO = struct(Module.ASSIMP, "AIFileIO", nativeName = "struct aiFileIO")
         custom file systems to enable reading from other sources, such as ZIPs or memory locations.
         """
 
-    aiFileOpenProc.member("OpenProc", "Function used to open a new file")
-    aiFileCloseProc.member("CloseProc", "Function used to close an existing file")
-    nullable..aiUserData.member("UserData", "User-defined, opaque data")
+    aiFileOpenProc("OpenProc", "Function used to open a new file")
+    aiFileCloseProc("CloseProc", "Function used to close an existing file")
+    nullable..aiUserData("UserData", "User-defined, opaque data")
 }
 
 val aiFile = struct(Module.ASSIMP, "AIFile", nativeName = "struct aiFile") {
@@ -1061,13 +1061,13 @@ val aiFile = struct(Module.ASSIMP, "AIFile", nativeName = "struct aiFile") {
         delivering a custom ##AIFileIO. Use this to enable reading from other sources, such as ZIP archives or memory locations.
         """
 
-    aiFileReadProc.member("ReadProc", "Callback to read from a file")
-    aiFileWriteProc.member("WriteProc", "Callback to write to a file")
-    aiFileTellProc.member("TellProc", "Callback to retrieve the current position of the file cursor (ftell())")
-    aiFileTellProc.member("FileSizeProc", "Callback to retrieve the size of the file, in bytes")
-    aiFileSeek.member("SeekProc", "Callback to set the current position of the file cursor (fseek())")
-    aiFileFlushProc.member("FlushProc", "Callback to flush the file contents")
-    nullable..aiUserData.member("UserData", "User-defined, opaque data")
+    aiFileReadProc("ReadProc", "Callback to read from a file")
+    aiFileWriteProc("WriteProc", "Callback to write to a file")
+    aiFileTellProc("TellProc", "Callback to retrieve the current position of the file cursor (ftell())")
+    aiFileTellProc("FileSizeProc", "Callback to retrieve the size of the file, in bytes")
+    aiFileSeek("SeekProc", "Callback to set the current position of the file cursor (fseek())")
+    aiFileFlushProc("FlushProc", "Callback to flush the file contents")
+    nullable..aiUserData("UserData", "User-defined, opaque data")
 }
 
 val aiLogStreamCallback = Module.ASSIMP.callback {
@@ -1085,14 +1085,14 @@ val aiLogStreamCallback = Module.ASSIMP.callback {
 val aiLogStream = struct(Module.ASSIMP, "AILogStream", nativeName = "struct aiLogStream") {
     documentation = "Represents a log stream. A log stream receives all log messages and streams them somewhere"
 
-    aiLogStreamCallback.member("callback", "callback to be called")
-    opaque_p.member("user", "user data to be passed to the callback")
+    aiLogStreamCallback("callback", "callback to be called")
+    opaque_p("user", "user data to be passed to the callback")
 }
 
 val aiPropertyStore = struct(Module.ASSIMP, "AIPropertyStore", nativeName = "struct aiPropertyStore") {
     documentation = "Represents an opaque set of settings to be used during importing."
 
-    char.member("sentinel", "")
+    char("sentinel", "")
 }
 
 val aiBool = typedef(intb, "aiBool")
@@ -1104,18 +1104,18 @@ val aiExportFormatDesc = struct(Module.ASSIMP, "AIExportFormatDesc", nativeName 
         #GetExportFormatDescription() to retrieve a description of an export format option.
         """
 
-    charUTF8.const.p.member(
+    charUTF8.const.p(
         "id",
         """
         a short string ID to uniquely identify the export format. Use this ID string to specify which file format you want to export to when calling
         #ExportScene(). Example: "dae" or "obj"
         """
     )
-    charUTF8.const.p.member(
+    charUTF8.const.p(
         "description",
         "A short description of the file format to present to users. Useful if you want to allow the user to select an export format."
     )
-    charUTF8.const.p.member("fileExtension", "Recommended file extension for the exported file in lower case.")
+    charUTF8.const.p("fileExtension", "Recommended file extension for the exported file in lower case.")
 }
 
 private val _aiExportDataBlob = struct(Module.ASSIMP, "AIExportDataBlob", nativeName = "struct aiExportDataBlob")
@@ -1129,9 +1129,9 @@ val aiExportDataBlob = struct(Module.ASSIMP, "AIExportDataBlob", nativeName = "s
         than one output file for a given ##AIScene. See the remarks for {@code aiExportDataBlob::name} for more information.
         """
 
-    AutoSize("data")..size_t.member("size", "Size of the data in bytes")
-    void.p.member("data", "The data.")
-    aiString.member(
+    AutoSize("data")..size_t("size", "Size of the data in bytes")
+    void.p("data", "The data.")
+    aiString(
         "name",
         """
         Name of the blob. An empty string always indicates the first (and primary) blob, which contains the actual file data. Any other blobs are auxiliary
@@ -1142,5 +1142,5 @@ val aiExportDataBlob = struct(Module.ASSIMP, "AIExportDataBlob", nativeName = "s
         """
     )
 
-    nullable.._aiExportDataBlob.p.member("next", "Pointer to the next blob in the chain or NULL if there is none.")
+    nullable.._aiExportDataBlob.p("next", "Pointer to the next blob in the chain or NULL if there is none.")
 }

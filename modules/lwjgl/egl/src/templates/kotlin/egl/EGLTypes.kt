@@ -175,22 +175,22 @@ val EGLClientPixmapHI = struct(Module.EGL, "EGLClientPixmapHI", nativeName = "st
         create the {@code PixmapSurface}.
         """
 
-    void.p.member(
+    void.p(
         "pData",
         """
         pointer to a memory buffer allocated by the application that will contain the result of the drawing operations. It is up to the application to ensure
         that the buffer size corresponds to {@code iHeight * iStride * sizeof(pixel)}.
         """
     )
-    EGLint.member("iWidth", "width of the buffer in pixels")
-    EGLint.member(
+    EGLint("iWidth", "width of the buffer in pixels")
+    EGLint(
         "iHeight",
         """
         height of the buffer in pixels. The height of the buffer can be negative; in that case the result of the drawing operations will be vertically swapped.
         When positive, {@code pData} will point at the bottom-left corner of the image; when negative, to the top-left corner.
         """
     )
-    EGLint.member("iStride", "stride of the buffer, in pixels. It is important to note that each row of the buffer must start on 32-bit boundaries.")
+    EGLint("iStride", "stride of the buffer, in pixels. It is important to note that each row of the buffer must start on 32-bit boundaries.")
 }
 
 // NV_sync

@@ -24,49 +24,49 @@ val DISPLAY = Parameter(Display.p, "display", "the connection to the X server") 
 val Visual = struct(Module.CORE_LINUX, "Visual") {
     documentation = "Visual structure; contains information about colormapping possible."
 
-    nullable..opaque_p.member("ext_data", "")
-    VisualID.member("visualid", "")
-    int.member("class", "")
-    unsigned_long.member("red_mask", "")
-    unsigned_long.member("green_mask", "")
-    unsigned_long.member("blue_mask", "")
-    int.member("bits_per_rgb", "")
-    int.member("map_entries", "")
+    nullable..opaque_p("ext_data", "")
+    VisualID("visualid", "")
+    int("class", "")
+    unsigned_long("red_mask", "")
+    unsigned_long("green_mask", "")
+    unsigned_long("blue_mask", "")
+    int("bits_per_rgb", "")
+    int("map_entries", "")
 }
 
 val XVisualInfo = struct(Module.CORE_LINUX, "XVisualInfo") {
     documentation = "Information used by the visual utility routines to find desired visual type from the many visuals a display may support."
 
-    Visual.p.member("visual", "")
-    VisualID.member("visualid", "")
-    int.member("screen", "")
-    int.member("depth", "")
-    int.member("class", "")
-    unsigned_long.member("red_mask", "")
-    unsigned_long.member("green_mask", "")
-    unsigned_long.member("blue_mask", "")
-    int.member("colormap_size", "")
-    int.member("bits_per_rgb", "")
+    Visual.p("visual", "")
+    VisualID("visualid", "")
+    int("screen", "")
+    int("depth", "")
+    int("class", "")
+    unsigned_long("red_mask", "")
+    unsigned_long("green_mask", "")
+    unsigned_long("blue_mask", "")
+    int("colormap_size", "")
+    int("bits_per_rgb", "")
 }
 
 val XSetWindowAttributes = struct(Module.CORE_LINUX, "XSetWindowAttributes") {
     documentation = "Data structure for setting window attributes."
 
-    Pixmap.member("background_pixmap", "")
-    unsigned_long.member("background_pixel", "")
-    Pixmap.member("border_pixmap", "")
-    unsigned_long.member("border_pixel", "")
-    int.member("bit_gravity", "")
-    int.member("win_gravity", "")
-    int.member("backing_store", "")
-    unsigned_long.member("backing_planes", "")
-    unsigned_long.member("backing_pixel", "")
-    Bool.member("save_under", "")
-    long.member("event_mask", "")
-    long.member("do_not_propagate_mask", "")
-    Bool.member("override_redirect", "")
-    Colormap.member("colormap", "")
-    Cursor.member("cursor", "")
+    Pixmap("background_pixmap", "")
+    unsigned_long("background_pixel", "")
+    Pixmap("border_pixmap", "")
+    unsigned_long("border_pixel", "")
+    int("bit_gravity", "")
+    int("win_gravity", "")
+    int("backing_store", "")
+    unsigned_long("backing_planes", "")
+    unsigned_long("backing_pixel", "")
+    Bool("save_under", "")
+    long("event_mask", "")
+    long("do_not_propagate_mask", "")
+    Bool("override_redirect", "")
+    Colormap("colormap", "")
+    Cursor("cursor", "")
 }
 
 // --------------- Xrandr.h ---------------

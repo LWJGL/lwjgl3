@@ -35,12 +35,12 @@ val NVGcolor = struct(Module.NANOVG, "NVGColor", nativeName = "NVGcolor") {
     documentation = "A NanoVG color."
 
     union {
-        float.member("rgba", "an array of 4 color components")[4]
+        float("rgba", "an array of 4 color components")[4]
         struct {
-            float.member("r", "the color red component")
-            float.member("g", "the color green component")
-            float.member("b", "the color blue component")
-            float.member("a", "the color alpha component")
+            float("r", "the color red component")
+            float("g", "the color green component")
+            float("b", "the color blue component")
+            float("a", "the color alpha component")
         }
     }
 }
@@ -48,13 +48,13 @@ val NVGcolor = struct(Module.NANOVG, "NVGColor", nativeName = "NVGcolor") {
 val NVGpaint = struct(Module.NANOVG, "NVGPaint", nativeName = "NVGpaint") {
     documentation = "A NanoVG paint."
 
-    float.member("xform", "the transformation matrix")[6]
-    float.member("extent", "the extent")[2]
-    float.member("radius", "the radius")
-    float.member("feather", "the feather amount")
-    NVGcolor.member("innerColor", "the inner color")
-    NVGcolor.member("outerColor", "the outer color")
-    int.member("image", "the image handle")
+    float("xform", "the transformation matrix")[6]
+    float("extent", "the extent")[2]
+    float("radius", "the radius")
+    float("feather", "the feather amount")
+    NVGcolor("innerColor", "the inner color")
+    NVGcolor("outerColor", "the outer color")
+    int("image", "the image handle")
 }
 
 val charptr = "char".opaque // address, not data
@@ -62,19 +62,19 @@ val charptr = "char".opaque // address, not data
 val NVGglyphPosition = struct(Module.NANOVG, "NVGGlyphPosition", nativeName = "NVGglyphPosition", mutable = false) {
     documentation = "A glyph position."
 
-    charptr.p.member("str", "position of the glyph in the input string")
-    float.member("x", "the x-coordinate of the logical glyph position")
-    float.member("minx", "the left bound of the glyph shape")
-    float.member("maxx", "the right bound of the glyph shape")
+    charptr.p("str", "position of the glyph in the input string")
+    float("x", "the x-coordinate of the logical glyph position")
+    float("minx", "the left bound of the glyph shape")
+    float("maxx", "the right bound of the glyph shape")
 }
 
 val NVGtextRow = struct(Module.NANOVG, "NVGTextRow", nativeName = "NVGtextRow", mutable = false) {
     documentation = "A text row."
 
-    charptr.p.member("start", "pointer to the input text where the row starts")
-    charptr.p.member("end", "pointer to the input text where the row ends (one past the last character")
-    charptr.p.member("next", "pointer to the beginning of the next row")
-    float.member("width", "logical width of the row")
-    float.member("minx", "actual left bound of the row. Logical width and bounds can differ because of kerning and some parts over extending.")
-    float.member("maxx", "actual right bound of the row. Logical width and bounds can differ because of kerning and some parts over extending.")
+    charptr.p("start", "pointer to the input text where the row starts")
+    charptr.p("end", "pointer to the input text where the row ends (one past the last character")
+    charptr.p("next", "pointer to the beginning of the next row")
+    float("width", "logical width of the row")
+    float("minx", "actual left bound of the row. Logical width and bounds can differ because of kerning and some parts over extending.")
+    float("maxx", "actual right bound of the row. Logical width and bounds can differ because of kerning and some parts over extending.")
 }

@@ -27,7 +27,7 @@ fun templateCustomization() {
 
     VkShaderModuleCreateInfo.definition.apply {
         AutoSize("pCode")..this["codeSize"]
-        PrimitiveType("uint32_t", PrimitiveMapping.BYTE).const.p.member("pCode", "points to code that is used to create the shader module")
+        PrimitiveType("uint32_t", PrimitiveMapping.BYTE).const.p("pCode", "points to code that is used to create the shader module")
             .replace(this["pCode"])
     }
 

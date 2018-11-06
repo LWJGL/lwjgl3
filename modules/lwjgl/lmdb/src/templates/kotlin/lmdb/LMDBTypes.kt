@@ -142,8 +142,8 @@ val MDB_val = struct(Module.LMDB, "MDBVal", nativeName = "MDB_val") {
         Other data items can in theory be from 0 to {@code 0xffffffff} bytes long.
         """
 
-    AutoSize("mv_data", optional = true)..size_t.member("mv_size", "Size of the data item.")
-    nullable..void.p.member("mv_data", "Address of the data item.")
+    AutoSize("mv_data", optional = true)..size_t("mv_size", "Size of the data item.")
+    nullable..void.p("mv_data", "Address of the data item.")
 }
 
 val MDB_cursor = "MDB_cursor".opaque
@@ -153,23 +153,23 @@ val MDB_cursor_op = "MDB_cursor_op".enumType
 val MDB_stat = struct(Module.LMDB, "MDBStat", nativeName = "MDB_stat", mutable = false) {
     documentation = "Statistics for a database in the environment."
 
-    unsigned_int.member("ms_psize", "Size of a database page. This is currently the same for all databases.")
-    unsigned_int.member("ms_depth", "Depth (height) of the B-tree.")
-    mdb_size_t.member("ms_branch_pages", "Number of internal (non-leaf) pages.")
-    mdb_size_t.member("ms_leaf_pages", "Number of leaf pages.")
-    mdb_size_t.member("ms_overflow_pages", "Number of overflow pages.")
-    mdb_size_t.member("ms_entries", "Number of data items.")
+    unsigned_int("ms_psize", "Size of a database page. This is currently the same for all databases.")
+    unsigned_int("ms_depth", "Depth (height) of the B-tree.")
+    mdb_size_t("ms_branch_pages", "Number of internal (non-leaf) pages.")
+    mdb_size_t("ms_leaf_pages", "Number of leaf pages.")
+    mdb_size_t("ms_overflow_pages", "Number of overflow pages.")
+    mdb_size_t("ms_entries", "Number of data items.")
 }
 
 val MDB_envinfo = struct(Module.LMDB, "MDBEnvInfo", nativeName = "MDB_envinfo", mutable = false) {
     documentation = "Information about the environment."
 
-    opaque_p.member("me_mapaddr", "Address of map, if fixed.")
-    mdb_size_t.member("me_mapsize", "Size of the data memory map.")
-    mdb_size_t.member("me_last_pgno", "ID of the last used page.")
-    mdb_size_t.member("me_last_txnid", "ID of the last committed transaction.")
-    unsigned_int.member("me_maxreaders", "Max reader slots in the environment.")
-    unsigned_int.member("me_numreaders", "Max reader slots used in the environment.")
+    opaque_p("me_mapaddr", "Address of map, if fixed.")
+    mdb_size_t("me_mapsize", "Size of the data memory map.")
+    mdb_size_t("me_last_pgno", "ID of the last used page.")
+    mdb_size_t("me_last_txnid", "ID of the last committed transaction.")
+    unsigned_int("me_maxreaders", "Max reader slots in the environment.")
+    unsigned_int("me_numreaders", "Max reader slots used in the environment.")
 }
 
 val MDB_cmp_func = Module.LMDB.callback {

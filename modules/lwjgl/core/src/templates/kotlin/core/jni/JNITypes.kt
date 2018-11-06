@@ -55,7 +55,7 @@ val JavaVM = "JavaVM".handle
 val JNINativeMethod = struct(Module.CORE_JNI, "JNINativeMethod") {
     documentation = ""
 
-    charUTF8.p.member("name", "")
-    charUTF8.p.member("signature", "")
-    opaque_p.member("fnPtr", "")
+    charUTF8.p("name", "")
+    charUTF8.p("signature", "")
+    opaque_p("fnPtr", "")
 }
