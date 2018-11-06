@@ -23,14 +23,15 @@ val GLX_SGI_make_current_read = "GLXSGIMakeCurrentRead".nativeClassGLX("GLX_SGI_
         "Associates two {@code GLXDrawables} with the current rendering context.",
 
         DISPLAY,
-        nullable..GLXDrawable.IN("draw", "the draw drawable"),
-        nullable..GLXDrawable.IN("read", "the read drawable"),
-        nullable..GLXContext.IN("ctx", "the current context")
+        nullable..GLXDrawable("draw", "the draw drawable"),
+        nullable..GLXDrawable("read", "the read drawable"),
+        nullable..GLXContext("ctx", "the current context")
     )
 
     GLXDrawable(
         "GetCurrentReadDrawableSGI",
-        "Returns the name of the {@code GLXDrawable} currently being used as a pixel query source."
+        "Returns the name of the {@code GLXDrawable} currently being used as a pixel query source.",
+        void()
     )
 
 }

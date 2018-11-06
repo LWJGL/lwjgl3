@@ -23,7 +23,7 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         "CommitWorkingCopy",
         "Saves the current working copy to disk.",
 
-        EChaperoneConfigFile.IN("configFile", "", "EChaperoneConfigFile_\\w+")
+        EChaperoneConfigFile("configFile", "", "EChaperoneConfigFile_\\w+")
     )
 
     void(
@@ -93,37 +93,37 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         "SetWorkingPlayAreaSize",
         "Sets the Play Area in the working copy.",
 
-        float.IN("sizeX", ""),
-        float.IN("sizeZ", "")
+        float("sizeX", ""),
+        float("sizeZ", "")
     )
 
     void(
         "SetWorkingCollisionBoundsInfo",
         "Sets the Collision Bounds in the working copy.",
 
-        HmdQuad_t.p.IN("pQuadsBuffer", ""),
-        AutoSize("pQuadsBuffer")..uint32_t.IN("unQuadsCount", "")
+        HmdQuad_t.p("pQuadsBuffer", ""),
+        AutoSize("pQuadsBuffer")..uint32_t("unQuadsCount", "")
     )
 
     void(
         "SetWorkingSeatedZeroPoseToRawTrackingPose",
         "Sets the preferred seated position in the working copy.",
 
-        HmdMatrix34_t.const.p.IN("pMatSeatedZeroPoseToRawTrackingPose", "")
+        HmdMatrix34_t.const.p("pMatSeatedZeroPoseToRawTrackingPose", "")
     )
 
     void(
         "SetWorkingStandingZeroPoseToRawTrackingPose",
         "Sets the preferred standing position in the working copy.",
 
-        HmdMatrix34_t.const.p.IN("pMatStandingZeroPoseToRawTrackingPose", "")
+        HmdMatrix34_t.const.p("pMatStandingZeroPoseToRawTrackingPose", "")
     )
 
     void(
         "ReloadFromDisk",
         "Tear everything down and reload it from the file on disk.",
 
-        EChaperoneConfigFile.IN("configFile", "", "EChaperoneConfigFile_\\w+")
+        EChaperoneConfigFile("configFile", "", "EChaperoneConfigFile_\\w+")
     )
 
     bool(
@@ -137,8 +137,8 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         "SetWorkingCollisionBoundsTagsInfo",
         "",
 
-        uint8_t.p.IN("pTagsBuffer", ""),
-        AutoSize("pTagsBuffer")..uint32_t.IN("unTagCount", "")
+        uint8_t.p("pTagsBuffer", ""),
+        AutoSize("pTagsBuffer")..uint32_t("unTagCount", "")
     )
 
     bool(
@@ -153,8 +153,8 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         "SetWorkingPhysicalBoundsInfo",
         "",
 
-        HmdQuad_t.p.IN("pQuadsBuffer", ""),
-        AutoSize("pQuadsBuffer")..uint32_t.IN("unQuadsCount", "")
+        HmdQuad_t.p("pQuadsBuffer", ""),
+        AutoSize("pQuadsBuffer")..uint32_t("unQuadsCount", "")
     )
 
     bool(
@@ -177,7 +177,7 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         "ImportFromBufferToWorking",
         "",
 
-        Unsafe..char.const.p.IN("pBuffer", ""),
-        uint32_t.IN("nImportFlags", "")
+        Unsafe..char.const.p("pBuffer", ""),
+        uint32_t("nImportFlags", "")
     )
 }

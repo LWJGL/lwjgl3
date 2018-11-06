@@ -49,6 +49,6 @@ val EXT_provoking_vertex = "EXTProvokingVertex".nativeClassGL("EXT_provoking_ver
         "ProvokingVertexEXT",
         "",
 
-        GLenum.IN("mode", "")
+        GLenum("mode", "")
     )
 }

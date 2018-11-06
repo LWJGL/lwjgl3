@@ -22,16 +22,16 @@ val EXT_win32_keyed_mutex = "EXTWin32KeyedMutex".nativeClassGLES("EXT_win32_keye
         "AcquireKeyedMutexWin32EXT",
         "Blocks GL command processing until a keyed mutex is acquired.",
 
-        GLuint.IN("memory", "identifies which keyed mutex to acquire"),
-        GLuint64.IN("key", "is the mutex value to wait for"),
-        GLuint.IN("timeout", "the time, in milliseconds, to wait before failing the acquire operation")
+        GLuint("memory", "identifies which keyed mutex to acquire"),
+        GLuint64("key", "is the mutex value to wait for"),
+        GLuint("timeout", "the time, in milliseconds, to wait before failing the acquire operation")
     )
 
     GLboolean(
         "ReleaseKeyedMutexWin32EXT",
         "Releases a keyed mutex after all prior GL command processing has completed.",
 
-        GLuint.IN("memory", "identifies the keyed mutex to release"),
-        GLuint64.IN("key", "the mutex value set by the release operation")
+        GLuint("memory", "identifies the keyed mutex to release"),
+        GLuint64("key", "the mutex value set by the release operation")
     )
 }

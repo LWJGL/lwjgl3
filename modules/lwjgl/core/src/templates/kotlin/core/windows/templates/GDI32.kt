@@ -146,8 +146,8 @@ val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", 
         "ChoosePixelFormat",
         "Attempts to match an appropriate pixel format supported by a device context to a given pixel format specification.",
 
-        HDC.IN("hdc", "the device context that the function examines to determine the best match for the pixel format descriptor pointed to by {@code pixelFormatDescriptor}"),
-        PIXELFORMATDESCRIPTOR.const.p.IN("pixelFormatDescriptor", "a ##PIXELFORMATDESCRIPTOR structure that specifies the requested pixel format")
+        HDC("hdc", "the device context that the function examines to determine the best match for the pixel format descriptor pointed to by {@code pixelFormatDescriptor}"),
+        PIXELFORMATDESCRIPTOR.const.p("pixelFormatDescriptor", "a ##PIXELFORMATDESCRIPTOR structure that specifies the requested pixel format")
     )
 
     SaveLastError..int(
@@ -158,9 +158,9 @@ val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", 
         index of the device context.
         """,
 
-        HDC.IN("hdc", "the device context"),
-        int.IN("pixelFormat", "index that specifies the pixel format. The pixel formats that a device context supports are identified by positive one-based integer indexes."),
-        Expression("PIXELFORMATDESCRIPTOR.SIZEOF")..UINT.IN(
+        HDC("hdc", "the device context"),
+        int("pixelFormat", "index that specifies the pixel format. The pixel formats that a device context supports are identified by positive one-based integer indexes."),
+        Expression("PIXELFORMATDESCRIPTOR.SIZEOF")..UINT(
             "bytes",
             """
             the size, in bytes, of the structure pointed to by {@code pixelFormatDescriptor}. The {@code wglDescribePixelFormat} function stores no more than
@@ -181,16 +181,16 @@ val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", 
         "GetPixelFormat",
         "Obtains the index of the currently selected pixel format of the specified device context.",
 
-        HDC.IN("hdc", "the device context of the currently selected pixel format index returned by the function")
+        HDC("hdc", "the device context of the currently selected pixel format index returned by the function")
     )
 
     SaveLastError..BOOL(
         "SetPixelFormat",
         "Sets the pixel format of the specified device context to the format specified by the pixelFormat index.",
 
-        HDC.IN("hdc", "the device context whose pixel format the function attempts to set"),
-        int.IN("pixelFormat", "index that identifies the pixel format to set. The various pixel formats supported by a device context are identified by one-based indexes."),
-        nullable..PIXELFORMATDESCRIPTOR.const.p.IN(
+        HDC("hdc", "the device context whose pixel format the function attempts to set"),
+        int("pixelFormat", "index that identifies the pixel format to set. The various pixel formats supported by a device context are identified by one-based indexes."),
+        nullable..PIXELFORMATDESCRIPTOR.const.p(
             "pixelFormatDescriptor",
             """
             a ##PIXELFORMATDESCRIPTOR structure that contains the logical pixel format specification. The system's metafile component uses this structure
@@ -203,7 +203,7 @@ val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", 
         "SwapBuffers",
         "Exchanges the front and back buffers if the current pixel format for the window referenced by the specified device context includes a back buffer.",
 
-        HDC.IN(
+        HDC(
             "dc",
             """
             a device context. If the current pixel format for the window referenced by this device context includes a back buffer, the function exchanges the

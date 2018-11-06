@@ -98,10 +98,10 @@ val EXT_texture_array = "EXTTextureArray".nativeClassGL("EXT_texture_array", pos
         "FramebufferTextureLayerEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLint.IN("layer", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLint("layer", "")
     )
 }

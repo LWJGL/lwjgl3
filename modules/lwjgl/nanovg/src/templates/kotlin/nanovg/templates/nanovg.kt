@@ -199,7 +199,7 @@ nvgFill(vg);""")}
         "IMAGE_NEAREST".enum("Image interpolation is Nearest instead Linear.", "1<<5")
     ).javaDocLinks
 
-    val ctx = NVGcontext.p.IN("ctx", "the NanoVG context")
+    val ctx = NVGcontext.p("ctx", "the NanoVG context")
 
     void(
         "BeginFrame",
@@ -213,9 +213,9 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("windowWidth", "the window width"),
-        float.IN("windowHeight", "the window height"),
-        float.IN("devicePixelRatio", "the device pixel ratio")
+        float("windowWidth", "the window width"),
+        float("windowHeight", "the window height"),
+        float("devicePixelRatio", "the device pixel ratio")
     )
 
     void(
@@ -239,7 +239,7 @@ nvgFill(vg);""")}
         "Sets the composite operation.",
 
         ctx,
-        int.IN("op", "the composite operation", CompositeOperation)
+        int("op", "the composite operation", CompositeOperation)
     )
 
     void(
@@ -247,8 +247,8 @@ nvgFill(vg);""")}
         "Sets the composite operation with custom pixel arithmetic.",
 
         ctx,
-        int.IN("sfactor", "the source blend factor", BlendFactor),
-        int.IN("dfactor", "the destination blend factor", BlendFactor)
+        int("sfactor", "the source blend factor", BlendFactor),
+        int("dfactor", "the destination blend factor", BlendFactor)
     )
 
     void(
@@ -256,10 +256,10 @@ nvgFill(vg);""")}
         "Sets the composite operation with custom pixel arithmetic for RGB and alpha components separately.",
 
         ctx,
-        int.IN("srcRGB", "the source RGB blend factor", BlendFactor),
-        int.IN("dstRGB", "the destination RGB blend factor", BlendFactor),
-        int.IN("srcAlpha", "the source alpha blend factor", BlendFactor),
-        int.IN("dstAlpha", "the destination alpha blend factor", BlendFactor)
+        int("srcRGB", "the source RGB blend factor", BlendFactor),
+        int("dstRGB", "the destination RGB blend factor", BlendFactor),
+        int("srcAlpha", "the source alpha blend factor", BlendFactor),
+        int("dstAlpha", "the destination alpha blend factor", BlendFactor)
     )
 
     // Color utils
@@ -268,63 +268,63 @@ nvgFill(vg);""")}
         "RGB",
         "Returns a color value from red, green, blue values. Alpha will be set to 255 (1.0f).",
 
-        unsigned_char.IN("r", "the red value"),
-        unsigned_char.IN("g", "the green value"),
-        unsigned_char.IN("b", "the blue value")
+        unsigned_char("r", "the red value"),
+        unsigned_char("g", "the green value"),
+        unsigned_char("b", "the blue value")
     )
 
     NVGcolor(
         "RGBf",
         "Returns a color value from red, green, blue values. Alpha will be set to 1.0f.",
 
-        float.IN("r", "the red value"),
-        float.IN("g", "the green value"),
-        float.IN("b", "the blue value")
+        float("r", "the red value"),
+        float("g", "the green value"),
+        float("b", "the blue value")
     )
 
     NVGcolor(
         "RGBA",
         "Returns a color value from red, green, blue and alpha values.",
 
-        unsigned_char.IN("r", "the red value"),
-        unsigned_char.IN("g", "the green value"),
-        unsigned_char.IN("b", "the blue value"),
-        unsigned_char.IN("a", "the alpha value")
+        unsigned_char("r", "the red value"),
+        unsigned_char("g", "the green value"),
+        unsigned_char("b", "the blue value"),
+        unsigned_char("a", "the alpha value")
     )
 
     NVGcolor(
         "RGBAf",
         "Returns a color value from red, green, blue and alpha values.",
 
-        float.IN("r", "the red value"),
-        float.IN("g", "the green value"),
-        float.IN("b", "the blue value"),
-        float.IN("a", "the alpha value")
+        float("r", "the red value"),
+        float("g", "the green value"),
+        float("b", "the blue value"),
+        float("a", "the alpha value")
     )
 
     NVGcolor(
         "LerpRGBA",
         "Linearly interpolates from color {@code c0} to {@code c1}, and returns resulting color value.",
 
-        NVGcolor.IN("c0", "the first color"),
-        NVGcolor.IN("c1", "the second color"),
-        float.IN("u", "the interpolation factor")
+        NVGcolor("c0", "the first color"),
+        NVGcolor("c1", "the second color"),
+        float("u", "the interpolation factor")
     )
 
     NVGcolor(
         "TransRGBA",
         "Sets transparency of a color value.",
 
-        NVGcolor.IN("c0", "the color"),
-        unsigned_char.IN("a", "the alpha value")
+        NVGcolor("c0", "the color"),
+        unsigned_char("a", "the alpha value")
     )
 
     NVGcolor(
         "TransRGBAf",
         "Sets transparency of a color value.",
 
-        NVGcolor.IN("c0", "the color"),
-        float.IN("a", "the alpha value")
+        NVGcolor("c0", "the color"),
+        float("a", "the alpha value")
     )
 
     NVGcolor(
@@ -335,9 +335,9 @@ nvgFill(vg);""")}
         HSL values are all in range {@code [0..1]}, alpha will be set to 255.
         """,
 
-        float.IN("h", "the hue value"),
-        float.IN("s", "the saturation value"),
-        float.IN("l", "the lightness value")
+        float("h", "the hue value"),
+        float("s", "the saturation value"),
+        float("l", "the lightness value")
     )
 
     NVGcolor(
@@ -348,10 +348,10 @@ nvgFill(vg);""")}
         HSL values are all in range {@code [0..1]}, alpha in range {@code [0..255]}
         """,
 
-        float.IN("h", "the hue value"),
-        float.IN("s", "the saturation value"),
-        float.IN("l", "the lightness value"),
-        unsigned_char.IN("a", "the alpha value")
+        float("h", "the hue value"),
+        float("s", "the saturation value"),
+        float("l", "the lightness value"),
+        unsigned_char("a", "the alpha value")
     )
 
     // State Handling
@@ -384,7 +384,7 @@ nvgFill(vg);""")}
         "Sets whether to draw antialias for #Stroke() and #Fill(). It's enabled by default.",
 
         ctx,
-        intb.IN("enabled", "the flag to set")
+        intb("enabled", "the flag to set")
     )
 
     void(
@@ -392,7 +392,7 @@ nvgFill(vg);""")}
         "Sets current stroke style to a solid color.",
 
         ctx,
-        NVGcolor.IN("color", "the color to set")
+        NVGcolor("color", "the color to set")
     )
 
     void(
@@ -400,7 +400,7 @@ nvgFill(vg);""")}
         "Sets current stroke style to a paint, which can be a one of the gradients or a pattern.",
 
         ctx,
-        NVGpaint.IN("paint", "the paint to set")
+        NVGpaint("paint", "the paint to set")
     )
 
     void(
@@ -408,7 +408,7 @@ nvgFill(vg);""")}
         "Sets current fill style to a solid color.",
 
         ctx,
-        NVGcolor.IN("color", "the color to set")
+        NVGcolor("color", "the color to set")
     )
 
     void(
@@ -416,7 +416,7 @@ nvgFill(vg);""")}
         "Sets current fill style to a paint, which can be a one of the gradients or a pattern.",
 
         ctx,
-        NVGpaint.IN("paint", "the paint to set")
+        NVGpaint("paint", "the paint to set")
     )
 
     void(
@@ -424,7 +424,7 @@ nvgFill(vg);""")}
         "Sets the miter limit of the stroke style. Miter limit controls when a sharp corner is beveled.",
 
         ctx,
-        float.IN("limit", "the miter limit to set")
+        float("limit", "the miter limit to set")
     )
 
     void(
@@ -432,7 +432,7 @@ nvgFill(vg);""")}
         "Sets the stroke width of the stroke style.",
 
         ctx,
-        float.IN("size", "the stroke width to set")
+        float("size", "the stroke width to set")
     )
 
     void(
@@ -444,7 +444,7 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        int.IN("cap", "the line cap to set", "#BUTT #ROUND #SQUARE")
+        int("cap", "the line cap to set", "#BUTT #ROUND #SQUARE")
     )
 
     void(
@@ -456,7 +456,7 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        int.IN("join", "the line join to set", "#MITER #ROUND #BEVEL")
+        int("join", "the line join to set", "#MITER #ROUND #BEVEL")
     )
 
     void(
@@ -468,7 +468,7 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("alpha", "the alpha value to set")
+        float("alpha", "the alpha value to set")
     )
 
     // Transforms
@@ -491,12 +491,12 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("a", "the a value"),
-        float.IN("b", "the b value"),
-        float.IN("c", "the c value"),
-        float.IN("d", "the d value"),
-        float.IN("e", "the e value"),
-        float.IN("f", "the f value")
+        float("a", "the a value"),
+        float("b", "the b value"),
+        float("c", "the c value"),
+        float("d", "the d value"),
+        float("e", "the e value"),
+        float("f", "the f value")
     )
 
     void(
@@ -504,8 +504,8 @@ nvgFill(vg);""")}
         "Translates current coordinate system.",
 
         ctx,
-        float.IN("x", "the X axis translation amount"),
-        float.IN("y", "the Y axis translation amount")
+        float("x", "the X axis translation amount"),
+        float("y", "the Y axis translation amount")
     )
 
     void(
@@ -513,7 +513,7 @@ nvgFill(vg);""")}
         "Rotates current coordinate system.",
 
         ctx,
-        float.IN("angle", "the rotation angle, in radians")
+        float("angle", "the rotation angle, in radians")
     )
 
     void(
@@ -521,7 +521,7 @@ nvgFill(vg);""")}
         "Skews the current coordinate system along X axis.",
 
         ctx,
-        float.IN("angle", "the skew angle, in radians")
+        float("angle", "the skew angle, in radians")
     )
 
     void(
@@ -529,7 +529,7 @@ nvgFill(vg);""")}
         "Skews the current coordinate system along Y axis.",
 
         ctx,
-        float.IN("angle", "the skew angle, in radians")
+        float("angle", "the skew angle, in radians")
     )
 
     void(
@@ -537,8 +537,8 @@ nvgFill(vg);""")}
         "Scales the current coordinate system.",
 
         ctx,
-        float.IN("x", "the X axis scale factor"),
-        float.IN("y", "the Y axis scale factor")
+        float("x", "the X axis scale factor"),
+        float("y", "the Y axis scale factor")
     )
 
     void(
@@ -569,8 +569,8 @@ nvgFill(vg);""")}
         "Sets the transform to translation matrix matrix.",
 
         TransformIdentity["dst"],
-        float.IN("tx", "the X axis translation amount"),
-        float.IN("ty", "the Y axis translation amount")
+        float("tx", "the X axis translation amount"),
+        float("ty", "the Y axis translation amount")
     )
 
     void(
@@ -578,8 +578,8 @@ nvgFill(vg);""")}
         "Sets the transform to scale matrix.",
 
         TransformIdentity["dst"],
-        float.IN("sx", "the X axis scale factor"),
-        float.IN("sy", "the Y axis scale factor")
+        float("sx", "the X axis scale factor"),
+        float("sy", "the Y axis scale factor")
     )
 
     void(
@@ -587,7 +587,7 @@ nvgFill(vg);""")}
         "Sets the transform to rotate matrix.",
 
         TransformIdentity["dst"],
-        float.IN("a", "the rotation angle, in radians")
+        float("a", "the rotation angle, in radians")
     )
 
     void(
@@ -595,7 +595,7 @@ nvgFill(vg);""")}
         "Sets the transform to skew-x matrix.",
 
         TransformIdentity["dst"],
-        float.IN("a", "the skew angle, in radians")
+        float("a", "the skew angle, in radians")
     )
 
     void(
@@ -603,7 +603,7 @@ nvgFill(vg);""")}
         "Sets the transform to skew-y matrix.",
 
         TransformIdentity["dst"],
-        float.IN("a", "the skew angle, in radians")
+        float("a", "the skew angle, in radians")
     )
 
     void(
@@ -611,7 +611,7 @@ nvgFill(vg);""")}
         "Sets the transform to the result of multiplication of two transforms, of {@code A = A*B}.",
 
         TransformIdentity["dst"],
-        Check(6)..float.const.p.IN("src", "the {@code B} transformation matrix")
+        Check(6)..float.const.p("src", "the {@code B} transformation matrix")
     )
 
     void(
@@ -619,7 +619,7 @@ nvgFill(vg);""")}
         "Sets the transform to the result of multiplication of two transforms, of {@code A = B*A}.",
 
         TransformIdentity["dst"],
-        Check(6)..float.const.p.IN("src", "the {@code B} transformation matrix")
+        Check(6)..float.const.p("src", "the {@code B} transformation matrix")
     )
 
     intb(
@@ -627,7 +627,7 @@ nvgFill(vg);""")}
         "Sets the destination to inverse of specified transform.",
 
         TransformIdentity["dst"],
-        Check(6)..float.const.p.IN("src", "the transformation matrix to inverse"),
+        Check(6)..float.const.p("src", "the transformation matrix to inverse"),
 
         returnDoc = "1 if the inverse could be calculated, else 0"
     )
@@ -638,35 +638,35 @@ nvgFill(vg);""")}
 
         Check(1)..float.p.OUT("dstx", "returns the transformed X axis coordinate"),
         Check(1)..float.p.OUT("dsty", "returns the transformed Y axis coordinate"),
-        Check(6)..float.const.p.IN("xform", "the transformation matrix"),
-        float.IN("srcx", "the point X axis coordinate"),
-        float.IN("srcy", "the point Y axis coordinate")
+        Check(6)..float.const.p("xform", "the transformation matrix"),
+        float("srcx", "the point X axis coordinate"),
+        float("srcy", "the point Y axis coordinate")
     )
 
     float(
         "DegToRad",
         "Converts degrees to radians.",
 
-        float.IN("deg", "the rotation value, in degrees")
+        float("deg", "the rotation value, in degrees")
     )
 
     float(
         "RadToDeg",
         "Converts radians to degrees.",
 
-        float.IN("rad", "the rotation value, in radians")
+        float("rad", "the rotation value, in radians")
     )
 
     // Images
 
-    val imageFlags = int.IN("imageFlags", "the image flags", ImageFlags)
+    val imageFlags = int("imageFlags", "the image flags", ImageFlags)
 
     int(
         "CreateImage",
         "Creates image by loading it from the disk from specified file name.",
 
         ctx,
-        charASCII.const.p.IN("filename", "the image file name"),
+        charASCII.const.p("filename", "the image file name"),
         imageFlags,
 
         returnDoc = "a handle to the image"
@@ -678,8 +678,8 @@ nvgFill(vg);""")}
 
         ctx,
         imageFlags,
-        unsigned_char.p.IN("data", "the image data"),
-        AutoSize("data")..int.IN("ndata", "the image data size, in bytes"),
+        unsigned_char.p("data", "the image data"),
+        AutoSize("data")..int("ndata", "the image data size, in bytes"),
 
         returnDoc = "a handle to the image"
     )
@@ -689,10 +689,10 @@ nvgFill(vg);""")}
         "Creates image from specified image data.",
 
         ctx,
-        int.IN("w", "the image width"),
-        int.IN("h", "the image height"),
+        int("w", "the image width"),
+        int("h", "the image height"),
         imageFlags,
-        Check("w * h * 4")..unsigned_char.const.p.IN("data", "the image data"),
+        Check("w * h * 4")..unsigned_char.const.p("data", "the image data"),
 
         returnDoc = "a handle to the image"
     )
@@ -702,8 +702,8 @@ nvgFill(vg);""")}
         "Updates image data specified by image handle.",
 
         ctx,
-        int.IN("image", "the image handle"),
-        Unsafe..unsigned_char.const.p.IN("data", "the image data")
+        int("image", "the image handle"),
+        Unsafe..unsigned_char.const.p("data", "the image data")
     )
 
     void(
@@ -711,7 +711,7 @@ nvgFill(vg);""")}
         "Returns the dimensions of a created image.",
 
         ctx,
-        int.IN("image", "the image handle"),
+        int("image", "the image handle"),
         Check(1)..int.p.OUT("w", "returns the image width"),
         Check(1)..int.p.OUT("h", "returns the image height")
     )
@@ -721,7 +721,7 @@ nvgFill(vg);""")}
         "Deletes created image.",
 
         ctx,
-        int.IN("image", "the image handle to delete")
+        int("image", "the image handle to delete")
     )
 
     // Paints
@@ -735,12 +735,12 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("sx", "the X axis start coordinate"),
-        float.IN("sy", "the Y axis start coordinate"),
-        float.IN("ex", "the X axis end coordinate"),
-        float.IN("ey", "the Y axis end coordinate"),
-        NVGcolor.IN("icol", "the start color"),
-        NVGcolor.IN("ocol", "the end color")
+        float("sx", "the X axis start coordinate"),
+        float("sy", "the Y axis start coordinate"),
+        float("ex", "the X axis end coordinate"),
+        float("ey", "the Y axis end coordinate"),
+        NVGcolor("icol", "the start color"),
+        NVGcolor("ocol", "the end color")
     )
 
     NVGpaint(
@@ -752,14 +752,14 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("x", "the rectangle left coordinate"),
-        float.IN("y", "the rectangle top coordinate"),
-        float.IN("w", "the rectangle width"),
-        float.IN("h", "the rectangle height"),
-        float.IN("r", "the corner radius"),
-        float.IN("f", "the feather value. Feather defines how blurry the border of the rectangle is."),
-        NVGcolor.IN("icol", "the inner color"),
-        NVGcolor.IN("ocol", "the outer color")
+        float("x", "the rectangle left coordinate"),
+        float("y", "the rectangle top coordinate"),
+        float("w", "the rectangle width"),
+        float("h", "the rectangle height"),
+        float("r", "the corner radius"),
+        float("f", "the feather value. Feather defines how blurry the border of the rectangle is."),
+        NVGcolor("icol", "the inner color"),
+        NVGcolor("ocol", "the outer color")
     )
 
     NVGpaint(
@@ -771,12 +771,12 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("cx", "the X axis center coordinate"),
-        float.IN("cy", "the Y axis center coordinate"),
-        float.IN("inr", "the inner radius"),
-        float.IN("outr", "the outer radius"),
-        NVGcolor.IN("icol", "the start color"),
-        NVGcolor.IN("ocol", "the end color")
+        float("cx", "the X axis center coordinate"),
+        float("cy", "the Y axis center coordinate"),
+        float("inr", "the inner radius"),
+        float("outr", "the outer radius"),
+        NVGcolor("icol", "the start color"),
+        NVGcolor("ocol", "the end color")
     )
 
     NVGpaint(
@@ -788,13 +788,13 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("ox", "the image pattern left coordinate"),
-        float.IN("oy", "the image pattern top coordinate"),
-        float.IN("ex", "the image width"),
-        float.IN("ey", "the image height"),
-        float.IN("angle", "the rotation angle around the top-left corner"),
-        int.IN("image", "the image to render"),
-        float.IN("alpha", "the alpha value")
+        float("ox", "the image pattern left coordinate"),
+        float("oy", "the image pattern top coordinate"),
+        float("ex", "the image width"),
+        float("ey", "the image height"),
+        float("angle", "the rotation angle around the top-left corner"),
+        int("image", "the image to render"),
+        float("alpha", "the alpha value")
     )
 
     // Scissoring
@@ -808,10 +808,10 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("x", "the rectangle X axis coordinate"),
-        float.IN("y", "the rectangle Y axis coordinate"),
-        float.IN("w", "the rectangle width"),
-        float.IN("h", "the rectangle height")
+        float("x", "the rectangle X axis coordinate"),
+        float("y", "the rectangle Y axis coordinate"),
+        float("w", "the rectangle width"),
+        float("h", "the rectangle height")
     )
 
     void(
@@ -826,10 +826,10 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("x", "the rectangle X axis coordinate"),
-        float.IN("y", "the rectangle Y axis coordinate"),
-        float.IN("w", "the rectangle width"),
-        float.IN("h", "the rectangle height")
+        float("x", "the rectangle X axis coordinate"),
+        float("y", "the rectangle Y axis coordinate"),
+        float("w", "the rectangle width"),
+        float("h", "the rectangle height")
     )
 
     void(
@@ -853,8 +853,8 @@ nvgFill(vg);""")}
         "Starts new sub-path with specified point as first point.",
 
         ctx,
-        float.IN("x", "the point X axis coordinate"),
-        float.IN("y", "the point Y axis coordinate")
+        float("x", "the point X axis coordinate"),
+        float("y", "the point Y axis coordinate")
     )
 
     void(
@@ -862,8 +862,8 @@ nvgFill(vg);""")}
         "Adds line segment from the last point in the path to the specified point.",
 
         ctx,
-        float.IN("x", "the point X axis coordinate"),
-        float.IN("y", "the point Y axis coordinate")
+        float("x", "the point X axis coordinate"),
+        float("y", "the point Y axis coordinate")
     )
 
     void(
@@ -871,12 +871,12 @@ nvgFill(vg);""")}
         "Adds cubic bezier segment from last point in the path via two control points to the specified point.",
 
         ctx,
-        float.IN("c1x", "the first control point X axis coordinate"),
-        float.IN("c1y", "the first control point Y axis coordinate"),
-        float.IN("c2x", "the second control point X axis coordinate"),
-        float.IN("c2y", "the second control point Y axis coordinate"),
-        float.IN("x", "the point X axis coordinate"),
-        float.IN("y", "the point Y axis coordinate")
+        float("c1x", "the first control point X axis coordinate"),
+        float("c1y", "the first control point Y axis coordinate"),
+        float("c2x", "the second control point X axis coordinate"),
+        float("c2y", "the second control point Y axis coordinate"),
+        float("x", "the point X axis coordinate"),
+        float("y", "the point Y axis coordinate")
     )
 
     void(
@@ -884,10 +884,10 @@ nvgFill(vg);""")}
         "Adds quadratic bezier segment from last point in the path via a control point to the specified point.",
 
         ctx,
-        float.IN("cx", "the control point X axis coordinate"),
-        float.IN("cy", "the control point Y axis coordinate"),
-        float.IN("x", "the point X axis coordinate"),
-        float.IN("y", "the point Y axis coordinate")
+        float("cx", "the control point X axis coordinate"),
+        float("cy", "the control point Y axis coordinate"),
+        float("x", "the point X axis coordinate"),
+        float("y", "the point Y axis coordinate")
     )
 
     void(
@@ -895,11 +895,11 @@ nvgFill(vg);""")}
         "Adds an arc segment at the corner defined by the last path point, and two specified points.",
 
         ctx,
-        float.IN("x1", "the first point X axis coordinate"),
-        float.IN("y1", "the first point Y axis coordinate"),
-        float.IN("x2", "the second point X axis coordinate"),
-        float.IN("y2", "the second point Y axis coordinate"),
-        float.IN("radius", "the arc radius, in radians")
+        float("x1", "the first point X axis coordinate"),
+        float("y1", "the first point Y axis coordinate"),
+        float("x2", "the second point X axis coordinate"),
+        float("y2", "the second point Y axis coordinate"),
+        float("radius", "the arc radius, in radians")
     )
 
     void(
@@ -914,7 +914,7 @@ nvgFill(vg);""")}
         "Sets the current sub-path winding.",
 
         ctx,
-        int.IN("dir", "the sub-path winding", "#CCW #CW")
+        int("dir", "the sub-path winding", "#CCW #CW")
     )
 
     void(
@@ -922,12 +922,12 @@ nvgFill(vg);""")}
         "Creates new circle arc shaped sub-path.",
 
         ctx,
-        float.IN("cx", "the arc center X axis coordinate"),
-        float.IN("cy", "the arc center Y axis coordinate"),
-        float.IN("r", "the arc radius"),
-        float.IN("a0", "the arc starting angle, in radians"),
-        float.IN("a1", "the arc ending angle, in radians"),
-        int.IN("dir", "the arc direction", "#CCW #CW")
+        float("cx", "the arc center X axis coordinate"),
+        float("cy", "the arc center Y axis coordinate"),
+        float("r", "the arc radius"),
+        float("a0", "the arc starting angle, in radians"),
+        float("a1", "the arc ending angle, in radians"),
+        int("dir", "the arc direction", "#CCW #CW")
     )
 
     void(
@@ -935,10 +935,10 @@ nvgFill(vg);""")}
         "Creates new rectangle shaped sub-path.",
 
         ctx,
-        float.IN("x", "the rectangle X axis coordinate"),
-        float.IN("y", "the rectangle Y axis coordinate"),
-        float.IN("w", "the rectangle width"),
-        float.IN("h", "the rectangle height")
+        float("x", "the rectangle X axis coordinate"),
+        float("y", "the rectangle Y axis coordinate"),
+        float("w", "the rectangle width"),
+        float("h", "the rectangle height")
     )
 
     void(
@@ -946,11 +946,11 @@ nvgFill(vg);""")}
         "Creates new rounded rectangle shaped sub-path.",
 
         ctx,
-        float.IN("x", "the rectangle X axis coordinate"),
-        float.IN("y", "the rectangle Y axis coordinate"),
-        float.IN("w", "the rectangle width"),
-        float.IN("h", "the rectangle height"),
-        float.IN("r", "the corner radius")
+        float("x", "the rectangle X axis coordinate"),
+        float("y", "the rectangle Y axis coordinate"),
+        float("w", "the rectangle width"),
+        float("h", "the rectangle height"),
+        float("r", "the corner radius")
     )
 
     void(
@@ -958,14 +958,14 @@ nvgFill(vg);""")}
         "Creates new rounded rectangle shaped sub-path with varying radii for each corner.",
 
         ctx,
-        float.IN("x", "the rectangle X axis coordinate"),
-        float.IN("y", "the rectangle Y axis coordinate"),
-        float.IN("w", "the rectangle width"),
-        float.IN("h", "the rectangle height"),
-        float.IN("radTopLeft", "the top-left corner radius"),
-        float.IN("radTopRight", "the top-right corner radius"),
-        float.IN("radBottomRight", "the bottom-right corner radius"),
-        float.IN("radBottomLeft", "the bottom-left corner radius")
+        float("x", "the rectangle X axis coordinate"),
+        float("y", "the rectangle Y axis coordinate"),
+        float("w", "the rectangle width"),
+        float("h", "the rectangle height"),
+        float("radTopLeft", "the top-left corner radius"),
+        float("radTopRight", "the top-right corner radius"),
+        float("radBottomRight", "the bottom-right corner radius"),
+        float("radBottomLeft", "the bottom-left corner radius")
     )
 
     void(
@@ -973,10 +973,10 @@ nvgFill(vg);""")}
         "Creates new ellipse shaped sub-path.",
 
         ctx,
-        float.IN("cx", "the ellipse center X axis coordinate"),
-        float.IN("cy", "the ellipse center Y axis coordinate"),
-        float.IN("rx", "the ellipse X axis radius"),
-        float.IN("ry", "the ellipse Y axis radius")
+        float("cx", "the ellipse center X axis coordinate"),
+        float("cy", "the ellipse center Y axis coordinate"),
+        float("rx", "the ellipse X axis radius"),
+        float("ry", "the ellipse Y axis radius")
     )
 
     void(
@@ -984,9 +984,9 @@ nvgFill(vg);""")}
         "Creates new circle shaped sub-path.",
 
         ctx,
-        float.IN("cx", "the circle center X axis coordinate"),
-        float.IN("cy", "the circle center Y axis coordinate"),
-        float.IN("r", "the circle radius")
+        float("cx", "the circle center X axis coordinate"),
+        float("cy", "the circle center Y axis coordinate"),
+        float("r", "the circle radius")
     )
 
     void(
@@ -1010,8 +1010,8 @@ nvgFill(vg);""")}
         "Creates font by loading it from the disk from specified file name.",
 
         ctx,
-        charASCII.const.p.IN("name", "the font name"),
-        charASCII.const.p.IN("filename", "the font file name"),
+        charASCII.const.p("name", "the font name"),
+        charASCII.const.p("filename", "the font file name"),
 
         returnDoc = "a handle to the font"
     )
@@ -1025,10 +1025,10 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        charASCII.const.p.IN("name", "the font name"),
-        unsigned_char.p.IN("data", "the font data"),
-        AutoSize("data")..int.IN("ndata", "the font data size, in bytes"),
-        int.IN("freeData", "1 if the font data should be freed automatically, 0 otherwise"),
+        charASCII.const.p("name", "the font name"),
+        unsigned_char.p("data", "the font data"),
+        AutoSize("data")..int("ndata", "the font data size, in bytes"),
+        int("freeData", "1 if the font data should be freed automatically, 0 otherwise"),
 
         returnDoc = "a handle to the font"
     )
@@ -1038,7 +1038,7 @@ nvgFill(vg);""")}
         "Finds a loaded font of specified name, and returns handle to it, or -1 if the font is not found.",
 
         ctx,
-        charASCII.const.p.IN("name", "the font name")
+        charASCII.const.p("name", "the font name")
     )
 
     int(
@@ -1046,8 +1046,8 @@ nvgFill(vg);""")}
         "Adds fallback font by handle.",
 
         ctx,
-        int.IN("baseFont", ""),
-        int.IN("fallbackFont", "")
+        int("baseFont", ""),
+        int("fallbackFont", "")
     )
 
     int(
@@ -1055,8 +1055,8 @@ nvgFill(vg);""")}
         "Adds fallback font by name.",
 
         ctx,
-        charASCII.const.p.IN("baseFont", ""),
-        charASCII.const.p.IN("fallbackFont", "")
+        charASCII.const.p("baseFont", ""),
+        charASCII.const.p("fallbackFont", "")
     )
 
     void(
@@ -1064,7 +1064,7 @@ nvgFill(vg);""")}
         "Sets the font size of current text style.",
 
         ctx,
-        float.IN("size", "the font size to set")
+        float("size", "the font size to set")
     )
 
     void(
@@ -1072,7 +1072,7 @@ nvgFill(vg);""")}
         "Sets the blur of current text style.",
 
         ctx,
-        float.IN("blur", "the blur amount to set")
+        float("blur", "the blur amount to set")
     )
 
     void(
@@ -1080,7 +1080,7 @@ nvgFill(vg);""")}
         "Sets the letter spacing of current text style.",
 
         ctx,
-        float.IN("spacing", "the letter spacing amount to set")
+        float("spacing", "the letter spacing amount to set")
     )
 
     void(
@@ -1088,7 +1088,7 @@ nvgFill(vg);""")}
         "Sets the proportional line height of current text style. The line height is specified as multiple of font size.",
 
         ctx,
-        float.IN("lineHeight", "the line height to set")
+        float("lineHeight", "the line height to set")
     )
 
     void(
@@ -1096,7 +1096,7 @@ nvgFill(vg);""")}
         "Sets the text align of current text style.",
 
         ctx,
-        int.IN("align", "the text align to set", TexAlign)
+        int("align", "the text align to set", TexAlign)
     )
 
     void(
@@ -1104,7 +1104,7 @@ nvgFill(vg);""")}
         "Sets the font face based on specified id of current text style.",
 
         ctx,
-        int.IN("font", "the font id")
+        int("font", "the font id")
     )
 
     void(
@@ -1112,7 +1112,7 @@ nvgFill(vg);""")}
         "Sets the font face based on specified name of current text style.",
 
         ctx,
-        charASCII.const.p.IN("font", "the font name")
+        charASCII.const.p("font", "the font name")
     )
 
     float(
@@ -1120,10 +1120,10 @@ nvgFill(vg);""")}
         "Draws text string at specified location. If {@code end} is specified only the sub-string up to the {@code end} is drawn.",
 
         ctx,
-        float.IN("x", "the text X axis coordinate"),
-        float.IN("y", "the text Y axis coordinate"),
-        charUTF8.const.p.IN("string", "the text string to draw"),
-        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to draw, or #NULL")
+        float("x", "the text X axis coordinate"),
+        float("y", "the text Y axis coordinate"),
+        charUTF8.const.p("string", "the text string to draw"),
+        AutoSize("string")..nullable..charptr.const.p("end", "a pointer to the end of the sub-string to draw, or #NULL")
     )
 
     void(
@@ -1137,11 +1137,11 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("x", "the text box X axis coordinate"),
-        float.IN("y", "the text box Y axis coordinate"),
-        float.IN("breakRowWidth", "the maximum row width"),
-        charUTF8.const.p.IN("string", "the text string to draw"),
-        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to draw, or #NULL")
+        float("x", "the text box X axis coordinate"),
+        float("y", "the text box Y axis coordinate"),
+        float("breakRowWidth", "the maximum row width"),
+        charUTF8.const.p("string", "the text string to draw"),
+        AutoSize("string")..nullable..charptr.const.p("end", "a pointer to the end of the sub-string to draw, or #NULL")
     )
 
     float(
@@ -1156,10 +1156,10 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("x", "the text X axis coordinate"),
-        float.IN("y", "the text Y axis coordinate"),
-        charUTF8.const.p.IN("string", "the text string to measure"),
-        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
+        float("x", "the text X axis coordinate"),
+        float("y", "the text Y axis coordinate"),
+        charUTF8.const.p("string", "the text string to measure"),
+        AutoSize("string")..nullable..charptr.const.p("end", "a pointer to the end of the sub-string to measure, or #NULL"),
         nullable..Check(4)..float.p.OUT("bounds", "returns the bounding box of the text"),
 
         returnDoc = "the horizontal advance of the measured text (i.e. where the next character should drawn)"
@@ -1177,11 +1177,11 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("x", "the text box X axis coordinate"),
-        float.IN("y", "the text box Y axis coordinate"),
-        float.IN("breakRowWidth", "the maximum row width"),
-        charUTF8.const.p.IN("string", "the text string to measure"),
-        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
+        float("x", "the text box X axis coordinate"),
+        float("y", "the text box Y axis coordinate"),
+        float("breakRowWidth", "the maximum row width"),
+        charUTF8.const.p("string", "the text string to measure"),
+        AutoSize("string")..nullable..charptr.const.p("end", "a pointer to the end of the sub-string to measure, or #NULL"),
         nullable..Check(4)..float.p.OUT("bounds", "returns the bounding box of the text box")
     )
 
@@ -1194,12 +1194,12 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        float.IN("x", "the text X axis coordinate"),
-        float.IN("y", "the text Y axis coordinate"),
-        charUTF8.const.p.IN("string", "the text string to measure"),
-        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
+        float("x", "the text X axis coordinate"),
+        float("y", "the text Y axis coordinate"),
+        charUTF8.const.p("string", "the text string to measure"),
+        AutoSize("string")..nullable..charptr.const.p("end", "a pointer to the end of the sub-string to measure, or #NULL"),
         NVGglyphPosition.p.OUT("positions", "returns the glyph x positions"),
-        AutoSize("positions")..int.IN("maxPositions", "the maximum number of glyph positions to return")
+        AutoSize("positions")..int("maxPositions", "the maximum number of glyph positions to return")
     )
 
     void(
@@ -1226,10 +1226,10 @@ nvgFill(vg);""")}
         """,
 
         ctx,
-        charUTF8.const.p.IN("string", "the text string to measure"),
-        AutoSize("string")..nullable..charptr.const.p.IN("end", "a pointer to the end of the sub-string to measure, or #NULL"),
-        float.IN("breakRowWidth", "the maximum row width"),
+        charUTF8.const.p("string", "the text string to measure"),
+        AutoSize("string")..nullable..charptr.const.p("end", "a pointer to the end of the sub-string to measure, or #NULL"),
+        float("breakRowWidth", "the maximum row width"),
         NVGtextRow.p.OUT("rows", "returns the text rows"),
-        AutoSize("rows")..int.IN("maxRows", "the maximum number of text rows to return")
+        AutoSize("rows")..int("maxRows", "the maximum number of text rows to return")
     )
 }

@@ -46,23 +46,23 @@ val NV_transform_feedback2 = "NVTransformFeedback2".nativeClassGL("NV_transform_
         "BindTransformFeedbackNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("id", "")
+        GLenum("target", ""),
+        GLuint("id", "")
     )
 
     void(
         "DeleteTransformFeedbacksNV",
         "",
 
-        AutoSize("ids")..GLsizei.IN("n", ""),
-        SingleValue("id")..GLuint.const.p.IN("ids", "")
+        AutoSize("ids")..GLsizei("n", ""),
+        SingleValue("id")..GLuint.const.p("ids", "")
     )
 
     void(
         "GenTransformFeedbacksNV",
         "",
 
-        AutoSize("ids")..GLsizei.IN("n", ""),
+        AutoSize("ids")..GLsizei("n", ""),
         Check(1)..ReturnParam..GLuint.p.OUT("ids", "")
     )
 
@@ -70,7 +70,7 @@ val NV_transform_feedback2 = "NVTransformFeedback2".nativeClassGL("NV_transform_
         "IsTransformFeedbackNV",
         "",
 
-        GLuint.IN("id", "")
+        GLuint("id", "")
     )
 
     void(
@@ -87,7 +87,7 @@ val NV_transform_feedback2 = "NVTransformFeedback2".nativeClassGL("NV_transform_
         "DrawTransformFeedbackNV",
         "",
 
-        GLenum.IN("mode", ""),
-        GLuint.IN("id", "")
+        GLenum("mode", ""),
+        GLuint("id", "")
     )
 }

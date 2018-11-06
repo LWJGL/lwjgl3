@@ -76,16 +76,16 @@ typedef struct HiddenAreaMesh_t
         "GetProjectionMatrix",
         "Returns the projection matrix for the specified eye.",
 
-        EVREye.IN("eEye", "determines which eye the function should return the projection for", "EVREye_\\w+"),
-        float.IN("fNearZ", "distance to the near clip plane in meters"),
-        float.IN("fFarZ", "distance to the far clip plane in meters")
+        EVREye("eEye", "determines which eye the function should return the projection for", "EVREye_\\w+"),
+        float("fNearZ", "distance to the near clip plane in meters"),
+        float("fFarZ", "distance to the far clip plane in meters")
     )
 
     void(
         "GetProjectionRaw",
         "Returns the components necessary to build your own projection matrix in case your application is doing something fancy like infinite Z.",
 
-        EVREye.IN("eEye", "determines which eye the function should return the projection for", "EVREye_\\w+"),
+        EVREye("eEye", "determines which eye the function should return the projection for", "EVREye_\\w+"),
         Check(1)..float.p.OUT("pfLeft", "coordinate for the left clipping plane"),
         Check(1)..float.p.OUT("pfRight", "coordinate for the right clipping plane"),
         Check(1)..float.p.OUT("pfTop", "coordinate for the top clipping plane"),
@@ -99,9 +99,9 @@ typedef struct HiddenAreaMesh_t
         lower right of that eye's viewport.
         """,
 
-        EVREye.IN("eEye", "determines which eye the function should return the distortion value for", "EVREye_\\w+"),
-        float.IN("fU", "horizontal texture coordinate for the output pixel within the viewport"),
-        float.IN("fV", "vertical texture coordinate for the output pixel within the viewport"),
+        EVREye("eEye", "determines which eye the function should return the distortion value for", "EVREye_\\w+"),
+        float("fU", "horizontal texture coordinate for the output pixel within the viewport"),
+        float("fV", "vertical texture coordinate for the output pixel within the viewport"),
         DistortionCoordinates_t.p.OUT("pDistortionCoordinates", "a struct in which to return the distortion coordinates"),
 
         returnDoc = "true for success. Otherwise, returns false, and distortion coordinates are not suitable."
@@ -115,7 +115,7 @@ typedef struct HiddenAreaMesh_t
         multiplied together and treated as {@code View} in your application.
         """,
 
-        EVREye.IN("eEye", "determines which eye the function should return the eye matrix for", "EVREye_\\w+")
+        EVREye("eEye", "determines which eye the function should return the eye matrix for", "EVREye_\\w+")
     )
 
     bool(
@@ -185,20 +185,21 @@ typedef struct HiddenAreaMesh_t
         """,
 
         Check(1)..uint64_t.p.OUT("pnDevice", ""),
-        ETextureType.IN("textureType", "", "ETextureType_\\w+"),
-        VkInstance_T.p.IN("pInstance", "an optional parameter that is required only when {@code textureType} is #ETextureType_TextureType_Vulkan")
+        ETextureType("textureType", "", "ETextureType_\\w+"),
+        VkInstance_T.p("pInstance", "an optional parameter that is required only when {@code textureType} is #ETextureType_TextureType_Vulkan")
     )
 
     bool(
         "IsDisplayOnDesktop",
-        "Use to determine if the headset display is part of the desktop (i.e. extended) or hidden (i.e. direct mode)."
+        "Use to determine if the headset display is part of the desktop (i.e. extended) or hidden (i.e. direct mode).",
+        void()
     )
 
     bool(
         "SetDisplayVisibility",
         "Sets the display visibility (true = extended, false = direct mode).",
 
-        bool.IN("bIsVisibleOnDesktop", "the display visibility"),
+        bool("bIsVisibleOnDesktop", "the display visibility"),
 
         returnDoc = "true indicates that the change was successful"
     )
@@ -222,13 +223,13 @@ typedef struct HiddenAreaMesh_t
         itself, but will provide poses relative to the hardware-specific coordinate system in the driver.
         """,
 
-        ETrackingUniverseOrigin.IN("eOrigin", "tracking universe that returned poses should be relative to", "ETrackingUniverseOrigin_\\w+"),
-        float.IN(
+        ETrackingUniverseOrigin("eOrigin", "tracking universe that returned poses should be relative to", "ETrackingUniverseOrigin_\\w+"),
+        float(
             "fPredictedSecondsToPhotonsFromNow",
             "number of seconds from now to predict poses for. Positive numbers are in the future. Pass 0 to get the state at the instant the function is called."
         ),
         TrackedDevicePose_t.p.OUT("pTrackedDevicePoseArray", ""),
-        AutoSize("pTrackedDevicePoseArray")..uint32_t.IN("unTrackedDevicePoseArrayCount", "")
+        AutoSize("pTrackedDevicePoseArray")..uint32_t("unTrackedDevicePoseArrayCount", "")
     )
 
     void(
@@ -252,7 +253,8 @@ typedef struct HiddenAreaMesh_t
 
         The seated origin may or may not be inside the Play Area or Collision Bounds returned by {@code IVRChaperone}. Its position depends on what the user
         has set from the Dashboard settings and previous calls to #ResetSeatedZeroPose().
-        """
+        """,
+        void()
     )
 
     HmdMatrix34_t(
@@ -260,7 +262,8 @@ typedef struct HiddenAreaMesh_t
         """
         Returns the transform from the tracking origin to the standing absolute tracking system. This allows applications to convert from raw tracking space to
         the calibrated standing coordinate system.
-        """
+        """,
+        void()
     )
 
     uint32_t(
@@ -270,10 +273,10 @@ typedef struct HiddenAreaMesh_t
         specified tracked device (default: hmd -- pass in -1 for absolute tracking space).
         """,
 
-        ETrackedDeviceClass.IN("eTrackedDeviceClass", "", "ETrackedDeviceClass_\\w+"),
+        ETrackedDeviceClass("eTrackedDeviceClass", "", "ETrackedDeviceClass_\\w+"),
         nullable..TrackedDeviceIndex_t.p.OUT("punTrackedDeviceIndexArray", ""),
-        AutoSize("punTrackedDeviceIndexArray")..uint32_t.IN("unTrackedDeviceIndexArrayCount", ""),
-        TrackedDeviceIndex_t.IN("unRelativeToTrackedDeviceIndex", ""),
+        AutoSize("punTrackedDeviceIndexArray")..uint32_t("unTrackedDeviceIndexArrayCount", ""),
+        TrackedDeviceIndex_t("unRelativeToTrackedDeviceIndex", ""),
 
         returnDoc = "the number of devices in the list, or the size of the array needed if not large enough"
     )
@@ -282,7 +285,7 @@ typedef struct HiddenAreaMesh_t
         "GetTrackedDeviceActivityLevel",
         "Returns the level of activity on the device.",
 
-        TrackedDeviceIndex_t.IN("unDeviceId", "")
+        TrackedDeviceIndex_t("unDeviceId", "")
     )
 
     void(
@@ -293,8 +296,8 @@ typedef struct HiddenAreaMesh_t
         """,
 
         TrackedDevicePose_t.p.OUT("pOutputPose", ""),
-        TrackedDevicePose_t.const.p.IN("pTrackedDevicePose", ""),
-        HmdMatrix34_t.const.p.IN("pTransform", "")
+        TrackedDevicePose_t.const.p("pTrackedDevicePose", ""),
+        HmdMatrix34_t.const.p("pTransform", "")
     )
 
     TrackedDeviceIndex_t(
@@ -305,7 +308,7 @@ typedef struct HiddenAreaMesh_t
         This function is deprecated in favor of the new {@code IVRInput} system.
         """,
 
-        ETrackedControllerRole.IN("unDeviceType", "", "ETrackedControllerRole_\\w+")
+        ETrackedControllerRole("unDeviceType", "", "ETrackedControllerRole_\\w+")
     )
 
     ETrackedControllerRole(
@@ -316,7 +319,7 @@ typedef struct HiddenAreaMesh_t
         This function is deprecated in favor of the new {@code IVRInput} system.
         """,
 
-        TrackedDeviceIndex_t.IN("unDeviceIndex", "")
+        TrackedDeviceIndex_t("unDeviceIndex", "")
     )
 
     ETrackedDeviceClass(
@@ -329,22 +332,22 @@ typedef struct HiddenAreaMesh_t
         other than #ETrackedDeviceClass_TrackedDeviceClass_Invalid is associated with an actual tracked device.
         """,
 
-        TrackedDeviceIndex_t.IN("unDeviceIndex", "index of the device to get the device class for.")
+        TrackedDeviceIndex_t("unDeviceIndex", "index of the device to get the device class for.")
     )
 
     bool(
         "IsTrackedDeviceConnected",
         "Returns true if there is a device connected in this slot.",
 
-        TrackedDeviceIndex_t.IN("unDeviceIndex", "index of the device to test connected state for")
+        TrackedDeviceIndex_t("unDeviceIndex", "index of the device to test connected state for")
     )
 
     val GetTrackedDeviceProperty = bool(
         "GetBoolTrackedDeviceProperty",
         "Returns a bool property. If the device index is not valid or the property is not a bool type this function will return false.",
 
-        TrackedDeviceIndex_t.IN("unDeviceIndex", "index of the device to get the property for"),
-        ETrackedDeviceProperty.IN("prop", "which property to get"),
+        TrackedDeviceIndex_t("unDeviceIndex", "index of the device to get the property for"),
+        ETrackedDeviceProperty("prop", "which property to get"),
         Check(1)..nullable..ETrackedPropertyError.p.OUT(
             "pError",
             "the error returned when attempting to fetch this property. This can be #NULL if the caller doesn't care about the source of a property error."
@@ -399,9 +402,9 @@ typedef struct HiddenAreaMesh_t
 
         GetTrackedDeviceProperty["unDeviceIndex"],
         GetTrackedDeviceProperty["prop"],
-        PropertyTypeTag_t.IN("propType", ""),
+        PropertyTypeTag_t("propType", ""),
         nullable..void.p.OUT("pBuffer", ""),
-        AutoSize("pBuffer")..uint32_t.IN("unBufferSize", ""),
+        AutoSize("pBuffer")..uint32_t("unBufferSize", ""),
         GetTrackedDeviceProperty["pError"]
     )
 
@@ -419,7 +422,7 @@ typedef struct HiddenAreaMesh_t
             "pchValue",
             "the buffer to store string properties in. {@code unBufferSize} should be the size of this buffer."
         ),
-        AutoSize("pchValue")..uint32_t.IN("unBufferSize", "the size of the buffer pointed to by {@code pchValue}"),
+        AutoSize("pchValue")..uint32_t("unBufferSize", "the size of the buffer pointed to by {@code pchValue}"),
         GetTrackedDeviceProperty["pError"]
     )
 
@@ -427,7 +430,7 @@ typedef struct HiddenAreaMesh_t
         "GetPropErrorNameFromEnum",
         "Returns a string that corresponds with the specified property error. The string will be the name of the error enum value for all valid error codes.",
 
-        ETrackedPropertyError.IN("error", "the error code to return a string for", "ETrackedPropertyError_\\w+")
+        ETrackedPropertyError("error", "the error code to return a string for", "ETrackedPropertyError_\\w+")
     )
 
     bool(
@@ -435,7 +438,7 @@ typedef struct HiddenAreaMesh_t
         "Returns true and fills the event with the next event on the queue if there is one. If there are no events this method returns false.",
 
         VREvent_t.p.OUT("pEvent", "an event structure to fill with the next event"),
-        Expression("VREvent.SIZEOF")..uint32_t.IN("uncbVREvent", "the size in bytes of the ##VREvent struct")
+        Expression("VREvent.SIZEOF")..uint32_t("uncbVREvent", "the size in bytes of the ##VREvent struct")
     )
 
     bool(
@@ -446,9 +449,9 @@ typedef struct HiddenAreaMesh_t
         render the device.
         """,
 
-        ETrackingUniverseOrigin.IN("eOrigin", "the tracking system to return the event's pose in", "ETrackingUniverseOrigin_\\w+"),
+        ETrackingUniverseOrigin("eOrigin", "the tracking system to return the event's pose in", "ETrackingUniverseOrigin_\\w+"),
         VREvent_t.p.OUT("pEvent", "an event structure to fill with the next event"),
-        Expression("VREvent.SIZEOF")..uint32_t.IN("uncbVREvent", "the size in bytes of the ##VREvent struct"),
+        Expression("VREvent.SIZEOF")..uint32_t("uncbVREvent", "the size in bytes of the ##VREvent struct"),
         TrackedDevicePose_t.p.OUT("pTrackedDevicePose", "a pose struct to fill with the returned event's pose. Must not be #NULL.")
     )
 
@@ -456,7 +459,7 @@ typedef struct HiddenAreaMesh_t
         "GetEventTypeNameFromEnum",
         "Returns the name of an {@code EVREvent} enum value.",
 
-        EVREventType.IN("eType", "the event type to return a string for", "EVREventType_\\w+")
+        EVREventType("eType", "the event type to return a string for", "EVREventType_\\w+")
     )
 
     HiddenAreaMesh_t(
@@ -471,8 +474,8 @@ typedef struct HiddenAreaMesh_t
         ${note("Render this mesh with backface culling disabled since the winding order of the vertices can be different per-HMD or per-eye.")}
         """,
 
-        EVREye.IN("eEye", "the eye to get the hidden area mesh for", "EVREye_\\w+"),
-        EHiddenAreaMeshType.IN("type", "", "EHiddenAreaMeshType_\\w+")
+        EVREye("eEye", "the eye to get the hidden area mesh for", "EVREye_\\w+"),
+        EHiddenAreaMeshType("type", "", "EHiddenAreaMeshType_\\w+")
     )
 
     bool(
@@ -483,9 +486,9 @@ typedef struct HiddenAreaMesh_t
         This function is deprecated in favor of the new {@code IVRInput} system.
         """,
 
-        TrackedDeviceIndex_t.IN("unControllerDeviceIndex", "the tracked device index of the controller to get the state of"),
+        TrackedDeviceIndex_t("unControllerDeviceIndex", "the tracked device index of the controller to get the state of"),
         VRControllerState_t.p.OUT("pControllerState", "a struct to fill with the controller state"),
-        Expression("VRControllerState.SIZEOF")..uint32_t.IN("unControllerStateSize", "the size in bytes of the ##VRControllerState struct"),
+        Expression("VRControllerState.SIZEOF")..uint32_t("unControllerStateSize", "the size in bytes of the ##VRControllerState struct"),
 
         returnDoc = "false if the controller index is invalid"
     )
@@ -499,10 +502,10 @@ typedef struct HiddenAreaMesh_t
         This function is deprecated in favor of the new {@code IVRInput} system.
         """,
 
-        ETrackingUniverseOrigin.IN("eOrigin", "the tracking coordinate system to return the pose in", "ETrackingUniverseOrigin_\\w+"),
-        TrackedDeviceIndex_t.IN("unControllerDeviceIndex", "the tracked device index of the controller to get the state of"),
+        ETrackingUniverseOrigin("eOrigin", "the tracking coordinate system to return the pose in", "ETrackingUniverseOrigin_\\w+"),
+        TrackedDeviceIndex_t("unControllerDeviceIndex", "the tracked device index of the controller to get the state of"),
         VRControllerState_t.p.OUT("pControllerState", "a struct to fill with the controller state"),
-        Expression("VRControllerState.SIZEOF")..uint32_t.IN("unControllerStateSize", "the size in bytes of the ##VRControllerState struct"),
+        Expression("VRControllerState.SIZEOF")..uint32_t("unControllerStateSize", "the size in bytes of the ##VRControllerState struct"),
         TrackedDevicePose_t.p.OUT("pTrackedDevicePose", "a pose struct to fill with the pose of the controller when the last button event occurred")
     )
 
@@ -515,9 +518,9 @@ typedef struct HiddenAreaMesh_t
         This function is deprecated in favor of the new {@code IVRInput} system.
         """,
 
-        TrackedDeviceIndex_t.IN("unControllerDeviceIndex", "the tracked device index of the controller to trigger a haptic pulse on"),
-        uint32_t.IN("unAxisId", "the ID of the axis to trigger a haptic pulse on"),
-        unsigned_short.IN("usDurationMicroSec", "the duration of the desired haptic pulse in microseconds")
+        TrackedDeviceIndex_t("unControllerDeviceIndex", "the tracked device index of the controller to trigger a haptic pulse on"),
+        uint32_t("unAxisId", "the ID of the axis to trigger a haptic pulse on"),
+        unsigned_short("usDurationMicroSec", "the duration of the desired haptic pulse in microseconds")
     )
 
     charASCII.p(
@@ -528,14 +531,14 @@ typedef struct HiddenAreaMesh_t
         This function is deprecated in favor of the new {@code IVRInput} system.
         """,
 
-        EVRButtonId.IN("eButtonId", "the button ID to return the name of", "EVRButtonId_\\w+")
+        EVRButtonId("eButtonId", "the button ID to return the name of", "EVRButtonId_\\w+")
     )
 
     charASCII.p(
         "GetControllerAxisTypeNameFromEnum",
         "Returns the name of an {@code EVRControllerAxisType} enum value.",
 
-        EVRControllerAxisType.IN("eAxisType", "the controller axis type to get a name for", "EVRControllerAxisType_\\w+")
+        EVRControllerAxisType("eAxisType", "the controller axis type to get a name for", "EVRControllerAxisType_\\w+")
     )
 
     bool(
@@ -543,7 +546,8 @@ typedef struct HiddenAreaMesh_t
         """
         Returns true if this application is receiving input from the system. This would return false if system-related functionality is consuming the input
         stream.
-        """
+        """,
+        void()
     )
 
     bool(
@@ -551,7 +555,8 @@ typedef struct HiddenAreaMesh_t
         """
         Returns true if SteamVR is drawing controllers on top of the application. Applications should consider not drawing anything attached to the user's
         hands in this case.
-        """
+        """,
+        void()
     )
 
     bool(
@@ -559,7 +564,8 @@ typedef struct HiddenAreaMesh_t
         """
         Returns true if the user has put SteamVR into a mode that is distracting them from the application. For applications where this is appropriate, the
         application should pause ongoing activity.
-        """
+        """,
+        void()
     )
 
     bool(
@@ -567,7 +573,8 @@ typedef struct HiddenAreaMesh_t
         """
         Returns true if SteamVR is doing significant rendering work and the game should do what it can to reduce its own workload. One common way to do this is
         to reduce the size of the render target provided for each eye.
-        """
+        """,
+        void()
     )
 
     uint32_t(
@@ -577,10 +584,10 @@ typedef struct HiddenAreaMesh_t
         smaller buffer. If the response exceeds the size of the buffer, it is truncated.
         """,
 
-        TrackedDeviceIndex_t.IN("unDeviceIndex", ""),
-        charASCII.const.p.IN("pchRequest", ""),
+        TrackedDeviceIndex_t("unDeviceIndex", ""),
+        charASCII.const.p("pchRequest", ""),
         Return(RESULT, "VR.k_unMaxDriverDebugResponseSize", includesNT = true)..nullable..charASCII.p.OUT("pchResponseBuffer", ""),
-        AutoSize("pchResponseBuffer")..uint32_t.IN("unResponseBufferSize", ""),
+        AutoSize("pchResponseBuffer")..uint32_t("unResponseBufferSize", ""),
 
         returnDoc = "the size of the response including its terminating null"
     )
@@ -598,7 +605,7 @@ typedef struct HiddenAreaMesh_t
         manual update. #ETrackedDeviceProperty_Prop_Firmware_ManualUpdateURL_String should point to an URL describing the manual update process.
         """,
 
-        TrackedDeviceIndex_t.IN("unDeviceIndex", "")
+        TrackedDeviceIndex_t("unDeviceIndex", "")
     )
 
     void(

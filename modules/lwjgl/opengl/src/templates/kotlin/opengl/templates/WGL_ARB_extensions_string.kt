@@ -25,7 +25,7 @@ val WGL_ARB_extensions_string = "WGLARBExtensionsString".nativeClassWGL("WGL_ARB
         empty string is returned.
         """,
 
-        HDC.IN("hdc", "the device context to query extensions for")
+        HDC("hdc", "the device context to query extensions for")
     )
 
 }

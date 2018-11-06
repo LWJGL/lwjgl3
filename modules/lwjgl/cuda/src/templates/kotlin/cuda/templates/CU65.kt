@@ -23,9 +23,9 @@ val CU65 = "CU65".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Check(1)..int.p.OUT("numBlocks", ""),
-        CUfunction.IN("func", ""),
-        int.IN("blockSize", ""),
-        size_t.IN("dynamicSMemSize", "")
+        CUfunction("func", ""),
+        int("blockSize", ""),
+        size_t("dynamicSMemSize", "")
     )
 
     CUresult(
@@ -33,10 +33,10 @@ val CU65 = "CU65".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Check(1)..int.p.OUT("numBlocks", ""),
-        CUfunction.IN("func", ""),
-        int.IN("blockSize", ""),
-        size_t.IN("dynamicSMemSize", ""),
-        unsigned_int.IN("flags", "")
+        CUfunction("func", ""),
+        int("blockSize", ""),
+        size_t("dynamicSMemSize", ""),
+        unsigned_int("flags", "")
     )
 
     CUresult(
@@ -45,10 +45,10 @@ val CU65 = "CU65".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
 
         Check(1)..int.p.OUT("minGridSize", ""),
         Check(1)..int.p.OUT("blockSize", ""),
-        CUfunction.IN("func", ""),
-        nullable..CUoccupancyB2DSize.IN("blockSizeToDynamicSMemSize", ""),
-        size_t.IN("dynamicSMemSize", ""),
-        int.IN("blockSizeLimit", "")
+        CUfunction("func", ""),
+        nullable..CUoccupancyB2DSize("blockSizeToDynamicSMemSize", ""),
+        size_t("dynamicSMemSize", ""),
+        int("blockSizeLimit", "")
     )
 
     CUresult(
@@ -57,10 +57,10 @@ val CU65 = "CU65".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
 
         Check(1)..int.p.OUT("minGridSize", ""),
         Check(1)..int.p.OUT("blockSize", ""),
-        CUfunction.IN("func", ""),
-        CUoccupancyB2DSize.IN("blockSizeToDynamicSMemSize", ""),
-        size_t.IN("dynamicSMemSize", ""),
-        int.IN("blockSizeLimit", ""),
-        unsigned_int.IN("flags", "")
+        CUfunction("func", ""),
+        CUoccupancyB2DSize("blockSizeToDynamicSMemSize", ""),
+        size_t("dynamicSMemSize", ""),
+        int("blockSizeLimit", ""),
+        unsigned_int("flags", "")
     )
 }

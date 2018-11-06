@@ -40,15 +40,15 @@ val ANGLE_framebuffer_blit = "ANGLEFramebufferBlit".nativeClassGLES("ANGLE_frame
         "BlitFramebufferANGLE",
         "",
 
-        GLint.IN("srcX0", ""),
-        GLint.IN("srcY0", ""),
-        GLint.IN("srcX1", ""),
-        GLint.IN("srcY1", ""),
-        GLint.IN("dstX0", ""),
-        GLint.IN("dstY0", ""),
-        GLint.IN("dstX1", ""),
-        GLint.IN("dstY1", ""),
-        GLbitfield.IN("mask", ""),
-        GLenum.IN("filter", "")
+        GLint("srcX0", ""),
+        GLint("srcY0", ""),
+        GLint("srcX1", ""),
+        GLint("srcY1", ""),
+        GLint("dstX0", ""),
+        GLint("dstY0", ""),
+        GLint("dstX1", ""),
+        GLint("dstY1", ""),
+        GLbitfield("mask", ""),
+        GLenum("filter", "")
     )
 }

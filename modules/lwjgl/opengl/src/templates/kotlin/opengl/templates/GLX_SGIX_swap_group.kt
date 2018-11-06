@@ -28,8 +28,8 @@ val GLX_SGIX_swap_group = "GLXSGIXSwapGroup".nativeClassGLX("GLX_SGIX_swap_group
         """,
 
         DISPLAY,
-        GLXDrawable.IN("drawable", "the GLXDrawable to add to the swap group"),
-        nullable..GLXDrawable.IN("member", "a member of the swap group or {@code None}")
+        GLXDrawable("drawable", "the GLXDrawable to add to the swap group"),
+        nullable..GLXDrawable("member", "a member of the swap group or {@code None}")
     )
 
 }

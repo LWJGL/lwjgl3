@@ -23,7 +23,7 @@ val NV_query_resource_tag = "NVQueryResourceTag".nativeClassGL("NV_query_resourc
         "GenQueryResourceTagNV",
         "",
 
-        AutoSize("tagIds")..GLsizei.IN("n", ""),
+        AutoSize("tagIds")..GLsizei("n", ""),
         ReturnParam..GLuint.p.OUT("tagIds", "")
     )
 
@@ -31,15 +31,15 @@ val NV_query_resource_tag = "NVQueryResourceTag".nativeClassGL("NV_query_resourc
         "DeleteQueryResourceTagNV",
         "",
 
-        AutoSize("tagIds")..GLsizei.IN("n", ""),
-        SingleValue("tagId")..GLuint.const.p.IN("tagIds", "")
+        AutoSize("tagIds")..GLsizei("n", ""),
+        SingleValue("tagId")..GLuint.const.p("tagIds", "")
     )
 
     void(
         "QueryResourceTagNV",
         "",
 
-        GLuint.IN("tagId", ""),
-        GLcharASCII.const.p.IN("tagString", "")
+        GLuint("tagId", ""),
+        GLcharASCII.const.p("tagString", "")
     )
 }

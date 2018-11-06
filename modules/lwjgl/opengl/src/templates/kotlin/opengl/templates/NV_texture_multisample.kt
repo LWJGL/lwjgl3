@@ -31,82 +31,82 @@ val NV_texture_multisample = "NVTextureMultisample".nativeClassGL("NV_texture_mu
         "TexImage2DMultisampleCoverageNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("coverageSamples", ""),
-        GLsizei.IN("colorSamples", ""),
-        GLint.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLboolean.IN("fixedSampleLocations", "")
+        GLenum("target", ""),
+        GLsizei("coverageSamples", ""),
+        GLsizei("colorSamples", ""),
+        GLint("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLboolean("fixedSampleLocations", "")
     )
 
     void(
         "TexImage3DMultisampleCoverageNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("coverageSamples", ""),
-        GLsizei.IN("colorSamples", ""),
-        GLint.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLboolean.IN("fixedSampleLocations", "")
+        GLenum("target", ""),
+        GLsizei("coverageSamples", ""),
+        GLsizei("colorSamples", ""),
+        GLint("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLboolean("fixedSampleLocations", "")
     )
 
     void(
         "TextureImage2DMultisampleNV",
         "",
 
-        GLuint.IN("texture", ""),
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLint.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLboolean.IN("fixedSampleLocations", "")
+        GLuint("texture", ""),
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLint("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLboolean("fixedSampleLocations", "")
     )
 
     void(
         "TextureImage3DMultisampleNV",
         "",
 
-        GLuint.IN("texture", ""),
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLint.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLboolean.IN("fixedSampleLocations", "")
+        GLuint("texture", ""),
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLint("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLboolean("fixedSampleLocations", "")
     )
 
     void(
         "TextureImage2DMultisampleCoverageNV",
         "",
 
-        GLuint.IN("texture", ""),
-        GLenum.IN("target", ""),
-        GLsizei.IN("coverageSamples", ""),
-        GLsizei.IN("colorSamples", ""),
-        GLint.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLboolean.IN("fixedSampleLocations", "")
+        GLuint("texture", ""),
+        GLenum("target", ""),
+        GLsizei("coverageSamples", ""),
+        GLsizei("colorSamples", ""),
+        GLint("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLboolean("fixedSampleLocations", "")
     )
 
     void(
         "TextureImage3DMultisampleCoverageNV",
         "",
 
-        GLuint.IN("texture", ""),
-        GLenum.IN("target", ""),
-        GLsizei.IN("coverageSamples", ""),
-        GLsizei.IN("colorSamples", ""),
-        GLint.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLboolean.IN("fixedSampleLocations", "")
+        GLuint("texture", ""),
+        GLenum("target", ""),
+        GLsizei("coverageSamples", ""),
+        GLsizei("colorSamples", ""),
+        GLint("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLboolean("fixedSampleLocations", "")
     )
 }

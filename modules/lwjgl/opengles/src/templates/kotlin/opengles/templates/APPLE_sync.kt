@@ -92,40 +92,40 @@ val APPLE_sync = "APPLESync".nativeClassGLES("APPLE_sync", postfix = APPLE) {
         "FenceSyncAPPLE",
         "",
 
-        GLenum.IN("condition", ""),
-        GLbitfield.IN("flags", "")
+        GLenum("condition", ""),
+        GLbitfield("flags", "")
     )
 
     GLboolean(
         "IsSyncAPPLE",
         "",
 
-        GLsync.IN("sync", "")
+        GLsync("sync", "")
     )
 
     void(
         "DeleteSyncAPPLE",
         "",
 
-        GLsync.IN("sync", "")
+        GLsync("sync", "")
     )
 
     GLenum(
         "ClientWaitSyncAPPLE",
         "",
 
-        GLsync.IN("sync", ""),
-        GLbitfield.IN("flags", ""),
-        GLuint64.IN("timeout", "")
+        GLsync("sync", ""),
+        GLbitfield("flags", ""),
+        GLuint64("timeout", "")
     )
 
     void(
         "WaitSyncAPPLE",
         "",
 
-        GLsync.IN("sync", ""),
-        GLbitfield.IN("flags", ""),
-        GLuint64.IN("timeout", "")
+        GLsync("sync", ""),
+        GLbitfield("flags", ""),
+        GLuint64("timeout", "")
     )
 
     void(
@@ -133,7 +133,7 @@ val APPLE_sync = "APPLESync".nativeClassGLES("APPLE_sync", postfix = APPLE) {
         "",
 
 
-        GLenum.IN("pname", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint64.p.OUT("params", "")
     )
 
@@ -141,9 +141,9 @@ val APPLE_sync = "APPLESync".nativeClassGLES("APPLE_sync", postfix = APPLE) {
         "GetSyncivAPPLE",
         "",
 
-        GLsync.IN("sync", ""),
-        GLenum.IN("pname", ""),
-        AutoSize("values")..GLsizei.IN("bufSize", ""),
+        GLsync("sync", ""),
+        GLenum("pname", ""),
+        AutoSize("values")..GLsizei("bufSize", ""),
         nullable..Check(1)..GLsizei.p.OUT("length", ""),
         ReturnParam..GLint.p.OUT("values", "")
     )

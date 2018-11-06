@@ -71,15 +71,15 @@ val KHR_debug = "KHRDebug".nativeClassEGL("KHR_debug", postfix = KHR) {
         "DebugMessageControlKHR",
         "",
 
-        EGLDEBUGPROCKHR.IN("callback", ""),
-        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
+        EGLDEBUGPROCKHR("callback", ""),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
     )
 
     EGLBoolean(
         "QueryDebugKHR",
         "",
 
-        EGLint.IN("attribute", ""),
+        EGLint("attribute", ""),
         Check(1)..EGLAttrib.p.OUT("value", "")
     )
 
@@ -87,9 +87,9 @@ val KHR_debug = "KHRDebug".nativeClassEGL("KHR_debug", postfix = KHR) {
         "LabelObjectKHR",
         "",
 
-        EGLDisplay.IN("display", ""),
-        EGLenum.IN("objectType", ""),
-        EGLObjectKHR.IN("object", ""),
-        EGLLabelKHR.IN("label", "")
+        EGLDisplay("display", ""),
+        EGLenum("objectType", ""),
+        EGLObjectKHR("object", ""),
+        EGLLabelKHR("label", "")
     )
 }

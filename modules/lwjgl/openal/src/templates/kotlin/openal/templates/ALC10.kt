@@ -63,7 +63,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         device configuration. If #NULL is specified, the implementation will provide an implementation specific default.
         """,
 
-        nullable..ALCcharUTF8.const.p.IN("deviceSpecifier", "the requested device or device configuration")
+        nullable..ALCcharUTF8.const.p("deviceSpecifier", "the requested device or device configuration")
     )
 
     ALCboolean(
@@ -75,15 +75,15 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         destroyed. Once closed, the {@code deviceHandle} is invalid.
         """,
 
-        ALCdevice.const.p.IN("deviceHandle", "the device to close")
+        ALCdevice.const.p("deviceHandle", "the device to close")
     )
 
     ALCcontext.p(
         "CreateContext",
         "Creates an AL context.",
 
-        ALCdevice.const.p.IN("deviceHandle", "a valid device"),
-        nullable..NullTerminated..ALCint.const.p.IN(
+        ALCdevice.const.p("deviceHandle", "a valid device"),
+        nullable..NullTerminated..ALCint.const.p(
             "attrList",
             "null or a zero terminated list of integer pairs composed of valid ALC attribute tokens and requested values",
             ContextAttributes
@@ -102,7 +102,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         context. Commands that affect objects shared among contexts (e.g. buffers) have side effects on other contexts.
         """,
 
-        nullable..ALCcontext.p.IN("context", "the context to make current")
+        nullable..ALCcontext.p("context", "the context to make current")
     )
 
     ALCvoid(
@@ -116,7 +116,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         by alcCreateContext is that it is processing.
         """,
 
-        ALCcontext.p.IN("context", "the context to mark for processing")
+        ALCcontext.p("context", "the context to mark for processing")
     )
 
     ALCvoid(
@@ -128,7 +128,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         Repeated calls to alcSuspendContext are legal, and do not affect a context that is already marked as suspended.
         """,
 
-        ALCcontext.p.IN("context", "the context to mark as suspended")
+        ALCcontext.p("context", "the context to mark as suspended")
     )
 
     ALCvoid(
@@ -141,19 +141,20 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         during context destruction.
         """,
 
-        ALCcontext.p.IN("context", "the context to destroy")
+        ALCcontext.p("context", "the context to destroy")
     )
 
     ALCcontext.p(
         "GetCurrentContext",
-        "Queries for, and obtains a handle to, the current context for the application. If there is no current context, #NULL is returned."
+        "Queries for, and obtains a handle to, the current context for the application. If there is no current context, #NULL is returned.",
+        void()
     )
 
     ALCdevice.p(
         "GetContextsDevice",
         "Queries for, and obtains a handle to, the device of a given context.",
 
-        ALCcontext.p.IN("context", "the context to query")
+        ALCcontext.p("context", "the context to query")
     )
 
     ALCboolean(
@@ -165,8 +166,8 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         will convert the name to all upper-case internally (and will express extension names in upper-case).
         """,
 
-        nullable..ALCdevice.const.p.IN("deviceHandle", "the device to query"),
-        ALCcharASCII.const.p.IN("extName", "the extension name")
+        nullable..ALCdevice.const.p("deviceHandle", "the device to query"),
+        ALCcharASCII.const.p("extName", "the extension name")
     )
 
     opaque_p(
@@ -181,8 +182,8 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         even if available for one of the available devices.
         """,
 
-        nullable..ALCdevice.const.p.IN("deviceHandle", "the device to query"),
-        ALcharASCII.const.p.IN("funcName", "the function name")
+        nullable..ALCdevice.const.p("deviceHandle", "the device to query"),
+        ALcharASCII.const.p("funcName", "the function name")
     )
 
     ALCenum(
@@ -194,8 +195,8 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         legal, but only the tokens defined by the AL core are guaranteed. Availability of extension tokens depends on the ALC extension.
         """,
 
-        nullable..ALCdevice.const.p.IN("deviceHandle", "the device to query"),
-        ALCcharASCII.const.p.IN("enumName", "the enum name")
+        nullable..ALCdevice.const.p("deviceHandle", "the device to query"),
+        ALCcharASCII.const.p("enumName", "the enum name")
     )
 
     ALCenum(
@@ -209,7 +210,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         Error conditions are specific to the device, and (like AL) a call to alcGetError resets the error state.
         """,
 
-        nullable..ALCdevice.p.IN("deviceHandle", "the device to query")
+        nullable..ALCdevice.p("deviceHandle", "the device to query")
     )
 
     ALCcharUTF8.const.p(
@@ -220,17 +221,17 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         <b>LWJGL note</b>: Use ALUtil#getStringList() for those tokens that return multiple values.
         """,
 
-        nullable..ALCdevice.p.IN("deviceHandle", "the device to query"),
-        ALCenum.IN("token", "the information to query", StringQueries)
+        nullable..ALCdevice.p("deviceHandle", "the device to query"),
+        ALCenum("token", "the information to query", StringQueries)
     )
 
     ALCvoid(
         "GetIntegerv",
         "Obtains integer value(s) from ALC.",
 
-        nullable..ALCdevice.p.IN("deviceHandle", "the device to query"),
-        ALCenum.IN("token", "the information to query", IntegerQueries),
-        AutoSize("dest")..ALCsizei.IN("size", "the size of the {@code dest} buffer"),
+        nullable..ALCdevice.p("deviceHandle", "the device to query"),
+        ALCenum("token", "the information to query", IntegerQueries),
+        AutoSize("dest")..ALCsizei("size", "the size of the {@code dest} buffer"),
         ReturnParam..ALCint.p.OUT("dest", "the destination buffer")
     )
 

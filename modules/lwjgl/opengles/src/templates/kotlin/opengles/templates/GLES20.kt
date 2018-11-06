@@ -322,381 +322,378 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "ActiveTexture",
         "",
 
-        GLenum.IN("texture", "")
+        GLenum("texture", "")
     )
 
     void(
         "AttachShader",
         "",
 
-        GLuint.IN("program", ""),
-        GLuint.IN("shader", "")
+        GLuint("program", ""),
+        GLuint("shader", "")
     )
 
     void(
         "BindAttribLocation",
         "",
 
-        GLuint.IN("program", ""),
-        GLuint.IN("index", ""),
-        GLcharASCII.const.p.IN("name", "")
+        GLuint("program", ""),
+        GLuint("index", ""),
+        GLcharASCII.const.p("name", "")
     )
 
     void(
         "BindBuffer",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("buffer", "")
+        GLenum("target", ""),
+        GLuint("buffer", "")
     )
 
     void(
         "BindFramebuffer",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("framebuffer", "")
+        GLenum("target", ""),
+        GLuint("framebuffer", "")
     )
 
     void(
         "BindRenderbuffer",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("renderbuffer", "")
+        GLenum("target", ""),
+        GLuint("renderbuffer", "")
     )
 
     void(
         "BindTexture",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("texture", "")
+        GLenum("target", ""),
+        GLuint("texture", "")
     )
 
     void(
         "BlendColor",
         "",
 
-        GLfloat.IN("red", ""),
-        GLfloat.IN("green", ""),
-        GLfloat.IN("blue", ""),
-        GLfloat.IN("alpha", "")
+        GLfloat("red", ""),
+        GLfloat("green", ""),
+        GLfloat("blue", ""),
+        GLfloat("alpha", "")
     )
 
     void(
         "BlendEquation",
         "",
 
-        GLenum.IN("mode", "")
+        GLenum("mode", "")
     )
 
     void(
         "BlendEquationSeparate",
         "",
 
-        GLenum.IN("modeRGB", ""),
-        GLenum.IN("modeAlpha", "")
+        GLenum("modeRGB", ""),
+        GLenum("modeAlpha", "")
     )
 
     void(
         "BlendFunc",
         "",
 
-        GLenum.IN("sfactor", ""),
-        GLenum.IN("dfactor", "")
+        GLenum("sfactor", ""),
+        GLenum("dfactor", "")
     )
 
     void(
         "BlendFuncSeparate",
         "",
 
-        GLenum.IN("sfactorRGB", ""),
-        GLenum.IN("dfactorRGB", ""),
-        GLenum.IN("sfactorAlpha", ""),
-        GLenum.IN("dfactorAlpha", "")
+        GLenum("sfactorRGB", ""),
+        GLenum("dfactorRGB", ""),
+        GLenum("sfactorAlpha", ""),
+        GLenum("dfactorAlpha", "")
     )
 
     void(
         "BufferData",
         "",
 
-        GLenum.IN("target", ""),
-        AutoSize("data")..GLsizeiptr.IN("size", ""),
+        GLenum("target", ""),
+        AutoSize("data")..GLsizeiptr("size", ""),
         optional..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..void.const.p.IN("data", ""),
-        GLenum.IN("usage", "")
+        )..void.const.p("data", ""),
+        GLenum("usage", "")
     )
 
     void(
         "BufferSubData",
         "",
 
-        GLenum.IN("target", ""),
-        GLintptr.IN("offset", ""),
-        AutoSize("data")..GLsizeiptr.IN("size", ""),
+        GLenum("target", ""),
+        GLintptr("offset", ""),
+        AutoSize("data")..GLsizeiptr("size", ""),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..void.const.p.IN("data", "")
+        )..void.const.p("data", "")
     )
 
     GLenum(
         "CheckFramebufferStatus",
         "",
 
-        GLenum.IN("target", "")
+        GLenum("target", "")
     )
 
     void(
         "Clear",
         "",
 
-        GLbitfield.IN("mask", "")
+        GLbitfield("mask", "")
     )
 
     void(
         "ClearColor",
         "",
 
-        GLfloat.IN("red", ""),
-        GLfloat.IN("green", ""),
-        GLfloat.IN("blue", ""),
-        GLfloat.IN("alpha", "")
+        GLfloat("red", ""),
+        GLfloat("green", ""),
+        GLfloat("blue", ""),
+        GLfloat("alpha", "")
     )
 
     void(
         "ClearDepthf",
         "",
 
-        GLfloat.IN("d", "")
+        GLfloat("d", "")
     )
 
     void(
         "ClearStencil",
         "",
 
-        GLint.IN("s", "")
+        GLint("s", "")
     )
 
     void(
         "ColorMask",
         "",
 
-        GLboolean.IN("red", ""),
-        GLboolean.IN("green", ""),
-        GLboolean.IN("blue", ""),
-        GLboolean.IN("alpha", "")
+        GLboolean("red", ""),
+        GLboolean("green", ""),
+        GLboolean("blue", ""),
+        GLboolean("alpha", "")
     )
 
     void(
         "CompileShader",
         "",
 
-        GLuint.IN("shader", "")
+        GLuint("shader", "")
     )
 
     void(
         "CompressedTexImage2D",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLint.IN("border", ""),
-        AutoSize("data")..GLsizei.IN("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("data", "")
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLint("border", ""),
+        AutoSize("data")..GLsizei("imageSize", ""),
+        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "")
     )
 
     void(
         "CompressedTexSubImage2D",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLint.IN("xoffset", ""),
-        GLint.IN("yoffset", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLenum.IN("format", ""),
-        AutoSize("data")..GLsizei.IN("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "")
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLint("xoffset", ""),
+        GLint("yoffset", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLenum("format", ""),
+        AutoSize("data")..GLsizei("imageSize", ""),
+        PIXEL_UNPACK_BUFFER..void.const.p("data", "")
     )
 
     void(
         "CopyTexImage2D",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLenum.IN("internalformat", ""),
-        GLint.IN("x", ""),
-        GLint.IN("y", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLint.IN("border", "")
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLenum("internalformat", ""),
+        GLint("x", ""),
+        GLint("y", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLint("border", "")
     )
 
     void(
         "CopyTexSubImage2D",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLint.IN("xoffset", ""),
-        GLint.IN("yoffset", ""),
-        GLint.IN("x", ""),
-        GLint.IN("y", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLint("xoffset", ""),
+        GLint("yoffset", ""),
+        GLint("x", ""),
+        GLint("y", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
-    GLuint(
-        "CreateProgram",
-        ""
-    )
+    GLuint("CreateProgram", "", void())
 
     GLuint(
         "CreateShader",
         "",
 
-        GLenum.IN("type", "")
+        GLenum("type", "")
     )
 
     void(
         "CullFace",
         "",
 
-        GLenum.IN("mode", "")
+        GLenum("mode", "")
     )
 
     void(
         "DeleteBuffers",
         "",
 
-        AutoSize("buffers")..GLsizei.IN("n", ""),
-        SingleValue("buffer")..GLuint.const.p.IN("buffers", "")
+        AutoSize("buffers")..GLsizei("n", ""),
+        SingleValue("buffer")..GLuint.const.p("buffers", "")
     )
 
     void(
         "DeleteFramebuffers",
         "",
 
-        AutoSize("framebuffers")..GLsizei.IN("n", ""),
-        SingleValue("framebuffer")..GLuint.const.p.IN("framebuffers", "")
+        AutoSize("framebuffers")..GLsizei("n", ""),
+        SingleValue("framebuffer")..GLuint.const.p("framebuffers", "")
     )
 
     void(
         "DeleteProgram",
         "",
 
-        GLuint.IN("program", "")
+        GLuint("program", "")
     )
 
     void(
         "DeleteRenderbuffers",
         "",
 
-        AutoSize("renderbuffers")..GLsizei.IN("n", ""),
-        SingleValue("renderbuffer")..GLuint.const.p.IN("renderbuffers", "")
+        AutoSize("renderbuffers")..GLsizei("n", ""),
+        SingleValue("renderbuffer")..GLuint.const.p("renderbuffers", "")
     )
 
     void(
         "DeleteShader",
         "",
 
-        GLuint.IN("shader", "")
+        GLuint("shader", "")
     )
 
     void(
         "DeleteTextures",
         "",
 
-        AutoSize("textures")..GLsizei.IN("n", ""),
-        SingleValue("texture")..GLuint.const.p.IN("textures", "")
+        AutoSize("textures")..GLsizei("n", ""),
+        SingleValue("texture")..GLuint.const.p("textures", "")
     )
 
     void(
         "DepthFunc",
         "",
 
-        GLenum.IN("func", "")
+        GLenum("func", "")
     )
 
     void(
         "DepthMask",
         "",
 
-        GLboolean.IN("flag", "")
+        GLboolean("flag", "")
     )
 
     void(
         "DepthRangef",
         "",
 
-        GLfloat.IN("n", ""),
-        GLfloat.IN("f", "")
+        GLfloat("n", ""),
+        GLfloat("f", "")
     )
 
     void(
         "DetachShader",
         "",
 
-        GLuint.IN("program", ""),
-        GLuint.IN("shader", "")
+        GLuint("program", ""),
+        GLuint("shader", "")
     )
 
     void(
         "Disable",
         "",
 
-        GLenum.IN("cap", "")
+        GLenum("cap", "")
     )
 
     void(
         "DisableVertexAttribArray",
         "",
 
-        GLuint.IN("index", "")
+        GLuint("index", "")
     )
 
     void(
         "DrawArrays",
         "",
 
-        GLenum.IN("mode", ""),
-        GLint.IN("first", ""),
-        GLsizei.IN("count", "")
+        GLenum("mode", ""),
+        GLint("first", ""),
+        GLsizei("count", "")
     )
 
     void(
         "DrawElements",
         "",
 
-        GLenum.IN("mode", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "")
+        GLenum("mode", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", "")
     )
 
     void(
         "Enable",
         "",
 
-        GLenum.IN("cap", "")
+        GLenum("cap", "")
     )
 
     void(
         "EnableVertexAttribArray",
         "",
 
-        GLuint.IN("index", "")
+        GLuint("index", "")
     )
 
     void(
@@ -713,35 +710,35 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "FramebufferRenderbuffer",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLenum.IN("renderbuffertarget", ""),
-        GLuint.IN("renderbuffer", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLenum("renderbuffertarget", ""),
+        GLuint("renderbuffer", "")
     )
 
     void(
         "FramebufferTexture2D",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLenum.IN("textarget", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLenum("textarget", ""),
+        GLuint("texture", ""),
+        GLint("level", "")
     )
 
     void(
         "FrontFace",
         "",
 
-        GLenum.IN("mode", "")
+        GLenum("mode", "")
     )
 
     void(
         "GenBuffers",
         "",
 
-        AutoSize("buffers")..GLsizei.IN("n", ""),
+        AutoSize("buffers")..GLsizei("n", ""),
         ReturnParam..GLuint.p.OUT("buffers", "")
     )
 
@@ -749,14 +746,14 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GenerateMipmap",
         "",
 
-        GLenum.IN("target", "")
+        GLenum("target", "")
     )
 
     void(
         "GenFramebuffers",
         "",
 
-        AutoSize("framebuffers")..GLsizei.IN("n", ""),
+        AutoSize("framebuffers")..GLsizei("n", ""),
         ReturnParam..GLuint.p.OUT("framebuffers", "")
     )
 
@@ -764,7 +761,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GenRenderbuffers",
         "",
 
-        AutoSize("renderbuffers")..GLsizei.IN("n", ""),
+        AutoSize("renderbuffers")..GLsizei("n", ""),
         ReturnParam..GLuint.p.OUT("renderbuffers", "")
     )
 
@@ -772,7 +769,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GenTextures",
         "",
 
-        AutoSize("textures")..GLsizei.IN("n", ""),
+        AutoSize("textures")..GLsizei("n", ""),
         ReturnParam..GLuint.p.OUT("textures", "")
     )
 
@@ -780,9 +777,9 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetActiveAttrib",
         "",
 
-        GLuint.IN("program", ""),
-        GLuint.IN("index", ""),
-        AutoSize("name")..GLsizei.IN("bufSize", ""),
+        GLuint("program", ""),
+        GLuint("index", ""),
+        AutoSize("name")..GLsizei("bufSize", ""),
         Check(1)..nullable..GLsizei.p.OUT("length", ""),
         Check(1)..GLint.p.OUT("size", ""),
         Check(1)..GLenum.p.OUT("type", ""),
@@ -796,9 +793,9 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetActiveUniform",
         "",
 
-        GLuint.IN("program", ""),
-        GLuint.IN("index", ""),
-        AutoSize("name")..GLsizei.IN("bufSize", ""),
+        GLuint("program", ""),
+        GLuint("index", ""),
+        AutoSize("name")..GLsizei("bufSize", ""),
         Check(1)..nullable..GLsizei.p.OUT("length", ""),
         Check(1)..GLint.p.OUT("size", ""),
         Check(1)..GLenum.p.OUT("type", ""),
@@ -812,8 +809,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetAttachedShaders",
         "",
 
-        GLuint.IN("program", ""),
-        AutoSize("shaders")..GLsizei.IN("maxCount", ""),
+        GLuint("program", ""),
+        AutoSize("shaders")..GLsizei("maxCount", ""),
         Check(1)..nullable..GLsizei.p.OUT("count", ""),
         GLuint.p.OUT("shaders", "")
     )
@@ -822,15 +819,15 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetAttribLocation",
         "",
 
-        GLuint.IN("program", ""),
-        GLcharASCII.const.p.IN("name", "")
+        GLuint("program", ""),
+        GLcharASCII.const.p("name", "")
     )
 
     void(
         "GetBooleanv",
         "",
 
-        GLenum.IN("pname", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLboolean.p.OUT("data", "")
     )
 
@@ -838,21 +835,18 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetBufferParameteriv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
-    GLenum(
-        "GetError",
-        ""
-    )
+    GLenum("GetError", "", void())
 
     void(
         "GetFloatv",
         "",
 
-        GLenum.IN("pname", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLfloat.p.OUT("data", "")
     )
 
@@ -860,9 +854,9 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetFramebufferAttachmentParameteriv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -870,7 +864,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetIntegerv",
         "",
 
-        GLenum.IN("pname", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("data", "")
     )
 
@@ -878,8 +872,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetProgramiv",
         "",
 
-        GLuint.IN("program", ""),
-        GLenum.IN("pname", ""),
+        GLuint("program", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -887,8 +881,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetProgramInfoLog",
         "",
 
-        GLuint.IN("program", ""),
-        AutoSize("infoLog")..GLsizei.IN("bufSize", ""),
+        GLuint("program", ""),
+        AutoSize("infoLog")..GLsizei("bufSize", ""),
         Check(1)..nullable..GLsizei.p.OUT("length", ""),
         Return(
             "length",
@@ -901,8 +895,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetRenderbufferParameteriv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -910,8 +904,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetShaderiv",
         "",
 
-        GLuint.IN("shader", ""),
-        GLenum.IN("pname", ""),
+        GLuint("shader", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -919,8 +913,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetShaderInfoLog",
         "",
 
-        GLuint.IN("shader", ""),
-        AutoSize("infoLog")..GLsizei.IN("bufSize", ""),
+        GLuint("shader", ""),
+        AutoSize("infoLog")..GLsizei("bufSize", ""),
         Check(1)..nullable..GLsizei.p.OUT("length", ""),
         Return(
             "length",
@@ -933,8 +927,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetShaderPrecisionFormat",
         "",
 
-        GLenum.IN("shadertype", ""),
-        GLenum.IN("precisiontype", ""),
+        GLenum("shadertype", ""),
+        GLenum("precisiontype", ""),
         Check(2)..GLint.p.OUT("range", ""),
         Check(2)..GLint.p.OUT("precision", "")
     )
@@ -943,8 +937,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetShaderSource",
         "",
 
-        GLuint.IN("shader", ""),
-        AutoSize("source")..GLsizei.IN("bufSize", ""),
+        GLuint("shader", ""),
+        AutoSize("source")..GLsizei("bufSize", ""),
         Check(1)..nullable..GLsizei.p.OUT("length", ""),
         Return("length", "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)", heapAllocate = true)..GLcharUTF8.p.OUT("source", "")
     )
@@ -953,15 +947,15 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetString",
         "",
 
-        GLenum.IN("name", "")
+        GLenum("name", "")
     )
 
     void(
         "GetTexParameterfv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLfloat.p.OUT("params", "")
     )
 
@@ -969,8 +963,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetTexParameteriv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -978,8 +972,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetUniformfv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
+        GLuint("program", ""),
+        GLint("location", ""),
         ReturnParam..Check(1)..GLfloat.p.OUT("params", "")
     )
 
@@ -987,8 +981,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetUniformiv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
+        GLuint("program", ""),
+        GLint("location", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -996,16 +990,16 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetUniformLocation",
         "",
 
-        GLuint.IN("program", ""),
-        GLcharASCII.const.p.IN("name", "")
+        GLuint("program", ""),
+        GLcharASCII.const.p("name", "")
     )
 
     void(
         "GetVertexAttribfv",
         "",
 
-        GLuint.IN("index", ""),
-        GLenum.IN("pname", ""),
+        GLuint("index", ""),
+        GLenum("pname", ""),
         Check(4)..GLfloat.p.OUT("params", "")
     )
 
@@ -1013,8 +1007,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetVertexAttribiv",
         "",
 
-        GLuint.IN("index", ""),
-        GLenum.IN("pname", ""),
+        GLuint("index", ""),
+        GLenum("pname", ""),
         Check(4)..GLint.p.OUT("params", "")
     )
 
@@ -1022,8 +1016,8 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "GetVertexAttribPointerv",
         "",
 
-        GLuint.IN("index", ""),
-        GLenum.IN("pname", ""),
+        GLuint("index", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..void.p.p.OUT("pointer", "")
     )
 
@@ -1031,99 +1025,99 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "Hint",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("mode", "")
+        GLenum("target", ""),
+        GLenum("mode", "")
     )
 
     GLboolean(
         "IsBuffer",
         "",
 
-        GLuint.IN("buffer", "")
+        GLuint("buffer", "")
     )
 
     GLboolean(
         "IsEnabled",
         "",
 
-        GLenum.IN("cap", "")
+        GLenum("cap", "")
     )
 
     GLboolean(
         "IsFramebuffer",
         "",
 
-        GLuint.IN("framebuffer", "")
+        GLuint("framebuffer", "")
     )
 
     GLboolean(
         "IsProgram",
         "",
 
-        GLuint.IN("program", "")
+        GLuint("program", "")
     )
 
     GLboolean(
         "IsRenderbuffer",
         "",
 
-        GLuint.IN("renderbuffer", "")
+        GLuint("renderbuffer", "")
     )
 
     GLboolean(
         "IsShader",
         "",
 
-        GLuint.IN("shader", "")
+        GLuint("shader", "")
     )
 
     GLboolean(
         "IsTexture",
         "",
 
-        GLuint.IN("texture", "")
+        GLuint("texture", "")
     )
 
     void(
         "LineWidth",
         "",
 
-        GLfloat.IN("width", "")
+        GLfloat("width", "")
     )
 
     void(
         "LinkProgram",
         "",
 
-        GLuint.IN("program", "")
+        GLuint("program", "")
     )
 
     void(
         "PixelStorei",
         "",
 
-        GLenum.IN("pname", ""),
-        GLint.IN("param", "")
+        GLenum("pname", ""),
+        GLint("param", "")
     )
 
     void(
         "PolygonOffset",
         "",
 
-        GLfloat.IN("factor", ""),
-        GLfloat.IN("units", "")
+        GLfloat("factor", ""),
+        GLfloat("units", "")
     )
 
     void(
         "ReadPixels",
         "",
 
-        GLint.IN("x", ""),
-        GLint.IN("y", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLenum.IN("format", ""),
-        GLenum.IN("type", ""),
+        GLint("x", ""),
+        GLint("y", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLenum("format", ""),
+        GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
@@ -1140,457 +1134,457 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
         "RenderbufferStorage",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLenum("target", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
     void(
         "SampleCoverage",
         "",
 
-        GLfloat.IN("value", ""),
-        GLboolean.IN("invert", "")
+        GLfloat("value", ""),
+        GLboolean("invert", "")
     )
 
     void(
         "Scissor",
         "",
 
-        GLint.IN("x", ""),
-        GLint.IN("y", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLint("x", ""),
+        GLint("y", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
     void(
         "ShaderBinary",
         "",
 
-        AutoSize("shaders")..GLsizei.IN("count", ""),
-        GLuint.const.p.IN("shaders", ""),
-        GLenum.IN("binaryformat", ""),
-        void.const.p.IN("binary", ""),
-        AutoSize("binary")..GLsizei.IN("length", "")
+        AutoSize("shaders")..GLsizei("count", ""),
+        GLuint.const.p("shaders", ""),
+        GLenum("binaryformat", ""),
+        void.const.p("binary", ""),
+        AutoSize("binary")..GLsizei("length", "")
     )
 
     void(
         "ShaderSource",
         "",
 
-        GLuint.IN("shader", ""),
-        AutoSize("string", "length")..GLsizei.IN("count", ""),
-        PointerArray(GLcharUTF8.p, "string", "length")..GLcharUTF8.const.p.const.p.IN("string", ""),
-        nullable..GLint.const.p.IN("length", "")
+        GLuint("shader", ""),
+        AutoSize("string", "length")..GLsizei("count", ""),
+        PointerArray(GLcharUTF8.p, "string", "length")..GLcharUTF8.const.p.const.p("string", ""),
+        nullable..GLint.const.p("length", "")
     )
 
     void(
         "StencilFunc",
         "",
 
-        GLenum.IN("func", ""),
-        GLint.IN("ref", ""),
-        GLuint.IN("mask", "")
+        GLenum("func", ""),
+        GLint("ref", ""),
+        GLuint("mask", "")
     )
 
     void(
         "StencilFuncSeparate",
         "",
 
-        GLenum.IN("face", ""),
-        GLenum.IN("func", ""),
-        GLint.IN("ref", ""),
-        GLuint.IN("mask", "")
+        GLenum("face", ""),
+        GLenum("func", ""),
+        GLint("ref", ""),
+        GLuint("mask", "")
     )
 
     void(
         "StencilMask",
         "",
 
-        GLuint.IN("mask", "")
+        GLuint("mask", "")
     )
 
     void(
         "StencilMaskSeparate",
         "",
 
-        GLenum.IN("face", ""),
-        GLuint.IN("mask", "")
+        GLenum("face", ""),
+        GLuint("mask", "")
     )
 
     void(
         "StencilOp",
         "",
 
-        GLenum.IN("fail", ""),
-        GLenum.IN("zfail", ""),
-        GLenum.IN("zpass", "")
+        GLenum("fail", ""),
+        GLenum("zfail", ""),
+        GLenum("zpass", "")
     )
 
     void(
         "StencilOpSeparate",
         "",
 
-        GLenum.IN("face", ""),
-        GLenum.IN("sfail", ""),
-        GLenum.IN("dpfail", ""),
-        GLenum.IN("dppass", "")
+        GLenum("face", ""),
+        GLenum("sfail", ""),
+        GLenum("dpfail", ""),
+        GLenum("dppass", "")
     )
 
     void(
         "TexImage2D",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLint.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLint.IN("border", ""),
-        GLenum.IN("format", ""),
-        GLenum.IN("type", ""),
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLint("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLint("border", ""),
+        GLenum("format", ""),
+        GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("pixels", "")
+        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p("pixels", "")
     )
 
     void(
         "TexParameterf",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
-        GLfloat.IN("param", "")
+        GLenum("target", ""),
+        GLenum("pname", ""),
+        GLfloat("param", "")
     )
 
     void(
         "TexParameterfv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
-        Check(1)..GLfloat.const.p.IN("params", "")
+        GLenum("target", ""),
+        GLenum("pname", ""),
+        Check(1)..GLfloat.const.p("params", "")
     )
 
     void(
         "TexParameteri",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
-        GLint.IN("param", "")
+        GLenum("target", ""),
+        GLenum("pname", ""),
+        GLint("param", "")
     )
 
     void(
         "TexParameteriv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
-        Check(1)..GLint.const.p.IN("params", "")
+        GLenum("target", ""),
+        GLenum("pname", ""),
+        Check(1)..GLint.const.p("params", "")
     )
 
     void(
         "TexSubImage2D",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLint.IN("xoffset", ""),
-        GLint.IN("yoffset", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLenum.IN("format", ""),
-        GLenum.IN("type", ""),
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLint("xoffset", ""),
+        GLint("yoffset", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLenum("format", ""),
+        GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p.IN("pixels", "")
+        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
     )
 
     void(
         "Uniform1f",
         "",
 
-        GLint.IN("location", ""),
-        GLfloat.IN("v0", "")
+        GLint("location", ""),
+        GLfloat("v0", "")
     )
 
     void(
         "Uniform1fv",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "Uniform1i",
         "",
 
-        GLint.IN("location", ""),
-        GLint.IN("v0", "")
+        GLint("location", ""),
+        GLint("v0", "")
     )
 
     void(
         "Uniform1iv",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLint.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLint.const.p("value", "")
     )
 
     void(
         "Uniform2f",
         "",
 
-        GLint.IN("location", ""),
-        GLfloat.IN("v0", ""),
-        GLfloat.IN("v1", "")
+        GLint("location", ""),
+        GLfloat("v0", ""),
+        GLfloat("v1", "")
     )
 
     void(
         "Uniform2fv",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(2, "value")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(2, "value")..GLsizei("count", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "Uniform2i",
         "",
 
-        GLint.IN("location", ""),
-        GLint.IN("v0", ""),
-        GLint.IN("v1", "")
+        GLint("location", ""),
+        GLint("v0", ""),
+        GLint("v1", "")
     )
 
     void(
         "Uniform2iv",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(2, "value")..GLsizei.IN("count", ""),
-        GLint.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(2, "value")..GLsizei("count", ""),
+        GLint.const.p("value", "")
     )
 
     void(
         "Uniform3f",
         "",
 
-        GLint.IN("location", ""),
-        GLfloat.IN("v0", ""),
-        GLfloat.IN("v1", ""),
-        GLfloat.IN("v2", "")
+        GLint("location", ""),
+        GLfloat("v0", ""),
+        GLfloat("v1", ""),
+        GLfloat("v2", "")
     )
 
     void(
         "Uniform3fv",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(3, "value")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(3, "value")..GLsizei("count", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "Uniform3i",
         "",
 
-        GLint.IN("location", ""),
-        GLint.IN("v0", ""),
-        GLint.IN("v1", ""),
-        GLint.IN("v2", "")
+        GLint("location", ""),
+        GLint("v0", ""),
+        GLint("v1", ""),
+        GLint("v2", "")
     )
 
     void(
         "Uniform3iv",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(3, "value")..GLsizei.IN("count", ""),
-        GLint.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(3, "value")..GLsizei("count", ""),
+        GLint.const.p("value", "")
     )
 
     void(
         "Uniform4f",
         "",
 
-        GLint.IN("location", ""),
-        GLfloat.IN("v0", ""),
-        GLfloat.IN("v1", ""),
-        GLfloat.IN("v2", ""),
-        GLfloat.IN("v3", "")
+        GLint("location", ""),
+        GLfloat("v0", ""),
+        GLfloat("v1", ""),
+        GLfloat("v2", ""),
+        GLfloat("v3", "")
     )
 
     void(
         "Uniform4fv",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(4, "value")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(4, "value")..GLsizei("count", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "Uniform4i",
         "",
 
-        GLint.IN("location", ""),
-        GLint.IN("v0", ""),
-        GLint.IN("v1", ""),
-        GLint.IN("v2", ""),
-        GLint.IN("v3", "")
+        GLint("location", ""),
+        GLint("v0", ""),
+        GLint("v1", ""),
+        GLint("v2", ""),
+        GLint("v3", "")
     )
 
     void(
         "Uniform4iv",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(4, "value")..GLsizei.IN("count", ""),
-        GLint.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(4, "value")..GLsizei("count", ""),
+        GLint.const.p("value", "")
     )
 
     void(
         "UniformMatrix2fv",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(2 x 2, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(2 x 2, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "UniformMatrix3fv",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(3 x 3, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(3 x 3, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "UniformMatrix4fv",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(4 x 4, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(4 x 4, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "UseProgram",
         "",
 
-        GLuint.IN("program", "")
+        GLuint("program", "")
     )
 
     void(
         "ValidateProgram",
         "",
 
-        GLuint.IN("program", "")
+        GLuint("program", "")
     )
 
     void(
         "VertexAttrib1f",
         "",
 
-        GLuint.IN("index", ""),
-        GLfloat.IN("x", "")
+        GLuint("index", ""),
+        GLfloat("x", "")
     )
 
     void(
         "VertexAttrib1fv",
         "",
 
-        GLuint.IN("index", ""),
-        Check(1)..GLfloat.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(1)..GLfloat.const.p("v", "")
     )
 
     void(
         "VertexAttrib2f",
         "",
 
-        GLuint.IN("index", ""),
-        GLfloat.IN("x", ""),
-        GLfloat.IN("y", "")
+        GLuint("index", ""),
+        GLfloat("x", ""),
+        GLfloat("y", "")
     )
 
     void(
         "VertexAttrib2fv",
         "",
 
-        GLuint.IN("index", ""),
-        Check(2)..GLfloat.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(2)..GLfloat.const.p("v", "")
     )
 
     void(
         "VertexAttrib3f",
         "",
 
-        GLuint.IN("index", ""),
-        GLfloat.IN("x", ""),
-        GLfloat.IN("y", ""),
-        GLfloat.IN("z", "")
+        GLuint("index", ""),
+        GLfloat("x", ""),
+        GLfloat("y", ""),
+        GLfloat("z", "")
     )
 
     void(
         "VertexAttrib3fv",
         "",
 
-        GLuint.IN("index", ""),
-        Check(3)..GLfloat.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(3)..GLfloat.const.p("v", "")
     )
 
     void(
         "VertexAttrib4f",
         "",
 
-        GLuint.IN("index", ""),
-        GLfloat.IN("x", ""),
-        GLfloat.IN("y", ""),
-        GLfloat.IN("z", ""),
-        GLfloat.IN("w", "")
+        GLuint("index", ""),
+        GLfloat("x", ""),
+        GLfloat("y", ""),
+        GLfloat("z", ""),
+        GLfloat("w", "")
     )
 
     void(
         "VertexAttrib4fv",
         "",
 
-        GLuint.IN("index", ""),
-        Check(4)..GLfloat.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(4)..GLfloat.const.p("v", "")
     )
 
     OffHeapOnly..void(
         "VertexAttribPointer",
         "",
 
-        GLuint.IN("index", ""),
-        GLint.IN("size", ""),
-        GLenum.IN("type", ""),
-        GLboolean.IN("normalized", ""),
-        GLsizei.IN("stride", ""),
+        GLuint("index", ""),
+        GLint("size", ""),
+        GLenum("type", ""),
+        GLboolean("normalized", ""),
+        GLsizei("stride", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..void.const.p.IN("pointer", "")
+        )..Unsafe..ARRAY_BUFFER..void.const.p("pointer", "")
     )
 
     void(
         "Viewport",
         "",
 
-        GLint.IN("x", ""),
-        GLint.IN("y", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLint("x", ""),
+        GLint("y", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 }

@@ -55,22 +55,22 @@ glActiveProgramEXT(program);""")}
         "UseShaderProgramEXT",
         "",
 
-        GLenum.IN("type", ""),
-        GLuint.IN("program", "")
+        GLenum("type", ""),
+        GLuint("program", "")
     )
 
     void(
         "ActiveProgramEXT",
         "",
 
-        GLuint.IN("program", "")
+        GLuint("program", "")
     )
 
     GLuint(
         "CreateShaderProgramEXT",
         "",
 
-        GLenum.IN("type", ""),
-        GLcharUTF8.const.p.IN("string", "")
+        GLenum("type", ""),
+        GLcharUTF8.const.p("string", "")
     )
 }

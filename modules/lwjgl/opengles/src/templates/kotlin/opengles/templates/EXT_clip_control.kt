@@ -47,7 +47,7 @@ val EXT_clip_control = "EXTClipControl".nativeClassGLES("EXT_clip_control", post
         "ClipControlEXT",
         "",
 
-        GLenum.IN("origin", "", origins),
-        GLenum.IN("depth", "", depths)
+        GLenum("origin", "", origins),
+        GLenum("depth", "", depths)
     )
 }

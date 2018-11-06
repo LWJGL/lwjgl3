@@ -109,11 +109,11 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
         #DEBUG_SEVERITY_LOW_AMD are initially disabled.
         """,
 
-        GLenum.IN("category", "the message category", Categories),
-        GLenum.IN("severity", "the message severity", Severities),
-        AutoSize("ids")..GLsizei.IN("count", "the number of values in the {@code ids} array"),
-        SingleValue("id")..nullable..GLuint.const.p.IN("ids", "an array of message ids"),
-        GLboolean.IN("enabled", "whether to enable or disable the referenced subset of messages")
+        GLenum("category", "the message category", Categories),
+        GLenum("severity", "the message severity", Severities),
+        AutoSize("ids")..GLsizei("count", "the number of values in the {@code ids} array"),
+        SingleValue("id")..nullable..GLuint.const.p("ids", "an array of message ids"),
+        GLboolean("enabled", "whether to enable or disable the referenced subset of messages")
     )
 
     void(
@@ -130,11 +130,11 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
         The error #INVALID_OPERATION will be generated if this function is called in a non-debug context.
         """,
 
-        GLenum.IN("category", "the message category", "#DEBUG_CATEGORY_APPLICATION_AMD"),
-        GLenum.IN("severity", "the message severity", Severities),
-        GLuint.IN("id", "the message id"),
-        AutoSize("buf")..GLsizei.IN("length", "the number of character in the message"),
-        GLcharUTF8.const.p.IN("buf", "the message characters")
+        GLenum("category", "the message category", "#DEBUG_CATEGORY_APPLICATION_AMD"),
+        GLenum("severity", "the message severity", Severities),
+        GLuint("id", "the message id"),
+        AutoSize("buf")..GLsizei("length", "the number of character in the message"),
+        GLcharUTF8.const.p("buf", "the message characters")
     )
 
     void(
@@ -164,8 +164,8 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
         application can query the number of messages currently in the log by obtaining the value of #DEBUG_LOGGED_MESSAGES_AMD.
         """,
 
-        nullable..GLDEBUGPROCAMD.IN("callback", "a callback function that will be called when a debug message is generated"),
-        nullable..opaque_p.IN(
+        nullable..GLDEBUGPROCAMD("callback", "a callback function that will be called when a debug message is generated"),
+        nullable..opaque_p(
             "userParam",
             "a user supplied pointer that will be passed on each invocation of {@code callback}"
         )
@@ -191,8 +191,8 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
         if it is called in a non-debug context.
         """,
 
-        GLuint.IN("count", "the number of debug messages to retrieve from the log"),
-        AutoSize("messageLog")..GLsizei.IN("bufsize", "the maximum number of characters that can be written in the {@code message} array"),
+        GLuint("count", "the number of debug messages to retrieve from the log"),
+        AutoSize("messageLog")..GLsizei("bufsize", "the maximum number of characters that can be written in the {@code message} array"),
         Check("count")..nullable..GLenum.p.OUT("categories", "an array of variables to receive the categories of the retrieved messages"),
         Check("count")..nullable..GLuint.p.OUT("severities", "an array of variables to receive the severities of the retrieved messages"),
         Check("count")..nullable..GLuint.p.OUT("ids", "an array of variables to receive the ids of the retrieved messages"),

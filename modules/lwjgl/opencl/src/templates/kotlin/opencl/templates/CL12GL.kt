@@ -41,13 +41,13 @@ val CL12GL = "CL12GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
         The #RetainMemObject() and #ReleaseMemObject() functions can be used to retain and release the image objects.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
-        cl_mem_flags.IN(
+        cl_context("context", "a valid OpenCL context created from an OpenGL context"),
+        cl_mem_flags(
             "flags",
             "a bit-field that is used to specify usage information",
             "#MEM_READ_ONLY #MEM_WRITE_ONLY #MEM_READ_WRITE"
         ),
-        GLenum.IN(
+        GLenum(
             "texture_target",
             "defines the image type of {@code texture}. No reference to a bound GL texture object is made or implied by this parameter.",
             """
@@ -56,14 +56,14 @@ val CL12GL = "CL12GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
             GL_TEXTURE_CUBE_MAP_NEGATIVE_Y GL_TEXTURE_CUBE_MAP_NEGATIVE_Z GL_TEXTURE_RECTANGLE
             """
         ),
-        GLint.IN(
+        GLint(
             "miplevel",
             """
             the mipmap level to be used. Implementations may return $INVALID_OPERATION for {@code miplevel} values &gt; 0. If
             {@code texture_target} is {@code GL_TEXTURE_BUFFER}, {@code miplevel} must be 0.
             """
         ),
-        GLuint.IN(
+        GLuint(
             "texture",
             """
             the name of a GL 1D, 2D, 3D, 1D array, 2D array, cubemap, rectangle or buffer texture object. The texture object must be a complete texture as per

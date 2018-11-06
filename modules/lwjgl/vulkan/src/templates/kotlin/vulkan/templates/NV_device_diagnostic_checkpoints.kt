@@ -104,8 +104,8 @@ val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeCla
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer that will receive the marker"),
-        opaque_const_p.IN("pCheckpointMarker", "an opaque application-provided value that will be associated with the checkpoint.")
+        VkCommandBuffer("commandBuffer", "the command buffer that will receive the marker"),
+        opaque_const_p("pCheckpointMarker", "an opaque application-provided value that will be associated with the checkpoint.")
     )
 
     void(
@@ -145,7 +145,7 @@ val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeCla
         ##VkCheckpointDataNV
         """,
 
-        VkQueue.IN("queue", "the {@code VkQueue} object the caller would like to retrieve checkpoint data for"),
+        VkQueue("queue", "the {@code VkQueue} object the caller would like to retrieve checkpoint data for"),
         AutoSize("pCheckpointData")..Check(1)..uint32_t.p.INOUT("pCheckpointDataCount", "a pointer to an integer related to the number of checkpoint markers available or queried, as described below."),
         nullable..VkCheckpointDataNV.p.OUT("pCheckpointData", "either {@code NULL} or a pointer to an array of ##VkCheckpointDataNV structures.")
     )

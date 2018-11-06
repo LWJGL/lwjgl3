@@ -27,14 +27,14 @@ val VRInput = "VRInput".nativeClass(
         This call must be made before the first call to #UpdateActionState() or #PollNextEvent().
         """,
 
-        charASCII.const.p.IN("pchActionManifestPath", "")
+        charASCII.const.p("pchActionManifestPath", "")
     )
 
     EVRInputError(
         "GetActionSetHandle",
         "Returns a handle for an action set. This handle is used for all performance-sensitive calls.",
 
-        charASCII.const.p.IN("pchActionSetName", ""),
+        charASCII.const.p("pchActionSetName", ""),
         Check(1)..VRActionSetHandle_t.p.OUT("pHandle", "")
     )
 
@@ -42,7 +42,7 @@ val VRInput = "VRInput".nativeClass(
         "GetActionHandle",
         "Returns a handle for an action. This handle is used for all performance-sensitive calls.",
 
-        charASCII.const.p.IN("pchActionName", ""),
+        charASCII.const.p("pchActionName", ""),
         Check(1)..VRActionHandle_t.p.OUT("pHandle", "")
     )
 
@@ -50,7 +50,7 @@ val VRInput = "VRInput".nativeClass(
         "GetInputSourceHandle",
         "Returns a handle for any path in the input system. E.g. {@code /user/hand/right}.",
 
-        charASCII.const.p.IN("pchInputSourcePath", ""),
+        charASCII.const.p("pchInputSourcePath", ""),
         Check(1)..VRInputValueHandle_t.p.OUT("pHandle", "")
     )
 
@@ -62,8 +62,8 @@ val VRInput = "VRInput".nativeClass(
         """,
 
         VRActiveActionSet_t.p.INOUT("pSets", ""),
-        uint32_t.IN("unSizeOfVRSelectedActionSet_t", ""),
-        AutoSize("pSets")..uint32_t.IN("unSetCount", "")
+        uint32_t("unSizeOfVRSelectedActionSet_t", ""),
+        AutoSize("pSets")..uint32_t("unSetCount", "")
     )
 
     EVRInputError(
@@ -73,10 +73,10 @@ val VRInput = "VRInput".nativeClass(
         than digital.
         """,
 
-        VRActionHandle_t.IN("action", ""),
+        VRActionHandle_t("action", ""),
         InputDigitalActionData_t.p.OUT("pActionData", ""),
-        Expression("InputDigitalActionData.SIZEOF")..uint32_t.IN("unActionDataSize", ""),
-        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
+        Expression("InputDigitalActionData.SIZEOF")..uint32_t("unActionDataSize", ""),
+        VRInputValueHandle_t("ulRestrictToDevice", "")
     )
 
     EVRInputError(
@@ -86,44 +86,44 @@ val VRInput = "VRInput".nativeClass(
         than analog.
         """,
 
-        VRActionHandle_t.IN("action", ""),
+        VRActionHandle_t("action", ""),
         InputAnalogActionData_t.p.OUT("pActionData", ""),
-        Expression("InputAnalogActionData.SIZEOF")..uint32_t.IN("unActionDataSize", ""),
-        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
+        Expression("InputAnalogActionData.SIZEOF")..uint32_t("unActionDataSize", ""),
+        VRInputValueHandle_t("ulRestrictToDevice", "")
     )
 
     EVRInputError(
         "GetPoseActionData",
         "Reads the state of a pose action given its handle.",
 
-        VRActionHandle_t.IN("action", ""),
-        ETrackingUniverseOrigin.IN("eOrigin", "", "ETrackingUniverseOrigin_\\w+"),
-        float.IN("fPredictedSecondsFromNow", ""),
+        VRActionHandle_t("action", ""),
+        ETrackingUniverseOrigin("eOrigin", "", "ETrackingUniverseOrigin_\\w+"),
+        float("fPredictedSecondsFromNow", ""),
         InputPoseActionData_t.p.OUT("pActionData", ""),
-        Expression("InputPoseActionData.SIZEOF")..uint32_t.IN("unActionDataSize", ""),
-        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
+        Expression("InputPoseActionData.SIZEOF")..uint32_t("unActionDataSize", ""),
+        VRInputValueHandle_t("ulRestrictToDevice", "")
     )
 
     EVRInputError(
         "GetSkeletalActionData",
         "Reads the state of a skeletal action given its handle.",
 
-        VRActionHandle_t.IN("action", ""),
+        VRActionHandle_t("action", ""),
         InputSkeletalActionData_t.p.OUT("pActionData", ""),
-        Expression("InputSkeletalActionData.SIZEOF")..uint32_t.IN("unActionDataSize", ""),
-        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
+        Expression("InputSkeletalActionData.SIZEOF")..uint32_t("unActionDataSize", ""),
+        VRInputValueHandle_t("ulRestrictToDevice", "")
     )
 
     EVRInputError(
         "GetSkeletalBoneData",
         "Reads the state of the skeletal bone data associated with this action and copies it into the given buffer.",
 
-        VRActionHandle_t.IN("action", ""),
-        EVRSkeletalTransformSpace.IN("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
-        EVRSkeletalMotionRange.IN("eMotionRange", "", "EVRSkeletalMotionRange_\\w+"),
+        VRActionHandle_t("action", ""),
+        EVRSkeletalTransformSpace("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
+        EVRSkeletalMotionRange("eMotionRange", "", "EVRSkeletalMotionRange_\\w+"),
         VRBoneTransform_t.p.OUT("pTransformArray", ""),
-        AutoSize("pTransformArray")..uint32_t.IN("unTransformArrayCount", ""),
-        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
+        AutoSize("pTransformArray")..uint32_t("unTransformArrayCount", ""),
+        VRInputValueHandle_t("ulRestrictToDevice", "")
     )
 
     EVRInputError(
@@ -133,81 +133,81 @@ val VRInput = "VRInput".nativeClass(
         exceed ({@code sizeof(VR_BoneTransform_t)*boneCount + 2}). Usually the size will be much smaller.
         """,
 
-        VRActionHandle_t.IN("action", ""),
-        EVRSkeletalTransformSpace.IN("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
-        EVRSkeletalMotionRange.IN("eMotionRange", "", "EVRSkeletalMotionRange_\\w+"),
+        VRActionHandle_t("action", ""),
+        EVRSkeletalTransformSpace("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
+        EVRSkeletalMotionRange("eMotionRange", "", "EVRSkeletalMotionRange_\\w+"),
         nullable..void.p.OUT("pvCompressedData", ""),
-        AutoSize("pvCompressedData")..uint32_t.IN("unCompressedSize", ""),
+        AutoSize("pvCompressedData")..uint32_t("unCompressedSize", ""),
         Check(1)..nullable..uint32_t.p.OUT("punRequiredCompressedSize", ""),
-        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
+        VRInputValueHandle_t("ulRestrictToDevice", "")
     )
 
     EVRInputError(
         "DecompressSkeletalBoneData",
         "Turns a compressed buffer from #GetSkeletalBoneDataCompressed() and turns it back into a bone transform array.",
 
-        void.p.IN("pvCompressedBuffer", ""),
-        AutoSize("pvCompressedBuffer")..uint32_t.IN("unCompressedBufferSize", ""),
+        void.p("pvCompressedBuffer", ""),
+        AutoSize("pvCompressedBuffer")..uint32_t("unCompressedBufferSize", ""),
         Check(1)..EVRSkeletalTransformSpace.p.OUT("peTransformSpace", ""),
         VRBoneTransform_t.p.OUT("pTransformArray", ""),
-        AutoSize("pTransformArray")..uint32_t.IN("unTransformArrayCount", "")
+        AutoSize("pTransformArray")..uint32_t("unTransformArrayCount", "")
     )
 
     EVRInputError(
         "TriggerHapticVibrationAction",
         "Triggers a haptic event as described by the specified action.",
 
-        VRActionHandle_t.IN("action", ""),
-        float.IN("fStartSecondsFromNow", ""),
-        float.IN("fDurationSeconds", ""),
-        float.IN("fFrequency", ""),
-        float.IN("fAmplitude", ""),
-        VRInputValueHandle_t.IN("ulRestrictToDevice", "")
+        VRActionHandle_t("action", ""),
+        float("fStartSecondsFromNow", ""),
+        float("fDurationSeconds", ""),
+        float("fFrequency", ""),
+        float("fAmplitude", ""),
+        VRInputValueHandle_t("ulRestrictToDevice", "")
     )
 
     EVRInputError(
         "GetActionOrigins",
         "Retrieve origin handles for an action.",
 
-        VRActionSetHandle_t.IN("actionSetHandle", ""),
-        VRActionHandle_t.IN("digitalActionHandle", ""),
+        VRActionSetHandle_t("actionSetHandle", ""),
+        VRActionHandle_t("digitalActionHandle", ""),
         VRInputValueHandle_t.p.OUT("originsOut", ""),
-        AutoSize("originsOut")..uint32_t.IN("originOutCount", "")
+        AutoSize("originsOut")..uint32_t("originOutCount", "")
     )
 
     EVRInputError(
         "GetOriginLocalizedName",
         "Retrieves the name of the origin in the current language.",
 
-        VRInputValueHandle_t.IN("origin", ""),
+        VRInputValueHandle_t("origin", ""),
         charASCII.p.OUT("pchNameArray", ""),
-        AutoSize("pchNameArray")..uint32_t.IN("unNameArraySize", "")
+        AutoSize("pchNameArray")..uint32_t("unNameArraySize", "")
     )
 
     EVRInputError(
         "GetOriginTrackedDeviceInfo",
         "Retrieves useful information for the origin of this action.",
 
-        VRInputValueHandle_t.IN("origin", ""),
+        VRInputValueHandle_t("origin", ""),
         InputOriginInfo_t.p.OUT("pOriginInfo", ""),
-        Expression("InputOriginInfo.SIZEOF")..uint32_t.IN("unOriginInfoSize", "")
+        Expression("InputOriginInfo.SIZEOF")..uint32_t("unOriginInfoSize", "")
     )
 
     EVRInputError(
         "ShowActionOrigins",
         "Shows the current binding for the action in-headset.",
 
-        VRActionSetHandle_t.IN("actionSetHandle", ""),
-        VRActionHandle_t.IN("ulActionHandle", "")
+        VRActionSetHandle_t("actionSetHandle", ""),
+        VRActionHandle_t("ulActionHandle", "")
     )
 
     EVRInputError(
         "ShowBindingsForActionSet",
         "Shows the current binding all the actions in the specified action sets.",
 
-        VRActiveActionSet_t.p.IN("pSets", ""),
-        uint32_t.IN("unSizeOfVRSelectedActionSet_t", ""),
-        AutoSize("pSets")..uint32_t.IN("unSetCount", ""),
-        VRInputValueHandle_t.IN("originToHighlight", "")
+        VRActiveActionSet_t.p("pSets", ""),
+        uint32_t("unSizeOfVRSelectedActionSet_t", ""),
+        AutoSize("pSets")..uint32_t("unSetCount", ""),
+        VRInputValueHandle_t("originToHighlight", "")
     )
 }

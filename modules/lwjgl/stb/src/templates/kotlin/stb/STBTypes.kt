@@ -47,9 +47,9 @@ val stbi_io_callbacks = struct(Module.STB, "STBIIOCallbacks", nativeName = "stbi
         int(
             "STBIReadCallback",
             "The {@code stbi_io_callbacks.read} callback.",
-            void.p.IN("user", "a pointer to user data"),
-            char.p.IN("data", "the data buffer to fill"),
-            AutoSize("data")..int.IN("size", "the number of bytes to read"),
+            void.p("user", "a pointer to user data"),
+            char.p("data", "the data buffer to fill"),
+            AutoSize("data")..int("size", "the number of bytes to read"),
             returnDoc = "the number of bytes actually read"
         ) {
             documentation = "Instances of this interface may be set to the {@code read} field of the ##STBIIOCallbacks struct."
@@ -76,8 +76,8 @@ val stbi_io_callbacks = struct(Module.STB, "STBIIOCallbacks", nativeName = "stbi
             "STBISkipCallback",
             "The {@code stbi_io_callbacks.skip} callback.",
 
-            void.p.IN("user", "a pointer to user data"),
-            int.IN("n", "the number of bytes to skip if positive, or <em>unget</em> the last {@code -n} bytes if negative")
+            void.p("user", "a pointer to user data"),
+            int("n", "the number of bytes to skip if positive, or <em>unget</em> the last {@code -n} bytes if negative")
         ) {
             documentation = "Instances of this interface may be set to the {@code skip} field of the ##STBIIOCallbacks struct."
         }
@@ -87,7 +87,7 @@ val stbi_io_callbacks = struct(Module.STB, "STBIIOCallbacks", nativeName = "stbi
             "STBIEOFCallback",
             "The {@code stbi_io_callbacks.eof} callback.",
 
-            void.p.IN("user", "a pointer to user data"),
+            void.p("user", "a pointer to user data"),
             returnDoc = "nonzero if we are at the end of file/data"
         ) {
             documentation = "Instances of this interface may be set to the {@code eof} field of the ##STBIIOCallbacks struct."
@@ -111,9 +111,9 @@ val stbi_write_func = Module.STB.callback {
         "STBIWriteCallback",
         "The {@code stbi_write_func} callback.",
 
-        void.p.IN("context", "the context passed to the write function"),
-        void.p.IN("data", "the data to write"),
-        AutoSize("data")..int.IN("size", "the number of bytes in {@code data}"),
+        void.p("context", "the context passed to the write function"),
+        void.p("data", "the data to write"),
+        AutoSize("data")..int("size", "the number of bytes in {@code data}"),
 
         nativeType = "stbi_write_func *"
     ) {
@@ -145,10 +145,10 @@ val stbi_zlib_compress = Module.STB.callback {
         The returned data will be freed with MemoryUtil#memFree() so it must be heap allocated with MemoryUtil#memAlloc().
         """,
 
-        unsigned_char.p.IN("data", "the data to compress"),
-        AutoSize("data")..int.IN("data_len", "the data length, in bytes"),
+        unsigned_char.p("data", "the data to compress"),
+        AutoSize("data")..int("data_len", "the data length, in bytes"),
         AutoSizeResult..Check(1)..int.p.OUT("out_len", "returns the compressed data length, in bytes"),
-        int.IN("quality", "the compression quality to use"),
+        int("quality", "the compression quality to use"),
 
         returnDoc = "the compressed data"
     ) {

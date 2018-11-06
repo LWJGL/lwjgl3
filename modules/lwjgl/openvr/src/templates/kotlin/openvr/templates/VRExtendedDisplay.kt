@@ -31,7 +31,7 @@ val VRExtendedDisplay = "VRExtendedDisplay".nativeClass(
         "GetEyeOutputViewport",
         "Gets the viewport in the frame buffer to draw the output of the distortion into.",
 
-        EVREye.IN("eEye", ""),
+        EVREye("eEye", ""),
         Check(1)..uint32_t.p.OUT("pnX", ""),
         Check(1)..uint32_t.p.OUT("pnY", ""),
         Check(1)..uint32_t.p.OUT("pnWidth", ""),

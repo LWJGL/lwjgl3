@@ -34,31 +34,31 @@ val EXT_clear_texture = "EXTClearTexture".nativeClassGLES("EXT_clear_texture", p
         "ClearTexImageEXT",
         "",
 
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLenum.IN("format", ""),
-        GLenum.IN("type", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLenum("format", ""),
+        GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..nullable..void.const.p.IN("data", "")
+        )..Unsafe..nullable..void.const.p("data", "")
     )
 
     void(
         "ClearTexSubImageEXT",
         "",
 
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLint.IN("xoffset", ""),
-        GLint.IN("yoffset", ""),
-        GLint.IN("zoffset", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLenum.IN("format", ""),
-        GLenum.IN("type", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLint("xoffset", ""),
+        GLint("yoffset", ""),
+        GLint("zoffset", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLenum("format", ""),
+        GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..nullable..void.const.p.IN("data", "")
+        )..Unsafe..nullable..void.const.p("data", "")
     )
 }

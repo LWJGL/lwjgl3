@@ -57,7 +57,7 @@ val EXT_stencil_clear_tag = "EXTStencilClearTag".nativeClassGL("EXT_stencil_clea
         "StencilClearTagEXT",
         "",
 
-        GLsizei.IN("stencilTagBits", ""),
-        GLuint.IN("stencilClearTag", "")
+        GLsizei("stencilTagBits", ""),
+        GLuint("stencilClearTag", "")
     )
 }

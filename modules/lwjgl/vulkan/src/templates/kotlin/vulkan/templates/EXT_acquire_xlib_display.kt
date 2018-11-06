@@ -111,9 +111,9 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
         </dl>
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "The physical device the display is on."),
-        Display.p.IN("dpy", "A connection to the X11 server that currently owns {@code display}."),
-        VkDisplayKHR.IN("display", "The display the caller wishes to control in Vulkan.")
+        VkPhysicalDevice("physicalDevice", "The physical device the display is on."),
+        Display.p("dpy", "A connection to the X11 server that currently owns {@code display}."),
+        VkDisplayKHR("display", "The display the caller wishes to control in Vulkan.")
     )
 
     VkResult(
@@ -150,9 +150,9 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
         </dl>
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "The physical device to query the display handle on."),
-        Display.p.IN("dpy", "A connection to the X11 server from which {@code rrOutput} was queried."),
-        RROutput.IN("rrOutput", "An X11 RandR output ID."),
+        VkPhysicalDevice("physicalDevice", "The physical device to query the display handle on."),
+        Display.p("dpy", "A connection to the X11 server from which {@code rrOutput} was queried."),
+        RROutput("rrOutput", "An X11 RandR output ID."),
         Check(1)..VkDisplayKHR.p.OUT("pDisplay", "The corresponding {@code VkDisplayKHR} handle will be returned here.")
     )
 }

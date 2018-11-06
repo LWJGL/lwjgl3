@@ -17,7 +17,7 @@ val RemoteryMetal = "RemoteryMetal".nativeClass(Module.REMOTERY, prefix = "RMT_"
         "BindMetal",
         "",
 
-        id.IN("command_buffer", "")
+        id("command_buffer", "")
     )
 
     void(
@@ -31,7 +31,7 @@ val RemoteryMetal = "RemoteryMetal".nativeClass(Module.REMOTERY, prefix = "RMT_"
         "BeginMetalSample",
         "",
 
-        rmtPStr.IN("name", ""),
+        rmtPStr("name", ""),
         Check(1)..nullable..rmtU32.p.INOUT("hash_cache", "")
     )
 

@@ -66,8 +66,8 @@ w' = xcoeff * x + ycoeff * y + w;""")}
         and "y", the effective resolution will fall off linearly from the center of the image to its edges.
         """,
 
-        GLuint.IN("index", "the viewport index"),
-        GLfloat.IN("xcoeff", "the x coefficient"),
-        GLfloat.IN("ycoeff", "the y coefficient")
+        GLuint("index", "the viewport index"),
+        GLfloat("xcoeff", "the x coefficient"),
+        GLfloat("ycoeff", "the y coefficient")
     )
 }

@@ -48,58 +48,58 @@ val EXT_compositor = "EXTCompositor".nativeClassEGL("EXT_compositor", postfix = 
         "CompositorSetContextListEXT",
         "",
 
-        EGLint.const.p.IN("external_ref_ids", ""),
-        AutoSize("external_ref_ids")..EGLint.IN("num_entries", "")
+        EGLint.const.p("external_ref_ids", ""),
+        AutoSize("external_ref_ids")..EGLint("num_entries", "")
     )
 
     EGLBoolean(
         "CompositorSetContextAttributesEXT",
         "",
 
-        EGLint.IN("external_ref_id", ""),
-        EGLint.const.p.IN("context_attributes", ""),
-        AutoSize("context_attributes")..EGLint.IN("num_entries", "")
+        EGLint("external_ref_id", ""),
+        EGLint.const.p("context_attributes", ""),
+        AutoSize("context_attributes")..EGLint("num_entries", "")
     )
 
     EGLBoolean(
         "CompositorSetWindowListEXT",
         "",
 
-        EGLint.IN("external_ref_id", ""),
-        EGLint.const.p.IN("external_win_ids", ""),
-        AutoSize("external_win_ids")..EGLint.IN("num_entries", "")
+        EGLint("external_ref_id", ""),
+        EGLint.const.p("external_win_ids", ""),
+        AutoSize("external_win_ids")..EGLint("num_entries", "")
     )
 
     EGLBoolean(
         "CompositorSetWindowAttributesEXT",
         "",
 
-        EGLint.IN("external_win_id", ""),
-        EGLint.const.p.IN("window_attributes", ""),
-        AutoSize("window_attributes")..EGLint.IN("num_entries", "")
+        EGLint("external_win_id", ""),
+        EGLint.const.p("window_attributes", ""),
+        AutoSize("window_attributes")..EGLint("num_entries", "")
     )
 
     EGLBoolean(
         "CompositorBindTexWindowEXT",
         "",
 
-        EGLint.IN("external_win_id", "")
+        EGLint("external_win_id", "")
     )
 
     EGLBoolean(
         "CompositorSetSizeEXT",
         "",
 
-        EGLint.IN("external_win_id", ""),
-        EGLint.IN("width", ""),
-        EGLint.IN("height", "")
+        EGLint("external_win_id", ""),
+        EGLint("width", ""),
+        EGLint("height", "")
     )
 
     EGLBoolean(
         "CompositorSwapPolicyEXT",
         "",
 
-        EGLint.IN("external_win_id", ""),
-        EGLint.IN("policy", "")
+        EGLint("external_win_id", ""),
+        EGLint("policy", "")
     )
 }

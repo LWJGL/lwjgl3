@@ -69,9 +69,9 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         "SetDefaultDeviceCommandQueue",
         "Replaces a default device command queue created with #CreateCommandQueueWithProperties() and the #QUEUE_ON_DEVICE_DEFAULT flag.",
 
-        cl_context.IN("context", "a valid OpenCL context"),
-        cl_device_id.IN("device", "a OpenCL device associated with {@code context}"),
-        cl_command_queue.IN("command_queue", "a valid command-queue for {@code device}"),
+        cl_context("context", "a valid OpenCL context"),
+        cl_device_id("device", "a OpenCL device associated with {@code context}"),
+        cl_command_queue("command_queue", "a valid command-queue for {@code device}"),
 
         returnDoc =
         """
@@ -96,7 +96,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         the same device will always be in the same timebase.
         """,
 
-        cl_device_id.IN("device", "a device returned by #GetDeviceIDs()"),
+        cl_device_id("device", "a device returned by #GetDeviceIDs()"),
         Check(1)..cl_ulong.p.OUT(
             "device_timestamp",
             """
@@ -134,7 +134,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         #GetEventProfilingInfo() for an event on a device and a device timestamp queried from the same device will always be in the same timebase.
         """,
 
-        cl_device_id.IN("device", "a device returned by #GetDeviceIDs()"),
+        cl_device_id("device", "a device returned by #GetDeviceIDs()"),
         Check(1)..cl_ulong.p.OUT(
             "host_timestamp",
             """
@@ -159,9 +159,9 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         "CreateProgramWithIL",
         "Creates a program object for a context, and loads the IL pointed to by {@code il} and with length in bytes {@code length} into the program object.",
 
-        cl_context.IN("context", "a valid OpenCL context"),
-        void.const.p.IN("il", "a pointer to a {@code length}-byte block of memory containing SPIR-V or an implementation-defined intermediate language"),
-        AutoSize("il")..size_t.IN("length", "the number of bytes in {@code il}"),
+        cl_context("context", "a valid OpenCL context"),
+        void.const.p("il", "a pointer to a {@code length}-byte block of memory containing SPIR-V or an implementation-defined intermediate language"),
+        AutoSize("il")..size_t("length", "the number of bytes in {@code il}"),
         ERROR_RET,
 
         returnDoc =
@@ -200,7 +200,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         set on a kernel object, the pointer is copied but the underlying memory allocation is not.
         """,
 
-        cl_kernel.IN(
+        cl_kernel(
             "source_kernel",
             "a valid {@code cl_kernel} object that will be copied. {@code source_kernel} will not be modified in any way by this function."
         ),
@@ -222,22 +222,22 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         "GetKernelSubGroupInfo",
         "Returns information about the kernel object.",
 
-        cl_kernel.IN("kernel", "the kernel object being queried"),
-        nullable..cl_device_id.IN(
+        cl_kernel("kernel", "the kernel object being queried"),
+        nullable..cl_device_id(
             "device",
             """
             a specific device in the list of devices associated with {@code kernel}. The list of devices is the list of devices in the OpenCL context that is
             associated with {@code kernel}. If the list of devices associated with kernel is a single device, device can be a #NULL value.
             """
         ),
-        cl_kernel_sub_group_info.IN("param_name", "the information to query", "$GetKernelSubGroupInfoA $GetKernelSubGroupInfoB"),
-        AutoSize("input_value")..size_t.IN("input_value_size", "the size in bytes of memory pointed to by {@code input_value}"),
-        nullable..void.const.p.IN(
+        cl_kernel_sub_group_info("param_name", "the information to query", "$GetKernelSubGroupInfoA $GetKernelSubGroupInfoB"),
+        AutoSize("input_value")..size_t("input_value_size", "the size in bytes of memory pointed to by {@code input_value}"),
+        nullable..void.const.p(
             "input_value",
             "a pointer to memory where the appropriate parameterization of the query is passed from. If {@code input_value} is #NULL, it is ignored."
         ),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_POINTER)..nullable..void.p.IN("param_value", param_value),
+        MultiType(PointerMapping.DATA_POINTER)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -274,22 +274,22 @@ val CL21 = "CL21".nativeClassCL("CL21") {
         Improperly specified event dependencies passed to {@code clEnqueueSVMMigrateMem} could result in undefined results.
         """,
 
-        cl_command_queue.IN(
+        cl_command_queue(
             "command_queue",
             "a valid host command queue. The specified set of allocation ranges will be migrated to the OpenCL device associated with {@code command_queue}."
         ),
-        AutoSize("svm_pointers", "sizes")..cl_uint.IN(
+        AutoSize("svm_pointers", "sizes")..cl_uint(
             "num_svm_pointers",
             """
             the number of pointers in the specified {@code svm_pointers} array, and the number of sizes in the {@code sizes} array, if {@code sizes} is not
             #NULL.
             """
         ),
-        void.const.p.p.IN(
+        void.const.p.p(
             "svm_pointers",
             "a pointer to an array of pointers. Each pointer in this array must be within an allocation produced by a call to #SVMAlloc()."
         ),
-        nullable..size_t.const.p.IN(
+        nullable..size_t.const.p(
             "sizes",
             """
             an array of sizes. The pair {@code svm_pointers[i]} and {@code sizes[i]} together define the starting address and number of bytes in a range to be
@@ -297,7 +297,7 @@ val CL21 = "CL21".nativeClassCL("CL21") {
             {@code sizes[i]} is zero, then the entire allocation containing {@code svm_pointer[i]} is migrated.
             """
         ),
-        cl_mem_migration_flags.IN("flags", "a bit-field that is used to specify migration options"),
+        cl_mem_migration_flags("flags", "a bit-field that is used to specify migration options"),
         NEWL,
         EWL,
         EVENT,

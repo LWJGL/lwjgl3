@@ -58,8 +58,8 @@ val NV_stream_metadata = "NVStreamMetadata".nativeClassEGL("NV_stream_metadata",
         "QueryDisplayAttribNV",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLint.IN("attribute", ""),
+        EGLDisplay("dpy", ""),
+        EGLint("attribute", ""),
         Check(1)..EGLAttrib.p.OUT("value", "")
     )
 
@@ -67,24 +67,24 @@ val NV_stream_metadata = "NVStreamMetadata".nativeClassEGL("NV_stream_metadata",
         "SetStreamMetadataNV",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLStreamKHR.IN("stream", ""),
-        EGLint.IN("n", ""),
-        EGLint.IN("offset", ""),
-        AutoSize("data")..EGLint.IN("size", ""),
-        void.const.p.IN("data", "")
+        EGLDisplay("dpy", ""),
+        EGLStreamKHR("stream", ""),
+        EGLint("n", ""),
+        EGLint("offset", ""),
+        AutoSize("data")..EGLint("size", ""),
+        void.const.p("data", "")
     )
 
     EGLBoolean(
         "QueryStreamMetadataNV",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLStreamKHR.IN("stream", ""),
-        EGLenum.IN("name", ""),
-        EGLint.IN("n", ""),
-        EGLint.IN("offset", ""),
-        AutoSize("data")..EGLint.IN("size", ""),
+        EGLDisplay("dpy", ""),
+        EGLStreamKHR("stream", ""),
+        EGLenum("name", ""),
+        EGLint("n", ""),
+        EGLint("offset", ""),
+        AutoSize("data")..EGLint("size", ""),
         void.p.OUT("data", "")
     )
 }

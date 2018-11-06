@@ -211,8 +211,8 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         ##VkDebugMarkerObjectTagInfoEXT
         """,
 
-        VkDevice.IN("device", "the device that created the object."),
-        VkDebugMarkerObjectTagInfoEXT.const.p.IN("pTagInfo", "a pointer to an instance of the ##VkDebugMarkerObjectTagInfoEXT structure specifying the parameters of the tag to attach to the object.")
+        VkDevice("device", "the device that created the object."),
+        VkDebugMarkerObjectTagInfoEXT.const.p("pTagInfo", "a pointer to an instance of the ##VkDebugMarkerObjectTagInfoEXT structure specifying the parameters of the tag to attach to the object.")
     )
 
     VkResult(
@@ -257,8 +257,8 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         ##VkDebugMarkerObjectNameInfoEXT
         """,
 
-        VkDevice.IN("device", "the device that created the object."),
-        VkDebugMarkerObjectNameInfoEXT.const.p.IN("pNameInfo", "a pointer to an instance of the ##VkDebugMarkerObjectNameInfoEXT structure specifying the parameters of the name to set on the object.")
+        VkDevice("device", "the device that created the object."),
+        VkDebugMarkerObjectNameInfoEXT.const.p("pNameInfo", "a pointer to an instance of the ##VkDebugMarkerObjectNameInfoEXT structure specifying the parameters of the name to set on the object.")
     )
 
     void(
@@ -297,8 +297,8 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         ##VkDebugMarkerMarkerInfoEXT
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        VkDebugMarkerMarkerInfoEXT.const.p.IN("pMarkerInfo", "a pointer to an instance of the ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker region to open.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
+        VkDebugMarkerMarkerInfoEXT.const.p("pMarkerInfo", "a pointer to an instance of the ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker region to open.")
     )
 
     void(
@@ -341,7 +341,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded.")
     )
 
     void(
@@ -380,7 +380,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
         ##VkDebugMarkerMarkerInfoEXT
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        VkDebugMarkerMarkerInfoEXT.const.p.IN("pMarkerInfo", "a pointer to an instance of the ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker to insert.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
+        VkDebugMarkerMarkerInfoEXT.const.p("pMarkerInfo", "a pointer to an instance of the ##VkDebugMarkerMarkerInfoEXT structure specifying the parameters of the marker to insert.")
     )
 }

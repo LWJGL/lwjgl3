@@ -92,11 +92,11 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
         "GetPixelFormatAttribivARB",
         "",
 
-        HDC.IN("hdc", "the device context on which the pixel format is supported"),
-        int.IN("pixelFormat", "an index that specifies the pixel format"),
-        int.IN("layerPlane", "the plane being queried"),
-        AutoSize("attributes", "values")..UINT.IN("n", "the number of attributes being queried"),
-        SingleValue("attribute")..int.const.p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
+        HDC("hdc", "the device context on which the pixel format is supported"),
+        int("pixelFormat", "an index that specifies the pixel format"),
+        int("layerPlane", "the plane being queried"),
+        AutoSize("attributes", "values")..UINT("n", "the number of attributes being queried"),
+        SingleValue("attribute")..int.const.p("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
         int.p.OUT("values", "a buffer into which the results of the query will be placed")
     )
 
@@ -104,11 +104,11 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
         "GetPixelFormatAttribfvARB",
         "Float version of #GetPixelFormatAttribivARB().",
 
-        HDC.IN("hdc", "the device context on which the pixel format is supported"),
-        int.IN("pixelFormat", "an index that specifies the pixel format"),
-        int.IN("layerPlane", "the plane being queried"),
-        AutoSize("attributes", "values")..UINT.IN("n", "the number of attributes being queried"),
-        SingleValue("attribute")..int.const.p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
+        HDC("hdc", "the device context on which the pixel format is supported"),
+        int("pixelFormat", "an index that specifies the pixel format"),
+        int("layerPlane", "the plane being queried"),
+        AutoSize("attributes", "values")..UINT("n", "the number of attributes being queried"),
+        SingleValue("attribute")..int.const.p("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
         FLOAT.p.OUT("values", "a buffer into which the results of the query will be placed")
     )
 
@@ -120,11 +120,11 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
         start of the list (order is device dependent).
         """,
 
-        HDC.IN("hdc", "the device context on which the pixel format is supported"),
-        NullTerminated..nullable..int.const.p.IN("attribIList", "a list of attribute {type, value} pairs containing integer attribute values", WGL_ATTRIBUTES),
-        NullTerminated..nullable..FLOAT.const.p.IN("attribFList", "a list of attribute {type, value} pairs containing floating point attribute values"),
-        AutoSize("formats")..UINT.IN("maxFormats", "the number of attributes being queried"),
-        int.p.IN(
+        HDC("hdc", "the device context on which the pixel format is supported"),
+        NullTerminated..nullable..int.const.p("attribIList", "a list of attribute {type, value} pairs containing integer attribute values", WGL_ATTRIBUTES),
+        NullTerminated..nullable..FLOAT.const.p("attribFList", "a list of attribute {type, value} pairs containing floating point attribute values"),
+        AutoSize("formats")..UINT("maxFormats", "the number of attributes being queried"),
+        int.p(
             "formats",
             """
             an array of returned indices of the matching pixel formats. The best pixel formats (i.e. closest match and best format for the hardware) are at the

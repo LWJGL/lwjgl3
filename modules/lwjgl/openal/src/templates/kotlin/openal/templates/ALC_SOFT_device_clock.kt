@@ -69,8 +69,8 @@ val ALC_SOFT_device_clock = "SOFTDeviceClock".nativeClassALC("SOFT_device_clock"
         Note that the size parameter is the number of {@code ALCint64SOFT} elements in the buffer provided, not the number of bytes.
         """,
 
-        nullable..ALCdevice.p.IN("device", ""),
-        ALCenum.IN(
+        nullable..ALCdevice.p("device", ""),
+        ALCenum(
             "pname",
             """
             ${table(
@@ -97,7 +97,7 @@ val ALC_SOFT_device_clock = "SOFTDeviceClock".nativeClassALC("SOFT_device_clock"
             )}
             """
         ),
-        AutoSize("values")..ALsizei.IN("size", ""),
+        AutoSize("values")..ALsizei("size", ""),
         ReturnParam..ALCint64SOFT.p.OUT("values", "")
     )
 }

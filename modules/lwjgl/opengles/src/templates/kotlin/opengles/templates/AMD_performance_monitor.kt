@@ -45,7 +45,7 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGLES("AMD_perfo
         "",
 
         nullable..Check(1)..GLint.p.OUT("numGroups", ""),
-        AutoSize("groups")..GLsizei.IN("groupsSize", ""),
+        AutoSize("groups")..GLsizei("groupsSize", ""),
         nullable..GLuint.p.OUT("groups", "")
     )
 
@@ -53,10 +53,10 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGLES("AMD_perfo
         "GetPerfMonitorCountersAMD",
         "",
 
-        GLuint.IN("group", ""),
+        GLuint("group", ""),
         Check(1)..GLint.p.OUT("numCounters", ""),
         Check(1)..GLint.p.OUT("maxActiveCounters", ""),
-        AutoSize("counters")..GLsizei.IN("counterSize", ""),
+        AutoSize("counters")..GLsizei("counterSize", ""),
         GLuint.p.OUT("counters", "")
     )
 
@@ -64,8 +64,8 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGLES("AMD_perfo
         "GetPerfMonitorGroupStringAMD",
         "",
 
-        GLuint.IN("group", ""),
-        AutoSize("groupString")..GLsizei.IN("bufSize", ""),
+        GLuint("group", ""),
+        AutoSize("groupString")..GLsizei("bufSize", ""),
         Check(1)..GLsizei.p.OUT("length", ""),
         GLcharASCII.p.OUT("groupString", "")
     )
@@ -74,9 +74,9 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGLES("AMD_perfo
         "GetPerfMonitorCounterStringAMD",
         "",
 
-        GLuint.IN("group", ""),
-        GLuint.IN("counter", ""),
-        AutoSize("counterString")..GLsizei.IN("bufSize", ""),
+        GLuint("group", ""),
+        GLuint("counter", ""),
+        AutoSize("counterString")..GLsizei("bufSize", ""),
         nullable..Check(1)..GLsizei.p.OUT("length", ""),
         nullable..GLcharASCII.p.OUT("counterString", "")
     )
@@ -85,9 +85,9 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGLES("AMD_perfo
         "GetPerfMonitorCounterInfoAMD",
         "",
 
-        GLuint.IN("group", ""),
-        GLuint.IN("counter", ""),
-        GLenum.IN("pname", ""),
+        GLuint("group", ""),
+        GLuint("counter", ""),
+        GLenum("pname", ""),
         Check(4)..MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..void.p.OUT("data", "")
     )
 
@@ -95,7 +95,7 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGLES("AMD_perfo
         "GenPerfMonitorsAMD",
         "",
 
-        AutoSize("monitors")..GLsizei.IN("n", ""),
+        AutoSize("monitors")..GLsizei("n", ""),
         ReturnParam..GLuint.p.OUT("monitors", "")
     )
 
@@ -103,42 +103,42 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGLES("AMD_perfo
         "DeletePerfMonitorsAMD",
         "",
 
-        AutoSize("monitors")..GLsizei.IN("n", ""),
-        SingleValue("monitor")..GLuint.p.IN("monitors", "")
+        AutoSize("monitors")..GLsizei("n", ""),
+        SingleValue("monitor")..GLuint.p("monitors", "")
     )
 
     void(
         "SelectPerfMonitorCountersAMD",
         "",
 
-        GLuint.IN("monitor", ""),
-        GLboolean.IN("enable", ""),
-        GLuint.IN("group", ""),
-        AutoSize("counterList")..GLint.IN("numCounters", ""),
-        GLuint.p.IN("counterList", "")
+        GLuint("monitor", ""),
+        GLboolean("enable", ""),
+        GLuint("group", ""),
+        AutoSize("counterList")..GLint("numCounters", ""),
+        GLuint.p("counterList", "")
     )
 
     void(
         "BeginPerfMonitorAMD",
         "",
 
-        GLuint.IN("monitor", "")
+        GLuint("monitor", "")
     )
 
     void(
         "EndPerfMonitorAMD",
         "",
 
-        GLuint.IN("monitor", "")
+        GLuint("monitor", "")
     )
 
     void(
         "GetPerfMonitorCounterDataAMD",
         "",
 
-        GLuint.IN("monitor", ""),
-        GLenum.IN("pname", ""),
-        AutoSize("data")..GLsizei.IN("dataSize", ""),
+        GLuint("monitor", ""),
+        GLenum("pname", ""),
+        AutoSize("data")..GLsizei("dataSize", ""),
         GLuint.p.OUT("data", ""),
         Check(1)..nullable..GLint.p.OUT("bytesWritten", "")
     )

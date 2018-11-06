@@ -36,378 +36,378 @@ val NV_half_float = "NVHalfFloat".nativeClassGL("NV_half_float", postfix = NV) {
         "Vertex2hNV",
         "",
 
-        GLhalfNV.IN("x", ""),
-        GLhalfNV.IN("y", "")
+        GLhalfNV("x", ""),
+        GLhalfNV("y", "")
     )
 
     void(
         "Vertex2hvNV",
         "",
 
-        Check(2)..GLhalfNV.const.p.IN("v", "")
+        Check(2)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "Vertex3hNV",
         "",
 
-        GLhalfNV.IN("x", ""),
-        GLhalfNV.IN("y", ""),
-        GLhalfNV.IN("z", "")
+        GLhalfNV("x", ""),
+        GLhalfNV("y", ""),
+        GLhalfNV("z", "")
     )
 
     void(
         "Vertex3hvNV",
         "",
 
-        Check(3)..GLhalfNV.const.p.IN("v", "")
+        Check(3)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "Vertex4hNV",
         "",
 
-        GLhalfNV.IN("x", ""),
-        GLhalfNV.IN("y", ""),
-        GLhalfNV.IN("z", ""),
-        GLhalfNV.IN("w", "")
+        GLhalfNV("x", ""),
+        GLhalfNV("y", ""),
+        GLhalfNV("z", ""),
+        GLhalfNV("w", "")
     )
 
     void(
         "Vertex4hvNV",
         "",
 
-        Check(4)..GLhalfNV.const.p.IN("v", "")
+        Check(4)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "Normal3hNV",
         "",
 
-        GLhalfNV.IN("nx", ""),
-        GLhalfNV.IN("ny", ""),
-        GLhalfNV.IN("nz", "")
+        GLhalfNV("nx", ""),
+        GLhalfNV("ny", ""),
+        GLhalfNV("nz", "")
     )
 
     void(
         "Normal3hvNV",
         "",
 
-        Check(3)..GLhalfNV.const.p.IN("v", "")
+        Check(3)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "Color3hNV",
         "",
 
-        GLhalfNV.IN("red", ""),
-        GLhalfNV.IN("green", ""),
-        GLhalfNV.IN("blue", "")
+        GLhalfNV("red", ""),
+        GLhalfNV("green", ""),
+        GLhalfNV("blue", "")
     )
 
     void(
         "Color3hvNV",
         "",
 
-        Check(3)..GLhalfNV.const.p.IN("v", "")
+        Check(3)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "Color4hNV",
         "",
 
-        GLhalfNV.IN("red", ""),
-        GLhalfNV.IN("green", ""),
-        GLhalfNV.IN("blue", ""),
-        GLhalfNV.IN("alpha", "")
+        GLhalfNV("red", ""),
+        GLhalfNV("green", ""),
+        GLhalfNV("blue", ""),
+        GLhalfNV("alpha", "")
     )
 
     void(
         "Color4hvNV",
         "",
 
-        Check(4)..GLhalfNV.const.p.IN("v", "")
+        Check(4)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "TexCoord1hNV",
         "",
 
-        GLhalfNV.IN("s", "")
+        GLhalfNV("s", "")
     )
 
     void(
         "TexCoord1hvNV",
         "",
 
-        Check(1)..GLhalfNV.const.p.IN("v", "")
+        Check(1)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "TexCoord2hNV",
         "",
 
-        GLhalfNV.IN("s", ""),
-        GLhalfNV.IN("t", "")
+        GLhalfNV("s", ""),
+        GLhalfNV("t", "")
     )
 
     void(
         "TexCoord2hvNV",
         "",
 
-        Check(2)..GLhalfNV.const.p.IN("v", "")
+        Check(2)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "TexCoord3hNV",
         "",
 
-        GLhalfNV.IN("s", ""),
-        GLhalfNV.IN("t", ""),
-        GLhalfNV.IN("r", "")
+        GLhalfNV("s", ""),
+        GLhalfNV("t", ""),
+        GLhalfNV("r", "")
     )
 
     void(
         "TexCoord3hvNV",
         "",
 
-        Check(3)..GLhalfNV.const.p.IN("v", "")
+        Check(3)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "TexCoord4hNV",
         "",
 
-        GLhalfNV.IN("s", ""),
-        GLhalfNV.IN("t", ""),
-        GLhalfNV.IN("r", ""),
-        GLhalfNV.IN("q", "")
+        GLhalfNV("s", ""),
+        GLhalfNV("t", ""),
+        GLhalfNV("r", ""),
+        GLhalfNV("q", "")
     )
 
     void(
         "TexCoord4hvNV",
         "",
 
-        Check(4)..GLhalfNV.const.p.IN("v", "")
+        Check(4)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "MultiTexCoord1hNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLhalfNV.IN("s", "")
+        GLenum("target", ""),
+        GLhalfNV("s", "")
     )
 
     void(
         "MultiTexCoord1hvNV",
         "",
 
-        GLenum.IN("target", ""),
-        Check(1)..GLhalfNV.const.p.IN("v", "")
+        GLenum("target", ""),
+        Check(1)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "MultiTexCoord2hNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLhalfNV.IN("s", ""),
-        GLhalfNV.IN("t", "")
+        GLenum("target", ""),
+        GLhalfNV("s", ""),
+        GLhalfNV("t", "")
     )
 
     void(
         "MultiTexCoord2hvNV",
         "",
 
-        GLenum.IN("target", ""),
-        Check(2)..GLhalfNV.const.p.IN("v", "")
+        GLenum("target", ""),
+        Check(2)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "MultiTexCoord3hNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLhalfNV.IN("s", ""),
-        GLhalfNV.IN("t", ""),
-        GLhalfNV.IN("r", "")
+        GLenum("target", ""),
+        GLhalfNV("s", ""),
+        GLhalfNV("t", ""),
+        GLhalfNV("r", "")
     )
 
     void(
         "MultiTexCoord3hvNV",
         "",
 
-        GLenum.IN("target", ""),
-        Check(3)..GLhalfNV.const.p.IN("v", "")
+        GLenum("target", ""),
+        Check(3)..GLhalfNV.const.p("v", "")
     )
 
     void(
         "MultiTexCoord4hNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLhalfNV.IN("s", ""),
-        GLhalfNV.IN("t", ""),
-        GLhalfNV.IN("r", ""),
-        GLhalfNV.IN("q", "")
+        GLenum("target", ""),
+        GLhalfNV("s", ""),
+        GLhalfNV("t", ""),
+        GLhalfNV("r", ""),
+        GLhalfNV("q", "")
     )
 
     void(
         "MultiTexCoord4hvNV",
         "",
 
-        GLenum.IN("target", ""),
-        Check(4)..GLhalfNV.const.p.IN("v", "")
+        GLenum("target", ""),
+        Check(4)..GLhalfNV.const.p("v", "")
     )
 
     DependsOn("GL_EXT_fog_coord")..void(
         "FogCoordhNV",
         "",
 
-        GLhalfNV.IN("fog", "")
+        GLhalfNV("fog", "")
     )
 
     DependsOn("GL_EXT_fog_coord")..void(
         "FogCoordhvNV",
         "",
 
-        Check(1)..GLhalfNV.const.p.IN("fog", "")
+        Check(1)..GLhalfNV.const.p("fog", "")
     )
 
     DependsOn("GL_EXT_secondary_color")..void(
         "SecondaryColor3hNV",
         "",
 
-        GLhalfNV.IN("red", ""),
-        GLhalfNV.IN("green", ""),
-        GLhalfNV.IN("blue", "")
+        GLhalfNV("red", ""),
+        GLhalfNV("green", ""),
+        GLhalfNV("blue", "")
     )
 
     DependsOn("GL_EXT_secondary_color")..void(
         "SecondaryColor3hvNV",
         "",
 
-        Check(3)..GLhalfNV.const.p.IN("v", "")
+        Check(3)..GLhalfNV.const.p("v", "")
     )
 
     DependsOn("GL_EXT_vertex_weighting")..void(
         "VertexWeighthNV",
         "",
 
-        GLhalfNV.IN("weight", "")
+        GLhalfNV("weight", "")
     )
 
     DependsOn("GL_EXT_vertex_weighting")..void(
         "VertexWeighthvNV",
         "",
 
-        Check(1)..GLhalfNV.const.p.IN("weight", "")
+        Check(1)..GLhalfNV.const.p("weight", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttrib1hNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLhalfNV.IN("x", "")
+        GLuint("index", ""),
+        GLhalfNV("x", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttrib1hvNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(1)..GLhalfNV.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(1)..GLhalfNV.const.p("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttrib2hNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLhalfNV.IN("x", ""),
-        GLhalfNV.IN("y", "")
+        GLuint("index", ""),
+        GLhalfNV("x", ""),
+        GLhalfNV("y", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttrib2hvNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(2)..GLhalfNV.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(2)..GLhalfNV.const.p("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttrib3hNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLhalfNV.IN("x", ""),
-        GLhalfNV.IN("y", ""),
-        GLhalfNV.IN("z", "")
+        GLuint("index", ""),
+        GLhalfNV("x", ""),
+        GLhalfNV("y", ""),
+        GLhalfNV("z", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttrib3hvNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(3)..GLhalfNV.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(3)..GLhalfNV.const.p("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttrib4hNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLhalfNV.IN("x", ""),
-        GLhalfNV.IN("y", ""),
-        GLhalfNV.IN("z", ""),
-        GLhalfNV.IN("w", "")
+        GLuint("index", ""),
+        GLhalfNV("x", ""),
+        GLhalfNV("y", ""),
+        GLhalfNV("z", ""),
+        GLhalfNV("w", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttrib4hvNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(4)..GLhalfNV.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(4)..GLhalfNV.const.p("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttribs1hvNV",
         "",
 
-        GLuint.IN("index", ""),
-        AutoSize("v")..GLsizei.IN("n", ""),
-        GLhalfNV.const.p.IN("v", "")
+        GLuint("index", ""),
+        AutoSize("v")..GLsizei("n", ""),
+        GLhalfNV.const.p("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttribs2hvNV",
         "",
 
-        GLuint.IN("index", ""),
-        AutoSize(2, "v")..GLsizei.IN("n", ""),
-        GLhalfNV.const.p.IN("v", "")
+        GLuint("index", ""),
+        AutoSize(2, "v")..GLsizei("n", ""),
+        GLhalfNV.const.p("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttribs3hvNV",
         "",
 
-        GLuint.IN("index", ""),
-        AutoSize(3, "v")..GLsizei.IN("n", ""),
-        GLhalfNV.const.p.IN("v", "")
+        GLuint("index", ""),
+        AutoSize(3, "v")..GLsizei("n", ""),
+        GLhalfNV.const.p("v", "")
     )
 
     DependsOn("GL_NV_vertex_program")..void(
         "VertexAttribs4hvNV",
         "",
 
-        GLuint.IN("index", ""),
-        AutoSize(4, "v")..GLsizei.IN("n", ""),
-        GLhalfNV.const.p.IN("v", "")
+        GLuint("index", ""),
+        AutoSize(4, "v")..GLsizei("n", ""),
+        GLhalfNV.const.p("v", "")
     )
 }

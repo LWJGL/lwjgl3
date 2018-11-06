@@ -177,7 +177,7 @@ typedef struct {
         "CreateStatesNV",
         "Returns {@code n} previously unused state object names in {@code states}, and creates a state object in the initial state for each name.",
 
-        AutoSize("states")..GLsizei.IN("n", "the number of state object names to create"),
+        AutoSize("states")..GLsizei("n", "the number of state object names to create"),
         ReturnParam..GLuint.p.OUT("states", "the buffer in which to write the created state object names")
     )
 
@@ -188,15 +188,15 @@ typedef struct {
         Unused names in {@code states} are silently ignored, as is the value zero.
         """,
 
-        AutoSize("states")..GLsizei.IN("n", "the number of state object names to delete"),
-        SingleValue("state")..GLuint.const.p.IN("states", "the buffer from which to read the state object names to delete")
+        AutoSize("states")..GLsizei("n", "the number of state object names to delete"),
+        SingleValue("state")..GLuint.const.p("states", "the buffer from which to read the state object names to delete")
     )
 
     GLboolean(
         "IsStateNV",
         "Returns true if the specified name corresponds to a state object.",
 
-        GLuint.IN("state", "the object name to test")
+        GLuint("state", "the object name to test")
     )
 
     void(
@@ -227,8 +227,8 @@ typedef struct {
         )}
         """,
 
-        GLuint.IN("state", "the state object into which to capture the current rendering state"),
-        GLenum.IN(
+        GLuint("state", "the state object into which to capture the current rendering state"),
+        GLenum(
             "mode",
             "the basic Begin mode that this state object must be used with",
             "#POINTS #LINES #TRIANGLES #QUADS #LINES_ADJACENCY #TRIANGLES_ADJACENCY #PATCHES"
@@ -239,8 +239,8 @@ typedef struct {
         "GetCommandHeaderNV",
         "Returns the encoded 32bit header value for a given command; the returned value is implementation specific.",
 
-        GLenum.IN("tokenID", "the command to query", Commands),
-        GLuint.IN(
+        GLenum("tokenID", "the command to query", Commands),
+        GLuint(
             "size",
             """
             provided as basic consistency check, since the size of each structure is fixed and no padding is allowed. The value is the sum of the header and
@@ -256,7 +256,7 @@ typedef struct {
         {@code UniformAddressCommandNV} tokens.
         """,
 
-        GLenum.IN("shadertype", "the shader stage type")
+        GLenum("shadertype", "the shader stage type")
     )
 
     void(
@@ -266,11 +266,11 @@ typedef struct {
         {@code sizes}. All arrays have {@code count} entries.
         """,
 
-        GLenum.IN("primitiveMode", "the primitive mode"),
-        GLuint.IN("buffer", "the buffer object name"),
-        GLintptr.const.p.IN("indirects", "the array of offsets into the buffer"),
-        GLsizei.const.p.IN("sizes", "the array of command lengths"),
-        AutoSize("indirects", "sizes")..GLuint.IN("count", "the number of commands")
+        GLenum("primitiveMode", "the primitive mode"),
+        GLuint("buffer", "the buffer object name"),
+        GLintptr.const.p("indirects", "the array of offsets into the buffer"),
+        GLsizei.const.p("sizes", "the array of command lengths"),
+        AutoSize("indirects", "sizes")..GLuint("count", "the number of commands")
     )
 
     void(
@@ -280,10 +280,10 @@ typedef struct {
         {@code count} entries.
         """,
 
-        GLenum.IN("primitiveMode", "the primitive mode"),
-        GLuint64.const.p.IN("indirects", "the array of GPU addreses"),
-        GLsizei.const.p.IN("sizes", "the array of command lengths"),
-        AutoSize("indirects", "sizes")..GLuint.IN("count", "the number of commands")
+        GLenum("primitiveMode", "the primitive mode"),
+        GLuint64.const.p("indirects", "the array of GPU addreses"),
+        GLsizei.const.p("sizes", "the array of command lengths"),
+        AutoSize("indirects", "sizes")..GLuint("count", "the number of commands")
     )
 
     void(
@@ -295,12 +295,12 @@ typedef struct {
         object's captured fbo or the passed fbo must managed explicitly.
         """,
 
-        GLuint.IN("buffer", "the buffer object name"),
-        GLintptr.const.p.IN("indirects", "the array of offsets into the buffer"),
-        GLsizei.const.p.IN("sizes", "the array of command lengths"),
-        GLuint.const.p.IN("states", "the array of state object names"),
-        GLuint.const.p.IN("fbos", "the array of framebuffer object names"),
-        AutoSize("indirects", "sizes", "states", "fbos")..GLuint.IN("count", "the number of commands")
+        GLuint("buffer", "the buffer object name"),
+        GLintptr.const.p("indirects", "the array of offsets into the buffer"),
+        GLsizei.const.p("sizes", "the array of command lengths"),
+        GLuint.const.p("states", "the array of state object names"),
+        GLuint.const.p("fbos", "the array of framebuffer object names"),
+        AutoSize("indirects", "sizes", "states", "fbos")..GLuint("count", "the number of commands")
     )
 
     void(
@@ -312,18 +312,18 @@ typedef struct {
         must managed explicitly.
         """,
 
-        GLuint64.const.p.IN("indirects", "the array of GPU addresses"),
-        GLsizei.const.p.IN("sizes", "the array of command lengths"),
-        GLuint.const.p.IN("states", "the array of state object names"),
-        GLuint.const.p.IN("fbos", "the array of framebuffer object names"),
-        AutoSize("indirects", "sizes", "states", "fbos")..GLuint.IN("count", "the number of commands")
+        GLuint64.const.p("indirects", "the array of GPU addresses"),
+        GLsizei.const.p("sizes", "the array of command lengths"),
+        GLuint.const.p("states", "the array of state object names"),
+        GLuint.const.p("fbos", "the array of framebuffer object names"),
+        AutoSize("indirects", "sizes", "states", "fbos")..GLuint("count", "the number of commands")
     )
 
     void(
         "CreateCommandListsNV",
         "Returns {@code n} previously unused command list names in {@code lists}, and creates a command list in the initial state for each name.",
 
-        AutoSize("lists")..GLsizei.IN("n", "the number of command list names to create"),
+        AutoSize("lists")..GLsizei("n", "the number of command list names to create"),
         ReturnParam..GLuint.p.OUT("lists", "the buffer in which to return the created command list names")
     )
 
@@ -334,15 +334,15 @@ typedef struct {
         in {@code lists} are silently ignored, as is the value zero.
         """,
 
-        AutoSize("lists")..GLsizei.IN("n", "the number of command list names to delete"),
-        SingleValue("list")..GLuint.const.p.IN("lists", "the buffer from which to read the command list names to delete")
+        AutoSize("lists")..GLsizei("n", "the number of command list names to delete"),
+        SingleValue("list")..GLuint.const.p("lists", "the buffer from which to read the command list names to delete")
     )
 
     GLboolean(
         "IsCommandListNV",
         "Returns true if the specified name corresponds to a command list.",
 
-        GLuint.IN("list", "the object name to query")
+        GLuint("list", "the object name to query")
     )
 
     void(
@@ -365,13 +365,13 @@ typedef struct {
         fully immutable, while the buffer-based versions can change the content of the buffers at any later time.
         """,
 
-        GLuint.IN("list", "the command list"),
-        GLuint.IN("segment", "the segment"),
-        void.const.p.p.IN("indirects", "the array of GPU addresses"),
-        size_t.const.p.IN("sizes", "the array of command lengths"),
-        GLuint.const.p.IN("states", "the array of state object names"),
-        GLuint.const.p.IN("fbos", "the array of framebuffer object names"),
-        AutoSize("indirects", "sizes", "states", "fbos")..GLuint.IN("count", "the number of commands")
+        GLuint("list", "the command list"),
+        GLuint("segment", "the segment"),
+        void.const.p.p("indirects", "the array of GPU addresses"),
+        size_t.const.p("sizes", "the array of command lengths"),
+        GLuint.const.p("states", "the array of state object names"),
+        GLuint.const.p("fbos", "the array of framebuffer object names"),
+        AutoSize("indirects", "sizes", "states", "fbos")..GLuint("count", "the number of commands")
     )
 
     void(
@@ -381,8 +381,8 @@ typedef struct {
         called before any commands are enqueued. In the initial state, a command list has a single segment.
         """,
 
-        GLuint.IN("list", "the command list"),
-        GLuint.IN("segments", "the number of ordered sequences of commands")
+        GLuint("list", "the command list"),
+        GLuint("segments", "the number of ordered sequences of commands")
     )
 
     void(
@@ -392,7 +392,7 @@ typedef struct {
         generate optimized commands to transition between states as efficiently as possible.
         """,
 
-        GLuint.IN("list", "the command list to compile")
+        GLuint("list", "the command list to compile")
     )
 
     void(
@@ -403,6 +403,6 @@ typedef struct {
         explicitly, including texture attachments of the effective fbos during list enqueuing.
         """,
 
-        GLuint.IN("list", "the command list to call")
+        GLuint("list", "the command list to call")
     )
 }

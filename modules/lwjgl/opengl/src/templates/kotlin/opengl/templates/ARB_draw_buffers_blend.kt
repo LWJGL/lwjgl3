@@ -39,8 +39,8 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
         of #End().
         """,
 
-        GLuint.IN("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
-        GLenum.IN("mode", "determines both the RGB and alpha blend equations", blendEquations)
+        GLuint("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
+        GLenum("mode", "determines both the RGB and alpha blend equations", blendEquations)
     )
 
     void(
@@ -59,9 +59,9 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
         of #End().
         """,
 
-        GLuint.IN("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
-        GLenum.IN("modeRGB", "the RGB blend equation", blendEquations),
-        GLenum.IN("modeAlpha", "the alpha blend equation", blendEquations)
+        GLuint("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
+        GLenum("modeRGB", "the RGB blend equation", blendEquations),
+        GLenum("modeAlpha", "the alpha blend equation", blendEquations)
     )
 
     void(
@@ -79,9 +79,9 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
         of #End().
         """,
 
-        GLuint.IN("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
-        GLenum.IN("src", "determines both RGB and alpha source functions"),
-        GLenum.IN("dst", "determines both RGB and alpha destination functions")
+        GLuint("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
+        GLenum("src", "determines both RGB and alpha source functions"),
+        GLenum("dst", "determines both RGB and alpha destination functions")
     )
 
     void(
@@ -99,11 +99,11 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
         of #End().
         """,
 
-        GLuint.IN("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
-        GLenum.IN("srcRGB", "the source RGB blend function"),
-        GLenum.IN("dstRGB", "the destination RGB blend function"),
-        GLenum.IN("srcAlpha", "the source alpha blend function"),
-        GLenum.IN("dstAlpha", "the destination alpha blend function")
+        GLuint("buf", "an integer that indicates the #DRAW_BUFFER to modify."),
+        GLenum("srcRGB", "the source RGB blend function"),
+        GLenum("dstRGB", "the destination RGB blend function"),
+        GLenum("srcAlpha", "the source alpha blend function"),
+        GLenum("dstAlpha", "the destination alpha blend function")
     )
 
 }

@@ -37,6 +37,6 @@ val NV_fragment_coverage_to_color = "NVFragmentCoverageToColor".nativeClassGLES(
         "FragmentCoverageColorNV",
         "",
 
-        GLuint.IN("color", "")
+        GLuint("color", "")
     )
 }

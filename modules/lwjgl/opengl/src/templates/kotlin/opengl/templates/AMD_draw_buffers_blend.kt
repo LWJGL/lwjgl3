@@ -25,36 +25,36 @@ val AMD_draw_buffers_blend = "AMDDrawBuffersBlend".nativeClassGL("AMD_draw_buffe
         "BlendFuncIndexedAMD",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("src", ""),
-        GLenum.IN("dst", "")
+        GLuint("buf", ""),
+        GLenum("src", ""),
+        GLenum("dst", "")
     )
 
     void(
         "BlendFuncSeparateIndexedAMD",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("srcRGB", ""),
-        GLenum.IN("dstRGB", ""),
-        GLenum.IN("srcAlpha", ""),
-        GLenum.IN("dstAlpha", "")
+        GLuint("buf", ""),
+        GLenum("srcRGB", ""),
+        GLenum("dstRGB", ""),
+        GLenum("srcAlpha", ""),
+        GLenum("dstAlpha", "")
     )
 
     void(
         "BlendEquationIndexedAMD",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("mode", "")
+        GLuint("buf", ""),
+        GLenum("mode", "")
     )
 
     void(
         "BlendEquationSeparateIndexedAMD",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("modeRGB", ""),
-        GLenum.IN("modeAlpha", "")
+        GLuint("buf", ""),
+        GLenum("modeRGB", ""),
+        GLenum("modeAlpha", "")
     )
 }

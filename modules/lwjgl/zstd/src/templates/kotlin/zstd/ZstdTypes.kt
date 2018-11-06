@@ -62,8 +62,8 @@ val ZSTD_allocFunction = Module.ZSTD.callback {
         "ZSTDAllocFunction",
         "",
 
-        opaque_p.IN("opaque", ""),
-        size_t.IN("size", ""),
+        opaque_p("opaque", ""),
+        size_t("size", ""),
 
         nativeType = "ZSTD_allocFunction"
     )
@@ -74,8 +74,8 @@ val ZSTD_freeFunction = Module.ZSTD.callback {
         "ZSTDFreeFunction",
         "",
 
-        opaque_p.IN("opaque", ""),
-        void.p.IN("address", ""),
+        opaque_p("opaque", ""),
+        void.p("address", ""),
 
         nativeType = "ZSTD_freeFunction"
     )

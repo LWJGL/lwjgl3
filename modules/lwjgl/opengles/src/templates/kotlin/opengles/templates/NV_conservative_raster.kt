@@ -43,7 +43,7 @@ val NV_conservative_raster = "NVConservativeRaster".nativeClassGLES("NV_conserva
         "SubpixelPrecisionBiasNV",
         "",
 
-        GLuint.IN("xbits", ""),
-        GLuint.IN("ybits", "")
+        GLuint("xbits", ""),
+        GLuint("ybits", "")
     )
 }

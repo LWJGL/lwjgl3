@@ -101,18 +101,18 @@ val GL12C = "GL12C".nativeClassGL("GL12C") {
         "TexImage3D",
         "Specifies a three-dimensional texture image.",
 
-        GLenum.IN("target", "the texture target", "$TEXTURE_3D_TARGETS $PROXY_TEXTURE_3D_TARGETS"),
-        GLint.IN("level", "the level-of-detail number"),
-        GLint.IN("internalformat", "the texture internal format", TEXTURE_INTERNAL_FORMATS),
-        GLsizei.IN("width", "the texture width"),
-        GLsizei.IN("height", "the texture height"),
-        GLsizei.IN("depth", "the texture depth"),
-        GLint.IN("border", "the texture border width"),
-        GLenum.IN("format", "the texel data format", CORE_PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the texel data type", CORE_PIXEL_DATA_TYPES),
+        GLenum("target", "the texture target", "$TEXTURE_3D_TARGETS $PROXY_TEXTURE_3D_TARGETS"),
+        GLint("level", "the level-of-detail number"),
+        GLint("internalformat", "the texture internal format", TEXTURE_INTERNAL_FORMATS),
+        GLsizei("width", "the texture width"),
+        GLsizei("height", "the texture height"),
+        GLsizei("depth", "the texture depth"),
+        GLint("border", "the texture border width"),
+        GLenum("format", "the texel data format", CORE_PIXEL_DATA_FORMATS),
+        GLenum("type", "the texel data type", CORE_PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("pixels", "the texel data")
+        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p("pixels", "the texel data")
     )
 
     void(
@@ -122,19 +122,19 @@ val GL12C = "GL12C".nativeClassGL("GL12C") {
         the specified texel array, nor is any change made to texel values outside the specified subregion.
         """,
 
-        GLenum.IN("target", "the texture target", TEXTURE_3D_TARGETS),
-        GLint.IN("level", "the level-of-detail-number"),
-        GLint.IN("xoffset", "the x coordinate of the texel subregion"),
-        GLint.IN("yoffset", "the y coordinate of the texel subregion"),
-        GLint.IN("zoffset", "the z coordinate of the texel subregion"),
-        GLsizei.IN("width", "the subregion width"),
-        GLsizei.IN("height", "the subregion height"),
-        GLsizei.IN("depth", "the subregion depth"),
-        GLenum.IN("format", "the pixel data format", CORE_PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the pixel data type", CORE_PIXEL_DATA_TYPES),
+        GLenum("target", "the texture target", TEXTURE_3D_TARGETS),
+        GLint("level", "the level-of-detail-number"),
+        GLint("xoffset", "the x coordinate of the texel subregion"),
+        GLint("yoffset", "the y coordinate of the texel subregion"),
+        GLint("zoffset", "the z coordinate of the texel subregion"),
+        GLsizei("width", "the subregion width"),
+        GLsizei("height", "the subregion height"),
+        GLsizei("depth", "the subregion depth"),
+        GLenum("format", "the pixel data format", CORE_PIXEL_DATA_FORMATS),
+        GLenum("type", "the pixel data type", CORE_PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p.IN("pixels", "the pixel data")
+        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "the pixel data")
     )
 
     void(
@@ -144,15 +144,15 @@ val GL12C = "GL12C".nativeClassGL("GL12C") {
         {@code height}, or {@code border} parameters of the specified texel array, nor is any change made to texel values outside the specified subregion. See
         #CopyTexImage2D() for more details.
         """,
-        GLenum.IN("target", "the texture target", TEXTURE_3D_TARGETS),
-        GLint.IN("level", "the level-of-detail number"),
-        GLint.IN("xoffset", "the x coordinate of the texture subregion to update"),
-        GLint.IN("yoffset", "the y coordinate of the texture subregion to update"),
-        GLint.IN("zoffset", "the z coordinate of the texture subregion to update"),
-        GLint.IN("x", "the left framebuffer pixel coordinate"),
-        GLint.IN("y", "the lower framebuffer pixel coordinate"),
-        GLsizei.IN("width", "the texture subregion width"),
-        GLsizei.IN("height", "the texture subregion height")
+        GLenum("target", "the texture target", TEXTURE_3D_TARGETS),
+        GLint("level", "the level-of-detail number"),
+        GLint("xoffset", "the x coordinate of the texture subregion to update"),
+        GLint("yoffset", "the y coordinate of the texture subregion to update"),
+        GLint("zoffset", "the z coordinate of the texture subregion to update"),
+        GLint("x", "the left framebuffer pixel coordinate"),
+        GLint("y", "the lower framebuffer pixel coordinate"),
+        GLsizei("width", "the texture subregion width"),
+        GLsizei("height", "the texture subregion height")
     )
 
     // EXT_bgra
@@ -256,15 +256,15 @@ val GL12C = "GL12C".nativeClassGL("GL12C") {
         )}
         """,
 
-        GLenum.IN("mode", "the kind of primitives to render", CORE_PRIMITIVE_TYPES),
-        GLuint.IN("start", "the minimum array index contained in {@code indices}"),
-        GLuint.IN("end", "the maximum array index contained in {@code indices}"),
-        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
+        GLenum("mode", "the kind of primitives to render", CORE_PRIMITIVE_TYPES),
+        GLuint("start", "the minimum array index contained in {@code indices}"),
+        GLuint("end", "the maximum array index contained in {@code indices}"),
+        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei("count", "the number of elements to be rendered"),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum(
             "type",
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored")
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", "a pointer to the location where the indices are stored")
     )
 }

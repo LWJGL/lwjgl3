@@ -58,9 +58,9 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
         "EnqueueWaitSignalAMD",
         "Instructs the OpenCL to wait until {@code value} is written to {@code buffer} before issuing the next command.",
 
-        cl_command_queue.IN("command_queue", "a command-queue"),
-        cl_mem.IN("mem_object", "a memory object"),
-        cl_uint.IN("value", "the signal value"),
+        cl_command_queue("command_queue", "a command-queue"),
+        cl_mem("mem_object", "a memory object"),
+        cl_uint("value", "the signal value"),
         NEWL,
         EWL,
         EVENT,
@@ -88,10 +88,10 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
         keep increasing.
         """,
 
-        cl_command_queue.IN("command_queue", "a command-queue"),
-        cl_mem.IN("mem_object", "a memory object"),
-        cl_uint.IN("value", "the signal value"),
-        cl_ulong.IN("offset", "the write offset"),
+        cl_command_queue("command_queue", "a command-queue"),
+        cl_mem("mem_object", "a memory object"),
+        cl_uint("value", "the signal value"),
+        cl_ulong("offset", "the write offset"),
         NEWL,
         EWL,
         EVENT,
@@ -124,10 +124,10 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
         This function is used to make buffers resident.
         """,
 
-        cl_command_queue.IN("command_queue", "a command-queue"),
-        AutoSize("mem_objects", "bus_addresses")..cl_uint.IN("num_mem_objs", "the number of memory objects in {@code mem_objects}"),
-        cl_mem.const.p.IN("mem_objects", "a pointer to a list of memory objects created with #MEM_BUS_ADDRESSABLE_AMD flag"),
-        cl_bool.IN("blocking_make_resident", "indicates if read operation is <em>blocking</em> or <em>non-blocking</em>"),
+        cl_command_queue("command_queue", "a command-queue"),
+        AutoSize("mem_objects", "bus_addresses")..cl_uint("num_mem_objs", "the number of memory objects in {@code mem_objects}"),
+        cl_mem.const.p("mem_objects", "a pointer to a list of memory objects created with #MEM_BUS_ADDRESSABLE_AMD flag"),
+        cl_bool("blocking_make_resident", "indicates if read operation is <em>blocking</em> or <em>non-blocking</em>"),
         cl_bus_address_amd.p.OUT("bus_addresses", "a pointer to a list of ##CLBusAddressAMD structures"),
         NEWL,
         EWL,

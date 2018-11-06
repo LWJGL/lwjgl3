@@ -51,7 +51,7 @@ val NV_conservative_raster_pre_snap_triangles = "NVConservativeRasterPreSnapTria
         #CONSERVATIVE_RASTER_MODE_POST_SNAP_NV.
         """,
 
-        GLenum.IN("pname", "the parameter to set", "#CONSERVATIVE_RASTER_MODE_NV"),
-        GLint.IN("param", "specifies the conservative raster mode to be used", Modes)
+        GLenum("pname", "the parameter to set", "#CONSERVATIVE_RASTER_MODE_NV"),
+        GLint("param", "specifies the conservative raster mode to be used", Modes)
     )
 }

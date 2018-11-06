@@ -36,8 +36,8 @@ val KHR_cl_event2 = "KHRCLEvent2".nativeClassEGL("KHR_cl_event2", postfix = KHR)
         "CreateSync64KHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLenum.IN("type", ""),
-        noneTerminated..EGLAttribKHR.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLenum("type", ""),
+        noneTerminated..EGLAttribKHR.const.p("attrib_list", "")
     )
 }

@@ -85,8 +85,8 @@ val GLFWerrorfun = Module.GLFW.callback {
         "GLFWErrorCallback",
         "Will be called with an error code and a human-readable description when a GLFW error occurs.",
 
-        int.IN("error", "the error code"),
-        NullTerminated..charUTF8.p.IN("description", "a pointer to a UTF-8 encoded string describing the error"),
+        int("error", "the error code"),
+        NullTerminated..charUTF8.p("description", "a pointer to a UTF-8 encoded string describing the error"),
 
         nativeType = "GLFWerrorfun"
     ) {
@@ -175,8 +175,8 @@ val GLFWmonitorfun = Module.GLFW.callback {
         "GLFWMonitorCallback",
         "Will be called when a monitor is connected to or disconnected from the system.",
 
-        GLFWmonitor.p.IN("monitor", "the monitor that was connected or disconnected"),
-        int.IN("event", "one of #CONNECTED or #DISCONNECTED. Remaining values reserved for future use."),
+        GLFWmonitor.p("monitor", "the monitor that was connected or disconnected"),
+        int("event", "one of #CONNECTED or #DISCONNECTED. Remaining values reserved for future use."),
 
         nativeType = "GLFWmonitorfun"
     ) {
@@ -198,8 +198,8 @@ val GLFWjoystickfun = Module.GLFW.callback {
         "GLFWJoystickCallback",
         "Will be called when a joystick is connected to or disconnected from the system.",
 
-        int.IN("jid", "the joystick that was connected or disconnected"),
-        int.IN("event", "one of #CONNECTED or #DISCONNECTED. Remaining values reserved for future use."),
+        int("jid", "the joystick that was connected or disconnected"),
+        int("event", "one of #CONNECTED or #DISCONNECTED. Remaining values reserved for future use."),
 
         nativeType = "GLFWjoystickfun"
     ) {
@@ -221,9 +221,9 @@ val GLFWwindowposfun = Module.GLFW.callback {
         "GLFWWindowPosCallback",
         "Will be called when the specified window moves.",
 
-        GLFWwindow.p.IN("window", "the window that was moved"),
-        int.IN("xpos", "the new x-coordinate, in pixels, of the upper-left corner of the client area of the window"),
-        int.IN("ypos", "the new y-coordinate, in pixels, of the upper-left corner of the client area of the window"),
+        GLFWwindow.p("window", "the window that was moved"),
+        int("xpos", "the new x-coordinate, in pixels, of the upper-left corner of the client area of the window"),
+        int("ypos", "the new y-coordinate, in pixels, of the upper-left corner of the client area of the window"),
 
         nativeType = "GLFWwindowposfun"
     ) {
@@ -245,9 +245,9 @@ val GLFWwindowsizefun = Module.GLFW.callback {
         "GLFWWindowSizeCallback",
         "Will be called when the specified window is resized.",
 
-        GLFWwindow.p.IN("window", "the window that was resized"),
-        int.IN("width", "the new width, in screen coordinates, of the window"),
-        int.IN("height", "the new height, in screen coordinates, of the window"),
+        GLFWwindow.p("window", "the window that was resized"),
+        int("width", "the new width, in screen coordinates, of the window"),
+        int("height", "the new height, in screen coordinates, of the window"),
 
         nativeType = "GLFWwindowsizefun"
     ) {
@@ -268,7 +268,7 @@ val GLFWwindowclosefun = Module.GLFW.callback {
         "GLFWWindowCloseCallback",
         "Will be called when the user attempts to close the specified window, for example by clicking the close widget in the title bar.",
 
-        GLFWwindow.p.IN("window", "the window that the user attempted to close"),
+        GLFWwindow.p("window", "the window that the user attempted to close"),
 
         nativeType = "GLFWwindowclosefun"
     ) {
@@ -293,7 +293,7 @@ val GLFWwindowrefreshfun = Module.GLFW.callback {
         another window.
         """,
 
-        GLFWwindow.p.IN("window", "the window whose content needs to be refreshed"),
+        GLFWwindow.p("window", "the window whose content needs to be refreshed"),
 
         nativeType = "GLFWwindowrefreshfun"
     ) {
@@ -315,8 +315,8 @@ val GLFWwindowfocusfun = Module.GLFW.callback {
         "GLFWWindowFocusCallback",
         "Will be called when the specified window gains or loses focus.",
 
-        GLFWwindow.p.IN("window", "the window that was focused or defocused"),
-        intb.IN("focused", "#TRUE if the window was focused, or #FALSE if it was defocused"),
+        GLFWwindow.p("window", "the window that was focused or defocused"),
+        intb("focused", "#TRUE if the window was focused, or #FALSE if it was defocused"),
 
         nativeType = "GLFWwindowfocusfun"
     ) {
@@ -338,8 +338,8 @@ val GLFWwindowiconifyfun = Module.GLFW.callback {
         "GLFWWindowIconifyCallback",
         "Will be called when the specified window is iconified or restored.",
 
-        GLFWwindow.p.IN("window", "the window that was iconified or restored."),
-        intb.IN("iconified", "#TRUE if the window was iconified, or #FALSE if it was restored"),
+        GLFWwindow.p("window", "the window that was iconified or restored."),
+        intb("iconified", "#TRUE if the window was iconified, or #FALSE if it was restored"),
 
         nativeType = "GLFWwindowiconifyfun"
     ) {
@@ -361,8 +361,8 @@ val GLFWwindowmaximizefun = Module.GLFW.callback {
         "GLFWWindowMaximizeCallback",
         "Will be called when the specified window is maximized or restored.",
 
-        GLFWwindow.p.IN("window", "the window that was maximized or restored."),
-        intb.IN("maximized", "#TRUE if the window was maximized, or #FALSE if it was restored"),
+        GLFWwindow.p("window", "the window that was maximized or restored."),
+        intb("maximized", "#TRUE if the window was maximized, or #FALSE if it was restored"),
 
         nativeType = "GLFWwindowmaximizefun"
     ) {
@@ -384,9 +384,9 @@ val GLFWframebuffersizefun = Module.GLFW.callback {
         "GLFWFramebufferSizeCallback",
         "Will be called when the framebuffer of the specified window is resized.",
 
-        GLFWwindow.p.IN("window", "the window whose framebuffer was resized"),
-        int.IN("width", "the new width, in pixels, of the framebuffer"),
-        int.IN("height", "the new height, in pixels, of the framebuffer"),
+        GLFWwindow.p("window", "the window whose framebuffer was resized"),
+        int("width", "the new width, in pixels, of the framebuffer"),
+        int("height", "the new height, in pixels, of the framebuffer"),
 
         nativeType = "GLFWframebuffersizefun"
     ) {
@@ -408,9 +408,9 @@ val GLFWwindowcontentscalefun = Module.GLFW.callback {
         "GLFWWindowContentScaleCallback",
         "Will be called when the window content scale changes.",
 
-        GLFWwindow.p.IN("window", "the window whose content scale changed"),
-        float.IN("xscale", "the new x-axis content scale of the window"),
-        float.IN("yscale", "the new y-axis content scale of the window"),
+        GLFWwindow.p("window", "the window whose content scale changed"),
+        float("xscale", "the new x-axis content scale of the window"),
+        float("yscale", "the new y-axis content scale of the window"),
 
         nativeType = "GLFWwindowcontentscalefun"
     ) {
@@ -432,11 +432,11 @@ val GLFWkeyfun = Module.GLFW.callback {
         "GLFWKeyCallback",
         "Will be called when a key is pressed, repeated or released.",
 
-        GLFWwindow.p.IN("window", "the window that received the event"),
-        int.IN("key", "the keyboard key that was pressed or released"),
-        int.IN("scancode", "the system-specific scancode of the key"),
-        int.IN("action", "the key action", "#PRESS #RELEASE #REPEAT"),
-        int.IN("mods", "bitfield describing which modifiers keys were held down"),
+        GLFWwindow.p("window", "the window that received the event"),
+        int("key", "the keyboard key that was pressed or released"),
+        int("scancode", "the system-specific scancode of the key"),
+        int("action", "the key action", "#PRESS #RELEASE #REPEAT"),
+        int("mods", "bitfield describing which modifiers keys were held down"),
 
         nativeType = "GLFWkeyfun"
     ) {
@@ -457,8 +457,8 @@ val GLFWcharfun = Module.GLFW.callback {
         "GLFWCharCallback",
         "Will be called when a Unicode character is input.",
 
-        GLFWwindow.p.IN("window", "the window that received the event"),
-        unsigned_int.IN("codepoint", "the Unicode code point of the character"),
+        GLFWwindow.p("window", "the window that received the event"),
+        unsigned_int("codepoint", "the Unicode code point of the character"),
 
         nativeType = "GLFWcharfun"
     ) {
@@ -480,9 +480,9 @@ val GLFWcharmodsfun = Module.GLFW.callback {
         "GLFWCharModsCallback",
         "Will be called when a Unicode character is input regardless of what modifier keys are used.",
 
-        GLFWwindow.p.IN("window", "the window that received the event"),
-        unsigned_int.IN("codepoint", "the Unicode code point of the character"),
-        int.IN("mods", "bitfield describing which modifier keys were held down"),
+        GLFWwindow.p("window", "the window that received the event"),
+        unsigned_int("codepoint", "the Unicode code point of the character"),
+        int("mods", "bitfield describing which modifier keys were held down"),
 
         nativeType = "GLFWcharmodsfun"
     ) {
@@ -509,10 +509,10 @@ val GLFWmousebuttonfun = Module.GLFW.callback {
         "GLFWMouseButtonCallback",
         "Will be called when a mouse button is pressed or released.",
 
-        GLFWwindow.p.IN("window", "the window that received the event"),
-        int.IN("button", "the mouse button that was pressed or released"),
-        int.IN("action", "the button action", "#PRESS #RELEASE #REPEAT"),
-        int.IN("mods", "bitfield describing which modifiers keys were held down"),
+        GLFWwindow.p("window", "the window that received the event"),
+        int("button", "the mouse button that was pressed or released"),
+        int("action", "the button action", "#PRESS #RELEASE #REPEAT"),
+        int("mods", "bitfield describing which modifiers keys were held down"),
 
         nativeType = "GLFWmousebuttonfun"
     ) {
@@ -538,9 +538,9 @@ val GLFWcursorposfun = Module.GLFW.callback {
         platforms that provide it, the full sub-pixel cursor position is passed on.
         """,
 
-        GLFWwindow.p.IN("window", "the window that received the event"),
-        double.IN("xpos", "the new cursor x-coordinate, relative to the left edge of the client area"),
-        double.IN("ypos", "the new cursor y-coordinate, relative to the top edge of the client area"),
+        GLFWwindow.p("window", "the window that received the event"),
+        double("xpos", "the new cursor x-coordinate, relative to the left edge of the client area"),
+        double("ypos", "the new cursor y-coordinate, relative to the top edge of the client area"),
 
         nativeType = "GLFWcursorposfun"
     ) {
@@ -562,8 +562,8 @@ val GLFWcursorenterfun = Module.GLFW.callback {
         "GLFWCursorEnterCallback",
         "Will be called when the cursor enters or leaves the client area of the window.",
 
-        GLFWwindow.p.IN("window", "the window that received the event"),
-        intb.IN("entered", "#TRUE if the cursor entered the window's client area, or #FALSE if it left it"),
+        GLFWwindow.p("window", "the window that received the event"),
+        intb("entered", "#TRUE if the cursor entered the window's client area, or #FALSE if it left it"),
 
         nativeType = "GLFWcursorenterfun"
     ) {
@@ -585,9 +585,9 @@ val GLFWscrollfun = Module.GLFW.callback {
         "GLFWScrollCallback",
         "Will be called when a scrolling device is used, such as a mouse wheel or scrolling area of a touchpad.",
 
-        GLFWwindow.p.IN("window", "the window that received the event"),
-        double.IN("xoffset", "the scroll offset along the x-axis"),
-        double.IN("yoffset", "the scroll offset along the y-axis"),
+        GLFWwindow.p("window", "the window that received the event"),
+        double("xoffset", "the scroll offset along the x-axis"),
+        double("yoffset", "the scroll offset along the y-axis"),
 
         nativeType = "GLFWscrollfun"
     ) {
@@ -609,9 +609,9 @@ val GLFWdropfun = Module.GLFW.callback {
         "GLFWDropCallback",
         "Will be called when one or more dragged files are dropped on the window.",
 
-        GLFWwindow.p.IN("window", "the window that received the event"),
-        AutoSize("names")..int.IN("count", "the number of dropped files"),
-        char.const.p.p.IN("names", "pointer to the array of UTF-8 encoded path names of the dropped files"),
+        GLFWwindow.p("window", "the window that received the event"),
+        AutoSize("names")..int("count", "the number of dropped files"),
+        char.const.p.p("names", "pointer to the array of UTF-8 encoded path names of the dropped files"),
 
         nativeType = "GLFWdropfun"
     ) {

@@ -152,8 +152,8 @@ val EXT_tessellation_shader = "EXTTessellationShader".nativeClassGLES("EXT_tesse
         "PatchParameteriEXT",
         "",
 
-        GLenum.IN("pname", ""),
-        GLint.IN("value", "")
+        GLenum("pname", ""),
+        GLint("value", "")
     )
 }
 

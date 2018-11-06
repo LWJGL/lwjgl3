@@ -70,11 +70,11 @@ val APPLE_framebuffer_multisample = "APPLEFramebufferMultisample".nativeClassGLE
         "RenderbufferStorageMultisampleAPPLE",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
     void(

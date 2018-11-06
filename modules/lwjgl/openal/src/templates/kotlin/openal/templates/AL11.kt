@@ -32,17 +32,17 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         "Listener3i",
         "Sets the 3 dimensional integer values of a listener parameter.",
 
-        ALenum.IN("paramName", "the parameter to modify"),
-        ALfloat.IN("value1", "the first value"),
-        ALfloat.IN("value2", "the second value"),
-        ALfloat.IN("value3", "the third value")
+        ALenum("paramName", "the parameter to modify"),
+        ALfloat("value1", "the first value"),
+        ALfloat("value2", "the second value"),
+        ALfloat("value3", "the third value")
     )
 
     ALvoid(
         "GetListeneriv",
         "Returns the integer values of the specified listener parameter.",
 
-        ALenum.IN("param", "the parameter to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALint.p.OUT("values", "the parameter values")
     )
 
@@ -50,94 +50,94 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         "Source3i",
         "Sets the 3 dimensional integer values of a source parameter.",
 
-        ALuint.IN("source", "the source to modify"),
-        ALenum.IN("paramName", "the parameter to modify"),
-        ALint.IN("value1", "the first value"),
-        ALint.IN("value2", "the second value"),
-        ALint.IN("value3", "the third value")
+        ALuint("source", "the source to modify"),
+        ALenum("paramName", "the parameter to modify"),
+        ALint("value1", "the first value"),
+        ALint("value2", "the second value"),
+        ALint("value3", "the third value")
     )
 
     ALvoid(
         "Listeneriv",
         "Pointer version.",
 
-        ALenum.IN("listener", "the parameter to modify"),
-        Check(1)..ALint.const.p.IN("value", "the parameter values")
+        ALenum("listener", "the parameter to modify"),
+        Check(1)..ALint.const.p("value", "the parameter values")
     )
 
     ALvoid(
         "Sourceiv",
         "Pointer version.",
 
-        ALuint.IN("source", "the source to modify"),
-        ALenum.IN("paramName", "the parameter to modify"),
-        Check(1)..ALint.const.p.IN("value", "the parameter values")
+        ALuint("source", "the source to modify"),
+        ALenum("paramName", "the parameter to modify"),
+        Check(1)..ALint.const.p("value", "the parameter values")
     )
 
     ALvoid(
         "Bufferf",
         "Sets the float value of a buffer parameter.",
 
-        ALuint.IN("buffer", "the buffer to modify"),
-        ALenum.IN("paramName", "the parameter to modify"),
-        ALfloat.IN("value", "the value")
+        ALuint("buffer", "the buffer to modify"),
+        ALenum("paramName", "the parameter to modify"),
+        ALfloat("value", "the value")
     )
 
     ALvoid(
         "Buffer3f",
         "Sets the dimensional value of a buffer parameter.",
 
-        ALuint.IN("buffer", "the buffer to modify"),
-        ALenum.IN("paramName", "the parameter to modify"),
-        ALfloat.IN("value1", "the first value"),
-        ALfloat.IN("value2", "the second value"),
-        ALfloat.IN("value3", "the third value")
+        ALuint("buffer", "the buffer to modify"),
+        ALenum("paramName", "the parameter to modify"),
+        ALfloat("value1", "the first value"),
+        ALfloat("value2", "the second value"),
+        ALfloat("value3", "the third value")
     )
 
     ALvoid(
         "Bufferfv",
         "the pointer version of #Bufferf()",
 
-        ALuint.IN("buffer", "the buffer to modify"),
-        ALenum.IN("paramName", "the parameter to modify"),
-        Check(1)..ALfloat.const.p.IN("value", "the parameter values")
+        ALuint("buffer", "the buffer to modify"),
+        ALenum("paramName", "the parameter to modify"),
+        Check(1)..ALfloat.const.p("value", "the parameter values")
     )
 
     ALvoid(
         "Bufferi",
         "Sets the integer value of a buffer parameter.",
 
-        ALuint.IN("buffer", "the buffer to modify"),
-        ALenum.IN("paramName", "the parameter to modify"),
-        ALint.IN("value", "the value")
+        ALuint("buffer", "the buffer to modify"),
+        ALenum("paramName", "the parameter to modify"),
+        ALint("value", "the value")
     )
 
     ALvoid(
         "Buffer3i",
         "Sets the integer 3 dimensional value of a buffer parameter.",
 
-        ALuint.IN("buffer", "the buffer to modify"),
-        ALenum.IN("paramName", "the parameter to modify"),
-        ALint.IN("value1", "the first value"),
-        ALint.IN("value2", "the second value"),
-        ALint.IN("value3", "the third value")
+        ALuint("buffer", "the buffer to modify"),
+        ALenum("paramName", "the parameter to modify"),
+        ALint("value1", "the first value"),
+        ALint("value2", "the second value"),
+        ALint("value3", "the third value")
     )
 
     ALvoid(
         "Bufferiv",
         "the pointer version of #Bufferi()",
 
-        ALuint.IN("buffer", "the buffer to modify"),
-        ALenum.IN("paramName", "the parameter to modify"),
-        Check(1)..ALint.const.p.IN("value", "the parameter values")
+        ALuint("buffer", "the buffer to modify"),
+        ALenum("paramName", "the parameter to modify"),
+        Check(1)..ALint.const.p("value", "the parameter values")
     )
 
     ALvoid(
         "GetBufferiv",
         "Returns the integer values of the specified buffer parameter.",
 
-        ALuint.IN("buffer", "the buffer to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("buffer", "the buffer to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALint.p.OUT("values", "the parameter values")
     )
 
@@ -145,8 +145,8 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         "GetBufferfv",
         "Returns the float values of the specified buffer parameter.",
 
-        ALuint.IN("buffer", "the buffer to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("buffer", "the buffer to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALfloat.p.OUT("values", "the parameter values")
     )
 
@@ -154,6 +154,6 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         "SpeedOfSound",
         "Sets the speed of sound.",
 
-        ALfloat.IN("value", "the speed of sound")
+        ALfloat("value", "the speed of sound")
     )
 }

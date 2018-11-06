@@ -84,9 +84,9 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NA
         "ParseFromFile",
         "Parses SVG file from a file, returns SVG image as paths.",
 
-        charASCII.const.p.IN("filename", ""),
-        charASCII.const.p.IN("units", ""),
-        float.IN("dpi", "")
+        charASCII.const.p("filename", ""),
+        charASCII.const.p("units", ""),
+        float("dpi", "")
     )
 
     NSVGimage.p(
@@ -97,51 +97,52 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG", library = NA
         Important note: changes the string.
         """,
 
-        charASCII.p.IN("input", ""),
-        charASCII.const.p.IN("units", ""),
-        float.IN("dpi", "")
+        charASCII.p("input", ""),
+        charASCII.const.p("units", ""),
+        float("dpi", "")
     )
 
     NSVGpath.p(
         "DuplicatePath",
         "Duplicates a path.",
 
-        NSVGpath.p.IN("p", "")
+        NSVGpath.p("p", "")
     )
 
     void(
         "Delete",
         "Deletes an image.",
 
-        NSVGimage.p.IN("image", "")
+        NSVGimage.p("image", "")
     )
 
     // nanosvgrast.h
 
     NSVGrasterizer.p(
         "CreateRasterizer",
-        "Allocates rasterizer context."
+        "Allocates rasterizer context.",
+        void()
     )
 
     void(
         "Rasterize",
         "Rasterizes SVG image, returns RGBA image (non-premultiplied alpha).",
 
-        NSVGrasterizer.p.IN("r", "pointer to rasterizer context"),
-        NSVGimage.p.IN("image", "pointer to image to rasterize"),
-        float.IN("tx", "image x offset (applied after scaling)"),
-        float.IN("ty", "image y offset (applied after scaling)"),
-        float.IN("scale", "image scale"),
+        NSVGrasterizer.p("r", "pointer to rasterizer context"),
+        NSVGimage.p("image", "pointer to image to rasterize"),
+        float("tx", "image x offset (applied after scaling)"),
+        float("ty", "image y offset (applied after scaling)"),
+        float("scale", "image scale"),
         Check("h * stride")..unsigned_char.p.OUT("dst", "pointer to destination image data, 4 bytes per pixel (RGBA)"),
-        int.IN("w", "width of the image to render"),
-        int.IN("h", "height of the image to render"),
-        int.IN("stride", "number of bytes per scaleline in the destination buffer")
+        int("w", "width of the image to render"),
+        int("h", "height of the image to render"),
+        int("stride", "number of bytes per scaleline in the destination buffer")
     )
 
     void(
         "DeleteRasterizer",
         "Deletes rasterizer context.",
 
-        NSVGrasterizer.p.IN("rasterizer", "the rasterizer context to delete")
+        NSVGrasterizer.p("rasterizer", "the rasterizer context to delete")
     )
 }

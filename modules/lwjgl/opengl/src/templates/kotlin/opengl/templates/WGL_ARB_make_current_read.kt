@@ -56,11 +56,11 @@ val WGL_ARB_make_current_read = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_
         These frame buffer values are taken from the surface associated with the device context specified by {@code readDC}.
         """,
 
-        HDC.IN("drawDC", "the \"draw\" device context"),
-        HDC.IN("readDC", "the \"read\" device context"),
-        HGLRC.IN("hglrc", "the OpenGL context")
+        HDC("drawDC", "the \"draw\" device context"),
+        HDC("readDC", "the \"read\" device context"),
+        HGLRC("hglrc", "the OpenGL context")
     )
 
-    HDC("GetCurrentReadDCARB", "Returns the \"read\" device context for the current OpenGL context.")
+    HDC("GetCurrentReadDCARB", "Returns the \"read\" device context for the current OpenGL context.", void())
 
 }

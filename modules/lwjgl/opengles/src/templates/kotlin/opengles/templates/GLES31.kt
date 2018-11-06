@@ -194,54 +194,54 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "DispatchCompute",
         "",
 
-        GLuint.IN("num_groups_x", ""),
-        GLuint.IN("num_groups_y", ""),
-        GLuint.IN("num_groups_z", "")
+        GLuint("num_groups_x", ""),
+        GLuint("num_groups_y", ""),
+        GLuint("num_groups_z", "")
     )
 
     void(
         "DispatchComputeIndirect",
         "",
 
-        GLintptr.IN("indirect", "")
+        GLintptr("indirect", "")
     )
 
     void(
         "DrawArraysIndirect",
         "",
 
-        GLenum.IN("mode", ""),
+        GLenum("mode", ""),
         DRAW_INDIRECT_BUFFER..Check("4 * 4")..MultiType(
             PointerMapping.DATA_INT
-        )..void.const.p.IN("indirect", "")
+        )..void.const.p("indirect", "")
     )
 
     void(
         "DrawElementsIndirect",
         "",
 
-        GLenum.IN("mode", ""),
-        GLenum.IN("type", ""),
+        GLenum("mode", ""),
+        GLenum("type", ""),
         DRAW_INDIRECT_BUFFER..Check("5 * 4")..MultiType(
             PointerMapping.DATA_INT
-        )..void.const.p.IN("indirect", "")
+        )..void.const.p("indirect", "")
     )
 
     void(
         "FramebufferParameteri",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
-        GLint.IN("param", "")
+        GLenum("target", ""),
+        GLenum("pname", ""),
+        GLint("param", "")
     )
 
     void(
         "GetFramebufferParameteriv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -249,9 +249,9 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "GetProgramInterfaceiv",
         "",
 
-        GLuint.IN("program", ""),
-        GLenum.IN("programInterface", ""),
-        GLenum.IN("pname", ""),
+        GLuint("program", ""),
+        GLenum("programInterface", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -259,19 +259,19 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "GetProgramResourceIndex",
         "",
 
-        GLuint.IN("program", ""),
-        GLenum.IN("programInterface", ""),
-        GLcharASCII.const.p.IN("name", "")
+        GLuint("program", ""),
+        GLenum("programInterface", ""),
+        GLcharASCII.const.p("name", "")
     )
 
     void(
         "GetProgramResourceName",
         "",
 
-        GLuint.IN("program", ""),
-        GLenum.IN("programInterface", ""),
-        GLuint.IN("index", ""),
-        AutoSize("name")..GLsizei.IN("bufSize", ""),
+        GLuint("program", ""),
+        GLenum("programInterface", ""),
+        GLuint("index", ""),
+        AutoSize("name")..GLsizei("bufSize", ""),
         Check(1)..nullable..GLsizei.p.OUT("length", ""),
         Return(
             "length",
@@ -283,12 +283,12 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "GetProgramResourceiv",
         "",
 
-        GLuint.IN("program", ""),
-        GLenum.IN("programInterface", ""),
-        GLuint.IN("index", ""),
-        AutoSize("props")..GLsizei.IN("propCount", ""),
-        GLenum.const.p.IN("props", ""),
-        AutoSize("params")..GLsizei.IN("bufSize", ""),
+        GLuint("program", ""),
+        GLenum("programInterface", ""),
+        GLuint("index", ""),
+        AutoSize("props")..GLsizei("propCount", ""),
+        GLenum.const.p("props", ""),
+        AutoSize("params")..GLsizei("bufSize", ""),
         Check(1)..nullable..GLsizei.p.OUT("length", ""),
         GLint.p.OUT("params", "")
     )
@@ -297,57 +297,57 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "GetProgramResourceLocation",
         "",
 
-        GLuint.IN("program", ""),
-        GLenum.IN("programInterface", ""),
-        GLcharASCII.const.p.IN("name", "")
+        GLuint("program", ""),
+        GLenum("programInterface", ""),
+        GLcharASCII.const.p("name", "")
     )
 
     void(
         "UseProgramStages",
         "",
 
-        GLuint.IN("pipeline", ""),
-        GLbitfield.IN("stages", ""),
-        GLuint.IN("program", "")
+        GLuint("pipeline", ""),
+        GLbitfield("stages", ""),
+        GLuint("program", "")
     )
 
     void(
         "ActiveShaderProgram",
         "",
 
-        GLuint.IN("pipeline", ""),
-        GLuint.IN("program", "")
+        GLuint("pipeline", ""),
+        GLuint("program", "")
     )
 
     GLuint(
         "CreateShaderProgramv",
         "",
 
-        GLenum.IN("type", ""),
-        AutoSize("strings")..GLsizei.IN("count", ""),
-        PointerArray(GLcharUTF8.p, "string")..GLcharUTF8.const.p.const.p.IN("strings", "")
+        GLenum("type", ""),
+        AutoSize("strings")..GLsizei("count", ""),
+        PointerArray(GLcharUTF8.p, "string")..GLcharUTF8.const.p.const.p("strings", "")
     )
 
     void(
         "BindProgramPipeline",
         "",
 
-        GLuint.IN("pipeline", "")
+        GLuint("pipeline", "")
     )
 
     void(
         "DeleteProgramPipelines",
         "",
 
-        AutoSize("pipelines")..GLsizei.IN("n", ""),
-        SingleValue("pipeline")..GLuint.const.p.IN("pipelines", "")
+        AutoSize("pipelines")..GLsizei("n", ""),
+        SingleValue("pipeline")..GLuint.const.p("pipelines", "")
     )
 
     void(
         "GenProgramPipelines",
         "",
 
-        AutoSize("pipelines")..GLsizei.IN("n", ""),
+        AutoSize("pipelines")..GLsizei("n", ""),
         ReturnParam..GLuint.p.OUT("pipelines", "")
     )
 
@@ -355,15 +355,15 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "IsProgramPipeline",
         "",
 
-        GLuint.IN("pipeline", "")
+        GLuint("pipeline", "")
     )
 
     void(
         "GetProgramPipelineiv",
         "",
 
-        GLuint.IN("pipeline", ""),
-        GLenum.IN("pname", ""),
+        GLuint("pipeline", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -371,360 +371,360 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "ProgramUniform1i",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLint.IN("v0", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLint("v0", "")
     )
 
     void(
         "ProgramUniform2i",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLint.IN("v0", ""),
-        GLint.IN("v1", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLint("v0", ""),
+        GLint("v1", "")
     )
 
     void(
         "ProgramUniform3i",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLint.IN("v0", ""),
-        GLint.IN("v1", ""),
-        GLint.IN("v2", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLint("v0", ""),
+        GLint("v1", ""),
+        GLint("v2", "")
     )
 
     void(
         "ProgramUniform4i",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLint.IN("v0", ""),
-        GLint.IN("v1", ""),
-        GLint.IN("v2", ""),
-        GLint.IN("v3", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLint("v0", ""),
+        GLint("v1", ""),
+        GLint("v2", ""),
+        GLint("v3", "")
     )
 
     void(
         "ProgramUniform1ui",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLuint.IN("v0", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLuint("v0", "")
     )
 
     void(
         "ProgramUniform2ui",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLuint.IN("v0", ""),
-        GLuint.IN("v1", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLuint("v0", ""),
+        GLuint("v1", "")
     )
 
     void(
         "ProgramUniform3ui",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLuint.IN("v0", ""),
-        GLuint.IN("v1", ""),
-        GLuint.IN("v2", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLuint("v0", ""),
+        GLuint("v1", ""),
+        GLuint("v2", "")
     )
 
     void(
         "ProgramUniform4ui",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLuint.IN("v0", ""),
-        GLuint.IN("v1", ""),
-        GLuint.IN("v2", ""),
-        GLuint.IN("v3", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLuint("v0", ""),
+        GLuint("v1", ""),
+        GLuint("v2", ""),
+        GLuint("v3", "")
     )
 
     void(
         "ProgramUniform1f",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLfloat.IN("v0", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLfloat("v0", "")
     )
 
     void(
         "ProgramUniform2f",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLfloat.IN("v0", ""),
-        GLfloat.IN("v1", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLfloat("v0", ""),
+        GLfloat("v1", "")
     )
 
     void(
         "ProgramUniform3f",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLfloat.IN("v0", ""),
-        GLfloat.IN("v1", ""),
-        GLfloat.IN("v2", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLfloat("v0", ""),
+        GLfloat("v1", ""),
+        GLfloat("v2", "")
     )
 
     void(
         "ProgramUniform4f",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLfloat.IN("v0", ""),
-        GLfloat.IN("v1", ""),
-        GLfloat.IN("v2", ""),
-        GLfloat.IN("v3", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLfloat("v0", ""),
+        GLfloat("v1", ""),
+        GLfloat("v2", ""),
+        GLfloat("v3", "")
     )
 
     void(
         "ProgramUniform1iv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLint.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLint.const.p("value", "")
     )
 
     void(
         "ProgramUniform2iv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(2, "value")..GLsizei.IN("count", ""),
-        GLint.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(2, "value")..GLsizei("count", ""),
+        GLint.const.p("value", "")
     )
 
     void(
         "ProgramUniform3iv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(3, "value")..GLsizei.IN("count", ""),
-        GLint.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(3, "value")..GLsizei("count", ""),
+        GLint.const.p("value", "")
     )
 
     void(
         "ProgramUniform4iv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(4, "value")..GLsizei.IN("count", ""),
-        GLint.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(4, "value")..GLsizei("count", ""),
+        GLint.const.p("value", "")
     )
 
     void(
         "ProgramUniform1uiv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLuint.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLuint.const.p("value", "")
     )
 
     void(
         "ProgramUniform2uiv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(2, "value")..GLsizei.IN("count", ""),
-        GLuint.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(2, "value")..GLsizei("count", ""),
+        GLuint.const.p("value", "")
     )
 
     void(
         "ProgramUniform3uiv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(3, "value")..GLsizei.IN("count", ""),
-        GLuint.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(3, "value")..GLsizei("count", ""),
+        GLuint.const.p("value", "")
     )
 
     void(
         "ProgramUniform4uiv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(4, "value")..GLsizei.IN("count", ""),
-        GLuint.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(4, "value")..GLsizei("count", ""),
+        GLuint.const.p("value", "")
     )
 
     void(
         "ProgramUniform1fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniform2fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(2, "value")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(2, "value")..GLsizei("count", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniform3fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(3, "value")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(3, "value")..GLsizei("count", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniform4fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(4, "value")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(4, "value")..GLsizei("count", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniformMatrix2fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(2 x 2, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(2 x 2, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniformMatrix3fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(3 x 3, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(3 x 3, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniformMatrix4fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(4 x 4, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(4 x 4, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniformMatrix2x3fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(2 x 3, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(2 x 3, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniformMatrix3x2fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(3 x 2, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(3 x 2, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniformMatrix2x4fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(2 x 4, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(2 x 4, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniformMatrix4x2fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(4 x 2, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(4 x 2, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniformMatrix3x4fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(3 x 4, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(3 x 4, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ProgramUniformMatrix4x3fv",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(4 x 3, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(4 x 3, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "ValidateProgramPipeline",
         "",
 
-        GLuint.IN("pipeline", "")
+        GLuint("pipeline", "")
     )
 
     void(
         "GetProgramPipelineInfoLog",
         "",
 
-        GLuint.IN("pipeline", ""),
-        AutoSize("infoLog")..GLsizei.IN("bufSize", ""),
+        GLuint("pipeline", ""),
+        AutoSize("infoLog")..GLsizei("bufSize", ""),
         Check(1)..nullable..GLsizei.p.OUT("length", ""),
         Return(
             "length",
@@ -737,21 +737,21 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "BindImageTexture",
         "",
 
-        GLuint.IN("unit", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLboolean.IN("layered", ""),
-        GLint.IN("layer", ""),
-        GLenum.IN("access", ""),
-        GLenum.IN("format", "")
+        GLuint("unit", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLboolean("layered", ""),
+        GLint("layer", ""),
+        GLenum("access", ""),
+        GLenum("format", "")
     )
 
     void(
         "GetBooleani_v",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
+        GLenum("target", ""),
+        GLuint("index", ""),
         ReturnParam..Check(1)..GLboolean.p.OUT("data", "")
     )
 
@@ -759,34 +759,34 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "MemoryBarrier",
         "",
 
-        GLbitfield.IN("barriers", "")
+        GLbitfield("barriers", "")
     )
 
     void(
         "MemoryBarrierByRegion",
         "",
 
-        GLbitfield.IN("barriers", "")
+        GLbitfield("barriers", "")
     )
 
     void(
         "TexStorage2DMultisample",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLboolean.IN("fixedsamplelocations", "")
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLboolean("fixedsamplelocations", "")
     )
 
     void(
         "GetMultisamplefv",
         "",
 
-        GLenum.IN("pname", ""),
-        GLuint.IN("index", ""),
+        GLenum("pname", ""),
+        GLuint("index", ""),
         ReturnParam..Check(1)..GLfloat.p.OUT("val", "")
     )
 
@@ -794,17 +794,17 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "SampleMaski",
         "",
 
-        GLuint.IN("maskNumber", ""),
-        GLbitfield.IN("mask", "")
+        GLuint("maskNumber", ""),
+        GLbitfield("mask", "")
     )
 
     void(
         "GetTexLevelParameteriv",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -812,9 +812,9 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "GetTexLevelParameterfv",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLfloat.p.OUT("params", "")
     )
 
@@ -822,46 +822,46 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
         "BindVertexBuffer",
         "",
 
-        GLuint.IN("bindingindex", ""),
-        GLuint.IN("buffer", ""),
-        GLintptr.IN("offset", ""),
-        GLsizei.IN("stride", "")
+        GLuint("bindingindex", ""),
+        GLuint("buffer", ""),
+        GLintptr("offset", ""),
+        GLsizei("stride", "")
     )
 
     void(
         "VertexAttribFormat",
         "",
 
-        GLuint.IN("attribindex", ""),
-        GLint.IN("size", ""),
-        GLenum.IN("type", ""),
-        GLboolean.IN("normalized", ""),
-        GLuint.IN("relativeoffset", "")
+        GLuint("attribindex", ""),
+        GLint("size", ""),
+        GLenum("type", ""),
+        GLboolean("normalized", ""),
+        GLuint("relativeoffset", "")
     )
 
     void(
         "VertexAttribIFormat",
         "",
 
-        GLuint.IN("attribindex", ""),
-        GLint.IN("size", ""),
-        GLenum.IN("type", ""),
-        GLuint.IN("relativeoffset", "")
+        GLuint("attribindex", ""),
+        GLint("size", ""),
+        GLenum("type", ""),
+        GLuint("relativeoffset", "")
     )
 
     void(
         "VertexAttribBinding",
         "",
 
-        GLuint.IN("attribindex", ""),
-        GLuint.IN("bindingindex", "")
+        GLuint("attribindex", ""),
+        GLuint("bindingindex", "")
     )
 
     void(
         "VertexBindingDivisor",
         "",
 
-        GLuint.IN("bindingindex", ""),
-        GLuint.IN("divisor", "")
+        GLuint("bindingindex", ""),
+        GLuint("divisor", "")
     )
 }

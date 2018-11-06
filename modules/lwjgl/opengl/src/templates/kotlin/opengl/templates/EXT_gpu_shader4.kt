@@ -135,44 +135,44 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
     val vertexAttribW = "the vertex attribute w component"
     val vertexAttribBuffer = "the pure integer vertex attribute buffer"
 
-    void("VertexAttribI1iEXT", "Specifies the value of a pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX))
-    void("VertexAttribI2iEXT", "Specifies the value of a pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY))
-    void("VertexAttribI3iEXT", "Specifies the value of a pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
-    void("VertexAttribI4iEXT", "Specifies the value of a pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
+    void("VertexAttribI1iEXT", "Specifies the value of a pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint("index", vertexAttribIndex), GLint("x", vertexAttribX))
+    void("VertexAttribI2iEXT", "Specifies the value of a pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint("index", vertexAttribIndex), GLint("x", vertexAttribX), GLint("y", vertexAttribY))
+    void("VertexAttribI3iEXT", "Specifies the value of a pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint("index", vertexAttribIndex), GLint("x", vertexAttribX), GLint("y", vertexAttribY), GLint("z", vertexAttribZ))
+    void("VertexAttribI4iEXT", "Specifies the value of a pure integer generic vertex attribute.", GLuint("index", vertexAttribIndex), GLint("x", vertexAttribX), GLint("y", vertexAttribY), GLint("z", vertexAttribZ), GLint("w", vertexAttribW))
 
-    void("VertexAttribI1uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX))
-    void("VertexAttribI2uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX), GLuint.IN("y", vertexAttribY))
-    void("VertexAttribI3uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
-    void("VertexAttribI4uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
+    void("VertexAttribI1uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint("index", vertexAttribIndex), GLuint("x", vertexAttribX))
+    void("VertexAttribI2uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint("index", vertexAttribIndex), GLuint("x", vertexAttribX), GLuint("y", vertexAttribY))
+    void("VertexAttribI3uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint("index", vertexAttribIndex), GLint("x", vertexAttribX), GLint("y", vertexAttribY), GLint("z", vertexAttribZ))
+    void("VertexAttribI4uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint("index", vertexAttribIndex), GLint("x", vertexAttribX), GLint("y", vertexAttribY), GLint("z", vertexAttribZ), GLint("w", vertexAttribW))
 
-    void("VertexAttribI1ivEXT", "Pointer version of #VertexAttribI1iEXT().", GLuint.IN("index", vertexAttribIndex), Check(1)..GLint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI2ivEXT", "Pointer version of #VertexAttribI2iEXT().", GLuint.IN("index", vertexAttribIndex), Check(2)..GLint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI3ivEXT", "Pointer version of #VertexAttribI3iEXT().", GLuint.IN("index", vertexAttribIndex), Check(3)..GLint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4ivEXT", "Pointer version of #VertexAttribI4iEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLint.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI1ivEXT", "Pointer version of #VertexAttribI1iEXT().", GLuint("index", vertexAttribIndex), Check(1)..GLint.const.p("v", vertexAttribBuffer))
+    void("VertexAttribI2ivEXT", "Pointer version of #VertexAttribI2iEXT().", GLuint("index", vertexAttribIndex), Check(2)..GLint.const.p("v", vertexAttribBuffer))
+    void("VertexAttribI3ivEXT", "Pointer version of #VertexAttribI3iEXT().", GLuint("index", vertexAttribIndex), Check(3)..GLint.const.p("v", vertexAttribBuffer))
+    void("VertexAttribI4ivEXT", "Pointer version of #VertexAttribI4iEXT().", GLuint("index", vertexAttribIndex), Check(4)..GLint.const.p("v", vertexAttribBuffer))
 
-    void("VertexAttribI1uivEXT", "Pointer version of #VertexAttribI1uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(1)..GLuint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI2uivEXT", "Pointer version of #VertexAttribI2uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(2)..GLuint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI3uivEXT", "Pointer version of #VertexAttribI3uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(3)..GLuint.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4uivEXT", "Pointer version of #VertexAttribI4uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLuint.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI1uivEXT", "Pointer version of #VertexAttribI1uiEXT().", GLuint("index", vertexAttribIndex), Check(1)..GLuint.const.p("v", vertexAttribBuffer))
+    void("VertexAttribI2uivEXT", "Pointer version of #VertexAttribI2uiEXT().", GLuint("index", vertexAttribIndex), Check(2)..GLuint.const.p("v", vertexAttribBuffer))
+    void("VertexAttribI3uivEXT", "Pointer version of #VertexAttribI3uiEXT().", GLuint("index", vertexAttribIndex), Check(3)..GLuint.const.p("v", vertexAttribBuffer))
+    void("VertexAttribI4uivEXT", "Pointer version of #VertexAttribI4uiEXT().", GLuint("index", vertexAttribIndex), Check(4)..GLuint.const.p("v", vertexAttribBuffer))
 
-    void("VertexAttribI4bvEXT", "Byte version of #VertexAttribI4ivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLbyte.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4svEXT", "Short version of #VertexAttribI4ivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLshort.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI4bvEXT", "Byte version of #VertexAttribI4ivEXT().", GLuint("index", vertexAttribIndex), Check(4)..GLbyte.const.p("v", vertexAttribBuffer))
+    void("VertexAttribI4svEXT", "Short version of #VertexAttribI4ivEXT().", GLuint("index", vertexAttribIndex), Check(4)..GLshort.const.p("v", vertexAttribBuffer))
 
-    void("VertexAttribI4ubvEXT", "Byte version of #VertexAttribI4uivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLbyte.const.p.IN("v", vertexAttribBuffer))
-    void("VertexAttribI4usvEXT", "Short version of #VertexAttribI4uivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..GLshort.const.p.IN("v", vertexAttribBuffer))
+    void("VertexAttribI4ubvEXT", "Byte version of #VertexAttribI4uivEXT().", GLuint("index", vertexAttribIndex), Check(4)..GLbyte.const.p("v", vertexAttribBuffer))
+    void("VertexAttribI4usvEXT", "Short version of #VertexAttribI4uivEXT().", GLuint("index", vertexAttribIndex), Check(4)..GLshort.const.p("v", vertexAttribBuffer))
 
     void(
         "VertexAttribIPointerEXT",
         "Specifies the location and organization of a pure integer vertex attribute array.",
 
-        GLuint.IN("index", vertexAttribIndex),
-        GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 #BGRA"),
-        GLenum.IN(
+        GLuint("index", vertexAttribIndex),
+        GLint("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 #BGRA"),
+        GLenum(
             "type",
             "the data type of each component in the array",
             "#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT"
         ),
-        GLsizei.IN(
+        GLsizei(
             "stride",
             """
             the byte offset between consecutive generic vertex attributes. If stride is 0, the generic vertex attributes are understood to be tightly packed in
@@ -180,7 +180,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
             """),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
-        )..Unsafe..ARRAY_BUFFER..void.const.p.IN(
+        )..Unsafe..ARRAY_BUFFER..void.const.p(
             "pointer",
             """
             the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -193,8 +193,8 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
         "GetVertexAttribIivEXT",
         "Returns the value of a pure integer generic vertex attribute parameter.",
 
-        GLuint.IN("index", vertexAttribIndex),
-        GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
+        GLuint("index", vertexAttribIndex),
+        GLenum("pname", "the symbolic name of the vertex attribute parameter to be queried"),
         Check(4)..ReturnParam..GLint.p.OUT("params", "returns the requested data")
     )
 
@@ -202,8 +202,8 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
         "GetVertexAttribIuivEXT",
         "Unsigned version of #GetVertexAttribIivEXT().",
 
-        GLuint.IN("index", vertexAttribIndex),
-        GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
+        GLuint("index", vertexAttribIndex),
+        GLenum("pname", "the symbolic name of the vertex attribute parameter to be queried"),
         Check(4)..ReturnParam..GLuint.p.OUT("params", "returns the requested data")
     )
 
@@ -211,8 +211,8 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
         "GetUniformuivEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
+        GLuint("program", ""),
+        GLint("location", ""),
         Check(1)..ReturnParam..GLuint.p.OUT("params", "")
     )
 
@@ -220,90 +220,90 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
         "BindFragDataLocationEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLuint.IN("color", ""),
-        GLcharASCII.const.p.IN("name", "")
+        GLuint("program", ""),
+        GLuint("color", ""),
+        GLcharASCII.const.p("name", "")
     )
 
     GLint(
         "GetFragDataLocationEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLcharASCII.const.p.IN("name", "")
+        GLuint("program", ""),
+        GLcharASCII.const.p("name", "")
     )
 
     void(
         "Uniform1uiEXT",
         "",
 
-        GLint.IN("location", ""),
-        GLuint.IN("v0", "")
+        GLint("location", ""),
+        GLuint("v0", "")
     )
 
     void(
         "Uniform2uiEXT",
         "",
 
-        GLint.IN("location", ""),
-        GLuint.IN("v0", ""),
-        GLuint.IN("v1", "")
+        GLint("location", ""),
+        GLuint("v0", ""),
+        GLuint("v1", "")
     )
 
     void(
         "Uniform3uiEXT",
         "",
 
-        GLint.IN("location", ""),
-        GLuint.IN("v0", ""),
-        GLuint.IN("v1", ""),
-        GLuint.IN("v2", "")
+        GLint("location", ""),
+        GLuint("v0", ""),
+        GLuint("v1", ""),
+        GLuint("v2", "")
     )
 
     void(
         "Uniform4uiEXT",
         "",
 
-        GLint.IN("location", ""),
-        GLuint.IN("v0", ""),
-        GLuint.IN("v1", ""),
-        GLuint.IN("v2", ""),
-        GLuint.IN("v3", "")
+        GLint("location", ""),
+        GLuint("v0", ""),
+        GLuint("v1", ""),
+        GLuint("v2", ""),
+        GLuint("v3", "")
     )
 
     void(
         "Uniform1uivEXT",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLuint.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLuint.const.p("value", "")
     )
 
     void(
         "Uniform2uivEXT",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(2, "value")..GLsizei.IN("count", ""),
-        GLuint.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(2, "value")..GLsizei("count", ""),
+        GLuint.const.p("value", "")
     )
 
     void(
         "Uniform3uivEXT",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(3, "value")..GLsizei.IN("count", ""),
-        GLuint.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(3, "value")..GLsizei("count", ""),
+        GLuint.const.p("value", "")
     )
 
     void(
         "Uniform4uivEXT",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(4, "value")..GLsizei.IN("count", ""),
-        GLuint.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(4, "value")..GLsizei("count", ""),
+        GLuint.const.p("value", "")
     )
 }

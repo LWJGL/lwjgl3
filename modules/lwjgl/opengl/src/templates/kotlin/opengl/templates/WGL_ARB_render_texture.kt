@@ -134,8 +134,8 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
         the size of the  texture components are derived from attributes of pbuffer  specified by {@code pbuffer}.
         """,
 
-        HPBUFFERARB.IN("pbuffer", "a pbuffer handle"),
-        int.IN("buffer", "the target buffer", "#FRONT_LEFT_ARB #FRONT_RIGHT_ARB #BACK_LEFT_ARB #BACK_RIGHT_ARB #AUX0_ARB WGL_AUX[1-9]_ARB")
+        HPBUFFERARB("pbuffer", "a pbuffer handle"),
+        int("buffer", "the target buffer", "#FRONT_LEFT_ARB #FRONT_RIGHT_ARB #BACK_LEFT_ARB #BACK_RIGHT_ARB #AUX0_ARB WGL_AUX[1-9]_ARB")
     )
 
     BOOL(
@@ -145,15 +145,15 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
         bound as textures.
         """,
 
-        HPBUFFERARB.IN("pbuffer", "a pbuffer handle"),
-        int.IN("buffer", "the target buffer", "#FRONT_LEFT_ARB #FRONT_RIGHT_ARB #BACK_LEFT_ARB #BACK_RIGHT_ARB #AUX0_ARB WGL_AUX[1-9]_ARB")
+        HPBUFFERARB("pbuffer", "a pbuffer handle"),
+        int("buffer", "the target buffer", "#FRONT_LEFT_ARB #FRONT_RIGHT_ARB #BACK_LEFT_ARB #BACK_RIGHT_ARB #AUX0_ARB WGL_AUX[1-9]_ARB")
     )
 
     BOOL(
         "SetPbufferAttribARB",
         "Sets an attribute to the specified pbuffer.",
 
-        HPBUFFERARB.IN("pbuffer", "a pbuffer handle"),
-        NullTerminated..nullable..int.const.p.IN("attribList", "a 0-terminated list of attribute {type, value} pairs containing integer values")
+        HPBUFFERARB("pbuffer", "a pbuffer handle"),
+        NullTerminated..nullable..int.const.p("attribList", "a 0-terminated list of attribute {type, value} pairs containing integer values")
     )
 }

@@ -33,24 +33,24 @@ val ARB_draw_instanced = "ARBDrawInstanced".nativeClassGL("ARB_draw_instanced", 
         "DrawArraysInstancedARB",
         "Draw multiple instances of a range of elements.",
 
-        GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-        GLint.IN("first", "the starting index in the enabled arrays"),
-        GLsizei.IN("count", "the number of indices to be rendered"),
-        GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered")
+        GLenum("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
+        GLint("first", "the starting index in the enabled arrays"),
+        GLsizei("count", "the number of indices to be rendered"),
+        GLsizei("primcount", "the number of instances of the specified range of indices to be rendered")
     )
 
     void(
         "DrawElementsInstancedARB",
         "Draws multiple instances of a set of elements.",
 
-        GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
+        GLenum("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
+        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei("count", "the number of elements to be rendered"),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum(
             "type",
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
-        GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered")
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", "a pointer to the location where the indices are stored"),
+        GLsizei("primcount", "the number of instances of the specified range of indices to be rendered")
     )
 }

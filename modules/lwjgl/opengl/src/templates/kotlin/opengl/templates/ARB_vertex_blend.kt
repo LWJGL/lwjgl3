@@ -102,42 +102,42 @@ val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend", postfi
         "WEIGHT_ARRAY_ARB"..0x86AD
     )
 
-    val size = AutoSize("weights")..GLint.IN("size", "the number of weights to set. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB.")
+    val size = AutoSize("weights")..GLint("size", "the number of weights to set. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB.")
 
-    void("WeightfvARB", "Sets the current vertex weights.", size, GLfloat.p.IN("weights", "the vertex weights"))
+    void("WeightfvARB", "Sets the current vertex weights.", size, GLfloat.p("weights", "the vertex weights"))
 
-    void("WeightbvARB", "Byte version of #WeightfvARB().", size, GLbyte.p.IN("weights", "the vertex weights"))
-    void("WeightubvARB", "Unsigned byte version of #WeightfvARB().", size, GLubyte.p.IN("weights", "the vertex weights"))
+    void("WeightbvARB", "Byte version of #WeightfvARB().", size, GLbyte.p("weights", "the vertex weights"))
+    void("WeightubvARB", "Unsigned byte version of #WeightfvARB().", size, GLubyte.p("weights", "the vertex weights"))
 
-    void("WeightsvARB", "Short version of #WeightfvARB().", size, GLshort.p.IN("weights", "the vertex weights"))
-    void("WeightusvARB", "Unsigned short version of #WeightfvARB().", size, GLushort.p.IN("weights", "the vertex weights"))
+    void("WeightsvARB", "Short version of #WeightfvARB().", size, GLshort.p("weights", "the vertex weights"))
+    void("WeightusvARB", "Unsigned short version of #WeightfvARB().", size, GLushort.p("weights", "the vertex weights"))
 
-    void("WeightivARB", "Integer version of #WeightfvARB().", size, GLint.p.IN("weights", "the vertex weights"))
-    void("WeightuivARB", "Unsigned integer version of #WeightfvARB().", size, GLuint.p.IN("weights", "the vertex weights"))
+    void("WeightivARB", "Integer version of #WeightfvARB().", size, GLint.p("weights", "the vertex weights"))
+    void("WeightuivARB", "Unsigned integer version of #WeightfvARB().", size, GLuint.p("weights", "the vertex weights"))
 
-    void("WeightdvARB", "Double version of #WeightfvARB().", size, GLdouble.p.IN("weights", "the vertex weights"))
+    void("WeightdvARB", "Double version of #WeightfvARB().", size, GLdouble.p("weights", "the vertex weights"))
 
     void(
         "WeightPointerARB",
         "Specifies the location and organization of a weight array.",
 
-        GLint.IN("size", "the number of values per vertex that are stored in the array. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB."),
-        GLenum.IN(
+        GLint("size", "the number of values per vertex that are stored in the array. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB."),
+        GLenum(
             "type",
             "the data type of the values stored in the array",
             "#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT #FLOAT #DOUBLE"
         ),
-        GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
+        GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..ARRAY_BUFFER..void.p.IN("pointer", "the weight data")
+        )..Unsafe..ARRAY_BUFFER..void.p("pointer", "the weight data")
     )
 
     void(
         "VertexBlendARB",
         "Sets the number of active transformations applied.",
 
-        GLint.IN("count", "the number of transformations to blend")
+        GLint("count", "the number of transformations to blend")
     )
 
 }

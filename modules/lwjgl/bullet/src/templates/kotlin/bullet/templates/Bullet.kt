@@ -560,52 +560,53 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
 
     b3PhysicsClientHandle(
         "ConnectPhysicsDirect",
-        "Directly execute commands without transport (no shared memory, UDP, socket, grpc etc)."
+        "Directly execute commands without transport (no shared memory, UDP, socket, grpc etc).",
+        void()
     )
 
     b3PhysicsClientHandle(
         "ConnectSharedMemory",
         "",
 
-        int.IN("key", "")
+        int("key", "")
     )
 
     b3PhysicsClientHandle(
         "ConnectPhysicsTCP",
         "Send physics commands using TCP networking.",
 
-        nullable..charASCII.const.p.IN("hostName", ""),
-        int.IN("port", "")
+        nullable..charASCII.const.p("hostName", ""),
+        int("port", "")
     )
 
     b3PhysicsClientHandle(
         "ConnectPhysicsUDP",
         "Send physics commands using UDP networking.",
 
-        nullable..charASCII.const.p.IN("hostName", ""),
-        int.IN("port", "")
+        nullable..charASCII.const.p("hostName", ""),
+        int("port", "")
     )
 
     void(
         "DisconnectSharedMemory",
         "Disconnects the client from the server and cleans up memory.",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     intb(
         "CanSubmitCommand",
         "Checks if a command can be send. There can only be 1 outstanding command.",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryStatusHandle(
         "SubmitClientCommandAndWaitStatus",
         "Blocking submit command and wait for status.",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        b3SharedMemoryCommandHandle.IN("commandHandle", "")
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryCommandHandle("commandHandle", "")
     )
 
     int(
@@ -617,115 +618,115 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         before sending the next command, make sure to check if you can send a command using #CanSubmitCommand().
         """,
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        b3SharedMemoryCommandHandle.IN("commandHandle", "")
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryCommandHandle("commandHandle", "")
     )
 
     b3SharedMemoryStatusHandle(
         "ProcessServerStatus",
         "Νon-blocking check status.",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "GetStatusType",
         "Getσ the physics server return status type.",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CreateCustomCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     void(
         "CustomCommandLoadPlugin",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        charASCII.const.p.IN("pluginPath", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        charASCII.const.p("pluginPath", "")
     )
 
     void(
         "CustomCommandLoadPluginSetPostFix",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        charASCII.const.p.IN("postFix", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        charASCII.const.p("postFix", "")
     )
 
     int(
         "GetStatusPluginUniqueId",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
     int(
         "GetStatusPluginCommandResult",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
     void(
         "CustomCommandUnloadPlugin",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("pluginUniqueId", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("pluginUniqueId", "")
     )
 
     void(
         "CustomCommandExecutePluginCommand",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("pluginUniqueId", ""),
-        charASCII.const.p.IN("textArguments", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("pluginUniqueId", ""),
+        charASCII.const.p("textArguments", "")
     )
 
     void(
         "CustomCommandExecuteAddIntArgument",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("intVal", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("intVal", "")
     )
 
     void(
         "CustomCommandExecuteAddFloatArgument",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        float.IN("floatVal", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        float("floatVal", "")
     )
 
     int(
         "GetStatusBodyIndices",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         int.p.OUT("bodyIndicesOut", ""),
-        AutoSize("bodyIndicesOut")..int.IN("bodyIndicesCapacity", "")
+        AutoSize("bodyIndicesOut")..int("bodyIndicesCapacity", "")
     )
 
     int(
         "GetStatusBodyIndex",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
 	int(
         "GetStatusActualState",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         Check(1)..nullable..int.p.OUT("bodyUniqueId", ""),
         Check(1)..nullable..int.p.OUT("numDegreeOfFreedomQ", ""),
         Check(1)..nullable..int.p.OUT("numDegreeOfFreedomU", ""),
@@ -739,7 +740,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "GetStatusActualState2",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         Check(1)..nullable..int.p.OUT("bodyUniqueId", ""),
         Check(1)..nullable..int.p.OUT("numLinks", ""),
         Check(1)..nullable..int.p.OUT("numDegreeOfFreedomQ", ""),
@@ -758,16 +759,16 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "RequestCollisionInfoCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", "")
     )
 
     int(
         "GetStatusAABB",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
-        int.IN("linkIndex", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
+        int("linkIndex", ""),
         Check(3)..double.p.OUT("aabbMin", ""),
         Check(3)..double.p.OUT("aabbMax", "")
     )
@@ -776,38 +777,38 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitSyncBodyInfoCommand",
         "If you re-connected to an existing server, or server changed otherwise, sync the body info and user constraints etc.",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitRemoveBodyCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", "")
     )
 
     int(
         "GetNumBodies",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "GetBodyUniqueId",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("serialIndex", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("serialIndex", "")
     )
 
     int(
         "GetBodyInfo",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
         b3BodyInfo.p.OUT("info", "")
     )
 
@@ -815,25 +816,25 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "GetNumJoints",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", "")
     )
 
     int(
         "ComputeDofCount",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", "")
     )
 
     int(
         "GetJointInfo",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("jointIndex", ""),
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
+        int("jointIndex", ""),
         b3JointInfo.p.OUT("info", "")
     )
 
@@ -841,37 +842,37 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitSyncUserDataCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitAddUserDataCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        int.IN("visualShapeIndex", ""),
-        charASCII.const.p.IN("key", ""),
-        UserDataValueType.IN("valueType", ""),
-        AutoSize("valueData")..int.IN("valueLength", ""),
-        void.const.p.IN("valueData", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        int("visualShapeIndex", ""),
+        charASCII.const.p("key", ""),
+        UserDataValueType("valueType", ""),
+        AutoSize("valueData")..int("valueLength", ""),
+        void.const.p("valueData", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitRemoveUserDataCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("userDataId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("userDataId", "")
     )
 
     int(
         "GetUserData",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("userDataId", ""),
+        b3PhysicsClientHandle("physClient", ""),
+        int("userDataId", ""),
         b3UserDataValue.p.OUT("valueOut", "")
     )
 
@@ -879,35 +880,35 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "GetUserDataId",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        int.IN("visualShapeIndex", ""),
-        charASCII.const.p.IN("key", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        int("visualShapeIndex", ""),
+        charASCII.const.p("key", "")
     )
 
     int(
         "GetUserDataIdFromStatus",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
     int(
         "GetNumUserData",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", "")
     )
 
     void(
         "GetUserDataInfo",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("userDataIndex", ""),
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
+        int("userDataIndex", ""),
         Check(1)..charASCII.const.p.p.OUT("keyOut", ""),
         Check(1)..int.p.OUT("userDataIdOut", ""),
         Check(1)..int.p.OUT("linkIndexOut", ""),
@@ -918,25 +919,25 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "GetDynamicsInfoCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", "")
     )
 
     b3SharedMemoryCommandHandle(
         "GetDynamicsInfoCommandInit2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", "")
     )
 
     int(
         "GetDynamicsInfo",
         "Given a body unique id and link index, return the dynamics information.",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         b3DynamicsInfo.p.OUT("info", "")
     )
 
@@ -944,153 +945,153 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitChangeDynamicsInfo",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitChangeDynamicsInfo2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", "")
+        b3SharedMemoryCommandHandle("commandHandle", "")
     )
 
     int(
         "ChangeDynamicsInfoSetMass",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        double.IN("mass", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        double("mass", "")
     )
 
     int(
         "ChangeDynamicsInfoSetLocalInertiaDiagonal",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        Check(3)..double.const.p.IN("localInertiaDiagonal", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        Check(3)..double.const.p("localInertiaDiagonal", "")
     )
 
     int(
         "ChangeDynamicsInfoSetLateralFriction",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        double.IN("lateralFriction", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        double("lateralFriction", "")
     )
 
     int(
         "ChangeDynamicsInfoSetSpinningFriction",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        double.IN("friction", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        double("friction", "")
     )
 
     int(
         "ChangeDynamicsInfoSetRollingFriction",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        double.IN("friction", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        double("friction", "")
     )
 
     int(
         "ChangeDynamicsInfoSetRestitution",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        double.IN("restitution", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        double("restitution", "")
     )
 
     int(
         "ChangeDynamicsInfoSetLinearDamping",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        double.IN("linearDamping", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        double("linearDamping", "")
     )
 
     int(
         "ChangeDynamicsInfoSetAngularDamping",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        double.IN("angularDamping", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        double("angularDamping", "")
     )
 
     int(
         "ChangeDynamicsInfoSetContactStiffnessAndDamping",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        double.IN("contactStiffness", ""),
-        double.IN("contactDamping", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        double("contactStiffness", ""),
+        double("contactDamping", "")
     )
 
     int(
         "ChangeDynamicsInfoSetFrictionAnchor",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        int.IN("frictionAnchor", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        int("frictionAnchor", "")
     )
 
     int(
         "ChangeDynamicsInfoSetCcdSweptSphereRadius",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        double.IN("ccdSweptSphereRadius", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        double("ccdSweptSphereRadius", "")
     )
 
     int(
         "ChangeDynamicsInfoSetContactProcessingThreshold",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        double.IN("contactProcessingThreshold", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        double("contactProcessingThreshold", "")
     )
 
     int(
         "ChangeDynamicsInfoSetActivationState",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("activationState", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("activationState", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitCreateUserConstraintCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("parentBodyUniqueId", ""),
-        int.IN("parentJointIndex", ""),
-        int.IN("childBodyUniqueId", ""),
-        int.IN("childJointIndex", ""),
+        b3PhysicsClientHandle("physClient", ""),
+        int("parentBodyUniqueId", ""),
+        int("parentJointIndex", ""),
+        int("childBodyUniqueId", ""),
+        int("childJointIndex", ""),
         b3JointInfo.p.OUT("info", "")
     )
 
@@ -1098,11 +1099,11 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitCreateUserConstraintCommand2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("parentBodyUniqueId", ""),
-        int.IN("parentJointIndex", ""),
-        int.IN("childBodyUniqueId", ""),
-        int.IN("childJointIndex", ""),
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("parentBodyUniqueId", ""),
+        int("parentJointIndex", ""),
+        int("childBodyUniqueId", ""),
+        int("childJointIndex", ""),
         b3JointInfo.p.OUT("info", "")
     )
 
@@ -1110,101 +1111,101 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "GetStatusUserConstraintUniqueId",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitChangeUserConstraintCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("userConstraintUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("userConstraintUniqueId", "")
     )
 
     int(
         "InitChangeUserConstraintSetPivotInB",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("jointChildPivot", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("jointChildPivot", "")
     )
 
     int(
         "InitChangeUserConstraintSetFrameInB",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(4)..double.const.p.IN("jointChildFrameOrn", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(4)..double.const.p("jointChildFrameOrn", "")
     )
 
     int(
         "InitChangeUserConstraintSetMaxForce",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("maxAppliedForce", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("maxAppliedForce", "")
     )
 
     int(
         "InitChangeUserConstraintSetGearRatio",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("gearRatio", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("gearRatio", "")
     )
 
     int(
         "InitChangeUserConstraintSetGearAuxLink",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("gearAuxLink", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("gearAuxLink", "")
     )
 
     int(
         "InitChangeUserConstraintSetRelativePositionTarget",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("relativePositionTarget", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("relativePositionTarget", "")
     )
 
     int(
         "InitChangeUserConstraintSetERP",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("erp", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("erp", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitRemoveUserConstraintCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("userConstraintUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("userConstraintUniqueId", "")
     )
 
     int(
         "GetNumUserConstraints",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitGetUserConstraintStateCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.const.IN("raintUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int.const("raintUniqueId", "")
     )
 
     int(
         "GetStatusUserConstraintState",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         b3UserConstraintState.p.OUT("constraintState", "")
     )
 
@@ -1212,8 +1213,8 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "GetUserConstraintInfo",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.const.IN("raintUniqueId", ""),
+        b3PhysicsClientHandle("physClient", ""),
+        int.const("raintUniqueId", ""),
         b3UserConstraint.p.OUT("info", "")
     )
 
@@ -1221,23 +1222,23 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "GetUserConstraintId",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("serialIndex", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("serialIndex", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitRequestDebugLinesCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("debugMode", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("debugMode", "")
     )
 
     void(
         "GetDebugLines",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
+        b3PhysicsClientHandle("physClient", ""),
         b3DebugLines.p.OUT("lines", "")
     )
 
@@ -1245,48 +1246,48 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitConfigureOpenGLVisualizer",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitConfigureOpenGLVisualizer2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", "")
+        b3SharedMemoryCommandHandle("commandHandle", "")
     )
 
     void(
         "ConfigureOpenGLVisualizerSetVisualizationFlags",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("flag", ""),
-        intb.IN("enabled", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("flag", ""),
+        intb("enabled", "")
     )
 
     void(
         "ConfigureOpenGLVisualizerSetViewMatrix",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        float.IN("cameraDistance", ""),
-        float.IN("cameraPitch", ""),
-        float.IN("cameraYaw", ""),
-        Check(3)..float.const.p.IN("cameraTargetPosition", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        float("cameraDistance", ""),
+        float("cameraPitch", ""),
+        float("cameraYaw", ""),
+        Check(3)..float.const.p("cameraTargetPosition", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitRequestOpenGLVisualizerCameraCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "GetStatusOpenGLVisualizerCamera",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         b3OpenGLVisualizerCameraInfo.p.OUT("camera", "")
     )
 
@@ -1294,83 +1295,83 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitUserDebugDrawAddLine3D",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        Check(3)..double.const.p.IN("fromXYZ", ""),
-        Check(3)..double.const.p.IN("toXYZ", ""),
-        Check(3)..double.const.p.IN("colorRGB", ""),
-        double.IN("lineWidth", ""),
-        double.IN("lifeTime", "")
+        b3PhysicsClientHandle("physClient", ""),
+        Check(3)..double.const.p("fromXYZ", ""),
+        Check(3)..double.const.p("toXYZ", ""),
+        Check(3)..double.const.p("colorRGB", ""),
+        double("lineWidth", ""),
+        double("lifeTime", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitUserDebugDrawAddText3D",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("txt", ""),
-        Check(3)..double.const.p.IN("positionXYZ", ""),
-        Check(3)..double.const.p.IN("colorRGB", ""),
-        double.IN("textSize", ""),
-        double.IN("lifeTime", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("txt", ""),
+        Check(3)..double.const.p("positionXYZ", ""),
+        Check(3)..double.const.p("colorRGB", ""),
+        double("textSize", ""),
+        double("lifeTime", "")
     )
 
     void(
         "UserDebugTextSetOptionFlags",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("optionFlags", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("optionFlags", "")
     )
 
     void(
         "UserDebugTextSetOrientation",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(4)..double.const.p.IN("orientation", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(4)..double.const.p("orientation", "")
     )
 
     void(
         "UserDebugItemSetReplaceItemUniqueId",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("replaceItem", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("replaceItem", "")
     )
 
     void(
         "UserDebugItemSetParentObject",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("objectUniqueId", ""),
-        int.IN("linkIndex", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("objectUniqueId", ""),
+        int("linkIndex", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitUserDebugAddParameter",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("txt", ""),
-        double.IN("rangeMin", ""),
-        double.IN("rangeMax", ""),
-        double.IN("startValue", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("txt", ""),
+        double("rangeMin", ""),
+        double("rangeMax", ""),
+        double("startValue", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitUserDebugReadParameter",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("debugItemUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("debugItemUniqueId", "")
     )
 
     int(
         "GetStatusDebugParameterValue",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         Check(1)..double.p.OUT("paramValue", "")
     )
 
@@ -1378,159 +1379,159 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitUserDebugDrawRemove",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("debugItemUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("debugItemUniqueId", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitUserDebugDrawRemoveAll",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitDebugDrawingCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     void(
         "SetDebugObjectColor",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("objectUniqueId", ""),
-        int.IN("linkIndex", ""),
-        Check(3)..double.const.p.IN("objectColorRGB", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("objectUniqueId", ""),
+        int("linkIndex", ""),
+        Check(3)..double.const.p("objectColorRGB", "")
     )
 
     void(
         "RemoveDebugObjectColor",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("objectUniqueId", ""),
-        int.IN("linkIndex", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("objectUniqueId", ""),
+        int("linkIndex", "")
     )
 
     int(
         "GetDebugItemUniqueId",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitRequestCameraImage",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitRequestCameraImage2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", "")
+        b3SharedMemoryCommandHandle("commandHandle", "")
     )
 
     void(
         "RequestCameraImageSetCameraMatrices",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(16)..float.p.IN("viewMatrix", ""),
-        Check(16)..float.p.IN("projectionMatrix", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(16)..float.p("viewMatrix", ""),
+        Check(16)..float.p("projectionMatrix", "")
     )
 
     void(
         "RequestCameraImageSetPixelResolution",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("width", ""),
-        int.IN("height", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("width", ""),
+        int("height", "")
     )
 
     void(
         "RequestCameraImageSetLightDirection",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..float.const.p.IN("lightDirection", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..float.const.p("lightDirection", "")
     )
 
     void(
         "RequestCameraImageSetLightColor",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..float.const.p.IN("lightColor", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..float.const.p("lightColor", "")
     )
 
     void(
         "RequestCameraImageSetLightDistance",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        float.IN("lightDistance", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        float("lightDistance", "")
     )
 
     void(
         "RequestCameraImageSetLightAmbientCoeff",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        float.IN("lightAmbientCoeff", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        float("lightAmbientCoeff", "")
     )
 
     void(
         "RequestCameraImageSetLightDiffuseCoeff",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        float.IN("lightDiffuseCoeff", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        float("lightDiffuseCoeff", "")
     )
 
     void(
         "RequestCameraImageSetLightSpecularCoeff",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        float.IN("lightSpecularCoeff", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        float("lightSpecularCoeff", "")
     )
 
     void(
         "RequestCameraImageSetShadow",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("hasShadow", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("hasShadow", "")
     )
 
     void(
         "RequestCameraImageSelectRenderer",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("renderer", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("renderer", "")
     )
 
     void(
         "RequestCameraImageSetFlags",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("flags", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("flags", "")
     )
 
     void(
         "GetCameraImageData",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
+        b3PhysicsClientHandle("physClient", ""),
         b3CameraImageData.p.OUT("imageData", "")
     )
 
@@ -1538,18 +1539,18 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "RequestCameraImageSetProjectiveTextureMatrices",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(16)..float.p.IN("viewMatrix", ""),
-        Check(16)..float.p.IN("projectionMatrix", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(16)..float.p("viewMatrix", ""),
+        Check(16)..float.p("projectionMatrix", "")
     )
 
     void(
         "ComputeViewMatrixFromPositions",
         "",
 
-        Check(3)..float.const.p.IN("cameraPosition", ""),
-        Check(3)..float.const.p.IN("cameraTargetPosition", ""),
-        Check(3)..float.const.p.IN("cameraUp", ""),
+        Check(3)..float.const.p("cameraPosition", ""),
+        Check(3)..float.const.p("cameraTargetPosition", ""),
+        Check(3)..float.const.p("cameraUp", ""),
         Check(16)..float.p.OUT("viewMatrix", "")
     )
 
@@ -1557,12 +1558,12 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "ComputeViewMatrixFromYawPitchRoll",
         "",
 
-        Check(3)..float.const.p.IN("cameraTargetPosition", ""),
-        float.IN("distance", ""),
-        float.IN("yaw", ""),
-        float.IN("pitch", ""),
-        float.IN("roll", ""),
-        int.IN("upAxis", ""),
+        Check(3)..float.const.p("cameraTargetPosition", ""),
+        float("distance", ""),
+        float("yaw", ""),
+        float("pitch", ""),
+        float("roll", ""),
+        int("upAxis", ""),
         Check(16)..float.p.OUT("viewMatrix", "")
     )
 
@@ -1570,7 +1571,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "ComputePositionFromViewMatrix",
         "",
 
-        Check(16)..float.const.p.IN("viewMatrix", ""),
+        Check(16)..float.const.p("viewMatrix", ""),
         Check(3)..float.p.OUT("cameraPosition", ""),
         Check(3)..float.p.OUT("cameraTargetPosition", ""),
         Check(3)..float.p.OUT("cameraUp", "")
@@ -1580,12 +1581,12 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "ComputeProjectionMatrix",
         "",
 
-        float.IN("left", ""),
-        float.IN("right", ""),
-        float.IN("bottom", ""),
-        float.IN("top", ""),
-        float.IN("nearVal", ""),
-        float.IN("farVal", ""),
+        float("left", ""),
+        float("right", ""),
+        float("bottom", ""),
+        float("top", ""),
+        float("nearVal", ""),
+        float("farVal", ""),
         Check(16)..float.p.OUT("projectionMatrix", "")
     )
 
@@ -1593,10 +1594,10 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "ComputeProjectionMatrixFOV",
         "",
 
-        float.IN("fov", ""),
-        float.IN("aspect", ""),
-        float.IN("nearVal", ""),
-        float.IN("farVal", ""),
+        float("fov", ""),
+        float("aspect", ""),
+        float("nearVal", ""),
+        float("farVal", ""),
         Check(16)..float.p.OUT("projectionMatrix", "")
     )
 
@@ -1604,46 +1605,46 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitRequestContactPointInformation",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     void(
         "SetContactFilterBodyA",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueIdA", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueIdA", "")
     )
 
     void(
         "SetContactFilterBodyB",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueIdB", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueIdB", "")
     )
 
     void(
         "SetContactFilterLinkA",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("linkIndexA", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("linkIndexA", "")
     )
 
     void(
         "SetContactFilterLinkB",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("linkIndexB", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("linkIndexB", "")
     )
 
     void(
         "GetContactPointInformation",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
+        b3PhysicsClientHandle("physClient", ""),
         b3ContactInformation.p.OUT("contactPointData", "")
     )
 
@@ -1651,102 +1652,102 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitClosestDistanceQuery",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     void(
         "SetClosestDistanceFilterBodyA",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueIdA", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueIdA", "")
     )
 
     void(
         "SetClosestDistanceFilterLinkA",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("linkIndexA", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("linkIndexA", "")
     )
 
     void(
         "SetClosestDistanceFilterBodyB",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueIdB", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueIdB", "")
     )
 
     void(
         "SetClosestDistanceFilterLinkB",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("linkIndexB", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("linkIndexB", "")
     )
 
     void(
         "SetClosestDistanceThreshold",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("distance", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("distance", "")
     )
 
     void(
         "SetClosestDistanceFilterCollisionShapeA",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("collisionShapeA", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("collisionShapeA", "")
     )
 
     void(
         "SetClosestDistanceFilterCollisionShapeB",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("collisionShapeB", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("collisionShapeB", "")
     )
 
     void(
         "SetClosestDistanceFilterCollisionShapePositionA",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("collisionShapePositionA", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("collisionShapePositionA", "")
     )
 
     void(
         "SetClosestDistanceFilterCollisionShapePositionB",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("collisionShapePositionB", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("collisionShapePositionB", "")
     )
 
     void(
         "SetClosestDistanceFilterCollisionShapeOrientationA",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(4)..double.const.p.IN("collisionShapeOrientationA", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(4)..double.const.p("collisionShapeOrientationA", "")
     )
 
     void(
         "SetClosestDistanceFilterCollisionShapeOrientationB",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(4)..double.const.p.IN("collisionShapeOrientationB", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(4)..double.const.p("collisionShapeOrientationB", "")
     )
 
     void(
         "GetClosestPointInformation",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
+        b3PhysicsClientHandle("physClient", ""),
         b3ContactInformation.p.OUT("contactPointInfo", "")
     )
 
@@ -1754,16 +1755,16 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitAABBOverlapQuery",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        Check(3)..double.const.p.IN("aabbMin", ""),
-        Check(3)..double.const.p.IN("aabbMax", "")
+        b3PhysicsClientHandle("physClient", ""),
+        Check(3)..double.const.p("aabbMin", ""),
+        Check(3)..double.const.p("aabbMax", "")
     )
 
     void(
         "GetAABBOverlapResults",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
+        b3PhysicsClientHandle("physClient", ""),
         b3AABBOverlapData.p.OUT("data", "")
     )
 
@@ -1771,15 +1772,15 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitRequestVisualShapeInformation",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueIdA", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueIdA", "")
     )
 
     void(
         "GetVisualShapeInformation",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
+        b3PhysicsClientHandle("physClient", ""),
         b3VisualShapeInformation.p.OUT("visualShapeInfo", "")
     )
 
@@ -1787,16 +1788,16 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitRequestCollisionShapeInformation",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", "")
     )
 
     void(
         "GetCollisionShapeInformation",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
+        b3PhysicsClientHandle("physClient", ""),
         b3CollisionShapeInformation.p.OUT("collisionShapeInfo", "")
     )
 
@@ -1804,291 +1805,291 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InitLoadTexture",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("filename", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("filename", "")
     )
 
     int(
         "GetStatusTextureUniqueId",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CreateChangeTextureCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("textureUniqueId", ""),
-        int.IN("width", ""),
-        int.IN("height", ""),
-        Check("3 * width * height")..char.const.p.IN("rgbPixels", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("textureUniqueId", ""),
+        int("width", ""),
+        int("height", ""),
+        Check("3 * width * height")..char.const.p("rgbPixels", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitUpdateVisualShape",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("jointIndex", ""),
-        int.IN("shapeIndex", ""),
-        int.IN("textureUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
+        int("jointIndex", ""),
+        int("shapeIndex", ""),
+        int("textureUniqueId", "")
     )
 
     void(
         "UpdateVisualShapeRGBAColor",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(4)..double.const.p.IN("rgbaColor", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(4)..double.const.p("rgbaColor", "")
     )
 
     void(
         "UpdateVisualShapeSpecularColor",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("specularColor", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("specularColor", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitPhysicsParamCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitPhysicsParamCommand2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", "")
+        b3SharedMemoryCommandHandle("commandHandle", "")
     )
 
     int(
         "PhysicsParamSetGravity",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("gravx", ""),
-        double.IN("gravy", ""),
-        double.IN("gravz", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("gravx", ""),
+        double("gravy", ""),
+        double("gravz", "")
     )
 
     int(
         "PhysicsParamSetTimeStep",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("timeStep", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("timeStep", "")
     )
 
     int(
         "PhysicsParamSetDefaultContactERP",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("defaultContactERP", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("defaultContactERP", "")
     )
 
     int(
         "PhysicsParamSetDefaultNonContactERP",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("defaultNonContactERP", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("defaultNonContactERP", "")
     )
 
     int(
         "PhysicsParamSetDefaultFrictionERP",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("frictionERP", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("frictionERP", "")
     )
 
     int(
         "PhysicsParamSetDefaultGlobalCFM",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("defaultGlobalCFM", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("defaultGlobalCFM", "")
     )
 
     int(
         "PhysicsParamSetDefaultFrictionCFM",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("frictionCFM", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("frictionCFM", "")
     )
 
     int(
         "PhysicsParamSetNumSubSteps",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("numSubSteps", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("numSubSteps", "")
     )
 
     int(
         "PhysicsParamSetRealTimeSimulation",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        intb.IN("enableRealTimeSimulation", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        intb("enableRealTimeSimulation", "")
     )
 
     int(
         "PhysicsParamSetNumSolverIterations",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("numSolverIterations", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("numSolverIterations", "")
     )
 
     int(
         "PhysicsParamSetCollisionFilterMode",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("filterMode", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("filterMode", "")
     )
 
     int(
         "PhysicsParamSetUseSplitImpulse",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("useSplitImpulse", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("useSplitImpulse", "")
     )
 
     int(
         "PhysicsParamSetSplitImpulsePenetrationThreshold",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("splitImpulsePenetrationThreshold", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("splitImpulsePenetrationThreshold", "")
     )
 
     int(
         "PhysicsParamSetContactBreakingThreshold",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("contactBreakingThreshold", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("contactBreakingThreshold", "")
     )
 
     int(
         "PhysicsParamSetMaxNumCommandsPer1ms",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("maxNumCmdPer1ms", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("maxNumCmdPer1ms", "")
     )
 
     int(
         "PhysicsParamSetEnableFileCaching",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        intb.IN("enableFileCaching", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        intb("enableFileCaching", "")
     )
 
     int(
         "PhysicsParamSetRestitutionVelocityThreshold",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("restitutionVelocityThreshold", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("restitutionVelocityThreshold", "")
     )
 
     int(
         "PhysicsParamSetEnableConeFriction",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        intb.IN("enableConeFriction", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        intb("enableConeFriction", "")
     )
 
     int(
         "PhysicsParameterSetDeterministicOverlappingPairs",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("deterministicOverlappingPairs", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("deterministicOverlappingPairs", "")
     )
 
     int(
         "PhysicsParameterSetAllowedCcdPenetration",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("allowedCcdPenetration", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("allowedCcdPenetration", "")
     )
 
     int(
         "PhysicsParameterSetJointFeedbackMode",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("jointFeedbackMode", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("jointFeedbackMode", "")
     )
 
     int(
         "PhysicsParamSetSolverResidualThreshold",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("solverResidualThreshold", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("solverResidualThreshold", "")
     )
 
     int(
         "PhysicsParamSetContactSlop",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("contactSlop", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("contactSlop", "")
     )
 
     int(
         "PhysicsParameterSetEnableSAT",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        intb.IN("enableSAT", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        intb("enableSAT", "")
     )
 
     int(
         "PhysicsParameterSetConstraintSolverType",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.const.IN("raintSolverType", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int.const("raintSolverType", "")
     )
 
     int(
         "PhysicsParameterSetMinimumSolverIslandSize",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("minimumSolverIslandSize", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("minimumSolverIslandSize", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitRequestPhysicsParamCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "GetStatusPhysicsSimulationParameters",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         b3PhysicsSimulationParameters.p.OUT("params", "")
     )
 
@@ -2096,200 +2097,200 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "PhysicsParamSetInternalSimFlags",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("flags", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("flags", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitStepSimulationCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitStepSimulationCommand2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", "")
+        b3SharedMemoryCommandHandle("commandHandle", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitResetSimulationCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitResetSimulationCommand2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", "")
+        b3SharedMemoryCommandHandle("commandHandle", "")
     )
 
     b3SharedMemoryCommandHandle(
         "LoadUrdfCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("urdfFileName", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("urdfFileName", "")
     )
 
     b3SharedMemoryCommandHandle(
         "LoadUrdfCommandInit2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        charASCII.const.p.IN("urdfFileName", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        charASCII.const.p("urdfFileName", "")
     )
 
     int(
         "LoadUrdfCommandSetStartPosition",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("startPosX", ""),
-        double.IN("startPosY", ""),
-        double.IN("startPosZ", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("startPosX", ""),
+        double("startPosY", ""),
+        double("startPosZ", "")
     )
 
     int(
         "LoadUrdfCommandSetStartOrientation",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("startOrnX", ""),
-        double.IN("startOrnY", ""),
-        double.IN("startOrnZ", ""),
-        double.IN("startOrnW", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("startOrnX", ""),
+        double("startOrnY", ""),
+        double("startOrnZ", ""),
+        double("startOrnW", "")
     )
 
     int(
         "LoadUrdfCommandSetUseMultiBody",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("useMultiBody", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("useMultiBody", "")
     )
 
     int(
         "LoadUrdfCommandSetUseFixedBase",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("useFixedBase", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("useFixedBase", "")
     )
 
     int(
         "LoadUrdfCommandSetFlags",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("flags", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("flags", "")
     )
 
     int(
         "LoadUrdfCommandSetGlobalScaling",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("globalScaling", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("globalScaling", "")
     )
 
     b3SharedMemoryCommandHandle(
         "SaveStateCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "GetStatusGetStateId",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
     b3SharedMemoryCommandHandle(
         "LoadStateCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "LoadStateSetStateId",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("stateId", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("stateId", "")
     )
 
     int(
         "LoadStateSetFileName",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        charASCII.const.p.IN("fileName", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        charASCII.const.p("fileName", "")
     )
 
     b3SharedMemoryCommandHandle(
         "LoadBulletCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("fileName", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("fileName", "")
     )
 
     b3SharedMemoryCommandHandle(
         "SaveBulletCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("fileName", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("fileName", "")
     )
 
     b3SharedMemoryCommandHandle(
         "LoadMJCFCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("fileName", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("fileName", "")
     )
 
     b3SharedMemoryCommandHandle(
         "LoadMJCFCommandInit2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        charASCII.const.p.IN("fileName", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        charASCII.const.p("fileName", "")
     )
 
     void(
         "LoadMJCFCommandSetFlags",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("flags", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("flags", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CalculateInverseDynamicsCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
-        Unsafe..double.const.p.IN("jointPositionsQ", ""),
-        Unsafe..double.const.p.IN("jointVelocitiesQdot", ""),
-        Unsafe..double.const.p.IN("jointAccelerations", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
+        Unsafe..double.const.p("jointPositionsQ", ""),
+        Unsafe..double.const.p("jointVelocitiesQdot", ""),
+        Unsafe..double.const.p("jointAccelerations", "")
     )
 
     int(
         "GetStatusInverseDynamicsJointForces",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         Check(1)..nullable..int.p.OUT("bodyUniqueId", ""),
         Check(1)..nullable..int.p.OUT("dofCount", ""),
         Unsafe..nullable..double.p.OUT("jointForces", "")
@@ -2299,20 +2300,20 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "CalculateJacobianCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkIndex", ""),
-        Check(3)..double.const.p.IN("localPosition", ""),
-        Unsafe..double.const.p.IN("jointPositionsQ", ""),
-        Unsafe..double.const.p.IN("jointVelocitiesQdot", ""),
-        Unsafe..double.const.p.IN("jointAccelerations", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
+        int("linkIndex", ""),
+        Check(3)..double.const.p("localPosition", ""),
+        Unsafe..double.const.p("jointPositionsQ", ""),
+        Unsafe..double.const.p("jointVelocitiesQdot", ""),
+        Unsafe..double.const.p("jointAccelerations", "")
     )
 
     int(
         "GetStatusJacobian",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         Check(1)..nullable..int.p.OUT("dofCount", ""),
         Unsafe..double.p.OUT("linearJacobian", ""),
         Unsafe..double.p.OUT("angularJacobian", "")
@@ -2322,17 +2323,17 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "CalculateMassMatrixCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
-        Unsafe..double.const.p.IN("jointPositionsQ", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
+        Unsafe..double.const.p("jointPositionsQ", "")
     )
 
     int(
         "GetStatusMassMatrix",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         Check(1)..nullable..int.p.OUT("dofCount", ""),
         Unsafe..nullable..double.p.OUT("massMatrix", "")
     )
@@ -2341,80 +2342,80 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "CalculateInverseKinematicsCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", "")
     )
 
     void(
         "CalculateInverseKinematicsAddTargetPurePosition",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("endEffectorLinkIndex", ""),
-        Check(3)..double.const.p.IN("targetPosition", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("endEffectorLinkIndex", ""),
+        Check(3)..double.const.p("targetPosition", "")
     )
 
     void(
         "CalculateInverseKinematicsAddTargetPositionWithOrientation",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("endEffectorLinkIndex", ""),
-        Check(3)..double.const.p.IN("targetPosition", ""),
-        Check(4)..double.const.p.IN("targetOrientation", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("endEffectorLinkIndex", ""),
+        Check(3)..double.const.p("targetPosition", ""),
+        Check(4)..double.const.p("targetOrientation", "")
     )
 
     void(
         "CalculateInverseKinematicsPosWithNullSpaceVel",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        AutoSize("lowerLimit", "upperLimit", "jointRange", "restPose")..int.IN("numDof", ""),
-        int.IN("endEffectorLinkIndex", ""),
-        Check(3)..double.const.p.IN("targetPosition", ""),
-        double.const.p.IN("lowerLimit", ""),
-        double.const.p.IN("upperLimit", ""),
-        double.const.p.IN("jointRange", ""),
-        double.const.p.IN("restPose", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        AutoSize("lowerLimit", "upperLimit", "jointRange", "restPose")..int("numDof", ""),
+        int("endEffectorLinkIndex", ""),
+        Check(3)..double.const.p("targetPosition", ""),
+        double.const.p("lowerLimit", ""),
+        double.const.p("upperLimit", ""),
+        double.const.p("jointRange", ""),
+        double.const.p("restPose", "")
     )
 
     void(
         "CalculateInverseKinematicsPosOrnWithNullSpaceVel",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        AutoSize("lowerLimit", "upperLimit", "jointRange", "restPose")..int.IN("numDof", ""),
-        int.IN("endEffectorLinkIndex", ""),
-        Check(3)..double.const.p.IN("targetPosition", ""),
-        Check(4)..double.const.p.IN("targetOrientation", ""),
-        double.const.p.IN("lowerLimit", ""),
-        double.const.p.IN("upperLimit", ""),
-        double.const.p.IN("jointRange", ""),
-        double.const.p.IN("restPose", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        AutoSize("lowerLimit", "upperLimit", "jointRange", "restPose")..int("numDof", ""),
+        int("endEffectorLinkIndex", ""),
+        Check(3)..double.const.p("targetPosition", ""),
+        Check(4)..double.const.p("targetOrientation", ""),
+        double.const.p("lowerLimit", ""),
+        double.const.p("upperLimit", ""),
+        double.const.p("jointRange", ""),
+        double.const.p("restPose", "")
     )
 
     void(
         "CalculateInverseKinematicsSetJointDamping",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        AutoSize("jointDampingCoeff")..int.IN("numDof", ""),
-        double.const.p.IN("jointDampingCoeff", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        AutoSize("jointDampingCoeff")..int("numDof", ""),
+        double.const.p("jointDampingCoeff", "")
     )
 
     void(
         "CalculateInverseKinematicsSelectSolver",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("solver", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("solver", "")
     )
 
     int(
         "GetStatusInverseKinematicsJointPositions",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
         Check(1)..nullable..int.p.OUT("bodyUniqueId", ""),
         Check(1)..nullable..int.p.OUT("dofCount", ""),
         Unsafe..nullable..double.p.OUT("jointPositions", "")
@@ -2424,677 +2425,677 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "CalculateInverseKinematicsSetCurrentPositions",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        AutoSize("currentJointPositions")..int.IN("numDof", ""),
-        double.const.p.IN("currentJointPositions", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        AutoSize("currentJointPositions")..int("numDof", ""),
+        double.const.p("currentJointPositions", "")
     )
 
     void(
         "CalculateInverseKinematicsSetMaxNumIterations",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("maxNumIterations", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("maxNumIterations", "")
     )
 
     void(
         "CalculateInverseKinematicsSetResidualThreshold",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("residualThreshold", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("residualThreshold", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CollisionFilterCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     void(
         "SetCollisionFilterPair",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueIdA", ""),
-        int.IN("bodyUniqueIdB", ""),
-        int.IN("linkIndexA", ""),
-        int.IN("linkIndexB", ""),
-        intb.IN("enableCollision", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueIdA", ""),
+        int("bodyUniqueIdB", ""),
+        int("linkIndexA", ""),
+        int("linkIndexB", ""),
+        intb("enableCollision", "")
     )
 
     void(
         "SetCollisionFilterGroupMask",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueIdA", ""),
-        int.IN("linkIndexA", ""),
-        int.IN("collisionFilterGroup", ""),
-        int.IN("collisionFilterMask", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueIdA", ""),
+        int("linkIndexA", ""),
+        int("collisionFilterGroup", ""),
+        int("collisionFilterMask", "")
     )
 
     b3SharedMemoryCommandHandle(
         "LoadSdfCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("sdfFileName", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("sdfFileName", "")
     )
 
     b3SharedMemoryCommandHandle(
         "LoadSdfCommandInit2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        charASCII.const.p.IN("sdfFileName", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        charASCII.const.p("sdfFileName", "")
     )
 
     int(
         "LoadSdfCommandSetUseMultiBody",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("useMultiBody", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("useMultiBody", "")
     )
 
     int(
         "LoadSdfCommandSetUseGlobalScaling",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("globalScaling", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("globalScaling", "")
     )
 
     b3SharedMemoryCommandHandle(
         "SaveWorldCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("sdfFileName", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("sdfFileName", "")
     )
 
     b3SharedMemoryCommandHandle(
         "JointControlCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("controlMode", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("controlMode", "")
     )
 
     b3SharedMemoryCommandHandle(
         "JointControlCommandInit2",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("controlMode", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", ""),
+        int("controlMode", "")
     )
 
     b3SharedMemoryCommandHandle(
         "JointControlCommandInit2Internal",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("controlMode", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("controlMode", "")
     )
 
     int(
         "JointControlSetDesiredPosition",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("qIndex", ""),
-        double.IN("value", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("qIndex", ""),
+        double("value", "")
     )
 
     int(
         "JointControlSetKp",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("dofIndex", ""),
-        double.IN("value", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("dofIndex", ""),
+        double("value", "")
     )
 
     int(
         "JointControlSetKd",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("dofIndex", ""),
-        double.IN("value", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("dofIndex", ""),
+        double("value", "")
     )
 
     int(
         "JointControlSetMaximumVelocity",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("dofIndex", ""),
-        double.IN("maximumVelocity", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("dofIndex", ""),
+        double("maximumVelocity", "")
     )
 
     int(
         "JointControlSetDesiredVelocity",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("dofIndex", ""),
-        double.IN("value", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("dofIndex", ""),
+        double("value", "")
     )
 
     int(
         "JointControlSetMaximumForce",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("dofIndex", ""),
-        double.IN("value", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("dofIndex", ""),
+        double("value", "")
     )
 
     int(
         "JointControlSetDesiredForceTorque",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("dofIndex", ""),
-        double.IN("value", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("dofIndex", ""),
+        double("value", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CreateCollisionShapeCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "CreateCollisionShapeAddSphere",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("radius", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("radius", "")
     )
 
     int(
         "CreateCollisionShapeAddBox",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("halfExtents", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("halfExtents", "")
     )
 
     int(
         "CreateCollisionShapeAddCapsule",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("radius", ""),
-        double.IN("height", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("radius", ""),
+        double("height", "")
     )
 
     int(
         "CreateCollisionShapeAddCylinder",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("radius", ""),
-        double.IN("height", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("radius", ""),
+        double("height", "")
     )
 
     int(
         "CreateCollisionShapeAddPlane",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("planeNormal", ""),
-        double.IN("planeConstant", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("planeNormal", ""),
+        double("planeConstant", "")
     )
 
     int(
         "CreateCollisionShapeAddMesh",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        charASCII.const.p.IN("fileName", ""),
-        Check(3)..double.const.p.IN("meshScale", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        charASCII.const.p("fileName", ""),
+        Check(3)..double.const.p("meshScale", "")
     )
 
     void(
         "CreateCollisionSetFlag",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("shapeIndex", ""),
-        int.IN("flags", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("shapeIndex", ""),
+        int("flags", "")
     )
 
     void(
         "CreateCollisionShapeSetChildTransform",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("shapeIndex", ""),
-        Check(3)..double.const.p.IN("childPosition", ""),
-        Check(4)..double.const.p.IN("childOrientation", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("shapeIndex", ""),
+        Check(3)..double.const.p("childPosition", ""),
+        Check(4)..double.const.p("childOrientation", "")
     )
 
     int(
         "GetStatusCollisionShapeUniqueId",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
     b3SharedMemoryCommandHandle(
         "InitRemoveCollisionShapeCommand",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("collisionShapeId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("collisionShapeId", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CreateVisualShapeCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "CreateVisualShapeAddSphere",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("radius", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("radius", "")
     )
 
     int(
         "CreateVisualShapeAddBox",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("halfExtents", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("halfExtents", "")
     )
 
     int(
         "CreateVisualShapeAddCapsule",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("radius", ""),
-        double.IN("height", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("radius", ""),
+        double("height", "")
     )
 
     int(
         "CreateVisualShapeAddCylinder",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("radius", ""),
-        double.IN("height", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("radius", ""),
+        double("height", "")
     )
 
     int(
         "CreateVisualShapeAddPlane",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("planeNormal", ""),
-        double.IN("planeConstant", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("planeNormal", ""),
+        double("planeConstant", "")
     )
 
     int(
         "CreateVisualShapeAddMesh",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        charASCII.const.p.IN("fileName", ""),
-        Check(3)..double.const.p.IN("meshScale", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        charASCII.const.p("fileName", ""),
+        Check(3)..double.const.p("meshScale", "")
     )
 
     void(
         "CreateVisualSetFlag",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("shapeIndex", ""),
-        int.IN("flags", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("shapeIndex", ""),
+        int("flags", "")
     )
 
     void(
         "CreateVisualShapeSetChildTransform",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("shapeIndex", ""),
-        Check(3)..double.const.p.IN("childPosition", ""),
-        Check(4)..double.const.p.IN("childOrientation", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("shapeIndex", ""),
+        Check(3)..double.const.p("childPosition", ""),
+        Check(4)..double.const.p("childOrientation", "")
     )
 
     void(
         "CreateVisualShapeSetSpecularColor",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("shapeIndex", ""),
-        Check(3)..double.const.p.IN("specularColor", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("shapeIndex", ""),
+        Check(3)..double.const.p("specularColor", "")
     )
 
     void(
         "CreateVisualShapeSetRGBAColor",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("shapeIndex", ""),
-        Check(4)..double.const.p.IN("rgbaColor", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("shapeIndex", ""),
+        Check(4)..double.const.p("rgbaColor", "")
     )
 
     int(
         "GetStatusVisualShapeUniqueId",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CreateMultiBodyCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "CreateMultiBodyBase",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("mass", ""),
-        int.IN("collisionShapeUnique", ""),
-        int.IN("visualShapeUniqueId", ""),
-        Check(3)..double.const.p.IN("basePosition", ""),
-        Check(4)..double.const.p.IN("baseOrientation", ""),
-        Check(3)..double.const.p.IN("baseInertialFramePosition", ""),
-        Check(4)..double.const.p.IN("baseInertialFrameOrientation", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("mass", ""),
+        int("collisionShapeUnique", ""),
+        int("visualShapeUniqueId", ""),
+        Check(3)..double.const.p("basePosition", ""),
+        Check(4)..double.const.p("baseOrientation", ""),
+        Check(3)..double.const.p("baseInertialFramePosition", ""),
+        Check(4)..double.const.p("baseInertialFrameOrientation", "")
     )
 
     int(
         "CreateMultiBodyLink",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("linkMass", ""),
-        double.IN("linkCollisionShapeIndex", ""),
-        double.IN("linkVisualShapeIndex", ""),
-        Check(3)..double.const.p.IN("linkPosition", ""),
-        Check(4)..double.const.p.IN("linkOrientation", ""),
-        Check(3)..double.const.p.IN("linkInertialFramePosition", ""),
-        Check(4)..double.const.p.IN("linkInertialFrameOrientation", ""),
-        int.IN("linkParentIndex", ""),
-        int.IN("linkJointType", ""),
-        Check(3)..double.const.p.IN("linkJointAxis", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("linkMass", ""),
+        double("linkCollisionShapeIndex", ""),
+        double("linkVisualShapeIndex", ""),
+        Check(3)..double.const.p("linkPosition", ""),
+        Check(4)..double.const.p("linkOrientation", ""),
+        Check(3)..double.const.p("linkInertialFramePosition", ""),
+        Check(4)..double.const.p("linkInertialFrameOrientation", ""),
+        int("linkParentIndex", ""),
+        int("linkJointType", ""),
+        Check(3)..double.const.p("linkJointAxis", "")
     )
 
     void(
         "CreateMultiBodyUseMaximalCoordinates",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", "")
+        b3SharedMemoryCommandHandle("commandHandle", "")
     )
 
     void(
         "CreateMultiBodySetFlags",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("flags", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("flags", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CreateBoxShapeCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "CreateBoxCommandSetStartPosition",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("startPosX", ""),
-        double.IN("startPosY", ""),
-        double.IN("startPosZ", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("startPosX", ""),
+        double("startPosY", ""),
+        double("startPosZ", "")
     )
 
     int(
         "CreateBoxCommandSetStartOrientation",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("startOrnX", ""),
-        double.IN("startOrnY", ""),
-        double.IN("startOrnZ", ""),
-        double.IN("startOrnW", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("startOrnX", ""),
+        double("startOrnY", ""),
+        double("startOrnZ", ""),
+        double("startOrnW", "")
     )
 
     int(
         "CreateBoxCommandSetHalfExtents",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("halfExtentsX", ""),
-        double.IN("halfExtentsY", ""),
-        double.IN("halfExtentsZ", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("halfExtentsX", ""),
+        double("halfExtentsY", ""),
+        double("halfExtentsZ", "")
     )
 
     int(
         "CreateBoxCommandSetMass",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("mass", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("mass", "")
     )
 
     int(
         "CreateBoxCommandSetCollisionShapeType",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("collisionShapeType", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("collisionShapeType", "")
     )
 
     int(
         "CreateBoxCommandSetColorRGBA",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("red", ""),
-        double.IN("green", ""),
-        double.IN("blue", ""),
-        double.IN("alpha", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("red", ""),
+        double("green", ""),
+        double("blue", ""),
+        double("alpha", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CreatePoseCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CreatePoseCommandInit2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", "")
     )
 
     int(
         "CreatePoseCommandSetBasePosition",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("startPosX", ""),
-        double.IN("startPosY", ""),
-        double.IN("startPosZ", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("startPosX", ""),
+        double("startPosY", ""),
+        double("startPosZ", "")
     )
 
     int(
         "CreatePoseCommandSetBaseOrientation",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("startOrnX", ""),
-        double.IN("startOrnY", ""),
-        double.IN("startOrnZ", ""),
-        double.IN("startOrnW", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("startOrnX", ""),
+        double("startOrnY", ""),
+        double("startOrnZ", ""),
+        double("startOrnW", "")
     )
 
     int(
         "CreatePoseCommandSetBaseLinearVelocity",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("linVel", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("linVel", "")
     )
 
     int(
         "CreatePoseCommandSetBaseAngularVelocity",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("angVel", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("angVel", "")
     )
 
     int(
         "CreatePoseCommandSetJointPositions",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        AutoSize("jointPositions")..int.IN("numJointPositions", ""),
-        double.const.p.IN("jointPositions", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        AutoSize("jointPositions")..int("numJointPositions", ""),
+        double.const.p("jointPositions", "")
     )
 
     int(
         "CreatePoseCommandSetJointPosition",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("jointIndex", ""),
-        double.IN("jointPosition", "")
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("jointIndex", ""),
+        double("jointPosition", "")
     )
 
     int(
         "CreatePoseCommandSetQ",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        AutoSize("q", "hasQ")..int.IN("numJointPositions", ""),
-        double.const.p.IN("q", ""),
-        int.const.p.IN("hasQ", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        AutoSize("q", "hasQ")..int("numJointPositions", ""),
+        double.const.p("q", ""),
+        int.const.p("hasQ", "")
     )
 
     int(
         "CreatePoseCommandSetQdots",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        AutoSize("qDots", "hasQdots")..int.IN("numJointVelocities", ""),
-        double.const.p.IN("qDots", ""),
-        int.const.p.IN("hasQdots", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        AutoSize("qDots", "hasQdots")..int("numJointVelocities", ""),
+        double.const.p("qDots", ""),
+        int.const.p("hasQdots", "")
     )
 
     int(
         "CreatePoseCommandSetJointVelocities",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        AutoSize("jointVelocities")..int.IN("numJointVelocities", ""),
-        double.const.p.IN("jointVelocities", "")
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        AutoSize("jointVelocities")..int("numJointVelocities", ""),
+        double.const.p("jointVelocities", "")
     )
 
     int(
         "CreatePoseCommandSetJointVelocity",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("jointIndex", ""),
-        double.IN("jointVelocity", "")
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("jointIndex", ""),
+        double("jointVelocity", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CreateSensorCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", "")
     )
 
     int(
         "CreateSensorEnable6DofJointForceTorqueSensor",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("jointIndex", ""),
-        intb.IN("enable", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("jointIndex", ""),
+        intb("enable", "")
     )
 
     int(
         "CreateSensorEnableIMUForLink",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("linkIndex", ""),
-        intb.IN("enable", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("linkIndex", ""),
+        intb("enable", "")
     )
 
     b3SharedMemoryCommandHandle(
         "RequestActualStateCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        int.IN("bodyUniqueId", "")
+        b3PhysicsClientHandle("physClient", ""),
+        int("bodyUniqueId", "")
     )
 
     b3SharedMemoryCommandHandle(
         "RequestActualStateCommandInit2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", "")
     )
 
     int(
         "RequestActualStateCommandComputeLinkVelocity",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("computeLinkVelocity", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("computeLinkVelocity", "")
     )
 
     int(
         "RequestActualStateCommandComputeForwardKinematics",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("computeForwardKinematics", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("computeForwardKinematics", "")
     )
 
     int(
         "GetJointState",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
-        int.IN("jointIndex", ""),
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
+        int("jointIndex", ""),
         b3JointSensorState.p.OUT("state", "")
     )
 
@@ -3102,9 +3103,9 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "GetLinkState",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        b3SharedMemoryStatusHandle.IN("statusHandle", ""),
-        int.IN("linkIndex", ""),
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
+        int("linkIndex", ""),
         b3LinkState.p.OUT("state", "")
     )
 
@@ -3112,97 +3113,97 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "PickBody",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        double.IN("rayFromWorldX", ""),
-        double.IN("rayFromWorldY", ""),
-        double.IN("rayFromWorldZ", ""),
-        double.IN("rayToWorldX", ""),
-        double.IN("rayToWorldY", ""),
-        double.IN("rayToWorldZ", "")
+        b3PhysicsClientHandle("physClient", ""),
+        double("rayFromWorldX", ""),
+        double("rayFromWorldY", ""),
+        double("rayFromWorldZ", ""),
+        double("rayToWorldX", ""),
+        double("rayToWorldY", ""),
+        double("rayToWorldZ", "")
     )
 
     b3SharedMemoryCommandHandle(
         "MovePickedBody",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        double.IN("rayFromWorldX", ""),
-        double.IN("rayFromWorldY", ""),
-        double.IN("rayFromWorldZ", ""),
-        double.IN("rayToWorldX", ""),
-        double.IN("rayToWorldY", ""),
-        double.IN("rayToWorldZ", "")
+        b3PhysicsClientHandle("physClient", ""),
+        double("rayFromWorldX", ""),
+        double("rayFromWorldY", ""),
+        double("rayFromWorldZ", ""),
+        double("rayToWorldX", ""),
+        double("rayToWorldY", ""),
+        double("rayToWorldZ", "")
     )
 
     b3SharedMemoryCommandHandle(
         "RemovePickingConstraint",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CreateRaycastCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        double.IN("rayFromWorldX", ""),
-        double.IN("rayFromWorldY", ""),
-        double.IN("rayFromWorldZ", ""),
-        double.IN("rayToWorldX", ""),
-        double.IN("rayToWorldY", ""),
-        double.IN("rayToWorldZ", "")
+        b3PhysicsClientHandle("physClient", ""),
+        double("rayFromWorldX", ""),
+        double("rayFromWorldY", ""),
+        double("rayFromWorldZ", ""),
+        double("rayToWorldX", ""),
+        double("rayToWorldY", ""),
+        double("rayToWorldZ", "")
     )
 
     b3SharedMemoryCommandHandle(
         "CreateRaycastBatchCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     void(
         "RaycastBatchSetNumThreads",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("numThreads", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("numThreads", "")
     )
 
     void(
         "RaycastBatchAddRay",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("rayFromWorld", ""),
-        Check(3)..double.const.p.IN("rayToWorld", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("rayFromWorld", ""),
+        Check(3)..double.const.p("rayToWorld", "")
     )
 
     void(
         "RaycastBatchAddRays",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.const.p.IN("rayFromWorld", ""),
-        double.const.p.IN("rayToWorld", ""),
-        AutoSize(3, "rayFromWorld", "rayToWorld")..int.IN("numRays", "")
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double.const.p("rayFromWorld", ""),
+        double.const.p("rayToWorld", ""),
+        AutoSize(3, "rayFromWorld", "rayToWorld")..int("numRays", "")
     )
 
     void(
         "RaycastBatchSetParentObject",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("parentObjectUniqueId", ""),
-        int.IN("parentLinkIndex", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("parentObjectUniqueId", ""),
+        int("parentLinkIndex", "")
     )
 
     void(
         "GetRaycastInformation",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
+        b3PhysicsClientHandle("physClient", ""),
         b3RaycastInformation.p.OUT("raycastInfo", "")
     )
 
@@ -3210,84 +3211,84 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "ApplyExternalForceCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     void(
         "ApplyExternalForce",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkId", ""),
-        Check(3)..double.const.p.IN("force", ""),
-        Check(3)..double.const.p.IN("position", ""),
-        int.IN("flag", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkId", ""),
+        Check(3)..double.const.p("force", ""),
+        Check(3)..double.const.p("position", ""),
+        int("flag", "")
     )
 
     void(
         "ApplyExternalTorque",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyUniqueId", ""),
-        int.IN("linkId", ""),
-        Check(3)..double.const.p.IN("torque", ""),
-        int.IN("flag", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyUniqueId", ""),
+        int("linkId", ""),
+        Check(3)..double.const.p("torque", ""),
+        int("flag", "")
     )
 
     b3SharedMemoryCommandHandle(
         "LoadSoftBodyCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("fileName", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("fileName", "")
     )
 
     int(
         "LoadSoftBodySetScale",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("scale", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("scale", "")
     )
 
     int(
         "LoadSoftBodySetMass",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("mass", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("mass", "")
     )
 
     int(
         "LoadSoftBodySetCollisionMargin",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        double.IN("collisionMargin", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        double("collisionMargin", "")
     )
 
     b3SharedMemoryCommandHandle(
         "RequestVREventsCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     void(
         "VREventsSetDeviceTypeFilter",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("deviceTypeFilter", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("deviceTypeFilter", "")
     )
 
     void(
         "GetVREventsData",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
+        b3PhysicsClientHandle("physClient", ""),
         b3VREventsData.p.OUT("vrEventsData", "")
     )
 
@@ -3295,60 +3296,60 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "SetVRCameraStateCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "SetVRCameraRootPosition",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(3)..double.const.p.IN("rootPos", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(3)..double.const.p("rootPos", "")
     )
 
     int(
         "SetVRCameraRootOrientation",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        Check(4)..double.const.p.IN("rootOrn", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        Check(4)..double.const.p("rootOrn", "")
     )
 
     int(
         "SetVRCameraTrackingObject",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("objectUniqueId", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("objectUniqueId", "")
     )
 
     int(
         "SetVRCameraTrackingObjectFlag",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("flag", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("flag", "")
     )
 
     b3SharedMemoryCommandHandle(
         "RequestKeyboardEventsCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "RequestKeyboardEventsCommandInit2",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", "")
+        b3SharedMemoryCommandHandle("commandHandle", "")
     )
 
     void(
         "GetKeyboardEventsData",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
+        b3PhysicsClientHandle("physClient", ""),
         b3KeyboardEventsData.p.OUT("keyboardEventsData", "")
     )
 
@@ -3356,14 +3357,14 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "RequestMouseEventsCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     void(
         "GetMouseEventsData",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
+        b3PhysicsClientHandle("physClient", ""),
         b3MouseEventsData.p.OUT("mouseEventsData", "")
     )
 
@@ -3371,159 +3372,159 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "StateLoggingCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "StateLoggingStart",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("loggingType", ""),
-        charASCII.const.p.IN("fileName", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("loggingType", ""),
+        charASCII.const.p("fileName", "")
     )
 
     int(
         "StateLoggingAddLoggingObjectUniqueId",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("objectUniqueId", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("objectUniqueId", "")
     )
 
     int(
         "StateLoggingSetMaxLogDof",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("maxLogDof", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("maxLogDof", "")
     )
 
     int(
         "StateLoggingSetLinkIndexA",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("linkIndexA", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("linkIndexA", "")
     )
 
     int(
         "StateLoggingSetLinkIndexB",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("linkIndexB", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("linkIndexB", "")
     )
 
     int(
         "StateLoggingSetBodyAUniqueId",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyAUniqueId", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyAUniqueId", "")
     )
 
     int(
         "StateLoggingSetBodyBUniqueId",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("bodyBUniqueId", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("bodyBUniqueId", "")
     )
 
     int(
         "StateLoggingSetDeviceTypeFilter",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("deviceTypeFilter", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("deviceTypeFilter", "")
     )
 
     int(
         "StateLoggingSetLogFlags",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("logFlags", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("logFlags", "")
     )
 
     int(
         "GetStatusLoggingUniqueId",
         "",
 
-        b3SharedMemoryStatusHandle.IN("statusHandle", "")
+        b3SharedMemoryStatusHandle("statusHandle", "")
     )
 
     int(
         "StateLoggingStop",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("loggingUid", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("loggingUid", "")
     )
 
     b3SharedMemoryCommandHandle(
         "ProfileTimingCommandInit",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("name", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("name", "")
     )
 
     void(
         "SetProfileTimingDuractionInMicroSeconds",
         "",
 
-        b3SharedMemoryCommandHandle.IN("commandHandle", ""),
-        int.IN("duration", "")
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("duration", "")
     )
 
     void(
         "PushProfileTiming",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("timingName", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("timingName", "")
     )
 
     void(
         "PopProfileTiming",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     void(
         "SetTimeOut",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        double.IN("timeOutInSeconds", "")
+        b3PhysicsClientHandle("physClient", ""),
+        double("timeOutInSeconds", "")
     )
 
     double(
         "GetTimeOut",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", "")
+        b3PhysicsClientHandle("physClient", "")
     )
 
     b3SharedMemoryCommandHandle(
         "SetAdditionalSearchPath",
         "",
 
-        b3PhysicsClientHandle.IN("physClient", ""),
-        charASCII.const.p.IN("path", "")
+        b3PhysicsClientHandle("physClient", ""),
+        charASCII.const.p("path", "")
     )
 
     void(
         "MultiplyTransforms",
         "",
 
-        Check(3)..double.const.p.IN("posA", ""),
-        Check(4)..double.const.p.IN("ornA", ""),
-        Check(3)..double.const.p.IN("posB", ""),
-        Check(4)..double.const.p.IN("ornB", ""),
+        Check(3)..double.const.p("posA", ""),
+        Check(4)..double.const.p("ornA", ""),
+        Check(3)..double.const.p("posB", ""),
+        Check(4)..double.const.p("ornB", ""),
         Check(3)..double.p.OUT("outPos", ""),
         Check(4)..double.p.OUT("outOrn", "")
     )
@@ -3532,8 +3533,8 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         "InvertTransform",
         "",
 
-        Check(3)..double.const.p.IN("pos", ""),
-        Check(4)..double.const.p.IN("orn", ""),
+        Check(3)..double.const.p("pos", ""),
+        Check(4)..double.const.p("orn", ""),
         Check(3)..double.p.OUT("outPos", ""),
         Check(4)..double.p.OUT("outOrn", "")
     )

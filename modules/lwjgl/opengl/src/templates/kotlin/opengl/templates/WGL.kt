@@ -63,15 +63,15 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         format as the device context.
         """,
 
-        HDC.IN("hdc", "handle to a device context for which the function creates a suitable OpenGL rendering context")
+        HDC("hdc", "handle to a device context for which the function creates a suitable OpenGL rendering context")
     )
 
     HGLRC(
         "CreateLayerContext",
         "Creates a new OpenGL rendering context for drawing to a specified layer plane on a device context.",
 
-        HDC.IN("hdc", "the device context for a new rendering context"),
-        int.IN(
+        HDC("hdc", "the device context for a new rendering context"),
+        int(
             "layerPlane",
             """
             the layer plane to which you want to bind a rendering context. The value 0 identifies the main plane. Positive values of {@code layerPlace} identify
@@ -87,9 +87,9 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         "CopyContext",
         "Copies selected groups of rendering states from one OpenGL rendering context to another.",
 
-        HGLRC.IN("src", "the source OpenGL rendering context whose state information is to be copied"),
-        HGLRC.IN("dst", "the destination OpenGL rendering context to which state information is to be copied"),
-        UINT.IN(
+        HGLRC("src", "the source OpenGL rendering context whose state information is to be copied"),
+        HGLRC("dst", "the destination OpenGL rendering context to which state information is to be copied"),
+        UINT(
             "mask",
             """
             which groups of the {@code src} rendering state are to be copied to {@code dst}. It contains the bitwise-OR of the same symbolic names that are
@@ -102,24 +102,26 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         "DeleteContext",
         "Deletes a specified OpenGL rendering context.",
 
-        HGLRC.IN("context", "handle to an OpenGL rendering context that the function will delete")
+        HGLRC("context", "handle to an OpenGL rendering context that the function will delete")
     )
 
     HGLRC(
         "GetCurrentContext",
-        "Obtains a handle to the current OpenGL rendering context of the calling thread."
+        "Obtains a handle to the current OpenGL rendering context of the calling thread.",
+        void()
     )
 
     HDC(
         "GetCurrentDC",
-        "Obtains a handle to the device context that is associated with the current OpenGL rendering context of the calling thread."
+        "Obtains a handle to the device context that is associated with the current OpenGL rendering context of the calling thread.",
+        void()
     )
 
     PROC(
         "GetProcAddress",
         "Returns the address of an OpenGL extension function for use with the current OpenGL rendering context.",
 
-        LPCSTR.IN(
+        LPCSTR(
             "proc",
             """
             points to a null-terminated string that is the name of the extension function. The name of the extension function must be identical to a
@@ -135,8 +137,8 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         the device identified by device. You can also use MakeCurrent to change the calling thread's current rendering context so it's no longer current.
         """,
 
-        nullable..HDC.IN("hdc", "handle to a device context. Subsequent OpenGL calls made by the calling thread are drawn on the device identified by {@code dc}."),
-        nullable..HGLRC.IN(
+        nullable..HDC("hdc", "handle to a device context. Subsequent OpenGL calls made by the calling thread are drawn on the device identified by {@code dc}."),
+        nullable..HGLRC(
             "hglrc",
             """
             handle to an OpenGL rendering context that the function sets as the calling thread's rendering context. If {@code context} is #NULL, the function
@@ -150,8 +152,8 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         "ShareLists",
         "Enables multiple OpenGL rendering contexts to share a single display-list space.",
 
-        HGLRC.IN("hglrc1", "the OpenGL rendering context with which to share display lists."),
-        HGLRC.IN(
+        HGLRC("hglrc1", "the OpenGL rendering context with which to share display lists."),
+        HGLRC(
             "hglrc2",
             """
             the OpenGL rendering context to share display lists with {@code hglrc1}. The {@code hglrc2} parameter should not contain any existing display lists
@@ -181,10 +183,10 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         Creates count display lists, one for each of a run of count glyphs that begins with the first glyph in the device parameter's selected fonts.
         """,
 
-        HDC.IN("hdc", "the device context whose currently selected font will be used to form the glyph bitmap display lists in the current OpenGL rendering context"),
-        DWORD.IN("first", "the first glyph in the run of glyphs that will be used to form glyph bitmap display lists"),
-        DWORD.IN("count", "the number of glyphs in the run of glyphs that will be used to form glyph bitmap display lists. The function creates count display lists, one for each glyph in the run."),
-        DWORD.IN("listBase", "the starting display list")
+        HDC("hdc", "the device context whose currently selected font will be used to form the glyph bitmap display lists in the current OpenGL rendering context"),
+        DWORD("first", "the first glyph in the run of glyphs that will be used to form glyph bitmap display lists"),
+        DWORD("count", "the number of glyphs in the run of glyphs that will be used to form glyph bitmap display lists. The function creates count display lists, one for each glyph in the run."),
+        DWORD("listBase", "the starting display list")
     )
 
     NativeName("wglUseFontOutlinesW")..BOOL(
@@ -201,37 +203,37 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         a character cell.
         """,
 
-        HDC.IN(
+        HDC(
             "hdc",
             """
             the device context with the desired outline font. The outline font of {@code dc} is used to create the display lists in the current rendering
             context.
             """
         ),
-        DWORD.IN("first", "the first of the set of glyphs that form the font outline display lists"),
-        AutoSize("glyphMetrics")..DWORD.IN(
+        DWORD("first", "the first of the set of glyphs that form the font outline display lists"),
+        AutoSize("glyphMetrics")..DWORD(
             "count",
             """
             the number of glyphs in the set of glyphs used to form the font outline display lists. The {@code wglUseFontOutlines} function creates count display
             lists, one display list for each glyph in a set of glyphs.
             """
         ),
-        DWORD.IN("listBase", "the starting display list"),
-        FLOAT.IN(
+        DWORD("listBase", "the starting display list"),
+        FLOAT(
             "deviation",
             """
             the maximum chordal deviation from the original outlines. When deviation is zero, the chordal deviation is equivalent to one design unit of the
             original font. The value of deviation must be equal to or greater than 0.
             """
         ),
-        FLOAT.IN(
+        FLOAT(
             "extrusion",
             """
             how much a font is extruded in the negative z direction. The value must be equal to or greater than 0. When extrusion is 0, the display lists are
             not extruded.
             """
         ),
-        int.IN(
+        int(
             "format",
             """
             the format to use in the display lists. When format is #FONT_LINES, the {@code wglUseFontOutlines} function creates fonts with line

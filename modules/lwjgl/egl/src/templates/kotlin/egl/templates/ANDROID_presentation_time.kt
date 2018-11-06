@@ -34,8 +34,8 @@ val ANDROID_presentation_time = "ANDROIDPresentationTime".nativeClassEGL("ANDROI
         then an #BAD_SURFACE error is generated.
         """,
 
-        EGLDisplay.IN("dpy", "the {@code EGLDisplay}"),
-        EGLSurface.IN("surface", "the {@code EGLSurface}"),
-        EGLnsecsANDROID.IN("time", "the presentation time")
+        EGLDisplay("dpy", "the {@code EGLDisplay}"),
+        EGLSurface("surface", "the {@code EGLSurface}"),
+        EGLnsecsANDROID("time", "the presentation time")
     )
 }

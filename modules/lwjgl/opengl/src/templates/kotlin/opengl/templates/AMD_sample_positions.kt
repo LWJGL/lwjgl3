@@ -30,8 +30,8 @@ val AMD_sample_positions = "AMDSamplePositions".nativeClassGL("AMD_sample_positi
         "SetMultisamplefvAMD",
         "",
 
-        GLenum.IN("pname", ""),
-        GLuint.IN("index", ""),
-        Check(2)..GLfloat.const.p.IN("val", "")
+        GLenum("pname", ""),
+        GLuint("index", ""),
+        Check(2)..GLfloat.const.p("val", "")
     )
 }

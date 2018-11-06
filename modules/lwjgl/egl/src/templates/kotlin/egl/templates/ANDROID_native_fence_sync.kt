@@ -36,7 +36,7 @@ val ANDROID_native_fence_sync = "ANDROIDNativeFenceSync".nativeClassEGL("ANDROID
         "DupNativeFenceFDANDROID",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSyncKHR.IN("sync", "")
+        EGLDisplay("dpy", ""),
+        EGLSyncKHR("sync", "")
     )
 }

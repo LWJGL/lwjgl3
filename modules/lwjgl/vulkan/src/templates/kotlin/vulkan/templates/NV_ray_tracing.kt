@@ -414,9 +414,9 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         ##VkAccelerationStructureCreateInfoNV, ##VkAllocationCallbacks
         """,
 
-        VkDevice.IN("device", "the logical device that creates the buffer object."),
-        VkAccelerationStructureCreateInfoNV.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkAccelerationStructureCreateInfoNV structure containing parameters affecting creation of the acceleration structure."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkDevice("device", "the logical device that creates the buffer object."),
+        VkAccelerationStructureCreateInfoNV.const.p("pCreateInfo", "a pointer to an instance of the ##VkAccelerationStructureCreateInfoNV structure containing parameters affecting creation of the acceleration structure."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkAccelerationStructureNV.p.OUT("pAccelerationStructure", "points to a {@code VkAccelerationStructureNV} handle in which the resulting acceleration structure object is returned.")
     )
 
@@ -453,9 +453,9 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         ##VkAllocationCallbacks
         """,
 
-        VkDevice.IN("device", "the logical device that destroys the buffer."),
-        VkAccelerationStructureNV.IN("accelerationStructure", "the acceleration structure to destroy."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        VkDevice("device", "the logical device that destroys the buffer."),
+        VkAccelerationStructureNV("accelerationStructure", "the acceleration structure to destroy."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     void(
@@ -485,8 +485,8 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         ##VkAccelerationStructureMemoryRequirementsInfoNV, ##VkMemoryRequirements2KHR
         """,
 
-        VkDevice.IN("device", "the logical device on which the acceleration structure was created."),
-        VkAccelerationStructureMemoryRequirementsInfoNV.const.p.IN("pInfo", "specifies the acceleration structure to get memory requirements for."),
+        VkDevice("device", "the logical device on which the acceleration structure was created."),
+        VkAccelerationStructureMemoryRequirementsInfoNV.const.p("pInfo", "specifies the acceleration structure to get memory requirements for."),
         VkMemoryRequirements2KHR.p.OUT("pMemoryRequirements", "returns the requested acceleration structure memory requirements.")
     )
 
@@ -538,9 +538,9 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         ##VkBindAccelerationStructureMemoryInfoNV
         """,
 
-        VkDevice.IN("device", "the logical device that owns the acceleration structures and memory."),
-        AutoSize("pBindInfos")..uint32_t.IN("bindInfoCount", "the number of elements in pBindInfos."),
-        VkBindAccelerationStructureMemoryInfoNV.const.p.IN("pBindInfos", "a pointer to an array of structures of type ##VkBindAccelerationStructureMemoryInfoNV, describing images and memory to bind.")
+        VkDevice("device", "the logical device that owns the acceleration structures and memory."),
+        AutoSize("pBindInfos")..uint32_t("bindInfoCount", "the number of elements in pBindInfos."),
+        VkBindAccelerationStructureMemoryInfoNV.const.p("pBindInfos", "a pointer to an array of structures of type ##VkBindAccelerationStructureMemoryInfoNV, describing images and memory to bind.")
     )
 
     void(
@@ -601,15 +601,15 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         ##VkAccelerationStructureInfoNV
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded"),
-        VkAccelerationStructureInfoNV.const.p.IN("pInfo", ""),
-        VkBuffer.IN("instanceData", "the buffer containing instance data that will be used to build the acceleration structure as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#acceleration-structure-instance\">Accelerator structure instances.</a> This parameter <b>must</b> be NULL for bottom level acceleration structures."),
-        VkDeviceSize.IN("instanceOffset", "the offset in bytes (relative to the start of {@code instanceData}) at which the instance data is located."),
-        VkBool32.IN("update", "specifies whether to update the {@code dst} acceleration structure with the data in {@code src}."),
-        VkAccelerationStructureNV.IN("dst", "points to the target acceleration structure for the build."),
-        VkAccelerationStructureNV.IN("src", "points to an existing acceleration structure that can be used to update the {@code dst} acceleration structure."),
-        VkBuffer.IN("scratch", "the {@code VkBuffer} that will be used as scratch memory for the build."),
-        VkDeviceSize.IN("scratchOffset", "the offset in bytes relative to the start of {@code scratch} that will be used as scratch memory.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded"),
+        VkAccelerationStructureInfoNV.const.p("pInfo", ""),
+        VkBuffer("instanceData", "the buffer containing instance data that will be used to build the acceleration structure as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#acceleration-structure-instance\">Accelerator structure instances.</a> This parameter <b>must</b> be NULL for bottom level acceleration structures."),
+        VkDeviceSize("instanceOffset", "the offset in bytes (relative to the start of {@code instanceData}) at which the instance data is located."),
+        VkBool32("update", "specifies whether to update the {@code dst} acceleration structure with the data in {@code src}."),
+        VkAccelerationStructureNV("dst", "points to the target acceleration structure for the build."),
+        VkAccelerationStructureNV("src", "points to an existing acceleration structure that can be used to update the {@code dst} acceleration structure."),
+        VkBuffer("scratch", "the {@code VkBuffer} that will be used as scratch memory for the build."),
+        VkDeviceSize("scratchOffset", "the offset in bytes relative to the start of {@code scratch} that will be used as scratch memory.")
     )
 
     void(
@@ -656,10 +656,10 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkAccelerationStructureNV.IN("dst", "points to the target acceleration structure for the copy"),
-        VkAccelerationStructureNV.IN("src", "points to the source acceleration structure for the copy"),
-        VkCopyAccelerationStructureModeNV.IN("mode", "a {@code VkCopyAccelerationStructureModeNV} value that specifies additional operations to perform during the copy.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkAccelerationStructureNV("dst", "points to the target acceleration structure for the copy"),
+        VkAccelerationStructureNV("src", "points to the source acceleration structure for the copy"),
+        VkCopyAccelerationStructureModeNV("mode", "a {@code VkCopyAccelerationStructureModeNV} value that specifies additional operations to perform during the copy.")
     )
 
     void(
@@ -752,21 +752,21 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkBuffer.IN("raygenShaderBindingTableBuffer", "the buffer object that holds the shader binding table data for the ray generation shader stage."),
-        VkDeviceSize.IN("raygenShaderBindingOffset", "the offset in bytes (relative to {@code raygenShaderBindingTableBuffer}) of the ray generation shader being used for the trace."),
-        VkBuffer.IN("missShaderBindingTableBuffer", "the buffer object that holds the shader binding table data for the miss shader stage."),
-        VkDeviceSize.IN("missShaderBindingOffset", "the offset in bytes (relative to {@code missShaderBindingTableBuffer}) of the miss shader being used for the trace."),
-        VkDeviceSize.IN("missShaderBindingStride", "the size in bytes of each shader binding table record in {@code missShaderBindingTableBuffer}"),
-        VkBuffer.IN("hitShaderBindingTableBuffer", "the buffer object that holds the shader binding table data for the hit shader stages."),
-        VkDeviceSize.IN("hitShaderBindingOffset", "the offset in bytes (relative to {@code hitShaderBindingTableBuffer}) of the hit shader group being used for the trace."),
-        VkDeviceSize.IN("hitShaderBindingStride", "the size in bytes of each shader binding table record in {@code hitShaderBindingTableBuffer}"),
-        VkBuffer.IN("callableShaderBindingTableBuffer", "the buffer object that holds the shader binding table data for the callable shader stage."),
-        VkDeviceSize.IN("callableShaderBindingOffset", "the offset in bytes (relative to {@code callableShaderBindingTableBuffer}) of the callable shader being used for the trace."),
-        VkDeviceSize.IN("callableShaderBindingStride", "the size in bytes of each shader binding table record in {@code callableShaderBindingTableBuffer}"),
-        uint32_t.IN("width", "the width of the ray trace query dimensions."),
-        uint32_t.IN("height", "height of the ray trace query dimensions."),
-        uint32_t.IN("depth", "depth of the ray trace query dimensions.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkBuffer("raygenShaderBindingTableBuffer", "the buffer object that holds the shader binding table data for the ray generation shader stage."),
+        VkDeviceSize("raygenShaderBindingOffset", "the offset in bytes (relative to {@code raygenShaderBindingTableBuffer}) of the ray generation shader being used for the trace."),
+        VkBuffer("missShaderBindingTableBuffer", "the buffer object that holds the shader binding table data for the miss shader stage."),
+        VkDeviceSize("missShaderBindingOffset", "the offset in bytes (relative to {@code missShaderBindingTableBuffer}) of the miss shader being used for the trace."),
+        VkDeviceSize("missShaderBindingStride", "the size in bytes of each shader binding table record in {@code missShaderBindingTableBuffer}"),
+        VkBuffer("hitShaderBindingTableBuffer", "the buffer object that holds the shader binding table data for the hit shader stages."),
+        VkDeviceSize("hitShaderBindingOffset", "the offset in bytes (relative to {@code hitShaderBindingTableBuffer}) of the hit shader group being used for the trace."),
+        VkDeviceSize("hitShaderBindingStride", "the size in bytes of each shader binding table record in {@code hitShaderBindingTableBuffer}"),
+        VkBuffer("callableShaderBindingTableBuffer", "the buffer object that holds the shader binding table data for the callable shader stage."),
+        VkDeviceSize("callableShaderBindingOffset", "the offset in bytes (relative to {@code callableShaderBindingTableBuffer}) of the callable shader being used for the trace."),
+        VkDeviceSize("callableShaderBindingStride", "the size in bytes of each shader binding table record in {@code callableShaderBindingTableBuffer}"),
+        uint32_t("width", "the width of the ray trace query dimensions."),
+        uint32_t("height", "height of the ray trace query dimensions."),
+        uint32_t("depth", "depth of the ray trace query dimensions.")
     )
 
     VkResult(
@@ -822,11 +822,11 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         ##VkAllocationCallbacks, ##VkRayTracingPipelineCreateInfoNV
         """,
 
-        VkDevice.IN("device", "the logical device that creates the ray tracing pipelines."),
-        VkPipelineCache.IN("pipelineCache", "either #NULL_HANDLE, indicating that pipeline caching is disabled; or the handle of a valid <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#pipelines-cache\">pipeline cache</a> object, in which case use of that cache is enabled for the duration of the command."),
-        AutoSize("pCreateInfos", "pPipelines")..uint32_t.IN("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays."),
-        VkRayTracingPipelineCreateInfoNV.const.p.IN("pCreateInfos", "an array of ##VkRayTracingPipelineCreateInfoNV structures."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkDevice("device", "the logical device that creates the ray tracing pipelines."),
+        VkPipelineCache("pipelineCache", "either #NULL_HANDLE, indicating that pipeline caching is disabled; or the handle of a valid <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#pipelines-cache\">pipeline cache</a> object, in which case use of that cache is enabled for the duration of the command."),
+        AutoSize("pCreateInfos", "pPipelines")..uint32_t("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays."),
+        VkRayTracingPipelineCreateInfoNV.const.p("pCreateInfos", "an array of ##VkRayTracingPipelineCreateInfoNV structures."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         VkPipeline.p.OUT("pPipelines", "a pointer to an array in which the resulting compute pipeline objects are returned.")
     )
 
@@ -877,11 +877,11 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         </dl>
         """,
 
-        VkDevice.IN("device", "the logical device that contains the ray tracing pipeline."),
-        VkPipeline.IN("pipeline", "the ray tracing pipeline object that contains the shaders."),
-        uint32_t.IN("firstGroup", "the index of the first group to retrieve a handle for from the ##VkPipelineShaderStageCreateInfo{@code ::pGroups} array."),
-        uint32_t.IN("groupCount", "the number of shader handles to retrieve."),
-        AutoSize("pData")..size_t.IN("dataSize", "the size in bytes of the buffer pointed to by pData."),
+        VkDevice("device", "the logical device that contains the ray tracing pipeline."),
+        VkPipeline("pipeline", "the ray tracing pipeline object that contains the shaders."),
+        uint32_t("firstGroup", "the index of the first group to retrieve a handle for from the ##VkPipelineShaderStageCreateInfo{@code ::pGroups} array."),
+        uint32_t("groupCount", "the number of shader handles to retrieve."),
+        AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by pData."),
         void.p.OUT("pData", "a pointer to a user-allocated buffer where the results will be written.")
     )
 
@@ -929,9 +929,9 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         </dl>
         """,
 
-        VkDevice.IN("device", "the logical device that owns the acceleration structures."),
-        VkAccelerationStructureNV.IN("accelerationStructure", "the acceleration structure."),
-        AutoSize("pData")..size_t.IN("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
+        VkDevice("device", "the logical device that owns the acceleration structures."),
+        VkAccelerationStructureNV("accelerationStructure", "the acceleration structure."),
+        AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
         void.p.OUT("pData", "a pointer to a user-allocated buffer where the results will be written")
     )
 
@@ -984,12 +984,12 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        AutoSize("pAccelerationStructures")..uint32_t.IN("accelerationStructureCount", "the count of acceleration structures for which to query the property."),
-        VkAccelerationStructureNV.const.p.IN("pAccelerationStructures", ""),
-        VkQueryType.IN("queryType", "a {@code VkQueryType} value specifying the type of queries managed by the pool."),
-        VkQueryPool.IN("queryPool", "the query pool that will manage the results of the query."),
-        uint32_t.IN("firstQuery", "the first query index within the query pool that will contain the {@code accelerationStructureCount} number of results")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        AutoSize("pAccelerationStructures")..uint32_t("accelerationStructureCount", "the count of acceleration structures for which to query the property."),
+        VkAccelerationStructureNV.const.p("pAccelerationStructures", ""),
+        VkQueryType("queryType", "a {@code VkQueryType} value specifying the type of queries managed by the pool."),
+        VkQueryPool("queryPool", "the query pool that will manage the results of the query."),
+        uint32_t("firstQuery", "the first query index within the query pool that will contain the {@code accelerationStructureCount} number of results")
     )
 
     VkResult(
@@ -1034,8 +1034,8 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         </dl>
         """,
 
-        VkDevice.IN("device", "the logical device that contains the ray tracing pipeline."),
-        VkPipeline.IN("pipeline", "the ray tracing pipeline object that contains the shaders."),
-        uint32_t.IN("shader", "the index of the shader to compile.")
+        VkDevice("device", "the logical device that contains the ray tracing pipeline."),
+        VkPipeline("pipeline", "the ray tracing pipeline object that contains the shaders."),
+        uint32_t("shader", "the index of the shader to compile.")
     )
 }

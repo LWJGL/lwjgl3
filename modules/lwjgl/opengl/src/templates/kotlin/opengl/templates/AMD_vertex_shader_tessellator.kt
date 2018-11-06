@@ -96,13 +96,13 @@ val AMD_vertex_shader_tessellator = "AMDVertexShaderTessellator".nativeClassGL("
         "TessellationFactorAMD",
         "",
 
-        GLfloat.IN("factor", "")
+        GLfloat("factor", "")
     )
 
     void(
         "TessellationModeAMD",
         "",
 
-        GLenum.IN("mode", "")
+        GLenum("mode", "")
     )
 }

@@ -217,8 +217,8 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
         ##VkImageDrmFormatModifierPropertiesEXT
         """,
 
-        VkDevice.IN("device", "the logical device that owns the image."),
-        VkImage.IN("image", "the queried image."),
+        VkDevice("device", "the logical device that owns the image."),
+        VkImage("image", "the queried image."),
         VkImageDrmFormatModifierPropertiesEXT.p.OUT("pProperties", "will return properties of the image&#8217;s <em>DRM format modifier</em>.")
     )
 }

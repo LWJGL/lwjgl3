@@ -107,20 +107,20 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "MemPrefetchAsync",
         "",
 
-        CUdeviceptr.IN("devPtr", ""),
-        size_t.IN("count", ""),
-        CUdevice.IN("dstDevice", ""),
-        nullable..CUstream.IN("hStream", "")
+        CUdeviceptr("devPtr", ""),
+        size_t("count", ""),
+        CUdevice("dstDevice", ""),
+        nullable..CUstream("hStream", "")
     ).ptsz()
 
     CUresult(
         "MemAdvise",
         "",
 
-        CUdeviceptr.IN("devPtr", ""),
-        size_t.IN("count", ""),
-        CUmem_advise.IN("advice", ""),
-        CUdevice.IN("device", "")
+        CUdeviceptr("devPtr", ""),
+        size_t("count", ""),
+        CUmem_advise("advice", ""),
+        CUdevice("device", "")
     )
 
     CUresult(
@@ -128,10 +128,10 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         void.p.OUT("data", ""),
-        AutoSize("data")..size_t.IN("dataSize", ""),
-        CUmem_range_attribute.IN("attribute", ""),
-        CUdeviceptr.IN("devPtr", ""),
-        size_t.IN("count", "")
+        AutoSize("data")..size_t("dataSize", ""),
+        CUmem_range_attribute("attribute", ""),
+        CUdeviceptr("devPtr", ""),
+        size_t("count", "")
     )
 
     CUresult(
@@ -140,60 +140,60 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
 
         void.p.p.OUT("data", ""),
         size_t.p.OUT("dataSizes", ""),
-        CUmem_range_attribute.p.IN("attributes", ""),
-        AutoSize("attributes", "data", "dataSizes")..size_t.IN("numAttributes", ""),
-        CUdeviceptr.IN("devPtr", ""),
-        size_t.IN("count", "")
+        CUmem_range_attribute.p("attributes", ""),
+        AutoSize("attributes", "data", "dataSizes")..size_t("numAttributes", ""),
+        CUdeviceptr("devPtr", ""),
+        size_t("count", "")
     )
 
     CUresult(
         "StreamWaitValue32",
         "",
 
-        nullable..CUstream.IN("stream", ""),
-        CUdeviceptr.IN("addr", ""),
-        cuuint32_t.IN("value", ""),
-        unsigned_int.IN("flags", "")
+        nullable..CUstream("stream", ""),
+        CUdeviceptr("addr", ""),
+        cuuint32_t("value", ""),
+        unsigned_int("flags", "")
     ).ptsz()
 
     CUresult(
         "StreamWaitValue64",
         "",
 
-        nullable..CUstream.IN("stream", ""),
-        CUdeviceptr.IN("addr", ""),
-        cuuint64_t.IN("value", ""),
-        unsigned_int.IN("flags", "")
+        nullable..CUstream("stream", ""),
+        CUdeviceptr("addr", ""),
+        cuuint64_t("value", ""),
+        unsigned_int("flags", "")
     ).ptsz()
 
     CUresult(
         "StreamWriteValue32",
         "",
 
-        nullable..CUstream.IN("stream", ""),
-        CUdeviceptr.IN("addr", ""),
-        cuuint32_t.IN("value", ""),
-        unsigned_int.IN("flags", "")
+        nullable..CUstream("stream", ""),
+        CUdeviceptr("addr", ""),
+        cuuint32_t("value", ""),
+        unsigned_int("flags", "")
     ).ptsz()
 
     CUresult(
         "StreamWriteValue64",
         "",
 
-        nullable..CUstream.IN("stream", ""),
-        CUdeviceptr.IN("addr", ""),
-        cuuint64_t.IN("value", ""),
-        unsigned_int.IN("flags", "")
+        nullable..CUstream("stream", ""),
+        CUdeviceptr("addr", ""),
+        cuuint64_t("value", ""),
+        unsigned_int("flags", "")
     ).ptsz()
 
     CUresult(
         "StreamBatchMemOp",
         "",
 
-        nullable..CUstream.IN("stream", ""),
-        AutoSize("paramArray")..unsigned_int.IN("count", ""),
-        CUstreamBatchMemOpParams.p.IN("paramArray", ""),
-        unsigned_int.IN("flags", "")
+        nullable..CUstream("stream", ""),
+        AutoSize("paramArray")..unsigned_int("count", ""),
+        CUstreamBatchMemOpParams.p("paramArray", ""),
+        unsigned_int("flags", "")
     ).ptsz()
 
     CUresult(
@@ -201,8 +201,8 @@ val CU80 = "CU80".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Check(1)..int.p.OUT("value", ""),
-        CUdevice_P2PAttribute.IN("attrib", ""),
-        CUdevice.IN("srcDevice", ""),
-        CUdevice.IN("dstDevice", "")
+        CUdevice_P2PAttribute("attrib", ""),
+        CUdevice("srcDevice", ""),
+        CUdevice("dstDevice", "")
     )
 }

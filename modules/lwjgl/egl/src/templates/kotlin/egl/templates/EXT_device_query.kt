@@ -37,8 +37,8 @@ val EXT_device_query = "EXTDeviceQuery".nativeClassEGL("EXT_device_query", postf
         "QueryDeviceAttribEXT",
         "",
 
-        EGLDeviceEXT.IN("device", ""),
-        EGLint.IN("attribute", ""),
+        EGLDeviceEXT("device", ""),
+        EGLint("attribute", ""),
         Check(1)..EGLAttrib.p.OUT("value", "")
     )
 
@@ -46,16 +46,16 @@ val EXT_device_query = "EXTDeviceQuery".nativeClassEGL("EXT_device_query", postf
         "QueryDeviceStringEXT",
         "",
 
-        EGLDeviceEXT.IN("device", ""),
-        EGLint.IN("name", "")
+        EGLDeviceEXT("device", ""),
+        EGLint("name", "")
     )
 
     EGLBoolean(
         "QueryDisplayAttribEXT",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLint.IN("attribute", ""),
+        EGLDisplay("dpy", ""),
+        EGLint("attribute", ""),
         Check(1)..EGLAttrib.p.OUT("value", "")
     )
 }

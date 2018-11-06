@@ -50,7 +50,7 @@ val INTEL_map_texture = "INTELMapTexture".nativeClassGL("INTEL_map_texture", pos
         entities may interleave in a non-deterministic way).
         """,
 
-        GLuint.IN("texture", "the texture to synchronize")
+        GLuint("texture", "the texture to synchronize")
     )
 
     void(
@@ -61,8 +61,8 @@ val INTEL_map_texture = "INTELMapTexture".nativeClassGL("INTEL_map_texture", pos
         effect as if #SyncTextureINTEL() was called with {@code texture} parameter.
         """,
 
-        GLuint.IN("texture", "the texture to unmap"),
-        GLint.IN("level", "the mipmap level-of-detail of the texture")
+        GLuint("texture", "the texture to unmap"),
+        GLint("level", "the mipmap level-of-detail of the texture")
     )
 
     customMethod("""
@@ -83,9 +83,9 @@ val INTEL_map_texture = "INTELMapTexture".nativeClassGL("INTEL_map_texture", pos
         current context, the texture object must currently be bound to the GL_TEXTURE_2D target.
         """,
 
-        GLuint.IN("texture", "the texture to map"),
-        GLint.IN("level", "the mipmap level-of-detail of the texture"),
-        GLbitfield.IN("access", "the type of access that will be performed by the application", "#MAP_READ_BIT #MAP_WRITE_BIT"),
+        GLuint("texture", "the texture to map"),
+        GLint("level", "the mipmap level-of-detail of the texture"),
+        GLbitfield("access", "the type of access that will be performed by the application", "#MAP_READ_BIT #MAP_WRITE_BIT"),
         Check(1)..GLint.p.OUT("stride", "returns the distance in bytes between subsequent rows in the texture"),
         Check(1)..GLenum.p.OUT("layout", "returns the internal layout of the texture in the graphics memory")
     )

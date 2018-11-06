@@ -39,23 +39,23 @@ val OES_mapbuffer = "OESMapbuffer".nativeClassGLES("OES_mapbuffer", postfix = OE
         "MapBufferOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("access", "")
+        GLenum("target", ""),
+        GLenum("access", "")
     )
 
     GLboolean(
         "UnmapBufferOES",
         "",
 
-        GLenum.IN("target", "")
+        GLenum("target", "")
     )
 
     void(
         "GetBufferPointervOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..void.p.p.OUT("params", "")
     )
 }

@@ -21,14 +21,14 @@ val VRSettings = "VRSettings".nativeClass(
         "GetSettingsErrorNameFromEnum",
         "",
 
-        EVRSettingsError.IN("eError", "")
+        EVRSettingsError("eError", "")
     )
 
     bool(
         "Sync",
         "Returns true if file sync occurred (force or settings dirty).",
 
-        bool.IN("bForce", ""),
+        bool("bForce", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -36,9 +36,9 @@ val VRSettings = "VRSettings".nativeClass(
         "SetBool",
         "",
 
-        charASCII.const.p.IN("pchSection", ""),
-        charASCII.const.p.IN("pchSettingsKey", ""),
-        bool.IN("bValue", ""),
+        charASCII.const.p("pchSection", ""),
+        charASCII.const.p("pchSettingsKey", ""),
+        bool("bValue", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -46,9 +46,9 @@ val VRSettings = "VRSettings".nativeClass(
         "SetInt32",
         "",
 
-        charASCII.const.p.IN("pchSection", ""),
-        charASCII.const.p.IN("pchSettingsKey", ""),
-        int32_t.IN("nValue", ""),
+        charASCII.const.p("pchSection", ""),
+        charASCII.const.p("pchSettingsKey", ""),
+        int32_t("nValue", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -56,9 +56,9 @@ val VRSettings = "VRSettings".nativeClass(
         "SetFloat",
         "",
 
-        charASCII.const.p.IN("pchSection", ""),
-        charASCII.const.p.IN("pchSettingsKey", ""),
-        float.IN("flValue", ""),
+        charASCII.const.p("pchSection", ""),
+        charASCII.const.p("pchSettingsKey", ""),
+        float("flValue", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -66,9 +66,9 @@ val VRSettings = "VRSettings".nativeClass(
         "SetString",
         "",
 
-        charASCII.const.p.IN("pchSection", ""),
-        charASCII.const.p.IN("pchSettingsKey", ""),
-        charASCII.const.p.IN("pchValue", ""),
+        charASCII.const.p("pchSection", ""),
+        charASCII.const.p("pchSettingsKey", ""),
+        charASCII.const.p("pchValue", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -76,8 +76,8 @@ val VRSettings = "VRSettings".nativeClass(
         "GetBool",
         "",
 
-        charASCII.const.p.IN("pchSection", ""),
-        charASCII.const.p.IN("pchSettingsKey", ""),
+        charASCII.const.p("pchSection", ""),
+        charASCII.const.p("pchSettingsKey", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -85,8 +85,8 @@ val VRSettings = "VRSettings".nativeClass(
         "GetInt32",
         "",
 
-        charASCII.const.p.IN("pchSection", ""),
-        charASCII.const.p.IN("pchSettingsKey", ""),
+        charASCII.const.p("pchSection", ""),
+        charASCII.const.p("pchSettingsKey", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -94,8 +94,8 @@ val VRSettings = "VRSettings".nativeClass(
         "GetFloat",
         "",
 
-        charASCII.const.p.IN("pchSection", ""),
-        charASCII.const.p.IN("pchSettingsKey", ""),
+        charASCII.const.p("pchSection", ""),
+        charASCII.const.p("pchSettingsKey", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -103,10 +103,10 @@ val VRSettings = "VRSettings".nativeClass(
         "GetString",
         "",
 
-        charASCII.const.p.IN("pchSection", ""),
-        charASCII.const.p.IN("pchSettingsKey", ""),
+        charASCII.const.p("pchSection", ""),
+        charASCII.const.p("pchSettingsKey", ""),
         char.p.OUT("pchValue", ""),
-        AutoSize("pchValue")..uint32_t.IN("unValueLen", ""),
+        AutoSize("pchValue")..uint32_t("unValueLen", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -114,7 +114,7 @@ val VRSettings = "VRSettings".nativeClass(
         "RemoveSection",
         "",
 
-        charASCII.const.p.IN("pchSection", ""),
+        charASCII.const.p("pchSection", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 
@@ -122,8 +122,8 @@ val VRSettings = "VRSettings".nativeClass(
         "RemoveKeyInSection",
         "",
 
-        charASCII.const.p.IN("pchSection", ""),
-        charASCII.const.p.IN("pchSettingsKey", ""),
+        charASCII.const.p("pchSection", ""),
+        charASCII.const.p("pchSettingsKey", ""),
         Check(1)..EVRSettingsError.p.OUT("peError", "")
     )
 }

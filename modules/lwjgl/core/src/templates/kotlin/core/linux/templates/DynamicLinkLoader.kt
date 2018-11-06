@@ -55,8 +55,8 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_LINUX, nativeSubPath = "
         {@code filename} is #NULL, then the returned handle is for the main program.
         """,
 
-        nullable..charASCII.const.p.IN("filename", "the name of the dynamic library to open, or #NULL"),
-        int.IN("mode", "a bitfield", Modes, LinkMode.BITFIELD)
+        nullable..charASCII.const.p("filename", "the name of the dynamic library to open, or #NULL"),
+        int("mode", "a bitfield", Modes, LinkMode.BITFIELD)
     )
 
     charASCII.p(
@@ -64,7 +64,8 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_LINUX, nativeSubPath = "
         """
         Returns a human readable string describing the most recent error that occurred from #dlopen(), #dlsym() or #dlclose() since
         the last call to {@code dlerror()}. It returns #NULL if no errors have occurred since initialization or since it was last called.
-        """
+        """,
+        void()
     )
 
     opaque_p(
@@ -75,8 +76,8 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_LINUX, nativeSubPath = "
         library was loaded, {@code dlsym()} returns #NULL.
         """,
 
-        opaque_p.IN("handle", "the dynamic library handle"),
-        charASCII.const.p.IN("name", "the symbol name")
+        opaque_p("handle", "the dynamic library handle"),
+        charASCII.const.p("name", "the symbol name")
     )
 
     int(
@@ -86,7 +87,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_LINUX, nativeSubPath = "
         it, then the dynamic library is unloaded.
         """,
 
-        opaque_p.IN("handle", "the dynamic library to close")
+        opaque_p("handle", "the dynamic library to close")
     )
 
 }

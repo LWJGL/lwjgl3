@@ -924,9 +924,9 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkBindBufferMemoryInfo
         """,
 
-        VkDevice.IN("device", "the logical device that owns the buffers and memory."),
-        AutoSize("pBindInfos")..uint32_t.IN("bindInfoCount", "the number of elements in {@code pBindInfos}."),
-        VkBindBufferMemoryInfo.const.p.IN("pBindInfos", "a pointer to an array of structures of type ##VkBindBufferMemoryInfo, describing buffers and memory to bind.")
+        VkDevice("device", "the logical device that owns the buffers and memory."),
+        AutoSize("pBindInfos")..uint32_t("bindInfoCount", "the number of elements in {@code pBindInfos}."),
+        VkBindBufferMemoryInfo.const.p("pBindInfos", "a pointer to an array of structures of type ##VkBindBufferMemoryInfo, describing buffers and memory to bind.")
     )
 
     VkResult(
@@ -979,9 +979,9 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkBindImageMemoryInfo
         """,
 
-        VkDevice.IN("device", "the logical device that owns the images and memory."),
-        AutoSize("pBindInfos")..uint32_t.IN("bindInfoCount", "the number of elements in {@code pBindInfos}."),
-        VkBindImageMemoryInfo.const.p.IN("pBindInfos", "a pointer to an array of structures of type ##VkBindImageMemoryInfo, describing images and memory to bind.")
+        VkDevice("device", "the logical device that owns the images and memory."),
+        AutoSize("pBindInfos")..uint32_t("bindInfoCount", "the number of elements in {@code pBindInfos}."),
+        VkBindImageMemoryInfo.const.p("pBindInfos", "a pointer to an array of structures of type ##VkBindImageMemoryInfo, describing images and memory to bind.")
     )
 
     // Promoted from VK_KHR_device_group
@@ -1029,10 +1029,10 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </ul>
         """,
 
-        VkDevice.IN("device", "the logical device that owns the memory."),
-        uint32_t.IN("heapIndex", "the index of the memory heap from which the memory is allocated."),
-        uint32_t.IN("localDeviceIndex", "the device index of the physical device that performs the memory access."),
-        uint32_t.IN("remoteDeviceIndex", "the device index of the physical device that the memory is allocated for."),
+        VkDevice("device", "the logical device that owns the memory."),
+        uint32_t("heapIndex", "the index of the memory heap from which the memory is allocated."),
+        uint32_t("localDeviceIndex", "the device index of the physical device that performs the memory access."),
+        uint32_t("remoteDeviceIndex", "the device index of the physical device that the memory is allocated for."),
         Check(1)..VkPeerMemoryFeatureFlags.p.OUT("pPeerMemoryFeatures", "a pointer to a bitmask of {@code VkPeerMemoryFeatureFlagBits} indicating which types of memory accesses are supported for the combination of heap, local, and remote devices.")
     )
 
@@ -1087,8 +1087,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "command buffer whose current device mask is modified."),
-        uint32_t.IN("deviceMask", "the new value of the current device mask.")
+        VkCommandBuffer("commandBuffer", "command buffer whose current device mask is modified."),
+        uint32_t("deviceMask", "the new value of the current device mask.")
     )
 
     void(
@@ -1157,13 +1157,13 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        uint32_t.IN("baseGroupX", "the start value for the X component of {@code WorkgroupId}."),
-        uint32_t.IN("baseGroupY", "the start value for the Y component of {@code WorkgroupId}."),
-        uint32_t.IN("baseGroupZ", "the start value for the Z component of {@code WorkgroupId}."),
-        uint32_t.IN("groupCountX", "the number of local workgroups to dispatch in the X dimension."),
-        uint32_t.IN("groupCountY", "the number of local workgroups to dispatch in the Y dimension."),
-        uint32_t.IN("groupCountZ", "the number of local workgroups to dispatch in the Z dimension.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        uint32_t("baseGroupX", "the start value for the X component of {@code WorkgroupId}."),
+        uint32_t("baseGroupY", "the start value for the Y component of {@code WorkgroupId}."),
+        uint32_t("baseGroupZ", "the start value for the Z component of {@code WorkgroupId}."),
+        uint32_t("groupCountX", "the number of local workgroups to dispatch in the X dimension."),
+        uint32_t("groupCountY", "the number of local workgroups to dispatch in the Y dimension."),
+        uint32_t("groupCountZ", "the number of local workgroups to dispatch in the Z dimension.")
     )
 
     // Promoted from VK_KHR_device_group_creation
@@ -1222,7 +1222,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkPhysicalDeviceGroupProperties
         """,
 
-        VkInstance.IN("instance", "a handle to a Vulkan instance previously created with #CreateInstance()."),
+        VkInstance("instance", "a handle to a Vulkan instance previously created with #CreateInstance()."),
         AutoSize("pPhysicalDeviceGroupProperties")..Check(1)..uint32_t.p.INOUT("pPhysicalDeviceGroupCount", "a pointer to an integer related to the number of device groups available or queried, as described below."),
         nullable..VkPhysicalDeviceGroupProperties.p.OUT("pPhysicalDeviceGroupProperties", "either {@code NULL} or a pointer to an array of ##VkPhysicalDeviceGroupProperties structures.")
     )
@@ -1262,8 +1262,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkImageMemoryRequirementsInfo2, ##VkMemoryRequirements2
         """,
 
-        VkDevice.IN("device", "the logical device that owns the image."),
-        VkImageMemoryRequirementsInfo2.const.p.IN("pInfo", "a pointer to an instance of the ##VkImageMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
+        VkDevice("device", "the logical device that owns the image."),
+        VkImageMemoryRequirementsInfo2.const.p("pInfo", "a pointer to an instance of the ##VkImageMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
         VkMemoryRequirements2.p.OUT("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements2 structure in which the memory requirements of the image object are returned.")
     )
 
@@ -1300,8 +1300,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkBufferMemoryRequirementsInfo2, ##VkMemoryRequirements2
         """,
 
-        VkDevice.IN("device", "the logical device that owns the buffer."),
-        VkBufferMemoryRequirementsInfo2.const.p.IN("pInfo", "a pointer to an instance of the ##VkBufferMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
+        VkDevice("device", "the logical device that owns the buffer."),
+        VkBufferMemoryRequirementsInfo2.const.p("pInfo", "a pointer to an instance of the ##VkBufferMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
         VkMemoryRequirements2.p.OUT("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements2 structure in which the memory requirements of the buffer object are returned.")
     )
 
@@ -1341,8 +1341,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkImageSparseMemoryRequirementsInfo2, ##VkSparseImageMemoryRequirements2
         """,
 
-        VkDevice.IN("device", "the logical device that owns the image."),
-        VkImageSparseMemoryRequirementsInfo2.const.p.IN("pInfo", "a pointer to an instance of the ##VkImageSparseMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
+        VkDevice("device", "the logical device that owns the image."),
+        VkImageSparseMemoryRequirementsInfo2.const.p("pInfo", "a pointer to an instance of the ##VkImageSparseMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
         AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t.p.INOUT("pSparseMemoryRequirementCount", "a pointer to an integer related to the number of sparse memory requirements available or queried, as described below."),
         nullable..VkSparseImageMemoryRequirements2.p.OUT("pSparseMemoryRequirements", "either {@code NULL} or a pointer to an array of ##VkSparseImageMemoryRequirements2 structures.")
     )
@@ -1382,7 +1382,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkPhysicalDeviceFeatures2
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the supported features."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the supported features."),
         VkPhysicalDeviceFeatures2.p.OUT("pFeatures", "a pointer to a ##VkPhysicalDeviceFeatures2 structure in which the physical device features are returned.")
     )
 
@@ -1419,7 +1419,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkPhysicalDeviceProperties2
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the handle to the physical device whose properties will be queried."),
+        VkPhysicalDevice("physicalDevice", "the handle to the physical device whose properties will be queried."),
         VkPhysicalDeviceProperties2.p.OUT("pProperties", "points to an instance of the ##VkPhysicalDeviceProperties2 structure, that will be filled with returned information.")
     )
 
@@ -1459,8 +1459,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkFormatProperties2
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the format properties."),
-        VkFormat.IN("format", "the format whose properties are queried."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the format properties."),
+        VkFormat("format", "the format whose properties are queried."),
         VkFormatProperties2.p.OUT("pFormatProperties", "a pointer to a ##VkFormatProperties2 structure in which physical device properties for {@code format} are returned.")
     )
 
@@ -1515,8 +1515,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkImageFormatProperties2, ##VkPhysicalDeviceImageFormatInfo2
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the image capabilities."),
-        VkPhysicalDeviceImageFormatInfo2.const.p.IN("pImageFormatInfo", "points to an instance of the ##VkPhysicalDeviceImageFormatInfo2 structure, describing the parameters that would be consumed by #CreateImage()."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the image capabilities."),
+        VkPhysicalDeviceImageFormatInfo2.const.p("pImageFormatInfo", "points to an instance of the ##VkPhysicalDeviceImageFormatInfo2 structure, describing the parameters that would be consumed by #CreateImage()."),
         VkImageFormatProperties2.p.OUT("pImageFormatProperties", "points to an instance of the ##VkImageFormatProperties2 structure in which capabilities are returned.")
     )
 
@@ -1556,7 +1556,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkQueueFamilyProperties2
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the handle to the physical device whose properties will be queried."),
+        VkPhysicalDevice("physicalDevice", "the handle to the physical device whose properties will be queried."),
         AutoSize("pQueueFamilyProperties")..Check(1)..uint32_t.p.INOUT("pQueueFamilyPropertyCount", "a pointer to an integer related to the number of queue families available or queried, as described in #GetPhysicalDeviceQueueFamilyProperties()."),
         nullable..VkQueueFamilyProperties2.p.OUT("pQueueFamilyProperties", "either {@code NULL} or a pointer to an array of ##VkQueueFamilyProperties2 structures.")
     )
@@ -1594,7 +1594,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkPhysicalDeviceMemoryProperties2
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the handle to the device to query."),
+        VkPhysicalDevice("physicalDevice", "the handle to the device to query."),
         VkPhysicalDeviceMemoryProperties2.p.OUT("pMemoryProperties", "points to an instance of ##VkPhysicalDeviceMemoryProperties2 structure in which the properties are returned.")
     )
 
@@ -1637,8 +1637,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkPhysicalDeviceSparseImageFormatInfo2, ##VkSparseImageFormatProperties2
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the sparse image capabilities."),
-        VkPhysicalDeviceSparseImageFormatInfo2.const.p.IN("pFormatInfo", "a pointer to a structure of type ##VkPhysicalDeviceSparseImageFormatInfo2 containing input parameters to the command."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the sparse image capabilities."),
+        VkPhysicalDeviceSparseImageFormatInfo2.const.p("pFormatInfo", "a pointer to a structure of type ##VkPhysicalDeviceSparseImageFormatInfo2 containing input parameters to the command."),
         AutoSize("pProperties")..Check(1)..uint32_t.p.INOUT("pPropertyCount", "a pointer to an integer related to the number of sparse format properties available or queried, as described below."),
         nullable..VkSparseImageFormatProperties2.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkSparseImageFormatProperties2 structures.")
     )
@@ -1698,9 +1698,9 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </ul>
         """,
 
-        VkDevice.IN("device", "the logical device that owns the command pool."),
-        VkCommandPool.IN("commandPool", "the command pool to trim."),
-        VkCommandPoolTrimFlags.IN("flags", "reserved for future use.")
+        VkDevice("device", "the logical device that owns the command pool."),
+        VkCommandPool("commandPool", "the command pool to trim."),
+        VkCommandPoolTrimFlags("flags", "reserved for future use.")
     )
 
     // Originally based on VK_KHR_protected_memory (extension 146), which was never published; thus the mystifying large value= numbers below. These are not aliased since they weren't actually promoted from an extension.
@@ -1730,8 +1730,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkDeviceQueueInfo2
         """,
 
-        VkDevice.IN("device", "the logical device that owns the queue."),
-        VkDeviceQueueInfo2.const.p.IN("pQueueInfo", "points to an instance of the ##VkDeviceQueueInfo2 structure, describing the parameters used to create the device queue."),
+        VkDevice("device", "the logical device that owns the queue."),
+        VkDeviceQueueInfo2.const.p("pQueueInfo", "points to an instance of the ##VkDeviceQueueInfo2 structure, describing the parameters used to create the device queue."),
         Check(1)..VkQueue.p.OUT("pQueue", "a pointer to a {@code VkQueue} object that will be filled with the handle for the requested queue.")
     )
 
@@ -1795,9 +1795,9 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkAllocationCallbacks, ##VkSamplerYcbcrConversionCreateInfo
         """,
 
-        VkDevice.IN("device", "the logical device that creates the sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
-        VkSamplerYcbcrConversionCreateInfo.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkSamplerYcbcrConversionCreateInfo specifying the requested sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkDevice("device", "the logical device that creates the sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
+        VkSamplerYcbcrConversionCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkSamplerYcbcrConversionCreateInfo specifying the requested sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkSamplerYcbcrConversion.p.OUT("pYcbcrConversion", "points to a {@code VkSamplerYcbcrConversion} handle in which the resulting sampler Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion is returned.")
     )
 
@@ -1840,9 +1840,9 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkAllocationCallbacks
         """,
 
-        VkDevice.IN("device", "the logical device that destroys the Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
-        VkSamplerYcbcrConversion.IN("ycbcrConversion", "the conversion to destroy."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        VkDevice("device", "the logical device that destroys the Y&#8217;C<sub>B</sub>C<sub>R</sub> conversion."),
+        VkSamplerYcbcrConversion("ycbcrConversion", "the conversion to destroy."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     // Promoted from VK_KHR_descriptor_update_template
@@ -1901,9 +1901,9 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkAllocationCallbacks, ##VkDescriptorUpdateTemplateCreateInfo
         """,
 
-        VkDevice.IN("device", "the logical device that creates the descriptor update template."),
-        VkDescriptorUpdateTemplateCreateInfo.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkDescriptorUpdateTemplateCreateInfo structure specifying the set of descriptors to update with a single call to #CmdPushDescriptorSetWithTemplateKHR() or #UpdateDescriptorSetWithTemplate()."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkDevice("device", "the logical device that creates the descriptor update template."),
+        VkDescriptorUpdateTemplateCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkDescriptorUpdateTemplateCreateInfo structure specifying the set of descriptors to update with a single call to #CmdPushDescriptorSetWithTemplateKHR() or #UpdateDescriptorSetWithTemplate()."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkDescriptorUpdateTemplate.p.OUT("pDescriptorUpdateTemplate", "points to a {@code VkDescriptorUpdateTemplate} handle in which the resulting descriptor update template object is returned.")
     )
 
@@ -1952,9 +1952,9 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkAllocationCallbacks
         """,
 
-        VkDevice.IN("device", "the logical device that has been used to create the descriptor update template"),
-        VkDescriptorUpdateTemplate.IN("descriptorUpdateTemplate", "the descriptor update template to destroy."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        VkDevice("device", "the logical device that has been used to create the descriptor update template"),
+        VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "the descriptor update template to destroy."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     void(
@@ -2076,10 +2076,10 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿vkUpdateDescriptorSetWithTemplate(myDevice, myDescriptorSet, myDescriptorUpdateTemplate, &amp;appData);</code></pre>
         """,
 
-        VkDevice.IN("device", "the logical device that updates the descriptor sets."),
-        VkDescriptorSet.IN("descriptorSet", "the descriptor set to update"),
-        VkDescriptorUpdateTemplate.IN("descriptorUpdateTemplate", "the {@code VkDescriptorUpdateTemplate} which specifies the update mapping between {@code pData} and the descriptor set to update."),
-        opaque_const_p.IN("pData", "a pointer to memory which contains one or more structures of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} used to write the descriptors.")
+        VkDevice("device", "the logical device that updates the descriptor sets."),
+        VkDescriptorSet("descriptorSet", "the descriptor set to update"),
+        VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "the {@code VkDescriptorUpdateTemplate} which specifies the update mapping between {@code pData} and the descriptor set to update."),
+        opaque_const_p("pData", "a pointer to memory which contains one or more structures of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} used to write the descriptors.")
     )
 
     // Promoted from VK_KHR_external_memory_capabilities
@@ -2117,8 +2117,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkExternalBufferProperties, ##VkPhysicalDeviceExternalBufferInfo
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the buffer capabilities."),
-        VkPhysicalDeviceExternalBufferInfo.const.p.IN("pExternalBufferInfo", "points to an instance of the ##VkPhysicalDeviceExternalBufferInfo structure, describing the parameters that would be consumed by #CreateBuffer()."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the buffer capabilities."),
+        VkPhysicalDeviceExternalBufferInfo.const.p("pExternalBufferInfo", "points to an instance of the ##VkPhysicalDeviceExternalBufferInfo structure, describing the parameters that would be consumed by #CreateBuffer()."),
         VkExternalBufferProperties.p.OUT("pExternalBufferProperties", "points to an instance of the ##VkExternalBufferProperties structure in which capabilities are returned.")
     )
 
@@ -2157,8 +2157,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkExternalFenceProperties, ##VkPhysicalDeviceExternalFenceInfo
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the fence capabilities."),
-        VkPhysicalDeviceExternalFenceInfo.const.p.IN("pExternalFenceInfo", "points to an instance of the ##VkPhysicalDeviceExternalFenceInfo structure, describing the parameters that would be consumed by #CreateFence()."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the fence capabilities."),
+        VkPhysicalDeviceExternalFenceInfo.const.p("pExternalFenceInfo", "points to an instance of the ##VkPhysicalDeviceExternalFenceInfo structure, describing the parameters that would be consumed by #CreateFence()."),
         VkExternalFenceProperties.p.OUT("pExternalFenceProperties", "points to an instance of the ##VkExternalFenceProperties structure in which capabilities are returned.")
     )
 
@@ -2197,8 +2197,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkExternalSemaphoreProperties, ##VkPhysicalDeviceExternalSemaphoreInfo
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the semaphore capabilities."),
-        VkPhysicalDeviceExternalSemaphoreInfo.const.p.IN("pExternalSemaphoreInfo", "points to an instance of the ##VkPhysicalDeviceExternalSemaphoreInfo structure, describing the parameters that would be consumed by #CreateSemaphore()."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the semaphore capabilities."),
+        VkPhysicalDeviceExternalSemaphoreInfo.const.p("pExternalSemaphoreInfo", "points to an instance of the ##VkPhysicalDeviceExternalSemaphoreInfo structure, describing the parameters that would be consumed by #CreateSemaphore()."),
         VkExternalSemaphoreProperties.p.OUT("pExternalSemaphoreProperties", "points to an instance of the ##VkExternalSemaphoreProperties structure in which capabilities are returned.")
     )
 
@@ -2246,8 +2246,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         ##VkDescriptorSetLayoutCreateInfo, ##VkDescriptorSetLayoutSupport
         """,
 
-        VkDevice.IN("device", "the logical device that would create the descriptor set layout."),
-        VkDescriptorSetLayoutCreateInfo.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkDescriptorSetLayoutCreateInfo structure specifying the state of the descriptor set layout object."),
+        VkDevice("device", "the logical device that would create the descriptor set layout."),
+        VkDescriptorSetLayoutCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkDescriptorSetLayoutCreateInfo structure specifying the state of the descriptor set layout object."),
         VkDescriptorSetLayoutSupport.p.OUT("pSupport", "points to a ##VkDescriptorSetLayoutSupport structure in which information about support for the descriptor set layout object is returned.")
     )
 

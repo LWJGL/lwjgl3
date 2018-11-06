@@ -32,24 +32,24 @@ val NV_draw_vulkan_image = "NVDrawVulkanImage".nativeClassGLES("NV_draw_vulkan_i
         "DrawVkImageNV",
         "Draws a screen-aligned rectangle displaying a portion of the contents of the Vulkan {@code VkImage}.",
 
-        GLuint64.IN("vkImage", "the Vulkan image handle"),
-        GLuint.IN("sampler", "an optional sampler object"),
-        GLfloat.IN("x0", "the rectangle left window coordinate"),
-        GLfloat.IN("y0", "the rectangle bottom window coordinate"),
-        GLfloat.IN("x1", "the rectangle right window coordinate"),
-        GLfloat.IN("y1", "the rectangle top window coordinate"),
-        GLfloat.IN("z", "the Z window coordinate"),
-        GLfloat.IN("s0", "the left texture coordinate"),
-        GLfloat.IN("t0", "the bottom texture coordinate"),
-        GLfloat.IN("s1", "the right texture coordinate"),
-        GLfloat.IN("t1", "the top texture coordinate")
+        GLuint64("vkImage", "the Vulkan image handle"),
+        GLuint("sampler", "an optional sampler object"),
+        GLfloat("x0", "the rectangle left window coordinate"),
+        GLfloat("y0", "the rectangle bottom window coordinate"),
+        GLfloat("x1", "the rectangle right window coordinate"),
+        GLfloat("y1", "the rectangle top window coordinate"),
+        GLfloat("z", "the Z window coordinate"),
+        GLfloat("s0", "the left texture coordinate"),
+        GLfloat("t0", "the bottom texture coordinate"),
+        GLfloat("s1", "the right texture coordinate"),
+        GLfloat("t1", "the top texture coordinate")
     )
 
     VULKANPROCNV(
         "GetVkProcAddrNV",
         "Queries the Vulkan function entry points from within an OpenGL context.",
 
-        GLcharASCII.const.p.IN("name", "name of the Vulkan function")
+        GLcharASCII.const.p("name", "name of the Vulkan function")
     )
 
     void(
@@ -59,7 +59,7 @@ val NV_draw_vulkan_image = "NVDrawVulkanImage".nativeClassGLES("NV_draw_vulkan_i
         semaphore is signaled.
         """,
 
-        GLuint64.IN("vkSemaphore", "a valid Vulkan {@code VkSemaphore} non-dispatchable handle otherwise the operation is undefined")
+        GLuint64("vkSemaphore", "a valid Vulkan {@code VkSemaphore} non-dispatchable handle otherwise the operation is undefined")
     )
 
     void(
@@ -69,7 +69,7 @@ val NV_draw_vulkan_image = "NVDrawVulkanImage".nativeClassGLES("NV_draw_vulkan_i
         issued before this have completed execution on the GL server.
         """,
 
-        GLuint64.IN("vkSemaphore", "a valid Vulkan {@code VkSemaphore} non-dispatchable handle otherwise the operation is undefined")
+        GLuint64("vkSemaphore", "a valid Vulkan {@code VkSemaphore} non-dispatchable handle otherwise the operation is undefined")
     )
 
     void(
@@ -79,6 +79,6 @@ val NV_draw_vulkan_image = "NVDrawVulkanImage".nativeClassGLES("NV_draw_vulkan_i
         issued before this have completed execution on the GL server.
         """,
 
-        GLuint64.IN("vkFence", "a valid Vulkan VkFence non-dispatcable handle otherwise the operation is undefined")
+        GLuint64("vkFence", "a valid Vulkan VkFence non-dispatcable handle otherwise the operation is undefined")
     )
 }

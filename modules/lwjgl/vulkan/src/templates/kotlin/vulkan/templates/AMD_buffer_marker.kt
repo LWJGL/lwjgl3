@@ -128,10 +128,10 @@ val AMD_buffer_marker = "AMDBufferMarker".nativeClassVK("AMD_buffer_marker", typ
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkPipelineStageFlagBits.IN("pipelineStage", "one of the {@code VkPipelineStageFlagBits} values, specifying the pipeline stage whose completion triggers the marker write."),
-        VkBuffer.IN("dstBuffer", "the buffer where the marker will be written to."),
-        VkDeviceSize.IN("dstOffset", "the byte offset into the buffer where the marker will be written to."),
-        uint32_t.IN("marker", "the 32-bit value of the marker.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkPipelineStageFlagBits("pipelineStage", "one of the {@code VkPipelineStageFlagBits} values, specifying the pipeline stage whose completion triggers the marker write."),
+        VkBuffer("dstBuffer", "the buffer where the marker will be written to."),
+        VkDeviceSize("dstOffset", "the byte offset into the buffer where the marker will be written to."),
+        uint32_t("marker", "the 32-bit value of the marker.")
     )
 }

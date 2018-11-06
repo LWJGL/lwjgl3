@@ -54,15 +54,15 @@ val apple_gl_sharing = "APPLEGLSharing".dependsOn(Module.OPENGL, Module.OPENGLES
         on the active device.
         """,
 
-        cl_context.IN("context", "the context being queried"),
-        opaque_p.IN("platform_gl_ctx", "the OpenGL context handle"),
-        cl_gl_platform_info.IN(
+        cl_context("context", "the context being queried"),
+        opaque_p("platform_gl_ctx", "the OpenGL context handle"),
+        cl_gl_platform_info(
             "param_name",
             "a constant that specifies the GL context information to query",
             "#CGL_DEVICES_FOR_SUPPORTED_VIRTUAL_SCREENS_APPLE #CGL_DEVICE_FOR_CURRENT_VIRTUAL_SCREEN_APPLE"
         ),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_POINTER)..nullable..void.p.IN("param_value", param_value),
+        MultiType(PointerMapping.DATA_POINTER)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET
     )
 

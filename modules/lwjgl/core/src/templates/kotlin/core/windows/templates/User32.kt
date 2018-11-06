@@ -924,7 +924,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "RegisterClassEx",
         "Registers a window class for subsequent use in calls to the #CreateWindowEx() function.",
 
-        WNDCLASSEX.const.p.IN(
+        WNDCLASSEX.const.p(
             "lpwcx",
             "a ##WNDCLASSEX structure. You must fill the structure with the appropriate class attributes before passing it to the function."
         )
@@ -934,7 +934,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "UnregisterClass",
         "Unregisters a window class, freeing the memory required for the class.",
 
-        LPCTSTR.IN(
+        LPCTSTR(
             "lpClassName",
             """
             a null-terminated string or a class atom. If {@code lpClassName} is a string, it specifies the window class name. This class name must have been
@@ -943,34 +943,34 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             word of {@code lpClassName}; the high-order word must be zero.
             """
         ),
-        nullable..HINSTANCE.IN("hInstance", "a handle to the instance of the module that created the class")
+        nullable..HINSTANCE("hInstance", "a handle to the instance of the module that created the class")
     )
 
     NativeName("CreateWindowExW")..SaveLastError..HWND(
         "CreateWindowEx",
         "Creates an overlapped, pop-up, or child window with an extended window style; otherwise, this function is identical to the CreateWindow function.",
 
-        DWORD.IN("dwExStyle", "the extended window style of the window being created"),
-        nullable..LPCTSTR.IN(
+        DWORD("dwExStyle", "the extended window style of the window being created"),
+        nullable..LPCTSTR(
             "lpClassName",
             "a null-terminated string or a class atom created by a previous call to the #RegisterClassEx(WNDCLASSEX) function."
         ),
-        nullable..LPCTSTR.IN(
+        nullable..LPCTSTR(
             "lpWindowName",
             "the window name. If the window style specifies a title bar, the window title pointed to by {@code lpWindowName} is displayed in the title bar."
         ),
-        DWORD.IN("dwStyle", "the style of the window being created"),
-        int.IN("x", "the initial horizontal position of the window"),
-        int.IN("y", "the initial vertical position of the window"),
-        int.IN("nWidth", "the width, in device units, of the window"),
-        int.IN("nHeight", "the height, in device units, of the window"),
-        nullable..HWND.IN(
+        DWORD("dwStyle", "the style of the window being created"),
+        int("x", "the initial horizontal position of the window"),
+        int("y", "the initial vertical position of the window"),
+        int("nWidth", "the width, in device units, of the window"),
+        int("nHeight", "the height, in device units, of the window"),
+        nullable..HWND(
             "hWndParent",
             "a handle to the parent or owner window of the window being created. To create a child window or an owned window, supply a valid window handle."
         ),
-        nullable..HMENU.IN("hMenu", "a handle to a menu, or specifies a child-window identifier, depending on the window style"),
-        nullable..HINSTANCE.IN("hInstance", "a handle to the instance of the module to be associated with the window"),
-        nullable..LPVOID.IN(
+        nullable..HMENU("hMenu", "a handle to a menu, or specifies a child-window identifier, depending on the window style"),
+        nullable..HINSTANCE("hInstance", "a handle to the instance of the module to be associated with the window"),
+        nullable..LPVOID(
             "lpParam",
             """
             a value to be passed to the window through the {@code CREATESTRUCT} structure ({@code createParams} member) pointed to by the {@code lParam} param
@@ -990,7 +990,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         parent or owner window. The function first destroys child or owned windows, and then it destroys the parent or owner window.
         """,
 
-        HWND.IN("hWnd", "a handle to the window to be destroyed")
+        HWND("hWnd", "a handle to the window to be destroyed")
     )
 
     NativeName("DefWindowProcW")..LRESULT(
@@ -1000,17 +1000,17 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         that every message is processed. DefWindowProc is called with the same parameters received by the window procedure.
         """,
 
-        HWND.IN("hWnd", "a handle to the window that received the message"),
-        UINT.IN("Msg", "the message"),
-        WPARAM.IN("wParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter."),
-        LPARAM.IN("lParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter.")
+        HWND("hWnd", "a handle to the window that received the message"),
+        UINT("Msg", "the message"),
+        WPARAM("wParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter."),
+        LPARAM("lParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter.")
     )
 
     NativeName("CallWindowProcW")..LRESULT(
         "CallWindowProc",
         "Passes message information to the specified window procedure.",
 
-        WNDPROC.IN(
+        WNDPROC(
             "lpPrevWndFunc",
             """
             the previous window procedure.
@@ -1019,18 +1019,18 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             it is actually either the address of a window or dialog box procedure, or a special internal value meaningful only to {@code CallWindowProc}.
             """
         ),
-        HWND.IN("hWnd", "a handle to the window procedure to receive the message"),
-        UINT.IN("Msg", "the message"),
-        WPARAM.IN("wParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter."),
-        LPARAM.IN("lParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter.")
+        HWND("hWnd", "a handle to the window procedure to receive the message"),
+        UINT("Msg", "the message"),
+        WPARAM("wParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter."),
+        LPARAM("lParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter.")
     )
 
     BOOL(
         "ShowWindow",
         "Sets the specified window's show state.",
 
-        HWND.IN("hWnd", "a handle to the window"),
-        int.IN(
+        HWND("hWnd", "a handle to the window"),
+        int(
             "nCmdShow",
             """
             controls how the window is to be shown. This parameter is ignored the first time an application calls {@code ShowWindow}, if the program that
@@ -1049,7 +1049,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         message is sent.
         """,
 
-        HWND.IN("hWnd", "handle to the window to be updated")
+        HWND("hWnd", "handle to the window to be updated")
     )
 
     SaveLastError..BOOL(
@@ -1059,17 +1059,17 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         The topmost window receives the highest rank and is the first window in the Z order.
         """,
 
-        HWND.IN("hWnd", "a handle to the window"),
-        nullable..HWND.IN(
+        HWND("hWnd", "a handle to the window"),
+        nullable..HWND(
             "hWndInsertAfter",
             "a handle to the window to precede the positioned window in the Z order. This parameter must be a window handle or",
             VirtualWindowHandles, LinkMode.SINGLE_CNT
         ),
-        int.IN("X", "the new position of the left side of the window, in client coordinates"),
-        int.IN("Y", "the new position of the top of the window, in client coordinates"),
-        int.IN("cx", "the new width of the window, in pixels"),
-        int.IN("cy", "the new height of the window, in pixels"),
-        UINT.IN("uFlags", "the window sizing and positioning flags", SizePosFlags, LinkMode.BITFIELD)
+        int("X", "the new position of the left side of the window, in client coordinates"),
+        int("Y", "the new position of the top of the window, in client coordinates"),
+        int("cx", "the new width of the window, in pixels"),
+        int("cy", "the new height of the window, in pixels"),
+        UINT("uFlags", "the window sizing and positioning flags", SizePosFlags, LinkMode.BITFIELD)
     )
 
     NativeName("SetWindowTextW")..SaveLastError..BOOL(
@@ -1079,8 +1079,8 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         However, {@code SetWindowText} cannot change the text of a control in another application.
         """,
 
-        HWND.IN("hWnd", "a handle to the window or control whose text is to be changed"),
-        LPCTSTR.IN("lpString", "the new title or control text")
+        HWND("hWnd", "a handle to the window or control whose text is to be changed"),
+        LPCTSTR("lpString", "the new title or control text")
     )
 
     val GetMessage = NativeName("GetMessageW")..SaveLastError..BOOL(
@@ -1091,7 +1091,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         """,
 
         LPMSG.OUT("lpMsg", "a pointer to an ##MSG structure that receives message information from the thread's message queue"),
-        nullable..HWND.IN(
+        nullable..HWND(
             "hWnd",
             """
             a handle to the window whose messages are to be retrieved. The window must belong to the current thread.
@@ -1104,8 +1104,8 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             thread messages as posted by #PostMessage() (when the {@code hWnd} parameter is #NULL) or {@code PostThreadMessage}.
             """
         ),
-        UINT.IN("wMsgFilterMin", "the integer value of the lowest message value to be retrieved"),
-        UINT.IN("wMsgFilterMax", "the integer value of the highest message value to be retrieved")
+        UINT("wMsgFilterMin", "the integer value of the lowest message value to be retrieved"),
+        UINT("wMsgFilterMax", "the integer value of the highest message value to be retrieved")
     )
 
     NativeName("PeekMessageW")..BOOL(
@@ -1116,7 +1116,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         GetMessage["hWnd"],
         GetMessage["wMsgFilterMin"],
         GetMessage["wMsgFilterMax"],
-        UINT.IN("wRemoveMsg", "specifies how messages are to be handled.", "#PM_NOREMOVE #PM_REMOVE #PM_NOYIELD")
+        UINT("wRemoveMsg", "specifies how messages are to be handled.", "#PM_NOREMOVE #PM_REMOVE #PM_NOYIELD")
     )
 
     BOOL(
@@ -1126,7 +1126,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         time the thread calls the #GetMessage() or #PeekMessage() function.
         """,
 
-        MSG.const.p.IN(
+        MSG.const.p(
             "lpMsg",
             """
             an ##MSG structure that contains message information retrieved from the calling thread's message queue by using the #GetMessage() or #PeekMessage()
@@ -1140,14 +1140,15 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         """
         Yields control to other threads when a thread has no other messages in its message queue. The WaitMessage function suspends the thread and does not
         return until a new message is placed in the thread's message queue.
-        """
+        """,
+        void()
     )
 
     NativeName("DispatchMessageW")..LRESULT(
         "DispatchMessage",
         "Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the #GetMessage() function.",
 
-        MSG.const.p.IN("lpmsg", "a pointer to a structure that contains the message.")
+        MSG.const.p("lpmsg", "a pointer to a structure that contains the message.")
     )
 
     NativeName("PostMessageW")..SaveLastError..BOOL(
@@ -1157,7 +1158,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         to process the message.
         """,
 
-        nullable..HWND.IN(
+        nullable..HWND(
             "hWnd",
             """
             a handle to the window whose window procedure is to receive the message. The following values have special meanings:
@@ -1170,9 +1171,9 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             )}
             """
         ),
-        UINT.IN("Msg", "the message to be posted"),
-        WPARAM.IN("wParam", "additional message-specific information"),
-        LPARAM.IN("lParam", "additional message-specific information")
+        UINT("Msg", "the message to be posted"),
+        WPARAM("wParam", "additional message-specific information"),
+        LPARAM("lParam", "additional message-specific information")
     )
 
     NativeName("SendMessageW")..SaveLastError..BOOL(
@@ -1182,7 +1183,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         return until the window procedure has processed the message.
         """,
 
-        HWND.IN(
+        HWND(
             "hWnd",
             """
             a handle to the window whose window procedure will receive the message. If this parameter is #HWND_BROADCAST, the message is sent to all top-level
@@ -1193,9 +1194,9 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             integrity level.
             """
         ),
-        UINT.IN("Msg", "the message to be sent"),
-        WPARAM.IN("wParam", "additional message-specific information"),
-        LPARAM.IN("lParam", "additional message-specific information")
+        UINT("Msg", "the message to be sent"),
+        WPARAM("wParam", "additional message-specific information"),
+        LPARAM("lParam", "additional message-specific information")
     )
 
     SaveLastError..BOOL(
@@ -1205,7 +1206,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         #CreateWindowEx() function to create a window whose client area is the desired size.
         """,
 
-        LPRECT.IN(
+        LPRECT(
             "lpRect",
             """
             a pointer to a ##RECT structure that contains the coordinates of the top-left and bottom-right corners of the desired client area. When the
@@ -1213,9 +1214,9 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             area.
             """
         ),
-        DWORD.IN("dwStyle", "the window style of the window whose required size is to be calculated. Note that you cannot specify the #WS_OVERLAPPED style."),
-        BOOL.IN("bMenu", "indicates whether the window has a menu"),
-        DWORD.IN("dwExStyle", "the extended window style of the window whose required size is to be calculated")
+        DWORD("dwStyle", "the window style of the window whose required size is to be calculated. Note that you cannot specify the #WS_OVERLAPPED style."),
+        BOOL("bMenu", "indicates whether the window has a menu"),
+        DWORD("dwExStyle", "the extended window style of the window whose required size is to be calculated")
     )
 
     SaveLastError..BOOL(
@@ -1225,7 +1226,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         upper-left corner of the screen.
         """,
 
-        HWND.IN("hWnd", "a handle to the window"),
+        HWND("hWnd", "a handle to the window"),
         LPRECT.OUT("lpRect", "a pointer to a ##RECT structure that receives the screen coordinates of the upper-left and lower-right corners of the window")
     )
 
@@ -1236,12 +1237,12 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         of the screen. For a child window, they are relative to the upper-left corner of the parent window's client area.
         """,
 
-        HWND.IN("hWnd", "a handle to the window"),
-        int.IN("X", "the new position of the left side of the window"),
-        int.IN("Y", "the new position of the top of the window"),
-        int.IN("nWidth", "the new width of the window"),
-        int.IN("nHeight", "the new height of the window"),
-        BOOL.IN(
+        HWND("hWnd", "a handle to the window"),
+        int("X", "the new position of the left side of the window"),
+        int("Y", "the new position of the top of the window"),
+        int("nWidth", "the new width of the window"),
+        int("nHeight", "the new height of the window"),
+        BOOL(
             "bRepaint",
             """
             indicates whether the window is to be repainted. If this parameter is TRUE, the window receives a message. If the parameter is FALSE, no repainting
@@ -1263,7 +1264,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GetWindowPlacement",
         "Retrieves the show state and the restored, minimized, and maximized positions of the specified window.",
 
-        HWND.IN("hWnd", "a handle to the window"),
+        HWND("hWnd", "a handle to the window"),
         WINDOWPLACEMENT.p.INOUT(
             "lpwndpl",
             """
@@ -1279,8 +1280,8 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "SetWindowPlacement",
         "Sets the show state and the restored, minimized, and maximized positions of the specified window.",
 
-        HWND.IN("hWnd", "a handle to the window"),
-        WINDOWPLACEMENT.const.p.IN(
+        HWND("hWnd", "a handle to the window"),
+        WINDOWPLACEMENT.const.p(
             "lpwndpl",
             """
             a pointer to the ##WINDOWPLACEMENT structure that specifies the new show state and window positions.
@@ -1295,21 +1296,21 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "IsWindowVisible",
         "Determines the visibility state of the specified window.",
 
-        HWND.IN("hWnd", "a handle to the window to be tested")
+        HWND("hWnd", "a handle to the window to be tested")
     )
 
     BOOL(
         "IsIconic",
         "Determines whether the specified window is minimized (iconic).",
 
-        HWND.IN("hWnd", "a handle to the window to be tested")
+        HWND("hWnd", "a handle to the window to be tested")
     )
 
     BOOL(
         "IsZoomed",
         "Determines whether a window is maximized.",
 
-        HWND.IN("hWnd", "a handle to the window to be tested")
+        HWND("hWnd", "a handle to the window to be tested")
     )
 
     BOOL(
@@ -1319,15 +1320,15 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         top-level parent window associated with the child window is activated.
         """,
 
-        HWND.IN("hWnd", "a handle to the window to bring to the top of the Z order")
+        HWND("hWnd", "a handle to the window to bring to the top of the Z order")
     )
 
     NativeName("Pointer.BITS64 ? \"SetWindowLongPtrW\" : \"SetWindowLongW\"")..SaveLastError..LONG_PTR(
         "SetWindowLongPtr",
         "Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.",
 
-        HWND.IN("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
-        int.IN(
+        HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
+        int(
             "nIndex",
             """
             the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
@@ -1335,7 +1336,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             """,
             WindowLongOffsets, LinkMode.SINGLE_CNT
         ),
-        LONG_PTR.IN("dwNewLong", "the replacement value"),
+        LONG_PTR("dwNewLong", "the replacement value"),
 
         returnDoc = "the previous value at the given {@code index}"
     )
@@ -1344,8 +1345,8 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GetWindowLongPtr",
         "Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.",
 
-        HWND.IN("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
-        int.IN(
+        HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
+        int(
             "nIndex",
             """
             the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
@@ -1362,8 +1363,8 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         window belongs.
         """,
 
-        HWND.IN("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
-        int.IN(
+        HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
+        int(
             "nIndex",
             """
             the value to be replaced. To set a value in the extra class memory, specify the positive, zero-based byte offset of the value to be set. Valid
@@ -1372,7 +1373,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             """,
             ClassLongOffsets, LinkMode.SINGLE_CNT
         ),
-        LONG_PTR.IN("dwNewLong", "the replacement value"),
+        LONG_PTR("dwNewLong", "the replacement value"),
 
         returnDoc =
         """
@@ -1386,8 +1387,8 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GetClassLongPtr",
         "Retrieves the specified value from the ##WNDCLASSEX structure associated with the specified window.",
 
-        HWND.IN("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
-        int.IN(
+        HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
+        int(
             "nIndex",
             """
             the value to be retrieved. To retrieve a value from the extra class memory, specify the positive, zero-based byte offset of the value to be
@@ -1410,50 +1411,50 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "SetLayeredWindowAttributes",
         "",
 
-        HWND.IN(
+        HWND(
             "hwnd",
             """
             a handle to the layered window. A layered window is created by specifying #WS_EX_LAYERED when creating the window with the #CreateWindowEx()
             function or by setting #WS_EX_LAYERED via #SetWindowLongPtr() after the window has been created.
             """
         ),
-        COLORREF.IN(
+        COLORREF(
             "crKey",
             """
             the transparency color key (0x00bbggrr) to be used when composing the layered window. All pixels painted by the window in this color will be
             transparent.
             """
         ),
-        BYTE.IN(
+        BYTE(
             "bAlpha",
             """
             the alpha value used to describe the opacity of the layered window. When {@code bAlpha} is 0, the window is completely transparent. When
             {@code bAlpha} is 255, the window is opaque.
             """
         ),
-        DWORD.IN("dwFlags", "an action to be taken", "#LWA_COLORKEY #LWA_ALPHA", LinkMode.BITFIELD)
+        DWORD("dwFlags", "an action to be taken", "#LWA_COLORKEY #LWA_ALPHA", LinkMode.BITFIELD)
     )
 
     NativeName("LoadIconW")..SaveLastError..HICON(
         "LoadIcon",
         "Loads the specified icon resource from the executable (.exe) file associated with an application instance.",
 
-        nullable..HINSTANCE.IN(
+        nullable..HINSTANCE(
             "instance",
             """
             a handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be #NULL when a standard icon is
             being loaded.
             """
         ),
-        LPCTSTR.IN("iconName", "the name of the icon resource to be loaded or", StandardIcons, LinkMode.SINGLE_CNT)
+        LPCTSTR("iconName", "the name of the icon resource to be loaded or", StandardIcons, LinkMode.SINGLE_CNT)
     )
 
     NativeName("LoadCursorW")..SaveLastError..HCURSOR(
         "LoadCursor",
         "Loads the specified cursor resource from the executable (.EXE) file associated with an application instance.",
 
-        nullable..HINSTANCE.IN("instance", "a handle to an instance of the module whose executable file contains the cursor to be loaded."),
-        LPCTSTR.IN("cursorName", "the name of the cursor resource to be loaded or", StandardCursors, LinkMode.SINGLE_CNT)
+        nullable..HINSTANCE("instance", "a handle to an instance of the module whose executable file contains the cursor to be loaded."),
+        LPCTSTR("cursorName", "the name of the cursor resource to be loaded or", StandardCursors, LinkMode.SINGLE_CNT)
     )
 
     HDC(
@@ -1463,7 +1464,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI.
         """,
 
-        nullable..HWND.IN("hWnd", "a handle to the window whose DC is to be retrieved. If this value is #NULL, GetDC retrieves the DC for the entire screen.")
+        nullable..HWND("hWnd", "a handle to the window whose DC is to be retrieved. If this value is #NULL, GetDC retrieves the DC for the entire screen.")
     )
 
     BOOL(
@@ -1473,8 +1474,8 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         common and window DCs. It has no effect on class or private DCs.
         """,
 
-        HWND.IN("hWnd", "a handle to the window whose DC is to be released"),
-        HDC.IN("hDC", "a handle to the DC to be released")
+        HWND("hWnd", "a handle to the window whose DC is to be released"),
+        HDC("hDC", "a handle to the DC to be released")
     )
 
     val SystemMetrics = IntConstant(
@@ -1599,7 +1600,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GetSystemMetrics",
         "Retrieves the specified system metric or system configuration setting.",
 
-        int.IN("index", "the system metric or configuration setting to be retrieved", SystemMetrics)
+        int("index", "the system metric or configuration setting to be retrieved", SystemMetrics)
     )
 
     val TouchFlags = IntConstant(
@@ -1641,14 +1642,14 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         marked as no longer requiring touch input using the #UnregisterTouchWindow() function.
         """,
 
-        HWND.IN(
+        HWND(
             "hWnd",
             """
             the handle of the window being registered. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified
             window.
             """
         ),
-        ULONG.IN(
+        ULONG(
             "ulFlags",
             "a set of bit flags that specify optional modifications. This field may contain 0 or",
             TouchFlags, LinkMode.BITFIELD_CNT
@@ -1661,7 +1662,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "UnregisterTouchWindow",
         "Registers a window as no longer being touch-capable.",
 
-        HWND.IN(
+        HWND(
             "hWnd",
             "the handle of the window. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified window."
         ),
@@ -1673,7 +1674,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "IsTouchWindow",
         "Checks whether a specified window is touch-capable and, optionally, retrieves the modifier flags set for the window's touch capability.",
 
-        HWND.IN(
+        HWND(
             "hWnd",
             """
             the handle of the window. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread is not on the same desktop as the specified
@@ -1692,7 +1693,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GetTouchInputInfo",
         "Retrieves detailed information about touch inputs associated with a particular touch input handle.",
 
-        HTOUCHINPUT.IN(
+        HTOUCHINPUT(
             "hTouchInput",
             """
             the touch input handle received in the {@code LPARAM} of a touch message. The function fails with {@code ERROR_INVALID_HANDLE} if this handle is
@@ -1700,7 +1701,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             #DefWindowProc(), #PostMessage(), #SendMessage() or one of their variants.
             """
         ),
-        AutoSize("pInputs")..UINT.IN(
+        AutoSize("pInputs")..UINT(
             "cInputs",
             """
             The number of structures in the {@code pInputs} array. This should ideally be at least equal to the number of touch points associated with the
@@ -1712,7 +1713,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             "pInputs",
             "a pointer to an array of ##TOUCHINPUT structures to receive information about the touch points associated with the specified touch input handle"
         ),
-        int.IN(
+        int(
             "cbSize",
             """
             the size, in bytes, of a single ##TOUCHINPUT structure. If {@code cbSize} is not the size of a single {@code TOUCHINPUT} structure, the function
@@ -1727,7 +1728,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "CloseTouchInputHandle",
         "Closes a touch input handle, frees process memory associated with it, and invalidates the handle.",
 
-        HTOUCHINPUT.IN(
+        HTOUCHINPUT(
             "hTouchInput",
             """
             the touch input handle received in the {@code LPARAM} of a touch message. The function fails with {@code ERROR_INVALID_HANDLE} if this handle is
@@ -1751,8 +1752,8 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "MonitorFromWindow",
         "Retrieves a handle to the display monitor that has the largest area of intersection with the bounding rectangle of a specified window.",
 
-        HWND.IN("hWnd", "a handle to the window of interest"),
-        DWORD.IN("dwFlags", "determines the function's return value if the window does not intersect any display monitor", MonitorFromWindowFlags)
+        HWND("hWnd", "a handle to the window of interest"),
+        DWORD("dwFlags", "determines the function's return value if the window does not intersect any display monitor", MonitorFromWindowFlags)
     )
 
     IntConstant(
@@ -1765,7 +1766,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GetMonitorInfo",
         "Retrieves information about a display monitor.",
 
-        HMONITOR.IN("hMonitor", "a handle to the display monitor of interest"),
+        HMONITOR("hMonitor", "a handle to the display monitor of interest"),
         LPMONITORINFOEX.OUT(
             "lpmi",
             """
@@ -1833,11 +1834,11 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "EnumDisplayDevices",
         "Obtains information about the display devices in the current session.",
 
-        nullable..LPCTSTR.IN(
+        nullable..LPCTSTR(
             "lpDevice",
             "the device name. If #NULL, function returns information for the display adapter(s) on the machine, based on {@code devNum}."
         ),
-        DWORD.IN(
+        DWORD(
             "iDevNum",
             """
             an index value that specifies the display device of interest.
@@ -1855,7 +1856,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             {@code DISPLAY_DEVICE}.
             """
         ),
-        DWORD.IN(
+        DWORD(
             "dwFlags",
             """
             set this flag to #EDD_GET_DEVICE_INTERFACE_NAME to retrieve the device interface name for {@code GUID_DEVINTERFACE_MONITOR}, which is registered by
@@ -1873,7 +1874,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         make a series of calls to this function.
         """,
 
-        nullable..LPCTSTR.IN(
+        nullable..LPCTSTR(
             "lpszDeviceName",
             """
             a pointer to a null-terminated string that specifies the display device about which graphics mode the function will obtain information.
@@ -1882,7 +1883,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             device on the computer that the calling thread is running on.
             """
         ),
-        DWORD.IN(
+        DWORD(
             "iModeNum",
             """
             indicates the type of information to be retrieved.
@@ -1911,14 +1912,14 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             {@code DEVMODE} structure. To determine which members were set by the call to {@code EnumDisplaySettingsEx}, inspect the {@code dmFields} bitmask.
             """
         ),
-        DWORD.IN("dwFlags", "this parameter can be", EnumDisplaySettingsFlags, LinkMode.SINGLE_CNT)
+        DWORD("dwFlags", "this parameter can be", EnumDisplaySettingsFlags, LinkMode.SINGLE_CNT)
     )
 
     NativeName("ChangeDisplaySettingsExW")..LONG(
         "ChangeDisplaySettingsEx",
         "Changes the settings of the specified display device to the specified graphics mode.",
 
-        nullable..LPCTSTR.IN(
+        nullable..LPCTSTR(
             "lpszDeviceName",
             """
             a pointer to a null-terminated string that specifies the display device whose graphics mode will change. Only display device names as returned by
@@ -1928,7 +1929,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             calling {@code EnumDisplayDevices} and checking for the #DISPLAY_DEVICE_PRIMARY_DEVICE flag.
             """
         ),
-        nullable..DEVMODE.p.IN(
+        nullable..DEVMODE.p(
             "lpDevMode",
             """
             a pointer to a ##DEVMODE structure that describes the new graphics mode. If {@code lpDevMode} is #NULL, all the values currently in the registry
@@ -1939,9 +1940,9 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
             initialized to indicate the number of bytes of private driver data following the {@code DEVMODE} structure.
             """
         ),
-        nullable..HWND.IN("hwnd", "reserved; must be #NULL"),
-        DWORD.IN("dwflags", "indicates how the graphics mode should be changed", ChangeDisplaySettingsFlags),
-        nullable..LPVOID.IN(
+        nullable..HWND("hwnd", "reserved; must be #NULL"),
+        DWORD("dwflags", "indicates how the graphics mode should be changed", ChangeDisplaySettingsFlags),
+        nullable..LPVOID(
             "lParam",
             """
             if {@code flags} is #CDS_VIDEOPARAMETERS, {@code lParam} is a pointer to a {@code VIDEOPARAMETERS} structure. Otherwise {@code lParam} must be #NULL.
@@ -1965,8 +1966,8 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         function call, the system automatically adjusts the coordinates so that the cursor stays within the rectangle.
         """,
 
-        int.IN("X", "the new x-coordinate of the cursor, in screen coordinates."),
-        int.IN("Y", "the new y-coordinate of the cursor, in screen coordinates.")
+        int("X", "the new x-coordinate of the cursor, in screen coordinates."),
+        int("Y", "the new y-coordinate of the cursor, in screen coordinates.")
     )
 
     BOOL(
@@ -1976,7 +1977,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         outside the rectangle, the system automatically adjusts the position to keep the cursor inside the rectangular area.
         """,
 
-        nullable..RECT.const.p.IN(
+        nullable..RECT.const.p(
             "rect",
             """
             a pointer to the structure that contains the screen coordinates of the upper-left and lower-right corners of the confining rectangle. If this
@@ -1994,7 +1995,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         count is greater than or equal to 0. If a mouse is installed, the initial display count is 0. If no mouse is installed, the display count is –1.
         """,
 
-        BOOL.IN(
+        BOOL(
             "show",
             "If {@code show} is #TRUE, the display count is incremented by one. If {@code show} is #FALSE, the display count is decremented by one."
         ),
@@ -2020,7 +2021,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         function to hide the cursor more times than to show the cursor.
         """,
 
-        nullable..HCURSOR.IN(
+        nullable..HCURSOR(
             "hCursor",
             """
             a handle to the cursor. The cursor must have been created by the {@code CreateCursor} function or loaded by the #LoadCursor() or {@code LoadImage}
@@ -2051,7 +2052,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GetDpiForWindow",
         "Returns the dots per inch (dpi) value for the associated window.",
 
-        HWND.IN("hwnd", "the window you want to get information about"),
+        HWND("hwnd", "the window you want to get information about"),
 
         returnDoc =
         "the DPI for the window which depends on the {@code DPI_AWARENESS} of the window. An invalid {@code hwnd} value will result in a return value of 0.",
@@ -2062,7 +2063,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GetAwarenessFromDpiAwarenessContext",
         "Retrieves the {@code DPI_AWARENESS} value from a {@code DPI_AWARENESS_CONTEXT}.",
 
-        DPI_AWARENESS_CONTEXT.IN("value", "the {@code DPI_AWARENESS_CONTEXT} you want to examine"),
+        DPI_AWARENESS_CONTEXT("value", "the {@code DPI_AWARENESS_CONTEXT} you want to examine"),
 
         returnDoc = "the {@code DPI_AWARENESS}. If the provided value is null or invalid, this method will return #DPI_AWARENESS_INVALID.",
         since = "Windows 10"
@@ -2085,7 +2086,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GetWindowDpiAwarenessContext",
         "Returns the {@code DPI_AWARENESS_CONTEXT}  associated with a window.",
 
-        HWND.IN("hwnd", "the window to query"),
+        HWND("hwnd", "the window to query"),
 
         returnDoc = "the {@code DPI_AWARENESS_CONTEXT} for the provided window. If the window is not valid, the return value is #NULL.",
         since = "Windows 10"
@@ -2095,7 +2096,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "IsValidDpiAwarenessContext",
         "Determines if a specified {@code DPI_AWARENESS_CONTEXT} is valid and supported by the current system.",
 
-        nullable..DPI_AWARENESS_CONTEXT.IN("value", "the context that you want to determine if it is supported"),
+        nullable..DPI_AWARENESS_CONTEXT("value", "the context that you want to determine if it is supported"),
 
         returnDoc = "#TRUE if the provided context is supported, otherwise #FALSE",
         since = "Windows 10"
@@ -2105,7 +2106,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "SetThreadDpiAwarenessContext",
         "Set the DPI awareness for the current thread to the provided value.",
 
-        DPI_AWARENESS_CONTEXT.IN("dpiContext", "the DPI awareness value to set"),
+        DPI_AWARENESS_CONTEXT("dpiContext", "the DPI awareness value to set"),
 
         returnDoc =
         """

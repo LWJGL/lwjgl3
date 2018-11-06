@@ -32,27 +32,32 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
 
     macro..charASCII.p(
         "version",
-        "Contains tinyfd current version number."
+        "Contains tinyfd current version number.",
+        void()
     )
 
     macro..charASCII.p(
         "needs",
-        "Contains info about requirements."
+        "Contains info about requirements.",
+        void()
     )
 
     macro..Address..int.p(
         "verbose",
-        "0 (default) or 1 : on unix, prints the command line calls."
+        "0 (default) or 1 : on unix, prints the command line calls.",
+        void()
     )
 
     macro..Address..int.p(
         "silent",
-        "1 (default) or 0 : on unix, hide errors and warnings from called dialog."
+        "1 (default) or 0 : on unix, hide errors and warnings from called dialog.",
+        void()
     )
 
     private..macro..Address..int.p(
         "winUtf8",
-        "On windows string char can be 0:MBSC or 1:UTF-8. Unless your code is really prepared for UTF-8 on windows, leave this on MBSC."
+        "On windows string char can be 0:MBSC or 1:UTF-8. Unless your code is really prepared for UTF-8 on windows, leave this on MBSC.",
+        void()
     )
 
     macro..Address..int.p(
@@ -65,7 +70,8 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         0: try to use a graphic solution, if it fails then it uses console mode.
         1: forces all dialogs into console mode even when the X server is present. It will use the package dialog or dialog.exe if installed. On windows it
         only makes sense for console applications.
-        """
+        """,
+        void()
     )
 
     macro(variable = true)..charUTF8.p(
@@ -78,7 +84,8 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         tkinter gdialog gxmessage xmessage
 
         For the console mode: dialog whiptail basicinput
-        """
+        """,
+        void()
     )
 
     void(
@@ -90,20 +97,20 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         "notifyPopup",
         "Displays a notification popup.",
 
-        nullable..charUTF8.const.p.IN("aTitle", "the dialog title or #NULL"),
-        nullable..charUTF8.const.p.IN("aMessage", "the message or #NULL. It may contain \\n and \\t characters."),
-        charASCII.const.p.IN("aIconType", "the icon type", """"info" "warning" "error"""")
+        nullable..charUTF8.const.p("aTitle", "the dialog title or #NULL"),
+        nullable..charUTF8.const.p("aMessage", "the message or #NULL. It may contain \\n and \\t characters."),
+        charASCII.const.p("aIconType", "the icon type", """"info" "warning" "error"""")
     )
 
     val messageBox = intb(
         "messageBox",
         "Displays a message dialog.",
 
-        nullable..charUTF8.const.p.IN("aTitle", "the dialog title or #NULL"),
-        nullable..charUTF8.const.p.IN("aMessage", "the message or #NULL. It may contain \\n and \\t characters."),
-        charASCII.const.p.IN("aDialogType", "the dialog type", """"ok" "okcancel" "yesno" "yesnocancel""""),
-        charASCII.const.p.IN("aIconType", "the icon type", """"info" "warning" "error" "question""""),
-        intb.IN("aDefaultButton", "0 for cancel/no, 1 for ok/yes"),
+        nullable..charUTF8.const.p("aTitle", "the dialog title or #NULL"),
+        nullable..charUTF8.const.p("aMessage", "the message or #NULL. It may contain \\n and \\t characters."),
+        charASCII.const.p("aDialogType", "the dialog type", """"ok" "okcancel" "yesno" "yesnocancel""""),
+        charASCII.const.p("aIconType", "the icon type", """"info" "warning" "error" "question""""),
+        intb("aDefaultButton", "0 for cancel/no, 1 for ok/yes"),
 
         returnDoc = "0 for cancel/no, 1 for ok/yes, 2 for no in yesnocancel"
     )
@@ -113,8 +120,8 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         "Displays an input dialog.",
 
         messageBox["aTitle"],
-        nullable..charUTF8.const.p.IN("aMessage", "the message or #NULL. May NOT contain \\n and \\t characters on Windows."),
-        nullable..charUTF8.const.p.IN("aDefaultInput", "if #NULL it's a password box"),
+        nullable..charUTF8.const.p("aMessage", "the message or #NULL. May NOT contain \\n and \\t characters on Windows."),
+        nullable..charUTF8.const.p("aDefaultInput", "if #NULL it's a password box"),
 
         returnDoc = "the input value or #NULL on cancel"
     )
@@ -124,10 +131,10 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         "Displays a file save dialog.",
 
         messageBox["aTitle"],
-        nullable..charUTF8.const.p.IN("aDefaultPathAndFile", "the default path and/or file or #NULL"),
-        AutoSize("aFilterPatterns")..int.IN("aNumOfFilterPatterns", "the number of patterns in {@code aFilterPatterns}"),
-        nullable..charUTF8.const.p.const.p.IN("aFilterPatterns", """an array of file type patterns (#NULL or {"*.jpg","*.png"}"""),
-        nullable..charUTF8.const.p.IN("aSingleFilterDescription", "#NULL or \"image files\""),
+        nullable..charUTF8.const.p("aDefaultPathAndFile", "the default path and/or file or #NULL"),
+        AutoSize("aFilterPatterns")..int("aNumOfFilterPatterns", "the number of patterns in {@code aFilterPatterns}"),
+        nullable..charUTF8.const.p.const.p("aFilterPatterns", """an array of file type patterns (#NULL or {"*.jpg","*.png"}"""),
+        nullable..charUTF8.const.p("aSingleFilterDescription", "#NULL or \"image files\""),
 
         returnDoc = "the selected file path or #NULL on cancel"
     )
@@ -141,7 +148,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         saveFileDialog["aNumOfFilterPatterns"],
         saveFileDialog["aFilterPatterns"],
         saveFileDialog["aSingleFilterDescription"],
-        intb.IN("aAllowMultipleSelects", "if true, multiple selections are allowed"),
+        intb("aAllowMultipleSelects", "if true, multiple selections are allowed"),
 
         returnDoc = "the file(s) selected or #NULL on cancel. In case of multiple files, the separator is '|'."
     )
@@ -151,7 +158,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         "Displays a folder selection dialog.",
 
         messageBox["aTitle"],
-        charUTF8.const.p.IN("aDefaultPath", "the default path or #NULL")
+        charUTF8.const.p("aDefaultPath", "the default path or #NULL")
     )
 
     charUTF8.const.p(
@@ -159,7 +166,7 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         "Displays a color chooser dialog.",
 
         messageBox["aTitle"],
-        nullable..charASCII.const.p.IN("aDefaultHexRGB", "#NULL or \"\\#FF0000\""),
+        nullable..charASCII.const.p("aDefaultHexRGB", "#NULL or \"\\#FF0000\""),
         nullable..Check(3)..unsigned_char.p.INOUT("aDefaultRGB", "{ 0 , 255 , 255 }. Used only if {@code aDefaultHexRGB} is #NULL."),
         Check(3)..unsigned_char.p.OUT("aoResultRGB", "returns the selected color. {@code aDefaultRGB} and {@code aoResultRGB} can be the same array."),
 

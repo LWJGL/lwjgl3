@@ -103,52 +103,52 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
         "MakeBufferResidentNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("access", "")
+        GLenum("target", ""),
+        GLenum("access", "")
     )
 
     void(
         "MakeBufferNonResidentNV",
         "",
 
-        GLenum.IN("target", "")
+        GLenum("target", "")
     )
 
     GLboolean(
         "IsBufferResidentNV",
         "",
 
-        GLenum.IN("target", "")
+        GLenum("target", "")
     )
 
     void(
         "MakeNamedBufferResidentNV",
         "",
 
-        GLuint.IN("buffer", ""),
-        GLenum.IN("access", "")
+        GLuint("buffer", ""),
+        GLenum("access", "")
     )
 
     void(
         "MakeNamedBufferNonResidentNV",
         "",
 
-        GLuint.IN("buffer", "")
+        GLuint("buffer", "")
     )
 
     GLboolean(
         "IsNamedBufferResidentNV",
         "",
 
-        GLuint.IN("buffer", "")
+        GLuint("buffer", "")
     )
 
     void(
         "GetBufferParameterui64vNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         Check(1)..ReturnParam..GLuint64EXT.p.OUT("params", "")
     )
 
@@ -156,8 +156,8 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
         "GetNamedBufferParameterui64vNV",
         "",
 
-        GLuint.IN("buffer", ""),
-        GLenum.IN("pname", ""),
+        GLuint("buffer", ""),
+        GLenum("pname", ""),
         Check(1)..ReturnParam..GLuint64EXT.p.OUT("params", "")
     )
 
@@ -165,7 +165,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
         "GetIntegerui64vNV",
         "",
 
-        GLenum.IN("value", ""),
+        GLenum("value", ""),
         Check(1)..ReturnParam..GLuint64EXT.p.OUT("result", "")
     )
 
@@ -173,25 +173,25 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
         "Uniformui64NV",
         "",
 
-        GLint.IN("location", ""),
-        GLuint64EXT.IN("value", "")
+        GLint("location", ""),
+        GLuint64EXT("value", "")
     )
 
     void(
         "Uniformui64vNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLuint64EXT.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLuint64EXT.const.p("value", "")
     )
 
     void(
         "GetUniformui64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
+        GLuint("program", ""),
+        GLint("location", ""),
         Check(1)..ReturnParam..GLuint64EXT.p.OUT("params", "")
     )
 
@@ -199,18 +199,18 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
         "ProgramUniformui64NV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLuint64EXT.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLuint64EXT("value", "")
     )
 
     void(
         "ProgramUniformui64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLuint64EXT.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLuint64EXT.const.p("value", "")
     )
 }

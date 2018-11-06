@@ -46,7 +46,7 @@ val EXT_raster_multisample = "EXTRasterMultisample".nativeClassGLES("EXT_raster_
         "RasterSamplesEXT",
         "",
 
-        GLuint.IN("samples", ""),
-        GLboolean.IN("fixedsamplelocations", "")
+        GLuint("samples", ""),
+        GLboolean("fixedsamplelocations", "")
     )
 }

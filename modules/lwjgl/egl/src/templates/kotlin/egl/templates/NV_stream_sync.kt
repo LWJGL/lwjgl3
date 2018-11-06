@@ -29,9 +29,9 @@ val NV_stream_sync = "NVStreamSync".nativeClassEGL("NV_stream_sync", postfix = N
         "CreateStreamSyncNV",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLStreamKHR.IN("stream", ""),
-        EGLenum.IN("type", ""),
-        noneTerminated..EGLint.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLStreamKHR("stream", ""),
+        EGLenum("type", ""),
+        noneTerminated..EGLint.const.p("attrib_list", "")
     )
 }

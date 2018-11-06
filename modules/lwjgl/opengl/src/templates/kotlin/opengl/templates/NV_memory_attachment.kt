@@ -62,10 +62,10 @@ val NV_memory_attachment = "NVMemoryAttachment".nativeClassGL("NV_memory_attachm
         "GetMemoryObjectDetachedResourcesuivNV",
         "",
 
-        GLuint.IN("memory", ""),
-        GLenum.IN("pname", ""),
-        GLint.IN("first", ""),
-        AutoSize("params")..GLsizei.IN("count", ""),
+        GLuint("memory", ""),
+        GLenum("pname", ""),
+        GLint("first", ""),
+        AutoSize("params")..GLsizei("count", ""),
         GLuint.p.OUT("params", "")
     )
 
@@ -73,43 +73,43 @@ val NV_memory_attachment = "NVMemoryAttachment".nativeClassGL("NV_memory_attachm
         "ResetMemoryObjectParameterNV",
         "",
 
-        GLuint.IN("memory", ""),
-        GLenum.IN("pname", "")
+        GLuint("memory", ""),
+        GLenum("pname", "")
     )
 
     void(
         "TexAttachMemoryNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLenum("target", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     void(
         "BufferAttachMemoryNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLenum("target", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "TextureAttachMemoryNV",
         "",
 
-        GLuint.IN("texture", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLuint("texture", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "NamedBufferAttachMemoryNV",
         "",
 
-        GLuint.IN("buffer", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLuint("buffer", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 }

@@ -57,22 +57,22 @@ val NV_depth_buffer_float = "NVDepthBufferFloat".nativeClassGL("NV_depth_buffer_
         "DepthRangedNV",
         "",
 
-        GLdouble.IN("zNear", ""),
-        GLdouble.IN("zFar", "")
+        GLdouble("zNear", ""),
+        GLdouble("zFar", "")
     )
 
     void(
         "ClearDepthdNV",
         "",
 
-        GLdouble.IN("depth", "")
+        GLdouble("depth", "")
     )
 
     void(
         "DepthBoundsdNV",
         "",
 
-        GLdouble.IN("zmin", ""),
-        GLdouble.IN("zmax", "")
+        GLdouble("zmin", ""),
+        GLdouble("zmax", "")
     )
 }

@@ -44,11 +44,11 @@ val NV_framebuffer_multisample_coverage = "NVFramebufferMultisampleCoverage".nat
         "RenderbufferStorageMultisampleCoverageNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("coverageSamples", ""),
-        GLsizei.IN("colorSamples", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLenum("target", ""),
+        GLsizei("coverageSamples", ""),
+        GLsizei("colorSamples", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 }

@@ -59,8 +59,8 @@ val ARB_compute_variable_group_size = "ARBComputeVariableGroupSize".nativeClassG
         src["num_groups_x"],
         src["num_groups_y"],
         src["num_groups_z"],
-        GLuint.IN("group_size_x", "the group size in the X dimension"),
-        GLuint.IN("group_size_y", "the group size in the Y dimension"),
-        GLuint.IN("group_size_z", "the group size in the Z dimension")
+        GLuint("group_size_x", "the group size in the X dimension"),
+        GLuint("group_size_y", "the group size in the Y dimension"),
+        GLuint("group_size_z", "the group size in the Z dimension")
     )
 }

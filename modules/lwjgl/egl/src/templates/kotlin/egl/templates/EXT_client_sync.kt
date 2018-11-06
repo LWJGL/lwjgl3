@@ -40,8 +40,8 @@ val EXT_client_sync = "EXTClientSync".nativeClassEGL("EXT_client_sync", postfix 
         "ClientSignalSyncEXT",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSync.IN("sync", ""),
-        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLSync("sync", ""),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
     )
 }

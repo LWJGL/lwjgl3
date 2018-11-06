@@ -25,7 +25,8 @@ val VRChaperone = "VRChaperone".nativeClass(
 
     ChaperoneCalibrationState(
         "GetCalibrationState",
-        "Get the current state of Chaperone calibration. This state can change at any time during a session due to physical base station changes."
+        "Get the current state of Chaperone calibration. This state can change at any time during a session due to physical base station changes.",
+        void()
     )
 
     bool(
@@ -57,7 +58,7 @@ val VRChaperone = "VRChaperone".nativeClass(
         "SetSceneColor",
         "Optionally give the chaperone system a hit about the color and brightness in the scene.",
 
-        HmdColor_t.IN("color", "")
+        HmdColor_t("color", "")
     )
 
     void(
@@ -65,20 +66,21 @@ val VRChaperone = "VRChaperone".nativeClass(
         "Get the current chaperone bounds draw color and brightness.",
 
         HmdColor_t.p.OUT("pOutputColorArray", ""),
-        AutoSize("pOutputColorArray")..int.IN("nNumOutputColors", ""),
-        float.IN("flCollisionBoundsFadeDistance", ""),
+        AutoSize("pOutputColorArray")..int("nNumOutputColors", ""),
+        float("flCollisionBoundsFadeDistance", ""),
         HmdColor_t.p.OUT("pOutputCameraColor", "")
     )
 
     bool(
         "AreBoundsVisible",
-        "Determine whether the bounds are showing right now."
+        "Determine whether the bounds are showing right now.",
+        void()
     )
 
     void(
         "ForceBoundsVisible",
         "Force the bounds to show, mostly for utilities.",
 
-        bool.IN("bForce", "")
+        bool("bForce", "")
     )
 }

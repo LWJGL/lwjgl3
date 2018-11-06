@@ -61,21 +61,21 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "CopyImageSubData",
         "",
 
-        GLuint.IN("srcName", ""),
-        GLenum.IN("srcTarget", ""),
-        GLint.IN("srcLevel", ""),
-        GLint.IN("srcX", ""),
-        GLint.IN("srcY", ""),
-        GLint.IN("srcZ", ""),
-        GLuint.IN("dstName", ""),
-        GLenum.IN("dstTarget", ""),
-        GLint.IN("dstLevel", ""),
-        GLint.IN("dstX", ""),
-        GLint.IN("dstY", ""),
-        GLint.IN("dstZ", ""),
-        GLsizei.IN("srcWidth", ""),
-        GLsizei.IN("srcHeight", ""),
-        GLsizei.IN("srcDepth", "")
+        GLuint("srcName", ""),
+        GLenum("srcTarget", ""),
+        GLint("srcLevel", ""),
+        GLint("srcX", ""),
+        GLint("srcY", ""),
+        GLint("srcZ", ""),
+        GLuint("dstName", ""),
+        GLenum("dstTarget", ""),
+        GLint("dstLevel", ""),
+        GLint("dstX", ""),
+        GLint("dstY", ""),
+        GLint("dstZ", ""),
+        GLsizei("srcWidth", ""),
+        GLsizei("srcHeight", ""),
+        GLsizei("srcDepth", "")
     )
 
     // KHR_debug
@@ -214,12 +214,12 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         disabled.
         """,
 
-        GLenum.IN("source", "the source of debug messages to enable or disable", DebugSources),
-        GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
-        GLenum.IN("severity", "the severity of debug messages to enable or disable", DebugSeverities),
-        AutoSize("ids")..GLsizei.IN("count", "the length of the array {@code ids}"),
-        SingleValue("id")..GLuint.const.p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
-        GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
+        GLenum("source", "the source of debug messages to enable or disable", DebugSources),
+        GLenum("type", "the type of debug messages to enable or disable", DebugTypes),
+        GLenum("severity", "the severity of debug messages to enable or disable", DebugSeverities),
+        AutoSize("ids")..GLsizei("count", "the length of the array {@code ids}"),
+        SingleValue("id")..GLuint.const.p("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
+        GLboolean("enabled", "whether the selected messages should be enabled or disabled")
     )
 
     void(
@@ -237,12 +237,12 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         If the #DEBUG_OUTPUT state is disabled calls to DebugMessageInsert are discarded and do not generate an error.
         """,
 
-        GLenum.IN("source", "the source of the debug message to insert", DebugSources),
-        GLenum.IN("type", "the type of the debug message insert", DebugTypes),
-        GLuint.IN("id", "the user-supplied identifier of the message to insert", DebugSeverities),
-        GLenum.IN("severity", "the severity of the debug messages to insert"),
-        AutoSize("message")..GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
-        GLcharUTF8.const.p.IN("message", "a character array containing the message to insert")
+        GLenum("source", "the source of the debug message to insert", DebugSources),
+        GLenum("type", "the type of the debug message insert", DebugTypes),
+        GLuint("id", "the user-supplied identifier of the message to insert", DebugSeverities),
+        GLenum("severity", "the severity of the debug messages to insert"),
+        AutoSize("message")..GLsizei("length", "the length of the string contained in the character array whose address is given by {@code message}"),
+        GLcharUTF8.const.p("message", "a character array containing the message to insert")
     )
 
     void(
@@ -276,8 +276,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         If the #DEBUG_OUTPUT state is disabled then the GL will not call the callback function.
         """,
 
-        nullable..GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
-        nullable..opaque_const_p.IN(
+        nullable..GLDEBUGPROC("callback", "a callback function that will be called when a debug message is generated"),
+        nullable..opaque_const_p(
             "userParam",
             "a user supplied pointer that will be passed on each invocation of {@code callback}"
         )
@@ -310,8 +310,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         always return zero.
         """,
 
-        GLuint.IN("count", "the number of debug messages to retrieve from the log"),
-        AutoSize("messageLog")..GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
+        GLuint("count", "the number of debug messages to retrieve from the log"),
+        AutoSize("messageLog")..GLsizei("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
         Check("count")..nullable..GLenum.p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
         Check("count")..nullable..GLenum.p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
         Check("count")..nullable..GLuint.p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
@@ -324,7 +324,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "GetPointerv",
         "",
 
-        GLenum.IN("pname", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..void.p.p.OUT("params", "")
     )
 
@@ -344,10 +344,10 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         is not less than the value of #MAX_DEBUG_MESSAGE_LENGTH.
         """,
 
-        GLenum.IN("source", "the source of the debug message", "#DEBUG_SOURCE_APPLICATION #DEBUG_SOURCE_THIRD_PARTY"),
-        GLuint.IN("id", "the identifier of the message"),
-        AutoSize("message")..GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
-        GLcharUTF8.const.p.IN("message", "a string containing the message to be sent to the debug output stream")
+        GLenum("source", "the source of the debug message", "#DEBUG_SOURCE_APPLICATION #DEBUG_SOURCE_THIRD_PARTY"),
+        GLuint("id", "the identifier of the message"),
+        AutoSize("message")..GLsizei("length", "the length of the message to be sent to the debug output stream"),
+        GLcharUTF8.const.p("message", "a string containing the message to be sent to the debug output stream")
     )
 
     void(
@@ -368,27 +368,27 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "ObjectLabel",
         "Labels a named object identified within a namespace.",
 
-        GLenum.IN(
+        GLenum(
             "identifier",
             "the namespace from which the name of the object is allocated",
             DebugIdentifiers + " #TEXTURE #RENDERBUFFER #FRAMEBUFFER #TRANSFORM_FEEDBACK"
         ),
-        GLuint.IN("name", "the name of the object to label"),
-        AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
-        GLcharUTF8.const.p.IN("label", "a string containing the label to assign to the object")
+        GLuint("name", "the name of the object to label"),
+        AutoSize("label")..GLsizei("length", "the length of the label to be used for the object"),
+        GLcharUTF8.const.p("label", "a string containing the label to assign to the object")
     )
 
     void(
         "GetObjectLabel",
         "Retrieves the label of a named object identified within a namespace.",
 
-        GLenum.IN(
+        GLenum(
             "identifier",
             "the namespace from which the name of the object is allocated",
             DebugIdentifiers + " #TEXTURE #RENDERBUFFER #FRAMEBUFFER #TRANSFORM_FEEDBACK"
         ),
-        GLuint.IN("name", "the name of the object whose label to retrieve"),
-        AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+        GLuint("name", "the name of the object whose label to retrieve"),
+        AutoSize("label")..GLsizei("bufSize", "the length of the buffer whose address is in {@code label}"),
         Check(1)..nullable..GLsizei.p.OUT("length", "the address of a variable to receive the length of the object label"),
         Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8.p.OUT("label", "a string that will receive the object label")
     )
@@ -397,17 +397,17 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "ObjectPtrLabel",
         "Labels a sync object identified by a pointer.",
 
-        opaque_p.IN("ptr", "a pointer identifying a sync object"),
-        AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
-        GLcharUTF8.const.p.IN("label", "a string containing the label to assign to the object")
+        opaque_p("ptr", "a pointer identifying a sync object"),
+        AutoSize("label")..GLsizei("length", "the length of the label to be used for the object"),
+        GLcharUTF8.const.p("label", "a string containing the label to assign to the object")
     )
 
     void(
         "GetObjectPtrLabel",
         "Retrieves the label of a sync object identified by a pointer.",
 
-        opaque_p.IN("ptr", "the name of the sync object whose label to retrieve"),
-        AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+        opaque_p("ptr", "the name of the sync object whose label to retrieve"),
+        AutoSize("label")..GLsizei("bufSize", "the length of the buffer whose address is in {@code label}"),
         Check(1)..nullable..GLsizei.p.OUT("length", "a variable to receive the length of the object label"),
         Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8.p.OUT("label", "a string that will receive the object label")
     )
@@ -418,72 +418,72 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "Enablei",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 
     void(
         "Disablei",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 
     void(
         "BlendEquationi",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("mode", "")
+        GLuint("buf", ""),
+        GLenum("mode", "")
     )
 
     void(
         "BlendEquationSeparatei",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("modeRGB", ""),
-        GLenum.IN("modeAlpha", "")
+        GLuint("buf", ""),
+        GLenum("modeRGB", ""),
+        GLenum("modeAlpha", "")
     )
 
     void(
         "BlendFunci",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("src", ""),
-        GLenum.IN("dst", "")
+        GLuint("buf", ""),
+        GLenum("src", ""),
+        GLenum("dst", "")
     )
 
     void(
         "BlendFuncSeparatei",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("srcRGB", ""),
-        GLenum.IN("dstRGB", ""),
-        GLenum.IN("srcAlpha", ""),
-        GLenum.IN("dstAlpha", "")
+        GLuint("buf", ""),
+        GLenum("srcRGB", ""),
+        GLenum("dstRGB", ""),
+        GLenum("srcAlpha", ""),
+        GLenum("dstAlpha", "")
     )
 
     void(
         "ColorMaski",
         "",
 
-        GLuint.IN("index", ""),
-        GLboolean.IN("r", ""),
-        GLboolean.IN("g", ""),
-        GLboolean.IN("b", ""),
-        GLboolean.IN("a", "")
+        GLuint("index", ""),
+        GLboolean("r", ""),
+        GLboolean("g", ""),
+        GLboolean("b", ""),
+        GLboolean("a", "")
     )
 
     GLboolean(
         "IsEnabledi",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 
     // OES_draw_elements_base_vertex
@@ -492,36 +492,36 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "DrawElementsBaseVertex",
         "",
 
-        GLenum.IN("mode", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
-        GLint.IN("basevertex", "")
+        GLenum("mode", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        GLint("basevertex", "")
     )
 
     void(
         "DrawRangeElementsBaseVertex",
         "",
 
-        GLenum.IN("mode", ""),
-        GLuint.IN("start", ""),
-        GLuint.IN("end", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
-        GLint.IN("basevertex", "")
+        GLenum("mode", ""),
+        GLuint("start", ""),
+        GLuint("end", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        GLint("basevertex", "")
     )
 
     void(
         "DrawElementsInstancedBaseVertex",
         "",
 
-        GLenum.IN("mode", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
-        GLsizei.IN("instancecount", ""),
-        GLint.IN("basevertex", "")
+        GLenum("mode", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        GLsizei("instancecount", ""),
+        GLint("basevertex", "")
     )
 
     // OES_geometry_shader
@@ -626,10 +626,10 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "FramebufferTexture",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLuint("texture", ""),
+        GLint("level", "")
     )
 
     // OES_primitive_bounding_box
@@ -650,14 +650,14 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         rasterizer may or may not generate fragments for the portions of primitives outside the bounds.
         """,
 
-        GLfloat.IN("minX", "the minimum x clip space coordinate"),
-        GLfloat.IN("minY", "the minimum y clip space coordinate"),
-        GLfloat.IN("minZ", "the minimum z clip space coordinate"),
-        GLfloat.IN("minW", "the minimum w clip space coordinate"),
-        GLfloat.IN("maxX", "the maximum x clip space coordinate"),
-        GLfloat.IN("maxY", "the maximum y clip space coordinate"),
-        GLfloat.IN("maxZ", "the maximum z clip space coordinate"),
-        GLfloat.IN("maxW", "the maximum w clip space coordinate")
+        GLfloat("minX", "the minimum x clip space coordinate"),
+        GLfloat("minY", "the minimum y clip space coordinate"),
+        GLfloat("minZ", "the minimum z clip space coordinate"),
+        GLfloat("minW", "the minimum w clip space coordinate"),
+        GLfloat("maxX", "the maximum x clip space coordinate"),
+        GLfloat("maxY", "the maximum y clip space coordinate"),
+        GLfloat("maxZ", "the maximum z clip space coordinate"),
+        GLfloat("maxW", "the maximum w clip space coordinate")
     )
 
     // KHR_robustness
@@ -727,20 +727,21 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
             indicating completion to the application.
             """
         )}
-        """
+        """,
+        void()
     )
 
     void(
         "ReadnPixels",
         "Behaves identically to #ReadPixels() except that it does not write more than {@code bufSize} bytes into {@code data}",
 
-        GLint.IN("x", "the left pixel coordinate"),
-        GLint.IN("y", "the lower pixel coordinate"),
-        GLsizei.IN("width", "the number of pixels to read in the x-dimension"),
-        GLsizei.IN("height", "the number of pixels to read in the y-dimension"),
-        GLenum.IN("format", "the pixel format"),
-        GLenum.IN("type", "the pixel type"),
-        AutoSize("pixels")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+        GLint("x", "the left pixel coordinate"),
+        GLint("y", "the lower pixel coordinate"),
+        GLsizei("width", "the number of pixels to read in the x-dimension"),
+        GLsizei("height", "the number of pixels to read in the y-dimension"),
+        GLenum("format", "the pixel format"),
+        GLenum("type", "the pixel type"),
+        AutoSize("pixels")..GLsizei("bufSize", "the maximum number of bytes to write into {@code data}"),
         PIXEL_PACK_BUFFER..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
@@ -752,9 +753,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "GetnUniformfv",
         "Returns the value or values of a uniform of the default uniform block.",
 
-        GLuint.IN("program", "the program object"),
-        GLint.IN("location", "the uniform location"),
-        AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
+        GLuint("program", "the program object"),
+        GLint("location", "the uniform location"),
+        AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
         ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
     )
 
@@ -762,9 +763,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "GetnUniformiv",
         "Integer version of #GetnUniformfv().",
 
-        GLuint.IN("program", "the program object"),
-        GLint.IN("location", "the uniform location"),
-        AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
+        GLuint("program", "the program object"),
+        GLint("location", "the uniform location"),
+        AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
         ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
     )
 
@@ -772,9 +773,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "GetnUniformuiv",
         "Unsigned version of #GetnUniformiv().",
 
-        GLuint.IN("program", "the program object"),
-        GLint.IN("location", "the uniform location"),
-        AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
+        GLuint("program", "the program object"),
+        GLint("location", "the uniform location"),
+        AutoSize("params")..GLsizei("bufSize", "the maximum number of bytes to write to {@code params}"),
         ReturnParam..GLfloat.p.OUT("params", "the buffer in which to place the returned data")
     )
 
@@ -799,7 +800,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "MinSampleShading",
         "",
 
-        GLfloat.IN("value", "")
+        GLfloat("value", "")
     )
 
     // OES_multisample_interpolation_features
@@ -909,8 +910,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "PatchParameteri",
         "",
 
-        GLenum.IN("pname", ""),
-        GLint.IN("value", "")
+        GLenum("pname", ""),
+        GLint("value", "")
     )
 
     // OES_texture_border_clamp
@@ -941,26 +942,26 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "TexParameterIiv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..GLint.const.p.IN("params", "")
+        GLenum("target", ""),
+        GLenum("pname", ""),
+        SingleValue("param")..Check(1)..GLint.const.p("params", "")
     )
 
     void(
         "TexParameterIuiv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..GLuint.const.p.IN("params", "")
+        GLenum("target", ""),
+        GLenum("pname", ""),
+        SingleValue("param")..Check(1)..GLuint.const.p("params", "")
     )
 
     void(
         "GetTexParameterIiv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -968,8 +969,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "GetTexParameterIuiv",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLuint.p.OUT("params", "")
     )
 
@@ -977,26 +978,26 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "SamplerParameterIiv",
         "",
 
-        GLuint.IN("sampler", ""),
-        GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..GLint.const.p.IN("params", "")
+        GLuint("sampler", ""),
+        GLenum("pname", ""),
+        SingleValue("param")..Check(1)..GLint.const.p("params", "")
     )
 
     void(
         "SamplerParameterIuiv",
         "",
 
-        GLuint.IN("sampler", ""),
-        GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..GLuint.const.p.IN("params", "")
+        GLuint("sampler", ""),
+        GLenum("pname", ""),
+        SingleValue("param")..Check(1)..GLuint.const.p("params", "")
     )
 
     void(
         "GetSamplerParameterIiv",
         "",
 
-        GLuint.IN("sampler", ""),
-        GLenum.IN("pname", ""),
+        GLuint("sampler", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -1004,8 +1005,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "GetSamplerParameterIuiv",
         "",
 
-        GLuint.IN("sampler", ""),
-        GLenum.IN("pname", ""),
+        GLuint("sampler", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLuint.p.OUT("params", "")
     )
 
@@ -1054,20 +1055,20 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "TexBuffer",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("internalformat", ""),
-        GLuint.IN("buffer", "")
+        GLenum("target", ""),
+        GLenum("internalformat", ""),
+        GLuint("buffer", "")
     )
 
     void(
         "TexBufferRange",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("internalformat", ""),
-        GLuint.IN("buffer", ""),
-        GLintptr.IN("offset", ""),
-        GLsizeiptr.IN("size", "")
+        GLenum("target", ""),
+        GLenum("internalformat", ""),
+        GLuint("buffer", ""),
+        GLintptr("offset", ""),
+        GLsizeiptr("size", "")
     )
 
     // KHR_texture_compression_astc_ldr
@@ -1168,12 +1169,12 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
         "TexStorage3DMultisample",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLboolean.IN("fixedsamplelocations", "")
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLboolean("fixedsamplelocations", "")
     )
 }

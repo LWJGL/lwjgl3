@@ -28,10 +28,10 @@ val EXT_memory_object_fd = "EXTMemoryObjectFD".nativeClassGLES("EXT_memory_objec
         "ImportMemoryFdEXT",
         "",
 
-        GLuint.IN("memory", ""),
-        GLuint64.IN("size", ""),
-        GLenum.IN("handleType", ""),
-        GLint.IN("fd", "")
+        GLuint("memory", ""),
+        GLuint64("size", ""),
+        GLenum("handleType", ""),
+        GLint("fd", "")
     )
 }
 
@@ -56,8 +56,8 @@ val EXT_semaphore_fd = "EXTSemaphoreFD".nativeClassGLES("EXT_semaphore_fd", post
         "ImportSemaphoreFdEXT",
         "",
 
-        GLuint.IN("semaphore", ""),
-        GLenum.IN("handleType", ""),
-        GLint.IN("fd", "")
+        GLuint("semaphore", ""),
+        GLenum("handleType", ""),
+        GLint("fd", "")
     )
 }

@@ -30,7 +30,7 @@ val CUGL65 = "CUGL65".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_B
 
         Check(1)..unsigned_int.p.OUT("pCudaDeviceCount", ""),
         CUdevice.p.OUT("pCudaDevices", ""),
-        AutoSize("pCudaDevices")..unsigned_int.IN("cudaDeviceCount", ""),
-        CUGLDeviceList.IN("deviceList", "")
+        AutoSize("pCudaDevices")..unsigned_int("cudaDeviceCount", ""),
+        CUGLDeviceList("deviceList", "")
     ).versioned()
 }

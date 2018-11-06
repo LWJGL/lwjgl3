@@ -36,6 +36,6 @@ val EXT_stencil_two_side = "EXTStencilTwoSide".nativeClassGL("EXT_stencil_two_si
         "ActiveStencilFaceEXT",
         "",
 
-        GLenum.IN("face", "")
+        GLenum("face", "")
     )
 }

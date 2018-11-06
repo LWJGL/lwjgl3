@@ -152,8 +152,8 @@ val OES_tessellation_shader = "OESTessellationShader".nativeClassGLES("OES_tesse
         "PatchParameteriOES",
         "",
 
-        GLenum.IN("pname", ""),
-        GLint.IN("value", "")
+        GLenum("pname", ""),
+        GLint("value", "")
     )
 }
 

@@ -50,7 +50,7 @@ val NV_conservative_raster = "NVConservativeRaster".nativeClassGL("NV_conservati
         When these values are non-zero, the invariance requirement may not apply because the subpixel precision may not be the same at all window coordinates.
         """,
 
-        GLuint.IN("xbits", "the #SUBPIXEL_PRECISION_BIAS_X_BITS_NV value. The initial value is zero."),
-        GLuint.IN("ybits", "the #SUBPIXEL_PRECISION_BIAS_Y_BITS_NV value. The initial value is zero.")
+        GLuint("xbits", "the #SUBPIXEL_PRECISION_BIAS_X_BITS_NV value. The initial value is zero."),
+        GLuint("ybits", "the #SUBPIXEL_PRECISION_BIAS_Y_BITS_NV value. The initial value is zero.")
     )
 }

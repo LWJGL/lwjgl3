@@ -66,7 +66,8 @@ val errno = "LibCErrno".nativeClass(Module.CORE_LIBC) {
 
         <b>LWJGL note</b>: This function cannot be used after another JNI call to a function, because the last error resets before that call returns. For this
         reason, LWJGL stores the last error in thread-local storage, you can use #getErrno() to access it.
-        """
+        """,
+        void()
     )
 
     int(
@@ -78,7 +79,8 @@ val errno = "LibCErrno".nativeClass(Module.CORE_LIBC) {
 
         <b>LWJGL note</b>: This method has a meaningful value only after another LWJGL JNI call. It does not return {@code errno} from errno.h, but the
         thread-local error code stored by a previous JNI call.
-        """
+        """,
+        void()
     )
 
 }

@@ -42,15 +42,15 @@ val CL22 = "CL22".nativeClassCL("CL22") {
         application (and libraries) to be notified when destructors are complete.
         """,
 
-        cl_program.IN("program", "a valid program object"),
-        cl_program_release_callback.IN(
+        cl_program("program", "a valid program object"),
+        cl_program_release_callback(
             "pfn_notify",
             """
             the callback function that can be registered by the application. This callback function may be called asynchronously by the OpenCL implementation.
             It is the applications responsibility to ensure that the callback function is thread safe.
             """
         ),
-        nullable..opaque_p.IN(
+        nullable..opaque_p(
             "user_data",
             """
             a pointer to user supplied data. {@code user_data} will be passed as the {@code user_data} argument when {@code pfn_notify} is called.
@@ -71,9 +71,9 @@ val CL22 = "CL22".nativeClassCL("CL22") {
         specialization constants.
         """,
 
-        cl_program.IN("program", "must be a valid OpenCL program created from a SPIR-V module"),
-        cl_uint.IN("spec_id", "identifies the SPIR-V specialization constant whose value will be set"),
-        AutoSize("spec_value")..size_t.IN(
+        cl_program("program", "must be a valid OpenCL program created from a SPIR-V module"),
+        cl_uint("spec_id", "identifies the SPIR-V specialization constant whose value will be set"),
+        AutoSize("spec_value")..size_t(
             "spec_size",
             """
             specifies the size in bytes of the data pointed to by {@code spec_value}. This should be 1 for boolean constants. For all other constant types this
@@ -86,7 +86,7 @@ val CL22 = "CL22".nativeClassCL("CL22") {
             PointerMapping.DATA_LONG,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..void.const.p.IN(
+        )..void.const.p(
             "spec_value",
             """
             a pointer to the memory location that contains the value of the specialization constant. The data pointed to by {@code spec_value} are copied and

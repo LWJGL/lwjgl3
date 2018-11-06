@@ -91,25 +91,25 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassGL("NV_shading_rate_
         "BindShadingRateImageNV",
         "",
 
-        GLuint.IN("texture", "")
+        GLuint("texture", "")
     )
 
     void(
         "ShadingRateImagePaletteNV",
         "",
 
-        GLuint.IN("viewport", ""),
-        GLuint.IN("first", ""),
-        AutoSize("rates")..GLsizei.IN("count", ""),
-        GLenum.const.p.IN("rates", "")
+        GLuint("viewport", ""),
+        GLuint("first", ""),
+        AutoSize("rates")..GLsizei("count", ""),
+        GLenum.const.p("rates", "")
     )
 
     void(
         "GetShadingRateImagePaletteNV",
         "",
 
-        GLuint.IN("viewport", ""),
-        GLuint.IN("entry", ""),
+        GLuint("viewport", ""),
+        GLuint("entry", ""),
         Check(1)..GLenum.p.OUT("rate", "")
     )
 
@@ -117,32 +117,32 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassGL("NV_shading_rate_
         "ShadingRateImageBarrierNV",
         "",
 
-        GLboolean.IN("synchronize", "")
+        GLboolean("synchronize", "")
     )
 
     void(
         "ShadingRateSampleOrderNV",
         "",
 
-        GLenum.IN("order", "")
+        GLenum("order", "")
     )
 
     void(
         "ShadingRateSampleOrderCustomNV",
         "",
 
-        GLenum.IN("rate", ""),
-        GLuint.IN("samples", ""),
-        Unsafe..GLint.const.p.IN("locations", "")
+        GLenum("rate", ""),
+        GLuint("samples", ""),
+        Unsafe..GLint.const.p("locations", "")
     )
 
     void(
         "GetShadingRateSampleLocationivNV",
         "",
 
-        GLenum.IN("rate", ""),
-        GLuint.IN("samples", ""),
-        GLuint.IN("index", ""),
+        GLenum("rate", ""),
+        GLuint("samples", ""),
+        GLuint("index", ""),
         Check(3)..GLint.p.OUT("location", "")
     )
 }

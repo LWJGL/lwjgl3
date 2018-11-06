@@ -78,8 +78,8 @@ val ARB_texture_buffer_object = "ARBTextureBufferObject".nativeClassGL("ARB_text
         shader as a four-component result vector with components of the appropriate data type for the texture's internal format.
         """,
 
-        GLenum.IN("target", "the target of the operation", "#TEXTURE_BUFFER_ARB"),
-        GLenum.IN("internalformat", "the sized internal format of the data in the store belonging to {@code buffer}"),
-        GLuint.IN("buffer", "the name of the buffer object whose storage to attach to the active buffer texture")
+        GLenum("target", "the target of the operation", "#TEXTURE_BUFFER_ARB"),
+        GLenum("internalformat", "the sized internal format of the data in the store belonging to {@code buffer}"),
+        GLuint("buffer", "the name of the buffer object whose storage to attach to the active buffer texture")
     )
 }

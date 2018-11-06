@@ -66,9 +66,9 @@ fun templateCustomization() {
             This macro <b>can</b> be used when constructing the ##VkApplicationInfo{@code ::pname:apiVersion} parameter passed to #CreateInstance().
             """,
 
-            uint32_t.IN("major", "the major version number"),
-            uint32_t.IN("minor", "the minor version number"),
-            uint32_t.IN("patch", "the patch version number"),
+            uint32_t("major", "the major version number"),
+            uint32_t("minor", "the minor version number"),
+            uint32_t("patch", "the patch version number"),
 
             noPrefix = true
         )
@@ -77,7 +77,7 @@ fun templateCustomization() {
             "VK_VERSION_MAJOR",
             "Extracts the API major version number from a packed version number.",
 
-            uint32_t.IN("version", "the Vulkan API version"),
+            uint32_t("version", "the Vulkan API version"),
 
             noPrefix = true
         )
@@ -86,7 +86,7 @@ fun templateCustomization() {
             "VK_VERSION_MINOR",
             "Extracts the API minor version number from a packed version number.",
 
-            uint32_t.IN("version", "the Vulkan API version"),
+            uint32_t("version", "the Vulkan API version"),
 
             noPrefix = true
         )
@@ -95,7 +95,7 @@ fun templateCustomization() {
             "VK_VERSION_PATCH",
             "Extracts the API patch version number from a packed version number.",
 
-            uint32_t.IN("version", "the Vulkan API version"),
+            uint32_t("version", "the Vulkan API version"),
 
             noPrefix = true
         )

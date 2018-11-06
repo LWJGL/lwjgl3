@@ -79,19 +79,19 @@ val EXT_texture_buffer = "EXTTextureBuffer".nativeClassGLES("EXT_texture_buffer"
         "TexBufferEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("internalformat", ""),
-        GLuint.IN("buffer", "")
+        GLenum("target", ""),
+        GLenum("internalformat", ""),
+        GLuint("buffer", "")
     )
 
     void(
         "TexBufferRangeEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("internalformat", ""),
-        GLuint.IN("buffer", ""),
-        GLintptr.IN("offset", ""),
-        GLsizeiptr.IN("size", "")
+        GLenum("target", ""),
+        GLenum("internalformat", ""),
+        GLuint("buffer", ""),
+        GLintptr("offset", ""),
+        GLsizeiptr("size", "")
     )
 }

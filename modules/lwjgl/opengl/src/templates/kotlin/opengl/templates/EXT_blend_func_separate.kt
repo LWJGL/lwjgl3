@@ -31,9 +31,9 @@ val EXT_blend_func_separate = "EXTBlendFuncSeparate".nativeClassGL("EXT_blend_fu
         "BlendFuncSeparateEXT",
         "",
 
-        GLenum.IN("sfactorRGB", ""),
-        GLenum.IN("dfactorRGB", ""),
-        GLenum.IN("sfactorAlpha", ""),
-        GLenum.IN("dfactorAlpha", "")
+        GLenum("sfactorRGB", ""),
+        GLenum("dfactorRGB", ""),
+        GLenum("sfactorAlpha", ""),
+        GLenum("dfactorAlpha", "")
     )
 }

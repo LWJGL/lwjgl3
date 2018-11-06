@@ -91,10 +91,10 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
         "Creates a single GLXPbuffer and returns its XID.",
 
         DISPLAY,
-        GLXFBConfig.IN("config", "the {@code GLXFBConfig}"),
-        unsigned_int.IN("width", "the pbuffer width"),
-        unsigned_int.IN("height", "the pbuffer height"),
-        nullable..NullTerminated..int.p.IN("attrib_list", "an optional null-terminated list of attributes")
+        GLXFBConfig("config", "the {@code GLXFBConfig}"),
+        unsigned_int("width", "the pbuffer width"),
+        unsigned_int("height", "the pbuffer height"),
+        nullable..NullTerminated..int.p("attrib_list", "an optional null-terminated list of attributes")
     )
 
     void(
@@ -102,7 +102,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
         "Destroys a GLXPbuffer.",
 
         DISPLAY,
-        GLXPbuffer.IN("pbuf", "the pbuffer to destroy")
+        GLXPbuffer("pbuf", "the pbuffer to destroy")
     )
 
     void(
@@ -110,8 +110,8 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
         "Queries an attribute associated with a GLXPbuffer.",
 
         DISPLAY,
-        GLXPbuffer.IN("pbuf", "the pbuffer being queried"),
-        int.IN("attribute", "the attribute to query"),
+        GLXPbuffer("pbuf", "the pbuffer being queried"),
+        int("attribute", "the attribute to query"),
         Check(1)..unsigned_int.p.OUT("value", "returns the attribute value")
     )
 
@@ -120,8 +120,8 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
         "Selects which GLX events should be received on a GLXdrawable.",
 
         DISPLAY,
-        GLXDrawable.IN("drawable", "the GLXDrawable"),
-        unsigned_long.IN("mask", "the selection mask")
+        GLXDrawable("drawable", "the GLXDrawable"),
+        unsigned_long("mask", "the selection mask")
     )
 
     void(
@@ -129,7 +129,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
         "Returns which GLX events are selected for a GLXdrawable.",
 
         DISPLAY,
-        GLXDrawable.IN("drawable", "the GLXDrawable"),
+        GLXDrawable("drawable", "the GLXDrawable"),
         Check(1)..unsigned_long.p.OUT("mask", "returns the selection mask")
     )
 

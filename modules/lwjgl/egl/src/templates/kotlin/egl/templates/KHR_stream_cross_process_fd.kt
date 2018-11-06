@@ -45,15 +45,15 @@ val KHR_stream_cross_process_fd = "KHRStreamCrossProcessFD".nativeClassEGL("KHR_
         "GetStreamFileDescriptorKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLStreamKHR.IN("stream", "")
+        EGLDisplay("dpy", ""),
+        EGLStreamKHR("stream", "")
     )
 
     EGLStreamKHR(
         "CreateStreamFromFileDescriptorKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLNativeFileDescriptorKHR.IN("file_descriptor", "")
+        EGLDisplay("dpy", ""),
+        EGLNativeFileDescriptorKHR("file_descriptor", "")
     )
 }

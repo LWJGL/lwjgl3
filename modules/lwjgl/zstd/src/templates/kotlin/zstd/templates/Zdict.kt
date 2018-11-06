@@ -57,12 +57,12 @@ ENABLE_WARNINGS()""")
         """,
 
         void.p.OUT("dictBuffer", ""),
-        AutoSize("dictBuffer")..size_t.IN("dictBufferCapacity", ""),
+        AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
         Check(
             "getSamplesBufferSize(samplesSizes)", debug = true
-        )..void.const.p.IN("samplesBuffer", ""),
-        size_t.const.p.IN("samplesSizes", ""),
-        AutoSize("samplesSizes")..unsigned_int.IN("nbSamples", ""),
+        )..void.const.p("samplesBuffer", ""),
+        size_t.const.p("samplesSizes", ""),
+        AutoSize("samplesSizes")..unsigned_int("nbSamples", ""),
 
         returnDoc = "size of dictionary stored into {@code dictBuffer} (&le; {@code dictBufferCapacity}) or an error code, which can be tested with #isError()."
     )
@@ -71,8 +71,8 @@ ENABLE_WARNINGS()""")
         "getDictID",
         "Extracts {@code dictID}.",
 
-        void.const.p.IN("dictBuffer", ""),
-        AutoSize("dictBuffer")..size_t.IN("dictSize", ""),
+        void.const.p("dictBuffer", ""),
+        AutoSize("dictBuffer")..size_t("dictSize", ""),
 
         returnDoc = "zero if error (not a valid dictionary)"
     )
@@ -81,14 +81,14 @@ ENABLE_WARNINGS()""")
         "isError",
         "",
 
-        size_t.IN("errorCode", "")
+        size_t("errorCode", "")
     )
 
     charASCII.const.p(
         "getErrorName",
         "",
 
-        size_t.IN("errorCode", "")
+        size_t("errorCode", "")
     )
 
     // EXPERIMENTAL
@@ -115,13 +115,13 @@ ENABLE_WARNINGS()""")
         """,
 
         void.p.OUT("dictBuffer", ""),
-        AutoSize("dictBuffer")..size_t.IN("dictBufferCapacity", ""),
+        AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
         Check(
             "getSamplesBufferSize(samplesSizes)", debug = true
-        )..void.const.p.IN("samplesBuffer", ""),
-        size_t.const.p.IN("samplesSizes", ""),
-        AutoSize("samplesSizes")..unsigned_int.IN("nbSamples", ""),
-        ZDICT_cover_params_t.IN("parameters", ""),
+        )..void.const.p("samplesBuffer", ""),
+        size_t.const.p("samplesSizes", ""),
+        AutoSize("samplesSizes")..unsigned_int("nbSamples", ""),
+        ZDICT_cover_params_t("parameters", ""),
 
         returnDoc = "size of dictionary stored into {@code dictBuffer} (&le; {@code dictBufferCapacity}) or an error code, which can be tested with #isError()."
     )
@@ -146,13 +146,13 @@ ENABLE_WARNINGS()""")
         """,
 
         void.p.OUT("dictBuffer", ""),
-        AutoSize("dictBuffer")..size_t.IN("dictBufferCapacity", ""),
+        AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
         Check(
             "getSamplesBufferSize(samplesSizes)", debug = true
-        )..void.const.p.IN("samplesBuffer", ""),
-        size_t.const.p.IN("samplesSizes", ""),
-        AutoSize("samplesSizes")..unsigned_int.IN("nbSamples", ""),
-        ZDICT_cover_params_t.p.IN("parameters", ""),
+        )..void.const.p("samplesBuffer", ""),
+        size_t.const.p("samplesSizes", ""),
+        AutoSize("samplesSizes")..unsigned_int("nbSamples", ""),
+        ZDICT_cover_params_t.p("parameters", ""),
 
         returnDoc =
         """
@@ -179,13 +179,13 @@ ENABLE_WARNINGS()""")
         """,
 
         void.p.OUT("dictBuffer", ""),
-        AutoSize("dictBuffer")..size_t.IN("dictBufferCapacity", ""),
+        AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
         Check(
             "getSamplesBufferSize(samplesSizes)", debug = true
-        )..void.const.p.IN("samplesBuffer", ""),
-        size_t.const.p.IN("samplesSizes", ""),
-        AutoSize("samplesSizes")..unsigned.IN("nbSamples", ""),
-        ZDICT_fastCover_params_t.IN("parameters", ""),
+        )..void.const.p("samplesBuffer", ""),
+        size_t.const.p("samplesSizes", ""),
+        AutoSize("samplesSizes")..unsigned("nbSamples", ""),
+        ZDICT_fastCover_params_t("parameters", ""),
 
         returnDoc = "size of dictionary stored into {@code dictBuffer} (&le; {@code dictBufferCapacity}) or an error code, which can be tested with #isError()."
     )
@@ -212,12 +212,12 @@ ENABLE_WARNINGS()""")
         """,
 
         void.p.OUT("dictBuffer", ""),
-        AutoSize("dictBuffer")..size_t.IN("dictBufferCapacity", ""),
+        AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
         Check(
             "getSamplesBufferSize(samplesSizes)", debug = true
-        )..void.const.p.IN("samplesBuffer", ""),
-        size_t.const.p.IN("samplesSizes", ""),
-        AutoSize("samplesSizes")..unsigned_int.IN("nbSamples", ""),
+        )..void.const.p("samplesBuffer", ""),
+        size_t.const.p("samplesSizes", ""),
+        AutoSize("samplesSizes")..unsigned_int("nbSamples", ""),
         ZDICT_fastCover_params_t.p.OUT("parameters", ""),
 
         returnDoc =
@@ -245,15 +245,15 @@ ENABLE_WARNINGS()""")
         """,
 
         void.p.OUT("dictBuffer", ""),
-        AutoSize("dictBuffer")..size_t.IN("dictBufferCapacity", ""),
-        void.const.p.IN("dictContent", ""),
-        AutoSize("dictContent")..size_t.IN("dictContentSize", ""),
+        AutoSize("dictBuffer")..size_t("dictBufferCapacity", ""),
+        void.const.p("dictContent", ""),
+        AutoSize("dictContent")..size_t("dictContentSize", ""),
         Check(
             "getSamplesBufferSize(samplesSizes)", debug = true
-        )..void.const.p.IN("samplesBuffer", ""),
-        size_t.const.p.IN("samplesSizes", ""),
-        AutoSize("samplesSizes")..unsigned_int.IN("nbSamples", ""),
-        ZDICT_params_t.IN("parameters", ""),
+        )..void.const.p("samplesBuffer", ""),
+        size_t.const.p("samplesSizes", ""),
+        AutoSize("samplesSizes")..unsigned_int("nbSamples", ""),
+        ZDICT_params_t("parameters", ""),
 
         returnDoc = "size of dictionary stored into {@code dictBuffer} (&le; {@code dictBufferCapacity}) or an error code, which can be tested with #isError()."
     )

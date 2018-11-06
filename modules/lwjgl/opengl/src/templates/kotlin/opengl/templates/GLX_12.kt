@@ -6,6 +6,7 @@ package opengl.templates
 
 import opengl.*
 import core.linux.*
+import org.lwjgl.generator.*
 
 val GLX12 = "GLX12".nativeClassGLX("GLX12") {
     extends = GLX11
@@ -13,6 +14,7 @@ val GLX12 = "GLX12".nativeClassGLX("GLX12") {
 
     Display.p(
         "GetCurrentDisplay",
-        "Returns the display associated with the current context and drawable."
+        "Returns the display associated with the current context and drawable.",
+        void()
     )
 }

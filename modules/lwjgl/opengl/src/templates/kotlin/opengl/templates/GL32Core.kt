@@ -56,8 +56,8 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "GetBufferParameteri64v",
         "Returns the value of a buffer object parameter.",
 
-        GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-        GLenum.IN("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
+        GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+        GLenum("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
         Check(1)..ReturnParam..GLint64.p.OUT("params", "the requested parameter")
     )
 
@@ -67,48 +67,48 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "DrawElementsBaseVertex",
         "Renders primitives from array data with a per-element offset.",
 
-        GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
+        GLenum("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
+        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei("count", "the number of elements to be rendered"),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum(
             "type",
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
-        GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", "a pointer to the location where the indices are stored"),
+        GLint("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
     )
 
     void(
         "DrawRangeElementsBaseVertex",
         "Renders primitives from array data with a per-element offset.",
 
-        GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-        GLuint.IN("start", "the minimum array index contained in {@code indices}"),
-        GLuint.IN("end", "the maximum array index contained in {@code indices}"),
-        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
+        GLenum("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
+        GLuint("start", "the minimum array index contained in {@code indices}"),
+        GLuint("end", "the maximum array index contained in {@code indices}"),
+        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei("count", "the number of elements to be rendered"),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum(
             "type",
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
-        GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", "a pointer to the location where the indices are stored"),
+        GLint("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
     )
 
     void(
         "DrawElementsInstancedBaseVertex",
         "Renders multiple instances of a set of primitives from array data with a per-element offset.",
 
-        GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
+        GLenum("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
+        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei("count", "the number of elements to be rendered"),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum(
             "type",
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
-        GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
-        GLint.IN("basevertex", "a constant that should be added to each element of indices when chosing elements from the enabled vertex arrays")
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", "a pointer to the location where the indices are stored"),
+        GLsizei("primcount", "the number of instances of the indexed geometry that should be drawn"),
+        GLint("basevertex", "a constant that should be added to each element of indices when chosing elements from the enabled vertex arrays")
     )
 
     void(
@@ -119,12 +119,12 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         <b>LWJGL note</b>: Use org.lwjgl.system.MemoryUtil#memAddress() to retrieve pointers to the index buffers.
         """,
 
-        GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-        GLsizei.const.p.IN("count", "an array of the elements counts"),
-        GLenum.IN("type", "the type of the values in {@code indices}", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
-        void.const.p.p.IN("indices", "a pointer to the location where the indices are stored"),
-        AutoSize("count", "indices", "basevertex")..GLsizei.IN("primcount", "the size of the {@code count} array"),
-        GLint.p.IN("basevertex", "a pointer to the location where the base vertices are stored")
+        GLenum("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
+        GLsizei.const.p("count", "an array of the elements counts"),
+        GLenum("type", "the type of the values in {@code indices}", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
+        void.const.p.p("indices", "a pointer to the location where the indices are stored"),
+        AutoSize("count", "indices", "basevertex")..GLsizei("primcount", "the size of the {@code count} array"),
+        GLint.p("basevertex", "a pointer to the location where the base vertices are stored")
     )
 
     // ARB_provoking_vertex
@@ -147,7 +147,7 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "ProvokingVertex",
         "Specifies the vertex to be used as the source of data for flat shaded varyings.",
 
-        GLenum.IN("mode", "the provoking vertex mode", ProvokingVertexModes)
+        GLenum("mode", "the provoking vertex mode", ProvokingVertexModes)
     )
 
     // ARB_seamless_cube_map
@@ -241,18 +241,18 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "TexImage2DMultisample",
         "Establishes the data storage, format, dimensions, and number of samples of a 2D multisample texture's image.",
 
-        GLenum.IN("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE #PROXY_TEXTURE_2D_MULTISAMPLE"),
-        GLsizei.IN("samples", "the number of samples in the multisample texture's image"),
-        GLint.IN(
+        GLenum("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE #PROXY_TEXTURE_2D_MULTISAMPLE"),
+        GLsizei("samples", "the number of samples in the multisample texture's image"),
+        GLint(
             "internalformat",
             """
             the internal format to be used to store the multisample texture's image. {@code internalformat} must specify a color-renderable, depth-renderable,
             or stencil-renderable format.
             """
         ),
-        GLsizei.IN("width", "the width of the multisample texture's image, in texels"),
-        GLsizei.IN("height", "the height of the multisample texture's image, in texels"),
-        GLboolean.IN(
+        GLsizei("width", "the width of the multisample texture's image, in texels"),
+        GLsizei("height", "the height of the multisample texture's image, in texels"),
+        GLboolean(
             "fixedsamplelocations",
             """
             whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
@@ -265,19 +265,19 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "TexImage3DMultisample",
         "Establishes the data storage, format, dimensions, and number of samples of a 3D multisample texture's image.",
 
-        GLenum.IN("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE_ARRAY #PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY"),
-        GLsizei.IN("samples", "the number of samples in the multisample texture's image"),
-        GLint.IN(
+        GLenum("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE_ARRAY #PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY"),
+        GLsizei("samples", "the number of samples in the multisample texture's image"),
+        GLint(
             "internalformat",
             """
             the internal format to be used to store the multisample texture's image. {@code internalformat} must specify a color-renderable, depth-renderable,
             or stencil-renderable format.
             """
         ),
-        GLsizei.IN("width", "the width of the multisample texture's image, in texels"),
-        GLsizei.IN("height", "the height of the multisample texture's image, in texels"),
-        GLsizei.IN("depth", "the depth of the multisample texture's image, in texels"),
-        GLboolean.IN(
+        GLsizei("width", "the width of the multisample texture's image, in texels"),
+        GLsizei("height", "the height of the multisample texture's image, in texels"),
+        GLsizei("depth", "the depth of the multisample texture's image, in texels"),
+        GLboolean(
             "fixedsamplelocations",
             """
             whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
@@ -290,8 +290,8 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "GetMultisamplefv",
         "Retrieves the location of a sample.",
 
-        GLenum.IN("pname", "the sample parameter name", "#SAMPLE_POSITION"),
-        GLuint.IN("index", "the index of the sample whose position to query"),
+        GLenum("pname", "the sample parameter name", "#SAMPLE_POSITION"),
+        GLuint("index", "the index of the sample whose position to query"),
         Check(1)..ReturnParam..GLfloat.p.OUT("val", "an array to receive the position of the sample")
     )
 
@@ -299,8 +299,8 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "SampleMaski",
         "Sets the value of a sub-word of the sample mask.",
 
-        GLuint.IN("index", "which 32-bit sub-word of the sample mask to update"),
-        GLbitfield.IN("mask", "the new value of the mask sub-word")
+        GLuint("index", "which 32-bit sub-word of the sample mask to update"),
+        GLbitfield("mask", "the new value of the mask sub-word")
     )
 
     // ARB_depth_clamp
@@ -373,10 +373,10 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "FramebufferTexture",
         "Attaches a level of a texture object as a logical buffer to the currently bound framebuffer object.",
 
-        GLenum.IN("target", "the framebuffer target", "#FRAMEBUFFER #READ_FRAMEBUFFER #DRAW_FRAMEBUFFER"),
-        GLenum.IN("attachment", "the attachment point of the framebuffer"),
-        GLuint.IN("texture", "the texture object to attach to the framebuffer attachment point named by {@code attachment}"),
-        GLint.IN("level", "the mipmap level of {@code texture} to attach")
+        GLenum("target", "the framebuffer target", "#FRAMEBUFFER #READ_FRAMEBUFFER #DRAW_FRAMEBUFFER"),
+        GLenum("attachment", "the attachment point of the framebuffer"),
+        GLuint("texture", "the texture object to attach to the framebuffer attachment point named by {@code attachment}"),
+        GLint("level", "the mipmap level of {@code texture} to attach")
     )
 
     // ARB_sync
@@ -440,8 +440,8 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "FenceSync",
         "Creates a new sync object and inserts it into the GL command stream.",
 
-        GLenum.IN("condition", "the condition that must be met to set the sync object's state to signaled", "#SYNC_GPU_COMMANDS_COMPLETE"),
-        GLbitfield.IN(
+        GLenum("condition", "the condition that must be met to set the sync object's state to signaled", "#SYNC_GPU_COMMANDS_COMPLETE"),
+        GLbitfield(
             "flags",
             """
             a bitwise combination of flags controlling the behavior of the sync object. No flags are presently defined for this operation and {@code flags} must
@@ -454,14 +454,14 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "IsSync",
         "Determines if a name corresponds to a sync object.",
 
-        GLsync.IN("sync", "a value that may be the name of a sync object")
+        GLsync("sync", "a value that may be the name of a sync object")
     )
 
     void(
         "DeleteSync",
         "Deletes a sync object.",
 
-        GLsync.IN("sync", "the sync object to be deleted")
+        GLsync("sync", "the sync object to be deleted")
     )
 
     GLenum(
@@ -479,9 +479,9 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         )}
         """,
 
-        GLsync.IN("sync", "the sync object whose status to wait on"),
-        GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0 #SYNC_FLUSH_COMMANDS_BIT", LinkMode.BITFIELD),
-        GLuint64.IN("timeout", "the timeout, specified in nanoseconds, for which the implementation should wait for {@code sync} to become signaled")
+        GLsync("sync", "the sync object whose status to wait on"),
+        GLbitfield("flags", "a bitfield controlling the command flushing behavior", "0 #SYNC_FLUSH_COMMANDS_BIT", LinkMode.BITFIELD),
+        GLuint64("timeout", "the timeout, specified in nanoseconds, for which the implementation should wait for {@code sync} to become signaled")
     )
 
     void(
@@ -496,16 +496,16 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         If an error occurs, {@code glWaitSync} does not cause the GL server to block.
         """,
 
-        GLsync.IN("sync", "the sync object whose status to wait on"),
-        GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0"),
-        GLuint64.IN("timeout", "the timeout that the server should wait before continuing", "#TIMEOUT_IGNORED")
+        GLsync("sync", "the sync object whose status to wait on"),
+        GLbitfield("flags", "a bitfield controlling the command flushing behavior", "0"),
+        GLuint64("timeout", "the timeout that the server should wait before continuing", "#TIMEOUT_IGNORED")
     )
 
     void(
         "GetInteger64v",
         "Returns the 64bit integer value or values of a selected parameter.",
 
-        GLenum.IN("pname", "the parameter value to be returned"),
+        GLenum("pname", "the parameter value to be returned"),
         Check(1)..ReturnParam..GLint64.p.OUT("params", "the value or values of the specified parameter")
     )
 
@@ -513,8 +513,8 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "GetInteger64i_v",
         "Queries the 64bit integer value of an indexed state variable.",
 
-        GLenum.IN("pname", "the indexed state to query"),
-        GLuint.IN("index", "the index of the element being queried"),
+        GLenum("pname", "the indexed state to query"),
+        GLuint("index", "the index of the element being queried"),
         Check(1)..ReturnParam..GLint64.p.OUT("params", "the value or values of the specified parameter")
     )
 
@@ -522,9 +522,9 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
         "GetSynciv",
         "Queries the properties of a sync object.",
 
-        GLsync.IN("sync", "the sync object whose properties to query"),
-        GLenum.IN("pname", "the parameter whose value to retrieve from the sync object specified in {@code sync}", SyncProperties),
-        AutoSize("values")..GLsizei.IN("bufSize", "the size of the buffer whose address is given in {@code values}"),
+        GLsync("sync", "the sync object whose properties to query"),
+        GLenum("pname", "the parameter whose value to retrieve from the sync object specified in {@code sync}", SyncProperties),
+        AutoSize("values")..GLsizei("bufSize", "the size of the buffer whose address is given in {@code values}"),
         Check(1)..nullable..GLsizei.p.OUT("length", "the address of an variable to receive the number of integers placed in {@code values}"),
         ReturnParam..GLint.p.OUT("values", "the address of an array to receive the values of the queried parameter")
     )

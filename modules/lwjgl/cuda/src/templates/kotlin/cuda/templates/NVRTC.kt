@@ -36,7 +36,7 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "GetErrorString",
         "",
 
-        nvrtcResult.IN("result", "")
+        nvrtcResult("result", "")
     )
 
     nvrtcResult(
@@ -52,34 +52,34 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "",
 
         Check(1)..nvrtcProgram.p.OUT("prog", ""),
-        charASCII.const.p.IN("src", ""),
-        nullable..charASCII.const.p.IN("name", ""),
-        AutoSize("headers", "includeNames")..int.IN("numHeaders", ""),
-        nullable..char.const.p.const.p.IN("headers", ""),
-        nullable..char.const.p.const.p.IN("includeNames", "")
+        charASCII.const.p("src", ""),
+        nullable..charASCII.const.p("name", ""),
+        AutoSize("headers", "includeNames")..int("numHeaders", ""),
+        nullable..char.const.p.const.p("headers", ""),
+        nullable..char.const.p.const.p("includeNames", "")
     )
 
     nvrtcResult(
         "DestroyProgram",
         "",
 
-        Check(1)..nvrtcProgram.p.IN("prog", "")
+        Check(1)..nvrtcProgram.p("prog", "")
     )
 
     nvrtcResult(
         "CompileProgram",
         "",
 
-        nvrtcProgram.IN("prog", ""),
-        AutoSize("options")..int.IN("numOptions", ""),
-        nullable..charASCII.const.p.const.p.IN("options", "")
+        nvrtcProgram("prog", ""),
+        AutoSize("options")..int("numOptions", ""),
+        nullable..charASCII.const.p.const.p("options", "")
     )
 
     nvrtcResult(
         "GetPTXSize",
         "",
 
-        nvrtcProgram.IN("prog", ""),
+        nvrtcProgram("prog", ""),
         Check(1)..size_t.p.OUT("ptxSizeRet", "")
     )
 
@@ -87,7 +87,7 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "GetPTX",
         "",
 
-        nvrtcProgram.IN("prog", ""),
+        nvrtcProgram("prog", ""),
         charASCII.p.OUT("ptx", "")
     )
 
@@ -95,7 +95,7 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "GetProgramLogSize",
         "",
 
-        nvrtcProgram.IN("prog", ""),
+        nvrtcProgram("prog", ""),
         Check(1)..size_t.p.OUT("logSizeRet", "")
     )
 
@@ -103,7 +103,7 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "GetProgramLog",
         "",
 
-        nvrtcProgram.IN("prog", ""),
+        nvrtcProgram("prog", ""),
         charASCII.p.OUT("log", "")
     )
 
@@ -111,16 +111,16 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "AddNameExpression",
         "",
 
-        nvrtcProgram.IN("prog", ""),
-        charASCII.const.p.const.IN("name_expression", "")
+        nvrtcProgram("prog", ""),
+        charASCII.const.p.const("name_expression", "")
     )
 
     nvrtcResult(
         "GetLoweredName",
         "",
 
-        nvrtcProgram.IN("prog", ""),
-        charASCII.const.p.const.IN("name_expression", ""),
-        Check(1)..charASCII.const.p.p.IN("lowered_name", "")
+        nvrtcProgram("prog", ""),
+        charASCII.const.p.const("name_expression", ""),
+        Check(1)..charASCII.const.p.p("lowered_name", "")
     )
 }

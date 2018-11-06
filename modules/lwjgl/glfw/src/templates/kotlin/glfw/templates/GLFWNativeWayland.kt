@@ -30,7 +30,7 @@ val GLFWNativeWayland = "GLFWNativeWayland".nativeClass(Module.GLFW, nativeSubPa
         This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWmonitor.p.IN("monitor", ""),
+        GLFWmonitor.p("monitor", ""),
         returnDoc = "the {@code struct wl_output*} of the specified monitor, or #NULL if an error occurred.",
         since = "version 3.2"
     )
@@ -43,7 +43,7 @@ val GLFWNativeWayland = "GLFWNativeWayland".nativeClass(Module.GLFW, nativeSubPa
         This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWwindow.p.IN("window", ""),
+        GLFWwindow.p("window", ""),
         returnDoc = "the main {@code struct wl_surface*} of the specified window, or #NULL if an error occurred.",
         since = "version 3.2"
     )

@@ -44,8 +44,8 @@ val ARB_draw_buffers = "ARBDrawBuffers".nativeClassGL("ARB_draw_buffers", postfi
         "DrawBuffersARB",
         "Defines the draw buffers to which all output colors are written.",
 
-        AutoSize("bufs")..GLsizei.IN("n", "the number of buffers in {@code bufs}"),
-        GLenum.const.p.IN(
+        AutoSize("bufs")..GLsizei("n", "the number of buffers in {@code bufs}"),
+        GLenum.const.p(
             "bufs",
             "a buffer of symbolic constants specifying the buffer to which each output color is written",
             """

@@ -95,9 +95,9 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
         """,
 
         DISPLAY,
-        GLXDrawable.IN("drawable", "the drawable"),
-        int.IN("buffer", "the buffer"),
-        nullable..NullTerminated..int.const.p.IN("attrib_list", "an optional null-terminated list of attributes")
+        GLXDrawable("drawable", "the drawable"),
+        int("buffer", "the buffer"),
+        nullable..NullTerminated..int.const.p("attrib_list", "an optional null-terminated list of attributes")
     )
 
     void(
@@ -105,8 +105,8 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
         "Releases a color buffer that is being used as a texture.",
 
         DISPLAY,
-        GLXDrawable.IN("drawable", "the drawable"),
-        int.IN("buffer", "the buffer")
+        GLXDrawable("drawable", "the drawable"),
+        int("buffer", "the buffer")
     )
 
 }

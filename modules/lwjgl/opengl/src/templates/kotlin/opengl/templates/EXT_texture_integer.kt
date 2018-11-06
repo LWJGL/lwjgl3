@@ -111,46 +111,46 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
         "ClearColorIiEXT",
         "",
 
-        GLint.IN("r", ""),
-        GLint.IN("g", ""),
-        GLint.IN("b", ""),
-        GLint.IN("a", "")
+        GLint("r", ""),
+        GLint("g", ""),
+        GLint("b", ""),
+        GLint("a", "")
     )
 
     void(
         "ClearColorIuiEXT",
         "",
 
-        GLuint.IN("r", ""),
-        GLuint.IN("g", ""),
-        GLuint.IN("b", ""),
-        GLuint.IN("a", "")
+        GLuint("r", ""),
+        GLuint("g", ""),
+        GLuint("b", ""),
+        GLuint("a", "")
     )
 
     void(
         "TexParameterIivEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
-        Check(1)..SingleValue("param")..GLint.p.IN("params", "")
+        GLenum("target", ""),
+        GLenum("pname", ""),
+        Check(1)..SingleValue("param")..GLint.p("params", "")
     )
 
     void(
         "TexParameterIuivEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
-        Check(1)..SingleValue("param")..GLuint.p.IN("params", "")
+        GLenum("target", ""),
+        GLenum("pname", ""),
+        Check(1)..SingleValue("param")..GLuint.p("params", "")
     )
 
     void(
         "GetTexParameterIivEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         Check(1)..ReturnParam..GLint.p.OUT("params", "")
     )
 
@@ -158,8 +158,8 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
         "GetTexParameterIuivEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         Check(1)..ReturnParam..GLuint.p.OUT("params", "")
     )
 }

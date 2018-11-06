@@ -48,10 +48,10 @@ val NV_viewport_swizzle = "NVViewportSwizzle".nativeClassGLES("NV_viewport_swizz
         "ViewportSwizzleNV",
         "Sets the swizzle state for the specified viewport.",
 
-        GLuint.IN("index", "the viewport index"),
-        GLenum.IN("swizzlex", "the x swizzle state", SwizzleStates),
-        GLenum.IN("swizzley", "the y swizzle state", SwizzleStates),
-        GLenum.IN("swizzlez", "the z swizzle state", SwizzleStates),
-        GLenum.IN("swizzlew", "the w swizzle state", SwizzleStates)
+        GLuint("index", "the viewport index"),
+        GLenum("swizzlex", "the x swizzle state", SwizzleStates),
+        GLenum("swizzley", "the y swizzle state", SwizzleStates),
+        GLenum("swizzlez", "the z swizzle state", SwizzleStates),
+        GLenum("swizzlew", "the w swizzle state", SwizzleStates)
     )
 }

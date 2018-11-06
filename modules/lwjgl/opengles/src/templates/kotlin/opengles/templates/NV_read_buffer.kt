@@ -32,7 +32,7 @@ val NV_read_buffer = "NVReadBuffer".nativeClassGLES("NV_read_buffer", postfix = 
         "ReadBufferNV",
         "",
 
-        GLenum.IN("mode", "")
+        GLenum("mode", "")
     )
 }
 

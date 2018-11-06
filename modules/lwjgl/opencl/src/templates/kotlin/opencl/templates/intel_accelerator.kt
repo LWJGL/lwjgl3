@@ -60,16 +60,16 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
         document.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context"),
-        cl_accelerator_type_intel.IN(
+        cl_context("context", "a valid OpenCL context"),
+        cl_accelerator_type_intel(
             "accelerator_type",
             """
             specifies the type of accelerator object created. The type constants are defined by acceleration engine-specific extensions. It is encouraged that
             extensions follow the naming scheme of CL_ACCELERATOR_TYPE_{name}_INTEL where {name} is a descriptive acceleration engine string.
             """
         ),
-        AutoSize("descriptor")..size_t.IN("descriptor_size", "a value which specifies of the size, in bytes, of the immediately following descriptor structure"),
-        void.const.p.IN(
+        AutoSize("descriptor")..size_t("descriptor_size", "a value which specifies of the size, in bytes, of the immediately following descriptor structure"),
+        void.const.p(
             "descriptor",
             """
             a pointer to a structure that defines the parameter set of the accelerator object. This parameter set describes the configurable state of the
@@ -103,7 +103,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
         "RetainAcceleratorINTEL",
         "Increments the accelerator reference count. #CreateAcceleratorINTEL() does an implicit retain.",
 
-        cl_accelerator_intel.IN("accelerator", "a valid accelerator object"),
+        cl_accelerator_intel("accelerator", "a valid accelerator object"),
 
         returnDoc =
         """
@@ -123,7 +123,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
         on a command-queue(s) that reference accelerator have finished.
         """,
 
-        cl_accelerator_intel.IN("accelerator", "a valid accelerator object"),
+        cl_accelerator_intel("accelerator", "a valid accelerator object"),
 
         returnDoc =
         """
@@ -140,8 +140,8 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
         "GetAcceleratorInfoINTEL",
         "Returns information about the accelerator object.",
 
-        cl_accelerator_intel.IN("accelerator", "the accelerator object being queried"),
-        cl_accelerator_info_intel.IN("param_name", "the information to query", AcceleratorInfo),
+        cl_accelerator_intel("accelerator", "the accelerator object being queried"),
+        cl_accelerator_info_intel("param_name", "the information to query", AcceleratorInfo),
         PARAM_VALUE_SIZE,
         MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void.p.OUT("param_value", param_value),
         PARAM_VALUE_SIZE_RET,

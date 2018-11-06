@@ -54,8 +54,8 @@ val intel_subgroups = "INTELSubgroups".nativeClassCL("intel_subgroups", INTEL) {
         "GetKernelSubGroupInfoKHR",
         "Returns information about a kernel object.",
 
-        cl_kernel.IN("kernel", "the kernel object being queried"),
-        nullable..cl_device_id.IN(
+        cl_kernel("kernel", "the kernel object being queried"),
+        nullable..cl_device_id(
             "device",
             """
             identifies a specific device in the list of devices associated with {@code kernel}. The list of devices is the list of devices in the OpenCL
@@ -63,12 +63,12 @@ val intel_subgroups = "INTELSubgroups".nativeClassCL("intel_subgroups", INTEL) {
             #NULL value.
             """
         ),
-        cl_kernel_sub_group_info.IN("param_name", "specifies the information to query", KernalSubGroupInfo),
-        AutoSize("input_value")..size_t.IN(
+        cl_kernel_sub_group_info("param_name", "specifies the information to query", KernalSubGroupInfo),
+        AutoSize("input_value")..size_t(
             "input_value_size",
             "specifies the size in bytes of memory pointed to by {@code input_value}. This size must be equal to the size of the input type."
         ),
-        void.const.p.IN(
+        void.const.p(
             "input_value",
             "a pointer to memory where the appropriate parameterization of the query is passed from. If {@code input_value} is #NULL it is ignored."
         ),

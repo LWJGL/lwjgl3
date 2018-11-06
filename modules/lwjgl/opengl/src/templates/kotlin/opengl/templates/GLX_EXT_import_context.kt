@@ -28,7 +28,8 @@ val GLX_EXT_import_context = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_impor
 
     Display.p(
         "GetCurrentDisplayEXT",
-        "Returns the display associated with the current context."
+        "Returns the display associated with the current context.",
+        void()
     )
 
     int(
@@ -36,8 +37,8 @@ val GLX_EXT_import_context = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_impor
         "Obtains the value of a context's attribute.",
 
         DISPLAY,
-        GLXContext.IN("context", "the context being queried"),
-        int.IN("attribute", "the attribute to query"),
+        GLXContext("context", "the context being queried"),
+        int("attribute", "the attribute to query"),
         Check(1)..int.p.OUT("value", "returns the attribute value")
     )
 
@@ -45,7 +46,7 @@ val GLX_EXT_import_context = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_impor
         "GetContextIDEXT",
         "Returns the XID of a GLXContext.",
 
-        GLXContext.const.IN("context", "the context")
+        GLXContext.const("context", "the context")
     )
 
     GLXContext(
@@ -53,7 +54,7 @@ val GLX_EXT_import_context = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_impor
         "May be used in place of glXCreateContext to share another process's indirect rendering context.",
 
         DISPLAY,
-        GLXContextID.IN("contextID", "the context XID")
+        GLXContextID("contextID", "the context XID")
     )
 
     void(
@@ -61,7 +62,7 @@ val GLX_EXT_import_context = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_impor
         "Frees the client-side part of a GLXContext that was created  with #ImportContextEXT().",
 
         DISPLAY,
-        GLXContext.IN("context", "the context to free")
+        GLXContext("context", "the context to free")
     )
 
 }

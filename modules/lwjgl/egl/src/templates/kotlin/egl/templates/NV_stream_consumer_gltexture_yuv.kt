@@ -47,8 +47,8 @@ val NV_stream_consumer_gltexture_yuv = "NVStreamConsumerGLTextureYUV".nativeClas
         "StreamConsumerGLTextureExternalAttribsNV",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLStreamKHR.IN("stream", ""),
-        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLStreamKHR("stream", ""),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
     )
 }

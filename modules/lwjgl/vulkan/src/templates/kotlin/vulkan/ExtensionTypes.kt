@@ -122,14 +122,14 @@ val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
         "VkDebugReportCallbackEXT",
         "Application-defined debug report callback function.",
 
-        VkDebugReportFlagsEXT.IN("flags", "specifies the {@code VkDebugReportFlagBitsEXT} that triggered this callback."),
-        VkDebugReportObjectTypeEXT.IN("objectType", "a {@code VkDebugReportObjectTypeEXT} value specifying the type of object being used or created at the time the event was triggered."),
-        uint64_t.IN("object", "the object where the issue was detected. If {@code objectType} is #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT, {@code object} is undefined."),
-        size_t.IN("location", "a component (layer, driver, loader) defined value that specifies the <em>location</em> of the trigger. This is an optional: value."),
-        int32_t.IN("messageCode", "a layer-defined value indicating what test triggered this callback."),
-        char.const.p.IN("pLayerPrefix", "a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
-        char.const.p.IN("pMessage", "a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback."),
-        opaque_p.IN("pUserData", "the user data given when the {@code VkDebugReportCallbackEXT} was created."),
+        VkDebugReportFlagsEXT("flags", "specifies the {@code VkDebugReportFlagBitsEXT} that triggered this callback."),
+        VkDebugReportObjectTypeEXT("objectType", "a {@code VkDebugReportObjectTypeEXT} value specifying the type of object being used or created at the time the event was triggered."),
+        uint64_t("object", "the object where the issue was detected. If {@code objectType} is #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT, {@code object} is undefined."),
+        size_t("location", "a component (layer, driver, loader) defined value that specifies the <em>location</em> of the trigger. This is an optional: value."),
+        int32_t("messageCode", "a layer-defined value indicating what test triggered this callback."),
+        char.const.p("pLayerPrefix", "a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback."),
+        char.const.p("pMessage", "a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback."),
+        opaque_p("pUserData", "the user data given when the {@code VkDebugReportCallbackEXT} was created."),
 
         nativeType = "PFN_vkDebugReportCallbackEXT"
     ) {
@@ -170,10 +170,10 @@ val PFN_vkDebugUtilsMessengerCallbackEXT = Module.VULKAN.callback {
         "VkDebugUtilsMessengerCallbackEXT",
         "Application-defined debug messenger callback function.",
 
-        VkDebugUtilsMessageSeverityFlagBitsEXT.IN("messageSeverity", "specifies the {@code VkDebugUtilsMessageSeverityFlagBitsEXT} that triggered this callback."),
-        VkDebugUtilsMessageTypeFlagsEXT.IN("messageTypes", "a bitmask of {@code VkDebugUtilsMessageTypeFlagBitsEXT} specifying which type of event(s) triggered this callback."),
-        _VkDebugUtilsMessengerCallbackDataEXT.const.p.IN("pCallbackData", "contains all the callback related data in the ##VkDebugUtilsMessengerCallbackDataEXT structure."),
-        opaque_p.IN("pUserData", "the user data provided when the {@code VkDebugUtilsMessengerEXT} was created."),
+        VkDebugUtilsMessageSeverityFlagBitsEXT("messageSeverity", "specifies the {@code VkDebugUtilsMessageSeverityFlagBitsEXT} that triggered this callback."),
+        VkDebugUtilsMessageTypeFlagsEXT("messageTypes", "a bitmask of {@code VkDebugUtilsMessageTypeFlagBitsEXT} specifying which type of event(s) triggered this callback."),
+        _VkDebugUtilsMessengerCallbackDataEXT.const.p("pCallbackData", "contains all the callback related data in the ##VkDebugUtilsMessengerCallbackDataEXT structure."),
+        opaque_p("pUserData", "the user data provided when the {@code VkDebugUtilsMessengerEXT} was created."),
 
         nativeType = "PFN_vkDebugUtilsMessengerCallbackEXT"
     ) {

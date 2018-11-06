@@ -33,23 +33,23 @@ val NV_draw_instanced = "NVDrawInstanced".nativeClassGLES("NV_draw_instanced", p
         "DrawArraysInstancedNV",
         "",
 
-        GLenum.IN("mode", ""),
-        GLint.IN("first", ""),
-        GLsizei.IN("count", ""),
-        GLsizei.IN("primcount", "")
+        GLenum("mode", ""),
+        GLint("first", ""),
+        GLsizei("count", ""),
+        GLsizei("primcount", "")
     )
 
     void(
         "DrawElementsInstancedNV",
         "",
 
-        GLenum.IN("mode", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
+        GLenum("mode", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum(
             "type",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
-        GLsizei.IN("primcount", "")
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        GLsizei("primcount", "")
     )
 }

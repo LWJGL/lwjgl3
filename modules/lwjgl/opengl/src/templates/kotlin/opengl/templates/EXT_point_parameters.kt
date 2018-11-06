@@ -63,15 +63,15 @@ alpha(Pe) = Alpha * factor(Pe)""")}
         "PointParameterfEXT",
         "",
 
-        GLenum.IN("pname", ""),
-        GLfloat.IN("param", "")
+        GLenum("pname", ""),
+        GLfloat("param", "")
     )
 
     void(
         "PointParameterfvEXT",
         "",
 
-        GLenum.IN("pname", ""),
-        Check(1)..GLfloat.const.p.IN("params", "")
+        GLenum("pname", ""),
+        Check(1)..GLfloat.const.p("params", "")
     )
 }

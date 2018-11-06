@@ -84,7 +84,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         "Converts a ##Method or ##Constructor object to a method ID.",
 
         JNI_ENV,
-        java_lang_reflect_Method.IN("method", "")
+        java_lang_reflect_Method("method", "")
     )
 
     jfieldID(
@@ -92,7 +92,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         "Converts a ##Field to a field ID.",
 
         JNI_ENV,
-        java_lang_reflect_Field.IN("field", "")
+        java_lang_reflect_Field("field", "")
     )
 
     java_lang_reflect_Method(
@@ -100,9 +100,9 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         "Converts a method ID derived from {@code cls} to a ##Method or ##Constructor object.",
 
         JNI_ENV,
-        jclass.IN("cls", ""),
-        jmethodID.IN("methodID", ""),
-        jboolean.IN("isStatic", "must be set to #TRUE if the method ID refers to a static field, and # FALSE otherwise")
+        jclass("cls", ""),
+        jmethodID("methodID", ""),
+        jboolean("isStatic", "must be set to #TRUE if the method ID refers to a static field, and # FALSE otherwise")
     )
 
     java_lang_reflect_Field(
@@ -110,9 +110,9 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         "Converts a field ID derived from {@code cls} to a ##Field object.",
 
         JNI_ENV,
-        jclass.IN("cls", ""),
-        jfieldID.IN("fieldID", ""),
-        jboolean.IN("isStatic", "must be set to #TRUE if {@code fieldID} refers to a static field, and #FALSE otherwise")
+        jclass("cls", ""),
+        jfieldID("fieldID", ""),
+        jboolean("isStatic", "must be set to #TRUE if {@code fieldID} refers to a static field, and #FALSE otherwise")
     )
 
     opaque_p(
@@ -123,7 +123,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         """,
 
         JNI_ENV,
-        jobject.IN("obj", "a global or local reference"),
+        jobject("obj", "a global or local reference"),
 
         returnDoc = "a global reference, or #NULL if the system runs out of memory"
     )
@@ -133,7 +133,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         "Deletes the global reference pointed to by {@code globalRef}.",
 
         JNI_ENV,
-        opaque_p.IN("globalRef", "a global reference")
+        opaque_p("globalRef", "a global reference")
     )
 
     fun ArrayElementsRoutines(name: String, elementType: PrimitiveType, arrayType: JObjectType) {
@@ -148,7 +148,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
             """,
 
             JNI_ENV,
-            AutoSizeResult("\$original.length")..arrayType.IN("array", "the primitive array"),
+            AutoSizeResult("\$original.length")..arrayType("array", "the primitive array"),
             Check(1)..nullable..jboolean.p.OUT("isCopy", "a pointer to a boolean"),
 
             returnDoc = "a pointer to the array elements, or #NULL if the operation fails"
@@ -173,9 +173,9 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
             """,
 
             JNI_ENV,
-            arrayType.IN("array", "a Java array object"),
-            Unsafe..elementType.p.IN("elems", "a pointer to array elements"),
-            jint.IN("mode", "the release mode", "0 #COMMIT #ABORT")
+            arrayType("array", "a Java array object"),
+            Unsafe..elementType.p("elems", "a pointer to array elements"),
+            jint("mode", "the release mode", "0 #COMMIT #ABORT")
         )
     }
 
@@ -194,9 +194,9 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
             "Copies a region of a primitive array into a buffer.",
 
             JNI_ENV,
-            arrayType.IN("array", "a Java array"),
-            jsize.IN("start", "the starting index"),
-            AutoSize("buf")..jsize.IN("len", "the number of elements to be copied"),
+            arrayType("array", "a Java array"),
+            jsize("start", "the starting index"),
+            AutoSize("buf")..jsize("len", "the number of elements to be copied"),
             elementType.p.OUT("buf", "the destination buffer")
         )
 
@@ -205,10 +205,10 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
             "Copies back a region of a primitive array from a buffer.",
 
             JNI_ENV,
-            arrayType.IN("array", "a Java array"),
-            jsize.IN("start", "the starting index"),
-            AutoSize("buf")..jsize.IN("len", "the number of elements to be copied"),
-            elementType.const.p.IN("buf", "the source buffer")
+            arrayType("array", "a Java array"),
+            jsize("start", "the starting index"),
+            AutoSize("buf")..jsize("len", "the number of elements to be copied"),
+            elementType.const.p("buf", "the source buffer")
         )
     }
 
@@ -230,9 +230,9 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         """,
 
         JNI_ENV,
-        jclass.IN("targetClass", ""),
-        JNINativeMethod.const.p.IN("methods", "the native methods in the class"),
-        AutoSize("methods")..jint.IN("nMethods", "the number of native methods in the class"),
+        jclass("targetClass", ""),
+        JNINativeMethod.const.p("methods", "the native methods in the class"),
+        AutoSize("methods")..jint("nMethods", "the number of native methods in the class"),
 
         returnDoc = "“0” on success; returns a negative value on failure"
     )
@@ -246,7 +246,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         """,
 
         JNI_ENV,
-        jclass.IN("targetClass", "a Java class object"),
+        jclass("targetClass", "a Java class object"),
 
         returnDoc = "“0” on success; returns a negative value on failure"
     )
@@ -267,9 +267,9 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         "Copies {@code len} number of Unicode characters beginning at offset {@code start} to the given buffer {@code buf}.",
 
         JNI_ENV,
-        jstring.IN("str", ""),
-        jsize.IN("start", ""),
-        AutoSize("buf")..jsize.IN("len", ""),
+        jstring("str", ""),
+        jsize("start", ""),
+        AutoSize("buf")..jsize("len", ""),
         jchar.p.OUT("buf", "")
     )
 
@@ -281,9 +281,9 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         """,
 
         JNI_ENV,
-        jstring.IN("str", ""),
-        jsize.IN("start", ""),
-        jsize.IN("len", ""),
+        jstring("str", ""),
+        jsize("start", ""),
+        jsize("len", ""),
         Check("len")..char.p.OUT("buf", "")
     )
 
@@ -295,7 +295,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         """,
 
         JNI_ENV,
-        jobject.IN("obj", "")
+        jobject("obj", "")
     )
 
     void(
@@ -303,7 +303,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         "Delete the VM resources needed for the given weak global reference.",
 
         JNI_ENV,
-        opaque_p.IN("weakGlobalRef", "")
+        opaque_p("weakGlobalRef", "")
     )
 
     java_nio_ByteBuffer(
@@ -318,8 +318,8 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         """,
 
         JNI_ENV,
-        opaque_p.IN("address", "the starting address of the memory region (must not be #NULL)"),
-        jlong.IN("capacity", "the size in bytes of the memory region (must be positive)"),
+        opaque_p("address", "the starting address of the memory region (must not be #NULL)"),
+        jlong("capacity", "the size in bytes of the memory region (must be positive)"),
 
         returnDoc =
         """
@@ -337,7 +337,7 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         """,
 
         JNI_ENV,
-        java_nio_Buffer.IN("buf", "a direct {@code java.nio.Buffer} object (must not be #NULL)"),
+        java_nio_Buffer("buf", "a direct {@code java.nio.Buffer} object (must not be #NULL)"),
 
         returnDoc =
         """
@@ -354,6 +354,6 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         """,
 
         JNI_ENV,
-        jobject.IN("obj", "a local, global or weak global reference")
+        jobject("obj", "a local, global or weak global reference")
     )
 }

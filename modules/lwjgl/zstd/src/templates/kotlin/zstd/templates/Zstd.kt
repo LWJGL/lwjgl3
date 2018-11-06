@@ -92,8 +92,8 @@ ENABLE_WARNINGS()""")
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
     StringConstant("Version string.", "VERSION_STRING".."""ZSTD_VERSION_MAJOR + "." + ZSTD_VERSION_MINOR + "." + ZSTD_VERSION_RELEASE""")
 
-    unsigned("versionNumber", "Returns the version number.")
-    Nonnull..charASCII.const.p("versionString", "Returns the version string.")
+    unsigned("versionNumber", "Returns the version number.", void())
+    Nonnull..charASCII.const.p("versionString", "Returns the version string.", void())
 
     LongConstant(
         "Content size.",
@@ -121,10 +121,10 @@ ENABLE_WARNINGS()""")
         """,
 
         void.p.OUT("dst", ""),
-        AutoSize("dst")..size_t.IN("dstCapacity", ""),
-        void.const.p.IN("src", ""),
-        AutoSize("src")..size_t.IN("srcSize", ""),
-        int.IN("compressionLevel", ""),
+        AutoSize("dst")..size_t("dstCapacity", ""),
+        void.const.p("src", ""),
+        AutoSize("src")..size_t("srcSize", ""),
+        int("compressionLevel", ""),
 
         returnDoc = "compressed size written into {@code dst} (&le; {@code dstCapacity}), or an error code if it fails (which can be tested using #isError())."
     )
@@ -134,15 +134,15 @@ ENABLE_WARNINGS()""")
         "",
 
         void.p.OUT("dst", ""),
-        AutoSize("dst")..size_t.IN(
+        AutoSize("dst")..size_t(
             "dstCapacity",
             """
             is an upper bound of {@code originalSize} to regenerate. If user cannot imply a maximum upper bound, it's better to use streaming mode to
             decompress data.
             """
         ),
-        void.const.p.IN("src", ""),
-        AutoSize("src")..size_t.IN("compressedSize", "must be the <b>exact</b> size of some number of compressed and/or skippable frames"),
+        void.const.p("src", ""),
+        AutoSize("src")..size_t("compressedSize", "must be the <b>exact</b> size of some number of compressed and/or skippable frames"),
 
         returnDoc =
         """
@@ -178,8 +178,8 @@ ENABLE_WARNINGS()""")
         )}
         """,
 
-        void.const.p.IN("src", "should point to the start of a ZSTD encoded frame"),
-        AutoSize("src")..size_t.IN("srcSize", "must be at least as large as the frame header. Hint: any size &ge; #FRAMEHEADERSIZE_MAX is large enough."),
+        void.const.p("src", "should point to the start of a ZSTD encoded frame"),
+        AutoSize("src")..size_t("srcSize", "must be at least as large as the frame header. Hint: any size &ge; #FRAMEHEADERSIZE_MAX is large enough."),
 
         returnDoc =
         """
@@ -207,27 +207,24 @@ ENABLE_WARNINGS()""")
         "compressBound",
         "Returns the maximum compressed size in worst case single-pass scenario.",
 
-        size_t.IN("srcSize", "")
+        size_t("srcSize", "")
     )
 
     unsigned_intb(
         "isError",
         "Tells if a {@code size_t} function result is an error code.",
 
-        size_t.IN("code", "")
+        size_t("code", "")
     )
 
     Nonnull..charASCII.const.p(
         "getErrorName",
         "Provides readable string from an error code.",
 
-        size_t.IN("code", "")
+        size_t("code", "")
     )
 
-    int(
-        "maxCLevel",
-        "Returns the maximum compression level available."
-    )
+    int("maxCLevel", "Returns the maximum compression level available.", void())
 
     /***************************************
     *  Explicit context
@@ -240,26 +237,27 @@ ENABLE_WARNINGS()""")
 
         When compressing many times, it is recommended to allocate a context just once, and re-use it for each successive compression operation. This will make
         workload friendlier for system's memory. Use one context per thread for parallel execution in multi-threaded environments.
-        """
+        """,
+        void()
     )
 
     size_t(
         "freeCCtx",
         "Frees memory allocated by #createCCtx().",
 
-        ZSTD_CCtx.p.IN("cctx", "")
+        ZSTD_CCtx.p("cctx", "")
     )
 
     size_t(
         "compressCCtx",
         "Same as #compress(), requires an allocated {@code ZSTD_CCtx} (see #createCCtx()).",
 
-        ZSTD_CCtx.p.IN("ctx", ""),
+        ZSTD_CCtx.p("ctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
         compress["srcSize"],
-        int.IN("compressionLevel", "")
+        int("compressionLevel", "")
     )
 
     ZSTD_DCtx.p(
@@ -269,21 +267,22 @@ ENABLE_WARNINGS()""")
 
         When decompressing many times, it is recommended to allocate a context only once, and re-use it for each successive compression operation. This will
         make workload friendlier for system's memory. Use one context per thread for parallel execution.
-        """
+        """,
+        void()
     )
 
     size_t(
         "freeDCtx",
         "Frees memory allocated by #createDCtx().",
 
-        ZSTD_DCtx.p.IN("dctx", "")
+        ZSTD_DCtx.p("dctx", "")
     )
 
     size_t(
         "decompressDCtx",
         "Same as #decompress(), requires an allocated {@code ZSTD_DCtx} (see #createDCtx()).",
 
-        ZSTD_DCtx.p.IN("ctx", ""),
+        ZSTD_DCtx.p("ctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
@@ -304,14 +303,14 @@ ENABLE_WARNINGS()""")
         When {@code dict == NULL || dictSize < 8} no dictionary is used.
         """,
 
-        ZSTD_CCtx.p.IN("ctx", ""),
+        ZSTD_CCtx.p("ctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
         compress["srcSize"],
-        nullable..void.const.p.IN("dict", ""),
-        AutoSize("dict")..size_t.IN("dictSize", ""),
-        int.IN("compressionLevel", "")
+        nullable..void.const.p("dict", ""),
+        AutoSize("dict")..size_t("dictSize", ""),
+        int("compressionLevel", "")
     )
 
     size_t(
@@ -324,13 +323,13 @@ ENABLE_WARNINGS()""")
         When {@code dict == NULL || dictSize < 8} no dictionary is used.
         """,
 
-        ZSTD_DCtx.p.IN("dctx", ""),
+        ZSTD_DCtx.p("dctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
         compress["srcSize"],
-        nullable..void.const.p.IN("dict", ""),
-        AutoSize("dict")..size_t.IN("dictSize", "")
+        nullable..void.const.p("dict", ""),
+        AutoSize("dict")..size_t("dictSize", "")
     )
 
     /**********************************
@@ -350,16 +349,16 @@ ENABLE_WARNINGS()""")
         Note: A {@code ZSTD_CDict} can be created with an empty dictionary, but it is inefficient for small data.
         """,
 
-        void.const.p.IN("dictBuffer", ""),
-        AutoSize("dictBuffer")..size_t.IN("dictSize", ""),
-        int.IN("compressionLevel", "")
+        void.const.p("dictBuffer", ""),
+        AutoSize("dictBuffer")..size_t("dictSize", ""),
+        int("compressionLevel", "")
     )
 
     size_t(
         "freeCDict",
         "Frees memory allocated by #createCDict().",
 
-        ZSTD_CDict.p.IN("CDict", "")
+        ZSTD_CDict.p("CDict", "")
     )
 
     size_t(
@@ -374,12 +373,12 @@ ENABLE_WARNINGS()""")
         and it is recommended to use #compressCCtx().
         """,
 
-        ZSTD_CCtx.p.IN("cctx", ""),
+        ZSTD_CCtx.p("cctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
         compress["srcSize"],
-        ZSTD_CDict.const.p.IN("cdict", "")
+        ZSTD_CDict.const.p("cdict", "")
     )
 
     ZSTD_DDict.p(
@@ -390,15 +389,15 @@ ENABLE_WARNINGS()""")
         {@code dictBuffer} can be released after {@code DDict} creation, as its content is copied inside {@code DDict}.
         """,
 
-        void.const.p.IN("dictBuffer", ""),
-        AutoSize("dictBuffer")..size_t.IN("dictSize", "")
+        void.const.p("dictBuffer", ""),
+        AutoSize("dictBuffer")..size_t("dictSize", "")
     )
 
     size_t(
         "freeDDict",
         "Frees memory allocated with #createDDict().",
 
-        ZSTD_DDict.p.IN("ddict", "")
+        ZSTD_DDict.p("ddict", "")
     )
 
     size_t(
@@ -409,12 +408,12 @@ ENABLE_WARNINGS()""")
         Faster startup than #decompress_usingDict(), recommended when same dictionary is used multiple times.
         """,
 
-        ZSTD_DCtx.p.IN("dctx", ""),
+        ZSTD_DCtx.p("dctx", ""),
         compress["dst"],
         compress["dstCapacity"],
         compress["src"],
         compress["srcSize"],
-        ZSTD_DDict.const.p.IN("ddict", "")
+        ZSTD_DDict.const.p("ddict", "")
     )
 
     /****************************
@@ -431,22 +430,23 @@ ENABLE_WARNINGS()""")
         {@code ZSTD_CStream} objects can be reused multiple times on consecutive compression operations. It is recommended to re-use {@code ZSTD_CStream} in
         situations where many streaming operations will be achieved consecutively, since it will play nicer with system's memory, by re-using already allocated
         memory. Use one separate {@code ZSTD_CStream} per thread for parallel execution.
-        """.trimIndent()
+        """,
+        void()
     )
 
     size_t(
         "freeCStream",
         "Frees memory allocated by #createCStream().",
 
-        ZSTD_CStream.p.IN("zcs", "")
+        ZSTD_CStream.p("zcs", "")
     )
 
     size_t(
         "initCStream",
         "Use {@code ZSTD_initCStream()} to start a new compression operation.",
 
-        ZSTD_CStream.p.IN("zcs", ""),
-        int.IN("compressionLevel", "")
+        ZSTD_CStream.p("zcs", ""),
+        int("compressionLevel", "")
     )
 
     size_t(
@@ -460,9 +460,9 @@ ENABLE_WARNINGS()""")
         new output buffer, and then present again remaining input data.
         """,
 
-        ZSTD_CStream.p.IN("zcs", ""),
-        ZSTD_outBuffer.p.IN("output", ""),
-        ZSTD_inBuffer.p.IN("input", ""),
+        ZSTD_CStream.p("zcs", ""),
+        ZSTD_outBuffer.p("output", ""),
+        ZSTD_inBuffer.p("input", ""),
 
         returnDoc =
         """
@@ -485,8 +485,8 @@ ENABLE_WARNINGS()""")
         enough (return code &gt; 0). In which case, make some room to receive more compressed data, and call again {@code ZSTD_flushStream()}.
         """.trimIndent(),
 
-        ZSTD_CStream.p.IN("zcs", ""),
-        ZSTD_outBuffer.p.IN("output", ""),
+        ZSTD_CStream.p("zcs", ""),
+        ZSTD_outBuffer.p("output", ""),
 
         returnDoc =
         """
@@ -507,8 +507,8 @@ ENABLE_WARNINGS()""")
         same, and follows same rules as #flushStream().
         """.trimIndent(),
 
-        ZSTD_CStream.p.IN("zcs", ""),
-        ZSTD_outBuffer.p.IN("output", ""),
+        ZSTD_CStream.p("zcs", ""),
+        ZSTD_outBuffer.p("output", ""),
 
         returnDoc =
         """
@@ -519,12 +519,14 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "CStreamInSize",
-        "Returns the recommended size for input buffer."
+        "Returns the recommended size for input buffer.",
+        void()
     )
 
     size_t(
         "CStreamOutSize",
-        "Returns the recommended size for output buffer. Guarantee to successfully flush at least one complete compressed block in all circumstances."
+        "Returns the recommended size for output buffer. Guarantee to successfully flush at least one complete compressed block in all circumstances.",
+        void()
     )
 
     ZSTD_DStream.p(
@@ -533,21 +535,22 @@ ENABLE_WARNINGS()""")
         A {@code ZSTD_DStream} object is required to track streaming operations.
 
         Use {@code ZSTD_createDStream()} and #freeDStream() to create/release resources. {@code ZSTD_DStream} objects can be re-used multiple times.
-        """
+        """,
+        void()
     )
 
     size_t(
         "freeDStream",
         "Frees memory allocated by #createDStream().",
 
-        ZSTD_DStream.p.IN("zds", "")
+        ZSTD_DStream.p("zds", "")
     )
 
     size_t(
         "initDStream",
         "Use {@code ZSTD_initDStream()} to start a new decompression operation.",
 
-        ZSTD_DStream.p.IN("zds", ""),
+        ZSTD_DStream.p("zds", ""),
 
         returnDoc = "recommended first input size"
     )
@@ -564,9 +567,9 @@ ENABLE_WARNINGS()""")
         When no additional input is provided, amount of data flushed is necessarily &le; #BLOCKSIZE_MAX.
         """,
 
-        ZSTD_DStream.p.IN("zds", ""),
-        ZSTD_outBuffer.p.IN("output", ""),
-        ZSTD_inBuffer.p.IN("input", ""),
+        ZSTD_DStream.p("zds", ""),
+        ZSTD_outBuffer.p("output", ""),
+        ZSTD_inBuffer.p("input", ""),
 
         returnDoc =
         """
@@ -578,11 +581,13 @@ ENABLE_WARNINGS()""")
 
     size_t(
         "DStreamInSize",
-        "Returns the recommended size for input buffer."
+        "Returns the recommended size for input buffer.",
+        void()
     )
 
     size_t(
         "DStreamOutSize",
-        "Returns the recommended size for output buffer. Guarantee to successfully flush at least one complete compressed block in all circumstances."
+        "Returns the recommended size for output buffer. Guarantee to successfully flush at least one complete compressed block in all circumstances.",
+        void()
     )
 }

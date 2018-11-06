@@ -45,6 +45,6 @@ val OES_sample_shading = "OESSampleShading".nativeClassGLES("OES_sample_shading"
         "MinSampleShadingOES",
         "",
 
-        GLfloat.IN("value", "")
+        GLfloat("value", "")
     )
 }

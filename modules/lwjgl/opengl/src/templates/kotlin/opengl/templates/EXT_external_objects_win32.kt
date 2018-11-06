@@ -65,20 +65,20 @@ val EXT_memory_object_win32 = "EXTMemoryObjectWin32".nativeClassGL("EXT_memory_o
         "ImportMemoryWin32HandleEXT",
         "",
 
-        GLuint.IN("memory", ""),
-        GLuint64.IN("size", ""),
-        GLenum.IN("handleType", ""),
-        opaque_p.IN("handle", "")
+        GLuint("memory", ""),
+        GLuint64("size", ""),
+        GLenum("handleType", ""),
+        opaque_p("handle", "")
     )
 
     void(
         "ImportMemoryWin32NameEXT",
         "",
 
-        GLuint.IN("memory", ""),
-        GLuint64.IN("size", ""),
-        GLenum.IN("handleType", ""),
-        opaque_const_p.IN("name", "")
+        GLuint("memory", ""),
+        GLuint64("size", ""),
+        GLenum("handleType", ""),
+        opaque_const_p("name", "")
     )
 }
 
@@ -138,17 +138,17 @@ val EXT_semaphore_win32 = "EXTSemaphoreWin32".nativeClassGL("EXT_semaphore_win32
         "ImportSemaphoreWin32HandleEXT",
         "",
 
-        GLuint.IN("semaphore", ""),
-        GLenum.IN("handleType", ""),
-        opaque_p.IN("handle", "")
+        GLuint("semaphore", ""),
+        GLenum("handleType", ""),
+        opaque_p("handle", "")
     )
 
     void(
         "ImportSemaphoreWin32NameEXT",
         "",
 
-        GLuint.IN("semaphore", ""),
-        GLenum.IN("handleType", ""),
-        opaque_const_p.IN("name", "")
+        GLuint("semaphore", ""),
+        GLenum("handleType", ""),
+        opaque_const_p("name", "")
     )
 }

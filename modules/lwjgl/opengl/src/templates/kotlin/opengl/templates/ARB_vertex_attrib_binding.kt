@@ -72,7 +72,7 @@ val ARB_vertex_attrib_binding = "ARBVertexAttribBinding".nativeClassGL("ARB_vert
     GL43C reuse "VertexAttribBinding"
     GL43C reuse "VertexBindingDivisor"
 
-    val vaobj = GLuint.IN("vaobj", "the vertex array object")
+    val vaobj = GLuint("vaobj", "the vertex array object")
     var src = GL43["BindVertexBuffer"]
     DependsOn("GL_EXT_direct_state_access")..void(
         "VertexArrayBindVertexBufferEXT",

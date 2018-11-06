@@ -53,17 +53,17 @@ val EGLDEBUGPROCKHR = Module.EGL.callback {
         "EGLDebugMessageKHRCallback",
         "Will be called when a debug message is generated.",
 
-        EGLenum.IN("error", "will contain an EGL error code, or #SUCCESS, as applicable"),
-        charASCII.const.p.IN("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
-        EGLint.IN("messageType", "will contain one of the debug message types"),
-        EGLLabelKHR.IN(
+        EGLenum("error", "will contain an EGL error code, or #SUCCESS, as applicable"),
+        charASCII.const.p("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
+        EGLint("messageType", "will contain one of the debug message types"),
+        EGLLabelKHR(
             "threadLabel",
             """
             will contain the label attached to the current thread. The {@code threadLabel} will be #NULL if not set by the application. If the message is from an
             internal thread, the label will be #NULL.
             """
         ),
-        EGLLabelKHR.IN(
+        EGLLabelKHR(
             "objectLabel",
             """
             will contain the label attached to the primary object of the message; Labels will be #NULL if not set by the application. The primary object should
@@ -72,7 +72,7 @@ val EGLDEBUGPROCKHR = Module.EGL.callback {
             the command before the primary object was validated, therefore its label can not be included in the callback.
             """
         ),
-        nullable..charUTF8.const.p.IN(
+        nullable..charUTF8.const.p(
             "message",
             """
             will contain a platform specific debug string message; This string should provide added information to the application developer regarding the
@@ -135,10 +135,10 @@ val EGLSetBlobFuncANDROID = Module.EGL.callback {
     void(
         "EGLSetBlobFuncANDROID", "",
 
-        void.const.p.IN("key", ""),
-        AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
-        void.const.p.IN("value", ""),
-        AutoSize("value")..EGLsizeiANDROID.IN("valueSize", ""),
+        void.const.p("key", ""),
+        AutoSize("key")..EGLsizeiANDROID("keySize", ""),
+        void.const.p("value", ""),
+        AutoSize("value")..EGLsizeiANDROID("valueSize", ""),
 
         nativeType = "EGLSetBlobFuncANDROID"
     ) {
@@ -149,10 +149,10 @@ val EGLGetBlobFuncANDROID = Module.EGL.callback {
     EGLsizeiANDROID(
         "EGLGetBlobFuncANDROID", "",
 
-        void.const.p.IN("key", ""),
-        AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
-        void.p.IN("value", ""),
-        AutoSize("value")..EGLsizeiANDROID.IN("valueSize", ""),
+        void.const.p("key", ""),
+        AutoSize("key")..EGLsizeiANDROID("keySize", ""),
+        void.p("value", ""),
+        AutoSize("value")..EGLsizeiANDROID("valueSize", ""),
 
         nativeType = "EGLGetBlobFuncANDROID"
     ) {

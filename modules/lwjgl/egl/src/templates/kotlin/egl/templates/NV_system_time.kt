@@ -5,6 +5,7 @@
 package egl.templates
 
 import egl.*
+import org.lwjgl.generator.*
 
 val NV_system_time = "NVSystemTime".nativeClassEGL("NV_system_time", postfix = NV) {
     documentation =
@@ -16,13 +17,7 @@ val NV_system_time = "NVSystemTime".nativeClassEGL("NV_system_time", postfix = N
         Requires ${EGL12.core}.
         """
 
-    EGLuint64NV(
-        "GetSystemTimeFrequencyNV",
-        ""
-    )
+    EGLuint64NV("GetSystemTimeFrequencyNV", "", void())
 
-    EGLuint64NV(
-        "GetSystemTimeNV",
-        ""
-    )
+    EGLuint64NV("GetSystemTimeNV", "", void())
 }

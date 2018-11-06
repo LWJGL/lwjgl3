@@ -93,11 +93,11 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
         "GetDeviceIDsFromVA_APIMediaAdapterINTEL",
         "Queries the OpenCL devices corresponding to a VA API display.",
 
-        cl_platform_id.IN("platform", "the platform ID returned by #GetPlatformIDs()"),
-        cl_va_api_device_source_intel.IN("media_adapter_type", "the type of {@code media_adapter}", MediaAdapterTypes),
-        opaque_p.IN("media_adapter", "the media adapter whose corresponding OpenCL devices are being queried"),
-        cl_va_api_device_set_intel.IN("media_adapter_set", "", MediaAdapterSets),
-        AutoSize("devices")..cl_uint.IN(
+        cl_platform_id("platform", "the platform ID returned by #GetPlatformIDs()"),
+        cl_va_api_device_source_intel("media_adapter_type", "the type of {@code media_adapter}", MediaAdapterTypes),
+        opaque_p("media_adapter", "the media adapter whose corresponding OpenCL devices are being queried"),
+        cl_va_api_device_set_intel("media_adapter_set", "", MediaAdapterSets),
+        AutoSize("devices")..cl_uint(
             "num_entries",
             """
             the number of cl_device_id entries that can be added to {@code devices}. If {@code devices} is not #NULL then {@code num_entries} must be greater
@@ -122,10 +122,10 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
         "CreateFromVA_APIMediaSurfaceINTEL",
         "Creates an OpenCL 2D image object from a VA API media surface or a plane of a VA API media surface.",
 
-        cl_context.IN("context", "a valid OpenCL context created from a VA API display"),
-        cl_mem_flags.IN("flags", "a bit-field that is used to specify usage information", "#MEM_READ_ONLY #MEM_WRITE_ONLY #MEM_READ_WRITE"),
-        Check(1)..VASurfaceID.p.IN("surface", "a pointer to the VA API surface to share"),
-        cl_uint.IN("plane", "the plane of {@code surface} to share, for planar formats. For non-planar formats, {@code plane} must be 0."),
+        cl_context("context", "a valid OpenCL context created from a VA API display"),
+        cl_mem_flags("flags", "a bit-field that is used to specify usage information", "#MEM_READ_ONLY #MEM_WRITE_ONLY #MEM_READ_WRITE"),
+        Check(1)..VASurfaceID.p("surface", "a pointer to the VA API surface to share"),
+        cl_uint("plane", "the plane of {@code surface} to share, for planar formats. For non-planar formats, {@code plane} must be 0."),
         ERROR_RET
     )
 
@@ -147,9 +147,9 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
         calling {@code clEnqueueAcquireVA_APIMediaSurfacesINTEL}.
         """,
 
-        cl_command_queue.IN("command_queue", "a valid command-queue"),
-        AutoSize("mem_objects")..cl_uint.IN("num_objects", "the number of memory objects to be acquired in {@code mem_objects}."),
-        cl_mem.const.p.IN("mem_objects", "a pointer to a list of OpenCL memory objects that were created from VA API surfaces"),
+        cl_command_queue("command_queue", "a valid command-queue"),
+        AutoSize("mem_objects")..cl_uint("num_objects", "the number of memory objects to be acquired in {@code mem_objects}."),
+        cl_mem.const.p("mem_objects", "a pointer to a list of OpenCL memory objects that were created from VA API surfaces"),
         NEWL,
         EWL,
         EVENT
@@ -173,9 +173,9 @@ val intel_va_api_media_sharing = "INTELVAAPIMediaSharing".nativeClassCL("intel_v
         executing until after the event returned by {@code clEnqueueReleaseVA_APIMediaSurfacesINTEL} reports completion.
         """,
 
-        cl_command_queue.IN("command_queue", "a valid OpenCL context created from a VA API display"),
-        AutoSize("mem_objects")..cl_uint.IN("num_objects", "the number of memory objects to be released in {@code mem_objects}"),
-        cl_mem.const.p.IN("mem_objects", "a pointer to a list of OpenCL memory objects that were created from VA API surfaces"),
+        cl_command_queue("command_queue", "a valid OpenCL context created from a VA API display"),
+        AutoSize("mem_objects")..cl_uint("num_objects", "the number of memory objects to be released in {@code mem_objects}"),
+        cl_mem.const.p("mem_objects", "a pointer to a list of OpenCL memory objects that were created from VA API surfaces"),
         NEWL,
         EWL,
         EVENT

@@ -24,16 +24,16 @@ val EXT_draw_transform_feedback = "EXTDrawTransformFeedback".nativeClassGLES("EX
         "DrawTransformFeedbackEXT",
         "",
 
-        GLenum.IN("mode", ""),
-        GLuint.IN("id", "")
+        GLenum("mode", ""),
+        GLuint("id", "")
     )
 
     void(
         "DrawTransformFeedbackInstancedEXT",
         "",
 
-        GLenum.IN("mode", ""),
-        GLuint.IN("id", ""),
-        GLsizei.IN("instancecount", "")
+        GLenum("mode", ""),
+        GLuint("id", ""),
+        GLsizei("instancecount", "")
     )
 }

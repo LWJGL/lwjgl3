@@ -56,8 +56,8 @@ val EXT_texture_buffer_object = "EXTTextureBufferObject".nativeClassGL("EXT_text
         "TexBufferEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("internalformat", ""),
-        GLuint.IN("buffer", "")
+        GLenum("target", ""),
+        GLenum("internalformat", ""),
+        GLuint("buffer", "")
     )
 }

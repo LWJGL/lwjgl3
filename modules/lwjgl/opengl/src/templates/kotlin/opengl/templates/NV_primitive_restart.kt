@@ -51,6 +51,6 @@ val NV_primitive_restart = "NVPrimitiveRestart".nativeClassGL("NV_primitive_rest
         "PrimitiveRestartIndexNV",
         "",
 
-        GLuint.IN("index", "")
+        GLuint("index", "")
     )
 }

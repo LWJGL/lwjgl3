@@ -38,28 +38,28 @@ val EXT_instanced_arrays = "EXTInstancedArrays".nativeClassGLES("EXT_instanced_a
         "DrawArraysInstancedEXT",
         "",
 
-        GLenum.IN("mode", ""),
-        GLint.IN("start", ""),
-        GLsizei.IN("count", ""),
-        GLsizei.IN("primcount", "")
+        GLenum("mode", ""),
+        GLint("start", ""),
+        GLsizei("count", ""),
+        GLsizei("primcount", "")
     )
 
     void(
         "DrawElementsInstancedEXT",
         "",
 
-        GLenum.IN("mode", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
-        GLsizei.IN("primcount", "")
+        GLenum("mode", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        GLsizei("primcount", "")
     )
 
     void(
         "VertexAttribDivisorEXT",
         "",
 
-        GLuint.IN("index", ""),
-        GLuint.IN("divisor", "")
+        GLuint("index", ""),
+        GLuint("divisor", "")
     )
 }

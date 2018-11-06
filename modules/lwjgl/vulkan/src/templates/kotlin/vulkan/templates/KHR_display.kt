@@ -150,7 +150,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         ##VkDisplayPropertiesKHR
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "a physical device."),
+        VkPhysicalDevice("physicalDevice", "a physical device."),
         AutoSize("pProperties")..Check(1)..uint32_t.p.INOUT("pPropertyCount", "a pointer to an integer related to the number of display devices available or queried, as described below."),
         nullable..VkDisplayPropertiesKHR.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkDisplayPropertiesKHR structures.")
     )
@@ -198,7 +198,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         ##VkDisplayPlanePropertiesKHR
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "a physical device."),
+        VkPhysicalDevice("physicalDevice", "a physical device."),
         AutoSize("pProperties")..Check(1)..uint32_t.p.INOUT("pPropertyCount", "a pointer to an integer related to the number of display planes available or queried, as described below."),
         nullable..VkDisplayPlanePropertiesKHR.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkDisplayPlanePropertiesKHR structures.")
     )
@@ -249,8 +249,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         </dl>
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "a physical device."),
-        uint32_t.IN("planeIndex", "the plane which the application wishes to use, and <b>must</b> be in the range <code>[0, physical device plane count - 1]</code>."),
+        VkPhysicalDevice("physicalDevice", "a physical device."),
+        uint32_t("planeIndex", "the plane which the application wishes to use, and <b>must</b> be in the range <code>[0, physical device plane count - 1]</code>."),
         AutoSize("pDisplays")..Check(1)..uint32_t.p.INOUT("pDisplayCount", "a pointer to an integer related to the number of displays available or queried, as described below."),
         nullable..VkDisplayKHR.p.OUT("pDisplays", "either {@code NULL} or a pointer to an array of {@code VkDisplayKHR} handles.")
     )
@@ -300,8 +300,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         ##VkDisplayModePropertiesKHR
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device associated with {@code display}."),
-        VkDisplayKHR.IN("display", "the display to query."),
+        VkPhysicalDevice("physicalDevice", "the physical device associated with {@code display}."),
+        VkDisplayKHR("display", "the display to query."),
         AutoSize("pProperties")..Check(1)..uint32_t.p.INOUT("pPropertyCount", "a pointer to an integer related to the number of display modes available or queried, as described below."),
         nullable..VkDisplayModePropertiesKHR.p.OUT("pProperties", "either {@code NULL} or a pointer to an array of ##VkDisplayModePropertiesKHR structures.")
     )
@@ -355,10 +355,10 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         ##VkAllocationCallbacks, ##VkDisplayModeCreateInfoKHR
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device associated with {@code display}."),
-        VkDisplayKHR.IN("display", "the display to create an additional mode for."),
-        VkDisplayModeCreateInfoKHR.const.p.IN("pCreateInfo", "a ##VkDisplayModeCreateInfoKHR structure describing the new mode to create."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "the allocator used for host memory allocated for the display mode object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
+        VkPhysicalDevice("physicalDevice", "the physical device associated with {@code display}."),
+        VkDisplayKHR("display", "the display to create an additional mode for."),
+        VkDisplayModeCreateInfoKHR.const.p("pCreateInfo", "a ##VkDisplayModeCreateInfoKHR structure describing the new mode to create."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the display mode object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
         Check(1)..VkDisplayModeKHR.p.OUT("pMode", "returns the handle of the mode created.")
     )
 
@@ -407,9 +407,9 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         ##VkDisplayPlaneCapabilitiesKHR
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device associated with {@code display}"),
-        VkDisplayModeKHR.IN("mode", "the display mode the application intends to program when using the specified plane. Note this parameter also implicitly specifies a display."),
-        uint32_t.IN("planeIndex", "the plane which the application intends to use with the display, and is less than the number of display planes supported by the device."),
+        VkPhysicalDevice("physicalDevice", "the physical device associated with {@code display}"),
+        VkDisplayModeKHR("mode", "the display mode the application intends to program when using the specified plane. Note this parameter also implicitly specifies a display."),
+        uint32_t("planeIndex", "the plane which the application intends to use with the display, and is less than the number of display planes supported by the device."),
         VkDisplayPlaneCapabilitiesKHR.p.OUT("pCapabilities", "a pointer to a ##VkDisplayPlaneCapabilitiesKHR structure in which the capabilities are returned.")
     )
 
@@ -454,9 +454,9 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         ##VkAllocationCallbacks, ##VkDisplaySurfaceCreateInfoKHR
         """,
 
-        VkInstance.IN("instance", "the instance corresponding to the physical device the targeted display is on."),
-        VkDisplaySurfaceCreateInfoKHR.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkDisplaySurfaceCreateInfoKHR structure specifying which mode, plane, and other parameters to use, as described below."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
+        VkInstance("instance", "the instance corresponding to the physical device the targeted display is on."),
+        VkDisplaySurfaceCreateInfoKHR.const.p("pCreateInfo", "a pointer to an instance of the ##VkDisplaySurfaceCreateInfoKHR structure specifying which mode, plane, and other parameters to use, as described below."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
         Check(1)..VkSurfaceKHR.p.OUT("pSurface", "points to a {@code VkSurfaceKHR} handle in which the created surface is returned.")
     )
 }

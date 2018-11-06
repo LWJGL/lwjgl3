@@ -142,10 +142,10 @@ val OES_geometry_shader = "OESGeometryShader".nativeClassGLES("OES_geometry_shad
         "FramebufferTextureOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLuint("texture", ""),
+        GLint("level", "")
     )
 }
 

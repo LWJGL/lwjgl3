@@ -35,18 +35,18 @@ val KHR_image_base = "KHRImageBase".nativeClassEGL("KHR_image_base", postfix = K
         "CreateImageKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLContext.IN("ctx", ""),
-        EGLenum.IN("target", ""),
-        EGLClientBuffer.IN("buffer", ""),
-        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLContext("ctx", ""),
+        EGLenum("target", ""),
+        EGLClientBuffer("buffer", ""),
+        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
     )
 
     EGLBoolean(
         "DestroyImageKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLImageKHR.IN("image", "")
+        EGLDisplay("dpy", ""),
+        EGLImageKHR("image", "")
     )
 }

@@ -24,7 +24,7 @@ val VRSpatialAnchors = "VRSpatialAnchors".nativeClass(
         wait for an event or occasionally poll #GetSpatialAnchorPose() to find the virtual coordinate associated with this anchor.
         """,
 
-        charASCII.const.p.IN("pchDescriptor", ""),
+        charASCII.const.p("pchDescriptor", ""),
         Check(1)..SpatialAnchorHandle_t.p.OUT("pHandleOut", "")
     )
 
@@ -45,9 +45,9 @@ val VRSpatialAnchors = "VRSpatialAnchors".nativeClass(
         highest fidelity.
         """,
 
-        TrackedDeviceIndex_t.IN("unDeviceIndex", ""),
-        ETrackingUniverseOrigin.IN("eOrigin", ""),
-        SpatialAnchorPose_t.p.IN("pPose", ""),
+        TrackedDeviceIndex_t("unDeviceIndex", ""),
+        ETrackingUniverseOrigin("eOrigin", ""),
+        SpatialAnchorPose_t.p("pPose", ""),
         Check(1)..SpatialAnchorHandle_t.p.OUT("pHandleOut", "")
     )
 
@@ -60,8 +60,8 @@ val VRSpatialAnchors = "VRSpatialAnchors".nativeClass(
         available.
         """,
 
-        SpatialAnchorHandle_t.IN("unHandle", ""),
-        ETrackingUniverseOrigin.IN("eOrigin", ""),
+        SpatialAnchorHandle_t("unHandle", ""),
+        ETrackingUniverseOrigin("eOrigin", ""),
         SpatialAnchorPose_t.p.OUT("pPoseOut", "")
     )
 
@@ -75,7 +75,7 @@ val VRSpatialAnchors = "VRSpatialAnchors".nativeClass(
         will be the descriptor provided by the driver.
         """,
 
-        SpatialAnchorHandle_t.IN("unHandle", ""),
+        SpatialAnchorHandle_t("unHandle", ""),
         charASCII.p.OUT("pchDescriptorOut", ""),
         AutoSize("pchDescriptorOut")..Check(1)..uint32_t.p.INOUT("punDescriptorBufferLenInOut", ""),
 

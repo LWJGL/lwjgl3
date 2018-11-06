@@ -252,7 +252,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
         src["target"],
         src["query"],
-        AutoSize("data")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+        AutoSize("data")..GLsizei("bufSize", "the maximum number of bytes to write into {@code data}"),
         ReturnParam..GLdouble.p.OUT("data", "a buffer in which to place the returned data")
     )
 
@@ -263,7 +263,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
         src["target"],
         src["query"],
-        AutoSize("data")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+        AutoSize("data")..GLsizei("bufSize", "the maximum number of bytes to write into {@code data}"),
         ReturnParam..GLfloat.p.OUT("data", "a buffer in which to place the returned data")
     )
 
@@ -274,7 +274,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
         src["target"],
         src["query"],
-        AutoSize("data")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+        AutoSize("data")..GLsizei("bufSize", "the maximum number of bytes to write into {@code data}"),
         ReturnParam..GLint.p.OUT("data", "a buffer in which to place the returned data")
     )
 
@@ -284,7 +284,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         "Robust version of ${src.javaDocLink}",
 
         src["map"],
-        AutoSize("data")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+        AutoSize("data")..GLsizei("bufSize", "the maximum number of bytes to write into {@code data}"),
         GLfloat.p.OUT("data", "a buffer in which to place the returned data")
     )
 
@@ -294,7 +294,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         "Robust version of ${src.javaDocLink}",
 
         src["map"],
-        AutoSize("data")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+        AutoSize("data")..GLsizei("bufSize", "the maximum number of bytes to write into {@code data}"),
         GLuint.p.OUT("data", "a buffer in which to place the returned data")
     )
 
@@ -304,7 +304,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         "Robust version of ${src.javaDocLink}",
 
         src["map"],
-        AutoSize("data")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+        AutoSize("data")..GLsizei("bufSize", "the maximum number of bytes to write into {@code data}"),
         GLushort.p.OUT("data", "a buffer in which to place the returned data")
     )
 
@@ -313,7 +313,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         "GetnPolygonStipple",
         "Robust version of ${src.javaDocLink}",
 
-        AutoSize("pattern")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code pattern}"),
+        AutoSize("pattern")..GLsizei("bufSize", "the maximum number of bytes to write into {@code pattern}"),
         PIXEL_PACK_BUFFER..GLubyte.p.OUT("pattern", "a buffer in which to place the returned pattern")
     )
 
@@ -328,7 +328,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         src["target"],
         src["format"],
         src["type"],
-        AutoSize("table")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code table}"),
+        AutoSize("table")..GLsizei("bufSize", "the maximum number of bytes to write into {@code table}"),
         MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..PIXEL_PACK_BUFFER..void.p.OUT("table", "a buffer in which to place the returned data")
     )
 
@@ -340,7 +340,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         src["target"],
         src["format"],
         src["type"],
-        AutoSize("image")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code image}"),
+        AutoSize("image")..GLsizei("bufSize", "the maximum number of bytes to write into {@code image}"),
         PIXEL_PACK_BUFFER..void.p.OUT("image", "a buffer in which to place the returned data")
     )
 
@@ -352,11 +352,11 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         src["target"],
         src["format"],
         src["type"],
-        AutoSize("row")..GLsizei.IN("rowBufSize", "the maximum number of bytes to write into {@code row}"),
+        AutoSize("row")..GLsizei("rowBufSize", "the maximum number of bytes to write into {@code row}"),
         PIXEL_PACK_BUFFER..void.p.OUT("row", "a buffer in which to return the filter row"),
-        AutoSize("column")..GLsizei.IN("columnBufSize", "the maximum number of bytes to write into {@code column}"),
+        AutoSize("column")..GLsizei("columnBufSize", "the maximum number of bytes to write into {@code column}"),
         PIXEL_PACK_BUFFER..void.p.OUT("column", "a buffer in which to return the filter column"),
-        Unsafe..nullable..void.p.IN("span", "")
+        Unsafe..nullable..void.p("span", "")
     )
 
     src = ARB_imaging["GetHistogram"]
@@ -368,7 +368,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         src["reset"],
         src["format"],
         src["type"],
-        AutoSize("values")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code values}"),
+        AutoSize("values")..GLsizei("bufSize", "the maximum number of bytes to write into {@code values}"),
         PIXEL_PACK_BUFFER..void.p.OUT("values", "a buffer in which to place the returned data")
     )
 
@@ -381,7 +381,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         src["reset"],
         src["format"],
         src["type"],
-        AutoSize("values")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code values}"),
+        AutoSize("values")..GLsizei("bufSize", "the maximum number of bytes to write into {@code values}"),
         PIXEL_PACK_BUFFER..void.p.OUT("values", "a buffer in which to place the returned data")
     )
 

@@ -41,21 +41,21 @@ val EXT_external_buffer = "EXTExternalBuffer".nativeClassGLES("EXT_external_buff
         "BufferStorageExternalEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLintptr.IN("offset", ""),
-        GLsizeiptr.IN("size", ""),
-        GLeglClientBufferEXT.IN("clientBuffer", ""),
-        GLbitfield.IN("flags", "")
+        GLenum("target", ""),
+        GLintptr("offset", ""),
+        GLsizeiptr("size", ""),
+        GLeglClientBufferEXT("clientBuffer", ""),
+        GLbitfield("flags", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "NamedBufferStorageExternalEXT",
         "",
 
-        GLuint.IN("buffer", ""),
-        GLintptr.IN("offset", ""),
-        GLsizeiptr.IN("size", ""),
-        GLeglClientBufferEXT.IN("clientBuffer", ""),
-        GLbitfield.IN("flags", "")
+        GLuint("buffer", ""),
+        GLintptr("offset", ""),
+        GLsizeiptr("size", ""),
+        GLeglClientBufferEXT("clientBuffer", ""),
+        GLbitfield("flags", "")
     )
 }

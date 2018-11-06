@@ -75,15 +75,15 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGLES("
         "CoverageModulationTableNV",
         "",
 
-        AutoSize("v")..GLsizei.IN("n", ""),
-        GLfloat.const.p.IN("v", "")
+        AutoSize("v")..GLsizei("n", ""),
+        GLfloat.const.p("v", "")
     )
 
     void(
         "GetCoverageModulationTableNV",
         "",
 
-        AutoSize("v")..GLsizei.IN("bufsize", ""),
+        AutoSize("v")..GLsizei("bufsize", ""),
         GLfloat.p.OUT("v", "")
     )
 
@@ -91,6 +91,6 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGLES("
         "CoverageModulationNV",
         "",
 
-        GLenum.IN("components", "")
+        GLenum("components", "")
     )
 }

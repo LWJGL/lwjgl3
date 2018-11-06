@@ -117,21 +117,21 @@ stbir_resize_uint8_srgb_edgemode(
         This function uses the default resampling filter defined at compile time. For a different filter, use the medium-complexity API.
         """,
 
-        Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : input_stride_in_bytes)")..unsigned_char.const.p.IN("input_pixels", "the source image data"),
-        int.IN("input_w", "the source image width"),
-        int.IN("input_h", "the source image height"),
-        int.IN(
+        Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : input_stride_in_bytes)")..unsigned_char.const.p("input_pixels", "the source image data"),
+        int("input_w", "the source image width"),
+        int("input_h", "the source image height"),
+        int(
             "input_stride_in_bytes",
             "the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory"
         ),
         Check("output_h * (output_stride_in_bytes == 0 ? output_w * num_channels : output_stride_in_bytes)")..unsigned_char.p.OUT("output_pixels", "returns the scaled image data"),
-        int.IN("output_w", "the resized image width"),
-        int.IN("output_h", "the resized image height"),
-        int.IN(
+        int("output_w", "the resized image width"),
+        int("output_h", "the resized image height"),
+        int(
             "output_stride_in_bytes",
             "the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory"
         ),
-        int.IN("num_channels", "the number of channels in the image (e.g. RGB=3, RGBA=4)"),
+        int("num_channels", "the number of channels in the image (e.g. RGB=3, RGBA=4)"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -140,7 +140,7 @@ stbir_resize_uint8_srgb_edgemode(
         "resize_float",
         "Float version of #resize_uint8().",
 
-        Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 2))")..float.const.p.IN("input_pixels", "the source image data"),
+        Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 2))")..float.const.p("input_pixels", "the source image data"),
         resize_uint8["input_w"],
         resize_uint8["input_h"],
         resize_uint8["input_stride_in_bytes"],
@@ -176,8 +176,8 @@ stbir_resize_uint8_srgb_edgemode(
         resize_uint8["output_h"],
         resize_uint8["output_stride_in_bytes"],
         resize_uint8["num_channels"],
-        int.IN("alpha_channel", "the alpha channel index, or #ALPHA_CHANNEL_NONE if there is no alpha channel"),
-        int.IN(
+        int("alpha_channel", "the alpha channel index, or #ALPHA_CHANNEL_NONE if there is no alpha channel"),
+        int(
             "flags",
             "the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean",
             "#FLAG_ALPHA_PREMULTIPLIED #FLAG_ALPHA_USES_COLORSPACE"
@@ -201,7 +201,7 @@ stbir_resize_uint8_srgb_edgemode(
         resize_uint8["num_channels"],
         resize_uint8_srgb["alpha_channel"],
         resize_uint8_srgb["flags"],
-        stbir_edge.IN("edge_wrap_mode", "the edge wrap mode", EdgeWrapModes),
+        stbir_edge("edge_wrap_mode", "the edge wrap mode", EdgeWrapModes),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -242,9 +242,9 @@ stbir_resize_uint8_srgb_edgemode(
         resize_uint8_srgb["alpha_channel"],
         resize_uint8_srgb["flags"],
         resize_uint8_srgb_edgemode["edge_wrap_mode"],
-        stbir_filter.IN("filter", "the scale filter", Filters),
-        stbir_colorspace.IN("space", "the image colorspace", ColorSpaces),
-        Expression("NULL")..opaque_p.IN("alloc_context", "pointer to the allocation context"),
+        stbir_filter("filter", "the scale filter", Filters),
+        stbir_colorspace("space", "the image colorspace", ColorSpaces),
+        Expression("NULL")..opaque_p("alloc_context", "pointer to the allocation context"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -253,7 +253,7 @@ stbir_resize_uint8_srgb_edgemode(
         "resize_uint16_generic",
         "Short version of #resize_uint8_generic().",
 
-        Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 1))")..stbir_uint16.const.p.IN("input_pixels", "the source image data"),
+        Check("input_h * (input_stride_in_bytes == 0 ? input_w * num_channels : (input_stride_in_bytes >> 1))")..stbir_uint16.const.p("input_pixels", "the source image data"),
         resize_uint8["input_w"],
         resize_uint8["input_h"],
         resize_uint8["input_stride_in_bytes"],
@@ -322,7 +322,7 @@ stbir_resize_uint8_srgb_edgemode(
         "resize",
         "Full-complexity version of #resize_uint8_generic().",
 
-        Check("input_h * (input_stride_in_bytes == 0 ? (input_w * num_channels) << getTypeShift(datatype) : input_stride_in_bytes)")..void.const.p.IN("input_pixels", "the source image data"),
+        Check("input_h * (input_stride_in_bytes == 0 ? (input_w * num_channels) << getTypeShift(datatype) : input_stride_in_bytes)")..void.const.p("input_pixels", "the source image data"),
         resize_uint8["input_w"],
         resize_uint8["input_h"],
         resize_uint8["input_stride_in_bytes"],
@@ -330,14 +330,14 @@ stbir_resize_uint8_srgb_edgemode(
         resize_uint8["output_w"],
         resize_uint8["output_h"],
         resize_uint8["output_stride_in_bytes"],
-        stbir_datatype.IN("datatype", "the image data type", DataTypes),
+        stbir_datatype("datatype", "the image data type", DataTypes),
         resize_uint8["num_channels"],
         resize_uint8_srgb["alpha_channel"],
         resize_uint8_srgb["flags"],
-        stbir_edge.IN("edge_mode_horizontal", "the horizontal edge wrap mode"),
-        stbir_edge.IN("edge_mode_vertical", "the vertical edge wrap mode"),
-        stbir_filter.IN("filter_horizontal", "the horizontal scale filter"),
-        stbir_filter.IN("filter_vertical", "the vertical scale filter"),
+        stbir_edge("edge_mode_horizontal", "the horizontal edge wrap mode"),
+        stbir_edge("edge_mode_vertical", "the vertical edge wrap mode"),
+        stbir_filter("filter_horizontal", "the horizontal scale filter"),
+        stbir_filter("filter_vertical", "the vertical scale filter"),
         resize_uint8_generic["space"],
         resize_uint8_generic["alloc_context"],
 
@@ -366,10 +366,10 @@ stbir_resize_uint8_srgb_edgemode(
         resize["filter_vertical"],
         resize["space"],
         resize["alloc_context"],
-        float.IN("x_scale", "horizontal scale for subpixel correctness"),
-        float.IN("y_scale", "vertical scale for subpixel correctness"),
-        float.IN("x_offset", "horizontal offset for subpixel correctness"),
-        float.IN("y_offset", "vertical offset for subpixel correctness"),
+        float("x_scale", "horizontal scale for subpixel correctness"),
+        float("y_scale", "vertical scale for subpixel correctness"),
+        float("x_offset", "horizontal offset for subpixel correctness"),
+        float("y_offset", "vertical offset for subpixel correctness"),
 
         returnDoc = "1 on success, 0 on failure"
     )
@@ -396,10 +396,10 @@ stbir_resize_uint8_srgb_edgemode(
         resize["filter_vertical"],
         resize["space"],
         resize["alloc_context"],
-        float.IN("s0", "the left texture coordinate of the region to scale"),
-        float.IN("t0", "the top texture coordinate of the region to scale"),
-        float.IN("s1", "the right texture coordinate of the region to scale"),
-        float.IN("t1", "the bottom texture coordinate of the region to scale"),
+        float("s0", "the left texture coordinate of the region to scale"),
+        float("t0", "the top texture coordinate of the region to scale"),
+        float("s1", "the right texture coordinate of the region to scale"),
+        float("t1", "the bottom texture coordinate of the region to scale"),
 
         returnDoc = "1 on success, 0 on failure"
     )

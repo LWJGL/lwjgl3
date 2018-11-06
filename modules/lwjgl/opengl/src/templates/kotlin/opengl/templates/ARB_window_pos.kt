@@ -29,34 +29,34 @@ val ARB_window_pos = "ARBWindowPos".nativeClassGL("ARB_window_pos", postfix = AR
         "WindowPos2iARB",
         "Alternate way to set the current raster position. {@code z} is implictly set to 0.",
 
-        GLint.IN("x", "the x value"),
-        GLint.IN("y", "the y value")
+        GLint("x", "the x value"),
+        GLint("y", "the y value")
     )
 
-    void("WindowPos2sARB", "Short version of #WindowPos2iARB().", GLshort.IN("x", "the x value"), GLshort.IN("y", "the y value"))
-    void("WindowPos2fARB", "Float version of #WindowPos2iARB().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"))
-    void("WindowPos2dARB", "Double version of #WindowPos2iARB().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"))
+    void("WindowPos2sARB", "Short version of #WindowPos2iARB().", GLshort("x", "the x value"), GLshort("y", "the y value"))
+    void("WindowPos2fARB", "Float version of #WindowPos2iARB().", GLfloat("x", "the x value"), GLfloat("y", "the y value"))
+    void("WindowPos2dARB", "Double version of #WindowPos2iARB().", GLdouble("x", "the x value"), GLdouble("y", "the y value"))
 
-    void("WindowPos2ivARB", "Pointer version of #WindowPos2iARB().", Check(2)..GLint.const.p.IN("p", "the position value"))
-    void("WindowPos2svARB", "Pointer version of #WindowPos2sARB().", Check(2)..GLshort.const.p.IN("p", "the position value"))
-    void("WindowPos2fvARB", "Pointer version of #WindowPos2fARB().", Check(2)..GLfloat.const.p.IN("p", "the position value"))
-    void("WindowPos2dvARB", "Pointer version of #WindowPos2dARB().", Check(2)..GLdouble.const.p.IN("p", "the position value"))
+    void("WindowPos2ivARB", "Pointer version of #WindowPos2iARB().", Check(2)..GLint.const.p("p", "the position value"))
+    void("WindowPos2svARB", "Pointer version of #WindowPos2sARB().", Check(2)..GLshort.const.p("p", "the position value"))
+    void("WindowPos2fvARB", "Pointer version of #WindowPos2fARB().", Check(2)..GLfloat.const.p("p", "the position value"))
+    void("WindowPos2dvARB", "Pointer version of #WindowPos2dARB().", Check(2)..GLdouble.const.p("p", "the position value"))
 
     void(
         "WindowPos3iARB",
         "Alternate way to set the current raster position.",
 
-        GLint.IN("x", "the x value"),
-        GLint.IN("y", "the y value"),
-        GLint.IN("z", "the z value")
+        GLint("x", "the x value"),
+        GLint("y", "the y value"),
+        GLint("z", "the z value")
     )
 
-    void("WindowPos3sARB", "Short version of #WindowPos3iARB().", GLshort.IN("x", "the x value"), GLshort.IN("y", "the y value"), GLshort.IN("z", "the z value"))
-    void("WindowPos3fARB", "Float version of #WindowPos3iARB().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"), GLfloat.IN("z", "the z value"))
-    void("WindowPos3dARB", "Double version of #WindowPos3iARB().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"), GLdouble.IN("z", "the z value"))
+    void("WindowPos3sARB", "Short version of #WindowPos3iARB().", GLshort("x", "the x value"), GLshort("y", "the y value"), GLshort("z", "the z value"))
+    void("WindowPos3fARB", "Float version of #WindowPos3iARB().", GLfloat("x", "the x value"), GLfloat("y", "the y value"), GLfloat("z", "the z value"))
+    void("WindowPos3dARB", "Double version of #WindowPos3iARB().", GLdouble("x", "the x value"), GLdouble("y", "the y value"), GLdouble("z", "the z value"))
 
-    void("WindowPos3ivARB", "Pointer version of #WindowPos3iARB().", Check(3)..GLint.const.p.IN("p", "the position value"))
-    void("WindowPos3svARB", "Pointer version of #WindowPos3sARB().", Check(3)..GLshort.const.p.IN("p", "the position value"))
-    void("WindowPos3fvARB", "Pointer version of #WindowPos3fARB().", Check(3)..GLfloat.const.p.IN("p", "the position value"))
-    void("WindowPos3dvARB", "Pointer version of #WindowPos3dARB().", Check(3)..GLdouble.const.p.IN("p", "the position value"))
+    void("WindowPos3ivARB", "Pointer version of #WindowPos3iARB().", Check(3)..GLint.const.p("p", "the position value"))
+    void("WindowPos3svARB", "Pointer version of #WindowPos3sARB().", Check(3)..GLshort.const.p("p", "the position value"))
+    void("WindowPos3fvARB", "Pointer version of #WindowPos3fARB().", Check(3)..GLfloat.const.p("p", "the position value"))
+    void("WindowPos3dvARB", "Pointer version of #WindowPos3dARB().", Check(3)..GLdouble.const.p("p", "the position value"))
 }

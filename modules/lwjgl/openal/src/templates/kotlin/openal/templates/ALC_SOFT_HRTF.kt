@@ -74,9 +74,9 @@ val ALC_SOFT_HRTF = "SOFTHRTF".nativeClassALC("SOFT_HRTF") {
         strings are valid until the next enumeration point or the device is closed.
         """,
 
-        ALCdevice.p.IN("device", "he same one that previously queried the number of HRTF specifiers"),
-        ALCenum.IN("paramName", "the parameter to query", "#HRTF_SPECIFIER_SOFT"),
-        ALCsizei.IN("index", "an index between 0 (inclusive) and the previously-queried HRTF count (exclusive)")
+        ALCdevice.p("device", "he same one that previously queried the number of HRTF specifiers"),
+        ALCenum("paramName", "the parameter to query", "#HRTF_SPECIFIER_SOFT"),
+        ALCsizei("index", "an index between 0 (inclusive) and the previously-queried HRTF count (exclusive)")
     )
 
     ALCboolean(
@@ -85,11 +85,11 @@ val ALC_SOFT_HRTF = "SOFTHRTF".nativeClassALC("SOFT_HRTF") {
         Resets a device after it is opened for playback, to attempt changing the playback properties.
         """,
 
-        ALCdevice.p.IN(
+        ALCdevice.p(
             "device",
             "a handle to a valid playback device as returned by #OpenDevice(), otherwise the call fails and an #INVALID_DEVICE error is generated"
         ),
-        nullable..NullTerminated..ALCint.const.p.IN(
+        nullable..NullTerminated..ALCint.const.p(
             "attrList",
             """
             the same as what could be passed to #CreateContext(). The AL is allowed to ignore attributes and attribute value combinations the device

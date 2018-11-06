@@ -46,7 +46,7 @@ val NV_stream_reset = "NVStreamReset".nativeClassEGL("NV_stream_reset", postfix 
         "ResetStreamNV",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLStreamKHR.IN("stream", "")
+        EGLDisplay("dpy", ""),
+        EGLStreamKHR("stream", "")
     )
 }

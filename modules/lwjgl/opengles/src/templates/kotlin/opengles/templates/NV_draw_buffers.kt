@@ -66,7 +66,7 @@ val NV_draw_buffers = "NVDrawBuffers".nativeClassGLES("NV_draw_buffers", postfix
         "DrawBuffersNV",
         "",
 
-        AutoSize("bufs")..GLsizei.IN("n", ""),
-        SingleValue("buf")..GLenum.const.p.IN("bufs", "")
+        AutoSize("bufs")..GLsizei("n", ""),
+        SingleValue("buf")..GLenum.const.p("bufs", "")
     )
 }

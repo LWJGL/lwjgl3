@@ -41,8 +41,8 @@ val EXT_discard_framebuffer = "EXTDiscardFramebuffer".nativeClassGLES("EXT_disca
         "DiscardFramebufferEXT",
         "",
 
-        GLenum.IN("target", ""),
-        AutoSize("attachments")..GLsizei.IN("numAttachments", ""),
-        SingleValue("attachment")..GLenum.const.p.IN("attachments", "")
+        GLenum("target", ""),
+        AutoSize("attachments")..GLsizei("numAttachments", ""),
+        SingleValue("attachment")..GLenum.const.p("attachments", "")
     )
 }

@@ -43,18 +43,18 @@ val EXT_map_buffer_range = "EXTMapBufferRange".nativeClassGLES("EXT_map_buffer_r
         "MapBufferRangeEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLintptr.IN("offset", ""),
-        GLsizeiptr.IN("length", ""),
-        GLbitfield.IN("access", "")
+        GLenum("target", ""),
+        GLintptr("offset", ""),
+        GLsizeiptr("length", ""),
+        GLbitfield("access", "")
     )
 
     void(
         "FlushMappedBufferRangeEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLintptr.IN("offset", ""),
-        GLsizeiptr.IN("length", "")
+        GLenum("target", ""),
+        GLintptr("offset", ""),
+        GLsizeiptr("length", "")
     )
 }

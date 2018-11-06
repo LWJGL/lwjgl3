@@ -58,22 +58,22 @@ val IMG_multisampled_render_to_texture = "IMGMultisampledRenderToTexture".native
         "RenderbufferStorageMultisampleIMG",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
     void(
         "FramebufferTexture2DMultisampleIMG",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLenum.IN("textarget", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLsizei.IN("samples", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLenum("textarget", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLsizei("samples", "")
     )
 }

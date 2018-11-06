@@ -28,7 +28,8 @@ val WinBase = "WinBase".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
 
         <b>LWJGL note</b>: This function cannot be used after another JNI call to a Windows function, because the last error resets before that call returns.
         For this reason, LWJGL stores the last error in thread-local storage, you can use #getLastError() to access it.
-        """
+        """,
+        void()
     )
 
     DWORD(
@@ -39,14 +40,15 @@ val WinBase = "WinBase".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
 
         <b>LWJGL note</b>: This method has a meaningful value only after another LWJGL JNI call. It does not call {@code GetLastError()} from WinBase.h, it
         returns the thread-local error code stored by a previous JNI call.
-        """
+        """,
+        void()
     )
 
     SaveLastError..HMODULE(
         "GetModuleHandle",
         "Retrieves a module handle for the specified module. The module must have been loaded by the calling process.",
 
-        nullable..LPCTSTR.IN(
+        nullable..LPCTSTR(
             "moduleName",
             """
             the name of the loaded module (either a .dll or .exe file). If the file name extension is omitted, the default library extension .dll is appended.
@@ -63,7 +65,7 @@ val WinBase = "WinBase".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
         "LoadLibrary",
         "Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded.",
 
-        LPCTSTR.IN(
+        LPCTSTR(
             "name",
             """
             the name of the module. This can be either a library module (a .dll file) or an executable module (an .exe file). The name specified is the file
@@ -86,8 +88,8 @@ val WinBase = "WinBase".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
         "GetProcAddress",
         "Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL).",
 
-        HMODULE.IN("handle", "a handle to the DLL module that contains the function or variable"),
-        LPCSTR.IN(
+        HMODULE("handle", "a handle to the DLL module that contains the function or variable"),
+        LPCSTR(
             "name",
             """
             the function or variable name, or the function's ordinal value. If this parameter is an ordinal value, it must be in the low-order word; the
@@ -103,6 +105,6 @@ val WinBase = "WinBase".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
         is unloaded from the address space of the calling process and the handle is no longer valid.
         """,
 
-        HMODULE.IN("handle", "a handle to the loaded library module")
+        HMODULE("handle", "a handle to the loaded library module")
     )
 }

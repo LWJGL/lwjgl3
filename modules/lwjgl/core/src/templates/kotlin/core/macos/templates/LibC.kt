@@ -12,6 +12,7 @@ val libc = "LibC".nativeClass(Module.CORE_MACOS, nativeSubPath = "macos", bindin
 
     pid_t(
         "getpid",
-        "Returns the process ID of the calling process."
+        "Returns the process ID of the calling process.",
+        void()
     )
 }

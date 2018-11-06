@@ -33,7 +33,7 @@ val GLX_EXT_swap_control = "GLXEXTSwapControl".nativeClassGLX("GLX_EXT_swap_cont
         """,
 
         DISPLAY,
-        GLXDrawable.IN("drawable", "the drawable"),
-        int.IN("interval", "the swap interval")
+        GLXDrawable("drawable", "the drawable"),
+        int("interval", "the swap interval")
     )
 }

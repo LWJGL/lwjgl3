@@ -161,9 +161,9 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         ##VkDisplayPowerInfoEXT
         """,
 
-        VkDevice.IN("device", "a logical device associated with {@code display}."),
-        VkDisplayKHR.IN("display", "the display whose power state is modified."),
-        VkDisplayPowerInfoEXT.const.p.IN("pDisplayPowerInfo", "an instance of ##VkDisplayPowerInfoEXT specifying the new power state of {@code display}.")
+        VkDevice("device", "a logical device associated with {@code display}."),
+        VkDisplayKHR("display", "the display whose power state is modified."),
+        VkDisplayPowerInfoEXT.const.p("pDisplayPowerInfo", "an instance of ##VkDisplayPowerInfoEXT specifying the new power state of {@code display}.")
     )
 
     VkResult(
@@ -201,9 +201,9 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         ##VkAllocationCallbacks, ##VkDeviceEventInfoEXT
         """,
 
-        VkDevice.IN("device", "a logical device on which the event <b>may</b> occur."),
-        VkDeviceEventInfoEXT.const.p.IN("pDeviceEventInfo", "a pointer to an instance of the ##VkDeviceEventInfoEXT structure describing the event of interest to the application."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkDevice("device", "a logical device on which the event <b>may</b> occur."),
+        VkDeviceEventInfoEXT.const.p("pDeviceEventInfo", "a pointer to an instance of the ##VkDeviceEventInfoEXT structure describing the event of interest to the application."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned.")
     )
 
@@ -244,10 +244,10 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         ##VkAllocationCallbacks, ##VkDisplayEventInfoEXT
         """,
 
-        VkDevice.IN("device", "a logical device associated with {@code display}"),
-        VkDisplayKHR.IN("display", "the display on which the event <b>may</b> occur."),
-        VkDisplayEventInfoEXT.const.p.IN("pDisplayEventInfo", "a pointer to an instance of the ##VkDisplayEventInfoEXT structure describing the event of interest to the application."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkDevice("device", "a logical device associated with {@code display}"),
+        VkDisplayKHR("display", "the display on which the event <b>may</b> occur."),
+        VkDisplayEventInfoEXT.const.p("pDisplayEventInfo", "a pointer to an instance of the ##VkDisplayEventInfoEXT structure describing the event of interest to the application."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkFence.p.OUT("pFence", "points to a handle in which the resulting fence object is returned.")
     )
 
@@ -298,9 +298,9 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
         </dl>
         """,
 
-        VkDevice.IN("device", "the {@code VkDevice} associated with {@code swapchain}."),
-        VkSwapchainKHR.IN("swapchain", "the swapchain from which to query the counter value."),
-        VkSurfaceCounterFlagBitsEXT.IN("counter", "the counter to query."),
+        VkDevice("device", "the {@code VkDevice} associated with {@code swapchain}."),
+        VkSwapchainKHR("swapchain", "the swapchain from which to query the counter value."),
+        VkSurfaceCounterFlagBitsEXT("counter", "the counter to query."),
         Check(1)..uint64_t.p.OUT("pCounterValue", "will return the current value of the counter.")
     )
 }

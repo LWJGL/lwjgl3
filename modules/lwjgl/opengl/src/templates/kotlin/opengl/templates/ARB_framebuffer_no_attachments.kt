@@ -69,7 +69,7 @@ val ARB_framebuffer_no_attachments = "ARBFramebufferNoAttachments".nativeClassGL
         "NamedFramebufferParameteriEXT",
         "DSA version of #FramebufferParameteri().",
 
-        GLuint.IN("framebuffer", "the framebuffer object"),
+        GLuint("framebuffer", "the framebuffer object"),
         src["pname"],
         src["param"]
     )
@@ -79,7 +79,7 @@ val ARB_framebuffer_no_attachments = "ARBFramebufferNoAttachments".nativeClassGL
         "GetNamedFramebufferParameterivEXT",
         "DSA version of #GetFramebufferParameteriv().",
 
-        GLuint.IN("framebuffer", "the framebuffer object"),
+        GLuint("framebuffer", "the framebuffer object"),
         src["pname"],
         src["params"]
     )

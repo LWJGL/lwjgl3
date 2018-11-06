@@ -42,71 +42,72 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
         "BlitContextFramebufferAMD",
         "",
 
-        GLXContext.IN("dstCtx", ""),
-        GLint.IN("srcX0", ""),
-        GLint.IN("srcY0", ""),
-        GLint.IN("srcX1", ""),
-        GLint.IN("srcY1", ""),
-        GLint.IN("dstX0", ""),
-        GLint.IN("dstY0", ""),
-        GLint.IN("dstX1", ""),
-        GLint.IN("dstY1", ""),
-        GLbitfield.IN("mask", ""),
-        GLenum.IN("filter", "")
+        GLXContext("dstCtx", ""),
+        GLint("srcX0", ""),
+        GLint("srcY0", ""),
+        GLint("srcX1", ""),
+        GLint("srcY1", ""),
+        GLint("dstX0", ""),
+        GLint("dstY0", ""),
+        GLint("dstX1", ""),
+        GLint("dstY1", ""),
+        GLbitfield("mask", ""),
+        GLenum("filter", "")
     )
 
     GLXContext(
         "CreateAssociatedContextAMD",
         "Creates an associated context.",
 
-        unsigned_int.IN("id", ""),
-        GLXContext.IN("share_list", "")
+        unsigned_int("id", ""),
+        GLXContext("share_list", "")
     )
 
     GLXContext(
         "CreateAssociatedContextAttribsAMD",
         "Creates an associated context and requests a specific GL version.",
 
-        unsigned_int.IN("id", ""),
-        GLXContext.IN("share_context", ""),
-        NullTerminated..int.const.p.IN("attribList", "")
+        unsigned_int("id", ""),
+        GLXContext("share_context", ""),
+        NullTerminated..int.const.p("attribList", "")
     )
 
     Bool(
         "DeleteAssociatedContextAMD",
         "Deletes an associated context.",
 
-        GLXContext.IN("ctx", "the GLXContext")
+        GLXContext("ctx", "the GLXContext")
     )
 
     unsigned_int(
         "GetContextGPUIDAMD",
         "Determines which GPU a context is attached to.",
 
-        GLXContext.IN("ctx", "the GLXContext")
+        GLXContext("ctx", "the GLXContext")
     )
 
     GLXContext(
         "GetCurrentAssociatedContextAMD",
-        "Queries the crrent associated context."
+        "Queries the crrent associated context.",
+        void()
     )
 
     unsigned_int(
         "GetGPUIDsAMD",
         "Queries the IDs for available GPUs.",
 
-        unsigned_int.IN("maxCount", ""),
-        unsigned_int.IN("ids", "")
+        unsigned_int("maxCount", ""),
+        unsigned_int("ids", "")
     )
 
     int(
         "GetGPUInfoAMD",
         "Queries GPU properties.",
 
-        unsigned_int.IN("id", ""),
-        int.IN("property", "", properties),
-        GLenum.IN("dataType", ""),
-        AutoSize("data")..unsigned_int.IN("size", ""),
+        unsigned_int("id", ""),
+        int("property", "", properties),
+        GLenum("dataType", ""),
+        AutoSize("data")..unsigned_int("size", ""),
         void.p.OUT("data", "")
     )
 
@@ -114,7 +115,7 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
         "MakeAssociatedContextCurrentAMD",
         "Makes an associated context current in the current thread.",
 
-        GLXContext.IN("ctx", "the GLXContext")
+        GLXContext("ctx", "the GLXContext")
     )
 
 }

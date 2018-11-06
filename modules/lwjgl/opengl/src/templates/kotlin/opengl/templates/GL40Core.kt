@@ -41,37 +41,37 @@ val GL40C = "GL40C".nativeClassGL("GL40C") {
         "BlendEquationi",
         "Specifies the equation used for both the RGB blend equation and the Alpha blend equation for the specified draw buffer.",
 
-        GLuint.IN("buf", "the index of the draw buffer for which to set the blend equation"),
-        GLenum.IN("mode", "how source and destination colors are combined", blendEquations)
+        GLuint("buf", "the index of the draw buffer for which to set the blend equation"),
+        GLenum("mode", "how source and destination colors are combined", blendEquations)
     )
 
     void(
         "BlendEquationSeparatei",
         "Sets the RGB blend equation and the alpha blend equation separately for the specified draw buffer.",
 
-        GLuint.IN("buf", "the index of the draw buffer for which to set the blend equations"),
-        GLenum.IN("modeRGB", "the RGB blend equation, how the red, green, and blue components of the source and destination colors are combined", blendEquations),
-        GLenum.IN("modeAlpha", "the alpha blend equation, how the alpha component of the source and destination colors are combined", blendEquations)
+        GLuint("buf", "the index of the draw buffer for which to set the blend equations"),
+        GLenum("modeRGB", "the RGB blend equation, how the red, green, and blue components of the source and destination colors are combined", blendEquations),
+        GLenum("modeAlpha", "the alpha blend equation, how the alpha component of the source and destination colors are combined", blendEquations)
     )
 
     void(
         "BlendFunci",
         "Specifies pixel arithmetic for the specified draw buffer.",
 
-        GLuint.IN("buf", "the index of the draw buffer for which to set the blend function"),
-        GLenum.IN("sfactor", "how the red, green, blue, and alpha source blending factors are computed"),
-        GLenum.IN("dfactor", "how the red, green, blue, and alpha destination blending factors are computed")
+        GLuint("buf", "the index of the draw buffer for which to set the blend function"),
+        GLenum("sfactor", "how the red, green, blue, and alpha source blending factors are computed"),
+        GLenum("dfactor", "how the red, green, blue, and alpha destination blending factors are computed")
     )
 
     void(
         "BlendFuncSeparatei",
         "Specifies pixel arithmetic for RGB and alpha components separately for the specified draw buffer.",
 
-        GLuint.IN("buf", "the index of the draw buffer for which to set the blend functions"),
-        GLenum.IN("srcRGB", "how the red, green, and blue blending factors are computed"),
-        GLenum.IN("dstRGB", "how the red, green, and blue destination blending factors are computed"),
-        GLenum.IN("srcAlpha", "how the alpha source blending factor is computed"),
-        GLenum.IN("dstAlpha", "how the alpha destination blending factor is computed")
+        GLuint("buf", "the index of the draw buffer for which to set the blend functions"),
+        GLenum("srcRGB", "how the red, green, and blue blending factors are computed"),
+        GLenum("dstRGB", "how the red, green, and blue destination blending factors are computed"),
+        GLenum("srcAlpha", "how the alpha source blending factor is computed"),
+        GLenum("dstAlpha", "how the alpha destination blending factor is computed")
     )
 
     // ARB_draw_indirect
@@ -113,10 +113,10 @@ glDrawArraysInstancedBaseInstance(mode, cmd->first, cmd->count, cmd->primCount, 
         """)}
         """,
 
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
+        GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
         Check("4 * 4")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p.IN("indirect", "a structure containing the draw parameters")
+        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "a structure containing the draw parameters")
     )
 
     void(
@@ -155,15 +155,15 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         """)}
         """,
 
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        GLenum.IN(
+        GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
+        GLenum(
             "type",
             "the type of data in the buffer bound to the #ELEMENT_ARRAY_BUFFER binding",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
         Check("5 * 4")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p.IN("indirect", "the address of a structure containing the draw parameters")
+        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "the address of a structure containing the draw parameters")
     )
 
     // ARB_gpu_shader5
@@ -221,134 +221,134 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "Uniform1d",
         "Specifies the value of a double uniform variable for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        GLdouble.IN("x", uniformX)
+        GLint("location", uniformLocation),
+        GLdouble("x", uniformX)
     )
 
     void(
         "Uniform2d",
         "Specifies the value of a dvec2 uniform variable for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        GLdouble.IN("x", uniformX),
-        GLdouble.IN("y", uniformY)
+        GLint("location", uniformLocation),
+        GLdouble("x", uniformX),
+        GLdouble("y", uniformY)
     )
 
     void(
         "Uniform3d",
         "Specifies the value of a dvec3 uniform variable for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        GLdouble.IN("x", uniformX),
-        GLdouble.IN("y", uniformY),
-        GLdouble.IN("z", uniformZ)
+        GLint("location", uniformLocation),
+        GLdouble("x", uniformX),
+        GLdouble("y", uniformY),
+        GLdouble("z", uniformZ)
     )
 
     void(
         "Uniform4d",
         "Specifies the value of a dvec4 uniform variable for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        GLdouble.IN("x", uniformX),
-        GLdouble.IN("y", uniformY),
-        GLdouble.IN("z", uniformZ),
-        GLdouble.IN("w", uniformW)
+        GLint("location", uniformLocation),
+        GLdouble("x", uniformX),
+        GLdouble("y", uniformY),
+        GLdouble("z", uniformZ),
+        GLdouble("w", uniformW)
     )
 
     void(
         "Uniform1dv",
         "Specifies the value of a single double uniform variable or a double uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize("value")..GLsizei.IN("count", uniformArrayCount),
-        GLdouble.const.p.IN("value", uniformArrayValue)
+        GLint("location", uniformLocation),
+        AutoSize("value")..GLsizei("count", uniformArrayCount),
+        GLdouble.const.p("value", uniformArrayValue)
     )
 
     void(
         "Uniform2dv",
         "Specifies the value of a single dvec2 uniform variable or a dvec2 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(2, "value")..GLsizei.IN("count", uniformArrayCount),
-        GLdouble.const.p.IN("value", uniformArrayValue)
+        GLint("location", uniformLocation),
+        AutoSize(2, "value")..GLsizei("count", uniformArrayCount),
+        GLdouble.const.p("value", uniformArrayValue)
     )
 
     void(
         "Uniform3dv",
         "Specifies the value of a single dvec3 uniform variable or a dvec3 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(3, "value")..GLsizei.IN("count", uniformArrayCount),
-        GLdouble.const.p.IN("value", uniformArrayValue)
+        GLint("location", uniformLocation),
+        AutoSize(3, "value")..GLsizei("count", uniformArrayCount),
+        GLdouble.const.p("value", uniformArrayValue)
     )
 
     void(
         "Uniform4dv",
         "Specifies the value of a single dvec4 uniform variable or a dvec4 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(4, "value")..GLsizei.IN("count", uniformArrayCount),
-        GLdouble.const.p.IN("value", uniformArrayValue)
+        GLint("location", uniformLocation),
+        AutoSize(4, "value")..GLsizei("count", uniformArrayCount),
+        GLdouble.const.p("value", uniformArrayValue)
     )
 
     void(
         "UniformMatrix2dv",
         "Specifies the value of a single dmat2 uniform variable or a dmat2 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(2 x 2, "value")..GLsizei.IN("count", uniformMatrixCount),
-        GLboolean.IN("transpose", uniformMatrixTranspose),
-        GLdouble.const.p.IN("value", uniformMatrixValue)
+        GLint("location", uniformLocation),
+        AutoSize(2 x 2, "value")..GLsizei("count", uniformMatrixCount),
+        GLboolean("transpose", uniformMatrixTranspose),
+        GLdouble.const.p("value", uniformMatrixValue)
     )
 
     void(
         "UniformMatrix3dv",
         "Specifies the value of a single dmat3 uniform variable or a dmat3 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(3 x 3, "value")..GLsizei.IN("count", uniformMatrixCount),
-        GLboolean.IN("transpose", uniformMatrixTranspose),
-        GLdouble.const.p.IN("value", uniformMatrixValue)
+        GLint("location", uniformLocation),
+        AutoSize(3 x 3, "value")..GLsizei("count", uniformMatrixCount),
+        GLboolean("transpose", uniformMatrixTranspose),
+        GLdouble.const.p("value", uniformMatrixValue)
     )
 
     void(
         "UniformMatrix4dv",
         "Specifies the value of a single dmat4 uniform variable or a dmat4 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(4 x 4, "value")..GLsizei.IN("count", uniformMatrixCount),
-        GLboolean.IN("transpose", uniformMatrixTranspose),
-        GLdouble.const.p.IN("value", uniformMatrixValue)
+        GLint("location", uniformLocation),
+        AutoSize(4 x 4, "value")..GLsizei("count", uniformMatrixCount),
+        GLboolean("transpose", uniformMatrixTranspose),
+        GLdouble.const.p("value", uniformMatrixValue)
     )
 
     void(
         "UniformMatrix2x3dv",
         "Specifies the value of a single dmat2x3 uniform variable or a dmat2x3 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(2 x 3, "value")..GLsizei.IN("count", uniformMatrixCount),
-        GLboolean.IN("transpose", uniformMatrixTranspose),
-        GLdouble.const.p.IN("value", uniformMatrixValue)
+        GLint("location", uniformLocation),
+        AutoSize(2 x 3, "value")..GLsizei("count", uniformMatrixCount),
+        GLboolean("transpose", uniformMatrixTranspose),
+        GLdouble.const.p("value", uniformMatrixValue)
     )
 
     void(
         "UniformMatrix2x4dv",
         "Specifies the value of a single dmat2x4 uniform variable or a dmat2x4 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(2 x 4, "value")..GLsizei.IN("count", uniformMatrixCount),
-        GLboolean.IN("transpose", uniformMatrixTranspose),
-        GLdouble.const.p.IN("value", uniformMatrixValue)
+        GLint("location", uniformLocation),
+        AutoSize(2 x 4, "value")..GLsizei("count", uniformMatrixCount),
+        GLboolean("transpose", uniformMatrixTranspose),
+        GLdouble.const.p("value", uniformMatrixValue)
     )
 
     void(
         "UniformMatrix3x2dv",
         "Specifies the value of a single dmat3x2 uniform variable or a dmat3x2 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(3 x 2, "value")..GLsizei.IN("count", uniformMatrixCount),
-        GLboolean.IN("transpose", uniformMatrixTranspose),
-        GLdouble.const.p.IN("value", uniformMatrixValue)
+        GLint("location", uniformLocation),
+        AutoSize(3 x 2, "value")..GLsizei("count", uniformMatrixCount),
+        GLboolean("transpose", uniformMatrixTranspose),
+        GLdouble.const.p("value", uniformMatrixValue)
 
     )
 
@@ -356,10 +356,10 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "UniformMatrix3x4dv",
         "Specifies the value of a single dmat3x4 uniform variable or a dmat3x4 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(3 x 4, "value")..GLsizei.IN("count", uniformMatrixCount),
-        GLboolean.IN("transpose", uniformMatrixTranspose),
-        GLdouble.const.p.IN("value", uniformMatrixValue)
+        GLint("location", uniformLocation),
+        AutoSize(3 x 4, "value")..GLsizei("count", uniformMatrixCount),
+        GLboolean("transpose", uniformMatrixTranspose),
+        GLdouble.const.p("value", uniformMatrixValue)
 
     )
 
@@ -367,10 +367,10 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "UniformMatrix4x2dv",
         "Specifies the value of a single dmat4x2 uniform variable or a dmat4x2 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(4 x 2, "value")..GLsizei.IN("count", uniformMatrixCount),
-        GLboolean.IN("transpose", uniformMatrixTranspose),
-        GLdouble.const.p.IN("value", uniformMatrixValue)
+        GLint("location", uniformLocation),
+        AutoSize(4 x 2, "value")..GLsizei("count", uniformMatrixCount),
+        GLboolean("transpose", uniformMatrixTranspose),
+        GLdouble.const.p("value", uniformMatrixValue)
 
     )
 
@@ -378,10 +378,10 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "UniformMatrix4x3dv",
         "Specifies the value of a single dmat4x3 uniform variable or a dmat4x3 uniform variable array for the current program object.",
 
-        GLint.IN("location", uniformLocation),
-        AutoSize(4 x 3, "value")..GLsizei.IN("count", uniformMatrixCount),
-        GLboolean.IN("transpose", uniformMatrixTranspose),
-        GLdouble.const.p.IN("value", uniformMatrixValue)
+        GLint("location", uniformLocation),
+        AutoSize(4 x 3, "value")..GLsizei("count", uniformMatrixCount),
+        GLboolean("transpose", uniformMatrixTranspose),
+        GLdouble.const.p("value", uniformMatrixValue)
 
     )
 
@@ -389,8 +389,8 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "GetUniformdv",
         "Returns the double value(s) of a uniform variable.",
 
-        GLuint.IN("program", "the program object to be queried"),
-        GLint.IN("location", "the location of the uniform variable to be queried"),
+        GLuint("program", "the program object to be queried"),
+        GLint("location", "the location of the uniform variable to be queried"),
         Check(1)..ReturnParam..GLdouble.p.OUT("params", "the value of the specified uniform variable")
     )
 
@@ -415,7 +415,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "MinSampleShading",
         "Specifies the minimum rate at which sample shading takes place.",
 
-        GLfloat.IN("value", "the rate at which samples are shaded within each covered pixel")
+        GLfloat("value", "the rate at which samples are shaded within each covered pixel")
     )
 
     // ARB_shader_subroutine
@@ -448,28 +448,28 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "GetSubroutineUniformLocation",
         "Retrieves the location of a subroutine uniform of a given shader stage within a program.",
 
-        GLuint.IN("program", "the name of the program containing shader stage"),
-        GLenum.IN("shadertype", "the shader stage from which to query for subroutine uniform index", SHADER_TYPES),
-        GLcharASCII.const.p.IN("name", "the name of the subroutine uniform whose index to query.")
+        GLuint("program", "the name of the program containing shader stage"),
+        GLenum("shadertype", "the shader stage from which to query for subroutine uniform index", SHADER_TYPES),
+        GLcharASCII.const.p("name", "the name of the subroutine uniform whose index to query.")
     )
 
     GLuint(
         "GetSubroutineIndex",
         "Retrieves the index of a subroutine function of a given shader stage within a program.",
 
-        GLuint.IN("program", "the name of the program containing shader stage"),
-        GLenum.IN("shadertype", "the shader stage from which to query for subroutine function index", SHADER_TYPES),
-        GLcharASCII.const.p.IN("name", "the name of the subroutine function whose index to query")
+        GLuint("program", "the name of the program containing shader stage"),
+        GLenum("shadertype", "the shader stage from which to query for subroutine function index", SHADER_TYPES),
+        GLcharASCII.const.p("name", "the name of the subroutine function whose index to query")
     )
 
     void(
         "GetActiveSubroutineUniformiv",
         "Queries a property of an active shader subroutine uniform.",
 
-        GLuint.IN("program", "the name of the program containing the subroutine"),
-        GLenum.IN("shadertype", "the shader stage from which to query for the subroutine parameter", SHADER_TYPES),
-        GLuint.IN("index", "the index of the shader subroutine uniform"),
-        GLenum.IN(
+        GLuint("program", "the name of the program containing the subroutine"),
+        GLenum("shadertype", "the shader stage from which to query for the subroutine parameter", SHADER_TYPES),
+        GLuint("index", "the index of the shader subroutine uniform"),
+        GLenum(
             "pname",
             "the parameter of the shader subroutine uniform to query",
             "#NUM_COMPATIBLE_SUBROUTINES #COMPATIBLE_SUBROUTINES #UNIFORM_SIZE #UNIFORM_NAME_LENGTH"
@@ -481,10 +481,10 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "GetActiveSubroutineUniformName",
         "Queries the name of an active shader subroutine uniform.",
 
-        GLuint.IN("program", "the name of the program containing the subroutine"),
-        GLenum.IN("shadertype", "the shader stage from which to query for the subroutine parameter", SHADER_TYPES),
-        GLuint.IN("index", "the index of the shader subroutine uniform"),
-        AutoSize("name")..GLsizei.IN("bufsize", "the size of the buffer whose address is given in {@code name}"),
+        GLuint("program", "the name of the program containing the subroutine"),
+        GLenum("shadertype", "the shader stage from which to query for the subroutine parameter", SHADER_TYPES),
+        GLuint("index", "the index of the shader subroutine uniform"),
+        AutoSize("name")..GLsizei("bufsize", "the size of the buffer whose address is given in {@code name}"),
         Check(1)..nullable..GLsizei.p.OUT("length", "the address of a variable into which is written the number of characters copied into {@code name}"),
         Return(
             "length", "glGetActiveSubroutineUniformi(program, shadertype, index, GL31.GL_UNIFORM_NAME_LENGTH)"
@@ -495,10 +495,10 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "GetActiveSubroutineName",
         "Queries the name of an active shader subroutine.",
 
-        GLuint.IN("program", "the name of the program containing the subroutine"),
-        GLenum.IN("shadertype", "the shader stage from which to query the subroutine name", SHADER_TYPES),
-        GLuint.IN("index", "the index of the shader subroutine uniform"),
-        AutoSize("name")..GLsizei.IN("bufsize", "the size of the buffer whose address is given in {@code name}"),
+        GLuint("program", "the name of the program containing the subroutine"),
+        GLenum("shadertype", "the shader stage from which to query the subroutine name", SHADER_TYPES),
+        GLuint("index", "the index of the shader subroutine uniform"),
+        AutoSize("name")..GLsizei("bufsize", "the size of the buffer whose address is given in {@code name}"),
         Check(1)..nullable..GLsizei.p.OUT("length", "a variable which is to receive the length of the shader subroutine uniform name"),
         Return(
             "length", "glGetProgramStagei(program, shadertype, GL_ACTIVE_SUBROUTINE_MAX_LENGTH)"
@@ -509,17 +509,17 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "UniformSubroutinesuiv",
         "Loads active subroutine uniforms.",
 
-        GLenum.IN("shadertype", "the shader stage to update", SHADER_TYPES),
-        AutoSize("indices")..GLsizei.IN("count", "the number of uniform indices stored in {@code indices}"),
-        SingleValue("index")..GLuint.const.p.IN("indices", "an array holding the indices to load into the shader subroutine variables")
+        GLenum("shadertype", "the shader stage to update", SHADER_TYPES),
+        AutoSize("indices")..GLsizei("count", "the number of uniform indices stored in {@code indices}"),
+        SingleValue("index")..GLuint.const.p("indices", "an array holding the indices to load into the shader subroutine variables")
     )
 
     void(
         "GetUniformSubroutineuiv",
         "Retrieves the value of a subroutine uniform of a given shader stage of the current program.",
 
-        GLenum.IN("shadertype", "the shader stage from which to query for subroutine uniform index", SHADER_TYPES),
-        GLint.IN("location", "the location of the subroutine uniform"),
+        GLenum("shadertype", "the shader stage from which to query for subroutine uniform index", SHADER_TYPES),
+        GLint("location", "the location of the subroutine uniform"),
         Check(1)..ReturnParam..GLuint.p.OUT("params", "a variable to receive the value or values of the subroutine uniform")
     )
 
@@ -527,9 +527,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "GetProgramStageiv",
         "Retrieves properties of a program object corresponding to a specified shader stage.",
 
-        GLuint.IN("program", "the name of the program containing shader stage"),
-        GLenum.IN("shadertype", "the shader stage from which to query for the subroutine parameter", SHADER_TYPES),
-        GLenum.IN("pname", "the parameter of the shader to query", ProgramStageProperties),
+        GLuint("program", "the name of the program containing shader stage"),
+        GLenum("shadertype", "the shader stage from which to query for the subroutine parameter", SHADER_TYPES),
+        GLenum("pname", "the parameter of the shader to query", ProgramStageProperties),
         Check(1)..ReturnParam..GLint.p.OUT("values", "a variable into which the queried value or values will be placed")
     )
 
@@ -616,18 +616,18 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "PatchParameteri",
         "Specifies the integer value of the specified parameter for patch primitives.",
 
-        GLenum.IN("pname", "the name of the parameter to set", "#PATCH_VERTICES"),
-        GLint.IN("value", "the new value for the parameter given by {@code pname}")
+        GLenum("pname", "the name of the parameter to set", "#PATCH_VERTICES"),
+        GLint("value", "the new value for the parameter given by {@code pname}")
     )
 
     void(
         "PatchParameterfv",
         "Specifies an array of float values for the specified parameter for patch primitives.",
 
-        GLenum.IN("pname", "the name of the parameter to set", "#PATCH_DEFAULT_OUTER_LEVEL #PATCH_DEFAULT_INNER_LEVEL"),
+        GLenum("pname", "the name of the parameter to set", "#PATCH_DEFAULT_OUTER_LEVEL #PATCH_DEFAULT_INNER_LEVEL"),
         Check(
             expression = "GL11.glGetInteger(GL_PATCH_VERTICES)", debug = true
-        )..GLfloat.const.p.IN("values", "an array containing the new values for the parameter given by {@code pname}")
+        )..GLfloat.const.p("values", "an array containing the new values for the parameter given by {@code pname}")
     )
 
     // ARB_texture_cube_map_array
@@ -688,23 +688,23 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "BindTransformFeedback",
         "Binds a transform feedback object.",
 
-        GLenum.IN("target", "the target to which to bind the transform feedback object {@code id}", "#TRANSFORM_FEEDBACK"),
-        GLuint.IN("id", "the name of a transform feedback object")
+        GLenum("target", "the target to which to bind the transform feedback object {@code id}", "#TRANSFORM_FEEDBACK"),
+        GLuint("id", "the name of a transform feedback object")
     )
 
     void(
         "DeleteTransformFeedbacks",
         "Deletes transform feedback objects.",
 
-        AutoSize("ids")..GLsizei.IN("n", "the number of transform feedback objects to delete"),
-        SingleValue("id")..GLuint.const.p.IN("ids", "an array of names of transform feedback objects to delete")
+        AutoSize("ids")..GLsizei("n", "the number of transform feedback objects to delete"),
+        SingleValue("id")..GLuint.const.p("ids", "an array of names of transform feedback objects to delete")
     )
 
     void(
         "GenTransformFeedbacks",
         "Reserves transform feedback object names.",
 
-        AutoSize("ids")..GLsizei.IN("n", "the number of transform feedback object names to reserve"),
+        AutoSize("ids")..GLsizei("n", "the number of transform feedback object names to reserve"),
         ReturnParam..GLuint.p.OUT("ids", "an array of into which the reserved names will be written")
     )
 
@@ -712,7 +712,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "IsTransformFeedback",
         "Determines if a name corresponds to a transform feedback object.",
 
-        GLuint.IN("id", "a value that may be the name of a transform feedback object")
+        GLuint("id", "a value that may be the name of a transform feedback object")
     )
 
     void(
@@ -745,8 +745,8 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "DrawTransformFeedback",
         "Render primitives using a count derived from a transform feedback object.",
 
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        GLuint.IN("id", "the name of a transform feedback object from which to retrieve a primitive count")
+        GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
+        GLuint("id", "the name of a transform feedback object from which to retrieve a primitive count")
     )
 
     // ARB_transform_feedback3
@@ -762,39 +762,39 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
         "DrawTransformFeedbackStream",
         "Renders primitives using a count derived from a specifed stream of a transform feedback object.",
 
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        GLuint.IN("id", "the name of a transform feedback object from which to retrieve a primitive count"),
-        GLuint.IN("stream", "the index of the transform feedback stream from which to retrieve a primitive count")
+        GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
+        GLuint("id", "the name of a transform feedback object from which to retrieve a primitive count"),
+        GLuint("stream", "the index of the transform feedback stream from which to retrieve a primitive count")
     )
 
     void(
         "BeginQueryIndexed",
         "Begins a query object on an indexed target",
 
-        GLenum.IN(
+        GLenum(
             "target",
             "the target type of query object established between {@code glBeginQueryIndexed} and the subsequent #EndQueryIndexed()",
             QUERY_TARGETS
         ),
-        GLuint.IN("index", "the index of the query target upon which to begin the query"),
-        GLuint.IN("id", "the name of a query object")
+        GLuint("index", "the index of the query target upon which to begin the query"),
+        GLuint("id", "the name of a query object")
     )
 
     void(
         "EndQueryIndexed",
         "Ends a query object on an indexed target",
 
-        GLenum.IN("target", "the target type of query object to be concluded", QUERY_TARGETS),
-        GLuint.IN("index", "the index of the query target upon which to end the query")
+        GLenum("target", "the target type of query object to be concluded", QUERY_TARGETS),
+        GLuint("index", "the index of the query target upon which to end the query")
     )
 
     void(
         "GetQueryIndexediv",
         "Returns parameters of an indexed query object target.",
 
-        GLenum.IN("target", "a query object target", QUERY_TARGETS),
-        GLuint.IN("index", "the index of the query object target"),
-        GLenum.IN("pname", "the symbolic name of a query object target parameter"),
+        GLenum("target", "a query object target", QUERY_TARGETS),
+        GLuint("index", "the index of the query object target"),
+        GLenum("pname", "the symbolic name of a query object target parameter"),
         Check(1)..ReturnParam..GLint.p.OUT("params", "the requested data")
     )
 }

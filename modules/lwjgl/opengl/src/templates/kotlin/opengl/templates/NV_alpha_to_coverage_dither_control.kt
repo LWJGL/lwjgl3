@@ -34,6 +34,6 @@ val NV_alpha_to_coverage_dither_control = "NVAlphaToCoverageDitherControl".nativ
         "AlphaToCoverageDitherControlNV",
         "",
 
-        GLenum.IN("mode", "")
+        GLenum("mode", "")
     )
 }

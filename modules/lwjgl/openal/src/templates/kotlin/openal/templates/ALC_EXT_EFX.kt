@@ -745,7 +745,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GenEffects",
         "Requests a number of effects.",
 
-        AutoSize("effects")..ALsizei.IN("n", "the number of effects be to generated"),
+        AutoSize("effects")..ALsizei("n", "the number of effects be to generated"),
         ReturnParam..ALuint.p.OUT("effects", "the buffer that will receive the effects")
     )
 
@@ -753,59 +753,59 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "DeleteEffects",
         "Deletes a number of effects.",
 
-        AutoSize("effects")..ALsizei.IN("n", "the number of effects be to deleted"),
-        SingleValue("effect")..ALuint.p.IN("effects", "the effect to delete")
+        AutoSize("effects")..ALsizei("n", "the number of effects be to deleted"),
+        SingleValue("effect")..ALuint.p("effects", "the effect to delete")
     )
 
     ALboolean(
         "IsEffect",
         "Verifies whether the given object name is an effect.",
 
-        ALuint.IN("effect", "a value that may be a effect name")
+        ALuint("effect", "a value that may be a effect name")
     )
 
     ALvoid(
         "Effecti",
         "Sets the integer value of an effect parameter.",
 
-        ALuint.IN("effect", "the effect to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        ALint.IN("value", "the parameter value")
+        ALuint("effect", "the effect to modify"),
+        ALenum("param", "the parameter to modify"),
+        ALint("value", "the parameter value")
     )
 
     ALvoid(
         "Effectiv",
         "Pointer version of #Effecti().",
 
-        ALuint.IN("effect", "the effect to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        Check(1)..ALint.const.p.IN("values", "the parameter values")
+        ALuint("effect", "the effect to modify"),
+        ALenum("param", "the parameter to modify"),
+        Check(1)..ALint.const.p("values", "the parameter values")
     )
 
     ALvoid(
         "Effectf",
         "Sets the float value of an effect parameter.",
 
-        ALuint.IN("effect", "the effect to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        ALfloat.IN("value", "the parameter value")
+        ALuint("effect", "the effect to modify"),
+        ALenum("param", "the parameter to modify"),
+        ALfloat("value", "the parameter value")
     )
 
     ALvoid(
         "Effectfv",
         "Pointer version of #Effectf().",
 
-        ALuint.IN("effect", "the effect to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        Check(1)..ALfloat.const.p.IN("values", "the parameter values")
+        ALuint("effect", "the effect to modify"),
+        ALenum("param", "the parameter to modify"),
+        Check(1)..ALfloat.const.p("values", "the parameter values")
     )
 
     ALvoid(
         "GetEffecti",
         "Returns the integer value of the specified effect parameter.",
 
-        ALuint.IN("effect", "the effect to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("effect", "the effect to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALint.p.OUT("value", "the parameter value")
     )
 
@@ -813,8 +813,8 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GetEffectiv",
         "Returns the integer values of the specified effect parameter.",
 
-        ALuint.IN("effect", "the effect to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("effect", "the effect to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALint.p.OUT("values", "the parameter values")
     )
 
@@ -822,8 +822,8 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GetEffectf",
         "Returns the float value of the specified effect parameter.",
 
-        ALuint.IN("effect", "the effect to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("effect", "the effect to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALfloat.p.OUT("value", "the parameter value")
     )
 
@@ -831,8 +831,8 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GetEffectfv",
         "Returns the float values of the specified effect parameter.",
 
-        ALuint.IN("effect", "the effect to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("effect", "the effect to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALfloat.p.OUT("values", "the parameter values")
     )
 
@@ -840,7 +840,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GenFilters",
         "Requests a number of filters.",
 
-        AutoSize("filters")..ALsizei.IN("n", "the number of filters be to generated"),
+        AutoSize("filters")..ALsizei("n", "the number of filters be to generated"),
         ReturnParam..ALuint.p.OUT("filters", "the buffer that will receive the filters")
     )
 
@@ -848,59 +848,59 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "DeleteFilters",
         "Deletes a number of filters.",
 
-        AutoSize("filters")..ALsizei.IN("n", "the number of filters be to deleted"),
-        SingleValue("filter")..ALuint.p.IN("filters", "the filter to delete")
+        AutoSize("filters")..ALsizei("n", "the number of filters be to deleted"),
+        SingleValue("filter")..ALuint.p("filters", "the filter to delete")
     )
 
     ALboolean(
         "IsFilter",
         "Verifies whether the given object name is a filter.",
 
-        ALuint.IN("filter", "a value that may be a filter name")
+        ALuint("filter", "a value that may be a filter name")
     )
 
     ALvoid(
         "Filteri",
         "Sets the integer value of a filter parameter.",
 
-        ALuint.IN("filter", "the filter to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        ALint.IN("value", "the parameter value")
+        ALuint("filter", "the filter to modify"),
+        ALenum("param", "the parameter to modify"),
+        ALint("value", "the parameter value")
     )
 
     ALvoid(
         "Filteriv",
         "Pointer version of #Filteri().",
 
-        ALuint.IN("filter", "the filter to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        Check(1)..ALint.const.p.IN("values", "the parameter values")
+        ALuint("filter", "the filter to modify"),
+        ALenum("param", "the parameter to modify"),
+        Check(1)..ALint.const.p("values", "the parameter values")
     )
 
     ALvoid(
         "Filterf",
         "Sets the float value of a filter parameter.",
 
-        ALuint.IN("filter", "the filter to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        ALfloat.IN("value", "the parameter value")
+        ALuint("filter", "the filter to modify"),
+        ALenum("param", "the parameter to modify"),
+        ALfloat("value", "the parameter value")
     )
 
     ALvoid(
         "Filterfv",
         "Pointer version of #Filterf().",
 
-        ALuint.IN("filter", "the filter to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        Check(1)..ALfloat.const.p.IN("values", "the parameter values")
+        ALuint("filter", "the filter to modify"),
+        ALenum("param", "the parameter to modify"),
+        Check(1)..ALfloat.const.p("values", "the parameter values")
     )
 
     ALvoid(
         "GetFilteri",
         "Returns the integer value of the specified filter parameter.",
 
-        ALuint.IN("filter", "the filter to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("filter", "the filter to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALint.p.OUT("value", "the parameter value")
     )
 
@@ -908,8 +908,8 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GetFilteriv",
         "Returns the integer values of the specified filter parameter.",
 
-        ALuint.IN("filter", "the filter to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("filter", "the filter to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALint.p.OUT("values", "the parameter values")
     )
 
@@ -917,8 +917,8 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GetFilterf",
         "Returns the float value of the specified filter parameter.",
 
-        ALuint.IN("filter", "the effect to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("filter", "the effect to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALfloat.p.OUT("value", "the parameter value")
     )
 
@@ -926,8 +926,8 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GetFilterfv",
         "Returns the float values of the specified filter parameter.",
 
-        ALuint.IN("filter", "the effect to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("filter", "the effect to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALfloat.p.OUT("values", "the parameter values")
     )
 
@@ -935,7 +935,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GenAuxiliaryEffectSlots",
         "Requests a number of effect slots.",
 
-        AutoSize("effectSlots")..ALsizei.IN("n", "the number of effect slots be to generated"),
+        AutoSize("effectSlots")..ALsizei("n", "the number of effect slots be to generated"),
         ReturnParam..ALuint.p.OUT("effectSlots", "the buffer that will receive the effect slots")
     )
 
@@ -943,59 +943,59 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "DeleteAuxiliaryEffectSlots",
         "Deletes a number of effect slots.",
 
-        AutoSize("effectSlots")..ALsizei.IN("n", "the number of effect slots be to deleted"),
-        SingleValue("effectSlot")..ALuint.p.IN("effectSlots", "the effectSlot to delete")
+        AutoSize("effectSlots")..ALsizei("n", "the number of effect slots be to deleted"),
+        SingleValue("effectSlot")..ALuint.p("effectSlots", "the effectSlot to delete")
     )
 
     ALboolean(
         "IsAuxiliaryEffectSlot",
         "Verifies whether the given object name is an effect slot.",
 
-        ALuint.IN("effectSlot", "a value that may be an effect slot name")
+        ALuint("effectSlot", "a value that may be an effect slot name")
     )
 
     ALvoid(
         "AuxiliaryEffectSloti",
         "Sets the integer value of an effect slot parameter.",
 
-        ALuint.IN("effectSlot", "the effect slot to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        ALint.IN("value", "the parameter value")
+        ALuint("effectSlot", "the effect slot to modify"),
+        ALenum("param", "the parameter to modify"),
+        ALint("value", "the parameter value")
     )
 
     ALvoid(
         "AuxiliaryEffectSlotiv",
         "Pointer version of #AuxiliaryEffectSloti().",
 
-        ALuint.IN("effectSlot", "the effect slot to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        Check(1)..ALint.const.p.IN("values", "the parameter values")
+        ALuint("effectSlot", "the effect slot to modify"),
+        ALenum("param", "the parameter to modify"),
+        Check(1)..ALint.const.p("values", "the parameter values")
     )
 
     ALvoid(
         "AuxiliaryEffectSlotf",
         "Sets the float value of an effect slot parameter.",
 
-        ALuint.IN("effectSlot", "the effect slot to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        ALfloat.IN("value", "the parameter value")
+        ALuint("effectSlot", "the effect slot to modify"),
+        ALenum("param", "the parameter to modify"),
+        ALfloat("value", "the parameter value")
     )
 
     ALvoid(
         "AuxiliaryEffectSlotfv",
         "Pointer version of #AuxiliaryEffectSlotf().",
 
-        ALuint.IN("effectSlot", "the effect slot to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        Check(1)..ALfloat.const.p.IN("values", "the parameter values")
+        ALuint("effectSlot", "the effect slot to modify"),
+        ALenum("param", "the parameter to modify"),
+        Check(1)..ALfloat.const.p("values", "the parameter values")
     )
 
     ALvoid(
         "GetAuxiliaryEffectSloti",
         "Returns the integer value of the specified effect slot parameter.",
 
-        ALuint.IN("effectSlot", "the effect slot to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("effectSlot", "the effect slot to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALint.p.OUT("value", "the parameter value")
     )
 
@@ -1003,8 +1003,8 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GetAuxiliaryEffectSlotiv",
         "Returns the integer values of the specified effect slot parameter.",
 
-        ALuint.IN("effectSlot", "the effect slot to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("effectSlot", "the effect slot to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALint.p.OUT("values", "the parameter values")
     )
 
@@ -1012,8 +1012,8 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GetAuxiliaryEffectSlotf",
         "Returns the float value of the specified filter parameter.",
 
-        ALuint.IN("effectSlot", "the effect slot to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("effectSlot", "the effect slot to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ReturnParam..ALfloat.p.OUT("value", "the parameter value")
     )
 
@@ -1021,8 +1021,8 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
         "GetAuxiliaryEffectSlotfv",
         "Returns the float values of the specified effect slot parameter.",
 
-        ALuint.IN("effectSlot", "the effect to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("effectSlot", "the effect to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALfloat.p.OUT("values", "the parameter values")
     )
 

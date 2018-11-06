@@ -60,47 +60,47 @@ val EXT_draw_elements_base_vertex = "EXTDrawElementsBaseVertex".nativeClassGLES(
         "DrawElementsBaseVertexEXT",
         "",
 
-        GLenum.IN("mode", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
-        GLint.IN("basevertex", "")
+        GLenum("mode", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        GLint("basevertex", "")
     )
 
     DependsOn("GLES30")..void(
         "DrawRangeElementsBaseVertexEXT",
         "",
 
-        GLenum.IN("mode", ""),
-        GLuint.IN("start", ""),
-        GLuint.IN("end", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
-        GLint.IN("basevertex", "")
+        GLenum("mode", ""),
+        GLuint("start", ""),
+        GLuint("end", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        GLint("basevertex", "")
     )
 
     DependsOn("GLES30")..void(
         "DrawElementsInstancedBaseVertexEXT",
         "",
 
-        GLenum.IN("mode", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
-        GLsizei.IN("instancecount", ""),
-        GLint.IN("basevertex", "")
+        GLenum("mode", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        GLsizei("instancecount", ""),
+        GLint("basevertex", "")
     )
 
     DependsOn("GL_EXT_multi_draw_arrays")..void(
         "MultiDrawElementsBaseVertexEXT",
         "",
 
-        GLenum.IN("mode", ""),
-        GLsizei.const.p.IN("count", ""),
-        GLenum.IN("type", ""),
-        void.const.p.const.p.IN("indices", ""),
-        AutoSize("count", "indices", "basevertex")..GLsizei.IN("primcount", ""),
-        GLint.const.p.IN("basevertex", "")
+        GLenum("mode", ""),
+        GLsizei.const.p("count", ""),
+        GLenum("type", ""),
+        void.const.p.const.p("indices", ""),
+        AutoSize("count", "indices", "basevertex")..GLsizei("primcount", ""),
+        GLint.const.p("basevertex", "")
     )
 }

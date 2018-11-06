@@ -25,8 +25,8 @@ val MESA_image_dma_buf_export = "MESAImageDMABufExport".nativeClassEGL("MESA_ima
         "ExportDMABUFImageQueryMESA",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLImageKHR.IN("image", ""),
+        EGLDisplay("dpy", ""),
+        EGLImageKHR("image", ""),
         nullable..Check(1)..int.p.OUT("fourcc", ""),
         nullable..Check(1)..int.p.OUT("num_planes", ""),
         nullable..Check(1)..EGLuint64KHR.p.OUT("modifiers", "")
@@ -36,8 +36,8 @@ val MESA_image_dma_buf_export = "MESAImageDMABufExport".nativeClassEGL("MESA_ima
         "ExportDMABUFImageMESA",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLImageKHR.IN("image", ""),
+        EGLDisplay("dpy", ""),
+        EGLImageKHR("image", ""),
         nullable..Check(1)..int.p.OUT("fds", ""),
         nullable..Check(1)..EGLint.p.OUT("strides", ""),
         nullable..Check(1)..EGLint.p.OUT("offsets", "")

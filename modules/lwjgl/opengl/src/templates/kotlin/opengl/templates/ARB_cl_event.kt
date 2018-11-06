@@ -51,8 +51,8 @@ val ARB_cl_event = "ARBCLEvent".dependsOn(Module.OPENCL)?.nativeClassGL("ARB_cl_
         the event object.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context"),
-        cl_event.IN("event", "a valid OpenCL event"),
-        GLbitfield.IN("flags", "must be 0 (placeholder for anticipated future extensions of sync object capabilities)")
+        cl_context("context", "a valid OpenCL context"),
+        cl_event("event", "a valid OpenCL event"),
+        GLbitfield("flags", "must be 0 (placeholder for anticipated future extensions of sync object capabilities)")
     )
 }

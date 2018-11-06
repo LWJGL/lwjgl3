@@ -92,19 +92,19 @@ val EXT_geometry_shader4 = "EXTGeometryShader4".nativeClassGL("EXT_geometry_shad
         "ProgramParameteriEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLenum.IN("pname", ""),
-        GLint.IN("value", "")
+        GLuint("program", ""),
+        GLenum("pname", ""),
+        GLint("value", "")
     )
 
     void(
         "FramebufferTextureEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLuint("texture", ""),
+        GLint("level", "")
     )
 
     EXT_texture_array reuse "FramebufferTextureLayerEXT"
@@ -113,10 +113,10 @@ val EXT_geometry_shader4 = "EXTGeometryShader4".nativeClassGL("EXT_geometry_shad
         "FramebufferTextureFaceEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLenum.IN("face", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLenum("face", "")
     )
 }

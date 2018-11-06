@@ -66,68 +66,68 @@ val EXT_texture_storage = "EXTTextureStorage".nativeClassGLES("EXT_texture_stora
         "TexStorage1DEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("levels", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", "")
+        GLenum("target", ""),
+        GLsizei("levels", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", "")
     )
 
     void(
         "TexStorage2DEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("levels", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLenum("target", ""),
+        GLsizei("levels", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
     void(
         "TexStorage3DEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("levels", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", "")
+        GLenum("target", ""),
+        GLsizei("levels", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "TextureStorage1DEXT",
         "",
 
-        GLuint.IN("texture", ""),
-        GLenum.IN("target", ""),
-        GLsizei.IN("levels", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", "")
+        GLuint("texture", ""),
+        GLenum("target", ""),
+        GLsizei("levels", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "TextureStorage2DEXT",
         "",
 
-        GLuint.IN("texture", ""),
-        GLenum.IN("target", ""),
-        GLsizei.IN("levels", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLuint("texture", ""),
+        GLenum("target", ""),
+        GLsizei("levels", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "TextureStorage3DEXT",
         "",
 
-        GLuint.IN("texture", ""),
-        GLenum.IN("target", ""),
-        GLsizei.IN("levels", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", "")
+        GLuint("texture", ""),
+        GLenum("target", ""),
+        GLsizei("levels", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", "")
     )
 }

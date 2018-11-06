@@ -28,8 +28,8 @@ val EXT_stream_consumer_egloutput = "EXTStreamConsumerEGLOutput".nativeClassEGL(
         "StreamConsumerOutputEXT",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLStreamKHR.IN("stream", ""),
-        EGLOutputLayerEXT.IN("layer", "")
+        EGLDisplay("dpy", ""),
+        EGLStreamKHR("stream", ""),
+        EGLOutputLayerEXT("layer", "")
     )
 }

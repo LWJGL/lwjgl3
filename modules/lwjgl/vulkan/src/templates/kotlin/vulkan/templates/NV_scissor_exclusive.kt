@@ -139,9 +139,9 @@ val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclus
         ##VkRect2D
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        uint32_t.IN("firstExclusiveScissor", "the index of the first exclusive scissor rectangle whose state is updated by the command."),
-        AutoSize("pExclusiveScissors")..uint32_t.IN("exclusiveScissorCount", "the number of exclusive scissor rectangles updated by the command."),
-        VkRect2D.const.p.IN("pExclusiveScissors", "a pointer to an array of ##VkRect2D structures defining exclusive scissor rectangles.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        uint32_t("firstExclusiveScissor", "the index of the first exclusive scissor rectangle whose state is updated by the command."),
+        AutoSize("pExclusiveScissors")..uint32_t("exclusiveScissorCount", "the number of exclusive scissor rectangles updated by the command."),
+        VkRect2D.const.p("pExclusiveScissors", "a pointer to an array of ##VkRect2D structures defining exclusive scissor rectangles.")
     )
 }

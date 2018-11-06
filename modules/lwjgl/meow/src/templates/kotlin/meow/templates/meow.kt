@@ -73,67 +73,67 @@ val meow = "Meow".nativeClass(Module.MEOW, library = "lwjgl_meow") {
         "MeowHash1",
         "",
 
-        meow_u64.IN("Seed", ""),
-        AutoSize("SourceInit")..meow_u64.IN("TotalLengthInBytes", ""),
-        MultiTypeAll..void.p.IN("SourceInit", "")
+        meow_u64("Seed", ""),
+        AutoSize("SourceInit")..meow_u64("TotalLengthInBytes", ""),
+        MultiTypeAll..void.p("SourceInit", "")
     )
 
     intb(
         "MeowHashesAreEqual",
         "",
 
-        meow_hash.IN("A", ""),
-        meow_hash.IN("B", "")
+        meow_hash("A", ""),
+        meow_hash("B", "")
     )
 
     meow_source_blocks(
         "MeowSourceBlocksFor",
         "",
 
-        AutoSize("Source")..meow_u64.IN("TotalLengthInBytes", ""),
-        MultiTypeAll..void.p.IN("Source", "")
+        AutoSize("Source")..meow_u64("TotalLengthInBytes", ""),
+        MultiTypeAll..void.p("Source", "")
     )
 
     meow_macroblock(
         "MeowGetMacroblock",
         "",
 
-        meow_source_blocks/*.volatile*/.p.IN("Blocks", ""),
-        meow_u64.IN("Index", "")
+        meow_source_blocks/*.volatile*/.p("Blocks", ""),
+        meow_u64("Index", "")
     )
 
     void(
         "MeowHashMerge",
         "",
 
-        meow_macroblock_result.p.IN("A", ""),
-        meow_macroblock_result.p.IN("B", "")
+        meow_macroblock_result.p("A", ""),
+        meow_macroblock_result.p("B", "")
     )
 
     meow_hash(
         "MeowHashFinish",
         "",
 
-        meow_macroblock_result.p.IN("State", ""),
-        meow_u64.IN("Seed", ""),
-        meow_u64.IN("TotalLengthInBytes", ""),
-        int.IN("Overhang", ""),
-        meow_u8_opaque.IN("OverhangStart", "")
+        meow_macroblock_result.p("State", ""),
+        meow_u64("Seed", ""),
+        meow_u64("TotalLengthInBytes", ""),
+        int("Overhang", ""),
+        meow_u8_opaque("OverhangStart", "")
     )
 
     meow_macroblock_result(
         "MeowHashMergeArray",
         "",
 
-        AutoSize("MacroBlockHashes")..meow_u64.IN("MacroBlockCount", ""),
-        meow_macroblock_result.p.IN("MacroBlockHashes", "")
+        AutoSize("MacroBlockHashes")..meow_u64("MacroBlockCount", ""),
+        meow_macroblock_result.p("MacroBlockHashes", "")
     )
 
     meow_macroblock_result(
         "MeowHash1Op",
         "",
 
-        int.IN("BlockCount", ""),
-        meow_u8_opaque.IN("Source", "")
+        int("BlockCount", ""),
+        meow_u8_opaque("Source", "")
     )
 }

@@ -62,21 +62,21 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
 
         Check(8)..char.p.OUT("luid", ""), // TODO: 8?
         Check(1)..unsigned_int.p.OUT("deviceNodeMask", ""),
-        CUdevice.IN("dev", "")
+        CUdevice("dev", "")
     )
 
     CUresult(
         "StreamBeginCapture",
         "",
 
-        nullable..CUstream.IN("hStream", "")
+        nullable..CUstream("hStream", "")
     ).ptsz()
 
     CUresult(
         "StreamEndCapture",
         "",
 
-        nullable..CUstream.IN("hStream", ""),
+        nullable..CUstream("hStream", ""),
         Check(1)..CUgraph.p.OUT("phGraph", "")
     ).ptsz()
 
@@ -84,7 +84,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "StreamIsCapturing",
         "",
 
-        nullable..CUstream.IN("hStream", ""),
+        nullable..CUstream("hStream", ""),
         Check(1)..CUstreamCaptureStatus.p.OUT("captureStatus", "")
     ).ptsz()
 
@@ -93,7 +93,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUexternalMemory.p.OUT("extMem_out", ""),
-        CUDA_EXTERNAL_MEMORY_HANDLE_DESC.const.p.IN("memHandleDesc", "")
+        CUDA_EXTERNAL_MEMORY_HANDLE_DESC.const.p("memHandleDesc", "")
     )
 
     CUresult(
@@ -101,8 +101,8 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUdeviceptr.p.OUT("devPtr", ""),
-        CUexternalMemory.IN("extMem", ""),
-        CUDA_EXTERNAL_MEMORY_BUFFER_DESC.const.p.IN("bufferDesc", "")
+        CUexternalMemory("extMem", ""),
+        CUDA_EXTERNAL_MEMORY_BUFFER_DESC.const.p("bufferDesc", "")
     )
 
     CUresult(
@@ -110,15 +110,15 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUmipmappedArray.p.OUT("mipmap", ""),
-        CUexternalMemory.IN("extMem", ""),
-        CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.const.p.IN("mipmapDesc", "")
+        CUexternalMemory("extMem", ""),
+        CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.const.p("mipmapDesc", "")
     )
 
     CUresult(
         "DestroyExternalMemory",
         "",
 
-        CUexternalMemory.IN("extMem", "")
+        CUexternalMemory("extMem", "")
     )
 
     CUresult(
@@ -126,43 +126,43 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUexternalSemaphore.p.OUT("extSem_out", ""),
-        CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.const.p.IN("semHandleDesc", "")
+        CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.const.p("semHandleDesc", "")
     )
 
     CUresult(
         "SignalExternalSemaphoresAsync",
         "",
 
-        CUexternalSemaphore.const.p.IN("extSemArray", ""),
-        nullable..CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.const.p.IN("paramsArray", ""),
-        AutoSize("extSemArray", "paramsArray")..unsigned_int.IN("numExtSems", ""),
-        nullable..CUstream.IN("stream", "")
+        CUexternalSemaphore.const.p("extSemArray", ""),
+        nullable..CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.const.p("paramsArray", ""),
+        AutoSize("extSemArray", "paramsArray")..unsigned_int("numExtSems", ""),
+        nullable..CUstream("stream", "")
     ).ptsz()
 
     CUresult(
         "WaitExternalSemaphoresAsync",
         "",
 
-        CUexternalSemaphore.const.p.IN("extSemArray", ""),
-        nullable..CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.const.p.IN("paramsArray", ""),
-        AutoSize("extSemArray", "paramsArray")..unsigned_int.IN("numExtSems", ""),
-        nullable..CUstream.IN("stream", "")
+        CUexternalSemaphore.const.p("extSemArray", ""),
+        nullable..CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.const.p("paramsArray", ""),
+        AutoSize("extSemArray", "paramsArray")..unsigned_int("numExtSems", ""),
+        nullable..CUstream("stream", "")
     ).ptsz()
 
     CUresult(
         "DestroyExternalSemaphore",
         "",
 
-        CUexternalSemaphore.IN("extSem", "")
+        CUexternalSemaphore("extSem", "")
     )
 
     CUresult(
         "LaunchHostFunc",
         "",
 
-        nullable..CUstream.IN("hStream", ""),
-        CUhostFn.IN("fn", ""),
-        opaque_p.IN("userData", "")
+        nullable..CUstream("hStream", ""),
+        CUhostFn("fn", ""),
+        opaque_p("userData", "")
     ).ptsz()
 
     CUresult(
@@ -170,7 +170,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUgraph.p.OUT("phGraph", ""),
-        unsigned_int.IN("flags", "")
+        unsigned_int("flags", "")
     )
 
     CUresult(
@@ -178,17 +178,17 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUgraphNode.p.OUT("phGraphNode", ""),
-        CUgraph.IN("hGraph", ""),
-        nullable..CUgraphNode.p.IN("dependencies", ""),
-        AutoSize("dependencies")..size_t.IN("numDependencies", ""),
-        CUDA_KERNEL_NODE_PARAMS.const.p.IN("nodeParams", "")
+        CUgraph("hGraph", ""),
+        nullable..CUgraphNode.p("dependencies", ""),
+        AutoSize("dependencies")..size_t("numDependencies", ""),
+        CUDA_KERNEL_NODE_PARAMS.const.p("nodeParams", "")
     )
 
     CUresult(
         "GraphKernelNodeGetParams",
         "",
 
-        CUgraphNode.IN("hNode", ""),
+        CUgraphNode("hNode", ""),
         CUDA_KERNEL_NODE_PARAMS.p.OUT("nodeParams", "")
     )
 
@@ -196,8 +196,8 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "GraphKernelNodeSetParams",
         "",
 
-        CUgraphNode.IN("hNode", ""),
-        CUDA_KERNEL_NODE_PARAMS.const.p.IN("nodeParams", "")
+        CUgraphNode("hNode", ""),
+        CUDA_KERNEL_NODE_PARAMS.const.p("nodeParams", "")
     )
 
     CUresult(
@@ -205,18 +205,18 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUgraphNode.p.OUT("phGraphNode", ""),
-        CUgraph.IN("hGraph", ""),
-        nullable..CUgraphNode.p.IN("dependencies", ""),
-        AutoSize("dependencies")..size_t.IN("numDependencies", ""),
-        CUDA_MEMCPY3D.const.p.IN("copyParams", ""),
-        CUcontext.IN("ctx", "")
+        CUgraph("hGraph", ""),
+        nullable..CUgraphNode.p("dependencies", ""),
+        AutoSize("dependencies")..size_t("numDependencies", ""),
+        CUDA_MEMCPY3D.const.p("copyParams", ""),
+        CUcontext("ctx", "")
     )
 
     CUresult(
         "GraphMemcpyNodeGetParams",
         "",
 
-        CUgraphNode.IN("hNode", ""),
+        CUgraphNode("hNode", ""),
         CUDA_MEMCPY3D.p.OUT("nodeParams", "")
     )
 
@@ -224,8 +224,8 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "GraphMemcpyNodeSetParams",
         "",
 
-        CUgraphNode.IN("hNode", ""),
-        CUDA_MEMCPY3D.const.p.IN("nodeParams", "")
+        CUgraphNode("hNode", ""),
+        CUDA_MEMCPY3D.const.p("nodeParams", "")
     )
 
     CUresult(
@@ -233,18 +233,18 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUgraphNode.p.OUT("phGraphNode", ""),
-        CUgraph.IN("hGraph", ""),
-        nullable..CUgraphNode.p.IN("dependencies", ""),
-        AutoSize("dependencies")..size_t.IN("numDependencies", ""),
-        CUDA_MEMSET_NODE_PARAMS.const.p.IN("memsetParams", ""),
-        CUcontext.IN("ctx", "")
+        CUgraph("hGraph", ""),
+        nullable..CUgraphNode.p("dependencies", ""),
+        AutoSize("dependencies")..size_t("numDependencies", ""),
+        CUDA_MEMSET_NODE_PARAMS.const.p("memsetParams", ""),
+        CUcontext("ctx", "")
     )
 
     CUresult(
         "GraphMemsetNodeGetParams",
         "",
 
-        CUgraphNode.IN("hNode", ""),
+        CUgraphNode("hNode", ""),
         CUDA_MEMSET_NODE_PARAMS.p.OUT("nodeParams", "")
     )
 
@@ -252,8 +252,8 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "GraphMemsetNodeSetParams",
         "",
 
-        CUgraphNode.IN("hNode", ""),
-        CUDA_MEMSET_NODE_PARAMS.const.p.IN("nodeParams", "")
+        CUgraphNode("hNode", ""),
+        CUDA_MEMSET_NODE_PARAMS.const.p("nodeParams", "")
     )
 
     CUresult(
@@ -261,17 +261,17 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUgraphNode.p.OUT("phGraphNode", ""),
-        CUgraph.IN("hGraph", ""),
-        nullable..CUgraphNode.p.IN("dependencies", ""),
-        AutoSize("dependencies")..size_t.IN("numDependencies", ""),
-        CUDA_HOST_NODE_PARAMS.const.p.IN("nodeParams", "")
+        CUgraph("hGraph", ""),
+        nullable..CUgraphNode.p("dependencies", ""),
+        AutoSize("dependencies")..size_t("numDependencies", ""),
+        CUDA_HOST_NODE_PARAMS.const.p("nodeParams", "")
     )
 
     CUresult(
         "GraphHostNodeGetParams",
         "",
 
-        CUgraphNode.IN("hNode", ""),
+        CUgraphNode("hNode", ""),
         CUDA_HOST_NODE_PARAMS.p.OUT("nodeParams", "")
     )
 
@@ -279,8 +279,8 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "GraphHostNodeSetParams",
         "",
 
-        CUgraphNode.IN("hNode", ""),
-        CUDA_HOST_NODE_PARAMS.const.p.IN("nodeParams", "")
+        CUgraphNode("hNode", ""),
+        CUDA_HOST_NODE_PARAMS.const.p("nodeParams", "")
     )
 
     CUresult(
@@ -288,17 +288,17 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUgraphNode.p.OUT("phGraphNode", ""),
-        CUgraph.IN("hGraph", ""),
-        nullable..CUgraphNode.p.IN("dependencies", ""),
-        AutoSize("dependencies")..size_t.IN("numDependencies", ""),
-        CUgraph.IN("childGraph", "")
+        CUgraph("hGraph", ""),
+        nullable..CUgraphNode.p("dependencies", ""),
+        AutoSize("dependencies")..size_t("numDependencies", ""),
+        CUgraph("childGraph", "")
     )
 
     CUresult(
         "GraphChildGraphNodeGetGraph",
         "",
 
-        CUgraphNode.IN("hNode", ""),
+        CUgraphNode("hNode", ""),
         Check(1)..CUgraph.p.OUT("phGraph", "")
     )
 
@@ -307,9 +307,9 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUgraphNode.p.OUT("phGraphNode", ""),
-        CUgraph.IN("hGraph", ""),
-        nullable..CUgraphNode.p.IN("dependencies", ""),
-        AutoSize("dependencies")..size_t.IN("numDependencies", "")
+        CUgraph("hGraph", ""),
+        nullable..CUgraphNode.p("dependencies", ""),
+        AutoSize("dependencies")..size_t("numDependencies", "")
     )
 
     CUresult(
@@ -317,7 +317,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUgraph.p.OUT("phGraphClone", ""),
-        CUgraph.IN("originalGraph", "")
+        CUgraph("originalGraph", "")
     )
 
     CUresult(
@@ -325,15 +325,15 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUgraphNode.p.OUT("phNode", ""),
-        CUgraphNode.IN("hOriginalNode", ""),
-        CUgraph.IN("hClonedGraph", "")
+        CUgraphNode("hOriginalNode", ""),
+        CUgraph("hClonedGraph", "")
     )
 
     CUresult(
         "GraphNodeGetType",
         "",
 
-        CUgraphNode.IN("hNode", ""),
+        CUgraphNode("hNode", ""),
         Check(1)..CUgraphNodeType.p.OUT("type", "")
     )
 
@@ -341,7 +341,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "GraphGetNodes",
         "",
 
-        CUgraph.IN("hGraph", ""),
+        CUgraph("hGraph", ""),
         nullable..CUgraphNode.p.OUT("nodes", ""),
         AutoSize("nodes")..Check(1)..size_t.p.INOUT("numNodes", "")
     )
@@ -350,7 +350,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "GraphGetRootNodes",
         "",
 
-        CUgraph.IN("hGraph", ""),
+        CUgraph("hGraph", ""),
         nullable..CUgraphNode.p.OUT("rootNodes", ""),
         AutoSize("rootNodes")..Check(1)..size_t.p.INOUT("numRootNodes", "")
     )
@@ -359,7 +359,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "GraphGetEdges",
         "",
 
-        CUgraph.IN("hGraph", ""),
+        CUgraph("hGraph", ""),
         nullable..CUgraphNode.p.OUT("from", ""),
         nullable..CUgraphNode.p.OUT("to", ""),
         AutoSize("from", "to")..Check(1)..size_t.p.INOUT("numEdges", "")
@@ -369,7 +369,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "GraphNodeGetDependencies",
         "",
 
-        CUgraphNode.IN("hNode", ""),
+        CUgraphNode("hNode", ""),
         nullable..CUgraphNode.p.OUT("dependencies", ""),
         AutoSize("dependencies")..Check(1)..size_t.p.INOUT("numDependencies", "")
     )
@@ -378,7 +378,7 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "GraphNodeGetDependentNodes",
         "",
 
-        CUgraphNode.IN("hNode", ""),
+        CUgraphNode("hNode", ""),
         nullable..CUgraphNode.p.OUT("dependentNodes", ""),
         AutoSize("dependentNodes")..Check(1)..size_t.p.INOUT("numDependentNodes", "")
     )
@@ -387,27 +387,27 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "GraphAddDependencies",
         "",
 
-        CUgraph.IN("hGraph", ""),
-        CUgraphNode.p.IN("from", ""),
-        CUgraphNode.p.IN("to", ""),
-        AutoSize("from", "to")..size_t.IN("numDependencies", "")
+        CUgraph("hGraph", ""),
+        CUgraphNode.p("from", ""),
+        CUgraphNode.p("to", ""),
+        AutoSize("from", "to")..size_t("numDependencies", "")
     )
 
     CUresult(
         "GraphRemoveDependencies",
         "",
 
-        CUgraph.IN("hGraph", ""),
-        CUgraphNode.p.IN("from", ""),
-        CUgraphNode.p.IN("to", ""),
-        AutoSize("from", "to")..size_t.IN("numDependencies", "")
+        CUgraph("hGraph", ""),
+        CUgraphNode.p("from", ""),
+        CUgraphNode.p("to", ""),
+        AutoSize("from", "to")..size_t("numDependencies", "")
     )
 
     CUresult(
         "GraphDestroyNode",
         "",
 
-        CUgraphNode.IN("hNode", "")
+        CUgraphNode("hNode", "")
     )
 
     CUresult(
@@ -415,31 +415,31 @@ val CU100 = "CU100".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "",
 
         Check(1)..CUgraphExec.p.OUT("phGraphExec", ""),
-        CUgraph.IN("hGraph", ""),
+        CUgraph("hGraph", ""),
         Check(1)..CUgraphNode.p.OUT("phErrorNode", ""),
         charASCII.p.OUT("logBuffer", ""),
-        AutoSize("logBuffer")..size_t.IN("bufferSize", "")
+        AutoSize("logBuffer")..size_t("bufferSize", "")
     )
 
     CUresult(
         "GraphLaunch",
         "",
 
-        CUgraphExec.IN("hGraphExec", ""),
-        nullable..CUstream.IN("hStream", "")
+        CUgraphExec("hGraphExec", ""),
+        nullable..CUstream("hStream", "")
     ).ptsz()
 
     CUresult(
         "GraphExecDestroy",
         "",
 
-        CUgraphExec.IN("hGraphExec", "")
+        CUgraphExec("hGraphExec", "")
     )
 
     CUresult(
         "GraphDestroy",
         "",
 
-        CUgraph.IN("hGraph", "")
+        CUgraph("hGraph", "")
     )
 }

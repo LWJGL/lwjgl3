@@ -72,19 +72,19 @@ val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_a
         "VertexArrayVertexAttribLOffsetEXT",
         "DSA version of #VertexAttribLPointer().",
 
-        GLuint.IN("vaobj", "the vertex array object"),
-        GLuint.IN("buffer", "the buffer object"),
-        GLuint.IN("index", "the index of the generic vertex attribute to be modified"),
-        GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 #BGRA"),
-        GLenum.IN("type", "the data type of each component in the array", "#DOUBLE"),
-        GLsizei.IN(
+        GLuint("vaobj", "the vertex array object"),
+        GLuint("buffer", "the buffer object"),
+        GLuint("index", "the index of the generic vertex attribute to be modified"),
+        GLint("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 #BGRA"),
+        GLenum("type", "the data type of each component in the array", "#DOUBLE"),
+        GLsizei(
             "stride",
             """
             the byte offset between consecutive generic vertex attributes. If stride is 0, the generic vertex attributes are understood to be tightly packed in
             the array. The initial value is 0.
             """
         ),
-        GLintptr.IN(
+        GLintptr(
             "offset",
             "the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer. The initial value is 0."
         )

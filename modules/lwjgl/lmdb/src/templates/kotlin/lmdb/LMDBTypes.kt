@@ -177,8 +177,8 @@ val MDB_cmp_func = Module.LMDB.callback {
         "MDBCmpFunc",
         "A callback function used to compare two keys in a database.",
 
-        MDB_val.const.p.IN("a", "the first item to compare"),
-        MDB_val.const.p.IN("b", "the second item to compare"),
+        MDB_val.const.p("a", "the first item to compare"),
+        MDB_val.const.p("b", "the second item to compare"),
 
         nativeType = "MDB_cmp_func *",
         returnDoc = "&lt; 0 if a &lt; b, 0 if a == b, &gt; 0 if a &gt; b"
@@ -189,10 +189,10 @@ val MDB_rel_func = Module.LMDB.callback {
         "MDBRelFunc",
         "A callback function used to relocate a position-dependent data item in a fixed-address database.",
 
-        MDB_val.p.IN("item", "the item that is to be relocated"),
-        opaque_p.IN("oldptr", "the previous address"),
-        opaque_p.IN("newptr", "the new address to relocate to"),
-        opaque_p.IN("relctx", "an application-provided context, set by #set_relctx()"),
+        MDB_val.p("item", "the item that is to be relocated"),
+        opaque_p("oldptr", "the previous address"),
+        opaque_p("newptr", "the new address to relocate to"),
+        opaque_p("relctx", "an application-provided context, set by #set_relctx()"),
 
         nativeType = "MDB_rel_func *"
     ) {
@@ -212,8 +212,8 @@ val MDB_msg_func = Module.LMDB.callback {
         "MDBMsgFunc",
         "A callback function used to print a message from the library.",
 
-        charASCII.const.p.IN("msg", "the string to be printed"),
-        opaque_p.IN("ctx", "an arbitrary context pointer for the callback"),
+        charASCII.const.p("msg", "the string to be printed"),
+        opaque_p("ctx", "an arbitrary context pointer for the callback"),
 
         nativeType = "MDB_msg_func *",
         returnDoc = "&lt; 0 on failure, &ge; 0 on success"

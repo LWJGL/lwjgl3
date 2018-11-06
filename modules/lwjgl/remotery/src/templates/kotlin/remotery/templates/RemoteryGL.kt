@@ -29,7 +29,7 @@ val RemoteryGL = "RemoteryGL".nativeClass(Module.REMOTERY, prefix = "RMT_", libr
         "BeginOpenGLSample",
         "",
 
-        rmtPStr.IN("name", ""),
+        rmtPStr("name", ""),
         Check(1)..nullable..rmtU32.p.INOUT("hash_cache", "")
     )
 

@@ -95,17 +95,17 @@ val QCOM_tiled_rendering = "QCOMTiledRendering".nativeClassGLES("QCOM_tiled_rend
         "StartTilingQCOM",
         "",
 
-        GLuint.IN("x", ""),
-        GLuint.IN("y", ""),
-        GLuint.IN("width", ""),
-        GLuint.IN("height", ""),
-        GLbitfield.IN("preserveMask", "")
+        GLuint("x", ""),
+        GLuint("y", ""),
+        GLuint("width", ""),
+        GLuint("height", ""),
+        GLbitfield("preserveMask", "")
     )
 
     void(
         "EndTilingQCOM",
         "",
 
-        GLbitfield.IN("preserveMask", "")
+        GLbitfield("preserveMask", "")
     )
 }

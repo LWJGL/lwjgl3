@@ -25,7 +25,7 @@ val GLX11 = "GLX11".nativeClassGLX("GLX11") {
         "Returns a string describing which GLX extensions are supported on the connection.",
 
         DISPLAY,
-        int.IN("screen", "the screen number")
+        int("screen", "the screen number")
     )
 
     charASCII.const.p(
@@ -33,7 +33,7 @@ val GLX11 = "GLX11".nativeClassGLX("GLX11") {
         "Returns a pointer to a string describing some aspect of the client library.",
 
         DISPLAY,
-        int.IN("name", "the string to query")
+        int("name", "the string to query")
     )
 
     charASCII.const.p(
@@ -41,7 +41,7 @@ val GLX11 = "GLX11".nativeClassGLX("GLX11") {
         "Returns a pointer to a string describing some aspect of the server's GLX extension.",
 
         DISPLAY,
-        int.IN("screen", "the screen number"),
-        int.IN("name", "the string to query")
+        int("screen", "the screen number"),
+        int("name", "the string to query")
     )
 }

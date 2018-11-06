@@ -142,10 +142,10 @@ val EXT_geometry_shader = "EXTGeometryShader".nativeClassGLES("EXT_geometry_shad
         "FramebufferTextureEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLuint("texture", ""),
+        GLint("level", "")
     )
 }
 

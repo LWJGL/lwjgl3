@@ -43,7 +43,7 @@ val ARB_parallel_shader_compile = "ARBParallelShaderCompile".nativeClassGL("ARB_
         #MAX_SHADER_COMPILER_THREADS_ARB.
         """,
 
-        GLuint.IN(
+        GLuint(
             "count",
             """
             the number of background threads. A {@code count} of zero specifies a request for no parallel compiling or linking and a {@code count} of

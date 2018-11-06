@@ -59,89 +59,89 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
         "VertexAttribL1dEXT",
         "",
 
-        GLuint.IN("index", ""),
-        GLdouble.IN("x", "")
+        GLuint("index", ""),
+        GLdouble("x", "")
     )
 
     void(
         "VertexAttribL2dEXT",
         "",
 
-        GLuint.IN("index", ""),
-        GLdouble.IN("x", ""),
-        GLdouble.IN("y", "")
+        GLuint("index", ""),
+        GLdouble("x", ""),
+        GLdouble("y", "")
     )
 
     void(
         "VertexAttribL3dEXT",
         "",
 
-        GLuint.IN("index", ""),
-        GLdouble.IN("x", ""),
-        GLdouble.IN("y", ""),
-        GLdouble.IN("z", "")
+        GLuint("index", ""),
+        GLdouble("x", ""),
+        GLdouble("y", ""),
+        GLdouble("z", "")
     )
 
     void(
         "VertexAttribL4dEXT",
         "",
 
-        GLuint.IN("index", ""),
-        GLdouble.IN("x", ""),
-        GLdouble.IN("y", ""),
-        GLdouble.IN("z", ""),
-        GLdouble.IN("w", "")
+        GLuint("index", ""),
+        GLdouble("x", ""),
+        GLdouble("y", ""),
+        GLdouble("z", ""),
+        GLdouble("w", "")
     )
 
     void(
         "VertexAttribL1dvEXT",
         "",
 
-        GLuint.IN("index", ""),
-        Check(1)..GLdouble.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(1)..GLdouble.const.p("v", "")
     )
 
     void(
         "VertexAttribL2dvEXT",
         "",
 
-        GLuint.IN("index", ""),
-        Check(2)..GLdouble.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(2)..GLdouble.const.p("v", "")
     )
 
     void(
         "VertexAttribL3dvEXT",
         "",
 
-        GLuint.IN("index", ""),
-        Check(3)..GLdouble.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(3)..GLdouble.const.p("v", "")
     )
 
     void(
         "VertexAttribL4dvEXT",
         "",
 
-        GLuint.IN("index", ""),
-        Check(4)..GLdouble.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(4)..GLdouble.const.p("v", "")
     )
 
     void(
         "VertexAttribLPointerEXT",
         "",
 
-        GLuint.IN("index", ""),
-        GLint.IN("size", ""),
-        AutoType("pointer", BufferType.GL_DOUBLE)..GLenum.IN("type", ""),
-        GLsizei.IN("stride", ""),
-        Unsafe..ARRAY_BUFFER..void.const.p.IN("pointer", "")
+        GLuint("index", ""),
+        GLint("size", ""),
+        AutoType("pointer", BufferType.GL_DOUBLE)..GLenum("type", ""),
+        GLsizei("stride", ""),
+        Unsafe..ARRAY_BUFFER..void.const.p("pointer", "")
     )
 
     void(
         "GetVertexAttribLdvEXT",
         "",
 
-        GLuint.IN("index", ""),
-        GLenum.IN("pname", ""),
+        GLuint("index", ""),
+        GLenum("pname", ""),
         Check(4)..GLdouble.p.OUT("params", "")
     )
 

@@ -100,37 +100,37 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
         "BindBufferRangeEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
-        GLuint.IN("buffer", ""),
-        GLintptr.IN("offset", ""),
-        GLsizeiptr.IN("size", "")
+        GLenum("target", ""),
+        GLuint("index", ""),
+        GLuint("buffer", ""),
+        GLintptr("offset", ""),
+        GLsizeiptr("size", "")
     )
 
     void(
         "BindBufferOffsetEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
-        GLuint.IN("buffer", ""),
-        GLintptr.IN("offset", "")
+        GLenum("target", ""),
+        GLuint("index", ""),
+        GLuint("buffer", ""),
+        GLintptr("offset", "")
     )
 
     void(
         "BindBufferBaseEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
-        GLuint.IN("buffer", "")
+        GLenum("target", ""),
+        GLuint("index", ""),
+        GLuint("buffer", "")
     )
 
     void(
         "BeginTransformFeedbackEXT",
         "",
 
-        GLenum.IN("primitiveMode", "")
+        GLenum("primitiveMode", "")
     )
 
     void(
@@ -142,19 +142,19 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
         "TransformFeedbackVaryingsEXT",
         "",
 
-        GLuint.IN("program", ""),
-        AutoSize("varyings")..GLsizei.IN("count", ""),
-        PointerArray(GLcharASCII.p, "varying")..GLcharASCII.const.p.const.p.IN("varyings", ""),
-        GLenum.IN("bufferMode", "")
+        GLuint("program", ""),
+        AutoSize("varyings")..GLsizei("count", ""),
+        PointerArray(GLcharASCII.p, "varying")..GLcharASCII.const.p.const.p("varyings", ""),
+        GLenum("bufferMode", "")
     )
 
     void(
         "GetTransformFeedbackVaryingEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLuint.IN("index", ""),
-        AutoSize("name")..GLsizei.IN("bufSize", ""),
+        GLuint("program", ""),
+        GLuint("index", ""),
+        AutoSize("name")..GLsizei("bufSize", ""),
         Check(1)..nullable..GLsizei.p.OUT("length", ""),
         Check(1)..GLsizei.p.OUT("size", ""),
         Check(1)..GLenum.p.OUT("type", ""),

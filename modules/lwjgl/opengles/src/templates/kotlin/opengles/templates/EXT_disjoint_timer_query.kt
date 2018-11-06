@@ -74,8 +74,8 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
         "QueryCounterEXT",
         "",
 
-        GLuint.IN("id", ""),
-        GLenum.IN("target", "")
+        GLuint("id", ""),
+        GLenum("target", "")
     )
 
 
@@ -83,8 +83,8 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
         "GetQueryObjectivEXT",
         "",
 
-        GLuint.IN("id", ""),
-        GLenum.IN("pname", ""),
+        GLuint("id", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -92,8 +92,8 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
         "GetQueryObjecti64vEXT",
         "",
 
-        GLuint.IN("id", ""),
-        GLenum.IN("pname", ""),
+        GLuint("id", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint64.p.OUT("params", "")
     )
 
@@ -101,8 +101,8 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
         "GetQueryObjectui64vEXT",
         "",
 
-        GLuint.IN("id", ""),
-        GLenum.IN("pname", ""),
+        GLuint("id", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLuint64.p.OUT("params", "")
     )
 }

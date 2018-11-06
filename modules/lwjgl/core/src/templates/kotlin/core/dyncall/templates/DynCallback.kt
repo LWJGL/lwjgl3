@@ -39,36 +39,36 @@ val DynCallback = "DynCallback".nativeClass(Module.CORE_DYNCALL, prefix = "DCB")
         Use #FreeCallback() to destroy the {@code Callback} object.
         """,
 
-        charASCII.const.p.IN("signature", "the function signature of the function to mimic"),
-        DCCallbackHandler.p.IN("funcptr", "a pointer to a callback handler"),
-        opaque_p.IN("userdata", "a pointer to custom data that might be useful in the handler")
+        charASCII.const.p("signature", "the function signature of the function to mimic"),
+        DCCallbackHandler.p("funcptr", "a pointer to a callback handler"),
+        opaque_p("userdata", "a pointer to custom data that might be useful in the handler")
     )
 
     void(
         "InitCallback",
         "(Re)initializes a callback object.",
 
-        DCCallback.p.IN("pcb", "the callback object"),
-        charASCII.const.p.IN("signature", "the function signature of the function to mimic"),
-        DCCallbackHandler.p.IN("handler", "a pointer to a callback handler"),
-        opaque_p.IN("userdata", "a pointer to custom data that might be useful in the handler")
+        DCCallback.p("pcb", "the callback object"),
+        charASCII.const.p("signature", "the function signature of the function to mimic"),
+        DCCallbackHandler.p("handler", "a pointer to a callback handler"),
+        opaque_p("userdata", "a pointer to custom data that might be useful in the handler")
     )
 
     void(
         "FreeCallback",
         "Destroys and frees the callback object.",
 
-        DCCallback.p.IN("pcb", "the callback object")
+        DCCallback.p("pcb", "the callback object")
     )
 
     opaque_p(
         "GetUserData",
         "Returns a pointer to the {@code userdata} passed to the callback object on creation or initialization.",
 
-        DCCallback.p.IN("pcb", "the callback object")
+        DCCallback.p("pcb", "the callback object")
     )
 
-    val args = DCArgs.p.IN("args", "the function arguments")
+    val args = DCArgs.p("args", "the function arguments")
 
     DCbool("ArgBool", "Returns the next {@code bool} argument.", args)
     DCchar("ArgChar", "Returns the next {@code char} argument.", args)

@@ -225,9 +225,9 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkImageView.IN("imageView", "an image view handle that specifies the shading rate image. {@code imageView} <b>may</b> be set to #NULL_HANDLE, which is equivalent to specifying a view of an image filled with zero values."),
-        VkImageLayout.IN("imageLayout", "the layout that the image subresources accessible from {@code imageView} will be in when the shading rate image is accessed.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkImageView("imageView", "an image view handle that specifies the shading rate image. {@code imageView} <b>may</b> be set to #NULL_HANDLE, which is equivalent to specifying a view of an image filled with zero values."),
+        VkImageLayout("imageLayout", "the layout that the image subresources accessible from {@code imageView} will be in when the shading rate image is accessed.")
     )
 
     void(
@@ -280,10 +280,10 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
         ##VkShadingRatePaletteNV
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        uint32_t.IN("firstViewport", "the index of the first viewport whose shading rate palette is updated by the command."),
-        AutoSize("pShadingRatePalettes")..uint32_t.IN("viewportCount", "the number of viewports whose shading rate palettes are updated by the command."),
-        VkShadingRatePaletteNV.const.p.IN("pShadingRatePalettes", "a pointer to an array of ##VkShadingRatePaletteNV structures defining the palette for each viewport.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        uint32_t("firstViewport", "the index of the first viewport whose shading rate palette is updated by the command."),
+        AutoSize("pShadingRatePalettes")..uint32_t("viewportCount", "the number of viewports whose shading rate palettes are updated by the command."),
+        VkShadingRatePaletteNV.const.p("pShadingRatePalettes", "a pointer to an array of ##VkShadingRatePaletteNV structures defining the palette for each viewport.")
     )
 
     void(
@@ -335,9 +335,9 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
         ##VkCoarseSampleOrderCustomNV
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkCoarseSampleOrderTypeNV.IN("sampleOrderType", "specifies the mechanism used to order coverage samples in fragments larger than one pixel."),
-        AutoSize("pCustomSampleOrders")..uint32_t.IN("customSampleOrderCount", "specifies the number of custom sample orderings to use when ordering coverage samples."),
-        nullable..VkCoarseSampleOrderCustomNV.const.p.IN("pCustomSampleOrders", "a pointer to an array of ##VkCoarseSampleOrderCustomNV structures, each of which specifies the coverage sample order for a single combination of fragment area and coverage sample count.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkCoarseSampleOrderTypeNV("sampleOrderType", "specifies the mechanism used to order coverage samples in fragments larger than one pixel."),
+        AutoSize("pCustomSampleOrders")..uint32_t("customSampleOrderCount", "specifies the number of custom sample orderings to use when ordering coverage samples."),
+        nullable..VkCoarseSampleOrderCustomNV.const.p("pCustomSampleOrders", "a pointer to an array of ##VkCoarseSampleOrderCustomNV structures, each of which specifies the coverage sample order for a single combination of fragment area and coverage sample count.")
     )
 }

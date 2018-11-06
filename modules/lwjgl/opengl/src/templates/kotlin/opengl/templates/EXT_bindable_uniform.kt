@@ -44,24 +44,24 @@ val EXT_bindable_uniform = "EXTBindableUniform".nativeClassGL("EXT_bindable_unif
         "UniformBufferEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLuint.IN("buffer", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLuint("buffer", "")
     )
 
     GLint(
         "GetUniformBufferSizeEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", "")
+        GLuint("program", ""),
+        GLint("location", "")
     )
 
     GLintptr(
         "GetUniformOffsetEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", "")
+        GLuint("program", ""),
+        GLint("location", "")
     )
 }

@@ -60,14 +60,14 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "CtxDestroy",
         "",
 
-        CUcontext.IN("ctx", "")
+        CUcontext("ctx", "")
     ).versioned()
 
     CUresult(
         "CtxPushCurrent",
         "",
 
-        CUcontext.IN("ctx", "")
+        CUcontext("ctx", "")
     ).versioned()
 
     CUresult(
@@ -81,7 +81,7 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "CtxSetCurrent",
         "",
 
-        nullable..CUcontext.IN("ctx", "")
+        nullable..CUcontext("ctx", "")
     )
 
     CUresult(
@@ -96,72 +96,72 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         void.p.OUT("p", ""),
-        AutoSize("p")..size_t.IN("bytesize", ""),
-        unsigned_int.IN("Flags", "")
+        AutoSize("p")..size_t("bytesize", ""),
+        unsigned_int("Flags", "")
     ).versioned()
 
     CUresult(
         "MemHostUnregister",
         "",
 
-        Unsafe..void.p.IN("p", "")
+        Unsafe..void.p("p", "")
     )
 
     CUresult(
         "Memcpy",
         "",
 
-        CUdeviceptr.IN("dst", ""),
-        CUdeviceptr.IN("src", ""),
-        size_t.IN("ByteCount", "")
+        CUdeviceptr("dst", ""),
+        CUdeviceptr("src", ""),
+        size_t("ByteCount", "")
     ).ptds()
 
     CUresult(
         "MemcpyPeer",
         "",
 
-        CUdeviceptr.IN("dstDevice", ""),
-        CUcontext.IN("dstContext", ""),
-        CUdeviceptr.IN("srcDevice", ""),
-        CUcontext.IN("srcContext", ""),
-        size_t.IN("ByteCount", "")
+        CUdeviceptr("dstDevice", ""),
+        CUcontext("dstContext", ""),
+        CUdeviceptr("srcDevice", ""),
+        CUcontext("srcContext", ""),
+        size_t("ByteCount", "")
     ).ptds()
 
     CUresult(
         "Memcpy3DPeer",
         "",
 
-        CUDA_MEMCPY3D_PEER.const.p.IN("pCopy", "")
+        CUDA_MEMCPY3D_PEER.const.p("pCopy", "")
     ).ptds()
 
     CUresult(
         "MemcpyAsync",
         "",
 
-        CUdeviceptr.IN("dst", ""),
-        CUdeviceptr.IN("src", ""),
-        size_t.IN("ByteCount", ""),
-        nullable..CUstream.IN("hStream", "")
+        CUdeviceptr("dst", ""),
+        CUdeviceptr("src", ""),
+        size_t("ByteCount", ""),
+        nullable..CUstream("hStream", "")
     ).ptsz()
 
     CUresult(
         "MemcpyPeerAsync",
         "",
 
-        CUdeviceptr.IN("dstDevice", ""),
-        CUcontext.IN("dstContext", ""),
-        CUdeviceptr.IN("srcDevice", ""),
-        CUcontext.IN("srcContext", ""),
-        size_t.IN("ByteCount", ""),
-        nullable..CUstream.IN("hStream", "")
+        CUdeviceptr("dstDevice", ""),
+        CUcontext("dstContext", ""),
+        CUdeviceptr("srcDevice", ""),
+        CUcontext("srcContext", ""),
+        size_t("ByteCount", ""),
+        nullable..CUstream("hStream", "")
     ).ptsz()
 
     CUresult(
         "Memcpy3DPeerAsync",
         "",
 
-        CUDA_MEMCPY3D_PEER.const.p.IN("pCopy", ""),
-        nullable..CUstream.IN("hStream", "")
+        CUDA_MEMCPY3D_PEER.const.p("pCopy", ""),
+        nullable..CUstream("hStream", "")
     ).ptsz()
 
     CUresult(
@@ -169,39 +169,39 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Unsafe..void.p.OUT("data", ""),
-        CUpointer_attribute.IN("attribute", ""),
-        CUdeviceptr.IN("ptr", "")
+        CUpointer_attribute("attribute", ""),
+        CUdeviceptr("ptr", "")
     )
 
     CUresult(
         "StreamDestroy",
         "",
 
-        CUstream.IN("hStream", "")
+        CUstream("hStream", "")
     ).versioned()
 
     CUresult(
         "EventDestroy",
         "",
 
-        CUevent.IN("hEvent", "")
+        CUevent("hEvent", "")
     ).versioned()
 
     CUresult(
         "LaunchKernel",
         "",
 
-        CUfunction.IN("f", ""),
-        unsigned_int.IN("gridDimX", ""),
-        unsigned_int.IN("gridDimY", ""),
-        unsigned_int.IN("gridDimZ", ""),
-        unsigned_int.IN("blockDimX", ""),
-        unsigned_int.IN("blockDimY", ""),
-        unsigned_int.IN("blockDimZ", ""),
-        unsigned_int.IN("sharedMemBytes", ""),
-        nullable..CUstream.IN("hStream", ""),
-        Unsafe..nullable..void.p.p.IN("kernelParams", ""),
-        Unsafe..nullable..void.p.p.IN("extra", "")
+        CUfunction("f", ""),
+        unsigned_int("gridDimX", ""),
+        unsigned_int("gridDimY", ""),
+        unsigned_int("gridDimZ", ""),
+        unsigned_int("blockDimX", ""),
+        unsigned_int("blockDimY", ""),
+        unsigned_int("blockDimZ", ""),
+        unsigned_int("sharedMemBytes", ""),
+        nullable..CUstream("hStream", ""),
+        Unsafe..nullable..void.p.p("kernelParams", ""),
+        Unsafe..nullable..void.p.p("extra", "")
     ).ptsz()
 
     CUresult(
@@ -209,22 +209,22 @@ val CU40 = "CU40".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Check(1)..int.p.OUT("canAccessPeer", ""),
-        CUdevice.IN("dev", ""),
-        CUdevice.IN("peerDev", "")
+        CUdevice("dev", ""),
+        CUdevice("peerDev", "")
     )
 
     CUresult(
         "CtxEnablePeerAccess",
         "",
 
-        CUcontext.IN("peerContext", ""),
-        unsigned_int.IN("Flags", "")
+        CUcontext("peerContext", ""),
+        unsigned_int("Flags", "")
     )
 
     CUresult(
         "CtxDisablePeerAccess",
         "",
 
-        CUcontext.IN("peerContext", "")
+        CUcontext("peerContext", "")
     )
 }

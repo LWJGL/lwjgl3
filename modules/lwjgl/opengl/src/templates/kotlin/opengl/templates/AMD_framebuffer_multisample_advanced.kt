@@ -47,23 +47,23 @@ val AMD_framebuffer_multisample_advanced = "AMDFramebufferMultisampleAdvanced".n
         "RenderbufferStorageMultisampleAdvancedAMD",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLsizei.IN("storageSamples", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLsizei("storageSamples", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
     void(
         "NamedRenderbufferStorageMultisampleAdvancedAMD",
         "",
 
-        GLuint.IN("renderbuffer", ""),
-        GLsizei.IN("samples", ""),
-        GLsizei.IN("storageSamples", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLuint("renderbuffer", ""),
+        GLsizei("samples", ""),
+        GLsizei("storageSamples", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 }

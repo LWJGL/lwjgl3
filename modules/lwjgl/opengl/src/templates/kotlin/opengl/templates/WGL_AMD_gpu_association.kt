@@ -48,8 +48,8 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
         number of GPUs. {@code ids} will be tightly packed with no 0 values between valid ids.
         """,
 
-        AutoSize("ids")..UINT.IN("maxCount", "the max number of IDs that can be returned"),
-        nullable..UINT.p.IN("ids", "the array of returned IDs")
+        AutoSize("ids")..UINT("maxCount", "the max number of IDs that can be returned"),
+        nullable..UINT.p("ids", "the array of returned IDs")
     )
 
     int(
@@ -64,17 +64,17 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
         type, are UTF-8 encoded and will be #NULL terminated. If the function fails, -1 will be returned.
         """,
 
-        UINT.IN("id", "a GPU id obtained from calling #GetGPUIDsAMD()"),
-        int.IN("property", "the information being queried", properties),
-        GLenum.IN(
+        UINT("id", "a GPU id obtained from calling #GetGPUIDsAMD()"),
+        int("property", "the information being queried", properties),
+        GLenum(
             "dataType",
             "the data type to be returned",
             "#UNSIGNED_INT #INT #FLOAT #UNSIGNED_BYTE"
         ),
-        AutoSizeShr("GLChecks.typeToByteShift(dataType)", "data")..UINT.IN("size", "the size of the {@code data} buffer"),
+        AutoSizeShr("GLChecks.typeToByteShift(dataType)", "data")..UINT("size", "the size of the {@code data} buffer"),
         MultiType(
             PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..void.p.IN("data", "the buffer which will be filled with the requested information")
+        )..void.p("data", "the buffer which will be filled with the requested information")
     )
 
     UINT(
@@ -87,14 +87,14 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
         available, it would be undesirable to use one for rendering to visible surfaces and then chose the same one for off-screen rendering.
         """,
 
-        HGLRC.IN("hglrc", "the context for which the GPU id will be returned")
+        HGLRC("hglrc", "the context for which the GPU id will be returned")
     )
 
     HGLRC(
         "CreateAssociatedContextAMD",
         "Creates an associated context. Upon successful creation, no pixel format is tied to an associated context.",
 
-        UINT.IN("id", "a valid GPU id")
+        UINT("id", "a valid GPU id")
     )
 
     HGLRC(
@@ -105,26 +105,26 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
         All capabilities and limitations of WGLARBCreateContext#wglCreateContextAttribsARB() apply to {@code CreateAssociatedContextAttribsAMD}.
         """,
 
-        UINT.IN("id", "a valid GPU id"),
-        nullable..HGLRC.IN("shareContext", "must either be #NULL or that of an associated context created with the same GPU ID as {@code id}"),
-        NullTerminated..nullable..int.const.p.IN("attribList", "a 0-terminated list of attributes for the context")
+        UINT("id", "a valid GPU id"),
+        nullable..HGLRC("shareContext", "must either be #NULL or that of an associated context created with the same GPU ID as {@code id}"),
+        NullTerminated..nullable..int.const.p("attribList", "a 0-terminated list of attributes for the context")
     )
 
     BOOL(
         "DeleteAssociatedContextAMD",
         "Deletes an associated context. An associated context cannot be deleted by calling #DeleteContext().",
 
-        HGLRC.IN("hglrc", "a valid associated context created by calling #CreateAssociatedContextAMD()")
+        HGLRC("hglrc", "a valid associated context created by calling #CreateAssociatedContextAMD()")
     )
 
     BOOL(
         "MakeAssociatedContextCurrentAMD",
         "Makes an associated context current in the current thread.",
 
-        HGLRC.IN("hglrc", "a context handle created by calling #CreateAssociatedContextAMD()")
+        HGLRC("hglrc", "a context handle created by calling #CreateAssociatedContextAMD()")
     )
 
-    HGLRC("GetCurrentAssociatedContextAMD", "Returns the current associated context in the current thread.")
+    HGLRC("GetCurrentAssociatedContextAMD", "Returns the current associated context in the current thread.", void())
 
     IgnoreMissing..VOID(
         "BlitContextFramebufferAMD",
@@ -132,20 +132,20 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
         Blits data from one context to another. This facilitates high performance data communication between multiple contexts.
         """,
 
-        HGLRC.IN("dstCtx", "the context handle for the write context"),
-        GLint.IN("srcX0", "the source x<sub>0</sub> coordinate"),
-        GLint.IN("srcY0", "the source Y<sub>0</sub> coordinate"),
-        GLint.IN("srcX1", "the source X<sub>1</sub> coordinate"),
-        GLint.IN("srcY1", "the source Y<sub>1</sub> coordinate"),
-        GLint.IN("dstX0", "the destination X<sub>0</sub> coordinate"),
-        GLint.IN("dstY0", "the destination Y<sub>0</sub> coordinate"),
-        GLint.IN("dstX1", "the destination X<sub>1</sub> coordinate"),
-        GLint.IN("dstY1", "the destination Y<sub>1</sub> coordinate"),
-        GLbitfield.IN(
+        HGLRC("dstCtx", "the context handle for the write context"),
+        GLint("srcX0", "the source x<sub>0</sub> coordinate"),
+        GLint("srcY0", "the source Y<sub>0</sub> coordinate"),
+        GLint("srcX1", "the source X<sub>1</sub> coordinate"),
+        GLint("srcY1", "the source Y<sub>1</sub> coordinate"),
+        GLint("dstX0", "the destination X<sub>0</sub> coordinate"),
+        GLint("dstY0", "the destination Y<sub>0</sub> coordinate"),
+        GLint("dstX1", "the destination X<sub>1</sub> coordinate"),
+        GLint("dstY1", "the destination Y<sub>1</sub> coordinate"),
+        GLbitfield(
             "mask",
             "the bitwise OR of a number of values indicating which buffers are to be copied",
             "#COLOR_BUFFER_BIT #DEPTH_BUFFER_BIT #STENCIL_BUFFER_BIT", LinkMode.BITFIELD
         ),
-        GLenum.IN("filter", "the interpolation method to apply if the image is stretched", "#LINEAR #NEAREST")
+        GLenum("filter", "the interpolation method to apply if the image is stretched", "#LINEAR #NEAREST")
     )
 }

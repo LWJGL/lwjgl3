@@ -58,7 +58,7 @@ val ARB_buffer_storage = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage") 
         binding to {@code target}.
         """,
 
-        GLuint.IN("buffer", "the buffer object"),
+        GLuint("buffer", "the buffer object"),
         BufferStorage["size"],
         BufferStorage["data"],
         BufferStorage["flags"]

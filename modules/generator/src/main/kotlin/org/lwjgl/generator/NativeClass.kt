@@ -665,8 +665,10 @@ class NativeClass internal constructor(
     fun String.enum(documentation: String, expression: String) =
         Constant(this, EnumValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
 
-    fun DataType.IN(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.IN, javadoc, links, linkMode)
-    fun PointerType<*>.OUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = createParameter(name, ParameterType.OUT, javadoc, links, linkMode)
+    operator fun DataType.invoke(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) =
+        createParameter(name, ParameterType.IN, javadoc, links, linkMode)
+    fun PointerType<*>.OUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) =
+        createParameter(name, ParameterType.OUT, javadoc, links, linkMode)
     fun <T : DataType> PointerType<T>.INOUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) =
         createParameter(name, ParameterType.INOUT, javadoc, links, linkMode)
 
@@ -681,6 +683,7 @@ class NativeClass internal constructor(
     else
         Parameter(this, name, paramType) { linkMode.appendLinks(javadoc, linksFromRegex(links)) }
 
+    operator fun VoidType.invoke() = void.createParameter(ANONYMOUS, ParameterType.IN, "", "")
     operator fun VoidType.invoke(
         className: String,
         functionDoc: String,
@@ -781,6 +784,11 @@ class NativeClass internal constructor(
         noPrefix: Boolean,
         vararg parameters: Parameter
     ): Func {
+        val params = if (parameters.size == 1 && parameters[0].nativeType === void) {
+            emptyArray()
+        } else {
+            parameters
+        }
         val overload = name.indexOf('@').let { if (it == -1) name else name.substring(0, it) }
         val func = Func(
             returns = returns,
@@ -789,7 +797,7 @@ class NativeClass internal constructor(
             documentation = { parameterFilter ->
                 this@NativeClass.toJavaDoc(
                     processDocumentation(documentation),
-                    parameters.asSequence().filter { it !== JNI_ENV && parameterFilter(it) },
+                    params.asSequence().filter { it !== JNI_ENV && parameterFilter(it) },
                     returns.nativeType,
                     returnDoc,
                     see,
@@ -797,7 +805,7 @@ class NativeClass internal constructor(
                 )
             },
             nativeClass = this@NativeClass,
-            parameters = *parameters
+            parameters = *params
         )
 
         if ((_functions.put(name, func)) != null) {

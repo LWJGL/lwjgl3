@@ -30,10 +30,10 @@ val NV_copy_buffer = "NVCopyBuffer".nativeClassGLES("NV_copy_buffer", postfix = 
         "CopyBufferSubDataNV",
         "",
 
-        GLenum.IN("readTarget", ""),
-        GLenum.IN("writeTarget", ""),
-        GLintptr.IN("readOffset", ""),
-        GLintptr.IN("writeOffset", ""),
-        GLsizeiptr.IN("size", "")
+        GLenum("readTarget", ""),
+        GLenum("writeTarget", ""),
+        GLintptr("readOffset", ""),
+        GLintptr("writeOffset", ""),
+        GLsizeiptr("size", "")
     )
 }

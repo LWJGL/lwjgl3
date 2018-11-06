@@ -35,35 +35,35 @@ val EGL11 = "EGL11".nativeClassEGL("EGL11", postfix = "") {
         "BindTexImage",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSurface.IN("surface", ""),
-        EGLint.IN("buffer", "")
+        EGLDisplay("dpy", ""),
+        EGLSurface("surface", ""),
+        EGLint("buffer", "")
     )
 
     EGLBoolean(
         "ReleaseTexImage",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSurface.IN("surface", ""),
-        EGLint.IN("buffer", "")
+        EGLDisplay("dpy", ""),
+        EGLSurface("surface", ""),
+        EGLint("buffer", "")
     )
 
     EGLBoolean(
         "SurfaceAttrib",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSurface.IN("surface", ""),
-        EGLint.IN("attribute", ""),
-        EGLint.IN("value", "")
+        EGLDisplay("dpy", ""),
+        EGLSurface("surface", ""),
+        EGLint("attribute", ""),
+        EGLint("value", "")
     )
 
     EGLBoolean(
         "SwapInterval",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLint.IN("interval", "")
+        EGLDisplay("dpy", ""),
+        EGLint("interval", "")
     )
 }

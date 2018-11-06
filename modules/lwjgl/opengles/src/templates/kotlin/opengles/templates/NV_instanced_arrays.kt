@@ -40,7 +40,7 @@ val NV_instanced_arrays = "NVInstancedArrays".nativeClassGLES("NV_instanced_arra
         "VertexAttribDivisorNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLuint.IN("divisor", "")
+        GLuint("index", ""),
+        GLuint("divisor", "")
     )
 }

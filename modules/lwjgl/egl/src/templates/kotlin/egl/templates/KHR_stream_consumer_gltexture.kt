@@ -29,23 +29,23 @@ val KHR_stream_consumer_gltexture = "KHRStreamConsumerGLTexture".nativeClassEGL(
         "StreamConsumerGLTextureExternalKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLStreamKHR.IN("stream", "")
+        EGLDisplay("dpy", ""),
+        EGLStreamKHR("stream", "")
     )
 
     EGLBoolean(
         "StreamConsumerAcquireKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLStreamKHR.IN("stream", "")
+        EGLDisplay("dpy", ""),
+        EGLStreamKHR("stream", "")
     )
 
     EGLBoolean(
         "StreamConsumerReleaseKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLStreamKHR.IN("stream", "")
+        EGLDisplay("dpy", ""),
+        EGLStreamKHR("stream", "")
     )
 }

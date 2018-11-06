@@ -35,17 +35,17 @@ val nanovg_gles3 = "NanoVGGLES3".dependsOn(Module.OPENGLES)?.nativeClass(Module.
         "IMAGE_NODELETE".enum("Do not delete GL texture handle.", "1<<16")
     )
 
-    val ctx = NVGcontext.p.IN("ctx", "the NanoVG context")
+    val ctx = NVGcontext.p("ctx", "the NanoVG context")
 
     NativeName("nvglCreateImageFromHandleGLES3")..int(
         "lCreateImageFromHandle",
         "Creates a NanoVG image from an OpenGL texture.",
 
         ctx,
-        GLuint.IN("textureId", "the OpenGL texture id"),
-        int.IN("w", "the image width"),
-        int.IN("h", "the image height"),
-        int.IN("flags", "the image flags"),
+        GLuint("textureId", "the OpenGL texture id"),
+        int("w", "the image width"),
+        int("h", "the image height"),
+        int("flags", "the image flags"),
 
         returnDoc = "a handle to the image"
     )
@@ -55,7 +55,7 @@ val nanovg_gles3 = "NanoVGGLES3".dependsOn(Module.OPENGLES)?.nativeClass(Module.
         "Returns the OpenGL texture id associated with a NanoVG image.",
 
         ctx,
-        int.IN("image", "the image handle")
+        int("image", "the image handle")
     )
 
     NativeName("nvgCreateGLES3")..NVGcontext.p(
@@ -68,7 +68,7 @@ val nanovg_gles3 = "NanoVGGLES3".dependsOn(Module.OPENGLES)?.nativeClass(Module.
         """,
 
         JNI_ENV,
-        int.IN("flags", "the context flags", CreateFlags)
+        int("flags", "the context flags", CreateFlags)
     )
 
     NativeName("nvgDeleteGLES3")..void(
@@ -83,9 +83,9 @@ val nanovg_gles3 = "NanoVGGLES3".dependsOn(Module.OPENGLES)?.nativeClass(Module.
         "Creates a framebuffer object to render to.",
 
         ctx,
-        int.IN("w", "the framebuffer width"),
-        int.IN("h", "the framebuffer height"),
-        int.IN("imageFlags", "the image flags")
+        int("w", "the framebuffer width"),
+        int("h", "the framebuffer height"),
+        int("imageFlags", "the image flags")
     )
 
     NativeName("nvgluBindFramebufferGLES3")..void(
@@ -93,7 +93,7 @@ val nanovg_gles3 = "NanoVGGLES3".dependsOn(Module.OPENGLES)?.nativeClass(Module.
         "Binds the framebuffer object associated with the specified ##NVGLUFramebuffer.",
 
         ctx,
-        nullable..NVGLUframebuffer.p.IN("fb", "the framebuffer to bind")
+        nullable..NVGLUframebuffer.p("fb", "the framebuffer to bind")
     )
 
     NativeName("nvgluDeleteFramebufferGLES3")..void(
@@ -101,6 +101,6 @@ val nanovg_gles3 = "NanoVGGLES3".dependsOn(Module.OPENGLES)?.nativeClass(Module.
         "Deletes an ##NVGLUFramebuffer.",
 
         ctx,
-        NVGLUframebuffer.p.IN("fb", "the framebuffer to delete")
+        NVGLUframebuffer.p("fb", "the framebuffer to delete")
     )
 }

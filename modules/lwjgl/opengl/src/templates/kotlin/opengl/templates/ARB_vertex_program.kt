@@ -229,7 +229,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
     ARB_vertex_shader reuse "EnableVertexAttribArrayARB"
     ARB_vertex_shader reuse "DisableVertexAttribArrayARB"
 
-    val TARGET = GLenum.IN("target", "the program target", "#VERTEX_PROGRAM_ARB #FRAGMENT_PROGRAM_ARB")
+    val TARGET = GLenum("target", "the program target", "#VERTEX_PROGRAM_ARB #FRAGMENT_PROGRAM_ARB")
 
     void(
         "ProgramStringARB",
@@ -249,9 +249,9 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         """,
 
         TARGET,
-        GLenum.IN("format", "the format of the program string", "#PROGRAM_FORMAT_ASCII_ARB"),
-        AutoSize("string")..GLsizei.IN("len", "the length of the program string, excluding the null-terminator"),
-        void.const.p.IN("string", "an array of bytes representing the program string being loaded")
+        GLenum("format", "the format of the program string", "#PROGRAM_FORMAT_ASCII_ARB"),
+        AutoSize("string")..GLsizei("len", "the length of the program string, excluding the null-terminator"),
+        void.const.p("string", "an array of bytes representing the program string being loaded")
     )
 
     void(
@@ -262,7 +262,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         """,
 
         TARGET,
-        GLuint.IN(
+        GLuint(
             "program",
             """
             the program object to bind. If {@code program} is zero, the default program object for {@code target} is bound.  If {@code program} is the name of
@@ -275,8 +275,8 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         "DeleteProgramsARB",
         "Deletes program objects.",
 
-        AutoSize("programs")..GLsizei.IN("n", "the number of program object to delete"),
-        GLuint.const.p.IN("programs", "an array of {@code n} program objects to be deleted")
+        AutoSize("programs")..GLsizei("n", "the number of program object to delete"),
+        GLuint.const.p("programs", "an array of {@code n} program objects to be deleted")
     )
 
     void(
@@ -286,11 +286,11 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         objects are created only when they are first bound using #BindProgramARB().
         """,
 
-        AutoSize("programs")..GLsizei.IN("n", "the number of program names to genereate"),
+        AutoSize("programs")..GLsizei("n", "the number of program names to genereate"),
         ReturnParam..GLuint.p.OUT("programs", "an array in which to return the generated program names")
     )
 
-    val VP_INDEX = GLuint.IN("index", "the environment parameter index")
+    val VP_INDEX = GLuint("index", "the environment parameter index")
     val VP_X = "the {@code x} parameter component"
     val VP_Y = "the {@code y} parameter component"
     val VP_Z = "the {@code z} parameter component"
@@ -298,35 +298,35 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
     val VP_V = "a buffer from which to read the parameter value"
 
-    void("ProgramEnvParameter4dARB", "Double version of #ProgramEnvParameter4fARB().", TARGET, VP_INDEX, GLdouble.IN("x", VP_X), GLdouble.IN("y", VP_Y), GLdouble.IN("z", VP_Z), GLdouble.IN("w", VP_W))
-    void("ProgramEnvParameter4dvARB", "Pointer version of #ProgramEnvParameter4dARB()", TARGET, VP_INDEX, Check(4)..GLdouble.const.p.IN("params", VP_V))
+    void("ProgramEnvParameter4dARB", "Double version of #ProgramEnvParameter4fARB().", TARGET, VP_INDEX, GLdouble("x", VP_X), GLdouble("y", VP_Y), GLdouble("z", VP_Z), GLdouble("w", VP_W))
+    void("ProgramEnvParameter4dvARB", "Pointer version of #ProgramEnvParameter4dARB()", TARGET, VP_INDEX, Check(4)..GLdouble.const.p("params", VP_V))
     void(
         "ProgramEnvParameter4fARB",
         "Updates the values of the program environment parameter numbered {@code index} for the specified program target {@code target}.",
 
         TARGET,
         VP_INDEX,
-        GLfloat.IN("x", VP_X),
-        GLfloat.IN("y", VP_Y),
-        GLfloat.IN("z", VP_Z),
-        GLfloat.IN("w", VP_W)
+        GLfloat("x", VP_X),
+        GLfloat("y", VP_Y),
+        GLfloat("z", VP_Z),
+        GLfloat("w", VP_W)
     )
-    void("ProgramEnvParameter4fvARB", "Pointer version of #ProgramEnvParameter4fARB().", TARGET, VP_INDEX, Check(4)..GLfloat.const.p.IN("params", VP_V))
+    void("ProgramEnvParameter4fvARB", "Pointer version of #ProgramEnvParameter4fARB().", TARGET, VP_INDEX, Check(4)..GLfloat.const.p("params", VP_V))
 
-    void("ProgramLocalParameter4dARB", "Double version of #ProgramLocalParameter4fARB().", TARGET, VP_INDEX, GLdouble.IN("x", VP_X), GLdouble.IN("y", VP_Y), GLdouble.IN("z", VP_Z), GLdouble.IN("w", VP_W))
-    void("ProgramLocalParameter4dvARB", "Pointer version of #ProgramLocalParameter4dARB().", TARGET, VP_INDEX, Check(4)..GLdouble.const.p.IN("params", VP_V))
+    void("ProgramLocalParameter4dARB", "Double version of #ProgramLocalParameter4fARB().", TARGET, VP_INDEX, GLdouble("x", VP_X), GLdouble("y", VP_Y), GLdouble("z", VP_Z), GLdouble("w", VP_W))
+    void("ProgramLocalParameter4dvARB", "Pointer version of #ProgramLocalParameter4dARB().", TARGET, VP_INDEX, Check(4)..GLdouble.const.p("params", VP_V))
     void(
         "ProgramLocalParameter4fARB",
         "Updates the values of the program local parameter numbered {@code index} for the specified program target {@code target}.",
 
         TARGET,
         VP_INDEX,
-        GLfloat.IN("x", VP_X),
-        GLfloat.IN("y", VP_Y),
-        GLfloat.IN("z", VP_Z),
-        GLfloat.IN("w", VP_W)
+        GLfloat("x", VP_X),
+        GLfloat("y", VP_Y),
+        GLfloat("z", VP_Z),
+        GLfloat("w", VP_W)
     )
-    void("ProgramLocalParameter4fvARB", "Pointer version of #ProgramLocalParameter4fARB().", TARGET, VP_INDEX, Check(4)..GLfloat.const.p.IN("params", VP_V))
+    void("ProgramLocalParameter4fvARB", "Pointer version of #ProgramLocalParameter4fARB().", TARGET, VP_INDEX, Check(4)..GLfloat.const.p("params", VP_V))
 
     void(
         "GetProgramEnvParameterfvARB",
@@ -378,7 +378,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         """,
 
         TARGET,
-        GLenum.IN("pname", "the parameter to query", PARAMS),
+        GLenum("pname", "the parameter to query", PARAMS),
         ReturnParam..Check(1)..GLint.p.OUT("params", "an array in which to place the parameter value")
     )
 
@@ -392,7 +392,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         """,
 
         TARGET,
-        GLenum.IN("pname", "the parameter to query", "#PROGRAM_STRING_ARB"),
+        GLenum("pname", "the parameter to query", "#PROGRAM_STRING_ARB"),
         Check("glGetProgramiARB(target, GL_PROGRAM_LENGTH_ARB)", debug = true)..void.p.OUT("string", "an array in which to place the program string")
     )
 
@@ -409,7 +409,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         name of a program object.
         """,
 
-        GLuint.IN("program", "the program name")
+        GLuint("program", "the program name")
     )
 
 }

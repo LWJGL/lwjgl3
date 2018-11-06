@@ -40,7 +40,7 @@ val altera_live_object_tracking = "ALTERALiveObjectTracking".nativeClassCL("alte
         Behaviour is unspecified if the {@code clTrackLiveObjectsAltera} method is called before the the first call to #GetPlatformIDs().
         """,
 
-        cl_platform_id.IN("platform", "the platform ID")
+        cl_platform_id("platform", "the platform ID")
     )
 
     void(
@@ -50,8 +50,8 @@ val altera_live_object_tracking = "ALTERALiveObjectTracking".nativeClassCL("alte
         some implementation-defined sequence (i.e. not concurrently).
         """,
 
-        cl_platform_id.IN("platform", "the platform for which live objects are being tracked"),
-        cl_report_live_objects_altera_callback.IN("report_fn", "the callback function"),
-        opaque_p.IN("user_data", "a pointer to user data that will be passed to {@code report_fn}")
+        cl_platform_id("platform", "the platform for which live objects are being tracked"),
+        cl_report_live_objects_altera_callback("report_fn", "the callback function"),
+        opaque_p("user_data", "a pointer to user data that will be passed to {@code report_fn}")
     )
 }

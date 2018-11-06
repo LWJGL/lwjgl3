@@ -30,35 +30,35 @@ val EXT_base_instance = "EXTBaseInstance".nativeClassGLES("EXT_base_instance", p
         "DrawArraysInstancedBaseInstanceEXT",
         "",
 
-        GLenum.IN("mode", ""),
-        GLint.IN("first", ""),
-        GLsizei.IN("count", ""),
-        GLsizei.IN("instancecount", ""),
-        GLuint.IN("baseinstance", "")
+        GLenum("mode", ""),
+        GLint("first", ""),
+        GLsizei("count", ""),
+        GLsizei("instancecount", ""),
+        GLuint("baseinstance", "")
     )
 
     void(
         "DrawElementsInstancedBaseInstanceEXT",
         "",
 
-        GLenum.IN("mode", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
-        GLsizei.IN("instancecount", ""),
-        GLuint.IN("baseinstance", "")
+        GLenum("mode", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        GLsizei("instancecount", ""),
+        GLuint("baseinstance", "")
     )
 
     void(
         "DrawElementsInstancedBaseVertexBaseInstanceEXT",
         "",
 
-        GLenum.IN("mode", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", ""),
-        GLsizei.IN("instancecount", ""),
-        GLint.IN("basevertex", ""),
-        GLuint.IN("baseinstance", "")
+        GLenum("mode", ""),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", ""),
+        GLsizei("instancecount", ""),
+        GLint("basevertex", ""),
+        GLuint("baseinstance", "")
     )
 }

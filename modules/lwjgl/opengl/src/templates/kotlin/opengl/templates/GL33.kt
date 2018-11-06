@@ -158,48 +158,48 @@ val GL33 = "GL33".nativeClassGL("GL33") {
     val packedTypes = "#INT_2_10_10_10_REV #UNSIGNED_INT_2_10_10_10_REV"
     val packedValue = "the packed value"
 
-    DeprecatedGL..void("VertexP2ui", "Packed component version of #Vertex2f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))
-    DeprecatedGL..void("VertexP3ui", "Packed component version of #Vertex3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))
-    DeprecatedGL..void("VertexP4ui", "Packed component version of #Vertex4f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))
+    DeprecatedGL..void("VertexP2ui", "Packed component version of #Vertex2f().", GLenum("type", packedType, packedTypes), GLuint("value", "the packed value"))
+    DeprecatedGL..void("VertexP3ui", "Packed component version of #Vertex3f().", GLenum("type", packedType, packedTypes), GLuint("value", "the packed value"))
+    DeprecatedGL..void("VertexP4ui", "Packed component version of #Vertex4f().", GLenum("type", packedType, packedTypes), GLuint("value", "the packed value"))
 
-    DeprecatedGL..void("VertexP2uiv", "Pointer version of #VertexP2ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("value", packedValue))
-    DeprecatedGL..void("VertexP3uiv", "Pointer version of #VertexP3ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("value", packedValue))
-    DeprecatedGL..void("VertexP4uiv", "Pointer version of #VertexP4ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("value", packedValue))
+    DeprecatedGL..void("VertexP2uiv", "Pointer version of #VertexP2ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("value", packedValue))
+    DeprecatedGL..void("VertexP3uiv", "Pointer version of #VertexP3ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("value", packedValue))
+    DeprecatedGL..void("VertexP4uiv", "Pointer version of #VertexP4ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("value", packedValue))
 
-    DeprecatedGL..void("TexCoordP1ui", "Packed component version of #TexCoord1f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
-    DeprecatedGL..void("TexCoordP2ui", "Packed component version of #TexCoord2f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
-    DeprecatedGL..void("TexCoordP3ui", "Packed component version of #TexCoord3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
-    DeprecatedGL..void("TexCoordP4ui", "Packed component version of #TexCoord4f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
+    DeprecatedGL..void("TexCoordP1ui", "Packed component version of #TexCoord1f().", GLenum("type", packedType, packedTypes), GLuint("coords", packedValue))
+    DeprecatedGL..void("TexCoordP2ui", "Packed component version of #TexCoord2f().", GLenum("type", packedType, packedTypes), GLuint("coords", packedValue))
+    DeprecatedGL..void("TexCoordP3ui", "Packed component version of #TexCoord3f().", GLenum("type", packedType, packedTypes), GLuint("coords", packedValue))
+    DeprecatedGL..void("TexCoordP4ui", "Packed component version of #TexCoord4f().", GLenum("type", packedType, packedTypes), GLuint("coords", packedValue))
 
-    DeprecatedGL..void("TexCoordP1uiv", "Pointer version of #TexCoordP1ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("coords", packedValue))
-    DeprecatedGL..void("TexCoordP2uiv", "Pointer version of #TexCoordP2ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("coords", packedValue))
-    DeprecatedGL..void("TexCoordP3uiv", "Pointer version of #TexCoordP3ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("coords", packedValue))
-    DeprecatedGL..void("TexCoordP4uiv", "Pointer version of #TexCoordP4ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("coords", packedValue))
+    DeprecatedGL..void("TexCoordP1uiv", "Pointer version of #TexCoordP1ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("coords", packedValue))
+    DeprecatedGL..void("TexCoordP2uiv", "Pointer version of #TexCoordP2ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("coords", packedValue))
+    DeprecatedGL..void("TexCoordP3uiv", "Pointer version of #TexCoordP3ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("coords", packedValue))
+    DeprecatedGL..void("TexCoordP4uiv", "Pointer version of #TexCoordP4ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("coords", packedValue))
 
     val texCoordTex = "the coordinate set to be modified"
 
-    DeprecatedGL..void("MultiTexCoordP1ui", "Packed component version of #MultiTexCoord1f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
-    DeprecatedGL..void("MultiTexCoordP2ui", "Packed component version of #MultiTexCoord2f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
-    DeprecatedGL..void("MultiTexCoordP3ui", "Packed component version of #MultiTexCoord3f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
-    DeprecatedGL..void("MultiTexCoordP4ui", "Packed component version of #MultiTexCoord4f().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))
+    DeprecatedGL..void("MultiTexCoordP1ui", "Packed component version of #MultiTexCoord1f().", GLenum("texture", texCoordTex), GLenum("type", packedType, packedType), GLuint("coords", packedValue))
+    DeprecatedGL..void("MultiTexCoordP2ui", "Packed component version of #MultiTexCoord2f().", GLenum("texture", texCoordTex), GLenum("type", packedType, packedType), GLuint("coords", packedValue))
+    DeprecatedGL..void("MultiTexCoordP3ui", "Packed component version of #MultiTexCoord3f().", GLenum("texture", texCoordTex), GLenum("type", packedType, packedType), GLuint("coords", packedValue))
+    DeprecatedGL..void("MultiTexCoordP4ui", "Packed component version of #MultiTexCoord4f().", GLenum("texture", texCoordTex), GLenum("type", packedType, packedType), GLuint("coords", packedValue))
 
-    DeprecatedGL..void("MultiTexCoordP1uiv", "Pointer version of #MultiTexCoordP1ui().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("coords", packedValue))
-    DeprecatedGL..void("MultiTexCoordP2uiv", "Pointer version of #MultiTexCoordP2ui().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("coords", packedValue))
-    DeprecatedGL..void("MultiTexCoordP3uiv", "Pointer version of #MultiTexCoordP3ui().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("coords", packedValue))
-    DeprecatedGL..void("MultiTexCoordP4uiv", "Pointer version of #MultiTexCoordP4ui().", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("coords", packedValue))
+    DeprecatedGL..void("MultiTexCoordP1uiv", "Pointer version of #MultiTexCoordP1ui().", GLenum("texture", texCoordTex), GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("coords", packedValue))
+    DeprecatedGL..void("MultiTexCoordP2uiv", "Pointer version of #MultiTexCoordP2ui().", GLenum("texture", texCoordTex), GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("coords", packedValue))
+    DeprecatedGL..void("MultiTexCoordP3uiv", "Pointer version of #MultiTexCoordP3ui().", GLenum("texture", texCoordTex), GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("coords", packedValue))
+    DeprecatedGL..void("MultiTexCoordP4uiv", "Pointer version of #MultiTexCoordP4ui().", GLenum("texture", texCoordTex), GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("coords", packedValue))
 
-    DeprecatedGL..void("NormalP3ui", "Packed component version of #Normal3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))
+    DeprecatedGL..void("NormalP3ui", "Packed component version of #Normal3f().", GLenum("type", packedType, packedTypes), GLuint("coords", packedValue))
 
-    DeprecatedGL..void("NormalP3uiv", "Pointer version #NormalP3ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("coords", packedValue))
+    DeprecatedGL..void("NormalP3uiv", "Pointer version #NormalP3ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("coords", packedValue))
 
-    DeprecatedGL..void("ColorP3ui", "Packed component version of #Color3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue))
-    DeprecatedGL..void("ColorP4ui", "Packed component version of #Color4f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue))
+    DeprecatedGL..void("ColorP3ui", "Packed component version of #Color3f().", GLenum("type", packedType, packedTypes), GLuint("color", packedValue))
+    DeprecatedGL..void("ColorP4ui", "Packed component version of #Color4f().", GLenum("type", packedType, packedTypes), GLuint("color", packedValue))
 
-    DeprecatedGL..void("ColorP3uiv", "Pointer version of #ColorP3ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("color", packedValue))
-    DeprecatedGL..void("ColorP4uiv", "Pointer version of #ColorP4ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("color", packedValue))
+    DeprecatedGL..void("ColorP3uiv", "Pointer version of #ColorP3ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("color", packedValue))
+    DeprecatedGL..void("ColorP4uiv", "Pointer version of #ColorP4ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("color", packedValue))
 
-    DeprecatedGL..void("SecondaryColorP3ui", "Packed component version of #SecondaryColor3f().", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue))
-    DeprecatedGL..void("SecondaryColorP3uiv", "Pointer version of #SecondaryColorP3ui().", GLenum.IN("type", packedType, packedTypes), Check(1)..GLuint.const.p.IN("color", packedValue))
+    DeprecatedGL..void("SecondaryColorP3ui", "Packed component version of #SecondaryColor3f().", GLenum("type", packedType, packedTypes), GLuint("color", packedValue))
+    DeprecatedGL..void("SecondaryColorP3uiv", "Pointer version of #SecondaryColorP3ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("color", packedValue))
 
     GL33C reuse "VertexAttribP1ui"
     GL33C reuse "VertexAttribP2ui"

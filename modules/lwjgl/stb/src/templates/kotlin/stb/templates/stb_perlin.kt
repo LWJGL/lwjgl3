@@ -31,57 +31,57 @@ val stb_perlin = "STBPerlin".nativeClass(Module.STB, prefix = "STB", prefixMetho
         care". (The noise always wraps every 256 due details of the implementation, even if you ask for larger or no wrapping.)
         """,
 
-        float.IN("x", "the x coordinate"),
-        float.IN("y", "the y coordinate"),
-        float.IN("z", "the z coordinate"),
-        int.IN("x_wrap", "0, or a power of two value that specifies the x wraparound coordinate"),
-        int.IN("y_wrap", "0, or a power of two value that specifies the y wraparound coordinate"),
-        int.IN("z_wrap", "0, or a power of two value that specifies the z wraparound coordinate")
+        float("x", "the x coordinate"),
+        float("y", "the y coordinate"),
+        float("z", "the z coordinate"),
+        int("x_wrap", "0, or a power of two value that specifies the x wraparound coordinate"),
+        int("y_wrap", "0, or a power of two value that specifies the y wraparound coordinate"),
+        int("z_wrap", "0, or a power of two value that specifies the z wraparound coordinate")
     )
 
     float(
         "perlin_ridge_noise3",
         "Computes ridged noise. Calls #perlin_noise3() {@code octaves} times, so this parameter will affect runtime.",
 
-        float.IN("x", "the x coordinate"),
-        float.IN("y", "the y coordinate"),
-        float.IN("z", "the z coordinate"),
-        float.IN("lacunarity", ""),
-        float.IN("gain", ""),
-        float.IN("offset", ""),
-        int.IN("octaves", ""),
-        int.IN("x_wrap", ""),
-        int.IN("y_wrap", ""),
-        int.IN("z_wrap", "")
+        float("x", "the x coordinate"),
+        float("y", "the y coordinate"),
+        float("z", "the z coordinate"),
+        float("lacunarity", ""),
+        float("gain", ""),
+        float("offset", ""),
+        int("octaves", ""),
+        int("x_wrap", ""),
+        int("y_wrap", ""),
+        int("z_wrap", "")
     )
 
     float(
         "perlin_fbm_noise3",
         "Computes Fractal Brownian Motion noise. Calls #perlin_noise3() {@code octaves} times, so this parameter will affect runtime.",
 
-        float.IN("x", "the x coordinate"),
-        float.IN("y", "the y coordinate"),
-        float.IN("z", "the z coordinate"),
-        float.IN("lacunarity", ""),
-        float.IN("gain", ""),
-        int.IN("octaves", ""),
-        int.IN("x_wrap", ""),
-        int.IN("y_wrap", ""),
-        int.IN("z_wrap", "")
+        float("x", "the x coordinate"),
+        float("y", "the y coordinate"),
+        float("z", "the z coordinate"),
+        float("lacunarity", ""),
+        float("gain", ""),
+        int("octaves", ""),
+        int("x_wrap", ""),
+        int("y_wrap", ""),
+        int("z_wrap", "")
     )
 
     float(
         "perlin_turbulence_noise3",
         "Computes turbulence noise. Calls #perlin_noise3() {@code octaves} times, so this parameter will affect runtime.",
 
-        float.IN("x", "the x coordinate"),
-        float.IN("y", "the y coordinate"),
-        float.IN("z", "the z coordinate"),
-        float.IN("lacunarity", ""),
-        float.IN("gain", ""),
-        int.IN("octaves", ""),
-        int.IN("x_wrap", ""),
-        int.IN("y_wrap", ""),
-        int.IN("z_wrap", "")
+        float("x", "the x coordinate"),
+        float("y", "the y coordinate"),
+        float("z", "the z coordinate"),
+        float("lacunarity", ""),
+        float("gain", ""),
+        int("octaves", ""),
+        int("x_wrap", ""),
+        int("y_wrap", ""),
+        int("z_wrap", "")
     )
 }

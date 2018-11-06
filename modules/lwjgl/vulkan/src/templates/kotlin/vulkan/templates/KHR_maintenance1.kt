@@ -120,8 +120,8 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassVK("KHR_maintenance1", type 
         "TrimCommandPoolKHR",
         "See #TrimCommandPool().",
 
-        VkDevice.IN("device", "the logical device that owns the command pool."),
-        VkCommandPool.IN("commandPool", "the command pool to trim."),
-        VkCommandPoolTrimFlags.IN("flags", "reserved for future use.")
+        VkDevice("device", "the logical device that owns the command pool."),
+        VkCommandPool("commandPool", "the command pool to trim."),
+        VkCommandPoolTrimFlags("flags", "reserved for future use.")
     )
 }

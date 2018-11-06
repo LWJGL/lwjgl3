@@ -44,8 +44,8 @@ val ARB_instanced_arrays = "ARBInstancedArrays".nativeClassGL("ARB_instanced_arr
         instances of the set(s) of vertices being rendered. An attribute is referred to as {@code instanced} if its {@code divisor} value is non-zero.
         """,
 
-        GLuint.IN("index", "the attribute index"),
-        GLuint.IN("divisor", "the divisor value")
+        GLuint("index", "the attribute index"),
+        GLuint("divisor", "the divisor value")
     )
 
     DependsOn("GL_EXT_direct_state_access")..IgnoreMissing..void(
@@ -62,8 +62,8 @@ if (caps.GL_ARB_instanced_arrays && ARBInstancedArrays.getInstance().VertexArray
 }""")}
         """,
 
-        GLuint.IN("vaobj", "the vertex array object"),
-        GLuint.IN("index", "the attribute index"),
-        GLuint.IN("divisor", "the divisor value")
+        GLuint("vaobj", "the vertex array object"),
+        GLuint("index", "the attribute index"),
+        GLuint("divisor", "the divisor value")
     )
 }

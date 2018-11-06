@@ -24,19 +24,19 @@ val EXT_gpu_program_parameters = "EXTGPUProgramParameters".nativeClassGL("EXT_gp
         "ProgramEnvParameters4fvEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
-        AutoSize(4, "params")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("params", "")
+        GLenum("target", ""),
+        GLuint("index", ""),
+        AutoSize(4, "params")..GLsizei("count", ""),
+        GLfloat.const.p("params", "")
     )
 
     void(
         "ProgramLocalParameters4fvEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
-        AutoSize(4, "params")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("params", "")
+        GLenum("target", ""),
+        GLuint("index", ""),
+        AutoSize(4, "params")..GLsizei("count", ""),
+        GLfloat.const.p("params", "")
     )
 }

@@ -35,9 +35,9 @@ val APPLE_copy_texture_levels = "APPLECopyTextureLevels".nativeClassGLES("APPLE_
         "CopyTextureLevelsAPPLE",
         "",
 
-        GLuint.IN("destinationTexture", ""),
-        GLuint.IN("sourceTexture", ""),
-        GLint.IN("sourceBaseLevel", ""),
-        GLsizei.IN("sourceLevelCount", "")
+        GLuint("destinationTexture", ""),
+        GLuint("sourceTexture", ""),
+        GLint("sourceBaseLevel", ""),
+        GLsizei("sourceLevelCount", "")
     )
 }

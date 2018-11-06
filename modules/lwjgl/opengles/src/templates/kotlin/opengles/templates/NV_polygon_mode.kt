@@ -44,7 +44,7 @@ val NV_polygon_mode = "NVPolygonMode".nativeClassGLES("NV_polygon_mode", postfix
         "PolygonModeNV",
         "",
 
-        GLenum.IN("face", ""),
-        GLenum.IN("mode", "")
+        GLenum("face", ""),
+        GLenum("mode", "")
     )
 }

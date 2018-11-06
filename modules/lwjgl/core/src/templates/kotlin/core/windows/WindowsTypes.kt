@@ -180,10 +180,10 @@ val WNDPROC = Module.CORE_WINDOWS.callback {
         "WindowProc",
         "Will be called for each message sent to the window.",
 
-        HWND.IN("hwnd", "a handle to the window procedure that received the message"),
-        UINT.IN("uMsg", "the message"),
-        WPARAM.IN("wParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter."),
-        LPARAM.IN("lParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter."),
+        HWND("hwnd", "a handle to the window procedure that received the message"),
+        UINT("uMsg", "the message"),
+        WPARAM("wParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter."),
+        LPARAM("lParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter."),
 
         nativeType = "WNDPROC"
     ) {

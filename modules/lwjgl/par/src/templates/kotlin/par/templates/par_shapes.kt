@@ -46,7 +46,7 @@ par_shapes_free_mesh(m);""")}
         "free_mesh",
         "Frees the specified ##ParShapesMesh structure.",
 
-        par_shapes_mesh.p.IN("mesh", "the mesh to free")
+        par_shapes_mesh.p("mesh", "the mesh to free")
     )
 
     val shapes_create_ss = par_shapes_mesh.p(
@@ -56,8 +56,8 @@ par_shapes_free_mesh(m);""")}
         slices, and "stacks" like a number of stacked rings.  Height and radius are both 1.0, but they can easily be changed with #scale().
         """,
 
-        int.IN("slices", "the number of slices"),
-        int.IN("stacks", "the number of stacks")
+        int("slices", "the number of slices"),
+        int("stacks", "the number of stacks")
     )
 
     par_shapes_mesh.p(
@@ -66,7 +66,7 @@ par_shapes_free_mesh(m);""")}
 
         shapes_create_ss["slices"],
         shapes_create_ss["stacks"],
-        float.IN("radius", "the torus radius")
+        float("radius", "the torus radius")
     )
 
     par_shapes_mesh.p(
@@ -84,7 +84,7 @@ par_shapes_free_mesh(m);""")}
         level scales the number of triangles by four, so use a very low number.
         """,
 
-        int.IN("nsubdivisions", "the number of subdivisions")
+        int("nsubdivisions", "the number of subdivisions")
     )
 
     par_shapes_mesh.p(
@@ -101,7 +101,7 @@ par_shapes_free_mesh(m);""")}
 
         shapes_create_ss["slices"],
         shapes_create_ss["stacks"],
-        float.IN("radius", "")
+        float("radius", "")
     )
 
     par_shapes_mesh.p(
@@ -130,42 +130,48 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
 
     par_shapes_mesh.p(
         "create_icosahedron",
-        "Generates points for a 20-sided polyhedron that fits in the unit sphere. Texture coordinates and normals are not generated."
+        "Generates points for a 20-sided polyhedron that fits in the unit sphere. Texture coordinates and normals are not generated.",
+        void()
     )
 
     par_shapes_mesh.p(
         "create_dodecahedron",
-        "Generates points for a 12-sided polyhedron that fits in the unit sphere. Texture coordinates and normals are not generated."
+        "Generates points for a 12-sided polyhedron that fits in the unit sphere. Texture coordinates and normals are not generated.",
+        void()
     )
 
     par_shapes_mesh.p(
         "create_octahedron",
-        "Generates points for an 8-sided polyhedron that fits in the unit sphere. Texture coordinates and normals are not generated."
+        "Generates points for an 8-sided polyhedron that fits in the unit sphere. Texture coordinates and normals are not generated.",
+        void()
     )
 
     par_shapes_mesh.p(
         "create_tetrahedron",
-        "Generates points for a 4-sided polyhedron that fits in the unit sphere. Texture coordinates and normals are not generated."
+        "Generates points for a 4-sided polyhedron that fits in the unit sphere. Texture coordinates and normals are not generated.",
+        void()
     )
 
     par_shapes_mesh.p(
         "create_cube",
-        "Generates points for a cube that fits in the unit sphere. Texture coordinates and normals are not generated."
+        "Generates points for a cube that fits in the unit sphere. Texture coordinates and normals are not generated.",
+        void()
     )
 
     par_shapes_mesh.p(
         "create_disk",
         "Generates an orientable disk shape in 3-space.  Does not include normals or texture coordinates.",
 
-        float.IN("radius", "the disk radius"),
+        float("radius", "the disk radius"),
         shapes_create_ss["slices"],
-        Check(3)..float.const.p.IN("center", "the disk center"),
-        Check(3)..float.const.p.IN("normal", "the disk normal")
+        Check(3)..float.const.p("center", "the disk center"),
+        Check(3)..float.const.p("normal", "the disk normal")
     )
 
     par_shapes_mesh.p(
         "create_empty",
-        "Creates an empty shape. Useful for building scenes with #merge_and_free()."
+        "Creates an empty shape. Useful for building scenes with #merge_and_free().",
+        void()
     )
 
     par_shapes_mesh.p(
@@ -175,8 +181,8 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         level scales the number of triangles by four, so use a very low number.
         """,
 
-        int.IN("seed", "a seed value"),
-        int.IN("nsubdivisions", "the number of subdivisions")
+        int("seed", "a seed value"),
+        int("nsubdivisions", "the number of subdivisions")
     )
 
     par_shapes_mesh.p(
@@ -187,24 +193,24 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         Texture coordinates and normals are not generated.
         """,
 
-        charASCII.const.p.IN("program", "the list of command-argument pairs"),
+        charASCII.const.p("program", "the list of command-argument pairs"),
         shapes_create_ss["slices"],
-        int.IN("maxdepth", "the maximum depth")
+        int("maxdepth", "the maximum depth")
     )
 
     void(
         "export",
         "Dumps out a text file conforming to the venerable OBJ format.",
 
-        par_shapes_mesh.const.p.IN("mesh", "the mesh to export"),
-        charASCII.const.p.IN("objfile", "the OBJ file path")
+        par_shapes_mesh.const.p("mesh", "the mesh to export"),
+        charASCII.const.p("objfile", "the OBJ file path")
     )
 
     void(
         "compute_aabb",
         "Takes a pointer to 6 floats and sets them to min xyz, max xyz.",
 
-        par_shapes_mesh.const.p.IN("mesh", "the mesh to query"),
+        par_shapes_mesh.const.p("mesh", "the mesh to query"),
         Check(6)..float.p.OUT("aabb", "a pointer to an array of 6 floats in which the AABB will be written")
     )
 
@@ -212,7 +218,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "clone",
         "Makes a deep copy of a mesh. To make a brand new copy, pass #NULL to {@code target}. To avoid memory churn, pass an existing mesh to {@code target}.",
 
-        par_shapes_mesh.const.p.IN("mesh", "the mesh to copy"),
+        par_shapes_mesh.const.p("mesh", "the mesh to copy"),
         nullable..par_shapes_mesh.p.INOUT("target", "the target mesh")
     )
 
@@ -221,7 +227,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "Merges two shapes.",
 
         par_shapes_mesh.p.INOUT("dst", "the destination mesh"),
-        par_shapes_mesh.const.p.IN("src", "the source mesh")
+        par_shapes_mesh.const.p("src", "the source mesh")
     )
 
     void(
@@ -229,9 +235,9 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "Translates the specified mesh.",
 
         par_shapes_mesh.p.INOUT("mesh", "the mesh to translate"),
-        float.IN("x", "the X axis translation amount"),
-        float.IN("y", "the Y axis translation amount"),
-        float.IN("z", "the Z axis translation amount")
+        float("x", "the X axis translation amount"),
+        float("y", "the Y axis translation amount"),
+        float("z", "the Z axis translation amount")
     )
 
     void(
@@ -239,8 +245,8 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "Rotates the specified mesh.",
 
         par_shapes_mesh.p.INOUT("mesh", "the mesh to rotate"),
-        float.IN("radians", "the rotation angle, in radians"),
-        Check(3)..float.const.p.IN("axis", "the rotation axis")
+        float("radians", "the rotation angle, in radians"),
+        Check(3)..float.const.p("axis", "the rotation axis")
     )
 
     void(
@@ -248,9 +254,9 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "Scales the specified mesh.",
 
         par_shapes_mesh.p.INOUT("mesh", "the mesh to scale"),
-        float.IN("x", "the X axis scale factor"),
-        float.IN("y", "the Y axis scale factor"),
-        float.IN("z", "the Z axis scale factor")
+        float("x", "the X axis scale factor"),
+        float("y", "the Y axis scale factor"),
+        float("z", "the Z axis scale factor")
     )
 
     void(
@@ -258,7 +264,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "Merges two shapes and frees the source shape.",
 
         par_shapes_mesh.p.INOUT("dst", "the destination mesh"),
-        par_shapes_mesh.p.IN("src", "the source mesh")
+        par_shapes_mesh.p("src", "the source mesh")
     )
 
     void(
@@ -266,8 +272,8 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "Reverses the winding of a run of faces. Useful when drawing the inside of a Cornell Box. Pass 0 for {@code nfaces} to reverse every face in the mesh.",
 
         par_shapes_mesh.p.INOUT("mesh", "the mesh to reverse"),
-        int.IN("startface", "the index of the first face to reverse"),
-        int.IN("nfaces", "the number of faces to reverse")
+        int("startface", "the index of the first face to reverse"),
+        int("nfaces", "the number of faces to reverse")
     )
 
     void(
@@ -275,7 +281,7 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         "Removes all triangles whose area is less than {@code minarea}.",
 
         par_shapes_mesh.p.INOUT("mesh", "the mesh to cleanup"),
-        float.IN("minarea", "triangles with an area below this value will be removed")
+        float("minarea", "triangles with an area below this value will be removed")
     )
 
     void(
@@ -288,15 +294,15 @@ par_shapes_mesh* par_shapes_create_parametric(par_shapes_fn, int slices,
         """,
 
         par_shapes_mesh.p.INOUT("mesh", "the mesh to unweld"),
-        bool.IN("create_indices", "if an index buffer should be generated")
+        bool("create_indices", "if an index buffer should be generated")
     )
 
     par_shapes_mesh.p(
         "weld",
         "Merges colocated verts, builds a new index buffer, and returns the optimized mesh.",
 
-        par_shapes_mesh.const.p.IN("mesh", "the mesh to weld"),
-        float.IN("epsilon", "the maximum distance to consider when welding vertices"),
+        par_shapes_mesh.const.p("mesh", "the mesh to weld"),
+        float("epsilon", "the maximum distance to consider when welding vertices"),
         Check("mesh.npoints()")..nullable..PAR_SHAPES_T.p.OUT(
             "mapping",
             "null, or a pointer to {@code npoints} 32-bit integers, which gets filled with the mapping from old vertex indices to new indices"

@@ -80,19 +80,19 @@ val OES_texture_buffer = "OESTextureBuffer".nativeClassGLES("OES_texture_buffer"
         "TexBufferOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("internalformat", ""),
-        GLuint.IN("buffer", "")
+        GLenum("target", ""),
+        GLenum("internalformat", ""),
+        GLuint("buffer", "")
     )
 
     void(
         "TexBufferRangeOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("internalformat", ""),
-        GLuint.IN("buffer", ""),
-        GLintptr.IN("offset", ""),
-        GLsizeiptr.IN("size", "")
+        GLenum("target", ""),
+        GLenum("internalformat", ""),
+        GLuint("buffer", ""),
+        GLintptr("offset", ""),
+        GLsizeiptr("size", "")
     )
 }

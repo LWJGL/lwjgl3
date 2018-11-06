@@ -34,8 +34,8 @@ val WGL_EXT_swap_control = "WGLEXTSwapControl".nativeClassWGL("WGL_EXT_swap_cont
         The swap interval is not part of the render context state. It cannot be pushed or popped. The default swap interval is 1.
         """,
 
-        int.IN("interval", "the minimum number of video frames that are displayed before a buffer swap will occur")
+        int("interval", "the minimum number of video frames that are displayed before a buffer swap will occur")
     )
 
-    int("GetSwapIntervalEXT", "Returns the current swap interval for the window associated with the current context.")
+    int("GetSwapIntervalEXT", "Returns the current swap interval for the window associated with the current context.", void())
 }

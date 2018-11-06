@@ -92,156 +92,156 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
         "Uniform1i64NV",
         "",
 
-        GLint.IN("location", ""),
-        GLint64EXT.IN("x", "")
+        GLint("location", ""),
+        GLint64EXT("x", "")
     )
 
     void(
         "Uniform2i64NV",
         "",
 
-        GLint.IN("location", ""),
-        GLint64EXT.IN("x", ""),
-        GLint64EXT.IN("y", "")
+        GLint("location", ""),
+        GLint64EXT("x", ""),
+        GLint64EXT("y", "")
     )
 
     void(
         "Uniform3i64NV",
         "",
 
-        GLint.IN("location", ""),
-        GLint64EXT.IN("x", ""),
-        GLint64EXT.IN("y", ""),
-        GLint64EXT.IN("z", "")
+        GLint("location", ""),
+        GLint64EXT("x", ""),
+        GLint64EXT("y", ""),
+        GLint64EXT("z", "")
     )
 
     void(
         "Uniform4i64NV",
         "",
 
-        GLint.IN("location", ""),
-        GLint64EXT.IN("x", ""),
-        GLint64EXT.IN("y", ""),
-        GLint64EXT.IN("z", ""),
-        GLint64EXT.IN("w", "")
+        GLint("location", ""),
+        GLint64EXT("x", ""),
+        GLint64EXT("y", ""),
+        GLint64EXT("z", ""),
+        GLint64EXT("w", "")
     )
 
     void(
         "Uniform1i64vNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLint64EXT.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLint64EXT.const.p("value", "")
     )
 
     void(
         "Uniform2i64vNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(2, "value")..GLsizei.IN("count", ""),
-        GLint64EXT.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(2, "value")..GLsizei("count", ""),
+        GLint64EXT.const.p("value", "")
     )
 
     void(
         "Uniform3i64vNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(3, "value")..GLsizei.IN("count", ""),
-        GLint64EXT.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(3, "value")..GLsizei("count", ""),
+        GLint64EXT.const.p("value", "")
     )
 
     void(
         "Uniform4i64vNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(4, "value")..GLsizei.IN("count", ""),
-        GLint64EXT.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(4, "value")..GLsizei("count", ""),
+        GLint64EXT.const.p("value", "")
     )
 
     void(
         "Uniform1ui64NV",
         "",
 
-        GLint.IN("location", ""),
-        GLuint64EXT.IN("x", "")
+        GLint("location", ""),
+        GLuint64EXT("x", "")
     )
 
     void(
         "Uniform2ui64NV",
         "",
 
-        GLint.IN("location", ""),
-        GLuint64EXT.IN("x", ""),
-        GLuint64EXT.IN("y", "")
+        GLint("location", ""),
+        GLuint64EXT("x", ""),
+        GLuint64EXT("y", "")
     )
 
     void(
         "Uniform3ui64NV",
         "",
 
-        GLint.IN("location", ""),
-        GLuint64EXT.IN("x", ""),
-        GLuint64EXT.IN("y", ""),
-        GLuint64EXT.IN("z", "")
+        GLint("location", ""),
+        GLuint64EXT("x", ""),
+        GLuint64EXT("y", ""),
+        GLuint64EXT("z", "")
     )
 
     void(
         "Uniform4ui64NV",
         "",
 
-        GLint.IN("location", ""),
-        GLuint64EXT.IN("x", ""),
-        GLuint64EXT.IN("y", ""),
-        GLuint64EXT.IN("z", ""),
-        GLuint64EXT.IN("w", "")
+        GLint("location", ""),
+        GLuint64EXT("x", ""),
+        GLuint64EXT("y", ""),
+        GLuint64EXT("z", ""),
+        GLuint64EXT("w", "")
     )
 
     void(
         "Uniform1ui64vNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLuint64EXT.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLuint64EXT.const.p("value", "")
     )
 
     void(
         "Uniform2ui64vNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(2, "value")..GLsizei.IN("count", ""),
-        GLuint64EXT.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(2, "value")..GLsizei("count", ""),
+        GLuint64EXT.p("value", "")
     )
 
     void(
         "Uniform3ui64vNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(3, "value")..GLsizei.IN("count", ""),
-        GLuint64EXT.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(3, "value")..GLsizei("count", ""),
+        GLuint64EXT.const.p("value", "")
     )
 
     void(
         "Uniform4ui64vNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(4, "value")..GLsizei.IN("count", ""),
-        GLuint64EXT.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(4, "value")..GLsizei("count", ""),
+        GLuint64EXT.const.p("value", "")
     )
 
     void(
         "GetUniformi64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
+        GLuint("program", ""),
+        GLint("location", ""),
         Check(1)..ReturnParam..GLint64EXT.p.OUT("params", "")
     )
 
@@ -253,163 +253,163 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
         "ProgramUniform1i64NV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLint64EXT.IN("x", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLint64EXT("x", "")
     )
 
     DSA..void(
         "ProgramUniform2i64NV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLint64EXT.IN("x", ""),
-        GLint64EXT.IN("y", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLint64EXT("x", ""),
+        GLint64EXT("y", "")
     )
 
     DSA..void(
         "ProgramUniform3i64NV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLint64EXT.IN("x", ""),
-        GLint64EXT.IN("y", ""),
-        GLint64EXT.IN("z", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLint64EXT("x", ""),
+        GLint64EXT("y", ""),
+        GLint64EXT("z", "")
     )
 
     DSA..void(
         "ProgramUniform4i64NV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLint64EXT.IN("x", ""),
-        GLint64EXT.IN("y", ""),
-        GLint64EXT.IN("z", ""),
-        GLint64EXT.IN("w", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLint64EXT("x", ""),
+        GLint64EXT("y", ""),
+        GLint64EXT("z", ""),
+        GLint64EXT("w", "")
     )
 
     DSA..void(
         "ProgramUniform1i64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLint64EXT.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLint64EXT.const.p("value", "")
     )
 
     DSA..void(
         "ProgramUniform2i64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(2, "value")..GLsizei.IN("count", ""),
-        GLint64EXT.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(2, "value")..GLsizei("count", ""),
+        GLint64EXT.const.p("value", "")
     )
 
     DSA..void(
         "ProgramUniform3i64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(3, "value")..GLsizei.IN("count", ""),
-        GLint64EXT.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(3, "value")..GLsizei("count", ""),
+        GLint64EXT.const.p("value", "")
     )
 
     DSA..void(
         "ProgramUniform4i64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(4, "value")..GLsizei.IN("count", ""),
-        GLint64EXT.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(4, "value")..GLsizei("count", ""),
+        GLint64EXT.const.p("value", "")
     )
 
     DSA..void(
         "ProgramUniform1ui64NV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLuint64EXT.IN("x", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLuint64EXT("x", "")
     )
 
     DSA..void(
         "ProgramUniform2ui64NV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLuint64EXT.IN("x", ""),
-        GLuint64EXT.IN("y", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLuint64EXT("x", ""),
+        GLuint64EXT("y", "")
     )
 
     DSA..void(
         "ProgramUniform3ui64NV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLuint64EXT.IN("x", ""),
-        GLuint64EXT.IN("y", ""),
-        GLuint64EXT.IN("z", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLuint64EXT("x", ""),
+        GLuint64EXT("y", ""),
+        GLuint64EXT("z", "")
     )
 
     DSA..void(
         "ProgramUniform4ui64NV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLuint64EXT.IN("x", ""),
-        GLuint64EXT.IN("y", ""),
-        GLuint64EXT.IN("z", ""),
-        GLuint64EXT.IN("w", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLuint64EXT("x", ""),
+        GLuint64EXT("y", ""),
+        GLuint64EXT("z", ""),
+        GLuint64EXT("w", "")
     )
 
     DSA..void(
         "ProgramUniform1ui64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize("value")..GLsizei.IN("count", ""),
-        GLuint64EXT.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize("value")..GLsizei("count", ""),
+        GLuint64EXT.const.p("value", "")
     )
 
     DSA..void(
         "ProgramUniform2ui64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(2, "value")..GLsizei.IN("count", ""),
-        GLuint64EXT.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(2, "value")..GLsizei("count", ""),
+        GLuint64EXT.const.p("value", "")
     )
 
     DSA..void(
         "ProgramUniform3ui64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(3, "value")..GLsizei.IN("count", ""),
-        GLuint64EXT.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(3, "value")..GLsizei("count", ""),
+        GLuint64EXT.const.p("value", "")
     )
 
     DSA..void(
         "ProgramUniform4ui64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize(4, "value")..GLsizei.IN("count", ""),
-        GLuint64EXT.const.p.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize(4, "value")..GLsizei("count", ""),
+        GLuint64EXT.const.p("value", "")
     )
 }

@@ -72,22 +72,19 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
         "NO_RESET_NOTIFICATION_EXT"..0x8261
     )
 
-    GLenum(
-        "GetGraphicsResetStatusEXT",
-        ""
-    )
+    GLenum("GetGraphicsResetStatusEXT", "", void())
 
     void(
         "ReadnPixelsEXT",
         "",
 
-        GLint.IN("x", ""),
-        GLint.IN("y", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLenum.IN("format", ""),
-        GLenum.IN("type", ""),
-        AutoSize("data")..GLsizei.IN("bufSize", ""),
+        GLint("x", ""),
+        GLint("y", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLenum("format", ""),
+        GLenum("type", ""),
+        AutoSize("data")..GLsizei("bufSize", ""),
         PIXEL_PACK_BUFFER..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
@@ -99,9 +96,9 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
         "GetnUniformfvEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize("params")..GLsizei.IN("bufSize", ""),
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize("params")..GLsizei("bufSize", ""),
         ReturnParam..GLfloat.p.OUT("params", "")
     )
 
@@ -109,9 +106,9 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
         "GetnUniformivEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize("params")..GLsizei.IN("bufSize", ""),
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize("params")..GLsizei("bufSize", ""),
         ReturnParam..GLint.p.OUT("params", "")
     )
 }

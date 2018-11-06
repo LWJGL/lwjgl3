@@ -49,26 +49,26 @@ val KHR_lock_surface3 = "KHRLockSurface3".nativeClassEGL("KHR_lock_surface3", po
         "LockSurfaceKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSurface.IN("surface", ""),
-        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLSurface("surface", ""),
+        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
     )
 
     EGLBoolean(
         "UnlockSurfaceKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSurface.IN("surface", "")
+        EGLDisplay("dpy", ""),
+        EGLSurface("surface", "")
     )
 
     EGLBoolean(
         "QuerySurface64KHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSurface.IN("surface", ""),
-        EGLint.IN("attribute", ""),
+        EGLDisplay("dpy", ""),
+        EGLSurface("surface", ""),
+        EGLint("attribute", ""),
         Check(1)..EGLAttribKHR.p.OUT("value", "")
     )
 }

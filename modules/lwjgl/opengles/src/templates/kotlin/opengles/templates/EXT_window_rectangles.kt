@@ -83,8 +83,8 @@ y_i <= yw < y_i+h_i""")}
         When the bound framebuffer object is zero, the window rectangles test always passes.
         """,
 
-        GLenum.IN("mode", "the rectangle mode", Modes),
-        AutoSize(4, "box")..GLsizei.IN("count", "the number of active window rectangles. Must be between zero and the value of #MAX_WINDOW_RECTANGLES_EXT."),
-        nullable..GLint.const.p.IN("box", "an array of {@code 4*count} window rectangle coordinates")
+        GLenum("mode", "the rectangle mode", Modes),
+        AutoSize(4, "box")..GLsizei("count", "the number of active window rectangles. Must be between zero and the value of #MAX_WINDOW_RECTANGLES_EXT."),
+        nullable..GLint.const.p("box", "an array of {@code 4*count} window rectangle coordinates")
     )
 }

@@ -80,12 +80,12 @@ val GLDEBUGPROCAMD = Module.OPENGL.callback {
         "GLDebugMessageAMDCallback",
         "Will be called when a debug message is generated.",
 
-        GLuint.IN("id", "the message ID"),
-        GLenum.IN("category", "the message category"),
-        GLenum.IN("severity", "the message severity"),
-        AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-        GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
-        void.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackAMD()"),
+        GLuint("id", "the message ID"),
+        GLenum("category", "the message category"),
+        GLenum("severity", "the message severity"),
+        AutoSize("message")..GLsizei("length", "the message length, excluding the null-terminator"),
+        GLcharUTF8.const.p("message", "a pointer to the message string representation"),
+        void.p("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackAMD()"),
 
         nativeType = "GLDEBUGPROCAMD"
     ) {
@@ -113,13 +113,13 @@ val GLDEBUGPROCARB = Module.OPENGL.callback {
         "GLDebugMessageARBCallback",
         "Will be called when a debug message is generated.",
 
-        GLenum.IN("source", "the message source"),
-        GLenum.IN("type", "the message type"),
-        GLuint.IN("id", "the message ID"),
-        GLenum.IN("severity", "the message severity"),
-        AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-        GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
-        void.const.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackARB()"),
+        GLenum("source", "the message source"),
+        GLenum("type", "the message type"),
+        GLuint("id", "the message ID"),
+        GLenum("severity", "the message severity"),
+        AutoSize("message")..GLsizei("length", "the message length, excluding the null-terminator"),
+        GLcharUTF8.const.p("message", "a pointer to the message string representation"),
+        void.const.p("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackARB()"),
 
         nativeType = "GLDEBUGPROCARB"
     ) {
@@ -156,13 +156,13 @@ val GLDEBUGPROC = Module.OPENGL.callback {
         "GLDebugMessageCallback",
         "Will be called when a debug message is generated.",
 
-        GLenum.IN("source", "the message source"),
-        GLenum.IN("type", "the message type"),
-        GLuint.IN("id", "the message ID"),
-        GLenum.IN("severity", "the message severity"),
-        AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-        GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
-        void.const.p.IN("userParam",
+        GLenum("source", "the message source"),
+        GLenum("type", "the message type"),
+        GLuint("id", "the message ID"),
+        GLenum("severity", "the message severity"),
+        AutoSize("message")..GLsizei("length", "the message length, excluding the null-terminator"),
+        GLcharUTF8.const.p("message", "a pointer to the message string representation"),
+        void.const.p("userParam",
             "the user-specified value that was passed when calling GL43#glDebugMessageCallback() or KHRDebug#glDebugMessageCallback()"
         ),
 

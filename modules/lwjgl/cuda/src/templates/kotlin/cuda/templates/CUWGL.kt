@@ -22,6 +22,6 @@ val CUWGL = "CUWGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BIN
         "Gets the CUDA device associated with {@code hGpu}.",
 
         Check(1)..CUdevice.p.OUT("pDevice", "device associated with {@code hGpu}"),
-        HGPUNV.IN("hGpu", "handle to a GPU, as queried via {@code WGL_NV_gpu_affinity}")
+        HGPUNV("hGpu", "handle to a GPU, as queried via {@code WGL_NV_gpu_affinity}")
     )
 }

@@ -47,13 +47,13 @@ val OES_texture_view = "OESTextureView".nativeClassGLES("OES_texture_view", post
         "TextureViewOES",
         "",
 
-        GLuint.IN("texture", ""),
-        GLenum.IN("target", ""),
-        GLuint.IN("origtexture", ""),
-        GLenum.IN("internalformat", ""),
-        GLuint.IN("minlevel", ""),
-        GLuint.IN("numlevels", ""),
-        GLuint.IN("minlayer", ""),
-        GLuint.IN("numlayers", "")
+        GLuint("texture", ""),
+        GLenum("target", ""),
+        GLuint("origtexture", ""),
+        GLenum("internalformat", ""),
+        GLuint("minlevel", ""),
+        GLuint("numlevels", ""),
+        GLuint("minlayer", ""),
+        GLuint("numlayers", "")
     )
 }

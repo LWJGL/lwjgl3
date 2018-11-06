@@ -23,14 +23,14 @@ val DynLoad = "DynLoad".nativeClass(Module.CORE_DYNCALL, prefix = "DL") {
         "LoadLibrary",
         "Loads a dynamic library at {@code libpath} and returns a handle to it.",
 
-        charASCII.const.p.IN("libpath", "the dynamic library path")
+        charASCII.const.p("libpath", "the dynamic library path")
     )
 
     void(
         "FreeLibrary",
         "Frees a loaded library.",
 
-        DLLib.p.IN("pLib", "the dynamic library to free")
+        DLLib.p("pLib", "the dynamic library to free")
     )
 
     opaque_p(
@@ -40,8 +40,8 @@ val DynLoad = "DynLoad".nativeClass(Module.CORE_DYNCALL, prefix = "DL") {
         found.
         """,
 
-        DLLib.p.IN("pLib", "the dynamic library"),
-        charASCII.const.p.IN("pSymbolName", "the symbol name")
+        DLLib.p("pLib", "the dynamic library"),
+        charASCII.const.p("pSymbolName", "the symbol name")
     )
 
     int(
@@ -55,45 +55,45 @@ val DynLoad = "DynLoad".nativeClass(Module.CORE_DYNCALL, prefix = "DL") {
         happen in some rare cases, so make sure to always check.
         """,
 
-        DLLib.p.IN("pLib", "the dynamic library"),
+        DLLib.p("pLib", "the dynamic library"),
         Return(RESULT, includesNT = true)..charASCII.p.OUT("sOut", "pointer to a buffer where the library path will be stored"),
-        AutoSize("sOut")..int.IN("bufSize", "the size of {@code sOut}, in bytes")
+        AutoSize("sOut")..int("bufSize", "the size of {@code sOut}, in bytes")
     )
 
     DLSyms.p(
         "SymsInit",
         "Creates a new {@code DLSyms} object.",
 
-        charASCII.const.p.IN("libPath", "the dynamic library path")
+        charASCII.const.p("libPath", "the dynamic library path")
     )
 
     void(
         "SymsCleanup",
         "Frees the specified {@code DLSyms} object.",
 
-        DLSyms.p.IN("pSyms", "the {@code DLSyms} object to free")
+        DLSyms.p("pSyms", "the {@code DLSyms} object to free")
     )
 
     int(
         "SymsCount",
         "Returns the number of symbols exported by the specified library.",
 
-        DLSyms.p.IN("pSyms", "a {@code DLSyms} object")
+        DLSyms.p("pSyms", "a {@code DLSyms} object")
     )
 
     charASCII.const.p(
         "SymsName",
         "Returns the symbol name exported by the specified library at the specified index.",
 
-        DLSyms.p.IN("pSyms", "a {@code DLSyms} object"),
-        int.IN("index", "")
+        DLSyms.p("pSyms", "a {@code DLSyms} object"),
+        int("index", "")
     )
 
     charASCII.const.p(
         "SymsNameFromValue",
         "Returns the symbol name exported by the specified library at the specified address.",
 
-        DLSyms.p.IN("pSyms", "a {@code DLSyms} object"),
-        opaque_p.IN("value", "the symbol address")
+        DLSyms.p("pSyms", "a {@code DLSyms} object"),
+        opaque_p("value", "the symbol address")
     )
 }

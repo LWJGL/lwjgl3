@@ -70,106 +70,106 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
         "BufferAddressRangeNV",
         "",
 
-        GLenum.IN("pname", ""),
-        GLuint.IN("index", ""),
-        GLuint64EXT.IN("address", ""),
-        GLsizeiptr.IN("length", "")
+        GLenum("pname", ""),
+        GLuint("index", ""),
+        GLuint64EXT("address", ""),
+        GLsizeiptr("length", "")
     )
 
     void(
         "VertexFormatNV",
         "",
 
-        GLint.IN("size", ""),
-        GLenum.IN("type", ""),
-        GLsizei.IN("stride", "")
+        GLint("size", ""),
+        GLenum("type", ""),
+        GLsizei("stride", "")
     )
 
     void(
         "NormalFormatNV",
         "",
 
-        GLenum.IN("type", ""),
-        GLsizei.IN("stride", "")
+        GLenum("type", ""),
+        GLsizei("stride", "")
     )
 
     void(
         "ColorFormatNV",
         "",
 
-        GLint.IN("size", ""),
-        GLenum.IN("type", ""),
-        GLsizei.IN("stride", "")
+        GLint("size", ""),
+        GLenum("type", ""),
+        GLsizei("stride", "")
     )
 
     void(
         "IndexFormatNV",
         "",
 
-        GLenum.IN("type", ""),
-        GLsizei.IN("stride", "")
+        GLenum("type", ""),
+        GLsizei("stride", "")
     )
 
     void(
         "TexCoordFormatNV",
         "",
 
-        GLint.IN("size", ""),
-        GLenum.IN("type", ""),
-        GLsizei.IN("stride", "")
+        GLint("size", ""),
+        GLenum("type", ""),
+        GLsizei("stride", "")
     )
 
     void(
         "EdgeFlagFormatNV",
         "",
 
-        GLsizei.IN("stride", "")
+        GLsizei("stride", "")
     )
 
     void(
         "SecondaryColorFormatNV",
         "",
 
-        GLint.IN("size", ""),
-        GLenum.IN("type", ""),
-        GLsizei.IN("stride", "")
+        GLint("size", ""),
+        GLenum("type", ""),
+        GLsizei("stride", "")
     )
 
     void(
         "FogCoordFormatNV",
         "",
 
-        GLenum.IN("type", ""),
-        GLsizei.IN("stride", "")
+        GLenum("type", ""),
+        GLsizei("stride", "")
     )
 
     void(
         "VertexAttribFormatNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLint.IN("size", ""),
-        GLenum.IN("type", ""),
-        GLboolean.IN("normalized", ""),
-        GLsizei.IN("stride", "")
+        GLuint("index", ""),
+        GLint("size", ""),
+        GLenum("type", ""),
+        GLboolean("normalized", ""),
+        GLsizei("stride", "")
     )
 
     void(
         "VertexAttribIFormatNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLint.IN("size", ""),
-        GLenum.IN("type", ""),
-        GLsizei.IN("stride", "")
+        GLuint("index", ""),
+        GLint("size", ""),
+        GLenum("type", ""),
+        GLsizei("stride", "")
     )
 
     void(
         "GetIntegerui64i_vNV",
         "",
 
-        GLenum.IN("value", ""),
-        GLuint.IN("index", ""),
+        GLenum("value", ""),
+        GLuint("index", ""),
         Check(1)..ReturnParam..GLuint64EXT.p.OUT("result", "")
     )
 }

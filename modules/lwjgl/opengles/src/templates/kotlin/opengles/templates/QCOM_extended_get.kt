@@ -40,7 +40,7 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
         "",
 
         nullable..GLuint.p.OUT("textures", ""),
-        AutoSize("textures")..GLint.IN("maxTextures", ""),
+        AutoSize("textures")..GLint("maxTextures", ""),
         nullable..Check(1)..GLint.p.OUT("numTextures", "")
     )
 
@@ -49,7 +49,7 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
         "",
 
         nullable..GLuint.p.OUT("buffers", ""),
-        AutoSize("buffers")..GLint.IN("maxBuffers", ""),
+        AutoSize("buffers")..GLint("maxBuffers", ""),
         nullable..Check(1)..GLint.p.OUT("numBuffers", "")
     )
 
@@ -58,7 +58,7 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
         "",
 
         nullable..GLuint.p.OUT("renderbuffers", ""),
-        AutoSize("renderbuffers")..GLint.IN("maxRenderbuffers", ""),
+        AutoSize("renderbuffers")..GLint("maxRenderbuffers", ""),
         nullable..Check(1)..GLint.p.OUT("numRenderbuffers", "")
     )
 
@@ -67,7 +67,7 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
         "",
 
         nullable..GLuint.p.OUT("framebuffers", ""),
-        AutoSize("framebuffers")..GLint.IN("maxFramebuffers", ""),
+        AutoSize("framebuffers")..GLint("maxFramebuffers", ""),
         nullable..Check(1)..GLint.p.OUT("numFramebuffers", "")
     )
 
@@ -75,10 +75,10 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
         "ExtGetTexLevelParameterivQCOM",
         "",
 
-        GLuint.IN("texture", ""),
-        GLenum.IN("face", ""),
-        GLint.IN("level", ""),
-        GLenum.IN("pname", ""),
+        GLuint("texture", ""),
+        GLenum("face", ""),
+        GLint("level", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -86,25 +86,25 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
         "ExtTexObjectStateOverrideiQCOM",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
-        GLint.IN("param", "")
+        GLenum("target", ""),
+        GLenum("pname", ""),
+        GLint("param", "")
     )
 
     void(
         "ExtGetTexSubImageQCOM",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLint.IN("xoffset", ""),
-        GLint.IN("yoffset", ""),
-        GLint.IN("zoffset", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLenum.IN("format", ""),
-        GLenum.IN("type", ""),
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLint("xoffset", ""),
+        GLint("yoffset", ""),
+        GLint("zoffset", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLenum("format", ""),
+        GLenum("type", ""),
         Unsafe..void.p.OUT("texels", "")
     )
 
@@ -112,7 +112,7 @@ val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", p
         "ExtGetBufferPointervQCOM",
         "",
 
-        GLenum.IN("target", ""),
+        GLenum("target", ""),
         ReturnParam..Check(1)..void.p.p.OUT("params", "")
     )
 }

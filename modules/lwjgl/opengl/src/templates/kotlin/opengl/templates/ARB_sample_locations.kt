@@ -61,17 +61,17 @@ val ARB_sample_locations = "ARBSampleLocations".nativeClassGL("ARB_sample_locati
         locations outside of {@code [0,1]} result in undefined behavior.
         """,
 
-        GLenum.IN("target", "the framebuffer target", "#FRAMEBUFFER #DRAW_FRAMEBUFFER #READ_FRAMEBUFFER"),
-        GLuint.IN("start", "the first sample location to update"),
-        AutoSize(2, "v")..GLsizei.IN("count", "the number of sample locations to update"),
-        GLfloat.const.p.IN("v", "a pair of values for each sample location to update")
+        GLenum("target", "the framebuffer target", "#FRAMEBUFFER #DRAW_FRAMEBUFFER #READ_FRAMEBUFFER"),
+        GLuint("start", "the first sample location to update"),
+        AutoSize(2, "v")..GLsizei("count", "the number of sample locations to update"),
+        GLfloat.const.p("v", "a pair of values for each sample location to update")
     )
 
     void(
         "NamedFramebufferSampleLocationsfvARB",
         "DSA version of #FramebufferSampleLocationsfvARB().",
 
-        GLuint.IN("framebuffer", "the framebuffer object to update"),
+        GLuint("framebuffer", "the framebuffer object to update"),
         this["FramebufferSampleLocationsfvARB"]["start"],
         this["FramebufferSampleLocationsfvARB"]["count"],
         this["FramebufferSampleLocationsfvARB"]["v"]

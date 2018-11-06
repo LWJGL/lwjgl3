@@ -90,7 +90,7 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         "GetUnsignedBytevEXT",
         "",
 
-        GLenum.IN("pname", ""),
+        GLenum("pname", ""),
         Unsafe..GLubyte.p.OUT("data", "")
     )
 
@@ -98,8 +98,8 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         "GetUnsignedBytei_vEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
+        GLenum("target", ""),
+        GLuint("index", ""),
         Unsafe..GLubyte.p.OUT("data", "")
     )
 
@@ -107,22 +107,22 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         "DeleteMemoryObjectsEXT",
         "",
 
-        AutoSize("memoryObjects")..GLsizei.IN("n", ""),
-        SingleValue("memoryObject")..GLuint.const.p.IN("memoryObjects", "")
+        AutoSize("memoryObjects")..GLsizei("n", ""),
+        SingleValue("memoryObject")..GLuint.const.p("memoryObjects", "")
     )
 
     GLboolean(
         "IsMemoryObjectEXT",
         "",
 
-        GLuint.IN("memoryObject", "")
+        GLuint("memoryObject", "")
     )
 
     void(
         "CreateMemoryObjectsEXT",
         "",
 
-        AutoSize("memoryObjects")..GLsizei.IN("n", ""),
+        AutoSize("memoryObjects")..GLsizei("n", ""),
         ReturnParam..GLuint.p.OUT("memoryObjects", "")
     )
 
@@ -130,17 +130,17 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         "MemoryObjectParameterivEXT",
         "",
 
-        GLuint.IN("memoryObject", ""),
-        GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..GLint.const.p.IN("params", "")
+        GLuint("memoryObject", ""),
+        GLenum("pname", ""),
+        SingleValue("param")..Check(1)..GLint.const.p("params", "")
     )
 
     void(
         "GetMemoryObjectParameterivEXT",
         "",
 
-        GLuint.IN("memoryObject", ""),
-        GLenum.IN("pname", ""),
+        GLuint("memoryObject", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -148,132 +148,132 @@ val EXT_memory_object = "EXTMemoryObject".nativeClassGLES("EXT_memory_object", p
         "TexStorageMem2DEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("levels", ""),
-        GLenum.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLenum("target", ""),
+        GLsizei("levels", ""),
+        GLenum("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     void(
         "TexStorageMem2DMultisampleEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLboolean.IN("fixedSampleLocations", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLenum("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLboolean("fixedSampleLocations", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     void(
         "TexStorageMem3DEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("levels", ""),
-        GLenum.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLenum("target", ""),
+        GLsizei("levels", ""),
+        GLenum("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     void(
         "TexStorageMem3DMultisampleEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLboolean.IN("fixedSampleLocations", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLenum("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLboolean("fixedSampleLocations", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     void(
         "BufferStorageMemEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizeiptr.IN("size", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLenum("target", ""),
+        GLsizeiptr("size", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "TextureStorageMem2DEXT",
         "",
 
-        GLuint.IN("texture", ""),
-        GLsizei.IN("levels", ""),
-        GLenum.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLuint("texture", ""),
+        GLsizei("levels", ""),
+        GLenum("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "TextureStorageMem2DMultisampleEXT",
         "",
 
-        GLuint.IN("texture", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLboolean.IN("fixedSampleLocations", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLuint("texture", ""),
+        GLsizei("samples", ""),
+        GLenum("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLboolean("fixedSampleLocations", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "TextureStorageMem3DEXT",
         "",
 
-        GLuint.IN("texture", ""),
-        GLsizei.IN("levels", ""),
-        GLenum.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLuint("texture", ""),
+        GLsizei("levels", ""),
+        GLenum("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "TextureStorageMem3DMultisampleEXT",
         "",
 
-        GLuint.IN("texture", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLboolean.IN("fixedSampleLocations", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLuint("texture", ""),
+        GLsizei("samples", ""),
+        GLenum("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLboolean("fixedSampleLocations", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "NamedBufferStorageMemEXT",
         "",
 
-        GLuint.IN("buffer", ""),
-        GLsizeiptr.IN("size", ""),
-        GLuint.IN("memory", ""),
-        GLuint64.IN("offset", "")
+        GLuint("buffer", ""),
+        GLsizeiptr("size", ""),
+        GLuint("memory", ""),
+        GLuint64("offset", "")
     )
 }
 
@@ -340,7 +340,7 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGLES("EXT_semaphore", postfix = EX
         "GenSemaphoresEXT",
         "",
 
-        AutoSize("semaphores")..GLsizei.IN("n", ""),
+        AutoSize("semaphores")..GLsizei("n", ""),
         ReturnParam..GLuint.p.OUT("semaphores", "")
     )
 
@@ -348,32 +348,32 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGLES("EXT_semaphore", postfix = EX
         "DeleteSemaphoresEXT",
         "",
 
-        AutoSize("semaphores")..GLsizei.IN("n", ""),
-        SingleValue("semaphore")..GLuint.const.p.IN("semaphores", "")
+        AutoSize("semaphores")..GLsizei("n", ""),
+        SingleValue("semaphore")..GLuint.const.p("semaphores", "")
     )
 
     GLboolean(
         "IsSemaphoreEXT",
         "",
 
-        GLuint.IN("semaphore", "")
+        GLuint("semaphore", "")
     )
 
     void(
         "SemaphoreParameterui64vEXT",
         "",
 
-        GLuint.IN("semaphore", ""),
-        GLenum.IN("pname", ""),
-        SingleValue("param")..Check(1)..GLuint64.const.p.IN("params", "")
+        GLuint("semaphore", ""),
+        GLenum("pname", ""),
+        SingleValue("param")..Check(1)..GLuint64.const.p("params", "")
     )
 
     void(
         "GetSemaphoreParameterui64vEXT",
         "",
 
-        GLuint.IN("semaphore", ""),
-        GLenum.IN("pname", ""),
+        GLuint("semaphore", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLuint64.p.OUT("params", "")
     )
 
@@ -381,23 +381,23 @@ val EXT_semaphore = "EXTSemaphore".nativeClassGLES("EXT_semaphore", postfix = EX
         "WaitSemaphoreEXT",
         "",
 
-        GLuint.IN("semaphore", ""),
-        AutoSize("buffers")..GLuint.IN("numBufferBarriers", ""),
-        GLuint.const.p.IN("buffers", ""),
-        AutoSize("textures", "srcLayouts")..GLuint.IN("numTextureBarriers", ""),
-        GLuint.const.p.IN("textures", ""),
-        GLenum.const.p.IN("srcLayouts", "")
+        GLuint("semaphore", ""),
+        AutoSize("buffers")..GLuint("numBufferBarriers", ""),
+        GLuint.const.p("buffers", ""),
+        AutoSize("textures", "srcLayouts")..GLuint("numTextureBarriers", ""),
+        GLuint.const.p("textures", ""),
+        GLenum.const.p("srcLayouts", "")
     )
 
     void(
         "SignalSemaphoreEXT",
         "",
 
-        GLuint.IN("semaphore", ""),
-        AutoSize("buffers")..GLuint.IN("numBufferBarriers", ""),
-        GLuint.const.p.IN("buffers", ""),
-        AutoSize("textures", "dstLayouts")..GLuint.IN("numTextureBarriers", ""),
-        GLuint.const.p.IN("textures", ""),
-        GLenum.const.p.IN("dstLayouts", "")
+        GLuint("semaphore", ""),
+        AutoSize("buffers")..GLuint("numBufferBarriers", ""),
+        GLuint.const.p("buffers", ""),
+        AutoSize("textures", "dstLayouts")..GLuint("numTextureBarriers", ""),
+        GLuint.const.p("textures", ""),
+        GLenum.const.p("dstLayouts", "")
     )
 }

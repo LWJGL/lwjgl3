@@ -749,8 +749,8 @@ nk_style_pop_vec2(ctx);""")}
         "WINDOW_REMOVE_ROM".enum("Removes the read only mode at the end of the window", 16.NK_FLAG)
     ).javaDocLinks
 
-    val ctx = nk_context.p.IN("ctx", "the nuklear context")
-    val cctx = nk_context.const.p.IN("ctx", "the nuklear context");
+    val ctx = nk_context.p("ctx", "the nuklear context")
+    val cctx = nk_context.const.p("ctx", "the nuklear context");
 
     {
         intb(
@@ -766,9 +766,9 @@ nk_style_pop_vec2(ctx);""")}
             """,
 
             ctx,
-            void.p.IN("memory", "must point to a previously allocated memory block"),
-            AutoSize("memory")..nk_size.IN("size", "must contain the total size of {@code memory}"),
-            nullable..nk_user_font.const.p.IN("font", "must point to a previously initialized font handle")
+            void.p("memory", "must point to a previously allocated memory block"),
+            AutoSize("memory")..nk_size("size", "must contain the total size of {@code memory}"),
+            nullable..nk_user_font.const.p("font", "must point to a previously initialized font handle")
         )
 
         intb(
@@ -781,8 +781,8 @@ nk_style_pop_vec2(ctx);""")}
             """,
 
             ctx,
-            nk_allocator.p.IN("allocator", "must point to a previously allocated memory allocator"),
-            nullable..nk_user_font.const.p.IN("font", "must point to a previously initialized font handle")
+            nk_allocator.p("allocator", "must point to a previously allocated memory allocator"),
+            nullable..nk_user_font.const.p("font", "must point to a previously initialized font handle")
         )
 
         intb(
@@ -790,9 +790,9 @@ nk_style_pop_vec2(ctx);""")}
             "Initializes context from two buffers. One for draw commands the other for window/panel/table allocations.",
 
             ctx,
-            nk_buffer_p.IN("cmds", "must point to a previously initialized memory buffer either fixed or dynamic to store draw commands into"),
-            nk_buffer_p.IN("pool", "must point to a previously initialized memory buffer either fixed or dynamic to store windows, panels and tables"),
-            nullable..nk_user_font.const.p.IN("font", "must point to a previously initialized font handle")
+            nk_buffer_p("cmds", "must point to a previously initialized memory buffer either fixed or dynamic to store draw commands into"),
+            nk_buffer_p("pool", "must point to a previously initialized memory buffer either fixed or dynamic to store windows, panels and tables"),
+            nullable..nk_user_font.const.p("font", "must point to a previously initialized font handle")
         )
 
         void(
@@ -823,7 +823,7 @@ nk_style_pop_vec2(ctx);""")}
             "Utility function to pass user data to draw command.",
 
             ctx,
-            nk_handle.IN("handle", "handle with either pointer or index to be passed into every draw commands")
+            nk_handle("handle", "handle with either pointer or index to be passed into every draw commands")
         )
 
         intb(
@@ -831,9 +831,9 @@ nk_style_pop_vec2(ctx);""")}
             "Starts a new window; needs to be called every frame for every window (unless hidden) or otherwise the window gets removed.",
 
             ctx,
-            charUTF8.const.p.IN("title", ""),
-            nk_rect.IN("bounds", ""),
-            nk_flags.IN("flags", "", WindowFlags, LinkMode.BITFIELD)
+            charUTF8.const.p("title", ""),
+            nk_rect("bounds", ""),
+            nk_flags("flags", "", WindowFlags, LinkMode.BITFIELD)
         )
 
         intb(
@@ -841,10 +841,10 @@ nk_style_pop_vec2(ctx);""")}
             "Extended window start with separated title and identifier to allow multiple windows with same name but not title.",
 
             ctx,
-            charUTF8.const.p.IN("name", ""),
-            charUTF8.const.p.IN("title", ""),
-            nk_rect.IN("bounds", ""),
-            nk_flags.IN("flags", "", WindowFlags, LinkMode.BITFIELD)
+            charUTF8.const.p("name", ""),
+            charUTF8.const.p("title", ""),
+            nk_rect("bounds", ""),
+            nk_flags("flags", "", WindowFlags, LinkMode.BITFIELD)
         )
 
         void(
@@ -859,7 +859,7 @@ nk_style_pop_vec2(ctx);""")}
             "Finds and returns the window with give name.",
 
             ctx,
-            charUTF8.const.p.IN("name", "")
+            charUTF8.const.p("name", "")
         )
 
         nk_rect("window_get_bounds", "Returns a rectangle with screen position and size of the currently processed window.", cctx)
@@ -885,7 +885,7 @@ nk_style_pop_vec2(ctx);""")}
             "Returns if the window with given name is currently minimized/collapsed.",
 
             ctx,
-            charUTF8.const.p.IN("name", "")
+            charUTF8.const.p("name", "")
         )
 
         intb(
@@ -893,7 +893,7 @@ nk_style_pop_vec2(ctx);""")}
             "Returns if the currently processed window was closed.",
 
             ctx,
-            charUTF8.const.p.IN("name", "")
+            charUTF8.const.p("name", "")
         )
 
         intb(
@@ -901,7 +901,7 @@ nk_style_pop_vec2(ctx);""")}
             "Returns if the currently processed window was hidden.",
 
             ctx,
-            charUTF8.const.p.IN("name", "")
+            charUTF8.const.p("name", "")
         )
 
         intb(
@@ -909,7 +909,7 @@ nk_style_pop_vec2(ctx);""")}
             "Same as #window_has_focus() for some reason.",
 
             ctx,
-            charUTF8.const.p.IN("name", "")
+            charUTF8.const.p("name", "")
         )
 
         intb("window_is_hovered", "Returns if the currently processed window is currently being hovered by mouse.", ctx)
@@ -923,8 +923,8 @@ nk_style_pop_vec2(ctx);""")}
             "Updates position and size of the specified window.",
 
             ctx,
-            charUTF8.const.p.IN("name", "name of the window to modify both position and size"),
-            nk_rect.IN("bounds", "points to a {@code nk_rect} struct with the new position and size of the specified window")
+            charUTF8.const.p("name", "name of the window to modify both position and size"),
+            nk_rect("bounds", "points to a {@code nk_rect} struct with the new position and size of the specified window")
         )
 
         void(
@@ -932,8 +932,8 @@ nk_style_pop_vec2(ctx);""")}
             "Updates position of the currently process window.",
 
             ctx,
-            charUTF8.const.p.IN("name", "name of the window to modify position of"),
-            nk_vec2.IN("position", "points to a {@code nk_vec2} struct with the new position of currently active window")
+            charUTF8.const.p("name", "name of the window to modify position of"),
+            nk_vec2("position", "points to a {@code nk_vec2} struct with the new position of currently active window")
         )
 
         void(
@@ -941,8 +941,8 @@ nk_style_pop_vec2(ctx);""")}
             "Updates the size of the specified window.",
 
             ctx,
-            charUTF8.const.p.IN("name", "name of the window to modify size of"),
-            nk_vec2.IN("size", "points to a {@code nk_vec2} struct with the new size of currently active window")
+            charUTF8.const.p("name", "name of the window to modify size of"),
+            nk_vec2("size", "points to a {@code nk_vec2} struct with the new size of currently active window")
         )
 
         void(
@@ -950,7 +950,7 @@ nk_style_pop_vec2(ctx);""")}
             "Sets the specified window as active window.",
 
             ctx,
-            charUTF8.const.p.IN("name", "name of the window to be set active")
+            charUTF8.const.p("name", "name of the window to be set active")
         )
 
         void(
@@ -958,7 +958,7 @@ nk_style_pop_vec2(ctx);""")}
             "Closes the window with given window name which deletes the window at the end of the frame.",
 
             ctx,
-            charUTF8.const.p.IN("name", "")
+            charUTF8.const.p("name", "")
         )
 
         void(
@@ -966,8 +966,8 @@ nk_style_pop_vec2(ctx);""")}
             "Collapses the window with given window name.",
 
             ctx,
-            charUTF8.const.p.IN("name", ""),
-            nk_collapse_states.IN("c", "", CollapseStates)
+            charUTF8.const.p("name", ""),
+            nk_collapse_states("c", "", CollapseStates)
         )
 
         void(
@@ -975,9 +975,9 @@ nk_style_pop_vec2(ctx);""")}
             "Collapses the window with given window name if the given condition was met.",
 
             ctx,
-            charUTF8.const.p.IN("name", ""),
-            nk_collapse_states.IN("c", "", CollapseStates),
-            intb.IN("cond", "")
+            charUTF8.const.p("name", ""),
+            nk_collapse_states("c", "", CollapseStates),
+            intb("cond", "")
         )
 
         void(
@@ -985,8 +985,8 @@ nk_style_pop_vec2(ctx);""")}
             "Hides a visible or reshows a hidden window.",
 
             ctx,
-            charUTF8.const.p.IN("name", ""),
-            nk_show_states.IN("s", "", ShowStates)
+            charUTF8.const.p("name", ""),
+            nk_show_states("s", "", ShowStates)
         )
 
         void(
@@ -994,9 +994,9 @@ nk_style_pop_vec2(ctx);""")}
             "Hides/shows a window depending on condition.",
 
             ctx,
-            charUTF8.const.p.IN("name", ""),
-            nk_show_states.IN("s", "", ShowStates),
-            intb.IN("cond", "")
+            charUTF8.const.p("name", ""),
+            nk_show_states("s", "", ShowStates),
+            intb("cond", "")
         )
 
         void(
@@ -1008,7 +1008,7 @@ nk_style_pop_vec2(ctx);""")}
             """,
 
             ctx,
-            float.IN("height", "new minimum row height to be used for auto generating the row height")
+            float("height", "new minimum row height to be used for auto generating the row height")
         )
 
         void(
@@ -1033,7 +1033,7 @@ nk_style_pop_vec2(ctx);""")}
             "Utility function to calculate window ratio from pixel size.",
 
             ctx,
-            float.IN("pixel_width", "pixel width to convert to window ratio")
+            float("pixel_width", "pixel width to convert to window ratio")
         )
 
         void(
@@ -1044,8 +1044,8 @@ nk_style_pop_vec2(ctx);""")}
             """,
 
             ctx,
-            float.IN("height", "holds height of each widget in row or zero for auto layouting"),
-            nk_int.IN("cols", "number of widgets inside row")
+            float("height", "holds height of each widget in row or zero for auto layouting"),
+            nk_int("cols", "number of widgets inside row")
         )
         void(
             "layout_row_static",
@@ -1055,9 +1055,9 @@ nk_style_pop_vec2(ctx);""")}
             """,
 
             ctx,
-            float.IN("height", "holds row height to allocate from panel for widget height"),
-            nk_int.IN("item_width", "holds width of each widget in row"),
-            nk_int.IN("cols", "number of widgets inside row")
+            float("height", "holds row height to allocate from panel for widget height"),
+            nk_int("item_width", "holds width of each widget in row"),
+            nk_int("cols", "number of widgets inside row")
         )
 
         void(
@@ -1065,16 +1065,16 @@ nk_style_pop_vec2(ctx);""")}
             "Starts a new dynamic or fixed row with given height and columns.",
 
             ctx,
-            nk_layout_format.IN("fmt", "either #DYNAMIC for window ratio or #STATIC for fixed size columns", LayoutFormats),
-            float.IN("row_height", "holds height of each widget in row or zero for auto layouting"),
-            nk_int.IN("cols", "number of widgets inside row")
+            nk_layout_format("fmt", "either #DYNAMIC for window ratio or #STATIC for fixed size columns", LayoutFormats),
+            float("row_height", "holds height of each widget in row or zero for auto layouting"),
+            nk_int("cols", "number of widgets inside row")
         )
         void(
             "layout_row_push",
             "Specifies either window ratio or width of a single column.",
 
             ctx,
-            float.IN("value", "either a window ratio or fixed width depending on {@code fmt} in previous #layout_row_begin() call")
+            float("value", "either a window ratio or fixed width depending on {@code fmt} in previous #layout_row_begin() call")
         )
         void(
             "layout_row_end",
@@ -1087,10 +1087,10 @@ nk_style_pop_vec2(ctx);""")}
             "Specifies row columns in array as either window ratio or size.",
 
             ctx,
-            nk_layout_format.IN("fmt", "either #DYNAMIC for window ratio or #STATIC for fixed size columns", LayoutFormats),
-            float.IN("height", "holds height of each widget in row or zero for auto layouting"),
-            AutoSize("ratio")..nk_int.IN("cols", "number of widgets inside row"),
-            float.const.p.IN("ratio", "")
+            nk_layout_format("fmt", "either #DYNAMIC for window ratio or #STATIC for fixed size columns", LayoutFormats),
+            float("height", "holds height of each widget in row or zero for auto layouting"),
+            AutoSize("ratio")..nk_int("cols", "number of widgets inside row"),
+            float.const.p("ratio", "")
         )
 
         void(
@@ -1098,7 +1098,7 @@ nk_style_pop_vec2(ctx);""")}
             "Begins the row template declaration.",
 
             ctx,
-            float.IN("height", "holds height of each widget in row or zero for auto layouting")
+            float("height", "holds height of each widget in row or zero for auto layouting")
         )
         void(
             "layout_row_template_push_dynamic",
@@ -1111,14 +1111,14 @@ nk_style_pop_vec2(ctx);""")}
             "Adds a variable column that dynamically grows but does not shrink below specified pixel width.",
 
             ctx,
-            float.IN("min_width", "holds the minimum pixel width the next column must be")
+            float("min_width", "holds the minimum pixel width the next column must be")
         )
         void(
             "layout_row_template_push_static",
             "Adds a static column that does not grow and will always have the same size.",
 
             ctx,
-            float.IN("width", "holds the absolute pixel width value the next column must be")
+            float("width", "holds the absolute pixel width value the next column must be")
         )
 
         void(
@@ -1133,16 +1133,16 @@ nk_style_pop_vec2(ctx);""")}
             "Begins a new layouting space that allows to specify each widgets position and size.",
 
             ctx,
-            nk_layout_format.IN("fmt", "either #DYNAMIC for window ratio or #STATIC for fixed size columns", LayoutFormats),
-            float.IN("height", "holds height of each widget in row or zero for auto layouting"),
-            nk_int.IN("widget_count", "number of widgets inside row")
+            nk_layout_format("fmt", "either #DYNAMIC for window ratio or #STATIC for fixed size columns", LayoutFormats),
+            float("height", "holds height of each widget in row or zero for auto layouting"),
+            nk_int("widget_count", "number of widgets inside row")
         )
         void(
             "layout_space_push",
             "Pushes position and size of the next widget in own coordiante space either as pixel or ratio.",
 
             ctx,
-            nk_rect.IN("rect", "position and size in layout space local coordinates")
+            nk_rect("rect", "position and size in layout space local coordinates")
         )
         void(
             "layout_space_end",
@@ -1163,7 +1163,7 @@ nk_style_pop_vec2(ctx);""")}
             "Converts vector from {@code nk_layout_space} coordinate space into screen space.",
 
             ctx,
-            ReturnParam..nk_vec2.IN("ret", "position to convert from layout space into screen coordinate space")
+            ReturnParam..nk_vec2("ret", "position to convert from layout space into screen coordinate space")
         )
 
         nk_vec2(
@@ -1171,7 +1171,7 @@ nk_style_pop_vec2(ctx);""")}
             "Converts vector from layout space into screen space.",
 
             ctx,
-            ReturnParam..nk_vec2.IN("ret", "position to convert from screen space into layout coordinate space")
+            ReturnParam..nk_vec2("ret", "position to convert from screen space into layout coordinate space")
         )
 
         nk_rect(
@@ -1179,7 +1179,7 @@ nk_style_pop_vec2(ctx);""")}
             "Converts rectangle from screen space into layout space.",
 
             ctx,
-            ReturnParam..nk_rect.IN("ret", "rectangle to convert from layout space into screen space")
+            ReturnParam..nk_rect("ret", "rectangle to convert from layout space into screen space")
         )
 
         nk_rect(
@@ -1187,7 +1187,7 @@ nk_style_pop_vec2(ctx);""")}
             "Converts rectangle from layout space into screen space.",
 
             ctx,
-            ReturnParam..nk_rect.IN("ret", "rectangle to convert from screen space into layout space")
+            ReturnParam..nk_rect("ret", "rectangle to convert from screen space into layout space")
         )
 
         intb(
@@ -1195,17 +1195,17 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("title", ""),
-            nk_flags.IN("flags", "")
+            charUTF8.const.p("title", ""),
+            nk_flags("flags", "")
         )
         intb(
             "group_begin_titled",
             "",
 
             ctx,
-            charUTF8.const.p.IN("name", "must be an unique identifier for this group"),
-            charUTF8.const.p.IN("title", "group header title"),
-            nk_flags.IN(
+            charUTF8.const.p("name", "must be an unique identifier for this group"),
+            charUTF8.const.p("title", "group header title"),
+            nk_flags(
                 "flags",
                 "window flags defined in the nk_panel_flags section with a number of different group behaviors",
                 WindowFlags, LinkMode.BITFIELD
@@ -1218,19 +1218,19 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            Check(1)..nk_uint.p.IN("x_offset", ""),
-            Check(1)..nk_uint.p.IN("y_offset", ""),
-            charUTF8.const.p.IN("title", ""),
-            nk_flags.IN("flags", "")
+            Check(1)..nk_uint.p("x_offset", ""),
+            Check(1)..nk_uint.p("y_offset", ""),
+            charUTF8.const.p("title", ""),
+            nk_flags("flags", "")
         )
         intb(
             "group_scrolled_begin",
             "",
 
             ctx,
-            nk_scroll.p.IN("scroll", ""),
-            charUTF8.const.p.IN("title", ""),
-            nk_flags.IN("flags", "")
+            nk_scroll.p("scroll", ""),
+            charUTF8.const.p("title", ""),
+            nk_flags("flags", "")
         )
         void("group_scrolled_end", "", ctx)
         void("group_end", "", ctx)
@@ -1241,10 +1241,10 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_list_view.p.OUT("view", ""),
-            charUTF8.const.p.IN("title", ""),
-            nk_flags.IN("flags", ""),
-            int.IN("row_height", ""),
-            int.IN("row_count", "")
+            charUTF8.const.p("title", ""),
+            nk_flags("flags", ""),
+            int("row_height", ""),
+            int("row_count", "")
         )
         void(
             "list_view_end",
@@ -1258,16 +1258,16 @@ nk_style_pop_vec2(ctx);""")}
             "Start a collapsable UI section with internal state management with full control over internal unique ID used to store state.",
 
             ctx,
-            nk_tree_type.IN(
+            nk_tree_type(
                 "type",
                 "value from the {@code nk_tree_type} section to visually mark a tree node header as either a collapseable UI section or tree node",
                 TreeTypes
             ),
-            charUTF8.const.p.IN("title", "label printed in the tree header"),
-            nk_collapse_states.IN("initial_state", "initial tree state value out of {@code nk_collapse_states}", CollapseStates),
-            char.const.p.IN("hash", "memory block or string to generate the ID from"),
-            AutoSize("hash")..nk_int.IN("len", "size of passed memory block or string in {@code hash}"),
-            nk_int.IN("seed", "seeding value if this function is called in a loop or default to 0")
+            charUTF8.const.p("title", "label printed in the tree header"),
+            nk_collapse_states("initial_state", "initial tree state value out of {@code nk_collapse_states}", CollapseStates),
+            char.const.p("hash", "memory block or string to generate the ID from"),
+            AutoSize("hash")..nk_int("len", "size of passed memory block or string in {@code hash}"),
+            nk_int("seed", "seeding value if this function is called in a loop or default to 0")
         )
         intb(
             "tree_image_push_hashed",
@@ -1275,7 +1275,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             tree_push_hashed["type"],
-            nk_image.IN("img", "image to display inside the header on the left of the label"),
+            nk_image("img", "image to display inside the header on the left of the label"),
             tree_push_hashed["title"],
             tree_push_hashed["initial_state"],
             tree_push_hashed["hash"],
@@ -1299,7 +1299,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             tree_push_hashed["type"],
-            nk_image.IN("image", "image to display inside the header on the left of the label"),
+            nk_image("image", "image to display inside the header on the left of the label"),
             tree_push_hashed["title"],
             Check(1)..nk_collapse_states.p.INOUT("state", "")
         )
@@ -1312,11 +1312,11 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             tree_push_hashed["type"],
             tree_push_hashed["title"],
-            nk_collapse_states.IN("initial_state", ""),
+            nk_collapse_states("initial_state", ""),
             Check(1)..intb.p.INOUT("selected", ""),
-            char.const.p.IN("hash", ""),
-            AutoSize("hash")..int.IN("len", ""),
-            int.IN("seed", "")
+            char.const.p("hash", ""),
+            AutoSize("hash")..int("len", ""),
+            int("seed", "")
         )
         intb(
             "tree_element_image_push_hashed",
@@ -1324,13 +1324,13 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             tree_push_hashed["type"],
-            nk_image.IN("img", ""),
+            nk_image("img", ""),
             tree_push_hashed["title"],
-            nk_collapse_states.IN("initial_state", ""),
+            nk_collapse_states("initial_state", ""),
             Check(1)..intb.p.INOUT("selected", ""),
-            char.const.p.IN("hash", ""),
-            AutoSize("hash")..int.IN("len", ""),
-            int.IN("seed", "")
+            char.const.p("hash", ""),
+            AutoSize("hash")..int("len", ""),
+            int("seed", "")
         )
         void("tree_element_pop", "", ctx)
 
@@ -1339,9 +1339,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..nk_int.IN("len", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..nk_int("len", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         void(
@@ -1349,10 +1349,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..nk_int.IN("len", ""),
-            nk_flags.IN("alignment", "", TextAlignments),
-            nk_color.IN("color", "")
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..nk_int("len", ""),
+            nk_flags("alignment", "", TextAlignments),
+            nk_color("color", "")
         )
 
         void(
@@ -1360,8 +1360,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..nk_int.IN("len", "")
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..nk_int("len", "")
         )
 
         void(
@@ -1369,9 +1369,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..nk_int.IN("len", ""),
-            nk_color.IN("color", "")
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..nk_int("len", ""),
+            nk_color("color", "")
         )
 
         void(
@@ -1379,8 +1379,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            nk_flags.IN("align", "", TextAlignments)
+            charUTF8.const.p("str", ""),
+            nk_flags("align", "", TextAlignments)
         )
 
         void(
@@ -1388,9 +1388,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            nk_color.IN("color", "")
+            charUTF8.const.p("str", ""),
+            nk_flags("align", "", TextAlignments),
+            nk_color("color", "")
         )
 
         void(
@@ -1398,7 +1398,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", "")
+            charUTF8.const.p("str", "")
         )
 
         void(
@@ -1406,8 +1406,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            nk_color.IN("color", "")
+            charUTF8.const.p("str", ""),
+            nk_color("color", "")
         )
 
         void(
@@ -1415,7 +1415,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", "")
+            nk_image("img", "")
         )
 
         void(
@@ -1423,8 +1423,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            nk_color.IN("color", "")
+            nk_image("img", ""),
+            nk_color("color", "")
         )
 
         void(
@@ -1432,7 +1432,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+            nk_button_behavior("behavior", "", ButtonBehaviors)
         )
 
         intb(
@@ -1440,7 +1440,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_button_behavior.IN("behavior", "", ButtonBehaviors)
+            nk_button_behavior("behavior", "", ButtonBehaviors)
         )
 
         intb(
@@ -1455,8 +1455,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("title", ""),
-            AutoSize("title")..nk_int.IN("len", "")
+            charUTF8.const.p("title", ""),
+            AutoSize("title")..nk_int("len", "")
         )
 
         intb(
@@ -1464,7 +1464,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("title", "")
+            charUTF8.const.p("title", "")
         )
 
         intb(
@@ -1472,7 +1472,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         intb(
@@ -1480,7 +1480,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes)
+            nk_symbol_type("symbol", "", SymbolTypes)
         )
 
         intb(
@@ -1488,7 +1488,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", "")
+            nk_image("img", "")
         )
 
         intb(
@@ -1496,9 +1496,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("text_alignment", "", TextAlignments)
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("text", ""),
+            nk_flags("text_alignment", "", TextAlignments)
         )
 
         intb(
@@ -1506,10 +1506,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..nk_int.IN("len", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..nk_int("len", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -1517,9 +1517,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("text_alignment", "", TextAlignments)
+            nk_image("img", ""),
+            charUTF8.const.p("text", ""),
+            nk_flags("text_alignment", "", TextAlignments)
         )
 
         intb(
@@ -1527,10 +1527,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..nk_int.IN("len", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_image("img", ""),
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..nk_int("len", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -1538,9 +1538,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_style_button.const.p.IN("style", ""),
-            charUTF8.const.p.IN("title", ""),
-            int.IN("len", "")
+            nk_style_button.const.p("style", ""),
+            charUTF8.const.p("title", ""),
+            int("len", "")
         )
 
         intb(
@@ -1548,8 +1548,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_style_button.const.p.IN("style", ""),
-            charUTF8.const.p.IN("title", "")
+            nk_style_button.const.p("style", ""),
+            charUTF8.const.p("title", "")
         )
 
         intb(
@@ -1557,8 +1557,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_style_button.const.p.IN("style", ""),
-            nk_symbol_type.IN("symbol", "")
+            nk_style_button.const.p("style", ""),
+            nk_symbol_type("symbol", "")
         )
 
         intb(
@@ -1566,8 +1566,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_style_button.const.p.IN("style", ""),
-            nk_image.IN("img", "")
+            nk_style_button.const.p("style", ""),
+            nk_image("img", "")
         )
 
         intb(
@@ -1575,11 +1575,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_style_button.const.p.IN("style", ""),
-            nk_symbol_type.IN("symbol", ""),
-            charUTF8.const.p.IN("title", ""),
-            int.IN("len", ""),
-            nk_flags.IN("alignment", "")
+            nk_style_button.const.p("style", ""),
+            nk_symbol_type("symbol", ""),
+            charUTF8.const.p("title", ""),
+            int("len", ""),
+            nk_flags("alignment", "")
         )
 
         intb(
@@ -1587,10 +1587,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_style_button.const.p.IN("style", ""),
-            nk_symbol_type.IN("symbol", ""),
-            charUTF8.const.p.IN("title", ""),
-            nk_flags.IN("text_alignment", "")
+            nk_style_button.const.p("style", ""),
+            nk_symbol_type("symbol", ""),
+            charUTF8.const.p("title", ""),
+            nk_flags("text_alignment", "")
         )
 
         intb(
@@ -1598,10 +1598,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_style_button.const.p.IN("style", ""),
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("title", ""),
-            nk_flags.IN("text_alignment", "")
+            nk_style_button.const.p("style", ""),
+            nk_image("img", ""),
+            charUTF8.const.p("title", ""),
+            nk_flags("text_alignment", "")
         )
 
         intb(
@@ -1609,11 +1609,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_style_button.const.p.IN("style", ""),
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("title", ""),
-            int.IN("len", ""),
-            nk_flags.IN("alignment", "")
+            nk_style_button.const.p("style", ""),
+            nk_image("img", ""),
+            charUTF8.const.p("title", ""),
+            int("len", ""),
+            nk_flags("alignment", "")
         )
 
         intb(
@@ -1621,8 +1621,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            intb.IN("active", "")
+            charUTF8.const.p("str", ""),
+            intb("active", "")
         )
 
         intb(
@@ -1630,9 +1630,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
-            intb.IN("active", "")
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            intb("active", "")
         )
 
         unsigned_int(
@@ -1640,9 +1640,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            unsigned_int.IN("flags", ""),
-            unsigned_int.IN("value", "")
+            charUTF8.const.p("str", ""),
+            unsigned_int("flags", ""),
+            unsigned_int("value", "")
         )
 
         unsigned_int(
@@ -1650,10 +1650,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
-            unsigned_int.IN("flags", ""),
-            unsigned_int.IN("value", "")
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            unsigned_int("flags", ""),
+            unsigned_int("value", "")
         )
 
         intb(
@@ -1661,7 +1661,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
+            charUTF8.const.p("str", ""),
             Check(1)..int.p.INOUT("active", "")
         )
 
@@ -1670,8 +1670,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
             Check(1)..int.p.INOUT("active", "")
         )
 
@@ -1680,9 +1680,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
+            charUTF8.const.p("str", ""),
             Check(1)..unsigned_int.p.INOUT("flags", ""),
-            unsigned_int.IN("value", "")
+            unsigned_int("value", "")
         )
 
         intb(
@@ -1690,10 +1690,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
             Check(1)..unsigned_int.p.INOUT("flags", ""),
-            unsigned_int.IN("value", "")
+            unsigned_int("value", "")
         )
 
         intb(
@@ -1701,7 +1701,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
+            charUTF8.const.p("str", ""),
             Check(1)..int.p.INOUT("active", "")
         )
 
@@ -1710,8 +1710,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
             Check(1)..int.p.INOUT("active", "")
         )
 
@@ -1720,8 +1720,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            intb.IN("active", "")
+            charUTF8.const.p("str", ""),
+            intb("active", "")
         )
 
         intb(
@@ -1729,9 +1729,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
-            intb.IN("active", "")
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            intb("active", "")
         )
 
         intb(
@@ -1739,8 +1739,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            nk_flags.IN("align", "", TextAlignments),
+            charUTF8.const.p("str", ""),
+            nk_flags("align", "", TextAlignments),
             Check(1)..int.p.INOUT("value", "")
         )
 
@@ -1749,9 +1749,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
-            nk_flags.IN("align", "", TextAlignments),
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            nk_flags("align", "", TextAlignments),
             Check(1)..int.p.INOUT("value", "")
         )
 
@@ -1760,9 +1760,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("str", ""),
-            nk_flags.IN("align", "", TextAlignments),
+            nk_image("img", ""),
+            charUTF8.const.p("str", ""),
+            nk_flags("align", "", TextAlignments),
             Check(1)..int.p.INOUT("value", "")
         )
 
@@ -1771,10 +1771,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
-            nk_flags.IN("align", "", TextAlignments),
+            nk_image("img", ""),
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            nk_flags("align", "", TextAlignments),
             Check(1)..int.p.INOUT("value", "")
         )
 
@@ -1783,9 +1783,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("str", ""),
-            nk_flags.IN("align", "", TextAlignments),
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("str", ""),
+            nk_flags("align", "", TextAlignments),
             Check(1)..int.p.INOUT("value", "")
         )
 
@@ -1794,10 +1794,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
-            nk_flags.IN("align", "", TextAlignments),
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            nk_flags("align", "", TextAlignments),
             Check(1)..int.p.INOUT("value", "")
         )
 
@@ -1806,9 +1806,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            intb.IN("value", "")
+            charUTF8.const.p("str", ""),
+            nk_flags("align", "", TextAlignments),
+            intb("value", "")
         )
 
         intb(
@@ -1816,10 +1816,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            intb.IN("value", "")
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            nk_flags("align", "", TextAlignments),
+            intb("value", "")
         )
 
         intb(
@@ -1827,10 +1827,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("str", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            intb.IN("value", "")
+            nk_image("img", ""),
+            charUTF8.const.p("str", ""),
+            nk_flags("align", "", TextAlignments),
+            intb("value", "")
         )
 
         intb(
@@ -1838,11 +1838,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            intb.IN("value", "")
+            nk_image("img", ""),
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            nk_flags("align", "", TextAlignments),
+            intb("value", "")
         )
 
         intb(
@@ -1850,10 +1850,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("str", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            intb.IN("value", "")
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("str", ""),
+            nk_flags("align", "", TextAlignments),
+            intb("value", "")
         )
 
         intb(
@@ -1861,11 +1861,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            intb.IN("value", "")
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("str", ""),
+            AutoSize("str")..int("len", ""),
+            nk_flags("align", "", TextAlignments),
+            intb("value", "")
         )
 
         float(
@@ -1873,10 +1873,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            float.IN("min", ""),
-            float.IN("val", ""),
-            float.IN("max", ""),
-            float.IN("step", "")
+            float("min", ""),
+            float("val", ""),
+            float("max", ""),
+            float("step", "")
         )
 
         int(
@@ -1884,10 +1884,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            int.IN("min", ""),
-            int.IN("val", ""),
-            int.IN("max", ""),
-            int.IN("step", "")
+            int("min", ""),
+            int("val", ""),
+            int("max", ""),
+            int("step", "")
         )
 
         int(
@@ -1895,10 +1895,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            float.IN("min", ""),
+            float("min", ""),
             Check(1)..float.p.OUT("val", ""),
-            float.IN("max", ""),
-            float.IN("step", "")
+            float("max", ""),
+            float("step", "")
         )
 
         int(
@@ -1906,10 +1906,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            int.IN("min", ""),
+            int("min", ""),
             Check(1)..int.p.OUT("val", ""),
-            int.IN("max", ""),
-            int.IN("step", "")
+            int("max", ""),
+            int("step", "")
         )
 
         intb(
@@ -1918,8 +1918,8 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             Check(1)..nk_size.p.INOUT("cur", ""),
-            nk_size.IN("max", ""),
-            intb.IN("modifyable", "")
+            nk_size("max", ""),
+            intb("modifyable", "")
         )
 
         nk_size(
@@ -1927,9 +1927,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_size.IN("cur", ""),
-            nk_size.IN("max", ""),
-            intb.IN("modifyable", "")
+            nk_size("cur", ""),
+            nk_size("max", ""),
+            intb("modifyable", "")
         )
 
         nk_colorf(
@@ -1937,8 +1937,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            ReturnParam..nk_colorf.IN("color", ""),
-            nk_color_format.IN("fmt", "", ColorFormats)
+            ReturnParam..nk_colorf("color", ""),
+            nk_color_format("fmt", "", ColorFormats)
         )
 
         intb(
@@ -1947,7 +1947,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             nk_colorf.p.INOUT("color", ""),
-            nk_color_format.IN("fmt", "", ColorFormats)
+            nk_color_format("fmt", "", ColorFormats)
         )
 
         void(
@@ -1955,12 +1955,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("name", ""),
-            int.IN("min", ""),
+            charUTF8.const.p("name", ""),
+            int("min", ""),
             Check(1)..int.p.INOUT("val", ""),
-            int.IN("max", ""),
-            int.IN("step", ""),
-            float.IN("inc_per_pixel", "")
+            int("max", ""),
+            int("step", ""),
+            float("inc_per_pixel", "")
         )
 
         void(
@@ -1968,12 +1968,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("name", ""),
-            float.IN("min", ""),
+            charUTF8.const.p("name", ""),
+            float("min", ""),
             Check(1)..float.p.INOUT("val", ""),
-            float.IN("max", ""),
-            float.IN("step", ""),
-            float.IN("inc_per_pixel", "")
+            float("max", ""),
+            float("step", ""),
+            float("inc_per_pixel", "")
         )
 
         void(
@@ -1981,12 +1981,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("name", ""),
-            double.IN("min", ""),
+            charUTF8.const.p("name", ""),
+            double("min", ""),
             Check(1)..double.p.INOUT("val", ""),
-            double.IN("max", ""),
-            double.IN("step", ""),
-            float.IN("inc_per_pixel", "")
+            double("max", ""),
+            double("step", ""),
+            float("inc_per_pixel", "")
         )
 
         int(
@@ -1994,12 +1994,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("name", ""),
-            int.IN("min", ""),
-            int.IN("val", ""),
-            int.IN("max", ""),
-            int.IN("step", ""),
-            float.IN("inc_per_pixel", "")
+            charUTF8.const.p("name", ""),
+            int("min", ""),
+            int("val", ""),
+            int("max", ""),
+            int("step", ""),
+            float("inc_per_pixel", "")
         )
 
         float(
@@ -2007,12 +2007,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("name", ""),
-            float.IN("min", ""),
-            float.IN("val", ""),
-            float.IN("max", ""),
-            float.IN("step", ""),
-            float.IN("inc_per_pixel", "")
+            charUTF8.const.p("name", ""),
+            float("min", ""),
+            float("val", ""),
+            float("max", ""),
+            float("step", ""),
+            float("inc_per_pixel", "")
         )
 
         double(
@@ -2020,12 +2020,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("name", ""),
-            double.IN("min", ""),
-            double.IN("val", ""),
-            double.IN("max", ""),
-            double.IN("step", ""),
-            float.IN("inc_per_pixel", "")
+            charUTF8.const.p("name", ""),
+            double("min", ""),
+            double("val", ""),
+            double("max", ""),
+            double("step", ""),
+            float("inc_per_pixel", "")
         )
 
         void(
@@ -2033,7 +2033,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_flags.IN("flags", "", EditFlags)
+            nk_flags("flags", "", EditFlags)
         )
 
         void(
@@ -2048,11 +2048,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_flags.IN("flags", "", EditFlags),
-            charUTF8.p.IN("memory", ""),
+            nk_flags("flags", "", EditFlags),
+            charUTF8.p("memory", ""),
             Check(1)..int.p.OUT("len", ""),
-            int.IN("max", ""),
-            nullable..nk_plugin_filter.IN("filter", "")
+            int("max", ""),
+            nullable..nk_plugin_filter("filter", "")
         )
 
         nk_flags(
@@ -2060,9 +2060,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_flags.IN("flags", "", EditFlags),
-            nk_text_edit.p.IN("edit", ""),
-            nullable..nk_plugin_filter.IN("filter", "")
+            nk_flags("flags", "", EditFlags),
+            nk_text_edit.p("edit", ""),
+            nullable..nk_plugin_filter("filter", "")
         )
 
         nk_flags(
@@ -2070,10 +2070,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_flags.IN("flags", "", EditFlags),
-            charUTF8.p.IN("buffer", ""),
-            int.IN("max", ""),
-            nullable..nk_plugin_filter.IN("filter", "")
+            nk_flags("flags", "", EditFlags),
+            charUTF8.p("buffer", ""),
+            int("max", ""),
+            nullable..nk_plugin_filter("filter", "")
         )
     }();
 
@@ -2083,10 +2083,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_chart_type.IN("type", "", ChartTypes),
-            int.IN("num", ""),
-            float.IN("min", ""),
-            float.IN("max", "")
+            nk_chart_type("type", "", ChartTypes),
+            int("num", ""),
+            float("min", ""),
+            float("max", "")
         )
 
         intb(
@@ -2094,12 +2094,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_chart_type.IN("type", "", ChartTypes),
-            nk_color.IN("color", ""),
-            nk_color.IN("active", ""),
-            int.IN("num", ""),
-            float.IN("min", ""),
-            float.IN("max", "")
+            nk_chart_type("type", "", ChartTypes),
+            nk_color("color", ""),
+            nk_color("active", ""),
+            int("num", ""),
+            float("min", ""),
+            float("max", "")
         )
 
         void(
@@ -2107,10 +2107,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_chart_type.IN("type", "", ChartTypes),
-            int.IN("count", ""),
-            float.IN("min_value", ""),
-            float.IN("max_value", "")
+            nk_chart_type("type", "", ChartTypes),
+            int("count", ""),
+            float("min_value", ""),
+            float("max_value", "")
         )
 
         void(
@@ -2118,12 +2118,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_chart_type.IN("type", "", ChartTypes),
-            nk_color.IN("color", ""),
-            nk_color.IN("active", ""),
-            int.IN("count", ""),
-            float.IN("min_value", ""),
-            float.IN("max_value", "")
+            nk_chart_type("type", "", ChartTypes),
+            nk_color("color", ""),
+            nk_color("active", ""),
+            int("count", ""),
+            float("min_value", ""),
+            float("max_value", "")
         )
 
         nk_flags(
@@ -2131,7 +2131,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            float.IN("value", "")
+            float("value", "")
         )
 
         nk_flags(
@@ -2139,8 +2139,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            float.IN("value", ""),
-            int.IN("slot", "")
+            float("value", ""),
+            int("slot", "")
         )
 
         void("chart_end", "", ctx)
@@ -2150,10 +2150,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_chart_type.IN("type", "", ChartTypes),
-            Check("offset + count")..float.const.p.IN("values", ""),
-            int.IN("count", ""),
-            int.IN("offset", "")
+            nk_chart_type("type", "", ChartTypes),
+            Check("offset + count")..float.const.p("values", ""),
+            int("count", ""),
+            int("offset", "")
         )
 
         void(
@@ -2161,11 +2161,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_chart_type.IN("type", "", ChartTypes),
-            opaque_p.IN("userdata", ""),
-            nk_value_getter.IN("value_getter", ""),
-            int.IN("count", ""),
-            int.IN("offset", "")
+            nk_chart_type("type", "", ChartTypes),
+            opaque_p("userdata", ""),
+            nk_value_getter("value_getter", ""),
+            int("count", ""),
+            int("offset", "")
         )
 
         intb(
@@ -2173,10 +2173,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_popup_type.IN("type", "", PopupTypes),
-            charUTF8.const.p.IN("title", ""),
-            nk_flags.IN("flags", "", PanelFlags),
-            nk_rect.IN("rect", "")
+            nk_popup_type("type", "", PopupTypes),
+            charUTF8.const.p("title", ""),
+            nk_flags("flags", "", PanelFlags),
+            nk_rect("rect", "")
         )
 
         void("popup_close", "", ctx)
@@ -2187,11 +2187,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.p.IN("items", ""),
-            AutoSize("items")..int.IN("count", ""),
-            intb.IN("selected", ""),
-            int.IN("item_height", ""),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p.p("items", ""),
+            AutoSize("items")..int("count", ""),
+            intb("selected", ""),
+            int("item_height", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2199,12 +2199,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("items_separated_by_separator", ""),
-            int.IN("separator", ""),
-            intb.IN("selected", ""),
-            int.IN("count", ""),
-            int.IN("item_height", ""),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("items_separated_by_separator", ""),
+            int("separator", ""),
+            intb("selected", ""),
+            int("count", ""),
+            int("item_height", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2212,11 +2212,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("items_separated_by_zeros", ""),
-            intb.IN("selected", ""),
-            int.IN("count", ""),
-            int.IN("item_height", ""),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("items_separated_by_zeros", ""),
+            intb("selected", ""),
+            int("count", ""),
+            int("item_height", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2224,12 +2224,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_item_getter.IN("item_getter", ""),
-            opaque_p.IN("userdata", ""),
-            intb.IN("selected", ""),
-            int.IN("count", ""),
-            int.IN("item_height", ""),
-            nk_vec2.IN("size", "")
+            nk_item_getter("item_getter", ""),
+            opaque_p("userdata", ""),
+            intb("selected", ""),
+            int("count", ""),
+            int("item_height", ""),
+            nk_vec2("size", "")
         )
 
         void(
@@ -2237,11 +2237,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.p.IN("items", ""),
-            AutoSize("items")..int.IN("count", ""),
+            charUTF8.const.p.p("items", ""),
+            AutoSize("items")..int("count", ""),
             Check(1)..int.p.INOUT("selected", ""),
-            int.IN("item_height", ""),
-            nk_vec2.IN("size", "")
+            int("item_height", ""),
+            nk_vec2("size", "")
         )
 
         void(
@@ -2249,11 +2249,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("items_separated_by_zeros", ""),
+            charUTF8.const.p("items_separated_by_zeros", ""),
             Check(1)..int.p.INOUT("selected", ""),
-            int.IN("count", ""),
-            int.IN("item_height", ""),
-            nk_vec2.IN("size", "")
+            int("count", ""),
+            int("item_height", ""),
+            nk_vec2("size", "")
         )
 
         void(
@@ -2261,12 +2261,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("items_separated_by_separator", ""),
-            int.IN("separator", ""),
+            charUTF8.const.p("items_separated_by_separator", ""),
+            int("separator", ""),
             Check(1)..int.p.INOUT("selected", ""),
-            int.IN("count", ""),
-            int.IN("item_height", ""),
-            nk_vec2.IN("size", "")
+            int("count", ""),
+            int("item_height", ""),
+            nk_vec2("size", "")
         )
 
         void(
@@ -2274,12 +2274,12 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_item_getter.IN("item_getter", ""),
-            opaque_p.IN("userdata", ""),
+            nk_item_getter("item_getter", ""),
+            opaque_p("userdata", ""),
             Check(1)..int.p.INOUT("selected", ""),
-            int.IN("count", ""),
-            int.IN("item_height", ""),
-            nk_vec2.IN("size", "")
+            int("count", ""),
+            int("item_height", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2287,9 +2287,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("selected", ""),
-            AutoSize("selected")..int.IN("len", ""),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("selected", ""),
+            AutoSize("selected")..int("len", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2297,8 +2297,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("selected", ""),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("selected", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2306,8 +2306,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_color.IN("color", ""),
-            nk_vec2.IN("size", "")
+            nk_color("color", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2315,8 +2315,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            nk_vec2.IN("size", "")
+            nk_symbol_type("symbol", "", SymbolTypes),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2324,9 +2324,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("selected", ""),
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("selected", ""),
+            nk_symbol_type("symbol", "", SymbolTypes),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2334,10 +2334,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("selected", ""),
-            AutoSize("selected")..int.IN("len", ""),
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("selected", ""),
+            AutoSize("selected")..int("len", ""),
+            nk_symbol_type("symbol", "", SymbolTypes),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2345,8 +2345,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            nk_vec2.IN("size", "")
+            nk_image("img", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2354,9 +2354,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("selected", ""),
-            nk_image.IN("img", ""),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("selected", ""),
+            nk_image("img", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2364,10 +2364,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("selected", ""),
-            AutoSize("selected")..int.IN("len", ""),
-            nk_image.IN("img", ""),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("selected", ""),
+            AutoSize("selected")..int("len", ""),
+            nk_image("img", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2375,8 +2375,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            charUTF8.const.p("text", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2384,9 +2384,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2394,9 +2394,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_image("img", ""),
+            charUTF8.const.p("text", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2404,10 +2404,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_image("img", ""),
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2415,9 +2415,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("text", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2425,10 +2425,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         void("combo_close", "", ctx)
@@ -2439,9 +2439,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_flags.IN("flags", "", WindowFlags),
-            nk_vec2.IN("size", ""),
-            nk_rect.IN("trigger_bounds", "")
+            nk_flags("flags", "", WindowFlags),
+            nk_vec2("size", ""),
+            nk_rect("trigger_bounds", "")
         )
 
         intb(
@@ -2449,9 +2449,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("align", "", TextAlignments)
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("align", "", TextAlignments)
         )
 
         intb(
@@ -2459,8 +2459,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("align", "", TextAlignments)
+            charUTF8.const.p("text", ""),
+            nk_flags("align", "", TextAlignments)
         )
 
         intb(
@@ -2468,9 +2468,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_image("img", ""),
+            charUTF8.const.p("text", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2478,10 +2478,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_image("img", ""),
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2489,9 +2489,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("text", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2499,10 +2499,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         void("contextual_close", "", ctx)
@@ -2513,7 +2513,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", "")
+            charUTF8.const.p("text", "")
         )
 
         intb(
@@ -2521,7 +2521,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            float.IN("width", "")
+            float("width", "")
         )
 
         void("tooltip_end", "", ctx)
@@ -2534,10 +2534,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("align", "", TextAlignments),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2545,9 +2545,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("text", ""),
+            nk_flags("align", "", TextAlignments),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2555,9 +2555,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            nk_image.IN("img", ""),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("text", ""),
+            nk_image("img", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2565,11 +2565,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            nk_image.IN("img", ""),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("align", "", TextAlignments),
+            nk_image("img", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2577,10 +2577,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            nk_image.IN("img", ""),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("text", ""),
+            nk_flags("align", "", TextAlignments),
+            nk_image("img", ""),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2588,9 +2588,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("text", ""),
+            nk_symbol_type("symbol", "", SymbolTypes),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2598,11 +2598,11 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("align", "", TextAlignments),
+            nk_symbol_type("symbol", "", SymbolTypes),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2610,10 +2610,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("align", "", TextAlignments),
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            nk_vec2.IN("size", "")
+            charUTF8.const.p("text", ""),
+            nk_flags("align", "", TextAlignments),
+            nk_symbol_type("symbol", "", SymbolTypes),
+            nk_vec2("size", "")
         )
 
         intb(
@@ -2621,9 +2621,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("align", "", TextAlignments)
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("align", "", TextAlignments)
         )
 
         intb(
@@ -2631,8 +2631,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            charUTF8.const.p("text", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2640,9 +2640,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_image("img", ""),
+            charUTF8.const.p("text", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2650,10 +2650,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_image.IN("img", ""),
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_image("img", ""),
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2661,10 +2661,10 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         intb(
@@ -2672,9 +2672,9 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_symbol_type.IN("symbol", "", SymbolTypes),
-            charUTF8.const.p.IN("text", ""),
-            nk_flags.IN("alignment", "", TextAlignments)
+            nk_symbol_type("symbol", "", SymbolTypes),
+            charUTF8.const.p("text", ""),
+            nk_flags("alignment", "", TextAlignments)
         )
 
         void("menu_close", "", ctx)
@@ -2687,10 +2687,10 @@ nk_style_pop_vec2(ctx);""")}
             "Converts from the abstract draw commands list into a hardware accessable vertex format.",
 
             ctx,
-            nk_buffer_p.IN("cmds", ""),
-            nk_buffer_p.IN("vertices", ""),
-            nk_buffer_p.IN("elements", ""),
-            nk_convert_config.const.p.IN("config", "")
+            nk_buffer_p("cmds", ""),
+            nk_buffer_p("vertices", ""),
+            nk_buffer_p("elements", ""),
+            nk_convert_config.const.p("config", "")
         )
 
         void(
@@ -2705,8 +2705,8 @@ nk_style_pop_vec2(ctx);""")}
             "Mirrors mouse cursor position.",
 
             ctx,
-            int.IN("x", ""),
-            int.IN("y", "")
+            int("x", ""),
+            int("y", "")
         )
 
         void(
@@ -2714,8 +2714,8 @@ nk_style_pop_vec2(ctx);""")}
             "Mirrors key state with either pressed or released.",
 
             ctx,
-            nk_keys.IN("key", "", Keys),
-            intb.IN("down", "")
+            nk_keys("key", "", Keys),
+            intb("down", "")
         )
 
         void(
@@ -2723,10 +2723,10 @@ nk_style_pop_vec2(ctx);""")}
             "Mirrors mouse button state with either pressed or released.",
 
             ctx,
-            nk_buttons.IN("id", "", Buttons),
-            int.IN("x", ""),
-            int.IN("y", ""),
-            intb.IN("down", "")
+            nk_buttons("id", "", Buttons),
+            int("x", ""),
+            int("y", ""),
+            intb("down", "")
         )
 
         void(
@@ -2737,7 +2737,7 @@ nk_style_pop_vec2(ctx);""")}
             """,
 
             ctx,
-            nk_vec2.IN("val", "vector with both X- as well as Y-scroll value")
+            nk_vec2("val", "vector with both X- as well as Y-scroll value")
         )
 
         void(
@@ -2745,7 +2745,7 @@ nk_style_pop_vec2(ctx);""")}
             "Adds a single ASCII text character into an internal text buffer.",
 
             ctx,
-            char.IN("c", "")
+            char("c", "")
         );
 
         void(
@@ -2753,7 +2753,7 @@ nk_style_pop_vec2(ctx);""")}
             "Adds a single multi-byte UTF-8 character into an internal text buffer.",
 
             ctx,
-            Check(NK_UTF_SIZE)..nk_glyph.IN("glyph", "")
+            Check(NK_UTF_SIZE)..nk_glyph("glyph", "")
         )
 
         void(
@@ -2761,7 +2761,7 @@ nk_style_pop_vec2(ctx);""")}
             "Adds a single unicode rune into an internal text buffer.",
 
             ctx,
-            nk_rune.IN("unicode", "")
+            nk_rune("unicode", "")
         )
 
         void(
@@ -2778,7 +2778,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            Check("NK_COLOR_COUNT")..nk_color.const.p.IN("table", "")
+            Check("NK_COLOR_COUNT")..nk_color.const.p("table", "")
         )
 
         void(
@@ -2786,8 +2786,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_style_cursor.IN("style", "", StyleCursor),
-            nk_cursor.p.IN("cursor", "")
+            nk_style_cursor("style", "", StyleCursor),
+            nk_cursor.p("cursor", "")
         )
 
         void(
@@ -2795,14 +2795,14 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            Check("NK_CURSOR_COUNT")..nk_cursor.p.IN("cursors", "")
+            Check("NK_CURSOR_COUNT")..nk_cursor.p("cursors", "")
         )
 
         charUTF8.const.p(
             "style_get_color_by_name",
             "",
 
-            nk_style_colors.IN("c", "", StyleColors)
+            nk_style_colors("c", "", StyleColors)
         )
 
         void(
@@ -2810,7 +2810,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_user_font.const.p.IN("font", "")
+            nk_user_font.const.p("font", "")
         )
 
         int(
@@ -2818,7 +2818,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_style_cursor.IN("style", "", StyleCursor)
+            nk_style_cursor("style", "", StyleCursor)
         )
 
         void("style_show_cursor", "", ctx)
@@ -2829,7 +2829,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_user_font.const.p.IN("font", "")
+            nk_user_font.const.p("font", "")
         )
 
         int(
@@ -2837,8 +2837,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            Check(1)..float.p.IN("address", ""),
-            float.IN("value", "")
+            Check(1)..float.p("address", ""),
+            float("value", "")
         )
 
         int(
@@ -2846,8 +2846,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_vec2.p.IN("address", ""),
-            nk_vec2.IN("value", "")
+            nk_vec2.p("address", ""),
+            nk_vec2("value", "")
         )
 
         int(
@@ -2855,8 +2855,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_style_item.p.IN("address", ""),
-            nk_style_item.IN("value", "")
+            nk_style_item.p("address", ""),
+            nk_style_item("value", "")
         )
 
         int(
@@ -2864,8 +2864,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            Check(1)..nk_flags.p.IN("address", ""),
-            nk_flags.IN("value", "")
+            Check(1)..nk_flags.p("address", ""),
+            nk_flags("value", "")
         )
 
         int(
@@ -2873,8 +2873,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_color.p.IN("address", ""),
-            nk_color.IN("value", "")
+            nk_color.p("address", ""),
+            nk_color("value", "")
         )
 
         int("style_pop_font", "", ctx)
@@ -2900,7 +2900,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_buttons.IN("btn", "")
+            nk_buttons("btn", "")
         )
 
         intb(
@@ -2908,8 +2908,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            nk_buttons.IN("btn", "", Buttons),
-            intb.IN("down", "")
+            nk_buttons("btn", "", Buttons),
+            intb("down", "")
         )
 
         void(
@@ -2917,14 +2917,14 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             ctx,
-            int.IN("cols", "")
+            int("cols", "")
         )
 
         nk_widget_layout_states(
             "widget",
             "",
 
-            nk_rect.p.IN("bounds", ""),
+            nk_rect.p("bounds", ""),
             cctx
         )
 
@@ -2932,141 +2932,141 @@ nk_style_pop_vec2(ctx);""")}
             "widget_fitting",
             "",
 
-            nk_rect.p.IN("bounds", ""),
+            nk_rect.p("bounds", ""),
             ctx,
-            nk_vec2.IN("item_padding", "")
+            nk_vec2("item_padding", "")
         )
 
         nk_color(
             "rgb",
             "",
 
-            int.IN("r", ""),
-            int.IN("g", ""),
-            int.IN("b", "")
+            int("r", ""),
+            int("g", ""),
+            int("b", "")
         )
 
         nk_color(
             "rgb_iv",
             "",
 
-            Check(3)..int.const.p.IN("rgb", "")
+            Check(3)..int.const.p("rgb", "")
         )
 
         nk_color(
             "rgb_bv",
             "",
 
-            Check(3)..nk_byte.const.p.IN("rgb", "")
+            Check(3)..nk_byte.const.p("rgb", "")
         )
 
         nk_color(
             "rgb_f",
             "",
 
-            float.IN("r", ""),
-            float.IN("g", ""),
-            float.IN("b", "")
+            float("r", ""),
+            float("g", ""),
+            float("b", "")
         )
 
         nk_color(
             "rgb_fv",
             "",
 
-            Check(3)..float.const.p.IN("rgb", "")
+            Check(3)..float.const.p("rgb", "")
         )
 
         nk_color(
             "rgb_cf",
             "",
 
-            nk_colorf.IN("c", "")
+            nk_colorf("c", "")
         )
 
         nk_color(
             "rgb_hex",
             "",
 
-            Check(6)..charASCII.const.p.IN("rgb", "")
+            Check(6)..charASCII.const.p("rgb", "")
         )
 
         nk_color(
             "rgba",
             "",
 
-            int.IN("r", ""),
-            int.IN("g", ""),
-            int.IN("b", ""),
-            int.IN("a", "")
+            int("r", ""),
+            int("g", ""),
+            int("b", ""),
+            int("a", "")
         )
 
         nk_color(
             "rgba_u32",
             "",
 
-            nk_uint.IN("in", "")
+            nk_uint("in", "")
         )
 
         nk_color(
             "rgba_iv",
             "",
 
-            Check(4)..int.const.p.IN("rgba", "")
+            Check(4)..int.const.p("rgba", "")
         )
 
         nk_color(
             "rgba_bv",
             "",
 
-            Check(4)..nk_byte.const.p.IN("rgba", "")
+            Check(4)..nk_byte.const.p("rgba", "")
         )
 
         nk_color(
             "rgba_f",
             "",
 
-            float.IN("r", ""),
-            float.IN("g", ""),
-            float.IN("b", ""),
-            float.IN("a", "")
+            float("r", ""),
+            float("g", ""),
+            float("b", ""),
+            float("a", "")
         )
 
         nk_color(
             "rgba_fv",
             "",
 
-            Check(4)..float.const.p.IN("rgba", "")
+            Check(4)..float.const.p("rgba", "")
         )
 
         nk_color(
             "rgba_cf",
             "",
 
-            nk_colorf.IN("c", "")
+            nk_colorf("c", "")
         )
 
         nk_color(
             "rgba_hex",
             "",
 
-            Check(8)..charASCII.const.p.IN("rgba", "")
+            Check(8)..charASCII.const.p("rgba", "")
         )
 
         nk_colorf(
             "hsva_colorf",
             "",
 
-            float.IN("h", ""),
-            float.IN("s", ""),
-            float.IN("v", ""),
-            float.IN("a", "")
+            float("h", ""),
+            float("s", ""),
+            float("v", ""),
+            float("a", "")
         )
 
         nk_colorf(
             "hsva_colorfv",
             "",
 
-            Check(4)..float.p.IN("c", "")
+            Check(4)..float.p("c", "")
         )
 
         void(
@@ -3077,7 +3077,7 @@ nk_style_pop_vec2(ctx);""")}
             Check(1)..float.p.OUT("out_s", ""),
             Check(1)..float.p.OUT("out_v", ""),
             Check(1)..float.p.OUT("out_a", ""),
-            nk_colorf.IN("in", "")
+            nk_colorf("in", "")
         )
 
         void(
@@ -3085,87 +3085,87 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(4)..float.p.OUT("hsva", ""),
-            nk_colorf.IN("in", "")
+            nk_colorf("in", "")
         )
 
         nk_color(
             "hsv",
             "",
 
-            int.IN("h", ""),
-            int.IN("s", ""),
-            int.IN("v", "")
+            int("h", ""),
+            int("s", ""),
+            int("v", "")
         )
 
         nk_color(
             "hsv_iv",
             "",
 
-            Check(3)..int.const.p.IN("hsv", "")
+            Check(3)..int.const.p("hsv", "")
         )
 
         nk_color(
             "hsv_bv",
             "",
 
-            Check(3)..nk_byte.const.p.IN("hsv", "")
+            Check(3)..nk_byte.const.p("hsv", "")
         )
 
         nk_color(
             "hsv_f",
             "",
 
-            float.IN("h", ""),
-            float.IN("s", ""),
-            float.IN("v", "")
+            float("h", ""),
+            float("s", ""),
+            float("v", "")
         )
 
         nk_color(
             "hsv_fv",
             "",
 
-            Check(3)..float.const.p.IN("hsv", "")
+            Check(3)..float.const.p("hsv", "")
         )
 
         nk_color(
             "hsva",
             "",
 
-            int.IN("h", ""),
-            int.IN("s", ""),
-            int.IN("v", ""),
-            int.IN("a", "")
+            int("h", ""),
+            int("s", ""),
+            int("v", ""),
+            int("a", "")
         )
 
         nk_color(
             "hsva_iv",
             "",
 
-            Check(4)..int.const.p.IN("hsva", "")
+            Check(4)..int.const.p("hsva", "")
         )
 
         nk_color(
             "hsva_bv",
             "",
 
-            Check(4)..nk_byte.const.p.IN("hsva", "")
+            Check(4)..nk_byte.const.p("hsva", "")
         )
 
         nk_color(
             "hsva_f",
             "",
 
-            float.IN("h", ""),
-            float.IN("s", ""),
-            float.IN("v", ""),
-            float.IN("a", "")
+            float("h", ""),
+            float("s", ""),
+            float("v", ""),
+            float("a", "")
         )
 
         nk_color(
             "hsva_fv",
             "",
 
-            Check(4)..float.const.p.IN("hsva", "")
+            Check(4)..float.const.p("hsva", "")
         )
 
         void(
@@ -3176,7 +3176,7 @@ nk_style_pop_vec2(ctx);""")}
             Check(1)..float.p.OUT("g", ""),
             Check(1)..float.p.OUT("b", ""),
             Check(1)..float.p.OUT("a", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3184,14 +3184,14 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(4)..float.p.OUT("rgba_out", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         nk_colorf(
             "color_cf",
             "",
 
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3202,7 +3202,7 @@ nk_style_pop_vec2(ctx);""")}
             Check(1)..double.p.OUT("g", ""),
             Check(1)..double.p.OUT("b", ""),
             Check(1)..double.p.OUT("a", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3210,14 +3210,14 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(4)..double.p.OUT("rgba_out", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         nk_uint(
             "color_u32",
             "",
 
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3225,7 +3225,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(8)..char.p.OUT("output", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3233,7 +3233,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(6)..char.p.OUT("output", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3243,7 +3243,7 @@ nk_style_pop_vec2(ctx);""")}
             Check(1)..int.p.OUT("out_h", ""),
             Check(1)..int.p.OUT("out_s", ""),
             Check(1)..int.p.OUT("out_v", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3253,7 +3253,7 @@ nk_style_pop_vec2(ctx);""")}
             Check(1)..nk_byte.p.OUT("out_h", ""),
             Check(1)..nk_byte.p.OUT("out_s", ""),
             Check(1)..nk_byte.p.OUT("out_v", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3261,7 +3261,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(3)..int.p.OUT("hsv_out", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3269,7 +3269,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(3)..nk_byte.p.OUT("hsv_out", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3279,7 +3279,7 @@ nk_style_pop_vec2(ctx);""")}
             Check(1)..float.p.OUT("out_h", ""),
             Check(1)..float.p.OUT("out_s", ""),
             Check(1)..float.p.OUT("out_v", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3287,7 +3287,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(3)..float.p.OUT("hsv_out", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3298,7 +3298,7 @@ nk_style_pop_vec2(ctx);""")}
             Check(1)..int.p.OUT("s", ""),
             Check(1)..int.p.OUT("v", ""),
             Check(1)..int.p.OUT("a", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3309,7 +3309,7 @@ nk_style_pop_vec2(ctx);""")}
             Check(1)..nk_byte.p.OUT("s", ""),
             Check(1)..nk_byte.p.OUT("v", ""),
             Check(1)..nk_byte.p.OUT("a", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3317,7 +3317,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(4)..int.p.OUT("hsva_out", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3325,7 +3325,7 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(4)..nk_byte.p.OUT("hsva_out", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3336,7 +3336,7 @@ nk_style_pop_vec2(ctx);""")}
             Check(1)..float.p.OUT("out_s", ""),
             Check(1)..float.p.OUT("out_v", ""),
             Check(1)..float.p.OUT("out_a", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         void(
@@ -3344,88 +3344,88 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             Check(4)..float.p.OUT("hsva_out", ""),
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         nk_handle(
             "handle_ptr",
             "",
 
-            opaque_p.IN("ptr", "")
+            opaque_p("ptr", "")
         )
 
         nk_handle(
             "handle_id",
             "",
 
-            int.IN("id", "")
+            int("id", "")
         )
 
         nk_image(
             "image_handle",
             "",
 
-            nk_handle.IN("handle", "")
+            nk_handle("handle", "")
         )
 
         nk_image(
             "image_ptr",
             "",
 
-            opaque_p.IN("ptr", "")
+            opaque_p("ptr", "")
         )
 
         nk_image(
             "image_id",
             "",
 
-            int.IN("id", "")
+            int("id", "")
         )
 
         intb(
             "image_is_subimage",
             "",
 
-            nk_image.const.p.IN("img", "")
+            nk_image.const.p("img", "")
         )
 
         nk_image(
             "subimage_ptr",
             "",
 
-            opaque_p.IN("ptr", ""),
-            unsigned_short.IN("w", ""),
-            unsigned_short.IN("h", ""),
-            nk_rect.IN("sub_region", "")
+            opaque_p("ptr", ""),
+            unsigned_short("w", ""),
+            unsigned_short("h", ""),
+            nk_rect("sub_region", "")
         )
 
         nk_image(
             "subimage_id",
             "",
 
-            int.IN("id", ""),
-            unsigned_short.IN("w", ""),
-            unsigned_short.IN("h", ""),
-            nk_rect.IN("sub_region", "")
+            int("id", ""),
+            unsigned_short("w", ""),
+            unsigned_short("h", ""),
+            nk_rect("sub_region", "")
         )
 
         nk_image(
             "subimage_handle",
             "",
 
-            nk_handle.IN("handle", ""),
-            unsigned_short.IN("w", ""),
-            unsigned_short.IN("h", ""),
-            nk_rect.IN("sub_region", "")
+            nk_handle("handle", ""),
+            unsigned_short("w", ""),
+            unsigned_short("h", ""),
+            nk_rect("sub_region", "")
         )
 
         nk_hash(
             "murmur_hash",
             "",
 
-            void.const.p.IN("key", ""),
-            AutoSize("key")..int.IN("len", ""),
-            nk_hash.IN("seed", "")
+            void.const.p("key", ""),
+            AutoSize("key")..int("len", ""),
+            nk_hash("seed", "")
         )
 
         void(
@@ -3433,101 +3433,98 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             nk_vec2.p.OUT("result", ""),
-            nk_rect.IN("r", ""),
-            float.IN("pad_x", ""),
-            float.IN("pad_y", ""),
-            nk_heading.IN("direction", "", Headings)
+            nk_rect("r", ""),
+            float("pad_x", ""),
+            float("pad_y", ""),
+            nk_heading("direction", "", Headings)
         )
 
         nk_vec2(
             "vec2",
             "",
 
-            float.IN("x", ""),
-            float.IN("y", "")
+            float("x", ""),
+            float("y", "")
         )
 
         nk_vec2(
             "vec2i",
             "",
 
-            int.IN("x", ""),
-            int.IN("y", "")
+            int("x", ""),
+            int("y", "")
         )
 
         nk_vec2(
             "vec2v",
             "",
 
-            Check(2)..float.const.p.IN("xy", "")
+            Check(2)..float.const.p("xy", "")
         )
 
         nk_vec2(
             "vec2iv",
             "",
 
-            Check(2)..int.const.p.IN("xy", "")
+            Check(2)..int.const.p("xy", "")
         )
 
-        nk_rect(
-            "get_null_rect",
-            ""
-        )
+        nk_rect("get_null_rect", "", void())
 
         nk_rect(
             "rect",
             "",
 
-            float.IN("x", ""),
-            float.IN("y", ""),
-            float.IN("w", ""),
-            float.IN("h", "")
+            float("x", ""),
+            float("y", ""),
+            float("w", ""),
+            float("h", "")
         )
 
         nk_rect(
             "recti",
             "",
 
-            int.IN("x", ""),
-            int.IN("y", ""),
-            int.IN("w", ""),
-            int.IN("h", "")
+            int("x", ""),
+            int("y", ""),
+            int("w", ""),
+            int("h", "")
         )
 
         nk_rect(
             "recta",
             "",
 
-            nk_vec2.IN("pos", ""),
-            nk_vec2.IN("size", "")
+            nk_vec2("pos", ""),
+            nk_vec2("size", "")
         )
 
         nk_rect(
             "rectv",
             "",
 
-            Check(4)..float.const.p.IN("xywh", "")
+            Check(4)..float.const.p("xywh", "")
         )
 
         nk_rect(
             "rectiv",
             "",
 
-            Check(4)..int.const.p.IN("xywh", "")
+            Check(4)..int.const.p("xywh", "")
         )
 
         nk_vec2(
             "rect_pos",
             "",
 
-            nk_rect.IN("r", "")
+            nk_rect("r", "")
         )
 
         nk_vec2(
             "rect_size",
             "",
 
-            nk_rect.IN("r", "")
+            nk_rect("r", "")
         )
     }();
 
@@ -3536,31 +3533,31 @@ nk_style_pop_vec2(ctx);""")}
             "strlen",
             "",
 
-            charUTF8.const.p.IN("str", "")
+            charUTF8.const.p("str", "")
         )
 
         int(
             "stricmp",
             "",
 
-            charUTF8.const.p.IN("s1", ""),
-            charUTF8.const.p.IN("s2", "")
+            charUTF8.const.p("s1", ""),
+            charUTF8.const.p("s2", "")
         )
 
         int(
             "stricmpn",
             "",
 
-            charUTF8.const.p.IN("s1", ""),
-            charUTF8.const.p.IN("s2", ""),
-            int.IN("n", "")
+            charUTF8.const.p("s1", ""),
+            charUTF8.const.p("s2", ""),
+            int("n", "")
         )
 
         int(
             "strtoi",
             "",
 
-            charUTF8.const.p.IN("str", ""),
+            charUTF8.const.p("str", ""),
             Check(1)..charUTF8.const.p.p.OUT("endptr", "")
         )
 
@@ -3568,7 +3565,7 @@ nk_style_pop_vec2(ctx);""")}
             "strtof",
             "",
 
-            charUTF8.const.p.IN("str", ""),
+            charUTF8.const.p("str", ""),
             Check(1)..charUTF8.const.p.p.OUT("endptr", "")
         )
 
@@ -3576,7 +3573,7 @@ nk_style_pop_vec2(ctx);""")}
             "strtod",
             "",
 
-            charUTF8.const.p.IN("str", ""),
+            charUTF8.const.p("str", ""),
             Check(1)..charUTF8.const.p.p.OUT("endptr", "")
         )
 
@@ -3592,8 +3589,8 @@ nk_style_pop_vec2(ctx);""")}
             )}
             """,
 
-            charUTF8.const.p.IN("str", ""),
-            charUTF8.const.p.IN("regexp", "")
+            charUTF8.const.p("str", ""),
+            charUTF8.const.p("regexp", "")
         )
 
         intb(
@@ -3604,8 +3601,8 @@ nk_style_pop_vec2(ctx);""")}
 
             """,
 
-            charUTF8.const.p.IN("str", ""),
-            charUTF8.const.p.IN("pattern", ""),
+            charUTF8.const.p("str", ""),
+            charUTF8.const.p("pattern", ""),
             Check(1)..int.p.OUT("out_score", "")
         )
 
@@ -3613,9 +3610,9 @@ nk_style_pop_vec2(ctx);""")}
             "strmatch_fuzzy_text",
             "",
 
-            charUTF8.const.p.IN("txt", ""),
-            AutoSize("txt")..int.IN("txt_len", ""),
-            charUTF8.const.p.IN("pattern", ""),
+            charUTF8.const.p("txt", ""),
+            AutoSize("txt")..int("txt_len", ""),
+            charUTF8.const.p("pattern", ""),
             Check(1)..int.p.OUT("out_score", "")
         )
 
@@ -3623,35 +3620,35 @@ nk_style_pop_vec2(ctx);""")}
             "utf_decode",
             "",
 
-            char.const.p.IN("c", ""),
+            char.const.p("c", ""),
             Check(1)..nk_rune.p.OUT("u", ""),
-            AutoSize("c")..int.IN("clen", "")
+            AutoSize("c")..int("clen", "")
         )
 
         int(
             "utf_encode",
             "",
 
-            nk_rune.IN("u", ""),
-            char.p.IN("c", ""),
-            AutoSize("c")..int.IN("clen", "")
+            nk_rune("u", ""),
+            char.p("c", ""),
+            AutoSize("c")..int("clen", "")
         )
 
         int(
             "utf_len",
             "",
 
-            char.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("byte_len", "")
+            char.const.p("str", ""),
+            AutoSize("str")..int("byte_len", "")
         )
 
         char.const.p(
             "utf_at",
             "",
 
-            char.const.p.IN("buffer", ""),
-            AutoSize("buffer")..int.IN("length", ""),
-            int.IN("index", ""),
+            char.const.p("buffer", ""),
+            AutoSize("buffer")..int("length", ""),
+            int("index", ""),
             Check(1)..nk_rune.p.OUT("unicode", ""),
             AutoSizeResult..int.p.OUT("len", "")
         )
@@ -3660,18 +3657,18 @@ nk_style_pop_vec2(ctx);""")}
             "buffer_init",
             "",
 
-            nk_buffer_p.IN("buffer", ""),
-            nk_allocator.const.p.IN("allocator", ""),
-            nk_size.IN("size", "")
+            nk_buffer_p("buffer", ""),
+            nk_allocator.const.p("allocator", ""),
+            nk_size("size", "")
         )
 
         void(
             "buffer_init_fixed",
             "",
 
-            nk_buffer_p.IN("buffer", ""),
-            void.p.IN("memory", ""),
-            AutoSize("memory")..nk_size.IN("size", "")
+            nk_buffer_p("buffer", ""),
+            void.p("memory", ""),
+            AutoSize("memory")..nk_size("size", "")
         )
 
         void(
@@ -3679,279 +3676,279 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             nk_memory_status.p.OUT("status", ""),
-            nk_buffer_p.IN("buffer", "")
+            nk_buffer_p("buffer", "")
         )
 
         void(
             "buffer_push",
             "",
 
-            nk_buffer_p.IN("buffer", ""),
-            nk_buffer_allocation_type.IN("type", "", BufferAllocationTypes),
-            void.const.p.IN("memory", ""),
-            AutoSize("memory")..nk_size.IN("size", ""),
-            nk_size.IN("align", "")
+            nk_buffer_p("buffer", ""),
+            nk_buffer_allocation_type("type", "", BufferAllocationTypes),
+            void.const.p("memory", ""),
+            AutoSize("memory")..nk_size("size", ""),
+            nk_size("align", "")
         )
 
         void(
             "buffer_mark",
             "",
 
-            nk_buffer_p.IN("buffer", ""),
-            nk_buffer_allocation_type.IN("type", "", BufferAllocationTypes)
+            nk_buffer_p("buffer", ""),
+            nk_buffer_allocation_type("type", "", BufferAllocationTypes)
         )
 
         void(
             "buffer_reset",
             "",
 
-            nk_buffer_p.IN("buffer", ""),
-            nk_buffer_allocation_type.IN("type", "", BufferAllocationTypes)
+            nk_buffer_p("buffer", ""),
+            nk_buffer_allocation_type("type", "", BufferAllocationTypes)
         )
 
         void(
             "buffer_clear",
             "",
 
-            nk_buffer_p.IN("buffer", "")
+            nk_buffer_p("buffer", "")
         )
 
         void(
             "buffer_free",
             "",
 
-            nk_buffer_p.IN("buffer", "")
+            nk_buffer_p("buffer", "")
         )
 
         opaque_p(
             "buffer_memory",
             "",
 
-            nk_buffer_p.IN("buffer", "")
+            nk_buffer_p("buffer", "")
         )
 
         opaque_const_p(
             "buffer_memory_const",
             "",
 
-            nk_buffer.const.p.IN("buffer", "")
+            nk_buffer.const.p("buffer", "")
         )
 
         nk_size(
             "buffer_total",
             "",
 
-            nk_buffer_p.IN("buffer", "")
+            nk_buffer_p("buffer", "")
         )
 
         void(
             "str_init",
             "",
 
-            nk_str.p.IN("str", ""),
-            nk_allocator.const.p.IN("allocator", ""),
-            nk_size.IN("size", "")
+            nk_str.p("str", ""),
+            nk_allocator.const.p("allocator", ""),
+            nk_size("size", "")
         )
 
         void(
             "str_init_fixed",
             "",
 
-            nk_str.p.IN("str", ""),
-            void.p.IN("memory", ""),
-            AutoSize("memory")..nk_size.IN("size", "")
+            nk_str.p("str", ""),
+            void.p("memory", ""),
+            AutoSize("memory")..nk_size("size", "")
         )
 
         void(
             "str_clear",
             "",
 
-            nk_str.p.IN("str", "")
+            nk_str.p("str", "")
         )
 
         void(
             "str_free",
             "",
 
-            nk_str.p.IN("str", "")
+            nk_str.p("str", "")
         )
 
         int(
             "str_append_text_char",
             "",
 
-            nk_str.p.IN("s", ""),
-            char.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", "")
+            nk_str.p("s", ""),
+            char.const.p("str", ""),
+            AutoSize("str")..int("len", "")
         )
 
         int(
             "str_append_str_char",
             "",
 
-            nk_str.p.IN("s", ""),
-            NullTerminated..char.const.p.IN("str", "")
+            nk_str.p("s", ""),
+            NullTerminated..char.const.p("str", "")
         )
 
         int(
             "str_append_text_utf8",
             "",
 
-            nk_str.p.IN("s", ""),
-            char.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", "")
+            nk_str.p("s", ""),
+            char.const.p("str", ""),
+            AutoSize("str")..int("len", "")
         )
 
         int(
             "str_append_str_utf8",
             "",
 
-            nk_str.p.IN("s", ""),
-            NullTerminated..char.const.p.IN("str", "")
+            nk_str.p("s", ""),
+            NullTerminated..char.const.p("str", "")
         )
 
         int(
             "str_append_text_runes",
             "",
 
-            nk_str.p.IN("s", ""),
-            nk_rune.const.p.IN("runes", ""),
-            AutoSize("runes")..int.IN("len", "")
+            nk_str.p("s", ""),
+            nk_rune.const.p("runes", ""),
+            AutoSize("runes")..int("len", "")
         )
 
         int(
             "str_append_str_runes",
             "",
 
-            nk_str.p.IN("s", ""),
-            NullTerminated..nk_rune.const.p.IN("runes", "")
+            nk_str.p("s", ""),
+            NullTerminated..nk_rune.const.p("runes", "")
         )
 
         int(
             "str_insert_at_char",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", ""),
-            char.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", "")
+            nk_str.p("s", ""),
+            int("pos", ""),
+            char.const.p("str", ""),
+            AutoSize("str")..int("len", "")
         )
 
         int(
             "str_insert_at_rune",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", ""),
-            char.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", "")
+            nk_str.p("s", ""),
+            int("pos", ""),
+            char.const.p("str", ""),
+            AutoSize("str")..int("len", "")
         )
 
         int(
             "str_insert_text_char",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", ""),
-            char.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", "")
+            nk_str.p("s", ""),
+            int("pos", ""),
+            char.const.p("str", ""),
+            AutoSize("str")..int("len", "")
         )
 
         int(
             "str_insert_str_char",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", ""),
-            NullTerminated..char.const.p.IN("str", "")
+            nk_str.p("s", ""),
+            int("pos", ""),
+            NullTerminated..char.const.p("str", "")
         )
 
         int(
             "str_insert_text_utf8",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", ""),
-            char.const.p.IN("str", ""),
-            AutoSize("str")..int.IN("len", "")
+            nk_str.p("s", ""),
+            int("pos", ""),
+            char.const.p("str", ""),
+            AutoSize("str")..int("len", "")
         )
 
         int(
             "str_insert_str_utf8",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", ""),
-            NullTerminated..char.const.p.IN("str", "")
+            nk_str.p("s", ""),
+            int("pos", ""),
+            NullTerminated..char.const.p("str", "")
         )
 
         int(
             "str_insert_text_runes",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", ""),
-            nk_rune.const.p.IN("runes", ""),
-            AutoSize("runes")..int.IN("len", "")
+            nk_str.p("s", ""),
+            int("pos", ""),
+            nk_rune.const.p("runes", ""),
+            AutoSize("runes")..int("len", "")
         )
 
         int(
             "str_insert_str_runes",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", ""),
-            NullTerminated..nk_rune.const.p.IN("runes", "")
+            nk_str.p("s", ""),
+            int("pos", ""),
+            NullTerminated..nk_rune.const.p("runes", "")
         )
 
         void(
             "str_remove_chars",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("len", "")
+            nk_str.p("s", ""),
+            int("len", "")
         )
 
         void(
             "str_remove_runes",
             "",
 
-            nk_str.p.IN("str", ""),
-            int.IN("len", "")
+            nk_str.p("str", ""),
+            int("len", "")
         )
 
         void(
             "str_delete_chars",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", ""),
-            int.IN("len", "")
+            nk_str.p("s", ""),
+            int("pos", ""),
+            int("len", "")
         )
 
         void(
             "str_delete_runes",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", ""),
-            int.IN("len", "")
+            nk_str.p("s", ""),
+            int("pos", ""),
+            int("len", "")
         )
 
         charUTF8.p(
             "str_at_char",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", "")
+            nk_str.p("s", ""),
+            int("pos", "")
         )
 
         char.p(
             "str_at_rune",
             "",
 
-            nk_str.p.IN("s", ""),
-            int.IN("pos", ""),
+            nk_str.p("s", ""),
+            int("pos", ""),
             Check(1)..nk_rune.p.OUT("unicode", ""),
             AutoSizeResult..int.p.OUT("len", "")
         )
@@ -3960,24 +3957,24 @@ nk_style_pop_vec2(ctx);""")}
             "str_rune_at",
             "",
 
-            nk_str.const.p.IN("s", ""),
-            int.IN("pos", "")
+            nk_str.const.p("s", ""),
+            int("pos", "")
         )
 
         charUTF8.const.p(
             "str_at_char_const",
             "",
 
-            nk_str.const.p.IN("s", ""),
-            int.IN("pos", "")
+            nk_str.const.p("s", ""),
+            int("pos", "")
         )
 
         char.const.p(
             "str_at_const",
             "",
 
-            nk_str.const.p.IN("s", ""),
-            int.IN("pos", ""),
+            nk_str.const.p("s", ""),
+            int("pos", ""),
             Check(1)..nk_rune.p.OUT("unicode", ""),
             AutoSizeResult..int.p.OUT("len", "")
         )
@@ -3986,171 +3983,171 @@ nk_style_pop_vec2(ctx);""")}
             "str_get",
             "",
 
-            nk_str.p.IN("s", "")
+            nk_str.p("s", "")
         )
 
         charUTF8.const.p(
             "str_get_const",
             "",
 
-            nk_str.const.p.IN("s", "")
+            nk_str.const.p("s", "")
         )
 
         int(
             "str_len",
             "",
 
-            nk_str.p.IN("s", "")
+            nk_str.p("s", "")
         )
 
         int(
             "str_len_char",
             "",
 
-            nk_str.p.IN("s", "")
+            nk_str.p("s", "")
         )
 
         intb(
             "filter_default",
             "",
 
-            nk_text_edit.const.p.IN("edit", ""),
-            nk_rune.IN("unicode", "")
+            nk_text_edit.const.p("edit", ""),
+            nk_rune("unicode", "")
         )
 
         intb(
             "filter_ascii",
             "",
 
-            nk_text_edit.const.p.IN("edit", ""),
-            nk_rune.IN("unicode", "")
+            nk_text_edit.const.p("edit", ""),
+            nk_rune("unicode", "")
         )
 
         intb(
             "filter_float",
             "",
 
-            nk_text_edit.const.p.IN("edit", ""),
-            nk_rune.IN("unicode", "")
+            nk_text_edit.const.p("edit", ""),
+            nk_rune("unicode", "")
         )
 
         intb(
             "filter_decimal",
             "",
 
-            nk_text_edit.const.p.IN("edit", ""),
-            nk_rune.IN("unicode", "")
+            nk_text_edit.const.p("edit", ""),
+            nk_rune("unicode", "")
         )
 
         intb(
             "filter_hex",
             "",
 
-            nk_text_edit.const.p.IN("edit", ""),
-            nk_rune.IN("unicode", "")
+            nk_text_edit.const.p("edit", ""),
+            nk_rune("unicode", "")
         )
 
         intb(
             "filter_oct",
             "",
 
-            nk_text_edit.const.p.IN("edit", ""),
-            nk_rune.IN("unicode", "")
+            nk_text_edit.const.p("edit", ""),
+            nk_rune("unicode", "")
         )
 
         intb(
             "filter_binary",
             "",
 
-            nk_text_edit.const.p.IN("edit", ""),
-            nk_rune.IN("unicode", "")
+            nk_text_edit.const.p("edit", ""),
+            nk_rune("unicode", "")
         )
 
         void(
             "textedit_init",
             "",
 
-            nk_text_edit.p.IN("box", ""),
-            nk_allocator.p.IN("allocator", ""),
-            nk_size.IN("size", "")
+            nk_text_edit.p("box", ""),
+            nk_allocator.p("allocator", ""),
+            nk_size("size", "")
         )
 
         void(
             "textedit_init_fixed",
             "",
 
-            nk_text_edit.p.IN("box", ""),
-            void.p.IN("memory", ""),
-            AutoSize("memory")..nk_size.IN("size", "")
+            nk_text_edit.p("box", ""),
+            void.p("memory", ""),
+            AutoSize("memory")..nk_size("size", "")
         )
 
         void(
             "textedit_free",
             "",
 
-            nk_text_edit.p.IN("box", "")
+            nk_text_edit.p("box", "")
         )
 
         void(
             "textedit_text",
             "",
 
-            nk_text_edit.p.IN("box", ""),
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("total_len", "")
+            nk_text_edit.p("box", ""),
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("total_len", "")
         )
 
         void(
             "textedit_delete",
             "",
 
-            nk_text_edit.p.IN("box", ""),
-            int.IN("where", ""),
-            int.IN("len", "")
+            nk_text_edit.p("box", ""),
+            int("where", ""),
+            int("len", "")
         )
 
         void(
             "textedit_delete_selection",
             "",
 
-            nk_text_edit.p.IN("box", "")
+            nk_text_edit.p("box", "")
         )
 
         void(
             "textedit_select_all",
             "",
 
-            nk_text_edit.p.IN("box", "")
+            nk_text_edit.p("box", "")
         )
 
         intb(
             "textedit_cut",
             "",
 
-            nk_text_edit.p.IN("box", "")
+            nk_text_edit.p("box", "")
         )
 
         intb(
             "textedit_paste",
             "",
 
-            nk_text_edit.p.IN("box", ""),
-            charUTF8.const.p.IN("ctext", ""),
-            AutoSize("ctext")..int.IN("len", "")
+            nk_text_edit.p("box", ""),
+            charUTF8.const.p("ctext", ""),
+            AutoSize("ctext")..int("len", "")
         )
 
         void(
             "textedit_undo",
             "",
 
-            nk_text_edit.p.IN("box", "")
+            nk_text_edit.p("box", "")
         )
 
         void(
             "textedit_redo",
             "",
 
-            nk_text_edit.p.IN("box", "")
+            nk_text_edit.p("box", "")
         )
     }();
 
@@ -4159,211 +4156,211 @@ nk_style_pop_vec2(ctx);""")}
             "stroke_line",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            float.IN("x0", ""),
-            float.IN("y0", ""),
-            float.IN("x1", ""),
-            float.IN("y1", ""),
-            float.IN("line_thickness", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            float("x0", ""),
+            float("y0", ""),
+            float("x1", ""),
+            float("y1", ""),
+            float("line_thickness", ""),
+            nk_color("color", "")
         )
 
         void(
             "stroke_curve",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            float.IN("ax", ""),
-            float.IN("ay", ""),
-            float.IN("ctrl0x", ""),
-            float.IN("ctrl0y", ""),
-            float.IN("ctrl1x", ""),
-            float.IN("ctrl1y", ""),
-            float.IN("bx", ""),
-            float.IN("by", ""),
-            float.IN("line_thickness", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            float("ax", ""),
+            float("ay", ""),
+            float("ctrl0x", ""),
+            float("ctrl0y", ""),
+            float("ctrl1x", ""),
+            float("ctrl1y", ""),
+            float("bx", ""),
+            float("by", ""),
+            float("line_thickness", ""),
+            nk_color("color", "")
         )
 
         void(
             "stroke_rect",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            nk_rect.IN("rect", ""),
-            float.IN("rounding", ""),
-            float.IN("line_thickness", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            nk_rect("rect", ""),
+            float("rounding", ""),
+            float("line_thickness", ""),
+            nk_color("color", "")
         )
 
         void(
             "stroke_circle",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            nk_rect.IN("rect", ""),
-            float.IN("line_thickness", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            nk_rect("rect", ""),
+            float("line_thickness", ""),
+            nk_color("color", "")
         )
 
         void(
             "stroke_arc",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            float.IN("cx", ""),
-            float.IN("cy", ""),
-            float.IN("radius", ""),
-            float.IN("a_min", ""),
-            float.IN("a_max", ""),
-            float.IN("line_thickness", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            float("cx", ""),
+            float("cy", ""),
+            float("radius", ""),
+            float("a_min", ""),
+            float("a_max", ""),
+            float("line_thickness", ""),
+            nk_color("color", "")
         )
 
         void(
             "stroke_triangle",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            float.IN("x0", ""),
-            float.IN("y0", ""),
-            float.IN("x1", ""),
-            float.IN("y1", ""),
-            float.IN("x2", ""),
-            float.IN("y2", ""),
-            float.IN("line_thichness", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            float("x0", ""),
+            float("y0", ""),
+            float("x1", ""),
+            float("y1", ""),
+            float("x2", ""),
+            float("y2", ""),
+            float("line_thichness", ""),
+            nk_color("color", "")
         )
 
         void(
             "stroke_polyline",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            float.p.IN("points", ""),
-            AutoSize("points")..int.IN("point_count", ""),
-            float.IN("line_thickness", ""),
-            nk_color.IN("col", "")
+            nk_command_buffer.p("b", ""),
+            float.p("points", ""),
+            AutoSize("points")..int("point_count", ""),
+            float("line_thickness", ""),
+            nk_color("col", "")
         )
 
         void(
             "stroke_polygon",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            float.p.IN("points", ""),
-            AutoSize("points")..int.IN("point_count", ""),
-            float.IN("line_thickness", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            float.p("points", ""),
+            AutoSize("points")..int("point_count", ""),
+            float("line_thickness", ""),
+            nk_color("color", "")
         )
 
         void(
             "fill_rect",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            nk_rect.IN("rect", ""),
-            float.IN("rounding", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            nk_rect("rect", ""),
+            float("rounding", ""),
+            nk_color("color", "")
         )
 
         void(
             "fill_rect_multi_color",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            nk_rect.IN("rect", ""),
-            nk_color.IN("left", ""),
-            nk_color.IN("top", ""),
-            nk_color.IN("right", ""),
-            nk_color.IN("bottom", "")
+            nk_command_buffer.p("b", ""),
+            nk_rect("rect", ""),
+            nk_color("left", ""),
+            nk_color("top", ""),
+            nk_color("right", ""),
+            nk_color("bottom", "")
         )
 
         void(
             "fill_circle",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            nk_rect.IN("rect", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            nk_rect("rect", ""),
+            nk_color("color", "")
         )
 
         void(
             "fill_arc",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            float.IN("cx", ""),
-            float.IN("cy", ""),
-            float.IN("radius", ""),
-            float.IN("a_min", ""),
-            float.IN("a_max", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            float("cx", ""),
+            float("cy", ""),
+            float("radius", ""),
+            float("a_min", ""),
+            float("a_max", ""),
+            nk_color("color", "")
         )
 
         void(
             "fill_triangle",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            float.IN("x0", ""),
-            float.IN("y0", ""),
-            float.IN("x1", ""),
-            float.IN("y1", ""),
-            float.IN("x2", ""),
-            float.IN("y2", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            float("x0", ""),
+            float("y0", ""),
+            float("x1", ""),
+            float("y1", ""),
+            float("x2", ""),
+            float("y2", ""),
+            nk_color("color", "")
         )
 
         void(
             "fill_polygon",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            float.p.IN("points", ""),
-            AutoSize("points")..int.IN("point_count", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            float.p("points", ""),
+            AutoSize("points")..int("point_count", ""),
+            nk_color("color", "")
         )
 
         void(
             "draw_image",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            nk_rect.IN("rect", ""),
-            nk_image.const.p.IN("img", ""),
-            nk_color.IN("color", "")
+            nk_command_buffer.p("b", ""),
+            nk_rect("rect", ""),
+            nk_image.const.p("img", ""),
+            nk_color("color", "")
         )
 
         void(
             "draw_text",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            nk_rect.IN("rect", ""),
-            charUTF8.const.p.IN("string", ""),
-            AutoSize("string")..int.IN("length", ""),
-            nk_user_font.const.p.IN("font", ""),
-            nk_color.IN("bg", ""),
-            nk_color.IN("fg", "")
+            nk_command_buffer.p("b", ""),
+            nk_rect("rect", ""),
+            charUTF8.const.p("string", ""),
+            AutoSize("string")..int("length", ""),
+            nk_user_font.const.p("font", ""),
+            nk_color("bg", ""),
+            nk_color("fg", "")
         )
 
         void(
             "push_scissor",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            nk_rect.IN("rect", "")
+            nk_command_buffer.p("b", ""),
+            nk_rect("rect", "")
         )
 
         void(
             "push_custom",
             "",
 
-            nk_command_buffer.p.IN("b", ""),
-            nk_rect.IN("rect", ""),
-            nk_command_custom_callback.IN("callback", ""),
-            nk_handle.IN("usr", "")
+            nk_command_buffer.p("b", ""),
+            nk_rect("rect", ""),
+            nk_command_custom_callback("callback", ""),
+            nk_handle("usr", "")
         )
 
         nk_command.const.p(
@@ -4371,7 +4368,7 @@ nk_style_pop_vec2(ctx);""")}
             "Increments the draw command iterator to the next command inside the context draw command list.",
 
             ctx,
-            nk_command.const.p.IN("cmd", "")
+            nk_command.const.p("cmd", "")
         )
 
         nk_command.const.p(
@@ -4385,127 +4382,127 @@ nk_style_pop_vec2(ctx);""")}
             "input_has_mouse_click",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_buttons.IN("id", "", Buttons)
+            nk_input.const.p("i", ""),
+            nk_buttons("id", "", Buttons)
         )
 
         intb(
             "input_has_mouse_click_in_rect",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_buttons.IN("id", "", Buttons),
-            nk_rect.IN("rect", "")
+            nk_input.const.p("i", ""),
+            nk_buttons("id", "", Buttons),
+            nk_rect("rect", "")
         )
 
         intb(
             "input_has_mouse_click_down_in_rect",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_buttons.IN("id", "", Buttons),
-            nk_rect.IN("rect", ""),
-            int.IN("down", "")
+            nk_input.const.p("i", ""),
+            nk_buttons("id", "", Buttons),
+            nk_rect("rect", ""),
+            int("down", "")
         )
 
         intb(
             "input_is_mouse_click_in_rect",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_buttons.IN("id", "", Buttons),
-            nk_rect.IN("rect", "")
+            nk_input.const.p("i", ""),
+            nk_buttons("id", "", Buttons),
+            nk_rect("rect", "")
         )
 
         intb(
             "input_is_mouse_click_down_in_rect",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_buttons.IN("id", "", Buttons),
-            nk_rect.IN("b", ""),
-            int.IN("down", "")
+            nk_input.const.p("i", ""),
+            nk_buttons("id", "", Buttons),
+            nk_rect("b", ""),
+            int("down", "")
         )
 
         intb(
             "input_any_mouse_click_in_rect",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_rect.IN("rect", "")
+            nk_input.const.p("i", ""),
+            nk_rect("rect", "")
         )
 
         intb(
             "input_is_mouse_prev_hovering_rect",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_rect.IN("rect", "")
+            nk_input.const.p("i", ""),
+            nk_rect("rect", "")
         )
 
         intb(
             "input_is_mouse_hovering_rect",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_rect.IN("rect", "")
+            nk_input.const.p("i", ""),
+            nk_rect("rect", "")
         )
 
         intb(
             "input_mouse_clicked",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_buttons.IN("id", "", Buttons),
-            nk_rect.IN("rect", "")
+            nk_input.const.p("i", ""),
+            nk_buttons("id", "", Buttons),
+            nk_rect("rect", "")
         )
 
         intb(
             "input_is_mouse_down",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_buttons.IN("id", "", Buttons)
+            nk_input.const.p("i", ""),
+            nk_buttons("id", "", Buttons)
         )
 
         intb(
             "input_is_mouse_pressed",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_buttons.IN("id", "", Buttons)
+            nk_input.const.p("i", ""),
+            nk_buttons("id", "", Buttons)
         )
 
         intb(
             "input_is_mouse_released",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_buttons.IN("id", "", Buttons)
+            nk_input.const.p("i", ""),
+            nk_buttons("id", "", Buttons)
         )
 
         intb(
             "input_is_key_pressed",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_keys.IN("key", "", Keys)
+            nk_input.const.p("i", ""),
+            nk_keys("key", "", Keys)
         )
 
         intb(
             "input_is_key_released",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_keys.IN("key", "", Keys)
+            nk_input.const.p("i", ""),
+            nk_keys("key", "", Keys)
         )
 
         intb(
             "input_is_key_down",
             "",
 
-            nk_input.const.p.IN("i", ""),
-            nk_keys.IN("key", "", Keys)
+            nk_input.const.p("i", ""),
+            nk_keys("key", "", Keys)
         )
     }();
 
@@ -4514,37 +4511,37 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_init",
             "",
 
-            nk_draw_list.p.IN("list", "")
+            nk_draw_list.p("list", "")
         )
 
         void(
             "draw_list_setup",
             "",
 
-            nk_draw_list.p.IN("canvas", ""),
-            nk_convert_config.const.p.IN("config", ""),
-            nk_buffer_p.IN("cmds", ""),
-            nk_buffer_p.IN("vertices", ""),
-            nk_buffer_p.IN("elements", ""),
-            nk_anti_aliasing.IN("line_aa", ""),
-            nk_anti_aliasing.IN("shape_aa", "")
+            nk_draw_list.p("canvas", ""),
+            nk_convert_config.const.p("config", ""),
+            nk_buffer_p("cmds", ""),
+            nk_buffer_p("vertices", ""),
+            nk_buffer_p("elements", ""),
+            nk_anti_aliasing("line_aa", ""),
+            nk_anti_aliasing("shape_aa", "")
         )
 
         nk_draw_command.const.p(
             "_draw_list_begin",
             "",
 
-            nk_draw_list.const.p.IN("list", ""),
-            nk_buffer.const.p.IN("buffer", "")
+            nk_draw_list.const.p("list", ""),
+            nk_buffer.const.p("buffer", "")
         )
 
         nk_draw_command.const.p(
             "_draw_list_next",
             "",
 
-            nk_draw_command.const.p.IN("cmd", ""),
-            nk_buffer.const.p.IN("buffer", ""),
-            nk_draw_list.const.p.IN("list", "")
+            nk_draw_command.const.p("cmd", ""),
+            nk_buffer.const.p("buffer", ""),
+            nk_draw_list.const.p("list", "")
         )
 
         nk_draw_command.const.p(
@@ -4552,7 +4549,7 @@ nk_style_pop_vec2(ctx);""")}
             "Returns the first vertex command in the context vertex draw list to be executed.",
 
             cctx,
-            nk_buffer.const.p.IN("buffer", "")
+            nk_buffer.const.p("buffer", "")
         )
 
         nk_draw_command.const.p(
@@ -4560,15 +4557,15 @@ nk_style_pop_vec2(ctx);""")}
             "Returns the end of the vertex draw list.",
 
             cctx,
-            nk_buffer.const.p.IN("buffer", "")
+            nk_buffer.const.p("buffer", "")
         )
 
         nk_draw_command.const.p(
             "_draw_next",
             "Increments the vertex command iterator to the next command inside the context vertex command list.",
 
-            nk_draw_command.const.p.IN("cmd", ""),
-            nk_buffer.const.p.IN("buffer", ""),
+            nk_draw_command.const.p("cmd", ""),
+            nk_buffer.const.p("buffer", ""),
             cctx
         )
 
@@ -4576,255 +4573,256 @@ nk_style_pop_vec2(ctx);""")}
             "draw_list_path_clear",
             "",
 
-            nk_draw_list.p.IN("list", "")
+            nk_draw_list.p("list", "")
         )
 
         void(
             "draw_list_path_line_to",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.IN("pos", "")
+            nk_draw_list.p("list", ""),
+            nk_vec2("pos", "")
         )
 
         void(
             "draw_list_path_arc_to_fast",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.IN("center", ""),
-            float.IN("radius", ""),
-            int.IN("a_min", ""),
-            int.IN("a_max", "")
+            nk_draw_list.p("list", ""),
+            nk_vec2("center", ""),
+            float("radius", ""),
+            int("a_min", ""),
+            int("a_max", "")
         )
 
         void(
             "draw_list_path_arc_to",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.IN("center", ""),
-            float.IN("radius", ""),
-            float.IN("a_min", ""),
-            float.IN("a_max", ""),
-            unsigned_int.IN("segments", "")
+            nk_draw_list.p("list", ""),
+            nk_vec2("center", ""),
+            float("radius", ""),
+            float("a_min", ""),
+            float("a_max", ""),
+            unsigned_int("segments", "")
         )
 
         void(
             "draw_list_path_rect_to",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.IN("a", ""),
-            nk_vec2.IN("b", ""),
-            float.IN("rounding", "")
+            nk_draw_list.p("list", ""),
+            nk_vec2("a", ""),
+            nk_vec2("b", ""),
+            float("rounding", "")
         )
 
         void(
             "draw_list_path_curve_to",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.IN("p2", ""),
-            nk_vec2.IN("p3", ""),
-            nk_vec2.IN("p4", ""),
-            unsigned_int.IN("num_segments", "")
+            nk_draw_list.p("list", ""),
+            nk_vec2("p2", ""),
+            nk_vec2("p3", ""),
+            nk_vec2("p4", ""),
+            unsigned_int("num_segments", "")
         )
 
         void(
             "draw_list_path_fill",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_color.IN("color", "")
+            nk_draw_list.p("list", ""),
+            nk_color("color", "")
         )
 
         void(
             "draw_list_path_stroke",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_color.IN("color", ""),
-            nk_draw_list_stroke.IN("closed", "", DrawListStrokes),
-            float.IN("thickness", "")
+            nk_draw_list.p("list", ""),
+            nk_color("color", ""),
+            nk_draw_list_stroke("closed", "", DrawListStrokes),
+            float("thickness", "")
         )
 
         void(
             "draw_list_stroke_line",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.IN("a", ""),
-            nk_vec2.IN("b", ""),
-            nk_color.IN("color", ""),
-            float.IN("thickness", "")
+            nk_draw_list.p("list", ""),
+            nk_vec2("a", ""),
+            nk_vec2("b", ""),
+            nk_color("color", ""),
+            float("thickness", "")
         )
 
         void(
             "draw_list_stroke_rect",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_rect.IN("rect", ""),
-            nk_color.IN("color", ""),
-            float.IN("rounding", ""),
-            float.IN("thickness", "")
+            nk_draw_list.p("list", ""),
+            nk_rect("rect", ""),
+            nk_color("color", ""),
+            float("rounding", ""),
+            float("thickness", "")
         )
 
         void(
             "draw_list_stroke_triangle",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.IN("a", ""),
-            nk_vec2.IN("b", ""),
-            nk_vec2.IN("c", ""),
-            nk_color.IN("color", ""),
-            float.IN("thickness", "")
+            nk_draw_list.p("list", ""),
+            nk_vec2("a", ""),
+            nk_vec2("b", ""),
+            nk_vec2("c", ""),
+            nk_color("color", ""),
+            float("thickness", "")
         )
 
         void(
             "draw_list_stroke_circle",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.IN("center", ""),
-            float.IN("radius", ""),
-            nk_color.IN("color", ""),
-            unsigned_int.IN("segs", ""),
-            float.IN("thickness", "")
+            nk_draw_list.p("list", ""),
+            nk_vec2("center", ""),
+            float("radius", ""),
+            nk_color("color", ""),
+            unsigned_int("segs", ""),
+            float("thickness", "")
         )
 
         void(
             "draw_list_stroke_curve",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.IN("p0", ""),
-            nk_vec2.IN("cp0", ""),
-            nk_vec2.IN("cp1", ""),
-            nk_vec2.IN("p1", ""),
-            nk_color.IN("color", ""),
-            unsigned_int.IN("segments", ""),
-            float.IN("thickness", "")
+            nk_draw_list.p("list", ""),
+            nk_vec2("p0", ""),
+            nk_vec2("cp0", ""),
+            nk_vec2("cp1", ""),
+            nk_vec2("p1", ""),
+            nk_color("color", ""),
+            unsigned_int("segments", ""),
+            float("thickness", "")
         )
 
         void(
             "draw_list_stroke_poly_line",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.const.p.IN("pnts", ""),
-            unsigned_int.IN("cnt", ""),
-            nk_color.IN("color", ""),
-            nk_draw_list_stroke.IN("closed", "", DrawListStrokes),
-            float.IN("thickness", ""),
-            nk_anti_aliasing.IN("aliasing", "", Antialiasing)
+            nk_draw_list.p("list", ""),
+            nk_vec2.const.p("pnts", ""),
+            unsigned_int("cnt", ""),
+            nk_color("color", ""),
+            nk_draw_list_stroke("closed", "", DrawListStrokes),
+            float("thickness", ""),
+            nk_anti_aliasing("aliasing", "", Antialiasing)
         )
 
         void(
             "draw_list_fill_rect",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_rect.IN("rect", ""),
-            nk_color.IN("color", ""),
-            float.IN("rounding", "")
+            nk_draw_list.p("list", ""),
+            nk_rect("rect", ""),
+            nk_color("color", ""),
+            float("rounding", "")
         )
 
         void(
             "draw_list_fill_rect_multi_color",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_rect.IN("rect", ""),
-            nk_color.IN("left", ""),
-            nk_color.IN("top", ""),
-            nk_color.IN("right", ""),
-            nk_color.IN("bottom", "")
+            nk_draw_list.p("list", ""),
+            nk_rect("rect", ""),
+            nk_color("left", ""),
+            nk_color("top", ""),
+            nk_color("right", ""),
+            nk_color("bottom", "")
         )
 
         void(
             "draw_list_fill_triangle",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.IN("a", ""),
-            nk_vec2.IN("b", ""),
-            nk_vec2.IN("c", ""),
-            nk_color.IN("color", "")
+            nk_draw_list.p("list", ""),
+            nk_vec2("a", ""),
+            nk_vec2("b", ""),
+            nk_vec2("c", ""),
+            nk_color("color", "")
         )
 
         void(
             "draw_list_fill_circle",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.IN("center", ""),
-            float.IN("radius", ""),
-            nk_color.IN("col", ""),
-            unsigned_int.IN("segs", "")
+            nk_draw_list.p("list", ""),
+            nk_vec2("center", ""),
+            float("radius", ""),
+            nk_color("col", ""),
+            unsigned_int("segs", "")
         )
 
         void(
             "draw_list_fill_poly_convex",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_vec2.const.p.IN("points", ""),
-            AutoSize("points")..unsigned_int.IN("count", ""),
-            nk_color.IN("color", ""),
-            nk_anti_aliasing.IN("aliasing", "", Antialiasing)
+            nk_draw_list.p("list", ""),
+            nk_vec2.const.p("points", ""),
+            AutoSize("points")..unsigned_int("count", ""),
+            nk_color("color", ""),
+            nk_anti_aliasing("aliasing", "", Antialiasing)
         )
 
         void(
             "draw_list_add_image",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_image.IN("texture", ""),
-            nk_rect.IN("rect", ""),
-            nk_color.IN("color", "")
+            nk_draw_list.p("list", ""),
+            nk_image("texture", ""),
+            nk_rect("rect", ""),
+            nk_color("color", "")
         )
 
         void(
             "draw_list_add_text",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_user_font.const.p.IN("font", ""),
-            nk_rect.IN("rect", ""),
-            charUTF8.const.p.IN("text", ""),
-            AutoSize("text")..int.IN("len", ""),
-            float.IN("font_height", ""),
-            nk_color.IN("color", "")
+            nk_draw_list.p("list", ""),
+            nk_user_font.const.p("font", ""),
+            nk_rect("rect", ""),
+            charUTF8.const.p("text", ""),
+            AutoSize("text")..int("len", ""),
+            float("font_height", ""),
+            nk_color("color", "")
         )
 
         void(
             "draw_list_push_userdata",
             "",
 
-            nk_draw_list.p.IN("list", ""),
-            nk_handle.IN("userdata", "")
+            nk_draw_list.p("list", ""),
+            nk_handle("userdata", "")
         )
 
         nk_style_item(
             "style_item_image",
             "",
 
-            nk_image.IN("img", "")
+            nk_image("img", "")
         )
 
         nk_style_item(
             "style_item_color",
             "",
 
-            nk_color.IN("color", "")
+            nk_color("color", "")
         )
 
         nk_style_item(
             "style_item_hide",
-            ""
+            "",
+            void()
         )
     }()
 }

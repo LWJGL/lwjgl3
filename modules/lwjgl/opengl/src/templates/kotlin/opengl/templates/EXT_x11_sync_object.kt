@@ -38,8 +38,8 @@ val EXT_x11_sync_object = "EXTX11SyncObject".nativeClassGL("EXT_x11_sync_object"
         "ImportSyncEXT",
         "Creates a GL sync object of the type {@code external_sync_type} based on the object referred to by {@code external_sync}.",
 
-        GLenum.IN("external_sync_type", "the external sync object type", "#SYNC_X11_FENCE_EXT"),
-        GLintptr.IN("external_sync", "the external sync object. Must be the XID of a valid X11 Synchronization Fence object"),
-        GLbitfield.IN("flags", "Must be 0.")
+        GLenum("external_sync_type", "the external sync object type", "#SYNC_X11_FENCE_EXT"),
+        GLintptr("external_sync", "the external sync object. Must be the XID of a valid X11 Synchronization Fence object"),
+        GLbitfield("flags", "Must be 0.")
     )
 }

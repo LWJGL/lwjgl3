@@ -77,13 +77,13 @@ val QCOM_texture_foveated = "QCOMTextureFoveated".nativeClassGLES("QCOM_texture_
         "TextureFoveationParametersQCOM",
         "",
 
-        GLuint.IN("texture", ""),
-        GLuint.IN("layer", ""),
-        GLuint.IN("focalPoint", ""),
-        float.IN("focalX", ""),
-        float.IN("focalY", ""),
-        float.IN("gainX", ""),
-        float.IN("gainY", ""),
-        float.IN("foveaArea", "")
+        GLuint("texture", ""),
+        GLuint("layer", ""),
+        GLuint("focalPoint", ""),
+        float("focalX", ""),
+        float("focalY", ""),
+        float("gainX", ""),
+        float("gainY", ""),
+        float("foveaArea", "")
     )
 }

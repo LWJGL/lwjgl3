@@ -41,8 +41,8 @@ val NV_conditional_render = "NVConditionalRender".nativeClassGL("NV_conditional_
         "BeginConditionalRenderNV",
         "",
 
-        GLuint.IN("id", ""),
-        GLenum.IN("mode", "")
+        GLuint("id", ""),
+        GLenum("mode", "")
     )
 
     void(

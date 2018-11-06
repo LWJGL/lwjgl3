@@ -139,7 +139,7 @@ val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KH
         </dl>
         """,
 
-        VkDevice.IN("device", "the device associated with {@code swapchain}."),
-        VkSwapchainKHR.IN("swapchain", "the swapchain to query.")
+        VkDevice("device", "the device associated with {@code swapchain}."),
+        VkSwapchainKHR("swapchain", "the swapchain to query.")
     )
 }

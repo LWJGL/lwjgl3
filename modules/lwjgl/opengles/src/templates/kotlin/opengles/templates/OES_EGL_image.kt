@@ -26,15 +26,15 @@ val OES_EGL_image = "OESEGLImage".nativeClassGLES("OES_EGL_image", postfix = OES
         "EGLImageTargetTexture2DOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLeglImageOES.IN("image", "")
+        GLenum("target", ""),
+        GLeglImageOES("image", "")
     )
 
     void(
         "EGLImageTargetRenderbufferStorageOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLeglImageOES.IN("image", "")
+        GLenum("target", ""),
+        GLeglImageOES("image", "")
     )
 }

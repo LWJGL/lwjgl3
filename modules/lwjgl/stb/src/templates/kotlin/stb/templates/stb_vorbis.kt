@@ -86,7 +86,7 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
 
     // FUNCTIONS USEABLE WITH ALL INPUT MODES
 
-    val DECODER = stb_vorbis.p.IN("f", "an ogg vorbis file decoder")
+    val DECODER = stb_vorbis.p("f", "an ogg vorbis file decoder")
 
     stb_vorbis_info(
         "get_info",
@@ -137,11 +137,11 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
         first N bytes of the file -- you're told if it's not enough, see below)
         """,
 
-        unsigned_char.const.p.IN("datablock", "the data block containing the ogg vorbis headers"),
-        AutoSize("datablock")..int.IN("datablock_length_in_bytes", "the length of {@code datablock}, in bytes"),
+        unsigned_char.const.p("datablock", "the data block containing the ogg vorbis headers"),
+        AutoSize("datablock")..int("datablock_length_in_bytes", "the length of {@code datablock}, in bytes"),
         Check(1)..int.p.OUT("datablock_memory_consumed_in_bytes", "returns the amount of data parsed/consumed, in bytes"),
         Check(1)..int.p.OUT("error", "returns the error code"),
-        nullable..stb_vorbis_alloc.const.p.IN("alloc_buffer", "an ##STBVorbisAlloc struct"),
+        nullable..stb_vorbis_alloc.const.p("alloc_buffer", "an ##STBVorbisAlloc struct"),
 
         returnDoc =
         """
@@ -166,8 +166,8 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
         """,
 
         DECODER,
-        unsigned_char.const.p.IN("datablock", "the data block containing the audio sample data"),
-        AutoSize("datablock")..int.IN("datablock_length_in_bytes", "the length of {@code datablock}, in bytes"),
+        unsigned_char.const.p("datablock", "the data block containing the audio sample data"),
+        AutoSize("datablock")..int("datablock_length_in_bytes", "the length of {@code datablock}, in bytes"),
         nullable..Check(1)..int.p.OUT("channels", "place to write number of {@code float *} buffers"),
         Check(1)..float.p.p.p.OUT("output", "place to write float ** array of float * buffers"),
         Check(1)..int.p.OUT("samples", "place to write number of output samples"),
@@ -207,7 +207,7 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
         LibCStdlib#free() the pointer returned in {@code *output}.
         """,
 
-        charASCII.const.p.IN("filename", "the file name"),
+        charASCII.const.p("filename", "the file name"),
         Check(1)..int.p.OUT("channels", "returns the number of channels"),
         Check(1)..int.p.OUT("sample_rate", "returns the sample rate"),
         Return("$RESULT * channels.get(0)")..Check(1)..short.p.p.OUT("output", "returns a pointer to the decoded data"),
@@ -219,8 +219,8 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
         "decode_memory",
         "In-memory version of #decode_filename().",
 
-        unsigned_char.const.p.IN("mem", "the data to decode"),
-        AutoSize("mem")..int.IN("len", "the {@code data} length, in bytes"),
+        unsigned_char.const.p("mem", "the data to decode"),
+        AutoSize("mem")..int("len", "the {@code data} length, in bytes"),
         Check(1)..int.p.OUT("channels", "returns the number of channels"),
         Check(1)..int.p.OUT("sample_rate", "returns the sample rate"),
         Return("$RESULT * channels.get(0)")..Check(1)..short.p.p.OUT("output", "returns a pointer to the decoded data")
@@ -230,8 +230,8 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
         "open_memory",
         "Creates an ogg vorbis decoder from an ogg vorbis stream in memory (note this must be the entire stream!).",
 
-        unsigned_char.const.p.IN("mem", "the data to decode"),
-        AutoSize("mem")..int.IN("len", "the {@code data} length, in bytes"),
+        unsigned_char.const.p("mem", "the data to decode"),
+        AutoSize("mem")..int("len", "the {@code data} length, in bytes"),
         Check(1)..int.p.OUT("error", "returns an error code"),
         open_pushdata["alloc_buffer"],
 
@@ -242,7 +242,7 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
         "open_filename",
         "Creates an ogg vorbis decoder from a file name.",
 
-        charASCII.const.p.IN("filename", "the file name"),
+        charASCII.const.p("filename", "the file name"),
         Check(1)..int.p.OUT("error", "returns an error code"),
         open_pushdata["alloc_buffer"],
 
@@ -257,7 +257,7 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
         """,
 
         DECODER,
-        unsigned_int.IN("sample_number", "the sample index")
+        unsigned_int("sample_number", "the sample index")
     )
 
     intb(
@@ -268,7 +268,7 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
         """,
 
         DECODER,
-        unsigned_int.IN("sample_number", "the sample index")
+        unsigned_int("sample_number", "the sample index")
     )
 
     intb(
@@ -340,12 +340,12 @@ k    l      k <= l, the first k channels""")}
         """,
 
         DECODER,
-        AutoSize("buffer")..int.IN("num_c", "the number of channels"),
+        AutoSize("buffer")..int("num_c", "the number of channels"),
         short.p.p.OUT(
             "buffer",
             "the output buffer, an array of pointers with length {@code num_c}, each pointing to a short array with length {@code num_samples}"
         ),
-        int.IN("num_samples", "the number of samples"),
+        int("num_samples", "the number of samples"),
 
         returnDoc = "the number of samples per channel"
     )
@@ -360,9 +360,9 @@ k    l      k <= l, the first k channels""")}
         """,
 
         DECODER,
-        int.IN("num_c", "the number of channels"),
+        int("num_c", "the number of channels"),
         short.p.OUT("buffer", "the output buffer"),
-        AutoSize("buffer")..int.IN("num_shorts", "the size of {@code buffer}"),
+        AutoSize("buffer")..int("num_shorts", "the size of {@code buffer}"),
 
         returnDoc = "the number of samples per channel"
     )
@@ -375,12 +375,12 @@ k    l      k <= l, the first k channels""")}
         """,
 
         DECODER,
-        AutoSize("buffer")..int.IN("channels", "the number of channels to decode"),
+        AutoSize("buffer")..int("channels", "the number of channels to decode"),
         float.p.p.OUT(
             "buffer",
             "the output buffer, an array of pointers with length {@code channels}, each pointing to a float array with length {@code num_samples}"
         ),
-        int.IN("num_samples", "the number of samples to decode"),
+        int("num_samples", "the number of samples to decode"),
 
         returnDoc =
         "the number of samples stored per channel; it may be less than requested at the end of the file. If there are no more samples in the file, returns 0."
@@ -391,9 +391,9 @@ k    l      k <= l, the first k channels""")}
         "Interleaved version of #get_samples_float().",
 
         DECODER,
-        int.IN("channels", "the number of channels"),
+        int("channels", "the number of channels"),
         float.p.OUT("buffer", "the output buffer"),
-        AutoSize("buffer")..int.IN("num_floats", "the size of {@code buffer}"),
+        AutoSize("buffer")..int("num_floats", "the size of {@code buffer}"),
 
         returnDoc =
         "the number of samples stored per channel; it may be less than requested at the end of the file. If there are no more samples in the file, returns 0."
@@ -407,12 +407,12 @@ k    l      k <= l, the first k channels""")}
         """,
 
         DECODER,
-        AutoSize("buffer")..int.IN("channels", "the number of channels"),
+        AutoSize("buffer")..int("channels", "the number of channels"),
         short.p.p.OUT(
             "buffer",
             "the output buffer, an array of pointers with length {@code channels}, each pointing to a short array with length {@code num_samples}"
         ),
-        int.IN("num_samples", "the number of samples"),
+        int("num_samples", "the number of samples"),
 
         returnDoc =
         "the number of samples stored per channel; it may be less than requested at the end of the file. If there are no more samples in the file, returns 0."
@@ -423,9 +423,9 @@ k    l      k <= l, the first k channels""")}
         "Interleaved version of #get_samples_short().",
 
         DECODER,
-        int.IN("channels", "the number of channels"),
+        int("channels", "the number of channels"),
         short.p.OUT("buffer", "the output buffer"),
-        AutoSize("buffer")..int.IN("num_shorts", "the size of {@code buffer}"),
+        AutoSize("buffer")..int("num_shorts", "the size of {@code buffer}"),
 
         returnDoc =
         "the number of samples stored per channel; it may be less than requested at the end of the file. If there are no more samples in the file, returns 0."

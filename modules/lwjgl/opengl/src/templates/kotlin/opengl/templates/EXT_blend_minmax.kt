@@ -39,6 +39,6 @@ val EXT_blend_minmax = "EXTBlendMinmax".nativeClassGL("EXT_blend_minmax", postfi
         "BlendEquationEXT",
         "",
 
-        GLenum.IN("mode", "")
+        GLenum("mode", "")
     )
 }

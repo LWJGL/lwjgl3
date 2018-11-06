@@ -43,23 +43,23 @@ val EXT_shader_pixel_local_storage2 = "EXTShaderPixelLocalStorage2".nativeClassG
         "FramebufferPixelLocalStorageSizeEXT",
         "",
 
-        GLuint.IN("target", ""),
-        GLsizei.IN("size", "")
+        GLuint("target", ""),
+        GLsizei("size", "")
     )
 
     GLsizei(
         "GetFramebufferPixelLocalStorageSizeEXT",
         "",
 
-        GLuint.IN("target", "")
+        GLuint("target", "")
     )
 
     void(
         "ClearPixelLocalStorageuiEXT",
         "",
 
-        GLsizei.IN("offset", ""),
-        AutoSize("values")..GLsizei.IN("n", ""),
-        GLuint.const.p.IN("values", "")
+        GLsizei("offset", ""),
+        AutoSize("values")..GLsizei("n", ""),
+        GLuint.const.p("values", "")
     )
 }

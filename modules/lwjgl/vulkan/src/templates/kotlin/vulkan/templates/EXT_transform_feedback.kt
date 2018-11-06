@@ -173,12 +173,12 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        uint32_t.IN("firstBinding", "the index of the first transform feedback binding whose state is updated by the command."),
-        AutoSize("pBuffers", "pOffsets", "pSizes")..uint32_t.IN("bindingCount", "the number of transform feedback bindings whose state is updated by the command."),
-        VkBuffer.const.p.IN("pBuffers", "a pointer to an array of buffer handles."),
-        VkDeviceSize.const.p.IN("pOffsets", "a pointer to an array of buffer offsets."),
-        nullable..VkDeviceSize.const.p.IN("pSizes", "an optional array of buffer sizes, which specifies the maximum number of bytes to capture to the corresponding transform feedback buffer. If {@code pSizes} is {@code NULL}, or the value of the {@code pSizes} array element is #WHOLE_SIZE, then the maximum bytes captured will be the size of the corresponding buffer minus the buffer offset.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
+        uint32_t("firstBinding", "the index of the first transform feedback binding whose state is updated by the command."),
+        AutoSize("pBuffers", "pOffsets", "pSizes")..uint32_t("bindingCount", "the number of transform feedback bindings whose state is updated by the command."),
+        VkBuffer.const.p("pBuffers", "a pointer to an array of buffer handles."),
+        VkDeviceSize.const.p("pOffsets", "a pointer to an array of buffer offsets."),
+        nullable..VkDeviceSize.const.p("pSizes", "an optional array of buffer sizes, which specifies the maximum number of bytes to capture to the corresponding transform feedback buffer. If {@code pSizes} is {@code NULL}, or the value of the {@code pSizes} array element is #WHOLE_SIZE, then the maximum bytes captured will be the size of the corresponding buffer minus the buffer offset.")
     )
 
     void(
@@ -236,11 +236,11 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        uint32_t.IN("firstCounterBuffer", "the index of the first transform feedback buffer corresponding to {@code pCounterBuffers}[0] and {@code pCounterBufferOffsets}[0]."),
-        AutoSize("pCounterBuffers", "pCounterBufferOffsets")..uint32_t.IN("counterBufferCount", "the size of the {@code pCounterBuffers} and {@code pCounterBufferOffsets} arrays."),
-        nullable..VkBuffer.const.p.IN("pCounterBuffers", "an optional array of buffer handles to the counter buffers which contain a 4 byte integer value representing the byte offset from the start of the corresponding transform feedback buffer from where to start capturing vertex data. If the byte offset stored to the counter buffer location was done using #CmdEndTransformFeedbackEXT() it can be used to resume transform feedback from the previous location. If {@code pCounterBuffers} is {@code NULL}, then transform feedback will start capturing vertex data to byte offset zero in all bound transform feedback buffers. For each element of {@code pCounterBuffers} that is #NULL_HANDLE, transform feedback will start capturing vertex data to byte zero in the corresponding bound transform feedback buffer."),
-        nullable..VkDeviceSize.const.p.IN("pCounterBufferOffsets", "an optional array of offsets within each of the {@code pCounterBuffers} where the counter values were previously written. The location in each counter buffer at these offsets <b>must</b> be large enough to contain 4 bytes of data. This data is the number of bytes captured by the previous transform feedback to this buffer. If {@code pCounterBufferOffsets} is {@code NULL}, then it is assumed the offsets are zero.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
+        uint32_t("firstCounterBuffer", "the index of the first transform feedback buffer corresponding to {@code pCounterBuffers}[0] and {@code pCounterBufferOffsets}[0]."),
+        AutoSize("pCounterBuffers", "pCounterBufferOffsets")..uint32_t("counterBufferCount", "the size of the {@code pCounterBuffers} and {@code pCounterBufferOffsets} arrays."),
+        nullable..VkBuffer.const.p("pCounterBuffers", "an optional array of buffer handles to the counter buffers which contain a 4 byte integer value representing the byte offset from the start of the corresponding transform feedback buffer from where to start capturing vertex data. If the byte offset stored to the counter buffer location was done using #CmdEndTransformFeedbackEXT() it can be used to resume transform feedback from the previous location. If {@code pCounterBuffers} is {@code NULL}, then transform feedback will start capturing vertex data to byte offset zero in all bound transform feedback buffers. For each element of {@code pCounterBuffers} that is #NULL_HANDLE, transform feedback will start capturing vertex data to byte zero in the corresponding bound transform feedback buffer."),
+        nullable..VkDeviceSize.const.p("pCounterBufferOffsets", "an optional array of offsets within each of the {@code pCounterBuffers} where the counter values were previously written. The location in each counter buffer at these offsets <b>must</b> be large enough to contain 4 bytes of data. This data is the number of bytes captured by the previous transform feedback to this buffer. If {@code pCounterBufferOffsets} is {@code NULL}, then it is assumed the offsets are zero.")
     )
 
     void(
@@ -294,11 +294,11 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        uint32_t.IN("firstCounterBuffer", "the index of the first transform feedback buffer corresponding to {@code pCounterBuffers}[0] and {@code pCounterBufferOffsets}[0]."),
-        AutoSize("pCounterBuffers", "pCounterBufferOffsets")..uint32_t.IN("counterBufferCount", "the size of the {@code pCounterBuffers} and {@code pCounterBufferOffsets} arrays."),
-        nullable..VkBuffer.const.p.IN("pCounterBuffers", "an optional array of buffer handles to the counter buffers used to record the current byte positions of each transform feedback buffer where the next vertex output data would be captured. This <b>can</b> be used by a subsequent #CmdBeginTransformFeedbackEXT() call to resume transform feedback capture from this position. It can also be used by #CmdDrawIndirectByteCountEXT() to determine the vertex count of the draw call."),
-        nullable..VkDeviceSize.const.p.IN("pCounterBufferOffsets", "an optional array of offsets within each of the {@code pCounterBuffers} where the counter values can be written. The location in each counter buffer at these offsets <b>must</b> be large enough to contain 4 bytes of data. The data stored at this location is the byte offset from the start of the transform feedback buffer binding where the next vertex data would be written. If {@code pCounterBufferOffsets} is {@code NULL}, then it is assumed the offsets are zero.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
+        uint32_t("firstCounterBuffer", "the index of the first transform feedback buffer corresponding to {@code pCounterBuffers}[0] and {@code pCounterBufferOffsets}[0]."),
+        AutoSize("pCounterBuffers", "pCounterBufferOffsets")..uint32_t("counterBufferCount", "the size of the {@code pCounterBuffers} and {@code pCounterBufferOffsets} arrays."),
+        nullable..VkBuffer.const.p("pCounterBuffers", "an optional array of buffer handles to the counter buffers used to record the current byte positions of each transform feedback buffer where the next vertex output data would be captured. This <b>can</b> be used by a subsequent #CmdBeginTransformFeedbackEXT() call to resume transform feedback capture from this position. It can also be used by #CmdDrawIndirectByteCountEXT() to determine the vertex count of the draw call."),
+        nullable..VkDeviceSize.const.p("pCounterBufferOffsets", "an optional array of offsets within each of the {@code pCounterBuffers} where the counter values can be written. The location in each counter buffer at these offsets <b>must</b> be large enough to contain 4 bytes of data. The data stored at this location is the byte offset from the start of the transform feedback buffer binding where the next vertex data would be written. If {@code pCounterBufferOffsets} is {@code NULL}, then it is assumed the offsets are zero.")
     )
 
     void(
@@ -360,11 +360,11 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded."),
-        VkQueryPool.IN("queryPool", "the query pool that will manage the results of the query."),
-        uint32_t.IN("query", "the query index within the query pool that will contain the results."),
-        VkQueryControlFlags.IN("flags", "a bitmask of {@code VkQueryControlFlagBits} specifying constraints on the types of queries that <b>can</b> be performed."),
-        uint32_t.IN("index", "the query type specific index. When the query type is {@code VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} the index represents the vertex stream.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which this command will be recorded."),
+        VkQueryPool("queryPool", "the query pool that will manage the results of the query."),
+        uint32_t("query", "the query index within the query pool that will contain the results."),
+        VkQueryControlFlags("flags", "a bitmask of {@code VkQueryControlFlagBits} specifying constraints on the types of queries that <b>can</b> be performed."),
+        uint32_t("index", "the query type specific index. When the query type is {@code VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} the index represents the vertex stream.")
     )
 
     void(
@@ -417,10 +417,10 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded."),
-        VkQueryPool.IN("queryPool", "the query pool that is managing the results of the query."),
-        uint32_t.IN("query", "the query index within the query pool where the result is stored."),
-        uint32_t.IN("index", "the query type specific index.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which this command will be recorded."),
+        VkQueryPool("queryPool", "the query pool that is managing the results of the query."),
+        uint32_t("query", "the query index within the query pool where the result is stored."),
+        uint32_t("index", "the query type specific index.")
     )
 
     void(
@@ -505,12 +505,12 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        uint32_t.IN("instanceCount", "the number of instances to draw."),
-        uint32_t.IN("firstInstance", "the instance ID of the first instance to draw."),
-        VkBuffer.IN("counterBuffer", "the buffer handle from where the byte count is read."),
-        VkDeviceSize.IN("counterBufferOffset", "the offset into the buffer used to read the byte count, which is used to calculate the vertex count for this draw call."),
-        uint32_t.IN("counterOffset", "subtracted from the byte count read from the {@code counterBuffer} at the {@code counterBufferOffset}"),
-        uint32_t.IN("vertexStride", "the stride in bytes between each element of the vertex data that is used to calculate the vertex count from the counter value. This value is typically the same value that was used in the graphics pipeline state when the transform feedback was captured as the {@code XfbStride}.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
+        uint32_t("instanceCount", "the number of instances to draw."),
+        uint32_t("firstInstance", "the instance ID of the first instance to draw."),
+        VkBuffer("counterBuffer", "the buffer handle from where the byte count is read."),
+        VkDeviceSize("counterBufferOffset", "the offset into the buffer used to read the byte count, which is used to calculate the vertex count for this draw call."),
+        uint32_t("counterOffset", "subtracted from the byte count read from the {@code counterBuffer} at the {@code counterBufferOffset}"),
+        uint32_t("vertexStride", "the stride in bytes between each element of the vertex data that is used to calculate the vertex count from the counter value. This value is typically the same value that was used in the graphics pipeline state when the transform feedback was captured as the {@code XfbStride}.")
     )
 }

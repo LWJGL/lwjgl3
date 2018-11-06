@@ -33,13 +33,13 @@ val GREMEDY_string_marker = "GREMEDYStringMarker".nativeClassGL("GREMEDY_string_
         They have no influence on the rendered image or the OpenGL state.
         """,
 
-        AutoSize("string")..GLsizei.IN(
+        AutoSize("string")..GLsizei(
             "len",
             """
             the length of the array. If {@code string} is null-terminated, {@code len} should not include the terminator. If {@code len} is 0, then the string
             is assumed to be null-terminated.
             """
         ),
-        GLcharUTF8.const.p.IN("string", "a pointer to the array of bytes representing the marker being inserted, which need not be null-terminated")
+        GLcharUTF8.const.p("string", "a pointer to the array of bytes representing the marker being inserted, which need not be null-terminated")
     )
 }

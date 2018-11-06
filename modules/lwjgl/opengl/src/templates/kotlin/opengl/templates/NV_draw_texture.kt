@@ -26,16 +26,16 @@ val NV_draw_texture = "NVDrawTexture".nativeClassGL("NV_draw_texture", postfix =
         "DrawTextureNV",
         "",
 
-        GLuint.IN("texture", ""),
-        GLuint.IN("sampler", ""),
-        GLfloat.IN("x0", ""),
-        GLfloat.IN("y0", ""),
-        GLfloat.IN("x1", ""),
-        GLfloat.IN("y1", ""),
-        GLfloat.IN("z", ""),
-        GLfloat.IN("s0", ""),
-        GLfloat.IN("t0", ""),
-        GLfloat.IN("s1", ""),
-        GLfloat.IN("t1", "")
+        GLuint("texture", ""),
+        GLuint("sampler", ""),
+        GLfloat("x0", ""),
+        GLfloat("y0", ""),
+        GLfloat("x1", ""),
+        GLfloat("y1", ""),
+        GLfloat("z", ""),
+        GLfloat("s0", ""),
+        GLfloat("t0", ""),
+        GLfloat("s1", ""),
+        GLfloat("t1", "")
     )
 }

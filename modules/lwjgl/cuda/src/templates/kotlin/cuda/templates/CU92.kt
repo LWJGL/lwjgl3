@@ -17,14 +17,14 @@ val CU92 = "CU92".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         CUuuid.p.OUT("uuid", ""),
-        CUdevice.IN("dev", "")
+        CUdevice("dev", "")
     )
 
     CUresult(
         "StreamGetCtx",
         "",
 
-        CUstream.IN("hStream", ""),
+        CUstream("hStream", ""),
         Check(1)..CUcontext.p.OUT("pctx", "")
     ).ptsz()
 }

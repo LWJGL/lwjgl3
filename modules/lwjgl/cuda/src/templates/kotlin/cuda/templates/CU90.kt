@@ -35,33 +35,33 @@ val CU90 = "CU90".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "FuncSetAttribute",
         "",
 
-        CUfunction.IN("hfunc", ""),
-        CUfunction_attribute.IN("attrib", ""),
-        int.IN("value", "")
+        CUfunction("hfunc", ""),
+        CUfunction_attribute("attrib", ""),
+        int("value", "")
     )
 
     CUresult(
         "LaunchCooperativeKernel",
         "",
 
-        CUfunction.IN("f", ""),
-        unsigned_int.IN("gridDimX", ""),
-        unsigned_int.IN("gridDimY", ""),
-        unsigned_int.IN("gridDimZ", ""),
-        unsigned_int.IN("blockDimX", ""),
-        unsigned_int.IN("blockDimY", ""),
-        unsigned_int.IN("blockDimZ", ""),
-        unsigned_int.IN("sharedMemBytes", ""),
-        nullable..CUstream.IN("hStream", ""),
-        Unsafe..nullable..void.p.p.IN("kernelParams", "")
+        CUfunction("f", ""),
+        unsigned_int("gridDimX", ""),
+        unsigned_int("gridDimY", ""),
+        unsigned_int("gridDimZ", ""),
+        unsigned_int("blockDimX", ""),
+        unsigned_int("blockDimY", ""),
+        unsigned_int("blockDimZ", ""),
+        unsigned_int("sharedMemBytes", ""),
+        nullable..CUstream("hStream", ""),
+        Unsafe..nullable..void.p.p("kernelParams", "")
     ).ptsz()
 
     CUresult(
         "LaunchCooperativeKernelMultiDevice",
         "",
 
-        CUDA_LAUNCH_PARAMS.p.IN("launchParamsList", ""),
-        AutoSize("launchParamsList")..unsigned_int.IN("numDevices", ""),
-        unsigned_int.IN("flags", "")
+        CUDA_LAUNCH_PARAMS.p("launchParamsList", ""),
+        AutoSize("launchParamsList")..unsigned_int("numDevices", ""),
+        unsigned_int("flags", "")
     )
 }

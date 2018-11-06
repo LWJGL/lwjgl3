@@ -13,12 +13,12 @@ val locale = "LibCLocale".nativeClass(Module.CORE_LIBC) {
 
     documentation = "Native bindings to locale.h."
 
-    macro..int("LC_ALL", "Selects the entire C locale.")
-    macro..int("LC_COLLATE", "Selects the collation category of the C locale.")
-    macro..int("LC_CTYPE", "Selects the character classification category of the C locale.")
-    macro..int("LC_MONETARY", "Selects the monetary formatting category of the C locale.")
-    macro..int("LC_NUMERIC", "Selects the numeric formatting category of the C locale.")
-    macro..int("LC_TIME", "Selects the time formatting category of the C locale.")
+    macro..int("LC_ALL", "Selects the entire C locale.", void())
+    macro..int("LC_COLLATE", "Selects the collation category of the C locale.", void())
+    macro..int("LC_CTYPE", "Selects the character classification category of the C locale.", void())
+    macro..int("LC_MONETARY", "Selects the monetary formatting category of the C locale.", void())
+    macro..int("LC_NUMERIC", "Selects the numeric formatting category of the C locale.", void())
+    macro..int("LC_TIME", "Selects the time formatting category of the C locale.", void())
 
     charASCII.p(
         "setlocale",
@@ -30,8 +30,8 @@ val locale = "LibCLocale".nativeClass(Module.CORE_LIBC) {
         {@code setlocale} queries the current C locale without modifying it.
         """,
 
-        int.IN("category", "the locale category identifier, may by null", "#LC_ALL #LC_COLLATE #LC_CTYPE #LC_MONETARY #LC_NUMERIC #LC_TIME"),
-        charASCII.const.p.IN("locale", "system-specific locale identifier. Can be \"\" for the user-preferred locale or \"C\" for the minimal locale."),
+        int("category", "the locale category identifier, may by null", "#LC_ALL #LC_COLLATE #LC_CTYPE #LC_MONETARY #LC_NUMERIC #LC_TIME"),
+        charASCII.const.p("locale", "system-specific locale identifier. Can be \"\" for the user-preferred locale or \"C\" for the minimal locale."),
 
         returnDoc =
         """

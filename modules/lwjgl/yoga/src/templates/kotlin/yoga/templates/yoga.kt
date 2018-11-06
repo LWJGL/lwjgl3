@@ -207,26 +207,23 @@ div {
         "WrapReverse".enum
     )
 
-    YGNodeRef(
-        "NodeNew",
-        ""
-    )
+    YGNodeRef("NodeNew", "", void())
 
     YGNodeRef(
         "NodeNewWithConfig",
         "",
 
-        YGConfigRef.const.IN("config", "")
+        YGConfigRef.const("config", "")
     )
 
     YGNodeRef(
         "NodeClone",
         "",
 
-        YGNodeRef.const.IN("node", "")
+        YGNodeRef.const("node", "")
     )
 
-    val node = YGNodeRef.const.IN("node", "")
+    val node = YGNodeRef.const("node", "")
 
     void(
         "NodeFree",
@@ -249,18 +246,15 @@ div {
         node
     )
 
-    int32_t(
-        "NodeGetInstanceCount",
-        ""
-    )
+    int32_t("NodeGetInstanceCount", "", void())
 
     void(
         "NodeInsertChild",
         "",
 
         node,
-        YGNodeRef.const.IN("child", ""),
-        uint32_t.IN("index", "")
+        YGNodeRef.const("child", ""),
+        uint32_t("index", "")
     )
 
     void(
@@ -272,8 +266,8 @@ div {
         """,
 
         node,
-        YGNodeRef.const.IN("child", ""),
-        uint32_t.IN("index", "")
+        YGNodeRef.const("child", ""),
+        uint32_t("index", "")
     )
 
     void(
@@ -281,14 +275,14 @@ div {
         "",
 
         node,
-        YGNodeRef.const.IN("child", "")
+        YGNodeRef.const("child", "")
     )
 
     void(
         "NodeRemoveAllChildren",
         "",
 
-        YGNodeRef.const.IN("node", "")
+        YGNodeRef.const("node", "")
     )
 
     YGNodeRef(
@@ -296,7 +290,7 @@ div {
         "",
 
         node,
-        uint32_t.IN("index", "")
+        uint32_t("index", "")
     )
 
     YGNodeRef(
@@ -324,9 +318,9 @@ div {
         "NodeSetChildren",
         "",
 
-        YGNodeRef.const.IN("owner", ""),
-        YGNodeRef.const.p.IN("children", ""),
-        AutoSize("children")..uint32_t.IN("count", "")
+        YGNodeRef.const("owner", ""),
+        YGNodeRef.const.p("children", ""),
+        AutoSize("children")..uint32_t("count", "")
     )
 
     void(
@@ -334,9 +328,9 @@ div {
         "",
 
         node,
-        float.IN("availableWidth", ""),
-        float.IN("availableHeight", ""),
-        YGDirection.IN("ownerDirection", "", "Direction\\w+")
+        float("availableWidth", ""),
+        float("availableHeight", ""),
+        YGDirection("ownerDirection", "", "Direction\\w+")
     )
 
     void(
@@ -368,41 +362,41 @@ div {
         "",
 
         node,
-        YGPrintOptions.IN("options", "", "PrintOptions\\w+")
+        YGPrintOptions("options", "", "PrintOptions\\w+")
     )
 
     bool(
         "FloatIsUndefined",
         "",
 
-        float.IN("value", "")
+        float("value", "")
     )
 
     bool(
         "NodeCanUseCachedMeasurement",
         "",
 
-        YGMeasureMode.IN("widthMode", "", "MeasureMode\\w+"),
-        float.IN("width", ""),
-        YGMeasureMode.IN("heightMode", ""),
-        float.IN("height", ""),
-        YGMeasureMode.IN("lastWidthMode", ""),
-        float.IN("lastWidth", ""),
-        YGMeasureMode.IN("lastHeightMode", ""),
-        float.IN("lastHeight", ""),
-        float.IN("lastComputedWidth", ""),
-        float.IN("lastComputedHeight", ""),
-        float.IN("marginRow", ""),
-        float.IN("marginColumn", ""),
-        YGConfigRef.const.IN("config", "")
+        YGMeasureMode("widthMode", "", "MeasureMode\\w+"),
+        float("width", ""),
+        YGMeasureMode("heightMode", ""),
+        float("height", ""),
+        YGMeasureMode("lastWidthMode", ""),
+        float("lastWidth", ""),
+        YGMeasureMode("lastHeightMode", ""),
+        float("lastHeight", ""),
+        float("lastComputedWidth", ""),
+        float("lastComputedHeight", ""),
+        float("marginRow", ""),
+        float("marginColumn", ""),
+        YGConfigRef.const("config", "")
     )
 
     void(
         "NodeCopyStyle",
         "",
 
-        YGNodeRef.const.IN("dstNode", ""),
-        YGNodeRef.const.IN("srcNode", "")
+        YGNodeRef.const("dstNode", ""),
+        YGNodeRef.const("srcNode", "")
     )
 
     opaque_p(
@@ -416,15 +410,15 @@ div {
         "",
 
         node,
-        opaque_p.IN("context", "")
+        opaque_p("context", "")
     )
 
     void(
         "ConfigSetPrintTreeFlag",
         "",
 
-        YGConfigRef.IN("config", ""),
-        bool.IN("enabled", "")
+        YGConfigRef("config", ""),
+        bool("enabled", "")
     )
 
     YGMeasureFunc(
@@ -438,7 +432,7 @@ div {
         "",
 
         node,
-        nullable..YGMeasureFunc.IN("measureFunc", "")
+        nullable..YGMeasureFunc("measureFunc", "")
     )
 
     YGBaselineFunc(
@@ -452,7 +446,7 @@ div {
         "",
 
         node,
-        nullable..YGBaselineFunc.IN("baselineFunc", "")
+        nullable..YGBaselineFunc("baselineFunc", "")
     )
 
     YGDirtiedFunc(
@@ -466,7 +460,7 @@ div {
         "",
 
         node,
-        nullable..YGDirtiedFunc.IN("dirtiedFunc", "")
+        nullable..YGDirtiedFunc("dirtiedFunc", "")
     )
 
     YGPrintFunc(
@@ -480,7 +474,7 @@ div {
         "",
 
         node,
-        nullable..YGPrintFunc.IN("printFunc", "")
+        nullable..YGPrintFunc("printFunc", "")
     )
 
     bool(
@@ -494,7 +488,7 @@ div {
         "",
 
         node,
-        bool.IN("hasNewLayout", "")
+        bool("hasNewLayout", "")
     )
 
     YGNodeType(
@@ -508,7 +502,7 @@ div {
         "",
 
         node,
-        YGNodeType.IN("nodeType", "")
+        YGNodeType("nodeType", "")
     )
 
     bool(
@@ -530,7 +524,7 @@ div {
         "",
 
         node,
-        YGDirection.IN("direction", "", "Direction\\w+")
+        YGDirection("direction", "", "Direction\\w+")
     )
     YGDirection(
         "NodeStyleGetDirection",
@@ -544,7 +538,7 @@ div {
         "",
 
         node,
-        YGFlexDirection.IN("flexDirection", "", "FlexDirection\\w+")
+        YGFlexDirection("flexDirection", "", "FlexDirection\\w+")
     )
     YGFlexDirection(
         "NodeStyleGetFlexDirection",
@@ -558,7 +552,7 @@ div {
         "",
 
         node,
-        YGJustify.IN("justifyContent", "", "Justify\\w+")
+        YGJustify("justifyContent", "", "Justify\\w+")
     )
     YGJustify(
         "NodeStyleGetJustifyContent",
@@ -572,7 +566,7 @@ div {
         "",
 
         node,
-        YGAlign.IN("alignContent", "", "Align\\w+")
+        YGAlign("alignContent", "", "Align\\w+")
     )
     YGAlign(
         "NodeStyleGetAlignContent",
@@ -586,7 +580,7 @@ div {
         "",
 
         node,
-        YGAlign.IN("alignItems", "", "Align\\w+")
+        YGAlign("alignItems", "", "Align\\w+")
     )
     YGAlign(
         "NodeStyleGetAlignItems",
@@ -600,7 +594,7 @@ div {
         "",
 
         node,
-        YGAlign.IN("alignSelf", "", "Align\\w+")
+        YGAlign("alignSelf", "", "Align\\w+")
     )
     YGAlign(
         "NodeStyleGetAlignSelf",
@@ -614,7 +608,7 @@ div {
         "",
 
         node,
-        YGPositionType.IN("positionType", "", "PositionType\\w+")
+        YGPositionType("positionType", "", "PositionType\\w+")
     )
     YGPositionType(
         "NodeStyleGetPositionType",
@@ -628,7 +622,7 @@ div {
         "",
 
         node,
-        YGWrap.IN("flexWrap", "", "Wrap\\w+")
+        YGWrap("flexWrap", "", "Wrap\\w+")
     )
     YGWrap(
         "NodeStyleGetFlexWrap",
@@ -642,7 +636,7 @@ div {
         "",
 
         node,
-        YGOverflow.IN("overflow", "", "Overflow\\w+")
+        YGOverflow("overflow", "", "Overflow\\w+")
     )
     YGOverflow(
         "NodeStyleGetOverflow",
@@ -656,7 +650,7 @@ div {
         "",
 
         node,
-        YGDisplay.IN("display", "", "Display\\w+")
+        YGDisplay("display", "", "Display\\w+")
     )
     YGDisplay(
         "NodeStyleGetDisplay",
@@ -670,7 +664,7 @@ div {
         "",
 
         node,
-        float.IN("flex", "")
+        float("flex", "")
     )
     float(
         "NodeStyleGetFlex",
@@ -684,7 +678,7 @@ div {
         "",
 
         node,
-        float.IN("flexGrow", "")
+        float("flexGrow", "")
     )
     float(
         "NodeStyleGetFlexGrow",
@@ -698,7 +692,7 @@ div {
         "",
 
         node,
-        float.IN("flexShrink", "")
+        float("flexShrink", "")
     )
     float(
         "NodeStyleGetFlexShrink",
@@ -712,14 +706,14 @@ div {
         "",
 
         node,
-        float.IN("flexBasis", "")
+        float("flexBasis", "")
     )
     void(
         "NodeStyleSetFlexBasisPercent",
         "",
 
         node,
-        float.IN("flexBasis", "")
+        float("flexBasis", "")
     )
     void(
         "NodeStyleSetFlexBasisAuto",
@@ -739,23 +733,23 @@ div {
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges),
-        float.IN("position", "")
+        YGEdge("edge", "", Edges),
+        float("position", "")
     )
     void(
         "NodeStyleSetPositionPercent",
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges),
-        float.IN("position", "")
+        YGEdge("edge", "", Edges),
+        float("position", "")
     )
     YGValue(
         "NodeStyleGetPosition",
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges)
+        YGEdge("edge", "", Edges)
     )
 
     void(
@@ -763,30 +757,30 @@ div {
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges),
-        float.IN("margin", "")
+        YGEdge("edge", "", Edges),
+        float("margin", "")
     )
     void(
         "NodeStyleSetMarginPercent",
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges),
-        float.IN("margin", "")
+        YGEdge("edge", "", Edges),
+        float("margin", "")
     )
     void(
         "NodeStyleSetMarginAuto",
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges)
+        YGEdge("edge", "", Edges)
     )
     YGValue(
         "NodeStyleGetMargin",
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges)
+        YGEdge("edge", "", Edges)
     )
 
     void(
@@ -794,23 +788,23 @@ div {
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges),
-        float.IN("padding", "")
+        YGEdge("edge", "", Edges),
+        float("padding", "")
     )
     void(
         "NodeStyleSetPaddingPercent",
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges),
-        float.IN("padding", "")
+        YGEdge("edge", "", Edges),
+        float("padding", "")
     )
     YGValue(
         "NodeStyleGetPadding",
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges)
+        YGEdge("edge", "", Edges)
     )
 
     void(
@@ -818,15 +812,15 @@ div {
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges),
-        float.IN("border", "")
+        YGEdge("edge", "", Edges),
+        float("border", "")
     )
     float(
         "NodeStyleGetBorder",
         "",
 
         node,
-        YGEdge.IN("edge", "", Edges)
+        YGEdge("edge", "", Edges)
     )
 
     void(
@@ -834,14 +828,14 @@ div {
         "",
 
         node,
-        float.IN("width", "")
+        float("width", "")
     )
     void(
         "NodeStyleSetWidthPercent",
         "",
 
         node,
-        float.IN("width", "")
+        float("width", "")
     )
     void(
         "NodeStyleSetWidthAuto",
@@ -861,14 +855,14 @@ div {
         "",
 
         node,
-        float.IN("height", "")
+        float("height", "")
     )
     void(
         "NodeStyleSetHeightPercent",
         "",
 
         node,
-        float.IN("height", "")
+        float("height", "")
     )
     void(
         "NodeStyleSetHeightAuto",
@@ -888,14 +882,14 @@ div {
         "",
 
         node,
-        float.IN("minWidth", "")
+        float("minWidth", "")
     )
     void(
         "NodeStyleSetMinWidthPercent",
         "",
 
         node,
-        float.IN("minWidth", "")
+        float("minWidth", "")
     )
     YGValue(
         "NodeStyleGetMinWidth",
@@ -909,14 +903,14 @@ div {
         "",
 
         node,
-        float.IN("minHeight", "")
+        float("minHeight", "")
     )
     void(
         "NodeStyleSetMinHeightPercent",
         "",
 
         node,
-        float.IN("minHeight", "")
+        float("minHeight", "")
     )
     YGValue(
         "NodeStyleGetMinHeight",
@@ -930,14 +924,14 @@ div {
         "",
 
         node,
-        float.IN("maxWidth", "")
+        float("maxWidth", "")
     )
     void(
         "NodeStyleSetMaxWidthPercent",
         "",
 
         node,
-        float.IN("maxWidth", "")
+        float("maxWidth", "")
     )
     YGValue(
         "NodeStyleGetMaxWidth",
@@ -951,14 +945,14 @@ div {
         "",
 
         node,
-        float.IN("maxHeight", "")
+        float("maxHeight", "")
     )
     void(
         "NodeStyleSetMaxHeightPercent",
         "",
 
         node,
-        float.IN("maxHeight", "")
+        float("maxHeight", "")
     )
     YGValue(
         "NodeStyleGetMaxHeight",
@@ -984,7 +978,7 @@ div {
         """,
 
         node,
-        float.IN("aspectRatio", "")
+        float("aspectRatio", "")
     )
     float(
         "NodeStyleGetAspectRatio",
@@ -1056,7 +1050,7 @@ div {
         """,
 
         node,
-        YGEdge.IN("edge", "", Edges)
+        YGEdge("edge", "", Edges)
     )
     float(
         "NodeLayoutGetBorder",
@@ -1066,7 +1060,7 @@ div {
         """,
 
         node,
-        YGEdge.IN("edge", "", Edges)
+        YGEdge("edge", "", Edges)
     )
     float(
         "NodeLayoutGetPadding",
@@ -1076,75 +1070,75 @@ div {
         """,
 
         node,
-        YGEdge.IN("edge", "", Edges)
+        YGEdge("edge", "", Edges)
     )
 
     void(
         "ConfigSetLogger",
         "",
 
-        YGConfigRef.const.IN("config", ""),
-        nullable..YGLogger.IN("logger", "")
+        YGConfigRef.const("config", ""),
+        nullable..YGLogger("logger", "")
     )
 
     void(
         "Log",
         "",
 
-        YGNodeRef.const.IN("node", ""),
-        YGLogLevel.IN("level", "", "LogLevel\\w+"),
-        charUTF8.const.p.IN("message", "")
+        YGNodeRef.const("node", ""),
+        YGLogLevel("level", "", "LogLevel\\w+"),
+        charUTF8.const.p("message", "")
     )
 
     void(
         "LogWithConfig",
         "",
 
-        YGConfigRef.const.IN("config", ""),
-        YGLogLevel.IN("level", ""),
-        charUTF8.const.p.IN("message", "")
+        YGConfigRef.const("config", ""),
+        YGLogLevel("level", ""),
+        charUTF8.const.p("message", "")
     )
 
     void(
         "Assert",
         "",
 
-        bool.IN("condition", ""),
-        charUTF8.const.p.IN("message", "")
+        bool("condition", ""),
+        charUTF8.const.p("message", "")
     )
 
     void(
         "AssertWithNode",
         "",
 
-        YGNodeRef.const.IN("node", ""),
-        bool.IN("condition", ""),
-        charUTF8.const.p.IN("message", "")
+        YGNodeRef.const("node", ""),
+        bool("condition", ""),
+        charUTF8.const.p("message", "")
     )
 
     void(
         "AssertWithConfig",
         "",
 
-        YGConfigRef.const.IN("config", ""),
-        bool.IN("condition", ""),
-        charUTF8.const.p.IN("message", "")
+        YGConfigRef.const("config", ""),
+        bool("condition", ""),
+        charUTF8.const.p("message", "")
     )
 
     void(
         "ConfigSetPointScaleFactor",
         "Set this to number of pixels in 1 point to round calculation results. If you want to avoid rounding set {@code PointScaleFactor} to 0.",
 
-        YGConfigRef.const.IN("config", ""),
-        float.IN("pixelsInPoint", "")
+        YGConfigRef.const("config", ""),
+        float("pixelsInPoint", "")
     )
 
     void(
         "ConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour",
         "",
 
-        YGConfigRef.const.IN("config", ""),
-        bool.IN("shouldDiffLayout", "")
+        YGConfigRef.const("config", ""),
+        bool("shouldDiffLayout", "")
     )
 
     void(
@@ -1155,98 +1149,89 @@ div {
         this behaviour.
         """,
 
-        YGConfigRef.const.IN("config", ""),
-        bool.IN("useLegacyStretchBehaviour", "")
+        YGConfigRef.const("config", ""),
+        bool("useLegacyStretchBehaviour", "")
     )
 
-    YGConfigRef(
-        "ConfigNew",
-        ""
-    )
+    YGConfigRef("ConfigNew", "", void())
 
     void("ConfigFree",
         "",
-        YGConfigRef.const.IN("config", "")
+        YGConfigRef.const("config", "")
     )
 
     void(
         "ConfigCopy",
         "",
 
-        YGConfigRef.const.IN("dest", ""),
-        YGConfigRef.const.IN("src", "")
+        YGConfigRef.const("dest", ""),
+        YGConfigRef.const("src", "")
     )
 
-    int32_t(
-        "ConfigGetInstanceCount",
-        ""
-    )
+    int32_t("ConfigGetInstanceCount", "", void())
 
     void(
         "ConfigSetExperimentalFeatureEnabled",
         "",
 
-        YGConfigRef.const.IN("config", ""),
-        YGExperimentalFeature.IN("feature", "", "ExperimentalFeature\\w+"),
-        bool.IN("enabled", "")
+        YGConfigRef.const("config", ""),
+        YGExperimentalFeature("feature", "", "ExperimentalFeature\\w+"),
+        bool("enabled", "")
     )
     bool(
         "ConfigIsExperimentalFeatureEnabled",
         "",
 
-        YGConfigRef.const.IN("config", ""),
-        YGExperimentalFeature.IN("feature", "", "ExperimentalFeature\\w+")
+        YGConfigRef.const("config", ""),
+        YGExperimentalFeature("feature", "", "ExperimentalFeature\\w+")
     )
 
     void(
         "ConfigSetUseWebDefaults",
         "Using the web defaults is the prefered configuration for new projects. Usage of non web defaults should be considered as legacy.",
 
-        YGConfigRef.const.IN("config", ""),
-        bool.IN("enabled", "")
+        YGConfigRef.const("config", ""),
+        bool("enabled", "")
     )
     bool(
         "ConfigGetUseWebDefaults",
         "",
 
-        YGConfigRef.const.IN("config", "")
+        YGConfigRef.const("config", "")
     )
 
     void(
         "ConfigSetCloneNodeFunc",
         "",
 
-        YGConfigRef.const.IN("config", ""),
-        nullable..YGCloneNodeFunc.IN("callback", "") // const function pointer in Yoga sources
+        YGConfigRef.const("config", ""),
+        nullable..YGCloneNodeFunc("callback", "") // const function pointer in Yoga sources
     )
 
-    YGConfigRef(
-        "ConfigGetDefault",
-        ""
-    )
+    YGConfigRef("ConfigGetDefault", "", void())
 
     void(
         "ConfigSetContext",
         "",
 
-        YGConfigRef.const.IN("config", ""),
-        opaque_p.IN("context", "")
+        YGConfigRef.const("config", ""),
+        opaque_p("context", "")
     )
     opaque_p(
         "ConfigGetContext",
         "",
 
-        YGConfigRef.const.IN("config", "")
+        YGConfigRef.const("config", "")
     )
 
     float(
         "RoundValueToPixelGrid",
         "",
 
-        float.IN("value", ""),
-        float.IN("pointScaleFactor", ""),
-        bool.IN("forceCeil", ""),
-        bool.IN("forceFloor", "")
+        float("value", ""),
+        float("pointScaleFactor", ""),
+        bool("forceCeil", ""),
+        bool("forceFloor", "")
     )
 
     // Enums
@@ -1257,7 +1242,7 @@ div {
             "${name}ToString",
             "",
 
-            type.IN("value", "", "$name\\w+")
+            type("value", "", "$name\\w+")
         )
     }
 

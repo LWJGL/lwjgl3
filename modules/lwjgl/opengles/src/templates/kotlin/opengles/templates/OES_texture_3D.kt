@@ -46,95 +46,95 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
         "TexImage3DOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLint.IN("border", ""),
-        GLenum.IN("format", ""),
-        GLenum.IN("type", ""),
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLint("border", ""),
+        GLenum("format", ""),
+        GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("pixels", "")
+        )..Unsafe..PIXEL_UNPACK_BUFFER..nullable..void.const.p("pixels", "")
     )
 
     void(
         "TexSubImage3DOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLint.IN("xoffset", ""),
-        GLint.IN("yoffset", ""),
-        GLint.IN("zoffset", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLenum.IN("format", ""),
-        GLenum.IN("type", ""),
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLint("xoffset", ""),
+        GLint("yoffset", ""),
+        GLint("zoffset", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLenum("format", ""),
+        GLenum("type", ""),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p.IN("pixels", "")
+        )..Unsafe..PIXEL_UNPACK_BUFFER..void.const.p("pixels", "")
     )
 
     void(
         "CopyTexSubImage3DOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLint.IN("xoffset", ""),
-        GLint.IN("yoffset", ""),
-        GLint.IN("zoffset", ""),
-        GLint.IN("x", ""),
-        GLint.IN("y", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLint("xoffset", ""),
+        GLint("yoffset", ""),
+        GLint("zoffset", ""),
+        GLint("x", ""),
+        GLint("y", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
     void(
         "CompressedTexImage3DOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLint.IN("border", ""),
-        AutoSize("data")..GLsizei.IN("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("data", "")
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLint("border", ""),
+        AutoSize("data")..GLsizei("imageSize", ""),
+        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "")
     )
 
     void(
         "CompressedTexSubImage3DOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLint.IN("level", ""),
-        GLint.IN("xoffset", ""),
-        GLint.IN("yoffset", ""),
-        GLint.IN("zoffset", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLenum.IN("format", ""),
-        AutoSize("data")..GLsizei.IN("imageSize", ""),
-        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "")
+        GLenum("target", ""),
+        GLint("level", ""),
+        GLint("xoffset", ""),
+        GLint("yoffset", ""),
+        GLint("zoffset", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLenum("format", ""),
+        AutoSize("data")..GLsizei("imageSize", ""),
+        PIXEL_UNPACK_BUFFER..void.const.p("data", "")
     )
 
     void(
         "FramebufferTexture3DOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLenum.IN("textarget", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLint.IN("zoffset", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLenum("textarget", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLint("zoffset", "")
     )
 }

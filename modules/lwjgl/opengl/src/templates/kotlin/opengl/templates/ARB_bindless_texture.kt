@@ -52,7 +52,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
         #GetTextureSamplerHandleARB() for details.
         """,
 
-        GLuint.IN("texture", "the texture object")
+        GLuint("texture", "the texture object")
     )
 
     GLuint64(
@@ -86,8 +86,8 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
         #INVALID_OPERATION is generated when calling SamplerParameter* functions to modify a sampler object referenced by one or more texture handles.
         """,
 
-        GLuint.IN("texture", "the texture object"),
-        GLuint.IN("sampler", "the sampler object")
+        GLuint("texture", "the texture object"),
+        GLuint("sampler", "the sampler object")
     )
 
     void(
@@ -101,7 +101,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
         generated if {@code handle} is not a valid texture handle, or if {@code handle} is already resident in the current GL context.
         """,
 
-        GLuint64.IN("handle", "the texture handle")
+        GLuint64("handle", "the texture handle")
     )
 
     void(
@@ -113,7 +113,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
         context.
         """,
 
-        GLuint64.IN("handle", "the texture handle")
+        GLuint64("handle", "the texture handle")
     )
 
     GLuint64(
@@ -154,11 +154,11 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
         handle will be returned if GetImageHandleARB is called multiple times with the same parameters.
         """,
 
-        GLuint.IN("texture", "the texture object"),
-        GLint.IN("level", "the texture level"),
-        GLboolean.IN("layered", "the layered flag"),
-        GLint.IN("layer", "the texture layer"),
-        GLenum.IN("format", "the texture format")
+        GLuint("texture", "the texture object"),
+        GLint("level", "the texture level"),
+        GLboolean("layered", "the layered flag"),
+        GLint("layer", "the texture layer"),
+        GLenum("format", "the texture format")
     )
 
     void(
@@ -176,24 +176,24 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
         the texture it references is not necessarily considered resident for the purposes of the #AreTexturesResident() command.
         """,
 
-        GLuint64.IN("handle", "the image handle"),
-        GLenum.IN("access", "the access type", "#READ_ONLY #WRITE_ONLY #READ_WRITE")
+        GLuint64("handle", "the image handle"),
+        GLenum("access", "the access type", "#READ_ONLY #WRITE_ONLY #READ_WRITE")
     )
 
     void(
         "MakeImageHandleNonResidentARB",
         "Makes an image handle inaccessible to shaders.",
 
-        GLuint64.IN("handle", "the image handle")
+        GLuint64("handle", "the image handle")
     )
 
-    val location = GLint.IN("location", "the uniform location")
+    val location = GLint("location", "the uniform location")
     val UniformHandleui64ARB = void(
         "UniformHandleui64ARB",
         "Loads a 64-bit unsigned integer handle into a uniform location corresponding to sampler or image variable types.",
 
         location,
-        GLuint64.IN("value", "the handle value")
+        GLuint64("value", "the handle value")
     )
 
     val UniformHandleui64vARB = void(
@@ -201,15 +201,15 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
         "Loads {@code count} 64-bit unsigned integer handles into a uniform location corresponding to sampler or image variable types.",
 
         location,
-        AutoSize("values")..GLsizei.IN("count", "the number of handles to load"),
-        GLuint64.const.p.IN("values", "a buffer from which to load the handles")
+        AutoSize("values")..GLsizei("count", "the number of handles to load"),
+        GLuint64.const.p("values", "a buffer from which to load the handles")
     )
 
     void(
         "ProgramUniformHandleui64ARB",
         "DSA version of #UniformHandleui64ARB().",
 
-        GLuint.IN("program", "the program object"),
+        GLuint("program", "the program object"),
         location,
         UniformHandleui64ARB["value"]
     )
@@ -218,7 +218,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
         "ProgramUniformHandleui64vARB",
         "DSA version of #UniformHandleui64vARB().",
 
-        GLuint.IN("program", "the program object"),
+        GLuint("program", "the program object"),
         location,
         UniformHandleui64vARB["count"],
         UniformHandleui64vARB["values"]
@@ -228,38 +228,38 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
         "IsTextureHandleResidentARB",
         "Returns #TRUE if the specified texture handle is resident in the current context.",
 
-        GLuint64.IN("handle", "the texture handle")
+        GLuint64("handle", "the texture handle")
     )
 
     GLboolean(
         "IsImageHandleResidentARB",
         "Returns #TRUE if the specified image handle is resident in the current context.",
 
-        GLuint64.IN("handle", "the image handle")
+        GLuint64("handle", "the image handle")
     )
 
     void(
         "VertexAttribL1ui64ARB",
         "Specifies the 64-bit unsigned integer handle value of a generic vertex attribute.",
 
-        GLuint.IN("index", "the index of the generic vertex attribute to be modified"),
-        GLuint64.IN("x", "the handle value")
+        GLuint("index", "the index of the generic vertex attribute to be modified"),
+        GLuint64("x", "the handle value")
     )
 
     void(
         "VertexAttribL1ui64vARB",
         "Pointer version of #VertexAttribL1ui64ARB().",
 
-        GLuint.IN("index", "the index of the generic vertex attribute to be modified"),
-        Check(1)..GLuint64.const.p.IN("v", "the vertex attribute buffer")
+        GLuint("index", "the index of the generic vertex attribute to be modified"),
+        Check(1)..GLuint64.const.p("v", "the vertex attribute buffer")
     )
 
     void(
         "GetVertexAttribLui64vARB",
         "Returns the 64-bit unsigned integer handle value of a generic vertex attribute parameter.",
 
-        GLuint.IN("index", "the generic vertex attribute index"),
-        GLenum.IN("pname", "the parameter to query"),
+        GLuint("index", "the generic vertex attribute index"),
+        GLenum("pname", "the parameter to query"),
         Check(1)..ReturnParam..GLuint64.p.OUT("params", "a buffer in which to place the returned data")
     )
 }

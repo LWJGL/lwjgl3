@@ -51,8 +51,8 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
         """,
 
         DISPLAY,
-        GLXFBConfig.IN("config", "the {@code GLXFBConfig}"),
-        nullable..GLXContext.IN(
+        GLXFBConfig("config", "the {@code GLXFBConfig}"),
+        nullable..GLXContext(
             "share_context",
             """
             if not #NULL, then all shareable data (excluding OpenGL texture objects named 0) will be shared by {@code share_context}, all other contexts
@@ -60,7 +60,7 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
             server context state for all sharing contexts must exist in a single address space.
             """
         ),
-        Bool.IN(
+        Bool(
             "direct",
             """
             direct rendering is requested if {@code direct} is {@code True}, and indirect rendering if {@code direct} is {@code False}. If
@@ -73,7 +73,7 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
             Use #IsDirect() to determine whether or not a request for a direct rendering context succeeded.
             """
         ),
-        nullable..NullTerminated..int.const.p.IN("attrib_list", "an optional list of attributes for the context, terminated with {@code None}")
+        nullable..NullTerminated..int.const.p("attrib_list", "an optional list of attributes for the context, terminated with {@code None}")
     )
 
 }

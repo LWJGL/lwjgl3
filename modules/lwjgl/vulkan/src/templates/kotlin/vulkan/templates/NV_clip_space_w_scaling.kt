@@ -208,9 +208,9 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
         ##VkViewportWScalingNV
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        uint32_t.IN("firstViewport", "the index of the first viewport whose parameters are updated by the command."),
-        AutoSize("pViewportWScalings")..uint32_t.IN("viewportCount", "the number of viewports whose parameters are updated by the command."),
-        VkViewportWScalingNV.const.p.IN("pViewportWScalings", "a pointer to an array of ##VkViewportWScalingNV structures specifying viewport parameters.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        uint32_t("firstViewport", "the index of the first viewport whose parameters are updated by the command."),
+        AutoSize("pViewportWScalings")..uint32_t("viewportCount", "the number of viewports whose parameters are updated by the command."),
+        VkViewportWScalingNV.const.p("pViewportWScalings", "a pointer to an array of ##VkViewportWScalingNV structures specifying viewport parameters.")
     )
 }

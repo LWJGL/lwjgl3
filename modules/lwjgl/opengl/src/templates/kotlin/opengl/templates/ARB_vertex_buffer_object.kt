@@ -120,23 +120,23 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
         "BindBufferARB",
         "Binds a named buffer object.",
 
-        GLenum.IN("target", "the target to which the buffer object is bound", BUFFER_OBJECT_TARGETS),
-        GLuint.IN("buffer", "the name of a buffer object")
+        GLenum("target", "the target to which the buffer object is bound", BUFFER_OBJECT_TARGETS),
+        GLuint("buffer", "the name of a buffer object")
     )
 
     void(
         "DeleteBuffersARB",
         "Deletes named buffer objects.",
 
-        AutoSize("buffers")..GLsizei.IN("n", "the number of buffer objects to be deleted"),
-        SingleValue("buffer")..GLuint.const.p.IN("buffers", "an array of buffer objects to be deleted")
+        AutoSize("buffers")..GLsizei("n", "the number of buffer objects to be deleted"),
+        SingleValue("buffer")..GLuint.const.p("buffers", "an array of buffer objects to be deleted")
     )
 
     void(
         "GenBuffersARB",
         "Generates buffer object names.",
 
-        AutoSize("buffers")..GLsizei.IN("n", "the number of buffer object names to be generated"),
+        AutoSize("buffers")..GLsizei("n", "the number of buffer object names to be generated"),
         ReturnParam..GLuint.p.OUT("buffers", "a buffer in which the generated buffer object names are stored")
     )
 
@@ -144,7 +144,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
         "IsBufferARB",
         "Determines if a name corresponds to a buffer object.",
 
-        GLuint.IN("buffer", "a value that may be the name of a buffer object")
+        GLuint("buffer", "a value that may be the name of a buffer object")
     )
 
     void(
@@ -169,45 +169,45 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
         )}
         """,
 
-        GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-        AutoSize("data")..GLsizeiptrARB.IN("size", "the size in bytes of the buffer object's new data store"),
+        GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+        AutoSize("data")..GLsizeiptrARB("size", "the size in bytes of the buffer object's new data store"),
         optional..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..void.const.p.IN("data", "a pointer to data that will be copied into the data store for initialization, or #NULL if no data is to be copied"),
-        GLenum.IN("usage", "the expected usage pattern of the data store", BUFFER_OBJECT_USAGE_HINTS)
+        )..void.const.p("data", "a pointer to data that will be copied into the data store for initialization, or #NULL if no data is to be copied"),
+        GLenum("usage", "the expected usage pattern of the data store", BUFFER_OBJECT_USAGE_HINTS)
     )
 
     void(
         "BufferSubDataARB",
         "Updates a subset of a buffer object's data store.",
 
-        GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-        GLintptrARB.IN("offset", "the offset into the buffer object's data store where data replacement will begin, measured in bytes"),
-        AutoSize("data")..GLsizeiptrARB.IN("size", "the size in bytes of the data store region being replaced"),
+        GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+        GLintptrARB("offset", "the offset into the buffer object's data store where data replacement will begin, measured in bytes"),
+        AutoSize("data")..GLsizeiptrARB("size", "the size in bytes of the data store region being replaced"),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..void.const.p.IN("data", "a pointer to the new data that will be copied into the data store")
+        )..void.const.p("data", "a pointer to the new data that will be copied into the data store")
     )
 
     void(
         "GetBufferSubDataARB",
         "Returns a subset of a buffer object's data store.",
 
-        GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-        GLintptrARB.IN("offset", "the offset into the buffer object's data store from which data will be returned, measured in bytes"),
-        AutoSize("data")..GLsizeiptrARB.IN("size", "the size in bytes of the data store region being returned"),
+        GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+        GLintptrARB("offset", "the offset into the buffer object's data store from which data will be returned, measured in bytes"),
+        AutoSize("data")..GLsizeiptrARB("size", "the size in bytes of the data store region being returned"),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..void.p.IN("data", "a pointer to the location where buffer object data is returned")
+        )..void.p("data", "a pointer to the location where buffer object data is returned")
     )
 
     MapPointer("glGetBufferParameteriARB(target, GL_BUFFER_SIZE_ARB)")..void.p(
@@ -223,8 +223,8 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
         )}
         """,
 
-        GLenum.IN("target", "the target buffer object being mapped", BUFFER_OBJECT_TARGETS),
-        GLenum.IN(
+        GLenum("target", "the target buffer object being mapped", BUFFER_OBJECT_TARGETS),
+        GLenum(
             "access",
             "the access policy, indicating whether it will be possible to read from, write to, or both read from and write to the buffer object's mapped data store",
             BUFFER_OBJECT_ACCESS_POLICIES
@@ -242,15 +242,15 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
         If such corruption has occurred, UnmapBuffer returns FALSE, and the contents of the buffer’s data store become undefined.
         """,
 
-        GLenum.IN("target", "the target buffer object being unmapped", BUFFER_OBJECT_TARGETS)
+        GLenum("target", "the target buffer object being unmapped", BUFFER_OBJECT_TARGETS)
     )
 
     void(
         "GetBufferParameterivARB",
         "Returns the value of a buffer object parameter.",
 
-        GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-        GLenum.IN("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
+        GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+        GLenum("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
         Check(1)..ReturnParam..GLint.p.OUT("params", "the requested parameter")
     )
 
@@ -258,8 +258,8 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
         "GetBufferPointervARB",
         "Returns the pointer to a mapped buffer object's data store.",
 
-        GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-        GLenum.IN("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER_ARB"),
+        GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+        GLenum("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER_ARB"),
         Check(1)..ReturnParam..void.p.p.OUT("params", "the pointer value specified by {@code pname}")
     )
 }

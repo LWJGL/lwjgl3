@@ -17,7 +17,7 @@ val OVRGL = "OVRGL".dependsOn(Module.OPENGL)?.nativeClass(Module.OVR, prefixMeth
         This class contains OpenGL specific functionality.
         """
 
-    val session = ovrSession.IN("session", "an {@code ovrSession} previously returned by #Create()")
+    val session = ovrSession("session", "an {@code ovrSession} previously returned by #Create()")
 
     ovrResult(
         "CreateTextureSwapChainGL",
@@ -33,7 +33,7 @@ val OVRGL = "OVRGL".dependsOn(Module.OPENGL)?.nativeClass(Module.OVR, prefixMeth
         """,
 
         session,
-        ovrTextureSwapChainDesc.const.p.IN("desc", "the requested texture properties. See notes for more info about texture format."),
+        ovrTextureSwapChainDesc.const.p("desc", "the requested texture properties. See notes for more info about texture format."),
         Check(1)..ovrTextureSwapChain.p.OUT(
             "out_TextureSwapChain",
             """
@@ -50,8 +50,8 @@ val OVRGL = "OVRGL".dependsOn(Module.OPENGL)?.nativeClass(Module.OVR, prefixMeth
         "Get a specific buffer within the chain as a GL texture name.",
 
         session,
-        ovrTextureSwapChain.IN("chain", "an {@code ovrTextureSwapChain} previously returned by #CreateTextureSwapChainGL()"),
-        int.IN(
+        ovrTextureSwapChain("chain", "an {@code ovrTextureSwapChain} previously returned by #CreateTextureSwapChainGL()"),
+        int(
             "index",
             """
             the index within the chain to retrieve. Must be between 0 and length (see #GetTextureSwapChainLength()) or may pass -1 to get the buffer at the
@@ -80,7 +80,7 @@ val OVRGL = "OVRGL".dependsOn(Module.OPENGL)?.nativeClass(Module.OVR, prefixMeth
         """,
 
         session,
-        ovrMirrorTextureDesc.const.p.IN("desc", "specifies the requested mirror texture description"),
+        ovrMirrorTextureDesc.const.p("desc", "specifies the requested mirror texture description"),
         Check(1)..ovrMirrorTexture.p.OUT(
             "out_MirrorTexture",
             """
@@ -102,7 +102,7 @@ val OVRGL = "OVRGL".dependsOn(Module.OPENGL)?.nativeClass(Module.OVR, prefixMeth
         """,
 
         session,
-        ovrMirrorTextureDesc.const.p.IN("desc", "the requested mirror texture description"),
+        ovrMirrorTextureDesc.const.p("desc", "the requested mirror texture description"),
         Check(1)..ovrMirrorTexture.p.OUT(
             "out_MirrorTexture",
             """
@@ -119,7 +119,7 @@ val OVRGL = "OVRGL".dependsOn(Module.OPENGL)?.nativeClass(Module.OVR, prefixMeth
         "Gets a the underlying buffer as a GL texture name.",
 
         session,
-        ovrMirrorTexture.IN("mirrorTexture", "an {@code OVRMirrorTexture} previously returned by #CreateMirrorTextureWithOptionsGL()"),
+        ovrMirrorTexture("mirrorTexture", "an {@code OVRMirrorTexture} previously returned by #CreateMirrorTextureWithOptionsGL()"),
         Check(1)..unsigned_int.p.OUT("out_TexId", "returns the GL texture object name associated with the mirror texture"),
 
         returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information."

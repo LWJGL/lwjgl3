@@ -34,7 +34,7 @@ val NV_conservative_raster_dilate = "NVConservativeRasterDilate".nativeClassGL("
         "ConservativeRasterParameterfNV",
         "",
 
-        GLenum.IN("pname", ""),
-        GLfloat.IN("value", "")
+        GLenum("pname", ""),
+        GLfloat("value", "")
     )
 }

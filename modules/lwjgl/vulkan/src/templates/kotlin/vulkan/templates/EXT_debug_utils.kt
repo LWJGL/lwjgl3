@@ -380,8 +380,8 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         ##VkDebugUtilsObjectNameInfoEXT
         """,
 
-        VkDevice.IN("device", "the device that created the object."),
-        VkDebugUtilsObjectNameInfoEXT.const.p.IN("pNameInfo", "a pointer to an instance of the ##VkDebugUtilsObjectNameInfoEXT structure specifying the parameters of the name to set on the object.")
+        VkDevice("device", "the device that created the object."),
+        VkDebugUtilsObjectNameInfoEXT.const.p("pNameInfo", "a pointer to an instance of the ##VkDebugUtilsObjectNameInfoEXT structure specifying the parameters of the name to set on the object.")
     )
 
     VkResult(
@@ -424,8 +424,8 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         ##VkDebugUtilsObjectTagInfoEXT
         """,
 
-        VkDevice.IN("device", "the device that created the object."),
-        VkDebugUtilsObjectTagInfoEXT.const.p.IN("pTagInfo", "a pointer to an instance of the ##VkDebugUtilsObjectTagInfoEXT structure specifying the parameters of the tag to attach to the object.")
+        VkDevice("device", "the device that created the object."),
+        VkDebugUtilsObjectTagInfoEXT.const.p("pTagInfo", "a pointer to an instance of the ##VkDebugUtilsObjectTagInfoEXT structure specifying the parameters of the tag to attach to the object.")
     )
 
     void(
@@ -457,8 +457,8 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         ##VkDebugUtilsLabelEXT
         """,
 
-        VkQueue.IN("queue", "the queue in which to start a debug label region."),
-        VkDebugUtilsLabelEXT.const.p.IN("pLabelInfo", "a pointer to an instance of the ##VkDebugUtilsLabelEXT structure specifying the parameters of the label region to open.")
+        VkQueue("queue", "the queue in which to start a debug label region."),
+        VkDebugUtilsLabelEXT.const.p("pLabelInfo", "a pointer to an instance of the ##VkDebugUtilsLabelEXT structure specifying the parameters of the label region to open.")
     )
 
     void(
@@ -493,7 +493,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         </table>
         """,
 
-        VkQueue.IN("queue", "the queue in which a debug label region should be closed.")
+        VkQueue("queue", "the queue in which a debug label region should be closed.")
     )
 
     void(
@@ -525,8 +525,8 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         ##VkDebugUtilsLabelEXT
         """,
 
-        VkQueue.IN("queue", "the queue into which a debug label will be inserted."),
-        VkDebugUtilsLabelEXT.const.p.IN("pLabelInfo", "a pointer to an instance of the ##VkDebugUtilsLabelEXT structure specifying the parameters of the label to insert.")
+        VkQueue("queue", "the queue into which a debug label will be inserted."),
+        VkDebugUtilsLabelEXT.const.p("pLabelInfo", "a pointer to an instance of the ##VkDebugUtilsLabelEXT structure specifying the parameters of the label to insert.")
     )
 
     void(
@@ -565,8 +565,8 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         ##VkDebugUtilsLabelEXT
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        VkDebugUtilsLabelEXT.const.p.IN("pLabelInfo", "a pointer to an instance of the ##VkDebugUtilsLabelEXT structure specifying the parameters of the label region to open.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
+        VkDebugUtilsLabelEXT.const.p("pLabelInfo", "a pointer to an instance of the ##VkDebugUtilsLabelEXT structure specifying the parameters of the label region to open.")
     )
 
     void(
@@ -609,7 +609,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded.")
     )
 
     void(
@@ -648,8 +648,8 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         ##VkDebugUtilsLabelEXT
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        VkDebugUtilsLabelEXT.const.p.IN("pLabelInfo", "")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
+        VkDebugUtilsLabelEXT.const.p("pLabelInfo", "")
     )
 
     VkResult(
@@ -692,9 +692,9 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         ##VkAllocationCallbacks, ##VkDebugUtilsMessengerCreateInfoEXT
         """,
 
-        VkInstance.IN("instance", "the instance the messenger will be used with."),
-        VkDebugUtilsMessengerCreateInfoEXT.const.p.IN("pCreateInfo", "points to a ##VkDebugUtilsMessengerCreateInfoEXT structure which contains the callback pointer as well as defines the conditions under which this messenger will trigger the callback."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkInstance("instance", "the instance the messenger will be used with."),
+        VkDebugUtilsMessengerCreateInfoEXT.const.p("pCreateInfo", "points to a ##VkDebugUtilsMessengerCreateInfoEXT structure which contains the callback pointer as well as defines the conditions under which this messenger will trigger the callback."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkDebugUtilsMessengerEXT.p.OUT("pMessenger", "a pointer to record the {@code VkDebugUtilsMessengerEXT} object created.")
     )
 
@@ -735,9 +735,9 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         ##VkAllocationCallbacks
         """,
 
-        VkInstance.IN("instance", "the instance where the callback was created."),
-        VkDebugUtilsMessengerEXT.IN("messenger", "the {@code VkDebugUtilsMessengerEXT} object to destroy. {@code messenger} is an externally synchronized object and <b>must</b> not be used on more than one thread at a time. This means that #DestroyDebugUtilsMessengerEXT() <b>must</b> not be called when a callback is active."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        VkInstance("instance", "the instance where the callback was created."),
+        VkDebugUtilsMessengerEXT("messenger", "the {@code VkDebugUtilsMessengerEXT} object to destroy. {@code messenger} is an externally synchronized object and <b>must</b> not be used on more than one thread at a time. This means that #DestroyDebugUtilsMessengerEXT() <b>must</b> not be called when a callback is active."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     void(
@@ -771,9 +771,9 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         ##VkDebugUtilsMessengerCallbackDataEXT
         """,
 
-        VkInstance.IN("instance", "the debug stream&#8217;s {@code VkInstance}."),
-        VkDebugUtilsMessageSeverityFlagBitsEXT.IN("messageSeverity", "the {@code VkDebugUtilsMessageSeverityFlagBitsEXT} severity of this event/message."),
-        VkDebugUtilsMessageTypeFlagsEXT.IN("messageTypes", "a bitmask of {@code VkDebugUtilsMessageTypeFlagBitsEXT} specifying which type of event(s) to identify with this message."),
-        VkDebugUtilsMessengerCallbackDataEXT.const.p.IN("pCallbackData", "contains all the callback related data in the ##VkDebugUtilsMessengerCallbackDataEXT structure.")
+        VkInstance("instance", "the debug stream&#8217;s {@code VkInstance}."),
+        VkDebugUtilsMessageSeverityFlagBitsEXT("messageSeverity", "the {@code VkDebugUtilsMessageSeverityFlagBitsEXT} severity of this event/message."),
+        VkDebugUtilsMessageTypeFlagsEXT("messageTypes", "a bitmask of {@code VkDebugUtilsMessageTypeFlagBitsEXT} specifying which type of event(s) to identify with this message."),
+        VkDebugUtilsMessengerCallbackDataEXT.const.p("pCallbackData", "contains all the callback related data in the ##VkDebugUtilsMessengerCallbackDataEXT structure.")
     )
 }

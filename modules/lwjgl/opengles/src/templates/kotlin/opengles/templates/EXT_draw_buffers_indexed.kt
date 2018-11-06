@@ -32,71 +32,71 @@ val EXT_draw_buffers_indexed = "EXTDrawBuffersIndexed".nativeClassGLES("EXT_draw
         "EnableiEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 
     void(
         "DisableiEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 
     void(
         "BlendEquationiEXT",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("mode", "")
+        GLuint("buf", ""),
+        GLenum("mode", "")
     )
 
     void(
         "BlendEquationSeparateiEXT",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("modeRGB", ""),
-        GLenum.IN("modeAlpha", "")
+        GLuint("buf", ""),
+        GLenum("modeRGB", ""),
+        GLenum("modeAlpha", "")
     )
 
     void(
         "BlendFunciEXT",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("src", ""),
-        GLenum.IN("dst", "")
+        GLuint("buf", ""),
+        GLenum("src", ""),
+        GLenum("dst", "")
     )
 
     void(
         "BlendFuncSeparateiEXT",
         "",
 
-        GLuint.IN("buf", ""),
-        GLenum.IN("srcRGB", ""),
-        GLenum.IN("dstRGB", ""),
-        GLenum.IN("srcAlpha", ""),
-        GLenum.IN("dstAlpha", "")
+        GLuint("buf", ""),
+        GLenum("srcRGB", ""),
+        GLenum("dstRGB", ""),
+        GLenum("srcAlpha", ""),
+        GLenum("dstAlpha", "")
     )
 
     void(
         "ColorMaskiEXT",
         "",
 
-        GLuint.IN("index", ""),
-        GLboolean.IN("r", ""),
-        GLboolean.IN("g", ""),
-        GLboolean.IN("b", ""),
-        GLboolean.IN("a", "")
+        GLuint("index", ""),
+        GLboolean("r", ""),
+        GLboolean("g", ""),
+        GLboolean("b", ""),
+        GLboolean("a", "")
     )
 
     GLboolean(
         "IsEnablediEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 }

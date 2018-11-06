@@ -76,8 +76,8 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
         "Gets the value of a GLX attribute for a {@code GLXFBConfigSGIX}.",
 
         DISPLAY,
-        GLXFBConfigSGIX.IN("config", "the {@code GLXFBConfigSGIX} being queried"),
-        int.IN("attribute", "the attribute to query"),
+        GLXFBConfigSGIX("config", "the {@code GLXFBConfigSGIX} being queried"),
+        int("attribute", "the attribute to query"),
         Check(1)..int.p.OUT("value", "returns the attribute value")
     )
 
@@ -86,8 +86,8 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
         "Gets {@code GLXFBConfigSGIX}s that match a list of attributes or to get the list of GLXFBConfigSGIXs that are available on the specified screen.",
 
         DISPLAY,
-        int.IN("screen", "the screen number"),
-        NullTerminated..nullable..int.const.p.IN("attrib_list", "an optional list of attributes, terminated with org.lwjgl.system.linux.{@code None}"),
+        int("screen", "the screen number"),
+        NullTerminated..nullable..int.const.p("attrib_list", "an optional list of attributes, terminated with org.lwjgl.system.linux.{@code None}"),
         AutoSizeResult..int.p.OUT("nelements", "the number of {@code GLXFBConfigSGIX} returned")
     )
 
@@ -96,8 +96,8 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
         "Creates a GLX pixmap using a {@code GLXFBConfigSGIX}.",
 
         DISPLAY,
-        GLXFBConfig.IN("config", "the {@code GLXFBConfigSGIX}"),
-        Pixmap.IN("pixmap", "the pixmap")
+        GLXFBConfig("config", "the {@code GLXFBConfigSGIX}"),
+        Pixmap("pixmap", "the pixmap")
     )
 
     GLXContext(
@@ -105,10 +105,10 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
         "Creates a GLX context using a {@code GLXFBConfigSGIX}.",
 
         DISPLAY,
-        GLXFBConfig.IN("config", "the {@code GLXFBConfigSGIX}"),
-        int.IN("render_type", "the render type", RenderTypes),
-        GLXContext.IN("share_list", "the GLX context to share objects with"),
-        Bool.IN("direct", "direct rendering request")
+        GLXFBConfig("config", "the {@code GLXFBConfigSGIX}"),
+        int("render_type", "the render type", RenderTypes),
+        GLXContext("share_list", "the GLX context to share objects with"),
+        Bool("direct", "direct rendering request")
     )
 
     XVisualInfo.p(
@@ -116,7 +116,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
         "Retrieves the associated visual of a {@code GLXFBConfigSGIX}.",
 
         DISPLAY,
-        GLXFBConfig.IN("config", "the {@code GLXFBConfigSGIX}")
+        GLXFBConfig("config", "the {@code GLXFBConfigSGIX}")
     )
 
     GLXFBConfigSGIX(
@@ -124,7 +124,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
         "Retrieves the {@code GLXFBConfigSGIX} associated with a visual.",
 
         DISPLAY,
-        XVisualInfo.p.IN("vis", "the visual")
+        XVisualInfo.p("vis", "the visual")
     )
 
 }

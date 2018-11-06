@@ -60,9 +60,9 @@ val SSE = "SSE".nativeClass(Module.SSE, prefix = "_MM", prefixMethod = "_MM_", l
         "SET_EXCEPTION_STATE",
         "Sets the exception state bits of the MXCSR control and status register.",
 
-        unsigned_int.IN("mask", "the exception state", ExceptionState)
+        unsigned_int("mask", "the exception state", ExceptionState)
     )
-    macro()..unsigned_int("GET_EXCEPTION_STATE", "Returns the exception state bits from the MXCSR control and status register.")
+    macro()..unsigned_int("GET_EXCEPTION_STATE", "Returns the exception state bits from the MXCSR control and status register.", void())
 
     macro()..void(
         "SET_EXCEPTION_MASK",
@@ -72,17 +72,17 @@ val SSE = "SSE".nativeClass(Module.SSE, prefix = "_MM", prefixMethod = "_MM_", l
         All six exception mask bits are always affected. Bits not set explicitly are cleared.
         """,
 
-        unsigned_int.IN("mask", "the exception mask", ExceptionMask, LinkMode.BITFIELD)
+        unsigned_int("mask", "the exception mask", ExceptionMask, LinkMode.BITFIELD)
     )
-    macro()..unsigned_int("GET_EXCEPTION_MASK", "Returns the exception mask bits from the MXCSR control and status register.")
+    macro()..unsigned_int("GET_EXCEPTION_MASK", "Returns the exception mask bits from the MXCSR control and status register.", void())
 
     macro()..void(
         "SET_ROUNDING_MODE",
         "Sets the rounding mode bits of the MXCSR control and status register.",
 
-        unsigned_int.IN("mode", "the rounding mode", RoundMode)
+        unsigned_int("mode", "the rounding mode", RoundMode)
     )
-    macro()..unsigned_int("GET_ROUNDING_MODE", "Returns the rounding mode bits from the MXCSR control and status register.")
+    macro()..unsigned_int("GET_ROUNDING_MODE", "Returns the rounding mode bits from the MXCSR control and status register.", void())
 
     macro()..void(
         "SET_FLUSH_ZERO_MODE",
@@ -93,7 +93,7 @@ val SSE = "SSE".nativeClass(Module.SSE, prefix = "_MM", prefixMethod = "_MM_", l
         faster.
         """,
 
-        unsigned_int.IN("mode", "the flush-to-zero mode", FlushZeroMode)
+        unsigned_int("mode", "the flush-to-zero mode", FlushZeroMode)
     )
-    macro()..unsigned_int("GET_FLUSH_ZERO_MODE", "Returns the flush zero bits from the MXCSR control and status register.")
+    macro()..unsigned_int("GET_FLUSH_ZERO_MODE", "Returns the flush zero bits from the MXCSR control and status register.", void())
 }

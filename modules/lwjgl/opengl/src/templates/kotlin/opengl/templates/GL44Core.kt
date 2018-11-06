@@ -87,21 +87,21 @@ val GL44C = "GL44C".nativeClassGL("GL44C") {
         another thread, it is as though #UnmapBuffer() is executed in each such context prior to deleting the existing data store.
         """,
 
-        GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
-        AutoSize("data")..GLsizeiptr.IN("size", "the size of the data store in basic machine units"),
+        GLenum("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
+        AutoSize("data")..GLsizeiptr("size", "the size of the data store in basic machine units"),
         optional..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..void.const.p.IN(
+        )..void.const.p(
             "data",
             """
             the address in client memory of the data that should be used to initialize the buffer's data store. If {@code data} is #NULL, the data store of the
             buffer is created, but contains undefined data. Otherwise, {@code data} should point to an array of at least {@code size} basic machine units.
             """
         ),
-        GLbitfield.IN(
+        GLbitfield(
             "flags",
             """
             the bitwise {@code OR} of flags describing the intended usage of the buffer object's data store by the application. Valid flags and their meanings
@@ -184,25 +184,25 @@ val GL44C = "GL44C".nativeClassGL("GL44C") {
         Negative values of {@code xoffset}, {@code yoffset}, and {@code zoffset} correspond to the coordinates of border texels.
         """,
 
-        GLuint.IN(
+        GLuint(
             "texture",
             """
             the texture to clear. It is an error if {@code texture} is zero or not the name of a texture object, if {@code texture} is a buffer texture, or if
             the texture image has a compressed internal format
             """
         ),
-        GLint.IN("level", "the texture level to clear"),
-        GLint.IN("xoffset", "the x coordinate of the texel subregion"),
-        GLint.IN("yoffset", "the y coordinate of the texel subregion"),
-        GLint.IN("zoffset", "the z coordinate of the texel subregion"),
-        GLsizei.IN("width", "the subregion width"),
-        GLsizei.IN("height", "the subregion height"),
-        GLsizei.IN("depth", "the subregion depth"),
-        GLenum.IN("format", "the format of the source data", PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
+        GLint("level", "the texture level to clear"),
+        GLint("xoffset", "the x coordinate of the texel subregion"),
+        GLint("yoffset", "the y coordinate of the texel subregion"),
+        GLint("zoffset", "the z coordinate of the texel subregion"),
+        GLsizei("width", "the subregion width"),
+        GLsizei("height", "the subregion height"),
+        GLsizei("depth", "the subregion depth"),
+        GLenum("format", "the format of the source data", PIXEL_DATA_FORMATS),
+        GLenum("type", "the type of the source data", PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..nullable..void.const.p.IN(
+        )..Unsafe..nullable..void.const.p(
             "data",
             """
             an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is #NULL,
@@ -219,19 +219,19 @@ val GL44C = "GL44C".nativeClassGL("GL44C") {
         have).
         """,
 
-        GLuint.IN(
+        GLuint(
             "texture",
             """
             the texture to clear. It is an error if {@code texture} is zero or not the name of a texture object, if {@code texture} is a buffer texture, or if
             the texture image has a compressed internal format
             """
         ),
-        GLint.IN("level", "the texture level to clear"),
-        GLenum.IN("format", "the format of the source data", PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
+        GLint("level", "the texture level to clear"),
+        GLenum("format", "the format of the source data", PIXEL_DATA_FORMATS),
+        GLenum("type", "the type of the source data", PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..nullable..void.const.p.IN(
+        )..Unsafe..nullable..void.const.p(
             "data",
             """
             an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is #NULL,
@@ -270,10 +270,10 @@ for ( i = 0; i < count; i++ ) {
         except that the single general buffer binding corresponding to {@code target} is unmodified, and that buffers will not be created if they do not exist.
         """,
 
-        GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
-        GLuint.IN("first", "the first binding"),
-        AutoSize("buffers")..GLsizei.IN("count", "the number of bindings"),
-        nullable..GLuint.const.p.IN("buffers", "an array of zeros or names of existing buffers objects")
+        GLenum("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
+        GLuint("first", "the first binding"),
+        AutoSize("buffers")..GLsizei("count", "the number of bindings"),
+        nullable..GLuint.const.p("buffers", "an array of zeros or names of existing buffers objects")
     )
 
     void(
@@ -300,12 +300,12 @@ for ( i = 0; i < count; i++ ) {
         points will still be changed if their corresponding values are valid.
         """,
 
-        GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
-        GLuint.IN("first", "the first binding"),
-        AutoSize("buffers", "offsets", "sizes")..GLsizei.IN("count", "the number of bindings"),
-        nullable..GLuint.const.p.IN("buffers", "an array of names of existing buffers objects"),
-        nullable..GLintptr.const.p.IN("offsets", "an array of offsets"),
-        nullable..GLsizeiptr.const.p.IN("sizes", "an array of sizes")
+        GLenum("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
+        GLuint("first", "the first binding"),
+        AutoSize("buffers", "offsets", "sizes")..GLsizei("count", "the number of bindings"),
+        nullable..GLuint.const.p("buffers", "an array of names of existing buffers objects"),
+        nullable..GLintptr.const.p("offsets", "an array of offsets"),
+        nullable..GLsizeiptr.const.p("sizes", "an array of sizes")
     )
 
     void(
@@ -346,9 +346,9 @@ for ( i = 0; i < count; i++ ) {
         be changed if their corresponding values are valid.
         """,
 
-        GLuint.IN("first", "the first texture objects"),
-        AutoSize("textures")..GLsizei.IN("count", "the number of texture objects"),
-        nullable..GLuint.const.p.IN("textures", "an array of zeros or names of existing texture objects")
+        GLuint("first", "the first texture objects"),
+        AutoSize("textures")..GLsizei("count", "the number of texture objects"),
+        nullable..GLuint.const.p("textures", "an array of zeros or names of existing texture objects")
     )
 
     void(
@@ -373,9 +373,9 @@ for ( i = 0; i < count; i++ ) {
         be changed if their corresponding values are valid.
         """,
 
-        GLuint.IN("first", "the first sampler object"),
-        AutoSize("samplers")..GLsizei.IN("count", "the number of sampler objects"),
-        nullable..GLuint.const.p.IN("samplers", "an array of zeros or names of existing sampler objects")
+        GLuint("first", "the first sampler object"),
+        AutoSize("samplers")..GLsizei("count", "the number of sampler objects"),
+        nullable..GLuint.const.p("samplers", "an array of zeros or names of existing sampler objects")
     )
 
     void(
@@ -411,9 +411,9 @@ for ( i = 0; i < count; i++ ) {
         values are valid.
         """,
 
-        GLuint.IN("first", "the first image unit"),
-        AutoSize("textures")..GLsizei.IN("count", "the number of image units"),
-        nullable..GLuint.const.p.IN("textures", "an array of zeros or names of existing texture objects")
+        GLuint("first", "the first image unit"),
+        AutoSize("textures")..GLsizei("count", "the number of image units"),
+        nullable..GLuint.const.p("textures", "an array of zeros or names of existing texture objects")
     )
 
     void(
@@ -443,11 +443,11 @@ for ( i = 0; i < count; i++ ) {
         other binding points will still be changed if their corresponding values are valid.
         """,
 
-        GLuint.IN("first", "the first vertex buffer binding point"),
-        AutoSize("buffers", "offsets", "strides")..GLsizei.IN("count", "the number of vertex buffer binding points"),
-        nullable..GLuint.const.p.IN("buffers", "an array of zeros or names of existing buffers objects"),
-        nullable..GLintptr.const.p.IN("offsets", "an array of offses"),
-        nullable..GLsizei.const.p.IN("strides", "an array of stride values")
+        GLuint("first", "the first vertex buffer binding point"),
+        AutoSize("buffers", "offsets", "strides")..GLsizei("count", "the number of vertex buffer binding points"),
+        nullable..GLuint.const.p("buffers", "an array of zeros or names of existing buffers objects"),
+        nullable..GLintptr.const.p("offsets", "an array of offses"),
+        nullable..GLsizei.const.p("strides", "an array of stride values")
     )
 
     // ARB_query_buffer_object

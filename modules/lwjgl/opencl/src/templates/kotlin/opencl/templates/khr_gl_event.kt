@@ -31,8 +31,8 @@ val khr_gl_event = "KHRGLEvent".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativ
         "CreateEventFromGLsyncKHR",
         "Creates an OpenCL event object from an OpenGL fence sync object.",
 
-        cl_context.IN("context", "the OpenCL context in which to create the event object"),
-        GLsync.IN("sync", "the OpenGL fence sync object"),
+        cl_context("context", "the OpenCL context in which to create the event object"),
+        GLsync("sync", "the OpenGL fence sync object"),
         ERROR_RET
     )
 }

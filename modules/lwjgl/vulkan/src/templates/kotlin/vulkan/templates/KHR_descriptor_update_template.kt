@@ -112,9 +112,9 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         "CreateDescriptorUpdateTemplateKHR",
         "See #CreateDescriptorUpdateTemplate().",
 
-        VkDevice.IN("device", "the logical device that creates the descriptor update template."),
-        VkDescriptorUpdateTemplateCreateInfo.const.p.IN("pCreateInfo", "a pointer to an instance of the ##VkDescriptorUpdateTemplateCreateInfo structure specifying the set of descriptors to update with a single call to #CmdPushDescriptorSetWithTemplateKHR() or #UpdateDescriptorSetWithTemplate()."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkDevice("device", "the logical device that creates the descriptor update template."),
+        VkDescriptorUpdateTemplateCreateInfo.const.p("pCreateInfo", "a pointer to an instance of the ##VkDescriptorUpdateTemplateCreateInfo structure specifying the set of descriptors to update with a single call to #CmdPushDescriptorSetWithTemplateKHR() or #UpdateDescriptorSetWithTemplate()."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkDescriptorUpdateTemplate.p.OUT("pDescriptorUpdateTemplate", "points to a {@code VkDescriptorUpdateTemplate} handle in which the resulting descriptor update template object is returned.")
     )
 
@@ -122,19 +122,19 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         "DestroyDescriptorUpdateTemplateKHR",
         "See #DestroyDescriptorUpdateTemplate().",
 
-        VkDevice.IN("device", "the logical device that has been used to create the descriptor update template"),
-        VkDescriptorUpdateTemplate.IN("descriptorUpdateTemplate", "the descriptor update template to destroy."),
-        nullable..VkAllocationCallbacks.const.p.IN("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        VkDevice("device", "the logical device that has been used to create the descriptor update template"),
+        VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "the descriptor update template to destroy."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     void(
         "UpdateDescriptorSetWithTemplateKHR",
         "See #UpdateDescriptorSetWithTemplate().",
 
-        VkDevice.IN("device", "the logical device that updates the descriptor sets."),
-        VkDescriptorSet.IN("descriptorSet", "the descriptor set to update"),
-        VkDescriptorUpdateTemplate.IN("descriptorUpdateTemplate", "the {@code VkDescriptorUpdateTemplate} which specifies the update mapping between {@code pData} and the descriptor set to update."),
-        opaque_const_p.IN("pData", "a pointer to memory which contains one or more structures of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} used to write the descriptors.")
+        VkDevice("device", "the logical device that updates the descriptor sets."),
+        VkDescriptorSet("descriptorSet", "the descriptor set to update"),
+        VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "the {@code VkDescriptorUpdateTemplate} which specifies the update mapping between {@code pData} and the descriptor set to update."),
+        opaque_const_p("pData", "a pointer to memory which contains one or more structures of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} used to write the descriptors.")
     )
 
     DependsOn("VK_KHR_push_descriptor")..void(
@@ -235,10 +235,10 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
 ￿vkCmdPushDescriptorSetWithTemplateKHR(myCmdBuffer, myDescriptorUpdateTemplate, myPipelineLayout, 0,&amp;appData);</code></pre>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer that the descriptors will be recorded in."),
-        VkDescriptorUpdateTemplate.IN("descriptorUpdateTemplate", "A descriptor update template which defines how to interpret the descriptor information in pData."),
-        VkPipelineLayout.IN("layout", "a {@code VkPipelineLayout} object used to program the bindings. It <b>must</b> be compatible with the layout used to create the {@code descriptorUpdateTemplate} handle."),
-        uint32_t.IN("set", "the set number of the descriptor set in the pipeline layout that will be updated. This <b>must</b> be the same number used to create the {@code descriptorUpdateTemplate} handle."),
-        opaque_const_p.IN("pData", "Points to memory which contains the descriptors for the templated update.")
+        VkCommandBuffer("commandBuffer", "the command buffer that the descriptors will be recorded in."),
+        VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "A descriptor update template which defines how to interpret the descriptor information in pData."),
+        VkPipelineLayout("layout", "a {@code VkPipelineLayout} object used to program the bindings. It <b>must</b> be compatible with the layout used to create the {@code descriptorUpdateTemplate} handle."),
+        uint32_t("set", "the set number of the descriptor set in the pipeline layout that will be updated. This <b>must</b> be the same number used to create the {@code descriptorUpdateTemplate} handle."),
+        opaque_const_p("pData", "Points to memory which contains the descriptors for the templated update.")
     )
 }

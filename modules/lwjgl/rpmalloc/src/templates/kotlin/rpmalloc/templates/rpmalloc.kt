@@ -46,53 +46,25 @@ ENABLE_WARNINGS()""")
         "free",
         "aligned_alloc"
     ).forEach {
-        Code(nativeCall = "${t}return (jlong)(intptr_t)&rp$it;")..internal..opaque_p(
-            "${it}_address",
-            "The #$it() function address."
-        )
+        Code(nativeCall = "${t}return (jlong)(intptr_t)&rp$it;")..internal..opaque_p("${it}_address", "The #$it() function address.", void())
     }
 
-    intb(
-        "malloc_initialize",
-        "Initializes allocator with default configuration."
-    )
+    intb("malloc_initialize", "Initializes allocator with default configuration.", void())
 
     intb(
         "malloc_initialize_config",
         "Initializes allocator with given configuration.",
 
-        nullable..rpmalloc_config_t.const.p.IN("config", "an optional ##RPMallocConfig instance")
+        nullable..rpmalloc_config_t.const.p("config", "an optional ##RPMallocConfig instance")
     )
 
-    Nonnull..rpmalloc_config_t.const.p(
-        "malloc_config",
-        "Gets allocator configuration."
-    )
+    Nonnull..rpmalloc_config_t.const.p("malloc_config", "Gets allocator configuration.", void())
 
-    void(
-        "malloc_finalize",
-        "Finalizes allocator."
-    )
-
-    void(
-        "malloc_thread_initialize",
-        "Initializes allocator for calling thread."
-    )
-
-    void(
-        "malloc_thread_finalize",
-        "Finalizes allocator for calling thread."
-    )
-
-    void(
-        "malloc_thread_collect",
-        "Performs deferred deallocations pending for the calling thread heap."
-    )
-
-    intb(
-        "malloc_is_thread_initialized",
-        "Query if allocator is initialized for calling thread."
-    )
+    void("malloc_finalize", "Finalizes allocator.")
+    void("malloc_thread_initialize", "Initializes allocator for calling thread.")
+    void("malloc_thread_finalize", "Finalizes allocator for calling thread.")
+    void("malloc_thread_collect", "Performs deferred deallocations pending for the calling thread heap.")
+    intb("malloc_is_thread_initialized", "Query if allocator is initialized for calling thread.", void())
 
     void(
         "malloc_thread_statistics",
@@ -112,57 +84,57 @@ ENABLE_WARNINGS()""")
         "malloc",
         "Allocates a memory block of at least the given size.",
 
-        AutoSizeResult..size_t.IN("size", "")
+        AutoSizeResult..size_t("size", "")
     )
 
     void(
         "free",
         "Frees the given memory block.",
 
-        MultiTypeAll..Unsafe..nullable..void.p.IN("ptr", "")
+        MultiTypeAll..Unsafe..nullable..void.p("ptr", "")
     )
 
     void.p(
         "calloc",
         "Allocates a memory block of at least the given size and zero initializes it.",
 
-        AutoSizeResult..size_t.IN("num", ""),
-        AutoSizeResult..size_t.IN("size", "")
+        AutoSizeResult..size_t("num", ""),
+        AutoSizeResult..size_t("size", "")
     )
 
     void.p(
         "realloc",
         "Reallocates the given block to at least the given size.",
 
-        Unsafe..nullable..void.p.IN("ptr", ""),
-        AutoSizeResult..size_t.IN("size", "")
+        Unsafe..nullable..void.p("ptr", ""),
+        AutoSizeResult..size_t("size", "")
     )
 
     void.p(
         "aligned_realloc",
         "Reallocates the given block to at least the given size and alignment, with optional control flags (see #MALLOC_NO_PRESERVE)",
 
-        nullable..void.p.IN("ptr", ""),
-        size_t.IN("alignment", ""),
-        AutoSizeResult..size_t.IN("size", ""),
-        AutoSize("ptr")..size_t.IN("oldsize", ""),
-        unsigned_int.IN("flags", "")
+        nullable..void.p("ptr", ""),
+        size_t("alignment", ""),
+        AutoSizeResult..size_t("size", ""),
+        AutoSize("ptr")..size_t("oldsize", ""),
+        unsigned_int("flags", "")
     )
 
     void.p(
         "aligned_alloc",
         "Allocates a memory block of at least the given size and alignment.",
 
-        size_t.IN("alignment", ""),
-        AutoSizeResult..size_t.IN("size", "")
+        size_t("alignment", ""),
+        AutoSizeResult..size_t("size", "")
     )
 
     void.p(
         "memalign",
         "Allocates a memory block of at least the given size and alignment.",
 
-        size_t.IN("alignment", ""),
-        AutoSizeResult..size_t.IN("size", "")
+        size_t("alignment", ""),
+        AutoSizeResult..size_t("size", "")
     )
 
     int(
@@ -170,14 +142,14 @@ ENABLE_WARNINGS()""")
         "Allocates a memory block of at least the given size and alignment.",
 
         Check(1)..void.p.p.OUT("memptr", ""),
-        size_t.IN("alignment", ""),
-        size_t.IN("size", "")
+        size_t("alignment", ""),
+        size_t("size", "")
     )
 
     size_t(
         "malloc_usable_size",
         "Queries the usable size of the given memory block (from given pointer to the end of block).",
 
-        MultiTypeAll..Unsafe..void.p.IN("ptr", "")
+        MultiTypeAll..Unsafe..void.p("ptr", "")
     )
 }

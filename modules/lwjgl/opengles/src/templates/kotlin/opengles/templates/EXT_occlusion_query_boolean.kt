@@ -44,7 +44,7 @@ val EXT_occlusion_query_boolean = "EXTOcclusionQueryBoolean".nativeClassGLES("EX
         "GenQueriesEXT",
         "",
 
-        AutoSize("ids")..GLsizei.IN("n", ""),
+        AutoSize("ids")..GLsizei("n", ""),
         ReturnParam..GLuint.p.OUT("ids", "")
     )
 
@@ -52,38 +52,38 @@ val EXT_occlusion_query_boolean = "EXTOcclusionQueryBoolean".nativeClassGLES("EX
         "DeleteQueriesEXT",
         "",
 
-        AutoSize("ids")..GLsizei.IN("n", ""),
-        SingleValue("id")..GLuint.const.p.IN("ids", "")
+        AutoSize("ids")..GLsizei("n", ""),
+        SingleValue("id")..GLuint.const.p("ids", "")
     )
 
     GLboolean(
         "IsQueryEXT",
         "",
 
-        GLuint.IN("id", "")
+        GLuint("id", "")
     )
 
     void(
         "BeginQueryEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("id", "")
+        GLenum("target", ""),
+        GLuint("id", "")
     )
 
     void(
         "EndQueryEXT",
         "",
 
-        GLenum.IN("target", "")
+        GLenum("target", "")
     )
 
     void(
         "GetQueryivEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("pname", ""),
+        GLenum("target", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLint.p.OUT("params", "")
     )
 
@@ -91,8 +91,8 @@ val EXT_occlusion_query_boolean = "EXTOcclusionQueryBoolean".nativeClassGLES("EX
         "GetQueryObjectuivEXT",
         "",
 
-        GLuint.IN("id", ""),
-        GLenum.IN("pname", ""),
+        GLuint("id", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..GLuint.p.OUT("params", "")
     )
 }

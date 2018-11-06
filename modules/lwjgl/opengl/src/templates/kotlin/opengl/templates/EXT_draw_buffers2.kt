@@ -25,19 +25,19 @@ val EXT_draw_buffers2 = "EXTDrawBuffers2".nativeClassGL("EXT_draw_buffers2", pos
         "ColorMaskIndexedEXT",
         "",
 
-        GLuint.IN("index", ""),
-        GLboolean.IN("r", ""),
-        GLboolean.IN("g", ""),
-        GLboolean.IN("b", ""),
-        GLboolean.IN("a", "")
+        GLuint("index", ""),
+        GLboolean("r", ""),
+        GLboolean("g", ""),
+        GLboolean("b", ""),
+        GLboolean("a", "")
     )
 
     void(
         "GetBooleanIndexedvEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
+        GLenum("target", ""),
+        GLuint("index", ""),
         Check(1)..ReturnParam..GLboolean.p.OUT("data", "")
     )
 
@@ -45,8 +45,8 @@ val EXT_draw_buffers2 = "EXTDrawBuffers2".nativeClassGL("EXT_draw_buffers2", pos
         "GetIntegerIndexedvEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
+        GLenum("target", ""),
+        GLuint("index", ""),
         Check(1)..ReturnParam..GLint.p.OUT("data", "")
     )
 
@@ -54,23 +54,23 @@ val EXT_draw_buffers2 = "EXTDrawBuffers2".nativeClassGL("EXT_draw_buffers2", pos
         "EnableIndexedEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 
     void(
         "DisableIndexedEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 
     GLboolean(
         "IsEnabledIndexedEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 }

@@ -30,11 +30,11 @@ val NV_post_sub_buffer = "NVPostSubBuffer".nativeClassEGL("NV_post_sub_buffer", 
         "PostSubBufferNV",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSurface.IN("surface", ""),
-        EGLint.IN("x", ""),
-        EGLint.IN("y", ""),
-        EGLint.IN("width", ""),
-        EGLint.IN("height", "")
+        EGLDisplay("dpy", ""),
+        EGLSurface("surface", ""),
+        EGLint("x", ""),
+        EGLint("y", ""),
+        EGLint("width", ""),
+        EGLint("height", "")
     )
 }

@@ -40,13 +40,13 @@ val OES_primitive_bounding_box = "OESPrimitiveBoundingBox".nativeClassGLES("OES_
         "PrimitiveBoundingBoxOES",
         "",
 
-        GLfloat.IN("minX", ""),
-        GLfloat.IN("minY", ""),
-        GLfloat.IN("minZ", ""),
-        GLfloat.IN("minW", ""),
-        GLfloat.IN("maxX", ""),
-        GLfloat.IN("maxY", ""),
-        GLfloat.IN("maxZ", ""),
-        GLfloat.IN("maxW", "")
+        GLfloat("minX", ""),
+        GLfloat("minY", ""),
+        GLfloat("minZ", ""),
+        GLfloat("minW", ""),
+        GLfloat("maxX", ""),
+        GLfloat("maxY", ""),
+        GLfloat("maxZ", ""),
+        GLfloat("maxW", "")
     )
 }

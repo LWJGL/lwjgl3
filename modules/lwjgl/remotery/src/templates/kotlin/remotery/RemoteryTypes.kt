@@ -65,8 +65,8 @@ val rmtMallocPtr = Module.REMOTERY.callback {
     opaque_p(
         "RMTMalloc", "",
 
-        opaque_p.IN("mm_context", ""),
-        rmtU32.IN("size", ""),
+        opaque_p("mm_context", ""),
+        rmtU32("size", ""),
 
         nativeType = "rmtMallocPtr"
     )
@@ -76,9 +76,9 @@ val rmtReallocPtr = Module.REMOTERY.callback {
     opaque_p(
         "RMTRealloc", "",
 
-        opaque_p.IN("mm_context", ""),
-        void.p.IN("ptr", ""),
-        rmtU32.IN("size", ""),
+        opaque_p("mm_context", ""),
+        void.p("ptr", ""),
+        rmtU32("size", ""),
 
         nativeType = "rmtReallocPtr"
     )
@@ -88,8 +88,8 @@ val rmtFreePtr = Module.REMOTERY.callback {
     opaque_p(
         "RMTFree", "",
 
-        opaque_p.IN("mm_context", ""),
-        void.p.IN("ptr", ""),
+        opaque_p("mm_context", ""),
+        void.p("ptr", ""),
 
         nativeType = "rmtFreePtr"
     )
@@ -99,8 +99,8 @@ val rmtInputHandlerPtr = Module.REMOTERY.callback {
     opaque_p(
         "RMTInputHandler", "",
 
-        charASCII.const.p.IN("text", ""),
-        opaque_p.IN("context", ""),
+        charASCII.const.p("text", ""),
+        opaque_p("context", ""),
 
         nativeType = "rmtInputHandlerPtr"
     )

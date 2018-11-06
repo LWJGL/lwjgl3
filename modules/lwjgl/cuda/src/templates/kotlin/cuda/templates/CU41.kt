@@ -24,7 +24,7 @@ val CU41 = "CU41".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Check(1)..CUdevice.p.OUT("dev", ""),
-        charASCII.const.p.IN("pciBusId", "")
+        charASCII.const.p("pciBusId", "")
     )
 
     CUresult(
@@ -32,8 +32,8 @@ val CU41 = "CU41".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         charASCII.p.OUT("pciBusId", ""),
-        AutoSize("pciBusId")..int.IN("len", ""),
-        CUdevice.IN("dev", "")
+        AutoSize("pciBusId")..int("len", ""),
+        CUdevice("dev", "")
     )
 
     CUresult(
@@ -41,7 +41,7 @@ val CU41 = "CU41".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         CUipcEventHandle.p.OUT("pHandle", ""),
-        CUevent.IN("event", "")
+        CUevent("event", "")
     )
 
     CUresult(
@@ -49,7 +49,7 @@ val CU41 = "CU41".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Check(1)..CUevent.p.OUT("phEvent", ""),
-        CUipcEventHandle.IN("handle", "")
+        CUipcEventHandle("handle", "")
     )
 
     CUresult(
@@ -57,7 +57,7 @@ val CU41 = "CU41".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         CUipcMemHandle.p.OUT("pHandle", ""),
-        CUdeviceptr.IN("dptr", "")
+        CUdeviceptr("dptr", "")
     )
 
     CUresult(
@@ -65,14 +65,14 @@ val CU41 = "CU41".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Check(1)..CUdeviceptr.p.OUT("pdptr", ""),
-        CUipcMemHandle.IN("handle", ""),
-        unsigned_int.IN("Flags", "")
+        CUipcMemHandle("handle", ""),
+        unsigned_int("Flags", "")
     )
 
     CUresult(
         "IpcCloseMemHandle",
         "",
 
-        CUdeviceptr.IN("dptr", "")
+        CUdeviceptr("dptr", "")
     )
 }

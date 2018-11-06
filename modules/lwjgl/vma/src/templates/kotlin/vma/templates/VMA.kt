@@ -1283,7 +1283,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         LWJGL: Use ##VmaVulkanFunctions{@code ::set(VkInstance, VkDevice)} to populate the ##VmaAllocatorCreateInfo{@code ::pVulkanFunctions} struct.
         """,
 
-        VmaAllocatorCreateInfo.const.p.IN("pCreateInfo", ""),
+        VmaAllocatorCreateInfo.const.p("pCreateInfo", ""),
         Check(1)..VmaAllocator.p.OUT("pAllocator", "")
     )
 
@@ -1291,7 +1291,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         "DestroyAllocator",
         "Destroys allocator object.",
 
-        VmaAllocator.IN("allocator", "")
+        VmaAllocator("allocator", "")
     )
 
     void(
@@ -1301,8 +1301,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         own.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        Check(1)..VkPhysicalDeviceProperties.const.p.p.IN("ppPhysicalDeviceProperties", "")
+        VmaAllocator("allocator", ""),
+        Check(1)..VkPhysicalDeviceProperties.const.p.p("ppPhysicalDeviceProperties", "")
     )
 
     void(
@@ -1312,8 +1312,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         your own.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        Check(1)..VkPhysicalDeviceMemoryProperties.const.p.p.IN("ppPhysicalDeviceMemoryProperties", "")
+        VmaAllocator("allocator", ""),
+        Check(1)..VkPhysicalDeviceMemoryProperties.const.p.p("ppPhysicalDeviceMemoryProperties", "")
     )
 
     void(
@@ -1324,8 +1324,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         This is just a convenience function. Same information can be obtained using #GetMemoryProperties().
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        uint32_t.IN("memoryTypeIndex", ""),
+        VmaAllocator("allocator", ""),
+        uint32_t("memoryTypeIndex", ""),
         Check(1)..VkMemoryPropertyFlags.p.OUT("pFlags", "")
     )
 
@@ -1338,15 +1338,15 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         inform the allocator when a new frame begins. Allocations queried using #GetAllocationInfo() cannot become lost in the current frame.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        uint32_t.IN("frameIndex", "")
+        VmaAllocator("allocator", ""),
+        uint32_t("frameIndex", "")
     )
 
     void(
         "CalculateStats",
         "Retrieves statistics from current state of the Allocator.",
 
-        VmaAllocator.IN("allocator", ""),
+        VmaAllocator("allocator", ""),
         VmaStats.p.OUT("pStats", "")
     )
 
@@ -1354,17 +1354,17 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         "BuildStatsString",
         "Builds and returns statistics as string in JSON format.",
 
-        VmaAllocator.IN("allocator", ""),
+        VmaAllocator("allocator", ""),
         Check(1)..charASCII.p.p.OUT("ppStatsString", "must be freed using #FreeStatsString() function"),
-        VkBool32.IN("detailedMap", "")
+        VkBool32("detailedMap", "")
     )
 
     void(
         "FreeStatsString",
         "",
 
-        VmaAllocator.IN("allocator", ""),
-        charASCII.p.IN("pStatsString", "")
+        VmaAllocator("allocator", ""),
+        charASCII.p("pStatsString", "")
     )
 
     VkResult(
@@ -1381,9 +1381,9 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         )}
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        uint32_t.IN("memoryTypeBits", ""),
-        VmaAllocationCreateInfo.const.p.IN("pAllocationCreateInfo", ""),
+        VmaAllocator("allocator", ""),
+        uint32_t("memoryTypeBits", ""),
+        VmaAllocationCreateInfo.const.p("pAllocationCreateInfo", ""),
         Check(1)..uint32_t.p.OUT("pMemoryTypeIndex", ""),
 
         returnDoc =
@@ -1412,9 +1412,9 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         )}
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VkBufferCreateInfo.const.p.IN("pBufferCreateInfo", ""),
-        VmaAllocationCreateInfo.const.p.IN("pAllocationCreateInfo", ""),
+        VmaAllocator("allocator", ""),
+        VkBufferCreateInfo.const.p("pBufferCreateInfo", ""),
+        VmaAllocationCreateInfo.const.p("pAllocationCreateInfo", ""),
         Check(1)..uint32_t.p.OUT("pMemoryTypeIndex", "")
     )
 
@@ -1434,9 +1434,9 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         )}
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VkImageCreateInfo.const.p.IN("pImageCreateInfo", ""),
-        VmaAllocationCreateInfo.const.p.IN("pAllocationCreateInfo", ""),
+        VmaAllocator("allocator", ""),
+        VkImageCreateInfo.const.p("pImageCreateInfo", ""),
+        VmaAllocationCreateInfo.const.p("pAllocationCreateInfo", ""),
         Check(1)..uint32_t.p.OUT("pMemoryTypeIndex", "")
     )
 
@@ -1444,8 +1444,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         "CreatePool",
         "Allocates Vulkan device memory and creates {@code VmaPool} object.",
 
-        VmaAllocator.IN("allocator", "Allocator object"),
-        VmaPoolCreateInfo.const.p.IN("pCreateInfo", "parameters of pool to create"),
+        VmaAllocator("allocator", "Allocator object"),
+        VmaPoolCreateInfo.const.p("pCreateInfo", "parameters of pool to create"),
         Check(1)..VmaPool.p.OUT("pPool", "handle to created pool")
     )
 
@@ -1453,16 +1453,16 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         "DestroyPool",
         "Destroys {@code VmaPool} object and frees Vulkan device memory.",
 
-        VmaAllocator.IN("allocator", ""),
-        VmaPool.IN("pool", "")
+        VmaAllocator("allocator", ""),
+        VmaPool("pool", "")
     )
 
     void(
         "GetPoolStats",
         "Retrieves statistics of existing VmaPool object.",
 
-        VmaAllocator.IN("allocator", "Allocator object"),
-        VmaPool.IN("pool", "pool object"),
+        VmaAllocator("allocator", "Allocator object"),
+        VmaPool("pool", "pool object"),
         VmaPoolStats.p.OUT("pPoolStats", "statistics of specified pool")
     )
 
@@ -1470,8 +1470,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         "MakePoolAllocationsLost",
         "Marks all allocations in given pool as lost if they are not used in current frame or ##VmaPoolCreateInfo{@code ::frameInUseCount} back from now.",
 
-        VmaAllocator.IN("allocator", "Allocator object"),
-        VmaPool.IN("pool", "pool"),
+        VmaAllocator("allocator", "Allocator object"),
+        VmaPool("pool", "pool"),
         ReturnParam..nullable..Check(1)..size_t.p.OUT(
             "pLostAllocationCount",
             "number of allocations marked as lost. Optional - pass null if you don't need this information."
@@ -1486,8 +1486,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         Corruption detection is enabled only when {@code VMA_DEBUG_DETECT_CORRUPTION} macro is defined to nonzero, {@code VMA_DEBUG_MARGIN} is defined to
         nonzero and the pool is created in memory type that is {@code HOST_VISIBLE} and {@code HOST_COHERENT}.
         """,
-        VmaAllocator.IN("allocator", ""),
-        VmaPool.IN("pool", ""),
+        VmaAllocator("allocator", ""),
+        VmaPool("pool", ""),
 
         returnDoc =
         """
@@ -1514,9 +1514,9 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         It is recommended to use #AllocateMemoryForBuffer(), #AllocateMemoryForImage(), #CreateBuffer(), #CreateImage() instead whenever possible.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VkMemoryRequirements.const.p.IN("pVkMemoryRequirements", ""),
-        VmaAllocationCreateInfo.const.p.IN("pCreateInfo", ""),
+        VmaAllocator("allocator", ""),
+        VkMemoryRequirements.const.p("pVkMemoryRequirements", ""),
+        VmaAllocationCreateInfo.const.p("pCreateInfo", ""),
         Check(1)..VmaAllocation.p.OUT("pAllocation", "handle to allocated memory"),
         nullable..VmaAllocationInfo.p.OUT(
             "pAllocationInfo",
@@ -1532,9 +1532,9 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         You should free the memory using #FreeMemory().
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VkBuffer.IN("buffer", ""),
-        VmaAllocationCreateInfo.const.p.IN("pCreateInfo", ""),
+        VmaAllocator("allocator", ""),
+        VkBuffer("buffer", ""),
+        VmaAllocationCreateInfo.const.p("pCreateInfo", ""),
         Check(1)..VmaAllocation.p.OUT("pAllocation", "handle to allocated memory"),
         nullable..VmaAllocationInfo.p.OUT(
             "pAllocationInfo",
@@ -1546,9 +1546,9 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         "AllocateMemoryForImage",
         "Function similar to #AllocateMemoryForBuffer().",
 
-        VmaAllocator.IN("allocator", ""),
-        VkImage.IN("image", ""),
-        VmaAllocationCreateInfo.const.p.IN("pCreateInfo", ""),
+        VmaAllocator("allocator", ""),
+        VkImage("image", ""),
+        VmaAllocationCreateInfo.const.p("pCreateInfo", ""),
         Check(1)..VmaAllocation.p.OUT("pAllocation", "handle to allocated memory"),
         nullable..VmaAllocationInfo.p.OUT(
             "pAllocationInfo",
@@ -1560,8 +1560,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         "FreeMemory",
         "Frees memory previously allocated using #AllocateMemory(), #AllocateMemoryForBuffer(), or #AllocateMemoryForImage().",
 
-        VmaAllocator.IN("allocator", ""),
-        VmaAllocation.IN("allocation", "")
+        VmaAllocator("allocator", ""),
+        VmaAllocation("allocation", "")
     )
 
     void(
@@ -1585,8 +1585,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         )}
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VmaAllocation.IN("allocation", ""),
+        VmaAllocator("allocator", ""),
+        VmaAllocation("allocation", ""),
         VmaAllocationInfo.p.OUT("pAllocationInfo", "")
     )
 
@@ -1605,8 +1605,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         If the allocation has been created without #ALLOCATION_CREATE_CAN_BECOME_LOST_BIT flag, this function always returns {@code VK_TRUE}.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VmaAllocation.IN("allocation", "")
+        VmaAllocator("allocator", ""),
+        VmaAllocation("allocation", "")
     )
 
     void(
@@ -1623,9 +1623,9 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         however you want - e.g. as a pointer, ordinal number or some handle to you own data.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VmaAllocation.IN("allocation", ""),
-        opaque_p.IN("pUserData", "")
+        VmaAllocator("allocator", ""),
+        VmaAllocation("allocation", ""),
+        opaque_p("pUserData", "")
     )
 
     void(
@@ -1641,7 +1641,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         into a real, non-empty allocation.
         """,
 
-        VmaAllocator.IN("allocator", ""),
+        VmaAllocator("allocator", ""),
         Check(1)..VmaAllocation.p.OUT("pAllocation", "")
     )
 
@@ -1674,8 +1674,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         mapped.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VmaAllocation.IN("allocation", ""),
+        VmaAllocator("allocator", ""),
+        VmaAllocation("allocation", ""),
         Check(1)..void.p.p.OUT("ppData", "")
     )
 
@@ -1687,8 +1687,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         For details, see description of {@code vmaMapMemory()}.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VmaAllocation.IN("allocation", "")
+        VmaAllocator("allocator", ""),
+        VmaAllocation("allocation", "")
     )
 
     void(
@@ -1707,10 +1707,10 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         )}
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VmaAllocation.IN("allocation", ""),
-        VkDeviceSize.IN("offset", ""),
-        VkDeviceSize.IN("size", "")
+        VmaAllocator("allocator", ""),
+        VmaAllocation("allocation", ""),
+        VkDeviceSize("offset", ""),
+        VkDeviceSize("size", "")
     )
 
     void(
@@ -1729,10 +1729,10 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         )}
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VmaAllocation.IN("allocation", ""),
-        VkDeviceSize.IN("offset", ""),
-        VkDeviceSize.IN("size", "")
+        VmaAllocator("allocator", ""),
+        VmaAllocation("allocation", ""),
+        VkDeviceSize("offset", ""),
+        VkDeviceSize("size", "")
     )
 
     VkResult(
@@ -1744,8 +1744,8 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         nonzero and only for memory types that are {@code HOST_VISIBLE} and {@code HOST_COHERENT}.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        uint32_t.IN("memoryTypeBits", "bit mask, where each bit set means that a memory type with that index should be checked"),
+        VmaAllocator("allocator", ""),
+        uint32_t("memoryTypeBits", "bit mask, where each bit set means that a memory type with that index should be checked"),
 
         returnDoc =
         """
@@ -1835,9 +1835,9 @@ for(size_t i = 0; i < allocations.size(); ++i)
         can call it on special occasions (like when reloading a game level or when you just destroyed a lot of objects).
         """,
 
-        VmaAllocator.IN("allocator", ""),
+        VmaAllocator("allocator", ""),
         VmaAllocation.p.OUT("pAllocations", "array of allocations that can be moved during this compaction"),
-        AutoSize("pAllocations", "pAllocationsChanged")..size_t.IN("allocationCount", "number of elements in {@code pAllocations} and {@code pAllocationsChanged} arrays"),
+        AutoSize("pAllocations", "pAllocationsChanged")..size_t("allocationCount", "number of elements in {@code pAllocations} and {@code pAllocationsChanged} arrays"),
         nullable..VkBool32.p.OUT(
             "pAllocationsChanged",
             """
@@ -1845,7 +1845,7 @@ for(size_t i = 0; i < allocations.size(); ++i)
             Pass null if you don't need this information.
             """
         ),
-        nullable..VmaDefragmentationInfo.const.p.IN("pDefragmentationInfo", "configuration parameters. Optional - pass null to use default values."),
+        nullable..VmaDefragmentationInfo.const.p("pDefragmentationInfo", "configuration parameters. Optional - pass null to use default values."),
         nullable..VmaDefragmentationStats.p.OUT(
             "pDefragmentationStats",
             "statistics returned by the function. Optional - pass null if you don't need this information."
@@ -1870,9 +1870,9 @@ for(size_t i = 0; i < allocations.size(); ++i)
         It is recommended to use function #CreateBuffer() instead of this one.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VmaAllocation.IN("allocation", ""),
-        VkBuffer.IN("buffer", "")
+        VmaAllocator("allocator", ""),
+        VmaAllocation("allocation", ""),
+        VkBuffer("buffer", "")
     )
 
     VkResult(
@@ -1888,9 +1888,9 @@ for(size_t i = 0; i < allocations.size(); ++i)
         It is recommended to use function vmaCreateImage() instead of this one.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VmaAllocation.IN("allocation", ""),
-        VkImage.IN("image", "")
+        VmaAllocator("allocator", ""),
+        VmaAllocation("allocation", ""),
+        VkImage("image", "")
     )
 
     VkResult(
@@ -1914,9 +1914,9 @@ for(size_t i = 0; i < allocations.size(); ++i)
         buffer, just like when using #ALLOCATION_CREATE_DEDICATED_MEMORY_BIT.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VkBufferCreateInfo.const.p.IN("pBufferCreateInfo", ""),
-        VmaAllocationCreateInfo.const.p.IN("pAllocationCreateInfo", ""),
+        VmaAllocator("allocator", ""),
+        VkBufferCreateInfo.const.p("pBufferCreateInfo", ""),
+        VmaAllocationCreateInfo.const.p("pAllocationCreateInfo", ""),
         Check(1)..VkBuffer.p.OUT("pBuffer", "buffer that was created"),
         Check(1)..VmaAllocation.p.OUT("pAllocation", "allocation that was created"),
         nullable..VmaAllocationInfo.p.OUT(
@@ -1938,18 +1938,18 @@ vmaFreeMemory(allocator, allocation);""")}
         It it safe to pass null as buffer and/or allocation.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VkBuffer.IN("buffer", ""),
-        VmaAllocation.IN("allocation", "")
+        VmaAllocator("allocator", ""),
+        VkBuffer("buffer", ""),
+        VmaAllocation("allocation", "")
     )
 
     VkResult(
         "CreateImage",
         "Function similar to #CreateBuffer().",
 
-        VmaAllocator.IN("allocator", ""),
-        VkImageCreateInfo.const.p.IN("pImageCreateInfo", ""),
-        VmaAllocationCreateInfo.const.p.IN("pAllocationCreateInfo", ""),
+        VmaAllocator("allocator", ""),
+        VkImageCreateInfo.const.p("pImageCreateInfo", ""),
+        VmaAllocationCreateInfo.const.p("pAllocationCreateInfo", ""),
         Check(1)..VkImage.p.OUT("pImage", "image that was created"),
         Check(1)..VmaAllocation.p.OUT("pAllocation", "allocation that was created"),
         nullable..VmaAllocationInfo.p.OUT(
@@ -1971,8 +1971,8 @@ vmaFreeMemory(allocator, allocation);""")}
         It it safe to pass null as image and/or allocation.
         """,
 
-        VmaAllocator.IN("allocator", ""),
-        VkImage.IN("image", ""),
-        VmaAllocation.IN("allocation", "")
+        VmaAllocator("allocator", ""),
+        VkImage("image", ""),
+        VmaAllocation("allocation", "")
     )
 }

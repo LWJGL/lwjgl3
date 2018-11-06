@@ -37,19 +37,19 @@ val EXT_debug_label = "EXTDebugLabel".nativeClassGL("EXT_debug_label", postfix =
         "LabelObjectEXT",
         "",
 
-        GLenum.IN("type", ""),
-        GLuint.IN("object", ""),
-        AutoSize("label")..GLsizei.IN("length", ""),
-        GLcharUTF8.const.p.IN("label", "")
+        GLenum("type", ""),
+        GLuint("object", ""),
+        AutoSize("label")..GLsizei("length", ""),
+        GLcharUTF8.const.p("label", "")
     )
 
     void(
         "GetObjectLabelEXT",
         "",
 
-        GLenum.IN("type", ""),
-        GLuint.IN("object", ""),
-        AutoSize("label")..GLsizei.IN("bufSize", ""),
+        GLenum("type", ""),
+        GLuint("object", ""),
+        AutoSize("label")..GLsizei("bufSize", ""),
         Check(1)..GLsizei.p.OUT("length", ""),
         Return("length")..GLcharUTF8.p.OUT("label", "")
     )

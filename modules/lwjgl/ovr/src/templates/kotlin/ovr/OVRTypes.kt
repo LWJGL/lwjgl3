@@ -43,9 +43,9 @@ val ovrLogCallback = Module.OVR.callback {
         "OVRLogCallback",
         "The logging callback.",
 
-        uintptr_t.IN("userData", "an arbitrary value specified by the user of ovrInitParams"),
-        int.IN("level", "one of the {@code ovrLogLevel} constants"),
-        NullTerminated..charUTF8.const.p.IN("message", "a UTF8-encoded null-terminated string"),
+        uintptr_t("userData", "an arbitrary value specified by the user of ovrInitParams"),
+        int("level", "one of the {@code ovrLogLevel} constants"),
+        NullTerminated..charUTF8.const.p("message", "a UTF8-encoded null-terminated string"),
 
         nativeType = "ovrLogCallback"
     ) {

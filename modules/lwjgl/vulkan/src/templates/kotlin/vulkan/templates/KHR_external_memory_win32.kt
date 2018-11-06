@@ -116,8 +116,8 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
         ##VkMemoryGetWin32HandleInfoKHR
         """,
 
-        VkDevice.IN("device", "the logical device that created the device memory being exported."),
-        VkMemoryGetWin32HandleInfoKHR.const.p.IN("pGetWin32HandleInfo", "a pointer to an instance of the ##VkMemoryGetWin32HandleInfoKHR structure containing parameters of the export operation."),
+        VkDevice("device", "the logical device that created the device memory being exported."),
+        VkMemoryGetWin32HandleInfoKHR.const.p("pGetWin32HandleInfo", "a pointer to an instance of the ##VkMemoryGetWin32HandleInfoKHR structure containing parameters of the export operation."),
         Check(1)..HANDLE.p.OUT("pHandle", "will return the Windows handle representing the underlying resources of the device memory object.")
     )
 
@@ -166,9 +166,9 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
         ##VkMemoryWin32HandlePropertiesKHR
         """,
 
-        VkDevice.IN("device", "the logical device that will be importing {@code handle}."),
-        VkExternalMemoryHandleTypeFlagBits.IN("handleType", "the type of the handle {@code handle}."),
-        HANDLE.IN("handle", "the handle which will be imported."),
+        VkDevice("device", "the logical device that will be importing {@code handle}."),
+        VkExternalMemoryHandleTypeFlagBits("handleType", "the type of the handle {@code handle}."),
+        HANDLE("handle", "the handle which will be imported."),
         VkMemoryWin32HandlePropertiesKHR.p.OUT("pMemoryWin32HandleProperties", "will return properties of {@code handle}.")
     )
 }

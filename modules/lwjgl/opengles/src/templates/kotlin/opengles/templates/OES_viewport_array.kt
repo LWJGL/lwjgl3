@@ -41,82 +41,82 @@ val OES_viewport_array = "OESViewportArray".nativeClassGLES("OES_viewport_array"
         "ViewportArrayvOES",
         "",
 
-        GLuint.IN("first", ""),
-        AutoSize(4, "v")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("v", "")
+        GLuint("first", ""),
+        AutoSize(4, "v")..GLsizei("count", ""),
+        GLfloat.const.p("v", "")
     )
 
     void(
         "ViewportIndexedfOES",
         "",
 
-        GLuint.IN("index", ""),
-        GLfloat.IN("x", ""),
-        GLfloat.IN("y", ""),
-        GLfloat.IN("w", ""),
-        GLfloat.IN("h", "")
+        GLuint("index", ""),
+        GLfloat("x", ""),
+        GLfloat("y", ""),
+        GLfloat("w", ""),
+        GLfloat("h", "")
     )
 
     void(
         "ViewportIndexedfvOES",
         "",
 
-        GLuint.IN("index", ""),
-        Check(4)..GLfloat.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(4)..GLfloat.const.p("v", "")
     )
 
     void(
         "ScissorArrayvOES",
         "",
 
-        GLuint.IN("first", ""),
-        AutoSize(4, "v")..GLsizei.IN("count", ""),
-        GLint.const.p.IN("v", "")
+        GLuint("first", ""),
+        AutoSize(4, "v")..GLsizei("count", ""),
+        GLint.const.p("v", "")
     )
 
     void(
         "ScissorIndexedOES",
         "",
 
-        GLuint.IN("index", ""),
-        GLint.IN("left", ""),
-        GLint.IN("bottom", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLuint("index", ""),
+        GLint("left", ""),
+        GLint("bottom", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
     void(
         "ScissorIndexedvOES",
         "",
 
-        GLuint.IN("index", ""),
-        Check(4)..GLint.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(4)..GLint.const.p("v", "")
     )
 
     void(
         "DepthRangeArrayfvOES",
         "",
 
-        GLuint.IN("first", ""),
-        AutoSize(2, "v")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("v", "")
+        GLuint("first", ""),
+        AutoSize(2, "v")..GLsizei("count", ""),
+        GLfloat.const.p("v", "")
     )
 
     void(
         "DepthRangeIndexedfOES",
         "",
 
-        GLuint.IN("index", ""),
-        GLfloat.IN("n", ""),
-        GLfloat.IN("f", "")
+        GLuint("index", ""),
+        GLfloat("n", ""),
+        GLfloat("f", "")
     )
 
     void(
         "GetFloati_vOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
+        GLenum("target", ""),
+        GLuint("index", ""),
         Check(1)..ReturnParam..GLfloat.p.OUT("data", "")
     )
 

@@ -32,8 +32,8 @@ val ANDROID_blob_cache = "ANDROIDBlobCache".nativeClassEGL("ANDROID_blob_cache",
         "SetBlobCacheFuncsANDROID",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSetBlobFuncANDROID.IN("set", ""),
-        EGLGetBlobFuncANDROID.IN("get", "")
+        EGLDisplay("dpy", ""),
+        EGLSetBlobFuncANDROID("set", ""),
+        EGLGetBlobFuncANDROID("get", "")
     )
 }

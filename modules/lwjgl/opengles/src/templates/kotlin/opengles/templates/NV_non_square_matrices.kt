@@ -32,59 +32,59 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
         "UniformMatrix2x3fvNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(2 x 3, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(2 x 3, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "UniformMatrix3x2fvNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(3 x 2, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(3 x 2, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "UniformMatrix2x4fvNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(2 x 4, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(2 x 4, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "UniformMatrix4x2fvNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(4 x 2, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(4 x 2, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "UniformMatrix3x4fvNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(3 x 4, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(3 x 4, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 
     void(
         "UniformMatrix4x3fvNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize(4 x 3, "value")..GLsizei.IN("count", ""),
-        GLboolean.IN("transpose", ""),
-        GLfloat.const.p.IN("value", "")
+        GLint("location", ""),
+        AutoSize(4 x 3, "value")..GLsizei("count", ""),
+        GLboolean("transpose", ""),
+        GLfloat.const.p("value", "")
     )
 }

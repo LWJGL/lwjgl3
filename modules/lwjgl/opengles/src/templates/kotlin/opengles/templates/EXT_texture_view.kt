@@ -47,13 +47,13 @@ val EXT_texture_view = "EXTTextureView".nativeClassGLES("EXT_texture_view", post
         "TextureViewEXT",
         "",
 
-        GLuint.IN("texture", ""),
-        GLenum.IN("target", ""),
-        GLuint.IN("origtexture", ""),
-        GLenum.IN("internalformat", ""),
-        GLuint.IN("minlevel", ""),
-        GLuint.IN("numlevels", ""),
-        GLuint.IN("minlayer", ""),
-        GLuint.IN("numlayers", "")
+        GLuint("texture", ""),
+        GLenum("target", ""),
+        GLuint("origtexture", ""),
+        GLenum("internalformat", ""),
+        GLuint("minlevel", ""),
+        GLuint("numlevels", ""),
+        GLuint("minlayer", ""),
+        GLuint("numlayers", "")
     )
 }

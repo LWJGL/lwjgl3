@@ -128,7 +128,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(Module.OVR, prefixMethod = "OVR_"
         Some functions return additional successful values other than #Success and require usage of this macro to indicate success.
         """,
 
-        ovrResult.IN("result", "the {@code ovrResult} to check")
+        ovrResult("result", "the {@code ovrResult} to check")
     )
 
     macro(expression = "result == ovrSuccess")..bool(

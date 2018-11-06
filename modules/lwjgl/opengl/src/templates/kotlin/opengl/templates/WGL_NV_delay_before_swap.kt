@@ -51,7 +51,7 @@ val WGL_NV_delay_before_swap = "WGLNVDelayBeforeSwap".nativeClassWGL("WGL_NV_del
         reasons, for example if the swap interval is equal to 0, if the window is in a mode switch or if no monitors are active.
         """,
 
-        HDC.IN("hDC", "a handle to the DC"),
-        GLfloat.IN("seconds", "the delay, in seconds")
+        HDC("hDC", "a handle to the DC"),
+        GLfloat("seconds", "the delay, in seconds")
     )
 }

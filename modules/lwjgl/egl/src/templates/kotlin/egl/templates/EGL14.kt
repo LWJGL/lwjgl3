@@ -30,8 +30,5 @@ val EGL14 = "EGL14".nativeClassEGL("EGL14", postfix = "") {
         "DEFAULT_DISPLAY"..0L
     )
 
-    EGLContext(
-        "GetCurrentContext",
-        ""
-    )
+    EGLContext("GetCurrentContext", "", void())
 }

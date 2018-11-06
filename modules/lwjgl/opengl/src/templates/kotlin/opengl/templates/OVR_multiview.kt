@@ -105,8 +105,8 @@ for( int i = 0; i < numViews; i++ ) {
         FramebufferTextureLayer["attachment"],
         FramebufferTextureLayer["texture"],
         FramebufferTextureLayer["level"],
-        GLint.IN("baseViewIndex", "the base framebuffer texture layer index"),
-        GLsizei.IN("numViews", "the number of views to target when rendering")
+        GLint("baseViewIndex", "the base framebuffer texture layer index"),
+        GLsizei("numViews", "the number of views to target when rendering")
     )
 
     val NamedFramebufferTextureLayer = GL45["NamedFramebufferTextureLayer"]
@@ -119,7 +119,7 @@ for( int i = 0; i < numViews; i++ ) {
         NamedFramebufferTextureLayer["attachment"],
         NamedFramebufferTextureLayer["texture"],
         NamedFramebufferTextureLayer["level"],
-        GLint.IN("baseViewIndex", ""),
-        GLsizei.IN("numViews", "")
+        GLint("baseViewIndex", ""),
+        GLsizei("numViews", "")
     )
 }

@@ -51,10 +51,10 @@ val NV_framebuffer_multisample = "NVFramebufferMultisample".nativeClassGLES("NV_
         "RenderbufferStorageMultisampleNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 }

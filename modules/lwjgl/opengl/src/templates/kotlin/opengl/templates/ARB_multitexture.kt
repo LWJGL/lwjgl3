@@ -69,7 +69,7 @@ val ARB_multitexture = "ARBMultitexture".nativeClassGL("ARB_multitexture", postf
         dependent.
         """,
 
-        GLenum.IN("texture", "which texture unit to make active", "#TEXTURE0_ARB GL_TEXTURE[1-31]")
+        GLenum("texture", "which texture unit to make active", "#TEXTURE0_ARB GL_TEXTURE[1-31]")
     )
 
     void(
@@ -79,7 +79,7 @@ val ARB_multitexture = "ARBMultitexture".nativeClassGL("ARB_multitexture", postf
         DisableClientState with parameter TEXTURE_COORD_ARRAY.
         """,
 
-        GLenum.IN("texture", "which texture coordinate array to make active", "#TEXTURE0_ARB GL_TEXTURE[1-31]")
+        GLenum("texture", "which texture coordinate array to make active", "#TEXTURE0_ARB GL_TEXTURE[1-31]")
     )
 
     // MultiTexCoord functions javadoc
@@ -94,73 +94,73 @@ val ARB_multitexture = "ARBMultitexture".nativeClassGL("ARB_multitexture", postf
         "MultiTexCoord1fARB",
         "Sets the current one-dimensional texture coordinate for the specified texture coordinate set. {@code t} and {@code r} are implicitly set to 0 and {@code q} to 1.",
 
-        GLenum.IN("texture", texCoordTex),
-        GLfloat.IN("s", texCoordS)
+        GLenum("texture", texCoordTex),
+        GLfloat("s", texCoordS)
     )
 
-    void("MultiTexCoord1sARB", "Short version of #MultiTexCoord1fARB().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS))
-    void("MultiTexCoord1iARB", "Integer version of #MultiTexCoord1fARB().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS))
-    void("MultiTexCoord1dARB", "Double version of #MultiTexCoord1fARB().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS))
+    void("MultiTexCoord1sARB", "Short version of #MultiTexCoord1fARB().", GLenum("texture", texCoordTex), GLshort("s", texCoordS))
+    void("MultiTexCoord1iARB", "Integer version of #MultiTexCoord1fARB().", GLenum("texture", texCoordTex), GLint("s", texCoordS))
+    void("MultiTexCoord1dARB", "Double version of #MultiTexCoord1fARB().", GLenum("texture", texCoordTex), GLdouble("s", texCoordS))
 
-    void("MultiTexCoord1fvARB", "Pointer version of #MultiTexCoord1fARB().", GLenum.IN("texture", texCoordTex), Check(1)..GLfloat.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord1svARB", "Pointer version of #MultiTexCoord1sARB().", GLenum.IN("texture", texCoordTex), Check(1)..GLshort.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord1ivARB", "Pointer version of #MultiTexCoord1iARB().", GLenum.IN("texture", texCoordTex), Check(1)..GLint.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord1dvARB", "Pointer version of #MultiTexCoord1dARB().", GLenum.IN("texture", texCoordTex), Check(1)..GLdouble.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord1fvARB", "Pointer version of #MultiTexCoord1fARB().", GLenum("texture", texCoordTex), Check(1)..GLfloat.const.p("v", texCoordBuffer))
+    void("MultiTexCoord1svARB", "Pointer version of #MultiTexCoord1sARB().", GLenum("texture", texCoordTex), Check(1)..GLshort.const.p("v", texCoordBuffer))
+    void("MultiTexCoord1ivARB", "Pointer version of #MultiTexCoord1iARB().", GLenum("texture", texCoordTex), Check(1)..GLint.const.p("v", texCoordBuffer))
+    void("MultiTexCoord1dvARB", "Pointer version of #MultiTexCoord1dARB().", GLenum("texture", texCoordTex), Check(1)..GLdouble.const.p("v", texCoordBuffer))
 
     void(
         "MultiTexCoord2fARB",
         "Sets the current two-dimensional texture coordinate for the specified texture coordinate set. {@code r} is implicitly set to 0 and {@code q} to 1.",
 
-        GLenum.IN("texture", texCoordTex),
-        GLfloat.IN("s", texCoordS),
-        GLfloat.IN("t", texCoordT)
+        GLenum("texture", texCoordTex),
+        GLfloat("s", texCoordS),
+        GLfloat("t", texCoordT)
     )
 
-    void("MultiTexCoord2sARB", "Short version of #MultiTexCoord2fARB().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT))
-    void("MultiTexCoord2iARB", "Integer version of #MultiTexCoord2fARB().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT))
-    void("MultiTexCoord2dARB", "Double version of #MultiTexCoord2fARB().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT))
+    void("MultiTexCoord2sARB", "Short version of #MultiTexCoord2fARB().", GLenum("texture", texCoordTex), GLshort("s", texCoordS), GLshort("t", texCoordT))
+    void("MultiTexCoord2iARB", "Integer version of #MultiTexCoord2fARB().", GLenum("texture", texCoordTex), GLint("s", texCoordS), GLint("t", texCoordT))
+    void("MultiTexCoord2dARB", "Double version of #MultiTexCoord2fARB().", GLenum("texture", texCoordTex), GLdouble("s", texCoordS), GLdouble("t", texCoordT))
 
-    void("MultiTexCoord2fvARB", "Pointer version of #MultiTexCoord2fARB().", GLenum.IN("texture", texCoordTex), Check(2)..GLfloat.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord2svARB", "Pointer version of #MultiTexCoord2sARB().", GLenum.IN("texture", texCoordTex), Check(2)..GLshort.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord2ivARB", "Pointer version of #MultiTexCoord2iARB().", GLenum.IN("texture", texCoordTex), Check(2)..GLint.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord2dvARB", "Pointer version of #MultiTexCoord2dARB().", GLenum.IN("texture", texCoordTex), Check(2)..GLdouble.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord2fvARB", "Pointer version of #MultiTexCoord2fARB().", GLenum("texture", texCoordTex), Check(2)..GLfloat.const.p("v", texCoordBuffer))
+    void("MultiTexCoord2svARB", "Pointer version of #MultiTexCoord2sARB().", GLenum("texture", texCoordTex), Check(2)..GLshort.const.p("v", texCoordBuffer))
+    void("MultiTexCoord2ivARB", "Pointer version of #MultiTexCoord2iARB().", GLenum("texture", texCoordTex), Check(2)..GLint.const.p("v", texCoordBuffer))
+    void("MultiTexCoord2dvARB", "Pointer version of #MultiTexCoord2dARB().", GLenum("texture", texCoordTex), Check(2)..GLdouble.const.p("v", texCoordBuffer))
 
     void(
         "MultiTexCoord3fARB",
         "Sets the current three-dimensional texture coordinate for the specified texture coordinate set. {@code q} is implicitly set to 1.",
 
-        GLenum.IN("texture", texCoordTex),
-        GLfloat.IN("s", texCoordS),
-        GLfloat.IN("t", texCoordT),
-        GLfloat.IN("r", texCoordR)
+        GLenum("texture", texCoordTex),
+        GLfloat("s", texCoordS),
+        GLfloat("t", texCoordT),
+        GLfloat("r", texCoordR)
     )
 
-    void("MultiTexCoord3sARB", "Short version of #MultiTexCoord3fARB().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR))
-    void("MultiTexCoord3iARB", "Integer version of #MultiTexCoord3fARB().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR))
-    void("MultiTexCoord3dARB", "Double version of #MultiTexCoord3fARB().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR))
+    void("MultiTexCoord3sARB", "Short version of #MultiTexCoord3fARB().", GLenum("texture", texCoordTex), GLshort("s", texCoordS), GLshort("t", texCoordT), GLshort("r", texCoordR))
+    void("MultiTexCoord3iARB", "Integer version of #MultiTexCoord3fARB().", GLenum("texture", texCoordTex), GLint("s", texCoordS), GLint("t", texCoordT), GLint("r", texCoordR))
+    void("MultiTexCoord3dARB", "Double version of #MultiTexCoord3fARB().", GLenum("texture", texCoordTex), GLdouble("s", texCoordS), GLdouble("t", texCoordT), GLdouble("r", texCoordR))
 
-    void("MultiTexCoord3fvARB", "Pointer version of #MultiTexCoord3fARB().", GLenum.IN("texture", texCoordTex), Check(3)..GLfloat.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord3svARB", "Pointer version of #MultiTexCoord3sARB().", GLenum.IN("texture", texCoordTex), Check(3)..GLshort.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord3ivARB", "Pointer version of #MultiTexCoord3iARB().", GLenum.IN("texture", texCoordTex), Check(3)..GLint.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord3dvARB", "Pointer version of #MultiTexCoord3dARB().", GLenum.IN("texture", texCoordTex), Check(3)..GLdouble.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord3fvARB", "Pointer version of #MultiTexCoord3fARB().", GLenum("texture", texCoordTex), Check(3)..GLfloat.const.p("v", texCoordBuffer))
+    void("MultiTexCoord3svARB", "Pointer version of #MultiTexCoord3sARB().", GLenum("texture", texCoordTex), Check(3)..GLshort.const.p("v", texCoordBuffer))
+    void("MultiTexCoord3ivARB", "Pointer version of #MultiTexCoord3iARB().", GLenum("texture", texCoordTex), Check(3)..GLint.const.p("v", texCoordBuffer))
+    void("MultiTexCoord3dvARB", "Pointer version of #MultiTexCoord3dARB().", GLenum("texture", texCoordTex), Check(3)..GLdouble.const.p("v", texCoordBuffer))
 
     void(
         "MultiTexCoord4fARB",
         "Sets the current four-dimensional texture coordinate for the specified texture coordinate set.",
 
-        GLenum.IN("texture", texCoordTex),
-        GLfloat.IN("s", texCoordS),
-        GLfloat.IN("t", texCoordT),
-        GLfloat.IN("r", texCoordR),
-        GLfloat.IN("q", texCoordQ)
+        GLenum("texture", texCoordTex),
+        GLfloat("s", texCoordS),
+        GLfloat("t", texCoordT),
+        GLfloat("r", texCoordR),
+        GLfloat("q", texCoordQ)
     )
 
-    void("MultiTexCoord4sARB", "Short version of #MultiTexCoord4fARB().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR), GLshort.IN("q", texCoordQ))
-    void("MultiTexCoord4iARB", "Integer version of #MultiTexCoord4fARB().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR), GLint.IN("q", texCoordQ))
-    void("MultiTexCoord4dARB", "Double version of #MultiTexCoord4fARB().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR), GLdouble.IN("q", texCoordQ))
+    void("MultiTexCoord4sARB", "Short version of #MultiTexCoord4fARB().", GLenum("texture", texCoordTex), GLshort("s", texCoordS), GLshort("t", texCoordT), GLshort("r", texCoordR), GLshort("q", texCoordQ))
+    void("MultiTexCoord4iARB", "Integer version of #MultiTexCoord4fARB().", GLenum("texture", texCoordTex), GLint("s", texCoordS), GLint("t", texCoordT), GLint("r", texCoordR), GLint("q", texCoordQ))
+    void("MultiTexCoord4dARB", "Double version of #MultiTexCoord4fARB().", GLenum("texture", texCoordTex), GLdouble("s", texCoordS), GLdouble("t", texCoordT), GLdouble("r", texCoordR), GLdouble("q", texCoordQ))
 
-    void("MultiTexCoord4fvARB", "Pointer version of #MultiTexCoord4fARB().", GLenum.IN("texture", texCoordTex), Check(4)..GLfloat.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord4svARB", "Pointer version of #MultiTexCoord4sARB().", GLenum.IN("texture", texCoordTex), Check(4)..GLshort.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord4ivARB", "Pointer version of #MultiTexCoord4iARB().", GLenum.IN("texture", texCoordTex), Check(4)..GLint.const.p.IN("v", texCoordBuffer))
-    void("MultiTexCoord4dvARB", "Pointer version of #MultiTexCoord4dARB().", GLenum.IN("texture", texCoordTex), Check(4)..GLdouble.const.p.IN("v", texCoordBuffer))
+    void("MultiTexCoord4fvARB", "Pointer version of #MultiTexCoord4fARB().", GLenum("texture", texCoordTex), Check(4)..GLfloat.const.p("v", texCoordBuffer))
+    void("MultiTexCoord4svARB", "Pointer version of #MultiTexCoord4sARB().", GLenum("texture", texCoordTex), Check(4)..GLshort.const.p("v", texCoordBuffer))
+    void("MultiTexCoord4ivARB", "Pointer version of #MultiTexCoord4iARB().", GLenum("texture", texCoordTex), Check(4)..GLint.const.p("v", texCoordBuffer))
+    void("MultiTexCoord4dvARB", "Pointer version of #MultiTexCoord4dARB().", GLenum("texture", texCoordTex), Check(4)..GLdouble.const.p("v", texCoordBuffer))
 }

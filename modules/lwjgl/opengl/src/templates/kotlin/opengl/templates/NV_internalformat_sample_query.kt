@@ -51,11 +51,11 @@ val NV_internalformat_sample_query = "NVInternalformatSampleQuery".nativeClassGL
         "GetInternalformatSampleivNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("pname", ""),
-        AutoSize("params")..GLsizei.IN("bufSize", ""),
+        GLenum("target", ""),
+        GLenum("internalformat", ""),
+        GLsizei("samples", ""),
+        GLenum("pname", ""),
+        AutoSize("params")..GLsizei("bufSize", ""),
         GLint.p.OUT("params", "")
     )
 }

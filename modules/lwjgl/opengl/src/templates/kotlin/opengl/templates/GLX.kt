@@ -92,8 +92,8 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Returns a description of an OpenGL attribute exported by a Visual.",
 
         DISPLAY,
-        XVisualInfo.p.IN("visual", "a pointer to an ##XVisualInfo structure"),
-        int.IN("attribute", "the attribute to query"),
+        XVisualInfo.p("visual", "a pointer to an ##XVisualInfo structure"),
+        int("attribute", "the attribute to query"),
         Check(1)..int.p.OUT("value", "returns the attribute value")
     )
 
@@ -102,8 +102,8 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Finds a visual that matches the client’s specified attributes.",
 
         DISPLAY,
-        int.IN("screen", "the screen number"),
-        nullable..NullTerminated..int.p.IN("attrib_list", "a list of attributes terminated with {@code None}"),
+        int("screen", "the screen number"),
+        nullable..NullTerminated..int.p("attrib_list", "a list of attributes terminated with {@code None}"),
 
         returnDoc =
         """
@@ -117,9 +117,9 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Creates an OpenGL context.",
 
         DISPLAY,
-        XVisualInfo.p.IN("visual", "a pointer to an ##XVisualInfo structure"),
-        nullable..GLXContext.IN("share_list", "the GLXContext to share objects with"),
-        Bool.IN("direct", "whether direct rendering is requested")
+        XVisualInfo.p("visual", "a pointer to an ##XVisualInfo structure"),
+        nullable..GLXContext("share_list", "the GLXContext to share objects with"),
+        Bool("direct", "whether direct rendering is requested")
     )
 
     Bool(
@@ -127,8 +127,8 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Makes a context current in the current thread",
 
         DISPLAY,
-        nullable..GLXDrawable.IN("draw", "the draw GLXdrawable"),
-        nullable..GLXContext.IN("ctx", "the GLXContext to make current")
+        nullable..GLXDrawable("draw", "the draw GLXdrawable"),
+        nullable..GLXContext("ctx", "the GLXContext to make current")
     )
 
     void(
@@ -136,9 +136,9 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Copies OpenGL rendering state from one context to another.",
 
         DISPLAY,
-        GLXContext.IN("source", "the source GLXContext"),
-        GLXContext.IN("dest", "the destination GLXContext"),
-        unsigned_long.IN(
+        GLXContext("source", "the source GLXContext"),
+        GLXContext("dest", "the destination GLXContext"),
+        unsigned_long(
             "mask",
             "indicates which groups of state variables are to be copied; it contains the bitwise OR of the symbolic names for the attribute groups"
         )
@@ -149,7 +149,7 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Determines if an OpenGL rendering context is direct.",
 
         DISPLAY,
-        GLXContext.IN("ctx", "the GLXContext to query")
+        GLXContext("ctx", "the GLXContext to query")
     )
 
     void(
@@ -162,17 +162,19 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         """,
 
         DISPLAY,
-        GLXContext.IN("ctx", "the GLXContext to destroy")
+        GLXContext("ctx", "the GLXContext to destroy")
     )
 
     GLXContext(
         "GetCurrentContext",
-        "Returns the GLXContext that is current in the current thread."
+        "Returns the GLXContext that is current in the current thread.",
+        void()
     )
 
     GLXDrawable(
         "GetCurrentDrawable",
-        "Returns the XID of the current drawable used for rendering."
+        "Returns the XID of the current drawable used for rendering.",
+        void()
     )
 
     void(
@@ -183,7 +185,8 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         OpenGL calls made prior to {@code glXWaitGL} are guaranteed to be executed before X rendering calls made after {@code glXWaitGL}. While the same result
         can be achieved using #Finish(), {@code glXWaitGL} does not require a round trip to the server, and is therefore more efficient in cases
         where the client and server are on separate machines.
-        """
+        """,
+        void()
     )
 
     void(
@@ -193,7 +196,8 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
 
         X rendering calls made prior to {@code glXWaitX} are guaranteed to be executed before OpenGL rendering calls made after {@code glXWaitX}. While the same
         result can be achieved using {@code XSync()}, {@code glXWaitX} does not require a round trip to the server, and may therefore be more efficient.
-        """
+        """,
+        void()
     )
 
     void(
@@ -206,17 +210,17 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         """,
 
         DISPLAY,
-        GLXDrawable.IN("draw", "a double buffered GLXDrawable")
+        GLXDrawable("draw", "a double buffered GLXDrawable")
     )
 
     void(
         "UseXFont",
         "Provides a shortcut for using X fonts.",
 
-        Font.IN("font", "the font to use"),
-        int.IN("first", "the first glyph in the font to use"),
-        int.IN("count", "the number of display lists to define"),
-        int.IN("list_base", "the base list number")
+        Font("font", "the font to use"),
+        int("first", "the first glyph in the font to use"),
+        int("count", "the number of display lists to define"),
+        int("list_base", "the base list number")
     )
 
     GLXPixmap(
@@ -224,8 +228,8 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Creates a GLXPixmap from a Pixmap.",
 
         DISPLAY,
-        XVisualInfo.p.IN("visual", "a pointer to a ##XVisualInfo structure"),
-        Pixmap.IN("pixmap", "the Pixmap")
+        XVisualInfo.p("visual", "a pointer to a ##XVisualInfo structure"),
+        Pixmap("pixmap", "the Pixmap")
     )
 
     void(
@@ -233,6 +237,6 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "Destroys a GLXPixmap.",
 
         DISPLAY,
-        GLXPixmap.IN("pixmap", "the GLXPixmap to destroy.")
+        GLXPixmap("pixmap", "the GLXPixmap to destroy.")
     )
 }

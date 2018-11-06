@@ -43,11 +43,11 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
         attribute to determine which pixel formats support the creation of pbuffers.
         """,
 
-        HDC.IN("hdc", "a device context for the device on which the pbuffer is created"),
-        int.IN("pixelFormat", "a non-generic pixel format descriptor index"),
-        int.IN("width", "the pixel width of the rectangular pbuffer"),
-        int.IN("height", "the pixel height of the rectangular pbuffer"),
-        NullTerminated..nullable..int.const.p.IN(
+        HDC("hdc", "a device context for the device on which the pbuffer is created"),
+        int("pixelFormat", "a non-generic pixel format descriptor index"),
+        int("width", "the pixel width of the rectangular pbuffer"),
+        int("height", "the pixel height of the rectangular pbuffer"),
+        NullTerminated..nullable..int.const.p(
             "attribList",
             "a 0-terminated list of attributes {type, value} pairs containing integer attribute values"
         )
@@ -57,15 +57,15 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
         "GetPbufferDCARB",
         "Creates a device context for the pbuffer.",
 
-        HPBUFFERARB.IN("pbuffer", "a pbuffer handle returned from a previous call to #CreatePbufferARB()")
+        HPBUFFERARB("pbuffer", "a pbuffer handle returned from a previous call to #CreatePbufferARB()")
     )
 
     int(
         "ReleasePbufferDCARB",
         "Releases a device context obtained from a previous call to #GetPbufferDCARB().",
 
-        HPBUFFERARB.IN("pbuffer", "a pbuffer handle"),
-        HDC.IN("hdc", "a device context handle")
+        HPBUFFERARB("pbuffer", "a pbuffer handle"),
+        HDC("hdc", "a device context handle")
     )
 
     BOOL(
@@ -77,16 +77,16 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
         it are freed and its handle is no longer valid.
         """,
 
-        HPBUFFERARB.IN("pbuffer", "a pbuffer handle")
+        HPBUFFERARB("pbuffer", "a pbuffer handle")
     )
 
     BOOL(
         "QueryPbufferARB",
         "Queries an attribute associated with a specific pbuffer.",
 
-        HPBUFFERARB.IN("pbuffer", "a pbuffer handle"),
-        int.IN("attribute", "the attribute to query", "#PBUFFER_WIDTH_ARB #PBUFFER_HEIGHT_ARB #PBUFFER_LOST_ARB"),
-        Check(1)..int.p.IN("value", "the attribute value")
+        HPBUFFERARB("pbuffer", "a pbuffer handle"),
+        int("attribute", "the attribute to query", "#PBUFFER_WIDTH_ARB #PBUFFER_HEIGHT_ARB #PBUFFER_LOST_ARB"),
+        Check(1)..int.p("value", "the attribute value")
     )
 
     IntConstant(

@@ -65,8 +65,8 @@ val ARB_multisample = "ARBMultisample".nativeClassGL("ARB_multisample", postfix 
         is ANDed with the fragment coverage.
         """,
 
-        GLfloat.IN("value", "the desired coverage value"),
-        GLboolean.IN(
+        GLfloat("value", "the desired coverage value"),
+        GLboolean(
             "invert",
             "if true, the temporary coverage is inverted",
             "#TRUE #FALSE"

@@ -209,12 +209,12 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
         disabled.
         """,
 
-        GLenum.IN("source", "the source of debug messages to enable or disable", DebugSources),
-        GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
-        GLenum.IN("severity", "the severity of debug messages to enable or disable", DebugSeverities),
-        AutoSize("ids")..GLsizei.IN("count", "the length of the array {@code ids}"),
-        SingleValue("id")..nullable..GLuint.const.p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
-        GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
+        GLenum("source", "the source of debug messages to enable or disable", DebugSources),
+        GLenum("type", "the type of debug messages to enable or disable", DebugTypes),
+        GLenum("severity", "the severity of debug messages to enable or disable", DebugSeverities),
+        AutoSize("ids")..GLsizei("count", "the length of the array {@code ids}"),
+        SingleValue("id")..nullable..GLuint.const.p("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
+        GLboolean("enabled", "whether the selected messages should be enabled or disabled")
     )
 
     void(
@@ -232,12 +232,12 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
         If the #DEBUG_OUTPUT_KHR state is disabled calls to DebugMessageInsert are discarded and do not generate an error.
         """,
 
-        GLenum.IN("source", "the source of the debug message to insert", DebugSources),
-        GLenum.IN("type", "the type of the debug message insert", DebugTypes),
-        GLuint.IN("id", "the user-supplied identifier of the message to insert", DebugSeverities),
-        GLenum.IN("severity", "the severity of the debug messages to insert"),
-        AutoSize("message")..GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
-        GLcharUTF8.const.p.IN("message", "a character array containing the message to insert")
+        GLenum("source", "the source of the debug message to insert", DebugSources),
+        GLenum("type", "the type of the debug message insert", DebugTypes),
+        GLuint("id", "the user-supplied identifier of the message to insert", DebugSeverities),
+        GLenum("severity", "the severity of the debug messages to insert"),
+        AutoSize("message")..GLsizei("length", "the length of the string contained in the character array whose address is given by {@code message}"),
+        GLcharUTF8.const.p("message", "a character array containing the message to insert")
     )
 
     void(
@@ -271,8 +271,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
         If the #DEBUG_OUTPUT_KHR state is disabled then the GL will not call the callback function.
         """,
 
-        nullable..GLDEBUGPROCKHR.IN("callback", "a callback function that will be called when a debug message is generated"),
-        nullable..opaque_const_p.IN(
+        nullable..GLDEBUGPROCKHR("callback", "a callback function that will be called when a debug message is generated"),
+        nullable..opaque_const_p(
             "userParam",
             "a user supplied pointer that will be passed on each invocation of {@code callback}"
         )
@@ -305,8 +305,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
         always return zero.
         """,
 
-        GLuint.IN("count", "the number of debug messages to retrieve from the log"),
-        AutoSize("messageLog")..GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
+        GLuint("count", "the number of debug messages to retrieve from the log"),
+        AutoSize("messageLog")..GLsizei("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
         Check("count")..nullable..GLenum.p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
         Check("count")..nullable..GLenum.p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
         Check("count")..nullable..GLuint.p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
@@ -319,7 +319,7 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
         "GetPointervKHR",
         "",
 
-        GLenum.IN("pname", ""),
+        GLenum("pname", ""),
         ReturnParam..Check(1)..void.p.p.OUT("params", "")
     )
 
@@ -339,10 +339,10 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
         is not less than the value of #MAX_DEBUG_MESSAGE_LENGTH_KHR.
         """,
 
-        GLenum.IN("source", "the source of the debug message", "#DEBUG_SOURCE_APPLICATION_KHR #DEBUG_SOURCE_THIRD_PARTY_KHR"),
-        GLuint.IN("id", "the identifier of the message"),
-        AutoSize("message")..GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
-        GLcharUTF8.const.p.IN("message", "a string containing the message to be sent to the debug output stream")
+        GLenum("source", "the source of the debug message", "#DEBUG_SOURCE_APPLICATION_KHR #DEBUG_SOURCE_THIRD_PARTY_KHR"),
+        GLuint("id", "the identifier of the message"),
+        AutoSize("message")..GLsizei("length", "the length of the message to be sent to the debug output stream"),
+        GLcharUTF8.const.p("message", "a string containing the message to be sent to the debug output stream")
     )
 
     void(
@@ -363,27 +363,27 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
         "ObjectLabelKHR",
         "Labels a named object identified within a namespace.",
 
-        GLenum.IN(
+        GLenum(
             "identifier",
             "the namespace from which the name of the object is allocated",
             DebugIdentifiers + " #TEXTURE #RENDERBUFFER #FRAMEBUFFER #TRANSFORM_FEEDBACK"
         ),
-        GLuint.IN("name", "the name of the object to label"),
-        AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
-        GLcharUTF8.const.p.IN("label", "a string containing the label to assign to the object")
+        GLuint("name", "the name of the object to label"),
+        AutoSize("label")..GLsizei("length", "the length of the label to be used for the object"),
+        GLcharUTF8.const.p("label", "a string containing the label to assign to the object")
     )
 
     void(
         "GetObjectLabelKHR",
         "Retrieves the label of a named object identified within a namespace.",
 
-        GLenum.IN(
+        GLenum(
             "identifier",
             "the namespace from which the name of the object is allocated",
             DebugIdentifiers + " #TEXTURE #RENDERBUFFER #FRAMEBUFFER #TRANSFORM_FEEDBACK"
         ),
-        GLuint.IN("name", "the name of the object whose label to retrieve"),
-        AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+        GLuint("name", "the name of the object whose label to retrieve"),
+        AutoSize("label")..GLsizei("bufSize", "the length of the buffer whose address is in {@code label}"),
         Check(1)..nullable..GLsizei.p.OUT("length", "the address of a variable to receive the length of the object label"),
         Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH_KHR)")..GLcharUTF8.p.OUT("label", "a string that will receive the object label")
     )
@@ -392,17 +392,17 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
         "ObjectPtrLabelKHR",
         "Labels a sync object identified by a pointer.",
 
-        opaque_p.IN("ptr", "a pointer identifying a sync object"),
-        AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
-        GLcharUTF8.const.p.IN("label", "a string containing the label to assign to the object")
+        opaque_p("ptr", "a pointer identifying a sync object"),
+        AutoSize("label")..GLsizei("length", "the length of the label to be used for the object"),
+        GLcharUTF8.const.p("label", "a string containing the label to assign to the object")
     )
 
     void(
         "GetObjectPtrLabelKHR",
         "Retrieves the label of a sync object identified by a pointer.",
 
-        opaque_p.IN("ptr", "the name of the sync object whose label to retrieve"),
-        AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+        opaque_p("ptr", "the name of the sync object whose label to retrieve"),
+        AutoSize("label")..GLsizei("bufSize", "the length of the buffer whose address is in {@code label}"),
         Check(1)..nullable..GLsizei.p.OUT("length", "a variable to receive the length of the object label"),
         Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH_KHR)")..GLcharUTF8.p.OUT("label", "a string that will receive the object label")
     )

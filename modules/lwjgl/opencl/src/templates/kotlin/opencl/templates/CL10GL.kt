@@ -86,13 +86,13 @@ val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
         The #RetainMemObject() and #ReleaseMemObject() functions can be used to retain and release the buffer object.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
-        cl_mem_flags.IN(
+        cl_context("context", "a valid OpenCL context created from an OpenGL context"),
+        cl_mem_flags(
             "flags",
             "a bit-field that is used to specify usage information",
             "#MEM_READ_ONLY #MEM_WRITE_ONLY #MEM_READ_WRITE"
         ),
-        GLuint.IN(
+        GLuint(
             "bufobj",
             """
             the name of a GL buffer object. The data store of the GL buffer object must have have been previously created by calling {@code glBufferData},
@@ -130,13 +130,13 @@ val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
         The #RetainMemObject() and #ReleaseMemObject() functions can be used to retain and release the image objects.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
-        cl_mem_flags.IN(
+        cl_context("context", "a valid OpenCL context created from an OpenGL context"),
+        cl_mem_flags(
             "flags",
             "a bit-field that is used to specify usage information",
             "#MEM_READ_ONLY #MEM_WRITE_ONLY #MEM_READ_WRITE"
         ),
-        GLenum.IN(
+        GLenum(
             "texture_target",
             "defines the image type of {@code texture}. No reference to a bound GL texture object is made or implied by this parameter.",
             """
@@ -144,8 +144,8 @@ val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
             GL_TEXTURE_CUBE_MAP_NEGATIVE_Y GL_TEXTURE_CUBE_MAP_NEGATIVE_Z GL_TEXTURE_RECTANGLE
             """
         ),
-        GLint.IN("miplevel", "the mipmap level to be used. Implementations may return $INVALID_OPERATION for {@code miplevel} values &gt; 0."),
-        GLuint.IN(
+        GLint("miplevel", "the mipmap level to be used. Implementations may return $INVALID_OPERATION for {@code miplevel} values &gt; 0."),
+        GLuint(
             "texture",
             """
             the name of a GL 2D, cubemap or rectangle texture object. The texture object must be a complete texture as per OpenGL rules on texture completeness.
@@ -198,19 +198,19 @@ val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
         The #RetainMemObject() and #ReleaseMemObject() functions can be used to retain and release the image objects.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
-        cl_mem_flags.IN(
+        cl_context("context", "a valid OpenCL context created from an OpenGL context"),
+        cl_mem_flags(
             "flags",
             "a bit-field that is used to specify usage information",
             "#MEM_READ_ONLY #MEM_WRITE_ONLY #MEM_READ_WRITE"
         ),
-        GLenum.IN(
+        GLenum(
             "texture_target",
             "defines the image type of {@code texture}. No reference to a bound GL texture object is made or implied by this parameter.",
             "GL_TEXTURE_3D"
         ),
-        GLint.IN("miplevel", "the mipmap level to be used"),
-        GLuint.IN(
+        GLint("miplevel", "the mipmap level to be used"),
+        GLuint(
             "texture",
             """
             the name of a GL 3D texture object. The texture object must be a complete texture as per OpenGL rules on texture completeness. The texture format
@@ -262,13 +262,13 @@ val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
         The #RetainMemObject() and #ReleaseMemObject() functions can be used to retain and release the image objects.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
-        cl_mem_flags.IN(
+        cl_context("context", "a valid OpenCL context created from an OpenGL context"),
+        cl_mem_flags(
             "flags",
             "a bit-field that is used to specify usage information",
             "#MEM_READ_ONLY #MEM_WRITE_ONLY #MEM_READ_WRITE"
         ),
-        GLuint.IN(
+        GLuint(
             "renderbuffer",
             """
         the name of a GL renderbuffer object. The renderbuffer storage must be specified before the image object can be created. The {@code renderbuffer}
@@ -301,7 +301,7 @@ val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
         buffer object.
         """,
 
-        cl_mem.IN("memobj", "the memory object being queried"),
+        cl_mem("memobj", "the memory object being queried"),
         Check(1)..nullable..cl_gl_object_type.p.OUT(
             "gl_object_type",
             "returns the type of GL object attached to {@code memobj}. If {@code gl_object_type} is #NULL, it is ignored.",
@@ -325,14 +325,14 @@ val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
         "GetGLTextureInfo",
         "Returns additional information about the GL texture object associated with {@code memobj}.",
 
-        cl_mem.IN("memobj", ""),
-        cl_gl_texture_info.IN(
+        cl_mem("memobj", ""),
+        cl_gl_texture_info(
             "param_name",
             "specifies what additional information about the GL texture object associated with {@code memobj} to query",
             GLTextureInfo
         ),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT)..nullable..void.p.IN("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -366,15 +366,15 @@ val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
         other than {@code glFinish} are portable between OpenGL implementations at this time.
         """,
 
-        cl_command_queue.IN(
+        cl_command_queue(
             "command_queue",
             """
             a valid command-queue. All devices used to create the OpenCL context associated with {@code command_queue} must support acquiring shared CL/GL
             objects. This constraint is enforced at context creation time.
             """
         ),
-        AutoSize("mem_objects")..cl_uint.IN("num_objects", "the number of memory objects to be acquired in {@code mem_objects}"),
-        SingleValue("mem_object")..cl_mem.const.p.IN("mem_objects", "a pointer to a list of CL memory objects that correspond to GL objects"),
+        AutoSize("mem_objects")..cl_uint("num_objects", "the number of memory objects to be acquired in {@code mem_objects}"),
+        SingleValue("mem_object")..cl_mem.const.p("mem_objects", "a pointer to a list of CL memory objects that correspond to GL objects"),
         NEWL,
         EWL,
         EVENT,
@@ -411,9 +411,9 @@ val CL10GL = "CL10GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("
         Some implementations may offer more efficient methods.
         """,
 
-        cl_command_queue.IN("command_queue", "a valid command-queue"),
-        AutoSize("mem_objects")..cl_uint.IN("num_objects", "the number of memory objects to be released in {@code mem_objects}"),
-        SingleValue("mem_object")..cl_mem.const.p.IN("mem_objects", "a pointer to a list of CL memory objects that correpond to GL objects"),
+        cl_command_queue("command_queue", "a valid command-queue"),
+        AutoSize("mem_objects")..cl_uint("num_objects", "the number of memory objects to be released in {@code mem_objects}"),
+        SingleValue("mem_object")..cl_mem.const.p("mem_objects", "a pointer to a list of CL memory objects that correpond to GL objects"),
         NEWL,
         EWL,
         EVENT,

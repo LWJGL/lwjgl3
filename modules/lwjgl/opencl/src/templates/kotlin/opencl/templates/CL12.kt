@@ -276,8 +276,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         implementing those functions. However, portable applications cannot rely on this behavior.
         """,
 
-        cl_platform_id.IN("platform", "the platform to query"),
-        cl_charASCII.const.p.IN("funcname", "the extension function name")
+        cl_platform_id("platform", "the platform to query"),
+        cl_charASCII.const.p("funcname", "the extension function name")
     )
 
     cl_int(
@@ -287,7 +287,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         root level device i.e. a {@code cl_device_id} returned by #GetDeviceIDs(), the device reference count remains unchanged.
         """,
 
-        cl_device_id.IN("device", "the device to retain"),
+        cl_device_id("device", "the device to retain"),
 
         returnDoc =
         """
@@ -310,7 +310,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         object is deleted.
         """,
 
-        cl_device_id.IN("device", "the device to release"),
+        cl_device_id("device", "the device to release"),
 
         returnDoc =
         """
@@ -349,8 +349,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         )}
         """,
 
-        cl_device_id.IN("in_device", "the device to be partitioned"),
-        NullTerminated..cl_device_partition_property.const.p.IN(
+        cl_device_id("in_device", "the device to be partitioned"),
+        NullTerminated..cl_device_partition_property.const.p(
             "properties",
             """
             specifies how {@code in_device} is to be partition described by a partition name and its corresponding value. Each partition name is immediately
@@ -358,7 +358,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             """,
             "#DEVICE_PARTITION_EQUALLY #DEVICE_PARTITION_BY_COUNTS #DEVICE_PARTITION_BY_AFFINITY_DOMAIN"
         ),
-        AutoSize("out_devices")..cl_uint.IN(
+        AutoSize("out_devices")..cl_uint(
             "num_devices",
             "the size of memory pointed to by {@code out_devices} specified as the number of {@code cl_device_id} entries."
         ),
@@ -419,8 +419,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         1D image buffer is a single scanline which is a linear sequence of adjacent elements.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context on which the image object is to be created"),
-        cl_mem_flags.IN(
+        cl_context("context", "a valid OpenCL context on which the image object is to be created"),
+        cl_mem_flags(
             "flags",
             """
             a bit-field that is used to specify allocation and usage information about the image memory object being created.
@@ -441,11 +441,11 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             #MEM_HOST_READ_ONLY #MEM_HOST_NO_ACCESS
             """
         ),
-        cl_image_format.const.p.IN(
+        cl_image_format.const.p(
             "image_format",
             "a pointer to a ##CLImageFormat structure that describes format properties of the image to be allocated"
         ),
-        cl_image_desc.const.p.IN(
+        cl_image_desc.const.p(
             "image_desc",
             "a pointer to a ##CLImageDesc structure that describes type and dimensions of the image to be allocated"
         ),
@@ -453,7 +453,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..Unsafe..nullable..void.p.IN(
+        )..Unsafe..nullable..void.p(
             "host_ptr",
             """
             a pointer to the image data that may already be allocated by the application. Refer to table below for a description of how large the buffer that
@@ -515,9 +515,9 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         "CreateProgramWithBuiltInKernels",
         "Creates a program object for a context, and loads the information related to the built-in kernels into a program object.",
 
-        cl_context.IN("context", "a valid OpenCL context"),
-        AutoSize("device_list")..cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-        SingleValue("device")..cl_device_id.const.p.IN(
+        cl_context("context", "a valid OpenCL context"),
+        AutoSize("device_list")..cl_uint("num_devices", "the number of devices listed in {@code device_list}"),
+        SingleValue("device")..cl_device_id.const.p(
             "device_list",
             """
             a pointer to a list of devices that are in {@code context}. {@code device_list} must be a non-#NULL value. The built-in kernels are loaded for
@@ -527,7 +527,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             {@code device_list} must be devices associated with {@code context}.
             """
         ),
-        cl_charASCII.const.p.IN("kernel_names", "a semi-colon separated list of built-in kernel names"),
+        cl_charASCII.const.p("kernel_names", "a semi-colon separated list of built-in kernel names"),
         ERROR_RET,
 
         returnDoc =
@@ -557,28 +557,28 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         to #CreateProgramWithBinary() to create a new program object.
         """,
 
-        cl_program.IN("program", "the program object that is the compilation target"),
-        AutoSize("device_list")..cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-        nullable..cl_device_id.const.p.IN(
+        cl_program("program", "the program object that is the compilation target"),
+        AutoSize("device_list")..cl_uint("num_devices", "the number of devices listed in {@code device_list}"),
+        nullable..cl_device_id.const.p(
             "device_list",
             """
             a pointer to a list of devices associated with {@code program}. If {@code device_list} is a #NULL value, the compile is performed for all devices
             associated with program. If {@code device_list} is a non-#NULL value, the compile is performed for devices specified in this list.
             """
         ),
-        cl_charASCII.const.p.IN(
+        cl_charASCII.const.p(
             "options",
             "a pointer to a null-terminated string of characters that describes the compilation options to be used for building the program executable"
         ),
-        AutoSize("input_headers", "header_include_names")..cl_uint.IN(
+        AutoSize("input_headers", "header_include_names")..cl_uint(
             "num_input_headers",
             "the number of programs that describe headers in the array referenced by {@code input_headers}"
         ),
-        nullable..cl_program.const.p.IN(
+        nullable..cl_program.const.p(
             "input_headers",
             "an array of program embedded headers created with #CreateProgramWithSource()"
         ),
-        nullable..cl_charASCII.const.p.p.IN(
+        nullable..cl_charASCII.const.p.p(
             "header_include_names",
             """
             an array that has a one to one correspondence with {@code input_headers}. Each entry in {@code header_include_names} specifies the include name used
@@ -587,7 +587,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             compile option. If multiple entries in {@code header_include_names} refer to the same header name, the first one encountered will be used.
             """
         ),
-        nullable..cl_program_callback.IN(
+        nullable..cl_program_callback(
             "pfn_notify",
             """
             a function pointer to a notification routine. The notification routine is a callback function that an application can register and which will be
@@ -602,7 +602,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
             """
         ),
-        nullable..opaque_p.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
+        nullable..opaque_p("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
 
         returnDoc =
         """
@@ -649,9 +649,9 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         it will be the list of devices associated with context.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context"),
-        AutoSize("device_list")..cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-        nullable..cl_device_id.const.p.IN(
+        cl_context("context", "a valid OpenCL context"),
+        AutoSize("device_list")..cl_uint("num_devices", "the number of devices listed in {@code device_list}"),
+        nullable..cl_device_id.const.p(
             "device_list",
             """
             a pointer to a list of devices that are in {@code context}. If {@code device_list} is a #NULL value, the link is performed for all devices
@@ -659,15 +659,15 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             devices specified in this list for which a compiled object is available.
             """
         ),
-        cl_charASCII.const.p.IN(
+        cl_charASCII.const.p(
             "options",
             "a pointer to a null-terminated string of characters that describes the link options to be used for building the program executable"
         ),
-        AutoSize("input_programs")..cl_uint.IN(
+        AutoSize("input_programs")..cl_uint(
             "num_input_programs",
             "the number of programs in array referenced by {@code input_programs}"
         ),
-        SingleValue("input_program")..nullable..cl_program.const.p.IN(
+        SingleValue("input_program")..nullable..cl_program.const.p(
             "input_programs",
             """
             an array of program objects that are compiled binaries or libraries that are to be linked to create the program executable. For each device in
@@ -685,7 +685,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             )}
             """
         ),
-        nullable..cl_program_callback.IN(
+        nullable..cl_program_callback(
             "pfn_notify",
             """
             a function pointer to a notification routine. The notification routine is a callback function that an application can register and which will be
@@ -699,7 +699,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             If {@code pfn_notify} is #NULL, {@code clLinkProgram} does not return until the linker has completed.
             """
         ),
-        nullable..opaque_p.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
+        nullable..opaque_p("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
 
         returnDoc =
         """
@@ -754,7 +754,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         appropriate program executable.
         """,
 
-        cl_platform_id.IN("platform", "the platform for which to unload the compiler"),
+        cl_platform_id("platform", "the platform for which to unload the compiler"),
 
         returnDoc =
         """
@@ -773,17 +773,17 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         argument to #BuildProgram() or #CompileProgram().
         """,
 
-        cl_kernel.IN("kernel", "specifies the kernel object being queried"),
-        cl_uint.IN(
+        cl_kernel("kernel", "specifies the kernel object being queried"),
+        cl_uint(
             "arg_indx",
             """
             the argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to {@code n - 1}, where {@code n} is
             the total number of arguments declared by a kernel.
             """
         ),
-        cl_kernel_arg_info.IN("param_name", "the argument information to query", KernelArgInfo),
+        cl_kernel_arg_info("param_name", "the argument information to query", KernelArgInfo),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG)..nullable..void.p.IN("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -809,12 +809,12 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         {@code clEnqueueFillBuffer}.
         """,
 
-        cl_command_queue.IN(
+        cl_command_queue(
             "command_queue",
             "the command-queue in which the fill command will be queued. The OpenCL context associated with {@code command_queue} and {@code buffer} must be the same."
         ),
-        cl_mem.IN("buffer", "a valid buffer object"),
-        void.const.p.IN(
+        cl_mem("buffer", "a valid buffer object"),
+        void.const.p(
             "pattern",
             """
             pointer to the data pattern of size {@code pattern_size} in bytes. {@code pattern} will be used to fill a region in buffer starting at {@code offset}
@@ -824,9 +824,9 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             supported by the OpenCL device. The memory associated with {@code pattern} can be reused or freed after the function returns.
             """
         ),
-        AutoSize("pattern")..size_t.IN("pattern_size", "the pattern size"),
-        size_t.IN("offset", "the location in bytes of the region being filled in {@code buffer} and must be a multiple of {@code pattern_size}"),
-        size_t.IN("size", "the size in bytes of region being filled in {@code buffer} and must be a multiple of {@code pattern_size}"),
+        AutoSize("pattern")..size_t("pattern_size", "the pattern size"),
+        size_t("offset", "the location in bytes of the region being filled in {@code buffer} and must be a multiple of {@code pattern_size}"),
+        size_t("size", "the size in bytes of region being filled in {@code buffer} and must be a multiple of {@code pattern_size}"),
         NEWL,
         EWL,
         EVENT,
@@ -864,15 +864,15 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         {@code clEnqueueFillImage}.
         """,
 
-        cl_command_queue.IN(
+        cl_command_queue(
             "command_queue",
             "the command-queue in which the fill command will be queued. The OpenCL context associated with {@code command_queue} and {@code image} must be the same."
         ),
-        cl_mem.IN("image", "a valid image object"),
+        cl_mem("image", "a valid image object"),
         MultiType(
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..Check(4 x 4)..void.const.p.IN(
+        )..Check(4 x 4)..void.const.p(
             "fill_color",
             """
             the fill color. The fill color is a four component RGBA floating-point color value if the {@code image} channel data type is not an unnormalized
@@ -881,7 +881,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             will be converted to the appropriate image channel format and order associated with {@code image}.
             """
         ),
-        Check(1)..size_t.const.p.IN(
+        Check(1)..size_t.const.p(
             "origin",
             """
             the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the {@code (x)}
@@ -891,7 +891,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             describes the image index in the 2D image array.
             """
         ),
-        Check(1)..size_t.const.p.IN(
+        Check(1)..size_t.const.p(
             "region",
             """
             the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number
@@ -946,16 +946,16 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         Improperly specified event dependencies passed to {@code clEnqueueMigrateMemObjects} could result in undefined results.
         """,
 
-        cl_command_queue.IN(
+        cl_command_queue(
             "command_queue",
             """
             a valid command-queue. The specified set of memory objects in {@code mem_objects} will be migrated to the OpenCL device associated with
             {@code command_queue} or to the host if the #MIGRATE_MEM_OBJECT_HOST has been specified.
             """
         ),
-        AutoSize("mem_objects")..cl_uint.IN("num_mem_objects", "the number of memory objects specified in {@code mem_objects}"),
-        cl_mem.const.p.IN("mem_objects", "a pointer to a list of memory objects"),
-        cl_mem_migration_flags.IN("flags", "a bit-field that is used to specify migration options", MigrationFlags),
+        AutoSize("mem_objects")..cl_uint("num_mem_objects", "the number of memory objects specified in {@code mem_objects}"),
+        cl_mem.const.p("mem_objects", "a pointer to a list of memory objects"),
+        cl_mem_migration_flags("flags", "a bit-field that is used to specify migration options", MigrationFlags),
         NEWL,
         EWL,
         EVENT,
@@ -989,7 +989,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         completed.
         """,
 
-        cl_command_queue.IN("command_queue", "a valid command-queue"),
+        cl_command_queue("command_queue", "a valid command-queue"),
         NEWL,
         EWL,
         EVENT,
@@ -1016,7 +1016,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
         the {@code event_wait_list} or all previously enqueued commands, queued before this command to {@code command_queue}, have completed.
         """,
 
-        cl_command_queue.IN("command_queue", "a valid command-queue"),
+        cl_command_queue("command_queue", "a valid command-queue"),
         NEWL,
         EWL,
         EVENT,

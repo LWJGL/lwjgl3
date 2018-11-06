@@ -35,7 +35,7 @@ val EXT_blend_equation_separate = "EXTBlendEquationSeparate".nativeClassGL("EXT_
         "BlendEquationSeparateEXT",
         "",
 
-        GLenum.IN("modeRGB", ""),
-        GLenum.IN("modeAlpha", "")
+        GLenum("modeRGB", ""),
+        GLenum("modeAlpha", "")
     )
 }

@@ -36,7 +36,7 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
         either #NULL, or a unique pointer value that can later be successfully passed to #free().
         """,
 
-        AutoSizeResult..size_t.IN("size", "the number of bytes to allocate")
+        AutoSizeResult..size_t("size", "the number of bytes to allocate")
     )
 
     void.p(
@@ -47,8 +47,8 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
         #free().
         """,
 
-        AutoSizeResult..size_t.IN("nmemb", "the number of elements to allocate"),
-        AutoSizeResult..size_t.IN("size", "the number of bytes to allocate per element")
+        AutoSizeResult..size_t("nmemb", "the number of elements to allocate"),
+        AutoSizeResult..size_t("size", "the number of bytes to allocate per element")
     )
 
     void.p(
@@ -61,8 +61,8 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
         to #malloc(), #calloc() or #realloc(). If the area pointed to was moved, a {@code free(ptr)} is done.
         """,
 
-        Unsafe..nullable..void.p.IN("ptr", "the memory block to reallocate"),
-        AutoSizeResult..size_t.IN("size", "the new memory block size, in bytes")
+        Unsafe..nullable..void.p("ptr", "the memory block to reallocate"),
+        AutoSizeResult..size_t("size", "the new memory block size, in bytes")
     )
 
     OffHeapOnly..void(
@@ -72,7 +72,7 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
         or if {@code free(ptr)} has already been called before, undefined behavior occurs. If ptr is #NULL, no operation is performed.
         """,
 
-        MultiTypeAll..Unsafe..nullable..void.p.IN("ptr", "the memory space to free")
+        MultiTypeAll..Unsafe..nullable..void.p("ptr", "the memory space to free")
     )
 
     Code(
@@ -84,8 +84,8 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
         of alignment. Memory allocated with aligned_alloc() must be freed with #aligned_free().
         """,
 
-        size_t.IN("alignment", "the alignment. Must be a power of two value."),
-        AutoSizeResult..size_t.IN("size", "the number of bytes to allocate. Must be a multiple of {@code alignment}.")
+        size_t("alignment", "the alignment. Must be a power of two value."),
+        AutoSizeResult..size_t("size", "the number of bytes to allocate. Must be a multiple of {@code alignment}.")
     )
 
     Code(
@@ -94,6 +94,6 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
         "aligned_free",
         "Frees a block of memory that was allocated with #aligned_alloc(). If ptr is #NULL, no operation is performed.",
 
-        Unsafe..MultiTypeAll..nullable..void.p.IN("ptr", "the aligned block of memory to free")
+        Unsafe..MultiTypeAll..nullable..void.p("ptr", "the aligned block of memory to free")
     )
 }

@@ -30,7 +30,7 @@ val ARB_clear_buffer_object = "ARBClearBufferObject".nativeClassGL("ARB_clear_bu
         "ClearNamedBufferDataEXT",
         "DSA version of #ClearBufferData().",
 
-        GLuint.IN("buffer", "the buffer object to clear"),
+        GLuint("buffer", "the buffer object to clear"),
         ClearBufferData["internalformat"],
         ClearBufferData["format"],
         ClearBufferData["type"],
@@ -41,7 +41,7 @@ val ARB_clear_buffer_object = "ARBClearBufferObject".nativeClassGL("ARB_clear_bu
         "ClearNamedBufferSubDataEXT",
         "DSA version of #ClearBufferSubData().",
 
-        GLuint.IN("buffer", "the buffer object to clear"),
+        GLuint("buffer", "the buffer object to clear"),
         ClearBufferSubData["internalformat"],
         ClearBufferSubData["offset"],
         ClearBufferSubData["size"],

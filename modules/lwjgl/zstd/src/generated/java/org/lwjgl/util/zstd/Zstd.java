@@ -469,8 +469,8 @@ public class Zstd {
      * <p>Use {@code ZSTD_createCStream()} and {@link #ZSTD_freeCStream freeCStream} to create/release resources.</p>
      * 
      * <p>{@code ZSTD_CStream} objects can be reused multiple times on consecutive compression operations. It is recommended to re-use {@code ZSTD_CStream} in
-situations where many streaming operations will be achieved consecutively, since it will play nicer with system's memory, by re-using already allocated
-memory. Use one separate {@code ZSTD_CStream} per thread for parallel execution.</p>
+     * situations where many streaming operations will be achieved consecutively, since it will play nicer with system's memory, by re-using already allocated
+     * memory. Use one separate {@code ZSTD_CStream} per thread for parallel execution.</p>
      */
     @NativeType("ZSTD_CStream *")
     public static native long ZSTD_createCStream();

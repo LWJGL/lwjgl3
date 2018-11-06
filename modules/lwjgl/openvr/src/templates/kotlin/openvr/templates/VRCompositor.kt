@@ -34,12 +34,13 @@ typedef struct HmdColor_t
         "SetTrackingSpace",
         "Sets tracking space returned by #WaitGetPoses().",
 
-        ETrackingUniverseOrigin.IN("eOrigin", "", "ETrackingUniverseOrigin_\\w+")
+        ETrackingUniverseOrigin("eOrigin", "", "ETrackingUniverseOrigin_\\w+")
     )
 
     ETrackingUniverseOrigin(
         "GetTrackingSpace",
-        "Gets current tracking space returned by #WaitGetPoses()."
+        "Gets current tracking space returned by #WaitGetPoses().",
+        void()
     )
 
     EVRCompositorError(
@@ -51,9 +52,9 @@ typedef struct HmdColor_t
         """,
 
         TrackedDevicePose_t.p.OUT("pRenderPoseArray", ""),
-        AutoSize("pRenderPoseArray")..uint32_t.IN("unRenderPoseArrayCount", ""),
+        AutoSize("pRenderPoseArray")..uint32_t("unRenderPoseArrayCount", ""),
         nullable..TrackedDevicePose_t.p.OUT("pGamePoseArray", ""),
-        AutoSize("pGamePoseArray")..uint32_t.IN("unGamePoseArrayCount", "")
+        AutoSize("pGamePoseArray")..uint32_t("unGamePoseArrayCount", "")
     )
 
     EVRCompositorError(
@@ -61,9 +62,9 @@ typedef struct HmdColor_t
         "Get the last set of poses returned by #WaitGetPoses().",
 
         TrackedDevicePose_t.p.OUT("pRenderPoseArray", ""),
-        AutoSize("pRenderPoseArray")..uint32_t.IN("unRenderPoseArrayCount", ""),
+        AutoSize("pRenderPoseArray")..uint32_t("unRenderPoseArrayCount", ""),
         TrackedDevicePose_t.p.OUT("pGamePoseArray", ""),
-        AutoSize("pGamePoseArray")..uint32_t.IN("unGamePoseArrayCount", "")
+        AutoSize("pGamePoseArray")..uint32_t("unGamePoseArrayCount", "")
     )
 
     EVRCompositorError(
@@ -74,7 +75,7 @@ typedef struct HmdColor_t
         It is okay to pass #NULL for either pose if you only want one of the values.
         """,
 
-        TrackedDeviceIndex_t.IN("unDeviceIndex", ""),
+        TrackedDeviceIndex_t("unDeviceIndex", ""),
         nullable..TrackedDevicePose_t.p.OUT("pOutputPose", ""),
         nullable..TrackedDevicePose_t.p.OUT("pOutputGamePose", ""),
 
@@ -97,10 +98,10 @@ typedef struct HmdColor_t
         OpenGL dirty state: glBindTexture
         """,
 
-        EVREye.IN("eEye", "", "EVREye_\\w+"),
-        Texture_t.const.p.IN("pTexture", ""),
-        nullable..VRTextureBounds_t.const.p.IN("pBounds", ""),
-        EVRSubmitFlags.IN("nSubmitFlags", "", "EVRSubmitFlags_\\w+"),
+        EVREye("eEye", "", "EVREye_\\w+"),
+        Texture_t.const.p("pTexture", ""),
+        nullable..VRTextureBounds_t.const.p("pBounds", ""),
+        EVRSubmitFlags("nSubmitFlags", "", "EVRSubmitFlags_\\w+"),
 
         returnDoc =
         """
@@ -143,7 +144,7 @@ typedef struct HmdColor_t
         """,
 
         Compositor_FrameTiming.p.OUT("pTiming", ""),
-        AutoSize("pTiming")..uint32_t.IN("unFramesAgo", "")
+        AutoSize("pTiming")..uint32_t("unFramesAgo", "")
     )
 
     uint32_t(
@@ -154,7 +155,7 @@ typedef struct HmdColor_t
         """,
 
         Compositor_FrameTiming.p.OUT("pTiming", ""),
-        AutoSize("pTiming")..uint32_t.IN("nFrames", "")
+        AutoSize("pTiming")..uint32_t("nFrames", "")
     )
 
     float(
@@ -163,7 +164,8 @@ typedef struct HmdColor_t
         Returns the time in seconds left in the current (as identified by FrameTiming's frameIndex) frame.
 
         Due to "running start", this value may roll over to the next frame before ever reaching 0.0.
-        """
+        """,
+        void()
     )
 
     void(
@@ -171,7 +173,7 @@ typedef struct HmdColor_t
         "Fills out stats accumulated for the last connected application.",
 
         Compositor_CumulativeStats.p.OUT("pStats", ""),
-        Expression("CompositorCumulativeStats.SIZEOF")..uint32_t.IN("nStatsSizeInBytes", "must be {@code sizeof( Compositor_CumulativeStats )}")
+        Expression("CompositorCumulativeStats.SIZEOF")..uint32_t("nStatsSizeInBytes", "must be {@code sizeof( Compositor_CumulativeStats )}")
     )
 
     void(
@@ -183,32 +185,33 @@ typedef struct HmdColor_t
         parameter. Removing the fade color instantly would be {@code FadeToColor( 0.0, 0.0, 0.0, 0.0, 0.0 )}. Values are in un-premultiplied alpha space.
         """,
 
-        float.IN("fSeconds", ""),
-        float.IN("fRed", ""),
-        float.IN("fGreen", ""),
-        float.IN("fBlue", ""),
-        float.IN("fAlpha", ""),
-        bool.IN("bBackground", "")
+        float("fSeconds", ""),
+        float("fRed", ""),
+        float("fGreen", ""),
+        float("fBlue", ""),
+        float("fAlpha", ""),
+        bool("bBackground", "")
     )
 
     HmdColor_t(
         "GetCurrentFadeColor",
         "Get current fade color value.",
 
-        bool.IN("bBackground", "")
+        bool("bBackground", "")
     )
 
     void(
         "FadeGrid",
         "Fading the Grid in or out in {@code fSeconds}.",
 
-        float.IN("fSeconds", ""),
-        bool.IN("bFadeIn", "")
+        float("fSeconds", ""),
+        bool("bFadeIn", "")
     )
 
     float(
         "GetCurrentGridAlpha",
-        "Get current alpha value of grid."
+        "Get current alpha value of grid.",
+        void()
     )
 
     EVRCompositorError(
@@ -220,8 +223,8 @@ typedef struct HmdColor_t
         a lat-long stereo pair.
         """,
 
-        Texture_t.p.IN("pTextures", ""),
-        AutoSize("pTextures")..uint32_t.IN("unTextureCount", "")
+        Texture_t.p("pTextures", ""),
+        AutoSize("pTextures")..uint32_t("unTextureCount", "")
     )
 
     void(
@@ -249,68 +252,78 @@ typedef struct HmdColor_t
 
     bool(
         "IsFullscreen",
-        "Return whether the compositor is fullscreen."
+        "Return whether the compositor is fullscreen.",
+        void()
     )
 
     uint32_t(
         "GetCurrentSceneFocusProcess",
-        "Returns the process ID of the process that is currently rendering the scene."
+        "Returns the process ID of the process that is currently rendering the scene.",
+        void()
     )
 
     uint32_t(
         "GetLastFrameRenderer",
         "Returns the process ID of the process that rendered the last frame (or 0 if the compositor itself rendered the frame).",
+        void(),
 
         returnDoc = "0 when fading out from an app and the app's process Id when fading into an app"
     )
 
     bool(
         "CanRenderScene",
-        "Returns true if the current process has the scene focus."
+        "Returns true if the current process has the scene focus.",
+        void()
     )
 
     void(
         "ShowMirrorWindow",
-        "Creates a window on the primary monitor to display what is being shown in the headset."
+        "Creates a window on the primary monitor to display what is being shown in the headset.",
+        void()
     )
 
     void(
         "HideMirrorWindow",
-        "Closes the mirror window."
+        "Closes the mirror window.",
+        void()
     )
 
     bool(
         "IsMirrorWindowVisible",
-        "Returns true if the mirror window is shown."
+        "Returns true if the mirror window is shown.",
+        void()
     )
 
     void(
         "CompositorDumpImages",
-        "Writes back buffer and stereo left/right pair from the application to a 'screenshots' folder in the SteamVR runtime root."
+        "Writes back buffer and stereo left/right pair from the application to a 'screenshots' folder in the SteamVR runtime root.",
+        void()
     )
 
     bool(
         "ShouldAppRenderWithLowResources",
-        "Let an app know it should be rendering with low resources."
+        "Let an app know it should be rendering with low resources.",
+        void()
     )
 
     void(
         "ForceInterleavedReprojectionOn",
         "Override interleaved reprojection logic to force on.",
 
-        bool.IN("bOverride", "")
+        bool("bOverride", "")
     )
 
     void(
         "ForceReconnectProcess",
-        "Force reconnecting to the compositor process."
+        "Force reconnecting to the compositor process.",
+        void()
     )
 
     void(
         "SuspendRendering",
         "Temporarily suspends rendering (useful for finer control over scene transitions).",
 
-        bool.IN("bSuspend", "")
+        bool("bSuspend", "")
     )
 
     EVRCompositorError(
@@ -321,8 +334,8 @@ typedef struct HmdColor_t
         Use #ReleaseMirrorTextureD3D11() when finished instead of calling Release on the resource itself.
         """,
 
-        EVREye.IN("eEye", ""),
-        opaque_p.IN("pD3D11DeviceOrResource", ""),
+        EVREye("eEye", ""),
+        opaque_p("pD3D11DeviceOrResource", ""),
         Check(1)..void.p.p.OUT("ppD3D11ShaderResourceView", "")
     )
 
@@ -330,14 +343,14 @@ typedef struct HmdColor_t
         "ReleaseMirrorTextureD3D11",
         "Releases a shared D3D11 texture.",
 
-        opaque_p.IN("pD3D11ShaderResourceView", "")
+        opaque_p("pD3D11ShaderResourceView", "")
     )
 
     EVRCompositorError(
         "GetMirrorTextureGL",
         "Access to mirror textures from OpenGL.",
 
-        EVREye.IN("eEye", ""),
+        EVREye("eEye", ""),
         Check(1)..glUInt_t.p.OUT("pglTextureId", ""),
         Check(1)..glSharedTextureHandle_t.p.OUT("pglSharedTextureHandle", "")
     )
@@ -346,22 +359,22 @@ typedef struct HmdColor_t
         "ReleaseSharedGLTexture",
         "",
 
-        glUInt_t.IN("glTextureId", ""),
-        glSharedTextureHandle_t.IN("glSharedTextureHandle", "")
+        glUInt_t("glTextureId", ""),
+        glSharedTextureHandle_t("glSharedTextureHandle", "")
     )
 
     void(
         "LockGLSharedTextureForAccess",
         "",
 
-        glSharedTextureHandle_t.IN("glSharedTextureHandle", "")
+        glSharedTextureHandle_t("glSharedTextureHandle", "")
     )
 
     void(
         "UnlockGLSharedTextureForAccess",
         "",
 
-        glSharedTextureHandle_t.IN("glSharedTextureHandle", "")
+        glSharedTextureHandle_t("glSharedTextureHandle", "")
     )
 
     uint32_t(
@@ -372,7 +385,7 @@ typedef struct HmdColor_t
         """,
 
         Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchValue", ""),
-        AutoSize("pchValue")..uint32_t.IN("unBufferSize", "")
+        AutoSize("pchValue")..uint32_t("unBufferSize", "")
     )
 
     uint32_t(
@@ -382,9 +395,9 @@ typedef struct HmdColor_t
         separated list of required device extensions to enable in {@code VkCreateDevice}.
         """,
 
-        VkPhysicalDevice_T.p.IN("pPhysicalDevice", ""),
+        VkPhysicalDevice_T.p("pPhysicalDevice", ""),
         Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchValue", ""),
-        AutoSize("pchValue")..uint32_t.IN("unBufferSize", "")
+        AutoSize("pchValue")..uint32_t("unBufferSize", "")
     )
 
     void(
@@ -414,7 +427,7 @@ typedef struct HmdColor_t
         queue from another thread.
         """,
 
-        EVRCompositorTimingMode.IN("eTimingMode", "")
+        EVRCompositorTimingMode("eTimingMode", "")
     )
 
     EVRCompositorError(

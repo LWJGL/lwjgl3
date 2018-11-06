@@ -43,7 +43,7 @@ val EnumerationMutationHandler = Module.CORE_MACOS.callback {
         "EnumerationMutationHandler",
         "Will be called when an object is mutated during a foreach iteration.",
 
-        id.IN("id", "the object that was mutated"),
+        id("id", "the object that was mutated"),
 
         nativeType = "EnumerationMutationHandler"
     ) {

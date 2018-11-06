@@ -66,37 +66,37 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         "SourcedSOFT",
         "Sets the double value of a source parameter.",
 
-        ALuint.IN("source", "the source to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        ALdouble.IN("value", "the parameter value")
+        ALuint("source", "the source to modify"),
+        ALenum("param", "the parameter to modify"),
+        ALdouble("value", "the parameter value")
     )
 
     ALvoid(
         "Source3dSOFT",
         "Sets the 3 dimensional double values of a source parameter.",
 
-        ALuint.IN("source", "the source to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        ALdouble.IN("value1", "the first value"),
-        ALdouble.IN("value2", "the second value"),
-        ALdouble.IN("value3", "the third value")
+        ALuint("source", "the source to modify"),
+        ALenum("param", "the parameter to modify"),
+        ALdouble("value1", "the first value"),
+        ALdouble("value2", "the second value"),
+        ALdouble("value3", "the third value")
     )
 
     ALvoid(
         "SourcedvSOFT",
         "pointer version of #SourcedSOFT()",
 
-        ALuint.IN("source", "the source to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        Check(1)..ALdouble.const.p.IN("value", "the parameter values")
+        ALuint("source", "the source to modify"),
+        ALenum("param", "the parameter to modify"),
+        Check(1)..ALdouble.const.p("value", "the parameter values")
     )
 
     ALvoid(
         "GetSourcedSOFT",
         "Gets the double value of a source parameter.",
 
-        ALuint.IN("source", "the source to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("source", "the source to query"),
+        ALenum("param", "the parameter to query"),
         ReturnParam..Check(1)..ALdouble.p.OUT("value", "the parameter values")
     )
 
@@ -104,8 +104,8 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         "GetSource3dSOFT",
         "Gets the 3 dimensional double values of a source parameter.",
 
-        ALuint.IN("source", "the source to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("source", "the source to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALdouble.p.OUT("value1", "the first value"),
         Check(1)..ALdouble.p.OUT("value2", "the second value"),
         Check(1)..ALdouble.p.OUT("value3", "the third value")
@@ -115,8 +115,8 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         "GetSourcedvSOFT",
         "Array version of #GetSourcedSOFT()",
 
-        ALuint.IN("source", "the source to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("source", "the source to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALdouble.p.OUT("values", "the parameter values")
     )
 
@@ -124,37 +124,37 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         "Sourcei64SOFT",
         "Sets the 64 bit integer value of a source parameter.",
 
-        ALuint.IN("source", "the source to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        ALint64SOFT.IN("value", "the parameter values")
+        ALuint("source", "the source to modify"),
+        ALenum("param", "the parameter to modify"),
+        ALint64SOFT("value", "the parameter values")
     )
 
     ALvoid(
         "Source3i64SOFT",
         "Sets the 3 dimensional 64 bit integer values of a source parameter.",
 
-        ALuint.IN("source", "the source to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        ALint64SOFT.IN("value1", "the first value"),
-        ALint64SOFT.IN("value2", "the second value"),
-        ALint64SOFT.IN("value3", "the third value")
+        ALuint("source", "the source to modify"),
+        ALenum("param", "the parameter to modify"),
+        ALint64SOFT("value1", "the first value"),
+        ALint64SOFT("value2", "the second value"),
+        ALint64SOFT("value3", "the third value")
     )
 
     ALvoid(
         "Sourcei64vSOFT",
         "Array version of #Sourcei64SOFT()",
 
-        ALuint.IN("source", "the source to modify"),
-        ALenum.IN("param", "the parameter to modify"),
-        Check(1)..ALint64SOFT.const.p.IN("values", "the parameter values")
+        ALuint("source", "the source to modify"),
+        ALenum("param", "the parameter to modify"),
+        Check(1)..ALint64SOFT.const.p("values", "the parameter values")
     )
 
     ALvoid(
         "GetSourcei64SOFT",
         "Gets the 64 bit integer value of a source parameter.",
 
-        ALuint.IN("source", "the source to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("source", "the source to query"),
+        ALenum("param", "the parameter to query"),
         ReturnParam..Check(1)..ALint64SOFT.p.OUT("value", "the parameter values")
     )
 
@@ -162,8 +162,8 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         "GetSource3i64SOFT",
         "Gets the 3 dimensional 64 bit integer values of a source parameter.",
 
-        ALuint.IN("source", "the source to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("source", "the source to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALint64SOFT.p.OUT("value1", "the first value"),
         Check(1)..ALint64SOFT.p.OUT("value2", "the second value"),
         Check(1)..ALint64SOFT.p.OUT("value3", "the third value")
@@ -173,8 +173,8 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
         "GetSourcei64vSOFT",
         "Array version of #GetSourcei64SOFT()",
 
-        ALuint.IN("source", "the source to query"),
-        ALenum.IN("param", "the parameter to query"),
+        ALuint("source", "the source to query"),
+        ALenum("param", "the parameter to query"),
         Check(1)..ALint64SOFT.p.OUT("values", "the parameter values")
     )
 }

@@ -906,10 +906,12 @@ public class GL11C {
     // --- [ glGetError ] ---
 
     /**
-     * Returns error information. Each detectable error is assigned a numeric code. When an error is detected, a flag is set and the code is recorded. Further
-     * errors, if they occur, do not affect this recorded code. When {@code GetError} is called, the code is returned and the flag is cleared, so that a
-     * further error will again record its code. If a call to {@code GetError} returns {@link #GL_NO_ERROR NO_ERROR}, then there has been no detectable error since
-     * the last call to {@code GetError} (or since the GL was initialized).
+     * Returns error information.
+     * 
+     * <p>Each detectable error is assigned a numeric code. When an error is detected, a flag is set and the code is recorded. Further errors, if they occur, do
+     * not affect this recorded code. When {@code GetError} is called, the code is returned and the flag is cleared, so that a further error will again record
+     * its code. If a call to {@code GetError} returns {@link #GL_NO_ERROR NO_ERROR}, then there has been no detectable error since the last call to {@code GetError} (or since
+     * the GL was initialized).</p>
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetError">Reference Page</a>
      */

@@ -36,7 +36,7 @@ val QCOM_alpha_test = "QCOMAlphaTest".nativeClassGLES("QCOM_alpha_test", postfix
         "AlphaFuncQCOM",
         "",
 
-        GLenum.IN("func", ""),
-        GLfloat.IN("ref", "")
+        GLenum("func", ""),
+        GLfloat("ref", "")
     )
 }

@@ -90,7 +90,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
 
     GL40C reuse "GetUniformdv"
 
-    val program = GLuint.IN("program", "the program object to update")
+    val program = GLuint("program", "the program object to update")
 
     var src = GL40C["Uniform1d"]
     IgnoreMissing..DependsOn("GL_EXT_direct_state_access")..void(

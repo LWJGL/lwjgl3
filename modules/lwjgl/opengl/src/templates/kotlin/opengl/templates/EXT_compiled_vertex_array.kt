@@ -33,8 +33,8 @@ val EXT_compiled_vertex_array = "EXTCompiledVertexArray".nativeClassGL("EXT_comp
         "LockArraysEXT",
         "",
 
-        GLint.IN("first", ""),
-        GLsizei.IN("count", "")
+        GLint("first", ""),
+        GLsizei("count", "")
     )
 
     void(

@@ -118,19 +118,19 @@ val EXT_shader_image_load_store = "EXTShaderImageLoadStore".nativeClassGL("EXT_s
         "BindImageTextureEXT",
         "",
 
-        GLuint.IN("index", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLboolean.IN("layered", ""),
-        GLint.IN("layer", ""),
-        GLenum.IN("access", ""),
-        GLint.IN("format", "")
+        GLuint("index", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLboolean("layered", ""),
+        GLint("layer", ""),
+        GLenum("access", ""),
+        GLint("format", "")
     )
 
     void(
         "MemoryBarrierEXT",
         "",
 
-        GLbitfield.IN("barriers", "")
+        GLbitfield("barriers", "")
     )
 }

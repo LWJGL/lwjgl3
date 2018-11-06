@@ -153,8 +153,8 @@ val EXT_conditional_rendering = "EXTConditionalRendering".nativeClassVK("EXT_con
         ##VkConditionalRenderingBeginInfoEXT
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded."),
-        VkConditionalRenderingBeginInfoEXT.const.p.IN("pConditionalRenderingBegin", "a pointer to an instance of the ##VkConditionalRenderingBeginInfoEXT structure specifying the parameters of conditional rendering.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which this command will be recorded."),
+        VkConditionalRenderingBeginInfoEXT.const.p("pConditionalRenderingBegin", "a pointer to an instance of the ##VkConditionalRenderingBeginInfoEXT structure specifying the parameters of conditional rendering.")
     )
 
     void(
@@ -199,6 +199,6 @@ val EXT_conditional_rendering = "EXTConditionalRendering".nativeClassVK("EXT_con
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which this command will be recorded.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which this command will be recorded.")
     )
 }

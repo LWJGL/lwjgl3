@@ -50,7 +50,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
         greater or equal than the number of GPUs supported by the system.
         """,
 
-        UINT.IN("gpuIndex", "an index value that specifies a GPU"),
+        UINT("gpuIndex", "an index value that specifies a GPU"),
         Check(1)..HGPUNV.p.OUT("gpu", "returns a handle for GPU number {@code gpuIndex}. The first GPU will be index 0.")
     )
 
@@ -58,8 +58,8 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
         "EnumGpuDevicesNV",
         "Retrieve information about the display devices supported by a GPU.",
 
-        HGPUNV.IN("gpu", "a handle to the GPU to query"),
-        UINT.IN("deviceIndex", "an index value that specifies a display device, supported by {@code gpu}, to query. The first display device will be index 0."),
+        HGPUNV("gpu", "a handle to the GPU to query"),
+        UINT("deviceIndex", "an index value that specifies a display device, supported by {@code gpu}, to query. The first display device will be index 0."),
         PGPU_DEVICE.OUT("gpuDevice", "a ##GPU_DEVICE structure which will receive information about the display device at index {@code deviceIndex}.")
     )
 
@@ -74,7 +74,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
         If successful, the function returns an affinity-DC handle. If it fails, #NULL will be returned.
         """,
 
-        NullTerminated..HGPUNV.const.p.IN("gpuList", "a #NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
+        NullTerminated..HGPUNV.const.p("gpuList", "a #NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
     )
 
     BOOL(
@@ -87,8 +87,8 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
         function fails if {@code gpuIndex} is greater or equal than the number of GPUs associated with {@code affinityDC}.
         """,
 
-        HDC.IN("affinityDC", "a handle of the affinity-DC to query"),
-        UINT.IN("gpuIndex", "an index value of the GPU handle in the affinity mask of {@code affinityDC} to query"),
+        HDC("affinityDC", "a handle of the affinity-DC to query"),
+        UINT("gpuIndex", "an index value of the GPU handle in the affinity mask of {@code affinityDC} to query"),
         Check(1)..HGPUNV.p.OUT("gpu", "returns a handle for  GPU number {@code gpuIndex}. The first GPU will be at index 0.")
     )
 
@@ -96,6 +96,6 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
         "DeleteDCNV",
         "Deletes an affinity-DC.",
 
-        HDC.IN("hdc", "a handle of an affinity-DC to delete")
+        HDC("hdc", "a handle of an affinity-DC to delete")
     )
 }

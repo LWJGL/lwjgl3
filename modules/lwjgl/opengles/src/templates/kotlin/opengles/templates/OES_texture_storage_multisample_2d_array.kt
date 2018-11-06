@@ -44,12 +44,12 @@ val OES_texture_storage_multisample_2d_array = "OESTextureStorageMultisample2DAr
         "TexStorage3DMultisampleOES",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLboolean.IN("fixedsamplelocations", "")
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLboolean("fixedsamplelocations", "")
     )
 }

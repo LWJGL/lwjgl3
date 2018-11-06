@@ -38,14 +38,14 @@ val CU42 = "CU42".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "CtxSetSharedMemConfig",
         "",
 
-        CUsharedconfig.IN("config", "")
+        CUsharedconfig("config", "")
     )
 
     CUresult(
         "FuncSetSharedMemConfig",
         "",
 
-        CUfunction.IN("hfunc", ""),
-        CUsharedconfig.IN("config", "")
+        CUfunction("hfunc", ""),
+        CUsharedconfig("config", "")
     )
 }

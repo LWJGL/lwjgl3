@@ -19,7 +19,7 @@ val GLFWNativeWGL = "GLFWNativeWGL".nativeClass(Module.GLFW, nativeSubPath = "wi
         Note: This function may be called from any thread. Access is not synchronized.
         """,
 
-        GLFWwindow.p.IN("window", "the GLFW window"),
+        GLFWwindow.p("window", "the GLFW window"),
         returnDoc = "The {@code HGLRC} of the specified window, or #NULL if an error occurred.",
         since = "version 3.0"
     )

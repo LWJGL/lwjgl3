@@ -117,7 +117,7 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
             both.
             """,
 
-            size_t.IN("size", "the number of bytes to map"),
+            size_t("size", "the number of bytes to map"),
             Check(1)..size_t.p.OUT("offset", "the alignment offset")
         ) {
             documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
@@ -138,10 +138,10 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
             """,
 
             //void* address, size_t size, size_t offset, int release
-            opaque_p.IN("address", "the address to unmap"),
-            size_t.IN("size", "the size of the mapped pages, in bytes"),
-            size_t.IN("offset", "the alignment offset"),
-            intb.IN("release", "the release flag")
+            opaque_p("address", "the address to unmap"),
+            size_t("size", "the size of the mapped pages, in bytes"),
+            size_t("offset", "the alignment offset"),
+            intb("release", "the release flag")
         ) {
             documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
         }

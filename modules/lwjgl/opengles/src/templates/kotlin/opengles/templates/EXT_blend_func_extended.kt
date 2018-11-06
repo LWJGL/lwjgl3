@@ -57,35 +57,35 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
         "BindFragDataLocationIndexedEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLuint.IN("colorNumber", ""),
-        GLuint.IN("index", ""),
-        GLcharASCII.const.p.IN("name", "")
+        GLuint("program", ""),
+        GLuint("colorNumber", ""),
+        GLuint("index", ""),
+        GLcharASCII.const.p("name", "")
     )
 
     GLint(
         "GetFragDataIndexEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLcharASCII.const.p.IN("name", "")
+        GLuint("program", ""),
+        GLcharASCII.const.p("name", "")
     )
 
     void(
         "BindFragDataLocationEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLuint.IN("colorNumber", ""),
-        GLcharASCII.const.p.IN("name", "")
+        GLuint("program", ""),
+        GLuint("colorNumber", ""),
+        GLcharASCII.const.p("name", "")
     )
 
     GLint(
         "GetProgramResourceLocationIndexEXT",
         "",
 
-        GLuint.IN("program", ""),
-        GLenum.IN("programInterface", ""),
-        GLcharASCII.const.p.IN("name", "")
+        GLuint("program", ""),
+        GLenum("programInterface", ""),
+        GLcharASCII.const.p("name", "")
     )
 }

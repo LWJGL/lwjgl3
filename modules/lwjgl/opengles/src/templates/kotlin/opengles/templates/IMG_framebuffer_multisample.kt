@@ -49,25 +49,25 @@ val IMG_framebuffer_downsample = "IMGFramebufferDownsample".nativeClassGLES("IMG
         "FramebufferTexture2DDownsampleIMG",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLenum.IN("textarget", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLint.IN("xscale", ""),
-        GLint.IN("yscale", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLenum("textarget", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLint("xscale", ""),
+        GLint("yscale", "")
     )
 
     void(
         "FramebufferTextureLayerDownsampleIMG",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLint.IN("layer", ""),
-        GLint.IN("xscale", ""),
-        GLint.IN("yscale", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLint("layer", ""),
+        GLint("xscale", ""),
+        GLint("yscale", "")
     )
 }

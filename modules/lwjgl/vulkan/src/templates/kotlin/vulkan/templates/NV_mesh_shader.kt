@@ -154,9 +154,9 @@ val NV_mesh_shader = "NVMeshShader".nativeClassVK("NV_mesh_shader", type = "devi
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        uint32_t.IN("taskCount", "the number of local workgroups to dispatch in the X dimension. Y and Z dimension are implicitly set to one."),
-        uint32_t.IN("firstTask", "the X component of the first workgroup ID.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        uint32_t("taskCount", "the number of local workgroups to dispatch in the X dimension. Y and Z dimension are implicitly set to one."),
+        uint32_t("firstTask", "the X component of the first workgroup ID.")
     )
 
     void(
@@ -237,11 +237,11 @@ val NV_mesh_shader = "NVMeshShader".nativeClassVK("NV_mesh_shader", type = "devi
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        VkBuffer.IN("buffer", "the buffer containing draw parameters."),
-        VkDeviceSize.IN("offset", "the byte offset into {@code buffer} where parameters begin."),
-        uint32_t.IN("drawCount", "the number of draws to execute, and <b>can</b> be zero."),
-        uint32_t.IN("stride", "the byte stride between successive sets of draw parameters.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
+        VkBuffer("buffer", "the buffer containing draw parameters."),
+        VkDeviceSize("offset", "the byte offset into {@code buffer} where parameters begin."),
+        uint32_t("drawCount", "the number of draws to execute, and <b>can</b> be zero."),
+        uint32_t("stride", "the byte stride between successive sets of draw parameters.")
     )
 
     void(
@@ -324,12 +324,12 @@ val NV_mesh_shader = "NVMeshShader".nativeClassVK("NV_mesh_shader", type = "devi
         </table>
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command is recorded."),
-        VkBuffer.IN("buffer", "the buffer containing draw parameters."),
-        VkDeviceSize.IN("offset", "the byte offset into {@code buffer} where parameters begin."),
-        VkBuffer.IN("countBuffer", "the buffer containing the draw count."),
-        VkDeviceSize.IN("countBufferOffset", "the byte offset into {@code countBuffer} where the draw count begins."),
-        uint32_t.IN("maxDrawCount", "specifies the maximum number of draws that will be executed. The actual number of executed draw calls is the minimum of the count specified in {@code countBuffer} and {@code maxDrawCount}."),
-        uint32_t.IN("stride", "the byte stride between successive sets of draw parameters.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
+        VkBuffer("buffer", "the buffer containing draw parameters."),
+        VkDeviceSize("offset", "the byte offset into {@code buffer} where parameters begin."),
+        VkBuffer("countBuffer", "the buffer containing the draw count."),
+        VkDeviceSize("countBufferOffset", "the byte offset into {@code countBuffer} where the draw count begins."),
+        uint32_t("maxDrawCount", "specifies the maximum number of draws that will be executed. The actual number of executed draw calls is the minimum of the count specified in {@code countBuffer} and {@code maxDrawCount}."),
+        uint32_t("stride", "the byte stride between successive sets of draw parameters.")
     )
 }

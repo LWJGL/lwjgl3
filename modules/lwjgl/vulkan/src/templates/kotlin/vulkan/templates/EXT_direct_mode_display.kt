@@ -94,7 +94,7 @@ val EXT_direct_mode_display = "EXTDirectModeDisplay".nativeClassVK("EXT_direct_m
         </dl>
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "The physical device the display is on."),
-        VkDisplayKHR.IN("display", "The display to release control of.")
+        VkPhysicalDevice("physicalDevice", "The physical device the display is on."),
+        VkDisplayKHR("display", "The display to release control of.")
     )
 }

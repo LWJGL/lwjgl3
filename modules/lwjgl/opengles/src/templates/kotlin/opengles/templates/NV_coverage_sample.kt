@@ -79,13 +79,13 @@ val NV_coverage_sample = "NVCoverageSample".nativeClassGLES("NV_coverage_sample"
         "CoverageMaskNV",
         "",
 
-        GLboolean.IN("mask", "")
+        GLboolean("mask", "")
     )
 
     void(
         "CoverageOperationNV",
         "",
 
-        GLenum.IN("operation", "")
+        GLenum("operation", "")
     )
 }

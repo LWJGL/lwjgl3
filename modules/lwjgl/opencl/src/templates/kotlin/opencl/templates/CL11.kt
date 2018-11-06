@@ -113,8 +113,8 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         from both a buffer object and its sub-buffer objects or reading from multiple overlapping sub-buffer objects is defined.
         """,
 
-        cl_mem.IN("buffer", "a valid buffer object and cannot be a sub-buffer object"),
-        cl_mem_flags.IN(
+        cl_mem("buffer", "a valid buffer object and cannot be a sub-buffer object"),
+        cl_mem_flags(
             "flags",
             """
             a bit-field that is used to specify allocation and usage information about the sub-buffer memory object being created.
@@ -128,12 +128,12 @@ val CL11 = "CL11".nativeClassCL("CL11") {
             associated with buffer.
             """
         ),
-        cl_buffer_create_type.IN(
+        cl_buffer_create_type(
             "buffer_create_type",
             "the type of buffer object to be created",
             BufferCreateType
         ),
-        Unsafe..void.const.p.IN(
+        Unsafe..void.const.p(
             "buffer_create_info",
             """
             details about the buffer object to be created.
@@ -183,15 +183,15 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         memory object is created and used as the storage bits for the memory object, can be reused or freed.
         """,
 
-        cl_mem.IN("memobj", "a valid memory object"),
-        cl_mem_object_destructor_callback.IN(
+        cl_mem("memobj", "a valid memory object"),
+        cl_mem_object_destructor_callback(
             "pfn_notify",
             """
             the callback function that can be registered by the application. This callback function may be called asynchronously by the OpenCL implementation.
             It is the application's responsibility to ensure that the callback function is thread-safe.
             """
         ),
-        nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
+        nullable..opaque_p("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
 
         returnDoc =
         """
@@ -205,49 +205,49 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         """
     )
 
-    val BufferRectBufferOffset = Check(3)..size_t.const.p.IN(
+    val BufferRectBufferOffset = Check(3)..size_t.const.p(
         "buffer_offset",
         """
         the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
         should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
         """
     )
-    val BufferRectHostOffset = Check(3)..size_t.const.p.IN(
+    val BufferRectHostOffset = Check(3)..size_t.const.p(
         "host_offset",
         """
         the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
         should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
         """
     )
-    val BufferRectRegion = Check(3)..size_t.const.p.IN(
+    val BufferRectRegion = Check(3)..size_t.const.p(
         "region",
         """
         the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
         given by {@code region[2]} should be 1. The values in region cannot be 0.
         """
     )
-    val BufferRectBufferRowPitch = size_t.IN(
+    val BufferRectBufferRowPitch = size_t(
         "buffer_row_pitch",
         """
         the length of each row in bytes to be used for the memory region associated with {@code buffer}. If {@code buffer_row_pitch} is 0,
         {@code buffer_row_pitch} is computed as {@code region[0]}.
         """
     )
-    val BufferRectBufferSlicePitch = size_t.IN(
+    val BufferRectBufferSlicePitch = size_t(
         "buffer_slice_pitch",
         """
         the length of each 2D slice in bytes to be used for the memory region associated with {@code buffer}. If {@code buffer_slice_pitch} is 0,
         {@code buffer_slice_pitch} is computed as {@code region[1] * buffer_row_pitch}.
         """
     )
-    val BufferRectHostRowPitch = size_t.IN(
+    val BufferRectHostRowPitch = size_t(
         "host_row_pitch",
         """
         the length of each row in bytes to be used for the memory region pointed to by {@code ptr}. If {@code host_row_pitch} is 0, {@code host_row_pitch}
         is computed as {@code region[0]}.
         """
     )
-    val BufferRectHostSlicePitch = size_t.IN(
+    val BufferRectHostSlicePitch = size_t(
         "host_slice_pitch",
         """
         the length of each 2D slice in bytes to be used for the memory region pointed to by {@code ptr}. If {@code host_slice_pitch} is 0,
@@ -273,12 +273,12 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         )}
         """,
 
-        cl_command_queue.IN(
+        cl_command_queue(
             "command_queue",
             "the command-queue in which the read command will be queued. {@code command_queue} and {@code buffer} must be created with the same OpenCL context."
         ),
-        cl_mem.IN("buffer", "a valid buffer object"),
-        cl_bool.IN(
+        cl_mem("buffer", "a valid buffer object"),
+        cl_bool(
             "blocking_read",
             """
             indicates if the read operation is <em>blocking</em> or <em>nonblocking</em>.
@@ -350,12 +350,12 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         )}
         """,
 
-        cl_command_queue.IN(
+        cl_command_queue(
             "command_queue",
             "the command-queue in which the write command will be queued. {@code command_queue} and {@code buffer} must be created with the same OpenCL context."
         ),
-        cl_mem.IN("buffer", "a valid buffer object"),
-        cl_bool.IN(
+        cl_mem("buffer", "a valid buffer object"),
+        cl_bool(
             "blocking_write",
             """
             indicates if the write operation is <em>blocking</em> or <em>nonblocking</em>.
@@ -381,7 +381,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..Unsafe..void.const.p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
+        )..Unsafe..void.const.p("ptr", "the pointer to buffer in host memory where data is to be written from"),
         NEWL,
         EWL,
         EVENT,
@@ -427,58 +427,58 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         and {@code src_slice_pitch} must equal {@code dst_slice_pitch}.
         """,
 
-        cl_command_queue.IN(
+        cl_command_queue(
             "command_queue",
             """
             the command-queue in which the copy command will be queued. The OpenCL context associated with {@code command_queue}, {@code src_buffer} and
             {@code dst_buffer} must be the same.
             """
         ),
-        cl_mem.IN("src_buffer", "the source buffer"),
-        cl_mem.IN("dst_buffer", "the destination buffer"),
-        Check(3)..size_t.p.IN(
+        cl_mem("src_buffer", "the source buffer"),
+        cl_mem("dst_buffer", "the destination buffer"),
+        Check(3)..size_t.p(
             "src_origin",
             """
             the {@code (x, y, z)} offset in the memory region associated with {@code src_buffer}. For a 2D rectangle region, the z value given by {@code src_origin[2]}
             should be 0. The offset in bytes is computed as {@code src_origin[2] * src_slice_pitch + src_origin[1] * src_row_pitch + src_origin[0]}.
             """
         ),
-        Check(3)..size_t.p.IN(
+        Check(3)..size_t.p(
             "dst_origin",
             """
             the {@code (x, y, z)} offset in the memory region associated with {@code dst_buffer}. For a 2D rectangle region, the z value given by {@code dst_origin[2]}
             should be 0. The offset in bytes is computed as {@code dst_origin[2] * dst_slice_pitch + dst_origin[1] * dst_row_pitch + dst_origin[0]}.
             """
         ),
-        Check(3)..size_t.p.IN(
+        Check(3)..size_t.p(
             "region",
             """
             the ({@code width} in bytes, {@code height} in rows, {@code depth} in slices) of the 2D or 3D rectangle being copied. For a 2D rectangle, the depth
             value given by {@code region[2]} should be 1. The values in {@code region} cannot be 0.
             """
         ),
-        size_t.IN(
+        size_t(
             "src_row_pitch",
             """
             the length of each row in bytes to be used for the memory region associated with {@code src_buffer}. If {@code src_row_pitch} is 0, {@code src_row_pitch}
             is computed as {@code region[0]}.
             """
         ),
-        size_t.IN(
+        size_t(
             "src_slice_pitch",
             """
             the length of each 2D slice in bytes to be used for the memory region associated with {@code src_buffer}. If {@code src_slice_pitch} is 0,
             {@code src_slice_pitch} is computed as {@code region[1] * src_row_pitch}.
             """
         ),
-        size_t.IN(
+        size_t(
             "dst_row_pitch",
             """
             the length of each row in bytes to be used for the memory region associated with {@code dst_buffer}. If {@code dst_row_pitch} is 0, {@code dst_row_pitch}
             is computed as {@code region[0]}.
             """
         ),
-        size_t.IN(
+        size_t(
             "dst_slice_pitch",
             """
             the length of each 2D slice in bytes to be used for the memory region associated with {@code dst_buffer}. If {@code dst_slice_pitch} is 0,
@@ -541,7 +541,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         The execution status of the user event object created is set to #SUBMITTED.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context"),
+        cl_context("context", "a valid OpenCL context"),
         ERROR_RET,
 
         returnDoc =
@@ -583,8 +583,8 @@ clReleaseMemObject(buf2);
         """)}
         """,
 
-        cl_event.IN("event", "a user event object created using #CreateUserEvent()"),
-        cl_int.IN(
+        cl_event("event", "a user event object created using #CreateUserEvent()"),
+        cl_int(
             "execution_status",
             """
             the new execution status to be set and can be #COMPLETE or a negative integer value to indicate an error. A negative integer value
@@ -633,8 +633,8 @@ clReleaseMemObject(buf2);
         #Flush() on the queue before returning or arrange for #Flush() to be called later on another thread.
         """,
 
-        cl_event.IN("event", "a valid event object"),
-        cl_int.IN(
+        cl_event("event", "a valid event object"),
+        cl_int(
             "command_exec_callback_type",
             """
             the command execution status for which the callback is registered. There is no guarantee that the callback functions registered for various
@@ -645,14 +645,14 @@ clReleaseMemObject(buf2);
             """,
             "#SUBMITTED #RUNNING #COMPLETE"
         ),
-        cl_event_callback.IN(
+        cl_event_callback(
             "pfn_notify",
             """
             the event callback function that can be registered by the application. This callback function may be called asynchronously by the OpenCL
             implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
             """
         ),
-        nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
+        nullable..opaque_p("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be #NULL."),
 
         returnDoc =
         """

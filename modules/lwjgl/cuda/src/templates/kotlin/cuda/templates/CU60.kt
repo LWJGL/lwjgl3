@@ -25,26 +25,26 @@ val CU60 = "CU60".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Check(1)..CUdeviceptr.p.OUT("dptr", ""),
-        size_t.IN("bytesize", ""),
-        unsigned_int.IN("flags", "")
+        size_t("bytesize", ""),
+        unsigned_int("flags", "")
     )
 
     CUresult(
         "PointerSetAttribute",
         "",
 
-        Unsafe..void.const.p.IN("value", ""),
-        CUpointer_attribute.IN("attribute", ""),
-        CUdeviceptr.IN("ptr", "")
+        Unsafe..void.const.p("value", ""),
+        CUpointer_attribute("attribute", ""),
+        CUdeviceptr("ptr", "")
     )
 
     CUresult(
         "StreamAttachMemAsync",
         "",
 
-        nullable..CUstream.IN("hStream", ""),
-        CUdeviceptr.IN("dptr", ""),
-        size_t.IN("length", ""),
-        unsigned_int.IN("flags", "")
+        nullable..CUstream("hStream", ""),
+        CUdeviceptr("dptr", ""),
+        size_t("length", ""),
+        unsigned_int("flags", "")
     ).ptsz()
 }

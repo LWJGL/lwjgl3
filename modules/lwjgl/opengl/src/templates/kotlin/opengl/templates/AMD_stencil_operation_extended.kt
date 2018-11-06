@@ -40,7 +40,7 @@ val AMD_stencil_operation_extended = "AMDStencilOperationExtended".nativeClassGL
         "StencilOpValueAMD",
         "",
 
-        GLenum.IN("face", ""),
-        GLuint.IN("value", "")
+        GLenum("face", ""),
+        GLuint("value", "")
     )
 }

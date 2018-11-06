@@ -47,45 +47,45 @@ val KHR_reusable_sync = "KHRReusableSync".nativeClassEGL("KHR_reusable_sync", po
         "CreateSyncKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLenum.IN("type", ""),
-        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLenum("type", ""),
+        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
     )
 
     EGLBoolean(
         "DestroySyncKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSyncKHR.IN("sync", "")
+        EGLDisplay("dpy", ""),
+        EGLSyncKHR("sync", "")
     )
 
     EGLint(
         "ClientWaitSyncKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSyncKHR.IN("sync", ""),
-        EGLint.IN("flags", ""),
-        EGLTimeKHR.IN("timeout", "")
+        EGLDisplay("dpy", ""),
+        EGLSyncKHR("sync", ""),
+        EGLint("flags", ""),
+        EGLTimeKHR("timeout", "")
     )
 
     EGLBoolean(
         "SignalSyncKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSyncKHR.IN("sync", ""),
-        EGLenum.IN("mode", "")
+        EGLDisplay("dpy", ""),
+        EGLSyncKHR("sync", ""),
+        EGLenum("mode", "")
     )
 
     EGLBoolean(
         "GetSyncAttribKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSyncKHR.IN("sync", ""),
-        EGLint.IN("attribute", ""),
+        EGLDisplay("dpy", ""),
+        EGLSyncKHR("sync", ""),
+        EGLint("attribute", ""),
         Check(1)..EGLint.p.OUT("value", "")
     )
 }

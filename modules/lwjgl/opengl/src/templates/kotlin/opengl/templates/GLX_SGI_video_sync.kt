@@ -34,8 +34,8 @@ val GLX_SGI_video_sync = "GLXSGIVideoSync".nativeClassGLX("GLX_SGI_video_sync", 
         {@code count}. Zero is returned by {@code glXWaitVideoSyncSGI} if it is successful.
         """,
 
-        int.IN("divisor", "the divisor value"),
-        int.IN("remainder", "the remainder value"),
+        int("divisor", "the divisor value"),
+        int("remainder", "the remainder value"),
         Check(1)..unsigned_int.p.OUT("count", "the video sync counter value")
     )
 

@@ -393,7 +393,7 @@ if (nb_packets > 0)
         "encoder_get_size",
         "Gets the size of an {@code OpusEncoder} structure.",
 
-        int.IN("channels", "number of channels", "1 2"),
+        int("channels", "number of channels", "1 2"),
 
         returnDoc = "the size in bytes"
     )
@@ -432,9 +432,9 @@ if (nb_packets > 0)
         encoding.""")}
         """,
 
-        opus_int32.IN("Fs", "sampling rate of input signal (Hz)", "8000 12000 16000 24000 48000"),
-        int.IN("channels", "number of channels in input signal", "1 2"),
-        int.IN("application", "coding mode", CodingModes),
+        opus_int32("Fs", "sampling rate of input signal (Hz)", "8000 12000 16000 24000 48000"),
+        int("channels", "number of channels in input signal", "1 2"),
+        int("application", "coding mode", CodingModes),
         Check(1)..nullable..int.p.OUT("error", "", ErrorCodes)
     )
 
@@ -449,10 +449,10 @@ if (nb_packets > 0)
         To reset a previously initialized state, use the #RESET_STATE CTL.
         """,
 
-        OpusEncoder.p.IN("st", "encoder state"),
-        opus_int32.IN("Fs", "sampling rate of input signal (Hz)", "8000 12000 16000 24000 48000"),
-        int.IN("channels", "number of channels in input signal", "1 2"),
-        int.IN("application", "coding mode", CodingModes),
+        OpusEncoder.p("st", "encoder state"),
+        opus_int32("Fs", "sampling rate of input signal (Hz)", "8000 12000 16000 24000 48000"),
+        int("channels", "number of channels in input signal", "1 2"),
+        int("application", "coding mode", CodingModes),
 
         returnDoc = "#OK on success or a negative error code on error"
     )
@@ -461,12 +461,12 @@ if (nb_packets > 0)
         "encode",
         "Encodes an Opus frame.",
 
-        OpusEncoder.p.IN("st", "encoder state"),
+        OpusEncoder.p("st", "encoder state"),
         Check(
             // Reading OpusEncoder internal state here
             "frame_size * memGetInt(st + 8)"
-        )..opus_int16.const.p.IN("pcm","input signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)})"),
-        int.IN(
+        )..opus_int16.const.p("pcm","input signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)})"),
+        int(
             "frame_size",
             """
             number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the
@@ -475,7 +475,7 @@ if (nb_packets > 0)
             """
         ),
         unsigned_char.p.OUT("data", "output payload"),
-        AutoSize("data")..opus_int32.IN(
+        AutoSize("data")..opus_int32(
             "max_data_bytes",
             """
             size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as
@@ -490,11 +490,11 @@ if (nb_packets > 0)
         "encode_float",
         "Encodes an Opus frame from floating point input.",
 
-        OpusEncoder.p.IN("st", "encoder state"),
+        OpusEncoder.p("st", "encoder state"),
         Check(
             // Reading OpusEncoder internal state here
             "frame_size * memGetInt(st + 8)"
-        )..float.const.p.IN(
+        )..float.const.p(
             "pcm",
             """
             input signal (interleaved if 2 channels) with a normal range of {@code +/-1.0}. Samples with a range beyond {@code +/-1.0} are supported but will
@@ -502,7 +502,7 @@ if (nb_packets > 0)
             {@code frame_size*channels*sizeof(float)})
             """
         ),
-        int.IN("frame_size",
+        int("frame_size",
             """
             number of samples per channel in the input signal. This must be an Opus frame size for the encoder's sampling rate. For example, at 48 kHz the
             permitted values are 120, 240, 480, 960, 1920, and 2880. Passing in a duration of less than 10 ms (480 samples at 48 kHz) will prevent the encoder
@@ -510,7 +510,7 @@ if (nb_packets > 0)
             """
         ),
         unsigned_char.p.OUT("data", "output payload"),
-        AutoSize("data")..opus_int32.IN(
+        AutoSize("data")..opus_int32(
             "max_data_bytes",
             """
             size of the allocated memory for the output payload. This may be used to impose an upper limit on the instant bitrate, but should not be used as
@@ -525,21 +525,21 @@ if (nb_packets > 0)
         "encoder_destroy",
         "Frees an {@code OpusEncoder} allocated by #encoder_create().",
 
-        OpusEncoder.p.IN("st", "state to be freed")
+        OpusEncoder.p("st", "state to be freed")
     )
 
     private..int(
         "encoder_ctl",
         "Performs a CTL function on an Opus encoder.",
 
-        OpusEncoder.p.IN("st", "encoder state")
+        OpusEncoder.p("st", "encoder state")
     )
 
     int(
         "decoder_get_size",
         "Gets the size of an {@code OpusDecoder} structure.",
 
-        int.IN("channels", "number of channels", "1 2"),
+        int("channels", "number of channels", "1 2"),
 
         returnDoc = "the size in bytes"
     )
@@ -555,8 +555,8 @@ if (nb_packets > 0)
         buffers, at the caller's request.
         """,
 
-        opus_int32.IN("Fs", "sampling rate of input signal (Hz)", "8000 12000 16000 24000 48000"),
-        int.IN("channels", "number of channels to decode", "1 2"),
+        opus_int32("Fs", "sampling rate of input signal (Hz)", "8000 12000 16000 24000 48000"),
+        int("channels", "number of channels to decode", "1 2"),
         Check(1)..nullable..int.p.OUT("error", "", ErrorCodes)
     )
 
@@ -571,9 +571,9 @@ if (nb_packets > 0)
         To reset a previously initialized state, use the #RESET_STATE CTL.
         """,
 
-        OpusDecoder.p.IN("st", "decoder state"),
-        opus_int32.IN("Fs", "sampling rate of input signal (Hz)", "8000 12000 16000 24000 48000"),
-        int.IN("channels", "number of channels to decode", "1 2"),
+        OpusDecoder.p("st", "decoder state"),
+        opus_int32("Fs", "sampling rate of input signal (Hz)", "8000 12000 16000 24000 48000"),
+        int("channels", "number of channels to decode", "1 2"),
 
         returnDoc = "#OK on success or a negative error code on error"
     )
@@ -582,14 +582,14 @@ if (nb_packets > 0)
         "decode",
         "Decodes an Opus packet.",
 
-        OpusDecoder.p.IN("st", "decoder state"),
-        nullable..unsigned_char.const.p.IN("data", "input payload (Use a #NULL pointer to indicate packet loss)"),
-        AutoSize("data")..opus_int32.IN("len", "number of bytes in payload"),
+        OpusDecoder.p("st", "decoder state"),
+        nullable..unsigned_char.const.p("data", "input payload (Use a #NULL pointer to indicate packet loss)"),
+        AutoSize("data")..opus_int32("len", "number of bytes in payload"),
         Check(
             // Reading OpusDecoder internal state here
             "frame_size * memGetInt(st + 8)"
         )..opus_int16.p.OUT("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)}"),
-        int.IN(
+        int(
             "frame_size",
             """
             number of samples per channel of available space in pcm.
@@ -600,7 +600,7 @@ if (nb_packets > 0)
             <b>must</b> be a multiple of 2.5 ms.
             """
         ),
-        int.IN(
+        int(
             "decode_fec",
             """
             flag (0 or 1) to request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it
@@ -615,14 +615,14 @@ if (nb_packets > 0)
         "decode_float",
         "Decodes an Opus packet with floating point output.",
 
-        OpusDecoder.p.IN("st", "decoder state"),
-        nullable..unsigned_char.const.p.IN("data", "input payload (Use a #NULL pointer to indicate packet loss)"),
-        AutoSize("data")..opus_int32.IN("len", "number of bytes in payload"),
+        OpusDecoder.p("st", "decoder state"),
+        nullable..unsigned_char.const.p("data", "input payload (Use a #NULL pointer to indicate packet loss)"),
+        AutoSize("data")..opus_int32("len", "number of bytes in payload"),
         Check(
             // Reading OpusDecoder internal state here
             "frame_size * memGetInt(st + 8)"
         )..opus_int16.p.OUT("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)}"),
-        int.IN(
+        int(
             "frame_size",
             """
             number of samples per channel of available space in pcm.
@@ -633,7 +633,7 @@ if (nb_packets > 0)
             <b>must</b> be a multiple of 2.5 ms.
             """
         ),
-        int.IN(
+        int(
             "decode_fec",
             """
             flag (0 or 1) to request that any in-band forward error correction data be decoded. If no such data is available, the frame is decoded as if it
@@ -648,14 +648,14 @@ if (nb_packets > 0)
         "decoder_ctl",
         "Performs a CTL function on an Opus decoder.",
 
-        OpusDecoder.p.IN("st", "decoder state")
+        OpusDecoder.p("st", "decoder state")
     )
 
     void(
         "decoder_destroy",
         "Frees an {@code OpusDecoder} allocated by #decoder_create().",
 
-        OpusDecoder.p.IN("st", "decoder state")
+        OpusDecoder.p("st", "decoder state")
     )
 
     int(
@@ -668,8 +668,8 @@ if (nb_packets > 0)
         This function does not copy the frames, the returned pointers are pointers into the input packet.
         """,
 
-        unsigned_char.const.p.IN("data", "Opus packet to be parsed"),
-        AutoSize("data")..opus_int32.IN("len", "size of data"),
+        unsigned_char.const.p("data", "Opus packet to be parsed"),
+        AutoSize("data")..opus_int32("len", "size of data"),
         Check(1)..nullable..unsigned_char.p.OUT("out_toc", "TOC pointer"),
         Check(48)..nullable..unsigned_char.const.p.p.OUT("frames", "encapsulated frames"),
         Check(48)..opus_int16.p.OUT("size", "sizes of the encapsulated frames"),
@@ -680,7 +680,7 @@ if (nb_packets > 0)
         "packet_get_bandwidth",
         "Gets the bandwidth of an Opus packet.",
 
-        Check(1)..unsigned_char.const.p.IN("data", "Opus packet"),
+        Check(1)..unsigned_char.const.p("data", "Opus packet"),
 
         returnDoc = "the bandwidth of the packer on success, or #INVALID_PACKET if the compressed data passed is corrupted or of an unsupported type"
     )
@@ -689,8 +689,8 @@ if (nb_packets > 0)
         "packet_get_samples_per_frame",
         "Gets the number of samples per frame from an Opus packet.",
 
-        Check(1)..unsigned_char.const.p.IN("data", "Opus packet. This must contain at least one byte of data."),
-        opus_int32.IN("Fs", "sampling rate in Hz. This must be a multiple of 400, or inaccurate results will be returned."),
+        Check(1)..unsigned_char.const.p("data", "Opus packet. This must contain at least one byte of data."),
+        opus_int32("Fs", "sampling rate in Hz. This must be a multiple of 400, or inaccurate results will be returned."),
 
         returnDoc = "number of samples per frame"
     )
@@ -699,7 +699,7 @@ if (nb_packets > 0)
         "packet_get_nb_channels",
         "Gets the number of channels from an Opus packet.",
 
-        Unsafe..unsigned_char.const.p.IN("data", "Opus packet"),
+        Unsafe..unsigned_char.const.p("data", "Opus packet"),
 
         returnDoc = "number of channels, or #INVALID_PACKET if the compressed data passed is corrupted or of an unsupported type"
     )
@@ -708,8 +708,8 @@ if (nb_packets > 0)
         "packet_get_nb_frames",
         "Gets the number of frames in an Opus packet.",
 
-        unsigned_char.const.p.IN("packet", "Opus packet"),
-        AutoSize("packet")..opus_int32.IN("len", "length of packet"),
+        unsigned_char.const.p("packet", "Opus packet"),
+        AutoSize("packet")..opus_int32("len", "length of packet"),
 
         returnDoc =
         """
@@ -722,9 +722,9 @@ if (nb_packets > 0)
         "packet_get_nb_samples",
         "Gets the number of samples of an Opus packet.",
 
-        unsigned_char.const.p.IN("packet", "Opus packet"),
-        AutoSize("packet")..opus_int32.IN("len", "length of packet"),
-        opus_int32.IN("Fs", "sampling rate in Hz. This must be a multiple of 400, or inaccurate results will be returned."),
+        unsigned_char.const.p("packet", "Opus packet"),
+        AutoSize("packet")..opus_int32("len", "length of packet"),
+        opus_int32("Fs", "sampling rate in Hz. This must be a multiple of 400, or inaccurate results will be returned."),
 
         returnDoc =
         """
@@ -737,9 +737,9 @@ if (nb_packets > 0)
         "decoder_get_nb_samples",
         "Gets the number of samples of an Opus packet.",
 
-        OpusDecoder.const.p.IN("dec", "decoder state"),
-        unsigned_char.const.p.IN("packet", "Opus packet"),
-        AutoSize("packet")..opus_int32.IN("len", "length of packet"),
+        OpusDecoder.const.p("dec", "decoder state"),
+        unsigned_char.const.p("packet", "Opus packet"),
+        AutoSize("packet")..opus_int32("len", "length of packet"),
 
         returnDoc =
         """
@@ -757,8 +757,8 @@ if (nb_packets > 0)
         """,
 
         Check("frame_size * softclip_mem.remaining()")..float.p.INOUT("pcm", "input PCM and modified PCM"),
-        int.IN("frame_size", "number of samples per channel to process"),
-        AutoSize("softclip_mem")..int.IN("channels", "number of channels"),
+        int("frame_size", "number of samples per channel to process"),
+        AutoSize("softclip_mem")..int("channels", "number of channels"),
         float.p.INOUT("softclip_mem", "state memory for the soft clipping process (one float per channel, initialized to zero)")
     )
 
@@ -782,19 +782,20 @@ if (nb_packets > 0)
         will prevent a new packet from being added with #repacketizer_cat().
         """,
 
-        OpusRepacketizer.p.IN("rp", "the repacketizer state to (re)initialize")
+        OpusRepacketizer.p("rp", "the repacketizer state to (re)initialize")
     )
 
     OpusRepacketizer.p(
         "repacketizer_create",
-        "Allocates memory and initializes the new repacketizer with #repacketizer_init()."
+        "Allocates memory and initializes the new repacketizer with #repacketizer_init().",
+        void()
     )
 
     void(
         "repacketizer_destroy",
         "Frees an {@code OpusRepacketizer} allocated by #repacketizer_create().",
 
-        OpusRepacketizer.p.IN("rp", "state to be freed")
+        OpusRepacketizer.p("rp", "state to be freed")
     )
 
     int(
@@ -815,9 +816,9 @@ if (nb_packets > 0)
         and add them individually.
         """,
 
-        OpusRepacketizer.p.IN("rp", "the repacketizer state to which to add the packet"),
-        unsigned_char.const.p.IN("data", ""),
-        AutoSize("data")..opus_int32.IN("len", "the number of bytes in the packet data"),
+        OpusRepacketizer.p("rp", "the repacketizer state to which to add the packet"),
+        unsigned_char.const.p("data", ""),
+        AutoSize("data")..opus_int32("len", "the number of bytes in the packet data"),
 
         returnDoc =
         """
@@ -831,11 +832,11 @@ if (nb_packets > 0)
         "repacketizer_out_range",
         "Constructs a new packet from data previously submitted to the repacketizer state via #repacketizer_cat().",
 
-        OpusRepacketizer.p.IN("rp", "the repacketizer state from which to construct the new packet"),
-        int.IN("begin", "the index of the first frame in the current repacketizer state to include in the output"),
-        int.IN("end", "one past the index of the last frame in the current repacketizer state to include in the output"),
+        OpusRepacketizer.p("rp", "the repacketizer state from which to construct the new packet"),
+        int("begin", "the index of the first frame in the current repacketizer state to include in the output"),
+        int("end", "one past the index of the last frame in the current repacketizer state to include in the output"),
         unsigned_char.const.p.OUT("data", "the buffer in which to store the output packet"),
-        AutoSize("data")..opus_int32.IN(
+        AutoSize("data")..opus_int32(
             "maxlen",
             """
             the maximum number of bytes to store in the output buffer. In order to guarantee success, this should be at least {@code 1276} for a single frame,
@@ -861,7 +862,7 @@ if (nb_packets > 0)
         This defines the valid range of packets that can be extracted with #repacketizer_out_range() or #repacketizer_out().
         """,
 
-        OpusRepacketizer.p.IN("rp", "the repacketizer state containing the frames"),
+        OpusRepacketizer.p("rp", "the repacketizer state containing the frames"),
 
         returnDoc = "the total number of frames contained in the packet data submitted to the repacketizer state"
     )
@@ -875,9 +876,9 @@ if (nb_packets > 0)
         {@code opus_repacketizer_out_range(rp, 0, opus_repacketizer_get_nb_frames(rp), data, maxlen)}.
         """,
 
-        OpusRepacketizer.p.IN("rp", "the repacketizer state from which to construct the new packet"),
+        OpusRepacketizer.p("rp", "the repacketizer state from which to construct the new packet"),
         unsigned_char.const.p.OUT("data", "the buffer in which to store the output packet"),
-        AutoSize("data")..opus_int32.IN(
+        AutoSize("data")..opus_int32(
             "maxlen",
             """
             the maximum number of bytes to store in the output buffer. In order to guarantee success, this should be at least
@@ -894,8 +895,8 @@ if (nb_packets > 0)
         "Pads a given Opus packet to a larger size (possibly changing the TOC sequence).",
 
         Check("Math.max(len, new_len)")..unsigned_char.const.p.INOUT("data", "the buffer containing the packet to pad"),
-        opus_int32.IN("len", "the size of the packet. This must be at least 1."),
-        opus_int32.IN("new_len", "the desired size of the packet after padding. This must be at least as large as {@code len}."),
+        opus_int32("len", "the size of the packet. This must be at least 1."),
+        opus_int32("new_len", "the desired size of the packet after padding. This must be at least as large as {@code len}."),
 
         returnDoc =
         """
@@ -909,7 +910,7 @@ if (nb_packets > 0)
         "Removes all padding from a given Opus packet and rewrite the TOC sequence to minimize space usage.",
 
         Check("len")..unsigned_char.const.p.INOUT("data", "the buffer containing the packet to strip"),
-        opus_int32.IN("len", "the size of the packet. This must be at least 1."),
+        opus_int32("len", "the size of the packet. This must be at least 1."),
 
         returnDoc =
         """
@@ -923,9 +924,9 @@ if (nb_packets > 0)
         "Pads a given Opus multi-stream packet to a larger size (possibly changing the TOC sequence).",
 
         Check("Math.max(len, new_len)")..unsigned_char.const.p.INOUT("data", "the buffer containing the packet to pad"),
-        opus_int32.IN("len", "the size of the packet. This must be at least 1."),
-        opus_int32.IN("new_len", "the desired size of the packet after padding. This must be at least 1."),
-        int.IN("nb_streams", "the number of streams (not channels) in the packet. This must be at least as large as {@code len}."),
+        opus_int32("len", "the size of the packet. This must be at least 1."),
+        opus_int32("new_len", "the desired size of the packet after padding. This must be at least 1."),
+        int("nb_streams", "the number of streams (not channels) in the packet. This must be at least as large as {@code len}."),
 
         returnDoc =
         """
@@ -939,8 +940,8 @@ if (nb_packets > 0)
         "Removes all padding from a given Opus multi-stream packet and rewrite the TOC sequence to minimize space usage.",
 
         Check("len")..unsigned_char.const.p.INOUT("data", "the buffer containing the packet to strip"),
-        opus_int32.IN("len", "the size of the packet. This must be at least 1."),
-        int.IN("nb_streams", "the number of streams (not channels) in the packet. This must be at least 1."),
+        opus_int32("len", "the size of the packet. This must be at least 1."),
+        int("nb_streams", "the number of streams (not channels) in the packet. This must be at least 1."),
 
         returnDoc =
         """
@@ -953,7 +954,7 @@ if (nb_packets > 0)
         "strerror",
         "Converts an opus error code into a human readable string.",
 
-        int.IN("error", "error number"),
+        int("error", "error number"),
 
         returnDoc = "error string"
     )
@@ -964,7 +965,8 @@ if (nb_packets > 0)
         Gets the libopus version string.
 
         Applications may look for the substring "-fixed" in the version string to determine whether they have a fixed-point or floating-point build at runtime.
-        """
+        """,
+        void()
     )
 
     javaImport("static org.lwjgl.system.dyncall.DynCall.*")

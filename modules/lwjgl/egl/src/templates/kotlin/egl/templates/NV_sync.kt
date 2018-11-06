@@ -51,48 +51,48 @@ val NV_sync = "NVSync".nativeClassEGL("NV_sync", postfix = NV) {
         "CreateFenceSyncNV",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLenum.IN("condition", ""),
-        noneTerminated..EGLint.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLenum("condition", ""),
+        noneTerminated..EGLint.const.p("attrib_list", "")
     )
 
     EGLBoolean(
         "DestroySyncNV",
         "",
 
-        EGLSyncNV.IN("sync", "")
+        EGLSyncNV("sync", "")
     )
 
     EGLBoolean(
         "FenceNV",
         "",
 
-        EGLSyncNV.IN("sync", "")
+        EGLSyncNV("sync", "")
     )
 
     EGLint(
         "ClientWaitSyncNV",
         "",
 
-        EGLSyncNV.IN("sync", ""),
-        EGLint.IN("flags", ""),
-        EGLTimeNV.IN("timeout", "")
+        EGLSyncNV("sync", ""),
+        EGLint("flags", ""),
+        EGLTimeNV("timeout", "")
     )
 
     EGLBoolean(
         "SignalSyncNV",
         "",
 
-        EGLSyncNV.IN("sync", ""),
-        EGLenum.IN("mode", "")
+        EGLSyncNV("sync", ""),
+        EGLenum("mode", "")
     )
 
     EGLBoolean(
         "GetSyncAttribNV",
         "",
 
-        EGLSyncNV.IN("sync", ""),
-        EGLint.IN("attribute", ""),
+        EGLSyncNV("sync", ""),
+        EGLint("attribute", ""),
         Check(1)..EGLint.p.OUT("value", "")
     )
 }

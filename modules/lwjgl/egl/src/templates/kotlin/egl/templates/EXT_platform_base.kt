@@ -41,28 +41,28 @@ val EXT_platform_base = "EXTPlatformBase".nativeClassEGL("EXT_platform_base", po
         "GetPlatformDisplayEXT",
         "",
 
-        EGLenum.IN("platform", ""),
-        opaque_p.IN("native_display", ""),
-        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
+        EGLenum("platform", ""),
+        opaque_p("native_display", ""),
+        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
     )
 
     EGLSurface(
         "CreatePlatformWindowSurfaceEXT",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLConfig.IN("config", ""),
-        opaque_p.IN("native_window", ""),
-        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLConfig("config", ""),
+        opaque_p("native_window", ""),
+        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
     )
 
     EGLSurface(
         "CreatePlatformPixmapSurfaceEXT",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLConfig.IN("config", ""),
-        opaque_p.IN("native_pixmap", ""),
-        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLConfig("config", ""),
+        opaque_p("native_pixmap", ""),
+        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
     )
 }

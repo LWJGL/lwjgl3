@@ -108,9 +108,9 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
         components of all active varying variables exceeds #MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_ARB.
         """,
 
-        GLuint.IN("program", "the program object"),
-        GLenum.IN("pname", "the parameter to set", Parameters),
-        GLint.IN("value", "the value being set")
+        GLuint("program", "the program object"),
+        GLenum("pname", "the parameter to set", Parameters),
+        GLint("value", "the value being set")
     )
 
     void(
@@ -131,10 +131,10 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
         the framebuffer attachment point is an array of images, and the framebuffer attachment is considered layered.
         """,
 
-        GLenum.IN("target", "the render target", "ARBFramebufferObject#GL_FRAMEBUFFER"),
-        GLenum.IN("attachment", "must be one of the attachments points of the framebuffer"),
-        GLuint.IN("texture", "the texture object name"),
-        GLint.IN("level", "the texture level")
+        GLenum("target", "the render target", "ARBFramebufferObject#GL_FRAMEBUFFER"),
+        GLenum("attachment", "must be one of the attachments points of the framebuffer"),
+        GLuint("texture", "the texture object name"),
+        GLint("level", "the texture level")
     )
 
     void(
@@ -148,11 +148,11 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
         two-dimensional array texture.
         """,
 
-        GLenum.IN("target", "the render target", "ARBFramebufferObject#GL_FRAMEBUFFER"),
-        GLenum.IN("attachment", "must be one of the attachments points of the framebuffer"),
-        GLuint.IN("texture", "the texture object name"),
-        GLint.IN("level", "the texture level"),
-        GLint.IN("layer", "the texture layer")
+        GLenum("target", "the render target", "ARBFramebufferObject#GL_FRAMEBUFFER"),
+        GLenum("attachment", "must be one of the attachments points of the framebuffer"),
+        GLuint("texture", "the texture object name"),
+        GLint("level", "the texture level"),
+        GLint("layer", "the texture layer")
     )
 
     void(
@@ -165,10 +165,10 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
         #INVALID_OPERATION is generated unless {@code texture} is zero or the name of a cube map texture.
         """,
 
-        GLenum.IN("target", "the render target", "ARBFramebufferObject#GL_FRAMEBUFFER"),
-        GLenum.IN("attachment", "must be one of the attachments points of the framebuffer"),
-        GLuint.IN("texture", "the texture object name"),
-        GLint.IN("level", "the texture level"),
-        GLenum.IN("face", "the cube map face", CUBE_MAP_FACES)
+        GLenum("target", "the render target", "ARBFramebufferObject#GL_FRAMEBUFFER"),
+        GLenum("attachment", "must be one of the attachments points of the framebuffer"),
+        GLuint("texture", "the texture object name"),
+        GLint("level", "the texture level"),
+        GLenum("face", "the cube map face", CUBE_MAP_FACES)
     )
 }

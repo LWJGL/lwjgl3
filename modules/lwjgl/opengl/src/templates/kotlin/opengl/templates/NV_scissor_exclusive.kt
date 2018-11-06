@@ -48,18 +48,18 @@ val NV_scissor_exclusive = "NVScissorExclusive".nativeClassGL("NV_scissor_exclus
         "ScissorExclusiveArrayvNV",
         "",
 
-        GLuint.IN("first", ""),
-        AutoSize(4, "v")..GLsizei.IN("count", ""),
-        GLint.const.p.IN("v", "")
+        GLuint("first", ""),
+        AutoSize(4, "v")..GLsizei("count", ""),
+        GLint.const.p("v", "")
     )
 
     void(
         "ScissorExclusiveNV",
         "",
 
-        GLint.IN("x", ""),
-        GLint.IN("y", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLint("x", ""),
+        GLint("y", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 }

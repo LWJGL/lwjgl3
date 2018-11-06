@@ -26,6 +26,6 @@ val GLX_SGI_swap_control = "GLXSGISwapControl".nativeClassGLX("GLX_SGI_swap_cont
         the time required to display both the even and odd fields of a frame of video data.
         """,
 
-        int.IN("interval", "the swap interval")
+        int("interval", "the swap interval")
     )
 }

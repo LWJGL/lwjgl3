@@ -33,8 +33,8 @@ val EXT_sync_reuse = "EXTSyncReuse".nativeClassEGL("EXT_sync_reuse", postfix = E
         "UnsignalSyncEXT",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSync.IN("sync", ""),
-        nullable..noneTerminated..EGLAttrib.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLSync("sync", ""),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
     )
 }

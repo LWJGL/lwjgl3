@@ -55,7 +55,7 @@ val EXT_depth_bounds_test = "EXTDepthBoundsTest".nativeClassGL("EXT_depth_bounds
         "DepthBoundsEXT",
         "",
 
-        double.IN("zmin", ""),
-        double.IN("zmax", "")
+        double("zmin", ""),
+        double("zmax", "")
     )
 }

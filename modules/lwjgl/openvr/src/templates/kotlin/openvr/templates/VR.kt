@@ -1489,7 +1489,7 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "Initializes the connection to the VR hardware.",
 
         Check(1)..EVRInitError.p.OUT("peError", "a buffer in which to store the error code"),
-        EVRApplicationType.IN("eType", "the application type", "EVRApplicationType_\\w+"),
+        EVRApplicationType("eType", "the application type", "EVRApplicationType_\\w+"),
 
         returnDoc = "a VR interface handles token"
     )
@@ -1499,7 +1499,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         """
         Shuts down the connection to the VR hardware and cleans up the OpenVR API. The {@code IVRSystem} pointer returned by #InitInternal() will be invalid
         after this call is made.
-        """
+        """,
+        void()
     )
 
     bool(
@@ -1510,7 +1511,8 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
 
         This function will return true in situations where #InitInternal() will return #NULL. It is a quick way to eliminate users that have no VR hardware,
         but there are some startup conditions that can only be detected by starting the system.
-        """
+        """,
+        void()
     )
 
     intptr_t(
@@ -1520,19 +1522,21 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         always return #NULL if #InitInternal() has not been called successfully.
         """,
 
-        charASCII.const.p.IN("pchInterfaceVersion", "the interface name and version"),
+        charASCII.const.p("pchInterfaceVersion", "the interface name and version"),
         Check(1)..EVRInitError.p.OUT("peError", "a buffer in which to store the error code")
     )
 
     bool(
         "IsRuntimeInstalled",
-        "Returns true if the OpenVR runtime is installed on the system."
+        "Returns true if the OpenVR runtime is installed on the system.",
+        void()
     )
 
     // TODO: deprecated?
     charASCII.p(
         "RuntimePath",
-        "Returns where the OpenVR runtime is installed."
+        "Returns where the OpenVR runtime is installed.",
+        void()
     )
 
     // TODO: deprecated?
@@ -1540,20 +1544,21 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         "IsInterfaceVersionValid",
         "Returns whether the interface of the specified version exists.",
 
-        charASCII.const.p.IN("pchInterfaceVersion", "the interface name and version")
+        charASCII.const.p("pchInterfaceVersion", "the interface name and version")
     )
 
     // TODO: deprecated?
     uint32_t(
         "GetInitToken",
-        "Returns a token that represents whether the VR interface handles need to be reloaded."
+        "Returns a token that represents whether the VR interface handles need to be reloaded.",
+        void()
     )
 
     charASCII.const.p(
         "GetVRInitErrorAsSymbol",
         "Returns the {@code EVRInitError} enum value as a string. It can be called any time, regardless of whether the VR system is started up.",
 
-        EVRInitError.IN("error", "the error code")
+        EVRInitError("error", "the error code")
     )
 
     charASCII.const.p(
@@ -1565,6 +1570,6 @@ val VR = "VR".nativeClass(Module.OPENVR, prefixMethod = "VR_", binding = OPENVR_
         called outside of #InitInternal() / #ShutdownInternal().
         """,
 
-        EVRInitError.IN("error", "the error code")
+        EVRInitError("error", "the error code")
     )
 }

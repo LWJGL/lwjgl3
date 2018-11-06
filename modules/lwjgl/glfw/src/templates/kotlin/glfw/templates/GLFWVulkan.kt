@@ -108,8 +108,8 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         This function may be called from any thread.
         """,
 
-        nullable..VkInstance.IN("instance", "the Vulkan instance to query, or #NULL to retrieve functions related to instance creation"),
-        charASCII.const.p.IN("procname", "the ASCII encoded name of the function"),
+        nullable..VkInstance("instance", "the Vulkan instance to query, or #NULL to retrieve functions related to instance creation"),
+        charASCII.const.p("procname", "the ASCII encoded name of the function"),
 
         returnDoc = "the address of the function, or #NULL if an error occurred",
         since = "version 3.2"
@@ -129,9 +129,9 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         This function may be called from any thread. For synchronization details of Vulkan objects, see the Vulkan specification.
         """,
 
-        VkInstance.IN("instance", "the instance that the physical device belongs to"),
-        VkPhysicalDevice.IN("device", "the physical device that the queue family belongs to"),
-        uint32_t.IN("queuefamily", "the index of the queue family to query"),
+        VkInstance("instance", "the instance that the physical device belongs to"),
+        VkPhysicalDevice("device", "the physical device that the queue family belongs to"),
+        uint32_t("queuefamily", "the index of the queue family to query"),
 
         returnDoc = "#TRUE if the queue family supports presentation, or #FALSE otherwise",
         since = "version 3.2"
@@ -163,9 +163,9 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         This function may be called from any thread. For synchronization details of Vulkan objects, see the Vulkan specification.
         """,
 
-        VkInstance.IN("instance", "the Vulkan instance to create the surface in"),
-        GLFWwindow.p.IN("window", "the window to create the surface for"),
-        nullable..VkAllocationCallbacks.const.p.IN("allocator", "the allocator to use, or #NULL to use the default allocator."),
+        VkInstance("instance", "the Vulkan instance to create the surface in"),
+        GLFWwindow.p("window", "the window to create the surface for"),
+        nullable..VkAllocationCallbacks.const.p("allocator", "the allocator to use, or #NULL to use the default allocator."),
         Check(1)..VkSurfaceKHR.p.OUT("surface", "where to store the handle of the surface. This is set to VK10#VK_NULL_HANDLE if an error occurred."),
 
         returnDoc = "VK10#VK_SUCCESS if successful, or a Vulkan error code if an error occurred",

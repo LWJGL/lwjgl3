@@ -33,9 +33,9 @@ val khr_egl_event = "KHREGLEvent".dependsOn(Module.EGL)?.nativeClassCL("khr_egl_
         "CreateEventFromEGLSyncKHR",
         "Creates a linked event object.",
 
-        cl_context.IN("context", "a valid OpenCL context"),
-        CLeglSyncKHR.IN("sync", "the name of a sync object of type org.lwjgl.egl.EGL15#EGL_SYNC_FENCE created with respect to {@code EGLDisplay display}."),
-        CLeglDisplayKHR.IN("display", "an {@code EGLDisplay}"),
+        cl_context("context", "a valid OpenCL context"),
+        CLeglSyncKHR("sync", "the name of a sync object of type org.lwjgl.egl.EGL15#EGL_SYNC_FENCE created with respect to {@code EGLDisplay display}."),
+        CLeglDisplayKHR("display", "an {@code EGLDisplay}"),
         ERROR_RET
     )
 }

@@ -70,27 +70,27 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
         "CurrentPaletteMatrixARB",
         "Defines which of the palette's matrices is affected by subsequent matrix operations when the current matrix mode is #MATRIX_PALETTE_ARB,",
 
-        GLint.IN("index", "the current matrix index. Must be a value between 0 and #MAX_PALETTE_MATRICES_ARB.")
+        GLint("index", "the current matrix index. Must be a value between 0 and #MAX_PALETTE_MATRICES_ARB.")
     )
 
-    val size = AutoSize("indices")..GLint.IN("size", "the number of index values to set. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB.")
+    val size = AutoSize("indices")..GLint("size", "the number of index values to set. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB.")
 
-    void("MatrixIndexuivARB", "Sets the current matrix indices.", size, GLuint.p.IN("indices", "the matrix index values"))
-    void("MatrixIndexubvARB", "Byte version of #MatrixIndexuivARB().", size, GLubyte.p.IN("indices", "the matrix index values"))
-    void("MatrixIndexusvARB", "Short version of #MatrixIndexuivARB().", size, GLushort.p.IN("indices", "the matrix index values"))
+    void("MatrixIndexuivARB", "Sets the current matrix indices.", size, GLuint.p("indices", "the matrix index values"))
+    void("MatrixIndexubvARB", "Byte version of #MatrixIndexuivARB().", size, GLubyte.p("indices", "the matrix index values"))
+    void("MatrixIndexusvARB", "Short version of #MatrixIndexuivARB().", size, GLushort.p("indices", "the matrix index values"))
 
     void(
         "MatrixIndexPointerARB",
         "",
 
-        GLint.IN("size", "the number of index values per vertex that are stored in the array. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB."),
-        AutoType("pointer", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
+        GLint("size", "the number of index values per vertex that are stored in the array. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB."),
+        AutoType("pointer", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum(
             "type",
             "the data type of the values stored in the array",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-        Unsafe..ARRAY_BUFFER..void.p.IN("pointer", "the matrix index data")
+        GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
+        Unsafe..ARRAY_BUFFER..void.p("pointer", "the matrix index data")
     )
 
 }

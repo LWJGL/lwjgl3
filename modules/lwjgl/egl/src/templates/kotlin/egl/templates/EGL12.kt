@@ -50,32 +50,23 @@ val EGL12 = "EGL12".nativeClassEGL("EGL12", postfix = "") {
         "BindAPI",
         "",
 
-        EGLenum.IN("api", "")
+        EGLenum("api", "")
     )
 
-    EGLenum(
-        "QueryAPI",
-        ""
-    )
+    EGLenum("QueryAPI", "", void())
 
     EGLSurface(
         "CreatePbufferFromClientBuffer",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLenum.IN("buftype", ""),
-        EGLClientBuffer.IN("buffer", ""),
-        EGLConfig.IN("config", ""),
-        nullable..noneTerminated..EGLint.const.p.IN("attrib_list", "")
+        EGLDisplay("dpy", ""),
+        EGLenum("buftype", ""),
+        EGLClientBuffer("buffer", ""),
+        EGLConfig("config", ""),
+        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
     )
 
-    EGLBoolean(
-        "ReleaseThread",
-        ""
-    )
+    EGLBoolean("ReleaseThread", "", void())
 
-    EGLBoolean(
-        "WaitClient",
-        ""
-    )
+    EGLBoolean("WaitClient", "", void())
 }

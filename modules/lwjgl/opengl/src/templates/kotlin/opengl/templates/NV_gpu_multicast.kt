@@ -74,88 +74,88 @@ val NV_gpu_multicast = "NVGPUMulticast".nativeClassGL("NV_gpu_multicast", postfi
         "RenderGpuMaskNV",
         "Restricts render commands to a specific set of GPUs.",
 
-        GLbitfield.IN("mask", "")
+        GLbitfield("mask", "")
     )
 
     void(
         "MulticastBufferSubDataNV",
         "",
 
-        GLbitfield.IN("gpuMask", ""),
-        GLuint.IN("buffer", ""),
-        GLintptr.IN("offset", ""),
-        AutoSize("data")..GLsizeiptr.IN("size", ""),
+        GLbitfield("gpuMask", ""),
+        GLuint("buffer", ""),
+        GLintptr("offset", ""),
+        AutoSize("data")..GLsizeiptr("size", ""),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..void.const.p.IN("data", "")
+        )..void.const.p("data", "")
     )
 
     void(
         "MulticastCopyBufferSubDataNV",
         "",
 
-        GLuint.IN("readGpu", ""),
-        GLbitfield.IN("writeGpuMask", ""),
-        GLuint.IN("readBuffer", ""),
-        GLuint.IN("writeBuffer", ""),
-        GLintptr.IN("readOffset", ""),
-        GLintptr.IN("writeOffset", ""),
-        GLsizeiptr.IN("size", "")
+        GLuint("readGpu", ""),
+        GLbitfield("writeGpuMask", ""),
+        GLuint("readBuffer", ""),
+        GLuint("writeBuffer", ""),
+        GLintptr("readOffset", ""),
+        GLintptr("writeOffset", ""),
+        GLsizeiptr("size", "")
     )
 
     void(
         "MulticastCopyImageSubDataNV",
         "",
 
-        GLuint.IN("srcGpu", ""),
-        GLbitfield.IN("dstGpuMask", ""),
-        GLuint.IN("srcName", ""),
-        GLenum.IN("srcTarget", ""),
-        GLint.IN("srcLevel", ""),
-        GLint.IN("srcX", ""),
-        GLint.IN("srxY", ""),
-        GLint.IN("srcZ", ""),
-        GLuint.IN("dstName", ""),
-        GLenum.IN("dstTarget", ""),
-        GLint.IN("dstLevel", ""),
-        GLint.IN("dstX", ""),
-        GLint.IN("dstY", ""),
-        GLint.IN("dstZ", ""),
-        GLsizei.IN("srcWidth", ""),
-        GLsizei.IN("srcHeight", ""),
-        GLsizei.IN("srcDepth", "")
+        GLuint("srcGpu", ""),
+        GLbitfield("dstGpuMask", ""),
+        GLuint("srcName", ""),
+        GLenum("srcTarget", ""),
+        GLint("srcLevel", ""),
+        GLint("srcX", ""),
+        GLint("srxY", ""),
+        GLint("srcZ", ""),
+        GLuint("dstName", ""),
+        GLenum("dstTarget", ""),
+        GLint("dstLevel", ""),
+        GLint("dstX", ""),
+        GLint("dstY", ""),
+        GLint("dstZ", ""),
+        GLsizei("srcWidth", ""),
+        GLsizei("srcHeight", ""),
+        GLsizei("srcDepth", "")
     )
 
     void(
         "MulticastBlitFramebufferNV",
         "",
 
-        GLuint.IN("srcGpu", ""),
-        GLuint.IN("dstGpu", ""),
-        GLint.IN("srcX0", ""),
-        GLint.IN("srcY0", ""),
-        GLint.IN("srcX1", ""),
-        GLint.IN("srcY1", ""),
-        GLint.IN("dstX0", ""),
-        GLint.IN("dstY0", ""),
-        GLint.IN("dstX1", ""),
-        GLint.IN("dstY1", ""),
-        GLbitfield.IN("mask", ""),
-        GLenum.IN("filter", "")
+        GLuint("srcGpu", ""),
+        GLuint("dstGpu", ""),
+        GLint("srcX0", ""),
+        GLint("srcY0", ""),
+        GLint("srcX1", ""),
+        GLint("srcY1", ""),
+        GLint("dstX0", ""),
+        GLint("dstY0", ""),
+        GLint("dstX1", ""),
+        GLint("dstY1", ""),
+        GLbitfield("mask", ""),
+        GLenum("filter", "")
     )
 
     void(
         "MulticastFramebufferSampleLocationsfvNV",
         "",
 
-        GLuint.IN("gpu", ""),
-        GLuint.IN("framebuffer", ""),
-        GLuint.IN("start", ""),
-        AutoSize(2, "v")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("v", "")
+        GLuint("gpu", ""),
+        GLuint("framebuffer", ""),
+        GLuint("start", ""),
+        AutoSize(2, "v")..GLsizei("count", ""),
+        GLfloat.const.p("v", "")
     )
 
     void(
@@ -167,17 +167,17 @@ val NV_gpu_multicast = "NVGPUMulticast".nativeClassGL("NV_gpu_multicast", postfi
         "MulticastWaitSyncNV",
         "",
 
-        GLuint.IN("signalGpu", ""),
-        GLbitfield.IN("waitGpuMask", "")
+        GLuint("signalGpu", ""),
+        GLbitfield("waitGpuMask", "")
     )
 
     void(
         "MulticastGetQueryObjectivNV",
         "",
 
-        GLuint.IN("gpu", ""),
-        GLuint.IN("id", ""),
-        GLenum.IN("pname", ""),
+        GLuint("gpu", ""),
+        GLuint("id", ""),
+        GLenum("pname", ""),
         Check(1)..ReturnParam..GLint.p.OUT("params", "")
     )
 
@@ -185,9 +185,9 @@ val NV_gpu_multicast = "NVGPUMulticast".nativeClassGL("NV_gpu_multicast", postfi
         "MulticastGetQueryObjectuivNV",
         "",
 
-        GLuint.IN("gpu", ""),
-        GLuint.IN("id", ""),
-        GLenum.IN("pname", ""),
+        GLuint("gpu", ""),
+        GLuint("id", ""),
+        GLenum("pname", ""),
         Check(1)..ReturnParam..GLuint.p.OUT("params", "")
     )
 
@@ -195,9 +195,9 @@ val NV_gpu_multicast = "NVGPUMulticast".nativeClassGL("NV_gpu_multicast", postfi
         "MulticastGetQueryObjecti64vNV",
         "",
 
-        GLuint.IN("gpu", ""),
-        GLuint.IN("id", ""),
-        GLenum.IN("pname", ""),
+        GLuint("gpu", ""),
+        GLuint("id", ""),
+        GLenum("pname", ""),
         Check(1)..ReturnParam..GLint64.p.OUT("params", "")
     )
 
@@ -205,9 +205,9 @@ val NV_gpu_multicast = "NVGPUMulticast".nativeClassGL("NV_gpu_multicast", postfi
         "MulticastGetQueryObjectui64vNV",
         "",
 
-        GLuint.IN("gpu", ""),
-        GLuint.IN("id", ""),
-        GLenum.IN("pname", ""),
+        GLuint("gpu", ""),
+        GLuint("id", ""),
+        GLenum("pname", ""),
         Check(1)..ReturnParam..GLuint64.p.OUT("params", "")
     )
 }

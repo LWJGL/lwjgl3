@@ -32,148 +32,148 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         "VertexAttribL1i64NV",
         "",
 
-        GLuint.IN("index", ""),
-        GLint64EXT.IN("x", "")
+        GLuint("index", ""),
+        GLint64EXT("x", "")
     )
 
     void(
         "VertexAttribL2i64NV",
         "",
 
-        GLuint.IN("index", ""),
-        GLint64EXT.IN("x", ""),
-        GLint64EXT.IN("y", "")
+        GLuint("index", ""),
+        GLint64EXT("x", ""),
+        GLint64EXT("y", "")
     )
 
     void(
         "VertexAttribL3i64NV",
         "",
 
-        GLuint.IN("index", ""),
-        GLint64EXT.IN("x", ""),
-        GLint64EXT.IN("y", ""),
-        GLint64EXT.IN("z", "")
+        GLuint("index", ""),
+        GLint64EXT("x", ""),
+        GLint64EXT("y", ""),
+        GLint64EXT("z", "")
     )
 
     void(
         "VertexAttribL4i64NV",
         "",
 
-        GLuint.IN("index", ""),
-        GLint64EXT.IN("x", ""),
-        GLint64EXT.IN("y", ""),
-        GLint64EXT.IN("z", ""),
-        GLint64EXT.IN("w", "")
+        GLuint("index", ""),
+        GLint64EXT("x", ""),
+        GLint64EXT("y", ""),
+        GLint64EXT("z", ""),
+        GLint64EXT("w", "")
     )
 
     void(
         "VertexAttribL1i64vNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(1)..GLint64EXT.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(1)..GLint64EXT.const.p("v", "")
     )
 
     void(
         "VertexAttribL2i64vNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(2)..GLint64EXT.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(2)..GLint64EXT.const.p("v", "")
     )
 
     void(
         "VertexAttribL3i64vNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(3)..GLint64EXT.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(3)..GLint64EXT.const.p("v", "")
     )
 
     void(
         "VertexAttribL4i64vNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(4)..GLint64EXT.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(4)..GLint64EXT.const.p("v", "")
     )
 
     void(
         "VertexAttribL1ui64NV",
         "",
 
-        GLuint.IN("index", ""),
-        GLuint64EXT.IN("x", "")
+        GLuint("index", ""),
+        GLuint64EXT("x", "")
     )
 
     void(
         "VertexAttribL2ui64NV",
         "",
 
-        GLuint.IN("index", ""),
-        GLuint64EXT.IN("x", ""),
-        GLuint64EXT.IN("y", "")
+        GLuint("index", ""),
+        GLuint64EXT("x", ""),
+        GLuint64EXT("y", "")
     )
 
     void(
         "VertexAttribL3ui64NV",
         "",
 
-        GLuint.IN("index", ""),
-        GLuint64EXT.IN("x", ""),
-        GLuint64EXT.IN("y", ""),
-        GLuint64EXT.IN("z", "")
+        GLuint("index", ""),
+        GLuint64EXT("x", ""),
+        GLuint64EXT("y", ""),
+        GLuint64EXT("z", "")
     )
 
     void(
         "VertexAttribL4ui64NV",
         "",
 
-        GLuint.IN("index", ""),
-        GLuint64EXT.IN("x", ""),
-        GLuint64EXT.IN("y", ""),
-        GLuint64EXT.IN("z", ""),
-        GLuint64EXT.IN("w", "")
+        GLuint("index", ""),
+        GLuint64EXT("x", ""),
+        GLuint64EXT("y", ""),
+        GLuint64EXT("z", ""),
+        GLuint64EXT("w", "")
     )
 
     void(
         "VertexAttribL1ui64vNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(1)..GLuint64EXT.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(1)..GLuint64EXT.const.p("v", "")
     )
 
     void(
         "VertexAttribL2ui64vNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(2)..GLuint64EXT.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(2)..GLuint64EXT.const.p("v", "")
     )
 
     void(
         "VertexAttribL3ui64vNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(3)..GLuint64EXT.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(3)..GLuint64EXT.const.p("v", "")
     )
 
     void(
         "VertexAttribL4ui64vNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(4)..GLuint64EXT.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(4)..GLuint64EXT.const.p("v", "")
     )
 
     void(
         "GetVertexAttribLi64vNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLenum.IN("pname", ""),
+        GLuint("index", ""),
+        GLenum("pname", ""),
         Check(1)..ReturnParam..GLint64EXT.p.OUT("params", "")
     )
 
@@ -181,8 +181,8 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         "GetVertexAttribLui64vNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLenum.IN("pname", ""),
+        GLuint("index", ""),
+        GLenum("pname", ""),
         Check(1)..ReturnParam..GLuint64EXT.p.OUT("params", "")
     )
 
@@ -190,9 +190,9 @@ val NV_vertex_attrib_integer_64bit = "NVVertexAttribInteger64bit".nativeClassGL(
         "VertexAttribLFormatNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLint.IN("size", ""),
-        GLenum.IN("type", ""),
-        GLsizei.IN("stride", "")
+        GLuint("index", ""),
+        GLint("size", ""),
+        GLenum("type", ""),
+        GLsizei("stride", "")
     )
 }

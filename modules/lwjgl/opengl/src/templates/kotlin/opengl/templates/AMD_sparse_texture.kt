@@ -63,26 +63,26 @@ val AMD_sparse_texture = "AMDSparseTexture".nativeClassGL("AMD_sparse_texture", 
         "TexStorageSparseAMD",
         "",
 
-        GLenum.IN("target", ""),
-        GLenum.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLsizei.IN("layers", ""),
-        GLbitfield.IN("flags", "")
+        GLenum("target", ""),
+        GLenum("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLsizei("layers", ""),
+        GLbitfield("flags", "")
     )
 
     void(
         "TextureStorageSparseAMD",
         "",
 
-        GLuint.IN("texture", ""),
-        GLenum.IN("target", ""),
-        GLenum.IN("internalFormat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", ""),
-        GLsizei.IN("depth", ""),
-        GLsizei.IN("layers", ""),
-        GLbitfield.IN("flags", "")
+        GLuint("texture", ""),
+        GLenum("target", ""),
+        GLenum("internalFormat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", ""),
+        GLsizei("depth", ""),
+        GLsizei("layers", ""),
+        GLbitfield("flags", "")
     )
 }

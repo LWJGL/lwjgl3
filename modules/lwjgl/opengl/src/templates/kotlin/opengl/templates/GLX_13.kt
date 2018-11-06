@@ -80,7 +80,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Returns the list of all GLXFBConfigs that are available on the specified screen.",
 
         DISPLAY,
-        int.IN("screen", "the screen number"),
+        int("screen", "the screen number"),
         AutoSizeResult..int.p.OUT("nelements", "returns the number of GLXFBConfigs in the returned list")
     )
 
@@ -89,8 +89,8 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Returns a list of GLXFBConfigs that match a list of attributes.",
 
         DISPLAY,
-        int.IN("screen", "the screen number"),
-        nullable..NullTerminated..int.const.p.IN("attrib_list", "a list of attributes terminated with {@code None}"),
+        int("screen", "the screen number"),
+        nullable..NullTerminated..int.const.p("attrib_list", "a list of attributes terminated with {@code None}"),
         AutoSizeResult..int.p.OUT("nelements", "returns the number of GLXFBConfigs matched")
     )
 
@@ -99,8 +99,8 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Queries the value of a GLX attribute for a GLXFBConfig.",
 
         DISPLAY,
-        GLXFBConfig.IN("config", "the GLXFBConfig being queried"),
-        int.IN("attribute", "the attribute to query"),
+        GLXFBConfig("config", "the GLXFBConfig being queried"),
+        int("attribute", "the attribute to query"),
         Check(1)..int.p.OUT("value", "the attribute value")
     )
 
@@ -109,7 +109,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Retrieves the associated visual of a GLXFBConfig.",
 
         DISPLAY,
-        GLXFBConfig.IN("config", "the GLXFBConfig")
+        GLXFBConfig("config", "the GLXFBConfig")
     )
 
     GLXWindow(
@@ -117,9 +117,9 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Create an onscreen rendering area from an X Window and a desired GLXFBConfig.",
 
         DISPLAY,
-        GLXFBConfig.IN("config", "the GLXFBConfig"),
-        Window.IN("win", "the X Window"),
-        nullable..NullTerminated..int.const.p.IN("attrib_list", "a list of attributes terminated with {@code None}")
+        GLXFBConfig("config", "the GLXFBConfig"),
+        Window("win", "the X Window"),
+        nullable..NullTerminated..int.const.p("attrib_list", "a list of attributes terminated with {@code None}")
     )
 
     GLXPixmap(
@@ -127,9 +127,9 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Creates a GLXPixmap offscreen rendering area from an X Pixmap and a desired GLXFBConfig.",
 
         DISPLAY,
-        GLXFBConfig.IN("config", "the GLXFBConfig"),
-        Pixmap.IN("pixmap", "the X Pixmap"),
-        nullable..NullTerminated..int.const.p.IN("attrib_list", "a list of attributes terminated with {@code None}")
+        GLXFBConfig("config", "the GLXFBConfig"),
+        Pixmap("pixmap", "the X Pixmap"),
+        nullable..NullTerminated..int.const.p("attrib_list", "a list of attributes terminated with {@code None}")
     )
 
     void(
@@ -137,7 +137,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Destroys a GLXPixmap.",
 
         DISPLAY,
-        GLXPixmap.IN("pixmap", "the GLXPixmap to destroy")
+        GLXPixmap("pixmap", "the GLXPixmap to destroy")
     )
 
     GLXPbuffer(
@@ -145,8 +145,8 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Creates a GLXPbuffer from a GLXFBConfig.",
 
         DISPLAY,
-        GLXFBConfig.IN("config", "the GLXFBConfig"),
-        nullable..NullTerminated..int.const.p.IN("attrib_list", "a list of attributes terminated with {@code None}")
+        GLXFBConfig("config", "the GLXFBConfig"),
+        nullable..NullTerminated..int.const.p("attrib_list", "a list of attributes terminated with {@code None}")
     )
 
     void(
@@ -154,7 +154,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Destroys a GLXPbuffer.",
 
         DISPLAY,
-        GLXPbuffer.IN("pbuf", "the GLXPbuffer to destroy")
+        GLXPbuffer("pbuf", "the GLXPbuffer to destroy")
     )
 
     void(
@@ -162,8 +162,8 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Queries an attribute associated with a GLXDrawable.",
 
         DISPLAY,
-        GLXDrawable.IN("draw", "the GLXDrawable being queried"),
-        int.IN("attribute", "the attribute to query"),
+        GLXDrawable("draw", "the GLXDrawable being queried"),
+        int("attribute", "the attribute to query"),
         ReturnParam..Check(1)..unsigned_int.p.OUT("value", "returns the attribute value")
     )
 
@@ -172,24 +172,25 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Creates an OpenGL rendering context.",
 
         DISPLAY,
-        GLXFBConfig.IN("config", "the GLXFBConfig"),
-        int.IN("render_type", "the render type"),
-        nullable..GLXContext.IN("share_list", "a GLXContext to share objects with"),
-        Bool.IN("direct", "whether direct rendering is requested")
+        GLXFBConfig("config", "the GLXFBConfig"),
+        int("render_type", "the render type"),
+        nullable..GLXContext("share_list", "a GLXContext to share objects with"),
+        Bool("direct", "whether direct rendering is requested")
     )
     Bool(
         "MakeContextCurrent",
         "Makes a GLXContext current in the current thread.",
 
         DISPLAY,
-        nullable..GLXDrawable.IN("draw", "the draw GLXDrawable"),
-        nullable..GLXDrawable.IN("read", "the read GLXDrawable"),
-        nullable..GLXContext.IN("ctx", "the GLXContext")
+        nullable..GLXDrawable("draw", "the draw GLXDrawable"),
+        nullable..GLXDrawable("read", "the read GLXDrawable"),
+        nullable..GLXContext("ctx", "the GLXContext")
     )
 
     GLXDrawable(
         "GetCurrentReadDrawable",
-        "Returns the current GLXDrawable used for reading in the current thread."
+        "Returns the current GLXDrawable used for reading in the current thread.",
+        void()
     )
 
     int(
@@ -197,8 +198,8 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Queries the value of a GLXContext attribute.",
 
         DISPLAY,
-        GLXContext.IN("ctx", "the GLXContext being queried"),
-        int.IN("attribute", "the attribute to query"),
+        GLXContext("ctx", "the GLXContext being queried"),
+        int("attribute", "the attribute to query"),
         Check(1)..int.p.OUT("value", "returns the attribute value")
     )
 
@@ -207,8 +208,8 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Selects which GLX events should be received on a GLXDrawable.",
 
         DISPLAY,
-        GLXDrawable.IN("draw", "the GLXDrawable"),
-        unsigned_long.IN("event_mask", "the selection mask")
+        GLXDrawable("draw", "the GLXDrawable"),
+        unsigned_long("event_mask", "the selection mask")
     )
 
     void(
@@ -216,7 +217,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
         "Returns which GLX events are selected for a GLXDrawable.",
 
         DISPLAY,
-        GLXDrawable.IN("draw", "the GLXDrawable"),
-        Check(1)..unsigned_long.p.IN("event_mask", "returns the selection mask")
+        GLXDrawable("draw", "the GLXDrawable"),
+        Check(1)..unsigned_long.p("event_mask", "returns the selection mask")
     )
 }

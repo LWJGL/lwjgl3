@@ -104,13 +104,13 @@ val GL43C = "GL43C".nativeClassGL("GL43C") {
         "ClearBufferData",
         "Fills a buffer object's data store with a fixed value.",
 
-        GLenum.IN("target", "the target of the operation", BUFFER_OBJECT_TARGETS),
-        GLenum.IN("internalformat", "the internal format with which the data will be stored in the buffer object"),
-        GLenum.IN("format", "the format of the data in memory addressed by {@code data}", PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
+        GLenum("target", "the target of the operation", BUFFER_OBJECT_TARGETS),
+        GLenum("internalformat", "the internal format with which the data will be stored in the buffer object"),
+        GLenum("format", "the format of the data in memory addressed by {@code data}", PIXEL_DATA_FORMATS),
+        GLenum("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..nullable..void.const.p.IN(
+        )..Unsafe..nullable..void.const.p(
             "data",
             """
             the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
@@ -124,15 +124,15 @@ val GL43C = "GL43C".nativeClassGL("GL43C") {
         "ClearBufferSubData",
         "Fills all or part of buffer object's data store with a fixed value.",
 
-        GLenum.IN("target", "the target of the operation", BUFFER_OBJECT_TARGETS),
-        GLenum.IN("internalformat", "the internal format with which the data will be stored in the buffer object"),
-        GLintptr.IN("offset", "the offset, in basic machine units into the buffer object's data store at which to start filling"),
-        GLsizeiptr.IN("size", "the size, in basic machine units of the range of the data store to fill"),
-        GLenum.IN("format", "the format of the data in memory addressed by {@code data}", PIXEL_DATA_FORMATS),
-        GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
+        GLenum("target", "the target of the operation", BUFFER_OBJECT_TARGETS),
+        GLenum("internalformat", "the internal format with which the data will be stored in the buffer object"),
+        GLintptr("offset", "the offset, in basic machine units into the buffer object's data store at which to start filling"),
+        GLsizeiptr("size", "the size, in basic machine units of the range of the data store to fill"),
+        GLenum("format", "the format of the data in memory addressed by {@code data}", PIXEL_DATA_FORMATS),
+        GLenum("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..nullable..void.const.p.IN(
+        )..Unsafe..nullable..void.const.p(
             "data",
             """
             the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
@@ -211,9 +211,9 @@ val GL43C = "GL43C".nativeClassGL("GL43C") {
         "DispatchCompute",
         "Launches one or more compute work groups.",
 
-        GLuint.IN("num_groups_x", "the number of work groups to be launched in the X dimension"),
-        GLuint.IN("num_groups_y", "the number of work groups to be launched in the Y dimension"),
-        GLuint.IN("num_groups_z", "the number of work groups to be launched in the Z dimension")
+        GLuint("num_groups_x", "the number of work groups to be launched in the X dimension"),
+        GLuint("num_groups_y", "the number of work groups to be launched in the Y dimension"),
+        GLuint("num_groups_z", "the number of work groups to be launched in the Z dimension")
     )
 
     void(
@@ -237,7 +237,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         """)}
         """,
 
-        DISPATCH_INDIRECT_BUFFER..GLintptr.IN(
+        DISPATCH_INDIRECT_BUFFER..GLintptr(
             "indirect",
             """
             the offset into the buffer object currently bound to the #DISPATCH_INDIRECT_BUFFER buffer target at which the dispatch parameters are
@@ -252,21 +252,21 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         "CopyImageSubData",
         "Performs a raw data copy between two images.",
 
-        GLuint.IN("srcName", "the name of a texture or renderbuffer object from which to copy"),
-        GLenum.IN("srcTarget", "the target representing the namespace of the source name {@code srcName}"),
-        GLint.IN("srcLevel", "the mipmap level to read from the source"),
-        GLint.IN("srcX", "the X coordinate of the left edge of the souce region to copy"),
-        GLint.IN("srcY", "the Y coordinate of the top edge of the souce region to copy"),
-        GLint.IN("srcZ", "the Z coordinate of the near edge of the souce region to copy"),
-        GLuint.IN("dstName", "the name of a texture or renderbuffer object to which to copy"),
-        GLenum.IN("dstTarget", "the target representing the namespace of the destination name {@code dstName}"),
-        GLint.IN("dstLevel", "the mipmap level to write to the source"),
-        GLint.IN("dstX", "the X coordinate of the left edge of the destination region"),
-        GLint.IN("dstY", "the Y coordinate of the top edge of the destination region"),
-        GLint.IN("dstZ", "the Z coordinate of the near edge of the destination region"),
-        GLsizei.IN("srcWidth", "the width of the region to be copied"),
-        GLsizei.IN("srcHeight", "the height of the region to be copied"),
-        GLsizei.IN("srcDepth", "the depth of the region to be copied")
+        GLuint("srcName", "the name of a texture or renderbuffer object from which to copy"),
+        GLenum("srcTarget", "the target representing the namespace of the source name {@code srcName}"),
+        GLint("srcLevel", "the mipmap level to read from the source"),
+        GLint("srcX", "the X coordinate of the left edge of the souce region to copy"),
+        GLint("srcY", "the Y coordinate of the top edge of the souce region to copy"),
+        GLint("srcZ", "the Z coordinate of the near edge of the souce region to copy"),
+        GLuint("dstName", "the name of a texture or renderbuffer object to which to copy"),
+        GLenum("dstTarget", "the target representing the namespace of the destination name {@code dstName}"),
+        GLint("dstLevel", "the mipmap level to write to the source"),
+        GLint("dstX", "the X coordinate of the left edge of the destination region"),
+        GLint("dstY", "the Y coordinate of the top edge of the destination region"),
+        GLint("dstZ", "the Z coordinate of the near edge of the destination region"),
+        GLsizei("srcWidth", "the width of the region to be copied"),
+        GLsizei("srcHeight", "the height of the region to be copied"),
+        GLsizei("srcDepth", "the depth of the region to be copied")
     )
 
     // KHR_debug
@@ -398,12 +398,12 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         If the #DEBUG_OUTPUT state is disabled the GL operates the same as if messages of every {@code source}, {@code type} or {@code severity} are disabled.
         """,
 
-        GLenum.IN("source", "the source of debug messages to enable or disable", DebugSources),
-        GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
-        GLenum.IN("severity", "the severity of debug messages to enable or disable", DebugSeverities),
-        AutoSize("ids")..GLsizei.IN("count", "the length of the array {@code ids}"),
-        SingleValue("id")..nullable..GLuint.const.p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
-        GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
+        GLenum("source", "the source of debug messages to enable or disable", DebugSources),
+        GLenum("type", "the type of debug messages to enable or disable", DebugTypes),
+        GLenum("severity", "the severity of debug messages to enable or disable", DebugSeverities),
+        AutoSize("ids")..GLsizei("count", "the length of the array {@code ids}"),
+        SingleValue("id")..nullable..GLuint.const.p("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
+        GLboolean("enabled", "whether the selected messages should be enabled or disabled")
     )
 
     void(
@@ -421,12 +421,12 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         If the #DEBUG_OUTPUT state is disabled calls to DebugMessageInsert are discarded and do not generate an error.
         """,
 
-        GLenum.IN("source", "the source of the debug message to insert", DebugSources),
-        GLenum.IN("type", "the type of the debug message insert", DebugTypes),
-        GLuint.IN("id", "the user-supplied identifier of the message to insert", DebugSeverities),
-        GLenum.IN("severity", "the severity of the debug messages to insert"),
-        AutoSize("message")..GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
-        GLcharUTF8.const.p.IN("message", "a character array containing the message to insert")
+        GLenum("source", "the source of the debug message to insert", DebugSources),
+        GLenum("type", "the type of the debug message insert", DebugTypes),
+        GLuint("id", "the user-supplied identifier of the message to insert", DebugSeverities),
+        GLenum("severity", "the severity of the debug messages to insert"),
+        AutoSize("message")..GLsizei("length", "the length of the string contained in the character array whose address is given by {@code message}"),
+        GLcharUTF8.const.p("message", "a character array containing the message to insert")
     )
 
     void(
@@ -460,8 +460,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         If the #DEBUG_OUTPUT state is disabled then the GL will not call the callback function.
         """,
 
-        nullable..GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
-        nullable..opaque_const_p.IN(
+        nullable..GLDEBUGPROC("callback", "a callback function that will be called when a debug message is generated"),
+        nullable..opaque_const_p(
             "userParam",
             "a user supplied pointer that will be passed on each invocation of {@code callback}"
         )
@@ -495,8 +495,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         message log so GetDebugMessageLog will always return zero.
         """,
 
-        GLuint.IN("count", "the number of debug messages to retrieve from the log"),
-        AutoSize("messageLog")..GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
+        GLuint("count", "the number of debug messages to retrieve from the log"),
+        AutoSize("messageLog")..GLsizei("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
         Check("count")..nullable..GLenum.p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
         Check("count")..nullable..GLenum.p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
         Check("count")..nullable..GLuint.p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
@@ -520,10 +520,10 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         not less than the value of #MAX_DEBUG_MESSAGE_LENGTH.
         """,
 
-        GLenum.IN("source", "the source of the debug message", "#DEBUG_SOURCE_APPLICATION #DEBUG_SOURCE_THIRD_PARTY"),
-        GLuint.IN("id", "the identifier of the message"),
-        AutoSize("message")..GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
-        GLcharUTF8.const.p.IN("message", "a string containing the message to be sent to the debug output stream")
+        GLenum("source", "the source of the debug message", "#DEBUG_SOURCE_APPLICATION #DEBUG_SOURCE_THIRD_PARTY"),
+        GLuint("id", "the identifier of the message"),
+        AutoSize("message")..GLsizei("length", "the length of the message to be sent to the debug output stream"),
+        GLcharUTF8.const.p("message", "a string containing the message to be sent to the debug output stream")
     )
 
     void(
@@ -543,27 +543,27 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         "ObjectLabel",
         "Labels a named object identified within a namespace.",
 
-        GLenum.IN(
+        GLenum(
             "identifier",
             "the namespace from which the name of the object is allocated",
             "$DebugIdentifiers #VERTEX_ARRAY #TEXTURE #RENDERBUFFER #FRAMEBUFFER #TRANSFORM_FEEDBACK"
         ),
-        GLuint.IN("name", "the name of the object to label"),
-        AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
-        GLcharUTF8.const.p.IN("label", "a string containing the label to assign to the object")
+        GLuint("name", "the name of the object to label"),
+        AutoSize("label")..GLsizei("length", "the length of the label to be used for the object"),
+        GLcharUTF8.const.p("label", "a string containing the label to assign to the object")
     )
 
     void(
         "GetObjectLabel",
         "Retrieves the label of a named object identified within a namespace.",
 
-        GLenum.IN(
+        GLenum(
             "identifier",
             "the namespace from which the name of the object is allocated",
             "$DebugIdentifiers #VERTEX_ARRAY #TEXTURE #RENDERBUFFER #FRAMEBUFFER #TRANSFORM_FEEDBACK"
         ),
-        GLuint.IN("name", "the name of the object whose label to retrieve"),
-        AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+        GLuint("name", "the name of the object whose label to retrieve"),
+        AutoSize("label")..GLsizei("bufSize", "the length of the buffer whose address is in {@code label}"),
         Check(1)..nullable..GLsizei.p.OUT("length", "the address of a variable to receive the length of the object label"),
         Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8.p.OUT("label", "a string that will receive the object label")
     )
@@ -572,17 +572,17 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         "ObjectPtrLabel",
         "Labels a sync object identified by a pointer.",
 
-        opaque_p.IN("ptr", "a pointer identifying a sync object"),
-        AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
-        GLcharUTF8.const.p.IN("label", "a string containing the label to assign to the object")
+        opaque_p("ptr", "a pointer identifying a sync object"),
+        AutoSize("label")..GLsizei("length", "the length of the label to be used for the object"),
+        GLcharUTF8.const.p("label", "a string containing the label to assign to the object")
     )
 
     void(
         "GetObjectPtrLabel",
         "Retrieves the label of a sync object identified by a pointer.",
 
-        opaque_p.IN("ptr", "the name of the sync object whose label to retrieve"),
-        AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+        opaque_p("ptr", "the name of the sync object whose label to retrieve"),
+        AutoSize("label")..GLsizei("bufSize", "the length of the buffer whose address is in {@code label}"),
         Check(1)..nullable..GLsizei.p.OUT("length", "a variable to receive the length of the object label"),
         Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8.p.OUT("label", "a string that will receive the object label")
     )
@@ -623,17 +623,17 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         "FramebufferParameteri",
         "Sets a named parameter of a framebuffer.",
 
-        GLenum.IN("target", "target of the operation", "#READ_FRAMEBUFFER #DRAW_FRAMEBUFFER #FRAMEBUFFER"),
-        GLenum.IN("pname", "a token indicating the parameter to be modified", FramebufferParameters),
-        GLint.IN("param", "the new value for the parameter named {@code pname}")
+        GLenum("target", "target of the operation", "#READ_FRAMEBUFFER #DRAW_FRAMEBUFFER #FRAMEBUFFER"),
+        GLenum("pname", "a token indicating the parameter to be modified", FramebufferParameters),
+        GLint("param", "the new value for the parameter named {@code pname}")
     )
 
     void(
         "GetFramebufferParameteriv",
         "Retrieves a named parameter from a framebuffer.",
 
-        GLenum.IN("target", "target of the operation", "#READ_FRAMEBUFFER #DRAW_FRAMEBUFFER #FRAMEBUFFER"),
-        GLenum.IN("pname", "a token indicating the parameter to be retrieved", FramebufferParameters),
+        GLenum("target", "target of the operation", "#READ_FRAMEBUFFER #DRAW_FRAMEBUFFER #FRAMEBUFFER"),
+        GLenum("pname", "a token indicating the parameter to be retrieved", FramebufferParameters),
         Check(1)..ReturnParam..GLint.p.OUT("params", "a variable to receive the value of the parameter named {@code pname}")
     )
 
@@ -751,7 +751,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         "GetInternalformati64v",
         "Retrieves information about implementation-dependent support for internal formats.",
 
-        GLenum.IN(
+        GLenum(
             "target",
             "the usage of the internal format",
             """
@@ -759,9 +759,9 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
             #TEXTURE_2D_MULTISAMPLE_ARRAY
             """
         ),
-        GLenum.IN("internalformat", "the internal format about which to retrieve information"),
-        GLenum.IN("pname", "the type of information to query"),
-        AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values that may be written to params by the function"),
+        GLenum("internalformat", "the internal format about which to retrieve information"),
+        GLenum("pname", "the type of information to query"),
+        AutoSize("params")..GLsizei("bufSize", "the maximum number of values that may be written to params by the function"),
         ReturnParam..GLint64.p.OUT("params", "a variable into which to write the retrieved information")
     )
 
@@ -771,60 +771,60 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
         "InvalidateTexSubImage",
         "Invalidates a region of a texture image.",
 
-        GLuint.IN("texture", "the name of a texture object a subregion of which to invalidate"),
-        GLint.IN("level", "the level of detail of the texture object within which the region resides"),
-        GLint.IN("xoffset", "the X offset of the region to be invalidated"),
-        GLint.IN("yoffset", "the Y offset of the region to be invalidated"),
-        GLint.IN("zoffset", "the Z offset of the region to be invalidated"),
-        GLsizei.IN("width", "the width of the region to be invalidated"),
-        GLsizei.IN("height", "the height of the region to be invalidated"),
-        GLsizei.IN("depth", "the depth of the region to be invalidated")
+        GLuint("texture", "the name of a texture object a subregion of which to invalidate"),
+        GLint("level", "the level of detail of the texture object within which the region resides"),
+        GLint("xoffset", "the X offset of the region to be invalidated"),
+        GLint("yoffset", "the Y offset of the region to be invalidated"),
+        GLint("zoffset", "the Z offset of the region to be invalidated"),
+        GLsizei("width", "the width of the region to be invalidated"),
+        GLsizei("height", "the height of the region to be invalidated"),
+        GLsizei("depth", "the depth of the region to be invalidated")
     )
 
     void(
         "InvalidateTexImage",
         "Invalidates the entirety of a texture image.",
 
-        GLuint.IN("texture", "the name of a texture object to invalidate"),
-        GLint.IN("level", "the level of detail of the texture object to invalidate")
+        GLuint("texture", "the name of a texture object to invalidate"),
+        GLint("level", "the level of detail of the texture object to invalidate")
     )
 
     void(
         "InvalidateBufferSubData",
         "Invalidates a region of a buffer object's data store.",
 
-        GLuint.IN("buffer", "the name of a buffer object, a subrange of whose data store to invalidate"),
-        GLintptr.IN("offset", "the offset within the buffer's data store of the start of the range to be invalidated"),
-        GLsizeiptr.IN("length", "the length of the range within the buffer's data store to be invalidated")
+        GLuint("buffer", "the name of a buffer object, a subrange of whose data store to invalidate"),
+        GLintptr("offset", "the offset within the buffer's data store of the start of the range to be invalidated"),
+        GLsizeiptr("length", "the length of the range within the buffer's data store to be invalidated")
     )
 
     void(
         "InvalidateBufferData",
         "Invalidates the content of a buffer object's data store.",
 
-        GLuint.IN("buffer", "the name of a buffer object whose data store to invalidate")
+        GLuint("buffer", "the name of a buffer object whose data store to invalidate")
     )
 
     void(
         "InvalidateFramebuffer",
         "Invalidate the content some or all of a framebuffer object's attachments.",
 
-        GLenum.IN("target", "the target to which the framebuffer is attached", "#FRAMEBUFFER #DRAW_FRAMEBUFFER #READ_FRAMEBUFFER"),
-        AutoSize("attachments")..GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
-        SingleValue("attachment")..GLenum.const.p.IN("attachments", "the address of an array identifying the attachments to be invalidated")
+        GLenum("target", "the target to which the framebuffer is attached", "#FRAMEBUFFER #DRAW_FRAMEBUFFER #READ_FRAMEBUFFER"),
+        AutoSize("attachments")..GLsizei("numAttachments", "the number of entries in the {@code attachments} array"),
+        SingleValue("attachment")..GLenum.const.p("attachments", "the address of an array identifying the attachments to be invalidated")
     )
 
     void(
         "InvalidateSubFramebuffer",
         "Invalidates the content of a region of some or all of a framebuffer object's attachments.",
 
-        GLenum.IN("target", "the target to which the framebuffer is attached", "#FRAMEBUFFER #DRAW_FRAMEBUFFER #READ_FRAMEBUFFER"),
-        AutoSize("attachments")..GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
-        SingleValue("attachment")..GLenum.const.p.IN("attachments", "an array identifying the attachments to be invalidated"),
-        GLint.IN("x", "the X offset of the region to be invalidated"),
-        GLint.IN("y", "the Y offset of the region to be invalidated"),
-        GLsizei.IN("width", "the width of the region to be invalidated"),
-        GLsizei.IN("height", "the height of the region to be invalidated")
+        GLenum("target", "the target to which the framebuffer is attached", "#FRAMEBUFFER #DRAW_FRAMEBUFFER #READ_FRAMEBUFFER"),
+        AutoSize("attachments")..GLsizei("numAttachments", "the number of entries in the {@code attachments} array"),
+        SingleValue("attachment")..GLenum.const.p("attachments", "an array identifying the attachments to be invalidated"),
+        GLint("x", "the X offset of the region to be invalidated"),
+        GLint("y", "the Y offset of the region to be invalidated"),
+        GLsizei("width", "the width of the region to be invalidated"),
+        GLsizei("height", "the height of the region to be invalidated")
     )
 
     // ARB_multi_draw_indirect
@@ -857,12 +857,12 @@ for ( i = 0; i < primcount; i++ ) {
         """)}
         """,
 
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
+        GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
         Check("primcount * (stride == 0 ? (4 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p.IN("indirect", "an array of structures containing the draw parameters"),
-        GLsizei.IN("primcount", "the number of elements in the array of draw parameter structures"),
-        GLsizei.IN("stride", "the distance in basic machine units between elements of the draw parameter array")
+        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "an array of structures containing the draw parameters"),
+        GLsizei("primcount", "the number of elements in the array of draw parameter structures"),
+        GLsizei("stride", "the distance in basic machine units between elements of the draw parameter array")
     )
 
     void(
@@ -894,13 +894,13 @@ for ( i = 0; i < primcount; i++ ) {
     """)}
         """,
 
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        GLenum.IN("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
+        GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
+        GLenum("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
         Check("primcount * (stride == 0 ? (5 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p.IN("indirect", "a structure containing an array of draw parameters"),
-        GLsizei.IN("primcount", "the number of elements in the array addressed by {@code indirect}"),
-        GLsizei.IN("stride", "the distance in basic machine units between elements of the draw parameter array")
+        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "a structure containing an array of draw parameters"),
+        GLsizei("primcount", "the number of elements in the array addressed by {@code indirect}"),
+        GLsizei("stride", "the distance in basic machine units between elements of the draw parameter array")
     )
 
     // ARB_program_interface_query
@@ -974,9 +974,9 @@ for ( i = 0; i < primcount; i++ ) {
         "GetProgramInterfaceiv",
         "Queries a property of an interface in a program.",
 
-        GLuint.IN("program", "the name of a program object whose interface to query"),
-        GLenum.IN("programInterface", "a token identifying the interface within {@code program} to query", ProgramInterfaces),
-        GLenum.IN("pname", "the name of the parameter within {@code programInterface} to query", ProgramInterfaceParameters),
+        GLuint("program", "the name of a program object whose interface to query"),
+        GLenum("programInterface", "a token identifying the interface within {@code program} to query", ProgramInterfaces),
+        GLenum("pname", "the name of the parameter within {@code programInterface} to query", ProgramInterfaceParameters),
         Check(1)..ReturnParam..GLint.p.OUT("params", "a variable to retrieve the value of {@code pname} for the program interface")
     )
 
@@ -984,19 +984,19 @@ for ( i = 0; i < primcount; i++ ) {
         "GetProgramResourceIndex",
         "Queries the index of a named resource within a program.",
 
-        GLuint.IN("program", "the name of a program object whose resources to query"),
-        GLenum.IN("programInterface", "a token identifying the interface within {@code program} containing the resource named {Wcode name}", ProgramInterfaces),
-        GLcharUTF8.const.p.IN("name", "the name of the resource to query the index of")
+        GLuint("program", "the name of a program object whose resources to query"),
+        GLenum("programInterface", "a token identifying the interface within {@code program} containing the resource named {Wcode name}", ProgramInterfaces),
+        GLcharUTF8.const.p("name", "the name of the resource to query the index of")
     )
 
     void(
         "GetProgramResourceName",
         "Queries the name of an indexed resource within a program.",
 
-        GLuint.IN("program", "the name of a program object whose resources to query"),
-        GLenum.IN("programInterface", "a token identifying the interface within {@code program} containing the indexed resource", ProgramInterfaces),
-        GLuint.IN("index", "the index of the resource within {@code programInterface} of {@code program}"),
-        AutoSize("name")..GLsizei.IN("bufSize", "the size of the character array whose address is given by {@code name}"),
+        GLuint("program", "the name of a program object whose resources to query"),
+        GLenum("programInterface", "a token identifying the interface within {@code program} containing the indexed resource", ProgramInterfaces),
+        GLuint("index", "the index of the resource within {@code programInterface} of {@code program}"),
+        AutoSize("name")..GLsizei("bufSize", "the size of the character array whose address is given by {@code name}"),
         Check(1)..nullable..GLsizei.p.OUT("length", "a variable which will receive the length of the resource name"),
         Return("length", "glGetProgramInterfacei(program, programInterface, GL_MAX_NAME_LENGTH)")..GLcharASCII.p.OUT(
             "name",
@@ -1008,12 +1008,12 @@ for ( i = 0; i < primcount; i++ ) {
         "GetProgramResourceiv",
         "Retrieves values for multiple properties of a single active resource within a program object.",
 
-        GLuint.IN("program", "the name of a program object whose resources to query"),
-        GLenum.IN("programInterface", "a token identifying the interface within {@code program} containing the resource named {@code name}.", ProgramInterfaces),
-        GLuint.IN("index", "the active resource index"),
-        AutoSize("props")..GLsizei.IN("propCount", "the number of properties in {@code props}"),
-        GLenum.const.p.IN("props", "an array that will receive the active resource properties"),
-        AutoSize("params")..GLsizei.IN("bufSize", "the size of the integer array whose address is given by {@code params}"),
+        GLuint("program", "the name of a program object whose resources to query"),
+        GLenum("programInterface", "a token identifying the interface within {@code program} containing the resource named {@code name}.", ProgramInterfaces),
+        GLuint("index", "the active resource index"),
+        AutoSize("props")..GLsizei("propCount", "the number of properties in {@code props}"),
+        GLenum.const.p("props", "an array that will receive the active resource properties"),
+        AutoSize("params")..GLsizei("bufSize", "the size of the integer array whose address is given by {@code params}"),
         Check(1)..nullable..GLsizei.p.OUT("length", "a variable which will receive the number of values returned"),
         GLint.p.OUT("params", "an array that will receive the property values")
     )
@@ -1022,22 +1022,22 @@ for ( i = 0; i < primcount; i++ ) {
         "GetProgramResourceLocation",
         "Queries the location of a named resource within a program.",
 
-        GLuint.IN("program", "the name of a program object whose resources to query"),
-        GLenum.IN("programInterface", "a token identifying the interface within {@code program} containing the resource named {@code name}"),
-        GLcharASCII.const.p.IN("name", "the name of the resource to query the location of")
+        GLuint("program", "the name of a program object whose resources to query"),
+        GLenum("programInterface", "a token identifying the interface within {@code program} containing the resource named {@code name}"),
+        GLcharASCII.const.p("name", "the name of the resource to query the location of")
     )
 
     GLint(
         "GetProgramResourceLocationIndex",
         "Queries the fragment color index of a named variable within a program.",
 
-        GLuint.IN("program", "the name of a program object whose resources to query"),
-        GLenum.IN(
+        GLuint("program", "the name of a program object whose resources to query"),
+        GLenum(
             "programInterface",
             "a token identifying the interface within {@code program} containing the resource named {@code name}.",
             "#PROGRAM_OUTPUT"
         ),
-        GLcharASCII.const.p.IN("name", "the name of the resource to query the location of")
+        GLcharASCII.const.p("name", "the name of the resource to query the location of")
     )
 
     // ARB_shader_storage_buffer_object
@@ -1095,9 +1095,9 @@ for ( i = 0; i < primcount; i++ ) {
         "ShaderStorageBlockBinding",
         "Changes an active shader storage block binding.",
 
-        GLuint.IN("program", "the name of the program containing the block whose binding to change"),
-        GLuint.IN("storageBlockIndex", "the index storage block within the program"),
-        GLuint.IN("storageBlockBinding", "the index storage block binding to associate with the specified storage block")
+        GLuint("program", "the name of the program containing the block whose binding to change"),
+        GLuint("storageBlockIndex", "the index storage block within the program"),
+        GLuint("storageBlockBinding", "the index storage block binding to associate with the specified storage block")
     )
 
     // ARB_stencil_texturing
@@ -1127,11 +1127,11 @@ for ( i = 0; i < primcount; i++ ) {
         "TexBufferRange",
         "Binds a range of a buffer's data store to a buffer texture.",
 
-        GLenum.IN("target", "the target of the operation", "#TEXTURE_BUFFER"),
-        GLenum.IN("internalformat", "the internal format of the data in the store belonging to {@code buffer}"),
-        GLuint.IN("buffer", "the name of the buffer object whose storage to attach to the active buffer texture"),
-        GLintptr.IN("offset", "the offset of the start of the range of the buffer's data store to attach"),
-        GLsizeiptr.IN("size", "the size of the range of the buffer's data store to attach")
+        GLenum("target", "the target of the operation", "#TEXTURE_BUFFER"),
+        GLenum("internalformat", "the internal format of the data in the store belonging to {@code buffer}"),
+        GLuint("buffer", "the name of the buffer object whose storage to attach to the active buffer texture"),
+        GLintptr("offset", "the offset of the start of the range of the buffer's data store to attach"),
+        GLsizeiptr("size", "the size of the range of the buffer's data store to attach")
     )
 
     // ARB_texture_storage_multisample
@@ -1140,12 +1140,12 @@ for ( i = 0; i < primcount; i++ ) {
         "TexStorage2DMultisample",
         "Specifies storage for a two-dimensional multisample texture.",
 
-        GLenum.IN("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE #PROXY_TEXTURE_2D_MULTISAMPLE"),
-        GLsizei.IN("samples", "the number of samples in the texture"),
-        GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
-        GLsizei.IN("width", "the width of the texture, in texels"),
-        GLsizei.IN("height", "the height of the texture, in texels"),
-        GLboolean.IN(
+        GLenum("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE #PROXY_TEXTURE_2D_MULTISAMPLE"),
+        GLsizei("samples", "the number of samples in the texture"),
+        GLenum("internalformat", "the sized internal format to be used to store texture image data"),
+        GLsizei("width", "the width of the texture, in texels"),
+        GLsizei("height", "the height of the texture, in texels"),
+        GLboolean(
             "fixedsamplelocations",
             """
             whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
@@ -1158,13 +1158,13 @@ for ( i = 0; i < primcount; i++ ) {
         "TexStorage3DMultisample",
         "Specifies storage for a two-dimensional multisample array texture.",
 
-        GLenum.IN("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE_ARRAY #PROXY_TEXTURE_2D_MULTISAMPLE"),
-        GLsizei.IN("samples", "the number of samples in the texture"),
-        GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
-        GLsizei.IN("width", "the width of the texture, in texels"),
-        GLsizei.IN("height", "the height of the texture, in texels"),
-        GLsizei.IN("depth", "the depth of the texture, in texels"),
-        GLboolean.IN(
+        GLenum("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE_ARRAY #PROXY_TEXTURE_2D_MULTISAMPLE"),
+        GLsizei("samples", "the number of samples in the texture"),
+        GLenum("internalformat", "the sized internal format to be used to store texture image data"),
+        GLsizei("width", "the width of the texture, in texels"),
+        GLsizei("height", "the height of the texture, in texels"),
+        GLsizei("depth", "the depth of the texture, in texels"),
+        GLboolean(
             "fixedsamplelocations",
             """
             whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
@@ -1188,14 +1188,14 @@ for ( i = 0; i < primcount; i++ ) {
         "TextureView",
         "Initializes a texture as a data alias of another texture's data store.",
 
-        GLuint.IN("texture", "the texture object to be initialized as a view"),
-        GLenum.IN("target", "the target to be used for the newly initialized texture"),
-        GLuint.IN("origtexture", "the name of a texture object of which to make a view"),
-        GLenum.IN("internalformat", "the internal format for the newly created view"),
-        GLuint.IN("minlevel", "the  lowest level of detail of the view"),
-        GLuint.IN("numlevels", "the number of levels of detail to include in the view"),
-        GLuint.IN("minlayer", "the index of the first layer to include in the view"),
-        GLuint.IN("numlayers", "the number of layers to include in the view")
+        GLuint("texture", "the texture object to be initialized as a view"),
+        GLenum("target", "the target to be used for the newly initialized texture"),
+        GLuint("origtexture", "the name of a texture object of which to make a view"),
+        GLenum("internalformat", "the internal format for the newly created view"),
+        GLuint("minlevel", "the  lowest level of detail of the view"),
+        GLuint("numlevels", "the number of levels of detail to include in the view"),
+        GLuint("minlayer", "the index of the first layer to include in the view"),
+        GLuint("numlayers", "the number of layers to include in the view")
     )
 
     // ARB_vertex_attrib_binding
@@ -1227,27 +1227,27 @@ for ( i = 0; i < primcount; i++ ) {
         "BindVertexBuffer",
         "Binds a buffer to a vertex buffer bind point.",
 
-        GLuint.IN("bindingindex", "the index of the vertex buffer binding point to which to bind the buffer"),
-        GLuint.IN("buffer", "the name of an existing buffer to bind to the vertex buffer binding point"),
-        GLintptr.IN("offset", "the offset of the first element of the buffer"),
-        GLsizei.IN("stride", "the distance between elements within the buffer")
+        GLuint("bindingindex", "the index of the vertex buffer binding point to which to bind the buffer"),
+        GLuint("buffer", "the name of an existing buffer to bind to the vertex buffer binding point"),
+        GLintptr("offset", "the offset of the first element of the buffer"),
+        GLsizei("stride", "the distance between elements within the buffer")
     )
 
     void(
         "VertexAttribFormat",
         "Specifies the organization of data in vertex arrays.",
 
-        GLuint.IN("attribindex", "the generic vertex attribute array being described"),
-        GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 #BGRA"),
-        GLenum.IN("type", "the type of the data stored in the array"),
-        GLboolean.IN(
+        GLuint("attribindex", "the generic vertex attribute array being described"),
+        GLint("size", "the number of values per vertex that are stored in the array", "1 2 3 4 #BGRA"),
+        GLenum("type", "the type of the data stored in the array"),
+        GLboolean(
             "normalized",
             """
             if true then integer data is normalized to the range [-1, 1] or [0, 1] if it is signed or unsigned, respectively. If false then integer data is
             directly converted to floating point.
             """
         ),
-        GLuint.IN(
+        GLuint(
             "relativeoffset",
             "the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from"
         )
@@ -1257,10 +1257,10 @@ for ( i = 0; i < primcount; i++ ) {
         "VertexAttribIFormat",
         "Specifies the organization of pure integer data in vertex arrays.",
 
-        GLuint.IN("attribindex", "the generic vertex attribute array being described"),
-        GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 #BGRA"),
-        GLenum.IN("type", "the type of the data stored in the array"),
-        GLuint.IN(
+        GLuint("attribindex", "the generic vertex attribute array being described"),
+        GLint("size", "the number of values per vertex that are stored in the array", "1 2 3 4 #BGRA"),
+        GLenum("type", "the type of the data stored in the array"),
+        GLuint(
             "relativeoffset",
             "the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from"
         )
@@ -1270,10 +1270,10 @@ for ( i = 0; i < primcount; i++ ) {
         "VertexAttribLFormat",
         "Specifies the organization of 64-bit double data in vertex arrays.",
 
-        GLuint.IN("attribindex", "the generic vertex attribute array being described"),
-        GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 #BGRA"),
-        GLenum.IN("type", "the type of the data stored in the array"),
-        GLuint.IN(
+        GLuint("attribindex", "the generic vertex attribute array being described"),
+        GLint("size", "the number of values per vertex that are stored in the array", "1 2 3 4 #BGRA"),
+        GLenum("type", "the type of the data stored in the array"),
+        GLuint(
             "relativeoffset",
             "the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from"
         )
@@ -1283,15 +1283,15 @@ for ( i = 0; i < primcount; i++ ) {
         "VertexAttribBinding",
         "Associate a vertex attribute and a vertex buffer binding.",
 
-        GLuint.IN("attribindex", "the index of the attribute to associate with a vertex buffer binding"),
-        GLuint.IN("bindingindex", "the index of the vertex buffer binding with which to associate the generic vertex attribute")
+        GLuint("attribindex", "the index of the attribute to associate with a vertex buffer binding"),
+        GLuint("bindingindex", "the index of the vertex buffer binding with which to associate the generic vertex attribute")
     )
 
     void(
         "VertexBindingDivisor",
         "Modifies the rate at which generic vertex attributes advance during instanced rendering.",
 
-        GLuint.IN("bindingindex", "the index of the generic vertex attribute"),
-        GLuint.IN("divisor", "the number of instances that will pass between updates of the generic attribute at slot {@code index}")
+        GLuint("bindingindex", "the index of the generic vertex attribute"),
+        GLuint("divisor", "the number of instances that will pass between updates of the generic attribute at slot {@code index}")
     )
 }

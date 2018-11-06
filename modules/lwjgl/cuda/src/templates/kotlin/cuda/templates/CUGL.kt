@@ -28,8 +28,8 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Check(1)..CUgraphicsResource.p.OUT("pCudaResource", ""),
-        GLuint.IN("buffer", ""),
-        unsigned_int.IN("Flags", "")
+        GLuint("buffer", ""),
+        unsigned_int("Flags", "")
     )
 
     CUresult(
@@ -37,9 +37,9 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Check(1)..CUgraphicsResource.p.OUT("pCudaResource", ""),
-        GLuint.IN("image", ""),
-        GLenum.IN("target", ""),
-        unsigned_int.IN("Flags", "")
+        GLuint("image", ""),
+        GLenum("target", ""),
+        unsigned_int("Flags", "")
     )
 
     CUresult(
@@ -47,20 +47,17 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "",
 
         Check(1)..CUcontext.p.OUT("pCtx", ""),
-        unsigned_int.IN("Flags", ""),
-        CUdevice.IN("device", "")
+        unsigned_int("Flags", ""),
+        CUdevice("device", "")
     ).versioned()
 
-    CUresult(
-        "GLInit",
-        ""
-    )
+    CUresult("GLInit", "", void())
 
     CUresult(
         "GLRegisterBufferObject",
         "",
 
-        GLuint.IN("buffer", "")
+        GLuint("buffer", "")
     )
 
     CUresult(
@@ -69,29 +66,29 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
 
         Check(1)..CUdeviceptr.p.OUT("dptr", ""),
         Check(1)..size_t.p.OUT("size", ""),
-        GLuint.IN("buffer", "")
+        GLuint("buffer", "")
     ).ptds(2)
 
     CUresult(
         "GLUnmapBufferObject",
         "",
 
-        GLuint.IN("buffer", "")
+        GLuint("buffer", "")
     )
 
     CUresult(
         "GLUnregisterBufferObject",
         "",
 
-        GLuint.IN("buffer", "")
+        GLuint("buffer", "")
     )
 
     CUresult(
         "GLSetBufferObjectMapFlags",
         "",
 
-        GLuint.IN("buffer", ""),
-        unsigned_int.IN("Flags", "")
+        GLuint("buffer", ""),
+        unsigned_int("Flags", "")
     )
 
     CUresult(
@@ -100,15 +97,15 @@ val CUGL = "CUGL".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
 
         Check(1)..CUdeviceptr.p.OUT("dptr", ""),
         Check(1)..size_t.p.OUT("size", ""),
-        GLuint.IN("buffer", ""),
-        nullable..CUstream.IN("hStream", "")
+        GLuint("buffer", ""),
+        nullable..CUstream("hStream", "")
     ).ptsz(2)
 
     CUresult(
         "GLUnmapBufferObjectAsync",
         "",
 
-        GLuint.IN("buffer", ""),
-        nullable..CUstream.IN("hStream", "")
+        GLuint("buffer", ""),
+        nullable..CUstream("hStream", "")
     )
 }

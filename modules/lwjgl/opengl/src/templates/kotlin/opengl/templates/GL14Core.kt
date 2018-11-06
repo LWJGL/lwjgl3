@@ -43,10 +43,10 @@ val GL14C = "GL14C".nativeClassGL("GL14C") {
         "BlendColor",
         "Specifies the constant color C<sub>c</sub> to be used in blending.",
 
-        GLfloat.IN("red", "the red color component"),
-        GLfloat.IN("green", "the green color component"),
-        GLfloat.IN("blue", "the blue color component"),
-        GLfloat.IN("alpha", "the alpha color component")
+        GLfloat("red", "the red color component"),
+        GLfloat("green", "the green color component"),
+        GLfloat("blue", "the blue color component"),
+        GLfloat("alpha", "the alpha color component")
     )
 
     // EXT_blend_minmax
@@ -63,7 +63,7 @@ val GL14C = "GL14C".nativeClassGL("GL14C") {
         "BlendEquation",
         "Controls the blend equations used for per-fragment blending.",
 
-        GLenum.IN("mode", "the blend equation", "#FUNC_ADD #FUNC_SUBTRACT #FUNC_REVERSE_SUBTRACT #MIN #MAX")
+        GLenum("mode", "the blend equation", "#FUNC_ADD #FUNC_SUBTRACT #FUNC_REVERSE_SUBTRACT #MIN #MAX")
     )
 
     // EXT_blend_subtract
@@ -106,10 +106,10 @@ val GL14C = "GL14C".nativeClassGL("GL14C") {
         "MultiDrawArrays",
         "Renders multiple sets of primitives from array data.",
 
-        GLenum.IN("mode", "the kind of primitives to render", CORE_PRIMITIVE_TYPES),
-        GLint.const.p.IN("first", "an array of starting indices in the enabled arrays"),
-        GLsizei.const.p.IN("count", "an array of the number of indices to be rendered"),
-        AutoSize("first", "count")..GLsizei.IN("primcount", "the size of {@code first} and {@code count}")
+        GLenum("mode", "the kind of primitives to render", CORE_PRIMITIVE_TYPES),
+        GLint.const.p("first", "an array of starting indices in the enabled arrays"),
+        GLsizei.const.p("count", "an array of the number of indices to be rendered"),
+        AutoSize("first", "count")..GLsizei("primcount", "the size of {@code first} and {@code count}")
     )
 
     void(
@@ -120,11 +120,11 @@ val GL14C = "GL14C".nativeClassGL("GL14C") {
         <b>LWJGL note</b>: Use org.lwjgl.system.MemoryUtil#memAddress() to retrieve pointers to the index buffers.
         """,
 
-        GLenum.IN("mode", "the kind of primitives to render", CORE_PRIMITIVE_TYPES),
-        GLsizei.p.IN("count", "an array of the elements counts"),
-        GLenum.IN("type", "the type of the values in indices", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
-        void.const.p.p.IN("indices", "a pointer to the location where the indices are stored"),
-        AutoSize("count", "indices")..GLsizei.IN("primcount", "the size of the {@code count} array")
+        GLenum("mode", "the kind of primitives to render", CORE_PRIMITIVE_TYPES),
+        GLsizei.p("count", "an array of the elements counts"),
+        GLenum("type", "the type of the values in indices", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
+        void.const.p.p("indices", "a pointer to the location where the indices are stored"),
+        AutoSize("count", "indices")..GLsizei("primcount", "the size of the {@code count} array")
     )
 
     // ARB_point_parameters
@@ -139,32 +139,32 @@ val GL14C = "GL14C".nativeClassGL("GL14C") {
         "PointParameterf",
         "Sets the float value of a pointer parameter.",
 
-        GLenum.IN("pname", "the parameter to set", "#POINT_FADE_THRESHOLD_SIZE"),
-        GLfloat.IN("param", "the parameter value")
+        GLenum("pname", "the parameter to set", "#POINT_FADE_THRESHOLD_SIZE"),
+        GLfloat("param", "the parameter value")
     )
 
     void(
         "PointParameteri",
         "Integer version of #PointParameterf().",
 
-        GLenum.IN("pname", "the parameter to set", "#POINT_FADE_THRESHOLD_SIZE"),
-        GLint.IN("param", "the parameter value")
+        GLenum("pname", "the parameter to set", "#POINT_FADE_THRESHOLD_SIZE"),
+        GLint("param", "the parameter value")
     )
 
     void(
         "PointParameterfv",
         "Pointer version of #PointParameterf().",
 
-        GLenum.IN("pname", "the parameter to set"),
-        Check(3)..GLfloat.const.p.IN("params", "the parameter value")
+        GLenum("pname", "the parameter to set"),
+        Check(3)..GLfloat.const.p("params", "the parameter value")
     )
 
     void(
         "PointParameteriv",
         "Pointer version of #PointParameteri().",
 
-        GLenum.IN("pname", "the parameter to set"),
-        Check(3)..GLint.const.p.IN("params", "the parameter value")
+        GLenum("pname", "the parameter to set"),
+        Check(3)..GLint.const.p("params", "the parameter value")
     )
 
     // EXT_blend_func_separate
@@ -182,10 +182,10 @@ val GL14C = "GL14C".nativeClassGL("GL14C") {
         "BlendFuncSeparate",
         "Specifies pixel arithmetic for RGB and alpha components separately.",
 
-        GLenum.IN("sfactorRGB", "how the red, green, and blue blending factors are computed. The initial value is GL_ONE."),
-        GLenum.IN("dfactorRGB", "how the red, green, and blue destination blending factors are computed. The initial value is GL_ZERO."),
-        GLenum.IN("sfactorAlpha", "how the alpha source blending factor is computed. The initial value is GL_ONE."),
-        GLenum.IN("dfactorAlpha", "how the alpha destination blending factor is computed. The initial value is GL_ZERO.")
+        GLenum("sfactorRGB", "how the red, green, and blue blending factors are computed. The initial value is GL_ONE."),
+        GLenum("dfactorRGB", "how the red, green, and blue destination blending factors are computed. The initial value is GL_ZERO."),
+        GLenum("sfactorAlpha", "how the alpha source blending factor is computed. The initial value is GL_ONE."),
+        GLenum("dfactorAlpha", "how the alpha destination blending factor is computed. The initial value is GL_ZERO.")
     )
 
     // EXT_stencil_wrap

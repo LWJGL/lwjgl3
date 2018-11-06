@@ -24,8 +24,8 @@ val KHR_wait_sync = "KHRWaitSync".nativeClassEGL("KHR_wait_sync", postfix = KHR)
         "WaitSyncKHR",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSyncKHR.IN("sync", ""),
-        EGLint.IN("flags", "")
+        EGLDisplay("dpy", ""),
+        EGLSyncKHR("sync", ""),
+        EGLint("flags", "")
     )
 }

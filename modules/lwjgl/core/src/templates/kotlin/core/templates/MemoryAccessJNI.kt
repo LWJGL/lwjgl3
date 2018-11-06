@@ -19,7 +19,8 @@ val MemoryAccessJNI = "MemoryAccessJNI".nativeClass(Module.CORE) {
         nativeCall = "${t}return (jint)sizeof(void *);"
     )..int(
         "getPointerSize",
-        "Returns the {@code sizeof(void *)}."
+        "Returns the {@code sizeof(void *)}.",
+        void()
     )
 
     val primitives = arrayOf(
@@ -82,7 +83,8 @@ ${primitives
     ).forEach { (name, signature) ->
         macro..Address..signature.handle(
             name,
-            "Returns the address of the stdlib {@code $name} function."
+            "Returns the address of the stdlib {@code $name} function.",
+            void()
         )
     }
 
@@ -90,14 +92,16 @@ ${primitives
         nativeCall = "${t}return (jlong)(intptr_t)&__aligned_alloc;"
     )..macro..Address.."void * (*) (size_t, size_t)".handle(
         "aligned_alloc",
-        "Returns the address of the stdlib {@code aligned_alloc} function."
+        "Returns the address of the stdlib {@code aligned_alloc} function.",
+        void()
     )
 
     Code(
         nativeCall = "${t}return (jlong)(intptr_t)&__aligned_free;"
     )..macro..Address.."void (*) (void *)".handle(
         "aligned_free",
-        "Returns the address of the stdlib {@code aligned_free} function."
+        "Returns the address of the stdlib {@code aligned_free} function.",
+        void()
     )
 
     for ((type, name, msg) in primitives)
@@ -105,7 +109,7 @@ ${primitives
             "get$name",
             "Reads $msg from the specified memory address.",
 
-            opaque_p.IN("ptr", "the memory address to read")
+            opaque_p("ptr", "the memory address to read")
         )
 
     for ((type, name, msg) in primitives)
@@ -113,7 +117,7 @@ ${primitives
             "put$name",
             "Writes $msg to the specified memory address.",
 
-            opaque_p.IN("ptr", "the memory address to write"),
-            type.IN("value", "the value to write")
+            opaque_p("ptr", "the memory address to write"),
+            type("value", "the value to write")
         )
 }

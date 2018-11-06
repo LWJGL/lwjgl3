@@ -24,12 +24,12 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
         "CreateBufferRegionARB",
         "Creates a buffer region and returns a handle associated with it.",
 
-        HDC.IN("hdc", "the device context for the device on which the buffer region is created"),
-        int.IN(
+        HDC("hdc", "the device context for the device on which the buffer region is created"),
+        int(
             "layerPlane",
             "the layer plane. Positive values identify overlay planes, negative values identify underlay planes. A value of 0 identifies the main plane."
         ),
-        UINT.IN(
+        UINT(
             "type",
             """
             a bitwise OR of any of the following values indicating which buffers can be saved or restored.  Multiple bits can be set and may result in better
@@ -43,7 +43,7 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
         "DeleteBufferRegionARB",
         "Deletes a buffer region.",
 
-        HANDLE.IN("region", "a handle to a buffer region previously created with #CreateBufferRegionARB().")
+        HANDLE("region", "a handle to a buffer region previously created with #CreateBufferRegionARB().")
     )
 
     BOOL(
@@ -59,24 +59,24 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
         The saved buffer region area can be freed by calling {@code wglSaveBufferRegionARB} with {@code width} or {@code height} set to a value of 0.
         """,
 
-        HANDLE.IN("region", "a handle to a buffer region previously created with #CreateBufferRegionARB()."),
-        int.IN("x", "the window x-coordinate for the source rectangle"),
-        int.IN("y", "the window y-coordinate for the source rectangle"),
-        int.IN("width", "the source rectangle width"),
-        int.IN("height", "the source rectangle height")
+        HANDLE("region", "a handle to a buffer region previously created with #CreateBufferRegionARB()."),
+        int("x", "the window x-coordinate for the source rectangle"),
+        int("y", "the window y-coordinate for the source rectangle"),
+        int("width", "the source rectangle width"),
+        int("height", "the source rectangle height")
     )
 
     BOOL(
         "RestoreBufferRegionARB",
         "Restores a previously saved buffer region.",
 
-        HANDLE.IN("region", "a handle to a buffer region previously created with #CreateBufferRegionARB()."),
-        int.IN("x", "the window x-coordinate for the destination rectangle"),
-        int.IN("y", "the window y-coordinate for the destination rectangle"),
-        int.IN("width", "the destination rectangle width"),
-        int.IN("height", "the destination rectangle height"),
-        int.IN("xSrc", "the buffer region x-coordinate for the source of the data"),
-        int.IN("ySrc", "the buffer region y-coordinate for the source of the data")
+        HANDLE("region", "a handle to a buffer region previously created with #CreateBufferRegionARB()."),
+        int("x", "the window x-coordinate for the destination rectangle"),
+        int("y", "the window y-coordinate for the destination rectangle"),
+        int("width", "the destination rectangle width"),
+        int("height", "the destination rectangle height"),
+        int("xSrc", "the buffer region x-coordinate for the source of the data"),
+        int("ySrc", "the buffer region y-coordinate for the source of the data")
     )
 
     IntConstant(

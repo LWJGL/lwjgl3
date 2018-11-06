@@ -47,9 +47,9 @@ val NV_query_resource = "NVQueryResource".nativeClassGL("NV_query_resource", pos
         "QueryResourceNV",
         "",
 
-        GLenum.IN("queryType", "", "#QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV"),
-        GLint.IN("pname", ""),
-        AutoSize("buffer")..GLuint.IN("bufSize", ""),
+        GLenum("queryType", "", "#QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV"),
+        GLint("pname", ""),
+        AutoSize("buffer")..GLuint("bufSize", ""),
         GLint.p.OUT("buffer", "")
     )
 }

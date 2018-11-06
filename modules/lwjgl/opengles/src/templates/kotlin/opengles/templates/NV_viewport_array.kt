@@ -41,82 +41,82 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
         "ViewportArrayvNV",
         "",
 
-        GLuint.IN("first", ""),
-        AutoSize(4, "v")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("v", "")
+        GLuint("first", ""),
+        AutoSize(4, "v")..GLsizei("count", ""),
+        GLfloat.const.p("v", "")
     )
 
     void(
         "ViewportIndexedfNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLfloat.IN("x", ""),
-        GLfloat.IN("y", ""),
-        GLfloat.IN("w", ""),
-        GLfloat.IN("h", "")
+        GLuint("index", ""),
+        GLfloat("x", ""),
+        GLfloat("y", ""),
+        GLfloat("w", ""),
+        GLfloat("h", "")
     )
 
     void(
         "ViewportIndexedfvNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(4)..GLfloat.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(4)..GLfloat.const.p("v", "")
     )
 
     void(
         "ScissorArrayvNV",
         "",
 
-        GLuint.IN("first", ""),
-        AutoSize(4, "v")..GLsizei.IN("count", ""),
-        GLint.const.p.IN("v", "")
+        GLuint("first", ""),
+        AutoSize(4, "v")..GLsizei("count", ""),
+        GLint.const.p("v", "")
     )
 
     void(
         "ScissorIndexedNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLint.IN("left", ""),
-        GLint.IN("bottom", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLuint("index", ""),
+        GLint("left", ""),
+        GLint("bottom", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
     void(
         "ScissorIndexedvNV",
         "",
 
-        GLuint.IN("index", ""),
-        Check(4)..GLint.const.p.IN("v", "")
+        GLuint("index", ""),
+        Check(4)..GLint.const.p("v", "")
     )
 
     void(
         "DepthRangeArrayfvNV",
         "",
 
-        GLuint.IN("first", ""),
-        AutoSize(2, "v")..GLsizei.IN("count", ""),
-        GLfloat.const.p.IN("v", "")
+        GLuint("first", ""),
+        AutoSize(2, "v")..GLsizei("count", ""),
+        GLfloat.const.p("v", "")
     )
 
     void(
         "DepthRangeIndexedfNV",
         "",
 
-        GLuint.IN("index", ""),
-        GLfloat.IN("n", ""),
-        GLfloat.IN("f", "")
+        GLuint("index", ""),
+        GLfloat("n", ""),
+        GLfloat("f", "")
     )
 
     void(
         "GetFloati_vNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
+        GLenum("target", ""),
+        GLuint("index", ""),
         ReturnParam..Check(1)..GLfloat.p.OUT("data", "")
     )
 
@@ -124,23 +124,23 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
         "EnableiNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 
     void(
         "DisableiNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 
     GLboolean(
         "IsEnablediNV",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", "")
+        GLenum("target", ""),
+        GLuint("index", "")
     )
 }

@@ -44,7 +44,7 @@ val GLX_NV_delay_before_swap = "GLXNVDelayBeforeSwap".nativeClassGLX("GLX_NV_del
         """,
 
         DISPLAY,
-        GLXDrawable.IN("drawable", "the window drawable"),
-        GLfloat.IN("seconds", "the delay, in seconds")
+        GLXDrawable("drawable", "the window drawable"),
+        GLfloat("seconds", "the delay, in seconds")
     )
 }

@@ -90,8 +90,8 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
         "GetImageMemoryRequirements2KHR",
         "See #GetImageMemoryRequirements2().",
 
-        VkDevice.IN("device", "the logical device that owns the image."),
-        VkImageMemoryRequirementsInfo2.const.p.IN("pInfo", "a pointer to an instance of the ##VkImageMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
+        VkDevice("device", "the logical device that owns the image."),
+        VkImageMemoryRequirementsInfo2.const.p("pInfo", "a pointer to an instance of the ##VkImageMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
         VkMemoryRequirements2.p.OUT("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements2 structure in which the memory requirements of the image object are returned.")
     )
 
@@ -99,8 +99,8 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
         "GetBufferMemoryRequirements2KHR",
         "See #GetBufferMemoryRequirements2().",
 
-        VkDevice.IN("device", "the logical device that owns the buffer."),
-        VkBufferMemoryRequirementsInfo2.const.p.IN("pInfo", "a pointer to an instance of the ##VkBufferMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
+        VkDevice("device", "the logical device that owns the buffer."),
+        VkBufferMemoryRequirementsInfo2.const.p("pInfo", "a pointer to an instance of the ##VkBufferMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
         VkMemoryRequirements2.p.OUT("pMemoryRequirements", "points to an instance of the ##VkMemoryRequirements2 structure in which the memory requirements of the buffer object are returned.")
     )
 
@@ -108,8 +108,8 @@ val KHR_get_memory_requirements2 = "KHRGetMemoryRequirements2".nativeClassVK("KH
         "GetImageSparseMemoryRequirements2KHR",
         "See #GetImageSparseMemoryRequirements2().",
 
-        VkDevice.IN("device", "the logical device that owns the image."),
-        VkImageSparseMemoryRequirementsInfo2.const.p.IN("pInfo", "a pointer to an instance of the ##VkImageSparseMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
+        VkDevice("device", "the logical device that owns the image."),
+        VkImageSparseMemoryRequirementsInfo2.const.p("pInfo", "a pointer to an instance of the ##VkImageSparseMemoryRequirementsInfo2 structure containing parameters required for the memory requirements query."),
         AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t.p.INOUT("pSparseMemoryRequirementCount", "a pointer to an integer related to the number of sparse memory requirements available or queried, as described below."),
         nullable..VkSparseImageMemoryRequirements2.p.OUT("pSparseMemoryRequirements", "either {@code NULL} or a pointer to an array of ##VkSparseImageMemoryRequirements2 structures.")
     )

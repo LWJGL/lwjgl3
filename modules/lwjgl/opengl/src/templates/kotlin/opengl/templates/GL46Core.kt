@@ -63,9 +63,9 @@ val GL46C = "GL46C".nativeClassGL("GL46C") {
         src["mode"],
         Check("maxdrawcount * (stride == 0 ? (4 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p.IN("indirect", "an array of structures containing the draw parameters"),
-        GLintptr.IN("drawcount", "the offset into the parameter buffer object"),
-        GLsizei.IN("maxdrawcount", "the maximum number of draws"),
+        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "an array of structures containing the draw parameters"),
+        GLintptr("drawcount", "the offset into the parameter buffer object"),
+        GLsizei("maxdrawcount", "the maximum number of draws"),
         src["stride"]
     )
 
@@ -84,9 +84,9 @@ val GL46C = "GL46C".nativeClassGL("GL46C") {
         src["type"],
         Check("maxdrawcount * (stride == 0 ? (5 * 4) : stride)")..MultiType(
             PointerMapping.DATA_INT
-        )..DRAW_INDIRECT_BUFFER..void.const.p.IN("indirect", "a structure containing an array of draw parameters"),
-        GLintptr.IN("drawcount", "the offset into the parameter buffer object"),
-        GLsizei.IN("maxdrawcount", "the maximum number of draws"),
+        )..DRAW_INDIRECT_BUFFER..void.const.p("indirect", "a structure containing an array of draw parameters"),
+        GLintptr("drawcount", "the offset into the parameter buffer object"),
+        GLsizei("maxdrawcount", "the maximum number of draws"),
         src["stride"]
     )
 
@@ -132,9 +132,9 @@ val GL46C = "GL46C".nativeClassGL("GL46C") {
         to calling the command {@code PolygonOffsetClamp} with clamp equal to zero.
         """,
 
-        GLfloat.IN("factor", "scales the maximum depth slope of the polygon"),
-        GLfloat.IN("units", "scales an implementation-dependent constant that relates to the usable resolution of the depth buffer"),
-        GLfloat.IN("clamp", "the minimum or maximum polygon offset value")
+        GLfloat("factor", "scales the maximum depth slope of the polygon"),
+        GLfloat("units", "scales an implementation-dependent constant that relates to the usable resolution of the depth buffer"),
+        GLfloat("clamp", "the minimum or maximum polygon offset value")
     )
 
     // KHR_no_error
@@ -178,22 +178,22 @@ val GL46C = "GL46C".nativeClassGL("GL46C") {
         additional information about the cause of the failure may be available in the shader compilation log.
         """,
 
-        GLuint.IN(
+        GLuint(
             "shader",
             """
             the name of a shader object containing unspecialized SPIR-V as created from a successful call to #ShaderBinary() to which a SPIR-V module was
             passed
             """
         ),
-        GLcharUTF8.const.p.IN(
+        GLcharUTF8.const.p(
             "pEntryPoint",
             "a pointer to a null-terminated UTF-8 string specifying the name of the entry point in the SPIR-V module to use for this shader"
         ),
-        AutoSize("pConstantIndex", "pConstantValue")..GLuint.IN(
+        AutoSize("pConstantIndex", "pConstantValue")..GLuint(
             "numSpecializationConstants",
             "the number of specialization constants whose values to set in this call"
         ),
-        GLuint.const.p.IN(
+        GLuint.const.p(
             "pConstantIndex",
             """
             is a pointer to an array of {@code numSpecializationConstants} unsigned integers, each holding the index of a specialization constant in the SPIR-V
@@ -202,7 +202,7 @@ val GL46C = "GL46C".nativeClassGL("GL46C") {
             Specialization constants not referenced by {@code pConstantIndex} retain their default values as specified in the SPIR-V module.
             """
         ),
-        GLuint.const.p.IN(
+        GLuint.const.p(
             "pConstantValue",
             """
             an entry in {@code pConstantValue} is used to set the value of the specialization constant indexed by the corresponding entry in

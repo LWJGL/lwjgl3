@@ -65,7 +65,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
         #GetTextureSamplerHandleNV() for details.
         """,
 
-        GLuint.IN("texture", "the texture object")
+        GLuint("texture", "the texture object")
     )
 
     GLuint64(
@@ -99,8 +99,8 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
         #INVALID_OPERATION is generated when calling SamplerParameter* functions to modify a sampler object referenced by one or more texture handles.
         """,
 
-        GLuint.IN("texture", "the texture object"),
-        GLuint.IN("sampler", "the sampler object")
+        GLuint("texture", "the texture object"),
+        GLuint("sampler", "the sampler object")
     )
 
     void(
@@ -114,7 +114,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
         generated if {@code handle} is not a valid texture handle, or if {@code handle} is already resident in the current GL context.
         """,
 
-        GLuint64.IN("handle", "the texture handle")
+        GLuint64("handle", "the texture handle")
     )
 
     void(
@@ -126,7 +126,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
         context.
         """,
 
-        GLuint64.IN("handle", "the texture handle")
+        GLuint64("handle", "the texture handle")
     )
 
     GLuint64(
@@ -166,11 +166,11 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
         handle will be returned if GetImageHandleNV is called multiple times with the same parameters.
         """,
 
-        GLuint.IN("texture", "the texture object"),
-        GLint.IN("level", "the texture level"),
-        GLboolean.IN("layered", "the layered flag"),
-        GLint.IN("layer", "the texture layer"),
-        GLenum.IN("format", "the texture format")
+        GLuint("texture", "the texture object"),
+        GLint("level", "the texture level"),
+        GLboolean("layered", "the layered flag"),
+        GLint("layer", "the texture layer"),
+        GLenum("format", "the texture format")
     )
 
     void(
@@ -188,24 +188,24 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
         the texture it references is not necessarily considered resident for the purposes of the #AreTexturesResident() command.
         """,
 
-        GLuint64.IN("handle", "the image handle"),
-        GLenum.IN("access", "the access type", "#READ_ONLY #WRITE_ONLY #READ_WRITE")
+        GLuint64("handle", "the image handle"),
+        GLenum("access", "the access type", "#READ_ONLY #WRITE_ONLY #READ_WRITE")
     )
 
     void(
         "MakeImageHandleNonResidentNV",
         "Makes an image handle inaccessible to shaders.",
 
-        GLuint64.IN("handle", "the image handle")
+        GLuint64("handle", "the image handle")
     )
 
-    val location = GLint.IN("location", "the uniform location")
+    val location = GLint("location", "the uniform location")
     val UniformHandleui64NV = void(
         "UniformHandleui64NV",
         "Loads a 64-bit unsigned integer handle into a uniform location corresponding to sampler or image variable types.",
 
         location,
-        GLuint64.IN("value", "the handle value")
+        GLuint64("value", "the handle value")
     )
 
     val UniformHandleui64vNV = void(
@@ -213,15 +213,15 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
         "Loads {@code count} 64-bit unsigned integer handles into a uniform location corresponding to sampler or image variable types.",
 
         location,
-        AutoSize("values")..GLsizei.IN("count", "the number of handles to load"),
-        GLuint64.const.p.IN("values", "a buffer from which to load the handles")
+        AutoSize("values")..GLsizei("count", "the number of handles to load"),
+        GLuint64.const.p("values", "a buffer from which to load the handles")
     )
 
     void(
         "ProgramUniformHandleui64NV",
         "DSA version of #UniformHandleui64NV().",
 
-        GLuint.IN("program", "the program object"),
+        GLuint("program", "the program object"),
         location,
         UniformHandleui64NV["value"]
     )
@@ -230,7 +230,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
         "ProgramUniformHandleui64vNV",
         "DSA version of #UniformHandleui64vNV().",
 
-        GLuint.IN("program", "the program object"),
+        GLuint("program", "the program object"),
         location,
         UniformHandleui64vNV["count"],
         UniformHandleui64vNV["values"]
@@ -240,14 +240,14 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
         "IsTextureHandleResidentNV",
         "Returns #TRUE if the specified texture handle is resident in the current context.",
 
-        GLuint64.IN("handle", "the texture handle")
+        GLuint64("handle", "the texture handle")
     )
 
     GLboolean(
         "IsImageHandleResidentNV",
         "Returns #TRUE if the specified image handle is resident in the current context.",
 
-        GLuint64.IN("handle", "the image handle")
+        GLuint64("handle", "the image handle")
     )
 
 }

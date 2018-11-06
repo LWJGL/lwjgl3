@@ -113,10 +113,10 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         Use #Free() to destroy the {@code CallVM} object.
         """,
 
-        DCsize.IN("size", "the max size of the internal stack that will be allocated and used to bind arguments to")
+        DCsize("size", "the max size of the internal stack that will be allocated and used to bind arguments to")
     )
 
-    val vm = DCCallVM.p.IN("vm", "a {@code CallVM} instance")
+    val vm = DCCallVM.p("vm", "a {@code CallVM} instance")
 
     void(
         "Free",
@@ -149,25 +149,25 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         """,
 
         vm,
-        DCint.IN("mode", "the calling convention", CallingConventions)
+        DCint("mode", "the calling convention", CallingConventions)
     )
 
-    void("ArgBool", "Binds a {@code bool} argument.", vm, DCbool.IN("value", "the argument value"))
-    void("ArgChar", "Binds a {@code char} argument.", vm, DCchar.IN("value", "the argument value"))
-    void("ArgShort", "Binds a {@code short} argument.", vm, DCshort.IN("value", "the argument value"))
-    void("ArgInt", "Binds an {@code int} argument.", vm, DCint.IN("value", "the argument value"))
-    void("ArgLong", "Binds a {@code long} argument.", vm, DClong.IN("value", "the argument value"))
-    void("ArgLongLong", "Binds a {@code long long} argument.", vm, DClonglong.IN("value", "the argument value"))
-    void("ArgFloat", "Binds a {@code float} argument.", vm, DCfloat.IN("value", "the argument value"))
-    void("ArgDouble", "Binds a {@code double} argument.", vm, DCdouble.IN("value", "the argument value"))
-    void("ArgPointer", "Binds a pointer argument.", vm, nullable..DCpointer.IN("value", "the argument value"))
+    void("ArgBool", "Binds a {@code bool} argument.", vm, DCbool("value", "the argument value"))
+    void("ArgChar", "Binds a {@code char} argument.", vm, DCchar("value", "the argument value"))
+    void("ArgShort", "Binds a {@code short} argument.", vm, DCshort("value", "the argument value"))
+    void("ArgInt", "Binds an {@code int} argument.", vm, DCint("value", "the argument value"))
+    void("ArgLong", "Binds a {@code long} argument.", vm, DClong("value", "the argument value"))
+    void("ArgLongLong", "Binds a {@code long long} argument.", vm, DClonglong("value", "the argument value"))
+    void("ArgFloat", "Binds a {@code float} argument.", vm, DCfloat("value", "the argument value"))
+    void("ArgDouble", "Binds a {@code double} argument.", vm, DCdouble("value", "the argument value"))
+    void("ArgPointer", "Binds a pointer argument.", vm, nullable..DCpointer("value", "the argument value"))
     void(
         "ArgStruct",
         "Binds a struct argument.",
 
         vm,
-        DCstruct.p.IN("s", ""),
-        DCpointer.IN("value", "the argument value")
+        DCstruct.p("s", ""),
+        DCpointer("value", "the argument value")
     )
 
     val CallDoc =
@@ -178,7 +178,7 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         need to clear the argument bindings, you have to reset the {@code CallVM}.
 
         """
-    val funcptr = DCpointer.IN("funcptr", "the function pointer")
+    val funcptr = DCpointer("funcptr", "the function pointer")
 
     DCvoid("CallVoid", CallDoc, vm, funcptr)
     DCbool("CallBool", CallDoc, vm, funcptr)
@@ -197,8 +197,8 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
 
         vm,
         funcptr,
-        DCstruct.p.IN("s", ""),
-        DCpointer.IN("returnValue", "")
+        DCstruct.p("s", ""),
+        DCpointer("returnValue", "")
     )
 
     DCint(
@@ -212,62 +212,62 @@ val DynCall = "DynCall".nativeClass(Module.CORE_DYNCALL, prefix = "DC") {
         "NewStruct",
         "Creates a new struct type.",
 
-        DCsize.IN("fieldCount", "the number of fields"),
-        DCint.IN("alignment", "a custom struct alignment, or 0 to calculate automatically")
+        DCsize("fieldCount", "the number of fields"),
+        DCint("alignment", "a custom struct alignment, or 0 to calculate automatically")
     )
 
     void(
         "StructField",
         "Adds a field to the specified struct.",
 
-        DCstruct.p.IN("s", "the struct"),
-        DCint.IN("type", "the field type", "SIGCHAR_(?!CC_)\\w+"),
-        DCint.IN("alignment", "a custom field alignment, or 0 to calculate automatically"),
-        DCsize.IN("arrayLength", "1 or a higher value if the field is an array")
+        DCstruct.p("s", "the struct"),
+        DCint("type", "the field type", "SIGCHAR_(?!CC_)\\w+"),
+        DCint("alignment", "a custom field alignment, or 0 to calculate automatically"),
+        DCsize("arrayLength", "1 or a higher value if the field is an array")
     )
 
     void(
         "SubStruct",
         "Adds a nested struct to the specified struct",
 
-        DCstruct.p.IN("s", "the struct"),
-        DCsize.IN("fieldCount", "the number of fields in the nested struct"),
-        DCint.IN("alignment", "a custom nested struct alignment, or 0 to calculate automatically"),
-        DCsize.IN("arrayLength", "1 or a higher value if the nested struct is an array")
+        DCstruct.p("s", "the struct"),
+        DCsize("fieldCount", "the number of fields in the nested struct"),
+        DCint("alignment", "a custom nested struct alignment, or 0 to calculate automatically"),
+        DCsize("arrayLength", "1 or a higher value if the nested struct is an array")
     )
 
     void(
         "CloseStruct",
         "Completes the struct definition.",
 
-        DCstruct.p.IN("s", "the struct to close")
+        DCstruct.p("s", "the struct to close")
     )
 
     DCsize(
         "StructSize",
         "Returns the size, in bytes, of the specified struct.",
 
-        DCstruct.p.IN("s", "the struct")
+        DCstruct.p("s", "the struct")
     )
 
     DCsize(
         "StructAlignment",
         "Returns the alignment, in bytes, of the specified struct.",
 
-        DCstruct.p.IN("s", "the struct")
+        DCstruct.p("s", "the struct")
     )
 
     void(
         "FreeStruct",
         "Frees the specified struct object.",
 
-        DCstruct.p.IN("s", "the struct to free")
+        DCstruct.p("s", "the struct to free")
     )
 
     DCstruct.p(
         "DefineStruct",
         "Creates a new struct type using a signature string.",
 
-        charASCII.const.p.IN("signature", "the struct signature")
+        charASCII.const.p("signature", "the struct signature")
     )
 }

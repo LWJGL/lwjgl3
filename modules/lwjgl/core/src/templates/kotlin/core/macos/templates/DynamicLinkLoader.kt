@@ -71,8 +71,8 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "
         )}
         """,
 
-        nullable..charASCII.const.p.IN("path", "path to the image to open"),
-        int.IN(
+        nullable..charASCII.const.p("path", "path to the image to open"),
+        int(
             "mode",
             """
             specifies when the loaded image's external symbols are bound to their definitions in dependent libraries (lazy or at load time) and the visibility
@@ -110,7 +110,8 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "
 
         Each call to {@code dlerror} resets its diagnostic buffer. If a program needs to keep a record of past error messages, it must store them itself.
         Subsequent calls to {@code dlerror} in the same thread with no calls to #dlopen(), #dlsym(), or #dlclose(), return #NULL.
-        """
+        """,
+        void()
     )
 
     opaque_p(
@@ -136,14 +137,14 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "
         Unlike in the NS... functions, the symbol parameter doesn't require a leading underscore to be part of the symbol name.
         """,
 
-        opaque_p.IN(
+        opaque_p(
             "handle",
             """
             a handle obtained by a call to #dlopen(), or a special handle. If the handle was obtained by a call to #dlopen(), it must not have been
             closed with a call to #dlclose(). These are the possible special-handle values: #RTLD_DEFAULT, and #RTLD_NEXT.
             """
         ),
-        charASCII.const.p.IN("name", "the null-terminated character string containing the C name of the symbol being sought")
+        charASCII.const.p("name", "the null-terminated character string containing the C name of the symbol being sought")
     )
 
     int(
@@ -155,7 +156,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "
         in the image are called, and the image is removed from the address space of the current process. After that point, handle is rendered invalid.
         """,
 
-        opaque_p.IN("handle", "a handle obtained through a call to #dlopen().")
+        opaque_p("handle", "a handle obtained through a call to #dlopen().")
     )
 
 }

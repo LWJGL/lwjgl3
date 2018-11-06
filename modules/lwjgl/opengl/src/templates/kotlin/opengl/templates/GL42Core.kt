@@ -148,9 +148,9 @@ val GL42C = "GL42C".nativeClassGL("GL42C") {
         "GetActiveAtomicCounterBufferiv",
         "Obtains information about the set of active atomic counter buffers for a program.",
 
-        GLuint.IN("program", "the name of a program object for which the command #LinkProgram() has been issued in the past"),
-        GLuint.IN("bufferIndex", "the index of an active atomic counter buffer"),
-        GLenum.IN("pname", "the parameter to query", AtomicCounterBufferParameters),
+        GLuint("program", "the name of a program object for which the command #LinkProgram() has been issued in the past"),
+        GLuint("bufferIndex", "the index of an active atomic counter buffer"),
+        GLenum("pname", "the parameter to query", AtomicCounterBufferParameters),
         Check(1)..ReturnParam..GLint.p.OUT("params", "a buffer in which to place the returned value")
     )
 
@@ -166,33 +166,33 @@ val GL42C = "GL42C".nativeClassGL("GL42C") {
         "TexStorage1D",
         "Simultaneously specifies storage for all levels of a one-dimensional texture.",
 
-        GLenum.IN("target", "the target of the operation", "#TEXTURE_1D #PROXY_TEXTURE_1D"),
-        GLsizei.IN("levels", "the number of texture levels"),
-        GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
-        GLsizei.IN("width", "the width of the texture, in texels")
+        GLenum("target", "the target of the operation", "#TEXTURE_1D #PROXY_TEXTURE_1D"),
+        GLsizei("levels", "the number of texture levels"),
+        GLenum("internalformat", "the sized internal format to be used to store texture image data"),
+        GLsizei("width", "the width of the texture, in texels")
     )
 
     void(
         "TexStorage2D",
         "Simultaneously specifies storage for all levels of a two-dimensional or one-dimensional array texture.",
 
-        GLenum.IN("target", "the target of the operation", "$TEXTURE_2D_TARGETS $PROXY_TEXTURE_2D_TARGETS"),
-        GLsizei.IN("levels", "the number of texture levels"),
-        GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
-        GLsizei.IN("width", "the width of the texture, in texels"),
-        GLsizei.IN("height", "the height of the texture, in texels")
+        GLenum("target", "the target of the operation", "$TEXTURE_2D_TARGETS $PROXY_TEXTURE_2D_TARGETS"),
+        GLsizei("levels", "the number of texture levels"),
+        GLenum("internalformat", "the sized internal format to be used to store texture image data"),
+        GLsizei("width", "the width of the texture, in texels"),
+        GLsizei("height", "the height of the texture, in texels")
     )
 
     void(
         "TexStorage3D",
         "Simultaneously specifies storage for all levels of a three-dimensional, two-dimensional array or cube-map array texture.",
 
-        GLenum.IN("target", "the target of the operation", "$TEXTURE_3D_TARGETS $PROXY_TEXTURE_3D_TARGETS"),
-        GLsizei.IN("levels", "the number of texture levels"),
-        GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
-        GLsizei.IN("width", "the width of the texture, in texels"),
-        GLsizei.IN("height", "the height of the texture, in texels"),
-        GLsizei.IN("depth", "the depth of the texture, in texels")
+        GLenum("target", "the target of the operation", "$TEXTURE_3D_TARGETS $PROXY_TEXTURE_3D_TARGETS"),
+        GLsizei("levels", "the number of texture levels"),
+        GLenum("internalformat", "the sized internal format to be used to store texture image data"),
+        GLsizei("width", "the width of the texture, in texels"),
+        GLsizei("height", "the height of the texture, in texels"),
+        GLsizei("depth", "the depth of the texture, in texels")
     )
 
     // ARB_transform_feedback_instanced
@@ -201,19 +201,19 @@ val GL42C = "GL42C".nativeClassGL("GL42C") {
         "DrawTransformFeedbackInstanced",
         "Renders multiple instances of primitives using a count derived from a transform feedback object.",
 
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        GLuint.IN("id", "the name of a transform feedback object from which to retrieve a primitive count"),
-        GLsizei.IN("primcount", "the number of instances of the geometry to render")
+        GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
+        GLuint("id", "the name of a transform feedback object from which to retrieve a primitive count"),
+        GLsizei("primcount", "the number of instances of the geometry to render")
     )
 
     void(
         "DrawTransformFeedbackStreamInstanced",
         "Renders multiple instances of primitives using a count derived from a specifed stream of a transform feedback object.",
 
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        GLuint.IN("id", "the name of a transform feedback object from which to retrieve a primitive count"),
-        GLuint.IN("stream", "the index of the transform feedback stream from which to retrieve a primitive count"),
-        GLsizei.IN("primcount", "the number of instances of the geometry to render")
+        GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
+        GLuint("id", "the name of a transform feedback object from which to retrieve a primitive count"),
+        GLuint("stream", "the index of the transform feedback stream from which to retrieve a primitive count"),
+        GLsizei("primcount", "the number of instances of the geometry to render")
     )
 
     // ARB_base_instance
@@ -222,44 +222,44 @@ val GL42C = "GL42C".nativeClassGL("GL42C") {
         "DrawArraysInstancedBaseInstance",
         "Draws multiple instances of a range of elements with an offset applied to instanced attributes.",
 
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        GLint.IN("first", "the starting index in the enabled arrays"),
-        GLsizei.IN("count", "the number of indices to be rendered"),
-        GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered"),
-        GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
+        GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
+        GLint("first", "the starting index in the enabled arrays"),
+        GLsizei("count", "the number of indices to be rendered"),
+        GLsizei("primcount", "the number of instances of the specified range of indices to be rendered"),
+        GLuint("baseinstance", "the base instance for use in fetching instanced vertex attributes")
     )
 
     void(
         "DrawElementsInstancedBaseInstance",
         "Draws multiple instances of a set of elements with an offset applied to instanced attributes",
 
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
+        GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
+        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei("count", "the number of elements to be rendered"),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum(
             "type",
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
-        GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered"),
-        GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", "a pointer to the location where the indices are stored"),
+        GLsizei("primcount", "the number of instances of the specified range of indices to be rendered"),
+        GLuint("baseinstance", "the base instance for use in fetching instanced vertex attributes")
     )
 
     void(
         "DrawElementsInstancedBaseVertexBaseInstance",
         "Renders multiple instances of a set of primitives from array data with a per-element offset.",
 
-        GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
+        GLenum("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
+        AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei("count", "the number of elements to be rendered"),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum(
             "type",
             "the type of the values in {@code indices}",
             "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
         ),
-        ELEMENT_ARRAY_BUFFER..void.const.p.IN("indices", "a pointer to the location where the indices are stored"),
-        GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
-        GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays"),
-        GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
+        ELEMENT_ARRAY_BUFFER..void.const.p("indices", "a pointer to the location where the indices are stored"),
+        GLsizei("primcount", "the number of instances of the indexed geometry that should be drawn"),
+        GLint("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays"),
+        GLuint("baseinstance", "the base instance for use in fetching instanced vertex attributes")
     )
 
     // ARB_shader_image_load_store
@@ -365,20 +365,20 @@ val GL42C = "GL42C".nativeClassGL("GL42C") {
         "BindImageTexture",
         "Binds a level of a texture to an image unit.",
 
-        GLuint.IN("unit", "the index of the image unit to which to bind the texture"),
-        GLuint.IN("texture", "the name of the texture to bind to the image unit"),
-        GLint.IN("level", "the level of the texture that is to be bound"),
-        GLboolean.IN("layered", "whether a layered texture binding is to be established"),
-        GLint.IN("layer", "if {@code layered} is false, specifies the layer of texture to be bound to the image unit. Ignored otherwise."),
-        GLenum.IN("access", "a token indicating the type of access that will be performed on the image"),
-        GLenum.IN("format", "the format that the elements of the image will be treated as for the purposes of formatted stores")
+        GLuint("unit", "the index of the image unit to which to bind the texture"),
+        GLuint("texture", "the name of the texture to bind to the image unit"),
+        GLint("level", "the level of the texture that is to be bound"),
+        GLboolean("layered", "whether a layered texture binding is to be established"),
+        GLint("layer", "if {@code layered} is false, specifies the layer of texture to be bound to the image unit. Ignored otherwise."),
+        GLenum("access", "a token indicating the type of access that will be performed on the image"),
+        GLenum("format", "the format that the elements of the image will be treated as for the purposes of formatted stores")
     )
 
     void(
         "MemoryBarrier",
         "Defines a barrier ordering memory transactions.",
 
-        GLbitfield.IN("barriers", "the barriers to insert (bitwise combination)", MemoryBarriers + " #SHADER_STORAGE_BARRIER_BIT", LinkMode.BITFIELD)
+        GLbitfield("barriers", "the barriers to insert (bitwise combination)", MemoryBarriers + " #SHADER_STORAGE_BARRIER_BIT", LinkMode.BITFIELD)
     )
 
     // ARB_internal_format_query
@@ -393,7 +393,7 @@ val GL42C = "GL42C".nativeClassGL("GL42C") {
         "GetInternalformativ",
         "Retrieves information about implementation-dependent support for internal formats.",
 
-        GLenum.IN(
+        GLenum(
             "target",
             "the usage of the internal format",
             """
@@ -401,9 +401,9 @@ val GL42C = "GL42C".nativeClassGL("GL42C") {
             #TEXTURE_2D_MULTISAMPLE_ARRAY
             """
         ),
-        GLenum.IN("internalformat", "the internal format about which to retrieve information"),
-        GLenum.IN("pname", "the type of information to query"),
-        AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values that may be written to params by the function"),
+        GLenum("internalformat", "the internal format about which to retrieve information"),
+        GLenum("pname", "the type of information to query"),
+        AutoSize("params")..GLsizei("bufSize", "the maximum number of values that may be written to params by the function"),
         ReturnParam..GLint.p.OUT("params", "a variable into which to write the retrieved information")
     )
 

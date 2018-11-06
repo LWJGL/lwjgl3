@@ -51,9 +51,9 @@ val WGL_ARB_create_context = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_creat
         other contexts {@code shareContext} already shares with, and the newly created context. An arbitrary number of contexts can share data in this fashion.
         """,
 
-        HDC.IN("hdc", ""),
-        nullable..HGLRC.IN("shareContext", ""),
-        NullTerminated..nullable..int.const.p.IN(
+        HDC("hdc", ""),
+        nullable..HGLRC("shareContext", ""),
+        NullTerminated..nullable..int.const.p(
             "attribList",
             """
             a list of attributes for the context. The list consists of a sequence of &lt;name, value&gt; pairs terminated by the value 0. If an attribute is not

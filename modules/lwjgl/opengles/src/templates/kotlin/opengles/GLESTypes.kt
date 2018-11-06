@@ -58,13 +58,13 @@ val GLDEBUGPROC = Module.OPENGLES.callback {
         "GLDebugMessageCallback",
         "Will be called when a debug message is generated.",
 
-        GLenum.IN("source", "the message source"),
-        GLenum.IN("type", "the message type"),
-        GLuint.IN("id", "the message ID"),
-        GLenum.IN("severity", "the message severity"),
-        AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-        GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
-        void.const.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallback()"),
+        GLenum("source", "the message source"),
+        GLenum("type", "the message type"),
+        GLuint("id", "the message ID"),
+        GLenum("severity", "the message severity"),
+        AutoSize("message")..GLsizei("length", "the message length, excluding the null-terminator"),
+        GLcharUTF8.const.p("message", "a pointer to the message string representation"),
+        void.const.p("userParam", "the user-specified value that was passed when calling #DebugMessageCallback()"),
 
         nativeType = "GLDEBUGPROC"
     ) {
@@ -95,13 +95,13 @@ val GLDEBUGPROCKHR = Module.OPENGLES.callback {
         "GLDebugMessageKHRCallback",
         "Will be called when a debug message is generated.",
 
-        GLenum.IN("source", "the message source"),
-        GLenum.IN("type", "the message type"),
-        GLuint.IN("id", "the message ID"),
-        GLenum.IN("severity", "the message severity"),
-        AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
-        GLcharUTF8.const.p.IN("message", "a pointer to the message string representation"),
-        void.const.p.IN("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackKHR()"),
+        GLenum("source", "the message source"),
+        GLenum("type", "the message type"),
+        GLuint("id", "the message ID"),
+        GLenum("severity", "the message severity"),
+        AutoSize("message")..GLsizei("length", "the message length, excluding the null-terminator"),
+        GLcharUTF8.const.p("message", "a pointer to the message string representation"),
+        void.const.p("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackKHR()"),
 
         nativeType = "GLDEBUGPROCKHR"
     ) {

@@ -33,7 +33,7 @@ val SSE3 = "SSE3".nativeClass(Module.SSE, prefix = "_MM", prefixMethod = "_MM_",
         undetectable.
         """,
 
-        unsigned_int.IN("mode", "the denormals are zero mode", DenormalsZeroMode)
+        unsigned_int("mode", "the denormals are zero mode", DenormalsZeroMode)
     )
-    macro()..unsigned_int("GET_DENORMALS_ZERO_MODE", "Returns the current value of the \"denormals are zero mode\" bit of the control register.")
+    macro()..unsigned_int("GET_DENORMALS_ZERO_MODE", "Returns the current value of the \"denormals are zero mode\" bit of the control register.", void())
 }

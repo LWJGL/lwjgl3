@@ -54,25 +54,25 @@ val EXT_multiview_draw_buffers = "EXTMultiviewDrawBuffers".nativeClassGLES("EXT_
         "ReadBufferIndexedEXT",
         "",
 
-        GLenum.IN("src", ""),
-        GLint.IN("index", "")
+        GLenum("src", ""),
+        GLint("index", "")
     )
 
     void(
         "DrawBuffersIndexedEXT",
         "",
 
-        AutoSize("location", "indices")..GLint.IN("n", ""),
-        GLenum.const.p.IN("location", ""),
-        GLint.const.p.IN("indices", "")
+        AutoSize("location", "indices")..GLint("n", ""),
+        GLenum.const.p("location", ""),
+        GLint.const.p("indices", "")
     )
 
     void(
         "GetIntegeri_vEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLuint.IN("index", ""),
+        GLenum("target", ""),
+        GLuint("index", ""),
         ReturnParam..Check(1)..GLint.p.OUT("data", "")
     )
 }

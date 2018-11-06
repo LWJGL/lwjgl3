@@ -57,20 +57,20 @@ val khr_gl_sharing = "KHRGLSharing".dependsOn(Module.OPENGL, Module.OPENGLES)?.n
         may be faster on a command queue corresponding to this device than on command queues corresponding to other devices available to an OpenCL context.
         """,
 
-        NullTerminated..cl_context_properties.const.p.IN(
+        NullTerminated..cl_context_properties.const.p(
             "properties",
             """
         points to an attribute list whose format and valid contents are identical to the {code properties} argument of #CreateContext().
         {@code properties} must identify a single valid GL context or GL share group object.
         """
         ),
-        cl_gl_context_info.IN(
+        cl_gl_context_info(
             "param_name",
             "a constant that specifies the GL context information to query",
             "#DEVICES_FOR_GL_CONTEXT_KHR #CURRENT_DEVICE_FOR_GL_CONTEXT_KHR"
         ),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_POINTER)..nullable..void.p.IN("param_value", param_value),
+        MultiType(PointerMapping.DATA_POINTER)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =

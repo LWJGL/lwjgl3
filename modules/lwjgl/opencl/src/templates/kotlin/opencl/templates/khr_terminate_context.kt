@@ -74,7 +74,7 @@ val khr_terminate_context = "KHRTerminateContext".nativeClassCL("khr_terminate_c
         )}
         """,
 
-        cl_context.IN("context", "the context to terminate"),
+        cl_context("context", "the context to terminate"),
 
         returnDoc =
         """

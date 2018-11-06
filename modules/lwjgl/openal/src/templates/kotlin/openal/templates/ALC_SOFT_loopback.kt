@@ -62,7 +62,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
         error.
         """,
 
-        nullable..ALCcharUTF8.const.p.IN(
+        nullable..ALCcharUTF8.const.p(
             "deviceName",
             """
             which device or device driver to use for subsequent rendering. This may be #NULL for an implementation-defined default, otherwise it must be a
@@ -80,10 +80,10 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
         To check if a particular rendering format is available, use this function.
         """,
 
-        ALCdevice.p.IN("device", "the loopback device to query"),
-        ALCsizei.IN("frequency", "the sample rate of the rendered audio"),
-        ALCenum.IN("channels", "the channel configuration used for rendering", Channels),
-        ALCenum.IN("type", "sample type of the written audio", Types)
+        ALCdevice.p("device", "the loopback device to query"),
+        ALCsizei("frequency", "the sample rate of the rendered audio"),
+        ALCenum("channels", "the channel configuration used for rendering", Channels),
+        ALCenum("type", "sample type of the written audio", Types)
     )
 
     ALCvoid(
@@ -93,10 +93,10 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
         render samples, use this function.
         """,
 
-        ALCdevice.p.IN("device", "the loopback device which samples are rendered from, using its contexts and associated buffers and sources"),
+        ALCdevice.p("device", "the loopback device which samples are rendered from, using its contexts and associated buffers and sources"),
         Unsafe..MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
         )..ALCvoid.p.OUT("buffer", "the buffer that will receive the samples. It must be big enough to contain at least {@code samples} sample frames."),
-        ALCsizei.IN("samples", "the number of sample frames to render")
+        ALCsizei("samples", "the number of sample frames to render")
     )
 }

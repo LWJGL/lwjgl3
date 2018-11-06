@@ -174,13 +174,13 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
         ##VkExternalImageFormatPropertiesNV
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the image capabilities"),
-        VkFormat.IN("format", "the image format, corresponding to ##VkImageCreateInfo{@code ::format}."),
-        VkImageType.IN("type", "the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}."),
-        VkImageTiling.IN("tiling", "the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}."),
-        VkImageUsageFlags.IN("usage", "the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}."),
-        VkImageCreateFlags.IN("flags", "a bitmask describing additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}."),
-        VkExternalMemoryHandleTypeFlagsNV.IN("externalHandleType", "either one of the bits from {@code VkExternalMemoryHandleTypeFlagBitsNV}, or 0."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the image capabilities"),
+        VkFormat("format", "the image format, corresponding to ##VkImageCreateInfo{@code ::format}."),
+        VkImageType("type", "the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}."),
+        VkImageTiling("tiling", "the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}."),
+        VkImageUsageFlags("usage", "the intended usage of the image, corresponding to ##VkImageCreateInfo{@code ::usage}."),
+        VkImageCreateFlags("flags", "a bitmask describing additional parameters of the image, corresponding to ##VkImageCreateInfo{@code ::flags}."),
+        VkExternalMemoryHandleTypeFlagsNV("externalHandleType", "either one of the bits from {@code VkExternalMemoryHandleTypeFlagBitsNV}, or 0."),
         VkExternalImageFormatPropertiesNV.p.OUT("pExternalImageFormatProperties", "points to an instance of the ##VkExternalImageFormatPropertiesNV structure in which capabilities are returned.")
     )
 }

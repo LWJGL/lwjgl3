@@ -36,7 +36,7 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(Module.BGFX, prefix = "BGFX", pref
         be created by #init() call.
         """,
 
-        int32_t.IN("_msecs", "timeout in milliseconds"),
+        int32_t("_msecs", "timeout in milliseconds"),
 
         returnDoc = "current renderer state. One of: $RenderFrame"
     )
@@ -49,12 +49,13 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(Module.BGFX, prefix = "BGFX", pref
         Must be called before #init().
         """,
 
-        bgfx_platform_data_t.const.p.IN("_data", "the platform data to set")
+        bgfx_platform_data_t.const.p("_data", "the platform data to set")
     )
 
     bgfx_internal_data_t.const.p(
         "get_internal_data",
-        "Gets internal data for interop."
+        "Gets internal data for interop.",
+        void()
     )
 
     uintptr_t(
@@ -67,8 +68,8 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(Module.BGFX, prefix = "BGFX", pref
         Must be called only on render thread.
         """,
 
-        bgfx_texture_handle_t.IN("_handle", "texture handle"),
-        uintptr_t.IN("_ptr", "native API pointer to texture"),
+        bgfx_texture_handle_t("_handle", "texture handle"),
+        uintptr_t("_ptr", "native API pointer to texture"),
 
         returnDoc = "native API pointer to texture. If result is 0, texture is not created yet from the main thread."
     )
@@ -83,12 +84,12 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(Module.BGFX, prefix = "BGFX", pref
         Must be called only on render thread.
         """,
 
-        bgfx_texture_handle_t.IN("_handle", "texture handle"),
-        MapToInt..uint16_t.IN("_width", "width"),
-        MapToInt..uint16_t.IN("_height", "height"),
-        MapToInt..uint8_t.IN("_numMips", "number of mip-maps"),
-        bgfx_texture_format_t.IN("_format", "texture format"),
-        uint32_t.IN("_flags", "default texture sampling mode is linear, and wrap mode is repeat"),
+        bgfx_texture_handle_t("_handle", "texture handle"),
+        MapToInt..uint16_t("_width", "width"),
+        MapToInt..uint16_t("_height", "height"),
+        MapToInt..uint8_t("_numMips", "number of mip-maps"),
+        bgfx_texture_format_t("_format", "texture format"),
+        uint32_t("_flags", "default texture sampling mode is linear, and wrap mode is repeat"),
 
         returnDoc = "native API pointer to texture. If result is 0, texture is not created yet from the main thread."
     )

@@ -42,104 +42,104 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGLES("NV_bindless_textu
         "GetTextureHandleNV",
         "",
 
-        GLuint.IN("texture", "")
+        GLuint("texture", "")
     )
 
     GLuint64(
         "GetTextureSamplerHandleNV",
         "",
 
-        GLuint.IN("texture", ""),
-        GLuint.IN("sampler", "")
+        GLuint("texture", ""),
+        GLuint("sampler", "")
     )
 
     void(
         "MakeTextureHandleResidentNV",
         "",
 
-        GLuint64.IN("handle", "")
+        GLuint64("handle", "")
     )
 
     void(
         "MakeTextureHandleNonResidentNV",
         "",
 
-        GLuint64.IN("handle", "")
+        GLuint64("handle", "")
     )
 
     GLuint64(
         "GetImageHandleNV",
         "",
 
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLboolean.IN("layered", ""),
-        GLint.IN("layer", ""),
-        GLenum.IN("format", "")
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLboolean("layered", ""),
+        GLint("layer", ""),
+        GLenum("format", "")
     )
 
     void(
         "MakeImageHandleResidentNV",
         "",
 
-        GLuint64.IN("handle", ""),
-        GLenum.IN("access", "")
+        GLuint64("handle", ""),
+        GLenum("access", "")
     )
 
     void(
         "MakeImageHandleNonResidentNV",
         "",
 
-        GLuint64.IN("handle", "")
+        GLuint64("handle", "")
     )
 
     void(
         "UniformHandleui64NV",
         "",
 
-        GLint.IN("location", ""),
-        GLuint64.IN("value", "")
+        GLint("location", ""),
+        GLuint64("value", "")
     )
 
     void(
         "UniformHandleui64vNV",
         "",
 
-        GLint.IN("location", ""),
-        AutoSize("values")..GLsizei.IN("count", ""),
-        GLuint64.const.p.IN("values", "")
+        GLint("location", ""),
+        AutoSize("values")..GLsizei("count", ""),
+        GLuint64.const.p("values", "")
     )
 
     void(
         "ProgramUniformHandleui64NV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        GLuint64.IN("value", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        GLuint64("value", "")
     )
 
     void(
         "ProgramUniformHandleui64vNV",
         "",
 
-        GLuint.IN("program", ""),
-        GLint.IN("location", ""),
-        AutoSize("values")..GLsizei.IN("count", ""),
-        GLuint64.const.p.IN("values", "")
+        GLuint("program", ""),
+        GLint("location", ""),
+        AutoSize("values")..GLsizei("count", ""),
+        GLuint64.const.p("values", "")
     )
 
     GLboolean(
         "IsTextureHandleResidentNV",
         "",
 
-        GLuint64.IN("handle", "")
+        GLuint64("handle", "")
     )
 
     GLboolean(
         "IsImageHandleResidentNV",
         "",
 
-        GLuint64.IN("handle", "")
+        GLuint64("handle", "")
     )
 }

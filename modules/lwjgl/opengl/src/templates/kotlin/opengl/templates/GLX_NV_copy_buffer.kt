@@ -21,13 +21,13 @@ val GLX_NV_copy_buffer = "GLXNVCopyBuffer".nativeClassGLX("GLX_NV_copy_buffer", 
         "",
 
         DISPLAY,
-        GLXContext.IN("readCtx", ""),
-        GLXContext.IN("writeCtx", ""),
-        GLenum.IN("readTarget", ""),
-        GLenum.IN("writeTarget", ""),
-        GLintptr.IN("readOffset", ""),
-        GLintptr.IN("writeOffset", ""),
-        GLsizeiptr.IN("size", "")
+        GLXContext("readCtx", ""),
+        GLXContext("writeCtx", ""),
+        GLenum("readTarget", ""),
+        GLenum("writeTarget", ""),
+        GLintptr("readOffset", ""),
+        GLintptr("writeOffset", ""),
+        GLsizeiptr("size", "")
     )
 
     void(
@@ -35,12 +35,12 @@ val GLX_NV_copy_buffer = "GLXNVCopyBuffer".nativeClassGLX("GLX_NV_copy_buffer", 
         "",
 
         DISPLAY,
-        GLXContext.IN("readCtx", ""),
-        GLXContext.IN("writeCtx", ""),
-        GLuint.IN("readBuffer", ""),
-        GLuint.IN("writeBuffer", ""),
-        GLintptr.IN("readOffset", ""),
-        GLintptr.IN("writeOffset", ""),
-        GLsizeiptr.IN("size", "")
+        GLXContext("readCtx", ""),
+        GLXContext("writeCtx", ""),
+        GLuint("readBuffer", ""),
+        GLuint("writeBuffer", ""),
+        GLintptr("readOffset", ""),
+        GLintptr("writeOffset", ""),
+        GLsizeiptr("size", "")
     )
 }

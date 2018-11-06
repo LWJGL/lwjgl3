@@ -23,12 +23,12 @@ val OVR_multiview_multisampled_render_to_texture = "OVRMultiviewMultisampledRend
         non-multisampled texture object similarly to #FramebufferTexture2DMultisampleEXT().
         """,
 
-        GLenum.IN("target", ""),
-        GLenum.IN("attachment", ""),
-        GLuint.IN("texture", ""),
-        GLint.IN("level", ""),
-        GLsizei.IN("samples", ""),
-        GLint.IN("baseViewIndex", ""),
-        GLsizei.IN("numViews", "")
+        GLenum("target", ""),
+        GLenum("attachment", ""),
+        GLuint("texture", ""),
+        GLint("level", ""),
+        GLsizei("samples", ""),
+        GLint("baseViewIndex", ""),
+        GLsizei("numViews", "")
     )
 }

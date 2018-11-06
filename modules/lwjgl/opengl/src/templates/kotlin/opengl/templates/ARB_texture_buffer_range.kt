@@ -39,7 +39,7 @@ val ARB_texture_buffer_range = "ARBTextureBufferRange".nativeClassGL("ARB_textur
         "TextureBufferRangeEXT",
         "DSA version of #TexBufferRange().",
 
-        GLuint.IN("texture", "the texture object"),
+        GLuint("texture", "the texture object"),
         src["target"],
         src["internalformat"],
         src["buffer"],

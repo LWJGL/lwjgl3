@@ -706,7 +706,7 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
         "bcp_batch",
         "Commits all rows previously bulk copied from program variables and sent to SQL Server by ##bcp_sendrow().",
 
-        HDBC.IN("hdbc", "the bulk copy-enabled ODBC connection handle"),
+        HDBC("hdbc", "the bulk copy-enabled ODBC connection handle"),
 
         returnDoc = "the number of rows saved after the last call to bcp_batch, or -1 in case of error"
     )*/

@@ -60,22 +60,22 @@ val ARB_gl_spirv = "ARBGLSPIRV".nativeClassGL("ARB_gl_spirv") {
         additional information about the cause of the failure may be available in the shader compilation log.
         """,
 
-        GLuint.IN(
+        GLuint(
             "shader",
             """
             the name of a shader object containing unspecialized SPIR-V as created from a successful call to #ShaderBinary() to which a SPIR-V module was
             passed
             """
         ),
-        GLcharUTF8.const.p.IN(
+        GLcharUTF8.const.p(
             "pEntryPoint",
             "a pointer to a null-terminated UTF-8 string specifying the name of the entry point in the SPIR-V module to use for this shader"
         ),
-        AutoSize("pConstantIndex", "pConstantValue")..GLuint.IN(
+        AutoSize("pConstantIndex", "pConstantValue")..GLuint(
             "numSpecializationConstants",
             "the number of specialization constants whose values to set in this call"
         ),
-        GLuint.const.p.IN(
+        GLuint.const.p(
             "pConstantIndex",
             """
             is a pointer to an array of {@code numSpecializationConstants} unsigned integers, each holding the index of a specialization constant in the SPIR-V
@@ -84,7 +84,7 @@ val ARB_gl_spirv = "ARBGLSPIRV".nativeClassGL("ARB_gl_spirv") {
             Specialization constants not referenced by {@code pConstantIndex} retain their default values as specified in the SPIR-V module.
             """
         ),
-        GLuint.const.p.IN(
+        GLuint.const.p(
             "pConstantValue",
             """
             an entry in {@code pConstantValue} is used to set the value of the specialization constant indexed by the corresponding entry in

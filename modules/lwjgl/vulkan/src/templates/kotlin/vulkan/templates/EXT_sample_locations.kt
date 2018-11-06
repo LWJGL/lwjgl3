@@ -136,8 +136,8 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
         ##VkSampleLocationsInfoEXT
         """,
 
-        VkCommandBuffer.IN("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkSampleLocationsInfoEXT.const.p.IN("pSampleLocationsInfo", "the sample locations state to set.")
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkSampleLocationsInfoEXT.const.p("pSampleLocationsInfo", "the sample locations state to set.")
     )
 
     void(
@@ -167,8 +167,8 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
         ##VkMultisamplePropertiesEXT
         """,
 
-        VkPhysicalDevice.IN("physicalDevice", "the physical device from which to query the additional multisampling capabilities."),
-        VkSampleCountFlagBits.IN("samples", "the sample count to query the capabilities for."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the additional multisampling capabilities."),
+        VkSampleCountFlagBits("samples", "the sample count to query the capabilities for."),
         VkMultisamplePropertiesEXT.p.OUT("pMultisampleProperties", "a pointer to a structure of type ##VkMultisamplePropertiesEXT, in which information about the additional multisampling capabilities specific to the sample count is returned.")
     )
 }

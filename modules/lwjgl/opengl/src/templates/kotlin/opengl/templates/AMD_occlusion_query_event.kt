@@ -42,9 +42,9 @@ val AMD_occlusion_query_event = "AMDOcclusionQueryEvent".nativeClassGL("AMD_occl
         "QueryObjectParameteruiAMD",
         "Changes the value of a query object parameter.",
 
-        GLenum.IN("target", "a valid query target", QUERY_TARGETS),
-        GLuint.IN("id", "a value returned from a previous call to #GenQueries()"),
-        GLenum.IN("pname", "the parameter to modify", "#OCCLUSION_QUERY_EVENT_MASK_AMD"),
-        GLuint.IN("param", "the new value", params)
+        GLenum("target", "a valid query target", QUERY_TARGETS),
+        GLuint("id", "a value returned from a previous call to #GenQueries()"),
+        GLenum("pname", "the parameter to modify", "#OCCLUSION_QUERY_EVENT_MASK_AMD"),
+        GLuint("param", "the new value", params)
     )
 }

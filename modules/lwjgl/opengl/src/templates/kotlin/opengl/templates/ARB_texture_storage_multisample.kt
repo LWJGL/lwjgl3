@@ -30,7 +30,7 @@ val ARB_texture_storage_multisample = "ARBTextureStorageMultisample".nativeClass
         "TextureStorage2DMultisampleEXT",
         "DSA version of #TexStorage2DMultisample().",
 
-        GLuint.IN("texture", "the texture object"),
+        GLuint("texture", "the texture object"),
         src["target"],
         src["samples"],
         src["internalformat"],
@@ -44,7 +44,7 @@ val ARB_texture_storage_multisample = "ARBTextureStorageMultisample".nativeClass
         "TextureStorage3DMultisampleEXT",
         "DSA version of #TexStorage3DMultisample().",
 
-        GLuint.IN("texture", "the texture object"),
+        GLuint("texture", "the texture object"),
         src["target"],
         src["samples"],
         src["internalformat"],

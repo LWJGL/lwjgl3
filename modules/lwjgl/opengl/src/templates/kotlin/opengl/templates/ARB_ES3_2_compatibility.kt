@@ -45,13 +45,13 @@ val ARB_ES3_2_compatibility = "ARBES32Compatibility".nativeClassGL("ARB_ES3_2_co
         rasterizer may or may not generate fragments for the portions of primitives outside the bounds.
         """,
 
-        GLfloat.IN("minX", "the minimum x clip space coordinate"),
-        GLfloat.IN("minY", "the minimum y clip space coordinate"),
-        GLfloat.IN("minZ", "the minimum z clip space coordinate"),
-        GLfloat.IN("minW", "the minimum w clip space coordinate"),
-        GLfloat.IN("maxX", "the maximum x clip space coordinate"),
-        GLfloat.IN("maxY", "the maximum y clip space coordinate"),
-        GLfloat.IN("maxZ", "the maximum z clip space coordinate"),
-        GLfloat.IN("maxW", "the maximum w clip space coordinate")
+        GLfloat("minX", "the minimum x clip space coordinate"),
+        GLfloat("minY", "the minimum y clip space coordinate"),
+        GLfloat("minZ", "the minimum z clip space coordinate"),
+        GLfloat("minW", "the minimum w clip space coordinate"),
+        GLfloat("maxX", "the maximum x clip space coordinate"),
+        GLfloat("maxY", "the maximum y clip space coordinate"),
+        GLfloat("maxZ", "the maximum z clip space coordinate"),
+        GLfloat("maxW", "the maximum w clip space coordinate")
     )
 }

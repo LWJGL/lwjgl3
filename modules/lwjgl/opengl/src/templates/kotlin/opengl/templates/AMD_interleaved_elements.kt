@@ -46,8 +46,8 @@ val AMD_interleaved_elements = "AMDInterleavedElements".nativeClassGL("AMD_inter
         "VertexAttribParameteriAMD",
         "",
 
-        GLuint.IN("index", ""),
-        GLenum.IN("pname", ""),
-        GLint.IN("param", "")
+        GLuint("index", ""),
+        GLenum("pname", ""),
+        GLint("param", "")
     )
 }

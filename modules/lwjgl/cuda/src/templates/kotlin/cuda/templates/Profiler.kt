@@ -47,9 +47,9 @@ for each set of counters/options
 }""")}
         """,
 
-        charASCII.const.p.IN("configFile", "name of the config file that lists the counters/options for profiling"),
-        charASCII.const.p.IN("outputFile", "name of the outputFile where the profiling results will be stored"),
-        CUoutput_mode.IN("outputMode", "", "#OUT_KEY_VALUE_PAIR #OUT_CSV")
+        charASCII.const.p("configFile", "name of the config file that lists the counters/options for profiling"),
+        charASCII.const.p("outputFile", "name of the outputFile where the profiling results will be stored"),
+        CUoutput_mode("outputMode", "", "#OUT_KEY_VALUE_PAIR #OUT_CSV")
     )
 
     CUresult(
@@ -62,7 +62,8 @@ for each set of counters/options
 
         {@code cuProfilerStart} and #ProfilerStop() APIs are used to programmatically control the profiling granularity by allowing profiling to be done only
         on selective pieces of code.
-        """
+        """,
+        void()
     )
 
     CUresult(
@@ -75,6 +76,7 @@ for each set of counters/options
 
         #ProfilerStart() and {@code cuProfilerStop} APIs are used to programmatically control the profiling granularity by allowing profiling to be done only
         on selective pieces of code.
-        """
+        """,
+        void()
     )
 }

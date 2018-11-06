@@ -38,8 +38,8 @@ val EXT_image_dma_buf_import_modifiers = "EXTImageDMABufImportModifiers".nativeC
         "QueryDmaBufFormatsEXT",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        AutoSize("formats")..EGLint.IN("max_formats", ""),
+        EGLDisplay("dpy", ""),
+        AutoSize("formats")..EGLint("max_formats", ""),
         nullable..EGLint.p.OUT("formats", ""),
         Check(1)..EGLint.p.OUT("num_formats", "")
     )
@@ -48,9 +48,9 @@ val EXT_image_dma_buf_import_modifiers = "EXTImageDMABufImportModifiers".nativeC
         "QueryDmaBufModifiersEXT",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLint.IN("format", ""),
-        AutoSize("modifiers", "external_only")..EGLint.IN("max_modifiers", ""),
+        EGLDisplay("dpy", ""),
+        EGLint("format", ""),
+        AutoSize("modifiers", "external_only")..EGLint("max_modifiers", ""),
         nullable..EGLuint64KHR.p.OUT("modifiers", ""),
         nullable..EGLBoolean.p.OUT("external_only", ""),
         Check(1)..EGLint.p.OUT("num_modifiers", "")

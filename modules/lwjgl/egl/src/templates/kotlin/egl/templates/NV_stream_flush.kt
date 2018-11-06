@@ -33,7 +33,7 @@ val NV_stream_flush = "NVStreamFlush".nativeClassEGL("NV_stream_flush", postfix 
         "StreamFlush",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLStreamKHR.IN("stream", "")
+        EGLDisplay("dpy", ""),
+        EGLStreamKHR("stream", "")
     )
 }

@@ -26,7 +26,7 @@ val ALC_SOFT_pause_device = "SOFTPauseDevice".nativeClassALC("SOFT_pause_device"
         incremented, or process any more buffers, until the device is resumed. Pausing a device that is already paused is a legal no-op.
         """,
 
-        ALCdevice.p.IN("device", "the device to pause")
+        ALCdevice.p("device", "the device to pause")
     )
 
     ALCvoid(
@@ -41,6 +41,6 @@ val ALC_SOFT_pause_device = "SOFTPauseDevice".nativeClassALC("SOFT_pause_device"
         #DevicePauseSOFT() was called.
         """,
 
-        ALCdevice.p.IN("device", "the device to resume")
+        ALCdevice.p("device", "the device to resume")
     )
 }

@@ -80,11 +80,11 @@ val YGMeasureFunc = Module.YOGA.callback {
         "YGMeasureFunc",
         "Use {@link YGMeasureFunc\\#toLong toLong} to create the return value.",
 
-        YGNodeRef.IN("node", ""),
-        float.IN("width", ""),
-        YGMeasureMode.IN("widthMode", ""),
-        float.IN("height", ""),
-        YGMeasureMode.IN("heightMode", ""),
+        YGNodeRef("node", ""),
+        float("width", ""),
+        YGMeasureMode("widthMode", ""),
+        float("height", ""),
+        YGMeasureMode("heightMode", ""),
 
         nativeType = "YGMeasureFunc"
     ) {
@@ -102,9 +102,9 @@ val YGBaselineFunc = Module.YOGA.callback {
         "YGBaselineFunc",
         "",
 
-        YGNodeRef.IN("node", ""),
-        float.IN("width", ""),
-        float.IN("height", ""),
+        YGNodeRef("node", ""),
+        float("width", ""),
+        float("height", ""),
 
         nativeType = "YGBaselineFunc"
     )
@@ -115,7 +115,7 @@ val YGDirtiedFunc = Module.YOGA.callback {
         "YGDirtiedFunc",
         "",
 
-        YGNodeRef.IN("node", ""),
+        YGNodeRef("node", ""),
 
         nativeType = "YGDirtiedFunc"
     )
@@ -126,7 +126,7 @@ val YGPrintFunc = Module.YOGA.callback {
         "YGPrintFunc",
         "",
 
-        YGNodeRef.IN("node", ""),
+        YGNodeRef("node", ""),
 
         nativeType = "YGPrintFunc"
     )
@@ -137,11 +137,11 @@ val YGLogger = Module.YOGA.callback {
         "YGLogger",
         "",
 
-        YGConfigRef.const.IN("config", ""),
-        YGNodeRef.const.IN("node", ""),
-        YGLogLevel.IN("level", ""),
-        charUTF8.const.p.IN("format", ""),
-        va_list.IN("args", ""),
+        YGConfigRef.const("config", ""),
+        YGNodeRef.const("node", ""),
+        YGLogLevel("level", ""),
+        charUTF8.const.p("format", ""),
+        va_list("args", ""),
 
         nativeType = "YGLogger"
     )
@@ -152,9 +152,9 @@ val YGCloneNodeFunc = Module.YOGA.callback {
         "YGCloneNodeFunc",
         "",
 
-        YGNodeRef.IN("oldNode", ""),
-        YGNodeRef.IN("owner", ""),
-        int.IN("childIndex", ""),
+        YGNodeRef("oldNode", ""),
+        YGNodeRef("owner", ""),
+        int("childIndex", ""),
 
         nativeType = "YGCloneNodeFunc"
     )

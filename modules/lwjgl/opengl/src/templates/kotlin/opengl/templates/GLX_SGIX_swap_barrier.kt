@@ -26,8 +26,8 @@ val GLX_SGIX_swap_barrier = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap_b
         """,
 
         DISPLAY,
-        GLXDrawable.IN("drawable", "the swap group GLXDrawable"),
-        int.IN("barrier", "the swap barrier")
+        GLXDrawable("drawable", "the swap group GLXDrawable"),
+        int("barrier", "the swap barrier")
     )
 
     Bool(
@@ -35,7 +35,7 @@ val GLX_SGIX_swap_barrier = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap_b
         "Returns in {@code max} the maximum number of barriers supported by an implementation on {@code screen}.",
 
         DISPLAY,
-        int.IN("screen", "the screen"),
+        int("screen", "the screen"),
         Check(1)..int.p.OUT("max", "returns the maximum number of barriers")
     )
 

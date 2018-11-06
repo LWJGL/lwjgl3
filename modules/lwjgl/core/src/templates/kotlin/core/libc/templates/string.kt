@@ -22,9 +22,9 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void.p.IN("dest", "pointer to the memory area to fill"),
-        int.IN("c", "byte to set"),
-        AutoSize("dest")..size_t.IN("count", "number of bytes to fill"),
+        )..void.p("dest", "pointer to the memory area to fill"),
+        int("c", "byte to set"),
+        AutoSize("dest")..size_t("count", "number of bytes to fill"),
 
         returnDoc = "the value of {@code dest}"
     )
@@ -54,7 +54,7 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void.p.IN("dest", "pointer to the destination memory area"),
+        )..void.p("dest", "pointer to the destination memory area"),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
@@ -62,8 +62,8 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void.const.p.IN("src", "pointer to the source memory area"),
-        AutoSize("src", "dest")..size_t.IN("count", "the number of bytes to be copied"),
+        )..void.const.p("src", "pointer to the source memory area"),
+        AutoSize("src", "dest")..size_t("count", "the number of bytes to be copied"),
 
         returnDoc = "the value of {@code dest}"
     )
@@ -101,7 +101,7 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void.p.IN("dest", "pointer to the destination memory area"),
+        )..void.p("dest", "pointer to the destination memory area"),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
@@ -109,8 +109,8 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void.const.p.IN("src", "pointer to the source memory area"),
-        AutoSize("src", "dest")..size_t.IN("count", "the number of bytes to be copied"),
+        )..void.const.p("src", "pointer to the source memory area"),
+        AutoSize("src", "dest")..size_t("count", "the number of bytes to be copied"),
 
         returnDoc = "the value of {@code dest}"
     )

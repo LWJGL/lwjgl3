@@ -118,7 +118,7 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
         {@code target} is #FALSE.
         """,
 
-        GLenum.IN("target", "the texture target", "#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS"),
+        GLenum("target", "the texture target", "#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS"),
         TexSubImage3D["level"],
         TexSubImage3D["xoffset"],
         TexSubImage3D["yoffset"],
@@ -126,14 +126,14 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
         TexSubImage3D["width"],
         TexSubImage3D["height"],
         TexSubImage3D["depth"],
-        GLboolean.IN("commit", "the commit flag")
+        GLboolean("commit", "the commit flag")
     )
 
     DependsOn("GL_EXT_direct_state_access")..void(
         "TexturePageCommitmentEXT",
         "DSA version of #TexPageCommitmentARB().",
 
-        GLuint.IN("texture", "the texture object"),
+        GLuint("texture", "the texture object"),
         TexPageCommitmentARB["level"],
         TexPageCommitmentARB["xoffset"],
         TexPageCommitmentARB["yoffset"],

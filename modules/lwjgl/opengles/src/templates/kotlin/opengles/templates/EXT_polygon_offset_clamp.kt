@@ -36,8 +36,8 @@ val EXT_polygon_offset_clamp = "EXTPolygonOffsetClamp".nativeClassGLES("EXT_poly
         command #PolygonOffset() is equivalent to calling the command PolygonOffsetClampEXT with {@code clamp} equal to zero.
         """,
 
-        GLfloat.IN("factor", "scales the maximum depth slope of the polygon"),
-        GLfloat.IN("units", "scales an implementation-dependent constant that relates to the usable resolution of the depth buffer"),
-        GLfloat.IN("clamp", "the minimum or maximum clamp value")
+        GLfloat("factor", "scales the maximum depth slope of the polygon"),
+        GLfloat("units", "scales an implementation-dependent constant that relates to the usable resolution of the depth buffer"),
+        GLfloat("clamp", "the minimum or maximum clamp value")
     )
 }

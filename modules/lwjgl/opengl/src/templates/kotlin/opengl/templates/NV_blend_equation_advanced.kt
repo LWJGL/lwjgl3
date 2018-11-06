@@ -97,8 +97,8 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGL("NV_ble
         "BlendParameteriNV",
         "",
 
-        GLenum.IN("pname", ""),
-        GLint.IN("value", "")
+        GLenum("pname", ""),
+        GLint("value", "")
     )
 
     void(

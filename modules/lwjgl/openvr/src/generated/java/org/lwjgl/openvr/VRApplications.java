@@ -1039,8 +1039,7 @@ public class VRApplications {
 
     /**
      * Returns the current scene process ID according to the application system. A scene process will get scene focus once it starts rendering, but it will
-     * appear here once it calls {@code VR_Init} with the Scene application.
-        * type.
+     * appear here once it calls {@code VR_Init} with the Scene application type.
      */
     @NativeType("uint32_t")
     public static int VRApplications_GetCurrentSceneProcessId() {

@@ -93,23 +93,23 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         "BindBuffer",
         "Binds a named buffer object.",
 
-        GLenum.IN("target", "the target to which the buffer object is bound", BUFFER_OBJECT_TARGETS),
-        GLuint.IN("buffer", "the name of a buffer object")
+        GLenum("target", "the target to which the buffer object is bound", BUFFER_OBJECT_TARGETS),
+        GLuint("buffer", "the name of a buffer object")
     )
 
     void(
         "DeleteBuffers",
         "Deletes named buffer objects.",
 
-        AutoSize("buffers")..GLsizei.IN("n", "the number of buffer objects to be deleted"),
-        SingleValue("buffer")..GLuint.const.p.IN("buffers", "an array of buffer objects to be deleted")
+        AutoSize("buffers")..GLsizei("n", "the number of buffer objects to be deleted"),
+        SingleValue("buffer")..GLuint.const.p("buffers", "an array of buffer objects to be deleted")
     )
 
     void(
         "GenBuffers",
         "Generates buffer object names.",
 
-        AutoSize("buffers")..GLsizei.IN("n", "the number of buffer object names to be generated"),
+        AutoSize("buffers")..GLsizei("n", "the number of buffer object names to be generated"),
         ReturnParam..GLuint.p.OUT("buffers", "a buffer in which the generated buffer object names are stored")
     )
 
@@ -117,7 +117,7 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         "IsBuffer",
         "Determines if a name corresponds to a buffer object.",
 
-        GLuint.IN("buffer", "a value that may be the name of a buffer object")
+        GLuint("buffer", "a value that may be the name of a buffer object")
     )
 
     void(
@@ -142,48 +142,48 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         )}
         """,
 
-        GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-        AutoSize("data")..GLsizeiptr.IN("size", "the size in bytes of the buffer object's new data store"),
+        GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+        AutoSize("data")..GLsizeiptr("size", "the size in bytes of the buffer object's new data store"),
         optional..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_LONG,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..void.const.p.IN("data", "a pointer to data that will be copied into the data store for initialization, or #NULL if no data is to be copied"),
-        GLenum.IN("usage", "the expected usage pattern of the data store", BUFFER_OBJECT_USAGE_HINTS)
+        )..void.const.p("data", "a pointer to data that will be copied into the data store for initialization, or #NULL if no data is to be copied"),
+        GLenum("usage", "the expected usage pattern of the data store", BUFFER_OBJECT_USAGE_HINTS)
     )
 
     void(
         "BufferSubData",
         "Updates a subset of a buffer object's data store.",
 
-        GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-        GLintptr.IN("offset", "the offset into the buffer object's data store where data replacement will begin, measured in bytes"),
-        AutoSize("data")..GLsizeiptr.IN("size", "the size in bytes of the data store region being replaced"),
+        GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+        GLintptr("offset", "the offset into the buffer object's data store where data replacement will begin, measured in bytes"),
+        AutoSize("data")..GLsizeiptr("size", "the size in bytes of the data store region being replaced"),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_LONG,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..void.const.p.IN("data", "a pointer to the new data that will be copied into the data store")
+        )..void.const.p("data", "a pointer to the new data that will be copied into the data store")
     )
 
     void(
         "GetBufferSubData",
         "Returns a subset of a buffer object's data store.",
 
-        GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-        GLintptr.IN("offset", "the offset into the buffer object's data store from which data will be returned, measured in bytes"),
-        AutoSize("data")..GLsizeiptr.IN("size", "the size in bytes of the data store region being returned"),
+        GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+        GLintptr("offset", "the offset into the buffer object's data store from which data will be returned, measured in bytes"),
+        AutoSize("data")..GLsizeiptr("size", "the size in bytes of the data store region being returned"),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_LONG,
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE
-        )..void.p.IN("data", "a pointer to the location where buffer object data is returned")
+        )..void.p("data", "a pointer to the location where buffer object data is returned")
     )
 
     MapPointer("glGetBufferParameteri(target, GL_BUFFER_SIZE)")..void.p(
@@ -199,8 +199,8 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         )}
         """,
 
-        GLenum.IN("target", "the target buffer object being mapped", BUFFER_OBJECT_TARGETS),
-        GLenum.IN(
+        GLenum("target", "the target buffer object being mapped", BUFFER_OBJECT_TARGETS),
+        GLenum(
             "access",
             "the access policy, indicating whether it will be possible to read from, write to, or both read from and write to the buffer object's mapped data store",
             BUFFER_OBJECT_ACCESS_POLICIES
@@ -218,15 +218,15 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         If such corruption has occurred, UnmapBuffer returns FALSE, and the contents of the buffer’s data store become undefined.
         """,
 
-        GLenum.IN("target", "the target buffer object being unmapped", BUFFER_OBJECT_TARGETS)
+        GLenum("target", "the target buffer object being unmapped", BUFFER_OBJECT_TARGETS)
     )
 
     void(
         "GetBufferParameteriv",
         "Returns the value of a buffer object parameter.",
 
-        GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-        GLenum.IN("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
+        GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+        GLenum("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
         Check(1)..ReturnParam..GLint.p.OUT("params", "the requested parameter")
     )
 
@@ -234,8 +234,8 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         "GetBufferPointerv",
         "Returns the pointer to a mapped buffer object's data store.",
 
-        GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-        GLenum.IN("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER"),
+        GLenum("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+        GLenum("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER"),
         Check(1)..ReturnParam..void.p.p.OUT("params", "the pointer value specified by {@code pname}")
     )
 
@@ -265,7 +265,7 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         "GenQueries",
         "Generates query object names.",
 
-        AutoSize("ids")..GLsizei.IN("n", "the number of query object names to be generated"),
+        AutoSize("ids")..GLsizei("n", "the number of query object names to be generated"),
         ReturnParam..GLuint.p.OUT("ids", "a buffer in which the generated query object names are stored")
     )
 
@@ -273,38 +273,38 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         "DeleteQueries",
         "Deletes named query objects.",
 
-        AutoSize("ids")..GLsizei.IN("n", "the number of query objects to be deleted"),
-        SingleValue("id")..GLuint.const.p.IN("ids", "an array of query objects to be deleted")
+        AutoSize("ids")..GLsizei("n", "the number of query objects to be deleted"),
+        SingleValue("id")..GLuint.const.p("ids", "an array of query objects to be deleted")
     )
 
     GLboolean(
         "IsQuery",
         "Determine if a name corresponds to a query object.",
 
-        GLuint.IN("id", "a value that may be the name of a query object")
+        GLuint("id", "a value that may be the name of a query object")
     )
 
     void(
         "BeginQuery",
         "Creates a query object and makes it active.",
 
-        GLenum.IN("target", "the target type of query object established", QUERY_TARGETS),
-        GLuint.IN("id", "the name of a query object")
+        GLenum("target", "the target type of query object established", QUERY_TARGETS),
+        GLuint("id", "the name of a query object")
     )
 
     void(
         "EndQuery",
         "Marks the end of the sequence of commands to be tracked for the active query specified by {@code target}.",
 
-        GLenum.IN("target", "the query object target", QUERY_TARGETS)
+        GLenum("target", "the query object target", QUERY_TARGETS)
     )
 
     void(
         "GetQueryiv",
         "Returns parameters of a query object target.",
 
-        GLenum.IN("target", "the query object target", QUERY_TARGETS),
-        GLenum.IN("pname", "the symbolic name of a query object target parameter", QUERY_PARAMETERS),
+        GLenum("target", "the query object target", QUERY_TARGETS),
+        GLenum("pname", "the symbolic name of a query object target parameter", QUERY_PARAMETERS),
         Check(1)..ReturnParam..GLint.p.OUT("params", "the requested data")
     )
 
@@ -312,8 +312,8 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         "GetQueryObjectiv",
         "Returns the integer value of a query object parameter.",
 
-        GLuint.IN("id", "the name of a query object"),
-        GLenum.IN("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
+        GLuint("id", "the name of a query object"),
+        GLenum("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
         Check(1)..ReturnParam..GLint.p.OUT("params", "the requested data")
     )
 
@@ -321,8 +321,8 @@ val GL15C = "GL15C".nativeClassGL("GL15C") {
         "GetQueryObjectuiv",
         "Unsigned version of #GetQueryObjectiv().",
 
-        GLuint.IN("id", "the name of a query object"),
-        GLenum.IN("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
+        GLuint("id", "the name of a query object"),
+        GLenum("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
         Check(1)..ReturnParam..GLuint.p.OUT("params", "the requested data")
     )
 }

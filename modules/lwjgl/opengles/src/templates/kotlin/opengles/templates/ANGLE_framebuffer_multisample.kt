@@ -51,10 +51,10 @@ val ANGLE_framebuffer_multisample = "ANGLEFramebufferMultisample".nativeClassGLE
         "RenderbufferStorageMultisampleANGLE",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 }

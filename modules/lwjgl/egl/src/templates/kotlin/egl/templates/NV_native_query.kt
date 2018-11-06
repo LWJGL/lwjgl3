@@ -19,7 +19,7 @@ val NV_native_query = "NVNativeQuery".nativeClassEGL("NV_native_query", postfix 
         "QueryNativeDisplayNV",
         "",
 
-        EGLDisplay.IN("dpy", ""),
+        EGLDisplay("dpy", ""),
         Check(1)..EGLNativeDisplayType.p.OUT("display_id", "")
     )
 
@@ -27,8 +27,8 @@ val NV_native_query = "NVNativeQuery".nativeClassEGL("NV_native_query", postfix 
         "QueryNativeWindowNV",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSurface.IN("surf", ""),
+        EGLDisplay("dpy", ""),
+        EGLSurface("surf", ""),
         Check(1)..EGLNativeWindowType.p.OUT("window", "")
     )
 
@@ -36,8 +36,8 @@ val NV_native_query = "NVNativeQuery".nativeClassEGL("NV_native_query", postfix 
         "QueryNativePixmapNV",
         "",
 
-        EGLDisplay.IN("dpy", ""),
-        EGLSurface.IN("surf", ""),
+        EGLDisplay("dpy", ""),
+        EGLSurface("surf", ""),
         Check(1)..EGLNativePixmapType.p.OUT("pixmap", "")
     )
 }

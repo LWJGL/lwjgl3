@@ -98,10 +98,10 @@ val PFN_vmaAllocateDeviceMemoryFunction = Module.VMA.callback {
         "VmaAllocateDeviceMemoryFunction",
         "Called after successful {@code vkAllocateMemory}.",
 
-        VmaAllocator.IN("allocator", ""),
-        uint32_t.IN("memoryType", ""),
-        VkDeviceMemory.IN("memory", ""),
-        VkDeviceSize.IN("size", ""),
+        VmaAllocator("allocator", ""),
+        uint32_t("memoryType", ""),
+        VkDeviceMemory("memory", ""),
+        VkDeviceSize("size", ""),
 
         nativeType = "PFN_vmaAllocateDeviceMemoryFunction"
     ) {
@@ -114,10 +114,10 @@ val PFN_vmaFreeDeviceMemoryFunction = Module.VMA.callback {
         "VmaFreeDeviceMemoryFunction",
         "Called before {@code vkFreeMemory}.",
 
-        VmaAllocator.IN("allocator", ""),
-        uint32_t.IN("memoryType", ""),
-        VkDeviceMemory.IN("memory", ""),
-        VkDeviceSize.IN("size", ""),
+        VmaAllocator("allocator", ""),
+        uint32_t("memoryType", ""),
+        VkDeviceMemory("memory", ""),
+        VkDeviceSize("size", ""),
 
         nativeType = "PFN_vmaFreeDeviceMemoryFunction"
     ) {

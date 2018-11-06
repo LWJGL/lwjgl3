@@ -22,9 +22,9 @@ val APPLE_command_queue_priority = "APPLECommandQueuePriority".nativeClassCL("AP
         "CreateCommandQueueWithPropertiesAPPLE",
         "",
 
-        cl_context.IN("context", ""),
-        cl_device_id.IN("device", ""),
-        NullTerminated..cl_queue_properties_APPLE.const.p.IN("properties", ""),
+        cl_context("context", ""),
+        cl_device_id("device", ""),
+        NullTerminated..cl_queue_properties_APPLE.const.p("properties", ""),
         ERROR_RET
     )
 }

@@ -88,19 +88,19 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
         associated with that tree location, it will be replaced with the new {@code string}.
         """,
 
-        GLenum.IN("type", "the string type", "#SHADER_INCLUDE_ARB"),
-        AutoSize("name")..GLint.IN("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
-        GLcharASCII.const.p.IN("name", "the name associated with the string"),
-        AutoSize("string")..GLint.IN("stringlen", "the number of characters in {@code string}. If negative, {@code string} is considered to be a null-terminated string."),
-        GLcharUTF8.const.p.IN("string", "an arbitrary string of characters")
+        GLenum("type", "the string type", "#SHADER_INCLUDE_ARB"),
+        AutoSize("name")..GLint("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
+        GLcharASCII.const.p("name", "the name associated with the string"),
+        AutoSize("string")..GLint("stringlen", "the number of characters in {@code string}. If negative, {@code string} is considered to be a null-terminated string."),
+        GLcharUTF8.const.p("string", "an arbitrary string of characters")
     )
 
     void(
         "DeleteNamedStringARB",
         "Deletes a named string.",
 
-        AutoSize("name")..GLint.IN("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
-        GLcharASCII.const.p.IN("name", "the name associated with the string")
+        AutoSize("name")..GLint("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
+        GLcharASCII.const.p("name", "the name associated with the string")
     )
 
     void(
@@ -112,10 +112,10 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
         named strings corresponding to the $include directives. If a $include directive does not correspond to a valid named string, compilation will fail.
         """,
 
-        GLuint.IN("shader", "the shader object compile"),
-        AutoSize("path", "length")..GLsizei.IN("count", ""),
-        GLcharASCII.const.p.const.p.IN("path", "an ordered array of {@code count} pointers to optionally null-terminated character strings defining search paths"),
-        nullable..GLint.const.p.IN(
+        GLuint("shader", "the shader object compile"),
+        AutoSize("path", "length")..GLsizei("count", ""),
+        GLcharASCII.const.p.const.p("path", "an ordered array of {@code count} pointers to optionally null-terminated character strings defining search paths"),
+        nullable..GLint.const.p(
             "length",
             """
             an array {@code count} values with the number of characters in each string (the string length). If an element in {@code length} is negative, its
@@ -131,17 +131,17 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
         associated with it.
         """,
 
-        AutoSize("name")..GLint.IN("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
-        GLcharASCII.const.p.IN("name", "the name associated with the string")
+        AutoSize("name")..GLint("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
+        GLcharASCII.const.p("name", "the name associated with the string")
     )
 
     void(
         "GetNamedStringARB",
         "Returns in {@code string} the string corresponding to the specified {@code name}. The returned string will be null-terminated.",
 
-        AutoSize("name")..GLint.IN("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
-        GLcharASCII.const.p.IN("name", "the name associated with the string"),
-        AutoSize("string")..GLsizei.IN("bufSize", "the maximum number of characters that may be written into {@code string}, including the null terminator"),
+        AutoSize("name")..GLint("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
+        GLcharASCII.const.p("name", "the name associated with the string"),
+        AutoSize("string")..GLsizei("bufSize", "the maximum number of characters that may be written into {@code string}, including the null terminator"),
         nullable..Check(1)..GLint.p.OUT(
             "stringlen",
             """
@@ -159,9 +159,9 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
         "GetNamedStringivARB",
         "Returns properties of the named string whose tree location corresponds to {@code name}.",
 
-        AutoSize("name")..GLint.IN("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
-        GLcharASCII.const.p.IN("name", "the name associated with the string"),
-        GLenum.IN("pname", "the parameter to query", "#NAMED_STRING_LENGTH_ARB #NAMED_STRING_TYPE_ARB"),
+        AutoSize("name")..GLint("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
+        GLcharASCII.const.p("name", "the name associated with the string"),
+        GLenum("pname", "the parameter to query", "#NAMED_STRING_LENGTH_ARB #NAMED_STRING_TYPE_ARB"),
         Check(1)..ReturnParam..GLint.p.OUT("params", "a buffer in which to place the returned value")
     )
 }

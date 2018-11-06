@@ -21,14 +21,14 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         "GetCameraErrorNameFromEnum",
         "Returns a string for an error.",
 
-        EVRTrackedCameraError.IN("eCameraError", "", "EVRTrackedCameraError_\\w+")
+        EVRTrackedCameraError("eCameraError", "", "EVRTrackedCameraError_\\w+")
     )
 
     EVRTrackedCameraError(
         "HasCamera",
         "For convenience, same as tracked property request #ETrackedDeviceProperty_Prop_HasCamera_Bool.",
 
-        TrackedDeviceIndex_t.IN("nDeviceIndex", ""),
+        TrackedDeviceIndex_t("nDeviceIndex", ""),
         Check(1)..bool.p.OUT("pHasCamera", "")
     )
 
@@ -36,8 +36,8 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         "GetCameraFrameSize",
         "Gets size of the image frame.",
 
-        TrackedDeviceIndex_t.IN("nDeviceIndex", ""),
-        EVRTrackedCameraFrameType.IN("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
+        TrackedDeviceIndex_t("nDeviceIndex", ""),
+        EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
         Check(1)..uint32_t.p.OUT("pnWidth", ""),
         Check(1)..uint32_t.p.OUT("pnHeight", ""),
         Check(1)..uint32_t.p.OUT("pnFrameBufferSize", "")
@@ -47,8 +47,8 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         "GetCameraIntrinsics",
         "",
 
-        TrackedDeviceIndex_t.IN("nDeviceIndex", ""),
-        EVRTrackedCameraFrameType.IN("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
+        TrackedDeviceIndex_t("nDeviceIndex", ""),
+        EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
         Check(1)..HmdVector2_t.p.OUT("pFocalLength", ""),
         Check(1)..HmdVector2_t.p.OUT("pCenter", "")
     )
@@ -57,10 +57,10 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         "GetCameraProjection",
         "",
 
-        TrackedDeviceIndex_t.IN("nDeviceIndex", ""),
-        EVRTrackedCameraFrameType.IN("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
-        float.IN("flZNear", ""),
-        float.IN("flZFar", ""),
+        TrackedDeviceIndex_t("nDeviceIndex", ""),
+        EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
+        float("flZNear", ""),
+        float("flZFar", ""),
         HmdMatrix44_t.p.OUT("pProjection", "")
     )
 
@@ -73,7 +73,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         lack of active consumers or headset idleness.
         """,
 
-        TrackedDeviceIndex_t.IN("nDeviceIndex", ""),
+        TrackedDeviceIndex_t("nDeviceIndex", ""),
         Check(1)..TrackedCameraHandle_t.p.OUT("pHandle", "")
     )
 
@@ -81,7 +81,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         "ReleaseVideoStreamingService",
         "",
 
-        TrackedCameraHandle_t.IN("hTrackedCamera", "")
+        TrackedCameraHandle_t("hTrackedCamera", "")
     )
 
     EVRTrackedCameraError(
@@ -93,20 +93,20 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         be #EVRTrackedCameraError_VRTrackedCameraError_NoFrameAvailable. Ideally a caller should be polling at ~16ms intervals.
         """,
 
-        TrackedCameraHandle_t.IN("hTrackedCamera", ""),
-        EVRTrackedCameraFrameType.IN("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
+        TrackedCameraHandle_t("hTrackedCamera", ""),
+        EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
         void.p.OUT("pFrameBuffer", ""),
-        AutoSize("pFrameBuffer")..uint32_t.IN("nFrameBufferSize", ""),
+        AutoSize("pFrameBuffer")..uint32_t("nFrameBufferSize", ""),
         CameraVideoStreamFrameHeader_t.p.OUT("pFrameHeader", ""),
-        Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t.IN("nFrameHeaderSize", "")
+        Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t("nFrameHeaderSize", "")
     )
 
     EVRTrackedCameraError(
         "GetVideoStreamTextureSize",
         "Gets size of the image frame.",
 
-        TrackedDeviceIndex_t.IN("nDeviceIndex", ""),
-        EVRTrackedCameraFrameType.IN("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
+        TrackedDeviceIndex_t("nDeviceIndex", ""),
+        EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
         VRTextureBounds_t.p.OUT("pTextureBounds", ""),
         Check(1)..uint32_t.p.OUT("pnWidth", ""),
         Check(1)..uint32_t.p.OUT("pnHeight", "")
@@ -126,30 +126,30 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         a rectangle where all pixels are valid.
         """,
 
-        TrackedCameraHandle_t.IN("hTrackedCamera", ""),
-        EVRTrackedCameraFrameType.IN("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
-        opaque_p.IN("pD3D11DeviceOrResource", ""),
+        TrackedCameraHandle_t("hTrackedCamera", ""),
+        EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
+        opaque_p("pD3D11DeviceOrResource", ""),
         Check(1)..void.p.p.OUT("ppD3D11ShaderResourceView", ""),
         CameraVideoStreamFrameHeader_t.p.OUT("pFrameHeader", ""),
-        Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t.IN("nFrameHeaderSize", "")
+        Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t("nFrameHeaderSize", "")
     )
 
     EVRTrackedCameraError(
         "GetVideoStreamTextureGL",
         "Access a shared GL texture for the specified tracked camera stream.",
 
-        TrackedCameraHandle_t.IN("hTrackedCamera", ""),
-        EVRTrackedCameraFrameType.IN("eFrameType", ""),
+        TrackedCameraHandle_t("hTrackedCamera", ""),
+        EVRTrackedCameraFrameType("eFrameType", ""),
         Check(1)..glUInt_t.p.OUT("pglTextureId", ""),
         CameraVideoStreamFrameHeader_t.p.OUT("pFrameHeader", ""),
-        Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t.IN("nFrameHeaderSize", "")
+        Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t("nFrameHeaderSize", "")
     )
 
     EVRTrackedCameraError(
         "ReleaseVideoStreamTextureGL",
         "",
 
-        TrackedCameraHandle_t.IN("hTrackedCamera", ""),
-        glUInt_t.IN("glTextureId", "")
+        TrackedCameraHandle_t("hTrackedCamera", ""),
+        glUInt_t("glTextureId", "")
     )
 }

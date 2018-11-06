@@ -61,9 +61,9 @@ val CU55 = "CU55".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "LinkCreate",
         "",
 
-        AutoSize("options", "optionValues")..unsigned_int.IN("numOptions", ""),
-        nullable..CUjit_option.p.IN("options", ""),
-        nullable..void.p.p.IN("optionValues", ""),
+        AutoSize("options", "optionValues")..unsigned_int("numOptions", ""),
+        nullable..CUjit_option.p("options", ""),
+        nullable..void.p.p("optionValues", ""),
         Check(1)..CUlinkState.p.OUT("stateOut", "")
     ).versioned()
 
@@ -71,33 +71,33 @@ val CU55 = "CU55".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "LinkAddData",
         "",
 
-        CUlinkState.IN("state", ""),
-        CUjitInputType.IN("type", ""),
-        void.p.IN("data", ""),
-        AutoSize("data")..size_t.IN("size", ""),
-        charASCII.const.p.IN("name", ""),
-        AutoSize("options", "optionValues")..unsigned_int.IN("numOptions", ""),
-        nullable..CUjit_option.p.IN("options", ""),
-        nullable..void.p.p.IN("optionValues", "")
+        CUlinkState("state", ""),
+        CUjitInputType("type", ""),
+        void.p("data", ""),
+        AutoSize("data")..size_t("size", ""),
+        charASCII.const.p("name", ""),
+        AutoSize("options", "optionValues")..unsigned_int("numOptions", ""),
+        nullable..CUjit_option.p("options", ""),
+        nullable..void.p.p("optionValues", "")
     ).versioned()
 
     CUresult(
         "LinkAddFile",
         "",
 
-        CUlinkState.IN("state", ""),
-        CUjitInputType.IN("type", ""),
-        charASCII.const.p.IN("path", ""),
-        AutoSize("options", "optionValues")..unsigned_int.IN("numOptions", ""),
-        nullable..CUjit_option.p.IN("options", ""),
-        nullable..void.p.p.IN("optionValues", "")
+        CUlinkState("state", ""),
+        CUjitInputType("type", ""),
+        charASCII.const.p("path", ""),
+        AutoSize("options", "optionValues")..unsigned_int("numOptions", ""),
+        nullable..CUjit_option.p("options", ""),
+        nullable..void.p.p("optionValues", "")
     ).versioned()
 
     CUresult(
         "LinkComplete",
         "",
 
-        CUlinkState.IN("state", ""),
+        CUlinkState("state", ""),
         Check(1)..void.p.p.OUT("cubinOut", ""),
         Check(1)..size_t.p.OUT("sizeOut", "")
     )
@@ -106,6 +106,6 @@ val CU55 = "CU55".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDI
         "LinkDestroy",
         "",
 
-        CUlinkState.IN("state", "")
+        CUlinkState("state", "")
     )
 }

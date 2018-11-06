@@ -55,27 +55,27 @@ val EXT_buffer_storage = "EXTBufferStorage".nativeClassGLES("EXT_buffer_storage"
         "BufferStorageEXT",
         "",
 
-        GLenum.IN("target", ""),
-        AutoSize("data")..GLsizeiptr.IN("size", ""),
+        GLenum("target", ""),
+        AutoSize("data")..GLsizeiptr("size", ""),
         optional..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..void.const.p.IN("data", ""),
-        GLbitfield.IN("flags", "")
+        )..void.const.p("data", ""),
+        GLbitfield("flags", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "NamedBufferStorageEXT",
         "",
 
-        GLuint.IN("buffer", ""),
-        AutoSize("data")..GLsizeiptr.IN("size", ""),
+        GLuint("buffer", ""),
+        AutoSize("data")..GLsizeiptr("size", ""),
         optional..MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
-        )..void.const.p.IN("data", ""),
-        GLbitfield.IN("flags", "")
+        )..void.const.p("data", ""),
+        GLbitfield("flags", "")
     )
 }

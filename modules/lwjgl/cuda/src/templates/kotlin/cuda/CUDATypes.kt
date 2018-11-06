@@ -95,9 +95,9 @@ val CUstreamCallback = Module.CUDA.callback {
         "CUstreamCallback",
         "CUDA stream callback.",
 
-        nullable..CUstream.IN("hStream", "the stream the callback was added to, as passed to #StreamAddCallback(). May be #NULL."),
-        CUresult.IN("status", "CUDA_SUCCESS or any persistent error on the stream"), // TODO:
-        opaque_p.IN("userData", "user parameter provided at registration")
+        nullable..CUstream("hStream", "the stream the callback was added to, as passed to #StreamAddCallback(). May be #NULL."),
+        CUresult("status", "CUDA_SUCCESS or any persistent error on the stream"), // TODO:
+        opaque_p("userData", "user parameter provided at registration")
     ) {
         documentation = "Instances of this interface may be passed to the #StreamAddCallback() method."
     }
@@ -108,7 +108,7 @@ val CUhostFn = Module.CUDA.callback {
         "CUhostFn",
         "CUDA host function.",
 
-        opaque_p.IN("userData", "argument value passed to the function")
+        opaque_p("userData", "argument value passed to the function")
     ) {
         documentation = "Instances of this interface may be passed to the #LaunchHostFunc() method."
     }
@@ -119,7 +119,7 @@ val CUoccupancyB2DSize = Module.CUDA.callback {
         "CUoccupancyB2DSize",
         "Block size to per-block dynamic shared memory mapping for a certain kernel.",
 
-        int.IN("blockSize", "block size of the kernel"),
+        int("blockSize", "block size of the kernel"),
 
         returnDoc = "the dynamic shared memory needed by a block"
     ) {

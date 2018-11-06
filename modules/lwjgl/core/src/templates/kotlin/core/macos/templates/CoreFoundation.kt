@@ -30,33 +30,37 @@ val CoreFoundation = "CoreFoundation".nativeClass(Module.CORE_MACOS, nativeSubPa
         "FALSE".."0"
     )
 
-    macro..CFAllocatorRef("kCFAllocatorDefault", "This is a synonym for #NULL, if you'd rather use a named constant.")
-    macro..CFAllocatorRef("kCFAllocatorSystemDefault", "Default system allocator; you rarely need to use this.")
+    macro..CFAllocatorRef("kCFAllocatorDefault", "This is a synonym for #NULL, if you'd rather use a named constant.", void())
+    macro..CFAllocatorRef("kCFAllocatorSystemDefault", "Default system allocator; you rarely need to use this.", void())
     macro..CFAllocatorRef(
         "kCFAllocatorMalloc",
         """
         This allocator uses {@code malloc()}, {@code realloc()}, and {@code free()}. This should not be generally used; stick to #kCFAllocatorDefault()
         whenever possible. This allocator is useful as the "bytesDeallocator" in {@code CFData} or "contentsDeallocator" in {@code CFString} where the memory
         was obtained as a result of {@code malloc()} type functions.
-        """
+        """,
+        void()
     )
     macro..CFAllocatorRef(
         "kCFAllocatorMallocZone",
         """
         This allocator explicitly uses the default malloc zone, returned by {@code malloc_default_zone()}. It should only be used when an object is safe to be
         allocated in non-scanned memory.
-        """
+        """,
+        void()
     )
     macro..CFAllocatorRef(
         "kCFAllocatorNull",
         """
         Null allocator which does nothing and allocates no memory. This allocator is useful as the "bytesDeallocator" in {@code CFData} or "contentsDeallocator"
         in {@code CFString} where the memory should not be freed.
-        """
+        """,
+        void()
     )
     macro..CFAllocatorRef(
         "kCFAllocatorUseContext",
-        "Special allocator argument to CFAllocatorCreate which means \"use the functions given in the context to allocate the allocator itself as well\"."
+        "Special allocator argument to CFAllocatorCreate which means \"use the functions given in the context to allocate the allocator itself as well\".",
+        void()
     )
 
     CFTypeRef(
@@ -68,7 +72,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(Module.CORE_MACOS, nativeSubPa
         you retain a Core Foundation object you are responsible for releasing it.
         """,
 
-        CFTypeRef.IN("cf", "the CFType object to retain")
+        CFTypeRef("cf", "the CFType object to retain")
     )
 
     void(
@@ -80,7 +84,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(Module.CORE_MACOS, nativeSubPa
         explicitly retain (see the #CFRetain() function) a Core Foundation object, you are responsible for releasing it when you no longer need it.
         """,
 
-        CFTypeRef.IN("cf", "the CFType object to release")
+        CFTypeRef("cf", "the CFType object to release")
     )
 
     // -----------------------------------------------
@@ -91,22 +95,22 @@ val CoreFoundation = "CoreFoundation".nativeClass(Module.CORE_MACOS, nativeSubPa
         "Creates a {@code CFBundle} object.",
 
         ALLOCATOR,
-        CFURLRef.IN("bundleURL", "the location of the bundle for which to create a {@code CFBundle} object")
+        CFURLRef("bundleURL", "the location of the bundle for which to create a {@code CFBundle} object")
     )
 
     CFBundleRef(
         "CFBundleGetBundleWithIdentifier",
         "Locates a bundle given its program-defined identifier.",
 
-        CFStringRef.IN("bundleID", "the identifier of the bundle to locate. Note that identifier names are case-sensitive.")
+        CFStringRef("bundleID", "the identifier of the bundle to locate. Note that identifier names are case-sensitive.")
     )
 
     opaque_p(
         "CFBundleGetFunctionPointerForName",
         "Returns a pointer to a function in a bundle’s executable code using the function name as the search key.",
 
-        CFBundleRef.IN("bundle", "the bundle to examine"),
-        CFStringRef.IN("functionName", "the name of the function to locate")
+        CFBundleRef("bundle", "the bundle to examine"),
+        CFStringRef("functionName", "the name of the function to locate")
     )
 
     // -----------------------------------------------
@@ -136,8 +140,8 @@ val CoreFoundation = "CoreFoundation".nativeClass(Module.CORE_MACOS, nativeSubPa
         "Creates an immutable string from a C string.",
 
         ALLOCATOR,
-        Unsafe..char.const.p.IN("cStr", "the #NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
-        CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.", Encodings)
+        Unsafe..char.const.p("cStr", "the #NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
+        CFStringEncoding("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.", Encodings)
     )
 
     CFStringRef(
@@ -145,9 +149,9 @@ val CoreFoundation = "CoreFoundation".nativeClass(Module.CORE_MACOS, nativeSubPa
         "Creates a CFString object from an external C string buffer that might serve as the backing store for the object.",
 
         ALLOCATOR,
-        Unsafe..char.const.p.IN("cStr", "the #NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
-        CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.", Encodings),
-        nullable..CFAllocatorRef.IN(
+        Unsafe..char.const.p("cStr", "the #NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
+        CFStringEncoding("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.", Encodings),
+        nullable..CFAllocatorRef(
             "contentsDeallocator",
             """
             the {@code CFAllocator} object to use to deallocate the external string buffer when it is no longer needed. You can pass #NULL or
@@ -173,15 +177,15 @@ val CoreFoundation = "CoreFoundation".nativeClass(Module.CORE_MACOS, nativeSubPa
         "Creates a {@code CFURL} object using a local file system path string.",
 
         ALLOCATOR,
-        CFStringRef.IN(
+        CFStringRef(
             "filePath",
             """
             the path string to convert to a {@code CFURL} object. If {@code filePath} is not absolute, the resulting URL will be considered relative to the
             current working directory (evaluated when this function is being invoked).
             """
         ),
-        CFURLPathStyle.IN("pathStyle", "the operating system path style used in {@code filePath}", PathStyles),
-        core.macos.Boolean.IN(
+        CFURLPathStyle("pathStyle", "the operating system path style used in {@code filePath}", PathStyles),
+        core.macos.Boolean(
             "isDirectory",
             """
             a Boolean value that specifies whether filePath is treated as a directory path when resolving against relative path components. Pass true if the

@@ -40,7 +40,7 @@ val AL_SOFT_source_resampler = "SOFTSourceResampler".nativeClassAL("SOFT_source_
         "GetStringiSOFT",
         "",
 
-        ALenum.IN("pname", ""),
-        ALsizei.IN("index", "")
+        ALenum("pname", ""),
+        ALsizei("index", "")
     )
 }

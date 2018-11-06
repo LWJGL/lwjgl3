@@ -91,17 +91,18 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
 
     TootleResult(
         "Init",
-        "Performs one-time initialization required by Tootle."
+        "Performs one-time initialization required by Tootle.",
+        void()
     )
 
     TootleResult(
         "OptimizeVCache",
         "This function performs vertex cache optimization on an index buffer.  It returns a face re-mapping if requested.",
 
-        unsigned_int.const.p.IN("pnIB", "the index buffer to optimize.  Must be a triangle list."),
-        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int.IN("nFaces", "the number of faces in the index buffer. This must be non-zero and less than #MAX_FACES."),
-        unsigned_int.IN("nVertices", "the number of vertices in the model. This must non-zero and less than #MAX_VERTICES."),
-        unsigned_int.IN(
+        unsigned_int.const.p("pnIB", "the index buffer to optimize.  Must be a triangle list."),
+        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int("nFaces", "the number of faces in the index buffer. This must be non-zero and less than #MAX_FACES."),
+        unsigned_int("nVertices", "the number of vertices in the model. This must non-zero and less than #MAX_VERTICES."),
+        unsigned_int(
             "nCacheSize",
             """
             the number of vertices that will fit in cache. If the application does not know or care about the vertex cache size, then it should pass
@@ -120,7 +121,7 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             Element {@code i} in the array will contain the position of input face {@code i} in the output face ordering.
             """
         ),
-        TootleVCacheOptimizer.IN("eVCacheOptimizer", "the selection for choosing the algorithm to optimize vertex cache", TootleVCacheOptimizers),
+        TootleVCacheOptimizer("eVCacheOptimizer", "the selection for choosing the algorithm to optimize vertex cache", TootleVCacheOptimizers),
 
         returnDoc = "one of: #OK, #OUT_OF_MEMORY, #INVALID_ARGS"
     )
@@ -135,21 +136,21 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
 
         MultiType(
             PointerMapping.DATA_FLOAT
-        )..void.const.p.IN(
+        )..void.const.p(
             "pVB",
             """
             a pointer to the vertex buffer. The pointer {@code pVB} must point to the vertex position. The vertex position must be a 3-component floating point
             value (X,Y,Z).
             """
         ),
-        unsigned_int.const.p.IN("pnIB", "an index buffer. Must be a triangle list."),
-        AutoSizeDiv("nVBStride", "pVB")..unsigned_int.IN("nVertices", "number of vertices. This must be non-zero and less than #MAX_VERTICES."),
-        UseVariable..AutoSize(3, "pnIB", "pnClusteredIBOut")..unsigned_int.IN("nFaces", "number of faces. This must be non-zero and less than #MAX_FACES."),
-        unsigned_int.IN(
+        unsigned_int.const.p("pnIB", "an index buffer. Must be a triangle list."),
+        AutoSizeDiv("nVBStride", "pVB")..unsigned_int("nVertices", "number of vertices. This must be non-zero and less than #MAX_VERTICES."),
+        UseVariable..AutoSize(3, "pnIB", "pnClusteredIBOut")..unsigned_int("nFaces", "number of faces. This must be non-zero and less than #MAX_FACES."),
+        unsigned_int(
             "nVBStride",
             "the distance between successive vertices in the vertex buffer, in bytes. This must be at least {@code 3*sizeof(float)}."
         ),
-        unsigned_int.IN(
+        unsigned_int(
             "nTargetClusters",
             """
             a target number of clusters. The clustering algorithm will create at least this many clusters, but not more than {@code nFaces}. This value is only
@@ -187,10 +188,10 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
         buffer and an array of the resulting clusters. The result can be used as inputs to #OptimizeOverdraw().
         """,
 
-        unsigned_int.const.p.IN("pnIB", "the input index buffer: 3 {@code unsigned int} per triangle."),
-        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int.IN("nFaces", "the number of faces in the index buffer"),
-        unsigned_int.IN("nVertices", "the number of vertices in the vertex buffer"),
-        unsigned_int.IN("nCacheSize", "hardware cache size (12 to 24 are good options)"),
+        unsigned_int.const.p("pnIB", "the input index buffer: 3 {@code unsigned int} per triangle."),
+        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int("nFaces", "the number of faces in the index buffer"),
+        unsigned_int("nVertices", "the number of vertices in the vertex buffer"),
+        unsigned_int("nCacheSize", "hardware cache size (12 to 24 are good options)"),
         unsigned_int.p.OUT("pnIBOut", "the updated index buffer (the output). May not be #NULL. May equal {@code pnIB}."),
         Check("nFaces + 1")..unsigned_int.p.OUT(
             "pnClustersOut",
@@ -201,7 +202,7 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             """
         ),
         Check(1)..unsigned_int.p.OUT("pnNumClustersOut", "the total number of clusters in {@code pnClustersOut}"),
-        float.IN("fAlpha", "a linear parameter to compute lambda term from the algorithm. Pass #DEFAULT_ALPHA as a default."),
+        float("fAlpha", "a linear parameter to compute lambda term from the algorithm. Pass #DEFAULT_ALPHA as a default."),
 
         returnDoc = "one of: #OK, #OUT_OF_MEMORY, #INVALID_ARGS"
     )
@@ -216,23 +217,23 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
 
         MultiType(
             PointerMapping.DATA_FLOAT
-        )..void.const.p.IN(
+        )..void.const.p(
             "pVB",
             """
             a pointer to the vertex buffer. The pointer {@code pVB} must point to the vertex position. The vertex position must be a 3-component floating point
             value (X,Y,Z).
             """),
-        unsigned_int.const.p.IN("pnIB", "the mesh index buffer. This must be a triangle list. The faces must be clustered."),
-        AutoSizeDiv("nVBStride", "pVB")..unsigned_int.IN(
+        unsigned_int.const.p("pnIB", "the mesh index buffer. This must be a triangle list. The faces must be clustered."),
+        AutoSizeDiv("nVBStride", "pVB")..unsigned_int(
             "nVertices",
             "the number of vertices in the mesh. This must be non-zero and less than #MAX_VERTICES."
         ),
-        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int.IN(
+        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int(
             "nFaces",
             "the number of faces in the mesh.  This must be non-zero and less than #MAX_FACES."
         ),
-        unsigned_int.IN("nVBStride", "the distance between successive vertices in the vertex buffer, in bytes. This must be at least {@code 3*sizeof(float)}."),
-        nullable..float.const.p.IN(
+        unsigned_int("nVBStride", "the distance between successive vertices in the vertex buffer, in bytes. This must be at least {@code 3*sizeof(float)}."),
+        nullable..float.const.p(
             "pfViewpoint",
             """
             an array of viewpoints to use to measure overdraw. Each viewpoint must be a point on or in the unit sphere. When measuring overdraw, the mesh will
@@ -240,9 +241,9 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             at the given point looking at the origin. If this argument is #NULL, a default viewpoint set will be used.
             """
         ),
-        AutoSize(3, "pfViewpoint")..unsigned_int.IN("nViewpoints", "the number of viewpoints in the viewpoint array"),
-        TootleFaceWinding.IN("eFrontWinding", "the winding order of front-faces in the mesh", TootleFaceWindings),
-        Check("nFaces + 1")..unsigned_int.const.p.IN(
+        AutoSize(3, "pfViewpoint")..unsigned_int("nViewpoints", "the number of viewpoints in the viewpoint array"),
+        TootleFaceWinding("eFrontWinding", "the winding order of front-faces in the mesh", TootleFaceWindings),
+        Check("nFaces + 1")..unsigned_int.const.p(
             "pnFaceClusters",
             """
             this array of {@code nFaces+1} size can be either of two types: a full format (the output of #ClusterMesh()) or a compact format (the output of
@@ -264,7 +265,7 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             mesh. {@code pClusterRemapOut[i]} will be set to the ID of the cluster that should come {@code i}'th in the draw order.
             """
         ),
-        TootleOverdrawOptimizer.IN("eOverdrawOptimizer", "the algorithm selection for optimizing overdraw", TootleOverdrawOptimizers),
+        TootleOverdrawOptimizer("eOverdrawOptimizer", "the algorithm selection for optimizing overdraw", TootleOverdrawOptimizers),
 
         returnDoc = "one of: #OK, #OUT_OF_MEMORY, #INVALID_ARGS #3D_API_ERROR, #NOT_INITIALIZED"
     )
@@ -286,28 +287,28 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
 
         MultiType(
             PointerMapping.DATA_FLOAT
-        )..void.const.p.IN(
+        )..void.const.p(
             "pVB",
             """
             a pointer to the vertex buffer. The pointer {@code pVB} must point to the vertex position. The vertex position must be a 3-component floating point
             value (X,Y,Z).
             """
         ),
-        unsigned_int.const.p.IN("pnIB", "an index buffer. Must be a triangle list."),
-        AutoSizeDiv("nVBStride", "pVB")..unsigned_int.IN("nVertices", "number of vertices. This must be non-zero and less than #MAX_VERTICES."),
-        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int.IN("nFaces", "number of faces. This must be non-zero and less than #MAX_FACES."),
-        unsigned_int.IN(
+        unsigned_int.const.p("pnIB", "an index buffer. Must be a triangle list."),
+        AutoSizeDiv("nVBStride", "pVB")..unsigned_int("nVertices", "number of vertices. This must be non-zero and less than #MAX_VERTICES."),
+        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int("nFaces", "number of faces. This must be non-zero and less than #MAX_FACES."),
+        unsigned_int(
             "nVBStride",
             "the distance between successive vertices in the vertex buffer, in bytes. This must be at least {@code 3*sizeof(float)}."
         ),
-        unsigned_int.IN(
+        unsigned_int(
             "nCacheSize",
             """
             the number of vertices that will fit in cache. If the application does not know or care about the vertex cache size, then it should pass
             #DEFAULT_VCACHE_SIZE. This value must be non-zero.
             """
         ),
-        nullable..float.const.p.IN(
+        nullable..float.const.p(
             "pViewpoints",
             """
             an array of viewpoints to use to measure overdraw. Each viewpoint must be a point on or in the unit sphere.  When measuring overdraw, the mesh will
@@ -315,12 +316,12 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             at the given point looking at the origin.  If this argument is #NULL, a default viewpoint set will be used.
             """
         ),
-        AutoSize(3, "pViewpoints")..unsigned_int.IN("nViewpoints", "the number of viewpoints in the viewpoint array"),
-        TootleFaceWinding.IN("eFrontWinding", "the winding order of front-faces in the model", TootleFaceWindings),
+        AutoSize(3, "pViewpoints")..unsigned_int("nViewpoints", "the number of viewpoints in the viewpoint array"),
+        TootleFaceWinding("eFrontWinding", "the winding order of front-faces in the model", TootleFaceWindings),
         unsigned_int.p.OUT("pnIBOut", "a pointer that will be filled with an optimized index buffer. May not be #NULL. May equal {@code pIB}."),
         Check(1)..nullable..unsigned_int.p.OUT("pnNumClustersOut", "the number of clusters generated by the algorithm. May be #NULL if the output is not requested."),
-        TootleVCacheOptimizer.IN("eVCacheOptimizer", "the selection for choosing the algorithm to optimize vertex cache", TootleVCacheOptimizers),
-        TootleOverdrawOptimizer.IN("eOverdrawOptimizer", "the algorithm selection for optimizing overdraw", TootleOverdrawOptimizers),
+        TootleVCacheOptimizer("eVCacheOptimizer", "the selection for choosing the algorithm to optimize vertex cache", TootleVCacheOptimizers),
+        TootleOverdrawOptimizer("eOverdrawOptimizer", "the algorithm selection for optimizing overdraw", TootleOverdrawOptimizers),
 
         returnDoc = "one of: #OK, #OUT_OF_MEMORY, #INVALID_ARGS"
     )
@@ -335,25 +336,25 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
 
         MultiType(
             PointerMapping.DATA_FLOAT
-        )..void.const.p.IN(
+        )..void.const.p(
             "pVB",
             """
             a pointer to the vertex buffer. The pointer {@code pVB} must point to the vertex position. The vertex position must be a 3-component floating point
             value (X,Y,Z).
             """
         ),
-        unsigned_int.const.p.IN("pnIB", "the input index buffer: 3 {@code unsigned int} per triangle"),
-        AutoSizeDiv("nVBStride", "pVB")..unsigned_int.IN("nVertices", "the number of vertices in the vertex buffer"),
-        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int.IN("nFaces", "the number of faces in the index buffer"),
-        unsigned_int.IN(
+        unsigned_int.const.p("pnIB", "the input index buffer: 3 {@code unsigned int} per triangle"),
+        AutoSizeDiv("nVBStride", "pVB")..unsigned_int("nVertices", "the number of vertices in the vertex buffer"),
+        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int("nFaces", "the number of faces in the index buffer"),
+        unsigned_int(
             "nVBStride",
             "the distance between successive vertices in the vertex buffer, in bytes. This must be at least {@code 3*sizeof(float)}."
         ),
-        unsigned_int.IN("nCacheSize", "hardware cache size (12 to 24 are good options)"),
-        TootleFaceWinding.IN("eFrontWinding", "the winding order of front-faces in the model", TootleFaceWindings),
+        unsigned_int("nCacheSize", "hardware cache size (12 to 24 are good options)"),
+        TootleFaceWinding("eFrontWinding", "the winding order of front-faces in the model", TootleFaceWindings),
         unsigned_int.p.OUT("pnIBOut", "the updated index buffer (the output). May not be #NULL. May equal {@code pnIB}."),
         Check(1)..nullable..unsigned_int.p.OUT("pnNumClustersOut", "the number of output clusters. May be #NULL if not requested."),
-        float.IN("fAlpha", "a linear parameter to compute lambda term from the algorithm. Pass #DEFAULT_ALPHA as a default."),
+        float("fAlpha", "a linear parameter to compute lambda term from the algorithm. Pass #DEFAULT_ALPHA as a default."),
 
         returnDoc = "one of: #OK, #OUT_OF_MEMORY, #INVALID_ARGS"
     )
@@ -365,17 +366,17 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
         within each cluster will be re-ordered, but the clustering will be maintained.
         """,
 
-        unsigned_int.const.p.IN("pnIB", "the index buffer to optimize. Must be a triangle list."),
-        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int.IN("nFaces", "the number of faces in the index buffer. This must be non-zero and less than #MAX_FACES."),
-        unsigned_int.IN("nVertices", "the number of vertices in the model. This must be non-zero and less than #MAX_VERTICES."),
-        unsigned_int.IN(
+        unsigned_int.const.p("pnIB", "the index buffer to optimize. Must be a triangle list."),
+        UseVariable..AutoSize(3, "pnIB", "pnIBOut")..unsigned_int("nFaces", "the number of faces in the index buffer. This must be non-zero and less than #MAX_FACES."),
+        unsigned_int("nVertices", "the number of vertices in the model. This must be non-zero and less than #MAX_VERTICES."),
+        unsigned_int(
             "nCacheSize",
             """
             the number of vertices that will fit in cache. If the application does not know or care about the vertex cache size, then it should pass
             #DEFAULT_VCACHE_SIZE. This value must be non-zero.
             """
         ),
-        Check("nFaces + 1")..unsigned_int.const.p.IN(
+        Check("nFaces + 1")..unsigned_int.const.p(
             "pnFaceClusters",
             """
             an array giving the cluster ID for each face. All faces in a particular cluster should appear consecutively in the index buffer, as well as in this
@@ -391,7 +392,7 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             Element {@code i} in the array will contain the position of input face {@code i} in the output face ordering.
             """
         ),
-        TootleVCacheOptimizer.IN("eVCacheOptimizer", "the selection for choosing the algorithm to optimize vertex cache", TootleVCacheOptimizers),
+        TootleVCacheOptimizer("eVCacheOptimizer", "the selection for choosing the algorithm to optimize vertex cache", TootleVCacheOptimizers),
 
         returnDoc = "one of: #OK, #OUT_OF_MEMORY, #INVALID_ARGS"
     )
@@ -405,9 +406,9 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
         worst ratio.
         """,
 
-        unsigned_int.const.p.IN("pnIB", "the index buffer whose efficiency should be measured. Must be a triangle list."),
-        AutoSize(3, "pnIB")..unsigned_int.IN("nFaces", "the number of faces in the index buffer. This must be non-zero and less than #MAX_FACES."),
-        unsigned_int.IN(
+        unsigned_int.const.p("pnIB", "the index buffer whose efficiency should be measured. Must be a triangle list."),
+        AutoSize(3, "pnIB")..unsigned_int("nFaces", "the number of faces in the index buffer. This must be non-zero and less than #MAX_FACES."),
+        unsigned_int(
             "nCacheSize",
             "the number of vertices that will fit in cache. If the application doesn't know or care, it should use #DEFAULT_VCACHE_SIZE."
         ),
@@ -425,21 +426,21 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
 
         MultiType(
             PointerMapping.DATA_FLOAT
-        )..void.const.p.IN(
+        )..void.const.p(
             "pVB",
             """
             a pointer to the vertex buffer. The pointer {@code pVB} must point to the vertex position. The vertex position must be a 3-component floating point
             value (X,Y,Z).
             """
         ),
-        unsigned_int.const.p.IN("pnIB", "the index buffer. Must be a triangle list."),
-        AutoSizeDiv("nVBStride", "pVB")..unsigned_int.IN("nVertices", "the number of vertices. This must be non-zero and less than #MAX_VERTICES."),
-        AutoSize(3, "pnIB")..unsigned_int.IN("nFaces", "the number of indices. This must be non-zero and less than #MAX_FACES."),
-        unsigned_int.IN(
+        unsigned_int.const.p("pnIB", "the index buffer. Must be a triangle list."),
+        AutoSizeDiv("nVBStride", "pVB")..unsigned_int("nVertices", "the number of vertices. This must be non-zero and less than #MAX_VERTICES."),
+        AutoSize(3, "pnIB")..unsigned_int("nFaces", "the number of indices. This must be non-zero and less than #MAX_FACES."),
+        unsigned_int(
             "nVBStride",
             "the distance between successive vertices in the vertex buffer, in bytes. This must be at least {@code 3*sizeof(float)}."
         ),
-        nullable..float.const.p.IN(
+        nullable..float.const.p(
             "pfViewpoint",
             """
             an array of viewpoints to use to measure overdraw. Each viewpoint must be a point on or in the unit sphere.  When measuring overdraw, the mesh will
@@ -447,11 +448,11 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
             at the given point looking at the origin. If this argument is #NULL, a default viewpoint set will be used.
             """
         ),
-        AutoSize(3, "pfViewpoint")..unsigned_int.IN("nViewpoints", "the number of viewpoints in the viewpoint array"),
-        TootleFaceWinding.IN("eFrontWinding", "the winding order of front-faces in the model"),
+        AutoSize(3, "pfViewpoint")..unsigned_int("nViewpoints", "the number of viewpoints in the viewpoint array"),
+        TootleFaceWinding("eFrontWinding", "the winding order of front-faces in the model"),
         Check(1)..nullable..float.p.OUT("pfAvgODOut", "a pointer to a variable to receive the average overdraw per pixel. May be #NULL."),
         Check(1)..nullable..float.p.OUT("pfMaxODOut", "a pointer to a variable to receive the maximum overdraw per pixel. May be #NULL."),
-        TootleOverdrawOptimizer.IN("eOverdrawOptimizer", "the algorithm selection for optimizing overdraw", TootleOverdrawOptimizers),
+        TootleOverdrawOptimizer("eOverdrawOptimizer", "the algorithm selection for optimizing overdraw", TootleOverdrawOptimizers),
 
         returnDoc = "one of: #OK, #OUT_OF_MEMORY, #INVALID_ARGS, #NOT_INITIALIZED"
     )
@@ -469,17 +470,17 @@ val Tootle = "Tootle".nativeClass(Module.TOOTLE, prefix = "TOOTLE", prefixMethod
 
         MultiType(
             PointerMapping.DATA_FLOAT
-        )..void.const.p.IN(
+        )..void.const.p(
             "pVB",
             """
             a pointer to the vertex buffer. The pointer {@code pVB} must point to the vertex position. The vertex position must be a 3-component floating point
             value (X,Y,Z).
             """
         ),
-        unsigned_int.const.p.IN("pnIB", "the mesh index buffer. This must be a triangle list."),
-        UseVariable..AutoSizeDiv("nVBStride", "pVB", "pVBOut")..unsigned_int.IN("nVertices", "the number of vertices in the mesh. This must be non-zero and less than #MAX_VERTICES."),
-        AutoSize(3, "pnIB", "pnIBOut")..unsigned_int.IN("nFaces", "the number of faces in the mesh. This must be non-zero and less than #MAX_FACES."),
-        unsigned_int.IN(
+        unsigned_int.const.p("pnIB", "the mesh index buffer. This must be a triangle list."),
+        UseVariable..AutoSizeDiv("nVBStride", "pVB", "pVBOut")..unsigned_int("nVertices", "the number of vertices in the mesh. This must be non-zero and less than #MAX_VERTICES."),
+        AutoSize(3, "pnIB", "pnIBOut")..unsigned_int("nFaces", "the number of faces in the mesh. This must be non-zero and less than #MAX_FACES."),
+        unsigned_int(
             "nVBStride",
             "the distance between successive vertices in the vertex buffer, in bytes. This must be at least {@code 3*sizeof(float)}."
         ),

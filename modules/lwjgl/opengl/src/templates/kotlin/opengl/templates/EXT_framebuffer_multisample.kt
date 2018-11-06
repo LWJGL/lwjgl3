@@ -57,11 +57,11 @@ val EXT_framebuffer_multisample = "EXTFramebufferMultisample".nativeClassGL("EXT
         "RenderbufferStorageMultisampleEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLsizei.IN("samples", ""),
-        GLenum.IN("internalformat", ""),
-        GLsizei.IN("width", ""),
-        GLsizei.IN("height", "")
+        GLenum("target", ""),
+        GLsizei("samples", ""),
+        GLenum("internalformat", ""),
+        GLsizei("width", ""),
+        GLsizei("height", "")
     )
 
     IntConstant(

@@ -70,8 +70,8 @@ val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_
         needed.
         """,
 
-        nullable..nfdchar_t.const.p.IN("filterList", "an optional filter list"),
-        nullable..nfdchar_t.const.p.IN("defaultPath", "an optional default path"),
+        nullable..nfdchar_t.const.p("filterList", "an optional filter list"),
+        nullable..nfdchar_t.const.p("defaultPath", "an optional default path"),
         Check(1)..nfdchar_t.p.p.OUT("outPath", "returns the selected file path")
     )
 
@@ -118,35 +118,36 @@ val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_
 
     charASCII.const.p(
         "GetError",
-        "Returns the last error."
+        "Returns the last error.",
+        void()
     )
 
     size_t(
         "PathSet_GetCount",
         "Returns the number of entries stored in {@code pathSet}.",
 
-        nfdpathset_t.const.p.IN("pathSet", "the path set to query")
+        nfdpathset_t.const.p("pathSet", "the path set to query")
     )
 
     nfdchar_t.p(
         "PathSet_GetPath",
         "Returns the UTF-8 path at offset {@code index}.",
 
-        nfdpathset_t.const.p.IN("pathSet", "the path set to query"),
-        size_t.IN("index", "the path offset")
+        nfdpathset_t.const.p("pathSet", "the path set to query"),
+        size_t("index", "the path offset")
     )
 
     void(
         "PathSet_Free",
         "Frees the contents of the specified path set.",
 
-        nfdpathset_t.p.IN("pathSet", "the path set")
+        nfdpathset_t.p("pathSet", "the path set")
     )
 
     NativeName("NFDi_Free")..void(
         "Free",
         "Frees memory allocated by NativeFileDialog.",
 
-        Check(1)..void.p.IN("outPath", "the string to free")
+        Check(1)..void.p("outPath", "the string to free")
     )
 }

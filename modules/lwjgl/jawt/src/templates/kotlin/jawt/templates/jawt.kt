@@ -83,7 +83,7 @@ ENABLE_WARNINGS()
         "Returns the AWT native structure.",
 
         JNI_ENV,
-        JAWT.p.IN("awt", "the target {@code JAWT} struct"),
+        JAWT.p("awt", "the target {@code JAWT} struct"),
 
         returnDoc = "{@code JNI_FALSE} if an error occurs"
     )
@@ -95,7 +95,7 @@ ENABLE_WARNINGS()
         "Locks the surface of the target component for native rendering. When finished drawing, the surface must be unlocked with #DrawingSurface_Unlock().",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface.p.IN("ds", "the surface to lock"),
+        JAWT_DrawingSurface.p("ds", "the surface to lock"),
 
         returnDoc =
         """
@@ -121,7 +121,7 @@ ENABLE_WARNINGS()
         """,
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface.p.IN("ds", "the {@link JAWTDrawingSurface} to free"),
+        JAWT_DrawingSurface.p("ds", "the {@link JAWTDrawingSurface} to free"),
 
         returnDoc = "#NULL if an error has occurred."
     )
@@ -131,7 +131,7 @@ ENABLE_WARNINGS()
         "Frees the drawing surface info.",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurfaceInfo.p.IN("dsi", "the {@link JAWTDrawingSurfaceInfo} to free")
+        JAWT_DrawingSurfaceInfo.p("dsi", "the {@link JAWTDrawingSurfaceInfo} to free")
     )
 
     void(
@@ -139,7 +139,7 @@ ENABLE_WARNINGS()
         "Unlocks the drawing surface of the target component for native rendering.",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface.p.IN("ds", "the surface to unlock")
+        JAWT_DrawingSurface.p("ds", "the surface to unlock")
     )
 
     // JAWT struct functions
@@ -154,7 +154,7 @@ ENABLE_WARNINGS()
 
         EXPLICIT_FUNCTION_ADDRESS,
         JNI_ENV,
-        jobject.IN(
+        jobject(
             "target",
             "must be a {@link java.awt.Component Component} (should be a {@link java.awt.Canvas Canvas} or {@link java.awt.Window Window} for native rendering)"
         ),
@@ -167,7 +167,7 @@ ENABLE_WARNINGS()
         "Frees the drawing surface allocated in #GetDrawingSurface().",
 
         EXPLICIT_FUNCTION_ADDRESS,
-        JAWT_DrawingSurface.p.IN("ds", "the {@link JAWTDrawingSurface} to free")
+        JAWT_DrawingSurface.p("ds", "the {@link JAWTDrawingSurface} to free")
     )
 
     void(
@@ -197,7 +197,7 @@ ENABLE_WARNINGS()
 
         EXPLICIT_FUNCTION_ADDRESS,
         JNI_ENV,
-        opaque_p.IN("platformInfo", "the native platform handle")
+        opaque_p("platformInfo", "the native platform handle")
     )
 
     // JDK 9+
@@ -213,7 +213,7 @@ ENABLE_WARNINGS()
 
         EXPLICIT_FUNCTION_ADDRESS,
         JNI_ENV,
-        opaque_p.IN("platformInfo", "the native platform handle"),
+        opaque_p("platformInfo", "the native platform handle"),
 
         since = "Java 9"
     )
@@ -235,11 +235,11 @@ ENABLE_WARNINGS()
 
         EXPLICIT_FUNCTION_ADDRESS,
         JNI_ENV,
-        Frame.IN("embeddedFrame", "the embedded frame"),
-        jint.IN("x", "the x coordinate"),
-        jint.IN("y", "the y coordinate"),
-        jint.IN("w", "the width"),
-        jint.IN("h", "the height"),
+        Frame("embeddedFrame", "the embedded frame"),
+        jint("x", "the x coordinate"),
+        jint("y", "the y coordinate"),
+        jint("w", "the width"),
+        jint("h", "the height"),
 
         since = "Java 9"
     )
@@ -254,8 +254,8 @@ ENABLE_WARNINGS()
 
         EXPLICIT_FUNCTION_ADDRESS,
         JNI_ENV,
-        Frame.IN("embeddedFrame", "the embedded frame"),
-        jboolean.IN("doActivate", "if true activates the window; otherwise, deactivates the window"),
+        Frame("embeddedFrame", "the embedded frame"),
+        jboolean("doActivate", "if true activates the window; otherwise, deactivates the window"),
 
         since = "Java 9"
     )

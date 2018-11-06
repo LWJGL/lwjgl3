@@ -157,15 +157,15 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         of objects across multiple command-queues will require the application to perform appropriate synchronization.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context"),
-        cl_device_id.IN(
+        cl_context("context", "a valid OpenCL context"),
+        cl_device_id(
             "device",
             """
             a device associated with context. It can either be in the list of devices specified when context is created using #CreateContext() or have the same
             device type as device type specified when context is created using #CreateContextFromType().
             """
         ),
-        nullable..NullTerminated..cl_command_queue_properties.const.p.IN(
+        nullable..NullTerminated..cl_command_queue_properties.const.p(
             "properties",
             """
             a list of properties for the command-queue and their corresponding values. Each property name is immediately followed by the corresponding desired
@@ -195,17 +195,17 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         "CreatePipe",
         "Creates a pipe object.",
 
-        cl_context.IN("context", "a valid OpenCL context used to create the pipe object"),
-        cl_mem_flags.IN(
+        cl_context("context", "a valid OpenCL context used to create the pipe object"),
+        cl_mem_flags(
             "flags",
             """
             a bit-field that is used to specify allocation and usage information such as the memory arena that should be used to allocate the pipe object and
             how it will be used. If value specified for flags is 0, the default is used which is #MEM_READ_WRITE.
             """
         ),
-        cl_uint.IN("pipe_packet_size", "the size in bytes of a pipe packet"),
-        cl_uint.IN("pipe_max_packets", "the pipe capacity by specifying the maximum number of packets the pipe can hold"),
-        nullable..NullTerminated..cl_pipe_properties.const.p.IN(
+        cl_uint("pipe_packet_size", "the size in bytes of a pipe packet"),
+        cl_uint("pipe_max_packets", "the pipe capacity by specifying the maximum number of packets the pipe can hold"),
+        nullable..NullTerminated..cl_pipe_properties.const.p(
             "properties",
             """
             a list of properties for the pipe and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
@@ -237,10 +237,10 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         "GetPipeInfo",
         "Queries information specific to a pipe object.",
 
-        cl_mem.IN("pipe", "the pipe object being queried"),
-        cl_pipe_info.IN("param_name", "the information to query"),
+        cl_mem("pipe", "the pipe object being queried"),
+        cl_pipe_info("param_name", "the information to query"),
         PARAM_VALUE_SIZE,
-        MultiType(PointerMapping.DATA_INT)..nullable..void.p.IN("param_value", param_value),
+        MultiType(PointerMapping.DATA_INT)..nullable..void.p("param_value", param_value),
         PARAM_VALUE_SIZE_RET,
 
         returnDoc =
@@ -286,14 +286,14 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         e.g., atomic operations if the device supports them.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context used to create the SVM buffer"),
-        cl_svm_mem_flags.IN(
+        cl_context("context", "a valid OpenCL context used to create the SVM buffer"),
+        cl_svm_mem_flags(
             "flags",
             "a bit-field that is used to specify allocation and usage information",
             "#MEM_READ_WRITE #MEM_WRITE_ONLY #MEM_READ_ONLY #MEM_SVM_FINE_GRAIN_BUFFER #MEM_SVM_ATOMICS"
         ),
-        AutoSizeResult..size_t.IN("size", "the size in bytes of the SVM buffer to be allocated"),
-        unsigned_int.IN(
+        AutoSizeResult..size_t("size", "the size in bytes of the SVM buffer to be allocated"),
+        unsigned_int(
             "alignment",
             """
             the minimum alignment in bytes that is required for the newly created buffer's memory region. It must be a power of two up to the largest data type
@@ -335,17 +335,17 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         #CreateBuffer() with {@code svm_pointer}, the buffer object must first be released before the {@code svm_pointer} is freed.
         """,
 
-        cl_context.IN("context", "a valid OpenCL context used to create the SVM buffer"),
-        Unsafe..void.p.IN("svm_pointer", "must be the value returned by a call to #SVMAlloc(). If a #NULL pointer is passed in {@code svm_pointer}, no action occurs.")
+        cl_context("context", "a valid OpenCL context used to create the SVM buffer"),
+        Unsafe..void.p("svm_pointer", "must be the value returned by a call to #SVMAlloc(). If a #NULL pointer is passed in {@code svm_pointer}, no action occurs.")
     )
 
     cl_int(
         "EnqueueSVMFree",
         "Enqueues a command to free the shared virtual memory buffer allocated using #SVMAlloc() or a shared system memory pointer.",
 
-        cl_command_queue.IN("command_queue", "a valid host command-queue"),
-        AutoSize("svm_pointers")..cl_uint.IN("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
-        void.p.p.IN(
+        cl_command_queue("command_queue", "a valid host command-queue"),
+        AutoSize("svm_pointers")..cl_uint("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
+        void.p.p(
             "svm_pointers",
             """
             the shared virtual memory pointers to be freed. Each pointer in {@code svm_pointers} that was allocated using #SVMAlloc() must have been allocated
@@ -353,7 +353,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
             function returns.
             """
         ),
-        nullable..cl_svmfree_callback.IN(
+        nullable..cl_svmfree_callback(
             "pfn_free_func",
             """
             the callback function to be called to free the SVM pointers. If pfn_free_func is #NULL, all pointers specified in {@code svm_pointers} must be
@@ -362,7 +362,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
             the OpenCL implementation will call {@code pfn_free_func} to free all the SVM pointers specified in {@code svm_pointers}.
             """
         ),
-        nullable..opaque_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_free_func} is called. {@code user_data} can be #NULL."),
+        nullable..opaque_p("user_data", "will be passed as the {@code user_data} argument when {@code pfn_free_func} is called. {@code user_data} can be #NULL."),
         NEWL,
         EWL,
         EVENT,
@@ -392,8 +392,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         {@code command_queue} was created. Otherwise the behavior is undefined.
         """,
 
-        cl_command_queue.IN("command_queue", "the host command-queue in which the read / write command will be queued"),
-        cl_bool.IN(
+        cl_command_queue("command_queue", "the host command-queue in which the read / write command will be queued"),
+        cl_bool(
             "blocking_copy",
             """
             indicates if the copy operation is <em>blocking</em> or <em>non-blocking</em>.
@@ -407,9 +407,9 @@ val CL20 = "CL20".nativeClassCL("CL20") {
             {@code dst_ptr} points to can be used by the application.
             """
         ),
-        void.p.IN("dst_ptr", "the pointer to a memory region where data is copied to"),
-        void.const.p.IN("src_ptr", "the pointer to a memory region where data is copied from"),
-        AutoSize("src_ptr", "dst_ptr")..size_t.IN("size", "the size in bytes of data being copied"),
+        void.p("dst_ptr", "the pointer to a memory region where data is copied to"),
+        void.const.p("src_ptr", "the pointer to a memory region where data is copied from"),
+        AutoSize("src_ptr", "dst_ptr")..size_t("size", "the size in bytes of data being copied"),
         NEWL,
         EWL,
         EVENT,
@@ -435,15 +435,15 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         "EnqueueSVMMemFill",
         "Enqueues a command to fill a region in memory with a pattern of a given pattern size.",
 
-        cl_command_queue.IN("command_queue", "the host command-queue in which the fill command will be queued"),
-        void.p.IN(
+        cl_command_queue("command_queue", "the host command-queue in which the fill command will be queued"),
+        void.p(
             "svm_ptr",
             """
             a pointer to a memory region that will be filled with pattern. It must be aligned to {@code pattern_size} bytes. If {@code svm_ptr} is allocated
             using #SVMAlloc() then it must be allocated from the same context from which {@code command_queue} was created. Otherwise the behavior is undefined.
             """
         ),
-        void.const.p.IN(
+        void.const.p(
             "pattern",
             """
             a pointer to the data pattern of size {@code pattern_size} in bytes. {@code pattern} will be used to fill a region in buffer starting at
@@ -454,8 +454,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
             the function returns.
             """
         ),
-        AutoSize("pattern")..size_t.IN("pattern_size", "the size of the {@code pattern} array, in bytes"),
-        AutoSize("svm_ptr")..size_t.IN("size", "the size in bytes of region being filled starting with {@code svm_ptr} and must be a multiple of {@code pattern_size}"),
+        AutoSize("pattern")..size_t("pattern_size", "the size of the {@code pattern} array, in bytes"),
+        AutoSize("svm_ptr")..size_t("size", "the size in bytes of region being filled starting with {@code svm_ptr} and must be a multiple of {@code pattern_size}"),
         NEWL,
         EWL,
         EVENT,
@@ -487,8 +487,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         is already mapped in the host address space.
         """,
 
-        cl_command_queue.IN("command_queue", "a valid host command-queue"),
-        cl_bool.IN(
+        cl_command_queue("command_queue", "a valid host command-queue"),
+        cl_bool(
             "blocking_map",
             """
             indicates if the map operation is blocking or non-blocking.
@@ -501,15 +501,15 @@ val CL20 = "CL20".nativeClassCL("CL20") {
             the map command is completed, the application can access the contents of the region specified by {@code svm_ptr} and {@code size}.
             """
         ),
-        cl_map_flags.IN("map_flags", "a bit-field"),
-        void.p.IN(
+        cl_map_flags("map_flags", "a bit-field"),
+        void.p(
             "svm_ptr",
             """
             a pointer to a memory region and {@code size} in bytes that will be updated by the host. If {@code svm_ptr} is allocated using #SVMAlloc() then it
             must be allocated from the same context from which {@code command_queue} was created. Otherwise the behavior is undefined.
             """
         ),
-        AutoSize("svm_ptr")..size_t.IN("size", "the size of the memory region to map, in bytes"),
+        AutoSize("svm_ptr")..size_t("size", "the size of the memory region to map, in bytes"),
         NEWL,
         EWL,
         EVENT,
@@ -537,8 +537,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         #EnqueueSVMMap().
         """,
 
-        cl_command_queue.IN("command_queue", "a valid host command-queue"),
-        Unsafe..void.p.IN(
+        cl_command_queue("command_queue", "a valid host command-queue"),
+        Unsafe..void.p(
             "svm_ptr",
             """
             a pointer that was specified in a previous call to #EnqueueSVMMap(). If {@code svm_ptr} is allocated using #SVMAlloc() then it must be allocated from
@@ -567,15 +567,15 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         "SetKernelArgSVMPointer",
         "Set a SVM pointer as the argument value for a specific argument of a kernel.",
 
-        cl_kernel.IN("kernel", "a valid kernel object"),
-        cl_uint.IN(
+        cl_kernel("kernel", "a valid kernel object"),
+        cl_uint(
             "arg_index",
             """
             the argument index. Arguments to the kernel are referred by indices that go from {@code 0} for the leftmost argument to {@code n - 1}, where
             {@code n} is the total number of arguments declared by a kernel.
             """
         ),
-        Unsafe..void.const.p.IN(
+        Unsafe..void.const.p(
             "arg_value",
             """
             the SVM pointer that should be used as the argument value for argument specified by {@code arg_index}. The SVM pointer specified is the value used
@@ -634,10 +634,10 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         default value used is $TRUE (system pointers might be passed); otherwise, the default is $FALSE.
         """,
 
-        cl_kernel.IN("kernel", "the kernel object being queried"),
-        cl_kernel_exec_info.IN("param_name", "the information to be passed to {@code kernel}", cl_kernel_exec_infos),
-        AutoSize("param_value")..size_t.IN("param_value_size", "the size in bytes of the memory pointed to by {@code param_value}"),
-        MultiType(PointerMapping.DATA_POINTER, PointerMapping.DATA_INT)..void.const.p.IN("param_value", "a pointer to memory where the appropriate values determined by {@code param_name} are specified"),
+        cl_kernel("kernel", "the kernel object being queried"),
+        cl_kernel_exec_info("param_name", "the information to be passed to {@code kernel}", cl_kernel_exec_infos),
+        AutoSize("param_value")..size_t("param_value_size", "the size in bytes of the memory pointed to by {@code param_value}"),
+        MultiType(PointerMapping.DATA_POINTER, PointerMapping.DATA_INT)..void.const.p("param_value", "a pointer to memory where the appropriate values determined by {@code param_name} are specified"),
 
         returnDoc =
         """
@@ -659,8 +659,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         "CreateSamplerWithProperties",
         "Creates a sampler object.",
 
-        cl_context.IN("context", "a valid OpenCL context"),
-        nullable..NullTerminated..cl_sampler_properties.const.p.IN(
+        cl_context("context", "a valid OpenCL context"),
+        nullable..NullTerminated..cl_sampler_properties.const.p(
             "sampler_properties",
             """
             a list of sampler property names and their corresponding values. Each sampler property name is immediately followed by the corresponding desired

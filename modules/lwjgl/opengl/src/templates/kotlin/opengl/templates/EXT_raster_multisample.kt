@@ -70,7 +70,7 @@ val EXT_raster_multisample = "EXTRasterMultisample".nativeClassGL("EXT_raster_mu
         number of samples).
         """,
 
-        GLuint.IN("samples", "the number of samples to be used for rasterization"),
-        GLboolean.IN("fixedsamplelocations", "if #TRUE, identical sample locations will be used for all pixels")
+        GLuint("samples", "the number of samples to be used for rasterization"),
+        GLboolean("fixedsamplelocations", "if #TRUE, identical sample locations will be used for all pixels")
     )
 }

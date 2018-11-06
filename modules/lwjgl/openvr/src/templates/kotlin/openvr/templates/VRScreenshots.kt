@@ -33,9 +33,9 @@ val VRScreenshots = "VRScreenshots".nativeClass(
         """,
 
         Check(1)..ScreenshotHandle_t.p.OUT("pOutScreenshotHandle", ""),
-        EVRScreenshotType.IN("type", "", "EVRScreenshotType_\\w+"),
-        charASCII.const.p.IN("pchPreviewFilename", ""),
-        charASCII.const.p.IN("pchVRFilename", "")
+        EVRScreenshotType("type", "", "EVRScreenshotType_\\w+"),
+        charASCII.const.p("pchPreviewFilename", ""),
+        charASCII.const.p("pchVRFilename", "")
     )
 
     EVRScreenshotError(
@@ -47,15 +47,15 @@ val VRScreenshots = "VRScreenshots".nativeClass(
         Once hooked your application will receive a #EVREventType_VREvent_RequestScreenshot event when the user presses the buttons to take a screenshot.
         """,
 
-        EVRScreenshotType.const.p.IN("pSupportedTypes", ""),
-        AutoSize("pSupportedTypes")..int.IN("numTypes", "")
+        EVRScreenshotType.const.p("pSupportedTypes", ""),
+        AutoSize("pSupportedTypes")..int("numTypes", "")
     )
 
     EVRScreenshotType(
         "GetScreenshotPropertyType",
         "When your application receives a #EVREventType_VREvent_RequestScreenshot event, call these functions to get the details of the screenshot request.",
 
-        ScreenshotHandle_t.IN("screenshotHandle", ""),
+        ScreenshotHandle_t("screenshotHandle", ""),
         Check(1)..EVRScreenshotError.p.OUT("pError", "")
     )
 
@@ -63,10 +63,10 @@ val VRScreenshots = "VRScreenshots".nativeClass(
         "GetScreenshotPropertyFilename",
         "Get the filename for the preview or vr image (see {@code EScreenshotPropertyFilenames}).",
 
-        ScreenshotHandle_t.IN("screenshotHandle", ""),
-        EVRScreenshotPropertyFilenames.IN("filenameType", "", "EVRScreenshotPropertyFilenames_\\w+"),
+        ScreenshotHandle_t("screenshotHandle", ""),
+        EVRScreenshotPropertyFilenames("filenameType", "", "EVRScreenshotPropertyFilenames_\\w+"),
         Return(RESULT, includesNT = true)..nullable..charASCII.p.OUT("pchFilename", ""),
-        AutoSize("pchFilename")..uint32_t.IN("cchFilename", ""),
+        AutoSize("pchFilename")..uint32_t("cchFilename", ""),
         Check(1)..EVRScreenshotError.p.OUT("pError", ""),
 
         returnDoc = "the size of the string"
@@ -79,8 +79,8 @@ val VRScreenshots = "VRScreenshots".nativeClass(
         shows a completion bar.
         """,
 
-        ScreenshotHandle_t.IN("screenshotHandle", ""),
-        float.IN("flProgress", "")
+        ScreenshotHandle_t("screenshotHandle", ""),
+        float("flProgress", "")
     )
 
     EVRScreenshotError(
@@ -93,8 +93,8 @@ val VRScreenshots = "VRScreenshots".nativeClass(
         """,
 
         Check(1)..ScreenshotHandle_t.p.OUT("pOutScreenshotHandle", ""),
-        charASCII.const.p.IN("pchPreviewFilename", ""),
-        charASCII.const.p.IN("pchVRFilename", "")
+        charASCII.const.p("pchPreviewFilename", ""),
+        charASCII.const.p("pchVRFilename", "")
     )
 
     EVRScreenshotError(
@@ -112,9 +112,9 @@ val VRScreenshots = "VRScreenshots".nativeClass(
         (achievement earned or something).
         """,
 
-        ScreenshotHandle_t.IN("screenshotHandle", ""),
-        EVRScreenshotType.IN("type", "", "EVRScreenshotType_\\w+"),
-        charASCII.const.p.IN("pchSourcePreviewFilename", ""),
-        charASCII.const.p.IN("pchSourceVRFilename", "")
+        ScreenshotHandle_t("screenshotHandle", ""),
+        EVRScreenshotType("type", "", "EVRScreenshotType_\\w+"),
+        charASCII.const.p("pchSourcePreviewFilename", ""),
+        charASCII.const.p("pchSourceVRFilename", "")
     )
 }

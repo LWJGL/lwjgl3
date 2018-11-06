@@ -73,15 +73,15 @@ val NV_pixel_data_range = "NVPixelDataRange".nativeClassGL("NV_pixel_data_range"
         "PixelDataRangeNV",
         "",
 
-        GLenum.IN("target", ""),
-        AutoSize("pointer")..GLsizei.IN("length", ""),
-        void.const.p.IN("pointer", "")
+        GLenum("target", ""),
+        AutoSize("pointer")..GLsizei("length", ""),
+        void.const.p("pointer", "")
     )
 
     void(
         "FlushPixelDataRangeNV",
         "",
 
-        GLenum.IN("target", "")
+        GLenum("target", "")
     )
 }

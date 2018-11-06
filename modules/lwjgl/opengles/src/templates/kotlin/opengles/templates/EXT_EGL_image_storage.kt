@@ -29,17 +29,17 @@ val EXT_EGL_image_storage = "EXTEGLImageStorage".nativeClassGLES("EXT_EGL_image_
         "EGLImageTargetTexStorageEXT",
         "",
 
-        GLenum.IN("target", ""),
-        GLeglImageOES.IN("image", ""),
-        nullable..NullTerminated..int.const.p.IN("attrib_list", "")
+        GLenum("target", ""),
+        GLeglImageOES("image", ""),
+        nullable..NullTerminated..int.const.p("attrib_list", "")
     )
 
     DependsOn("caps.hasDSA(ext)")..void(
         "EGLImageTargetTextureStorageEXT",
         "",
 
-        GLuint.IN("texture", ""),
-        GLeglImageOES.IN("image", ""),
-        nullable..NullTerminated..int.const.p.IN("attrib_list", "")
+        GLuint("texture", ""),
+        GLeglImageOES("image", ""),
+        nullable..NullTerminated..int.const.p("attrib_list", "")
     )
 }

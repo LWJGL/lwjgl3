@@ -122,9 +122,9 @@ val nk_plugin_alloc = Module.NUKLEAR.callback {
         "NkPluginAlloc",
         "",
 
-        nk_handle_in_callback.IN("handle", ""),
-        opaque_p.IN("old", ""),
-        nk_size.IN("size", ""),
+        nk_handle_in_callback("handle", ""),
+        opaque_p("old", ""),
+        nk_size("size", ""),
 
         nativeType = "nk_plugin_alloc"
     )
@@ -135,8 +135,8 @@ val nk_plugin_free = Module.NUKLEAR.callback {
         "NkPluginFree",
         "",
 
-        nk_handle_in_callback.IN("handle", ""),
-        opaque_p.IN("old", ""),
+        nk_handle_in_callback("handle", ""),
+        opaque_p("old", ""),
 
         nativeType = "nk_plugin_free"
     )
@@ -239,8 +239,8 @@ val nk_plugin_filter = Module.NUKLEAR.callback {
         "NkPluginFilter",
         "",
 
-        _nk_text_edit.const.p.IN("edit", ""),
-        nk_rune.IN("unicode", ""),
+        _nk_text_edit.const.p("edit", ""),
+        nk_rune("unicode", ""),
 
         nativeType = "nk_plugin_filter"
     ) {
@@ -253,8 +253,8 @@ val nk_plugin_paste = Module.NUKLEAR.callback {
         "NkPluginPaste",
         "",
 
-        nk_handle_in_callback.IN("handle", ""),
-        _nk_text_edit.p.IN("edit", ""),
+        nk_handle_in_callback("handle", ""),
+        _nk_text_edit.p("edit", ""),
 
         nativeType = "nk_plugin_paste"
     ) {
@@ -267,9 +267,9 @@ val nk_plugin_copy = Module.NUKLEAR.callback {
         "NkPluginCopy",
         "",
 
-        nk_handle_in_callback.IN("handle", ""),
-        charUTF8.const.p.IN("text", ""),
-        int.IN("len", ""),
+        nk_handle_in_callback("handle", ""),
+        charUTF8.const.p("text", ""),
+        int("len", ""),
 
         nativeType = "nk_plugin_copy"
     ) {
@@ -342,10 +342,10 @@ val nk_text_width_f = Module.NUKLEAR.callback {
         "NkTextWidthCallback",
         "",
 
-        nk_handle_in_callback.IN("handle", ""),
-        float.IN("h", ""),
-        charUTF8.const.p.IN("text", ""),
-        int.IN("len", ""),
+        nk_handle_in_callback("handle", ""),
+        float("h", ""),
+        charUTF8.const.p("text", ""),
+        int("len", ""),
 
         nativeType = "nk_text_width_f"
     ) {
@@ -358,11 +358,11 @@ val nk_query_font_glyph_f = Module.NUKLEAR.callback {
         "NkQueryFontGlyphCallback",
         "",
 
-        nk_handle_in_callback.IN("handle", ""),
-        float.IN("font_height", ""),
-        nk_user_font_glyph.p.IN("glyph", ""),
-        nk_rune.IN("codepoint", ""),
-        nk_rune.IN("next_codepoint", ""),
+        nk_handle_in_callback("handle", ""),
+        float("font_height", ""),
+        nk_user_font_glyph.p("glyph", ""),
+        nk_rune("codepoint", ""),
+        nk_rune("next_codepoint", ""),
 
         nativeType = "nk_query_font_glyph_f"
     ) {
@@ -550,12 +550,12 @@ val nk_command_custom_callback = Module.NUKLEAR.callback {
         "NkCommandCustomCallback",
         "",
 
-        opaque_p.IN("canvas", ""),
-        short.IN("x", ""),
-        short.IN("y", ""),
-        unsigned_short.IN("w", ""),
-        unsigned_short.IN("h", ""),
-        nk_handle_in_callback.IN("callback_data", ""),
+        opaque_p("canvas", ""),
+        short("x", ""),
+        short("y", ""),
+        unsigned_short("w", ""),
+        unsigned_short("h", ""),
+        nk_handle_in_callback("callback_data", ""),
 
         nativeType = "nk_command_custom_callback"
     )
@@ -677,8 +677,8 @@ val nk_draw_begin = Module.NUKLEAR.callback {
         "NkDrawBeginCallback",
         "",
 
-        nk_command_buffer.p.IN("buffer", ""),
-        nk_handle_in_callback.IN("userdata", ""),
+        nk_command_buffer.p("buffer", ""),
+        nk_handle_in_callback("userdata", ""),
 
         nativeType = "nk_draw_begin"
     ) {
@@ -691,8 +691,8 @@ val nk_draw_end = Module.NUKLEAR.callback {
         "NkDrawEndCallback",
         "",
 
-        nk_command_buffer.p.IN("buffer", ""),
-        nk_handle_in_callback.IN("userdata", ""),
+        nk_command_buffer.p("buffer", ""),
+        nk_handle_in_callback("userdata", ""),
 
         nativeType = "nk_draw_end"
     ) {
@@ -1351,8 +1351,8 @@ val nk_value_getter = Module.NUKLEAR.callback {
         "NkValueGetter",
         "",
 
-        opaque_p.IN("userdata", ""),
-        int.IN("index", ""),
+        opaque_p("userdata", ""),
+        int("index", ""),
 
         nativeType = "nk_value_getter"
     ) {
@@ -1365,9 +1365,9 @@ val nk_item_getter = Module.NUKLEAR.callback {
         "NkItemGetter",
         "",
 
-        opaque_p.IN("userdata", ""),
-        int.IN("selected", ""),
-        charUTF8.const.p.p.IN("item", ""),
+        opaque_p("userdata", ""),
+        int("selected", ""),
+        charUTF8.const.p.p("item", ""),
 
         nativeType = "nk_item_getter"
     ) {

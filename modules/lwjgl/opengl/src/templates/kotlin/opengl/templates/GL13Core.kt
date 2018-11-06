@@ -59,95 +59,95 @@ val GL13C = "GL13C".nativeClassGL("GL13C") {
         "CompressedTexImage3D",
         "Specifies a three-dimensional texture image in a compressed format.",
 
-        GLenum.IN("target", "the target texture", "$TEXTURE_3D_TARGETS $PROXY_TEXTURE_3D_TARGETS"),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
-        GLsizei.IN("width", "the width of the texture image"),
-        GLsizei.IN("height", "the height of the texture image"),
-        GLsizei.IN("depth", "the depth of the texture image"),
-        GLint.IN("border", "must be 0"),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("data", "a pointer to the compressed image data")
+        GLenum("target", "the target texture", "$TEXTURE_3D_TARGETS $PROXY_TEXTURE_3D_TARGETS"),
+        GLint("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
+        GLenum("internalformat", "the format of the compressed image data", CompressTexImageFormats),
+        GLsizei("width", "the width of the texture image"),
+        GLsizei("height", "the height of the texture image"),
+        GLsizei("depth", "the depth of the texture image"),
+        GLint("border", "must be 0"),
+        AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
         "CompressedTexImage2D",
         "Specifies a two-dimensional texture image in a compressed format.",
 
-        GLenum.IN("target", "the target texture", "$TEXTURE_2D_TARGETS $PROXY_TEXTURE_2D_TARGETS"),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
-        GLsizei.IN("width", "the width of the texture image"),
-        GLsizei.IN("height", "the height of the texture image"),
-        GLint.IN("border", "must be 0"),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("data", "a pointer to the compressed image data")
+        GLenum("target", "the target texture", "$TEXTURE_2D_TARGETS $PROXY_TEXTURE_2D_TARGETS"),
+        GLint("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
+        GLenum("internalformat", "the format of the compressed image data", CompressTexImageFormats),
+        GLsizei("width", "the width of the texture image"),
+        GLsizei("height", "the height of the texture image"),
+        GLint("border", "must be 0"),
+        AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
         "CompressedTexImage1D",
         "Specifies a one-dimensional texture image in a compressed format.",
 
-        GLenum.IN("target", "the target texture", "#TEXTURE_1D #PROXY_TEXTURE_1D"),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
-        GLsizei.IN("width", "the width of the texture image"),
-        GLint.IN("border", "must be 0"),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..nullable..void.const.p.IN("data", "a pointer to the compressed image data")
+        GLenum("target", "the target texture", "#TEXTURE_1D #PROXY_TEXTURE_1D"),
+        GLint("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
+        GLenum("internalformat", "the format of the compressed image data", CompressTexImageFormats),
+        GLsizei("width", "the width of the texture image"),
+        GLint("border", "must be 0"),
+        AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+        PIXEL_UNPACK_BUFFER..nullable..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
         "CompressedTexSubImage3D",
         "Respecifies only a cubic subregion of an existing 3D texel array, with incoming data stored in a specific compressed image format.",
 
-        GLenum.IN("target", "the target texture", TEXTURE_3D_TARGETS),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLint.IN("xoffset", "a texel offset in the x direction within the texture array"),
-        GLint.IN("yoffset", "a texel offset in the y direction within the texture array"),
-        GLint.IN("zoffset", "a texel offset in the z direction within the texture array"),
-        GLsizei.IN("width", "the width of the texture subimage"),
-        GLsizei.IN("height", "the height of the texture subimage"),
-        GLsizei.IN("depth", "the depth of the texture subimage"),
-        GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
+        GLenum("target", "the target texture", TEXTURE_3D_TARGETS),
+        GLint("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
+        GLint("xoffset", "a texel offset in the x direction within the texture array"),
+        GLint("yoffset", "a texel offset in the y direction within the texture array"),
+        GLint("zoffset", "a texel offset in the z direction within the texture array"),
+        GLsizei("width", "the width of the texture subimage"),
+        GLsizei("height", "the height of the texture subimage"),
+        GLsizei("depth", "the depth of the texture subimage"),
+        GLenum("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
+        AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+        PIXEL_UNPACK_BUFFER..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
         "CompressedTexSubImage2D",
         "Respecifies only a rectangular subregion of an existing 2D texel array, with incoming data stored in a specific compressed image format.",
 
-        GLenum.IN("target", "the target texture", TEXTURE_2D_TARGETS),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLint.IN("xoffset", "a texel offset in the x direction within the texture array"),
-        GLint.IN("yoffset", "a texel offset in the y direction within the texture array"),
-        GLsizei.IN("width", "the width of the texture subimage"),
-        GLsizei.IN("height", "the height of the texture subimage"),
-        GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
+        GLenum("target", "the target texture", TEXTURE_2D_TARGETS),
+        GLint("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
+        GLint("xoffset", "a texel offset in the x direction within the texture array"),
+        GLint("yoffset", "a texel offset in the y direction within the texture array"),
+        GLsizei("width", "the width of the texture subimage"),
+        GLsizei("height", "the height of the texture subimage"),
+        GLenum("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
+        AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+        PIXEL_UNPACK_BUFFER..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
         "CompressedTexSubImage1D",
         "Respecifies only a subregion of an existing 1D texel array, with incoming data stored in a specific compressed image format.",
 
-        GLenum.IN("target", "the target texture", "#TEXTURE_1D"),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-        GLint.IN("xoffset", "a texel offset in the x direction within the texture array"),
-        GLsizei.IN("width", "the width of the texture subimage"),
-        GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
-        AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-        PIXEL_UNPACK_BUFFER..void.const.p.IN("data", "a pointer to the compressed image data")
+        GLenum("target", "the target texture", "#TEXTURE_1D"),
+        GLint("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
+        GLint("xoffset", "a texel offset in the x direction within the texture array"),
+        GLsizei("width", "the width of the texture subimage"),
+        GLenum("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
+        AutoSize("data")..GLsizei("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+        PIXEL_UNPACK_BUFFER..void.const.p("data", "a pointer to the compressed image data")
     )
 
     void(
         "GetCompressedTexImage",
         "Returns a compressed texture image.",
 
-        GLenum.IN("target", "the target texture", "#TEXTURE_1D $TEXTURE_2D_FACE_TARGETS $TEXTURE_3D_TARGETS"),
-        GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
+        GLenum("target", "the target texture", "#TEXTURE_1D $TEXTURE_2D_FACE_TARGETS $TEXTURE_3D_TARGETS"),
+        GLint("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
         Check(
             expression = "GL11.glGetTexLevelParameteri(target, level, GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
         )..PIXEL_PACK_BUFFER..void.p.OUT("pixels", "a buffer in which to return the compressed texture image")
@@ -240,8 +240,8 @@ val GL13C = "GL13C".nativeClassGL("GL13C") {
         samples per pixel. Each sample contains color, depth, and stencil information, allowing those operations to be performed on each sample.
         """,
 
-        GLfloat.IN("value", "a sample coverage value. The value is clamped to the range [0, 1]. The initial value is 1.0."),
-        GLboolean.IN("invert", "if the coverage masks should be inverted. The initial value is false.")
+        GLfloat("value", "a sample coverage value. The value is clamped to the range [0, 1]. The initial value is 1.0."),
+        GLboolean("invert", "if the coverage masks should be inverted. The initial value is false.")
     )
 
     // ARB_multitexture
@@ -296,7 +296,7 @@ val GL13C = "GL13C".nativeClassGL("GL13C") {
         dependent.
         """,
 
-        GLenum.IN("texture", "which texture unit to make active", "#TEXTURE0 GL_TEXTURE[1-31]")
+        GLenum("texture", "which texture unit to make active", "#TEXTURE0 GL_TEXTURE[1-31]")
     )
 
     // ARB_texture_border_clamp

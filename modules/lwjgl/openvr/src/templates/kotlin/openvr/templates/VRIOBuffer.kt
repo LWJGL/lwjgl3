@@ -21,10 +21,10 @@ val VRIOBuffer = "VRIOBuffer".nativeClass(
         "Open",
         "Opens an existing or creates a new {@code IOBuffer} of {@code unSize} bytes.",
 
-        charASCII.const.p.IN("pchPath", ""),
-        EIOBufferMode.IN("mode", "", "EIOBufferMode_\\w+"),
-        uint32_t.IN("unElementSize", ""),
-        uint32_t.IN("unElements", ""),
+        charASCII.const.p("pchPath", ""),
+        EIOBufferMode("mode", "", "EIOBufferMode_\\w+"),
+        uint32_t("unElementSize", ""),
+        uint32_t("unElements", ""),
         Check(1)..IOBufferHandle_t.p.OUT("pulBuffer", "")
     )
 
@@ -32,16 +32,16 @@ val VRIOBuffer = "VRIOBuffer".nativeClass(
         "Close",
         "Closes a previously opened or created buffer.",
 
-        IOBufferHandle_t.IN("ulBuffer", "")
+        IOBufferHandle_t("ulBuffer", "")
     )
 
     EIOBufferError(
         "Read",
         "Reads up to {@code unBytes} from buffer into {@code *pDst}, returning number of bytes read in {@code *punRead}",
 
-        IOBufferHandle_t.IN("ulBuffer", ""),
+        IOBufferHandle_t("ulBuffer", ""),
         void.p.OUT("pDst", ""),
-        AutoSize("pDst")..uint32_t.IN("unBytes", ""),
+        AutoSize("pDst")..uint32_t("unBytes", ""),
         Check(1)..uint32_t.p.OUT("punRead", "")
     )
 
@@ -49,15 +49,15 @@ val VRIOBuffer = "VRIOBuffer".nativeClass(
         "Write",
         "Writes {@code unBytes} of data from {@code *pSrc} into a buffer.",
 
-        IOBufferHandle_t.IN("ulBuffer", ""),
+        IOBufferHandle_t("ulBuffer", ""),
         void.p.OUT("pSrc", ""),
-        AutoSize("pSrc")..uint32_t.IN("unBytes", "")
+        AutoSize("pSrc")..uint32_t("unBytes", "")
     )
 
     PropertyContainerHandle_t(
         "PropertyContainer",
         "Retrieves the property container of a buffer.",
 
-        IOBufferHandle_t.IN("ulBuffer", "")
+        IOBufferHandle_t("ulBuffer", "")
     )
 }

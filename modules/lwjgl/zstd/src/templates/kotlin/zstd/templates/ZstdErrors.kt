@@ -50,13 +50,13 @@ ENABLE_WARNINGS()""")*/
         "getErrorCode",
         "",
 
-        size_t.IN("functionResult", "")
+        size_t("functionResult", "")
     )
 
     Nonnull..charASCII.const.p(
         "getErrorString",
         "",
 
-        ZSTD_ErrorCode.IN("code", "")
+        ZSTD_ErrorCode("code", "")
     )
 }

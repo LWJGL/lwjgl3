@@ -35,10 +35,10 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
         "BufferPageCommitmentARB",
         "Commit and de-commits regions of sparse buffer storage.",
 
-        GLenum.IN("target", "buffer object target", BUFFER_OBJECT_TARGETS),
-        GLintptr.IN("offset", "the region offset. Must be an integer multiple of the implementation dependent constant #SPARSE_BUFFER_PAGE_SIZE_ARB."),
-        GLsizeiptr.IN("size", "the data size. must either be a multiple of #SPARSE_BUFFER_PAGE_SIZE_ARB, or extend to the end of the buffer's data store."),
-        GLboolean.IN(
+        GLenum("target", "buffer object target", BUFFER_OBJECT_TARGETS),
+        GLintptr("offset", "the region offset. Must be an integer multiple of the implementation dependent constant #SPARSE_BUFFER_PAGE_SIZE_ARB."),
+        GLsizeiptr("size", "the data size. must either be a multiple of #SPARSE_BUFFER_PAGE_SIZE_ARB, or extend to the end of the buffer's data store."),
+        GLboolean(
             "commit",
             """
             If true, then pages contained in the specified range become committed and become physically backed. If false, then physical storage associated with
@@ -52,19 +52,19 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
         "NamedBufferPageCommitmentEXT",
         "Direct-state-access version of #BufferPageCommitmentARB().",
 
-        GLuint.IN("buffer", "the buffer object"),
-        GLintptr.IN("offset", "the region offset. Must be an integer multiple of the implementation dependent constant #SPARSE_BUFFER_PAGE_SIZE_ARB."),
-        GLsizeiptr.IN("size", "the data size. must either be a multiple of #SPARSE_BUFFER_PAGE_SIZE_ARB, or extend to the end of the buffer's data store."),
-        GLboolean.IN("commit", "the commit state")
+        GLuint("buffer", "the buffer object"),
+        GLintptr("offset", "the region offset. Must be an integer multiple of the implementation dependent constant #SPARSE_BUFFER_PAGE_SIZE_ARB."),
+        GLsizeiptr("size", "the data size. must either be a multiple of #SPARSE_BUFFER_PAGE_SIZE_ARB, or extend to the end of the buffer's data store."),
+        GLboolean("commit", "the commit state")
     )
 
     DependsOn("GL_ARB_direct_state_access")..IgnoreMissing..void(
         "NamedBufferPageCommitmentARB",
         "Direct-state-access version of #BufferPageCommitmentARB().",
 
-        GLuint.IN("buffer", "the buffer object"),
-        GLintptr.IN("offset", "the region offset. Must be an integer multiple of the implementation dependent constant #SPARSE_BUFFER_PAGE_SIZE_ARB."),
-        GLsizeiptr.IN("size", "the data size. must either be a multiple of #SPARSE_BUFFER_PAGE_SIZE_ARB, or extend to the end of the buffer's data store."),
-        GLboolean.IN("commit", "the commit state")
+        GLuint("buffer", "the buffer object"),
+        GLintptr("offset", "the region offset. Must be an integer multiple of the implementation dependent constant #SPARSE_BUFFER_PAGE_SIZE_ARB."),
+        GLsizeiptr("size", "the data size. must either be a multiple of #SPARSE_BUFFER_PAGE_SIZE_ARB, or extend to the end of the buffer's data store."),
+        GLboolean("commit", "the commit state")
     )
 }

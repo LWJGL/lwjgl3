@@ -21,12 +21,12 @@ val AL_EXT_static_buffer = "EXTStaticBuffer".nativeClassAL("EXT_static_buffer") 
         "BufferDataStatic",
         "Sets the sample data of the specified buffer.",
 
-        ALint.IN("buffer", "the buffer handle"),
-        ALenum.IN("format", "the data format"),
+        ALint("buffer", "the buffer handle"),
+        ALenum("format", "the data format"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..ALvoid.p.IN("data", "the sample data"),
-        AutoSize("data")..ALsizei.IN("len", "the data buffer size, in bytes"),
-        ALsizei.IN("freq", "the data frequency")
+        )..ALvoid.p("data", "the sample data"),
+        AutoSize("data")..ALsizei("len", "the data buffer size, in bytes"),
+        ALsizei("freq", "the data frequency")
     )
 }

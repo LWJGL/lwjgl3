@@ -37,9 +37,9 @@ val EXT_blend_color = "EXTBlendColor".nativeClassGL("EXT_blend_color", postfix =
         "BlendColorEXT",
         "",
 
-        GLfloat.IN("red", ""),
-        GLfloat.IN("green", ""),
-        GLfloat.IN("blue", ""),
-        GLfloat.IN("alpha", "")
+        GLfloat("red", ""),
+        GLfloat("green", ""),
+        GLfloat("blue", ""),
+        GLfloat("alpha", "")
     )
 }

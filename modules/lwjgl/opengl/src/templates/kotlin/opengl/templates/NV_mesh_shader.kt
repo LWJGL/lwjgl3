@@ -120,33 +120,33 @@ val NV_mesh_shader = "NVMeshShader".nativeClassGL("NV_mesh_shader", postfix = NV
         "DrawMeshTasksNV",
         "",
 
-        GLuint.IN("first", ""),
-        GLuint.IN("count", "")
+        GLuint("first", ""),
+        GLuint("count", "")
     )
 
     void(
         "DrawMeshTasksIndirectNV",
         "",
 
-        GLintptr.IN("indirect", "")
+        GLintptr("indirect", "")
     )
 
     void(
         "MultiDrawMeshTasksIndirectNV",
         "",
 
-        GLintptr.IN("indirect", ""),
-        GLsizei.IN("drawcount", ""),
-        GLsizei.IN("stride", "")
+        GLintptr("indirect", ""),
+        GLsizei("drawcount", ""),
+        GLsizei("stride", "")
     )
 
     void(
         "MultiDrawMeshTasksIndirectCountNV",
         "",
 
-        GLintptr.IN("indirect", ""),
-        GLintptr.IN("drawcount", ""),
-        GLsizei.IN("maxdrawcount", ""),
-        GLsizei.IN("stride", "")
+        GLintptr("indirect", ""),
+        GLintptr("drawcount", ""),
+        GLsizei("maxdrawcount", ""),
+        GLsizei("stride", "")
     )
 }
