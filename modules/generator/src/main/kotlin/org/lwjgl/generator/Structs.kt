@@ -77,12 +77,6 @@ open class StructMember(
     }
 }
 
-internal class StructMemberBuffer(
-    nativeType: PointerType<*>,
-    name: String,
-    documentation: String
-) : StructMember(nativeType, name, documentation)
-
 private open class StructMemberArray(
     nativeType: DataType,
     name: String,
@@ -92,11 +86,9 @@ private open class StructMemberArray(
     /** Number of pointer elements that must not be null. */
     val validSize: String
 ) : StructMember(nativeType, name, documentation) {
-
     val primitiveMapping get() = this.nativeType.let {
         if (it is PointerType<*>) PrimitiveMapping.POINTER else it.mapping as PrimitiveMapping
     }
-
 }
 
 private class StructMemberPadding(size: String, val condition: String?) : StructMemberArray(char, ANONYMOUS, "", size, size) {
@@ -229,13 +221,8 @@ class Struct(
         return member
     }
 
-    // Struct member
+    // Plain struct member
     fun DataType.member(name: String, documentation: String) = add(StructMember(this, name, documentation))
-
-    // Points to an array of structs, not a single struct
-    fun PointerType<StructType>.buffer(name: String, documentation: String): StructMember {
-        return add(StructMemberBuffer(this, name, documentation))
-    }
 
     // Converts a plain member to an array member
     operator fun StructMember.get(size: Int, validSize: Int = size): StructMember {
@@ -281,6 +268,10 @@ class Struct(
                 println("\n$t$it")
             }
     }
+
+    /** A pointer-to-struct member points to an array of structs, rather than a single struct. */
+    private val StructMember.isStructBuffer
+        get() = getReferenceMember<AutoSizeMember>(this.name) != null || this.has<UnsafeMember>()
 
     /** The nested struct's members are embedded in the parent struct. */
     private val StructMember.isNestedStruct
@@ -534,9 +525,6 @@ $indentation}"""
 
                         if (!bufferParam.nativeType.isPointerData)
                             it.error("Reference must not be a opaque pointer: AutoSize($reference)")
-
-                        if ((bufferParam.nativeType as PointerType<*>).elementType is StructType && bufferParam !is StructMemberBuffer)
-                            it.error("Reference must be a struct buffer: AutoSize($reference)")
                     } else if (autoSize.optional || autoSize.atLeastOne)
                         it.error("Optional cannot be used with array references: AutoSize($reference)")
 
@@ -1246,7 +1234,7 @@ ${validations.joinToString("\n")}
                                 it.primitiveMapping.toPointer.javaMethodName
                         } else if (it.nativeType is PointerType<*> && it.nativeType.elementType is StructType) {
                             val structType = it.nativeType.javaMethodType
-                            if (it is StructMemberBuffer)
+                            if (it.isStructBuffer)
                                 "$structType.Buffer"
                             else
                                 structType
@@ -1483,7 +1471,7 @@ ${validations.joinToString("\n")}
                 } else if (it.nativeType.isPointerData) {
                     val paramType = it.nativeType.javaMethodType
                     if (it.nativeType.dereference is StructType) {
-                        if (it is StructMemberBuffer) {
+                        if (it.isStructBuffer) {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter($paramType.Buffer) $setter}. */")
                             print("${t}public static void n$setter(long $STRUCT, ${it.nullable("$paramType.Buffer")} value) { memPutAddress($STRUCT + $field, ${it.addressValue});")
@@ -1611,7 +1599,7 @@ ${validations.joinToString("\n")}
                     println("${indent}public $returnType $setter(${it.annotate("ByteBuffer")} value) { $n$setter($ADDRESS, value); return this; }")
                 } else if (it.nativeType.isPointerData) {
                     val pointerType = it.nativeType.javaMethodType
-                    if (it is StructMemberBuffer) {
+                    if ((it.nativeType as PointerType<*>).elementType is StructType && it.isStructBuffer) {
                         println("$indent/** Sets the address of the specified {@link $pointerType.Buffer} to the {@code $member} field. */")
                         if (overrides) println("$indent@Override")
                         println("${indent}public $returnType $setter(${it.annotate("$pointerType.Buffer")} value) { $n$setter($ADDRESS, value); return this; }")
@@ -1739,7 +1727,7 @@ ${validations.joinToString("\n")}
                     if (it.nativeType.dereference is StructType) {
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter}. */")
-                        println(if (it is StructMemberBuffer) {
+                        println(if (it.isStructBuffer) {
                             val capacity = getReferenceMember<AutoSizeMember>(it.name)
                             if (capacity == null)
                                 "$t${it.nullable("public")} static $returnType.Buffer n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }"
@@ -1869,7 +1857,7 @@ ${validations.joinToString("\n")}
                 } else if (it.nativeType.isPointerData) {
                     val returnType = it.nativeType.javaMethodType
                     if (it.nativeType.dereference is StructType) {
-                        if (it is StructMemberBuffer) {
+                        if (it.isStructBuffer) {
                             if (getReferenceMember<AutoSizeMember>(it.name) == null) {
                                 println("""$indent/**
 $indent * Returns a {@link $returnType.Buffer} view of the struct array pointed to by the {@code $member} field.
@@ -2009,6 +1997,9 @@ EXTERN_C_EXIT""")
 
     /** Marks a pointer member as nullable. */
     val nullable get() = NullableMember
+
+    /** Marks a pointer to struct member as Unsafe (mapped to .Buffer). */
+    val Unsafe get() = UnsafeMember
 }
 
 fun struct(

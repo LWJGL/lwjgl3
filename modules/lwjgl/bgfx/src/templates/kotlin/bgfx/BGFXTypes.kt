@@ -173,10 +173,10 @@ val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t",
     uint16_t.member("textHeight", "debug text height in characters")
 
     AutoSize("viewStats")..uint16_t.member("numViews", "number of view stats")
-    bgfx_view_stats_t.p.buffer("viewStats", "array of view stats")
+    bgfx_view_stats_t.p.member("viewStats", "array of view stats")
 
     AutoSize("encoderStats")..uint16_t.member("numEncoder", "number of encoders used during frame")
-    bgfx_encoder_stats_t.p.buffer("encoderStats", "array of encoder stats")
+    bgfx_encoder_stats_t.p.member("encoderStats", "array of encoder stats")
 }
 
 val bgfx_vertex_decl_t = struct(Module.BGFX, "BGFXVertexDecl", nativeName = "bgfx_vertex_decl_t") {

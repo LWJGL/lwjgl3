@@ -132,7 +132,7 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
         'jpeg'). E.g. 'dds\0', 'pcx\0', 'jpg\0'. All characters are lower-case. The fourth character will always be '\0'.
         """
     )[4]
-    aiTexel.p.buffer(
+    Unsafe..aiTexel.p.member(
         "pcData",
         """
         Data of the texture. Points to an array of {@code mWidth * mHeight} ##AITexel's. The format of the texture data is always ARGB8888 to make the
@@ -205,8 +205,8 @@ val aiMetadataEntry = struct(Module.ASSIMP, "AIMetaDataEntry", nativeName = "str
 
 val aiMetadata = struct(Module.ASSIMP, "AIMetaData", nativeName = "struct aiMetadata") {
     AutoSize("mKeys", "mValues")..unsigned_int.member("mNumProperties", "Length of the {@code mKeys} and {@code mValues} arrays, respectively")
-    aiString.p.buffer("mKeys", "Arrays of keys, may not be #NULL. Entries in this array may not be #NULL as well.")
-    aiMetadataEntry.p.buffer(
+    aiString.p.member("mKeys", "Arrays of keys, may not be #NULL. Entries in this array may not be #NULL as well.")
+    aiMetadataEntry.p.member(
         "mValues",
         "Arrays of values, may not be #NULL. Entries in this array may be #NULL if the corresponding property key has no assigned value."
     )
@@ -273,7 +273,7 @@ val aiBone = struct(Module.ASSIMP, "AIBone", nativeName = "struct aiBone") {
         "mNumWeights",
         "the number of vertices affected by this bone. The maximum value for this member is #AI_MAX_BONE_WEIGHTS."
     )
-    aiVertexWeight.p.buffer("mWeights", "the influence weights of this bone, by vertex index")
+    aiVertexWeight.p.member("mWeights", "the influence weights of this bone, by vertex index")
     aiMatrix4x4.member(
         "mOffsetMatrix",
         """
@@ -297,7 +297,7 @@ val aiAnimMesh = struct(Module.ASSIMP, "AIAnimMesh", nativeName = "struct aiAnim
         {@code aiMeshAnim}, which references singular mesh attachments by their ID and binds them to a time offset.
         """
 
-    nullable..aiVector3D.p.buffer(
+    nullable..aiVector3D.p.member(
         "mVertices",
         """
         Replacement for ##AIMesh{@code ::mVertices}. If this array is non-#NULL, it *must* contain {@code mNumVertices} entries. The corresponding array in the
@@ -305,9 +305,9 @@ val aiAnimMesh = struct(Module.ASSIMP, "AIAnimMesh", nativeName = "struct aiAnim
         corresponding source array is not, the source data is taken instead).
         """
     )
-    nullable..aiVector3D.p.buffer("mNormals", "Replacement for ##AIMesh{@code ::mNormals}.")
-    nullable..aiVector3D.p.buffer("mTangents", "Replacement for ##AIMesh{@code ::mTangents}.")
-    nullable..aiVector3D.p.buffer("mBitangents", "Replacement for ##AIMesh{@code ::mBitangents}.")
+    nullable..aiVector3D.p.member("mNormals", "Replacement for ##AIMesh{@code ::mNormals}.")
+    nullable..aiVector3D.p.member("mTangents", "Replacement for ##AIMesh{@code ::mTangents}.")
+    nullable..aiVector3D.p.member("mBitangents", "Replacement for ##AIMesh{@code ::mBitangents}.")
     nullable..aiColor4D.p.member("mColors", "Replacement for ##AIMesh{@code ::mColors}")["Assimp.AI_MAX_NUMBER_OF_COLOR_SETS"]
     nullable..aiVector3D.p.member("mTextureCoords", "Replacement for ##AIMesh{@code ::mTextureCoords}")["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
     AutoSize(
@@ -360,8 +360,8 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         member is #AI_MAX_FACES.
         """
     )
-    aiVector3D.p.buffer("mVertices", "Vertex positions. This array is always present in a mesh. The array is {@code mNumVertices} in size.")
-    nullable..aiVector3D.p.buffer(
+    aiVector3D.p.member("mVertices", "Vertex positions. This array is always present in a mesh. The array is {@code mNumVertices} in size.")
+    nullable..aiVector3D.p.member(
         "mNormals",
         """
         Vertex normals. The array contains normalized vectors, #NULL if not present. The array is {@code mNumVertices} in size. Normals are undefined for point
@@ -369,7 +369,7 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         triangles) may have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and set to {@code qNaN}.
         """
     )
-    nullable..aiVector3D.p.buffer(
+    nullable..aiVector3D.p.member(
         "mTangents",
         """
         Vertex tangents. The tangent of a vertex points in the direction of the positive X texture axis. The array contains normalized vectors, #NULL if not
@@ -378,7 +378,7 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         set to {@code qNaN}.
         """
     )
-    nullable..aiVector3D.p.buffer(
+    nullable..aiVector3D.p.member(
         "mBitangents",
         """
         Vertex bitangents. The bitangent of a vertex points in the direction of the positive Y texture axis. The array contains normalized vectors, #NULL if
@@ -407,7 +407,7 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         is set to 0.0f, too.
         """
     )["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
-    aiFace.p.buffer(
+    aiFace.p.member(
         "mFaces",
         """
         The faces the mesh is constructed from. Each face refers to a number of vertices by their indices. This array is always present in a mesh, its size is
@@ -574,7 +574,7 @@ val aiNodeAnim = struct(Module.ASSIMP, "AINodeAnim", nativeName = "struct aiNode
 
     aiString.member("mNodeName", "The name of the node affected by this animation. The node must exist and it must be unique.")
     AutoSize("mPositionKeys", optional = true)..unsigned_int.member("mNumPositionKeys", "The number of position keys")
-    aiVectorKey.p.buffer(
+    aiVectorKey.p.member(
         "mPositionKeys",
         """
         The position keys of this animation channel. Positions are specified as 3D vector. The array is {@code mNumPositionKeys} in size. If there are position
@@ -582,7 +582,7 @@ val aiNodeAnim = struct(Module.ASSIMP, "AINodeAnim", nativeName = "struct aiNode
         """
     )
     AutoSize("mRotationKeys", optional = true)..unsigned_int.member("mNumRotationKeys", "The number of rotation keys")
-    aiQuatKey.p.buffer(
+    aiQuatKey.p.member(
         "mRotationKeys",
         """
         The rotation keys of this animation channel. Rotations are given as quaternions,  which are 4D vectors. The array is {@code mNumRotationKeys} in size.
@@ -590,7 +590,7 @@ val aiNodeAnim = struct(Module.ASSIMP, "AINodeAnim", nativeName = "struct aiNode
         """
     )
     AutoSize("mScalingKeys", optional = true)..unsigned_int.member("mNumScalingKeys", "The number of scaling keys")
-    aiVectorKey.p.buffer(
+    aiVectorKey.p.member(
         "mScalingKeys",
         """
         The scaling keys of this animation channel. Scalings are specified as 3D vector. The array is {@code mNumScalingKeys} in size. If there are scaling
@@ -628,7 +628,7 @@ val aiMeshAnim = struct(Module.ASSIMP, "AIMeshAnim", nativeName = "struct aiMesh
         serve as wildcard to select a group of meshes with similar animation setup)
         """)
     AutoSize("mKeys")..unsigned_int.member("mNumKeys", "Size of the {@code mKeys} array. Must be 1, at least.")
-    aiMeshKey.p.buffer("mKeys", "Key frames of the animation. May not be #NULL.")
+    aiMeshKey.p.member("mKeys", "Key frames of the animation. May not be #NULL.")
 }
 
 val aiAnimation = struct(Module.ASSIMP, "AIAnimation", nativeName = "struct aiAnimation") {

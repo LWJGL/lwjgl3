@@ -54,7 +54,7 @@ val JAWT_DrawingSurfaceInfo = struct(Module.JAWT, "JAWTDrawingSurfaceInfo", nati
     JAWT_DrawingSurface.p.member("ds", "Cached pointer to the underlying drawing surface.")
     JAWT_Rectangle.member("bounds", "Bounding rectangle of the drawing surface.")
     AutoSize("clip")..jint.member("clipSize", "Number of rectangles in the clip.")
-    JAWT_Rectangle.p.buffer("clip", "Clip rectangle array.")
+    JAWT_Rectangle.p.member("clip", "Clip rectangle array.")
 }
 
 val JAWT = struct(Module.JAWT, "JAWT", skipBuffer = true, mutable = false) {

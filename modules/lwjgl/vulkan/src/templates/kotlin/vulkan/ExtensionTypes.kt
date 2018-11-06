@@ -1465,7 +1465,7 @@ val VkDeviceGroupRenderPassBeginInfoKHR = struct(Module.VULKAN, "VkDeviceGroupRe
     nullable..opaque_const_p.member("pNext", "")
     uint32_t.member("deviceMask", "")
     AutoSize("pDeviceRenderAreas", optional = true)..uint32_t.member("deviceRenderAreaCount", "")
-    VkRect2D.const.p.buffer("pDeviceRenderAreas", "")
+    VkRect2D.const.p.member("pDeviceRenderAreas", "")
 }
 
 val VkDeviceGroupCommandBufferBeginInfoKHR = struct(Module.VULKAN, "VkDeviceGroupCommandBufferBeginInfoKHR", alias = VkDeviceGroupCommandBufferBeginInfo) {
@@ -1515,7 +1515,7 @@ val VkBindImageMemoryDeviceGroupInfoKHR = struct(Module.VULKAN, "VkBindImageMemo
     AutoSize("pDeviceIndices", optional = true)..uint32_t.member("deviceIndexCount", "")
     uint32_t.const.p.member("pDeviceIndices", "")
     AutoSize("pSplitInstanceBindRegions", optional = true)..uint32_t.member("splitInstanceBindRegionCount", "")
-    VkRect2D.const.p.buffer("pSplitInstanceBindRegions", "")
+    VkRect2D.const.p.member("pSplitInstanceBindRegions", "")
 }
 
 val VkValidationFlagsEXT = struct(Module.VULKAN, "VkValidationFlagsEXT") {
@@ -2319,7 +2319,7 @@ val VkPresentRegionKHR = struct(Module.VULKAN, "VkPresentRegionKHR") {
         """
 
     AutoSize("pRectangles", optional = true)..uint32_t.member("rectangleCount", "the number of rectangles in {@code pRectangles}, or zero if the entire image has changed and should be presented.")
-    nullable..VkRectLayerKHR.const.p.buffer("pRectangles", "either {@code NULL} or a pointer to an array of ##VkRectLayerKHR structures. The ##VkRectLayerKHR structure is the framebuffer coordinates, plus layer, of a portion of a presentable image that has changed and <b>must</b> be presented. If non-{@code NULL}, each entry in {@code pRectangles} is a rectangle of the given image that has changed since the last image was presented to the given swapchain.")
+    nullable..VkRectLayerKHR.const.p.member("pRectangles", "either {@code NULL} or a pointer to an array of ##VkRectLayerKHR structures. The ##VkRectLayerKHR structure is the framebuffer coordinates, plus layer, of a portion of a presentable image that has changed and <b>must</b> be presented. If non-{@code NULL}, each entry in {@code pRectangles} is a rectangle of the given image that has changed since the last image was presented to the given swapchain.")
 }
 
 val VkPresentRegionsKHR = struct(Module.VULKAN, "VkPresentRegionsKHR") {
@@ -2346,7 +2346,7 @@ val VkPresentRegionsKHR = struct(Module.VULKAN, "VkPresentRegionsKHR") {
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pRegions", optional = true)..uint32_t.member("swapchainCount", "the number of swapchains being presented to by this command.")
-    nullable..VkPresentRegionKHR.const.p.buffer("pRegions", "{@code NULL} or a pointer to an array of ##VkPresentRegionKHR elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pRegions} contains the region that has changed since the last present to the swapchain in the corresponding entry in the ##VkPresentInfoKHR{@code ::pSwapchains} array.")
+    nullable..VkPresentRegionKHR.const.p.member("pRegions", "{@code NULL} or a pointer to an array of ##VkPresentRegionKHR elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pRegions} contains the region that has changed since the last present to the swapchain in the corresponding entry in the ##VkPresentInfoKHR{@code ::pSwapchains} array.")
 }
 
 val VkDescriptorUpdateTemplateEntryKHR = struct(Module.VULKAN, "VkDescriptorUpdateTemplateEntryKHR", alias = VkDescriptorUpdateTemplateEntry) {
@@ -2367,7 +2367,7 @@ val VkDescriptorUpdateTemplateCreateInfoKHR = struct(Module.VULKAN, "VkDescripto
     nullable..opaque_p.member("pNext", "")
     VkDescriptorUpdateTemplateCreateFlags.member("flags", "")
     AutoSize("pDescriptorUpdateEntries")..uint32_t.member("descriptorUpdateEntryCount", "")
-    VkDescriptorUpdateTemplateEntry.const.p.buffer("pDescriptorUpdateEntries", "")
+    VkDescriptorUpdateTemplateEntry.const.p.member("pDescriptorUpdateEntries", "")
     VkDescriptorUpdateTemplateType.member("templateType", "")
     VkDescriptorSetLayout.member("descriptorSetLayout", "")
     VkPipelineBindPoint.member("pipelineBindPoint", "")
@@ -2527,7 +2527,7 @@ val VkIndirectCommandsLayoutCreateInfoNVX = struct(Module.VULKAN, "VkIndirectCom
     VkPipelineBindPoint.member("pipelineBindPoint", "the {@code VkPipelineBindPoint} that this layout targets.")
     VkIndirectCommandsLayoutUsageFlagsNVX.member("flags", "a bitmask of {@code VkIndirectCommandsLayoutUsageFlagBitsNVX} specifying usage hints of this layout.")
     AutoSize("pTokens")..uint32_t.member("tokenCount", "the length of the individual command sequnce.")
-    VkIndirectCommandsLayoutTokenNVX.const.p.buffer("pTokens", "an array describing each command token in detail. See {@code VkIndirectCommandsTokenTypeNVX} and ##VkIndirectCommandsLayoutTokenNVX below for details.")
+    VkIndirectCommandsLayoutTokenNVX.const.p.member("pTokens", "an array describing each command token in detail. See {@code VkIndirectCommandsTokenTypeNVX} and ##VkIndirectCommandsLayoutTokenNVX below for details.")
 }
 
 val VkCmdProcessCommandsInfoNVX = struct(Module.VULKAN, "VkCmdProcessCommandsInfoNVX") {
@@ -2579,7 +2579,7 @@ val VkCmdProcessCommandsInfoNVX = struct(Module.VULKAN, "VkCmdProcessCommandsInf
     VkObjectTableNVX.member("objectTable", "the {@code VkObjectTableNVX} to be used for the generation process. Only registered objects at the time #CmdReserveSpaceForCommandsNVX() is called, will be taken into account for the reservation.")
     VkIndirectCommandsLayoutNVX.member("indirectCommandsLayout", "the {@code VkIndirectCommandsLayoutNVX} that provides the command sequence to generate.")
     AutoSize("pIndirectCommandsTokens")..uint32_t.member("indirectCommandsTokenCount", "defines the number of input tokens used.")
-    VkIndirectCommandsTokenNVX.const.p.buffer("pIndirectCommandsTokens", "provides an array of ##VkIndirectCommandsTokenNVX that reference the input data for each token command.")
+    VkIndirectCommandsTokenNVX.const.p.member("pIndirectCommandsTokens", "provides an array of ##VkIndirectCommandsTokenNVX that reference the input data for each token command.")
     uint32_t.member("maxSequencesCount", "the maximum number of sequences for which command buffer space will be reserved. If {@code sequencesCountBuffer} is #NULL_HANDLE, this is also the actual number of sequences generated.")
     nullable..VkCommandBuffer.member("targetCommandBuffer", "<b>can</b> be the secondary {@code VkCommandBuffer} in which the commands should be recorded. If {@code targetCommandBuffer} is {@code NULL} an implicit reservation as well as execution takes place on the processing {@code VkCommandBuffer}.")
     VkBuffer.member("sequencesCountBuffer", "<b>can</b> be {@code VkBuffer} from which the actual amount of sequences is sourced from as ftext:uint32_t value.")
@@ -2843,7 +2843,7 @@ val VkPipelineViewportWScalingStateCreateInfoNV = struct(Module.VULKAN, "VkPipel
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32.member("viewportWScalingEnable", "controls whether viewport <b>W</b> scaling is enabled.")
     AutoSize("pViewportWScalings")..uint32_t.member("viewportCount", "the number of viewports used by <b>W</b> scaling, and <b>must</b> match the number of viewports in the pipeline if viewport <b>W</b> scaling is enabled.")
-    VkViewportWScalingNV.const.p.buffer("pViewportWScalings", "a pointer to an array of ##VkViewportWScalingNV structures, which define the <b>W</b> scaling parameters for the corresponding viewport. If the viewport <b>W</b> scaling state is dynamic, this member is ignored.")
+    VkViewportWScalingNV.const.p.member("pViewportWScalings", "a pointer to an array of ##VkViewportWScalingNV structures, which define the <b>W</b> scaling parameters for the corresponding viewport. If the viewport <b>W</b> scaling state is dynamic, this member is ignored.")
 }
 
 val VkSurfaceCapabilities2EXT = struct(Module.VULKAN, "VkSurfaceCapabilities2EXT", mutable = false) {
@@ -3030,7 +3030,7 @@ val VkPresentTimesInfoGOOGLE = struct(Module.VULKAN, "VkPresentTimesInfoGOOGLE")
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pTimes", optional = true)..uint32_t.member("swapchainCount", "the number of swapchains being presented to by this command.")
-    nullable..VkPresentTimeGOOGLE.const.p.buffer("pTimes", "{@code NULL} or a pointer to an array of ##VkPresentTimeGOOGLE elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pTimes} contains the earliest time to present the image corresponding to the entry in the ##VkPresentInfoKHR{@code ::pImageIndices} array.")
+    nullable..VkPresentTimeGOOGLE.const.p.member("pTimes", "{@code NULL} or a pointer to an array of ##VkPresentTimeGOOGLE elements with {@code swapchainCount} entries. If not {@code NULL}, each element of {@code pTimes} contains the earliest time to present the image corresponding to the entry in the ##VkPresentInfoKHR{@code ::pImageIndices} array.")
 }
 
 val VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX", mutable = false) {
@@ -3099,7 +3099,7 @@ val VkPipelineViewportSwizzleStateCreateInfoNV = struct(Module.VULKAN, "VkPipeli
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkPipelineViewportSwizzleStateCreateFlagsNV.member("flags", "reserved for future use.")
     AutoSize("pViewportSwizzles", optional = true)..uint32_t.member("viewportCount", "the number of viewport swizzles used by the pipeline.")
-    nullable..VkViewportSwizzleNV.const.p.buffer("pViewportSwizzles", "a pointer to an array of ##VkViewportSwizzleNV structures, defining the viewport swizzles.")
+    nullable..VkViewportSwizzleNV.const.p.member("pViewportSwizzles", "a pointer to an array of ##VkViewportSwizzleNV structures, defining the viewport swizzles.")
 }
 
 val VkPhysicalDeviceDiscardRectanglePropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceDiscardRectanglePropertiesEXT") {
@@ -3146,7 +3146,7 @@ val VkPipelineDiscardRectangleStateCreateInfoEXT = struct(Module.VULKAN, "VkPipe
     VkPipelineDiscardRectangleStateCreateFlagsEXT.member("flags", "reserved for future use.")
     VkDiscardRectangleModeEXT.member("discardRectangleMode", "the mode used to determine whether fragments that lie within the discard rectangle are discarded or not.")
     AutoSize("pDiscardRectangles", optional = true)..uint32_t.member("discardRectangleCount", "the number of discard rectangles used by the pipeline.")
-    nullable..VkRect2D.const.p.buffer("pDiscardRectangles", "a pointer to an array of ##VkRect2D structures, defining the discard rectangles. If the discard rectangle state is dynamic, this member is ignored.")
+    nullable..VkRect2D.const.p.member("pDiscardRectangles", "a pointer to an array of ##VkRect2D structures, defining the discard rectangles. If the discard rectangle state is dynamic, this member is ignored.")
 }
 
 val VkPhysicalDeviceConservativeRasterizationPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceConservativeRasterizationPropertiesEXT") {
@@ -3365,10 +3365,10 @@ val VkSubpassDescription2KHR = struct(Module.VULKAN, "VkSubpassDescription2KHR")
     VkPipelineBindPoint.member("pipelineBindPoint", "a {@code VkPipelineBindPoint} value specifying the pipeline type supported for this subpass.")
     uint32_t.member("viewMask", "a bitfield of view indices describing which views rendering is broadcast to in this subpass, when multiview is enabled.")
     AutoSize("pInputAttachments", optional = true)..uint32_t.member("inputAttachmentCount", "the number of input attachments.")
-    VkAttachmentReference2KHR.const.p.buffer("pInputAttachments", "an array of ##VkAttachmentReference structures defining the input attachments for this subpass and their layouts.")
+    VkAttachmentReference2KHR.const.p.member("pInputAttachments", "an array of ##VkAttachmentReference structures defining the input attachments for this subpass and their layouts.")
     AutoSize("pColorAttachments", "pResolveAttachments", optional = true)..uint32_t.member("colorAttachmentCount", "the number of color attachments.")
-    VkAttachmentReference2KHR.const.p.buffer("pColorAttachments", "an array of ##VkAttachmentReference structures defining the color attachments for this subpass and their layouts.")
-    nullable..VkAttachmentReference2KHR.const.p.buffer("pResolveAttachments", "an optional array of {@code colorAttachmentCount} ##VkAttachmentReference structures defining the resolve attachments for this subpass and their layouts.")
+    VkAttachmentReference2KHR.const.p.member("pColorAttachments", "an array of ##VkAttachmentReference structures defining the color attachments for this subpass and their layouts.")
+    nullable..VkAttachmentReference2KHR.const.p.member("pResolveAttachments", "an optional array of {@code colorAttachmentCount} ##VkAttachmentReference structures defining the resolve attachments for this subpass and their layouts.")
     nullable..VkAttachmentReference2KHR.const.p.member("pDepthStencilAttachment", "a pointer to a ##VkAttachmentReference specifying the depth/stencil attachment for this subpass and its layout.")
     AutoSize("pPreserveAttachments", optional = true)..uint32_t.member("preserveAttachmentCount", "the number of preserved attachments.")
     uint32_t.const.p.member("pPreserveAttachments", "an array of {@code preserveAttachmentCount} render pass attachment indices identifying attachments that are not used by this subpass, but whose contents <b>must</b> be preserved throughout the subpass.")
@@ -3486,11 +3486,11 @@ val VkRenderPassCreateInfo2KHR = struct(Module.VULKAN, "VkRenderPassCreateInfo2K
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkRenderPassCreateFlags.member("flags", "reserved for future use.")
     AutoSize("pAttachments", optional = true)..uint32_t.member("attachmentCount", "the number of attachments used by this render pass.")
-    VkAttachmentDescription2KHR.const.p.buffer("pAttachments", "points to an array of {@code attachmentCount} ##VkAttachmentDescription2KHR structures describing the attachments used by the render pass.")
+    VkAttachmentDescription2KHR.const.p.member("pAttachments", "points to an array of {@code attachmentCount} ##VkAttachmentDescription2KHR structures describing the attachments used by the render pass.")
     AutoSize("pSubpasses")..uint32_t.member("subpassCount", "the number of subpasses to create.")
-    VkSubpassDescription2KHR.const.p.buffer("pSubpasses", "points to an array of {@code subpassCount} ##VkSubpassDescription2KHR structures describing each subpass.")
+    VkSubpassDescription2KHR.const.p.member("pSubpasses", "points to an array of {@code subpassCount} ##VkSubpassDescription2KHR structures describing each subpass.")
     AutoSize("pDependencies", optional = true)..uint32_t.member("dependencyCount", "the number of dependencies between pairs of subpasses.")
-    VkSubpassDependency2KHR.const.p.buffer("pDependencies", "points to an array of {@code dependencyCount} ##VkSubpassDependency2KHR structures describing dependencies between pairs of subpasses.")
+    VkSubpassDependency2KHR.const.p.member("pDependencies", "points to an array of {@code dependencyCount} ##VkSubpassDependency2KHR structures describing dependencies between pairs of subpasses.")
     AutoSize("pCorrelatedViewMasks", optional = true)..uint32_t.member("correlatedViewMaskCount", "the number of correlation masks.")
     uint32_t.const.p.member("pCorrelatedViewMasks", "an array of view masks indicating sets of views that <b>may</b> be more efficient to render concurrently.")
 }
@@ -3810,7 +3810,7 @@ val VkRenderPassInputAttachmentAspectCreateInfoKHR = struct(Module.VULKAN, "VkRe
     VkStructureType.member("sType", "")
     nullable..opaque_const_p.member("pNext", "")
     AutoSize("pAspectReferences")..uint32_t.member("aspectReferenceCount", "")
-    VkInputAttachmentAspectReference.const.p.buffer("pAspectReferences", "")
+    VkInputAttachmentAspectReference.const.p.member("pAspectReferences", "")
 }
 
 val VkInputAttachmentAspectReferenceKHR = struct(Module.VULKAN, "VkInputAttachmentAspectReferenceKHR", alias = VkInputAttachmentAspectReference) {
@@ -4205,11 +4205,11 @@ val VkDebugUtilsMessengerCallbackDataEXT = struct(Module.VULKAN, "VkDebugUtilsMe
     int32_t.member("messageIdNumber", "the ID number of the triggering message. If the message corresponds to a validation layer message, then this number is related to the internal number associated with the message being triggered.")
     charUTF8.const.p.member("pMessage", "a null-terminated string detailing the trigger conditions.")
     AutoSize("pQueueLabels", optional = true)..uint32_t.member("queueLabelCount", "a count of items contained in the {@code pQueueLabels} array.")
-    nullable..VkDebugUtilsLabelEXT.p.buffer("pQueueLabels", "NULL or a pointer to an array of ##VkDebugUtilsLabelEXT active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#debugging-queue-labels\">Queue Labels</a> for more information.")
+    nullable..VkDebugUtilsLabelEXT.p.member("pQueueLabels", "NULL or a pointer to an array of ##VkDebugUtilsLabelEXT active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#debugging-queue-labels\">Queue Labels</a> for more information.")
     AutoSize("pCmdBufLabels", optional = true)..uint32_t.member("cmdBufLabelCount", "a count of items contained in the {@code pCmdBufLabels} array.")
-    nullable..VkDebugUtilsLabelEXT.p.buffer("pCmdBufLabels", "NULL or a pointer to an array of ##VkDebugUtilsLabelEXT active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#debugging-command-buffer-labels\">Command Buffer Labels</a> for more information.")
+    nullable..VkDebugUtilsLabelEXT.p.member("pCmdBufLabels", "NULL or a pointer to an array of ##VkDebugUtilsLabelEXT active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#debugging-command-buffer-labels\">Command Buffer Labels</a> for more information.")
     AutoSize("pObjects")..uint32_t.member("objectCount", "a count of items contained in the {@code pObjects} array.")
-    VkDebugUtilsObjectNameInfoEXT.p.buffer("pObjects", "a pointer to an array of ##VkDebugUtilsObjectNameInfoEXT objects related to the detected issue. The array is roughly in order or importance, but the 0th element is always guaranteed to be the most important object for this message.")
+    VkDebugUtilsObjectNameInfoEXT.p.member("pObjects", "a pointer to an array of ##VkDebugUtilsObjectNameInfoEXT objects related to the detected issue. The array is roughly in order or importance, but the 0th element is always guaranteed to be the most important object for this message.")
 }
 
 val VkDebugUtilsMessengerCreateInfoEXT = struct(Module.VULKAN, "VkDebugUtilsMessengerCreateInfoEXT") {
@@ -4464,7 +4464,7 @@ val VkSampleLocationsInfoEXT = struct(Module.VULKAN, "VkSampleLocationsInfoEXT")
     VkSampleCountFlagBits.member("sampleLocationsPerPixel", "a {@code VkSampleCountFlagBits} specifying the number of sample locations per pixel.")
     VkExtent2D.member("sampleLocationGridSize", "the size of the sample location grid to select custom sample locations for.")
     AutoSize("pSampleLocations", optional = true)..uint32_t.member("sampleLocationsCount", "the number of sample locations in {@code pSampleLocations}.")
-    VkSampleLocationEXT.const.p.buffer("pSampleLocations", "an array of {@code sampleLocationsCount} ##VkSampleLocationEXT structures.")
+    VkSampleLocationEXT.const.p.member("pSampleLocations", "an array of {@code sampleLocationsCount} ##VkSampleLocationEXT structures.")
 }
 
 val VkAttachmentSampleLocationsEXT = struct(Module.VULKAN, "VkAttachmentSampleLocationsEXT") {
@@ -4538,9 +4538,9 @@ val VkRenderPassSampleLocationsBeginInfoEXT = struct(Module.VULKAN, "VkRenderPas
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pAttachmentInitialSampleLocations", optional = true)..uint32_t.member("attachmentInitialSampleLocationsCount", "the number of elements in the {@code pAttachmentInitialSampleLocations} array.")
-    VkAttachmentSampleLocationsEXT.const.p.buffer("pAttachmentInitialSampleLocations", "an array of {@code attachmentInitialSampleLocationsCount} ##VkAttachmentSampleLocationsEXT structures specifying the attachment indices and their corresponding sample location state. Each element of {@code pAttachmentInitialSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition a depth/stencil attachment from the initial layout of the attachment to the image layout specified for the attachment in the first subpass using it.")
+    VkAttachmentSampleLocationsEXT.const.p.member("pAttachmentInitialSampleLocations", "an array of {@code attachmentInitialSampleLocationsCount} ##VkAttachmentSampleLocationsEXT structures specifying the attachment indices and their corresponding sample location state. Each element of {@code pAttachmentInitialSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition a depth/stencil attachment from the initial layout of the attachment to the image layout specified for the attachment in the first subpass using it.")
     AutoSize("pPostSubpassSampleLocations", optional = true)..uint32_t.member("postSubpassSampleLocationsCount", "the number of elements in the {@code pPostSubpassSampleLocations} array.")
-    VkSubpassSampleLocationsEXT.const.p.buffer("pPostSubpassSampleLocations", "an array of {@code postSubpassSampleLocationsCount} ##VkSubpassSampleLocationsEXT structures specifying the subpass indices and their corresponding sample location state. Each element of {@code pPostSubpassSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition the depth/stencil attachment used by the specified subpass to the image layout specified in a dependent subpass or to the final layout of the attachment in case the specified subpass is the last subpass using that attachment. In addition, if ##VkPhysicalDeviceSampleLocationsPropertiesEXT{@code ::variableSampleLocations} is #FALSE, each element of {@code pPostSubpassSampleLocations} <b>must</b> specify the sample location state that matches the sample locations used by all pipelines that will be bound to a command buffer during the specified subpass. If {@code variableSampleLocations} is #TRUE, the sample locations used for rasterization do not depend on {@code pPostSubpassSampleLocations}.")
+    VkSubpassSampleLocationsEXT.const.p.member("pPostSubpassSampleLocations", "an array of {@code postSubpassSampleLocationsCount} ##VkSubpassSampleLocationsEXT structures specifying the subpass indices and their corresponding sample location state. Each element of {@code pPostSubpassSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition the depth/stencil attachment used by the specified subpass to the image layout specified in a dependent subpass or to the final layout of the attachment in case the specified subpass is the last subpass using that attachment. In addition, if ##VkPhysicalDeviceSampleLocationsPropertiesEXT{@code ::variableSampleLocations} is #FALSE, each element of {@code pPostSubpassSampleLocations} <b>must</b> specify the sample location state that matches the sample locations used by all pipelines that will be bound to a command buffer during the specified subpass. If {@code variableSampleLocations} is #TRUE, the sample locations used for rasterization do not depend on {@code pPostSubpassSampleLocations}.")
 }
 
 val VkPipelineSampleLocationsStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineSampleLocationsStateCreateInfoEXT") {
@@ -4961,7 +4961,7 @@ val VkDrmFormatModifierPropertiesListEXT = struct(Module.VULKAN, "VkDrmFormatMod
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pDrmFormatModifierProperties", optional = true)..uint32_t.member("drmFormatModifierCount", "an inout parameter related to the number of modifiers compatible with the {@code format}, as described below.")
-    nullable..VkDrmFormatModifierPropertiesEXT.p.buffer("pDrmFormatModifierProperties", "either {@code NULL} or an array of ##VkDrmFormatModifierPropertiesEXT structures.")
+    nullable..VkDrmFormatModifierPropertiesEXT.p.member("pDrmFormatModifierProperties", "either {@code NULL} or an array of ##VkDrmFormatModifierPropertiesEXT structures.")
 }
 
 val VkPhysicalDeviceImageDrmFormatModifierInfoEXT = struct(Module.VULKAN, "VkPhysicalDeviceImageDrmFormatModifierInfoEXT") {
@@ -5051,7 +5051,7 @@ val VkImageDrmFormatModifierExplicitCreateInfoEXT = struct(Module.VULKAN, "VkIma
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     uint64_t.member("drmFormatModifier", "the <em>Linux DRM format modifier</em> with which the image will be created.")
     AutoSize("pPlaneLayouts", optional = true)..uint32_t.member("drmFormatModifierPlaneCount", "the number of <em>memory planes</em> in the image (as reported by ##VkDrmFormatModifierPropertiesEXT) as well as the length of the {@code pPlaneLayouts} array.")
-    VkSubresourceLayout.const.p.buffer("pPlaneLayouts", "an array of ##VkSubresourceLayout structures that describe the image&#8217;s <em>memory planes</em>.")
+    VkSubresourceLayout.const.p.member("pPlaneLayouts", "an array of ##VkSubresourceLayout structures that describe the image&#8217;s <em>memory planes</em>.")
 }
 
 val VkImageDrmFormatModifierPropertiesEXT = struct(Module.VULKAN, "VkImageDrmFormatModifierPropertiesEXT", mutable = false) {
@@ -5343,7 +5343,7 @@ val VkPipelineViewportShadingRateImageStateCreateInfoNV = struct(Module.VULKAN, 
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32.member("shadingRateImageEnable", "specifies whether shading rate image and palettes are used during rasterization.")
     AutoSize("pShadingRatePalettes", optional = true)..uint32_t.member("viewportCount", "specifies the number of per-viewport palettes used to translate values stored in shading rate images.")
-    nullable..VkShadingRatePaletteNV.const.p.buffer("pShadingRatePalettes", "a pointer to an array of ##VkShadingRatePaletteNV structures defining the palette for each viewport. If the shading rate palette state is dynamic, this member is ignored.")
+    nullable..VkShadingRatePaletteNV.const.p.member("pShadingRatePalettes", "a pointer to an array of ##VkShadingRatePaletteNV structures defining the palette for each viewport. If the shading rate palette state is dynamic, this member is ignored.")
 }
 
 val VkPhysicalDeviceShadingRateImageFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceShadingRateImageFeaturesNV") {
@@ -5443,7 +5443,7 @@ val VkCoarseSampleOrderCustomNV = struct(Module.VULKAN, "VkCoarseSampleOrderCust
     VkShadingRatePaletteEntryNV.member("shadingRate", "a shading rate palette entry that identifies the fragment width and height for the combination of fragment area and per-pixel coverage sample count to control.")
     uint32_t.member("sampleCount", "identifies the per-pixel coverage sample count for the combination of fragment area and coverage sample count to control.")
     AutoSize("pSampleLocations")..uint32_t.member("sampleLocationCount", "specifies the number of sample locations in the custom ordering.")
-    VkCoarseSampleLocationNV.const.p.buffer("pSampleLocations", "a pointer to an array of ##VkCoarseSampleOrderCustomNV structures that specifies the location of each sample in the custom ordering.")
+    VkCoarseSampleLocationNV.const.p.member("pSampleLocations", "a pointer to an array of ##VkCoarseSampleOrderCustomNV structures that specifies the location of each sample in the custom ordering.")
 }
 
 val VkPipelineViewportCoarseSampleOrderStateCreateInfoNV = struct(Module.VULKAN, "VkPipelineViewportCoarseSampleOrderStateCreateInfoNV") {
@@ -5479,7 +5479,7 @@ val VkPipelineViewportCoarseSampleOrderStateCreateInfoNV = struct(Module.VULKAN,
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkCoarseSampleOrderTypeNV.member("sampleOrderType", "specifies the mechanism used to order coverage samples in fragments larger than one pixel.")
     AutoSize("pCustomSampleOrders", optional = true)..uint32_t.member("customSampleOrderCount", "specifies the number of custom sample orderings to use when ordering coverage samples.")
-    VkCoarseSampleOrderCustomNV.const.p.buffer("pCustomSampleOrders", "a pointer to an array of ##VkCoarseSampleOrderCustomNV structures, each of which specifies the coverage sample order for a single combination of fragment area and coverage sample count.")
+    VkCoarseSampleOrderCustomNV.const.p.member("pCustomSampleOrders", "a pointer to an array of ##VkCoarseSampleOrderCustomNV structures, each of which specifies the coverage sample order for a single combination of fragment area and coverage sample count.")
 }
 
 val VkRayTracingShaderGroupCreateInfoNV = struct(Module.VULKAN, "VkRayTracingShaderGroupCreateInfoNV") {
@@ -5559,9 +5559,9 @@ val VkRayTracingPipelineCreateInfoNV = struct(Module.VULKAN, "VkRayTracingPipeli
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkPipelineCreateFlags.member("flags", "a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated.")
     AutoSize("pStages")..uint32_t.member("stageCount", "the number of entries in the {@code pStages} array.")
-    VkPipelineShaderStageCreateInfo.const.p.buffer("pStages", "an array of size {@code stageCount} structures of type ##VkPipelineShaderStageCreateInfo describing the set of the shader stages to be included in the ray tracing pipeline.")
+    VkPipelineShaderStageCreateInfo.const.p.member("pStages", "an array of size {@code stageCount} structures of type ##VkPipelineShaderStageCreateInfo describing the set of the shader stages to be included in the ray tracing pipeline.")
     AutoSize("pGroups")..uint32_t.member("groupCount", "the number of entries in the {@code pGroups} array.")
-    VkRayTracingShaderGroupCreateInfoNV.const.p.buffer("pGroups", "an array of size {@code groupCount} structures of type ##VkRayTracingShaderGroupCreateInfoNV describing the set of the shader stages to be included in each shader group in the ray tracing pipeline.")
+    VkRayTracingShaderGroupCreateInfoNV.const.p.member("pGroups", "an array of size {@code groupCount} structures of type ##VkRayTracingShaderGroupCreateInfoNV describing the set of the shader stages to be included in each shader group in the ray tracing pipeline.")
     uint32_t.member("maxRecursionDepth", "the maximum recursion that will be called from this pipeline.")
     VkPipelineLayout.member("layout", "the description of binding locations used by both the pipeline and descriptor sets used with the pipeline.")
     VkPipeline.member("basePipelineHandle", "a pipeline to derive from.")
@@ -5736,7 +5736,7 @@ val VkAccelerationStructureInfoNV = struct(Module.VULKAN, "VkAccelerationStructu
     VkBuildAccelerationStructureFlagsNV.member("flags", "a set of {@code VkBuildAccelerationStructureFlagBitsNV} values that specify additional parameters of the acceleration structure.")
     uint32_t.member("instanceCount", "specifies the number of instances that will be in the new acceleration structure")
     AutoSize("pGeometries", optional = true)..uint32_t.member("geometryCount", "specifies the number of geometries that will be in the new acceleration structure")
-    VkGeometryNV.const.p.buffer("pGeometries", "an array of {@code VkGeometryNV} structures which contain the scene data being passed into the acceleration structure.")
+    VkGeometryNV.const.p.member("pGeometries", "an array of {@code VkGeometryNV} structures which contain the scene data being passed into the acceleration structure.")
 }
 
 val VkAccelerationStructureCreateInfoNV = struct(Module.VULKAN, "VkAccelerationStructureCreateInfoNV") {
@@ -6179,7 +6179,7 @@ val VkPipelineVertexInputDivisorStateCreateInfoEXT = struct(Module.VULKAN, "VkPi
     VkStructureType.member("sType", "the type of this structure")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure")
     AutoSize("pVertexBindingDivisors")..uint32_t.member("vertexBindingDivisorCount", "the number of elements in the {@code pVertexBindingDivisors} array.")
-    VkVertexInputBindingDivisorDescriptionEXT.const.p.buffer("pVertexBindingDivisors", "a pointer to an array of ##VkVertexInputBindingDivisorDescriptionEXT structures, which specifies the divisor value for each binding.")
+    VkVertexInputBindingDivisorDescriptionEXT.const.p.member("pVertexBindingDivisors", "a pointer to an array of ##VkVertexInputBindingDivisorDescriptionEXT structures, which specifies the divisor value for each binding.")
 }
 
 val VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT") {
@@ -6405,7 +6405,7 @@ val VkPipelineViewportExclusiveScissorStateCreateInfoNV = struct(Module.VULKAN, 
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     AutoSize("pExclusiveScissors", optional = true)..uint32_t.member("exclusiveScissorCount", "the number of exclusive scissor rectangles used by the pipeline.")
-    nullable..VkRect2D.const.p.buffer("pExclusiveScissors", "a pointer to an array of ##VkRect2D structures defining exclusive scissor rectangles. If the exclusive scissor state is dynamic, this member is ignored.")
+    nullable..VkRect2D.const.p.member("pExclusiveScissors", "a pointer to an array of ##VkRect2D structures defining exclusive scissor rectangles. If the exclusive scissor state is dynamic, this member is ignored.")
 }
 
 val VkPhysicalDeviceExclusiveScissorFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceExclusiveScissorFeaturesNV") {

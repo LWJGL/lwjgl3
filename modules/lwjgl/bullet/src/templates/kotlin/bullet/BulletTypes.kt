@@ -155,7 +155,7 @@ val b3ContactPointData = struct(Module.BULLET, "B3ContactPointData", nativeName 
 }
 val b3ContactInformation = struct(Module.BULLET, "B3ContactInformation", nativeName = "struct b3ContactInformation") {
     AutoSize("m_contactPointData")..int.member("m_numContactPoints", "")
-    b3ContactPointData.p.buffer("m_contactPointData", "")
+    b3ContactPointData.p.member("m_contactPointData", "")
 }
 
 val b3OverlappingObject = struct(Module.BULLET, "B3OverlappingObject", nativeName = "struct b3OverlappingObject") {
@@ -164,7 +164,7 @@ val b3OverlappingObject = struct(Module.BULLET, "B3OverlappingObject", nativeNam
 }
 val b3AABBOverlapData = struct(Module.BULLET, "B3AABBOverlapData", nativeName = "struct b3AABBOverlapData") {
     AutoSize("m_overlappingObjects")..int.member("m_numOverlappingObjects", "")
-    b3OverlappingObject.p.buffer("m_overlappingObjects", "")
+    b3OverlappingObject.p.member("m_overlappingObjects", "")
 }
 
 val b3VisualShapeData = struct(Module.BULLET, "B3VisualShapeData", nativeName = "struct b3VisualShapeData") {
@@ -184,7 +184,7 @@ val b3VisualShapeData = struct(Module.BULLET, "B3VisualShapeData", nativeName = 
 }
 val b3VisualShapeInformation = struct(Module.BULLET, "B3VisualShapeInformation", nativeName = "struct b3VisualShapeInformation") {
     AutoSize("m_visualShapeData")..int.member("m_numVisualShapes", "")
-    b3VisualShapeData.p.buffer("m_visualShapeData", "")
+    b3VisualShapeData.p.member("m_visualShapeData", "")
 }
 
 val b3CollisionShapeData = struct(Module.BULLET, "B3CollisionShapeData", nativeName = "struct b3CollisionShapeData") {
@@ -199,7 +199,7 @@ val b3CollisionShapeData = struct(Module.BULLET, "B3CollisionShapeData", nativeN
 }
 val b3CollisionShapeInformation = struct(Module.BULLET, "B3CollisionShapeInformation", nativeName = "struct b3CollisionShapeInformation") {
     AutoSize("m_collisionShapeData")..int.member("m_numCollisionShapes", "")
-    b3CollisionShapeData.p.buffer("m_collisionShapeData", "")
+    b3CollisionShapeData.p.member("m_collisionShapeData", "")
 }
 
 val b3PhysicsSimulationParameters = struct(Module.BULLET, "B3PhysicsSimulationParameters", nativeName = "struct b3PhysicsSimulationParameters") {
@@ -271,7 +271,7 @@ val b3RayHitInfo = struct(Module.BULLET, "B3RayHitInfo", nativeName = "struct b3
 }
 val b3RaycastInformation = struct(Module.BULLET, "B3RaycastInformation", nativeName = "struct b3RaycastInformation") {
     AutoSize("m_rayHits")..int.member("m_numRayHits", "")
-    b3RayHitInfo.p.buffer("m_rayHits", "")
+    b3RayHitInfo.p.member("m_rayHits", "")
 }
 
 val b3VRControllerEvent = struct(Module.BULLET, "B3VRControllerEvent", nativeName = "struct b3VRControllerEvent") {
@@ -292,7 +292,7 @@ val b3VRControllerEvent = struct(Module.BULLET, "B3VRControllerEvent", nativeNam
 
 val b3VREventsData = struct(Module.BULLET, "B3VREventsData", nativeName = "struct b3VREventsData") {
     AutoSize("m_controllerEvents")..int.member("m_numControllerEvents", "")
-    b3VRControllerEvent.p.buffer("m_controllerEvents", "")
+    b3VRControllerEvent.p.member("m_controllerEvents", "")
 }
 
 
@@ -303,7 +303,7 @@ val b3KeyboardEvent = struct(Module.BULLET, "B3KeyboardEvent", nativeName = "str
 
 val b3KeyboardEventsData = struct(Module.BULLET, "B3KeyboardEventsData", nativeName = "struct b3KeyboardEventsData") {
     AutoSize("m_keyboardEvents")..int.member("m_numKeyboardEvents", "")
-    b3KeyboardEvent.p.buffer("m_keyboardEvents", "")
+    b3KeyboardEvent.p.member("m_keyboardEvents", "")
 }
 
 val b3MouseEvent = struct(Module.BULLET, "B3MouseEvent", nativeName = "struct b3MouseEvent") {
@@ -316,5 +316,5 @@ val b3MouseEvent = struct(Module.BULLET, "B3MouseEvent", nativeName = "struct b3
 
 val b3MouseEventsData = struct(Module.BULLET, "B3MouseEventsData", nativeName = "struct b3MouseEventsData") {
     AutoSize("m_mouseEvents")..int.member("m_numMouseEvents", "")
-    b3MouseEvent.p.buffer("m_mouseEvents", "")
+    b3MouseEvent.p.member("m_mouseEvents", "")
 }

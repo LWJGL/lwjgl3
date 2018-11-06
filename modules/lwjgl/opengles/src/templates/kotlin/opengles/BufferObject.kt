@@ -10,16 +10,16 @@ class BufferObject(val binding: String) : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
         if (!param.nativeType.isPointer || param.nativeType.isPointerHandle)
-            throw IllegalArgumentException("The BufferObject modifier can only be applied on data pointer types or long primitives.")
+            throw IllegalArgumentException("The BufferObject modifier can only be applied to data pointer types or long primitives.")
 
         when (this) {
             PIXEL_PACK_BUFFER -> {
                 if (param.paramType !== ParameterType.OUT)
-                    throw IllegalArgumentException("The specified BufferObject modifier can only be applied on output parameters.")
+                    throw IllegalArgumentException("The specified BufferObject modifier can only be applied to output parameters.")
             }
             else              -> {
                 if (param.paramType !== ParameterType.IN)
-                    throw IllegalArgumentException("The specified BufferObject modifier can only be applied on input parameters.")
+                    throw IllegalArgumentException("The specified BufferObject modifier can only be applied to input parameters.")
             }
         }
     }

@@ -452,7 +452,7 @@ val ovrFovStencilMeshBuffer = struct(Module.OVR, "OVRFovStencilMeshBuffer", nati
     /// Vertex info
     AutoSize("VertexBuffer")..int.member("AllocVertexCount", "to be filled in by caller of #GetFovStencil()")
     int.member("UsedVertexCount", "to be filled in by SDK and returned to caller")
-    nullable..ovrVector2f.p.buffer("VertexBuffer", "to be allocated by caller and filled in by SDK")
+    nullable..ovrVector2f.p.member("VertexBuffer", "to be allocated by caller and filled in by SDK")
 
     /// Index info
     AutoSize("IndexBuffer")..int.member("AllocIndexCount", "to be filled in by caller of #GetFovStencil()")

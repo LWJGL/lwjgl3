@@ -233,7 +233,7 @@ val stbtt_pack_context = struct(Module.STB, "STBTTPackContext", nativeName = "st
     unsigned_int.member("h_oversample", "")
     unsigned_int.member("v_oversample", "")
     unsigned_char.p.member("pixels", "")
-    stbrp_node.p.buffer("nodes", "")
+    Unsafe..stbrp_node.p.member("nodes", "")
 }
 
 val stbtt_packedchar = struct(Module.STB, "STBTTPackedchar", nativeName = "stbtt_packedchar") {
@@ -257,7 +257,7 @@ val stbtt_pack_range = struct(Module.STB, "STBTTPackRange", nativeName = "stbtt_
     int.member("first_unicode_codepoint_in_range", "if non-zero, then the chars are continuous, and this is the first codepoint")
     nullable..int.p.member("array_of_unicode_codepoints", "if non-zero, then this is an array of unicode codepoints")
     AutoSize("array_of_unicode_codepoints", "chardata_for_range")..int.member("num_chars", "the number of codepoints in the range")
-    stbtt_packedchar.p.buffer("chardata_for_range", "output")
+    Unsafe..stbtt_packedchar.p.member("chardata_for_range", "output")
     unsigned_char.member("h_oversample", "used internally")
     unsigned_char.member("v_oversample", "used internally")
 }

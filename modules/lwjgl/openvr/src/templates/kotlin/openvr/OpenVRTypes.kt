@@ -439,7 +439,7 @@ val HiddenAreaMesh_t = struct(Module.OPENVR, "HiddenAreaMesh", nativeName = "Hid
     If the HMD does not provide a visible area mesh {@code pVertexData} will be #NULL and {@code unTriangleCount} will be 0.
     """
 
-    HmdVector2_t.p.buffer("pVertexData", "")
+    HmdVector2_t.p.member("pVertexData", "")
     AutoSize("pVertexData", optional = true)..uint32_t.member("unTriangleCount", "")
 }
 
@@ -715,7 +715,7 @@ val RenderModel_Vertex_t = struct(Module.OPENVR, "RenderModelVertex", nativeName
 val RenderModel_t = struct(Module.OPENVR, "RenderModel", nativeName = "RenderModel_t", mutable = false) {
     pack("Platform.get() == Platform.LINUX || Platform.get() == Platform.MACOSX ? 4 : DEFAULT_PACK_ALIGNMENT")
 
-    RenderModel_Vertex_t.const.p.buffer("rVertexData", "Vertex data for the mesh")
+    RenderModel_Vertex_t.const.p.member("rVertexData", "Vertex data for the mesh")
     AutoSize("rVertexData")..uint32_t.member("unVertexCount", "Number of vertices in the vertex data")
     uint16_t.const.p.member("IndexData", "Indices into the vertex data for each triangle")
     AutoSizeMul("3", "IndexData")..uint32_t.member("unTriangleCount", "Number of triangles in the mesh. Index count is 3 * TriangleCount.")

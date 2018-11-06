@@ -14,7 +14,7 @@ object MapToInt : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
         if (param.nativeType.mapping !== PrimitiveMapping.BYTE && param.nativeType.mapping !== PrimitiveMapping.SHORT)
-            throw IllegalArgumentException("The MapToInt modifier can only be applied on byte or short parameters.")
+            throw IllegalArgumentException("The MapToInt modifier can only be applied to byte or short parameters.")
     }
 }
 
@@ -90,7 +90,7 @@ class AutoSize(
                     throw IllegalArgumentException("INOUT parameters with the AutoSize modifier must be integer pointer types.")
             }
             else                ->
-                throw IllegalArgumentException("The AutoSize modifier can only be applied on IN or INOUT parameters.")
+                throw IllegalArgumentException("The AutoSize modifier can only be applied to IN or INOUT parameters.")
         }
     }
 }
@@ -105,7 +105,7 @@ class AutoSizeResultParam(val expression: String?) : ParameterModifier {
                     PrimitiveMapping.POINTER -> {
                     }
                     else                     -> {
-                        throw IllegalArgumentException("The AutoSizeResult modifier on input parameters can only be applied on integer primitive types.")
+                        throw IllegalArgumentException("The AutoSizeResult modifier on input parameters can only be applied to integer primitive types.")
                     }
                 }
             }
@@ -115,12 +115,12 @@ class AutoSizeResultParam(val expression: String?) : ParameterModifier {
                 PointerMapping.DATA_POINTER -> {
                 }
                 else                        -> {
-                    throw IllegalArgumentException("The AutoSizeResult modifier on output parameters can only be applied on integer pointer types.")
+                    throw IllegalArgumentException("The AutoSizeResult modifier on output parameters can only be applied to integer pointer types.")
                 }
             }
 
             if (param has nullable)
-                throw IllegalArgumentException("The AutoSizeResult modifier cannot be applied on nullable parameters.")
+                throw IllegalArgumentException("The AutoSizeResult modifier cannot be applied to nullable parameters.")
         } else
             throw IllegalArgumentException("The AutoSizeResult modifier cannot be used on in/out parameters.")
     }
@@ -140,10 +140,10 @@ class Check(
     override val isSpecial = expression != "0"
     override fun validate(param: Parameter) {
         if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The Check modifier can only be applied on pointer types.")
+            throw IllegalArgumentException("The Check modifier can only be applied to pointer types.")
 
         if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-            throw IllegalArgumentException("The Check modifier cannot be applied on opaque pointer types.")
+            throw IllegalArgumentException("The Check modifier cannot be applied to opaque pointer types.")
     }
 }
 
@@ -157,7 +157,7 @@ class Nullable internal constructor(val optional: Boolean) : ParameterModifier {
     override val isSpecial = optional
     override fun validate(param: Parameter) {
         if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The nullable modifier can only be applied on pointer types.")
+            throw IllegalArgumentException("The nullable modifier can only be applied to pointer types.")
     }
 }
 
@@ -171,10 +171,10 @@ class Terminated(val value: String) : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
         if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The NullTerminated modifier can only be applied on pointer types.")
+            throw IllegalArgumentException("The NullTerminated modifier can only be applied to pointer types.")
 
         if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-            throw IllegalArgumentException("The NullTerminated modifier cannot be applied on opaque pointer types.")
+            throw IllegalArgumentException("The NullTerminated modifier cannot be applied to opaque pointer types.")
     }
 }
 
@@ -213,7 +213,7 @@ class AutoType(override val reference: String, vararg val types: AutoTypeToken) 
 
     override fun validate(param: Parameter) {
         if (param.nativeType !is IntegerType || !param.nativeType.unsigned)
-            throw IllegalArgumentException("The AutoType modifier can only be applied on unsigned integer parameters.")
+            throw IllegalArgumentException("The AutoType modifier can only be applied to unsigned integer parameters.")
     }
 }
 
@@ -239,10 +239,10 @@ class MultiType(
     override val isSpecial = true
     override fun validate(param: Parameter) {
         if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The MultiType modifier can only be applied on pointer types.")
+            throw IllegalArgumentException("The MultiType modifier can only be applied to pointer types.")
 
         if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-            throw IllegalArgumentException("The MultiType modifier cannot be applied on opaque pointer types.")
+            throw IllegalArgumentException("The MultiType modifier cannot be applied to opaque pointer types.")
     }
 
 }
@@ -271,13 +271,13 @@ class Return(
     override fun validate(param: Parameter) {
         if (param.nativeType is PointerType<*>) {
             if (param.paramType !== ParameterType.OUT)
-                throw IllegalArgumentException("The Return modifier can only be applied on output parameters.")
+                throw IllegalArgumentException("The Return modifier can only be applied to output parameters.")
 
             if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-                throw IllegalArgumentException("The Return modifier cannot be applied on opaque pointer types.")
+                throw IllegalArgumentException("The Return modifier cannot be applied to opaque pointer types.")
 
             if (this !== ReturnParam && param.nativeType !is CharSequenceType && !lengthParam.startsWith(RESULT))
-                throw IllegalArgumentException("The Return modifier can only be applied on CharSequence parameters.")
+                throw IllegalArgumentException("The Return modifier can only be applied to CharSequence parameters.")
 
             if (heapAllocate && param.nativeType !is CharSequenceType)
                 throw IllegalArgumentException("The heapAllocate option can only be enabled with CharSequence parameters.")
@@ -299,13 +299,13 @@ class SingleValue(val newName: String) : ParameterModifier {
     override val isSpecial = true
     override fun validate(param: Parameter) {
         if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The SingleValue modifier can only be applied on pointer types.")
+            throw IllegalArgumentException("The SingleValue modifier can only be applied to pointer types.")
 
         if (param.nativeType.mapping === PointerMapping.OPAQUE_POINTER)
-            throw IllegalArgumentException("The SingleValue modifier cannot be applied on opaque pointer types.")
+            throw IllegalArgumentException("The SingleValue modifier cannot be applied to opaque pointer types.")
 
         if (param.paramType != ParameterType.IN)
-            throw IllegalArgumentException("The SingleValue modifier can only be applied on input parameters.")
+            throw IllegalArgumentException("The SingleValue modifier can only be applied to input parameters.")
     }
 }
 
@@ -321,13 +321,13 @@ class PointerArray(
     override val isSpecial = true
     override fun validate(param: Parameter) {
         if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The PointerArray modifier can only be applied on pointer types.")
+            throw IllegalArgumentException("The PointerArray modifier can only be applied to pointer types.")
 
         if (param.nativeType.mapping != PointerMapping.DATA_POINTER)
-            throw IllegalArgumentException("The PointerArray modifier can only be applied on pointer-to-pointer types.")
+            throw IllegalArgumentException("The PointerArray modifier can only be applied to pointer-to-pointer types.")
 
         if (param.paramType != ParameterType.IN)
-            throw IllegalArgumentException("The PointerArray modifier can only be applied on input parameters.")
+            throw IllegalArgumentException("The PointerArray modifier can only be applied to input parameters.")
     }
 }
 
@@ -338,10 +338,10 @@ class UserData(
     override val isSpecial = false
     override fun validate(param: Parameter) {
         if (!(param.nativeType is PointerType<*> && param.nativeType.elementType is OpaqueType)) {
-            throw IllegalArgumentException("The UserData modifier can only be applied on opaque pointer parameters.")
+            throw IllegalArgumentException("The UserData modifier can only be applied to opaque pointer parameters.")
         }
         if (param.paramType != ParameterType.IN) {
-            throw IllegalArgumentException("The UserData modifier can only be applied on input parameters.")
+            throw IllegalArgumentException("The UserData modifier can only be applied to input parameters.")
         }
     }
 }

@@ -79,12 +79,12 @@ val EXRHeader = struct(Module.TINYEXR, "EXRHeader") {
     unsigned_int.member("header_len", "")
 
     AutoSize("custom_attributes")..int.member("num_custom_attributes", "number of {@code EXRAttribute} in the {@code custom_attributes} array")
-    nullable..EXRAttribute.p.buffer(
+    nullable..EXRAttribute.p.member(
         "custom_attributes",
         "custom attributes (excludes required attributes, e.g. `channels`, `compression`, etc)"
     )
 
-    EXRChannelInfo.p.buffer("channels", "")
+    EXRChannelInfo.p.member("channels", "")
 
     int.p.member(
         "pixel_types",
@@ -105,7 +105,7 @@ val EXRHeader = struct(Module.TINYEXR, "EXRHeader") {
 }*/
 
 val EXRImage = struct(Module.TINYEXR, "EXRImage") {
-    EXRTile.p.buffer("tiles", "tiled pixel data. The application must reconstruct image from tiles manually. #NULL if scanline format.")
+    EXRTile.p.member("tiles", "tiled pixel data. The application must reconstruct image from tiles manually. #NULL if scanline format.")
     nullable..unsigned_char.p.p.member("images", "{@code image[channels][pixels]}. #NULL if tiled format.")
     int.member("width", "")
     int.member("height", "")

@@ -12,26 +12,26 @@ interface TemplateModifier {
     val isSpecial: Boolean
 }
 
-/** A modifier that can be applied on functions */
+/** A modifier that can be applied to functions */
 interface FunctionModifier : TemplateModifier {
     /** Implementations should check that the specified function is valid for this modifier. */
     fun validate(func: Func) {
     }
 }
 
-/** A modifier that can be applied on parameters. */
+/** A modifier that can be applied to parameters. */
 interface ParameterModifier : TemplateModifier {
     /** Implementations should check that the specified parameter is valid for this modifier. */
     fun validate(param: Parameter) {
     }
 }
 
-/** A modifier that can be applied on either functions or parameters. */
+/** A modifier that can be applied to either functions or parameters. */
 interface FuncParamModifier :
     FunctionModifier,
     ParameterModifier
 
-/** A modifier that can be applied on struct members. */
+/** A modifier that can be applied to struct members. */
 interface StructMemberModifier : TemplateModifier {
     /** Implementations should check that the specified struct member is valid for this modifier. */
     fun validate(member: StructMember) {
