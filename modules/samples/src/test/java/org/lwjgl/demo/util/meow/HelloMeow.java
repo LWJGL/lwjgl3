@@ -25,19 +25,17 @@ public final class HelloMeow {
         int SEED = 7;
         int RUNS = 100;
 
-        // 1GB: memory bandwidth bound
-        // 8MB (L3 cache size): best-case MT speed-up
-        ByteBuffer buffer = memAlignedAlloc(MEOW_HASH_ALIGNMENT >> 3, 8 * 1024 * 1024);
+        ByteBuffer buffer = memAlignedAlloc(16, 8 * 1024 * 1024);
 
         ThreadLocalRandom rand = ThreadLocalRandom.current();
         for (int i = 0; i < buffer.limit() >> 3; i++) {
             buffer.putLong(i << 3, rand.nextLong());
         }
 
-        try (MemoryStack frame0 = stackPush()) {
-            MeowHash ref = MeowHash.mallocStack(frame0);
+        try (MemoryStack stack = stackPush()) {
+            MeowU128 ref = MeowU128.mallocStack(stack);
 
-            // SINGLE-THREADED
+            // BATCH
 
             long st = Long.MAX_VALUE;
             for (int r = 0; r < RUNS; r++) {
@@ -46,66 +44,34 @@ public final class HelloMeow {
                 MeowHash1(SEED, buffer, ref);
 
                 st = min(System.nanoTime() - t, st);
-                System.out.format("ST: %d bytes/ns, %d GB/s\n", buffer.capacity() / st, (buffer.capacity() * 1_000_000_000L / st) / (1024 * 1024 * 1024));
+                System.out.format("%d bytes/ns, %d GB/s\n", buffer.capacity() / st, (buffer.capacity() * 1_000_000_000L / st) / (1024 * 1024 * 1024));
             }
 
-            // MULTI-THREADED
+            // STREAMING
 
-            MeowSourceBlocks blocks = MeowSourceBlocksFor(buffer, MeowSourceBlocks.malloc());
+            MeowHashState state = MeowHashState.mallocStack(stack);
+            MeowHashBegin(state);
 
-            int blockCount = (int)blocks.MacroblockCount();
-
-            MeowMacroblockResult.Buffer results = MeowMacroblockResult.create(
-                nmemAlignedAlloc(MeowMacroblockResult.ALIGNOF, blockCount * MeowMacroblockResult.SIZEOF),
-                blockCount
-            );
-
-            long mt = Long.MAX_VALUE;
-            for (int r = 0; r < RUNS; r++) {
-                try (MemoryStack frame1 = stackPush()) {
-                    long t = System.nanoTime();
-
-                    for (int i = 0; i < blockCount; i++) {
-                        int index = i;
-                        ForkJoinPool
-                            .commonPool()
-                            .submit(() -> {
-                                try (MemoryStack stack = stackPush()) {
-                                    MeowMacroblock block = MeowGetMacroblock(blocks, index, MeowMacroblock.mallocStack(stack));
-
-                                    MeowHash1Op(
-                                        block.BlockCount(),
-                                        block.Source(),
-                                        results.get(index)
-                                    );
-                                }
-                            });
-                    }
-                    ForkJoinPool
-                        .commonPool()
-                        .awaitQuiescence(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-
-                    MeowHash hash = MeowHashFinish(
-                        MeowHashMergeArray(results, results.get(0)),
-                        SEED,
-                        blocks.TotalLengthInBytes(),
-                        blocks.Overhang(),
-                        blocks.OverhangStart(),
-                        MeowHash.mallocStack(frame1)
-                    );
-
-                    mt = min(System.nanoTime() - t, mt);
-                    System.out.format("MT: %d bytes/ns, %d GB/s, %.2fx faster\n", buffer.capacity() / mt, (buffer.capacity() * 1_000_000_000L / mt) / (1024 * 1024 * 1024), (st / (float)mt));
-
-                    assertTrue(MeowHashesAreEqual(hash, ref));
+            long at    = memAddress(buffer);
+            int  count = buffer.remaining();
+            while (0 < count) {
+                int amount = rand.nextInt(0, Integer.MAX_VALUE) % (8192 + 1);
+                if (count < amount) {
+                    amount = count;
                 }
+
+                nMeowHashAbsorb1(state.address(), amount, at);
+
+                at += amount;
+                count -= amount;
             }
 
-            nmemAlignedFree(results.address());
-            blocks.free();
+            MeowU128 hash = MeowHashEnd(state, SEED, MeowU128.mallocStack(stack));
 
-            memAlignedFree(buffer);
+            assertTrue(MeowHashesAreEqual(hash, ref));
         }
+
+        memAlignedFree(buffer);
     }
 
 }
