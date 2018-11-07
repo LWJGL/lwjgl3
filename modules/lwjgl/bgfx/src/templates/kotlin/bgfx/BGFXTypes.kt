@@ -106,7 +106,7 @@ val bgfx_transform_t = struct(Module.BGFX, "BGFXTransform", nativeName = "bgfx_t
 val bgfx_view_stats_t = struct(Module.BGFX, "BGFXViewStats", nativeName = "bgfx_view_stats_t", mutable = false) {
     documentation = "View stats."
 
-    charASCII.array("name", "view name", size = 256)
+    charASCII.member("name", "view name")[256]
     bgfx_view_id_t.member("view", "view id")
     int64_t.member("cpuTimeElapsed", "CPU (submit) time elapsed")
     int64_t.member("gpuTimeElapsed", "GPU time elapsed")
@@ -162,7 +162,7 @@ val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t",
     int32_t.member("transientVbUsed", "amount of transient vertex buffer used")
     int32_t.member("transientIbUsed", "amount of transient index buffer used")
 
-    uint32_t.array("numPrims", "number of primitives rendered", size = "BGFX_TOPOLOGY_COUNT")
+    uint32_t.member("numPrims", "number of primitives rendered")["BGFX_TOPOLOGY_COUNT"]
 
     int64_t.member("gpuMemoryMax", "maximum available GPU memory for application")
     int64_t.member("gpuMemoryUsed", "amount of GPU memory used by the application")
@@ -185,8 +185,8 @@ val bgfx_vertex_decl_t = struct(Module.BGFX, "BGFXVertexDecl", nativeName = "bgf
 
     uint32_t.member("hash", "")
     uint16_t.member("stride", "vertex stride")
-    uint16_t.array("offset", "relative attribute offset from the vertex", size = "BGFX_ATTRIB_COUNT")
-    uint16_t.array("attributes", "", size = "BGFX_ATTRIB_COUNT")
+    uint16_t.member("offset", "relative attribute offset from the vertex")["BGFX_ATTRIB_COUNT"]
+    uint16_t.member("attributes", "")["BGFX_ATTRIB_COUNT"]
 }
 
 val bgfx_transient_index_buffer_t = struct(Module.BGFX, "BGFXTransientIndexBuffer", nativeName = "bgfx_transient_index_buffer_t") {
@@ -237,7 +237,7 @@ val bgfx_texture_info_t_p = struct(Module.BGFX, "BGFXTextureInfo", nativeName = 
 val bgfx_uniform_info_t_p = struct(Module.BGFX, "BGFXUniformInfo", nativeName = "bgfx_uniform_info_t") {
     documentation = "Uniform info."
 
-    charASCII.array("name", "uniform name", size = 256)
+    charASCII.member("name", "uniform name")[256]
     bgfx_uniform_type_t.member("type", "uniform type")
     uint16_t.member("num", "number of elements in array")
 }.p
@@ -300,10 +300,10 @@ val bgfx_caps_t = struct(Module.BGFX, "BGFXCaps", nativeName = "bgfx_caps_t", mu
     bool.member("originBottomLeft", "true when NDC origin is at bottom left")
     AutoSize("gpu")..uint8_t.member("numGPUs", "number of enumerated GPUs")
 
-    bgfx_caps_gpu_t.array("gpu", "enumerated GPUs", size = 4)
+    bgfx_caps_gpu_t.member("gpu", "enumerated GPUs")[4]
     bgfx_caps_limits_t.member("limits", "rendering limits")
 
-    uint16_t.array("formats", "supported texture formats", size = "BGFX_TEXTURE_FORMAT_COUNT")
+    uint16_t.member("formats", "supported texture formats")["BGFX_TEXTURE_FORMAT_COUNT"]
 }
 
 // Callback interface

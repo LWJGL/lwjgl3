@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.odbc.SQL.*;
+
 /**
  * <h3>Layout</h3>
  * 
@@ -24,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SQLCHAR precision;
  *     SQLSCHAR scale;
  *     SQLCHAR sign;
- *     SQLCHAR val[16];
+ *     SQLCHAR val[SQL_MAX_NUMERIC_LEN];
  * }</code></pre>
  */
 public class SQL_NUMERIC_STRUCT extends Struct implements NativeResource {
@@ -47,7 +49,7 @@ public class SQL_NUMERIC_STRUCT extends Struct implements NativeResource {
             __member(1),
             __member(1),
             __member(1),
-            __array(1, 16)
+            __array(1, SQL_MAX_NUMERIC_LEN)
         );
 
         SIZEOF = layout.getSize();
@@ -82,7 +84,7 @@ public class SQL_NUMERIC_STRUCT extends Struct implements NativeResource {
     @NativeType("SQLCHAR")
     public byte sign() { return nsign(address()); }
     /** Returns a {@link ByteBuffer} view of the {@code val} field. */
-    @NativeType("SQLCHAR[16]")
+    @NativeType("SQLCHAR[SQL_MAX_NUMERIC_LEN]")
     public ByteBuffer val() { return nval(address()); }
     /** Returns the value at the specified index of the {@code val} field. */
     @NativeType("SQLCHAR")
@@ -95,7 +97,7 @@ public class SQL_NUMERIC_STRUCT extends Struct implements NativeResource {
     /** Sets the specified value to the {@code sign} field. */
     public SQL_NUMERIC_STRUCT sign(@NativeType("SQLCHAR") byte value) { nsign(address(), value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code val} field. */
-    public SQL_NUMERIC_STRUCT val(@NativeType("SQLCHAR[16]") ByteBuffer value) { nval(address(), value); return this; }
+    public SQL_NUMERIC_STRUCT val(@NativeType("SQLCHAR[SQL_MAX_NUMERIC_LEN]") ByteBuffer value) { nval(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code val} field. */
     public SQL_NUMERIC_STRUCT val(int index, @NativeType("SQLCHAR") byte value) { nval(address(), index, value); return this; }
 
@@ -276,10 +278,10 @@ public class SQL_NUMERIC_STRUCT extends Struct implements NativeResource {
     /** Unsafe version of {@link #sign}. */
     public static byte nsign(long struct) { return UNSAFE.getByte(null, struct + SQL_NUMERIC_STRUCT.SIGN); }
     /** Unsafe version of {@link #val}. */
-    public static ByteBuffer nval(long struct) { return memByteBuffer(struct + SQL_NUMERIC_STRUCT.VAL, 16); }
+    public static ByteBuffer nval(long struct) { return memByteBuffer(struct + SQL_NUMERIC_STRUCT.VAL, SQL_MAX_NUMERIC_LEN); }
     /** Unsafe version of {@link #val(int) val}. */
     public static byte nval(long struct, int index) {
-        return UNSAFE.getByte(null, struct + SQL_NUMERIC_STRUCT.VAL + check(index, 16) * 1);
+        return UNSAFE.getByte(null, struct + SQL_NUMERIC_STRUCT.VAL + check(index, SQL_MAX_NUMERIC_LEN) * 1);
     }
 
     /** Unsafe version of {@link #precision(byte) precision}. */
@@ -290,12 +292,12 @@ public class SQL_NUMERIC_STRUCT extends Struct implements NativeResource {
     public static void nsign(long struct, byte value) { UNSAFE.putByte(null, struct + SQL_NUMERIC_STRUCT.SIGN, value); }
     /** Unsafe version of {@link #val(ByteBuffer) val}. */
     public static void nval(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 16); }
+        if (CHECKS) { checkGT(value, SQL_MAX_NUMERIC_LEN); }
         memCopy(memAddress(value), struct + SQL_NUMERIC_STRUCT.VAL, value.remaining() * 1);
     }
     /** Unsafe version of {@link #val(int, byte) val}. */
     public static void nval(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + SQL_NUMERIC_STRUCT.VAL + check(index, 16) * 1, value);
+        UNSAFE.putByte(null, struct + SQL_NUMERIC_STRUCT.VAL + check(index, SQL_MAX_NUMERIC_LEN) * 1, value);
     }
 
     // -----------------------------------
@@ -346,7 +348,7 @@ public class SQL_NUMERIC_STRUCT extends Struct implements NativeResource {
         @NativeType("SQLCHAR")
         public byte sign() { return SQL_NUMERIC_STRUCT.nsign(address()); }
         /** Returns a {@link ByteBuffer} view of the {@code val} field. */
-        @NativeType("SQLCHAR[16]")
+        @NativeType("SQLCHAR[SQL_MAX_NUMERIC_LEN]")
         public ByteBuffer val() { return SQL_NUMERIC_STRUCT.nval(address()); }
         /** Returns the value at the specified index of the {@code val} field. */
         @NativeType("SQLCHAR")
@@ -359,7 +361,7 @@ public class SQL_NUMERIC_STRUCT extends Struct implements NativeResource {
         /** Sets the specified value to the {@code sign} field. */
         public SQL_NUMERIC_STRUCT.Buffer sign(@NativeType("SQLCHAR") byte value) { SQL_NUMERIC_STRUCT.nsign(address(), value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code val} field. */
-        public SQL_NUMERIC_STRUCT.Buffer val(@NativeType("SQLCHAR[16]") ByteBuffer value) { SQL_NUMERIC_STRUCT.nval(address(), value); return this; }
+        public SQL_NUMERIC_STRUCT.Buffer val(@NativeType("SQLCHAR[SQL_MAX_NUMERIC_LEN]") ByteBuffer value) { SQL_NUMERIC_STRUCT.nval(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code val} field. */
         public SQL_NUMERIC_STRUCT.Buffer val(int index, @NativeType("SQLCHAR") byte value) { SQL_NUMERIC_STRUCT.nval(address(), index, value); return this; }
 

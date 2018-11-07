@@ -342,7 +342,7 @@ val MONITORINFOEX = struct(Module.CORE_WINDOWS, "MONITORINFOEX", mutable = false
         """
     )
     DWORD.member("dwFlags", "the attributes of the display monitor. May be:<br>#MONITORINFOF_PRIMARY")
-    TCHAR.array("szDevice", "a string that specifies the device name of the monitor being used", 32)
+    TCHAR.member("szDevice", "a string that specifies the device name of the monitor being used")[32]
 }
 val LPMONITORINFOEX = typedef(MONITORINFOEX.p, "LPMONITORINFOEX")
 
@@ -356,14 +356,13 @@ val POINTL = struct(Module.CORE_WINDOWS, "POINTL") {
 val DEVMODE = struct(Module.CORE_WINDOWS, "DEVMODE", mutable = false) {
     documentation = "Contains information about the initialization and environment of a printer or a display device."
 
-    TCHAR.array(
+    TCHAR.member(
         "dmDeviceName",
         """
         A zero-terminated character array that specifies the "friendly" name of the printer or display; for example, "PCL/HP LaserJet" in the case of PCL/HP
         LaserJet. This string is unique among device drivers. Note that this name may be truncated to fit in the {@code dmDeviceName} array.
-        """,
-        32
-    )
+        """
+    )[32]
     WORD.member(
         "dmSpecVersion",
         """
@@ -441,7 +440,7 @@ val DEVMODE = struct(Module.CORE_WINDOWS, "DEVMODE", mutable = false) {
     short.member("dmYResolution", PRINTER_ONLY)
     short.member("dmTTOption", PRINTER_ONLY)
     short.member("dmCollate", PRINTER_ONLY)
-    TCHAR.array("dmFormName", PRINTER_ONLY, 32)
+    TCHAR.member("dmFormName", PRINTER_ONLY)[32]
 
     WORD.member("dmLogPixels", "the number of pixels per logical inch")
     DWORD.member(
@@ -494,15 +493,14 @@ val DISPLAY_DEVICE = struct(Module.CORE_WINDOWS, "DISPLAY_DEVICE", mutable = fal
         "cb",
         "size, in bytes, of the {@code DISPLAY_DEVICE} structure. This must be initialized prior to calling #EnumDisplayDevices()."
     ).mutable()
-    TCHAR.array("DeviceName", "an array of characters identifying the device name. This is either the adapter device or the monitor device.", size = 32)
-    TCHAR.array(
+    TCHAR.member("DeviceName", "an array of characters identifying the device name. This is either the adapter device or the monitor device.")[32]
+    TCHAR.member(
         "DeviceString",
-        "an array of characters containing the device context string. This is either a description of the display adapter or of the display monitor.",
-        size = 128
-    )
+        "an array of characters containing the device context string. This is either a description of the display adapter or of the display monitor."
+    )[128]
     DWORD.member("StateFlags", "device state flags")
-    TCHAR.array("DeviceID", "not used", size = 128)
-    TCHAR.array("DeviceKey", "reserved", size = 128)
+    TCHAR.member("DeviceID", "not used")[128]
+    TCHAR.member("DeviceKey", "reserved")[128]
 }
 val PDISPLAY_DEVICE = typedef(DISPLAY_DEVICE.p, "PDISPLAY_DEVICE")
 

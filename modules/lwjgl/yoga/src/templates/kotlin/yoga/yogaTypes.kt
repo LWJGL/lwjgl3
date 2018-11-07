@@ -179,11 +179,11 @@ val YGFloatOptional = struct(Module.YOGA, "YGFloatOptional", mutable = false) {
 
 const val YG_MAX_CACHED_RESULT_COUNT = 16
 val YGLayout = struct(Module.YOGA, "YGLayout", mutable = false) {
-    float.array("positions", "", size = 4)
-    float.array("dimensions", "", size = 2)
-    float.array("margin", "", size = 6)
-    float.array("border", "", size = 6)
-    float.array("padding", "", size = 6)
+    float.member("positions", "")[4]
+    float.member("dimensions", "")[2]
+    float.member("margin", "")[6]
+    float.member("border", "")[6]
+    float.member("padding", "")[6]
     YGDirection.member("direction", "")
 
     uint32_t.member("computedFlexBasisGeneration", "")
@@ -194,8 +194,8 @@ val YGLayout = struct(Module.YOGA, "YGLayout", mutable = false) {
     YGDirection.member("lastOwnerDirection", "")
 
     uint32_t.member("nextCachedMeasurementsIndex", "")
-    YGCachedMeasurement.array("cachedMeasurements", "", size = YG_MAX_CACHED_RESULT_COUNT)
-    float.array("measuredDimensions", "", size = 2)
+    YGCachedMeasurement.member("cachedMeasurements", "")[YG_MAX_CACHED_RESULT_COUNT]
+    float.member("measuredDimensions", "")[2]
 
     YGCachedMeasurement.member("cachedLayout", "")
     bool.member("didUseLegacyFlag", "")
@@ -218,13 +218,13 @@ val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     YGFloatOptional.member("flexGrow", "")
     YGFloatOptional.member("flexShrink", "")
     YGValue.member("flexBasis", "")
-    YGValue.array("margin", "", size = YGEdgeCount)
-    YGValue.array("positions", "", size = YGEdgeCount)
-    YGValue.array("padding", "", size = YGEdgeCount)
-    YGValue.array("border", "", size = YGEdgeCount)
-    YGValue.array("dimensions", "", size = 2)
-    YGValue.array("minDimensions", "", size = 2)
-    YGValue.array("maxDimensions", "", size = 2)
+    YGValue.member("margin", "")[YGEdgeCount]
+    YGValue.member("positions", "")[YGEdgeCount]
+    YGValue.member("padding", "")[YGEdgeCount]
+    YGValue.member("border", "")[YGEdgeCount]
+    YGValue.member("dimensions", "")[2]
+    YGValue.member("minDimensions", "")[2]
+    YGValue.member("maxDimensions", "")[2]
 
     // Yoga specific properties, not compatible with flexbox specification
     YGFloatOptional.member("aspectRatio", "")
@@ -251,5 +251,5 @@ val YGNode = struct(Module.YOGA, "YGNode") {
 
     nullable..YGConfigRef.member("config", "")
     bool.member("isDirty", "")
-    YGValue.p.array("resolvedDimensions", "", size = 2)
+    YGValue.p.member("resolvedDimensions", "")[2]
 }

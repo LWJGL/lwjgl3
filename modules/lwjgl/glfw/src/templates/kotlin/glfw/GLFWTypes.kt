@@ -74,8 +74,8 @@ val GLFWgamepadstate = struct(Module.GLFW, "GLFWGamepadState", nativeName = "GLF
     documentation = "Describes the input state of a gamepad."
     since = "version 3.3"
 
-    unsigned_char.array("buttons", "the states of each gamepad button, #PRESS or #RELEASE", 15)
-    float.array("axes", "the states of each gamepad axis, in the range -1.0 to 1.0 inclusive", 6)
+    unsigned_char.member("buttons", "the states of each gamepad button, #PRESS or #RELEASE")[15]
+    float.member("axes", "the states of each gamepad axis, in the range -1.0 to 1.0 inclusive")[6]
 }
 
 // callback functions

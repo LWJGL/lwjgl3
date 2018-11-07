@@ -26,15 +26,15 @@ val EXRVersion = struct(Module.TINYEXR, "EXRVersion") {
 }
 
 val EXRAttribute = struct(Module.TINYEXR, "EXRAttribute") {
-    charASCII.array("name", "", size = 256)
-    charASCII.array("type", "", size = 256)
+    charASCII.member("name", "")[256]
+    charASCII.member("type", "")[256]
     unsigned_char.p.member("value", "")
     AutoSize("value", optional = true)..int.member("size", "")
     padding(4)
 }
 
 val EXRChannelInfo = struct(Module.TINYEXR, "EXRChannelInfo") {
-    charASCII.array("name", "", size = 256)
+    charASCII.member("name", "")[256]
     int.member("pixel_type", "")
     int.member("x_sampling", "")
     int.member("y_sampling", "")
@@ -59,9 +59,9 @@ val EXRHeader = struct(Module.TINYEXR, "EXRHeader") {
 
     float.member("pixel_aspect_ratio", "")
     int.member("line_order", "")
-    int.array("data_window", "", size = 4)
-    int.array("display_window", "", size = 4)
-    float.array("screen_window_center", "", size = 2)
+    int.member("data_window", "")[4]
+    int.member("display_window", "")[4]
+    float.member("screen_window_center", "")[2]
     float.member("screen_window_width", "")
 
     int.member("chunk_count", "")

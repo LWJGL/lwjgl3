@@ -110,31 +110,31 @@ val VkDevice_T = "VkDevice_T".opaque
 val VkQueue_T = "VkQueue_T".opaque
 
 val HmdMatrix34_t = struct(Module.OPENVR, "HmdMatrix34", nativeName = "HmdMatrix34_t") {
-    float.array("m", "", size = 3 x 4)
+    float.member("m", "")[3 x 4]
 }
 
 val HmdMatrix33_t = struct(Module.OPENVR, "HmdMatrix33", nativeName = "HmdMatrix33_t") {
-    float.array("m", "", size = 3 x 3)
+    float.member("m", "")[3 x 3]
 }
 
 val HmdMatrix44_t = struct(Module.OPENVR, "HmdMatrix44", nativeName = "HmdMatrix44_t") {
-    float.array("m", "", size = 4 x 4)
+    float.member("m", "")[4 x 4]
 }
 
 val HmdVector3_t = struct(Module.OPENVR, "HmdVector3", nativeName = "HmdVector3_t") {
-    float.array("v", "", size = 3)
+    float.member("v", "")[3]
 }
 
 val HmdVector4_t = struct(Module.OPENVR, "HmdVector4", nativeName = "HmdVector4_t") {
-    float.array("v", "", size = 4)
+    float.member("v", "")[4]
 }
 
 val HmdVector3d_t = struct(Module.OPENVR, "HmdVector3d", nativeName = "HmdVector3d_t") {
-    double.array("v", "", size = 3)
+    double.member("v", "")[3]
 }
 
 val HmdVector2_t = struct(Module.OPENVR, "HmdVector2", nativeName = "HmdVector2_t") {
-    float.array("v", "", size = 2)
+    float.member("v", "")[2]
 }
 
 val HmdQuaternion_t = struct(Module.OPENVR, "HmdQuaternion", nativeName = "HmdQuaternion_t") {
@@ -159,7 +159,7 @@ val HmdColor_t = struct(Module.OPENVR, "HmdColor", nativeName = "HmdColor_t") {
 }
 
 val HmdQuad_t = struct(Module.OPENVR, "HmdQuad", nativeName = "HmdQuad_t") {
-    HmdVector3_t.array("vCorners", "", size = 4)
+    HmdVector3_t.member("vCorners", "")[4]
 }
 
 val HmdRect2_t = struct(Module.OPENVR, "HmdRect2", nativeName = "HmdRect2_t") {
@@ -175,9 +175,9 @@ val DistortionCoordinates_t = struct(Module.OPENVR, "DistortionCoordinates", nat
     UVs range from 0 to 1 with 0,0 in the upper left corner of the source render target. The 0,0 to 1,1 range covers a single eye.
     """
 
-    float.array("rfRed", "the UVs for the red channel", size = 2)
-    float.array("rfGreen", "the UVs for the green channel", size = 2)
-    float.array("rfBlue", "the UVs for the blue channel", size = 2)
+    float.member("rfRed", "the UVs for the red channel")[2]
+    float.member("rfGreen", "the UVs for the green channel")[2]
+    float.member("rfBlue", "the UVs for the blue channel")[2]
 }
 
 val TrackedDevicePose_t = struct(Module.OPENVR, "TrackedDevicePose", nativeName = "TrackedDevicePose_t") {
@@ -256,7 +256,7 @@ val VREvent_Status_t = struct(Module.OPENVR, "VREventStatus", nativeName = "VREv
 val VREvent_Keyboard_t = struct(Module.OPENVR, "VREventKeyboard", nativeName = "VREvent_Keyboard_t", mutable = false) {
     documentation = "Used for keyboard events."
 
-    char.array("cNewInput", "up to 8 bytes of new input", size = 8)
+    char.member("cNewInput", "up to 8 bytes of new input")[8]
     uint64_t.member("uUserValue", "possible flags about the new input")
 }
 
@@ -459,7 +459,7 @@ val VRControllerState_t = struct(Module.OPENVR, "VRControllerState", nativeName 
     )
     uint64_t.member("ulButtonPressed", "bit flags for each of the buttons. Use {@code ButtonMaskFromId} to turn an ID into a mask")
     uint64_t.member("ulButtonTouched", "")
-    VRControllerAxis_t.array("rAxis", "axis data for the controller's analog inputs", size = 5)
+    VRControllerAxis_t.member("rAxis", "axis data for the controller's analog inputs")[5]
 }
 
 val Texture_t = struct(Module.OPENVR, "Texture", nativeName = "Texture_t") {
@@ -675,7 +675,7 @@ val InputSkeletalActionData_t = struct(Module.OPENVR, "InputSkeletalActionData",
 val InputOriginInfo_t = struct(Module.OPENVR, "InputOriginInfo", nativeName = "InputOriginInfo_t", mutable = false) {
     VRInputValueHandle_t.member("devicePath", "")
 	TrackedDeviceIndex_t.member("trackedDeviceIndex", "")
-    charUTF8.array("rchRenderModelComponentName", "", size = 128)
+    charUTF8.member("rchRenderModelComponentName", "")[128]
 }
 
 val VRActiveActionSet_t = struct(Module.OPENVR, "VRActiveActionSet", nativeName = "VRActiveActionSet_t") {
@@ -709,7 +709,7 @@ val RenderModel_Vertex_t = struct(Module.OPENVR, "RenderModelVertex", nativeName
 
     HmdVector3_t.member("vPosition", "position in meters in device space")
     HmdVector3_t.member("vNormal", "")
-    float.array("rfTextureCoord", "", size = 2)
+    float.member("rfTextureCoord", "")[2]
 }
 
 val RenderModel_t = struct(Module.OPENVR, "RenderModel", nativeName = "RenderModel_t", mutable = false) {

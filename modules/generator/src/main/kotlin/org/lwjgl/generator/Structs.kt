@@ -99,13 +99,6 @@ private open class StructMemberArray(
 
 }
 
-private class StructMemberCharArray(
-    nativeType: CharType,
-    name: String,
-    documentation: String,
-    size: String
-) : StructMemberArray(nativeType, name, documentation, size, size)
-
 private class StructMemberPadding(size: String, val condition: String?) : StructMemberArray(char, ANONYMOUS, "", size, size) {
     init {
         public = false
@@ -236,7 +229,7 @@ class Struct(
         return member
     }
 
-    // Plain field
+    // Struct member
     fun DataType.member(name: String, documentation: String) = add(StructMember(this, name, documentation))
 
     // Points to an array of structs, not a single struct
@@ -244,27 +237,15 @@ class Struct(
         return add(StructMemberBuffer(this, name, documentation))
     }
 
-    // Array field
-    fun DataType.array(name: String, documentation: String, size: Int, validSize: Int = size) =
-        array(name, documentation, size.toString(), validSize.toString())
-
-    fun DataType.array(name: String, documentation: String, size: String, validSize: String = size) =
-        add(StructMemberArray(this, name, documentation, size, validSize))
-
+    // Converts a plain member to an array member
     operator fun StructMember.get(size: Int, validSize: Int = size): StructMember {
         this@Struct.members.remove(this)
         return add(StructMemberArray(this.nativeType, this.name, this.documentation, size.toString(), validSize.toString()))
     }
-
     operator fun StructMember.get(size: String, validSize: String = size): StructMember {
         this@Struct.members.remove(this)
         return add(StructMemberArray(this.nativeType, this.name, this.documentation, size, validSize))
     }
-
-    // CharSequence special-case
-    fun CharType.array(name: String, documentation: String, size: Int) = array(name, documentation, size.toString())
-
-    fun CharType.array(name: String, documentation: String, size: String) = add(StructMemberCharArray(this, name, documentation, size))
 
     fun padding(size: Int, condition: String? = null) = padding(size.toString(), condition)
     fun padding(size: String, condition: String? = null) = add(StructMemberPadding(size, condition))
@@ -595,7 +576,7 @@ $indentation}"""
         println("import org.lwjgl.system.*;\n")
 
         fun Struct.hasChecks(): Boolean = visibleMembers.any {
-            (it is StructMemberArray && it !is StructMemberCharArray) ||
+            (it is StructMemberArray && it.nativeType !is CharType) ||
             (
                 (mutable || it.mutable) &&
                 (
@@ -1257,7 +1238,7 @@ ${validations.joinToString("\n")}
                 print(
                     "$t$t${it.nullable(
                         (if (it is StructMemberArray) {
-                            if (it is StructMemberCharArray) {
+                            if (it.nativeType is CharType) {
                                 "ByteBuffer"
                             } else if (it.nativeType is StructType)
                                 "${it.nativeType.javaMethodType}.Buffer"
@@ -1451,7 +1432,7 @@ ${validations.joinToString("\n")}
                             println("$t${t}memCopy(value.$ADDRESS, $STRUCT + $field + check(index, ${it.size}) * $structType.SIZEOF, $structType.SIZEOF);")
                             println("$t}")
                         }
-                    } else if (it is StructMemberCharArray) {
+                    } else if (it.nativeType is CharType) {
                         val mapping = it.nativeType.mapping as PrimitiveMapping
                         val byteSize = if (mapping.bytes == 1) it.size else "${it.size} * ${mapping.bytes}"
 
@@ -1486,7 +1467,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(int, $javaType) $setter}. */")
                         println("${t}public static void n$setter(long $STRUCT, int index, $javaType value) {")
-                        println("$t${t}${getBufferMethod("put", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * $bytesPerElement, value);")
+                        println("$t$t${getBufferMethod("put", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * $bytesPerElement, value);")
                         println("$t}")
                     }
                 } else if (it.nativeType is CharSequenceType) {
@@ -1611,7 +1592,7 @@ ${validations.joinToString("\n")}
                         }
                         if (overrides) println("$indent@Override")
                         println("${indent}public $returnType $setter(int index, ${it.annotate("$structType${if (getReferenceMember<AutoSizeIndirect>(it.name) == null) "" else ".Buffer"}")} value) { $n$setter($ADDRESS, index, value); return this; }")
-                    } else if (it is StructMemberCharArray) {
+                    } else if (it.nativeType is CharType) {
                         println("$indent/** Copies the specified encoded string to the {@code $member} field. */")
                         if (overrides) println("$indent@Override")
                         println("${indent}public $returnType $setter(${it.annotate("ByteBuffer", it.size)} value) { $n$setter($ADDRESS, value); return this; }")
@@ -1715,8 +1696,8 @@ ${validations.joinToString("\n")}
                             println("$t${t}return ${it.construct(nestedStruct)}($STRUCT + $field + check(index, $size) * $nestedStruct.SIZEOF);")
                             println("$t}")
                         }
-                    } else if (it is StructMemberCharArray) {
-                        val mapping = it.nativeType.mapping as CharMapping
+                    } else if (it.nativeType is CharType) {
+                        val mapping = it.nativeType.mapping
                         val capacity = getReferenceMember<AutoSizeMember>(it.name)
                         val byteSize = capacity?.autoSize ?: if (mapping.bytes == 1) it.size else "${it.size} * ${mapping.bytes}"
 
@@ -1862,7 +1843,7 @@ ${validations.joinToString("\n")}
                             generateGetterAnnotations(indent, it, structType)
                             println("${indent}public $structType $getter(int index) { return $n$getter($ADDRESS, index); }")
                         }
-                    } else if (it is StructMemberCharArray) {
+                    } else if (it.nativeType is CharType) {
                         println("$indent/** Returns a {@link ByteBuffer} view of the {@code $member} field. */")
                         generateGetterAnnotations(indent, it, "ByteBuffer", it.size)
                         println("${indent}public ByteBuffer $getter() { return $n$getter($ADDRESS); }")

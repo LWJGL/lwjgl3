@@ -68,7 +68,7 @@ val aiString = struct(Module.ASSIMP, "AIString", nativeName = "struct aiString")
     documentation = "Represents an UTF-8 string, zero byte terminated."
 
     AutoSize("data")..size_t.member("length", "Binary length of the string excluding the terminal 0.")
-    charUTF8.array("data", "String buffer.", size = "Assimp.MAXLEN")
+    charUTF8.member("data", "String buffer.")["Assimp.MAXLEN"]
 }
 
 val aiMemoryInfo = struct(Module.ASSIMP, "AIMemoryInfo", nativeName = "struct aiMemoryInfo", mutable = false) {
@@ -123,16 +123,15 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
         "mHeight",
         "Height of the texture, in pixels. If this value is zero, {@code pcData} points to an compressed texture in any format (e.g. JPEG)."
     )
-    charASCII.array(
+    charASCII.member(
         "achFormatHint",
         """
         A hint from the loader to make it easier for applications to determine the type of embedded compressed textures. If {@code mHeight != 0} this member is
         undefined. Otherwise it is set set to '\0\0\0\0' if the loader has no additional information about the texture file format used OR the file extension
         of the format without a trailing dot. If there are multiple file extensions for a format, the shortest extension is chosen (JPEG maps to 'jpg', not to
         'jpeg'). E.g. 'dds\0', 'pcx\0', 'jpg\0'. All characters are lower-case. The fourth character will always be '\0'.
-        """,
-        size = 4
-    )
+        """
+    )[4]
     aiTexel.p.buffer(
         "pcData",
         """
@@ -309,8 +308,8 @@ val aiAnimMesh = struct(Module.ASSIMP, "AIAnimMesh", nativeName = "struct aiAnim
     nullable..aiVector3D.p.buffer("mNormals", "Replacement for ##AIMesh{@code ::mNormals}.")
     nullable..aiVector3D.p.buffer("mTangents", "Replacement for ##AIMesh{@code ::mTangents}.")
     nullable..aiVector3D.p.buffer("mBitangents", "Replacement for ##AIMesh{@code ::mBitangents}.")
-    nullable..aiColor4D.p.array("mColors", "Replacement for ##AIMesh{@code ::mColors}", size = "Assimp.AI_MAX_NUMBER_OF_COLOR_SETS")
-    nullable..aiVector3D.p.array("mTextureCoords", "Replacement for ##AIMesh{@code ::mTextureCoords}", size = "Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS")
+    nullable..aiColor4D.p.member("mColors", "Replacement for ##AIMesh{@code ::mColors}")["Assimp.AI_MAX_NUMBER_OF_COLOR_SETS"]
+    nullable..aiVector3D.p.member("mTextureCoords", "Replacement for ##AIMesh{@code ::mTextureCoords}")["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
     AutoSize(
         "mVertices", "mNormals", "mTangents", "mBitangents"
     )..AutoSizeIndirect(
@@ -386,31 +385,28 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         not present. The array is {@code mNumVertices} in size.
         """
     )
-    nullable..aiColor4D.p.array(
+    nullable..aiColor4D.p.member(
         "mColors",
         """
         Vertex color sets. A mesh may contain 0 to #AI_MAX_NUMBER_OF_COLOR_SETS vertex colors per vertex. #NULL if not present. Each array is
         {@code mNumVertices} in size if present.
-        """,
-        size = "Assimp.AI_MAX_NUMBER_OF_COLOR_SETS"
-    )
-    nullable..aiVector3D.p.array(
+        """
+    )["Assimp.AI_MAX_NUMBER_OF_COLOR_SETS"]
+    nullable..aiVector3D.p.member(
         "mTextureCoords",
         """
         Vertex texture coords, also known as UV channels. A mesh may contain 0 to #AI_MAX_NUMBER_OF_TEXTURECOORDS per vertex. #NULL if not present. The array
         is {@code mNumVertices} in size.
-        """,
-        size = "Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"
-    )
-    unsigned_int.array(
+        """
+    )["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
+    unsigned_int.member(
         "mNumUVComponents",
         """
         Specifies the number of components for a given UV channel. Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is
         2 for a given channel n, the component {@code p.z} of {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y}
         is set to 0.0f, too.
-        """,
-        size = "Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"
-    )
+        """
+    )["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
     aiFace.p.buffer(
         "mFaces",
         """

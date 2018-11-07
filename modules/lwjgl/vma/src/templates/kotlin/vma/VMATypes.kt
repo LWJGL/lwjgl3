@@ -308,8 +308,8 @@ private const val VK_MAX_MEMORY_HEAPS = 16
 val VmaStats = struct(Module.VMA, "VmaStats", mutable = false) {
     documentation = "General statistics from current state of Allocator."
 
-    VmaStatInfo.array("memoryType", "", size = VK_MAX_MEMORY_TYPES)
-    VmaStatInfo.array("memoryHeap", "", size = VK_MAX_MEMORY_HEAPS)
+    VmaStatInfo.member("memoryType", "")[VK_MAX_MEMORY_TYPES]
+    VmaStatInfo.member("memoryHeap", "")[VK_MAX_MEMORY_HEAPS]
     VmaStatInfo.member("total", "")
 }
 

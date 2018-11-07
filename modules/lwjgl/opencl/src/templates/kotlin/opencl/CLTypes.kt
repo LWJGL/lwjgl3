@@ -207,7 +207,7 @@ fun config() {
 
         struct {
             cl_uint.member("type", "")
-            cl_uint.array("data", "", size = 5)
+            cl_uint.member("data", "")[5]
         }.member("raw", "")
         struct {
             cl_uint.member("type", "")

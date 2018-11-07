@@ -496,7 +496,7 @@ val VkDeviceGroupPresentCapabilitiesKHR = struct(Module.VULKAN, "VkDeviceGroupPr
 
     VkStructureType.member("sType", "the type of this structure.").mutable()
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
-    uint32_t.array("presentMask", "an array of masks, where the mask at element <code>i</code> is non-zero if physical device <code>i</code> has a presentation engine, and where bit <code>j</code> is set in element <code>i</code> if physical device <code>i</code> <b>can</b> present swapchain images from physical device <code>j</code>. If element <code>i</code> is non-zero, then bit <code>i</code> <b>must</b> be set.", size = "VK_MAX_DEVICE_GROUP_SIZE")
+    uint32_t.member("presentMask", "an array of masks, where the mask at element <code>i</code> is non-zero if physical device <code>i</code> has a presentation engine, and where bit <code>j</code> is set in element <code>i</code> if physical device <code>i</code> <b>can</b> present swapchain images from physical device <code>j</code>. If element <code>i</code> is non-zero, then bit <code>i</code> <b>must</b> be set.")["VK_MAX_DEVICE_GROUP_SIZE"]
     VkDeviceGroupPresentModeFlagsKHR.member("modes", "a bitmask of {@code VkDeviceGroupPresentModeFlagBitsKHR} indicating which device group presentation modes are supported.")
 }
 
@@ -992,7 +992,7 @@ val VkDebugMarkerMarkerInfoEXT = struct(Module.VULKAN, "VkDebugMarkerMarkerInfoE
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     charUTF8.const.p.member("pMarkerName", "a pointer to a null-terminated UTF-8 string that contains the name of the marker.")
-    float.array("color", "an optional: RGBA color value that can be associated with the marker. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored.", size = 4)
+    float.member("color", "an optional: RGBA color value that can be associated with the marker. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored.")[4]
 }
 
 val VkDedicatedAllocationImageCreateInfoNV = struct(Module.VULKAN, "VkDedicatedAllocationImageCreateInfoNV") {
@@ -1187,7 +1187,7 @@ val VkShaderStatisticsInfoAMD = struct(Module.VULKAN, "VkShaderStatisticsInfoAMD
     uint32_t.member("numPhysicalSgprs", "the maximum number of scalar instruction general-purpose registers (SGPRs) available to the physical device.")
     uint32_t.member("numAvailableVgprs", "the maximum limit of VGPRs made available to the shader compiler.")
     uint32_t.member("numAvailableSgprs", "the maximum limit of SGPRs made available to the shader compiler.")
-    uint32_t.array("computeWorkGroupSize", "the local workgroup size of this shader in { X, Y, Z } dimensions.", size = 3)
+    uint32_t.member("computeWorkGroupSize", "the local workgroup size of this shader in { X, Y, Z } dimensions.")[3]
 }
 
 val VkPhysicalDeviceCornerSampledImageFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceCornerSampledImageFeaturesNV") {
@@ -1590,7 +1590,7 @@ val VkPhysicalDeviceGroupPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDevice
     VkStructureType.member("sType", "").mutable()
     nullable..opaque_p.member("pNext", "").mutable()
     uint32_t.member("physicalDeviceCount", "")
-    VkPhysicalDevice.array("physicalDevices", "", size = "VK_MAX_DEVICE_GROUP_SIZE")
+    VkPhysicalDevice.member("physicalDevices", "")["VK_MAX_DEVICE_GROUP_SIZE"]
     VkBool32.member("subsetAllocation", "")
 }
 
@@ -1650,9 +1650,9 @@ val VkPhysicalDeviceIDPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceIDP
 
     VkStructureType.member("sType", "").mutable()
     nullable..opaque_p.member("pNext", "").mutable()
-    uint8_t.array("deviceUUID", "", size = "VK_UUID_SIZE")
-    uint8_t.array("driverUUID", "", size = "VK_UUID_SIZE")
-    uint8_t.array("deviceLUID", "", size = "VK_LUID_SIZE")
+    uint8_t.member("deviceUUID", "")["VK_UUID_SIZE"]
+    uint8_t.member("driverUUID", "")["VK_UUID_SIZE"]
+    uint8_t.member("deviceLUID", "")["VK_LUID_SIZE"]
     uint32_t.member("deviceNodeMask", "")
     VkBool32.member("deviceLUIDValid", "")
 }
@@ -4163,7 +4163,7 @@ val VkDebugUtilsLabelEXT = struct(Module.VULKAN, "VkDebugUtilsLabelEXT") {
     VkStructureType.member("sType", "the type of this structure.")
     nullable..opaque_const_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     charUTF8.const.p.member("pLabelName", "a pointer to a null-terminated UTF-8 string that contains the name of the label.")
-    float.array("color", "an optional RGBA color value that can be associated with the label. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored.", size = 4)
+    float.member("color", "an optional RGBA color value that can be associated with the label. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored.")[4]
 }
 
 val VkDebugUtilsMessengerCallbackDataEXT = struct(Module.VULKAN, "VkDebugUtilsMessengerCallbackDataEXT") {
@@ -4584,7 +4584,7 @@ val VkPhysicalDeviceSampleLocationsPropertiesEXT = struct(Module.VULKAN, "VkPhys
     nullable..opaque_p.member("pNext", "").mutable()
     VkSampleCountFlags.member("sampleLocationSampleCounts", "a bitmask of {@code VkSampleCountFlagBits} indicating the sample counts supporting custom sample locations.")
     VkExtent2D.member("maxSampleLocationGridSize", "the maximum size of the pixel grid in which sample locations <b>can</b> vary that is supported for all sample counts in {@code sampleLocationSampleCounts}.")
-    float.array("sampleLocationCoordinateRange", "the range of supported sample location coordinates.", size = 2)
+    float.member("sampleLocationCoordinateRange", "the range of supported sample location coordinates.")[2]
     uint32_t.member("sampleLocationSubPixelBits", "the number of bits of subpixel precision for sample locations.")
     VkBool32.member("variableSampleLocations", "specifies whether the sample locations used by all pipelines that will be bound to a command buffer during a subpass <b>must</b> match. If set to #TRUE, the implementation supports variable sample locations in a subpass. If set to #FALSE, then the sample locations <b>must</b> stay constant in each subpass.")
 }
@@ -6235,8 +6235,8 @@ val VkPhysicalDeviceDriverPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDevic
     VkStructureType.member("sType", "the type of this structure.").mutable()
     nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension specific structure.").mutable()
     VkDriverIdKHR.member("driverID", "a unique identifier for the driver of the physical device.")
-    charUTF8.array("driverName", "a null-terminated UTF-8 string containing the name of the driver.", size = "VK_MAX_DRIVER_NAME_SIZE_KHR")
-    charUTF8.array("driverInfo", "a null-terminated UTF-8 string containing additional information about the driver.", size = "VK_MAX_DRIVER_INFO_SIZE_KHR")
+    charUTF8.member("driverName", "a null-terminated UTF-8 string containing the name of the driver.")["VK_MAX_DRIVER_NAME_SIZE_KHR"]
+    charUTF8.member("driverInfo", "a null-terminated UTF-8 string containing additional information about the driver.")["VK_MAX_DRIVER_INFO_SIZE_KHR"]
     VkConformanceVersionKHR.member("conformanceVersion", "the version of the Vulkan conformance test this driver is conformant against (see ##VkConformanceVersionKHR).")
 }
 
@@ -6300,11 +6300,11 @@ val VkPhysicalDeviceMeshShaderPropertiesNV = struct(Module.VULKAN, "VkPhysicalDe
     nullable..opaque_p.member("pNext", "")
     uint32_t.member("maxDrawMeshTasksCount", "the maximum number of local workgroups that <b>can</b> be launched by a single draw mesh tasks command. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#drawing-mesh-shading\">the “Programmable Mesh Shading” section</a>.")
     uint32_t.member("maxTaskWorkGroupInvocations", "the maximum total number of task shader invocations in a single local workgroup. The product of the X, Y, and Z sizes as specified by the {@code LocalSize} execution mode in shader modules and by the object decorated by the {@code WorkgroupSize} decoration <b>must</b> be less than or equal to this limit.")
-    uint32_t.array("maxTaskWorkGroupSize", "the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes specified by the {@code LocalSize} execution mode and by the object decorated by the {@code WorkgroupSize} decoration in shader modules <b>must</b> be less than or equal to the corresponding limit.", size = 3)
+    uint32_t.member("maxTaskWorkGroupSize", "the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes specified by the {@code LocalSize} execution mode and by the object decorated by the {@code WorkgroupSize} decoration in shader modules <b>must</b> be less than or equal to the corresponding limit.")[3]
     uint32_t.member("maxTaskTotalMemorySize", "the maximum number of bytes that the task shader can use in total for shared and output memory combined.")
     uint32_t.member("maxTaskOutputCount", "the maximum number of output tasks a single task shader workgroup can emit.")
     uint32_t.member("maxMeshWorkGroupInvocations", "the maximum total number of mesh shader invocations in a single local workgroup. The product of the X, Y, and Z sizes as specified by the {@code LocalSize} execution mode in shader modules and by the object decorated by the {@code WorkgroupSize} decoration <b>must</b> be less than or equal to this limit.")
-    uint32_t.array("maxMeshWorkGroupSize", "the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes specified by the {@code LocalSize} execution mode and by the object decorated by the {@code WorkgroupSize} decoration in shader modules <b>must</b> be less than or equal to the corresponding limit.", size = 3)
+    uint32_t.member("maxMeshWorkGroupSize", "the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes specified by the {@code LocalSize} execution mode and by the object decorated by the {@code WorkgroupSize} decoration in shader modules <b>must</b> be less than or equal to the corresponding limit.")[3]
     uint32_t.member("maxMeshTotalMemorySize", "the maximum number of bytes that the mesh shader can use in total for shared and output memory combined.")
     uint32_t.member("maxMeshOutputVertices", "the maximum number of vertices a mesh shader output can store.")
     uint32_t.member("maxMeshOutputPrimitives", "the maximum number of primitives a mesh shader output can store.")

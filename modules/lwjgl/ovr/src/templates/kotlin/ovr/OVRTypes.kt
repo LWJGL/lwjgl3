@@ -71,11 +71,10 @@ val ovrErrorInfo = struct(Module.OVR, "OVRErrorInfo", nativeName = "ovrErrorInfo
     documentation = "Provides information about the last error."
 
     ovrResult.member("Result", "the result from the last API call that generated an error {@code ovrResult}")
-    charUTF8.array(
+    charUTF8.member(
         "ErrorString",
-        "a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions",
-        size = 512
-    )
+        "a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions"
+    )[512]
 }
 
 val ovrSessionStatus = struct(Module.OVR, "OVRSessionStatus", nativeName = "ovrSessionStatus", mutable = false) {
@@ -207,7 +206,7 @@ val ovrVector3f = struct(Module.OVR, "OVRVector3f", nativeName = "ovrVector3f") 
 val ovrMatrix4f = struct(Module.OVR, "OVRMatrix4f", nativeName = "ovrMatrix4f") {
     documentation = "A 4x4 matrix with float components."
 
-    float.array("M", "the matrix components", 16)
+    float.member("M", "the matrix components")[16]
 }
 
 val ovrPosef = struct(Module.OVR, "OVRPosef", nativeName = "ovrPosef") {
@@ -260,7 +259,7 @@ val ovrGraphicsLuid = struct(Module.OVR, "OVRGraphicsLuid", nativeName = "ovrGra
 
     alignas("POINTER_SIZE")
 
-    char.array("Reserved", "public definition reserves space for graphics API-specific implementation.", size = 8)
+    char.member("Reserved", "public definition reserves space for graphics API-specific implementation.")[8]
 }
 
 val ovrHmdDesc = struct(Module.OVR, "OVRHmdDesc", nativeName = "ovrHmdDesc", mutable = false, skipBuffer = true) {
@@ -271,11 +270,11 @@ val ovrHmdDesc = struct(Module.OVR, "OVRHmdDesc", nativeName = "ovrHmdDesc", mut
 
     ovrHmdType.member("Type", "this HMD's type").links("Hmd_\\w+")
     padding(4, "Pointer.BITS64")
-    charUTF8.array("ProductName", "name string describing the product: \"Oculus Rift DK1\", etc.", size = 64)
-    charUTF8.array("Manufacturer", "string describing the manufacturer. Usually \"Oculus\".", size = 64)
+    charUTF8.member("ProductName", "name string describing the product: \"Oculus Rift DK1\", etc.")[64]
+    charUTF8.member("Manufacturer", "string describing the manufacturer. Usually \"Oculus\".")[64]
     short.member("VendorId", "HID Vendor ID of the device")
     short.member("ProductId", "HID Product ID of the device")
-    charASCII.array("SerialNumber", "HMD serial number", size = 24)
+    charASCII.member("SerialNumber", "HMD serial number")[24]
     short.member("FirmwareMajor", "HMD firmware major version number")
     short.member("FirmwareMinor", "HMD firmware minor version number")
 
@@ -284,8 +283,8 @@ val ovrHmdDesc = struct(Module.OVR, "OVRHmdDesc", nativeName = "ovrHmdDesc", mut
     unsigned_int.member("AvailableTrackingCaps", "available {@code ovrTrackingCaps} bits")
     unsigned_int.member("DefaultTrackingCaps", "default {@code ovrTrackingCaps} bits")
 
-    ovrFovPort.array("DefaultEyeFov", "the recommended optical FOV for the HMD", size = "ovrEye_Count")
-    ovrFovPort.array("MaxEyeFov", "the maximum optical FOV for the HMD", size = "ovrEye_Count")
+    ovrFovPort.member("DefaultEyeFov", "the recommended optical FOV for the HMD")["ovrEye_Count"]
+    ovrFovPort.member("MaxEyeFov", "the maximum optical FOV for the HMD")["ovrEye_Count"]
 
     ovrSizei.member("Resolution", "resolution of the full HMD screen (both eyes) in pixels")
     float.member("DisplayRefreshRate", "refresh rate of the display in cycles per second at the time of HMD creation")
@@ -331,20 +330,18 @@ val ovrTrackingState = struct(Module.OVR, "OVRTrackingState", nativeName = "ovrT
 
     unsigned_int.member("StatusFlags", "{@code HeadPose} tracking status described by {@code ovrStatusBits}.")
 
-    ovrPoseStatef.array(
+    ovrPoseStatef.member(
         "HandPoses",
         """
         The most recent calculated pose for each hand when hand controller tracking is present. {@code HandPoses[ovrHand_Left]} refers to the left hand and
         {@code HandPoses[ovrHand_Right]} to the right hand. These values can be combined with {@code ovrInputState} for complete hand controller information.
-        """,
-        size = 2
-    )
+        """
+    )[2]
 
-    unsigned_int.array(
+    unsigned_int.member(
         "HandStatusFlags",
-        "{@code HandPoses} status flags described by {@code ovrStatusBits}. Only #Status_OrientationTracked and #Status_PositionTracked are reported.",
-        size = 2
-    )
+        "{@code HandPoses} status flags described by {@code ovrStatusBits}. Only #Status_OrientationTracked and #Status_PositionTracked are reported."
+    )[2]
 
 
     ovrPosef.member(
@@ -403,7 +400,7 @@ val ovrViewScaleDesc = struct(Module.OVR, "OVRViewScaleDesc", nativeName = "ovrV
         units are inches, but you're shrinking the player to half their normal size, then {@code HmdSpaceToWorldScaleInMeters} would be {@code 0.0254*2.0}.
         """
 
-    ovrPosef.array("HmdToEyePose", "transform of each eye from the HMD center, in meters", size = "ovrEye_Count")
+    ovrPosef.member("HmdToEyePose", "transform of each eye from the HMD center, in meters")["ovrEye_Count"]
     float.member("HmdSpaceToWorldScaleInMeters", "ratio of viewer units to meter units")
 }
 
@@ -532,56 +529,47 @@ val ovrInputState = struct(Module.OVR, "OVRInputState", nativeName = "ovrInputSt
     double.member("TimeInSeconds", "system type when the controller state was last updated")
     unsigned_int.member("Buttons", "values for buttons described by {@code ovrButton}")
     unsigned_int.member("Touches", "touch values for buttons and sensors as described by {@code ovrTouch}.")
-    float.array(
+    float.member(
         "IndexTrigger",
-        "left and right finger trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f.",
-        size = "ovrHand_Count"
-    )
-    float.array(
+        "left and right finger trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f."
+    )["ovrHand_Count"]
+    float.member(
         "HandTrigger",
-        "left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f.",
-        size = "ovrHand_Count"
-    )
-    ovrVector2f.array(
+        "left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f."
+    )["ovrHand_Count"]
+    ovrVector2f.member(
         "Thumbstick",
-        "horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f.",
-        size = "ovrHand_Count"
-    )
+        "horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f."
+    )["ovrHand_Count"]
     ovrControllerType.member("ControllerType", "The type of the controller this state is for.").links("ControllerType_\\w+")
 
-    float.array(
+    float.member(
         "IndexTriggerNoDeadzone",
-        "Left and right finger trigger values (#Hand_Left and #Hand_Right), in range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter.",
-        size = "ovrHand_Count"
-    )
-    float.array(
+        "Left and right finger trigger values (#Hand_Left and #Hand_Right), in range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter."
+    )["ovrHand_Count"]
+    float.member(
         "HandTriggerNoDeadzone",
-        "Left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter.",
-        size = "ovrHand_Count"
-    )
-    ovrVector2f.array(
+        "Left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter."
+    )["ovrHand_Count"]
+    ovrVector2f.member(
         "ThumbstickNoDeadzone",
-        "Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f. Does not apply a deadzone or filter.",
-        size = "ovrHand_Count"
-    )
+        "Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in the range -1.0f to 1.0f. Does not apply a deadzone or filter."
+    )["ovrHand_Count"]
 
-    float.array(
+    float.member(
         "IndexTriggerRaw",
-        "Left and right finger trigger values (#Hand_Left and #Hand_Right), in range 0.0 to 1.0f. No deadzone or filter.",
-        size = "ovrHand_Count"
-    )
+        "Left and right finger trigger values (#Hand_Left and #Hand_Right), in range 0.0 to 1.0f. No deadzone or filter."
+    )["ovrHand_Count"]
 
-    float.array(
+    float.member(
         "HandTriggerRaw",
-        "Left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. No deadzone or filter.",
-        size = "ovrHand_Count"
-    )
+        "Left and right hand trigger values (#Hand_Left and #Hand_Right), in the range 0.0 to 1.0f. No deadzone or filter."
+    )["ovrHand_Count"]
 
-    ovrVector2f.array(
+    ovrVector2f.member(
         "ThumbstickRaw",
-        "Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in range -1.0f to 1.0f. No deadzone or filter.",
-        size = "ovrHand_Count"
-    )
+        "Horizontal and vertical thumbstick axis values (#Hand_Left and #Hand_Right), in range -1.0f to 1.0f. No deadzone or filter."
+    )["ovrHand_Count"]
 }
 
 val ovrCameraIntrinsics = struct(Module.OVR, "OVRCameraIntrinsics", nativeName = "ovrCameraIntrinsics") {
@@ -622,7 +610,7 @@ val ovrCameraExtrinsics = struct(Module.OVR, "OVRCameraExtrinsics", nativeName =
 
 const val OVR_EXTERNAL_CAMERA_NAME_SIZE = 32
 val ovrExternalCamera = struct(Module.OVR, "OVRExternalCamera", nativeName = "ovrExternalCamera", mutable = false) {
-    charASCII.array("Name", "camera identifier: vid + pid + serial number etc.", size = OVR_EXTERNAL_CAMERA_NAME_SIZE)
+    charASCII.member("Name", "camera identifier: vid + pid + serial number etc.")[OVR_EXTERNAL_CAMERA_NAME_SIZE]
     ovrCameraIntrinsics.member("Intrinsics", "")
     ovrCameraExtrinsics.member("Extrinsics", "")
 }
@@ -653,26 +641,22 @@ val ovrLayerEyeFov = struct(Module.OVR, "OVRLayerEyeFov", nativeName = "ovrLayer
         """
 
     ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeFov")
-    ovrTextureSwapChain.array(
+    ovrTextureSwapChain.member(
         "ColorTexture",
-        "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL.",
-        size = "ovrEye_Count",
-        validSize = "1"
-    )
-    ovrRecti.array(
+        "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL."
+    )["ovrEye_Count", "1"]
+    ovrRecti.member(
         "Viewport",
-        "specifies the ColorTexture sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
-        size = "ovrEye_Count"
-    )
-    ovrFovPort.array("Fov", "the viewport field of view", size = "ovrEye_Count")
-    ovrPosef.array(
+        "specifies the ColorTexture sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid."
+    )["ovrEye_Count"]
+    ovrFovPort.member("Fov", "the viewport field of view")["ovrEye_Count"]
+    ovrPosef.member(
         "RenderPose",
         """
         specifies the position and orientation of each eye view, with the position specified in meters. RenderPose will typically be the value returned from
         #_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
-        """,
-        size = "ovrEye_Count"
-    )
+        """
+    )["ovrEye_Count"]
     double.member(
         "SensorSampleTime",
         """
@@ -707,26 +691,22 @@ val ovrLayerEyeFovDepth = struct(Module.OVR, "OVRLayerEyeFovDepth", nativeName =
         """
 
     ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeFovDepth")
-    ovrTextureSwapChain.array(
+    ovrTextureSwapChain.member(
         "ColorTexture",
-        "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above.",
-        size = "ovrEye_Count",
-        validSize = "1"
-    )
-    ovrRecti.array(
+        "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above."
+    )["ovrEye_Count", "1"]
+    ovrRecti.member(
         "Viewport",
-        "specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
-        size = "ovrEye_Count"
-    )
-    ovrFovPort.array("Fov", "the viewport field of view", size = "ovrEye_Count")
-    ovrPosef.array(
+        "specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid."
+    )["ovrEye_Count"]
+    ovrFovPort.member("Fov", "the viewport field of view")["ovrEye_Count"]
+    ovrPosef.member(
         "RenderPose",
         """
         specifies the position and orientation of each eye view, with position specified in meters. {@code RenderPose} will typically be the value returned
         from #_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
-        """,
-        size = "ovrEye_Count"
-    )
+        """
+    )["ovrEye_Count"]
     double.member(
         "SensorSampleTime",
         """
@@ -735,12 +715,10 @@ val ovrLayerEyeFovDepth = struct(Module.OVR, "OVRLayerEyeFovDepth", nativeName =
         latency.
         """
     )
-    ovrTextureSwapChain.array(
+    ovrTextureSwapChain.member(
         "DepthTexture",
-        "depth texture for depth composition with overlays. Must map 1:1 to the {@code ColorTexture}.",
-        size = "ovrEye_Count",
-        validSize = "1"
-    )
+        "depth texture for depth composition with overlays. Must map 1:1 to the {@code ColorTexture}."
+    )["ovrEye_Count", "1"]
     ovrTimewarpProjectionDesc.member("ProjectionDesc", "specifies how to convert {@code DepthTexture} information into meters")
 }
 
@@ -811,7 +789,7 @@ val ovrTextureLayoutDesc_Union = union(Module.OVR, "OVRTextureLayoutDescUnion", 
     javaImport("static org.lwjgl.ovr.OVR.ovrEye_Count")
     documentation = "Combines texture layout descriptors."
 
-    ovrTextureLayoutOctilinear.array("Octilinear", "", size = "ovrEye_Count")
+    ovrTextureLayoutOctilinear.member("Octilinear", "")["ovrEye_Count"]
 }
 
 val ovrTextureLayout = "ovrTextureLayout".enumType
@@ -839,28 +817,25 @@ val ovrLayerEyeFovMultires = struct(Module.OVR, "OVRLayerEyeFovMultires", native
 
     ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeFovMultires")
 
-    ovrTextureSwapChain.array(
+    ovrTextureSwapChain.member(
         "ColorTexture",
-        "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above.",
-        size = "ovrEye_Count"
-    )
+        "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above."
+    )["ovrEye_Count"]
 
-    ovrRecti.array(
+    ovrRecti.member(
         "Viewport",
-        "specifies the ColorTexture sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
-        size = "ovrEye_Count"
-    )
+        "specifies the ColorTexture sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid."
+    )["ovrEye_Count"]
 
-    ovrFovPort.array("Fov", "the viewport field of view", size = "ovrEye_Count")
+    ovrFovPort.member("Fov", "the viewport field of view")["ovrEye_Count"]
 
-    ovrPosef.array(
+    ovrPosef.member(
         "RenderPose",
         """
         specifies the position and orientation of each eye view, with position specified in meters. {@code RenderPose} will typically be the value returned
         from #_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
-        """,
-        size = "ovrEye_Count"
-    )
+        """
+    )["ovrEye_Count"]
 
     double.member(
         "SensorSampleTime",
@@ -900,26 +875,22 @@ val ovrLayerEyeMatrix = struct(Module.OVR, "OVRLayerEyeMatrix", nativeName = "ov
         """
 
     ovrLayerHeader.member("Header", "{@code Header.Type} must be #LayerType_EyeMatrix")
-    ovrTextureSwapChain.array(
+    ovrTextureSwapChain.member(
         "ColorTexture",
-        "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above.",
-        size = "ovrEye_Count",
-        validSize = "1"
-    )
-    ovrRecti.array(
+        "{@code ovrTextureSwapChains} for the left and right eye respectively. The second one of which can be #NULL for cases described above."
+    )["ovrEye_Count", "1"]
+    ovrRecti.member(
         "Viewport",
-        "specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid.",
-        size = "ovrEye_Count"
-    )
-    ovrPosef.array(
+        "specifies the {@code ColorTexture} sub-rect UV coordinates. Both {@code Viewport[0]} and {@code Viewport[1]} must be valid."
+    )["ovrEye_Count"]
+    ovrPosef.member(
         "RenderPose",
         """
         specifies the position and orientation of each eye view, with the position specified in meters. {@code RenderPose} will typically be the value
         returned from #_CalcEyePoses(), but can be different in special cases if a different head pose is used for rendering.
-        """,
-        size = "ovrEye_Count"
-    )
-    ovrMatrix4f.array(
+        """
+    )["ovrEye_Count"]
+    ovrMatrix4f.member(
         "Matrix",
         """
         specifies the mapping from a view-space vector to a UV coordinate on the textures given above.
@@ -927,9 +898,8 @@ val ovrLayerEyeMatrix = struct(Module.OVR, "OVRLayerEyeMatrix", nativeName = "ov
 P = (x,y,z,1)*Matrix
 TexU  = P.x/P.z
 TexV  = P.y/P.z""")}
-        """,
-        size = "ovrEye_Count"
-    )
+        """
+    )["ovrEye_Count"]
     double.member(
         "SensorSampleTime",
         """
@@ -1181,15 +1151,14 @@ val ovrPerfStats = struct(Module.OVR, "OVRPerfStats", nativeName = "ovrPerfStats
 
     documentation = "This is a complete descriptor of the performance stats provided by the SDK."
 
-    ovrPerfStatsPerCompositorFrame.array(
+    ovrPerfStatsPerCompositorFrame.member(
         "FrameStats",
         """
         an array of performance stats.
 
         The performance entries will be ordered in reverse chronological order such that the first entry will be the most recent one.
-        """,
-        size = "ovrMaxProvidedFrameStats"
-    )
+        """
+    )["ovrMaxProvidedFrameStats"]
     AutoSize("FrameStats")..int.member(
         "FrameStatsCount",
         """

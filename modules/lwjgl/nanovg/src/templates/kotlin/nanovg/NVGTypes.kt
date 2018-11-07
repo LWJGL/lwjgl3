@@ -35,7 +35,7 @@ val NVGcolor = struct(Module.NANOVG, "NVGColor", nativeName = "NVGcolor") {
     documentation = "A NanoVG color."
 
     union {
-        float.array("rgba", "an array of 4 color components", size = 4)
+        float.member("rgba", "an array of 4 color components")[4]
         struct {
             float.member("r", "the color red component")
             float.member("g", "the color green component")
@@ -48,8 +48,8 @@ val NVGcolor = struct(Module.NANOVG, "NVGColor", nativeName = "NVGcolor") {
 val NVGpaint = struct(Module.NANOVG, "NVGPaint", nativeName = "NVGpaint") {
     documentation = "A NanoVG paint."
 
-    float.array("xform", "the transformation matrix", size = 6)
-    float.array("extent", "the extent", size = 2)
+    float.member("xform", "the transformation matrix")[6]
+    float.member("extent", "the extent")[2]
     float.member("radius", "the radius")
     float.member("feather", "the feather amount")
     NVGcolor.member("innerColor", "the inner color")

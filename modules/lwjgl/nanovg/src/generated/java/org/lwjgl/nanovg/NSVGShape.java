@@ -143,9 +143,9 @@ public class NSVGShape extends Struct {
     /** Returns a {@link ByteBuffer} view of the {@code id} field. */
     @NativeType("char[64]")
     public ByteBuffer id() { return nid(address()); }
-    /** Returns the value at the specified index of the {@code id} field. */
-    @NativeType("char")
-    public byte id(int index) { return nid(address(), index); }
+    /** Decodes the null-terminated string stored in the {@code id} field. */
+    @NativeType("char[64]")
+    public String idString() { return nidString(address()); }
     /** Returns a {@link NSVGPaint} view of the {@code fill} field. */
     @NativeType("NSVGpaint")
     public NSVGPaint fill() { return nfill(address()); }
@@ -225,10 +225,8 @@ public class NSVGShape extends Struct {
 
     /** Unsafe version of {@link #id}. */
     public static ByteBuffer nid(long struct) { return memByteBuffer(struct + NSVGShape.ID, 64); }
-    /** Unsafe version of {@link #id(int) id}. */
-    public static byte nid(long struct, int index) {
-        return UNSAFE.getByte(null, struct + NSVGShape.ID + check(index, 64) * 1);
-    }
+    /** Unsafe version of {@link #idString}. */
+    public static String nidString(long struct) { return memASCII(struct + NSVGShape.ID); }
     /** Unsafe version of {@link #fill}. */
     public static NSVGPaint nfill(long struct) { return NSVGPaint.create(struct + NSVGShape.FILL); }
     /** Unsafe version of {@link #stroke}. */
@@ -309,9 +307,9 @@ public class NSVGShape extends Struct {
         /** Returns a {@link ByteBuffer} view of the {@code id} field. */
         @NativeType("char[64]")
         public ByteBuffer id() { return NSVGShape.nid(address()); }
-        /** Returns the value at the specified index of the {@code id} field. */
-        @NativeType("char")
-        public byte id(int index) { return NSVGShape.nid(address(), index); }
+        /** Decodes the null-terminated string stored in the {@code id} field. */
+        @NativeType("char[64]")
+        public String idString() { return NSVGShape.nidString(address()); }
         /** Returns a {@link NSVGPaint} view of the {@code fill} field. */
         @NativeType("NSVGpaint")
         public NSVGPaint fill() { return NSVGShape.nfill(address()); }

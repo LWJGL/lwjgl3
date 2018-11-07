@@ -103,7 +103,7 @@ val nk_image = struct(Module.NUKLEAR, "NkImage", nativeName = "struct nk_image")
     nk_handle.member("handle", "")
     unsigned_short.member("w", "")
     unsigned_short.member("h", "")
-    unsigned_short.array("region", "", size = 4)
+    unsigned_short.member("region", "")[4]
 }
 
 val nk_cursor = struct(Module.NUKLEAR, "NkCursor", nativeName = "struct nk_cursor") {
@@ -205,7 +205,7 @@ val nk_memory = struct(Module.NUKLEAR, "NkMemory", nativeName = "struct nk_memor
 }
 
 val nk_buffer = struct(Module.NUKLEAR, "NkBuffer", nativeName = "struct nk_buffer", mutable = false) {
-    nk_buffer_marker.array("marker", "buffer marker to free a buffer to a certain offset", size = 2)
+    nk_buffer_marker.member("marker", "buffer marker to free a buffer to a certain offset")[2]
     nk_allocator.member("pool", "allocator callback for dynamic buffers")
     nk_allocation_type.member("type", "memory management type")
     nk_memory.member("memory", "memory and size of the current memory block")
@@ -297,8 +297,8 @@ const val NK_TEXTEDIT_UNDOCHARCOUNT = 999
 val nk_text_undo_state = struct(Module.NUKLEAR, "NkTextUndoState", nativeName = "struct nk_text_undo_state", mutable = false) {
     access = Access.INTERNAL
 
-    nk_text_undo_record.array("undo_rec", "", size = NK_TEXTEDIT_UNDOSTATECOUNT)
-    nk_rune.array("undo_char", "", size = NK_TEXTEDIT_UNDOCHARCOUNT)
+    nk_text_undo_record.member("undo_rec", "")[NK_TEXTEDIT_UNDOSTATECOUNT]
+    nk_rune.member("undo_char", "")[NK_TEXTEDIT_UNDOCHARCOUNT]
     short.member("undo_point", "")
     short.member("redo_point", "")
     short.member("undo_char_point", "")
@@ -330,7 +330,7 @@ val nk_text_edit = struct(Module.NUKLEAR, "NkTextEdit", nativeName = "struct nk_
 // FONT
 
 val nk_user_font_glyph = struct(Module.NUKLEAR, "NkUserFontGlyph", nativeName = "struct nk_user_font_glyph") {
-    nk_vec2.array("uv", "texture coordinates", size = 2)
+    nk_vec2.member("uv", "texture coordinates")[2]
     nk_vec2.member("offset", "offset between top left and glyph")
     float.member("width", "width of the glyph")
     float.member("height", "height of the glyph")
@@ -406,7 +406,7 @@ val nk_command_curve = struct(Binding.NUKLEAR, "NkCommandCurve", nativeName = "s
     unsigned_short.member("line_thickness", "")
     nk_vec2i.member("begin", "")
     nk_vec2i.member("end", "")
-    nk_vec2i.array("ctrl", "", size = 2)
+    nk_vec2i.member("ctrl", "")[2]
     nk_color.member("color", "")
 }
 
@@ -485,7 +485,7 @@ val nk_command_arc = struct(Binding.NUKLEAR, "NkCommandArc", nativeName = "struc
     short.member("cy", "")
     unsigned_short.member("r", "")
     unsigned_short.member("line_thickness", "")
-    float.array("a", "", size = 2)
+    float.member("a", "")[2]
     nk_color.member("color", "")
 }
 
@@ -494,7 +494,7 @@ val nk_command_arc_filled = struct(Binding.NUKLEAR, "NkCommandArcFilled", native
     short.member("cx", "")
     short.member("cy", "")
     unsigned_short.member("r", "")
-    float.array("a", "", size = 2)
+    float.member("a", "")[2]
     nk_color.member("color", "")
 }
 
@@ -503,14 +503,14 @@ val nk_command_polygon = struct(Binding.NUKLEAR, "NkCommandPolygon", nativeName 
     nk_color.member("color", "")
     unsigned_short.member("line_thickness", "")
     unsigned_short.member("point_count", "")
-    nk_vec2i.array("points", "", size = 1)
+    nk_vec2i.member("points", "")[1]
 }
 
 val nk_command_polygon_filled = struct(Binding.NUKLEAR, "NkCommandPolygonFilled", nativeName = "struct nk_command_polygon_filled") {
     nk_command.member("header", "")
     nk_color.member("color", "")
     unsigned_short.member("point_count", "")
-    nk_vec2i.array("points", "", size = 1)
+    nk_vec2i.member("points", "")[1]
 }
 
 val nk_command_polyline = struct(Binding.NUKLEAR, "NkCommandPolyline", nativeName = "struct nk_command_polyline") {
@@ -518,7 +518,7 @@ val nk_command_polyline = struct(Binding.NUKLEAR, "NkCommandPolyline", nativeNam
     nk_color.member("color", "")
     unsigned_short.member("line_thickness", "")
     unsigned_short.member("point_count", "")
-    nk_vec2i.array("points", "", size = 1)
+    nk_vec2i.member("points", "")[1]
 }
 
 val nk_command_image = struct(Binding.NUKLEAR, "NkCommandImage", nativeName = "struct nk_command_image") {
@@ -542,7 +542,7 @@ val nk_command_text = struct(Binding.NUKLEAR, "NkCommandText", nativeName = "str
     unsigned_short.member("h", "")
     float.member("height", "")
     int.member("length", "")
-    char.array("string", "", size = 1)
+    char.member("string", "")[1]
 }*/
 
 val nk_command_custom_callback = Module.NUKLEAR.callback {
@@ -592,7 +592,7 @@ val nk_mouse_button = struct(Module.NUKLEAR, "NkMouseButton", nativeName = "stru
 val nk_mouse = struct(Module.NUKLEAR, "NkMouse", nativeName = "struct nk_mouse", mutable = false) {
     javaImport("static org.lwjgl.nuklear.Nuklear.NK_BUTTON_MAX")
 
-    nk_mouse_button.array("buttons", "", size = "NK_BUTTON_MAX")
+    nk_mouse_button.member("buttons", "")["NK_BUTTON_MAX"]
     nk_vec2.member("pos", "")
     nk_vec2.member("prev", "")
     nk_vec2.member("delta", "")
@@ -610,8 +610,8 @@ val nk_key = struct(Module.NUKLEAR, "NkKey", nativeName = "struct nk_key", mutab
 val nk_keyboard = struct(Module.NUKLEAR, "NkKeyboard", nativeName = "struct nk_keyboard", mutable = false) {
     javaImport("static org.lwjgl.nuklear.Nuklear.*")
 
-    nk_key.array("keys", "", size = "NK_KEY_MAX")
-    char.array("text", "", size = "NK_INPUT_MAX")
+    nk_key.member("keys", "")["NK_KEY_MAX"]
+    char.member("text", "")["NK_INPUT_MAX"]
     int.member("text_len", "")
 }
 
@@ -634,7 +634,7 @@ val nk_draw_command = struct(Module.NUKLEAR, "NkDrawCommand", nativeName = "stru
 
 val nk_draw_list = struct(Module.NUKLEAR, "NkDrawList", nativeName = "struct nk_draw_list", mutable = false) {
     nk_rect.member("clip_rect", "")
-    nk_vec2.array("circle_vtx", "", size = 12)
+    nk_vec2.member("circle_vtx", "")[12]
     nk_convert_config.member("config", "")
 
     nullable..nk_buffer_p.member("buffer", "")
@@ -1087,7 +1087,7 @@ val nk_style = struct(Module.NUKLEAR, "NkStyle", nativeName = "struct nk_style")
     javaImport("static org.lwjgl.nuklear.Nuklear.NK_CURSOR_COUNT")
 
     nullable..nk_user_font.p.member("font", "")
-    nullable..nk_cursor.p.array("cursors", "", size = "NK_CURSOR_COUNT")
+    nullable..nk_cursor.p.member("cursors", "")["NK_CURSOR_COUNT"]
     nullable..nk_cursor.p.member("cursor_active", "")
     nullable..nk_cursor.p.member("cursor_last", "")
     intb.member("cursor_visible", "")
@@ -1132,7 +1132,7 @@ val nk_chart = struct(Module.NUKLEAR, "NkChart", nativeName = "struct nk_chart",
     float.member("y", "")
     float.member("w", "")
     float.member("h", "")
-    nk_chart_slot.array("slots", "", size = NK_CHART_MAX_SLOT)
+    nk_chart_slot.member("slots", "")[NK_CHART_MAX_SLOT]
 }
 
 const val NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS = 16
@@ -1149,7 +1149,7 @@ val nk_row_layout = struct(Module.NUKLEAR, "NkRowLayout", nativeName = "struct n
     float.member("filled", "")
     nk_rect.member("item", "")
     int.member("tree_depth", "")
-    float.array("templates", "", size = NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS)
+    float.member("templates", "")[NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS]
 }
 
 val nk_popup_buffer = struct(Module.NUKLEAR, "NkPopupBuffer", nativeName = "struct nk_popup_buffer", mutable = false) {
@@ -1225,7 +1225,7 @@ val nk_property_state = struct(Module.NUKLEAR, "NkPropertyState", nativeName = "
 
     int.member("active", "")
     int.member("prev", "")
-    char.array("buffer", "", size = "NK_MAX_NUMBER_BUFFER")
+    char.member("buffer", "")["NK_MAX_NUMBER_BUFFER"]
     int.member("length", "")
     int.member("cursor", "")
     int.member("select_start", "")
@@ -1240,7 +1240,7 @@ const val NK_WINDOW_MAX_NAME = 64
 val nk_window = struct(Module.NUKLEAR, "NkWindow", nativeName = "struct nk_window", mutable = false) {
     unsigned_int.member("seq", "")
     nk_hash.member("name", "")
-    charUTF8.array("name_string", "", size = NK_WINDOW_MAX_NAME)
+    charUTF8.member("name_string", "")[NK_WINDOW_MAX_NAME]
     nk_flags.member("flags", "")
     nk_rect.member("bounds", "")
     nk_scroll.member("scrollbar", "")
@@ -1291,7 +1291,7 @@ fun NK_CONFIGURATION_STACK(address: PointerType<*>, old_value: DataType, javaNam
         access = Access.INTERNAL
 
         int.member("head", "")
-        element.array("elements", "", size = size)
+        element.member("elements", "")[size]
     }
 }
 

@@ -820,9 +820,9 @@ val VkPhysicalDeviceLimits = struct(Module.VULKAN, "VkPhysicalDeviceLimits", mut
     uint32_t.member("maxFragmentDualSrcAttachments", "the maximum number of output attachments which <b>can</b> be written to by the fragment shader stage when blending is enabled and one of the dual source blend modes is in use. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#framebuffer-dsb\">the “Dual-Source Blending” section</a> and <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#features-features-dualSrcBlend\">dualSrcBlend</a>.")
     uint32_t.member("maxFragmentCombinedOutputResources", "the total number of storage buffers, storage images, and output buffers which <b>can</b> be used in the fragment shader stage.")
     uint32_t.member("maxComputeSharedMemorySize", "the maximum total storage size, in bytes, of all variables declared with the {@code WorkgroupLocal} storage class in shader modules (or with the {@code shared} storage qualifier in GLSL) in the compute shader stage.")
-    uint32_t.array("maxComputeWorkGroupCount", "the maximum number of local workgroups that <b>can</b> be dispatched by a single dispatch command. These three values represent the maximum number of local workgroups for the X, Y, and Z dimensions, respectively. The workgroup count parameters to the dispatch commands <b>must</b> be less than or equal to the corresponding limit. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#dispatch\">the “Dispatching Commands” chapter</a>.", size = 3)
+    uint32_t.member("maxComputeWorkGroupCount", "the maximum number of local workgroups that <b>can</b> be dispatched by a single dispatch command. These three values represent the maximum number of local workgroups for the X, Y, and Z dimensions, respectively. The workgroup count parameters to the dispatch commands <b>must</b> be less than or equal to the corresponding limit. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#dispatch\">the “Dispatching Commands” chapter</a>.")[3]
     uint32_t.member("maxComputeWorkGroupInvocations", "the maximum total number of compute shader invocations in a single local workgroup. The product of the X, Y, and Z sizes as specified by the {@code LocalSize} execution mode in shader modules and by the object decorated by the {@code WorkgroupSize} decoration <b>must</b> be less than or equal to this limit.")
-    uint32_t.array("maxComputeWorkGroupSize", "the maximum size of a local compute workgroup, per dimension. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes specified by the {@code LocalSize} execution mode and by the object decorated by the {@code WorkgroupSize} decoration in shader modules <b>must</b> be less than or equal to the corresponding limit.", size = 3)
+    uint32_t.member("maxComputeWorkGroupSize", "the maximum size of a local compute workgroup, per dimension. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes specified by the {@code LocalSize} execution mode and by the object decorated by the {@code WorkgroupSize} decoration in shader modules <b>must</b> be less than or equal to the corresponding limit.")[3]
     uint32_t.member("subPixelPrecisionBits", "the number of bits of subpixel precision in framebuffer coordinates <code>x<sub>f</sub></code> and <code>y<sub>f</sub></code>. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#primsrast\">the “Rasterization” chapter</a>.")
     uint32_t.member("subTexelPrecisionBits", "the number of bits of precision in the division along an axis of an image used for minification and magnification filters. <code>2<sup>subTexelPrecisionBits</sup></code> is the actual number of divisions along each axis of the image represented. Sub-texel values calculated during image sampling will snap to these locations when generating the filtered results.")
     uint32_t.member("mipmapPrecisionBits", "the number of bits of division that the LOD calculation for mipmap fetching get snapped to when determining the contribution from each mip level to the mip filtered results. <code>2<sup>mipmapPrecisionBits</sup></code> is the actual number of divisions.")
@@ -831,12 +831,12 @@ val VkPhysicalDeviceLimits = struct(Module.VULKAN, "VkPhysicalDeviceLimits", mut
     float.member("maxSamplerLodBias", "the maximum absolute sampler LOD bias. The sum of the {@code mipLodBias} member of the ##VkSamplerCreateInfo structure and the {@code Bias} operand of image sampling operations in shader modules (or 0 if no {@code Bias} operand is provided to an image sampling operation) are clamped to the range <code>[-maxSamplerLodBias,+maxSamplerLodBias]</code>. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#samplers-mipLodBias\">samplers-mipLodBias</a>.")
     float.member("maxSamplerAnisotropy", "the maximum degree of sampler anisotropy. The maximum degree of anisotropic filtering used for an image sampling operation is the minimum of the {@code maxAnisotropy} member of the ##VkSamplerCreateInfo structure and this limit. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#samplers-maxAnisotropy\">samplers-maxAnisotropy</a>.")
     uint32_t.member("maxViewports", "the maximum number of active viewports. The {@code viewportCount} member of the ##VkPipelineViewportStateCreateInfo structure that is provided at pipeline creation <b>must</b> be less than or equal to this limit.")
-    uint32_t.array("maxViewportDimensions", "are the maximum viewport dimensions in the X (width) and Y (height) dimensions, respectively. The maximum viewport dimensions <b>must</b> be greater than or equal to the largest image which <b>can</b> be created and used as a framebuffer attachment. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#vertexpostproc-viewport\">Controlling the Viewport</a>.", size = 2)
-    float.array("viewportBoundsRange", """the <code>[minimum, maximum]</code> range that the corners of a viewport <b>must</b> be contained in. This range <b>must</b> be at least <code>[-2 × size, 2 × size - 1]</code>, where <code>size = max(maxViewportDimensions[0], maxViewportDimensions[1])</code>. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#vertexpostproc-viewport">Controlling the Viewport</a>.
+    uint32_t.member("maxViewportDimensions", "are the maximum viewport dimensions in the X (width) and Y (height) dimensions, respectively. The maximum viewport dimensions <b>must</b> be greater than or equal to the largest image which <b>can</b> be created and used as a framebuffer attachment. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#vertexpostproc-viewport\">Controlling the Viewport</a>.")[2]
+    float.member("viewportBoundsRange", """the <code>[minimum, maximum]</code> range that the corners of a viewport <b>must</b> be contained in. This range <b>must</b> be at least <code>[-2 × size, 2 × size - 1]</code>, where <code>size = max(maxViewportDimensions[0], maxViewportDimensions[1])</code>. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#vertexpostproc-viewport">Controlling the Viewport</a>.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         The intent of the {@code viewportBoundsRange} limit is to allow a maximum sized viewport to be arbitrarily shifted relative to the output target as long as at least some portion intersects. This would give a bounds limit of <code>[-size + 1, 2 × size - 1]</code> which would allow all possible non-empty-set intersections of the output target and the viewport. Since these numbers are typically powers of two, picking the signed number range using the smallest possible number of bits ends up with the specified range.
-        </div>""", size = 2)
+        </div>""")[2]
     uint32_t.member("viewportSubPixelBits", "the number of bits of subpixel precision for viewport bounds. The subpixel precision that floating-point viewport bounds are interpreted at is given by this limit.")
     size_t.member("minMemoryMapAlignment", "the minimum required: alignment, in bytes, of host visible memory allocations within the host address space. When mapping a memory allocation with #MapMemory(), subtracting {@code offset} bytes from the returned pointer will always produce an integer multiple of this limit. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-device-hostaccess\">the “Host Access to Device Memory Objects” section</a>.")
     VkDeviceSize.member("minTexelBufferOffsetAlignment", "the minimum required: alignment, in bytes, for the {@code offset} member of the ##VkBufferViewCreateInfo structure for texel buffers. When a buffer view is created for a buffer which was created with #BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT or #BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT set in the {@code usage} member of the ##VkBufferCreateInfo structure, the {@code offset} <b>must</b> be an integer multiple of this limit.")
@@ -869,8 +869,8 @@ val VkPhysicalDeviceLimits = struct(Module.VULKAN, "VkPhysicalDeviceLimits", mut
     uint32_t.member("maxCullDistances", "the maximum number of cull distances that <b>can</b> be used in a single shader stage. The size of any array declared with the {@code CullDistance} built-in decoration in a shader module <b>must</b> be less than or equal to this limit.")
     uint32_t.member("maxCombinedClipAndCullDistances", "the maximum combined number of clip and cull distances that <b>can</b> be used in a single shader stage. The sum of the sizes of any pair of arrays declared with the {@code ClipDistance} and {@code CullDistance} built-in decoration used by a single shader stage in a shader module <b>must</b> be less than or equal to this limit.")
     uint32_t.member("discreteQueuePriorities", "the number of discrete priorities that <b>can</b> be assigned to a queue based on the value of each member of ##VkDeviceQueueCreateInfo{@code ::pQueuePriorities}. This <b>must</b> be at least 2, and levels <b>must</b> be spread evenly over the range, with at least one level at 1.0, and another at 0.0. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#devsandqueues-priority\">the “Queue Priority” section</a>.")
-    float.array("pointSizeRange", "the range <code>[minimum,maximum]</code> of supported sizes for points. Values written to variables decorated with the {@code PointSize} built-in decoration are clamped to this range.", size = 2)
-    float.array("lineWidthRange", "the range <code>[minimum,maximum]</code> of supported widths for lines. Values specified by the {@code lineWidth} member of the ##VkPipelineRasterizationStateCreateInfo or the {@code lineWidth} parameter to #CmdSetLineWidth() are clamped to this range.", size = 2)
+    float.member("pointSizeRange", "the range <code>[minimum,maximum]</code> of supported sizes for points. Values written to variables decorated with the {@code PointSize} built-in decoration are clamped to this range.")[2]
+    float.member("lineWidthRange", "the range <code>[minimum,maximum]</code> of supported widths for lines. Values specified by the {@code lineWidth} member of the ##VkPipelineRasterizationStateCreateInfo or the {@code lineWidth} parameter to #CmdSetLineWidth() are clamped to this range.")[2]
     float.member("pointSizeGranularity", "the granularity of supported point sizes. Not all point sizes in the range defined by {@code pointSizeRange} are supported. This limit specifies the granularity (or increment) between successive supported point sizes.")
     float.member("lineWidthGranularity", "the granularity of supported line widths. Not all line widths in the range defined by {@code lineWidthRange} are supported. This limit specifies the granularity (or increment) between successive supported line widths.")
     VkBool32.member("strictLines", "specifies whether lines are rasterized according to the preferred method of rasterization. If set to #FALSE, lines <b>may</b> be rasterized under a relaxed set of rules. If set to #TRUE, lines are rasterized as per the strict definition. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#primsrast-lines-basic\">Basic Line Segment Rasterization</a>.")
@@ -933,8 +933,8 @@ val VkPhysicalDeviceProperties = struct(Module.VULKAN, "VkPhysicalDeviceProperti
     uint32_t.member("vendorID", "a unique identifier for the <em>vendor</em> (see below) of the physical device.")
     uint32_t.member("deviceID", "a unique identifier for the physical device among devices available from the vendor.")
     VkPhysicalDeviceType.member("deviceType", "a {@code VkPhysicalDeviceType} specifying the type of device.")
-    charUTF8.array("deviceName", "a null-terminated UTF-8 string containing the name of the device.", size = "VK_MAX_PHYSICAL_DEVICE_NAME_SIZE")
-    uint8_t.array("pipelineCacheUUID", "an array of size #UUID_SIZE, containing 8-bit values that represent a universally unique identifier for the device.", size = "VK_UUID_SIZE")
+    charUTF8.member("deviceName", "a null-terminated UTF-8 string containing the name of the device.")["VK_MAX_PHYSICAL_DEVICE_NAME_SIZE"]
+    uint8_t.member("pipelineCacheUUID", "an array of size #UUID_SIZE, containing 8-bit values that represent a universally unique identifier for the device.")["VK_UUID_SIZE"]
     VkPhysicalDeviceLimits.member("limits", "the ##VkPhysicalDeviceLimits structure which specifies device-specific limits of the physical device. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#features-limits\">Limits</a> for details.")
     VkPhysicalDeviceSparseProperties.member("sparseProperties", "the ##VkPhysicalDeviceSparseProperties structure which specifies various sparse related properties of the physical device. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#sparsememory-physicalprops\">Sparse Properties</a> for details.")
 }
@@ -1091,9 +1091,9 @@ val VkPhysicalDeviceMemoryProperties = struct(Module.VULKAN, "VkPhysicalDeviceMe
         """
 
     AutoSize("memoryTypes")..uint32_t.member("memoryTypeCount", "the number of valid elements in the {@code memoryTypes} array.")
-    VkMemoryType.array("memoryTypes", "an array of ##VkMemoryType structures describing the <em>memory types</em> that <b>can</b> be used to access memory allocated from the heaps specified by {@code memoryHeaps}.", size = "VK_MAX_MEMORY_TYPES")
+    VkMemoryType.member("memoryTypes", "an array of ##VkMemoryType structures describing the <em>memory types</em> that <b>can</b> be used to access memory allocated from the heaps specified by {@code memoryHeaps}.")["VK_MAX_MEMORY_TYPES"]
     AutoSize("memoryHeaps")..uint32_t.member("memoryHeapCount", "the number of valid elements in the {@code memoryHeaps} array.")
-    VkMemoryHeap.array("memoryHeaps", "an array of ##VkMemoryHeap structures describing the <em>memory heaps</em> from which memory <b>can</b> be allocated.", size = "VK_MAX_MEMORY_HEAPS")
+    VkMemoryHeap.member("memoryHeaps", "an array of ##VkMemoryHeap structures describing the <em>memory heaps</em> from which memory <b>can</b> be allocated.")["VK_MAX_MEMORY_HEAPS"]
 }
 
 val VkDeviceQueueCreateInfo = struct(Module.VULKAN, "VkDeviceQueueCreateInfo") {
@@ -1177,7 +1177,7 @@ val VkExtensionProperties = struct(Module.VULKAN, "VkExtensionProperties", mutab
         Structure specifying an extension properties.
         """
 
-    charUTF8.array("extensionName", "a null-terminated string specifying the name of the extension.", size = "VK_MAX_EXTENSION_NAME_SIZE")
+    charUTF8.member("extensionName", "a null-terminated string specifying the name of the extension.")["VK_MAX_EXTENSION_NAME_SIZE"]
     uint32_t.member("specVersion", "the version of this extension. It is an integer, incremented with backward compatible changes.")
 }
 
@@ -1188,10 +1188,10 @@ val VkLayerProperties = struct(Module.VULKAN, "VkLayerProperties", mutable = fal
         Structure specifying layer properties.
         """
 
-    charUTF8.array("layerName", "a null-terminated UTF-8 string specifying the name of the layer. Use this name in the {@code ppEnabledLayerNames} array passed in the ##VkInstanceCreateInfo structure to enable this layer for an instance.", size = "VK_MAX_EXTENSION_NAME_SIZE")
+    charUTF8.member("layerName", "a null-terminated UTF-8 string specifying the name of the layer. Use this name in the {@code ppEnabledLayerNames} array passed in the ##VkInstanceCreateInfo structure to enable this layer for an instance.")["VK_MAX_EXTENSION_NAME_SIZE"]
     uint32_t.member("specVersion", "the Vulkan version the layer was written to, encoded as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#fundamentals-versionnum\">API Version Numbers and Semantics</a> section.")
     uint32_t.member("implementationVersion", "the version of this layer. It is an integer, increasing with backward compatible changes.")
-    charUTF8.array("description", "a null-terminated UTF-8 string providing additional details that <b>can</b> be used by the application to identify the layer.", size = "VK_MAX_DESCRIPTION_SIZE")
+    charUTF8.member("description", "a null-terminated UTF-8 string providing additional details that <b>can</b> be used by the application to identify the layer.")["VK_MAX_DESCRIPTION_SIZE"]
 }
 
 val VkSubmitInfo = struct(Module.VULKAN, "VkSubmitInfo") {
@@ -2856,7 +2856,7 @@ val VkPipelineColorBlendStateCreateInfo = struct(Module.VULKAN, "VkPipelineColor
     VkLogicOp.member("logicOp", "selects which logical operation to apply.")
     AutoSize("pAttachments", optional = true)..uint32_t.member("attachmentCount", "the number of ##VkPipelineColorBlendAttachmentState elements in {@code pAttachments}. This value <b>must</b> equal the {@code colorAttachmentCount} for the subpass in which this pipeline is used.")
     VkPipelineColorBlendAttachmentState.const.p.buffer("pAttachments", "a pointer to array of per target attachment states.")
-    float.array("blendConstants", "an array of four values used as the R, G, B, and A components of the blend constant that are used in blending, depending on the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#framebuffer-blendfactors\">blend factor</a>.", size = 4)
+    float.member("blendConstants", "an array of four values used as the R, G, B, and A components of the blend constant that are used in blending, depending on the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#framebuffer-blendfactors\">blend factor</a>.")[4]
 }
 
 val VkPipelineDynamicStateCreateInfo = struct(Module.VULKAN, "VkPipelineDynamicStateCreateInfo") {
@@ -4213,9 +4213,9 @@ val VkImageBlit = struct(Module.VULKAN, "VkImageBlit") {
         """
 
     VkImageSubresourceLayers.member("srcSubresource", "the subresource to blit from.")
-    VkOffset3D.array("srcOffsets", "an array of two ##VkOffset3D structures specifying the bounds of the source region within {@code srcSubresource}.", size = 2)
+    VkOffset3D.member("srcOffsets", "an array of two ##VkOffset3D structures specifying the bounds of the source region within {@code srcSubresource}.")[2]
     VkImageSubresourceLayers.member("dstSubresource", "the subresource to blit into.")
-    VkOffset3D.array("dstOffsets", "an array of two ##VkOffset3D structures specifying the bounds of the destination region within {@code dstSubresource}.", size = 2)
+    VkOffset3D.member("dstOffsets", "an array of two ##VkOffset3D structures specifying the bounds of the destination region within {@code dstSubresource}.")[2]
 }
 
 val VkBufferImageCopy = struct(Module.VULKAN, "VkBufferImageCopy") {
@@ -4297,9 +4297,9 @@ val VkClearColorValue = union(Module.VULKAN, "VkClearColorValue") {
         ##VkClearValue, #CmdClearColorImage()
         """
 
-    float.array("float32", "are the color clear values when the format of the image or attachment is one of the formats in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#features-formats-numericformat\">Interpretation of Numeric Format</a> table other than signed integer ({@code SINT}) or unsigned integer ({@code UINT}). Floating point values are automatically converted to the format of the image, with the clear value being treated as linear if the image is sRGB.", size = 4)
-    int32_t.array("int32", "are the color clear values when the format of the image or attachment is signed integer ({@code SINT}). Signed integer values are converted to the format of the image by casting to the smaller type (with negative 32-bit values mapping to negative values in the smaller type). If the integer clear value is not representable in the target type (e.g. would overflow in conversion to that type), the clear value is undefined.", size = 4)
-    uint32_t.array("uint32", "are the color clear values when the format of the image or attachment is unsigned integer ({@code UINT}). Unsigned integer values are converted to the format of the image by casting to the integer type with fewer bits.", size = 4)
+    float.member("float32", "are the color clear values when the format of the image or attachment is one of the formats in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#features-formats-numericformat\">Interpretation of Numeric Format</a> table other than signed integer ({@code SINT}) or unsigned integer ({@code UINT}). Floating point values are automatically converted to the format of the image, with the clear value being treated as linear if the image is sRGB.")[4]
+    int32_t.member("int32", "are the color clear values when the format of the image or attachment is signed integer ({@code SINT}). Signed integer values are converted to the format of the image by casting to the smaller type (with negative 32-bit values mapping to negative values in the smaller type). If the integer clear value is not representable in the target type (e.g. would overflow in conversion to that type), the clear value is undefined.")[4]
+    uint32_t.member("uint32", "are the color clear values when the format of the image or attachment is unsigned integer ({@code UINT}). Unsigned integer values are converted to the format of the image by casting to the integer type with fewer bits.")[4]
 }
 
 val VkClearDepthStencilValue = struct(Module.VULKAN, "VkClearDepthStencilValue") {
@@ -5191,7 +5191,7 @@ val VkPhysicalDeviceGroupProperties = struct(Module.VULKAN, "VkPhysicalDeviceGro
     VkStructureType.member("sType", "the type of this structure.").mutable()
     nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
     uint32_t.member("physicalDeviceCount", "the number of physical devices in the group.")
-    VkPhysicalDevice.array("physicalDevices", "an array of physical device handles representing all physical devices in the group. The first {@code physicalDeviceCount} elements of the array will be valid.", size = "VK_MAX_DEVICE_GROUP_SIZE")
+    VkPhysicalDevice.member("physicalDevices", "an array of physical device handles representing all physical devices in the group. The first {@code physicalDeviceCount} elements of the array will be valid.")["VK_MAX_DEVICE_GROUP_SIZE"]
     VkBool32.member("subsetAllocation", "specifies whether logical devices created from the group support allocating device memory on a subset of devices, via the {@code deviceMask} member of the ##VkMemoryAllocateFlagsInfo. If this is #FALSE, then all device memory allocations are made across all physical devices in the group. If {@code physicalDeviceCount} is 1, then {@code subsetAllocation} <b>must</b> be #FALSE.")
 }
 
@@ -6267,9 +6267,9 @@ val VkPhysicalDeviceIDProperties = struct(Module.VULKAN, "VkPhysicalDeviceIDProp
 
     VkStructureType.member("sType", "the type of this structure.").mutable()
     nullable..opaque_p.member("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
-    uint8_t.array("deviceUUID", "an array of size #UUID_SIZE, containing 8-bit values that represent a universally unique identifier for the device.", size = "VK_UUID_SIZE")
-    uint8_t.array("driverUUID", "an array of size #UUID_SIZE, containing 8-bit values that represent a universally unique identifier for the driver build in use by the device.", size = "VK_UUID_SIZE")
-    uint8_t.array("deviceLUID", "an array of size #LUID_SIZE, containing 8-bit values that represent a locally unique identifier for the device.", size = "VK_LUID_SIZE")
+    uint8_t.member("deviceUUID", "an array of size #UUID_SIZE, containing 8-bit values that represent a universally unique identifier for the device.")["VK_UUID_SIZE"]
+    uint8_t.member("driverUUID", "an array of size #UUID_SIZE, containing 8-bit values that represent a universally unique identifier for the driver build in use by the device.")["VK_UUID_SIZE"]
+    uint8_t.member("deviceLUID", "an array of size #LUID_SIZE, containing 8-bit values that represent a locally unique identifier for the device.")["VK_LUID_SIZE"]
     uint32_t.member("deviceNodeMask", "a bitfield identifying the node within a linked device adapter corresponding to the device.")
     VkBool32.member("deviceLUIDValid", "a boolean value that will be #TRUE if {@code deviceLUID} contains a valid LUID and {@code deviceNodeMask} contains a valid node mask, and #FALSE if they do not.")
 }

@@ -130,19 +130,19 @@ val CUoccupancyB2DSize = Module.CUDA.callback {
 
 val CUuuid = struct(Module.CUDA, "CUuuid", mutable = false) {
     documentation = "CUDA definition of UUID"
-    charASCII.array("bytes", "", size = 16)
+    charASCII.member("bytes", "")[16]
 }
 
 val CUipcEventHandle = struct(Module.CUDA, "CUIPCEventHandle", nativeName = "CUipcEventHandle") {
     javaImport("static org.lwjgl.cuda.CU41.*")
 
-    char.array("reserved", "", size = "CU_IPC_HANDLE_SIZE")
+    char.member("reserved", "")["CU_IPC_HANDLE_SIZE"]
 }
 
 val CUipcMemHandle = struct(Module.CUDA, "CUIPCMemHandle", nativeName = "CUipcMemHandle") {
     javaImport("static org.lwjgl.cuda.CU41.*")
 
-    char.array("reserved", "", size = "CU_IPC_HANDLE_SIZE")
+    char.member("reserved", "")["CU_IPC_HANDLE_SIZE"]
 }
 
 val CUDA_MEMCPY2D = struct(Module.CUDA, "CUDA_MEMCPY2D") {
@@ -269,7 +269,7 @@ val CUDA_EXTERNAL_MEMORY_HANDLE_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_MEMORY
     }.member("handle", "")
     unsigned_long_long.member("size", "Size of the memory allocation")
     unsigned_int.member("flags", "Flags must either be zero or ::CUDA_EXTERNAL_MEMORY_DEDICATED")
-    unsigned_int.array("reserved", "", size = 16)
+    unsigned_int.member("reserved", "")[16]
 }
 
 val CUDA_EXTERNAL_MEMORY_BUFFER_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_MEMORY_BUFFER_DESC") {
@@ -278,7 +278,7 @@ val CUDA_EXTERNAL_MEMORY_BUFFER_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_MEMORY
     unsigned_long_long.member("offset", "Offset into the memory object where the buffer's base is")
     unsigned_long_long.member("size", "Size of the buffer")
     unsigned_int.member("flags", "Flags reserved for future use. Must be zero.")
-    unsigned_int.array("reserved", "", size = 16)
+    unsigned_int.member("reserved", "")[16]
 }
 
 val CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC") {
@@ -287,7 +287,7 @@ val CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC = struct(Module.CUDA, "CUDA_EXTERN
     unsigned_long_long.member("offset", "Offset into the memory object where the base level of the mipmap chain is.")
     CUDA_ARRAY3D_DESCRIPTOR.member("arrayDesc", "Format, dimension and type of base level of the mipmap chain")
     unsigned_int.member("numLevels", "Total number of levels in the mipmap chain")
-    unsigned_int.array("reserved", "", size = 16)
+    unsigned_int.member("reserved", "")[16]
 }
 
 val CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC") {
@@ -311,7 +311,7 @@ val CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC = struct(Module.CUDA, "CUDA_EXTERNAL_SEM
         )
     }.member("handle", "")
     unsigned_int.member("flags", "Flags reserved for the future. Must be zero.")
-    unsigned_int.array("reserved", "", size = 16)
+    unsigned_int.member("reserved", "")[16]
 }
 
 val CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS = struct(Module.CUDA, "CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS") {
@@ -321,10 +321,10 @@ val CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS = struct(Module.CUDA, "CUDA_EXTERNAL_S
         struct {
             unsigned_long_long.member("value", "")
         }.member("fence", "Value of fence to be signaled")
-        unsigned_int.array("reserved", "", size = 16)
+        unsigned_int.member("reserved", "")[16]
     }.member("params", "Parameters for fence objects")
     unsigned_int.member("flags", "Flags reserved for the future. Must be zero.")
-    unsigned_int.array("reserved", "", size = 16)
+    unsigned_int.member("reserved", "")[16]
 }
 
 val CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS = struct(Module.CUDA, "CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS") {
@@ -334,10 +334,10 @@ val CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS = struct(Module.CUDA, "CUDA_EXTERNAL_SEM
         struct {
             unsigned_long_long.member("value", "")
         }.member("fence", "Value of fence to be waited on")
-        unsigned_int.array("reserved", "", size = 16)
+        unsigned_int.member("reserved", "")[16]
     }.member("params", "Parameters for fence objects")
     unsigned_int.member("flags", "Flags reserved for the future. Must be zero.")
-    unsigned_int.array("reserved", "", size = 16)
+    unsigned_int.member("reserved", "")[16]
 }
 
 val CUstreamBatchMemOpParams = union(Module.CUDA, "CUstreamBatchMemOpParams") {
@@ -368,7 +368,7 @@ val CUstreamBatchMemOpParams = union(Module.CUDA, "CUstreamBatchMemOpParams") {
         CUstreamBatchMemOpType.member("operation", "")
         unsigned_int.member("flags", "")
     }.member("flushRemoteWrites", "")
-    cuuint64_t.array("pad", "", size = 6)
+    cuuint64_t.member("pad", "")[6]
 }
 
 val CUDA_LAUNCH_PARAMS = struct(Module.CUDA, "CUDA_LAUNCH_PARAMS") {
@@ -445,7 +445,7 @@ val CUDA_RESOURCE_DESC = struct(Module.CUDA, "CUDA_RESOURCE_DESC") {
             size_t.member("pitchInBytes", "Pitch between two rows in bytes")
         }.member("pitch2D", "")
         struct {
-            int.array("reserved", "", size = 32)
+            int.member("reserved", "")[32]
         }.member("reserved", "")
     }.member("res", "")
 
@@ -455,7 +455,7 @@ val CUDA_RESOURCE_DESC = struct(Module.CUDA, "CUDA_RESOURCE_DESC") {
 val CUDA_TEXTURE_DESC = struct(Module.CUDA, "CUDA_TEXTURE_DESC") {
     documentation = "Texture descriptor."
 
-    CUaddress_mode.array("addressMode", "Address modes", size = 3)
+    CUaddress_mode.member("addressMode", "Address modes")[3]
     CUfilter_mode.member("filterMode", "Filter mode")
     unsigned_int.member("flags", "Flags")
     unsigned_int.member("maxAnisotropy", "Maximum anisotropy ratio")
@@ -463,8 +463,8 @@ val CUDA_TEXTURE_DESC = struct(Module.CUDA, "CUDA_TEXTURE_DESC") {
     float.member("mipmapLevelBias", "Mipmap level bias")
     float.member("minMipmapLevelClamp", "Mipmap minimum level clamp")
     float.member("maxMipmapLevelClamp", "Mipmap maximum level clamp")
-    float.array("borderColor", "Border Color", size = 4)
-    int.array("reserved", "", size = 12)
+    float.member("borderColor", "Border Color")[4]
+    int.member("reserved", "")[12]
 }
 
 val CUDA_RESOURCE_VIEW_DESC = struct(Module.CUDA, "CUDA_RESOURCE_VIEW_DESC") {
@@ -478,15 +478,15 @@ val CUDA_RESOURCE_VIEW_DESC = struct(Module.CUDA, "CUDA_RESOURCE_VIEW_DESC") {
     unsigned_int.member("lastMipmapLevel", "Last defined mipmap level")
     unsigned_int.member("firstLayer", "First layer index")
     unsigned_int.member("lastLayer", "Last layer index")
-    unsigned_int.array("reserved", "", size = 16)
+    unsigned_int.member("reserved", "")[16]
 }
 
 val CUdevprop = struct(Module.CUDA, "CUdevprop") {
     documentation = "Legacy device properties."
 
     int.member("maxThreadsPerBlock", "Maximum number of threads per block")
-    int.array("maxThreadsDim", "Maximum size of each dimension of a block", size = 3)
-    int.array("maxGridSize", "Maximum size of each dimension of a grid", size = 3)
+    int.member("maxThreadsDim", "Maximum size of each dimension of a block")[3]
+    int.member("maxGridSize", "Maximum size of each dimension of a grid")[3]
     int.member("sharedMemPerBlock", "Shared memory available per block in bytes")
     int.member("totalConstantMemory", "Constant memory available on device in bytes")
     int.member("SIMDWidth", "Warp size in threads")

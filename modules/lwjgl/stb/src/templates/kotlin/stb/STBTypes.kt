@@ -191,7 +191,7 @@ val stbrp_context = struct(Module.STB, "STBRPContext", nativeName = "stbrp_conte
     int.member("num_nodes", "")
     nullable..stbrp_node.p.member("active_head", "")
     nullable..stbrp_node.p.member("free_head", "")
-    stbrp_node.array("extra", "we allocate two extra nodes so optimal user-node-count is {@code width} not {@code width+2}", size = 2)
+    stbrp_node.member("extra", "we allocate two extra nodes so optimal user-node-count is {@code width} not {@code width+2}")[2]
 }
 
 // stb_truetype.h

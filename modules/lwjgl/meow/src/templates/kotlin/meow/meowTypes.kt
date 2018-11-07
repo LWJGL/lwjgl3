@@ -24,8 +24,8 @@ val meow_u128 = struct(Module.MEOW, "MeowU128", nativeName = "meow_u128", mutabl
 
 val meow_hash = union(Module.MEOW, "MeowHash", nativeName = "meow_hash", mutable = false) {
     meow_u128.member("u128", "").private()
-    meow_u64.array("u64", "", size = 2)
-    meow_u32.array("u32", "", size = 4)
+    meow_u64.member("u64", "")[2]
+    meow_u32.member("u32", "")[4]
 }
 
 val meow_source_blocks = struct(Module.MEOW, "MeowSourceBlocks", nativeName = "meow_source_blocks", mutable = false) {

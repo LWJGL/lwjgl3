@@ -66,7 +66,7 @@ val LZ4F_preferences_t = struct(Module.LZ4, "LZ4FPreferences", nativeName = "LZ4
     )
     unsigned.member("autoFlush", "1: always flush, reduces usage of internal buffers")
     unsigned.member("favorDecSpeed", "1: parser favors decompression speed vs compression ratio. Only works for high compression modes (&ge; #CLEVEL_OPT_MIN). Since version 1.8.2.")
-    unsigned.array("reserved", "must be zero for forward compatibility", size = 3)
+    unsigned.member("reserved", "must be zero for forward compatibility")[3]
 }
 
 val LZ4F_compressOptions_t = struct(Module.LZ4, "LZ4FCompressOptions", nativeName = "LZ4F_compressOptions_t") {
@@ -74,7 +74,7 @@ val LZ4F_compressOptions_t = struct(Module.LZ4, "LZ4FCompressOptions", nativeNam
         "stableSrc",
         "{@code 1 == src} content will remain present on future calls to {@code LZ4F_compress()}; skip copying {@code src} content within {@code tmp} buffer"
     )
-    unsigned.array("reserved", "", size = 3)
+    unsigned.member("reserved", "")[3]
 }
 
 val LZ4F_decompressOptions_t = struct(Module.LZ4, "LZ4FDecompressOptions", nativeName = "LZ4F_decompressOptions_t") {
@@ -82,7 +82,7 @@ val LZ4F_decompressOptions_t = struct(Module.LZ4, "LZ4FDecompressOptions", nativ
         "stableDst",
         "pledges that last 64KB decompressed data will remain available unmodified. This optimization skips storage operations in tmp buffers."
     )
-    unsigned.array("reserved", "must be set to zero for forward compatibility", size = 3)
+    unsigned.member("reserved", "must be set to zero for forward compatibility")[3]
 }
 
 // lz4frame_static.h

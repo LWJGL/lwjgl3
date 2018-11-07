@@ -112,10 +112,12 @@ val SQL_INTERVAL_STRUCT = struct(Module.ODBC, "SQL_INTERVAL_STRUCT") {
 }
 
 val SQL_NUMERIC_STRUCT = struct(Module.ODBC, "SQL_NUMERIC_STRUCT") {
+    javaImport("static org.lwjgl.odbc.SQL.*")
+
     SQLCHAR.member("precision", "")
     SQLSCHAR.member("scale", "")
     SQLCHAR.member("sign", "")
-    SQLCHAR.array("val", "", size = 16 /*SQL_MAX_NUMERIC_LEN*/)
+    SQLCHAR.member("val", "")["SQL_MAX_NUMERIC_LEN"]
 }
 
 // sqlncli.h structs
