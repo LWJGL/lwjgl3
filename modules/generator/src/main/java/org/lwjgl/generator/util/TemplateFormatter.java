@@ -488,15 +488,9 @@ public class TemplateFormatter {
                         builder.append(".const");
                     }
                     // pointer
-                    if (writePointer(builder, paramMatcher) != 0) {
-                        builder.append(
-                            paramMatcher.group(1) != null || paramMatcher.group(4) != null // const
-                                ? ".IN(\""
-                                : ".OUT(\""
-                        );
-                    } else {
-                        builder.append(".IN(\"");
-                    }
+                    writePointer(builder, paramMatcher);
+
+                    builder.append("(\"");
                     builder.append(paramMatcher.group(6));
                     builder.append("\", \"\")");
                 }
@@ -508,7 +502,7 @@ public class TemplateFormatter {
         return builder.toString();
     }
 
-    private static int writePointer(StringBuilder builder, Matcher paramMatcher) {
+    private static void writePointer(StringBuilder builder, Matcher paramMatcher) {
         int indirections = 0;
 
         if (paramMatcher.group(5) != null) {
@@ -521,8 +515,6 @@ public class TemplateFormatter {
         for (int i = 0; i < indirections; i++) {
             builder.append(".p");
         }
-
-        return indirections;
     }
 
     // ---[ DOCUMENTATION FORMATTING ]----
