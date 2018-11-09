@@ -5762,7 +5762,7 @@ val VkAccelerationStructureCreateInfoNV = struct(Module.VULKAN, "VkAccelerationS
 
     VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkDeviceSize("compactedSize", "the size from the result of #CmdWriteAccelerationStructurePropertiesNV(), if this acceleration structure is going to be the target of a compacting copy.")
+    VkDeviceSize("compactedSize", "the size from the result of #CmdWriteAccelerationStructuresPropertiesNV(), if this acceleration structure is going to be the target of a compacting copy.")
     VkAccelerationStructureInfoNV("info", "contains the {@code VkAccelerationStructureInfoNV} information for the acceleration structure&#8217;s parameters")
 }
 

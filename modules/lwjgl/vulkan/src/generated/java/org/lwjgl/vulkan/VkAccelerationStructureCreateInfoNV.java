@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code compactedSize} &ndash; the size from the result of {@link #CmdWriteAccelerationStructurePropertiesNV}, if this acceleration structure is going to be the target of a compacting copy.</li>
+ * <li>{@code compactedSize} &ndash; the size from the result of {@link NVRayTracing#vkCmdWriteAccelerationStructuresPropertiesNV CmdWriteAccelerationStructuresPropertiesNV}, if this acceleration structure is going to be the target of a compacting copy.</li>
  * <li>{@code info} &ndash; contains the {@code VkAccelerationStructureInfoNV} information for the acceleration structure&#8217;s parameters</li>
  * </ul>
  * 
