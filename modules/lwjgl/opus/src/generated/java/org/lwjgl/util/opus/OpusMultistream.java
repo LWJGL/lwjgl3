@@ -149,7 +149,7 @@ public class OpusMultistream {
      * <p>Call {@link #opus_multistream_encoder_destroy multistream_encoder_destroy} to release this object when finished.</p>
      *
      * @param Fs              sampling rate of the input signal (in Hz). One of:<br><table><tr><td>8000</td><td>12000</td><td>16000</td><td>24000</td><td>48000</td></tr></table>
-     * @param streams         The total number of streams to encode from the input. This must be no more than the number of channels.
+     * @param streams         the total number of streams to encode from the input. This must be no more than the number of channels.
      * @param coupled_streams number of coupled (2 channel) streams to encode. This must be no larger than the total number of streams. Additionally, The total number of encoded
      *                        channels ({@code streams + coupled_streams}) must be no more than the number of input channels.
      * @param mapping         Mapping from encoded channels to input channels. As an extra constraint, the multistream encoder does not allow encoding coupled streams for which
@@ -458,11 +458,11 @@ public class OpusMultistream {
      *
      * @return number of decoded samples on success or a negative error code on failure
      */
-    public static int opus_multistream_decode(@NativeType("OpusMSDecoder *") long st, @NativeType("unsigned char const *") ByteBuffer data, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size, int decode_fec) {
+    public static int opus_multistream_decode(@NativeType("OpusMSDecoder *") long st, @Nullable @NativeType("unsigned char const *") ByteBuffer data, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size, int decode_fec) {
         if (CHECKS) {
             check(pcm, frame_size * memGetInt(st));
         }
-        return nopus_multistream_decode(st, memAddress(data), data.remaining(), memAddress(pcm), frame_size, decode_fec);
+        return nopus_multistream_decode(st, memAddressSafe(data), remainingSafe(data), memAddress(pcm), frame_size, decode_fec);
     }
 
     // --- [ opus_multistream_decode_float ] ---

@@ -30,3 +30,6 @@ val OpusMSDecoder = "OpusMSDecoder".opaque
 val OpusCustomEncoder = "OpusCustomEncoder".opaque
 val OpusCustomDecoder = "OpusCustomDecoder".opaque
 val OpusCustomMode = "OpusCustomMode".opaque
+
+val OpusProjectionEncoder = "OpusProjectionEncoder".opaque
+val OpusProjectionDecoder = "OpusProjectionDecoder".opaque
