@@ -97,7 +97,7 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
             coupled_streams}).
             """
         ),
-        int("streams", "The total number of streams to encode from the input. This must be no more than the number of channels."),
+        int("streams", "the total number of streams to encode from the input. This must be no more than the number of channels."),
         int(
             "coupled_streams",
             """
@@ -330,7 +330,7 @@ nb_samples = opus_packet_get_samples_per_frame(data, 48000) * nb_frames;""")}
         "Decode a multistream Opus packet.",
 
         OpusMSDecoder.p("st", "multistream decoder"),
-        Unsafe..unsigned_char.const.p("data", "input payload (Use a #NULL pointer to indicate packet loss)"),
+        nullable..unsigned_char.const.p("data", "input payload (Use a #NULL pointer to indicate packet loss)"),
         AutoSize("data")..opus_int32("len", "number of bytes in payload"),
         Check(
             // Reading OpusMSDecoder internal state here

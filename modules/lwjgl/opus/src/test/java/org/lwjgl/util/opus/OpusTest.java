@@ -15,6 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.opus.Opus.*;
 import static org.lwjgl.util.opus.OpusCustom.*;
 import static org.lwjgl.util.opus.OpusMultistream.*;
+import static org.lwjgl.util.opus.OpusProjection.*;
 import static org.testng.Assert.*;
 
 @Test
@@ -41,6 +42,13 @@ public class OpusTest {
             testChannels(
                 opus_multistream_encoder_create(48000, 254, 1, stack.malloc(255), application, error),
                 error, 0, 255, OpusMultistream::opus_multistream_encoder_destroy
+            );
+
+            long st;
+
+            testChannels(
+                st = opus_projection_ambisonics_encoder_create(48000, 9, 3, stack.mallocInt(1), stack.mallocInt(1), application, error),
+                error, 8 + memGetInt(st) + memGetInt(st + 4), 9, OpusProjection::opus_projection_decoder_destroy
             );
 
             long mode = opus_custom_mode_create(48000, 64, error);
