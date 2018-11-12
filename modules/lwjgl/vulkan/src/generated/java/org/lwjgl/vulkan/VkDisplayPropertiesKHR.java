@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>For devices which have no natural value to return here, implementations <b>should</b> return the maximum resolution supported.</p>
  * </div></li>
- * <li>{@code supportedTransforms} &ndash; tells which transforms are supported by this display. This will contain one or more of the bits from {@code VkSurfaceTransformFlagsKHR}.</li>
+ * <li>{@code supportedTransforms} &ndash; a bitmask of {@code VkSurfaceTransformFlagBitsKHR} describing which transforms are supported by this display.</li>
  * <li>{@code planeReorderPossible} &ndash; tells whether the planes on this display <b>can</b> have their z order changed. If this is {@link VK10#VK_TRUE TRUE}, the application <b>can</b> re-arrange the planes on this display in any order relative to each other.</li>
  * <li>{@code persistentContent} &ndash; tells whether the display supports self-refresh/internal buffering. If this is true, the application <b>can</b> submit persistent present operations on swapchains created against this display.
  * 

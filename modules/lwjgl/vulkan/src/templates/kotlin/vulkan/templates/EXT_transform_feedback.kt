@@ -145,7 +145,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
             <li>All elements of {@code pSizes} <b>must</b> be less than or equal to the size of the corresponding buffer in {@code pBuffers}</li>
             <li>All elements of {@code pOffsets} plus {@code pSizes}, where the {@code pSizes}, element is not #WHOLE_SIZE, <b>must</b> be less than or equal to the size of the corresponding element in {@code pBuffers}</li>
             <li>Each element of {@code pBuffers} that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
-            <li>Transform feedback <b>must</b> not be active when the #CmdBindTransformFeedbackBuffersEXT() command is recorded</li>
+            <li>Transform feedback <b>must</b> not be active when the {@code vkCmdBindTransformFeedbackBuffersEXT} command is recorded</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -318,7 +318,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
 ￿    uint32_t                                    index);</code></pre>
 
         <h5>Description</h5>
-        The #CmdBeginQueryIndexedEXT() command operates the same as the #CmdBeginQuery() command, except that it also accepts a query type specific {@code index} parameter.
+        The {@code vkCmdBeginQueryIndexedEXT} command operates the same as the #CmdBeginQuery() command, except that it also accepts a query type specific {@code index} parameter.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -330,7 +330,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
             <li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_PIPELINE_STATISTICS and any of the {@code pipelineStatistics} indicate graphics operations, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
             <li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_PIPELINE_STATISTICS and any of the {@code pipelineStatistics} indicate compute operations, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
             <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
-            <li>If #CmdBeginQuery() is called within a render pass instance, the sum of {@code query} and the number of bits set in the current subpass&#8217;s view mask <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
+            <li>If {@code vkCmdBeginQuery} is called within a render pass instance, the sum of {@code query} and the number of bits set in the current subpass&#8217;s view mask <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
             <li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
             <li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT the {@code index} parameter <b>must</b> be less than ##VkPhysicalDeviceTransformFeedbackPropertiesEXT{@code ::maxTransformFeedbackStreams}</li>
             <li>If the {@code queryType} used to create {@code queryPool} was not #QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT the {@code index} <b>must</b> be zero</li>
@@ -383,14 +383,14 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
 ￿    uint32_t                                    index);</code></pre>
 
         <h5>Description</h5>
-        The #CmdEndQueryIndexedEXT() command operates the same as the #CmdEndQuery() command, except that it also accepts a query type specific {@code index} parameter.
+        The {@code vkCmdEndQueryIndexedEXT} command operates the same as the #CmdEndQuery() command, except that it also accepts a query type specific {@code index} parameter.
 
         <h5>Valid Usage</h5>
         <ul>
             <li>All queries used by the command <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#queries-operation-active">active</a></li>
             <li>{@code query} <b>must</b> be less than the number of queries in {@code queryPool}</li>
             <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
-            <li>If #CmdEndQuery() is called within a render pass instance, the sum of {@code query} and the number of bits set in the current subpass&#8217;s view mask <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
+            <li>If {@code vkCmdEndQuery} is called within a render pass instance, the sum of {@code query} and the number of bits set in the current subpass&#8217;s view mask <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
             <li>If the {@code queryType} used to create {@code queryPool} was #QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT the {@code index} parameter <b>must</b> be less than ##VkPhysicalDeviceTransformFeedbackPropertiesEXT{@code ::maxTransformFeedbackStreams}</li>
             <li>If the {@code queryType} used to create {@code queryPool} was not #QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT the {@code index} <b>must</b> be zero</li>
         </ul>
@@ -462,7 +462,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassVK("EXT_transform
             <li>The subpass index of the current render pass <b>must</b> be equal to the {@code subpass} member of the ##VkGraphicsPipelineCreateInfo structure specified when creating the {@code VkPipeline} bound to #PIPELINE_BIND_POINT_GRAPHICS</li>
             <li>For each set <em>n</em> that is statically used by the {@code VkPipeline} bound to #PIPELINE_BIND_POINT_GRAPHICS, a descriptor set <b>must</b> have been bound to <em>n</em> at #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
             <li>For each push constant that is statically used by the {@code VkPipeline} bound to #PIPELINE_BIND_POINT_GRAPHICS, a push constant value <b>must</b> have been set for #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
-            <li>Descriptors in each bound descriptor set, specified via #CmdBindDescriptorSets(), <b>must</b> be valid if they are statically used by the bound {@code VkPipeline} object, specified via #CmdBindPipeline()</li>
+            <li>Descriptors in each bound descriptor set, specified via {@code vkCmdBindDescriptorSets}, <b>must</b> be valid if they are statically used by the bound {@code VkPipeline} object, specified via {@code vkCmdBindPipeline}</li>
             <li>All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <b>must</b> have valid buffers bound</li>
             <li>For a given vertex buffer binding, any attribute data fetched <b>must</b> be entirely contained within the corresponding vertex buffer binding, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#fxvertex-input">the “Vertex Input Description” section</a></li>
             <li>A valid graphics pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS</li>

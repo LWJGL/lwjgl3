@@ -278,7 +278,7 @@ public class KHRCreateRenderpass2 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkCmdNextSubpass2KHR CmdNextSubpass2KHR} is semantically identical to {@link VK10#vkCmdNextSubpass CmdNextSubpass}, except that it is extensible, and that {@code contents} is provided as part of an extensible structure instead of as a flat parameter.</p>
+     * <p>{@code vkCmdNextSubpass2KHR} is semantically identical to {@link VK10#vkCmdNextSubpass CmdNextSubpass}, except that it is extensible, and that {@code contents} is provided as part of an extensible structure instead of as a flat parameter.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -350,7 +350,7 @@ public class KHRCreateRenderpass2 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkCmdEndRenderPass2KHR CmdEndRenderPass2KHR} is semantically identical to {@link VK10#vkCmdEndRenderPass CmdEndRenderPass}, except that it is extensible.</p>
+     * <p>{@code vkCmdEndRenderPass2KHR} is semantically identical to {@link VK10#vkCmdEndRenderPass CmdEndRenderPass}, except that it is extensible.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

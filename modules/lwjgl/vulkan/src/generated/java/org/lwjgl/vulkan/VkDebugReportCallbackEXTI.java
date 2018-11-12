@@ -29,7 +29,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The callback <b>must</b> not call {@link EXTDebugReport#vkDestroyDebugReportCallbackEXT DestroyDebugReportCallbackEXT}.</p>
+ * <p>The callback <b>must</b> not call {@code vkDestroyDebugReportCallbackEXT}.</p>
  * 
  * <p>The callback returns a {@code VkBool32}, which is interpreted in a layer-specified manner. The application <b>should</b> always return {@link VK10#VK_FALSE FALSE}. The {@link VK10#VK_TRUE TRUE} value is reserved for use in layer development.</p>
  * 

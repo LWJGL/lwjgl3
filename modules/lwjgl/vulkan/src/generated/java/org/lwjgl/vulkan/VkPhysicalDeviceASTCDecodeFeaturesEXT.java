@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code decodeModeSharedExponent} &ndash; indicates whether the implementation supports decoding ASTC compressed formats to {@code FORMAT_E5B9G9R9_UFLOAT_PACK32} internal precision.</li>
+ * <li>{@code decodeModeSharedExponent} &ndash; indicates whether the implementation supports decoding ASTC compressed formats to {@link VK10#VK_FORMAT_E5B9G9R9_UFLOAT_PACK32 FORMAT_E5B9G9R9_UFLOAT_PACK32} internal precision.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

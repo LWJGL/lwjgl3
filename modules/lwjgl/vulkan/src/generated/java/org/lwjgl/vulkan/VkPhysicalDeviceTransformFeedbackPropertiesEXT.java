@@ -16,17 +16,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Structure describing transform feedback properties that can be supported by an implementation.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits and properties.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTTransformFeedback#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT}</li>
  * </ul>
  * 
- * <p>If the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2KHR}, it is filled with the implementation-dependent limits and properties.</p>
- * 
  * <h3>Member documentation</h3>
  * 
  * <ul>
+ * <li>{@code sType} &ndash; the type of this structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code maxTransformFeedbackStreams} &ndash; the maximum number of vertex streams that can be output from geometry shaders declared with the {@code GeometryStreams} capability. If the implementation does not support {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT}{@code ::geometryStreams} then {@code maxTransformFeedbackStreams} <b>must</b> be set to 1.</li>
  * <li>{@code maxTransformFeedbackBuffers} &ndash; the maximum number of transform feedback buffers that can be bound for capturing shader outputs from the last vertex processing stage.</li>
  * <li>{@code maxTransformFeedbackBufferSize} &ndash; the maximum size that can be specified when binding a buffer for transform feedback in {@link EXTTransformFeedback#vkCmdBindTransformFeedbackBuffersEXT CmdBindTransformFeedbackBuffersEXT}.</li>

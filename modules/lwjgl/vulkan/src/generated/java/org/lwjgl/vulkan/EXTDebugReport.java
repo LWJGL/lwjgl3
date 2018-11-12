@@ -402,7 +402,7 @@ public class EXTDebugReport {
      * <p>{@link VkAllocationCallbacks}</p>
      *
      * @param instance   the instance where the callback was created.
-     * @param callback   the {@code VkDebugReportCallbackEXT} object to destroy. {@code callback} is an externally synchronized object and <b>must</b> not be used on more than one thread at a time. This means that {@link #vkDestroyDebugReportCallbackEXT DestroyDebugReportCallbackEXT} <b>must</b> not be called when a callback is active.
+     * @param callback   the {@code VkDebugReportCallbackEXT} object to destroy. {@code callback} is an externally synchronized object and <b>must</b> not be used on more than one thread at a time. This means that {@code vkDestroyDebugReportCallbackEXT} <b>must</b> not be called when a callback is active.
      * @param pAllocator controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
     public static void vkDestroyDebugReportCallbackEXT(VkInstance instance, @NativeType("VkDebugReportCallbackEXT") long callback, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {

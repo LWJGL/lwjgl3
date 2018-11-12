@@ -88,7 +88,7 @@ val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_ind
 ￿    uint32_t                                    stride);</code></pre>
 
         <h5>Description</h5>
-        #CmdDrawIndirectCountKHR() behaves similarly to #CmdDrawIndirect() except that the draw count is read by the device from a buffer during execution. The command will read an unsigned 32-bit integer from {@code countBuffer} located at {@code countBufferOffset} and use this as the draw count.
+        {@code vkCmdDrawIndirectCountKHR} behaves similarly to #CmdDrawIndirect() except that the draw count is read by the device from a buffer during execution. The command will read an unsigned 32-bit integer from {@code countBuffer} located at {@code countBufferOffset} and use this as the draw count.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -105,7 +105,7 @@ val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_ind
             <li>The subpass index of the current render pass <b>must</b> be equal to the {@code subpass} member of the ##VkGraphicsPipelineCreateInfo structure specified when creating the {@code VkPipeline} bound to #PIPELINE_BIND_POINT_GRAPHICS.</li>
             <li>For each set <em>n</em> that is statically used by the {@code VkPipeline} bound to #PIPELINE_BIND_POINT_GRAPHICS, a descriptor set <b>must</b> have been bound to <em>n</em> at #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
             <li>For each push constant that is statically used by the {@code VkPipeline} bound to #PIPELINE_BIND_POINT_GRAPHICS, a push constant value <b>must</b> have been set for #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
-            <li>Descriptors in each bound descriptor set, specified via #CmdBindDescriptorSets(), <b>must</b> be valid if they are statically used by the bound {@code VkPipeline} object, specified via #CmdBindPipeline()</li>
+            <li>Descriptors in each bound descriptor set, specified via {@code vkCmdBindDescriptorSets}, <b>must</b> be valid if they are statically used by the bound {@code VkPipeline} object, specified via {@code vkCmdBindPipeline}</li>
             <li>All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <b>must</b> have valid buffers bound</li>
             <li>A valid graphics pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS</li>
             <li>If the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_GRAPHICS requires any dynamic state, that state <b>must</b> have been set on the current command buffer</li>
@@ -182,7 +182,7 @@ val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_ind
 ￿    uint32_t                                    stride);</code></pre>
 
         <h5>Description</h5>
-        #CmdDrawIndexedIndirectCountKHR() behaves similarly to #CmdDrawIndexedIndirect() except that the draw count is read by the device from a buffer during execution. The command will read an unsigned 32-bit integer from {@code countBuffer} located at {@code countBufferOffset} and use this as the draw count.
+        {@code vkCmdDrawIndexedIndirectCountKHR} behaves similarly to #CmdDrawIndexedIndirect() except that the draw count is read by the device from a buffer during execution. The command will read an unsigned 32-bit integer from {@code countBuffer} located at {@code countBufferOffset} and use this as the draw count.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -199,7 +199,7 @@ val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_ind
             <li>The subpass index of the current render pass <b>must</b> be equal to the {@code subpass} member of the ##VkGraphicsPipelineCreateInfo structure specified when creating the {@code VkPipeline} bound to #PIPELINE_BIND_POINT_GRAPHICS.</li>
             <li>For each set <em>n</em> that is statically used by the {@code VkPipeline} bound to #PIPELINE_BIND_POINT_GRAPHICS, a descriptor set <b>must</b> have been bound to <em>n</em> at #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
             <li>For each push constant that is statically used by the {@code VkPipeline} bound to #PIPELINE_BIND_POINT_GRAPHICS, a push constant value <b>must</b> have been set for #PIPELINE_BIND_POINT_GRAPHICS, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
-            <li>Descriptors in each bound descriptor set, specified via #CmdBindDescriptorSets(), <b>must</b> be valid if they are statically used by the bound {@code VkPipeline} object, specified via #CmdBindPipeline()</li>
+            <li>Descriptors in each bound descriptor set, specified via {@code vkCmdBindDescriptorSets}, <b>must</b> be valid if they are statically used by the bound {@code VkPipeline} object, specified via {@code vkCmdBindPipeline}</li>
             <li>All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <b>must</b> have valid buffers bound</li>
             <li>A valid graphics pipeline <b>must</b> be bound to the current command buffer with #PIPELINE_BIND_POINT_GRAPHICS</li>
             <li>If the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_GRAPHICS requires any dynamic state, that state <b>must</b> have been set on the current command buffer</li>

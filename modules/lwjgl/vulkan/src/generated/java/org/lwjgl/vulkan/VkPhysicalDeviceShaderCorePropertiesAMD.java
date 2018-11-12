@@ -16,17 +16,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Structure describing shader core properties that can be supported by an implementation.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDeviceShaderCorePropertiesAMD} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link AMDShaderCoreProperties#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD}</li>
  * </ul>
  * 
- * <p>If the {@link VkPhysicalDeviceShaderCorePropertiesAMD} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
- * 
  * <h3>Member documentation</h3>
  * 
  * <ul>
+ * <li>{@code sType} &ndash; the type of this structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code shaderEngineCount} &ndash; an unsigned integer value indicating the number of shader engines found inside the shader core of the physical device.</li>
  * <li>{@code shaderArraysPerEngineCount} &ndash; an unsigned integer value indicating the number of shader arrays inside a shader engine. Each shader array has its own scan converter, set of compute units, and a render back end (color and depth buffers). Shader arrays within a shader engine share shader processor input (wave launcher) and shader export (export buffer) units. Currently, a shader engine can have one or two shader arrays.</li>
  * <li>{@code computeUnitsPerShaderArray} &ndash; an unsigned integer value indicating the number of compute units within a shader array. A compute unit houses a set of SIMDs along with a sequencer module and a local data store.</li>

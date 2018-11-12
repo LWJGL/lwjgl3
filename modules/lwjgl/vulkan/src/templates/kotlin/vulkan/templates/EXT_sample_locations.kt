@@ -98,7 +98,7 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
         <h5>C Specification</h5>
         The custom sample locations used for rasterization when ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsEnable} is #TRUE are specified by the ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsInfo} property of the bound graphics pipeline, if the pipeline was not created with #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT enabled.
 
-        Otherwise, the sample locations used for rasterization are set by calling #CmdSetSampleLocationsEXT():
+        Otherwise, the sample locations used for rasterization are set by calling {@code vkCmdSetSampleLocationsEXT}:
 
         <pre><code>
 ￿void vkCmdSetSampleLocationsEXT(

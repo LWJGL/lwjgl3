@@ -29,6 +29,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
+ * <li>{@code sType} &ndash; the type of this structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code maxPerSetDescriptors} &ndash; a maximum number of descriptors (summed over all descriptor types) in a single descriptor set that is guaranteed to satisfy any implementation-dependent constraints on the size of a descriptor set itself. Applications <b>can</b> query whether a descriptor set that goes beyond this limit is supported using {@link VK11#vkGetDescriptorSetLayoutSupport GetDescriptorSetLayoutSupport}.</li>
  * <li>{@code maxMemoryAllocationSize} &ndash; the maximum size of a memory allocation that <b>can</b> be created, even if there is more space available in the heap.</li>
  * </ul>

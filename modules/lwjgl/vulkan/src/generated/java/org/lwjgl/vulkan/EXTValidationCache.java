@@ -86,7 +86,7 @@ public class EXTValidationCache {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>UNKNOWN:vkCreateValdiationCacheEXT, {@link #vkGetValidationCacheDataEXT GetValidationCacheDataEXT}</p>
+     * <p>{@link #vkCreateValidationCacheEXT CreateValidationCacheEXT}, {@link #vkGetValidationCacheDataEXT GetValidationCacheDataEXT}</p>
      */
     public static final int VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT = 1;
 
@@ -134,14 +134,14 @@ public class EXTValidationCache {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>Applications <b>can</b> track and manage the total host memory size of a validation cache object using the {@code pAllocator}. Applications <b>can</b> limit the amount of data retrieved from a validation cache object in {@link #vkGetValidationCacheDataEXT GetValidationCacheDataEXT}. Implementations <b>should</b> not internally limit the total number of entries added to a validation cache object or the total host memory consumed.</p>
+     * <p>Applications <b>can</b> track and manage the total host memory size of a validation cache object using the {@code pAllocator}. Applications <b>can</b> limit the amount of data retrieved from a validation cache object in {@code vkGetValidationCacheDataEXT}. Implementations <b>should</b> not internally limit the total number of entries added to a validation cache object or the total host memory consumed.</p>
      * </div>
      * 
-     * <p>Once created, a validation cache <b>can</b> be passed to the {@link VK10#vkCreateShaderModule CreateShaderModule} command as part of the {@link VkShaderModuleCreateInfo} {@code pNext} chain. If a {@link VkShaderModuleValidationCacheCreateInfoEXT} object is part of the {@link VkShaderModuleCreateInfo}{@code ::pNext} chain, and its {@code validationCache} field is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the implementation will query it for possible reuse opportunities and update it with new content. The use of the validation cache object in these commands is internally synchronized, and the same validation cache object <b>can</b> be used in multiple threads simultaneously.</p>
+     * <p>Once created, a validation cache <b>can</b> be passed to the {@code vkCreateShaderModule} command as part of the {@link VkShaderModuleCreateInfo} {@code pNext} chain. If a {@link VkShaderModuleValidationCacheCreateInfoEXT} object is part of the {@link VkShaderModuleCreateInfo}{@code ::pNext} chain, and its {@code validationCache} field is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the implementation will query it for possible reuse opportunities and update it with new content. The use of the validation cache object in these commands is internally synchronized, and the same validation cache object <b>can</b> be used in multiple threads simultaneously.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>Implementations <b>should</b> make every effort to limit any critical sections to the actual accesses to the cache, which is expected to be significantly shorter than the duration of the {@link VK10#vkCreateShaderModule CreateShaderModule} command.</p>
+     * <p>Implementations <b>should</b> make every effort to limit any critical sections to the actual accesses to the cache, which is expected to be significantly shorter than the duration of the {@code vkCreateShaderModule} command.</p>
      * </div>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -357,13 +357,13 @@ public class EXTValidationCache {
      * 
      * <p>If {@code pData} is {@code NULL}, then the maximum size of the data that <b>can</b> be retrieved from the validation cache, in bytes, is returned in {@code pDataSize}. Otherwise, {@code pDataSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return the variable is overwritten with the amount of data actually written to {@code pData}.</p>
      * 
-     * <p>If {@code pDataSize} is less than the maximum size that <b>can</b> be retrieved by the validation cache, at most {@code pDataSize} bytes will be written to {@code pData}, and {@link #vkGetValidationCacheDataEXT GetValidationCacheDataEXT} will return {@link VK10#VK_INCOMPLETE INCOMPLETE}. Any data written to {@code pData} is valid and <b>can</b> be provided as the {@code pInitialData} member of the {@link VkValidationCacheCreateInfoEXT} structure passed to {@link #vkCreateValidationCacheEXT CreateValidationCacheEXT}.</p>
+     * <p>If {@code pDataSize} is less than the maximum size that <b>can</b> be retrieved by the validation cache, at most {@code pDataSize} bytes will be written to {@code pData}, and {@code vkGetValidationCacheDataEXT} will return {@link VK10#VK_INCOMPLETE INCOMPLETE}. Any data written to {@code pData} is valid and <b>can</b> be provided as the {@code pInitialData} member of the {@link VkValidationCacheCreateInfoEXT} structure passed to {@code vkCreateValidationCacheEXT}.</p>
      * 
-     * <p>Two calls to {@link #vkGetValidationCacheDataEXT GetValidationCacheDataEXT} with the same parameters <b>must</b> retrieve the same data unless a command that modifies the contents of the cache is called between them.</p>
+     * <p>Two calls to {@code vkGetValidationCacheDataEXT} with the same parameters <b>must</b> retrieve the same data unless a command that modifies the contents of the cache is called between them.</p>
      * 
      * <p>Applications <b>can</b> store the data retrieved from the validation cache, and use these data, possibly in a future run of the application, to populate new validation cache objects. The results of validation, however, <b>may</b> depend on the vendor ID, device ID, driver version, and other details of the device. To enable applications to detect when previously retrieved data is incompatible with the device, the initial bytes written to {@code pData} <b>must</b> be a header consisting of the following members:</p>
      * 
-     * <h6>Layout for validation cache header version ename:VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT</h6>
+     * <h6>Layout for validation cache header version {@link #VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT VALIDATION_CACHE_HEADER_VERSION_ONE_EXT}</h6>
      * 
      * <table class="lwjgl">
      * <thead><tr><th>Offset</th><th>Size</th><th>Meaning</th></tr></thead>

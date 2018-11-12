@@ -36,9 +36,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code maxIndirectCommandsLayoutTokenCount} &ndash; the maximum number of tokens in {@code VkIndirectCommandsLayoutNVX}.</li>
  * <li>{@code maxObjectEntryCounts} &ndash; the maximum number of entries per resource type in {@code VkObjectTableNVX}.</li>
- * <li>{@code minSequenceCountBufferOffsetAlignment} &ndash; the minimum alignment for memory addresses optionally used in {@link NVXDeviceGeneratedCommands#vkCmdProcessCommandsNVX CmdProcessCommandsNVX}.</li>
- * <li>{@code minSequenceIndexBufferOffsetAlignment} &ndash; the minimum alignment for memory addresses optionally used in {@link NVXDeviceGeneratedCommands#vkCmdProcessCommandsNVX CmdProcessCommandsNVX}.</li>
- * <li>{@code minCommandsTokenBufferOffsetAlignment} &ndash; the minimum alignment for memory addresses optionally used in {@link NVXDeviceGeneratedCommands#vkCmdProcessCommandsNVX CmdProcessCommandsNVX}.</li>
+ * <li>{@code minSequenceCountBufferOffsetAlignment} &ndash; the minimum alignment for memory addresses optionally used in {@code vkCmdProcessCommandsNVX}.</li>
+ * <li>{@code minSequenceIndexBufferOffsetAlignment} &ndash; the minimum alignment for memory addresses optionally used in {@code vkCmdProcessCommandsNVX}.</li>
+ * <li>{@code minCommandsTokenBufferOffsetAlignment} &ndash; the minimum alignment for memory addresses optionally used in {@code vkCmdProcessCommandsNVX}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

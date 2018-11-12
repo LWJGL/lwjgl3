@@ -243,14 +243,14 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         <table class="lwjgl">
             <thead><tr><th>Token type</th><th>Equivalent command</th></tr></thead>
             <tbody>
-                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NVX</td><td>#CmdBindPipeline()</td></tr>
-                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DESCRIPTOR_SET_NVX</td><td>#CmdBindDescriptorSets()</td></tr>
-                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NVX</td><td>#CmdBindIndexBuffer()</td></tr>
-                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NVX</td><td>#CmdBindVertexBuffers()</td></tr>
-                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NVX</td><td>#CmdPushConstants()</td></tr>
-                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NVX</td><td>#CmdDrawIndexedIndirect()</td></tr>
-                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX</td><td>#CmdDrawIndirect()</td></tr>
-                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX</td><td>#CmdDispatchIndirect()</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NVX</td><td>{@code vkCmdBindPipeline}</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DESCRIPTOR_SET_NVX</td><td>{@code vkCmdBindDescriptorSets}</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NVX</td><td>{@code vkCmdBindIndexBuffer}</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NVX</td><td>{@code vkCmdBindVertexBuffers}</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NVX</td><td>{@code vkCmdPushConstants}</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NVX</td><td>{@code vkCmdDrawIndexedIndirect}</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX</td><td>{@code vkCmdDrawIndirect}</td></tr>
+                <tr><td>#INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX</td><td>{@code vkCmdDispatchIndirect}</td></tr>
             </tbody>
         </table>
 
@@ -564,7 +564,7 @@ val NVX_device_generated_commands = "NVXDeviceGeneratedCommands".nativeClassVK("
         Register resource bindings in an object table.
 
         <h5>C Specification</h5>
-        Resource bindings of Vulkan objects are registered at an arbitrary ftext:uint32_t index within an object table. As long as the object table references such objects, they <b>must</b> not be deleted.
+        Resource bindings of Vulkan objects are registered at an arbitrary {@code uint32_t} index within an object table. As long as the object table references such objects, they <b>must</b> not be deleted.
 
         <pre><code>
 ￿VkResult vkRegisterObjectsNVX(

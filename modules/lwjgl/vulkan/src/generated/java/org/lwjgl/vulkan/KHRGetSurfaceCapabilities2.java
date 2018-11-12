@@ -109,7 +109,7 @@ public class KHRGetSurfaceCapabilities2 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR} behaves similarly to {@link KHRSurface#vkGetPhysicalDeviceSurfaceCapabilitiesKHR GetPhysicalDeviceSurfaceCapabilitiesKHR}, with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.</p>
+     * <p>{@code vkGetPhysicalDeviceSurfaceCapabilities2KHR} behaves similarly to {@link KHRSurface#vkGetPhysicalDeviceSurfaceCapabilitiesKHR GetPhysicalDeviceSurfaceCapabilitiesKHR}, with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

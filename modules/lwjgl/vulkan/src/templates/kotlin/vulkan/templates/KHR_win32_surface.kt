@@ -150,7 +150,7 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code queueFamilyIndex} <b>must</b> be less than {@code pQueueFamilyPropertyCount} returned by #GetPhysicalDeviceQueueFamilyProperties() for the given {@code physicalDevice}</li>
+            <li>{@code queueFamilyIndex} <b>must</b> be less than {@code pQueueFamilyPropertyCount} returned by {@code vkGetPhysicalDeviceQueueFamilyProperties} for the given {@code physicalDevice}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

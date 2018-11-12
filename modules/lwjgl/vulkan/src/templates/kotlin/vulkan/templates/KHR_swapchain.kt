@@ -378,7 +378,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         uint64_t("timeout", "specifies how long the function waits, in nanoseconds, if no image is available."),
         VkSemaphore("semaphore", "#NULL_HANDLE or a semaphore to signal."),
         VkFence("fence", "#NULL_HANDLE or a fence to signal."),
-        Check(1)..uint32_t.p("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use (i.e. an index into the array of images returned by #GetSwapchainImagesKHR()).")
+        Check(1)..uint32_t.p("pImageIndex", "a pointer to a {@code uint32_t} that is set to the index of the next image to use (i.e. an index into the array of images returned by {@code vkGetSwapchainImagesKHR}).")
     )
 
     VkResult(
@@ -401,7 +401,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>Each element of {@code pSwapchains} member of {@code pPresentInfo} <b>must</b> be a swapchain that is created for a surface for which presentation is supported from {@code queue} as determined using a call to #GetPhysicalDeviceSurfaceSupportKHR()</li>
+            <li>Each element of {@code pSwapchains} member of {@code pPresentInfo} <b>must</b> be a swapchain that is created for a surface for which presentation is supported from {@code queue} as determined using a call to {@code vkGetPhysicalDeviceSurfaceSupportKHR}</li>
             <li>If more than one member of {@code pSwapchains} was created from a display surface, all display surfaces referenced that refer to the same display <b>must</b> use the same display mode</li>
             <li>When a semaphore unsignal operation defined by the elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} executes on {@code queue}, no other queue <b>must</b> be waiting on the same semaphore.</li>
             <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> be semaphores that are signaled, or have <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#synchronization-semaphores-signaling">semaphore signal operations</a> previously submitted for execution.</li>
@@ -411,9 +411,9 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         Queueing an image for presentation defines a set of <em>queue operations</em>, including waiting on the semaphores and submitting a presentation request to the presentation engine. However, the scope of this set of queue operations does not include the actual processing of the image by the presentation engine.
 
-        If #QueuePresentKHR() fails to enqueue the corresponding set of queue operations, it <b>may</b> return #ERROR_OUT_OF_HOST_MEMORY or #ERROR_OUT_OF_DEVICE_MEMORY. If it does, the implementation <b>must</b> ensure that the state and contents of any resources or synchronization primitives referenced is unaffected by the call or its failure.
+        If {@code vkQueuePresentKHR} fails to enqueue the corresponding set of queue operations, it <b>may</b> return #ERROR_OUT_OF_HOST_MEMORY or #ERROR_OUT_OF_DEVICE_MEMORY. If it does, the implementation <b>must</b> ensure that the state and contents of any resources or synchronization primitives referenced is unaffected by the call or its failure.
 
-        If #QueuePresentKHR() fails in such a way that the implementation is unable to make that guarantee, the implementation <b>must</b> return #ERROR_DEVICE_LOST.
+        If {@code vkQueuePresentKHR} fails in such a way that the implementation is unable to make that guarantee, the implementation <b>must</b> return #ERROR_DEVICE_LOST.
 
         However, if the presentation request is rejected by the presentation engine with an error #ERROR_OUT_OF_DATE_KHR or #ERROR_SURFACE_LOST_KHR, the set of queue operations are still considered to be enqueued and thus any semaphore to be waited on gets unsignaled when the corresponding queue operation is complete.
 

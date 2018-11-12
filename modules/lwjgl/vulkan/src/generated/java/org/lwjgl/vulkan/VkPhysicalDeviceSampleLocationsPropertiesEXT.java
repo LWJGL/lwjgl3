@@ -17,13 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Structure describing sample location limits that can be supported by an implementation.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDeviceSampleLocationsPropertiesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTSampleLocations#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT}</li>
  * </ul>
- * 
- * <p>If the {@link VkPhysicalDeviceSampleLocationsPropertiesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
  * 
  * <h5>See Also</h5>
  * 
@@ -32,6 +34,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
+ * <li>{@code sType} &ndash; the type of this structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code sampleLocationSampleCounts} &ndash; a bitmask of {@code VkSampleCountFlagBits} indicating the sample counts supporting custom sample locations.</li>
  * <li>{@code maxSampleLocationGridSize} &ndash; the maximum size of the pixel grid in which sample locations <b>can</b> vary that is supported for all sample counts in {@code sampleLocationSampleCounts}.</li>
  * <li>{@code sampleLocationCoordinateRange} &ndash; the range of supported sample location coordinates.</li>

@@ -109,7 +109,7 @@ public class KHRExternalFenceWin32 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Importing a fence payload from Windows handles does not transfer ownership of the handle to the Vulkan implementation. For handle types defined as NT handles, the application <b>must</b> release ownership using the fname:CloseHandle system call when the handle is no longer needed.</p>
+     * <p>Importing a fence payload from Windows handles does not transfer ownership of the handle to the Vulkan implementation. For handle types defined as NT handles, the application <b>must</b> release ownership using the {@code CloseHandle} system call when the handle is no longer needed.</p>
      * 
      * <p>Applications <b>can</b> import the same fence payload into multiple instances of Vulkan, into the same instance from which it was exported, and multiple times into a given Vulkan instance.</p>
      * 
@@ -172,7 +172,7 @@ public class KHRExternalFenceWin32 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>For handle types defined as NT handles, the handles returned by {@link #vkGetFenceWin32HandleKHR GetFenceWin32HandleKHR} are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the fname:CloseHandle system call when they are no longer needed.</p>
+     * <p>For handle types defined as NT handles, the handles returned by {@code vkGetFenceWin32HandleKHR} are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.</p>
      * 
      * <p>Exporting a Windows handle from a fence <b>may</b> have side effects depending on the transference of the specified handle type, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#synchronization-fences-importing">Importing Fence Payloads</a>.</p>
      * 

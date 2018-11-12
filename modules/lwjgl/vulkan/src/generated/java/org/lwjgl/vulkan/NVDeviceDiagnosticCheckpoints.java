@@ -90,7 +90,7 @@ public class NVDeviceDiagnosticCheckpoints {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>Device diagnostic checkpoints are inserted into the command stream by calling {@code vkCmdSetCheckpointNV}.</p>
+     * <p>Device diagnostic checkpoints are inserted into the command stream by calling {@link #vkCmdSetCheckpointNV CmdSetCheckpointNV}.</p>
      * 
      * <pre><code>
      * void vkCmdSetCheckpointNV(
@@ -150,7 +150,7 @@ public class NVDeviceDiagnosticCheckpoints {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>If the device encounters an error during execution, the implementation will return a {@link VK10#VK_ERROR_DEVICE_LOST ERROR_DEVICE_LOST} error to the application at a certain point during host execution. When this happens, the application <b>can</b> call {@code vkGetQueueCheckpointDataNV} to retrieve information on the most recent diagnostic checkpoints that were executed by the device.</p>
+     * <p>If the device encounters an error during execution, the implementation will return a {@link VK10#VK_ERROR_DEVICE_LOST ERROR_DEVICE_LOST} error to the application at a certain point during host execution. When this happens, the application <b>can</b> call {@link #vkGetQueueCheckpointDataNV GetQueueCheckpointDataNV} to retrieve information on the most recent diagnostic checkpoints that were executed by the device.</p>
      * 
      * <pre><code>
      * void vkGetQueueCheckpointDataNV(

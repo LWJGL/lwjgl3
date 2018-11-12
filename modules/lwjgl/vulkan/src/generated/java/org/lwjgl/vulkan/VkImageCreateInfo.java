@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>To determine the set of valid {@code usage} bits for a given format, call {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties}.</p>
  * 
- * <p>If the size of the resultant image would exceed {@code maxResourceSize}, then {@link VK10#vkCreateImage CreateImage} <b>must</b> fail and return {@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}. This failure <b>may</b> occur even when all image creation parameters satisfy their valid usage requirements.</p>
+ * <p>If the size of the resultant image would exceed {@code maxResourceSize}, then {@code vkCreateImage} <b>must</b> fail and return {@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}. This failure <b>may</b> occur even when all image creation parameters satisfy their valid usage requirements.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 

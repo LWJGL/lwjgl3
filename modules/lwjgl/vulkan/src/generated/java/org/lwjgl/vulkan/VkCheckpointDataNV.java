@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * </ul>
  * 
- * <p>Note that the stages at which a checkpoint marker <b>can</b> be executed are implementation-defined and <b>can</b> be queried by calling {@code vkGetPhysicalDeviceQueueFamilyProperties2}.</p>
+ * <p>Note that the stages at which a checkpoint marker <b>can</b> be executed are implementation-defined and <b>can</b> be queried by calling {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2}.</p>
  * 
  * <h5>See Also</h5>
  * 

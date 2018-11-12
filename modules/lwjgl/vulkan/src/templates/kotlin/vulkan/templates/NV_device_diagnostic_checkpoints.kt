@@ -78,7 +78,7 @@ val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeCla
         insert diagnostic checkpoint in command stream.
 
         <h5>C Specification</h5>
-        Device diagnostic checkpoints are inserted into the command stream by calling {@code vkCmdSetCheckpointNV}.
+        Device diagnostic checkpoints are inserted into the command stream by calling #CmdSetCheckpointNV().
 
         <pre><code>
 ￿void vkCmdSetCheckpointNV(
@@ -114,7 +114,7 @@ val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeCla
         retrieve diagnostic checkpoint data.
 
         <h5>C Specification</h5>
-        If the device encounters an error during execution, the implementation will return a #ERROR_DEVICE_LOST error to the application at a certain point during host execution. When this happens, the application <b>can</b> call {@code vkGetQueueCheckpointDataNV} to retrieve information on the most recent diagnostic checkpoints that were executed by the device.
+        If the device encounters an error during execution, the implementation will return a #ERROR_DEVICE_LOST error to the application at a certain point during host execution. When this happens, the application <b>can</b> call #GetQueueCheckpointDataNV() to retrieve information on the most recent diagnostic checkpoints that were executed by the device.
 
         <pre><code>
 ￿void vkGetQueueCheckpointDataNV(

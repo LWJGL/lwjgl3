@@ -18,18 +18,22 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing discard rectangle limits that can be supported by an implementation.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTDiscardRectangles#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT}</li>
  * </ul>
  * 
- * <p>If the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
- * 
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code maxDiscardRectangles} &ndash; the maximum number of discard rectangles that <b>can</b> be specified.</li>
+ * <li>{@code sType} &ndash; the type of this structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code maxDiscardRectangles} &ndash; the maximum number of active discard rectangles that <b>can</b> be specified.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

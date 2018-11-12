@@ -87,7 +87,7 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
 ￿    VkSurfaceCapabilities2KHR*                  pSurfaceCapabilities);</code></pre>
 
         <h5>Description</h5>
-        #GetPhysicalDeviceSurfaceCapabilities2KHR() behaves similarly to #GetPhysicalDeviceSurfaceCapabilitiesKHR(), with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.
+        {@code vkGetPhysicalDeviceSurfaceCapabilities2KHR} behaves similarly to #GetPhysicalDeviceSurfaceCapabilitiesKHR(), with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

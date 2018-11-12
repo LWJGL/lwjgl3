@@ -20,9 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>No memory barriers are needed between {@link VK10#vkCmdClearAttachments CmdClearAttachments} and preceding or subsequent draw or attachment clear commands in the same subpass.</p>
+ * <p>No memory barriers are needed between {@code vkCmdClearAttachments} and preceding or subsequent draw or attachment clear commands in the same subpass.</p>
  * 
- * <p>The {@link VK10#vkCmdClearAttachments CmdClearAttachments} command is not affected by the bound pipeline state.</p>
+ * <p>The {@code vkCmdClearAttachments} command is not affected by the bound pipeline state.</p>
  * 
  * <p>Attachments <b>can</b> also be cleared at the beginning of a render pass instance by setting {@code loadOp} (or {@code stencilLoadOp}) of {@link VkAttachmentDescription} to {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}, as described for {@link VK10#vkCreateRenderPass CreateRenderPass}.</p>
  * 
@@ -33,8 +33,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code aspectMask} <b>must</b> not include {@link VK10#VK_IMAGE_ASPECT_METADATA_BIT IMAGE_ASPECT_METADATA_BIT}</li>
  * <li>{@code aspectMask} <b>must</b> not include {@code VK_IMAGE_ASPECT_MEMORY_PLANE__i__BIT_EXT} for any index <em>i</em>.</li>
  * <li>{@code clearValue} <b>must</b> be a valid {@link VkClearValue} union</li>
- * <li>If {@code commandBuffer} is an unprotected command buffer, then the attachment to be cleared <b>must</b> not be a protected image.</li>
- * <li>If {@code commandBuffer} is a protected command buffer, then the attachment to be cleared <b>must</b> not be an unprotected image.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -51,8 +49,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code aspectMask} &ndash; a mask selecting the color, depth and/or stencil aspects of the attachment to be cleared. {@code aspectMask} <b>can</b> include {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} for color attachments, {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} for depth/stencil attachments with a depth component, and {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} for depth/stencil attachments with a stencil component. If the subpass&#8217;s depth/stencil attachment is {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, then the clear has no effect.</li>
- * <li>{@code colorAttachment} &ndash; only meaningful if {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} is set in {@code aspectMask}, in which case it is an index to the {@code pColorAttachments} array in the {@link VkSubpassDescription} structure of the current subpass which selects the color attachment to clear. If {@code colorAttachment} is {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} then the clear has no effect.</li>
+ * <li>{@code aspectMask} &ndash; a mask selecting the color, depth and/or stencil aspects of the attachment to be cleared.</li>
+ * <li>{@code colorAttachment} &ndash; only meaningful if {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} is set in {@code aspectMask}, in which case it is an index to the {@code pColorAttachments} array in the {@link VkSubpassDescription} structure of the current subpass which selects the color attachment to clear.</li>
  * <li>{@code clearValue} &ndash; the color or depth/stencil value to clear the attachment to, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#clears-values">Clear Values</a> below.</li>
  * </ul>
  * 

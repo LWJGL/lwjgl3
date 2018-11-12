@@ -175,7 +175,7 @@ public class AMDShaderInfo {
      * 
      * <p>If {@code pInfo} is {@code NULL}, then the maximum size of the information that <b>can</b> be retrieved about the shader, in bytes, is returned in {@code pInfoSize}. Otherwise, {@code pInfoSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pInfo}, and on return the variable is overwritten with the amount of data actually written to {@code pInfo}.</p>
      * 
-     * <p>If {@code pInfoSize} is less than the maximum size that <b>can</b> be retrieved by the pipeline cache, then at most {@code pInfoSize} bytes will be written to {@code pInfo}, and {@link #vkGetShaderInfoAMD GetShaderInfoAMD} will return {@link VK10#VK_INCOMPLETE INCOMPLETE}.</p>
+     * <p>If {@code pInfoSize} is less than the maximum size that <b>can</b> be retrieved by the pipeline cache, then at most {@code pInfoSize} bytes will be written to {@code pInfo}, and {@code vkGetShaderInfoAMD} will return {@link VK10#VK_INCOMPLETE INCOMPLETE}.</p>
      * 
      * <p>Not all information is available for every shader and implementations may not support all kinds of information for any shader. When a certain type of information is unavailable, the function returns {@link VK10#VK_ERROR_FEATURE_NOT_PRESENT ERROR_FEATURE_NOT_PRESENT}.</p>
      * 

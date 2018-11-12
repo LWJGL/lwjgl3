@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The queue returned by {@link VK11#vkGetDeviceQueue2 GetDeviceQueue2} <b>must</b> have the same {@code flags} value from this structure as that used at device creation time in a {@link VkDeviceQueueCreateInfo} instance. If no matching {@code flags} were specified at device creation time then {@code pQueue} will return {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</p>
+ * <p>The queue returned by {@code vkGetDeviceQueue2} <b>must</b> have the same {@code flags} value from this structure as that used at device creation time in a {@link VkDeviceQueueCreateInfo} instance. If no matching {@code flags} were specified at device creation time then {@code pQueue} will return {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of {@link VkDeviceQueueInfo2} is used to provide additional image parameters to {@link VK11#vkGetDeviceQueue2 GetDeviceQueue2}.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of {@link VkDeviceQueueInfo2} is used to provide additional image parameters to {@code vkGetDeviceQueue2}.</li>
  * <li>{@code flags} &ndash; a {@code VkDeviceQueueCreateFlags} value indicating the flags used to create the device queue.</li>
  * <li>{@code queueFamilyIndex} &ndash; the index of the queue family to which the queue belongs.</li>
  * <li>{@code queueIndex} &ndash; the index within this queue family of the queue to retrieve.</li>

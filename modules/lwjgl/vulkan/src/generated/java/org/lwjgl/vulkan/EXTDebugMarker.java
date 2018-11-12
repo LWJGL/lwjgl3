@@ -376,12 +376,12 @@ public class EXTDebugMarker {
      * 
      * <h5>Description</h5>
      * 
-     * <p>An application <b>may</b> open a marker region in one command buffer and close it in another, or otherwise split marker regions across multiple command buffers or multiple queue submissions. When viewed from the linear series of submissions to a single queue, the calls to {@link #vkCmdDebugMarkerBeginEXT CmdDebugMarkerBeginEXT} and {@link #vkCmdDebugMarkerEndEXT CmdDebugMarkerEndEXT} <b>must</b> be matched and balanced.</p>
+     * <p>An application <b>may</b> open a marker region in one command buffer and close it in another, or otherwise split marker regions across multiple command buffers or multiple queue submissions. When viewed from the linear series of submissions to a single queue, the calls to {@code vkCmdDebugMarkerBeginEXT} and {@code vkCmdDebugMarkerEndEXT} <b>must</b> be matched and balanced.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>There <b>must</b> be an outstanding {@link #vkCmdDebugMarkerBeginEXT CmdDebugMarkerBeginEXT} command prior to the {@link #vkCmdDebugMarkerEndEXT CmdDebugMarkerEndEXT} on the queue that {@code commandBuffer} is submitted to</li>
+     * <li>There <b>must</b> be an outstanding {@link #vkCmdDebugMarkerBeginEXT CmdDebugMarkerBeginEXT} command prior to the {@code vkCmdDebugMarkerEndEXT} on the queue that {@code commandBuffer} is submitted to</li>
      * <li>If {@code commandBuffer} is a secondary command buffer, there <b>must</b> be an outstanding {@link #vkCmdDebugMarkerBeginEXT CmdDebugMarkerBeginEXT} command recorded to {@code commandBuffer} that has not previously been ended by a call to {@link #vkCmdDebugMarkerEndEXT CmdDebugMarkerEndEXT}.</li>
      * </ul>
      * 

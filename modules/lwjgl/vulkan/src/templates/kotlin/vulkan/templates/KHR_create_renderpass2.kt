@@ -209,7 +209,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
 ￿    const VkSubpassEndInfoKHR*                  pSubpassEndInfo);</code></pre>
 
         <h5>Description</h5>
-        #CmdNextSubpass2KHR() is semantically identical to #CmdNextSubpass(), except that it is extensible, and that {@code contents} is provided as part of an extensible structure instead of as a flat parameter.
+        {@code vkCmdNextSubpass2KHR} is semantically identical to #CmdNextSubpass(), except that it is extensible, and that {@code contents} is provided as part of an extensible structure instead of as a flat parameter.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -263,7 +263,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
 ￿    const VkSubpassEndInfoKHR*                  pSubpassEndInfo);</code></pre>
 
         <h5>Description</h5>
-        #CmdEndRenderPass2KHR() is semantically identical to #CmdEndRenderPass(), except that it is extensible.
+        {@code vkCmdEndRenderPass2KHR} is semantically identical to #CmdEndRenderPass(), except that it is extensible.
 
         <h5>Valid Usage</h5>
         <ul>

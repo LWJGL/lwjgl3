@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code currentDisplay} &ndash; the handle of the display the plane is currently associated with. If the plane is not currently attached to any displays, this will be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</li>
- * <li>{@code currentStackIndex} &ndash; the current z-order of the plane. This will be between 0 and the value returned by {@link KHRDisplay#vkGetPhysicalDeviceDisplayPlanePropertiesKHR GetPhysicalDeviceDisplayPlanePropertiesKHR} in {@code pPropertyCount}.</li>
+ * <li>{@code currentStackIndex} &ndash; the current z-order of the plane. This will be between 0 and the value returned by {@code vkGetPhysicalDeviceDisplayPlanePropertiesKHR} in {@code pPropertyCount}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

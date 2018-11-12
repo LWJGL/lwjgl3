@@ -118,7 +118,7 @@ public class KHRGetDisplayProperties2 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkGetPhysicalDeviceDisplayProperties2KHR GetPhysicalDeviceDisplayProperties2KHR} behaves similarly to {@link KHRDisplay#vkGetPhysicalDeviceDisplayPropertiesKHR GetPhysicalDeviceDisplayPropertiesKHR}, with the ability to return extended information via chained output structures.</p>
+     * <p>{@code vkGetPhysicalDeviceDisplayProperties2KHR} behaves similarly to {@link KHRDisplay#vkGetPhysicalDeviceDisplayPropertiesKHR GetPhysicalDeviceDisplayPropertiesKHR}, with the ability to return extended information via chained output structures.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -190,7 +190,7 @@ public class KHRGetDisplayProperties2 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkGetPhysicalDeviceDisplayPlaneProperties2KHR GetPhysicalDeviceDisplayPlaneProperties2KHR} behaves similarly to {@link KHRDisplay#vkGetPhysicalDeviceDisplayPlanePropertiesKHR GetPhysicalDeviceDisplayPlanePropertiesKHR}, with the ability to return extended information via chained output structures.</p>
+     * <p>{@code vkGetPhysicalDeviceDisplayPlaneProperties2KHR} behaves similarly to {@link KHRDisplay#vkGetPhysicalDeviceDisplayPlanePropertiesKHR GetPhysicalDeviceDisplayPlanePropertiesKHR}, with the ability to return extended information via chained output structures.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -263,7 +263,7 @@ public class KHRGetDisplayProperties2 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkGetDisplayModeProperties2KHR GetDisplayModeProperties2KHR} behaves similarly to {@link KHRDisplay#vkGetDisplayModePropertiesKHR GetDisplayModePropertiesKHR}, with the ability to return extended information via chained output structures.</p>
+     * <p>{@code vkGetDisplayModeProperties2KHR} behaves similarly to {@link KHRDisplay#vkGetDisplayModePropertiesKHR GetDisplayModePropertiesKHR}, with the ability to return extended information via chained output structures.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -333,7 +333,7 @@ public class KHRGetDisplayProperties2 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkGetDisplayPlaneCapabilities2KHR GetDisplayPlaneCapabilities2KHR} behaves similarly to {@link KHRDisplay#vkGetDisplayPlaneCapabilitiesKHR GetDisplayPlaneCapabilitiesKHR}, with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.</p>
+     * <p>{@code vkGetDisplayPlaneCapabilities2KHR} behaves similarly to {@link KHRDisplay#vkGetDisplayPlaneCapabilitiesKHR GetDisplayPlaneCapabilitiesKHR}, with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

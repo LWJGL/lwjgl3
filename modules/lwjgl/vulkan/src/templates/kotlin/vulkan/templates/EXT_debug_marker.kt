@@ -314,11 +314,11 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassVK("EXT_debug_marker", type =
 ￿    VkCommandBuffer                             commandBuffer);</code></pre>
 
         <h5>Description</h5>
-        An application <b>may</b> open a marker region in one command buffer and close it in another, or otherwise split marker regions across multiple command buffers or multiple queue submissions. When viewed from the linear series of submissions to a single queue, the calls to #CmdDebugMarkerBeginEXT() and #CmdDebugMarkerEndEXT() <b>must</b> be matched and balanced.
+        An application <b>may</b> open a marker region in one command buffer and close it in another, or otherwise split marker regions across multiple command buffers or multiple queue submissions. When viewed from the linear series of submissions to a single queue, the calls to {@code vkCmdDebugMarkerBeginEXT} and {@code vkCmdDebugMarkerEndEXT} <b>must</b> be matched and balanced.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>There <b>must</b> be an outstanding #CmdDebugMarkerBeginEXT() command prior to the #CmdDebugMarkerEndEXT() on the queue that {@code commandBuffer} is submitted to</li>
+            <li>There <b>must</b> be an outstanding #CmdDebugMarkerBeginEXT() command prior to the {@code vkCmdDebugMarkerEndEXT} on the queue that {@code commandBuffer} is submitted to</li>
             <li>If {@code commandBuffer} is a secondary command buffer, there <b>must</b> be an outstanding #CmdDebugMarkerBeginEXT() command recorded to {@code commandBuffer} that has not previously been ended by a call to #CmdDebugMarkerEndEXT().</li>
         </ul>
 

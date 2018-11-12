@@ -20,9 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The results for a given {@code swapchain} and {@code presentID} are only returned once from {@link GOOGLEDisplayTiming#vkGetPastPresentationTimingGOOGLE GetPastPresentationTimingGOOGLE}.</p>
+ * <p>The results for a given {@code swapchain} and {@code presentID} are only returned once from {@code vkGetPastPresentationTimingGOOGLE}.</p>
  * 
- * <p>The application <b>can</b> use the fname:VkPastPresentationTimingGOOGLE values to occasionally adjust its timing. For example, if {@code actualPresentTime} is later than expected (e.g. one {@code refreshDuration} late), the application may increase its target IPD to a higher multiple of {@code refreshDuration} (e.g. decrease its frame rate from 60Hz to 30Hz). If {@code actualPresentTime} and {@code earliestPresentTime} are consistently different, and if {@code presentMargin} is consistently large enough, the application may decrease its target IPD to a smaller multiple of {@code refreshDuration} (e.g. increase its frame rate from 30Hz to 60Hz). If {@code actualPresentTime} and {@code earliestPresentTime} are same, and if {@code presentMargin} is consistently high, the application may delay the start of its input-render-present loop in order to decrease the latency between user input and the corresponding present (always leaving some margin in case a new image takes longer to render than the previous image). An application that desires its target IPD to always be the same as {@code refreshDuration}, can also adjust features until {@code actualPresentTime} is never late and {@code presentMargin} is satisfactory.</p>
+ * <p>The application <b>can</b> use the {@link VkPastPresentationTimingGOOGLE} values to occasionally adjust its timing. For example, if {@code actualPresentTime} is later than expected (e.g. one {@code refreshDuration} late), the application may increase its target IPD to a higher multiple of {@code refreshDuration} (e.g. decrease its frame rate from 60Hz to 30Hz). If {@code actualPresentTime} and {@code earliestPresentTime} are consistently different, and if {@code presentMargin} is consistently large enough, the application may decrease its target IPD to a smaller multiple of {@code refreshDuration} (e.g. increase its frame rate from 30Hz to 60Hz). If {@code actualPresentTime} and {@code earliestPresentTime} are same, and if {@code presentMargin} is consistently high, the application may delay the start of its input-render-present loop in order to decrease the latency between user input and the corresponding present (always leaving some margin in case a new image takes longer to render than the previous image). An application that desires its target IPD to always be the same as {@code refreshDuration}, can also adjust features until {@code actualPresentTime} is never late and {@code presentMargin} is satisfactory.</p>
  * 
  * <h5>See Also</h5>
  * 
@@ -31,11 +31,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code presentID} &ndash; an application-provided value that was given to a previous {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} command via {@link VkPresentTimeGOOGLE}{@code ::presentID} (see below). It <b>can</b> be used to uniquely identify a previous present with the {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} command.</li>
+ * <li>{@code presentID} &ndash; an application-provided value that was given to a previous {@code vkQueuePresentKHR} command via {@link VkPresentTimeGOOGLE}{@code ::presentID} (see below). It <b>can</b> be used to uniquely identify a previous present with the {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} command.</li>
  * <li>{@code desiredPresentTime} &ndash; an application-provided value that was given to a previous {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} command via {@link VkPresentTimeGOOGLE}{@code ::desiredPresentTime}. If non-zero, it was used by the application to indicate that an image not be presented any sooner than {@code desiredPresentTime}.</li>
  * <li>{@code actualPresentTime} &ndash; the time when the image of the {@code swapchain} was actually displayed.</li>
  * <li>{@code earliestPresentTime} &ndash; the time when the image of the {@code swapchain} could have been displayed. This <b>may</b> differ from {@code actualPresentTime} if the application requested that the image be presented no sooner than {@link VkPresentTimeGOOGLE}{@code ::desiredPresentTime}.</li>
- * <li>{@code presentMargin} &ndash; an indication of how early the {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} command was processed compared to how soon it needed to be processed, and still be presented at {@code earliestPresentTime}.</li>
+ * <li>{@code presentMargin} &ndash; an indication of how early the {@code vkQueuePresentKHR} command was processed compared to how soon it needed to be processed, and still be presented at {@code earliestPresentTime}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

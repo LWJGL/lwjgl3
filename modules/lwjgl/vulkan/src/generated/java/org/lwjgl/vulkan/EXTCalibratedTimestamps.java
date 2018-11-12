@@ -202,7 +202,7 @@ public class EXTCalibratedTimestamps {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>The maximum deviation <b>may</b> vary between calls to {@link #vkGetCalibratedTimestampsEXT GetCalibratedTimestampsEXT} even for the same set of time domains due to implementation and platform specific reasons. It's the application's responsibility to assess whether the returned maximum deviation makes the timestamp values suitable for any particular purpose and <b>can</b> choose to re-issue the timestamp calibration call pursuing a lower devation value.</p>
+     * <p>The maximum deviation <b>may</b> vary between calls to {@code vkGetCalibratedTimestampsEXT} even for the same set of time domains due to implementation and platform specific reasons. It's the application's responsibility to assess whether the returned maximum deviation makes the timestamp values suitable for any particular purpose and <b>can</b> choose to re-issue the timestamp calibration call pursuing a lower devation value.</p>
      * </div>
      * 
      * <p>Calibrated timestamp values <b>can</b> be extrapolated to estimate future coinciding timestamp values, however, depending on the nature of the time domains and other properties of the platform extrapolating values over a sufficiently long period of time <b>may</b> no longer be accurate enough to fit any particular purpose so applications are expected to re-calibrate the timestamps on a regular basis.</p>

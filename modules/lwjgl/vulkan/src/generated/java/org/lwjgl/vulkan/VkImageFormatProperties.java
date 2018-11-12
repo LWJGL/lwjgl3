@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>There is no mechanism to query the size of an image before creating it, to compare that size against {@code maxResourceSize}. If an application attempts to create an image that exceeds this limit, the creation will fail and {@link VK10#vkCreateImage CreateImage} will return {@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}. While the advertised limit <b>must</b> be at least 2<sup>31</sup>, it <b>may</b> not be possible to create an image that approaches that size, particularly for {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}.</p>
  * </div>
  * 
- * <p>If the combination of parameters to {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} is not supported by the implementation for use in {@link VK10#vkCreateImage CreateImage}, then all members of {@link VkImageFormatProperties} will be filled with zero.</p>
+ * <p>If the combination of parameters to {@code vkGetPhysicalDeviceImageFormatProperties} is not supported by the implementation for use in {@link VK10#vkCreateImage CreateImage}, then all members of {@link VkImageFormatProperties} will be filled with zero.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code maxMipLevels} &ndash; the maximum number of mipmap levels. {@code maxMipLevels} <b>must</b> be equal to the number of levels in the complete mipmap chain based on the <code>maxExtent.width</code>, <code>maxExtent.height</code>, and <code>maxExtent.depth</code>, except when one of the following conditions is true, in which case it <b>may</b> instead be 1:
  * 
  * <ul>
- * <li>{@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties}{@code ::tiling} was {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}</li>
+ * <li>{@code vkGetPhysicalDeviceImageFormatProperties}{@code ::tiling} was {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}</li>
  * <li>{@link VkPhysicalDeviceImageFormatInfo2}{@code ::tiling} was {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}</li>
  * <li>the {@link VkPhysicalDeviceImageFormatInfo2}{@code ::pNext} chain included an instance of {@link VkPhysicalDeviceExternalImageFormatInfo} with a handle type included in the {@code handleTypes} member for which mipmap image support is not required</li>
  * <li>image {@code format} is one of those listed in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#features-formats-requiring-sampler-ycbcr-conversion">the “Formats requiring sampler Y'C<sub>B</sub>C<sub>R</sub> conversion for {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} image views” table</a></li>

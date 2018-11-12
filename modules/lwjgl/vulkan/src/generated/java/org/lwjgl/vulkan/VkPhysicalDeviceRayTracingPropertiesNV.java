@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Properties of the physical device for ray tracing.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDeviceRayTracingPropertiesNV} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

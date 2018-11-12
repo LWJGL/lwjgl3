@@ -13,9 +13,9 @@ package org.lwjgl.vulkan;
  * <p>Three decoding options are provided:</p>
  * 
  * <ul>
- * <li>Decode to {@code VK_FORMAT_R16G16B16A16_SFLOAT} precision: This is the default, and matches the required behavior in the core API.</li>
- * <li>Decode to {@code VK_FORMAT_R8G8B8A8_UNORM} precision: This is provided as an option in LDR mode.</li>
- * <li>Decode to {@code VK_FORMAT_E5B9G9R9_UFLOAT_PACK32} precision: This is provided as an option in both LDR and HDR mode. In this mode, negative values cannot be represented and are clamped to zero. The alpha component is ignored, and the results are as if alpha was 1.0. This decode mode is optional and support can be queried via the physical device properties.</li>
+ * <li>Decode to {@link VK10#VK_FORMAT_R16G16B16A16_SFLOAT FORMAT_R16G16B16A16_SFLOAT} precision: This is the default, and matches the required behavior in the core API.</li>
+ * <li>Decode to {@link VK10#VK_FORMAT_R8G8B8A8_UNORM FORMAT_R8G8B8A8_UNORM} precision: This is provided as an option in LDR mode.</li>
+ * <li>Decode to {@link VK10#VK_FORMAT_E5B9G9R9_UFLOAT_PACK32 FORMAT_E5B9G9R9_UFLOAT_PACK32} precision: This is provided as an option in both LDR and HDR mode. In this mode, negative values cannot be represented and are clamped to zero. The alpha component is ignored, and the results are as if alpha was 1.0. This decode mode is optional and support can be queried via the physical device properties.</li>
  * </ul>
  * 
  * <h5>Example</h5>

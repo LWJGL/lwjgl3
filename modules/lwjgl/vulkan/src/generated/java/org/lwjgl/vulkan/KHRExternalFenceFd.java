@@ -175,14 +175,14 @@ public class KHRExternalFenceFd {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Each call to {@link #vkGetFenceFdKHR GetFenceFdKHR} <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor when it is no longer needed.</p>
+     * <p>Each call to {@code vkGetFenceFdKHR} <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor when it is no longer needed.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
      * <p>Ownership can be released in many ways. For example, the application can call {@code close}() on the file descriptor, or transfer ownership back to Vulkan by using the file descriptor to import a fence payload.</p>
      * </div>
      * 
-     * <p>If {@code pGetFdInfo}-&gt;{@code handleType} is {@link VK11#VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT} and the fence is signaled at the time {@link #vkGetFenceFdKHR GetFenceFdKHR} is called, {@code pFd} <b>may</b> return the value {@code -1} instead of a valid file descriptor.</p>
+     * <p>If {@code pGetFdInfo}-&gt;{@code handleType} is {@link VK11#VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT} and the fence is signaled at the time {@code vkGetFenceFdKHR} is called, {@code pFd} <b>may</b> return the value {@code -1} instead of a valid file descriptor.</p>
      * 
      * <p>Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an {@code execve} system call is made.</p>
      * 

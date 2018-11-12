@@ -223,7 +223,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code planeIndex} <b>must</b> be less than the number of display planes supported by the device as determined by calling #GetPhysicalDeviceDisplayPlanePropertiesKHR()</li>
+            <li>{@code planeIndex} <b>must</b> be less than the number of display planes supported by the device as determined by calling {@code vkGetPhysicalDeviceDisplayPlanePropertiesKHR}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code stride} <b>must</b> be a multiple of 8.</li>
  * </ul>
  * 
- * <p>The AABB data in memory is 6 32-bit floats consisting of the minimum x, y, and z values followed by the maximum x, y, and x values.</p>
+ * <p>The AABB data in memory is 6 32-bit floats consisting of the minimum x, y, and z values followed by the maximum x, y, and z values.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

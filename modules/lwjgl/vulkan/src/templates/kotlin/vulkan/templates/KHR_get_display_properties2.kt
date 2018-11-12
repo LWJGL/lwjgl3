@@ -88,7 +88,7 @@ val KHR_get_display_properties2 = "KHRGetDisplayProperties2".nativeClassVK("KHR_
 ￿    VkDisplayProperties2KHR*                    pProperties);</code></pre>
 
         <h5>Description</h5>
-        #GetPhysicalDeviceDisplayProperties2KHR() behaves similarly to #GetPhysicalDeviceDisplayPropertiesKHR(), with the ability to return extended information via chained output structures.
+        {@code vkGetPhysicalDeviceDisplayProperties2KHR} behaves similarly to #GetPhysicalDeviceDisplayPropertiesKHR(), with the ability to return extended information via chained output structures.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -136,7 +136,7 @@ val KHR_get_display_properties2 = "KHRGetDisplayProperties2".nativeClassVK("KHR_
 ￿    VkDisplayPlaneProperties2KHR*               pProperties);</code></pre>
 
         <h5>Description</h5>
-        #GetPhysicalDeviceDisplayPlaneProperties2KHR() behaves similarly to #GetPhysicalDeviceDisplayPlanePropertiesKHR(), with the ability to return extended information via chained output structures.
+        {@code vkGetPhysicalDeviceDisplayPlaneProperties2KHR} behaves similarly to #GetPhysicalDeviceDisplayPlanePropertiesKHR(), with the ability to return extended information via chained output structures.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -185,7 +185,7 @@ val KHR_get_display_properties2 = "KHRGetDisplayProperties2".nativeClassVK("KHR_
 ￿    VkDisplayModeProperties2KHR*                pProperties);</code></pre>
 
         <h5>Description</h5>
-        #GetDisplayModeProperties2KHR() behaves similarly to #GetDisplayModePropertiesKHR(), with the ability to return extended information via chained output structures.
+        {@code vkGetDisplayModeProperties2KHR} behaves similarly to #GetDisplayModePropertiesKHR(), with the ability to return extended information via chained output structures.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -235,7 +235,7 @@ val KHR_get_display_properties2 = "KHRGetDisplayProperties2".nativeClassVK("KHR_
 ￿    VkDisplayPlaneCapabilities2KHR*             pCapabilities);</code></pre>
 
         <h5>Description</h5>
-        #GetDisplayPlaneCapabilities2KHR() behaves similarly to #GetDisplayPlaneCapabilitiesKHR(), with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.
+        {@code vkGetDisplayPlaneCapabilities2KHR} behaves similarly to #GetDisplayPlaneCapabilitiesKHR(), with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

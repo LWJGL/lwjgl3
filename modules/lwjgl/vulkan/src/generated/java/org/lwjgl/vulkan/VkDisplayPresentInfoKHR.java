@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code srcRect} <b>must</b> specify a rectangular region that is a subset of the image being presented</li>
  * <li>{@code dstRect} <b>must</b> specify a rectangular region that is a subset of the {@code visibleRegion} parameter of the display mode the swapchain being presented uses</li>
- * <li>If the {@code persistentContent} member of the {@link VkDisplayPropertiesKHR} structure returned by {@link KHRDisplay#vkGetPhysicalDeviceDisplayPropertiesKHR GetPhysicalDeviceDisplayPropertiesKHR} for the display the present operation targets then {@code persistent} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If the {@code persistentContent} member of the {@link VkDisplayPropertiesKHR} structure returned by {@code vkGetPhysicalDeviceDisplayPropertiesKHR} for the display the present operation targets then {@code persistent} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

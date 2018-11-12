@@ -89,7 +89,7 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
 ￿    HANDLE*                                     pHandle);</code></pre>
 
         <h5>Description</h5>
-        For handle types defined as NT handles, the handles returned by #GetMemoryWin32HandleKHR() are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.
+        For handle types defined as NT handles, the handles returned by {@code vkGetMemoryWin32HandleKHR} are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This device extension extends {@code vkQueuePresentKHR}, from the {@link KHRSwapchain VK_KHR_swapchain} extension, allowing an application to specify a list of rectangular, modified regions of each image to present. This should be used in situations where an application is only changing a small portion of the presentable images within a swapchain, since it enables the presentation engine to avoid wasting time presenting parts of the surface that haven't changed.
+ * This device extension extends {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR}, from the {@link KHRSwapchain VK_KHR_swapchain} extension, allowing an application to specify a list of rectangular, modified regions of each image to present. This should be used in situations where an application is only changing a small portion of the presentable images within a swapchain, since it enables the presentation engine to avoid wasting time presenting parts of the surface that haven't changed.
  * 
  * <p>This extension is leveraged from the {@code EGL_KHR_swap_buffers_with_damage} extension.</p>
  * 

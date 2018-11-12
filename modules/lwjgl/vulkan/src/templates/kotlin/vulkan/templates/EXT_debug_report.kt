@@ -345,7 +345,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         """,
 
         VkInstance("instance", "the instance where the callback was created."),
-        VkDebugReportCallbackEXT("callback", "the {@code VkDebugReportCallbackEXT} object to destroy. {@code callback} is an externally synchronized object and <b>must</b> not be used on more than one thread at a time. This means that #DestroyDebugReportCallbackEXT() <b>must</b> not be called when a callback is active."),
+        VkDebugReportCallbackEXT("callback", "the {@code VkDebugReportCallbackEXT} object to destroy. {@code callback} is an externally synchronized object and <b>must</b> not be used on more than one thread at a time. This means that {@code vkDestroyDebugReportCallbackEXT} <b>must</b> not be called when a callback is active."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 

@@ -106,7 +106,7 @@ public class KHRExternalMemoryFd {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Each call to {@link #vkGetMemoryFdKHR GetMemoryFdKHR} <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor using the {@code close} system call when it is no longer needed, or by importing a Vulkan memory object from it. Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an {@code execve} system call is made.</p>
+     * <p>Each call to {@code vkGetMemoryFdKHR} <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor using the {@code close} system call when it is no longer needed, or by importing a Vulkan memory object from it. Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an {@code execve} system call is made.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

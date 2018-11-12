@@ -174,7 +174,7 @@ public class KHRExternalSemaphoreFd {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Each call to {@link #vkGetSemaphoreFdKHR GetSemaphoreFdKHR} <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor when it is no longer needed.</p>
+     * <p>Each call to {@code vkGetSemaphoreFdKHR} <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor when it is no longer needed.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 

@@ -50,6 +50,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
+ * <li>{@code sType} &ndash; the type of this structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code filterMinmaxSingleComponentFormats} &ndash; a boolean value indicating whether a minimum set of required formats support min/max filtering.</li>
  * <li>{@code filterMinmaxImageComponentMapping} &ndash; a boolean value indicating whether the implementation supports non-identity component mapping of the image when doing min/max filtering.</li>
  * </ul>

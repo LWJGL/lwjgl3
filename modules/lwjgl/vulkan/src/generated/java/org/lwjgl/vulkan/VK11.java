@@ -619,8 +619,8 @@ public class VK11 extends VK10 {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT PEER_MEMORY_FEATURE_COPY_SRC_BIT} specifies that the memory <b>can</b> be accessed as the source of a ftext:vkCmdCopyBuffer, ftext:vkCmdCopyImage, ftext:vkCmdCopyBufferToImage, or ftext:vkCmdCopyImageToBuffer command.</li>
-     * <li>{@link #VK_PEER_MEMORY_FEATURE_COPY_DST_BIT PEER_MEMORY_FEATURE_COPY_DST_BIT} specifies that the memory <b>can</b> be accessed as the destination of a ftext:vkCmdCopyBuffer, ftext:vkCmdCopyImage, ftext:vkCmdCopyBufferToImage, or ftext:vkCmdCopyImageToBuffer command.</li>
+     * <li>{@link #VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT PEER_MEMORY_FEATURE_COPY_SRC_BIT} specifies that the memory <b>can</b> be accessed as the source of a {@code vkCmdCopyBuffer}, {@code vkCmdCopyImage}, {@code vkCmdCopyBufferToImage}, or {@code vkCmdCopyImageToBuffer} command.</li>
+     * <li>{@link #VK_PEER_MEMORY_FEATURE_COPY_DST_BIT PEER_MEMORY_FEATURE_COPY_DST_BIT} specifies that the memory <b>can</b> be accessed as the destination of a {@code vkCmdCopyBuffer}, {@code vkCmdCopyImage}, {@code vkCmdCopyBufferToImage}, or {@code vkCmdCopyImageToBuffer} command.</li>
      * <li>{@link #VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT PEER_MEMORY_FEATURE_GENERIC_SRC_BIT} specifies that the memory <b>can</b> be read as any memory access type.</li>
      * <li>{@link #VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT PEER_MEMORY_FEATURE_GENERIC_DST_BIT} specifies that the memory <b>can</b> be written as any memory access type. Shader atomics are considered to be writes.</li>
      * </ul>
@@ -806,8 +806,8 @@ public class VK11 extends VK10 {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT} specifies a POSIX file descriptor handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the POSIX system calls ftext:dup, ftext:dup2, ftext:close, and the non-standard system call ftext:dup3. Additionally, it <b>must</b> be transportable over a socket using an {@code SCM_RIGHTS} control message. It owns a reference to the underlying memory resource represented by its Vulkan memory object.</li>
-     * <li>{@link #VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT} specifies an NT handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the functions ftext:DuplicateHandle, ftext:CloseHandle, ftext:CompareObjectHandles, ftext:GetHandleInformation, and ftext:SetHandleInformation. It owns a reference to the underlying memory resource represented by its Vulkan memory object.</li>
+     * <li>{@link #VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT} specifies a POSIX file descriptor handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the POSIX system calls {@code dup}, {@code dup2}, {@code close}, and the non-standard system call {@code dup3}. Additionally, it <b>must</b> be transportable over a socket using an {@code SCM_RIGHTS} control message. It owns a reference to the underlying memory resource represented by its Vulkan memory object.</li>
+     * <li>{@link #VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT} specifies an NT handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the functions {@code DuplicateHandle}, {@code CloseHandle}, {@code CompareObjectHandles}, {@code GetHandleInformation}, and {@code SetHandleInformation}. It owns a reference to the underlying memory resource represented by its Vulkan memory object.</li>
      * <li>{@link #VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT} specifies a global share handle that has only limited valid usage outside of Vulkan and other compatible APIs. It is not compatible with any native APIs. It does not own a reference to the underlying memory resource represented its Vulkan memory object, and will therefore become invalid when all Vulkan memory objects associated with it are destroyed.</li>
      * <li>{@link #VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT} specifies an NT handle returned by {@code IDXGIResource1}::{@code CreateSharedHandle} referring to a Direct3D 10 or 11 texture resource. It owns a reference to the memory used by the Direct3D resource.</li>
      * <li>{@link #VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT} specifies a global share handle returned by {@code IDXGIResource}::{@code GetSharedHandle} referring to a Direct3D 10 or 11 texture resource. It does not own a reference to the underlying Direct3D resource, and will therefore become invalid when all Vulkan memory objects and Direct3D resources associated with it are destroyed.</li>
@@ -1380,7 +1380,7 @@ public class VK11 extends VK10 {
      * <li>{@code deviceMask} <b>must</b> be a valid device mask value</li>
      * <li>{@code deviceMask} <b>must</b> not be zero</li>
      * <li>{@code deviceMask} <b>must</b> not include any set bits that were not in the {@link VkDeviceGroupCommandBufferBeginInfo}{@code ::deviceMask} value when the command buffer began recording.</li>
-     * <li>If {@link #vkCmdSetDeviceMask CmdSetDeviceMask} is called inside a render pass instance, {@code deviceMask} <b>must</b> not include any set bits that were not in the {@link VkDeviceGroupRenderPassBeginInfo}{@code ::deviceMask} value when the render pass instance began recording.</li>
+     * <li>If {@code vkCmdSetDeviceMask} is called inside a render pass instance, {@code deviceMask} <b>must</b> not include any set bits that were not in the {@link VkDeviceGroupRenderPassBeginInfo}{@code ::deviceMask} value when the render pass instance began recording.</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1786,7 +1786,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Each structure in {@code pFeatures} and its {@code pNext} chain contain members corresponding to fine-grained features. {@link #vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2} writes each member to a boolean value indicating whether that feature is supported.</p>
+     * <p>Each structure in {@code pFeatures} and its {@code pNext} chain contain members corresponding to fine-grained features. {@code vkGetPhysicalDeviceFeatures2} writes each member to a boolean value indicating whether that feature is supported.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -1838,7 +1838,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Each structure in {@code pProperties} and its {@code pNext} chain contain members corresponding to properties or implementation-dependent limits. {@link #vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2} writes each member to a value indicating the value of that property or limit.</p>
+     * <p>Each structure in {@code pProperties} and its {@code pNext} chain contain members corresponding to properties or implementation-dependent limits. {@code vkGetPhysicalDeviceProperties2} writes each member to a value indicating the value of that property or limit.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -1892,7 +1892,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkGetPhysicalDeviceFormatProperties2 GetPhysicalDeviceFormatProperties2} behaves similarly to {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties}, with the ability to return extended information in a {@code pNext} chain of output structures.</p>
+     * <p>{@code vkGetPhysicalDeviceFormatProperties2} behaves similarly to {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties}, with the ability to return extended information in a {@code pNext} chain of output structures.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -1948,7 +1948,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} behaves similarly to {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties}, with the ability to return extended information in a {@code pNext} chain of output structures.</p>
+     * <p>{@code vkGetPhysicalDeviceImageFormatProperties2} behaves similarly to {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties}, with the ability to return extended information in a {@code pNext} chain of output structures.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2024,7 +2024,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2} behaves similarly to {@link VK10#vkGetPhysicalDeviceQueueFamilyProperties GetPhysicalDeviceQueueFamilyProperties}, with the ability to return extended information in a {@code pNext} chain of output structures.</p>
+     * <p>{@code vkGetPhysicalDeviceQueueFamilyProperties2} behaves similarly to {@link VK10#vkGetPhysicalDeviceQueueFamilyProperties GetPhysicalDeviceQueueFamilyProperties}, with the ability to return extended information in a {@code pNext} chain of output structures.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2082,7 +2082,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkGetPhysicalDeviceMemoryProperties2 GetPhysicalDeviceMemoryProperties2} behaves similarly to {@link VK10#vkGetPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties}, with the ability to return extended information in a {@code pNext} chain of output structures.</p>
+     * <p>{@code vkGetPhysicalDeviceMemoryProperties2} behaves similarly to {@link VK10#vkGetPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties}, with the ability to return extended information in a {@code pNext} chain of output structures.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2122,7 +2122,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>{@link #vkGetPhysicalDeviceSparseImageFormatProperties2 GetPhysicalDeviceSparseImageFormatProperties2} returns an array of {@link VkSparseImageFormatProperties2}. Each element will describe properties for one set of image aspects that are bound simultaneously in the image. This is usually one element for each aspect in the image, but for interleaved depth/stencil images there is only one element describing the combined aspects.</p>
+     * <p>{@code vkGetPhysicalDeviceSparseImageFormatProperties2} returns an array of {@link VkSparseImageFormatProperties2}. Each element will describe properties for one set of image aspects that are bound simultaneously in the image. This is usually one element for each aspect in the image, but for interleaved depth/stencil images there is only one element describing the combined aspects.</p>
      * 
      * <pre><code>
      * void vkGetPhysicalDeviceSparseImageFormatProperties2(
@@ -2142,7 +2142,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@link #vkGetPhysicalDeviceSparseImageFormatProperties2 GetPhysicalDeviceSparseImageFormatProperties2} behaves identically to {@link VK10#vkGetPhysicalDeviceSparseImageFormatProperties GetPhysicalDeviceSparseImageFormatProperties}, with the ability to return extended information by adding extension structures to the {@code pNext} chain of its {@code pProperties} parameter.</p>
+     * <p>{@code vkGetPhysicalDeviceSparseImageFormatProperties2} behaves identically to {@link VK10#vkGetPhysicalDeviceSparseImageFormatProperties GetPhysicalDeviceSparseImageFormatProperties}, with the ability to return extended information by adding extension structures to the {@code pNext} chain of its {@code pProperties} parameter.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Applications <b>may</b> change the name associated with an object simply by calling {@link EXTDebugUtils#vkSetDebugUtilsObjectNameEXT SetDebugUtilsObjectNameEXT} again with a new string. If {@code pObjectName} is an empty string, then any previously set name is removed.</p>
+ * <p>Applications <b>may</b> change the name associated with an object simply by calling {@code vkSetDebugUtilsObjectNameEXT} again with a new string. If {@code pObjectName} is an empty string, then any previously set name is removed.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

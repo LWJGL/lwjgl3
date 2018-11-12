@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the combination of parameters to {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} is not supported by the implementation for use in {@link VK10#vkCreateImage CreateImage}, then all members of {@code imageFormatProperties} will be filled with zero.</p>
+ * <p>If the combination of parameters to {@code vkGetPhysicalDeviceImageFormatProperties2} is not supported by the implementation for use in {@link VK10#vkCreateImage CreateImage}, then all members of {@code imageFormatProperties} will be filled with zero.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of {@link VkImageFormatProperties2} is used to allow the specification of additional capabilities to be returned from {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2}.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure. The {@code pNext} chain of {@link VkImageFormatProperties2} is used to allow the specification of additional capabilities to be returned from {@code vkGetPhysicalDeviceImageFormatProperties2}.</li>
  * <li>{@code imageFormatProperties} &ndash; an instance of a {@link VkImageFormatProperties} structure in which capabilities are returned.</li>
  * </ul>
  * 

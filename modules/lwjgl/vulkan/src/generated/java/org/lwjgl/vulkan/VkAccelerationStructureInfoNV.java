@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>{@link VkAccelerationStructureInfoNV} contains information that's used both for acceleration structure creation with {@link NVRayTracing#vkCreateAccelerationStructureNV CreateAccelerationStructureNV} and in combination with the actual geometric data to build the acceleration structure with {@link NVRayTracing#vkCmdBuildAccelerationStructureNV CmdBuildAccelerationStructureNV}.</p>
+ * <p>{@link VkAccelerationStructureInfoNV} contains information that's used both for acceleration structure creation with {@code vkCreateAccelerationStructureNV} and in combination with the actual geometric data to build the acceleration structure with {@code vkCmdBuildAccelerationStructureNV}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -53,11 +53,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code type} &ndash; a {@code VkAccelerationStructureTypeBitsNV} value that specifies the type of acceleration structure that will be created.</li>
- * <li>{@code flags} &ndash; a set of {@code VkBuildAccelerationStructureFlagBitsNV} values that specify additional parameters of the acceleration structure.</li>
+ * <li>{@code type} &ndash; a {@code VkAccelerationStructureMemoryRequirementsTypeNV} value specifying the type of acceleration structure that will be created.</li>
+ * <li>{@code flags} &ndash; a bitmask of {@code VkBuildAccelerationStructureFlagBitsNV} specifying additional parameters of the acceleration structure.</li>
  * <li>{@code instanceCount} &ndash; specifies the number of instances that will be in the new acceleration structure</li>
  * <li>{@code geometryCount} &ndash; specifies the number of geometries that will be in the new acceleration structure</li>
- * <li>{@code pGeometries} &ndash; an array of {@code VkGeometryNV} structures which contain the scene data being passed into the acceleration structure.</li>
+ * <li>{@code pGeometries} &ndash; an array of {@link VkGeometryNV} structures which contain the scene data being passed into the acceleration structure.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

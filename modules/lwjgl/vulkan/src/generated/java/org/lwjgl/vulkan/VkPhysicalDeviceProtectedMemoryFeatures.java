@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceProtectedMemoryFeatures} structure is included in the {@code pNext} chain of flink:VkPhysicalDeviceFeatures2, it is filled with a value indicating whether the feature is supported.</p>
+ * <p>If the {@link VkPhysicalDeviceProtectedMemoryFeatures} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with a value indicating whether the feature is supported.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

@@ -553,7 +553,7 @@ public class EXTDebugUtils {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>There <b>must</b> be an outstanding {@link #vkQueueBeginDebugUtilsLabelEXT QueueBeginDebugUtilsLabelEXT} command prior to the {@link #vkQueueEndDebugUtilsLabelEXT QueueEndDebugUtilsLabelEXT} on the queue</li>
+     * <li>There <b>must</b> be an outstanding {@code vkQueueBeginDebugUtilsLabelEXT} command prior to the {@code vkQueueEndDebugUtilsLabelEXT} on the queue</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -705,8 +705,8 @@ public class EXTDebugUtils {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>There <b>must</b> be an outstanding {@link #vkCmdBeginDebugUtilsLabelEXT CmdBeginDebugUtilsLabelEXT} command prior to the {@link #vkCmdEndDebugUtilsLabelEXT CmdEndDebugUtilsLabelEXT} on the queue that {@code commandBuffer} is submitted to</li>
-     * <li>If {@code commandBuffer} is a secondary command buffer, there <b>must</b> be an outstanding {@link #vkCmdBeginDebugUtilsLabelEXT CmdBeginDebugUtilsLabelEXT} command recorded to {@code commandBuffer} that has not previously been ended by a call to {@link #vkCmdEndDebugUtilsLabelEXT CmdEndDebugUtilsLabelEXT}.</li>
+     * <li>There <b>must</b> be an outstanding {@code vkCmdBeginDebugUtilsLabelEXT} command prior to the {@code vkCmdEndDebugUtilsLabelEXT} on the queue that {@code commandBuffer} is submitted to</li>
+     * <li>If {@code commandBuffer} is a secondary command buffer, there <b>must</b> be an outstanding {@code vkCmdBeginDebugUtilsLabelEXT} command recorded to {@code commandBuffer} that has not previously been ended by a call to {@code vkCmdEndDebugUtilsLabelEXT}.</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -914,7 +914,7 @@ public class EXTDebugUtils {
      * <p>{@link VkAllocationCallbacks}</p>
      *
      * @param instance   the instance where the callback was created.
-     * @param messenger  the {@code VkDebugUtilsMessengerEXT} object to destroy. {@code messenger} is an externally synchronized object and <b>must</b> not be used on more than one thread at a time. This means that {@link #vkDestroyDebugUtilsMessengerEXT DestroyDebugUtilsMessengerEXT} <b>must</b> not be called when a callback is active.
+     * @param messenger  the {@code VkDebugUtilsMessengerEXT} object to destroy. {@code messenger} is an externally synchronized object and <b>must</b> not be used on more than one thread at a time. This means that {@code vkDestroyDebugUtilsMessengerEXT} <b>must</b> not be called when a callback is active.
      * @param pAllocator controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
     public static void vkDestroyDebugUtilsMessengerEXT(VkInstance instance, @NativeType("VkDebugUtilsMessengerEXT") long messenger, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {

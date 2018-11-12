@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code shadingRate} <b>must</b> be a shading rate that generates fragments with more than one pixel.</li>
- * <li>{@code sampleCount} <b>must</b> correspond to a sample count enumerated in {@code VkSampleCountFlags} whose corresponding bit is set in {@code VkPhysicalDeviceLimits}{@code ::framebufferNoAttachmentsSampleCounts}.</li>
+ * <li>{@code sampleCount} <b>must</b> correspond to a sample count enumerated in {@code VkSampleCountFlags} whose corresponding bit is set in {@link VkPhysicalDeviceLimits}{@code ::framebufferNoAttachmentsSampleCounts}.</li>
  * <li>{@code sampleLocationCount} <b>must</b> be equal to the product of {@code sampleCount}, the fragment width for {@code shadingRate}, and the fragment height for {@code shadingRate}.</li>
  * <li>{@code sampleLocationCount} <b>must</b> be less than or equal to the value of {@link VkPhysicalDeviceShadingRateImagePropertiesNV}{@code ::shadingRateMaxCoarseSamples}.</li>
  * <li>The array {@code pSampleLocations} <b>must</b> contain exactly one entry for every combination of valid values for {@code pixelX}, {@code pixelY}, and {@code sample} in the structure {@link VkCoarseSampleOrderCustomNV}.</li>

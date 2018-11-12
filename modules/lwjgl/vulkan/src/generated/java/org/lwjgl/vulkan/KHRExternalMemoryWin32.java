@@ -109,7 +109,7 @@ public class KHRExternalMemoryWin32 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>For handle types defined as NT handles, the handles returned by {@link #vkGetMemoryWin32HandleKHR GetMemoryWin32HandleKHR} are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.</p>
+     * <p>For handle types defined as NT handles, the handles returned by {@code vkGetMemoryWin32HandleKHR} are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

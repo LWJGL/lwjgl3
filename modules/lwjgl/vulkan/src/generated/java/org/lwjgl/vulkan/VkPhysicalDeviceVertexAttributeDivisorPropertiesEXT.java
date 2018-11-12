@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing max value of vertex attribute divisor that can be supported by an implementation.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -27,6 +31,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
+ * <li>{@code sType} &ndash; the type of this structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code maxVertexAttribDivisor} &ndash; the maximum value of the number of instances that will repeat the value of vertex attribute data when instanced rendering is enabled.</li>
  * </ul>
  * 

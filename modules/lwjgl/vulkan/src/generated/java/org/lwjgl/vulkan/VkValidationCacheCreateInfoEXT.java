@@ -22,8 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@code initialDataSize} is not 0, it <b>must</b> be equal to the size of {@code pInitialData}, as returned by {@link EXTValidationCache#vkGetValidationCacheDataEXT GetValidationCacheDataEXT} when {@code pInitialData} was originally retrieved</li>
- * <li>If {@code initialDataSize} is not 0, {@code pInitialData} <b>must</b> have been retrieved from a previous call to {@link EXTValidationCache#vkGetValidationCacheDataEXT GetValidationCacheDataEXT}</li>
+ * <li>If {@code initialDataSize} is not 0, it <b>must</b> be equal to the size of {@code pInitialData}, as returned by {@code vkGetValidationCacheDataEXT} when {@code pInitialData} was originally retrieved</li>
+ * <li>If {@code initialDataSize} is not 0, {@code pInitialData} <b>must</b> have been retrieved from a previous call to {@code vkGetValidationCacheDataEXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

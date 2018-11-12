@@ -186,7 +186,7 @@ public class EXTTransformFeedback {
      * <li>All elements of {@code pSizes} <b>must</b> be less than or equal to the size of the corresponding buffer in {@code pBuffers}</li>
      * <li>All elements of {@code pOffsets} plus {@code pSizes}, where the {@code pSizes}, element is not {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, <b>must</b> be less than or equal to the size of the corresponding element in {@code pBuffers}</li>
      * <li>Each element of {@code pBuffers} that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
-     * <li>Transform feedback <b>must</b> not be active when the {@link #vkCmdBindTransformFeedbackBuffersEXT CmdBindTransformFeedbackBuffersEXT} command is recorded</li>
+     * <li>Transform feedback <b>must</b> not be active when the {@code vkCmdBindTransformFeedbackBuffersEXT} command is recorded</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -414,7 +414,7 @@ public class EXTTransformFeedback {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The {@link #vkCmdBeginQueryIndexedEXT CmdBeginQueryIndexedEXT} command operates the same as the {@link VK10#vkCmdBeginQuery CmdBeginQuery} command, except that it also accepts a query type specific {@code index} parameter.</p>
+     * <p>The {@code vkCmdBeginQueryIndexedEXT} command operates the same as the {@link VK10#vkCmdBeginQuery CmdBeginQuery} command, except that it also accepts a query type specific {@code index} parameter.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -427,7 +427,7 @@ public class EXTTransformFeedback {
      * <li>If the {@code queryType} used to create {@code queryPool} was {@link VK10#VK_QUERY_TYPE_PIPELINE_STATISTICS QUERY_TYPE_PIPELINE_STATISTICS} and any of the {@code pipelineStatistics} indicate graphics operations, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
      * <li>If the {@code queryType} used to create {@code queryPool} was {@link VK10#VK_QUERY_TYPE_PIPELINE_STATISTICS QUERY_TYPE_PIPELINE_STATISTICS} and any of the {@code pipelineStatistics} indicate compute operations, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
      * <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
-     * <li>If {@link VK10#vkCmdBeginQuery CmdBeginQuery} is called within a render pass instance, the sum of {@code query} and the number of bits set in the current subpass&#8217;s view mask <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
+     * <li>If {@code vkCmdBeginQuery} is called within a render pass instance, the sum of {@code query} and the number of bits set in the current subpass&#8217;s view mask <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
      * <li>If the {@code queryType} used to create {@code queryPool} was {@link #VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
      * <li>If the {@code queryType} used to create {@code queryPool} was {@link #VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} the {@code index} parameter <b>must</b> be less than {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT}{@code ::maxTransformFeedbackStreams}</li>
      * <li>If the {@code queryType} used to create {@code queryPool} was not {@link #VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} the {@code index} <b>must</b> be zero</li>
@@ -491,7 +491,7 @@ public class EXTTransformFeedback {
      * 
      * <h5>Description</h5>
      * 
-     * <p>The {@link #vkCmdEndQueryIndexedEXT CmdEndQueryIndexedEXT} command operates the same as the {@link VK10#vkCmdEndQuery CmdEndQuery} command, except that it also accepts a query type specific {@code index} parameter.</p>
+     * <p>The {@code vkCmdEndQueryIndexedEXT} command operates the same as the {@link VK10#vkCmdEndQuery CmdEndQuery} command, except that it also accepts a query type specific {@code index} parameter.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -499,7 +499,7 @@ public class EXTTransformFeedback {
      * <li>All queries used by the command <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#queries-operation-active">active</a></li>
      * <li>{@code query} <b>must</b> be less than the number of queries in {@code queryPool}</li>
      * <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
-     * <li>If {@link VK10#vkCmdEndQuery CmdEndQuery} is called within a render pass instance, the sum of {@code query} and the number of bits set in the current subpass&#8217;s view mask <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
+     * <li>If {@code vkCmdEndQuery} is called within a render pass instance, the sum of {@code query} and the number of bits set in the current subpass&#8217;s view mask <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
      * <li>If the {@code queryType} used to create {@code queryPool} was {@link #VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} the {@code index} parameter <b>must</b> be less than {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT}{@code ::maxTransformFeedbackStreams}</li>
      * <li>If the {@code queryType} used to create {@code queryPool} was not {@link #VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} the {@code index} <b>must</b> be zero</li>
      * </ul>
@@ -583,7 +583,7 @@ public class EXTTransformFeedback {
      * <li>The subpass index of the current render pass <b>must</b> be equal to the {@code subpass} member of the {@link VkGraphicsPipelineCreateInfo} structure specified when creating the {@code VkPipeline} bound to {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS}</li>
      * <li>For each set <em>n</em> that is statically used by the {@code VkPipeline} bound to {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS}, a descriptor set <b>must</b> have been bound to <em>n</em> at {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS}, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
      * <li>For each push constant that is statically used by the {@code VkPipeline} bound to {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS}, a push constant value <b>must</b> have been set for {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS}, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#descriptorsets-compatibility">the “Pipeline Layout Compatibility” section</a></li>
-     * <li>Descriptors in each bound descriptor set, specified via {@link VK10#vkCmdBindDescriptorSets CmdBindDescriptorSets}, <b>must</b> be valid if they are statically used by the bound {@code VkPipeline} object, specified via {@link VK10#vkCmdBindPipeline CmdBindPipeline}</li>
+     * <li>Descriptors in each bound descriptor set, specified via {@code vkCmdBindDescriptorSets}, <b>must</b> be valid if they are statically used by the bound {@code VkPipeline} object, specified via {@code vkCmdBindPipeline}</li>
      * <li>All vertex input bindings accessed via vertex input variables declared in the vertex shader entry point&#8217;s interface <b>must</b> have valid buffers bound</li>
      * <li>For a given vertex buffer binding, any attribute data fetched <b>must</b> be entirely contained within the corresponding vertex buffer binding, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#fxvertex-input">the “Vertex Input Description” section</a></li>
      * <li>A valid graphics pipeline <b>must</b> be bound to the current command buffer with {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS}</li>

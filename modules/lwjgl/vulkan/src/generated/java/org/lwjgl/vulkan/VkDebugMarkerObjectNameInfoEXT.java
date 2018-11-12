@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Applications <b>may</b> change the name associated with an object simply by calling {@link EXTDebugMarker#vkDebugMarkerSetObjectNameEXT DebugMarkerSetObjectNameEXT} again with a new string. To remove a previously set name, {@code pObjectName} <b>should</b> be set to an empty string.</p>
+ * <p>Applications <b>may</b> change the name associated with an object simply by calling {@code vkDebugMarkerSetObjectNameEXT} again with a new string. To remove a previously set name, {@code pObjectName} <b>should</b> be set to an empty string.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

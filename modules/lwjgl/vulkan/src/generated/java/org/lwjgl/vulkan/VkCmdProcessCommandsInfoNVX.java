@@ -72,9 +72,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pIndirectCommandsTokens} &ndash; provides an array of {@link VkIndirectCommandsTokenNVX} that reference the input data for each token command.</li>
  * <li>{@code maxSequencesCount} &ndash; the maximum number of sequences for which command buffer space will be reserved. If {@code sequencesCountBuffer} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, this is also the actual number of sequences generated.</li>
  * <li>{@code targetCommandBuffer} &ndash; <b>can</b> be the secondary {@code VkCommandBuffer} in which the commands should be recorded. If {@code targetCommandBuffer} is {@code NULL} an implicit reservation as well as execution takes place on the processing {@code VkCommandBuffer}.</li>
- * <li>{@code sequencesCountBuffer} &ndash; <b>can</b> be {@code VkBuffer} from which the actual amount of sequences is sourced from as ftext:uint32_t value.</li>
+ * <li>{@code sequencesCountBuffer} &ndash; <b>can</b> be {@code VkBuffer} from which the actual amount of sequences is sourced from as {@code uint32_t} value.</li>
  * <li>{@code sequencesCountOffset} &ndash; the byte offset into {@code sequencesCountBuffer} where the count value is stored.</li>
- * <li>{@code sequencesIndexBuffer} &ndash; <b>must</b> be set if {@code indirectCommandsLayout}&#8217;s {@link NVXDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX} is set and provides the used sequence indices as ftext:uint32_t array. Otherwise it <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</li>
+ * <li>{@code sequencesIndexBuffer} &ndash; <b>must</b> be set if {@code indirectCommandsLayout}&#8217;s {@link NVXDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX} is set and provides the used sequence indices as {@code uint32_t} array. Otherwise it <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</li>
  * <li>{@code sequencesIndexOffset} &ndash; the byte offset into {@code sequencesIndexBuffer} where the index values start.</li>
  * </ul>
  * 

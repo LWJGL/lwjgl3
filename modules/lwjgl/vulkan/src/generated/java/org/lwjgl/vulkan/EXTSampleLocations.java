@@ -117,7 +117,7 @@ public class EXTSampleLocations {
      * 
      * <p>The custom sample locations used for rasterization when {@link VkPipelineSampleLocationsStateCreateInfoEXT}{@code ::sampleLocationsEnable} is {@link VK10#VK_TRUE TRUE} are specified by the {@link VkPipelineSampleLocationsStateCreateInfoEXT}{@code ::sampleLocationsInfo} property of the bound graphics pipeline, if the pipeline was not created with {@link #VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT} enabled.</p>
      * 
-     * <p>Otherwise, the sample locations used for rasterization are set by calling {@link #vkCmdSetSampleLocationsEXT CmdSetSampleLocationsEXT}:</p>
+     * <p>Otherwise, the sample locations used for rasterization are set by calling {@code vkCmdSetSampleLocationsEXT}:</p>
      * 
      * <pre><code>
      * void vkCmdSetSampleLocationsEXT(

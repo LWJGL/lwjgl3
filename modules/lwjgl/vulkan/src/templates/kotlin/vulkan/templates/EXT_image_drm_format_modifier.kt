@@ -25,7 +25,7 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
 
         Each <em>modifier</em> is usually supported by a single vendor and its name matches the pattern {@code {VENDOR}_FORMAT_MOD_*} or {@code DRM_FORMAT_MOD_{VENDOR}_*}. Examples are {@code I915_FORMAT_MOD_X_TILED} and {@code DRM_FORMAT_MOD_BROADCOM_VC4_T_TILED}. An exception is {@code DRM_FORMAT_MOD_LINEAR}, which is supported by most vendors.
 
-        Many APIs in Linux use <em>modifiers</em> to negotiate and specify the memory layout of shared images. For example, a Wayland compositor and Wayland client may, by relaying <em>modifiers</em> over the Wayland protocol {@code zwp_linux_dmabuf_v1}, negotiate a vendor-specific tiling format for a shared stext:wl_buffer. The client may allocate the underlying memory for the stext:wl_buffer with GBM, providing the chosen <em>modifier</em> to fname:gbm_bo_create_with_modifiers. The client may then import the stext:wl_buffer into Vulkan for producing image content, providing the resource's dma_buf to {@code VkImportMemoryFdInfo} and its <em>modifier</em> to ##VkImageDrmFormatModifierExplicitCreateInfoEXT. The compositor may then import the stext:wl_buffer into OpenGL for sampling, providing the resource's dma_buf and <em>modifier</em> to fname:eglCreateImage. The compositor may also bypass OpenGL and submit the stext:wl_buffer directly to the kernel's display API, providing the dma_buf and <em>modifier</em> through stext:drm_mode_fb_cmd2.
+        Many APIs in Linux use <em>modifiers</em> to negotiate and specify the memory layout of shared images. For example, a Wayland compositor and Wayland client may, by relaying <em>modifiers</em> over the Wayland protocol {@code zwp_linux_dmabuf_v1}, negotiate a vendor-specific tiling format for a shared {@code wl_buffer}. The client may allocate the underlying memory for the {@code wl_buffer} with GBM, providing the chosen <em>modifier</em> to {@code gbm_bo_create_with_modifiers}. The client may then import the {@code wl_buffer} into Vulkan for producing image content, providing the resource's dma_buf to ##VkImportMemoryFdInfoKHR and its <em>modifier</em> to ##VkImageDrmFormatModifierExplicitCreateInfoEXT. The compositor may then import the {@code wl_buffer} into OpenGL for sampling, providing the resource's dma_buf and <em>modifier</em> to {@code eglCreateImage}. The compositor may also bypass OpenGL and submit the {@code wl_buffer} directly to the kernel's display API, providing the dma_buf and <em>modifier</em> through {@code drm_mode_fb_cmd2}.
 
         <h5>Format Translation</h5>
         <em>Modifier</em>-capable APIs often pair <em>modifiers</em> with DRM formats, which are defined in <a target="_blank" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/uapi/drm/drm_fourcc.h">{@code drm_fourcc.h}</a>. However, {@code VK_EXT_image_drm_format_modifier} uses {@code VkFormat} instead of DRM formats. The application must convert between {@code VkFormat} and DRM format when it sends or receives a DRM format to or from an external API.
@@ -65,9 +65,9 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
         </ul>
 
         <h5>Prior Art</h5>
-        Extension {@code EGL_EXT_image_dma_buf_import}<sup><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_image_drm_format_modifier-fn1">1</a></sup> introduced the ability to create an stext:EGLImage by importing for each plane a dma_buf, offset, and row pitch.
+        Extension {@code EGL_EXT_image_dma_buf_import}<sup><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_image_drm_format_modifier-fn1">1</a></sup> introduced the ability to create an {@code EGLImage} by importing for each plane a dma_buf, offset, and row pitch.
 
-        Later, extension {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_image_drm_format_modifier-fn2">2</a></sup> introduced the ability to query which combination of formats and <em>modifiers</em> the implementation supports and to specify <em>modifiers</em> during creation of the stext:EGLImage.
+        Later, extension {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_image_drm_format_modifier-fn2">2</a></sup> introduced the ability to query which combination of formats and <em>modifiers</em> the implementation supports and to specify <em>modifiers</em> during creation of the {@code EGLImage}.
 
         Extension {@code EGL_MESA_image_dma_buf_export}<sup><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#VK_EXT_image_drm_format_modifier-fn3">3</a></sup> is the inverse of {@code EGL_EXT_image_dma_buf_import_modifiers}.
 
@@ -121,18 +121,6 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
             </ul></dd>
         </dl>
         """
-
-    IntConstant(
-        "The extension specification version.",
-
-        "EXT_EXTENSION_159_SPEC_VERSION".."0"
-    )
-
-    StringConstant(
-        "The extension name.",
-
-        "EXT_EXTENSION_159_EXTENSION_NAME".."VK_EXT_extension_159"
-    )
 
     IntConstant(
         "The extension specification version.",

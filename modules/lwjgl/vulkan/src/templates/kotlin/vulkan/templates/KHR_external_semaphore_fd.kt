@@ -138,7 +138,7 @@ val KHR_external_semaphore_fd = "KHRExternalSemaphoreFd".nativeClassVK("KHR_exte
 ￿    int*                                        pFd);</code></pre>
 
         <h5>Description</h5>
-        Each call to #GetSemaphoreFdKHR() <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor when it is no longer needed.
+        Each call to {@code vkGetSemaphoreFdKHR} <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor when it is no longer needed.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Ownership can be released in many ways. For example, the application can call {@code close}() on the file descriptor, or transfer ownership back to Vulkan by using the file descriptor to import a semaphore payload.
