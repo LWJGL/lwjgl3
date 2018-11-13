@@ -210,15 +210,17 @@ private open class Signature constructor(
     override fun hashCode(): Int = signatureNative.hashCode()
 
     override fun compareTo(other: Signature): Int {
-        if (this.callingConvention !== other.callingConvention)
-            return this.callingConvention.ordinal.compareTo(other.callingConvention.ordinal)
+        this.callingConvention.ordinal.compareTo(other.callingConvention.ordinal).let { if (it != 0) return it }
+        this.returnType.jniSignature.compareTo(other.returnType.jniSignature).let { if (it != 0) return it }
 
-        return returnType.jniSignature.compareTo(other.returnType.jniSignature).let {
-            if (it != 0)
-                it
-            else
-                this.paramSignatureStrict.compareTo(other.paramSignatureStrict)
-        }
+        val javaSignature0 = this.arguments.asSequence().map { it.jniSignatureJava }.joinToString("")
+        val javaSignature1 = other.arguments.asSequence().map { it.jniSignatureJava }.joinToString("")
+
+        javaSignature0.length.compareTo(javaSignature1.length).let { if (it != 0) return it }
+        this.arguments.size.compareTo(other.arguments.size).let { if (it != 0) return it }
+        javaSignature0.compareTo(javaSignature1).let { if (it != 0) return it }
+
+        return this.signatureNative.compareTo(other.signatureNative)
     }
 
 }
@@ -247,15 +249,17 @@ private class SignatureArray constructor(
     override fun hashCode(): Int = signatureArray.hashCode()
 
     override fun compareTo(other: Signature): Int {
-        if (this.callingConvention !== other.callingConvention)
-            return this.callingConvention.ordinal.compareTo(other.callingConvention.ordinal)
+        this.callingConvention.ordinal.compareTo(other.callingConvention.ordinal).let { if (it != 0) return it }
+        this.returnType.jniSignature.compareTo(other.returnType.jniSignature).let { if (it != 0) return it }
 
-        return returnType.jniSignature.compareTo(other.returnType.jniSignature).let {
-            if (it != 0)
-                it
-            else
-                this.paramSignatureStrict.compareTo((other as SignatureArray).paramSignatureStrict)
-        }
+        val javaSignature0 = this.arguments.asSequence().map { it.jniSignatureJava }.joinToString("")
+        val javaSignature1 = other.arguments.asSequence().map { it.jniSignatureJava }.joinToString("")
+
+        javaSignature0.length.compareTo(javaSignature1.length).let { if (it != 0) return it }
+        this.arguments.size.compareTo(other.arguments.size).let { if (it != 0) return it }
+        javaSignature0.compareTo(javaSignature1).let { if (it != 0) return it }
+
+        return this.signatureArray.compareTo((other as SignatureArray).signatureArray)
     }
 
 }
