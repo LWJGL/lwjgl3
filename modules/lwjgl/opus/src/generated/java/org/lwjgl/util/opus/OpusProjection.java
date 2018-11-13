@@ -17,6 +17,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.util.opus.Opus.*;
+import static org.lwjgl.system.dyncall.DynCall.*;
 
 public class OpusProjection {
 
@@ -127,7 +128,7 @@ public class OpusProjection {
      * Initialize a previously allocated projection encoder state.
      * 
      * <p>The memory pointed to by {@code st} must be at least the size returned by {@link #opus_projection_ambisonics_encoder_get_size projection_ambisonics_encoder_get_size}. This is intended for applications
-     * which use their own allocator instead of malloc.</p>
+     * which use their own allocator instead of {@code malloc}.</p>
      * 
      * <p>To reset a previously initialized state, use the {@link Opus#OPUS_RESET_STATE RESET_STATE} CTL.</p>
      *
@@ -322,7 +323,7 @@ public class OpusProjection {
      * Initialize a previously allocated projection decoder state object.
      * 
      * <p>The memory pointed to by {@code st} must be at least the size returned by {@link #opus_projection_decoder_get_size projection_decoder_get_size}. This is intended for applications which use
-     * their own allocator instead of malloc.</p>
+     * their own allocator instead of {@code malloc}.</p>
      * 
      * <p>To reset a previously initialized state, use the {@link Opus#OPUS_RESET_STATE RESET_STATE} CTL.</p>
      *
@@ -486,6 +487,38 @@ public class OpusProjection {
      */
     public static int opus_projection_decoder_ctl(@NativeType("OpusProjectionDecoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.projection_decoder_ctl);
+    }
+
+    /**
+     * Gets the gain (in dB. S7.8-format) of the demixing matrix from the encoder.
+     *
+     * @return the gain (in dB. S7.8-format) of the demixing matrix.
+     */
+    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN(IntBuffer value) { return new CTLRequestGetI(OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST, value); }
+
+    /**
+     * Gets the size in bytes of the demixing matrix from the encoder.
+     *
+     * @return the size in bytes of the demixing matrix.
+     */
+    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE(IntBuffer value) { return new CTLRequestGetI(OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST, value); }
+
+    /**
+     * Copies the demixing matrix to the supplied pointer location.
+     *
+     * @param matrix returns the demixing matrix to the supplied pointer location.
+     * @param size   the size in bytes of the reserved memory at the pointer location.
+     */
+    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX(ByteBuffer matrix) {
+        long address = memAddress(matrix);
+        int size = matrix.remaining();
+        return new CTLRequest(OPUS_PROJECTION_GET_DEMIXING_MATRIX_REQUEST) {
+            @Override
+            void apply(long vm) {
+                dcArgPointer(vm, address);
+                dcArgInt(vm, size);
+            }
+        };
     }
 
 }

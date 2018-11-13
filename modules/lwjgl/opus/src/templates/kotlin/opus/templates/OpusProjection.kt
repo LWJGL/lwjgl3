@@ -8,8 +8,6 @@ import opus.*
 import org.lwjgl.generator.*
 
 val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", prefixMethod = "opus_", binding = OPUS_BINDING_DELEGATE) {
-    javaImport("static org.lwjgl.util.opus.Opus.*")
-
     EnumConstant(
         "Projection CTLs",
 
@@ -57,7 +55,7 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
         Initialize a previously allocated projection encoder state.
 
         The memory pointed to by {@code st} must be at least the size returned by #projection_ambisonics_encoder_get_size(). This is intended for applications
-        which use their own allocator instead of malloc.
+        which use their own allocator instead of {@code malloc}.
 
         To reset a previously initialized state, use the #RESET_STATE CTL.
         """,
@@ -206,7 +204,7 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
         Initialize a previously allocated projection decoder state object.
 
         The memory pointed to by {@code st} must be at least the size returned by #projection_decoder_get_size(). This is intended for applications which use
-        their own allocator instead of malloc.
+        their own allocator instead of {@code malloc}.
 
         To reset a previously initialized state, use the #RESET_STATE CTL.
         """,
@@ -311,6 +309,11 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
         OpusProjectionDecoder.p("st", "projection decoder state to be freed")
     )
 
+    javaImport(
+        "static org.lwjgl.util.opus.Opus.*",
+        "static org.lwjgl.system.dyncall.DynCall.*"
+    )
+
     customMethod("""
     /**
      * Performs a CTL function on an projection Opus encoder.
@@ -350,6 +353,38 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
      */
     public static int opus_projection_decoder_ctl(@NativeType("OpusProjectionDecoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.projection_decoder_ctl);
+    }
+
+    /**
+     * Gets the gain (in dB. S7.8-format) of the demixing matrix from the encoder.
+     *
+     * @return the gain (in dB. S7.8-format) of the demixing matrix.
+     */
+    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN(IntBuffer value) { return new CTLRequestGetI(OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST, value); }
+
+    /**
+     * Gets the size in bytes of the demixing matrix from the encoder.
+     *
+     * @return the size in bytes of the demixing matrix.
+     */
+    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE(IntBuffer value) { return new CTLRequestGetI(OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST, value); }
+
+    /**
+     * Copies the demixing matrix to the supplied pointer location.
+     *
+     * @param matrix returns the demixing matrix to the supplied pointer location.
+     * @param size   the size in bytes of the reserved memory at the pointer location.
+     */
+    public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX(ByteBuffer matrix) {
+        long address = memAddress(matrix);
+        int size = matrix.remaining();
+        return new CTLRequest(OPUS_PROJECTION_GET_DEMIXING_MATRIX_REQUEST) {
+            @Override
+            void apply(long vm) {
+                dcArgPointer(vm, address);
+                dcArgInt(vm, size);
+            }
+        };
     }
     """)
 }

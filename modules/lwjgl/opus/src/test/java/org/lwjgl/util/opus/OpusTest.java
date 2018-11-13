@@ -109,12 +109,30 @@ public class OpusTest {
         }
     }
 
+    public void testProjectionEncoderCTL() {
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer error = stack.callocInt(1);
+
+            IntBuffer pi0 = stack.callocInt(1);
+            IntBuffer pi1 = stack.callocInt(1);
+
+            long st = opus_projection_ambisonics_encoder_create(48000, 16, 3, pi0, pi1, OPUS_APPLICATION_AUDIO, error);
+            check(error);
+
+            check(opus_projection_encoder_ctl(st, OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE(pi0)));
+            check(opus_projection_encoder_ctl(st, OPUS_PROJECTION_GET_DEMIXING_MATRIX(stack.calloc(pi0.get(0)))));
+
+            opus_projection_encoder_destroy(st);
+        }
+    }
+
     public void testDecoderCTL() {
         try (MemoryStack stack = stackPush()) {
             IntBuffer error = stack.callocInt(1);
             IntBuffer pi    = stack.callocInt(1);
 
             long st = opus_decoder_create(48000, 2, error);
+            check(error);
 
             check(opus_decoder_ctl(st, OPUS_RESET_STATE));
             check(opus_decoder_ctl(st, OPUS_GET_SAMPLE_RATE(pi)));
