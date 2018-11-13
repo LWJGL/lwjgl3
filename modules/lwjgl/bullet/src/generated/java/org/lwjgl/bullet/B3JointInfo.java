@@ -46,6 +46,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     double m_childFrame[7];
  *     double m_jointAxis[3];
  *     int m_parentIndex;
+ *     int m_qSize;
+ *     int m_uSize;
  * }</code></pre>
  */
 @NativeType("struct b3JointInfo")
@@ -75,7 +77,9 @@ public class B3JointInfo extends Struct implements NativeResource {
         M_PARENTFRAME,
         M_CHILDFRAME,
         M_JOINTAXIS,
-        M_PARENTINDEX;
+        M_PARENTINDEX,
+        M_QSIZE,
+        M_USIZE;
 
     static {
         Layout layout = __struct(
@@ -95,6 +99,8 @@ public class B3JointInfo extends Struct implements NativeResource {
             __array(8, 7),
             __array(8, 7),
             __array(8, 3),
+            __member(4),
+            __member(4),
             __member(4)
         );
 
@@ -118,6 +124,8 @@ public class B3JointInfo extends Struct implements NativeResource {
         M_CHILDFRAME = layout.offsetof(14);
         M_JOINTAXIS = layout.offsetof(15);
         M_PARENTINDEX = layout.offsetof(16);
+        M_QSIZE = layout.offsetof(17);
+        M_USIZE = layout.offsetof(18);
     }
 
     /**
@@ -184,6 +192,10 @@ public class B3JointInfo extends Struct implements NativeResource {
     public double m_jointAxis(int index) { return nm_jointAxis(address(), index); }
     /** Returns the value of the {@code m_parentIndex} field. */
     public int m_parentIndex() { return nm_parentIndex(address()); }
+    /** Returns the value of the {@code m_qSize} field. */
+    public int m_qSize() { return nm_qSize(address()); }
+    /** Returns the value of the {@code m_uSize} field. */
+    public int m_uSize() { return nm_uSize(address()); }
 
     /** Copies the specified encoded string to the {@code m_linkName} field. */
     public B3JointInfo m_linkName(@NativeType("char[1024]") ByteBuffer value) { nm_linkName(address(), value); return this; }
@@ -225,6 +237,10 @@ public class B3JointInfo extends Struct implements NativeResource {
     public B3JointInfo m_jointAxis(int index, double value) { nm_jointAxis(address(), index, value); return this; }
     /** Sets the specified value to the {@code m_parentIndex} field. */
     public B3JointInfo m_parentIndex(int value) { nm_parentIndex(address(), value); return this; }
+    /** Sets the specified value to the {@code m_qSize} field. */
+    public B3JointInfo m_qSize(int value) { nm_qSize(address(), value); return this; }
+    /** Sets the specified value to the {@code m_uSize} field. */
+    public B3JointInfo m_uSize(int value) { nm_uSize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public B3JointInfo set(
@@ -244,7 +260,9 @@ public class B3JointInfo extends Struct implements NativeResource {
         DoubleBuffer m_parentFrame,
         DoubleBuffer m_childFrame,
         DoubleBuffer m_jointAxis,
-        int m_parentIndex
+        int m_parentIndex,
+        int m_qSize,
+        int m_uSize
     ) {
         m_linkName(m_linkName);
         m_jointName(m_jointName);
@@ -263,6 +281,8 @@ public class B3JointInfo extends Struct implements NativeResource {
         m_childFrame(m_childFrame);
         m_jointAxis(m_jointAxis);
         m_parentIndex(m_parentIndex);
+        m_qSize(m_qSize);
+        m_uSize(m_uSize);
 
         return this;
     }
@@ -472,6 +492,10 @@ public class B3JointInfo extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #m_parentIndex}. */
     public static int nm_parentIndex(long struct) { return UNSAFE.getInt(null, struct + B3JointInfo.M_PARENTINDEX); }
+    /** Unsafe version of {@link #m_qSize}. */
+    public static int nm_qSize(long struct) { return UNSAFE.getInt(null, struct + B3JointInfo.M_QSIZE); }
+    /** Unsafe version of {@link #m_uSize}. */
+    public static int nm_uSize(long struct) { return UNSAFE.getInt(null, struct + B3JointInfo.M_USIZE); }
 
     /** Unsafe version of {@link #m_linkName(ByteBuffer) m_linkName}. */
     public static void nm_linkName(long struct, ByteBuffer value) {
@@ -540,6 +564,10 @@ public class B3JointInfo extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #m_parentIndex(int) m_parentIndex}. */
     public static void nm_parentIndex(long struct, int value) { UNSAFE.putInt(null, struct + B3JointInfo.M_PARENTINDEX, value); }
+    /** Unsafe version of {@link #m_qSize(int) m_qSize}. */
+    public static void nm_qSize(long struct, int value) { UNSAFE.putInt(null, struct + B3JointInfo.M_QSIZE, value); }
+    /** Unsafe version of {@link #m_uSize(int) m_uSize}. */
+    public static void nm_uSize(long struct, int value) { UNSAFE.putInt(null, struct + B3JointInfo.M_USIZE, value); }
 
     // -----------------------------------
 
@@ -630,6 +658,10 @@ public class B3JointInfo extends Struct implements NativeResource {
         public double m_jointAxis(int index) { return B3JointInfo.nm_jointAxis(address(), index); }
         /** Returns the value of the {@code m_parentIndex} field. */
         public int m_parentIndex() { return B3JointInfo.nm_parentIndex(address()); }
+        /** Returns the value of the {@code m_qSize} field. */
+        public int m_qSize() { return B3JointInfo.nm_qSize(address()); }
+        /** Returns the value of the {@code m_uSize} field. */
+        public int m_uSize() { return B3JointInfo.nm_uSize(address()); }
 
         /** Copies the specified encoded string to the {@code m_linkName} field. */
         public B3JointInfo.Buffer m_linkName(@NativeType("char[1024]") ByteBuffer value) { B3JointInfo.nm_linkName(address(), value); return this; }
@@ -671,6 +703,10 @@ public class B3JointInfo extends Struct implements NativeResource {
         public B3JointInfo.Buffer m_jointAxis(int index, double value) { B3JointInfo.nm_jointAxis(address(), index, value); return this; }
         /** Sets the specified value to the {@code m_parentIndex} field. */
         public B3JointInfo.Buffer m_parentIndex(int value) { B3JointInfo.nm_parentIndex(address(), value); return this; }
+        /** Sets the specified value to the {@code m_qSize} field. */
+        public B3JointInfo.Buffer m_qSize(int value) { B3JointInfo.nm_qSize(address(), value); return this; }
+        /** Sets the specified value to the {@code m_uSize} field. */
+        public B3JointInfo.Buffer m_uSize(int value) { B3JointInfo.nm_uSize(address(), value); return this; }
 
     }
 

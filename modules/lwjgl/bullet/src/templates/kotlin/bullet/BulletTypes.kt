@@ -52,6 +52,8 @@ val b3JointInfo = struct(Module.BULLET, "B3JointInfo", nativeName = "struct b3Jo
     double("m_childFrame", "position and orientation (quaternion)")[7]
     double("m_jointAxis", "joint axis in parent local frame")[3]
     int("m_parentIndex", "")
+    int("m_qSize", "")
+	int("m_uSize", "")
 }
 
 val b3UserDataValue = struct(Module.BULLET, "B3UserDataValue", nativeName = "struct b3UserDataValue") {
@@ -236,6 +238,15 @@ val b3JointSensorState = struct(Module.BULLET, "B3JointSensorState", nativeName 
     double("m_jointVelocity", "")
     double("m_jointForceTorque", "")[6] /* note to roboticists: this is NOT the motor torque/force, but the spatial reaction force vector at joint */
     double("m_jointMotorTorque", "")
+}
+
+val b3JointSensorState2 = struct(Module.BULLET, "B3JointSensorState2", nativeName = "struct b3JointSensorState2") {
+    double("m_jointPosition", "")[4]
+    double("m_jointVelocity", "")[3]
+    double("m_jointReactionForceTorque", "")[6] /* note to roboticists: this is NOT the motor torque/force, but the spatial reaction force vector at joint */
+    double("m_jointMotorTorque", "")
+    int("m_qDofSize", "")
+	int("m_uDofSize", "")
 }
 
 ///b3LinkState provides extra information such as the Cartesian world coordinates

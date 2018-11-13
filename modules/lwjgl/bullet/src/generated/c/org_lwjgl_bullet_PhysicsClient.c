@@ -1856,6 +1856,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandS
     return (jint)b3CreatePoseCommandSetJointPosition(physClient, commandHandle, jointIndex, jointPosition);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositionMultiDof__JJIJI(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jlong jointPositionAddress, jint posSize) {
+    b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
+    b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
+    double const *jointPosition = (double const *)(intptr_t)jointPositionAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)b3CreatePoseCommandSetJointPositionMultiDof(physClient, commandHandle, jointIndex, jointPosition, posSize);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQ__JIJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numJointPositions, jlong qAddress, jlong hasQAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *q = (double const *)(intptr_t)qAddress;
@@ -1885,6 +1893,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandS
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)b3CreatePoseCommandSetJointVelocity(physClient, commandHandle, jointIndex, jointVelocity);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocityMultiDof__JJIJI(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jlong jointVelocityAddress, jint velSize) {
+    b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
+    b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
+    double const *jointVelocity = (double const *)(intptr_t)jointVelocityAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)b3CreatePoseCommandSetJointVelocityMultiDof(physClient, commandHandle, jointIndex, jointVelocity, velSize);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateSensorCommandInit(JNIEnv *__env, jclass clazz, jlong physClientAddress, jint bodyUniqueId) {
@@ -1935,6 +1951,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetJointState(JNIE
     struct b3JointSensorState *state = (struct b3JointSensorState *)(intptr_t)stateAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)b3GetJointState(physClient, statusHandle, jointIndex, state);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetJointStateMultiDof(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong statusHandleAddress, jint jointIndex, jlong stateAddress) {
+    b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
+    b3SharedMemoryStatusHandle statusHandle = (b3SharedMemoryStatusHandle)(intptr_t)statusHandleAddress;
+    struct b3JointSensorState *state = (struct b3JointSensorState *)(intptr_t)stateAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)b3GetJointStateMultiDof(physClient, statusHandle, jointIndex, state);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetLinkState(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong statusHandleAddress, jint linkIndex, jlong stateAddress) {

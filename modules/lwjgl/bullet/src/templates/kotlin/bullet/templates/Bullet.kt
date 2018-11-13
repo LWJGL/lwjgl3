@@ -2992,6 +2992,17 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
     )
 
     int(
+        "CreatePoseCommandSetJointPositionMultiDof",
+        "",
+
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("jointIndex", ""),
+        double.const.p("jointPosition", ""),
+        AutoSize("jointPosition")..int("posSize", "")
+    )
+
+    int(
         "CreatePoseCommandSetQ",
         "",
 
@@ -3029,6 +3040,17 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         b3SharedMemoryCommandHandle("commandHandle", ""),
         int("jointIndex", ""),
         double("jointVelocity", "")
+    )
+
+    int(
+        "CreatePoseCommandSetJointVelocityMultiDof",
+        "",
+
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryCommandHandle("commandHandle", ""),
+        int("jointIndex", ""),
+        double.const.p("jointVelocity", ""),
+        AutoSize("jointVelocity")..int("velSize", "")
     )
 
     b3SharedMemoryCommandHandle(
@@ -3091,6 +3113,16 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
 
     int(
         "GetJointState",
+        "",
+
+        b3PhysicsClientHandle("physClient", ""),
+        b3SharedMemoryStatusHandle("statusHandle", ""),
+        int("jointIndex", ""),
+        b3JointSensorState.p("state", "")
+    )
+
+    int(
+        "GetJointStateMultiDof",
         "",
 
         b3PhysicsClientHandle("physClient", ""),

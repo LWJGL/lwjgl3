@@ -4638,6 +4638,18 @@ public class PhysicsClient {
         return nb3CreatePoseCommandSetJointPosition(physClient, commandHandle, jointIndex, jointPosition);
     }
 
+    // --- [ b3CreatePoseCommandSetJointPositionMultiDof ] ---
+
+    public static native int nb3CreatePoseCommandSetJointPositionMultiDof(long physClient, long commandHandle, int jointIndex, long jointPosition, int posSize);
+
+    public static int b3CreatePoseCommandSetJointPositionMultiDof(@NativeType("b3PhysicsClientHandle") long physClient, @NativeType("b3SharedMemoryCommandHandle") long commandHandle, int jointIndex, @NativeType("double const *") DoubleBuffer jointPosition) {
+        if (CHECKS) {
+            check(physClient);
+            check(commandHandle);
+        }
+        return nb3CreatePoseCommandSetJointPositionMultiDof(physClient, commandHandle, jointIndex, memAddress(jointPosition), jointPosition.remaining());
+    }
+
     // --- [ b3CreatePoseCommandSetQ ] ---
 
     public static native int nb3CreatePoseCommandSetQ(long commandHandle, int numJointPositions, long q, long hasQ);
@@ -4684,6 +4696,18 @@ public class PhysicsClient {
             check(commandHandle);
         }
         return nb3CreatePoseCommandSetJointVelocity(physClient, commandHandle, jointIndex, jointVelocity);
+    }
+
+    // --- [ b3CreatePoseCommandSetJointVelocityMultiDof ] ---
+
+    public static native int nb3CreatePoseCommandSetJointVelocityMultiDof(long physClient, long commandHandle, int jointIndex, long jointVelocity, int velSize);
+
+    public static int b3CreatePoseCommandSetJointVelocityMultiDof(@NativeType("b3PhysicsClientHandle") long physClient, @NativeType("b3SharedMemoryCommandHandle") long commandHandle, int jointIndex, @NativeType("double const *") DoubleBuffer jointVelocity) {
+        if (CHECKS) {
+            check(physClient);
+            check(commandHandle);
+        }
+        return nb3CreatePoseCommandSetJointVelocityMultiDof(physClient, commandHandle, jointIndex, memAddress(jointVelocity), jointVelocity.remaining());
     }
 
     // --- [ b3CreateSensorCommandInit ] ---
@@ -4776,6 +4800,18 @@ public class PhysicsClient {
             check(statusHandle);
         }
         return nb3GetJointState(physClient, statusHandle, jointIndex, state.address());
+    }
+
+    // --- [ b3GetJointStateMultiDof ] ---
+
+    public static native int nb3GetJointStateMultiDof(long physClient, long statusHandle, int jointIndex, long state);
+
+    public static int b3GetJointStateMultiDof(@NativeType("b3PhysicsClientHandle") long physClient, @NativeType("b3SharedMemoryStatusHandle") long statusHandle, int jointIndex, @NativeType("struct b3JointSensorState *") B3JointSensorState state) {
+        if (CHECKS) {
+            check(physClient);
+            check(statusHandle);
+        }
+        return nb3GetJointStateMultiDof(physClient, statusHandle, jointIndex, state.address());
     }
 
     // --- [ b3GetLinkState ] ---
