@@ -560,6 +560,16 @@ val bgfx_init_limits_t = struct(Module.BGFX, "BGFXInitLimits", nativeName = "bgf
     uint32_t("transientIbSize", "maximum transient index buffer size")
 }
 
+val bgfx_platform_data_t = struct(Module.BGFX, "BGFXPlatformData", nativeName = "bgfx_platform_data_t", skipBuffer = true) {
+    documentation = "Platform data."
+
+    nullable..opaque_p("ndt", "native display type")
+    nullable..opaque_p("nwh", "native window handle")
+    nullable..opaque_p("context", "GL context, or D3D device")
+    nullable..opaque_p("backBuffer", "GL backbuffer, or D3D render target view")
+    nullable..opaque_p("backBufferDS", "Backbuffer depth/stencil")
+}
+
 val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", skipBuffer = true) {
     documentation = "Initialization parameters used by #init()."
 
@@ -572,6 +582,7 @@ val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", sk
     bool("debug", "enable device for debugging")
     bool("profile", "enable device for profiling")
 
+    bgfx_platform_data_t("platformData", "platform data")
     bgfx_resolution_t("resolution", "backbuffer resolution and reset parameters")
     bgfx_init_limits_t("limits", "")
 
@@ -585,17 +596,6 @@ val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", sk
 // Platform API
 
 val bgfx_renderer_frame_t = "bgfx_renderer_frame_t".enumType
-
-val bgfx_platform_data_t = struct(Module.BGFX, "BGFXPlatformData", nativeName = "bgfx_platform_data_t", skipBuffer = true) {
-    documentation = "Platform data."
-
-    nullable..opaque_p("ndt", "native display type")
-    nullable..opaque_p("nwh", "native window handle")
-    nullable..opaque_p("context", "GL context, or D3D device")
-    nullable..opaque_p("backBuffer", "GL backbuffer, or D3D render target view")
-    nullable..opaque_p("backBufferDS", "Backbuffer depth/stencil")
-    nullable..opaque_p("session", "{@code ovrSession}, for Oculus SDK")
-}
 
 val bgfx_internal_data_t = struct(Module.BGFX, "BGFXInternalData", nativeName = "bgfx_internal_data_t", mutable = false, skipBuffer = true) {
     documentation = "Internal data."

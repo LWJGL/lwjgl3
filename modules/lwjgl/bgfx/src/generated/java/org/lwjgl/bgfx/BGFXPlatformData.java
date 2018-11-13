@@ -26,7 +26,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code context} &ndash; GL context, or D3D device</li>
  * <li>{@code backBuffer} &ndash; GL backbuffer, or D3D render target view</li>
  * <li>{@code backBufferDS} &ndash; Backbuffer depth/stencil</li>
- * <li>{@code session} &ndash; {@code ovrSession}, for Oculus SDK</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -38,7 +37,6 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * context;
  *     void * backBuffer;
  *     void * backBufferDS;
- *     void * session;
  * }</code></pre>
  */
 @NativeType("struct bgfx_platform_data_t")
@@ -56,12 +54,10 @@ public class BGFXPlatformData extends Struct implements NativeResource {
         NWH,
         CONTEXT,
         BACKBUFFER,
-        BACKBUFFERDS,
-        SESSION;
+        BACKBUFFERDS;
 
     static {
         Layout layout = __struct(
-            __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -77,7 +73,6 @@ public class BGFXPlatformData extends Struct implements NativeResource {
         CONTEXT = layout.offsetof(2);
         BACKBUFFER = layout.offsetof(3);
         BACKBUFFERDS = layout.offsetof(4);
-        SESSION = layout.offsetof(5);
     }
 
     /**
@@ -108,9 +103,6 @@ public class BGFXPlatformData extends Struct implements NativeResource {
     /** Returns the value of the {@code backBufferDS} field. */
     @NativeType("void *")
     public long backBufferDS() { return nbackBufferDS(address()); }
-    /** Returns the value of the {@code session} field. */
-    @NativeType("void *")
-    public long session() { return nsession(address()); }
 
     /** Sets the specified value to the {@code ndt} field. */
     public BGFXPlatformData ndt(@NativeType("void *") long value) { nndt(address(), value); return this; }
@@ -122,8 +114,6 @@ public class BGFXPlatformData extends Struct implements NativeResource {
     public BGFXPlatformData backBuffer(@NativeType("void *") long value) { nbackBuffer(address(), value); return this; }
     /** Sets the specified value to the {@code backBufferDS} field. */
     public BGFXPlatformData backBufferDS(@NativeType("void *") long value) { nbackBufferDS(address(), value); return this; }
-    /** Sets the specified value to the {@code session} field. */
-    public BGFXPlatformData session(@NativeType("void *") long value) { nsession(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public BGFXPlatformData set(
@@ -131,15 +121,13 @@ public class BGFXPlatformData extends Struct implements NativeResource {
         long nwh,
         long context,
         long backBuffer,
-        long backBufferDS,
-        long session
+        long backBufferDS
     ) {
         ndt(ndt);
         nwh(nwh);
         context(context);
         backBuffer(backBuffer);
         backBufferDS(backBufferDS);
-        session(session);
 
         return this;
     }
@@ -227,8 +215,6 @@ public class BGFXPlatformData extends Struct implements NativeResource {
     public static long nbackBuffer(long struct) { return memGetAddress(struct + BGFXPlatformData.BACKBUFFER); }
     /** Unsafe version of {@link #backBufferDS}. */
     public static long nbackBufferDS(long struct) { return memGetAddress(struct + BGFXPlatformData.BACKBUFFERDS); }
-    /** Unsafe version of {@link #session}. */
-    public static long nsession(long struct) { return memGetAddress(struct + BGFXPlatformData.SESSION); }
 
     /** Unsafe version of {@link #ndt(long) ndt}. */
     public static void nndt(long struct, long value) { memPutAddress(struct + BGFXPlatformData.NDT, value); }
@@ -240,7 +226,5 @@ public class BGFXPlatformData extends Struct implements NativeResource {
     public static void nbackBuffer(long struct, long value) { memPutAddress(struct + BGFXPlatformData.BACKBUFFER, value); }
     /** Unsafe version of {@link #backBufferDS(long) backBufferDS}. */
     public static void nbackBufferDS(long struct, long value) { memPutAddress(struct + BGFXPlatformData.BACKBUFFERDS, value); }
-    /** Unsafe version of {@link #session(long) session}. */
-    public static void nsession(long struct, long value) { memPutAddress(struct + BGFXPlatformData.SESSION, value); }
 
 }
