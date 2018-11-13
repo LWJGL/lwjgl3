@@ -2826,7 +2826,19 @@ x1""")}
             0x10000000
         ),
 
-        "Process_ForceGenNormals".enum("", 0x20000000)
+        "Process_ForceGenNormals".enum("", 0x20000000),
+
+        "Process_DropNormals".enum(
+            """
+            Drops normals for all faces of all meshes.
+
+            This is ignored if no normals are present.
+
+            Face normals are shared between all points of a single face, so a single point can have multiple normals, which forces the library to duplicate
+            vertices in some cases. #Process_JoinIdenticalVertices is <em>senseless</em> then. This process gives sense back to #Process_JoinIdenticalVertices.
+            """,
+            0x40000000
+        )
     )
 
     EnumConstant(
