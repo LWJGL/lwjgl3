@@ -14,6 +14,7 @@ import static java.lang.Math.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.meow.Meow.*;
+import static org.lwjgl.util.meow.MeowC.*;
 import static org.testng.Assert.*;
 
 public final class HelloMeow {
@@ -33,7 +34,8 @@ public final class HelloMeow {
         }
 
         try (MemoryStack stack = stackPush()) {
-            MeowU128 ref = MeowU128.mallocStack(stack);
+            MeowHash ref  = MeowHash.mallocStack(stack);
+            MeowHash hash = MeowHash.mallocStack(stack);
 
             // BATCH
 
@@ -41,37 +43,51 @@ public final class HelloMeow {
             for (int r = 0; r < RUNS; r++) {
                 long t = System.nanoTime();
 
-                MeowHash1(SEED, buffer, ref);
+                MeowHash_Accelerated(SEED, buffer, ref);
 
                 st = min(System.nanoTime() - t, st);
                 System.out.format("%d bytes/ns, %d GB/s\n", buffer.capacity() / st, (buffer.capacity() * 1_000_000_000L / st) / (1024 * 1024 * 1024));
             }
 
-            // STREAMING
+            assertEquals(ref.u64(0), MeowU64From(ref));
+            assertEquals(ref.u32(0), MeowU32From(ref));
 
-            MeowHashState state = MeowHashState.mallocStack(stack);
-            MeowHashBegin(state);
+            MeowHash_C(SEED, buffer, hash);
+            checkEqual(ref, hash);
+
+            // STREAMING
 
             long at    = memAddress(buffer);
             int  count = buffer.remaining();
+
+            MeowHashState state = MeowHashState.mallocStack(stack);
+            MeowHashBegin(state);
             while (0 < count) {
                 int amount = rand.nextInt(0, Integer.MAX_VALUE) % (8192 + 1);
                 if (count < amount) {
                     amount = count;
                 }
 
-                nMeowHashAbsorb1(state.address(), amount, at);
+                nMeowHashAbsorb(state.address(), amount, at);
 
                 at += amount;
                 count -= amount;
             }
-
-            MeowU128 hash = MeowHashEnd(state, SEED, MeowU128.mallocStack(stack));
-
-            assertTrue(MeowHashesAreEqual(hash, ref));
+            MeowHashEnd(state, SEED, hash);
+            checkEqual(ref, hash);
         }
 
         memAlignedFree(buffer);
+    }
+
+    private static void checkEqual(MeowHash ref, MeowHash hash) {
+        assertTrue(MeowHashesAreEqual(hash, ref));
+        for (int i = 0; i < 2; i++) {
+            assertEquals(hash.u64(i), ref.u64(i));
+        }
+        for (int i = 0; i < 4; i++) {
+            assertEquals(hash.u32(i), ref.u32(i));
+        }
     }
 
 }

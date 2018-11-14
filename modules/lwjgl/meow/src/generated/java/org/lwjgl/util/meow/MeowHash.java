@@ -43,7 +43,7 @@ public class MeowHash extends Struct implements NativeResource {
 
     static {
         Layout layout = __union(
-            __member(MeowU128.SIZEOF, MeowU128.ALIGNOF, true),
+            __member(MeowU128.SIZEOF, MeowU128.ALIGNOF),
             __array(8, 2),
             __array(4, 4)
         );
@@ -69,6 +69,9 @@ public class MeowHash extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** Returns a {@link MeowU128} view of the {@code u128} field. */
+    @NativeType("meow_u128")
+    public MeowU128 u128() { return nu128(address()); }
     /** Returns a {@link LongBuffer} view of the {@code u64} field. */
     @NativeType("meow_u64[2]")
     public LongBuffer u64() { return nu64(address()); }
@@ -225,6 +228,7 @@ public class MeowHash extends Struct implements NativeResource {
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #u128}. */
     public static MeowU128 nu128(long struct) { return MeowU128.create(struct + MeowHash.U128); }
     /** Unsafe version of {@link #u64}. */
     public static LongBuffer nu64(long struct) { return memLongBuffer(struct + MeowHash.U64, 2); }
@@ -277,6 +281,9 @@ public class MeowHash extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
+        /** Returns a {@link MeowU128} view of the {@code u128} field. */
+        @NativeType("meow_u128")
+        public MeowU128 u128() { return MeowHash.nu128(address()); }
         /** Returns a {@link LongBuffer} view of the {@code u64} field. */
         @NativeType("meow_u64[2]")
         public LongBuffer u64() { return MeowHash.nu64(address()); }

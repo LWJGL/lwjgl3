@@ -23,7 +23,7 @@ public class HashingTest {
     private int length;
 
     private ByteBuffer buffer;
-    private MeowU128   hash;
+    private MeowHash   hash;
 
     @Setup
     public void setup() {
@@ -34,7 +34,7 @@ public class HashingTest {
             buffer.put(i, (byte)(rand.nextInt() & 0xFF));
         }
 
-        hash = MeowU128.create(nmemAlignedAlloc(MeowU128.ALIGNOF, MeowU128.SIZEOF));
+        hash = MeowHash.create(nmemAlignedAlloc(MeowHash.ALIGNOF, MeowHash.SIZEOF));
 
         assertEquals(xxhashJava(), xxhash());
     }
@@ -74,7 +74,7 @@ public class HashingTest {
 
     @Benchmark
     public long meow() {
-        return MeowU64From(MeowHash1(7, buffer, hash));
+        return MeowHash_Accelerated(7, buffer, hash).u64(0);
     }
 
     @Benchmark
