@@ -555,7 +555,8 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
 
         "ePosixFileIO".enum("", "1"),
         "eZipFileIO".enum,
-        "eCNSFileIO".enum
+        "eCNSFileIO".enum,
+	    "eInMemoryFileIO".enum
     )
 
     b3PhysicsClientHandle(

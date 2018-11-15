@@ -1019,12 +1019,14 @@ public class PhysicsClient {
      * <li>{@link #ePosixFileIO ePosixFileIO}</li>
      * <li>{@link #eZipFileIO eZipFileIO}</li>
      * <li>{@link #eCNSFileIO eCNSFileIO}</li>
+     * <li>{@link #eInMemoryFileIO eInMemoryFileIO}</li>
      * </ul>
      */
     public static final int
-        ePosixFileIO = 1,
-        eZipFileIO   = 2,
-        eCNSFileIO   = 3;
+        ePosixFileIO    = 1,
+        eZipFileIO      = 2,
+        eCNSFileIO      = 3,
+        eInMemoryFileIO = 4;
 
     static { LibBullet.initialize(); }
 
