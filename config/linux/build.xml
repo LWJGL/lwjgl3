@@ -240,7 +240,7 @@
         </build>
 
         <!-- Meow -->
-        <build module="meow" simple="true" flags="-Werror -Wfatal-errors -maes" if:true="${binding.meow}"/>
+        <build module="meow" simple="true" flags="-Werror -Wfatal-errors -maes -msse4.2" if:true="${binding.meow}"/>
 
         <!-- NanoVG -->
         <build module="nanovg" simple="true" if:true="${binding.nanovg}">

@@ -44,7 +44,8 @@ val meow_hash_state = struct(
 ) {
     nativeImport(
         "meow_intrinsics.h",
-        "meow_hash.h"
+        "meow_hash.h",
+        "meow_more.h"
     )
     static(MEOW_LIBRARY)
 }

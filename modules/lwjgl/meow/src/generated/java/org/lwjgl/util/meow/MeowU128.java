@@ -9,14 +9,13 @@ import javax.annotation.*;
 
 import java.nio.*;
 
-import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 @NativeType("struct meow_u128")
-public class MeowU128 extends Struct implements NativeResource {
+public class MeowU128 extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -51,22 +50,6 @@ public class MeowU128 extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link MeowU128} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
-    public static MeowU128 malloc() {
-        return wrap(MeowU128.class, nmemAllocChecked(SIZEOF));
-    }
-
-    /** Returns a new {@link MeowU128} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
-    public static MeowU128 calloc() {
-        return wrap(MeowU128.class, nmemCallocChecked(1, SIZEOF));
-    }
-
-    /** Returns a new {@link MeowU128} instance allocated with {@link BufferUtils}. */
-    public static MeowU128 create() {
-        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(MeowU128.class, memAddress(container), container);
-    }
-
     /** Returns a new {@link MeowU128} instance for the specified memory address. */
     public static MeowU128 create(long address) {
         return wrap(MeowU128.class, address);
@@ -76,34 +59,6 @@ public class MeowU128 extends Struct implements NativeResource {
     @Nullable
     public static MeowU128 createSafe(long address) {
         return address == NULL ? null : wrap(MeowU128.class, address);
-    }
-
-    /**
-     * Returns a new {@link MeowU128.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static MeowU128.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
-    }
-
-    /**
-     * Returns a new {@link MeowU128.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static MeowU128.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link MeowU128.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static MeowU128.Buffer create(int capacity) {
-        ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -124,78 +79,10 @@ public class MeowU128 extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link MeowU128} instance allocated on the thread-local {@link MemoryStack}. */
-    public static MeowU128 mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@link MeowU128} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static MeowU128 callocStack() {
-        return callocStack(stackGet());
-    }
-
-    /**
-     * Returns a new {@link MeowU128} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static MeowU128 mallocStack(MemoryStack stack) {
-        return wrap(MeowU128.class, stack.nmalloc(ALIGNOF, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link MeowU128} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static MeowU128 callocStack(MemoryStack stack) {
-        return wrap(MeowU128.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link MeowU128.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static MeowU128.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link MeowU128.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static MeowU128.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link MeowU128.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static MeowU128.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link MeowU128.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static MeowU128.Buffer callocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
-    }
-
-    // -----------------------------------
-
     // -----------------------------------
 
     /** An array of {@link MeowU128} structs. */
-    public static class Buffer extends StructBuffer<MeowU128, Buffer> implements NativeResource {
+    public static class Buffer extends StructBuffer<MeowU128, Buffer> {
 
         private static final MeowU128 ELEMENT_FACTORY = MeowU128.create(-1L);
 

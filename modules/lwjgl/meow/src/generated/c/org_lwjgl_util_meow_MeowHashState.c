@@ -6,6 +6,7 @@
 #include "common_tools.h"
 #include "meow_intrinsics.h"
 #include "meow_hash.h"
+#include "meow_more.h"
 #include <stddef.h>
 #ifdef LWJGL_WINDOWS
     #define alignof __alignof
