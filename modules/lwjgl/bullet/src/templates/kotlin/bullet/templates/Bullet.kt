@@ -3129,7 +3129,7 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
         b3PhysicsClientHandle("physClient", ""),
         b3SharedMemoryStatusHandle("statusHandle", ""),
         int("jointIndex", ""),
-        b3JointSensorState.p("state", "")
+        b3JointSensorState2.p("state", "")
     )
 
     int(

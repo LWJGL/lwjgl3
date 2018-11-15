@@ -4808,7 +4808,7 @@ public class PhysicsClient {
 
     public static native int nb3GetJointStateMultiDof(long physClient, long statusHandle, int jointIndex, long state);
 
-    public static int b3GetJointStateMultiDof(@NativeType("b3PhysicsClientHandle") long physClient, @NativeType("b3SharedMemoryStatusHandle") long statusHandle, int jointIndex, @NativeType("struct b3JointSensorState *") B3JointSensorState state) {
+    public static int b3GetJointStateMultiDof(@NativeType("b3PhysicsClientHandle") long physClient, @NativeType("b3SharedMemoryStatusHandle") long statusHandle, int jointIndex, @NativeType("struct b3JointSensorState2 *") B3JointSensorState2 state) {
         if (CHECKS) {
             check(physClient);
             check(statusHandle);

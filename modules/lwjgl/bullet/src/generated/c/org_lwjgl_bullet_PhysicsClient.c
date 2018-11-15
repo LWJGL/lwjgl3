@@ -1956,7 +1956,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetJointState(JNIE
 JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetJointStateMultiDof(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong statusHandleAddress, jint jointIndex, jlong stateAddress) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     b3SharedMemoryStatusHandle statusHandle = (b3SharedMemoryStatusHandle)(intptr_t)statusHandleAddress;
-    struct b3JointSensorState *state = (struct b3JointSensorState *)(intptr_t)stateAddress;
+    struct b3JointSensorState2 *state = (struct b3JointSensorState2 *)(intptr_t)stateAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)b3GetJointStateMultiDof(physClient, statusHandle, jointIndex, state);
 }
