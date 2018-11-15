@@ -87,7 +87,11 @@
 #define meow_aes_512 __m512i
 
 #define MeowU32From(A, I) (_mm_extract_epi32((A), (I)))
+#if MEOW_64BIT
 #define MeowU64From(A, I) (_mm_extract_epi64((A), (I)))
+#else
+#define MeowU64From(A, I) (((__int64)_mm_extract_epi32((A), (I * 2 + 1)) << 32) | ((__int64)_mm_extract_epi32((A), (I * 2 + 0)) & 0xFFFFFFFF))
+#endif
 #define MeowHashesAreEqual(A, B) (_mm_movemask_epi8(_mm_cmpeq_epi8((A), (B))) == 0xFFFF)
 
 #define Meow128_AESDEC(Prior, Xor) _mm_aesdec_si128((Prior), (Xor))

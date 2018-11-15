@@ -27,6 +27,7 @@ val meow_u128 = struct(
 ) {
     nativeImport("meow_intrinsics.h")
     static(MEOW_LIBRARY)
+    alignas(16)
 }
 
 val meow_hash = union(Module.MEOW, "MeowHash", nativeName = "meow_hash", mutable = false) {

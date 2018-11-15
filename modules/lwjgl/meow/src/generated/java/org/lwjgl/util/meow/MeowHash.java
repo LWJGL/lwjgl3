@@ -43,7 +43,7 @@ public class MeowHash extends Struct implements NativeResource {
 
     static {
         Layout layout = __union(
-            __member(MeowU128.SIZEOF, MeowU128.ALIGNOF),
+            __member(MeowU128.SIZEOF, MeowU128.ALIGNOF, true),
             __array(8, 2),
             __array(4, 4)
         );
