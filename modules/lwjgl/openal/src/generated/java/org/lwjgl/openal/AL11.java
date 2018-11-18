@@ -53,7 +53,7 @@ public class AL11 extends AL10 {
      * @param value3    the third value
      */
     @NativeType("ALvoid")
-    public static void alListener3i(@NativeType("ALenum") int paramName, @NativeType("ALfloat") float value1, @NativeType("ALfloat") float value2, @NativeType("ALfloat") float value3) {
+    public static void alListener3i(@NativeType("ALenum") int paramName, @NativeType("ALint") int value1, @NativeType("ALint") int value2, @NativeType("ALint") int value3) {
         long __functionAddress = AL.getICD().alListener3i;
         if (CHECKS) {
             check(__functionAddress);
