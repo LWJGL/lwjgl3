@@ -33,9 +33,9 @@ val AL11 = "AL11".nativeClassAL("AL11") {
         "Sets the 3 dimensional integer values of a listener parameter.",
 
         ALenum("paramName", "the parameter to modify"),
-        ALfloat("value1", "the first value"),
-        ALfloat("value2", "the second value"),
-        ALfloat("value3", "the third value")
+        ALint("value1", "the first value"),
+        ALint("value2", "the second value"),
+        ALint("value3", "the third value")
     )
 
     ALvoid(
