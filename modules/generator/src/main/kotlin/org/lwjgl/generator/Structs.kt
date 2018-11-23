@@ -2017,6 +2017,8 @@ fun struct(
     val struct = Struct(module, className, nativeSubPath, nativeName, false, virtual, mutable, alias?.definition, nativeLayout, !skipBuffer)
     if (init != null) {
         struct.init()
+    }
+    if (init != null || nativeLayout) {
         Generator.register(struct)
     }
     return struct.nativeType
