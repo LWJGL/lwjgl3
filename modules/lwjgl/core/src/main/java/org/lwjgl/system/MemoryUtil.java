@@ -2415,6 +2415,12 @@ public final class MemoryUtil {
         return address == NULL ? null : memASCII(address, memLengthNT1(address, Integer.MAX_VALUE));
     }
 
+    /** Like {@link #memASCII(long, int) memASCII}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static String memASCIISafe(long address, int length) {
+        return address == NULL ? null : memASCII(address, length);
+    }
+
     /** Like {@link #memASCII(ByteBuffer) memASCII}, but returns {@code null} if {@code buffer} is {@code null}. */
     @Nullable
     public static String memASCIISafe(@Nullable ByteBuffer buffer) {
@@ -2490,6 +2496,12 @@ public final class MemoryUtil {
     @Nullable
     public static String memUTF8Safe(long address) {
         return address == NULL ? null : MultiReleaseTextDecoding.decodeUTF8(address, memLengthNT1(address, Integer.MAX_VALUE));
+    }
+
+    /** Like {@link #memUTF8(long, int) memUTF8}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static String memUTF8Safe(long address, int length) {
+        return address == NULL ? null : MultiReleaseTextDecoding.decodeUTF8(address, length);
     }
 
     /** Like {@link #memUTF8(ByteBuffer) memUTF8}, but returns {@code null} if {@code buffer} is {@code null}. */
@@ -2581,6 +2593,12 @@ public final class MemoryUtil {
     @Nullable
     public static String memUTF16Safe(long address) {
         return address == NULL ? null : memUTF16(address, memLengthNT2(address, Integer.MAX_VALUE - 1) >> 1);
+    }
+
+    /** Like {@link #memUTF16(long, int) memUTF16}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    @Nullable
+    public static String memUTF16Safe(long address, int length) {
+        return address == NULL ? null : memUTF16(address, length);
     }
 
     /** Like {@link #memUTF16(ByteBuffer) memUTF16}, but returns {@code null} if {@code buffer} is {@code null}. */
