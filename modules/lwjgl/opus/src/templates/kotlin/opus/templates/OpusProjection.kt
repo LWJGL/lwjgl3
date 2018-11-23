@@ -373,7 +373,6 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
      * Copies the demixing matrix to the supplied pointer location.
      *
      * @param matrix returns the demixing matrix to the supplied pointer location.
-     * @param size   the size in bytes of the reserved memory at the pointer location.
      */
     public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX(ByteBuffer matrix) {
         long address = memAddress(matrix);

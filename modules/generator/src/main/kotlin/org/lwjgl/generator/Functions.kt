@@ -489,7 +489,7 @@ class Func(
                 checks.add("checkNT$postfix$Safe(${it.name}${it.get<Terminated>().let { terminated -> if (terminated === NullTerminated) "" else ", ${terminated.value}" }});")
             }
 
-            if (it.has<Check>()) {
+            if (it.has<Check>() && (!it.has<AutoSizeResultParam>() || !hideAutoSizeResultParam)) {
                 val check = it.get<Check>()
                 val transform = transforms?.get(it)
                 if (check !== Unsafe && transform !is SkipCheckFunctionTransform) {
@@ -942,42 +942,47 @@ class Func(
             if (returns.nativeType is PointerType<*> && returns.nativeType.mapping !== PointerMapping.OPAQUE_POINTER) {
                 if (hasFinally)
                     print(t)
-                print("$t$t")
-                if (returns.nativeType.dereference is StructType) {
-                    println("return ${returns.nativeType.javaMethodType}.create${if (returnsNull) "Safe" else ""}($RESULT${parameters.asSequence()
-                        .singleOrNull { it.has<AutoSizeResultParam>() }
-                        .let { if (it != null) ", ${it.name}.get(0)" else "" }
-                    });")
-                } else {
-                    val isNullTerminated = returns.nativeType is CharSequenceType
-                    val bufferType = if (isNullTerminated || returns.nativeType.elementType is VoidType)
-                        "ByteBuffer"
-                    else
-                        returns.nativeType.mapping.javaMethodName
+                print("$t${t}return ")
 
-                    print("return mem$bufferType")
-                    if (isNullTerminated)
-                        print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
-                    else if (returnsNull)
-                        print("Safe")
+                val isNullTerminated = returns.nativeType is CharSequenceType
+                print(
+                    if (returns.nativeType.dereference is StructType) {
+                        "${returns.nativeType.javaMethodType}.create"
+                    } else {
+                        "mem${if (isNullTerminated || returns.nativeType.elementType is VoidType)
+                            "ByteBuffer"
+                        else
+                            returns.nativeType.mapping.javaMethodName}"
+                    }
+                )
+                if (isNullTerminated) {
+                    print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
+                } else if (returnsNull) {
+                    print("Safe")
+                }
 
-                    print("($RESULT")
-                    if (has<MapPointer>())
-                        get<MapPointer>().sizeExpression.let { expression ->
-                            print(", ${if (paramMap[expression]?.nativeType?.mapping === PrimitiveMapping.POINTER) "(int)" else ""}$expression")
-                        }
-                    else if (!isNullTerminated) {
-                        if (hasParam { it.has<AutoSizeResultParam>() }) {
+                print("($RESULT")
+                if (has<MapPointer>())
+                    get<MapPointer>().sizeExpression.let { expression ->
+                        print(", ${if (paramMap[expression]?.nativeType?.mapping === PrimitiveMapping.POINTER) "(int)" else ""}$expression")
+                    }
+                else {
+                    val hasAutoSizeResult = hasParam { it.has<AutoSizeResultParam>() }
+                    if (!isNullTerminated || hasAutoSizeResult) {
+                        if (hasAutoSizeResult) {
                             val params = getParams { it.has<AutoSizeResultParam>() }
                             val single = params.count() == 1
                             print(", ${params.map { getAutoSizeResultExpression(single, it) }.joinToString(" * ")}")
-                        } else if (has<Address>())
-                            print(", 1")
-                        else
-                            throw IllegalStateException("No AutoSizeResult parameter could be found.")
+                        } else if (returns.nativeType.dereference !is StructType) {
+                            if (has<Address>()) {
+                                print(", 1")
+                            } else {
+                                throw IllegalStateException("No AutoSizeResult parameter could be found.")
+                            }
+                        }
                     }
-                    println(");")
                 }
+                println(");")
             } else if (code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL)) {
                 if (hasFinally)
                     print(t)
@@ -1636,43 +1641,48 @@ class Func(
                 if (hasFinally)
                     print(t)
                 print("$t$t")
-                if (returns.nativeType.dereference is StructType) {
-                    println("return ${returns.nativeType.javaMethodType}.create${if (returnsNull) "Safe" else ""}($RESULT${parameters.asSequence()
-                        .singleOrNull { it.has<AutoSizeResultParam>() }
-                        .let { if (it != null) ", ${it.name}.get(${it.name}.position()" else "" }
-                    });")
-                } else {
-                    val isNullTerminated = returns.nativeType is CharSequenceType
-                    val bufferType = if (isNullTerminated || returns.nativeType.elementType is VoidType)
-                        "ByteBuffer"
-                    else
-                        returns.nativeType.mapping.javaMethodName
 
-                    val builder = StringBuilder()
-                    builder.append("mem$bufferType")
-                    if (isNullTerminated)
-                        builder.append("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
-                    else if (returnsNull)
-                        builder.append("Safe")
-                    builder.append("($RESULT")
-                    if (has<MapPointer>())
-                        builder.append(", ${get<MapPointer>().sizeExpression}")
-                    else if (!isNullTerminated) {
-                        if (hasParam { it.has<AutoSizeResultParam>() }) {
+                val builder = StringBuilder()
+
+                val isNullTerminated = returns.nativeType is CharSequenceType
+                builder.append(
+                    if (returns.nativeType.dereference is StructType) {
+                        "${returns.nativeType.javaMethodType}.create"
+                    } else {
+                        "mem${if (isNullTerminated || returns.nativeType.elementType is VoidType)
+                            "ByteBuffer"
+                        else
+                            returns.nativeType.mapping.javaMethodName}"
+                    }
+                )
+                if (isNullTerminated) {
+                    builder.append("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
+                } else if (returnsNull) {
+                    builder.append("Safe")
+                }
+
+                builder.append("($RESULT")
+                if (has<MapPointer>())
+                    builder.append(", ${get<MapPointer>().sizeExpression}")
+                else {
+                    val hasAutoSizeResult = hasParam { it.has<AutoSizeResultParam>() }
+                    if (!isNullTerminated || hasAutoSizeResult) {
+                        if (hasAutoSizeResult) {
                             val params = getParams { it.has<AutoSizeResultParam>() }
                             val single = params.count() == 1
                             builder.append(", ${params.map { getAutoSizeResultExpression(single, it) }.joinToString(" * ")}")
-                        } else
+                        } else if (returns.nativeType.dereference !is StructType) {
                             throw IllegalStateException("No AutoSizeResult parameter could be found.")
+                        }
                     }
-                    builder.append(")")
-
-                    val returnExpression = returns.transformCallOrElse(transforms, builder.toString())
-                    if (returnExpression.indexOf('\n') == -1)
-                        println("return $returnExpression;")
-                    else // Multiple statements, assumes the transformation includes the return statement.
-                        println(returnExpression)
                 }
+                builder.append(")")
+
+                val returnExpression = returns.transformCallOrElse(transforms, builder.toString())
+                if (returnExpression.indexOf('\n') == -1)
+                    println("return $returnExpression;")
+                else // Multiple statements, assumes the transformation includes the return statement.
+                    println(returnExpression)
             } else if (returnLater) {
                 if (hasFinally)
                     print(t)
