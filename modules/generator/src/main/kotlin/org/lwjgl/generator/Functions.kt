@@ -77,8 +77,18 @@ class Func(
     private inline fun getParam(crossinline predicate: (Parameter) -> Boolean) = getParams(predicate).single()
     internal inline fun hasParam(crossinline predicate: (Parameter) -> Boolean) = getParams(predicate).any()
 
-    private fun getNativeParams(withExplicitFunctionAddress: Boolean = true, withJNIEnv: Boolean = false) =
-        getParams { (withJNIEnv || it !== JNI_ENV) && (withExplicitFunctionAddress || it !== EXPLICIT_FUNCTION_ADDRESS) && !it.has<Virtual>() }
+    private fun getNativeParams(
+        withExplicitFunctionAddress: Boolean = true,
+        withJNIEnv: Boolean = false,
+        withAutoSizeResultParams: Boolean = true
+    ) = parameters.asSequence()
+        .let { p -> if (withExplicitFunctionAddress) p else p.filter { it !== EXPLICIT_FUNCTION_ADDRESS } }
+        .let { p -> if (withJNIEnv) p else p.filter { it !== JNI_ENV } }
+        .let { p -> if (withAutoSizeResultParams)
+            p.filter { !it.has<Virtual>() }
+        else
+            p.filter { !((it.has<Virtual>() && !it.has<AutoSizeResultParam>()) || (it.isAutoSizeResultOut && hideAutoSizeResultParam)) }
+        }
 
     /** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
     internal inline fun <reified T> getReferenceParam(reference: String)
@@ -865,11 +875,8 @@ class Func(
         }
 
         print("$t${if (constantMacro) "private " else accessModifier}static $retType $name(")
-        printList(getNativeParams()) {
-            if (it.isAutoSizeResultOut && hideAutoSizeResultParam)
-                null
-            else
-                it.asJavaMethodParam(true)
+        printList(getNativeParams(withAutoSizeResultParams = false)) {
+            it.asJavaMethodParam(true)
         }
 
         if (returns.isStructValue && !hasParam { it has ReturnParam }) {
@@ -1494,17 +1501,14 @@ class Func(
         }
 
         print("$t${if (constantMacro) "private " else accessModifier}static $retType $name(")
-        printList(getParams { it !== JNI_ENV }) { param ->
-            if (param.isAutoSizeResultOut && hideAutoSizeResultParam)
-                null
-            else
-                param.transformDeclarationOrElse(transforms, param.asJavaMethodParam(false), true).let {
-                    if (it != null && param.nativeType.isReference && param.has(nullable) && transforms[param] !is SingleValueStructTransform) {
-                        "@Nullable $it"
-                    } else {
-                        it
-                    }
+        printList(getNativeParams(withAutoSizeResultParams = false)) { param ->
+            param.transformDeclarationOrElse(transforms, param.asJavaMethodParam(false), true).let {
+                if (it != null && param.nativeType.isReference && param.has(nullable) && transforms[param] !is SingleValueStructTransform) {
+                    "@Nullable $it"
+                } else {
+                    it
                 }
+            }
         }
         val returnTransform = transforms[returns]
         if (returnTransform is MapPointerTransform) {
@@ -1544,13 +1548,9 @@ class Func(
                 print("return ")
             }
             print("${get<Reuse>().source.className}.$name(")
-            printList(getNativeParams()) {
-                if ((it.isAutoSizeResultOut && hideAutoSizeResultParam))
-                    null
-                else {
-                    it.transformDeclarationOrElse(transforms, it.name, false).let { name ->
-                        name?.substring(name.lastIndexOf(' ') + 1)
-                    }
+            printList(getNativeParams(withAutoSizeResultParams = false)) {
+                it.transformDeclarationOrElse(transforms, it.name, false).let { name ->
+                    name?.substring(name.lastIndexOf(' ') + 1)
                 }
             }
             println(");\n$t}")
