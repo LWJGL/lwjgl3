@@ -51,10 +51,12 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
     <property name="module.lwjgl" location="modules/lwjgl" relative="true"/>
 
+    <property name="src.extract" location="modules/extract/src/main" relative="true"/>
     <property name="src.generator" location="modules/generator/src/main" relative="true"/>
 
     <property name="test.resources" location="modules/samples/src/test/resources" relative="true"/>
 
+    <property name="bin.extract" location="bin/classes/extract" relative="true"/>
     <property name="bin.generator" location="bin/classes/generator" relative="true"/>
     <property name="bin.javadoc" location="bin/javadoc" relative="true"/>
     <property name="bin.lwjgl" location="bin/classes/lwjgl" relative="true"/>

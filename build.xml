@@ -421,6 +421,64 @@
         <antcall target="compile-native-platform"/>
     </target>
 
+    <target name="-compile-extract">
+        <local name="extract-uptodate"/>
+        <uptodate targetfile="${bin.extract}/touch.txt" property="extract-uptodate">
+            <srcfiles dir="${src.extract}/kotlin" includes="**"/>
+        </uptodate>
+
+        <echo message="Compiling LWJGL Template Extraction Tool..." level="info" taskname="extract compilation" unless:set="extract-uptodate"/>
+        <mkdir dir="${bin.extract}"/>
+        <kotlinc moduleName="extract" output="${bin.extract}" printVersion="true" unless:set="extract-uptodate">
+            <classpath>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
+                <pathelement path="${module.classpath}"/>
+                <pathelement path="${kotlinc}/lib/kotlin-stdlib.jar"/>
+                <pathelement path="${kotlinc}/lib/kotlin-stdlib-jdk7.jar"/>
+            </classpath>
+
+            <compilerarg line="-jvm-target 1.8"/>
+            <compilerarg value="-Xno-call-assertions"/>
+            <compilerarg value="-Xno-param-assertions"/>
+            <compilerarg value="-Xreport-perf"/>
+            <compilerarg value="-progressive"/>
+            <compilerarg value="-Xuse-experimental=kotlin.Experimental"/>
+            <compilerarg value="-Xuse-experimental=kotlin.contracts.ExperimentalContracts"/>
+
+            <src path="${src.extract}/kotlin"/>
+        </kotlinc>
+        <touch file="${bin.extract}/touch.txt" unless:set="extract-uptodate"/>
+    </target>
+
+    <target name="touch-extract" description="Used for touching from an IDE">
+        <touch file="${bin.extract}/touch.txt"/>
+    </target>
+
+    <target name="extract" description="Runs the LWJGL Template Extraction tool" depends="compile-native, -compile-extract">
+        <fail message="Please specify the Clang shared library path with -Dclang=&lt;path&gt;">
+            <condition>
+                <not><isset property="clang"/></not>
+            </condition>
+        </fail>
+        <java classname="org.lwjgl.extract.MainKt" fork="true" spawn="true" taskname="LWJGL Template Extraction Tool">
+            <classpath>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
+                <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
+                <pathelement path="${module.classpath}"/>
+                <pathelement path="${bin.extract}"/>
+                <pathelement path="${test.resources}"/>
+                <pathelement path="${kotlinc}/lib/kotlin-stdlib.jar"/>
+                <pathelement path="${kotlinc}/lib/kotlin-stdlib-jdk7.jar"/>
+            </classpath>
+
+            <jvmarg value="-Djava.library.path=${lib}"/>
+            <jvmarg value="-Dorg.lwjgl.llvm.clang.libname=${clang}"/>
+            <jvmarg line="${jvmargs}" if:set="jvmargs"/>
+            <arg line="${args}" if:set="args"/>
+        </java>
+    </target>
+
     <target name="compile-tests" description="Compiles the LWJGL test suite" depends="compile">
         <mkdir dir="${bin.test}"/>
         <forEachModule>

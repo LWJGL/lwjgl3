@@ -45,6 +45,13 @@ The source code Generator and related tools.
 Module dependencies: n/a  
 Compile dependencies: Kotlin runtime, JDK tools
 
+### Extract
+A tool that extracts generator templates from native headers.
+* `modules/extract/src/main/kotlin`
+
+Module dependencies: the core & llvm modules  
+Compile dependencies: Kotlin runtime
+
 # INSTALLATION
 Requirements:
 * JDK 8 or newer

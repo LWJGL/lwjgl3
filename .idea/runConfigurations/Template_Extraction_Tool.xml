@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Template Extraction Tool" type="JetRunConfigurationType" factoryName="Kotlin">
+    <module name="extract" />
+    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <option name="VM_PARAMETERS" value="-Djava.library.path=bin/libs -Dorg.lwjgl.llvm.clang.libname=D:/CLONES/llvm/build/Release/bin/libclang.dll -Dfile.encoding=UTF8" />
+    <option name="PROGRAM_PARAMETERS" value="" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <option name="PASS_PARENT_ENVS" value="true" />
+    <option name="MAIN_CLASS_NAME" value="org.lwjgl.extract.MainKt" />
+    <option name="WORKING_DIRECTORY" value="" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/build.xml" target="touch-extract" />
+    </method>
+  </configuration>
+</component>
