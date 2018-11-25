@@ -90,3 +90,15 @@ object UnsafeMember : StructMemberModifier {
             throw IllegalArgumentException("The Unsafe modifier can only be applied to pointer to struct members.")
     }
 }
+
+/** Marks a member as a callback member's "user data". */
+class UserDataMember(
+    override val reference: String = ""
+) : StructMemberModifier, ReferenceModifier {
+    override val isSpecial = true
+    override fun validate(member: StructMember) {
+        if (!(member.nativeType is PointerType<*> && member.nativeType.elementType is OpaqueType)) {
+            throw IllegalArgumentException("The UserData modifier can only be applied to opaque pointer parameters.")
+        }
+    }
+}
