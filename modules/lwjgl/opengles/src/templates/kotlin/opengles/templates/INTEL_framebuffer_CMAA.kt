@@ -22,7 +22,7 @@ val INTEL_framebuffer_CMAA = "INTELFramebufferCMAA".nativeClassGLES("INTEL_frame
 
         This extension incorporates an optimized CMAA algorithm implementation into the GL implementation.
 
-        For more information on CMAA refer to ${url("http://software.intel.com", "http://software.intel.com")}.
+        For more information on CMAA refer to ${url("http://software.intel.com")}.
         """
 
     void(

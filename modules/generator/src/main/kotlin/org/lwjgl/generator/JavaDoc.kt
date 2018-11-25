@@ -339,7 +339,7 @@ ${code
 
 fun note(content: String) = "<div style=\"margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;\"><h5>Note</h5>\n$content</div>"
 
-fun url(href: String, innerHTML: String) = """<a target="_blank" href="$href">$innerHTML</a>"""
+fun url(href: String, innerHTML: String = href) = """<a target="_blank" href="$href">$innerHTML</a>"""
 
 fun table(vararg rows: String) = StringBuilder(512).run {
     append("<table class=striped>")
