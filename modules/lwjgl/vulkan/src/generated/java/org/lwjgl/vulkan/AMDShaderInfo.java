@@ -115,15 +115,19 @@ public class AMDShaderInfo {
     public static final String VK_AMD_SHADER_INFO_EXTENSION_NAME = "VK_AMD_shader_info";
 
     /**
-     * VkShaderInfoTypeAMD
+     * VkShaderInfoTypeAMD - Enum specifying which type of shader info to query
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_SHADER_INFO_TYPE_STATISTICS_AMD SHADER_INFO_TYPE_STATISTICS_AMD}</li>
-     * <li>{@link #VK_SHADER_INFO_TYPE_BINARY_AMD SHADER_INFO_TYPE_BINARY_AMD}</li>
-     * <li>{@link #VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD SHADER_INFO_TYPE_DISASSEMBLY_AMD}</li>
+     * <li>{@link #VK_SHADER_INFO_TYPE_STATISTICS_AMD SHADER_INFO_TYPE_STATISTICS_AMD} specifies that device resources used by a shader will be queried.</li>
+     * <li>{@link #VK_SHADER_INFO_TYPE_BINARY_AMD SHADER_INFO_TYPE_BINARY_AMD} specifies that implementation-specific information will be queried.</li>
+     * <li>{@link #VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD SHADER_INFO_TYPE_DISASSEMBLY_AMD} specifies that human-readable dissassembly of a shader.</li>
      * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link #vkGetShaderInfoAMD GetShaderInfoAMD}</p>
      */
     public static final int
         VK_SHADER_INFO_TYPE_STATISTICS_AMD  = 0,
@@ -181,11 +185,11 @@ public class AMDShaderInfo {
      * 
      * <p>If information is successfully and fully queried, the function will return {@link VK10#VK_SUCCESS SUCCESS}.</p>
      * 
-     * <p>For {@link #VK_SHADER_INFO_TYPE_STATISTICS_AMD SHADER_INFO_TYPE_STATISTICS_AMD}, an instance of {@link VkShaderStatisticsInfoAMD} will be written to the buffer pointed to by {@code pInfo}. This structure will be populated with statistics regarding the physical device resources used by that shader along with other miscellaneous information and is described in further detail below.</p>
+     * <p>For {@code infoType} {@link #VK_SHADER_INFO_TYPE_STATISTICS_AMD SHADER_INFO_TYPE_STATISTICS_AMD}, an instance of {@link VkShaderStatisticsInfoAMD} will be written to the buffer pointed to by {@code pInfo}. This structure will be populated with statistics regarding the physical device resources used by that shader along with other miscellaneous information and is described in further detail below.</p>
      * 
-     * <p>For {@link #VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD SHADER_INFO_TYPE_DISASSEMBLY_AMD}, {@code pInfo} points to a UTF-8 null-terminated string containing human-readable disassembly. The exact formatting and contents of the disassembly string are vendor-specific.</p>
+     * <p>For {@code infoType} {@link #VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD SHADER_INFO_TYPE_DISASSEMBLY_AMD}, {@code pInfo} points to a UTF-8 null-terminated string containing human-readable disassembly. The exact formatting and contents of the disassembly string are vendor-specific.</p>
      * 
-     * <p>The formatting and contents of all other types of information, including {@link #VK_SHADER_INFO_TYPE_BINARY_AMD SHADER_INFO_TYPE_BINARY_AMD}, are left to the vendor and are not further specified by this extension.</p>
+     * <p>The formatting and contents of all other types of information, including {@code infoType} {@link #VK_SHADER_INFO_TYPE_BINARY_AMD SHADER_INFO_TYPE_BINARY_AMD}, are left to the vendor and are not further specified by this extension.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

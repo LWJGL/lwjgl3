@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>If no format feature flags are supported, the format itself is not supported, and images of that format cannot be created.</p>
  * </div>
  * 
- * <p>If {@code format} is a block-compression format, then {@code bufferFeatures} <b>must</b> not support any features for the format.</p>
+ * <p>If {@code format} is a block-compressed format, then {@code bufferFeatures} <b>must</b> not support any features for the format.</p>
  * 
  * <p>If {@code format} is a multi-plane format then {@code linearTilingFeatures} and {@code optimalTilingFeatures} <b>must</b> not contain {@link VK11#VK_FORMAT_FEATURE_DISJOINT_BIT FORMAT_FEATURE_DISJOINT_BIT}.</p>
  * 

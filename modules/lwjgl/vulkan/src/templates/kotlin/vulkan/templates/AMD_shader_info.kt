@@ -120,7 +120,19 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
     )
 
     EnumConstant(
-        "VkShaderInfoTypeAMD",
+        """
+        VkShaderInfoTypeAMD - Enum specifying which type of shader info to query
+
+        <h5>Description</h5>
+        <ul>
+            <li>#SHADER_INFO_TYPE_STATISTICS_AMD specifies that device resources used by a shader will be queried.</li>
+            <li>#SHADER_INFO_TYPE_BINARY_AMD specifies that implementation-specific information will be queried.</li>
+            <li>#SHADER_INFO_TYPE_DISASSEMBLY_AMD specifies that human-readable dissassembly of a shader.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetShaderInfoAMD()
+        """,
 
         "SHADER_INFO_TYPE_STATISTICS_AMD".."0",
         "SHADER_INFO_TYPE_BINARY_AMD".."1",
@@ -153,11 +165,11 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
 
         If information is successfully and fully queried, the function will return #SUCCESS.
 
-        For #SHADER_INFO_TYPE_STATISTICS_AMD, an instance of ##VkShaderStatisticsInfoAMD will be written to the buffer pointed to by {@code pInfo}. This structure will be populated with statistics regarding the physical device resources used by that shader along with other miscellaneous information and is described in further detail below.
+        For {@code infoType} #SHADER_INFO_TYPE_STATISTICS_AMD, an instance of ##VkShaderStatisticsInfoAMD will be written to the buffer pointed to by {@code pInfo}. This structure will be populated with statistics regarding the physical device resources used by that shader along with other miscellaneous information and is described in further detail below.
 
-        For #SHADER_INFO_TYPE_DISASSEMBLY_AMD, {@code pInfo} points to a UTF-8 null-terminated string containing human-readable disassembly. The exact formatting and contents of the disassembly string are vendor-specific.
+        For {@code infoType} #SHADER_INFO_TYPE_DISASSEMBLY_AMD, {@code pInfo} points to a UTF-8 null-terminated string containing human-readable disassembly. The exact formatting and contents of the disassembly string are vendor-specific.
 
-        The formatting and contents of all other types of information, including #SHADER_INFO_TYPE_BINARY_AMD, are left to the vendor and are not further specified by this extension.
+        The formatting and contents of all other types of information, including {@code infoType} #SHADER_INFO_TYPE_BINARY_AMD, are left to the vendor and are not further specified by this extension.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

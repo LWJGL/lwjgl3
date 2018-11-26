@@ -38,13 +38,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>All attachments in {@code pColorAttachments} that are not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} <b>must</b> have the same sample count</li>
  * <li>If the {@code VK_AMD_mixed_attachment_samples} extension is enabled, all attachments in {@code pColorAttachments} that are not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} <b>must</b> have a sample count that is smaller than or equal to the sample count of {@code pDepthStencilAttachment} if it is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}</li>
  * <li>If neither the {@code VK_AMD_mixed_attachment_samples} nor the {@code VK_NV_framebuffer_mixed_samples} extensions are enabled, and if {@code pDepthStencilAttachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} and any attachments in {@code pColorAttachments} are not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, they <b>must</b> have the same sample count</li>
- * <li>If any input attachments are {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, then any pipelines bound during the subpass <b>must</b> not access those input attachments from the fragment shader</li>
  * <li>The {@code attachment} member of any element of {@code pPreserveAttachments} <b>must</b> not be {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}</li>
  * <li>Any given element of {@code pPreserveAttachments} <b>must</b> not also be an element of any other member of the subpass description</li>
- * <li>If any attachment is used as both an input attachment and a color or depth/stencil attachment, then each use <b>must</b> use the same {@code layout}</li>
+ * <li>If any attachment is used by more than one {@link VkAttachmentReference} member, then each use <b>must</b> use the same {@code layout}</li>
  * <li>If {@code flags} includes {@link NVXMultiviewPerViewAttributes#VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX}, it <b>must</b> also include {@link NVXMultiviewPerViewAttributes#VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX}.</li>
  * <li>The {@code aspectMask} member of any element of {@code pInputAttachments} <b>must</b> be a valid combination of {@code VkImageAspectFlagBits}</li>
  * <li>The {@code aspectMask} member of any element of {@code pInputAttachments} <b>must</b> not be 0</li>
+ * <li>The {@code aspectMask} member of each element of {@code pInputAttachments} <b>must</b> not include {@link VK10#VK_IMAGE_ASPECT_METADATA_BIT IMAGE_ASPECT_METADATA_BIT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -73,11 +73,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pipelineBindPoint} &ndash; a {@code VkPipelineBindPoint} value specifying the pipeline type supported for this subpass.</li>
  * <li>{@code viewMask} &ndash; a bitfield of view indices describing which views rendering is broadcast to in this subpass, when multiview is enabled.</li>
  * <li>{@code inputAttachmentCount} &ndash; the number of input attachments.</li>
- * <li>{@code pInputAttachments} &ndash; an array of {@link VkAttachmentReference} structures defining the input attachments for this subpass and their layouts.</li>
+ * <li>{@code pInputAttachments} &ndash; an array of {@link VkAttachmentReference2KHR} structures defining the input attachments for this subpass and their layouts.</li>
  * <li>{@code colorAttachmentCount} &ndash; the number of color attachments.</li>
- * <li>{@code pColorAttachments} &ndash; an array of {@link VkAttachmentReference} structures defining the color attachments for this subpass and their layouts.</li>
- * <li>{@code pResolveAttachments} &ndash; an optional array of {@code colorAttachmentCount} {@link VkAttachmentReference} structures defining the resolve attachments for this subpass and their layouts.</li>
- * <li>{@code pDepthStencilAttachment} &ndash; a pointer to a {@link VkAttachmentReference} specifying the depth/stencil attachment for this subpass and its layout.</li>
+ * <li>{@code pColorAttachments} &ndash; an array of {@link VkAttachmentReference2KHR} structures defining the color attachments for this subpass and their layouts.</li>
+ * <li>{@code pResolveAttachments} &ndash; an optional array of {@code colorAttachmentCount} {@link VkAttachmentReference2KHR} structures defining the resolve attachments for this subpass and their layouts.</li>
+ * <li>{@code pDepthStencilAttachment} &ndash; a pointer to a {@link VkAttachmentReference2KHR} specifying the depth/stencil attachment for this subpass and its layout.</li>
  * <li>{@code preserveAttachmentCount} &ndash; the number of preserved attachments.</li>
  * <li>{@code pPreserveAttachments} &ndash; an array of {@code preserveAttachmentCount} render pass attachment indices identifying attachments that are not used by this subpass, but whose contents <b>must</b> be preserved throughout the subpass.</li>
  * </ul>

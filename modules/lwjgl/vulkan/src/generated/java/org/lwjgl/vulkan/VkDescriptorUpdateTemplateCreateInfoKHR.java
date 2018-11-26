@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkDescriptorUpdateTemplateCreateInfoKHR {
  *     VkStructureType sType;
- *     void * pNext;
+ *     void const * pNext;
  *     VkDescriptorUpdateTemplateCreateFlags flags;
  *     uint32_t descriptorUpdateEntryCount;
  *     {@link VkDescriptorUpdateTemplateEntry VkDescriptorUpdateTemplateEntry const} * pDescriptorUpdateEntries;
@@ -52,7 +52,7 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
     public VkDescriptorUpdateTemplateCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
-    public VkDescriptorUpdateTemplateCreateInfoKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    public VkDescriptorUpdateTemplateCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
     @Override
     public VkDescriptorUpdateTemplateCreateInfoKHR flags(@NativeType("VkDescriptorUpdateTemplateCreateFlags") int value) { nflags(address(), value); return this; }
@@ -297,7 +297,7 @@ public class VkDescriptorUpdateTemplateCreateInfoKHR extends VkDescriptorUpdateT
         public VkDescriptorUpdateTemplateCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorUpdateTemplateCreateInfoKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
-        public VkDescriptorUpdateTemplateCreateInfoKHR.Buffer pNext(@NativeType("void *") long value) { VkDescriptorUpdateTemplateCreateInfoKHR.npNext(address(), value); return this; }
+        public VkDescriptorUpdateTemplateCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorUpdateTemplateCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */
         @Override
         public VkDescriptorUpdateTemplateCreateInfoKHR.Buffer flags(@NativeType("VkDescriptorUpdateTemplateCreateFlags") int value) { VkDescriptorUpdateTemplateCreateInfoKHR.nflags(address(), value); return this; }

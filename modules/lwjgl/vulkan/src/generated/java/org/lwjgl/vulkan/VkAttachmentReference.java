@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkSubpassDescription}</p>
+ * <p>{@link VkRenderPassFragmentDensityMapCreateInfoEXT}, {@link VkSubpassDescription}</p>
  * 
  * <h3>Member documentation</h3>
  * 

@@ -25,6 +25,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The sample locations in {@code pSampleLocations} specify {@code sampleLocationsPerPixel} number of sample locations for each pixel in the grid of the size specified in {@code sampleLocationGridSize}. The sample location for sample <code>i</code> at the pixel grid location <code>(x,y)</code> is taken from <code>pSampleLocations[(x + y <b> sampleLocationGridSize.width) </b> sampleLocationsPerPixel + i]</code>.</p>
  * 
+ * <p>If the render pass has a fragment density map, the implementation will choose the sample locations for the fragment and the contents of {@code pSampleLocations} <b>may</b> be ignored.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

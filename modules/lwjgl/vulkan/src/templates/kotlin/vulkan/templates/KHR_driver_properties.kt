@@ -111,6 +111,7 @@ val KHR_driver_properties = "KHRDriverProperties".nativeClassVK("KHR_driver_prop
         "DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR".."6",
         "DRIVER_ID_IMAGINATION_PROPRIETARY_KHR".."7",
         "DRIVER_ID_QUALCOMM_PROPRIETARY_KHR".."8",
-        "DRIVER_ID_ARM_PROPRIETARY_KHR".."9"
+        "DRIVER_ID_ARM_PROPRIETARY_KHR".."9",
+        "DRIVER_ID_GOOGLE_PASTEL_KHR".."10"
     )
 }

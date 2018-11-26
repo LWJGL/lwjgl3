@@ -53,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code type} &ndash; a {@code VkAccelerationStructureMemoryRequirementsTypeNV} value specifying the type of acceleration structure that will be created.</li>
+ * <li>{@code type} &ndash; a {@code VkAccelerationStructureTypeNV} value specifying the type of acceleration structure that will be created.</li>
  * <li>{@code flags} &ndash; a bitmask of {@code VkBuildAccelerationStructureFlagBitsNV} specifying additional parameters of the acceleration structure.</li>
  * <li>{@code instanceCount} &ndash; specifies the number of instances that will be in the new acceleration structure</li>
  * <li>{@code geometryCount} &ndash; specifies the number of geometries that will be in the new acceleration structure</li>

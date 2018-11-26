@@ -16,6 +16,23 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * Base structure for a read-only pointer chain.
+ * 
+ * <h5>Description</h5>
+ * 
+ * <p>{@link VkBaseOutStructure} can be used to facilitate iterating through a structure pointer chain that returns data back to the application.</p>
+ * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkBaseOutStructure}</p>
+ * 
+ * <h3>Member documentation</h3>
+ * 
+ * <ul>
+ * <li>{@code sType} &ndash; the structure type of the structure being iterated through.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to the next structure in a structure chain.</li>
+ * </ul>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

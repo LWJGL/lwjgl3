@@ -62,7 +62,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
             <dd>166</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>2</dd>
+            <dd>3</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -77,7 +77,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2018-09-11</dd>
+            <dd>2018-11-20</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
@@ -106,7 +106,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
     IntConstant(
         "The extension specification version.",
 
-        "NV_RAY_TRACING_SPEC_VERSION".."2"
+        "NV_RAY_TRACING_SPEC_VERSION".."3"
     )
 
     StringConstant(
@@ -295,7 +295,18 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
     )
 
     EnumConstant(
-        "VkAccelerationStructureTypeNV",
+        """
+        VkAccelerationStructureTypeNV - Type of acceleration structure
+
+        <h5>Description</h5>
+        <ul>
+            <li>#ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV is a bottom-level acceleration structure containing the AABBs or geometry to be intersected.</li>
+            <li>#ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV is a top-level acceleration structure containing instance data referring to bottom-level level acceleration structures.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkAccelerationStructureInfoNV
+        """,
 
         "ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV".."0",
         "ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV".."1"
@@ -719,8 +730,8 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
             <li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV accesses a uniform buffer, it <b>must</b> not access values outside of the range of that buffer specified in the bound descriptor set</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV accesses a storage buffer, it <b>must</b> not access values outside of the range of that buffer specified in the bound descriptor set</li>
-            <li>If a {@code VkImageView} is sampled with with #FILTER_LINEAR as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT.</li>
-            <li>If a {@code VkImageView} is sampled with with #FILTER_CUBIC_IMG as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG.</li>
+            <li>If a {@code VkImageView} is sampled with #FILTER_LINEAR as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT.</li>
+            <li>If a {@code VkImageView} is sampled with #FILTER_CUBIC_IMG as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG.</li>
             <li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
             <li>If {@code commandBuffer} is an unprotected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV reads from or writes to any image or buffer, that image or buffer <b>must</b> not be a protected image or protected buffer.</li>
             <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV writes to any image or buffer, that image or buffer <b>must</b> not be an unprotected image or unprotected buffer.</li>

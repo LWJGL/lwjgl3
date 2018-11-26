@@ -465,6 +465,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_external_memory_dma_buf;
     /** When true, {@link EXTExternalMemoryHost} is supported. */
     public final boolean VK_EXT_external_memory_host;
+    /** When true, {@link EXTFragmentDensityMap} is supported. */
+    public final boolean VK_EXT_fragment_density_map;
     /** When true, {@link EXTGlobalPriority} is supported. */
     public final boolean VK_EXT_global_priority;
     /** When true, {@link EXTHdrMetadata} is supported. */
@@ -483,6 +485,10 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_sample_locations;
     /** When true, {@link EXTSamplerFilterMinmax} is supported. */
     public final boolean VK_EXT_sampler_filter_minmax;
+    /** When true, {@link EXTScalarBlockLayout} is supported. */
+    public final boolean VK_EXT_scalar_block_layout;
+    /** When true, {@link EXTSeparateStencilUsage} is supported. */
+    public final boolean VK_EXT_separate_stencil_usage;
     /** When true, {@link EXTShaderStencilExport} is supported. */
     public final boolean VK_EXT_shader_stencil_export;
     /** When true, {@link EXTShaderSubgroupBallot} is supported. */
@@ -577,6 +583,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_storage_buffer_storage_class;
     /** When true, {@link KHRSwapchain} is supported. */
     public final boolean VK_KHR_swapchain;
+    /** When true, {@link KHRSwapchainMutableFormat} is supported. */
+    public final boolean VK_KHR_swapchain_mutable_format;
     /** When true, {@link KHRVariablePointers} is supported. */
     public final boolean VK_KHR_variable_pointers;
     /** When true, {@link KHRVulkanMemoryModel} is supported. */
@@ -673,6 +681,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_display_control = EXTDisplayControl.checkCapsDevice(provider, caps, ext);
         VK_EXT_external_memory_dma_buf = ext.contains("VK_EXT_external_memory_dma_buf");
         VK_EXT_external_memory_host = EXTExternalMemoryHost.checkCapsDevice(provider, caps, ext);
+        VK_EXT_fragment_density_map = ext.contains("VK_EXT_fragment_density_map");
         VK_EXT_global_priority = ext.contains("VK_EXT_global_priority");
         VK_EXT_hdr_metadata = EXTHdrMetadata.checkCapsDevice(provider, caps, ext);
         VK_EXT_image_drm_format_modifier = EXTImageDrmFormatModifier.checkCapsDevice(provider, caps, ext);
@@ -682,6 +691,8 @@ public class VKCapabilitiesDevice {
         VK_EXT_queue_family_foreign = ext.contains("VK_EXT_queue_family_foreign");
         VK_EXT_sample_locations = EXTSampleLocations.checkCapsDevice(provider, caps, ext);
         VK_EXT_sampler_filter_minmax = ext.contains("VK_EXT_sampler_filter_minmax");
+        VK_EXT_scalar_block_layout = ext.contains("VK_EXT_scalar_block_layout");
+        VK_EXT_separate_stencil_usage = ext.contains("VK_EXT_separate_stencil_usage");
         VK_EXT_shader_stencil_export = ext.contains("VK_EXT_shader_stencil_export");
         VK_EXT_shader_subgroup_ballot = ext.contains("VK_EXT_shader_subgroup_ballot");
         VK_EXT_shader_subgroup_vote = ext.contains("VK_EXT_shader_subgroup_vote");
@@ -729,6 +740,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_shared_presentable_image = KHRSharedPresentableImage.checkCapsDevice(provider, caps, ext);
         VK_KHR_storage_buffer_storage_class = ext.contains("VK_KHR_storage_buffer_storage_class");
         VK_KHR_swapchain = KHRSwapchain.checkCapsDevice(provider, caps, ext);
+        VK_KHR_swapchain_mutable_format = ext.contains("VK_KHR_swapchain_mutable_format");
         VK_KHR_variable_pointers = ext.contains("VK_KHR_variable_pointers");
         VK_KHR_vulkan_memory_model = ext.contains("VK_KHR_vulkan_memory_model");
         VK_KHR_win32_keyed_mutex = ext.contains("VK_KHR_win32_keyed_mutex");

@@ -33,6 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code shaderGroupHandleSize} &ndash; size in bytes of the shader header.</li>
  * <li>{@code maxRecursionDepth} &ndash; the maximum number of levels of recursion allowed in a trace command.</li>
  * <li>{@code maxShaderGroupStride} &ndash; the maximum stride in bytes allowed between shader groups in the SBT.</li>
  * <li>{@code shaderGroupBaseAlignment} &ndash; the required alignment in bytes for the base of the SBTs.</li>

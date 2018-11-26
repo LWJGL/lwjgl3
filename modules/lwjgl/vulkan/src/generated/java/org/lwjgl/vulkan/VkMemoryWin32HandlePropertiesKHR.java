@@ -18,6 +18,17 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Properties of External Memory Windows Handles.
  * 
+ * <h5>Valid Usage (Implicit)</h5>
+ * 
+ * <ul>
+ * <li>{@code sType} <b>must</b> be {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * </ul>
+ * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link KHRExternalMemoryWin32#vkGetMemoryWin32HandlePropertiesKHR GetMemoryWin32HandlePropertiesKHR}</p>
+ * 
  * <h3>Member documentation</h3>
  * 
  * <ul>

@@ -65,7 +65,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkDescriptorUpdateTemplateCreateInfo {
  *     VkStructureType sType;
- *     void * pNext;
+ *     void const * pNext;
  *     VkDescriptorUpdateTemplateCreateFlags flags;
  *     uint32_t descriptorUpdateEntryCount;
  *     {@link VkDescriptorUpdateTemplateEntry VkDescriptorUpdateTemplateEntry const} * pDescriptorUpdateEntries;
@@ -143,7 +143,7 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** Returns the value of the {@code pNext} field. */
-    @NativeType("void *")
+    @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** Returns the value of the {@code flags} field. */
     @NativeType("VkDescriptorUpdateTemplateCreateFlags")
@@ -173,7 +173,7 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
     /** Sets the specified value to the {@code sType} field. */
     public VkDescriptorUpdateTemplateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkDescriptorUpdateTemplateCreateInfo pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    public VkDescriptorUpdateTemplateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
     public VkDescriptorUpdateTemplateCreateInfo flags(@NativeType("VkDescriptorUpdateTemplateCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkDescriptorUpdateTemplateEntry.Buffer} to the {@code pDescriptorUpdateEntries} field. */
@@ -474,7 +474,7 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
         @NativeType("VkStructureType")
         public int sType() { return VkDescriptorUpdateTemplateCreateInfo.nsType(address()); }
         /** Returns the value of the {@code pNext} field. */
-        @NativeType("void *")
+        @NativeType("void const *")
         public long pNext() { return VkDescriptorUpdateTemplateCreateInfo.npNext(address()); }
         /** Returns the value of the {@code flags} field. */
         @NativeType("VkDescriptorUpdateTemplateCreateFlags")
@@ -504,7 +504,7 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
         /** Sets the specified value to the {@code sType} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorUpdateTemplateCreateInfo.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkDescriptorUpdateTemplateCreateInfo.Buffer pNext(@NativeType("void *") long value) { VkDescriptorUpdateTemplateCreateInfo.npNext(address(), value); return this; }
+        public VkDescriptorUpdateTemplateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorUpdateTemplateCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer flags(@NativeType("VkDescriptorUpdateTemplateCreateFlags") int value) { VkDescriptorUpdateTemplateCreateInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkDescriptorUpdateTemplateEntry.Buffer} to the {@code pDescriptorUpdateEntries} field. */
