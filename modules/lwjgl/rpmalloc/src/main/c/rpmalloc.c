@@ -82,10 +82,22 @@
 #  error Must use global cache if unmap is disabled
 #endif
 
+#if defined( _WIN32 ) || defined( __WIN32__ ) || defined( _WIN64 )
+#  define PLATFORM_WINDOWS 1
+#  define PLATFORM_POSIX 0
+#else
+#  define PLATFORM_WINDOWS 0
+#  define PLATFORM_POSIX 1
+#endif
+
 /// Platform and arch specifics
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && !defined(__clang__)
 #  define FORCEINLINE __forceinline
 #  define _Static_assert static_assert
+#else
+#  define FORCEINLINE inline __attribute__((__always_inline__))
+#endif
+#if PLATFORM_WINDOWS
 #  if ENABLE_VALIDATE_ARGS
 #    include <Intsafe.h>
 #  endif
@@ -97,21 +109,16 @@
 #    include <mach/mach_vm.h>
 #    include <pthread.h>
 #  endif
-#  define FORCEINLINE inline __attribute__((__always_inline__))
+#  if defined(__HAIKU__)
+#    include <OS.h>
+#    include <pthread.h>
+#  endif
 #endif
 
 #if defined( __x86_64__ ) || defined( _M_AMD64 ) || defined( _M_X64 ) || defined( _AMD64_ ) || defined( __arm64__ ) || defined( __aarch64__ )
 #  define ARCH_64BIT 1
 #else
 #  define ARCH_64BIT 0
-#endif
-
-#if defined( _WIN32 ) || defined( __WIN32__ ) || defined( _WIN64 )
-#  define PLATFORM_WINDOWS 1
-#  define PLATFORM_POSIX 0
-#else
-#  define PLATFORM_WINDOWS 0
-#  define PLATFORM_POSIX 1
 #endif
 
 #include <stdint.h>
@@ -129,7 +136,7 @@
 #endif
 
 /// Atomic access abstraction
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && !defined(__clang__)
 
 typedef volatile long      atomic32_t;
 typedef volatile long long atomic64_t;
@@ -398,7 +405,7 @@ static atomic32_t _mapped_pages_os;
 #endif
 
 //! Current thread heap
-#if defined(__APPLE__) && ENABLE_PRELOAD
+#if (defined(__APPLE__) || defined(__HAIKU__)) && ENABLE_PRELOAD
 static pthread_key_t _memory_thread_heap;
 #else
 #  ifdef _MSC_VER
@@ -416,7 +423,7 @@ static _Thread_local heap_t* _memory_thread_heap TLS_MODEL;
 //! Get the current thread heap
 static FORCEINLINE heap_t*
 get_thread_heap(void) {
-#if defined(__APPLE__) && ENABLE_PRELOAD
+#if (defined(__APPLE__) || defined(__HAIKU__)) && ENABLE_PRELOAD
 	return pthread_getspecific(_memory_thread_heap);
 #else
 	return _memory_thread_heap;
@@ -426,7 +433,7 @@ get_thread_heap(void) {
 //! Set the current thread heap
 static void
 set_thread_heap(heap_t* heap) {
-#if defined(__APPLE__) && ENABLE_PRELOAD
+#if (defined(__APPLE__) || defined(__HAIKU__)) && ENABLE_PRELOAD
 	pthread_setspecific(_memory_thread_heap, heap);
 #else
 	_memory_thread_heap = heap;
@@ -517,6 +524,8 @@ _memory_map_spans(heap_t* heap, size_t span_count) {
 		request_spans += _memory_span_map_count - (request_spans % _memory_span_map_count);
 	size_t align_offset = 0;
 	span_t* span = _memory_map(request_spans * _memory_span_size, &align_offset);
+	if (!span)
+		return span;
 	span->align_offset = (uint32_t)align_offset;
 	span->total_spans_or_distance = (uint32_t)request_spans;
 	span->span_count = (uint32_t)span_count;
@@ -939,6 +948,8 @@ use_active:
 	if (!span) {
 		//Step 5: Map in more virtual memory
 		span = _memory_map_spans(heap, 1);
+		if (!span)
+			return span;
 	}
 
 	//Mark span as owned by this heap and set base data
@@ -982,6 +993,8 @@ _memory_allocate_large_from_heap(heap_t* heap, size_t size) {
 	if (!span) {
 		//Step 2: Map in more virtual memory
 		span = _memory_map_spans(heap, span_count);
+		if (!span)
+			return span;
 	}
 
 	//Mark span as owned by this heap and set base data
@@ -1018,6 +1031,8 @@ _memory_allocate_heap(void) {
 		//Map in pages for a new heap
 		size_t align_offset = 0;
 		heap = _memory_map((1 + (sizeof(heap_t) >> _memory_page_size_shift)) * _memory_page_size, &align_offset);
+		if (!heap)
+			return heap;
 		memset(heap, 0, sizeof(heap_t));
 		heap->align_offset = align_offset;
 
@@ -1161,6 +1176,8 @@ _memory_allocate(size_t size) {
 		++num_pages;
 	size_t align_offset = 0;
 	span_t* span = _memory_map(num_pages * _memory_page_size, &align_offset);
+	if (!span)
+		return span;
 	atomic_store32(&span->heap_id, 0);
 	//Store page count in span_count
 	span->span_count = (uint32_t)num_pages;
@@ -1311,8 +1328,8 @@ _memory_adjust_size_class(size_t iclass) {
 	}
 }
 
-#if defined( _WIN32 ) || defined( __WIN32__ ) || defined( _WIN64 )
-#  include <windows.h>
+#if defined(_WIN32) || defined(__WIN32__) || defined(_WIN64)
+#  include <Windows.h>
 #else
 #  include <sys/mman.h>
 #  include <sched.h>
@@ -1444,7 +1461,7 @@ rpmalloc_initialize_config(const rpmalloc_config_t* config) {
 	_memory_span_release_count = (_memory_span_map_count > 4 ? ((_memory_span_map_count < 64) ? _memory_span_map_count : 64) : 4);
 	_memory_span_release_count_large = (_memory_span_release_count > 4 ? (_memory_span_release_count / 2) : 2);
 
-#if defined(__APPLE__) && ENABLE_PRELOAD
+#if (defined(__APPLE__) || defined(__HAIKU__)) && ENABLE_PRELOAD
 	if (pthread_key_create(&_memory_thread_heap, 0))
 		return -1;
 #endif
@@ -1537,7 +1554,7 @@ rpmalloc_finalize(void) {
 	assert(!atomic_load32(&_mapped_pages_os));
 #endif
 
-#if defined(__APPLE__) && ENABLE_PRELOAD
+#if (defined(__APPLE__) || defined(__HAIKU__)) && ENABLE_PRELOAD
 	pthread_key_delete(_memory_thread_heap);
 #endif
 }
@@ -1627,8 +1644,10 @@ _memory_map_os(size_t size, size_t* offset) {
 #else
 #  if defined(__APPLE__)
 	void* ptr = mmap(0, size + padding, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_UNINITIALIZED, (_memory_huge_pages ? VM_FLAGS_SUPERPAGE_SIZE_2MB : -1), 0);
-#  else
+#  elif defined(MAP_HUGETLB)
 	void* ptr = mmap(0, size + padding, PROT_READ | PROT_WRITE, (_memory_huge_pages ? MAP_HUGETLB : 0) | MAP_PRIVATE | MAP_ANONYMOUS | MAP_UNINITIALIZED, -1, 0);
+#  else
+	void* ptr = mmap(0, size + padding, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_UNINITIALIZED, -1, 0);
 #  endif
 	if ((ptr == MAP_FAILED) || !ptr) {
 		assert("Failed to map virtual memory block" == 0);
@@ -1676,10 +1695,10 @@ _memory_unmap_os(void* address, size_t size, size_t offset, size_t release) {
 		}
 	}
 	else {
-#if defined(MADV_FREE)
-		if (madvise(address, size, MADV_FREE))
+#if defined(POSIX_MADV_FREE)
+		if (posix_madvise(address, size, POSIX_MADV_FREE))
 #endif
-		if (madvise(address, size, MADV_DONTNEED)) {
+		if (posix_madvise(address, size, POSIX_MADV_DONTNEED)) {
 			assert("Failed to madvise virtual memory block as free" == 0);
 		}
 	}
