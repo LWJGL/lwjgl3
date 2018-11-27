@@ -1,5 +1,5 @@
 /*_________
- /         \ tinyfiledialogs.c v3.3.7 [Aug 3, 2018] zlib licence
+ /         \ tinyfiledialogs.c v3.3.8 [Nov 4, 2018] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2018 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -87,7 +87,10 @@ misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
 */
 
+#ifndef __sun
 #define _POSIX_C_SOURCE 2 /* to accept POSIX 2 in old ANSI C standards */
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -129,7 +132,7 @@ misrepresented as being the original software.
 #define MAX_PATH_OR_CMD 1024 /* _MAX_PATH or MAX_PATH */
 #define MAX_MULTIPLE_FILES 32
 
-char const tinyfd_version [8] = "3.3.7";
+char const tinyfd_version [8] = "3.3.8";
 
 int tinyfd_verbose = 0 ; /* on unix: prints the command line calls */
 int tinyfd_silent = 1 ; /* 1 (default) or 0 : on unix,
@@ -729,9 +732,15 @@ static int dirExists(char const * const aDirPath)
         struct _stat lInfo;
         wchar_t * lTmpWChar;
         int lStatRet;
+		int lDirLen;
 
-        if (!aDirPath || !strlen(aDirPath))
-                return 0;
+		if (!aDirPath)
+			return 0;
+		lDirLen = strlen(aDirPath);
+		if (!lDirLen)
+			return 1;
+		if ( (lDirLen == 2) && (aDirPath[1] == ':') )
+			return 1;
 
         if (tinyfd_winUtf8)
         {
