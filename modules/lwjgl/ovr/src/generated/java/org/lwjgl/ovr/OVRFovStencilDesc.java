@@ -23,8 +23,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code StencilType} &ndash; one of:<br><table><tr><td>{@link OVR#ovrFovStencil_HiddenArea FovStencil_HiddenArea}</td><td>{@link OVR#ovrFovStencil_VisibleArea FovStencil_VisibleArea}</td><td>{@link OVR#ovrFovStencil_BorderLine FovStencil_BorderLine}</td></tr></table></li>
  * <li>{@code StencilFlags} &ndash; one or more of:<br><table><tr><td>{@link OVR#ovrFovStencilFlag_MeshOriginAtBottomLeft FovStencilFlag_MeshOriginAtBottomLeft}</td></tr></table></li>
- * <li>{@code FovPort} &ndash; typically Fov obtained from {@link OVR#ovr_GetRenderDesc GetRenderDesc}</li>
- * <li>{@code HmdToEyeRotation} &ndash; typically {@code HmdToEyePose.Orientation} obtained from {@link OVR#ovr_GetRenderDesc GetRenderDesc}</li>
+ * <li>{@code FovPort} &ndash; typically FOV obtained from {@link OVR#ovr_GetRenderDesc GetRenderDesc}</li>
+ * <li>{@code HmdToEyeRotation} &ndash; typically {@code HmdToEyePose.Orientation} obtained from {@link OVR#ovr_GetRenderDesc GetRenderDesc}. Note: Currently unsupported, always treated as identity.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

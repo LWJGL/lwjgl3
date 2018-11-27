@@ -443,8 +443,11 @@ val ovrFovStencilDesc = struct(Module.OVR, "OVRFovStencilDesc", nativeName = "ov
     ovrFovStencilType("StencilType", "").links("FovStencil_\\w+")
     uint32_t("StencilFlags", "").links("FovStencilFlag_\\w+", LinkMode.BITFIELD)
     ovrEyeType("Eye", "")
-    ovrFovPort("FovPort", "typically Fov obtained from #GetRenderDesc()")
-    ovrQuatf("HmdToEyeRotation", "typically {@code HmdToEyePose.Orientation} obtained from #GetRenderDesc()")
+    ovrFovPort("FovPort", "typically FOV obtained from #GetRenderDesc()")
+    ovrQuatf(
+        "HmdToEyeRotation",
+        "typically {@code HmdToEyePose.Orientation} obtained from #GetRenderDesc(). Note: Currently unsupported, always treated as identity."
+    )
 }
 val ovrFovStencilMeshBuffer = struct(Module.OVR, "OVRFovStencilMeshBuffer", nativeName = "ovrFovStencilMeshBuffer") {
     documentation = "Contains the data for the fov-stencil mesh. Parts of the struct are filled by the caller while some parts are filled by the SDK."
