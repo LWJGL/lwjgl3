@@ -61,7 +61,7 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>Warning! Using this feature may not be equivalent to installing a GPU with smaller amount of memory, because graphics driver doesn't necessary fail new
  * allocations with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY} result when memory capacity is exceeded. It may return success and just silently migrate some
- * device memory blocks to system RAM.</p></li>
+ * device memory blocks to system RAM. This driver behavior can also be controlled using {@code VK_AMD_memory_overallocation_behavior} extension.</p></li>
  * <li>{@code pVulkanFunctions} &ndash; pointers to Vulkan functions</li>
  * <li>{@code pRecordSettings} &ndash; 
  * parameters for recording of VMA calls. Can be null.

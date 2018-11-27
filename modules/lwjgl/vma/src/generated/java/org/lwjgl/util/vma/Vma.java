@@ -235,6 +235,8 @@ import org.lwjgl.vulkan.*;
  * allocated from this memory type stays mapped for the time of any call to {@code vkQueueSubmit()} or {@code vkQueuePresentKHR()}, this block is
  * migrated by WDDM to system RAM, which degrades performance. It doesn't matter if that particular memory block is actually used by the command
  * buffer being submitted.</li>
+ * <li>On Mac/MoltenVK there is a known bug - <a href="https://github.com/KhronosGroup/MoltenVK/issues/175">Issue #175</a> which requires unmapping
+ * before GPU can see updated texture.</li>
  * <li>Keeping many large memory blocks mapped may impact performance or stability of some debugging tools.</li>
  * </ul>
  * 
@@ -466,6 +468,33 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>Ring buffer is available only in pools with one memory block - {@link VmaPoolCreateInfo}{@code ::maxBlockCount} must be 1. Otherwise behavior is undefined.</p>
  * 
+ * <h4>Buddy allocation algorithm</h4>
+ * 
+ * <p>There is another allocation algorithm that can be used with custom pools, called "buddy". Its internal data structure is based on a tree of blocks,
+ * each having size that is a power of two and a half of its parent's size. When you want to allocate memory of certain size, a free node in the tree is
+ * located. If it's too large, it is recursively split into two halves (called "buddies"). However, if requested allocation size is not a power of two,
+ * the size of a tree node is aligned up to the nearest power of two and the remaining space is wasted. When two buddy nodes become free, they are merged
+ * back into one larger node.</p>
+ * 
+ * <p>The advantage of buddy allocation algorithm over default algorithm is faster allocation and deallocation, as well as smaller external fragmentation.
+ * The disadvantage is more wasted space (internal fragmentation).</p>
+ * 
+ * <p>For more information, please read <a href="https://en.wikipedia.org/wiki/Buddy_memory_allocation">"Buddy memory allocation" on Wikipedia</a> or other
+ * sources that describe this concept in general.</p>
+ * 
+ * <p>To use buddy allocation algorithm with a custom pool, add flag {@link #VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT POOL_CREATE_BUDDY_ALGORITHM_BIT} to {@link VmaPoolCreateInfo}{@code ::flags} while creating
+ * {@code VmaPool} object.</p>
+ * 
+ * <p>Several limitations apply to pools that use buddy algorithm:</p>
+ * 
+ * <ul>
+ * <li>It is recommended to use {@link VmaPoolCreateInfo}{@code ::blockSize} that is a power of two. Otherwise, only largest power of two smaller than the size
+ * is used for allocations. The remaining space always stays unused.</li>
+ * <li>Margins and corruption detection don't work in such pools.</li>
+ * <li>Lost allocations don't work in such pools. You can use them, but they never become lost. Support may be added in the future.</li>
+ * <li>Defragmentation doesn't work with allocations made from such pool.</li>
+ * </ul>
+ * 
  * <h3>Defragmentation</h3>
  * 
  * <p>Interleaved allocations and deallocations of many objects of varying size can cause fragmentation, which can lead to a situation where the library is
@@ -473,12 +502,61 @@ import org.lwjgl.vulkan.*;
  * between existing allocations.</p>
  * 
  * <p>To mitigate this problem, you can use {@link #vmaDefragment Defragment}. Given set of allocations, this function can move them to compact used memory, ensure more
- * continuous free space and possibly also free some {@code VkDeviceMemory}. It can work only on allocations made from memory type that is
- * {@code HOST_VISIBLE}. Allocations are modified to point to the new {@code VkDeviceMemory} and offset. Data in this memory is also {@code memmove}-ed to
- * the new place. However, if you have images or buffers bound to these allocations (and you certainly do), you need to destroy, recreate, and bind them
- * to the new place in memory.</p>
+ * continuous free space and possibly also free some {@code VkDeviceMemory}. Currently it can work only on allocations made from memory type that is
+ * {@code HOST_VISIBLE} and {@code HOST_COHERENT}. Allocations are modified to point to the new {@code VkDeviceMemory} and offset. Data in this memory is
+ * also {@code memmove}-ed to the new place. However, if you have images or buffers bound to these allocations (and you certainly do), you need to
+ * destroy, recreate, and bind them to the new place in memory.</p>
  * 
- * <p>For further details and example code, see documentation of function {@link #vmaDefragment Defragment}.</p>
+ * <p>After allocation has been moved, its {@link VmaAllocationInfo}{@code ::deviceMemory} and/or {@code VmaAllocationInfo::offset} changes. You must query them
+ * again using {@link #vmaGetAllocationInfo GetAllocationInfo} if you need them.</p>
+ * 
+ * <p>If an allocation has been moved, data in memory is copied to new place automatically, but if it was bound to a buffer or an image, you must destroy
+ * that object yourself, create new one and bind it to the new memory pointed by the allocation. You must use {@code vkDestroyBuffer()},
+ * {@code vkDestroyImage()}, {@code vkCreateBuffer()}, {@code vkCreateImage()} for that purpose and NOT {@link #vmaDestroyBuffer DestroyBuffer}, {@link #vmaDestroyImage DestroyImage},
+ * {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}! Example:</p>
+ * 
+ * <pre><code>
+ * VkDevice device = ...;
+ * VmaAllocator allocator = ...;
+ * std::vector&lt;VkBuffer&gt; buffers = ...;
+ * std::vector&lt;VmaAllocation&gt; allocations = ...;
+ * const size_t allocCount = allocations.size();
+ * 
+ * std::vector&lt;VkBool32&gt; allocationsChanged(allocCount);
+ * vmaDefragment(allocator, allocations.data(), allocCount, allocationsChanged.data(), nullptr, nullptr);
+ * 
+ * for(size_t i = 0; i &lt; allocCount; ++i)
+ * {
+ *     if(allocationsChanged[i])
+ *     {
+ *         // Destroy buffers that is immutably bound to memory region which is no longer valid.
+ *         vkDestroyBuffer(device, buffers[i], nullptr);
+ * 
+ *         // Create new buffer with same parameters.
+ *         VkBufferCreateInfo bufferInfo = ...;
+ *         vkCreateBuffer(device, &amp;bufferInfo, nullptr, &amp;buffers[i]);
+ * 
+ *         // You can make dummy call to vkGetBufferMemoryRequirements here to silence validation layer warning.
+ * 
+ *         // Bind new buffer with new memory region. Data contained in it is already there.
+ *         VmaAllocationInfo allocInfo;
+ *         vmaGetAllocationInfo(allocator, allocations[i], &amp;allocInfo);
+ *         vkBindBufferMemory(device, buffers[i], allocInfo.deviceMemory, allocInfo.offset);
+ *     }
+ * }</code></pre>
+ * 
+ * <p>Please don't expect memory to be fully compacted after defragmentation. Algorithms inside are based on some heuristics that try to maximize number of
+ * Vulkan memory blocks to make totally empty to release them, as well as to maximimze continuous empty space inside remaining blocks, while minimizing
+ * the number and size of allocations that needs to be moved. Some fragmentation still remains after this call. This is normal.</p>
+ * 
+ * <p>If you defragment allocations bound to images, these images should be created with {@code VK_IMAGE_CREATE_ALIAS_BIT} flag, to make sure that new image
+ * created with same parameters and pointing to data copied to another memory region will interpret its contents consistently. Otherwise you may
+ * experience corrupted data on some implementations, e.g. due to different pixel swizzling used internally by the graphics driver.</p>
+ * 
+ * <p>If you defragment allocations bound to images, new images to be bound to new memory region after defragmentation should be created with
+ * {@code VK_IMAGE_LAYOUT_PREINITIALIZED} and then transitioned to their original layout from before defragmentation using an image memory barrier.</p>
+ * 
+ * <p>For further details, see documentation of function {@link #vmaDefragment Defragment}.</p>
  * 
  * <h3>Lost allocations</h3>
  * 
@@ -709,7 +787,8 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>Margin is applied only to allocations made out of memory blocks and not to dedicated allocations, which have their own memory block of specific size.
  * It is thus not applied to allocations made using {@link #VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT} flag or those automatically decided to put into dedicated
- * allocations, e.g. due to its large size or recommended by {@code VK_KHR_dedicated_allocation} extension.</p>
+ * allocations, e.g. due to its large size or recommended by {@code VK_KHR_dedicated_allocation} extension. Margins are also not active in custom pools
+ * created with {@link #VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT POOL_CREATE_BUDDY_ALGORITHM_BIT} flag.</p>
  * 
  * <p>Margins appear in JSON dump as part of free space.</p>
  * 
@@ -983,12 +1062,21 @@ import org.lwjgl.vulkan.*;
  * <p>Features deliberately excluded from the scope of this library:</p>
  * 
  * <ul>
- * <li>Sparse resources.</li>
+ * <li>Support for sparse binding and sparse residency. You can still use these features (when supported by the device) with VMA. You just need to do it
+ * yourself. Allocate memory pages with {@link #vmaAllocateMemory AllocateMemory}. Any explicit support for sparse binding/residency would rather require another,
+ * higher-level library on top of VMA.</li>
  * <li>Data transfer - issuing commands that transfer data between buffers or images, any usage of {@code VkCommandList} or {@code VkQueue} and related
  * synchronization is responsibility of the user.</li>
  * <li>Allocations for imported/exported external memory. They tend to require explicit memory type index and dedicated allocation anyway, so they don't
  * interact with main features of this library. Such special purpose allocations should be made manually, using {@code vkCreateBuffer()} and
  * {@code vkAllocateMemory()}.</li>
+ * <li>Recreation of buffers and images. Although the library has functions for buffer and image creation ({@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}), you need to
+ * recreate these objects yourself after defragmentation. That's because the big structures {@code VkBufferCreateInfo}, {@code VkImageCreateInfo} are
+ * not stored in {@code VmaAllocation} object.</li>
+ * <li>Handling CPU memory allocation failures. When dynamically creating small C++ objects in CPU memory (not Vulkan memory), allocation failures are not
+ * checked and handled gracefully, because that would complicate code significantly and is usually not needed in desktop PC applications anyway.</li>
+ * <li>Code free of any compiler warnings. Maintaining the library to compile and work correctly on so many different platforms is hard enough. Being free
+ * of any warnings, on any version of any compiler, is simply not feasible.</li>
  * <li>Support for any programming languages other than C/C++. Bindings to other languages are welcomed as external projects.</li>
  * </ul>
  */
@@ -1174,16 +1262,34 @@ public class Vma {
      * 
      * <p>This flag is only allowed for custom pools created with {@link #VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT} flag.</p>
      * </li>
+     * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT} - Allocation strategy that chooses smallest possible free range for the allocation.</li>
+     * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT} - Allocation strategy that chooses biggest possible free range for the allocation.</li>
+     * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT} - 
+     * Allocation strategy that chooses first suitable free range for the allocation.
+     * 
+     * <p>"First" doesn't necessarily means the one with smallest offset in memory, but rather the one that is easiest and fastest to find.</p>
+     * </li>
+     * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT} - Allocation strategy that tries to minimize memory usage.</li>
+     * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT} - Allocation strategy that tries to minimize allocation time.</li>
+     * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT} - Allocation strategy that tries to minimize memory fragmentation.</li>
+     * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_MASK ALLOCATION_CREATE_STRATEGY_MASK} - A bit mask to extract only {@code STRATEGY} bits from entire set of flags.</li>
      * </ul>
      */
     public static final int
-        VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT      = 0x1,
-        VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT        = 0x2,
-        VMA_ALLOCATION_CREATE_MAPPED_BIT                = 0x4,
-        VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT       = 0x8,
-        VMA_ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT   = 0x10,
-        VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT = 0x20,
-        VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT         = 0x40;
+        VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT           = 0x1,
+        VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT             = 0x2,
+        VMA_ALLOCATION_CREATE_MAPPED_BIT                     = 0x4,
+        VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT            = 0x8,
+        VMA_ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT        = 0x10,
+        VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT      = 0x20,
+        VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT              = 0x40,
+        VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT          = 0x00010000,
+        VMA_ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT         = 0x00020000,
+        VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT         = 0x00040000,
+        VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT        = VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT,
+        VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT          = VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT,
+        VMA_ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT = VMA_ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT,
+        VMA_ALLOCATION_CREATE_STRATEGY_MASK                  = VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT | VMA_ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT | VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT;
 
     /**
      * Flags to be passed as {@link VmaPoolCreateInfo}{@code ::flags}. ({@code VmaPoolCreateFlagBits})
@@ -1203,7 +1309,7 @@ public class Vma {
      * <p>If you also allocate using {@link #vmaAllocateMemoryForImage AllocateMemoryForImage} or {@link #vmaAllocateMemory AllocateMemory}, exact type of such allocations is not known, so allocator must be
      * conservative in handling Buffer-Image Granularity, which can lead to suboptimal allocation (wasted memory). In that case, if you can make sure you
      * always allocate only buffers and linear images or only optimal images out of this pool, use this flag to make allocator disregard Buffer-Image
-     * Granularity and so make allocations more optimal.</p>
+     * Granularity and so make allocations faster and more optimal.</p>
      * </li>
      * <li>{@link #VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT} - 
      * Enables alternative, linear allocation algorithm in this pool.
@@ -1216,11 +1322,20 @@ public class Vma {
      * 
      * <p>When using this flag, you must specify {@link VmaPoolCreateInfo}{@code ::maxBlockCount == 1} (or 0 for default).</p>
      * </li>
+     * <li>{@link #VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT POOL_CREATE_BUDDY_ALGORITHM_BIT} - 
+     * Enables alternative, buddy allocation algorithm in this pool.
+     * 
+     * <p>It operates on a tree of blocks, each having size that is a power of two and a half of its parent's size. Comparing to default algorithm, this one
+     * provides faster allocation and deallocation and decreased external fragmentation, at the expense of more memory wasted (internal fragmentation).</p>
+     * </li>
+     * <li>{@link #VMA_POOL_CREATE_ALGORITHM_MASK POOL_CREATE_ALGORITHM_MASK} - Bit mask to extract only {@code ALGORITHM} bits from entire set of flags.</li>
      * </ul>
      */
     public static final int
         VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT = 0x2,
-        VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT                = 0x4;
+        VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT                = 0x4,
+        VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT                 = 0x8,
+        VMA_POOL_CREATE_ALGORITHM_MASK                      = VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT | VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT;
 
     static { LibVma.initialize(); }
 
@@ -1669,6 +1784,39 @@ public class Vma {
         nvmaFreeMemory(allocator, allocation);
     }
 
+    // --- [ vmaResizeAllocation ] ---
+
+    /** Unsafe version of: {@link #vmaResizeAllocation ResizeAllocation} */
+    public static native int nvmaResizeAllocation(long allocator, long allocation, long newSize);
+
+    /**
+     * Tries to resize an allocation in place, if there is enough free memory after it.
+     * 
+     * <p>Tries to change allocation's size without moving or reallocating it. You can both shrink and grow allocation size. When growing, it succeeds only when
+     * the allocation belongs to a memory block with enough free space after it.</p>
+     * 
+     * <p>After successful call to this function, {@link VmaAllocationInfo}{@code ::size} of this allocation changes. All other parameters stay the same: memory pool
+     * and type, alignment, offset, mapped pointer.</p>
+     * 
+     * <ul>
+     * <li>Calling this function on allocation that is in lost state fails with result {@code VK_ERROR_VALIDATION_FAILED_EXT}.</li>
+     * <li>Calling this function with {@code newSize} same as current allocation size does nothing and returns {@code VK_SUCCESS}.</li>
+     * <li>Resizing dedicated allocations, as well as allocations created in pools that use linear or buddy algorithm, is not supported. The function returns
+     * {@code VK_ERROR_FEATURE_NOT_PRESENT} in such cases. Support may be added in the future.</li>
+     * </ul>
+     *
+     * @return {@code VK_SUCCESS} if allocation's size has been successfully changed. Returns {@code VK_ERROR_OUT_OF_POOL_MEMORY} if allocation's size could not be
+     *         changed.
+     */
+    @NativeType("VkResult")
+    public static int vmaResizeAllocation(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkDeviceSize") long newSize) {
+        if (CHECKS) {
+            check(allocator);
+            check(allocation);
+        }
+        return nvmaResizeAllocation(allocator, allocation, newSize);
+    }
+
     // --- [ vmaGetAllocationInfo ] ---
 
     /** Unsafe version of: {@link #vmaGetAllocationInfo GetAllocationInfo} */
@@ -1933,8 +2081,8 @@ public class Vma {
      * <ul>
      * <li>Only allocations made in memory types that have {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT} and {@code VK_MEMORY_PROPERTY_HOST_COHERENT_BIT} flags
      * can be compacted. You may pass other allocations but it makes no sense - these will never be moved.</li>
-     * <li>Custom pools created with {@link #VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT} flag are not defragmented. Allocations passed to this function that come from such
-     * pools are ignored.</li>
+     * <li>Custom pools created with {@link #VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT} or {@link #VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT POOL_CREATE_BUDDY_ALGORITHM_BIT} flag are not defragmented. Allocations passed to
+     * this function that come from such pools are ignored.</li>
      * <li>Allocations created with {@link #VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT} or created as dedicated allocations for any other reason are also ignored.</li>
      * <li>Both allocations made with or without {@link #VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT} flag can be compacted. If not persistently mapped, memory will be mapped
      * temporarily inside this function if needed.</li>
@@ -1943,51 +2091,9 @@ public class Vma {
      * 
      * <p>The function also frees empty {@code VkDeviceMemory} blocks.</p>
      * 
-     * <p>After allocation has been moved, its {@link VmaAllocationInfo}{@code ::deviceMemory} and/or {@link VmaAllocationInfo}{@code ::offset} changes. You must query them
-     * again using {@link #vmaGetAllocationInfo GetAllocationInfo} if you need them.</p>
-     * 
-     * <p>If an allocation has been moved, data in memory is copied to new place automatically, but if it was bound to a buffer or an image, you must destroy
-     * that object yourself, create new one and bind it to the new memory pointed by the allocation. You must use {@code vkDestroyBuffer()},
-     * {@code vkDestroyImage()}, {@code vkCreateBuffer()}, {@code vkCreateImage()} for that purpose and NOT {@link #vmaDestroyBuffer DestroyBuffer}, {@link #vmaDestroyImage DestroyImage},
-     * {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}! Example:</p>
-     * 
-     * <pre><code>
-     * VkDevice device = ...;
-     * VmaAllocator allocator = ...;
-     * std::vector&lt;VkBuffer&gt; buffers = ...;
-     * std::vector&lt;VmaAllocation&gt; allocations = ...;
-     * 
-     * std::vector&lt;VkBool32&gt; allocationsChanged(allocations.size());
-     * vmaDefragment(allocator, allocations.data(), allocations.size(), allocationsChanged.data(), nullptr, nullptr);
-     * 
-     * for(size_t i = 0; i &lt; allocations.size(); ++i)
-     * {
-     *     if(allocationsChanged[i])
-     *     {
-     *         VmaAllocationInfo allocInfo;
-     *         vmaGetAllocationInfo(allocator, allocations[i], &amp;allocInfo);
-     * 
-     *         vkDestroyBuffer(device, buffers[i], nullptr);
-     * 
-     *         VkBufferCreateInfo bufferInfo = ...;
-     *         vkCreateBuffer(device, &amp;bufferInfo, nullptr, &amp;buffers[i]);
-     * 
-     *         // You can make dummy call to vkGetBufferMemoryRequirements here to silence validation layer warning.
-     * 
-     *         vkBindBufferMemory(device, buffers[i], allocInfo.deviceMemory, allocInfo.offset);
-     *     }
-     * }</code></pre>
-     * 
-     * <p>Note: Please don't expect memory to be fully compacted after this call. Algorithms inside are based on some heuristics that try to maximize number of
-     * Vulkan memory blocks to make totally empty to release them, as well as to maximimze continuous empty space inside remaining blocks, while minimizing
-     * the number and size of data that needs to be moved. Some fragmentation still remains after this call. This is normal.</p>
-     * 
-     * <p>Warning: This function is not 100% correct according to Vulkan specification. Use it at your own risk. That's because Vulkan doesn't guarantee that
-     * memory requirements (size and alignment) for a new buffer or image are consistent. They may be different even for subsequent calls with the same
-     * parameters. It really does happen on some platforms, especially with images.</p>
-     * 
-     * <p>Warning: This function may be time-consuming, so you shouldn't call it too often (like every frame or after every resource creation/destruction). You
-     * can call it on special occasions (like when reloading a game level or when you just destroyed a lot of objects).</p>
+     * <p>Warning: This function may be time-consuming, so you shouldn't call it too often (like after every resource creation/destruction). You
+     * can call it on special occasions (like when reloading a game level or when you just destroyed a lot of objects). Calling it every frame may be OK, but
+     * you should measure that on your platform.</p>
      *
      * @param pAllocations          array of allocations that can be moved during this compaction
      * @param pAllocationsChanged   array of boolean values that will indicate whether matching allocation in {@code pAllocations} array has been moved. This parameter is optional.

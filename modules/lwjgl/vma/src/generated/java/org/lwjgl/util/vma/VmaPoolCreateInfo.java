@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code memoryTypeIndex} &ndash; Vulkan memory type index to allocate this pool from</li>
- * <li>{@code flags} &ndash; Use combination of {@code VmaPoolCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT}</td><td>{@link Vma#VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT}</td></tr></table></li>
+ * <li>{@code flags} &ndash; Use combination of {@code VmaPoolCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT}</td><td>{@link Vma#VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT}</td></tr><tr><td>{@link Vma#VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT POOL_CREATE_BUDDY_ALGORITHM_BIT}</td><td>{@link Vma#VMA_POOL_CREATE_ALGORITHM_MASK POOL_CREATE_ALGORITHM_MASK}</td></tr></table></li>
  * <li>{@code blockSize} &ndash; 
  * size of a single {@code VkDeviceMemory} block to be allocated as part of this pool, in bytes. Optional.
  * 

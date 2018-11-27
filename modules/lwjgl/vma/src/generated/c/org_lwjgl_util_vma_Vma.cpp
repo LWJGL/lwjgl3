@@ -176,6 +176,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaFreeMemory(JNIEnv *__env,
     vmaFreeMemory(allocator, allocation);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaResizeAllocation(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong newSize) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VmaAllocation allocation = (VmaAllocation)(intptr_t)allocationAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaResizeAllocation(allocator, allocation, (VkDeviceSize)newSize);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetAllocationInfo(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong pAllocationInfoAddress) {
     VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
     VmaAllocation allocation = (VmaAllocation)(intptr_t)allocationAddress;
