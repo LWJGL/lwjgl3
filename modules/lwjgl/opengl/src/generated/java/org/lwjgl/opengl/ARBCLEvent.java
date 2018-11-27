@@ -9,14 +9,12 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
 
-import org.lwjgl.opencl.*;
-
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_cl_event.txt">ARB_cl_event</a> extension.
  * 
- * <p>This extension allows creating OpenGL sync objects linked to OpenCL event objects, potentially improving efficiency of sharing images and buffers between
- * the two APIs. The companion {@link org.lwjgl.opencl.KHRGLEvent cl_khr_gl_event} OpenCL extension provides the complementary functionality of creating an
- * OpenCL event object from an OpenGL fence sync object.</p>
+ * <p>This extension allows creating OpenGL sync objects linked to OpenCL event objects, potentially improving efficiency of sharing images and buffers
+ * between the two APIs. The companion {@code cl_khr_gl_event} OpenCL extension provides the complementary functionality of creating an OpenCL event
+ * object from an OpenGL fence sync object.</p>
  * 
  * <p>Requires {@link GL32 OpenGL 3.2} or {@link ARBSync ARB_sync}. Requires an OpenCL implementation supporting sharing event objects with OpenGL.</p>
  */
@@ -50,9 +48,9 @@ public class ARBCLEvent {
      * respectively. {@code context} must support sharing with GL, and must have been created with respect to the current GL context, or to a share group
      * including the current GL context.
      * 
-     * <p>The status of such a sync object depends on {@code event}. When the status of {@code event} is {@link CL10#CL_QUEUED}, {@link CL10#CL_SUBMITTED}, or {@link CL10#CL_RUNNING},
-     * the status of the linked sync object will be {@link GL32#GL_UNSIGNALED UNSIGNALED}. When the status of {@code event} changes to {@link CL10#CL_COMPLETE}, the status of the linked
-     * sync object will become {@link GL32#GL_SIGNALED SIGNALED}.</p>
+     * <p>The status of such a sync object depends on {@code event}. When the status of {@code event} is {@code CL_QUEUED}, {@code CL_SUBMITTED}, or
+     * {@code CL_RUNNING}, the status of the linked sync object will be {@link GL32#GL_UNSIGNALED UNSIGNALED}. When the status of {@code event} changes to {@code CL_COMPLETE}, the
+     * status of the linked sync object will become {@link GL32#GL_SIGNALED SIGNALED}.</p>
      * 
      * <p>Creating a linked sync object places a reference on the linked OpenCL event object. When the sync object is deleted, the reference will be removed from
      * the event object.</p>

@@ -6,7 +6,6 @@ package opencl.templates
 
 import org.lwjgl.generator.*
 import opencl.*
-import opengl.*
 
 val CL12GL = "CL12GL".dependsOn(Module.OPENGL, Module.OPENGLES)?.nativeClassCL("CL12GL") {
     extends = CL10GL

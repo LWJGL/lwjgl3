@@ -344,6 +344,11 @@ val cl_program_release_callback = Module.OPENCL.callback {
 
 // OpenGL interop
 
+val GLint = IntegerType("GLint", PrimitiveMapping.INT)
+val GLuint = IntegerType("GLuint", PrimitiveMapping.INT, unsigned = true)
+val GLenum = IntegerType("GLenum", PrimitiveMapping.INT, unsigned = true)
+val GLsync = "GLsync".handle
+
 val cl_gl_context_info = IntegerType("cl_gl_context_info", PrimitiveMapping.INT)
 val cl_gl_platform_info = IntegerType("cl_gl_platform_info", PrimitiveMapping.INT)
 val cl_gl_object_type = IntegerType("cl_gl_object_type", PrimitiveMapping.INT)

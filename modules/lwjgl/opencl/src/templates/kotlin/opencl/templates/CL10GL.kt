@@ -6,7 +6,6 @@ package opencl.templates
 
 import org.lwjgl.generator.*
 import opencl.*
-import opengl.*
 
 const val INVALID_GL_OBJECT = "#INVALID_GL_OBJECT"
 const val INVALID_MIP_LEVEL = "#INVALID_MIP_LEVEL"

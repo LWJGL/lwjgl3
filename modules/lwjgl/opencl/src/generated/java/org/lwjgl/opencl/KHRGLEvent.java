@@ -19,11 +19,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * Native bindings to the <strong>khr_gl_event</strong> extension.
  * 
  * <p>This extension allows creating OpenCL event objects linked to OpenGL fence sync objects, potentially improving efficiency of sharing images and buffers
- * between the two APIs. The companion {@link org.lwjgl.opengl.ARBCLEvent GL_ARB_cl_event} extension provides the complementary functionality of creating
- * an OpenGL sync object from an OpenCL event object.</p>
+ * between the two APIs. The companion {@code GL_ARB_cl_event} extension provides the complementary functionality of creating an OpenGL sync object from
+ * an OpenCL event object.</p>
  * 
- * <p>In addition, this extension modifies the behavior of {@link CL10GL#clEnqueueAcquireGLObjects EnqueueAcquireGLObjects} and {@link CL10GL#clEnqueueReleaseGLObjects EnqueueReleaseGLObjects} to implicitly
- * guarantee synchronization with an OpenGL context bound in the same thread as the OpenCL context.</p>
+ * <p>In addition, this extension modifies the behavior of {@link CL10GL#clEnqueueAcquireGLObjects EnqueueAcquireGLObjects} and {@link CL10GL#clEnqueueReleaseGLObjects EnqueueReleaseGLObjects} to implicitly guarantee synchronization
+ * with an OpenGL context bound in the same thread as the OpenCL context.</p>
  */
 public class KHRGLEvent {
 

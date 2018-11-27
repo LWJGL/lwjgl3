@@ -5,21 +5,16 @@
 package opengl.templates
 
 import org.lwjgl.generator.*
-import opencl.*
 import opengl.*
 
 val ARB_cl_event = "ARBCLEvent".dependsOn(Module.OPENCL)?.nativeClassGL("ARB_cl_event", postfix = ARB) {
-    javaImport(
-        "org.lwjgl.opencl.*"
-    )
-
     documentation =
         """
         Native bindings to the $registryLink extension.
 
-        This extension allows creating OpenGL sync objects linked to OpenCL event objects, potentially improving efficiency of sharing images and buffers between
-        the two APIs. The companion {@link org.lwjgl.opencl.KHRGLEvent cl_khr_gl_event} OpenCL extension provides the complementary functionality of creating an
-        OpenCL event object from an OpenGL fence sync object.
+        This extension allows creating OpenGL sync objects linked to OpenCL event objects, potentially improving efficiency of sharing images and buffers
+        between the two APIs. The companion {@code cl_khr_gl_event} OpenCL extension provides the complementary functionality of creating an OpenCL event
+        object from an OpenGL fence sync object.
 
         Requires ${GL32.core} or ${ARB_sync.link}. Requires an OpenCL implementation supporting sharing event objects with OpenGL.
         """
@@ -43,16 +38,16 @@ val ARB_cl_event = "ARBCLEvent".dependsOn(Module.OPENCL)?.nativeClassGL("ARB_cl_
         respectively. {@code context} must support sharing with GL, and must have been created with respect to the current GL context, or to a share group
         including the current GL context.
 
-        The status of such a sync object depends on {@code event}. When the status of {@code event} is CL10#CL_QUEUED, CL10#CL_SUBMITTED, or CL10#CL_RUNNING,
-        the status of the linked sync object will be #UNSIGNALED. When the status of {@code event} changes to CL10#CL_COMPLETE, the status of the linked
-        sync object will become #SIGNALED.
+        The status of such a sync object depends on {@code event}. When the status of {@code event} is {@code CL_QUEUED}, {@code CL_SUBMITTED}, or
+        {@code CL_RUNNING}, the status of the linked sync object will be #UNSIGNALED. When the status of {@code event} changes to {@code CL_COMPLETE}, the
+        status of the linked sync object will become #SIGNALED.
 
         Creating a linked sync object places a reference on the linked OpenCL event object. When the sync object is deleted, the reference will be removed from
         the event object.
         """,
 
-        cl_context("context", "a valid OpenCL context"),
-        cl_event("event", "a valid OpenCL event"),
+        "cl_context".handle("context", "a valid OpenCL context"),
+        "cl_event".handle("event", "a valid OpenCL event"),
         GLbitfield("flags", "must be 0 (placeholder for anticipated future extensions of sync object capabilities)")
     )
 }

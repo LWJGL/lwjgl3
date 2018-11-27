@@ -12,6 +12,5 @@
     <orderEntry type="library" name="KotlinRuntime" level="project" />
     <orderEntry type="module" module-name="generator" />
     <orderEntry type="module" module-name="core-templates" />
-    <orderEntry type="module" module-name="opencl-templates" />
   </component>
 </module>

@@ -167,22 +167,11 @@
             </and>
         </condition>
 
-        <local name="opencl_types"/>
-        <condition property="opencl_types">
-            <and>
-                <isfalse value="${binding.opencl}"/>
-                <istrue value="${binding.opengl}"/>
-            </and>
-        </condition>
-
         <local name="opengl_types"/>
         <condition property="opengl_types">
             <and>
                 <isfalse value="${binding.opengl}"/>
-                <or>
-                    <istrue value="${binding.glfw}"/>
-                    <istrue value="${binding.opencl}"/>
-                </or>
+                <istrue value="${binding.glfw}"/>
             </and>
         </condition>
 
@@ -221,7 +210,6 @@
             <src path="${module.templatepath}"/>
 
             <src path="${module.lwjgl}/egl/src/templates/kotlin/egl/EGLTypes.kt" if:set="egl_types"/>
-            <src path="${module.lwjgl}/opencl/src/templates/kotlin/opencl/CLTypes.kt" if:set="opencl_types"/>
             <src path="${module.lwjgl}/opengl/src/templates/kotlin/opengl/GLTypes.kt" if:set="opengl_types"/>
             <src path="${module.lwjgl}/opengl/src/templates/kotlin/opengl/GLXTypes.kt" if:set="opengl_types"/>
             <src path="${module.lwjgl}/opengl/src/templates/kotlin/opengl/WGLTypes.kt" if:set="opengl_types"/>
