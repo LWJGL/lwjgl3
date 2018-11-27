@@ -245,6 +245,7 @@ val bgfx_uniform_info_t_p = struct(Module.BGFX, "BGFXUniformInfo", nativeName = 
 val bgfx_attachment_t = struct(Module.BGFX, "BGFXAttachment", nativeName = "bgfx_attachment_t") {
     documentation = "Frame buffer texture attachment info."
 
+    bgfx_access_t("access", "access")
     bgfx_texture_handle_t("handle", "texture handle")
     uint16_t("mip", "mip level")
     uint16_t("layer", "cubemap side or depth layer/slice")
