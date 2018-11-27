@@ -21,7 +21,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code bActive} &ndash; whether or not this action is currently available to be bound in the active action set</li>
  * <li>{@code activeOrigin} &ndash; the origin that caused this action's current state</li>
- * <li>{@code boneCount} &ndash; the number of bones in the skeletal data</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -30,7 +29,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct InputSkeletalActionData_t {
  *     bool bActive;
  *     VRInputValueHandle_t activeOrigin;
- *     uint32_t boneCount;
  * }</code></pre>
  */
 @NativeType("struct InputSkeletalActionData_t")
@@ -45,14 +43,12 @@ public class InputSkeletalActionData extends Struct implements NativeResource {
     /** The struct member offsets. */
     public static final int
         BACTIVE,
-        ACTIVEORIGIN,
-        BONECOUNT;
+        ACTIVEORIGIN;
 
     static {
         Layout layout = __struct(
             __member(1),
-            __member(8),
-            __member(4)
+            __member(8)
         );
 
         SIZEOF = layout.getSize();
@@ -60,7 +56,6 @@ public class InputSkeletalActionData extends Struct implements NativeResource {
 
         BACTIVE = layout.offsetof(0);
         ACTIVEORIGIN = layout.offsetof(1);
-        BONECOUNT = layout.offsetof(2);
     }
 
     /**
@@ -82,9 +77,6 @@ public class InputSkeletalActionData extends Struct implements NativeResource {
     /** Returns the value of the {@code activeOrigin} field. */
     @NativeType("VRInputValueHandle_t")
     public long activeOrigin() { return nactiveOrigin(address()); }
-    /** Returns the value of the {@code boneCount} field. */
-    @NativeType("uint32_t")
-    public int boneCount() { return nboneCount(address()); }
 
     // -----------------------------------
 
@@ -233,8 +225,6 @@ public class InputSkeletalActionData extends Struct implements NativeResource {
     public static boolean nbActive(long struct) { return UNSAFE.getByte(null, struct + InputSkeletalActionData.BACTIVE) != 0; }
     /** Unsafe version of {@link #activeOrigin}. */
     public static long nactiveOrigin(long struct) { return UNSAFE.getLong(null, struct + InputSkeletalActionData.ACTIVEORIGIN); }
-    /** Unsafe version of {@link #boneCount}. */
-    public static int nboneCount(long struct) { return UNSAFE.getInt(null, struct + InputSkeletalActionData.BONECOUNT); }
 
     // -----------------------------------
 
@@ -280,9 +270,6 @@ public class InputSkeletalActionData extends Struct implements NativeResource {
         /** Returns the value of the {@code activeOrigin} field. */
         @NativeType("VRInputValueHandle_t")
         public long activeOrigin() { return InputSkeletalActionData.nactiveOrigin(address()); }
-        /** Returns the value of the {@code boneCount} field. */
-        @NativeType("uint32_t")
-        public int boneCount() { return InputSkeletalActionData.nboneCount(address()); }
 
     }
 

@@ -20,7 +20,7 @@ private fun PrintWriter.generateCapabilitiesClass(nativeClass: NativeClass) {
         .joinToString(",\n$t$t$t", prefix = "$t$t$t", postfix = ";"))
 
     println("\n$t${t}public ${nativeClass.capabilitiesClass}(long tableAddress) {")
-    println("$t$t${t}PointerBuffer table = MemoryUtil.memPointerBuffer(tableAddress, ${nativeClass.functions.count()});")
+    println("$t$t${t}PointerBuffer table = memPointerBuffer(tableAddress, ${nativeClass.functions.count()});")
     println(nativeClass.functions
         .mapIndexed { i, function -> "${function.simpleName} = table.get($i);" }
         .joinToString("\n$t$t$t", prefix = "$t$t$t"))

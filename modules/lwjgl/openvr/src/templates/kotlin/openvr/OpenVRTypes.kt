@@ -56,6 +56,8 @@ val EVRSubmitFlags = "EVRSubmitFlags".enumType
 val EVRTrackedCameraFrameType = "EVRTrackedCameraFrameType".enumType
 val EVRSkeletalTransformSpace = "EVRSkeletalTransformSpace".enumType
 val EVRSkeletalMotionRange = "EVRSkeletalMotionRange".enumType
+val EVRSkeletalReferencePose = "EVRSkeletalReferencePose".enumType
+val EVRSkeletalTrackingLevel = "EVRSkeletalTrackingLevel".enumType
 
 val ChaperoneCalibrationState = "ChaperoneCalibrationState".enumType
 
@@ -66,7 +68,9 @@ val EDualAnalogWhich = "EDualAnalogWhich".enumType
 val EGamepadTextInputMode = "EGamepadTextInputMode".enumType
 val EGamepadTextInputLineMode = "EGamepadTextInputLineMode".enumType
 val EHiddenAreaMeshType = "EHiddenAreaMeshType".enumType
+val EIOBufferMode = "EIOBufferMode".enumType
 val EOverlayDirection = "EOverlayDirection".enumType
+val EShowUIType = "EShowUIType".enumType
 val ETextureType = "ETextureType".enumType
 val ETrackedControllerRole = "ETrackedControllerRole".enumType
 val ETrackedDeviceClass = "ETrackedDeviceClass".enumType
@@ -74,7 +78,6 @@ val ETrackedDeviceProperty = "ETrackedDeviceProperty".enumType
 val ETrackedPropertyError = "ETrackedPropertyError".enumType
 val ETrackingResult = "ETrackingResult".enumType
 val ETrackingUniverseOrigin = "ETrackingUniverseOrigin".enumType
-val EIOBufferMode = "EIOBufferMode".enumType
 
 val VRMessageOverlayResponse = "VRMessageOverlayResponse".enumType
 val VROverlayFlags = "VROverlayFlags".enumType
@@ -97,6 +100,7 @@ val DriverId_t = typedef(uint32_t, "DriverId_t")
 val VRComponentProperties = typedef(uint32_t, "VRComponentProperties")
 val VRNotificationId = typedef(uint32_t, "VRNotificationId")
 val VROverlayHandle_t = typedef(uint64_t, "VROverlayHandle_t")
+val BoneIndex_t = typedef(int32_t, "BoneIndex_t")
 val IOBufferHandle_t = typedef(uint64_t, "IOBufferHandle_t")
 
 val SpatialAnchorHandle_t = typedef(uint32_t, "SpatialAnchorHandle_t")
@@ -201,6 +205,8 @@ val VREvent_Reserved_t = struct(Module.OPENVR, "VREventReserved", nativeName = "
     uint64_t("reserved1", "")
     uint64_t("reserved2", "")
     uint64_t("reserved3", "")
+    uint64_t("reserved4", "")
+    uint64_t("reserved5", "")
 }
 
 val VREvent_Controller_t = struct(Module.OPENVR, "VREventController", nativeName = "VREvent_Controller_t", mutable = false) {
@@ -356,6 +362,19 @@ val VREvent_InputActionManifestLoad_t = struct(Module.OPENVR, "VREventInputActio
 
 val VREvent_SpatialAnchor_t = struct(Module.OPENVR, "VREventSpatialAnchor", nativeName = "VREvent_SpatialAnchor_t", mutable = false) {
 	SpatialAnchorHandle_t("unHandle", "")
+}
+
+val VREvent_ProgressUpdate_t = struct(Module.OPENVR, "VREventProgressUpdate", nativeName = "VREvent_ProgressUpdate_t", mutable = false) {
+	uint64_t("ulApplicationPropertyContainer", "")
+	uint64_t("pathDevice", "")
+	uint64_t("pathInputSource", "")
+	uint64_t("pathProgressAction", "")
+	uint64_t("pathIcon", "")
+	float("fProgress", "")
+}
+
+val VREvent_ShowUI_t = struct(Module.OPENVR, "VREventShowUI", nativeName = "VREvent_ShowUI_t", mutable = false) {
+	EShowUIType("eType", "")
 }
 
 val VREvent_Data_t = union(Module.OPENVR, "VREventData", nativeName = "VREvent_Data_t", mutable = false) {
@@ -669,7 +688,6 @@ val InputPoseActionData_t = struct(Module.OPENVR, "InputPoseActionData", nativeN
 val InputSkeletalActionData_t = struct(Module.OPENVR, "InputSkeletalActionData", nativeName = "InputSkeletalActionData_t", mutable = false) {
     bool("bActive", "whether or not this action is currently available to be bound in the active action set")
 	VRInputValueHandle_t("activeOrigin", "the origin that caused this action's current state")
-    uint32_t("boneCount", "the number of bones in the skeletal data")
 }
 
 val InputOriginInfo_t = struct(Module.OPENVR, "InputOriginInfo", nativeName = "InputOriginInfo_t", mutable = false) {
@@ -698,6 +716,27 @@ val VRActiveActionSet_t = struct(Module.OPENVR, "VRActiveActionSet", nativeName 
         other active action sets with a smaller priority.
         """
     )
+}
+
+val VRSkeletalSummaryData_t = struct(Module.OPENVR, "VRSkeletalSummaryData", nativeName = "VRSkeletalSummaryData_t", mutable = false) {
+    documentation = "Contains summary information about the current skeletal pose."
+
+	float(
+        "flFingerCurl",
+        """
+        The amount that each finger is 'curled' inwards towards the palm.
+
+        In the case of the thumb, this represents how much the thumb is wrapped around the fist. 0 means straight, 1 means fully curled.
+        """
+    )[5]
+	float(
+        "flFingerSplay",
+        """
+        The amount that each pair of adjacent fingers are separated.
+
+        0 means the digits are touching, 1 means they are fully separated.
+        """
+    )[4]
 }
 
 val SpatialAnchorPose_t = struct(Module.OPENVR, "SpatialAnchorPose", nativeName = "SpatialAnchorPose_t", mutable = false) {

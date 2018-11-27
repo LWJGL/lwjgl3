@@ -563,7 +563,7 @@ val VROverlay = "VROverlay".nativeClass(
 
         VROverlayHandle_t("ulOverlay", ""),
         EDualAnalogWhich("eWhich", "", "EDualAnalogWhich_\\w+"),
-        HmdVector2_t.p("pvCenter", ""), // TODO: bug in C header? (struct HmdVector2_t & vCenter)
+        HmdVector2_t.p("pvCenter", ""),
         float("fRadius", "")
     )
 

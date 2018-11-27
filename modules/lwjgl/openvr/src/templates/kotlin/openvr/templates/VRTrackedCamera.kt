@@ -48,6 +48,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         "",
 
         TrackedDeviceIndex_t("nDeviceIndex", ""),
+        uint32_t("nCameraIndex", ""),
         EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
         Check(1)..HmdVector2_t.p("pFocalLength", ""),
         Check(1)..HmdVector2_t.p("pCenter", "")
@@ -58,6 +59,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         "",
 
         TrackedDeviceIndex_t("nDeviceIndex", ""),
+        uint32_t("nCameraIndex", ""),
         EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
         float("flZNear", ""),
         float("flZFar", ""),
@@ -139,7 +141,7 @@ val VRTrackedCamera = "VRTrackedCamera".nativeClass(
         "Access a shared GL texture for the specified tracked camera stream.",
 
         TrackedCameraHandle_t("hTrackedCamera", ""),
-        EVRTrackedCameraFrameType("eFrameType", ""),
+        EVRTrackedCameraFrameType("eFrameType", "", "EVRTrackedCameraFrameType_\\w+"),
         Check(1)..glUInt_t.p("pglTextureId", ""),
         CameraVideoStreamFrameHeader_t.p("pFrameHeader", ""),
         Expression("CameraVideoStreamFrameHeader.SIZEOF")..uint32_t("nFrameHeaderSize", "")

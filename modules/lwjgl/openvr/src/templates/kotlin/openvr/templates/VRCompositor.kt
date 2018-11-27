@@ -443,4 +443,16 @@ typedef struct HmdColor_t
 
         returnDoc = "#EVRCompositorError_VRCompositorError_RequestFailed if {@code SetExplicitTimingMode} is not enabled"
     )
+
+    bool(
+        "IsMotionSmoothingEnabled",
+        """
+        Indicates whether or not motion smoothing is enabled by the user settings.
+
+        If you want to know if motion smoothing actually triggered due to a late frame, check ##Compositor_FrameTiming {@code m_nReprojectionFlags} &amp;
+        {@code VRCompositor_ReprojectionMotion} instead.
+        """,
+
+        void()
+    )
 }

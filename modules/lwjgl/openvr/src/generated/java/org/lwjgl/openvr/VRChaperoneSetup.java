@@ -206,6 +206,22 @@ public class VRChaperoneSetup {
         nVRChaperoneSetup_SetWorkingCollisionBoundsInfo(pQuadsBuffer.address(), pQuadsBuffer.remaining());
     }
 
+    // --- [ VRChaperoneSetup_SetWorkingPerimeter ] ---
+
+    /** Unsafe version of: {@link #VRChaperoneSetup_SetWorkingPerimeter SetWorkingPerimeter} */
+    public static void nVRChaperoneSetup_SetWorkingPerimeter(long pPointBuffer, int unPointCount) {
+        long __functionAddress = OpenVR.VRChaperoneSetup.SetWorkingPerimeter;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(__functionAddress, pPointBuffer, unPointCount);
+    }
+
+    /** Sets the Collision Bounds in the working copy */
+    public static void VRChaperoneSetup_SetWorkingPerimeter(@NativeType("HmdVector2_t *") HmdVector2.Buffer pPointBuffer) {
+        nVRChaperoneSetup_SetWorkingPerimeter(pPointBuffer.address(), pPointBuffer.remaining());
+    }
+
     // --- [ VRChaperoneSetup_SetWorkingSeatedZeroPoseToRawTrackingPose ] ---
 
     /** Unsafe version of: {@link #VRChaperoneSetup_SetWorkingSeatedZeroPoseToRawTrackingPose SetWorkingSeatedZeroPoseToRawTrackingPose} */
@@ -270,73 +286,6 @@ public class VRChaperoneSetup {
         return nVRChaperoneSetup_GetLiveSeatedZeroPoseToRawTrackingPose(pmatSeatedZeroPoseToRawTrackingPose.address());
     }
 
-    // --- [ VRChaperoneSetup_SetWorkingCollisionBoundsTagsInfo ] ---
-
-    public static void nVRChaperoneSetup_SetWorkingCollisionBoundsTagsInfo(long pTagsBuffer, int unTagCount) {
-        long __functionAddress = OpenVR.VRChaperoneSetup.SetWorkingCollisionBoundsTagsInfo;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(__functionAddress, pTagsBuffer, unTagCount);
-    }
-
-    public static void VRChaperoneSetup_SetWorkingCollisionBoundsTagsInfo(@NativeType("uint8_t *") ByteBuffer pTagsBuffer) {
-        nVRChaperoneSetup_SetWorkingCollisionBoundsTagsInfo(memAddress(pTagsBuffer), pTagsBuffer.remaining());
-    }
-
-    // --- [ VRChaperoneSetup_GetLiveCollisionBoundsTagsInfo ] ---
-
-    public static boolean nVRChaperoneSetup_GetLiveCollisionBoundsTagsInfo(long pTagsBuffer, long punTagCount) {
-        long __functionAddress = OpenVR.VRChaperoneSetup.GetLiveCollisionBoundsTagsInfo;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callPPZ(__functionAddress, pTagsBuffer, punTagCount);
-    }
-
-    @NativeType("bool")
-    public static boolean VRChaperoneSetup_GetLiveCollisionBoundsTagsInfo(@Nullable @NativeType("uint8_t *") ByteBuffer pTagsBuffer, @NativeType("uint32_t *") IntBuffer punTagCount) {
-        if (CHECKS) {
-            check(punTagCount, 1);
-            checkSafe(pTagsBuffer, punTagCount.get(punTagCount.position()));
-        }
-        return nVRChaperoneSetup_GetLiveCollisionBoundsTagsInfo(memAddressSafe(pTagsBuffer), memAddress(punTagCount));
-    }
-
-    // --- [ VRChaperoneSetup_SetWorkingPhysicalBoundsInfo ] ---
-
-    public static boolean nVRChaperoneSetup_SetWorkingPhysicalBoundsInfo(long pQuadsBuffer, int unQuadsCount) {
-        long __functionAddress = OpenVR.VRChaperoneSetup.SetWorkingPhysicalBoundsInfo;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callPZ(__functionAddress, pQuadsBuffer, unQuadsCount);
-    }
-
-    @NativeType("bool")
-    public static boolean VRChaperoneSetup_SetWorkingPhysicalBoundsInfo(@NativeType("HmdQuad_t *") HmdQuad.Buffer pQuadsBuffer) {
-        return nVRChaperoneSetup_SetWorkingPhysicalBoundsInfo(pQuadsBuffer.address(), pQuadsBuffer.remaining());
-    }
-
-    // --- [ VRChaperoneSetup_GetLivePhysicalBoundsInfo ] ---
-
-    public static boolean nVRChaperoneSetup_GetLivePhysicalBoundsInfo(long pQuadsBuffer, long punQuadsCount) {
-        long __functionAddress = OpenVR.VRChaperoneSetup.GetLivePhysicalBoundsInfo;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        return callPPZ(__functionAddress, pQuadsBuffer, punQuadsCount);
-    }
-
-    @NativeType("bool")
-    public static boolean VRChaperoneSetup_GetLivePhysicalBoundsInfo(@Nullable @NativeType("HmdQuad_t *") HmdQuad.Buffer pQuadsBuffer, @NativeType("uint32_t *") IntBuffer punQuadsCount) {
-        if (CHECKS) {
-            check(punQuadsCount, 1);
-            checkSafe(pQuadsBuffer, punQuadsCount.get(punQuadsCount.position()));
-        }
-        return nVRChaperoneSetup_GetLivePhysicalBoundsInfo(memAddressSafe(pQuadsBuffer), memAddress(punQuadsCount));
-    }
-
     // --- [ VRChaperoneSetup_ExportLiveToBuffer ] ---
 
     public static boolean nVRChaperoneSetup_ExportLiveToBuffer(long pBuffer, long pnBufferLength) {
@@ -369,6 +318,28 @@ public class VRChaperoneSetup {
     @NativeType("bool")
     public static boolean VRChaperoneSetup_ImportFromBufferToWorking(@NativeType("char const *") ByteBuffer pBuffer, @NativeType("uint32_t") int nImportFlags) {
         return nVRChaperoneSetup_ImportFromBufferToWorking(memAddress(pBuffer), nImportFlags);
+    }
+
+    // --- [ VRChaperoneSetup_ShowWorkingSetPreview ] ---
+
+    /** Shows the chaperone data in the working set to preview in the compositor. */
+    public static void VRChaperoneSetup_ShowWorkingSetPreview() {
+        long __functionAddress = OpenVR.VRChaperoneSetup.ShowWorkingSetPreview;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callV(__functionAddress);
+    }
+
+    // --- [ VRChaperoneSetup_HideWorkingSetPreview ] ---
+
+    /** Hides the chaperone data in the working set to preview in the compositor (if it was visible). */
+    public static void VRChaperoneSetup_HideWorkingSetPreview() {
+        long __functionAddress = OpenVR.VRChaperoneSetup.HideWorkingSetPreview;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callV(__functionAddress);
     }
 
 }

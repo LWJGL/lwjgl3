@@ -24,6 +24,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint64_t reserved1;
  *     uint64_t reserved2;
  *     uint64_t reserved3;
+ *     uint64_t reserved4;
+ *     uint64_t reserved5;
  * }</code></pre>
  */
 @NativeType("struct VREvent_Reserved_t")
@@ -40,10 +42,14 @@ public class VREventReserved extends Struct {
         RESERVED0,
         RESERVED1,
         RESERVED2,
-        RESERVED3;
+        RESERVED3,
+        RESERVED4,
+        RESERVED5;
 
     static {
         Layout layout = __struct(
+            __member(8),
+            __member(8),
             __member(8),
             __member(8),
             __member(8),
@@ -57,6 +63,8 @@ public class VREventReserved extends Struct {
         RESERVED1 = layout.offsetof(1);
         RESERVED2 = layout.offsetof(2);
         RESERVED3 = layout.offsetof(3);
+        RESERVED4 = layout.offsetof(4);
+        RESERVED5 = layout.offsetof(5);
     }
 
     /**
@@ -84,6 +92,12 @@ public class VREventReserved extends Struct {
     /** Returns the value of the {@code reserved3} field. */
     @NativeType("uint64_t")
     public long reserved3() { return nreserved3(address()); }
+    /** Returns the value of the {@code reserved4} field. */
+    @NativeType("uint64_t")
+    public long reserved4() { return nreserved4(address()); }
+    /** Returns the value of the {@code reserved5} field. */
+    @NativeType("uint64_t")
+    public long reserved5() { return nreserved5(address()); }
 
     // -----------------------------------
 
@@ -124,6 +138,10 @@ public class VREventReserved extends Struct {
     public static long nreserved2(long struct) { return UNSAFE.getLong(null, struct + VREventReserved.RESERVED2); }
     /** Unsafe version of {@link #reserved3}. */
     public static long nreserved3(long struct) { return UNSAFE.getLong(null, struct + VREventReserved.RESERVED3); }
+    /** Unsafe version of {@link #reserved4}. */
+    public static long nreserved4(long struct) { return UNSAFE.getLong(null, struct + VREventReserved.RESERVED4); }
+    /** Unsafe version of {@link #reserved5}. */
+    public static long nreserved5(long struct) { return UNSAFE.getLong(null, struct + VREventReserved.RESERVED5); }
 
     // -----------------------------------
 
@@ -175,6 +193,12 @@ public class VREventReserved extends Struct {
         /** Returns the value of the {@code reserved3} field. */
         @NativeType("uint64_t")
         public long reserved3() { return VREventReserved.nreserved3(address()); }
+        /** Returns the value of the {@code reserved4} field. */
+        @NativeType("uint64_t")
+        public long reserved4() { return VREventReserved.nreserved4(address()); }
+        /** Returns the value of the {@code reserved5} field. */
+        @NativeType("uint64_t")
+        public long reserved5() { return VREventReserved.nreserved5(address()); }
 
     }
 

@@ -110,8 +110,53 @@ val VRInput = "VRInput".nativeClass(
 
         VRActionHandle_t("action", ""),
         InputSkeletalActionData_t.p("pActionData", ""),
-        Expression("InputSkeletalActionData.SIZEOF")..uint32_t("unActionDataSize", ""),
-        VRInputValueHandle_t("ulRestrictToDevice", "")
+        Expression("InputSkeletalActionData.SIZEOF")..uint32_t("unActionDataSize", "")
+    )
+
+    EVRInputError(
+        "GetBoneCount",
+        "Reads the number of bones in skeleton associated with the given action.",
+
+        VRActionHandle_t("action", ""),
+        Check(1)..uint32_t.p("pBoneCount", "")
+    )
+
+    EVRInputError(
+        "GetBoneHierarchy",
+        "Fills the given array with the index of each bone's parent in the skeleton associated with the given action.",
+
+        VRActionHandle_t("action", ""),
+        BoneIndex_t.p("pParentIndices", ""),
+        AutoSize("pParentIndices")..uint32_t("unIndexArrayCount", "")
+    )
+
+    EVRInputError(
+        "GetBoneName",
+        "Fills the given buffer with the name of the bone at the given index in the skeleton associated with the given action.",
+
+        VRActionHandle_t("action", ""),
+        BoneIndex_t("nBoneIndex", ""),
+        charASCII.p("pchBoneName", ""),
+        AutoSize("pchBoneName")..uint32_t("unNameBufferSize", "")
+    )
+
+    EVRInputError(
+        "GetSkeletalReferenceTransforms",
+        "Fills the given buffer with the transforms for a specific static skeletal reference pose.",
+
+        VRActionHandle_t("action", ""),
+        EVRSkeletalTransformSpace("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
+        EVRSkeletalReferencePose("eReferencePose", "", "EVRSkeletalReferencePose_\\w+"),
+        VRBoneTransform_t.p("pTransformArray", ""),
+        AutoSize("pTransformArray")..uint32_t("unTransformArrayCount", "")
+    )
+
+    EVRInputError(
+        "GetSkeletalTrackingLevel",
+        "Reads the level of accuracy to which the controller is able to track the user to recreate a skeletal pose.",
+
+        VRActionHandle_t("action", ""),
+        Check(1)..EVRSkeletalTrackingLevel.p("pSkeletalTrackingLevel", "")
     )
 
     EVRInputError(
@@ -122,8 +167,15 @@ val VRInput = "VRInput".nativeClass(
         EVRSkeletalTransformSpace("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
         EVRSkeletalMotionRange("eMotionRange", "", "EVRSkeletalMotionRange_\\w+"),
         VRBoneTransform_t.p("pTransformArray", ""),
-        AutoSize("pTransformArray")..uint32_t("unTransformArrayCount", ""),
-        VRInputValueHandle_t("ulRestrictToDevice", "")
+        AutoSize("pTransformArray")..uint32_t("unTransformArrayCount", "")
+    )
+
+    EVRInputError(
+        "GetSkeletalSummaryData",
+        "Reads summary information about the current pose of the skeleton associated with the given action.",
+
+        VRActionHandle_t("action", ""),
+        VRSkeletalSummaryData_t.p("pSkeletalSummaryData", "")
     )
 
     EVRInputError(
@@ -134,12 +186,10 @@ val VRInput = "VRInput".nativeClass(
         """,
 
         VRActionHandle_t("action", ""),
-        EVRSkeletalTransformSpace("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
         EVRSkeletalMotionRange("eMotionRange", "", "EVRSkeletalMotionRange_\\w+"),
         nullable..void.p("pvCompressedData", ""),
         AutoSize("pvCompressedData")..uint32_t("unCompressedSize", ""),
-        Check(1)..nullable..uint32_t.p("punRequiredCompressedSize", ""),
-        VRInputValueHandle_t("ulRestrictToDevice", "")
+        Check(1)..nullable..uint32_t.p("punRequiredCompressedSize", "")
     )
 
     EVRInputError(
@@ -148,7 +198,7 @@ val VRInput = "VRInput".nativeClass(
 
         void.p("pvCompressedBuffer", ""),
         AutoSize("pvCompressedBuffer")..uint32_t("unCompressedBufferSize", ""),
-        Check(1)..EVRSkeletalTransformSpace.p("peTransformSpace", ""),
+        EVRSkeletalTransformSpace("eTransformSpace", "", "EVRSkeletalTransformSpace_\\w+"),
         VRBoneTransform_t.p("pTransformArray", ""),
         AutoSize("pTransformArray")..uint32_t("unTransformArrayCount", "")
     )
@@ -181,7 +231,15 @@ val VRInput = "VRInput".nativeClass(
 
         VRInputValueHandle_t("origin", ""),
         charASCII.p("pchNameArray", ""),
-        AutoSize("pchNameArray")..uint32_t("unNameArraySize", "")
+        AutoSize("pchNameArray")..uint32_t("unNameArraySize", ""),
+        int32_t(
+            "unStringSectionsToInclude",
+            """
+            a bitfield of values in {@code EVRInputStringBits} that allows the application to specify which parts of the origin's information it wants a string
+            for
+            """,
+            "EVRInputStringBits_\\w+", LinkMode.BITFIELD
+        )
     )
 
     EVRInputError(

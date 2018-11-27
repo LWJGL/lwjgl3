@@ -106,6 +106,14 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
     )
 
     void(
+        "SetWorkingPerimeter",
+        "Sets the Collision Bounds in the working copy",
+
+        HmdVector2_t.p("pPointBuffer", ""),
+        AutoSize("pPointBuffer")..uint32_t("unPointCount", "")
+    )
+
+    void(
         "SetWorkingSeatedZeroPoseToRawTrackingPose",
         "Sets the preferred seated position in the working copy.",
 
@@ -133,38 +141,6 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         HmdMatrix34_t.p("pmatSeatedZeroPoseToRawTrackingPose", "")
     )
 
-    void(
-        "SetWorkingCollisionBoundsTagsInfo",
-        "",
-
-        uint8_t.p("pTagsBuffer", ""),
-        AutoSize("pTagsBuffer")..uint32_t("unTagCount", "")
-    )
-
-    bool(
-        "GetLiveCollisionBoundsTagsInfo",
-        "",
-
-        nullable..uint8_t.p("pTagsBuffer", ""),
-        AutoSize("pTagsBuffer")..Check(1)..uint32_t.p("punTagCount", "")
-    )
-
-    bool(
-        "SetWorkingPhysicalBoundsInfo",
-        "",
-
-        HmdQuad_t.p("pQuadsBuffer", ""),
-        AutoSize("pQuadsBuffer")..uint32_t("unQuadsCount", "")
-    )
-
-    bool(
-        "GetLivePhysicalBoundsInfo",
-        "",
-
-        nullable..HmdQuad_t.p("pQuadsBuffer", ""),
-        AutoSize("pQuadsBuffer")..Check(1)..uint32_t.p("punQuadsCount", "")
-    )
-
     bool(
         "ExportLiveToBuffer",
         "",
@@ -180,4 +156,7 @@ val VRChaperoneSetup = "VRChaperoneSetup".nativeClass(
         Unsafe..char.const.p("pBuffer", ""),
         uint32_t("nImportFlags", "")
     )
+
+    void("ShowWorkingSetPreview", "Shows the chaperone data in the working set to preview in the compositor.", void())
+    void("HideWorkingSetPreview", "Hides the chaperone data in the working set to preview in the compositor (if it was visible).", void())
 }
