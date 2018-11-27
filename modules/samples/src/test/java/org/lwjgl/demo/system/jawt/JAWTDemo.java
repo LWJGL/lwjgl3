@@ -44,7 +44,7 @@ public final class JAWTDemo {
         });
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(e -> {
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE && e.getID() == KeyEvent.KEY_PRESSED) {
                 frame.dispose();
 
                 glfwTerminate();
@@ -58,6 +58,7 @@ public final class JAWTDemo {
 
         frame.setLayout(new BorderLayout());
         frame.add(canvas, BorderLayout.CENTER);
+        frame.add(new JTextField(), BorderLayout.SOUTH);
 
         frame.pack();
         frame.setVisible(true);
