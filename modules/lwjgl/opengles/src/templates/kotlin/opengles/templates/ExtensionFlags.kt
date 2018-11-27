@@ -441,6 +441,22 @@ val KHR_texture_compression_astc_sliced_3d = EXT_FLAG.nativeClassGLES("KHR_textu
         """
 }
 
+val NV_compute_shader_derivatives = EXT_FLAG.nativeClassGLES("NV_compute_shader_derivatives", postfix = NV) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension adds OpenGL ES API support for the OpenGL Shading Language (GLSL) extension {@code "NV_compute_shader_derivatives"}.
+
+        That extension, when enabled, allows applications to use derivatives in compute shaders. It adds compute shader support for explicit derivative
+        built-in functions like {@code dFdx()}, automatic derivative computation in texture lookup functions like {@code texture()}, use of the optional LOD
+        bias parameter to adjust the computed level of detail values in texture lookup functions, and the texture level of detail query function
+        {@code textureQueryLod()}.
+
+        Requires ${GLES32.core}.
+        """
+}
+
 val NV_explicit_attrib_location = EXT_FLAG.nativeClassGLES("NV_explicit_attrib_location", postfix = NV) {
     documentation =
         """
@@ -950,5 +966,14 @@ val QCOM_shader_framebuffer_fetch_rate = EXT_FLAG.nativeClassGLES("QCOM_shader_f
             "gl_SamplePosition",
             "interpolateAtSample()"
         )}
+        """
+}
+
+val QCOM_YUV_texture_gather = EXT_FLAG.nativeClassGLES("QCOM_YUV_texture_gather", postfix = QCOM) {
+    documentation =
+        """
+        Extension ${EXT_gpu_shader5.cap} introduced the texture gather built-in functions. Extension ${EXT_YUV_target.link} adds the ability to sample from YUV
+        textures, but does not include gather functions. This extension allows gather function to be used in combination with the YUV textures exposed in
+        {@code EXT_YUV_target}.
         """
 }

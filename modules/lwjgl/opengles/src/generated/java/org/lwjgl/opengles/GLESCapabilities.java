@@ -1496,6 +1496,19 @@ public final class GLESCapabilities {
     public final boolean GL_NV_blend_minmax_factor;
     /** When true, {@link NVClipSpaceWScaling} is supported. */
     public final boolean GL_NV_clip_space_w_scaling;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_compute_shader_derivatives.txt">NV_compute_shader_derivatives</a> extension is supported.
+     * 
+     * <p>This extension adds OpenGL ES API support for the OpenGL Shading Language (GLSL) extension {@code "NV_compute_shader_derivatives"}.</p>
+     * 
+     * <p>That extension, when enabled, allows applications to use derivatives in compute shaders. It adds compute shader support for explicit derivative
+     * built-in functions like {@code dFdx()}, automatic derivative computation in texture lookup functions like {@code texture()}, use of the optional LOD
+     * bias parameter to adjust the computed level of detail values in texture lookup functions, and the texture level of detail query function
+     * {@code textureQueryLod()}.</p>
+     * 
+     * <p>Requires {@link GLES32 GLES 3.2}.</p>
+     */
+    public final boolean GL_NV_compute_shader_derivatives;
     /** When true, {@link NVConditionalRender} is supported. */
     public final boolean GL_NV_conditional_render;
     /** When true, {@link NVConservativeRaster} is supported. */
@@ -2165,6 +2178,12 @@ public final class GLESCapabilities {
     public final boolean GL_QCOM_tiled_rendering;
     /** When true, {@link QCOMWriteonlyRendering} is supported. */
     public final boolean GL_QCOM_writeonly_rendering;
+    /**
+     * Extension {@link #GL_EXT_gpu_shader5 EXT_gpu_shader5} introduced the texture gather built-in functions. Extension {@link EXTYUVTarget EXT_YUV_target} adds the ability to sample from YUV
+     * textures, but does not include gather functions. This extension allows gather function to be used in combination with the YUV textures exposed in
+     * {@code EXT_YUV_target}.
+     */
+    public final boolean GL_QCOM_YUV_texture_gather;
     /** When true, {@link VIVShaderBinary} is supported. */
     public final boolean GL_VIV_shader_binary;
 
@@ -3184,6 +3203,7 @@ public final class GLESCapabilities {
         GL_NV_blend_equation_advanced_coherent = ext.contains("GL_NV_blend_equation_advanced_coherent");
         GL_NV_blend_minmax_factor = ext.contains("GL_NV_blend_minmax_factor");
         GL_NV_clip_space_w_scaling = ext.contains("GL_NV_clip_space_w_scaling") && checkExtension("GL_NV_clip_space_w_scaling", NVClipSpaceWScaling.isAvailable(this));
+        GL_NV_compute_shader_derivatives = ext.contains("GL_NV_compute_shader_derivatives");
         GL_NV_conditional_render = ext.contains("GL_NV_conditional_render") && checkExtension("GL_NV_conditional_render", NVConditionalRender.isAvailable(this));
         GL_NV_conservative_raster = ext.contains("GL_NV_conservative_raster") && checkExtension("GL_NV_conservative_raster", NVConservativeRaster.isAvailable(this));
         GL_NV_conservative_raster_pre_snap = ext.contains("GL_NV_conservative_raster_pre_snap");
@@ -3305,6 +3325,7 @@ public final class GLESCapabilities {
         GL_QCOM_texture_foveated_subsampled_layout = ext.contains("GL_QCOM_texture_foveated_subsampled_layout");
         GL_QCOM_tiled_rendering = ext.contains("GL_QCOM_tiled_rendering") && checkExtension("GL_QCOM_tiled_rendering", QCOMTiledRendering.isAvailable(this));
         GL_QCOM_writeonly_rendering = ext.contains("GL_QCOM_writeonly_rendering");
+        GL_QCOM_YUV_texture_gather = ext.contains("GL_QCOM_YUV_texture_gather");
         GL_VIV_shader_binary = ext.contains("GL_VIV_shader_binary");
 
         addresses = ThreadLocalUtil.getAddressesFromCapabilities(this);
