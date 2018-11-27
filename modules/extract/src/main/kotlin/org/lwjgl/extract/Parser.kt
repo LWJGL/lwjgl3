@@ -154,7 +154,10 @@ internal class Enum(
                 }
 
                 val v = if (renderValue) {
-                    ", \"${it.value}\""
+                    if (it.value.startsWith("0x") && it.value.length == 10)
+                        ", ${it.value}"
+                    else
+                        ", \"${it.value}\""
                 } else {
                     ""
                 }
