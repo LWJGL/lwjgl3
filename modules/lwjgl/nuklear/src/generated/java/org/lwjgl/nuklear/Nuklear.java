@@ -1375,7 +1375,7 @@ public class Nuklear {
     public static native int nnk_begin_titled(long ctx, long name, long title, long bounds, int flags);
 
     /**
-     * Extended window start with separated title and identifier to allow multiple windows with same name but not title.
+     * Extended window start with separated title and identifier to allow multiple windows with same title but not name.
      *
      * @param ctx   the nuklear context
      * @param flags one or more of:<br><table><tr><td>{@link #NK_WINDOW_PRIVATE WINDOW_PRIVATE}</td><td>{@link #NK_WINDOW_DYNAMIC WINDOW_DYNAMIC}</td><td>{@link #NK_WINDOW_ROM WINDOW_ROM}</td><td>{@link #NK_WINDOW_HIDDEN WINDOW_HIDDEN}</td><td>{@link #NK_WINDOW_CLOSED WINDOW_CLOSED}</td></tr><tr><td>{@link #NK_WINDOW_MINIMIZED WINDOW_MINIMIZED}</td><td>{@link #NK_WINDOW_REMOVE_ROM WINDOW_REMOVE_ROM}</td></tr></table>
@@ -1390,7 +1390,7 @@ public class Nuklear {
     }
 
     /**
-     * Extended window start with separated title and identifier to allow multiple windows with same name but not title.
+     * Extended window start with separated title and identifier to allow multiple windows with same title but not name.
      *
      * @param ctx   the nuklear context
      * @param flags one or more of:<br><table><tr><td>{@link #NK_WINDOW_PRIVATE WINDOW_PRIVATE}</td><td>{@link #NK_WINDOW_DYNAMIC WINDOW_DYNAMIC}</td><td>{@link #NK_WINDOW_ROM WINDOW_ROM}</td><td>{@link #NK_WINDOW_HIDDEN WINDOW_HIDDEN}</td><td>{@link #NK_WINDOW_CLOSED WINDOW_CLOSED}</td></tr><tr><td>{@link #NK_WINDOW_MINIMIZED WINDOW_MINIMIZED}</td><td>{@link #NK_WINDOW_REMOVE_ROM WINDOW_REMOVE_ROM}</td></tr></table>
@@ -1427,7 +1427,7 @@ public class Nuklear {
     public static native long nnk_window_find(long ctx, long name);
 
     /**
-     * Finds and returns the window with give name.
+     * Finds and returns a window from passed name.
      *
      * @param ctx the nuklear context
      */
@@ -1442,7 +1442,7 @@ public class Nuklear {
     }
 
     /**
-     * Finds and returns the window with give name.
+     * Finds and returns a window from passed name.
      *
      * @param ctx the nuklear context
      */
@@ -6222,7 +6222,7 @@ public class Nuklear {
     public static native void nnk_input_begin(long ctx);
 
     /**
-     * Begins the input mirroring process. Needs to be called before all other {@code nk_input_xxx} calls
+     * Begins the input mirroring process by resetting text, scroll, mouse, previous mouse position and movement as well as key state transitions.
      *
      * @param ctx the nuklear context
      */
@@ -6236,7 +6236,7 @@ public class Nuklear {
     public static native void nnk_input_motion(long ctx, int x, int y);
 
     /**
-     * Mirrors mouse cursor position.
+     * Mirrors current mouse position to nuklear.
      *
      * @param ctx the nuklear context
      */
@@ -6250,7 +6250,7 @@ public class Nuklear {
     public static native void nnk_input_key(long ctx, int key, int down);
 
     /**
-     * Mirrors key state with either pressed or released.
+     * Mirrors the state of a specific key to nuklear.
      *
      * @param ctx the nuklear context
      * @param key one of:<br><table><tr><td>{@link #NK_KEY_NONE KEY_NONE}</td><td>{@link #NK_KEY_SHIFT KEY_SHIFT}</td><td>{@link #NK_KEY_CTRL KEY_CTRL}</td><td>{@link #NK_KEY_DEL KEY_DEL}</td><td>{@link #NK_KEY_ENTER KEY_ENTER}</td><td>{@link #NK_KEY_TAB KEY_TAB}</td></tr><tr><td>{@link #NK_KEY_BACKSPACE KEY_BACKSPACE}</td><td>{@link #NK_KEY_COPY KEY_COPY}</td><td>{@link #NK_KEY_CUT KEY_CUT}</td><td>{@link #NK_KEY_PASTE KEY_PASTE}</td><td>{@link #NK_KEY_UP KEY_UP}</td><td>{@link #NK_KEY_DOWN KEY_DOWN}</td></tr><tr><td>{@link #NK_KEY_LEFT KEY_LEFT}</td><td>{@link #NK_KEY_RIGHT KEY_RIGHT}</td><td>{@link #NK_KEY_TEXT_INSERT_MODE KEY_TEXT_INSERT_MODE}</td><td>{@link #NK_KEY_TEXT_REPLACE_MODE KEY_TEXT_REPLACE_MODE}</td><td>{@link #NK_KEY_TEXT_RESET_MODE KEY_TEXT_RESET_MODE}</td><td>{@link #NK_KEY_TEXT_LINE_START KEY_TEXT_LINE_START}</td></tr><tr><td>{@link #NK_KEY_TEXT_LINE_END KEY_TEXT_LINE_END}</td><td>{@link #NK_KEY_TEXT_START KEY_TEXT_START}</td><td>{@link #NK_KEY_TEXT_END KEY_TEXT_END}</td><td>{@link #NK_KEY_TEXT_UNDO KEY_TEXT_UNDO}</td><td>{@link #NK_KEY_TEXT_REDO KEY_TEXT_REDO}</td><td>{@link #NK_KEY_TEXT_SELECT_ALL KEY_TEXT_SELECT_ALL}</td></tr><tr><td>{@link #NK_KEY_TEXT_WORD_LEFT KEY_TEXT_WORD_LEFT}</td><td>{@link #NK_KEY_TEXT_WORD_RIGHT KEY_TEXT_WORD_RIGHT}</td><td>{@link #NK_KEY_SCROLL_START KEY_SCROLL_START}</td><td>{@link #NK_KEY_SCROLL_END KEY_SCROLL_END}</td><td>{@link #NK_KEY_SCROLL_DOWN KEY_SCROLL_DOWN}</td><td>{@link #NK_KEY_SCROLL_UP KEY_SCROLL_UP}</td></tr></table>
@@ -6265,7 +6265,7 @@ public class Nuklear {
     public static native void nnk_input_button(long ctx, int id, int x, int y, int down);
 
     /**
-     * Mirrors mouse button state with either pressed or released.
+     * Mirrors the state of a specific mouse button to nuklear.
      *
      * @param ctx the nuklear context
      * @param id  one of:<br><table><tr><td>{@link #NK_BUTTON_LEFT BUTTON_LEFT}</td><td>{@link #NK_BUTTON_MIDDLE BUTTON_MIDDLE}</td><td>{@link #NK_BUTTON_RIGHT BUTTON_RIGHT}</td><td>{@link #NK_BUTTON_DOUBLE BUTTON_DOUBLE}</td></tr></table>
@@ -8609,7 +8609,7 @@ public class Nuklear {
     public static native long nnk__begin(long ctx);
 
     /**
-     * Returns the first draw command in the context draw command list to be drawn.
+     * Returns draw command pointer pointing to the next command inside the draw command list.
      *
      * @param ctx the nuklear context
      */
@@ -8826,7 +8826,7 @@ public class Nuklear {
     public static native long nnk__draw_begin(long ctx, long buffer);
 
     /**
-     * Returns the first vertex command in the context vertex draw list to be executed.
+     * Returns a draw vertex command buffer iterator to iterate over the vertex draw command buffer.
      *
      * @param ctx the nuklear context
      */

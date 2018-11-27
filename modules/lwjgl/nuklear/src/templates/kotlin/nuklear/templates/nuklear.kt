@@ -838,7 +838,7 @@ nk_style_pop_vec2(ctx);""")}
 
         intb(
             "begin_titled",
-            "Extended window start with separated title and identifier to allow multiple windows with same name but not title.",
+            "Extended window start with separated title and identifier to allow multiple windows with same title but not name.",
 
             ctx,
             charUTF8.const.p("name", ""),
@@ -856,7 +856,7 @@ nk_style_pop_vec2(ctx);""")}
 
         nk_window.p(
             "window_find",
-            "Finds and returns the window with give name.",
+            "Finds and returns a window from passed name.",
 
             ctx,
             charUTF8.const.p("name", "")
@@ -2695,14 +2695,14 @@ nk_style_pop_vec2(ctx);""")}
 
         void(
             "input_begin",
-            "Begins the input mirroring process. Needs to be called before all other {@code nk_input_xxx} calls",
+            "Begins the input mirroring process by resetting text, scroll, mouse, previous mouse position and movement as well as key state transitions.",
 
             ctx
         )
 
         void(
             "input_motion",
-            "Mirrors mouse cursor position.",
+            "Mirrors current mouse position to nuklear.",
 
             ctx,
             int("x", ""),
@@ -2711,7 +2711,7 @@ nk_style_pop_vec2(ctx);""")}
 
         void(
             "input_key",
-            "Mirrors key state with either pressed or released.",
+            "Mirrors the state of a specific key to nuklear.",
 
             ctx,
             nk_keys("key", "", Keys),
@@ -2720,7 +2720,7 @@ nk_style_pop_vec2(ctx);""")}
 
         void(
             "input_button",
-            "Mirrors mouse button state with either pressed or released.",
+            "Mirrors the state of a specific mouse button to nuklear.",
 
             ctx,
             nk_buttons("id", "", Buttons),
@@ -4374,7 +4374,7 @@ nk_style_pop_vec2(ctx);""")}
 
         nk_command.const.p(
             "_begin",
-            "Returns the first draw command in the context draw command list to be drawn.",
+            "Returns draw command pointer pointing to the next command inside the draw command list.",
 
             ctx
         )
@@ -4547,7 +4547,7 @@ nk_style_pop_vec2(ctx);""")}
 
         nk_draw_command.const.p(
             "_draw_begin",
-            "Returns the first vertex command in the context vertex draw list to be executed.",
+            "Returns a draw vertex command buffer iterator to iterate over the vertex draw command buffer.",
 
             cctx,
             nk_buffer.const.p("buffer", "")
