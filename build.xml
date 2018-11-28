@@ -1164,7 +1164,7 @@
         <release-module package="org.lwjgl.util.libdivide" name="libdivide" native-library="lwjgl_libdivide" title="libdivide" if:true="${binding.libdivide}"/>
 
         <!-- LLVM -->
-        <release-module package="org.lwjgl.llvm" name="llvm" title="LLVM/Clang" if:true="${binding.llvm}"/>
+        <release-module package="org.lwjgl.llvm" name="llvm" native-library="lwjgl_llvm" title="LLVM/Clang" if:true="${binding.llvm}"/>
 
         <!-- LMDB -->
         <release-module package="org.lwjgl.util.lmdb" name="lmdb" native-library="lwjgl_lmdb" title="LMDB" if:true="${binding.lmdb}"/>
