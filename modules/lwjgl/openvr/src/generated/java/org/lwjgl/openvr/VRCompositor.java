@@ -762,7 +762,7 @@ public class VRCompositor {
     /**
      * Indicates whether or not motion smoothing is enabled by the user settings.
      * 
-     * <p>If you want to know if motion smoothing actually triggered due to a late frame, check {@link Compositor_FrameTiming} {@code m_nReprojectionFlags} &amp;
+     * <p>If you want to know if motion smoothing actually triggered due to a late frame, check {@link CompositorFrameTiming} {@code m_nReprojectionFlags} &amp;
      * {@code VRCompositor_ReprojectionMotion} instead.</p>
      */
     @NativeType("bool")
