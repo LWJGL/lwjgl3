@@ -1799,7 +1799,7 @@ public final class MemoryUtil {
         return encodeASCII(text, nullTerminated, memAddress(target, offset));
     }
 
-    private static int encodeASCII(CharSequence text, boolean nullTerminated, long target) {
+    static int encodeASCII(CharSequence text, boolean nullTerminated, long target) {
         int len = text.length();
         for (int p = 0; p < len; p++) {
             UNSAFE.putByte(target + p, (byte)text.charAt(p));
@@ -1891,7 +1891,7 @@ public final class MemoryUtil {
         return encodeUTF8(text, nullTerminated, memAddress(target, offset));
     }
 
-    private static int encodeUTF8(CharSequence text, boolean nullTerminated, long target) {
+    static int encodeUTF8(CharSequence text, boolean nullTerminated, long target) {
         int i = 0, len = text.length(), p = 0;
 
         char c;
@@ -2073,7 +2073,7 @@ public final class MemoryUtil {
         return encodeUTF16(text, nullTerminated, memAddress(target, offset));
     }
 
-    private static int encodeUTF16(CharSequence text, boolean nullTerminated, long target) {
+    static int encodeUTF16(CharSequence text, boolean nullTerminated, long target) {
         int len = text.length();
         for (int i = 0; i < len; i++) {
             UNSAFE.putShort(target + 2 * i, (short)text.charAt(i));

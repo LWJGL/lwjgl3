@@ -612,9 +612,11 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public ByteBuffer ASCII(CharSequence text, boolean nullTerminated) {
-        ByteBuffer encoded = malloc(memLengthASCII(text, nullTerminated));
-        memASCII(text, nullTerminated, encoded);
-        return encoded;
+        int  length = memLengthASCII(text, nullTerminated);
+        long target = nmalloc(1, length);
+        encodeASCII(text, nullTerminated, target);
+
+        return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
     /** Like {@link #ASCII(CharSequence) ASCII}, but returns {@code null} if {@code text} is {@code null}. */
@@ -645,9 +647,10 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public ByteBuffer UTF8(CharSequence text, boolean nullTerminated) {
-        ByteBuffer encoded = malloc(memLengthUTF8(text, nullTerminated));
-        memUTF8(text, nullTerminated, encoded);
-        return encoded;
+        int  length = memLengthUTF8(text, nullTerminated);
+        long target = nmalloc(1, length);
+        encodeUTF8(text, nullTerminated, target);
+        return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
     /** Like {@link #UTF8(CharSequence) UTF8}, but returns {@code null} if {@code text} is {@code null}. */
@@ -678,9 +681,10 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public ByteBuffer UTF16(CharSequence text, boolean nullTerminated) {
-        ByteBuffer encoded = malloc(2, memLengthUTF16(text, nullTerminated));
-        memUTF16(text, nullTerminated, encoded);
-        return encoded;
+        int  length = memLengthUTF16(text, nullTerminated);
+        long target = nmalloc(2, length);
+        encodeUTF16(text, nullTerminated, target);
+        return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
     /** Like {@link #UTF16(CharSequence) UTF16}, but returns {@code null} if {@code text} is {@code null}. */
