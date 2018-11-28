@@ -344,8 +344,9 @@ public class STBVorbis {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nstb_vorbis_decode_filename(memAddress(filenameEncoded), memAddress(channels), memAddress(sample_rate), memAddress(output));
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nstb_vorbis_decode_filename(filenameEncoded, memAddress(channels), memAddress(sample_rate), memAddress(output));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -370,9 +371,10 @@ public class STBVorbis {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
             PointerBuffer output = stack.pointers(NULL);
-            int __result = nstb_vorbis_decode_filename(memAddress(filenameEncoded), memAddress(channels), memAddress(sample_rate), memAddress(output));
+            int __result = nstb_vorbis_decode_filename(filenameEncoded, memAddress(channels), memAddress(sample_rate), memAddress(output));
             return memShortBufferSafe(output.get(0), __result * channels.get(0));
         } finally {
             stack.setPointer(stackPointer);
@@ -497,8 +499,9 @@ public class STBVorbis {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nstb_vorbis_open_filename(memAddress(filenameEncoded), memAddress(error), memAddressSafe(alloc_buffer));
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nstb_vorbis_open_filename(filenameEncoded, memAddress(error), memAddressSafe(alloc_buffer));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -848,8 +851,9 @@ public class STBVorbis {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nstb_vorbis_decode_filename(memAddress(filenameEncoded), channels, sample_rate, memAddress(output));
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nstb_vorbis_decode_filename(filenameEncoded, channels, sample_rate, memAddress(output));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -904,8 +908,9 @@ public class STBVorbis {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nstb_vorbis_open_filename(memAddress(filenameEncoded), error, memAddressSafe(alloc_buffer));
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nstb_vorbis_open_filename(filenameEncoded, error, memAddressSafe(alloc_buffer));
         } finally {
             stack.setPointer(stackPointer);
         }

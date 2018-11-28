@@ -83,9 +83,11 @@ public class VRScreenshots {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchPreviewFilenameEncoded = stack.ASCII(pchPreviewFilename);
-            ByteBuffer pchVRFilenameEncoded = stack.ASCII(pchVRFilename);
-            return nVRScreenshots_RequestScreenshot(memAddress(pOutScreenshotHandle), type, memAddress(pchPreviewFilenameEncoded), memAddress(pchVRFilenameEncoded));
+            stack.nASCII(pchPreviewFilename, true);
+            long pchPreviewFilenameEncoded = stack.getPointerAddress();
+            stack.nASCII(pchVRFilename, true);
+            long pchVRFilenameEncoded = stack.getPointerAddress();
+            return nVRScreenshots_RequestScreenshot(memAddress(pOutScreenshotHandle), type, pchPreviewFilenameEncoded, pchVRFilenameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -236,9 +238,11 @@ public class VRScreenshots {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchPreviewFilenameEncoded = stack.ASCII(pchPreviewFilename);
-            ByteBuffer pchVRFilenameEncoded = stack.ASCII(pchVRFilename);
-            return nVRScreenshots_TakeStereoScreenshot(memAddress(pOutScreenshotHandle), memAddress(pchPreviewFilenameEncoded), memAddress(pchVRFilenameEncoded));
+            stack.nASCII(pchPreviewFilename, true);
+            long pchPreviewFilenameEncoded = stack.getPointerAddress();
+            stack.nASCII(pchVRFilename, true);
+            long pchVRFilenameEncoded = stack.getPointerAddress();
+            return nVRScreenshots_TakeStereoScreenshot(memAddress(pOutScreenshotHandle), pchPreviewFilenameEncoded, pchVRFilenameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -296,9 +300,11 @@ public class VRScreenshots {
     public static int VRScreenshots_SubmitScreenshot(@NativeType("ScreenshotHandle_t") int screenshotHandle, @NativeType("EVRScreenshotType") int type, @NativeType("char const *") CharSequence pchSourcePreviewFilename, @NativeType("char const *") CharSequence pchSourceVRFilename) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchSourcePreviewFilenameEncoded = stack.ASCII(pchSourcePreviewFilename);
-            ByteBuffer pchSourceVRFilenameEncoded = stack.ASCII(pchSourceVRFilename);
-            return nVRScreenshots_SubmitScreenshot(screenshotHandle, type, memAddress(pchSourcePreviewFilenameEncoded), memAddress(pchSourceVRFilenameEncoded));
+            stack.nASCII(pchSourcePreviewFilename, true);
+            long pchSourcePreviewFilenameEncoded = stack.getPointerAddress();
+            stack.nASCII(pchSourceVRFilename, true);
+            long pchSourceVRFilenameEncoded = stack.getPointerAddress();
+            return nVRScreenshots_SubmitScreenshot(screenshotHandle, type, pchSourcePreviewFilenameEncoded, pchSourceVRFilenameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

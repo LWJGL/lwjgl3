@@ -962,8 +962,9 @@ public class OVR {
     public static int ovr_TraceMessage(int level, @NativeType("char const *") CharSequence message) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer messageEncoded = stack.UTF8(message);
-            return novr_TraceMessage(level, memAddress(messageEncoded));
+            stack.nUTF8(message, true);
+            long messageEncoded = stack.getPointerAddress();
+            return novr_TraceMessage(level, messageEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1040,8 +1041,9 @@ public class OVR {
     public static int ovr_IdentifyClient(@NativeType("char const *") CharSequence identity) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer identityEncoded = stack.UTF8(identity);
-            return novr_IdentifyClient(memAddress(identityEncoded));
+            stack.nUTF8(identity, true);
+            long identityEncoded = stack.getPointerAddress();
+            return novr_IdentifyClient(identityEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1867,8 +1869,9 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return novr_SetExternalCameraProperties(session, memAddress(nameEncoded), intrinsics.address(), extrinsics.address());
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return novr_SetExternalCameraProperties(session, nameEncoded, intrinsics.address(), extrinsics.address());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2427,8 +2430,9 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            return novr_GetBool(session, memAddress(propertyNameEncoded), defaultVal);
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            return novr_GetBool(session, propertyNameEncoded, defaultVal);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2477,8 +2481,9 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            return novr_SetBool(session, memAddress(propertyNameEncoded), value);
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            return novr_SetBool(session, propertyNameEncoded, value);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2521,8 +2526,9 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            return novr_GetInt(session, memAddress(propertyNameEncoded), defaultVal);
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            return novr_GetInt(session, propertyNameEncoded, defaultVal);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2571,8 +2577,9 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            return novr_SetInt(session, memAddress(propertyNameEncoded), value);
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            return novr_SetInt(session, propertyNameEncoded, value);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2615,8 +2622,9 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            return novr_GetFloat(session, memAddress(propertyNameEncoded), defaultVal);
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            return novr_GetFloat(session, propertyNameEncoded, defaultVal);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2665,8 +2673,9 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            return novr_SetFloat(session, memAddress(propertyNameEncoded), value);
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            return novr_SetFloat(session, propertyNameEncoded, value);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2715,8 +2724,9 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            return novr_GetFloatArray(session, memAddress(propertyNameEncoded), memAddress(values), values.remaining());
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            return novr_GetFloatArray(session, propertyNameEncoded, memAddress(values), values.remaining());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2765,8 +2775,9 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            return novr_SetFloatArray(session, memAddress(propertyNameEncoded), memAddress(values), values.remaining());
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            return novr_SetFloatArray(session, propertyNameEncoded, memAddress(values), values.remaining());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2821,9 +2832,11 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            ByteBuffer defaultValEncoded = stack.UTF8Safe(defaultVal);
-            long __result = novr_GetString(session, memAddress(propertyNameEncoded), memAddressSafe(defaultValEncoded));
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            stack.nUTF8Safe(defaultVal, true);
+            long defaultValEncoded = defaultVal == null ? NULL : stack.getPointerAddress();
+            long __result = novr_GetString(session, propertyNameEncoded, defaultValEncoded);
             return memUTF8Safe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -2874,9 +2887,11 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            ByteBuffer valueEncoded = stack.ASCII(value);
-            return novr_SetString(hmddesc, memAddress(propertyNameEncoded), memAddress(valueEncoded));
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            stack.nASCII(value, true);
+            long valueEncoded = stack.getPointerAddress();
+            return novr_SetString(hmddesc, propertyNameEncoded, valueEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2971,8 +2986,9 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            return novr_GetFloatArray(session, memAddress(propertyNameEncoded), values, values.length);
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            return novr_GetFloatArray(session, propertyNameEncoded, values, values.length);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2999,8 +3015,9 @@ public class OVR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyNameEncoded = stack.ASCII(propertyName);
-            return novr_SetFloatArray(session, memAddress(propertyNameEncoded), values, values.length);
+            stack.nASCII(propertyName, true);
+            long propertyNameEncoded = stack.getPointerAddress();
+            return novr_SetFloatArray(session, propertyNameEncoded, values, values.length);
         } finally {
             stack.setPointer(stackPointer);
         }

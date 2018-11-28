@@ -355,8 +355,9 @@ public class GLES31 extends GLES30 {
     public static int glGetProgramResourceIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetProgramResourceIndex(program, programInterface, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetProgramResourceIndex(program, programInterface, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -424,8 +425,9 @@ public class GLES31 extends GLES30 {
     public static int glGetProgramResourceLocation(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetProgramResourceLocation(program, programInterface, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetProgramResourceLocation(program, programInterface, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

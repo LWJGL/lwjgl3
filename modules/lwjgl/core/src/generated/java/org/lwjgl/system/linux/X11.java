@@ -469,8 +469,9 @@ public class X11 {
     public static long XOpenDisplay(@Nullable @NativeType("char const *") CharSequence display_name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer display_nameEncoded = stack.ASCIISafe(display_name);
-            return nXOpenDisplay(memAddressSafe(display_nameEncoded));
+            stack.nASCIISafe(display_name, true);
+            long display_nameEncoded = display_name == null ? NULL : stack.getPointerAddress();
+            return nXOpenDisplay(display_nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

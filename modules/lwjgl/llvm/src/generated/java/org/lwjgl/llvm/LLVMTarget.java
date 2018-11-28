@@ -115,8 +115,9 @@ public class LLVMTarget {
     public static long LLVMCreateTargetData(@NativeType("char const *") CharSequence StringRep) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer StringRepEncoded = stack.UTF8(StringRep);
-            return nLLVMCreateTargetData(memAddress(StringRepEncoded));
+            stack.nUTF8(StringRep, true);
+            long StringRepEncoded = stack.getPointerAddress();
+            return nLLVMCreateTargetData(StringRepEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

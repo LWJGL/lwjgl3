@@ -147,9 +147,11 @@ public class NVRTC {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer srcEncoded = stack.ASCII(src);
-            ByteBuffer nameEncoded = stack.ASCIISafe(name);
-            return nnvrtcCreateProgram(memAddress(prog), memAddress(srcEncoded), memAddressSafe(nameEncoded), remainingSafe(headers), memAddressSafe(headers), memAddressSafe(includeNames));
+            stack.nASCII(src, true);
+            long srcEncoded = stack.getPointerAddress();
+            stack.nASCIISafe(name, true);
+            long nameEncoded = name == null ? NULL : stack.getPointerAddress();
+            return nnvrtcCreateProgram(memAddress(prog), srcEncoded, nameEncoded, remainingSafe(headers), memAddressSafe(headers), memAddressSafe(includeNames));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -273,8 +275,9 @@ public class NVRTC {
     public static int nvrtcAddNameExpression(@NativeType("nvrtcProgram") long prog, @NativeType("char const * const") CharSequence name_expression) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer name_expressionEncoded = stack.ASCII(name_expression);
-            return nnvrtcAddNameExpression(prog, memAddress(name_expressionEncoded));
+            stack.nASCII(name_expression, true);
+            long name_expressionEncoded = stack.getPointerAddress();
+            return nnvrtcAddNameExpression(prog, name_expressionEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -306,8 +309,9 @@ public class NVRTC {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer name_expressionEncoded = stack.ASCII(name_expression);
-            return nnvrtcGetLoweredName(prog, memAddress(name_expressionEncoded), memAddress(lowered_name));
+            stack.nASCII(name_expression, true);
+            long name_expressionEncoded = stack.getPointerAddress();
+            return nnvrtcGetLoweredName(prog, name_expressionEncoded, memAddress(lowered_name));
         } finally {
             stack.setPointer(stackPointer);
         }

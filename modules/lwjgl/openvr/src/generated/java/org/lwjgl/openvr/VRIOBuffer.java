@@ -57,8 +57,9 @@ public class VRIOBuffer {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchPathEncoded = stack.ASCII(pchPath);
-            return nVRIOBuffer_Open(memAddress(pchPathEncoded), mode, unElementSize, unElements, memAddress(pulBuffer));
+            stack.nASCII(pchPath, true);
+            long pchPathEncoded = stack.getPointerAddress();
+            return nVRIOBuffer_Open(pchPathEncoded, mode, unElementSize, unElements, memAddress(pulBuffer));
         } finally {
             stack.setPointer(stackPointer);
         }

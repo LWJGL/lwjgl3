@@ -119,8 +119,9 @@ public class LLVMORC {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer SymbolEncoded = stack.UTF8(Symbol);
-            nLLVMOrcGetMangledSymbol(JITStack, memAddress(MangledSymbol), memAddress(SymbolEncoded));
+            stack.nUTF8(Symbol, true);
+            long SymbolEncoded = stack.getPointerAddress();
+            nLLVMOrcGetMangledSymbol(JITStack, memAddress(MangledSymbol), SymbolEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -185,8 +186,9 @@ public class LLVMORC {
     public static long LLVMOrcCreateIndirectStub(@NativeType("LLVMOrcJITStackRef") long JITStack, @NativeType("char const *") CharSequence StubName, @NativeType("LLVMOrcTargetAddress") long InitAddr) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer StubNameEncoded = stack.UTF8(StubName);
-            return nLLVMOrcCreateIndirectStub(JITStack, memAddress(StubNameEncoded), InitAddr);
+            stack.nUTF8(StubName, true);
+            long StubNameEncoded = stack.getPointerAddress();
+            return nLLVMOrcCreateIndirectStub(JITStack, StubNameEncoded, InitAddr);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -217,8 +219,9 @@ public class LLVMORC {
     public static long LLVMOrcSetIndirectStubPointer(@NativeType("LLVMOrcJITStackRef") long JITStack, @NativeType("char const *") CharSequence StubName, @NativeType("LLVMOrcTargetAddress") long NewAddr) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer StubNameEncoded = stack.UTF8(StubName);
-            return nLLVMOrcSetIndirectStubPointer(JITStack, memAddress(StubNameEncoded), NewAddr);
+            stack.nUTF8(StubName, true);
+            long StubNameEncoded = stack.getPointerAddress();
+            return nLLVMOrcSetIndirectStubPointer(JITStack, StubNameEncoded, NewAddr);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -340,8 +343,9 @@ public class LLVMORC {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer SymbolNameEncoded = stack.UTF8(SymbolName);
-            return nLLVMOrcGetSymbolAddress(JITStack, memAddress(RetAddr), memAddress(SymbolNameEncoded));
+            stack.nUTF8(SymbolName, true);
+            long SymbolNameEncoded = stack.getPointerAddress();
+            return nLLVMOrcGetSymbolAddress(JITStack, memAddress(RetAddr), SymbolNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -376,8 +380,9 @@ public class LLVMORC {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer SymbolNameEncoded = stack.UTF8(SymbolName);
-            return nLLVMOrcGetSymbolAddressIn(JITStack, memAddress(RetAddr), H, memAddress(SymbolNameEncoded));
+            stack.nUTF8(SymbolName, true);
+            long SymbolNameEncoded = stack.getPointerAddress();
+            return nLLVMOrcGetSymbolAddressIn(JITStack, memAddress(RetAddr), H, SymbolNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

@@ -778,8 +778,9 @@ public class DynCall {
     public static long dcDefineStruct(@NativeType("char const *") CharSequence signature) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer signatureEncoded = stack.ASCII(signature);
-            return ndcDefineStruct(memAddress(signatureEncoded));
+            stack.nASCII(signature, true);
+            long signatureEncoded = stack.getPointerAddress();
+            return ndcDefineStruct(signatureEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

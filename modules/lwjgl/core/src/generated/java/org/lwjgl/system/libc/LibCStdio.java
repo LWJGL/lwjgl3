@@ -72,9 +72,11 @@ public class LibCStdio {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer bufferEncoded = stack.ASCII(buffer);
-            ByteBuffer formatEncoded = stack.ASCII(format);
-            return nvsscanf(memAddress(bufferEncoded), memAddress(formatEncoded), vlist);
+            stack.nASCII(buffer, true);
+            long bufferEncoded = stack.getPointerAddress();
+            stack.nASCII(format, true);
+            long formatEncoded = stack.getPointerAddress();
+            return nvsscanf(bufferEncoded, formatEncoded, vlist);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -143,8 +145,9 @@ public class LibCStdio {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer formatEncoded = stack.ASCII(format);
-            return nvsnprintf(memAddressSafe(buffer), remainingSafe(buffer), memAddress(formatEncoded), vlist);
+            stack.nASCII(format, true);
+            long formatEncoded = stack.getPointerAddress();
+            return nvsnprintf(memAddressSafe(buffer), remainingSafe(buffer), formatEncoded, vlist);
         } finally {
             stack.setPointer(stackPointer);
         }

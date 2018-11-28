@@ -133,8 +133,9 @@ public class ARBGLSPIRV {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pEntryPointEncoded = stack.UTF8(pEntryPoint);
-            nglSpecializeShaderARB(shader, memAddress(pEntryPointEncoded), pConstantIndex.remaining(), memAddress(pConstantIndex), memAddress(pConstantValue));
+            stack.nUTF8(pEntryPoint, true);
+            long pEntryPointEncoded = stack.getPointerAddress();
+            nglSpecializeShaderARB(shader, pEntryPointEncoded, pConstantIndex.remaining(), memAddress(pConstantIndex), memAddress(pConstantValue));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -160,8 +161,9 @@ public class ARBGLSPIRV {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pEntryPointEncoded = stack.UTF8(pEntryPoint);
-            callPPPV(__functionAddress, shader, memAddress(pEntryPointEncoded), pConstantIndex.length, pConstantIndex, pConstantValue);
+            stack.nUTF8(pEntryPoint, true);
+            long pEntryPointEncoded = stack.getPointerAddress();
+            callPPPV(__functionAddress, shader, pEntryPointEncoded, pConstantIndex.length, pConstantIndex, pConstantValue);
         } finally {
             stack.setPointer(stackPointer);
         }

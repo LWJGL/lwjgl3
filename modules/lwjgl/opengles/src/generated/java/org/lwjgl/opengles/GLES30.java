@@ -1074,8 +1074,9 @@ public class GLES30 extends GLES20 {
     public static int glGetFragDataLocation(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetFragDataLocation(program, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetFragDataLocation(program, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1237,8 +1238,9 @@ public class GLES30 extends GLES20 {
     public static int glGetUniformBlockIndex(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence uniformBlockName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer uniformBlockNameEncoded = stack.ASCII(uniformBlockName);
-            return nglGetUniformBlockIndex(program, memAddress(uniformBlockNameEncoded));
+            stack.nASCII(uniformBlockName, true);
+            long uniformBlockNameEncoded = stack.getPointerAddress();
+            return nglGetUniformBlockIndex(program, uniformBlockNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

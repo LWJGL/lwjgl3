@@ -521,10 +521,13 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateCompileUnit(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMDWARFSourceLanguage") int Lang, @NativeType("LLVMMetadataRef") long FileRef, @NativeType("char const *") CharSequence Producer, @NativeType("LLVMBool") boolean isOptimized, @NativeType("char const *") CharSequence Flags, @NativeType("unsigned int") int RuntimeVer, @NativeType("char const *") CharSequence SplitName, @NativeType("LLVMDWARFEmissionKind") int Kind, @NativeType("unsigned int") int DWOId, @NativeType("LLVMBool") boolean SplitDebugInlining, @NativeType("LLVMBool") boolean DebugInfoForProfiling) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer ProducerEncoded = stack.UTF8(Producer, false);
-            ByteBuffer FlagsEncoded = stack.UTF8(Flags, false);
-            ByteBuffer SplitNameEncoded = stack.UTF8(SplitName, false);
-            return nLLVMDIBuilderCreateCompileUnit(Builder, Lang, FileRef, memAddress(ProducerEncoded), ProducerEncoded.remaining(), isOptimized ? 1 : 0, memAddress(FlagsEncoded), FlagsEncoded.remaining(), RuntimeVer, memAddress(SplitNameEncoded), SplitNameEncoded.remaining(), Kind, DWOId, SplitDebugInlining ? 1 : 0, DebugInfoForProfiling ? 1 : 0);
+            int ProducerEncodedLength = stack.nUTF8(Producer, false);
+            long ProducerEncoded = stack.getPointerAddress();
+            int FlagsEncodedLength = stack.nUTF8(Flags, false);
+            long FlagsEncoded = stack.getPointerAddress();
+            int SplitNameEncodedLength = stack.nUTF8(SplitName, false);
+            long SplitNameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateCompileUnit(Builder, Lang, FileRef, ProducerEncoded, ProducerEncodedLength, isOptimized ? 1 : 0, FlagsEncoded, FlagsEncodedLength, RuntimeVer, SplitNameEncoded, SplitNameEncodedLength, Kind, DWOId, SplitDebugInlining ? 1 : 0, DebugInfoForProfiling ? 1 : 0);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -569,9 +572,11 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateFile(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("char const *") CharSequence Filename, @NativeType("char const *") CharSequence Directory) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer FilenameEncoded = stack.UTF8(Filename, false);
-            ByteBuffer DirectoryEncoded = stack.UTF8(Directory, false);
-            return nLLVMDIBuilderCreateFile(Builder, memAddress(FilenameEncoded), FilenameEncoded.remaining(), memAddress(DirectoryEncoded), DirectoryEncoded.remaining());
+            int FilenameEncodedLength = stack.nUTF8(Filename, false);
+            long FilenameEncoded = stack.getPointerAddress();
+            int DirectoryEncodedLength = stack.nUTF8(Directory, false);
+            long DirectoryEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateFile(Builder, FilenameEncoded, FilenameEncodedLength, DirectoryEncoded, DirectoryEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -625,11 +630,15 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateModule(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long ParentScope, @NativeType("char const *") CharSequence Name, @NativeType("char const *") CharSequence ConfigMacros, @NativeType("char const *") CharSequence IncludePath, @NativeType("char const *") CharSequence ISysRoot) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            ByteBuffer ConfigMacrosEncoded = stack.UTF8(ConfigMacros, false);
-            ByteBuffer IncludePathEncoded = stack.UTF8(IncludePath, false);
-            ByteBuffer ISysRootEncoded = stack.UTF8(ISysRoot, false);
-            return nLLVMDIBuilderCreateModule(Builder, ParentScope, memAddress(NameEncoded), NameEncoded.remaining(), memAddress(ConfigMacrosEncoded), ConfigMacrosEncoded.remaining(), memAddress(IncludePathEncoded), IncludePathEncoded.remaining(), memAddress(ISysRootEncoded), ISysRootEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            int ConfigMacrosEncodedLength = stack.nUTF8(ConfigMacros, false);
+            long ConfigMacrosEncoded = stack.getPointerAddress();
+            int IncludePathEncodedLength = stack.nUTF8(IncludePath, false);
+            long IncludePathEncoded = stack.getPointerAddress();
+            int ISysRootEncodedLength = stack.nUTF8(ISysRoot, false);
+            long ISysRootEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateModule(Builder, ParentScope, NameEncoded, NameEncodedLength, ConfigMacrosEncoded, ConfigMacrosEncodedLength, IncludePathEncoded, IncludePathEncodedLength, ISysRootEncoded, ISysRootEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -676,8 +685,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateNameSpace(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long ParentScope, @NativeType("char const *") CharSequence Name, @NativeType("LLVMBool") boolean ExportSymbols) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateNameSpace(Builder, ParentScope, memAddress(NameEncoded), NameEncoded.remaining(), ExportSymbols ? 1 : 0);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateNameSpace(Builder, ParentScope, NameEncoded, NameEncodedLength, ExportSymbols ? 1 : 0);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -743,9 +753,11 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateFunction(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("char const *") CharSequence LinkageName, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("LLVMMetadataRef") long Ty, @NativeType("LLVMBool") boolean IsLocalToUnit, @NativeType("LLVMBool") boolean IsDefinition, @NativeType("unsigned int") int ScopeLine, @NativeType("LLVMDIFlags") int Flags, @NativeType("LLVMBool") boolean IsOptimized) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            ByteBuffer LinkageNameEncoded = stack.UTF8(LinkageName, false);
-            return nLLVMDIBuilderCreateFunction(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), memAddress(LinkageNameEncoded), LinkageNameEncoded.remaining(), File, LineNo, Ty, IsLocalToUnit ? 1 : 0, IsDefinition ? 1 : 0, ScopeLine, Flags, IsOptimized ? 1 : 0);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            int LinkageNameEncodedLength = stack.nUTF8(LinkageName, false);
+            long LinkageNameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateFunction(Builder, Scope, NameEncoded, NameEncodedLength, LinkageNameEncoded, LinkageNameEncodedLength, File, LineNo, Ty, IsLocalToUnit ? 1 : 0, IsDefinition ? 1 : 0, ScopeLine, Flags, IsOptimized ? 1 : 0);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -909,8 +921,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateImportedDeclaration(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long Decl, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateImportedDeclaration(Builder, Scope, Decl, File, Line, memAddress(NameEncoded), NameEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateImportedDeclaration(Builder, Scope, Decl, File, Line, NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1098,8 +1111,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateEnumerationType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNumber, @NativeType("uint64_t") long SizeInBits, @NativeType("uint32_t") int AlignInBits, @NativeType("LLVMMetadataRef *") PointerBuffer Elements, @NativeType("LLVMMetadataRef") long ClassTy) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateEnumerationType(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), File, LineNumber, SizeInBits, AlignInBits, memAddress(Elements), Elements.remaining(), ClassTy);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateEnumerationType(Builder, Scope, NameEncoded, NameEncodedLength, File, LineNumber, SizeInBits, AlignInBits, memAddress(Elements), Elements.remaining(), ClassTy);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1163,9 +1177,11 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateUnionType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNumber, @NativeType("uint64_t") long SizeInBits, @NativeType("uint32_t") int AlignInBits, @NativeType("LLVMDIFlags") int Flags, @NativeType("LLVMMetadataRef *") PointerBuffer Elements, @NativeType("unsigned int") int RunTimeLang, @NativeType("char const *") CharSequence UniqueId) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            ByteBuffer UniqueIdEncoded = stack.UTF8(UniqueId, false);
-            return nLLVMDIBuilderCreateUnionType(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), File, LineNumber, SizeInBits, AlignInBits, Flags, memAddress(Elements), Elements.remaining(), RunTimeLang, memAddress(UniqueIdEncoded), UniqueIdEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            int UniqueIdEncodedLength = stack.nUTF8(UniqueId, false);
+            long UniqueIdEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateUnionType(Builder, Scope, NameEncoded, NameEncodedLength, File, LineNumber, SizeInBits, AlignInBits, Flags, memAddress(Elements), Elements.remaining(), RunTimeLang, UniqueIdEncoded, UniqueIdEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1267,8 +1283,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateUnspecifiedType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateUnspecifiedType(Builder, memAddress(NameEncoded), NameEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateUnspecifiedType(Builder, NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1316,8 +1333,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateBasicType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("char const *") CharSequence Name, @NativeType("uint64_t") long SizeInBits, @NativeType("LLVMDWARFTypeEncoding") int Encoding, @NativeType("LLVMDIFlags") int Flags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateBasicType(Builder, memAddress(NameEncoded), NameEncoded.remaining(), SizeInBits, Encoding, Flags);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateBasicType(Builder, NameEncoded, NameEncodedLength, SizeInBits, Encoding, Flags);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1368,8 +1386,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreatePointerType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long PointeeTy, @NativeType("uint64_t") long SizeInBits, @NativeType("uint32_t") int AlignInBits, @NativeType("unsigned int") int AddressSpace, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreatePointerType(Builder, PointeeTy, SizeInBits, AlignInBits, AddressSpace, memAddress(NameEncoded), NameEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreatePointerType(Builder, PointeeTy, SizeInBits, AlignInBits, AddressSpace, NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1437,9 +1456,11 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateStructType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNumber, @NativeType("uint64_t") long SizeInBits, @NativeType("uint32_t") int AlignInBits, @NativeType("LLVMDIFlags") int Flags, @NativeType("LLVMMetadataRef") long DerivedFrom, @NativeType("LLVMMetadataRef *") PointerBuffer Elements, @NativeType("unsigned int") int RunTimeLang, @NativeType("LLVMMetadataRef") long VTableHolder, @NativeType("char const *") CharSequence UniqueId) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            ByteBuffer UniqueIdEncoded = stack.UTF8(UniqueId, false);
-            return nLLVMDIBuilderCreateStructType(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), File, LineNumber, SizeInBits, AlignInBits, Flags, DerivedFrom, memAddress(Elements), Elements.remaining(), RunTimeLang, VTableHolder, memAddress(UniqueIdEncoded), UniqueIdEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            int UniqueIdEncodedLength = stack.nUTF8(UniqueId, false);
+            long UniqueIdEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateStructType(Builder, Scope, NameEncoded, NameEncodedLength, File, LineNumber, SizeInBits, AlignInBits, Flags, DerivedFrom, memAddress(Elements), Elements.remaining(), RunTimeLang, VTableHolder, UniqueIdEncoded, UniqueIdEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1500,8 +1521,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateMemberType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("uint64_t") long SizeInBits, @NativeType("uint32_t") int AlignInBits, @NativeType("uint64_t") long OffsetInBits, @NativeType("LLVMDIFlags") int Flags, @NativeType("LLVMMetadataRef") long Ty) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateMemberType(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), File, LineNo, SizeInBits, AlignInBits, OffsetInBits, Flags, Ty);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateMemberType(Builder, Scope, NameEncoded, NameEncodedLength, File, LineNo, SizeInBits, AlignInBits, OffsetInBits, Flags, Ty);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1561,8 +1583,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateStaticMemberType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNumber, @NativeType("LLVMMetadataRef") long Type, @NativeType("LLVMDIFlags") int Flags, @NativeType("LLVMValueRef") long ConstantVal, @NativeType("uint32_t") int AlignInBits) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateStaticMemberType(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), File, LineNumber, Type, Flags, ConstantVal, AlignInBits);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateStaticMemberType(Builder, Scope, NameEncoded, NameEncodedLength, File, LineNumber, Type, Flags, ConstantVal, AlignInBits);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1646,8 +1669,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateObjCIVar(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("uint64_t") long SizeInBits, @NativeType("uint32_t") int AlignInBits, @NativeType("uint64_t") long OffsetInBits, @NativeType("LLVMDIFlags") int Flags, @NativeType("LLVMMetadataRef") long Ty, @NativeType("LLVMMetadataRef") long PropertyNode) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateObjCIVar(Builder, memAddress(NameEncoded), NameEncoded.remaining(), File, LineNo, SizeInBits, AlignInBits, OffsetInBits, Flags, Ty, PropertyNode);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateObjCIVar(Builder, NameEncoded, NameEncodedLength, File, LineNo, SizeInBits, AlignInBits, OffsetInBits, Flags, Ty, PropertyNode);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1705,10 +1729,13 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateObjCProperty(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("char const *") CharSequence GetterName, @NativeType("char const *") CharSequence SetterName, @NativeType("unsigned int") int PropertyAttributes, @NativeType("LLVMMetadataRef") long Ty) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            ByteBuffer GetterNameEncoded = stack.UTF8(GetterName, false);
-            ByteBuffer SetterNameEncoded = stack.UTF8(SetterName, false);
-            return nLLVMDIBuilderCreateObjCProperty(Builder, memAddress(NameEncoded), NameEncoded.remaining(), File, LineNo, memAddress(GetterNameEncoded), GetterNameEncoded.remaining(), memAddress(SetterNameEncoded), SetterNameEncoded.remaining(), PropertyAttributes, Ty);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            int GetterNameEncodedLength = stack.nUTF8(GetterName, false);
+            long GetterNameEncoded = stack.getPointerAddress();
+            int SetterNameEncodedLength = stack.nUTF8(SetterName, false);
+            long SetterNameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateObjCProperty(Builder, NameEncoded, NameEncodedLength, File, LineNo, GetterNameEncoded, GetterNameEncodedLength, SetterNameEncoded, SetterNameEncodedLength, PropertyAttributes, Ty);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1829,8 +1856,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateTypedef(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Type, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("LLVMMetadataRef") long Scope) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateTypedef(Builder, Type, memAddress(NameEncoded), NameEncoded.remaining(), File, LineNo, Scope);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateTypedef(Builder, Type, NameEncoded, NameEncodedLength, File, LineNo, Scope);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1914,9 +1942,11 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateForwardDecl(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("unsigned int") int Tag, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("unsigned int") int RuntimeLang, @NativeType("uint64_t") long SizeInBits, @NativeType("uint32_t") int AlignInBits, @NativeType("char const *") CharSequence UniqueIdentifier) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            ByteBuffer UniqueIdentifierEncoded = stack.UTF8(UniqueIdentifier, false);
-            return nLLVMDIBuilderCreateForwardDecl(Builder, Tag, memAddress(NameEncoded), NameEncoded.remaining(), Scope, File, Line, RuntimeLang, SizeInBits, AlignInBits, memAddress(UniqueIdentifierEncoded), UniqueIdentifierEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            int UniqueIdentifierEncodedLength = stack.nUTF8(UniqueIdentifier, false);
+            long UniqueIdentifierEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateForwardDecl(Builder, Tag, NameEncoded, NameEncodedLength, Scope, File, Line, RuntimeLang, SizeInBits, AlignInBits, UniqueIdentifierEncoded, UniqueIdentifierEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1979,9 +2009,11 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateReplaceableCompositeType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("unsigned int") int Tag, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("unsigned int") int RuntimeLang, @NativeType("uint64_t") long SizeInBits, @NativeType("uint32_t") int AlignInBits, @NativeType("LLVMDIFlags") int Flags, @NativeType("char const *") CharSequence UniqueIdentifier) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            ByteBuffer UniqueIdentifierEncoded = stack.UTF8(UniqueIdentifier, false);
-            return nLLVMDIBuilderCreateReplaceableCompositeType(Builder, Tag, memAddress(NameEncoded), NameEncoded.remaining(), Scope, File, Line, RuntimeLang, SizeInBits, AlignInBits, Flags, memAddress(UniqueIdentifierEncoded), UniqueIdentifierEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            int UniqueIdentifierEncodedLength = stack.nUTF8(UniqueIdentifier, false);
+            long UniqueIdentifierEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateReplaceableCompositeType(Builder, Tag, NameEncoded, NameEncodedLength, Scope, File, Line, RuntimeLang, SizeInBits, AlignInBits, Flags, UniqueIdentifierEncoded, UniqueIdentifierEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2042,8 +2074,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateBitFieldMemberType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNumber, @NativeType("uint64_t") long SizeInBits, @NativeType("uint64_t") long OffsetInBits, @NativeType("uint64_t") long StorageOffsetInBits, @NativeType("LLVMDIFlags") int Flags, @NativeType("LLVMMetadataRef") long Type) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateBitFieldMemberType(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), File, LineNumber, SizeInBits, OffsetInBits, StorageOffsetInBits, Flags, Type);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateBitFieldMemberType(Builder, Scope, NameEncoded, NameEncodedLength, File, LineNumber, SizeInBits, OffsetInBits, StorageOffsetInBits, Flags, Type);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2114,9 +2147,11 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateClassType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNumber, @NativeType("uint64_t") long SizeInBits, @NativeType("uint32_t") int AlignInBits, @NativeType("uint64_t") long OffsetInBits, @NativeType("LLVMDIFlags") int Flags, @NativeType("LLVMMetadataRef") long DerivedFrom, @NativeType("LLVMMetadataRef *") PointerBuffer Elements, @NativeType("LLVMMetadataRef") long VTableHolder, @NativeType("LLVMMetadataRef") long TemplateParamsNode, @NativeType("char const *") CharSequence UniqueIdentifier) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            ByteBuffer UniqueIdentifierEncoded = stack.UTF8(UniqueIdentifier, false);
-            return nLLVMDIBuilderCreateClassType(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), File, LineNumber, SizeInBits, AlignInBits, OffsetInBits, Flags, DerivedFrom, memAddress(Elements), Elements.remaining(), VTableHolder, TemplateParamsNode, memAddress(UniqueIdentifierEncoded), UniqueIdentifierEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            int UniqueIdentifierEncodedLength = stack.nUTF8(UniqueIdentifier, false);
+            long UniqueIdentifierEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateClassType(Builder, Scope, NameEncoded, NameEncodedLength, File, LineNumber, SizeInBits, AlignInBits, OffsetInBits, Flags, DerivedFrom, memAddress(Elements), Elements.remaining(), VTableHolder, TemplateParamsNode, UniqueIdentifierEncoded, UniqueIdentifierEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2398,9 +2433,11 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateGlobalVariableExpression(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("char const *") CharSequence Linkage, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("LLVMMetadataRef") long Ty, @NativeType("LLVMBool") boolean LocalToUnit, @NativeType("LLVMMetadataRef") long Expr, @NativeType("LLVMMetadataRef") long Decl, @NativeType("uint32_t") int AlignInBits) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            ByteBuffer LinkageEncoded = stack.UTF8(Linkage, false);
-            return nLLVMDIBuilderCreateGlobalVariableExpression(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), memAddress(LinkageEncoded), LinkageEncoded.remaining(), File, LineNo, Ty, LocalToUnit ? 1 : 0, Expr, Decl, AlignInBits);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            int LinkageEncodedLength = stack.nUTF8(Linkage, false);
+            long LinkageEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateGlobalVariableExpression(Builder, Scope, NameEncoded, NameEncodedLength, LinkageEncoded, LinkageEncodedLength, File, LineNo, Ty, LocalToUnit ? 1 : 0, Expr, Decl, AlignInBits);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2522,9 +2559,11 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateTempGlobalVariableFwdDecl(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("char const *") CharSequence Linkage, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("LLVMMetadataRef") long Ty, @NativeType("LLVMBool") boolean LocalToUnit, @NativeType("LLVMMetadataRef") long Decl, @NativeType("uint32_t") int AlignInBits) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            ByteBuffer LinkageEncoded = stack.UTF8(Linkage, false);
-            return nLLVMDIBuilderCreateTempGlobalVariableFwdDecl(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), memAddress(LinkageEncoded), LinkageEncoded.remaining(), File, LineNo, Ty, LocalToUnit ? 1 : 0, Decl, AlignInBits);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            int LinkageEncodedLength = stack.nUTF8(Linkage, false);
+            long LinkageEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateTempGlobalVariableFwdDecl(Builder, Scope, NameEncoded, NameEncodedLength, LinkageEncoded, LinkageEncodedLength, File, LineNo, Ty, LocalToUnit ? 1 : 0, Decl, AlignInBits);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2689,8 +2728,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateAutoVariable(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("LLVMMetadataRef") long Ty, @NativeType("LLVMBool") boolean AlwaysPreserve, @NativeType("LLVMDIFlags") int Flags, @NativeType("uint32_t") int AlignInBits) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateAutoVariable(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), File, LineNo, Ty, AlwaysPreserve ? 1 : 0, Flags, AlignInBits);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateAutoVariable(Builder, Scope, NameEncoded, NameEncodedLength, File, LineNo, Ty, AlwaysPreserve ? 1 : 0, Flags, AlignInBits);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2749,8 +2789,9 @@ public class LLVMDebugInfo {
     public static long LLVMDIBuilderCreateParameterVariable(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") CharSequence Name, @NativeType("unsigned int") int ArgNo, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("LLVMMetadataRef") long Ty, @NativeType("LLVMBool") boolean AlwaysPreserve, @NativeType("LLVMDIFlags") int Flags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMDIBuilderCreateParameterVariable(Builder, Scope, memAddress(NameEncoded), NameEncoded.remaining(), ArgNo, File, LineNo, Ty, AlwaysPreserve ? 1 : 0, Flags);
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateParameterVariable(Builder, Scope, NameEncoded, NameEncodedLength, ArgNo, File, LineNo, Ty, AlwaysPreserve ? 1 : 0, Flags);
         } finally {
             stack.setPointer(stackPointer);
         }

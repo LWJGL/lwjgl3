@@ -146,9 +146,11 @@ public class NanoSVG {
     public static NSVGImage nsvgParseFromFile(@NativeType("char const *") CharSequence filename, @NativeType("char const *") CharSequence units, float dpi) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            ByteBuffer unitsEncoded = stack.ASCII(units);
-            long __result = nnsvgParseFromFile(memAddress(filenameEncoded), memAddress(unitsEncoded), dpi);
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            stack.nASCII(units, true);
+            long unitsEncoded = stack.getPointerAddress();
+            long __result = nnsvgParseFromFile(filenameEncoded, unitsEncoded, dpi);
             return NSVGImage.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -186,9 +188,11 @@ public class NanoSVG {
     public static NSVGImage nsvgParse(@NativeType("char *") CharSequence input, @NativeType("char const *") CharSequence units, float dpi) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer inputEncoded = stack.ASCII(input);
-            ByteBuffer unitsEncoded = stack.ASCII(units);
-            long __result = nnsvgParse(memAddress(inputEncoded), memAddress(unitsEncoded), dpi);
+            stack.nASCII(input, true);
+            long inputEncoded = stack.getPointerAddress();
+            stack.nASCII(units, true);
+            long unitsEncoded = stack.getPointerAddress();
+            long __result = nnsvgParse(inputEncoded, unitsEncoded, dpi);
             return NSVGImage.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);

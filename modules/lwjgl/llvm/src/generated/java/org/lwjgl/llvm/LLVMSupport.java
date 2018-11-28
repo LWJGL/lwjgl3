@@ -59,8 +59,9 @@ public class LLVMSupport {
     public static boolean LLVMLoadLibraryPermanently(@NativeType("char const *") CharSequence Filename) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer FilenameEncoded = stack.UTF8(Filename);
-            return nLLVMLoadLibraryPermanently(memAddress(FilenameEncoded)) != 0;
+            stack.nUTF8(Filename, true);
+            long FilenameEncoded = stack.getPointerAddress();
+            return nLLVMLoadLibraryPermanently(FilenameEncoded) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -96,8 +97,9 @@ public class LLVMSupport {
     public static void LLVMParseCommandLineOptions(@NativeType("char const * const *") PointerBuffer argv, @NativeType("char const *") CharSequence Overview) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer OverviewEncoded = stack.UTF8(Overview);
-            nLLVMParseCommandLineOptions(argv.remaining(), memAddress(argv), memAddress(OverviewEncoded));
+            stack.nUTF8(Overview, true);
+            long OverviewEncoded = stack.getPointerAddress();
+            nLLVMParseCommandLineOptions(argv.remaining(), memAddress(argv), OverviewEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -131,8 +133,9 @@ public class LLVMSupport {
     public static long LLVMSearchForAddressOfSymbol(@NativeType("char const *") CharSequence symbolName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer symbolNameEncoded = stack.UTF8(symbolName);
-            return nLLVMSearchForAddressOfSymbol(memAddress(symbolNameEncoded));
+            stack.nUTF8(symbolName, true);
+            long symbolNameEncoded = stack.getPointerAddress();
+            return nLLVMSearchForAddressOfSymbol(symbolNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -161,8 +164,9 @@ public class LLVMSupport {
     public static void LLVMAddSymbol(@NativeType("char const *") CharSequence symbolName, @NativeType("void *") long symbolValue) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer symbolNameEncoded = stack.UTF8(symbolName);
-            nLLVMAddSymbol(memAddress(symbolNameEncoded), symbolValue);
+            stack.nUTF8(symbolName, true);
+            long symbolNameEncoded = stack.getPointerAddress();
+            nLLVMAddSymbol(symbolNameEncoded, symbolValue);
         } finally {
             stack.setPointer(stackPointer);
         }

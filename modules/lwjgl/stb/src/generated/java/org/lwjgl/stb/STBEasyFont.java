@@ -88,8 +88,9 @@ public class STBEasyFont {
     public static int stb_easy_font_width(@NativeType("char *") CharSequence text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer textEncoded = stack.ASCII(text);
-            return nstb_easy_font_width(memAddress(textEncoded));
+            stack.nASCII(text, true);
+            long textEncoded = stack.getPointerAddress();
+            return nstb_easy_font_width(textEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -124,8 +125,9 @@ public class STBEasyFont {
     public static int stb_easy_font_height(@NativeType("char *") CharSequence text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer textEncoded = stack.ASCII(text);
-            return nstb_easy_font_height(memAddress(textEncoded));
+            stack.nASCII(text, true);
+            long textEncoded = stack.getPointerAddress();
+            return nstb_easy_font_height(textEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -216,8 +218,9 @@ public class STBEasyFont {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer textEncoded = stack.ASCII(text);
-            return nstb_easy_font_print(x, y, memAddress(textEncoded), memAddressSafe(color), memAddress(vertex_buffer), vertex_buffer.remaining());
+            stack.nASCII(text, true);
+            long textEncoded = stack.getPointerAddress();
+            return nstb_easy_font_print(x, y, textEncoded, memAddressSafe(color), memAddress(vertex_buffer), vertex_buffer.remaining());
         } finally {
             stack.setPointer(stackPointer);
         }

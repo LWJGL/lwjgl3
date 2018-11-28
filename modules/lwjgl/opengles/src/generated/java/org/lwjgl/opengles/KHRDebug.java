@@ -316,8 +316,9 @@ public class KHRDebug {
     public static void glDebugMessageInsertKHR(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLuint") int id, @NativeType("GLenum") int severity, @NativeType("GLchar const *") CharSequence message) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer messageEncoded = stack.UTF8(message, false);
-            nglDebugMessageInsertKHR(source, type, id, severity, messageEncoded.remaining(), memAddress(messageEncoded));
+            int messageEncodedLength = stack.nUTF8(message, false);
+            long messageEncoded = stack.getPointerAddress();
+            nglDebugMessageInsertKHR(source, type, id, severity, messageEncodedLength, messageEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -489,8 +490,9 @@ public class KHRDebug {
     public static void glPushDebugGroupKHR(@NativeType("GLenum") int source, @NativeType("GLuint") int id, @NativeType("GLchar const *") CharSequence message) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer messageEncoded = stack.UTF8(message, false);
-            nglPushDebugGroupKHR(source, id, messageEncoded.remaining(), memAddress(messageEncoded));
+            int messageEncodedLength = stack.nUTF8(message, false);
+            long messageEncoded = stack.getPointerAddress();
+            nglPushDebugGroupKHR(source, id, messageEncodedLength, messageEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -540,8 +542,9 @@ public class KHRDebug {
     public static void glObjectLabelKHR(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @NativeType("GLchar const *") CharSequence label) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer labelEncoded = stack.UTF8(label, false);
-            nglObjectLabelKHR(identifier, name, labelEncoded.remaining(), memAddress(labelEncoded));
+            int labelEncodedLength = stack.nUTF8(label, false);
+            long labelEncoded = stack.getPointerAddress();
+            nglObjectLabelKHR(identifier, name, labelEncodedLength, labelEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -636,8 +639,9 @@ public class KHRDebug {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer labelEncoded = stack.UTF8(label, false);
-            nglObjectPtrLabelKHR(ptr, labelEncoded.remaining(), memAddress(labelEncoded));
+            int labelEncodedLength = stack.nUTF8(label, false);
+            long labelEncoded = stack.getPointerAddress();
+            nglObjectPtrLabelKHR(ptr, labelEncodedLength, labelEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

@@ -125,10 +125,7 @@ private class AutoSizeBytesTransform(
 internal open class AutoSizeCharSequenceTransform(private val bufferParam: Parameter) : FunctionTransform<Parameter> {
     override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
     override fun transformCall(param: Parameter, original: String): String {
-        var expression = if (bufferParam has nullable)
-            "remainingSafe(${bufferParam.name}Encoded)"
-        else
-            "${bufferParam.name}Encoded.remaining()"
+        var expression = "${bufferParam.name}EncodedLength"
 
         param.get<AutoSize>().factor.let {
             if (it != null)
@@ -136,7 +133,7 @@ internal open class AutoSizeCharSequenceTransform(private val bufferParam: Param
         }
 
         if (param.nativeType is PointerType<*>)
-            expression = "memAddress${if (bufferParam has nullable) "Safe" else ""}(${bufferParam.name}Encoded) + $expression"
+            expression = "${bufferParam.name}Encoded + $expression"
         else if ((param.nativeType.mapping as PrimitiveMapping).bytes < 4)
             expression = "(${param.nativeType.javaMethodType})($expression)"
 
@@ -169,21 +166,25 @@ internal class CharSequenceTransform(
     private val nullTerminated: Boolean
 ) : FunctionTransform<Parameter>, StackFunctionTransform<Parameter> {
     override fun transformDeclaration(param: Parameter, original: String) = "CharSequence ${param.name}"
-    override fun transformCall(param: Parameter, original: String) = if (param.has<Nullable>())
-        "memAddressSafe(${param.name}Encoded)"
-    else
-        "memAddress(${param.name}Encoded)"
-
+    override fun transformCall(param: Parameter, original: String) = "${param.name}Encoded"
     override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
-        writer.print("$t$t${t}ByteBuffer ${qtype.name}Encoded = stack.")
+        writer.print(
+            if (nullTerminated)
+                "$t$t${t}"
+            else
+                "$t$t${t}int ${qtype.name}EncodedLength = "
+        )
+        writer.print("stack.n")
         writer.print((qtype.nativeType as CharSequenceType).charMapping.charset)
         if (qtype.has(nullable)) {
             writer.print("Safe")
         }
-        writer.print("(${qtype.name}")
-        if (!nullTerminated)
-            writer.print(", false")
-        writer.println(");")
+        writer.println("(${qtype.name}, $nullTerminated);")
+        if (qtype.has<Nullable>()) {
+            writer.println("$t$t${t}long ${qtype.name}Encoded = ${qtype.name} == null ? NULL : stack.getPointerAddress();")
+        } else {
+            writer.println("$t$t${t}long ${qtype.name}Encoded = stack.getPointerAddress();")
+        }
     }
 }
 

@@ -125,8 +125,9 @@ public class CU55 extends CU50 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return ncuLinkAddData(state, type, memAddress(data), data.remaining(), memAddress(nameEncoded), remainingSafe(options), memAddressSafe(options), memAddressSafe(optionValues));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return ncuLinkAddData(state, type, memAddress(data), data.remaining(), nameEncoded, remainingSafe(options), memAddressSafe(options), memAddressSafe(optionValues));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -158,8 +159,9 @@ public class CU55 extends CU50 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.ASCII(path);
-            return ncuLinkAddFile(state, type, memAddress(pathEncoded), remainingSafe(options), memAddressSafe(options), memAddressSafe(optionValues));
+            stack.nASCII(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return ncuLinkAddFile(state, type, pathEncoded, remainingSafe(options), memAddressSafe(options), memAddressSafe(optionValues));
         } finally {
             stack.setPointer(stackPointer);
         }

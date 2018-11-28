@@ -1292,8 +1292,9 @@ public class GL30C extends GL21C {
     public static void glBindFragDataLocation(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            nglBindFragDataLocation(program, colorNumber, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nglBindFragDataLocation(program, colorNumber, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1332,8 +1333,9 @@ public class GL30C extends GL21C {
     public static int glGetFragDataLocation(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetFragDataLocation(program, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetFragDataLocation(program, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

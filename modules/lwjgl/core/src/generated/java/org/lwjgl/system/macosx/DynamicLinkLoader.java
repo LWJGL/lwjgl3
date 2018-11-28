@@ -171,8 +171,9 @@ public class DynamicLinkLoader {
     public static long dlopen(@Nullable @NativeType("char const *") CharSequence path, int mode) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.ASCIISafe(path);
-            return ndlopen(memAddressSafe(pathEncoded), mode);
+            stack.nASCIISafe(path, true);
+            long pathEncoded = path == null ? NULL : stack.getPointerAddress();
+            return ndlopen(pathEncoded, mode);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -258,8 +259,9 @@ public class DynamicLinkLoader {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return ndlsym(handle, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return ndlsym(handle, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

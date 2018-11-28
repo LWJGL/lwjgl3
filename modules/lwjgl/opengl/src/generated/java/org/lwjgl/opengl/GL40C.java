@@ -910,8 +910,9 @@ public class GL40C extends GL33C {
     public static int glGetSubroutineUniformLocation(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetSubroutineUniformLocation(program, shadertype, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetSubroutineUniformLocation(program, shadertype, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -952,8 +953,9 @@ public class GL40C extends GL33C {
     public static int glGetSubroutineIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetSubroutineIndex(program, shadertype, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetSubroutineIndex(program, shadertype, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

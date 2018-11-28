@@ -220,8 +220,9 @@ public class Remotery {
     public static void rmt_SetCurrentThreadName(@NativeType("rmtPStr") CharSequence thread_name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer thread_nameEncoded = stack.ASCII(thread_name);
-            nrmt_SetCurrentThreadName(memAddress(thread_nameEncoded));
+            stack.nASCII(thread_name, true);
+            long thread_nameEncoded = stack.getPointerAddress();
+            nrmt_SetCurrentThreadName(thread_nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -241,8 +242,9 @@ public class Remotery {
     public static void rmt_LogText(@NativeType("rmtPStr") CharSequence text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer textEncoded = stack.ASCII(text);
-            nrmt_LogText(memAddress(textEncoded));
+            stack.nASCII(text, true);
+            long textEncoded = stack.getPointerAddress();
+            nrmt_LogText(textEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -269,8 +271,9 @@ public class Remotery {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            nrmt_BeginCPUSample(memAddress(nameEncoded), flags, memAddressSafe(hash_cache));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nrmt_BeginCPUSample(nameEncoded, flags, memAddressSafe(hash_cache));
         } finally {
             stack.setPointer(stackPointer);
         }

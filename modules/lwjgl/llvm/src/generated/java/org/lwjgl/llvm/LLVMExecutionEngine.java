@@ -409,8 +409,9 @@ public class LLVMExecutionEngine {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMFindFunction(EE, memAddress(NameEncoded), memAddress(OutFn)) != 0;
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMFindFunction(EE, NameEncoded, memAddress(OutFn)) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -496,8 +497,9 @@ public class LLVMExecutionEngine {
     public static long LLVMGetGlobalValueAddress(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMGetGlobalValueAddress(EE, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetGlobalValueAddress(EE, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -525,8 +527,9 @@ public class LLVMExecutionEngine {
     public static long LLVMGetFunctionAddress(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMGetFunctionAddress(EE, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetFunctionAddress(EE, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

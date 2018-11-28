@@ -91,8 +91,9 @@ public class EXTSeparateShaderObjects {
     public static int glCreateShaderProgramEXT(@NativeType("GLenum") int type, @NativeType("GLchar const *") CharSequence string) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer stringEncoded = stack.UTF8(string);
-            return nglCreateShaderProgramEXT(type, memAddress(stringEncoded));
+            stack.nUTF8(string, true);
+            long stringEncoded = stack.getPointerAddress();
+            return nglCreateShaderProgramEXT(type, stringEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

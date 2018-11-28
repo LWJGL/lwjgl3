@@ -1136,8 +1136,9 @@ public class User32 {
     public static boolean UnregisterClass(@NativeType("LPCTSTR") CharSequence lpClassName, @NativeType("HINSTANCE") long hInstance) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer lpClassNameEncoded = stack.UTF16(lpClassName);
-            return nUnregisterClass(memAddress(lpClassNameEncoded), hInstance) != 0;
+            stack.nUTF16(lpClassName, true);
+            long lpClassNameEncoded = stack.getPointerAddress();
+            return nUnregisterClass(lpClassNameEncoded, hInstance) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1201,9 +1202,11 @@ public class User32 {
     public static long CreateWindowEx(@NativeType("DWORD") int dwExStyle, @Nullable @NativeType("LPCTSTR") CharSequence lpClassName, @Nullable @NativeType("LPCTSTR") CharSequence lpWindowName, @NativeType("DWORD") int dwStyle, int x, int y, int nWidth, int nHeight, @NativeType("HWND") long hWndParent, @NativeType("HMENU") long hMenu, @NativeType("HINSTANCE") long hInstance, @NativeType("LPVOID") long lpParam) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer lpClassNameEncoded = stack.UTF16Safe(lpClassName);
-            ByteBuffer lpWindowNameEncoded = stack.UTF16Safe(lpWindowName);
-            return nCreateWindowEx(dwExStyle, memAddressSafe(lpClassNameEncoded), memAddressSafe(lpWindowNameEncoded), dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+            stack.nUTF16Safe(lpClassName, true);
+            long lpClassNameEncoded = lpClassName == null ? NULL : stack.getPointerAddress();
+            stack.nUTF16Safe(lpWindowName, true);
+            long lpWindowNameEncoded = lpWindowName == null ? NULL : stack.getPointerAddress();
+            return nCreateWindowEx(dwExStyle, lpClassNameEncoded, lpWindowNameEncoded, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1384,8 +1387,9 @@ public class User32 {
     public static boolean SetWindowText(@NativeType("HWND") long hWnd, @NativeType("LPCTSTR") CharSequence lpString) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer lpStringEncoded = stack.UTF16(lpString);
-            return nSetWindowText(hWnd, memAddress(lpStringEncoded)) != 0;
+            stack.nUTF16(lpString, true);
+            long lpStringEncoded = stack.getPointerAddress();
+            return nSetWindowText(hWnd, lpStringEncoded) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1916,8 +1920,9 @@ public class User32 {
     public static long LoadIcon(@NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") CharSequence iconName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer iconNameEncoded = stack.UTF16(iconName);
-            return nLoadIcon(instance, memAddress(iconNameEncoded));
+            stack.nUTF16(iconName, true);
+            long iconNameEncoded = stack.getPointerAddress();
+            return nLoadIcon(instance, iconNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1958,8 +1963,9 @@ public class User32 {
     public static long LoadCursor(@NativeType("HINSTANCE") long instance, @NativeType("LPCTSTR") CharSequence cursorName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer cursorNameEncoded = stack.UTF16(cursorName);
-            return nLoadCursor(instance, memAddress(cursorNameEncoded));
+            stack.nUTF16(cursorName, true);
+            long cursorNameEncoded = stack.getPointerAddress();
+            return nLoadCursor(instance, cursorNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2254,8 +2260,9 @@ public class User32 {
     public static boolean EnumDisplayDevices(@Nullable @NativeType("LPCTSTR") CharSequence lpDevice, @NativeType("DWORD") int iDevNum, @NativeType("PDISPLAY_DEVICE") DISPLAY_DEVICE lpDisplayDevice, @NativeType("DWORD") int dwFlags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer lpDeviceEncoded = stack.UTF16Safe(lpDevice);
-            return nEnumDisplayDevices(memAddressSafe(lpDeviceEncoded), iDevNum, lpDisplayDevice.address(), dwFlags) != 0;
+            stack.nUTF16Safe(lpDevice, true);
+            long lpDeviceEncoded = lpDevice == null ? NULL : stack.getPointerAddress();
+            return nEnumDisplayDevices(lpDeviceEncoded, iDevNum, lpDisplayDevice.address(), dwFlags) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2335,8 +2342,9 @@ public class User32 {
     public static boolean EnumDisplaySettingsEx(@Nullable @NativeType("LPCTSTR") CharSequence lpszDeviceName, @NativeType("DWORD") int iModeNum, @NativeType("DEVMODE *") DEVMODE lpDevMode, @NativeType("DWORD") int dwFlags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer lpszDeviceNameEncoded = stack.UTF16Safe(lpszDeviceName);
-            return nEnumDisplaySettingsEx(memAddressSafe(lpszDeviceNameEncoded), iModeNum, lpDevMode.address(), dwFlags) != 0;
+            stack.nUTF16Safe(lpszDeviceName, true);
+            long lpszDeviceNameEncoded = lpszDeviceName == null ? NULL : stack.getPointerAddress();
+            return nEnumDisplaySettingsEx(lpszDeviceNameEncoded, iModeNum, lpDevMode.address(), dwFlags) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2402,8 +2410,9 @@ public class User32 {
     public static int ChangeDisplaySettingsEx(@Nullable @NativeType("LPCTSTR") CharSequence lpszDeviceName, @Nullable @NativeType("DEVMODE *") DEVMODE lpDevMode, @NativeType("HWND") long hwnd, @NativeType("DWORD") int dwflags, @NativeType("LPVOID") long lParam) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer lpszDeviceNameEncoded = stack.UTF16Safe(lpszDeviceName);
-            return nChangeDisplaySettingsEx(memAddressSafe(lpszDeviceNameEncoded), memAddressSafe(lpDevMode), hwnd, dwflags, lParam);
+            stack.nUTF16Safe(lpszDeviceName, true);
+            long lpszDeviceNameEncoded = lpszDeviceName == null ? NULL : stack.getPointerAddress();
+            return nChangeDisplaySettingsEx(lpszDeviceNameEncoded, memAddressSafe(lpDevMode), hwnd, dwflags, lParam);
         } finally {
             stack.setPointer(stackPointer);
         }

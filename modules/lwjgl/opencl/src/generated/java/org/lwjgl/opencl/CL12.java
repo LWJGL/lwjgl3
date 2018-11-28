@@ -270,8 +270,9 @@ public class CL12 extends CL11 {
     public static long clGetExtensionFunctionAddressForPlatform(@NativeType("cl_platform_id") long platform, @NativeType("cl_char const *") CharSequence funcname) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer funcnameEncoded = stack.ASCII(funcname);
-            return nclGetExtensionFunctionAddressForPlatform(platform, memAddress(funcnameEncoded));
+            stack.nASCII(funcname, true);
+            long funcnameEncoded = stack.getPointerAddress();
+            return nclGetExtensionFunctionAddressForPlatform(platform, funcnameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -821,8 +822,9 @@ public class CL12 extends CL11 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer kernel_namesEncoded = stack.ASCII(kernel_names);
-            return nclCreateProgramWithBuiltInKernels(context, device_list.remaining(), memAddress(device_list), memAddress(kernel_namesEncoded), memAddressSafe(errcode_ret));
+            stack.nASCII(kernel_names, true);
+            long kernel_namesEncoded = stack.getPointerAddress();
+            return nclCreateProgramWithBuiltInKernels(context, device_list.remaining(), memAddress(device_list), kernel_namesEncoded, memAddressSafe(errcode_ret));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -857,9 +859,10 @@ public class CL12 extends CL11 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer kernel_namesEncoded = stack.ASCII(kernel_names);
+            stack.nASCII(kernel_names, true);
+            long kernel_namesEncoded = stack.getPointerAddress();
             PointerBuffer device_list = stack.pointers(device);
-            return nclCreateProgramWithBuiltInKernels(context, 1, memAddress(device_list), memAddress(kernel_namesEncoded), memAddressSafe(errcode_ret));
+            return nclCreateProgramWithBuiltInKernels(context, 1, memAddress(device_list), kernel_namesEncoded, memAddressSafe(errcode_ret));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1000,8 +1003,9 @@ public class CL12 extends CL11 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer optionsEncoded = stack.ASCII(options);
-            return nclCompileProgram(program, remainingSafe(device_list), memAddressSafe(device_list), memAddress(optionsEncoded), remainingSafe(input_headers), memAddressSafe(input_headers), memAddressSafe(header_include_names), memAddressSafe(pfn_notify), user_data);
+            stack.nASCII(options, true);
+            long optionsEncoded = stack.getPointerAddress();
+            return nclCompileProgram(program, remainingSafe(device_list), memAddressSafe(device_list), optionsEncoded, remainingSafe(input_headers), memAddressSafe(input_headers), memAddressSafe(header_include_names), memAddressSafe(pfn_notify), user_data);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1176,8 +1180,9 @@ public class CL12 extends CL11 {
     public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") CharSequence options, @Nullable @NativeType("cl_program const *") PointerBuffer input_programs, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer optionsEncoded = stack.ASCII(options);
-            return nclLinkProgram(context, remainingSafe(device_list), memAddressSafe(device_list), memAddress(optionsEncoded), remainingSafe(input_programs), memAddressSafe(input_programs), memAddressSafe(pfn_notify), user_data);
+            stack.nASCII(options, true);
+            long optionsEncoded = stack.getPointerAddress();
+            return nclLinkProgram(context, remainingSafe(device_list), memAddressSafe(device_list), optionsEncoded, remainingSafe(input_programs), memAddressSafe(input_programs), memAddressSafe(pfn_notify), user_data);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1247,9 +1252,10 @@ public class CL12 extends CL11 {
     public static long clLinkProgram(@NativeType("cl_context") long context, @Nullable @NativeType("cl_device_id const *") PointerBuffer device_list, @NativeType("cl_char const *") CharSequence options, @Nullable @NativeType("cl_program const *") long input_program, @Nullable @NativeType("void (*) (cl_program, void *)") CLProgramCallbackI pfn_notify, @NativeType("void *") long user_data) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer optionsEncoded = stack.ASCII(options);
+            stack.nASCII(options, true);
+            long optionsEncoded = stack.getPointerAddress();
             PointerBuffer input_programs = stack.pointers(input_program);
-            return nclLinkProgram(context, remainingSafe(device_list), memAddressSafe(device_list), memAddress(optionsEncoded), 1, memAddress(input_programs), memAddressSafe(pfn_notify), user_data);
+            return nclLinkProgram(context, remainingSafe(device_list), memAddressSafe(device_list), optionsEncoded, 1, memAddress(input_programs), memAddressSafe(pfn_notify), user_data);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1950,8 +1956,9 @@ public class CL12 extends CL11 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer kernel_namesEncoded = stack.ASCII(kernel_names);
-            return callPPPPP(__functionAddress, context, device_list.remaining(), memAddress(device_list), memAddress(kernel_namesEncoded), errcode_ret);
+            stack.nASCII(kernel_names, true);
+            long kernel_namesEncoded = stack.getPointerAddress();
+            return callPPPPP(__functionAddress, context, device_list.remaining(), memAddress(device_list), kernel_namesEncoded, errcode_ret);
         } finally {
             stack.setPointer(stackPointer);
         }

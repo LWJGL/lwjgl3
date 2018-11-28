@@ -224,8 +224,9 @@ public class AMDDebugOutput {
     public static void glDebugMessageInsertAMD(@NativeType("GLenum") int category, @NativeType("GLenum") int severity, @NativeType("GLuint") int id, @NativeType("GLchar const *") CharSequence buf) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer bufEncoded = stack.UTF8(buf, false);
-            nglDebugMessageInsertAMD(category, severity, id, bufEncoded.remaining(), memAddress(bufEncoded));
+            int bufEncodedLength = stack.nUTF8(buf, false);
+            long bufEncoded = stack.getPointerAddress();
+            nglDebugMessageInsertAMD(category, severity, id, bufEncodedLength, bufEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

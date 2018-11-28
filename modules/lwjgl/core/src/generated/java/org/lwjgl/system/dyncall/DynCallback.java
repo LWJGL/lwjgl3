@@ -77,8 +77,9 @@ public class DynCallback {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer signatureEncoded = stack.ASCII(signature);
-            return ndcbNewCallback(memAddress(signatureEncoded), funcptr, userdata);
+            stack.nASCII(signature, true);
+            long signatureEncoded = stack.getPointerAddress();
+            return ndcbNewCallback(signatureEncoded, funcptr, userdata);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -123,8 +124,9 @@ public class DynCallback {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer signatureEncoded = stack.ASCII(signature);
-            ndcbInitCallback(pcb, memAddress(signatureEncoded), handler, userdata);
+            stack.nASCII(signature, true);
+            long signatureEncoded = stack.getPointerAddress();
+            ndcbInitCallback(pcb, signatureEncoded, handler, userdata);
         } finally {
             stack.setPointer(stackPointer);
         }

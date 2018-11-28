@@ -595,8 +595,9 @@ public class GLES32 extends GLES31 {
     public static void glDebugMessageInsert(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLuint") int id, @NativeType("GLenum") int severity, @NativeType("GLchar const *") CharSequence message) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer messageEncoded = stack.UTF8(message, false);
-            nglDebugMessageInsert(source, type, id, severity, messageEncoded.remaining(), memAddress(messageEncoded));
+            int messageEncodedLength = stack.nUTF8(message, false);
+            long messageEncoded = stack.getPointerAddress();
+            nglDebugMessageInsert(source, type, id, severity, messageEncodedLength, messageEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -778,8 +779,9 @@ public class GLES32 extends GLES31 {
     public static void glPushDebugGroup(@NativeType("GLenum") int source, @NativeType("GLuint") int id, @NativeType("GLchar const *") CharSequence message) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer messageEncoded = stack.UTF8(message, false);
-            nglPushDebugGroup(source, id, messageEncoded.remaining(), memAddress(messageEncoded));
+            int messageEncodedLength = stack.nUTF8(message, false);
+            long messageEncoded = stack.getPointerAddress();
+            nglPushDebugGroup(source, id, messageEncodedLength, messageEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -835,8 +837,9 @@ public class GLES32 extends GLES31 {
     public static void glObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @NativeType("GLchar const *") CharSequence label) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer labelEncoded = stack.UTF8(label, false);
-            nglObjectLabel(identifier, name, labelEncoded.remaining(), memAddress(labelEncoded));
+            int labelEncodedLength = stack.nUTF8(label, false);
+            long labelEncoded = stack.getPointerAddress();
+            nglObjectLabel(identifier, name, labelEncodedLength, labelEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -941,8 +944,9 @@ public class GLES32 extends GLES31 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer labelEncoded = stack.UTF8(label, false);
-            nglObjectPtrLabel(ptr, labelEncoded.remaining(), memAddress(labelEncoded));
+            int labelEncodedLength = stack.nUTF8(label, false);
+            long labelEncoded = stack.getPointerAddress();
+            nglObjectPtrLabel(ptr, labelEncodedLength, labelEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

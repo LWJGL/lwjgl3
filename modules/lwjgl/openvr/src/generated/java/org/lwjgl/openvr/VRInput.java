@@ -59,8 +59,9 @@ public class VRInput {
     public static int VRInput_SetActionManifestPath(@NativeType("char const *") CharSequence pchActionManifestPath) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchActionManifestPathEncoded = stack.ASCII(pchActionManifestPath);
-            return nVRInput_SetActionManifestPath(memAddress(pchActionManifestPathEncoded));
+            stack.nASCII(pchActionManifestPath, true);
+            long pchActionManifestPathEncoded = stack.getPointerAddress();
+            return nVRInput_SetActionManifestPath(pchActionManifestPathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -95,8 +96,9 @@ public class VRInput {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchActionSetNameEncoded = stack.ASCII(pchActionSetName);
-            return nVRInput_GetActionSetHandle(memAddress(pchActionSetNameEncoded), memAddress(pHandle));
+            stack.nASCII(pchActionSetName, true);
+            long pchActionSetNameEncoded = stack.getPointerAddress();
+            return nVRInput_GetActionSetHandle(pchActionSetNameEncoded, memAddress(pHandle));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -131,8 +133,9 @@ public class VRInput {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchActionNameEncoded = stack.ASCII(pchActionName);
-            return nVRInput_GetActionHandle(memAddress(pchActionNameEncoded), memAddress(pHandle));
+            stack.nASCII(pchActionName, true);
+            long pchActionNameEncoded = stack.getPointerAddress();
+            return nVRInput_GetActionHandle(pchActionNameEncoded, memAddress(pHandle));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -167,8 +170,9 @@ public class VRInput {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchInputSourcePathEncoded = stack.ASCII(pchInputSourcePath);
-            return nVRInput_GetInputSourceHandle(memAddress(pchInputSourcePathEncoded), memAddress(pHandle));
+            stack.nASCII(pchInputSourcePath, true);
+            long pchInputSourcePathEncoded = stack.getPointerAddress();
+            return nVRInput_GetInputSourceHandle(pchInputSourcePathEncoded, memAddress(pHandle));
         } finally {
             stack.setPointer(stackPointer);
         }

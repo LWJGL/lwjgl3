@@ -1186,8 +1186,9 @@ public class VRSystem {
     public static int VRSystem_DriverDebugRequest(@NativeType("TrackedDeviceIndex_t") int unDeviceIndex, @NativeType("char const *") CharSequence pchRequest, @Nullable @NativeType("char *") ByteBuffer pchResponseBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchRequestEncoded = stack.ASCII(pchRequest);
-            return nVRSystem_DriverDebugRequest(unDeviceIndex, memAddress(pchRequestEncoded), memAddressSafe(pchResponseBuffer), remainingSafe(pchResponseBuffer));
+            stack.nASCII(pchRequest, true);
+            long pchRequestEncoded = stack.getPointerAddress();
+            return nVRSystem_DriverDebugRequest(unDeviceIndex, pchRequestEncoded, memAddressSafe(pchResponseBuffer), remainingSafe(pchResponseBuffer));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1203,9 +1204,10 @@ public class VRSystem {
     public static String VRSystem_DriverDebugRequest(@NativeType("TrackedDeviceIndex_t") int unDeviceIndex, @NativeType("char const *") CharSequence pchRequest, @NativeType("uint32_t") int unResponseBufferSize) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchRequestEncoded = stack.ASCII(pchRequest);
+            stack.nASCII(pchRequest, true);
+            long pchRequestEncoded = stack.getPointerAddress();
             ByteBuffer pchResponseBuffer = stack.malloc(unResponseBufferSize);
-            int __result = nVRSystem_DriverDebugRequest(unDeviceIndex, memAddress(pchRequestEncoded), memAddress(pchResponseBuffer), unResponseBufferSize);
+            int __result = nVRSystem_DriverDebugRequest(unDeviceIndex, pchRequestEncoded, memAddress(pchResponseBuffer), unResponseBufferSize);
             return memASCII(pchResponseBuffer, __result - 1);
         } finally {
             stack.setPointer(stackPointer);

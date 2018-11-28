@@ -99,8 +99,9 @@ public class ClangCompilationDatabase {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer BuildDirEncoded = stack.ASCII(BuildDir);
-            return nclang_CompilationDatabase_fromDirectory(memAddress(BuildDirEncoded), memAddress(ErrorCode));
+            stack.nASCII(BuildDir, true);
+            long BuildDirEncoded = stack.getPointerAddress();
+            return nclang_CompilationDatabase_fromDirectory(BuildDirEncoded, memAddress(ErrorCode));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -142,8 +143,9 @@ public class ClangCompilationDatabase {
     public static long clang_CompilationDatabase_getCompileCommands(@NativeType("CXCompilationDatabase") long database, @NativeType("char const *") CharSequence CompleteFileName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer CompleteFileNameEncoded = stack.ASCII(CompleteFileName);
-            return nclang_CompilationDatabase_getCompileCommands(database, memAddress(CompleteFileNameEncoded));
+            stack.nASCII(CompleteFileName, true);
+            long CompleteFileNameEncoded = stack.getPointerAddress();
+            return nclang_CompilationDatabase_getCompileCommands(database, CompleteFileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

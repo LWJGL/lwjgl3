@@ -76,8 +76,9 @@ public class EXTBlendFuncExtended {
     public static void glBindFragDataLocationIndexedEXT(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLuint") int index, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            nglBindFragDataLocationIndexedEXT(program, colorNumber, index, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nglBindFragDataLocationIndexedEXT(program, colorNumber, index, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -99,8 +100,9 @@ public class EXTBlendFuncExtended {
     public static int glGetFragDataIndexEXT(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetFragDataIndexEXT(program, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetFragDataIndexEXT(program, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -120,8 +122,9 @@ public class EXTBlendFuncExtended {
     public static void glBindFragDataLocationEXT(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            nglBindFragDataLocationEXT(program, colorNumber, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nglBindFragDataLocationEXT(program, colorNumber, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -143,8 +146,9 @@ public class EXTBlendFuncExtended {
     public static int glGetProgramResourceLocationIndexEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetProgramResourceLocationIndexEXT(program, programInterface, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetProgramResourceLocationIndexEXT(program, programInterface, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

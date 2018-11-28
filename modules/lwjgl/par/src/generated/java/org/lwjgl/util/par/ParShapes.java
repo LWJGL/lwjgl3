@@ -364,8 +364,9 @@ public class ParShapes {
     public static ParShapesMesh par_shapes_create_lsystem(@NativeType("char const *") CharSequence program, int slices, int maxdepth) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer programEncoded = stack.ASCII(program);
-            long __result = npar_shapes_create_lsystem(memAddress(programEncoded), slices, maxdepth);
+            stack.nASCII(program, true);
+            long programEncoded = stack.getPointerAddress();
+            long __result = npar_shapes_create_lsystem(programEncoded, slices, maxdepth);
             return ParShapesMesh.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -399,8 +400,9 @@ public class ParShapes {
     public static void par_shapes_export(@NativeType("par_shapes_mesh const *") ParShapesMesh mesh, @NativeType("char const *") CharSequence objfile) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer objfileEncoded = stack.ASCII(objfile);
-            npar_shapes_export(mesh.address(), memAddress(objfileEncoded));
+            stack.nASCII(objfile, true);
+            long objfileEncoded = stack.getPointerAddress();
+            npar_shapes_export(mesh.address(), objfileEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

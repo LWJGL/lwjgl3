@@ -101,9 +101,11 @@ public class ClangBuildSystem {
     public static int clang_VirtualFileOverlay_addFileMapping(@NativeType("CXVirtualFileOverlay") long overlay, @NativeType("char const *") CharSequence virtualPath, @NativeType("char const *") CharSequence realPath) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer virtualPathEncoded = stack.ASCII(virtualPath);
-            ByteBuffer realPathEncoded = stack.ASCII(realPath);
-            return nclang_VirtualFileOverlay_addFileMapping(overlay, memAddress(virtualPathEncoded), memAddress(realPathEncoded));
+            stack.nASCII(virtualPath, true);
+            long virtualPathEncoded = stack.getPointerAddress();
+            stack.nASCII(realPath, true);
+            long realPathEncoded = stack.getPointerAddress();
+            return nclang_VirtualFileOverlay_addFileMapping(overlay, virtualPathEncoded, realPathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -229,8 +231,9 @@ public class ClangBuildSystem {
     public static int clang_ModuleMapDescriptor_setFrameworkModuleName(@NativeType("CXModuleMapDescriptor") long descriptor, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nclang_ModuleMapDescriptor_setFrameworkModuleName(descriptor, memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nclang_ModuleMapDescriptor_setFrameworkModuleName(descriptor, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -269,8 +272,9 @@ public class ClangBuildSystem {
     public static int clang_ModuleMapDescriptor_setUmbrellaHeader(@NativeType("CXModuleMapDescriptor") long descriptor, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nclang_ModuleMapDescriptor_setUmbrellaHeader(descriptor, memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nclang_ModuleMapDescriptor_setUmbrellaHeader(descriptor, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

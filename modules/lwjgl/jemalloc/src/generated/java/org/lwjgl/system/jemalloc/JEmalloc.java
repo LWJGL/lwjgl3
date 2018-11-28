@@ -632,8 +632,9 @@ public class JEmalloc {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nje_mallctl(memAddress(nameEncoded), memAddressSafe(oldp), memAddressSafe(oldlenp), memAddressSafe(newp), remainingSafe(newp));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nje_mallctl(nameEncoded, memAddressSafe(oldp), memAddressSafe(oldlenp), memAddressSafe(newp), remainingSafe(newp));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -729,8 +730,9 @@ public class JEmalloc {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nje_mallctlnametomib(memAddress(nameEncoded), memAddress(mibp), memAddress(miblenp));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nje_mallctlnametomib(nameEncoded, memAddress(mibp), memAddress(miblenp));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -808,8 +810,9 @@ public class JEmalloc {
     public static void je_malloc_stats_print(@Nullable @NativeType("void (*) (void *, char const *)") MallocMessageCallbackI write_cb, @NativeType("void *") long cbopaque, @Nullable @NativeType("char const *") CharSequence opts) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer optsEncoded = stack.ASCIISafe(opts);
-            nje_malloc_stats_print(memAddressSafe(write_cb), cbopaque, memAddressSafe(optsEncoded));
+            stack.nASCIISafe(opts, true);
+            long optsEncoded = opts == null ? NULL : stack.getPointerAddress();
+            nje_malloc_stats_print(memAddressSafe(write_cb), cbopaque, optsEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

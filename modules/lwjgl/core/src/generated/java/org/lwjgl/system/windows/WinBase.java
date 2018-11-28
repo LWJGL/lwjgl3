@@ -90,8 +90,9 @@ public class WinBase {
     public static long GetModuleHandle(@Nullable @NativeType("LPCTSTR") CharSequence moduleName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer moduleNameEncoded = stack.UTF16Safe(moduleName);
-            return nGetModuleHandle(memAddressSafe(moduleNameEncoded));
+            stack.nUTF16Safe(moduleName, true);
+            long moduleNameEncoded = moduleName == null ? NULL : stack.getPointerAddress();
+            return nGetModuleHandle(moduleNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -146,8 +147,9 @@ public class WinBase {
     public static long LoadLibrary(@NativeType("LPCTSTR") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF16(name);
-            return nLoadLibrary(memAddress(nameEncoded));
+            stack.nUTF16(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nLoadLibrary(nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -188,8 +190,9 @@ public class WinBase {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nGetProcAddress(handle, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nGetProcAddress(handle, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

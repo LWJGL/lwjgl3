@@ -1729,8 +1729,9 @@ public class STBTruetype {
     public static int stbtt_FindMatchingFont(@NativeType("unsigned char const *") ByteBuffer fontdata, @NativeType("char const *") CharSequence name, int flags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nstbtt_FindMatchingFont(memAddress(fontdata), memAddress(nameEncoded), flags);
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nstbtt_FindMatchingFont(memAddress(fontdata), nameEncoded, flags);
         } finally {
             stack.setPointer(stackPointer);
         }

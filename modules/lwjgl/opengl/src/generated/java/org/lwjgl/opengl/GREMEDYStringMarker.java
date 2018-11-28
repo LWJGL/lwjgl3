@@ -72,8 +72,9 @@ public class GREMEDYStringMarker {
     public static void glStringMarkerGREMEDY(@NativeType("GLchar const *") CharSequence string) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer stringEncoded = stack.UTF8(string, false);
-            nglStringMarkerGREMEDY(stringEncoded.remaining(), memAddress(stringEncoded));
+            int stringEncodedLength = stack.nUTF8(string, false);
+            long stringEncoded = stack.getPointerAddress();
+            nglStringMarkerGREMEDY(stringEncodedLength, stringEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

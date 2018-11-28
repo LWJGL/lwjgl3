@@ -56,8 +56,9 @@ public class VRResources {
     public static int VRResources_LoadSharedResource(@NativeType("char const *") CharSequence pchResourceName, @Nullable @NativeType("char *") ByteBuffer pchBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchResourceNameEncoded = stack.ASCII(pchResourceName);
-            return nVRResources_LoadSharedResource(memAddress(pchResourceNameEncoded), memAddressSafe(pchBuffer), remainingSafe(pchBuffer));
+            stack.nASCII(pchResourceName, true);
+            long pchResourceNameEncoded = stack.getPointerAddress();
+            return nVRResources_LoadSharedResource(pchResourceNameEncoded, memAddressSafe(pchBuffer), remainingSafe(pchBuffer));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -72,9 +73,10 @@ public class VRResources {
     public static String VRResources_LoadSharedResource(@NativeType("char const *") CharSequence pchResourceName, @NativeType("uint32_t") int unBufferLen) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchResourceNameEncoded = stack.ASCII(pchResourceName);
+            stack.nASCII(pchResourceName, true);
+            long pchResourceNameEncoded = stack.getPointerAddress();
             ByteBuffer pchBuffer = stack.malloc(unBufferLen);
-            int __result = nVRResources_LoadSharedResource(memAddress(pchResourceNameEncoded), memAddress(pchBuffer), unBufferLen);
+            int __result = nVRResources_LoadSharedResource(pchResourceNameEncoded, memAddress(pchBuffer), unBufferLen);
             return memASCII(pchBuffer, __result - 1);
         } finally {
             stack.setPointer(stackPointer);
@@ -113,9 +115,11 @@ public class VRResources {
     public static int VRResources_GetResourceFullPath(@NativeType("char const *") CharSequence pchResourceName, @NativeType("char const *") CharSequence pchResourceTypeDirectory, @Nullable @NativeType("char *") ByteBuffer pchPathBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchResourceNameEncoded = stack.ASCII(pchResourceName);
-            ByteBuffer pchResourceTypeDirectoryEncoded = stack.ASCII(pchResourceTypeDirectory);
-            return nVRResources_GetResourceFullPath(memAddress(pchResourceNameEncoded), memAddress(pchResourceTypeDirectoryEncoded), memAddressSafe(pchPathBuffer), remainingSafe(pchPathBuffer));
+            stack.nASCII(pchResourceName, true);
+            long pchResourceNameEncoded = stack.getPointerAddress();
+            stack.nASCII(pchResourceTypeDirectory, true);
+            long pchResourceTypeDirectoryEncoded = stack.getPointerAddress();
+            return nVRResources_GetResourceFullPath(pchResourceNameEncoded, pchResourceTypeDirectoryEncoded, memAddressSafe(pchPathBuffer), remainingSafe(pchPathBuffer));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -129,10 +133,12 @@ public class VRResources {
     public static String VRResources_GetResourceFullPath(@NativeType("char const *") CharSequence pchResourceName, @NativeType("char const *") CharSequence pchResourceTypeDirectory, @NativeType("uint32_t") int unBufferLen) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchResourceNameEncoded = stack.ASCII(pchResourceName);
-            ByteBuffer pchResourceTypeDirectoryEncoded = stack.ASCII(pchResourceTypeDirectory);
+            stack.nASCII(pchResourceName, true);
+            long pchResourceNameEncoded = stack.getPointerAddress();
+            stack.nASCII(pchResourceTypeDirectory, true);
+            long pchResourceTypeDirectoryEncoded = stack.getPointerAddress();
             ByteBuffer pchPathBuffer = stack.malloc(unBufferLen);
-            int __result = nVRResources_GetResourceFullPath(memAddress(pchResourceNameEncoded), memAddress(pchResourceTypeDirectoryEncoded), memAddress(pchPathBuffer), unBufferLen);
+            int __result = nVRResources_GetResourceFullPath(pchResourceNameEncoded, pchResourceTypeDirectoryEncoded, memAddress(pchPathBuffer), unBufferLen);
             return memASCII(pchPathBuffer, __result - 1);
         } finally {
             stack.setPointer(stackPointer);

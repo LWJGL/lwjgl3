@@ -206,8 +206,9 @@ public class WGL {
     public static long wglGetProcAddress(@NativeType("LPCSTR") CharSequence proc) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer procEncoded = stack.ASCII(proc);
-            return nwglGetProcAddress(memAddress(procEncoded));
+            stack.nASCII(proc, true);
+            long procEncoded = stack.getPointerAddress();
+            return nwglGetProcAddress(procEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

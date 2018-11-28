@@ -50,8 +50,9 @@ public class RemoteryGL {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            nrmt_BeginOpenGLSample(memAddress(nameEncoded), memAddressSafe(hash_cache));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nrmt_BeginOpenGLSample(nameEncoded, memAddressSafe(hash_cache));
         } finally {
             stack.setPointer(stackPointer);
         }

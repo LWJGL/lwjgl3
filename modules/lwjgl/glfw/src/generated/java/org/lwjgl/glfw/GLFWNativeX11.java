@@ -159,8 +159,9 @@ public class GLFWNativeX11 {
     public static void glfwSetX11SelectionString(@NativeType("char const *") CharSequence string) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer stringEncoded = stack.UTF8(string);
-            nglfwSetX11SelectionString(memAddress(stringEncoded));
+            stack.nUTF8(string, true);
+            long stringEncoded = stack.getPointerAddress();
+            nglfwSetX11SelectionString(stringEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

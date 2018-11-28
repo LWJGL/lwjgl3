@@ -529,9 +529,11 @@ public class EXTDebugReport {
     public static void vkDebugReportMessageEXT(VkInstance instance, @NativeType("VkDebugReportFlagsEXT") int flags, @NativeType("VkDebugReportObjectTypeEXT") int objectType, @NativeType("uint64_t") long object, @NativeType("size_t") long location, @NativeType("int32_t") int messageCode, @NativeType("char const *") CharSequence pLayerPrefix, @NativeType("char const *") CharSequence pMessage) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pLayerPrefixEncoded = stack.UTF8(pLayerPrefix);
-            ByteBuffer pMessageEncoded = stack.UTF8(pMessage);
-            nvkDebugReportMessageEXT(instance, flags, objectType, object, location, messageCode, memAddress(pLayerPrefixEncoded), memAddress(pMessageEncoded));
+            stack.nUTF8(pLayerPrefix, true);
+            long pLayerPrefixEncoded = stack.getPointerAddress();
+            stack.nUTF8(pMessage, true);
+            long pMessageEncoded = stack.getPointerAddress();
+            nvkDebugReportMessageEXT(instance, flags, objectType, object, location, messageCode, pLayerPrefixEncoded, pMessageEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

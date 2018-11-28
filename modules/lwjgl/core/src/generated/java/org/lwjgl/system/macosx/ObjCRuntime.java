@@ -415,8 +415,9 @@ public class ObjCRuntime {
     public static long object_setInstanceVariable(@NativeType("id") long obj, @NativeType("char const *") CharSequence name, @NativeType("void *") ByteBuffer value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nobject_setInstanceVariable(obj, memAddress(nameEncoded), memAddress(value));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nobject_setInstanceVariable(obj, nameEncoded, memAddress(value));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -467,8 +468,9 @@ public class ObjCRuntime {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nobject_getInstanceVariable(obj, memAddress(nameEncoded), memAddress(outValue));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nobject_getInstanceVariable(obj, nameEncoded, memAddress(outValue));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -514,8 +516,9 @@ public class ObjCRuntime {
     public static long objc_getClass(@NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nobjc_getClass(memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nobjc_getClass(nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -563,8 +566,9 @@ public class ObjCRuntime {
     public static long objc_getMetaClass(@NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nobjc_getMetaClass(memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nobjc_getMetaClass(nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -610,8 +614,9 @@ public class ObjCRuntime {
     public static long objc_lookUpClass(@NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nobjc_lookUpClass(memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nobjc_lookUpClass(nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -659,8 +664,9 @@ public class ObjCRuntime {
     public static long objc_getRequiredClass(@NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nobjc_getRequiredClass(memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nobjc_getRequiredClass(nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -883,8 +889,9 @@ public class ObjCRuntime {
     public static long class_getInstanceVariable(@NativeType("Class") long cls, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nclass_getInstanceVariable(cls, memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nclass_getInstanceVariable(cls, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -929,8 +936,9 @@ public class ObjCRuntime {
     public static long class_getClassVariable(@NativeType("Class") long cls, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nclass_getClassVariable(cls, memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nclass_getClassVariable(cls, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1193,8 +1201,9 @@ public class ObjCRuntime {
     public static long class_getProperty(@NativeType("Class") long cls, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nclass_getProperty(cls, memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nclass_getProperty(cls, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1372,8 +1381,9 @@ public class ObjCRuntime {
     public static boolean class_addMethod(@NativeType("Class") long cls, @NativeType("SEL") long name, @NativeType("IMP") long imp, @NativeType("char const *") CharSequence types) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer typesEncoded = stack.UTF8(types);
-            return nclass_addMethod(cls, name, imp, memAddress(typesEncoded));
+            stack.nUTF8(types, true);
+            long typesEncoded = stack.getPointerAddress();
+            return nclass_addMethod(cls, name, imp, typesEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1450,8 +1460,9 @@ public class ObjCRuntime {
     public static long class_replaceMethod(@NativeType("Class") long cls, @NativeType("SEL") long name, @NativeType("IMP") long imp, @NativeType("char const *") CharSequence types) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer typesEncoded = stack.UTF8(types);
-            return nclass_replaceMethod(cls, name, imp, memAddress(typesEncoded));
+            stack.nUTF8(types, true);
+            long typesEncoded = stack.getPointerAddress();
+            return nclass_replaceMethod(cls, name, imp, typesEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1507,9 +1518,11 @@ public class ObjCRuntime {
     public static boolean class_addIvar(@NativeType("Class") long cls, @NativeType("char const *") CharSequence name, @NativeType("size_t") long size, @NativeType("uint8_t") byte alignment, @NativeType("char const *") CharSequence types) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            ByteBuffer typesEncoded = stack.UTF8(types);
-            return nclass_addIvar(cls, memAddress(nameEncoded), size, alignment, memAddress(typesEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            stack.nUTF8(types, true);
+            long typesEncoded = stack.getPointerAddress();
+            return nclass_addIvar(cls, nameEncoded, size, alignment, typesEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1581,8 +1594,9 @@ public class ObjCRuntime {
     public static boolean class_addProperty(@NativeType("Class") long cls, @NativeType("char const *") CharSequence name, @NativeType("objc_property_attribute_t const *") ObjCPropertyAttribute.Buffer attributes) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nclass_addProperty(cls, memAddress(nameEncoded), attributes.address(), attributes.remaining());
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nclass_addProperty(cls, nameEncoded, attributes.address(), attributes.remaining());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1628,8 +1642,9 @@ public class ObjCRuntime {
     public static void class_replaceProperty(@NativeType("Class") long cls, @NativeType("char const *") CharSequence name, @NativeType("objc_property_attribute_t const *") ObjCPropertyAttribute.Buffer attributes) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            nclass_replaceProperty(cls, memAddress(nameEncoded), attributes.address(), attributes.remaining());
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nclass_replaceProperty(cls, nameEncoded, attributes.address(), attributes.remaining());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1668,8 +1683,9 @@ public class ObjCRuntime {
     public static void class_setIvarLayout(@NativeType("Class") long cls, @NativeType("uint8_t const *") CharSequence layout) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer layoutEncoded = stack.ASCII(layout);
-            nclass_setIvarLayout(cls, memAddress(layoutEncoded));
+            stack.nASCII(layout, true);
+            long layoutEncoded = stack.getPointerAddress();
+            nclass_setIvarLayout(cls, layoutEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1708,8 +1724,9 @@ public class ObjCRuntime {
     public static void class_setWeakIvarLayout(@NativeType("Class") long cls, @NativeType("uint8_t const *") CharSequence layout) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer layoutEncoded = stack.ASCII(layout);
-            nclass_setWeakIvarLayout(cls, memAddress(layoutEncoded));
+            stack.nASCII(layout, true);
+            long layoutEncoded = stack.getPointerAddress();
+            nclass_setWeakIvarLayout(cls, layoutEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1837,8 +1854,9 @@ public class ObjCRuntime {
     public static long objc_allocateClassPair(@NativeType("Class") long superclass, @NativeType("char const *") CharSequence name, @NativeType("size_t") long extraBytes) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nobjc_allocateClassPair(superclass, memAddress(nameEncoded), extraBytes);
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nobjc_allocateClassPair(superclass, nameEncoded, extraBytes);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2344,8 +2362,9 @@ public class ObjCRuntime {
     public static String property_copyAttributeValue(@NativeType("objc_property_t") long property, @NativeType("char const *") CharSequence attributeName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer attributeNameEncoded = stack.UTF8(attributeName);
-            long __result = nproperty_copyAttributeValue(property, memAddress(attributeNameEncoded));
+            stack.nUTF8(attributeName, true);
+            long attributeNameEncoded = stack.getPointerAddress();
+            long __result = nproperty_copyAttributeValue(property, attributeNameEncoded);
             return memUTF8Safe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -2390,8 +2409,9 @@ public class ObjCRuntime {
     public static long objc_getProtocol(@NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nobjc_getProtocol(memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nobjc_getProtocol(nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2621,8 +2641,9 @@ public class ObjCRuntime {
     public static long protocol_getProperty(@NativeType("Protocol *") long proto, @NativeType("char const *") CharSequence name, @NativeType("BOOL") boolean isRequiredProperty, @NativeType("BOOL") boolean isInstanceProperty) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nprotocol_getProperty(proto, memAddress(nameEncoded), isRequiredProperty, isInstanceProperty);
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nprotocol_getProperty(proto, nameEncoded, isRequiredProperty, isInstanceProperty);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2746,8 +2767,9 @@ public class ObjCRuntime {
     public static long objc_allocateProtocol(@NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nobjc_allocateProtocol(memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nobjc_allocateProtocol(nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2819,8 +2841,9 @@ public class ObjCRuntime {
     public static void protocol_addMethodDescription(@NativeType("Protocol *") long proto, @NativeType("SEL") long name, @NativeType("char const *") CharSequence types, @NativeType("BOOL") boolean isRequiredMethod, @NativeType("BOOL") boolean isInstanceMethod) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer typesEncoded = stack.UTF8(types);
-            nprotocol_addMethodDescription(proto, name, memAddress(typesEncoded), isRequiredMethod, isInstanceMethod);
+            stack.nUTF8(types, true);
+            long typesEncoded = stack.getPointerAddress();
+            nprotocol_addMethodDescription(proto, name, typesEncoded, isRequiredMethod, isInstanceMethod);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2900,8 +2923,9 @@ public class ObjCRuntime {
     public static void protocol_addProperty(@NativeType("Protocol *") long proto, @NativeType("char const *") CharSequence name, @NativeType("objc_property_attribute_t const *") ObjCPropertyAttribute.Buffer attributes, @NativeType("BOOL") boolean isRequiredProperty, @NativeType("BOOL") boolean isInstanceProperty) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            nprotocol_addProperty(proto, memAddress(nameEncoded), attributes.address(), attributes.remaining(), isRequiredProperty, isInstanceProperty);
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nprotocol_addProperty(proto, nameEncoded, attributes.address(), attributes.remaining(), isRequiredProperty, isInstanceProperty);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3010,8 +3034,9 @@ public class ObjCRuntime {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer outCount = stack.callocInt(1);
-            ByteBuffer imageEncoded = stack.UTF8(image);
-            long __result = nobjc_copyClassNamesForImage(memAddress(imageEncoded), memAddress(outCount));
+            stack.nUTF8(image, true);
+            long imageEncoded = stack.getPointerAddress();
+            long __result = nobjc_copyClassNamesForImage(imageEncoded, memAddress(outCount));
             return memPointerBufferSafe(__result, outCount.get(0));
         } finally {
             stack.setPointer(stackPointer);
@@ -3081,8 +3106,9 @@ public class ObjCRuntime {
     public static long sel_getUid(@NativeType("char const *") CharSequence str) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer strEncoded = stack.UTF8(str);
-            return nsel_getUid(memAddress(strEncoded));
+            stack.nUTF8(str, true);
+            long strEncoded = stack.getPointerAddress();
+            return nsel_getUid(strEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3128,8 +3154,9 @@ public class ObjCRuntime {
     public static long sel_registerName(@NativeType("char const *") CharSequence str) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer strEncoded = stack.UTF8(str);
-            return nsel_registerName(memAddress(strEncoded));
+            stack.nUTF8(str, true);
+            long strEncoded = stack.getPointerAddress();
+            return nsel_registerName(strEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

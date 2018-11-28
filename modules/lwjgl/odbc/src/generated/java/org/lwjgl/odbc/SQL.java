@@ -2165,10 +2165,13 @@ public class SQL {
     public static short SQLConnect(@NativeType("SQLHDBC") long ConnectionHandle, @NativeType("SQLWCHAR *") CharSequence ServerName, @NativeType("SQLWCHAR *") CharSequence UserName, @NativeType("SQLWCHAR *") CharSequence Authentication) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer ServerNameEncoded = stack.UTF16(ServerName, false);
-            ByteBuffer UserNameEncoded = stack.UTF16(UserName, false);
-            ByteBuffer AuthenticationEncoded = stack.UTF16(Authentication, false);
-            return nSQLConnect(ConnectionHandle, memAddress(ServerNameEncoded), (short)(ServerNameEncoded.remaining() >> 1), memAddress(UserNameEncoded), (short)(UserNameEncoded.remaining() >> 1), memAddress(AuthenticationEncoded), (short)(AuthenticationEncoded.remaining() >> 1));
+            int ServerNameEncodedLength = stack.nUTF16(ServerName, false);
+            long ServerNameEncoded = stack.getPointerAddress();
+            int UserNameEncodedLength = stack.nUTF16(UserName, false);
+            long UserNameEncoded = stack.getPointerAddress();
+            int AuthenticationEncodedLength = stack.nUTF16(Authentication, false);
+            long AuthenticationEncoded = stack.getPointerAddress();
+            return nSQLConnect(ConnectionHandle, ServerNameEncoded, (short)(ServerNameEncodedLength >> 1), UserNameEncoded, (short)(UserNameEncodedLength >> 1), AuthenticationEncoded, (short)(AuthenticationEncodedLength >> 1));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2687,8 +2690,9 @@ public class SQL {
     public static short SQLPrepare(@NativeType("SQLHSTMT") long StatementHandle, @NativeType("SQLWCHAR *") CharSequence StatementText) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer StatementTextEncoded = stack.UTF16(StatementText, false);
-            return nSQLPrepare(StatementHandle, memAddress(StatementTextEncoded), StatementTextEncoded.remaining() >> 1);
+            int StatementTextEncodedLength = stack.nUTF16(StatementText, false);
+            long StatementTextEncoded = stack.getPointerAddress();
+            return nSQLPrepare(StatementHandle, StatementTextEncoded, StatementTextEncodedLength >> 1);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2800,8 +2804,9 @@ public class SQL {
     public static short SQLExecDirect(@NativeType("SQLHSTMT") long StatementHandle, @NativeType("SQLWCHAR *") CharSequence StatementText) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer StatementTextEncoded = stack.UTF16(StatementText, false);
-            return nSQLExecDirect(StatementHandle, memAddress(StatementTextEncoded), StatementTextEncoded.remaining() >> 1);
+            int StatementTextEncodedLength = stack.nUTF16(StatementText, false);
+            long StatementTextEncoded = stack.getPointerAddress();
+            return nSQLExecDirect(StatementHandle, StatementTextEncoded, StatementTextEncodedLength >> 1);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3545,8 +3550,9 @@ public class SQL {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer InConnectionStringEncoded = stack.UTF16(InConnectionString, false);
-            return nSQLDriverConnect(ConnectionHandle, WindowHandle, memAddress(InConnectionStringEncoded), (short)(InConnectionStringEncoded.remaining() >> 1), memAddressSafe(OutConnectionString), (short)(remainingSafe(OutConnectionString) >> 1), memAddressSafe(StringLength2Ptr), DriverCompletion);
+            int InConnectionStringEncodedLength = stack.nUTF16(InConnectionString, false);
+            long InConnectionStringEncoded = stack.getPointerAddress();
+            return nSQLDriverConnect(ConnectionHandle, WindowHandle, InConnectionStringEncoded, (short)(InConnectionStringEncodedLength >> 1), memAddressSafe(OutConnectionString), (short)(remainingSafe(OutConnectionString) >> 1), memAddressSafe(StringLength2Ptr), DriverCompletion);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3621,8 +3627,9 @@ public class SQL {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer InConnectionStringEncoded = stack.UTF16(InConnectionString, false);
-            return nSQLBrowseConnect(ConnectionHandle, memAddress(InConnectionStringEncoded), (short)(InConnectionStringEncoded.remaining() >> 1), memAddressSafe(OutConnectionString), (short)(remainingSafe(OutConnectionString) >> 1), memAddressSafe(StringLength2Ptr));
+            int InConnectionStringEncodedLength = stack.nUTF16(InConnectionString, false);
+            long InConnectionStringEncoded = stack.getPointerAddress();
+            return nSQLBrowseConnect(ConnectionHandle, InConnectionStringEncoded, (short)(InConnectionStringEncodedLength >> 1), memAddressSafe(OutConnectionString), (short)(remainingSafe(OutConnectionString) >> 1), memAddressSafe(StringLength2Ptr));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3779,8 +3786,9 @@ public class SQL {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer InStatementTextEncoded = stack.UTF16(InStatementText, false);
-            return nSQLNativeSql(ConnectionHandle, memAddress(InStatementTextEncoded), InStatementTextEncoded.remaining() >> 1, memAddressSafe(OutStatementText), remainingSafe(OutStatementText) >> 1, memAddress(TextLength2Ptr));
+            int InStatementTextEncodedLength = stack.nUTF16(InStatementText, false);
+            long InStatementTextEncoded = stack.getPointerAddress();
+            return nSQLNativeSql(ConnectionHandle, InStatementTextEncoded, InStatementTextEncodedLength >> 1, memAddressSafe(OutStatementText), remainingSafe(OutStatementText) >> 1, memAddress(TextLength2Ptr));
         } finally {
             stack.setPointer(stackPointer);
         }

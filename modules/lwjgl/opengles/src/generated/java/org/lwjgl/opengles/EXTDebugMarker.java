@@ -49,8 +49,9 @@ public class EXTDebugMarker {
     public static void glInsertEventMarkerEXT(@NativeType("GLchar const *") CharSequence marker) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer markerEncoded = stack.UTF8(marker, false);
-            nglInsertEventMarkerEXT(markerEncoded.remaining(), memAddress(markerEncoded));
+            int markerEncodedLength = stack.nUTF8(marker, false);
+            long markerEncoded = stack.getPointerAddress();
+            nglInsertEventMarkerEXT(markerEncodedLength, markerEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -67,8 +68,9 @@ public class EXTDebugMarker {
     public static void glPushGroupMarkerEXT(@NativeType("GLchar const *") CharSequence marker) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer markerEncoded = stack.UTF8(marker, false);
-            nglPushGroupMarkerEXT(markerEncoded.remaining(), memAddress(markerEncoded));
+            int markerEncodedLength = stack.nUTF8(marker, false);
+            long markerEncoded = stack.getPointerAddress();
+            nglPushGroupMarkerEXT(markerEncodedLength, markerEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

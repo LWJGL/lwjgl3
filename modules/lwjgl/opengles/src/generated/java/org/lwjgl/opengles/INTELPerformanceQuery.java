@@ -219,8 +219,9 @@ public class INTELPerformanceQuery {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer queryNameEncoded = stack.ASCII(queryName);
-            nglGetPerfQueryIdByNameINTEL(memAddress(queryNameEncoded), memAddress(queryId));
+            stack.nASCII(queryName, true);
+            long queryNameEncoded = stack.getPointerAddress();
+            nglGetPerfQueryIdByNameINTEL(queryNameEncoded, memAddress(queryId));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -230,9 +231,10 @@ public class INTELPerformanceQuery {
     public static int glGetPerfQueryIdByNameINTEL(@NativeType("GLchar *") CharSequence queryName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer queryNameEncoded = stack.ASCII(queryName);
+            stack.nASCII(queryName, true);
+            long queryNameEncoded = stack.getPointerAddress();
             IntBuffer queryId = stack.callocInt(1);
-            nglGetPerfQueryIdByNameINTEL(memAddress(queryNameEncoded), memAddress(queryId));
+            nglGetPerfQueryIdByNameINTEL(queryNameEncoded, memAddress(queryId));
             return queryId.get(0);
         } finally {
             stack.setPointer(stackPointer);
@@ -327,8 +329,9 @@ public class INTELPerformanceQuery {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer queryNameEncoded = stack.ASCII(queryName);
-            callPPV(__functionAddress, memAddress(queryNameEncoded), queryId);
+            stack.nASCII(queryName, true);
+            long queryNameEncoded = stack.getPointerAddress();
+            callPPV(__functionAddress, queryNameEncoded, queryId);
         } finally {
             stack.setPointer(stackPointer);
         }

@@ -110,8 +110,9 @@ public class LLVMDisassembler {
     public static long LLVMCreateDisasm(@NativeType("char const *") CharSequence TripleName, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer TripleNameEncoded = stack.UTF8(TripleName);
-            return nLLVMCreateDisasm(memAddress(TripleNameEncoded), DisInfo, TagType, memAddressSafe(GetOpInfo), memAddressSafe(SymbolLookUp));
+            stack.nUTF8(TripleName, true);
+            long TripleNameEncoded = stack.getPointerAddress();
+            return nLLVMCreateDisasm(TripleNameEncoded, DisInfo, TagType, memAddressSafe(GetOpInfo), memAddressSafe(SymbolLookUp));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -152,9 +153,11 @@ public class LLVMDisassembler {
     public static long LLVMCreateDisasmCPU(@NativeType("char const *") CharSequence Triple, @NativeType("char const *") CharSequence CPU, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer TripleEncoded = stack.UTF8(Triple);
-            ByteBuffer CPUEncoded = stack.UTF8(CPU);
-            return nLLVMCreateDisasmCPU(memAddress(TripleEncoded), memAddress(CPUEncoded), DisInfo, TagType, memAddressSafe(GetOpInfo), memAddressSafe(SymbolLookUp));
+            stack.nUTF8(Triple, true);
+            long TripleEncoded = stack.getPointerAddress();
+            stack.nUTF8(CPU, true);
+            long CPUEncoded = stack.getPointerAddress();
+            return nLLVMCreateDisasmCPU(TripleEncoded, CPUEncoded, DisInfo, TagType, memAddressSafe(GetOpInfo), memAddressSafe(SymbolLookUp));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -194,10 +197,13 @@ public class LLVMDisassembler {
     public static long LLVMCreateDisasmCPUFeatures(@NativeType("char const *") CharSequence Triple, @NativeType("char const *") CharSequence CPU, @NativeType("char const *") CharSequence Features, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer TripleEncoded = stack.UTF8(Triple);
-            ByteBuffer CPUEncoded = stack.UTF8(CPU);
-            ByteBuffer FeaturesEncoded = stack.UTF8(Features);
-            return nLLVMCreateDisasmCPUFeatures(memAddress(TripleEncoded), memAddress(CPUEncoded), memAddress(FeaturesEncoded), DisInfo, TagType, memAddressSafe(GetOpInfo), memAddressSafe(SymbolLookUp));
+            stack.nUTF8(Triple, true);
+            long TripleEncoded = stack.getPointerAddress();
+            stack.nUTF8(CPU, true);
+            long CPUEncoded = stack.getPointerAddress();
+            stack.nUTF8(Features, true);
+            long FeaturesEncoded = stack.getPointerAddress();
+            return nLLVMCreateDisasmCPUFeatures(TripleEncoded, CPUEncoded, FeaturesEncoded, DisInfo, TagType, memAddressSafe(GetOpInfo), memAddressSafe(SymbolLookUp));
         } finally {
             stack.setPointer(stackPointer);
         }

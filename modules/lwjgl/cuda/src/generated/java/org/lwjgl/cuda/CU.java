@@ -1617,8 +1617,9 @@ public class CU {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fnameEncoded = stack.ASCII(fname);
-            return ncuModuleLoad(memAddress(module), memAddress(fnameEncoded));
+            stack.nASCII(fname, true);
+            long fnameEncoded = stack.getPointerAddress();
+            return ncuModuleLoad(memAddress(module), fnameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1707,8 +1708,9 @@ public class CU {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return ncuModuleGetFunction(memAddress(hfunc), hmod, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return ncuModuleGetFunction(memAddress(hfunc), hmod, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1742,8 +1744,9 @@ public class CU {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return ncuModuleGetGlobal(memAddressSafe(dptr), memAddressSafe(bytes), hmod, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return ncuModuleGetGlobal(memAddressSafe(dptr), memAddressSafe(bytes), hmod, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1775,8 +1778,9 @@ public class CU {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return ncuModuleGetTexRef(memAddress(pTexRef), hmod, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return ncuModuleGetTexRef(memAddress(pTexRef), hmod, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1808,8 +1812,9 @@ public class CU {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return ncuModuleGetSurfRef(memAddress(pSurfRef), hmod, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return ncuModuleGetSurfRef(memAddress(pSurfRef), hmod, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

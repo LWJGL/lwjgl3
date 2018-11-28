@@ -541,8 +541,9 @@ public class GL31C extends GL30C {
     public static int glGetUniformBlockIndex(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence uniformBlockName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer uniformBlockNameEncoded = stack.ASCII(uniformBlockName);
-            return nglGetUniformBlockIndex(program, memAddress(uniformBlockNameEncoded));
+            stack.nASCII(uniformBlockName, true);
+            long uniformBlockNameEncoded = stack.getPointerAddress();
+            return nglGetUniformBlockIndex(program, uniformBlockNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

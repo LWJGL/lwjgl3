@@ -91,8 +91,9 @@ public class NVDrawVulkanImage {
     public static long glGetVkProcAddrNV(@NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetVkProcAddrNV(memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetVkProcAddrNV(nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

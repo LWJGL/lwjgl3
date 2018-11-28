@@ -96,8 +96,9 @@ public class VRDriverManager {
     public static long VRDriverManager_GetDriverHandle(@NativeType("char const *") CharSequence pchDriverName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchDriverNameEncoded = stack.ASCII(pchDriverName);
-            return nVRDriverManager_GetDriverHandle(memAddress(pchDriverNameEncoded));
+            stack.nASCII(pchDriverName, true);
+            long pchDriverNameEncoded = stack.getPointerAddress();
+            return nVRDriverManager_GetDriverHandle(pchDriverNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

@@ -47,7 +47,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     protected int   frameIndex;
 
     /**
-     * Creates a new {@link MemoryStack} backed by the specified memory region.
+     * Creates a new {@code MemoryStack} backed by the specified memory region.
      *
      * <p>In the initial state, there is no active stack frame. The {@link #push} method must be used before any allocations.</p>
      *
@@ -66,7 +66,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Creates a new {@link MemoryStack} with the default size.
+     * Creates a new {@code MemoryStack} with the default size.
      *
      * <p>In the initial state, there is no active stack frame. The {@link #push} method must be used before any allocations.</p>
      */
@@ -75,7 +75,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Creates a new {@link MemoryStack} with the specified size.
+     * Creates a new {@code MemoryStack} with the specified size.
      *
      * <p>In the initial state, there is no active stack frame. The {@link #push} method must be used before any allocations.</p>
      *
@@ -86,7 +86,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Creates a new {@link MemoryStack} backed by the specified memory buffer.
+     * Creates a new {@code MemoryStack} backed by the specified memory buffer.
      *
      * <p>In the initial state, there is no active stack frame. The {@link #push} method must be used before any allocations.</p>
      *
@@ -101,7 +101,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Creates a new {@link MemoryStack} backed by the specified memory region.
+     * Creates a new {@code MemoryStack} backed by the specified memory region.
      *
      * <p>In the initial state, there is no active stack frame. The {@link #push} method must be used before any allocations.</p>
      *
@@ -156,7 +156,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Calls {@link #pop} on this {@link MemoryStack}.
+     * Calls {@link #pop} on this {@code MemoryStack}.
      *
      * <p>This method should not be used directly. It is called automatically when the {@code MemoryStack} is used as a resource in a try-with-resources
      * statement.</p>
@@ -243,11 +243,16 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return frameIndex;
     }
 
+    /** Returns the memory address at the current stack pointer. */
+    public long getPointerAddress() {
+        return address + (pointer & 0xFFFF_FFFFL);
+    }
+
     /**
      * Returns the current stack pointer.
      *
      * <p>The stack grows "downwards", so when the stack is empty {@code pointer} is equal to {@code size}. On every allocation {@code pointer} is reduced by
-     * the allocated size (after alignment) and {@code address + pointers} points to the last byte of the last allocation.</p>
+     * the allocated size (after alignment) and {@code address + pointer} points to the first byte of the last allocation.</p>
      *
      * <p>Effectively, this methods returns how many more bytes may be allocated on the stack.</p>
      */
@@ -619,6 +624,18 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
+    /**
+     * Encodes the specified text on the stack using ASCII encoding and returns the encoded text length, in bytes.
+     *
+     * <p>Use {@link #getPointerAddress} immediately after this method to get the encoded text address.</p>
+     *
+     * @param text           the text to encode
+     * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
+     */
+    public int nASCII(CharSequence text, boolean nullTerminated) {
+        return encodeASCII(text, nullTerminated, nmalloc(1, memLengthASCII(text, nullTerminated)));
+    }
+
     /** Like {@link #ASCII(CharSequence) ASCII}, but returns {@code null} if {@code text} is {@code null}. */
     @Nullable
     public ByteBuffer ASCIISafe(@Nullable CharSequence text) {
@@ -629,6 +646,11 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     @Nullable
     public ByteBuffer ASCIISafe(@Nullable CharSequence text, boolean nullTerminated) {
         return text == null ? null : ASCII(text, nullTerminated);
+    }
+
+    /** Like {@link #nASCII(CharSequence, boolean) nASCII}, but returns 0 if {@code text} is {@code null}. */
+    public int nASCIISafe(@Nullable CharSequence text, boolean nullTerminated) {
+        return text == null ? 0 : nASCII(text, nullTerminated);
     }
 
     /**
@@ -653,6 +675,18 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
+    /**
+     * Encodes the specified text on the stack using UTF8 encoding and returns the encoded text length, in bytes.
+     *
+     * <p>Use {@link #getPointerAddress} immediately after this method to get the encoded text address.</p>
+     *
+     * @param text           the text to encode
+     * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
+     */
+    public int nUTF8(CharSequence text, boolean nullTerminated) {
+        return encodeUTF8(text, nullTerminated, nmalloc(1, memLengthUTF8(text, nullTerminated)));
+    }
+
     /** Like {@link #UTF8(CharSequence) UTF8}, but returns {@code null} if {@code text} is {@code null}. */
     @Nullable
     public ByteBuffer UTF8Safe(@Nullable CharSequence text) {
@@ -663,6 +697,11 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     @Nullable
     public ByteBuffer UTF8Safe(@Nullable CharSequence text, boolean nullTerminated) {
         return text == null ? null : UTF8(text, nullTerminated);
+    }
+
+    /** Like {@link #nUTF8(CharSequence, boolean) nUTF8}, but returns 0 if {@code text} is {@code null}. */
+    public int nUTF8Safe(@Nullable CharSequence text, boolean nullTerminated) {
+        return text == null ? 0 : nUTF8(text, nullTerminated);
     }
 
     /**
@@ -687,6 +726,18 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
+    /**
+     * Encodes the specified text on the stack using UTF16 encoding and returns the encoded text length, in bytes.
+     *
+     * <p>Use {@link #getPointerAddress} immediately after this method to get the encoded text address.</p>
+     *
+     * @param text           the text to encode
+     * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
+     */
+    public int nUTF16(CharSequence text, boolean nullTerminated) {
+        return encodeUTF16(text, nullTerminated, nmalloc(2, memLengthUTF16(text, nullTerminated)));
+    }
+
     /** Like {@link #UTF16(CharSequence) UTF16}, but returns {@code null} if {@code text} is {@code null}. */
     @Nullable
     public ByteBuffer UTF16Safe(@Nullable CharSequence text) {
@@ -697,6 +748,11 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     @Nullable
     public ByteBuffer UTF16Safe(@Nullable CharSequence text, boolean nullTerminated) {
         return text == null ? null : UTF16(text, nullTerminated);
+    }
+
+    /** Like {@link #nUTF16(CharSequence, boolean) nUTF16}, but returns 0 if {@code text} is {@code null}. */
+    public int nUTF16Safe(@Nullable CharSequence text, boolean nullTerminated) {
+        return text == null ? 0 : nUTF16(text, nullTerminated);
     }
 
     // -----------------------------------------------------

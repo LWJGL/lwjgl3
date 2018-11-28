@@ -132,9 +132,11 @@ public class CUDAProfiler {
     public static int cuProfilerInitialize(@NativeType("char const *") CharSequence configFile, @NativeType("char const *") CharSequence outputFile, @NativeType("CUoutput_mode") int outputMode) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer configFileEncoded = stack.ASCII(configFile);
-            ByteBuffer outputFileEncoded = stack.ASCII(outputFile);
-            return ncuProfilerInitialize(memAddress(configFileEncoded), memAddress(outputFileEncoded), outputMode);
+            stack.nASCII(configFile, true);
+            long configFileEncoded = stack.getPointerAddress();
+            stack.nASCII(outputFile, true);
+            long outputFileEncoded = stack.getPointerAddress();
+            return ncuProfilerInitialize(configFileEncoded, outputFileEncoded, outputMode);
         } finally {
             stack.setPointer(stackPointer);
         }

@@ -3397,8 +3397,9 @@ public class VK10 {
     public static long vkGetInstanceProcAddr(VkInstance instance, @NativeType("char const *") CharSequence pName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pNameEncoded = stack.ASCII(pName);
-            return nvkGetInstanceProcAddr(instance, memAddress(pNameEncoded));
+            stack.nASCII(pName, true);
+            long pNameEncoded = stack.getPointerAddress();
+            return nvkGetInstanceProcAddr(instance, pNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3506,8 +3507,9 @@ public class VK10 {
     public static long vkGetDeviceProcAddr(VkDevice device, @NativeType("char const *") CharSequence pName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pNameEncoded = stack.ASCII(pName);
-            return nvkGetDeviceProcAddr(device, memAddress(pNameEncoded));
+            stack.nASCII(pName, true);
+            long pNameEncoded = stack.getPointerAddress();
+            return nvkGetDeviceProcAddr(device, pNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3798,8 +3800,9 @@ public class VK10 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pLayerNameEncoded = stack.UTF8Safe(pLayerName);
-            return nvkEnumerateInstanceExtensionProperties(memAddressSafe(pLayerNameEncoded), memAddress(pPropertyCount), memAddressSafe(pProperties));
+            stack.nUTF8Safe(pLayerName, true);
+            long pLayerNameEncoded = pLayerName == null ? NULL : stack.getPointerAddress();
+            return nvkEnumerateInstanceExtensionProperties(pLayerNameEncoded, memAddress(pPropertyCount), memAddressSafe(pProperties));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3939,8 +3942,9 @@ public class VK10 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pLayerNameEncoded = stack.UTF8Safe(pLayerName);
-            return nvkEnumerateDeviceExtensionProperties(physicalDevice, memAddressSafe(pLayerNameEncoded), memAddress(pPropertyCount), memAddressSafe(pProperties));
+            stack.nUTF8Safe(pLayerName, true);
+            long pLayerNameEncoded = pLayerName == null ? NULL : stack.getPointerAddress();
+            return nvkEnumerateDeviceExtensionProperties(physicalDevice, pLayerNameEncoded, memAddress(pPropertyCount), memAddressSafe(pProperties));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -14993,8 +14997,9 @@ public class VK10 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pLayerNameEncoded = stack.UTF8Safe(pLayerName);
-            return callPPPI(__functionAddress, memAddressSafe(pLayerNameEncoded), pPropertyCount, memAddressSafe(pProperties));
+            stack.nUTF8Safe(pLayerName, true);
+            long pLayerNameEncoded = pLayerName == null ? NULL : stack.getPointerAddress();
+            return callPPPI(__functionAddress, pLayerNameEncoded, pPropertyCount, memAddressSafe(pProperties));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -15022,8 +15027,9 @@ public class VK10 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pLayerNameEncoded = stack.UTF8Safe(pLayerName);
-            return callPPPPI(__functionAddress, physicalDevice.address(), memAddressSafe(pLayerNameEncoded), pPropertyCount, memAddressSafe(pProperties));
+            stack.nUTF8Safe(pLayerName, true);
+            long pLayerNameEncoded = pLayerName == null ? NULL : stack.getPointerAddress();
+            return callPPPPI(__functionAddress, physicalDevice.address(), pLayerNameEncoded, pPropertyCount, memAddressSafe(pProperties));
         } finally {
             stack.setPointer(stackPointer);
         }

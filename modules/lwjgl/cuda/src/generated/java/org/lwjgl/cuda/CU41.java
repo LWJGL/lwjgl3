@@ -77,8 +77,9 @@ public class CU41 extends CU40 {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pciBusIdEncoded = stack.ASCII(pciBusId);
-            return ncuDeviceGetByPCIBusId(memAddress(dev), memAddress(pciBusIdEncoded));
+            stack.nASCII(pciBusId, true);
+            long pciBusIdEncoded = stack.getPointerAddress();
+            return ncuDeviceGetByPCIBusId(memAddress(dev), pciBusIdEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

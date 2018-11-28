@@ -55,8 +55,9 @@ public class VRSpatialAnchors {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchDescriptorEncoded = stack.ASCII(pchDescriptor);
-            return nVRSpatialAnchors_CreateSpatialAnchorFromDescriptor(memAddress(pchDescriptorEncoded), memAddress(pHandleOut));
+            stack.nASCII(pchDescriptor, true);
+            long pchDescriptorEncoded = stack.getPointerAddress();
+            return nVRSpatialAnchors_CreateSpatialAnchorFromDescriptor(pchDescriptorEncoded, memAddress(pHandleOut));
         } finally {
             stack.setPointer(stackPointer);
         }

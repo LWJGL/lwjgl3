@@ -129,8 +129,9 @@ public class GL33C extends GL32C {
     public static void glBindFragDataLocationIndexed(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLuint") int index, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            nglBindFragDataLocationIndexed(program, colorNumber, index, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nglBindFragDataLocationIndexed(program, colorNumber, index, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -169,8 +170,9 @@ public class GL33C extends GL32C {
     public static int glGetFragDataIndex(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetFragDataIndex(program, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetFragDataIndex(program, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

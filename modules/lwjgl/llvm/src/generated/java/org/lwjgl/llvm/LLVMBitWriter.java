@@ -58,8 +58,9 @@ public class LLVMBitWriter {
     public static int LLVMWriteBitcodeToFile(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer PathEncoded = stack.UTF8(Path);
-            return nLLVMWriteBitcodeToFile(M, memAddress(PathEncoded));
+            stack.nUTF8(Path, true);
+            long PathEncoded = stack.getPointerAddress();
+            return nLLVMWriteBitcodeToFile(M, PathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

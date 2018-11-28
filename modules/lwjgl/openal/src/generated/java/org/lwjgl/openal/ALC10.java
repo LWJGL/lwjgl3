@@ -101,8 +101,9 @@ public class ALC10 {
     public static long alcOpenDevice(@Nullable @NativeType("ALCchar const *") CharSequence deviceSpecifier) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer deviceSpecifierEncoded = stack.UTF8Safe(deviceSpecifier);
-            return nalcOpenDevice(memAddressSafe(deviceSpecifierEncoded));
+            stack.nUTF8Safe(deviceSpecifier, true);
+            long deviceSpecifierEncoded = deviceSpecifier == null ? NULL : stack.getPointerAddress();
+            return nalcOpenDevice(deviceSpecifierEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -294,8 +295,9 @@ public class ALC10 {
     public static boolean alcIsExtensionPresent(@NativeType("ALCdevice const *") long deviceHandle, @NativeType("ALCchar const *") CharSequence extName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer extNameEncoded = stack.ASCII(extName);
-            return nalcIsExtensionPresent(deviceHandle, memAddress(extNameEncoded));
+            stack.nASCII(extName, true);
+            long extNameEncoded = stack.getPointerAddress();
+            return nalcIsExtensionPresent(deviceHandle, extNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -345,8 +347,9 @@ public class ALC10 {
     public static long alcGetProcAddress(@NativeType("ALCdevice const *") long deviceHandle, @NativeType("ALchar const *") CharSequence funcName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer funcNameEncoded = stack.ASCII(funcName);
-            return nalcGetProcAddress(deviceHandle, memAddress(funcNameEncoded));
+            stack.nASCII(funcName, true);
+            long funcNameEncoded = stack.getPointerAddress();
+            return nalcGetProcAddress(deviceHandle, funcNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -390,8 +393,9 @@ public class ALC10 {
     public static int alcGetEnumValue(@NativeType("ALCdevice const *") long deviceHandle, @NativeType("ALCchar const *") CharSequence enumName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer enumNameEncoded = stack.ASCII(enumName);
-            return nalcGetEnumValue(deviceHandle, memAddress(enumNameEncoded));
+            stack.nASCII(enumName, true);
+            long enumNameEncoded = stack.getPointerAddress();
+            return nalcGetEnumValue(deviceHandle, enumNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

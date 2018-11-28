@@ -267,8 +267,9 @@ public class LLVMLTO {
     public static boolean lto_module_is_object_file(@NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nlto_module_is_object_file(memAddress(pathEncoded));
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nlto_module_is_object_file(pathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -297,9 +298,11 @@ public class LLVMLTO {
     public static boolean lto_module_is_object_file_for_target(@NativeType("char const *") CharSequence path, @NativeType("char const *") CharSequence target_triple_prefix) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            ByteBuffer target_triple_prefixEncoded = stack.UTF8(target_triple_prefix);
-            return nlto_module_is_object_file_for_target(memAddress(pathEncoded), memAddress(target_triple_prefixEncoded));
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            stack.nUTF8(target_triple_prefix, true);
+            long target_triple_prefixEncoded = stack.getPointerAddress();
+            return nlto_module_is_object_file_for_target(pathEncoded, target_triple_prefixEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -355,8 +358,9 @@ public class LLVMLTO {
     public static boolean lto_module_is_object_file_in_memory_for_target(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") CharSequence target_triple_prefix) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer target_triple_prefixEncoded = stack.UTF8(target_triple_prefix);
-            return nlto_module_is_object_file_in_memory_for_target(memAddress(mem), mem.remaining(), memAddress(target_triple_prefixEncoded));
+            stack.nUTF8(target_triple_prefix, true);
+            long target_triple_prefixEncoded = stack.getPointerAddress();
+            return nlto_module_is_object_file_in_memory_for_target(memAddress(mem), mem.remaining(), target_triple_prefixEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -384,8 +388,9 @@ public class LLVMLTO {
     public static long lto_module_create(@NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nlto_module_create(memAddress(pathEncoded));
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nlto_module_create(pathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -427,8 +432,9 @@ public class LLVMLTO {
     public static long lto_module_create_from_memory_with_path(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nlto_module_create_from_memory_with_path(memAddress(mem), mem.remaining(), memAddress(pathEncoded));
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nlto_module_create_from_memory_with_path(memAddress(mem), mem.remaining(), pathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -470,8 +476,9 @@ public class LLVMLTO {
     public static long lto_module_create_in_local_context(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nlto_module_create_in_local_context(memAddress(mem), mem.remaining(), memAddress(pathEncoded));
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nlto_module_create_in_local_context(memAddress(mem), mem.remaining(), pathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -514,8 +521,9 @@ public class LLVMLTO {
     public static long lto_module_create_in_codegen_context(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") CharSequence path, @NativeType("lto_code_gen_t") long cg) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nlto_module_create_in_codegen_context(memAddress(mem), mem.remaining(), memAddress(pathEncoded), cg);
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nlto_module_create_in_codegen_context(memAddress(mem), mem.remaining(), pathEncoded, cg);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -543,8 +551,9 @@ public class LLVMLTO {
     public static long lto_module_create_from_fd(int fd, @NativeType("char const *") CharSequence path, @NativeType("size_t") long file_size) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nlto_module_create_from_fd(fd, memAddress(pathEncoded), file_size);
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nlto_module_create_from_fd(fd, pathEncoded, file_size);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -572,8 +581,9 @@ public class LLVMLTO {
     public static long lto_module_create_from_fd_at_offset(int fd, @NativeType("char const *") CharSequence path, @NativeType("size_t") long file_size, @NativeType("size_t") long map_size, @NativeType("off_t") long offset) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nlto_module_create_from_fd_at_offset(fd, memAddress(pathEncoded), file_size, map_size, offset);
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nlto_module_create_from_fd_at_offset(fd, pathEncoded, file_size, map_size, offset);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -632,8 +642,9 @@ public class LLVMLTO {
     public static void lto_module_set_target_triple(@NativeType("lto_module_t") long mod, @NativeType("char const *") CharSequence triple) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer tripleEncoded = stack.UTF8(triple);
-            nlto_module_set_target_triple(mod, memAddress(tripleEncoded));
+            stack.nUTF8(triple, true);
+            long tripleEncoded = stack.getPointerAddress();
+            nlto_module_set_target_triple(mod, tripleEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -843,8 +854,9 @@ public class LLVMLTO {
     public static void lto_codegen_set_cpu(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") CharSequence cpu) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer cpuEncoded = stack.UTF8(cpu);
-            nlto_codegen_set_cpu(cg, memAddress(cpuEncoded));
+            stack.nUTF8(cpu, true);
+            long cpuEncoded = stack.getPointerAddress();
+            nlto_codegen_set_cpu(cg, cpuEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -873,8 +885,9 @@ public class LLVMLTO {
     public static void lto_codegen_set_assembler_path(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            nlto_codegen_set_assembler_path(cg, memAddress(pathEncoded));
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            nlto_codegen_set_assembler_path(cg, pathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -925,8 +938,9 @@ public class LLVMLTO {
     public static void lto_codegen_add_must_preserve_symbol(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") CharSequence symbol) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer symbolEncoded = stack.UTF8(symbol);
-            nlto_codegen_add_must_preserve_symbol(cg, memAddress(symbolEncoded));
+            stack.nUTF8(symbol, true);
+            long symbolEncoded = stack.getPointerAddress();
+            nlto_codegen_add_must_preserve_symbol(cg, symbolEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -963,8 +977,9 @@ public class LLVMLTO {
     public static boolean lto_codegen_write_merged_modules(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nlto_codegen_write_merged_modules(cg, memAddress(pathEncoded));
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nlto_codegen_write_merged_modules(cg, pathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1101,8 +1116,9 @@ public class LLVMLTO {
     public static void lto_codegen_debug_options(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") CharSequence options) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer optionsEncoded = stack.UTF8(options);
-            nlto_codegen_debug_options(cg, memAddress(optionsEncoded));
+            stack.nUTF8(options, true);
+            long optionsEncoded = stack.getPointerAddress();
+            nlto_codegen_debug_options(cg, optionsEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1200,8 +1216,9 @@ public class LLVMLTO {
     public static void thinlto_codegen_add_module(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence identifier, @NativeType("char const *") ByteBuffer data) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer identifierEncoded = stack.UTF8(identifier);
-            nthinlto_codegen_add_module(cg, memAddress(identifierEncoded), memAddress(data), data.remaining());
+            stack.nUTF8(identifier, true);
+            long identifierEncoded = stack.getPointerAddress();
+            nthinlto_codegen_add_module(cg, identifierEncoded, memAddress(data), data.remaining());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1340,8 +1357,9 @@ public class LLVMLTO {
     public static void thinlto_codegen_set_savetemps_dir(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence save_temps_dir) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer save_temps_dirEncoded = stack.UTF8(save_temps_dir);
-            nthinlto_codegen_set_savetemps_dir(cg, memAddress(save_temps_dirEncoded));
+            stack.nUTF8(save_temps_dir, true);
+            long save_temps_dirEncoded = stack.getPointerAddress();
+            nthinlto_codegen_set_savetemps_dir(cg, save_temps_dirEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1376,8 +1394,9 @@ public class LLVMLTO {
     public static void thinlto_set_generated_objects_dir(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence save_temps_dir) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer save_temps_dirEncoded = stack.UTF8(save_temps_dir);
-            nthinlto_set_generated_objects_dir(cg, memAddress(save_temps_dirEncoded));
+            stack.nUTF8(save_temps_dir, true);
+            long save_temps_dirEncoded = stack.getPointerAddress();
+            nthinlto_set_generated_objects_dir(cg, save_temps_dirEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1406,8 +1425,9 @@ public class LLVMLTO {
     public static void thinlto_codegen_set_cpu(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence cpu) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer cpuEncoded = stack.UTF8(cpu);
-            nthinlto_codegen_set_cpu(cg, memAddress(cpuEncoded));
+            stack.nUTF8(cpu, true);
+            long cpuEncoded = stack.getPointerAddress();
+            nthinlto_codegen_set_cpu(cg, cpuEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1486,8 +1506,9 @@ public class LLVMLTO {
     public static void thinlto_codegen_add_must_preserve_symbol(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name, false);
-            nthinlto_codegen_add_must_preserve_symbol(cg, memAddress(nameEncoded), nameEncoded.remaining());
+            int nameEncodedLength = stack.nUTF8(name, false);
+            long nameEncoded = stack.getPointerAddress();
+            nthinlto_codegen_add_must_preserve_symbol(cg, nameEncoded, nameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1519,8 +1540,9 @@ public class LLVMLTO {
     public static void thinlto_codegen_add_cross_referenced_symbol(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name, false);
-            nthinlto_codegen_add_cross_referenced_symbol(cg, memAddress(nameEncoded), nameEncoded.remaining());
+            int nameEncodedLength = stack.nUTF8(name, false);
+            long nameEncoded = stack.getPointerAddress();
+            nthinlto_codegen_add_cross_referenced_symbol(cg, nameEncoded, nameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1549,8 +1571,9 @@ public class LLVMLTO {
     public static void thinlto_codegen_set_cache_dir(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence cache_dir) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer cache_dirEncoded = stack.UTF8(cache_dir);
-            nthinlto_codegen_set_cache_dir(cg, memAddress(cache_dirEncoded));
+            stack.nUTF8(cache_dir, true);
+            long cache_dirEncoded = stack.getPointerAddress();
+            nthinlto_codegen_set_cache_dir(cg, cache_dirEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

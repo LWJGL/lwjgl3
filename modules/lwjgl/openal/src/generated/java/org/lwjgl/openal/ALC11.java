@@ -89,8 +89,9 @@ public class ALC11 extends ALC10 {
     public static long alcCaptureOpenDevice(@Nullable @NativeType("ALCchar const *") CharSequence deviceName, @NativeType("ALCuint") int frequency, @NativeType("ALCenum") int format, @NativeType("ALCsizei") int samples) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer deviceNameEncoded = stack.UTF8Safe(deviceName);
-            return nalcCaptureOpenDevice(memAddressSafe(deviceNameEncoded), frequency, format, samples);
+            stack.nUTF8Safe(deviceName, true);
+            long deviceNameEncoded = deviceName == null ? NULL : stack.getPointerAddress();
+            return nalcCaptureOpenDevice(deviceNameEncoded, frequency, format, samples);
         } finally {
             stack.setPointer(stackPointer);
         }

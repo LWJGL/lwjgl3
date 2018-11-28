@@ -361,8 +361,9 @@ public class EGL10 {
     public static long eglGetProcAddress(@NativeType("char const *") CharSequence procname) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer procnameEncoded = stack.ASCII(procname);
-            return neglGetProcAddress(memAddress(procnameEncoded));
+            stack.nASCII(procname, true);
+            long procnameEncoded = stack.getPointerAddress();
+            return neglGetProcAddress(procnameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

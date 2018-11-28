@@ -116,8 +116,9 @@ public class LibCLocale {
     public static String setlocale(int category, @NativeType("char const *") CharSequence locale) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer localeEncoded = stack.ASCII(locale);
-            long __result = nsetlocale(category, memAddress(localeEncoded));
+            stack.nASCII(locale, true);
+            long localeEncoded = stack.getPointerAddress();
+            long __result = nsetlocale(category, localeEncoded);
             return memASCIISafe(__result);
         } finally {
             stack.setPointer(stackPointer);

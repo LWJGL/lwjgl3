@@ -167,8 +167,9 @@ public class NVTransformFeedback {
     public static void glActiveVaryingNV(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            nglActiveVaryingNV(program, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nglActiveVaryingNV(program, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -190,8 +191,9 @@ public class NVTransformFeedback {
     public static int glGetVaryingLocationNV(@NativeType("GLuint") int program, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetVaryingLocationNV(program, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetVaryingLocationNV(program, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

@@ -56,8 +56,9 @@ public class VRApplications {
     public static int VRApplications_AddApplicationManifest(@NativeType("char const *") CharSequence pchApplicationManifestFullPath, @NativeType("bool") boolean bTemporary) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchApplicationManifestFullPathEncoded = stack.ASCII(pchApplicationManifestFullPath);
-            return nVRApplications_AddApplicationManifest(memAddress(pchApplicationManifestFullPathEncoded), bTemporary);
+            stack.nASCII(pchApplicationManifestFullPath, true);
+            long pchApplicationManifestFullPathEncoded = stack.getPointerAddress();
+            return nVRApplications_AddApplicationManifest(pchApplicationManifestFullPathEncoded, bTemporary);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -88,8 +89,9 @@ public class VRApplications {
     public static int VRApplications_RemoveApplicationManifest(@NativeType("char const *") CharSequence pchApplicationManifestFullPath) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchApplicationManifestFullPathEncoded = stack.ASCII(pchApplicationManifestFullPath);
-            return nVRApplications_RemoveApplicationManifest(memAddress(pchApplicationManifestFullPathEncoded));
+            stack.nASCII(pchApplicationManifestFullPath, true);
+            long pchApplicationManifestFullPathEncoded = stack.getPointerAddress();
+            return nVRApplications_RemoveApplicationManifest(pchApplicationManifestFullPathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -120,8 +122,9 @@ public class VRApplications {
     public static boolean VRApplications_IsApplicationInstalled(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_IsApplicationInstalled(memAddress(pchAppKeyEncoded));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_IsApplicationInstalled(pchAppKeyEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -209,8 +212,9 @@ public class VRApplications {
     public static int VRApplications_LaunchApplication(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_LaunchApplication(memAddress(pchAppKeyEncoded));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_LaunchApplication(pchAppKeyEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -249,9 +253,11 @@ public class VRApplications {
     public static int VRApplications_LaunchTemplateApplication(@NativeType("char const *") CharSequence pchTemplateAppKey, @NativeType("char const *") CharSequence pchNewAppKey, @NativeType("AppOverrideKeys_t const *") AppOverrideKeys.Buffer pKeys) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchTemplateAppKeyEncoded = stack.ASCII(pchTemplateAppKey);
-            ByteBuffer pchNewAppKeyEncoded = stack.ASCII(pchNewAppKey);
-            return nVRApplications_LaunchTemplateApplication(memAddress(pchTemplateAppKeyEncoded), memAddress(pchNewAppKeyEncoded), pKeys.address(), pKeys.remaining());
+            stack.nASCII(pchTemplateAppKey, true);
+            long pchTemplateAppKeyEncoded = stack.getPointerAddress();
+            stack.nASCII(pchNewAppKey, true);
+            long pchNewAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_LaunchTemplateApplication(pchTemplateAppKeyEncoded, pchNewAppKeyEncoded, pKeys.address(), pKeys.remaining());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -289,9 +295,11 @@ public class VRApplications {
     public static int VRApplications_LaunchApplicationFromMimeType(@NativeType("char const *") CharSequence pchMimeType, @NativeType("char const *") CharSequence pchArgs) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchMimeTypeEncoded = stack.ASCII(pchMimeType);
-            ByteBuffer pchArgsEncoded = stack.ASCII(pchArgs);
-            return nVRApplications_LaunchApplicationFromMimeType(memAddress(pchMimeTypeEncoded), memAddress(pchArgsEncoded));
+            stack.nASCII(pchMimeType, true);
+            long pchMimeTypeEncoded = stack.getPointerAddress();
+            stack.nASCII(pchArgs, true);
+            long pchArgsEncoded = stack.getPointerAddress();
+            return nVRApplications_LaunchApplicationFromMimeType(pchMimeTypeEncoded, pchArgsEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -322,8 +330,9 @@ public class VRApplications {
     public static int VRApplications_LaunchDashboardOverlay(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_LaunchDashboardOverlay(memAddress(pchAppKeyEncoded));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_LaunchDashboardOverlay(pchAppKeyEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -354,8 +363,9 @@ public class VRApplications {
     public static boolean VRApplications_CancelApplicationLaunch(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_CancelApplicationLaunch(memAddress(pchAppKeyEncoded));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_CancelApplicationLaunch(pchAppKeyEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -394,8 +404,9 @@ public class VRApplications {
     public static int VRApplications_IdentifyApplication(@NativeType("uint32_t") int unProcessId, @NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_IdentifyApplication(unProcessId, memAddress(pchAppKeyEncoded));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_IdentifyApplication(unProcessId, pchAppKeyEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -426,8 +437,9 @@ public class VRApplications {
     public static int VRApplications_GetApplicationProcessId(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_GetApplicationProcessId(memAddress(pchAppKeyEncoded));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_GetApplicationProcessId(pchAppKeyEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -493,8 +505,9 @@ public class VRApplications {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_GetApplicationPropertyString(memAddress(pchAppKeyEncoded), eProperty, memAddressSafe(pchPropertyValueBuffer), remainingSafe(pchPropertyValueBuffer), memAddress(peError));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_GetApplicationPropertyString(pchAppKeyEncoded, eProperty, memAddressSafe(pchPropertyValueBuffer), remainingSafe(pchPropertyValueBuffer), memAddress(peError));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -512,9 +525,10 @@ public class VRApplications {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
             ByteBuffer pchPropertyValueBuffer = stack.malloc(unPropertyValueBufferLen);
-            int __result = nVRApplications_GetApplicationPropertyString(memAddress(pchAppKeyEncoded), eProperty, memAddress(pchPropertyValueBuffer), unPropertyValueBufferLen, memAddress(peError));
+            int __result = nVRApplications_GetApplicationPropertyString(pchAppKeyEncoded, eProperty, memAddress(pchPropertyValueBuffer), unPropertyValueBufferLen, memAddress(peError));
             return memASCII(pchPropertyValueBuffer, __result - 1);
         } finally {
             stack.setPointer(stackPointer);
@@ -568,8 +582,9 @@ public class VRApplications {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_GetApplicationPropertyBool(memAddress(pchAppKeyEncoded), eProperty, memAddress(peError));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_GetApplicationPropertyBool(pchAppKeyEncoded, eProperty, memAddress(peError));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -612,8 +627,9 @@ public class VRApplications {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_GetApplicationPropertyUint64(memAddress(pchAppKeyEncoded), eProperty, memAddress(peError));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_GetApplicationPropertyUint64(pchAppKeyEncoded, eProperty, memAddress(peError));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -650,8 +666,9 @@ public class VRApplications {
     public static int VRApplications_SetApplicationAutoLaunch(@NativeType("char const *") CharSequence pchAppKey, @NativeType("bool") boolean bAutoLaunch) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_SetApplicationAutoLaunch(memAddress(pchAppKeyEncoded), bAutoLaunch);
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_SetApplicationAutoLaunch(pchAppKeyEncoded, bAutoLaunch);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -688,8 +705,9 @@ public class VRApplications {
     public static boolean VRApplications_GetApplicationAutoLaunch(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_GetApplicationAutoLaunch(memAddress(pchAppKeyEncoded));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_GetApplicationAutoLaunch(pchAppKeyEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -721,9 +739,11 @@ public class VRApplications {
     public static int VRApplications_SetDefaultApplicationForMimeType(@NativeType("char const *") CharSequence pchAppKey, @NativeType("char const *") CharSequence pchMimeType) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            ByteBuffer pchMimeTypeEncoded = stack.ASCII(pchMimeType);
-            return nVRApplications_SetDefaultApplicationForMimeType(memAddress(pchAppKeyEncoded), memAddress(pchMimeTypeEncoded));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            stack.nASCII(pchMimeType, true);
+            long pchMimeTypeEncoded = stack.getPointerAddress();
+            return nVRApplications_SetDefaultApplicationForMimeType(pchAppKeyEncoded, pchMimeTypeEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -754,8 +774,9 @@ public class VRApplications {
     public static boolean VRApplications_GetDefaultApplicationForMimeType(@NativeType("char const *") CharSequence pchMimeType, @Nullable @NativeType("char *") ByteBuffer pchAppKeyBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchMimeTypeEncoded = stack.ASCII(pchMimeType);
-            return nVRApplications_GetDefaultApplicationForMimeType(memAddress(pchMimeTypeEncoded), memAddressSafe(pchAppKeyBuffer), remainingSafe(pchAppKeyBuffer));
+            stack.nASCII(pchMimeType, true);
+            long pchMimeTypeEncoded = stack.getPointerAddress();
+            return nVRApplications_GetDefaultApplicationForMimeType(pchMimeTypeEncoded, memAddressSafe(pchAppKeyBuffer), remainingSafe(pchAppKeyBuffer));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -786,8 +807,9 @@ public class VRApplications {
     public static boolean VRApplications_GetApplicationSupportedMimeTypes(@NativeType("char const *") CharSequence pchAppKey, @Nullable @NativeType("char *") ByteBuffer pchMimeTypesBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_GetApplicationSupportedMimeTypes(memAddress(pchAppKeyEncoded), memAddressSafe(pchMimeTypesBuffer), remainingSafe(pchMimeTypesBuffer));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_GetApplicationSupportedMimeTypes(pchAppKeyEncoded, memAddressSafe(pchMimeTypesBuffer), remainingSafe(pchMimeTypesBuffer));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -818,8 +840,9 @@ public class VRApplications {
     public static int VRApplications_GetApplicationsThatSupportMimeType(@NativeType("char const *") CharSequence pchMimeType, @Nullable @NativeType("char *") ByteBuffer pchAppKeysThatSupportBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchMimeTypeEncoded = stack.ASCII(pchMimeType);
-            return nVRApplications_GetApplicationsThatSupportMimeType(memAddress(pchMimeTypeEncoded), memAddressSafe(pchAppKeysThatSupportBuffer), remainingSafe(pchAppKeysThatSupportBuffer));
+            stack.nASCII(pchMimeType, true);
+            long pchMimeTypeEncoded = stack.getPointerAddress();
+            return nVRApplications_GetApplicationsThatSupportMimeType(pchMimeTypeEncoded, memAddressSafe(pchAppKeysThatSupportBuffer), remainingSafe(pchAppKeysThatSupportBuffer));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -830,9 +853,10 @@ public class VRApplications {
     public static String VRApplications_GetApplicationsThatSupportMimeType(@NativeType("char const *") CharSequence pchMimeType, @NativeType("uint32_t") int unAppKeysThatSupportBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchMimeTypeEncoded = stack.ASCII(pchMimeType);
+            stack.nASCII(pchMimeType, true);
+            long pchMimeTypeEncoded = stack.getPointerAddress();
             ByteBuffer pchAppKeysThatSupportBuffer = stack.malloc(unAppKeysThatSupportBuffer);
-            int __result = nVRApplications_GetApplicationsThatSupportMimeType(memAddress(pchMimeTypeEncoded), memAddress(pchAppKeysThatSupportBuffer), unAppKeysThatSupportBuffer);
+            int __result = nVRApplications_GetApplicationsThatSupportMimeType(pchMimeTypeEncoded, memAddress(pchAppKeysThatSupportBuffer), unAppKeysThatSupportBuffer);
             return memASCII(pchAppKeysThatSupportBuffer, __result - 1);
         } finally {
             stack.setPointer(stackPointer);
@@ -949,8 +973,9 @@ public class VRApplications {
     public static int VRApplications_PerformApplicationPrelaunchCheck(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchAppKeyEncoded = stack.ASCII(pchAppKey);
-            return nVRApplications_PerformApplicationPrelaunchCheck(memAddress(pchAppKeyEncoded));
+            stack.nASCII(pchAppKey, true);
+            long pchAppKeyEncoded = stack.getPointerAddress();
+            return nVRApplications_PerformApplicationPrelaunchCheck(pchAppKeyEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1026,10 +1051,13 @@ public class VRApplications {
     public static int VRApplications_LaunchInternalProcess(@NativeType("char const *") CharSequence pchBinaryPath, @NativeType("char const *") CharSequence pchArguments, @NativeType("char const *") CharSequence pchWorkingDirectory) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchBinaryPathEncoded = stack.ASCII(pchBinaryPath);
-            ByteBuffer pchArgumentsEncoded = stack.ASCII(pchArguments);
-            ByteBuffer pchWorkingDirectoryEncoded = stack.ASCII(pchWorkingDirectory);
-            return nVRApplications_LaunchInternalProcess(memAddress(pchBinaryPathEncoded), memAddress(pchArgumentsEncoded), memAddress(pchWorkingDirectoryEncoded));
+            stack.nASCII(pchBinaryPath, true);
+            long pchBinaryPathEncoded = stack.getPointerAddress();
+            stack.nASCII(pchArguments, true);
+            long pchArgumentsEncoded = stack.getPointerAddress();
+            stack.nASCII(pchWorkingDirectory, true);
+            long pchWorkingDirectoryEncoded = stack.getPointerAddress();
+            return nVRApplications_LaunchInternalProcess(pchBinaryPathEncoded, pchArgumentsEncoded, pchWorkingDirectoryEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

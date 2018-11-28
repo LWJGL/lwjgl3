@@ -1518,8 +1518,9 @@ public class AL10 {
     public static int alGetEnumValue(@NativeType("ALchar const *") CharSequence enumName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer enumNameEncoded = stack.ASCII(enumName);
-            return nalGetEnumValue(memAddress(enumNameEncoded));
+            stack.nASCII(enumName, true);
+            long enumNameEncoded = stack.getPointerAddress();
+            return nalGetEnumValue(enumNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1567,8 +1568,9 @@ public class AL10 {
     public static long alGetProcAddress(@NativeType("ALchar const *") CharSequence funcName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer funcNameEncoded = stack.ASCII(funcName);
-            return nalGetProcAddress(memAddress(funcNameEncoded));
+            stack.nASCII(funcName, true);
+            long funcNameEncoded = stack.getPointerAddress();
+            return nalGetProcAddress(funcNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1610,8 +1612,9 @@ public class AL10 {
     public static boolean alIsExtensionPresent(@NativeType("ALchar const *") CharSequence extName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer extNameEncoded = stack.ASCII(extName);
-            return nalIsExtensionPresent(memAddress(extNameEncoded));
+            stack.nASCII(extName, true);
+            long extNameEncoded = stack.getPointerAddress();
+            return nalIsExtensionPresent(extNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

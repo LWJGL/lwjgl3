@@ -267,8 +267,9 @@ public class ARBDebugOutput {
     public static void glDebugMessageInsertARB(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLuint") int id, @NativeType("GLenum") int severity, @NativeType("GLchar const *") CharSequence buf) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer bufEncoded = stack.UTF8(buf, false);
-            nglDebugMessageInsertARB(source, type, id, severity, bufEncoded.remaining(), memAddress(bufEncoded));
+            int bufEncodedLength = stack.nUTF8(buf, false);
+            long bufEncoded = stack.getPointerAddress();
+            nglDebugMessageInsertARB(source, type, id, severity, bufEncodedLength, bufEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

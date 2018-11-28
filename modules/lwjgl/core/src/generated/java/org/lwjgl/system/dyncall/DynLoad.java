@@ -55,8 +55,9 @@ public class DynLoad {
     public static long dlLoadLibrary(@NativeType("char const *") CharSequence libpath) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer libpathEncoded = stack.ASCII(libpath);
-            return ndlLoadLibrary(memAddress(libpathEncoded));
+            stack.nASCII(libpath, true);
+            long libpathEncoded = stack.getPointerAddress();
+            return ndlLoadLibrary(libpathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -114,8 +115,9 @@ public class DynLoad {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pSymbolNameEncoded = stack.ASCII(pSymbolName);
-            return ndlFindSymbol(pLib, memAddress(pSymbolNameEncoded));
+            stack.nASCII(pSymbolName, true);
+            long pSymbolNameEncoded = stack.getPointerAddress();
+            return ndlFindSymbol(pLib, pSymbolNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -201,8 +203,9 @@ public class DynLoad {
     public static long dlSymsInit(@NativeType("char const *") CharSequence libPath) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer libPathEncoded = stack.ASCII(libPath);
-            return ndlSymsInit(memAddress(libPathEncoded));
+            stack.nASCII(libPath, true);
+            long libPathEncoded = stack.getPointerAddress();
+            return ndlSymsInit(libPathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

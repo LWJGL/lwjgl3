@@ -60,8 +60,9 @@ public class EXTDebugLabel {
     public static void glLabelObjectEXT(@NativeType("GLenum") int type, @NativeType("GLuint") int object, @NativeType("GLchar const *") CharSequence label) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer labelEncoded = stack.UTF8(label, false);
-            nglLabelObjectEXT(type, object, labelEncoded.remaining(), memAddress(labelEncoded));
+            int labelEncodedLength = stack.nUTF8(label, false);
+            long labelEncoded = stack.getPointerAddress();
+            nglLabelObjectEXT(type, object, labelEncodedLength, labelEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

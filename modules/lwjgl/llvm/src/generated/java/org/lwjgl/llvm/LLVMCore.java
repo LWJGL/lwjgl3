@@ -1394,8 +1394,9 @@ public class LLVMCore {
     public static String LLVMCreateMessage(@NativeType("char const *") CharSequence Message) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer MessageEncoded = stack.UTF8(Message);
-            long __result = nLLVMCreateMessage(memAddress(MessageEncoded));
+            stack.nUTF8(Message, true);
+            long MessageEncoded = stack.getPointerAddress();
+            long __result = nLLVMCreateMessage(MessageEncoded);
             return memUTF8(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -1564,8 +1565,9 @@ public class LLVMCore {
     public static int LLVMGetMDKindIDInContext(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMGetMDKindIDInContext(C, memAddress(NameEncoded), NameEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetMDKindIDInContext(C, NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1587,8 +1589,9 @@ public class LLVMCore {
     public static int LLVMGetMDKindID(@NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMGetMDKindID(memAddress(NameEncoded), NameEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetMDKindID(NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1627,8 +1630,9 @@ public class LLVMCore {
     public static int LLVMGetEnumAttributeKindForName(@NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMGetEnumAttributeKindForName(memAddress(NameEncoded), NameEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetEnumAttributeKindForName(NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1700,9 +1704,11 @@ public class LLVMCore {
     public static long LLVMCreateStringAttribute(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence K, @NativeType("char const *") CharSequence V) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer KEncoded = stack.UTF8(K, false);
-            ByteBuffer VEncoded = stack.UTF8(V, false);
-            return nLLVMCreateStringAttribute(C, memAddress(KEncoded), KEncoded.remaining(), memAddress(VEncoded), VEncoded.remaining());
+            int KEncodedLength = stack.nUTF8(K, false);
+            long KEncoded = stack.getPointerAddress();
+            int VEncodedLength = stack.nUTF8(V, false);
+            long VEncoded = stack.getPointerAddress();
+            return nLLVMCreateStringAttribute(C, KEncoded, KEncodedLength, VEncoded, VEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1812,8 +1818,9 @@ public class LLVMCore {
     public static long LLVMModuleCreateWithName(@NativeType("char const *") CharSequence ModuleID) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer ModuleIDEncoded = stack.UTF8(ModuleID);
-            return nLLVMModuleCreateWithName(memAddress(ModuleIDEncoded));
+            stack.nUTF8(ModuleID, true);
+            long ModuleIDEncoded = stack.getPointerAddress();
+            return nLLVMModuleCreateWithName(ModuleIDEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1852,8 +1859,9 @@ public class LLVMCore {
     public static long LLVMModuleCreateWithNameInContext(@NativeType("char const *") CharSequence ModuleID, @NativeType("LLVMContextRef") long C) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer ModuleIDEncoded = stack.UTF8(ModuleID);
-            return nLLVMModuleCreateWithNameInContext(memAddress(ModuleIDEncoded), C);
+            stack.nUTF8(ModuleID, true);
+            long ModuleIDEncoded = stack.getPointerAddress();
+            return nLLVMModuleCreateWithNameInContext(ModuleIDEncoded, C);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1954,8 +1962,9 @@ public class LLVMCore {
     public static void LLVMSetModuleIdentifier(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Ident) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer IdentEncoded = stack.UTF8(Ident, false);
-            nLLVMSetModuleIdentifier(M, memAddress(IdentEncoded), IdentEncoded.remaining());
+            int IdentEncodedLength = stack.nUTF8(Ident, false);
+            long IdentEncoded = stack.getPointerAddress();
+            nLLVMSetModuleIdentifier(M, IdentEncoded, IdentEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2029,8 +2038,9 @@ public class LLVMCore {
     public static void LLVMSetSourceFileName(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            nLLVMSetSourceFileName(M, memAddress(NameEncoded), NameEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            nLLVMSetSourceFileName(M, NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2098,8 +2108,9 @@ public class LLVMCore {
     public static void LLVMSetDataLayout(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence DataLayoutStr) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer DataLayoutStrEncoded = stack.UTF8(DataLayoutStr);
-            nLLVMSetDataLayout(M, memAddress(DataLayoutStrEncoded));
+            stack.nUTF8(DataLayoutStr, true);
+            long DataLayoutStrEncoded = stack.getPointerAddress();
+            nLLVMSetDataLayout(M, DataLayoutStrEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2146,8 +2157,9 @@ public class LLVMCore {
     public static void LLVMSetTarget(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Triple) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer TripleEncoded = stack.UTF8(Triple);
-            nLLVMSetTarget(M, memAddress(TripleEncoded));
+            stack.nUTF8(Triple, true);
+            long TripleEncoded = stack.getPointerAddress();
+            nLLVMSetTarget(M, TripleEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2257,8 +2269,9 @@ public class LLVMCore {
     public static long LLVMGetModuleFlag(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Key) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer KeyEncoded = stack.UTF8(Key, false);
-            return nLLVMGetModuleFlag(M, memAddress(KeyEncoded), KeyEncoded.remaining());
+            int KeyEncodedLength = stack.nUTF8(Key, false);
+            long KeyEncoded = stack.getPointerAddress();
+            return nLLVMGetModuleFlag(M, KeyEncoded, KeyEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2285,8 +2298,9 @@ public class LLVMCore {
     public static void LLVMAddModuleFlag(@NativeType("LLVMModuleRef") long M, @NativeType("LLVMModuleFlagBehavior") int Behavior, @NativeType("char const *") CharSequence Key, @NativeType("LLVMMetadataRef") long Val) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer KeyEncoded = stack.UTF8(Key, false);
-            nLLVMAddModuleFlag(M, Behavior, memAddress(KeyEncoded), KeyEncoded.remaining(), Val);
+            int KeyEncodedLength = stack.nUTF8(Key, false);
+            long KeyEncoded = stack.getPointerAddress();
+            nLLVMAddModuleFlag(M, Behavior, KeyEncoded, KeyEncodedLength, Val);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2340,8 +2354,9 @@ public class LLVMCore {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer FilenameEncoded = stack.UTF8(Filename);
-            return nLLVMPrintModuleToFile(M, memAddress(FilenameEncoded), memAddress(ErrorMessage)) != 0;
+            stack.nUTF8(Filename, true);
+            long FilenameEncoded = stack.getPointerAddress();
+            return nLLVMPrintModuleToFile(M, FilenameEncoded, memAddress(ErrorMessage)) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2409,8 +2424,9 @@ public class LLVMCore {
     public static void LLVMSetModuleInlineAsm2(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Asm) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer AsmEncoded = stack.UTF8(Asm, false);
-            nLLVMSetModuleInlineAsm2(M, memAddress(AsmEncoded), AsmEncoded.remaining());
+            int AsmEncodedLength = stack.nUTF8(Asm, false);
+            long AsmEncoded = stack.getPointerAddress();
+            nLLVMSetModuleInlineAsm2(M, AsmEncoded, AsmEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2436,8 +2452,9 @@ public class LLVMCore {
     public static void LLVMAppendModuleInlineAsm(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Asm) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer AsmEncoded = stack.UTF8(Asm, false);
-            nLLVMAppendModuleInlineAsm(M, memAddress(AsmEncoded), AsmEncoded.remaining());
+            int AsmEncodedLength = stack.nUTF8(Asm, false);
+            long AsmEncoded = stack.getPointerAddress();
+            nLLVMAppendModuleInlineAsm(M, AsmEncoded, AsmEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2497,8 +2514,9 @@ public class LLVMCore {
     public static long LLVMGetTypeByName(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMGetTypeByName(M, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetTypeByName(M, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2582,8 +2600,9 @@ public class LLVMCore {
     public static long LLVMGetNamedMetadata(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMGetNamedMetadata(M, memAddress(NameEncoded), NameEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetNamedMetadata(M, NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2611,8 +2630,9 @@ public class LLVMCore {
     public static long LLVMGetOrInsertNamedMetadata(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMGetOrInsertNamedMetadata(M, memAddress(NameEncoded), NameEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetOrInsertNamedMetadata(M, NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2667,8 +2687,9 @@ public class LLVMCore {
     public static int LLVMGetNamedMetadataNumOperands(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMGetNamedMetadataNumOperands(M, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetNamedMetadataNumOperands(M, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2715,8 +2736,9 @@ public class LLVMCore {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            nLLVMGetNamedMetadataOperands(M, memAddress(NameEncoded), memAddress(Dest));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            nLLVMGetNamedMetadataOperands(M, NameEncoded, memAddress(Dest));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2746,8 +2768,9 @@ public class LLVMCore {
     public static void LLVMAddNamedMetadataOperand(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name, @NativeType("LLVMValueRef") long Val) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            nLLVMAddNamedMetadataOperand(M, memAddress(NameEncoded), Val);
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            nLLVMAddNamedMetadataOperand(M, NameEncoded, Val);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2862,8 +2885,9 @@ public class LLVMCore {
     public static long LLVMAddFunction(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name, @NativeType("LLVMTypeRef") long FunctionTy) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMAddFunction(M, memAddress(NameEncoded), FunctionTy);
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMAddFunction(M, NameEncoded, FunctionTy);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2902,8 +2926,9 @@ public class LLVMCore {
     public static long LLVMGetNamedFunction(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMGetNamedFunction(M, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetNamedFunction(M, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2988,8 +3013,9 @@ public class LLVMCore {
     public static void LLVMSetModuleInlineAsm(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Asm) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer AsmEncoded = stack.UTF8(Asm);
-            nLLVMSetModuleInlineAsm(M, memAddress(AsmEncoded));
+            stack.nUTF8(Asm, true);
+            long AsmEncoded = stack.getPointerAddress();
+            nLLVMSetModuleInlineAsm(M, AsmEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3481,8 +3507,9 @@ public class LLVMCore {
     public static long LLVMStructCreateNamed(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMStructCreateNamed(C, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMStructCreateNamed(C, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3903,8 +3930,9 @@ public class LLVMCore {
     public static void LLVMSetValueName2(@NativeType("LLVMValueRef") long Val, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            nLLVMSetValueName2(Val, memAddress(NameEncoded), NameEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            nLLVMSetValueName2(Val, NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4918,8 +4946,9 @@ public class LLVMCore {
     public static void LLVMSetValueName(@NativeType("LLVMValueRef") long Val, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            nLLVMSetValueName(Val, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            nLLVMSetValueName(Val, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5167,8 +5196,9 @@ public class LLVMCore {
     public static long LLVMConstIntOfString(@NativeType("LLVMTypeRef") long IntTy, @NativeType("char const *") CharSequence Text, @NativeType("uint8_t") byte Radix) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer TextEncoded = stack.UTF8(Text);
-            return nLLVMConstIntOfString(IntTy, memAddress(TextEncoded), Radix);
+            stack.nUTF8(Text, true);
+            long TextEncoded = stack.getPointerAddress();
+            return nLLVMConstIntOfString(IntTy, TextEncoded, Radix);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5196,8 +5226,9 @@ public class LLVMCore {
     public static long LLVMConstIntOfStringAndSize(@NativeType("LLVMTypeRef") long IntTy, @NativeType("char const *") CharSequence Text, @NativeType("uint8_t") byte Radix) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer TextEncoded = stack.UTF8(Text, false);
-            return nLLVMConstIntOfStringAndSize(IntTy, memAddress(TextEncoded), TextEncoded.remaining(), Radix);
+            int TextEncodedLength = stack.nUTF8(Text, false);
+            long TextEncoded = stack.getPointerAddress();
+            return nLLVMConstIntOfStringAndSize(IntTy, TextEncoded, TextEncodedLength, Radix);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5248,8 +5279,9 @@ public class LLVMCore {
     public static long LLVMConstRealOfString(@NativeType("LLVMTypeRef") long RealTy, @NativeType("char const *") CharSequence Text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer TextEncoded = stack.UTF8(Text);
-            return nLLVMConstRealOfString(RealTy, memAddress(TextEncoded));
+            stack.nUTF8(Text, true);
+            long TextEncoded = stack.getPointerAddress();
+            return nLLVMConstRealOfString(RealTy, TextEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5277,8 +5309,9 @@ public class LLVMCore {
     public static long LLVMConstRealOfStringAndSize(@NativeType("LLVMTypeRef") long RealTy, @NativeType("char const *") CharSequence Text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer TextEncoded = stack.UTF8(Text, false);
-            return nLLVMConstRealOfStringAndSize(RealTy, memAddress(TextEncoded), TextEncoded.remaining());
+            int TextEncodedLength = stack.nUTF8(Text, false);
+            long TextEncoded = stack.getPointerAddress();
+            return nLLVMConstRealOfStringAndSize(RealTy, TextEncoded, TextEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5349,8 +5382,9 @@ public class LLVMCore {
     public static long LLVMConstStringInContext(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence Str, @NativeType("LLVMBool") boolean DontNullTerminate) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer StrEncoded = stack.UTF8(Str, false);
-            return nLLVMConstStringInContext(C, memAddress(StrEncoded), StrEncoded.remaining(), DontNullTerminate ? 1 : 0);
+            int StrEncodedLength = stack.nUTF8(Str, false);
+            long StrEncoded = stack.getPointerAddress();
+            return nLLVMConstStringInContext(C, StrEncoded, StrEncodedLength, DontNullTerminate ? 1 : 0);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5383,8 +5417,9 @@ public class LLVMCore {
     public static long LLVMConstString(@NativeType("char const *") CharSequence Str, @NativeType("LLVMBool") boolean DontNullTerminate) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer StrEncoded = stack.UTF8(Str, false);
-            return nLLVMConstString(memAddress(StrEncoded), StrEncoded.remaining(), DontNullTerminate ? 1 : 0);
+            int StrEncodedLength = stack.nUTF8(Str, false);
+            long StrEncoded = stack.getPointerAddress();
+            return nLLVMConstString(StrEncoded, StrEncodedLength, DontNullTerminate ? 1 : 0);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -6323,9 +6358,11 @@ public class LLVMCore {
     public static long LLVMConstInlineAsm(@NativeType("LLVMTypeRef") long Ty, @NativeType("char const *") CharSequence AsmString, @NativeType("char const *") CharSequence Constraints, @NativeType("LLVMBool") boolean HasSideEffects, @NativeType("LLVMBool") boolean IsAlignStack) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer AsmStringEncoded = stack.UTF8(AsmString);
-            ByteBuffer ConstraintsEncoded = stack.UTF8(Constraints);
-            return nLLVMConstInlineAsm(Ty, memAddress(AsmStringEncoded), memAddress(ConstraintsEncoded), HasSideEffects ? 1 : 0, IsAlignStack ? 1 : 0);
+            stack.nUTF8(AsmString, true);
+            long AsmStringEncoded = stack.getPointerAddress();
+            stack.nUTF8(Constraints, true);
+            long ConstraintsEncoded = stack.getPointerAddress();
+            return nLLVMConstInlineAsm(Ty, AsmStringEncoded, ConstraintsEncoded, HasSideEffects ? 1 : 0, IsAlignStack ? 1 : 0);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -6410,8 +6447,9 @@ public class LLVMCore {
     public static void LLVMSetSection(@NativeType("LLVMValueRef") long Global, @NativeType("char const *") CharSequence Section) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer SectionEncoded = stack.UTF8(Section);
-            nLLVMSetSection(Global, memAddress(SectionEncoded));
+            stack.nUTF8(Section, true);
+            long SectionEncoded = stack.getPointerAddress();
+            nLLVMSetSection(Global, SectionEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -6653,8 +6691,9 @@ public class LLVMCore {
     public static long LLVMAddGlobal(@NativeType("LLVMModuleRef") long M, @NativeType("LLVMTypeRef") long Ty, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMAddGlobal(M, Ty, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMAddGlobal(M, Ty, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -6683,8 +6722,9 @@ public class LLVMCore {
     public static long LLVMAddGlobalInAddressSpace(@NativeType("LLVMModuleRef") long M, @NativeType("LLVMTypeRef") long Ty, @NativeType("char const *") CharSequence Name, @NativeType("unsigned int") int AddressSpace) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMAddGlobalInAddressSpace(M, Ty, memAddress(NameEncoded), AddressSpace);
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMAddGlobalInAddressSpace(M, Ty, NameEncoded, AddressSpace);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -6712,8 +6752,9 @@ public class LLVMCore {
     public static long LLVMGetNamedGlobal(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMGetNamedGlobal(M, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetNamedGlobal(M, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -6903,8 +6944,9 @@ public class LLVMCore {
     public static long LLVMAddAlias(@NativeType("LLVMModuleRef") long M, @NativeType("LLVMTypeRef") long Ty, @NativeType("LLVMValueRef") long Aliasee, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMAddAlias(M, Ty, Aliasee, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMAddAlias(M, Ty, Aliasee, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -6940,8 +6982,9 @@ public class LLVMCore {
     public static long LLVMGetNamedGlobalAlias(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name, false);
-            return nLLVMGetNamedGlobalAlias(M, memAddress(NameEncoded), NameEncoded.remaining());
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetNamedGlobalAlias(M, NameEncoded, NameEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7160,8 +7203,9 @@ public class LLVMCore {
     public static void LLVMSetGC(@NativeType("LLVMValueRef") long Fn, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            nLLVMSetGC(Fn, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            nLLVMSetGC(Fn, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7239,8 +7283,9 @@ public class LLVMCore {
     public static long LLVMGetStringAttributeAtIndex(@NativeType("LLVMValueRef") long F, @NativeType("LLVMAttributeIndex") int Idx, @NativeType("char const *") CharSequence K) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer KEncoded = stack.UTF8(K, false);
-            return nLLVMGetStringAttributeAtIndex(F, Idx, memAddress(KEncoded), KEncoded.remaining());
+            int KEncodedLength = stack.nUTF8(K, false);
+            long KEncoded = stack.getPointerAddress();
+            return nLLVMGetStringAttributeAtIndex(F, Idx, KEncoded, KEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7273,8 +7318,9 @@ public class LLVMCore {
     public static void LLVMRemoveStringAttributeAtIndex(@NativeType("LLVMValueRef") long F, @NativeType("LLVMAttributeIndex") int Idx, @NativeType("char const *") CharSequence K) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer KEncoded = stack.UTF8(K, false);
-            nLLVMRemoveStringAttributeAtIndex(F, Idx, memAddress(KEncoded), KEncoded.remaining());
+            int KEncodedLength = stack.nUTF8(K, false);
+            long KEncoded = stack.getPointerAddress();
+            nLLVMRemoveStringAttributeAtIndex(F, Idx, KEncoded, KEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7304,9 +7350,11 @@ public class LLVMCore {
     public static void LLVMAddTargetDependentFunctionAttr(@NativeType("LLVMValueRef") long Fn, @NativeType("char const *") CharSequence A, @NativeType("char const *") CharSequence V) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer AEncoded = stack.UTF8(A);
-            ByteBuffer VEncoded = stack.UTF8(V);
-            nLLVMAddTargetDependentFunctionAttr(Fn, memAddress(AEncoded), memAddress(VEncoded));
+            stack.nUTF8(A, true);
+            long AEncoded = stack.getPointerAddress();
+            stack.nUTF8(V, true);
+            long VEncoded = stack.getPointerAddress();
+            nLLVMAddTargetDependentFunctionAttr(Fn, AEncoded, VEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7489,8 +7537,9 @@ public class LLVMCore {
     public static long LLVMMDStringInContext(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence Str) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer StrEncoded = stack.UTF8(Str, false);
-            return nLLVMMDStringInContext(C, memAddress(StrEncoded), StrEncoded.remaining());
+            int StrEncodedLength = stack.nUTF8(Str, false);
+            long StrEncoded = stack.getPointerAddress();
+            return nLLVMMDStringInContext(C, StrEncoded, StrEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7515,8 +7564,9 @@ public class LLVMCore {
     public static long LLVMMDString(@NativeType("char const *") CharSequence Str) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer StrEncoded = stack.UTF8(Str, false);
-            return nLLVMMDString(memAddress(StrEncoded), StrEncoded.remaining());
+            int StrEncodedLength = stack.nUTF8(Str, false);
+            long StrEncoded = stack.getPointerAddress();
+            return nLLVMMDString(StrEncoded, StrEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7880,8 +7930,9 @@ public class LLVMCore {
     public static long LLVMAppendBasicBlockInContext(@NativeType("LLVMContextRef") long C, @NativeType("LLVMValueRef") long Fn, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMAppendBasicBlockInContext(C, Fn, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMAppendBasicBlockInContext(C, Fn, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7912,8 +7963,9 @@ public class LLVMCore {
     public static long LLVMAppendBasicBlock(@NativeType("LLVMValueRef") long Fn, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMAppendBasicBlock(Fn, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMAppendBasicBlock(Fn, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7953,8 +8005,9 @@ public class LLVMCore {
     public static long LLVMInsertBasicBlockInContext(@NativeType("LLVMContextRef") long C, @NativeType("LLVMBasicBlockRef") long BB, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMInsertBasicBlockInContext(C, BB, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMInsertBasicBlockInContext(C, BB, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -7985,8 +8038,9 @@ public class LLVMCore {
     public static long LLVMInsertBasicBlock(@NativeType("LLVMBasicBlockRef") long InsertBeforeBB, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMInsertBasicBlock(InsertBeforeBB, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMInsertBasicBlock(InsertBeforeBB, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -8418,8 +8472,9 @@ public class LLVMCore {
     public static long LLVMGetCallSiteStringAttribute(@NativeType("LLVMValueRef") long C, @NativeType("LLVMAttributeIndex") int Idx, @NativeType("char const *") CharSequence K) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer KEncoded = stack.UTF8(K, false);
-            return nLLVMGetCallSiteStringAttribute(C, Idx, memAddress(KEncoded), KEncoded.remaining());
+            int KEncodedLength = stack.nUTF8(K, false);
+            long KEncoded = stack.getPointerAddress();
+            return nLLVMGetCallSiteStringAttribute(C, Idx, KEncoded, KEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -8452,8 +8507,9 @@ public class LLVMCore {
     public static void LLVMRemoveCallSiteStringAttribute(@NativeType("LLVMValueRef") long C, @NativeType("LLVMAttributeIndex") int Idx, @NativeType("char const *") CharSequence K) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer KEncoded = stack.UTF8(K, false);
-            nLLVMRemoveCallSiteStringAttribute(C, Idx, memAddress(KEncoded), KEncoded.remaining());
+            int KEncodedLength = stack.nUTF8(K, false);
+            long KEncoded = stack.getPointerAddress();
+            nLLVMRemoveCallSiteStringAttribute(C, Idx, KEncoded, KEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -8900,8 +8956,9 @@ public class LLVMCore {
     public static void LLVMInsertIntoBuilderWithName(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Instr, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            nLLVMInsertIntoBuilderWithName(Builder, Instr, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            nLLVMInsertIntoBuilderWithName(Builder, Instr, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9066,8 +9123,9 @@ public class LLVMCore {
     public static long LLVMBuildInvoke(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Fn, @NativeType("LLVMValueRef *") PointerBuffer Args, @NativeType("LLVMBasicBlockRef") long Then, @NativeType("LLVMBasicBlockRef") long Catch, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildInvoke(Builder, Fn, memAddress(Args), Args.remaining(), Then, Catch, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildInvoke(Builder, Fn, memAddress(Args), Args.remaining(), Then, Catch, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9121,8 +9179,9 @@ public class LLVMCore {
     public static long LLVMBuildLandingPad(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMTypeRef") long Ty, @NativeType("LLVMValueRef") long PersFn, @NativeType("unsigned int") int NumClauses, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildLandingPad(B, Ty, PersFn, NumClauses, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildLandingPad(B, Ty, PersFn, NumClauses, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9177,8 +9236,9 @@ public class LLVMCore {
     public static long LLVMBuildCatchPad(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMValueRef") long ParentPad, @NativeType("LLVMValueRef *") PointerBuffer Args, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildCatchPad(B, ParentPad, memAddress(Args), Args.remaining(), memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildCatchPad(B, ParentPad, memAddress(Args), Args.remaining(), NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9207,8 +9267,9 @@ public class LLVMCore {
     public static long LLVMBuildCleanupPad(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMValueRef") long ParentPad, @NativeType("LLVMValueRef *") PointerBuffer Args, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildCleanupPad(B, ParentPad, memAddress(Args), Args.remaining(), memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildCleanupPad(B, ParentPad, memAddress(Args), Args.remaining(), NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9238,8 +9299,9 @@ public class LLVMCore {
     public static long LLVMBuildCatchSwitch(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMValueRef") long ParentPad, @NativeType("LLVMBasicBlockRef") long UnwindBB, @NativeType("unsigned int") int NumHandlers, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildCatchSwitch(B, ParentPad, UnwindBB, NumHandlers, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildCatchSwitch(B, ParentPad, UnwindBB, NumHandlers, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9465,8 +9527,9 @@ public class LLVMCore {
     public static long LLVMBuildAdd(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildAdd(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildAdd(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9496,8 +9559,9 @@ public class LLVMCore {
     public static long LLVMBuildNSWAdd(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildNSWAdd(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildNSWAdd(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9527,8 +9591,9 @@ public class LLVMCore {
     public static long LLVMBuildNUWAdd(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildNUWAdd(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildNUWAdd(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9558,8 +9623,9 @@ public class LLVMCore {
     public static long LLVMBuildFAdd(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFAdd(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFAdd(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9589,8 +9655,9 @@ public class LLVMCore {
     public static long LLVMBuildSub(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildSub(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildSub(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9620,8 +9687,9 @@ public class LLVMCore {
     public static long LLVMBuildNSWSub(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildNSWSub(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildNSWSub(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9651,8 +9719,9 @@ public class LLVMCore {
     public static long LLVMBuildNUWSub(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildNUWSub(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildNUWSub(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9682,8 +9751,9 @@ public class LLVMCore {
     public static long LLVMBuildFSub(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFSub(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFSub(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9713,8 +9783,9 @@ public class LLVMCore {
     public static long LLVMBuildMul(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildMul(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildMul(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9744,8 +9815,9 @@ public class LLVMCore {
     public static long LLVMBuildNSWMul(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildNSWMul(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildNSWMul(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9775,8 +9847,9 @@ public class LLVMCore {
     public static long LLVMBuildNUWMul(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildNUWMul(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildNUWMul(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9806,8 +9879,9 @@ public class LLVMCore {
     public static long LLVMBuildFMul(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFMul(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFMul(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9837,8 +9911,9 @@ public class LLVMCore {
     public static long LLVMBuildUDiv(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildUDiv(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildUDiv(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9868,8 +9943,9 @@ public class LLVMCore {
     public static long LLVMBuildExactUDiv(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildExactUDiv(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildExactUDiv(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9899,8 +9975,9 @@ public class LLVMCore {
     public static long LLVMBuildSDiv(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildSDiv(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildSDiv(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9930,8 +10007,9 @@ public class LLVMCore {
     public static long LLVMBuildExactSDiv(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildExactSDiv(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildExactSDiv(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9961,8 +10039,9 @@ public class LLVMCore {
     public static long LLVMBuildFDiv(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFDiv(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFDiv(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9992,8 +10071,9 @@ public class LLVMCore {
     public static long LLVMBuildURem(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildURem(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildURem(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10023,8 +10103,9 @@ public class LLVMCore {
     public static long LLVMBuildSRem(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildSRem(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildSRem(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10054,8 +10135,9 @@ public class LLVMCore {
     public static long LLVMBuildFRem(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFRem(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFRem(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10085,8 +10167,9 @@ public class LLVMCore {
     public static long LLVMBuildShl(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildShl(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildShl(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10116,8 +10199,9 @@ public class LLVMCore {
     public static long LLVMBuildLShr(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildLShr(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildLShr(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10147,8 +10231,9 @@ public class LLVMCore {
     public static long LLVMBuildAShr(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildAShr(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildAShr(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10178,8 +10263,9 @@ public class LLVMCore {
     public static long LLVMBuildAnd(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildAnd(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildAnd(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10209,8 +10295,9 @@ public class LLVMCore {
     public static long LLVMBuildOr(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildOr(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildOr(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10240,8 +10327,9 @@ public class LLVMCore {
     public static long LLVMBuildXor(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildXor(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildXor(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10271,8 +10359,9 @@ public class LLVMCore {
     public static long LLVMBuildBinOp(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMOpcode") int Op, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildBinOp(B, Op, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildBinOp(B, Op, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10301,8 +10390,9 @@ public class LLVMCore {
     public static long LLVMBuildNeg(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long V, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildNeg(Builder, V, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildNeg(Builder, V, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10331,8 +10421,9 @@ public class LLVMCore {
     public static long LLVMBuildNSWNeg(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMValueRef") long V, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildNSWNeg(B, V, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildNSWNeg(B, V, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10361,8 +10452,9 @@ public class LLVMCore {
     public static long LLVMBuildNUWNeg(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMValueRef") long V, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildNUWNeg(B, V, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildNUWNeg(B, V, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10391,8 +10483,9 @@ public class LLVMCore {
     public static long LLVMBuildFNeg(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long V, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFNeg(Builder, V, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFNeg(Builder, V, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10421,8 +10514,9 @@ public class LLVMCore {
     public static long LLVMBuildNot(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long V, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildNot(Builder, V, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildNot(Builder, V, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10454,8 +10548,9 @@ public class LLVMCore {
     public static long LLVMBuildMalloc(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMTypeRef") long Ty, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildMalloc(Builder, Ty, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildMalloc(Builder, Ty, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10485,8 +10580,9 @@ public class LLVMCore {
     public static long LLVMBuildArrayMalloc(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMTypeRef") long Ty, @NativeType("LLVMValueRef") long Val, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildArrayMalloc(Builder, Ty, Val, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildArrayMalloc(Builder, Ty, Val, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10515,8 +10611,9 @@ public class LLVMCore {
     public static long LLVMBuildAlloca(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMTypeRef") long Ty, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildAlloca(Builder, Ty, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildAlloca(Builder, Ty, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10546,8 +10643,9 @@ public class LLVMCore {
     public static long LLVMBuildArrayAlloca(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMTypeRef") long Ty, @NativeType("LLVMValueRef") long Val, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildArrayAlloca(Builder, Ty, Val, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildArrayAlloca(Builder, Ty, Val, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10588,8 +10686,9 @@ public class LLVMCore {
     public static long LLVMBuildLoad(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long PointerVal, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildLoad(Builder, PointerVal, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildLoad(Builder, PointerVal, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10631,8 +10730,9 @@ public class LLVMCore {
     public static long LLVMBuildGEP(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMValueRef") long Pointer, @NativeType("LLVMValueRef *") PointerBuffer Indices, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildGEP(B, Pointer, memAddress(Indices), Indices.remaining(), memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildGEP(B, Pointer, memAddress(Indices), Indices.remaining(), NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10661,8 +10761,9 @@ public class LLVMCore {
     public static long LLVMBuildInBoundsGEP(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMValueRef") long Pointer, @NativeType("LLVMValueRef *") PointerBuffer Indices, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildInBoundsGEP(B, Pointer, memAddress(Indices), Indices.remaining(), memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildInBoundsGEP(B, Pointer, memAddress(Indices), Indices.remaining(), NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10691,8 +10792,9 @@ public class LLVMCore {
     public static long LLVMBuildStructGEP(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMValueRef") long Pointer, @NativeType("unsigned int") int Idx, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildStructGEP(B, Pointer, Idx, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildStructGEP(B, Pointer, Idx, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10721,9 +10823,11 @@ public class LLVMCore {
     public static long LLVMBuildGlobalString(@NativeType("LLVMBuilderRef") long B, @NativeType("char const *") CharSequence Str, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer StrEncoded = stack.UTF8(Str);
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildGlobalString(B, memAddress(StrEncoded), memAddress(NameEncoded));
+            stack.nUTF8(Str, true);
+            long StrEncoded = stack.getPointerAddress();
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildGlobalString(B, StrEncoded, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10752,9 +10856,11 @@ public class LLVMCore {
     public static long LLVMBuildGlobalStringPtr(@NativeType("LLVMBuilderRef") long B, @NativeType("char const *") CharSequence Str, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer StrEncoded = stack.UTF8(Str);
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildGlobalStringPtr(B, memAddress(StrEncoded), memAddress(NameEncoded));
+            stack.nUTF8(Str, true);
+            long StrEncoded = stack.getPointerAddress();
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildGlobalStringPtr(B, StrEncoded, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10829,8 +10935,9 @@ public class LLVMCore {
     public static long LLVMBuildTrunc(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildTrunc(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildTrunc(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10860,8 +10967,9 @@ public class LLVMCore {
     public static long LLVMBuildZExt(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildZExt(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildZExt(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10891,8 +10999,9 @@ public class LLVMCore {
     public static long LLVMBuildSExt(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildSExt(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildSExt(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10922,8 +11031,9 @@ public class LLVMCore {
     public static long LLVMBuildFPToUI(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFPToUI(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFPToUI(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10953,8 +11063,9 @@ public class LLVMCore {
     public static long LLVMBuildFPToSI(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFPToSI(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFPToSI(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -10984,8 +11095,9 @@ public class LLVMCore {
     public static long LLVMBuildUIToFP(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildUIToFP(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildUIToFP(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11015,8 +11127,9 @@ public class LLVMCore {
     public static long LLVMBuildSIToFP(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildSIToFP(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildSIToFP(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11046,8 +11159,9 @@ public class LLVMCore {
     public static long LLVMBuildFPTrunc(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFPTrunc(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFPTrunc(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11077,8 +11191,9 @@ public class LLVMCore {
     public static long LLVMBuildFPExt(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFPExt(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFPExt(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11108,8 +11223,9 @@ public class LLVMCore {
     public static long LLVMBuildPtrToInt(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildPtrToInt(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildPtrToInt(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11139,8 +11255,9 @@ public class LLVMCore {
     public static long LLVMBuildIntToPtr(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildIntToPtr(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildIntToPtr(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11170,8 +11287,9 @@ public class LLVMCore {
     public static long LLVMBuildBitCast(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildBitCast(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildBitCast(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11201,8 +11319,9 @@ public class LLVMCore {
     public static long LLVMBuildAddrSpaceCast(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildAddrSpaceCast(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildAddrSpaceCast(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11232,8 +11351,9 @@ public class LLVMCore {
     public static long LLVMBuildZExtOrBitCast(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildZExtOrBitCast(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildZExtOrBitCast(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11263,8 +11383,9 @@ public class LLVMCore {
     public static long LLVMBuildSExtOrBitCast(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildSExtOrBitCast(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildSExtOrBitCast(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11294,8 +11415,9 @@ public class LLVMCore {
     public static long LLVMBuildTruncOrBitCast(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildTruncOrBitCast(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildTruncOrBitCast(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11325,8 +11447,9 @@ public class LLVMCore {
     public static long LLVMBuildCast(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMOpcode") int Op, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildCast(B, Op, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildCast(B, Op, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11356,8 +11479,9 @@ public class LLVMCore {
     public static long LLVMBuildPointerCast(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildPointerCast(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildPointerCast(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11387,8 +11511,9 @@ public class LLVMCore {
     public static long LLVMBuildIntCast(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildIntCast(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildIntCast(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11418,8 +11543,9 @@ public class LLVMCore {
     public static long LLVMBuildFPCast(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("LLVMTypeRef") long DestTy, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFPCast(Builder, Val, DestTy, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFPCast(Builder, Val, DestTy, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11452,8 +11578,9 @@ public class LLVMCore {
     public static long LLVMBuildICmp(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMIntPredicate") int Op, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildICmp(Builder, Op, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildICmp(Builder, Op, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11483,8 +11610,9 @@ public class LLVMCore {
     public static long LLVMBuildFCmp(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMRealPredicate") int Op, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFCmp(Builder, Op, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFCmp(Builder, Op, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11516,8 +11644,9 @@ public class LLVMCore {
     public static long LLVMBuildPhi(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMTypeRef") long Ty, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildPhi(Builder, Ty, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildPhi(Builder, Ty, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11546,8 +11675,9 @@ public class LLVMCore {
     public static long LLVMBuildCall(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Fn, @NativeType("LLVMValueRef *") PointerBuffer Args, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildCall(Builder, Fn, memAddress(Args), Args.remaining(), memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildCall(Builder, Fn, memAddress(Args), Args.remaining(), NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11578,8 +11708,9 @@ public class LLVMCore {
     public static long LLVMBuildSelect(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long If, @NativeType("LLVMValueRef") long Then, @NativeType("LLVMValueRef") long Else, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildSelect(Builder, If, Then, Else, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildSelect(Builder, If, Then, Else, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11609,8 +11740,9 @@ public class LLVMCore {
     public static long LLVMBuildVAArg(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long List, @NativeType("LLVMTypeRef") long Ty, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildVAArg(Builder, List, Ty, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildVAArg(Builder, List, Ty, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11640,8 +11772,9 @@ public class LLVMCore {
     public static long LLVMBuildExtractElement(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long VecVal, @NativeType("LLVMValueRef") long Index, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildExtractElement(Builder, VecVal, Index, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildExtractElement(Builder, VecVal, Index, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11672,8 +11805,9 @@ public class LLVMCore {
     public static long LLVMBuildInsertElement(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long VecVal, @NativeType("LLVMValueRef") long EltVal, @NativeType("LLVMValueRef") long Index, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildInsertElement(Builder, VecVal, EltVal, Index, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildInsertElement(Builder, VecVal, EltVal, Index, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11704,8 +11838,9 @@ public class LLVMCore {
     public static long LLVMBuildShuffleVector(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long V1, @NativeType("LLVMValueRef") long V2, @NativeType("LLVMValueRef") long Mask, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildShuffleVector(Builder, V1, V2, Mask, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildShuffleVector(Builder, V1, V2, Mask, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11734,8 +11869,9 @@ public class LLVMCore {
     public static long LLVMBuildExtractValue(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long AggVal, @NativeType("unsigned int") int Index, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildExtractValue(Builder, AggVal, Index, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildExtractValue(Builder, AggVal, Index, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11765,8 +11901,9 @@ public class LLVMCore {
     public static long LLVMBuildInsertValue(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long AggVal, @NativeType("LLVMValueRef") long EltVal, @NativeType("unsigned int") int Index, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildInsertValue(Builder, AggVal, EltVal, Index, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildInsertValue(Builder, AggVal, EltVal, Index, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11795,8 +11932,9 @@ public class LLVMCore {
     public static long LLVMBuildIsNull(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildIsNull(Builder, Val, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildIsNull(Builder, Val, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11825,8 +11963,9 @@ public class LLVMCore {
     public static long LLVMBuildIsNotNull(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildIsNotNull(Builder, Val, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildIsNotNull(Builder, Val, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11856,8 +11995,9 @@ public class LLVMCore {
     public static long LLVMBuildPtrDiff(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long LHS, @NativeType("LLVMValueRef") long RHS, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildPtrDiff(Builder, LHS, RHS, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildPtrDiff(Builder, LHS, RHS, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -11885,8 +12025,9 @@ public class LLVMCore {
     public static long LLVMBuildFence(@NativeType("LLVMBuilderRef") long B, @NativeType("LLVMAtomicOrdering") int ordering, @NativeType("LLVMBool") boolean singleThread, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMBuildFence(B, ordering, singleThread ? 1 : 0, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFence(B, ordering, singleThread ? 1 : 0, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -12033,8 +12174,9 @@ public class LLVMCore {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer PathEncoded = stack.UTF8(Path);
-            return nLLVMCreateMemoryBufferWithContentsOfFile(memAddress(PathEncoded), memAddress(OutMemBuf), memAddress(OutMessage)) != 0;
+            stack.nUTF8(Path, true);
+            long PathEncoded = stack.getPointerAddress();
+            return nLLVMCreateMemoryBufferWithContentsOfFile(PathEncoded, memAddress(OutMemBuf), memAddress(OutMessage)) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -12075,8 +12217,9 @@ public class LLVMCore {
     public static long LLVMCreateMemoryBufferWithMemoryRange(@NativeType("char const *") ByteBuffer InputData, @NativeType("char const *") CharSequence BufferName, @NativeType("LLVMBool") boolean RequiresNullTerminator) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer BufferNameEncoded = stack.UTF8(BufferName);
-            return nLLVMCreateMemoryBufferWithMemoryRange(memAddress(InputData), InputData.remaining(), memAddress(BufferNameEncoded), RequiresNullTerminator ? 1 : 0);
+            stack.nUTF8(BufferName, true);
+            long BufferNameEncoded = stack.getPointerAddress();
+            return nLLVMCreateMemoryBufferWithMemoryRange(memAddress(InputData), InputData.remaining(), BufferNameEncoded, RequiresNullTerminator ? 1 : 0);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -12101,8 +12244,9 @@ public class LLVMCore {
     public static long LLVMCreateMemoryBufferWithMemoryRangeCopy(@NativeType("char const *") ByteBuffer InputData, @NativeType("char const *") CharSequence BufferName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer BufferNameEncoded = stack.UTF8(BufferName);
-            return nLLVMCreateMemoryBufferWithMemoryRangeCopy(memAddress(InputData), InputData.remaining(), memAddress(BufferNameEncoded));
+            stack.nUTF8(BufferName, true);
+            long BufferNameEncoded = stack.getPointerAddress();
+            return nLLVMCreateMemoryBufferWithMemoryRangeCopy(memAddress(InputData), InputData.remaining(), BufferNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

@@ -135,8 +135,9 @@ public class STBImageWrite {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nstbi_write_png(memAddress(filenameEncoded), w, h, comp, memAddress(data), stride_in_bytes) != 0;
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nstbi_write_png(filenameEncoded, w, h, comp, memAddress(data), stride_in_bytes) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -232,8 +233,9 @@ public class STBImageWrite {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nstbi_write_bmp(memAddress(filenameEncoded), w, h, comp, memAddress(data)) != 0;
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nstbi_write_bmp(filenameEncoded, w, h, comp, memAddress(data)) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -288,8 +290,9 @@ public class STBImageWrite {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nstbi_write_tga(memAddress(filenameEncoded), w, h, comp, memAddress(data)) != 0;
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nstbi_write_tga(filenameEncoded, w, h, comp, memAddress(data)) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -357,8 +360,9 @@ public class STBImageWrite {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nstbi_write_hdr(memAddress(filenameEncoded), w, h, comp, memAddress(data)) != 0;
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nstbi_write_hdr(filenameEncoded, w, h, comp, memAddress(data)) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -415,8 +419,9 @@ public class STBImageWrite {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nstbi_write_jpg(memAddress(filenameEncoded), w, h, comp, memAddress(data), quality) != 0;
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nstbi_write_jpg(filenameEncoded, w, h, comp, memAddress(data), quality) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -583,8 +588,9 @@ public class STBImageWrite {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nstbi_write_hdr(memAddress(filenameEncoded), w, h, comp, data) != 0;
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nstbi_write_hdr(filenameEncoded, w, h, comp, data) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }

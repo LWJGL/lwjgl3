@@ -81,8 +81,9 @@ public class LLVMComdat {
     public static long LLVMGetOrInsertComdat(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMGetOrInsertComdat(M, memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetOrInsertComdat(M, NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

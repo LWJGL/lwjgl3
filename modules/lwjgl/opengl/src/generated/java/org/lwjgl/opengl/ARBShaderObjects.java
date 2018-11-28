@@ -846,8 +846,9 @@ public class ARBShaderObjects {
     public static int glGetUniformLocationARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLcharARB const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            return nglGetUniformLocationARB(programObj, memAddress(nameEncoded));
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetUniformLocationARB(programObj, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

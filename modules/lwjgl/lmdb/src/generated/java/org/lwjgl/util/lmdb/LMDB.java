@@ -638,8 +638,9 @@ public class LMDB {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nmdb_env_open(env, memAddress(pathEncoded), flags, mode);
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nmdb_env_open(env, pathEncoded, flags, mode);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -688,8 +689,9 @@ public class LMDB {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nmdb_env_copy(env, memAddress(pathEncoded));
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nmdb_env_copy(env, pathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -746,8 +748,9 @@ public class LMDB {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nmdb_env_copy2(env, memAddress(pathEncoded), flags);
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nmdb_env_copy2(env, pathEncoded, flags);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1410,8 +1413,9 @@ public class LMDB {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8Safe(name);
-            return nmdb_dbi_open(txn, memAddressSafe(nameEncoded), flags, memAddress(dbi));
+            stack.nUTF8Safe(name, true);
+            long nameEncoded = name == null ? NULL : stack.getPointerAddress();
+            return nmdb_dbi_open(txn, nameEncoded, flags, memAddress(dbi));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2083,8 +2087,9 @@ public class LMDB {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8Safe(name);
-            return nmdb_dbi_open(txn, memAddressSafe(nameEncoded), flags, dbi);
+            stack.nUTF8Safe(name, true);
+            long nameEncoded = name == null ? NULL : stack.getPointerAddress();
+            return nmdb_dbi_open(txn, nameEncoded, flags, dbi);
         } finally {
             stack.setPointer(stackPointer);
         }

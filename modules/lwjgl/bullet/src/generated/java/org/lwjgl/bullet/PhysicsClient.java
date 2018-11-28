@@ -1064,8 +1064,9 @@ public class PhysicsClient {
     public static long b3ConnectPhysicsTCP(@Nullable @NativeType("char const *") CharSequence hostName, int port) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer hostNameEncoded = stack.ASCIISafe(hostName);
-            return nb3ConnectPhysicsTCP(memAddressSafe(hostNameEncoded), port);
+            stack.nASCIISafe(hostName, true);
+            long hostNameEncoded = hostName == null ? NULL : stack.getPointerAddress();
+            return nb3ConnectPhysicsTCP(hostNameEncoded, port);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1090,8 +1091,9 @@ public class PhysicsClient {
     public static long b3ConnectPhysicsUDP(@Nullable @NativeType("char const *") CharSequence hostName, int port) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer hostNameEncoded = stack.ASCIISafe(hostName);
-            return nb3ConnectPhysicsUDP(memAddressSafe(hostNameEncoded), port);
+            stack.nASCIISafe(hostName, true);
+            long hostNameEncoded = hostName == null ? NULL : stack.getPointerAddress();
+            return nb3ConnectPhysicsUDP(hostNameEncoded, port);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1215,8 +1217,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pluginPathEncoded = stack.ASCII(pluginPath);
-            nb3CustomCommandLoadPlugin(commandHandle, memAddress(pluginPathEncoded));
+            stack.nASCII(pluginPath, true);
+            long pluginPathEncoded = stack.getPointerAddress();
+            nb3CustomCommandLoadPlugin(commandHandle, pluginPathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1240,8 +1243,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer postFixEncoded = stack.ASCII(postFix);
-            nb3CustomCommandLoadPluginSetPostFix(commandHandle, memAddress(postFixEncoded));
+            stack.nASCII(postFix, true);
+            long postFixEncoded = stack.getPointerAddress();
+            nb3CustomCommandLoadPluginSetPostFix(commandHandle, postFixEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1298,8 +1302,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer textArgumentsEncoded = stack.ASCII(textArguments);
-            nb3CustomCommandExecutePluginCommand(commandHandle, pluginUniqueId, memAddress(textArgumentsEncoded));
+            stack.nASCII(textArguments, true);
+            long textArgumentsEncoded = stack.getPointerAddress();
+            nb3CustomCommandExecutePluginCommand(commandHandle, pluginUniqueId, textArgumentsEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1539,8 +1544,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer keyEncoded = stack.ASCII(key);
-            return nb3InitAddUserDataCommand(physClient, bodyUniqueId, linkIndex, visualShapeIndex, memAddress(keyEncoded), valueType, valueData.remaining(), memAddress(valueData));
+            stack.nASCII(key, true);
+            long keyEncoded = stack.getPointerAddress();
+            return nb3InitAddUserDataCommand(physClient, bodyUniqueId, linkIndex, visualShapeIndex, keyEncoded, valueType, valueData.remaining(), memAddress(valueData));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1587,8 +1593,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer keyEncoded = stack.ASCII(key);
-            return nb3GetUserDataId(physClient, bodyUniqueId, linkIndex, visualShapeIndex, memAddress(keyEncoded));
+            stack.nASCII(key, true);
+            long keyEncoded = stack.getPointerAddress();
+            return nb3GetUserDataId(physClient, bodyUniqueId, linkIndex, visualShapeIndex, keyEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2162,8 +2169,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer txtEncoded = stack.ASCII(txt);
-            return nb3InitUserDebugDrawAddText3D(physClient, memAddress(txtEncoded), memAddress(positionXYZ), memAddress(colorRGB), textSize, lifeTime);
+            stack.nASCII(txt, true);
+            long txtEncoded = stack.getPointerAddress();
+            return nb3InitUserDebugDrawAddText3D(physClient, txtEncoded, memAddress(positionXYZ), memAddress(colorRGB), textSize, lifeTime);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2234,8 +2242,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer txtEncoded = stack.ASCII(txt);
-            return nb3InitUserDebugAddParameter(physClient, memAddress(txtEncoded), rangeMin, rangeMax, startValue);
+            stack.nASCII(txt, true);
+            long txtEncoded = stack.getPointerAddress();
+            return nb3InitUserDebugAddParameter(physClient, txtEncoded, rangeMin, rangeMax, startValue);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2876,8 +2885,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer filenameEncoded = stack.ASCII(filename);
-            return nb3InitLoadTexture(physClient, memAddress(filenameEncoded));
+            stack.nASCII(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nb3InitLoadTexture(physClient, filenameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3355,8 +3365,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer urdfFileNameEncoded = stack.ASCII(urdfFileName);
-            return nb3LoadUrdfCommandInit(physClient, memAddress(urdfFileNameEncoded));
+            stack.nASCII(urdfFileName, true);
+            long urdfFileNameEncoded = stack.getPointerAddress();
+            return nb3LoadUrdfCommandInit(physClient, urdfFileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3382,8 +3393,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer urdfFileNameEncoded = stack.ASCII(urdfFileName);
-            return nb3LoadUrdfCommandInit2(commandHandle, memAddress(urdfFileNameEncoded));
+            stack.nASCII(urdfFileName, true);
+            long urdfFileNameEncoded = stack.getPointerAddress();
+            return nb3LoadUrdfCommandInit2(commandHandle, urdfFileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3519,8 +3531,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fileNameEncoded = stack.ASCII(fileName);
-            return nb3LoadStateSetFileName(commandHandle, memAddress(fileNameEncoded));
+            stack.nASCII(fileName, true);
+            long fileNameEncoded = stack.getPointerAddress();
+            return nb3LoadStateSetFileName(commandHandle, fileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3546,8 +3559,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fileNameEncoded = stack.ASCII(fileName);
-            return nb3LoadBulletCommandInit(physClient, memAddress(fileNameEncoded));
+            stack.nASCII(fileName, true);
+            long fileNameEncoded = stack.getPointerAddress();
+            return nb3LoadBulletCommandInit(physClient, fileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3573,8 +3587,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fileNameEncoded = stack.ASCII(fileName);
-            return nb3SaveBulletCommandInit(physClient, memAddress(fileNameEncoded));
+            stack.nASCII(fileName, true);
+            long fileNameEncoded = stack.getPointerAddress();
+            return nb3SaveBulletCommandInit(physClient, fileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3600,8 +3615,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fileNameEncoded = stack.ASCII(fileName);
-            return nb3LoadMJCFCommandInit(physClient, memAddress(fileNameEncoded));
+            stack.nASCII(fileName, true);
+            long fileNameEncoded = stack.getPointerAddress();
+            return nb3LoadMJCFCommandInit(physClient, fileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3627,8 +3643,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fileNameEncoded = stack.ASCII(fileName);
-            return nb3LoadMJCFCommandInit2(commandHandle, memAddress(fileNameEncoded));
+            stack.nASCII(fileName, true);
+            long fileNameEncoded = stack.getPointerAddress();
+            return nb3LoadMJCFCommandInit2(commandHandle, fileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3910,8 +3927,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer sdfFileNameEncoded = stack.ASCII(sdfFileName);
-            return nb3LoadSdfCommandInit(physClient, memAddress(sdfFileNameEncoded));
+            stack.nASCII(sdfFileName, true);
+            long sdfFileNameEncoded = stack.getPointerAddress();
+            return nb3LoadSdfCommandInit(physClient, sdfFileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3937,8 +3955,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer sdfFileNameEncoded = stack.ASCII(sdfFileName);
-            return nb3LoadSdfCommandInit2(commandHandle, memAddress(sdfFileNameEncoded));
+            stack.nASCII(sdfFileName, true);
+            long sdfFileNameEncoded = stack.getPointerAddress();
+            return nb3LoadSdfCommandInit2(commandHandle, sdfFileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3986,8 +4005,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer sdfFileNameEncoded = stack.ASCII(sdfFileName);
-            return nb3SaveWorldCommandInit(physClient, memAddress(sdfFileNameEncoded));
+            stack.nASCII(sdfFileName, true);
+            long sdfFileNameEncoded = stack.getPointerAddress();
+            return nb3SaveWorldCommandInit(physClient, sdfFileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4195,8 +4215,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fileNameEncoded = stack.ASCII(fileName);
-            return nb3CreateCollisionShapeAddMesh(commandHandle, memAddress(fileNameEncoded), memAddress(meshScale));
+            stack.nASCII(fileName, true);
+            long fileNameEncoded = stack.getPointerAddress();
+            return nb3CreateCollisionShapeAddMesh(commandHandle, fileNameEncoded, memAddress(meshScale));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4338,8 +4359,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fileNameEncoded = stack.ASCII(fileName);
-            return nb3CreateVisualShapeAddMesh(commandHandle, memAddress(fileNameEncoded), memAddress(meshScale));
+            stack.nASCII(fileName, true);
+            long fileNameEncoded = stack.getPointerAddress();
+            return nb3CreateVisualShapeAddMesh(commandHandle, fileNameEncoded, memAddress(meshScale));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5004,8 +5026,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fileNameEncoded = stack.ASCII(fileName);
-            return nb3LoadSoftBodyCommandInit(physClient, memAddress(fileNameEncoded));
+            stack.nASCII(fileName, true);
+            long fileNameEncoded = stack.getPointerAddress();
+            return nb3LoadSoftBodyCommandInit(physClient, fileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5224,8 +5247,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fileNameEncoded = stack.ASCII(fileName);
-            return nb3StateLoggingStart(commandHandle, loggingType, memAddress(fileNameEncoded));
+            stack.nASCII(fileName, true);
+            long fileNameEncoded = stack.getPointerAddress();
+            return nb3StateLoggingStart(commandHandle, loggingType, fileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5361,8 +5385,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nb3ProfileTimingCommandInit(physClient, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nb3ProfileTimingCommandInit(physClient, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5397,8 +5422,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer timingNameEncoded = stack.ASCII(timingName);
-            nb3PushProfileTiming(physClient, memAddress(timingNameEncoded));
+            stack.nASCII(timingName, true);
+            long timingNameEncoded = stack.getPointerAddress();
+            nb3PushProfileTiming(physClient, timingNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5457,8 +5483,9 @@ public class PhysicsClient {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.ASCII(path);
-            return nb3SetAdditionalSearchPath(physClient, memAddress(pathEncoded));
+            stack.nASCII(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nb3SetAdditionalSearchPath(physClient, pathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

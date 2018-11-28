@@ -2233,9 +2233,11 @@ public class Assimp {
     public static int aiExportScene(@NativeType("struct aiScene const *") AIScene pScene, @NativeType("char const *") CharSequence pFormatId, @NativeType("char const *") CharSequence pFileName, @NativeType("unsigned int") int pPreProcessing) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pFormatIdEncoded = stack.UTF8(pFormatId);
-            ByteBuffer pFileNameEncoded = stack.UTF8(pFileName);
-            return naiExportScene(pScene.address(), memAddress(pFormatIdEncoded), memAddress(pFileNameEncoded), pPreProcessing);
+            stack.nUTF8(pFormatId, true);
+            long pFormatIdEncoded = stack.getPointerAddress();
+            stack.nUTF8(pFileName, true);
+            long pFileNameEncoded = stack.getPointerAddress();
+            return naiExportScene(pScene.address(), pFormatIdEncoded, pFileNameEncoded, pPreProcessing);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2330,9 +2332,11 @@ public class Assimp {
     public static int aiExportSceneEx(@NativeType("struct aiScene const *") AIScene pScene, @NativeType("char const *") CharSequence pFormatId, @NativeType("char const *") CharSequence pFileName, @Nullable @NativeType("struct aiFileIO const *") AIFileIO pIO, @NativeType("unsigned int") int pPreProcessing) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pFormatIdEncoded = stack.UTF8(pFormatId);
-            ByteBuffer pFileNameEncoded = stack.UTF8(pFileName);
-            return naiExportSceneEx(pScene.address(), memAddress(pFormatIdEncoded), memAddress(pFileNameEncoded), memAddressSafe(pIO), pPreProcessing);
+            stack.nUTF8(pFormatId, true);
+            long pFormatIdEncoded = stack.getPointerAddress();
+            stack.nUTF8(pFileName, true);
+            long pFileNameEncoded = stack.getPointerAddress();
+            return naiExportSceneEx(pScene.address(), pFormatIdEncoded, pFileNameEncoded, memAddressSafe(pIO), pPreProcessing);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2416,8 +2420,9 @@ public class Assimp {
     public static AIExportDataBlob aiExportSceneToBlob(@NativeType("struct aiScene const *") AIScene pScene, @NativeType("char const *") CharSequence pFormatId, @NativeType("unsigned int") int pPreProcessing) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pFormatIdEncoded = stack.UTF8(pFormatId);
-            long __result = naiExportSceneToBlob(pScene.address(), memAddress(pFormatIdEncoded), pPreProcessing);
+            stack.nUTF8(pFormatId, true);
+            long pFormatIdEncoded = stack.getPointerAddress();
+            long __result = naiExportSceneToBlob(pScene.address(), pFormatIdEncoded, pPreProcessing);
             return AIExportDataBlob.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -2493,8 +2498,9 @@ public class Assimp {
     public static AIScene aiImportFile(@NativeType("char const *") CharSequence pFile, @NativeType("unsigned int") int pFlags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pFileEncoded = stack.UTF8(pFile);
-            long __result = naiImportFile(memAddress(pFileEncoded), pFlags);
+            stack.nUTF8(pFile, true);
+            long pFileEncoded = stack.getPointerAddress();
+            long __result = naiImportFile(pFileEncoded, pFlags);
             return AIScene.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -2555,8 +2561,9 @@ public class Assimp {
     public static AIScene aiImportFileEx(@NativeType("char const *") CharSequence pFile, @NativeType("unsigned int") int pFlags, @Nullable @NativeType("struct aiFileIO *") AIFileIO pFS) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pFileEncoded = stack.UTF8(pFile);
-            long __result = naiImportFileEx(memAddress(pFileEncoded), pFlags, memAddressSafe(pFS));
+            stack.nUTF8(pFile, true);
+            long pFileEncoded = stack.getPointerAddress();
+            long __result = naiImportFileEx(pFileEncoded, pFlags, memAddressSafe(pFS));
             return AIScene.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -2611,8 +2618,9 @@ public class Assimp {
     public static AIScene aiImportFileExWithProperties(@NativeType("char const *") CharSequence pFile, @NativeType("unsigned int") int pFlags, @Nullable @NativeType("struct aiFileIO *") AIFileIO pFS, @NativeType("struct aiPropertyStore const *") AIPropertyStore pProps) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pFileEncoded = stack.UTF8(pFile);
-            long __result = naiImportFileExWithProperties(memAddress(pFileEncoded), pFlags, memAddressSafe(pFS), pProps.address());
+            stack.nUTF8(pFile, true);
+            long pFileEncoded = stack.getPointerAddress();
+            long __result = naiImportFileExWithProperties(pFileEncoded, pFlags, memAddressSafe(pFS), pProps.address());
             return AIScene.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -2692,8 +2700,9 @@ public class Assimp {
     public static AIScene aiImportFileFromMemory(@NativeType("char const *") ByteBuffer pBuffer, @NativeType("unsigned int") int pFlags, @Nullable @NativeType("char const *") CharSequence pHint) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pHintEncoded = stack.UTF8Safe(pHint);
-            long __result = naiImportFileFromMemory(memAddress(pBuffer), pBuffer.remaining(), pFlags, memAddressSafe(pHintEncoded));
+            stack.nUTF8Safe(pHint, true);
+            long pHintEncoded = pHint == null ? NULL : stack.getPointerAddress();
+            long __result = naiImportFileFromMemory(memAddress(pBuffer), pBuffer.remaining(), pFlags, pHintEncoded);
             return AIScene.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -2753,8 +2762,9 @@ public class Assimp {
     public static AIScene aiImportFileFromMemoryWithProperties(@NativeType("char const *") ByteBuffer pBuffer, @NativeType("unsigned int") int pFlags, @Nullable @NativeType("char const *") CharSequence pHint, @NativeType("struct aiPropertyStore const *") AIPropertyStore pProps) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pHintEncoded = stack.UTF8Safe(pHint);
-            long __result = naiImportFileFromMemoryWithProperties(memAddress(pBuffer), pBuffer.remaining(), pFlags, memAddressSafe(pHintEncoded), pProps.address());
+            stack.nUTF8Safe(pHint, true);
+            long pHintEncoded = pHint == null ? NULL : stack.getPointerAddress();
+            long __result = naiImportFileFromMemoryWithProperties(memAddress(pBuffer), pBuffer.remaining(), pFlags, pHintEncoded, pProps.address());
             return AIScene.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -2947,8 +2957,9 @@ public class Assimp {
     public static boolean aiIsExtensionSupported(@NativeType("char const *") CharSequence szExtension) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer szExtensionEncoded = stack.UTF8(szExtension);
-            return naiIsExtensionSupported(memAddress(szExtensionEncoded)) != 0;
+            stack.nUTF8(szExtension, true);
+            long szExtensionEncoded = stack.getPointerAddress();
+            return naiIsExtensionSupported(szExtensionEncoded) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3069,8 +3080,9 @@ public class Assimp {
     public static void aiSetImportPropertyInteger(@NativeType("struct aiPropertyStore *") AIPropertyStore store, @NativeType("char const *") CharSequence szName, int value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer szNameEncoded = stack.ASCII(szName);
-            naiSetImportPropertyInteger(store.address(), memAddress(szNameEncoded), value);
+            stack.nASCII(szName, true);
+            long szNameEncoded = stack.getPointerAddress();
+            naiSetImportPropertyInteger(store.address(), szNameEncoded, value);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3114,8 +3126,9 @@ public class Assimp {
     public static void aiSetImportPropertyFloat(@NativeType("struct aiPropertyStore *") AIPropertyStore store, @NativeType("char const *") CharSequence szName, float value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer szNameEncoded = stack.ASCII(szName);
-            naiSetImportPropertyFloat(store.address(), memAddress(szNameEncoded), value);
+            stack.nASCII(szName, true);
+            long szNameEncoded = stack.getPointerAddress();
+            naiSetImportPropertyFloat(store.address(), szNameEncoded, value);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3159,8 +3172,9 @@ public class Assimp {
     public static void aiSetImportPropertyString(@NativeType("struct aiPropertyStore *") AIPropertyStore store, @NativeType("char const *") CharSequence szName, @NativeType("struct aiString const *") AIString value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer szNameEncoded = stack.ASCII(szName);
-            naiSetImportPropertyString(store.address(), memAddress(szNameEncoded), value.address());
+            stack.nASCII(szName, true);
+            long szNameEncoded = stack.getPointerAddress();
+            naiSetImportPropertyString(store.address(), szNameEncoded, value.address());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3204,8 +3218,9 @@ public class Assimp {
     public static void aiSetImportPropertyMatrix(@NativeType("struct aiPropertyStore *") AIPropertyStore store, @NativeType("char const *") CharSequence szName, @NativeType("struct aiMatrix4x4 const *") AIMatrix4x4 value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer szNameEncoded = stack.ASCII(szName);
-            naiSetImportPropertyMatrix(store.address(), memAddress(szNameEncoded), value.address());
+            stack.nASCII(szName, true);
+            long szNameEncoded = stack.getPointerAddress();
+            naiSetImportPropertyMatrix(store.address(), szNameEncoded, value.address());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3464,8 +3479,9 @@ public class Assimp {
     public static AIImporterDesc aiGetImporterDesc(@NativeType("char const *") CharSequence extension) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer extensionEncoded = stack.ASCII(extension);
-            long __result = naiGetImporterDesc(memAddress(extensionEncoded));
+            stack.nASCII(extension, true);
+            long extensionEncoded = stack.getPointerAddress();
+            long __result = naiGetImporterDesc(extensionEncoded);
             return AIImporterDesc.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -3521,8 +3537,9 @@ public class Assimp {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pKeyEncoded = stack.ASCII(pKey);
-            return naiGetMaterialProperty(pMat.address(), memAddress(pKeyEncoded), type, index, memAddress(mPropOut));
+            stack.nASCII(pKey, true);
+            long pKeyEncoded = stack.getPointerAddress();
+            return naiGetMaterialProperty(pMat.address(), pKeyEncoded, type, index, memAddress(mPropOut));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3615,8 +3632,9 @@ public class Assimp {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pKeyEncoded = stack.ASCII(pKey);
-            return naiGetMaterialFloatArray(pMat.address(), memAddress(pKeyEncoded), type, index, memAddress(pOut), memAddressSafe(pMax));
+            stack.nASCII(pKey, true);
+            long pKeyEncoded = stack.getPointerAddress();
+            return naiGetMaterialFloatArray(pMat.address(), pKeyEncoded, type, index, memAddress(pOut), memAddressSafe(pMax));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3679,8 +3697,9 @@ public class Assimp {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pKeyEncoded = stack.ASCII(pKey);
-            return naiGetMaterialIntegerArray(pMat.address(), memAddress(pKeyEncoded), type, index, memAddress(pOut), memAddressSafe(pMax));
+            stack.nASCII(pKey, true);
+            long pKeyEncoded = stack.getPointerAddress();
+            return naiGetMaterialIntegerArray(pMat.address(), pKeyEncoded, type, index, memAddress(pOut), memAddressSafe(pMax));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3731,8 +3750,9 @@ public class Assimp {
     public static int aiGetMaterialColor(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") CharSequence pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("struct aiColor4D *") AIColor4D pOut) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pKeyEncoded = stack.ASCII(pKey);
-            return naiGetMaterialColor(pMat.address(), memAddress(pKeyEncoded), type, index, pOut.address());
+            stack.nASCII(pKey, true);
+            long pKeyEncoded = stack.getPointerAddress();
+            return naiGetMaterialColor(pMat.address(), pKeyEncoded, type, index, pOut.address());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3783,8 +3803,9 @@ public class Assimp {
     public static int aiGetMaterialUVTransform(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") CharSequence pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("struct aiUVTransform *") AIUVTransform pOut) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pKeyEncoded = stack.ASCII(pKey);
-            return naiGetMaterialUVTransform(pMat.address(), memAddress(pKeyEncoded), type, index, pOut.address());
+            stack.nASCII(pKey, true);
+            long pKeyEncoded = stack.getPointerAddress();
+            return naiGetMaterialUVTransform(pMat.address(), pKeyEncoded, type, index, pOut.address());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3835,8 +3856,9 @@ public class Assimp {
     public static int aiGetMaterialString(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") CharSequence pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("struct aiString *") AIString pOut) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pKeyEncoded = stack.ASCII(pKey);
-            return naiGetMaterialString(pMat.address(), memAddress(pKeyEncoded), type, index, pOut.address());
+            stack.nASCII(pKey, true);
+            long pKeyEncoded = stack.getPointerAddress();
+            return naiGetMaterialString(pMat.address(), pKeyEncoded, type, index, pOut.address());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4028,8 +4050,9 @@ public class Assimp {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pKeyEncoded = stack.ASCII(pKey);
-            return invokePPPPI(__functionAddress, pMat.address(), memAddress(pKeyEncoded), type, index, pOut, pMax);
+            stack.nASCII(pKey, true);
+            long pKeyEncoded = stack.getPointerAddress();
+            return invokePPPPI(__functionAddress, pMat.address(), pKeyEncoded, type, index, pOut, pMax);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4059,8 +4082,9 @@ public class Assimp {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pKeyEncoded = stack.ASCII(pKey);
-            return invokePPPPI(__functionAddress, pMat.address(), memAddress(pKeyEncoded), type, index, pOut, pMax);
+            stack.nASCII(pKey, true);
+            long pKeyEncoded = stack.getPointerAddress();
+            return invokePPPPI(__functionAddress, pMat.address(), pKeyEncoded, type, index, pOut, pMax);
         } finally {
             stack.setPointer(stackPointer);
         }

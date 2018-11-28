@@ -1979,29 +1979,12 @@ public final class MemoryUtil {
             } else if (c < MIN_SURROGATE || MAX_SURROGATE < c) {
                 bytes += 2;
             } else {
-                if (Checks.DEBUG) {
-                    checkSurrogatePair(value, i, len);
-                }
-
-                // TODO: test
                 bytes += 2; // the byte count already includes 2 bytes for the surrogate pair, add 2 more
                 i++;
             }
         }
 
         return bytes;
-    }
-
-    private static void checkSurrogatePair(CharSequence value, int offset, int len) {
-        char hi = value.charAt(offset);
-        if (len <= offset) {
-            throw new RuntimeException(String.format("Character sequence ends with single surrogate character: 0x%X", hi));
-        }
-
-        char lo = value.charAt(offset + 1);
-        if (!Character.isSurrogatePair(hi, lo)) {
-            throw new RuntimeException(String.format("Malformed surrogate pair: 0x%X - 0x%X", hi, lo));
-        }
     }
 
     /**

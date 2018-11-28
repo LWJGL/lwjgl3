@@ -2816,8 +2816,9 @@ public class VR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchInterfaceVersionEncoded = stack.ASCII(pchInterfaceVersion);
-            return nVR_GetGenericInterface(memAddress(pchInterfaceVersionEncoded), memAddress(peError));
+            stack.nASCII(pchInterfaceVersion, true);
+            long pchInterfaceVersionEncoded = stack.getPointerAddress();
+            return nVR_GetGenericInterface(pchInterfaceVersionEncoded, memAddress(peError));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2878,8 +2879,9 @@ public class VR {
     public static boolean VR_IsInterfaceVersionValid(@NativeType("char const *") CharSequence pchInterfaceVersion) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pchInterfaceVersionEncoded = stack.ASCII(pchInterfaceVersion);
-            return nVR_IsInterfaceVersionValid(memAddress(pchInterfaceVersionEncoded));
+            stack.nASCII(pchInterfaceVersion, true);
+            long pchInterfaceVersionEncoded = stack.getPointerAddress();
+            return nVR_IsInterfaceVersionValid(pchInterfaceVersionEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

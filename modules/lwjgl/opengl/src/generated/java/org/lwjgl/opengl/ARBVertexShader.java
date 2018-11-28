@@ -796,8 +796,9 @@ public class ARBVertexShader {
     public static void glBindAttribLocationARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLuint") int index, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            nglBindAttribLocationARB(programObj, index, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nglBindAttribLocationARB(programObj, index, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -900,8 +901,9 @@ public class ARBVertexShader {
     public static int glGetAttribLocationARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.ASCII(name);
-            return nglGetAttribLocationARB(programObj, memAddress(nameEncoded));
+            stack.nASCII(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            return nglGetAttribLocationARB(programObj, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }

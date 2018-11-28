@@ -2794,8 +2794,9 @@ public class ClangIndex {
     public static void clang_CXIndex_setInvocationEmissionPathOption(@NativeType("CXIndex") long index, @Nullable @NativeType("char const *") CharSequence Path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer PathEncoded = stack.UTF8Safe(Path);
-            nclang_CXIndex_setInvocationEmissionPathOption(index, memAddressSafe(PathEncoded));
+            stack.nUTF8Safe(Path, true);
+            long PathEncoded = Path == null ? NULL : stack.getPointerAddress();
+            nclang_CXIndex_setInvocationEmissionPathOption(index, PathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2911,8 +2912,9 @@ public class ClangIndex {
     public static long clang_getFile(@NativeType("CXTranslationUnit") long tu, @NativeType("char const *") CharSequence file_name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer file_nameEncoded = stack.UTF8(file_name);
-            return nclang_getFile(tu, memAddress(file_nameEncoded));
+            stack.nUTF8(file_name, true);
+            long file_nameEncoded = stack.getPointerAddress();
+            return nclang_getFile(tu, file_nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3460,8 +3462,9 @@ public class ClangIndex {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fileEncoded = stack.UTF8(file);
-            return nclang_loadDiagnostics(memAddress(fileEncoded), memAddress(error), errorString.address());
+            stack.nUTF8(file, true);
+            long fileEncoded = stack.getPointerAddress();
+            return nclang_loadDiagnostics(fileEncoded, memAddress(error), errorString.address());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3902,8 +3905,9 @@ public class ClangIndex {
     public static long clang_createTranslationUnitFromSourceFile(@NativeType("CXIndex") long CIdx, @Nullable @NativeType("char const *") CharSequence source_filename, @Nullable @NativeType("char const * const *") PointerBuffer clang_command_line_args, @Nullable @NativeType("struct CXUnsavedFile *") CXUnsavedFile.Buffer unsaved_files) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer source_filenameEncoded = stack.UTF8Safe(source_filename);
-            return nclang_createTranslationUnitFromSourceFile(CIdx, memAddressSafe(source_filenameEncoded), remainingSafe(clang_command_line_args), memAddressSafe(clang_command_line_args), remainingSafe(unsaved_files), memAddressSafe(unsaved_files));
+            stack.nUTF8Safe(source_filename, true);
+            long source_filenameEncoded = source_filename == null ? NULL : stack.getPointerAddress();
+            return nclang_createTranslationUnitFromSourceFile(CIdx, source_filenameEncoded, remainingSafe(clang_command_line_args), memAddressSafe(clang_command_line_args), remainingSafe(unsaved_files), memAddressSafe(unsaved_files));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3940,8 +3944,9 @@ public class ClangIndex {
     public static long clang_createTranslationUnit(@NativeType("CXIndex") long CIdx, @NativeType("char const *") CharSequence ast_filename) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer ast_filenameEncoded = stack.UTF8(ast_filename);
-            return nclang_createTranslationUnit(CIdx, memAddress(ast_filenameEncoded));
+            stack.nUTF8(ast_filename, true);
+            long ast_filenameEncoded = stack.getPointerAddress();
+            return nclang_createTranslationUnit(CIdx, ast_filenameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3988,8 +3993,9 @@ public class ClangIndex {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer ast_filenameEncoded = stack.UTF8(ast_filename);
-            return nclang_createTranslationUnit2(CIdx, memAddress(ast_filenameEncoded), memAddress(out_TU));
+            stack.nUTF8(ast_filename, true);
+            long ast_filenameEncoded = stack.getPointerAddress();
+            return nclang_createTranslationUnit2(CIdx, ast_filenameEncoded, memAddress(out_TU));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4043,8 +4049,9 @@ public class ClangIndex {
     public static long clang_parseTranslationUnit(@NativeType("CXIndex") long CIdx, @Nullable @NativeType("char const *") CharSequence source_filename, @Nullable @NativeType("char const * const *") PointerBuffer command_line_args, @Nullable @NativeType("struct CXUnsavedFile *") CXUnsavedFile.Buffer unsaved_files, @NativeType("unsigned") int options) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer source_filenameEncoded = stack.UTF8Safe(source_filename);
-            return nclang_parseTranslationUnit(CIdx, memAddressSafe(source_filenameEncoded), memAddressSafe(command_line_args), remainingSafe(command_line_args), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), options);
+            stack.nUTF8Safe(source_filename, true);
+            long source_filenameEncoded = source_filename == null ? NULL : stack.getPointerAddress();
+            return nclang_parseTranslationUnit(CIdx, source_filenameEncoded, memAddressSafe(command_line_args), remainingSafe(command_line_args), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), options);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4127,8 +4134,9 @@ public class ClangIndex {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer source_filenameEncoded = stack.UTF8Safe(source_filename);
-            return nclang_parseTranslationUnit2(CIdx, memAddressSafe(source_filenameEncoded), memAddressSafe(command_line_args), remainingSafe(command_line_args), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), options, memAddress(out_TU));
+            stack.nUTF8Safe(source_filename, true);
+            long source_filenameEncoded = source_filename == null ? NULL : stack.getPointerAddress();
+            return nclang_parseTranslationUnit2(CIdx, source_filenameEncoded, memAddressSafe(command_line_args), remainingSafe(command_line_args), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), options, memAddress(out_TU));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4169,8 +4177,9 @@ public class ClangIndex {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer source_filenameEncoded = stack.UTF8Safe(source_filename);
-            return nclang_parseTranslationUnit2FullArgv(CIdx, memAddressSafe(source_filenameEncoded), memAddress(command_line_args), command_line_args.remaining(), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), options, memAddress(out_TU));
+            stack.nUTF8Safe(source_filename, true);
+            long source_filenameEncoded = source_filename == null ? NULL : stack.getPointerAddress();
+            return nclang_parseTranslationUnit2FullArgv(CIdx, source_filenameEncoded, memAddress(command_line_args), command_line_args.remaining(), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), options, memAddress(out_TU));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4242,8 +4251,9 @@ public class ClangIndex {
     public static int clang_saveTranslationUnit(@NativeType("CXTranslationUnit") long TU, @NativeType("char const *") CharSequence FileName, @NativeType("unsigned") int options) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer FileNameEncoded = stack.UTF8(FileName);
-            return nclang_saveTranslationUnit(TU, memAddress(FileNameEncoded), options);
+            stack.nUTF8(FileName, true);
+            long FileNameEncoded = stack.getPointerAddress();
+            return nclang_saveTranslationUnit(TU, FileNameEncoded, options);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -6163,8 +6173,9 @@ public class ClangIndex {
     public static long clang_Type_getOffsetOf(CXType T, @NativeType("char const *") CharSequence S) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer SEncoded = stack.UTF8(S);
-            return nclang_Type_getOffsetOf(T.address(), memAddress(SEncoded));
+            stack.nUTF8(S, true);
+            long SEncoded = stack.getPointerAddress();
+            return nclang_Type_getOffsetOf(T.address(), SEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -6477,8 +6488,9 @@ public class ClangIndex {
     public static CXString clang_constructUSR_ObjCClass(@NativeType("char const *") CharSequence class_name, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer class_nameEncoded = stack.UTF8(class_name);
-            nclang_constructUSR_ObjCClass(memAddress(class_nameEncoded), __result.address());
+            stack.nUTF8(class_name, true);
+            long class_nameEncoded = stack.getPointerAddress();
+            nclang_constructUSR_ObjCClass(class_nameEncoded, __result.address());
             return __result;
         } finally {
             stack.setPointer(stackPointer);
@@ -6510,9 +6522,11 @@ public class ClangIndex {
     public static CXString clang_constructUSR_ObjCCategory(@NativeType("char const *") CharSequence class_name, @NativeType("char const *") CharSequence category_name, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer class_nameEncoded = stack.UTF8(class_name);
-            ByteBuffer category_nameEncoded = stack.UTF8(category_name);
-            nclang_constructUSR_ObjCCategory(memAddress(class_nameEncoded), memAddress(category_nameEncoded), __result.address());
+            stack.nUTF8(class_name, true);
+            long class_nameEncoded = stack.getPointerAddress();
+            stack.nUTF8(category_name, true);
+            long category_nameEncoded = stack.getPointerAddress();
+            nclang_constructUSR_ObjCCategory(class_nameEncoded, category_nameEncoded, __result.address());
             return __result;
         } finally {
             stack.setPointer(stackPointer);
@@ -6543,8 +6557,9 @@ public class ClangIndex {
     public static CXString clang_constructUSR_ObjCProtocol(@NativeType("char const *") CharSequence protocol_name, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer protocol_nameEncoded = stack.UTF8(protocol_name);
-            nclang_constructUSR_ObjCProtocol(memAddress(protocol_nameEncoded), __result.address());
+            stack.nUTF8(protocol_name, true);
+            long protocol_nameEncoded = stack.getPointerAddress();
+            nclang_constructUSR_ObjCProtocol(protocol_nameEncoded, __result.address());
             return __result;
         } finally {
             stack.setPointer(stackPointer);
@@ -6575,8 +6590,9 @@ public class ClangIndex {
     public static CXString clang_constructUSR_ObjCIvar(@NativeType("char const *") CharSequence name, CXString classUSR, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            nclang_constructUSR_ObjCIvar(memAddress(nameEncoded), classUSR.address(), __result.address());
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nclang_constructUSR_ObjCIvar(nameEncoded, classUSR.address(), __result.address());
             return __result;
         } finally {
             stack.setPointer(stackPointer);
@@ -6607,8 +6623,9 @@ public class ClangIndex {
     public static CXString clang_constructUSR_ObjCMethod(@NativeType("char const *") CharSequence name, @NativeType("unsigned") boolean isInstanceMethod, CXString classUSR, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer nameEncoded = stack.UTF8(name);
-            nclang_constructUSR_ObjCMethod(memAddress(nameEncoded), isInstanceMethod ? 1 : 0, classUSR.address(), __result.address());
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nclang_constructUSR_ObjCMethod(nameEncoded, isInstanceMethod ? 1 : 0, classUSR.address(), __result.address());
             return __result;
         } finally {
             stack.setPointer(stackPointer);
@@ -6639,8 +6656,9 @@ public class ClangIndex {
     public static CXString clang_constructUSR_ObjCProperty(@NativeType("char const *") CharSequence property, CXString classUSR, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer propertyEncoded = stack.UTF8(property);
-            nclang_constructUSR_ObjCProperty(memAddress(propertyEncoded), classUSR.address(), __result.address());
+            stack.nUTF8(property, true);
+            long propertyEncoded = stack.getPointerAddress();
+            nclang_constructUSR_ObjCProperty(propertyEncoded, classUSR.address(), __result.address());
             return __result;
         } finally {
             stack.setPointer(stackPointer);
@@ -8242,8 +8260,9 @@ public class ClangIndex {
     public static CXCodeCompleteResults clang_codeCompleteAt(@NativeType("CXTranslationUnit") long TU, @NativeType("char const *") CharSequence complete_filename, @NativeType("unsigned") int complete_line, @NativeType("unsigned") int complete_column, @Nullable @NativeType("struct CXUnsavedFile *") CXUnsavedFile.Buffer unsaved_files, @NativeType("unsigned") int options) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer complete_filenameEncoded = stack.UTF8(complete_filename);
-            long __result = nclang_codeCompleteAt(TU, memAddress(complete_filenameEncoded), complete_line, complete_column, memAddressSafe(unsaved_files), remainingSafe(unsaved_files), options);
+            stack.nUTF8(complete_filename, true);
+            long complete_filenameEncoded = stack.getPointerAddress();
+            long __result = nclang_codeCompleteAt(TU, complete_filenameEncoded, complete_line, complete_column, memAddressSafe(unsaved_files), remainingSafe(unsaved_files), options);
             return CXCodeCompleteResults.createSafe(__result);
         } finally {
             stack.setPointer(stackPointer);
@@ -8616,8 +8635,9 @@ public class ClangIndex {
     public static long clang_getRemappings(@NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer pathEncoded = stack.UTF8(path);
-            return nclang_getRemappings(memAddress(pathEncoded));
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nclang_getRemappings(pathEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -8995,8 +9015,9 @@ public class ClangIndex {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer source_filenameEncoded = stack.UTF8(source_filename);
-            return nclang_indexSourceFile(action, client_data, index_callbacks.address(), index_callbacks_size, index_options, memAddress(source_filenameEncoded), memAddressSafe(command_line_args), remainingSafe(command_line_args), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), memAddressSafe(out_TU), TU_options);
+            stack.nUTF8(source_filename, true);
+            long source_filenameEncoded = stack.getPointerAddress();
+            return nclang_indexSourceFile(action, client_data, index_callbacks.address(), index_callbacks_size, index_options, source_filenameEncoded, memAddressSafe(command_line_args), remainingSafe(command_line_args), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), memAddressSafe(out_TU), TU_options);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9035,8 +9056,9 @@ public class ClangIndex {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer source_filenameEncoded = stack.UTF8(source_filename);
-            return nclang_indexSourceFileFullArgv(action, client_data, index_callbacks.address(), index_callbacks_size, index_options, memAddress(source_filenameEncoded), memAddress(command_line_args), command_line_args.remaining(), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), memAddressSafe(out_TU), TU_options);
+            stack.nUTF8(source_filename, true);
+            long source_filenameEncoded = stack.getPointerAddress();
+            return nclang_indexSourceFileFullArgv(action, client_data, index_callbacks.address(), index_callbacks_size, index_options, source_filenameEncoded, memAddress(command_line_args), command_line_args.remaining(), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), memAddressSafe(out_TU), TU_options);
         } finally {
             stack.setPointer(stackPointer);
         }

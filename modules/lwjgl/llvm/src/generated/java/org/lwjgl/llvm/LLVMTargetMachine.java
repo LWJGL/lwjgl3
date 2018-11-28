@@ -176,8 +176,9 @@ public class LLVMTargetMachine {
     public static long LLVMGetTargetFromName(@NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer NameEncoded = stack.UTF8(Name);
-            return nLLVMGetTargetFromName(memAddress(NameEncoded));
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetTargetFromName(NameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -217,8 +218,9 @@ public class LLVMTargetMachine {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer TripleEncoded = stack.UTF8(Triple);
-            return nLLVMGetTargetFromTriple(memAddress(TripleEncoded), memAddress(T), memAddress(ErrorMessage)) != 0;
+            stack.nUTF8(Triple, true);
+            long TripleEncoded = stack.getPointerAddress();
+            return nLLVMGetTargetFromTriple(TripleEncoded, memAddress(T), memAddress(ErrorMessage)) != 0;
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -325,10 +327,13 @@ public class LLVMTargetMachine {
     public static long LLVMCreateTargetMachine(@NativeType("LLVMTargetRef") long T, @NativeType("char const *") CharSequence Triple, @NativeType("char const *") CharSequence CPU, @NativeType("char const *") CharSequence Features, @NativeType("LLVMCodeGenOptLevel") int Level, @NativeType("LLVMRelocMode") int Reloc, @NativeType("LLVMCodeModel") int CodeModel) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer TripleEncoded = stack.UTF8(Triple);
-            ByteBuffer CPUEncoded = stack.UTF8(CPU);
-            ByteBuffer FeaturesEncoded = stack.UTF8(Features);
-            return nLLVMCreateTargetMachine(T, memAddress(TripleEncoded), memAddress(CPUEncoded), memAddress(FeaturesEncoded), Level, Reloc, CodeModel);
+            stack.nUTF8(Triple, true);
+            long TripleEncoded = stack.getPointerAddress();
+            stack.nUTF8(CPU, true);
+            long CPUEncoded = stack.getPointerAddress();
+            stack.nUTF8(Features, true);
+            long FeaturesEncoded = stack.getPointerAddress();
+            return nLLVMCreateTargetMachine(T, TripleEncoded, CPUEncoded, FeaturesEncoded, Level, Reloc, CodeModel);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -531,8 +536,9 @@ public class LLVMTargetMachine {
     public static String LLVMNormalizeTargetTriple(@NativeType("char const *") CharSequence triple) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer tripleEncoded = stack.UTF8(triple);
-            long __result = nLLVMNormalizeTargetTriple(memAddress(tripleEncoded));
+            stack.nUTF8(triple, true);
+            long tripleEncoded = stack.getPointerAddress();
+            long __result = nLLVMNormalizeTargetTriple(tripleEncoded);
             return memUTF8Safe(__result);
         } finally {
             stack.setPointer(stackPointer);
