@@ -1,8 +1,0 @@
-<#if licenseFirst??>
-${licenseFirst}
-</#if>
-${licensePrefix}Copyright LWJGL. All rights reserved.
-${licensePrefix}License terms: https://www.lwjgl.org/license
-<#if licenseLast??>
-${licenseLast}
-</#if>

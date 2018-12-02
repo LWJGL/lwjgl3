@@ -1,23 +1,968 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright LWJGL. All rights reserved.
-  ~ License terms: https://www.lwjgl.org/license
-  -->
 <project xmlns="http://www.netbeans.org/ns/project/1">
-    <type>org.netbeans.modules.java.j2seproject</type>
+    <type>org.netbeans.modules.ant.freeform</type>
     <configuration>
-        <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
-            <name>LWJGL</name>
-            <source-roots>
-                <root id="src.dir"/>
-                <root id="src.java.dir" name="Generated Source"/>
-            </source-roots>
-            <test-roots>
-                <root id="test.src.dir"/>
-            </test-roots>
-        </data>
-        <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
-            <definitions>./libs/nblibraries.properties</definitions>
-        </libraries>
+        <general-data xmlns="http://www.netbeans.org/ns/freeform-project/1">
+            <!-- Do not use Project Properties customizer when editing this file manually. 
+ To prevent the customizer from showing, create nbproject/project.properties file and enter 
+auxiliary.show.customizer=false 
+property there. Adding 
+auxiliary.show.customizer.message=<message>
+ will show your customized message when someone attempts to open the customizer.  -->
+            <name>LWJGL 3</name>
+            <properties/>
+            <folders>
+                <source-folder>
+                    <label>generator</label>
+                    <type>java</type>
+                    <location>modules/generator/src/main/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>assimp</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/assimp/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>bgfx</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/bgfx/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>bullet</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/bullet/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>core (generated)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/core/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>core</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/core/src/main/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>core10</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/core/src/main/java10</location>
+                </source-folder>
+                <source-folder>
+                    <label>core9</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/core/src/main/java9</location>
+                </source-folder>
+                <source-folder>
+                    <label>cuda (generated)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/cuda/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>cuda</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/cuda/src/main/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>egl (generated)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/egl/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>egl</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/egl/src/main/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>glfw (generated)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/glfw/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>glfw</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/glfw/src/main/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>jawt</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/jawt/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>jemalloc</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/jemalloc/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>libdivide</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/libdivide/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>llvm</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/llvm/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>lmdb</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/lmdb/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>lz4</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/lz4/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>meow</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/meow/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>nanovg (generated)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/nanovg/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>nanovg</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/nanovg/src/main/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>nfd</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/nfd/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>nuklear</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/nuklear/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>odbc</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/odbc/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>openal (generated)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/openal/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>openal</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/openal/src/main/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>opencl (generated)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/opencl/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>opencl</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/opencl/src/main/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>opengl (generated)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/opengl/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>opengl</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/opengl/src/main/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>opengles (generated)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/opengles/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>opengles</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/opengles/src/main/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>openvr</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/openvr/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>opus</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/opus/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>ovr</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/ovr/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>par</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/par/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>remotery</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/remotery/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>rpmalloc</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/rpmalloc/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>sse</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/sse/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>stb</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/stb/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>tinyexr</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/tinyexr/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>tinyfd</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/tinyfd/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>tootle</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/tootle/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>vma</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/vma/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>vulkan (generated)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/vulkan/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>vulkan</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/vulkan/src/main/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>xxhash</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/xxhash/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>yoga</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/yoga/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>zstd</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/zstd/src/generated/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>core (test)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/core/src/test/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>libdivide (test)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/libdivide/src/test/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>opencl (test)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/opencl/src/test/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>opus (test)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/opus/src/test/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>par (test)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/par/src/test/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>rpmalloc (test)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/rpmalloc/src/test/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>sse (test)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/sse/src/test/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>yoga (test)</label>
+                    <type>java</type>
+                    <location>modules/lwjgl/yoga/src/test/java</location>
+                </source-folder>
+                <source-folder>
+                    <label>samples</label>
+                    <type>java</type>
+                    <location>modules/samples/src/test/java</location>
+                </source-folder>
+            </folders>
+            <ide-actions>
+                <action name="clean">
+                    <target>clean</target>
+                </action>
+                <action name="javadoc">
+                    <target>javadoc</target>
+                </action>
+            </ide-actions>
+            <view>
+                <items>
+                    <source-folder style="packages">
+                        <label>generator</label>
+                        <location>modules/generator/src/main/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>assimp</label>
+                        <location>modules/lwjgl/assimp/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>bgfx</label>
+                        <location>modules/lwjgl/bgfx/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>bullet</label>
+                        <location>modules/lwjgl/bullet/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>core (generated)</label>
+                        <location>modules/lwjgl/core/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>core</label>
+                        <location>modules/lwjgl/core/src/main/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>core10</label>
+                        <location>modules/lwjgl/core/src/main/java10</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>core9</label>
+                        <location>modules/lwjgl/core/src/main/java9</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>cuda (generated)</label>
+                        <location>modules/lwjgl/cuda/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>cuda</label>
+                        <location>modules/lwjgl/cuda/src/main/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>egl (generated)</label>
+                        <location>modules/lwjgl/egl/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>egl</label>
+                        <location>modules/lwjgl/egl/src/main/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>glfw (generated)</label>
+                        <location>modules/lwjgl/glfw/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>glfw</label>
+                        <location>modules/lwjgl/glfw/src/main/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>jawt</label>
+                        <location>modules/lwjgl/jawt/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>jemalloc</label>
+                        <location>modules/lwjgl/jemalloc/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>libdivide</label>
+                        <location>modules/lwjgl/libdivide/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>llvm</label>
+                        <location>modules/lwjgl/llvm/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>lmdb</label>
+                        <location>modules/lwjgl/lmdb/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>lz4</label>
+                        <location>modules/lwjgl/lz4/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>meow</label>
+                        <location>modules/lwjgl/meow/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>nanovg (generated)</label>
+                        <location>modules/lwjgl/nanovg/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>nanovg</label>
+                        <location>modules/lwjgl/nanovg/src/main/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>nfd</label>
+                        <location>modules/lwjgl/nfd/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>nuklear</label>
+                        <location>modules/lwjgl/nuklear/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>odbc</label>
+                        <location>modules/lwjgl/odbc/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>openal (generated)</label>
+                        <location>modules/lwjgl/openal/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>openal</label>
+                        <location>modules/lwjgl/openal/src/main/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>opencl (generated)</label>
+                        <location>modules/lwjgl/opencl/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>opencl</label>
+                        <location>modules/lwjgl/opencl/src/main/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>opengl (generated)</label>
+                        <location>modules/lwjgl/opengl/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>opengl</label>
+                        <location>modules/lwjgl/opengl/src/main/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>opengles (generated)</label>
+                        <location>modules/lwjgl/opengles/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>opengles</label>
+                        <location>modules/lwjgl/opengles/src/main/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>openvr</label>
+                        <location>modules/lwjgl/openvr/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>opus</label>
+                        <location>modules/lwjgl/opus/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>ovr</label>
+                        <location>modules/lwjgl/ovr/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>par</label>
+                        <location>modules/lwjgl/par/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>remotery</label>
+                        <location>modules/lwjgl/remotery/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>rpmalloc</label>
+                        <location>modules/lwjgl/rpmalloc/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>sse</label>
+                        <location>modules/lwjgl/sse/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>stb</label>
+                        <location>modules/lwjgl/stb/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>tinyexr</label>
+                        <location>modules/lwjgl/tinyexr/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>tinyfd</label>
+                        <location>modules/lwjgl/tinyfd/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>tootle</label>
+                        <location>modules/lwjgl/tootle/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>vma</label>
+                        <location>modules/lwjgl/vma/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>vulkan (generated)</label>
+                        <location>modules/lwjgl/vulkan/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>vulkan</label>
+                        <location>modules/lwjgl/vulkan/src/main/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>xxhash</label>
+                        <location>modules/lwjgl/xxhash/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>yoga</label>
+                        <location>modules/lwjgl/yoga/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>zstd</label>
+                        <location>modules/lwjgl/zstd/src/generated/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>core (test)</label>
+                        <location>modules/lwjgl/core/src/test/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>libdivide (test)</label>
+                        <location>modules/lwjgl/libdivide/src/test/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>opencl (test)</label>
+                        <location>modules/lwjgl/opencl/src/test/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>opus (test)</label>
+                        <location>modules/lwjgl/opus/src/test/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>par (test)</label>
+                        <location>modules/lwjgl/par/src/test/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>rpmalloc (test)</label>
+                        <location>modules/lwjgl/rpmalloc/src/test/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>sse (test)</label>
+                        <location>modules/lwjgl/sse/src/test/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>yoga (test)</label>
+                        <location>modules/lwjgl/yoga/src/test/java</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>samples</label>
+                        <location>modules/samples/src/test/java</location>
+                    </source-folder>
+                    <source-file>
+                        <location>build.xml</location>
+                    </source-file>
+                </items>
+                <context-menu>
+                    <ide-action name="clean"/>
+                    <ide-action name="javadoc"/>
+                    <action>
+                        <label>Compile Generator &amp; Templates</label>
+                        <target>compile-templates</target>
+                    </action>
+                    <action>
+                        <label>Run Generator</label>
+                        <target>generate</target>
+                    </action>
+                    <action>
+                        <label>Compile Java</label>
+                        <target>compile</target>
+                    </action>
+                    <action>
+                        <label>Compile Native Code</label>
+                        <target>compile-native</target>
+                    </action>
+                    <action>
+                        <label>Run Test Suite</label>
+                        <target>tests</target>
+                    </action>
+                </context-menu>
+            </view>
+            <subprojects/>
+        </general-data>
+        <java-data xmlns="http://www.netbeans.org/ns/freeform-project-java/4">
+            <compilation-unit>
+                <package-root>modules/generator/src/main/java</package-root>
+                <built-to>bin/classes/generator</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/assimp/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/assimp</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/bgfx/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/bgfx</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/bullet/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/bullet</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/core/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/core</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/core/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/core</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/core/src/main/java10</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:modules/lwjgl/core/src/main/java9</classpath>
+                <built-to>bin/classes/lwjgl/core/META-INF/versions/10</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/core/src/main/java9</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java</classpath>
+                <built-to>bin/classes/lwjgl/core/META-INF/versions/9</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/cuda/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/cuda/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/cuda</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/cuda/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/cuda/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/cuda</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/egl/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/egl/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/egl</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/egl/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/egl/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/egl</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/glfw/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/glfw/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:modules/lwjgl/egl/src/generated/java:modules/lwjgl/egl/src/main/java:modules/lwjgl/vulkan/src/generated/java:modules/lwjgl/vulkan/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/glfw</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/glfw/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/glfw/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:modules/lwjgl/egl/src/generated/java:modules/lwjgl/egl/src/main/java:modules/lwjgl/vulkan/src/generated/java:modules/lwjgl/vulkan/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/glfw</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/jawt/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/jawt</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/jemalloc/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/jemalloc</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/libdivide/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/libdivide</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/llvm/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/llvm</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/lmdb/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/lmdb</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/lz4/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/lz4</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/meow/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/meow</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/nanovg/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/nanovg/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/nanovg</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/nanovg/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/nanovg/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/nanovg</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/nfd/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/nfd</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/nuklear/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/nuklear</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/odbc/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/odbc</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/openal/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/openal/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/openal</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/openal/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/openal/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/openal</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/opencl/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/opencl/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/opencl</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/opencl/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/opencl/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/opencl</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/opengl/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/opengl/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/opengl</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/opengl/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/opengl/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/opengl</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/opengles/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/egl/src/generated/java:modules/lwjgl/egl/src/main/java:modules/lwjgl/opengles/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/opengles</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/opengles/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/egl/src/generated/java:modules/lwjgl/egl/src/main/java:modules/lwjgl/opengles/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/opengles</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/openvr/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/openvr</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/opus/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/opus</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/ovr/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/vulkan/src/generated/java:modules/lwjgl/vulkan/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/ovr</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/par/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/par</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/remotery/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/remotery</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/rpmalloc/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/rpmalloc</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/sse/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/sse</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/stb/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/stb</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/tinyexr/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/tinyexr</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/tinyfd/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/tinyfd</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/tootle/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/tootle</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/vma/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/vulkan/src/generated/java:modules/lwjgl/vulkan/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/vma</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/vulkan/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/vulkan/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/vulkan</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/vulkan/src/main/java</package-root>
+                <classpath mode="compile">modules/lwjgl/vulkan/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/vulkan</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/xxhash/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/xxhash</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/yoga/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/yoga</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/zstd/src/generated/java</package-root>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar</classpath>
+                <built-to>bin/classes/lwjgl/zstd</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/core/src/test/java</package-root>
+                <unit-tests/>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar:bin/libs/java/testng.jar</classpath>
+                <built-to>bin/classes/test</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/libdivide/src/test/java</package-root>
+                <unit-tests/>
+                <classpath mode="compile">modules/lwjgl/libdivide/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar:bin/libs/java/testng.jar</classpath>
+                <built-to>bin/classes/test</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/opencl/src/test/java</package-root>
+                <unit-tests/>
+                <classpath mode="compile">modules/lwjgl/opencl/src/generated/java:modules/lwjgl/opencl/src/main/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar:bin/libs/java/testng.jar</classpath>
+                <built-to>bin/classes/test</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/opus/src/test/java</package-root>
+                <unit-tests/>
+                <classpath mode="compile">modules/lwjgl/opus/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar:bin/libs/java/testng.jar</classpath>
+                <built-to>bin/classes/test</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/par/src/test/java</package-root>
+                <unit-tests/>
+                <classpath mode="compile">modules/lwjgl/par/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar:bin/libs/java/testng.jar</classpath>
+                <built-to>bin/classes/test</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/rpmalloc/src/test/java</package-root>
+                <unit-tests/>
+                <classpath mode="compile">modules/lwjgl/rpmalloc/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar:bin/libs/java/testng.jar</classpath>
+                <built-to>bin/classes/test</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/sse/src/test/java</package-root>
+                <unit-tests/>
+                <classpath mode="compile">modules/lwjgl/sse/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar:bin/libs/java/testng.jar</classpath>
+                <built-to>bin/classes/test</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/lwjgl/yoga/src/test/java</package-root>
+                <unit-tests/>
+                <classpath mode="compile">modules/lwjgl/yoga/src/generated/java:modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:bin/libs/java/jsr305.jar:bin/libs/java/testng.jar</classpath>
+                <built-to>bin/classes/test</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>modules/samples/src/test/java</package-root>
+                <unit-tests/>
+                <classpath mode="compile">modules/lwjgl/core/src/generated/java:modules/lwjgl/core/src/main/java:modules/lwjgl/assimp/src/generated/java:modules/lwjgl/bgfx/src/generated/java:modules/lwjgl/bullet/src/generated/java:modules/lwjgl/cuda/src/generated/java:modules/lwjgl/cuda/src/main/java:modules/lwjgl/egl/src/generated/java:modules/lwjgl/egl/src/main/java:modules/lwjgl/glfw/src/generated/java:modules/lwjgl/glfw/src/main/java:modules/lwjgl/jawt/src/generated/java:modules/lwjgl/jemalloc/src/generated/java:modules/lwjgl/libdivide/src/generated/java:modules/lwjgl/llvm/src/generated/java:modules/lwjgl/lmdb/src/generated/java:modules/lwjgl/lz4/src/generated/java:modules/lwjgl/meow/src/generated/java:modules/lwjgl/nanovg/src/generated/java:modules/lwjgl/nanovg/src/main/java:modules/lwjgl/nfd/src/generated/java:modules/lwjgl/nuklear/src/generated/java:modules/lwjgl/odbc/src/generated/java:modules/lwjgl/openal/src/generated/java:modules/lwjgl/openal/src/main/java:modules/lwjgl/opencl/src/generated/java:modules/lwjgl/opencl/src/main/java:modules/lwjgl/opengl/src/generated/java:modules/lwjgl/opengl/src/main/java:modules/lwjgl/opengles/src/generated/java:modules/lwjgl/opengles/src/main/java:modules/lwjgl/openvr/src/generated/java:modules/lwjgl/opus/src/generated/java:modules/lwjgl/ovr/src/generated/java:modules/lwjgl/par/src/generated/java:modules/lwjgl/remotery/src/generated/java:modules/lwjgl/rpmalloc/src/generated/java:modules/lwjgl/sse/src/generated/java:modules/lwjgl/stb/src/generated/java:modules/lwjgl/tinyexr/src/generated/java:modules/lwjgl/tinyfd/src/generated/java:modules/lwjgl/tootle/src/generated/java:modules/lwjgl/vma/src/generated/java:modules/lwjgl/vulkan/src/generated/java:modules/lwjgl/vulkan/src/main/java:modules/lwjgl/xxhash/src/generated/java:modules/lwjgl/yoga/src/generated/java:modules/lwjgl/zstd/src/generated/java:modules/lwjgl/core/src/test/java:modules/lwjgl/libdivide/src/test/java:modules/lwjgl/opencl/src/test/java:modules/lwjgl/opus/src/test/java:modules/lwjgl/par/src/test/java:modules/lwjgl/rpmalloc/src/test/java:modules/lwjgl/sse/src/test/java:modules/lwjgl/yoga/src/test/java:modules/samples/src/test/java:bin/libs/java/joml.jar:bin/libs/java/jmh-core.jar:bin/libs/java/jmh-generator-annprocess.jar:bin/libs/java/jopt-simple.jar:bin/libs/java/commons-math3.jar:bin/libs/java/jsr305.jar:bin/libs/java/testng.jar</classpath>
+                <built-to>bin/classes/samples</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+        </java-data>
     </configuration>
 </project>
