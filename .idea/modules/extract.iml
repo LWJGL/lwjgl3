@@ -4,7 +4,7 @@
     <facet type="kotlin-language" name="Kotlin">
       <configuration version="3" platform="JVM 1.8" useProjectSettings="false">
         <compilerSettings>
-          <option name="additionalArguments" value="-version -progressive -Xuse-experimental=kotlin.Experimental -Xuse-experimental=kotlin.contracts.ExperimentalContracts" />
+          <option name="additionalArguments" value="-version -progressive -Xno-call-assertions -Xno-param-assertions -Xuse-experimental=kotlin.Experimental -Xuse-experimental=kotlin.contracts.ExperimentalContracts" />
         </compilerSettings>
         <compilerArguments>
           <option name="jvmTarget" value="1.8" />
