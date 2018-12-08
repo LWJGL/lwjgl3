@@ -656,7 +656,7 @@ _memory_span_list_pop(span_t** head) {
 }
 
 #endif
-#if ENABLE_GLOBAL_CACHE
+#if ENABLE_THREAD_CACHE
 
 //! Split a single linked span list
 static span_t*
@@ -1419,6 +1419,10 @@ rpmalloc_initialize_config(const rpmalloc_config_t* config) {
 #endif
 		}
 #endif
+	}
+	else {
+		if (config && config->enable_huge_pages)
+			_memory_huge_pages = 1;
 	}
 
 	if (_memory_page_size < 512)

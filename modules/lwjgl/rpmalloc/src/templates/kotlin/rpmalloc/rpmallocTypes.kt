@@ -174,7 +174,18 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
         Will be aligned to a multiple of spans that match memory page size in case of huge pages.
         """
     )
-	intb("enable_huge_pages", "enable use of large/huge pages")
+	intb(
+        "enable_huge_pages",
+        """
+        enable use of large/huge pages.
+
+        If this flag is set to non-zero and page size is zero, the allocator will try to enable huge pages and auto detect the configuration. If this is set to
+        non-zero and page_size is also non-zero, the allocator will assume huge pages have been configured and enabled prior to initializing the allocator.
+
+        For Windows, see <a href="https://docs.microsoft.com/en-us/windows/desktop/memory/large-page-support">large-page-support</a>. For Linux, see
+        <a href="https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt">hugetlbpage.txt</a>.
+        """
+    )
 }
 
 val rpmalloc_global_statistics_t = struct(

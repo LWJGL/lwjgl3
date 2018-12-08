@@ -92,7 +92,13 @@ typedef struct rpmalloc_config_t {
 	//  committed memory should not be affected in the default implementation. Will be
 	//  aligned to a multiple of spans that match memory page size in case of huge pages.
 	size_t span_map_count;
-	//! Enable use of large/huge pages
+	//! Enable use of large/huge pages. If this flag is set to non-zero and page size is
+	//  zero, the allocator will try to enable huge pages and auto detect the configuration.
+	//  If this is set to non-zero and page_size is also non-zero, the allocator will
+	//  assume huge pages have been configured and enabled prior to initializing the
+	//  allocator.
+	//  For Windows, see https://docs.microsoft.com/en-us/windows/desktop/memory/large-page-support
+	//  For Linux, see https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt
 	int enable_huge_pages;
 } rpmalloc_config_t;
 

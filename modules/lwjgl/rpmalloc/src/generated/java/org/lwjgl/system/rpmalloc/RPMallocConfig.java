@@ -46,7 +46,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * actually used, so physical committed memory should not be affected in the default implementation.</p>
  * 
  * <p>Will be aligned to a multiple of spans that match memory page size in case of huge pages.</p></li>
- * <li>{@code enable_huge_pages} &ndash; enable use of large/huge pages</li>
+ * <li>{@code enable_huge_pages} &ndash; 
+ * enable use of large/huge pages.
+ * 
+ * <p>If this flag is set to non-zero and page size is zero, the allocator will try to enable huge pages and auto detect the configuration. If this is set to
+ * non-zero and page_size is also non-zero, the allocator will assume huge pages have been configured and enabled prior to initializing the allocator.</p>
+ * 
+ * <p>For Windows, see <a href="https://docs.microsoft.com/en-us/windows/desktop/memory/large-page-support">large-page-support</a>. For Linux, see
+ * <a href="https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt">hugetlbpage.txt</a>.</p></li>
  * </ul>
  * 
  * <h3>Layout</h3>
