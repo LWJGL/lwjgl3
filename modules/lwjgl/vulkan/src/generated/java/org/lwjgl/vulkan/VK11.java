@@ -867,7 +867,7 @@ public class VK11 extends VK10 {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT} specifies that images or buffers created with the specified parameters and handle type <b>must</b> use the mechanisms defined in the {@link NVDedicatedAllocation VK_NV_dedicated_allocation} extension to create (or import) a dedicated allocation for the image or buffer.</li>
+     * <li>{@link #VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT} specifies that images or buffers created with the specified parameters and handle type <b>must</b> use the mechanisms defined by {@link VkMemoryDedicatedRequirements} and {@link VkMemoryDedicatedAllocateInfo} to create (or import) a dedicated allocation for the image or buffer.</li>
      * <li>{@link #VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT} specifies that handles of this type <b>can</b> be exported from Vulkan memory objects.</li>
      * <li>{@link #VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT} specifies that handles of this type <b>can</b> be imported as Vulkan memory objects.</li>
      * </ul>

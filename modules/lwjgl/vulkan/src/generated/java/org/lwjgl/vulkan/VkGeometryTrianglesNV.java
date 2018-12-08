@@ -26,13 +26,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code vertexOffset} <b>must</b> be less than the size of {@code vertexData}</li>
- * <li>{@code vertexOffset} <b>must</b> be a multiple of the component size of {@code vertexFormat}.</li>
+ * <li>{@code vertexOffset} <b>must</b> be a multiple of the component size of {@code vertexFormat}</li>
  * <li>{@code vertexFormat} <b>must</b> be one of {@link VK10#VK_FORMAT_R32G32B32_SFLOAT FORMAT_R32G32B32_SFLOAT}, {@link VK10#VK_FORMAT_R32G32_SFLOAT FORMAT_R32G32_SFLOAT}, {@link VK10#VK_FORMAT_R16G16B16_SFLOAT FORMAT_R16G16B16_SFLOAT}, {@link VK10#VK_FORMAT_R16G16_SFLOAT FORMAT_R16G16_SFLOAT}, {@link VK10#VK_FORMAT_R16G16_SNORM FORMAT_R16G16_SNORM}, or {@link VK10#VK_FORMAT_R16G16B16_SNORM FORMAT_R16G16B16_SNORM}</li>
  * <li>{@code indexOffset} <b>must</b> be less than the size of {@code indexData}</li>
  * <li>{@code indexOffset} <b>must</b> be a multiple of the element size of {@code indexType}</li>
  * <li>{@code indexType} <b>must</b> be {@link VK10#VK_INDEX_TYPE_UINT16 INDEX_TYPE_UINT16}, {@link VK10#VK_INDEX_TYPE_UINT32 INDEX_TYPE_UINT32}, or {@link NVRayTracing#VK_INDEX_TYPE_NONE_NV INDEX_TYPE_NONE_NV}</li>
  * <li>{@code indexData} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} if {@code indexType} is {@link NVRayTracing#VK_INDEX_TYPE_NONE_NV INDEX_TYPE_NONE_NV}</li>
- * <li>{@code indexData} <b>must</b> be a valid handle if {@code indexType} is not {@link NVRayTracing#VK_INDEX_TYPE_NONE_NV INDEX_TYPE_NONE_NV}</li>
+ * <li>{@code indexData} <b>must</b> be a valid {@code VkBuffer} handle if {@code indexType} is not {@link NVRayTracing#VK_INDEX_TYPE_NONE_NV INDEX_TYPE_NONE_NV}</li>
  * <li>{@code indexCount} <b>must</b> be 0 if {@code indexType} is {@link NVRayTracing#VK_INDEX_TYPE_NONE_NV INDEX_TYPE_NONE_NV}</li>
  * <li>{@code transformOffset} <b>must</b> be less than the size of {@code transformData}</li>
  * <li>{@code transformOffset} <b>must</b> be a multiple of 16</li>

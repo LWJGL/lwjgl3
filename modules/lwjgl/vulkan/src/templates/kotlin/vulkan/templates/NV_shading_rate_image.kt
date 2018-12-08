@@ -197,7 +197,7 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
             <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-shadingRateImage">shading rate image</a> feature <b>must</b> be enabled.</li>
             <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> be a valid {@code VkImageView} handle of type #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY.</li>
             <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have a format of #FORMAT_R8_UINT.</li>
-            <li>If {@code imageView} is not #NULL_HANDLE, the image <b>must</b> have been created with #IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV set</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have been created with a {@code usage} value including #IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV</li>
             <li>If {@code imageView} is not #NULL_HANDLE, {@code imageLayout} <b>must</b> match the actual {@code VkImageLayout} of each subresource accessible from {@code imageView} at the time the subresource is accessed.</li>
             <li>If {@code imageView} is not #NULL_HANDLE, {@code imageLayout} <b>must</b> be #IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV or #IMAGE_LAYOUT_GENERAL.</li>
         </ul>

@@ -384,6 +384,13 @@ public class EXTDebugUtils {
      *     VkDevice                                    device,
      *     const VkDebugUtilsObjectNameInfoEXT*        pNameInfo);</code></pre>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>{@code pNameInfo}-&gt;{@code objectType} <b>must</b> not be {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}</li>
+     * <li>{@code pNameInfo}-&gt;{@code objectHandle} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -845,6 +852,8 @@ public class EXTDebugUtils {
      * </ul></dd>
      * </dl>
      * 
+     * <p>The application <b>must</b> ensure that {@link #vkCreateDebugUtilsMessengerEXT CreateDebugUtilsMessengerEXT} is not executed in parallel with any Vulkan command that is also called with {@code instance} or child of {@code instance} as the dispatchable argument.</p>
+     * 
      * <h5>See Also</h5>
      * 
      * <p>{@link VkAllocationCallbacks}, {@link VkDebugUtilsMessengerCreateInfoEXT}</p>
@@ -909,6 +918,8 @@ public class EXTDebugUtils {
      * <li>Host access to {@code messenger} <b>must</b> be externally synchronized</li>
      * </ul>
      * 
+     * <p>The application <b>must</b> ensure that {@link #vkDestroyDebugUtilsMessengerEXT DestroyDebugUtilsMessengerEXT} is not executed in parallel with any Vulkan command that is also called with {@code instance} or child of {@code instance} as the dispatchable argument.</p>
+     * 
      * <h5>See Also</h5>
      * 
      * <p>{@link VkAllocationCallbacks}</p>
@@ -950,6 +961,12 @@ public class EXTDebugUtils {
      * <h5>Description</h5>
      * 
      * <p>The call will propagate through the layers and generate callback(s) as indicated by the message's flags. The parameters are passed on to the callback in addition to the {@code pUserData} value that was defined at the time the messenger was registered.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>{@code objectType} member of each element of {@code pCallbackData}-&gt;{@code pObjects} <b>must</b> not be {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}</li>
+     * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

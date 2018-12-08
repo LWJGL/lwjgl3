@@ -18,15 +18,17 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying axis-aligned bounding box geometry in a bottom-level acceleration structure.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>The AABB data in memory is six 32-bit floats consisting of the minimum x, y, and z values followed by the maximum x, y, and z values.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>{@code offset} <b>must</b> be less than the size of {@code aabbData}</li>
- * <li>{@code offset} <b>must</b> be a multiple of 8.</li>
- * <li>{@code stride} <b>must</b> be a multiple of 8.</li>
+ * <li>{@code offset} <b>must</b> be a multiple of 8</li>
+ * <li>{@code stride} <b>must</b> be a multiple of 8</li>
  * </ul>
- * 
- * <p>The AABB data in memory is 6 32-bit floats consisting of the minimum x, y, and z values followed by the maximum x, y, and z values.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -45,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code aabbData} &ndash; the buffer containing axis-aligned bounding box data</li>
+ * <li>{@code aabbData} &ndash; the buffer containing axis-aligned bounding box data.</li>
  * <li>{@code numAABBs} &ndash; the number of AABBs in this geometry.</li>
  * <li>{@code stride} &ndash; the stride in bytes between AABBs in {@code aabbData}.</li>
  * <li>{@code offset} &ndash; the offset in bytes of the first AABB in {@code aabbData}.</li>

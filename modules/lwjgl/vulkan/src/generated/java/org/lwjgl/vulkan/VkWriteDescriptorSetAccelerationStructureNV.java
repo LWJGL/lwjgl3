@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code accelerationStructureCount} <b>must</b> be equal to descriptorCount in the extended structure.</li>
+ * <li>{@code accelerationStructureCount} <b>must</b> be equal to {@code descriptorCount} in the extended structure</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -38,8 +38,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code accelerationStructureCount} &ndash; the number of elements in pAccelerationStructures</li>
- * <li>{@code pAccelerationStructures} &ndash; are the acceleration structures to update</li>
+ * <li>{@code accelerationStructureCount} &ndash; the number of elements in {@code pAccelerationStructures}.</li>
+ * <li>{@code pAccelerationStructures} &ndash; are the acceleration structures to update.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code geometryType} &ndash; describes which type of geometry this VkGeometryNV refers to.</li>
+ * <li>{@code geometryType} &ndash; describes which type of geometry this {@link VkGeometryNV} refers to.</li>
  * <li>{@code geometry} &ndash; contains the geometry data as described in {@link VkGeometryDataNV}.</li>
  * <li>{@code flags} &ndash; has flags describing options for this geometry.</li>
  * </ul>

@@ -577,6 +577,10 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_shader_atomic_int64;
     /** When true, {@link KHRShaderDrawParameters} is supported. */
     public final boolean VK_KHR_shader_draw_parameters;
+    /** When true, {@link KHRShaderFloat16Int8} is supported. */
+    public final boolean VK_KHR_shader_float16_int8;
+    /** When true, {@link KHRShaderFloatControls} is supported. */
+    public final boolean VK_KHR_shader_float_controls;
     /** When true, {@link KHRSharedPresentableImage} is supported. */
     public final boolean VK_KHR_shared_presentable_image;
     /** When true, {@link KHRStorageBufferStorageClass} is supported. */
@@ -737,6 +741,8 @@ public class VKCapabilitiesDevice {
         VK_KHR_sampler_ycbcr_conversion = KHRSamplerYcbcrConversion.checkCapsDevice(provider, caps, ext);
         VK_KHR_shader_atomic_int64 = ext.contains("VK_KHR_shader_atomic_int64");
         VK_KHR_shader_draw_parameters = ext.contains("VK_KHR_shader_draw_parameters");
+        VK_KHR_shader_float16_int8 = ext.contains("VK_KHR_shader_float16_int8");
+        VK_KHR_shader_float_controls = ext.contains("VK_KHR_shader_float_controls");
         VK_KHR_shared_presentable_image = KHRSharedPresentableImage.checkCapsDevice(provider, caps, ext);
         VK_KHR_storage_buffer_storage_class = ext.contains("VK_KHR_storage_buffer_storage_class");
         VK_KHR_swapchain = KHRSwapchain.checkCapsDevice(provider, caps, ext);

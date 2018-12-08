@@ -351,6 +351,12 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿    VkDevice                                    device,
 ￿    const VkDebugUtilsObjectNameInfoEXT*        pNameInfo);</code></pre>
 
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code pNameInfo}-&gt;{@code objectType} <b>must</b> not be #OBJECT_TYPE_UNKNOWN</li>
+            <li>{@code pNameInfo}-&gt;{@code objectHandle} <b>must</b> not be #NULL_HANDLE</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
@@ -688,6 +694,8 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
             </ul></dd>
         </dl>
 
+        The application <b>must</b> ensure that #CreateDebugUtilsMessengerEXT() is not executed in parallel with any Vulkan command that is also called with {@code instance} or child of {@code instance} as the dispatchable argument.
+
         <h5>See Also</h5>
         ##VkAllocationCallbacks, ##VkDebugUtilsMessengerCreateInfoEXT
         """,
@@ -731,6 +739,8 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
             <li>Host access to {@code messenger} <b>must</b> be externally synchronized</li>
         </ul>
 
+        The application <b>must</b> ensure that #DestroyDebugUtilsMessengerEXT() is not executed in parallel with any Vulkan command that is also called with {@code instance} or child of {@code instance} as the dispatchable argument.
+
         <h5>See Also</h5>
         ##VkAllocationCallbacks
         """,
@@ -757,6 +767,11 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 
         <h5>Description</h5>
         The call will propagate through the layers and generate callback(s) as indicated by the message's flags. The parameters are passed on to the callback in addition to the {@code pUserData} value that was defined at the time the messenger was registered.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code objectType} member of each element of {@code pCallbackData}-&gt;{@code pObjects} <b>must</b> not be #OBJECT_TYPE_UNKNOWN</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

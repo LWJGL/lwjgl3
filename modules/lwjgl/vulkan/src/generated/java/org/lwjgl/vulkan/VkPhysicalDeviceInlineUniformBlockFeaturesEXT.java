@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing inline uniform block features that can be supported by an implementation.
@@ -43,7 +45,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
  * }</code></pre>
  */
-public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
+public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -105,14 +107,22 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
     public VkPhysicalDeviceInlineUniformBlockFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceInlineUniformBlockFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@code inlineUniformBlock} field. */
+    public VkPhysicalDeviceInlineUniformBlockFeaturesEXT inlineUniformBlock(@NativeType("VkBool32") boolean value) { ninlineUniformBlock(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code descriptorBindingInlineUniformBlockUpdateAfterBind} field. */
+    public VkPhysicalDeviceInlineUniformBlockFeaturesEXT descriptorBindingInlineUniformBlockUpdateAfterBind(@NativeType("VkBool32") boolean value) { ndescriptorBindingInlineUniformBlockUpdateAfterBind(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceInlineUniformBlockFeaturesEXT set(
         int sType,
-        long pNext
+        long pNext,
+        boolean inlineUniformBlock,
+        boolean descriptorBindingInlineUniformBlockUpdateAfterBind
     ) {
         sType(sType);
         pNext(pNext);
+        inlineUniformBlock(inlineUniformBlock);
+        descriptorBindingInlineUniformBlockUpdateAfterBind(descriptorBindingInlineUniformBlockUpdateAfterBind);
 
         return this;
     }
@@ -131,6 +141,22 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT malloc() {
+        return wrap(VkPhysicalDeviceInlineUniformBlockFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT calloc() {
+        return wrap(VkPhysicalDeviceInlineUniformBlockFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} instance allocated with {@link BufferUtils}. */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPhysicalDeviceInlineUniformBlockFeaturesEXT.class, memAddress(container), container);
+    }
+
     /** Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT create(long address) {
         return wrap(VkPhysicalDeviceInlineUniformBlockFeaturesEXT.class, address);
@@ -140,6 +166,34 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
     @Nullable
     public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceInlineUniformBlockFeaturesEXT.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -160,6 +214,74 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
 
     // -----------------------------------
 
+    /** Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT mallocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceInlineUniformBlockFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT callocStack(MemoryStack stack) {
+        return wrap(VkPhysicalDeviceInlineUniformBlockFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
+    // -----------------------------------
+
     /** Unsafe version of {@link #sType}. */
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
@@ -173,11 +295,15 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.PNEXT, value); }
+    /** Unsafe version of {@link #inlineUniformBlock(boolean) inlineUniformBlock}. */
+    public static void ninlineUniformBlock(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.INLINEUNIFORMBLOCK, value); }
+    /** Unsafe version of {@link #descriptorBindingInlineUniformBlockUpdateAfterBind(boolean) descriptorBindingInlineUniformBlockUpdateAfterBind}. */
+    public static void ndescriptorBindingInlineUniformBlockUpdateAfterBind(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceInlineUniformBlockFeaturesEXT.DESCRIPTORBINDINGINLINEUNIFORMBLOCKUPDATEAFTERBIND, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceInlineUniformBlockFeaturesEXT, Buffer> {
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceInlineUniformBlockFeaturesEXT, Buffer> implements NativeResource {
 
         private static final VkPhysicalDeviceInlineUniformBlockFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceInlineUniformBlockFeaturesEXT.create(-1L);
 
@@ -229,6 +355,10 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct {
         public VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceInlineUniformBlockFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceInlineUniformBlockFeaturesEXT.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@code inlineUniformBlock} field. */
+        public VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer inlineUniformBlock(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceInlineUniformBlockFeaturesEXT.ninlineUniformBlock(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code descriptorBindingInlineUniformBlockUpdateAfterBind} field. */
+        public VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer descriptorBindingInlineUniformBlockUpdateAfterBind(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceInlineUniformBlockFeaturesEXT.ndescriptorBindingInlineUniformBlockUpdateAfterBind(address(), value ? 1 : 0); return this; }
 
     }
 

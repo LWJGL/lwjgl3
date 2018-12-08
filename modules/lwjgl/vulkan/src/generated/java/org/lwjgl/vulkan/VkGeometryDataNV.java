@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code triangles} &ndash; contains triangle data if {@code geometryType} is {@link NVRayTracing#VK_GEOMETRY_TYPE_TRIANGLES_NV GEOMETRY_TYPE_TRIANGLES_NV}.</li>
- * <li>{@code aabbs} &ndash; contains axis-aligned bounding box data if {@code geometryType} is {@link NVRayTracing#VK_GEOMETRY_TYPE_AABBS_NV GEOMETRY_TYPE_AABBS_NV}.</li>
+ * <li>{@code triangles} &ndash; contains triangle data if {@link VkGeometryNV}{@code ::geometryType} is {@link NVRayTracing#VK_GEOMETRY_TYPE_TRIANGLES_NV GEOMETRY_TYPE_TRIANGLES_NV}.</li>
+ * <li>{@code aabbs} &ndash; contains axis-aligned bounding box data if {@link VkGeometryNV}{@code ::geometryType} is {@link NVRayTracing#VK_GEOMETRY_TYPE_AABBS_NV GEOMETRY_TYPE_AABBS_NV}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

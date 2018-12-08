@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@code compactedSize} is not 0 then both {@code info}{@code ::geometryCount} and {@code info}{@code ::instanceCount} <b>must</b> be 0</li>
+ * <li>If {@code compactedSize} is not 0 then both {@code info.geometryCount} and {@code info.instanceCount} <b>must</b> be 0</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -41,8 +41,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code compactedSize} &ndash; the size from the result of {@link NVRayTracing#vkCmdWriteAccelerationStructuresPropertiesNV CmdWriteAccelerationStructuresPropertiesNV}, if this acceleration structure is going to be the target of a compacting copy.</li>
- * <li>{@code info} &ndash; contains the {@link VkAccelerationStructureInfoNV} information for the acceleration structure&#8217;s parameters</li>
+ * <li>{@code compactedSize} &ndash; the size from the result of {@link NVRayTracing#vkCmdWriteAccelerationStructuresPropertiesNV CmdWriteAccelerationStructuresPropertiesNV} if this acceleration structure is going to be the target of a compacting copy.</li>
+ * <li>{@code info} &ndash; the {@link VkAccelerationStructureInfoNV} structure that specifies further parameters of the created acceleration structure.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

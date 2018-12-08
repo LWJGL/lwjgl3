@@ -24,7 +24,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         This extension adds support for the following SPIR-V extension in Vulkan:
 
         <ul>
-            <li>SPV_NV_ray_tracing</li>
+            <li>{@code SPV_NV_ray_tracing}</li>
         </ul>
 
         <h5>Sample Code</h5>
@@ -216,13 +216,13 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
 
         <h5>Description</h5>
         <ul>
-            <li>#RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV indicates a shader group with a single #SHADER_STAGE_RAYGEN_BIT_NV, #SHADER_STAGE_MISS_BIT_NV, or #SHADER_STAGE_CALLABLE_BIT_NV shader in it</li>
-            <li>#RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV specifies a shader group that only hits triangles and <b>must</b> not contain an intersection shader, only closest hit and any hit.</li>
-            <li>#RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV specifies a shader group that only intersects with custom geometry and <b>must</b> contain an intersection shader and <b>may</b> contain closest hit and any hit shaders.</li>
+            <li>#RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV indicates a shader group with a single #SHADER_STAGE_RAYGEN_BIT_NV, #SHADER_STAGE_MISS_BIT_NV, or #SHADER_STAGE_CALLABLE_BIT_NV shader in it.</li>
+            <li>#RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV specifies a shader group that only hits triangles and <b>must</b> not contain an intersection shader, only closest hit and any-hit.</li>
+            <li>#RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV specifies a shader group that only intersects with custom geometry and <b>must</b> contain an intersection shader and <b>may</b> contain closest hit and any-hit shaders.</li>
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        For current group types, the hit group type could be inferred from the presence or absence of the intersection shader, but we provide the type explicitly for future hit groups that don't have that property.
+        For current group types, the hit group type could be inferred from the presence or absence of the intersection shader, but we provide the type explicitly for future hit groups that do not have that property.
         </div>
 
         <h5>See Also</h5>
@@ -258,8 +258,8 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
 
         <h5>Description</h5>
         <ul>
-            <li>#GEOMETRY_OPAQUE_BIT_NV indicates that this geometry does not invoke any-hit shaders even if present in a hit group.</li>
-            <li>#GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV indicates that the implementation <b>must</b> only call any hit a single time for each primitive in this geometry. If this bit is absent an implementation <b>may</b> invoke an any hit shader more than once for this geometry.</li>
+            <li>#GEOMETRY_OPAQUE_BIT_NV indicates that this geometry does not invoke the any-hit shaders even if present in a hit group.</li>
+            <li>#GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV indicates that the implementation <b>must</b> only call the any-hit shader a single time for each primitive in this geometry. If this bit is absent an implementation <b>may</b> invoke the any-hit shader more than once for this geometry.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -277,9 +277,9 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         <h5>Description</h5>
         <ul>
             <li>#GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NV disables face culling for this instance.</li>
-            <li>#GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV indicates that the front face of the triangle for culling purposes should be the face that&#8217;s counter clockwise in object space relative to the ray origin. Because the facing is determined in object space, an instance transform matrix does not changing winding, but a geometry transform does.</li>
-            <li>#GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV causes this instance to act as though #GEOMETRY_OPAQUE_BIT_NV were specified on all geometries referenced by this instance. This behavior can be overridden by the ray flag {@code gl_RayFlagsNoOpaqueNV}.</li>
-            <li>#GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV causes this instance to act as though #GEOMETRY_OPAQUE_BIT_NV were not specified on all geometries referenced by this instance. This behavior can be overridden by the ray flag {@code gl_RayFlagsOpaqueNV}.</li>
+            <li>#GEOMETRY_INSTANCE_TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV indicates that the front face of the triangle for culling purposes is the face that is counter clockwise in object space relative to the ray origin. Because the facing is determined in object space, an instance transform matrix does not change the winding, but a geometry transform does.</li>
+            <li>#GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV causes this instance to act as though #GEOMETRY_OPAQUE_BIT_NV were specified on all geometries referenced by this instance. This behavior <b>can</b> be overridden by the ray flag {@code gl_RayFlagsNoOpaqueNV}.</li>
+            <li>#GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV causes this instance to act as though #GEOMETRY_OPAQUE_BIT_NV were not specified on all geometries referenced by this instance. This behavior <b>can</b> be overridden by the ray flag {@code gl_RayFlagsOpaqueNV}.</li>
         </ul>
 
         #GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NV and #GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NV <b>must</b> not be used in the same flag.
@@ -300,8 +300,8 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
 
         <h5>Description</h5>
         <ul>
-            <li>#ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV is a bottom-level acceleration structure containing the AABBs or geometry to be intersected.</li>
             <li>#ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV is a top-level acceleration structure containing instance data referring to bottom-level level acceleration structures.</li>
+            <li>#ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV is a bottom-level acceleration structure containing the AABBs or geometry to be intersected.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -318,17 +318,15 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
 
         <h5>Description</h5>
         <ul>
-            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV indicates that the specified acceleration structure <b>may</b> be updated with {@code update} of true in #CmdBuildAccelerationStructureNV(). This flag <b>must</b> only be set on a build that is not an update or is an update with a source that also had this flag set.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV indicates that the specified acceleration structure <b>may</b> act as the source for #CmdCopyAccelerationStructureNV() with {@code mode} of #COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV to produce a compacted acceleration structure.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV indicates that the given acceleration structure build should prioritize trace performance over build time.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV indicates that the given acceleration structure build should prioritize build time over trace performance.</li>
-            <li>#BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NV indicates that this acceleration structure should minimize the size of scratch memory and final result build, potentially at the expense of build time or trace performance.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV indicates that the specified acceleration structure <b>can</b> be updated with {@code update} of #TRUE in #CmdBuildAccelerationStructureNV().</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV indicates that the specified acceleration structure <b>can</b> act as the source for #CmdCopyAccelerationStructureNV() with {@code mode} of #COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NV to produce a compacted acceleration structure.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV indicates that the given acceleration structure build <b>should</b> prioritize trace performance over build time.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV indicates that the given acceleration structure build <b>should</b> prioritize build time over trace performance.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NV indicates that this acceleration structure <b>should</b> minimize the size of the scratch memory and the final result build, potentially at the expense of build time or trace performance.</li>
         </ul>
 
-        #BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV and #BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV <b>must</b> not be used in the same flags.
-
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        #BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV and #BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV <b>may</b> take more time and memory than a normal build, so should only be used when those features are used.
+        #BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV and #BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NV <b>may</b> take more time and memory than a normal build, and so <b>should</b> only be used when those features are used.
         </div>
 
         <h5>See Also</h5>
@@ -396,7 +394,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
 ￿    VkAccelerationStructureNV*                  pAccelerationStructure);</code></pre>
 
         <h5>Description</h5>
-        Similar to other objects in Vulkan, the acceleration structure creation merely creates an object with a specific "shape" as specified by the information in ##VkAccelerationStructureInfoNV and {@code compactedSize} in {@code pCreateInfo}. Populating the data in the object after allocating and binding memory is done with {@code vkCmdBuildAccelerationStructureNV} and {@code vkCmdCopyAccelerationStructureNV}.
+        Similar to other objects in Vulkan, the acceleration structure creation merely creates an object with a specific "{@code shape}" as specified by the information in ##VkAccelerationStructureInfoNV and {@code compactedSize} in {@code pCreateInfo}. Populating the data in the object after allocating and binding memory is done with #CmdBuildAccelerationStructureNV() and #CmdCopyAccelerationStructureNV().
 
         Acceleration structure creation uses the count and type information from the geometries, but does not use the data references in the structures.
 
@@ -515,15 +513,6 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
 ￿    uint32_t                                    bindInfoCount,
 ￿    const VkBindAccelerationStructureMemoryInfoNV* pBindInfos);</code></pre>
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code accelerationStructure} <b>must</b> not already be backed by a memory object</li>
-            <li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
-            <li>{@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements structure returned from a call to {@code vkGetAccelerationStructureMemoryRequirementsNV} with {@code accelerationStructure} and {@code type} of #ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV</li>
-            <li>{@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the ##VkMemoryRequirements structure returned from a call to {@code vkGetAccelerationStructureMemoryRequirementsNV} with {@code accelerationStructure} and {@code type} of #ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV</li>
-            <li>The {@code size} member of the ##VkMemoryRequirements structure returned from a call to {@code vkGetImageMemoryRequirements} with {@code accelerationStructure} and {@code type} of #ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
-        </ul>
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
@@ -550,7 +539,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         """,
 
         VkDevice("device", "the logical device that owns the acceleration structures and memory."),
-        AutoSize("pBindInfos")..uint32_t("bindInfoCount", "the number of elements in pBindInfos."),
+        AutoSize("pBindInfos")..uint32_t("bindInfoCount", "the number of elements in {@code pBindInfos}."),
         VkBindAccelerationStructureMemoryInfoNV.const.p("pBindInfos", "a pointer to an array of structures of type ##VkBindAccelerationStructureMemoryInfoNV, describing images and memory to bind.")
     )
 
@@ -578,10 +567,10 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         <ul>
             <li>{@code geometryCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::maxGeometryCount}</li>
             <li>{@code dst} <b>must</b> have been created with compatible ##VkAccelerationStructureInfoNV where ##VkAccelerationStructureInfoNV:{@code ::type} and ##VkAccelerationStructureInfoNV{@code ::flags} are identical, ##VkAccelerationStructureInfoNV{@code ::instanceCount} and ##VkAccelerationStructureInfoNV{@code ::geometryCount} for {@code dst} are greater than or equal to the build size and each geometry in ##VkAccelerationStructureInfoNV{@code ::pGeometries} for {@code dst} has greater than or equal to the number of vertices, indices, and AABBs.</li>
-            <li>If {@code update} is true, {@code src} <b>must</b> not be #NULL_HANDLE</li>
-            <li>If {@code update} is true, {@code src} <b>must</b> have been built last with #BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV set in ##VkAccelerationStructureInfoNV{@code ::flags}</li>
-            <li>If {@code update} is false, The {@code size} member of the ##VkMemoryRequirements structure returned from a call to {@code vkGetAccelerationStructureMemoryRequirementsNV} with ##VkAccelerationStructureMemoryRequirementsInfoNV{@code ::accelerationStructure} set to {@code dst} and ##VkAccelerationStructureMemoryRequirementsInfoNV{@code ::type} set to #ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV <b>must</b> be less than or equal to the size of {@code scratch} minus {@code scratchOffset}</li>
-            <li>If {@code update} is true, The {@code size} member of the ##VkMemoryRequirements structure returned from a call to {@code vkGetAccelerationStructureMemoryRequirementsNV} with ##VkAccelerationStructureMemoryRequirementsInfoNV{@code ::accelerationStructure} set to {@code dst} and ##VkAccelerationStructureMemoryRequirementsInfoNV{@code ::type} set to #ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV <b>must</b> be less than or equal to the size of {@code scratch} minus {@code scratchOffset}</li>
+            <li>If {@code update} is #TRUE, {@code src} <b>must</b> not be #NULL_HANDLE</li>
+            <li>If {@code update} is #TRUE, {@code src} <b>must</b> have been built before with #BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NV set in ##VkAccelerationStructureInfoNV{@code ::flags}</li>
+            <li>If {@code update} is #FALSE, The {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetAccelerationStructureMemoryRequirementsNV() with ##VkAccelerationStructureMemoryRequirementsInfoNV{@code ::accelerationStructure} set to {@code dst} and ##VkAccelerationStructureMemoryRequirementsInfoNV{@code ::type} set to #ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV <b>must</b> be less than or equal to the size of {@code scratch} minus {@code scratchOffset}</li>
+            <li>If {@code update} is #TRUE, The {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetAccelerationStructureMemoryRequirementsNV() with ##VkAccelerationStructureMemoryRequirementsInfoNV{@code ::accelerationStructure} set to {@code dst} and ##VkAccelerationStructureMemoryRequirementsInfoNV{@code ::type} set to #ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV <b>must</b> be less than or equal to the size of {@code scratch} minus {@code scratchOffset}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -612,15 +601,15 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         ##VkAccelerationStructureInfoNV
         """,
 
-        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded"),
-        VkAccelerationStructureInfoNV.const.p("pInfo", ""),
-        VkBuffer("instanceData", "the buffer containing instance data that will be used to build the acceleration structure as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#acceleration-structure-instance\">Accelerator structure instances.</a> This parameter <b>must</b> be NULL for bottom level acceleration structures."),
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkAccelerationStructureInfoNV.const.p("pInfo", "contains the shared information for the acceleration structure&#8217;s structure."),
+        VkBuffer("instanceData", "the buffer containing instance data that will be used to build the acceleration structure as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#acceleration-structure-instance\">Accelerator structure instances.</a> This parameter <b>must</b> be {@code NULL} for bottom level acceleration structures."),
         VkDeviceSize("instanceOffset", "the offset in bytes (relative to the start of {@code instanceData}) at which the instance data is located."),
         VkBool32("update", "specifies whether to update the {@code dst} acceleration structure with the data in {@code src}."),
         VkAccelerationStructureNV("dst", "points to the target acceleration structure for the build."),
-        VkAccelerationStructureNV("src", "points to an existing acceleration structure that can be used to update the {@code dst} acceleration structure."),
+        VkAccelerationStructureNV("src", "points to an existing acceleration structure that is to be used to update the {@code dst} acceleration structure."),
         VkBuffer("scratch", "the {@code VkBuffer} that will be used as scratch memory for the build."),
-        VkDeviceSize("scratchOffset", "the offset in bytes relative to the start of {@code scratch} that will be used as scratch memory.")
+        VkDeviceSize("scratchOffset", "the offset in bytes relative to the start of {@code scratch} that will be used as a scratch memory.")
     )
 
     void(
@@ -668,8 +657,8 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkAccelerationStructureNV("dst", "points to the target acceleration structure for the copy"),
-        VkAccelerationStructureNV("src", "points to the source acceleration structure for the copy"),
+        VkAccelerationStructureNV("dst", "points to the target acceleration structure for the copy."),
+        VkAccelerationStructureNV("src", "points to the source acceleration structure for the copy."),
         VkCopyAccelerationStructureModeNV("mode", "a {@code VkCopyAccelerationStructureModeNV} value that specifies additional operations to perform during the copy.")
     )
 
@@ -705,13 +694,13 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code raygenShaderBindingOffset} <b>must</b> be less than the size of {@code raygenShaderBindingTableBuffer}</li>
-            <li>{@code raygenShaderBindingOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::shaderGroupBaseAlignment}.</li>
+            <li>{@code raygenShaderBindingOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::shaderGroupBaseAlignment}</li>
             <li>{@code missShaderBindingOffset} <b>must</b> be less than the size of {@code missShaderBindingTableBuffer}</li>
-            <li>{@code missShaderBindingOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::shaderGroupBaseAlignment}.</li>
+            <li>{@code missShaderBindingOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::shaderGroupBaseAlignment}</li>
             <li>{@code hitShaderBindingOffset} <b>must</b> be less than the size of {@code hitShaderBindingTableBuffer}</li>
-            <li>{@code hitShaderBindingOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::shaderGroupBaseAlignment}.</li>
+            <li>{@code hitShaderBindingOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::shaderGroupBaseAlignment}</li>
             <li>{@code callableShaderBindingOffset} <b>must</b> be less than the size of {@code callableShaderBindingTableBuffer}</li>
-            <li>{@code callableShaderBindingOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::shaderGroupBaseAlignment}.</li>
+            <li>{@code callableShaderBindingOffset} <b>must</b> be a multiple of ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::shaderGroupBaseAlignment}</li>
             <li>{@code missShaderBindingStride} <b>must</b> be a multiple of ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::shaderGroupHandleSize}</li>
             <li>{@code hitShaderBindingStride} <b>must</b> be a multiple of ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::shaderGroupHandleSize}</li>
             <li>{@code callableShaderBindingStride} <b>must</b> be a multiple of ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::shaderGroupHandleSize}</li>
@@ -730,13 +719,13 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
             <li>If any {@code VkSampler} object that is accessed from a shader by the {@code VkPipeline} bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV uses unnormalized coordinates, it <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV accesses a uniform buffer, it <b>must</b> not access values outside of the range of that buffer specified in the bound descriptor set</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#features-features-robustBufferAccess">robust buffer access</a> feature is not enabled, and any shader stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV accesses a storage buffer, it <b>must</b> not access values outside of the range of that buffer specified in the bound descriptor set</li>
-            <li>If a {@code VkImageView} is sampled with #FILTER_LINEAR as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT.</li>
-            <li>If a {@code VkImageView} is sampled with #FILTER_CUBIC_IMG as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG.</li>
+            <li>If a {@code VkImageView} is sampled with #FILTER_LINEAR as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</li>
+            <li>If a {@code VkImageView} is sampled with #FILTER_CUBIC_IMG as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG</li>
             <li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_IMG as a result of this command <b>must</b> not have a {@code VkImageViewType} of #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, or #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
-            <li>If {@code commandBuffer} is an unprotected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV reads from or writes to any image or buffer, that image or buffer <b>must</b> not be a protected image or protected buffer.</li>
-            <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV writes to any image or buffer, that image or buffer <b>must</b> not be an unprotected image or unprotected buffer.</li>
-            <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage other than the ray tracing pipeline stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV reads from any image or buffer, the image or buffer <b>must</b> not be a protected image or protected buffer.</li>
-            <li>Any {@code VkImage} created with a ##VkImageCreateInfo{@code ::flags} containing #IMAGE_CREATE_CORNER_SAMPLED_BIT_NV sampled as a result of this command <b>must</b> only be sampled using a {@code VkSamplerAddressMode} of #SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE.</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV reads from or writes to any image or buffer, that image or buffer <b>must</b> not be a protected image or protected buffer</li>
+            <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV writes to any image or buffer, that image or buffer <b>must</b> not be an unprotected image or unprotected buffer</li>
+            <li>If {@code commandBuffer} is a protected command buffer, and any pipeline stage other than the ray tracing pipeline stage in the {@code VkPipeline} object bound to #PIPELINE_BIND_POINT_RAY_TRACING_NV reads from any image or buffer, the image or buffer <b>must</b> not be a protected image or protected buffer</li>
+            <li>Any {@code VkImage} created with a ##VkImageCreateInfo{@code ::flags} containing #IMAGE_CREATE_CORNER_SAMPLED_BIT_NV sampled as a result of this command <b>must</b> only be sampled using a {@code VkSamplerAddressMode} of #SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -768,13 +757,13 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         VkDeviceSize("raygenShaderBindingOffset", "the offset in bytes (relative to {@code raygenShaderBindingTableBuffer}) of the ray generation shader being used for the trace."),
         VkBuffer("missShaderBindingTableBuffer", "the buffer object that holds the shader binding table data for the miss shader stage."),
         VkDeviceSize("missShaderBindingOffset", "the offset in bytes (relative to {@code missShaderBindingTableBuffer}) of the miss shader being used for the trace."),
-        VkDeviceSize("missShaderBindingStride", "the size in bytes of each shader binding table record in {@code missShaderBindingTableBuffer}"),
+        VkDeviceSize("missShaderBindingStride", "the size in bytes of each shader binding table record in {@code missShaderBindingTableBuffer}."),
         VkBuffer("hitShaderBindingTableBuffer", "the buffer object that holds the shader binding table data for the hit shader stages."),
         VkDeviceSize("hitShaderBindingOffset", "the offset in bytes (relative to {@code hitShaderBindingTableBuffer}) of the hit shader group being used for the trace."),
-        VkDeviceSize("hitShaderBindingStride", "the size in bytes of each shader binding table record in {@code hitShaderBindingTableBuffer}"),
+        VkDeviceSize("hitShaderBindingStride", "the size in bytes of each shader binding table record in {@code hitShaderBindingTableBuffer}."),
         VkBuffer("callableShaderBindingTableBuffer", "the buffer object that holds the shader binding table data for the callable shader stage."),
         VkDeviceSize("callableShaderBindingOffset", "the offset in bytes (relative to {@code callableShaderBindingTableBuffer}) of the callable shader being used for the trace."),
-        VkDeviceSize("callableShaderBindingStride", "the size in bytes of each shader binding table record in {@code callableShaderBindingTableBuffer}"),
+        VkDeviceSize("callableShaderBindingStride", "the size in bytes of each shader binding table record in {@code callableShaderBindingTableBuffer}."),
         uint32_t("width", "the width of the ray trace query dimensions."),
         uint32_t("height", "height of the ray trace query dimensions."),
         uint32_t("depth", "depth of the ray trace query dimensions.")
@@ -834,11 +823,11 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         """,
 
         VkDevice("device", "the logical device that creates the ray tracing pipelines."),
-        VkPipelineCache("pipelineCache", "either #NULL_HANDLE, indicating that pipeline caching is disabled; or the handle of a valid <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#pipelines-cache\">pipeline cache</a> object, in which case use of that cache is enabled for the duration of the command."),
+        VkPipelineCache("pipelineCache", "either #NULL_HANDLE, indicating that pipeline caching is disabled, or the handle of a valid <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#pipelines-cache\">pipeline cache</a> object, in which case use of that cache is enabled for the duration of the command."),
         AutoSize("pCreateInfos", "pPipelines")..uint32_t("createInfoCount", "the length of the {@code pCreateInfos} and {@code pPipelines} arrays."),
         VkRayTracingPipelineCreateInfoNV.const.p("pCreateInfos", "an array of ##VkRayTracingPipelineCreateInfoNV structures."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        VkPipeline.p("pPipelines", "a pointer to an array in which the resulting compute pipeline objects are returned.")
+        VkPipeline.p("pPipelines", "a pointer to an array in which the resulting ray tracing pipeline objects are returned.")
     )
 
     VkResult(
@@ -892,7 +881,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         VkPipeline("pipeline", "the ray tracing pipeline object that contains the shaders."),
         uint32_t("firstGroup", "the index of the first group to retrieve a handle for from the ##VkPipelineShaderStageCreateInfo{@code ::pGroups} array."),
         uint32_t("groupCount", "the number of shader handles to retrieve."),
-        AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by pData."),
+        AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
         void.p("pData", "a pointer to a user-allocated buffer where the results will be written.")
     )
 
@@ -943,7 +932,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
         VkDevice("device", "the logical device that owns the acceleration structures."),
         VkAccelerationStructureNV("accelerationStructure", "the acceleration structure."),
         AutoSize("pData")..size_t("dataSize", "the size in bytes of the buffer pointed to by {@code pData}."),
-        void.p("pData", "a pointer to a user-allocated buffer where the results will be written")
+        void.p("pData", "a pointer to a user-allocated buffer where the results will be written.")
     )
 
     void(
@@ -997,10 +986,10 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         AutoSize("pAccelerationStructures")..uint32_t("accelerationStructureCount", "the count of acceleration structures for which to query the property."),
-        VkAccelerationStructureNV.const.p("pAccelerationStructures", ""),
+        VkAccelerationStructureNV.const.p("pAccelerationStructures", "points to an array of existing previously built acceleration structures."),
         VkQueryType("queryType", "a {@code VkQueryType} value specifying the type of queries managed by the pool."),
         VkQueryPool("queryPool", "the query pool that will manage the results of the query."),
-        uint32_t("firstQuery", "the first query index within the query pool that will contain the {@code accelerationStructureCount} number of results")
+        uint32_t("firstQuery", "the first query index within the query pool that will contain the {@code accelerationStructureCount} number of results.")
     )
 
     VkResult(
@@ -1019,8 +1008,8 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code pipeline} <b>must</b> have been created with #PIPELINE_CREATE_DEFER_COMPILE_BIT_NV.</li>
-            <li>{@code shader} <b>must</b> not have been called as a deferred compile before.</li>
+            <li>{@code pipeline} <b>must</b> have been created with #PIPELINE_CREATE_DEFER_COMPILE_BIT_NV</li>
+            <li>{@code shader} <b>must</b> not have been called as a deferred compile before</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

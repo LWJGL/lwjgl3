@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>When this structure is not present in the {@code pNext} chain of {@link VkImageCreateInfo} then the implicit value of {@code stencilUsage} matches that of {@link VkImageCreateInfo}{@code ::usage}.</p>
  * 
+ * <p>When this structure is present {@link VkImageCreateInfo}{@code ::usage} specifies the intended usage of the depth aspect of the image and {@link VkImageStencilUsageCreateInfoEXT}::stencilUsage specifies the intended usage of the stencil aspect of the image. However, for the purposes of determining image specific valid usage conditions, the image itself is considered to be created with a particular {@code VkImageUsageFlagBits} value if either {@link VkImageCreateInfo}{@code ::usage} or {@link VkImageStencilUsageCreateInfoEXT}::stencil usage includes that bit value.</p>
+ * 
  * <p>This structure <b>can</b> also be included in the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2} to query additional capabilities specific to image creation parameter combinations including a separate set of usage flags for the stencil aspect of the image using {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2}. When this structure is not present in the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2} then the implicit value of {@code stencilUsage} matches that of {@link VkPhysicalDeviceImageFormatInfo2}{@code ::usage}.</p>
  * 
  * <h5>Valid Usage</h5>

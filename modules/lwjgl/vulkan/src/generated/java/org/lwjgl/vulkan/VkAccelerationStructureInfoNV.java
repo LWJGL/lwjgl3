@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>{@link VkAccelerationStructureInfoNV} contains information that's used both for acceleration structure creation with {@code vkCreateAccelerationStructureNV} and in combination with the actual geometric data to build the acceleration structure with {@code vkCmdBuildAccelerationStructureNV}.</p>
+ * <p>{@link VkAccelerationStructureInfoNV} contains information that is used both for acceleration structure creation with {@code vkCreateAccelerationStructureNV} and in combination with the actual geometric data to build the acceleration structure with {@link NVRayTracing#vkCmdBuildAccelerationStructureNV CmdBuildAccelerationStructureNV}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -29,9 +29,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code geometryCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxGeometryCount}</li>
  * <li>{@code instanceCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxInstanceCount}</li>
  * <li>The total number of triangles in all geometries <b>must</b> be less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxTriangleCount}</li>
- * <li>If {@code type} is {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV} then {@code geometryCount} <b>must</b> be 0.</li>
- * <li>If {@code type} is {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV} then {@code instanceCount} <b>must</b> be 0.</li>
- * <li>If {@code compactedSize} is not 0 then both {@code geometryCount} and {@code instanceCount} <b>must</b> be 0</li>
+ * <li>If {@code type} is {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV} then {@code geometryCount} <b>must</b> be 0</li>
+ * <li>If {@code type} is {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV} then {@code instanceCount} <b>must</b> be 0</li>
+ * <li>If {@code flags} has the {@link NVRayTracing#VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV} bit set, then it <b>must</b> not have the {@link NVRayTracing#VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV} bit set</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -55,9 +55,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code type} &ndash; a {@code VkAccelerationStructureTypeNV} value specifying the type of acceleration structure that will be created.</li>
  * <li>{@code flags} &ndash; a bitmask of {@code VkBuildAccelerationStructureFlagBitsNV} specifying additional parameters of the acceleration structure.</li>
- * <li>{@code instanceCount} &ndash; specifies the number of instances that will be in the new acceleration structure</li>
- * <li>{@code geometryCount} &ndash; specifies the number of geometries that will be in the new acceleration structure</li>
- * <li>{@code pGeometries} &ndash; an array of {@link VkGeometryNV} structures which contain the scene data being passed into the acceleration structure.</li>
+ * <li>{@code instanceCount} &ndash; specifies the number of instances that will be in the new acceleration structure.</li>
+ * <li>{@code geometryCount} &ndash; specifies the number of geometries that will be in the new acceleration structure.</li>
+ * <li>{@code pGeometries} &ndash; an array of {@link VkGeometryNV} structures, which contain the scene data being passed into the acceleration structure.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

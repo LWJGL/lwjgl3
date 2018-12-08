@@ -24,9 +24,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code accelerationStructure} <b>must</b> not already be backed by a memory object</li>
  * <li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
- * <li>{@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the {@link VkMemoryRequirements} structure returned from a call to {@code vkGetAccelerationStructureMemoryRequirementsNV} with {@code accelerationStructure}</li>
- * <li>{@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the {@link VkMemoryRequirements} structure returned from a call to {@code vkGetAccelerationStructureMemoryRequirementsNV} with {@code accelerationStructure}</li>
- * <li>The {@code size} member of the {@link VkMemoryRequirements} structure returned from a call to {@code vkGetAccelerationStructureMemoryRequirementsNV} with {@code accelerationStructure} <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
+ * <li>{@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the {@link VkMemoryRequirements} structure returned from a call to {@link NVRayTracing#vkGetAccelerationStructureMemoryRequirementsNV GetAccelerationStructureMemoryRequirementsNV} with {@code accelerationStructure} and {@code type} of {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV}</li>
+ * <li>{@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the {@link VkMemoryRequirements} structure returned from a call to {@link NVRayTracing#vkGetAccelerationStructureMemoryRequirementsNV GetAccelerationStructureMemoryRequirementsNV} with {@code accelerationStructure} and {@code type} of {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV}</li>
+ * <li>The {@code size} member of the {@link VkMemoryRequirements} structure returned from a call to {@link NVRayTracing#vkGetAccelerationStructureMemoryRequirementsNV GetAccelerationStructureMemoryRequirementsNV} with {@code accelerationStructure} and {@code type} of {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV} <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -50,8 +50,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} &ndash; the type of this structure.</li>
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code accelerationStructure} &ndash; the acceleration structure to be attached to memory.</li>
- * <li>{@code memory} &ndash; a VkDeviceMemory object describing the device memory to attach.</li>
- * <li>{@code memoryOffset} &ndash; the start offset of the region of memory which is to be bound to the acceleration structure. The number of bytes returned in the {@link VkMemoryRequirements}::size member in memory, starting from {@code memoryOffset} bytes, will be bound to the specified acceleration structure.</li>
+ * <li>{@code memory} &ndash; a {@code VkDeviceMemory} object describing the device memory to attach.</li>
+ * <li>{@code memoryOffset} &ndash; the start offset of the region of memory that is to be bound to the acceleration structure. The number of bytes returned in the {@link VkMemoryRequirements}{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified acceleration structure.</li>
  * <li>{@code deviceIndexCount} &ndash; the number of elements in {@code pDeviceIndices}.</li>
  * <li>{@code pDeviceIndices} &ndash; a pointer to an array of device indices.</li>
  * </ul>

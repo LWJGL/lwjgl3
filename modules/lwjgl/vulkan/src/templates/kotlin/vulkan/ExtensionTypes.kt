@@ -2311,6 +2311,23 @@ val VkCommandBufferInheritanceConditionalRenderingInfoEXT = struct(Module.VULKAN
     VkBool32("conditionalRenderingEnable", "specifies whether the command buffer <b>can</b> be executed while conditional rendering is active in the primary command buffer. If this is #TRUE, then this command buffer <b>can</b> be executed whether the primary command buffer has active conditional rendering or not. If this is #FALSE, then the primary command buffer <b>must</b> not have conditional rendering active.")
 }
 
+val VkPhysicalDeviceFloat16Int8FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceFloat16Int8FeaturesKHR") {
+    documentation =
+        """
+        Structure describing features supported by VK_KHR_shader_float16_int8.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkBool32("shaderFloat16", "indicates whether 16-bit floats (halfs) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Float16} capability.")
+    VkBool32("shaderInt8", "indicates whether 8-bit integers (signed and unsigned) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int8} capability.")
+}
+
 val VkPhysicalDevice16BitStorageFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDevice16BitStorageFeaturesKHR", alias = VkPhysicalDevice16BitStorageFeatures) {
     documentation = "See ##VkPhysicalDevice16BitStorageFeatures."
 
@@ -4129,9 +4146,8 @@ val VkDebugUtilsObjectNameInfoEXT = struct(Module.VULKAN, "VkDebugUtilsObjectNam
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code objectType} <b>must</b> not be #OBJECT_TYPE_UNKNOWN</li>
-            <li>{@code objectHandle} <b>must</b> not be #NULL_HANDLE</li>
-            <li>{@code objectHandle} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debugging-object-types">the “{@code VkObjectType} and Vulkan Handle Relationship” table</a>.</li>
+            <li>If {@code objectType} is #OBJECT_TYPE_UNKNOWN, {@code objectHandle} <b>must</b> not be #NULL_HANDLE</li>
+            <li>If {@code objectType} is not #OBJECT_TYPE_UNKNOWN, {@code objectHandle} <b>must</b> be #NULL_HANDLE or a valid Vulkan handle of the type associated with {@code objectType} as defined in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debugging-object-types">VkObjectType and Vulkan Handle Relationship</a> table</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -4164,8 +4180,7 @@ val VkDebugUtilsObjectTagInfoEXT = struct(Module.VULKAN, "VkDebugUtilsObjectTagI
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code objectType} <b>must</b> not be #OBJECT_TYPE_UNKNOWN</li>
-            <li>{@code objectHandle} <b>must</b> not be #NULL_HANDLE</li>
-            <li>{@code objectHandle} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debugging-object-types">the “{@code VkObjectType} and Vulkan Handle Relationship” table</a>.</li>
+            <li>{@code objectHandle} <b>must</b> be a valid Vulkan handle of the type associated with {@code objectType} as defined in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debugging-object-types">VkObjectType and Vulkan Handle Relationship</a> table</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -4237,7 +4252,9 @@ val VkDebugUtilsMessengerCallbackDataEXT = struct(Module.VULKAN, "VkDebugUtilsMe
             <li>{@code flags} <b>must</b> be 0</li>
             <li>If {@code pMessageIdName} is not {@code NULL}, {@code pMessageIdName} <b>must</b> be a null-terminated UTF-8 string</li>
             <li>{@code pMessage} <b>must</b> be a null-terminated UTF-8 string</li>
-            <li>{@code objectCount} <b>must</b> be greater than 0</li>
+            <li>If {@code queueLabelCount} is not 0, {@code pQueueLabels} <b>must</b> be a valid pointer to an array of {@code queueLabelCount} valid ##VkDebugUtilsLabelEXT structures</li>
+            <li>If {@code cmdBufLabelCount} is not 0, {@code pCmdBufLabels} <b>must</b> be a valid pointer to an array of {@code cmdBufLabelCount} valid ##VkDebugUtilsLabelEXT structures</li>
+            <li>If {@code objectCount} is not 0, {@code pObjects} <b>must</b> be a valid pointer to an array of {@code objectCount} valid ##VkDebugUtilsObjectNameInfoEXT structures</li>
         </ul>
 
         <h5>See Also</h5>
@@ -4251,11 +4268,11 @@ val VkDebugUtilsMessengerCallbackDataEXT = struct(Module.VULKAN, "VkDebugUtilsMe
     int32_t("messageIdNumber", "the ID number of the triggering message. If the message corresponds to a validation layer message, then this number is related to the internal number associated with the message being triggered.")
     charUTF8.const.p("pMessage", "a null-terminated string detailing the trigger conditions.")
     AutoSize("pQueueLabels", optional = true)..uint32_t("queueLabelCount", "a count of items contained in the {@code pQueueLabels} array.")
-    nullable..VkDebugUtilsLabelEXT.p("pQueueLabels", "NULL or a pointer to an array of ##VkDebugUtilsLabelEXT active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#debugging-queue-labels\">Queue Labels</a> for more information.")
+    VkDebugUtilsLabelEXT.const.p("pQueueLabels", "NULL or a pointer to an array of ##VkDebugUtilsLabelEXT active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#debugging-queue-labels\">Queue Labels</a> for more information.")
     AutoSize("pCmdBufLabels", optional = true)..uint32_t("cmdBufLabelCount", "a count of items contained in the {@code pCmdBufLabels} array.")
-    nullable..VkDebugUtilsLabelEXT.p("pCmdBufLabels", "NULL or a pointer to an array of ##VkDebugUtilsLabelEXT active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#debugging-command-buffer-labels\">Command Buffer Labels</a> for more information.")
-    AutoSize("pObjects")..uint32_t("objectCount", "a count of items contained in the {@code pObjects} array.")
-    VkDebugUtilsObjectNameInfoEXT.p("pObjects", "a pointer to an array of ##VkDebugUtilsObjectNameInfoEXT objects related to the detected issue. The array is roughly in order or importance, but the 0th element is always guaranteed to be the most important object for this message.")
+    VkDebugUtilsLabelEXT.const.p("pCmdBufLabels", "NULL or a pointer to an array of ##VkDebugUtilsLabelEXT active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#debugging-command-buffer-labels\">Command Buffer Labels</a> for more information.")
+    AutoSize("pObjects", optional = true)..uint32_t("objectCount", "a count of items contained in the {@code pObjects} array.")
+    VkDebugUtilsObjectNameInfoEXT.const.p("pObjects", "a pointer to an array of ##VkDebugUtilsObjectNameInfoEXT objects related to the detected issue. The array is roughly in order or importance, but the 0th element is always guaranteed to be the most important object for this message.")
 }
 
 val VkDebugUtilsMessengerCreateInfoEXT = struct(Module.VULKAN, "VkDebugUtilsMessengerCreateInfoEXT") {
@@ -4377,7 +4394,7 @@ val VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT = struct(Module.VULKAN, "Vk
     VkBool32("filterMinmaxImageComponentMapping", "a boolean value indicating whether the implementation supports non-identity component mapping of the image when doing min/max filtering.")
 }
 
-val VkPhysicalDeviceInlineUniformBlockFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceInlineUniformBlockFeaturesEXT", mutable = false) {
+val VkPhysicalDeviceInlineUniformBlockFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceInlineUniformBlockFeaturesEXT") {
     documentation =
         """
         Structure describing inline uniform block features that can be supported by an implementation.
@@ -4391,8 +4408,8 @@ val VkPhysicalDeviceInlineUniformBlockFeaturesEXT = struct(Module.VULKAN, "VkPhy
         </ul>
         """
 
-    VkStructureType("sType", "").mutable()
-    nullable..opaque_p("pNext", "").mutable()
+    VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
     VkBool32("inlineUniformBlock", "indicates whether the implementation supports inline uniform block descriptors. If this feature is not enabled, #DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT <b>must</b> not be used.")
     VkBool32("descriptorBindingInlineUniformBlockUpdateAfterBind", "indicates whether the implementation supports updating inline uniform block descriptors after a set is bound. If this feature is not enabled, #DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT <b>must</b> not be used with #DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT.")
 }
@@ -5540,12 +5557,12 @@ val VkRayTracingShaderGroupCreateInfoNV = struct(Module.VULKAN, "VkRayTracingSha
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code type} is #RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV then {@code generalShader} <b>must</b> be a valid index into {@code pStages} referring to a shader of #SHADER_STAGE_RAYGEN_BIT_NV, #SHADER_STAGE_MISS_BIT_NV, or #SHADER_STAGE_CALLABLE_BIT_NV.</li>
-            <li>If {@code type} is #RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV then {@code closestHitShader}, {@code anyHitShader}, and {@code intersectionShader} <b>must</b> be #SHADER_UNUSED_NV.</li>
-            <li>If {@code type} is #RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV then {@code intersectionShader} <b>must</b> be a valid index into {@code pStages} referring to a shader of #SHADER_STAGE_INTERSECTION_BIT_NV.</li>
-            <li>If {@code type} is #RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV then {@code intersectionShader} <b>must</b> be #SHADER_UNUSED_NV.</li>
-            <li>{@code closestHitShader} <b>must</b> be either #SHADER_UNUSED_NV or a valid index into {@code pStages} referring to a shader of #SHADER_STAGE_CLOSEST_HIT_BIT_NV.</li>
-            <li>{@code anyHitShader} <b>must</b> be either #SHADER_UNUSED_NV or a valid index into {@code pStages} referring to a shader of #SHADER_STAGE_ANY_HIT_BIT_NV.</li>
+            <li>If {@code type} is #RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV then {@code generalShader} <b>must</b> be a valid index into {@code pStages} referring to a shader of #SHADER_STAGE_RAYGEN_BIT_NV, #SHADER_STAGE_MISS_BIT_NV, or #SHADER_STAGE_CALLABLE_BIT_NV</li>
+            <li>If {@code type} is #RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_NV then {@code closestHitShader}, {@code anyHitShader}, and {@code intersectionShader} <b>must</b> be #SHADER_UNUSED_NV</li>
+            <li>If {@code type} is #RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_NV then {@code intersectionShader} <b>must</b> be a valid index into {@code pStages} referring to a shader of #SHADER_STAGE_INTERSECTION_BIT_NV</li>
+            <li>If {@code type} is #RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_NV then {@code intersectionShader} <b>must</b> be #SHADER_UNUSED_NV</li>
+            <li>{@code closestHitShader} <b>must</b> be either #SHADER_UNUSED_NV or a valid index into {@code pStages} referring to a shader of #SHADER_STAGE_CLOSEST_HIT_BIT_NV</li>
+            <li>{@code anyHitShader} <b>must</b> be either #SHADER_UNUSED_NV or a valid index into {@code pStages} referring to a shader of #SHADER_STAGE_ANY_HIT_BIT_NV</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -5578,15 +5595,15 @@ val VkRayTracingPipelineCreateInfoNV = struct(Module.VULKAN, "VkRayTracingPipeli
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is -1, {@code basePipelineHandle} <b>must</b> be a valid handle to a ray tracing {@code VkPipeline}</li>
+            <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is {@code -1}, {@code basePipelineHandle} <b>must</b> be a valid handle to a ray tracing {@code VkPipeline}</li>
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be a valid index into the calling command&#8217;s {@code pCreateInfos} parameter</li>
-            <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is not -1, {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
-            <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is not #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be -1</li>
+            <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineIndex} is not {@code -1}, {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
+            <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, and {@code basePipelineHandle} is not #NULL_HANDLE, {@code basePipelineIndex} <b>must</b> be {@code -1}</li>
             <li>The {@code stage} member of one element of {@code pStages} <b>must</b> be #SHADER_STAGE_RAYGEN_BIT_NV</li>
             <li>The shader code for the entry points identified by {@code pStages}, and the rest of the state identified by this structure <b>must</b> adhere to the pipeline linking rules described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#interfaces">Shader Interfaces</a> chapter</li>
             <li>{@code layout} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#descriptorsets-pipelinelayout-consistency">consistent</a> with all shaders specified in {@code pStages}</li>
             <li>The number of resources in {@code layout} accessible to each shader stage that is used by the pipeline <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxPerStageResources}</li>
-            <li>{@code maxRecursionDepth} <b>must</b> be less than or equal to VkPhysicalDeviceRayTracingPropertiesNV{@code ::maxRecursionDepth}</li>
+            <li>{@code maxRecursionDepth} <b>must</b> be less than or equal to ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::maxRecursionDepth}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -5630,13 +5647,13 @@ val VkGeometryTrianglesNV = struct(Module.VULKAN, "VkGeometryTrianglesNV") {
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code vertexOffset} <b>must</b> be less than the size of {@code vertexData}</li>
-            <li>{@code vertexOffset} <b>must</b> be a multiple of the component size of {@code vertexFormat}.</li>
+            <li>{@code vertexOffset} <b>must</b> be a multiple of the component size of {@code vertexFormat}</li>
             <li>{@code vertexFormat} <b>must</b> be one of #FORMAT_R32G32B32_SFLOAT, #FORMAT_R32G32_SFLOAT, #FORMAT_R16G16B16_SFLOAT, #FORMAT_R16G16_SFLOAT, #FORMAT_R16G16_SNORM, or #FORMAT_R16G16B16_SNORM</li>
             <li>{@code indexOffset} <b>must</b> be less than the size of {@code indexData}</li>
             <li>{@code indexOffset} <b>must</b> be a multiple of the element size of {@code indexType}</li>
             <li>{@code indexType} <b>must</b> be #INDEX_TYPE_UINT16, #INDEX_TYPE_UINT32, or #INDEX_TYPE_NONE_NV</li>
             <li>{@code indexData} <b>must</b> be #NULL_HANDLE if {@code indexType} is #INDEX_TYPE_NONE_NV</li>
-            <li>{@code indexData} <b>must</b> be a valid handle if {@code indexType} is not #INDEX_TYPE_NONE_NV</li>
+            <li>{@code indexData} <b>must</b> be a valid {@code VkBuffer} handle if {@code indexType} is not #INDEX_TYPE_NONE_NV</li>
             <li>{@code indexCount} <b>must</b> be 0 if {@code indexType} is #INDEX_TYPE_NONE_NV</li>
             <li>{@code transformOffset} <b>must</b> be less than the size of {@code transformData}</li>
             <li>{@code transformOffset} <b>must</b> be a multiple of 16</li>
@@ -5678,14 +5695,15 @@ val VkGeometryAABBNV = struct(Module.VULKAN, "VkGeometryAABBNV") {
         """
         Structure specifying axis-aligned bounding box geometry in a bottom-level acceleration structure.
 
+        <h5>Description</h5>
+        The AABB data in memory is six 32-bit floats consisting of the minimum x, y, and z values followed by the maximum x, y, and z values.
+
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code offset} <b>must</b> be less than the size of {@code aabbData}</li>
-            <li>{@code offset} <b>must</b> be a multiple of 8.</li>
-            <li>{@code stride} <b>must</b> be a multiple of 8.</li>
+            <li>{@code offset} <b>must</b> be a multiple of 8</li>
+            <li>{@code stride} <b>must</b> be a multiple of 8</li>
         </ul>
-
-        The AABB data in memory is 6 32-bit floats consisting of the minimum x, y, and z values followed by the maximum x, y, and z values.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -5700,7 +5718,7 @@ val VkGeometryAABBNV = struct(Module.VULKAN, "VkGeometryAABBNV") {
 
     VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkBuffer("aabbData", "the buffer containing axis-aligned bounding box data")
+    VkBuffer("aabbData", "the buffer containing axis-aligned bounding box data.")
     uint32_t("numAABBs", "the number of AABBs in this geometry.")
     uint32_t("stride", "the stride in bytes between AABBs in {@code aabbData}.")
     VkDeviceSize("offset", "the offset in bytes of the first AABB in {@code aabbData}.")
@@ -5721,8 +5739,8 @@ val VkGeometryDataNV = struct(Module.VULKAN, "VkGeometryDataNV") {
         ##VkGeometryAABBNV, ##VkGeometryNV, ##VkGeometryTrianglesNV
         """
 
-    VkGeometryTrianglesNV("triangles", "contains triangle data if {@code geometryType} is #GEOMETRY_TYPE_TRIANGLES_NV.")
-    VkGeometryAABBNV("aabbs", "contains axis-aligned bounding box data if {@code geometryType} is #GEOMETRY_TYPE_AABBS_NV.")
+    VkGeometryTrianglesNV("triangles", "contains triangle data if ##VkGeometryNV{@code ::geometryType} is #GEOMETRY_TYPE_TRIANGLES_NV.")
+    VkGeometryAABBNV("aabbs", "contains axis-aligned bounding box data if ##VkGeometryNV{@code ::geometryType} is #GEOMETRY_TYPE_AABBS_NV.")
 }
 
 val VkGeometryNV = struct(Module.VULKAN, "VkGeometryNV") {
@@ -5745,7 +5763,7 @@ val VkGeometryNV = struct(Module.VULKAN, "VkGeometryNV") {
 
     VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkGeometryTypeNV("geometryType", "describes which type of geometry this VkGeometryNV refers to.")
+    VkGeometryTypeNV("geometryType", "describes which type of geometry this ##VkGeometryNV refers to.")
     VkGeometryDataNV("geometry", "contains the geometry data as described in ##VkGeometryDataNV.")
     VkGeometryFlagsNV("flags", "has flags describing options for this geometry.")
 }
@@ -5756,16 +5774,16 @@ val VkAccelerationStructureInfoNV = struct(Module.VULKAN, "VkAccelerationStructu
         Structure specifying the parameters of acceleration structure object.
 
         <h5>Description</h5>
-        ##VkAccelerationStructureInfoNV contains information that's used both for acceleration structure creation with {@code vkCreateAccelerationStructureNV} and in combination with the actual geometric data to build the acceleration structure with {@code vkCmdBuildAccelerationStructureNV}.
+        ##VkAccelerationStructureInfoNV contains information that is used both for acceleration structure creation with {@code vkCreateAccelerationStructureNV} and in combination with the actual geometric data to build the acceleration structure with #CmdBuildAccelerationStructureNV().
 
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code geometryCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::maxGeometryCount}</li>
             <li>{@code instanceCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::maxInstanceCount}</li>
             <li>The total number of triangles in all geometries <b>must</b> be less than or equal to ##VkPhysicalDeviceRayTracingPropertiesNV{@code ::maxTriangleCount}</li>
-            <li>If {@code type} is #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV then {@code geometryCount} <b>must</b> be 0.</li>
-            <li>If {@code type} is #ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV then {@code instanceCount} <b>must</b> be 0.</li>
-            <li>If {@code compactedSize} is not 0 then both {@code geometryCount} and {@code instanceCount} <b>must</b> be 0</li>
+            <li>If {@code type} is #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NV then {@code geometryCount} <b>must</b> be 0</li>
+            <li>If {@code type} is #ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NV then {@code instanceCount} <b>must</b> be 0</li>
+            <li>If {@code flags} has the #BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NV bit set, then it <b>must</b> not have the #BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NV bit set</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -5785,9 +5803,9 @@ val VkAccelerationStructureInfoNV = struct(Module.VULKAN, "VkAccelerationStructu
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkAccelerationStructureTypeNV("type", "a {@code VkAccelerationStructureTypeNV} value specifying the type of acceleration structure that will be created.")
     VkBuildAccelerationStructureFlagsNV("flags", "a bitmask of {@code VkBuildAccelerationStructureFlagBitsNV} specifying additional parameters of the acceleration structure.")
-    uint32_t("instanceCount", "specifies the number of instances that will be in the new acceleration structure")
-    AutoSize("pGeometries", optional = true)..uint32_t("geometryCount", "specifies the number of geometries that will be in the new acceleration structure")
-    VkGeometryNV.const.p("pGeometries", "an array of ##VkGeometryNV structures which contain the scene data being passed into the acceleration structure.")
+    uint32_t("instanceCount", "specifies the number of instances that will be in the new acceleration structure.")
+    AutoSize("pGeometries", optional = true)..uint32_t("geometryCount", "specifies the number of geometries that will be in the new acceleration structure.")
+    VkGeometryNV.const.p("pGeometries", "an array of ##VkGeometryNV structures, which contain the scene data being passed into the acceleration structure.")
 }
 
 val VkAccelerationStructureCreateInfoNV = struct(Module.VULKAN, "VkAccelerationStructureCreateInfoNV") {
@@ -5797,7 +5815,7 @@ val VkAccelerationStructureCreateInfoNV = struct(Module.VULKAN, "VkAccelerationS
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code compactedSize} is not 0 then both {@code info}{@code ::geometryCount} and {@code info}{@code ::instanceCount} <b>must</b> be 0</li>
+            <li>If {@code compactedSize} is not 0 then both {@code info.geometryCount} and {@code info.instanceCount} <b>must</b> be 0</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -5813,8 +5831,8 @@ val VkAccelerationStructureCreateInfoNV = struct(Module.VULKAN, "VkAccelerationS
 
     VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    VkDeviceSize("compactedSize", "the size from the result of #CmdWriteAccelerationStructuresPropertiesNV(), if this acceleration structure is going to be the target of a compacting copy.")
-    VkAccelerationStructureInfoNV("info", "contains the ##VkAccelerationStructureInfoNV information for the acceleration structure&#8217;s parameters")
+    VkDeviceSize("compactedSize", "the size from the result of #CmdWriteAccelerationStructuresPropertiesNV() if this acceleration structure is going to be the target of a compacting copy.")
+    VkAccelerationStructureInfoNV("info", "the ##VkAccelerationStructureInfoNV structure that specifies further parameters of the created acceleration structure.")
 }
 
 val VkBindAccelerationStructureMemoryInfoNV = struct(Module.VULKAN, "VkBindAccelerationStructureMemoryInfoNV") {
@@ -5826,9 +5844,9 @@ val VkBindAccelerationStructureMemoryInfoNV = struct(Module.VULKAN, "VkBindAccel
         <ul>
             <li>{@code accelerationStructure} <b>must</b> not already be backed by a memory object</li>
             <li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
-            <li>{@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements structure returned from a call to {@code vkGetAccelerationStructureMemoryRequirementsNV} with {@code accelerationStructure}</li>
-            <li>{@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the ##VkMemoryRequirements structure returned from a call to {@code vkGetAccelerationStructureMemoryRequirementsNV} with {@code accelerationStructure}</li>
-            <li>The {@code size} member of the ##VkMemoryRequirements structure returned from a call to {@code vkGetAccelerationStructureMemoryRequirementsNV} with {@code accelerationStructure} <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
+            <li>{@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the ##VkMemoryRequirements structure returned from a call to #GetAccelerationStructureMemoryRequirementsNV() with {@code accelerationStructure} and {@code type} of #ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV</li>
+            <li>{@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the ##VkMemoryRequirements structure returned from a call to #GetAccelerationStructureMemoryRequirementsNV() with {@code accelerationStructure} and {@code type} of #ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV</li>
+            <li>The {@code size} member of the ##VkMemoryRequirements structure returned from a call to #GetAccelerationStructureMemoryRequirementsNV() with {@code accelerationStructure} and {@code type} of #ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -5848,8 +5866,8 @@ val VkBindAccelerationStructureMemoryInfoNV = struct(Module.VULKAN, "VkBindAccel
     VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkAccelerationStructureNV("accelerationStructure", "the acceleration structure to be attached to memory.")
-    VkDeviceMemory("memory", "a VkDeviceMemory object describing the device memory to attach.")
-    VkDeviceSize("memoryOffset", "the start offset of the region of memory which is to be bound to the acceleration structure. The number of bytes returned in the ##VkMemoryRequirements::size member in memory, starting from {@code memoryOffset} bytes, will be bound to the specified acceleration structure.")
+    VkDeviceMemory("memory", "a {@code VkDeviceMemory} object describing the device memory to attach.")
+    VkDeviceSize("memoryOffset", "the start offset of the region of memory that is to be bound to the acceleration structure. The number of bytes returned in the ##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified acceleration structure.")
     AutoSize("pDeviceIndices", optional = true)..uint32_t("deviceIndexCount", "the number of elements in {@code pDeviceIndices}.")
     uint32_t.const.p("pDeviceIndices", "a pointer to an array of device indices.")
 }
@@ -5861,7 +5879,7 @@ val VkWriteDescriptorSetAccelerationStructureNV = struct(Module.VULKAN, "VkWrite
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code accelerationStructureCount} <b>must</b> be equal to descriptorCount in the extended structure.</li>
+            <li>{@code accelerationStructureCount} <b>must</b> be equal to {@code descriptorCount} in the extended structure</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -5874,8 +5892,8 @@ val VkWriteDescriptorSetAccelerationStructureNV = struct(Module.VULKAN, "VkWrite
 
     VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
-    AutoSize("pAccelerationStructures")..uint32_t("accelerationStructureCount", "the number of elements in pAccelerationStructures")
-    VkAccelerationStructureNV.const.p("pAccelerationStructures", "are the acceleration structures to update")
+    AutoSize("pAccelerationStructures")..uint32_t("accelerationStructureCount", "the number of elements in {@code pAccelerationStructures}.")
+    VkAccelerationStructureNV.const.p("pAccelerationStructures", "are the acceleration structures to update.")
 }
 
 val VkAccelerationStructureMemoryRequirementsInfoNV = struct(Module.VULKAN, "VkAccelerationStructureMemoryRequirementsInfoNV") {
@@ -6313,6 +6331,41 @@ val VkPhysicalDeviceDriverPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDevic
     VkConformanceVersionKHR("conformanceVersion", "the version of the Vulkan conformance test this driver is conformant against (see ##VkConformanceVersionKHR).")
 }
 
+val VkPhysicalDeviceFloatControlsPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceFloatControlsPropertiesKHR") {
+    documentation =
+        """
+        Structure describing properties supported by VK_KHR_shader_float_controls.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceFloatControlsPropertiesKHR structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2, it is filled with the implementation-dependent limits.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("separateDenormSettings", "a boolean value indicating whether the implementation supports separate settings for 16-bit and 64-bit denormals.")
+    VkBool32("separateRoundingModeSettings", "a boolean value indicating whether the implementation supports separate rounding modes for 16-bit and 64-bit floating point instructions.")
+    VkBool32("shaderSignedZeroInfNanPreserveFloat16", "a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 16-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 16-bit floating-point types.")
+    VkBool32("shaderSignedZeroInfNanPreserveFloat32", "a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 32-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 32-bit floating-point types.")
+    VkBool32("shaderSignedZeroInfNanPreserveFloat64", "a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 64-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 64-bit floating-point types.")
+    VkBool32("shaderDenormPreserveFloat16", "a boolean value indicating whether denormals <b>can</b> be preserved in 16-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 16-bit floating-point types.")
+    VkBool32("shaderDenormPreserveFloat32", "a boolean value indicating whether denormals <b>can</b> be preserved in 32-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 32-bit floating-point types.")
+    VkBool32("shaderDenormPreserveFloat64", "a boolean value indicating whether denormals <b>can</b> be preserved in 64-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 64-bit floating-point types.")
+    VkBool32("shaderDenormFlushToZeroFloat16", "a boolean value indicating whether denormals <b>can</b> be flushed to zero in 16-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 16-bit floating-point types.")
+    VkBool32("shaderDenormFlushToZeroFloat32", "a boolean value indicating whether denormals <b>can</b> be flushed to zero in 32-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 32-bit floating-point types.")
+    VkBool32("shaderDenormFlushToZeroFloat64", "a boolean value indicating whether denormals <b>can</b> be flushed to zero in 64-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 64-bit floating-point types.")
+    VkBool32("shaderRoundingModeRTEFloat16", "a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 16-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 16-bit floating-point types.")
+    VkBool32("shaderRoundingModeRTEFloat32", "a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 32-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 32-bit floating-point types.")
+    VkBool32("shaderRoundingModeRTEFloat64", "a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 64-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 64-bit floating-point types.")
+    VkBool32("shaderRoundingModeRTZFloat16", "a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 16-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 16-bit floating-point types.")
+    VkBool32("shaderRoundingModeRTZFloat32", "a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 32-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 32-bit floating-point types.")
+    VkBool32("shaderRoundingModeRTZFloat64", "a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 64-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 64-bit floating-point types.")
+}
+
 val VkPhysicalDeviceComputeShaderDerivativesFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceComputeShaderDerivativesFeaturesNV") {
     documentation =
         """
@@ -6541,7 +6594,7 @@ val VkCheckpointDataNV = struct(Module.VULKAN, "VkCheckpointDataNV", mutable = f
     opaque_p("pCheckpointMarker", "contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to.")
 }
 
-val VkPhysicalDeviceVulkanMemoryModelFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR", mutable = false) {
+val VkPhysicalDeviceVulkanMemoryModelFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR") {
     documentation =
         """
         Structure describing features supported by VK_KHR_vulkan_memory_model.
@@ -6552,8 +6605,8 @@ val VkPhysicalDeviceVulkanMemoryModelFeaturesKHR = struct(Module.VULKAN, "VkPhys
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32("vulkanMemoryModel", "indicates whether the Vulkan Memory Model is supported, as defined in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#memory-model\">Vulkan Memory Model</a>. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModelKHR} capability.")
     VkBool32("vulkanMemoryModelDeviceScope", "indicates whether the Vulkan Memory Model can use {@code Device} scope synchronization. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModelDeviceScopeKHR} capability.")
 }
@@ -6681,6 +6734,8 @@ val VkImageStencilUsageCreateInfoEXT = struct(Module.VULKAN, "VkImageStencilUsag
 
         <h5>Description</h5>
         When this structure is not present in the {@code pNext} chain of ##VkImageCreateInfo then the implicit value of {@code stencilUsage} matches that of ##VkImageCreateInfo{@code ::usage}.
+
+        When this structure is present ##VkImageCreateInfo{@code ::usage} specifies the intended usage of the depth aspect of the image and ##VkImageStencilUsageCreateInfoEXT::stencilUsage specifies the intended usage of the stencil aspect of the image. However, for the purposes of determining image specific valid usage conditions, the image itself is considered to be created with a particular {@code VkImageUsageFlagBits} value if either ##VkImageCreateInfo{@code ::usage} or ##VkImageStencilUsageCreateInfoEXT::stencil usage includes that bit value.
 
         This structure <b>can</b> also be included in the {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2 to query additional capabilities specific to image creation parameter combinations including a separate set of usage flags for the stencil aspect of the image using #GetPhysicalDeviceImageFormatProperties2(). When this structure is not present in the {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2 then the implicit value of {@code stencilUsage} matches that of ##VkPhysicalDeviceImageFormatInfo2{@code ::usage}.
 
