@@ -13,7 +13,7 @@ public final class Version {
     public static final int
         VERSION_MAJOR    = 3,
         VERSION_MINOR    = 2,
-        VERSION_REVISION = 1;
+        VERSION_REVISION = 2;
 
     /** The development state of the current build. */
     public static final BuildType BUILD_TYPE = BuildType.STABLE;
