@@ -1,3 +1,99 @@
+### 3.2.1
+
+_Released 2018 Dec 08_
+
+This build includes the following changes:
+
+#### Bindings
+
+- Added [CUDA](https://developer.nvidia.com/cuda-zone/) bindings.
+    * Only the Driver API & NVRTC are supported in this release.
+    * Bindings to more CUDA Toolkit libraries will be added in the future.
+- Added [libdivide](https://libdivide.com/) bindings.
+- Added [LLVM/Clang](https://llvm.org/) bindings.
+    * LLVM binaries are not included in this release. They must be separately downloaded or built for each platform.
+- Added [Meow hash](https://github.com/cmuratori/meow_hash/) bindings.
+- Added [Opus](http://opus-codec.org/) bindings.
+- bgfx: Updated to API version 90 (up from 76)
+- dyncall: Updated to 1.0 (up from 1.0-RC)
+- glfw: Updated to pre-release 3.3.0 version (up from 3.3.0 pre-release):
+    * Added `GLFW_SCALE_TO_MONITOR`.
+    * Added `glfwAttachWin32Window`. (experimental)
+- jemalloc: Updated to pre-release 5.2.0 (up from 5.1.0)
+    * When available, it is again the default memory allocator on Windows.
+- LibOVR: Updated to 1.30.0 (up from 1.26.0)
+- lz4: Updated to 1.8.3 (up from 1.8.2)
+- Nuklear: Updated to 4.00.2 (up from 4.00.1)
+- OpenAL Soft: Updated to 1.19.1 (up from 1.18.2)
+    * Added `ALC_SOFT_device_clock` extension.
+- OpenGL(ES): Added latest extensions:
+    * `NV_memory_attachment`
+    * `NV_compute_shader_derivatives`
+    * `NV_fragment_shader_barycentric`
+    * `NV_mesh_shader`
+    * `NV_representative_fragment_test`
+    * `NV_scissor_exclusive`
+    * `NV_shader_texture_footprint`
+    * `NV_shading_rate_image`
+    * `QCOM_shader_framebuffer_fetch_rate`
+    * `QCOM_texture_foveated_subsampled_layout`
+- OpenVR: Updated to 1.1.3b (up from 1.0.16)
+- rpmalloc: Updated to 1.3.2 (up from 1.3.1)
+- tinyfiledialogs: Updated to 3.3.8 (up from 3.3.6)
+- vma: Updated to 2.1.0 (up from 2.0.0)
+- Vulkan: Updated to 1.1.95 (up from 1.0.82)
+    * Includes MoltenVK 1.0.27 (up from 1.0.16)
+- Yoga: Updated to 1.10.0 (up from 1.9.0)
+- Zstd: Updated to 1.3.7 (up from 1.3.5)
+
+#### Improvements
+
+- perf(core): Refactored LWJGL internals to make call stacks shallower.
+    * Makes it harder to cross Hotspot's default `MaxInlineLevel` threshold, which can disable important optimizations.
+- perf(core): Added `memDuplicate` and refactored `memSlice` with implementations that use `Unsafe` to construct buffer instances, similar to `mem-X-Buffer`.
+    * Compared to the default JDK implementations, these methods are faster and enable Scalar Replacement via EA on Hotspot.
+    * The `memSlice` with offset method is also thread-safe now.
+- perf(core): Implemented workarounds to make struct buffer iteration garbage free on Hotspot.
+- perf(core): Re-tuned string codecs and `memCopy`/`memSet` for Java versions 8 to 11.
+- perf(core): Added thread-local array cache to minimize allocations while decoding text.
+- bgfx: Builds of bgfx tools (`geometryc`, `shaderc`, `texturec`, `texturev`) are now available.
+    * Use the [file browser](https://www.lwjgl.org/browse) in the LWJGL website to download the executables.
+    * For example, the latest Windows x64 build of `shaderc` can be found under `nightly/windows/x64/bgfx-tools/`.
+- vma: `VmaVulkanFunctions.set(VkInstance, VkDevice)` will now use Vulkan 1.1 functions instead of `KHR_get_memory_requirements2` functions, if available.
+- Generator: The template DSL has been simplified considerably.
+- Generator: Added the `LWJGL Template Extraction Tool`. It uses the new Clang bindings to parse native headers and extract LWJGL template declarations.
+    * Extracts both declarations and associated documentation.
+    * Written in Kotlin. The source can be found in the `extract` module.
+
+#### Fixes
+
+- Core: Fixed text decoding from buffer with `.position() > 0`.
+    * Affected all decoders on Java 9+, only UTF-16 on Java 8.
+- Core: Fixed the bounds check in `memCopy`. (#414)
+- OpenAL: Fixed signature of `alListener3i`. (#427)
+- OpenVR: The `pGamePoseArray` parameter of `VRCompositor_WaitGetPoses` is now nullable. (#418)
+- OpenVR: Fixed returned type of `VRRenderModels_GetComponentStateForDevicePath`.
+- OpenVR: Renamed `VRInput_UncompressSkeletalActionData` to `VRInput_DecompressSkeletalBoneData`.
+- OpenVR: Fixed wrong modifiers in `VRInput` functions:
+    - `VRInput_GetDigitalActionData`
+    - `VRInput_GetAnalogActionData`
+    - `VRInput_GetPoseActionData`
+    - `VRInput_GetSkeletalActionData`
+    - `VRInput_GetOriginTrackedDeviceInfo`
+- vma: The native library is now initialized automatically.
+- vma: Optional `KHR_get_memory_requirements2` addresses in `VmaVulkanFunctions` are now nullable.
+- vma: Nullability of `VmaAllocationCreateInfo` & `VmaAllocationInfo` members.
+
+#### Breaking Changes
+
+```
+(B): binary incompatible change
+(S): source incompatible change
+```
+
+- Core: `sun.misc.Unsafe` is now required, there is no JNI fallback.
+- vma: The `VmaVulkanFunctions.set` helper method now returns `VmaVulkanFunctions`. **(B)**
+
 ### 3.2.0
 
 _Released 2018 Jul 30_
