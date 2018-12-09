@@ -37,14 +37,27 @@ import static org.lwjgl.system.MemoryUtil.*;
  * size of the memory area {@code pcData} is pointing to, in bytes.</li>
  * <li>{@code mHeight} &ndash; Height of the texture, in pixels. If this value is zero, {@code pcData} points to an compressed texture in any format (e.g. JPEG).</li>
  * <li>{@code achFormatHint} &ndash; 
- * A hint from the loader to make it easier for applications to determine the type of embedded compressed textures. If {@code mHeight != 0} this member is
- * undefined. Otherwise it is set set to '\0\0\0\0' if the loader has no additional information about the texture file format used OR the file extension
- * of the format without a trailing dot. If there are multiple file extensions for a format, the shortest extension is chosen (JPEG maps to 'jpg', not to
- * 'jpeg'). E.g. 'dds\0', 'pcx\0', 'jpg\0'. All characters are lower-case. The fourth character will always be '\0'.</li>
+ * A hint from the loader to make it easier for applications to determine the type of embedded textures.
+ * 
+ * <p>If {@code mHeight != 0} this member is show how data is packed. Hint will consist of two parts: channel order and channel bitness (count of the bits
+ * for every color channel). For simple parsing by the viewer it's better to not omit absent color channel and just use 0 for bitness. For example:</p>
+ * 
+ * <ol>
+ * <li>Image contain RGBA and 8 bit per channel, {@code achFormatHint == "rgba8888";}</li>
+ * <li>Image contain ARGB and 8 bit per channel, {@code achFormatHint == "argb8888";}</li>
+ * <li>Image contain RGB and 5 bit for R and B channels and 6 bit for G channel, {@code achFormatHint == "rgba5650";}</li>
+ * <li>One color image with B channel and 1 bit for it, {@code achFormatHint == "rgba0010";}</li>
+ * </ol>
+ * 
+ * <p>If {@code mHeight == 0} then {@code achFormatHint} is set set to '\0\0\0\0' if the loader has no additional information about the texture file format
+ * used OR the file extension of the format without a trailing dot. If there are multiple file extensions for a format, the shortest extension is chosen
+ * (JPEG maps to 'jpg', not to 'jpeg'). E.g. 'dds\0', 'pcx\0', 'jpg\0'. All characters are lower-case. The fourth character will always be '\0'.</p></li>
  * <li>{@code pcData} &ndash; 
- * Data of the texture. Points to an array of {@code mWidth * mHeight} {@link AITexel}'s. The format of the texture data is always ARGB8888 to make the
- * implementation for user of the library as easy as possible. If {@code mHeight = 0} this is a pointer to a memory buffer of size mWidth containing the
- * compressed texture data. Good luck, have fun!</li>
+ * Data of the texture.
+ * 
+ * <p>Points to an array of {@code mWidth * mHeight} {@link AITexel}'s. The format of the texture data is always ARGB8888 to make the implementation for user of
+ * the library as easy as possible. If {@code mHeight = 0} this is a pointer to a memory buffer of size {@code mWidth} containing the compressed texture
+ * data. Good luck, have fun!</p></li>
  * <li>{@code mFilename} &ndash; texture original filename. Used to get the texture reference.</li>
  * </ul>
  * 
@@ -54,7 +67,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * struct aiTexture {
  *     unsigned int mWidth;
  *     unsigned int mHeight;
- *     char achFormatHint[4];
+ *     char achFormatHint[9];
  *     {@link AITexel struct aiTexel} * pcData;
  *     {@link AIString struct aiString} mFilename;
  * }</code></pre>
@@ -80,7 +93,7 @@ public class AITexture extends Struct {
         Layout layout = __struct(
             __member(4),
             __member(4),
-            __array(1, 4),
+            __array(1, 9),
             __member(POINTER_SIZE),
             __member(AIString.SIZEOF, AIString.ALIGNOF)
         );
@@ -115,10 +128,10 @@ public class AITexture extends Struct {
     @NativeType("unsigned int")
     public int mHeight() { return nmHeight(address()); }
     /** Returns a {@link ByteBuffer} view of the {@code achFormatHint} field. */
-    @NativeType("char[4]")
+    @NativeType("char[9]")
     public ByteBuffer achFormatHint() { return nachFormatHint(address()); }
     /** Decodes the null-terminated string stored in the {@code achFormatHint} field. */
-    @NativeType("char[4]")
+    @NativeType("char[9]")
     public String achFormatHintString() { return nachFormatHintString(address()); }
     /**
      * Returns a {@link AITexel.Buffer} view of the struct array pointed to by the {@code pcData} field.
@@ -169,7 +182,7 @@ public class AITexture extends Struct {
     /** Unsafe version of {@link #mHeight}. */
     public static int nmHeight(long struct) { return UNSAFE.getInt(null, struct + AITexture.MHEIGHT); }
     /** Unsafe version of {@link #achFormatHint}. */
-    public static ByteBuffer nachFormatHint(long struct) { return memByteBuffer(struct + AITexture.ACHFORMATHINT, 4); }
+    public static ByteBuffer nachFormatHint(long struct) { return memByteBuffer(struct + AITexture.ACHFORMATHINT, 9); }
     /** Unsafe version of {@link #achFormatHintString}. */
     public static String nachFormatHintString(long struct) { return memASCII(struct + AITexture.ACHFORMATHINT); }
     /** Unsafe version of {@link #pcData}. */
@@ -222,10 +235,10 @@ public class AITexture extends Struct {
         @NativeType("unsigned int")
         public int mHeight() { return AITexture.nmHeight(address()); }
         /** Returns a {@link ByteBuffer} view of the {@code achFormatHint} field. */
-        @NativeType("char[4]")
+        @NativeType("char[9]")
         public ByteBuffer achFormatHint() { return AITexture.nachFormatHint(address()); }
         /** Decodes the null-terminated string stored in the {@code achFormatHint} field. */
-        @NativeType("char[4]")
+        @NativeType("char[9]")
         public String achFormatHintString() { return AITexture.nachFormatHintString(address()); }
         /**
          * Returns a {@link AITexel.Buffer} view of the struct array pointed to by the {@code pcData} field.

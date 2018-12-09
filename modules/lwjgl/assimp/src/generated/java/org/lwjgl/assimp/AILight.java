@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>{@code mName} &ndash; 
  * The name of the light source. There must be a node in the scenegraph with the same name. This node specifies the position of the light in the scene
  * hierarchy and can be animated.</li>
- * <li>{@code mType} &ndash; The type of the light source. {@link Assimp#aiLightSource_UNDEFINED LightSource_UNDEFINED} is not a valid value for this member.</li>
+ * <li>{@code mType} &ndash; The type of the light source. {@link Assimp#aiLightSource_UNDEFINED LightSource_UNDEFINED} is not a valid value for this member. One of:<br><table><tr><td>{@link Assimp#aiLightSource_DIRECTIONAL LightSource_DIRECTIONAL}</td><td>{@link Assimp#aiLightSource_POINT LightSource_POINT}</td><td>{@link Assimp#aiLightSource_SPOT LightSource_SPOT}</td><td>{@link Assimp#aiLightSource_AMBIENT LightSource_AMBIENT}</td></tr><tr><td>{@link Assimp#aiLightSource_AREA LightSource_AREA}</td></tr></table></li>
  * <li>{@code mPosition} &ndash; 
  * Position of the light source in space. Relative to the transformation of the node corresponding to the light. The position is undefined for directional
  * lights.</li>

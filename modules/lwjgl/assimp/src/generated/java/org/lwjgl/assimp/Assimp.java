@@ -1001,7 +1001,7 @@ public class Assimp {
         aiImporterFlags_Experimental             = 0x10;
 
     /**
-     * Enumerates all supported types of light sources.
+     * Enumerates all supported types of light sources. ({@code enum aiLightSourceType})
      * 
      * <h5>Enum values:</h5>
      * 
@@ -1355,6 +1355,22 @@ public class Assimp {
         aiPrimitiveType_LINE     = 0x2,
         aiPrimitiveType_TRIANGLE = 0x4,
         aiPrimitiveType_POLYGON  = 0x8;
+
+    /**
+     * Enumerates the methods of mesh morphing supported by Assimp. ({@code enum aiMorphingMethod})
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #aiMorphingMethod_VERTEX_BLEND MorphingMethod_VERTEX_BLEND} - Interpolation between morph targets.</li>
+     * <li>{@link #aiMorphingMethod_MORPH_NORMALIZED MorphingMethod_MORPH_NORMALIZED} - Normalized morphing between morph targets.</li>
+     * <li>{@link #aiMorphingMethod_MORPH_RELATIVE MorphingMethod_MORPH_RELATIVE} - Relative morphing between morph targets.</li>
+     * </ul>
+     */
+    public static final int
+        aiMorphingMethod_VERTEX_BLEND     = 0x1,
+        aiMorphingMethod_MORPH_NORMALIZED = 0x2,
+        aiMorphingMethod_MORPH_RELATIVE   = 0x3;
 
     /**
      * Enum used to distinguish data types.

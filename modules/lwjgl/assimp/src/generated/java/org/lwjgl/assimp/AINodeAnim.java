@@ -45,12 +45,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code mScalingKeys} &ndash; 
  * The scaling keys of this animation channel. Scalings are specified as 3D vector. The array is {@code mNumScalingKeys} in size. If there are scaling
  * keys, there will also be at least one position and one rotation key.</li>
- * <li>{@code mPreState} &ndash; 
- * Defines how the animation behaves before the first key is encountered. The default value is aiAnimBehaviour_DEFAULT (the original transformation matrix
- * of the affected node is used).</li>
- * <li>{@code mPostState} &ndash; 
- * Defines how the animation behaves after the last key was processed. The default value is aiAnimBehaviour_DEFAULT (the original transformation matrix of
- * the affected node is taken).</li>
+ * <li>{@code mPreState} &ndash; Defines how the animation behaves before the first key is encountered. The default value is aiAnimBehaviour_DEFAULT (the original transformation matrix
+ * of the affected node is used). One of:<br><table><tr><td>{@link Assimp#aiAnimBehaviour_DEFAULT AnimBehaviour_DEFAULT}</td><td>{@link Assimp#aiAnimBehaviour_CONSTANT AnimBehaviour_CONSTANT}</td><td>{@link Assimp#aiAnimBehaviour_LINEAR AnimBehaviour_LINEAR}</td></tr><tr><td>{@link Assimp#aiAnimBehaviour_REPEAT AnimBehaviour_REPEAT}</td></tr></table></li>
+ * <li>{@code mPostState} &ndash; Defines how the animation behaves after the last key was processed. The default value is aiAnimBehaviour_DEFAULT (the original transformation matrix of
+ * the affected node is taken). One of:<br><table><tr><td>{@link Assimp#aiAnimBehaviour_DEFAULT AnimBehaviour_DEFAULT}</td><td>{@link Assimp#aiAnimBehaviour_CONSTANT AnimBehaviour_CONSTANT}</td><td>{@link Assimp#aiAnimBehaviour_LINEAR AnimBehaviour_LINEAR}</td></tr><tr><td>{@link Assimp#aiAnimBehaviour_REPEAT AnimBehaviour_REPEAT}</td></tr></table></li>
  * </ul>
  * 
  * <h3>Layout</h3>

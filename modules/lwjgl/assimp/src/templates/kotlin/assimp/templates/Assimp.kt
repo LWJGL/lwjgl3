@@ -1863,7 +1863,7 @@ aiAttachLogStream(&c);""")}
 
     EnumConstant(
         """
-        Enumerates all supported types of light sources.
+        Enumerates all supported types of light sources. ({@code enum aiLightSourceType})
         """,
 
         "LightSource_UNDEFINED".enum("Undefined or unknown light source", 0x0),
@@ -2369,6 +2369,14 @@ aiAttachLogStream(&c);""")}
             """,
             0x8
         )
+    )
+
+    EnumConstant(
+        "Enumerates the methods of mesh morphing supported by Assimp. ({@code enum aiMorphingMethod})",
+
+        "MorphingMethod_VERTEX_BLEND".enum("Interpolation between morph targets.", "0x1"),
+        "MorphingMethod_MORPH_NORMALIZED".enum("Normalized morphing between morph targets.", "0x2"),
+        "MorphingMethod_MORPH_RELATIVE".enum("Relative morphing between morph targets.", "0x3")
     )
 
     // metadata.h

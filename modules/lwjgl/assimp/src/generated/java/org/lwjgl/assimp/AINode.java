@@ -25,14 +25,31 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code mName} &ndash; The name of the node.</li>
+ * <li>{@code mName} &ndash; 
+ * The name of the node.
+ * 
+ * <p>The name might be empty (length of zero) but all nodes which need to be referenced by either bones or animations are named. Multiple nodes may have the
+ * same name, except for nodes which are referenced by bones (see {@link AIBone} and {@link AIMesh}{@code ::mBones}). Their names <b>must</b> be unique.</p>
+ * 
+ * <p>Cameras and lights reference a specific node by name - if there are multiple nodes with this name, they are assigned to each of them.</p>
+ * 
+ * <p>There are no limitations with regard to the characters contained in the name string as it is usually taken directly from the source file.</p>
+ * 
+ * <p>Implementations should be able to handle tokens such as whitespace, tabs, line feeds, quotation marks, ampersands etc.</p>
+ * 
+ * <p>Sometimes assimp introduces new nodes not present in the source file into the hierarchy (usually out of necessity because sometimes the source
+ * hierarchy format is simply not compatible). Their names are surrounded by {@code <>} e.g. {@code <DummyRootNode>}.</p></li>
  * <li>{@code mTransformation} &ndash; The transformation relative to the node's parent.</li>
  * <li>{@code mParent} &ndash; Parent node. {@code NULL} if this node is the root node.</li>
  * <li>{@code mNumChildren} &ndash; The number of child nodes of this node.</li>
  * <li>{@code mChildren} &ndash; The child nodes of this node. {@code NULL} if {@code mNumChildren} is 0.</li>
  * <li>{@code mNumMeshes} &ndash; The number of meshes of this node.</li>
- * <li>{@code mMeshes} &ndash; The meshes of this node. Each entry is an index into the mesh list of the aiScene.</li>
- * <li>{@code mMetadata} &ndash; Metadata associated with this node or {@code NULL} if there is no metadata.</li>
+ * <li>{@code mMeshes} &ndash; The meshes of this node. Each entry is an index into the mesh list of the {@link AIScene}.</li>
+ * <li>{@code mMetadata} &ndash; 
+ * Metadata associated with this node or {@code NULL} if there is no metadata.
+ * 
+ * <p>Whether any metadata is generated depends on the source file format. See the importer notes page for more information on every source file format.
+ * Importers that don't document any metadata don't write any.</p></li>
  * </ul>
  * 
  * <h3>Layout</h3>

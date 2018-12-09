@@ -31,9 +31,6 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float c1;
  *     float c2;
  *     float c3;
- *     float d1;
- *     float d2;
- *     float d3;
  * }</code></pre>
  */
 @NativeType("struct aiMatrix3x3")
@@ -55,16 +52,10 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
         B3,
         C1,
         C2,
-        C3,
-        D1,
-        D2,
-        D3;
+        C3;
 
     static {
         Layout layout = __struct(
-            __member(4),
-            __member(4),
-            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -88,9 +79,6 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
         C1 = layout.offsetof(6);
         C2 = layout.offsetof(7);
         C3 = layout.offsetof(8);
-        D1 = layout.offsetof(9);
-        D2 = layout.offsetof(10);
-        D3 = layout.offsetof(11);
     }
 
     /**
@@ -124,12 +112,6 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
     public float c2() { return nc2(address()); }
     /** Returns the value of the {@code c3} field. */
     public float c3() { return nc3(address()); }
-    /** Returns the value of the {@code d1} field. */
-    public float d1() { return nd1(address()); }
-    /** Returns the value of the {@code d2} field. */
-    public float d2() { return nd2(address()); }
-    /** Returns the value of the {@code d3} field. */
-    public float d3() { return nd3(address()); }
 
     /** Sets the specified value to the {@code a1} field. */
     public AIMatrix3x3 a1(float value) { na1(address(), value); return this; }
@@ -149,12 +131,6 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
     public AIMatrix3x3 c2(float value) { nc2(address(), value); return this; }
     /** Sets the specified value to the {@code c3} field. */
     public AIMatrix3x3 c3(float value) { nc3(address(), value); return this; }
-    /** Sets the specified value to the {@code d1} field. */
-    public AIMatrix3x3 d1(float value) { nd1(address(), value); return this; }
-    /** Sets the specified value to the {@code d2} field. */
-    public AIMatrix3x3 d2(float value) { nd2(address(), value); return this; }
-    /** Sets the specified value to the {@code d3} field. */
-    public AIMatrix3x3 d3(float value) { nd3(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public AIMatrix3x3 set(
@@ -166,10 +142,7 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
         float b3,
         float c1,
         float c2,
-        float c3,
-        float d1,
-        float d2,
-        float d3
+        float c3
     ) {
         a1(a1);
         a2(a2);
@@ -180,9 +153,6 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
         c1(c1);
         c2(c2);
         c3(c3);
-        d1(d1);
-        d2(d2);
-        d3(d3);
 
         return this;
     }
@@ -360,12 +330,6 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
     public static float nc2(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.C2); }
     /** Unsafe version of {@link #c3}. */
     public static float nc3(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.C3); }
-    /** Unsafe version of {@link #d1}. */
-    public static float nd1(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.D1); }
-    /** Unsafe version of {@link #d2}. */
-    public static float nd2(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.D2); }
-    /** Unsafe version of {@link #d3}. */
-    public static float nd3(long struct) { return UNSAFE.getFloat(null, struct + AIMatrix3x3.D3); }
 
     /** Unsafe version of {@link #a1(float) a1}. */
     public static void na1(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.A1, value); }
@@ -385,12 +349,6 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
     public static void nc2(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.C2, value); }
     /** Unsafe version of {@link #c3(float) c3}. */
     public static void nc3(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.C3, value); }
-    /** Unsafe version of {@link #d1(float) d1}. */
-    public static void nd1(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.D1, value); }
-    /** Unsafe version of {@link #d2(float) d2}. */
-    public static void nd2(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.D2, value); }
-    /** Unsafe version of {@link #d3(float) d3}. */
-    public static void nd3(long struct, float value) { UNSAFE.putFloat(null, struct + AIMatrix3x3.D3, value); }
 
     // -----------------------------------
 
@@ -448,12 +406,6 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
         public float c2() { return AIMatrix3x3.nc2(address()); }
         /** Returns the value of the {@code c3} field. */
         public float c3() { return AIMatrix3x3.nc3(address()); }
-        /** Returns the value of the {@code d1} field. */
-        public float d1() { return AIMatrix3x3.nd1(address()); }
-        /** Returns the value of the {@code d2} field. */
-        public float d2() { return AIMatrix3x3.nd2(address()); }
-        /** Returns the value of the {@code d3} field. */
-        public float d3() { return AIMatrix3x3.nd3(address()); }
 
         /** Sets the specified value to the {@code a1} field. */
         public AIMatrix3x3.Buffer a1(float value) { AIMatrix3x3.na1(address(), value); return this; }
@@ -473,12 +425,6 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
         public AIMatrix3x3.Buffer c2(float value) { AIMatrix3x3.nc2(address(), value); return this; }
         /** Sets the specified value to the {@code c3} field. */
         public AIMatrix3x3.Buffer c3(float value) { AIMatrix3x3.nc3(address(), value); return this; }
-        /** Sets the specified value to the {@code d1} field. */
-        public AIMatrix3x3.Buffer d1(float value) { AIMatrix3x3.nd1(address(), value); return this; }
-        /** Sets the specified value to the {@code d2} field. */
-        public AIMatrix3x3.Buffer d2(float value) { AIMatrix3x3.nd2(address(), value); return this; }
-        /** Sets the specified value to the {@code d3} field. */
-        public AIMatrix3x3.Buffer d3(float value) { AIMatrix3x3.nd3(address(), value); return this; }
 
     }
 

@@ -39,6 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * The number of vertices in the {@code aiAnimMesh}, and thus the length of all the member arrays. This has always the same value as the
  * {@code mNumVertices} property in the corresponding {@link AIMesh}. It is duplicated here merely to make the length of the member arrays accessible even if
  * the {@code aiMesh} is not known, e.g. from language bindings.</li>
+ * <li>{@code mWeight} &ndash; Weight of the {@code AnimMesh}.</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -52,6 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AIColor4D struct aiColor4D} * mColors[Assimp.AI_MAX_NUMBER_OF_COLOR_SETS];
  *     {@link AIVector3D struct aiVector3D} * mTextureCoords[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS];
  *     unsigned int mNumVertices;
+ *     float mWeight;
  * }</code></pre>
  */
 @NativeType("struct aiAnimMesh")
@@ -71,7 +73,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
         MBITANGENTS,
         MCOLORS,
         MTEXTURECOORDS,
-        MNUMVERTICES;
+        MNUMVERTICES,
+        MWEIGHT;
 
     static {
         Layout layout = __struct(
@@ -81,6 +84,7 @@ public class AIAnimMesh extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __array(POINTER_SIZE, Assimp.AI_MAX_NUMBER_OF_COLOR_SETS),
             __array(POINTER_SIZE, Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS),
+            __member(4),
             __member(4)
         );
 
@@ -94,6 +98,7 @@ public class AIAnimMesh extends Struct implements NativeResource {
         MCOLORS = layout.offsetof(4);
         MTEXTURECOORDS = layout.offsetof(5);
         MNUMVERTICES = layout.offsetof(6);
+        MWEIGHT = layout.offsetof(7);
     }
 
     /**
@@ -142,6 +147,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
     /** Returns the value of the {@code mNumVertices} field. */
     @NativeType("unsigned int")
     public int mNumVertices() { return nmNumVertices(address()); }
+    /** Returns the value of the {@code mWeight} field. */
+    public float mWeight() { return nmWeight(address()); }
 
     /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mVertices} field. */
     public AIAnimMesh mVertices(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { nmVertices(address(), value); return this; }
@@ -161,6 +168,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
     public AIAnimMesh mTextureCoords(int index, @Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { nmTextureCoords(address(), index, value); return this; }
     /** Sets the specified value to the {@code mNumVertices} field. */
     public AIAnimMesh mNumVertices(@NativeType("unsigned int") int value) { nmNumVertices(address(), value); return this; }
+    /** Sets the specified value to the {@code mWeight} field. */
+    public AIAnimMesh mWeight(float value) { nmWeight(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public AIAnimMesh set(
@@ -170,7 +179,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
         @Nullable AIVector3D.Buffer mBitangents,
         PointerBuffer mColors,
         PointerBuffer mTextureCoords,
-        int mNumVertices
+        int mNumVertices,
+        float mWeight
     ) {
         mVertices(mVertices);
         mNormals(mNormals);
@@ -179,6 +189,7 @@ public class AIAnimMesh extends Struct implements NativeResource {
         mColors(mColors);
         mTextureCoords(mTextureCoords);
         mNumVertices(mNumVertices);
+        mWeight(mWeight);
 
         return this;
     }
@@ -360,6 +371,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
     }
     /** Unsafe version of {@link #mNumVertices}. */
     public static int nmNumVertices(long struct) { return UNSAFE.getInt(null, struct + AIAnimMesh.MNUMVERTICES); }
+    /** Unsafe version of {@link #mWeight}. */
+    public static float nmWeight(long struct) { return UNSAFE.getFloat(null, struct + AIAnimMesh.MWEIGHT); }
 
     /** Unsafe version of {@link #mVertices(AIVector3D.Buffer) mVertices}. */
     public static void nmVertices(long struct, @Nullable AIVector3D.Buffer value) { memPutAddress(struct + AIAnimMesh.MVERTICES, memAddressSafe(value)); }
@@ -389,6 +402,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
     }
     /** Sets the specified value to the {@code mNumVertices} field of the specified {@code struct}. */
     public static void nmNumVertices(long struct, int value) { UNSAFE.putInt(null, struct + AIAnimMesh.MNUMVERTICES, value); }
+    /** Unsafe version of {@link #mWeight(float) mWeight}. */
+    public static void nmWeight(long struct, float value) { UNSAFE.putFloat(null, struct + AIAnimMesh.MWEIGHT, value); }
 
     // -----------------------------------
 
@@ -461,6 +476,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
         /** Returns the value of the {@code mNumVertices} field. */
         @NativeType("unsigned int")
         public int mNumVertices() { return AIAnimMesh.nmNumVertices(address()); }
+        /** Returns the value of the {@code mWeight} field. */
+        public float mWeight() { return AIAnimMesh.nmWeight(address()); }
 
         /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mVertices} field. */
         public AIAnimMesh.Buffer mVertices(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { AIAnimMesh.nmVertices(address(), value); return this; }
@@ -480,6 +497,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
         public AIAnimMesh.Buffer mTextureCoords(int index, @Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { AIAnimMesh.nmTextureCoords(address(), index, value); return this; }
         /** Sets the specified value to the {@code mNumVertices} field. */
         public AIAnimMesh.Buffer mNumVertices(@NativeType("unsigned int") int value) { AIAnimMesh.nmNumVertices(address(), value); return this; }
+        /** Sets the specified value to the {@code mWeight} field. */
+        public AIAnimMesh.Buffer mWeight(float value) { AIAnimMesh.nmWeight(address(), value); return this; }
 
     }
 

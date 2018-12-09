@@ -126,18 +126,31 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
     charASCII(
         "achFormatHint",
         """
-        A hint from the loader to make it easier for applications to determine the type of embedded compressed textures. If {@code mHeight != 0} this member is
-        undefined. Otherwise it is set set to '\0\0\0\0' if the loader has no additional information about the texture file format used OR the file extension
-        of the format without a trailing dot. If there are multiple file extensions for a format, the shortest extension is chosen (JPEG maps to 'jpg', not to
-        'jpeg'). E.g. 'dds\0', 'pcx\0', 'jpg\0'. All characters are lower-case. The fourth character will always be '\0'.
+        A hint from the loader to make it easier for applications to determine the type of embedded textures.
+
+        If {@code mHeight != 0} this member is show how data is packed. Hint will consist of two parts: channel order and channel bitness (count of the bits
+        for every color channel). For simple parsing by the viewer it's better to not omit absent color channel and just use 0 for bitness. For example:
+
+        ${ol(
+            "Image contain RGBA and 8 bit per channel, {@code achFormatHint == \"rgba8888\";}",
+            "Image contain ARGB and 8 bit per channel, {@code achFormatHint == \"argb8888\";}",
+            "Image contain RGB and 5 bit for R and B channels and 6 bit for G channel, {@code achFormatHint == \"rgba5650\";}",
+            "One color image with B channel and 1 bit for it, {@code achFormatHint == \"rgba0010\";}"
+        )}
+
+        If {@code mHeight == 0} then {@code achFormatHint} is set set to '\0\0\0\0' if the loader has no additional information about the texture file format
+        used OR the file extension of the format without a trailing dot. If there are multiple file extensions for a format, the shortest extension is chosen
+        (JPEG maps to 'jpg', not to 'jpeg'). E.g. 'dds\0', 'pcx\0', 'jpg\0'. All characters are lower-case. The fourth character will always be '\0'.
         """
-    )[4]
+    )[9] // 8 for string + 1 for terminator.
     Unsafe..aiTexel.p(
         "pcData",
         """
-        Data of the texture. Points to an array of {@code mWidth * mHeight} ##AITexel's. The format of the texture data is always ARGB8888 to make the
-        implementation for user of the library as easy as possible. If {@code mHeight = 0} this is a pointer to a memory buffer of size mWidth containing the
-        compressed texture data. Good luck, have fun!
+        Data of the texture.
+
+        Points to an array of {@code mWidth * mHeight} ##AITexel's. The format of the texture data is always ARGB8888 to make the implementation for user of
+        the library as easy as possible. If {@code mHeight = 0} this is a pointer to a memory buffer of size {@code mWidth} containing the compressed texture
+        data. Good luck, have fun!
         """
     )
     aiString("mFilename", "texture original filename. Used to get the texture reference.")
@@ -190,10 +203,6 @@ val aiMatrix3x3 = struct(Module.ASSIMP, "AIMatrix3x3", nativeName = "struct aiMa
     float("c1", "")
     float("c2", "")
     float("c3", "")
-
-    float("d1", "")
-    float("d2", "")
-    float("d3", "")
 }
 
 val aiMetadataType = "aiMetadataType".enumType
@@ -222,14 +231,39 @@ val aiNode = struct(Module.ASSIMP, "AINode", nativeName = "struct aiNode") {
         formats don't support hierarchical structures - for these formats the imported scene does consist of only a single root node without children.
         """
 
-    aiString("mName", "The name of the node.")
+    aiString(
+        "mName",
+        """
+        The name of the node.
+
+        The name might be empty (length of zero) but all nodes which need to be referenced by either bones or animations are named. Multiple nodes may have the
+        same name, except for nodes which are referenced by bones (see ##AIBone and ##AIMesh{@code ::mBones}). Their names <b>must</b> be unique.
+
+        Cameras and lights reference a specific node by name - if there are multiple nodes with this name, they are assigned to each of them.
+
+        There are no limitations with regard to the characters contained in the name string as it is usually taken directly from the source file.
+
+        Implementations should be able to handle tokens such as whitespace, tabs, line feeds, quotation marks, ampersands etc.
+
+        Sometimes assimp introduces new nodes not present in the source file into the hierarchy (usually out of necessity because sometimes the source
+        hierarchy format is simply not compatible). Their names are surrounded by {@code <>} e.g. {@code <DummyRootNode>}.
+        """
+    )
     aiMatrix4x4("mTransformation", "The transformation relative to the node's parent.")
     nullable.._aiNode.p("mParent", "Parent node. #NULL if this node is the root node.")
     AutoSize("mChildren", optional = true)..unsigned_int("mNumChildren", "The number of child nodes of this node.")
     _aiNode.p.p("mChildren", "The child nodes of this node. #NULL if {@code mNumChildren} is 0.")
     AutoSize("mMeshes", optional = true)..unsigned_int("mNumMeshes", "The number of meshes of this node.")
-    unsigned_int.p("mMeshes", "The meshes of this node. Each entry is an index into the mesh list of the aiScene.")
-    nullable..aiMetadata.p("mMetadata", "Metadata associated with this node or #NULL if there is no metadata.")
+    unsigned_int.p("mMeshes", "The meshes of this node. Each entry is an index into the mesh list of the ##AIScene.")
+    nullable..aiMetadata.p(
+        "mMetadata",
+        """
+        Metadata associated with this node or #NULL if there is no metadata.
+
+        Whether any metadata is generated depends on the source file format. See the importer notes page for more information on every source file format.
+        Importers that don't document any metadata don't write any.
+        """
+    )
 }
 
 val aiFace = struct(Module.ASSIMP, "AIFace", nativeName = "struct aiFace") {
@@ -322,6 +356,7 @@ val aiAnimMesh = struct(Module.ASSIMP, "AIAnimMesh", nativeName = "struct aiAnim
         the {@code aiMesh} is not known, e.g. from language bindings.
         """
     )
+    float("mWeight", "Weight of the {@code AnimMesh}.")
 }
 
 val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
@@ -364,25 +399,39 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
     nullable..aiVector3D.p(
         "mNormals",
         """
-        Vertex normals. The array contains normalized vectors, #NULL if not present. The array is {@code mNumVertices} in size. Normals are undefined for point
-        and line primitives. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive types (i.e. lines and
-        triangles) may have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and set to {@code qNaN}.
+        Vertex normals.
+
+        The array contains normalized vectors, #NULL if not present. The array is {@code mNumVertices} in size. Normals are undefined for point and line
+        primitives. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive types (i.e. lines and triangles) may
+        have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and set to {@code qNaN}.
+
+        ${note("""
+        Normal vectors computed by Assimp are always unit-length. However, this needn't apply for normals that have been taken directly from the model file
+        """)}
         """
     )
     nullable..aiVector3D.p(
         "mTangents",
         """
-        Vertex tangents. The tangent of a vertex points in the direction of the positive X texture axis. The array contains normalized vectors, #NULL if not
-        present. The array is {@code mNumVertices} in size. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive
-        types (i.e. lines and triangles) may have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and
-        set to {@code qNaN}.
+        Vertex tangents.
+
+        The tangent of a vertex points in the direction of the positive X texture axis. The array contains normalized vectors, #NULL if not present. The array
+        is {@code mNumVertices} in size. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive types (i.e. lines
+        and triangles) may have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and set to
+        {@code qNaN}.
+
+        ${note("If the mesh contains tangents, it automatically also contains bitangents.")}
         """
     )
     nullable..aiVector3D.p(
         "mBitangents",
         """
-        Vertex bitangents. The bitangent of a vertex points in the direction of the positive Y texture axis. The array contains normalized vectors, #NULL if
-        not present. The array is {@code mNumVertices} in size.
+        Vertex bitangents.
+
+        The bitangent of a vertex points in the direction of the positive Y texture axis. The array contains normalized vectors, #NULL if not present. The
+        array is {@code mNumVertices} in size.
+
+        ${note("If the mesh contains tangents, it automatically also contains bitangents.")}
         """
     )
     nullable..aiColor4D.p(
@@ -414,7 +463,10 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         given in {@code mNumFaces}. If the #AI_SCENE_FLAGS_NON_VERBOSE_FORMAT is NOT set each face references an unique set of vertices.
         """
     )
-    AutoSize("mBones", optional = true)..unsigned_int("mNumBones", "The number of bones this mesh contains. Can be 0, in which case the {@code mBones} array is #NULL.")
+    AutoSize("mBones", optional = true)..unsigned_int(
+        "mNumBones",
+        "The number of bones this mesh contains. Can be 0, in which case the {@code mBones} array is #NULL."
+    )
     aiBone.p.p(
         "mBones",
         "The bones of this mesh. A bone consists of a name by which it can be found in the frame hierarchy and a set of vertex weights."
@@ -429,20 +481,32 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
     aiString(
         "mName",
         """
-        Name of the mesh. Meshes can be named, but this is not a requirement and leaving this field empty is totally fine. There are mainly three uses for mesh
-        names: - some formats name nodes and meshes independently. - importers tend to split meshes up to meet the one-material-per-mesh requirement. Assigning
-        the same (dummy) name to each of the result meshes aids the caller at recovering the original mesh partitioning. - Vertex animations refer to meshes by
-        their names.
+        Name of the mesh.
+
+        Meshes can be named, but this is not a requirement and leaving this field empty is totally fine. There are mainly three uses for mesh names:
+
+        ${ul(
+            "some formats name nodes and meshes independently.",
+            """
+            importers tend to split meshes up to meet the one-material-per-mesh requirement. Assigning the same (dummy) name to each of the result meshes aids
+            the caller at recovering the original mesh partitioning.
+            """,
+            "vertex animations refer to meshes by their names."
+        )}
         """
     )
-    AutoSize("mAnimMeshes", optional = true)..unsigned_int("mNumAnimMeshes", "NOT CURRENTLY IN USE. The number of attachment meshes")
+    AutoSize("mAnimMeshes", optional = true)..unsigned_int(
+        "mNumAnimMeshes",
+        "The number of attachment meshes. Note! Currently only works with Collada loader."
+    )
     aiAnimMesh.p.p(
         "mAnimMeshes",
         """
-        NOT CURRENTLY IN USE. Attachment meshes for this mesh, for vertex-based animation. Attachment meshes carry replacement data for some of the mesh'es
-        vertex components (usually positions, normals).
+        Attachment meshes for this mesh, for vertex-based animation. Attachment meshes carry replacement data for some of the mesh'es vertex components
+        (usually positions, normals). Note! Currently only works with Collada loader.
         """
     )
+    unsigned_int("mMethod", "Method of morphing when {@code animeshes} are specified.").links("MorphingMethod_\\w+")
 }
 
 val aiUVTransform = struct(Module.ASSIMP, "AIUVTransform", nativeName = "struct aiUVTransform", mutable = false) {
@@ -554,6 +618,15 @@ val aiMeshKey = struct(Module.ASSIMP, "AIMeshKey", nativeName = "struct aiMeshKe
     )
 }
 
+val aiMeshMorphKey = struct(Module.ASSIMP, "AIMeshMorphKey", nativeName = "struct aiMeshMorphKey") {
+    documentation = "Binds a morph anim mesh to a specific point in time."
+
+    double("mTime", "the time of this key")
+    unsigned_int.p("mValues", "the values at the time of this key")
+    double.p("mWeights", "the weights at the time of this key")
+    AutoSize("mValues", "mWeights")..unsigned_int("mNumValuesAndWeights", "the number of values and weights");
+}
+
 val aiAnimBehaviour = "aiAnimBehaviour".enumType
 
 val aiNodeAnim = struct(Module.ASSIMP, "AINodeAnim", nativeName = "struct aiNodeAnim") {
@@ -603,14 +676,14 @@ val aiNodeAnim = struct(Module.ASSIMP, "AINodeAnim", nativeName = "struct aiNode
         Defines how the animation behaves before the first key is encountered. The default value is aiAnimBehaviour_DEFAULT (the original transformation matrix
         of the affected node is used).
         """
-    )
+    ).links("AnimBehaviour_\\w+")
     aiAnimBehaviour(
         "mPostState",
         """
         Defines how the animation behaves after the last key was processed. The default value is aiAnimBehaviour_DEFAULT (the original transformation matrix of
         the affected node is taken).
         """
-    )
+    ).links("AnimBehaviour_\\w+")
 }
 
 val aiMeshAnim = struct(Module.ASSIMP, "AIMeshAnim", nativeName = "struct aiMeshAnim") {
@@ -631,6 +704,19 @@ val aiMeshAnim = struct(Module.ASSIMP, "AIMeshAnim", nativeName = "struct aiMesh
     aiMeshKey.p("mKeys", "Key frames of the animation. May not be #NULL.")
 }
 
+val aiMeshMorphAnim = struct(Module.ASSIMP, "AIMeshMorphAnim", nativeName = "struct aiMeshMorphAnim") {
+    documentation = "Describes a morphing animation of a given mesh."
+
+    aiString(
+        "mName",
+        """
+        Name of the mesh to be animated. An empty string is not allowed, animated meshes need to be named (not necessarily uniquely, the name can basically
+        serve as wildcard to select a group of meshes with similar animation setup).
+        """)
+    AutoSize("mKeys")..unsigned_int("mNumKeys", "Size of the {@code mKeys} array. Must be 1, at least.")
+    aiMeshMorphKey.p("mKeys", "Key frames of the animation. May not be #NULL.")
+}
+
 val aiAnimation = struct(Module.ASSIMP, "AIAnimation", nativeName = "struct aiAnimation") {
     documentation =
         """
@@ -646,13 +732,21 @@ val aiAnimation = struct(Module.ASSIMP, "AIAnimation", nativeName = "struct aiAn
     )
     double("mDuration", "Duration of the animation in ticks.")
     double("mTicksPerSecond", "Ticks per second. 0 if not specified in the imported file")
-    AutoSize("mChannels")..unsigned_int("mNumChannels", "The number of bone animation channels. Each channel affects a single node.")
+    AutoSize("mChannels", optional = true)..unsigned_int("mNumChannels", "The number of bone animation channels. Each channel affects a single node.")
     aiNodeAnim.p.p("mChannels", "The node animation channels. Each channel affects a single node. The array is {@code mNumChannels} in size.")
-    AutoSize("mMeshChannels")..unsigned_int(
+    AutoSize("mMeshChannels", optional = true)..unsigned_int(
         "mNumMeshChannels",
         "The number of mesh animation channels. Each channel affects a single mesh and defines vertex-based animation."
     )
     aiMeshAnim.p.p("mMeshChannels", "The mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMeshChannels} in size.")
+    AutoSize("mMorphMeshChannels", optional = true)..unsigned_int(
+        "mNumMorphMeshChannels",
+        "the number of mesh animation channels. Each channel affects a single mesh and defines morphing animation."
+    )
+    aiMeshMorphAnim.p.p(
+        "mMorphMeshChannels",
+        "the morph mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMorphMeshChannels} in size."
+    )
 }
 
 val aiLightSourceType = "aiLightSourceType".enumType
@@ -675,7 +769,10 @@ val aiLight = struct(Module.ASSIMP, "AILight", nativeName = "struct aiLight", mu
         hierarchy and can be animated.
         """
     )
-    aiLightSourceType("mType", "The type of the light source. #LightSource_UNDEFINED is not a valid value for this member.")
+    aiLightSourceType(
+        "mType",
+        "The type of the light source. #LightSource_UNDEFINED is not a valid value for this member."
+    ).links("LightSource_(?!UNDEFINED)\\w+")
     aiVector3D(
         "mPosition",
         """

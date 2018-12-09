@@ -37,17 +37,36 @@ import static org.lwjgl.system.MemoryStack.*;
  * member is {@link Assimp#AI_MAX_FACES}.</li>
  * <li>{@code mVertices} &ndash; Vertex positions. This array is always present in a mesh. The array is {@code mNumVertices} in size.</li>
  * <li>{@code mNormals} &ndash; 
- * Vertex normals. The array contains normalized vectors, {@code NULL} if not present. The array is {@code mNumVertices} in size. Normals are undefined for point
- * and line primitives. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive types (i.e. lines and
- * triangles) may have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and set to {@code qNaN}.</li>
+ * Vertex normals.
+ * 
+ * <p>The array contains normalized vectors, {@code NULL} if not present. The array is {@code mNumVertices} in size. Normals are undefined for point and line
+ * primitives. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive types (i.e. lines and triangles) may
+ * have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and set to {@code qNaN}.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Normal vectors computed by Assimp are always unit-length. However, this needn't apply for normals that have been taken directly from the model file</p>
+ * </div></li>
  * <li>{@code mTangents} &ndash; 
- * Vertex tangents. The tangent of a vertex points in the direction of the positive X texture axis. The array contains normalized vectors, {@code NULL} if not
- * present. The array is {@code mNumVertices} in size. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive
- * types (i.e. lines and triangles) may have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and
- * set to {@code qNaN}.</li>
+ * Vertex tangents.
+ * 
+ * <p>The tangent of a vertex points in the direction of the positive X texture axis. The array contains normalized vectors, {@code NULL} if not present. The array
+ * is {@code mNumVertices} in size. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive types (i.e. lines
+ * and triangles) may have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and set to
+ * {@code qNaN}.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>If the mesh contains tangents, it automatically also contains bitangents.</p></div></li>
  * <li>{@code mBitangents} &ndash; 
- * Vertex bitangents. The bitangent of a vertex points in the direction of the positive Y texture axis. The array contains normalized vectors, {@code NULL} if
- * not present. The array is {@code mNumVertices} in size.</li>
+ * Vertex bitangents.
+ * 
+ * <p>The bitangent of a vertex points in the direction of the positive Y texture axis. The array contains normalized vectors, {@code NULL} if not present. The
+ * array is {@code mNumVertices} in size.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>If the mesh contains tangents, it automatically also contains bitangents.</p></div></li>
  * <li>{@code mColors} &ndash; 
  * Vertex color sets. A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_COLOR_SETS} vertex colors per vertex. {@code NULL} if not present. Each array is
  * {@code mNumVertices} in size if present.</li>
@@ -67,14 +86,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * The material used by this mesh. A mesh uses only a single material. If an imported model uses multiple materials, the import splits up the mesh. Use
  * this value as index into the scene's material list.</li>
  * <li>{@code mName} &ndash; 
- * Name of the mesh. Meshes can be named, but this is not a requirement and leaving this field empty is totally fine. There are mainly three uses for mesh
- * names: - some formats name nodes and meshes independently. - importers tend to split meshes up to meet the one-material-per-mesh requirement. Assigning
- * the same (dummy) name to each of the result meshes aids the caller at recovering the original mesh partitioning. - Vertex animations refer to meshes by
- * their names.</li>
- * <li>{@code mNumAnimMeshes} &ndash; NOT CURRENTLY IN USE. The number of attachment meshes</li>
+ * Name of the mesh.
+ * 
+ * <p>Meshes can be named, but this is not a requirement and leaving this field empty is totally fine. There are mainly three uses for mesh names:</p>
+ * 
+ * <ul>
+ * <li>some formats name nodes and meshes independently.</li>
+ * <li>importers tend to split meshes up to meet the one-material-per-mesh requirement. Assigning the same (dummy) name to each of the result meshes aids
+ * the caller at recovering the original mesh partitioning.</li>
+ * <li>vertex animations refer to meshes by their names.</li>
+ * </ul></li>
+ * <li>{@code mNumAnimMeshes} &ndash; The number of attachment meshes. Note! Currently only works with Collada loader.</li>
  * <li>{@code mAnimMeshes} &ndash; 
- * NOT CURRENTLY IN USE. Attachment meshes for this mesh, for vertex-based animation. Attachment meshes carry replacement data for some of the mesh'es
- * vertex components (usually positions, normals).</li>
+ * Attachment meshes for this mesh, for vertex-based animation. Attachment meshes carry replacement data for some of the mesh'es vertex components
+ * (usually positions, normals). Note! Currently only works with Collada loader.</li>
+ * <li>{@code mMethod} &ndash; Method of morphing when {@code animeshes} are specified. One of:<br><table><tr><td>{@link Assimp#aiMorphingMethod_VERTEX_BLEND MorphingMethod_VERTEX_BLEND}</td><td>{@link Assimp#aiMorphingMethod_MORPH_NORMALIZED MorphingMethod_MORPH_NORMALIZED}</td></tr><tr><td>{@link Assimp#aiMorphingMethod_MORPH_RELATIVE MorphingMethod_MORPH_RELATIVE}</td></tr></table></li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -98,6 +124,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AIString struct aiString} mName;
  *     unsigned int mNumAnimMeshes;
  *     {@link AIAnimMesh struct aiAnimMesh} ** mAnimMeshes;
+ *     unsigned int mMethod;
  * }</code></pre>
  */
 @NativeType("struct aiMesh")
@@ -127,7 +154,8 @@ public class AIMesh extends Struct implements NativeResource {
         MMATERIALINDEX,
         MNAME,
         MNUMANIMMESHES,
-        MANIMMESHES;
+        MANIMMESHES,
+        MMETHOD;
 
     static {
         Layout layout = __struct(
@@ -147,7 +175,8 @@ public class AIMesh extends Struct implements NativeResource {
             __member(4),
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(4),
-            __member(POINTER_SIZE)
+            __member(POINTER_SIZE),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -170,6 +199,7 @@ public class AIMesh extends Struct implements NativeResource {
         MNAME = layout.offsetof(14);
         MNUMANIMMESHES = layout.offsetof(15);
         MANIMMESHES = layout.offsetof(16);
+        MMETHOD = layout.offsetof(17);
     }
 
     /**
@@ -254,6 +284,9 @@ public class AIMesh extends Struct implements NativeResource {
     @Nullable
     @NativeType("struct aiAnimMesh **")
     public PointerBuffer mAnimMeshes() { return nmAnimMeshes(address()); }
+    /** Returns the value of the {@code mMethod} field. */
+    @NativeType("unsigned int")
+    public int mMethod() { return nmMethod(address()); }
 
     /** Sets the specified value to the {@code mPrimitiveTypes} field. */
     public AIMesh mPrimitiveTypes(@NativeType("unsigned int") int value) { nmPrimitiveTypes(address(), value); return this; }
@@ -289,6 +322,8 @@ public class AIMesh extends Struct implements NativeResource {
     public AIMesh mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@code mAnimMeshes} field. */
     public AIMesh mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { nmAnimMeshes(address(), value); return this; }
+    /** Sets the specified value to the {@code mMethod} field. */
+    public AIMesh mMethod(@NativeType("unsigned int") int value) { nmMethod(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public AIMesh set(
@@ -305,7 +340,8 @@ public class AIMesh extends Struct implements NativeResource {
         @Nullable PointerBuffer mBones,
         int mMaterialIndex,
         AIString mName,
-        @Nullable PointerBuffer mAnimMeshes
+        @Nullable PointerBuffer mAnimMeshes,
+        int mMethod
     ) {
         mPrimitiveTypes(mPrimitiveTypes);
         mNumVertices(mNumVertices);
@@ -321,6 +357,7 @@ public class AIMesh extends Struct implements NativeResource {
         mMaterialIndex(mMaterialIndex);
         mName(mName);
         mAnimMeshes(mAnimMeshes);
+        mMethod(mMethod);
 
         return this;
     }
@@ -526,6 +563,8 @@ public class AIMesh extends Struct implements NativeResource {
     public static int nmNumAnimMeshes(long struct) { return UNSAFE.getInt(null, struct + AIMesh.MNUMANIMMESHES); }
     /** Unsafe version of {@link #mAnimMeshes() mAnimMeshes}. */
     @Nullable public static PointerBuffer nmAnimMeshes(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIMesh.MANIMMESHES), nmNumAnimMeshes(struct)); }
+    /** Unsafe version of {@link #mMethod}. */
+    public static int nmMethod(long struct) { return UNSAFE.getInt(null, struct + AIMesh.MMETHOD); }
 
     /** Unsafe version of {@link #mPrimitiveTypes(int) mPrimitiveTypes}. */
     public static void nmPrimitiveTypes(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MPRIMITIVETYPES, value); }
@@ -582,6 +621,8 @@ public class AIMesh extends Struct implements NativeResource {
     public static void nmNumAnimMeshes(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MNUMANIMMESHES, value); }
     /** Unsafe version of {@link #mAnimMeshes(PointerBuffer) mAnimMeshes}. */
     public static void nmAnimMeshes(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIMesh.MANIMMESHES, memAddressSafe(value)); nmNumAnimMeshes(struct, value == null ? 0 : value.remaining()); }
+    /** Unsafe version of {@link #mMethod(int) mMethod}. */
+    public static void nmMethod(long struct, int value) { UNSAFE.putInt(null, struct + AIMesh.MMETHOD, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -721,6 +762,9 @@ public class AIMesh extends Struct implements NativeResource {
         @Nullable
         @NativeType("struct aiAnimMesh **")
         public PointerBuffer mAnimMeshes() { return AIMesh.nmAnimMeshes(address()); }
+        /** Returns the value of the {@code mMethod} field. */
+        @NativeType("unsigned int")
+        public int mMethod() { return AIMesh.nmMethod(address()); }
 
         /** Sets the specified value to the {@code mPrimitiveTypes} field. */
         public AIMesh.Buffer mPrimitiveTypes(@NativeType("unsigned int") int value) { AIMesh.nmPrimitiveTypes(address(), value); return this; }
@@ -756,6 +800,8 @@ public class AIMesh extends Struct implements NativeResource {
         public AIMesh.Buffer mName(@NativeType("struct aiString") AIString value) { AIMesh.nmName(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@code mAnimMeshes} field. */
         public AIMesh.Buffer mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { AIMesh.nmAnimMeshes(address(), value); return this; }
+        /** Sets the specified value to the {@code mMethod} field. */
+        public AIMesh.Buffer mMethod(@NativeType("unsigned int") int value) { AIMesh.nmMethod(address(), value); return this; }
 
     }
 

@@ -31,6 +31,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code mChannels} &ndash; The node animation channels. Each channel affects a single node. The array is {@code mNumChannels} in size.</li>
  * <li>{@code mNumMeshChannels} &ndash; The number of mesh animation channels. Each channel affects a single mesh and defines vertex-based animation.</li>
  * <li>{@code mMeshChannels} &ndash; The mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMeshChannels} in size.</li>
+ * <li>{@code mNumMorphMeshChannels} &ndash; the number of mesh animation channels. Each channel affects a single mesh and defines morphing animation.</li>
+ * <li>{@code mMorphMeshChannels} &ndash; the morph mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMorphMeshChannels} in size.</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -44,6 +46,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AINodeAnim struct aiNodeAnim} ** mChannels;
  *     unsigned int mNumMeshChannels;
  *     {@link AIMeshAnim struct aiMeshAnim} ** mMeshChannels;
+ *     unsigned int mNumMorphMeshChannels;
+ *     {@link AIMeshMorphAnim struct aiMeshMorphAnim} ** mMorphMeshChannels;
  * }</code></pre>
  */
 @NativeType("struct aiAnimation")
@@ -63,13 +67,17 @@ public class AIAnimation extends Struct implements NativeResource {
         MNUMCHANNELS,
         MCHANNELS,
         MNUMMESHCHANNELS,
-        MMESHCHANNELS;
+        MMESHCHANNELS,
+        MNUMMORPHMESHCHANNELS,
+        MMORPHMESHCHANNELS;
 
     static {
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(8),
             __member(8),
+            __member(4),
+            __member(POINTER_SIZE),
             __member(4),
             __member(POINTER_SIZE),
             __member(4),
@@ -86,6 +94,8 @@ public class AIAnimation extends Struct implements NativeResource {
         MCHANNELS = layout.offsetof(4);
         MNUMMESHCHANNELS = layout.offsetof(5);
         MMESHCHANNELS = layout.offsetof(6);
+        MNUMMORPHMESHCHANNELS = layout.offsetof(7);
+        MMORPHMESHCHANNELS = layout.offsetof(8);
     }
 
     /**
@@ -114,14 +124,23 @@ public class AIAnimation extends Struct implements NativeResource {
     @NativeType("unsigned int")
     public int mNumChannels() { return nmNumChannels(address()); }
     /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mChannels} field. */
+    @Nullable
     @NativeType("struct aiNodeAnim **")
     public PointerBuffer mChannels() { return nmChannels(address()); }
     /** Returns the value of the {@code mNumMeshChannels} field. */
     @NativeType("unsigned int")
     public int mNumMeshChannels() { return nmNumMeshChannels(address()); }
     /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mMeshChannels} field. */
+    @Nullable
     @NativeType("struct aiMeshAnim **")
     public PointerBuffer mMeshChannels() { return nmMeshChannels(address()); }
+    /** Returns the value of the {@code mNumMorphMeshChannels} field. */
+    @NativeType("unsigned int")
+    public int mNumMorphMeshChannels() { return nmNumMorphMeshChannels(address()); }
+    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mMorphMeshChannels} field. */
+    @Nullable
+    @NativeType("struct aiMeshMorphAnim **")
+    public PointerBuffer mMorphMeshChannels() { return nmMorphMeshChannels(address()); }
 
     /** Copies the specified {@link AIString} to the {@code mName} field. */
     public AIAnimation mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
@@ -130,23 +149,27 @@ public class AIAnimation extends Struct implements NativeResource {
     /** Sets the specified value to the {@code mTicksPerSecond} field. */
     public AIAnimation mTicksPerSecond(double value) { nmTicksPerSecond(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@code mChannels} field. */
-    public AIAnimation mChannels(@NativeType("struct aiNodeAnim **") PointerBuffer value) { nmChannels(address(), value); return this; }
+    public AIAnimation mChannels(@Nullable @NativeType("struct aiNodeAnim **") PointerBuffer value) { nmChannels(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@code mMeshChannels} field. */
-    public AIAnimation mMeshChannels(@NativeType("struct aiMeshAnim **") PointerBuffer value) { nmMeshChannels(address(), value); return this; }
+    public AIAnimation mMeshChannels(@Nullable @NativeType("struct aiMeshAnim **") PointerBuffer value) { nmMeshChannels(address(), value); return this; }
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code mMorphMeshChannels} field. */
+    public AIAnimation mMorphMeshChannels(@Nullable @NativeType("struct aiMeshMorphAnim **") PointerBuffer value) { nmMorphMeshChannels(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public AIAnimation set(
         AIString mName,
         double mDuration,
         double mTicksPerSecond,
-        PointerBuffer mChannels,
-        PointerBuffer mMeshChannels
+        @Nullable PointerBuffer mChannels,
+        @Nullable PointerBuffer mMeshChannels,
+        @Nullable PointerBuffer mMorphMeshChannels
     ) {
         mName(mName);
         mDuration(mDuration);
         mTicksPerSecond(mTicksPerSecond);
         mChannels(mChannels);
         mMeshChannels(mMeshChannels);
+        mMorphMeshChannels(mMorphMeshChannels);
 
         return this;
     }
@@ -315,11 +338,15 @@ public class AIAnimation extends Struct implements NativeResource {
     /** Unsafe version of {@link #mNumChannels}. */
     public static int nmNumChannels(long struct) { return UNSAFE.getInt(null, struct + AIAnimation.MNUMCHANNELS); }
     /** Unsafe version of {@link #mChannels() mChannels}. */
-    public static PointerBuffer nmChannels(long struct) { return memPointerBuffer(memGetAddress(struct + AIAnimation.MCHANNELS), nmNumChannels(struct)); }
+    @Nullable public static PointerBuffer nmChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MCHANNELS), nmNumChannels(struct)); }
     /** Unsafe version of {@link #mNumMeshChannels}. */
     public static int nmNumMeshChannels(long struct) { return UNSAFE.getInt(null, struct + AIAnimation.MNUMMESHCHANNELS); }
     /** Unsafe version of {@link #mMeshChannels() mMeshChannels}. */
-    public static PointerBuffer nmMeshChannels(long struct) { return memPointerBuffer(memGetAddress(struct + AIAnimation.MMESHCHANNELS), nmNumMeshChannels(struct)); }
+    @Nullable public static PointerBuffer nmMeshChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MMESHCHANNELS), nmNumMeshChannels(struct)); }
+    /** Unsafe version of {@link #mNumMorphMeshChannels}. */
+    public static int nmNumMorphMeshChannels(long struct) { return UNSAFE.getInt(null, struct + AIAnimation.MNUMMORPHMESHCHANNELS); }
+    /** Unsafe version of {@link #mMorphMeshChannels() mMorphMeshChannels}. */
+    @Nullable public static PointerBuffer nmMorphMeshChannels(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIAnimation.MMORPHMESHCHANNELS), nmNumMorphMeshChannels(struct)); }
 
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIAnimation.MNAME, AIString.SIZEOF); }
@@ -330,11 +357,15 @@ public class AIAnimation extends Struct implements NativeResource {
     /** Sets the specified value to the {@code mNumChannels} field of the specified {@code struct}. */
     public static void nmNumChannels(long struct, int value) { UNSAFE.putInt(null, struct + AIAnimation.MNUMCHANNELS, value); }
     /** Unsafe version of {@link #mChannels(PointerBuffer) mChannels}. */
-    public static void nmChannels(long struct, PointerBuffer value) { memPutAddress(struct + AIAnimation.MCHANNELS, memAddress(value)); nmNumChannels(struct, value.remaining()); }
+    public static void nmChannels(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIAnimation.MCHANNELS, memAddressSafe(value)); nmNumChannels(struct, value == null ? 0 : value.remaining()); }
     /** Sets the specified value to the {@code mNumMeshChannels} field of the specified {@code struct}. */
     public static void nmNumMeshChannels(long struct, int value) { UNSAFE.putInt(null, struct + AIAnimation.MNUMMESHCHANNELS, value); }
     /** Unsafe version of {@link #mMeshChannels(PointerBuffer) mMeshChannels}. */
-    public static void nmMeshChannels(long struct, PointerBuffer value) { memPutAddress(struct + AIAnimation.MMESHCHANNELS, memAddress(value)); nmNumMeshChannels(struct, value.remaining()); }
+    public static void nmMeshChannels(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIAnimation.MMESHCHANNELS, memAddressSafe(value)); nmNumMeshChannels(struct, value == null ? 0 : value.remaining()); }
+    /** Sets the specified value to the {@code mNumMorphMeshChannels} field of the specified {@code struct}. */
+    public static void nmNumMorphMeshChannels(long struct, int value) { UNSAFE.putInt(null, struct + AIAnimation.MNUMMORPHMESHCHANNELS, value); }
+    /** Unsafe version of {@link #mMorphMeshChannels(PointerBuffer) mMorphMeshChannels}. */
+    public static void nmMorphMeshChannels(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIAnimation.MMORPHMESHCHANNELS, memAddressSafe(value)); nmNumMorphMeshChannels(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -342,8 +373,15 @@ public class AIAnimation extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + AIAnimation.MCHANNELS));
-        check(memGetAddress(struct + AIAnimation.MMESHCHANNELS));
+        if (nmNumChannels(struct) != 0) {
+            check(memGetAddress(struct + AIAnimation.MCHANNELS));
+        }
+        if (nmNumMeshChannels(struct) != 0) {
+            check(memGetAddress(struct + AIAnimation.MMESHCHANNELS));
+        }
+        if (nmNumMorphMeshChannels(struct) != 0) {
+            check(memGetAddress(struct + AIAnimation.MMORPHMESHCHANNELS));
+        }
     }
 
     /**
@@ -409,14 +447,23 @@ public class AIAnimation extends Struct implements NativeResource {
         @NativeType("unsigned int")
         public int mNumChannels() { return AIAnimation.nmNumChannels(address()); }
         /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mChannels} field. */
+        @Nullable
         @NativeType("struct aiNodeAnim **")
         public PointerBuffer mChannels() { return AIAnimation.nmChannels(address()); }
         /** Returns the value of the {@code mNumMeshChannels} field. */
         @NativeType("unsigned int")
         public int mNumMeshChannels() { return AIAnimation.nmNumMeshChannels(address()); }
         /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mMeshChannels} field. */
+        @Nullable
         @NativeType("struct aiMeshAnim **")
         public PointerBuffer mMeshChannels() { return AIAnimation.nmMeshChannels(address()); }
+        /** Returns the value of the {@code mNumMorphMeshChannels} field. */
+        @NativeType("unsigned int")
+        public int mNumMorphMeshChannels() { return AIAnimation.nmNumMorphMeshChannels(address()); }
+        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mMorphMeshChannels} field. */
+        @Nullable
+        @NativeType("struct aiMeshMorphAnim **")
+        public PointerBuffer mMorphMeshChannels() { return AIAnimation.nmMorphMeshChannels(address()); }
 
         /** Copies the specified {@link AIString} to the {@code mName} field. */
         public AIAnimation.Buffer mName(@NativeType("struct aiString") AIString value) { AIAnimation.nmName(address(), value); return this; }
@@ -425,9 +472,11 @@ public class AIAnimation extends Struct implements NativeResource {
         /** Sets the specified value to the {@code mTicksPerSecond} field. */
         public AIAnimation.Buffer mTicksPerSecond(double value) { AIAnimation.nmTicksPerSecond(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@code mChannels} field. */
-        public AIAnimation.Buffer mChannels(@NativeType("struct aiNodeAnim **") PointerBuffer value) { AIAnimation.nmChannels(address(), value); return this; }
+        public AIAnimation.Buffer mChannels(@Nullable @NativeType("struct aiNodeAnim **") PointerBuffer value) { AIAnimation.nmChannels(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@code mMeshChannels} field. */
-        public AIAnimation.Buffer mMeshChannels(@NativeType("struct aiMeshAnim **") PointerBuffer value) { AIAnimation.nmMeshChannels(address(), value); return this; }
+        public AIAnimation.Buffer mMeshChannels(@Nullable @NativeType("struct aiMeshAnim **") PointerBuffer value) { AIAnimation.nmMeshChannels(address(), value); return this; }
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code mMorphMeshChannels} field. */
+        public AIAnimation.Buffer mMorphMeshChannels(@Nullable @NativeType("struct aiMeshMorphAnim **") PointerBuffer value) { AIAnimation.nmMorphMeshChannels(address(), value); return this; }
 
     }
 
