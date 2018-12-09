@@ -159,16 +159,22 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
                     }
                     CXCommentInlineCommandRenderKind_Emphasized -> {
                         val cmd = clang_InlineCommandComment_getCommandName(this, stack.str).str
-                        if (cmd == "a") {
-                            builder.append(" #")
-                            for (i in 0 until clang_InlineCommandComment_getNumArgs(this)) {
-                                builder.append(clang_InlineCommandComment_getArgText(this, i, stack.str).str)
+                        when (cmd) {
+                            "a"  -> {
+                                builder.append(" #")
+                                for (i in 0 until clang_InlineCommandComment_getNumArgs(this)) {
+                                    builder.append(clang_InlineCommandComment_getArgText(this, i, stack.str).str)
+                                }
                             }
-                        } else {
-                            val index = builder.length
-                            builder.append(" <em>")
-                            closeInlineCommand(builder, index, "</em>")
-                            TODO()
+                            "e"  -> {
+                                val index = builder.length
+                                builder.append(" <em>")
+                                closeInlineCommand(builder, index, "</em>")
+                            }
+                            else -> {
+                                System.err.println("Unsupported CXCommentInlineCommandRenderKind_Emphasized command: " + cmd)
+                                TODO()
+                            }
                         }
                     }
                     else                                        -> {

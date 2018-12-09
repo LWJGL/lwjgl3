@@ -227,7 +227,8 @@ internal fun parse(
                             }
                         }
                     }
-                    CXCursor_StructDecl      -> {
+                    CXCursor_StructDecl,
+                    CXCursor_UnionDecl       -> {
                         if (options.parseStructs) {
                             cursor.spelling.let { name ->
                                 cursor.parseStruct(context, name, false, handles).let {
