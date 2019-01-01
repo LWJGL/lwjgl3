@@ -21,7 +21,7 @@ This build includes the following changes:
     * Added `glfwAttachWin32Window`. (experimental)
 - jemalloc: Updated to pre-release 5.2.0 (up from 5.1.0)
     * When available, it is again the default memory allocator on Windows.
-- LibOVR: Updated to 1.30.0 (up from 1.26.0)
+- LibOVR: Updated to 1.31.0 (up from 1.26.0)
 - lz4: Updated to 1.8.3 (up from 1.8.2)
 - Nuklear: Updated to 4.00.2 (up from 4.00.1)
 - OpenAL Soft: Updated to 1.19.1 (up from 1.18.2)

@@ -60,7 +60,7 @@ This script is included in /config/build-definitions.xml.
 
     <!-- Set the path to the Oculus SDK to enable. -->
     <!-- TODO: add headers in here -->
-    <property name="OCULUS_SDK_PATH" location="../../CLONES/OculusSDK" relative="false"/>
+    <property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>
 
     <!-- // ================================ // -->
 
