@@ -9,90 +9,89 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/generator.iml" filepath="$PROJECT_DIR$/.idea/modules/generator.iml" />
 
       <!-- The generator templates for each binding -->
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/assimp.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/assimp.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/assimp-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/assimp-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/bgfx-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/bgfx-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/bullet-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/bullet-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/core-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/core-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/cuda-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/cuda-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/egl-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/egl-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/glfw-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/glfw-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/jawt-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/jawt-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/jemalloc-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/jemalloc-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/libdivide-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/libdivide-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/llvm-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/llvm-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/lmdb-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/lmdb-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/lz4-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/lz4-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/meow-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/meow-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/nanovg-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/nanovg-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/nfd-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/nfd-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/nuklear-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/nuklear-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/odbc-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/odbc-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/openal-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/openal-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/opencl-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/opencl-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/opengl-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/opengl-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/opengles-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/opengles-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/openvr-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/openvr-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/opus-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/opus-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/ovr-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/ovr-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/par-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/par-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/remotery-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/remotery-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/rpmalloc-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/rpmalloc-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/sse-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/sse-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/stb-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/stb-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/tinyexr-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/tinyexr-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/tinyfd-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/tinyfd-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/tootle-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/tootle-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/vma-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/vma-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/vulkan-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/vulkan-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/xxhash-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/xxhash-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/yoga-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/yoga-templates.iml" group="TEMPLATES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/zstd-templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/zstd-templates.iml" group="TEMPLATES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.assimp.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.assimp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.bgfx.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.bgfx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.bullet.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.bullet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.core.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.cuda.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.cuda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.egl.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.egl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.glfw.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.glfw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.jawt.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.jawt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.jemalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.jemalloc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.libdivide.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.libdivide.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.llvm.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.llvm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.lmdb.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.lmdb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.lz4.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.lz4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.meow.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.meow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.nanovg.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.nanovg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.nfd.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.nfd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.nuklear.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.nuklear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.odbc.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.odbc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.openal.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.openal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.opencl.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.opencl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.opengl.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.opengl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.opengles.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.opengles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.openvr.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.openvr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.opus.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.opus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.ovr.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.ovr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.par.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.par.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.remotery.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.remotery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.rpmalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.rpmalloc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.sse.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.sse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.stb.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.stb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.tinyexr.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.tinyexr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.tinyfd.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.tinyfd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.tootle.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.tootle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.vma.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.vma.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.vulkan.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.vulkan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.xxhash.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.xxhash.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.yoga.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.yoga.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.zstd.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.zstd.iml" />
 
       <!-- Used for building the generator -->
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates.iml" filepath="$PROJECT_DIR$/.idea/modules/templates.iml" />
 
       <!-- The LWJGL library (includes generated code) -->
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/assimp.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/assimp.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/bgfx.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/bgfx.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/bullet.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/bullet.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/core.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/core.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/core10.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/core10.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/core9.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/core9.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/cuda.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/cuda.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/egl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/egl.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/glfw.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/glfw.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/jawt.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/jawt.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/jemalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/jemalloc.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/libdivide.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/libdivide.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/llvm.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/llvm.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lmdb.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lmdb.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lz4.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lz4.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/meow.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/meow.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/nanovg.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/nanovg.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/nfd.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/nfd.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/nuklear.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/nuklear.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/odbc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/odbc.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/openal.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/openal.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/opencl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/opencl.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/opengl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/opengl.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/opengles.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/opengles.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/openvr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/openvr.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/opus.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/opus.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/ovr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/ovr.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/par.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/par.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/remotery.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/remotery.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/rpmalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/rpmalloc.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/sse.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/sse.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/stb.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/stb.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/tinyexr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/tinyexr.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/tinyfd.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/tinyfd.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/tootle.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/tootle.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/vma.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/vma.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/vulkan.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/vulkan.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/xxhash.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/xxhash.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/yoga.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/yoga.iml" group="MODULES" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/zstd.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/zstd.iml" group="MODULES" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.assimp.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.assimp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.bgfx.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.bgfx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.bullet.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.bullet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core10.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core9.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.cuda.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.cuda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.egl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.egl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.glfw.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.glfw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.jawt.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.jawt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.jemalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.jemalloc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.libdivide.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.libdivide.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.llvm.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.llvm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.lmdb.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.lmdb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.lz4.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.lz4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.meow.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.meow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nanovg.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nanovg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nfd.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nfd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nuklear.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.nuklear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.odbc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.odbc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openal.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opencl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opencl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengles.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openvr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openvr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opus.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.ovr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.ovr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.par.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.par.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.remotery.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.remotery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.rpmalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.rpmalloc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.sse.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.sse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.stb.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.stb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tinyexr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tinyexr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tinyfd.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tinyfd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tootle.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tootle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.vma.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.vma.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.vulkan.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.vulkan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.xxhash.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.xxhash.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.yoga.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.yoga.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.zstd.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.zstd.iml" />
 
       <!-- The tool that extracts generator templates from native headers -->
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/extract.iml" filepath="$PROJECT_DIR$/.idea/modules/extract.iml" />

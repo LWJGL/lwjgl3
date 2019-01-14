@@ -31,7 +31,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="llvm" />
+    <orderEntry type="module" module-name="lwjgl.core" />
+    <orderEntry type="module" module-name="lwjgl.llvm" />
   </component>
 </module>
