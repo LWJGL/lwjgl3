@@ -13,7 +13,7 @@ val NV_bindless_multi_draw_indirect_count = "NVBindlessMultiDrawIndirectCount".n
         Native bindings to the $registryLink extension.
 
         This extension adds the possibility to define the number of drawcalls within a multi-draw-indirect call from the GPU, as provided by
-        ARB_indirect_parameters, for the functions added in NV_bindless_multi_draw_indirect.
+        {@code ARB_indirect_parameters}, for the functions added in {@code NV_bindless_multi_draw_indirect}.
 
         Requires ${NV_bindless_multi_draw_indirect.link}, ${ARB_indirect_parameters.link}.
         """
@@ -28,7 +28,7 @@ val NV_bindless_multi_draw_indirect_count = "NVBindlessMultiDrawIndirectCount".n
         """,
 
         GLenum("mode", "the primitive mode", PRIMITIVE_TYPES),
-        Check("maxDrawCount * (stride == 0 ? (16 + vertexBufferCount * 24) : stride)")..void.const.p(
+        Check("maxDrawCount * (stride == 0 ? (16 + vertexBufferCount * 24) : stride)")..DRAW_INDIRECT_BUFFER..void.const.p(
             "indirect",
             "an array of DrawArraysIndirectBindlessCommandNV structures (see the extension spec for more information)"
         ),
@@ -49,7 +49,7 @@ val NV_bindless_multi_draw_indirect_count = "NVBindlessMultiDrawIndirectCount".n
 
         GLenum("mode", "the primitive mode", PRIMITIVE_TYPES),
         GLenum("type", "the data type of the element indices", "#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"),
-        Check("maxDrawCount * (stride == 0 ? ((vertexBufferCount + 2) * 24) : stride)")..void.const.p(
+        Check("maxDrawCount * (stride == 0 ? ((vertexBufferCount + 2) * 24) : stride)")..DRAW_INDIRECT_BUFFER..void.const.p(
             "indirect",
             "an array of DrawElementsIndirectBindlessCommandNV structures (see the extension spec for more information)"
         ),
