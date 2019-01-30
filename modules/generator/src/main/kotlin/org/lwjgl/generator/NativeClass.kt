@@ -706,7 +706,13 @@ class NativeClass internal constructor(
         init: (CallbackFunction.() -> Unit)?,
         vararg signature: Parameter
     ): CallbackType {
-        val callback = CallbackFunction(this@NativeClass.module, className, nativeType, returns, *signature)
+        val callback = CallbackFunction(this@NativeClass.module, className, nativeType, returns, *(
+            if (signature.size == 1 && signature[0].nativeType === void) {
+                emptyArray()
+            } else {
+                signature
+            }
+        ))
         if (init != null)
             callback.init()
         callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, see, since) }

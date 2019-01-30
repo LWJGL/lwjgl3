@@ -26,7 +26,7 @@ class CallbackFunction internal constructor(
     var additionalCode = ""
 
     internal fun nativeType(name: String, separator: String = ", ", prefix: String = "", postfix: String = "") =
-        "${returns.name} (*$name) (${signature.asSequence()
+        "${returns.name} (*$name) (${if (signature.isEmpty()) "void" else signature.asSequence()
             .joinToString(separator, prefix = prefix, postfix = postfix) { param ->
                 param.toNativeType(null).let {
                     if (it.endsWith('*')) {
@@ -39,8 +39,8 @@ class CallbackFunction internal constructor(
         })"
 
     internal val nativeType = if (nativeType === ANONYMOUS)
-        "${returns.name} (*) (${
-        signature.asSequence().joinToString(", ") { it.toNativeType(null) }
+        "${returns.name} (*) (${if (signature.isEmpty()) "void" else signature.asSequence()
+            .joinToString(", ") { it.toNativeType(null) }
         })"
     else
         nativeType
@@ -192,11 +192,11 @@ import static org.lwjgl.system.MemoryUtil.*;
         print(HEADER)
         println("package $packageName;\n")
 
-        print("""import org.lwjgl.system.*;
+        println("import org.lwjgl.system.*;\n")
+        if (signature.isNotEmpty()) {
+            println("import static org.lwjgl.system.dyncall.DynCallback.*;\n")
+        }
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
-
-""")
         generateDocumentation(false)
         print("""@FunctionalInterface
 @NativeType("$nativeType")
@@ -214,12 +214,10 @@ ${access.modifier}interface ${className}I extends CallbackI.${returns.jniSignatu
         """)
         if (returns.mapping != TypeMapping.VOID)
             print("return ")
-        print("""invoke(
-${javaSignature.map {
+        print("""invoke(${if (javaSignature.none()) "" else javaSignature.joinToString(",\n", prefix = "\n", postfix = "\n$t$t") {
             val arg = "dcbArg${it.nativeType.argType}(args)${if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN4) " != 0" else ""}"
             "$t$t$t${if (it.nativeType is StructType) "${it.nativeType.definition.className}.create($arg)" else arg}"
-        }.joinToString(",\n")}
-        );
+        }});
     }
 """)
         val doc = functionDoc(this@CallbackFunction)
