@@ -705,7 +705,7 @@ class NativeClass internal constructor(
         since: String,
         init: (CallbackFunction.() -> Unit)?,
         vararg signature: Parameter
-    ): CallbackType {
+    ): FunctionType {
         val callback = CallbackFunction(this@NativeClass.module, className, nativeType, returns, *(
             if (signature.size == 1 && signature[0].nativeType === void) {
                 emptyArray()
@@ -718,7 +718,7 @@ class NativeClass internal constructor(
         callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, see, since) }
         Generator.register(callback)
         Generator.register(CallbackInterface(callback))
-        return CallbackType(callback)
+        return FunctionType(callback)
     }
 
     fun AutoSize(reference: String, vararg dependent: String, factor: AutoSizeFactor? = null) =

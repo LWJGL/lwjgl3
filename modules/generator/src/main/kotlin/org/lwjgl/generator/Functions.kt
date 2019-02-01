@@ -182,7 +182,7 @@ class Func(
             if (it is PointerType<*>) {
                 if (it.elementType is StructType && hasParam { param -> param.has<AutoSizeResultParam>() })
                     "${it.javaMethodType}.Buffer"
-                else if (it is CallbackType)
+                else if (it is FunctionType)
                     it.className
                 else
                     it.javaMethodType
@@ -255,11 +255,11 @@ class Func(
         }
 
     private fun Parameter.asNativeMethodArgument(mode: GenerationMode) = when {
-        nativeType.dereference is StructType || nativeType is ObjectType
+        nativeType.dereference is StructType || nativeType is WrappedPointerType
                                                          ->
             if (has(nullable))
                 "memAddressSafe($name)"
-            else if (nativeType is ObjectType && hasUnsafeMethod && nativeClass.binding!!.apiCapabilities === APICapabilities.PARAM_CAPABILITIES)
+            else if (nativeType is WrappedPointerType && hasUnsafeMethod && nativeClass.binding!!.apiCapabilities === APICapabilities.PARAM_CAPABILITIES)
                 name
             else
                 "$name.$ADDRESS"
@@ -276,7 +276,7 @@ class Func(
     }
 
     private val Parameter.isFunctionProvider
-        get() = nativeType is ObjectType && nativeClass.binding != null && nativeClass.binding.apiCapabilities === APICapabilities.PARAM_CAPABILITIES
+        get() = nativeType is WrappedPointerType && nativeClass.binding != null && nativeClass.binding.apiCapabilities === APICapabilities.PARAM_CAPABILITIES
 
     /** Validates parameters with modifiers that reference other parameters. */
     private fun validate() {
@@ -416,7 +416,7 @@ class Func(
             if (it.nativeType === va_list && i != parameters.lastIndex)
                 it.error("The va_list type can only be used on the last parameter of a function")
 
-            if (it.nativeType is CallbackType && !it.nativeType.function.skipNative) {
+            if (it.nativeType is FunctionType && !it.nativeType.function.skipNative) {
                 if (!hasReferenceFor<UserData>(it)) {
                     it.error("Missing UserData parameter for callback parameter: ${it.name}")
                 }
@@ -432,7 +432,7 @@ class Func(
                 val callbackParam = paramMap[callbackParamName]
                 if (callbackParam == null) {
                     it.error("Callback reference does not exist: UserData($callbackParamName)")
-                } else if (callbackParam.nativeType !is CallbackType) {
+                } else if (callbackParam.nativeType !is FunctionType) {
                     it.error("UserData reference must be a callback parameter: UserData($callbackParamName)")
                 }
                 Expression(
@@ -484,7 +484,7 @@ class Func(
         // First pass
         getNativeParams().forEach {
             if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER) {
-                if (!it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType && transforms?.get(it) !is SkipCheckFunctionTransform)
+                if (!it.has(nullable) && !hasUnsafeMethod && it.nativeType !is WrappedPointerType && transforms?.get(it) !is SkipCheckFunctionTransform)
                     checks.add("check(${it.name});")
                 return@forEach
             }
@@ -781,7 +781,7 @@ class Func(
             if (has<DependsOn>() || has<IgnoreMissing>() || binding.shouldCheckFunctionAddress(this@Func))
                 checks.add("check($FUNCTION_ADDRESS);")
             getNativeParams().forEach {
-                if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType)
+                if (it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is WrappedPointerType)
                     checks.add("check(${it.name});")
                 else if (it.isInput && it.nativeType.hasStructValidation)
                     checks.add(
@@ -1057,8 +1057,8 @@ class Func(
         hasFinally: Boolean,
         printParams: PrintWriter.() -> Unit
     ) {
-        val returnsObject = returns.nativeType is ObjectType
-        val returnType = if (returnsObject) (returns.nativeType as ObjectType).className else returns.nativeMethodType
+        val returnsObject = returns.nativeType is WrappedPointerType
+        val returnType = if (returnsObject) (returns.nativeType as WrappedPointerType).className else returns.nativeMethodType
 
         if (hasFinally)
             print(t)
@@ -1412,11 +1412,11 @@ class Func(
                 } else {
                     transforms[it] = SingleValueTransform(
                         when (pointerType.elementType) {
-                            is CharSequenceType -> "CharSequence"
-                            is ObjectType       -> pointerType.elementType.className
-                            is StructType       -> it.javaMethodType
-                            is PointerType<*>   -> "long"
-                            else                -> pointerType.elementType.javaMethodType
+                            is CharSequenceType   -> "CharSequence"
+                            is WrappedPointerType -> pointerType.elementType.className
+                            is StructType         -> it.javaMethodType
+                            is PointerType<*>     -> "long"
+                            else                  -> pointerType.elementType.javaMethodType
                         },
                         pointerType.mapping.box.toLowerCase(),
                         singleValue.newName

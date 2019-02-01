@@ -78,8 +78,8 @@ class AutoSizeIndirect(
 object NullableMember : StructMemberModifier {
     override val isSpecial = true
     override fun validate(member: StructMember) {
-        if (member.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The nullable modifier can only be applied to pointer members.")
+        if (member.nativeType !is PointerType<*> && !(member.nativeType is CArrayType<*> && member.nativeType.elementType is PointerType<*>))
+            throw IllegalArgumentException("The nullable modifier can only be applied to pointer or pointer array members.")
     }
 }
 

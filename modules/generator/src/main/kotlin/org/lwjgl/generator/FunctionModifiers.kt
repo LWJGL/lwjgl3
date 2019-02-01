@@ -175,7 +175,7 @@ class Construct(
 ) : FunctionModifier {
     override val isSpecial = true
     override fun validate(func: Func) {
-        if (func.returns.nativeType !is ObjectType)
+        if (func.returns.nativeType !is WrappedPointerType)
             throw IllegalArgumentException("The Construct modifier can only be applied to functions with object return types.")
     }
 }

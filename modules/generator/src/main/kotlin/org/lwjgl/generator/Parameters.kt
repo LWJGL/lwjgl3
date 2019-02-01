@@ -10,7 +10,7 @@ interface QualifiedType {
 }
 
 internal val QualifiedType.hasUnsafe
-    get() = (nativeType is PointerType<*> && (nativeType.mapping !== PointerMapping.OPAQUE_POINTER || nativeType is CallbackType)) || nativeType is StructType
+    get() = (nativeType is PointerType<*> && (nativeType.mapping !== PointerMapping.OPAQUE_POINTER || nativeType is FunctionType)) || nativeType is StructType
 
 internal val QualifiedType.isBufferPointer
     get() = nativeType.let { it is PointerType<*> && it.mapping !== PointerMapping.OPAQUE_POINTER && it.elementType !is StructType }
@@ -83,7 +83,7 @@ class Parameter(
 
     internal val isSpecial
         get() = hasUnsafe || when (nativeType.mapping) {
-            PointerMapping.OPAQUE_POINTER -> (nativeType is ObjectType || !has(nullable)) && this !== JNI_ENV
+            PointerMapping.OPAQUE_POINTER -> (nativeType is WrappedPointerType || !has(nullable)) && this !== JNI_ENV
             PrimitiveMapping.BOOLEAN4     -> true
             else                          -> false
         } || modifiers.any { it.value.isSpecial }

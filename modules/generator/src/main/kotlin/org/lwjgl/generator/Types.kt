@@ -9,26 +9,29 @@ import java.nio.*
 import kotlin.reflect.*
 
 /*
-Type hierarchy:
+Type system (- interface * concrete):
 ---------------
-- NativeType (interface: root)
-- BaseType (abstract: root)
+- NativeType (root)
+- BaseType (root)
     * VoidType
     * OpaqueType (cannot be used directly, must be wrapped in PointerType)
-    - DataType (interface: types that can be used as parameters or struct members)
-        - ValueType (interface: passed by-value)
+    - DataType (types with known layout that can be used as parameters or struct members)
+        - ScalarType
             * PrimitiveType
                 * IntegerType
                 * CharType
+            * PointerType (mapped to raw pointer)
+        - AggregateType
+            * CArrayType
             * StructType (mapped to struct class)
-        - ReferenceType (interface: passed by-reference)
-            * JObjectType (only type passed as Java object to JNI)
-            * PointerType (mapped to raw pointer or buffer)
+        - ReferenceType
+            * JObjectType (only type passed as jobject to JNI)
+            * PointerType (mapped to a java.nio buffer class)
                 * ArrayType (mapped to java array)
                 * CharSequenceType (mapped to String/CharSequence)
-                * ObjectType (mapped to a Java class)
-                    * CallbackType (mapped to callback interface)
-                    * C++ classes (if we add support in the future)
+                * WrappedPointerType (mapped to a Java class)
+                    * FunctionType (mapped to a callback interface)
+                    * TODO: C++ classes
 */
 interface NativeType {
     /** The type used in the native API. */
@@ -39,10 +42,11 @@ interface NativeType {
     val p : PointerType<out NativeType>
     val const : NativeType
 }
-// These interfaces simplify some implementation details and the DSL
-interface DataType : NativeType
-    interface ValueType : DataType
-    interface ReferenceType : DataType
+// These interfaces simplify some implementation details and the DSL.
+interface DataType : NativeType // (all types except void & opaque types, i.e. types with known data layout)
+interface ScalarType : DataType // arithmetic & pointer types
+interface AggregateType : DataType // arrays & structs/unions
+interface ReferenceType : DataType // Mapped to a Java class in the Java API
 
 /** Base implementation of all concrete types */
 abstract class BaseType internal constructor(
@@ -56,14 +60,23 @@ abstract class BaseType internal constructor(
         "${this::class.java.simpleName}: $name | $jniFunctionType | $nativeMethodType | $javaMethodType"
 }
 
+// void
 class VoidType internal constructor(name: String) : BaseType(name, TypeMapping.VOID) {
     override val p by lazy { PointerType(name, PointerMapping.DATA_BYTE, elementType = this) }
     override val const by lazy { VoidType(this.name.const) }
 }
 val String.void: VoidType get() = VoidType(this)
 
+// Opaque types
+class OpaqueType internal constructor(name: String) : BaseType(name, TypeMapping.VOID) {
+    override val p by lazy { PointerType(this.name, PointerMapping.OPAQUE_POINTER, elementType = this) }
+    override val const by lazy { OpaqueType(this.name.const) }
+}
+val String.opaque get() = OpaqueType(this)
+val String.handle get() = typedef(this.opaque.p, this)
+
 // Specialization for primitives.
-open class PrimitiveType(name: String, mapping: PrimitiveMapping) : BaseType(name, mapping), ValueType {
+open class PrimitiveType(name: String, mapping: PrimitiveMapping) : BaseType(name, mapping), ScalarType {
     override val mapping: PrimitiveMapping get() = super.mapping as PrimitiveMapping
     override val p: PointerType<out PrimitiveType> by lazy { PointerType(this.name, this.mapping.toPointer, elementType = this) }
     override val const by lazy { PrimitiveType(this.name.const, this.mapping) }
@@ -85,13 +98,32 @@ class CharType(name: String, mapping: CharMapping) : PrimitiveType(name, mapping
     override val const by lazy { CharType(this.name.const, this.mapping) }
 }
 
+// Arrays
+class CArrayType<T : DataType> internal constructor(
+    name: String,
+    val elementType: T,
+    val dimensions: Array<String>
+) : BaseType(name, elementType.mapping), AggregateType {
+    /*override val p by lazy {
+        PointerType("${elementType.name}(*)[$size]", PointerMapping.DATA_POINTER, elementType = this, includesPointer = true)
+    }*/
+    override val p: PointerType<out NativeType> get() { throw UnsupportedOperationException() }
+    override val const: NativeType get() { throw UnsupportedOperationException() }
+
+    val size: String get() = dimensions.joinToString(" * ")
+}
+operator fun <T : DataType> T.get(size: Int) = this[size.toString()]
+operator fun <T : DataType> T.get(size: String) = CArrayType<T>(this.name, this, arrayOf(size))
+operator fun <T : DataType> CArrayType<T>.get(size: Int) = this[size.toString()]
+operator fun <T : DataType> CArrayType<T>.get(size: String) = CArrayType<T>(this.name, this.elementType, this.dimensions + size)
+
 // Structs
 class StructType internal constructor(
     /** The struct size in bytes. */
     val definition: Struct,
     /** The type used in the native API. */
     name: String = definition.nativeName
-) : BaseType(name, PrimitiveMapping.POINTER), ValueType {
+) : BaseType(name, PrimitiveMapping.POINTER), AggregateType {
     override val javaMethodType
         get() = definition.className
     override val p by lazy { PointerType(this.name, PointerMapping.DATA_POINTER, elementType = this) }
@@ -100,7 +132,7 @@ class StructType internal constructor(
 
 // Java instance passed as jobject to native code
 class JObjectType(name: String, type: KClass<*>) : BaseType(name, TypeMapping(name, type, type)), ReferenceType {
-    override val p: PointerType<JObjectType> get() { throw UnsupportedOperationException() }
+    override val p: PointerType<out NativeType> get() { throw UnsupportedOperationException() }
     override val const: NativeType get() { throw UnsupportedOperationException() }
 }
 val KClass<*>.jobject: JObjectType get() = JObjectType("jobject", this)
@@ -122,7 +154,7 @@ open class PointerType<T : NativeType> internal constructor(
         else               -> "$name *"
     },
     mapping
-), ReferenceType {
+), ScalarType, ReferenceType {
     override val mapping: PointerMapping get() = super.mapping as PointerMapping
     override val javaMethodType: String
         get() = if (elementType is StructType)
@@ -139,14 +171,6 @@ internal val NativeType.dereference get() = (if (this is PointerType<*>) this.el
 internal val NativeType.hasStructValidation
     get() = dereference.let { it is StructType && it.definition.validations.any() }
 
-// Opaque types
-class OpaqueType internal constructor(name: String) : BaseType(name, TypeMapping.VOID) {
-    override val p by lazy { PointerType(this.name, PointerMapping.OPAQUE_POINTER, includesPointer = false, elementType = this) }
-    override val const by lazy { OpaqueType(this.name.const) }
-}
-val String.opaque get() = OpaqueType(this)
-val String.handle get() = typedef(this.opaque.p, this)
-
 // Strings
 class CharSequenceType internal constructor(
     /** The type used in the native API. */
@@ -162,7 +186,7 @@ class CharSequenceType internal constructor(
     override val const by lazy { CharSequenceType(this.name.const, this.mapping, true, elementType) }
 }
 
-// Arrays (automatically used for array overloads)
+// Java arrays (automatically used for array overloads)
 class ArrayType<T : NativeType>(
     type: PointerType<T>,
     mapping: PointerMapping = type.mapping
@@ -183,8 +207,8 @@ class ArrayType<T : NativeType>(
     }
 }
 
-// Objects (org.lwjgl.system.Pointer subclasses)
-open class ObjectType(
+// Pointers wrapped in Java classes
+open class WrappedPointerType(
     /** The Java wrapper class. */
     val className: String,
     /** The type used in the native API. */
@@ -194,22 +218,23 @@ open class ObjectType(
 ) : PointerType<OpaqueType>(name, PointerMapping.OPAQUE_POINTER, includesPointer, elementType = name.opaque) {
     override val javaMethodType
         get() = className
-    override val const by lazy { ObjectType(className, name.const) }
+    override val const by lazy { WrappedPointerType(className, name.const) }
 }
 
-// Callbacks
-class CallbackType internal constructor(
+// Function types (callbacks)
+class FunctionType internal constructor(
     val function: CallbackFunction,
     name: String = function.nativeType
-) : ObjectType(function.className, name) {
+) : WrappedPointerType(function.className, name) {
     override val javaMethodType
         get() = "${super.javaMethodType}I"
-    override val const by lazy { CallbackType(function, name.const) }
+    override val const by lazy { FunctionType(function, name.const) }
 }
 
 // typedefs
 fun typedef(typedef: PrimitiveType, name: String) = PrimitiveType(name, typedef.mapping)
 fun typedef(typedef: IntegerType, name: String) = IntegerType(name, typedef.mapping, typedef.unsigned)
+fun <T: DataType> typedef(typedef: CArrayType<T>, name: String) = CArrayType(name, typedef.elementType, typedef.dimensions)
 fun <T: NativeType> typedef(typedef: PointerType<T>, name: String) = PointerType(name, typedef.mapping, true, typedef.elementType)
 fun typedef(typedef: CharSequenceType, name: String) = CharSequenceType(name, typedef.mapping, true, typedef.elementType)
 
@@ -369,13 +394,16 @@ internal val NativeType.jniSignatureJava
     else
         ""
 
-internal fun NativeType.annotation(type: String, arraySize: String? = null): String? {
-    return if (type == name)
-        null
-    else
-        "@NativeType(\"$name${if (arraySize == null) "" else "[$arraySize]"}\")"
-}
-internal fun NativeType.annotate(type: String, arraySize: String? = null) = annotation(type, arraySize).let {
+internal fun NativeType.annotation(type: String) = if (type == name)
+    null
+else
+    "@NativeType(\"$name${if (this !is CArrayType<*>) "" else this
+        .dimensions
+        .joinToString("") {
+            "[$it]"
+        }
+    }\")"
+internal fun NativeType.annotate(type: String) = annotation(type).let {
     if (it == null)
         type
     else
@@ -395,7 +423,7 @@ internal val NativeType.isPointerData
     get() = this is PointerType<*> && this.mapping !== PointerMapping.OPAQUE_POINTER
 
 internal val NativeType.isReference
-    get() = this is ReferenceType && (this.mapping !== PointerMapping.OPAQUE_POINTER || this is ObjectType)
+    get() = this is ReferenceType && (this.mapping !== PointerMapping.OPAQUE_POINTER || this is WrappedPointerType)
 
 internal val NativeType.isPointerSize
     get() = this.mapping === PointerMapping.DATA_INT || this.mapping === PointerMapping.DATA_POINTER

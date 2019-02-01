@@ -112,7 +112,7 @@ enum class Module(
     @Suppress("LeakingThis")
     private val CALLBACK_RECEIVER = ANONYMOUS.nativeClass(this)
 
-    fun callback(init: NativeClass.() -> CallbackType) = CALLBACK_RECEIVER.init()
+    fun callback(init: NativeClass.() -> FunctionType) = CALLBACK_RECEIVER.init()
 }
 
 fun String.dependsOn(vararg modules: Module): String? = if (modules.any { it.enabled }) this else null
