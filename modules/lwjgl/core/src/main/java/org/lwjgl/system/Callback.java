@@ -186,11 +186,12 @@ public abstract class Callback implements Pointer, NativeResource {
      */
     public static void free(long functionPointer) {
         DeleteGlobalRef(dcbGetUserData(functionPointer));
-        dcbFreeCallback(functionPointer);
 
         if (DEBUG_ALLOCATOR) {
             MemoryManage.DebugAllocator.untrack(functionPointer);
         }
+
+        dcbFreeCallback(functionPointer);
     }
 
     public boolean equals(Object o) {
