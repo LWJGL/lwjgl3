@@ -333,11 +333,10 @@ private fun CXCursor.parseStructMembers(context: ExtractionContext, structName: 
                     CXType_ConstantArray -> {
                         members.add(
                             structMember(
-                                clang_getElementType(type, CXType.mallocStack(stack)).lwjgl,
+                                clang_getElementType(type, CXType.mallocStack(stack)).lwjgl.arrayDimension(clang_getArraySize(type)),
                                 name,
                                 doc,
-                                indent,
-                                size = clang_getArraySize(type).toString()
+                                indent
                             )
                         )
                     }
@@ -352,7 +351,7 @@ private fun CXCursor.parseStructMembers(context: ExtractionContext, structName: 
     return "${attributes.joinToString("\n", postfix = if (attributes.isEmpty()) "" else "\n$indent") { "// $it" }}${members.joinToString("\n$indent")}"
 }
 
-private fun structMember(type: String, name: String, doc: Documentation, indent: String, size: String? = null): String {
+private fun structMember(type: String, name: String, doc: Documentation, indent: String): String {
     val memberDoc = doc.doc.let { memberDoc ->
         if (memberDoc.isEmpty()) {
             ""
@@ -363,26 +362,27 @@ private fun structMember(type: String, name: String, doc: Documentation, indent:
         }
     }
 
-    val array = if (size == null) {
-        ""
+    val elementType: String
+    val arrayDimensions: String
+
+    val arrayIndex = type.indexOf('[')
+    if (arrayIndex == -1) {
+        elementType = type
+        arrayDimensions = ""
     } else {
-        val sizei = size.toIntOrNull()
-        if (sizei == null) {
-            "[\"$size\"]"
-        } else {
-            "[$sizei]"
-        }
+        elementType = type.substring(0, arrayIndex)
+        arrayDimensions = type.substring(arrayIndex)
     }
 
-    return if (!memberDoc.contains('\n') && type.lastIndexOf('\n').let {
+    return if (!memberDoc.contains('\n') && elementType.lastIndexOf('\n').let {
             if (it == -1)
-                type.length + indent.length
+                elementType.length + indent.length
             else
-                type.length - it
-        } + 2 + name.length + 4 + memberDoc.length + 2 + array.length < 160)
-        "$type(\"$name\", \"$memberDoc\")$array"
+                elementType.length - it
+        } + 2 + name.length + 4 + memberDoc.length + 2 + arrayDimensions.length < 160)
+        "$elementType(\"$name\", \"$memberDoc\")$arrayDimensions"
     else {
-        "$type(\n$indent$t\"$name\",\n$indent$t${memberDoc.formatDocumentation("$indent$t")}\n$indent)$array"
+        "$elementType(\n$indent$t\"$name\",\n$indent$t${memberDoc.formatDocumentation("$indent$t")}\n$indent)$arrayDimensions"
     }
 }
 
@@ -629,7 +629,7 @@ private val CXType.lwjgl: String
             //CXType_FunctionNoProto ->
             //CXType_FunctionProto ->
             // TODO: curand.h - typedef unsigned int curandDirectionVectors32_t[32];
-            CXType_ConstantArray   -> "${clang_getElementType(this, CXType.mallocStack(stack)).lwjgl}.p"
+            CXType_ConstantArray   -> clang_getElementType(this, CXType.mallocStack(stack)).lwjgl.arrayDimension(clang_getArraySize(this))
             //CXType_Vector ->
             CXType_IncompleteArray -> "${clang_getElementType(this, CXType.mallocStack(stack)).lwjgl}.p"
             //CXType_VariableArray ->
@@ -659,3 +659,12 @@ private val CXType.lwjgl: String
                 it
             }
         }
+
+private fun String.arrayDimension(size: Long) = this.indexOf('[').let {
+    if (it == -1) {
+        "$this[$size]"
+    } else {
+        // types are visited depth-first, so the new dimension must be prepended
+        "${this.substring(0, it)}[$size]${this.substring(it)}"
+    }
+}
