@@ -16,35 +16,35 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
 ) {
     documentation = ""
 
-    void(
+    IgnoreMissing..void(
         "AddAggressiveInstCombinerPass",
         "See {@code llvm::createAggressiveInstCombinerPass} function.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddCoroEarlyPass",
         "See {@code llvm::createCoroEarlyPass} function.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddCoroSplitPass",
         "See {@code llvm::createCoroSplitPass} function.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddCoroElidePass",
         "See {@code llvm::createCoroElidePass} function.",
 
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddCoroCleanupPass",
         "See {@code llvm::createCoroCleanupPass} function.",
 
@@ -72,7 +72,7 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddCalledValuePropagationPass",
         "See {@code llvm::createCalledValuePropagationPass} function.",
 
@@ -371,7 +371,7 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLoopUnrollAndJamPass",
         "See {@code llvm::createLoopUnrollAndJamPass} function.",
 
@@ -385,7 +385,7 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLowerAtomicPass",
         "See {@code llvm::createLowerAtomicPass} function.",
 
@@ -526,7 +526,7 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddUnifyFunctionExitNodesPass",
         "See {@code llvm::createUnifyFunctionExitNodesPass} function",
 

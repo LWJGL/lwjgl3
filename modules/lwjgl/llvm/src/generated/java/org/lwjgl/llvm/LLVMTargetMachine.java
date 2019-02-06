@@ -126,9 +126,9 @@ public class LLVMTargetMachine {
             TargetMachineEmitToFile         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToFile"),
             TargetMachineEmitToMemoryBuffer = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToMemoryBuffer"),
             GetDefaultTargetTriple          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetDefaultTargetTriple"),
-            NormalizeTargetTriple           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMNormalizeTargetTriple"),
-            GetHostCPUName                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetHostCPUName"),
-            GetHostCPUFeatures              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetHostCPUFeatures"),
+            NormalizeTargetTriple           = LLVMCore.getLibrary().getFunctionAddress("LLVMNormalizeTargetTriple"),
+            GetHostCPUName                  = LLVMCore.getLibrary().getFunctionAddress("LLVMGetHostCPUName"),
+            GetHostCPUFeatures              = LLVMCore.getLibrary().getFunctionAddress("LLVMGetHostCPUFeatures"),
             AddAnalysisPasses               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddAnalysisPasses");
 
     }
@@ -516,6 +516,9 @@ public class LLVMTargetMachine {
     /** Unsafe version of: {@link #LLVMNormalizeTargetTriple NormalizeTargetTriple} */
     public static long nLLVMNormalizeTargetTriple(long triple) {
         long __functionAddress = Functions.NormalizeTargetTriple;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePP(__functionAddress, triple);
     }
 
@@ -550,6 +553,9 @@ public class LLVMTargetMachine {
     /** Unsafe version of: {@link #LLVMGetHostCPUName GetHostCPUName} */
     public static long nLLVMGetHostCPUName() {
         long __functionAddress = Functions.GetHostCPUName;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokeP(__functionAddress);
     }
 
@@ -566,6 +572,9 @@ public class LLVMTargetMachine {
     /** Unsafe version of: {@link #LLVMGetHostCPUFeatures GetHostCPUFeatures} */
     public static long nLLVMGetHostCPUFeatures() {
         long __functionAddress = Functions.GetHostCPUFeatures;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokeP(__functionAddress);
     }
 

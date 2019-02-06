@@ -1734,7 +1734,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         returnDoc = "a bitmask of options, a bitwise OR of {@code CXGlobalOpt_XXX} flags that are associated with the given {@code CXIndex} object"
     )
 
-    void(
+    IgnoreMissing..void(
         "CXIndex_setInvocationEmissionPathOption",
         """
         Sets the invocation emission path option in a {@code CXIndex}.
@@ -1793,7 +1793,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         "the file handle for the named file in the translation unit {@code tu}, or a #NULL file handle if the file was not a part of this translation unit"
     )
 
-    char.const.p(
+    IgnoreMissing..char.const.p(
         "getFileContents",
         "Retrieve the buffer associated with the given file.",
 
@@ -1812,7 +1812,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         nullable..CXFile("file2", "")
     )
 
-    CXString(
+    IgnoreMissing..CXString(
         "File_tryGetRealPathName",
         """
         Returns the real path name of {@code file}.
@@ -2657,7 +2657,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         CXCursorKind("kind", "")
     )
 
-    unsignedb(
+    IgnoreMissing..unsignedb(
         "isInvalidDeclaration",
         """
         Determine whether the given declaration is invalid.
@@ -2821,7 +2821,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         CXCursor("cursor", "")
     )
 
-    CXTLSKind(
+    IgnoreMissing..CXTLSKind(
         "getCursorTLSKind",
         "Determine the \"thread-local storage (TLS) kind\" of the declaration referred to by a cursor.",
 
@@ -3411,7 +3411,7 @@ void foo <float , 2147483649, true>();""")}
         unsigned("i", "")
     )
 
-    CXType(
+    IgnoreMissing..CXType(
         "Type_getObjCObjectBaseType",
         """
         Retrieves the base type of the {@code ObjCObjectType}.
@@ -3422,7 +3422,7 @@ void foo <float , 2147483649, true>();""")}
         CXType("T", "")
     )
 
-    unsigned(
+    IgnoreMissing..unsigned(
         "Type_getNumObjCProtocolRefs",
         """
         Retrieve the number of protocol references associated with an ObjC object/id.
@@ -3433,7 +3433,7 @@ void foo <float , 2147483649, true>();""")}
         CXType("T", "")
     )
 
-    CXCursor(
+    IgnoreMissing..CXCursor(
         "Type_getObjCProtocolDecl",
         """
         Retrieve the decl for a protocol reference for an ObjC object/id.
@@ -3445,7 +3445,7 @@ void foo <float , 2147483649, true>();""")}
         unsigned("i", "")
     )
 
-    unsigned(
+    IgnoreMissing..unsigned(
         "Type_getNumObjCTypeArgs",
         """
         Retreive the number of type arguments associated with an ObjC object.
@@ -3456,7 +3456,7 @@ void foo <float , 2147483649, true>();""")}
         CXType("T", "")
     )
 
-    CXType(
+    IgnoreMissing..CXType(
         "Type_getObjCTypeArg",
         """
         Retrieve a type argument associated with an ObjC object.
@@ -3573,7 +3573,7 @@ void foo <float , 2147483649, true>();""")}
         returnDoc = "non-zero if transparent and zero otherwise"
     )
 
-    CXTypeNullabilityKind(
+    IgnoreMissing..CXTypeNullabilityKind(
         "Type_getNullability",
         "Retrieve the nullability kind of a pointer type.",
 
@@ -3631,7 +3631,7 @@ void foo <float , 2147483649, true>();""")}
         charUTF8.const.p("S", "")
     )
 
-    CXType(
+    IgnoreMissing..CXType(
         "Type_getModifiedType",
         """
         Return the type that was modified by this attributed type.
@@ -3863,7 +3863,7 @@ void foo <float , 2147483649, true>();""")}
         unsigned("options", "reserved")
     )
 
-    unsigned(
+    IgnoreMissing..unsigned(
         "PrintingPolicy_getProperty",
         "Get a property value for the given printing policy.",
 
@@ -3871,7 +3871,7 @@ void foo <float , 2147483649, true>();""")}
         CXPrintingPolicyProperty("Property", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "PrintingPolicy_setProperty",
         "Set a property value for the given printing policy.",
 
@@ -3880,7 +3880,7 @@ void foo <float , 2147483649, true>();""")}
         unsigned("Value", "")
     )
 
-    CXPrintingPolicy(
+    IgnoreMissing..CXPrintingPolicy(
         "getCursorPrintingPolicy",
         """
         Retrieve the default policy for the cursor.
@@ -3891,14 +3891,14 @@ void foo <float , 2147483649, true>();""")}
         CXCursor("cursor", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "PrintingPolicy_dispose",
         "Release a printing policy.",
 
         CXPrintingPolicy("Policy", "")
     )
 
-    CXString(
+    IgnoreMissing..CXString(
         "getCursorPrettyPrinted",
         "Pretty print declarations.",
 
@@ -4035,14 +4035,14 @@ void foo <float , 2147483649, true>();""")}
         unsigned("reserved", "reserved for future use, pass 0")
     )
 
-    CXString(
+    IgnoreMissing..CXString(
         "Cursor_getObjCPropertyGetterName",
         "Given a cursor that represents a property declaration, return the name of the method that implements the getter.",
 
         CXCursor("C", "")
     )
 
-    CXString(
+    IgnoreMissing..CXString(
         "Cursor_getObjCPropertySetterName",
         "Given a cursor that represents a property declaration, return the name of the method that implements the setter, if any.",
 
@@ -4131,7 +4131,7 @@ void foo <float , 2147483649, true>();""")}
         CXCursor("cursor", "")
     )
 
-    CXStringSet.p(
+    IgnoreMissing..CXStringSet.p(
         "Cursor_getObjCManglings",
         "Retrieve the {@code CXString}s representing the mangled symbols of the ObjC class interface or implementation at the cursor.",
 
@@ -4285,7 +4285,7 @@ void foo <float , 2147483649, true>();""")}
         CXCursor("C", "")
     )
 
-    unsignedb(
+    IgnoreMissing..unsignedb(
         "CXXRecord_isAbstract",
         "Determine if a C++ record is abstract, i.e. whether a class or struct has a pure virtual member function.",
 
@@ -4375,7 +4375,7 @@ void foo <float , 2147483649, true>();""")}
         """
     )
 
-    CXToken.p(
+    IgnoreMissing..CXToken.p(
         "getToken",
         "Get the raw lexical token starting with the given location.",
 
@@ -4618,7 +4618,7 @@ void foo <float , 2147483649, true>();""")}
         returnDoc = "a non-context-sensitive completion string for declaration and macro definition cursors, or #NULL for other kinds of cursors"
     )
 
-    unsigned(
+    IgnoreMissing..unsigned(
         "getCompletionNumFixIts",
         """
         Retrieve the number of fix-its for the given completion index.
@@ -4632,7 +4632,7 @@ void foo <float , 2147483649, true>();""")}
         returnDoc = "the number of fix-its which must be applied before the completion at {@code completion_index} can be applied"
     )
 
-    CXString(
+    IgnoreMissing..CXString(
         "getCompletionFixIt",
         """
         Fix-its that <b>must</b> be applied before inserting the text for the corresponding completion.

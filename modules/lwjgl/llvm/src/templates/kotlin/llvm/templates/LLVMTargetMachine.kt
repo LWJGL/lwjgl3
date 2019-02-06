@@ -222,21 +222,21 @@ val LLVMTargetMachine = "LLVMTargetMachine".nativeClass(
         void()
     )
 
-    charUTF8.p(
+    IgnoreMissing..charUTF8.p(
         "NormalizeTargetTriple",
         "Normalize a target triple. The result needs to be disposed with #DisposeMessage().",
 
         charUTF8.const.p("triple", "")
     )
 
-    charUTF8.p(
+    IgnoreMissing..charUTF8.p(
         "GetHostCPUName",
         "Get the host CPU as a string. The result needs to be disposed with #DisposeMessage().",
 
         void()
     )
 
-    charUTF8.p(
+    IgnoreMissing..charUTF8.p(
         "GetHostCPUFeatures",
         "Get the host CPU's features as a string. The result needs to be disposed with #DisposeMessage().",
 

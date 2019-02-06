@@ -756,7 +756,7 @@ typedef struct {
         noPrefix = true
     )
 
-    void(
+    IgnoreMissing..void(
         "thinlto_codegen_set_cache_size_bytes",
         """
         Sets the maximum size of the cache directory (in bytes). A value over the amount of available space on the disk will be reduced to the amount of
@@ -769,7 +769,7 @@ typedef struct {
         noPrefix = true
     )
 
-    void(
+    IgnoreMissing..void(
         "thinlto_codegen_set_cache_size_megabytes",
         "Same as #thinlto_codegen_set_cache_size_bytes(), except the maximum size is in megabytes (2<sup>20</sup> bytes).",
 
@@ -779,7 +779,7 @@ typedef struct {
         noPrefix = true
     )
 
-    void(
+    IgnoreMissing..void(
         "thinlto_codegen_set_cache_size_files",
         "Sets the maximum number of files in the cache directory. An unspecified default value will be applied. A value of 0 will be ignored.",
 

@@ -24,15 +24,15 @@ public class LLVMTransforms {
 
         /** Function address. */
         public static final long
-            AddAggressiveInstCombinerPass                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddAggressiveInstCombinerPass"),
-            AddCoroEarlyPass                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddCoroEarlyPass"),
-            AddCoroSplitPass                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddCoroSplitPass"),
-            AddCoroElidePass                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddCoroElidePass"),
-            AddCoroCleanupPass                            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddCoroCleanupPass"),
+            AddAggressiveInstCombinerPass                 = LLVMCore.getLibrary().getFunctionAddress("LLVMAddAggressiveInstCombinerPass"),
+            AddCoroEarlyPass                              = LLVMCore.getLibrary().getFunctionAddress("LLVMAddCoroEarlyPass"),
+            AddCoroSplitPass                              = LLVMCore.getLibrary().getFunctionAddress("LLVMAddCoroSplitPass"),
+            AddCoroElidePass                              = LLVMCore.getLibrary().getFunctionAddress("LLVMAddCoroElidePass"),
+            AddCoroCleanupPass                            = LLVMCore.getLibrary().getFunctionAddress("LLVMAddCoroCleanupPass"),
             AddInstructionCombiningPass                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddInstructionCombiningPass"),
             AddArgumentPromotionPass                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddArgumentPromotionPass"),
             AddConstantMergePass                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddConstantMergePass"),
-            AddCalledValuePropagationPass                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddCalledValuePropagationPass"),
+            AddCalledValuePropagationPass                 = LLVMCore.getLibrary().getFunctionAddress("LLVMAddCalledValuePropagationPass"),
             AddDeadArgEliminationPass                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddDeadArgEliminationPass"),
             AddFunctionAttrsPass                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddFunctionAttrsPass"),
             AddFunctionInliningPass                       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddFunctionInliningPass"),
@@ -73,9 +73,9 @@ public class LLVMTransforms {
             AddLoopRotatePass                             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLoopRotatePass"),
             AddLoopRerollPass                             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLoopRerollPass"),
             AddLoopUnrollPass                             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLoopUnrollPass"),
-            AddLoopUnrollAndJamPass                       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLoopUnrollAndJamPass"),
+            AddLoopUnrollAndJamPass                       = LLVMCore.getLibrary().getFunctionAddress("LLVMAddLoopUnrollAndJamPass"),
             AddLoopUnswitchPass                           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLoopUnswitchPass"),
-            AddLowerAtomicPass                            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLowerAtomicPass"),
+            AddLowerAtomicPass                            = LLVMCore.getLibrary().getFunctionAddress("LLVMAddLowerAtomicPass"),
             AddMemCpyOptPass                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddMemCpyOptPass"),
             AddPartiallyInlineLibCallsPass                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddPartiallyInlineLibCallsPass"),
             AddReassociatePass                            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddReassociatePass"),
@@ -95,7 +95,7 @@ public class LLVMTransforms {
             AddTypeBasedAliasAnalysisPass                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddTypeBasedAliasAnalysisPass"),
             AddScopedNoAliasAAPass                        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddScopedNoAliasAAPass"),
             AddBasicAliasAnalysisPass                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddBasicAliasAnalysisPass"),
-            AddUnifyFunctionExitNodesPass                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddUnifyFunctionExitNodesPass"),
+            AddUnifyFunctionExitNodesPass                 = LLVMCore.getLibrary().getFunctionAddress("LLVMAddUnifyFunctionExitNodesPass"),
             AddLowerSwitchPass                            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLowerSwitchPass"),
             AddPromoteMemoryToRegisterPass                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddPromoteMemoryToRegisterPass"),
             AddLoopVectorizePass                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLoopVectorizePass"),
@@ -109,6 +109,7 @@ public class LLVMTransforms {
     public static void LLVMAddAggressiveInstCombinerPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddAggressiveInstCombinerPass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(__functionAddress, PM);
@@ -120,6 +121,7 @@ public class LLVMTransforms {
     public static void LLVMAddCoroEarlyPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCoroEarlyPass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(__functionAddress, PM);
@@ -131,6 +133,7 @@ public class LLVMTransforms {
     public static void LLVMAddCoroSplitPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCoroSplitPass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(__functionAddress, PM);
@@ -142,6 +145,7 @@ public class LLVMTransforms {
     public static void LLVMAddCoroElidePass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCoroElidePass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(__functionAddress, PM);
@@ -153,6 +157,7 @@ public class LLVMTransforms {
     public static void LLVMAddCoroCleanupPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCoroCleanupPass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(__functionAddress, PM);
@@ -197,6 +202,7 @@ public class LLVMTransforms {
     public static void LLVMAddCalledValuePropagationPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCalledValuePropagationPass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(__functionAddress, PM);
@@ -648,6 +654,7 @@ public class LLVMTransforms {
     public static void LLVMAddLoopUnrollAndJamPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLoopUnrollAndJamPass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(__functionAddress, PM);
@@ -670,6 +677,7 @@ public class LLVMTransforms {
     public static void LLVMAddLowerAtomicPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLowerAtomicPass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(__functionAddress, PM);
@@ -890,6 +898,7 @@ public class LLVMTransforms {
     public static void LLVMAddUnifyFunctionExitNodesPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddUnifyFunctionExitNodesPass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(__functionAddress, PM);

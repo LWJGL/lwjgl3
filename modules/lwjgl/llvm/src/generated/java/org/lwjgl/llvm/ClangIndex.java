@@ -2303,15 +2303,15 @@ public class ClangIndex {
             disposeIndex                            = apiGetFunctionAddress(CLANG, "clang_disposeIndex"),
             CXIndex_setGlobalOptions                = apiGetFunctionAddress(CLANG, "clang_CXIndex_setGlobalOptions"),
             CXIndex_getGlobalOptions                = apiGetFunctionAddress(CLANG, "clang_CXIndex_getGlobalOptions"),
-            CXIndex_setInvocationEmissionPathOption = apiGetFunctionAddress(CLANG, "clang_CXIndex_setInvocationEmissionPathOption"),
+            CXIndex_setInvocationEmissionPathOption = CLANG.getFunctionAddress("clang_CXIndex_setInvocationEmissionPathOption"),
             getFileName                             = apiGetFunctionAddress(CLANG, "clang_getFileName"),
             getFileTime                             = apiGetFunctionAddress(CLANG, "clang_getFileTime"),
             getFileUniqueID                         = apiGetFunctionAddress(CLANG, "clang_getFileUniqueID"),
             isFileMultipleIncludeGuarded            = apiGetFunctionAddress(CLANG, "clang_isFileMultipleIncludeGuarded"),
             getFile                                 = apiGetFunctionAddress(CLANG, "clang_getFile"),
-            getFileContents                         = apiGetFunctionAddress(CLANG, "clang_getFileContents"),
+            getFileContents                         = CLANG.getFunctionAddress("clang_getFileContents"),
             File_isEqual                            = apiGetFunctionAddress(CLANG, "clang_File_isEqual"),
-            File_tryGetRealPathName                 = apiGetFunctionAddress(CLANG, "clang_File_tryGetRealPathName"),
+            File_tryGetRealPathName                 = CLANG.getFunctionAddress("clang_File_tryGetRealPathName"),
             getNullLocation                         = apiGetFunctionAddress(CLANG, "clang_getNullLocation"),
             equalLocations                          = apiGetFunctionAddress(CLANG, "clang_equalLocations"),
             getLocation                             = apiGetFunctionAddress(CLANG, "clang_getLocation"),
@@ -2380,7 +2380,7 @@ public class ClangIndex {
             hashCursor                              = apiGetFunctionAddress(CLANG, "clang_hashCursor"),
             getCursorKind                           = apiGetFunctionAddress(CLANG, "clang_getCursorKind"),
             isDeclaration                           = apiGetFunctionAddress(CLANG, "clang_isDeclaration"),
-            isInvalidDeclaration                    = apiGetFunctionAddress(CLANG, "clang_isInvalidDeclaration"),
+            isInvalidDeclaration                    = CLANG.getFunctionAddress("clang_isInvalidDeclaration"),
             isReference                             = apiGetFunctionAddress(CLANG, "clang_isReference"),
             isExpression                            = apiGetFunctionAddress(CLANG, "clang_isExpression"),
             isStatement                             = apiGetFunctionAddress(CLANG, "clang_isStatement"),
@@ -2396,7 +2396,7 @@ public class ClangIndex {
             getCursorPlatformAvailability           = apiGetFunctionAddress(CLANG, "clang_getCursorPlatformAvailability"),
             disposeCXPlatformAvailability           = apiGetFunctionAddress(CLANG, "clang_disposeCXPlatformAvailability"),
             getCursorLanguage                       = apiGetFunctionAddress(CLANG, "clang_getCursorLanguage"),
-            getCursorTLSKind                        = apiGetFunctionAddress(CLANG, "clang_getCursorTLSKind"),
+            getCursorTLSKind                        = CLANG.getFunctionAddress("clang_getCursorTLSKind"),
             Cursor_getTranslationUnit               = apiGetFunctionAddress(CLANG, "clang_Cursor_getTranslationUnit"),
             createCXCursorSet                       = apiGetFunctionAddress(CLANG, "clang_createCXCursorSet"),
             disposeCXCursorSet                      = apiGetFunctionAddress(CLANG, "clang_disposeCXCursorSet"),
@@ -2444,11 +2444,11 @@ public class ClangIndex {
             getExceptionSpecificationType           = apiGetFunctionAddress(CLANG, "clang_getExceptionSpecificationType"),
             getNumArgTypes                          = apiGetFunctionAddress(CLANG, "clang_getNumArgTypes"),
             getArgType                              = apiGetFunctionAddress(CLANG, "clang_getArgType"),
-            Type_getObjCObjectBaseType              = apiGetFunctionAddress(CLANG, "clang_Type_getObjCObjectBaseType"),
-            Type_getNumObjCProtocolRefs             = apiGetFunctionAddress(CLANG, "clang_Type_getNumObjCProtocolRefs"),
-            Type_getObjCProtocolDecl                = apiGetFunctionAddress(CLANG, "clang_Type_getObjCProtocolDecl"),
-            Type_getNumObjCTypeArgs                 = apiGetFunctionAddress(CLANG, "clang_Type_getNumObjCTypeArgs"),
-            Type_getObjCTypeArg                     = apiGetFunctionAddress(CLANG, "clang_Type_getObjCTypeArg"),
+            Type_getObjCObjectBaseType              = CLANG.getFunctionAddress("clang_Type_getObjCObjectBaseType"),
+            Type_getNumObjCProtocolRefs             = CLANG.getFunctionAddress("clang_Type_getNumObjCProtocolRefs"),
+            Type_getObjCProtocolDecl                = CLANG.getFunctionAddress("clang_Type_getObjCProtocolDecl"),
+            Type_getNumObjCTypeArgs                 = CLANG.getFunctionAddress("clang_Type_getNumObjCTypeArgs"),
+            Type_getObjCTypeArg                     = CLANG.getFunctionAddress("clang_Type_getObjCTypeArg"),
             isFunctionTypeVariadic                  = apiGetFunctionAddress(CLANG, "clang_isFunctionTypeVariadic"),
             getCursorResultType                     = apiGetFunctionAddress(CLANG, "clang_getCursorResultType"),
             getCursorExceptionSpecificationType     = apiGetFunctionAddress(CLANG, "clang_getCursorExceptionSpecificationType"),
@@ -2459,12 +2459,12 @@ public class ClangIndex {
             getArraySize                            = apiGetFunctionAddress(CLANG, "clang_getArraySize"),
             Type_getNamedType                       = apiGetFunctionAddress(CLANG, "clang_Type_getNamedType"),
             Type_isTransparentTagTypedef            = apiGetFunctionAddress(CLANG, "clang_Type_isTransparentTagTypedef"),
-            Type_getNullability                     = apiGetFunctionAddress(CLANG, "clang_Type_getNullability"),
+            Type_getNullability                     = CLANG.getFunctionAddress("clang_Type_getNullability"),
             Type_getAlignOf                         = apiGetFunctionAddress(CLANG, "clang_Type_getAlignOf"),
             Type_getClassType                       = apiGetFunctionAddress(CLANG, "clang_Type_getClassType"),
             Type_getSizeOf                          = apiGetFunctionAddress(CLANG, "clang_Type_getSizeOf"),
             Type_getOffsetOf                        = apiGetFunctionAddress(CLANG, "clang_Type_getOffsetOf"),
-            Type_getModifiedType                    = apiGetFunctionAddress(CLANG, "clang_Type_getModifiedType"),
+            Type_getModifiedType                    = CLANG.getFunctionAddress("clang_Type_getModifiedType"),
             Cursor_getOffsetOfField                 = apiGetFunctionAddress(CLANG, "clang_Cursor_getOffsetOfField"),
             Cursor_isAnonymous                      = apiGetFunctionAddress(CLANG, "clang_Cursor_isAnonymous"),
             Type_getNumTemplateArguments            = apiGetFunctionAddress(CLANG, "clang_Type_getNumTemplateArguments"),
@@ -2487,11 +2487,11 @@ public class ClangIndex {
             constructUSR_ObjCProperty               = apiGetFunctionAddress(CLANG, "clang_constructUSR_ObjCProperty"),
             getCursorSpelling                       = apiGetFunctionAddress(CLANG, "clang_getCursorSpelling"),
             Cursor_getSpellingNameRange             = apiGetFunctionAddress(CLANG, "clang_Cursor_getSpellingNameRange"),
-            PrintingPolicy_getProperty              = apiGetFunctionAddress(CLANG, "clang_PrintingPolicy_getProperty"),
-            PrintingPolicy_setProperty              = apiGetFunctionAddress(CLANG, "clang_PrintingPolicy_setProperty"),
-            getCursorPrintingPolicy                 = apiGetFunctionAddress(CLANG, "clang_getCursorPrintingPolicy"),
-            PrintingPolicy_dispose                  = apiGetFunctionAddress(CLANG, "clang_PrintingPolicy_dispose"),
-            getCursorPrettyPrinted                  = apiGetFunctionAddress(CLANG, "clang_getCursorPrettyPrinted"),
+            PrintingPolicy_getProperty              = CLANG.getFunctionAddress("clang_PrintingPolicy_getProperty"),
+            PrintingPolicy_setProperty              = CLANG.getFunctionAddress("clang_PrintingPolicy_setProperty"),
+            getCursorPrintingPolicy                 = CLANG.getFunctionAddress("clang_getCursorPrintingPolicy"),
+            PrintingPolicy_dispose                  = CLANG.getFunctionAddress("clang_PrintingPolicy_dispose"),
+            getCursorPrettyPrinted                  = CLANG.getFunctionAddress("clang_getCursorPrettyPrinted"),
             getCursorDisplayName                    = apiGetFunctionAddress(CLANG, "clang_getCursorDisplayName"),
             getCursorReferenced                     = apiGetFunctionAddress(CLANG, "clang_getCursorReferenced"),
             getCursorDefinition                     = apiGetFunctionAddress(CLANG, "clang_getCursorDefinition"),
@@ -2501,8 +2501,8 @@ public class ClangIndex {
             Cursor_isDynamicCall                    = apiGetFunctionAddress(CLANG, "clang_Cursor_isDynamicCall"),
             Cursor_getReceiverType                  = apiGetFunctionAddress(CLANG, "clang_Cursor_getReceiverType"),
             Cursor_getObjCPropertyAttributes        = apiGetFunctionAddress(CLANG, "clang_Cursor_getObjCPropertyAttributes"),
-            Cursor_getObjCPropertyGetterName        = apiGetFunctionAddress(CLANG, "clang_Cursor_getObjCPropertyGetterName"),
-            Cursor_getObjCPropertySetterName        = apiGetFunctionAddress(CLANG, "clang_Cursor_getObjCPropertySetterName"),
+            Cursor_getObjCPropertyGetterName        = CLANG.getFunctionAddress("clang_Cursor_getObjCPropertyGetterName"),
+            Cursor_getObjCPropertySetterName        = CLANG.getFunctionAddress("clang_Cursor_getObjCPropertySetterName"),
             Cursor_getObjCDeclQualifiers            = apiGetFunctionAddress(CLANG, "clang_Cursor_getObjCDeclQualifiers"),
             Cursor_isObjCOptional                   = apiGetFunctionAddress(CLANG, "clang_Cursor_isObjCOptional"),
             Cursor_isVariadic                       = apiGetFunctionAddress(CLANG, "clang_Cursor_isVariadic"),
@@ -2512,7 +2512,7 @@ public class ClangIndex {
             Cursor_getBriefCommentText              = apiGetFunctionAddress(CLANG, "clang_Cursor_getBriefCommentText"),
             Cursor_getMangling                      = apiGetFunctionAddress(CLANG, "clang_Cursor_getMangling"),
             Cursor_getCXXManglings                  = apiGetFunctionAddress(CLANG, "clang_Cursor_getCXXManglings"),
-            Cursor_getObjCManglings                 = apiGetFunctionAddress(CLANG, "clang_Cursor_getObjCManglings"),
+            Cursor_getObjCManglings                 = CLANG.getFunctionAddress("clang_Cursor_getObjCManglings"),
             Cursor_getModule                        = apiGetFunctionAddress(CLANG, "clang_Cursor_getModule"),
             getModuleForFile                        = apiGetFunctionAddress(CLANG, "clang_getModuleForFile"),
             Module_getASTFile                       = apiGetFunctionAddress(CLANG, "clang_Module_getASTFile"),
@@ -2531,13 +2531,13 @@ public class ClangIndex {
             CXXMethod_isPureVirtual                 = apiGetFunctionAddress(CLANG, "clang_CXXMethod_isPureVirtual"),
             CXXMethod_isStatic                      = apiGetFunctionAddress(CLANG, "clang_CXXMethod_isStatic"),
             CXXMethod_isVirtual                     = apiGetFunctionAddress(CLANG, "clang_CXXMethod_isVirtual"),
-            CXXRecord_isAbstract                    = apiGetFunctionAddress(CLANG, "clang_CXXRecord_isAbstract"),
+            CXXRecord_isAbstract                    = CLANG.getFunctionAddress("clang_CXXRecord_isAbstract"),
             EnumDecl_isScoped                       = apiGetFunctionAddress(CLANG, "clang_EnumDecl_isScoped"),
             CXXMethod_isConst                       = apiGetFunctionAddress(CLANG, "clang_CXXMethod_isConst"),
             getTemplateCursorKind                   = apiGetFunctionAddress(CLANG, "clang_getTemplateCursorKind"),
             getSpecializedCursorTemplate            = apiGetFunctionAddress(CLANG, "clang_getSpecializedCursorTemplate"),
             getCursorReferenceNameRange             = apiGetFunctionAddress(CLANG, "clang_getCursorReferenceNameRange"),
-            getToken                                = apiGetFunctionAddress(CLANG, "clang_getToken"),
+            getToken                                = CLANG.getFunctionAddress("clang_getToken"),
             getTokenKind                            = apiGetFunctionAddress(CLANG, "clang_getTokenKind"),
             getTokenSpelling                        = apiGetFunctionAddress(CLANG, "clang_getTokenSpelling"),
             getTokenLocation                        = apiGetFunctionAddress(CLANG, "clang_getTokenLocation"),
@@ -2560,8 +2560,8 @@ public class ClangIndex {
             getCompletionParent                     = apiGetFunctionAddress(CLANG, "clang_getCompletionParent"),
             getCompletionBriefComment               = apiGetFunctionAddress(CLANG, "clang_getCompletionBriefComment"),
             getCursorCompletionString               = apiGetFunctionAddress(CLANG, "clang_getCursorCompletionString"),
-            getCompletionNumFixIts                  = apiGetFunctionAddress(CLANG, "clang_getCompletionNumFixIts"),
-            getCompletionFixIt                      = apiGetFunctionAddress(CLANG, "clang_getCompletionFixIt"),
+            getCompletionNumFixIts                  = CLANG.getFunctionAddress("clang_getCompletionNumFixIts"),
+            getCompletionFixIt                      = CLANG.getFunctionAddress("clang_getCompletionFixIt"),
             defaultCodeCompleteOptions              = apiGetFunctionAddress(CLANG, "clang_defaultCodeCompleteOptions"),
             codeCompleteAt                          = apiGetFunctionAddress(CLANG, "clang_codeCompleteAt"),
             sortCodeCompletionResults               = apiGetFunctionAddress(CLANG, "clang_sortCodeCompletionResults"),
@@ -2767,6 +2767,7 @@ public class ClangIndex {
     public static void nclang_CXIndex_setInvocationEmissionPathOption(long index, long Path) {
         long __functionAddress = Functions.CXIndex_setInvocationEmissionPathOption;
         if (CHECKS) {
+            check(__functionAddress);
             check(index);
         }
         invokePPV(__functionAddress, index, Path);
@@ -2930,6 +2931,7 @@ public class ClangIndex {
     public static long nclang_getFileContents(long tu, long file, long size) {
         long __functionAddress = Functions.getFileContents;
         if (CHECKS) {
+            check(__functionAddress);
             check(tu);
             check(file);
         }
@@ -2975,6 +2977,7 @@ public class ClangIndex {
     public static void nclang_File_tryGetRealPathName(long file, long __result) {
         long __functionAddress = Functions.File_tryGetRealPathName;
         if (CHECKS) {
+            check(__functionAddress);
             check(file);
         }
         nclang_File_tryGetRealPathName(__functionAddress, file, __result);
@@ -4571,6 +4574,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_isInvalidDeclaration isInvalidDeclaration} */
     public static int nclang_isInvalidDeclaration(long cursor) {
         long __functionAddress = Functions.isInvalidDeclaration;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePI(__functionAddress, cursor);
     }
 
@@ -4806,6 +4812,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCursorTLSKind getCursorTLSKind} */
     public static int nclang_getCursorTLSKind(long cursor) {
         long __functionAddress = Functions.getCursorTLSKind;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePI(__functionAddress, cursor);
     }
 
@@ -5786,6 +5795,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getObjCObjectBaseType Type_getObjCObjectBaseType} */
     public static void nclang_Type_getObjCObjectBaseType(long T, long __result) {
         long __functionAddress = Functions.Type_getObjCObjectBaseType;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         nclang_Type_getObjCObjectBaseType(__functionAddress, T, __result);
     }
 
@@ -5804,6 +5816,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getNumObjCProtocolRefs Type_getNumObjCProtocolRefs} */
     public static int nclang_Type_getNumObjCProtocolRefs(long T) {
         long __functionAddress = Functions.Type_getNumObjCProtocolRefs;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePI(__functionAddress, T);
     }
 
@@ -5825,6 +5840,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getObjCProtocolDecl Type_getObjCProtocolDecl} */
     public static void nclang_Type_getObjCProtocolDecl(long T, int i, long __result) {
         long __functionAddress = Functions.Type_getObjCProtocolDecl;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         nclang_Type_getObjCProtocolDecl(__functionAddress, T, i, __result);
     }
 
@@ -5843,6 +5861,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getNumObjCTypeArgs Type_getNumObjCTypeArgs} */
     public static int nclang_Type_getNumObjCTypeArgs(long T) {
         long __functionAddress = Functions.Type_getNumObjCTypeArgs;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePI(__functionAddress, T);
     }
 
@@ -5864,6 +5885,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getObjCTypeArg Type_getObjCTypeArg} */
     public static void nclang_Type_getObjCTypeArg(long T, int i, long __result) {
         long __functionAddress = Functions.Type_getObjCTypeArg;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         nclang_Type_getObjCTypeArg(__functionAddress, T, i, __result);
     }
 
@@ -6068,6 +6092,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getNullability Type_getNullability} */
     public static int nclang_Type_getNullability(long T) {
         long __functionAddress = Functions.Type_getNullability;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePI(__functionAddress, T);
     }
 
@@ -6189,6 +6216,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getModifiedType Type_getModifiedType} */
     public static void nclang_Type_getModifiedType(long T, long __result) {
         long __functionAddress = Functions.Type_getModifiedType;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         nclang_Type_getModifiedType(__functionAddress, T, __result);
     }
 
@@ -6712,6 +6742,7 @@ public class ClangIndex {
     public static int clang_PrintingPolicy_getProperty(@NativeType("CXPrintingPolicy") long Policy, @NativeType("enum CXPrintingPolicyProperty") int Property) {
         long __functionAddress = Functions.PrintingPolicy_getProperty;
         if (CHECKS) {
+            check(__functionAddress);
             check(Policy);
         }
         return invokePI(__functionAddress, Policy, Property);
@@ -6723,6 +6754,7 @@ public class ClangIndex {
     public static void clang_PrintingPolicy_setProperty(@NativeType("CXPrintingPolicy") long Policy, @NativeType("enum CXPrintingPolicyProperty") int Property, @NativeType("unsigned") int Value) {
         long __functionAddress = Functions.PrintingPolicy_setProperty;
         if (CHECKS) {
+            check(__functionAddress);
             check(Policy);
         }
         invokePV(__functionAddress, Policy, Property, Value);
@@ -6733,6 +6765,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCursorPrintingPolicy getCursorPrintingPolicy} */
     public static long nclang_getCursorPrintingPolicy(long cursor) {
         long __functionAddress = Functions.getCursorPrintingPolicy;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePP(__functionAddress, cursor);
     }
 
@@ -6752,6 +6787,7 @@ public class ClangIndex {
     public static void clang_PrintingPolicy_dispose(@NativeType("CXPrintingPolicy") long Policy) {
         long __functionAddress = Functions.PrintingPolicy_dispose;
         if (CHECKS) {
+            check(__functionAddress);
             check(Policy);
         }
         invokePV(__functionAddress, Policy);
@@ -6766,6 +6802,7 @@ public class ClangIndex {
     public static void nclang_getCursorPrettyPrinted(long Cursor, long Policy, long __result) {
         long __functionAddress = Functions.getCursorPrettyPrinted;
         if (CHECKS) {
+            check(__functionAddress);
             check(Policy);
         }
         nclang_getCursorPrettyPrinted(__functionAddress, Cursor, Policy, __result);
@@ -6995,6 +7032,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getObjCPropertyGetterName Cursor_getObjCPropertyGetterName} */
     public static void nclang_Cursor_getObjCPropertyGetterName(long C, long __result) {
         long __functionAddress = Functions.Cursor_getObjCPropertyGetterName;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         nclang_Cursor_getObjCPropertyGetterName(__functionAddress, C, __result);
     }
 
@@ -7012,6 +7052,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getObjCPropertySetterName Cursor_getObjCPropertySetterName} */
     public static void nclang_Cursor_getObjCPropertySetterName(long C, long __result) {
         long __functionAddress = Functions.Cursor_getObjCPropertySetterName;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         nclang_Cursor_getObjCPropertySetterName(__functionAddress, C, __result);
     }
 
@@ -7190,6 +7233,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getObjCManglings Cursor_getObjCManglings} */
     public static long nclang_Cursor_getObjCManglings(long cursor) {
         long __functionAddress = Functions.Cursor_getObjCManglings;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePP(__functionAddress, cursor);
     }
 
@@ -7491,6 +7537,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_CXXRecord_isAbstract CXXRecord_isAbstract} */
     public static int nclang_CXXRecord_isAbstract(long C) {
         long __functionAddress = Functions.CXXRecord_isAbstract;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePI(__functionAddress, C);
     }
 
@@ -7619,6 +7668,7 @@ public class ClangIndex {
     public static long nclang_getToken(long TU, long Location) {
         long __functionAddress = Functions.getToken;
         if (CHECKS) {
+            check(__functionAddress);
             check(TU);
         }
         return invokePPP(__functionAddress, TU, Location);
@@ -8091,6 +8141,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCompletionNumFixIts getCompletionNumFixIts} */
     public static int nclang_getCompletionNumFixIts(long results, int completion_index) {
         long __functionAddress = Functions.getCompletionNumFixIts;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePI(__functionAddress, results, completion_index);
     }
 
@@ -8117,6 +8170,9 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCompletionFixIt getCompletionFixIt} */
     public static void nclang_getCompletionFixIt(long results, int completion_index, int fixit_index, long replacement_range, long __result) {
         long __functionAddress = Functions.getCompletionFixIt;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         nclang_getCompletionFixIt(__functionAddress, results, completion_index, fixit_index, replacement_range, __result);
     }
 

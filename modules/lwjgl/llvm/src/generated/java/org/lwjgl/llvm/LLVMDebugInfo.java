@@ -367,7 +367,7 @@ public class LLVMDebugInfo {
             DIBuilderCreateParameterVariable           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateParameterVariable"),
             GetSubprogram                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetSubprogram"),
             SetSubprogram                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetSubprogram"),
-            GetMetadataKind                            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetMetadataKind");
+            GetMetadataKind                            = LLVMCore.getLibrary().getFunctionAddress("LLVMGetMetadataKind");
 
     }
 
@@ -2828,6 +2828,7 @@ public class LLVMDebugInfo {
     public static int LLVMGetMetadataKind(@NativeType("LLVMMetadataRef") long Metadata) {
         long __functionAddress = Functions.GetMetadataKind;
         if (CHECKS) {
+            check(__functionAddress);
             check(Metadata);
         }
         return invokePI(__functionAddress, Metadata);

@@ -1013,7 +1013,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         LLVMMetadataRef("SP", "")
     )
 
-    LLVMMetadataKind(
+    IgnoreMissing..LLVMMetadataKind(
         "GetMetadataKind",
         "Obtain the enumerated type of a Metadata instance.",
 

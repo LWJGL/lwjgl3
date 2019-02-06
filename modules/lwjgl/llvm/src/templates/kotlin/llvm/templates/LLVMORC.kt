@@ -106,7 +106,7 @@ val LLVMORC = "LLVMORC".nativeClass(
         opaque_p("SymbolResolverCtx", "")
     )
 
-    LLVMErrorRef(
+    IgnoreMissing..LLVMErrorRef(
         "OrcAddObjectFile",
         """
         Add an object file.
@@ -143,7 +143,7 @@ val LLVMORC = "LLVMORC".nativeClass(
         charUTF8.const.p("SymbolName", "")
     )
 
-    LLVMErrorRef(
+    IgnoreMissing..LLVMErrorRef(
         "OrcGetSymbolAddressIn",
         "Get symbol address from JIT instance, searching only the specified handle.",
 
@@ -160,7 +160,7 @@ val LLVMORC = "LLVMORC".nativeClass(
         LLVMOrcJITStackRef("JITStack", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "OrcRegisterJITEventListener",
         """
         Register a JIT Event Listener.
@@ -172,7 +172,7 @@ val LLVMORC = "LLVMORC".nativeClass(
         nullable..LLVMJITEventListenerRef("L", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "OrcUnregisterJITEventListener",
         """
         Unegister a JIT Event Listener.

@@ -29,8 +29,8 @@ public class LLVMInitialization {
             InitializeScalarOpts             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeScalarOpts"),
             InitializeObjCARCOpts            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeObjCARCOpts"),
             InitializeVectorization          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeVectorization"),
-            InitializeInstCombine            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeInstCombine"),
-            InitializeAggressiveInstCombiner = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeAggressiveInstCombiner"),
+            InitializeInstCombine            = LLVMCore.getLibrary().getFunctionAddress("LLVMInitializeInstCombine"),
+            InitializeAggressiveInstCombiner = LLVMCore.getLibrary().getFunctionAddress("LLVMInitializeAggressiveInstCombiner"),
             InitializeIPO                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeIPO"),
             InitializeInstrumentation        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeInstrumentation"),
             InitializeAnalysis               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMInitializeAnalysis"),
@@ -95,6 +95,7 @@ public class LLVMInitialization {
     public static void LLVMInitializeInstCombine(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeInstCombine;
         if (CHECKS) {
+            check(__functionAddress);
             check(R);
         }
         invokePV(__functionAddress, R);
@@ -105,6 +106,7 @@ public class LLVMInitialization {
     public static void LLVMInitializeAggressiveInstCombiner(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeAggressiveInstCombiner;
         if (CHECKS) {
+            check(__functionAddress);
             check(R);
         }
         invokePV(__functionAddress, R);

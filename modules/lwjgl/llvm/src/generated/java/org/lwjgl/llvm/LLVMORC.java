@@ -41,13 +41,13 @@ public class LLVMORC {
             OrcSetIndirectStubPointer     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcSetIndirectStubPointer"),
             OrcAddEagerlyCompiledIR       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcAddEagerlyCompiledIR"),
             OrcAddLazilyCompiledIR        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcAddLazilyCompiledIR"),
-            OrcAddObjectFile              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcAddObjectFile"),
+            OrcAddObjectFile              = LLVMCore.getLibrary().getFunctionAddress("LLVMOrcAddObjectFile"),
             OrcRemoveModule               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcRemoveModule"),
             OrcGetSymbolAddress           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcGetSymbolAddress"),
-            OrcGetSymbolAddressIn         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcGetSymbolAddressIn"),
+            OrcGetSymbolAddressIn         = LLVMCore.getLibrary().getFunctionAddress("LLVMOrcGetSymbolAddressIn"),
             OrcDisposeInstance            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcDisposeInstance"),
-            OrcRegisterJITEventListener   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcRegisterJITEventListener"),
-            OrcUnregisterJITEventListener = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcUnregisterJITEventListener");
+            OrcRegisterJITEventListener   = LLVMCore.getLibrary().getFunctionAddress("LLVMOrcRegisterJITEventListener"),
+            OrcUnregisterJITEventListener = LLVMCore.getLibrary().getFunctionAddress("LLVMOrcUnregisterJITEventListener");
 
     }
 
@@ -277,6 +277,7 @@ public class LLVMORC {
     public static long nLLVMOrcAddObjectFile(long JITStack, long RetHandle, long Obj, long SymbolResolver, long SymbolResolverCtx) {
         long __functionAddress = Functions.OrcAddObjectFile;
         if (CHECKS) {
+            check(__functionAddress);
             check(JITStack);
             check(Obj);
             check(SymbolResolverCtx);
@@ -357,6 +358,7 @@ public class LLVMORC {
     public static long nLLVMOrcGetSymbolAddressIn(long JITStack, long RetAddr, long H, long SymbolName) {
         long __functionAddress = Functions.OrcGetSymbolAddressIn;
         if (CHECKS) {
+            check(__functionAddress);
             check(JITStack);
         }
         return invokePPJPP(__functionAddress, JITStack, RetAddr, H, SymbolName);
@@ -410,6 +412,7 @@ public class LLVMORC {
     public static void LLVMOrcRegisterJITEventListener(@NativeType("LLVMOrcJITStackRef") long JITStack, @NativeType("LLVMJITEventListenerRef") long L) {
         long __functionAddress = Functions.OrcRegisterJITEventListener;
         if (CHECKS) {
+            check(__functionAddress);
             check(JITStack);
         }
         invokePPV(__functionAddress, JITStack, L);
@@ -425,6 +428,7 @@ public class LLVMORC {
     public static void LLVMOrcUnregisterJITEventListener(@NativeType("LLVMOrcJITStackRef") long JITStack, @NativeType("LLVMJITEventListenerRef") long L) {
         long __functionAddress = Functions.OrcUnregisterJITEventListener;
         if (CHECKS) {
+            check(__functionAddress);
             check(JITStack);
         }
         invokePPV(__functionAddress, JITStack, L);

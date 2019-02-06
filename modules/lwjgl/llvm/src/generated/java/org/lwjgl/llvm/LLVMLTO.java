@@ -203,9 +203,9 @@ public class LLVMLTO {
             thinlto_codegen_set_cache_pruning_interval                       = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cache_pruning_interval"),
             thinlto_codegen_set_final_cache_size_relative_to_available_space = apiGetFunctionAddress(LTO, "thinlto_codegen_set_final_cache_size_relative_to_available_space"),
             thinlto_codegen_set_cache_entry_expiration                       = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cache_entry_expiration"),
-            thinlto_codegen_set_cache_size_bytes                             = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cache_size_bytes"),
-            thinlto_codegen_set_cache_size_megabytes                         = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cache_size_megabytes"),
-            thinlto_codegen_set_cache_size_files                             = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cache_size_files");
+            thinlto_codegen_set_cache_size_bytes                             = LTO.getFunctionAddress("thinlto_codegen_set_cache_size_bytes"),
+            thinlto_codegen_set_cache_size_megabytes                         = LTO.getFunctionAddress("thinlto_codegen_set_cache_size_megabytes"),
+            thinlto_codegen_set_cache_size_files                             = LTO.getFunctionAddress("thinlto_codegen_set_cache_size_files");
 
     }
 
@@ -1630,6 +1630,7 @@ public class LLVMLTO {
     public static void thinlto_codegen_set_cache_size_bytes(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int max_size_bytes) {
         long __functionAddress = Functions.thinlto_codegen_set_cache_size_bytes;
         if (CHECKS) {
+            check(__functionAddress);
             check(cg);
         }
         invokePV(__functionAddress, cg, max_size_bytes);
@@ -1641,6 +1642,7 @@ public class LLVMLTO {
     public static void thinlto_codegen_set_cache_size_megabytes(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int max_size_megabytes) {
         long __functionAddress = Functions.thinlto_codegen_set_cache_size_megabytes;
         if (CHECKS) {
+            check(__functionAddress);
             check(cg);
         }
         invokePV(__functionAddress, cg, max_size_megabytes);
@@ -1652,6 +1654,7 @@ public class LLVMLTO {
     public static void thinlto_codegen_set_cache_size_files(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int max_size_files) {
         long __functionAddress = Functions.thinlto_codegen_set_cache_size_files;
         if (CHECKS) {
+            check(__functionAddress);
             check(cg);
         }
         invokePV(__functionAddress, cg, max_size_files);

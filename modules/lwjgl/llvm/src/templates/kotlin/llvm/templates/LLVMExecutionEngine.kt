@@ -307,7 +307,7 @@ LLVMCreateMCJITCompilerForModule(&jit, mod, 0, 0, &error);""")}
         LLVMMCJITMemoryManagerRef("MM", "")
     )
 
-    LLVMJITEventListenerRef("CreateGDBRegistrationListener", "", void())
+    IgnoreMissing..LLVMJITEventListenerRef("CreateGDBRegistrationListener", "", void())
     IgnoreMissing..LLVMJITEventListenerRef("CreateIntelJITEventListener", "", void())
     IgnoreMissing..LLVMJITEventListenerRef("CreateOprofileJITEventListener", "", void())
     IgnoreMissing..LLVMJITEventListenerRef("CreatePerfJITEventListener", "", void())

@@ -638,7 +638,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("Ident")..size_t("Len", "length of {@code Ident}")
     )
 
-    Nonnull..charUTF8.const.p(
+    IgnoreMissing..Nonnull..charUTF8.const.p(
         "GetSourceFileName",
         "Obtain the module's original source file name.",
 
@@ -648,7 +648,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         returnDoc = "the original source file name of {@code M}"
     )
 
-    void(
+    IgnoreMissing..void(
         "SetSourceFileName",
         "Set the original source file name of a module to a string {@code Name} with length {@code Len}.",
 
@@ -699,7 +699,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Triple", "")
     )
 
-    LLVMModuleFlagEntry.p(
+    IgnoreMissing..LLVMModuleFlagEntry.p(
         "CopyModuleFlagsMetadata",
         """
         Returns the module flags as an array of flag-key-value triples. The caller is responsible for freeing this array by calling {@code
@@ -710,14 +710,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         Check(1)..size_t.p("Len", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "DisposeModuleFlagsMetadata",
         "Destroys module flags metadata entries.",
 
         LLVMModuleFlagEntry.p("Entries", "")
     )
 
-    LLVMModuleFlagBehavior(
+    IgnoreMissing..LLVMModuleFlagBehavior(
         "ModuleFlagEntriesGetFlagBehavior",
         "Returns the flag behavior for a module flag entry at a specific index.",
 
@@ -725,7 +725,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         unsigned_int("Index", "")
     )
 
-    Nonnull..charUTF8.const.p(
+    IgnoreMissing..Nonnull..charUTF8.const.p(
         "ModuleFlagEntriesGetKey",
         "Returns the key for a module flag entry at a specific index.",
 
@@ -734,7 +734,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSizeResult..size_t.p("Len", "")
     )
 
-    LLVMMetadataRef(
+    IgnoreMissing..LLVMMetadataRef(
         "ModuleFlagEntriesGetMetadata",
         "Returns the metadata for a module flag entry at a specific index.",
 
@@ -742,7 +742,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         unsigned_int("Index", "")
     )
 
-    LLVMMetadataRef(
+    IgnoreMissing..LLVMMetadataRef(
         "GetModuleFlag",
         "Add a module-level flag to the module-level flags metadata if it doesn't already exist.",
 
@@ -751,7 +751,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("Key")..size_t("KeyLen", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddModuleFlag",
         "Add a module-level flag to the module-level flags metadata if it doesn't already exist.",
 
@@ -787,7 +787,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMModuleRef("M", "")
     )
 
-    Nonnull..charUTF8.const.p(
+    IgnoreMissing..Nonnull..charUTF8.const.p(
         "GetModuleInlineAsm",
         "Get inline assembly for a module.",
 
@@ -795,7 +795,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSizeResult..size_t.p("Len", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "SetModuleInlineAsm2",
         "Set inline assembly for a module.",
 
@@ -804,7 +804,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("Asm")..size_t("Len", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AppendModuleInlineAsm",
         "Append inline assembly to a module.",
 
@@ -813,7 +813,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("Asm")..size_t("Len", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "GetInlineAsm",
         "Create the specified uniqued inline asm string.",
 
@@ -842,21 +842,21 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
-    LLVMNamedMDNodeRef(
+    IgnoreMissing..LLVMNamedMDNodeRef(
         "GetFirstNamedMetadata",
         "Obtain an iterator to the first {@code NamedMDNode} in a {@code Module}.",
 
         LLVMModuleRef("M", "")
     )
 
-    LLVMNamedMDNodeRef(
+    IgnoreMissing..LLVMNamedMDNodeRef(
         "GetLastNamedMetadata",
         "Obtain an iterator to the last {@code NamedMDNode} in a {@code Module}.",
 
         LLVMModuleRef("M", "")
     )
 
-    LLVMNamedMDNodeRef(
+    IgnoreMissing..LLVMNamedMDNodeRef(
         "GetNextNamedMetadata",
         """
         Advance a {@code NamedMDNode} iterator to the next {@code NamedMDNode}.
@@ -867,7 +867,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMNamedMDNodeRef("NamedMDNode", "")
     )
 
-    LLVMNamedMDNodeRef(
+    IgnoreMissing..LLVMNamedMDNodeRef(
         "GetPreviousNamedMetadata",
         """
         Decrement a {@code NamedMDNode} iterator to the previous {@code NamedMDNode}.
@@ -878,7 +878,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMNamedMDNodeRef("NamedMDNode", "")
     )
 
-    LLVMNamedMDNodeRef(
+    IgnoreMissing..LLVMNamedMDNodeRef(
         "GetNamedMetadata",
         "Retrieve a {@code NamedMDNode} with the given name, returning #NULL if no such node exists.",
 
@@ -887,7 +887,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("Name")..size_t("NameLen", "")
     )
 
-    LLVMNamedMDNodeRef(
+    IgnoreMissing..LLVMNamedMDNodeRef(
         "GetOrInsertNamedMetadata",
         "Retrieve a {@code NamedMDNode} with the given name, creating a new node if no such node exists.",
 
@@ -896,7 +896,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("Name")..size_t("NameLen", "")
     )
 
-    Nonnull..charUTF8.const.p(
+    IgnoreMissing..Nonnull..charUTF8.const.p(
         "GetNamedMetadataName",
         "Retrieve the name of a {@code NamedMDNode}.",
 
@@ -937,7 +937,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Val", "")
     )
 
-    charUTF8.const.p(
+    IgnoreMissing..charUTF8.const.p(
         "GetDebugLocDirectory",
         """
         Return the directory of the debug location for this value, which must be an {@code llvm::Instruction}, {@code llvm::GlobalVariable}, or
@@ -948,7 +948,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSizeResult..unsigned_int.p("Length", "")
     )
 
-    charUTF8.const.p(
+    IgnoreMissing..charUTF8.const.p(
         "GetDebugLocFilename",
         """
         Return the filename of the debug location for this value, which must be an {@code llvm::Instruction}, {@code llvm::GlobalVariable}, or
@@ -959,7 +959,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSizeResult..unsigned_int.p("Length", "")
     )
 
-    unsigned_int(
+    IgnoreMissing..unsigned_int(
         "GetDebugLocLine",
         """
         Return the line number of the debug location for this value, which must be an {@code llvm::Instruction}, {@code llvm::GlobalVariable}, or
@@ -969,7 +969,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Val", "")
     )
 
-    unsigned_int(
+    IgnoreMissing..unsigned_int(
         "GetDebugLocColumn",
         "Return the column number of the debug location for this value, which must be an {@code llvm::Instruction}.",
 
@@ -1033,7 +1033,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Fn", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "SetModuleInlineAsm",
         "Deprecated: Use #SetModuleInlineAsm2() instead.",
 
@@ -1066,7 +1066,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMTypeRef("Ty", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "DumpType",
         "Dump a representation of a type to {@code stderr}.",
 
@@ -1352,7 +1352,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMTypeRef("StructTy", "")
     )
 
-    LLVMBool(
+    IgnoreMissing..LLVMBool(
         "IsLiteralStruct",
         "Determine whether a structure is literal.",
 
@@ -1475,14 +1475,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMContextRef("C", "")
     )
 
-    LLVMTypeRef(
+    IgnoreMissing..LLVMTypeRef(
         "TokenTypeInContext",
         "Create a token type in a context.",
 
         LLVMContextRef("C", "")
     )
 
-    LLVMTypeRef(
+    IgnoreMissing..LLVMTypeRef(
         "MetadataTypeInContext",
         "Create a metadata type in a context.",
 
@@ -1512,7 +1512,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Val", "")
     )
 
-    Nonnull..charUTF8.const.p(
+    IgnoreMissing..Nonnull..charUTF8.const.p(
         "GetValueName2",
         "Obtain the string name of a value.",
 
@@ -1520,7 +1520,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSizeResult..size_t.p("Length", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "SetValueName2",
         "Set the string name of a value.",
 
@@ -1565,6 +1565,11 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Val", "")
     )
 
+    val postLLVM5 = setOf(
+        "GlobalIFunc",
+        "DbgVariableIntrinsic",
+        "DbgLabelInst"
+    )
     arrayOf(
         "Argument",
         "BasicBlock",
@@ -1654,7 +1659,11 @@ val LLVMCore = "LLVMCore".nativeClass(
             "",
 
             LLVMValueRef("Val", "")
-        )
+        ).let { func ->
+            if (postLLVM5.contains(it)) {
+                IgnoreMissing..func
+            }
+        }
     }
 
     Nonnull..charUTF8.const.p(
@@ -2482,7 +2491,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("IdxList")..unsigned_int("NumIdx", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BlockAddress",
         "",
 
@@ -2575,14 +2584,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMDLLStorageClass("Class", "")
     )
 
-    LLVMUnnamedAddr(
+    IgnoreMissing..LLVMUnnamedAddr(
         "GetUnnamedAddress",
         "",
 
         LLVMValueRef("Global", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "SetUnnamedAddress",
         "",
 
@@ -2590,7 +2599,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMUnnamedAddr("UnnamedAddr", "")
     )
 
-    LLVMTypeRef(
+    IgnoreMissing..LLVMTypeRef(
         "GlobalGetValueType",
         "Returns the \"value type\" of a global value.  This differs from the formal type of a global value which is always a pointer type.",
 
@@ -2627,7 +2636,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         unsigned_int("Bytes", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "GlobalSetMetadata",
         "Sets a metadata attachment, erasing the existing metadata attachment if it already exists for the given kind.",
 
@@ -2636,7 +2645,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMMetadataRef("MD", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "GlobalEraseMetadata",
         "Erases a metadata attachment of the given kind if it exists.",
 
@@ -2644,14 +2653,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         unsigned_int("Kind", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "GlobalClearMetadata",
         "Removes all metadata attachments from this value.",
 
         LLVMValueRef("Global", "")
     )
 
-    LLVMValueMetadataEntry.p(
+    IgnoreMissing..LLVMValueMetadataEntry.p(
         "GlobalCopyAllMetadata",
         """
         Retrieves an array of metadata entries representing the metadata attached to this value. The caller is responsible for freeing this array by calling
@@ -2662,14 +2671,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         Check(1)..size_t.p("NumEntries", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "DisposeValueMetadataEntries",
         "Destroys value metadata entries.",
 
         LLVMValueMetadataEntry.p("Entries", "")
     )
 
-    unsigned_int(
+    IgnoreMissing..unsigned_int(
         "ValueMetadataEntriesGetKind",
         "Returns the kind of a value metadata entry at a specific index.",
 
@@ -2677,7 +2686,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         unsigned_int("Index", "")
     )
 
-    LLVMMetadataRef(
+    IgnoreMissing..LLVMMetadataRef(
         "ValueMetadataEntriesGetMetadata",
         "Returns the underlying metadata node of a value metadata entry at a specific index.",
 
@@ -2832,7 +2841,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "GetNamedGlobalAlias",
         """
         Obtain a GlobalAlias value from a Module by its name.
@@ -2845,21 +2854,21 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("Name")..size_t("NameLen", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "GetFirstGlobalAlias",
         "Obtain an iterator to the first GlobalAlias in a Module.",
 
         LLVMModuleRef("M", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "GetLastGlobalAlias",
         "Obtain an iterator to the last GlobalAlias in a Module.",
 
         LLVMModuleRef("M", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "GetNextGlobalAlias",
         """
         Advance a {@code GlobalAlias} iterator to the next {@code GlobalAlias}.
@@ -2870,7 +2879,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("GA", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "GetPreviousGlobalAlias",
         """
         Decrement a {@code GlobalAlias} iterator to the previous {@code GlobalAlias}.
@@ -2881,14 +2890,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("GA", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "AliasGetAliasee",
         "Retrieve the target value of an alias.",
 
         LLVMValueRef("Alias", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AliasSetAliasee",
         "Set the target value of an alias.",
 
@@ -3459,7 +3468,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Node", "")
     )
 
-    LLVMValueMetadataEntry.p(
+    IgnoreMissing..LLVMValueMetadataEntry.p(
         "InstructionGetAllMetadataOtherThanDebugLoc",
         "Returns the metadata associated with an instruction value, but filters out all the debug locations.",
 
@@ -4097,7 +4106,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildCleanupRet",
         "",
 
@@ -4106,7 +4115,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBasicBlockRef("BB", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildCatchRet",
         "",
 
@@ -4115,7 +4124,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBasicBlockRef("BB", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildCatchPad",
         "",
 
@@ -4126,7 +4135,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildCleanupPad",
         "",
 
@@ -4137,7 +4146,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildCatchSwitch",
         "",
 
@@ -4203,7 +4212,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBool("Val", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddHandler",
         "Add a destination to the {@code catchswitch} instruction",
 
@@ -4211,14 +4220,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBasicBlockRef("Dest", "")
     )
 
-    unsigned_int(
+    IgnoreMissing..unsigned_int(
         "GetNumHandlers",
         "Get the number of handlers on the {@code catchswitch} instruction",
 
         LLVMValueRef("CatchSwitch", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "GetHandlers",
         """
         Obtain the basic blocks acting as handlers for a {@code catchswitch} instruction.
@@ -4233,7 +4242,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         )..LLVMBasicBlockRef.p("Handlers", "memory address of an array to be filled with basic blocks")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "GetArgOperand",
         "Get the number of {@code funcletpad} arguments.",
 
@@ -4241,7 +4250,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         unsigned_int("i", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "SetArgOperand",
         "Set a {@code funcletpad} argument at the given index.",
 
@@ -4250,7 +4259,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("value", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "GetParentCatchSwitch",
         """
         Get the parent {@code catchswitch} instruction of a {@code catchpad} instruction.
@@ -4261,7 +4270,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("CatchPad", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "SetParentCatchSwitch",
         """
         Set the parent {@code catchswitch} instruction of a {@code catchpad} instruction.

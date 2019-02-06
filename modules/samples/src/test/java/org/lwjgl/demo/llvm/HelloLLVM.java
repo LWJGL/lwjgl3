@@ -5,6 +5,7 @@
 package org.lwjgl.demo.llvm;
 
 import org.lwjgl.*;
+import org.lwjgl.llvm.*;
 import org.lwjgl.system.*;
 
 import java.util.concurrent.*;
@@ -26,7 +27,9 @@ public class HelloLLVM {
         }
 
         long module = LLVMModuleCreateWithName("LWJGL");
-        LLVMSetSourceFileName(module, "lwjgl.c");
+        if (LLVMCore.Functions.SetSourceFileName != NULL) { // LLVM 7+
+            LLVMSetSourceFileName(module, "lwjgl.c");
+        }
 
         try (MemoryStack stack = stackPush()) {
             long functionType = LLVMFunctionType(
