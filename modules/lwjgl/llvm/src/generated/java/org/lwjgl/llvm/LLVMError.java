@@ -86,9 +86,9 @@ public class LLVMError {
      */
     @Nullable
     @NativeType("char *")
-    public static String LLVMGetErrorMessage(@NativeType("LLVMErrorRef") long Err) {
+    public static ByteBuffer LLVMGetErrorMessage(@NativeType("LLVMErrorRef") long Err) {
         long __result = nLLVMGetErrorMessage(Err);
-        return memUTF8Safe(__result);
+        return memByteBufferNT1Safe(__result);
     }
 
     // --- [ LLVMDisposeErrorMessage ] ---

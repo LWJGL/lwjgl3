@@ -629,7 +629,7 @@ class Func(
             if (hasUnsafeMethod)
                 writer.generateUnsafeMethod(constantMacro, hasReuse)
 
-            if ((returns.nativeType !is CharSequenceType || has<Address>()) && parameters.none { (it.has<AutoSize>() && it.isInput) || (it.has<Expression>() && it.get<Expression>().skipNormal) })
+            if ((returns.nativeType !is CharSequenceType || has<Address>() || has<MustBeDisposed>()) && parameters.none { (it.has<AutoSize>() && it.isInput) || (it.has<Expression>() && it.get<Expression>().skipNormal) })
                 writer.generateJavaMethod(constantMacro, hasReuse)
 
             writer.generateAlternativeMethods()
@@ -964,7 +964,8 @@ class Func(
                 )
                 if (isNullTerminated) {
                     print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
-                } else if (returnsNull) {
+                }
+                if (returnsNull) {
                     print("Safe")
                 }
 
@@ -1124,7 +1125,7 @@ class Func(
 
         nativeClass.binding?.generateAlternativeMethods(this, this@Func, transforms)
 
-        if (returns.nativeType is CharSequenceType && !has<Address>())
+        if (returns.nativeType is CharSequenceType && !has<Address>() && !has<MustBeDisposed>())
             transforms[returns] = StringReturnTransform(returnsNull)
         else if (has<MapPointer>()) {
             val mapPointer = get<MapPointer>()

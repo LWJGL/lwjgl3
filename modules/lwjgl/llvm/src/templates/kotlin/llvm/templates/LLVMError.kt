@@ -37,8 +37,7 @@ val LLVMError = "LLVMError".nativeClass(
         LLVMErrorRef("Err", "")
     )
 
-    // TODO: make this return memByteBufferNT1. NullTerminated function modifier?
-    charUTF8.p(
+    MustBeDisposed..charUTF8.p(
         "GetErrorMessage",
         """
         Returns the given string's error message.

@@ -193,5 +193,14 @@ object Nonnull : FunctionModifier {
         if (func.returns.nativeType !is PointerType<*> && func.returns.nativeType !is JObjectType)
             throw IllegalArgumentException("The Nonnull modifier can only be applied to functions with pointer or Java instance return types.")
     }
+}
 
+/** Forces a character sequence return type to be mapped to ByteBuffer instead of String, so that it can be disposed after use. */
+object MustBeDisposed/*tentative name*/ : FunctionModifier {
+    override val isSpecial = false
+
+    override fun validate(func: Func) {
+        if (func.returns.nativeType !is CharSequenceType)
+            throw IllegalArgumentException("The MustBeDisposed modifier can only be applied to functions with character sequence return types.")
+    }
 }
