@@ -76,7 +76,7 @@
             <local name="src.main.rel"/>
             <local name="src.generated"/>
             <property name="src.main" location="${module.lwjgl}/@{module}/src/main/c" relative="true"/>
-            <property name="src.main.rel" location="${module.lwjgl.rel}/@{module}/src/main/c" relative="true"/>
+            <property name="src.main.rel" value="${module.lwjgl.rel}/@{module}/src/main/c"/>
             <property name="src.generated" location="${module.lwjgl}/@{module}/src/generated/c" relative="true"/>
 
             <local name="name"/>
