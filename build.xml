@@ -441,11 +441,6 @@
     </target>
 
     <target name="extract" description="Runs the LWJGL Template Extraction tool" depends="compile-native, -compile-extract">
-        <fail message="Please specify the Clang shared library path with -Dclang=&lt;path&gt;">
-            <condition>
-                <not><isset property="clang"/></not>
-            </condition>
-        </fail>
         <java classname="org.lwjgl.extract.MainKt" fork="true" spawn="true" taskname="LWJGL Template Extraction Tool">
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
@@ -458,7 +453,6 @@
             </classpath>
 
             <jvmarg value="-Djava.library.path=${lib}"/>
-            <jvmarg value="-Dorg.lwjgl.llvm.clang.libname=${clang}"/>
             <jvmarg line="${jvmargs}" if:set="jvmargs"/>
             <arg line="${args}" if:set="args"/>
         </java>

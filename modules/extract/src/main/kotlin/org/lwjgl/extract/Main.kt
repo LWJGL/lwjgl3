@@ -5,6 +5,7 @@
 package org.lwjgl.extract
 
 import org.lwjgl.system.*
+import org.lwjgl.system.MemoryUtil.*
 import java.awt.*
 import java.awt.GridBagConstraints.*
 import java.awt.event.*
@@ -16,13 +17,10 @@ import javax.imageio.*
 import javax.swing.*
 import javax.swing.JFileChooser.*
 import javax.swing.ScrollPaneConstants.*
+import javax.swing.event.*
 import javax.swing.plaf.basic.*
 
 fun main() {
-    if (Configuration.LLVM_CLANG_LIBRARY_NAME.get() == null) {
-        throw IllegalStateException("Please configure the Clang shared library path with -Dorg.lwjgl.llvm.clang.libname=<path>");
-    }
-
     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
 
     System.setProperty("line.separator", "\n")
@@ -34,17 +32,26 @@ fun main() {
 private fun checkModal() = Window.getWindows().none { it is Dialog && it.isModal && it.isVisible }
 
 class Application {
+
+    companion object {
+        val SHARED_LIBRARY_SUFFIX = when (Platform.get()) {
+            Platform.LINUX   -> "so"
+            Platform.MACOSX  -> "dylib"
+            Platform.WINDOWS -> "dll"
+            else             -> throw UnsupportedOperationException()
+        }
+    }
+
     val frame = JFrame("LWJGL Template Extraction Tool [BETA]")
 
     // Settings
+
+    private val clangPath = JTextField()
 
     private val includePaths = DefaultListModel<String>()
     private val includePathsList = JList(includePaths)
 
     private val header = JTextField()
-
-    private var lastIncludePath: File? = null
-    private var lastHeader: File? = null
 
     private val module = JTextField()
     private val prefixConstant = JTextField()
@@ -70,8 +77,17 @@ class Application {
     private val source = JTextArea(256 * 3, 64)
     private val console = JTextArea(256, 64)
 
+    // Internal state
+
+    private var clangPathListener: MouseListener? = null
+
+    private var lastClangPath: File? = null
+    private var lastIncludePath: File? = null
+    private var lastHeader: File? = null
+
     init {
-        /*val preset = Paths.get("modules", "lwjgl", "llvm", "src", "main", "c")
+        /*
+        val preset = Paths.get("modules", "lwjgl", "llvm", "src", "main", "c")
             .let { includePath ->
                 Header(
                     "LLVM",
@@ -79,28 +95,6 @@ class Application {
                     "clang_",
                     listOf(includePath),
                     includePath.resolve(Paths.get("clang-c", "Index.h"))
-                )
-            }*/
-
-        /*val preset = Paths.get("C:", "Program Files", "NVIDIA GPU Computing Toolkit", "CUDA", "v10.0", "include")
-            .let { includePath ->
-                Header(
-                    "CUDA",
-                    "CUFFT_",
-                    "cufft",
-                    listOf(includePath),
-                    includePath.resolve(Paths.get("cufft.h"))
-                )
-            }*/
-
-        val preset = Paths.get("C:", "Program Files", "NVIDIA GPU Computing Toolkit", "CUDA", "v10.0", "include")
-            .let { includePath ->
-                Header(
-                    "CUDA",
-                    "CURAND_",
-                    "curand",
-                    listOf(includePath),
-                    includePath.resolve(Paths.get("curand.h"))
                 )
             }
 
@@ -117,6 +111,7 @@ class Application {
                 parseFunctions = true
             )
         )
+        */
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager()
             .addKeyEventDispatcher { e ->
@@ -147,15 +142,50 @@ class Application {
 
         // Settings
 
-        if (!includePaths.isEmpty) {
-            lastIncludePath = File(includePaths[includePaths.size - 1])
+        Configuration.LLVM_CLANG_LIBRARY_NAME.get().let {
+            if (it != null) {
+                if (checkClangLibrary(it, silent = true)) {
+                    clangPath.text = it
+                } else {
+                    System.err.println("The shared library specified with -Dorg.lwjgl.llvm.clang.libname is invalid.")
+                }
+            }
         }
-        if (header.text.isNotEmpty()) {
-            lastHeader = File(header.text)
-            extract.isEnabled = true
-        } else {
-            extract.isEnabled = false
+        clangPath.isEditable = false
+        clangPath.toolTipText = "Click to select the Clang shared library."
+
+        clangPathListener = object : MouseAdapter() {
+            override fun mouseClicked(e: MouseEvent) {
+                val chooser = JFileChooser(File(clangPath.text).parent)
+                chooser.addChoosableFileFilter(object : javax.swing.filechooser.FileFilter() {
+                    override fun accept(f: File): Boolean {
+                        return f.isDirectory || f.extension == SHARED_LIBRARY_SUFFIX
+                    }
+
+                    override fun getDescription(): String {
+                        return "Shared library"
+                    }
+                })
+                chooser.fileFilter = chooser.choosableFileFilters[1]
+                chooser.dialogTitle = "Select the Clang shared library"
+                chooser.approveButtonText = "Select"
+                chooser.approveButtonToolTipText = "Use selected shared library"
+                chooser.currentDirectory = lastClangPath?.parentFile ?: File("./")
+                if (chooser.showOpenDialog(header) == APPROVE_OPTION) {
+                    val lib = chooser.selectedFile
+                    lastClangPath = lib
+
+                    if (checkClangLibrary(lib.path)) {
+                        clangPath.text = lib.path
+                        updateExtractState()
+                    }
+                }
+            }
         }
+        if (clangPath.text.isNotEmpty()) {
+            lastClangPath = File(clangPath.text)
+        }
+        clangPath.addMouseListener(clangPathListener)
 
         val add = JButton("+")
         val remove = JButton("-")
@@ -175,13 +205,15 @@ class Application {
                     lastIncludePath = directory
                     directory.path
                 }
-                println(path)
                 if (!includePaths.contains(path)) {
                     includePaths.addElement(path)
                     remove.isEnabled = true
                     clear.isEnabled = true
                 }
             }
+        }
+        if (!includePaths.isEmpty) {
+            lastIncludePath = File(includePaths[includePaths.size - 1])
         }
 
         remove.toolTipText = "Press to remove directories from the include path list."
@@ -233,10 +265,20 @@ class Application {
                         lastHeader = file
                         file.path
                     }
-                    extract.isEnabled = true
+                    updateExtractState()
                 }
             }
         })
+        if (header.text.isNotEmpty()) {
+            lastHeader = File(header.text)
+        }
+
+        module.document.addDocumentListener(object : DocumentListener {
+            override fun changedUpdate(e: DocumentEvent) = updateExtractState()
+            override fun insertUpdate(e: DocumentEvent) = updateExtractState()
+            override fun removeUpdate(e: DocumentEvent) = updateExtractState()
+        })
+
         ignoreSystemHeaders.isEnabled = !mainFileOnly.isSelected
 
         mainFileOnly.toolTipText = "Ignore declarations from included files."
@@ -249,20 +291,36 @@ class Application {
 
         extract.toolTipText = "Press to extract LWJGL template definitions from the selected header. [CTRL+Enter]"
         extract.addActionListener {
+            if (clangPathListener != null) {
+                Configuration.LLVM_CLANG_LIBRARY_NAME.set(clangPath.text)
+
+                clangPath.toolTipText = "The Clang shared library path."
+                clangPath.removeMouseListener(clangPathListener)
+                clangPathListener = null
+            }
             extract()
         }
+        updateExtractState()
+
+        // Layout
 
         val settings = JPanel(GridBagLayout())
         settings.border = BorderFactory.createEmptyBorder(4, 4, 4, 4)
 
         val insets = Insets(2, 2, 2, 2)
 
-        var l = JLabel("Include paths")
+        var l = JLabel("Clang library")
+        l.font = l.font.deriveFont(Font.BOLD)
+        l.labelFor = clangPath
+        settings.add(l, GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, EAST, NONE, insets, 0, 0))
+        settings.add(clangPath, GridBagConstraints(1, 0, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, insets, 0, 0))
+
+        l = JLabel("Include paths")
         l.labelFor = includePathsList
-        settings.add(l, GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, NORTHEAST, NONE, insets, 0, 0))
+        settings.add(l, GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, NORTHEAST, NONE, insets, 0, 0))
         settings.add(
             JScrollPane(includePathsList, VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_AS_NEEDED),
-            GridBagConstraints(1, 0, 1, 1, 1.0, 0.0, NORTHWEST, BOTH, insets, 0, 0)
+            GridBagConstraints(1, 1, 1, 1, 1.0, 0.0, NORTHWEST, BOTH, insets, 0, 0)
         )
 
         val includeActionsPane = JPanel(GridBagLayout())
@@ -271,32 +329,34 @@ class Application {
         includeActionsPane.add(remove, GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, WEST, NONE, insets, 0, 0))
         includeActionsPane.add(clear, GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, WEST, NONE, insets, 0, 0))
 
-        settings.add(includeActionsPane, GridBagConstraints(1, 1, 1, 1, 1.0, 0.0, EAST, NONE, insets, 0, 0))
+        settings.add(includeActionsPane, GridBagConstraints(1, 2, 1, 1, 1.0, 0.0, EAST, NONE, insets, 0, 0))
 
         l = JLabel("Header")
+        l.font = l.font.deriveFont(Font.BOLD)
         l.labelFor = header
-        settings.add(l, GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, EAST, NONE, insets, 0, 0))
-        settings.add(header, GridBagConstraints(1, 2, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, insets, 0, 0))
+        settings.add(l, GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, EAST, NONE, insets, 0, 0))
+        settings.add(header, GridBagConstraints(1, 3, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, insets, 0, 0))
 
         l = JLabel("Compiler args")
         l.labelFor = compilerArgs
-        settings.add(l, GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, EAST, NONE, insets, 0, 0))
-        settings.add(compilerArgs, GridBagConstraints(1, 3, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, insets, 0, 0))
+        settings.add(l, GridBagConstraints(0, 4, 1, 1, 0.0, 0.0, EAST, NONE, insets, 0, 0))
+        settings.add(compilerArgs, GridBagConstraints(1, 4, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, insets, 0, 0))
 
         l = JLabel("LWJGL Module")
+        l.font = l.font.deriveFont(Font.BOLD)
         l.labelFor = module
-        settings.add(l, GridBagConstraints(0, 4, 1, 1, 0.0, 0.0, EAST, NONE, insets, 0, 0))
-        settings.add(module, GridBagConstraints(1, 4, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, insets, 0, 0))
+        settings.add(l, GridBagConstraints(0, 5, 1, 1, 0.0, 0.0, EAST, NONE, insets, 0, 0))
+        settings.add(module, GridBagConstraints(1, 5, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, insets, 0, 0))
 
         l = JLabel("Constant prefix")
         l.labelFor = prefixConstant
-        settings.add(l, GridBagConstraints(0, 5, 1, 1, 0.0, 0.0, EAST, NONE, insets, 0, 0))
-        settings.add(prefixConstant, GridBagConstraints(1, 5, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, insets, 0, 0))
+        settings.add(l, GridBagConstraints(0, 6, 1, 1, 0.0, 0.0, EAST, NONE, insets, 0, 0))
+        settings.add(prefixConstant, GridBagConstraints(1, 6, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, insets, 0, 0))
 
         l = JLabel("Method prefix")
         l.labelFor = prefixMethod
-        settings.add(l, GridBagConstraints(0, 6, 1, 1, 0.0, 0.0, EAST, NONE, insets, 0, 0))
-        settings.add(prefixMethod, GridBagConstraints(1, 6, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, insets, 0, 0))
+        settings.add(l, GridBagConstraints(0, 7, 1, 1, 0.0, 0.0, EAST, NONE, insets, 0, 0))
+        settings.add(prefixMethod, GridBagConstraints(1, 7, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, insets, 0, 0))
 
         val flagsPane = JPanel(GridBagLayout())
 
@@ -311,11 +371,11 @@ class Application {
         flagsPane.add(renderConstants, GridBagConstraints(1, 2, 1, 1, 1.0, 0.0, WEST, NONE, insets, 0, 0))
         flagsPane.add(renderFunctions, GridBagConstraints(1, 3, 1, 1, 1.0, 0.0, WEST, NONE, insets, 0, 0))
 
-        settings.add(flagsPane, GridBagConstraints(1, 7, 1, 1, 1.0, 0.0, EAST, HORIZONTAL, insets, 0, 0))
+        settings.add(flagsPane, GridBagConstraints(1, 8, 1, 1, 1.0, 0.0, EAST, HORIZONTAL, insets, 0, 0))
 
-        settings.add(extract, GridBagConstraints(1, 8, 1, 1, 1.0, 0.0, EAST, NONE, Insets(4, 4, 4, 16), 0, 0))
+        settings.add(extract, GridBagConstraints(1, 9, 1, 1, 1.0, 0.0, EAST, NONE, Insets(4, 4, 4, 16), 0, 0))
 
-        settings.add(JPanel(), GridBagConstraints(1, 9, 4, 1, 1.0, 1.0, CENTER, BOTH, insets, 0, 0))
+        settings.add(JPanel(), GridBagConstraints(1, 10, 4, 1, 1.0, 1.0, CENTER, BOTH, insets, 0, 0))
 
         // Output
 
@@ -386,6 +446,41 @@ class Application {
         frame.extendedState = frame.extendedState or Frame.MAXIMIZED_BOTH
     }
 
+    private fun checkClangLibrary(path: String, silent: Boolean = false): Boolean {
+        try {
+            val clang = Library.loadNative(path)
+            try {
+                if (clang.getFunctionAddress("clang_createIndex") == NULL) {
+                    if (!silent) {
+                        JOptionPane.showMessageDialog(
+                            clangPath,
+                            "The selected shared library does not export Clang's C API symbols.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                        )
+                    }
+                    return false
+                }
+            } finally {
+                clang.free()
+            }
+            return true
+        } catch (t: Throwable) {
+            t.printStackTrace()
+            if (!silent) {
+                JOptionPane.showMessageDialog(clangPath, "The selected shared library could not be loaded.", "Error", JOptionPane.ERROR_MESSAGE)
+            }
+            return false
+        }
+    }
+
+    private fun updateExtractState() {
+        extract.isEnabled =
+            clangPath.text.isNotEmpty() &&
+            header.text.isNotEmpty() &&
+            module.text.isNotEmpty()
+    }
+
     private fun load(
         header: Header,
         options: Options
@@ -415,7 +510,8 @@ class Application {
         renderFunctions.isSelected = options.parseFunctions
 
         ignoreSystemHeaders.isEnabled = !options.mainFileOnly
-        extract.isEnabled = true
+
+        updateExtractState()
     }
 
     private fun extract() {
