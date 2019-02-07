@@ -181,8 +181,7 @@ internal fun parse(
 
     val handles = ArrayList<String>()
     val typedefs = ArrayList<String>()
-    val callbacks = ArrayList<String>()
-    val structs = LinkedHashMap<String, Struct>()
+    val aggregateTypes = LinkedHashMap<String, Any>() // struct/union/function
     val constants = ArrayList<String>()
     val enums = LinkedHashMap<String, Enum>()
     val functions = ArrayList<String>()
@@ -193,8 +192,8 @@ internal fun parse(
         if (declaration == null) {
             TODO()
         }
-        structs.remove(declarationName)
-        structs[name] = Struct(name, true, declaration.documentation, declaration.kind, declaration.members)
+        aggregateTypes.remove(declarationName)
+        aggregateTypes[name] = Struct(name, true, declaration.documentation, declaration.kind, declaration.members)
     }
 
     fun enumTypedef(cursor: CXCursor, name: String) {
@@ -234,7 +233,7 @@ internal fun parse(
                                 cursor.parseStruct(context, name, false, handles).let {
                                     if (it != null) {
                                         structDeclarations[name] = it
-                                        structs[name] = it
+                                        aggregateTypes[name] = it
                                     }
                                 }
                             }
@@ -304,7 +303,7 @@ internal fun parse(
                                     CXType_FunctionNoProto,
                                     CXType_FunctionProto -> {
                                         if (options.parseTypes) {
-                                            callbacks.add(cursor.parseCallback(header, pointee, name))
+                                            aggregateTypes[name] = cursor.parseCallback(header, pointee, name)
                                         }
                                     }
                                     else                 -> {
@@ -351,7 +350,7 @@ internal fun parse(
         }
     }
 
-    if (handles.isNotEmpty() && options.parseTypes) {
+    if (handles.isNotEmpty()) {
         handles
             .sorted()
             .forEach {
@@ -360,7 +359,7 @@ internal fun parse(
         output.println()
     }
 
-    if (typedefs.isNotEmpty() && options.parseTypes) {
+    if (typedefs.isNotEmpty()) {
         typedefs
             .sorted()
             .forEach {
@@ -369,7 +368,7 @@ internal fun parse(
         output.println()
     }
 
-    if (enums.isNotEmpty() && options.parseTypes && options.parseConstants) {
+    if (enums.isNotEmpty()) {
         enums
             .mapNotNull { (_, enum) -> if (enum.name.isNotEmpty()) enum.getTypedef() else null }
             .sorted()
@@ -379,35 +378,28 @@ internal fun parse(
         output.println()
     }
 
-    if (callbacks.isNotEmpty() && options.parseTypes) {
-        callbacks.forEach {
-            output.println(it)
+    if (aggregateTypes.isNotEmpty()) {
+        aggregateTypes.forEach { (_, type) ->
+            output.println(if (type is Struct) type.getDeclaration(context) else type.toString())
             output.println()
         }
     }
 
-    if (structs.isNotEmpty() && options.parseStructs) {
-        structs.forEach { (_, struct) ->
-            output.println(struct.getDeclaration(context))
-            output.println()
-        }
-    }
-
-    if (constants.isNotEmpty() && options.parseConstants) {
+    if (constants.isNotEmpty()) {
         constants.forEach {
             output.println(it)
         }
         output.println()
     }
 
-    if (enums.isNotEmpty() && options.parseConstants) {
+    if (enums.isNotEmpty()) {
         enums.forEach { (_, enum) ->
             output.println(enum.getDeclaration(context))
             output.println()
         }
     }
 
-    if (functions.isNotEmpty() && options.parseFunctions) {
+    if (functions.isNotEmpty()) {
         functions.forEach {
             output.println(it)
             output.println()
