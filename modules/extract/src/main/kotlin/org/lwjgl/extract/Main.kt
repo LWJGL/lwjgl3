@@ -18,7 +18,7 @@ import javax.swing.JFileChooser.*
 import javax.swing.ScrollPaneConstants.*
 import javax.swing.plaf.basic.*
 
-fun main(args: Array<String>) {
+fun main() {
     if (Configuration.LLVM_CLANG_LIBRARY_NAME.get() == null) {
         throw IllegalStateException("Please configure the Clang shared library path with -Dorg.lwjgl.llvm.clang.libname=<path>");
     }
@@ -71,8 +71,7 @@ class Application {
     private val console = JTextArea(256, 64)
 
     init {
-        /*
-        val preset = Paths.get("modules", "lwjgl", "llvm", "src", "main", "c")
+        /*val preset = Paths.get("modules", "lwjgl", "llvm", "src", "main", "c")
             .let { includePath ->
                 Header(
                     "LLVM",
@@ -80,6 +79,28 @@ class Application {
                     "clang_",
                     listOf(includePath),
                     includePath.resolve(Paths.get("clang-c", "Index.h"))
+                )
+            }*/
+
+        /*val preset = Paths.get("C:", "Program Files", "NVIDIA GPU Computing Toolkit", "CUDA", "v10.0", "include")
+            .let { includePath ->
+                Header(
+                    "CUDA",
+                    "CUFFT_",
+                    "cufft",
+                    listOf(includePath),
+                    includePath.resolve(Paths.get("cufft.h"))
+                )
+            }*/
+
+        val preset = Paths.get("C:", "Program Files", "NVIDIA GPU Computing Toolkit", "CUDA", "v10.0", "include")
+            .let { includePath ->
+                Header(
+                    "CUDA",
+                    "CURAND_",
+                    "curand",
+                    listOf(includePath),
+                    includePath.resolve(Paths.get("curand.h"))
                 )
             }
 
@@ -96,7 +117,6 @@ class Application {
                 parseFunctions = true
             )
         )
-        */
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager()
             .addKeyEventDispatcher { e ->
