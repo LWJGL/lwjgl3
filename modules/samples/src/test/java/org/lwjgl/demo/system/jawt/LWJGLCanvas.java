@@ -4,19 +4,23 @@
  */
 package org.lwjgl.demo.system.jawt;
 
+import org.lwjgl.*;
 import org.lwjgl.demo.opengl.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 import org.lwjgl.system.jawt.JAWT;
 import org.lwjgl.system.jawt.*;
+import org.lwjgl.system.linux.*;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFWNativeWin32.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GLX13.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jawt.JAWTFunctions.*;
@@ -35,8 +39,7 @@ public class LWJGLCanvas extends Canvas {
 
     private final AbstractGears gears;
 
-    private long    glfwWindow;
-    private boolean resized;
+    private long context;
 
     private GLCapabilities caps;
 
@@ -54,9 +57,8 @@ public class LWJGLCanvas extends Canvas {
         addComponentListener(new ComponentAdapter() {
             @Override public void componentResized(ComponentEvent e) {
                 System.out.println(e);
-                resized = true;
-                if (glfwWindow != NULL) {
-                    render();
+                if (context != NULL) {
+                    paint();
                 }
             }
             @Override public void componentMoved(ComponentEvent e) {
@@ -132,11 +134,11 @@ public class LWJGLCanvas extends Canvas {
 
     @Override
     public void paint(Graphics g) {
-        render();
+        paint();
         repaint();
     }
 
-    private void render() {
+    private void paint() {
         if (ds == null) {
             // Get the drawing surface
             ds = JAWT_GetDrawingSurface(this, awt.GetDrawingSurface());
@@ -159,62 +161,63 @@ public class LWJGLCanvas extends Canvas {
             }
 
             try {
-                // Get the platform-specific drawing info
-                JAWTWin32DrawingSurfaceInfo dsi_win = JAWTWin32DrawingSurfaceInfo.create(dsi.platformInfo());
+                switch (Platform.get()) {
+                    case LINUX:
+                        // Get the platform-specific drawing info
+                        JAWTX11DrawingSurfaceInfo dsi_x11 = JAWTX11DrawingSurfaceInfo.create(dsi.platformInfo());
 
-                long hdc = dsi_win.hdc();
-                if (hdc != NULL) {
-                    // The render method is invoked in the EDT
-                    if (glfwWindow == NULL) {
-                        // glfwWindowHint can be used here to configure the GL context
-                        glfwWindow = glfwAttachWin32Window(dsi_win.hwnd(), NULL);
-                        if (glfwWindow == NULL) {
-                            throw new IllegalStateException("Failed to attach win32 window.");
+                        long drawable = dsi_x11.drawable();
+                        if (drawable == NULL) {
+                            break;
                         }
 
-                        // Any callbacks registered here will work. But care must be taken because
-                        // the callbacks are NOT invoked in the EDT, but in an AWT thread that
-                        // does the event polling. Many GLFW functions that require main thread
-                        // invocation, should only be called in that thread.
+                        if (context == NULL) {
+                            createContextGLX(dsi_x11);
+                            gears.initGLState();
+                        } else {
+                            if (!glXMakeCurrent(dsi_x11.display(), drawable, context)) {
+                                throw new IllegalStateException("glXMakeCurrent() failed");
+                            }
+                            GL.setCapabilities(caps);
+                        }
 
-                        // Because of how input focus is implemented in AWT, it is recommended that AWT
-                        // KeyListeners are always used for keyboard input.
+                        render(getWidth(), getHeight());
+                        glXSwapBuffers(dsi_x11.display(), drawable);
 
-                        glfwMakeContextCurrent(glfwWindow);
-                        caps = GL.createCapabilities();
+                        glXMakeCurrent(dsi_x11.display(), NULL, NULL);
+                        GL.setCapabilities(null);
+                        break;
+                    case WINDOWS:
+                        // Get the platform-specific drawing info
+                        JAWTWin32DrawingSurfaceInfo dsi_win = JAWTWin32DrawingSurfaceInfo.create(dsi.platformInfo());
 
-                        gears.initGLState();
-                        resized = true;
-                    } else {
-                        glfwMakeContextCurrent(glfwWindow);
-                        GL.setCapabilities(caps);
-                    }
+                        long hdc = dsi_win.hdc();
+                        if (hdc == NULL) {
+                            break;
+                        }
 
-                    if (resized) {
+                        // The render method is invoked in the EDT
+                        if (context == NULL) {
+                            createContextGLFW(dsi_win);
+                            gears.initGLState();
+                        } else {
+                            glfwMakeContextCurrent(context);
+                            GL.setCapabilities(caps);
+                        }
+
                         try (MemoryStack stack = stackPush()) {
                             IntBuffer pw = stack.mallocInt(1);
                             IntBuffer ph = stack.mallocInt(1);
 
-                            glfwGetFramebufferSize(glfwWindow, pw, ph);
+                            glfwGetFramebufferSize(context, pw, ph);
 
-                            glViewport(0, 0, pw.get(0), ph.get(0));
-
-                            float f = ph.get(0) / (float)pw.get(0);
-
-                            glMatrixMode(GL_PROJECTION);
-                            glLoadIdentity();
-                            glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
-                            glMatrixMode(GL_MODELVIEW);
+                            render(pw.get(0), ph.get(0));
                         }
+                        glfwSwapBuffers(context);
 
-                        resized = false;
-                    }
-
-                    gears.renderLoop();
-                    glfwSwapBuffers(glfwWindow);
-
-                    glfwMakeContextCurrent(NULL);
-                    GL.setCapabilities(null);
+                        glfwMakeContextCurrent(NULL);
+                        GL.setCapabilities(null);
+                        break;
                 }
             } finally {
                 // Free the drawing surface info
@@ -226,14 +229,74 @@ public class LWJGLCanvas extends Canvas {
         }
     }
 
+    private void render(int width, int height) {
+        glViewport(0, 0, width, height);
+
+        float f = height / (float)width;
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
+        glMatrixMode(GL_MODELVIEW);
+
+        gears.renderLoop();
+    }
+
+    private void createContextGLFW(JAWTWin32DrawingSurfaceInfo dsi_win) {
+        // glfwWindowHint can be used here to configure the GL context
+        context = glfwAttachWin32Window(dsi_win.hwnd(), NULL);
+        if (context == NULL) {
+            throw new IllegalStateException("Failed to attach win32 window.");
+        }
+
+        // Any callbacks registered here will work. But care must be taken because
+        // the callbacks are NOT invoked in the EDT, but in an AWT thread that
+        // does the event polling. Many GLFW functions that require main thread
+        // invocation, should only be called in that thread.
+
+        // Because of how input focus is implemented in AWT, it is recommended that AWT
+        // KeyListeners are always used for keyboard input.
+
+        glfwMakeContextCurrent(context);
+        caps = GL.createCapabilities();
+    }
+
+    // Simplest possible context creation.
+    private void createContextGLX(JAWTX11DrawingSurfaceInfo dsi_x11) {
+        long display  = dsi_x11.display();
+        long drawable = dsi_x11.drawable();
+
+        PointerBuffer configs = Objects.requireNonNull(glXChooseFBConfig(display, 0, (IntBuffer)null));
+
+        long config = NULL;
+        for (int i = 0; i < configs.remaining(); i++) {
+            XVisualInfo vi = Objects.requireNonNull(glXGetVisualFromFBConfig(display, configs.get(i)));
+            if (vi.visualid() == dsi_x11.visualID()) {
+                config = configs.get(i);
+                break;
+            }
+        }
+
+        context = glXCreateNewContext(display, config, GLX_RGBA_TYPE, NULL, true);
+        if (context == NULL) {
+            throw new IllegalStateException("glXCreateContext() failed");
+        }
+
+        if (!glXMakeCurrent(display, drawable, context)) {
+            throw new IllegalStateException("glXMakeCurrent() failed");
+        }
+
+        caps = GL.createCapabilities();
+    }
+
     public void destroy() {
         // Free the drawing surface
         JAWT_FreeDrawingSurface(ds, awt.FreeDrawingSurface());
 
         awt.free();
 
-        if (glfwWindow != NULL) {
-            glfwDestroyWindow(glfwWindow);
+        if (context != NULL) {
+            glfwDestroyWindow(context);
         }
     }
 

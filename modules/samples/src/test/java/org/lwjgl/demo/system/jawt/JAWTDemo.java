@@ -21,8 +21,8 @@ public final class JAWTDemo {
     }
 
     public static void main(String[] args) {
-        if (Platform.get() != Platform.WINDOWS) {
-            throw new UnsupportedOperationException("This demo can only run on Windows.");
+        if (Platform.get() == Platform.MACOSX) {
+            throw new UnsupportedOperationException("This demo cannot run on macOS.");
         }
 
         GLFWErrorCallback.createPrint().set();
