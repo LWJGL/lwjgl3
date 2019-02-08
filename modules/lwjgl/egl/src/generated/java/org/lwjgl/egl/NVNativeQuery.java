@@ -38,7 +38,7 @@ public class NVNativeQuery {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPI(__functionAddress, dpy, display_id);
+        return callPPI(dpy, display_id, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -58,7 +58,7 @@ public class NVNativeQuery {
             check(dpy);
             check(surf);
         }
-        return callPPPI(__functionAddress, dpy, surf, window);
+        return callPPPI(dpy, surf, window, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -78,7 +78,7 @@ public class NVNativeQuery {
             check(dpy);
             check(surf);
         }
-        return callPPPI(__functionAddress, dpy, surf, pixmap);
+        return callPPPI(dpy, surf, pixmap, __functionAddress);
     }
 
     @NativeType("EGLBoolean")

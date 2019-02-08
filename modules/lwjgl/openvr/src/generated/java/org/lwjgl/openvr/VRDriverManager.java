@@ -41,7 +41,7 @@ public class VRDriverManager {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, nDriver, pchValue, unBufferSize);
+        return callPI(nDriver, pchValue, unBufferSize, __functionAddress);
     }
 
     /** @return the length of the number of bytes necessary to hold this string including the trailing null */
@@ -71,7 +71,7 @@ public class VRDriverManager {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJ(__functionAddress, pchDriverName);
+        return callPJ(pchDriverName, __functionAddress);
     }
 
     /**

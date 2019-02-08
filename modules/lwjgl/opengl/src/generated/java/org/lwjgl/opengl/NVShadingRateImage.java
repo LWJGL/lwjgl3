@@ -152,7 +152,7 @@ public class NVShadingRateImage {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, viewport, first, rates.length, rates);
+        callPV(viewport, first, rates.length, rates, __functionAddress);
     }
 
     /** Array version of: {@link #glGetShadingRateImagePaletteNV GetShadingRateImagePaletteNV} */
@@ -162,7 +162,7 @@ public class NVShadingRateImage {
             check(__functionAddress);
             check(rate, 1);
         }
-        callPV(__functionAddress, viewport, entry, rate);
+        callPV(viewport, entry, rate, __functionAddress);
     }
 
     /** Array version of: {@link #glShadingRateSampleOrderCustomNV ShadingRateSampleOrderCustomNV} */
@@ -171,7 +171,7 @@ public class NVShadingRateImage {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, rate, samples, locations);
+        callPV(rate, samples, locations, __functionAddress);
     }
 
     /** Array version of: {@link #glGetShadingRateSampleLocationivNV GetShadingRateSampleLocationivNV} */
@@ -181,7 +181,7 @@ public class NVShadingRateImage {
             check(__functionAddress);
             check(location, 3);
         }
-        callPV(__functionAddress, rate, samples, index, location);
+        callPV(rate, samples, index, location, __functionAddress);
     }
 
 }

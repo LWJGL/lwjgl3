@@ -354,7 +354,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length, value);
+        callPV(location, value.length, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform2i64vNV Uniform2i64vNV} */
@@ -363,7 +363,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 1, value);
+        callPV(location, value.length >> 1, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform3i64vNV Uniform3i64vNV} */
@@ -372,7 +372,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 3, value);
+        callPV(location, value.length / 3, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform4i64vNV Uniform4i64vNV} */
@@ -381,7 +381,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 2, value);
+        callPV(location, value.length >> 2, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform1ui64vNV Uniform1ui64vNV} */
@@ -390,7 +390,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length, value);
+        callPV(location, value.length, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform2ui64vNV Uniform2ui64vNV} */
@@ -399,7 +399,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 1, value);
+        callPV(location, value.length >> 1, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform3ui64vNV Uniform3ui64vNV} */
@@ -408,7 +408,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 3, value);
+        callPV(location, value.length / 3, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform4ui64vNV Uniform4ui64vNV} */
@@ -417,7 +417,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 2, value);
+        callPV(location, value.length >> 2, value, __functionAddress);
     }
 
     /** Array version of: {@link #glGetUniformi64vNV GetUniformi64vNV} */
@@ -427,7 +427,7 @@ public class NVGPUShader5 {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, program, location, params);
+        callPV(program, location, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetUniformui64vNV GetUniformui64vNV} */
@@ -437,7 +437,7 @@ public class NVGPUShader5 {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, program, location, params);
+        callPV(program, location, params, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform1i64vNV ProgramUniform1i64vNV} */
@@ -446,7 +446,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length, value);
+        callPV(program, location, value.length, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform2i64vNV ProgramUniform2i64vNV} */
@@ -455,7 +455,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 1, value);
+        callPV(program, location, value.length >> 1, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform3i64vNV ProgramUniform3i64vNV} */
@@ -464,7 +464,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 3, value);
+        callPV(program, location, value.length / 3, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform4i64vNV ProgramUniform4i64vNV} */
@@ -473,7 +473,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 2, value);
+        callPV(program, location, value.length >> 2, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform1ui64vNV ProgramUniform1ui64vNV} */
@@ -482,7 +482,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length, value);
+        callPV(program, location, value.length, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform2ui64vNV ProgramUniform2ui64vNV} */
@@ -491,7 +491,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 1, value);
+        callPV(program, location, value.length >> 1, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform3ui64vNV ProgramUniform3ui64vNV} */
@@ -500,7 +500,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 3, value);
+        callPV(program, location, value.length / 3, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform4ui64vNV ProgramUniform4ui64vNV} */
@@ -509,7 +509,7 @@ public class NVGPUShader5 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 2, value);
+        callPV(program, location, value.length >> 2, value, __functionAddress);
     }
 
 }

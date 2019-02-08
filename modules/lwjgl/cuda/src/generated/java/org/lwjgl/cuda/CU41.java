@@ -58,7 +58,7 @@ public class CU41 extends CU40 {
 
     public static int ncuDeviceGetByPCIBusId(long dev, long pciBusId) {
         long __functionAddress = Functions.DeviceGetByPCIBusId;
-        return callPPI(__functionAddress, dev, pciBusId);
+        return callPPI(dev, pciBusId, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -89,7 +89,7 @@ public class CU41 extends CU40 {
 
     public static int ncuDeviceGetPCIBusId(long pciBusId, int len, int dev) {
         long __functionAddress = Functions.DeviceGetPCIBusId;
-        return callPI(__functionAddress, pciBusId, len, dev);
+        return callPI(pciBusId, len, dev, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -104,7 +104,7 @@ public class CU41 extends CU40 {
         if (CHECKS) {
             check(event);
         }
-        return callPPI(__functionAddress, pHandle, event);
+        return callPPI(pHandle, event, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -116,7 +116,7 @@ public class CU41 extends CU40 {
 
     public static int ncuIpcOpenEventHandle(long phEvent, long handle) {
         long __functionAddress = Functions.IpcOpenEventHandle;
-        return callPPI(__functionAddress, phEvent, handle);
+        return callPPI(phEvent, handle, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -134,7 +134,7 @@ public class CU41 extends CU40 {
         if (CHECKS) {
             check(dptr);
         }
-        return callPPI(__functionAddress, pHandle, dptr);
+        return callPPI(pHandle, dptr, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -146,7 +146,7 @@ public class CU41 extends CU40 {
 
     public static int ncuIpcOpenMemHandle(long pdptr, long handle, int Flags) {
         long __functionAddress = Functions.IpcOpenMemHandle;
-        return callPPI(__functionAddress, pdptr, handle, Flags);
+        return callPPI(pdptr, handle, Flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -165,7 +165,7 @@ public class CU41 extends CU40 {
         if (CHECKS) {
             check(dptr);
         }
-        return callPI(__functionAddress, dptr);
+        return callPI(dptr, __functionAddress);
     }
 
 }

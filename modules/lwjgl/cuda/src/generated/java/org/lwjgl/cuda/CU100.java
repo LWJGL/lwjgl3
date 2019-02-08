@@ -167,7 +167,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, luid, deviceNodeMask, dev);
+        return callPPI(luid, deviceNodeMask, dev, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -184,14 +184,14 @@ public class CU100 extends CU92 {
     @NativeType("CUresult")
     public static int cuStreamBeginCapture(@NativeType("CUstream") long hStream) {
         long __functionAddress = Functions.StreamBeginCapture;
-        return callPI(__functionAddress, hStream);
+        return callPI(hStream, __functionAddress);
     }
 
     // --- [ cuStreamEndCapture ] ---
 
     public static int ncuStreamEndCapture(long hStream, long phGraph) {
         long __functionAddress = Functions.StreamEndCapture;
-        return callPPI(__functionAddress, hStream, phGraph);
+        return callPPI(hStream, phGraph, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -206,7 +206,7 @@ public class CU100 extends CU92 {
 
     public static int ncuStreamIsCapturing(long hStream, long captureStatus) {
         long __functionAddress = Functions.StreamIsCapturing;
-        return callPPI(__functionAddress, hStream, captureStatus);
+        return callPPI(hStream, captureStatus, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -221,7 +221,7 @@ public class CU100 extends CU92 {
 
     public static int ncuImportExternalMemory(long extMem_out, long memHandleDesc) {
         long __functionAddress = Functions.ImportExternalMemory;
-        return callPPI(__functionAddress, extMem_out, memHandleDesc);
+        return callPPI(extMem_out, memHandleDesc, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -239,7 +239,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(extMem);
         }
-        return callPPPI(__functionAddress, devPtr, extMem, bufferDesc);
+        return callPPPI(devPtr, extMem, bufferDesc, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -257,7 +257,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(extMem);
         }
-        return callPPPI(__functionAddress, mipmap, extMem, mipmapDesc);
+        return callPPPI(mipmap, extMem, mipmapDesc, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -276,14 +276,14 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(extMem);
         }
-        return callPI(__functionAddress, extMem);
+        return callPI(extMem, __functionAddress);
     }
 
     // --- [ cuImportExternalSemaphore ] ---
 
     public static int ncuImportExternalSemaphore(long extSem_out, long semHandleDesc) {
         long __functionAddress = Functions.ImportExternalSemaphore;
-        return callPPI(__functionAddress, extSem_out, semHandleDesc);
+        return callPPI(extSem_out, semHandleDesc, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -298,7 +298,7 @@ public class CU100 extends CU92 {
 
     public static int ncuSignalExternalSemaphoresAsync(long extSemArray, long paramsArray, int numExtSems, long stream) {
         long __functionAddress = Functions.SignalExternalSemaphoresAsync;
-        return callPPPI(__functionAddress, extSemArray, paramsArray, numExtSems, stream);
+        return callPPPI(extSemArray, paramsArray, numExtSems, stream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -313,7 +313,7 @@ public class CU100 extends CU92 {
 
     public static int ncuWaitExternalSemaphoresAsync(long extSemArray, long paramsArray, int numExtSems, long stream) {
         long __functionAddress = Functions.WaitExternalSemaphoresAsync;
-        return callPPPI(__functionAddress, extSemArray, paramsArray, numExtSems, stream);
+        return callPPPI(extSemArray, paramsArray, numExtSems, stream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -332,7 +332,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(extSem);
         }
-        return callPI(__functionAddress, extSem);
+        return callPI(extSem, __functionAddress);
     }
 
     // --- [ cuLaunchHostFunc ] ---
@@ -342,7 +342,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(userData);
         }
-        return callPPPI(__functionAddress, hStream, fn, userData);
+        return callPPPI(hStream, fn, userData, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -354,7 +354,7 @@ public class CU100 extends CU92 {
 
     public static int ncuGraphCreate(long phGraph, int flags) {
         long __functionAddress = Functions.GraphCreate;
-        return callPI(__functionAddress, phGraph, flags);
+        return callPI(phGraph, flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -373,7 +373,7 @@ public class CU100 extends CU92 {
             check(hGraph);
             CUDA_KERNEL_NODE_PARAMS.validate(nodeParams);
         }
-        return callPPPPPI(__functionAddress, phGraphNode, hGraph, dependencies, numDependencies, nodeParams);
+        return callPPPPPI(phGraphNode, hGraph, dependencies, numDependencies, nodeParams, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -391,7 +391,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hNode);
         }
-        return callPPI(__functionAddress, hNode, nodeParams);
+        return callPPI(hNode, nodeParams, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -407,7 +407,7 @@ public class CU100 extends CU92 {
             check(hNode);
             CUDA_KERNEL_NODE_PARAMS.validate(nodeParams);
         }
-        return callPPI(__functionAddress, hNode, nodeParams);
+        return callPPI(hNode, nodeParams, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -424,7 +424,7 @@ public class CU100 extends CU92 {
             CUDA_MEMCPY3D.validate(copyParams);
             check(ctx);
         }
-        return callPPPPPPI(__functionAddress, phGraphNode, hGraph, dependencies, numDependencies, copyParams, ctx);
+        return callPPPPPPI(phGraphNode, hGraph, dependencies, numDependencies, copyParams, ctx, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -442,7 +442,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hNode);
         }
-        return callPPI(__functionAddress, hNode, nodeParams);
+        return callPPI(hNode, nodeParams, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -458,7 +458,7 @@ public class CU100 extends CU92 {
             check(hNode);
             CUDA_MEMCPY3D.validate(nodeParams);
         }
-        return callPPI(__functionAddress, hNode, nodeParams);
+        return callPPI(hNode, nodeParams, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -475,7 +475,7 @@ public class CU100 extends CU92 {
             CUDA_MEMSET_NODE_PARAMS.validate(memsetParams);
             check(ctx);
         }
-        return callPPPPPPI(__functionAddress, phGraphNode, hGraph, dependencies, numDependencies, memsetParams, ctx);
+        return callPPPPPPI(phGraphNode, hGraph, dependencies, numDependencies, memsetParams, ctx, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -493,7 +493,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hNode);
         }
-        return callPPI(__functionAddress, hNode, nodeParams);
+        return callPPI(hNode, nodeParams, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -509,7 +509,7 @@ public class CU100 extends CU92 {
             check(hNode);
             CUDA_MEMSET_NODE_PARAMS.validate(nodeParams);
         }
-        return callPPI(__functionAddress, hNode, nodeParams);
+        return callPPI(hNode, nodeParams, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -525,7 +525,7 @@ public class CU100 extends CU92 {
             check(hGraph);
             CUDA_HOST_NODE_PARAMS.validate(nodeParams);
         }
-        return callPPPPPI(__functionAddress, phGraphNode, hGraph, dependencies, numDependencies, nodeParams);
+        return callPPPPPI(phGraphNode, hGraph, dependencies, numDependencies, nodeParams, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -543,7 +543,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hNode);
         }
-        return callPPI(__functionAddress, hNode, nodeParams);
+        return callPPI(hNode, nodeParams, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -559,7 +559,7 @@ public class CU100 extends CU92 {
             check(hNode);
             CUDA_HOST_NODE_PARAMS.validate(nodeParams);
         }
-        return callPPI(__functionAddress, hNode, nodeParams);
+        return callPPI(hNode, nodeParams, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -575,7 +575,7 @@ public class CU100 extends CU92 {
             check(hGraph);
             check(childGraph);
         }
-        return callPPPPPI(__functionAddress, phGraphNode, hGraph, dependencies, numDependencies, childGraph);
+        return callPPPPPI(phGraphNode, hGraph, dependencies, numDependencies, childGraph, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -593,7 +593,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hNode);
         }
-        return callPPI(__functionAddress, hNode, phGraph);
+        return callPPI(hNode, phGraph, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -611,7 +611,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hGraph);
         }
-        return callPPPPI(__functionAddress, phGraphNode, hGraph, dependencies, numDependencies);
+        return callPPPPI(phGraphNode, hGraph, dependencies, numDependencies, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -629,7 +629,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(originalGraph);
         }
-        return callPPI(__functionAddress, phGraphClone, originalGraph);
+        return callPPI(phGraphClone, originalGraph, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -648,7 +648,7 @@ public class CU100 extends CU92 {
             check(hOriginalNode);
             check(hClonedGraph);
         }
-        return callPPPI(__functionAddress, phNode, hOriginalNode, hClonedGraph);
+        return callPPPI(phNode, hOriginalNode, hClonedGraph, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -666,7 +666,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hNode);
         }
-        return callPPI(__functionAddress, hNode, type);
+        return callPPI(hNode, type, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -684,7 +684,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hGraph);
         }
-        return callPPPI(__functionAddress, hGraph, nodes, numNodes);
+        return callPPPI(hGraph, nodes, numNodes, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -703,7 +703,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hGraph);
         }
-        return callPPPI(__functionAddress, hGraph, rootNodes, numRootNodes);
+        return callPPPI(hGraph, rootNodes, numRootNodes, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -722,7 +722,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hGraph);
         }
-        return callPPPPI(__functionAddress, hGraph, from, to, numEdges);
+        return callPPPPI(hGraph, from, to, numEdges, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -742,7 +742,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hNode);
         }
-        return callPPPI(__functionAddress, hNode, dependencies, numDependencies);
+        return callPPPI(hNode, dependencies, numDependencies, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -761,7 +761,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hNode);
         }
-        return callPPPI(__functionAddress, hNode, dependentNodes, numDependentNodes);
+        return callPPPI(hNode, dependentNodes, numDependentNodes, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -780,7 +780,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hGraph);
         }
-        return callPPPPI(__functionAddress, hGraph, from, to, numDependencies);
+        return callPPPPI(hGraph, from, to, numDependencies, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -798,7 +798,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hGraph);
         }
-        return callPPPPI(__functionAddress, hGraph, from, to, numDependencies);
+        return callPPPPI(hGraph, from, to, numDependencies, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -817,7 +817,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hNode);
         }
-        return callPI(__functionAddress, hNode);
+        return callPI(hNode, __functionAddress);
     }
 
     // --- [ cuGraphInstantiate ] ---
@@ -827,7 +827,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hGraph);
         }
-        return callPPPPPI(__functionAddress, phGraphExec, hGraph, phErrorNode, logBuffer, bufferSize);
+        return callPPPPPI(phGraphExec, hGraph, phErrorNode, logBuffer, bufferSize, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -847,7 +847,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hGraphExec);
         }
-        return callPPI(__functionAddress, hGraphExec, hStream);
+        return callPPI(hGraphExec, hStream, __functionAddress);
     }
 
     // --- [ cuGraphExecDestroy ] ---
@@ -858,7 +858,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hGraphExec);
         }
-        return callPI(__functionAddress, hGraphExec);
+        return callPI(hGraphExec, __functionAddress);
     }
 
     // --- [ cuGraphDestroy ] ---
@@ -869,7 +869,7 @@ public class CU100 extends CU92 {
         if (CHECKS) {
             check(hGraph);
         }
-        return callPI(__functionAddress, hGraph);
+        return callPI(hGraph, __functionAddress);
     }
 
 }

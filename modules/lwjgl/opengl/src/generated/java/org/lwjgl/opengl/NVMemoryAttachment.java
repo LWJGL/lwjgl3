@@ -100,7 +100,7 @@ public class NVMemoryAttachment {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, memory, pname, first, params.length, params);
+        callPV(memory, pname, first, params.length, params, __functionAddress);
     }
 
 }

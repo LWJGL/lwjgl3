@@ -37,7 +37,7 @@ public class KHRStreamAttrib {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPP(__functionAddress, dpy, attrib_list);
+        return callPPP(dpy, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLStreamKHR")
@@ -58,7 +58,7 @@ public class KHRStreamAttrib {
             check(dpy);
             check(stream);
         }
-        return callPPPI(__functionAddress, dpy, stream, attribute, value) != 0;
+        return callPPPI(dpy, stream, attribute, value, __functionAddress) != 0;
     }
 
     // --- [ eglQueryStreamAttribKHR ] ---
@@ -70,7 +70,7 @@ public class KHRStreamAttrib {
             check(dpy);
             check(stream);
         }
-        return callPPPI(__functionAddress, dpy, stream, attribute, value);
+        return callPPPI(dpy, stream, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -90,7 +90,7 @@ public class KHRStreamAttrib {
             check(dpy);
             check(stream);
         }
-        return callPPPI(__functionAddress, dpy, stream, attrib_list);
+        return callPPPI(dpy, stream, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -110,7 +110,7 @@ public class KHRStreamAttrib {
             check(dpy);
             check(stream);
         }
-        return callPPPI(__functionAddress, dpy, stream, attrib_list);
+        return callPPPI(dpy, stream, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLBoolean")

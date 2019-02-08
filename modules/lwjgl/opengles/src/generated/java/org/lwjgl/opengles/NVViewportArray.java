@@ -155,7 +155,7 @@ public class NVViewportArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, first, v.length >> 2, v);
+        callPV(first, v.length >> 2, v, __functionAddress);
     }
 
     /** Array version of: {@link #glViewportIndexedfvNV ViewportIndexedfvNV} */
@@ -165,7 +165,7 @@ public class NVViewportArray {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glScissorArrayvNV ScissorArrayvNV} */
@@ -174,7 +174,7 @@ public class NVViewportArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, first, v.length >> 2, v);
+        callPV(first, v.length >> 2, v, __functionAddress);
     }
 
     /** Array version of: {@link #glScissorIndexedvNV ScissorIndexedvNV} */
@@ -184,7 +184,7 @@ public class NVViewportArray {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glDepthRangeArrayfvNV DepthRangeArrayfvNV} */
@@ -193,7 +193,7 @@ public class NVViewportArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, first, v.length >> 1, v);
+        callPV(first, v.length >> 1, v, __functionAddress);
     }
 
     /** Array version of: {@link #glGetFloati_vNV GetFloati_vNV} */
@@ -203,7 +203,7 @@ public class NVViewportArray {
             check(__functionAddress);
             check(data, 1);
         }
-        callPV(__functionAddress, target, index, data);
+        callPV(target, index, data, __functionAddress);
     }
 
 }

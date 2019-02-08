@@ -94,8 +94,8 @@ ENABLE_WARNINGS()
         "DrawingSurface_Lock",
         "Locks the surface of the target component for native rendering. When finished drawing, the surface must be unlocked with #DrawingSurface_Unlock().",
 
-        EXPLICIT_FUNCTION_ADDRESS,
         Input..JAWT_DrawingSurface.p("ds", "the surface to lock"),
+        EXPLICIT_FUNCTION_ADDRESS,
 
         returnDoc =
         """
@@ -120,8 +120,8 @@ ENABLE_WARNINGS()
         When finished with the returned value, #DrawingSurface_FreeDrawingSurfaceInfo() must be called.
         """,
 
-        EXPLICIT_FUNCTION_ADDRESS,
         Input..JAWT_DrawingSurface.p("ds", "the {@link JAWTDrawingSurface} to free"),
+        EXPLICIT_FUNCTION_ADDRESS,
 
         returnDoc = "#NULL if an error has occurred."
     )
@@ -130,16 +130,16 @@ ENABLE_WARNINGS()
         "DrawingSurface_FreeDrawingSurfaceInfo",
         "Frees the drawing surface info.",
 
-        EXPLICIT_FUNCTION_ADDRESS,
-        Input..JAWT_DrawingSurfaceInfo.p("dsi", "the {@link JAWTDrawingSurfaceInfo} to free")
+        Input..JAWT_DrawingSurfaceInfo.p("dsi", "the {@link JAWTDrawingSurfaceInfo} to free"),
+        EXPLICIT_FUNCTION_ADDRESS
     )
 
     void(
         "DrawingSurface_Unlock",
         "Unlocks the drawing surface of the target component for native rendering.",
 
-        EXPLICIT_FUNCTION_ADDRESS,
-        Input..JAWT_DrawingSurface.p("ds", "the surface to unlock")
+        Input..JAWT_DrawingSurface.p("ds", "the surface to unlock"),
+        EXPLICIT_FUNCTION_ADDRESS
     )
 
     // JAWT struct functions
@@ -152,12 +152,12 @@ ENABLE_WARNINGS()
         #FreeDrawingSurface() must be called when finished with the returned {@link JAWTDrawingSurface}.
         """,
 
-        EXPLICIT_FUNCTION_ADDRESS,
         JNI_ENV,
         jobject(
             "target",
             "must be a {@link java.awt.Component Component} (should be a {@link java.awt.Canvas Canvas} or {@link java.awt.Window Window} for native rendering)"
         ),
+        EXPLICIT_FUNCTION_ADDRESS,
 
         returnDoc = "#NULL if an error has occurred"
     )
@@ -166,24 +166,24 @@ ENABLE_WARNINGS()
         "FreeDrawingSurface",
         "Frees the drawing surface allocated in #GetDrawingSurface().",
 
-        EXPLICIT_FUNCTION_ADDRESS,
-        Input..JAWT_DrawingSurface.p("ds", "the {@link JAWTDrawingSurface} to free")
+        Input..JAWT_DrawingSurface.p("ds", "the {@link JAWTDrawingSurface} to free"),
+        EXPLICIT_FUNCTION_ADDRESS
     )
 
     void(
         "Lock",
         "Locks the entire AWT for synchronization purposes.",
 
-        EXPLICIT_FUNCTION_ADDRESS,
-        JNI_ENV
+        JNI_ENV,
+        EXPLICIT_FUNCTION_ADDRESS
     )
 
     void(
         "Unlock",
         "Unlocks the entire AWT for synchronization purposes.",
 
-        EXPLICIT_FUNCTION_ADDRESS,
-        JNI_ENV
+        JNI_ENV,
+        EXPLICIT_FUNCTION_ADDRESS
     )
 
     Component(
@@ -195,9 +195,9 @@ ENABLE_WARNINGS()
         information.
         """,
 
-        EXPLICIT_FUNCTION_ADDRESS,
         JNI_ENV,
-        opaque_p("platformInfo", "the native platform handle")
+        opaque_p("platformInfo", "the native platform handle"),
+        EXPLICIT_FUNCTION_ADDRESS
     )
 
     // JDK 9+
@@ -211,9 +211,9 @@ ENABLE_WARNINGS()
         information.
         """,
 
-        EXPLICIT_FUNCTION_ADDRESS,
         JNI_ENV,
         opaque_p("platformInfo", "the native platform handle"),
+        EXPLICIT_FUNCTION_ADDRESS,
 
         since = "Java 9"
     )
@@ -233,13 +233,13 @@ ENABLE_WARNINGS()
         Using usual {@code get/setLocation()} and {@code get/setBounds()} together with this new method is not recommended.
         """,
 
-        EXPLICIT_FUNCTION_ADDRESS,
         JNI_ENV,
         Frame("embeddedFrame", "the embedded frame"),
         jint("x", "the x coordinate"),
         jint("y", "the y coordinate"),
         jint("w", "the width"),
         jint("h", "the height"),
+        EXPLICIT_FUNCTION_ADDRESS,
 
         since = "Java 9"
     )
@@ -252,10 +252,10 @@ ENABLE_WARNINGS()
         The embedded frame should be created by #CreateEmbeddedFrame() method, or this function will not have any effect.
         """,
 
-        EXPLICIT_FUNCTION_ADDRESS,
         JNI_ENV,
         Frame("embeddedFrame", "the embedded frame"),
         jboolean("doActivate", "if true activates the window; otherwise, deactivates the window"),
+        EXPLICIT_FUNCTION_ADDRESS,
 
         since = "Java 9"
     )

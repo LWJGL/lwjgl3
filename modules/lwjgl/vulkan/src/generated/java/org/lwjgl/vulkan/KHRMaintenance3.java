@@ -101,7 +101,7 @@ public class KHRMaintenance3 {
             check(__functionAddress);
             VkDescriptorSetLayoutCreateInfo.validate(pCreateInfo);
         }
-        callPPPV(__functionAddress, device.address(), pCreateInfo, pSupport);
+        callPPPV(device.address(), pCreateInfo, pSupport, __functionAddress);
     }
 
     /**

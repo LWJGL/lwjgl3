@@ -83,7 +83,7 @@ public class OESGetProgramBinary {
             checkSafe(length, 1);
             check(binaryFormat, 1);
         }
-        callPPPV(__functionAddress, program, binary.remaining(), length, binaryFormat, memAddress(binary));
+        callPPPV(program, binary.remaining(), length, binaryFormat, memAddress(binary), __functionAddress);
     }
 
 }

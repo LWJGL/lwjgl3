@@ -566,7 +566,7 @@ public class Opus {
      */
     public static int opus_encoder_get_size(int channels) {
         long __functionAddress = Functions.encoder_get_size;
-        return invokeI(__functionAddress, channels);
+        return invokeI(channels, __functionAddress);
     }
 
     // --- [ opus_encoder_create ] ---
@@ -574,7 +574,7 @@ public class Opus {
     /** Unsafe version of: {@link #opus_encoder_create encoder_create} */
     public static long nopus_encoder_create(int Fs, int channels, int application, long error) {
         long __functionAddress = Functions.encoder_create;
-        return invokePP(__functionAddress, Fs, channels, application, error);
+        return invokePP(Fs, channels, application, error, __functionAddress);
     }
 
     /**
@@ -639,7 +639,7 @@ public class Opus {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st, Fs, channels, application);
+        return invokePI(st, Fs, channels, application, __functionAddress);
     }
 
     // --- [ opus_encode ] ---
@@ -655,7 +655,7 @@ public class Opus {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, pcm, frame_size, data, max_data_bytes);
+        return invokePPPI(st, pcm, frame_size, data, max_data_bytes, __functionAddress);
     }
 
     /**
@@ -691,7 +691,7 @@ public class Opus {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, pcm, frame_size, data, max_data_bytes);
+        return invokePPPI(st, pcm, frame_size, data, max_data_bytes, __functionAddress);
     }
 
     /**
@@ -728,7 +728,7 @@ public class Opus {
         if (CHECKS) {
             check(st);
         }
-        invokePV(__functionAddress, st);
+        invokePV(st, __functionAddress);
     }
 
     // --- [ opus_encoder_ctl ] ---
@@ -743,7 +743,7 @@ public class Opus {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st);
+        return invokePI(st, __functionAddress);
     }
 
     // --- [ opus_decoder_get_size ] ---
@@ -757,7 +757,7 @@ public class Opus {
      */
     public static int opus_decoder_get_size(int channels) {
         long __functionAddress = Functions.decoder_get_size;
-        return invokeI(__functionAddress, channels);
+        return invokeI(channels, __functionAddress);
     }
 
     // --- [ opus_decoder_create ] ---
@@ -765,7 +765,7 @@ public class Opus {
     /** Unsafe version of: {@link #opus_decoder_create decoder_create} */
     public static long nopus_decoder_create(int Fs, int channels, long error) {
         long __functionAddress = Functions.decoder_create;
-        return invokePP(__functionAddress, Fs, channels, error);
+        return invokePP(Fs, channels, error, __functionAddress);
     }
 
     /**
@@ -809,7 +809,7 @@ public class Opus {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st, Fs, channels);
+        return invokePI(st, Fs, channels, __functionAddress);
     }
 
     // --- [ opus_decode ] ---
@@ -824,7 +824,7 @@ public class Opus {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, data, len, pcm, frame_size, decode_fec);
+        return invokePPPI(st, data, len, pcm, frame_size, decode_fec, __functionAddress);
     }
 
     /**
@@ -863,7 +863,7 @@ public class Opus {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, data, len, pcm, frame_size, decode_fec);
+        return invokePPPI(st, data, len, pcm, frame_size, decode_fec, __functionAddress);
     }
 
     /**
@@ -902,7 +902,7 @@ public class Opus {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st);
+        return invokePI(st, __functionAddress);
     }
 
     // --- [ opus_decoder_destroy ] ---
@@ -917,7 +917,7 @@ public class Opus {
         if (CHECKS) {
             check(st);
         }
-        invokePV(__functionAddress, st);
+        invokePV(st, __functionAddress);
     }
 
     // --- [ opus_packet_parse ] ---
@@ -929,7 +929,7 @@ public class Opus {
      */
     public static int nopus_packet_parse(long data, int len, long out_toc, long frames, long size, long payload_offset) {
         long __functionAddress = Functions.packet_parse;
-        return invokePPPPPI(__functionAddress, data, len, out_toc, frames, size, payload_offset);
+        return invokePPPPPI(data, len, out_toc, frames, size, payload_offset, __functionAddress);
     }
 
     /**
@@ -960,7 +960,7 @@ public class Opus {
     /** Unsafe version of: {@link #opus_packet_get_bandwidth packet_get_bandwidth} */
     public static int nopus_packet_get_bandwidth(long data) {
         long __functionAddress = Functions.packet_get_bandwidth;
-        return invokePI(__functionAddress, data);
+        return invokePI(data, __functionAddress);
     }
 
     /**
@@ -982,7 +982,7 @@ public class Opus {
     /** Unsafe version of: {@link #opus_packet_get_samples_per_frame packet_get_samples_per_frame} */
     public static int nopus_packet_get_samples_per_frame(long data, int Fs) {
         long __functionAddress = Functions.packet_get_samples_per_frame;
-        return invokePI(__functionAddress, data, Fs);
+        return invokePI(data, Fs, __functionAddress);
     }
 
     /**
@@ -1005,7 +1005,7 @@ public class Opus {
     /** Unsafe version of: {@link #opus_packet_get_nb_channels packet_get_nb_channels} */
     public static int nopus_packet_get_nb_channels(long data) {
         long __functionAddress = Functions.packet_get_nb_channels;
-        return invokePI(__functionAddress, data);
+        return invokePI(data, __functionAddress);
     }
 
     /**
@@ -1028,7 +1028,7 @@ public class Opus {
      */
     public static int nopus_packet_get_nb_frames(long packet, int len) {
         long __functionAddress = Functions.packet_get_nb_frames;
-        return invokePI(__functionAddress, packet, len);
+        return invokePI(packet, len, __functionAddress);
     }
 
     /**
@@ -1052,7 +1052,7 @@ public class Opus {
      */
     public static int nopus_packet_get_nb_samples(long packet, int len, int Fs) {
         long __functionAddress = Functions.packet_get_nb_samples;
-        return invokePI(__functionAddress, packet, len, Fs);
+        return invokePI(packet, len, Fs, __functionAddress);
     }
 
     /**
@@ -1080,7 +1080,7 @@ public class Opus {
         if (CHECKS) {
             check(dec);
         }
-        return invokePPI(__functionAddress, dec, packet, len);
+        return invokePPI(dec, packet, len, __functionAddress);
     }
 
     /**
@@ -1105,7 +1105,7 @@ public class Opus {
      */
     public static void nopus_pcm_soft_clip(long pcm, int frame_size, int channels, long softclip_mem) {
         long __functionAddress = Functions.pcm_soft_clip;
-        invokePPV(__functionAddress, pcm, frame_size, channels, softclip_mem);
+        invokePPV(pcm, frame_size, channels, softclip_mem, __functionAddress);
     }
 
     /**
@@ -1156,7 +1156,7 @@ public class Opus {
         if (CHECKS) {
             check(rp);
         }
-        return invokePP(__functionAddress, rp);
+        return invokePP(rp, __functionAddress);
     }
 
     // --- [ opus_repacketizer_create ] ---
@@ -1180,7 +1180,7 @@ public class Opus {
         if (CHECKS) {
             check(rp);
         }
-        invokePV(__functionAddress, rp);
+        invokePV(rp, __functionAddress);
     }
 
     // --- [ opus_repacketizer_cat ] ---
@@ -1195,7 +1195,7 @@ public class Opus {
         if (CHECKS) {
             check(rp);
         }
-        return invokePPI(__functionAddress, rp, data, len);
+        return invokePPI(rp, data, len, __functionAddress);
     }
 
     /**
@@ -1237,7 +1237,7 @@ public class Opus {
         if (CHECKS) {
             check(rp);
         }
-        return invokePPI(__functionAddress, rp, begin, end, data, maxlen);
+        return invokePPI(rp, begin, end, data, maxlen, __functionAddress);
     }
 
     /**
@@ -1274,7 +1274,7 @@ public class Opus {
         if (CHECKS) {
             check(rp);
         }
-        return invokePI(__functionAddress, rp);
+        return invokePI(rp, __functionAddress);
     }
 
     // --- [ opus_repacketizer_out ] ---
@@ -1291,7 +1291,7 @@ public class Opus {
         if (CHECKS) {
             check(rp);
         }
-        return invokePPI(__functionAddress, rp, data, maxlen);
+        return invokePPI(rp, data, maxlen, __functionAddress);
     }
 
     /**
@@ -1315,7 +1315,7 @@ public class Opus {
     /** Unsafe version of: {@link #opus_packet_pad packet_pad} */
     public static int nopus_packet_pad(long data, int len, int new_len) {
         long __functionAddress = Functions.packet_pad;
-        return invokePI(__functionAddress, data, len, new_len);
+        return invokePI(data, len, new_len, __functionAddress);
     }
 
     /**
@@ -1340,7 +1340,7 @@ public class Opus {
     /** Unsafe version of: {@link #opus_packet_unpad packet_unpad} */
     public static int nopus_packet_unpad(long data, int len) {
         long __functionAddress = Functions.packet_unpad;
-        return invokePI(__functionAddress, data, len);
+        return invokePI(data, len, __functionAddress);
     }
 
     /**
@@ -1365,7 +1365,7 @@ public class Opus {
     /** Unsafe version of: {@link #opus_multistream_packet_pad multistream_packet_pad} */
     public static int nopus_multistream_packet_pad(long data, int len, int new_len, int nb_streams) {
         long __functionAddress = Functions.multistream_packet_pad;
-        return invokePI(__functionAddress, data, len, new_len, nb_streams);
+        return invokePI(data, len, new_len, nb_streams, __functionAddress);
     }
 
     /**
@@ -1391,7 +1391,7 @@ public class Opus {
     /** Unsafe version of: {@link #opus_multistream_packet_unpad multistream_packet_unpad} */
     public static int nopus_multistream_packet_unpad(long data, int len, int nb_streams) {
         long __functionAddress = Functions.multistream_packet_unpad;
-        return invokePI(__functionAddress, data, len, nb_streams);
+        return invokePI(data, len, nb_streams, __functionAddress);
     }
 
     /**
@@ -1417,7 +1417,7 @@ public class Opus {
     /** Unsafe version of: {@link #opus_strerror strerror} */
     public static long nopus_strerror(int error) {
         long __functionAddress = Functions.strerror;
-        return invokeP(__functionAddress, error);
+        return invokeP(error, __functionAddress);
     }
 
     /**

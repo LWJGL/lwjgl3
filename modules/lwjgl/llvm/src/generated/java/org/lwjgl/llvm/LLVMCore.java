@@ -1363,7 +1363,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMShutdown ] ---
@@ -1378,7 +1378,7 @@ public class LLVMCore {
 
     public static long nLLVMCreateMessage(long Message) {
         long __functionAddress = Functions.CreateMessage;
-        return invokePP(__functionAddress, Message);
+        return invokePP(Message, __functionAddress);
     }
 
     @NativeType("char *")
@@ -1407,7 +1407,7 @@ public class LLVMCore {
 
     public static void nLLVMDisposeMessage(long Message) {
         long __functionAddress = Functions.DisposeMessage;
-        invokePV(__functionAddress, Message);
+        invokePV(Message, __functionAddress);
     }
 
     public static void LLVMDisposeMessage(@NativeType("char *") ByteBuffer Message) {
@@ -1447,7 +1447,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        invokePPPV(__functionAddress, C, Handler, DiagnosticContext);
+        invokePPPV(C, Handler, DiagnosticContext, __functionAddress);
     }
 
     /** Set the diagnostic handler for this context. */
@@ -1463,7 +1463,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     /** Get the diagnostic handler of this context. */
@@ -1482,7 +1482,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMContextSetYieldCallback ] ---
@@ -1493,7 +1493,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        invokePPPV(__functionAddress, C, Callback, OpaqueHandle);
+        invokePPPV(C, Callback, OpaqueHandle, __functionAddress);
     }
 
     /** Set the yield callback function for this context. */
@@ -1513,7 +1513,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        invokePV(__functionAddress, C);
+        invokePV(C, __functionAddress);
     }
 
     // --- [ LLVMGetDiagInfoDescription ] ---
@@ -1524,7 +1524,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(DI);
         }
-        return invokePP(__functionAddress, DI);
+        return invokePP(DI, __functionAddress);
     }
 
     /** Return a string representation of the {@code DiagnosticInfo}. Use {@link #LLVMDisposeMessage DisposeMessage} to free the string. */
@@ -1543,7 +1543,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(DI);
         }
-        return invokePI(__functionAddress, DI);
+        return invokePI(DI, __functionAddress);
     }
 
     // --- [ LLVMGetMDKindIDInContext ] ---
@@ -1553,7 +1553,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePPI(__functionAddress, C, Name, SLen);
+        return invokePPI(C, Name, SLen, __functionAddress);
     }
 
     @NativeType("unsigned int")
@@ -1577,7 +1577,7 @@ public class LLVMCore {
 
     public static int nLLVMGetMDKindID(long Name, int SLen) {
         long __functionAddress = Functions.GetMDKindID;
-        return invokePI(__functionAddress, Name, SLen);
+        return invokePI(Name, SLen, __functionAddress);
     }
 
     @NativeType("unsigned int")
@@ -1602,7 +1602,7 @@ public class LLVMCore {
     /** Unsafe version of: {@link #LLVMGetEnumAttributeKindForName GetEnumAttributeKindForName} */
     public static int nLLVMGetEnumAttributeKindForName(long Name, long SLen) {
         long __functionAddress = Functions.GetEnumAttributeKindForName;
-        return invokePPI(__functionAddress, Name, SLen);
+        return invokePPI(Name, SLen, __functionAddress);
     }
 
     /**
@@ -1655,7 +1655,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePJP(__functionAddress, C, KindID, Val);
+        return invokePJP(C, KindID, Val, __functionAddress);
     }
 
     // --- [ LLVMGetEnumAttributeKind ] ---
@@ -1667,7 +1667,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(A);
         }
-        return invokePI(__functionAddress, A);
+        return invokePI(A, __functionAddress);
     }
 
     // --- [ LLVMGetEnumAttributeValue ] ---
@@ -1679,7 +1679,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(A);
         }
-        return invokePJ(__functionAddress, A);
+        return invokePJ(A, __functionAddress);
     }
 
     // --- [ LLVMCreateStringAttribute ] ---
@@ -1690,7 +1690,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePPPP(__functionAddress, C, K, KLength, V, VLength);
+        return invokePPPP(C, K, KLength, V, VLength, __functionAddress);
     }
 
     /** Create a string attribute. */
@@ -1722,7 +1722,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(A);
         }
-        return invokePPP(__functionAddress, A, Length);
+        return invokePPP(A, Length, __functionAddress);
     }
 
     /** Get the string attribute's kind. */
@@ -1746,7 +1746,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(A);
         }
-        return invokePPP(__functionAddress, A, Length);
+        return invokePPP(A, Length, __functionAddress);
     }
 
     /** Get the string attribute's value. */
@@ -1770,7 +1770,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(A);
         }
-        return invokePI(__functionAddress, A) != 0;
+        return invokePI(A, __functionAddress) != 0;
     }
 
     // --- [ LLVMIsStringAttribute ] ---
@@ -1781,7 +1781,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(A);
         }
-        return invokePI(__functionAddress, A) != 0;
+        return invokePI(A, __functionAddress) != 0;
     }
 
     // --- [ LLVMModuleCreateWithName ] ---
@@ -1789,7 +1789,7 @@ public class LLVMCore {
     /** Unsafe version of: {@link #LLVMModuleCreateWithName ModuleCreateWithName} */
     public static long nLLVMModuleCreateWithName(long ModuleID) {
         long __functionAddress = Functions.ModuleCreateWithName;
-        return invokePP(__functionAddress, ModuleID);
+        return invokePP(ModuleID, __functionAddress);
     }
 
     /**
@@ -1834,7 +1834,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePPP(__functionAddress, ModuleID, C);
+        return invokePPP(ModuleID, C, __functionAddress);
     }
 
     /**
@@ -1876,7 +1876,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMDisposeModule ] ---
@@ -1891,7 +1891,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        invokePV(__functionAddress, M);
+        invokePV(M, __functionAddress);
     }
 
     // --- [ LLVMGetModuleIdentifier ] ---
@@ -1906,7 +1906,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePPP(__functionAddress, M, Len);
+        return invokePPP(M, Len, __functionAddress);
     }
 
     /**
@@ -1940,7 +1940,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        invokePPPV(__functionAddress, M, Ident, Len);
+        invokePPPV(M, Ident, Len, __functionAddress);
     }
 
     /**
@@ -1983,7 +1983,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        return invokePPP(__functionAddress, M, Len);
+        return invokePPP(M, Len, __functionAddress);
     }
 
     /**
@@ -2018,7 +2018,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        invokePPPV(__functionAddress, M, Name, Len);
+        invokePPPV(M, Name, Len, __functionAddress);
     }
 
     /**
@@ -2056,7 +2056,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     /**
@@ -2078,7 +2078,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     @NativeType("char const *")
@@ -2095,7 +2095,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        invokePPV(__functionAddress, M, DataLayoutStr);
+        invokePPV(M, DataLayoutStr, __functionAddress);
     }
 
     /** Set the data layout for a module. */
@@ -2126,7 +2126,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     /** Obtain the target triple for a module. */
@@ -2144,7 +2144,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        invokePPV(__functionAddress, M, Triple);
+        invokePPV(M, Triple, __functionAddress);
     }
 
     /** Set the target triple for a module. */
@@ -2176,7 +2176,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        return invokePPP(__functionAddress, M, Len);
+        return invokePPP(M, Len, __functionAddress);
     }
 
     /**
@@ -2200,7 +2200,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Entries);
         }
-        invokePV(__functionAddress, Entries);
+        invokePV(Entries, __functionAddress);
     }
 
     // --- [ LLVMModuleFlagEntriesGetFlagBehavior ] ---
@@ -2213,7 +2213,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Entries);
         }
-        return invokePI(__functionAddress, Entries, Index);
+        return invokePI(Entries, Index, __functionAddress);
     }
 
     // --- [ LLVMModuleFlagEntriesGetKey ] ---
@@ -2225,7 +2225,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Entries);
         }
-        return invokePPP(__functionAddress, Entries, Index, Len);
+        return invokePPP(Entries, Index, Len, __functionAddress);
     }
 
     /** Returns the key for a module flag entry at a specific index. */
@@ -2251,7 +2251,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Entries);
         }
-        return invokePP(__functionAddress, Entries, Index);
+        return invokePP(Entries, Index, __functionAddress);
     }
 
     // --- [ LLVMGetModuleFlag ] ---
@@ -2263,7 +2263,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        return invokePPPP(__functionAddress, M, Key, KeyLen);
+        return invokePPPP(M, Key, KeyLen, __functionAddress);
     }
 
     /** Add a module-level flag to the module-level flags metadata if it doesn't already exist. */
@@ -2295,7 +2295,7 @@ public class LLVMCore {
             check(M);
             check(Val);
         }
-        invokePPPPV(__functionAddress, M, Behavior, Key, KeyLen, Val);
+        invokePPPPV(M, Behavior, Key, KeyLen, Val, __functionAddress);
     }
 
     /** Add a module-level flag to the module-level flags metadata if it doesn't already exist. */
@@ -2323,7 +2323,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        invokePV(__functionAddress, M);
+        invokePV(M, __functionAddress);
     }
 
     // --- [ LLVMPrintModuleToFile ] ---
@@ -2334,7 +2334,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePPPI(__functionAddress, M, Filename, ErrorMessage);
+        return invokePPPI(M, Filename, ErrorMessage, __functionAddress);
     }
 
     /**
@@ -2379,7 +2379,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     /** Return a string representation of the module. Use {@link #LLVMDisposeMessage DisposeMessage} to free the string. */
@@ -2398,7 +2398,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        return invokePPP(__functionAddress, M, Len);
+        return invokePPP(M, Len, __functionAddress);
     }
 
     /** Get inline assembly for a module. */
@@ -2423,7 +2423,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        invokePPPV(__functionAddress, M, Asm, Len);
+        invokePPPV(M, Asm, Len, __functionAddress);
     }
 
     /** Set inline assembly for a module. */
@@ -2452,7 +2452,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        invokePPPV(__functionAddress, M, Asm, Len);
+        invokePPPV(M, Asm, Len, __functionAddress);
     }
 
     /** Append inline assembly to a module. */
@@ -2481,7 +2481,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Ty);
         }
-        return invokePPPPPP(__functionAddress, Ty, AsmString, AsmStringSize, Constraints, ConstraintsSize, HasSideEffects, IsAlignStack, Dialect);
+        return invokePPPPPP(Ty, AsmString, AsmStringSize, Constraints, ConstraintsSize, HasSideEffects, IsAlignStack, Dialect, __functionAddress);
     }
 
     /** Create the specified uniqued inline asm string. */
@@ -2499,7 +2499,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMGetTypeByName ] ---
@@ -2510,7 +2510,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePPP(__functionAddress, M, Name);
+        return invokePPP(M, Name, __functionAddress);
     }
 
     /** Obtain a Type from a module by its registered name. */
@@ -2545,7 +2545,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMGetLastNamedMetadata ] ---
@@ -2558,7 +2558,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMGetNextNamedMetadata ] ---
@@ -2575,7 +2575,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(NamedMDNode);
         }
-        return invokePP(__functionAddress, NamedMDNode);
+        return invokePP(NamedMDNode, __functionAddress);
     }
 
     // --- [ LLVMGetPreviousNamedMetadata ] ---
@@ -2592,7 +2592,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(NamedMDNode);
         }
-        return invokePP(__functionAddress, NamedMDNode);
+        return invokePP(NamedMDNode, __functionAddress);
     }
 
     // --- [ LLVMGetNamedMetadata ] ---
@@ -2604,7 +2604,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        return invokePPPP(__functionAddress, M, Name, NameLen);
+        return invokePPPP(M, Name, NameLen, __functionAddress);
     }
 
     /** Retrieve a {@code NamedMDNode} with the given name, returning {@code NULL} if no such node exists. */
@@ -2635,7 +2635,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        return invokePPPP(__functionAddress, M, Name, NameLen);
+        return invokePPPP(M, Name, NameLen, __functionAddress);
     }
 
     /** Retrieve a {@code NamedMDNode} with the given name, creating a new node if no such node exists. */
@@ -2666,7 +2666,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(NamedMD);
         }
-        return invokePPP(__functionAddress, NamedMD, NameLen);
+        return invokePPP(NamedMD, NameLen, __functionAddress);
     }
 
     /** Retrieve the name of a {@code NamedMDNode}. */
@@ -2690,7 +2690,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePPI(__functionAddress, M, Name);
+        return invokePPI(M, Name, __functionAddress);
     }
 
     /** Obtain the number of operands for named metadata in a module. */
@@ -2723,7 +2723,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        invokePPPV(__functionAddress, M, Name, Dest);
+        invokePPPV(M, Name, Dest, __functionAddress);
     }
 
     /**
@@ -2773,7 +2773,7 @@ public class LLVMCore {
             check(M);
             check(Val);
         }
-        invokePPPV(__functionAddress, M, Name, Val);
+        invokePPPV(M, Name, Val, __functionAddress);
     }
 
     /** Add an operand to named metadata. */
@@ -2805,7 +2805,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Val);
         }
-        return invokePPP(__functionAddress, Val, Length);
+        return invokePPP(Val, Length, __functionAddress);
     }
 
     /**
@@ -2834,7 +2834,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Val);
         }
-        return invokePPP(__functionAddress, Val, Length);
+        return invokePPP(Val, Length, __functionAddress);
     }
 
     /**
@@ -2867,7 +2867,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Val);
         }
-        return invokePI(__functionAddress, Val);
+        return invokePI(Val, __functionAddress);
     }
 
     // --- [ LLVMGetDebugLocColumn ] ---
@@ -2880,7 +2880,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Val);
         }
-        return invokePI(__functionAddress, Val);
+        return invokePI(Val, __functionAddress);
     }
 
     // --- [ LLVMAddFunction ] ---
@@ -2892,7 +2892,7 @@ public class LLVMCore {
             check(M);
             check(FunctionTy);
         }
-        return invokePPPP(__functionAddress, M, Name, FunctionTy);
+        return invokePPPP(M, Name, FunctionTy, __functionAddress);
     }
 
     /** Add a function to a module under a specified name. */
@@ -2925,7 +2925,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePPP(__functionAddress, M, Name);
+        return invokePPP(M, Name, __functionAddress);
     }
 
     /**
@@ -2967,7 +2967,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMGetLastFunction ] ---
@@ -2979,7 +2979,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMGetNextFunction ] ---
@@ -2995,7 +2995,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePP(__functionAddress, Fn);
+        return invokePP(Fn, __functionAddress);
     }
 
     // --- [ LLVMGetPreviousFunction ] ---
@@ -3011,7 +3011,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePP(__functionAddress, Fn);
+        return invokePP(Fn, __functionAddress);
     }
 
     // --- [ LLVMSetModuleInlineAsm ] ---
@@ -3023,7 +3023,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        invokePPV(__functionAddress, M, Asm);
+        invokePPV(M, Asm, __functionAddress);
     }
 
     /** Deprecated: Use {@link #LLVMSetModuleInlineAsm2 SetModuleInlineAsm2} instead. */
@@ -3055,7 +3055,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePI(__functionAddress, Ty);
+        return invokePI(Ty, __functionAddress);
     }
 
     // --- [ LLVMTypeIsSized ] ---
@@ -3071,7 +3071,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePI(__functionAddress, Ty) != 0;
+        return invokePI(Ty, __functionAddress) != 0;
     }
 
     // --- [ LLVMGetTypeContext ] ---
@@ -3083,7 +3083,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePP(__functionAddress, Ty);
+        return invokePP(Ty, __functionAddress);
     }
 
     // --- [ LLVMDumpType ] ---
@@ -3095,7 +3095,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Val);
         }
-        invokePV(__functionAddress, Val);
+        invokePV(Val, __functionAddress);
     }
 
     // --- [ LLVMPrintTypeToString ] ---
@@ -3106,7 +3106,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     /** Return a string representation of the type. Use {@link #LLVMDisposeMessage DisposeMessage} to free the string. */
@@ -3125,7 +3125,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMInt8TypeInContext ] ---
@@ -3136,7 +3136,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMInt16TypeInContext ] ---
@@ -3147,7 +3147,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMInt32TypeInContext ] ---
@@ -3158,7 +3158,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMInt64TypeInContext ] ---
@@ -3169,7 +3169,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMInt128TypeInContext ] ---
@@ -3180,7 +3180,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMIntTypeInContext ] ---
@@ -3191,7 +3191,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C, NumBits);
+        return invokePP(C, NumBits, __functionAddress);
     }
 
     // --- [ LLVMInt1Type ] ---
@@ -3248,7 +3248,7 @@ public class LLVMCore {
     @NativeType("LLVMTypeRef")
     public static long LLVMIntType(@NativeType("unsigned int") int NumBits) {
         long __functionAddress = Functions.IntType;
-        return invokeP(__functionAddress, NumBits);
+        return invokeP(NumBits, __functionAddress);
     }
 
     // --- [ LLVMGetIntTypeWidth ] ---
@@ -3259,7 +3259,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(IntegerTy);
         }
-        return invokePI(__functionAddress, IntegerTy);
+        return invokePI(IntegerTy, __functionAddress);
     }
 
     // --- [ LLVMHalfTypeInContext ] ---
@@ -3271,7 +3271,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMFloatTypeInContext ] ---
@@ -3283,7 +3283,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMDoubleTypeInContext ] ---
@@ -3295,7 +3295,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMX86FP80TypeInContext ] ---
@@ -3307,7 +3307,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMFP128TypeInContext ] ---
@@ -3319,7 +3319,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMPPCFP128TypeInContext ] ---
@@ -3331,7 +3331,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMHalfType ] ---
@@ -3395,7 +3395,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ReturnType);
         }
-        return invokePPP(__functionAddress, ReturnType, ParamTypes, ParamCount, IsVarArg);
+        return invokePPP(ReturnType, ParamTypes, ParamCount, IsVarArg, __functionAddress);
     }
 
     /**
@@ -3417,7 +3417,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(FunctionTy);
         }
-        return invokePI(__functionAddress, FunctionTy) != 0;
+        return invokePI(FunctionTy, __functionAddress) != 0;
     }
 
     // --- [ LLVMGetReturnType ] ---
@@ -3429,7 +3429,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(FunctionTy);
         }
-        return invokePP(__functionAddress, FunctionTy);
+        return invokePP(FunctionTy, __functionAddress);
     }
 
     // --- [ LLVMCountParamTypes ] ---
@@ -3441,7 +3441,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(FunctionTy);
         }
-        return invokePI(__functionAddress, FunctionTy);
+        return invokePI(FunctionTy, __functionAddress);
     }
 
     // --- [ LLVMGetParamTypes ] ---
@@ -3452,7 +3452,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(FunctionTy);
         }
-        invokePPV(__functionAddress, FunctionTy, Dest);
+        invokePPV(FunctionTy, Dest, __functionAddress);
     }
 
     /**
@@ -3481,7 +3481,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePPP(__functionAddress, C, ElementTypes, ElementCount, Packed);
+        return invokePPP(C, ElementTypes, ElementCount, Packed, __functionAddress);
     }
 
     /**
@@ -3499,7 +3499,7 @@ public class LLVMCore {
     /** Unsafe version of: {@link #LLVMStructType StructType} */
     public static long nLLVMStructType(long ElementTypes, int ElementCount, int Packed) {
         long __functionAddress = Functions.StructType;
-        return invokePP(__functionAddress, ElementTypes, ElementCount, Packed);
+        return invokePP(ElementTypes, ElementCount, Packed, __functionAddress);
     }
 
     /** Create a new structure type in the global context. */
@@ -3516,7 +3516,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePPP(__functionAddress, C, Name);
+        return invokePPP(C, Name, __functionAddress);
     }
 
     /** Create an empty structure in a context having a specified name. */
@@ -3549,7 +3549,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePP(__functionAddress, Ty);
+        return invokePP(Ty, __functionAddress);
     }
 
     /** Obtain the name of a structure. */
@@ -3568,7 +3568,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(StructTy);
         }
-        invokePPV(__functionAddress, StructTy, ElementTypes, ElementCount, Packed);
+        invokePPV(StructTy, ElementTypes, ElementCount, Packed, __functionAddress);
     }
 
     /** Set the contents of a structure type. */
@@ -3585,7 +3585,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(StructTy);
         }
-        return invokePI(__functionAddress, StructTy);
+        return invokePI(StructTy, __functionAddress);
     }
 
     // --- [ LLVMGetStructElementTypes ] ---
@@ -3596,7 +3596,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(StructTy);
         }
-        invokePPV(__functionAddress, StructTy, Dest);
+        invokePPV(StructTy, Dest, __functionAddress);
     }
 
     /**
@@ -3624,7 +3624,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(StructTy);
         }
-        return invokePP(__functionAddress, StructTy, i);
+        return invokePP(StructTy, i, __functionAddress);
     }
 
     // --- [ LLVMIsPackedStruct ] ---
@@ -3636,7 +3636,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(StructTy);
         }
-        return invokePI(__functionAddress, StructTy) != 0;
+        return invokePI(StructTy, __functionAddress) != 0;
     }
 
     // --- [ LLVMIsOpaqueStruct ] ---
@@ -3648,7 +3648,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(StructTy);
         }
-        return invokePI(__functionAddress, StructTy) != 0;
+        return invokePI(StructTy, __functionAddress) != 0;
     }
 
     // --- [ LLVMIsLiteralStruct ] ---
@@ -3661,7 +3661,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(StructTy);
         }
-        return invokePI(__functionAddress, StructTy) != 0;
+        return invokePI(StructTy, __functionAddress) != 0;
     }
 
     // --- [ LLVMGetElementType ] ---
@@ -3677,7 +3677,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePP(__functionAddress, Ty);
+        return invokePP(Ty, __functionAddress);
     }
 
     // --- [ LLVMGetSubtypes ] ---
@@ -3688,7 +3688,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Tp);
         }
-        invokePPV(__functionAddress, Tp, Arr);
+        invokePPV(Tp, Arr, __functionAddress);
     }
 
     /** Returns type's subtypes */
@@ -3705,7 +3705,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Tp);
         }
-        return invokePI(__functionAddress, Tp);
+        return invokePI(Tp, __functionAddress);
     }
 
     // --- [ LLVMArrayType ] ---
@@ -3721,7 +3721,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ElementType);
         }
-        return invokePP(__functionAddress, ElementType, ElementCount);
+        return invokePP(ElementType, ElementCount, __functionAddress);
     }
 
     // --- [ LLVMGetArrayLength ] ---
@@ -3737,7 +3737,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ArrayTy);
         }
-        return invokePI(__functionAddress, ArrayTy);
+        return invokePI(ArrayTy, __functionAddress);
     }
 
     // --- [ LLVMPointerType ] ---
@@ -3753,7 +3753,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ElementType);
         }
-        return invokePP(__functionAddress, ElementType, AddressSpace);
+        return invokePP(ElementType, AddressSpace, __functionAddress);
     }
 
     // --- [ LLVMGetPointerAddressSpace ] ---
@@ -3769,7 +3769,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(PointerTy);
         }
-        return invokePI(__functionAddress, PointerTy);
+        return invokePI(PointerTy, __functionAddress);
     }
 
     // --- [ LLVMVectorType ] ---
@@ -3785,7 +3785,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ElementType);
         }
-        return invokePP(__functionAddress, ElementType, ElementCount);
+        return invokePP(ElementType, ElementCount, __functionAddress);
     }
 
     // --- [ LLVMGetVectorSize ] ---
@@ -3801,7 +3801,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(VectorTy);
         }
-        return invokePI(__functionAddress, VectorTy);
+        return invokePI(VectorTy, __functionAddress);
     }
 
     // --- [ LLVMVoidTypeInContext ] ---
@@ -3813,7 +3813,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMLabelTypeInContext ] ---
@@ -3825,7 +3825,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMX86MMXTypeInContext ] ---
@@ -3837,7 +3837,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMTokenTypeInContext ] ---
@@ -3850,7 +3850,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMMetadataTypeInContext ] ---
@@ -3863,7 +3863,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMVoidType ] ---
@@ -3900,7 +3900,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMGetValueKind ] ---
@@ -3912,7 +3912,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePI(__functionAddress, Val);
+        return invokePI(Val, __functionAddress);
     }
 
     // --- [ LLVMGetValueName2 ] ---
@@ -3924,7 +3924,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Val);
         }
-        return invokePPP(__functionAddress, Val, Length);
+        return invokePPP(Val, Length, __functionAddress);
     }
 
     /** Obtain the string name of a value. */
@@ -3949,7 +3949,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Val);
         }
-        invokePPPV(__functionAddress, Val, Name, NameLen);
+        invokePPPV(Val, Name, NameLen, __functionAddress);
     }
 
     /** Set the string name of a value. */
@@ -3977,7 +3977,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        invokePV(__functionAddress, Val);
+        invokePV(Val, __functionAddress);
     }
 
     // --- [ LLVMPrintValueToString ] ---
@@ -3988,7 +3988,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     /** Return a string representation of the value. Use {@link #LLVMDisposeMessage DisposeMessage} to free the string. */
@@ -4007,7 +4007,7 @@ public class LLVMCore {
             check(OldVal);
             check(NewVal);
         }
-        invokePPV(__functionAddress, OldVal, NewVal);
+        invokePPV(OldVal, NewVal, __functionAddress);
     }
 
     // --- [ LLVMIsConstant ] ---
@@ -4019,7 +4019,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePI(__functionAddress, Val) != 0;
+        return invokePI(Val, __functionAddress) != 0;
     }
 
     // --- [ LLVMIsUndef ] ---
@@ -4031,7 +4031,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePI(__functionAddress, Val) != 0;
+        return invokePI(Val, __functionAddress) != 0;
     }
 
     // --- [ LLVMIsAArgument ] ---
@@ -4042,7 +4042,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsABasicBlock ] ---
@@ -4053,7 +4053,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAInlineAsm ] ---
@@ -4064,7 +4064,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAUser ] ---
@@ -4075,7 +4075,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstant ] ---
@@ -4086,7 +4086,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsABlockAddress ] ---
@@ -4097,7 +4097,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantAggregateZero ] ---
@@ -4108,7 +4108,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantArray ] ---
@@ -4119,7 +4119,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantDataSequential ] ---
@@ -4130,7 +4130,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantDataArray ] ---
@@ -4141,7 +4141,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantDataVector ] ---
@@ -4152,7 +4152,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantExpr ] ---
@@ -4163,7 +4163,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantFP ] ---
@@ -4174,7 +4174,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantInt ] ---
@@ -4185,7 +4185,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantPointerNull ] ---
@@ -4196,7 +4196,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantStruct ] ---
@@ -4207,7 +4207,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantTokenNone ] ---
@@ -4218,7 +4218,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAConstantVector ] ---
@@ -4229,7 +4229,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAGlobalValue ] ---
@@ -4240,7 +4240,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAGlobalAlias ] ---
@@ -4251,7 +4251,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAGlobalIFunc ] ---
@@ -4263,7 +4263,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAGlobalObject ] ---
@@ -4274,7 +4274,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAFunction ] ---
@@ -4285,7 +4285,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAGlobalVariable ] ---
@@ -4296,7 +4296,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAUndefValue ] ---
@@ -4307,7 +4307,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAInstruction ] ---
@@ -4318,7 +4318,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsABinaryOperator ] ---
@@ -4329,7 +4329,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsACallInst ] ---
@@ -4340,7 +4340,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAIntrinsicInst ] ---
@@ -4351,7 +4351,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsADbgInfoIntrinsic ] ---
@@ -4362,7 +4362,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsADbgVariableIntrinsic ] ---
@@ -4374,7 +4374,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsADbgDeclareInst ] ---
@@ -4385,7 +4385,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsADbgLabelInst ] ---
@@ -4397,7 +4397,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAMemIntrinsic ] ---
@@ -4408,7 +4408,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAMemCpyInst ] ---
@@ -4419,7 +4419,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAMemMoveInst ] ---
@@ -4430,7 +4430,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAMemSetInst ] ---
@@ -4441,7 +4441,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsACmpInst ] ---
@@ -4452,7 +4452,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAFCmpInst ] ---
@@ -4463,7 +4463,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAICmpInst ] ---
@@ -4474,7 +4474,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAExtractElementInst ] ---
@@ -4485,7 +4485,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAGetElementPtrInst ] ---
@@ -4496,7 +4496,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAInsertElementInst ] ---
@@ -4507,7 +4507,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAInsertValueInst ] ---
@@ -4518,7 +4518,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsALandingPadInst ] ---
@@ -4529,7 +4529,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAPHINode ] ---
@@ -4540,7 +4540,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsASelectInst ] ---
@@ -4551,7 +4551,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAShuffleVectorInst ] ---
@@ -4562,7 +4562,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAStoreInst ] ---
@@ -4573,7 +4573,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsABranchInst ] ---
@@ -4584,7 +4584,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAIndirectBrInst ] ---
@@ -4595,7 +4595,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAInvokeInst ] ---
@@ -4606,7 +4606,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAReturnInst ] ---
@@ -4617,7 +4617,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsASwitchInst ] ---
@@ -4628,7 +4628,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAUnreachableInst ] ---
@@ -4639,7 +4639,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAResumeInst ] ---
@@ -4650,7 +4650,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsACleanupReturnInst ] ---
@@ -4661,7 +4661,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsACatchReturnInst ] ---
@@ -4672,7 +4672,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAFuncletPadInst ] ---
@@ -4683,7 +4683,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsACatchPadInst ] ---
@@ -4694,7 +4694,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsACleanupPadInst ] ---
@@ -4705,7 +4705,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAUnaryInstruction ] ---
@@ -4716,7 +4716,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAAllocaInst ] ---
@@ -4727,7 +4727,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsACastInst ] ---
@@ -4738,7 +4738,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAAddrSpaceCastInst ] ---
@@ -4749,7 +4749,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsABitCastInst ] ---
@@ -4760,7 +4760,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAFPExtInst ] ---
@@ -4771,7 +4771,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAFPToSIInst ] ---
@@ -4782,7 +4782,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAFPToUIInst ] ---
@@ -4793,7 +4793,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAFPTruncInst ] ---
@@ -4804,7 +4804,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAIntToPtrInst ] ---
@@ -4815,7 +4815,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAPtrToIntInst ] ---
@@ -4826,7 +4826,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsASExtInst ] ---
@@ -4837,7 +4837,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsASIToFPInst ] ---
@@ -4848,7 +4848,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsATruncInst ] ---
@@ -4859,7 +4859,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAUIToFPInst ] ---
@@ -4870,7 +4870,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAZExtInst ] ---
@@ -4881,7 +4881,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAExtractValueInst ] ---
@@ -4892,7 +4892,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsALoadInst ] ---
@@ -4903,7 +4903,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAVAArgInst ] ---
@@ -4914,7 +4914,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAMDNode ] ---
@@ -4925,7 +4925,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMIsAMDString ] ---
@@ -4936,7 +4936,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMGetValueName ] ---
@@ -4947,7 +4947,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     /** Deprecated: Use {@link #LLVMGetValueName2 GetValueName2} instead. */
@@ -4965,7 +4965,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        invokePPV(__functionAddress, Val, Name);
+        invokePPV(Val, Name, __functionAddress);
     }
 
     /** Deprecated: Use {@link #LLVMSetValueName2 SetValueName2} instead. */
@@ -5002,7 +5002,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMGetNextUse ] ---
@@ -5018,7 +5018,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(U);
         }
-        return invokePP(__functionAddress, U);
+        return invokePP(U, __functionAddress);
     }
 
     // --- [ LLVMGetUser ] ---
@@ -5034,7 +5034,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(U);
         }
-        return invokePP(__functionAddress, U);
+        return invokePP(U, __functionAddress);
     }
 
     // --- [ LLVMGetUsedValue ] ---
@@ -5046,7 +5046,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(U);
         }
-        return invokePP(__functionAddress, U);
+        return invokePP(U, __functionAddress);
     }
 
     // --- [ LLVMGetOperand ] ---
@@ -5058,7 +5058,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val, Index);
+        return invokePP(Val, Index, __functionAddress);
     }
 
     // --- [ LLVMGetOperandUse ] ---
@@ -5070,7 +5070,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val, Index);
+        return invokePP(Val, Index, __functionAddress);
     }
 
     // --- [ LLVMSetOperand ] ---
@@ -5082,7 +5082,7 @@ public class LLVMCore {
             check(User);
             check(Val);
         }
-        invokePPV(__functionAddress, User, Index, Val);
+        invokePPV(User, Index, Val, __functionAddress);
     }
 
     // --- [ LLVMGetNumOperands ] ---
@@ -5093,7 +5093,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePI(__functionAddress, Val);
+        return invokePI(Val, __functionAddress);
     }
 
     // --- [ LLVMConstNull ] ---
@@ -5105,7 +5105,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePP(__functionAddress, Ty);
+        return invokePP(Ty, __functionAddress);
     }
 
     // --- [ LLVMConstAllOnes ] ---
@@ -5121,7 +5121,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePP(__functionAddress, Ty);
+        return invokePP(Ty, __functionAddress);
     }
 
     // --- [ LLVMGetUndef ] ---
@@ -5133,7 +5133,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePP(__functionAddress, Ty);
+        return invokePP(Ty, __functionAddress);
     }
 
     // --- [ LLVMIsNull ] ---
@@ -5145,7 +5145,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePI(__functionAddress, Val) != 0;
+        return invokePI(Val, __functionAddress) != 0;
     }
 
     // --- [ LLVMConstPointerNull ] ---
@@ -5157,7 +5157,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePP(__functionAddress, Ty);
+        return invokePP(Ty, __functionAddress);
     }
 
     // --- [ LLVMConstInt ] ---
@@ -5177,7 +5177,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(IntTy);
         }
-        return invokePJP(__functionAddress, IntTy, N, SignExtend ? 1 : 0);
+        return invokePJP(IntTy, N, SignExtend ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMConstIntOfArbitraryPrecision ] ---
@@ -5188,7 +5188,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(IntTy);
         }
-        return invokePPP(__functionAddress, IntTy, NumWords, Words);
+        return invokePPP(IntTy, NumWords, Words, __functionAddress);
     }
 
     /** Obtain a constant value for an integer of arbitrary precision. */
@@ -5205,7 +5205,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(IntTy);
         }
-        return invokePPP(__functionAddress, IntTy, Text, Radix);
+        return invokePPP(IntTy, Text, Radix, __functionAddress);
     }
 
     /**
@@ -5246,7 +5246,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(IntTy);
         }
-        return invokePPP(__functionAddress, IntTy, Text, SLen, Radix);
+        return invokePPP(IntTy, Text, SLen, Radix, __functionAddress);
     }
 
     /** Obtain a constant value for an integer parsed from a string with specified length. */
@@ -5277,7 +5277,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(RealTy);
         }
-        return invokePP(__functionAddress, RealTy, N);
+        return invokePP(RealTy, N, __functionAddress);
     }
 
     // --- [ LLVMConstRealOfString ] ---
@@ -5288,7 +5288,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(RealTy);
         }
-        return invokePPP(__functionAddress, RealTy, Text);
+        return invokePPP(RealTy, Text, __functionAddress);
     }
 
     /**
@@ -5329,7 +5329,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(RealTy);
         }
-        return invokePPP(__functionAddress, RealTy, Text, SLen);
+        return invokePPP(RealTy, Text, SLen, __functionAddress);
     }
 
     /** Obtain a constant for a floating point value parsed from a string. */
@@ -5360,7 +5360,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ConstantVal);
         }
-        return invokePJ(__functionAddress, ConstantVal);
+        return invokePJ(ConstantVal, __functionAddress);
     }
 
     // --- [ LLVMConstIntGetSExtValue ] ---
@@ -5372,7 +5372,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ConstantVal);
         }
-        return invokePJ(__functionAddress, ConstantVal);
+        return invokePJ(ConstantVal, __functionAddress);
     }
 
     // --- [ LLVMConstRealGetDouble ] ---
@@ -5383,7 +5383,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ConstantVal);
         }
-        return invokePPD(__functionAddress, ConstantVal, losesInfo);
+        return invokePPD(ConstantVal, losesInfo, __functionAddress);
     }
 
     /** Obtain the double value for an floating point constant value. {@code losesInfo} indicates if some precision was lost in the conversion. */
@@ -5402,7 +5402,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePPP(__functionAddress, C, Str, Length, DontNullTerminate);
+        return invokePPP(C, Str, Length, DontNullTerminate, __functionAddress);
     }
 
     /** Create a {@code ConstantDataSequential} and initialize it with a string. */
@@ -5429,7 +5429,7 @@ public class LLVMCore {
     /** Unsafe version of: {@link #LLVMConstString ConstString} */
     public static long nLLVMConstString(long Str, int Length, int DontNullTerminate) {
         long __functionAddress = Functions.ConstString;
-        return invokePP(__functionAddress, Str, Length, DontNullTerminate);
+        return invokePP(Str, Length, DontNullTerminate, __functionAddress);
     }
 
     /**
@@ -5468,7 +5468,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(c);
         }
-        return invokePI(__functionAddress, c) != 0;
+        return invokePI(c, __functionAddress) != 0;
     }
 
     // --- [ LLVMGetAsString ] ---
@@ -5479,7 +5479,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(c);
         }
-        return invokePPP(__functionAddress, c, Length);
+        return invokePPP(c, Length, __functionAddress);
     }
 
     /** Get the given constant data sequential as a string. */
@@ -5503,7 +5503,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePPP(__functionAddress, C, ConstantVals, Count, Packed);
+        return invokePPP(C, ConstantVals, Count, Packed, __functionAddress);
     }
 
     /** Create an anonymous {@code ConstantStruct} with the specified values. */
@@ -5517,7 +5517,7 @@ public class LLVMCore {
     /** Unsafe version of: {@link #LLVMConstStruct ConstStruct} */
     public static long nLLVMConstStruct(long ConstantVals, int Count, int Packed) {
         long __functionAddress = Functions.ConstStruct;
-        return invokePP(__functionAddress, ConstantVals, Count, Packed);
+        return invokePP(ConstantVals, Count, Packed, __functionAddress);
     }
 
     /**
@@ -5538,7 +5538,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ElementTy);
         }
-        return invokePPP(__functionAddress, ElementTy, ConstantVals, Length);
+        return invokePPP(ElementTy, ConstantVals, Length, __functionAddress);
     }
 
     /** Create a {@code ConstantArray} from values. */
@@ -5555,7 +5555,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(StructTy);
         }
-        return invokePPP(__functionAddress, StructTy, ConstantVals, Count);
+        return invokePPP(StructTy, ConstantVals, Count, __functionAddress);
     }
 
     /** Create a non-anonymous {@code ConstantStruct} from values. */
@@ -5573,7 +5573,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C, idx);
+        return invokePP(C, idx, __functionAddress);
     }
 
     // --- [ LLVMConstVector ] ---
@@ -5581,7 +5581,7 @@ public class LLVMCore {
     /** Unsafe version of: {@link #LLVMConstVector ConstVector} */
     public static long nLLVMConstVector(long ScalarConstantVals, int Size) {
         long __functionAddress = Functions.ConstVector;
-        return invokePP(__functionAddress, ScalarConstantVals, Size);
+        return invokePP(ScalarConstantVals, Size, __functionAddress);
     }
 
     /** Create a {@code ConstantVector} from values. */
@@ -5598,7 +5598,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ConstantVal);
         }
-        return invokePI(__functionAddress, ConstantVal);
+        return invokePI(ConstantVal, __functionAddress);
     }
 
     // --- [ LLVMAlignOf ] ---
@@ -5609,7 +5609,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePP(__functionAddress, Ty);
+        return invokePP(Ty, __functionAddress);
     }
 
     // --- [ LLVMSizeOf ] ---
@@ -5620,7 +5620,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePP(__functionAddress, Ty);
+        return invokePP(Ty, __functionAddress);
     }
 
     // --- [ LLVMConstNeg ] ---
@@ -5631,7 +5631,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ConstantVal);
         }
-        return invokePP(__functionAddress, ConstantVal);
+        return invokePP(ConstantVal, __functionAddress);
     }
 
     // --- [ LLVMConstNSWNeg ] ---
@@ -5642,7 +5642,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ConstantVal);
         }
-        return invokePP(__functionAddress, ConstantVal);
+        return invokePP(ConstantVal, __functionAddress);
     }
 
     // --- [ LLVMConstNUWNeg ] ---
@@ -5653,7 +5653,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ConstantVal);
         }
-        return invokePP(__functionAddress, ConstantVal);
+        return invokePP(ConstantVal, __functionAddress);
     }
 
     // --- [ LLVMConstFNeg ] ---
@@ -5664,7 +5664,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ConstantVal);
         }
-        return invokePP(__functionAddress, ConstantVal);
+        return invokePP(ConstantVal, __functionAddress);
     }
 
     // --- [ LLVMConstNot ] ---
@@ -5675,7 +5675,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ConstantVal);
         }
-        return invokePP(__functionAddress, ConstantVal);
+        return invokePP(ConstantVal, __functionAddress);
     }
 
     // --- [ LLVMConstAdd ] ---
@@ -5687,7 +5687,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstNSWAdd ] ---
@@ -5699,7 +5699,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstNUWAdd ] ---
@@ -5711,7 +5711,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstFAdd ] ---
@@ -5723,7 +5723,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstSub ] ---
@@ -5735,7 +5735,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstNSWSub ] ---
@@ -5747,7 +5747,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstNUWSub ] ---
@@ -5759,7 +5759,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstFSub ] ---
@@ -5771,7 +5771,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstMul ] ---
@@ -5783,7 +5783,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstNSWMul ] ---
@@ -5795,7 +5795,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstNUWMul ] ---
@@ -5807,7 +5807,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstFMul ] ---
@@ -5819,7 +5819,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstUDiv ] ---
@@ -5831,7 +5831,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstExactUDiv ] ---
@@ -5843,7 +5843,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstSDiv ] ---
@@ -5855,7 +5855,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstExactSDiv ] ---
@@ -5867,7 +5867,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstFDiv ] ---
@@ -5879,7 +5879,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstURem ] ---
@@ -5891,7 +5891,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstSRem ] ---
@@ -5903,7 +5903,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstFRem ] ---
@@ -5915,7 +5915,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstAnd ] ---
@@ -5927,7 +5927,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstOr ] ---
@@ -5939,7 +5939,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstXor ] ---
@@ -5951,7 +5951,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstICmp ] ---
@@ -5963,7 +5963,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, Predicate, LHSConstant, RHSConstant);
+        return invokePPP(Predicate, LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstFCmp ] ---
@@ -5975,7 +5975,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, Predicate, LHSConstant, RHSConstant);
+        return invokePPP(Predicate, LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstShl ] ---
@@ -5987,7 +5987,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstLShr ] ---
@@ -5999,7 +5999,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstAShr ] ---
@@ -6011,7 +6011,7 @@ public class LLVMCore {
             check(LHSConstant);
             check(RHSConstant);
         }
-        return invokePPP(__functionAddress, LHSConstant, RHSConstant);
+        return invokePPP(LHSConstant, RHSConstant, __functionAddress);
     }
 
     // --- [ LLVMConstGEP ] ---
@@ -6021,7 +6021,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ConstantVal);
         }
-        return invokePPP(__functionAddress, ConstantVal, ConstantIndices, NumIndices);
+        return invokePPP(ConstantVal, ConstantIndices, NumIndices, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -6036,7 +6036,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(ConstantVal);
         }
-        return invokePPP(__functionAddress, ConstantVal, ConstantIndices, NumIndices);
+        return invokePPP(ConstantVal, ConstantIndices, NumIndices, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -6053,7 +6053,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstSExt ] ---
@@ -6065,7 +6065,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstZExt ] ---
@@ -6077,7 +6077,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstFPTrunc ] ---
@@ -6089,7 +6089,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstFPExt ] ---
@@ -6101,7 +6101,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstUIToFP ] ---
@@ -6113,7 +6113,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstSIToFP ] ---
@@ -6125,7 +6125,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstFPToUI ] ---
@@ -6137,7 +6137,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstFPToSI ] ---
@@ -6149,7 +6149,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstPtrToInt ] ---
@@ -6161,7 +6161,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstIntToPtr ] ---
@@ -6173,7 +6173,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstBitCast ] ---
@@ -6185,7 +6185,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstAddrSpaceCast ] ---
@@ -6197,7 +6197,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstZExtOrBitCast ] ---
@@ -6209,7 +6209,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstSExtOrBitCast ] ---
@@ -6221,7 +6221,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstTruncOrBitCast ] ---
@@ -6233,7 +6233,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstPointerCast ] ---
@@ -6245,7 +6245,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstIntCast ] ---
@@ -6257,7 +6257,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType, isSigned ? 1 : 0);
+        return invokePPP(ConstantVal, ToType, isSigned ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMConstFPCast ] ---
@@ -6269,7 +6269,7 @@ public class LLVMCore {
             check(ConstantVal);
             check(ToType);
         }
-        return invokePPP(__functionAddress, ConstantVal, ToType);
+        return invokePPP(ConstantVal, ToType, __functionAddress);
     }
 
     // --- [ LLVMConstSelect ] ---
@@ -6282,7 +6282,7 @@ public class LLVMCore {
             check(ConstantIfTrue);
             check(ConstantIfFalse);
         }
-        return invokePPPP(__functionAddress, ConstantCondition, ConstantIfTrue, ConstantIfFalse);
+        return invokePPPP(ConstantCondition, ConstantIfTrue, ConstantIfFalse, __functionAddress);
     }
 
     // --- [ LLVMConstExtractElement ] ---
@@ -6294,7 +6294,7 @@ public class LLVMCore {
             check(VectorConstant);
             check(IndexConstant);
         }
-        return invokePPP(__functionAddress, VectorConstant, IndexConstant);
+        return invokePPP(VectorConstant, IndexConstant, __functionAddress);
     }
 
     // --- [ LLVMConstInsertElement ] ---
@@ -6307,7 +6307,7 @@ public class LLVMCore {
             check(ElementValueConstant);
             check(IndexConstant);
         }
-        return invokePPPP(__functionAddress, VectorConstant, ElementValueConstant, IndexConstant);
+        return invokePPPP(VectorConstant, ElementValueConstant, IndexConstant, __functionAddress);
     }
 
     // --- [ LLVMConstShuffleVector ] ---
@@ -6320,7 +6320,7 @@ public class LLVMCore {
             check(VectorBConstant);
             check(MaskConstant);
         }
-        return invokePPPP(__functionAddress, VectorAConstant, VectorBConstant, MaskConstant);
+        return invokePPPP(VectorAConstant, VectorBConstant, MaskConstant, __functionAddress);
     }
 
     // --- [ LLVMConstExtractValue ] ---
@@ -6330,7 +6330,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(AggConstant);
         }
-        return invokePPP(__functionAddress, AggConstant, IdxList, NumIdx);
+        return invokePPP(AggConstant, IdxList, NumIdx, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -6346,7 +6346,7 @@ public class LLVMCore {
             check(AggConstant);
             check(ElementValueConstant);
         }
-        return invokePPPP(__functionAddress, AggConstant, ElementValueConstant, IdxList, NumIdx);
+        return invokePPPP(AggConstant, ElementValueConstant, IdxList, NumIdx, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -6364,7 +6364,7 @@ public class LLVMCore {
             check(F);
             check(BB);
         }
-        return invokePPP(__functionAddress, F, BB);
+        return invokePPP(F, BB, __functionAddress);
     }
 
     // --- [ LLVMConstInlineAsm ] ---
@@ -6375,7 +6375,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePPPP(__functionAddress, Ty, AsmString, Constraints, HasSideEffects, IsAlignStack);
+        return invokePPPP(Ty, AsmString, Constraints, HasSideEffects, IsAlignStack, __functionAddress);
     }
 
     /** Deprecated: Use {@link #LLVMGetInlineAsm GetInlineAsm} instead. */
@@ -6411,7 +6411,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        return invokePP(__functionAddress, Global);
+        return invokePP(Global, __functionAddress);
     }
 
     // --- [ LLVMIsDeclaration ] ---
@@ -6422,7 +6422,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        return invokePI(__functionAddress, Global) != 0;
+        return invokePI(Global, __functionAddress) != 0;
     }
 
     // --- [ LLVMGetLinkage ] ---
@@ -6433,7 +6433,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        return invokePI(__functionAddress, Global);
+        return invokePI(Global, __functionAddress);
     }
 
     // --- [ LLVMSetLinkage ] ---
@@ -6443,7 +6443,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        invokePV(__functionAddress, Global, Linkage);
+        invokePV(Global, Linkage, __functionAddress);
     }
 
     // --- [ LLVMGetSection ] ---
@@ -6453,7 +6453,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        return invokePP(__functionAddress, Global);
+        return invokePP(Global, __functionAddress);
     }
 
     @NativeType("char const *")
@@ -6469,7 +6469,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        invokePPV(__functionAddress, Global, Section);
+        invokePPV(Global, Section, __functionAddress);
     }
 
     public static void LLVMSetSection(@NativeType("LLVMValueRef") long Global, @NativeType("char const *") ByteBuffer Section) {
@@ -6498,7 +6498,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        return invokePI(__functionAddress, Global);
+        return invokePI(Global, __functionAddress);
     }
 
     // --- [ LLVMSetVisibility ] ---
@@ -6508,7 +6508,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        invokePV(__functionAddress, Global, Viz);
+        invokePV(Global, Viz, __functionAddress);
     }
 
     // --- [ LLVMGetDLLStorageClass ] ---
@@ -6519,7 +6519,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        return invokePI(__functionAddress, Global);
+        return invokePI(Global, __functionAddress);
     }
 
     // --- [ LLVMSetDLLStorageClass ] ---
@@ -6529,7 +6529,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        invokePV(__functionAddress, Global, Class);
+        invokePV(Global, Class, __functionAddress);
     }
 
     // --- [ LLVMGetUnnamedAddress ] ---
@@ -6541,7 +6541,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Global);
         }
-        return invokePI(__functionAddress, Global);
+        return invokePI(Global, __functionAddress);
     }
 
     // --- [ LLVMSetUnnamedAddress ] ---
@@ -6552,7 +6552,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Global);
         }
-        invokePV(__functionAddress, Global, UnnamedAddr);
+        invokePV(Global, UnnamedAddr, __functionAddress);
     }
 
     // --- [ LLVMGlobalGetValueType ] ---
@@ -6565,7 +6565,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Global);
         }
-        return invokePP(__functionAddress, Global);
+        return invokePP(Global, __functionAddress);
     }
 
     // --- [ LLVMHasUnnamedAddr ] ---
@@ -6577,7 +6577,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        return invokePI(__functionAddress, Global) != 0;
+        return invokePI(Global, __functionAddress) != 0;
     }
 
     // --- [ LLVMSetUnnamedAddr ] ---
@@ -6588,7 +6588,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Global);
         }
-        invokePV(__functionAddress, Global, HasUnnamedAddr ? 1 : 0);
+        invokePV(Global, HasUnnamedAddr ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMGetAlignment ] ---
@@ -6600,7 +6600,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(V);
         }
-        return invokePI(__functionAddress, V);
+        return invokePI(V, __functionAddress);
     }
 
     // --- [ LLVMSetAlignment ] ---
@@ -6611,7 +6611,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(V);
         }
-        invokePV(__functionAddress, V, Bytes);
+        invokePV(V, Bytes, __functionAddress);
     }
 
     // --- [ LLVMGlobalSetMetadata ] ---
@@ -6624,7 +6624,7 @@ public class LLVMCore {
             check(Global);
             check(MD);
         }
-        invokePPV(__functionAddress, Global, Kind, MD);
+        invokePPV(Global, Kind, MD, __functionAddress);
     }
 
     // --- [ LLVMGlobalEraseMetadata ] ---
@@ -6636,7 +6636,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Global);
         }
-        invokePV(__functionAddress, Global, Kind);
+        invokePV(Global, Kind, __functionAddress);
     }
 
     // --- [ LLVMGlobalClearMetadata ] ---
@@ -6648,7 +6648,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Global);
         }
-        invokePV(__functionAddress, Global);
+        invokePV(Global, __functionAddress);
     }
 
     // --- [ LLVMGlobalCopyAllMetadata ] ---
@@ -6660,7 +6660,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Value);
         }
-        return invokePPP(__functionAddress, Value, NumEntries);
+        return invokePPP(Value, NumEntries, __functionAddress);
     }
 
     /**
@@ -6684,7 +6684,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Entries);
         }
-        invokePV(__functionAddress, Entries);
+        invokePV(Entries, __functionAddress);
     }
 
     // --- [ LLVMValueMetadataEntriesGetKind ] ---
@@ -6697,7 +6697,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Entries);
         }
-        return invokePI(__functionAddress, Entries, Index);
+        return invokePI(Entries, Index, __functionAddress);
     }
 
     // --- [ LLVMValueMetadataEntriesGetMetadata ] ---
@@ -6710,7 +6710,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Entries);
         }
-        return invokePP(__functionAddress, Entries, Index);
+        return invokePP(Entries, Index, __functionAddress);
     }
 
     // --- [ LLVMAddGlobal ] ---
@@ -6721,7 +6721,7 @@ public class LLVMCore {
             check(M);
             check(Ty);
         }
-        return invokePPPP(__functionAddress, M, Ty, Name);
+        return invokePPPP(M, Ty, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -6752,7 +6752,7 @@ public class LLVMCore {
             check(M);
             check(Ty);
         }
-        return invokePPPP(__functionAddress, M, Ty, Name, AddressSpace);
+        return invokePPPP(M, Ty, Name, AddressSpace, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -6782,7 +6782,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePPP(__functionAddress, M, Name);
+        return invokePPP(M, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -6813,7 +6813,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMGetLastGlobal ] ---
@@ -6824,7 +6824,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMGetNextGlobal ] ---
@@ -6835,7 +6835,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        return invokePP(__functionAddress, GlobalVar);
+        return invokePP(GlobalVar, __functionAddress);
     }
 
     // --- [ LLVMGetPreviousGlobal ] ---
@@ -6846,7 +6846,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        return invokePP(__functionAddress, GlobalVar);
+        return invokePP(GlobalVar, __functionAddress);
     }
 
     // --- [ LLVMDeleteGlobal ] ---
@@ -6856,7 +6856,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        invokePV(__functionAddress, GlobalVar);
+        invokePV(GlobalVar, __functionAddress);
     }
 
     // --- [ LLVMGetInitializer ] ---
@@ -6867,7 +6867,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        return invokePP(__functionAddress, GlobalVar);
+        return invokePP(GlobalVar, __functionAddress);
     }
 
     // --- [ LLVMSetInitializer ] ---
@@ -6878,7 +6878,7 @@ public class LLVMCore {
             check(GlobalVar);
             check(ConstantVal);
         }
-        invokePPV(__functionAddress, GlobalVar, ConstantVal);
+        invokePPV(GlobalVar, ConstantVal, __functionAddress);
     }
 
     // --- [ LLVMIsThreadLocal ] ---
@@ -6889,7 +6889,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        return invokePI(__functionAddress, GlobalVar) != 0;
+        return invokePI(GlobalVar, __functionAddress) != 0;
     }
 
     // --- [ LLVMSetThreadLocal ] ---
@@ -6899,7 +6899,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        invokePV(__functionAddress, GlobalVar, IsThreadLocal ? 1 : 0);
+        invokePV(GlobalVar, IsThreadLocal ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMIsGlobalConstant ] ---
@@ -6910,7 +6910,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        return invokePI(__functionAddress, GlobalVar) != 0;
+        return invokePI(GlobalVar, __functionAddress) != 0;
     }
 
     // --- [ LLVMSetGlobalConstant ] ---
@@ -6920,7 +6920,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        invokePV(__functionAddress, GlobalVar, IsConstant ? 1 : 0);
+        invokePV(GlobalVar, IsConstant ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMGetThreadLocalMode ] ---
@@ -6931,7 +6931,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        return invokePI(__functionAddress, GlobalVar);
+        return invokePI(GlobalVar, __functionAddress);
     }
 
     // --- [ LLVMSetThreadLocalMode ] ---
@@ -6941,7 +6941,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        invokePV(__functionAddress, GlobalVar, Mode);
+        invokePV(GlobalVar, Mode, __functionAddress);
     }
 
     // --- [ LLVMIsExternallyInitialized ] ---
@@ -6952,7 +6952,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        return invokePI(__functionAddress, GlobalVar) != 0;
+        return invokePI(GlobalVar, __functionAddress) != 0;
     }
 
     // --- [ LLVMSetExternallyInitialized ] ---
@@ -6962,7 +6962,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GlobalVar);
         }
-        invokePV(__functionAddress, GlobalVar, IsExtInit ? 1 : 0);
+        invokePV(GlobalVar, IsExtInit ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMAddAlias ] ---
@@ -6974,7 +6974,7 @@ public class LLVMCore {
             check(Ty);
             check(Aliasee);
         }
-        return invokePPPPP(__functionAddress, M, Ty, Aliasee, Name);
+        return invokePPPPP(M, Ty, Aliasee, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -7006,7 +7006,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        return invokePPPP(__functionAddress, M, Name, NameLen);
+        return invokePPPP(M, Name, NameLen, __functionAddress);
     }
 
     /**
@@ -7046,7 +7046,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMGetLastGlobalAlias ] ---
@@ -7059,7 +7059,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMGetNextGlobalAlias ] ---
@@ -7076,7 +7076,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(GA);
         }
-        return invokePP(__functionAddress, GA);
+        return invokePP(GA, __functionAddress);
     }
 
     // --- [ LLVMGetPreviousGlobalAlias ] ---
@@ -7093,7 +7093,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(GA);
         }
-        return invokePP(__functionAddress, GA);
+        return invokePP(GA, __functionAddress);
     }
 
     // --- [ LLVMAliasGetAliasee ] ---
@@ -7106,7 +7106,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Alias);
         }
-        return invokePP(__functionAddress, Alias);
+        return invokePP(Alias, __functionAddress);
     }
 
     // --- [ LLVMAliasSetAliasee ] ---
@@ -7119,7 +7119,7 @@ public class LLVMCore {
             check(Alias);
             check(Aliasee);
         }
-        invokePPV(__functionAddress, Alias, Aliasee);
+        invokePPV(Alias, Aliasee, __functionAddress);
     }
 
     // --- [ LLVMDeleteFunction ] ---
@@ -7130,7 +7130,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        invokePV(__functionAddress, Fn);
+        invokePV(Fn, __functionAddress);
     }
 
     // --- [ LLVMHasPersonalityFn ] ---
@@ -7142,7 +7142,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePI(__functionAddress, Fn) != 0;
+        return invokePI(Fn, __functionAddress) != 0;
     }
 
     // --- [ LLVMGetPersonalityFn ] ---
@@ -7154,7 +7154,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePP(__functionAddress, Fn);
+        return invokePP(Fn, __functionAddress);
     }
 
     // --- [ LLVMSetPersonalityFn ] ---
@@ -7166,7 +7166,7 @@ public class LLVMCore {
             check(Fn);
             check(PersonalityFn);
         }
-        invokePPV(__functionAddress, Fn, PersonalityFn);
+        invokePPV(Fn, PersonalityFn, __functionAddress);
     }
 
     // --- [ LLVMGetIntrinsicID ] ---
@@ -7178,7 +7178,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePI(__functionAddress, Fn);
+        return invokePI(Fn, __functionAddress);
     }
 
     // --- [ LLVMGetFunctionCallConv ] ---
@@ -7194,7 +7194,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePI(__functionAddress, Fn);
+        return invokePI(Fn, __functionAddress);
     }
 
     // --- [ LLVMSetFunctionCallConv ] ---
@@ -7210,7 +7210,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        invokePV(__functionAddress, Fn, CC);
+        invokePV(Fn, CC, __functionAddress);
     }
 
     // --- [ LLVMGetGC ] ---
@@ -7221,7 +7221,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePP(__functionAddress, Fn);
+        return invokePP(Fn, __functionAddress);
     }
 
     /** Obtain the name of the garbage collector to use during code generation. */
@@ -7240,7 +7240,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        invokePPV(__functionAddress, Fn, Name);
+        invokePPV(Fn, Name, __functionAddress);
     }
 
     /** Define the garbage collector to use during code generation. */
@@ -7272,7 +7272,7 @@ public class LLVMCore {
             check(F);
             check(A);
         }
-        invokePPV(__functionAddress, F, Idx, A);
+        invokePPV(F, Idx, A, __functionAddress);
     }
 
     // --- [ LLVMGetAttributeCountAtIndex ] ---
@@ -7283,7 +7283,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(F);
         }
-        return invokePI(__functionAddress, F, Idx);
+        return invokePI(F, Idx, __functionAddress);
     }
 
     // --- [ LLVMGetAttributesAtIndex ] ---
@@ -7293,7 +7293,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(F);
         }
-        invokePPV(__functionAddress, F, Idx, Attrs);
+        invokePPV(F, Idx, Attrs, __functionAddress);
     }
 
     public static void LLVMGetAttributesAtIndex(@NativeType("LLVMValueRef") long F, @NativeType("LLVMAttributeIndex") int Idx, @NativeType("LLVMAttributeRef *") PointerBuffer Attrs) {
@@ -7313,7 +7313,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(F);
         }
-        return invokePP(__functionAddress, F, Idx, KindID);
+        return invokePP(F, Idx, KindID, __functionAddress);
     }
 
     // --- [ LLVMGetStringAttributeAtIndex ] ---
@@ -7323,7 +7323,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(F);
         }
-        return invokePPP(__functionAddress, F, Idx, K, KLen);
+        return invokePPP(F, Idx, K, KLen, __functionAddress);
     }
 
     @NativeType("LLVMAttributeRef")
@@ -7350,7 +7350,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(F);
         }
-        invokePV(__functionAddress, F, Idx, KindID);
+        invokePV(F, Idx, KindID, __functionAddress);
     }
 
     // --- [ LLVMRemoveStringAttributeAtIndex ] ---
@@ -7360,7 +7360,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(F);
         }
-        invokePPV(__functionAddress, F, Idx, K, KLen);
+        invokePPV(F, Idx, K, KLen, __functionAddress);
     }
 
     public static void LLVMRemoveStringAttributeAtIndex(@NativeType("LLVMValueRef") long F, @NativeType("LLVMAttributeIndex") int Idx, @NativeType("char const *") ByteBuffer K) {
@@ -7386,7 +7386,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        invokePPPV(__functionAddress, Fn, A, V);
+        invokePPPV(Fn, A, V, __functionAddress);
     }
 
     /** Add a target-dependent attribute to a function */
@@ -7421,7 +7421,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePI(__functionAddress, Fn);
+        return invokePI(Fn, __functionAddress);
     }
 
     // --- [ LLVMGetParams ] ---
@@ -7432,7 +7432,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        invokePPV(__functionAddress, Fn, Params);
+        invokePPV(Fn, Params, __functionAddress);
     }
 
     /**
@@ -7464,7 +7464,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePP(__functionAddress, Fn, Index);
+        return invokePP(Fn, Index, __functionAddress);
     }
 
     // --- [ LLVMGetParamParent ] ---
@@ -7482,7 +7482,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        return invokePP(__functionAddress, Inst);
+        return invokePP(Inst, __functionAddress);
     }
 
     // --- [ LLVMGetFirstParam ] ---
@@ -7494,7 +7494,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePP(__functionAddress, Fn);
+        return invokePP(Fn, __functionAddress);
     }
 
     // --- [ LLVMGetLastParam ] ---
@@ -7506,7 +7506,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePP(__functionAddress, Fn);
+        return invokePP(Fn, __functionAddress);
     }
 
     // --- [ LLVMGetNextParam ] ---
@@ -7523,7 +7523,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Arg);
         }
-        return invokePP(__functionAddress, Arg);
+        return invokePP(Arg, __functionAddress);
     }
 
     // --- [ LLVMGetPreviousParam ] ---
@@ -7539,7 +7539,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Arg);
         }
-        return invokePP(__functionAddress, Arg);
+        return invokePP(Arg, __functionAddress);
     }
 
     // --- [ LLVMSetParamAlignment ] ---
@@ -7550,7 +7550,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Arg);
         }
-        invokePV(__functionAddress, Arg, Align);
+        invokePV(Arg, Align, __functionAddress);
     }
 
     // --- [ LLVMMDStringInContext ] ---
@@ -7561,7 +7561,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePPP(__functionAddress, C, Str, SLen);
+        return invokePPP(C, Str, SLen, __functionAddress);
     }
 
     /**
@@ -7602,7 +7602,7 @@ public class LLVMCore {
     /** Unsafe version of: {@link #LLVMMDString MDString} */
     public static long nLLVMMDString(long Str, int SLen) {
         long __functionAddress = Functions.MDString;
-        return invokePP(__functionAddress, Str, SLen);
+        return invokePP(Str, SLen, __functionAddress);
     }
 
     /** Obtain a {@code MDString} value from the global context. */
@@ -7632,7 +7632,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePPP(__functionAddress, C, Vals, Count);
+        return invokePPP(C, Vals, Count, __functionAddress);
     }
 
     /**
@@ -7650,7 +7650,7 @@ public class LLVMCore {
     /** Unsafe version of: {@link #LLVMMDNode MDNode} */
     public static long nLLVMMDNode(long Vals, int Count) {
         long __functionAddress = Functions.MDNode;
-        return invokePP(__functionAddress, Vals, Count);
+        return invokePP(Vals, Count, __functionAddress);
     }
 
     /** Obtain a {@code MDNode} value from the global context. */
@@ -7669,7 +7669,7 @@ public class LLVMCore {
             check(C);
             check(MD);
         }
-        return invokePPP(__functionAddress, C, MD);
+        return invokePPP(C, MD, __functionAddress);
     }
 
     // --- [ LLVMValueAsMetadata ] ---
@@ -7681,7 +7681,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMGetMDString ] ---
@@ -7696,7 +7696,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(V);
         }
-        return invokePPP(__functionAddress, V, Length);
+        return invokePPP(V, Length, __functionAddress);
     }
 
     /**
@@ -7734,7 +7734,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(V);
         }
-        return invokePI(__functionAddress, V);
+        return invokePI(V, __functionAddress);
     }
 
     // --- [ LLVMGetMDNodeOperands ] ---
@@ -7745,7 +7745,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(V);
         }
-        invokePPV(__functionAddress, V, Dest);
+        invokePPV(V, Dest, __functionAddress);
     }
 
     /**
@@ -7775,7 +7775,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(BB);
         }
-        return invokePP(__functionAddress, BB);
+        return invokePP(BB, __functionAddress);
     }
 
     // --- [ LLVMValueIsBasicBlock ] ---
@@ -7787,7 +7787,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePI(__functionAddress, Val) != 0;
+        return invokePI(Val, __functionAddress) != 0;
     }
 
     // --- [ LLVMValueAsBasicBlock ] ---
@@ -7799,7 +7799,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val);
+        return invokePP(Val, __functionAddress);
     }
 
     // --- [ LLVMGetBasicBlockName ] ---
@@ -7810,7 +7810,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(BB);
         }
-        return invokePP(__functionAddress, BB);
+        return invokePP(BB, __functionAddress);
     }
 
     /** Obtain the string name of a basic block. */
@@ -7829,7 +7829,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(BB);
         }
-        return invokePP(__functionAddress, BB);
+        return invokePP(BB, __functionAddress);
     }
 
     // --- [ LLVMGetBasicBlockTerminator ] ---
@@ -7847,7 +7847,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(BB);
         }
-        return invokePP(__functionAddress, BB);
+        return invokePP(BB, __functionAddress);
     }
 
     // --- [ LLVMCountBasicBlocks ] ---
@@ -7863,7 +7863,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePI(__functionAddress, Fn);
+        return invokePI(Fn, __functionAddress);
     }
 
     // --- [ LLVMGetBasicBlocks ] ---
@@ -7874,7 +7874,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        invokePPV(__functionAddress, Fn, BasicBlocks);
+        invokePPV(Fn, BasicBlocks, __functionAddress);
     }
 
     /**
@@ -7905,7 +7905,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePP(__functionAddress, Fn);
+        return invokePP(Fn, __functionAddress);
     }
 
     // --- [ LLVMGetLastBasicBlock ] ---
@@ -7917,7 +7917,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePP(__functionAddress, Fn);
+        return invokePP(Fn, __functionAddress);
     }
 
     // --- [ LLVMGetNextBasicBlock ] ---
@@ -7929,7 +7929,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(BB);
         }
-        return invokePP(__functionAddress, BB);
+        return invokePP(BB, __functionAddress);
     }
 
     // --- [ LLVMGetPreviousBasicBlock ] ---
@@ -7941,7 +7941,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(BB);
         }
-        return invokePP(__functionAddress, BB);
+        return invokePP(BB, __functionAddress);
     }
 
     // --- [ LLVMGetEntryBasicBlock ] ---
@@ -7953,7 +7953,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePP(__functionAddress, Fn);
+        return invokePP(Fn, __functionAddress);
     }
 
     // --- [ LLVMAppendBasicBlockInContext ] ---
@@ -7965,7 +7965,7 @@ public class LLVMCore {
             check(C);
             check(Fn);
         }
-        return invokePPPP(__functionAddress, C, Fn, Name);
+        return invokePPPP(C, Fn, Name, __functionAddress);
     }
 
     /** Append a basic block to the end of a function. */
@@ -7998,7 +7998,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePPP(__functionAddress, Fn, Name);
+        return invokePPP(Fn, Name, __functionAddress);
     }
 
     /** Append a basic block to the end of a function using the global context. */
@@ -8032,7 +8032,7 @@ public class LLVMCore {
             check(C);
             check(BB);
         }
-        return invokePPPP(__functionAddress, C, BB, Name);
+        return invokePPPP(C, BB, Name, __functionAddress);
     }
 
     /**
@@ -8073,7 +8073,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(InsertBeforeBB);
         }
-        return invokePPP(__functionAddress, InsertBeforeBB, Name);
+        return invokePPP(InsertBeforeBB, Name, __functionAddress);
     }
 
     /** Insert a basic block in a function using the global context. */
@@ -8110,7 +8110,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(BB);
         }
-        invokePV(__functionAddress, BB);
+        invokePV(BB, __functionAddress);
     }
 
     // --- [ LLVMRemoveBasicBlockFromParent ] ---
@@ -8125,7 +8125,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(BB);
         }
-        invokePV(__functionAddress, BB);
+        invokePV(BB, __functionAddress);
     }
 
     // --- [ LLVMMoveBasicBlockBefore ] ---
@@ -8137,7 +8137,7 @@ public class LLVMCore {
             check(BB);
             check(MovePos);
         }
-        invokePPV(__functionAddress, BB, MovePos);
+        invokePPV(BB, MovePos, __functionAddress);
     }
 
     // --- [ LLVMMoveBasicBlockAfter ] ---
@@ -8149,7 +8149,7 @@ public class LLVMCore {
             check(BB);
             check(MovePos);
         }
-        invokePPV(__functionAddress, BB, MovePos);
+        invokePPV(BB, MovePos, __functionAddress);
     }
 
     // --- [ LLVMGetFirstInstruction ] ---
@@ -8165,7 +8165,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(BB);
         }
-        return invokePP(__functionAddress, BB);
+        return invokePP(BB, __functionAddress);
     }
 
     // --- [ LLVMGetLastInstruction ] ---
@@ -8181,7 +8181,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(BB);
         }
-        return invokePP(__functionAddress, BB);
+        return invokePP(BB, __functionAddress);
     }
 
     // --- [ LLVMHasMetadata ] ---
@@ -8193,7 +8193,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePI(__functionAddress, Val) != 0;
+        return invokePI(Val, __functionAddress) != 0;
     }
 
     // --- [ LLVMGetMetadata ] ---
@@ -8205,7 +8205,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Val);
         }
-        return invokePP(__functionAddress, Val, KindID);
+        return invokePP(Val, KindID, __functionAddress);
     }
 
     // --- [ LLVMSetMetadata ] ---
@@ -8217,7 +8217,7 @@ public class LLVMCore {
             check(Val);
             check(Node);
         }
-        invokePPV(__functionAddress, Val, KindID, Node);
+        invokePPV(Val, KindID, Node, __functionAddress);
     }
 
     // --- [ LLVMInstructionGetAllMetadataOtherThanDebugLoc ] ---
@@ -8229,7 +8229,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Instr);
         }
-        return invokePPP(__functionAddress, Instr, NumEntries);
+        return invokePPP(Instr, NumEntries, __functionAddress);
     }
 
     /** Returns the metadata associated with an instruction value, but filters out all the debug locations. */
@@ -8250,7 +8250,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        return invokePP(__functionAddress, Inst);
+        return invokePP(Inst, __functionAddress);
     }
 
     // --- [ LLVMGetNextInstruction ] ---
@@ -8268,7 +8268,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        return invokePP(__functionAddress, Inst);
+        return invokePP(Inst, __functionAddress);
     }
 
     // --- [ LLVMGetPreviousInstruction ] ---
@@ -8284,7 +8284,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        return invokePP(__functionAddress, Inst);
+        return invokePP(Inst, __functionAddress);
     }
 
     // --- [ LLVMInstructionRemoveFromParent ] ---
@@ -8299,7 +8299,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        invokePV(__functionAddress, Inst);
+        invokePV(Inst, __functionAddress);
     }
 
     // --- [ LLVMInstructionEraseFromParent ] ---
@@ -8314,7 +8314,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        invokePV(__functionAddress, Inst);
+        invokePV(Inst, __functionAddress);
     }
 
     // --- [ LLVMGetInstructionOpcode ] ---
@@ -8326,7 +8326,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        return invokePI(__functionAddress, Inst);
+        return invokePI(Inst, __functionAddress);
     }
 
     // --- [ LLVMGetICmpPredicate ] ---
@@ -8343,7 +8343,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        return invokePI(__functionAddress, Inst);
+        return invokePI(Inst, __functionAddress);
     }
 
     // --- [ LLVMGetFCmpPredicate ] ---
@@ -8360,7 +8360,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        return invokePI(__functionAddress, Inst);
+        return invokePI(Inst, __functionAddress);
     }
 
     // --- [ LLVMInstructionClone ] ---
@@ -8379,7 +8379,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        return invokePP(__functionAddress, Inst);
+        return invokePP(Inst, __functionAddress);
     }
 
     // --- [ LLVMIsATerminatorInst ] ---
@@ -8394,7 +8394,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        return invokePP(__functionAddress, Inst);
+        return invokePP(Inst, __functionAddress);
     }
 
     // --- [ LLVMGetNumArgOperands ] ---
@@ -8410,7 +8410,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Instr);
         }
-        return invokePI(__functionAddress, Instr);
+        return invokePI(Instr, __functionAddress);
     }
 
     // --- [ LLVMSetInstructionCallConv ] ---
@@ -8425,7 +8425,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Instr);
         }
-        invokePV(__functionAddress, Instr, CC);
+        invokePV(Instr, CC, __functionAddress);
     }
 
     // --- [ LLVMGetInstructionCallConv ] ---
@@ -8441,7 +8441,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Instr);
         }
-        return invokePI(__functionAddress, Instr);
+        return invokePI(Instr, __functionAddress);
     }
 
     // --- [ LLVMSetInstrParamAlignment ] ---
@@ -8451,7 +8451,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Instr);
         }
-        invokePV(__functionAddress, Instr, index, Align);
+        invokePV(Instr, index, Align, __functionAddress);
     }
 
     // --- [ LLVMAddCallSiteAttribute ] ---
@@ -8462,7 +8462,7 @@ public class LLVMCore {
             check(C);
             check(A);
         }
-        invokePPV(__functionAddress, C, Idx, A);
+        invokePPV(C, Idx, A, __functionAddress);
     }
 
     // --- [ LLVMGetCallSiteAttributeCount ] ---
@@ -8473,7 +8473,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePI(__functionAddress, C, Idx);
+        return invokePI(C, Idx, __functionAddress);
     }
 
     // --- [ LLVMGetCallSiteAttributes ] ---
@@ -8483,7 +8483,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        invokePPV(__functionAddress, C, Idx, Attrs);
+        invokePPV(C, Idx, Attrs, __functionAddress);
     }
 
     public static void LLVMGetCallSiteAttributes(@NativeType("LLVMValueRef") long C, @NativeType("LLVMAttributeIndex") int Idx, @NativeType("LLVMAttributeRef *") PointerBuffer Attrs) {
@@ -8503,7 +8503,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C, Idx, KindID);
+        return invokePP(C, Idx, KindID, __functionAddress);
     }
 
     // --- [ LLVMGetCallSiteStringAttribute ] ---
@@ -8513,7 +8513,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePPP(__functionAddress, C, Idx, K, KLen);
+        return invokePPP(C, Idx, K, KLen, __functionAddress);
     }
 
     @NativeType("LLVMAttributeRef")
@@ -8540,7 +8540,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        invokePV(__functionAddress, C, Idx, KindID);
+        invokePV(C, Idx, KindID, __functionAddress);
     }
 
     // --- [ LLVMRemoveCallSiteStringAttribute ] ---
@@ -8550,7 +8550,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        invokePPV(__functionAddress, C, Idx, K, KLen);
+        invokePPV(C, Idx, K, KLen, __functionAddress);
     }
 
     public static void LLVMRemoveCallSiteStringAttribute(@NativeType("LLVMValueRef") long C, @NativeType("LLVMAttributeIndex") int Idx, @NativeType("char const *") ByteBuffer K) {
@@ -8581,7 +8581,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Instr);
         }
-        return invokePP(__functionAddress, Instr);
+        return invokePP(Instr, __functionAddress);
     }
 
     // --- [ LLVMIsTailCall ] ---
@@ -8597,7 +8597,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(CallInst);
         }
-        return invokePI(__functionAddress, CallInst) != 0;
+        return invokePI(CallInst, __functionAddress) != 0;
     }
 
     // --- [ LLVMSetTailCall ] ---
@@ -8612,7 +8612,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(CallInst);
         }
-        invokePV(__functionAddress, CallInst, IsTailCall ? 1 : 0);
+        invokePV(CallInst, IsTailCall ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMGetNormalDest ] ---
@@ -8628,7 +8628,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(InvokeInst);
         }
-        return invokePP(__functionAddress, InvokeInst);
+        return invokePP(InvokeInst, __functionAddress);
     }
 
     // --- [ LLVMGetUnwindDest ] ---
@@ -8644,7 +8644,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(InvokeInst);
         }
-        return invokePP(__functionAddress, InvokeInst);
+        return invokePP(InvokeInst, __functionAddress);
     }
 
     // --- [ LLVMSetNormalDest ] ---
@@ -8660,7 +8660,7 @@ public class LLVMCore {
             check(InvokeInst);
             check(B);
         }
-        invokePPV(__functionAddress, InvokeInst, B);
+        invokePPV(InvokeInst, B, __functionAddress);
     }
 
     // --- [ LLVMSetUnwindDest ] ---
@@ -8676,7 +8676,7 @@ public class LLVMCore {
             check(InvokeInst);
             check(B);
         }
-        invokePPV(__functionAddress, InvokeInst, B);
+        invokePPV(InvokeInst, B, __functionAddress);
     }
 
     // --- [ LLVMGetNumSuccessors ] ---
@@ -8688,7 +8688,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Term);
         }
-        return invokePI(__functionAddress, Term);
+        return invokePI(Term, __functionAddress);
     }
 
     // --- [ LLVMGetSuccessor ] ---
@@ -8700,7 +8700,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Term);
         }
-        return invokePP(__functionAddress, Term, i);
+        return invokePP(Term, i, __functionAddress);
     }
 
     // --- [ LLVMSetSuccessor ] ---
@@ -8712,7 +8712,7 @@ public class LLVMCore {
             check(Term);
             check(block);
         }
-        invokePPV(__functionAddress, Term, i, block);
+        invokePPV(Term, i, block, __functionAddress);
     }
 
     // --- [ LLVMIsConditional ] ---
@@ -8728,7 +8728,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Branch);
         }
-        return invokePI(__functionAddress, Branch) != 0;
+        return invokePI(Branch, __functionAddress) != 0;
     }
 
     // --- [ LLVMGetCondition ] ---
@@ -8744,7 +8744,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Branch);
         }
-        return invokePP(__functionAddress, Branch);
+        return invokePP(Branch, __functionAddress);
     }
 
     // --- [ LLVMSetCondition ] ---
@@ -8760,7 +8760,7 @@ public class LLVMCore {
             check(Branch);
             check(Cond);
         }
-        invokePPV(__functionAddress, Branch, Cond);
+        invokePPV(Branch, Cond, __functionAddress);
     }
 
     // --- [ LLVMGetSwitchDefaultDest ] ---
@@ -8776,7 +8776,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(SwitchInstr);
         }
-        return invokePP(__functionAddress, SwitchInstr);
+        return invokePP(SwitchInstr, __functionAddress);
     }
 
     // --- [ LLVMGetAllocatedType ] ---
@@ -8788,7 +8788,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Alloca);
         }
-        return invokePP(__functionAddress, Alloca);
+        return invokePP(Alloca, __functionAddress);
     }
 
     // --- [ LLVMIsInBounds ] ---
@@ -8800,7 +8800,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GEP);
         }
-        return invokePI(__functionAddress, GEP) != 0;
+        return invokePI(GEP, __functionAddress) != 0;
     }
 
     // --- [ LLVMSetIsInBounds ] ---
@@ -8811,7 +8811,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(GEP);
         }
-        invokePV(__functionAddress, GEP, InBounds ? 1 : 0);
+        invokePV(GEP, InBounds ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMAddIncoming ] ---
@@ -8822,7 +8822,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(PhiNode);
         }
-        invokePPPV(__functionAddress, PhiNode, IncomingValues, IncomingBlocks, Count);
+        invokePPPV(PhiNode, IncomingValues, IncomingBlocks, Count, __functionAddress);
     }
 
     /** Add an incoming value to the end of a PHI list. */
@@ -8842,7 +8842,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(PhiNode);
         }
-        return invokePI(__functionAddress, PhiNode);
+        return invokePI(PhiNode, __functionAddress);
     }
 
     // --- [ LLVMGetIncomingValue ] ---
@@ -8854,7 +8854,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(PhiNode);
         }
-        return invokePP(__functionAddress, PhiNode, Index);
+        return invokePP(PhiNode, Index, __functionAddress);
     }
 
     // --- [ LLVMGetIncomingBlock ] ---
@@ -8866,7 +8866,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(PhiNode);
         }
-        return invokePP(__functionAddress, PhiNode, Index);
+        return invokePP(PhiNode, Index, __functionAddress);
     }
 
     // --- [ LLVMGetNumIndices ] ---
@@ -8878,7 +8878,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        return invokePI(__functionAddress, Inst);
+        return invokePI(Inst, __functionAddress);
     }
 
     // --- [ LLVMGetIndices ] ---
@@ -8889,7 +8889,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Inst);
         }
-        return invokePP(__functionAddress, Inst);
+        return invokePP(Inst, __functionAddress);
     }
 
     /**
@@ -8911,7 +8911,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(C);
         }
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     // --- [ LLVMCreateBuilder ] ---
@@ -8931,7 +8931,7 @@ public class LLVMCore {
             check(Block);
             check(Instr);
         }
-        invokePPPV(__functionAddress, Builder, Block, Instr);
+        invokePPPV(Builder, Block, Instr, __functionAddress);
     }
 
     // --- [ LLVMPositionBuilderBefore ] ---
@@ -8942,7 +8942,7 @@ public class LLVMCore {
             check(Builder);
             check(Instr);
         }
-        invokePPV(__functionAddress, Builder, Instr);
+        invokePPV(Builder, Instr, __functionAddress);
     }
 
     // --- [ LLVMPositionBuilderAtEnd ] ---
@@ -8953,7 +8953,7 @@ public class LLVMCore {
             check(Builder);
             check(Block);
         }
-        invokePPV(__functionAddress, Builder, Block);
+        invokePPV(Builder, Block, __functionAddress);
     }
 
     // --- [ LLVMGetInsertBlock ] ---
@@ -8964,7 +8964,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePP(__functionAddress, Builder);
+        return invokePP(Builder, __functionAddress);
     }
 
     // --- [ LLVMClearInsertionPosition ] ---
@@ -8974,7 +8974,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Builder);
         }
-        invokePV(__functionAddress, Builder);
+        invokePV(Builder, __functionAddress);
     }
 
     // --- [ LLVMInsertIntoBuilder ] ---
@@ -8985,7 +8985,7 @@ public class LLVMCore {
             check(Builder);
             check(Instr);
         }
-        invokePPV(__functionAddress, Builder, Instr);
+        invokePPV(Builder, Instr, __functionAddress);
     }
 
     // --- [ LLVMInsertIntoBuilderWithName ] ---
@@ -8996,7 +8996,7 @@ public class LLVMCore {
             check(Builder);
             check(Instr);
         }
-        invokePPPV(__functionAddress, Builder, Instr, Name);
+        invokePPPV(Builder, Instr, Name, __functionAddress);
     }
 
     public static void LLVMInsertIntoBuilderWithName(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Instr, @NativeType("char const *") ByteBuffer Name) {
@@ -9024,7 +9024,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Builder);
         }
-        invokePV(__functionAddress, Builder);
+        invokePV(Builder, __functionAddress);
     }
 
     // --- [ LLVMSetCurrentDebugLocation ] ---
@@ -9036,7 +9036,7 @@ public class LLVMCore {
             check(Builder);
             check(L);
         }
-        invokePPV(__functionAddress, Builder, L);
+        invokePPV(Builder, L, __functionAddress);
     }
 
     // --- [ LLVMGetCurrentDebugLocation ] ---
@@ -9047,7 +9047,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePP(__functionAddress, Builder);
+        return invokePP(Builder, __functionAddress);
     }
 
     // --- [ LLVMSetInstDebugLocation ] ---
@@ -9058,7 +9058,7 @@ public class LLVMCore {
             check(Builder);
             check(Inst);
         }
-        invokePPV(__functionAddress, Builder, Inst);
+        invokePPV(Builder, Inst, __functionAddress);
     }
 
     // --- [ LLVMBuildRetVoid ] ---
@@ -9070,7 +9070,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePP(__functionAddress, Builder);
+        return invokePP(Builder, __functionAddress);
     }
 
     // --- [ LLVMBuildRet ] ---
@@ -9082,7 +9082,7 @@ public class LLVMCore {
             check(Builder);
             check(V);
         }
-        return invokePPP(__functionAddress, Builder, V);
+        return invokePPP(Builder, V, __functionAddress);
     }
 
     // --- [ LLVMBuildAggregateRet ] ---
@@ -9092,7 +9092,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePPP(__functionAddress, Builder, RetVals, N);
+        return invokePPP(Builder, RetVals, N, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9109,7 +9109,7 @@ public class LLVMCore {
             check(Builder);
             check(Dest);
         }
-        return invokePPP(__functionAddress, Builder, Dest);
+        return invokePPP(Builder, Dest, __functionAddress);
     }
 
     // --- [ LLVMBuildCondBr ] ---
@@ -9123,7 +9123,7 @@ public class LLVMCore {
             check(Then);
             check(Else);
         }
-        return invokePPPPP(__functionAddress, Builder, If, Then, Else);
+        return invokePPPPP(Builder, If, Then, Else, __functionAddress);
     }
 
     // --- [ LLVMBuildSwitch ] ---
@@ -9136,7 +9136,7 @@ public class LLVMCore {
             check(V);
             check(Else);
         }
-        return invokePPPP(__functionAddress, Builder, V, Else, NumCases);
+        return invokePPPP(Builder, V, Else, NumCases, __functionAddress);
     }
 
     // --- [ LLVMBuildIndirectBr ] ---
@@ -9148,7 +9148,7 @@ public class LLVMCore {
             check(B);
             check(Addr);
         }
-        return invokePPP(__functionAddress, B, Addr, NumDests);
+        return invokePPP(B, Addr, NumDests, __functionAddress);
     }
 
     // --- [ LLVMBuildInvoke ] ---
@@ -9161,7 +9161,7 @@ public class LLVMCore {
             check(Then);
             check(Catch);
         }
-        return invokePPPPPPP(__functionAddress, Builder, Fn, Args, NumArgs, Then, Catch, Name);
+        return invokePPPPPPP(Builder, Fn, Args, NumArgs, Then, Catch, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9192,7 +9192,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePP(__functionAddress, Builder);
+        return invokePP(Builder, __functionAddress);
     }
 
     // --- [ LLVMBuildResume ] ---
@@ -9205,7 +9205,7 @@ public class LLVMCore {
             check(B);
             check(Exn);
         }
-        return invokePPP(__functionAddress, B, Exn);
+        return invokePPP(B, Exn, __functionAddress);
     }
 
     // --- [ LLVMBuildLandingPad ] ---
@@ -9217,7 +9217,7 @@ public class LLVMCore {
             check(Ty);
             check(PersFn);
         }
-        return invokePPPPP(__functionAddress, B, Ty, PersFn, NumClauses, Name);
+        return invokePPPPP(B, Ty, PersFn, NumClauses, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9251,7 +9251,7 @@ public class LLVMCore {
             check(CatchPad);
             check(BB);
         }
-        return invokePPPP(__functionAddress, B, CatchPad, BB);
+        return invokePPPP(B, CatchPad, BB, __functionAddress);
     }
 
     // --- [ LLVMBuildCatchRet ] ---
@@ -9265,7 +9265,7 @@ public class LLVMCore {
             check(CatchPad);
             check(BB);
         }
-        return invokePPPP(__functionAddress, B, CatchPad, BB);
+        return invokePPPP(B, CatchPad, BB, __functionAddress);
     }
 
     // --- [ LLVMBuildCatchPad ] ---
@@ -9277,7 +9277,7 @@ public class LLVMCore {
             check(B);
             check(ParentPad);
         }
-        return invokePPPPP(__functionAddress, B, ParentPad, Args, NumArgs, Name);
+        return invokePPPPP(B, ParentPad, Args, NumArgs, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9309,7 +9309,7 @@ public class LLVMCore {
             check(B);
             check(ParentPad);
         }
-        return invokePPPPP(__functionAddress, B, ParentPad, Args, NumArgs, Name);
+        return invokePPPPP(B, ParentPad, Args, NumArgs, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9342,7 +9342,7 @@ public class LLVMCore {
             check(ParentPad);
             check(UnwindBB);
         }
-        return invokePPPPP(__functionAddress, B, ParentPad, UnwindBB, NumHandlers, Name);
+        return invokePPPPP(B, ParentPad, UnwindBB, NumHandlers, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9375,7 +9375,7 @@ public class LLVMCore {
             check(OnVal);
             check(Dest);
         }
-        invokePPPV(__functionAddress, Switch, OnVal, Dest);
+        invokePPPV(Switch, OnVal, Dest, __functionAddress);
     }
 
     // --- [ LLVMAddDestination ] ---
@@ -9387,7 +9387,7 @@ public class LLVMCore {
             check(IndirectBr);
             check(Dest);
         }
-        invokePPV(__functionAddress, IndirectBr, Dest);
+        invokePPV(IndirectBr, Dest, __functionAddress);
     }
 
     // --- [ LLVMGetNumClauses ] ---
@@ -9399,7 +9399,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(LandingPad);
         }
-        return invokePI(__functionAddress, LandingPad);
+        return invokePI(LandingPad, __functionAddress);
     }
 
     // --- [ LLVMGetClause ] ---
@@ -9411,7 +9411,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(LandingPad);
         }
-        return invokePP(__functionAddress, LandingPad, Idx);
+        return invokePP(LandingPad, Idx, __functionAddress);
     }
 
     // --- [ LLVMAddClause ] ---
@@ -9423,7 +9423,7 @@ public class LLVMCore {
             check(LandingPad);
             check(ClauseVal);
         }
-        invokePPV(__functionAddress, LandingPad, ClauseVal);
+        invokePPV(LandingPad, ClauseVal, __functionAddress);
     }
 
     // --- [ LLVMIsCleanup ] ---
@@ -9435,7 +9435,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(LandingPad);
         }
-        return invokePI(__functionAddress, LandingPad) != 0;
+        return invokePI(LandingPad, __functionAddress) != 0;
     }
 
     // --- [ LLVMSetCleanup ] ---
@@ -9446,7 +9446,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(LandingPad);
         }
-        invokePV(__functionAddress, LandingPad, Val ? 1 : 0);
+        invokePV(LandingPad, Val ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMAddHandler ] ---
@@ -9459,7 +9459,7 @@ public class LLVMCore {
             check(CatchSwitch);
             check(Dest);
         }
-        invokePPV(__functionAddress, CatchSwitch, Dest);
+        invokePPV(CatchSwitch, Dest, __functionAddress);
     }
 
     // --- [ LLVMGetNumHandlers ] ---
@@ -9472,7 +9472,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(CatchSwitch);
         }
-        return invokePI(__functionAddress, CatchSwitch);
+        return invokePI(CatchSwitch, __functionAddress);
     }
 
     // --- [ LLVMGetHandlers ] ---
@@ -9484,7 +9484,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(CatchSwitch);
         }
-        invokePPV(__functionAddress, CatchSwitch, Handlers);
+        invokePPV(CatchSwitch, Handlers, __functionAddress);
     }
 
     /**
@@ -9515,7 +9515,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(Funclet);
         }
-        return invokePP(__functionAddress, Funclet, i);
+        return invokePP(Funclet, i, __functionAddress);
     }
 
     // --- [ LLVMSetArgOperand ] ---
@@ -9528,7 +9528,7 @@ public class LLVMCore {
             check(Funclet);
             check(value);
         }
-        invokePPV(__functionAddress, Funclet, i, value);
+        invokePPV(Funclet, i, value, __functionAddress);
     }
 
     // --- [ LLVMGetParentCatchSwitch ] ---
@@ -9545,7 +9545,7 @@ public class LLVMCore {
             check(__functionAddress);
             check(CatchPad);
         }
-        return invokePP(__functionAddress, CatchPad);
+        return invokePP(CatchPad, __functionAddress);
     }
 
     // --- [ LLVMSetParentCatchSwitch ] ---
@@ -9562,7 +9562,7 @@ public class LLVMCore {
             check(CatchPad);
             check(CatchSwitch);
         }
-        invokePPV(__functionAddress, CatchPad, CatchSwitch);
+        invokePPV(CatchPad, CatchSwitch, __functionAddress);
     }
 
     // --- [ LLVMBuildAdd ] ---
@@ -9575,7 +9575,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     /** Arithmetic */
@@ -9609,7 +9609,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9641,7 +9641,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9673,7 +9673,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9705,7 +9705,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9737,7 +9737,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9769,7 +9769,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9801,7 +9801,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9833,7 +9833,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9865,7 +9865,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9897,7 +9897,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9929,7 +9929,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9961,7 +9961,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -9993,7 +9993,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10025,7 +10025,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10057,7 +10057,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10089,7 +10089,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10121,7 +10121,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10153,7 +10153,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10185,7 +10185,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10217,7 +10217,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10249,7 +10249,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10281,7 +10281,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10313,7 +10313,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10345,7 +10345,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10377,7 +10377,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10409,7 +10409,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, B, Op, LHS, RHS, Name);
+        return invokePPPPP(B, Op, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10440,7 +10440,7 @@ public class LLVMCore {
             check(Builder);
             check(V);
         }
-        return invokePPPP(__functionAddress, Builder, V, Name);
+        return invokePPPP(Builder, V, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10471,7 +10471,7 @@ public class LLVMCore {
             check(B);
             check(V);
         }
-        return invokePPPP(__functionAddress, B, V, Name);
+        return invokePPPP(B, V, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10502,7 +10502,7 @@ public class LLVMCore {
             check(B);
             check(V);
         }
-        return invokePPPP(__functionAddress, B, V, Name);
+        return invokePPPP(B, V, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10533,7 +10533,7 @@ public class LLVMCore {
             check(Builder);
             check(V);
         }
-        return invokePPPP(__functionAddress, Builder, V, Name);
+        return invokePPPP(Builder, V, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10564,7 +10564,7 @@ public class LLVMCore {
             check(Builder);
             check(V);
         }
-        return invokePPPP(__functionAddress, Builder, V, Name);
+        return invokePPPP(Builder, V, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10596,7 +10596,7 @@ public class LLVMCore {
             check(Builder);
             check(Ty);
         }
-        return invokePPPP(__functionAddress, Builder, Ty, Name);
+        return invokePPPP(Builder, Ty, Name, __functionAddress);
     }
 
     /** Memory */
@@ -10630,7 +10630,7 @@ public class LLVMCore {
             check(Ty);
             check(Val);
         }
-        return invokePPPPP(__functionAddress, Builder, Ty, Val, Name);
+        return invokePPPPP(Builder, Ty, Val, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10661,7 +10661,7 @@ public class LLVMCore {
             check(Builder);
             check(Ty);
         }
-        return invokePPPP(__functionAddress, Builder, Ty, Name);
+        return invokePPPP(Builder, Ty, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10693,7 +10693,7 @@ public class LLVMCore {
             check(Ty);
             check(Val);
         }
-        return invokePPPPP(__functionAddress, Builder, Ty, Val, Name);
+        return invokePPPPP(Builder, Ty, Val, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10725,7 +10725,7 @@ public class LLVMCore {
             check(Builder);
             check(PointerVal);
         }
-        return invokePPP(__functionAddress, Builder, PointerVal);
+        return invokePPP(Builder, PointerVal, __functionAddress);
     }
 
     // --- [ LLVMBuildLoad ] ---
@@ -10736,7 +10736,7 @@ public class LLVMCore {
             check(Builder);
             check(PointerVal);
         }
-        return invokePPPP(__functionAddress, Builder, PointerVal, Name);
+        return invokePPPP(Builder, PointerVal, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10769,7 +10769,7 @@ public class LLVMCore {
             check(Val);
             check(Ptr);
         }
-        return invokePPPP(__functionAddress, Builder, Val, Ptr);
+        return invokePPPP(Builder, Val, Ptr, __functionAddress);
     }
 
     // --- [ LLVMBuildGEP ] ---
@@ -10780,7 +10780,7 @@ public class LLVMCore {
             check(B);
             check(Pointer);
         }
-        return invokePPPPP(__functionAddress, B, Pointer, Indices, NumIndices, Name);
+        return invokePPPPP(B, Pointer, Indices, NumIndices, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10811,7 +10811,7 @@ public class LLVMCore {
             check(B);
             check(Pointer);
         }
-        return invokePPPPP(__functionAddress, B, Pointer, Indices, NumIndices, Name);
+        return invokePPPPP(B, Pointer, Indices, NumIndices, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10842,7 +10842,7 @@ public class LLVMCore {
             check(B);
             check(Pointer);
         }
-        return invokePPPP(__functionAddress, B, Pointer, Idx, Name);
+        return invokePPPP(B, Pointer, Idx, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10872,7 +10872,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(B);
         }
-        return invokePPPP(__functionAddress, B, Str, Name);
+        return invokePPPP(B, Str, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10905,7 +10905,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(B);
         }
-        return invokePPPP(__functionAddress, B, Str, Name);
+        return invokePPPP(B, Str, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -10939,7 +10939,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(MemoryAccessInst);
         }
-        return invokePI(__functionAddress, MemoryAccessInst) != 0;
+        return invokePI(MemoryAccessInst, __functionAddress) != 0;
     }
 
     // --- [ LLVMSetVolatile ] ---
@@ -10949,7 +10949,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(MemoryAccessInst);
         }
-        invokePV(__functionAddress, MemoryAccessInst, IsVolatile ? 1 : 0);
+        invokePV(MemoryAccessInst, IsVolatile ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMGetOrdering ] ---
@@ -10960,7 +10960,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(MemoryAccessInst);
         }
-        return invokePI(__functionAddress, MemoryAccessInst);
+        return invokePI(MemoryAccessInst, __functionAddress);
     }
 
     // --- [ LLVMSetOrdering ] ---
@@ -10970,7 +10970,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(MemoryAccessInst);
         }
-        invokePV(__functionAddress, MemoryAccessInst, Ordering);
+        invokePV(MemoryAccessInst, Ordering, __functionAddress);
     }
 
     // --- [ LLVMBuildTrunc ] ---
@@ -10983,7 +10983,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     /** Casts */
@@ -11017,7 +11017,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11049,7 +11049,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11081,7 +11081,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11113,7 +11113,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11145,7 +11145,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11177,7 +11177,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11209,7 +11209,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11241,7 +11241,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11273,7 +11273,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11305,7 +11305,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11337,7 +11337,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11369,7 +11369,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11401,7 +11401,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11433,7 +11433,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11465,7 +11465,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11497,7 +11497,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, B, Op, Val, DestTy, Name);
+        return invokePPPPP(B, Op, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11529,7 +11529,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11561,7 +11561,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11593,7 +11593,7 @@ public class LLVMCore {
             check(Val);
             check(DestTy);
         }
-        return invokePPPPP(__functionAddress, Builder, Val, DestTy, Name);
+        return invokePPPPP(Builder, Val, DestTy, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11626,7 +11626,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, Op, LHS, RHS, Name);
+        return invokePPPPP(Builder, Op, LHS, RHS, Name, __functionAddress);
     }
 
     /** Comparisons */
@@ -11660,7 +11660,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, Op, LHS, RHS, Name);
+        return invokePPPPP(Builder, Op, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11692,7 +11692,7 @@ public class LLVMCore {
             check(Builder);
             check(Ty);
         }
-        return invokePPPP(__functionAddress, Builder, Ty, Name);
+        return invokePPPP(Builder, Ty, Name, __functionAddress);
     }
 
     /** Miscellaneous instructions */
@@ -11725,7 +11725,7 @@ public class LLVMCore {
             check(Builder);
             check(Fn);
         }
-        return invokePPPPP(__functionAddress, Builder, Fn, Args, NumArgs, Name);
+        return invokePPPPP(Builder, Fn, Args, NumArgs, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11758,7 +11758,7 @@ public class LLVMCore {
             check(Then);
             check(Else);
         }
-        return invokePPPPPP(__functionAddress, Builder, If, Then, Else, Name);
+        return invokePPPPPP(Builder, If, Then, Else, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11790,7 +11790,7 @@ public class LLVMCore {
             check(List);
             check(Ty);
         }
-        return invokePPPPP(__functionAddress, Builder, List, Ty, Name);
+        return invokePPPPP(Builder, List, Ty, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11822,7 +11822,7 @@ public class LLVMCore {
             check(VecVal);
             check(Index);
         }
-        return invokePPPPP(__functionAddress, Builder, VecVal, Index, Name);
+        return invokePPPPP(Builder, VecVal, Index, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11855,7 +11855,7 @@ public class LLVMCore {
             check(EltVal);
             check(Index);
         }
-        return invokePPPPPP(__functionAddress, Builder, VecVal, EltVal, Index, Name);
+        return invokePPPPPP(Builder, VecVal, EltVal, Index, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11888,7 +11888,7 @@ public class LLVMCore {
             check(V2);
             check(Mask);
         }
-        return invokePPPPPP(__functionAddress, Builder, V1, V2, Mask, Name);
+        return invokePPPPPP(Builder, V1, V2, Mask, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11919,7 +11919,7 @@ public class LLVMCore {
             check(Builder);
             check(AggVal);
         }
-        return invokePPPP(__functionAddress, Builder, AggVal, Index, Name);
+        return invokePPPP(Builder, AggVal, Index, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11951,7 +11951,7 @@ public class LLVMCore {
             check(AggVal);
             check(EltVal);
         }
-        return invokePPPPP(__functionAddress, Builder, AggVal, EltVal, Index, Name);
+        return invokePPPPP(Builder, AggVal, EltVal, Index, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -11982,7 +11982,7 @@ public class LLVMCore {
             check(Builder);
             check(Val);
         }
-        return invokePPPP(__functionAddress, Builder, Val, Name);
+        return invokePPPP(Builder, Val, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -12013,7 +12013,7 @@ public class LLVMCore {
             check(Builder);
             check(Val);
         }
-        return invokePPPP(__functionAddress, Builder, Val, Name);
+        return invokePPPP(Builder, Val, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -12045,7 +12045,7 @@ public class LLVMCore {
             check(LHS);
             check(RHS);
         }
-        return invokePPPPP(__functionAddress, Builder, LHS, RHS, Name);
+        return invokePPPPP(Builder, LHS, RHS, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -12075,7 +12075,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(B);
         }
-        return invokePPP(__functionAddress, B, ordering, singleThread, Name);
+        return invokePPP(B, ordering, singleThread, Name, __functionAddress);
     }
 
     @NativeType("LLVMValueRef")
@@ -12108,7 +12108,7 @@ public class LLVMCore {
             check(PTR);
             check(Val);
         }
-        return invokePPPP(__functionAddress, B, op, PTR, Val, ordering, singleThread ? 1 : 0);
+        return invokePPPP(B, op, PTR, Val, ordering, singleThread ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMBuildAtomicCmpXchg ] ---
@@ -12122,7 +12122,7 @@ public class LLVMCore {
             check(Cmp);
             check(New);
         }
-        return invokePPPPP(__functionAddress, B, Ptr, Cmp, New, SuccessOrdering, FailureOrdering, SingleThread ? 1 : 0);
+        return invokePPPPP(B, Ptr, Cmp, New, SuccessOrdering, FailureOrdering, SingleThread ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMIsAtomicSingleThread ] ---
@@ -12133,7 +12133,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(AtomicInst);
         }
-        return invokePI(__functionAddress, AtomicInst) != 0;
+        return invokePI(AtomicInst, __functionAddress) != 0;
     }
 
     // --- [ LLVMSetAtomicSingleThread ] ---
@@ -12143,7 +12143,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(AtomicInst);
         }
-        invokePV(__functionAddress, AtomicInst, SingleThread ? 1 : 0);
+        invokePV(AtomicInst, SingleThread ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMGetCmpXchgSuccessOrdering ] ---
@@ -12154,7 +12154,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(CmpXchgInst);
         }
-        return invokePI(__functionAddress, CmpXchgInst);
+        return invokePI(CmpXchgInst, __functionAddress);
     }
 
     // --- [ LLVMSetCmpXchgSuccessOrdering ] ---
@@ -12164,7 +12164,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(CmpXchgInst);
         }
-        invokePV(__functionAddress, CmpXchgInst, Ordering);
+        invokePV(CmpXchgInst, Ordering, __functionAddress);
     }
 
     // --- [ LLVMGetCmpXchgFailureOrdering ] ---
@@ -12175,7 +12175,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(CmpXchgInst);
         }
-        return invokePI(__functionAddress, CmpXchgInst);
+        return invokePI(CmpXchgInst, __functionAddress);
     }
 
     // --- [ LLVMSetCmpXchgFailureOrdering ] ---
@@ -12185,7 +12185,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(CmpXchgInst);
         }
-        invokePV(__functionAddress, CmpXchgInst, Ordering);
+        invokePV(CmpXchgInst, Ordering, __functionAddress);
     }
 
     // --- [ LLVMCreateModuleProviderForExistingModule ] ---
@@ -12200,7 +12200,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMDisposeModuleProvider ] ---
@@ -12211,14 +12211,14 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        invokePV(__functionAddress, M);
+        invokePV(M, __functionAddress);
     }
 
     // --- [ LLVMCreateMemoryBufferWithContentsOfFile ] ---
 
     public static int nLLVMCreateMemoryBufferWithContentsOfFile(long Path, long OutMemBuf, long OutMessage) {
         long __functionAddress = Functions.CreateMemoryBufferWithContentsOfFile;
-        return invokePPPI(__functionAddress, Path, OutMemBuf, OutMessage);
+        return invokePPPI(Path, OutMemBuf, OutMessage, __functionAddress);
     }
 
     @NativeType("LLVMBool")
@@ -12251,7 +12251,7 @@ public class LLVMCore {
 
     public static int nLLVMCreateMemoryBufferWithSTDIN(long OutMemBuf, long OutMessage) {
         long __functionAddress = Functions.CreateMemoryBufferWithSTDIN;
-        return invokePPI(__functionAddress, OutMemBuf, OutMessage);
+        return invokePPI(OutMemBuf, OutMessage, __functionAddress);
     }
 
     @NativeType("LLVMBool")
@@ -12267,7 +12267,7 @@ public class LLVMCore {
 
     public static long nLLVMCreateMemoryBufferWithMemoryRange(long InputData, long InputDataLength, long BufferName, int RequiresNullTerminator) {
         long __functionAddress = Functions.CreateMemoryBufferWithMemoryRange;
-        return invokePPPP(__functionAddress, InputData, InputDataLength, BufferName, RequiresNullTerminator);
+        return invokePPPP(InputData, InputDataLength, BufferName, RequiresNullTerminator, __functionAddress);
     }
 
     @NativeType("LLVMMemoryBufferRef")
@@ -12294,7 +12294,7 @@ public class LLVMCore {
 
     public static long nLLVMCreateMemoryBufferWithMemoryRangeCopy(long InputData, long InputDataLength, long BufferName) {
         long __functionAddress = Functions.CreateMemoryBufferWithMemoryRangeCopy;
-        return invokePPPP(__functionAddress, InputData, InputDataLength, BufferName);
+        return invokePPPP(InputData, InputDataLength, BufferName, __functionAddress);
     }
 
     @NativeType("LLVMMemoryBufferRef")
@@ -12324,7 +12324,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(MemBuf);
         }
-        return invokePP(__functionAddress, MemBuf);
+        return invokePP(MemBuf, __functionAddress);
     }
 
     @Nullable
@@ -12342,7 +12342,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(MemBuf);
         }
-        return invokePP(__functionAddress, MemBuf);
+        return invokePP(MemBuf, __functionAddress);
     }
 
     // --- [ LLVMDisposeMemoryBuffer ] ---
@@ -12352,7 +12352,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(MemBuf);
         }
-        invokePV(__functionAddress, MemBuf);
+        invokePV(MemBuf, __functionAddress);
     }
 
     // --- [ LLVMGetGlobalPassRegistry ] ---
@@ -12385,7 +12385,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMCreateFunctionPassManager ] ---
@@ -12397,7 +12397,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(MP);
         }
-        return invokePP(__functionAddress, MP);
+        return invokePP(MP, __functionAddress);
     }
 
     // --- [ LLVMRunPassManager ] ---
@@ -12413,7 +12413,7 @@ public class LLVMCore {
             check(PM);
             check(M);
         }
-        return invokePPI(__functionAddress, PM, M) != 0;
+        return invokePPI(PM, M, __functionAddress) != 0;
     }
 
     // --- [ LLVMInitializeFunctionPassManager ] ---
@@ -12425,7 +12425,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(FPM);
         }
-        return invokePI(__functionAddress, FPM) != 0;
+        return invokePI(FPM, __functionAddress) != 0;
     }
 
     // --- [ LLVMRunFunctionPassManager ] ---
@@ -12441,7 +12441,7 @@ public class LLVMCore {
             check(FPM);
             check(F);
         }
-        return invokePPI(__functionAddress, FPM, F) != 0;
+        return invokePPI(FPM, F, __functionAddress) != 0;
     }
 
     // --- [ LLVMFinalizeFunctionPassManager ] ---
@@ -12453,7 +12453,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(FPM);
         }
-        return invokePI(__functionAddress, FPM) != 0;
+        return invokePI(FPM, __functionAddress) != 0;
     }
 
     // --- [ LLVMDisposePassManager ] ---
@@ -12464,7 +12464,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMStartMultithreaded ] ---

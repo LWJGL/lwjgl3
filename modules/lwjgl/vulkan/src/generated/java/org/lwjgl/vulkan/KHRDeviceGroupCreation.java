@@ -138,7 +138,7 @@ public class KHRDeviceGroupCreation {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, instance.address(), pPhysicalDeviceGroupCount, pPhysicalDeviceGroupProperties);
+        return callPPPI(instance.address(), pPhysicalDeviceGroupCount, pPhysicalDeviceGroupProperties, __functionAddress);
     }
 
     /**
@@ -166,7 +166,7 @@ public class KHRDeviceGroupCreation {
             check(pPhysicalDeviceGroupCount, 1);
             checkSafe(pPhysicalDeviceGroupProperties, pPhysicalDeviceGroupCount[0]);
         }
-        return callPPPI(__functionAddress, instance.address(), pPhysicalDeviceGroupCount, memAddressSafe(pPhysicalDeviceGroupProperties));
+        return callPPPI(instance.address(), pPhysicalDeviceGroupCount, memAddressSafe(pPhysicalDeviceGroupProperties), __functionAddress);
     }
 
 }

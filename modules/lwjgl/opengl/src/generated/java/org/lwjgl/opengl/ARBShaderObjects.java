@@ -1132,7 +1132,7 @@ public class ARBShaderObjects {
             check(__functionAddress);
             checkSafe(length, string.remaining());
         }
-        callPPV(__functionAddress, shaderObj, string.remaining(), memAddress(string), length);
+        callPPV(shaderObj, string.remaining(), memAddress(string), length, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform1fvARB Uniform1fvARB} */
@@ -1141,7 +1141,7 @@ public class ARBShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length, value);
+        callPV(location, value.length, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform2fvARB Uniform2fvARB} */
@@ -1150,7 +1150,7 @@ public class ARBShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 1, value);
+        callPV(location, value.length >> 1, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform3fvARB Uniform3fvARB} */
@@ -1159,7 +1159,7 @@ public class ARBShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 3, value);
+        callPV(location, value.length / 3, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform4fvARB Uniform4fvARB} */
@@ -1168,7 +1168,7 @@ public class ARBShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 2, value);
+        callPV(location, value.length >> 2, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform1ivARB Uniform1ivARB} */
@@ -1177,7 +1177,7 @@ public class ARBShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length, value);
+        callPV(location, value.length, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform2ivARB Uniform2ivARB} */
@@ -1186,7 +1186,7 @@ public class ARBShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 1, value);
+        callPV(location, value.length >> 1, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform3ivARB Uniform3ivARB} */
@@ -1195,7 +1195,7 @@ public class ARBShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 3, value);
+        callPV(location, value.length / 3, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniform4ivARB Uniform4ivARB} */
@@ -1204,7 +1204,7 @@ public class ARBShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 2, value);
+        callPV(location, value.length >> 2, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniformMatrix2fvARB UniformMatrix2fvARB} */
@@ -1213,7 +1213,7 @@ public class ARBShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 2, transpose, value);
+        callPV(location, value.length >> 2, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniformMatrix3fvARB UniformMatrix3fvARB} */
@@ -1222,7 +1222,7 @@ public class ARBShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 9, transpose, value);
+        callPV(location, value.length / 9, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniformMatrix4fvARB UniformMatrix4fvARB} */
@@ -1231,7 +1231,7 @@ public class ARBShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 4, transpose, value);
+        callPV(location, value.length >> 4, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glGetObjectParameterfvARB GetObjectParameterfvARB} */
@@ -1241,7 +1241,7 @@ public class ARBShaderObjects {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, obj, pname, params);
+        callPV(obj, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetObjectParameterivARB GetObjectParameterivARB} */
@@ -1251,7 +1251,7 @@ public class ARBShaderObjects {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, obj, pname, params);
+        callPV(obj, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetInfoLogARB GetInfoLogARB} */
@@ -1261,7 +1261,7 @@ public class ARBShaderObjects {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, obj, infoLog.remaining(), length, memAddress(infoLog));
+        callPPV(obj, infoLog.remaining(), length, memAddress(infoLog), __functionAddress);
     }
 
     /** Array version of: {@link #glGetAttachedObjectsARB GetAttachedObjectsARB} */
@@ -1271,7 +1271,7 @@ public class ARBShaderObjects {
             check(__functionAddress);
             checkSafe(count, 1);
         }
-        callPPV(__functionAddress, containerObj, obj.length, count, obj);
+        callPPV(containerObj, obj.length, count, obj, __functionAddress);
     }
 
     /** Array version of: {@link #glGetActiveUniformARB GetActiveUniformARB} */
@@ -1283,7 +1283,7 @@ public class ARBShaderObjects {
             check(size, 1);
             check(type, 1);
         }
-        callPPPPV(__functionAddress, programObj, index, name.remaining(), length, size, type, memAddress(name));
+        callPPPPV(programObj, index, name.remaining(), length, size, type, memAddress(name), __functionAddress);
     }
 
     /** Array version of: {@link #glGetUniformfvARB GetUniformfvARB} */
@@ -1293,7 +1293,7 @@ public class ARBShaderObjects {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, programObj, location, params);
+        callPV(programObj, location, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetUniformivARB GetUniformivARB} */
@@ -1303,7 +1303,7 @@ public class ARBShaderObjects {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, programObj, location, params);
+        callPV(programObj, location, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetShaderSourceARB GetShaderSourceARB} */
@@ -1313,7 +1313,7 @@ public class ARBShaderObjects {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, obj, source.remaining(), length, memAddress(source));
+        callPPV(obj, source.remaining(), length, memAddress(source), __functionAddress);
     }
 
 }

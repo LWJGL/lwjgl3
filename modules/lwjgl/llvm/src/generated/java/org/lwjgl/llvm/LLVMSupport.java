@@ -42,7 +42,7 @@ public class LLVMSupport {
     /** Unsafe version of: {@link #LLVMLoadLibraryPermanently LoadLibraryPermanently} */
     public static int nLLVMLoadLibraryPermanently(long Filename) {
         long __functionAddress = Functions.LoadLibraryPermanently;
-        return invokePI(__functionAddress, Filename);
+        return invokePI(Filename, __functionAddress);
     }
 
     /** This function permanently loads the dynamic library at the given path. It is safe to call this function multiple times for the same library. */
@@ -72,7 +72,7 @@ public class LLVMSupport {
     /** Unsafe version of: {@link #LLVMParseCommandLineOptions ParseCommandLineOptions} */
     public static void nLLVMParseCommandLineOptions(int argc, long argv, long Overview) {
         long __functionAddress = Functions.ParseCommandLineOptions;
-        invokePPV(__functionAddress, argc, argv, Overview);
+        invokePPV(argc, argv, Overview, __functionAddress);
     }
 
     /**
@@ -110,7 +110,7 @@ public class LLVMSupport {
     /** Unsafe version of: {@link #LLVMSearchForAddressOfSymbol SearchForAddressOfSymbol} */
     public static long nLLVMSearchForAddressOfSymbol(long symbolName) {
         long __functionAddress = Functions.SearchForAddressOfSymbol;
-        return invokePP(__functionAddress, symbolName);
+        return invokePP(symbolName, __functionAddress);
     }
 
     /**
@@ -149,7 +149,7 @@ public class LLVMSupport {
         if (CHECKS) {
             check(symbolValue);
         }
-        invokePPV(__functionAddress, symbolName, symbolValue);
+        invokePPV(symbolName, symbolValue, __functionAddress);
     }
 
     /** This functions permanently adds the symbol {@code symbolName} with the value {@code symbolValue}. These symbols are searched before any libraries. */

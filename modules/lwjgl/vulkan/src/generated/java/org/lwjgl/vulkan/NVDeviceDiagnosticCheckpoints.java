@@ -127,7 +127,7 @@ public class NVDeviceDiagnosticCheckpoints {
             check(__functionAddress);
             check(pCheckpointMarker);
         }
-        callPPV(__functionAddress, commandBuffer.address(), pCheckpointMarker);
+        callPPV(commandBuffer.address(), pCheckpointMarker, __functionAddress);
     }
 
     // --- [ vkGetQueueCheckpointDataNV ] ---
@@ -142,7 +142,7 @@ public class NVDeviceDiagnosticCheckpoints {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, queue.address(), pCheckpointDataCount, pCheckpointData);
+        callPPPV(queue.address(), pCheckpointDataCount, pCheckpointData, __functionAddress);
     }
 
     /**
@@ -204,7 +204,7 @@ public class NVDeviceDiagnosticCheckpoints {
             check(pCheckpointDataCount, 1);
             checkSafe(pCheckpointData, pCheckpointDataCount[0]);
         }
-        callPPPV(__functionAddress, queue.address(), pCheckpointDataCount, memAddressSafe(pCheckpointData));
+        callPPPV(queue.address(), pCheckpointDataCount, memAddressSafe(pCheckpointData), __functionAddress);
     }
 
 }

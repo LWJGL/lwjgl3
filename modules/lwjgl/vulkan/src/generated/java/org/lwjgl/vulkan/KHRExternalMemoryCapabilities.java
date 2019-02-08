@@ -146,7 +146,7 @@ public class KHRExternalMemoryCapabilities {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, physicalDevice.address(), pExternalBufferInfo, pExternalBufferProperties);
+        callPPPV(physicalDevice.address(), pExternalBufferInfo, pExternalBufferProperties, __functionAddress);
     }
 
     /**

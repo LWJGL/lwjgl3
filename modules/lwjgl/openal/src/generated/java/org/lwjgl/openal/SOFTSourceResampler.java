@@ -51,7 +51,7 @@ public class SOFTSourceResampler {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokeP(__functionAddress, pname, index);
+        return invokeP(pname, index, __functionAddress);
     }
 
     @Nullable

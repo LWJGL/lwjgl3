@@ -1229,7 +1229,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1243,7 +1243,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1257,7 +1257,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1271,7 +1271,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1285,7 +1285,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1299,7 +1299,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1313,7 +1313,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1327,7 +1327,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1341,7 +1341,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1355,7 +1355,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1369,7 +1369,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1383,7 +1383,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1397,7 +1397,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1411,7 +1411,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1425,7 +1425,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1439,7 +1439,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /**
@@ -1453,7 +1453,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(m, 16);
         }
-        callPV(__functionAddress, m);
+        callPV(m, __functionAddress);
     }
 
     /**
@@ -1467,7 +1467,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(m, 16);
         }
-        callPV(__functionAddress, m);
+        callPV(m, __functionAddress);
     }
 
     /**
@@ -1481,7 +1481,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(m, 16);
         }
-        callPV(__functionAddress, m);
+        callPV(m, __functionAddress);
     }
 
     /**
@@ -1495,7 +1495,7 @@ public class GL13 extends GL12 {
             check(__functionAddress);
             check(m, 16);
         }
-        callPV(__functionAddress, m);
+        callPV(m, __functionAddress);
     }
 
 }

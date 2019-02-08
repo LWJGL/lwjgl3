@@ -378,7 +378,7 @@ public class ARBDebugOutput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, source, type, severity, lengthSafe(ids), ids, enabled);
+        callPV(source, type, severity, lengthSafe(ids), ids, enabled, __functionAddress);
     }
 
     /** Array version of: {@link #glGetDebugMessageLogARB GetDebugMessageLogARB} */
@@ -393,7 +393,7 @@ public class ARBDebugOutput {
             checkSafe(severities, count);
             checkSafe(lengths, count);
         }
-        return callPPPPPPI(__functionAddress, count, remainingSafe(messageLog), sources, types, ids, severities, lengths, memAddressSafe(messageLog));
+        return callPPPPPPI(count, remainingSafe(messageLog), sources, types, ids, severities, lengths, memAddressSafe(messageLog), __functionAddress);
     }
 
 }

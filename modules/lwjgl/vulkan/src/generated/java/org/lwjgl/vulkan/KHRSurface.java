@@ -277,7 +277,7 @@ public class KHRSurface {
             check(__functionAddress);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        callPJPV(__functionAddress, instance.address(), surface, pAllocator);
+        callPJPV(instance.address(), surface, pAllocator, __functionAddress);
     }
 
     /**
@@ -340,7 +340,7 @@ public class KHRSurface {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPI(__functionAddress, physicalDevice.address(), queueFamilyIndex, surface, pSupported);
+        return callPJPI(physicalDevice.address(), queueFamilyIndex, surface, pSupported, __functionAddress);
     }
 
     /**
@@ -408,7 +408,7 @@ public class KHRSurface {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPI(__functionAddress, physicalDevice.address(), surface, pSurfaceCapabilities);
+        return callPJPI(physicalDevice.address(), surface, pSurfaceCapabilities, __functionAddress);
     }
 
     /**
@@ -473,7 +473,7 @@ public class KHRSurface {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, physicalDevice.address(), surface, pSurfaceFormatCount, pSurfaceFormats);
+        return callPJPPI(physicalDevice.address(), surface, pSurfaceFormatCount, pSurfaceFormats, __functionAddress);
     }
 
     /**
@@ -550,7 +550,7 @@ public class KHRSurface {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, physicalDevice.address(), surface, pPresentModeCount, pPresentModes);
+        return callPJPPI(physicalDevice.address(), surface, pPresentModeCount, pPresentModes, __functionAddress);
     }
 
     /**
@@ -619,7 +619,7 @@ public class KHRSurface {
             check(__functionAddress);
             check(pSupported, 1);
         }
-        return callPJPI(__functionAddress, physicalDevice.address(), queueFamilyIndex, surface, pSupported);
+        return callPJPI(physicalDevice.address(), queueFamilyIndex, surface, pSupported, __functionAddress);
     }
 
     /** Array version of: {@link #vkGetPhysicalDeviceSurfaceFormatsKHR GetPhysicalDeviceSurfaceFormatsKHR} */
@@ -631,7 +631,7 @@ public class KHRSurface {
             check(pSurfaceFormatCount, 1);
             checkSafe(pSurfaceFormats, pSurfaceFormatCount[0]);
         }
-        return callPJPPI(__functionAddress, physicalDevice.address(), surface, pSurfaceFormatCount, memAddressSafe(pSurfaceFormats));
+        return callPJPPI(physicalDevice.address(), surface, pSurfaceFormatCount, memAddressSafe(pSurfaceFormats), __functionAddress);
     }
 
     /** Array version of: {@link #vkGetPhysicalDeviceSurfacePresentModesKHR GetPhysicalDeviceSurfacePresentModesKHR} */
@@ -643,7 +643,7 @@ public class KHRSurface {
             check(pPresentModeCount, 1);
             checkSafe(pPresentModes, pPresentModeCount[0]);
         }
-        return callPJPPI(__functionAddress, physicalDevice.address(), surface, pPresentModeCount, pPresentModes);
+        return callPJPPI(physicalDevice.address(), surface, pPresentModeCount, pPresentModes, __functionAddress);
     }
 
 }

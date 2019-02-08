@@ -40,7 +40,7 @@ public class WGLARBExtensionsString {
             check(__functionAddress);
             check(hdc);
         }
-        return callPP(__functionAddress, hdc);
+        return callPP(hdc, __functionAddress);
     }
 
     /**

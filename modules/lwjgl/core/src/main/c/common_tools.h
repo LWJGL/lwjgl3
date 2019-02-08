@@ -14,13 +14,6 @@
     #include "macOSConfig.h"
 #endif
 
-#ifndef DISABLE_WARNINGS
-    #define DISABLE_WARNINGS()
-#endif
-#ifndef ENABLE_WARNINGS
-    #define ENABLE_WARNINGS()
-#endif
-
 DISABLE_WARNINGS()
 #include <jni.h>
 ENABLE_WARNINGS()

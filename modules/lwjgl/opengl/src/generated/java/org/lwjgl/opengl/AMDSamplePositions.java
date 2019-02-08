@@ -58,7 +58,7 @@ public class AMDSamplePositions {
             check(__functionAddress);
             check(val, 2);
         }
-        callPV(__functionAddress, pname, index, val);
+        callPV(pname, index, val, __functionAddress);
     }
 
 }

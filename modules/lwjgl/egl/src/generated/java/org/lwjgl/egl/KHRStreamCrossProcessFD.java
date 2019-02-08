@@ -61,7 +61,7 @@ public class KHRStreamCrossProcessFD {
             check(dpy);
             check(stream);
         }
-        return callPPI(__functionAddress, dpy, stream);
+        return callPPI(dpy, stream, __functionAddress);
     }
 
     // --- [ eglCreateStreamFromFileDescriptorKHR ] ---
@@ -73,7 +73,7 @@ public class KHRStreamCrossProcessFD {
             check(__functionAddress);
             check(dpy);
         }
-        return callPP(__functionAddress, dpy, file_descriptor);
+        return callPP(dpy, file_descriptor, __functionAddress);
     }
 
 }

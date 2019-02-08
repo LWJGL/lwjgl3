@@ -74,7 +74,7 @@ public class OpusCustom {
     /** Unsafe version of: {@link #opus_custom_mode_create custom_mode_create} */
     public static long nopus_custom_mode_create(int Fs, int frame_size, long error) {
         long __functionAddress = Functions.custom_mode_create;
-        return invokePP(__functionAddress, Fs, frame_size, error);
+        return invokePP(Fs, frame_size, error, __functionAddress);
     }
 
     /**
@@ -105,7 +105,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(mode);
         }
-        invokePV(__functionAddress, mode);
+        invokePV(mode, __functionAddress);
     }
 
     // --- [ opus_custom_encoder_get_size ] ---
@@ -123,7 +123,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(mode);
         }
-        return invokePI(__functionAddress, mode, channels);
+        return invokePI(mode, channels, __functionAddress);
     }
 
     // --- [ opus_custom_encoder_init ] ---
@@ -148,7 +148,7 @@ public class OpusCustom {
             check(st);
             check(mode);
         }
-        return invokePPI(__functionAddress, st, mode, channels);
+        return invokePPI(st, mode, channels, __functionAddress);
     }
 
     // --- [ opus_custom_encoder_create ] ---
@@ -159,7 +159,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(mode);
         }
-        return invokePPP(__functionAddress, mode, channels, error);
+        return invokePPP(mode, channels, error, __functionAddress);
     }
 
     /**
@@ -193,7 +193,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(st);
         }
-        invokePV(__functionAddress, st);
+        invokePV(st, __functionAddress);
     }
 
     // --- [ opus_custom_encode_float ] ---
@@ -208,7 +208,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, pcm, frame_size, compressed, maxCompressedBytes);
+        return invokePPPI(st, pcm, frame_size, compressed, maxCompressedBytes, __functionAddress);
     }
 
     /**
@@ -242,7 +242,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, pcm, frame_size, compressed, maxCompressedBytes);
+        return invokePPPI(st, pcm, frame_size, compressed, maxCompressedBytes, __functionAddress);
     }
 
     /**
@@ -274,7 +274,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st);
+        return invokePI(st, __functionAddress);
     }
 
     // --- [ opus_custom_decoder_get_size ] ---
@@ -292,7 +292,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(mode);
         }
-        return invokePI(__functionAddress, mode, channels);
+        return invokePI(mode, channels, __functionAddress);
     }
 
     // --- [ opus_custom_decoder_init ] ---
@@ -317,7 +317,7 @@ public class OpusCustom {
             check(st);
             check(mode);
         }
-        return invokePPI(__functionAddress, st, mode, channels);
+        return invokePPI(st, mode, channels, __functionAddress);
     }
 
     // --- [ opus_custom_decoder_create ] ---
@@ -328,7 +328,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(mode);
         }
-        return invokePPP(__functionAddress, mode, channels, error);
+        return invokePPP(mode, channels, error, __functionAddress);
     }
 
     /**
@@ -362,7 +362,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(st);
         }
-        invokePV(__functionAddress, st);
+        invokePV(st, __functionAddress);
     }
 
     // --- [ opus_custom_decode_float ] ---
@@ -377,7 +377,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, data, len, pcm, frame_size);
+        return invokePPPI(st, data, len, pcm, frame_size, __functionAddress);
     }
 
     /**
@@ -409,7 +409,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, data, len, pcm, frame_size);
+        return invokePPPI(st, data, len, pcm, frame_size, __functionAddress);
     }
 
     /**
@@ -441,7 +441,7 @@ public class OpusCustom {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st);
+        return invokePI(st, __functionAddress);
     }
 
     /**

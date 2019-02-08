@@ -46,7 +46,7 @@ public class GLXSGIMakeCurrentRead {
             check(__functionAddress);
             check(display);
         }
-        return callPPPPI(__functionAddress, display, draw, read, ctx) != 0;
+        return callPPPPI(display, draw, read, ctx, __functionAddress) != 0;
     }
 
     // --- [ glXGetCurrentReadDrawableSGI ] ---

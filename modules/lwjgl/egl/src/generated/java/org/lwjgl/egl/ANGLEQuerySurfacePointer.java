@@ -39,7 +39,7 @@ public class ANGLEQuerySurfacePointer {
             check(dpy);
             check(surface);
         }
-        return callPPPI(__functionAddress, dpy, surface, attribute, value);
+        return callPPPI(dpy, surface, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")

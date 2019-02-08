@@ -685,7 +685,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, buffers.length, buffers);
+        callPV(buffers.length, buffers, __functionAddress);
     }
 
     /** Array version of: {@link #glGenBuffersARB GenBuffersARB} */
@@ -694,7 +694,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, buffers.length, buffers);
+        callPV(buffers.length, buffers, __functionAddress);
     }
 
     /** Array version of: {@link #glBufferDataARB BufferDataARB} */
@@ -703,7 +703,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 1, data, usage);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 1, data, usage, __functionAddress);
     }
 
     /** Array version of: {@link #glBufferDataARB BufferDataARB} */
@@ -712,7 +712,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 2, data, usage);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 2, data, usage, __functionAddress);
     }
 
     /** Array version of: {@link #glBufferDataARB BufferDataARB} */
@@ -721,7 +721,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 2, data, usage);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 2, data, usage, __functionAddress);
     }
 
     /** Array version of: {@link #glBufferDataARB BufferDataARB} */
@@ -730,7 +730,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 3, data, usage);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 3, data, usage, __functionAddress);
     }
 
     /** Array version of: {@link #glBufferSubDataARB BufferSubDataARB} */
@@ -739,7 +739,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, target, offset, Integer.toUnsignedLong(data.length) << 1, data);
+        callPPPV(target, offset, Integer.toUnsignedLong(data.length) << 1, data, __functionAddress);
     }
 
     /** Array version of: {@link #glBufferSubDataARB BufferSubDataARB} */
@@ -748,7 +748,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, target, offset, Integer.toUnsignedLong(data.length) << 2, data);
+        callPPPV(target, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
     /** Array version of: {@link #glBufferSubDataARB BufferSubDataARB} */
@@ -757,7 +757,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, target, offset, Integer.toUnsignedLong(data.length) << 2, data);
+        callPPPV(target, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
     /** Array version of: {@link #glBufferSubDataARB BufferSubDataARB} */
@@ -766,7 +766,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, target, offset, Integer.toUnsignedLong(data.length) << 3, data);
+        callPPPV(target, offset, Integer.toUnsignedLong(data.length) << 3, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetBufferSubDataARB GetBufferSubDataARB} */
@@ -775,7 +775,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, target, offset, Integer.toUnsignedLong(data.length) << 1, data);
+        callPPPV(target, offset, Integer.toUnsignedLong(data.length) << 1, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetBufferSubDataARB GetBufferSubDataARB} */
@@ -784,7 +784,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, target, offset, Integer.toUnsignedLong(data.length) << 2, data);
+        callPPPV(target, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetBufferSubDataARB GetBufferSubDataARB} */
@@ -793,7 +793,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, target, offset, Integer.toUnsignedLong(data.length) << 2, data);
+        callPPPV(target, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetBufferSubDataARB GetBufferSubDataARB} */
@@ -802,7 +802,7 @@ public class ARBVertexBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, target, offset, Integer.toUnsignedLong(data.length) << 3, data);
+        callPPPV(target, offset, Integer.toUnsignedLong(data.length) << 3, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetBufferParameterivARB GetBufferParameterivARB} */
@@ -812,7 +812,7 @@ public class ARBVertexBufferObject {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
 }

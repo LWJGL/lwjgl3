@@ -48,7 +48,7 @@ public class ANDROIDBlobCache {
             check(__functionAddress);
             check(dpy);
         }
-        callPPPV(__functionAddress, dpy, set, get);
+        callPPPV(dpy, set, get, __functionAddress);
     }
 
     public static void eglSetBlobCacheFuncsANDROID(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSetBlobFuncANDROID") EGLSetBlobFuncANDROIDI set, @NativeType("EGLGetBlobFuncANDROID") EGLGetBlobFuncANDROIDI get) {

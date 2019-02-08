@@ -56,7 +56,7 @@ public class KHREGLImage {
             check(display);
             check(image);
         }
-        return callPPPJPPP(__functionAddress, context, display, image, flags, properties, errcode_ret);
+        return callPPPJPPP(context, display, image, flags, properties, errcode_ret, __functionAddress);
     }
 
     /**
@@ -91,7 +91,7 @@ public class KHREGLImage {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPPI(__functionAddress, command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPI(command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -130,7 +130,7 @@ public class KHREGLImage {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPPI(__functionAddress, command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPI(command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -194,7 +194,7 @@ public class KHREGLImage {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
         }
-        return callPPPJPPP(__functionAddress, context, display, image, flags, memAddressSafe(properties), errcode_ret);
+        return callPPPJPPP(context, display, image, flags, memAddressSafe(properties), errcode_ret, __functionAddress);
     }
 
 }

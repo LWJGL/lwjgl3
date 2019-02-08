@@ -44,7 +44,7 @@ public final class Callbacks {
             GLFW.Functions.SetScrollCallback,
             GLFW.Functions.SetDropCallback
         }) {
-            long prevCB = invokePPP(callback, window, NULL);
+            long prevCB = invokePPP(window, NULL, callback);
             if (prevCB != NULL) {
                 Callback.free(prevCB);
             }

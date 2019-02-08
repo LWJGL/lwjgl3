@@ -103,7 +103,7 @@ public class EXTExternalMemoryHost {
             check(__functionAddress);
             check(pHostPointer);
         }
-        return callPPPI(__functionAddress, device.address(), handleType, pHostPointer, pMemoryHostPointerProperties);
+        return callPPPI(device.address(), handleType, pHostPointer, pMemoryHostPointerProperties, __functionAddress);
     }
 
     /**

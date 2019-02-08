@@ -51,7 +51,7 @@ public class EXTDeviceEnumeration {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, max_devices, devices, num_devices);
+        return callPPI(max_devices, devices, num_devices, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -70,7 +70,7 @@ public class EXTDeviceEnumeration {
             check(__functionAddress);
             check(num_devices, 1);
         }
-        return callPPI(__functionAddress, remainingSafe(devices), memAddressSafe(devices), num_devices) != 0;
+        return callPPI(remainingSafe(devices), memAddressSafe(devices), num_devices, __functionAddress) != 0;
     }
 
 }

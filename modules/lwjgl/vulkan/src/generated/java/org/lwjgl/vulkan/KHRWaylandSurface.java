@@ -94,7 +94,7 @@ public class KHRWaylandSurface {
             VkWaylandSurfaceCreateInfoKHR.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, instance.address(), pCreateInfo, pAllocator, pSurface);
+        return callPPPPI(instance.address(), pCreateInfo, pAllocator, pSurface, __functionAddress);
     }
 
     /**
@@ -194,7 +194,7 @@ public class KHRWaylandSurface {
             check(__functionAddress);
             check(display);
         }
-        return callPPI(__functionAddress, physicalDevice.address(), queueFamilyIndex, display) != 0;
+        return callPPI(physicalDevice.address(), queueFamilyIndex, display, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #vkCreateWaylandSurfaceKHR CreateWaylandSurfaceKHR} */
@@ -207,7 +207,7 @@ public class KHRWaylandSurface {
             VkWaylandSurfaceCreateInfoKHR.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface);
+        return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface, __functionAddress);
     }
 
 }

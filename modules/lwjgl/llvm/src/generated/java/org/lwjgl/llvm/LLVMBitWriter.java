@@ -43,7 +43,7 @@ public class LLVMBitWriter {
         if (CHECKS) {
             check(M);
         }
-        return invokePPI(__functionAddress, M, Path);
+        return invokePPI(M, Path, __functionAddress);
     }
 
     /** Writes a module to the specified path. Returns 0 on success. */
@@ -74,7 +74,7 @@ public class LLVMBitWriter {
         if (CHECKS) {
             check(M);
         }
-        return invokePI(__functionAddress, M, FD, ShouldClose, Unbuffered);
+        return invokePI(M, FD, ShouldClose, Unbuffered, __functionAddress);
     }
 
     // --- [ LLVMWriteBitcodeToFileHandle ] ---
@@ -85,7 +85,7 @@ public class LLVMBitWriter {
         if (CHECKS) {
             check(M);
         }
-        return invokePI(__functionAddress, M, Handle);
+        return invokePI(M, Handle, __functionAddress);
     }
 
     // --- [ LLVMWriteBitcodeToMemoryBuffer ] ---
@@ -97,7 +97,7 @@ public class LLVMBitWriter {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
 }

@@ -89,7 +89,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, source, param, value);
+        invokeV(source, param, value, __functionAddress);
     }
 
     // --- [ alSource3dSOFT ] ---
@@ -109,7 +109,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, source, param, value1, value2, value3);
+        invokeV(source, param, value1, value2, value3, __functionAddress);
     }
 
     // --- [ alSourcedvSOFT ] ---
@@ -120,7 +120,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, source, param, value);
+        invokePV(source, param, value, __functionAddress);
     }
 
     /**
@@ -146,7 +146,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, source, param, value);
+        invokePV(source, param, value, __functionAddress);
     }
 
     /**
@@ -190,7 +190,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePPPV(__functionAddress, source, param, value1, value2, value3);
+        invokePPPV(source, param, value1, value2, value3, __functionAddress);
     }
 
     /**
@@ -220,7 +220,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, source, param, values);
+        invokePV(source, param, values, __functionAddress);
     }
 
     /**
@@ -253,7 +253,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeJV(__functionAddress, source, param, value);
+        invokeJV(source, param, value, __functionAddress);
     }
 
     // --- [ alSource3i64SOFT ] ---
@@ -273,7 +273,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeJJJV(__functionAddress, source, param, value1, value2, value3);
+        invokeJJJV(source, param, value1, value2, value3, __functionAddress);
     }
 
     // --- [ alSourcei64vSOFT ] ---
@@ -284,7 +284,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, source, param, values);
+        invokePV(source, param, values, __functionAddress);
     }
 
     /**
@@ -310,7 +310,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, source, param, value);
+        invokePV(source, param, value, __functionAddress);
     }
 
     /**
@@ -354,7 +354,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePPPV(__functionAddress, source, param, value1, value2, value3);
+        invokePPPV(source, param, value1, value2, value3, __functionAddress);
     }
 
     /**
@@ -384,7 +384,7 @@ public class SOFTSourceLatency {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, source, param, values);
+        invokePV(source, param, values, __functionAddress);
     }
 
     /**
@@ -410,7 +410,7 @@ public class SOFTSourceLatency {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, source, param, value);
+        invokePV(source, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetSourcedSOFT GetSourcedSOFT} */
@@ -421,7 +421,7 @@ public class SOFTSourceLatency {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, source, param, value);
+        invokePV(source, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetSource3dSOFT GetSource3dSOFT} */
@@ -434,7 +434,7 @@ public class SOFTSourceLatency {
             check(value2, 1);
             check(value3, 1);
         }
-        invokePPPV(__functionAddress, source, param, value1, value2, value3);
+        invokePPPV(source, param, value1, value2, value3, __functionAddress);
     }
 
     /** Array version of: {@link #alGetSourcedvSOFT GetSourcedvSOFT} */
@@ -445,7 +445,7 @@ public class SOFTSourceLatency {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, source, param, values);
+        invokePV(source, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alSourcei64vSOFT Sourcei64vSOFT} */
@@ -456,7 +456,7 @@ public class SOFTSourceLatency {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, source, param, values);
+        invokePV(source, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alGetSourcei64SOFT GetSourcei64SOFT} */
@@ -467,7 +467,7 @@ public class SOFTSourceLatency {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, source, param, value);
+        invokePV(source, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetSource3i64SOFT GetSource3i64SOFT} */
@@ -480,7 +480,7 @@ public class SOFTSourceLatency {
             check(value2, 1);
             check(value3, 1);
         }
-        invokePPPV(__functionAddress, source, param, value1, value2, value3);
+        invokePPPV(source, param, value1, value2, value3, __functionAddress);
     }
 
     /** Array version of: {@link #alGetSourcei64vSOFT GetSourcei64vSOFT} */
@@ -491,7 +491,7 @@ public class SOFTSourceLatency {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, source, param, values);
+        invokePV(source, param, values, __functionAddress);
     }
 
 }

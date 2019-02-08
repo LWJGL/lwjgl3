@@ -923,7 +923,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, query, data.length, data);
+        callPV(target, query, data.length, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnMapfvARB GetnMapfvARB} */
@@ -932,7 +932,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, query, data.length, data);
+        callPV(target, query, data.length, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnMapivARB GetnMapivARB} */
@@ -941,7 +941,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, query, data.length, data);
+        callPV(target, query, data.length, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnPixelMapfvARB GetnPixelMapfvARB} */
@@ -950,7 +950,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, map, data.length, data);
+        callPV(map, data.length, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnPixelMapuivARB GetnPixelMapuivARB} */
@@ -959,7 +959,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, map, data.length, data);
+        callPV(map, data.length, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnPixelMapusvARB GetnPixelMapusvARB} */
@@ -968,7 +968,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, map, data.length, data);
+        callPV(map, data.length, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnTexImageARB GetnTexImageARB} */
@@ -977,7 +977,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, tex, level, format, type, img.length << 1, img);
+        callPV(tex, level, format, type, img.length << 1, img, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnTexImageARB GetnTexImageARB} */
@@ -986,7 +986,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, tex, level, format, type, img.length << 2, img);
+        callPV(tex, level, format, type, img.length << 2, img, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnTexImageARB GetnTexImageARB} */
@@ -995,7 +995,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, tex, level, format, type, img.length << 2, img);
+        callPV(tex, level, format, type, img.length << 2, img, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnTexImageARB GetnTexImageARB} */
@@ -1004,7 +1004,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, tex, level, format, type, img.length << 3, img);
+        callPV(tex, level, format, type, img.length << 3, img, __functionAddress);
     }
 
     /** Array version of: {@link #glReadnPixelsARB ReadnPixelsARB} */
@@ -1013,7 +1013,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, data.length << 1, data);
+        callPV(x, y, width, height, format, type, data.length << 1, data, __functionAddress);
     }
 
     /** Array version of: {@link #glReadnPixelsARB ReadnPixelsARB} */
@@ -1022,7 +1022,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, data.length << 2, data);
+        callPV(x, y, width, height, format, type, data.length << 2, data, __functionAddress);
     }
 
     /** Array version of: {@link #glReadnPixelsARB ReadnPixelsARB} */
@@ -1031,7 +1031,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, data.length << 2, data);
+        callPV(x, y, width, height, format, type, data.length << 2, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnColorTableARB GetnColorTableARB} */
@@ -1040,7 +1040,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, format, type, table.length << 1, table);
+        callPV(target, format, type, table.length << 1, table, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnColorTableARB GetnColorTableARB} */
@@ -1049,7 +1049,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, format, type, table.length << 2, table);
+        callPV(target, format, type, table.length << 2, table, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnColorTableARB GetnColorTableARB} */
@@ -1058,7 +1058,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, format, type, table.length << 2, table);
+        callPV(target, format, type, table.length << 2, table, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnUniformfvARB GetnUniformfvARB} */
@@ -1067,7 +1067,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnUniformivARB GetnUniformivARB} */
@@ -1076,7 +1076,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnUniformuivARB GetnUniformuivARB} */
@@ -1085,7 +1085,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnUniformdvARB GetnUniformdvARB} */
@@ -1094,7 +1094,7 @@ public class ARBRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
 }

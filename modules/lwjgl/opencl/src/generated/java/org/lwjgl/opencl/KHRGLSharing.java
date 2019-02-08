@@ -66,7 +66,7 @@ public class KHRGLSharing {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPPI(__functionAddress, properties, param_name, param_value_size, param_value, param_value_size_ret);
+        return callPPPPI(properties, param_name, param_value_size, param_value, param_value_size_ret, __functionAddress);
     }
 
     /**

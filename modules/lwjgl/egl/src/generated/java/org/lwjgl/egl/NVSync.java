@@ -63,7 +63,7 @@ public class NVSync {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPP(__functionAddress, dpy, condition, attrib_list);
+        return callPPP(dpy, condition, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLSyncNV")
@@ -83,7 +83,7 @@ public class NVSync {
             check(__functionAddress);
             check(sync);
         }
-        return callPI(__functionAddress, sync) != 0;
+        return callPI(sync, __functionAddress) != 0;
     }
 
     // --- [ eglFenceNV ] ---
@@ -95,7 +95,7 @@ public class NVSync {
             check(__functionAddress);
             check(sync);
         }
-        return callPI(__functionAddress, sync) != 0;
+        return callPI(sync, __functionAddress) != 0;
     }
 
     // --- [ eglClientWaitSyncNV ] ---
@@ -107,7 +107,7 @@ public class NVSync {
             check(__functionAddress);
             check(sync);
         }
-        return callPJI(__functionAddress, sync, flags, timeout);
+        return callPJI(sync, flags, timeout, __functionAddress);
     }
 
     // --- [ eglSignalSyncNV ] ---
@@ -119,7 +119,7 @@ public class NVSync {
             check(__functionAddress);
             check(sync);
         }
-        return callPI(__functionAddress, sync, mode) != 0;
+        return callPI(sync, mode, __functionAddress) != 0;
     }
 
     // --- [ eglGetSyncAttribNV ] ---
@@ -130,7 +130,7 @@ public class NVSync {
             check(__functionAddress);
             check(sync);
         }
-        return callPPI(__functionAddress, sync, attribute, value);
+        return callPPI(sync, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -150,7 +150,7 @@ public class NVSync {
             check(dpy);
             checkNT(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPP(__functionAddress, dpy, condition, attrib_list);
+        return callPPP(dpy, condition, attrib_list, __functionAddress);
     }
 
     /** Array version of: {@link #eglGetSyncAttribNV GetSyncAttribNV} */
@@ -162,7 +162,7 @@ public class NVSync {
             check(sync);
             check(value, 1);
         }
-        return callPPI(__functionAddress, sync, attribute, value) != 0;
+        return callPPI(sync, attribute, value, __functionAddress) != 0;
     }
 
 }

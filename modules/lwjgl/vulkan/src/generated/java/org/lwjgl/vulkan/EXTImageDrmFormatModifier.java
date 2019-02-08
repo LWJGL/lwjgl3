@@ -187,7 +187,7 @@ public class EXTImageDrmFormatModifier {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPI(__functionAddress, device.address(), image, pProperties);
+        return callPJPI(device.address(), image, pProperties, __functionAddress);
     }
 
     /**

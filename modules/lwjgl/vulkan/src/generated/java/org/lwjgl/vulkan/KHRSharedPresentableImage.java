@@ -148,7 +148,7 @@ public class KHRSharedPresentableImage {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJI(__functionAddress, device.address(), swapchain);
+        return callPJI(device.address(), swapchain, __functionAddress);
     }
 
 }

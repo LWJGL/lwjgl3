@@ -79,7 +79,7 @@ public class EXTHdrMetadata {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, device.address(), swapchainCount, pSwapchains, pMetadata);
+        callPPPV(device.address(), swapchainCount, pSwapchains, pMetadata, __functionAddress);
     }
 
     /**
@@ -126,7 +126,7 @@ public class EXTHdrMetadata {
             check(__functionAddress);
             check(pMetadata, pSwapchains.length);
         }
-        callPPPV(__functionAddress, device.address(), pSwapchains.length, pSwapchains, pMetadata.address());
+        callPPPV(device.address(), pSwapchains.length, pSwapchains, pMetadata.address(), __functionAddress);
     }
 
 }

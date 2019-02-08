@@ -100,7 +100,7 @@ public class EXTPointParameters {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, pname, params);
+        callPV(pname, params, __functionAddress);
     }
 
 }

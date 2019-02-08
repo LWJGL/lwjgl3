@@ -244,7 +244,7 @@ public final class GLES {
                     minorVersion = pi.get(0);
                 } else {
                     // Fallback to the string query.
-                    String versionString = memUTF8Safe(callP(GetString, GL_VERSION));
+                    String versionString = memUTF8Safe(callP(GL_VERSION, GetString));
                     if (versionString == null || callI(GetError) != GL_NO_ERROR) {
                         throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
                     }
@@ -288,7 +288,7 @@ public final class GLES {
 
             if (majorVersion < 3) {
                 // Parse EXTENSIONS string
-                String extensionsString = memASCIISafe(callP(GetString, GL_EXTENSIONS));
+                String extensionsString = memASCIISafe(callP(GL_EXTENSIONS, GetString));
                 if (extensionsString != null) {
                     StringTokenizer tokenizer = new StringTokenizer(extensionsString);
                     while (tokenizer.hasMoreTokens()) {
@@ -308,7 +308,7 @@ public final class GLES {
 
                 long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
                 for (int i = 0; i < extensionCount; i++) {
-                    supportedExtensions.add(memASCII(callP(GetStringi, GL_EXTENSIONS, i)));
+                    supportedExtensions.add(memASCII(callP(GL_EXTENSIONS, i, GetStringi)));
                 }
             }
 
@@ -361,7 +361,7 @@ public final class GLES {
         private static final class WriteOnce {
             // This will be initialized the first time get() above is called
             @Nullable
-            private static final GLESCapabilities caps = ICDStatic.tempCaps;
+            static final GLESCapabilities caps = ICDStatic.tempCaps;
 
             static {
                 if (caps == null) {

@@ -77,7 +77,7 @@ public class EXTDiscardFramebuffer {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, attachments.length, attachments);
+        callPV(target, attachments.length, attachments, __functionAddress);
     }
 
 }

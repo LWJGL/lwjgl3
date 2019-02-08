@@ -177,7 +177,7 @@ public class EXTDrawElementsBaseVertex {
             check(indices, count.length);
             check(basevertex, count.length);
         }
-        callPPPV(__functionAddress, mode, count, type, memAddress(indices), count.length, basevertex);
+        callPPPV(mode, count, type, memAddress(indices), count.length, basevertex, __functionAddress);
     }
 
 }

@@ -39,7 +39,7 @@ public class CU92 extends CU90 {
 
     public static int ncuDeviceGetUuid(long uuid, int dev) {
         long __functionAddress = Functions.DeviceGetUuid;
-        return callPI(__functionAddress, uuid, dev);
+        return callPI(uuid, dev, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -54,7 +54,7 @@ public class CU92 extends CU90 {
         if (CHECKS) {
             check(hStream);
         }
-        return callPPI(__functionAddress, hStream, pctx);
+        return callPPI(hStream, pctx, __functionAddress);
     }
 
     @NativeType("CUresult")

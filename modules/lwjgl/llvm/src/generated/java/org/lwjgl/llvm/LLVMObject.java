@@ -67,7 +67,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(MemBuf);
         }
-        return invokePP(__functionAddress, MemBuf);
+        return invokePP(MemBuf, __functionAddress);
     }
 
     // --- [ LLVMDisposeObjectFile ] ---
@@ -77,7 +77,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(ObjectFile);
         }
-        invokePV(__functionAddress, ObjectFile);
+        invokePV(ObjectFile, __functionAddress);
     }
 
     // --- [ LLVMGetSections ] ---
@@ -89,7 +89,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(ObjectFile);
         }
-        return invokePP(__functionAddress, ObjectFile);
+        return invokePP(ObjectFile, __functionAddress);
     }
 
     // --- [ LLVMDisposeSectionIterator ] ---
@@ -99,7 +99,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(SI);
         }
-        invokePV(__functionAddress, SI);
+        invokePV(SI, __functionAddress);
     }
 
     // --- [ LLVMIsSectionIteratorAtEnd ] ---
@@ -111,7 +111,7 @@ public class LLVMObject {
             check(ObjectFile);
             check(SI);
         }
-        return invokePPI(__functionAddress, ObjectFile, SI) != 0;
+        return invokePPI(ObjectFile, SI, __functionAddress) != 0;
     }
 
     // --- [ LLVMMoveToNextSection ] ---
@@ -121,7 +121,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(SI);
         }
-        invokePV(__functionAddress, SI);
+        invokePV(SI, __functionAddress);
     }
 
     // --- [ LLVMMoveToContainingSection ] ---
@@ -132,7 +132,7 @@ public class LLVMObject {
             check(Sect);
             check(Sym);
         }
-        invokePPV(__functionAddress, Sect, Sym);
+        invokePPV(Sect, Sym, __functionAddress);
     }
 
     // --- [ LLVMGetSymbols ] ---
@@ -144,7 +144,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(ObjectFile);
         }
-        return invokePP(__functionAddress, ObjectFile);
+        return invokePP(ObjectFile, __functionAddress);
     }
 
     // --- [ LLVMDisposeSymbolIterator ] ---
@@ -154,7 +154,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(SI);
         }
-        invokePV(__functionAddress, SI);
+        invokePV(SI, __functionAddress);
     }
 
     // --- [ LLVMIsSymbolIteratorAtEnd ] ---
@@ -166,7 +166,7 @@ public class LLVMObject {
             check(ObjectFile);
             check(SI);
         }
-        return invokePPI(__functionAddress, ObjectFile, SI) != 0;
+        return invokePPI(ObjectFile, SI, __functionAddress) != 0;
     }
 
     // --- [ LLVMMoveToNextSymbol ] ---
@@ -176,7 +176,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(SI);
         }
-        invokePV(__functionAddress, SI);
+        invokePV(SI, __functionAddress);
     }
 
     // --- [ LLVMGetSectionName ] ---
@@ -187,7 +187,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(SI);
         }
-        return invokePP(__functionAddress, SI);
+        return invokePP(SI, __functionAddress);
     }
 
     /** SectionRef accessors */
@@ -206,7 +206,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(SI);
         }
-        return invokePJ(__functionAddress, SI);
+        return invokePJ(SI, __functionAddress);
     }
 
     // --- [ LLVMGetSectionContents ] ---
@@ -216,7 +216,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(SI);
         }
-        return invokePP(__functionAddress, SI);
+        return invokePP(SI, __functionAddress);
     }
 
     @Nullable
@@ -234,7 +234,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(SI);
         }
-        return invokePJ(__functionAddress, SI);
+        return invokePJ(SI, __functionAddress);
     }
 
     // --- [ LLVMGetSectionContainsSymbol ] ---
@@ -246,7 +246,7 @@ public class LLVMObject {
             check(SI);
             check(Sym);
         }
-        return invokePPI(__functionAddress, SI, Sym) != 0;
+        return invokePPI(SI, Sym, __functionAddress) != 0;
     }
 
     // --- [ LLVMGetRelocations ] ---
@@ -258,7 +258,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(Section);
         }
-        return invokePP(__functionAddress, Section);
+        return invokePP(Section, __functionAddress);
     }
 
     // --- [ LLVMDisposeRelocationIterator ] ---
@@ -268,7 +268,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(RI);
         }
-        invokePV(__functionAddress, RI);
+        invokePV(RI, __functionAddress);
     }
 
     // --- [ LLVMIsRelocationIteratorAtEnd ] ---
@@ -280,7 +280,7 @@ public class LLVMObject {
             check(Section);
             check(RI);
         }
-        return invokePPI(__functionAddress, Section, RI) != 0;
+        return invokePPI(Section, RI, __functionAddress) != 0;
     }
 
     // --- [ LLVMMoveToNextRelocation ] ---
@@ -290,7 +290,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(RI);
         }
-        invokePV(__functionAddress, RI);
+        invokePV(RI, __functionAddress);
     }
 
     // --- [ LLVMGetSymbolName ] ---
@@ -301,7 +301,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(SI);
         }
-        return invokePP(__functionAddress, SI);
+        return invokePP(SI, __functionAddress);
     }
 
     /** SymbolRef accessors */
@@ -320,7 +320,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(SI);
         }
-        return invokePJ(__functionAddress, SI);
+        return invokePJ(SI, __functionAddress);
     }
 
     // --- [ LLVMGetSymbolSize ] ---
@@ -331,7 +331,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(SI);
         }
-        return invokePJ(__functionAddress, SI);
+        return invokePJ(SI, __functionAddress);
     }
 
     // --- [ LLVMGetRelocationOffset ] ---
@@ -343,7 +343,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(RI);
         }
-        return invokePJ(__functionAddress, RI);
+        return invokePJ(RI, __functionAddress);
     }
 
     // --- [ LLVMGetRelocationSymbol ] ---
@@ -354,7 +354,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(RI);
         }
-        return invokePP(__functionAddress, RI);
+        return invokePP(RI, __functionAddress);
     }
 
     // --- [ LLVMGetRelocationType ] ---
@@ -365,7 +365,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(RI);
         }
-        return invokePJ(__functionAddress, RI);
+        return invokePJ(RI, __functionAddress);
     }
 
     // --- [ LLVMGetRelocationTypeName ] ---
@@ -376,7 +376,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(RI);
         }
-        return invokePP(__functionAddress, RI);
+        return invokePP(RI, __functionAddress);
     }
 
     /** Caller takes ownership of returned string. */
@@ -395,7 +395,7 @@ public class LLVMObject {
         if (CHECKS) {
             check(RI);
         }
-        return invokePP(__functionAddress, RI);
+        return invokePP(RI, __functionAddress);
     }
 
     /** Caller takes ownership of returned string. */

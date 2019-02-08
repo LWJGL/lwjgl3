@@ -224,7 +224,7 @@ public class EXTTextureInteger {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glTexParameterIuivEXT TexParameterIuivEXT} */
@@ -234,7 +234,7 @@ public class EXTTextureInteger {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetTexParameterIivEXT GetTexParameterIivEXT} */
@@ -244,7 +244,7 @@ public class EXTTextureInteger {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetTexParameterIuivEXT GetTexParameterIuivEXT} */
@@ -254,7 +254,7 @@ public class EXTTextureInteger {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
 }

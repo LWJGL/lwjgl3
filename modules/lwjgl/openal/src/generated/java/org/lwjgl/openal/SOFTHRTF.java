@@ -75,7 +75,7 @@ public class SOFTHRTF {
             check(__functionAddress);
             check(device);
         }
-        return invokePP(__functionAddress, device, paramName, index);
+        return invokePP(device, paramName, index, __functionAddress);
     }
 
     /**
@@ -104,7 +104,7 @@ public class SOFTHRTF {
             check(__functionAddress);
             check(device);
         }
-        return invokePPZ(__functionAddress, device, attrList);
+        return invokePPZ(device, attrList, __functionAddress);
     }
 
     /**
@@ -135,7 +135,7 @@ public class SOFTHRTF {
             check(device);
             checkNTSafe(attrList);
         }
-        return invokePPZ(__functionAddress, device, attrList);
+        return invokePPZ(device, attrList, __functionAddress);
     }
 
 }

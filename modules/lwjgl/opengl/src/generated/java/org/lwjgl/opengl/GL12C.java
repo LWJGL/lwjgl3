@@ -648,7 +648,7 @@ public class GL12C extends GL11C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, internalformat, width, height, depth, border, format, type, pixels);
+        callPV(target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -661,7 +661,7 @@ public class GL12C extends GL11C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, internalformat, width, height, depth, border, format, type, pixels);
+        callPV(target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -674,7 +674,7 @@ public class GL12C extends GL11C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, internalformat, width, height, depth, border, format, type, pixels);
+        callPV(target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -687,7 +687,7 @@ public class GL12C extends GL11C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, internalformat, width, height, depth, border, format, type, pixels);
+        callPV(target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -700,7 +700,7 @@ public class GL12C extends GL11C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -713,7 +713,7 @@ public class GL12C extends GL11C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -726,7 +726,7 @@ public class GL12C extends GL11C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -739,7 +739,7 @@ public class GL12C extends GL11C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
 }

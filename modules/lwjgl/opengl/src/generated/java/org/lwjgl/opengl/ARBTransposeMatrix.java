@@ -131,7 +131,7 @@ public class ARBTransposeMatrix {
             check(__functionAddress);
             check(m, 16);
         }
-        callPV(__functionAddress, m);
+        callPV(m, __functionAddress);
     }
 
     /** Array version of: {@link #glLoadTransposeMatrixdARB LoadTransposeMatrixdARB} */
@@ -141,7 +141,7 @@ public class ARBTransposeMatrix {
             check(__functionAddress);
             check(m, 16);
         }
-        callPV(__functionAddress, m);
+        callPV(m, __functionAddress);
     }
 
     /** Array version of: {@link #glMultTransposeMatrixfARB MultTransposeMatrixfARB} */
@@ -151,7 +151,7 @@ public class ARBTransposeMatrix {
             check(__functionAddress);
             check(m, 16);
         }
-        callPV(__functionAddress, m);
+        callPV(m, __functionAddress);
     }
 
     /** Array version of: {@link #glMultTransposeMatrixdARB MultTransposeMatrixdARB} */
@@ -161,7 +161,7 @@ public class ARBTransposeMatrix {
             check(__functionAddress);
             check(m, 16);
         }
-        callPV(__functionAddress, m);
+        callPV(m, __functionAddress);
     }
 
 }

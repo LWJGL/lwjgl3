@@ -2132,7 +2132,7 @@ public class GL43C extends GL42C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, internalformat, format, type, data);
+        callPV(target, internalformat, format, type, data, __functionAddress);
     }
 
     /**
@@ -2145,7 +2145,7 @@ public class GL43C extends GL42C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, internalformat, format, type, data);
+        callPV(target, internalformat, format, type, data, __functionAddress);
     }
 
     /**
@@ -2158,7 +2158,7 @@ public class GL43C extends GL42C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, internalformat, format, type, data);
+        callPV(target, internalformat, format, type, data, __functionAddress);
     }
 
     /**
@@ -2171,7 +2171,7 @@ public class GL43C extends GL42C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, target, internalformat, offset, size, format, type, data);
+        callPPPV(target, internalformat, offset, size, format, type, data, __functionAddress);
     }
 
     /**
@@ -2184,7 +2184,7 @@ public class GL43C extends GL42C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, target, internalformat, offset, size, format, type, data);
+        callPPPV(target, internalformat, offset, size, format, type, data, __functionAddress);
     }
 
     /**
@@ -2197,7 +2197,7 @@ public class GL43C extends GL42C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, target, internalformat, offset, size, format, type, data);
+        callPPPV(target, internalformat, offset, size, format, type, data, __functionAddress);
     }
 
     /**
@@ -2210,7 +2210,7 @@ public class GL43C extends GL42C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, source, type, severity, lengthSafe(ids), ids, enabled);
+        callPV(source, type, severity, lengthSafe(ids), ids, enabled, __functionAddress);
     }
 
     /**
@@ -2229,7 +2229,7 @@ public class GL43C extends GL42C {
             checkSafe(severities, count);
             checkSafe(lengths, count);
         }
-        return callPPPPPPI(__functionAddress, count, remainingSafe(messageLog), sources, types, ids, severities, lengths, memAddressSafe(messageLog));
+        return callPPPPPPI(count, remainingSafe(messageLog), sources, types, ids, severities, lengths, memAddressSafe(messageLog), __functionAddress);
     }
 
     /**
@@ -2243,7 +2243,7 @@ public class GL43C extends GL42C {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, identifier, name, label.remaining(), length, memAddress(label));
+        callPPV(identifier, name, label.remaining(), length, memAddress(label), __functionAddress);
     }
 
     /**
@@ -2258,7 +2258,7 @@ public class GL43C extends GL42C {
             check(ptr);
             checkSafe(length, 1);
         }
-        callPPPV(__functionAddress, ptr, label.remaining(), length, memAddress(label));
+        callPPPV(ptr, label.remaining(), length, memAddress(label), __functionAddress);
     }
 
     /**
@@ -2272,7 +2272,7 @@ public class GL43C extends GL42C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -2285,7 +2285,7 @@ public class GL43C extends GL42C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, internalformat, pname, params.length, params);
+        callPV(target, internalformat, pname, params.length, params, __functionAddress);
     }
 
     /**
@@ -2298,7 +2298,7 @@ public class GL43C extends GL42C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, attachments.length, attachments);
+        callPV(target, attachments.length, attachments, __functionAddress);
     }
 
     /**
@@ -2311,7 +2311,7 @@ public class GL43C extends GL42C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, attachments.length, attachments, x, y, width, height);
+        callPV(target, attachments.length, attachments, x, y, width, height, __functionAddress);
     }
 
     /**
@@ -2325,7 +2325,7 @@ public class GL43C extends GL42C {
             check(__functionAddress);
             check(indirect, (primcount * (stride == 0 ? (4 * 4) : stride)) >> 2);
         }
-        callPV(__functionAddress, mode, indirect, primcount, stride);
+        callPV(mode, indirect, primcount, stride, __functionAddress);
     }
 
     /**
@@ -2339,7 +2339,7 @@ public class GL43C extends GL42C {
             check(__functionAddress);
             check(indirect, (primcount * (stride == 0 ? (5 * 4) : stride)) >> 2);
         }
-        callPV(__functionAddress, mode, type, indirect, primcount, stride);
+        callPV(mode, type, indirect, primcount, stride, __functionAddress);
     }
 
     /**
@@ -2353,7 +2353,7 @@ public class GL43C extends GL42C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, program, programInterface, pname, params);
+        callPV(program, programInterface, pname, params, __functionAddress);
     }
 
     /**
@@ -2367,7 +2367,7 @@ public class GL43C extends GL42C {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, program, programInterface, index, name.remaining(), length, memAddress(name));
+        callPPV(program, programInterface, index, name.remaining(), length, memAddress(name), __functionAddress);
     }
 
     /**
@@ -2381,7 +2381,7 @@ public class GL43C extends GL42C {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPPV(__functionAddress, program, programInterface, index, props.length, props, params.length, length, params);
+        callPPPV(program, programInterface, index, props.length, props, params.length, length, params, __functionAddress);
     }
 
 }

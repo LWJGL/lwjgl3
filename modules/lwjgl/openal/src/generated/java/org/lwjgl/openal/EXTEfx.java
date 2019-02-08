@@ -672,7 +672,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, n, effects);
+        invokePV(n, effects, __functionAddress);
     }
 
     /**
@@ -710,7 +710,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, n, effects);
+        invokePV(n, effects, __functionAddress);
     }
 
     /**
@@ -748,7 +748,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokeZ(__functionAddress, effect);
+        return invokeZ(effect, __functionAddress);
     }
 
     // --- [ alEffecti ] ---
@@ -766,7 +766,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, effect, param, value);
+        invokeV(effect, param, value, __functionAddress);
     }
 
     // --- [ alEffectiv ] ---
@@ -777,7 +777,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effect, param, values);
+        invokePV(effect, param, values, __functionAddress);
     }
 
     /**
@@ -810,7 +810,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, effect, param, value);
+        invokeV(effect, param, value, __functionAddress);
     }
 
     // --- [ alEffectfv ] ---
@@ -821,7 +821,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effect, param, values);
+        invokePV(effect, param, values, __functionAddress);
     }
 
     /**
@@ -847,7 +847,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effect, param, value);
+        invokePV(effect, param, value, __functionAddress);
     }
 
     /**
@@ -891,7 +891,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effect, param, values);
+        invokePV(effect, param, values, __functionAddress);
     }
 
     /**
@@ -917,7 +917,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effect, param, value);
+        invokePV(effect, param, value, __functionAddress);
     }
 
     /**
@@ -961,7 +961,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effect, param, values);
+        invokePV(effect, param, values, __functionAddress);
     }
 
     /**
@@ -991,7 +991,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, n, filters);
+        invokePV(n, filters, __functionAddress);
     }
 
     /**
@@ -1029,7 +1029,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, n, filters);
+        invokePV(n, filters, __functionAddress);
     }
 
     /**
@@ -1067,7 +1067,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokeZ(__functionAddress, filter);
+        return invokeZ(filter, __functionAddress);
     }
 
     // --- [ alFilteri ] ---
@@ -1085,7 +1085,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, filter, param, value);
+        invokeV(filter, param, value, __functionAddress);
     }
 
     // --- [ alFilteriv ] ---
@@ -1096,7 +1096,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, filter, param, values);
+        invokePV(filter, param, values, __functionAddress);
     }
 
     /**
@@ -1129,7 +1129,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, filter, param, value);
+        invokeV(filter, param, value, __functionAddress);
     }
 
     // --- [ alFilterfv ] ---
@@ -1140,7 +1140,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, filter, param, values);
+        invokePV(filter, param, values, __functionAddress);
     }
 
     /**
@@ -1166,7 +1166,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, filter, param, value);
+        invokePV(filter, param, value, __functionAddress);
     }
 
     /**
@@ -1210,7 +1210,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, filter, param, values);
+        invokePV(filter, param, values, __functionAddress);
     }
 
     /**
@@ -1236,7 +1236,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, filter, param, value);
+        invokePV(filter, param, value, __functionAddress);
     }
 
     /**
@@ -1280,7 +1280,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, filter, param, values);
+        invokePV(filter, param, values, __functionAddress);
     }
 
     /**
@@ -1310,7 +1310,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, n, effectSlots);
+        invokePV(n, effectSlots, __functionAddress);
     }
 
     /**
@@ -1348,7 +1348,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, n, effectSlots);
+        invokePV(n, effectSlots, __functionAddress);
     }
 
     /**
@@ -1386,7 +1386,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokeZ(__functionAddress, effectSlot);
+        return invokeZ(effectSlot, __functionAddress);
     }
 
     // --- [ alAuxiliaryEffectSloti ] ---
@@ -1404,7 +1404,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, effectSlot, param, value);
+        invokeV(effectSlot, param, value, __functionAddress);
     }
 
     // --- [ alAuxiliaryEffectSlotiv ] ---
@@ -1415,7 +1415,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effectSlot, param, values);
+        invokePV(effectSlot, param, values, __functionAddress);
     }
 
     /**
@@ -1448,7 +1448,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, effectSlot, param, value);
+        invokeV(effectSlot, param, value, __functionAddress);
     }
 
     // --- [ alAuxiliaryEffectSlotfv ] ---
@@ -1459,7 +1459,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effectSlot, param, values);
+        invokePV(effectSlot, param, values, __functionAddress);
     }
 
     /**
@@ -1485,7 +1485,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effectSlot, param, value);
+        invokePV(effectSlot, param, value, __functionAddress);
     }
 
     /**
@@ -1529,7 +1529,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effectSlot, param, values);
+        invokePV(effectSlot, param, values, __functionAddress);
     }
 
     /**
@@ -1555,7 +1555,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effectSlot, param, value);
+        invokePV(effectSlot, param, value, __functionAddress);
     }
 
     /**
@@ -1599,7 +1599,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effectSlot, param, values);
+        invokePV(effectSlot, param, values, __functionAddress);
     }
 
     /**
@@ -1624,7 +1624,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effects.length, effects);
+        invokePV(effects.length, effects, __functionAddress);
     }
 
     /** Array version of: {@link #alDeleteEffects DeleteEffects} */
@@ -1634,7 +1634,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effects.length, effects);
+        invokePV(effects.length, effects, __functionAddress);
     }
 
     /** Array version of: {@link #alEffectiv Effectiv} */
@@ -1645,7 +1645,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, effect, param, values);
+        invokePV(effect, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alEffectfv Effectfv} */
@@ -1656,7 +1656,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, effect, param, values);
+        invokePV(effect, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alGetEffecti GetEffecti} */
@@ -1667,7 +1667,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, effect, param, value);
+        invokePV(effect, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetEffectiv GetEffectiv} */
@@ -1678,7 +1678,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, effect, param, values);
+        invokePV(effect, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alGetEffectf GetEffectf} */
@@ -1689,7 +1689,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, effect, param, value);
+        invokePV(effect, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetEffectfv GetEffectfv} */
@@ -1700,7 +1700,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, effect, param, values);
+        invokePV(effect, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alGenFilters GenFilters} */
@@ -1710,7 +1710,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, filters.length, filters);
+        invokePV(filters.length, filters, __functionAddress);
     }
 
     /** Array version of: {@link #alDeleteFilters DeleteFilters} */
@@ -1720,7 +1720,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, filters.length, filters);
+        invokePV(filters.length, filters, __functionAddress);
     }
 
     /** Array version of: {@link #alFilteriv Filteriv} */
@@ -1731,7 +1731,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, filter, param, values);
+        invokePV(filter, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alFilterfv Filterfv} */
@@ -1742,7 +1742,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, filter, param, values);
+        invokePV(filter, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alGetFilteri GetFilteri} */
@@ -1753,7 +1753,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, filter, param, value);
+        invokePV(filter, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetFilteriv GetFilteriv} */
@@ -1764,7 +1764,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, filter, param, values);
+        invokePV(filter, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alGetFilterf GetFilterf} */
@@ -1775,7 +1775,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, filter, param, value);
+        invokePV(filter, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetFilterfv GetFilterfv} */
@@ -1786,7 +1786,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, filter, param, values);
+        invokePV(filter, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alGenAuxiliaryEffectSlots GenAuxiliaryEffectSlots} */
@@ -1796,7 +1796,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effectSlots.length, effectSlots);
+        invokePV(effectSlots.length, effectSlots, __functionAddress);
     }
 
     /** Array version of: {@link #alDeleteAuxiliaryEffectSlots DeleteAuxiliaryEffectSlots} */
@@ -1806,7 +1806,7 @@ public class EXTEfx {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, effectSlots.length, effectSlots);
+        invokePV(effectSlots.length, effectSlots, __functionAddress);
     }
 
     /** Array version of: {@link #alAuxiliaryEffectSlotiv AuxiliaryEffectSlotiv} */
@@ -1817,7 +1817,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, effectSlot, param, values);
+        invokePV(effectSlot, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alAuxiliaryEffectSlotfv AuxiliaryEffectSlotfv} */
@@ -1828,7 +1828,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, effectSlot, param, values);
+        invokePV(effectSlot, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alGetAuxiliaryEffectSloti GetAuxiliaryEffectSloti} */
@@ -1839,7 +1839,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, effectSlot, param, value);
+        invokePV(effectSlot, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetAuxiliaryEffectSlotiv GetAuxiliaryEffectSlotiv} */
@@ -1850,7 +1850,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, effectSlot, param, values);
+        invokePV(effectSlot, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alGetAuxiliaryEffectSlotf GetAuxiliaryEffectSlotf} */
@@ -1861,7 +1861,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, effectSlot, param, value);
+        invokePV(effectSlot, param, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetAuxiliaryEffectSlotfv GetAuxiliaryEffectSlotfv} */
@@ -1872,7 +1872,7 @@ public class EXTEfx {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, effectSlot, param, values);
+        invokePV(effectSlot, param, values, __functionAddress);
     }
 
 }

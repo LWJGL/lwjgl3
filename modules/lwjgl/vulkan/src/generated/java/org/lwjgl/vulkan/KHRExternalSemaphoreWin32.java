@@ -92,7 +92,7 @@ public class KHRExternalSemaphoreWin32 {
             check(__functionAddress);
             VkImportSemaphoreWin32HandleInfoKHR.validate(pImportSemaphoreWin32HandleInfo);
         }
-        return callPPI(__functionAddress, device.address(), pImportSemaphoreWin32HandleInfo);
+        return callPPI(device.address(), pImportSemaphoreWin32HandleInfo, __functionAddress);
     }
 
     /**
@@ -154,7 +154,7 @@ public class KHRExternalSemaphoreWin32 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, device.address(), pGetWin32HandleInfo, pHandle);
+        return callPPPI(device.address(), pGetWin32HandleInfo, pHandle, __functionAddress);
     }
 
     /**

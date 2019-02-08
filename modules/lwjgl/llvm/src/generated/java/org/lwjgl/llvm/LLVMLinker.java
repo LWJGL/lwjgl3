@@ -59,7 +59,7 @@ public class LLVMLinker {
             check(Dest);
             check(Src);
         }
-        return invokePPI(__functionAddress, Dest, Src) != 0;
+        return invokePPI(Dest, Src, __functionAddress) != 0;
     }
 
 }

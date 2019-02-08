@@ -413,7 +413,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertex3hvNV Vertex3hvNV} */
@@ -423,7 +423,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertex4hvNV Vertex4hvNV} */
@@ -433,7 +433,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glNormal3hvNV Normal3hvNV} */
@@ -443,7 +443,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glColor3hvNV Color3hvNV} */
@@ -453,7 +453,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glColor4hvNV Color4hvNV} */
@@ -463,7 +463,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glTexCoord1hvNV TexCoord1hvNV} */
@@ -473,7 +473,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glTexCoord2hvNV TexCoord2hvNV} */
@@ -483,7 +483,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glTexCoord3hvNV TexCoord3hvNV} */
@@ -493,7 +493,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glTexCoord4hvNV TexCoord4hvNV} */
@@ -503,7 +503,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord1hvNV MultiTexCoord1hvNV} */
@@ -513,7 +513,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, target, v);
+        callPV(target, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord2hvNV MultiTexCoord2hvNV} */
@@ -523,7 +523,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, target, v);
+        callPV(target, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord3hvNV MultiTexCoord3hvNV} */
@@ -533,7 +533,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, target, v);
+        callPV(target, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord4hvNV MultiTexCoord4hvNV} */
@@ -543,7 +543,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, target, v);
+        callPV(target, v, __functionAddress);
     }
 
     /** Array version of: {@link #glFogCoordhvNV FogCoordhvNV} */
@@ -553,7 +553,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(fog, 1);
         }
-        callPV(__functionAddress, fog);
+        callPV(fog, __functionAddress);
     }
 
     /** Array version of: {@link #glSecondaryColor3hvNV SecondaryColor3hvNV} */
@@ -563,7 +563,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexWeighthvNV VertexWeighthvNV} */
@@ -573,7 +573,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(weight, 1);
         }
-        callPV(__functionAddress, weight);
+        callPV(weight, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttrib1hvNV VertexAttrib1hvNV} */
@@ -583,7 +583,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttrib2hvNV VertexAttrib2hvNV} */
@@ -593,7 +593,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttrib3hvNV VertexAttrib3hvNV} */
@@ -603,7 +603,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttrib4hvNV VertexAttrib4hvNV} */
@@ -613,7 +613,7 @@ public class NVHalfFloat {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribs1hvNV VertexAttribs1hvNV} */
@@ -622,7 +622,7 @@ public class NVHalfFloat {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, index, v.length, v);
+        callPV(index, v.length, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribs2hvNV VertexAttribs2hvNV} */
@@ -631,7 +631,7 @@ public class NVHalfFloat {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, index, v.length >> 1, v);
+        callPV(index, v.length >> 1, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribs3hvNV VertexAttribs3hvNV} */
@@ -640,7 +640,7 @@ public class NVHalfFloat {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, index, v.length / 3, v);
+        callPV(index, v.length / 3, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribs4hvNV VertexAttribs4hvNV} */
@@ -649,7 +649,7 @@ public class NVHalfFloat {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, index, v.length >> 2, v);
+        callPV(index, v.length >> 2, v, __functionAddress);
     }
 
 }

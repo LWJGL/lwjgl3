@@ -1659,7 +1659,7 @@ public class GLES32 extends GLES31 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, source, type, severity, ids.length, ids, enabled);
+        callPV(source, type, severity, ids.length, ids, enabled, __functionAddress);
     }
 
     /**
@@ -1678,7 +1678,7 @@ public class GLES32 extends GLES31 {
             checkSafe(severities, count);
             checkSafe(lengths, count);
         }
-        return callPPPPPPI(__functionAddress, count, remainingSafe(messageLog), sources, types, ids, severities, lengths, memAddressSafe(messageLog));
+        return callPPPPPPI(count, remainingSafe(messageLog), sources, types, ids, severities, lengths, memAddressSafe(messageLog), __functionAddress);
     }
 
     /**
@@ -1692,7 +1692,7 @@ public class GLES32 extends GLES31 {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, identifier, name, label.remaining(), length, memAddress(label));
+        callPPV(identifier, name, label.remaining(), length, memAddress(label), __functionAddress);
     }
 
     /**
@@ -1707,7 +1707,7 @@ public class GLES32 extends GLES31 {
             check(ptr);
             checkSafe(length, 1);
         }
-        callPPPV(__functionAddress, ptr, label.remaining(), length, memAddress(label));
+        callPPPV(ptr, label.remaining(), length, memAddress(label), __functionAddress);
     }
 
     /**
@@ -1720,7 +1720,7 @@ public class GLES32 extends GLES31 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, pixels.length << 1, pixels);
+        callPV(x, y, width, height, format, type, pixels.length << 1, pixels, __functionAddress);
     }
 
     /**
@@ -1733,7 +1733,7 @@ public class GLES32 extends GLES31 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, pixels.length << 2, pixels);
+        callPV(x, y, width, height, format, type, pixels.length << 2, pixels, __functionAddress);
     }
 
     /**
@@ -1746,7 +1746,7 @@ public class GLES32 extends GLES31 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, pixels.length << 2, pixels);
+        callPV(x, y, width, height, format, type, pixels.length << 2, pixels, __functionAddress);
     }
 
     /**
@@ -1759,7 +1759,7 @@ public class GLES32 extends GLES31 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /**
@@ -1772,7 +1772,7 @@ public class GLES32 extends GLES31 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /**
@@ -1785,7 +1785,7 @@ public class GLES32 extends GLES31 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /**
@@ -1799,7 +1799,7 @@ public class GLES32 extends GLES31 {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -1813,7 +1813,7 @@ public class GLES32 extends GLES31 {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -1827,7 +1827,7 @@ public class GLES32 extends GLES31 {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -1841,7 +1841,7 @@ public class GLES32 extends GLES31 {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -1855,7 +1855,7 @@ public class GLES32 extends GLES31 {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /**
@@ -1869,7 +1869,7 @@ public class GLES32 extends GLES31 {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /**
@@ -1883,7 +1883,7 @@ public class GLES32 extends GLES31 {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /**
@@ -1897,7 +1897,7 @@ public class GLES32 extends GLES31 {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
 }

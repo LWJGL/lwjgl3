@@ -94,11 +94,11 @@ public class Gears extends AbstractGears {
 			long cocoaWindow = glfwGetCocoaWindow(window);
 
 			long objc_msgSend = ObjCRuntime.getLibrary().getFunctionAddress("objc_msgSend");
-			long contentView = invokePPP(objc_msgSend, cocoaWindow, sel_getUid("contentView"));
+			long contentView = invokePPP(cocoaWindow, sel_getUid("contentView"), objc_msgSend);
 
-			invokePPV(objc_msgSend, contentView, sel_getUid("setWantsBestResolutionOpenGLSurface:"), false);
+			invokePPV(contentView, sel_getUid("setWantsBestResolutionOpenGLSurface:"), false, objc_msgSend);
 
-			boolean bool = invokePPZ(objc_msgSend, contentView, sel_getUid("wantsBestResolutionOpenGLSurface"));
+			boolean bool = invokePPZ(contentView, sel_getUid("wantsBestResolutionOpenGLSurface"), objc_msgSend);
 			System.out.println("wantsBestResolutionOpenGLSurface = " + bool);
 		}
 		*/

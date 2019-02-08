@@ -96,7 +96,7 @@ public class WGL {
         if (CHECKS) {
             check(hdc);
         }
-        return callPP(__functionAddress, hdc);
+        return callPP(hdc, __functionAddress);
     }
 
     // --- [ wglCreateLayerContext ] ---
@@ -117,7 +117,7 @@ public class WGL {
         if (CHECKS) {
             check(hdc);
         }
-        return callPP(__functionAddress, hdc, layerPlane);
+        return callPP(hdc, layerPlane, __functionAddress);
     }
 
     // --- [ wglCopyContext ] ---
@@ -137,7 +137,7 @@ public class WGL {
             check(src);
             check(dst);
         }
-        return callPPI(__functionAddress, src, dst, mask) != 0;
+        return callPPI(src, dst, mask, __functionAddress) != 0;
     }
 
     // --- [ wglDeleteContext ] ---
@@ -153,7 +153,7 @@ public class WGL {
         if (CHECKS) {
             check(context);
         }
-        return callPI(__functionAddress, context) != 0;
+        return callPI(context, __functionAddress) != 0;
     }
 
     // --- [ wglGetCurrentContext ] ---
@@ -179,7 +179,7 @@ public class WGL {
     /** Unsafe version of: {@link #wglGetProcAddress GetProcAddress} */
     public static long nwglGetProcAddress(long proc) {
         long __functionAddress = Functions.GetProcAddress;
-        return callPP(__functionAddress, proc);
+        return callPP(proc, __functionAddress);
     }
 
     /**
@@ -228,7 +228,7 @@ public class WGL {
     @NativeType("BOOL")
     public static boolean wglMakeCurrent(@NativeType("HDC") long hdc, @NativeType("HGLRC") long hglrc) {
         long __functionAddress = Functions.MakeCurrent;
-        return callPPI(__functionAddress, hdc, hglrc) != 0;
+        return callPPI(hdc, hglrc, __functionAddress) != 0;
     }
 
     // --- [ wglShareLists ] ---
@@ -247,7 +247,7 @@ public class WGL {
             check(hglrc1);
             check(hglrc2);
         }
-        return callPPI(__functionAddress, hglrc1, hglrc2) != 0;
+        return callPPI(hglrc1, hglrc2, __functionAddress) != 0;
     }
 
 }

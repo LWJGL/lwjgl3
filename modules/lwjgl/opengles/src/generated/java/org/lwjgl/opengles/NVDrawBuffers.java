@@ -100,7 +100,7 @@ public class NVDrawBuffers {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, bufs.length, bufs);
+        callPV(bufs.length, bufs, __functionAddress);
     }
 
 }

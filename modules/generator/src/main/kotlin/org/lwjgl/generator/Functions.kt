@@ -141,7 +141,7 @@ class Func(
     }
 
     internal val hasExplicitFunctionAddress
-        get() = this.parameters.isNotEmpty() && this.parameters[0] === EXPLICIT_FUNCTION_ADDRESS
+        get() = this.parameters.isNotEmpty() && this.parameters.last() === EXPLICIT_FUNCTION_ADDRESS
 
     private val hasNativeCode
         get() = (has<Code>() && get<Code>().let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null }) || this.parameters.contains(JNI_ENV)
@@ -299,8 +299,8 @@ class Func(
                 }
             }
 
-            if (it === EXPLICIT_FUNCTION_ADDRESS && i != 0)
-                it.error("The explicit function address parameter must be the first parameter.")
+            if (it === EXPLICIT_FUNCTION_ADDRESS && i != parameters.lastIndex)
+                it.error("The explicit function address parameter must be the last parameter.")
 
             if (it.has<Check>()) {
                 val checkReference = paramMap[it.get<Check>().expression]
@@ -705,12 +705,12 @@ class Func(
         print("(")
 
         val nativeParams = getNativeParams()
-        if (hasFunctionAddressParam && !hasExplicitFunctionAddress) {
-            print("long $FUNCTION_ADDRESS")
-            if (nativeParams.any()) print(", ")
-        }
         printList(nativeParams) {
             it.asNativeMethodParam(nativeOnly)
+        }
+        if (hasFunctionAddressParam && !hasExplicitFunctionAddress) {
+            if (nativeParams.any()) print(", ")
+            print("long $FUNCTION_ADDRESS")
         }
         if (returns.isStructValue && !hasParam { it has ReturnParam }) {
             if (nativeClass.binding != null || nativeParams.any()) print(", ")
@@ -722,12 +722,12 @@ class Func(
             if (retType != "void")
                 print("return ")
             print("${get<Reuse>().source.className}.n$name(")
-            if (hasFunctionAddressParam && !hasExplicitFunctionAddress) {
-                print(FUNCTION_ADDRESS)
-                if (nativeParams.any()) print(", ")
-            }
             printList(nativeParams) {
                 it.name
+            }
+            if (hasFunctionAddressParam && !hasExplicitFunctionAddress) {
+                if (nativeParams.any()) print(", ")
+                print(FUNCTION_ADDRESS)
             }
             println(");\n$t}")
         } else {
@@ -823,15 +823,15 @@ class Func(
         else
             "${nativeClass.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.jniSignatureJava }.joinToString("")}${returns.nativeType.jniSignature}("
         )
-        if (!hasExplicitFunctionAddress) {
-            print(FUNCTION_ADDRESS)
-            if (hasNativeParams) print(", ")
-        }
         printList(getNativeParams()) {
             if (it.isFunctionProvider)
                 "${it.name}.$ADDRESS"
             else
                 it.name
+        }
+        if (!hasExplicitFunctionAddress) {
+            if (hasNativeParams) print(", ")
+            print(FUNCTION_ADDRESS)
         }
         if (returns.isStructValue && !hasParam { it has ReturnParam }) {
             print(", ")
@@ -1091,13 +1091,13 @@ class Func(
                     .joinToString("")
                 }${returns.nativeType.jniSignature}(")
             }
-            if (hasFunctionAddressParam && !hasExplicitFunctionAddress && !has<Macro>()) {
-                print(FUNCTION_ADDRESS)
-                if (hasNativeParams) print(", ")
-            }
         }
         if (macroExpression == null) {
             printParams()
+            if (!hasUnsafeMethod && hasFunctionAddressParam && !hasExplicitFunctionAddress && !has<Macro>()) {
+                if (hasNativeParams) print(", ")
+                print(FUNCTION_ADDRESS)
+            }
             if (returns.isStructValue && !hasParam { it has ReturnParam }) {
                 if (hasNativeParams) print(", ")
                 print("$RESULT.$ADDRESS")
@@ -1745,17 +1745,17 @@ class Func(
 
     internal fun generateFunction(writer: PrintWriter) {
         val hasArrays = hasParam { it.nativeType is ArrayType<*> }
-        writer.generateFunctionImpl(hasArrays, critical = false)
-        if (hasArrays && !parameters.contains(JNI_ENV))
-            writer.generateFunctionImpl(hasArrays, critical = true)
+        val hasCritical = nativeClass.binding?.apiCapabilities != APICapabilities.JNI_CAPABILITIES && !parameters.contains(JNI_ENV)
+        if (hasCritical) {
+            writer.generateFunctionImpl(hasArrays, hasCritical, critical = true)
+        }
+        writer.generateFunctionImpl(hasArrays, hasCritical, critical = false)
     }
 
-    private fun PrintWriter.generateFunctionImpl(hasArrays: Boolean, critical: Boolean) {
+    private fun PrintWriter.generateFunctionImpl(hasArrays: Boolean, hasCritical: Boolean, critical: Boolean) {
         val params = ArrayList<String>(4 + parameters.size)
         if (!critical)
             params.add("JNIEnv *$JNIENV, jclass clazz")
-        if (hasFunctionAddressParam)
-            params.add("jlong $FUNCTION_ADDRESS")
         getNativeParams(withExplicitFunctionAddress = false).map {
             if (it.nativeType is ArrayType<*>) {
                 if (critical)
@@ -1766,27 +1766,40 @@ class Func(
                 "${it.nativeType.jniFunctionType} ${it.name}${if (it.nativeType is PointerType<*> || it.nativeType is StructType) POINTER_POSTFIX else ""}"
             }
         }.toCollection(params)
+        if (hasFunctionAddressParam)
+            params.add("jlong $FUNCTION_ADDRESS")
         if (returns.isStructValue && !hasParam { it has ReturnParam })
             params.add("jlong $RESULT")
 
         // Function signature
 
-        val workaroundJDK8167409 = critical && 6 <= parameters.count() && parameters.any {
-            (it.nativeType is PointerType<*> && it.nativeType !is ArrayType<*>) || it.nativeType.mapping.let { mapping -> mapping is PrimitiveMapping && 4 < mapping.bytes }
-        }
-        if (workaroundJDK8167409) println("#ifdef LWJGL_WINDOWS")
-        print("JNIEXPORT ${returns.jniFunctionType} JNICALL Java${if (critical) "Critical" else ""}_${nativeClass.nativeFileNameJNI}_")
-        if (!isNativeOnly)
-            print('n')
-        print(name.asJNIName)
-        if (hasArrays || hasArrayOverloads)
-            print(getNativeParams(withExplicitFunctionAddress = false).map {
-                if (it.nativeType is ArrayType<*>)
-                    it.nativeType.jniSignatureArray
-                else
-                    it.nativeType.jniSignatureStrict
-            }.joinToString("", prefix = if (hasFunctionAddressParam) "__J" else "__", postfix = if (returns.isStructValue) "J" else ""))
+        print("JNIEXPORT${if (critical && workaroundJDK8167409()) "_CRITICAL" else ""} ${returns.jniFunctionType} JNICALL ${JNI_NAME(hasArrays, critical)}")
         println("(${if (params.isEmpty()) "void" else params.joinToString(", ")}) {")
+
+        if (hasCritical && !(critical || hasArrays)) {
+            // Unused parameter macro
+            printUnusedParameters(false)
+
+            print(t)
+            if (!returns.isVoid && !returns.isStructValue)
+                print("return ")
+
+            print(JNI_NAME(hasArrays, critical = true, ignoreArrayType = true))
+            print('(')
+
+            params.clear()
+            getNativeParams(withExplicitFunctionAddress = true, withJNIEnv = false)
+                .mapTo(params) { "${it.name}${if (it.nativeType is PointerType<*> || it.nativeType is StructType) POINTER_POSTFIX else ""}" }
+            if (hasFunctionAddressParam)
+                params.add(FUNCTION_ADDRESS)
+            if (returns.isStructValue && !hasParam { it has ReturnParam })
+                params.add(RESULT)
+            print(params.joinToString(", "))
+
+            println(");")
+            println("}")
+            return
+        }
 
         // Cast function address to pointer
 
@@ -1799,47 +1812,69 @@ class Func(
 
         // Cast addresses to pointers
 
-        getNativeParams(withExplicitFunctionAddress = false)
-            .filter { it.nativeType.castAddressToPointer }
-            .forEach {
-                val pointerType = it.toNativeType(nativeClass.binding, pointerMode = true)
-                print("$t$pointerType")
-                if (!pointerType.endsWith('*')) print(' ')
-                val castExpression = if (it.nativeType === va_list) {
-                    print("*")
-                    "VA_LIST_CAST"
-                } else
-                    "($pointerType)"
-                println("${it.name} = $castExpression${if (nativeClass.binding == null) "(intptr_t)" else ""}${it.name}$POINTER_POSTFIX;")
-            }
+        if (!hasCritical || !hasArrays) {
+            getNativeParams(withExplicitFunctionAddress = false)
+                .filter { it.nativeType.castAddressToPointer }
+                .forEach {
+                    val pointerType = it.toNativeType(nativeClass.binding, pointerMode = true)
+                    print("$t$pointerType")
+                    if (!pointerType.endsWith('*')) print(' ')
+                    val castExpression = if (it.nativeType === va_list) {
+                        print("*")
+                        "VA_LIST_CAST"
+                    } else
+                        "($pointerType)"
+                    println("${it.name} = $castExpression${if (nativeClass.binding == null) "(intptr_t)" else ""}${it.name}$POINTER_POSTFIX;")
+                }
+        }
 
         // Custom code
 
         var code = if (has<Code>()) get() else Code.NO_CODE
-        if (hasArrays && !critical) {
-            code = code.append(
-                nativeBeforeCall = getParams { it.nativeType is ArrayType<*> }.map {
-                    "j${(it.nativeType.mapping as PointerMapping).primitive} *${it.name} = ${
-                    "(*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, 0)".let { expression ->
-                        if (it.has<Nullable>())
-                            "${it.name}$POINTER_POSTFIX == NULL ? NULL : $expression"
-                        else
-                            expression
-                    }};"
-                }.joinToString("\n$t", prefix = t),
-                nativeAfterCall = getParams { it.nativeType is ArrayType<*> }
-                    .withIndex()
-                    .sortedByDescending { it.index }
-                    .map { it.value }
-                    .map {
-                        "(*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, ${it.name}, 0);".let { expression ->
+        if (hasArrays) {
+            if (!critical) {
+                code = code.append(
+                    nativeBeforeCall = getParams { it.nativeType is ArrayType<*> }.map {
+                        "j${(it.nativeType.mapping as PointerMapping).primitive} *${it.name} = ${
+                        "(*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, 0)".let { expression ->
                             if (it.has<Nullable>())
-                                "if (${it.name} != NULL) { $expression }"
+                                "${it.name}$POINTER_POSTFIX == NULL ? NULL : $expression"
                             else
                                 expression
+                        }};"
+                    }.joinToString("\n$t", prefix = t),
+                    nativeAfterCall = getParams { it.nativeType is ArrayType<*> }
+                        .withIndex()
+                        .sortedByDescending { it.index }
+                        .map { it.value }
+                        .map {
+                            "(*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, ${it.name}$POINTER_POSTFIX, ${it.name}, 0);".let { expression ->
+                                if (it.has<Nullable>())
+                                    "if (${it.name} != NULL) { $expression }"
+                                else
+                                    expression
+                            }
+                        }.joinToString("\n$t", prefix = t)
+                )
+            }
+            if (hasCritical) {
+                val callPrefix = if (!returns.isVoid && !returns.isStructValue) {
+                    if (critical) "return " else "$RESULT = "
+                } else {
+                    ""
+                }
+                code = code.append(
+                    nativeCall = "$t$callPrefix${JNI_NAME(hasArrays = true, critical = true, ignoreArrayType = true)}(${getNativeParams()
+                        .map {
+                            if (it.nativeType is ArrayType<*>)
+                                "(intptr_t)${it.name}"
+                            else
+                                "${it.name}${if (it.nativeType is PointerType<*> || it.nativeType is StructType) POINTER_POSTFIX else ""}"
                         }
-                    }.joinToString("\n$t", prefix = t)
-            )
+                        .joinToString(", ")
+                    }${if (returns.isStructValue) ", $RESULT" else ""});"
+                )
+            }
         }
 
         if (code.nativeAfterCall != null && !returns.isVoid && !returns.isStructValue)
@@ -1849,16 +1884,7 @@ class Func(
 
         // Unused parameter macro
 
-        if (!critical)
-            println(if (parameters.contains(JNI_ENV) || (nativeClass.binding != null && !hasFunctionAddressParam))
-                "${t}UNUSED_PARAM(clazz)"
-            else
-                "${t}UNUSED_PARAMS($JNIENV, clazz)"
-            )
-        else
-            getParams { it.nativeType is ArrayType<*> }.forEach {
-                println("${t}UNUSED_PARAM(${it.name}__length)")
-            }
+        printUnusedParameters(critical)
 
         // Call native function
 
@@ -1916,7 +1942,54 @@ class Func(
         }
 
         println("}")
-        if (workaroundJDK8167409) println("#endif")
+    }
+
+    private fun workaroundJDK8167409(ignoreArrayType: Boolean = false): Boolean = parameters.count().let {
+        6 <= it || (5 <= it && returns.isStructValue && !hasParam { it has ReturnParam })
+    } && parameters[0].nativeType.let { type ->
+        (type is PointerType<*> && (ignoreArrayType || type !is ArrayType<*>)) || type.mapping.let { it is PrimitiveMapping && 4 < it.bytes }
+    }
+
+    private fun JNI_NAME(hasArrays: Boolean, critical: Boolean, ignoreArrayType: Boolean = false): String {
+        return "${nativeClass.nativeFileNameJNI}_${if (isNativeOnly) "" else "n"}${name.asJNIName}${if (hasArrays || hasArrayOverloads)
+            getNativeParams(withExplicitFunctionAddress = false)
+                .map {
+                    if (it.nativeType is ArrayType<*> && !(critical && ignoreArrayType))
+                        it.nativeType.jniSignatureArray
+                    else
+                        it.nativeType.jniSignatureStrict
+                }
+                .joinToString(
+                    "",
+                    prefix = if (hasFunctionAddressParam) "__J" else "__",
+                    postfix = if (returns.isStructValue) "J" else ""
+                )
+        else
+            ""
+        }".let {
+            if (critical) {
+                if (workaroundJDK8167409(ignoreArrayType))
+                    "CRITICAL($it)"
+                else
+                    "JavaCritical_$it"
+            } else {
+                "Java_$it"
+            }
+        }
+    }
+
+    private fun PrintWriter.printUnusedParameters(critical: Boolean) {
+        if (!critical)
+            println(
+                if (parameters.contains(JNI_ENV) || (nativeClass.binding != null && !hasFunctionAddressParam))
+                    "${t}UNUSED_PARAM(clazz)"
+                else
+                    "${t}UNUSED_PARAMS($JNIENV, clazz)"
+            )
+        else
+            getParams { it.nativeType is ArrayType<*> }.forEach {
+                println("${t}UNUSED_PARAM(${it.name}__length)")
+            }
     }
 
 }

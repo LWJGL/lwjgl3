@@ -85,7 +85,7 @@ public class NVPointSprite {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, pname, params);
+        callPV(pname, params, __functionAddress);
     }
 
 }

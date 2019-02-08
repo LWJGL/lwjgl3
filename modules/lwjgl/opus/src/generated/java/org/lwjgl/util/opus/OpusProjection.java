@@ -78,7 +78,7 @@ public class OpusProjection {
     @NativeType("opus_int32")
     public static int opus_projection_ambisonics_encoder_get_size(int channels, int mapping_family) {
         long __functionAddress = Functions.projection_ambisonics_encoder_get_size;
-        return invokeI(__functionAddress, channels, mapping_family);
+        return invokeI(channels, mapping_family, __functionAddress);
     }
 
     // --- [ opus_projection_ambisonics_encoder_create ] ---
@@ -86,7 +86,7 @@ public class OpusProjection {
     /** Unsafe version of: {@link #opus_projection_ambisonics_encoder_create projection_ambisonics_encoder_create} */
     public static long nopus_projection_ambisonics_encoder_create(int Fs, int channels, int mapping_family, long streams, long coupled_streams, int application, long error) {
         long __functionAddress = Functions.projection_ambisonics_encoder_create;
-        return invokePPPP(__functionAddress, Fs, channels, mapping_family, streams, coupled_streams, application, error);
+        return invokePPPP(Fs, channels, mapping_family, streams, coupled_streams, application, error, __functionAddress);
     }
 
     /**
@@ -121,7 +121,7 @@ public class OpusProjection {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, Fs, channels, mapping_family, streams, coupled_streams, application);
+        return invokePPPI(st, Fs, channels, mapping_family, streams, coupled_streams, application, __functionAddress);
     }
 
     /**
@@ -164,7 +164,7 @@ public class OpusProjection {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, pcm, frame_size, data, max_data_bytes);
+        return invokePPPI(st, pcm, frame_size, data, max_data_bytes, __functionAddress);
     }
 
     /**
@@ -199,7 +199,7 @@ public class OpusProjection {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, pcm, frame_size, data, max_data_bytes);
+        return invokePPPI(st, pcm, frame_size, data, max_data_bytes, __functionAddress);
     }
 
     /**
@@ -235,7 +235,7 @@ public class OpusProjection {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st);
+        return invokePI(st, __functionAddress);
     }
 
     // --- [ opus_projection_encoder_destroy ] ---
@@ -250,7 +250,7 @@ public class OpusProjection {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st);
+        return invokePI(st, __functionAddress);
     }
 
     // --- [ opus_projection_decoder_get_size ] ---
@@ -268,7 +268,7 @@ public class OpusProjection {
     @NativeType("opus_int32")
     public static int opus_projection_decoder_get_size(int channels, int streams, int coupled_streams) {
         long __functionAddress = Functions.projection_decoder_get_size;
-        return invokeI(__functionAddress, channels, streams, coupled_streams);
+        return invokeI(channels, streams, coupled_streams, __functionAddress);
     }
 
     // --- [ opus_projection_decoder_create ] ---
@@ -280,7 +280,7 @@ public class OpusProjection {
      */
     public static long nopus_projection_decoder_create(int Fs, int channels, int streams, int coupled_streams, long demixing_matrix, int demixing_matrix_size, long error) {
         long __functionAddress = Functions.projection_decoder_create;
-        return invokePPP(__functionAddress, Fs, channels, streams, coupled_streams, demixing_matrix, demixing_matrix_size, error);
+        return invokePPP(Fs, channels, streams, coupled_streams, demixing_matrix, demixing_matrix_size, error, __functionAddress);
     }
 
     /**
@@ -316,7 +316,7 @@ public class OpusProjection {
         if (CHECKS) {
             check(st);
         }
-        return invokePPI(__functionAddress, st, Fs, channels, streams, coupled_streams, demixing_matrix, demixing_matrix_size);
+        return invokePPI(st, Fs, channels, streams, coupled_streams, demixing_matrix, demixing_matrix_size, __functionAddress);
     }
 
     /**
@@ -353,7 +353,7 @@ public class OpusProjection {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, data, len, pcm, frame_size, decode_fec);
+        return invokePPPI(st, data, len, pcm, frame_size, decode_fec, __functionAddress);
     }
 
     /**
@@ -392,7 +392,7 @@ public class OpusProjection {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, data, len, pcm, frame_size, decode_fec);
+        return invokePPPI(st, data, len, pcm, frame_size, decode_fec, __functionAddress);
     }
 
     /**
@@ -431,7 +431,7 @@ public class OpusProjection {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st);
+        return invokePI(st, __functionAddress);
     }
 
     // --- [ opus_projection_decoder_destroy ] ---
@@ -446,7 +446,7 @@ public class OpusProjection {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st);
+        return invokePI(st, __functionAddress);
     }
 
     /**

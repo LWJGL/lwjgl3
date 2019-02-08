@@ -81,7 +81,7 @@ public class LLVMDisassembler {
     /** Unsafe version of: {@link #LLVMCreateDisasm CreateDisasm} */
     public static long nLLVMCreateDisasm(long TripleName, long DisInfo, int TagType, long GetOpInfo, long SymbolLookUp) {
         long __functionAddress = Functions.CreateDisasm;
-        return invokePPPPP(__functionAddress, TripleName, DisInfo, TagType, GetOpInfo, SymbolLookUp);
+        return invokePPPPP(TripleName, DisInfo, TagType, GetOpInfo, SymbolLookUp, __functionAddress);
     }
 
     /**
@@ -123,7 +123,7 @@ public class LLVMDisassembler {
     /** Unsafe version of: {@link #LLVMCreateDisasmCPU CreateDisasmCPU} */
     public static long nLLVMCreateDisasmCPU(long Triple, long CPU, long DisInfo, int TagType, long GetOpInfo, long SymbolLookUp) {
         long __functionAddress = Functions.CreateDisasmCPU;
-        return invokePPPPPP(__functionAddress, Triple, CPU, DisInfo, TagType, GetOpInfo, SymbolLookUp);
+        return invokePPPPPP(Triple, CPU, DisInfo, TagType, GetOpInfo, SymbolLookUp, __functionAddress);
     }
 
     /**
@@ -168,7 +168,7 @@ public class LLVMDisassembler {
     /** Unsafe version of: {@link #LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} */
     public static long nLLVMCreateDisasmCPUFeatures(long Triple, long CPU, long Features, long DisInfo, int TagType, long GetOpInfo, long SymbolLookUp) {
         long __functionAddress = Functions.CreateDisasmCPUFeatures;
-        return invokePPPPPPP(__functionAddress, Triple, CPU, Features, DisInfo, TagType, GetOpInfo, SymbolLookUp);
+        return invokePPPPPPP(Triple, CPU, Features, DisInfo, TagType, GetOpInfo, SymbolLookUp, __functionAddress);
     }
 
     /**
@@ -217,7 +217,7 @@ public class LLVMDisassembler {
         if (CHECKS) {
             check(DC);
         }
-        return invokePJI(__functionAddress, DC, Options);
+        return invokePJI(DC, Options, __functionAddress);
     }
 
     // --- [ LLVMDisasmDispose ] ---
@@ -228,7 +228,7 @@ public class LLVMDisassembler {
         if (CHECKS) {
             check(DC);
         }
-        invokePV(__functionAddress, DC);
+        invokePV(DC, __functionAddress);
     }
 
     // --- [ LLVMDisasmInstruction ] ---
@@ -239,7 +239,7 @@ public class LLVMDisassembler {
         if (CHECKS) {
             check(DC);
         }
-        return invokePPJJPPP(__functionAddress, DC, Bytes, BytesSize, PC, OutString, OutStringSize);
+        return invokePPJJPPP(DC, Bytes, BytesSize, PC, OutString, OutStringSize, __functionAddress);
     }
 
     /**

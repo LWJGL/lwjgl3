@@ -1454,7 +1454,7 @@ public class ARBVertexProgram {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, programs.length, programs);
+        callPV(programs.length, programs, __functionAddress);
     }
 
     /** Array version of: {@link #glGenProgramsARB GenProgramsARB} */
@@ -1463,7 +1463,7 @@ public class ARBVertexProgram {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, programs.length, programs);
+        callPV(programs.length, programs, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramEnvParameter4dvARB ProgramEnvParameter4dvARB} */
@@ -1473,7 +1473,7 @@ public class ARBVertexProgram {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, index, params);
+        callPV(target, index, params, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramEnvParameter4fvARB ProgramEnvParameter4fvARB} */
@@ -1483,7 +1483,7 @@ public class ARBVertexProgram {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, index, params);
+        callPV(target, index, params, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramLocalParameter4dvARB ProgramLocalParameter4dvARB} */
@@ -1493,7 +1493,7 @@ public class ARBVertexProgram {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, index, params);
+        callPV(target, index, params, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramLocalParameter4fvARB ProgramLocalParameter4fvARB} */
@@ -1503,7 +1503,7 @@ public class ARBVertexProgram {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, index, params);
+        callPV(target, index, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetProgramEnvParameterfvARB GetProgramEnvParameterfvARB} */
@@ -1513,7 +1513,7 @@ public class ARBVertexProgram {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, index, params);
+        callPV(target, index, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetProgramEnvParameterdvARB GetProgramEnvParameterdvARB} */
@@ -1523,7 +1523,7 @@ public class ARBVertexProgram {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, index, params);
+        callPV(target, index, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetProgramLocalParameterfvARB GetProgramLocalParameterfvARB} */
@@ -1533,7 +1533,7 @@ public class ARBVertexProgram {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, index, params);
+        callPV(target, index, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetProgramLocalParameterdvARB GetProgramLocalParameterdvARB} */
@@ -1543,7 +1543,7 @@ public class ARBVertexProgram {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, index, params);
+        callPV(target, index, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetProgramivARB GetProgramivARB} */
@@ -1553,7 +1553,7 @@ public class ARBVertexProgram {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetVertexAttribfvARB GetVertexAttribfvARB} */

@@ -154,7 +154,7 @@ public class EXTRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, data.length << 1, data);
+        callPV(x, y, width, height, format, type, data.length << 1, data, __functionAddress);
     }
 
     /** Array version of: {@link #glReadnPixelsEXT ReadnPixelsEXT} */
@@ -163,7 +163,7 @@ public class EXTRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, data.length << 2, data);
+        callPV(x, y, width, height, format, type, data.length << 2, data, __functionAddress);
     }
 
     /** Array version of: {@link #glReadnPixelsEXT ReadnPixelsEXT} */
@@ -172,7 +172,7 @@ public class EXTRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, data.length << 2, data);
+        callPV(x, y, width, height, format, type, data.length << 2, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnUniformfvEXT GetnUniformfvEXT} */
@@ -181,7 +181,7 @@ public class EXTRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnUniformivEXT GetnUniformivEXT} */
@@ -190,7 +190,7 @@ public class EXTRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
 }

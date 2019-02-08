@@ -94,7 +94,7 @@ public class CL10GL {
             check(__functionAddress);
             check(context);
         }
-        return callPJPP(__functionAddress, context, flags, bufobj, errcode_ret);
+        return callPJPP(context, flags, bufobj, errcode_ret, __functionAddress);
     }
 
     /**
@@ -143,7 +143,7 @@ public class CL10GL {
             check(__functionAddress);
             check(context);
         }
-        return callPJPP(__functionAddress, context, flags, texture_target, miplevel, texture, errcode_ret);
+        return callPJPP(context, flags, texture_target, miplevel, texture, errcode_ret, __functionAddress);
     }
 
     /**
@@ -203,7 +203,7 @@ public class CL10GL {
             check(__functionAddress);
             check(context);
         }
-        return callPJPP(__functionAddress, context, flags, texture_target, miplevel, texture, errcode_ret);
+        return callPJPP(context, flags, texture_target, miplevel, texture, errcode_ret, __functionAddress);
     }
 
     /**
@@ -262,7 +262,7 @@ public class CL10GL {
             check(__functionAddress);
             check(context);
         }
-        return callPJPP(__functionAddress, context, flags, renderbuffer, errcode_ret);
+        return callPJPP(context, flags, renderbuffer, errcode_ret, __functionAddress);
     }
 
     /**
@@ -313,7 +313,7 @@ public class CL10GL {
             check(__functionAddress);
             check(memobj);
         }
-        return callPPPI(__functionAddress, memobj, gl_object_type, gl_object_name);
+        return callPPPI(memobj, gl_object_type, gl_object_name, __functionAddress);
     }
 
     /**
@@ -357,7 +357,7 @@ public class CL10GL {
             check(__functionAddress);
             check(memobj);
         }
-        return callPPPPI(__functionAddress, memobj, param_name, param_value_size, param_value, param_value_size_ret);
+        return callPPPPI(memobj, param_name, param_value_size, param_value, param_value_size_ret, __functionAddress);
     }
 
     /**
@@ -430,7 +430,7 @@ public class CL10GL {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPPI(__functionAddress, command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPI(command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -550,7 +550,7 @@ public class CL10GL {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPPI(__functionAddress, command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPI(command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -661,7 +661,7 @@ public class CL10GL {
             check(context);
             checkSafe(errcode_ret, 1);
         }
-        return callPJPP(__functionAddress, context, flags, bufobj, errcode_ret);
+        return callPJPP(context, flags, bufobj, errcode_ret, __functionAddress);
     }
 
     /**
@@ -677,7 +677,7 @@ public class CL10GL {
             check(context);
             checkSafe(errcode_ret, 1);
         }
-        return callPJPP(__functionAddress, context, flags, texture_target, miplevel, texture, errcode_ret);
+        return callPJPP(context, flags, texture_target, miplevel, texture, errcode_ret, __functionAddress);
     }
 
     /**
@@ -693,7 +693,7 @@ public class CL10GL {
             check(context);
             checkSafe(errcode_ret, 1);
         }
-        return callPJPP(__functionAddress, context, flags, texture_target, miplevel, texture, errcode_ret);
+        return callPJPP(context, flags, texture_target, miplevel, texture, errcode_ret, __functionAddress);
     }
 
     /**
@@ -709,7 +709,7 @@ public class CL10GL {
             check(context);
             checkSafe(errcode_ret, 1);
         }
-        return callPJPP(__functionAddress, context, flags, renderbuffer, errcode_ret);
+        return callPJPP(context, flags, renderbuffer, errcode_ret, __functionAddress);
     }
 
     /**
@@ -726,7 +726,7 @@ public class CL10GL {
             checkSafe(gl_object_type, 1);
             checkSafe(gl_object_name, 1);
         }
-        return callPPPI(__functionAddress, memobj, gl_object_type, gl_object_name);
+        return callPPPI(memobj, gl_object_type, gl_object_name, __functionAddress);
     }
 
     /**
@@ -742,7 +742,7 @@ public class CL10GL {
             check(memobj);
             checkSafe(param_value_size_ret, 1);
         }
-        return callPPPPI(__functionAddress, memobj, param_name, Integer.toUnsignedLong(lengthSafe(param_value)) << 2, param_value, memAddressSafe(param_value_size_ret));
+        return callPPPPI(memobj, param_name, Integer.toUnsignedLong(lengthSafe(param_value)) << 2, param_value, memAddressSafe(param_value_size_ret), __functionAddress);
     }
 
 }

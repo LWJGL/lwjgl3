@@ -52,7 +52,7 @@ public class WGLEXTSwapControl {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, interval) != 0;
+        return callI(interval, __functionAddress) != 0;
     }
 
     // --- [ wglGetSwapIntervalEXT ] ---

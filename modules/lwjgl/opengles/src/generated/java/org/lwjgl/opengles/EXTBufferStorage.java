@@ -113,7 +113,7 @@ public class EXTBufferStorage {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 1, data, flags);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 1, data, flags, __functionAddress);
     }
 
     /** Array version of: {@link #glBufferStorageEXT BufferStorageEXT} */
@@ -122,7 +122,7 @@ public class EXTBufferStorage {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 2, data, flags);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
     }
 
     /** Array version of: {@link #glBufferStorageEXT BufferStorageEXT} */
@@ -131,7 +131,7 @@ public class EXTBufferStorage {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 2, data, flags);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
     }
 
     /** Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT} */
@@ -140,7 +140,7 @@ public class EXTBufferStorage {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 1, data, flags);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 1, data, flags, __functionAddress);
     }
 
     /** Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT} */
@@ -149,7 +149,7 @@ public class EXTBufferStorage {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 2, data, flags);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
     }
 
     /** Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT} */
@@ -158,7 +158,7 @@ public class EXTBufferStorage {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 2, data, flags);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
     }
 
 }

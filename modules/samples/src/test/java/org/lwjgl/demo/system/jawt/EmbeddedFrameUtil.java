@@ -64,7 +64,7 @@ final class EmbeddedFrameUtil {
                 return glfwGetX11Window(window);
             case MACOSX:
                 long objc_msgSend = ObjCRuntime.getLibrary().getFunctionAddress("objc_msgSend");
-                return invokePPP(objc_msgSend, glfwGetCocoaWindow(window), sel_getUid("contentView"));
+                return invokePPP(glfwGetCocoaWindow(window), sel_getUid("contentView"), objc_msgSend);
             case WINDOWS:
                 return glfwGetWin32Window(window);
             default:
@@ -99,7 +99,7 @@ final class EmbeddedFrameUtil {
                 throw new RuntimeException(e);
             }
         } else {
-            JAWT_SynthesizeWindowActivation(awt.SynthesizeWindowActivation(), embeddedFrame, doActivate);
+            JAWT_SynthesizeWindowActivation(embeddedFrame, doActivate, awt.SynthesizeWindowActivation());
         }
     }
 
@@ -116,7 +116,7 @@ final class EmbeddedFrameUtil {
                 throw new RuntimeException(e);
             }
         } else {
-            JAWT_SetBounds(awt.SetBounds(), embeddedFrame, x, y, width, height);
+            JAWT_SetBounds(embeddedFrame, x, y, width, height, awt.SetBounds());
         }
     }
 

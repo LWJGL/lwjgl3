@@ -35,7 +35,7 @@ public class LLVMErrorHandling {
     /** Unsafe version of: {@link #LLVMInstallFatalErrorHandler InstallFatalErrorHandler} */
     public static void nLLVMInstallFatalErrorHandler(long Handler) {
         long __functionAddress = Functions.InstallFatalErrorHandler;
-        invokePV(__functionAddress, Handler);
+        invokePV(Handler, __functionAddress);
     }
 
     /**

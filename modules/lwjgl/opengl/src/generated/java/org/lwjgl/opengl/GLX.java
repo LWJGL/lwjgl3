@@ -106,7 +106,7 @@ public class GLX {
         if (CHECKS) {
             check(display);
         }
-        return callPPPI(__functionAddress, display, error_base, event_base);
+        return callPPPI(display, error_base, event_base, __functionAddress);
     }
 
     /**
@@ -133,7 +133,7 @@ public class GLX {
         if (CHECKS) {
             check(display);
         }
-        return callPPPI(__functionAddress, display, major, minor);
+        return callPPPI(display, major, minor, __functionAddress);
     }
 
     /**
@@ -161,7 +161,7 @@ public class GLX {
             check(display);
             XVisualInfo.validate(visual);
         }
-        return callPPPI(__functionAddress, display, visual, attribute, value);
+        return callPPPI(display, visual, attribute, value, __functionAddress);
     }
 
     /**
@@ -187,7 +187,7 @@ public class GLX {
         if (CHECKS) {
             check(display);
         }
-        return callPPP(__functionAddress, display, screen, attrib_list);
+        return callPPP(display, screen, attrib_list, __functionAddress);
     }
 
     /**
@@ -219,7 +219,7 @@ public class GLX {
             check(display);
             XVisualInfo.validate(visual);
         }
-        return callPPPP(__functionAddress, display, visual, share_list, direct);
+        return callPPPP(display, visual, share_list, direct, __functionAddress);
     }
 
     /**
@@ -250,7 +250,7 @@ public class GLX {
         if (CHECKS) {
             check(display);
         }
-        return callPPPI(__functionAddress, display, draw, ctx) != 0;
+        return callPPPI(display, draw, ctx, __functionAddress) != 0;
     }
 
     // --- [ glXCopyContext ] ---
@@ -270,7 +270,7 @@ public class GLX {
             check(source);
             check(dest);
         }
-        callPPPPV(__functionAddress, display, source, dest, mask);
+        callPPPPV(display, source, dest, mask, __functionAddress);
     }
 
     // --- [ glXIsDirect ] ---
@@ -288,7 +288,7 @@ public class GLX {
             check(display);
             check(ctx);
         }
-        return callPPI(__functionAddress, display, ctx) != 0;
+        return callPPI(display, ctx, __functionAddress) != 0;
     }
 
     // --- [ glXDestroyContext ] ---
@@ -308,7 +308,7 @@ public class GLX {
             check(display);
             check(ctx);
         }
-        callPPV(__functionAddress, display, ctx);
+        callPPV(display, ctx, __functionAddress);
     }
 
     // --- [ glXGetCurrentContext ] ---
@@ -373,7 +373,7 @@ public class GLX {
             check(display);
             check(draw);
         }
-        callPPV(__functionAddress, display, draw);
+        callPPV(display, draw, __functionAddress);
     }
 
     // --- [ glXUseXFont ] ---
@@ -388,7 +388,7 @@ public class GLX {
      */
     public static void glXUseXFont(@NativeType("Font") long font, int first, int count, int list_base) {
         long __functionAddress = Functions.UseXFont;
-        callPV(__functionAddress, font, first, count, list_base);
+        callPV(font, first, count, list_base, __functionAddress);
     }
 
     // --- [ glXCreateGLXPixmap ] ---
@@ -400,7 +400,7 @@ public class GLX {
             check(display);
             XVisualInfo.validate(visual);
         }
-        return callPPPP(__functionAddress, display, visual, pixmap);
+        return callPPPP(display, visual, pixmap, __functionAddress);
     }
 
     /**
@@ -429,7 +429,7 @@ public class GLX {
             check(display);
             check(pixmap);
         }
-        callPPV(__functionAddress, display, pixmap);
+        callPPV(display, pixmap, __functionAddress);
     }
 
     /** Array version of: {@link #glXQueryExtension QueryExtension} */
@@ -441,7 +441,7 @@ public class GLX {
             check(error_base, 1);
             check(event_base, 1);
         }
-        return callPPPI(__functionAddress, display, error_base, event_base) != 0;
+        return callPPPI(display, error_base, event_base, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #glXQueryVersion QueryVersion} */
@@ -453,7 +453,7 @@ public class GLX {
             check(major, 1);
             check(minor, 1);
         }
-        return callPPPI(__functionAddress, display, major, minor) != 0;
+        return callPPPI(display, major, minor, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #glXGetConfig GetConfig} */
@@ -464,7 +464,7 @@ public class GLX {
             check(value, 1);
             XVisualInfo.validate(visual.address());
         }
-        return callPPPI(__functionAddress, display, visual.address(), attribute, value);
+        return callPPPI(display, visual.address(), attribute, value, __functionAddress);
     }
 
     /** Array version of: {@link #glXChooseVisual ChooseVisual} */
@@ -476,7 +476,7 @@ public class GLX {
             check(display);
             checkNTSafe(attrib_list);
         }
-        long __result = callPPP(__functionAddress, display, screen, attrib_list);
+        long __result = callPPP(display, screen, attrib_list, __functionAddress);
         return XVisualInfo.createSafe(__result);
     }
 

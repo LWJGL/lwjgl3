@@ -2023,7 +2023,7 @@ public class GLES20 {
      */
     public static void glBufferData(@NativeType("GLenum") int target, @NativeType("void const *") short[] data, @NativeType("GLenum") int usage) {
         long __functionAddress = GLES.getICD().glBufferData;
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 1, data, usage);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 1, data, usage, __functionAddress);
     }
 
     /**
@@ -2033,7 +2033,7 @@ public class GLES20 {
      */
     public static void glBufferData(@NativeType("GLenum") int target, @NativeType("void const *") int[] data, @NativeType("GLenum") int usage) {
         long __functionAddress = GLES.getICD().glBufferData;
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 2, data, usage);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 2, data, usage, __functionAddress);
     }
 
     /**
@@ -2043,7 +2043,7 @@ public class GLES20 {
      */
     public static void glBufferData(@NativeType("GLenum") int target, @NativeType("void const *") float[] data, @NativeType("GLenum") int usage) {
         long __functionAddress = GLES.getICD().glBufferData;
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 2, data, usage);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 2, data, usage, __functionAddress);
     }
 
     /**
@@ -2053,7 +2053,7 @@ public class GLES20 {
      */
     public static void glBufferSubData(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("void const *") short[] data) {
         long __functionAddress = GLES.getICD().glBufferSubData;
-        callPPPV(__functionAddress, target, offset, Integer.toUnsignedLong(data.length) << 1, data);
+        callPPPV(target, offset, Integer.toUnsignedLong(data.length) << 1, data, __functionAddress);
     }
 
     /**
@@ -2063,7 +2063,7 @@ public class GLES20 {
      */
     public static void glBufferSubData(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("void const *") int[] data) {
         long __functionAddress = GLES.getICD().glBufferSubData;
-        callPPPV(__functionAddress, target, offset, Integer.toUnsignedLong(data.length) << 2, data);
+        callPPPV(target, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
     /**
@@ -2073,7 +2073,7 @@ public class GLES20 {
      */
     public static void glBufferSubData(@NativeType("GLenum") int target, @NativeType("GLintptr") long offset, @NativeType("void const *") float[] data) {
         long __functionAddress = GLES.getICD().glBufferSubData;
-        callPPPV(__functionAddress, target, offset, Integer.toUnsignedLong(data.length) << 2, data);
+        callPPPV(target, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
     /**
@@ -2083,7 +2083,7 @@ public class GLES20 {
      */
     public static void glDeleteBuffers(@NativeType("GLuint const *") int[] buffers) {
         long __functionAddress = GLES.getICD().glDeleteBuffers;
-        callPV(__functionAddress, buffers.length, buffers);
+        callPV(buffers.length, buffers, __functionAddress);
     }
 
     /**
@@ -2093,7 +2093,7 @@ public class GLES20 {
      */
     public static void glDeleteFramebuffers(@NativeType("GLuint const *") int[] framebuffers) {
         long __functionAddress = GLES.getICD().glDeleteFramebuffers;
-        callPV(__functionAddress, framebuffers.length, framebuffers);
+        callPV(framebuffers.length, framebuffers, __functionAddress);
     }
 
     /**
@@ -2103,7 +2103,7 @@ public class GLES20 {
      */
     public static void glDeleteRenderbuffers(@NativeType("GLuint const *") int[] renderbuffers) {
         long __functionAddress = GLES.getICD().glDeleteRenderbuffers;
-        callPV(__functionAddress, renderbuffers.length, renderbuffers);
+        callPV(renderbuffers.length, renderbuffers, __functionAddress);
     }
 
     /**
@@ -2113,7 +2113,7 @@ public class GLES20 {
      */
     public static void glDeleteTextures(@NativeType("GLuint const *") int[] textures) {
         long __functionAddress = GLES.getICD().glDeleteTextures;
-        callPV(__functionAddress, textures.length, textures);
+        callPV(textures.length, textures, __functionAddress);
     }
 
     /**
@@ -2123,7 +2123,7 @@ public class GLES20 {
      */
     public static void glGenBuffers(@NativeType("GLuint *") int[] buffers) {
         long __functionAddress = GLES.getICD().glGenBuffers;
-        callPV(__functionAddress, buffers.length, buffers);
+        callPV(buffers.length, buffers, __functionAddress);
     }
 
     /**
@@ -2133,7 +2133,7 @@ public class GLES20 {
      */
     public static void glGenFramebuffers(@NativeType("GLuint *") int[] framebuffers) {
         long __functionAddress = GLES.getICD().glGenFramebuffers;
-        callPV(__functionAddress, framebuffers.length, framebuffers);
+        callPV(framebuffers.length, framebuffers, __functionAddress);
     }
 
     /**
@@ -2143,7 +2143,7 @@ public class GLES20 {
      */
     public static void glGenRenderbuffers(@NativeType("GLuint *") int[] renderbuffers) {
         long __functionAddress = GLES.getICD().glGenRenderbuffers;
-        callPV(__functionAddress, renderbuffers.length, renderbuffers);
+        callPV(renderbuffers.length, renderbuffers, __functionAddress);
     }
 
     /**
@@ -2153,7 +2153,7 @@ public class GLES20 {
      */
     public static void glGenTextures(@NativeType("GLuint *") int[] textures) {
         long __functionAddress = GLES.getICD().glGenTextures;
-        callPV(__functionAddress, textures.length, textures);
+        callPV(textures.length, textures, __functionAddress);
     }
 
     /**
@@ -2168,7 +2168,7 @@ public class GLES20 {
             check(size, 1);
             check(type, 1);
         }
-        callPPPPV(__functionAddress, program, index, name.remaining(), length, size, type, memAddress(name));
+        callPPPPV(program, index, name.remaining(), length, size, type, memAddress(name), __functionAddress);
     }
 
     /**
@@ -2183,7 +2183,7 @@ public class GLES20 {
             check(size, 1);
             check(type, 1);
         }
-        callPPPPV(__functionAddress, program, index, name.remaining(), length, size, type, memAddress(name));
+        callPPPPV(program, index, name.remaining(), length, size, type, memAddress(name), __functionAddress);
     }
 
     /**
@@ -2196,7 +2196,7 @@ public class GLES20 {
         if (CHECKS) {
             checkSafe(count, 1);
         }
-        callPPV(__functionAddress, program, shaders.length, count, shaders);
+        callPPV(program, shaders.length, count, shaders, __functionAddress);
     }
 
     /**
@@ -2209,7 +2209,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -2222,7 +2222,7 @@ public class GLES20 {
         if (CHECKS) {
             check(data, 1);
         }
-        callPV(__functionAddress, pname, data);
+        callPV(pname, data, __functionAddress);
     }
 
     /**
@@ -2235,7 +2235,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 1);
         }
-        callPV(__functionAddress, target, attachment, pname, params);
+        callPV(target, attachment, pname, params, __functionAddress);
     }
 
     /**
@@ -2248,7 +2248,7 @@ public class GLES20 {
         if (CHECKS) {
             check(data, 1);
         }
-        callPV(__functionAddress, pname, data);
+        callPV(pname, data, __functionAddress);
     }
 
     /**
@@ -2261,7 +2261,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 1);
         }
-        callPV(__functionAddress, program, pname, params);
+        callPV(program, pname, params, __functionAddress);
     }
 
     /**
@@ -2274,7 +2274,7 @@ public class GLES20 {
         if (CHECKS) {
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, program, infoLog.remaining(), length, memAddress(infoLog));
+        callPPV(program, infoLog.remaining(), length, memAddress(infoLog), __functionAddress);
     }
 
     /**
@@ -2287,7 +2287,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -2300,7 +2300,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 1);
         }
-        callPV(__functionAddress, shader, pname, params);
+        callPV(shader, pname, params, __functionAddress);
     }
 
     /**
@@ -2313,7 +2313,7 @@ public class GLES20 {
         if (CHECKS) {
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, shader, infoLog.remaining(), length, memAddress(infoLog));
+        callPPV(shader, infoLog.remaining(), length, memAddress(infoLog), __functionAddress);
     }
 
     /**
@@ -2327,7 +2327,7 @@ public class GLES20 {
             check(range, 2);
             check(precision, 2);
         }
-        callPPV(__functionAddress, shadertype, precisiontype, range, precision);
+        callPPV(shadertype, precisiontype, range, precision, __functionAddress);
     }
 
     /**
@@ -2340,7 +2340,7 @@ public class GLES20 {
         if (CHECKS) {
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, shader, source.remaining(), length, memAddress(source));
+        callPPV(shader, source.remaining(), length, memAddress(source), __functionAddress);
     }
 
     /**
@@ -2353,7 +2353,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -2366,7 +2366,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -2379,7 +2379,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 1);
         }
-        callPV(__functionAddress, program, location, params);
+        callPV(program, location, params, __functionAddress);
     }
 
     /**
@@ -2392,7 +2392,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 1);
         }
-        callPV(__functionAddress, program, location, params);
+        callPV(program, location, params, __functionAddress);
     }
 
     /**
@@ -2405,7 +2405,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 4);
         }
-        callPV(__functionAddress, index, pname, params);
+        callPV(index, pname, params, __functionAddress);
     }
 
     /**
@@ -2418,7 +2418,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 4);
         }
-        callPV(__functionAddress, index, pname, params);
+        callPV(index, pname, params, __functionAddress);
     }
 
     /**
@@ -2428,7 +2428,7 @@ public class GLES20 {
      */
     public static void glReadPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] pixels) {
         long __functionAddress = GLES.getICD().glReadPixels;
-        callPV(__functionAddress, x, y, width, height, format, type, pixels);
+        callPV(x, y, width, height, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -2438,7 +2438,7 @@ public class GLES20 {
      */
     public static void glReadPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] pixels) {
         long __functionAddress = GLES.getICD().glReadPixels;
-        callPV(__functionAddress, x, y, width, height, format, type, pixels);
+        callPV(x, y, width, height, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -2448,7 +2448,7 @@ public class GLES20 {
      */
     public static void glReadPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] pixels) {
         long __functionAddress = GLES.getICD().glReadPixels;
-        callPV(__functionAddress, x, y, width, height, format, type, pixels);
+        callPV(x, y, width, height, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -2458,7 +2458,7 @@ public class GLES20 {
      */
     public static void glShaderBinary(@NativeType("GLuint const *") int[] shaders, @NativeType("GLenum") int binaryformat, @NativeType("void const *") ByteBuffer binary) {
         long __functionAddress = GLES.getICD().glShaderBinary;
-        callPPV(__functionAddress, shaders.length, shaders, binaryformat, memAddress(binary), binary.remaining());
+        callPPV(shaders.length, shaders, binaryformat, memAddress(binary), binary.remaining(), __functionAddress);
     }
 
     /**
@@ -2471,7 +2471,7 @@ public class GLES20 {
         if (CHECKS) {
             checkSafe(length, string.remaining());
         }
-        callPPV(__functionAddress, shader, string.remaining(), memAddress(string), length);
+        callPPV(shader, string.remaining(), memAddress(string), length, __functionAddress);
     }
 
     /**
@@ -2481,7 +2481,7 @@ public class GLES20 {
      */
     public static void glTexImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] pixels) {
         long __functionAddress = GLES.getICD().glTexImage2D;
-        callPV(__functionAddress, target, level, internalformat, width, height, border, format, type, pixels);
+        callPV(target, level, internalformat, width, height, border, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -2491,7 +2491,7 @@ public class GLES20 {
      */
     public static void glTexImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] pixels) {
         long __functionAddress = GLES.getICD().glTexImage2D;
-        callPV(__functionAddress, target, level, internalformat, width, height, border, format, type, pixels);
+        callPV(target, level, internalformat, width, height, border, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -2501,7 +2501,7 @@ public class GLES20 {
      */
     public static void glTexImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] pixels) {
         long __functionAddress = GLES.getICD().glTexImage2D;
-        callPV(__functionAddress, target, level, internalformat, width, height, border, format, type, pixels);
+        callPV(target, level, internalformat, width, height, border, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -2514,7 +2514,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -2527,7 +2527,7 @@ public class GLES20 {
         if (CHECKS) {
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -2537,7 +2537,7 @@ public class GLES20 {
      */
     public static void glTexSubImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         long __functionAddress = GLES.getICD().glTexSubImage2D;
-        callPV(__functionAddress, target, level, xoffset, yoffset, width, height, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -2547,7 +2547,7 @@ public class GLES20 {
      */
     public static void glTexSubImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         long __functionAddress = GLES.getICD().glTexSubImage2D;
-        callPV(__functionAddress, target, level, xoffset, yoffset, width, height, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -2557,7 +2557,7 @@ public class GLES20 {
      */
     public static void glTexSubImage2D(@NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         long __functionAddress = GLES.getICD().glTexSubImage2D;
-        callPV(__functionAddress, target, level, xoffset, yoffset, width, height, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -2567,7 +2567,7 @@ public class GLES20 {
      */
     public static void glUniform1fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glUniform1fv;
-        callPV(__functionAddress, location, value.length, value);
+        callPV(location, value.length, value, __functionAddress);
     }
 
     /**
@@ -2577,7 +2577,7 @@ public class GLES20 {
      */
     public static void glUniform1iv(@NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GLES.getICD().glUniform1iv;
-        callPV(__functionAddress, location, value.length, value);
+        callPV(location, value.length, value, __functionAddress);
     }
 
     /**
@@ -2587,7 +2587,7 @@ public class GLES20 {
      */
     public static void glUniform2fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glUniform2fv;
-        callPV(__functionAddress, location, value.length >> 1, value);
+        callPV(location, value.length >> 1, value, __functionAddress);
     }
 
     /**
@@ -2597,7 +2597,7 @@ public class GLES20 {
      */
     public static void glUniform2iv(@NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GLES.getICD().glUniform2iv;
-        callPV(__functionAddress, location, value.length >> 1, value);
+        callPV(location, value.length >> 1, value, __functionAddress);
     }
 
     /**
@@ -2607,7 +2607,7 @@ public class GLES20 {
      */
     public static void glUniform3fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glUniform3fv;
-        callPV(__functionAddress, location, value.length / 3, value);
+        callPV(location, value.length / 3, value, __functionAddress);
     }
 
     /**
@@ -2617,7 +2617,7 @@ public class GLES20 {
      */
     public static void glUniform3iv(@NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GLES.getICD().glUniform3iv;
-        callPV(__functionAddress, location, value.length / 3, value);
+        callPV(location, value.length / 3, value, __functionAddress);
     }
 
     /**
@@ -2627,7 +2627,7 @@ public class GLES20 {
      */
     public static void glUniform4fv(@NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glUniform4fv;
-        callPV(__functionAddress, location, value.length >> 2, value);
+        callPV(location, value.length >> 2, value, __functionAddress);
     }
 
     /**
@@ -2637,7 +2637,7 @@ public class GLES20 {
      */
     public static void glUniform4iv(@NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GLES.getICD().glUniform4iv;
-        callPV(__functionAddress, location, value.length >> 2, value);
+        callPV(location, value.length >> 2, value, __functionAddress);
     }
 
     /**
@@ -2647,7 +2647,7 @@ public class GLES20 {
      */
     public static void glUniformMatrix2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glUniformMatrix2fv;
-        callPV(__functionAddress, location, value.length >> 2, transpose, value);
+        callPV(location, value.length >> 2, transpose, value, __functionAddress);
     }
 
     /**
@@ -2657,7 +2657,7 @@ public class GLES20 {
      */
     public static void glUniformMatrix3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glUniformMatrix3fv;
-        callPV(__functionAddress, location, value.length / 9, transpose, value);
+        callPV(location, value.length / 9, transpose, value, __functionAddress);
     }
 
     /**
@@ -2667,7 +2667,7 @@ public class GLES20 {
      */
     public static void glUniformMatrix4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GLES.getICD().glUniformMatrix4fv;
-        callPV(__functionAddress, location, value.length >> 4, transpose, value);
+        callPV(location, value.length >> 4, transpose, value, __functionAddress);
     }
 
     /**
@@ -2680,7 +2680,7 @@ public class GLES20 {
         if (CHECKS) {
             check(v, 1);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /**
@@ -2693,7 +2693,7 @@ public class GLES20 {
         if (CHECKS) {
             check(v, 2);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /**
@@ -2706,7 +2706,7 @@ public class GLES20 {
         if (CHECKS) {
             check(v, 3);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /**
@@ -2719,7 +2719,7 @@ public class GLES20 {
         if (CHECKS) {
             check(v, 4);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
 }

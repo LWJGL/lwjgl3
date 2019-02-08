@@ -140,7 +140,7 @@ public class OESTexture3D {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, internalformat, width, height, depth, border, format, type, pixels);
+        callPV(target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glTexImage3DOES TexImage3DOES} */
@@ -149,7 +149,7 @@ public class OESTexture3D {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, internalformat, width, height, depth, border, format, type, pixels);
+        callPV(target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glTexImage3DOES TexImage3DOES} */
@@ -158,7 +158,7 @@ public class OESTexture3D {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, internalformat, width, height, depth, border, format, type, pixels);
+        callPV(target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glTexSubImage3DOES TexSubImage3DOES} */
@@ -167,7 +167,7 @@ public class OESTexture3D {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glTexSubImage3DOES TexSubImage3DOES} */
@@ -176,7 +176,7 @@ public class OESTexture3D {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glTexSubImage3DOES TexSubImage3DOES} */
@@ -185,7 +185,7 @@ public class OESTexture3D {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
 }

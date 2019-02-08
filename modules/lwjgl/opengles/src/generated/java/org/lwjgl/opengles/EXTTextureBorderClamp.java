@@ -201,7 +201,7 @@ public class EXTTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glTexParameterIuivEXT TexParameterIuivEXT} */
@@ -211,7 +211,7 @@ public class EXTTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetTexParameterIivEXT GetTexParameterIivEXT} */
@@ -221,7 +221,7 @@ public class EXTTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetTexParameterIuivEXT GetTexParameterIuivEXT} */
@@ -231,7 +231,7 @@ public class EXTTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glSamplerParameterIivEXT SamplerParameterIivEXT} */
@@ -241,7 +241,7 @@ public class EXTTextureBorderClamp {
             check(__functionAddress);
             check(param, 1);
         }
-        callPV(__functionAddress, sampler, pname, param);
+        callPV(sampler, pname, param, __functionAddress);
     }
 
     /** Array version of: {@link #glSamplerParameterIuivEXT SamplerParameterIuivEXT} */
@@ -251,7 +251,7 @@ public class EXTTextureBorderClamp {
             check(__functionAddress);
             check(param, 1);
         }
-        callPV(__functionAddress, sampler, pname, param);
+        callPV(sampler, pname, param, __functionAddress);
     }
 
     /** Array version of: {@link #glGetSamplerParameterIivEXT GetSamplerParameterIivEXT} */
@@ -261,7 +261,7 @@ public class EXTTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetSamplerParameterIuivEXT GetSamplerParameterIuivEXT} */
@@ -271,7 +271,7 @@ public class EXTTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
 }

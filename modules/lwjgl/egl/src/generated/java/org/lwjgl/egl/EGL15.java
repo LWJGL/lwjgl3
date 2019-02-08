@@ -84,7 +84,7 @@ public class EGL15 extends EGL14 {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPP(__functionAddress, dpy, type, attrib_list);
+        return callPPP(dpy, type, attrib_list, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateSync.xhtml">Reference Page</a> */
@@ -107,7 +107,7 @@ public class EGL15 extends EGL14 {
             check(dpy);
             check(sync);
         }
-        return callPPI(__functionAddress, dpy, sync) != 0;
+        return callPPI(dpy, sync, __functionAddress) != 0;
     }
 
     // --- [ eglClientWaitSync ] ---
@@ -121,7 +121,7 @@ public class EGL15 extends EGL14 {
             check(dpy);
             check(sync);
         }
-        return callPPJI(__functionAddress, dpy, sync, flags, timeout);
+        return callPPJI(dpy, sync, flags, timeout, __functionAddress);
     }
 
     // --- [ eglGetSyncAttrib ] ---
@@ -133,7 +133,7 @@ public class EGL15 extends EGL14 {
             check(dpy);
             check(sync);
         }
-        return callPPPI(__functionAddress, dpy, sync, attribute, value);
+        return callPPPI(dpy, sync, attribute, value, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetSyncAttrib.xhtml">Reference Page</a> */
@@ -155,7 +155,7 @@ public class EGL15 extends EGL14 {
             check(ctx);
             check(buffer);
         }
-        return callPPPPP(__functionAddress, dpy, ctx, target, buffer, attrib_list);
+        return callPPPPP(dpy, ctx, target, buffer, attrib_list, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateImage.xhtml">Reference Page</a> */
@@ -178,7 +178,7 @@ public class EGL15 extends EGL14 {
             check(dpy);
             check(image);
         }
-        return callPPI(__functionAddress, dpy, image) != 0;
+        return callPPI(dpy, image, __functionAddress) != 0;
     }
 
     // --- [ eglGetPlatformDisplay ] ---
@@ -189,7 +189,7 @@ public class EGL15 extends EGL14 {
             check(__functionAddress);
             check(native_display);
         }
-        return callPPP(__functionAddress, platform, native_display, attrib_list);
+        return callPPP(platform, native_display, attrib_list, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetPlatformDisplay.xhtml">Reference Page</a> */
@@ -211,7 +211,7 @@ public class EGL15 extends EGL14 {
             check(config);
             check(native_window);
         }
-        return callPPPPP(__functionAddress, dpy, config, native_window, attrib_list);
+        return callPPPPP(dpy, config, native_window, attrib_list, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePlatformWindowSurface.xhtml">Reference Page</a> */
@@ -233,7 +233,7 @@ public class EGL15 extends EGL14 {
             check(config);
             check(native_pixmap);
         }
-        return callPPPPP(__functionAddress, dpy, config, native_pixmap, attrib_list);
+        return callPPPPP(dpy, config, native_pixmap, attrib_list, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePlatformPixmapSurface.xhtml">Reference Page</a> */
@@ -256,7 +256,7 @@ public class EGL15 extends EGL14 {
             check(dpy);
             check(sync);
         }
-        return callPPI(__functionAddress, dpy, sync, flags) != 0;
+        return callPPI(dpy, sync, flags, __functionAddress) != 0;
     }
 
 }

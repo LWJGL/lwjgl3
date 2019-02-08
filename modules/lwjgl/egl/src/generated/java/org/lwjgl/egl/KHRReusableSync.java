@@ -62,7 +62,7 @@ public class KHRReusableSync {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPP(__functionAddress, dpy, type, attrib_list);
+        return callPPP(dpy, type, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLSyncKHR")
@@ -83,7 +83,7 @@ public class KHRReusableSync {
             check(dpy);
             check(sync);
         }
-        return callPPI(__functionAddress, dpy, sync) != 0;
+        return callPPI(dpy, sync, __functionAddress) != 0;
     }
 
     // --- [ eglClientWaitSyncKHR ] ---
@@ -96,7 +96,7 @@ public class KHRReusableSync {
             check(dpy);
             check(sync);
         }
-        return callPPJI(__functionAddress, dpy, sync, flags, timeout);
+        return callPPJI(dpy, sync, flags, timeout, __functionAddress);
     }
 
     // --- [ eglSignalSyncKHR ] ---
@@ -109,7 +109,7 @@ public class KHRReusableSync {
             check(dpy);
             check(sync);
         }
-        return callPPI(__functionAddress, dpy, sync, mode) != 0;
+        return callPPI(dpy, sync, mode, __functionAddress) != 0;
     }
 
     // --- [ eglGetSyncAttribKHR ] ---
@@ -121,7 +121,7 @@ public class KHRReusableSync {
             check(dpy);
             check(sync);
         }
-        return callPPPI(__functionAddress, dpy, sync, attribute, value);
+        return callPPPI(dpy, sync, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -141,7 +141,7 @@ public class KHRReusableSync {
             check(dpy);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPP(__functionAddress, dpy, type, attrib_list);
+        return callPPP(dpy, type, attrib_list, __functionAddress);
     }
 
     /** Array version of: {@link #eglGetSyncAttribKHR GetSyncAttribKHR} */
@@ -154,7 +154,7 @@ public class KHRReusableSync {
             check(sync);
             check(value, 1);
         }
-        return callPPPI(__functionAddress, dpy, sync, attribute, value) != 0;
+        return callPPPI(dpy, sync, attribute, value, __functionAddress) != 0;
     }
 
 }

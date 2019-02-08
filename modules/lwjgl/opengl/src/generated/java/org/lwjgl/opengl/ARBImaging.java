@@ -1146,7 +1146,7 @@ public class ARBImaging {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, internalformat, width, format, type, table);
+        callPV(target, internalformat, width, format, type, table, __functionAddress);
     }
 
     /** Array version of: {@link #glColorTable ColorTable} */
@@ -1155,7 +1155,7 @@ public class ARBImaging {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, internalformat, width, format, type, table);
+        callPV(target, internalformat, width, format, type, table, __functionAddress);
     }
 
     /** Array version of: {@link #glColorTable ColorTable} */
@@ -1164,7 +1164,7 @@ public class ARBImaging {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, internalformat, width, format, type, table);
+        callPV(target, internalformat, width, format, type, table, __functionAddress);
     }
 
     /** Array version of: {@link #glColorTableParameteriv ColorTableParameteriv} */
@@ -1174,7 +1174,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glColorTableParameterfv ColorTableParameterfv} */
@@ -1184,7 +1184,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetColorTable GetColorTable} */
@@ -1193,7 +1193,7 @@ public class ARBImaging {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, format, type, table);
+        callPV(target, format, type, table, __functionAddress);
     }
 
     /** Array version of: {@link #glGetColorTable GetColorTable} */
@@ -1202,7 +1202,7 @@ public class ARBImaging {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, format, type, table);
+        callPV(target, format, type, table, __functionAddress);
     }
 
     /** Array version of: {@link #glGetColorTable GetColorTable} */
@@ -1211,7 +1211,7 @@ public class ARBImaging {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, format, type, table);
+        callPV(target, format, type, table, __functionAddress);
     }
 
     /** Array version of: {@link #glGetColorTableParameteriv GetColorTableParameteriv} */
@@ -1221,7 +1221,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetColorTableParameterfv GetColorTableParameterfv} */
@@ -1231,7 +1231,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glConvolutionParameteriv ConvolutionParameteriv} */
@@ -1241,7 +1241,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glConvolutionParameterfv ConvolutionParameterfv} */
@@ -1251,7 +1251,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetConvolutionParameteriv GetConvolutionParameteriv} */
@@ -1261,7 +1261,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetConvolutionParameterfv GetConvolutionParameterfv} */
@@ -1271,7 +1271,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetHistogramParameteriv GetHistogramParameteriv} */
@@ -1281,7 +1281,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetHistogramParameterfv GetHistogramParameterfv} */
@@ -1291,7 +1291,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetMinmaxParameteriv GetMinmaxParameteriv} */
@@ -1301,7 +1301,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetMinmaxParameterfv GetMinmaxParameterfv} */
@@ -1311,7 +1311,7 @@ public class ARBImaging {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
 }

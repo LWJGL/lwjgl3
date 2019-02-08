@@ -144,7 +144,7 @@ public class AMDBufferMarker {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJJV(__functionAddress, commandBuffer.address(), pipelineStage, dstBuffer, dstOffset, marker);
+        callPJJV(commandBuffer.address(), pipelineStage, dstBuffer, dstOffset, marker, __functionAddress);
     }
 
 }

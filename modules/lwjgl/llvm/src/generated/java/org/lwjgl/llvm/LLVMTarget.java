@@ -78,7 +78,7 @@ public class LLVMTarget {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMSetModuleDataLayout ] ---
@@ -90,7 +90,7 @@ public class LLVMTarget {
             check(M);
             check(DL);
         }
-        invokePPV(__functionAddress, M, DL);
+        invokePPV(M, DL, __functionAddress);
     }
 
     // --- [ LLVMCreateTargetData ] ---
@@ -98,7 +98,7 @@ public class LLVMTarget {
     /** Unsafe version of: {@link #LLVMCreateTargetData CreateTargetData} */
     public static long nLLVMCreateTargetData(long StringRep) {
         long __functionAddress = Functions.CreateTargetData;
-        return invokePP(__functionAddress, StringRep);
+        return invokePP(StringRep, __functionAddress);
     }
 
     /** Creates target data from a target layout string. See the constructor {@code llvm::DataLayout::DataLayout}. */
@@ -131,7 +131,7 @@ public class LLVMTarget {
         if (CHECKS) {
             check(TD);
         }
-        invokePV(__functionAddress, TD);
+        invokePV(TD, __functionAddress);
     }
 
     // --- [ LLVMAddTargetLibraryInfo ] ---
@@ -146,7 +146,7 @@ public class LLVMTarget {
             check(TLI);
             check(PM);
         }
-        invokePPV(__functionAddress, TLI, PM);
+        invokePPV(TLI, PM, __functionAddress);
     }
 
     // --- [ LLVMCopyStringRepOfTargetData ] ---
@@ -157,7 +157,7 @@ public class LLVMTarget {
         if (CHECKS) {
             check(TD);
         }
-        return invokePP(__functionAddress, TD);
+        return invokePP(TD, __functionAddress);
     }
 
     /**
@@ -180,7 +180,7 @@ public class LLVMTarget {
         if (CHECKS) {
             check(TD);
         }
-        return invokePI(__functionAddress, TD);
+        return invokePI(TD, __functionAddress);
     }
 
     // --- [ LLVMPointerSize ] ---
@@ -192,7 +192,7 @@ public class LLVMTarget {
         if (CHECKS) {
             check(TD);
         }
-        return invokePI(__functionAddress, TD);
+        return invokePI(TD, __functionAddress);
     }
 
     // --- [ LLVMPointerSizeForAS ] ---
@@ -204,7 +204,7 @@ public class LLVMTarget {
         if (CHECKS) {
             check(TD);
         }
-        return invokePI(__functionAddress, TD, AS);
+        return invokePI(TD, AS, __functionAddress);
     }
 
     // --- [ LLVMIntPtrType ] ---
@@ -216,7 +216,7 @@ public class LLVMTarget {
         if (CHECKS) {
             check(TD);
         }
-        return invokePP(__functionAddress, TD);
+        return invokePP(TD, __functionAddress);
     }
 
     // --- [ LLVMIntPtrTypeForAS ] ---
@@ -231,7 +231,7 @@ public class LLVMTarget {
         if (CHECKS) {
             check(TD);
         }
-        return invokePP(__functionAddress, TD, AS);
+        return invokePP(TD, AS, __functionAddress);
     }
 
     // --- [ LLVMIntPtrTypeInContext ] ---
@@ -244,7 +244,7 @@ public class LLVMTarget {
             check(C);
             check(TD);
         }
-        return invokePPP(__functionAddress, C, TD);
+        return invokePPP(C, TD, __functionAddress);
     }
 
     // --- [ LLVMIntPtrTypeForASInContext ] ---
@@ -260,7 +260,7 @@ public class LLVMTarget {
             check(C);
             check(TD);
         }
-        return invokePPP(__functionAddress, C, TD, AS);
+        return invokePPP(C, TD, AS, __functionAddress);
     }
 
     // --- [ LLVMSizeOfTypeInBits ] ---
@@ -273,7 +273,7 @@ public class LLVMTarget {
             check(TD);
             check(Ty);
         }
-        return invokePPJ(__functionAddress, TD, Ty);
+        return invokePPJ(TD, Ty, __functionAddress);
     }
 
     // --- [ LLVMStoreSizeOfType ] ---
@@ -286,7 +286,7 @@ public class LLVMTarget {
             check(TD);
             check(Ty);
         }
-        return invokePPJ(__functionAddress, TD, Ty);
+        return invokePPJ(TD, Ty, __functionAddress);
     }
 
     // --- [ LLVMABISizeOfType ] ---
@@ -299,7 +299,7 @@ public class LLVMTarget {
             check(TD);
             check(Ty);
         }
-        return invokePPJ(__functionAddress, TD, Ty);
+        return invokePPJ(TD, Ty, __functionAddress);
     }
 
     // --- [ LLVMABIAlignmentOfType ] ---
@@ -312,7 +312,7 @@ public class LLVMTarget {
             check(TD);
             check(Ty);
         }
-        return invokePPI(__functionAddress, TD, Ty);
+        return invokePPI(TD, Ty, __functionAddress);
     }
 
     // --- [ LLVMCallFrameAlignmentOfType ] ---
@@ -325,7 +325,7 @@ public class LLVMTarget {
             check(TD);
             check(Ty);
         }
-        return invokePPI(__functionAddress, TD, Ty);
+        return invokePPI(TD, Ty, __functionAddress);
     }
 
     // --- [ LLVMPreferredAlignmentOfType ] ---
@@ -338,7 +338,7 @@ public class LLVMTarget {
             check(TD);
             check(Ty);
         }
-        return invokePPI(__functionAddress, TD, Ty);
+        return invokePPI(TD, Ty, __functionAddress);
     }
 
     // --- [ LLVMPreferredAlignmentOfGlobal ] ---
@@ -351,7 +351,7 @@ public class LLVMTarget {
             check(TD);
             check(GlobalVar);
         }
-        return invokePPI(__functionAddress, TD, GlobalVar);
+        return invokePPI(TD, GlobalVar, __functionAddress);
     }
 
     // --- [ LLVMElementAtOffset ] ---
@@ -364,7 +364,7 @@ public class LLVMTarget {
             check(TD);
             check(StructTy);
         }
-        return invokePPJI(__functionAddress, TD, StructTy, Offset);
+        return invokePPJI(TD, StructTy, Offset, __functionAddress);
     }
 
     // --- [ LLVMOffsetOfElement ] ---
@@ -377,7 +377,7 @@ public class LLVMTarget {
             check(TD);
             check(StructTy);
         }
-        return invokePPJ(__functionAddress, TD, StructTy, Element);
+        return invokePPJ(TD, StructTy, Element, __functionAddress);
     }
 
 }

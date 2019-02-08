@@ -57,7 +57,7 @@ public class EXTImageDMABufImportModifiers {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPPI(__functionAddress, dpy, max_formats, formats, num_formats);
+        return callPPPI(dpy, max_formats, formats, num_formats, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -76,7 +76,7 @@ public class EXTImageDMABufImportModifiers {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPPPI(__functionAddress, dpy, format, max_modifiers, modifiers, external_only, num_modifiers);
+        return callPPPPI(dpy, format, max_modifiers, modifiers, external_only, num_modifiers, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -97,7 +97,7 @@ public class EXTImageDMABufImportModifiers {
             check(dpy);
             check(num_formats, 1);
         }
-        return callPPPI(__functionAddress, dpy, lengthSafe(formats), formats, num_formats) != 0;
+        return callPPPI(dpy, lengthSafe(formats), formats, num_formats, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #eglQueryDmaBufModifiersEXT QueryDmaBufModifiersEXT} */
@@ -110,7 +110,7 @@ public class EXTImageDMABufImportModifiers {
             checkSafe(external_only, lengthSafe(modifiers));
             check(num_modifiers, 1);
         }
-        return callPPPPI(__functionAddress, dpy, format, lengthSafe(modifiers), modifiers, external_only, num_modifiers) != 0;
+        return callPPPPI(dpy, format, lengthSafe(modifiers), modifiers, external_only, num_modifiers, __functionAddress) != 0;
     }
 
 }

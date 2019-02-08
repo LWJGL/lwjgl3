@@ -81,7 +81,7 @@ public class ANGLETranslatedShaderSource {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, shader, source.remaining(), length, memAddress(source));
+        callPPV(shader, source.remaining(), length, memAddress(source), __functionAddress);
     }
 
 }

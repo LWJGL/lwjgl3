@@ -580,7 +580,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord1svARB MultiTexCoord1svARB} */
@@ -590,7 +590,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord1ivARB MultiTexCoord1ivARB} */
@@ -600,7 +600,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord1dvARB MultiTexCoord1dvARB} */
@@ -610,7 +610,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord2fvARB MultiTexCoord2fvARB} */
@@ -620,7 +620,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord2svARB MultiTexCoord2svARB} */
@@ -630,7 +630,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord2ivARB MultiTexCoord2ivARB} */
@@ -640,7 +640,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord2dvARB MultiTexCoord2dvARB} */
@@ -650,7 +650,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord3fvARB MultiTexCoord3fvARB} */
@@ -660,7 +660,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord3svARB MultiTexCoord3svARB} */
@@ -670,7 +670,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord3ivARB MultiTexCoord3ivARB} */
@@ -680,7 +680,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord3dvARB MultiTexCoord3dvARB} */
@@ -690,7 +690,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord4fvARB MultiTexCoord4fvARB} */
@@ -700,7 +700,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord4svARB MultiTexCoord4svARB} */
@@ -710,7 +710,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord4ivARB MultiTexCoord4ivARB} */
@@ -720,7 +720,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiTexCoord4dvARB MultiTexCoord4dvARB} */
@@ -730,7 +730,7 @@ public class ARBMultitexture {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, texture, v);
+        callPV(texture, v, __functionAddress);
     }
 
 }

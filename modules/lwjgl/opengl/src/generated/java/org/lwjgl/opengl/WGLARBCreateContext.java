@@ -60,7 +60,7 @@ public class WGLARBCreateContext {
             check(__functionAddress);
             check(hdc);
         }
-        return callPPPP(__functionAddress, hdc, shareContext, attribList);
+        return callPPPP(hdc, shareContext, attribList, __functionAddress);
     }
 
     /**
@@ -90,7 +90,7 @@ public class WGLARBCreateContext {
             check(hdc);
             checkNTSafe(attribList);
         }
-        return callPPPP(__functionAddress, hdc, shareContext, attribList);
+        return callPPPP(hdc, shareContext, attribList, __functionAddress);
     }
 
 }

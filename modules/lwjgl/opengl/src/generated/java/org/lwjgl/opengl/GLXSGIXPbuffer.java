@@ -96,7 +96,7 @@ public class GLXSGIXPbuffer {
             check(display);
             check(config);
         }
-        return callPPPP(__functionAddress, display, config, width, height, attrib_list);
+        return callPPPP(display, config, width, height, attrib_list, __functionAddress);
     }
 
     /**
@@ -131,7 +131,7 @@ public class GLXSGIXPbuffer {
             check(display);
             check(pbuf);
         }
-        callPPV(__functionAddress, display, pbuf);
+        callPPV(display, pbuf, __functionAddress);
     }
 
     // --- [ glXQueryGLXPbufferSGIX ] ---
@@ -144,7 +144,7 @@ public class GLXSGIXPbuffer {
             check(display);
             check(pbuf);
         }
-        callPPPV(__functionAddress, display, pbuf, attribute, value);
+        callPPPV(display, pbuf, attribute, value, __functionAddress);
     }
 
     /**
@@ -178,7 +178,7 @@ public class GLXSGIXPbuffer {
             check(display);
             check(drawable);
         }
-        callPPPV(__functionAddress, display, drawable, mask);
+        callPPPV(display, drawable, mask, __functionAddress);
     }
 
     // --- [ glXGetSelectedEventSGIX ] ---
@@ -191,7 +191,7 @@ public class GLXSGIXPbuffer {
             check(display);
             check(drawable);
         }
-        callPPPV(__functionAddress, display, drawable, mask);
+        callPPPV(display, drawable, mask, __functionAddress);
     }
 
     /**
@@ -218,7 +218,7 @@ public class GLXSGIXPbuffer {
             check(config);
             checkNTSafe(attrib_list);
         }
-        return callPPPP(__functionAddress, display, config, width, height, attrib_list);
+        return callPPPP(display, config, width, height, attrib_list, __functionAddress);
     }
 
     /** Array version of: {@link #glXQueryGLXPbufferSGIX QueryGLXPbufferSGIX} */
@@ -230,7 +230,7 @@ public class GLXSGIXPbuffer {
             check(pbuf);
             check(value, 1);
         }
-        callPPPV(__functionAddress, display, pbuf, attribute, value);
+        callPPPV(display, pbuf, attribute, value, __functionAddress);
     }
 
 }

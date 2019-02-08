@@ -107,7 +107,7 @@ public class KHRGetMemoryRequirements2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, device.address(), pInfo, pMemoryRequirements);
+        callPPPV(device.address(), pInfo, pMemoryRequirements, __functionAddress);
     }
 
     /**
@@ -129,7 +129,7 @@ public class KHRGetMemoryRequirements2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, device.address(), pInfo, pMemoryRequirements);
+        callPPPV(device.address(), pInfo, pMemoryRequirements, __functionAddress);
     }
 
     /**
@@ -155,7 +155,7 @@ public class KHRGetMemoryRequirements2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPPV(__functionAddress, device.address(), pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
+        callPPPPV(device.address(), pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements, __functionAddress);
     }
 
     /**
@@ -182,7 +182,7 @@ public class KHRGetMemoryRequirements2 {
             check(pSparseMemoryRequirementCount, 1);
             checkSafe(pSparseMemoryRequirements, pSparseMemoryRequirementCount[0]);
         }
-        callPPPPV(__functionAddress, device.address(), pInfo.address(), pSparseMemoryRequirementCount, memAddressSafe(pSparseMemoryRequirements));
+        callPPPPV(device.address(), pInfo.address(), pSparseMemoryRequirementCount, memAddressSafe(pSparseMemoryRequirements), __functionAddress);
     }
 
 }

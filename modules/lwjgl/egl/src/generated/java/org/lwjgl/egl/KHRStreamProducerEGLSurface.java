@@ -47,7 +47,7 @@ public class KHRStreamProducerEGLSurface {
             check(config);
             check(stream);
         }
-        return callPPPPP(__functionAddress, dpy, config, stream, attrib_list);
+        return callPPPPP(dpy, config, stream, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLSurface")
@@ -69,7 +69,7 @@ public class KHRStreamProducerEGLSurface {
             check(stream);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPPPP(__functionAddress, dpy, config, stream, attrib_list);
+        return callPPPPP(dpy, config, stream, attrib_list, __functionAddress);
     }
 
 }

@@ -52,7 +52,7 @@ public class NVStreamFlush {
             check(dpy);
             check(stream);
         }
-        return callPPI(__functionAddress, dpy, stream) != 0;
+        return callPPI(dpy, stream, __functionAddress) != 0;
     }
 
 }

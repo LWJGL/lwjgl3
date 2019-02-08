@@ -92,7 +92,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePJP(__functionAddress, Ty, N, IsSigned ? 1 : 0);
+        return invokePJP(Ty, N, IsSigned ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMCreateGenericValueOfPointer ] ---
@@ -103,7 +103,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(P);
         }
-        return invokePP(__functionAddress, P);
+        return invokePP(P, __functionAddress);
     }
 
     // --- [ LLVMCreateGenericValueOfFloat ] ---
@@ -114,7 +114,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(Ty);
         }
-        return invokePP(__functionAddress, Ty, N);
+        return invokePP(Ty, N, __functionAddress);
     }
 
     // --- [ LLVMGenericValueIntWidth ] ---
@@ -125,7 +125,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(GenValRef);
         }
-        return invokePI(__functionAddress, GenValRef);
+        return invokePI(GenValRef, __functionAddress);
     }
 
     // --- [ LLVMGenericValueToInt ] ---
@@ -136,7 +136,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(GenVal);
         }
-        return invokePJ(__functionAddress, GenVal, IsSigned ? 1 : 0);
+        return invokePJ(GenVal, IsSigned ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMGenericValueToPointer ] ---
@@ -147,7 +147,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(GenVal);
         }
-        return invokePP(__functionAddress, GenVal);
+        return invokePP(GenVal, __functionAddress);
     }
 
     // --- [ LLVMGenericValueToFloat ] ---
@@ -158,7 +158,7 @@ public class LLVMExecutionEngine {
             check(TyRef);
             check(GenVal);
         }
-        return invokePPD(__functionAddress, TyRef, GenVal);
+        return invokePPD(TyRef, GenVal, __functionAddress);
     }
 
     // --- [ LLVMDisposeGenericValue ] ---
@@ -168,7 +168,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(GenVal);
         }
-        invokePV(__functionAddress, GenVal);
+        invokePV(GenVal, __functionAddress);
     }
 
     // --- [ LLVMCreateExecutionEngineForModule ] ---
@@ -178,7 +178,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(M);
         }
-        return invokePPPI(__functionAddress, OutEE, M, OutError);
+        return invokePPPI(OutEE, M, OutError, __functionAddress);
     }
 
     @NativeType("LLVMBool")
@@ -197,7 +197,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(M);
         }
-        return invokePPPI(__functionAddress, OutInterp, M, OutError);
+        return invokePPPI(OutInterp, M, OutError, __functionAddress);
     }
 
     @NativeType("LLVMBool")
@@ -216,7 +216,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(M);
         }
-        return invokePPPI(__functionAddress, OutJIT, M, OptLevel, OutError);
+        return invokePPPI(OutJIT, M, OptLevel, OutError, __functionAddress);
     }
 
     @NativeType("LLVMBool")
@@ -232,7 +232,7 @@ public class LLVMExecutionEngine {
 
     public static void nLLVMInitializeMCJITCompilerOptions(long Options, long SizeOfOptions) {
         long __functionAddress = Functions.InitializeMCJITCompilerOptions;
-        invokePPV(__functionAddress, Options, SizeOfOptions);
+        invokePPV(Options, SizeOfOptions, __functionAddress);
     }
 
     public static void LLVMInitializeMCJITCompilerOptions(@NativeType("struct LLVMMCJITCompilerOptions *") LLVMMCJITCompilerOptions.Buffer Options) {
@@ -247,7 +247,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(M);
         }
-        return invokePPPPPI(__functionAddress, OutJIT, M, Options, SizeOfOptions, OutError);
+        return invokePPPPPI(OutJIT, M, Options, SizeOfOptions, OutError, __functionAddress);
     }
 
     /**
@@ -283,7 +283,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(EE);
         }
-        invokePV(__functionAddress, EE);
+        invokePV(EE, __functionAddress);
     }
 
     // --- [ LLVMRunStaticConstructors ] ---
@@ -293,7 +293,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(EE);
         }
-        invokePV(__functionAddress, EE);
+        invokePV(EE, __functionAddress);
     }
 
     // --- [ LLVMRunStaticDestructors ] ---
@@ -303,7 +303,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(EE);
         }
-        invokePV(__functionAddress, EE);
+        invokePV(EE, __functionAddress);
     }
 
     // --- [ LLVMRunFunctionAsMain ] ---
@@ -314,7 +314,7 @@ public class LLVMExecutionEngine {
             check(EE);
             check(F);
         }
-        return invokePPPPI(__functionAddress, EE, F, ArgC, ArgV, EnvP);
+        return invokePPPPI(EE, F, ArgC, ArgV, EnvP, __functionAddress);
     }
 
     public static int LLVMRunFunctionAsMain(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("LLVMValueRef") long F, @NativeType("char const * const *") PointerBuffer ArgV, @NativeType("char const * const *") PointerBuffer EnvP) {
@@ -332,7 +332,7 @@ public class LLVMExecutionEngine {
             check(EE);
             check(F);
         }
-        return invokePPPP(__functionAddress, EE, F, NumArgs, Args);
+        return invokePPPP(EE, F, NumArgs, Args, __functionAddress);
     }
 
     @NativeType("LLVMGenericValueRef")
@@ -348,7 +348,7 @@ public class LLVMExecutionEngine {
             check(EE);
             check(F);
         }
-        invokePPV(__functionAddress, EE, F);
+        invokePPV(EE, F, __functionAddress);
     }
 
     // --- [ LLVMAddModule ] ---
@@ -359,7 +359,7 @@ public class LLVMExecutionEngine {
             check(EE);
             check(M);
         }
-        invokePPV(__functionAddress, EE, M);
+        invokePPV(EE, M, __functionAddress);
     }
 
     // --- [ LLVMRemoveModule ] ---
@@ -370,7 +370,7 @@ public class LLVMExecutionEngine {
             check(EE);
             check(M);
         }
-        return invokePPPPI(__functionAddress, EE, M, OutMod, OutError);
+        return invokePPPPI(EE, M, OutMod, OutError, __functionAddress);
     }
 
     @NativeType("LLVMBool")
@@ -389,7 +389,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(EE);
         }
-        return invokePPPI(__functionAddress, EE, Name, OutFn);
+        return invokePPPI(EE, Name, OutFn, __functionAddress);
     }
 
     @NativeType("LLVMBool")
@@ -426,7 +426,7 @@ public class LLVMExecutionEngine {
             check(EE);
             check(Fn);
         }
-        return invokePPP(__functionAddress, EE, Fn);
+        return invokePPP(EE, Fn, __functionAddress);
     }
 
     // --- [ LLVMGetExecutionEngineTargetData ] ---
@@ -437,7 +437,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(EE);
         }
-        return invokePP(__functionAddress, EE);
+        return invokePP(EE, __functionAddress);
     }
 
     // --- [ LLVMGetExecutionEngineTargetMachine ] ---
@@ -448,7 +448,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(EE);
         }
-        return invokePP(__functionAddress, EE);
+        return invokePP(EE, __functionAddress);
     }
 
     // --- [ LLVMAddGlobalMapping ] ---
@@ -460,7 +460,7 @@ public class LLVMExecutionEngine {
             check(Global);
             check(Addr);
         }
-        invokePPPV(__functionAddress, EE, Global, Addr);
+        invokePPPV(EE, Global, Addr, __functionAddress);
     }
 
     // --- [ LLVMGetPointerToGlobal ] ---
@@ -472,7 +472,7 @@ public class LLVMExecutionEngine {
             check(EE);
             check(Global);
         }
-        return invokePPP(__functionAddress, EE, Global);
+        return invokePPP(EE, Global, __functionAddress);
     }
 
     // --- [ LLVMGetGlobalValueAddress ] ---
@@ -482,7 +482,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(EE);
         }
-        return invokePPJ(__functionAddress, EE, Name);
+        return invokePPJ(EE, Name, __functionAddress);
     }
 
     @NativeType("uint64_t")
@@ -512,7 +512,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(EE);
         }
-        return invokePPJ(__functionAddress, EE, Name);
+        return invokePPJ(EE, Name, __functionAddress);
     }
 
     @NativeType("uint64_t")
@@ -543,7 +543,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(Opaque);
         }
-        return invokePPPPPP(__functionAddress, Opaque, AllocateCodeSection, AllocateDataSection, FinalizeMemory, Destroy);
+        return invokePPPPPP(Opaque, AllocateCodeSection, AllocateDataSection, FinalizeMemory, Destroy, __functionAddress);
     }
 
     /**
@@ -567,7 +567,7 @@ public class LLVMExecutionEngine {
         if (CHECKS) {
             check(MM);
         }
-        invokePV(__functionAddress, MM);
+        invokePV(MM, __functionAddress);
     }
 
     // --- [ LLVMCreateGDBRegistrationListener ] ---

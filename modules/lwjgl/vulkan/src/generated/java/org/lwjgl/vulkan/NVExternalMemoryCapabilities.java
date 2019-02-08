@@ -123,7 +123,7 @@ public class NVExternalMemoryCapabilities {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, physicalDevice.address(), format, type, tiling, usage, flags, externalHandleType, pExternalImageFormatProperties);
+        return callPPI(physicalDevice.address(), format, type, tiling, usage, flags, externalHandleType, pExternalImageFormatProperties, __functionAddress);
     }
 
     /**

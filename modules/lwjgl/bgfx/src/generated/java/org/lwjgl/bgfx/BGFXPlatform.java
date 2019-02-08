@@ -72,7 +72,7 @@ public class BGFXPlatform {
     @NativeType("bgfx_renderer_frame_t")
     public static int bgfx_render_frame(@NativeType("int32_t") int _msecs) {
         long __functionAddress = Functions.render_frame;
-        return invokeI(__functionAddress, _msecs);
+        return invokeI(_msecs, __functionAddress);
     }
 
     // --- [ bgfx_set_platform_data ] ---
@@ -80,7 +80,7 @@ public class BGFXPlatform {
     /** Unsafe version of: {@link #bgfx_set_platform_data set_platform_data} */
     public static void nbgfx_set_platform_data(long _data) {
         long __functionAddress = Functions.set_platform_data;
-        invokePV(__functionAddress, _data);
+        invokePV(_data, __functionAddress);
     }
 
     /**
@@ -127,7 +127,7 @@ public class BGFXPlatform {
     @NativeType("uintptr_t")
     public static long bgfx_override_internal_texture_ptr(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("uintptr_t") long _ptr) {
         long __functionAddress = Functions.override_internal_texture_ptr;
-        return invokePP(__functionAddress, _handle, _ptr);
+        return invokePP(_handle, _ptr, __functionAddress);
     }
 
     // --- [ bgfx_override_internal_texture ] ---
@@ -135,7 +135,7 @@ public class BGFXPlatform {
     /** Unsafe version of: {@link #bgfx_override_internal_texture override_internal_texture} */
     public static long nbgfx_override_internal_texture(short _handle, short _width, short _height, byte _numMips, int _format, int _flags) {
         long __functionAddress = Functions.override_internal_texture;
-        return invokeP(__functionAddress, _handle, _width, _height, _numMips, _format, _flags);
+        return invokeP(_handle, _width, _height, _numMips, _format, _flags, __functionAddress);
     }
 
     /**

@@ -161,7 +161,7 @@ public class OESViewportArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, first, v.length >> 2, v);
+        callPV(first, v.length >> 2, v, __functionAddress);
     }
 
     /** Array version of: {@link #glViewportIndexedfvOES ViewportIndexedfvOES} */
@@ -171,7 +171,7 @@ public class OESViewportArray {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glScissorArrayvOES ScissorArrayvOES} */
@@ -180,7 +180,7 @@ public class OESViewportArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, first, v.length >> 2, v);
+        callPV(first, v.length >> 2, v, __functionAddress);
     }
 
     /** Array version of: {@link #glScissorIndexedvOES ScissorIndexedvOES} */
@@ -190,7 +190,7 @@ public class OESViewportArray {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glDepthRangeArrayfvOES DepthRangeArrayfvOES} */
@@ -199,7 +199,7 @@ public class OESViewportArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, first, v.length >> 1, v);
+        callPV(first, v.length >> 1, v, __functionAddress);
     }
 
     /** Array version of: {@link #glGetFloati_vOES GetFloati_vOES} */
@@ -209,7 +209,7 @@ public class OESViewportArray {
             check(__functionAddress);
             check(data, 1);
         }
-        callPV(__functionAddress, target, index, data);
+        callPV(target, index, data, __functionAddress);
     }
 
 }

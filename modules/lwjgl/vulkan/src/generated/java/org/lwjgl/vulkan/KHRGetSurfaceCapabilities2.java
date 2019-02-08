@@ -91,7 +91,7 @@ public class KHRGetSurfaceCapabilities2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, physicalDevice.address(), pSurfaceInfo, pSurfaceCapabilities);
+        return callPPPI(physicalDevice.address(), pSurfaceInfo, pSurfaceCapabilities, __functionAddress);
     }
 
     /**
@@ -159,7 +159,7 @@ public class KHRGetSurfaceCapabilities2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPPI(__functionAddress, physicalDevice.address(), pSurfaceInfo, pSurfaceFormatCount, pSurfaceFormats);
+        return callPPPPI(physicalDevice.address(), pSurfaceInfo, pSurfaceFormatCount, pSurfaceFormats, __functionAddress);
     }
 
     /**
@@ -232,7 +232,7 @@ public class KHRGetSurfaceCapabilities2 {
             check(pSurfaceFormatCount, 1);
             checkSafe(pSurfaceFormats, pSurfaceFormatCount[0]);
         }
-        return callPPPPI(__functionAddress, physicalDevice.address(), pSurfaceInfo.address(), pSurfaceFormatCount, memAddressSafe(pSurfaceFormats));
+        return callPPPPI(physicalDevice.address(), pSurfaceInfo.address(), pSurfaceFormatCount, memAddressSafe(pSurfaceFormats), __functionAddress);
     }
 
 }

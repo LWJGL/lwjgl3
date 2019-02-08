@@ -95,7 +95,7 @@ public class EXTClearTexture {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, format, type, data);
+        callPV(texture, level, format, type, data, __functionAddress);
     }
 
     /** Array version of: {@link #glClearTexImageEXT ClearTexImageEXT} */
@@ -104,7 +104,7 @@ public class EXTClearTexture {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, format, type, data);
+        callPV(texture, level, format, type, data, __functionAddress);
     }
 
     /** Array version of: {@link #glClearTexImageEXT ClearTexImageEXT} */
@@ -113,7 +113,7 @@ public class EXTClearTexture {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, format, type, data);
+        callPV(texture, level, format, type, data, __functionAddress);
     }
 
     /** Array version of: {@link #glClearTexSubImageEXT ClearTexSubImageEXT} */
@@ -122,7 +122,7 @@ public class EXTClearTexture {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data, __functionAddress);
     }
 
     /** Array version of: {@link #glClearTexSubImageEXT ClearTexSubImageEXT} */
@@ -131,7 +131,7 @@ public class EXTClearTexture {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data, __functionAddress);
     }
 
     /** Array version of: {@link #glClearTexSubImageEXT ClearTexSubImageEXT} */
@@ -140,7 +140,7 @@ public class EXTClearTexture {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data, __functionAddress);
     }
 
 }

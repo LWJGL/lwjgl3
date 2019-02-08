@@ -94,7 +94,7 @@ public class OESVertexArrayObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, arrays.length, arrays);
+        callPV(arrays.length, arrays, __functionAddress);
     }
 
     /** Array version of: {@link #glGenVertexArraysOES GenVertexArraysOES} */
@@ -104,7 +104,7 @@ public class OESVertexArrayObject {
             check(__functionAddress);
             check(arrays, 1);
         }
-        callPV(__functionAddress, arrays.length, arrays);
+        callPV(arrays.length, arrays, __functionAddress);
     }
 
 }

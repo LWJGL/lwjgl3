@@ -241,7 +241,7 @@ public class OESTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glTexParameterIuivOES TexParameterIuivOES} */
@@ -251,7 +251,7 @@ public class OESTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetTexParameterIivOES GetTexParameterIivOES} */
@@ -261,7 +261,7 @@ public class OESTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetTexParameterIuivOES GetTexParameterIuivOES} */
@@ -271,7 +271,7 @@ public class OESTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glSamplerParameterIivOES SamplerParameterIivOES} */
@@ -281,7 +281,7 @@ public class OESTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glSamplerParameterIuivOES SamplerParameterIuivOES} */
@@ -291,7 +291,7 @@ public class OESTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetSamplerParameterIivOES GetSamplerParameterIivOES} */
@@ -301,7 +301,7 @@ public class OESTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetSamplerParameterIuivOES GetSamplerParameterIuivOES} */
@@ -311,7 +311,7 @@ public class OESTextureBorderClamp {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
 }

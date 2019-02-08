@@ -43,7 +43,7 @@ public class KHRStreamConsumerGLTexture {
             check(dpy);
             check(stream);
         }
-        return callPPI(__functionAddress, dpy, stream) != 0;
+        return callPPI(dpy, stream, __functionAddress) != 0;
     }
 
     // --- [ eglStreamConsumerAcquireKHR ] ---
@@ -56,7 +56,7 @@ public class KHRStreamConsumerGLTexture {
             check(dpy);
             check(stream);
         }
-        return callPPI(__functionAddress, dpy, stream) != 0;
+        return callPPI(dpy, stream, __functionAddress) != 0;
     }
 
     // --- [ eglStreamConsumerReleaseKHR ] ---
@@ -69,7 +69,7 @@ public class KHRStreamConsumerGLTexture {
             check(dpy);
             check(stream);
         }
-        return callPPI(__functionAddress, dpy, stream) != 0;
+        return callPPI(dpy, stream, __functionAddress) != 0;
     }
 
 }

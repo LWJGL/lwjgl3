@@ -206,7 +206,7 @@ public class GL21C extends GL20C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 6, transpose, value);
+        callPV(location, value.length / 6, transpose, value, __functionAddress);
     }
 
     /**
@@ -219,7 +219,7 @@ public class GL21C extends GL20C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 6, transpose, value);
+        callPV(location, value.length / 6, transpose, value, __functionAddress);
     }
 
     /**
@@ -232,7 +232,7 @@ public class GL21C extends GL20C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 3, transpose, value);
+        callPV(location, value.length >> 3, transpose, value, __functionAddress);
     }
 
     /**
@@ -245,7 +245,7 @@ public class GL21C extends GL20C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 3, transpose, value);
+        callPV(location, value.length >> 3, transpose, value, __functionAddress);
     }
 
     /**
@@ -258,7 +258,7 @@ public class GL21C extends GL20C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 12, transpose, value);
+        callPV(location, value.length / 12, transpose, value, __functionAddress);
     }
 
     /**
@@ -271,7 +271,7 @@ public class GL21C extends GL20C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 12, transpose, value);
+        callPV(location, value.length / 12, transpose, value, __functionAddress);
     }
 
 }

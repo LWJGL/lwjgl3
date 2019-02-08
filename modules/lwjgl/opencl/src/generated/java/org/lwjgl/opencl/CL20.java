@@ -137,7 +137,7 @@ public class CL20 extends CL12 {
             check(context);
             check(device);
         }
-        return callPPPPP(__functionAddress, context, device, properties, errcode_ret);
+        return callPPPPP(context, device, properties, errcode_ret, __functionAddress);
     }
 
     /**
@@ -188,7 +188,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(context);
         }
-        return callPJPPP(__functionAddress, context, flags, pipe_packet_size, pipe_max_packets, properties, errcode_ret);
+        return callPJPPP(context, flags, pipe_packet_size, pipe_max_packets, properties, errcode_ret, __functionAddress);
     }
 
     /**
@@ -241,7 +241,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(pipe);
         }
-        return callPPPPI(__functionAddress, pipe, param_name, param_value_size, param_value, param_value_size_ret);
+        return callPPPPI(pipe, param_name, param_value_size, param_value, param_value_size_ret, __functionAddress);
     }
 
     /**
@@ -309,7 +309,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(context);
         }
-        return callPJPP(__functionAddress, context, flags, size, alignment);
+        return callPJPP(context, flags, size, alignment, __functionAddress);
     }
 
     /**
@@ -377,7 +377,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(context);
         }
-        callPPV(__functionAddress, context, svm_pointer);
+        callPPV(context, svm_pointer, __functionAddress);
     }
 
     /**
@@ -415,7 +415,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPPPPI(__functionAddress, command_queue, num_svm_pointers, svm_pointers, pfn_free_func, user_data, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPPPI(command_queue, num_svm_pointers, svm_pointers, pfn_free_func, user_data, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -474,7 +474,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPPPPI(__functionAddress, command_queue, blocking_copy, dst_ptr, src_ptr, size, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPPPI(command_queue, blocking_copy, dst_ptr, src_ptr, size, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -545,7 +545,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPPPPPI(__functionAddress, command_queue, svm_ptr, pattern, pattern_size, size, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPPPPI(command_queue, svm_ptr, pattern, pattern_size, size, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -608,7 +608,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPJPPPPI(__functionAddress, command_queue, blocking_map, map_flags, svm_ptr, size, num_events_in_wait_list, event_wait_list, event);
+        return callPJPPPPI(command_queue, blocking_map, map_flags, svm_ptr, size, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -673,7 +673,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPPI(__functionAddress, command_queue, svm_ptr, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPI(command_queue, svm_ptr, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -722,7 +722,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(kernel);
         }
-        return callPPI(__functionAddress, kernel, arg_index, arg_value);
+        return callPPI(kernel, arg_index, arg_value, __functionAddress);
     }
 
     /**
@@ -768,7 +768,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(kernel);
         }
-        return callPPPI(__functionAddress, kernel, param_name, param_value_size, param_value);
+        return callPPPI(kernel, param_name, param_value_size, param_value, __functionAddress);
     }
 
     /**
@@ -939,7 +939,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(context);
         }
-        return callPPPP(__functionAddress, context, sampler_properties, errcode_ret);
+        return callPPPP(context, sampler_properties, errcode_ret, __functionAddress);
     }
 
     /**
@@ -989,7 +989,7 @@ public class CL20 extends CL12 {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
         }
-        return callPPPPP(__functionAddress, context, device, properties, errcode_ret);
+        return callPPPPP(context, device, properties, errcode_ret, __functionAddress);
     }
 
     /**
@@ -1006,7 +1006,7 @@ public class CL20 extends CL12 {
             checkNTSafe(properties);
             checkSafe(errcode_ret, 1);
         }
-        return callPJPPP(__functionAddress, context, flags, pipe_packet_size, pipe_max_packets, properties, errcode_ret);
+        return callPJPPP(context, flags, pipe_packet_size, pipe_max_packets, properties, errcode_ret, __functionAddress);
     }
 
     /**
@@ -1022,7 +1022,7 @@ public class CL20 extends CL12 {
             check(pipe);
             checkSafe(param_value_size_ret, 1);
         }
-        return callPPPPI(__functionAddress, pipe, param_name, Integer.toUnsignedLong(lengthSafe(param_value)) << 2, param_value, memAddressSafe(param_value_size_ret));
+        return callPPPPI(pipe, param_name, Integer.toUnsignedLong(lengthSafe(param_value)) << 2, param_value, memAddressSafe(param_value_size_ret), __functionAddress);
     }
 
     /**
@@ -1037,7 +1037,7 @@ public class CL20 extends CL12 {
             check(__functionAddress);
             check(kernel);
         }
-        return callPPPI(__functionAddress, kernel, param_name, Integer.toUnsignedLong(param_value.length) << 2, param_value);
+        return callPPPI(kernel, param_name, Integer.toUnsignedLong(param_value.length) << 2, param_value, __functionAddress);
     }
 
     /**
@@ -1054,7 +1054,7 @@ public class CL20 extends CL12 {
             checkNTSafe(sampler_properties);
             checkSafe(errcode_ret, 1);
         }
-        return callPPPP(__functionAddress, context, sampler_properties, errcode_ret);
+        return callPPPP(context, sampler_properties, errcode_ret, __functionAddress);
     }
 
 }

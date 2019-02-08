@@ -224,7 +224,7 @@ public class NVExternalMemoryWin32 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPI(__functionAddress, device.address(), memory, handleType, pHandle);
+        return callPJPI(device.address(), memory, handleType, pHandle, __functionAddress);
     }
 
     /**

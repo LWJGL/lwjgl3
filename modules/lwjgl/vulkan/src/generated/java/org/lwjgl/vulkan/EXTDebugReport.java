@@ -292,7 +292,7 @@ public class EXTDebugReport {
             VkDebugReportCallbackCreateInfoEXT.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, instance.address(), pCreateInfo, pAllocator, pCallback);
+        return callPPPPI(instance.address(), pCreateInfo, pAllocator, pCallback, __functionAddress);
     }
 
     /**
@@ -359,7 +359,7 @@ public class EXTDebugReport {
             check(__functionAddress);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        callPJPV(__functionAddress, instance.address(), callback, pAllocator);
+        callPJPV(instance.address(), callback, pAllocator, __functionAddress);
     }
 
     /**
@@ -417,7 +417,7 @@ public class EXTDebugReport {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJPPPV(__functionAddress, instance.address(), flags, objectType, object, location, messageCode, pLayerPrefix, pMessage);
+        callPJPPPV(instance.address(), flags, objectType, object, location, messageCode, pLayerPrefix, pMessage, __functionAddress);
     }
 
     /**
@@ -549,7 +549,7 @@ public class EXTDebugReport {
             VkDebugReportCallbackCreateInfoEXT.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pCallback);
+        return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pCallback, __functionAddress);
     }
 
 }

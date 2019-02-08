@@ -271,7 +271,7 @@ public class ARBWindowPos {
             check(__functionAddress);
             check(p, 2);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /** Array version of: {@link #glWindowPos2svARB WindowPos2svARB} */
@@ -281,7 +281,7 @@ public class ARBWindowPos {
             check(__functionAddress);
             check(p, 2);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /** Array version of: {@link #glWindowPos2fvARB WindowPos2fvARB} */
@@ -291,7 +291,7 @@ public class ARBWindowPos {
             check(__functionAddress);
             check(p, 2);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /** Array version of: {@link #glWindowPos2dvARB WindowPos2dvARB} */
@@ -301,7 +301,7 @@ public class ARBWindowPos {
             check(__functionAddress);
             check(p, 2);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /** Array version of: {@link #glWindowPos3ivARB WindowPos3ivARB} */
@@ -311,7 +311,7 @@ public class ARBWindowPos {
             check(__functionAddress);
             check(p, 3);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /** Array version of: {@link #glWindowPos3svARB WindowPos3svARB} */
@@ -321,7 +321,7 @@ public class ARBWindowPos {
             check(__functionAddress);
             check(p, 3);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /** Array version of: {@link #glWindowPos3fvARB WindowPos3fvARB} */
@@ -331,7 +331,7 @@ public class ARBWindowPos {
             check(__functionAddress);
             check(p, 3);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /** Array version of: {@link #glWindowPos3dvARB WindowPos3dvARB} */
@@ -341,7 +341,7 @@ public class ARBWindowPos {
             check(__functionAddress);
             check(p, 3);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
 }

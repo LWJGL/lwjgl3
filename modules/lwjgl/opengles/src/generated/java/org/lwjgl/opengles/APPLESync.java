@@ -194,7 +194,7 @@ public class APPLESync {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, pname, params);
+        callPV(pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetSyncivAPPLE GetSyncivAPPLE} */
@@ -205,7 +205,7 @@ public class APPLESync {
             check(sync);
             checkSafe(length, 1);
         }
-        callPPPV(__functionAddress, sync, pname, values.length, length, values);
+        callPPPV(sync, pname, values.length, length, values, __functionAddress);
     }
 
 }

@@ -101,7 +101,7 @@ public class EXTTimerQuery {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, id, pname, params);
+        callPV(id, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetQueryObjectui64vEXT GetQueryObjectui64vEXT} */
@@ -111,7 +111,7 @@ public class EXTTimerQuery {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, id, pname, params);
+        callPV(id, pname, params, __functionAddress);
     }
 
 }

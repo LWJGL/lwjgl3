@@ -116,7 +116,7 @@ public class EXTWindowRectangles {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, mode, lengthSafe(box) >> 2, box);
+        callPV(mode, lengthSafe(box) >> 2, box, __functionAddress);
     }
 
 }

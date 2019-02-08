@@ -52,7 +52,7 @@ public class MESADRMImage {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPP(__functionAddress, dpy, attrib_list);
+        return callPPP(dpy, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLImageKHR")
@@ -72,7 +72,7 @@ public class MESADRMImage {
             check(dpy);
             check(image);
         }
-        return callPPPPPI(__functionAddress, dpy, image, name, handle, stride);
+        return callPPPPPI(dpy, image, name, handle, stride, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -94,7 +94,7 @@ public class MESADRMImage {
             check(dpy);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPP(__functionAddress, dpy, attrib_list);
+        return callPPP(dpy, attrib_list, __functionAddress);
     }
 
     /** Array version of: {@link #eglExportDRMImageMESA ExportDRMImageMESA} */
@@ -109,7 +109,7 @@ public class MESADRMImage {
             checkSafe(handle, 1);
             checkSafe(stride, 1);
         }
-        return callPPPPPI(__functionAddress, dpy, image, name, handle, stride) != 0;
+        return callPPPPPI(dpy, image, name, handle, stride, __functionAddress) != 0;
     }
 
 }

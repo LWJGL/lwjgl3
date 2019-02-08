@@ -68,7 +68,7 @@ public class EGL12 extends EGL11 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, api) != 0;
+        return callI(api, __functionAddress) != 0;
     }
 
     // --- [ eglQueryAPI ] ---
@@ -93,7 +93,7 @@ public class EGL12 extends EGL11 {
             check(buffer);
             check(config);
         }
-        return callPPPPP(__functionAddress, dpy, buftype, buffer, config, attrib_list);
+        return callPPPPP(dpy, buftype, buffer, config, attrib_list, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePbufferFromClientBuffer.xhtml">Reference Page</a> */
@@ -144,7 +144,7 @@ public class EGL12 extends EGL11 {
             check(config);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPPPP(__functionAddress, dpy, buftype, buffer, config, attrib_list);
+        return callPPPPP(dpy, buftype, buffer, config, attrib_list, __functionAddress);
     }
 
 }

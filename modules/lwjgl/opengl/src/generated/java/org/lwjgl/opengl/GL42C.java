@@ -598,7 +598,7 @@ public class GL42C extends GL41C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, program, bufferIndex, pname, params);
+        callPV(program, bufferIndex, pname, params, __functionAddress);
     }
 
     /**
@@ -611,7 +611,7 @@ public class GL42C extends GL41C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, internalformat, pname, params.length, params);
+        callPV(target, internalformat, pname, params.length, params, __functionAddress);
     }
 
 }

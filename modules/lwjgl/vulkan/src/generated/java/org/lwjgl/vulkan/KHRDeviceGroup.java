@@ -226,7 +226,7 @@ public class KHRDeviceGroup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, device.address(), heapIndex, localDeviceIndex, remoteDeviceIndex, pPeerMemoryFeatures);
+        callPPV(device.address(), heapIndex, localDeviceIndex, remoteDeviceIndex, pPeerMemoryFeatures, __functionAddress);
     }
 
     /**
@@ -258,7 +258,7 @@ public class KHRDeviceGroup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, commandBuffer.address(), deviceMask);
+        callPV(commandBuffer.address(), deviceMask, __functionAddress);
     }
 
     // --- [ vkCmdDispatchBaseKHR ] ---
@@ -279,7 +279,7 @@ public class KHRDeviceGroup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, commandBuffer.address(), baseGroupX, baseGroupY, baseGroupZ, groupCountX, groupCountY, groupCountZ);
+        callPV(commandBuffer.address(), baseGroupX, baseGroupY, baseGroupZ, groupCountX, groupCountY, groupCountZ, __functionAddress);
     }
 
     // --- [ vkGetDeviceGroupPresentCapabilitiesKHR ] ---
@@ -290,7 +290,7 @@ public class KHRDeviceGroup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, device.address(), pDeviceGroupPresentCapabilities);
+        return callPPI(device.address(), pDeviceGroupPresentCapabilities, __functionAddress);
     }
 
     /**
@@ -348,7 +348,7 @@ public class KHRDeviceGroup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPI(__functionAddress, device.address(), surface, pModes);
+        return callPJPI(device.address(), surface, pModes, __functionAddress);
     }
 
     /**
@@ -424,7 +424,7 @@ public class KHRDeviceGroup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, physicalDevice.address(), surface, pRectCount, pRects);
+        return callPJPPI(physicalDevice.address(), surface, pRectCount, pRects, __functionAddress);
     }
 
     /**
@@ -508,7 +508,7 @@ public class KHRDeviceGroup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, device.address(), pAcquireInfo, pImageIndex);
+        return callPPPI(device.address(), pAcquireInfo, pImageIndex, __functionAddress);
     }
 
     /**
@@ -581,7 +581,7 @@ public class KHRDeviceGroup {
             check(__functionAddress);
             check(pPeerMemoryFeatures, 1);
         }
-        callPPV(__functionAddress, device.address(), heapIndex, localDeviceIndex, remoteDeviceIndex, pPeerMemoryFeatures);
+        callPPV(device.address(), heapIndex, localDeviceIndex, remoteDeviceIndex, pPeerMemoryFeatures, __functionAddress);
     }
 
     /** Array version of: {@link #vkGetDeviceGroupSurfacePresentModesKHR GetDeviceGroupSurfacePresentModesKHR} */
@@ -592,7 +592,7 @@ public class KHRDeviceGroup {
             check(__functionAddress);
             check(pModes, 1);
         }
-        return callPJPI(__functionAddress, device.address(), surface, pModes);
+        return callPJPI(device.address(), surface, pModes, __functionAddress);
     }
 
     /** Array version of: {@link #vkGetPhysicalDevicePresentRectanglesKHR GetPhysicalDevicePresentRectanglesKHR} */
@@ -604,7 +604,7 @@ public class KHRDeviceGroup {
             check(pRectCount, 1);
             checkSafe(pRects, pRectCount[0]);
         }
-        return callPJPPI(__functionAddress, physicalDevice.address(), surface, pRectCount, memAddressSafe(pRects));
+        return callPJPPI(physicalDevice.address(), surface, pRectCount, memAddressSafe(pRects), __functionAddress);
     }
 
     /** Array version of: {@link #vkAcquireNextImage2KHR AcquireNextImage2KHR} */
@@ -615,7 +615,7 @@ public class KHRDeviceGroup {
             check(__functionAddress);
             check(pImageIndex, 1);
         }
-        return callPPPI(__functionAddress, device.address(), pAcquireInfo.address(), pImageIndex);
+        return callPPPI(device.address(), pAcquireInfo.address(), pImageIndex, __functionAddress);
     }
 
 }

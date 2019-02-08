@@ -39,7 +39,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(__functionAddress, eOrigin);
+        callV(eOrigin, __functionAddress);
     }
 
     // --- [ VRCompositor_GetTrackingSpace ] ---
@@ -62,7 +62,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pRenderPoseArray, unRenderPoseArrayCount, pGamePoseArray, unGamePoseArrayCount);
+        return callPPI(pRenderPoseArray, unRenderPoseArrayCount, pGamePoseArray, unGamePoseArrayCount, __functionAddress);
     }
 
     /**
@@ -83,7 +83,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pRenderPoseArray, unRenderPoseArrayCount, pGamePoseArray, unGamePoseArrayCount);
+        return callPPI(pRenderPoseArray, unRenderPoseArrayCount, pGamePoseArray, unGamePoseArrayCount, __functionAddress);
     }
 
     /** Get the last set of poses returned by {@link #VRCompositor_WaitGetPoses WaitGetPoses}. */
@@ -100,7 +100,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, unDeviceIndex, pOutputPose, pOutputGamePose);
+        return callPPI(unDeviceIndex, pOutputPose, pOutputGamePose, __functionAddress);
     }
 
     /**
@@ -125,7 +125,7 @@ public class VRCompositor {
             check(__functionAddress);
             Texture.validate(pTexture);
         }
-        return callPPI(__functionAddress, eEye, pTexture, pBounds, nSubmitFlags);
+        return callPPI(eEye, pTexture, pBounds, nSubmitFlags, __functionAddress);
     }
 
     /**
@@ -194,7 +194,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, pTiming, unFramesAgo);
+        return callPZ(pTiming, unFramesAgo, __functionAddress);
     }
 
     /**
@@ -215,7 +215,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pTiming, nFrames);
+        return callPI(pTiming, nFrames, __functionAddress);
     }
 
     /**
@@ -250,7 +250,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pStats, nStatsSizeInBytes);
+        callPV(pStats, nStatsSizeInBytes, __functionAddress);
     }
 
     /**
@@ -280,13 +280,13 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(__functionAddress, fSeconds, fRed, fGreen, fBlue, fAlpha, bBackground);
+        callV(fSeconds, fRed, fGreen, fBlue, fAlpha, bBackground, __functionAddress);
     }
 
     // --- [ VRCompositor_GetCurrentFadeColor ] ---
 
     /** Unsafe version of: {@link #VRCompositor_GetCurrentFadeColor GetCurrentFadeColor} */
-    public static native void nVRCompositor_GetCurrentFadeColor(long __functionAddress, boolean bBackground, long __result);
+    public static native void nVRCompositor_GetCurrentFadeColor(boolean bBackground, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #VRCompositor_GetCurrentFadeColor GetCurrentFadeColor} */
     public static void nVRCompositor_GetCurrentFadeColor(boolean bBackground, long __result) {
@@ -294,7 +294,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nVRCompositor_GetCurrentFadeColor(__functionAddress, bBackground, __result);
+        nVRCompositor_GetCurrentFadeColor(bBackground, __functionAddress, __result);
     }
 
     /** Get current fade color value. */
@@ -312,7 +312,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(__functionAddress, fSeconds, bFadeIn);
+        callV(fSeconds, bFadeIn, __functionAddress);
     }
 
     // --- [ VRCompositor_GetCurrentGridAlpha ] ---
@@ -335,7 +335,7 @@ public class VRCompositor {
             check(__functionAddress);
             Texture.validate(pTextures, unTextureCount);
         }
-        return callPI(__functionAddress, pTextures, unTextureCount);
+        return callPI(pTextures, unTextureCount, __functionAddress);
     }
 
     /**
@@ -513,7 +513,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(__functionAddress, bOverride);
+        callV(bOverride, __functionAddress);
     }
 
     // --- [ VRCompositor_ForceReconnectProcess ] ---
@@ -535,7 +535,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(__functionAddress, bSuspend);
+        callV(bSuspend, __functionAddress);
     }
 
     // --- [ VRCompositor_GetMirrorTextureD3D11 ] ---
@@ -547,7 +547,7 @@ public class VRCompositor {
             check(__functionAddress);
             check(pD3D11DeviceOrResource);
         }
-        return callPPI(__functionAddress, eEye, pD3D11DeviceOrResource, ppD3D11ShaderResourceView);
+        return callPPI(eEye, pD3D11DeviceOrResource, ppD3D11ShaderResourceView, __functionAddress);
     }
 
     /**
@@ -572,7 +572,7 @@ public class VRCompositor {
             check(__functionAddress);
             check(pD3D11ShaderResourceView);
         }
-        callPV(__functionAddress, pD3D11ShaderResourceView);
+        callPV(pD3D11ShaderResourceView, __functionAddress);
     }
 
     // --- [ VRCompositor_GetMirrorTextureGL ] ---
@@ -583,7 +583,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, eEye, pglTextureId, pglSharedTextureHandle);
+        return callPPI(eEye, pglTextureId, pglSharedTextureHandle, __functionAddress);
     }
 
     /** Access to mirror textures from OpenGL. */
@@ -605,7 +605,7 @@ public class VRCompositor {
             check(__functionAddress);
             check(glSharedTextureHandle);
         }
-        return callPZ(__functionAddress, glTextureId, glSharedTextureHandle);
+        return callPZ(glTextureId, glSharedTextureHandle, __functionAddress);
     }
 
     // --- [ VRCompositor_LockGLSharedTextureForAccess ] ---
@@ -616,7 +616,7 @@ public class VRCompositor {
             check(__functionAddress);
             check(glSharedTextureHandle);
         }
-        callPV(__functionAddress, glSharedTextureHandle);
+        callPV(glSharedTextureHandle, __functionAddress);
     }
 
     // --- [ VRCompositor_UnlockGLSharedTextureForAccess ] ---
@@ -627,7 +627,7 @@ public class VRCompositor {
             check(__functionAddress);
             check(glSharedTextureHandle);
         }
-        callPV(__functionAddress, glSharedTextureHandle);
+        callPV(glSharedTextureHandle, __functionAddress);
     }
 
     // --- [ VRCompositor_GetVulkanInstanceExtensionsRequired ] ---
@@ -638,7 +638,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchValue, unBufferSize);
+        return callPI(pchValue, unBufferSize, __functionAddress);
     }
 
     /**
@@ -675,7 +675,7 @@ public class VRCompositor {
             check(__functionAddress);
             check(pPhysicalDevice);
         }
-        return callPPI(__functionAddress, pPhysicalDevice, pchValue, unBufferSize);
+        return callPPI(pPhysicalDevice, pchValue, unBufferSize, __functionAddress);
     }
 
     /**
@@ -733,7 +733,7 @@ public class VRCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(__functionAddress, eTimingMode);
+        callV(eTimingMode, __functionAddress);
     }
 
     // --- [ VRCompositor_SubmitExplicitTimingData ] ---

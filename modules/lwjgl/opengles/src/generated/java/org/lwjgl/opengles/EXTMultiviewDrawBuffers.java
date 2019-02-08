@@ -106,7 +106,7 @@ public class EXTMultiviewDrawBuffers {
             check(__functionAddress);
             check(indices, location.length);
         }
-        callPPV(__functionAddress, location.length, location, indices);
+        callPPV(location.length, location, indices, __functionAddress);
     }
 
     /** Array version of: {@link #glGetIntegeri_vEXT GetIntegeri_vEXT} */
@@ -116,7 +116,7 @@ public class EXTMultiviewDrawBuffers {
             check(__functionAddress);
             check(data, 1);
         }
-        callPV(__functionAddress, target, index, data);
+        callPV(target, index, data, __functionAddress);
     }
 
 }

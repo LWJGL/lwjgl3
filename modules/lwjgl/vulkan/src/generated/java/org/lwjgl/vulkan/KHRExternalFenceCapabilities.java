@@ -132,7 +132,7 @@ public class KHRExternalFenceCapabilities {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, physicalDevice.address(), pExternalFenceInfo, pExternalFenceProperties);
+        callPPPV(physicalDevice.address(), pExternalFenceInfo, pExternalFenceProperties, __functionAddress);
     }
 
     /**

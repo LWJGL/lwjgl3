@@ -191,7 +191,7 @@ public class ARBMatrixPalette {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, indices.length, indices);
+        callPV(indices.length, indices, __functionAddress);
     }
 
     /** Array version of: {@link #glMatrixIndexusvARB MatrixIndexusvARB} */
@@ -200,7 +200,7 @@ public class ARBMatrixPalette {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, indices.length, indices);
+        callPV(indices.length, indices, __functionAddress);
     }
 
 }

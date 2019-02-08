@@ -305,7 +305,7 @@ public class KHRSamplerYcbcrConversion {
             check(__functionAddress);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo, pAllocator, pYcbcrConversion);
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pYcbcrConversion, __functionAddress);
     }
 
     /**
@@ -333,7 +333,7 @@ public class KHRSamplerYcbcrConversion {
             check(__functionAddress);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        callPJPV(__functionAddress, device.address(), ycbcrConversion, pAllocator);
+        callPJPV(device.address(), ycbcrConversion, pAllocator, __functionAddress);
     }
 
     /**
@@ -356,7 +356,7 @@ public class KHRSamplerYcbcrConversion {
             check(pYcbcrConversion, 1);
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pYcbcrConversion);
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pYcbcrConversion, __functionAddress);
     }
 
 }

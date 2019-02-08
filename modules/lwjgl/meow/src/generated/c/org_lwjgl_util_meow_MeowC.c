@@ -11,10 +11,13 @@
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_meow_MeowC_nMeowHash_1C__JJJJ(JNIEnv *__env, jclass clazz, jlong Seed, jlong TotalLengthInBytes, jlong SourceInitAddress, jlong __result) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_meow_MeowC_nMeowHash_1C__JJJJ(jlong Seed, jlong TotalLengthInBytes, jlong SourceInitAddress, jlong __result) {
     void *SourceInit = (void *)(intptr_t)SourceInitAddress;
-    UNUSED_PARAMS(__env, clazz)
     *((meow_hash*)(intptr_t)__result) = MeowHash_C((meow_u64)Seed, (meow_u64)TotalLengthInBytes, SourceInit);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meow_MeowC_nMeowHash_1C__JJJJ(JNIEnv *__env, jclass clazz, jlong Seed, jlong TotalLengthInBytes, jlong SourceInitAddress, jlong __result) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_util_meow_MeowC_nMeowHash_1C__JJJJ(Seed, TotalLengthInBytes, SourceInitAddress, __result);
 }
 
 EXTERN_C_EXIT

@@ -42,7 +42,7 @@ public class KHRWaitSync {
             check(dpy);
             check(sync);
         }
-        return callPPI(__functionAddress, dpy, sync, flags);
+        return callPPI(dpy, sync, flags, __functionAddress);
     }
 
 }

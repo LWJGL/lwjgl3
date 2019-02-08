@@ -185,12 +185,12 @@ public class ClangDocumentation {
     // --- [ clang_Cursor_getParsedComment ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getParsedComment Cursor_getParsedComment} */
-    public static native void nclang_Cursor_getParsedComment(long __functionAddress, long C, long __result);
+    public static native void nclang_Cursor_getParsedComment(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Cursor_getParsedComment Cursor_getParsedComment} */
     public static void nclang_Cursor_getParsedComment(long C, long __result) {
         long __functionAddress = Functions.Cursor_getParsedComment;
-        nclang_Cursor_getParsedComment(__functionAddress, C, __result);
+        nclang_Cursor_getParsedComment(C, __functionAddress, __result);
     }
 
     /** Given a cursor that represents a documentable entity (e.g., declaration), return the associated parsed comment as a {@link #CXComment_FullComment Comment_FullComment} AST node. */
@@ -204,7 +204,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_Comment_getKind Comment_getKind} */
     public static int nclang_Comment_getKind(long Comment) {
         long __functionAddress = Functions.Comment_getKind;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -222,7 +222,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_Comment_getNumChildren Comment_getNumChildren} */
     public static int nclang_Comment_getNumChildren(long Comment) {
         long __functionAddress = Functions.Comment_getNumChildren;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -238,12 +238,12 @@ public class ClangDocumentation {
     // --- [ clang_Comment_getChild ] ---
 
     /** Unsafe version of: {@link #clang_Comment_getChild Comment_getChild} */
-    public static native void nclang_Comment_getChild(long __functionAddress, long Comment, int ChildIdx, long __result);
+    public static native void nclang_Comment_getChild(long Comment, int ChildIdx, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Comment_getChild Comment_getChild} */
     public static void nclang_Comment_getChild(long Comment, int ChildIdx, long __result) {
         long __functionAddress = Functions.Comment_getChild;
-        nclang_Comment_getChild(__functionAddress, Comment, ChildIdx, __result);
+        nclang_Comment_getChild(Comment, ChildIdx, __functionAddress, __result);
     }
 
     /**
@@ -261,7 +261,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_Comment_isWhitespace Comment_isWhitespace} */
     public static int nclang_Comment_isWhitespace(long Comment) {
         long __functionAddress = Functions.Comment_isWhitespace;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -281,7 +281,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_InlineContentComment_hasTrailingNewline InlineContentComment_hasTrailingNewline} */
     public static int nclang_InlineContentComment_hasTrailingNewline(long Comment) {
         long __functionAddress = Functions.InlineContentComment_hasTrailingNewline;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /** @return non-zero if {@code Comment} is inline content and has a newline immediately following it in the comment text. Newlines between paragraphs do not count. */
@@ -293,12 +293,12 @@ public class ClangDocumentation {
     // --- [ clang_TextComment_getText ] ---
 
     /** Unsafe version of: {@link #clang_TextComment_getText TextComment_getText} */
-    public static native void nclang_TextComment_getText(long __functionAddress, long Comment, long __result);
+    public static native void nclang_TextComment_getText(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_TextComment_getText TextComment_getText} */
     public static void nclang_TextComment_getText(long Comment, long __result) {
         long __functionAddress = Functions.TextComment_getText;
-        nclang_TextComment_getText(__functionAddress, Comment, __result);
+        nclang_TextComment_getText(Comment, __functionAddress, __result);
     }
 
     /**
@@ -313,12 +313,12 @@ public class ClangDocumentation {
     // --- [ clang_InlineCommandComment_getCommandName ] ---
 
     /** Unsafe version of: {@link #clang_InlineCommandComment_getCommandName InlineCommandComment_getCommandName} */
-    public static native void nclang_InlineCommandComment_getCommandName(long __functionAddress, long Comment, long __result);
+    public static native void nclang_InlineCommandComment_getCommandName(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_InlineCommandComment_getCommandName InlineCommandComment_getCommandName} */
     public static void nclang_InlineCommandComment_getCommandName(long Comment, long __result) {
         long __functionAddress = Functions.InlineCommandComment_getCommandName;
-        nclang_InlineCommandComment_getCommandName(__functionAddress, Comment, __result);
+        nclang_InlineCommandComment_getCommandName(Comment, __functionAddress, __result);
     }
 
     /**
@@ -335,7 +335,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_InlineCommandComment_getRenderKind InlineCommandComment_getRenderKind} */
     public static int nclang_InlineCommandComment_getRenderKind(long Comment) {
         long __functionAddress = Functions.InlineCommandComment_getRenderKind;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -353,7 +353,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_InlineCommandComment_getNumArgs InlineCommandComment_getNumArgs} */
     public static int nclang_InlineCommandComment_getNumArgs(long Comment) {
         long __functionAddress = Functions.InlineCommandComment_getNumArgs;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -369,12 +369,12 @@ public class ClangDocumentation {
     // --- [ clang_InlineCommandComment_getArgText ] ---
 
     /** Unsafe version of: {@link #clang_InlineCommandComment_getArgText InlineCommandComment_getArgText} */
-    public static native void nclang_InlineCommandComment_getArgText(long __functionAddress, long Comment, int ArgIdx, long __result);
+    public static native void nclang_InlineCommandComment_getArgText(long Comment, int ArgIdx, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_InlineCommandComment_getArgText InlineCommandComment_getArgText} */
     public static void nclang_InlineCommandComment_getArgText(long Comment, int ArgIdx, long __result) {
         long __functionAddress = Functions.InlineCommandComment_getArgText;
-        nclang_InlineCommandComment_getArgText(__functionAddress, Comment, ArgIdx, __result);
+        nclang_InlineCommandComment_getArgText(Comment, ArgIdx, __functionAddress, __result);
     }
 
     /**
@@ -390,12 +390,12 @@ public class ClangDocumentation {
     // --- [ clang_HTMLTagComment_getTagName ] ---
 
     /** Unsafe version of: {@link #clang_HTMLTagComment_getTagName HTMLTagComment_getTagName} */
-    public static native void nclang_HTMLTagComment_getTagName(long __functionAddress, long Comment, long __result);
+    public static native void nclang_HTMLTagComment_getTagName(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_HTMLTagComment_getTagName HTMLTagComment_getTagName} */
     public static void nclang_HTMLTagComment_getTagName(long Comment, long __result) {
         long __functionAddress = Functions.HTMLTagComment_getTagName;
-        nclang_HTMLTagComment_getTagName(__functionAddress, Comment, __result);
+        nclang_HTMLTagComment_getTagName(Comment, __functionAddress, __result);
     }
 
     /**
@@ -412,7 +412,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_HTMLStartTagComment_isSelfClosing HTMLStartTagComment_isSelfClosing} */
     public static int nclang_HTMLStartTagComment_isSelfClosing(long Comment) {
         long __functionAddress = Functions.HTMLStartTagComment_isSelfClosing;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -430,7 +430,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_HTMLStartTag_getNumAttrs HTMLStartTag_getNumAttrs} */
     public static int nclang_HTMLStartTag_getNumAttrs(long Comment) {
         long __functionAddress = Functions.HTMLStartTag_getNumAttrs;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -446,12 +446,12 @@ public class ClangDocumentation {
     // --- [ clang_HTMLStartTag_getAttrName ] ---
 
     /** Unsafe version of: {@link #clang_HTMLStartTag_getAttrName HTMLStartTag_getAttrName} */
-    public static native void nclang_HTMLStartTag_getAttrName(long __functionAddress, long Comment, int AttrIdx, long __result);
+    public static native void nclang_HTMLStartTag_getAttrName(long Comment, int AttrIdx, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_HTMLStartTag_getAttrName HTMLStartTag_getAttrName} */
     public static void nclang_HTMLStartTag_getAttrName(long Comment, int AttrIdx, long __result) {
         long __functionAddress = Functions.HTMLStartTag_getAttrName;
-        nclang_HTMLStartTag_getAttrName(__functionAddress, Comment, AttrIdx, __result);
+        nclang_HTMLStartTag_getAttrName(Comment, AttrIdx, __functionAddress, __result);
     }
 
     /**
@@ -467,12 +467,12 @@ public class ClangDocumentation {
     // --- [ clang_HTMLStartTag_getAttrValue ] ---
 
     /** Unsafe version of: {@link #clang_HTMLStartTag_getAttrValue HTMLStartTag_getAttrValue} */
-    public static native void nclang_HTMLStartTag_getAttrValue(long __functionAddress, long Comment, int AttrIdx, long __result);
+    public static native void nclang_HTMLStartTag_getAttrValue(long Comment, int AttrIdx, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_HTMLStartTag_getAttrValue HTMLStartTag_getAttrValue} */
     public static void nclang_HTMLStartTag_getAttrValue(long Comment, int AttrIdx, long __result) {
         long __functionAddress = Functions.HTMLStartTag_getAttrValue;
-        nclang_HTMLStartTag_getAttrValue(__functionAddress, Comment, AttrIdx, __result);
+        nclang_HTMLStartTag_getAttrValue(Comment, AttrIdx, __functionAddress, __result);
     }
 
     /**
@@ -488,12 +488,12 @@ public class ClangDocumentation {
     // --- [ clang_BlockCommandComment_getCommandName ] ---
 
     /** Unsafe version of: {@link #clang_BlockCommandComment_getCommandName BlockCommandComment_getCommandName} */
-    public static native void nclang_BlockCommandComment_getCommandName(long __functionAddress, long Comment, long __result);
+    public static native void nclang_BlockCommandComment_getCommandName(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_BlockCommandComment_getCommandName BlockCommandComment_getCommandName} */
     public static void nclang_BlockCommandComment_getCommandName(long Comment, long __result) {
         long __functionAddress = Functions.BlockCommandComment_getCommandName;
-        nclang_BlockCommandComment_getCommandName(__functionAddress, Comment, __result);
+        nclang_BlockCommandComment_getCommandName(Comment, __functionAddress, __result);
     }
 
     /**
@@ -510,7 +510,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_BlockCommandComment_getNumArgs BlockCommandComment_getNumArgs} */
     public static int nclang_BlockCommandComment_getNumArgs(long Comment) {
         long __functionAddress = Functions.BlockCommandComment_getNumArgs;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -526,12 +526,12 @@ public class ClangDocumentation {
     // --- [ clang_BlockCommandComment_getArgText ] ---
 
     /** Unsafe version of: {@link #clang_BlockCommandComment_getArgText BlockCommandComment_getArgText} */
-    public static native void nclang_BlockCommandComment_getArgText(long __functionAddress, long Comment, int ArgIdx, long __result);
+    public static native void nclang_BlockCommandComment_getArgText(long Comment, int ArgIdx, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_BlockCommandComment_getArgText BlockCommandComment_getArgText} */
     public static void nclang_BlockCommandComment_getArgText(long Comment, int ArgIdx, long __result) {
         long __functionAddress = Functions.BlockCommandComment_getArgText;
-        nclang_BlockCommandComment_getArgText(__functionAddress, Comment, ArgIdx, __result);
+        nclang_BlockCommandComment_getArgText(Comment, ArgIdx, __functionAddress, __result);
     }
 
     /**
@@ -547,12 +547,12 @@ public class ClangDocumentation {
     // --- [ clang_BlockCommandComment_getParagraph ] ---
 
     /** Unsafe version of: {@link #clang_BlockCommandComment_getParagraph BlockCommandComment_getParagraph} */
-    public static native void nclang_BlockCommandComment_getParagraph(long __functionAddress, long Comment, long __result);
+    public static native void nclang_BlockCommandComment_getParagraph(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_BlockCommandComment_getParagraph BlockCommandComment_getParagraph} */
     public static void nclang_BlockCommandComment_getParagraph(long Comment, long __result) {
         long __functionAddress = Functions.BlockCommandComment_getParagraph;
-        nclang_BlockCommandComment_getParagraph(__functionAddress, Comment, __result);
+        nclang_BlockCommandComment_getParagraph(Comment, __functionAddress, __result);
     }
 
     /**
@@ -567,12 +567,12 @@ public class ClangDocumentation {
     // --- [ clang_ParamCommandComment_getParamName ] ---
 
     /** Unsafe version of: {@link #clang_ParamCommandComment_getParamName ParamCommandComment_getParamName} */
-    public static native void nclang_ParamCommandComment_getParamName(long __functionAddress, long Comment, long __result);
+    public static native void nclang_ParamCommandComment_getParamName(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_ParamCommandComment_getParamName ParamCommandComment_getParamName} */
     public static void nclang_ParamCommandComment_getParamName(long Comment, long __result) {
         long __functionAddress = Functions.ParamCommandComment_getParamName;
-        nclang_ParamCommandComment_getParamName(__functionAddress, Comment, __result);
+        nclang_ParamCommandComment_getParamName(Comment, __functionAddress, __result);
     }
 
     /**
@@ -589,7 +589,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_ParamCommandComment_isParamIndexValid ParamCommandComment_isParamIndexValid} */
     public static int nclang_ParamCommandComment_isParamIndexValid(long Comment) {
         long __functionAddress = Functions.ParamCommandComment_isParamIndexValid;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -608,7 +608,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_ParamCommandComment_getParamIndex ParamCommandComment_getParamIndex} */
     public static int nclang_ParamCommandComment_getParamIndex(long Comment) {
         long __functionAddress = Functions.ParamCommandComment_getParamIndex;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -626,7 +626,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_ParamCommandComment_isDirectionExplicit ParamCommandComment_isDirectionExplicit} */
     public static int nclang_ParamCommandComment_isDirectionExplicit(long Comment) {
         long __functionAddress = Functions.ParamCommandComment_isDirectionExplicit;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -644,7 +644,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_ParamCommandComment_getDirection ParamCommandComment_getDirection} */
     public static int nclang_ParamCommandComment_getDirection(long Comment) {
         long __functionAddress = Functions.ParamCommandComment_getDirection;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -660,12 +660,12 @@ public class ClangDocumentation {
     // --- [ clang_TParamCommandComment_getParamName ] ---
 
     /** Unsafe version of: {@link #clang_TParamCommandComment_getParamName TParamCommandComment_getParamName} */
-    public static native void nclang_TParamCommandComment_getParamName(long __functionAddress, long Comment, long __result);
+    public static native void nclang_TParamCommandComment_getParamName(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_TParamCommandComment_getParamName TParamCommandComment_getParamName} */
     public static void nclang_TParamCommandComment_getParamName(long Comment, long __result) {
         long __functionAddress = Functions.TParamCommandComment_getParamName;
-        nclang_TParamCommandComment_getParamName(__functionAddress, Comment, __result);
+        nclang_TParamCommandComment_getParamName(Comment, __functionAddress, __result);
     }
 
     /**
@@ -682,7 +682,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_TParamCommandComment_isParamPositionValid TParamCommandComment_isParamPositionValid} */
     public static int nclang_TParamCommandComment_isParamPositionValid(long Comment) {
         long __functionAddress = Functions.TParamCommandComment_isParamPositionValid;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -701,7 +701,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_TParamCommandComment_getDepth TParamCommandComment_getDepth} */
     public static int nclang_TParamCommandComment_getDepth(long Comment) {
         long __functionAddress = Functions.TParamCommandComment_getDepth;
-        return invokePI(__functionAddress, Comment);
+        return invokePI(Comment, __functionAddress);
     }
 
     /**
@@ -727,7 +727,7 @@ public class ClangDocumentation {
     /** Unsafe version of: {@link #clang_TParamCommandComment_getIndex TParamCommandComment_getIndex} */
     public static int nclang_TParamCommandComment_getIndex(long Comment, int Depth) {
         long __functionAddress = Functions.TParamCommandComment_getIndex;
-        return invokePI(__functionAddress, Comment, Depth);
+        return invokePI(Comment, Depth, __functionAddress);
     }
 
     /**
@@ -753,12 +753,12 @@ public class ClangDocumentation {
     // --- [ clang_VerbatimBlockLineComment_getText ] ---
 
     /** Unsafe version of: {@link #clang_VerbatimBlockLineComment_getText VerbatimBlockLineComment_getText} */
-    public static native void nclang_VerbatimBlockLineComment_getText(long __functionAddress, long Comment, long __result);
+    public static native void nclang_VerbatimBlockLineComment_getText(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_VerbatimBlockLineComment_getText VerbatimBlockLineComment_getText} */
     public static void nclang_VerbatimBlockLineComment_getText(long Comment, long __result) {
         long __functionAddress = Functions.VerbatimBlockLineComment_getText;
-        nclang_VerbatimBlockLineComment_getText(__functionAddress, Comment, __result);
+        nclang_VerbatimBlockLineComment_getText(Comment, __functionAddress, __result);
     }
 
     /**
@@ -773,12 +773,12 @@ public class ClangDocumentation {
     // --- [ clang_VerbatimLineComment_getText ] ---
 
     /** Unsafe version of: {@link #clang_VerbatimLineComment_getText VerbatimLineComment_getText} */
-    public static native void nclang_VerbatimLineComment_getText(long __functionAddress, long Comment, long __result);
+    public static native void nclang_VerbatimLineComment_getText(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_VerbatimLineComment_getText VerbatimLineComment_getText} */
     public static void nclang_VerbatimLineComment_getText(long Comment, long __result) {
         long __functionAddress = Functions.VerbatimLineComment_getText;
-        nclang_VerbatimLineComment_getText(__functionAddress, Comment, __result);
+        nclang_VerbatimLineComment_getText(Comment, __functionAddress, __result);
     }
 
     /**
@@ -793,12 +793,12 @@ public class ClangDocumentation {
     // --- [ clang_HTMLTagComment_getAsString ] ---
 
     /** Unsafe version of: {@link #clang_HTMLTagComment_getAsString HTMLTagComment_getAsString} */
-    public static native void nclang_HTMLTagComment_getAsString(long __functionAddress, long Comment, long __result);
+    public static native void nclang_HTMLTagComment_getAsString(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_HTMLTagComment_getAsString HTMLTagComment_getAsString} */
     public static void nclang_HTMLTagComment_getAsString(long Comment, long __result) {
         long __functionAddress = Functions.HTMLTagComment_getAsString;
-        nclang_HTMLTagComment_getAsString(__functionAddress, Comment, __result);
+        nclang_HTMLTagComment_getAsString(Comment, __functionAddress, __result);
     }
 
     /**
@@ -815,12 +815,12 @@ public class ClangDocumentation {
     // --- [ clang_FullComment_getAsHTML ] ---
 
     /** Unsafe version of: {@link #clang_FullComment_getAsHTML FullComment_getAsHTML} */
-    public static native void nclang_FullComment_getAsHTML(long __functionAddress, long Comment, long __result);
+    public static native void nclang_FullComment_getAsHTML(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_FullComment_getAsHTML FullComment_getAsHTML} */
     public static void nclang_FullComment_getAsHTML(long Comment, long __result) {
         long __functionAddress = Functions.FullComment_getAsHTML;
-        nclang_FullComment_getAsHTML(__functionAddress, Comment, __result);
+        nclang_FullComment_getAsHTML(Comment, __functionAddress, __result);
     }
 
     /**
@@ -864,12 +864,12 @@ public class ClangDocumentation {
     // --- [ clang_FullComment_getAsXML ] ---
 
     /** Unsafe version of: {@link #clang_FullComment_getAsXML FullComment_getAsXML} */
-    public static native void nclang_FullComment_getAsXML(long __functionAddress, long Comment, long __result);
+    public static native void nclang_FullComment_getAsXML(long Comment, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_FullComment_getAsXML FullComment_getAsXML} */
     public static void nclang_FullComment_getAsXML(long Comment, long __result) {
         long __functionAddress = Functions.FullComment_getAsXML;
-        nclang_FullComment_getAsXML(__functionAddress, Comment, __result);
+        nclang_FullComment_getAsXML(Comment, __functionAddress, __result);
     }
 
     /**

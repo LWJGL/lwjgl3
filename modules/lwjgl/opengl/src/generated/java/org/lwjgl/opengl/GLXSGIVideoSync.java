@@ -38,7 +38,7 @@ public class GLXSGIVideoSync {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, count);
+        return callPI(count, __functionAddress);
     }
 
     /**
@@ -62,7 +62,7 @@ public class GLXSGIVideoSync {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, divisor, remainder, count);
+        return callPI(divisor, remainder, count, __functionAddress);
     }
 
     /**
@@ -94,7 +94,7 @@ public class GLXSGIVideoSync {
             check(__functionAddress);
             check(count, 1);
         }
-        return callPI(__functionAddress, count);
+        return callPI(count, __functionAddress);
     }
 
     /** Array version of: {@link #glXWaitVideoSyncSGI WaitVideoSyncSGI} */
@@ -105,7 +105,7 @@ public class GLXSGIVideoSync {
             check(__functionAddress);
             check(count, 1);
         }
-        return callPI(__functionAddress, divisor, remainder, count);
+        return callPI(divisor, remainder, count, __functionAddress);
     }
 
 }

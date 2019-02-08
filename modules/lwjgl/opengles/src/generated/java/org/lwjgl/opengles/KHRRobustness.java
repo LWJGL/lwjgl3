@@ -329,7 +329,7 @@ public class KHRRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, pixels.length << 1, pixels);
+        callPV(x, y, width, height, format, type, pixels.length << 1, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glReadnPixelsKHR ReadnPixelsKHR} */
@@ -338,7 +338,7 @@ public class KHRRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, pixels.length << 2, pixels);
+        callPV(x, y, width, height, format, type, pixels.length << 2, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glReadnPixelsKHR ReadnPixelsKHR} */
@@ -347,7 +347,7 @@ public class KHRRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, pixels.length << 2, pixels);
+        callPV(x, y, width, height, format, type, pixels.length << 2, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnUniformfvKHR GetnUniformfvKHR} */
@@ -356,7 +356,7 @@ public class KHRRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnUniformivKHR GetnUniformivKHR} */
@@ -365,7 +365,7 @@ public class KHRRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetnUniformuivKHR GetnUniformuivKHR} */
@@ -374,7 +374,7 @@ public class KHRRobustness {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
 }

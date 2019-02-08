@@ -56,13 +56,13 @@ public class VkDevice extends DispatchableHandleDevice {
         try (MemoryStack stack = stackPush()) {
             if (apiVersion == 0) {
                 long GetPhysicalDeviceProperties = callPPP(
-                    VK.getGlobalCommands().vkGetInstanceProcAddr,
                     physicalDevice.getInstance().address(),
-                    memAddress(stack.ASCII("vkGetPhysicalDeviceProperties"))
+                    memAddress(stack.ASCII("vkGetPhysicalDeviceProperties")),
+                    VK.getGlobalCommands().vkGetInstanceProcAddr
                 );
 
                 VkPhysicalDeviceProperties props = VkPhysicalDeviceProperties.callocStack(stack);
-                callPPV(GetPhysicalDeviceProperties, physicalDevice.address(), props.address());
+                callPPV(physicalDevice.address(), props.address(), GetPhysicalDeviceProperties);
                 apiVersion = props.apiVersion();
                 if (apiVersion == 0) { // vkGetPhysicalDeviceProperties failed?
                     apiVersion = physicalDevice.getInstance().getCapabilities().apiVersion;
@@ -70,14 +70,14 @@ public class VkDevice extends DispatchableHandleDevice {
             }
 
             GetDeviceProcAddr = callPPP(
-                VK.getGlobalCommands().vkGetInstanceProcAddr,
                 physicalDevice.getInstance().address(),
-                memAddress(stack.ASCII("vkGetDeviceProcAddr"))
+                memAddress(stack.ASCII("vkGetDeviceProcAddr")),
+                VK.getGlobalCommands().vkGetInstanceProcAddr
             );
         }
 
         return new VKCapabilitiesDevice(functionName -> {
-            long address = callPPP(GetDeviceProcAddr, handle, memAddress(functionName));
+            long address = callPPP(handle, memAddress(functionName), GetDeviceProcAddr);
             if (address == NULL && Checks.DEBUG_FUNCTIONS) {
                 apiLog("Failed to locate address for VK device function " + memASCII(functionName));
             }

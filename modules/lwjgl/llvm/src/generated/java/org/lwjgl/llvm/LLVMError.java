@@ -48,7 +48,7 @@ public class LLVMError {
         if (CHECKS) {
             check(Err);
         }
-        return invokePP(__functionAddress, Err);
+        return invokePP(Err, __functionAddress);
     }
 
     // --- [ LLVMConsumeError ] ---
@@ -64,7 +64,7 @@ public class LLVMError {
         if (CHECKS) {
             check(Err);
         }
-        invokePV(__functionAddress, Err);
+        invokePV(Err, __functionAddress);
     }
 
     // --- [ LLVMGetErrorMessage ] ---
@@ -75,7 +75,7 @@ public class LLVMError {
         if (CHECKS) {
             check(Err);
         }
-        return invokePP(__functionAddress, Err);
+        return invokePP(Err, __functionAddress);
     }
 
     /**
@@ -96,7 +96,7 @@ public class LLVMError {
     /** Unsafe version of: {@link #LLVMDisposeErrorMessage DisposeErrorMessage} */
     public static void nLLVMDisposeErrorMessage(long ErrMsg) {
         long __functionAddress = Functions.DisposeErrorMessage;
-        invokePV(__functionAddress, ErrMsg);
+        invokePV(ErrMsg, __functionAddress);
     }
 
     /** Dispose of the given error message. */

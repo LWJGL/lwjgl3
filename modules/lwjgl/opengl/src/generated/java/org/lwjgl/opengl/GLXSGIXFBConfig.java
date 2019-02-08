@@ -87,7 +87,7 @@ public class GLXSGIXFBConfig {
             check(display);
             check(config);
         }
-        return callPPPI(__functionAddress, display, config, attribute, value);
+        return callPPPI(display, config, attribute, value, __functionAddress);
     }
 
     /**
@@ -118,7 +118,7 @@ public class GLXSGIXFBConfig {
             check(__functionAddress);
             check(display);
         }
-        return callPPPP(__functionAddress, display, screen, attrib_list, nelements);
+        return callPPPP(display, screen, attrib_list, nelements, __functionAddress);
     }
 
     /**
@@ -161,7 +161,7 @@ public class GLXSGIXFBConfig {
             check(display);
             check(config);
         }
-        return callPPPP(__functionAddress, display, config, pixmap);
+        return callPPPP(display, config, pixmap, __functionAddress);
     }
 
     // --- [ glXCreateContextWithConfigSGIX ] ---
@@ -184,7 +184,7 @@ public class GLXSGIXFBConfig {
             check(config);
             check(share_list);
         }
-        return callPPPP(__functionAddress, display, config, render_type, share_list, direct ? 1 : 0);
+        return callPPPP(display, config, render_type, share_list, direct ? 1 : 0, __functionAddress);
     }
 
     // --- [ glXGetVisualFromFBConfigSGIX ] ---
@@ -197,7 +197,7 @@ public class GLXSGIXFBConfig {
             check(display);
             check(config);
         }
-        return callPPP(__functionAddress, display, config);
+        return callPPP(display, config, __functionAddress);
     }
 
     /**
@@ -223,7 +223,7 @@ public class GLXSGIXFBConfig {
             check(display);
             XVisualInfo.validate(vis);
         }
-        return callPPP(__functionAddress, display, vis);
+        return callPPP(display, vis, __functionAddress);
     }
 
     /**
@@ -246,7 +246,7 @@ public class GLXSGIXFBConfig {
             check(config);
             check(value, 1);
         }
-        return callPPPI(__functionAddress, display, config, attribute, value);
+        return callPPPI(display, config, attribute, value, __functionAddress);
     }
 
     /** Array version of: {@link #glXChooseFBConfigSGIX ChooseFBConfigSGIX} */
@@ -262,7 +262,7 @@ public class GLXSGIXFBConfig {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         IntBuffer nelements = stack.callocInt(1);
         try {
-            long __result = callPPPP(__functionAddress, display, screen, attrib_list, memAddress(nelements));
+            long __result = callPPPP(display, screen, attrib_list, memAddress(nelements), __functionAddress);
             return memPointerBufferSafe(__result, nelements.get(0));
         } finally {
             stack.setPointer(stackPointer);

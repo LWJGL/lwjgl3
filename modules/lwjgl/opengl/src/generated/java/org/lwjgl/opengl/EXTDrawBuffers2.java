@@ -110,7 +110,7 @@ public class EXTDrawBuffers2 {
             check(__functionAddress);
             check(data, 1);
         }
-        callPV(__functionAddress, target, index, data);
+        callPV(target, index, data, __functionAddress);
     }
 
 }

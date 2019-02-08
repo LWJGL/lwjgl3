@@ -250,7 +250,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #lto_module_is_object_file module_is_object_file} */
     public static boolean nlto_module_is_object_file(long path) {
         long __functionAddress = Functions.module_is_object_file;
-        return invokePZ(__functionAddress, path);
+        return invokePZ(path, __functionAddress);
     }
 
     /** Checks if a file is a loadable object file. */
@@ -280,7 +280,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #lto_module_is_object_file_for_target module_is_object_file_for_target} */
     public static boolean nlto_module_is_object_file_for_target(long path, long target_triple_prefix) {
         long __functionAddress = Functions.module_is_object_file_for_target;
-        return invokePPZ(__functionAddress, path, target_triple_prefix);
+        return invokePPZ(path, target_triple_prefix, __functionAddress);
     }
 
     /** Checks if a file is a loadable object compiled for requested target. */
@@ -313,7 +313,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #lto_module_has_objc_category module_has_objc_category} */
     public static boolean nlto_module_has_objc_category(long mem, long length) {
         long __functionAddress = Functions.module_has_objc_category;
-        return invokePPZ(__functionAddress, mem, length);
+        return invokePPZ(mem, length, __functionAddress);
     }
 
     /** Return true if {@code Buffer} contains a bitcode file with ObjC code (category or class) in it. */
@@ -327,7 +327,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #lto_module_is_object_file_in_memory module_is_object_file_in_memory} */
     public static boolean nlto_module_is_object_file_in_memory(long mem, long length) {
         long __functionAddress = Functions.module_is_object_file_in_memory;
-        return invokePPZ(__functionAddress, mem, length);
+        return invokePPZ(mem, length, __functionAddress);
     }
 
     /** Checks if a buffer is a loadable object file. */
@@ -341,7 +341,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #lto_module_is_object_file_in_memory_for_target module_is_object_file_in_memory_for_target} */
     public static boolean nlto_module_is_object_file_in_memory_for_target(long mem, long length, long target_triple_prefix) {
         long __functionAddress = Functions.module_is_object_file_in_memory_for_target;
-        return invokePPPZ(__functionAddress, mem, length, target_triple_prefix);
+        return invokePPPZ(mem, length, target_triple_prefix, __functionAddress);
     }
 
     /** Checks if a buffer is a loadable object compiled for requested target. */
@@ -371,7 +371,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #lto_module_create module_create} */
     public static long nlto_module_create(long path) {
         long __functionAddress = Functions.module_create;
-        return invokePP(__functionAddress, path);
+        return invokePP(path, __functionAddress);
     }
 
     /** Loads an object file from disk. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
@@ -401,7 +401,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #lto_module_create_from_memory module_create_from_memory} */
     public static long nlto_module_create_from_memory(long mem, long length) {
         long __functionAddress = Functions.module_create_from_memory;
-        return invokePPP(__functionAddress, mem, length);
+        return invokePPP(mem, length, __functionAddress);
     }
 
     /** Loads an object file from memory. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
@@ -415,7 +415,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #lto_module_create_from_memory_with_path module_create_from_memory_with_path} */
     public static long nlto_module_create_from_memory_with_path(long mem, long length, long path) {
         long __functionAddress = Functions.module_create_from_memory_with_path;
-        return invokePPPP(__functionAddress, mem, length, path);
+        return invokePPPP(mem, length, path, __functionAddress);
     }
 
     /** Loads an object file from memory with an extra path argument. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
@@ -445,7 +445,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #lto_module_create_in_local_context module_create_in_local_context} */
     public static long nlto_module_create_in_local_context(long mem, long length, long path) {
         long __functionAddress = Functions.module_create_in_local_context;
-        return invokePPPP(__functionAddress, mem, length, path);
+        return invokePPPP(mem, length, path, __functionAddress);
     }
 
     /**
@@ -492,7 +492,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePPPPP(__functionAddress, mem, length, path, cg);
+        return invokePPPPP(mem, length, path, cg, __functionAddress);
     }
 
     /**
@@ -534,7 +534,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #lto_module_create_from_fd module_create_from_fd} */
     public static long nlto_module_create_from_fd(int fd, long path, long file_size) {
         long __functionAddress = Functions.module_create_from_fd;
-        return invokePPP(__functionAddress, fd, path, file_size);
+        return invokePPP(fd, path, file_size, __functionAddress);
     }
 
     /** Loads an object file from disk. The seek point of {@code fd} is not preserved. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
@@ -564,7 +564,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #lto_module_create_from_fd_at_offset module_create_from_fd_at_offset} */
     public static long nlto_module_create_from_fd_at_offset(int fd, long path, long file_size, long map_size, long offset) {
         long __functionAddress = Functions.module_create_from_fd_at_offset;
-        return invokePPPJP(__functionAddress, fd, path, file_size, map_size, offset);
+        return invokePPPJP(fd, path, file_size, map_size, offset, __functionAddress);
     }
 
     /** Loads an object file from disk. The seek point of {@code fd} is not preserved. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
@@ -597,7 +597,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(mod);
         }
-        invokePV(__functionAddress, mod);
+        invokePV(mod, __functionAddress);
     }
 
     // --- [ lto_module_get_target_triple ] ---
@@ -608,7 +608,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(mod);
         }
-        return invokePP(__functionAddress, mod);
+        return invokePP(mod, __functionAddress);
     }
 
     /** Returns triple string which the object module was compiled under. */
@@ -627,7 +627,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(mod);
         }
-        invokePPV(__functionAddress, mod, triple);
+        invokePPV(mod, triple, __functionAddress);
     }
 
     /** Sets triple string with which the object will be codegened. */
@@ -659,7 +659,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(mod);
         }
-        return invokePI(__functionAddress, mod);
+        return invokePI(mod, __functionAddress);
     }
 
     // --- [ lto_module_get_symbol_name ] ---
@@ -670,7 +670,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(mod);
         }
-        return invokePP(__functionAddress, mod, index);
+        return invokePP(mod, index, __functionAddress);
     }
 
     /** Returns the name of the ith symbol in the object module. */
@@ -690,7 +690,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(mod);
         }
-        return invokePI(__functionAddress, mod, index);
+        return invokePI(mod, index, __functionAddress);
     }
 
     // --- [ lto_module_get_linkeropts ] ---
@@ -701,7 +701,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(mod);
         }
-        return invokePP(__functionAddress, mod);
+        return invokePP(mod, __functionAddress);
     }
 
     /**
@@ -725,7 +725,7 @@ public class LLVMLTO {
             check(cg);
             check(ctxt);
         }
-        invokePPPV(__functionAddress, cg, handler, ctxt);
+        invokePPPV(cg, handler, ctxt, __functionAddress);
     }
 
     /**
@@ -771,7 +771,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePV(__functionAddress, cg);
+        invokePV(cg, __functionAddress);
     }
 
     // --- [ lto_codegen_add_module ] ---
@@ -788,7 +788,7 @@ public class LLVMLTO {
             check(cg);
             check(mod);
         }
-        return invokePPZ(__functionAddress, cg, mod);
+        return invokePPZ(cg, mod, __functionAddress);
     }
 
     // --- [ lto_codegen_set_module ] ---
@@ -804,7 +804,7 @@ public class LLVMLTO {
             check(cg);
             check(mod);
         }
-        invokePPV(__functionAddress, cg, mod);
+        invokePPV(cg, mod, __functionAddress);
     }
 
     // --- [ lto_codegen_set_debug_model ] ---
@@ -816,7 +816,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePZ(__functionAddress, cg, model);
+        return invokePZ(cg, model, __functionAddress);
     }
 
     // --- [ lto_codegen_set_pic_model ] ---
@@ -828,7 +828,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePZ(__functionAddress, cg, model);
+        return invokePZ(cg, model, __functionAddress);
     }
 
     // --- [ lto_codegen_set_cpu ] ---
@@ -839,7 +839,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPV(__functionAddress, cg, cpu);
+        invokePPV(cg, cpu, __functionAddress);
     }
 
     /** Sets the cpu to generate code for. */
@@ -870,7 +870,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPV(__functionAddress, cg, path);
+        invokePPV(cg, path, __functionAddress);
     }
 
     /** Sets the location of the assembler tool to run. If not set, libLTO will use gcc to invoke the assembler. */
@@ -901,7 +901,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPV(__functionAddress, cg, args, nargs);
+        invokePPV(cg, args, nargs, __functionAddress);
     }
 
     /** Sets extra arguments that libLTO should pass to the assembler. */
@@ -917,7 +917,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPV(__functionAddress, cg, symbol);
+        invokePPV(cg, symbol, __functionAddress);
     }
 
     /**
@@ -954,7 +954,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePPZ(__functionAddress, cg, path);
+        return invokePPZ(cg, path, __functionAddress);
     }
 
     /**
@@ -993,7 +993,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePPP(__functionAddress, cg, length);
+        return invokePPP(cg, length, __functionAddress);
     }
 
     /**
@@ -1024,7 +1024,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePPZ(__functionAddress, cg, name);
+        return invokePPZ(cg, name, __functionAddress);
     }
 
     /**
@@ -1050,7 +1050,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePZ(__functionAddress, cg);
+        return invokePZ(cg, __functionAddress);
     }
 
     // --- [ lto_codegen_compile_optimized ] ---
@@ -1061,7 +1061,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePPP(__functionAddress, cg, length);
+        return invokePPP(cg, length, __functionAddress);
     }
 
     /**
@@ -1101,7 +1101,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPV(__functionAddress, cg, options);
+        invokePPV(cg, options, __functionAddress);
     }
 
     /** Sets options to help debug codegen bugs. */
@@ -1140,7 +1140,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePV(__functionAddress, cg, ShouldInternalize);
+        invokePV(cg, ShouldInternalize, __functionAddress);
     }
 
     // --- [ lto_codegen_set_should_embed_uselists ] ---
@@ -1155,7 +1155,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePV(__functionAddress, cg, ShouldEmbedUselists);
+        invokePV(cg, ShouldEmbedUselists, __functionAddress);
     }
 
     // --- [ thinlto_create_codegen ] ---
@@ -1180,7 +1180,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePV(__functionAddress, cg);
+        invokePV(cg, __functionAddress);
     }
 
     // --- [ thinlto_codegen_add_module ] ---
@@ -1191,7 +1191,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPPV(__functionAddress, cg, identifier, data, length);
+        invokePPPV(cg, identifier, data, length, __functionAddress);
     }
 
     /**
@@ -1232,7 +1232,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePV(__functionAddress, cg);
+        invokePV(cg, __functionAddress);
     }
 
     // --- [ thinlto_module_get_num_objects ] ---
@@ -1249,13 +1249,13 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePI(__functionAddress, cg);
+        return invokePI(cg, __functionAddress);
     }
 
     // --- [ thinlto_module_get_object ] ---
 
     /** Unsafe version of: {@link #thinlto_module_get_object} */
-    public static native void nthinlto_module_get_object(long __functionAddress, long cg, int index, long __result);
+    public static native void nthinlto_module_get_object(long cg, int index, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #thinlto_module_get_object} */
     public static void nthinlto_module_get_object(long cg, int index, long __result) {
@@ -1263,7 +1263,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        nthinlto_module_get_object(__functionAddress, cg, index, __result);
+        nthinlto_module_get_object(cg, index, __functionAddress, __result);
     }
 
     /**
@@ -1290,7 +1290,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePI(__functionAddress, cg);
+        return invokePI(cg, __functionAddress);
     }
 
     // --- [ thinlto_module_get_object_file ] ---
@@ -1301,7 +1301,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePP(__functionAddress, cg, index);
+        return invokePP(cg, index, __functionAddress);
     }
 
     /**
@@ -1325,7 +1325,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        return invokePZ(__functionAddress, cg, model);
+        return invokePZ(cg, model, __functionAddress);
     }
 
     // --- [ thinlto_codegen_set_savetemps_dir ] ---
@@ -1336,7 +1336,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPV(__functionAddress, cg, save_temps_dir);
+        invokePPV(cg, save_temps_dir, __functionAddress);
     }
 
     /**
@@ -1373,7 +1373,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPV(__functionAddress, cg, save_temps_dir);
+        invokePPV(cg, save_temps_dir, __functionAddress);
     }
 
     /**
@@ -1410,7 +1410,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPV(__functionAddress, cg, cpu);
+        invokePPV(cg, cpu, __functionAddress);
     }
 
     /** Sets the cpu to generate code for. */
@@ -1441,7 +1441,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePV(__functionAddress, cg, disable);
+        invokePV(cg, disable, __functionAddress);
     }
 
     // --- [ thinlto_codegen_set_codegen_only ] ---
@@ -1452,7 +1452,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePV(__functionAddress, cg, codegen_only);
+        invokePV(cg, codegen_only, __functionAddress);
     }
 
     // --- [ thinlto_debug_options ] ---
@@ -1460,7 +1460,7 @@ public class LLVMLTO {
     /** Unsafe version of: {@link #thinlto_debug_options} */
     public static void nthinlto_debug_options(long options, int number) {
         long __functionAddress = Functions.thinlto_debug_options;
-        invokePV(__functionAddress, options, number);
+        invokePV(options, number, __functionAddress);
     }
 
     /** Parse {@code -mllvm} style debug options. */
@@ -1477,7 +1477,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(mod);
         }
-        return invokePZ(__functionAddress, mod);
+        return invokePZ(mod, __functionAddress);
     }
 
     // --- [ thinlto_codegen_add_must_preserve_symbol ] ---
@@ -1488,7 +1488,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPV(__functionAddress, cg, name, length);
+        invokePPV(cg, name, length, __functionAddress);
     }
 
     /**
@@ -1522,7 +1522,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPV(__functionAddress, cg, name, length);
+        invokePPV(cg, name, length, __functionAddress);
     }
 
     /**
@@ -1556,7 +1556,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePPV(__functionAddress, cg, cache_dir);
+        invokePPV(cg, cache_dir, __functionAddress);
     }
 
     /** Sets the path to a directory to use as a cache storage for incremental build. Setting this activates caching. */
@@ -1590,7 +1590,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePV(__functionAddress, cg, interval);
+        invokePV(cg, interval, __functionAddress);
     }
 
     // --- [ thinlto_codegen_set_final_cache_size_relative_to_available_space ] ---
@@ -1607,7 +1607,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePV(__functionAddress, cg, percentage);
+        invokePV(cg, percentage, __functionAddress);
     }
 
     // --- [ thinlto_codegen_set_cache_entry_expiration ] ---
@@ -1618,7 +1618,7 @@ public class LLVMLTO {
         if (CHECKS) {
             check(cg);
         }
-        invokePV(__functionAddress, cg, expiration);
+        invokePV(cg, expiration, __functionAddress);
     }
 
     // --- [ thinlto_codegen_set_cache_size_bytes ] ---
@@ -1633,7 +1633,7 @@ public class LLVMLTO {
             check(__functionAddress);
             check(cg);
         }
-        invokePV(__functionAddress, cg, max_size_bytes);
+        invokePV(cg, max_size_bytes, __functionAddress);
     }
 
     // --- [ thinlto_codegen_set_cache_size_megabytes ] ---
@@ -1645,7 +1645,7 @@ public class LLVMLTO {
             check(__functionAddress);
             check(cg);
         }
-        invokePV(__functionAddress, cg, max_size_megabytes);
+        invokePV(cg, max_size_megabytes, __functionAddress);
     }
 
     // --- [ thinlto_codegen_set_cache_size_files ] ---
@@ -1657,7 +1657,7 @@ public class LLVMLTO {
             check(__functionAddress);
             check(cg);
         }
-        invokePV(__functionAddress, cg, max_size_files);
+        invokePV(cg, max_size_files, __functionAddress);
     }
 
 }

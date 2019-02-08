@@ -331,7 +331,7 @@ public class EXTFramebufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, renderbuffers.length, renderbuffers);
+        callPV(renderbuffers.length, renderbuffers, __functionAddress);
     }
 
     /** Array version of: {@link #glGenRenderbuffersEXT GenRenderbuffersEXT} */
@@ -340,7 +340,7 @@ public class EXTFramebufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, renderbuffers.length, renderbuffers);
+        callPV(renderbuffers.length, renderbuffers, __functionAddress);
     }
 
     /** Array version of: {@link #glGetRenderbufferParameterivEXT GetRenderbufferParameterivEXT} */
@@ -350,7 +350,7 @@ public class EXTFramebufferObject {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glDeleteFramebuffersEXT DeleteFramebuffersEXT} */
@@ -359,7 +359,7 @@ public class EXTFramebufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, framebuffers.length, framebuffers);
+        callPV(framebuffers.length, framebuffers, __functionAddress);
     }
 
     /** Array version of: {@link #glGenFramebuffersEXT GenFramebuffersEXT} */
@@ -368,7 +368,7 @@ public class EXTFramebufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, framebuffers.length, framebuffers);
+        callPV(framebuffers.length, framebuffers, __functionAddress);
     }
 
     /** Array version of: {@link #glGetFramebufferAttachmentParameterivEXT GetFramebufferAttachmentParameterivEXT} */
@@ -378,7 +378,7 @@ public class EXTFramebufferObject {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, attachment, pname, params);
+        callPV(target, attachment, pname, params, __functionAddress);
     }
 
 }

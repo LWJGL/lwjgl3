@@ -27,7 +27,7 @@ public class VRExtendedDisplay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPPV(__functionAddress, pnX, pnY, pnWidth, pnHeight);
+        callPPPPV(pnX, pnY, pnWidth, pnHeight, __functionAddress);
     }
 
     /** Size and position that the window needs to be on the VR display. */
@@ -49,7 +49,7 @@ public class VRExtendedDisplay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPPV(__functionAddress, eEye, pnX, pnY, pnWidth, pnHeight);
+        callPPPPV(eEye, pnX, pnY, pnWidth, pnHeight, __functionAddress);
     }
 
     /** Gets the viewport in the frame buffer to draw the output of the distortion into. */
@@ -71,7 +71,7 @@ public class VRExtendedDisplay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, pnAdapterIndex, pnAdapterOutputIndex);
+        callPPV(pnAdapterIndex, pnAdapterOutputIndex, __functionAddress);
     }
 
     /**

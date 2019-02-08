@@ -123,7 +123,7 @@ public class ARBSampleLocations {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, start, v.length >> 1, v);
+        callPV(target, start, v.length >> 1, v, __functionAddress);
     }
 
     /** Array version of: {@link #glNamedFramebufferSampleLocationsfvARB NamedFramebufferSampleLocationsfvARB} */
@@ -132,7 +132,7 @@ public class ARBSampleLocations {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, framebuffer, start, v.length >> 1, v);
+        callPV(framebuffer, start, v.length >> 1, v, __functionAddress);
     }
 
 }

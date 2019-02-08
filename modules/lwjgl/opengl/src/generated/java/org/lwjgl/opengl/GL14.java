@@ -1055,7 +1055,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(coord, 1);
         }
-        callPV(__functionAddress, coord);
+        callPV(coord, __functionAddress);
     }
 
     /**
@@ -1069,7 +1069,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(coord, 1);
         }
-        callPV(__functionAddress, coord);
+        callPV(coord, __functionAddress);
     }
 
     /**
@@ -1119,7 +1119,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /**
@@ -1133,7 +1133,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /**
@@ -1147,7 +1147,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /**
@@ -1161,7 +1161,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /**
@@ -1175,7 +1175,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /**
@@ -1189,7 +1189,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /**
@@ -1203,7 +1203,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(p, 2);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /**
@@ -1217,7 +1217,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(p, 2);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /**
@@ -1231,7 +1231,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(p, 2);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /**
@@ -1245,7 +1245,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(p, 2);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /**
@@ -1259,7 +1259,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(p, 3);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /**
@@ -1273,7 +1273,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(p, 3);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /**
@@ -1287,7 +1287,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(p, 3);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
     /**
@@ -1301,7 +1301,7 @@ public class GL14 extends GL13 {
             check(__functionAddress);
             check(p, 3);
         }
-        callPV(__functionAddress, p);
+        callPV(p, __functionAddress);
     }
 
 }

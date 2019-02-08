@@ -31,7 +31,7 @@ public class VRTrackedCamera {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, eCameraError);
+        return callP(eCameraError, __functionAddress);
     }
 
     /**
@@ -54,7 +54,7 @@ public class VRTrackedCamera {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, nDeviceIndex, pHasCamera);
+        return callPI(nDeviceIndex, pHasCamera, __functionAddress);
     }
 
     /** For convenience, same as tracked property request {@link VR#ETrackedDeviceProperty_Prop_HasCamera_Bool}. */
@@ -74,7 +74,7 @@ public class VRTrackedCamera {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, nDeviceIndex, eFrameType, pnWidth, pnHeight, pnFrameBufferSize);
+        return callPPPI(nDeviceIndex, eFrameType, pnWidth, pnHeight, pnFrameBufferSize, __functionAddress);
     }
 
     /**
@@ -100,7 +100,7 @@ public class VRTrackedCamera {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, nDeviceIndex, nCameraIndex, eFrameType, pFocalLength, pCenter);
+        return callPPI(nDeviceIndex, nCameraIndex, eFrameType, pFocalLength, pCenter, __functionAddress);
     }
 
     /** @param eFrameType one of:<br><table><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES}</td></tr></table> */
@@ -121,7 +121,7 @@ public class VRTrackedCamera {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, nDeviceIndex, nCameraIndex, eFrameType, flZNear, flZFar, pProjection);
+        return callPI(nDeviceIndex, nCameraIndex, eFrameType, flZNear, flZFar, pProjection, __functionAddress);
     }
 
     /** @param eFrameType one of:<br><table><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES}</td></tr></table> */
@@ -138,7 +138,7 @@ public class VRTrackedCamera {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, nDeviceIndex, pHandle);
+        return callPI(nDeviceIndex, pHandle, __functionAddress);
     }
 
     /**
@@ -163,7 +163,7 @@ public class VRTrackedCamera {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, hTrackedCamera);
+        return callJI(hTrackedCamera, __functionAddress);
     }
 
     // --- [ VRTrackedCamera_GetVideoStreamFrameBuffer ] ---
@@ -174,7 +174,7 @@ public class VRTrackedCamera {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, hTrackedCamera, eFrameType, pFrameBuffer, nFrameBufferSize, pFrameHeader, nFrameHeaderSize);
+        return callJPPI(hTrackedCamera, eFrameType, pFrameBuffer, nFrameBufferSize, pFrameHeader, nFrameHeaderSize, __functionAddress);
     }
 
     /**
@@ -198,7 +198,7 @@ public class VRTrackedCamera {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, nDeviceIndex, eFrameType, pTextureBounds, pnWidth, pnHeight);
+        return callPPPI(nDeviceIndex, eFrameType, pTextureBounds, pnWidth, pnHeight, __functionAddress);
     }
 
     /**
@@ -224,7 +224,7 @@ public class VRTrackedCamera {
             check(__functionAddress);
             check(pD3D11DeviceOrResource);
         }
-        return callJPPPI(__functionAddress, hTrackedCamera, eFrameType, pD3D11DeviceOrResource, ppD3D11ShaderResourceView, pFrameHeader, nFrameHeaderSize);
+        return callJPPPI(hTrackedCamera, eFrameType, pD3D11DeviceOrResource, ppD3D11ShaderResourceView, pFrameHeader, nFrameHeaderSize, __functionAddress);
     }
 
     /**
@@ -277,7 +277,7 @@ public class VRTrackedCamera {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, hTrackedCamera, eFrameType, pglTextureId, pFrameHeader, nFrameHeaderSize);
+        return callJPPI(hTrackedCamera, eFrameType, pglTextureId, pFrameHeader, nFrameHeaderSize, __functionAddress);
     }
 
     /**
@@ -314,7 +314,7 @@ public class VRTrackedCamera {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, hTrackedCamera, glTextureId);
+        return callJI(hTrackedCamera, glTextureId, __functionAddress);
     }
 
 }

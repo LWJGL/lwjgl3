@@ -49,7 +49,7 @@ public class GLFWNativeCocoa {
         if (CHECKS) {
             check(monitor);
         }
-        return invokePI(__functionAddress, monitor);
+        return invokePI(monitor, __functionAddress);
     }
 
     // --- [ glfwGetCocoaWindow ] ---
@@ -71,7 +71,7 @@ public class GLFWNativeCocoa {
         if (CHECKS) {
             check(window);
         }
-        return invokePP(__functionAddress, window);
+        return invokePP(window, __functionAddress);
     }
 
 }

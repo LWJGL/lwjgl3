@@ -130,7 +130,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_malloc malloc} */
     public static long nje_malloc(long size) {
         long __functionAddress = Functions.malloc;
-        return invokePP(__functionAddress, size);
+        return invokePP(size, __functionAddress);
     }
 
     /**
@@ -151,7 +151,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_calloc calloc} */
     public static long nje_calloc(long num, long size) {
         long __functionAddress = Functions.calloc;
-        return invokePPP(__functionAddress, num, size);
+        return invokePPP(num, size, __functionAddress);
     }
 
     /**
@@ -173,7 +173,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_posix_memalign posix_memalign} */
     public static int nje_posix_memalign(long memptr, long alignment, long size) {
         long __functionAddress = Functions.posix_memalign;
-        return invokePPPI(__functionAddress, memptr, alignment, size);
+        return invokePPPI(memptr, alignment, size, __functionAddress);
     }
 
     /**
@@ -196,7 +196,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_aligned_alloc aligned_alloc} */
     public static long nje_aligned_alloc(long alignment, long size) {
         long __functionAddress = Functions.aligned_alloc;
-        return invokePPP(__functionAddress, alignment, size);
+        return invokePPP(alignment, size, __functionAddress);
     }
 
     /**
@@ -218,7 +218,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_realloc realloc} */
     public static long nje_realloc(long ptr, long size) {
         long __functionAddress = Functions.realloc;
-        return invokePPP(__functionAddress, ptr, size);
+        return invokePPP(ptr, size, __functionAddress);
     }
 
     /**
@@ -243,7 +243,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_free free} */
     public static void nje_free(long ptr) {
         long __functionAddress = Functions.free;
-        invokePV(__functionAddress, ptr);
+        invokePV(ptr, __functionAddress);
     }
 
     /**
@@ -314,7 +314,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_mallocx mallocx} */
     public static long nje_mallocx(long size, int flags) {
         long __functionAddress = Functions.mallocx;
-        return invokePP(__functionAddress, size, flags);
+        return invokePP(size, flags, __functionAddress);
     }
 
     /**
@@ -336,7 +336,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_rallocx rallocx} */
     public static long nje_rallocx(long ptr, long size, int flags) {
         long __functionAddress = Functions.rallocx;
-        return invokePPP(__functionAddress, ptr, size, flags);
+        return invokePPP(ptr, size, flags, __functionAddress);
     }
 
     /**
@@ -360,7 +360,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_xallocx xallocx} */
     public static long nje_xallocx(long ptr, long size, long extra, int flags) {
         long __functionAddress = Functions.xallocx;
-        return invokePPPP(__functionAddress, ptr, size, extra, flags);
+        return invokePPPP(ptr, size, extra, flags, __functionAddress);
     }
 
     /**
@@ -383,7 +383,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_sallocx sallocx} */
     public static long nje_sallocx(long ptr, int flags) {
         long __functionAddress = Functions.sallocx;
-        return invokePP(__functionAddress, ptr, flags);
+        return invokePP(ptr, flags, __functionAddress);
     }
 
     /**
@@ -402,7 +402,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_dallocx dallocx} */
     public static void nje_dallocx(long ptr, int flags) {
         long __functionAddress = Functions.dallocx;
-        invokePV(__functionAddress, ptr, flags);
+        invokePV(ptr, flags, __functionAddress);
     }
 
     /**
@@ -484,7 +484,7 @@ public class JEmalloc {
      */
     public static void nje_sdallocx(long ptr, long size, int flags) {
         long __functionAddress = Functions.sdallocx;
-        invokePPV(__functionAddress, ptr, size, flags);
+        invokePPV(ptr, size, flags, __functionAddress);
     }
 
     /**
@@ -562,7 +562,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_nallocx nallocx} */
     public static long nje_nallocx(long size, int flags) {
         long __functionAddress = Functions.nallocx;
-        return invokePP(__functionAddress, size, flags);
+        return invokePP(size, flags, __functionAddress);
     }
 
     /**
@@ -589,7 +589,7 @@ public class JEmalloc {
      */
     public static int nje_mallctl(long name, long oldp, long oldlenp, long newp, long newlen) {
         long __functionAddress = Functions.mallctl;
-        return invokePPPPPI(__functionAddress, name, oldp, oldlenp, newp, newlen);
+        return invokePPPPPI(name, oldp, oldlenp, newp, newlen, __functionAddress);
     }
 
     /**
@@ -649,7 +649,7 @@ public class JEmalloc {
      */
     public static int nje_mallctlnametomib(long name, long mibp, long miblenp) {
         long __functionAddress = Functions.mallctlnametomib;
-        return invokePPPI(__functionAddress, name, mibp, miblenp);
+        return invokePPPI(name, mibp, miblenp, __functionAddress);
     }
 
     /**
@@ -748,7 +748,7 @@ public class JEmalloc {
      */
     public static int nje_mallctlbymib(long mib, long miblen, long oldp, long oldlenp, long newp, long newlen) {
         long __functionAddress = Functions.mallctlbymib;
-        return invokePPPPPPI(__functionAddress, mib, miblen, oldp, oldlenp, newp, newlen);
+        return invokePPPPPPI(mib, miblen, oldp, oldlenp, newp, newlen, __functionAddress);
     }
 
     /**
@@ -771,7 +771,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_malloc_stats_print malloc_stats_print} */
     public static void nje_malloc_stats_print(long write_cb, long cbopaque, long opts) {
         long __functionAddress = Functions.malloc_stats_print;
-        invokePPPV(__functionAddress, write_cb, cbopaque, opts);
+        invokePPPV(write_cb, cbopaque, opts, __functionAddress);
     }
 
     /**
@@ -823,7 +823,7 @@ public class JEmalloc {
     /** Unsafe version of: {@link #je_malloc_usable_size malloc_usable_size} */
     public static long nje_malloc_usable_size(long ptr) {
         long __functionAddress = Functions.malloc_usable_size;
-        return invokePP(__functionAddress, ptr);
+        return invokePP(ptr, __functionAddress);
     }
 
     /**

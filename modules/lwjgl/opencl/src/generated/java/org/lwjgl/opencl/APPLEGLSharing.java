@@ -67,7 +67,7 @@ public class APPLEGLSharing {
             check(context);
             check(platform_gl_ctx);
         }
-        return callPPPPPI(__functionAddress, context, platform_gl_ctx, param_name, param_value_size, param_value, param_value_size_ret);
+        return callPPPPPI(context, platform_gl_ctx, param_name, param_value_size, param_value, param_value_size_ret, __functionAddress);
     }
 
     /**

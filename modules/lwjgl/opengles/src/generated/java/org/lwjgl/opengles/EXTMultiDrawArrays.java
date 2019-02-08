@@ -64,7 +64,7 @@ public class EXTMultiDrawArrays {
             check(__functionAddress);
             check(count, first.length);
         }
-        callPPV(__functionAddress, mode, first, count, first.length);
+        callPPV(mode, first, count, first.length, __functionAddress);
     }
 
     /** Array version of: {@link #glMultiDrawElementsEXT MultiDrawElementsEXT} */
@@ -74,7 +74,7 @@ public class EXTMultiDrawArrays {
             check(__functionAddress);
             check(indices, count.length);
         }
-        callPPV(__functionAddress, mode, count, type, memAddress(indices), count.length);
+        callPPV(mode, count, type, memAddress(indices), count.length, __functionAddress);
     }
 
 }

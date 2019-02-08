@@ -107,7 +107,7 @@ public class EXTSampleLocations {
             check(__functionAddress);
             VkSampleLocationsInfoEXT.validate(pSampleLocationsInfo);
         }
-        callPPV(__functionAddress, commandBuffer.address(), pSampleLocationsInfo);
+        callPPV(commandBuffer.address(), pSampleLocationsInfo, __functionAddress);
     }
 
     /**
@@ -174,7 +174,7 @@ public class EXTSampleLocations {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, physicalDevice.address(), samples, pMultisampleProperties);
+        callPPV(physicalDevice.address(), samples, pMultisampleProperties, __functionAddress);
     }
 
     /**

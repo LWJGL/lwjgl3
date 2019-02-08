@@ -112,7 +112,7 @@ public class WGLARBPixelFormat {
             check(__functionAddress);
             check(hdc);
         }
-        return callPPPI(__functionAddress, hdc, pixelFormat, layerPlane, n, attributes, values);
+        return callPPPI(hdc, pixelFormat, layerPlane, n, attributes, values, __functionAddress);
     }
 
     /**
@@ -163,7 +163,7 @@ public class WGLARBPixelFormat {
             check(__functionAddress);
             check(hdc);
         }
-        return callPPPI(__functionAddress, hdc, pixelFormat, layerPlane, n, attributes, values);
+        return callPPPI(hdc, pixelFormat, layerPlane, n, attributes, values, __functionAddress);
     }
 
     /**
@@ -218,7 +218,7 @@ public class WGLARBPixelFormat {
             check(__functionAddress);
             check(hdc);
         }
-        return callPPPPPI(__functionAddress, hdc, attribIList, attribFList, maxFormats, formats, numFormats);
+        return callPPPPPI(hdc, attribIList, attribFList, maxFormats, formats, numFormats, __functionAddress);
     }
 
     /**
@@ -252,7 +252,7 @@ public class WGLARBPixelFormat {
             check(hdc);
             check(values, attributes.length);
         }
-        return callPPPI(__functionAddress, hdc, pixelFormat, layerPlane, attributes.length, attributes, values) != 0;
+        return callPPPI(hdc, pixelFormat, layerPlane, attributes.length, attributes, values, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #wglGetPixelFormatAttribfvARB GetPixelFormatAttribfvARB} */
@@ -264,7 +264,7 @@ public class WGLARBPixelFormat {
             check(hdc);
             check(values, attributes.length);
         }
-        return callPPPI(__functionAddress, hdc, pixelFormat, layerPlane, attributes.length, attributes, values) != 0;
+        return callPPPI(hdc, pixelFormat, layerPlane, attributes.length, attributes, values, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #wglChoosePixelFormatARB ChoosePixelFormatARB} */
@@ -278,7 +278,7 @@ public class WGLARBPixelFormat {
             checkNTSafe(attribFList);
             check(numFormats, 1);
         }
-        return callPPPPPI(__functionAddress, hdc, attribIList, attribFList, formats.length, formats, numFormats) != 0;
+        return callPPPPPI(hdc, attribIList, attribFList, formats.length, formats, numFormats, __functionAddress) != 0;
     }
 
 }

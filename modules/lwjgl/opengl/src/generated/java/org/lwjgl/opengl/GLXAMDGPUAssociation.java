@@ -60,7 +60,7 @@ public class GLXAMDGPUAssociation {
             check(__functionAddress);
             check(dstCtx);
         }
-        callPV(__functionAddress, dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+        callPV(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, __functionAddress);
     }
 
     // --- [ glXCreateAssociatedContextAMD ] ---
@@ -73,7 +73,7 @@ public class GLXAMDGPUAssociation {
             check(__functionAddress);
             check(share_list);
         }
-        return callPP(__functionAddress, id, share_list);
+        return callPP(id, share_list, __functionAddress);
     }
 
     // --- [ glXCreateAssociatedContextAttribsAMD ] ---
@@ -85,7 +85,7 @@ public class GLXAMDGPUAssociation {
             check(__functionAddress);
             check(share_context);
         }
-        return callPPP(__functionAddress, id, share_context, attribList);
+        return callPPP(id, share_context, attribList, __functionAddress);
     }
 
     /** Creates an associated context and requests a specific GL version. */
@@ -111,7 +111,7 @@ public class GLXAMDGPUAssociation {
             check(__functionAddress);
             check(ctx);
         }
-        return callPI(__functionAddress, ctx) != 0;
+        return callPI(ctx, __functionAddress) != 0;
     }
 
     // --- [ glXGetContextGPUIDAMD ] ---
@@ -128,7 +128,7 @@ public class GLXAMDGPUAssociation {
             check(__functionAddress);
             check(ctx);
         }
-        return callPI(__functionAddress, ctx);
+        return callPI(ctx, __functionAddress);
     }
 
     // --- [ glXGetCurrentAssociatedContextAMD ] ---
@@ -152,7 +152,7 @@ public class GLXAMDGPUAssociation {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, maxCount, ids);
+        return callI(maxCount, ids, __functionAddress);
     }
 
     // --- [ glXGetGPUInfoAMD ] ---
@@ -163,7 +163,7 @@ public class GLXAMDGPUAssociation {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, id, property, dataType, size, data);
+        return callPI(id, property, dataType, size, data, __functionAddress);
     }
 
     /**
@@ -189,7 +189,7 @@ public class GLXAMDGPUAssociation {
             check(__functionAddress);
             check(ctx);
         }
-        return callPI(__functionAddress, ctx) != 0;
+        return callPI(ctx, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #glXCreateAssociatedContextAttribsAMD CreateAssociatedContextAttribsAMD} */
@@ -201,7 +201,7 @@ public class GLXAMDGPUAssociation {
             check(share_context);
             checkNT(attribList);
         }
-        return callPPP(__functionAddress, id, share_context, attribList);
+        return callPPP(id, share_context, attribList, __functionAddress);
     }
 
 }

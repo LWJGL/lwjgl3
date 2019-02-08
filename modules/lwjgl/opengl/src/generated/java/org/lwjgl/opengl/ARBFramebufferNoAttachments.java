@@ -179,7 +179,7 @@ public class ARBFramebufferNoAttachments {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, framebuffer, pname, params);
+        callPV(framebuffer, pname, params, __functionAddress);
     }
 
 }

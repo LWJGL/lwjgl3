@@ -116,7 +116,7 @@ public class EXTConditionalRendering {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, commandBuffer.address(), pConditionalRenderingBegin);
+        callPPV(commandBuffer.address(), pConditionalRenderingBegin, __functionAddress);
     }
 
     /**
@@ -225,7 +225,7 @@ public class EXTConditionalRendering {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, commandBuffer.address());
+        callPV(commandBuffer.address(), __functionAddress);
     }
 
 }

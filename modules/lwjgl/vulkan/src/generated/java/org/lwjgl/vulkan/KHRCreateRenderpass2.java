@@ -112,7 +112,7 @@ public class KHRCreateRenderpass2 {
             VkRenderPassCreateInfo2KHR.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo, pAllocator, pRenderPass);
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pRenderPass, __functionAddress);
     }
 
     /**
@@ -182,7 +182,7 @@ public class KHRCreateRenderpass2 {
             check(__functionAddress);
             VkRenderPassBeginInfo.validate(pRenderPassBegin);
         }
-        callPPPV(__functionAddress, commandBuffer.address(), pRenderPassBegin, pSubpassBeginInfo);
+        callPPPV(commandBuffer.address(), pRenderPassBegin, pSubpassBeginInfo, __functionAddress);
     }
 
     /**
@@ -261,7 +261,7 @@ public class KHRCreateRenderpass2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, commandBuffer.address(), pSubpassBeginInfo, pSubpassEndInfo);
+        callPPPV(commandBuffer.address(), pSubpassBeginInfo, pSubpassEndInfo, __functionAddress);
     }
 
     /**
@@ -334,7 +334,7 @@ public class KHRCreateRenderpass2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, commandBuffer.address(), pSubpassEndInfo);
+        callPPV(commandBuffer.address(), pSubpassEndInfo, __functionAddress);
     }
 
     /**
@@ -406,7 +406,7 @@ public class KHRCreateRenderpass2 {
             VkRenderPassCreateInfo2KHR.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pRenderPass);
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pRenderPass, __functionAddress);
     }
 
 }

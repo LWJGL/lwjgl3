@@ -249,7 +249,7 @@ public class NVTransformFeedback {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, attribs.length, attribs, bufferMode);
+        callPV(attribs.length, attribs, bufferMode, __functionAddress);
     }
 
     /** Array version of: {@link #glTransformFeedbackVaryingsNV TransformFeedbackVaryingsNV} */
@@ -258,7 +258,7 @@ public class NVTransformFeedback {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, locations.length, locations, bufferMode);
+        callPV(program, locations.length, locations, bufferMode, __functionAddress);
     }
 
     /** Array version of: {@link #glGetActiveVaryingNV GetActiveVaryingNV} */
@@ -270,7 +270,7 @@ public class NVTransformFeedback {
             check(size, 1);
             check(type, 1);
         }
-        callPPPPV(__functionAddress, program, index, name.remaining(), length, size, type, memAddress(name));
+        callPPPPV(program, index, name.remaining(), length, size, type, memAddress(name), __functionAddress);
     }
 
     /** Array version of: {@link #glGetTransformFeedbackVaryingNV GetTransformFeedbackVaryingNV} */
@@ -280,7 +280,7 @@ public class NVTransformFeedback {
             check(__functionAddress);
             check(location, 1);
         }
-        callPV(__functionAddress, program, index, location);
+        callPV(program, index, location, __functionAddress);
     }
 
     /** Array version of: {@link #glTransformFeedbackStreamAttribsNV TransformFeedbackStreamAttribsNV} */
@@ -289,7 +289,7 @@ public class NVTransformFeedback {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, attribs.length, attribs, bufstreams.length, bufstreams, bufferMode);
+        callPPV(attribs.length, attribs, bufstreams.length, bufstreams, bufferMode, __functionAddress);
     }
 
 }

@@ -41,7 +41,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, pnWidth, pnHeight);
+        callPPV(pnWidth, pnHeight, __functionAddress);
     }
 
     /**
@@ -61,7 +61,7 @@ public class VRSystem {
     // --- [ VRSystem_GetProjectionMatrix ] ---
 
     /** Unsafe version of: {@link #VRSystem_GetProjectionMatrix GetProjectionMatrix} */
-    public static native void nVRSystem_GetProjectionMatrix(long __functionAddress, int eEye, float fNearZ, float fFarZ, long __result);
+    public static native void nVRSystem_GetProjectionMatrix(int eEye, float fNearZ, float fFarZ, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #VRSystem_GetProjectionMatrix GetProjectionMatrix} */
     public static void nVRSystem_GetProjectionMatrix(int eEye, float fNearZ, float fFarZ, long __result) {
@@ -69,7 +69,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nVRSystem_GetProjectionMatrix(__functionAddress, eEye, fNearZ, fFarZ, __result);
+        nVRSystem_GetProjectionMatrix(eEye, fNearZ, fFarZ, __functionAddress, __result);
     }
 
     /**
@@ -93,7 +93,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPPV(__functionAddress, eEye, pfLeft, pfRight, pfTop, pfBottom);
+        callPPPPV(eEye, pfLeft, pfRight, pfTop, pfBottom, __functionAddress);
     }
 
     /**
@@ -123,7 +123,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, eEye, fU, fV, pDistortionCoordinates);
+        return callPZ(eEye, fU, fV, pDistortionCoordinates, __functionAddress);
     }
 
     /**
@@ -145,7 +145,7 @@ public class VRSystem {
     // --- [ VRSystem_GetEyeToHeadTransform ] ---
 
     /** Unsafe version of: {@link #VRSystem_GetEyeToHeadTransform GetEyeToHeadTransform} */
-    public static native void nVRSystem_GetEyeToHeadTransform(long __functionAddress, int eEye, long __result);
+    public static native void nVRSystem_GetEyeToHeadTransform(int eEye, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #VRSystem_GetEyeToHeadTransform GetEyeToHeadTransform} */
     public static void nVRSystem_GetEyeToHeadTransform(int eEye, long __result) {
@@ -153,7 +153,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nVRSystem_GetEyeToHeadTransform(__functionAddress, eEye, __result);
+        nVRSystem_GetEyeToHeadTransform(eEye, __functionAddress, __result);
     }
 
     /**
@@ -177,7 +177,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pfSecondsSinceLastVsync, pulFrameCounter);
+        return callPPZ(pfSecondsSinceLastVsync, pulFrameCounter, __functionAddress);
     }
 
     /**
@@ -225,7 +225,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pnAdapterIndex);
+        callPV(pnAdapterIndex, __functionAddress);
     }
 
     /**
@@ -252,7 +252,7 @@ public class VRSystem {
             check(__functionAddress);
             check(pInstance);
         }
-        callPPV(__functionAddress, pnDevice, textureType, pInstance);
+        callPPV(pnDevice, textureType, pInstance, __functionAddress);
     }
 
     /**
@@ -318,7 +318,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callZ(__functionAddress, bIsVisibleOnDesktop);
+        return callZ(bIsVisibleOnDesktop, __functionAddress);
     }
 
     // --- [ VRSystem_GetDeviceToAbsoluteTrackingPose ] ---
@@ -329,7 +329,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, eOrigin, fPredictedSecondsToPhotonsFromNow, pTrackedDevicePoseArray, unTrackedDevicePoseArrayCount);
+        callPV(eOrigin, fPredictedSecondsToPhotonsFromNow, pTrackedDevicePoseArray, unTrackedDevicePoseArrayCount, __functionAddress);
     }
 
     /**
@@ -433,7 +433,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, eTrackedDeviceClass, punTrackedDeviceIndexArray, unTrackedDeviceIndexArrayCount, unRelativeToTrackedDeviceIndex);
+        return callPI(eTrackedDeviceClass, punTrackedDeviceIndexArray, unTrackedDeviceIndexArrayCount, unRelativeToTrackedDeviceIndex, __functionAddress);
     }
 
     /**
@@ -458,7 +458,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, unDeviceId);
+        return callI(unDeviceId, __functionAddress);
     }
 
     // --- [ VRSystem_ApplyTransform ] ---
@@ -469,7 +469,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, pOutputPose, pTrackedDevicePose, pTransform);
+        callPPPV(pOutputPose, pTrackedDevicePose, pTransform, __functionAddress);
     }
 
     /**
@@ -495,7 +495,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, unDeviceType);
+        return callI(unDeviceType, __functionAddress);
     }
 
     // --- [ VRSystem_GetControllerRoleForTrackedDeviceIndex ] ---
@@ -511,7 +511,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, unDeviceIndex);
+        return callI(unDeviceIndex, __functionAddress);
     }
 
     // --- [ VRSystem_GetTrackedDeviceClass ] ---
@@ -531,7 +531,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, unDeviceIndex);
+        return callI(unDeviceIndex, __functionAddress);
     }
 
     // --- [ VRSystem_IsTrackedDeviceConnected ] ---
@@ -547,7 +547,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callZ(__functionAddress, unDeviceIndex);
+        return callZ(unDeviceIndex, __functionAddress);
     }
 
     // --- [ VRSystem_GetBoolTrackedDeviceProperty ] ---
@@ -558,7 +558,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, unDeviceIndex, prop, pError);
+        return callPZ(unDeviceIndex, prop, pError, __functionAddress);
     }
 
     /**
@@ -584,7 +584,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPF(__functionAddress, unDeviceIndex, prop, pError);
+        return callPF(unDeviceIndex, prop, pError, __functionAddress);
     }
 
     /**
@@ -609,7 +609,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, unDeviceIndex, prop, pError);
+        return callPI(unDeviceIndex, prop, pError, __functionAddress);
     }
 
     /**
@@ -635,7 +635,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJ(__functionAddress, unDeviceIndex, prop, pError);
+        return callPJ(unDeviceIndex, prop, pError, __functionAddress);
     }
 
     /**
@@ -656,7 +656,7 @@ public class VRSystem {
     // --- [ VRSystem_GetMatrix34TrackedDeviceProperty ] ---
 
     /** Unsafe version of: {@link #VRSystem_GetMatrix34TrackedDeviceProperty GetMatrix34TrackedDeviceProperty} */
-    public static native void nVRSystem_GetMatrix34TrackedDeviceProperty(long __functionAddress, int unDeviceIndex, int prop, long pError, long __result);
+    public static native void nVRSystem_GetMatrix34TrackedDeviceProperty(int unDeviceIndex, int prop, long pError, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #VRSystem_GetMatrix34TrackedDeviceProperty GetMatrix34TrackedDeviceProperty} */
     public static void nVRSystem_GetMatrix34TrackedDeviceProperty(int unDeviceIndex, int prop, long pError, long __result) {
@@ -664,7 +664,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nVRSystem_GetMatrix34TrackedDeviceProperty(__functionAddress, unDeviceIndex, prop, pError, __result);
+        nVRSystem_GetMatrix34TrackedDeviceProperty(unDeviceIndex, prop, pError, __functionAddress, __result);
     }
 
     /**
@@ -691,7 +691,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, unDeviceIndex, prop, propType, pBuffer, unBufferSize, pError);
+        return callPPI(unDeviceIndex, prop, propType, pBuffer, unBufferSize, pError, __functionAddress);
     }
 
     /**
@@ -725,7 +725,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, unDeviceIndex, prop, pchValue, unBufferSize, pError);
+        return callPPI(unDeviceIndex, prop, pchValue, unBufferSize, pError, __functionAddress);
     }
 
     /**
@@ -793,7 +793,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, error);
+        return callP(error, __functionAddress);
     }
 
     /**
@@ -816,7 +816,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, pEvent, uncbVREvent);
+        return callPZ(pEvent, uncbVREvent, __functionAddress);
     }
 
     /**
@@ -848,7 +848,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, eOrigin, pEvent, uncbVREvent, pTrackedDevicePose);
+        return callPPZ(eOrigin, pEvent, uncbVREvent, pTrackedDevicePose, __functionAddress);
     }
 
     /**
@@ -888,7 +888,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, eType);
+        return callP(eType, __functionAddress);
     }
 
     /**
@@ -906,7 +906,7 @@ public class VRSystem {
     // --- [ VRSystem_GetHiddenAreaMesh ] ---
 
     /** Unsafe version of: {@link #VRSystem_GetHiddenAreaMesh GetHiddenAreaMesh} */
-    public static native void nVRSystem_GetHiddenAreaMesh(long __functionAddress, int eEye, int type, long __result);
+    public static native void nVRSystem_GetHiddenAreaMesh(int eEye, int type, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #VRSystem_GetHiddenAreaMesh GetHiddenAreaMesh} */
     public static void nVRSystem_GetHiddenAreaMesh(int eEye, int type, long __result) {
@@ -914,7 +914,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nVRSystem_GetHiddenAreaMesh(__functionAddress, eEye, type, __result);
+        nVRSystem_GetHiddenAreaMesh(eEye, type, __functionAddress, __result);
     }
 
     /**
@@ -945,7 +945,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, unControllerDeviceIndex, pControllerState, unControllerStateSize);
+        return callPZ(unControllerDeviceIndex, pControllerState, unControllerStateSize, __functionAddress);
     }
 
     /**
@@ -987,7 +987,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, eOrigin, unControllerDeviceIndex, pControllerState, unControllerStateSize, pTrackedDevicePose);
+        return callPPZ(eOrigin, unControllerDeviceIndex, pControllerState, unControllerStateSize, pTrackedDevicePose, __functionAddress);
     }
 
     /**
@@ -1040,7 +1040,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(__functionAddress, unControllerDeviceIndex, unAxisId, usDurationMicroSec);
+        callV(unControllerDeviceIndex, unAxisId, usDurationMicroSec, __functionAddress);
     }
 
     // --- [ VRSystem_GetButtonIdNameFromEnum ] ---
@@ -1051,7 +1051,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, eButtonId);
+        return callP(eButtonId, __functionAddress);
     }
 
     /**
@@ -1076,7 +1076,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, eAxisType);
+        return callP(eAxisType, __functionAddress);
     }
 
     /**
@@ -1159,7 +1159,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, unDeviceIndex, pchRequest, pchResponseBuffer, unResponseBufferSize);
+        return callPPI(unDeviceIndex, pchRequest, pchResponseBuffer, unResponseBufferSize, __functionAddress);
     }
 
     /**
@@ -1243,7 +1243,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, unDeviceIndex);
+        return callI(unDeviceIndex, __functionAddress);
     }
 
     // --- [ VRSystem_AcknowledgeQuit_Exiting ] ---

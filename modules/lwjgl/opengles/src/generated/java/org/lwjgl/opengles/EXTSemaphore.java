@@ -211,7 +211,7 @@ public class EXTSemaphore {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, semaphores.length, semaphores);
+        callPV(semaphores.length, semaphores, __functionAddress);
     }
 
     /** Array version of: {@link #glDeleteSemaphoresEXT DeleteSemaphoresEXT} */
@@ -220,7 +220,7 @@ public class EXTSemaphore {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, semaphores.length, semaphores);
+        callPV(semaphores.length, semaphores, __functionAddress);
     }
 
     /** Array version of: {@link #glSemaphoreParameterui64vEXT SemaphoreParameterui64vEXT} */
@@ -230,7 +230,7 @@ public class EXTSemaphore {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, semaphore, pname, params);
+        callPV(semaphore, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetSemaphoreParameterui64vEXT GetSemaphoreParameterui64vEXT} */
@@ -240,7 +240,7 @@ public class EXTSemaphore {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, semaphore, pname, params);
+        callPV(semaphore, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glWaitSemaphoreEXT WaitSemaphoreEXT} */
@@ -250,7 +250,7 @@ public class EXTSemaphore {
             check(__functionAddress);
             check(srcLayouts, textures.length);
         }
-        callPPPV(__functionAddress, semaphore, buffers.length, buffers, textures.length, textures, srcLayouts);
+        callPPPV(semaphore, buffers.length, buffers, textures.length, textures, srcLayouts, __functionAddress);
     }
 
     /** Array version of: {@link #glSignalSemaphoreEXT SignalSemaphoreEXT} */
@@ -260,7 +260,7 @@ public class EXTSemaphore {
             check(__functionAddress);
             check(dstLayouts, textures.length);
         }
-        callPPPV(__functionAddress, semaphore, buffers.length, buffers, textures.length, textures, dstLayouts);
+        callPPPV(semaphore, buffers.length, buffers, textures.length, textures, dstLayouts, __functionAddress);
     }
 
 }

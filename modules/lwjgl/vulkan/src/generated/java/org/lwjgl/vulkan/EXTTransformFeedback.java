@@ -150,7 +150,7 @@ public class EXTTransformFeedback {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPPV(__functionAddress, commandBuffer.address(), firstBinding, bindingCount, pBuffers, pOffsets, pSizes);
+        callPPPPV(commandBuffer.address(), firstBinding, bindingCount, pBuffers, pOffsets, pSizes, __functionAddress);
     }
 
     /**
@@ -242,7 +242,7 @@ public class EXTTransformFeedback {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, commandBuffer.address(), firstCounterBuffer, counterBufferCount, pCounterBuffers, pCounterBufferOffsets);
+        callPPPV(commandBuffer.address(), firstCounterBuffer, counterBufferCount, pCounterBuffers, pCounterBufferOffsets, __functionAddress);
     }
 
     /**
@@ -327,7 +327,7 @@ public class EXTTransformFeedback {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, commandBuffer.address(), firstCounterBuffer, counterBufferCount, pCounterBuffers, pCounterBufferOffsets);
+        callPPPV(commandBuffer.address(), firstCounterBuffer, counterBufferCount, pCounterBuffers, pCounterBufferOffsets, __functionAddress);
     }
 
     /**
@@ -470,7 +470,7 @@ public class EXTTransformFeedback {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJV(__functionAddress, commandBuffer.address(), queryPool, query, flags, index);
+        callPJV(commandBuffer.address(), queryPool, query, flags, index, __functionAddress);
     }
 
     // --- [ vkCmdEndQueryIndexedEXT ] ---
@@ -538,7 +538,7 @@ public class EXTTransformFeedback {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJV(__functionAddress, commandBuffer.address(), queryPool, query, index);
+        callPJV(commandBuffer.address(), queryPool, query, index, __functionAddress);
     }
 
     // --- [ vkCmdDrawIndirectByteCountEXT ] ---
@@ -641,7 +641,7 @@ public class EXTTransformFeedback {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJJV(__functionAddress, commandBuffer.address(), instanceCount, firstInstance, counterBuffer, counterBufferOffset, counterOffset, vertexStride);
+        callPJJV(commandBuffer.address(), instanceCount, firstInstance, counterBuffer, counterBufferOffset, counterOffset, vertexStride, __functionAddress);
     }
 
     /** Array version of: {@link #vkCmdBindTransformFeedbackBuffersEXT CmdBindTransformFeedbackBuffersEXT} */
@@ -652,7 +652,7 @@ public class EXTTransformFeedback {
             check(pOffsets, pBuffers.length);
             checkSafe(pSizes, pBuffers.length);
         }
-        callPPPPV(__functionAddress, commandBuffer.address(), firstBinding, pBuffers.length, pBuffers, pOffsets, pSizes);
+        callPPPPV(commandBuffer.address(), firstBinding, pBuffers.length, pBuffers, pOffsets, pSizes, __functionAddress);
     }
 
     /** Array version of: {@link #vkCmdBeginTransformFeedbackEXT CmdBeginTransformFeedbackEXT} */
@@ -662,7 +662,7 @@ public class EXTTransformFeedback {
             check(__functionAddress);
             checkSafe(pCounterBufferOffsets, lengthSafe(pCounterBuffers));
         }
-        callPPPV(__functionAddress, commandBuffer.address(), firstCounterBuffer, lengthSafe(pCounterBuffers), pCounterBuffers, pCounterBufferOffsets);
+        callPPPV(commandBuffer.address(), firstCounterBuffer, lengthSafe(pCounterBuffers), pCounterBuffers, pCounterBufferOffsets, __functionAddress);
     }
 
     /** Array version of: {@link #vkCmdEndTransformFeedbackEXT CmdEndTransformFeedbackEXT} */
@@ -672,7 +672,7 @@ public class EXTTransformFeedback {
             check(__functionAddress);
             checkSafe(pCounterBufferOffsets, lengthSafe(pCounterBuffers));
         }
-        callPPPV(__functionAddress, commandBuffer.address(), firstCounterBuffer, lengthSafe(pCounterBuffers), pCounterBuffers, pCounterBufferOffsets);
+        callPPPV(commandBuffer.address(), firstCounterBuffer, lengthSafe(pCounterBuffers), pCounterBuffers, pCounterBufferOffsets, __functionAddress);
     }
 
 }

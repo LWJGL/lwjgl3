@@ -56,7 +56,7 @@ public class KHRDisplayReference {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPI(__functionAddress, dpy, name, value);
+        return callPPI(dpy, name, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")

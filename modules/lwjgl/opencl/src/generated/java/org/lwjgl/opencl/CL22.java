@@ -48,7 +48,7 @@ public class CL22 extends CL21 {
             check(__functionAddress);
             check(program);
         }
-        return callPPPI(__functionAddress, program, pfn_notify, user_data);
+        return callPPPI(program, pfn_notify, user_data, __functionAddress);
     }
 
     /**
@@ -86,7 +86,7 @@ public class CL22 extends CL21 {
             check(__functionAddress);
             check(program);
         }
-        return callPPPI(__functionAddress, program, spec_id, spec_size, spec_value);
+        return callPPPI(program, spec_id, spec_size, spec_value, __functionAddress);
     }
 
     /**
@@ -311,7 +311,7 @@ public class CL22 extends CL21 {
             check(__functionAddress);
             check(program);
         }
-        return callPPPI(__functionAddress, program, spec_id, Integer.toUnsignedLong(spec_value.length) << 1, spec_value);
+        return callPPPI(program, spec_id, Integer.toUnsignedLong(spec_value.length) << 1, spec_value, __functionAddress);
     }
 
     /**
@@ -326,7 +326,7 @@ public class CL22 extends CL21 {
             check(__functionAddress);
             check(program);
         }
-        return callPPPI(__functionAddress, program, spec_id, Integer.toUnsignedLong(spec_value.length) << 2, spec_value);
+        return callPPPI(program, spec_id, Integer.toUnsignedLong(spec_value.length) << 2, spec_value, __functionAddress);
     }
 
     /**
@@ -341,7 +341,7 @@ public class CL22 extends CL21 {
             check(__functionAddress);
             check(program);
         }
-        return callPPPI(__functionAddress, program, spec_id, Integer.toUnsignedLong(spec_value.length) << 3, spec_value);
+        return callPPPI(program, spec_id, Integer.toUnsignedLong(spec_value.length) << 3, spec_value, __functionAddress);
     }
 
     /**
@@ -356,7 +356,7 @@ public class CL22 extends CL21 {
             check(__functionAddress);
             check(program);
         }
-        return callPPPI(__functionAddress, program, spec_id, Integer.toUnsignedLong(spec_value.length) << 2, spec_value);
+        return callPPPI(program, spec_id, Integer.toUnsignedLong(spec_value.length) << 2, spec_value, __functionAddress);
     }
 
     /**
@@ -371,7 +371,7 @@ public class CL22 extends CL21 {
             check(__functionAddress);
             check(program);
         }
-        return callPPPI(__functionAddress, program, spec_id, Integer.toUnsignedLong(spec_value.length) << 3, spec_value);
+        return callPPPI(program, spec_id, Integer.toUnsignedLong(spec_value.length) << 3, spec_value, __functionAddress);
     }
 
 }

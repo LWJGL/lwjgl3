@@ -4359,7 +4359,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, ids.length, ids);
+        callPV(ids.length, ids, __functionAddress);
     }
 
     /**
@@ -4373,7 +4373,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(param, 1);
         }
-        callPV(__functionAddress, xfb, pname, param);
+        callPV(xfb, pname, param, __functionAddress);
     }
 
     /**
@@ -4387,7 +4387,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(param, 1);
         }
-        callPV(__functionAddress, xfb, pname, index, param);
+        callPV(xfb, pname, index, param, __functionAddress);
     }
 
     /**
@@ -4401,7 +4401,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(param, 1);
         }
-        callPV(__functionAddress, xfb, pname, index, param);
+        callPV(xfb, pname, index, param, __functionAddress);
     }
 
     /**
@@ -4414,7 +4414,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, buffers.length, buffers);
+        callPV(buffers.length, buffers, __functionAddress);
     }
 
     /**
@@ -4427,7 +4427,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 1, data, flags);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 1, data, flags, __functionAddress);
     }
 
     /**
@@ -4440,7 +4440,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 2, data, flags);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
     }
 
     /**
@@ -4453,7 +4453,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 2, data, flags);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
     }
 
     /**
@@ -4466,7 +4466,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 3, data, flags);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 3, data, flags, __functionAddress);
     }
 
     /**
@@ -4479,7 +4479,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 1, data, usage);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 1, data, usage, __functionAddress);
     }
 
     /**
@@ -4492,7 +4492,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 2, data, usage);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, usage, __functionAddress);
     }
 
     /**
@@ -4505,7 +4505,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 3, data, usage);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 3, data, usage, __functionAddress);
     }
 
     /**
@@ -4518,7 +4518,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 2, data, usage);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, usage, __functionAddress);
     }
 
     /**
@@ -4531,7 +4531,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, buffer, Integer.toUnsignedLong(data.length) << 3, data, usage);
+        callPPV(buffer, Integer.toUnsignedLong(data.length) << 3, data, usage, __functionAddress);
     }
 
     /**
@@ -4544,7 +4544,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, offset, Integer.toUnsignedLong(data.length) << 1, data);
+        callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 1, data, __functionAddress);
     }
 
     /**
@@ -4557,7 +4557,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, offset, Integer.toUnsignedLong(data.length) << 2, data);
+        callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
     /**
@@ -4570,7 +4570,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, offset, Integer.toUnsignedLong(data.length) << 3, data);
+        callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 3, data, __functionAddress);
     }
 
     /**
@@ -4583,7 +4583,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, offset, Integer.toUnsignedLong(data.length) << 2, data);
+        callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
     /**
@@ -4596,7 +4596,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, offset, Integer.toUnsignedLong(data.length) << 3, data);
+        callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 3, data, __functionAddress);
     }
 
     /**
@@ -4609,7 +4609,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, buffer, internalformat, format, type, data);
+        callPV(buffer, internalformat, format, type, data, __functionAddress);
     }
 
     /**
@@ -4622,7 +4622,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, buffer, internalformat, format, type, data);
+        callPV(buffer, internalformat, format, type, data, __functionAddress);
     }
 
     /**
@@ -4635,7 +4635,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, buffer, internalformat, format, type, data);
+        callPV(buffer, internalformat, format, type, data, __functionAddress);
     }
 
     /**
@@ -4648,7 +4648,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+        callPPPV(buffer, internalformat, offset, size, format, type, data, __functionAddress);
     }
 
     /**
@@ -4661,7 +4661,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+        callPPPV(buffer, internalformat, offset, size, format, type, data, __functionAddress);
     }
 
     /**
@@ -4674,7 +4674,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+        callPPPV(buffer, internalformat, offset, size, format, type, data, __functionAddress);
     }
 
     /**
@@ -4688,7 +4688,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, buffer, pname, params);
+        callPV(buffer, pname, params, __functionAddress);
     }
 
     /**
@@ -4702,7 +4702,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, buffer, pname, params);
+        callPV(buffer, pname, params, __functionAddress);
     }
 
     /**
@@ -4715,7 +4715,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, offset, Integer.toUnsignedLong(data.length) << 1, data);
+        callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 1, data, __functionAddress);
     }
 
     /**
@@ -4728,7 +4728,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, offset, Integer.toUnsignedLong(data.length) << 2, data);
+        callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
     /**
@@ -4741,7 +4741,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, offset, Integer.toUnsignedLong(data.length) << 3, data);
+        callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 3, data, __functionAddress);
     }
 
     /**
@@ -4754,7 +4754,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, offset, Integer.toUnsignedLong(data.length) << 2, data);
+        callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
     /**
@@ -4767,7 +4767,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, offset, Integer.toUnsignedLong(data.length) << 3, data);
+        callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 3, data, __functionAddress);
     }
 
     /**
@@ -4780,7 +4780,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, framebuffers.length, framebuffers);
+        callPV(framebuffers.length, framebuffers, __functionAddress);
     }
 
     /**
@@ -4793,7 +4793,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, framebuffer, bufs.length, bufs);
+        callPV(framebuffer, bufs.length, bufs, __functionAddress);
     }
 
     /**
@@ -4806,7 +4806,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, framebuffer, attachments.length, attachments);
+        callPV(framebuffer, attachments.length, attachments, __functionAddress);
     }
 
     /**
@@ -4819,7 +4819,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, framebuffer, attachments.length, attachments, x, y, width, height);
+        callPV(framebuffer, attachments.length, attachments, x, y, width, height, __functionAddress);
     }
 
     /**
@@ -4833,7 +4833,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(value, 1);
         }
-        callPV(__functionAddress, framebuffer, buffer, drawbuffer, value);
+        callPV(framebuffer, buffer, drawbuffer, value, __functionAddress);
     }
 
     /**
@@ -4847,7 +4847,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(value, 4);
         }
-        callPV(__functionAddress, framebuffer, buffer, drawbuffer, value);
+        callPV(framebuffer, buffer, drawbuffer, value, __functionAddress);
     }
 
     /**
@@ -4861,7 +4861,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(value, 1);
         }
-        callPV(__functionAddress, framebuffer, buffer, drawbuffer, value);
+        callPV(framebuffer, buffer, drawbuffer, value, __functionAddress);
     }
 
     /**
@@ -4875,7 +4875,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, framebuffer, pname, params);
+        callPV(framebuffer, pname, params, __functionAddress);
     }
 
     /**
@@ -4889,7 +4889,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, framebuffer, attachment, pname, params);
+        callPV(framebuffer, attachment, pname, params, __functionAddress);
     }
 
     /**
@@ -4902,7 +4902,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, renderbuffers.length, renderbuffers);
+        callPV(renderbuffers.length, renderbuffers, __functionAddress);
     }
 
     /**
@@ -4916,7 +4916,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, renderbuffer, pname, params);
+        callPV(renderbuffer, pname, params, __functionAddress);
     }
 
     /**
@@ -4929,7 +4929,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, textures.length, textures);
+        callPV(target, textures.length, textures, __functionAddress);
     }
 
     /**
@@ -4942,7 +4942,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, width, format, type, pixels);
+        callPV(texture, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -4955,7 +4955,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, width, format, type, pixels);
+        callPV(texture, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -4968,7 +4968,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, width, format, type, pixels);
+        callPV(texture, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -4981,7 +4981,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, width, format, type, pixels);
+        callPV(texture, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -4994,7 +4994,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, width, height, format, type, pixels);
+        callPV(texture, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -5007,7 +5007,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, width, height, format, type, pixels);
+        callPV(texture, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -5020,7 +5020,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, width, height, format, type, pixels);
+        callPV(texture, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -5033,7 +5033,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, width, height, format, type, pixels);
+        callPV(texture, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -5046,7 +5046,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -5059,7 +5059,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -5072,7 +5072,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -5085,7 +5085,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
     /**
@@ -5099,7 +5099,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, texture, pname, params);
+        callPV(texture, pname, params, __functionAddress);
     }
 
     /**
@@ -5113,7 +5113,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, texture, pname, params);
+        callPV(texture, pname, params, __functionAddress);
     }
 
     /**
@@ -5127,7 +5127,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, texture, pname, params);
+        callPV(texture, pname, params, __functionAddress);
     }
 
     /**
@@ -5141,7 +5141,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, texture, pname, params);
+        callPV(texture, pname, params, __functionAddress);
     }
 
     /**
@@ -5154,7 +5154,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, format, type, pixels.length << 1, pixels);
+        callPV(texture, level, format, type, pixels.length << 1, pixels, __functionAddress);
     }
 
     /**
@@ -5167,7 +5167,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, format, type, pixels.length << 2, pixels);
+        callPV(texture, level, format, type, pixels.length << 2, pixels, __functionAddress);
     }
 
     /**
@@ -5180,7 +5180,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, format, type, pixels.length << 2, pixels);
+        callPV(texture, level, format, type, pixels.length << 2, pixels, __functionAddress);
     }
 
     /**
@@ -5193,7 +5193,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, format, type, pixels.length << 3, pixels);
+        callPV(texture, level, format, type, pixels.length << 3, pixels, __functionAddress);
     }
 
     /**
@@ -5207,7 +5207,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, texture, level, pname, params);
+        callPV(texture, level, pname, params, __functionAddress);
     }
 
     /**
@@ -5221,7 +5221,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, texture, level, pname, params);
+        callPV(texture, level, pname, params, __functionAddress);
     }
 
     /**
@@ -5235,7 +5235,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, texture, pname, params);
+        callPV(texture, pname, params, __functionAddress);
     }
 
     /**
@@ -5249,7 +5249,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, texture, pname, params);
+        callPV(texture, pname, params, __functionAddress);
     }
 
     /**
@@ -5263,7 +5263,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, texture, pname, params);
+        callPV(texture, pname, params, __functionAddress);
     }
 
     /**
@@ -5277,7 +5277,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, texture, pname, params);
+        callPV(texture, pname, params, __functionAddress);
     }
 
     /**
@@ -5290,7 +5290,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, arrays.length, arrays);
+        callPV(arrays.length, arrays, __functionAddress);
     }
 
     /**
@@ -5305,7 +5305,7 @@ public class GL45C extends GL44C {
             checkSafe(offsets, lengthSafe(buffers));
             checkSafe(strides, lengthSafe(buffers));
         }
-        callPPPV(__functionAddress, vaobj, first, lengthSafe(buffers), buffers, memAddressSafe(offsets), strides);
+        callPPPV(vaobj, first, lengthSafe(buffers), buffers, memAddressSafe(offsets), strides, __functionAddress);
     }
 
     /**
@@ -5319,7 +5319,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(param, 1);
         }
-        callPV(__functionAddress, vaobj, pname, param);
+        callPV(vaobj, pname, param, __functionAddress);
     }
 
     /**
@@ -5333,7 +5333,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(param, 1);
         }
-        callPV(__functionAddress, vaobj, index, pname, param);
+        callPV(vaobj, index, pname, param, __functionAddress);
     }
 
     /**
@@ -5347,7 +5347,7 @@ public class GL45C extends GL44C {
             check(__functionAddress);
             check(param, 1);
         }
-        callPV(__functionAddress, vaobj, index, pname, param);
+        callPV(vaobj, index, pname, param, __functionAddress);
     }
 
     /**
@@ -5360,7 +5360,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, samplers.length, samplers);
+        callPV(samplers.length, samplers, __functionAddress);
     }
 
     /**
@@ -5373,7 +5373,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pipelines.length, pipelines);
+        callPV(pipelines.length, pipelines, __functionAddress);
     }
 
     /**
@@ -5386,7 +5386,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, ids.length, ids);
+        callPV(target, ids.length, ids, __functionAddress);
     }
 
     /**
@@ -5399,7 +5399,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels.length << 1, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels.length << 1, pixels, __functionAddress);
     }
 
     /**
@@ -5412,7 +5412,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels.length << 2, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels.length << 2, pixels, __functionAddress);
     }
 
     /**
@@ -5425,7 +5425,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels.length << 2, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels.length << 2, pixels, __functionAddress);
     }
 
     /**
@@ -5438,7 +5438,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels.length << 3, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels.length << 3, pixels, __functionAddress);
     }
 
     /**
@@ -5451,7 +5451,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels.length << 1, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels.length << 1, pixels, __functionAddress);
     }
 
     /**
@@ -5464,7 +5464,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels.length << 2, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels.length << 2, pixels, __functionAddress);
     }
 
     /**
@@ -5477,7 +5477,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels.length << 2, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels.length << 2, pixels, __functionAddress);
     }
 
     /**
@@ -5490,7 +5490,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels.length << 3, pixels);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, pixels.length << 3, pixels, __functionAddress);
     }
 
     /**
@@ -5503,7 +5503,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, tex, level, format, type, img.length << 1, img);
+        callPV(tex, level, format, type, img.length << 1, img, __functionAddress);
     }
 
     /**
@@ -5516,7 +5516,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, tex, level, format, type, img.length << 2, img);
+        callPV(tex, level, format, type, img.length << 2, img, __functionAddress);
     }
 
     /**
@@ -5529,7 +5529,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, tex, level, format, type, img.length << 2, img);
+        callPV(tex, level, format, type, img.length << 2, img, __functionAddress);
     }
 
     /**
@@ -5542,7 +5542,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, tex, level, format, type, img.length << 3, img);
+        callPV(tex, level, format, type, img.length << 3, img, __functionAddress);
     }
 
     /**
@@ -5555,7 +5555,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, pixels.length << 1, pixels);
+        callPV(x, y, width, height, format, type, pixels.length << 1, pixels, __functionAddress);
     }
 
     /**
@@ -5568,7 +5568,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, pixels.length << 2, pixels);
+        callPV(x, y, width, height, format, type, pixels.length << 2, pixels, __functionAddress);
     }
 
     /**
@@ -5581,7 +5581,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, x, y, width, height, format, type, pixels.length << 2, pixels);
+        callPV(x, y, width, height, format, type, pixels.length << 2, pixels, __functionAddress);
     }
 
     /**
@@ -5594,7 +5594,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /**
@@ -5607,7 +5607,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /**
@@ -5620,7 +5620,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
     /**
@@ -5633,7 +5633,7 @@ public class GL45C extends GL44C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, params.length, params);
+        callPV(program, location, params.length, params, __functionAddress);
     }
 
 }

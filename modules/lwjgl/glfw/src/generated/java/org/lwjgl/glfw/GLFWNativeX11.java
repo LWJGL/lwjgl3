@@ -76,7 +76,7 @@ public class GLFWNativeX11 {
         if (CHECKS) {
             check(monitor);
         }
-        return invokePP(__functionAddress, monitor);
+        return invokePP(monitor, __functionAddress);
     }
 
     // --- [ glfwGetX11Monitor ] ---
@@ -98,7 +98,7 @@ public class GLFWNativeX11 {
         if (CHECKS) {
             check(monitor);
         }
-        return invokePP(__functionAddress, monitor);
+        return invokePP(monitor, __functionAddress);
     }
 
     // --- [ glfwGetX11Window ] ---
@@ -120,7 +120,7 @@ public class GLFWNativeX11 {
         if (CHECKS) {
             check(window);
         }
-        return invokePP(__functionAddress, window);
+        return invokePP(window, __functionAddress);
     }
 
     // --- [ glfwSetX11SelectionString ] ---
@@ -128,7 +128,7 @@ public class GLFWNativeX11 {
     /** Unsafe version of: {@link #glfwSetX11SelectionString SetX11SelectionString} */
     public static void nglfwSetX11SelectionString(long string) {
         long __functionAddress = Functions.SetX11SelectionString;
-        invokePV(__functionAddress, string);
+        invokePV(string, __functionAddress);
     }
 
     /**

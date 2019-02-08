@@ -44,7 +44,7 @@ public class CL12GL extends CL10GL {
             check(__functionAddress);
             check(context);
         }
-        return callPJPP(__functionAddress, context, flags, texture_target, miplevel, texture, errcode_ret);
+        return callPJPP(context, flags, texture_target, miplevel, texture, errcode_ret, __functionAddress);
     }
 
     /**
@@ -118,7 +118,7 @@ public class CL12GL extends CL10GL {
             check(context);
             checkSafe(errcode_ret, 1);
         }
-        return callPJPP(__functionAddress, context, flags, texture_target, miplevel, texture, errcode_ret);
+        return callPJPP(context, flags, texture_target, miplevel, texture, errcode_ret, __functionAddress);
     }
 
 }

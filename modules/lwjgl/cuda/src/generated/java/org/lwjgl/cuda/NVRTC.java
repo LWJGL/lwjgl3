@@ -95,7 +95,7 @@ public class NVRTC {
 
     public static long nnvrtcGetErrorString(int result) {
         long __functionAddress = Functions.GetErrorString;
-        return callP(__functionAddress, result);
+        return callP(result, __functionAddress);
     }
 
     @Nullable
@@ -109,7 +109,7 @@ public class NVRTC {
 
     public static int nnvrtcVersion(long major, long minor) {
         long __functionAddress = Functions.Version;
-        return callPPI(__functionAddress, major, minor);
+        return callPPI(major, minor, __functionAddress);
     }
 
     @NativeType("nvrtcResult")
@@ -125,7 +125,7 @@ public class NVRTC {
 
     public static int nnvrtcCreateProgram(long prog, long src, long name, int numHeaders, long headers, long includeNames) {
         long __functionAddress = Functions.CreateProgram;
-        return callPPPPPI(__functionAddress, prog, src, name, numHeaders, headers, includeNames);
+        return callPPPPPI(prog, src, name, numHeaders, headers, includeNames, __functionAddress);
     }
 
     @NativeType("nvrtcResult")
@@ -161,7 +161,7 @@ public class NVRTC {
 
     public static int nnvrtcDestroyProgram(long prog) {
         long __functionAddress = Functions.DestroyProgram;
-        return callPI(__functionAddress, prog);
+        return callPI(prog, __functionAddress);
     }
 
     @NativeType("nvrtcResult")
@@ -179,7 +179,7 @@ public class NVRTC {
         if (CHECKS) {
             check(prog);
         }
-        return callPPI(__functionAddress, prog, numOptions, options);
+        return callPPI(prog, numOptions, options, __functionAddress);
     }
 
     @NativeType("nvrtcResult")
@@ -194,7 +194,7 @@ public class NVRTC {
         if (CHECKS) {
             check(prog);
         }
-        return callPPI(__functionAddress, prog, ptxSizeRet);
+        return callPPI(prog, ptxSizeRet, __functionAddress);
     }
 
     @NativeType("nvrtcResult")
@@ -212,7 +212,7 @@ public class NVRTC {
         if (CHECKS) {
             check(prog);
         }
-        return callPPI(__functionAddress, prog, ptx);
+        return callPPI(prog, ptx, __functionAddress);
     }
 
     @NativeType("nvrtcResult")
@@ -227,7 +227,7 @@ public class NVRTC {
         if (CHECKS) {
             check(prog);
         }
-        return callPPI(__functionAddress, prog, logSizeRet);
+        return callPPI(prog, logSizeRet, __functionAddress);
     }
 
     @NativeType("nvrtcResult")
@@ -245,7 +245,7 @@ public class NVRTC {
         if (CHECKS) {
             check(prog);
         }
-        return callPPI(__functionAddress, prog, log);
+        return callPPI(prog, log, __functionAddress);
     }
 
     @NativeType("nvrtcResult")
@@ -260,7 +260,7 @@ public class NVRTC {
         if (CHECKS) {
             check(prog);
         }
-        return callPPI(__functionAddress, prog, name_expression);
+        return callPPI(prog, name_expression, __functionAddress);
     }
 
     @NativeType("nvrtcResult")
@@ -290,7 +290,7 @@ public class NVRTC {
         if (CHECKS) {
             check(prog);
         }
-        return callPPPI(__functionAddress, prog, name_expression, lowered_name);
+        return callPPPI(prog, name_expression, lowered_name, __functionAddress);
     }
 
     @NativeType("nvrtcResult")

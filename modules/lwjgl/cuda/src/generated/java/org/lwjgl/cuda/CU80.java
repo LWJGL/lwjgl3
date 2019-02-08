@@ -192,7 +192,7 @@ public class CU80 extends CU70 {
         if (CHECKS) {
             check(devPtr);
         }
-        return callPPPI(__functionAddress, devPtr, count, dstDevice, hStream);
+        return callPPPI(devPtr, count, dstDevice, hStream, __functionAddress);
     }
 
     // --- [ cuMemAdvise ] ---
@@ -203,7 +203,7 @@ public class CU80 extends CU70 {
         if (CHECKS) {
             check(devPtr);
         }
-        return callPPI(__functionAddress, devPtr, count, advice, device);
+        return callPPI(devPtr, count, advice, device, __functionAddress);
     }
 
     // --- [ cuMemRangeGetAttribute ] ---
@@ -213,7 +213,7 @@ public class CU80 extends CU70 {
         if (CHECKS) {
             check(devPtr);
         }
-        return callPPPPI(__functionAddress, data, dataSize, attribute, devPtr, count);
+        return callPPPPI(data, dataSize, attribute, devPtr, count, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -228,7 +228,7 @@ public class CU80 extends CU70 {
         if (CHECKS) {
             check(devPtr);
         }
-        return callPPPPPPI(__functionAddress, data, dataSizes, attributes, numAttributes, devPtr, count);
+        return callPPPPPPI(data, dataSizes, attributes, numAttributes, devPtr, count, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -248,7 +248,7 @@ public class CU80 extends CU70 {
         if (CHECKS) {
             check(addr);
         }
-        return callPPI(__functionAddress, stream, addr, value, flags);
+        return callPPI(stream, addr, value, flags, __functionAddress);
     }
 
     // --- [ cuStreamWaitValue64 ] ---
@@ -259,7 +259,7 @@ public class CU80 extends CU70 {
         if (CHECKS) {
             check(addr);
         }
-        return callPPJI(__functionAddress, stream, addr, value, flags);
+        return callPPJI(stream, addr, value, flags, __functionAddress);
     }
 
     // --- [ cuStreamWriteValue32 ] ---
@@ -270,7 +270,7 @@ public class CU80 extends CU70 {
         if (CHECKS) {
             check(addr);
         }
-        return callPPI(__functionAddress, stream, addr, value, flags);
+        return callPPI(stream, addr, value, flags, __functionAddress);
     }
 
     // --- [ cuStreamWriteValue64 ] ---
@@ -281,14 +281,14 @@ public class CU80 extends CU70 {
         if (CHECKS) {
             check(addr);
         }
-        return callPPJI(__functionAddress, stream, addr, value, flags);
+        return callPPJI(stream, addr, value, flags, __functionAddress);
     }
 
     // --- [ cuStreamBatchMemOp ] ---
 
     public static int ncuStreamBatchMemOp(long stream, int count, long paramArray, int flags) {
         long __functionAddress = Functions.StreamBatchMemOp;
-        return callPPI(__functionAddress, stream, count, paramArray, flags);
+        return callPPI(stream, count, paramArray, flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -300,7 +300,7 @@ public class CU80 extends CU70 {
 
     public static int ncuDeviceGetP2PAttribute(long value, int attrib, int srcDevice, int dstDevice) {
         long __functionAddress = Functions.DeviceGetP2PAttribute;
-        return callPI(__functionAddress, value, attrib, srcDevice, dstDevice);
+        return callPI(value, attrib, srcDevice, dstDevice, __functionAddress);
     }
 
     @NativeType("CUresult")

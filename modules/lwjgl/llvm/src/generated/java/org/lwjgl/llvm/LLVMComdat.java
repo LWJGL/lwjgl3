@@ -64,7 +64,7 @@ public class LLVMComdat {
         if (CHECKS) {
             check(M);
         }
-        return invokePPP(__functionAddress, M, Name);
+        return invokePPP(M, Name, __functionAddress);
     }
 
     /** Return the {@code Comdat} in the module with the specified name. It is created if it didn't already exist. */
@@ -98,7 +98,7 @@ public class LLVMComdat {
         if (CHECKS) {
             check(V);
         }
-        return invokePP(__functionAddress, V);
+        return invokePP(V, __functionAddress);
     }
 
     // --- [ LLVMSetComdat ] ---
@@ -110,7 +110,7 @@ public class LLVMComdat {
             check(V);
             check(C);
         }
-        invokePPV(__functionAddress, V, C);
+        invokePPV(V, C, __functionAddress);
     }
 
     // --- [ LLVMGetComdatSelectionKind ] ---
@@ -122,7 +122,7 @@ public class LLVMComdat {
         if (CHECKS) {
             check(C);
         }
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     // --- [ LLVMSetComdatSelectionKind ] ---
@@ -133,7 +133,7 @@ public class LLVMComdat {
         if (CHECKS) {
             check(C);
         }
-        invokePV(__functionAddress, C, Kind);
+        invokePV(C, Kind, __functionAddress);
     }
 
 }

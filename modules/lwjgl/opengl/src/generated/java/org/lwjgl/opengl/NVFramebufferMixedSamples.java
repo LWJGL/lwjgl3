@@ -128,7 +128,7 @@ public class NVFramebufferMixedSamples {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, v.length, v);
+        callPV(v.length, v, __functionAddress);
     }
 
     /** Array version of: {@link #glGetCoverageModulationTableNV GetCoverageModulationTableNV} */
@@ -137,7 +137,7 @@ public class NVFramebufferMixedSamples {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, v.length, v);
+        callPV(v.length, v, __functionAddress);
     }
 
 }

@@ -65,7 +65,7 @@ public class GLFWNativeWayland {
         if (CHECKS) {
             check(monitor);
         }
-        return invokePP(__functionAddress, monitor);
+        return invokePP(monitor, __functionAddress);
     }
 
     // --- [ glfwGetWaylandWindow ] ---
@@ -85,7 +85,7 @@ public class GLFWNativeWayland {
         if (CHECKS) {
             check(window);
         }
-        return invokePP(__functionAddress, window);
+        return invokePP(window, __functionAddress);
     }
 
 }

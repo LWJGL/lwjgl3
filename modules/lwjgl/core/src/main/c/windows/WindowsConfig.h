@@ -12,3 +12,7 @@
 #ifndef __cplusplus
     #define inline __forceinline
 #endif
+
+// JNIEXPORT_CRITICAL & CRITICAL are used as a workaround for JDK-8167409 on applicable functions.
+#define JNIEXPORT_CRITICAL JNIEXPORT
+#define CRITICAL(function) JavaCritical_##function

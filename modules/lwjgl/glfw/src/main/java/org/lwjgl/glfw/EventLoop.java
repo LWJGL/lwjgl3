@@ -85,9 +85,9 @@ final class EventLoop {
         long objc_msgSend = ObjCRuntime.getLibrary().getFunctionAddress("objc_msgSend");
 
         long NSThread      = objc_getClass("NSThread");
-        long currentThread = invokePPP(objc_msgSend, NSThread, sel_getUid("currentThread"));
+        long currentThread = invokePPP(NSThread, sel_getUid("currentThread"), objc_msgSend);
 
-        return invokePPZ(objc_msgSend, currentThread, sel_getUid("isMainThread"));
+        return invokePPZ(currentThread, sel_getUid("isMainThread"), objc_msgSend);
     }
 
     private static boolean isJavaStartedOnFirstThread() {

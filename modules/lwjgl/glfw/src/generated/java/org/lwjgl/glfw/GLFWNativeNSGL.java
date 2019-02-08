@@ -48,7 +48,7 @@ public class GLFWNativeNSGL {
         if (CHECKS) {
             check(window);
         }
-        return invokePP(__functionAddress, window);
+        return invokePP(window, __functionAddress);
     }
 
 }

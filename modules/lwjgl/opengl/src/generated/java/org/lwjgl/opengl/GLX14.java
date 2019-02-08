@@ -40,7 +40,7 @@ public class GLX14 extends GLX13 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPP(__functionAddress, procName);
+        return callPP(procName, __functionAddress);
     }
 
     /**

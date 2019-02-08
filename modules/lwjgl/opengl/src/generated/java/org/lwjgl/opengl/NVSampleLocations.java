@@ -120,7 +120,7 @@ public class NVSampleLocations {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, start, v.length >> 1, v);
+        callPV(target, start, v.length >> 1, v, __functionAddress);
     }
 
     /** Array version of: {@link #glNamedFramebufferSampleLocationsfvNV NamedFramebufferSampleLocationsfvNV} */
@@ -129,7 +129,7 @@ public class NVSampleLocations {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, framebuffer, start, v.length >> 1, v);
+        callPV(framebuffer, start, v.length >> 1, v, __functionAddress);
     }
 
 }

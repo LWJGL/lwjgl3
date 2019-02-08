@@ -91,7 +91,7 @@ public class KHRExternalMemoryWin32 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, device.address(), pGetWin32HandleInfo, pHandle);
+        return callPPPI(device.address(), pGetWin32HandleInfo, pHandle, __functionAddress);
     }
 
     /**
@@ -158,7 +158,7 @@ public class KHRExternalMemoryWin32 {
             check(__functionAddress);
             check(handle);
         }
-        return callPPPI(__functionAddress, device.address(), handleType, handle, pMemoryWin32HandleProperties);
+        return callPPPI(device.address(), handleType, handle, pMemoryWin32HandleProperties, __functionAddress);
     }
 
     /**

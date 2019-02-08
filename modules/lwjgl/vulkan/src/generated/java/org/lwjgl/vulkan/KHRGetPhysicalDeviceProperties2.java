@@ -168,7 +168,7 @@ public class KHRGetPhysicalDeviceProperties2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, physicalDevice.address(), pFeatures);
+        callPPV(physicalDevice.address(), pFeatures, __functionAddress);
     }
 
     /**
@@ -189,7 +189,7 @@ public class KHRGetPhysicalDeviceProperties2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, physicalDevice.address(), pProperties);
+        callPPV(physicalDevice.address(), pProperties, __functionAddress);
     }
 
     /**
@@ -210,7 +210,7 @@ public class KHRGetPhysicalDeviceProperties2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, physicalDevice.address(), format, pFormatProperties);
+        callPPV(physicalDevice.address(), format, pFormatProperties, __functionAddress);
     }
 
     /**
@@ -232,7 +232,7 @@ public class KHRGetPhysicalDeviceProperties2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, physicalDevice.address(), pImageFormatInfo, pImageFormatProperties);
+        return callPPPI(physicalDevice.address(), pImageFormatInfo, pImageFormatProperties, __functionAddress);
     }
 
     /**
@@ -259,7 +259,7 @@ public class KHRGetPhysicalDeviceProperties2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, physicalDevice.address(), pQueueFamilyPropertyCount, pQueueFamilyProperties);
+        callPPPV(physicalDevice.address(), pQueueFamilyPropertyCount, pQueueFamilyProperties, __functionAddress);
     }
 
     /**
@@ -285,7 +285,7 @@ public class KHRGetPhysicalDeviceProperties2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, physicalDevice.address(), pMemoryProperties);
+        callPPV(physicalDevice.address(), pMemoryProperties, __functionAddress);
     }
 
     /**
@@ -310,7 +310,7 @@ public class KHRGetPhysicalDeviceProperties2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPPV(__functionAddress, physicalDevice.address(), pFormatInfo, pPropertyCount, pProperties);
+        callPPPPV(physicalDevice.address(), pFormatInfo, pPropertyCount, pProperties, __functionAddress);
     }
 
     /**
@@ -337,7 +337,7 @@ public class KHRGetPhysicalDeviceProperties2 {
             check(pQueueFamilyPropertyCount, 1);
             checkSafe(pQueueFamilyProperties, pQueueFamilyPropertyCount[0]);
         }
-        callPPPV(__functionAddress, physicalDevice.address(), pQueueFamilyPropertyCount, memAddressSafe(pQueueFamilyProperties));
+        callPPPV(physicalDevice.address(), pQueueFamilyPropertyCount, memAddressSafe(pQueueFamilyProperties), __functionAddress);
     }
 
     /** Array version of: {@link #vkGetPhysicalDeviceSparseImageFormatProperties2KHR GetPhysicalDeviceSparseImageFormatProperties2KHR} */
@@ -348,7 +348,7 @@ public class KHRGetPhysicalDeviceProperties2 {
             check(pPropertyCount, 1);
             checkSafe(pProperties, pPropertyCount[0]);
         }
-        callPPPPV(__functionAddress, physicalDevice.address(), pFormatInfo.address(), pPropertyCount, memAddressSafe(pProperties));
+        callPPPPV(physicalDevice.address(), pFormatInfo.address(), pPropertyCount, memAddressSafe(pProperties), __functionAddress);
     }
 
 }

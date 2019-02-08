@@ -87,7 +87,7 @@ public class KHRPushDescriptor {
             check(__functionAddress);
             VkWriteDescriptorSet.validate(pDescriptorWrites, descriptorWriteCount);
         }
-        callPJPV(__functionAddress, commandBuffer.address(), pipelineBindPoint, layout, set, descriptorWriteCount, pDescriptorWrites);
+        callPJPV(commandBuffer.address(), pipelineBindPoint, layout, set, descriptorWriteCount, pDescriptorWrites, __functionAddress);
     }
 
     /**
@@ -285,7 +285,7 @@ public class KHRPushDescriptor {
             check(__functionAddress);
             check(pData);
         }
-        callPJJPV(__functionAddress, commandBuffer.address(), descriptorUpdateTemplate, layout, set, pData);
+        callPJJPV(commandBuffer.address(), descriptorUpdateTemplate, layout, set, pData, __functionAddress);
     }
 
 }

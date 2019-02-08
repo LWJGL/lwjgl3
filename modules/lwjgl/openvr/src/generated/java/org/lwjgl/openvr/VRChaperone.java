@@ -48,7 +48,7 @@ public class VRChaperone {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pSizeX, pSizeZ);
+        return callPPZ(pSizeX, pSizeZ, __functionAddress);
     }
 
     /** Returns the width and depth of the Play Area (formerly named Soft Bounds) in X and Z. Tracking space center(0, 0, 0) is the center of the Play Area. */
@@ -69,7 +69,7 @@ public class VRChaperone {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, rect);
+        return callPZ(rect, __functionAddress);
     }
 
     /**
@@ -102,7 +102,7 @@ public class VRChaperone {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, color);
+        callPV(color, __functionAddress);
     }
 
     /** Optionally give the chaperone system a hit about the color and brightness in the scene. */
@@ -118,7 +118,7 @@ public class VRChaperone {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, pOutputColorArray, nNumOutputColors, flCollisionBoundsFadeDistance, pOutputCameraColor);
+        callPPV(pOutputColorArray, nNumOutputColors, flCollisionBoundsFadeDistance, pOutputCameraColor, __functionAddress);
     }
 
     /** Get the current chaperone bounds draw color and brightness. */
@@ -146,7 +146,7 @@ public class VRChaperone {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(__functionAddress, bForce);
+        callV(bForce, __functionAddress);
     }
 
 }

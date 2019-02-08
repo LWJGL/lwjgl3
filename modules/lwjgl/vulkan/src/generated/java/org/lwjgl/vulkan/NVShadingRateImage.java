@@ -245,7 +245,7 @@ public class NVShadingRateImage {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJV(__functionAddress, commandBuffer.address(), imageView, imageLayout);
+        callPJV(commandBuffer.address(), imageView, imageLayout, __functionAddress);
     }
 
     // --- [ vkCmdSetViewportShadingRatePaletteNV ] ---
@@ -261,7 +261,7 @@ public class NVShadingRateImage {
             check(__functionAddress);
             VkShadingRatePaletteNV.validate(pShadingRatePalettes, viewportCount);
         }
-        callPPV(__functionAddress, commandBuffer.address(), firstViewport, viewportCount, pShadingRatePalettes);
+        callPPV(commandBuffer.address(), firstViewport, viewportCount, pShadingRatePalettes, __functionAddress);
     }
 
     /**
@@ -338,7 +338,7 @@ public class NVShadingRateImage {
             check(__functionAddress);
             if (pCustomSampleOrders != NULL) { VkCoarseSampleOrderCustomNV.validate(pCustomSampleOrders, customSampleOrderCount); }
         }
-        callPPV(__functionAddress, commandBuffer.address(), sampleOrderType, customSampleOrderCount, pCustomSampleOrders);
+        callPPV(commandBuffer.address(), sampleOrderType, customSampleOrderCount, pCustomSampleOrders, __functionAddress);
     }
 
     /**

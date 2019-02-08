@@ -87,7 +87,7 @@ public class CU55 extends CU50 {
 
     public static int ncuLinkCreate(int numOptions, long options, long optionValues, long stateOut) {
         long __functionAddress = Functions.LinkCreate;
-        return callPPPI(__functionAddress, numOptions, options, optionValues, stateOut);
+        return callPPPI(numOptions, options, optionValues, stateOut, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -106,7 +106,7 @@ public class CU55 extends CU50 {
         if (CHECKS) {
             check(state);
         }
-        return callPPPPPPI(__functionAddress, state, type, data, size, name, numOptions, options, optionValues);
+        return callPPPPPPI(state, type, data, size, name, numOptions, options, optionValues, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -140,7 +140,7 @@ public class CU55 extends CU50 {
         if (CHECKS) {
             check(state);
         }
-        return callPPPPI(__functionAddress, state, type, path, numOptions, options, optionValues);
+        return callPPPPI(state, type, path, numOptions, options, optionValues, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -174,7 +174,7 @@ public class CU55 extends CU50 {
         if (CHECKS) {
             check(state);
         }
-        return callPPPI(__functionAddress, state, cubinOut, sizeOut);
+        return callPPPI(state, cubinOut, sizeOut, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -194,7 +194,7 @@ public class CU55 extends CU50 {
         if (CHECKS) {
             check(state);
         }
-        return callPI(__functionAddress, state);
+        return callPI(state, __functionAddress);
     }
 
 }

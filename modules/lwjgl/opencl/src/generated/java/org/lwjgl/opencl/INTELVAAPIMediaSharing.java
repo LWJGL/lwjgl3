@@ -95,7 +95,7 @@ public class INTELVAAPIMediaSharing {
             check(platform);
             check(media_adapter);
         }
-        return callPPPPI(__functionAddress, platform, media_adapter_type, media_adapter, media_adapter_set, num_entries, devices, num_devices);
+        return callPPPPI(platform, media_adapter_type, media_adapter, media_adapter_set, num_entries, devices, num_devices, __functionAddress);
     }
 
     /**
@@ -127,7 +127,7 @@ public class INTELVAAPIMediaSharing {
             check(__functionAddress);
             check(context);
         }
-        return callPJPPP(__functionAddress, context, flags, surface, plane, errcode_ret);
+        return callPJPPP(context, flags, surface, plane, errcode_ret, __functionAddress);
     }
 
     /**
@@ -162,7 +162,7 @@ public class INTELVAAPIMediaSharing {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPPI(__functionAddress, command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPI(command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -212,7 +212,7 @@ public class INTELVAAPIMediaSharing {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPPI(__functionAddress, command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPI(command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -258,7 +258,7 @@ public class INTELVAAPIMediaSharing {
             check(media_adapter);
             checkSafe(num_devices, 1);
         }
-        return callPPPPI(__functionAddress, platform, media_adapter_type, media_adapter, media_adapter_set, remainingSafe(devices), memAddressSafe(devices), num_devices);
+        return callPPPPI(platform, media_adapter_type, media_adapter, media_adapter_set, remainingSafe(devices), memAddressSafe(devices), num_devices, __functionAddress);
     }
 
     /** Array version of: {@link #clCreateFromVA_APIMediaSurfaceINTEL CreateFromVA_APIMediaSurfaceINTEL} */
@@ -271,7 +271,7 @@ public class INTELVAAPIMediaSharing {
             check(surface, 1);
             checkSafe(errcode_ret, 1);
         }
-        return callPJPPP(__functionAddress, context, flags, surface, plane, errcode_ret);
+        return callPJPPP(context, flags, surface, plane, errcode_ret, __functionAddress);
     }
 
 }

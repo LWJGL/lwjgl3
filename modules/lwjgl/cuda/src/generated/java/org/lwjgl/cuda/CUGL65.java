@@ -57,7 +57,7 @@ public class CUGL65 extends CUGL {
 
     public static int ncuGLGetDevices(long pCudaDeviceCount, long pCudaDevices, int cudaDeviceCount, int deviceList) {
         long __functionAddress = Functions.GLGetDevices;
-        return callPPI(__functionAddress, pCudaDeviceCount, pCudaDevices, cudaDeviceCount, deviceList);
+        return callPPI(pCudaDeviceCount, pCudaDevices, cudaDeviceCount, deviceList, __functionAddress);
     }
 
     @NativeType("CUresult")

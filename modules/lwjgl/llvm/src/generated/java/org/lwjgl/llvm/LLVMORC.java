@@ -66,7 +66,7 @@ public class LLVMORC {
         if (CHECKS) {
             check(TM);
         }
-        return invokePP(__functionAddress, TM);
+        return invokePP(TM, __functionAddress);
     }
 
     // --- [ LLVMOrcGetErrorMsg ] ---
@@ -77,7 +77,7 @@ public class LLVMORC {
         if (CHECKS) {
             check(JITStack);
         }
-        return invokePP(__functionAddress, JITStack);
+        return invokePP(JITStack, __functionAddress);
     }
 
     /**
@@ -100,7 +100,7 @@ public class LLVMORC {
         if (CHECKS) {
             check(JITStack);
         }
-        invokePPPV(__functionAddress, JITStack, MangledSymbol, Symbol);
+        invokePPPV(JITStack, MangledSymbol, Symbol, __functionAddress);
     }
 
     /** Mangle the given symbol. Memory will be allocated for {@code MangledSymbol} to hold the result. */
@@ -132,7 +132,7 @@ public class LLVMORC {
     /** Unsafe version of: {@link #LLVMOrcDisposeMangledSymbol OrcDisposeMangledSymbol} */
     public static void nLLVMOrcDisposeMangledSymbol(long MangledSymbol) {
         long __functionAddress = Functions.OrcDisposeMangledSymbol;
-        invokePV(__functionAddress, MangledSymbol);
+        invokePV(MangledSymbol, __functionAddress);
     }
 
     /** Dispose of a mangled symbol. */
@@ -149,7 +149,7 @@ public class LLVMORC {
             check(JITStack);
             check(CallbackCtx);
         }
-        return invokePPPPP(__functionAddress, JITStack, RetAddr, Callback, CallbackCtx);
+        return invokePPPPP(JITStack, RetAddr, Callback, CallbackCtx, __functionAddress);
     }
 
     /** Create a lazy compile callback. */
@@ -169,7 +169,7 @@ public class LLVMORC {
         if (CHECKS) {
             check(JITStack);
         }
-        return invokePPJP(__functionAddress, JITStack, StubName, InitAddr);
+        return invokePPJP(JITStack, StubName, InitAddr, __functionAddress);
     }
 
     /** Create a named indirect call stub. */
@@ -202,7 +202,7 @@ public class LLVMORC {
         if (CHECKS) {
             check(JITStack);
         }
-        return invokePPJP(__functionAddress, JITStack, StubName, NewAddr);
+        return invokePPJP(JITStack, StubName, NewAddr, __functionAddress);
     }
 
     /** Set the pointer for the given indirect stub. */
@@ -237,7 +237,7 @@ public class LLVMORC {
             check(Mod);
             check(SymbolResolverCtx);
         }
-        return invokePPPPPP(__functionAddress, JITStack, RetHandle, Mod, SymbolResolver, SymbolResolverCtx);
+        return invokePPPPPP(JITStack, RetHandle, Mod, SymbolResolver, SymbolResolverCtx, __functionAddress);
     }
 
     /** Add module to be eagerly compiled. */
@@ -259,7 +259,7 @@ public class LLVMORC {
             check(Mod);
             check(SymbolResolverCtx);
         }
-        return invokePPPPPP(__functionAddress, JITStack, RetHandle, Mod, SymbolResolver, SymbolResolverCtx);
+        return invokePPPPPP(JITStack, RetHandle, Mod, SymbolResolver, SymbolResolverCtx, __functionAddress);
     }
 
     /** Add module to be lazily compiled one function at a time. */
@@ -282,7 +282,7 @@ public class LLVMORC {
             check(Obj);
             check(SymbolResolverCtx);
         }
-        return invokePPPPPP(__functionAddress, JITStack, RetHandle, Obj, SymbolResolver, SymbolResolverCtx);
+        return invokePPPPPP(JITStack, RetHandle, Obj, SymbolResolver, SymbolResolverCtx, __functionAddress);
     }
 
     /**
@@ -312,7 +312,7 @@ public class LLVMORC {
         if (CHECKS) {
             check(JITStack);
         }
-        return invokePJP(__functionAddress, JITStack, H);
+        return invokePJP(JITStack, H, __functionAddress);
     }
 
     // --- [ LLVMOrcGetSymbolAddress ] ---
@@ -323,7 +323,7 @@ public class LLVMORC {
         if (CHECKS) {
             check(JITStack);
         }
-        return invokePPPP(__functionAddress, JITStack, RetAddr, SymbolName);
+        return invokePPPP(JITStack, RetAddr, SymbolName, __functionAddress);
     }
 
     /** Get symbol address from JIT instance. */
@@ -361,7 +361,7 @@ public class LLVMORC {
             check(__functionAddress);
             check(JITStack);
         }
-        return invokePPJPP(__functionAddress, JITStack, RetAddr, H, SymbolName);
+        return invokePPJPP(JITStack, RetAddr, H, SymbolName, __functionAddress);
     }
 
     /** Get symbol address from JIT instance, searching only the specified handle. */
@@ -399,7 +399,7 @@ public class LLVMORC {
         if (CHECKS) {
             check(JITStack);
         }
-        return invokePP(__functionAddress, JITStack);
+        return invokePP(JITStack, __functionAddress);
     }
 
     // --- [ LLVMOrcRegisterJITEventListener ] ---
@@ -415,7 +415,7 @@ public class LLVMORC {
             check(__functionAddress);
             check(JITStack);
         }
-        invokePPV(__functionAddress, JITStack, L);
+        invokePPV(JITStack, L, __functionAddress);
     }
 
     // --- [ LLVMOrcUnregisterJITEventListener ] ---
@@ -431,7 +431,7 @@ public class LLVMORC {
             check(__functionAddress);
             check(JITStack);
         }
-        invokePPV(__functionAddress, JITStack, L);
+        invokePPV(JITStack, L, __functionAddress);
     }
 
 }

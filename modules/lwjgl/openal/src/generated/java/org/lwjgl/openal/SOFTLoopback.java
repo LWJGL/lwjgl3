@@ -66,7 +66,7 @@ public class SOFTLoopback {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePP(__functionAddress, deviceName);
+        return invokePP(deviceName, __functionAddress);
     }
 
     /**
@@ -141,7 +141,7 @@ public class SOFTLoopback {
             check(__functionAddress);
             check(device);
         }
-        return invokePZ(__functionAddress, device, frequency, channels, type);
+        return invokePZ(device, frequency, channels, type, __functionAddress);
     }
 
     // --- [ alcRenderSamplesSOFT ] ---
@@ -153,7 +153,7 @@ public class SOFTLoopback {
             check(__functionAddress);
             check(device);
         }
-        invokePPV(__functionAddress, device, buffer, samples);
+        invokePPV(device, buffer, samples, __functionAddress);
     }
 
     /**
@@ -216,7 +216,7 @@ public class SOFTLoopback {
             check(__functionAddress);
             check(device);
         }
-        invokePPV(__functionAddress, device, buffer, samples);
+        invokePPV(device, buffer, samples, __functionAddress);
     }
 
     /** Array version of: {@link #alcRenderSamplesSOFT RenderSamplesSOFT} */
@@ -227,7 +227,7 @@ public class SOFTLoopback {
             check(__functionAddress);
             check(device);
         }
-        invokePPV(__functionAddress, device, buffer, samples);
+        invokePPV(device, buffer, samples, __functionAddress);
     }
 
     /** Array version of: {@link #alcRenderSamplesSOFT RenderSamplesSOFT} */
@@ -238,7 +238,7 @@ public class SOFTLoopback {
             check(__functionAddress);
             check(device);
         }
-        invokePPV(__functionAddress, device, buffer, samples);
+        invokePPV(device, buffer, samples, __functionAddress);
     }
 
 }

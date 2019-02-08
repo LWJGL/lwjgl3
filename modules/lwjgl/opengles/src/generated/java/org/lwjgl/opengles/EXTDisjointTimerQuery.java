@@ -246,7 +246,7 @@ public class EXTDisjointTimerQuery {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, id, pname, params);
+        callPV(id, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetQueryObjecti64vEXT GetQueryObjecti64vEXT} */
@@ -256,7 +256,7 @@ public class EXTDisjointTimerQuery {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, id, pname, params);
+        callPV(id, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetQueryObjectui64vEXT GetQueryObjectui64vEXT} */
@@ -266,7 +266,7 @@ public class EXTDisjointTimerQuery {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, id, pname, params);
+        callPV(id, pname, params, __functionAddress);
     }
 
 }

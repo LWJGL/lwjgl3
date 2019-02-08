@@ -55,7 +55,7 @@ public class EXTSyncReuse {
             check(dpy);
             check(sync);
         }
-        return callPPPI(__functionAddress, dpy, sync, attrib_list);
+        return callPPPI(dpy, sync, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLBoolean")

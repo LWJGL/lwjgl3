@@ -189,7 +189,7 @@ public class NVMeshShader {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, commandBuffer.address(), taskCount, firstTask);
+        callPV(commandBuffer.address(), taskCount, firstTask, __functionAddress);
     }
 
     // --- [ vkCmdDrawMeshTasksIndirectNV ] ---
@@ -286,7 +286,7 @@ public class NVMeshShader {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJJV(__functionAddress, commandBuffer.address(), buffer, offset, drawCount, stride);
+        callPJJV(commandBuffer.address(), buffer, offset, drawCount, stride, __functionAddress);
     }
 
     // --- [ vkCmdDrawMeshTasksIndirectCountNV ] ---
@@ -387,7 +387,7 @@ public class NVMeshShader {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJJJJV(__functionAddress, commandBuffer.address(), buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+        callPJJJJV(commandBuffer.address(), buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride, __functionAddress);
     }
 
 }

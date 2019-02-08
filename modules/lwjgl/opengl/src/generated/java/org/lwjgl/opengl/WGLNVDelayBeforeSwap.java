@@ -69,7 +69,7 @@ public class WGLNVDelayBeforeSwap {
             check(__functionAddress);
             check(hDC);
         }
-        return callPI(__functionAddress, hDC, seconds) != 0;
+        return callPI(hDC, seconds, __functionAddress) != 0;
     }
 
 }

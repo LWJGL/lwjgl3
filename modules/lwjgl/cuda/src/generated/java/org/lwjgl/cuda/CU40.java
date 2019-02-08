@@ -114,7 +114,7 @@ public class CU40 extends CU {
         if (CHECKS) {
             check(ctx);
         }
-        return callPI(__functionAddress, ctx);
+        return callPI(ctx, __functionAddress);
     }
 
     // --- [ cuCtxPushCurrent ] ---
@@ -125,14 +125,14 @@ public class CU40 extends CU {
         if (CHECKS) {
             check(ctx);
         }
-        return callPI(__functionAddress, ctx);
+        return callPI(ctx, __functionAddress);
     }
 
     // --- [ cuCtxPopCurrent ] ---
 
     public static int ncuCtxPopCurrent(long pctx) {
         long __functionAddress = Functions.CtxPopCurrent;
-        return callPI(__functionAddress, pctx);
+        return callPI(pctx, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -148,14 +148,14 @@ public class CU40 extends CU {
     @NativeType("CUresult")
     public static int cuCtxSetCurrent(@NativeType("CUcontext") long ctx) {
         long __functionAddress = Functions.CtxSetCurrent;
-        return callPI(__functionAddress, ctx);
+        return callPI(ctx, __functionAddress);
     }
 
     // --- [ cuCtxGetCurrent ] ---
 
     public static int ncuCtxGetCurrent(long pctx) {
         long __functionAddress = Functions.CtxGetCurrent;
-        return callPI(__functionAddress, pctx);
+        return callPI(pctx, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -170,7 +170,7 @@ public class CU40 extends CU {
 
     public static int ncuMemHostRegister(long p, long bytesize, int Flags) {
         long __functionAddress = Functions.MemHostRegister;
-        return callPPI(__functionAddress, p, bytesize, Flags);
+        return callPPI(p, bytesize, Flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -182,7 +182,7 @@ public class CU40 extends CU {
 
     public static int ncuMemHostUnregister(long p) {
         long __functionAddress = Functions.MemHostUnregister;
-        return callPI(__functionAddress, p);
+        return callPI(p, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -199,7 +199,7 @@ public class CU40 extends CU {
             check(dst);
             check(src);
         }
-        return callPPPI(__functionAddress, dst, src, ByteCount);
+        return callPPPI(dst, src, ByteCount, __functionAddress);
     }
 
     // --- [ cuMemcpyPeer ] ---
@@ -213,7 +213,7 @@ public class CU40 extends CU {
             check(srcDevice);
             check(srcContext);
         }
-        return callPPPPPI(__functionAddress, dstDevice, dstContext, srcDevice, srcContext, ByteCount);
+        return callPPPPPI(dstDevice, dstContext, srcDevice, srcContext, ByteCount, __functionAddress);
     }
 
     // --- [ cuMemcpy3DPeer ] ---
@@ -223,7 +223,7 @@ public class CU40 extends CU {
         if (CHECKS) {
             CUDA_MEMCPY3D_PEER.validate(pCopy);
         }
-        return callPI(__functionAddress, pCopy);
+        return callPI(pCopy, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -240,7 +240,7 @@ public class CU40 extends CU {
             check(dst);
             check(src);
         }
-        return callPPPPI(__functionAddress, dst, src, ByteCount, hStream);
+        return callPPPPI(dst, src, ByteCount, hStream, __functionAddress);
     }
 
     // --- [ cuMemcpyPeerAsync ] ---
@@ -254,7 +254,7 @@ public class CU40 extends CU {
             check(srcDevice);
             check(srcContext);
         }
-        return callPPPPPPI(__functionAddress, dstDevice, dstContext, srcDevice, srcContext, ByteCount, hStream);
+        return callPPPPPPI(dstDevice, dstContext, srcDevice, srcContext, ByteCount, hStream, __functionAddress);
     }
 
     // --- [ cuMemcpy3DPeerAsync ] ---
@@ -264,7 +264,7 @@ public class CU40 extends CU {
         if (CHECKS) {
             CUDA_MEMCPY3D_PEER.validate(pCopy);
         }
-        return callPPI(__functionAddress, pCopy, hStream);
+        return callPPI(pCopy, hStream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -279,7 +279,7 @@ public class CU40 extends CU {
         if (CHECKS) {
             check(ptr);
         }
-        return callPPI(__functionAddress, data, attribute, ptr);
+        return callPPI(data, attribute, ptr, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -295,7 +295,7 @@ public class CU40 extends CU {
         if (CHECKS) {
             check(hStream);
         }
-        return callPI(__functionAddress, hStream);
+        return callPI(hStream, __functionAddress);
     }
 
     // --- [ cuEventDestroy ] ---
@@ -306,7 +306,7 @@ public class CU40 extends CU {
         if (CHECKS) {
             check(hEvent);
         }
-        return callPI(__functionAddress, hEvent);
+        return callPI(hEvent, __functionAddress);
     }
 
     // --- [ cuLaunchKernel ] ---
@@ -316,7 +316,7 @@ public class CU40 extends CU {
         if (CHECKS) {
             check(f);
         }
-        return callPPPPI(__functionAddress, f, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, hStream, kernelParams, extra);
+        return callPPPPI(f, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, hStream, kernelParams, extra, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -328,7 +328,7 @@ public class CU40 extends CU {
 
     public static int ncuDeviceCanAccessPeer(long canAccessPeer, int dev, int peerDev) {
         long __functionAddress = Functions.DeviceCanAccessPeer;
-        return callPI(__functionAddress, canAccessPeer, dev, peerDev);
+        return callPI(canAccessPeer, dev, peerDev, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -347,7 +347,7 @@ public class CU40 extends CU {
         if (CHECKS) {
             check(peerContext);
         }
-        return callPI(__functionAddress, peerContext, Flags);
+        return callPI(peerContext, Flags, __functionAddress);
     }
 
     // --- [ cuCtxDisablePeerAccess ] ---
@@ -358,7 +358,7 @@ public class CU40 extends CU {
         if (CHECKS) {
             check(peerContext);
         }
-        return callPI(__functionAddress, peerContext);
+        return callPI(peerContext, __functionAddress);
     }
 
 }

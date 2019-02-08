@@ -46,7 +46,7 @@ public class WGLNVSwapGroup {
             check(__functionAddress);
             check(hDC);
         }
-        return callPI(__functionAddress, hDC, group) != 0;
+        return callPI(hDC, group, __functionAddress) != 0;
     }
 
     // --- [ wglBindSwapBarrierNV ] ---
@@ -57,7 +57,7 @@ public class WGLNVSwapGroup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, group, barrier) != 0;
+        return callI(group, barrier, __functionAddress) != 0;
     }
 
     // --- [ wglQuerySwapGroupNV ] ---
@@ -68,7 +68,7 @@ public class WGLNVSwapGroup {
             check(__functionAddress);
             check(hDC);
         }
-        return callPPPI(__functionAddress, hDC, group, barrier);
+        return callPPPI(hDC, group, barrier, __functionAddress);
     }
 
     @NativeType("BOOL")
@@ -88,7 +88,7 @@ public class WGLNVSwapGroup {
             check(__functionAddress);
             check(hDC);
         }
-        return callPPPI(__functionAddress, hDC, maxGroups, maxBarriers);
+        return callPPPI(hDC, maxGroups, maxBarriers, __functionAddress);
     }
 
     @NativeType("BOOL")
@@ -108,7 +108,7 @@ public class WGLNVSwapGroup {
             check(__functionAddress);
             check(hDC);
         }
-        return callPPI(__functionAddress, hDC, count);
+        return callPPI(hDC, count, __functionAddress);
     }
 
     @NativeType("BOOL")
@@ -128,7 +128,7 @@ public class WGLNVSwapGroup {
             check(__functionAddress);
             check(hDC);
         }
-        return callPI(__functionAddress, hDC) != 0;
+        return callPI(hDC, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #wglQuerySwapGroupNV QuerySwapGroupNV} */
@@ -141,7 +141,7 @@ public class WGLNVSwapGroup {
             check(group, 1);
             check(barrier, 1);
         }
-        return callPPPI(__functionAddress, hDC, group, barrier) != 0;
+        return callPPPI(hDC, group, barrier, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #wglQueryMaxSwapGroupsNV QueryMaxSwapGroupsNV} */
@@ -154,7 +154,7 @@ public class WGLNVSwapGroup {
             check(maxGroups, 1);
             check(maxBarriers, 1);
         }
-        return callPPPI(__functionAddress, hDC, maxGroups, maxBarriers) != 0;
+        return callPPPI(hDC, maxGroups, maxBarriers, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #wglQueryFrameCountNV QueryFrameCountNV} */
@@ -166,7 +166,7 @@ public class WGLNVSwapGroup {
             check(hDC);
             check(count, 1);
         }
-        return callPPI(__functionAddress, hDC, count) != 0;
+        return callPPI(hDC, count, __functionAddress) != 0;
     }
 
 }

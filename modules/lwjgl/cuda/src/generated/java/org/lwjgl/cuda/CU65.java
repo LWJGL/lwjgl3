@@ -58,7 +58,7 @@ public class CU65 extends CU60 {
         if (CHECKS) {
             check(func);
         }
-        return callPPPI(__functionAddress, numBlocks, func, blockSize, dynamicSMemSize);
+        return callPPPI(numBlocks, func, blockSize, dynamicSMemSize, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -76,7 +76,7 @@ public class CU65 extends CU60 {
         if (CHECKS) {
             check(func);
         }
-        return callPPPI(__functionAddress, numBlocks, func, blockSize, dynamicSMemSize, flags);
+        return callPPPI(numBlocks, func, blockSize, dynamicSMemSize, flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -94,7 +94,7 @@ public class CU65 extends CU60 {
         if (CHECKS) {
             check(func);
         }
-        return callPPPPPI(__functionAddress, minGridSize, blockSize, func, blockSizeToDynamicSMemSize, dynamicSMemSize, blockSizeLimit);
+        return callPPPPPI(minGridSize, blockSize, func, blockSizeToDynamicSMemSize, dynamicSMemSize, blockSizeLimit, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -113,7 +113,7 @@ public class CU65 extends CU60 {
         if (CHECKS) {
             check(func);
         }
-        return callPPPPPI(__functionAddress, minGridSize, blockSize, func, blockSizeToDynamicSMemSize, dynamicSMemSize, blockSizeLimit, flags);
+        return callPPPPPI(minGridSize, blockSize, func, blockSizeToDynamicSMemSize, dynamicSMemSize, blockSizeLimit, flags, __functionAddress);
     }
 
     @NativeType("CUresult")

@@ -77,7 +77,7 @@ public class INTELAccelerator {
             check(__functionAddress);
             check(context);
         }
-        return callPPPPP(__functionAddress, context, accelerator_type, descriptor_size, descriptor, errcode_ret);
+        return callPPPPP(context, accelerator_type, descriptor_size, descriptor, errcode_ret, __functionAddress);
     }
 
     /**
@@ -142,7 +142,7 @@ public class INTELAccelerator {
             check(__functionAddress);
             check(accelerator);
         }
-        return callPI(__functionAddress, accelerator);
+        return callPI(accelerator, __functionAddress);
     }
 
     // --- [ clReleaseAcceleratorINTEL ] ---
@@ -168,7 +168,7 @@ public class INTELAccelerator {
             check(__functionAddress);
             check(accelerator);
         }
-        return callPI(__functionAddress, accelerator);
+        return callPI(accelerator, __functionAddress);
     }
 
     // --- [ clGetAcceleratorInfoINTEL ] ---
@@ -184,7 +184,7 @@ public class INTELAccelerator {
             check(__functionAddress);
             check(accelerator);
         }
-        return callPPPPI(__functionAddress, accelerator, param_name, param_value_size, param_value, param_value_size_ret);
+        return callPPPPI(accelerator, param_name, param_value_size, param_value, param_value_size_ret, __functionAddress);
     }
 
     /**
@@ -274,7 +274,7 @@ public class INTELAccelerator {
             check(context);
             checkSafe(errcode_ret, 1);
         }
-        return callPPPPP(__functionAddress, context, accelerator_type, (long)descriptor.remaining(), memAddress(descriptor), errcode_ret);
+        return callPPPPP(context, accelerator_type, (long)descriptor.remaining(), memAddress(descriptor), errcode_ret, __functionAddress);
     }
 
     /** Array version of: {@link #clGetAcceleratorInfoINTEL GetAcceleratorInfoINTEL} */
@@ -286,7 +286,7 @@ public class INTELAccelerator {
             check(accelerator);
             checkSafe(param_value_size_ret, 1);
         }
-        return callPPPPI(__functionAddress, accelerator, param_name, Integer.toUnsignedLong(lengthSafe(param_value)) << 2, param_value, memAddressSafe(param_value_size_ret));
+        return callPPPPI(accelerator, param_name, Integer.toUnsignedLong(lengthSafe(param_value)) << 2, param_value, memAddressSafe(param_value_size_ret), __functionAddress);
     }
 
 }

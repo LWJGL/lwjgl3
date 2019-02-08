@@ -94,7 +94,7 @@ public class KHRWin32Surface {
             VkWin32SurfaceCreateInfoKHR.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, instance.address(), pCreateInfo, pAllocator, pSurface);
+        return callPPPPI(instance.address(), pCreateInfo, pAllocator, pSurface, __functionAddress);
     }
 
     /**
@@ -190,7 +190,7 @@ public class KHRWin32Surface {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, physicalDevice.address(), queueFamilyIndex) != 0;
+        return callPI(physicalDevice.address(), queueFamilyIndex, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #vkCreateWin32SurfaceKHR CreateWin32SurfaceKHR} */
@@ -203,7 +203,7 @@ public class KHRWin32Surface {
             VkWin32SurfaceCreateInfoKHR.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface);
+        return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface, __functionAddress);
     }
 
 }

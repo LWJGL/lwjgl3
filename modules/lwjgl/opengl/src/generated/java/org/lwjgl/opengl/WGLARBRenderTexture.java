@@ -135,7 +135,7 @@ public class WGLARBRenderTexture {
             check(__functionAddress);
             check(pbuffer);
         }
-        return callPI(__functionAddress, pbuffer, buffer) != 0;
+        return callPI(pbuffer, buffer, __functionAddress) != 0;
     }
 
     // --- [ wglReleaseTexImageARB ] ---
@@ -154,7 +154,7 @@ public class WGLARBRenderTexture {
             check(__functionAddress);
             check(pbuffer);
         }
-        return callPI(__functionAddress, pbuffer, buffer) != 0;
+        return callPI(pbuffer, buffer, __functionAddress) != 0;
     }
 
     // --- [ wglSetPbufferAttribARB ] ---
@@ -166,7 +166,7 @@ public class WGLARBRenderTexture {
             check(__functionAddress);
             check(pbuffer);
         }
-        return callPPI(__functionAddress, pbuffer, attribList);
+        return callPPI(pbuffer, attribList, __functionAddress);
     }
 
     /**
@@ -192,7 +192,7 @@ public class WGLARBRenderTexture {
             check(pbuffer);
             checkNTSafe(attribList);
         }
-        return callPPI(__functionAddress, pbuffer, attribList) != 0;
+        return callPPI(pbuffer, attribList, __functionAddress) != 0;
     }
 
 }

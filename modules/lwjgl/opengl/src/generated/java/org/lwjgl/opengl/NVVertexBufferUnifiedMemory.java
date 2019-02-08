@@ -150,7 +150,7 @@ public class NVVertexBufferUnifiedMemory {
             check(__functionAddress);
             check(result, 1);
         }
-        callPV(__functionAddress, value, index, result);
+        callPV(value, index, result, __functionAddress);
     }
 
 }

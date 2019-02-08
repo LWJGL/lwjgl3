@@ -31,7 +31,7 @@ public class VRScreenshots {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, pOutScreenshotHandle, type, pchPreviewFilename, pchVRFilename);
+        return callPPPI(pOutScreenshotHandle, type, pchPreviewFilename, pchVRFilename, __functionAddress);
     }
 
     /**
@@ -101,7 +101,7 @@ public class VRScreenshots {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pSupportedTypes, numTypes);
+        return callPI(pSupportedTypes, numTypes, __functionAddress);
     }
 
     /**
@@ -123,7 +123,7 @@ public class VRScreenshots {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, screenshotHandle, pError);
+        return callPI(screenshotHandle, pError, __functionAddress);
     }
 
     /** When your application receives a {@link VR#EVREventType_VREvent_RequestScreenshot} event, call these functions to get the details of the screenshot request. */
@@ -143,7 +143,7 @@ public class VRScreenshots {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, screenshotHandle, filenameType, pchFilename, cchFilename, pError);
+        return callPPI(screenshotHandle, filenameType, pchFilename, cchFilename, pError, __functionAddress);
     }
 
     /**
@@ -195,7 +195,7 @@ public class VRScreenshots {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, screenshotHandle, flProgress);
+        return callI(screenshotHandle, flProgress, __functionAddress);
     }
 
     // --- [ VRScreenshots_TakeStereoScreenshot ] ---
@@ -206,7 +206,7 @@ public class VRScreenshots {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, pOutScreenshotHandle, pchPreviewFilename, pchVRFilename);
+        return callPPPI(pOutScreenshotHandle, pchPreviewFilename, pchVRFilename, __functionAddress);
     }
 
     /**
@@ -256,7 +256,7 @@ public class VRScreenshots {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, screenshotHandle, type, pchSourcePreviewFilename, pchSourceVRFilename);
+        return callPPI(screenshotHandle, type, pchSourcePreviewFilename, pchSourceVRFilename, __functionAddress);
     }
 
     /**

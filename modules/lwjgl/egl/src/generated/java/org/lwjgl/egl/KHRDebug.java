@@ -84,7 +84,7 @@ public class KHRDebug {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, callback, attrib_list);
+        return callPPI(callback, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLint")
@@ -102,7 +102,7 @@ public class KHRDebug {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, attribute, value);
+        return callPI(attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -124,7 +124,7 @@ public class KHRDebug {
             check(object);
             check(label);
         }
-        return callPPPI(__functionAddress, display, objectType, object, label);
+        return callPPPI(display, objectType, object, label, __functionAddress);
     }
 
 }

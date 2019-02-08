@@ -156,7 +156,7 @@ public class AMDShaderInfo {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, device.address(), pipeline, shaderStage, infoType, pInfoSize, pInfo);
+        return callPJPPI(device.address(), pipeline, shaderStage, infoType, pInfoSize, pInfo, __functionAddress);
     }
 
     /**

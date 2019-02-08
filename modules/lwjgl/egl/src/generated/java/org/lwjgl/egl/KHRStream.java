@@ -85,7 +85,7 @@ public class KHRStream {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPP(__functionAddress, dpy, attrib_list);
+        return callPPP(dpy, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLStreamKHR")
@@ -106,7 +106,7 @@ public class KHRStream {
             check(dpy);
             check(stream);
         }
-        return callPPI(__functionAddress, dpy, stream) != 0;
+        return callPPI(dpy, stream, __functionAddress) != 0;
     }
 
     // --- [ eglStreamAttribKHR ] ---
@@ -119,7 +119,7 @@ public class KHRStream {
             check(dpy);
             check(stream);
         }
-        return callPPI(__functionAddress, dpy, stream, attribute, value) != 0;
+        return callPPI(dpy, stream, attribute, value, __functionAddress) != 0;
     }
 
     // --- [ eglQueryStreamKHR ] ---
@@ -131,7 +131,7 @@ public class KHRStream {
             check(dpy);
             check(stream);
         }
-        return callPPPI(__functionAddress, dpy, stream, attribute, value);
+        return callPPPI(dpy, stream, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -151,7 +151,7 @@ public class KHRStream {
             check(dpy);
             check(stream);
         }
-        return callPPPI(__functionAddress, dpy, stream, attribute, value);
+        return callPPPI(dpy, stream, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -171,7 +171,7 @@ public class KHRStream {
             check(dpy);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPP(__functionAddress, dpy, attrib_list);
+        return callPPP(dpy, attrib_list, __functionAddress);
     }
 
     /** Array version of: {@link #eglQueryStreamKHR QueryStreamKHR} */
@@ -184,7 +184,7 @@ public class KHRStream {
             check(stream);
             check(value, 1);
         }
-        return callPPPI(__functionAddress, dpy, stream, attribute, value) != 0;
+        return callPPPI(dpy, stream, attribute, value, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #eglQueryStreamu64KHR QueryStreamu64KHR} */
@@ -197,7 +197,7 @@ public class KHRStream {
             check(stream);
             check(value, 1);
         }
-        return callPPPI(__functionAddress, dpy, stream, attribute, value) != 0;
+        return callPPPI(dpy, stream, attribute, value, __functionAddress) != 0;
     }
 
 }

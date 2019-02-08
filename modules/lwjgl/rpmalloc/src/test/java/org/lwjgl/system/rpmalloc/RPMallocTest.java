@@ -79,13 +79,13 @@ public class RPMallocTest {
 
             config
                 .memory_map((size, offset) -> {
-                    long m = invokePPP(memoryMapCB, size, offset);
+                    long m = invokePPP(size, offset, memoryMapCB);
                     assertNotEquals(m, NULL);
                     memoryMappings.incrementAndGet();
                     return m;
                 })
                 .memory_unmap((address, size, offset, release) -> {
-                    invokePPPV(memoryUnmapCB, address, size, offset, release ? 1 : 0);
+                    invokePPPV(address, size, offset, release ? 1 : 0, memoryUnmapCB);
                     if (release) {
                         memoryMappings.decrementAndGet();
                     }

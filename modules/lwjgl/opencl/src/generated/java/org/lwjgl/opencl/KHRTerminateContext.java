@@ -84,7 +84,7 @@ public class KHRTerminateContext {
             check(__functionAddress);
             check(context);
         }
-        return callPI(__functionAddress, context);
+        return callPI(context, __functionAddress);
     }
 
 }

@@ -187,7 +187,7 @@ public class EXTDebugMarker {
             check(__functionAddress);
             VkDebugMarkerObjectTagInfoEXT.validate(pTagInfo);
         }
-        return callPPI(__functionAddress, device.address(), pTagInfo);
+        return callPPI(device.address(), pTagInfo, __functionAddress);
     }
 
     /**
@@ -250,7 +250,7 @@ public class EXTDebugMarker {
             check(__functionAddress);
             VkDebugMarkerObjectNameInfoEXT.validate(pNameInfo);
         }
-        return callPPI(__functionAddress, device.address(), pNameInfo);
+        return callPPI(device.address(), pNameInfo, __functionAddress);
     }
 
     /**
@@ -313,7 +313,7 @@ public class EXTDebugMarker {
             check(__functionAddress);
             VkDebugMarkerMarkerInfoEXT.validate(pMarkerInfo);
         }
-        callPPV(__functionAddress, commandBuffer.address(), pMarkerInfo);
+        callPPV(commandBuffer.address(), pMarkerInfo, __functionAddress);
     }
 
     /**
@@ -413,7 +413,7 @@ public class EXTDebugMarker {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, commandBuffer.address());
+        callPV(commandBuffer.address(), __functionAddress);
     }
 
     // --- [ vkCmdDebugMarkerInsertEXT ] ---
@@ -425,7 +425,7 @@ public class EXTDebugMarker {
             check(__functionAddress);
             VkDebugMarkerMarkerInfoEXT.validate(pMarkerInfo);
         }
-        callPPV(__functionAddress, commandBuffer.address(), pMarkerInfo);
+        callPPV(commandBuffer.address(), pMarkerInfo, __functionAddress);
     }
 
     /**

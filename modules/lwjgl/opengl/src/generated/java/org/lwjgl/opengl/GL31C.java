@@ -677,7 +677,7 @@ public class GL31C extends GL30C {
             check(__functionAddress);
             check(uniformIndices, uniformNames.remaining());
         }
-        callPPV(__functionAddress, program, uniformNames.remaining(), memAddress(uniformNames), uniformIndices);
+        callPPV(program, uniformNames.remaining(), memAddress(uniformNames), uniformIndices, __functionAddress);
     }
 
     /**
@@ -691,7 +691,7 @@ public class GL31C extends GL30C {
             check(__functionAddress);
             check(params, uniformIndices.length);
         }
-        callPPV(__functionAddress, program, uniformIndices.length, uniformIndices, pname, params);
+        callPPV(program, uniformIndices.length, uniformIndices, pname, params, __functionAddress);
     }
 
     /**
@@ -705,7 +705,7 @@ public class GL31C extends GL30C {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, program, uniformIndex, uniformName.remaining(), length, memAddress(uniformName));
+        callPPV(program, uniformIndex, uniformName.remaining(), length, memAddress(uniformName), __functionAddress);
     }
 
     /**
@@ -719,7 +719,7 @@ public class GL31C extends GL30C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, program, uniformBlockIndex, pname, params);
+        callPV(program, uniformBlockIndex, pname, params, __functionAddress);
     }
 
     /**
@@ -733,7 +733,7 @@ public class GL31C extends GL30C {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, program, uniformBlockIndex, uniformBlockName.remaining(), length, memAddress(uniformBlockName));
+        callPPV(program, uniformBlockIndex, uniformBlockName.remaining(), length, memAddress(uniformBlockName), __functionAddress);
     }
 
 }

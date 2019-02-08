@@ -46,7 +46,7 @@ public class NVStreamSync {
             check(dpy);
             check(stream);
         }
-        return callPPPP(__functionAddress, dpy, stream, type, attrib_list);
+        return callPPPP(dpy, stream, type, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLSyncKHR")
@@ -67,7 +67,7 @@ public class NVStreamSync {
             check(stream);
             checkNT(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPPP(__functionAddress, dpy, stream, type, attrib_list);
+        return callPPPP(dpy, stream, type, attrib_list, __functionAddress);
     }
 
 }

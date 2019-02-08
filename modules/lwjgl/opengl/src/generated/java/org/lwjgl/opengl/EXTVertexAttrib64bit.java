@@ -184,7 +184,7 @@ public class EXTVertexAttrib64bit {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribL2dvEXT VertexAttribL2dvEXT} */
@@ -194,7 +194,7 @@ public class EXTVertexAttrib64bit {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribL3dvEXT VertexAttribL3dvEXT} */
@@ -204,7 +204,7 @@ public class EXTVertexAttrib64bit {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribL4dvEXT VertexAttribL4dvEXT} */
@@ -214,7 +214,7 @@ public class EXTVertexAttrib64bit {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glGetVertexAttribLdvEXT GetVertexAttribLdvEXT} */
@@ -224,7 +224,7 @@ public class EXTVertexAttrib64bit {
             check(__functionAddress);
             check(params, 4);
         }
-        callPV(__functionAddress, index, pname, params);
+        callPV(index, pname, params, __functionAddress);
     }
 
 }

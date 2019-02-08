@@ -100,7 +100,7 @@ public class EXTDisplaySurfaceCounter {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPI(__functionAddress, physicalDevice.address(), surface, pSurfaceCapabilities);
+        return callPJPI(physicalDevice.address(), surface, pSurfaceCapabilities, __functionAddress);
     }
 
     /**

@@ -1304,7 +1304,7 @@ public class CU {
 
     public static int ncuGetErrorString(int error, long pStr) {
         long __functionAddress = Functions.GetErrorString;
-        return callPI(__functionAddress, error, pStr);
+        return callPI(error, pStr, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1319,7 +1319,7 @@ public class CU {
 
     public static int ncuGetErrorName(int error, long pStr) {
         long __functionAddress = Functions.GetErrorName;
-        return callPI(__functionAddress, error, pStr);
+        return callPI(error, pStr, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1335,14 +1335,14 @@ public class CU {
     @NativeType("CUresult")
     public static int cuInit(@NativeType("unsigned int") int Flags) {
         long __functionAddress = Functions.Init;
-        return callI(__functionAddress, Flags);
+        return callI(Flags, __functionAddress);
     }
 
     // --- [ cuDriverGetVersion ] ---
 
     public static int ncuDriverGetVersion(long driverVersion) {
         long __functionAddress = Functions.DriverGetVersion;
-        return callPI(__functionAddress, driverVersion);
+        return callPI(driverVersion, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1357,7 +1357,7 @@ public class CU {
 
     public static int ncuDeviceGet(long device, int ordinal) {
         long __functionAddress = Functions.DeviceGet;
-        return callPI(__functionAddress, device, ordinal);
+        return callPI(device, ordinal, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1372,7 +1372,7 @@ public class CU {
 
     public static int ncuDeviceGetCount(long count) {
         long __functionAddress = Functions.DeviceGetCount;
-        return callPI(__functionAddress, count);
+        return callPI(count, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1387,7 +1387,7 @@ public class CU {
 
     public static int ncuDeviceGetName(long name, int len, int dev) {
         long __functionAddress = Functions.DeviceGetName;
-        return callPI(__functionAddress, name, len, dev);
+        return callPI(name, len, dev, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1399,7 +1399,7 @@ public class CU {
 
     public static int ncuDeviceTotalMem(long bytes, int dev) {
         long __functionAddress = Functions.DeviceTotalMem;
-        return callPI(__functionAddress, bytes, dev);
+        return callPI(bytes, dev, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1414,7 +1414,7 @@ public class CU {
 
     public static int ncuDeviceGetAttribute(long pi, int attrib, int dev) {
         long __functionAddress = Functions.DeviceGetAttribute;
-        return callPI(__functionAddress, pi, attrib, dev);
+        return callPI(pi, attrib, dev, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1429,7 +1429,7 @@ public class CU {
 
     public static int ncuDeviceGetProperties(long prop, int dev) {
         long __functionAddress = Functions.DeviceGetProperties;
-        return callPI(__functionAddress, prop, dev);
+        return callPI(prop, dev, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1441,7 +1441,7 @@ public class CU {
 
     public static int ncuDeviceComputeCapability(long major, long minor, int dev) {
         long __functionAddress = Functions.DeviceComputeCapability;
-        return callPPI(__functionAddress, major, minor, dev);
+        return callPPI(major, minor, dev, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1457,7 +1457,7 @@ public class CU {
 
     public static int ncuCtxCreate(long pctx, int flags, int dev) {
         long __functionAddress = Functions.CtxCreate;
-        return callPI(__functionAddress, pctx, flags, dev);
+        return callPI(pctx, flags, dev, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1472,7 +1472,7 @@ public class CU {
 
     public static int ncuCtxGetDevice(long device) {
         long __functionAddress = Functions.CtxGetDevice;
-        return callPI(__functionAddress, device);
+        return callPI(device, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1496,14 +1496,14 @@ public class CU {
     @NativeType("CUresult")
     public static int cuCtxSetLimit(@NativeType("CUlimit") int limit, @NativeType("size_t") long value) {
         long __functionAddress = Functions.CtxSetLimit;
-        return callPI(__functionAddress, limit, value);
+        return callPI(limit, value, __functionAddress);
     }
 
     // --- [ cuCtxGetLimit ] ---
 
     public static int ncuCtxGetLimit(long pvalue, int limit) {
         long __functionAddress = Functions.CtxGetLimit;
-        return callPI(__functionAddress, pvalue, limit);
+        return callPI(pvalue, limit, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1518,7 +1518,7 @@ public class CU {
 
     public static int ncuCtxGetCacheConfig(long pconfig) {
         long __functionAddress = Functions.CtxGetCacheConfig;
-        return callPI(__functionAddress, pconfig);
+        return callPI(pconfig, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1534,14 +1534,14 @@ public class CU {
     @NativeType("CUresult")
     public static int cuCtxSetCacheConfig(@NativeType("CUfunc_cache") int config) {
         long __functionAddress = Functions.CtxSetCacheConfig;
-        return callI(__functionAddress, config);
+        return callI(config, __functionAddress);
     }
 
     // --- [ cuCtxGetApiVersion ] ---
 
     public static int ncuCtxGetApiVersion(long ctx, long version) {
         long __functionAddress = Functions.CtxGetApiVersion;
-        return callPPI(__functionAddress, ctx, version);
+        return callPPI(ctx, version, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1556,7 +1556,7 @@ public class CU {
 
     public static int ncuCtxGetStreamPriorityRange(long leastPriority, long greatestPriority) {
         long __functionAddress = Functions.CtxGetStreamPriorityRange;
-        return callPPI(__functionAddress, leastPriority, greatestPriority);
+        return callPPI(leastPriority, greatestPriority, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1572,7 +1572,7 @@ public class CU {
 
     public static int ncuCtxAttach(long pctx, int flags) {
         long __functionAddress = Functions.CtxAttach;
-        return callPI(__functionAddress, pctx, flags);
+        return callPI(pctx, flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1591,14 +1591,14 @@ public class CU {
         if (CHECKS) {
             check(ctx);
         }
-        return callPI(__functionAddress, ctx);
+        return callPI(ctx, __functionAddress);
     }
 
     // --- [ cuModuleLoad ] ---
 
     public static int ncuModuleLoad(long module, long fname) {
         long __functionAddress = Functions.ModuleLoad;
-        return callPPI(__functionAddress, module, fname);
+        return callPPI(module, fname, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1629,7 +1629,7 @@ public class CU {
 
     public static int ncuModuleLoadData(long module, long image) {
         long __functionAddress = Functions.ModuleLoadData;
-        return callPPI(__functionAddress, module, image);
+        return callPPI(module, image, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1644,7 +1644,7 @@ public class CU {
 
     public static int ncuModuleLoadDataEx(long module, long image, int numOptions, long options, long optionValues) {
         long __functionAddress = Functions.ModuleLoadDataEx;
-        return callPPPPI(__functionAddress, module, image, numOptions, options, optionValues);
+        return callPPPPI(module, image, numOptions, options, optionValues, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1660,7 +1660,7 @@ public class CU {
 
     public static int ncuModuleLoadFatBinary(long module, long fatCubin) {
         long __functionAddress = Functions.ModuleLoadFatBinary;
-        return callPPI(__functionAddress, module, fatCubin);
+        return callPPI(module, fatCubin, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1679,7 +1679,7 @@ public class CU {
         if (CHECKS) {
             check(hmod);
         }
-        return callPI(__functionAddress, hmod);
+        return callPI(hmod, __functionAddress);
     }
 
     // --- [ cuModuleGetFunction ] ---
@@ -1689,7 +1689,7 @@ public class CU {
         if (CHECKS) {
             check(hmod);
         }
-        return callPPPI(__functionAddress, hfunc, hmod, name);
+        return callPPPI(hfunc, hmod, name, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1723,7 +1723,7 @@ public class CU {
         if (CHECKS) {
             check(hmod);
         }
-        return callPPPPI(__functionAddress, dptr, bytes, hmod, name);
+        return callPPPPI(dptr, bytes, hmod, name, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1759,7 +1759,7 @@ public class CU {
         if (CHECKS) {
             check(hmod);
         }
-        return callPPPI(__functionAddress, pTexRef, hmod, name);
+        return callPPPI(pTexRef, hmod, name, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1793,7 +1793,7 @@ public class CU {
         if (CHECKS) {
             check(hmod);
         }
-        return callPPPI(__functionAddress, pSurfRef, hmod, name);
+        return callPPPI(pSurfRef, hmod, name, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1824,7 +1824,7 @@ public class CU {
 
     public static int ncuMemGetInfo(long free, long total) {
         long __functionAddress = Functions.MemGetInfo;
-        return callPPI(__functionAddress, free, total);
+        return callPPI(free, total, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1840,7 +1840,7 @@ public class CU {
 
     public static int ncuMemAlloc(long dptr, long bytesize) {
         long __functionAddress = Functions.MemAlloc;
-        return callPPI(__functionAddress, dptr, bytesize);
+        return callPPI(dptr, bytesize, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1855,7 +1855,7 @@ public class CU {
 
     public static int ncuMemAllocPitch(long dptr, long pPitch, long WidthInBytes, long Height, int ElementSizeBytes) {
         long __functionAddress = Functions.MemAllocPitch;
-        return callPPPPI(__functionAddress, dptr, pPitch, WidthInBytes, Height, ElementSizeBytes);
+        return callPPPPI(dptr, pPitch, WidthInBytes, Height, ElementSizeBytes, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1875,7 +1875,7 @@ public class CU {
         if (CHECKS) {
             check(dptr);
         }
-        return callPI(__functionAddress, dptr);
+        return callPI(dptr, __functionAddress);
     }
 
     // --- [ cuMemGetAddressRange ] ---
@@ -1885,7 +1885,7 @@ public class CU {
         if (CHECKS) {
             check(dptr);
         }
-        return callPPPI(__functionAddress, pbase, psize, dptr);
+        return callPPPI(pbase, psize, dptr, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1901,7 +1901,7 @@ public class CU {
 
     public static int ncuMemAllocHost(long pp, long bytesize) {
         long __functionAddress = Functions.MemAllocHost;
-        return callPPI(__functionAddress, pp, bytesize);
+        return callPPI(pp, bytesize, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1916,7 +1916,7 @@ public class CU {
 
     public static int ncuMemFreeHost(long p) {
         long __functionAddress = Functions.MemFreeHost;
-        return callPI(__functionAddress, p);
+        return callPI(p, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1928,7 +1928,7 @@ public class CU {
 
     public static int ncuMemHostAlloc(long pp, long bytesize, int Flags) {
         long __functionAddress = Functions.MemHostAlloc;
-        return callPPI(__functionAddress, pp, bytesize, Flags);
+        return callPPI(pp, bytesize, Flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1943,7 +1943,7 @@ public class CU {
 
     public static int ncuMemHostGetDevicePointer(long pdptr, long p, int Flags) {
         long __functionAddress = Functions.MemHostGetDevicePointer;
-        return callPPI(__functionAddress, pdptr, p, Flags);
+        return callPPI(pdptr, p, Flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1958,7 +1958,7 @@ public class CU {
 
     public static int ncuMemHostGetFlags(long pFlags, long p) {
         long __functionAddress = Functions.MemHostGetFlags;
-        return callPPI(__functionAddress, pFlags, p);
+        return callPPI(pFlags, p, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -1976,7 +1976,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPI(__functionAddress, dstDevice, srcHost, ByteCount);
+        return callPPPI(dstDevice, srcHost, ByteCount, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2021,7 +2021,7 @@ public class CU {
         if (CHECKS) {
             check(srcDevice);
         }
-        return callPPPI(__functionAddress, dstHost, srcDevice, ByteCount);
+        return callPPPI(dstHost, srcDevice, ByteCount, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2068,7 +2068,7 @@ public class CU {
             check(dstDevice);
             check(srcDevice);
         }
-        return callPPPI(__functionAddress, dstDevice, srcDevice, ByteCount);
+        return callPPPI(dstDevice, srcDevice, ByteCount, __functionAddress);
     }
 
     // --- [ cuMemcpyDtoA ] ---
@@ -2080,7 +2080,7 @@ public class CU {
             check(dstArray);
             check(srcDevice);
         }
-        return callPPPPI(__functionAddress, dstArray, dstOffset, srcDevice, ByteCount);
+        return callPPPPI(dstArray, dstOffset, srcDevice, ByteCount, __functionAddress);
     }
 
     // --- [ cuMemcpyAtoD ] ---
@@ -2092,7 +2092,7 @@ public class CU {
             check(dstDevice);
             check(srcArray);
         }
-        return callPPPPI(__functionAddress, dstDevice, srcArray, srcOffset, ByteCount);
+        return callPPPPI(dstDevice, srcArray, srcOffset, ByteCount, __functionAddress);
     }
 
     // --- [ cuMemcpyHtoA ] ---
@@ -2102,7 +2102,7 @@ public class CU {
         if (CHECKS) {
             check(dstArray);
         }
-        return callPPPPI(__functionAddress, dstArray, dstOffset, srcHost, ByteCount);
+        return callPPPPI(dstArray, dstOffset, srcHost, ByteCount, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2147,7 +2147,7 @@ public class CU {
         if (CHECKS) {
             check(srcArray);
         }
-        return callPPPPI(__functionAddress, dstHost, srcArray, srcOffset, ByteCount);
+        return callPPPPI(dstHost, srcArray, srcOffset, ByteCount, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2194,7 +2194,7 @@ public class CU {
             check(dstArray);
             check(srcArray);
         }
-        return callPPPPPI(__functionAddress, dstArray, dstOffset, srcArray, srcOffset, ByteCount);
+        return callPPPPPI(dstArray, dstOffset, srcArray, srcOffset, ByteCount, __functionAddress);
     }
 
     // --- [ cuMemcpy2D ] ---
@@ -2204,7 +2204,7 @@ public class CU {
         if (CHECKS) {
             CUDA_MEMCPY2D.validate(pCopy);
         }
-        return callPI(__functionAddress, pCopy);
+        return callPI(pCopy, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2219,7 +2219,7 @@ public class CU {
         if (CHECKS) {
             CUDA_MEMCPY2D.validate(pCopy);
         }
-        return callPI(__functionAddress, pCopy);
+        return callPI(pCopy, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2234,7 +2234,7 @@ public class CU {
         if (CHECKS) {
             CUDA_MEMCPY3D.validate(pCopy);
         }
-        return callPI(__functionAddress, pCopy);
+        return callPI(pCopy, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2249,7 +2249,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPPI(__functionAddress, dstDevice, srcHost, ByteCount, hStream);
+        return callPPPPI(dstDevice, srcHost, ByteCount, hStream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2294,7 +2294,7 @@ public class CU {
         if (CHECKS) {
             check(srcDevice);
         }
-        return callPPPPI(__functionAddress, dstHost, srcDevice, ByteCount, hStream);
+        return callPPPPI(dstHost, srcDevice, ByteCount, hStream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2341,7 +2341,7 @@ public class CU {
             check(dstDevice);
             check(srcDevice);
         }
-        return callPPPPI(__functionAddress, dstDevice, srcDevice, ByteCount, hStream);
+        return callPPPPI(dstDevice, srcDevice, ByteCount, hStream, __functionAddress);
     }
 
     // --- [ cuMemcpyHtoAAsync ] ---
@@ -2351,7 +2351,7 @@ public class CU {
         if (CHECKS) {
             check(dstArray);
         }
-        return callPPPPPI(__functionAddress, dstArray, dstOffset, srcHost, ByteCount, hStream);
+        return callPPPPPI(dstArray, dstOffset, srcHost, ByteCount, hStream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2396,7 +2396,7 @@ public class CU {
         if (CHECKS) {
             check(srcArray);
         }
-        return callPPPPPI(__functionAddress, dstHost, srcArray, srcOffset, ByteCount, hStream);
+        return callPPPPPI(dstHost, srcArray, srcOffset, ByteCount, hStream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2441,7 +2441,7 @@ public class CU {
         if (CHECKS) {
             CUDA_MEMCPY2D.validate(pCopy);
         }
-        return callPPI(__functionAddress, pCopy, hStream);
+        return callPPI(pCopy, hStream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2456,7 +2456,7 @@ public class CU {
         if (CHECKS) {
             CUDA_MEMCPY3D.validate(pCopy);
         }
-        return callPPI(__functionAddress, pCopy, hStream);
+        return callPPI(pCopy, hStream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2472,7 +2472,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPI(__functionAddress, dstDevice, uc, N);
+        return callPPI(dstDevice, uc, N, __functionAddress);
     }
 
     // --- [ cuMemsetD16 ] ---
@@ -2483,7 +2483,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPI(__functionAddress, dstDevice, us, N);
+        return callPPI(dstDevice, us, N, __functionAddress);
     }
 
     // --- [ cuMemsetD32 ] ---
@@ -2494,7 +2494,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPI(__functionAddress, dstDevice, ui, N);
+        return callPPI(dstDevice, ui, N, __functionAddress);
     }
 
     // --- [ cuMemsetD2D8 ] ---
@@ -2505,7 +2505,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPPI(__functionAddress, dstDevice, dstPitch, uc, Width, Height);
+        return callPPPPI(dstDevice, dstPitch, uc, Width, Height, __functionAddress);
     }
 
     // --- [ cuMemsetD2D16 ] ---
@@ -2516,7 +2516,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPPI(__functionAddress, dstDevice, dstPitch, us, Width, Height);
+        return callPPPPI(dstDevice, dstPitch, us, Width, Height, __functionAddress);
     }
 
     // --- [ cuMemsetD2D32 ] ---
@@ -2527,7 +2527,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPPI(__functionAddress, dstDevice, dstPitch, ui, Width, Height);
+        return callPPPPI(dstDevice, dstPitch, ui, Width, Height, __functionAddress);
     }
 
     // --- [ cuMemsetD8Async ] ---
@@ -2538,7 +2538,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPI(__functionAddress, dstDevice, uc, N, hStream);
+        return callPPPI(dstDevice, uc, N, hStream, __functionAddress);
     }
 
     // --- [ cuMemsetD16Async ] ---
@@ -2549,7 +2549,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPI(__functionAddress, dstDevice, us, N, hStream);
+        return callPPPI(dstDevice, us, N, hStream, __functionAddress);
     }
 
     // --- [ cuMemsetD32Async ] ---
@@ -2560,7 +2560,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPI(__functionAddress, dstDevice, ui, N, hStream);
+        return callPPPI(dstDevice, ui, N, hStream, __functionAddress);
     }
 
     // --- [ cuMemsetD2D8Async ] ---
@@ -2571,7 +2571,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPPPI(__functionAddress, dstDevice, dstPitch, uc, Width, Height, hStream);
+        return callPPPPPI(dstDevice, dstPitch, uc, Width, Height, hStream, __functionAddress);
     }
 
     // --- [ cuMemsetD2D16Async ] ---
@@ -2582,7 +2582,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPPPI(__functionAddress, dstDevice, dstPitch, us, Width, Height, hStream);
+        return callPPPPPI(dstDevice, dstPitch, us, Width, Height, hStream, __functionAddress);
     }
 
     // --- [ cuMemsetD2D32Async ] ---
@@ -2593,14 +2593,14 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPPPI(__functionAddress, dstDevice, dstPitch, ui, Width, Height, hStream);
+        return callPPPPPI(dstDevice, dstPitch, ui, Width, Height, hStream, __functionAddress);
     }
 
     // --- [ cuArrayCreate ] ---
 
     public static int ncuArrayCreate(long pHandle, long pAllocateArray) {
         long __functionAddress = Functions.ArrayCreate;
-        return callPPI(__functionAddress, pHandle, pAllocateArray);
+        return callPPI(pHandle, pAllocateArray, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2618,7 +2618,7 @@ public class CU {
         if (CHECKS) {
             check(hArray);
         }
-        return callPPI(__functionAddress, pArrayDescriptor, hArray);
+        return callPPI(pArrayDescriptor, hArray, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2634,14 +2634,14 @@ public class CU {
         if (CHECKS) {
             check(hArray);
         }
-        return callPI(__functionAddress, hArray);
+        return callPI(hArray, __functionAddress);
     }
 
     // --- [ cuArray3DCreate ] ---
 
     public static int ncuArray3DCreate(long pHandle, long pAllocateArray) {
         long __functionAddress = Functions.Array3DCreate;
-        return callPPI(__functionAddress, pHandle, pAllocateArray);
+        return callPPI(pHandle, pAllocateArray, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2659,7 +2659,7 @@ public class CU {
         if (CHECKS) {
             check(hArray);
         }
-        return callPPI(__functionAddress, pArrayDescriptor, hArray);
+        return callPPI(pArrayDescriptor, hArray, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2671,7 +2671,7 @@ public class CU {
 
     public static int ncuStreamCreate(long phStream, int Flags) {
         long __functionAddress = Functions.StreamCreate;
-        return callPI(__functionAddress, phStream, Flags);
+        return callPI(phStream, Flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2686,7 +2686,7 @@ public class CU {
 
     public static int ncuStreamCreateWithPriority(long phStream, int flags, int priority) {
         long __functionAddress = Functions.StreamCreateWithPriority;
-        return callPI(__functionAddress, phStream, flags, priority);
+        return callPI(phStream, flags, priority, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2704,7 +2704,7 @@ public class CU {
         if (CHECKS) {
             check(hStream);
         }
-        return callPPI(__functionAddress, hStream, priority);
+        return callPPI(hStream, priority, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2722,7 +2722,7 @@ public class CU {
         if (CHECKS) {
             check(hStream);
         }
-        return callPPI(__functionAddress, hStream, flags);
+        return callPPI(hStream, flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2741,7 +2741,7 @@ public class CU {
         if (CHECKS) {
             check(hEvent);
         }
-        return callPPI(__functionAddress, hStream, hEvent, Flags);
+        return callPPI(hStream, hEvent, Flags, __functionAddress);
     }
 
     // --- [ cuStreamAddCallback ] ---
@@ -2751,7 +2751,7 @@ public class CU {
         if (CHECKS) {
             check(userData);
         }
-        return callPPPI(__functionAddress, hStream, callback, userData, flags);
+        return callPPPI(hStream, callback, userData, flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2764,7 +2764,7 @@ public class CU {
     @NativeType("CUresult")
     public static int cuStreamQuery(@NativeType("CUstream") long hStream) {
         long __functionAddress = Functions.StreamQuery;
-        return callPI(__functionAddress, hStream);
+        return callPI(hStream, __functionAddress);
     }
 
     // --- [ cuStreamSynchronize ] ---
@@ -2772,14 +2772,14 @@ public class CU {
     @NativeType("CUresult")
     public static int cuStreamSynchronize(@NativeType("CUstream") long hStream) {
         long __functionAddress = Functions.StreamSynchronize;
-        return callPI(__functionAddress, hStream);
+        return callPI(hStream, __functionAddress);
     }
 
     // --- [ cuEventCreate ] ---
 
     public static int ncuEventCreate(long phEvent, int Flags) {
         long __functionAddress = Functions.EventCreate;
-        return callPI(__functionAddress, phEvent, Flags);
+        return callPI(phEvent, Flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2798,7 +2798,7 @@ public class CU {
         if (CHECKS) {
             check(hEvent);
         }
-        return callPPI(__functionAddress, hEvent, hStream);
+        return callPPI(hEvent, hStream, __functionAddress);
     }
 
     // --- [ cuEventQuery ] ---
@@ -2809,7 +2809,7 @@ public class CU {
         if (CHECKS) {
             check(hEvent);
         }
-        return callPI(__functionAddress, hEvent);
+        return callPI(hEvent, __functionAddress);
     }
 
     // --- [ cuEventSynchronize ] ---
@@ -2820,7 +2820,7 @@ public class CU {
         if (CHECKS) {
             check(hEvent);
         }
-        return callPI(__functionAddress, hEvent);
+        return callPI(hEvent, __functionAddress);
     }
 
     // --- [ cuEventElapsedTime ] ---
@@ -2831,7 +2831,7 @@ public class CU {
             check(hStart);
             check(hEnd);
         }
-        return callPPPI(__functionAddress, pMilliseconds, hStart, hEnd);
+        return callPPPI(pMilliseconds, hStart, hEnd, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2849,7 +2849,7 @@ public class CU {
         if (CHECKS) {
             check(hfunc);
         }
-        return callPPI(__functionAddress, pi, attrib, hfunc);
+        return callPPI(pi, attrib, hfunc, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2868,7 +2868,7 @@ public class CU {
         if (CHECKS) {
             check(hfunc);
         }
-        return callPI(__functionAddress, hfunc, config);
+        return callPI(hfunc, config, __functionAddress);
     }
 
     // --- [ cuFuncSetBlockShape ] ---
@@ -2879,7 +2879,7 @@ public class CU {
         if (CHECKS) {
             check(hfunc);
         }
-        return callPI(__functionAddress, hfunc, x, y, z);
+        return callPI(hfunc, x, y, z, __functionAddress);
     }
 
     // --- [ cuFuncSetSharedSize ] ---
@@ -2890,7 +2890,7 @@ public class CU {
         if (CHECKS) {
             check(hfunc);
         }
-        return callPI(__functionAddress, hfunc, bytes);
+        return callPI(hfunc, bytes, __functionAddress);
     }
 
     // --- [ cuParamSetSize ] ---
@@ -2901,7 +2901,7 @@ public class CU {
         if (CHECKS) {
             check(hfunc);
         }
-        return callPI(__functionAddress, hfunc, numbytes);
+        return callPI(hfunc, numbytes, __functionAddress);
     }
 
     // --- [ cuParamSeti ] ---
@@ -2912,7 +2912,7 @@ public class CU {
         if (CHECKS) {
             check(hfunc);
         }
-        return callPI(__functionAddress, hfunc, offset, value);
+        return callPI(hfunc, offset, value, __functionAddress);
     }
 
     // --- [ cuParamSetf ] ---
@@ -2923,7 +2923,7 @@ public class CU {
         if (CHECKS) {
             check(hfunc);
         }
-        return callPI(__functionAddress, hfunc, offset, value);
+        return callPI(hfunc, offset, value, __functionAddress);
     }
 
     // --- [ cuParamSetv ] ---
@@ -2933,7 +2933,7 @@ public class CU {
         if (CHECKS) {
             check(hfunc);
         }
-        return callPPI(__functionAddress, hfunc, offset, ptr, numbytes);
+        return callPPI(hfunc, offset, ptr, numbytes, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -2949,7 +2949,7 @@ public class CU {
         if (CHECKS) {
             check(f);
         }
-        return callPI(__functionAddress, f);
+        return callPI(f, __functionAddress);
     }
 
     // --- [ cuLaunchGrid ] ---
@@ -2960,7 +2960,7 @@ public class CU {
         if (CHECKS) {
             check(f);
         }
-        return callPI(__functionAddress, f, grid_width, grid_height);
+        return callPI(f, grid_width, grid_height, __functionAddress);
     }
 
     // --- [ cuLaunchGridAsync ] ---
@@ -2971,7 +2971,7 @@ public class CU {
         if (CHECKS) {
             check(f);
         }
-        return callPPI(__functionAddress, f, grid_width, grid_height, hStream);
+        return callPPI(f, grid_width, grid_height, hStream, __functionAddress);
     }
 
     // --- [ cuParamSetTexRef ] ---
@@ -2983,7 +2983,7 @@ public class CU {
             check(hfunc);
             check(hTexRef);
         }
-        return callPPI(__functionAddress, hfunc, texunit, hTexRef);
+        return callPPI(hfunc, texunit, hTexRef, __functionAddress);
     }
 
     // --- [ cuTexRefSetArray ] ---
@@ -2995,7 +2995,7 @@ public class CU {
             check(hTexRef);
             check(hArray);
         }
-        return callPPI(__functionAddress, hTexRef, hArray, Flags);
+        return callPPI(hTexRef, hArray, Flags, __functionAddress);
     }
 
     // --- [ cuTexRefSetMipmappedArray ] ---
@@ -3007,7 +3007,7 @@ public class CU {
             check(hTexRef);
             check(hMipmappedArray);
         }
-        return callPPI(__functionAddress, hTexRef, hMipmappedArray, Flags);
+        return callPPI(hTexRef, hMipmappedArray, Flags, __functionAddress);
     }
 
     // --- [ cuTexRefSetAddress ] ---
@@ -3018,7 +3018,7 @@ public class CU {
             check(hTexRef);
             check(dptr);
         }
-        return callPPPPI(__functionAddress, ByteOffset, hTexRef, dptr, bytes);
+        return callPPPPI(ByteOffset, hTexRef, dptr, bytes, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3037,7 +3037,7 @@ public class CU {
             check(hTexRef);
             check(dptr);
         }
-        return callPPPPI(__functionAddress, hTexRef, desc, dptr, Pitch);
+        return callPPPPI(hTexRef, desc, dptr, Pitch, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3053,7 +3053,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPI(__functionAddress, hTexRef, fmt, NumPackedComponents);
+        return callPI(hTexRef, fmt, NumPackedComponents, __functionAddress);
     }
 
     // --- [ cuTexRefSetAddressMode ] ---
@@ -3064,7 +3064,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPI(__functionAddress, hTexRef, dim, am);
+        return callPI(hTexRef, dim, am, __functionAddress);
     }
 
     // --- [ cuTexRefSetFilterMode ] ---
@@ -3075,7 +3075,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPI(__functionAddress, hTexRef, fm);
+        return callPI(hTexRef, fm, __functionAddress);
     }
 
     // --- [ cuTexRefSetMipmapFilterMode ] ---
@@ -3086,7 +3086,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPI(__functionAddress, hTexRef, fm);
+        return callPI(hTexRef, fm, __functionAddress);
     }
 
     // --- [ cuTexRefSetMipmapLevelBias ] ---
@@ -3097,7 +3097,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPI(__functionAddress, hTexRef, bias);
+        return callPI(hTexRef, bias, __functionAddress);
     }
 
     // --- [ cuTexRefSetMipmapLevelClamp ] ---
@@ -3108,7 +3108,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPI(__functionAddress, hTexRef, minMipmapLevelClamp, maxMipmapLevelClamp);
+        return callPI(hTexRef, minMipmapLevelClamp, maxMipmapLevelClamp, __functionAddress);
     }
 
     // --- [ cuTexRefSetMaxAnisotropy ] ---
@@ -3119,7 +3119,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPI(__functionAddress, hTexRef, maxAniso);
+        return callPI(hTexRef, maxAniso, __functionAddress);
     }
 
     // --- [ cuTexRefSetBorderColor ] ---
@@ -3129,7 +3129,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPI(__functionAddress, hTexRef, pBorderColor);
+        return callPPI(hTexRef, pBorderColor, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3148,7 +3148,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPI(__functionAddress, hTexRef, Flags);
+        return callPI(hTexRef, Flags, __functionAddress);
     }
 
     // --- [ cuTexRefGetAddress ] ---
@@ -3158,7 +3158,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPI(__functionAddress, pdptr, hTexRef);
+        return callPPI(pdptr, hTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3176,7 +3176,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPI(__functionAddress, phArray, hTexRef);
+        return callPPI(phArray, hTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3194,7 +3194,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPI(__functionAddress, phMipmappedArray, hTexRef);
+        return callPPI(phMipmappedArray, hTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3212,7 +3212,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPI(__functionAddress, pam, hTexRef, dim);
+        return callPPI(pam, hTexRef, dim, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3230,7 +3230,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPI(__functionAddress, pfm, hTexRef);
+        return callPPI(pfm, hTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3248,7 +3248,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPPI(__functionAddress, pFormat, pNumChannels, hTexRef);
+        return callPPPI(pFormat, pNumChannels, hTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3267,7 +3267,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPI(__functionAddress, pfm, hTexRef);
+        return callPPI(pfm, hTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3285,7 +3285,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPI(__functionAddress, pbias, hTexRef);
+        return callPPI(pbias, hTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3303,7 +3303,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPPI(__functionAddress, pminMipmapLevelClamp, pmaxMipmapLevelClamp, hTexRef);
+        return callPPPI(pminMipmapLevelClamp, pmaxMipmapLevelClamp, hTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3322,7 +3322,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPI(__functionAddress, pmaxAniso, hTexRef);
+        return callPPI(pmaxAniso, hTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3340,7 +3340,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPI(__functionAddress, pBorderColor, hTexRef);
+        return callPPI(pBorderColor, hTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3358,7 +3358,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPPI(__functionAddress, pFlags, hTexRef);
+        return callPPI(pFlags, hTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3373,7 +3373,7 @@ public class CU {
 
     public static int ncuTexRefCreate(long pTexRef) {
         long __functionAddress = Functions.TexRefCreate;
-        return callPI(__functionAddress, pTexRef);
+        return callPI(pTexRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3392,7 +3392,7 @@ public class CU {
         if (CHECKS) {
             check(hTexRef);
         }
-        return callPI(__functionAddress, hTexRef);
+        return callPI(hTexRef, __functionAddress);
     }
 
     // --- [ cuSurfRefSetArray ] ---
@@ -3404,7 +3404,7 @@ public class CU {
             check(hSurfRef);
             check(hArray);
         }
-        return callPPI(__functionAddress, hSurfRef, hArray, Flags);
+        return callPPI(hSurfRef, hArray, Flags, __functionAddress);
     }
 
     // --- [ cuSurfRefGetArray ] ---
@@ -3414,7 +3414,7 @@ public class CU {
         if (CHECKS) {
             check(hSurfRef);
         }
-        return callPPI(__functionAddress, phArray, hSurfRef);
+        return callPPI(phArray, hSurfRef, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3433,7 +3433,7 @@ public class CU {
         if (CHECKS) {
             check(resource);
         }
-        return callPI(__functionAddress, resource);
+        return callPI(resource, __functionAddress);
     }
 
     // --- [ cuGraphicsSubResourceGetMappedArray ] ---
@@ -3443,7 +3443,7 @@ public class CU {
         if (CHECKS) {
             check(resource);
         }
-        return callPPI(__functionAddress, pArray, resource, arrayIndex, mipLevel);
+        return callPPI(pArray, resource, arrayIndex, mipLevel, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3461,7 +3461,7 @@ public class CU {
         if (CHECKS) {
             check(resource);
         }
-        return callPPPI(__functionAddress, pDevPtr, pSize, resource);
+        return callPPPI(pDevPtr, pSize, resource, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3481,14 +3481,14 @@ public class CU {
         if (CHECKS) {
             check(resource);
         }
-        return callPI(__functionAddress, resource, flags);
+        return callPI(resource, flags, __functionAddress);
     }
 
     // --- [ cuGraphicsMapResources ] ---
 
     public static int ncuGraphicsMapResources(int count, long resources, long hStream) {
         long __functionAddress = Functions.GraphicsMapResources;
-        return callPPI(__functionAddress, count, resources, hStream);
+        return callPPI(count, resources, hStream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3500,7 +3500,7 @@ public class CU {
 
     public static int ncuGraphicsUnmapResources(int count, long resources, long hStream) {
         long __functionAddress = Functions.GraphicsUnmapResources;
-        return callPPI(__functionAddress, count, resources, hStream);
+        return callPPI(count, resources, hStream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -3512,7 +3512,7 @@ public class CU {
 
     public static int ncuGetExportTable(long ppExportTable, long pExportTableId) {
         long __functionAddress = Functions.GetExportTable;
-        return callPPI(__functionAddress, ppExportTable, pExportTableId);
+        return callPPI(ppExportTable, pExportTableId, __functionAddress);
     }
 
     @NativeType("CUresult")

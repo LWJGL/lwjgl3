@@ -50,7 +50,7 @@ public class KHRGLEvent {
             check(context);
             check(sync);
         }
-        return callPPPP(__functionAddress, context, sync, errcode_ret);
+        return callPPPP(context, sync, errcode_ret, __functionAddress);
     }
 
     /**
@@ -78,7 +78,7 @@ public class KHRGLEvent {
             check(sync);
             checkSafe(errcode_ret, 1);
         }
-        return callPPPP(__functionAddress, context, sync, errcode_ret);
+        return callPPPP(context, sync, errcode_ret, __functionAddress);
     }
 
 }

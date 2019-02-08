@@ -61,7 +61,7 @@ public class NVStreamConsumerGLTextureYUV {
             check(dpy);
             check(stream);
         }
-        return callPPPI(__functionAddress, dpy, stream, attrib_list);
+        return callPPPI(dpy, stream, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLBoolean")

@@ -162,7 +162,7 @@ public class QCOMExtendedGet {
             check(__functionAddress);
             checkSafe(numTextures, 1);
         }
-        callPPV(__functionAddress, textures, lengthSafe(textures), numTextures);
+        callPPV(textures, lengthSafe(textures), numTextures, __functionAddress);
     }
 
     /** Array version of: {@link #glExtGetBuffersQCOM ExtGetBuffersQCOM} */
@@ -172,7 +172,7 @@ public class QCOMExtendedGet {
             check(__functionAddress);
             checkSafe(numBuffers, 1);
         }
-        callPPV(__functionAddress, buffers, lengthSafe(buffers), numBuffers);
+        callPPV(buffers, lengthSafe(buffers), numBuffers, __functionAddress);
     }
 
     /** Array version of: {@link #glExtGetRenderbuffersQCOM ExtGetRenderbuffersQCOM} */
@@ -182,7 +182,7 @@ public class QCOMExtendedGet {
             check(__functionAddress);
             checkSafe(numRenderbuffers, 1);
         }
-        callPPV(__functionAddress, renderbuffers, lengthSafe(renderbuffers), numRenderbuffers);
+        callPPV(renderbuffers, lengthSafe(renderbuffers), numRenderbuffers, __functionAddress);
     }
 
     /** Array version of: {@link #glExtGetFramebuffersQCOM ExtGetFramebuffersQCOM} */
@@ -192,7 +192,7 @@ public class QCOMExtendedGet {
             check(__functionAddress);
             checkSafe(numFramebuffers, 1);
         }
-        callPPV(__functionAddress, framebuffers, lengthSafe(framebuffers), numFramebuffers);
+        callPPV(framebuffers, lengthSafe(framebuffers), numFramebuffers, __functionAddress);
     }
 
     /** Array version of: {@link #glExtGetTexLevelParameterivQCOM ExtGetTexLevelParameterivQCOM} */
@@ -202,7 +202,7 @@ public class QCOMExtendedGet {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, texture, face, level, pname, params);
+        callPV(texture, face, level, pname, params, __functionAddress);
     }
 
 }

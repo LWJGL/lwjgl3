@@ -94,7 +94,7 @@ public class GLFWVulkan {
      */
     public static long nglfwGetRequiredInstanceExtensions(long count) {
         long __functionAddress = Functions.GetRequiredInstanceExtensions;
-        return invokePP(__functionAddress, count);
+        return invokePP(count, __functionAddress);
     }
 
     /**
@@ -139,7 +139,7 @@ public class GLFWVulkan {
     /** Unsafe version of: {@link #glfwGetInstanceProcAddress GetInstanceProcAddress} */
     public static long nglfwGetInstanceProcAddress(long instance, long procname) {
         long __functionAddress = Functions.GetInstanceProcAddress;
-        return invokePPP(__functionAddress, instance, procname);
+        return invokePPP(instance, procname, __functionAddress);
     }
 
     /**
@@ -244,7 +244,7 @@ public class GLFWVulkan {
     @NativeType("int")
     public static boolean glfwGetPhysicalDevicePresentationSupport(VkInstance instance, VkPhysicalDevice device, @NativeType("uint32_t") int queuefamily) {
         long __functionAddress = Functions.GetPhysicalDevicePresentationSupport;
-        return invokePPI(__functionAddress, instance.address(), device.address(), queuefamily) != 0;
+        return invokePPI(instance.address(), device.address(), queuefamily, __functionAddress) != 0;
     }
 
     // --- [ glfwCreateWindowSurface ] ---
@@ -256,7 +256,7 @@ public class GLFWVulkan {
             check(window);
             if (allocator != NULL) { VkAllocationCallbacks.validate(allocator); }
         }
-        return invokePPPPI(__functionAddress, instance, window, allocator, surface);
+        return invokePPPPI(instance, window, allocator, surface, __functionAddress);
     }
 
     /**
@@ -308,7 +308,7 @@ public class GLFWVulkan {
             check(surface, 1);
             if (allocator != null) { VkAllocationCallbacks.validate(allocator.address()); }
         }
-        return invokePPPPI(__functionAddress, instance.address(), window, memAddressSafe(allocator), surface);
+        return invokePPPPI(instance.address(), window, memAddressSafe(allocator), surface, __functionAddress);
     }
 
 }

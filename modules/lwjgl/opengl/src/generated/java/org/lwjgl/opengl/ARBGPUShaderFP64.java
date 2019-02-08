@@ -843,7 +843,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length, value);
+        callPV(program, location, value.length, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform2dvEXT ProgramUniform2dvEXT} */
@@ -852,7 +852,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 1, value);
+        callPV(program, location, value.length >> 1, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform3dvEXT ProgramUniform3dvEXT} */
@@ -861,7 +861,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 3, value);
+        callPV(program, location, value.length / 3, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform4dvEXT ProgramUniform4dvEXT} */
@@ -870,7 +870,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 2, value);
+        callPV(program, location, value.length >> 2, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix2dvEXT ProgramUniformMatrix2dvEXT} */
@@ -879,7 +879,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 2, transpose, value);
+        callPV(program, location, value.length >> 2, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix3dvEXT ProgramUniformMatrix3dvEXT} */
@@ -888,7 +888,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 9, transpose, value);
+        callPV(program, location, value.length / 9, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix4dvEXT ProgramUniformMatrix4dvEXT} */
@@ -897,7 +897,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 4, transpose, value);
+        callPV(program, location, value.length >> 4, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix2x3dvEXT ProgramUniformMatrix2x3dvEXT} */
@@ -906,7 +906,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 6, transpose, value);
+        callPV(program, location, value.length / 6, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix2x4dvEXT ProgramUniformMatrix2x4dvEXT} */
@@ -915,7 +915,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 3, transpose, value);
+        callPV(program, location, value.length >> 3, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix3x2dvEXT ProgramUniformMatrix3x2dvEXT} */
@@ -924,7 +924,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 6, transpose, value);
+        callPV(program, location, value.length / 6, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix3x4dvEXT ProgramUniformMatrix3x4dvEXT} */
@@ -933,7 +933,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 12, transpose, value);
+        callPV(program, location, value.length / 12, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix4x2dvEXT ProgramUniformMatrix4x2dvEXT} */
@@ -942,7 +942,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 3, transpose, value);
+        callPV(program, location, value.length >> 3, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix4x3dvEXT ProgramUniformMatrix4x3dvEXT} */
@@ -951,7 +951,7 @@ public class ARBGPUShaderFP64 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 12, transpose, value);
+        callPV(program, location, value.length / 12, transpose, value, __functionAddress);
     }
 
 }

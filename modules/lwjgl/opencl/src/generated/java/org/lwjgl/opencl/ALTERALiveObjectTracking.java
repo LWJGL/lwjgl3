@@ -59,7 +59,7 @@ public class ALTERALiveObjectTracking {
             check(__functionAddress);
             check(platform);
         }
-        callPV(__functionAddress, platform);
+        callPV(platform, __functionAddress);
     }
 
     // --- [ clReportLiveObjectsAltera ] ---
@@ -72,7 +72,7 @@ public class ALTERALiveObjectTracking {
             check(platform);
             check(user_data);
         }
-        callPPPV(__functionAddress, platform, report_fn, user_data);
+        callPPPV(platform, report_fn, user_data, __functionAddress);
     }
 
     /**

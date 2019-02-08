@@ -198,7 +198,7 @@ public class AMDPerformanceMonitor {
             check(__functionAddress);
             checkSafe(numGroups, 1);
         }
-        callPPV(__functionAddress, numGroups, lengthSafe(groups), groups);
+        callPPV(numGroups, lengthSafe(groups), groups, __functionAddress);
     }
 
     /** Array version of: {@link #glGetPerfMonitorCountersAMD GetPerfMonitorCountersAMD} */
@@ -209,7 +209,7 @@ public class AMDPerformanceMonitor {
             check(numCounters, 1);
             check(maxActiveCounters, 1);
         }
-        callPPPV(__functionAddress, group, numCounters, maxActiveCounters, counters.length, counters);
+        callPPPV(group, numCounters, maxActiveCounters, counters.length, counters, __functionAddress);
     }
 
     /** Array version of: {@link #glGetPerfMonitorGroupStringAMD GetPerfMonitorGroupStringAMD} */
@@ -219,7 +219,7 @@ public class AMDPerformanceMonitor {
             check(__functionAddress);
             check(length, 1);
         }
-        callPPV(__functionAddress, group, groupString.remaining(), length, memAddress(groupString));
+        callPPV(group, groupString.remaining(), length, memAddress(groupString), __functionAddress);
     }
 
     /** Array version of: {@link #glGetPerfMonitorCounterStringAMD GetPerfMonitorCounterStringAMD} */
@@ -229,7 +229,7 @@ public class AMDPerformanceMonitor {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, group, counter, remainingSafe(counterString), length, memAddressSafe(counterString));
+        callPPV(group, counter, remainingSafe(counterString), length, memAddressSafe(counterString), __functionAddress);
     }
 
     /** Array version of: {@link #glGetPerfMonitorCounterInfoAMD GetPerfMonitorCounterInfoAMD} */
@@ -239,7 +239,7 @@ public class AMDPerformanceMonitor {
             check(__functionAddress);
             check(data, 4 >> 2);
         }
-        callPV(__functionAddress, group, counter, pname, data);
+        callPV(group, counter, pname, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGetPerfMonitorCounterInfoAMD GetPerfMonitorCounterInfoAMD} */
@@ -249,7 +249,7 @@ public class AMDPerformanceMonitor {
             check(__functionAddress);
             check(data, 4 >> 2);
         }
-        callPV(__functionAddress, group, counter, pname, data);
+        callPV(group, counter, pname, data, __functionAddress);
     }
 
     /** Array version of: {@link #glGenPerfMonitorsAMD GenPerfMonitorsAMD} */
@@ -258,7 +258,7 @@ public class AMDPerformanceMonitor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, monitors.length, monitors);
+        callPV(monitors.length, monitors, __functionAddress);
     }
 
     /** Array version of: {@link #glDeletePerfMonitorsAMD DeletePerfMonitorsAMD} */
@@ -267,7 +267,7 @@ public class AMDPerformanceMonitor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, monitors.length, monitors);
+        callPV(monitors.length, monitors, __functionAddress);
     }
 
     /** Array version of: {@link #glSelectPerfMonitorCountersAMD SelectPerfMonitorCountersAMD} */
@@ -276,7 +276,7 @@ public class AMDPerformanceMonitor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, monitor, enable, group, counterList.length, counterList);
+        callPV(monitor, enable, group, counterList.length, counterList, __functionAddress);
     }
 
     /** Array version of: {@link #glGetPerfMonitorCounterDataAMD GetPerfMonitorCounterDataAMD} */
@@ -286,7 +286,7 @@ public class AMDPerformanceMonitor {
             check(__functionAddress);
             checkSafe(bytesWritten, 1);
         }
-        callPPV(__functionAddress, monitor, pname, data.length, data, bytesWritten);
+        callPPV(monitor, pname, data.length, data, bytesWritten, __functionAddress);
     }
 
 }

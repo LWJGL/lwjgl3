@@ -205,7 +205,7 @@ public class KHRSwapchain {
             VkSwapchainCreateInfoKHR.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo, pAllocator, pSwapchain);
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pSwapchain, __functionAddress);
     }
 
     /**
@@ -281,7 +281,7 @@ public class KHRSwapchain {
             check(__functionAddress);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        callPJPV(__functionAddress, device.address(), swapchain, pAllocator);
+        callPJPV(device.address(), swapchain, pAllocator, __functionAddress);
     }
 
     /**
@@ -350,7 +350,7 @@ public class KHRSwapchain {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, device.address(), swapchain, pSwapchainImageCount, pSwapchainImages);
+        return callPJPPI(device.address(), swapchain, pSwapchainImageCount, pSwapchainImages, __functionAddress);
     }
 
     /**
@@ -418,7 +418,7 @@ public class KHRSwapchain {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJJJJPI(__functionAddress, device.address(), swapchain, timeout, semaphore, fence, pImageIndex);
+        return callPJJJJPI(device.address(), swapchain, timeout, semaphore, fence, pImageIndex, __functionAddress);
     }
 
     /**
@@ -513,7 +513,7 @@ public class KHRSwapchain {
             check(__functionAddress);
             VkPresentInfoKHR.validate(pPresentInfo);
         }
-        return callPPI(__functionAddress, queue.address(), pPresentInfo);
+        return callPPI(queue.address(), pPresentInfo, __functionAddress);
     }
 
     /**
@@ -614,7 +614,7 @@ public class KHRSwapchain {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, device.address(), pDeviceGroupPresentCapabilities);
+        return callPPI(device.address(), pDeviceGroupPresentCapabilities, __functionAddress);
     }
 
     /**
@@ -672,7 +672,7 @@ public class KHRSwapchain {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPI(__functionAddress, device.address(), surface, pModes);
+        return callPJPI(device.address(), surface, pModes, __functionAddress);
     }
 
     /**
@@ -748,7 +748,7 @@ public class KHRSwapchain {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, physicalDevice.address(), surface, pRectCount, pRects);
+        return callPJPPI(physicalDevice.address(), surface, pRectCount, pRects, __functionAddress);
     }
 
     /**
@@ -832,7 +832,7 @@ public class KHRSwapchain {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, device.address(), pAcquireInfo, pImageIndex);
+        return callPPPI(device.address(), pAcquireInfo, pImageIndex, __functionAddress);
     }
 
     /**
@@ -908,7 +908,7 @@ public class KHRSwapchain {
             VkSwapchainCreateInfoKHR.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSwapchain);
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSwapchain, __functionAddress);
     }
 
     /** Array version of: {@link #vkGetSwapchainImagesKHR GetSwapchainImagesKHR} */
@@ -920,7 +920,7 @@ public class KHRSwapchain {
             check(pSwapchainImageCount, 1);
             checkSafe(pSwapchainImages, pSwapchainImageCount[0]);
         }
-        return callPJPPI(__functionAddress, device.address(), swapchain, pSwapchainImageCount, pSwapchainImages);
+        return callPJPPI(device.address(), swapchain, pSwapchainImageCount, pSwapchainImages, __functionAddress);
     }
 
     /** Array version of: {@link #vkAcquireNextImageKHR AcquireNextImageKHR} */
@@ -931,7 +931,7 @@ public class KHRSwapchain {
             check(__functionAddress);
             check(pImageIndex, 1);
         }
-        return callPJJJJPI(__functionAddress, device.address(), swapchain, timeout, semaphore, fence, pImageIndex);
+        return callPJJJJPI(device.address(), swapchain, timeout, semaphore, fence, pImageIndex, __functionAddress);
     }
 
     /** Array version of: {@link #vkGetDeviceGroupSurfacePresentModesKHR GetDeviceGroupSurfacePresentModesKHR} */
@@ -942,7 +942,7 @@ public class KHRSwapchain {
             check(__functionAddress);
             check(pModes, 1);
         }
-        return callPJPI(__functionAddress, device.address(), surface, pModes);
+        return callPJPI(device.address(), surface, pModes, __functionAddress);
     }
 
     /** Array version of: {@link #vkGetPhysicalDevicePresentRectanglesKHR GetPhysicalDevicePresentRectanglesKHR} */
@@ -954,7 +954,7 @@ public class KHRSwapchain {
             check(pRectCount, 1);
             checkSafe(pRects, pRectCount[0]);
         }
-        return callPJPPI(__functionAddress, physicalDevice.address(), surface, pRectCount, memAddressSafe(pRects));
+        return callPJPPI(physicalDevice.address(), surface, pRectCount, memAddressSafe(pRects), __functionAddress);
     }
 
     /** Array version of: {@link #vkAcquireNextImage2KHR AcquireNextImage2KHR} */
@@ -965,7 +965,7 @@ public class KHRSwapchain {
             check(__functionAddress);
             check(pImageIndex, 1);
         }
-        return callPPPI(__functionAddress, device.address(), pAcquireInfo.address(), pImageIndex);
+        return callPPPI(device.address(), pAcquireInfo.address(), pImageIndex, __functionAddress);
     }
 
 }

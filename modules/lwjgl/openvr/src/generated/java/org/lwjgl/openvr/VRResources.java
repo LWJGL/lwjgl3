@@ -31,7 +31,7 @@ public class VRResources {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchResourceName, pchBuffer, unBufferLen);
+        return callPPI(pchResourceName, pchBuffer, unBufferLen, __functionAddress);
     }
 
     /**
@@ -91,7 +91,7 @@ public class VRResources {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, pchResourceName, pchResourceTypeDirectory, pchPathBuffer, unBufferLen);
+        return callPPPI(pchResourceName, pchResourceTypeDirectory, pchPathBuffer, unBufferLen, __functionAddress);
     }
 
     /**

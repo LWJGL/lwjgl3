@@ -262,7 +262,7 @@ public class NVShaderBufferLoad {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetNamedBufferParameterui64vNV GetNamedBufferParameterui64vNV} */
@@ -272,7 +272,7 @@ public class NVShaderBufferLoad {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, buffer, pname, params);
+        callPV(buffer, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetIntegerui64vNV GetIntegerui64vNV} */
@@ -282,7 +282,7 @@ public class NVShaderBufferLoad {
             check(__functionAddress);
             check(result, 1);
         }
-        callPV(__functionAddress, value, result);
+        callPV(value, result, __functionAddress);
     }
 
     /** Array version of: {@link #glUniformui64vNV Uniformui64vNV} */
@@ -291,7 +291,7 @@ public class NVShaderBufferLoad {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length, value);
+        callPV(location, value.length, value, __functionAddress);
     }
 
     /** Array version of: {@link #glGetUniformui64vNV GetUniformui64vNV} */
@@ -301,7 +301,7 @@ public class NVShaderBufferLoad {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, program, location, params);
+        callPV(program, location, params, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformui64vNV ProgramUniformui64vNV} */
@@ -310,7 +310,7 @@ public class NVShaderBufferLoad {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length, value);
+        callPV(program, location, value.length, value, __functionAddress);
     }
 
 }

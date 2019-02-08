@@ -56,7 +56,7 @@ public class ANDROIDCreateNativeClientBuffer {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPP(__functionAddress, attrib_list);
+        return callPP(attrib_list, __functionAddress);
     }
 
     /**
@@ -83,7 +83,7 @@ public class ANDROIDCreateNativeClientBuffer {
             check(__functionAddress);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPP(__functionAddress, attrib_list);
+        return callPP(attrib_list, __functionAddress);
     }
 
 }

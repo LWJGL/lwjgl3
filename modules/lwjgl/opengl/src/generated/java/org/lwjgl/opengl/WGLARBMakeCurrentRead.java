@@ -73,7 +73,7 @@ public class WGLARBMakeCurrentRead {
             check(readDC);
             check(hglrc);
         }
-        return callPPPI(__functionAddress, drawDC, readDC, hglrc) != 0;
+        return callPPPI(drawDC, readDC, hglrc, __functionAddress) != 0;
     }
 
     // --- [ wglGetCurrentReadDCARB ] ---

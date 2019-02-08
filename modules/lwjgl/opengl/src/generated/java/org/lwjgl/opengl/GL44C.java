@@ -1008,7 +1008,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 1, data, flags);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 1, data, flags, __functionAddress);
     }
 
     /**
@@ -1021,7 +1021,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 2, data, flags);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
     }
 
     /**
@@ -1034,7 +1034,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 2, data, flags);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
     }
 
     /**
@@ -1047,7 +1047,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, target, Integer.toUnsignedLong(data.length) << 3, data, flags);
+        callPPV(target, Integer.toUnsignedLong(data.length) << 3, data, flags, __functionAddress);
     }
 
     /**
@@ -1060,7 +1060,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data, __functionAddress);
     }
 
     /**
@@ -1073,7 +1073,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data, __functionAddress);
     }
 
     /**
@@ -1086,7 +1086,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data, __functionAddress);
     }
 
     /**
@@ -1099,7 +1099,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+        callPV(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data, __functionAddress);
     }
 
     /**
@@ -1112,7 +1112,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, format, type, data);
+        callPV(texture, level, format, type, data, __functionAddress);
     }
 
     /**
@@ -1125,7 +1125,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, format, type, data);
+        callPV(texture, level, format, type, data, __functionAddress);
     }
 
     /**
@@ -1138,7 +1138,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, format, type, data);
+        callPV(texture, level, format, type, data, __functionAddress);
     }
 
     /**
@@ -1151,7 +1151,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, texture, level, format, type, data);
+        callPV(texture, level, format, type, data, __functionAddress);
     }
 
     /**
@@ -1164,7 +1164,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, first, lengthSafe(buffers), buffers);
+        callPV(target, first, lengthSafe(buffers), buffers, __functionAddress);
     }
 
     /**
@@ -1179,7 +1179,7 @@ public class GL44C extends GL43C {
             checkSafe(offsets, lengthSafe(buffers));
             checkSafe(sizes, lengthSafe(buffers));
         }
-        callPPPV(__functionAddress, target, first, lengthSafe(buffers), buffers, memAddressSafe(offsets), memAddressSafe(sizes));
+        callPPPV(target, first, lengthSafe(buffers), buffers, memAddressSafe(offsets), memAddressSafe(sizes), __functionAddress);
     }
 
     /**
@@ -1192,7 +1192,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, first, lengthSafe(textures), textures);
+        callPV(first, lengthSafe(textures), textures, __functionAddress);
     }
 
     /**
@@ -1205,7 +1205,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, first, lengthSafe(samplers), samplers);
+        callPV(first, lengthSafe(samplers), samplers, __functionAddress);
     }
 
     /**
@@ -1218,7 +1218,7 @@ public class GL44C extends GL43C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, first, lengthSafe(textures), textures);
+        callPV(first, lengthSafe(textures), textures, __functionAddress);
     }
 
     /**
@@ -1233,7 +1233,7 @@ public class GL44C extends GL43C {
             checkSafe(offsets, lengthSafe(buffers));
             checkSafe(strides, lengthSafe(buffers));
         }
-        callPPPV(__functionAddress, first, lengthSafe(buffers), buffers, memAddressSafe(offsets), strides);
+        callPPPV(first, lengthSafe(buffers), buffers, memAddressSafe(offsets), strides, __functionAddress);
     }
 
 }

@@ -64,7 +64,7 @@ public class ClangBuildSystem {
     @NativeType("CXVirtualFileOverlay")
     public static long clang_VirtualFileOverlay_create(@NativeType("unsigned int") int options) {
         long __functionAddress = Functions.VirtualFileOverlay_create;
-        return invokeP(__functionAddress, options);
+        return invokeP(options, __functionAddress);
     }
 
     // --- [ clang_VirtualFileOverlay_addFileMapping ] ---
@@ -75,7 +75,7 @@ public class ClangBuildSystem {
         if (CHECKS) {
             check(overlay);
         }
-        return invokePPPI(__functionAddress, overlay, virtualPath, realPath);
+        return invokePPPI(overlay, virtualPath, realPath, __functionAddress);
     }
 
     /**
@@ -125,7 +125,7 @@ public class ClangBuildSystem {
         if (CHECKS) {
             check(overlay);
         }
-        return invokePI(__functionAddress, overlay, caseSensitive);
+        return invokePI(overlay, caseSensitive, __functionAddress);
     }
 
     // --- [ clang_VirtualFileOverlay_writeToBuffer ] ---
@@ -136,7 +136,7 @@ public class ClangBuildSystem {
         if (CHECKS) {
             check(overlay);
         }
-        return invokePPPI(__functionAddress, overlay, options, out_buffer_ptr, out_buffer_size);
+        return invokePPPI(overlay, options, out_buffer_ptr, out_buffer_size, __functionAddress);
     }
 
     /**
@@ -162,7 +162,7 @@ public class ClangBuildSystem {
     /** Unsafe version of: {@link #clang_free free} */
     public static void nclang_free(long buffer) {
         long __functionAddress = Functions.free;
-        invokePV(__functionAddress, buffer);
+        invokePV(buffer, __functionAddress);
     }
 
     /**
@@ -182,7 +182,7 @@ public class ClangBuildSystem {
         if (CHECKS) {
             check(overlay);
         }
-        invokePV(__functionAddress, overlay);
+        invokePV(overlay, __functionAddress);
     }
 
     // --- [ clang_ModuleMapDescriptor_create ] ---
@@ -195,7 +195,7 @@ public class ClangBuildSystem {
     @NativeType("CXModuleMapDescriptor")
     public static long clang_ModuleMapDescriptor_create(@NativeType("unsigned int") int options) {
         long __functionAddress = Functions.ModuleMapDescriptor_create;
-        return invokeP(__functionAddress, options);
+        return invokeP(options, __functionAddress);
     }
 
     // --- [ clang_ModuleMapDescriptor_setFrameworkModuleName ] ---
@@ -206,7 +206,7 @@ public class ClangBuildSystem {
         if (CHECKS) {
             check(descriptor);
         }
-        return invokePPI(__functionAddress, descriptor, name);
+        return invokePPI(descriptor, name, __functionAddress);
     }
 
     /**
@@ -247,7 +247,7 @@ public class ClangBuildSystem {
         if (CHECKS) {
             check(descriptor);
         }
-        return invokePPI(__functionAddress, descriptor, name);
+        return invokePPI(descriptor, name, __functionAddress);
     }
 
     /**
@@ -288,7 +288,7 @@ public class ClangBuildSystem {
         if (CHECKS) {
             check(descriptor);
         }
-        return invokePPPI(__functionAddress, descriptor, options, out_buffer_ptr, out_buffer_size);
+        return invokePPPI(descriptor, options, out_buffer_ptr, out_buffer_size, __functionAddress);
     }
 
     /**
@@ -317,7 +317,7 @@ public class ClangBuildSystem {
         if (CHECKS) {
             check(descriptor);
         }
-        invokePV(__functionAddress, descriptor);
+        invokePV(descriptor, __functionAddress);
     }
 
 }

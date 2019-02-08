@@ -112,7 +112,7 @@ public class LLVMTransforms {
             check(__functionAddress);
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddCoroEarlyPass ] ---
@@ -124,7 +124,7 @@ public class LLVMTransforms {
             check(__functionAddress);
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddCoroSplitPass ] ---
@@ -136,7 +136,7 @@ public class LLVMTransforms {
             check(__functionAddress);
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddCoroElidePass ] ---
@@ -148,7 +148,7 @@ public class LLVMTransforms {
             check(__functionAddress);
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddCoroCleanupPass ] ---
@@ -160,7 +160,7 @@ public class LLVMTransforms {
             check(__functionAddress);
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddInstructionCombiningPass ] ---
@@ -171,7 +171,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddArgumentPromotionPass ] ---
@@ -182,7 +182,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddConstantMergePass ] ---
@@ -193,7 +193,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddCalledValuePropagationPass ] ---
@@ -205,7 +205,7 @@ public class LLVMTransforms {
             check(__functionAddress);
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddDeadArgEliminationPass ] ---
@@ -216,7 +216,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddFunctionAttrsPass ] ---
@@ -227,7 +227,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddFunctionInliningPass ] ---
@@ -238,7 +238,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddAlwaysInlinerPass ] ---
@@ -249,7 +249,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddGlobalDCEPass ] ---
@@ -260,7 +260,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddGlobalOptimizerPass ] ---
@@ -271,7 +271,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddIPConstantPropagationPass ] ---
@@ -282,7 +282,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddPruneEHPass ] ---
@@ -293,7 +293,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddIPSCCPPass ] ---
@@ -304,7 +304,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddInternalizePass ] ---
@@ -315,7 +315,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM, AllButMain);
+        invokePV(PM, AllButMain, __functionAddress);
     }
 
     // --- [ LLVMAddStripDeadPrototypesPass ] ---
@@ -326,7 +326,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddStripSymbolsPass ] ---
@@ -337,7 +337,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMPassManagerBuilderCreate ] ---
@@ -356,7 +356,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PMB);
         }
-        invokePV(__functionAddress, PMB);
+        invokePV(PMB, __functionAddress);
     }
 
     // --- [ LLVMPassManagerBuilderSetOptLevel ] ---
@@ -367,7 +367,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PMB);
         }
-        invokePV(__functionAddress, PMB, OptLevel);
+        invokePV(PMB, OptLevel, __functionAddress);
     }
 
     // --- [ LLVMPassManagerBuilderSetSizeLevel ] ---
@@ -378,7 +378,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PMB);
         }
-        invokePV(__functionAddress, PMB, SizeLevel);
+        invokePV(PMB, SizeLevel, __functionAddress);
     }
 
     // --- [ LLVMPassManagerBuilderSetDisableUnitAtATime ] ---
@@ -389,7 +389,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PMB);
         }
-        invokePV(__functionAddress, PMB, Value ? 1 : 0);
+        invokePV(PMB, Value ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMPassManagerBuilderSetDisableUnrollLoops ] ---
@@ -400,7 +400,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PMB);
         }
-        invokePV(__functionAddress, PMB, Value ? 1 : 0);
+        invokePV(PMB, Value ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMPassManagerBuilderSetDisableSimplifyLibCalls ] ---
@@ -411,7 +411,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PMB);
         }
-        invokePV(__functionAddress, PMB, Value ? 1 : 0);
+        invokePV(PMB, Value ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMPassManagerBuilderUseInlinerWithThreshold ] ---
@@ -422,7 +422,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PMB);
         }
-        invokePV(__functionAddress, PMB, Threshold);
+        invokePV(PMB, Threshold, __functionAddress);
     }
 
     // --- [ LLVMPassManagerBuilderPopulateFunctionPassManager ] ---
@@ -434,7 +434,7 @@ public class LLVMTransforms {
             check(PMB);
             check(PM);
         }
-        invokePPV(__functionAddress, PMB, PM);
+        invokePPV(PMB, PM, __functionAddress);
     }
 
     // --- [ LLVMPassManagerBuilderPopulateModulePassManager ] ---
@@ -446,7 +446,7 @@ public class LLVMTransforms {
             check(PMB);
             check(PM);
         }
-        invokePPV(__functionAddress, PMB, PM);
+        invokePPV(PMB, PM, __functionAddress);
     }
 
     // --- [ LLVMPassManagerBuilderPopulateLTOPassManager ] ---
@@ -458,7 +458,7 @@ public class LLVMTransforms {
             check(PMB);
             check(PM);
         }
-        invokePPV(__functionAddress, PMB, PM, Internalize ? 1 : 0, RunInliner ? 1 : 0);
+        invokePPV(PMB, PM, Internalize ? 1 : 0, RunInliner ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMAddAggressiveDCEPass ] ---
@@ -469,7 +469,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddBitTrackingDCEPass ] ---
@@ -480,7 +480,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddAlignmentFromAssumptionsPass ] ---
@@ -491,7 +491,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddCFGSimplificationPass ] ---
@@ -502,7 +502,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddDeadStoreEliminationPass ] ---
@@ -513,7 +513,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddScalarizerPass ] ---
@@ -524,7 +524,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddMergedLoadStoreMotionPass ] ---
@@ -535,7 +535,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddGVNPass ] ---
@@ -546,7 +546,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddNewGVNPass ] ---
@@ -557,7 +557,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddIndVarSimplifyPass ] ---
@@ -568,7 +568,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddJumpThreadingPass ] ---
@@ -579,7 +579,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLICMPass ] ---
@@ -590,7 +590,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLoopDeletionPass ] ---
@@ -601,7 +601,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLoopIdiomPass ] ---
@@ -612,7 +612,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLoopRotatePass ] ---
@@ -623,7 +623,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLoopRerollPass ] ---
@@ -634,7 +634,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLoopUnrollPass ] ---
@@ -645,7 +645,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLoopUnrollAndJamPass ] ---
@@ -657,7 +657,7 @@ public class LLVMTransforms {
             check(__functionAddress);
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLoopUnswitchPass ] ---
@@ -668,7 +668,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLowerAtomicPass ] ---
@@ -680,7 +680,7 @@ public class LLVMTransforms {
             check(__functionAddress);
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddMemCpyOptPass ] ---
@@ -691,7 +691,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddPartiallyInlineLibCallsPass ] ---
@@ -702,7 +702,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddReassociatePass ] ---
@@ -713,7 +713,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddSCCPPass ] ---
@@ -724,7 +724,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddScalarReplAggregatesPass ] ---
@@ -735,7 +735,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddScalarReplAggregatesPassSSA ] ---
@@ -746,7 +746,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddScalarReplAggregatesPassWithThreshold ] ---
@@ -757,7 +757,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM, Threshold);
+        invokePV(PM, Threshold, __functionAddress);
     }
 
     // --- [ LLVMAddSimplifyLibCallsPass ] ---
@@ -768,7 +768,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddTailCallEliminationPass ] ---
@@ -779,7 +779,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddConstantPropagationPass ] ---
@@ -790,7 +790,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddDemoteMemoryToRegisterPass ] ---
@@ -801,7 +801,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddVerifierPass ] ---
@@ -812,7 +812,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddCorrelatedValuePropagationPass ] ---
@@ -823,7 +823,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddEarlyCSEPass ] ---
@@ -834,7 +834,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddEarlyCSEMemSSAPass ] ---
@@ -845,7 +845,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLowerExpectIntrinsicPass ] ---
@@ -856,7 +856,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddTypeBasedAliasAnalysisPass ] ---
@@ -867,7 +867,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddScopedNoAliasAAPass ] ---
@@ -878,7 +878,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddBasicAliasAnalysisPass ] ---
@@ -889,7 +889,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddUnifyFunctionExitNodesPass ] ---
@@ -901,7 +901,7 @@ public class LLVMTransforms {
             check(__functionAddress);
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLowerSwitchPass ] ---
@@ -912,7 +912,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddPromoteMemoryToRegisterPass ] ---
@@ -923,7 +923,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddLoopVectorizePass ] ---
@@ -934,7 +934,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
     // --- [ LLVMAddSLPVectorizePass ] ---
@@ -945,7 +945,7 @@ public class LLVMTransforms {
         if (CHECKS) {
             check(PM);
         }
-        invokePV(__functionAddress, PM);
+        invokePV(PM, __functionAddress);
     }
 
 }

@@ -92,7 +92,7 @@ public class QCOMDriverControl {
             check(__functionAddress);
             checkSafe(num, 1);
         }
-        callPPV(__functionAddress, num, lengthSafe(driverControls), driverControls);
+        callPPV(num, lengthSafe(driverControls), driverControls, __functionAddress);
     }
 
     /** Array version of: {@link #glGetDriverControlStringQCOM GetDriverControlStringQCOM} */
@@ -102,7 +102,7 @@ public class QCOMDriverControl {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, driverControl, remainingSafe(driverControlString), length, memAddressSafe(driverControlString));
+        callPPV(driverControl, remainingSafe(driverControlString), length, memAddressSafe(driverControlString), __functionAddress);
     }
 
 }

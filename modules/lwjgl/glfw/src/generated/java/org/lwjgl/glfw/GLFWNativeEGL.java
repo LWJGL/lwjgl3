@@ -69,7 +69,7 @@ public class GLFWNativeEGL {
         if (CHECKS) {
             check(window);
         }
-        return invokePP(__functionAddress, window);
+        return invokePP(window, __functionAddress);
     }
 
     // --- [ glfwGetEGLSurface ] ---
@@ -89,7 +89,7 @@ public class GLFWNativeEGL {
         if (CHECKS) {
             check(window);
         }
-        return invokePP(__functionAddress, window);
+        return invokePP(window, __functionAddress);
     }
 
 }

@@ -51,7 +51,7 @@ public class ANDROIDNativeFenceSync {
             check(dpy);
             check(sync);
         }
-        return callPPI(__functionAddress, dpy, sync);
+        return callPPI(dpy, sync, __functionAddress);
     }
 
 }

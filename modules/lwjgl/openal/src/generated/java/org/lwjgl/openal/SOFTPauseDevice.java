@@ -46,7 +46,7 @@ public class SOFTPauseDevice {
             check(__functionAddress);
             check(device);
         }
-        invokePV(__functionAddress, device);
+        invokePV(device, __functionAddress);
     }
 
     // --- [ alcDeviceResumeSOFT ] ---
@@ -69,7 +69,7 @@ public class SOFTPauseDevice {
             check(__functionAddress);
             check(device);
         }
-        invokePV(__functionAddress, device);
+        invokePV(device, __functionAddress);
     }
 
 }

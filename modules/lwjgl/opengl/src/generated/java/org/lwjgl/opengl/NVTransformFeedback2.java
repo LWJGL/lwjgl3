@@ -124,7 +124,7 @@ public class NVTransformFeedback2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, ids.length, ids);
+        callPV(ids.length, ids, __functionAddress);
     }
 
     /** Array version of: {@link #glGenTransformFeedbacksNV GenTransformFeedbacksNV} */
@@ -134,7 +134,7 @@ public class NVTransformFeedback2 {
             check(__functionAddress);
             check(ids, 1);
         }
-        callPV(__functionAddress, ids.length, ids);
+        callPV(ids.length, ids, __functionAddress);
     }
 
 }

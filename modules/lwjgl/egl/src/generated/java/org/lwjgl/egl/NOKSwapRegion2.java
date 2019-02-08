@@ -52,7 +52,7 @@ public class NOKSwapRegion2 {
             check(dpy);
             check(surface);
         }
-        return callPPPI(__functionAddress, dpy, surface, numRects, rects);
+        return callPPPI(dpy, surface, numRects, rects, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -69,7 +69,7 @@ public class NOKSwapRegion2 {
             check(dpy);
             check(surface);
         }
-        return callPPPI(__functionAddress, dpy, surface, lengthSafe(rects), rects) != 0;
+        return callPPPI(dpy, surface, lengthSafe(rects), rects, __functionAddress) != 0;
     }
 
 }

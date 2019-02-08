@@ -467,7 +467,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pipelines.length, pipelines);
+        callPV(pipelines.length, pipelines, __functionAddress);
     }
 
     /** Array version of: {@link #glGenProgramPipelinesEXT GenProgramPipelinesEXT} */
@@ -476,7 +476,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pipelines.length, pipelines);
+        callPV(pipelines.length, pipelines, __functionAddress);
     }
 
     /** Array version of: {@link #glGetProgramPipelineInfoLogEXT GetProgramPipelineInfoLogEXT} */
@@ -486,7 +486,7 @@ public class EXTSeparateShaderObjects {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, pipeline, infoLog.remaining(), length, memAddress(infoLog));
+        callPPV(pipeline, infoLog.remaining(), length, memAddress(infoLog), __functionAddress);
     }
 
     /** Array version of: {@link #glGetProgramPipelineivEXT GetProgramPipelineivEXT} */
@@ -496,7 +496,7 @@ public class EXTSeparateShaderObjects {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, pipeline, pname, params);
+        callPV(pipeline, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform1fvEXT ProgramUniform1fvEXT} */
@@ -505,7 +505,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length, value);
+        callPV(program, location, value.length, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform1ivEXT ProgramUniform1ivEXT} */
@@ -514,7 +514,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length, value);
+        callPV(program, location, value.length, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform2fvEXT ProgramUniform2fvEXT} */
@@ -523,7 +523,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 1, value);
+        callPV(program, location, value.length >> 1, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform2ivEXT ProgramUniform2ivEXT} */
@@ -532,7 +532,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 1, value);
+        callPV(program, location, value.length >> 1, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform3fvEXT ProgramUniform3fvEXT} */
@@ -541,7 +541,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 3, value);
+        callPV(program, location, value.length / 3, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform3ivEXT ProgramUniform3ivEXT} */
@@ -550,7 +550,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 3, value);
+        callPV(program, location, value.length / 3, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform4fvEXT ProgramUniform4fvEXT} */
@@ -559,7 +559,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 2, value);
+        callPV(program, location, value.length >> 2, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform4ivEXT ProgramUniform4ivEXT} */
@@ -568,7 +568,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 2, value);
+        callPV(program, location, value.length >> 2, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix2fvEXT ProgramUniformMatrix2fvEXT} */
@@ -577,7 +577,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 2, transpose, value);
+        callPV(program, location, value.length >> 2, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix3fvEXT ProgramUniformMatrix3fvEXT} */
@@ -586,7 +586,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 9, transpose, value);
+        callPV(program, location, value.length / 9, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix4fvEXT ProgramUniformMatrix4fvEXT} */
@@ -595,7 +595,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 4, transpose, value);
+        callPV(program, location, value.length >> 4, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform1uivEXT ProgramUniform1uivEXT} */
@@ -604,7 +604,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length, value);
+        callPV(program, location, value.length, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform2uivEXT ProgramUniform2uivEXT} */
@@ -613,7 +613,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 1, value);
+        callPV(program, location, value.length >> 1, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform3uivEXT ProgramUniform3uivEXT} */
@@ -622,7 +622,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 3, value);
+        callPV(program, location, value.length / 3, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniform4uivEXT ProgramUniform4uivEXT} */
@@ -631,7 +631,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 2, value);
+        callPV(program, location, value.length >> 2, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix2x3fvEXT ProgramUniformMatrix2x3fvEXT} */
@@ -640,7 +640,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 6, transpose, value);
+        callPV(program, location, value.length / 6, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix3x2fvEXT ProgramUniformMatrix3x2fvEXT} */
@@ -649,7 +649,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 6, transpose, value);
+        callPV(program, location, value.length / 6, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix2x4fvEXT ProgramUniformMatrix2x4fvEXT} */
@@ -658,7 +658,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 3, transpose, value);
+        callPV(program, location, value.length >> 3, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix4x2fvEXT ProgramUniformMatrix4x2fvEXT} */
@@ -667,7 +667,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length >> 3, transpose, value);
+        callPV(program, location, value.length >> 3, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix3x4fvEXT ProgramUniformMatrix3x4fvEXT} */
@@ -676,7 +676,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 12, transpose, value);
+        callPV(program, location, value.length / 12, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformMatrix4x3fvEXT ProgramUniformMatrix4x3fvEXT} */
@@ -685,7 +685,7 @@ public class EXTSeparateShaderObjects {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, value.length / 12, transpose, value);
+        callPV(program, location, value.length / 12, transpose, value, __functionAddress);
     }
 
 }

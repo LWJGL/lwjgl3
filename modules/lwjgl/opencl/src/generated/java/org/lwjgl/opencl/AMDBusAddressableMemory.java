@@ -77,7 +77,7 @@ public class AMDBusAddressableMemory {
             check(command_queue);
             check(mem_object);
         }
-        return callPPPPI(__functionAddress, command_queue, mem_object, value, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPI(command_queue, mem_object, value, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -126,7 +126,7 @@ public class AMDBusAddressableMemory {
             check(command_queue);
             check(mem_object);
         }
-        return callPPJPPI(__functionAddress, command_queue, mem_object, value, offset, num_events_in_wait_list, event_wait_list, event);
+        return callPPJPPI(command_queue, mem_object, value, offset, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -180,7 +180,7 @@ public class AMDBusAddressableMemory {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPPPI(__functionAddress, command_queue, num_mem_objs, mem_objects, blocking_make_resident, bus_addresses, num_events_in_wait_list, event_wait_list, event);
+        return callPPPPPI(command_queue, num_mem_objs, mem_objects, blocking_make_resident, bus_addresses, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**

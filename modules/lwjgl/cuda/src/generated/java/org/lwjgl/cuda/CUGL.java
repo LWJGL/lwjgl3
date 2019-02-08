@@ -67,7 +67,7 @@ public class CUGL {
 
     public static int ncuGraphicsGLRegisterBuffer(long pCudaResource, int buffer, int Flags) {
         long __functionAddress = Functions.GraphicsGLRegisterBuffer;
-        return callPI(__functionAddress, pCudaResource, buffer, Flags);
+        return callPI(pCudaResource, buffer, Flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -82,7 +82,7 @@ public class CUGL {
 
     public static int ncuGraphicsGLRegisterImage(long pCudaResource, int image, int target, int Flags) {
         long __functionAddress = Functions.GraphicsGLRegisterImage;
-        return callPI(__functionAddress, pCudaResource, image, target, Flags);
+        return callPI(pCudaResource, image, target, Flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -97,7 +97,7 @@ public class CUGL {
 
     public static int ncuGLCtxCreate(long pCtx, int Flags, int device) {
         long __functionAddress = Functions.GLCtxCreate;
-        return callPI(__functionAddress, pCtx, Flags, device);
+        return callPI(pCtx, Flags, device, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -121,14 +121,14 @@ public class CUGL {
     @NativeType("CUresult")
     public static int cuGLRegisterBufferObject(@NativeType("GLuint") int buffer) {
         long __functionAddress = Functions.GLRegisterBufferObject;
-        return callI(__functionAddress, buffer);
+        return callI(buffer, __functionAddress);
     }
 
     // --- [ cuGLMapBufferObject ] ---
 
     public static int ncuGLMapBufferObject(long dptr, long size, int buffer) {
         long __functionAddress = Functions.GLMapBufferObject;
-        return callPPI(__functionAddress, dptr, size, buffer);
+        return callPPI(dptr, size, buffer, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -145,7 +145,7 @@ public class CUGL {
     @NativeType("CUresult")
     public static int cuGLUnmapBufferObject(@NativeType("GLuint") int buffer) {
         long __functionAddress = Functions.GLUnmapBufferObject;
-        return callI(__functionAddress, buffer);
+        return callI(buffer, __functionAddress);
     }
 
     // --- [ cuGLUnregisterBufferObject ] ---
@@ -153,7 +153,7 @@ public class CUGL {
     @NativeType("CUresult")
     public static int cuGLUnregisterBufferObject(@NativeType("GLuint") int buffer) {
         long __functionAddress = Functions.GLUnregisterBufferObject;
-        return callI(__functionAddress, buffer);
+        return callI(buffer, __functionAddress);
     }
 
     // --- [ cuGLSetBufferObjectMapFlags ] ---
@@ -161,14 +161,14 @@ public class CUGL {
     @NativeType("CUresult")
     public static int cuGLSetBufferObjectMapFlags(@NativeType("GLuint") int buffer, @NativeType("unsigned int") int Flags) {
         long __functionAddress = Functions.GLSetBufferObjectMapFlags;
-        return callI(__functionAddress, buffer, Flags);
+        return callI(buffer, Flags, __functionAddress);
     }
 
     // --- [ cuGLMapBufferObjectAsync ] ---
 
     public static int ncuGLMapBufferObjectAsync(long dptr, long size, int buffer, long hStream) {
         long __functionAddress = Functions.GLMapBufferObjectAsync;
-        return callPPPI(__functionAddress, dptr, size, buffer, hStream);
+        return callPPPI(dptr, size, buffer, hStream, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -185,7 +185,7 @@ public class CUGL {
     @NativeType("CUresult")
     public static int cuGLUnmapBufferObjectAsync(@NativeType("GLuint") int buffer, @NativeType("CUstream") long hStream) {
         long __functionAddress = Functions.GLUnmapBufferObjectAsync;
-        return callPI(__functionAddress, buffer, hStream);
+        return callPI(buffer, hStream, __functionAddress);
     }
 
 }

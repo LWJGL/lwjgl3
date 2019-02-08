@@ -44,7 +44,7 @@ public class EXTStaticBuffer {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, buffer, format, data, len, freq);
+        invokePV(buffer, format, data, len, freq, __functionAddress);
     }
 
     /**
@@ -106,7 +106,7 @@ public class EXTStaticBuffer {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, buffer, format, data, data.length << 1, freq);
+        invokePV(buffer, format, data, data.length << 1, freq, __functionAddress);
     }
 
     /** Array version of: {@link #alBufferDataStatic BufferDataStatic} */
@@ -116,7 +116,7 @@ public class EXTStaticBuffer {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, buffer, format, data, data.length << 2, freq);
+        invokePV(buffer, format, data, data.length << 2, freq, __functionAddress);
     }
 
     /** Array version of: {@link #alBufferDataStatic BufferDataStatic} */
@@ -126,7 +126,7 @@ public class EXTStaticBuffer {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, buffer, format, data, data.length << 2, freq);
+        invokePV(buffer, format, data, data.length << 2, freq, __functionAddress);
     }
 
 }

@@ -70,7 +70,7 @@ public class KHRLockSurface3 {
             check(dpy);
             check(surface);
         }
-        return callPPPI(__functionAddress, dpy, surface, attrib_list);
+        return callPPPI(dpy, surface, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -91,7 +91,7 @@ public class KHRLockSurface3 {
             check(dpy);
             check(surface);
         }
-        return callPPI(__functionAddress, dpy, surface) != 0;
+        return callPPI(dpy, surface, __functionAddress) != 0;
     }
 
     // --- [ eglQuerySurface64KHR ] ---
@@ -103,7 +103,7 @@ public class KHRLockSurface3 {
             check(dpy);
             check(surface);
         }
-        return callPPPI(__functionAddress, dpy, surface, attribute, value);
+        return callPPPI(dpy, surface, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -124,7 +124,7 @@ public class KHRLockSurface3 {
             check(surface);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPPI(__functionAddress, dpy, surface, attrib_list) != 0;
+        return callPPPI(dpy, surface, attrib_list, __functionAddress) != 0;
     }
 
 }

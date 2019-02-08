@@ -60,7 +60,7 @@ public class EXTPlatformBase {
             check(__functionAddress);
             check(native_display);
         }
-        return callPPP(__functionAddress, platform, native_display, attrib_list);
+        return callPPP(platform, native_display, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLDisplay")
@@ -81,7 +81,7 @@ public class EXTPlatformBase {
             check(config);
             check(native_window);
         }
-        return callPPPPP(__functionAddress, dpy, config, native_window, attrib_list);
+        return callPPPPP(dpy, config, native_window, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLSurface")
@@ -102,7 +102,7 @@ public class EXTPlatformBase {
             check(config);
             check(native_pixmap);
         }
-        return callPPPPP(__functionAddress, dpy, config, native_pixmap, attrib_list);
+        return callPPPPP(dpy, config, native_pixmap, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLSurface")
@@ -122,7 +122,7 @@ public class EXTPlatformBase {
             check(native_display);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPP(__functionAddress, platform, native_display, attrib_list);
+        return callPPP(platform, native_display, attrib_list, __functionAddress);
     }
 
     /** Array version of: {@link #eglCreatePlatformWindowSurfaceEXT CreatePlatformWindowSurfaceEXT} */
@@ -136,7 +136,7 @@ public class EXTPlatformBase {
             check(native_window);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPPPP(__functionAddress, dpy, config, native_window, attrib_list);
+        return callPPPPP(dpy, config, native_window, attrib_list, __functionAddress);
     }
 
     /** Array version of: {@link #eglCreatePlatformPixmapSurfaceEXT CreatePlatformPixmapSurfaceEXT} */
@@ -150,7 +150,7 @@ public class EXTPlatformBase {
             check(native_pixmap);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPPPP(__functionAddress, dpy, config, native_pixmap, attrib_list);
+        return callPPPPP(dpy, config, native_pixmap, attrib_list, __functionAddress);
     }
 
 }

@@ -47,7 +47,7 @@ public class MESAImageDMABufExport {
             check(dpy);
             check(image);
         }
-        return callPPPPPI(__functionAddress, dpy, image, fourcc, num_planes, modifiers);
+        return callPPPPPI(dpy, image, fourcc, num_planes, modifiers, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -69,7 +69,7 @@ public class MESAImageDMABufExport {
             check(dpy);
             check(image);
         }
-        return callPPPPPI(__functionAddress, dpy, image, fds, strides, offsets);
+        return callPPPPPI(dpy, image, fds, strides, offsets, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -94,7 +94,7 @@ public class MESAImageDMABufExport {
             checkSafe(num_planes, 1);
             checkSafe(modifiers, 1);
         }
-        return callPPPPPI(__functionAddress, dpy, image, fourcc, num_planes, modifiers) != 0;
+        return callPPPPPI(dpy, image, fourcc, num_planes, modifiers, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #eglExportDMABUFImageMESA ExportDMABUFImageMESA} */
@@ -109,7 +109,7 @@ public class MESAImageDMABufExport {
             checkSafe(strides, 1);
             checkSafe(offsets, 1);
         }
-        return callPPPPPI(__functionAddress, dpy, image, fds, strides, offsets) != 0;
+        return callPPPPPI(dpy, image, fds, strides, offsets, __functionAddress) != 0;
     }
 
 }

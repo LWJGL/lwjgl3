@@ -47,7 +47,7 @@ public class KHRSwapBuffersWithDamage {
             check(dpy);
             check(surface);
         }
-        return callPPPI(__functionAddress, dpy, surface, rects, n_rects);
+        return callPPPI(dpy, surface, rects, n_rects, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -64,7 +64,7 @@ public class KHRSwapBuffersWithDamage {
             check(dpy);
             check(surface);
         }
-        return callPPPI(__functionAddress, dpy, surface, rects, lengthSafe(rects)) != 0;
+        return callPPPI(dpy, surface, rects, lengthSafe(rects), __functionAddress) != 0;
     }
 
 }

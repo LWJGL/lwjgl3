@@ -58,7 +58,7 @@ public class CU70 extends CU65 {
 
     public static int ncuDevicePrimaryCtxRetain(long pctx, int dev) {
         long __functionAddress = Functions.DevicePrimaryCtxRetain;
-        return callPI(__functionAddress, pctx, dev);
+        return callPI(pctx, dev, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -74,7 +74,7 @@ public class CU70 extends CU65 {
     @NativeType("CUresult")
     public static int cuDevicePrimaryCtxRelease(@NativeType("CUdevice") int dev) {
         long __functionAddress = Functions.DevicePrimaryCtxRelease;
-        return callI(__functionAddress, dev);
+        return callI(dev, __functionAddress);
     }
 
     // --- [ cuDevicePrimaryCtxSetFlags ] ---
@@ -82,14 +82,14 @@ public class CU70 extends CU65 {
     @NativeType("CUresult")
     public static int cuDevicePrimaryCtxSetFlags(@NativeType("CUdevice") int dev, @NativeType("unsigned int") int flags) {
         long __functionAddress = Functions.DevicePrimaryCtxSetFlags;
-        return callI(__functionAddress, dev, flags);
+        return callI(dev, flags, __functionAddress);
     }
 
     // --- [ cuDevicePrimaryCtxGetState ] ---
 
     public static int ncuDevicePrimaryCtxGetState(int dev, long flags, long active) {
         long __functionAddress = Functions.DevicePrimaryCtxGetState;
-        return callPPI(__functionAddress, dev, flags, active);
+        return callPPI(dev, flags, active, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -106,14 +106,14 @@ public class CU70 extends CU65 {
     @NativeType("CUresult")
     public static int cuDevicePrimaryCtxReset(@NativeType("CUdevice") int dev) {
         long __functionAddress = Functions.DevicePrimaryCtxReset;
-        return callI(__functionAddress, dev);
+        return callI(dev, __functionAddress);
     }
 
     // --- [ cuCtxGetFlags ] ---
 
     public static int ncuCtxGetFlags(long flags) {
         long __functionAddress = Functions.CtxGetFlags;
-        return callPI(__functionAddress, flags);
+        return callPI(flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -131,7 +131,7 @@ public class CU70 extends CU65 {
         if (CHECKS) {
             check(ptr);
         }
-        return callPPPI(__functionAddress, numAttributes, attributes, data, ptr);
+        return callPPPI(numAttributes, attributes, data, ptr, __functionAddress);
     }
 
     @NativeType("CUresult")

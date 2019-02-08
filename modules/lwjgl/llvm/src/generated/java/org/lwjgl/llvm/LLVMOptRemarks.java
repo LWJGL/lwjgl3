@@ -44,7 +44,7 @@ public class LLVMOptRemarks {
     /** Unsafe version of: {@link #LLVMOptRemarkParserCreate OptRemarkParserCreate} */
     public static long nLLVMOptRemarkParserCreate(long Buf, long Size) {
         long __functionAddress = Functions.OptRemarkParserCreate;
-        return invokePJP(__functionAddress, Buf, Size);
+        return invokePJP(Buf, Size, __functionAddress);
     }
 
     /**
@@ -67,7 +67,7 @@ public class LLVMOptRemarks {
         if (CHECKS) {
             check(Parser);
         }
-        return invokePP(__functionAddress, Parser);
+        return invokePP(Parser, __functionAddress);
     }
 
     /**
@@ -120,7 +120,7 @@ public class LLVMOptRemarks {
         if (CHECKS) {
             check(Parser);
         }
-        return invokePI(__functionAddress, Parser) != 0;
+        return invokePI(Parser, __functionAddress) != 0;
     }
 
     // --- [ LLVMOptRemarkParserGetErrorMessage ] ---
@@ -131,7 +131,7 @@ public class LLVMOptRemarks {
         if (CHECKS) {
             check(Parser);
         }
-        return invokePP(__functionAddress, Parser);
+        return invokePP(Parser, __functionAddress);
     }
 
     /**
@@ -157,7 +157,7 @@ public class LLVMOptRemarks {
         if (CHECKS) {
             check(Parser);
         }
-        invokePV(__functionAddress, Parser);
+        invokePV(Parser, __functionAddress);
     }
 
 }

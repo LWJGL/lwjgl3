@@ -50,7 +50,7 @@ public class KHRImageBase {
             check(ctx);
             check(buffer);
         }
-        return callPPPPP(__functionAddress, dpy, ctx, target, buffer, attrib_list);
+        return callPPPPP(dpy, ctx, target, buffer, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLImageKHR")
@@ -71,7 +71,7 @@ public class KHRImageBase {
             check(dpy);
             check(image);
         }
-        return callPPI(__functionAddress, dpy, image) != 0;
+        return callPPI(dpy, image, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #eglCreateImageKHR CreateImageKHR} */
@@ -85,7 +85,7 @@ public class KHRImageBase {
             check(buffer);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPPPP(__functionAddress, dpy, ctx, target, buffer, attrib_list);
+        return callPPPPP(dpy, ctx, target, buffer, attrib_list, __functionAddress);
     }
 
 }

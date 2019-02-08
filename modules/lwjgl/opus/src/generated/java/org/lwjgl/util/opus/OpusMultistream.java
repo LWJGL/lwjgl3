@@ -119,7 +119,7 @@ public class OpusMultistream {
     @NativeType("opus_int32")
     public static int opus_multistream_encoder_get_size(int streams, int coupled_streams) {
         long __functionAddress = Functions.multistream_encoder_get_size;
-        return invokeI(__functionAddress, streams, coupled_streams);
+        return invokeI(streams, coupled_streams, __functionAddress);
     }
 
     // --- [ opus_multistream_surround_encoder_get_size ] ---
@@ -127,7 +127,7 @@ public class OpusMultistream {
     @NativeType("opus_int32")
     public static int opus_multistream_surround_encoder_get_size(int channels, int mapping_family) {
         long __functionAddress = Functions.multistream_surround_encoder_get_size;
-        return invokeI(__functionAddress, channels, mapping_family);
+        return invokeI(channels, mapping_family, __functionAddress);
     }
 
     // --- [ opus_multistream_encoder_create ] ---
@@ -140,7 +140,7 @@ public class OpusMultistream {
      */
     public static long nopus_multistream_encoder_create(int Fs, int channels, int streams, int coupled_streams, long mapping, int application, long error) {
         long __functionAddress = Functions.multistream_encoder_create;
-        return invokePPP(__functionAddress, Fs, channels, streams, coupled_streams, mapping, application, error);
+        return invokePPP(Fs, channels, streams, coupled_streams, mapping, application, error, __functionAddress);
     }
 
     /**
@@ -169,7 +169,7 @@ public class OpusMultistream {
 
     public static long nopus_multistream_surround_encoder_create(int Fs, int channels, int mapping_family, long streams, long coupled_streams, long mapping, int application, long error) {
         long __functionAddress = Functions.multistream_surround_encoder_create;
-        return invokePPPPP(__functionAddress, Fs, channels, mapping_family, streams, coupled_streams, mapping, application, error);
+        return invokePPPPP(Fs, channels, mapping_family, streams, coupled_streams, mapping, application, error, __functionAddress);
     }
 
     @NativeType("OpusMSEncoder *")
@@ -195,7 +195,7 @@ public class OpusMultistream {
         if (CHECKS) {
             check(st);
         }
-        return invokePPI(__functionAddress, st, Fs, channels, streams, coupled_streams, mapping, application);
+        return invokePPI(st, Fs, channels, streams, coupled_streams, mapping, application, __functionAddress);
     }
 
     /**
@@ -228,7 +228,7 @@ public class OpusMultistream {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPPI(__functionAddress, st, Fs, channels, streams, coupled_streams, mapping, application);
+        return invokePPPPI(st, Fs, channels, streams, coupled_streams, mapping, application, __functionAddress);
     }
 
     public static int opus_multistream_surround_encoder_init(@NativeType("OpusMSEncoder *") long st, @NativeType("opus_int32") int Fs, @NativeType("int *") IntBuffer streams, @NativeType("int *") IntBuffer coupled_streams, @NativeType("unsigned char const *") ByteBuffer mapping, int application) {
@@ -252,7 +252,7 @@ public class OpusMultistream {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, pcm, frame_size, data, max_data_bytes);
+        return invokePPPI(st, pcm, frame_size, data, max_data_bytes, __functionAddress);
     }
 
     /**
@@ -287,7 +287,7 @@ public class OpusMultistream {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, pcm, frame_size, data, max_data_bytes);
+        return invokePPPI(st, pcm, frame_size, data, max_data_bytes, __functionAddress);
     }
 
     /**
@@ -323,7 +323,7 @@ public class OpusMultistream {
         if (CHECKS) {
             check(st);
         }
-        invokePV(__functionAddress, st);
+        invokePV(st, __functionAddress);
     }
 
     // --- [ opus_multistream_encoder_ctl ] ---
@@ -338,7 +338,7 @@ public class OpusMultistream {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st);
+        return invokePI(st, __functionAddress);
     }
 
     // --- [ opus_multistream_decoder_get_size ] ---
@@ -355,7 +355,7 @@ public class OpusMultistream {
     @NativeType("opus_int32")
     public static int opus_multistream_decoder_get_size(int streams, int coupled_streams) {
         long __functionAddress = Functions.multistream_decoder_get_size;
-        return invokeI(__functionAddress, streams, coupled_streams);
+        return invokeI(streams, coupled_streams, __functionAddress);
     }
 
     // --- [ opus_multistream_decoder_create ] ---
@@ -367,7 +367,7 @@ public class OpusMultistream {
      */
     public static long nopus_multistream_decoder_create(int Fs, int channels, int streams, int coupled_streams, long mapping, long error) {
         long __functionAddress = Functions.multistream_decoder_create;
-        return invokePPP(__functionAddress, Fs, channels, streams, coupled_streams, mapping, error);
+        return invokePPP(Fs, channels, streams, coupled_streams, mapping, error, __functionAddress);
     }
 
     /**
@@ -402,7 +402,7 @@ public class OpusMultistream {
         if (CHECKS) {
             check(st);
         }
-        return invokePPI(__functionAddress, st, Fs, channels, streams, coupled_streams, mapping);
+        return invokePPI(st, Fs, channels, streams, coupled_streams, mapping, __functionAddress);
     }
 
     /**
@@ -438,7 +438,7 @@ public class OpusMultistream {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, data, len, pcm, frame_size, decode_fec);
+        return invokePPPI(st, data, len, pcm, frame_size, decode_fec, __functionAddress);
     }
 
     /**
@@ -477,7 +477,7 @@ public class OpusMultistream {
         if (CHECKS) {
             check(st);
         }
-        return invokePPPI(__functionAddress, st, data, len, pcm, frame_size, decode_fec);
+        return invokePPPI(st, data, len, pcm, frame_size, decode_fec, __functionAddress);
     }
 
     /**
@@ -516,7 +516,7 @@ public class OpusMultistream {
         if (CHECKS) {
             check(st);
         }
-        return invokePI(__functionAddress, st);
+        return invokePI(st, __functionAddress);
     }
 
     // --- [ opus_multistream_decoder_destroy ] ---
@@ -531,7 +531,7 @@ public class OpusMultistream {
         if (CHECKS) {
             check(st);
         }
-        invokePV(__functionAddress, st);
+        invokePV(st, __functionAddress);
     }
 
     /**

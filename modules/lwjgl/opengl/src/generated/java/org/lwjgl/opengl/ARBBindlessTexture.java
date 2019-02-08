@@ -363,7 +363,7 @@ public class ARBBindlessTexture {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, values.length, values);
+        callPV(location, values.length, values, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformHandleui64vARB ProgramUniformHandleui64vARB} */
@@ -372,7 +372,7 @@ public class ARBBindlessTexture {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, values.length, values);
+        callPV(program, location, values.length, values, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribL1ui64vARB VertexAttribL1ui64vARB} */
@@ -382,7 +382,7 @@ public class ARBBindlessTexture {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glGetVertexAttribLui64vARB GetVertexAttribLui64vARB} */
@@ -392,7 +392,7 @@ public class ARBBindlessTexture {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, index, pname, params);
+        callPV(index, pname, params, __functionAddress);
     }
 
 }

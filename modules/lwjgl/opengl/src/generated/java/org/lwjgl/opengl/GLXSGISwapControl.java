@@ -45,7 +45,7 @@ public class GLXSGISwapControl {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, interval);
+        return callI(interval, __functionAddress);
     }
 
 }

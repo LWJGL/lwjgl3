@@ -31,7 +31,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchApplicationManifestFullPath, bTemporary);
+        return callPI(pchApplicationManifestFullPath, bTemporary, __functionAddress);
     }
 
     /**
@@ -72,7 +72,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchApplicationManifestFullPath);
+        return callPI(pchApplicationManifestFullPath, __functionAddress);
     }
 
     /** Removes an application manifest from the list to load when building the list of installed applications. */
@@ -105,7 +105,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, pchAppKey);
+        return callPZ(pchAppKey, __functionAddress);
     }
 
     /** Returns true if an application is installed. */
@@ -150,7 +150,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, unApplicationIndex, pchAppKeyBuffer, unAppKeyBufferLen);
+        return callPI(unApplicationIndex, pchAppKeyBuffer, unAppKeyBufferLen, __functionAddress);
     }
 
     /**
@@ -170,7 +170,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, unProcessId, pchAppKeyBuffer, unAppKeyBufferLen);
+        return callPI(unProcessId, pchAppKeyBuffer, unAppKeyBufferLen, __functionAddress);
     }
 
     /** Returns the key of the application for the specified Process Id. The buffer should be at least {@link VR#k_unMaxApplicationKeyLength} in order to fit the key. */
@@ -187,7 +187,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchAppKey);
+        return callPI(pchAppKey, __functionAddress);
     }
 
     /**
@@ -229,7 +229,7 @@ public class VRApplications {
             check(__functionAddress);
             AppOverrideKeys.validate(pKeys, unKeys);
         }
-        return callPPPI(__functionAddress, pchTemplateAppKey, pchNewAppKey, pKeys, unKeys);
+        return callPPPI(pchTemplateAppKey, pchNewAppKey, pKeys, unKeys, __functionAddress);
     }
 
     /**
@@ -271,7 +271,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchMimeType, pchArgs);
+        return callPPI(pchMimeType, pchArgs, __functionAddress);
     }
 
     /**
@@ -313,7 +313,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchAppKey);
+        return callPI(pchAppKey, __functionAddress);
     }
 
     /** Launches the dashboard overlay application if it is not already running. This call is only valid for dashboard overlay applications. */
@@ -346,7 +346,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, pchAppKey);
+        return callPZ(pchAppKey, __functionAddress);
     }
 
     /** Cancel a pending launch for an application. */
@@ -379,7 +379,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, unProcessId, pchAppKey);
+        return callPI(unProcessId, pchAppKey, __functionAddress);
     }
 
     /**
@@ -420,7 +420,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchAppKey);
+        return callPI(pchAppKey, __functionAddress);
     }
 
     /** Returns the process ID for an application. Return 0 if the application was not found or is not running. */
@@ -453,7 +453,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, error);
+        return callP(error, __functionAddress);
     }
 
     /**
@@ -476,7 +476,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, pchAppKey, eProperty, pchPropertyValueBuffer, unPropertyValueBufferLen, peError);
+        return callPPPI(pchAppKey, eProperty, pchPropertyValueBuffer, unPropertyValueBufferLen, peError, __functionAddress);
     }
 
     /**
@@ -553,7 +553,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pchAppKey, eProperty, peError);
+        return callPPZ(pchAppKey, eProperty, peError, __functionAddress);
     }
 
     /**
@@ -598,7 +598,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPJ(__functionAddress, pchAppKey, eProperty, peError);
+        return callPPJ(pchAppKey, eProperty, peError, __functionAddress);
     }
 
     /**
@@ -643,7 +643,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchAppKey, bAutoLaunch);
+        return callPI(pchAppKey, bAutoLaunch, __functionAddress);
     }
 
     /**
@@ -682,7 +682,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, pchAppKey);
+        return callPZ(pchAppKey, __functionAddress);
     }
 
     /**
@@ -721,7 +721,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchAppKey, pchMimeType);
+        return callPPI(pchAppKey, pchMimeType, __functionAddress);
     }
 
     /** Adds this mime-type to the list of supported mime types for this application. */
@@ -757,7 +757,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pchMimeType, pchAppKeyBuffer, unAppKeyBufferLen);
+        return callPPZ(pchMimeType, pchAppKeyBuffer, unAppKeyBufferLen, __functionAddress);
     }
 
     /** Return the app key that will open this mime type. */
@@ -790,7 +790,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pchAppKey, pchMimeTypesBuffer, unMimeTypesBuffer);
+        return callPPZ(pchAppKey, pchMimeTypesBuffer, unMimeTypesBuffer, __functionAddress);
     }
 
     /** Get the list of supported mime types for this application, comma-delimited. */
@@ -823,7 +823,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchMimeType, pchAppKeysThatSupportBuffer, unAppKeysThatSupportBuffer);
+        return callPPI(pchMimeType, pchAppKeysThatSupportBuffer, unAppKeysThatSupportBuffer, __functionAddress);
     }
 
     /** Get the list of app-keys that support this mime type, comma-delimited, the return value is number of bytes you need to return the full string. */
@@ -871,7 +871,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, unHandle, pchArgs, unArgs);
+        return callPI(unHandle, pchArgs, unArgs, __functionAddress);
     }
 
     /** Get the args list from an app launch that had the process already running, you call this when you get a {@link VR#EVREventType_VREvent_ApplicationMimeTypeLoad}. */
@@ -901,7 +901,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchAppKeyBuffer, unAppKeyBufferLen);
+        return callPI(pchAppKeyBuffer, unAppKeyBufferLen, __functionAddress);
     }
 
     /** Returns the app key for the application that is starting up. */
@@ -930,7 +930,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchAppKey);
+        return callPI(pchAppKey, __functionAddress);
     }
 
     /**
@@ -989,7 +989,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, state);
+        return callP(state, __functionAddress);
     }
 
     /**
@@ -1024,7 +1024,7 @@ public class VRApplications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, pchBinaryPath, pchArguments, pchWorkingDirectory);
+        return callPPPI(pchBinaryPath, pchArguments, pchWorkingDirectory, __functionAddress);
     }
 
     /**

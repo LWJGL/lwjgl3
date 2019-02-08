@@ -386,7 +386,7 @@ public class ARBShadingLanguageInclude {
             check(__functionAddress);
             checkSafe(length, path.remaining());
         }
-        callPPV(__functionAddress, shader, path.remaining(), memAddress(path), length);
+        callPPV(shader, path.remaining(), memAddress(path), length, __functionAddress);
     }
 
     /** Array version of: {@link #glGetNamedStringARB GetNamedStringARB} */
@@ -396,7 +396,7 @@ public class ARBShadingLanguageInclude {
             check(__functionAddress);
             checkSafe(stringlen, 1);
         }
-        callPPPV(__functionAddress, name.remaining(), memAddress(name), string.remaining(), stringlen, memAddress(string));
+        callPPPV(name.remaining(), memAddress(name), string.remaining(), stringlen, memAddress(string), __functionAddress);
     }
 
     /** Array version of: {@link #glGetNamedStringARB GetNamedStringARB} */
@@ -410,7 +410,7 @@ public class ARBShadingLanguageInclude {
         try {
             int nameEncodedLength = stack.nASCII(name, false);
             long nameEncoded = stack.getPointerAddress();
-            callPPPV(__functionAddress, nameEncodedLength, nameEncoded, string.remaining(), stringlen, memAddress(string));
+            callPPPV(nameEncodedLength, nameEncoded, string.remaining(), stringlen, memAddress(string), __functionAddress);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -423,7 +423,7 @@ public class ARBShadingLanguageInclude {
             check(__functionAddress);
             check(params, 1);
         }
-        callPPV(__functionAddress, name.remaining(), memAddress(name), pname, params);
+        callPPV(name.remaining(), memAddress(name), pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetNamedStringivARB GetNamedStringivARB} */
@@ -437,7 +437,7 @@ public class ARBShadingLanguageInclude {
         try {
             int nameEncodedLength = stack.nASCII(name, false);
             long nameEncoded = stack.getPointerAddress();
-            callPPV(__functionAddress, nameEncodedLength, nameEncoded, pname, params);
+            callPPV(nameEncodedLength, nameEncoded, pname, params, __functionAddress);
         } finally {
             stack.setPointer(stackPointer);
         }

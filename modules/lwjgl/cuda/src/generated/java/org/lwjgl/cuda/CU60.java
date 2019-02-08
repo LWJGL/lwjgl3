@@ -58,7 +58,7 @@ public class CU60 extends CU55 {
 
     public static int ncuMemAllocManaged(long dptr, long bytesize, int flags) {
         long __functionAddress = Functions.MemAllocManaged;
-        return callPPI(__functionAddress, dptr, bytesize, flags);
+        return callPPI(dptr, bytesize, flags, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -76,7 +76,7 @@ public class CU60 extends CU55 {
         if (CHECKS) {
             check(ptr);
         }
-        return callPPI(__functionAddress, value, attribute, ptr);
+        return callPPI(value, attribute, ptr, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -92,7 +92,7 @@ public class CU60 extends CU55 {
         if (CHECKS) {
             check(dptr);
         }
-        return callPPPI(__functionAddress, hStream, dptr, length, flags);
+        return callPPPI(hStream, dptr, length, flags, __functionAddress);
     }
 
 }

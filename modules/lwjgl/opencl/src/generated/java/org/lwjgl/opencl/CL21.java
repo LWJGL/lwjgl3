@@ -94,7 +94,7 @@ public class CL21 extends CL20 {
             check(device);
             check(command_queue);
         }
-        return callPPPI(__functionAddress, context, device, command_queue);
+        return callPPPI(context, device, command_queue, __functionAddress);
     }
 
     // --- [ clGetDeviceAndHostTimer ] ---
@@ -106,7 +106,7 @@ public class CL21 extends CL20 {
             check(__functionAddress);
             check(device);
         }
-        return callPPPI(__functionAddress, device, device_timestamp, host_timestamp);
+        return callPPPI(device, device_timestamp, host_timestamp, __functionAddress);
     }
 
     /**
@@ -151,7 +151,7 @@ public class CL21 extends CL20 {
             check(__functionAddress);
             check(device);
         }
-        return callPPI(__functionAddress, device, host_timestamp);
+        return callPPI(device, host_timestamp, __functionAddress);
     }
 
     /**
@@ -197,7 +197,7 @@ public class CL21 extends CL20 {
             check(__functionAddress);
             check(context);
         }
-        return callPPPPP(__functionAddress, context, il, length, errcode_ret);
+        return callPPPPP(context, il, length, errcode_ret, __functionAddress);
     }
 
     /**
@@ -238,7 +238,7 @@ public class CL21 extends CL20 {
             check(__functionAddress);
             check(source_kernel);
         }
-        return callPPP(__functionAddress, source_kernel, errcode_ret);
+        return callPPP(source_kernel, errcode_ret, __functionAddress);
     }
 
     /**
@@ -294,7 +294,7 @@ public class CL21 extends CL20 {
             check(__functionAddress);
             check(kernel);
         }
-        return callPPPPPPPI(__functionAddress, kernel, device, param_name, input_value_size, input_value, param_value_size, param_value, param_value_size_ret);
+        return callPPPPPPPI(kernel, device, param_name, input_value_size, input_value, param_value_size, param_value, param_value_size_ret, __functionAddress);
     }
 
     /**
@@ -382,7 +382,7 @@ public class CL21 extends CL20 {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPPJPPI(__functionAddress, command_queue, num_svm_pointers, svm_pointers, sizes, flags, num_events_in_wait_list, event_wait_list, event);
+        return callPPPJPPI(command_queue, num_svm_pointers, svm_pointers, sizes, flags, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -446,7 +446,7 @@ public class CL21 extends CL20 {
             check(device_timestamp, 1);
             check(host_timestamp, 1);
         }
-        return callPPPI(__functionAddress, device, device_timestamp, host_timestamp);
+        return callPPPI(device, device_timestamp, host_timestamp, __functionAddress);
     }
 
     /**
@@ -462,7 +462,7 @@ public class CL21 extends CL20 {
             check(device);
             check(host_timestamp, 1);
         }
-        return callPPI(__functionAddress, device, host_timestamp);
+        return callPPI(device, host_timestamp, __functionAddress);
     }
 
     /**
@@ -478,7 +478,7 @@ public class CL21 extends CL20 {
             check(context);
             checkSafe(errcode_ret, 1);
         }
-        return callPPPPP(__functionAddress, context, memAddress(il), (long)il.remaining(), errcode_ret);
+        return callPPPPP(context, memAddress(il), (long)il.remaining(), errcode_ret, __functionAddress);
     }
 
     /**
@@ -494,7 +494,7 @@ public class CL21 extends CL20 {
             check(source_kernel);
             checkSafe(errcode_ret, 1);
         }
-        return callPPP(__functionAddress, source_kernel, errcode_ret);
+        return callPPP(source_kernel, errcode_ret, __functionAddress);
     }
 
 }

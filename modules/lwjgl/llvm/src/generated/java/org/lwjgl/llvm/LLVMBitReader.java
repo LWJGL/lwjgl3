@@ -46,7 +46,7 @@ public class LLVMBitReader {
         if (CHECKS) {
             check(MemBuf);
         }
-        return invokePPPI(__functionAddress, MemBuf, OutModule, OutMessage);
+        return invokePPPI(MemBuf, OutModule, OutMessage, __functionAddress);
     }
 
     /**
@@ -72,7 +72,7 @@ public class LLVMBitReader {
         if (CHECKS) {
             check(MemBuf);
         }
-        return invokePPI(__functionAddress, MemBuf, OutModule);
+        return invokePPI(MemBuf, OutModule, __functionAddress);
     }
 
     /**
@@ -96,7 +96,7 @@ public class LLVMBitReader {
             check(ContextRef);
             check(MemBuf);
         }
-        return invokePPPPI(__functionAddress, ContextRef, MemBuf, OutModule, OutMessage);
+        return invokePPPPI(ContextRef, MemBuf, OutModule, OutMessage, __functionAddress);
     }
 
     /** This is deprecated. Use {@link #LLVMParseBitcodeInContext2 ParseBitcodeInContext2}. */
@@ -117,7 +117,7 @@ public class LLVMBitReader {
             check(ContextRef);
             check(MemBuf);
         }
-        return invokePPPI(__functionAddress, ContextRef, MemBuf, OutModule);
+        return invokePPPI(ContextRef, MemBuf, OutModule, __functionAddress);
     }
 
     @NativeType("LLVMBool")
@@ -137,7 +137,7 @@ public class LLVMBitReader {
             check(ContextRef);
             check(MemBuf);
         }
-        return invokePPPPI(__functionAddress, ContextRef, MemBuf, OutM, OutMessage);
+        return invokePPPPI(ContextRef, MemBuf, OutM, OutMessage, __functionAddress);
     }
 
     /**
@@ -162,7 +162,7 @@ public class LLVMBitReader {
             check(ContextRef);
             check(MemBuf);
         }
-        return invokePPPI(__functionAddress, ContextRef, MemBuf, OutM);
+        return invokePPPI(ContextRef, MemBuf, OutM, __functionAddress);
     }
 
     /**
@@ -185,7 +185,7 @@ public class LLVMBitReader {
         if (CHECKS) {
             check(MemBuf);
         }
-        return invokePPPI(__functionAddress, MemBuf, OutM, OutMessage);
+        return invokePPPI(MemBuf, OutM, OutMessage, __functionAddress);
     }
 
     /** This is deprecated. Use {@link #LLVMGetBitcodeModule2 GetBitcodeModule2}. */
@@ -205,7 +205,7 @@ public class LLVMBitReader {
         if (CHECKS) {
             check(MemBuf);
         }
-        return invokePPI(__functionAddress, MemBuf, OutM);
+        return invokePPI(MemBuf, OutM, __functionAddress);
     }
 
     @NativeType("LLVMBool")

@@ -5503,7 +5503,7 @@ public class GL45 extends GL44 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, query, data.length, data);
+        callPV(target, query, data.length, data, __functionAddress);
     }
 
     /**
@@ -5516,7 +5516,7 @@ public class GL45 extends GL44 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, query, data.length, data);
+        callPV(target, query, data.length, data, __functionAddress);
     }
 
     /**
@@ -5529,7 +5529,7 @@ public class GL45 extends GL44 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, query, data.length, data);
+        callPV(target, query, data.length, data, __functionAddress);
     }
 
     /**
@@ -5542,7 +5542,7 @@ public class GL45 extends GL44 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, map, data.length, data);
+        callPV(map, data.length, data, __functionAddress);
     }
 
     /**
@@ -5555,7 +5555,7 @@ public class GL45 extends GL44 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, map, data.length, data);
+        callPV(map, data.length, data, __functionAddress);
     }
 
     /**
@@ -5568,7 +5568,7 @@ public class GL45 extends GL44 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, map, data.length, data);
+        callPV(map, data.length, data, __functionAddress);
     }
 
     /**
@@ -5644,7 +5644,7 @@ public class GL45 extends GL44 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, format, type, table.length << 1, table);
+        callPV(target, format, type, table.length << 1, table, __functionAddress);
     }
 
     /**
@@ -5657,7 +5657,7 @@ public class GL45 extends GL44 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, format, type, table.length << 2, table);
+        callPV(target, format, type, table.length << 2, table, __functionAddress);
     }
 
     /**
@@ -5670,7 +5670,7 @@ public class GL45 extends GL44 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, format, type, table.length << 2, table);
+        callPV(target, format, type, table.length << 2, table, __functionAddress);
     }
 
     /**

@@ -103,7 +103,7 @@ public class KHRBindMemory2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, device.address(), bindInfoCount, pBindInfos);
+        return callPPI(device.address(), bindInfoCount, pBindInfos, __functionAddress);
     }
 
     /**
@@ -129,7 +129,7 @@ public class KHRBindMemory2 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, device.address(), bindInfoCount, pBindInfos);
+        return callPPI(device.address(), bindInfoCount, pBindInfos, __functionAddress);
     }
 
     /**

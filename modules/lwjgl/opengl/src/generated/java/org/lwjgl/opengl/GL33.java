@@ -1360,7 +1360,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(value, 1);
         }
-        callPV(__functionAddress, type, value);
+        callPV(type, value, __functionAddress);
     }
 
     /**
@@ -1374,7 +1374,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(value, 1);
         }
-        callPV(__functionAddress, type, value);
+        callPV(type, value, __functionAddress);
     }
 
     /**
@@ -1388,7 +1388,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(value, 1);
         }
-        callPV(__functionAddress, type, value);
+        callPV(type, value, __functionAddress);
     }
 
     /**
@@ -1402,7 +1402,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(coords, 1);
         }
-        callPV(__functionAddress, type, coords);
+        callPV(type, coords, __functionAddress);
     }
 
     /**
@@ -1416,7 +1416,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(coords, 1);
         }
-        callPV(__functionAddress, type, coords);
+        callPV(type, coords, __functionAddress);
     }
 
     /**
@@ -1430,7 +1430,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(coords, 1);
         }
-        callPV(__functionAddress, type, coords);
+        callPV(type, coords, __functionAddress);
     }
 
     /**
@@ -1444,7 +1444,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(coords, 1);
         }
-        callPV(__functionAddress, type, coords);
+        callPV(type, coords, __functionAddress);
     }
 
     /**
@@ -1458,7 +1458,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(coords, 1);
         }
-        callPV(__functionAddress, texture, type, coords);
+        callPV(texture, type, coords, __functionAddress);
     }
 
     /**
@@ -1472,7 +1472,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(coords, 1);
         }
-        callPV(__functionAddress, texture, type, coords);
+        callPV(texture, type, coords, __functionAddress);
     }
 
     /**
@@ -1486,7 +1486,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(coords, 1);
         }
-        callPV(__functionAddress, texture, type, coords);
+        callPV(texture, type, coords, __functionAddress);
     }
 
     /**
@@ -1500,7 +1500,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(coords, 1);
         }
-        callPV(__functionAddress, texture, type, coords);
+        callPV(texture, type, coords, __functionAddress);
     }
 
     /**
@@ -1514,7 +1514,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(coords, 1);
         }
-        callPV(__functionAddress, type, coords);
+        callPV(type, coords, __functionAddress);
     }
 
     /**
@@ -1528,7 +1528,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(color, 1);
         }
-        callPV(__functionAddress, type, color);
+        callPV(type, color, __functionAddress);
     }
 
     /**
@@ -1542,7 +1542,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(color, 1);
         }
-        callPV(__functionAddress, type, color);
+        callPV(type, color, __functionAddress);
     }
 
     /**
@@ -1556,7 +1556,7 @@ public class GL33 extends GL32 {
             check(__functionAddress);
             check(color, 1);
         }
-        callPV(__functionAddress, type, color);
+        callPV(type, color, __functionAddress);
     }
 
     /**

@@ -47,7 +47,7 @@ public class CUWGL {
         if (CHECKS) {
             check(hGpu);
         }
-        return callPPI(__functionAddress, pDevice, hGpu);
+        return callPPI(pDevice, hGpu, __functionAddress);
     }
 
     /**

@@ -51,7 +51,7 @@ public class EXTDeviceQuery {
             check(__functionAddress);
             check(device);
         }
-        return callPPI(__functionAddress, device, attribute, value);
+        return callPPI(device, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -70,7 +70,7 @@ public class EXTDeviceQuery {
             check(__functionAddress);
             check(device);
         }
-        return callPP(__functionAddress, device, name);
+        return callPP(device, name, __functionAddress);
     }
 
     @Nullable
@@ -88,7 +88,7 @@ public class EXTDeviceQuery {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPI(__functionAddress, dpy, attribute, value);
+        return callPPI(dpy, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")

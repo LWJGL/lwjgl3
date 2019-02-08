@@ -151,7 +151,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePP(__functionAddress, T);
+        return invokePP(T, __functionAddress);
     }
 
     // --- [ LLVMGetTargetFromName ] ---
@@ -159,7 +159,7 @@ public class LLVMTargetMachine {
     /** Unsafe version of: {@link #LLVMGetTargetFromName GetTargetFromName} */
     public static long nLLVMGetTargetFromName(long Name) {
         long __functionAddress = Functions.GetTargetFromName;
-        return invokePP(__functionAddress, Name);
+        return invokePP(Name, __functionAddress);
     }
 
     /** Finds the target corresponding to the given name and stores it in {@code T}. Returns 0 on success. */
@@ -189,7 +189,7 @@ public class LLVMTargetMachine {
     /** Unsafe version of: {@link #LLVMGetTargetFromTriple GetTargetFromTriple} */
     public static int nLLVMGetTargetFromTriple(long Triple, long T, long ErrorMessage) {
         long __functionAddress = Functions.GetTargetFromTriple;
-        return invokePPPI(__functionAddress, Triple, T, ErrorMessage);
+        return invokePPPI(Triple, T, ErrorMessage, __functionAddress);
     }
 
     /**
@@ -234,7 +234,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePP(__functionAddress, T);
+        return invokePP(T, __functionAddress);
     }
 
     /** Returns the name of a target. See {@code llvm::Target::getName} */
@@ -253,7 +253,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePP(__functionAddress, T);
+        return invokePP(T, __functionAddress);
     }
 
     /** Returns the description  of a target. See {@code llvm::Target::getDescription} */
@@ -273,7 +273,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePI(__functionAddress, T) != 0;
+        return invokePI(T, __functionAddress) != 0;
     }
 
     // --- [ LLVMTargetHasTargetMachine ] ---
@@ -285,7 +285,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePI(__functionAddress, T) != 0;
+        return invokePI(T, __functionAddress) != 0;
     }
 
     // --- [ LLVMTargetHasAsmBackend ] ---
@@ -297,7 +297,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePI(__functionAddress, T) != 0;
+        return invokePI(T, __functionAddress) != 0;
     }
 
     // --- [ LLVMCreateTargetMachine ] ---
@@ -308,7 +308,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePPPPP(__functionAddress, T, Triple, CPU, Features, Level, Reloc, CodeModel);
+        return invokePPPPP(T, Triple, CPU, Features, Level, Reloc, CodeModel, __functionAddress);
     }
 
     /** Creates a new {@code llvm::TargetMachine}. See {@code llvm::Target::createTargetMachine} */
@@ -347,7 +347,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        invokePV(__functionAddress, T);
+        invokePV(T, __functionAddress);
     }
 
     // --- [ LLVMGetTargetMachineTarget ] ---
@@ -359,7 +359,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePP(__functionAddress, T);
+        return invokePP(T, __functionAddress);
     }
 
     // --- [ LLVMGetTargetMachineTriple ] ---
@@ -370,7 +370,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePP(__functionAddress, T);
+        return invokePP(T, __functionAddress);
     }
 
     /**
@@ -392,7 +392,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePP(__functionAddress, T);
+        return invokePP(T, __functionAddress);
     }
 
     /** Returns the cpu used creating this target machine. See {@code llvm::TargetMachine::getCPU}. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
@@ -411,7 +411,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePP(__functionAddress, T);
+        return invokePP(T, __functionAddress);
     }
 
     /**
@@ -434,7 +434,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        return invokePP(__functionAddress, T);
+        return invokePP(T, __functionAddress);
     }
 
     // --- [ LLVMSetTargetMachineAsmVerbosity ] ---
@@ -445,7 +445,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(T);
         }
-        invokePV(__functionAddress, T, VerboseAsm ? 1 : 0);
+        invokePV(T, VerboseAsm ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMTargetMachineEmitToFile ] ---
@@ -457,7 +457,7 @@ public class LLVMTargetMachine {
             check(T);
             check(M);
         }
-        return invokePPPPI(__functionAddress, T, M, Filename, codegen, ErrorMessage);
+        return invokePPPPI(T, M, Filename, codegen, ErrorMessage, __functionAddress);
     }
 
     /**
@@ -482,7 +482,7 @@ public class LLVMTargetMachine {
             check(T);
             check(M);
         }
-        return invokePPPPI(__functionAddress, T, M, codegen, ErrorMessage, OutMemBuf);
+        return invokePPPPI(T, M, codegen, ErrorMessage, OutMemBuf, __functionAddress);
     }
 
     /** Compile the LLVM IR stored in {@code M} and store the result in {@code OutMemBuf}. */
@@ -519,7 +519,7 @@ public class LLVMTargetMachine {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePP(__functionAddress, triple);
+        return invokePP(triple, __functionAddress);
     }
 
     /** Normalize a target triple. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
@@ -595,7 +595,7 @@ public class LLVMTargetMachine {
             check(T);
             check(PM);
         }
-        invokePPV(__functionAddress, T, PM);
+        invokePPV(T, PM, __functionAddress);
     }
 
 }

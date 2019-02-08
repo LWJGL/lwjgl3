@@ -151,7 +151,7 @@ public class GDI32 {
     // --- [ ChoosePixelFormat ] ---
 
     /** Unsafe version of: {@link #ChoosePixelFormat} */
-    public static native int nChoosePixelFormat(long __functionAddress, long hdc, long pixelFormatDescriptor);
+    public static native int nChoosePixelFormat(long hdc, long pixelFormatDescriptor, long __functionAddress);
 
     /** Unsafe version of: {@link #ChoosePixelFormat} */
     public static int nChoosePixelFormat(long hdc, long pixelFormatDescriptor) {
@@ -159,7 +159,7 @@ public class GDI32 {
         if (CHECKS) {
             check(hdc);
         }
-        return nChoosePixelFormat(__functionAddress, hdc, pixelFormatDescriptor);
+        return nChoosePixelFormat(hdc, pixelFormatDescriptor, __functionAddress);
     }
 
     /**
@@ -175,7 +175,7 @@ public class GDI32 {
     // --- [ DescribePixelFormat ] ---
 
     /** Unsafe version of: {@link #DescribePixelFormat} */
-    public static native int nDescribePixelFormat(long __functionAddress, long hdc, int pixelFormat, int bytes, long pixelFormatDescriptor);
+    public static native int nDescribePixelFormat(long hdc, int pixelFormat, int bytes, long pixelFormatDescriptor, long __functionAddress);
 
     /** Unsafe version of: {@link #DescribePixelFormat} */
     public static int nDescribePixelFormat(long hdc, int pixelFormat, int bytes, long pixelFormatDescriptor) {
@@ -183,7 +183,7 @@ public class GDI32 {
         if (CHECKS) {
             check(hdc);
         }
-        return nDescribePixelFormat(__functionAddress, hdc, pixelFormat, bytes, pixelFormatDescriptor);
+        return nDescribePixelFormat(hdc, pixelFormat, bytes, pixelFormatDescriptor, __functionAddress);
     }
 
     /**
@@ -221,7 +221,7 @@ public class GDI32 {
     // --- [ GetPixelFormat ] ---
 
     /** Unsafe version of: {@link #GetPixelFormat} */
-    public static native int nGetPixelFormat(long __functionAddress, long hdc);
+    public static native int nGetPixelFormat(long hdc, long __functionAddress);
 
     /**
      * Obtains the index of the currently selected pixel format of the specified device context.
@@ -233,13 +233,13 @@ public class GDI32 {
         if (CHECKS) {
             check(hdc);
         }
-        return nGetPixelFormat(__functionAddress, hdc);
+        return nGetPixelFormat(hdc, __functionAddress);
     }
 
     // --- [ SetPixelFormat ] ---
 
     /** Unsafe version of: {@link #SetPixelFormat} */
-    public static native int nSetPixelFormat(long __functionAddress, long hdc, int pixelFormat, long pixelFormatDescriptor);
+    public static native int nSetPixelFormat(long hdc, int pixelFormat, long pixelFormatDescriptor, long __functionAddress);
 
     /** Unsafe version of: {@link #SetPixelFormat} */
     public static int nSetPixelFormat(long hdc, int pixelFormat, long pixelFormatDescriptor) {
@@ -247,7 +247,7 @@ public class GDI32 {
         if (CHECKS) {
             check(hdc);
         }
-        return nSetPixelFormat(__functionAddress, hdc, pixelFormat, pixelFormatDescriptor);
+        return nSetPixelFormat(hdc, pixelFormat, pixelFormatDescriptor, __functionAddress);
     }
 
     /**
@@ -266,7 +266,7 @@ public class GDI32 {
     // --- [ SwapBuffers ] ---
 
     /** Unsafe version of: {@link #SwapBuffers} */
-    public static native int nSwapBuffers(long __functionAddress, long dc);
+    public static native int nSwapBuffers(long dc, long __functionAddress);
 
     /**
      * Exchanges the front and back buffers if the current pixel format for the window referenced by the specified device context includes a back buffer.
@@ -280,7 +280,7 @@ public class GDI32 {
         if (CHECKS) {
             check(dc);
         }
-        return nSwapBuffers(__functionAddress, dc) != 0;
+        return nSwapBuffers(dc, __functionAddress) != 0;
     }
 
 }

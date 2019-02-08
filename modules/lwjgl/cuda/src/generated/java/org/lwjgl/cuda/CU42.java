@@ -70,7 +70,7 @@ public class CU42 extends CU41 {
 
     public static int ncuCtxGetSharedMemConfig(long pConfig) {
         long __functionAddress = Functions.CtxGetSharedMemConfig;
-        return callPI(__functionAddress, pConfig);
+        return callPI(pConfig, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -86,7 +86,7 @@ public class CU42 extends CU41 {
     @NativeType("CUresult")
     public static int cuCtxSetSharedMemConfig(@NativeType("CUsharedconfig") int config) {
         long __functionAddress = Functions.CtxSetSharedMemConfig;
-        return callI(__functionAddress, config);
+        return callI(config, __functionAddress);
     }
 
     // --- [ cuFuncSetSharedMemConfig ] ---
@@ -97,7 +97,7 @@ public class CU42 extends CU41 {
         if (CHECKS) {
             check(hfunc);
         }
-        return callPI(__functionAddress, hfunc, config);
+        return callPI(hfunc, config, __functionAddress);
     }
 
 }

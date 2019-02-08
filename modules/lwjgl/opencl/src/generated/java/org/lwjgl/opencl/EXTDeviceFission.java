@@ -104,7 +104,7 @@ public class EXTDeviceFission {
             check(__functionAddress);
             check(device);
         }
-        return callPI(__functionAddress, device);
+        return callPI(device, __functionAddress);
     }
 
     // --- [ clRetainDeviceEXT ] ---
@@ -116,7 +116,7 @@ public class EXTDeviceFission {
             check(__functionAddress);
             check(device);
         }
-        return callPI(__functionAddress, device);
+        return callPI(device, __functionAddress);
     }
 
     // --- [ clCreateSubDevicesEXT ] ---
@@ -127,7 +127,7 @@ public class EXTDeviceFission {
             check(__functionAddress);
             check(in_device);
         }
-        return callPPPPI(__functionAddress, in_device, properties, num_entries, out_devices, num_devices);
+        return callPPPPI(in_device, properties, num_entries, out_devices, num_devices, __functionAddress);
     }
 
     @NativeType("cl_int")
@@ -149,7 +149,7 @@ public class EXTDeviceFission {
             checkNT(properties);
             checkSafe(num_devices, 1);
         }
-        return callPPPPI(__functionAddress, in_device, properties, remainingSafe(out_devices), memAddressSafe(out_devices), num_devices);
+        return callPPPPI(in_device, properties, remainingSafe(out_devices), memAddressSafe(out_devices), num_devices, __functionAddress);
     }
 
 }

@@ -73,7 +73,7 @@ public class NVQueryResource {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, queryType, pname, buffer.length, buffer);
+        return callPI(queryType, pname, buffer.length, buffer, __functionAddress);
     }
 
 }

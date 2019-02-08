@@ -88,7 +88,7 @@ public class GOOGLEDisplayTiming {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPI(__functionAddress, device.address(), swapchain, pDisplayTimingProperties);
+        return callPJPI(device.address(), swapchain, pDisplayTimingProperties, __functionAddress);
     }
 
     /**
@@ -158,7 +158,7 @@ public class GOOGLEDisplayTiming {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, device.address(), swapchain, pPresentationTimingCount, pPresentationTimings);
+        return callPJPPI(device.address(), swapchain, pPresentationTimingCount, pPresentationTimings, __functionAddress);
     }
 
     /**
@@ -240,7 +240,7 @@ public class GOOGLEDisplayTiming {
             check(pPresentationTimingCount, 1);
             checkSafe(pPresentationTimings, pPresentationTimingCount[0]);
         }
-        return callPJPPI(__functionAddress, device.address(), swapchain, pPresentationTimingCount, memAddressSafe(pPresentationTimings));
+        return callPJPPI(device.address(), swapchain, pPresentationTimingCount, memAddressSafe(pPresentationTimings), __functionAddress);
     }
 
 }

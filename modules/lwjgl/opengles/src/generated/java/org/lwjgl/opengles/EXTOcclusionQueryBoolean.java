@@ -155,7 +155,7 @@ public class EXTOcclusionQueryBoolean {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, ids.length, ids);
+        callPV(ids.length, ids, __functionAddress);
     }
 
     /** Array version of: {@link #glDeleteQueriesEXT DeleteQueriesEXT} */
@@ -164,7 +164,7 @@ public class EXTOcclusionQueryBoolean {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, ids.length, ids);
+        callPV(ids.length, ids, __functionAddress);
     }
 
     /** Array version of: {@link #glGetQueryivEXT GetQueryivEXT} */
@@ -174,7 +174,7 @@ public class EXTOcclusionQueryBoolean {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetQueryObjectuivEXT GetQueryObjectuivEXT} */
@@ -184,7 +184,7 @@ public class EXTOcclusionQueryBoolean {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, id, pname, params);
+        callPV(id, pname, params, __functionAddress);
     }
 
 }

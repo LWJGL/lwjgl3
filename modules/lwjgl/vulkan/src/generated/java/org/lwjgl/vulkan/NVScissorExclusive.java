@@ -93,7 +93,7 @@ public class NVScissorExclusive {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, commandBuffer.address(), firstExclusiveScissor, exclusiveScissorCount, pExclusiveScissors);
+        callPPV(commandBuffer.address(), firstExclusiveScissor, exclusiveScissorCount, pExclusiveScissors, __functionAddress);
     }
 
     /**

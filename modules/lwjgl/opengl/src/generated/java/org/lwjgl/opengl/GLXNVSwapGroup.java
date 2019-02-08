@@ -48,7 +48,7 @@ public class GLXNVSwapGroup {
             check(display);
             check(drawable);
         }
-        return callPPI(__functionAddress, display, drawable, group) != 0;
+        return callPPI(display, drawable, group, __functionAddress) != 0;
     }
 
     // --- [ glXBindSwapBarrierNV ] ---
@@ -61,7 +61,7 @@ public class GLXNVSwapGroup {
             check(__functionAddress);
             check(display);
         }
-        return callPI(__functionAddress, display, group, barrier) != 0;
+        return callPI(display, group, barrier, __functionAddress) != 0;
     }
 
     // --- [ glXQuerySwapGroupNV ] ---
@@ -74,7 +74,7 @@ public class GLXNVSwapGroup {
             check(display);
             check(drawable);
         }
-        return callPPPPI(__functionAddress, display, drawable, group, barrier);
+        return callPPPPI(display, drawable, group, barrier, __functionAddress);
     }
 
     /** @param display the connection to the X server */
@@ -96,7 +96,7 @@ public class GLXNVSwapGroup {
             check(__functionAddress);
             check(display);
         }
-        return callPPPI(__functionAddress, display, screen, maxGroups, maxBarriers);
+        return callPPPI(display, screen, maxGroups, maxBarriers, __functionAddress);
     }
 
     /** @param display the connection to the X server */
@@ -118,7 +118,7 @@ public class GLXNVSwapGroup {
             check(__functionAddress);
             check(display);
         }
-        return callPPI(__functionAddress, display, screen, count);
+        return callPPI(display, screen, count, __functionAddress);
     }
 
     /** @param display the connection to the X server */
@@ -140,7 +140,7 @@ public class GLXNVSwapGroup {
             check(__functionAddress);
             check(display);
         }
-        return callPI(__functionAddress, display, screen) != 0;
+        return callPI(display, screen, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #glXQuerySwapGroupNV QuerySwapGroupNV} */
@@ -154,7 +154,7 @@ public class GLXNVSwapGroup {
             check(group, 1);
             check(barrier, 1);
         }
-        return callPPPPI(__functionAddress, display, drawable, group, barrier) != 0;
+        return callPPPPI(display, drawable, group, barrier, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #glXQueryMaxSwapGroupsNV QueryMaxSwapGroupsNV} */
@@ -167,7 +167,7 @@ public class GLXNVSwapGroup {
             check(maxGroups, 1);
             check(maxBarriers, 1);
         }
-        return callPPPI(__functionAddress, display, screen, maxGroups, maxBarriers) != 0;
+        return callPPPI(display, screen, maxGroups, maxBarriers, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #glXQueryFrameCountNV QueryFrameCountNV} */
@@ -179,7 +179,7 @@ public class GLXNVSwapGroup {
             check(display);
             check(count, 1);
         }
-        return callPPI(__functionAddress, display, screen, count) != 0;
+        return callPPI(display, screen, count, __functionAddress) != 0;
     }
 
 }

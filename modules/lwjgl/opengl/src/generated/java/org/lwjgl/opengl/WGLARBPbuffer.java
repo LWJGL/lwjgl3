@@ -80,7 +80,7 @@ public class WGLARBPbuffer {
             check(__functionAddress);
             check(hdc);
         }
-        return callPPP(__functionAddress, hdc, pixelFormat, width, height, attribList);
+        return callPPP(hdc, pixelFormat, width, height, attribList, __functionAddress);
     }
 
     /**
@@ -117,7 +117,7 @@ public class WGLARBPbuffer {
             check(__functionAddress);
             check(pbuffer);
         }
-        return callPP(__functionAddress, pbuffer);
+        return callPP(pbuffer, __functionAddress);
     }
 
     // --- [ wglReleasePbufferDCARB ] ---
@@ -135,7 +135,7 @@ public class WGLARBPbuffer {
             check(pbuffer);
             check(hdc);
         }
-        return callPPI(__functionAddress, pbuffer, hdc);
+        return callPPI(pbuffer, hdc, __functionAddress);
     }
 
     // --- [ wglDestroyPbufferARB ] ---
@@ -155,7 +155,7 @@ public class WGLARBPbuffer {
             check(__functionAddress);
             check(pbuffer);
         }
-        return callPI(__functionAddress, pbuffer) != 0;
+        return callPI(pbuffer, __functionAddress) != 0;
     }
 
     // --- [ wglQueryPbufferARB ] ---
@@ -167,7 +167,7 @@ public class WGLARBPbuffer {
             check(__functionAddress);
             check(pbuffer);
         }
-        return callPPI(__functionAddress, pbuffer, attribute, value);
+        return callPPI(pbuffer, attribute, value, __functionAddress);
     }
 
     /**
@@ -194,7 +194,7 @@ public class WGLARBPbuffer {
             check(hdc);
             checkNTSafe(attribList);
         }
-        return callPPP(__functionAddress, hdc, pixelFormat, width, height, attribList);
+        return callPPP(hdc, pixelFormat, width, height, attribList, __functionAddress);
     }
 
     /** Array version of: {@link #wglQueryPbufferARB QueryPbufferARB} */
@@ -206,7 +206,7 @@ public class WGLARBPbuffer {
             check(pbuffer);
             check(value, 1);
         }
-        return callPPI(__functionAddress, pbuffer, attribute, value) != 0;
+        return callPPI(pbuffer, attribute, value, __functionAddress) != 0;
     }
 
 }

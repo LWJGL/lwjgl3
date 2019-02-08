@@ -114,7 +114,7 @@ public class EXTDiscardRectangles {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, commandBuffer.address(), firstDiscardRectangle, discardRectangleCount, pDiscardRectangles);
+        callPPV(commandBuffer.address(), firstDiscardRectangle, discardRectangleCount, pDiscardRectangles, __functionAddress);
     }
 
     /**

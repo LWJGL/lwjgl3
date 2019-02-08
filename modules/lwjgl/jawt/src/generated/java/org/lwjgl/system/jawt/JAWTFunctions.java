@@ -88,12 +88,12 @@ public class JAWTFunctions {
     // --- [ JAWT_GetAWT ] ---
 
     /** Unsafe version of: {@link #JAWT_GetAWT GetAWT} */
-    public static native boolean nJAWT_GetAWT(long __functionAddress, long awt);
+    public static native boolean nJAWT_GetAWT(long awt, long __functionAddress);
 
     /** Unsafe version of: {@link #JAWT_GetAWT GetAWT} */
     public static boolean nJAWT_GetAWT(long awt) {
         long __functionAddress = Functions.GetAWT;
-        return nJAWT_GetAWT(__functionAddress, awt);
+        return nJAWT_GetAWT(awt, __functionAddress);
     }
 
     /**
@@ -111,18 +111,18 @@ public class JAWTFunctions {
     // --- [ JAWT_DrawingSurface_Lock ] ---
 
     /** Unsafe version of: {@link #JAWT_DrawingSurface_Lock DrawingSurface_Lock} */
-    public static int nJAWT_DrawingSurface_Lock(long __functionAddress, long ds) {
+    public static int nJAWT_DrawingSurface_Lock(long ds, long __functionAddress) {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, ds);
+        return callPI(ds, __functionAddress);
     }
 
     /**
      * Locks the surface of the target component for native rendering. When finished drawing, the surface must be unlocked with {@link #JAWT_DrawingSurface_Unlock DrawingSurface_Unlock}.
      *
-     * @param __functionAddress the function address
      * @param ds                the surface to lock
+     * @param __functionAddress the function address
      *
      * @return a bitmask with one or more of the following values:
      *         
@@ -134,18 +134,18 @@ public class JAWTFunctions {
      *         </ul>
      */
     @NativeType("jint")
-    public static int JAWT_DrawingSurface_Lock(@NativeType("void *") long __functionAddress, @NativeType("JAWT_DrawingSurface *") JAWTDrawingSurface ds) {
-        return nJAWT_DrawingSurface_Lock(__functionAddress, ds.address());
+    public static int JAWT_DrawingSurface_Lock(@NativeType("JAWT_DrawingSurface *") JAWTDrawingSurface ds, @NativeType("void *") long __functionAddress) {
+        return nJAWT_DrawingSurface_Lock(ds.address(), __functionAddress);
     }
 
     // --- [ JAWT_DrawingSurface_GetDrawingSurfaceInfo ] ---
 
     /** Unsafe version of: {@link #JAWT_DrawingSurface_GetDrawingSurfaceInfo DrawingSurface_GetDrawingSurfaceInfo} */
-    public static long nJAWT_DrawingSurface_GetDrawingSurfaceInfo(long __functionAddress, long ds) {
+    public static long nJAWT_DrawingSurface_GetDrawingSurfaceInfo(long ds, long __functionAddress) {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPP(__functionAddress, ds);
+        return callPP(ds, __functionAddress);
     }
 
     /**
@@ -156,101 +156,101 @@ public class JAWTFunctions {
      * 
      * <p>When finished with the returned value, {@link #JAWT_DrawingSurface_FreeDrawingSurfaceInfo DrawingSurface_FreeDrawingSurfaceInfo} must be called.</p>
      *
-     * @param __functionAddress the function address
      * @param ds                the {@link JAWTDrawingSurface} to free
+     * @param __functionAddress the function address
      *
      * @return {@code NULL} if an error has occurred.
      */
     @Nullable
     @NativeType("JAWT_DrawingSurfaceInfo *")
-    public static JAWTDrawingSurfaceInfo JAWT_DrawingSurface_GetDrawingSurfaceInfo(@NativeType("void *") long __functionAddress, @NativeType("JAWT_DrawingSurface *") JAWTDrawingSurface ds) {
-        long __result = nJAWT_DrawingSurface_GetDrawingSurfaceInfo(__functionAddress, ds.address());
+    public static JAWTDrawingSurfaceInfo JAWT_DrawingSurface_GetDrawingSurfaceInfo(@NativeType("JAWT_DrawingSurface *") JAWTDrawingSurface ds, @NativeType("void *") long __functionAddress) {
+        long __result = nJAWT_DrawingSurface_GetDrawingSurfaceInfo(ds.address(), __functionAddress);
         return JAWTDrawingSurfaceInfo.createSafe(__result);
     }
 
     // --- [ JAWT_DrawingSurface_FreeDrawingSurfaceInfo ] ---
 
     /** Unsafe version of: {@link #JAWT_DrawingSurface_FreeDrawingSurfaceInfo DrawingSurface_FreeDrawingSurfaceInfo} */
-    public static void nJAWT_DrawingSurface_FreeDrawingSurfaceInfo(long __functionAddress, long dsi) {
+    public static void nJAWT_DrawingSurface_FreeDrawingSurfaceInfo(long dsi, long __functionAddress) {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, dsi);
+        callPV(dsi, __functionAddress);
     }
 
     /**
      * Frees the drawing surface info.
      *
-     * @param __functionAddress the function address
      * @param dsi               the {@link JAWTDrawingSurfaceInfo} to free
+     * @param __functionAddress the function address
      */
-    public static void JAWT_DrawingSurface_FreeDrawingSurfaceInfo(@NativeType("void *") long __functionAddress, @NativeType("JAWT_DrawingSurfaceInfo *") JAWTDrawingSurfaceInfo dsi) {
-        nJAWT_DrawingSurface_FreeDrawingSurfaceInfo(__functionAddress, dsi.address());
+    public static void JAWT_DrawingSurface_FreeDrawingSurfaceInfo(@NativeType("JAWT_DrawingSurfaceInfo *") JAWTDrawingSurfaceInfo dsi, @NativeType("void *") long __functionAddress) {
+        nJAWT_DrawingSurface_FreeDrawingSurfaceInfo(dsi.address(), __functionAddress);
     }
 
     // --- [ JAWT_DrawingSurface_Unlock ] ---
 
     /** Unsafe version of: {@link #JAWT_DrawingSurface_Unlock DrawingSurface_Unlock} */
-    public static void nJAWT_DrawingSurface_Unlock(long __functionAddress, long ds) {
+    public static void nJAWT_DrawingSurface_Unlock(long ds, long __functionAddress) {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, ds);
+        callPV(ds, __functionAddress);
     }
 
     /**
      * Unlocks the drawing surface of the target component for native rendering.
      *
-     * @param __functionAddress the function address
      * @param ds                the surface to unlock
+     * @param __functionAddress the function address
      */
-    public static void JAWT_DrawingSurface_Unlock(@NativeType("void *") long __functionAddress, @NativeType("JAWT_DrawingSurface *") JAWTDrawingSurface ds) {
-        nJAWT_DrawingSurface_Unlock(__functionAddress, ds.address());
+    public static void JAWT_DrawingSurface_Unlock(@NativeType("JAWT_DrawingSurface *") JAWTDrawingSurface ds, @NativeType("void *") long __functionAddress) {
+        nJAWT_DrawingSurface_Unlock(ds.address(), __functionAddress);
     }
 
     // --- [ JAWT_GetDrawingSurface ] ---
 
     /** Unsafe version of: {@link #JAWT_GetDrawingSurface GetDrawingSurface} */
-    public static native long nJAWT_GetDrawingSurface(long __functionAddress, Object target);
+    public static native long nJAWT_GetDrawingSurface(Object target, long __functionAddress);
 
     /**
      * Returns a drawing surface from a target {@code jobject}. This value may be cached.
      * 
      * <p>{@link #JAWT_FreeDrawingSurface FreeDrawingSurface} must be called when finished with the returned {@link JAWTDrawingSurface}.</p>
      *
-     * @param __functionAddress the function address
      * @param target            must be a {@link java.awt.Component Component} (should be a {@link java.awt.Canvas Canvas} or {@link java.awt.Window Window} for native rendering)
+     * @param __functionAddress the function address
      *
      * @return {@code NULL} if an error has occurred
      */
     @Nullable
     @NativeType("JAWT_DrawingSurface *")
-    public static JAWTDrawingSurface JAWT_GetDrawingSurface(@NativeType("void *") long __functionAddress, @NativeType("jobject") Object target) {
+    public static JAWTDrawingSurface JAWT_GetDrawingSurface(@NativeType("jobject") Object target, @NativeType("void *") long __functionAddress) {
         if (CHECKS) {
             check(__functionAddress);
         }
-        long __result = nJAWT_GetDrawingSurface(__functionAddress, target);
+        long __result = nJAWT_GetDrawingSurface(target, __functionAddress);
         return JAWTDrawingSurface.createSafe(__result);
     }
 
     // --- [ JAWT_FreeDrawingSurface ] ---
 
     /** Unsafe version of: {@link #JAWT_FreeDrawingSurface FreeDrawingSurface} */
-    public static void nJAWT_FreeDrawingSurface(long __functionAddress, long ds) {
+    public static void nJAWT_FreeDrawingSurface(long ds, long __functionAddress) {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, ds);
+        callPV(ds, __functionAddress);
     }
 
     /**
      * Frees the drawing surface allocated in {@link #JAWT_GetDrawingSurface GetDrawingSurface}.
      *
-     * @param __functionAddress the function address
      * @param ds                the {@link JAWTDrawingSurface} to free
+     * @param __functionAddress the function address
      */
-    public static void JAWT_FreeDrawingSurface(@NativeType("void *") long __functionAddress, @NativeType("JAWT_DrawingSurface *") JAWTDrawingSurface ds) {
-        nJAWT_FreeDrawingSurface(__functionAddress, ds.address());
+    public static void JAWT_FreeDrawingSurface(@NativeType("JAWT_DrawingSurface *") JAWTDrawingSurface ds, @NativeType("void *") long __functionAddress) {
+        nJAWT_FreeDrawingSurface(ds.address(), __functionAddress);
     }
 
     // --- [ JAWT_Lock ] ---
@@ -291,7 +291,7 @@ public class JAWTFunctions {
 
     /** Unsafe version of: {@link #JAWT_GetComponent GetComponent} */
     @Nullable
-    public static native Component nJAWT_GetComponent(long __functionAddress, long platformInfo);
+    public static native Component nJAWT_GetComponent(long platformInfo, long __functionAddress);
 
     /**
      * Returns a reference to a {@link Component} from a native platform handle. On Windows, this corresponds to an {@code HWND}; on Solaris and Linux, this is a
@@ -299,24 +299,24 @@ public class JAWTFunctions {
      * a local reference that is only valid in this environment. This function returns a {@code NULL} reference if no component could be found with matching platform
      * information.
      *
-     * @param __functionAddress the function address
      * @param platformInfo      the native platform handle
+     * @param __functionAddress the function address
      */
     @Nullable
     @NativeType("jobject")
-    public static Component JAWT_GetComponent(@NativeType("void *") long __functionAddress, @NativeType("void *") long platformInfo) {
+    public static Component JAWT_GetComponent(@NativeType("void *") long platformInfo, @NativeType("void *") long __functionAddress) {
         if (CHECKS) {
-            check(__functionAddress);
             check(platformInfo);
+            check(__functionAddress);
         }
-        return nJAWT_GetComponent(__functionAddress, platformInfo);
+        return nJAWT_GetComponent(platformInfo, __functionAddress);
     }
 
     // --- [ JAWT_CreateEmbeddedFrame ] ---
 
     /** Unsafe version of: {@link #JAWT_CreateEmbeddedFrame CreateEmbeddedFrame} */
     @Nullable
-    public static native Frame nJAWT_CreateEmbeddedFrame(long __functionAddress, long platformInfo);
+    public static native Frame nJAWT_CreateEmbeddedFrame(long platformInfo, long __functionAddress);
 
     /**
      * Creates a {@link Frame} placed in a native container. Container is referenced by the native platform handle. For example on Windows this corresponds to an
@@ -324,25 +324,25 @@ public class JAWTFunctions {
      * local reference that is only valid in this environment. This function returns a {@code NULL} reference if no frame could be created with matching platform
      * information.
      *
-     * @param __functionAddress the function address
      * @param platformInfo      the native platform handle
+     * @param __functionAddress the function address
      *
      * @since Java 9
      */
     @Nullable
     @NativeType("jobject")
-    public static Frame JAWT_CreateEmbeddedFrame(@NativeType("void *") long __functionAddress, @NativeType("void *") long platformInfo) {
+    public static Frame JAWT_CreateEmbeddedFrame(@NativeType("void *") long platformInfo, @NativeType("void *") long __functionAddress) {
         if (CHECKS) {
-            check(__functionAddress);
             check(platformInfo);
+            check(__functionAddress);
         }
-        return nJAWT_CreateEmbeddedFrame(__functionAddress, platformInfo);
+        return nJAWT_CreateEmbeddedFrame(platformInfo, __functionAddress);
     }
 
     // --- [ JAWT_SetBounds ] ---
 
     /** Unsafe version of: {@link #JAWT_SetBounds SetBounds} */
-    public static native void nJAWT_SetBounds(long __functionAddress, Frame embeddedFrame, int x, int y, int w, int h);
+    public static native void nJAWT_SetBounds(Frame embeddedFrame, int x, int y, int w, int h, long __functionAddress);
 
     /**
      * Moves and resizes the embedded frame. The new location of the top-left corner is specified by x and y parameters relative to the native parent
@@ -356,43 +356,43 @@ public class JAWTFunctions {
      * 
      * <p>Using usual {@code get/setLocation()} and {@code get/setBounds()} together with this new method is not recommended.</p>
      *
-     * @param __functionAddress the function address
      * @param embeddedFrame     the embedded frame
      * @param x                 the x coordinate
      * @param y                 the y coordinate
      * @param w                 the width
      * @param h                 the height
+     * @param __functionAddress the function address
      *
      * @since Java 9
      */
-    public static void JAWT_SetBounds(@NativeType("void *") long __functionAddress, @NativeType("jobject") Frame embeddedFrame, @NativeType("jint") int x, @NativeType("jint") int y, @NativeType("jint") int w, @NativeType("jint") int h) {
+    public static void JAWT_SetBounds(@NativeType("jobject") Frame embeddedFrame, @NativeType("jint") int x, @NativeType("jint") int y, @NativeType("jint") int w, @NativeType("jint") int h, @NativeType("void *") long __functionAddress) {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nJAWT_SetBounds(__functionAddress, embeddedFrame, x, y, w, h);
+        nJAWT_SetBounds(embeddedFrame, x, y, w, h, __functionAddress);
     }
 
     // --- [ JAWT_SynthesizeWindowActivation ] ---
 
     /** Unsafe version of: {@link #JAWT_SynthesizeWindowActivation SynthesizeWindowActivation} */
-    public static native void nJAWT_SynthesizeWindowActivation(long __functionAddress, Frame embeddedFrame, boolean doActivate);
+    public static native void nJAWT_SynthesizeWindowActivation(Frame embeddedFrame, boolean doActivate, long __functionAddress);
 
     /**
      * Synthesizes a native message to activate or deactivate an {@code EmbeddedFrame} window depending on the value of parameter {@code doActivate}.
      * 
      * <p>The embedded frame should be created by {@link #JAWT_CreateEmbeddedFrame CreateEmbeddedFrame} method, or this function will not have any effect.</p>
      *
-     * @param __functionAddress the function address
      * @param embeddedFrame     the embedded frame
      * @param doActivate        if true activates the window; otherwise, deactivates the window
+     * @param __functionAddress the function address
      *
      * @since Java 9
      */
-    public static void JAWT_SynthesizeWindowActivation(@NativeType("void *") long __functionAddress, @NativeType("jobject") Frame embeddedFrame, @NativeType("jboolean") boolean doActivate) {
+    public static void JAWT_SynthesizeWindowActivation(@NativeType("jobject") Frame embeddedFrame, @NativeType("jboolean") boolean doActivate, @NativeType("void *") long __functionAddress) {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nJAWT_SynthesizeWindowActivation(__functionAddress, embeddedFrame, doActivate);
+        nJAWT_SynthesizeWindowActivation(embeddedFrame, doActivate, __functionAddress);
     }
 
 }

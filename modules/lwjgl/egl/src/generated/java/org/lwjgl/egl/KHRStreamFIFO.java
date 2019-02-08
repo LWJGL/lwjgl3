@@ -63,7 +63,7 @@ public class KHRStreamFIFO {
             check(dpy);
             check(stream);
         }
-        return callPPPI(__functionAddress, dpy, stream, attribute, value);
+        return callPPPI(dpy, stream, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -84,7 +84,7 @@ public class KHRStreamFIFO {
             check(stream);
             check(value, 1);
         }
-        return callPPPI(__functionAddress, dpy, stream, attribute, value) != 0;
+        return callPPPI(dpy, stream, attribute, value, __functionAddress) != 0;
     }
 
 }

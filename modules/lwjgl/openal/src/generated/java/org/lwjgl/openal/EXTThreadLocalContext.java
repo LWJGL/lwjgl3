@@ -42,7 +42,7 @@ public class EXTThreadLocalContext {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePZ(__functionAddress, context);
+        return invokePZ(context, __functionAddress);
     }
 
     // --- [ alcGetThreadContext ] ---

@@ -59,7 +59,7 @@ public class EXTGPUProgramParameters {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, index, params.length >> 2, params);
+        callPV(target, index, params.length >> 2, params, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramLocalParameters4fvEXT ProgramLocalParameters4fvEXT} */
@@ -68,7 +68,7 @@ public class EXTGPUProgramParameters {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, index, params.length >> 2, params);
+        callPV(target, index, params.length >> 2, params, __functionAddress);
     }
 
 }

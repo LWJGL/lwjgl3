@@ -77,7 +77,7 @@ public class SOFTDeviceClock {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePPV(__functionAddress, device, pname, size, values);
+        invokePPV(device, pname, size, values, __functionAddress);
     }
 
     /**
@@ -132,7 +132,7 @@ public class SOFTDeviceClock {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePPV(__functionAddress, device, pname, values.length, values);
+        invokePPV(device, pname, values.length, values, __functionAddress);
     }
 
 }

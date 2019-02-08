@@ -59,7 +59,7 @@ public class EXTCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, external_ref_ids, num_entries);
+        return callPI(external_ref_ids, num_entries, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -74,7 +74,7 @@ public class EXTCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, external_ref_id, context_attributes, num_entries);
+        return callPI(external_ref_id, context_attributes, num_entries, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -89,7 +89,7 @@ public class EXTCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, external_ref_id, external_win_ids, num_entries);
+        return callPI(external_ref_id, external_win_ids, num_entries, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -104,7 +104,7 @@ public class EXTCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, external_win_id, window_attributes, num_entries);
+        return callPI(external_win_id, window_attributes, num_entries, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -120,7 +120,7 @@ public class EXTCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, external_win_id) != 0;
+        return callI(external_win_id, __functionAddress) != 0;
     }
 
     // --- [ eglCompositorSetSizeEXT ] ---
@@ -131,7 +131,7 @@ public class EXTCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, external_win_id, width, height) != 0;
+        return callI(external_win_id, width, height, __functionAddress) != 0;
     }
 
     // --- [ eglCompositorSwapPolicyEXT ] ---
@@ -142,7 +142,7 @@ public class EXTCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, external_win_id, policy) != 0;
+        return callI(external_win_id, policy, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #eglCompositorSetContextListEXT CompositorSetContextListEXT} */
@@ -152,7 +152,7 @@ public class EXTCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, external_ref_ids, external_ref_ids.length) != 0;
+        return callPI(external_ref_ids, external_ref_ids.length, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #eglCompositorSetContextAttributesEXT CompositorSetContextAttributesEXT} */
@@ -162,7 +162,7 @@ public class EXTCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, external_ref_id, context_attributes, context_attributes.length) != 0;
+        return callPI(external_ref_id, context_attributes, context_attributes.length, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #eglCompositorSetWindowListEXT CompositorSetWindowListEXT} */
@@ -172,7 +172,7 @@ public class EXTCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, external_ref_id, external_win_ids, external_win_ids.length) != 0;
+        return callPI(external_ref_id, external_win_ids, external_win_ids.length, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #eglCompositorSetWindowAttributesEXT CompositorSetWindowAttributesEXT} */
@@ -182,7 +182,7 @@ public class EXTCompositor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, external_win_id, window_attributes, window_attributes.length) != 0;
+        return callPI(external_win_id, window_attributes, window_attributes.length, __functionAddress) != 0;
     }
 
 }

@@ -106,7 +106,7 @@ public class EGL10 {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPPPI(__functionAddress, dpy, attrib_list, configs, config_size, num_config);
+        return callPPPPI(dpy, attrib_list, configs, config_size, num_config, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglChooseConfig.xhtml">Reference Page</a> */
@@ -131,7 +131,7 @@ public class EGL10 {
             check(surface);
             check(target);
         }
-        return callPPPI(__functionAddress, dpy, surface, target) != 0;
+        return callPPPI(dpy, surface, target, __functionAddress) != 0;
     }
 
     // --- [ eglCreateContext ] ---
@@ -143,7 +143,7 @@ public class EGL10 {
             check(dpy);
             check(config);
         }
-        return callPPPPP(__functionAddress, dpy, config, share_context, attrib_list);
+        return callPPPPP(dpy, config, share_context, attrib_list, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateContext.xhtml">Reference Page</a> */
@@ -164,7 +164,7 @@ public class EGL10 {
             check(dpy);
             check(config);
         }
-        return callPPPP(__functionAddress, dpy, config, attrib_list);
+        return callPPPP(dpy, config, attrib_list, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePbufferSurface.xhtml">Reference Page</a> */
@@ -186,7 +186,7 @@ public class EGL10 {
             check(config);
             check(pixmap);
         }
-        return callPPPPP(__functionAddress, dpy, config, pixmap, attrib_list);
+        return callPPPPP(dpy, config, pixmap, attrib_list, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePixmapSurface.xhtml">Reference Page</a> */
@@ -208,7 +208,7 @@ public class EGL10 {
             check(config);
             check(win);
         }
-        return callPPPPP(__functionAddress, dpy, config, win, attrib_list);
+        return callPPPPP(dpy, config, win, attrib_list, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateWindowSurface.xhtml">Reference Page</a> */
@@ -231,7 +231,7 @@ public class EGL10 {
             check(dpy);
             check(ctx);
         }
-        return callPPI(__functionAddress, dpy, ctx) != 0;
+        return callPPI(dpy, ctx, __functionAddress) != 0;
     }
 
     // --- [ eglDestroySurface ] ---
@@ -245,7 +245,7 @@ public class EGL10 {
             check(dpy);
             check(surface);
         }
-        return callPPI(__functionAddress, dpy, surface) != 0;
+        return callPPI(dpy, surface, __functionAddress) != 0;
     }
 
     // --- [ eglGetConfigAttrib ] ---
@@ -257,7 +257,7 @@ public class EGL10 {
             check(dpy);
             check(config);
         }
-        return callPPPI(__functionAddress, dpy, config, attribute, value);
+        return callPPPI(dpy, config, attribute, value, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetConfigAttrib.xhtml">Reference Page</a> */
@@ -277,7 +277,7 @@ public class EGL10 {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPPI(__functionAddress, dpy, configs, config_size, num_config);
+        return callPPPI(dpy, configs, config_size, num_config, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetConfigs.xhtml">Reference Page</a> */
@@ -310,7 +310,7 @@ public class EGL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, readdraw);
+        return callP(readdraw, __functionAddress);
     }
 
     // --- [ eglGetDisplay ] ---
@@ -322,7 +322,7 @@ public class EGL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPP(__functionAddress, display_id);
+        return callPP(display_id, __functionAddress);
     }
 
     // --- [ eglGetError ] ---
@@ -344,7 +344,7 @@ public class EGL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPP(__functionAddress, procname);
+        return callPP(procname, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetProcAddress.xhtml">Reference Page</a> */
@@ -377,7 +377,7 @@ public class EGL10 {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPPI(__functionAddress, dpy, major, minor);
+        return callPPPI(dpy, major, minor, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglInitialize.xhtml">Reference Page</a> */
@@ -400,7 +400,7 @@ public class EGL10 {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPPPI(__functionAddress, dpy, draw, read, ctx) != 0;
+        return callPPPPI(dpy, draw, read, ctx, __functionAddress) != 0;
     }
 
     // --- [ eglQueryContext ] ---
@@ -412,7 +412,7 @@ public class EGL10 {
             check(dpy);
             check(ctx);
         }
-        return callPPPI(__functionAddress, dpy, ctx, attribute, value);
+        return callPPPI(dpy, ctx, attribute, value, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQueryContext.xhtml">Reference Page</a> */
@@ -431,7 +431,7 @@ public class EGL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPP(__functionAddress, dpy, name);
+        return callPP(dpy, name, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQueryString.xhtml">Reference Page</a> */
@@ -451,7 +451,7 @@ public class EGL10 {
             check(dpy);
             check(surface);
         }
-        return callPPPI(__functionAddress, dpy, surface, attribute, value);
+        return callPPPI(dpy, surface, attribute, value, __functionAddress);
     }
 
     /** <a target="_blank" href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQuerySurface.xhtml">Reference Page</a> */
@@ -474,7 +474,7 @@ public class EGL10 {
             check(dpy);
             check(surface);
         }
-        return callPPI(__functionAddress, dpy, surface) != 0;
+        return callPPI(dpy, surface, __functionAddress) != 0;
     }
 
     // --- [ eglTerminate ] ---
@@ -487,7 +487,7 @@ public class EGL10 {
             check(__functionAddress);
             check(dpy);
         }
-        return callPI(__functionAddress, dpy) != 0;
+        return callPI(dpy, __functionAddress) != 0;
     }
 
     // --- [ eglWaitGL ] ---
@@ -511,7 +511,7 @@ public class EGL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, engine) != 0;
+        return callI(engine, __functionAddress) != 0;
     }
 
     /**
@@ -528,7 +528,7 @@ public class EGL10 {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
             check(num_config, 1);
         }
-        return callPPPPI(__functionAddress, dpy, attrib_list, memAddressSafe(configs), remainingSafe(configs), num_config) != 0;
+        return callPPPPI(dpy, attrib_list, memAddressSafe(configs), remainingSafe(configs), num_config, __functionAddress) != 0;
     }
 
     /**
@@ -545,7 +545,7 @@ public class EGL10 {
             check(config);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPPPP(__functionAddress, dpy, config, share_context, attrib_list);
+        return callPPPPP(dpy, config, share_context, attrib_list, __functionAddress);
     }
 
     /**
@@ -562,7 +562,7 @@ public class EGL10 {
             check(config);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPPP(__functionAddress, dpy, config, attrib_list);
+        return callPPPP(dpy, config, attrib_list, __functionAddress);
     }
 
     /**
@@ -580,7 +580,7 @@ public class EGL10 {
             check(pixmap);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPPPP(__functionAddress, dpy, config, pixmap, attrib_list);
+        return callPPPPP(dpy, config, pixmap, attrib_list, __functionAddress);
     }
 
     /**
@@ -598,7 +598,7 @@ public class EGL10 {
             check(win);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return callPPPPP(__functionAddress, dpy, config, win, attrib_list);
+        return callPPPPP(dpy, config, win, attrib_list, __functionAddress);
     }
 
     /**
@@ -615,7 +615,7 @@ public class EGL10 {
             check(config);
             check(value, 1);
         }
-        return callPPPI(__functionAddress, dpy, config, attribute, value) != 0;
+        return callPPPI(dpy, config, attribute, value, __functionAddress) != 0;
     }
 
     /**
@@ -631,7 +631,7 @@ public class EGL10 {
             check(dpy);
             check(num_config, 1);
         }
-        return callPPPI(__functionAddress, dpy, memAddressSafe(configs), remainingSafe(configs), num_config) != 0;
+        return callPPPI(dpy, memAddressSafe(configs), remainingSafe(configs), num_config, __functionAddress) != 0;
     }
 
     /**
@@ -648,7 +648,7 @@ public class EGL10 {
             check(major, 1);
             check(minor, 1);
         }
-        return callPPPI(__functionAddress, dpy, major, minor) != 0;
+        return callPPPI(dpy, major, minor, __functionAddress) != 0;
     }
 
     /**
@@ -665,7 +665,7 @@ public class EGL10 {
             check(ctx);
             check(value, 1);
         }
-        return callPPPI(__functionAddress, dpy, ctx, attribute, value) != 0;
+        return callPPPI(dpy, ctx, attribute, value, __functionAddress) != 0;
     }
 
     /**
@@ -682,7 +682,7 @@ public class EGL10 {
             check(surface);
             check(value, 1);
         }
-        return callPPPI(__functionAddress, dpy, surface, attribute, value) != 0;
+        return callPPPI(dpy, surface, attribute, value, __functionAddress) != 0;
     }
 
 }

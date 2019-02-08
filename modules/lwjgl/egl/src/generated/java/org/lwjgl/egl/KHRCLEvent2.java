@@ -52,7 +52,7 @@ public class KHRCLEvent2 {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPP(__functionAddress, dpy, type, attrib_list);
+        return callPPP(dpy, type, attrib_list, __functionAddress);
     }
 
     @NativeType("EGLSyncKHR")

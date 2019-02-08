@@ -73,7 +73,7 @@ public class NVStreamMetadata {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPI(__functionAddress, dpy, attribute, value);
+        return callPPI(dpy, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -93,7 +93,7 @@ public class NVStreamMetadata {
             check(dpy);
             check(stream);
         }
-        return callPPPI(__functionAddress, dpy, stream, n, offset, size, data);
+        return callPPPI(dpy, stream, n, offset, size, data, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -110,7 +110,7 @@ public class NVStreamMetadata {
             check(dpy);
             check(stream);
         }
-        return callPPPI(__functionAddress, dpy, stream, name, n, offset, size, data);
+        return callPPPI(dpy, stream, name, n, offset, size, data, __functionAddress);
     }
 
     @NativeType("EGLBoolean")

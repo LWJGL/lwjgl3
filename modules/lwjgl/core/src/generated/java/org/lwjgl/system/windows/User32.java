@@ -1074,7 +1074,7 @@ public class User32 {
     // --- [ RegisterClassEx ] ---
 
     /** Unsafe version of: {@link #RegisterClassEx} */
-    public static native short nRegisterClassEx(long __functionAddress, long lpwcx);
+    public static native short nRegisterClassEx(long lpwcx, long __functionAddress);
 
     /** Unsafe version of: {@link #RegisterClassEx} */
     public static short nRegisterClassEx(long lpwcx) {
@@ -1082,7 +1082,7 @@ public class User32 {
         if (CHECKS) {
             WNDCLASSEX.validate(lpwcx);
         }
-        return nRegisterClassEx(__functionAddress, lpwcx);
+        return nRegisterClassEx(lpwcx, __functionAddress);
     }
 
     /**
@@ -1098,12 +1098,12 @@ public class User32 {
     // --- [ UnregisterClass ] ---
 
     /** Unsafe version of: {@link #UnregisterClass} */
-    public static native int nUnregisterClass(long __functionAddress, long lpClassName, long hInstance);
+    public static native int nUnregisterClass(long lpClassName, long hInstance, long __functionAddress);
 
     /** Unsafe version of: {@link #UnregisterClass} */
     public static int nUnregisterClass(long lpClassName, long hInstance) {
         long __functionAddress = Functions.UnregisterClass;
-        return nUnregisterClass(__functionAddress, lpClassName, hInstance);
+        return nUnregisterClass(lpClassName, hInstance, __functionAddress);
     }
 
     /**
@@ -1147,12 +1147,12 @@ public class User32 {
     // --- [ CreateWindowEx ] ---
 
     /** Unsafe version of: {@link #CreateWindowEx} */
-    public static native long nCreateWindowEx(long __functionAddress, int dwExStyle, long lpClassName, long lpWindowName, int dwStyle, int x, int y, int nWidth, int nHeight, long hWndParent, long hMenu, long hInstance, long lpParam);
+    public static native long nCreateWindowEx(int dwExStyle, long lpClassName, long lpWindowName, int dwStyle, int x, int y, int nWidth, int nHeight, long hWndParent, long hMenu, long hInstance, long lpParam, long __functionAddress);
 
     /** Unsafe version of: {@link #CreateWindowEx} */
     public static long nCreateWindowEx(int dwExStyle, long lpClassName, long lpWindowName, int dwStyle, int x, int y, int nWidth, int nHeight, long hWndParent, long hMenu, long hInstance, long lpParam) {
         long __functionAddress = Functions.CreateWindowEx;
-        return nCreateWindowEx(__functionAddress, dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+        return nCreateWindowEx(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam, __functionAddress);
     }
 
     /**
@@ -1215,7 +1215,7 @@ public class User32 {
     // --- [ DestroyWindow ] ---
 
     /** Unsafe version of: {@link #DestroyWindow} */
-    public static native int nDestroyWindow(long __functionAddress, long hWnd);
+    public static native int nDestroyWindow(long hWnd, long __functionAddress);
 
     /**
      * Destroys the specified window. The function sends {@link #WM_DESTROY} and {@link #WM_NCDESTROY} messages to the window to deactivate it and remove the keyboard focus
@@ -1233,7 +1233,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nDestroyWindow(__functionAddress, hWnd) != 0;
+        return nDestroyWindow(hWnd, __functionAddress) != 0;
     }
 
     // --- [ DefWindowProc ] ---
@@ -1253,7 +1253,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return callPPPP(__functionAddress, hWnd, Msg, wParam, lParam);
+        return callPPPP(hWnd, Msg, wParam, lParam, __functionAddress);
     }
 
     // --- [ CallWindowProc ] ---
@@ -1264,7 +1264,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return callPPPPP(__functionAddress, lpPrevWndFunc, hWnd, Msg, wParam, lParam);
+        return callPPPPP(lpPrevWndFunc, hWnd, Msg, wParam, lParam, __functionAddress);
     }
 
     /**
@@ -1300,7 +1300,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return callPI(__functionAddress, hWnd, nCmdShow) != 0;
+        return callPI(hWnd, nCmdShow, __functionAddress) != 0;
     }
 
     // --- [ UpdateWindow ] ---
@@ -1318,13 +1318,13 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return callPI(__functionAddress, hWnd) != 0;
+        return callPI(hWnd, __functionAddress) != 0;
     }
 
     // --- [ SetWindowPos ] ---
 
     /** Unsafe version of: {@link #SetWindowPos} */
-    public static native int nSetWindowPos(long __functionAddress, long hWnd, long hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
+    public static native int nSetWindowPos(long hWnd, long hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags, long __functionAddress);
 
     /**
      * Changes the size, position, and Z order of a child, pop-up, or top-level window. These windows are ordered according to their appearance on the screen.
@@ -1344,13 +1344,13 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nSetWindowPos(__functionAddress, hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags) != 0;
+        return nSetWindowPos(hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags, __functionAddress) != 0;
     }
 
     // --- [ SetWindowText ] ---
 
     /** Unsafe version of: {@link #SetWindowText} */
-    public static native int nSetWindowText(long __functionAddress, long hWnd, long lpString);
+    public static native int nSetWindowText(long hWnd, long lpString, long __functionAddress);
 
     /** Unsafe version of: {@link #SetWindowText} */
     public static int nSetWindowText(long hWnd, long lpString) {
@@ -1358,7 +1358,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nSetWindowText(__functionAddress, hWnd, lpString);
+        return nSetWindowText(hWnd, lpString, __functionAddress);
     }
 
     /**
@@ -1398,12 +1398,12 @@ public class User32 {
     // --- [ GetMessage ] ---
 
     /** Unsafe version of: {@link #GetMessage} */
-    public static native int nGetMessage(long __functionAddress, long lpMsg, long hWnd, int wMsgFilterMin, int wMsgFilterMax);
+    public static native int nGetMessage(long lpMsg, long hWnd, int wMsgFilterMin, int wMsgFilterMax, long __functionAddress);
 
     /** Unsafe version of: {@link #GetMessage} */
     public static int nGetMessage(long lpMsg, long hWnd, int wMsgFilterMin, int wMsgFilterMax) {
         long __functionAddress = Functions.GetMessage;
-        return nGetMessage(__functionAddress, lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax);
+        return nGetMessage(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, __functionAddress);
     }
 
     /**
@@ -1432,7 +1432,7 @@ public class User32 {
     /** Unsafe version of: {@link #PeekMessage} */
     public static int nPeekMessage(long lpMsg, long hWnd, int wMsgFilterMin, int wMsgFilterMax, int wRemoveMsg) {
         long __functionAddress = Functions.PeekMessage;
-        return callPPI(__functionAddress, lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg);
+        return callPPI(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg, __functionAddress);
     }
 
     /**
@@ -1461,7 +1461,7 @@ public class User32 {
     /** Unsafe version of: {@link #TranslateMessage} */
     public static int nTranslateMessage(long lpMsg) {
         long __functionAddress = Functions.TranslateMessage;
-        return callPI(__functionAddress, lpMsg);
+        return callPI(lpMsg, __functionAddress);
     }
 
     /**
@@ -1496,7 +1496,7 @@ public class User32 {
     /** Unsafe version of: {@link #DispatchMessage} */
     public static long nDispatchMessage(long lpmsg) {
         long __functionAddress = Functions.DispatchMessage;
-        return callPP(__functionAddress, lpmsg);
+        return callPP(lpmsg, __functionAddress);
     }
 
     /**
@@ -1512,7 +1512,7 @@ public class User32 {
     // --- [ PostMessage ] ---
 
     /** Unsafe version of: {@link #PostMessage} */
-    public static native int nPostMessage(long __functionAddress, long hWnd, int Msg, long wParam, long lParam);
+    public static native int nPostMessage(long hWnd, int Msg, long wParam, long lParam, long __functionAddress);
 
     /**
      * Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread
@@ -1532,13 +1532,13 @@ public class User32 {
     @NativeType("BOOL")
     public static boolean PostMessage(@NativeType("HWND") long hWnd, @NativeType("UINT") int Msg, @NativeType("WPARAM") long wParam, @NativeType("LPARAM") long lParam) {
         long __functionAddress = Functions.PostMessage;
-        return nPostMessage(__functionAddress, hWnd, Msg, wParam, lParam) != 0;
+        return nPostMessage(hWnd, Msg, wParam, lParam, __functionAddress) != 0;
     }
 
     // --- [ SendMessage ] ---
 
     /** Unsafe version of: {@link #SendMessage} */
-    public static native int nSendMessage(long __functionAddress, long hWnd, int Msg, long wParam, long lParam);
+    public static native int nSendMessage(long hWnd, int Msg, long wParam, long lParam, long __functionAddress);
 
     /**
      * Sends the specified message to a window or windows. The {@code SendMessage} function calls the window procedure for the specified window and does not
@@ -1560,18 +1560,18 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nSendMessage(__functionAddress, hWnd, Msg, wParam, lParam) != 0;
+        return nSendMessage(hWnd, Msg, wParam, lParam, __functionAddress) != 0;
     }
 
     // --- [ AdjustWindowRectEx ] ---
 
     /** Unsafe version of: {@link #AdjustWindowRectEx} */
-    public static native int nAdjustWindowRectEx(long __functionAddress, long lpRect, int dwStyle, int bMenu, int dwExStyle);
+    public static native int nAdjustWindowRectEx(long lpRect, int dwStyle, int bMenu, int dwExStyle, long __functionAddress);
 
     /** Unsafe version of: {@link #AdjustWindowRectEx} */
     public static int nAdjustWindowRectEx(long lpRect, int dwStyle, int bMenu, int dwExStyle) {
         long __functionAddress = Functions.AdjustWindowRectEx;
-        return nAdjustWindowRectEx(__functionAddress, lpRect, dwStyle, bMenu, dwExStyle);
+        return nAdjustWindowRectEx(lpRect, dwStyle, bMenu, dwExStyle, __functionAddress);
     }
 
     /**
@@ -1593,7 +1593,7 @@ public class User32 {
     // --- [ GetWindowRect ] ---
 
     /** Unsafe version of: {@link #GetWindowRect} */
-    public static native int nGetWindowRect(long __functionAddress, long hWnd, long lpRect);
+    public static native int nGetWindowRect(long hWnd, long lpRect, long __functionAddress);
 
     /** Unsafe version of: {@link #GetWindowRect} */
     public static int nGetWindowRect(long hWnd, long lpRect) {
@@ -1601,7 +1601,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nGetWindowRect(__functionAddress, hWnd, lpRect);
+        return nGetWindowRect(hWnd, lpRect, __functionAddress);
     }
 
     /**
@@ -1619,7 +1619,7 @@ public class User32 {
     // --- [ MoveWindow ] ---
 
     /** Unsafe version of: {@link #MoveWindow} */
-    public static native int nMoveWindow(long __functionAddress, long hWnd, int X, int Y, int nWidth, int nHeight, int bRepaint);
+    public static native int nMoveWindow(long hWnd, int X, int Y, int nWidth, int nHeight, int bRepaint, long __functionAddress);
 
     /**
      * Changes the position and dimensions of the specified window. For a top-level window, the position and dimensions are relative to the upper-left corner
@@ -1640,13 +1640,13 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nMoveWindow(__functionAddress, hWnd, X, Y, nWidth, nHeight, bRepaint ? 1 : 0) != 0;
+        return nMoveWindow(hWnd, X, Y, nWidth, nHeight, bRepaint ? 1 : 0, __functionAddress) != 0;
     }
 
     // --- [ GetWindowPlacement ] ---
 
     /** Unsafe version of: {@link #GetWindowPlacement} */
-    public static native int nGetWindowPlacement(long __functionAddress, long hWnd, long lpwndpl);
+    public static native int nGetWindowPlacement(long hWnd, long lpwndpl, long __functionAddress);
 
     /** Unsafe version of: {@link #GetWindowPlacement} */
     public static int nGetWindowPlacement(long hWnd, long lpwndpl) {
@@ -1654,7 +1654,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nGetWindowPlacement(__functionAddress, hWnd, lpwndpl);
+        return nGetWindowPlacement(hWnd, lpwndpl, __functionAddress);
     }
 
     /**
@@ -1674,7 +1674,7 @@ public class User32 {
     // --- [ SetWindowPlacement ] ---
 
     /** Unsafe version of: {@link #SetWindowPlacement} */
-    public static native int nSetWindowPlacement(long __functionAddress, long hWnd, long lpwndpl);
+    public static native int nSetWindowPlacement(long hWnd, long lpwndpl, long __functionAddress);
 
     /** Unsafe version of: {@link #SetWindowPlacement} */
     public static int nSetWindowPlacement(long hWnd, long lpwndpl) {
@@ -1682,7 +1682,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nSetWindowPlacement(__functionAddress, hWnd, lpwndpl);
+        return nSetWindowPlacement(hWnd, lpwndpl, __functionAddress);
     }
 
     /**
@@ -1712,7 +1712,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return callPI(__functionAddress, hWnd) != 0;
+        return callPI(hWnd, __functionAddress) != 0;
     }
 
     // --- [ IsIconic ] ---
@@ -1728,7 +1728,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return callPI(__functionAddress, hWnd) != 0;
+        return callPI(hWnd, __functionAddress) != 0;
     }
 
     // --- [ IsZoomed ] ---
@@ -1744,7 +1744,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return callPI(__functionAddress, hWnd) != 0;
+        return callPI(hWnd, __functionAddress) != 0;
     }
 
     // --- [ BringWindowToTop ] ---
@@ -1761,13 +1761,13 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return callPI(__functionAddress, hWnd) != 0;
+        return callPI(hWnd, __functionAddress) != 0;
     }
 
     // --- [ SetWindowLongPtr ] ---
 
     /** Unsafe version of: {@link #SetWindowLongPtr} */
-    public static native long nSetWindowLongPtr(long __functionAddress, long hWnd, int nIndex, long dwNewLong);
+    public static native long nSetWindowLongPtr(long hWnd, int nIndex, long dwNewLong, long __functionAddress);
 
     /**
      * Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.
@@ -1785,13 +1785,13 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nSetWindowLongPtr(__functionAddress, hWnd, nIndex, dwNewLong);
+        return nSetWindowLongPtr(hWnd, nIndex, dwNewLong, __functionAddress);
     }
 
     // --- [ GetWindowLongPtr ] ---
 
     /** Unsafe version of: {@link #GetWindowLongPtr} */
-    public static native long nGetWindowLongPtr(long __functionAddress, long hWnd, int nIndex);
+    public static native long nGetWindowLongPtr(long hWnd, int nIndex, long __functionAddress);
 
     /**
      * Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.
@@ -1806,13 +1806,13 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nGetWindowLongPtr(__functionAddress, hWnd, nIndex);
+        return nGetWindowLongPtr(hWnd, nIndex, __functionAddress);
     }
 
     // --- [ SetClassLongPtr ] ---
 
     /** Unsafe version of: {@link #SetClassLongPtr} */
-    public static native long nSetClassLongPtr(long __functionAddress, long hWnd, int nIndex, long dwNewLong);
+    public static native long nSetClassLongPtr(long hWnd, int nIndex, long dwNewLong, long __functionAddress);
 
     /**
      * Replaces the specified value at the specified offset in the extra class memory or the {@link WNDCLASSEX} structure for the class to which the specified
@@ -1834,13 +1834,13 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nSetClassLongPtr(__functionAddress, hWnd, nIndex, dwNewLong);
+        return nSetClassLongPtr(hWnd, nIndex, dwNewLong, __functionAddress);
     }
 
     // --- [ GetClassLongPtr ] ---
 
     /** Unsafe version of: {@link #GetClassLongPtr} */
-    public static native long nGetClassLongPtr(long __functionAddress, long hWnd, int nIndex);
+    public static native long nGetClassLongPtr(long hWnd, int nIndex, long __functionAddress);
 
     /**
      * Retrieves the specified value from the {@link WNDCLASSEX} structure associated with the specified window.
@@ -1857,13 +1857,13 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return nGetClassLongPtr(__functionAddress, hWnd, nIndex);
+        return nGetClassLongPtr(hWnd, nIndex, __functionAddress);
     }
 
     // --- [ SetLayeredWindowAttributes ] ---
 
     /** Unsafe version of: {@link #SetLayeredWindowAttributes} */
-    public static native int nSetLayeredWindowAttributes(long __functionAddress, long hwnd, int crKey, byte bAlpha, int dwFlags);
+    public static native int nSetLayeredWindowAttributes(long hwnd, int crKey, byte bAlpha, int dwFlags, long __functionAddress);
 
     /**
      * @param hwnd    a handle to the layered window. A layered window is created by specifying {@link #WS_EX_LAYERED} when creating the window with the {@link #CreateWindowEx}
@@ -1880,18 +1880,18 @@ public class User32 {
         if (CHECKS) {
             check(hwnd);
         }
-        return nSetLayeredWindowAttributes(__functionAddress, hwnd, crKey, bAlpha, dwFlags) != 0;
+        return nSetLayeredWindowAttributes(hwnd, crKey, bAlpha, dwFlags, __functionAddress) != 0;
     }
 
     // --- [ LoadIcon ] ---
 
     /** Unsafe version of: {@link #LoadIcon} */
-    public static native long nLoadIcon(long __functionAddress, long instance, long iconName);
+    public static native long nLoadIcon(long instance, long iconName, long __functionAddress);
 
     /** Unsafe version of: {@link #LoadIcon} */
     public static long nLoadIcon(long instance, long iconName) {
         long __functionAddress = Functions.LoadIcon;
-        return nLoadIcon(__functionAddress, instance, iconName);
+        return nLoadIcon(instance, iconName, __functionAddress);
     }
 
     /**
@@ -1931,12 +1931,12 @@ public class User32 {
     // --- [ LoadCursor ] ---
 
     /** Unsafe version of: {@link #LoadCursor} */
-    public static native long nLoadCursor(long __functionAddress, long instance, long cursorName);
+    public static native long nLoadCursor(long instance, long cursorName, long __functionAddress);
 
     /** Unsafe version of: {@link #LoadCursor} */
     public static long nLoadCursor(long instance, long cursorName) {
         long __functionAddress = Functions.LoadCursor;
-        return nLoadCursor(__functionAddress, instance, cursorName);
+        return nLoadCursor(instance, cursorName, __functionAddress);
     }
 
     /**
@@ -1982,7 +1982,7 @@ public class User32 {
     @NativeType("HDC")
     public static long GetDC(@NativeType("HWND") long hWnd) {
         long __functionAddress = Functions.GetDC;
-        return callPP(__functionAddress, hWnd);
+        return callPP(hWnd, __functionAddress);
     }
 
     // --- [ ReleaseDC ] ---
@@ -2001,7 +2001,7 @@ public class User32 {
             check(hWnd);
             check(hDC);
         }
-        return callPPI(__functionAddress, hWnd, hDC) != 0;
+        return callPPI(hWnd, hDC, __functionAddress) != 0;
     }
 
     // --- [ GetSystemMetrics ] ---
@@ -2013,13 +2013,13 @@ public class User32 {
      */
     public static int GetSystemMetrics(int index) {
         long __functionAddress = Functions.GetSystemMetrics;
-        return callI(__functionAddress, index);
+        return callI(index, __functionAddress);
     }
 
     // --- [ RegisterTouchWindow ] ---
 
     /** Unsafe version of: {@link #RegisterTouchWindow} */
-    public static native int nRegisterTouchWindow(long __functionAddress, long hWnd, int ulFlags);
+    public static native int nRegisterTouchWindow(long hWnd, int ulFlags, long __functionAddress);
 
     /**
      * Registers a window as being touch-capable.
@@ -2042,13 +2042,13 @@ public class User32 {
             check(__functionAddress);
             check(hWnd);
         }
-        return nRegisterTouchWindow(__functionAddress, hWnd, ulFlags) != 0;
+        return nRegisterTouchWindow(hWnd, ulFlags, __functionAddress) != 0;
     }
 
     // --- [ UnregisterTouchWindow ] ---
 
     /** Unsafe version of: {@link #UnregisterTouchWindow} */
-    public static native int nUnregisterTouchWindow(long __functionAddress, long hWnd);
+    public static native int nUnregisterTouchWindow(long hWnd, long __functionAddress);
 
     /**
      * Registers a window as no longer being touch-capable.
@@ -2064,7 +2064,7 @@ public class User32 {
             check(__functionAddress);
             check(hWnd);
         }
-        return nUnregisterTouchWindow(__functionAddress, hWnd) != 0;
+        return nUnregisterTouchWindow(hWnd, __functionAddress) != 0;
     }
 
     // --- [ IsTouchWindow ] ---
@@ -2076,7 +2076,7 @@ public class User32 {
             check(__functionAddress);
             check(hWnd);
         }
-        return callPPI(__functionAddress, hWnd, pulFlags);
+        return callPPI(hWnd, pulFlags, __functionAddress);
     }
 
     /**
@@ -2105,7 +2105,7 @@ public class User32 {
      *                message as indicated in the message {@code WPARAM}. If {@code cInputs} is less than the number of touch points, the function will still succeed and
      *                populate the {@code pInputs} buffer with information about {@code cInputs} touch points.
      */
-    public static native int nGetTouchInputInfo(long __functionAddress, long hTouchInput, int cInputs, long pInputs, int cbSize);
+    public static native int nGetTouchInputInfo(long hTouchInput, int cInputs, long pInputs, int cbSize, long __functionAddress);
 
     /**
      * Unsafe version of: {@link #GetTouchInputInfo}
@@ -2120,7 +2120,7 @@ public class User32 {
             check(__functionAddress);
             check(hTouchInput);
         }
-        return nGetTouchInputInfo(__functionAddress, hTouchInput, cInputs, pInputs, cbSize);
+        return nGetTouchInputInfo(hTouchInput, cInputs, pInputs, cbSize, __functionAddress);
     }
 
     /**
@@ -2143,7 +2143,7 @@ public class User32 {
     // --- [ CloseTouchInputHandle ] ---
 
     /** Unsafe version of: {@link #CloseTouchInputHandle} */
-    public static native int nCloseTouchInputHandle(long __functionAddress, long hTouchInput);
+    public static native int nCloseTouchInputHandle(long hTouchInput, long __functionAddress);
 
     /**
      * Closes a touch input handle, frees process memory associated with it, and invalidates the handle.
@@ -2161,7 +2161,7 @@ public class User32 {
             check(__functionAddress);
             check(hTouchInput);
         }
-        return nCloseTouchInputHandle(__functionAddress, hTouchInput) != 0;
+        return nCloseTouchInputHandle(hTouchInput, __functionAddress) != 0;
     }
 
     // --- [ MonitorFromWindow ] ---
@@ -2178,7 +2178,7 @@ public class User32 {
         if (CHECKS) {
             check(hWnd);
         }
-        return callPP(__functionAddress, hWnd, dwFlags);
+        return callPP(hWnd, dwFlags, __functionAddress);
     }
 
     // --- [ GetMonitorInfo ] ---
@@ -2189,7 +2189,7 @@ public class User32 {
         if (CHECKS) {
             check(hMonitor);
         }
-        return callPPI(__functionAddress, hMonitor, lpmi);
+        return callPPI(hMonitor, lpmi, __functionAddress);
     }
 
     /**
@@ -2211,7 +2211,7 @@ public class User32 {
     /** Unsafe version of: {@link #EnumDisplayDevices} */
     public static int nEnumDisplayDevices(long lpDevice, int iDevNum, long lpDisplayDevice, int dwFlags) {
         long __functionAddress = Functions.EnumDisplayDevices;
-        return callPPI(__functionAddress, lpDevice, iDevNum, lpDisplayDevice, dwFlags);
+        return callPPI(lpDevice, iDevNum, lpDisplayDevice, dwFlags, __functionAddress);
     }
 
     /**
@@ -2273,7 +2273,7 @@ public class User32 {
     /** Unsafe version of: {@link #EnumDisplaySettingsEx} */
     public static int nEnumDisplaySettingsEx(long lpszDeviceName, int iModeNum, long lpDevMode, int dwFlags) {
         long __functionAddress = Functions.EnumDisplaySettingsEx;
-        return callPPI(__functionAddress, lpszDeviceName, iModeNum, lpDevMode, dwFlags);
+        return callPPI(lpszDeviceName, iModeNum, lpDevMode, dwFlags, __functionAddress);
     }
 
     /**
@@ -2355,7 +2355,7 @@ public class User32 {
     /** Unsafe version of: {@link #ChangeDisplaySettingsEx} */
     public static int nChangeDisplaySettingsEx(long lpszDeviceName, long lpDevMode, long hwnd, int dwflags, long lParam) {
         long __functionAddress = Functions.ChangeDisplaySettingsEx;
-        return callPPPPI(__functionAddress, lpszDeviceName, lpDevMode, hwnd, dwflags, lParam);
+        return callPPPPI(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam, __functionAddress);
     }
 
     /**
@@ -2423,7 +2423,7 @@ public class User32 {
     /** Unsafe version of: {@link #GetCursorPos} */
     public static int nGetCursorPos(long point) {
         long __functionAddress = Functions.GetCursorPos;
-        return callPI(__functionAddress, point);
+        return callPI(point, __functionAddress);
     }
 
     /**
@@ -2448,7 +2448,7 @@ public class User32 {
     @NativeType("BOOL")
     public static boolean SetCursorPos(int X, int Y) {
         long __functionAddress = Functions.SetCursorPos;
-        return callI(__functionAddress, X, Y) != 0;
+        return callI(X, Y, __functionAddress) != 0;
     }
 
     // --- [ ClipCursor ] ---
@@ -2456,7 +2456,7 @@ public class User32 {
     /** Unsafe version of: {@link #ClipCursor} */
     public static int nClipCursor(long rect) {
         long __functionAddress = Functions.ClipCursor;
-        return callPI(__functionAddress, rect);
+        return callPI(rect, __functionAddress);
     }
 
     /**
@@ -2485,7 +2485,7 @@ public class User32 {
      */
     public static int ShowCursor(@NativeType("BOOL") boolean show) {
         long __functionAddress = Functions.ShowCursor;
-        return callI(__functionAddress, show ? 1 : 0);
+        return callI(show ? 1 : 0, __functionAddress);
     }
 
     // --- [ SetCursor ] ---
@@ -2513,7 +2513,7 @@ public class User32 {
     @NativeType("HCURSOR")
     public static long SetCursor(@NativeType("HCURSOR") long hCursor) {
         long __functionAddress = Functions.SetCursor;
-        return callPP(__functionAddress, hCursor);
+        return callPP(hCursor, __functionAddress);
     }
 
     // --- [ GetDpiForSystem ] ---
@@ -2558,7 +2558,7 @@ public class User32 {
             check(__functionAddress);
             check(hwnd);
         }
-        return callPI(__functionAddress, hwnd);
+        return callPI(hwnd, __functionAddress);
     }
 
     // --- [ GetAwarenessFromDpiAwarenessContext ] ---
@@ -2579,7 +2579,7 @@ public class User32 {
             check(__functionAddress);
             check(value);
         }
-        return callPI(__functionAddress, value);
+        return callPI(value, __functionAddress);
     }
 
     // --- [ GetThreadDpiAwarenessContext ] ---
@@ -2621,7 +2621,7 @@ public class User32 {
             check(__functionAddress);
             check(hwnd);
         }
-        return callPP(__functionAddress, hwnd);
+        return callPP(hwnd, __functionAddress);
     }
 
     // --- [ IsValidDpiAwarenessContext ] ---
@@ -2641,7 +2641,7 @@ public class User32 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, value) != 0;
+        return callPI(value, __functionAddress) != 0;
     }
 
     // --- [ SetThreadDpiAwarenessContext ] ---
@@ -2663,7 +2663,7 @@ public class User32 {
             check(__functionAddress);
             check(dpiContext);
         }
-        return callPP(__functionAddress, dpiContext);
+        return callPP(dpiContext, __functionAddress);
     }
 
     /** Array version of: {@link #IsTouchWindow} */
@@ -2675,7 +2675,7 @@ public class User32 {
             check(hWnd);
             checkSafe(pulFlags, 1);
         }
-        return callPPI(__functionAddress, hWnd, pulFlags) != 0;
+        return callPPI(hWnd, pulFlags, __functionAddress) != 0;
     }
 
 }

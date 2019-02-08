@@ -64,7 +64,7 @@ public class CU90 extends CU80 {
         if (CHECKS) {
             check(hfunc);
         }
-        return callPI(__functionAddress, hfunc, attrib, value);
+        return callPI(hfunc, attrib, value, __functionAddress);
     }
 
     // --- [ cuLaunchCooperativeKernel ] ---
@@ -74,7 +74,7 @@ public class CU90 extends CU80 {
         if (CHECKS) {
             check(f);
         }
-        return callPPPI(__functionAddress, f, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, hStream, kernelParams);
+        return callPPPI(f, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, hStream, kernelParams, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -89,7 +89,7 @@ public class CU90 extends CU80 {
         if (CHECKS) {
             CUDA_LAUNCH_PARAMS.validate(launchParamsList, numDevices);
         }
-        return callPI(__functionAddress, launchParamsList, numDevices, flags);
+        return callPI(launchParamsList, numDevices, flags, __functionAddress);
     }
 
     @NativeType("CUresult")

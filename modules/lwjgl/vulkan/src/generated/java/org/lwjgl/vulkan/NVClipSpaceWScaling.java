@@ -163,7 +163,7 @@ public class NVClipSpaceWScaling {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, commandBuffer.address(), firstViewport, viewportCount, pViewportWScalings);
+        callPPV(commandBuffer.address(), firstViewport, viewportCount, pViewportWScalings, __functionAddress);
     }
 
     /**

@@ -29,7 +29,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, eError);
+        return callP(eError, __functionAddress);
     }
 
     @Nullable
@@ -47,7 +47,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, bForce, peError);
+        return callPZ(bForce, peError, __functionAddress);
     }
 
     /** Returns true if file sync occurred (force or settings dirty). */
@@ -66,7 +66,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, pchSection, pchSettingsKey, bValue, peError);
+        callPPPV(pchSection, pchSettingsKey, bValue, peError, __functionAddress);
     }
 
     public static void VRSettings_SetBool(@NativeType("char const *") ByteBuffer pchSection, @NativeType("char const *") ByteBuffer pchSettingsKey, @NativeType("bool") boolean bValue, @NativeType("EVRSettingsError *") IntBuffer peError) {
@@ -101,7 +101,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, pchSection, pchSettingsKey, nValue, peError);
+        callPPPV(pchSection, pchSettingsKey, nValue, peError, __functionAddress);
     }
 
     public static void VRSettings_SetInt32(@NativeType("char const *") ByteBuffer pchSection, @NativeType("char const *") ByteBuffer pchSettingsKey, @NativeType("int32_t") int nValue, @NativeType("EVRSettingsError *") IntBuffer peError) {
@@ -136,7 +136,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, pchSection, pchSettingsKey, flValue, peError);
+        callPPPV(pchSection, pchSettingsKey, flValue, peError, __functionAddress);
     }
 
     public static void VRSettings_SetFloat(@NativeType("char const *") ByteBuffer pchSection, @NativeType("char const *") ByteBuffer pchSettingsKey, float flValue, @NativeType("EVRSettingsError *") IntBuffer peError) {
@@ -171,7 +171,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPPV(__functionAddress, pchSection, pchSettingsKey, pchValue, peError);
+        callPPPPV(pchSection, pchSettingsKey, pchValue, peError, __functionAddress);
     }
 
     public static void VRSettings_SetString(@NativeType("char const *") ByteBuffer pchSection, @NativeType("char const *") ByteBuffer pchSettingsKey, @NativeType("char const *") ByteBuffer pchValue, @NativeType("EVRSettingsError *") IntBuffer peError) {
@@ -209,7 +209,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPZ(__functionAddress, pchSection, pchSettingsKey, peError);
+        return callPPPZ(pchSection, pchSettingsKey, peError, __functionAddress);
     }
 
     @NativeType("bool")
@@ -246,7 +246,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, pchSection, pchSettingsKey, peError);
+        return callPPPI(pchSection, pchSettingsKey, peError, __functionAddress);
     }
 
     @NativeType("int32_t")
@@ -283,7 +283,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPF(__functionAddress, pchSection, pchSettingsKey, peError);
+        return callPPPF(pchSection, pchSettingsKey, peError, __functionAddress);
     }
 
     public static float VRSettings_GetFloat(@NativeType("char const *") ByteBuffer pchSection, @NativeType("char const *") ByteBuffer pchSettingsKey, @NativeType("EVRSettingsError *") IntBuffer peError) {
@@ -318,7 +318,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPPV(__functionAddress, pchSection, pchSettingsKey, pchValue, unValueLen, peError);
+        callPPPPV(pchSection, pchSettingsKey, pchValue, unValueLen, peError, __functionAddress);
     }
 
     public static void VRSettings_GetString(@NativeType("char const *") ByteBuffer pchSection, @NativeType("char const *") ByteBuffer pchSettingsKey, @NativeType("char *") ByteBuffer pchValue, @NativeType("EVRSettingsError *") IntBuffer peError) {
@@ -353,7 +353,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, pchSection, peError);
+        callPPV(pchSection, peError, __functionAddress);
     }
 
     public static void VRSettings_RemoveSection(@NativeType("char const *") ByteBuffer pchSection, @NativeType("EVRSettingsError *") IntBuffer peError) {
@@ -385,7 +385,7 @@ public class VRSettings {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, pchSection, pchSettingsKey, peError);
+        callPPPV(pchSection, pchSettingsKey, peError, __functionAddress);
     }
 
     public static void VRSettings_RemoveKeyInSection(@NativeType("char const *") ByteBuffer pchSection, @NativeType("char const *") ByteBuffer pchSettingsKey, @NativeType("EVRSettingsError *") IntBuffer peError) {

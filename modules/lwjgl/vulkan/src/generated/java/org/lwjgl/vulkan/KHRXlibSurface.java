@@ -94,7 +94,7 @@ public class KHRXlibSurface {
             VkXlibSurfaceCreateInfoKHR.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, instance.address(), pCreateInfo, pAllocator, pSurface);
+        return callPPPPI(instance.address(), pCreateInfo, pAllocator, pSurface, __functionAddress);
     }
 
     /**
@@ -195,7 +195,7 @@ public class KHRXlibSurface {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPPI(__functionAddress, physicalDevice.address(), queueFamilyIndex, dpy, visualID) != 0;
+        return callPPPI(physicalDevice.address(), queueFamilyIndex, dpy, visualID, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #vkCreateXlibSurfaceKHR CreateXlibSurfaceKHR} */
@@ -208,7 +208,7 @@ public class KHRXlibSurface {
             VkXlibSurfaceCreateInfoKHR.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface);
+        return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface, __functionAddress);
     }
 
 }

@@ -110,7 +110,7 @@ public class EXTCalibratedTimestamps {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, physicalDevice.address(), pTimeDomainCount, pTimeDomains);
+        return callPPPI(physicalDevice.address(), pTimeDomainCount, pTimeDomains, __functionAddress);
     }
 
     /**
@@ -178,7 +178,7 @@ public class EXTCalibratedTimestamps {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPPI(__functionAddress, device.address(), timestampCount, pTimestampInfos, pTimestamps, pMaxDeviation);
+        return callPPPPI(device.address(), timestampCount, pTimestampInfos, pTimestamps, pMaxDeviation, __functionAddress);
     }
 
     /**
@@ -258,7 +258,7 @@ public class EXTCalibratedTimestamps {
             check(pTimeDomainCount, 1);
             checkSafe(pTimeDomains, pTimeDomainCount[0]);
         }
-        return callPPPI(__functionAddress, physicalDevice.address(), pTimeDomainCount, pTimeDomains);
+        return callPPPI(physicalDevice.address(), pTimeDomainCount, pTimeDomains, __functionAddress);
     }
 
     /** Array version of: {@link #vkGetCalibratedTimestampsEXT GetCalibratedTimestampsEXT} */
@@ -270,7 +270,7 @@ public class EXTCalibratedTimestamps {
             check(pTimestamps, pTimestampInfos.remaining());
             check(pMaxDeviation, 1);
         }
-        return callPPPPI(__functionAddress, device.address(), pTimestampInfos.remaining(), pTimestampInfos.address(), pTimestamps, pMaxDeviation);
+        return callPPPPI(device.address(), pTimestampInfos.remaining(), pTimestampInfos.address(), pTimestamps, pMaxDeviation, __functionAddress);
     }
 
 }

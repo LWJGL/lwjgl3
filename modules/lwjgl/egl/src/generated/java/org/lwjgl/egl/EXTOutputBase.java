@@ -63,7 +63,7 @@ public class EXTOutputBase {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPPPI(__functionAddress, dpy, attrib_list, layers, max_layers, num_layers);
+        return callPPPPI(dpy, attrib_list, layers, max_layers, num_layers, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -83,7 +83,7 @@ public class EXTOutputBase {
             check(__functionAddress);
             check(dpy);
         }
-        return callPPPPI(__functionAddress, dpy, attrib_list, ports, max_ports, num_ports);
+        return callPPPPI(dpy, attrib_list, ports, max_ports, num_ports, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -105,7 +105,7 @@ public class EXTOutputBase {
             check(dpy);
             check(layer);
         }
-        return callPPPI(__functionAddress, dpy, layer, attribute, value) != 0;
+        return callPPPI(dpy, layer, attribute, value, __functionAddress) != 0;
     }
 
     // --- [ eglQueryOutputLayerAttribEXT ] ---
@@ -117,7 +117,7 @@ public class EXTOutputBase {
             check(dpy);
             check(layer);
         }
-        return callPPPI(__functionAddress, dpy, layer, attribute, value);
+        return callPPPI(dpy, layer, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -137,7 +137,7 @@ public class EXTOutputBase {
             check(dpy);
             check(layer);
         }
-        return callPPP(__functionAddress, dpy, layer, name);
+        return callPPP(dpy, layer, name, __functionAddress);
     }
 
     @Nullable
@@ -157,7 +157,7 @@ public class EXTOutputBase {
             check(dpy);
             check(port);
         }
-        return callPPPI(__functionAddress, dpy, port, attribute, value) != 0;
+        return callPPPI(dpy, port, attribute, value, __functionAddress) != 0;
     }
 
     // --- [ eglQueryOutputPortAttribEXT ] ---
@@ -169,7 +169,7 @@ public class EXTOutputBase {
             check(dpy);
             check(port);
         }
-        return callPPPI(__functionAddress, dpy, port, attribute, value);
+        return callPPPI(dpy, port, attribute, value, __functionAddress);
     }
 
     @NativeType("EGLBoolean")
@@ -189,7 +189,7 @@ public class EXTOutputBase {
             check(dpy);
             check(port);
         }
-        return callPPP(__functionAddress, dpy, port, name);
+        return callPPP(dpy, port, name, __functionAddress);
     }
 
     @Nullable
@@ -209,7 +209,7 @@ public class EXTOutputBase {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
             check(num_layers, 1);
         }
-        return callPPPPI(__functionAddress, dpy, memAddressSafe(attrib_list), memAddressSafe(layers), remainingSafe(layers), num_layers) != 0;
+        return callPPPPI(dpy, memAddressSafe(attrib_list), memAddressSafe(layers), remainingSafe(layers), num_layers, __functionAddress) != 0;
     }
 
     /** Array version of: {@link #eglGetOutputPortsEXT GetOutputPortsEXT} */
@@ -222,7 +222,7 @@ public class EXTOutputBase {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
             check(num_ports, 1);
         }
-        return callPPPPI(__functionAddress, dpy, memAddressSafe(attrib_list), memAddressSafe(ports), remainingSafe(ports), num_ports) != 0;
+        return callPPPPI(dpy, memAddressSafe(attrib_list), memAddressSafe(ports), remainingSafe(ports), num_ports, __functionAddress) != 0;
     }
 
 }

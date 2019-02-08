@@ -101,7 +101,7 @@ public class GLXEXTTextureFromPixmap {
             check(display);
             check(drawable);
         }
-        callPPPV(__functionAddress, display, drawable, buffer, attrib_list);
+        callPPPV(display, drawable, buffer, attrib_list, __functionAddress);
     }
 
     /**
@@ -136,7 +136,7 @@ public class GLXEXTTextureFromPixmap {
             check(display);
             check(drawable);
         }
-        callPPV(__functionAddress, display, drawable, buffer);
+        callPPV(display, drawable, buffer, __functionAddress);
     }
 
     /** Array version of: {@link #glXBindTexImageEXT BindTexImageEXT} */
@@ -148,7 +148,7 @@ public class GLXEXTTextureFromPixmap {
             check(drawable);
             checkNTSafe(attrib_list);
         }
-        callPPPV(__functionAddress, display, drawable, buffer, attrib_list);
+        callPPPV(display, drawable, buffer, attrib_list, __functionAddress);
     }
 
 }

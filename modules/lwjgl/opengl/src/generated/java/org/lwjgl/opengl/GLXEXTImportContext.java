@@ -60,7 +60,7 @@ public class GLXEXTImportContext {
             check(display);
             check(context);
         }
-        return callPPPI(__functionAddress, display, context, attribute, value);
+        return callPPPI(display, context, attribute, value, __functionAddress);
     }
 
     /**
@@ -92,7 +92,7 @@ public class GLXEXTImportContext {
             check(__functionAddress);
             check(context);
         }
-        return callPP(__functionAddress, context);
+        return callPP(context, __functionAddress);
     }
 
     // --- [ glXImportContextEXT ] ---
@@ -110,7 +110,7 @@ public class GLXEXTImportContext {
             check(__functionAddress);
             check(display);
         }
-        return callPPP(__functionAddress, display, contextID);
+        return callPPP(display, contextID, __functionAddress);
     }
 
     // --- [ glXFreeContextEXT ] ---
@@ -128,7 +128,7 @@ public class GLXEXTImportContext {
             check(display);
             check(context);
         }
-        callPPV(__functionAddress, display, context);
+        callPPV(display, context, __functionAddress);
     }
 
     /** Array version of: {@link #glXQueryContextInfoEXT QueryContextInfoEXT} */
@@ -140,7 +140,7 @@ public class GLXEXTImportContext {
             check(context);
             check(value, 1);
         }
-        return callPPPI(__functionAddress, display, context, attribute, value);
+        return callPPPI(display, context, attribute, value, __functionAddress);
     }
 
 }

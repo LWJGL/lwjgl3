@@ -47,7 +47,7 @@ public class LLVMInitialization {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeTransformUtils ] ---
@@ -57,7 +57,7 @@ public class LLVMInitialization {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeScalarOpts ] ---
@@ -67,7 +67,7 @@ public class LLVMInitialization {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeObjCARCOpts ] ---
@@ -77,7 +77,7 @@ public class LLVMInitialization {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeVectorization ] ---
@@ -87,7 +87,7 @@ public class LLVMInitialization {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeInstCombine ] ---
@@ -98,7 +98,7 @@ public class LLVMInitialization {
             check(__functionAddress);
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeAggressiveInstCombiner ] ---
@@ -109,7 +109,7 @@ public class LLVMInitialization {
             check(__functionAddress);
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeIPO ] ---
@@ -119,7 +119,7 @@ public class LLVMInitialization {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeInstrumentation ] ---
@@ -129,7 +129,7 @@ public class LLVMInitialization {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeAnalysis ] ---
@@ -139,7 +139,7 @@ public class LLVMInitialization {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeIPA ] ---
@@ -149,7 +149,7 @@ public class LLVMInitialization {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeCodeGen ] ---
@@ -159,7 +159,7 @@ public class LLVMInitialization {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
     // --- [ LLVMInitializeTarget ] ---
@@ -169,7 +169,7 @@ public class LLVMInitialization {
         if (CHECKS) {
             check(R);
         }
-        invokePV(__functionAddress, R);
+        invokePV(R, __functionAddress);
     }
 
 }

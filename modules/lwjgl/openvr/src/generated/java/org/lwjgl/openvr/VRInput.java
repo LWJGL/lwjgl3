@@ -30,7 +30,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchActionManifestPath);
+        return callPI(pchActionManifestPath, __functionAddress);
     }
 
     /**
@@ -75,7 +75,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchActionSetName, pHandle);
+        return callPPI(pchActionSetName, pHandle, __functionAddress);
     }
 
     /** Returns a handle for an action set. This handle is used for all performance-sensitive calls. */
@@ -112,7 +112,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchActionName, pHandle);
+        return callPPI(pchActionName, pHandle, __functionAddress);
     }
 
     /** Returns a handle for an action. This handle is used for all performance-sensitive calls. */
@@ -149,7 +149,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchInputSourcePath, pHandle);
+        return callPPI(pchInputSourcePath, pHandle, __functionAddress);
     }
 
     /** Returns a handle for any path in the input system. E.g. {@code /user/hand/right}. */
@@ -186,7 +186,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pSets, unSizeOfVRSelectedActionSet_t, unSetCount);
+        return callPI(pSets, unSizeOfVRSelectedActionSet_t, unSetCount, __functionAddress);
     }
 
     /**
@@ -206,7 +206,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPJI(__functionAddress, action, pActionData, unActionDataSize, ulRestrictToDevice);
+        return callJPJI(action, pActionData, unActionDataSize, ulRestrictToDevice, __functionAddress);
     }
 
     /**
@@ -235,7 +235,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPJI(__functionAddress, action, pActionData, unActionDataSize, ulRestrictToDevice);
+        return callJPJI(action, pActionData, unActionDataSize, ulRestrictToDevice, __functionAddress);
     }
 
     /**
@@ -264,7 +264,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPJI(__functionAddress, action, eOrigin, fPredictedSecondsFromNow, pActionData, unActionDataSize, ulRestrictToDevice);
+        return callJPJI(action, eOrigin, fPredictedSecondsFromNow, pActionData, unActionDataSize, ulRestrictToDevice, __functionAddress);
     }
 
     /**
@@ -295,7 +295,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, action, pActionData, unActionDataSize);
+        return callJPI(action, pActionData, unActionDataSize, __functionAddress);
     }
 
     /** Reads the state of a skeletal action given its handle. */
@@ -318,7 +318,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, action, pBoneCount);
+        return callJPI(action, pBoneCount, __functionAddress);
     }
 
     /** Reads the number of bones in skeleton associated with the given action. */
@@ -338,7 +338,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, action, pParentIndices, unIndexArrayCount);
+        return callJPI(action, pParentIndices, unIndexArrayCount, __functionAddress);
     }
 
     /** Fills the given array with the index of each bone's parent in the skeleton associated with the given action. */
@@ -355,7 +355,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, action, nBoneIndex, pchBoneName, unNameBufferSize);
+        return callJPI(action, nBoneIndex, pchBoneName, unNameBufferSize, __functionAddress);
     }
 
     /** Fills the given buffer with the name of the bone at the given index in the skeleton associated with the given action. */
@@ -372,7 +372,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, action, eTransformSpace, eReferencePose, pTransformArray, unTransformArrayCount);
+        return callJPI(action, eTransformSpace, eReferencePose, pTransformArray, unTransformArrayCount, __functionAddress);
     }
 
     /**
@@ -394,7 +394,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, action, pSkeletalTrackingLevel);
+        return callJPI(action, pSkeletalTrackingLevel, __functionAddress);
     }
 
     /** Reads the level of accuracy to which the controller is able to track the user to recreate a skeletal pose. */
@@ -414,7 +414,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, action, eTransformSpace, eMotionRange, pTransformArray, unTransformArrayCount);
+        return callJPI(action, eTransformSpace, eMotionRange, pTransformArray, unTransformArrayCount, __functionAddress);
     }
 
     /**
@@ -436,7 +436,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, action, pSkeletalSummaryData);
+        return callJPI(action, pSkeletalSummaryData, __functionAddress);
     }
 
     /** Reads summary information about the current pose of the skeleton associated with the given action. */
@@ -453,7 +453,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, action, eMotionRange, pvCompressedData, unCompressedSize, punRequiredCompressedSize);
+        return callJPPI(action, eMotionRange, pvCompressedData, unCompressedSize, punRequiredCompressedSize, __functionAddress);
     }
 
     /**
@@ -478,7 +478,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pvCompressedBuffer, unCompressedBufferSize, eTransformSpace, pTransformArray, unTransformArrayCount);
+        return callPPI(pvCompressedBuffer, unCompressedBufferSize, eTransformSpace, pTransformArray, unTransformArrayCount, __functionAddress);
     }
 
     /**
@@ -500,7 +500,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJJI(__functionAddress, action, fStartSecondsFromNow, fDurationSeconds, fFrequency, fAmplitude, ulRestrictToDevice);
+        return callJJI(action, fStartSecondsFromNow, fDurationSeconds, fFrequency, fAmplitude, ulRestrictToDevice, __functionAddress);
     }
 
     // --- [ VRInput_GetActionOrigins ] ---
@@ -511,7 +511,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJJPI(__functionAddress, actionSetHandle, digitalActionHandle, originsOut, originOutCount);
+        return callJJPI(actionSetHandle, digitalActionHandle, originsOut, originOutCount, __functionAddress);
     }
 
     /** Retrieve origin handles for an action. */
@@ -528,7 +528,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, origin, pchNameArray, unNameArraySize, unStringSectionsToInclude);
+        return callJPI(origin, pchNameArray, unNameArraySize, unStringSectionsToInclude, __functionAddress);
     }
 
     /**
@@ -550,7 +550,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, origin, pOriginInfo, unOriginInfoSize);
+        return callJPI(origin, pOriginInfo, unOriginInfoSize, __functionAddress);
     }
 
     /** Retrieves useful information for the origin of this action. */
@@ -574,7 +574,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJJI(__functionAddress, actionSetHandle, ulActionHandle);
+        return callJJI(actionSetHandle, ulActionHandle, __functionAddress);
     }
 
     // --- [ VRInput_ShowBindingsForActionSet ] ---
@@ -585,7 +585,7 @@ public class VRInput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJI(__functionAddress, pSets, unSizeOfVRSelectedActionSet_t, unSetCount, originToHighlight);
+        return callPJI(pSets, unSizeOfVRSelectedActionSet_t, unSetCount, originToHighlight, __functionAddress);
     }
 
     /** Shows the current binding all the actions in the specified action sets. */

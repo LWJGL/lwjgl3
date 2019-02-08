@@ -31,7 +31,7 @@ public class VRNotifications {
             check(__functionAddress);
             if (pImage != NULL) { NotificationBitmap.validate(pImage); }
         }
-        return callJJPPPI(__functionAddress, ulOverlayHandle, ulUserValue, type, pchText, style, pImage, pNotificationId);
+        return callJJPPPI(ulOverlayHandle, ulUserValue, type, pchText, style, pImage, pNotificationId, __functionAddress);
     }
 
     /**
@@ -87,7 +87,7 @@ public class VRNotifications {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress, notificationId);
+        return callI(notificationId, __functionAddress);
     }
 
 }

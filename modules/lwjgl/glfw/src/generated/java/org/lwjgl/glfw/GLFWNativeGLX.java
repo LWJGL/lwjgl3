@@ -49,7 +49,7 @@ public class GLFWNativeGLX {
         if (CHECKS) {
             check(window);
         }
-        return invokePP(__functionAddress, window);
+        return invokePP(window, __functionAddress);
     }
 
     // --- [ glfwGetGLXWindow ] ---
@@ -71,7 +71,7 @@ public class GLFWNativeGLX {
         if (CHECKS) {
             check(window);
         }
-        return invokePP(__functionAddress, window);
+        return invokePP(window, __functionAddress);
     }
 
 }

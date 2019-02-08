@@ -343,7 +343,7 @@ public class NVXDeviceGeneratedCommands {
             check(__functionAddress);
             VkCmdProcessCommandsInfoNVX.validate(pProcessCommandsInfo);
         }
-        callPPV(__functionAddress, commandBuffer.address(), pProcessCommandsInfo);
+        callPPV(commandBuffer.address(), pProcessCommandsInfo, __functionAddress);
     }
 
     /**
@@ -401,7 +401,7 @@ public class NVXDeviceGeneratedCommands {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPV(__functionAddress, commandBuffer.address(), pReserveSpaceInfo);
+        callPPV(commandBuffer.address(), pReserveSpaceInfo, __functionAddress);
     }
 
     /**
@@ -468,7 +468,7 @@ public class NVXDeviceGeneratedCommands {
             VkIndirectCommandsLayoutCreateInfoNVX.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo, pAllocator, pIndirectCommandsLayout);
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pIndirectCommandsLayout, __functionAddress);
     }
 
     /**
@@ -534,7 +534,7 @@ public class NVXDeviceGeneratedCommands {
             check(__functionAddress);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        callPJPV(__functionAddress, device.address(), indirectCommandsLayout, pAllocator);
+        callPJPV(device.address(), indirectCommandsLayout, pAllocator, __functionAddress);
     }
 
     /**
@@ -589,7 +589,7 @@ public class NVXDeviceGeneratedCommands {
             VkObjectTableCreateInfoNVX.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo, pAllocator, pObjectTable);
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pObjectTable, __functionAddress);
     }
 
     /**
@@ -655,7 +655,7 @@ public class NVXDeviceGeneratedCommands {
             check(__functionAddress);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        callPJPV(__functionAddress, device.address(), objectTable, pAllocator);
+        callPJPV(device.address(), objectTable, pAllocator, __functionAddress);
     }
 
     /**
@@ -718,7 +718,7 @@ public class NVXDeviceGeneratedCommands {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, device.address(), objectTable, objectCount, ppObjectTableEntries, pObjectIndices);
+        return callPJPPI(device.address(), objectTable, objectCount, ppObjectTableEntries, pObjectIndices, __functionAddress);
     }
 
     /**
@@ -804,7 +804,7 @@ public class NVXDeviceGeneratedCommands {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, device.address(), objectTable, objectCount, pObjectEntryTypes, pObjectIndices);
+        return callPJPPI(device.address(), objectTable, objectCount, pObjectEntryTypes, pObjectIndices, __functionAddress);
     }
 
     /**
@@ -881,7 +881,7 @@ public class NVXDeviceGeneratedCommands {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, physicalDevice.address(), pFeatures, pLimits);
+        callPPPV(physicalDevice.address(), pFeatures, pLimits, __functionAddress);
     }
 
     /**
@@ -927,7 +927,7 @@ public class NVXDeviceGeneratedCommands {
             VkIndirectCommandsLayoutCreateInfoNVX.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pIndirectCommandsLayout);
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pIndirectCommandsLayout, __functionAddress);
     }
 
     /** Array version of: {@link #vkCreateObjectTableNVX CreateObjectTableNVX} */
@@ -940,7 +940,7 @@ public class NVXDeviceGeneratedCommands {
             VkObjectTableCreateInfoNVX.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pObjectTable);
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pObjectTable, __functionAddress);
     }
 
     /** Array version of: {@link #vkRegisterObjectsNVX RegisterObjectsNVX} */
@@ -951,7 +951,7 @@ public class NVXDeviceGeneratedCommands {
             check(__functionAddress);
             check(pObjectIndices, ppObjectTableEntries.remaining());
         }
-        return callPJPPI(__functionAddress, device.address(), objectTable, ppObjectTableEntries.remaining(), memAddress(ppObjectTableEntries), pObjectIndices);
+        return callPJPPI(device.address(), objectTable, ppObjectTableEntries.remaining(), memAddress(ppObjectTableEntries), pObjectIndices, __functionAddress);
     }
 
     /** Array version of: {@link #vkUnregisterObjectsNVX UnregisterObjectsNVX} */
@@ -962,7 +962,7 @@ public class NVXDeviceGeneratedCommands {
             check(__functionAddress);
             check(pObjectIndices, pObjectEntryTypes.length);
         }
-        return callPJPPI(__functionAddress, device.address(), objectTable, pObjectEntryTypes.length, pObjectEntryTypes, pObjectIndices);
+        return callPJPPI(device.address(), objectTable, pObjectEntryTypes.length, pObjectEntryTypes, pObjectIndices, __functionAddress);
     }
 
 }

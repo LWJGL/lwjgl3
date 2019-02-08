@@ -39,7 +39,7 @@ public class HIClientpixmap {
             check(config);
             EGLClientPixmapHI.validate(pixmap);
         }
-        return callPPPP(__functionAddress, dpy, config, pixmap);
+        return callPPPP(dpy, config, pixmap, __functionAddress);
     }
 
     @NativeType("EGLSurface")

@@ -76,7 +76,7 @@ public class INTELSubgroups {
             check(__functionAddress);
             check(kernel);
         }
-        return callPPPPPPPI(__functionAddress, kernel, device, param_name, input_value_size, input_value, param_value_size, param_value, param_value_size_ret);
+        return callPPPPPPPI(kernel, device, param_name, input_value_size, input_value, param_value_size, param_value, param_value_size_ret, __functionAddress);
     }
 
     /**

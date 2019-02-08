@@ -2624,7 +2624,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCString getCString} */
     public static long nclang_getCString(long string) {
         long __functionAddress = Functions.getCString;
-        return invokePP(__functionAddress, string);
+        return invokePP(string, __functionAddress);
     }
 
     /** Retrieve the character data associated with the given string. */
@@ -2640,7 +2640,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_disposeString disposeString} */
     public static void nclang_disposeString(long string) {
         long __functionAddress = Functions.disposeString;
-        invokePV(__functionAddress, string);
+        invokePV(string, __functionAddress);
     }
 
     /** Free the given string. */
@@ -2653,7 +2653,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_disposeStringSet disposeStringSet} */
     public static void nclang_disposeStringSet(long set) {
         long __functionAddress = Functions.disposeStringSet;
-        invokePV(__functionAddress, set);
+        invokePV(set, __functionAddress);
     }
 
     /** Free the given string set. */
@@ -2704,7 +2704,7 @@ public class ClangIndex {
     @NativeType("CXIndex")
     public static long clang_createIndex(@NativeType("int") boolean excludeDeclarationsFromPCH, @NativeType("int") boolean displayDiagnostics) {
         long __functionAddress = Functions.createIndex;
-        return invokeP(__functionAddress, excludeDeclarationsFromPCH ? 1 : 0, displayDiagnostics ? 1 : 0);
+        return invokeP(excludeDeclarationsFromPCH ? 1 : 0, displayDiagnostics ? 1 : 0, __functionAddress);
     }
 
     // --- [ clang_disposeIndex ] ---
@@ -2719,7 +2719,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(index);
         }
-        invokePV(__functionAddress, index);
+        invokePV(index, __functionAddress);
     }
 
     // --- [ clang_CXIndex_setGlobalOptions ] ---
@@ -2742,7 +2742,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(index);
         }
-        invokePV(__functionAddress, index, options);
+        invokePV(index, options, __functionAddress);
     }
 
     // --- [ clang_CXIndex_getGlobalOptions ] ---
@@ -2758,7 +2758,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(index);
         }
-        return invokePI(__functionAddress, index);
+        return invokePI(index, __functionAddress);
     }
 
     // --- [ clang_CXIndex_setInvocationEmissionPathOption ] ---
@@ -2770,7 +2770,7 @@ public class ClangIndex {
             check(__functionAddress);
             check(index);
         }
-        invokePPV(__functionAddress, index, Path);
+        invokePPV(index, Path, __functionAddress);
     }
 
     /**
@@ -2806,7 +2806,7 @@ public class ClangIndex {
     // --- [ clang_getFileName ] ---
 
     /** Unsafe version of: {@link #clang_getFileName getFileName} */
-    public static native void nclang_getFileName(long __functionAddress, long SFile, long __result);
+    public static native void nclang_getFileName(long SFile, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getFileName getFileName} */
     public static void nclang_getFileName(long SFile, long __result) {
@@ -2814,7 +2814,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(SFile);
         }
-        nclang_getFileName(__functionAddress, SFile, __result);
+        nclang_getFileName(SFile, __functionAddress, __result);
     }
 
     /** Retrieve the complete file and path name of the given file. */
@@ -2832,7 +2832,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(SFile);
         }
-        return invokePJ(__functionAddress, SFile);
+        return invokePJ(SFile, __functionAddress);
     }
 
     // --- [ clang_getFileUniqueID ] ---
@@ -2843,7 +2843,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(file);
         }
-        return invokePPI(__functionAddress, file, outID);
+        return invokePPI(file, outID, __functionAddress);
     }
 
     /**
@@ -2871,7 +2871,7 @@ public class ClangIndex {
             check(tu);
             check(file);
         }
-        return invokePPI(__functionAddress, tu, file) != 0;
+        return invokePPI(tu, file, __functionAddress) != 0;
     }
 
     // --- [ clang_getFile ] ---
@@ -2882,7 +2882,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(tu);
         }
-        return invokePPP(__functionAddress, tu, file_name);
+        return invokePPP(tu, file_name, __functionAddress);
     }
 
     /**
@@ -2935,7 +2935,7 @@ public class ClangIndex {
             check(tu);
             check(file);
         }
-        return invokePPPP(__functionAddress, tu, file, size);
+        return invokePPPP(tu, file, size, __functionAddress);
     }
 
     /**
@@ -2965,13 +2965,13 @@ public class ClangIndex {
     @NativeType("int")
     public static boolean clang_File_isEqual(@NativeType("CXFile") long file1, @NativeType("CXFile") long file2) {
         long __functionAddress = Functions.File_isEqual;
-        return invokePPI(__functionAddress, file1, file2) != 0;
+        return invokePPI(file1, file2, __functionAddress) != 0;
     }
 
     // --- [ clang_File_tryGetRealPathName ] ---
 
     /** Unsafe version of: {@link #clang_File_tryGetRealPathName File_tryGetRealPathName} */
-    public static native void nclang_File_tryGetRealPathName(long __functionAddress, long file, long __result);
+    public static native void nclang_File_tryGetRealPathName(long file, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_File_tryGetRealPathName File_tryGetRealPathName} */
     public static void nclang_File_tryGetRealPathName(long file, long __result) {
@@ -2980,7 +2980,7 @@ public class ClangIndex {
             check(__functionAddress);
             check(file);
         }
-        nclang_File_tryGetRealPathName(__functionAddress, file, __result);
+        nclang_File_tryGetRealPathName(file, __functionAddress, __result);
     }
 
     /**
@@ -3015,7 +3015,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_equalLocations equalLocations} */
     public static int nclang_equalLocations(long loc1, long loc2) {
         long __functionAddress = Functions.equalLocations;
-        return invokePPI(__functionAddress, loc1, loc2);
+        return invokePPI(loc1, loc2, __functionAddress);
     }
 
     /**
@@ -3031,7 +3031,7 @@ public class ClangIndex {
     // --- [ clang_getLocation ] ---
 
     /** Unsafe version of: {@link #clang_getLocation getLocation} */
-    public static native void nclang_getLocation(long __functionAddress, long tu, long file, int line, int column, long __result);
+    public static native void nclang_getLocation(long tu, long file, int line, int column, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getLocation getLocation} */
     public static void nclang_getLocation(long tu, long file, int line, int column, long __result) {
@@ -3040,7 +3040,7 @@ public class ClangIndex {
             check(tu);
             check(file);
         }
-        nclang_getLocation(__functionAddress, tu, file, line, column, __result);
+        nclang_getLocation(tu, file, line, column, __functionAddress, __result);
     }
 
     /** Retrieves the source location associated with a given file/line/column in a particular translation unit. */
@@ -3052,7 +3052,7 @@ public class ClangIndex {
     // --- [ clang_getLocationForOffset ] ---
 
     /** Unsafe version of: {@link #clang_getLocationForOffset getLocationForOffset} */
-    public static native void nclang_getLocationForOffset(long __functionAddress, long tu, long file, int offset, long __result);
+    public static native void nclang_getLocationForOffset(long tu, long file, int offset, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getLocationForOffset getLocationForOffset} */
     public static void nclang_getLocationForOffset(long tu, long file, int offset, long __result) {
@@ -3061,7 +3061,7 @@ public class ClangIndex {
             check(tu);
             check(file);
         }
-        nclang_getLocationForOffset(__functionAddress, tu, file, offset, __result);
+        nclang_getLocationForOffset(tu, file, offset, __functionAddress, __result);
     }
 
     /** Retrieves the source location associated with a given character offset in a particular translation unit. */
@@ -3075,7 +3075,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Location_isInSystemHeader Location_isInSystemHeader} */
     public static int nclang_Location_isInSystemHeader(long location) {
         long __functionAddress = Functions.Location_isInSystemHeader;
-        return invokePI(__functionAddress, location);
+        return invokePI(location, __functionAddress);
     }
 
     /** Returns non-zero if the given source location is in a system header. */
@@ -3089,7 +3089,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Location_isFromMainFile Location_isFromMainFile} */
     public static int nclang_Location_isFromMainFile(long location) {
         long __functionAddress = Functions.Location_isFromMainFile;
-        return invokePI(__functionAddress, location);
+        return invokePI(location, __functionAddress);
     }
 
     /** Returns non-zero if the given source location is in the main file of the corresponding translation unit. */
@@ -3118,12 +3118,12 @@ public class ClangIndex {
     // --- [ clang_getRange ] ---
 
     /** Unsafe version of: {@link #clang_getRange getRange} */
-    public static native void nclang_getRange(long __functionAddress, long begin, long end, long __result);
+    public static native void nclang_getRange(long begin, long end, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getRange getRange} */
     public static void nclang_getRange(long begin, long end, long __result) {
         long __functionAddress = Functions.getRange;
-        nclang_getRange(__functionAddress, begin, end, __result);
+        nclang_getRange(begin, end, __functionAddress, __result);
     }
 
     /** Retrieve a source range given the beginning and ending source locations. */
@@ -3137,7 +3137,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_equalRanges equalRanges} */
     public static int nclang_equalRanges(long range1, long range2) {
         long __functionAddress = Functions.equalRanges;
-        return invokePPI(__functionAddress, range1, range2);
+        return invokePPI(range1, range2, __functionAddress);
     }
 
     /**
@@ -3155,7 +3155,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Range_isNull Range_isNull} */
     public static int nclang_Range_isNull(long range) {
         long __functionAddress = Functions.Range_isNull;
-        return invokePI(__functionAddress, range);
+        return invokePI(range, __functionAddress);
     }
 
     /** Returns non-zero if {@code range} is null. */
@@ -3169,7 +3169,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getExpansionLocation getExpansionLocation} */
     public static void nclang_getExpansionLocation(long location, long file, long line, long column, long offset) {
         long __functionAddress = Functions.getExpansionLocation;
-        invokePPPPPV(__functionAddress, location, file, line, column, offset);
+        invokePPPPPV(location, file, line, column, offset, __functionAddress);
     }
 
     /**
@@ -3198,7 +3198,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getPresumedLocation getPresumedLocation} */
     public static void nclang_getPresumedLocation(long location, long filename, long line, long column) {
         long __functionAddress = Functions.getPresumedLocation;
-        invokePPPPV(__functionAddress, location, filename, line, column);
+        invokePPPPV(location, filename, line, column, __functionAddress);
     }
 
     /**
@@ -3244,7 +3244,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getSpellingLocation getSpellingLocation} */
     public static void nclang_getSpellingLocation(long location, long file, long line, long column, long offset) {
         long __functionAddress = Functions.getSpellingLocation;
-        invokePPPPPV(__functionAddress, location, file, line, column, offset);
+        invokePPPPPV(location, file, line, column, offset, __functionAddress);
     }
 
     /**
@@ -3273,7 +3273,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getFileLocation getFileLocation} */
     public static void nclang_getFileLocation(long location, long file, long line, long column, long offset) {
         long __functionAddress = Functions.getFileLocation;
-        invokePPPPPV(__functionAddress, location, file, line, column, offset);
+        invokePPPPPV(location, file, line, column, offset, __functionAddress);
     }
 
     /**
@@ -3301,12 +3301,12 @@ public class ClangIndex {
     // --- [ clang_getRangeStart ] ---
 
     /** Unsafe version of: {@link #clang_getRangeStart getRangeStart} */
-    public static native void nclang_getRangeStart(long __functionAddress, long range, long __result);
+    public static native void nclang_getRangeStart(long range, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getRangeStart getRangeStart} */
     public static void nclang_getRangeStart(long range, long __result) {
         long __functionAddress = Functions.getRangeStart;
-        nclang_getRangeStart(__functionAddress, range, __result);
+        nclang_getRangeStart(range, __functionAddress, __result);
     }
 
     /** Retrieve a source location representing the first character within a source range. */
@@ -3318,12 +3318,12 @@ public class ClangIndex {
     // --- [ clang_getRangeEnd ] ---
 
     /** Unsafe version of: {@link #clang_getRangeEnd getRangeEnd} */
-    public static native void nclang_getRangeEnd(long __functionAddress, long range, long __result);
+    public static native void nclang_getRangeEnd(long range, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getRangeEnd getRangeEnd} */
     public static void nclang_getRangeEnd(long range, long __result) {
         long __functionAddress = Functions.getRangeEnd;
-        nclang_getRangeEnd(__functionAddress, range, __result);
+        nclang_getRangeEnd(range, __functionAddress, __result);
     }
 
     /** Retrieve a source location representing the last character within a source range. */
@@ -3341,7 +3341,7 @@ public class ClangIndex {
             check(tu);
             check(file);
         }
-        return invokePPP(__functionAddress, tu, file);
+        return invokePPP(tu, file, __functionAddress);
     }
 
     /**
@@ -3364,7 +3364,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(tu);
         }
-        return invokePP(__functionAddress, tu);
+        return invokePP(tu, __functionAddress);
     }
 
     /**
@@ -3384,7 +3384,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_disposeSourceRangeList disposeSourceRangeList} */
     public static void nclang_disposeSourceRangeList(long ranges) {
         long __functionAddress = Functions.disposeSourceRangeList;
-        invokePV(__functionAddress, ranges);
+        invokePV(ranges, __functionAddress);
     }
 
     /** Destroy the given {@code CXSourceRangeList}. */
@@ -3401,7 +3401,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diags);
         }
-        return invokePI(__functionAddress, Diags);
+        return invokePI(Diags, __functionAddress);
     }
 
     // --- [ clang_getDiagnosticInSet ] ---
@@ -3420,7 +3420,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diags);
         }
-        return invokePP(__functionAddress, Diags, Index);
+        return invokePP(Diags, Index, __functionAddress);
     }
 
     // --- [ clang_loadDiagnostics ] ---
@@ -3428,7 +3428,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_loadDiagnostics loadDiagnostics} */
     public static long nclang_loadDiagnostics(long file, long error, long errorString) {
         long __functionAddress = Functions.loadDiagnostics;
-        return invokePPPP(__functionAddress, file, error, errorString);
+        return invokePPPP(file, error, errorString, __functionAddress);
     }
 
     /**
@@ -3481,7 +3481,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diags);
         }
-        invokePV(__functionAddress, Diags);
+        invokePV(Diags, __functionAddress);
     }
 
     // --- [ clang_getChildDiagnostics ] ---
@@ -3497,7 +3497,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(D);
         }
-        return invokePP(__functionAddress, D);
+        return invokePP(D, __functionAddress);
     }
 
     // --- [ clang_getNumDiagnostics ] ---
@@ -3509,7 +3509,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Unit);
         }
-        return invokePI(__functionAddress, Unit);
+        return invokePI(Unit, __functionAddress);
     }
 
     // --- [ clang_getDiagnostic ] ---
@@ -3528,7 +3528,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Unit);
         }
-        return invokePP(__functionAddress, Unit, Index);
+        return invokePP(Unit, Index, __functionAddress);
     }
 
     // --- [ clang_getDiagnosticSetFromTU ] ---
@@ -3544,7 +3544,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Unit);
         }
-        return invokePP(__functionAddress, Unit);
+        return invokePP(Unit, __functionAddress);
     }
 
     // --- [ clang_disposeDiagnostic ] ---
@@ -3555,13 +3555,13 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diagnostic);
         }
-        invokePV(__functionAddress, Diagnostic);
+        invokePV(Diagnostic, __functionAddress);
     }
 
     // --- [ clang_formatDiagnostic ] ---
 
     /** Unsafe version of: {@link #clang_formatDiagnostic formatDiagnostic} */
-    public static native void nclang_formatDiagnostic(long __functionAddress, long Diagnostic, int Options, long __result);
+    public static native void nclang_formatDiagnostic(long Diagnostic, int Options, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_formatDiagnostic formatDiagnostic} */
     public static void nclang_formatDiagnostic(long Diagnostic, int Options, long __result) {
@@ -3569,7 +3569,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diagnostic);
         }
-        nclang_formatDiagnostic(__functionAddress, Diagnostic, Options, __result);
+        nclang_formatDiagnostic(Diagnostic, Options, __functionAddress, __result);
     }
 
     /**
@@ -3609,13 +3609,13 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diagnostic);
         }
-        return invokePI(__functionAddress, Diagnostic);
+        return invokePI(Diagnostic, __functionAddress);
     }
 
     // --- [ clang_getDiagnosticLocation ] ---
 
     /** Unsafe version of: {@link #clang_getDiagnosticLocation getDiagnosticLocation} */
-    public static native void nclang_getDiagnosticLocation(long __functionAddress, long Diagnostic, long __result);
+    public static native void nclang_getDiagnosticLocation(long Diagnostic, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getDiagnosticLocation getDiagnosticLocation} */
     public static void nclang_getDiagnosticLocation(long Diagnostic, long __result) {
@@ -3623,7 +3623,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diagnostic);
         }
-        nclang_getDiagnosticLocation(__functionAddress, Diagnostic, __result);
+        nclang_getDiagnosticLocation(Diagnostic, __functionAddress, __result);
     }
 
     /**
@@ -3639,7 +3639,7 @@ public class ClangIndex {
     // --- [ clang_getDiagnosticSpelling ] ---
 
     /** Unsafe version of: {@link #clang_getDiagnosticSpelling getDiagnosticSpelling} */
-    public static native void nclang_getDiagnosticSpelling(long __functionAddress, long Diagnostic, long __result);
+    public static native void nclang_getDiagnosticSpelling(long Diagnostic, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getDiagnosticSpelling getDiagnosticSpelling} */
     public static void nclang_getDiagnosticSpelling(long Diagnostic, long __result) {
@@ -3647,7 +3647,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diagnostic);
         }
-        nclang_getDiagnosticSpelling(__functionAddress, Diagnostic, __result);
+        nclang_getDiagnosticSpelling(Diagnostic, __functionAddress, __result);
     }
 
     /** Retrieve the text of the given diagnostic. */
@@ -3659,7 +3659,7 @@ public class ClangIndex {
     // --- [ clang_getDiagnosticOption ] ---
 
     /** Unsafe version of: {@link #clang_getDiagnosticOption getDiagnosticOption} */
-    public static native void nclang_getDiagnosticOption(long __functionAddress, long Diag, long Disable, long __result);
+    public static native void nclang_getDiagnosticOption(long Diag, long Disable, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getDiagnosticOption getDiagnosticOption} */
     public static void nclang_getDiagnosticOption(long Diag, long Disable, long __result) {
@@ -3667,7 +3667,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diag);
         }
-        nclang_getDiagnosticOption(__functionAddress, Diag, Disable, __result);
+        nclang_getDiagnosticOption(Diag, Disable, __functionAddress, __result);
     }
 
     /**
@@ -3698,13 +3698,13 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diagnostic);
         }
-        return invokePI(__functionAddress, Diagnostic);
+        return invokePI(Diagnostic, __functionAddress);
     }
 
     // --- [ clang_getDiagnosticCategoryText ] ---
 
     /** Unsafe version of: {@link #clang_getDiagnosticCategoryText getDiagnosticCategoryText} */
-    public static native void nclang_getDiagnosticCategoryText(long __functionAddress, long Diagnostic, long __result);
+    public static native void nclang_getDiagnosticCategoryText(long Diagnostic, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getDiagnosticCategoryText getDiagnosticCategoryText} */
     public static void nclang_getDiagnosticCategoryText(long Diagnostic, long __result) {
@@ -3712,7 +3712,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diagnostic);
         }
-        nclang_getDiagnosticCategoryText(__functionAddress, Diagnostic, __result);
+        nclang_getDiagnosticCategoryText(Diagnostic, __functionAddress, __result);
     }
 
     /**
@@ -3734,13 +3734,13 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diagnostic);
         }
-        return invokePI(__functionAddress, Diagnostic);
+        return invokePI(Diagnostic, __functionAddress);
     }
 
     // --- [ clang_getDiagnosticRange ] ---
 
     /** Unsafe version of: {@link #clang_getDiagnosticRange getDiagnosticRange} */
-    public static native void nclang_getDiagnosticRange(long __functionAddress, long Diagnostic, int Range, long __result);
+    public static native void nclang_getDiagnosticRange(long Diagnostic, int Range, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getDiagnosticRange getDiagnosticRange} */
     public static void nclang_getDiagnosticRange(long Diagnostic, int Range, long __result) {
@@ -3748,7 +3748,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diagnostic);
         }
-        nclang_getDiagnosticRange(__functionAddress, Diagnostic, Range, __result);
+        nclang_getDiagnosticRange(Diagnostic, Range, __functionAddress, __result);
     }
 
     /**
@@ -3775,13 +3775,13 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diagnostic);
         }
-        return invokePI(__functionAddress, Diagnostic);
+        return invokePI(Diagnostic, __functionAddress);
     }
 
     // --- [ clang_getDiagnosticFixIt ] ---
 
     /** Unsafe version of: {@link #clang_getDiagnosticFixIt getDiagnosticFixIt} */
-    public static native void nclang_getDiagnosticFixIt(long __functionAddress, long Diagnostic, int FixIt, long ReplacementRange, long __result);
+    public static native void nclang_getDiagnosticFixIt(long Diagnostic, int FixIt, long ReplacementRange, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getDiagnosticFixIt getDiagnosticFixIt} */
     public static void nclang_getDiagnosticFixIt(long Diagnostic, int FixIt, long ReplacementRange, long __result) {
@@ -3789,7 +3789,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Diagnostic);
         }
-        nclang_getDiagnosticFixIt(__functionAddress, Diagnostic, FixIt, ReplacementRange, __result);
+        nclang_getDiagnosticFixIt(Diagnostic, FixIt, ReplacementRange, __functionAddress, __result);
     }
 
     /**
@@ -3814,7 +3814,7 @@ public class ClangIndex {
     // --- [ clang_getTranslationUnitSpelling ] ---
 
     /** Unsafe version of: {@link #clang_getTranslationUnitSpelling getTranslationUnitSpelling} */
-    public static native void nclang_getTranslationUnitSpelling(long __functionAddress, long CTUnit, long __result);
+    public static native void nclang_getTranslationUnitSpelling(long CTUnit, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getTranslationUnitSpelling getTranslationUnitSpelling} */
     public static void nclang_getTranslationUnitSpelling(long CTUnit, long __result) {
@@ -3822,7 +3822,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(CTUnit);
         }
-        nclang_getTranslationUnitSpelling(__functionAddress, CTUnit, __result);
+        nclang_getTranslationUnitSpelling(CTUnit, __functionAddress, __result);
     }
 
     /** Get the original translation unit source file name. */
@@ -3845,7 +3845,7 @@ public class ClangIndex {
             check(CIdx);
             if (unsaved_files != NULL) { CXUnsavedFile.validate(unsaved_files, num_unsaved_files); }
         }
-        return invokePPPPP(__functionAddress, CIdx, source_filename, num_clang_command_line_args, clang_command_line_args, num_unsaved_files, unsaved_files);
+        return invokePPPPP(CIdx, source_filename, num_clang_command_line_args, clang_command_line_args, num_unsaved_files, unsaved_files, __functionAddress);
     }
 
     /**
@@ -3924,7 +3924,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(CIdx);
         }
-        return invokePPP(__functionAddress, CIdx, ast_filename);
+        return invokePPP(CIdx, ast_filename, __functionAddress);
     }
 
     /**
@@ -3963,7 +3963,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(CIdx);
         }
-        return invokePPPI(__functionAddress, CIdx, ast_filename, out_TU);
+        return invokePPPI(CIdx, ast_filename, out_TU, __functionAddress);
     }
 
     /**
@@ -4029,7 +4029,7 @@ public class ClangIndex {
             check(CIdx);
             if (unsaved_files != NULL) { CXUnsavedFile.validate(unsaved_files, num_unsaved_files); }
         }
-        return invokePPPPP(__functionAddress, CIdx, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, options);
+        return invokePPPPP(CIdx, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, options, __functionAddress);
     }
 
     /**
@@ -4074,7 +4074,7 @@ public class ClangIndex {
             check(CIdx);
             if (unsaved_files != NULL) { CXUnsavedFile.validate(unsaved_files, num_unsaved_files); }
         }
-        return invokePPPPPI(__functionAddress, CIdx, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, options, out_TU);
+        return invokePPPPPI(CIdx, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, options, out_TU, __functionAddress);
     }
 
     /**
@@ -4153,7 +4153,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(CIdx);
         }
-        return invokePPPPPI(__functionAddress, CIdx, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, options, out_TU);
+        return invokePPPPPI(CIdx, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, options, out_TU, __functionAddress);
     }
 
     /**
@@ -4202,7 +4202,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        return invokePI(__functionAddress, TU);
+        return invokePI(TU, __functionAddress);
     }
 
     // --- [ clang_saveTranslationUnit ] ---
@@ -4213,7 +4213,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        return invokePPI(__functionAddress, TU, FileName, options);
+        return invokePPI(TU, FileName, options, __functionAddress);
     }
 
     /**
@@ -4276,7 +4276,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        return invokePI(__functionAddress, TU) != 0;
+        return invokePI(TU, __functionAddress) != 0;
     }
 
     // --- [ clang_disposeTranslationUnit ] ---
@@ -4287,7 +4287,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        invokePV(__functionAddress, TU);
+        invokePV(TU, __functionAddress);
     }
 
     // --- [ clang_defaultReparseOptions ] ---
@@ -4304,7 +4304,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        return invokePI(__functionAddress, TU);
+        return invokePI(TU, __functionAddress);
     }
 
     // --- [ clang_reparseTranslationUnit ] ---
@@ -4320,7 +4320,7 @@ public class ClangIndex {
             check(TU);
             if (unsaved_files != NULL) { CXUnsavedFile.validate(unsaved_files, num_unsaved_files); }
         }
-        return invokePPI(__functionAddress, TU, num_unsaved_files, unsaved_files, options);
+        return invokePPI(TU, num_unsaved_files, unsaved_files, options, __functionAddress);
     }
 
     /**
@@ -4355,7 +4355,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getTUResourceUsageName getTUResourceUsageName} */
     public static long nclang_getTUResourceUsageName(int kind) {
         long __functionAddress = Functions.getTUResourceUsageName;
-        return invokeP(__functionAddress, kind);
+        return invokeP(kind, __functionAddress);
     }
 
     /** Returns the human-readable null-terminated C string that represents the name of the memory category. This string should never be freed. */
@@ -4369,7 +4369,7 @@ public class ClangIndex {
     // --- [ clang_getCXTUResourceUsage ] ---
 
     /** Unsafe version of: {@link #clang_getCXTUResourceUsage getCXTUResourceUsage} */
-    public static native void nclang_getCXTUResourceUsage(long __functionAddress, long TU, long __result);
+    public static native void nclang_getCXTUResourceUsage(long TU, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCXTUResourceUsage getCXTUResourceUsage} */
     public static void nclang_getCXTUResourceUsage(long TU, long __result) {
@@ -4377,7 +4377,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        nclang_getCXTUResourceUsage(__functionAddress, TU, __result);
+        nclang_getCXTUResourceUsage(TU, __functionAddress, __result);
     }
 
     /** Return the memory usage of a translation unit.  This object should be released with {@link #clang_disposeCXTUResourceUsage disposeCXTUResourceUsage}. */
@@ -4390,7 +4390,7 @@ public class ClangIndex {
 
     public static void nclang_disposeCXTUResourceUsage(long usage) {
         long __functionAddress = Functions.disposeCXTUResourceUsage;
-        invokePV(__functionAddress, usage);
+        invokePV(usage, __functionAddress);
     }
 
     public static void clang_disposeCXTUResourceUsage(CXTUResourceUsage usage) {
@@ -4410,7 +4410,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(CTUnit);
         }
-        return invokePP(__functionAddress, CTUnit);
+        return invokePP(CTUnit, __functionAddress);
     }
 
     // --- [ clang_TargetInfo_dispose ] ---
@@ -4421,13 +4421,13 @@ public class ClangIndex {
         if (CHECKS) {
             check(Info);
         }
-        invokePV(__functionAddress, Info);
+        invokePV(Info, __functionAddress);
     }
 
     // --- [ clang_TargetInfo_getTriple ] ---
 
     /** Unsafe version of: {@link #clang_TargetInfo_getTriple TargetInfo_getTriple} */
-    public static native void nclang_TargetInfo_getTriple(long __functionAddress, long Info, long __result);
+    public static native void nclang_TargetInfo_getTriple(long Info, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_TargetInfo_getTriple TargetInfo_getTriple} */
     public static void nclang_TargetInfo_getTriple(long Info, long __result) {
@@ -4435,7 +4435,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Info);
         }
-        nclang_TargetInfo_getTriple(__functionAddress, Info, __result);
+        nclang_TargetInfo_getTriple(Info, __functionAddress, __result);
     }
 
     /**
@@ -4460,7 +4460,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Info);
         }
-        return invokePI(__functionAddress, Info);
+        return invokePI(Info, __functionAddress);
     }
 
     // --- [ clang_getNullCursor ] ---
@@ -4483,7 +4483,7 @@ public class ClangIndex {
     // --- [ clang_getTranslationUnitCursor ] ---
 
     /** Unsafe version of: {@link #clang_getTranslationUnitCursor getTranslationUnitCursor} */
-    public static native void nclang_getTranslationUnitCursor(long __functionAddress, long TU, long __result);
+    public static native void nclang_getTranslationUnitCursor(long TU, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getTranslationUnitCursor getTranslationUnitCursor} */
     public static void nclang_getTranslationUnitCursor(long TU, long __result) {
@@ -4491,7 +4491,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        nclang_getTranslationUnitCursor(__functionAddress, TU, __result);
+        nclang_getTranslationUnitCursor(TU, __functionAddress, __result);
     }
 
     /**
@@ -4509,7 +4509,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_equalCursors equalCursors} */
     public static int nclang_equalCursors(long A, long B) {
         long __functionAddress = Functions.equalCursors;
-        return invokePPI(__functionAddress, A, B);
+        return invokePPI(A, B, __functionAddress);
     }
 
     /** Determine whether two cursors are equivalent. */
@@ -4523,7 +4523,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_isNull Cursor_isNull} */
     public static int nclang_Cursor_isNull(long cursor) {
         long __functionAddress = Functions.Cursor_isNull;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /** Returns non-zero if {@code cursor} is null. */
@@ -4537,7 +4537,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_hashCursor hashCursor} */
     public static int nclang_hashCursor(long cursor) {
         long __functionAddress = Functions.hashCursor;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /** Compute a hash value for the given cursor. */
@@ -4551,7 +4551,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCursorKind getCursorKind} */
     public static int nclang_getCursorKind(long cursor) {
         long __functionAddress = Functions.getCursorKind;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /** Retrieve the kind of the given cursor. */
@@ -4566,7 +4566,7 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_isDeclaration(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isDeclaration;
-        return invokeI(__functionAddress, kind) != 0;
+        return invokeI(kind, __functionAddress) != 0;
     }
 
     // --- [ clang_isInvalidDeclaration ] ---
@@ -4577,7 +4577,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /**
@@ -4603,7 +4603,7 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_isReference(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isReference;
-        return invokeI(__functionAddress, kind) != 0;
+        return invokeI(kind, __functionAddress) != 0;
     }
 
     // --- [ clang_isExpression ] ---
@@ -4612,7 +4612,7 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_isExpression(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isExpression;
-        return invokeI(__functionAddress, kind) != 0;
+        return invokeI(kind, __functionAddress) != 0;
     }
 
     // --- [ clang_isStatement ] ---
@@ -4621,7 +4621,7 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_isStatement(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isStatement;
-        return invokeI(__functionAddress, kind) != 0;
+        return invokeI(kind, __functionAddress) != 0;
     }
 
     // --- [ clang_isAttribute ] ---
@@ -4630,7 +4630,7 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_isAttribute(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isAttribute;
-        return invokeI(__functionAddress, kind) != 0;
+        return invokeI(kind, __functionAddress) != 0;
     }
 
     // --- [ clang_Cursor_hasAttrs ] ---
@@ -4638,7 +4638,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_hasAttrs Cursor_hasAttrs} */
     public static int nclang_Cursor_hasAttrs(long C) {
         long __functionAddress = Functions.Cursor_hasAttrs;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine whether the given cursor has any attributes. */
@@ -4653,7 +4653,7 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_isInvalid(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isInvalid;
-        return invokeI(__functionAddress, kind) != 0;
+        return invokeI(kind, __functionAddress) != 0;
     }
 
     // --- [ clang_isTranslationUnit ] ---
@@ -4662,7 +4662,7 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_isTranslationUnit(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isTranslationUnit;
-        return invokeI(__functionAddress, kind) != 0;
+        return invokeI(kind, __functionAddress) != 0;
     }
 
     // --- [ clang_isPreprocessing ] ---
@@ -4671,7 +4671,7 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_isPreprocessing(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isPreprocessing;
-        return invokeI(__functionAddress, kind) != 0;
+        return invokeI(kind, __functionAddress) != 0;
     }
 
     // --- [ clang_isUnexposed ] ---
@@ -4680,7 +4680,7 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_isUnexposed(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isUnexposed;
-        return invokeI(__functionAddress, kind) != 0;
+        return invokeI(kind, __functionAddress) != 0;
     }
 
     // --- [ clang_getCursorLinkage ] ---
@@ -4688,7 +4688,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCursorLinkage getCursorLinkage} */
     public static int nclang_getCursorLinkage(long cursor) {
         long __functionAddress = Functions.getCursorLinkage;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /** Determine the linkage of the entity referred to by a given cursor. */
@@ -4702,7 +4702,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCursorVisibility getCursorVisibility} */
     public static int nclang_getCursorVisibility(long cursor) {
         long __functionAddress = Functions.getCursorVisibility;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /**
@@ -4725,7 +4725,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCursorAvailability getCursorAvailability} */
     public static int nclang_getCursorAvailability(long cursor) {
         long __functionAddress = Functions.getCursorAvailability;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /**
@@ -4749,7 +4749,7 @@ public class ClangIndex {
      */
     public static int nclang_getCursorPlatformAvailability(long cursor, long always_deprecated, long deprecated_message, long always_unavailable, long unavailable_message, long availability, int availability_size) {
         long __functionAddress = Functions.getCursorPlatformAvailability;
-        return invokePPPPPPI(__functionAddress, cursor, always_deprecated, deprecated_message, always_unavailable, unavailable_message, availability, availability_size);
+        return invokePPPPPPI(cursor, always_deprecated, deprecated_message, always_unavailable, unavailable_message, availability, availability_size, __functionAddress);
     }
 
     /**
@@ -4785,7 +4785,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_disposeCXPlatformAvailability disposeCXPlatformAvailability} */
     public static void nclang_disposeCXPlatformAvailability(long availability) {
         long __functionAddress = Functions.disposeCXPlatformAvailability;
-        invokePV(__functionAddress, availability);
+        invokePV(availability, __functionAddress);
     }
 
     /** Free the memory associated with a {@code CXPlatformAvailability} structure. */
@@ -4798,7 +4798,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCursorLanguage getCursorLanguage} */
     public static int nclang_getCursorLanguage(long cursor) {
         long __functionAddress = Functions.getCursorLanguage;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /** Determine the "language" of the entity referred to by a given cursor. */
@@ -4815,7 +4815,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /** Determine the "thread-local storage (TLS) kind" of the declaration referred to by a cursor. */
@@ -4829,7 +4829,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getTranslationUnit Cursor_getTranslationUnit} */
     public static long nclang_Cursor_getTranslationUnit(long cursor) {
         long __functionAddress = Functions.Cursor_getTranslationUnit;
-        return invokePP(__functionAddress, cursor);
+        return invokePP(cursor, __functionAddress);
     }
 
     /** Returns the translation unit that a cursor originated from. */
@@ -4855,7 +4855,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(cset);
         }
-        invokePV(__functionAddress, cset);
+        invokePV(cset, __functionAddress);
     }
 
     // --- [ clang_CXCursorSet_contains ] ---
@@ -4866,7 +4866,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(cset);
         }
-        return invokePPI(__functionAddress, cset, cursor);
+        return invokePPI(cset, cursor, __functionAddress);
     }
 
     /**
@@ -4887,7 +4887,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(cset);
         }
-        return invokePPI(__functionAddress, cset, cursor);
+        return invokePPI(cset, cursor, __functionAddress);
     }
 
     /**
@@ -4903,12 +4903,12 @@ public class ClangIndex {
     // --- [ clang_getCursorSemanticParent ] ---
 
     /** Unsafe version of: {@link #clang_getCursorSemanticParent getCursorSemanticParent} */
-    public static native void nclang_getCursorSemanticParent(long __functionAddress, long cursor, long __result);
+    public static native void nclang_getCursorSemanticParent(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorSemanticParent getCursorSemanticParent} */
     public static void nclang_getCursorSemanticParent(long cursor, long __result) {
         long __functionAddress = Functions.getCursorSemanticParent;
-        nclang_getCursorSemanticParent(__functionAddress, cursor, __result);
+        nclang_getCursorSemanticParent(cursor, __functionAddress, __result);
     }
 
     /**
@@ -4944,12 +4944,12 @@ public class ClangIndex {
     // --- [ clang_getCursorLexicalParent ] ---
 
     /** Unsafe version of: {@link #clang_getCursorLexicalParent getCursorLexicalParent} */
-    public static native void nclang_getCursorLexicalParent(long __functionAddress, long cursor, long __result);
+    public static native void nclang_getCursorLexicalParent(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorLexicalParent getCursorLexicalParent} */
     public static void nclang_getCursorLexicalParent(long cursor, long __result) {
         long __functionAddress = Functions.getCursorLexicalParent;
-        nclang_getCursorLexicalParent(__functionAddress, cursor, __result);
+        nclang_getCursorLexicalParent(cursor, __functionAddress, __result);
     }
 
     /**
@@ -4987,7 +4987,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getOverriddenCursors getOverriddenCursors} */
     public static void nclang_getOverriddenCursors(long cursor, long overridden, long num_overridden) {
         long __functionAddress = Functions.getOverriddenCursors;
-        invokePPPV(__functionAddress, cursor, overridden, num_overridden);
+        invokePPPV(cursor, overridden, num_overridden, __functionAddress);
     }
 
     /**
@@ -5024,7 +5024,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_disposeOverriddenCursors disposeOverriddenCursors} */
     public static void nclang_disposeOverriddenCursors(long overridden) {
         long __functionAddress = Functions.disposeOverriddenCursors;
-        invokePV(__functionAddress, overridden);
+        invokePV(overridden, __functionAddress);
     }
 
     /** Free the set of overridden cursors returned by {@code clang_getOverriddenCursors()}. */
@@ -5037,7 +5037,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getIncludedFile getIncludedFile} */
     public static long nclang_getIncludedFile(long cursor) {
         long __functionAddress = Functions.getIncludedFile;
-        return invokePP(__functionAddress, cursor);
+        return invokePP(cursor, __functionAddress);
     }
 
     /** Retrieve the file that is included by the given inclusion directive cursor. */
@@ -5049,7 +5049,7 @@ public class ClangIndex {
     // --- [ clang_getCursor ] ---
 
     /** Unsafe version of: {@link #clang_getCursor getCursor} */
-    public static native void nclang_getCursor(long __functionAddress, long TU, long location, long __result);
+    public static native void nclang_getCursor(long TU, long location, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursor getCursor} */
     public static void nclang_getCursor(long TU, long location, long __result) {
@@ -5057,7 +5057,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        nclang_getCursor(__functionAddress, TU, location, __result);
+        nclang_getCursor(TU, location, __functionAddress, __result);
     }
 
     /**
@@ -5078,12 +5078,12 @@ public class ClangIndex {
     // --- [ clang_getCursorLocation ] ---
 
     /** Unsafe version of: {@link #clang_getCursorLocation getCursorLocation} */
-    public static native void nclang_getCursorLocation(long __functionAddress, long cursor, long __result);
+    public static native void nclang_getCursorLocation(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorLocation getCursorLocation} */
     public static void nclang_getCursorLocation(long cursor, long __result) {
         long __functionAddress = Functions.getCursorLocation;
-        nclang_getCursorLocation(__functionAddress, cursor, __result);
+        nclang_getCursorLocation(cursor, __functionAddress, __result);
     }
 
     /**
@@ -5101,12 +5101,12 @@ public class ClangIndex {
     // --- [ clang_getCursorExtent ] ---
 
     /** Unsafe version of: {@link #clang_getCursorExtent getCursorExtent} */
-    public static native void nclang_getCursorExtent(long __functionAddress, long cursor, long __result);
+    public static native void nclang_getCursorExtent(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorExtent getCursorExtent} */
     public static void nclang_getCursorExtent(long cursor, long __result) {
         long __functionAddress = Functions.getCursorExtent;
-        nclang_getCursorExtent(__functionAddress, cursor, __result);
+        nclang_getCursorExtent(cursor, __functionAddress, __result);
     }
 
     /**
@@ -5124,12 +5124,12 @@ public class ClangIndex {
     // --- [ clang_getCursorType ] ---
 
     /** Unsafe version of: {@link #clang_getCursorType getCursorType} */
-    public static native void nclang_getCursorType(long __functionAddress, long C, long __result);
+    public static native void nclang_getCursorType(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorType getCursorType} */
     public static void nclang_getCursorType(long C, long __result) {
         long __functionAddress = Functions.getCursorType;
-        nclang_getCursorType(__functionAddress, C, __result);
+        nclang_getCursorType(C, __functionAddress, __result);
     }
 
     /** Retrieve the type of a {@code CXCursor} (if any). */
@@ -5141,12 +5141,12 @@ public class ClangIndex {
     // --- [ clang_getTypeSpelling ] ---
 
     /** Unsafe version of: {@link #clang_getTypeSpelling getTypeSpelling} */
-    public static native void nclang_getTypeSpelling(long __functionAddress, long CT, long __result);
+    public static native void nclang_getTypeSpelling(long CT, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getTypeSpelling getTypeSpelling} */
     public static void nclang_getTypeSpelling(long CT, long __result) {
         long __functionAddress = Functions.getTypeSpelling;
-        nclang_getTypeSpelling(__functionAddress, CT, __result);
+        nclang_getTypeSpelling(CT, __functionAddress, __result);
     }
 
     /**
@@ -5162,12 +5162,12 @@ public class ClangIndex {
     // --- [ clang_getTypedefDeclUnderlyingType ] ---
 
     /** Unsafe version of: {@link #clang_getTypedefDeclUnderlyingType getTypedefDeclUnderlyingType} */
-    public static native void nclang_getTypedefDeclUnderlyingType(long __functionAddress, long C, long __result);
+    public static native void nclang_getTypedefDeclUnderlyingType(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getTypedefDeclUnderlyingType getTypedefDeclUnderlyingType} */
     public static void nclang_getTypedefDeclUnderlyingType(long C, long __result) {
         long __functionAddress = Functions.getTypedefDeclUnderlyingType;
-        nclang_getTypedefDeclUnderlyingType(__functionAddress, C, __result);
+        nclang_getTypedefDeclUnderlyingType(C, __functionAddress, __result);
     }
 
     /**
@@ -5183,12 +5183,12 @@ public class ClangIndex {
     // --- [ clang_getEnumDeclIntegerType ] ---
 
     /** Unsafe version of: {@link #clang_getEnumDeclIntegerType getEnumDeclIntegerType} */
-    public static native void nclang_getEnumDeclIntegerType(long __functionAddress, long C, long __result);
+    public static native void nclang_getEnumDeclIntegerType(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getEnumDeclIntegerType getEnumDeclIntegerType} */
     public static void nclang_getEnumDeclIntegerType(long C, long __result) {
         long __functionAddress = Functions.getEnumDeclIntegerType;
-        nclang_getEnumDeclIntegerType(__functionAddress, C, __result);
+        nclang_getEnumDeclIntegerType(C, __functionAddress, __result);
     }
 
     /**
@@ -5206,7 +5206,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getEnumConstantDeclValue getEnumConstantDeclValue} */
     public static long nclang_getEnumConstantDeclValue(long C) {
         long __functionAddress = Functions.getEnumConstantDeclValue;
-        return invokePJ(__functionAddress, C);
+        return invokePJ(C, __functionAddress);
     }
 
     /**
@@ -5225,7 +5225,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getEnumConstantDeclUnsignedValue getEnumConstantDeclUnsignedValue} */
     public static long nclang_getEnumConstantDeclUnsignedValue(long C) {
         long __functionAddress = Functions.getEnumConstantDeclUnsignedValue;
-        return invokePJ(__functionAddress, C);
+        return invokePJ(C, __functionAddress);
     }
 
     /**
@@ -5244,7 +5244,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getFieldDeclBitWidth getFieldDeclBitWidth} */
     public static int nclang_getFieldDeclBitWidth(long C) {
         long __functionAddress = Functions.getFieldDeclBitWidth;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /**
@@ -5261,7 +5261,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getNumArguments Cursor_getNumArguments} */
     public static int nclang_Cursor_getNumArguments(long C) {
         long __functionAddress = Functions.Cursor_getNumArguments;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /**
@@ -5276,12 +5276,12 @@ public class ClangIndex {
     // --- [ clang_Cursor_getArgument ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getArgument Cursor_getArgument} */
-    public static native void nclang_Cursor_getArgument(long __functionAddress, long C, int i, long __result);
+    public static native void nclang_Cursor_getArgument(long C, int i, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Cursor_getArgument Cursor_getArgument} */
     public static void nclang_Cursor_getArgument(long C, int i, long __result) {
         long __functionAddress = Functions.Cursor_getArgument;
-        nclang_Cursor_getArgument(__functionAddress, C, i, __result);
+        nclang_Cursor_getArgument(C, i, __functionAddress, __result);
     }
 
     /**
@@ -5300,7 +5300,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getNumTemplateArguments Cursor_getNumTemplateArguments} */
     public static int nclang_Cursor_getNumTemplateArguments(long C) {
         long __functionAddress = Functions.Cursor_getNumTemplateArguments;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /**
@@ -5328,7 +5328,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentKind Cursor_getTemplateArgumentKind} */
     public static int nclang_Cursor_getTemplateArgumentKind(long C, int I) {
         long __functionAddress = Functions.Cursor_getTemplateArgumentKind;
-        return invokePI(__functionAddress, C, I);
+        return invokePI(C, I, __functionAddress);
     }
 
     /**
@@ -5355,12 +5355,12 @@ public class ClangIndex {
     // --- [ clang_Cursor_getTemplateArgumentType ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentType Cursor_getTemplateArgumentType} */
-    public static native void nclang_Cursor_getTemplateArgumentType(long __functionAddress, long C, int I, long __result);
+    public static native void nclang_Cursor_getTemplateArgumentType(long C, int I, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentType Cursor_getTemplateArgumentType} */
     public static void nclang_Cursor_getTemplateArgumentType(long C, int I, long __result) {
         long __functionAddress = Functions.Cursor_getTemplateArgumentType;
-        nclang_Cursor_getTemplateArgumentType(__functionAddress, C, I, __result);
+        nclang_Cursor_getTemplateArgumentType(C, I, __functionAddress, __result);
     }
 
     /**
@@ -5390,7 +5390,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentValue Cursor_getTemplateArgumentValue} */
     public static long nclang_Cursor_getTemplateArgumentValue(long C, int I) {
         long __functionAddress = Functions.Cursor_getTemplateArgumentValue;
-        return invokePJ(__functionAddress, C, I);
+        return invokePJ(C, I, __functionAddress);
     }
 
     /**
@@ -5421,7 +5421,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentUnsignedValue Cursor_getTemplateArgumentUnsignedValue} */
     public static long nclang_Cursor_getTemplateArgumentUnsignedValue(long C, int I) {
         long __functionAddress = Functions.Cursor_getTemplateArgumentUnsignedValue;
-        return invokePJ(__functionAddress, C, I);
+        return invokePJ(C, I, __functionAddress);
     }
 
     /**
@@ -5452,7 +5452,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_equalTypes equalTypes} */
     public static int nclang_equalTypes(long A, long B) {
         long __functionAddress = Functions.equalTypes;
-        return invokePPI(__functionAddress, A, B);
+        return invokePPI(A, B, __functionAddress);
     }
 
     /**
@@ -5468,12 +5468,12 @@ public class ClangIndex {
     // --- [ clang_getCanonicalType ] ---
 
     /** Unsafe version of: {@link #clang_getCanonicalType getCanonicalType} */
-    public static native void nclang_getCanonicalType(long __functionAddress, long T, long __result);
+    public static native void nclang_getCanonicalType(long T, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCanonicalType getCanonicalType} */
     public static void nclang_getCanonicalType(long T, long __result) {
         long __functionAddress = Functions.getCanonicalType;
-        nclang_getCanonicalType(__functionAddress, T, __result);
+        nclang_getCanonicalType(T, __functionAddress, __result);
     }
 
     /**
@@ -5492,7 +5492,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_isConstQualifiedType isConstQualifiedType} */
     public static int nclang_isConstQualifiedType(long T) {
         long __functionAddress = Functions.isConstQualifiedType;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /** Determine whether a {@code CXType} has the "const" qualifier set, without looking through typedefs that may have added "const" at a different level. */
@@ -5506,7 +5506,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_isMacroFunctionLike Cursor_isMacroFunctionLike} */
     public static int nclang_Cursor_isMacroFunctionLike(long C) {
         long __functionAddress = Functions.Cursor_isMacroFunctionLike;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine whether a {@code CXCursor} that is a macro, is function like. */
@@ -5520,7 +5520,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_isMacroBuiltin Cursor_isMacroBuiltin} */
     public static int nclang_Cursor_isMacroBuiltin(long C) {
         long __functionAddress = Functions.Cursor_isMacroBuiltin;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine whether a {@code CXCursor} that is a macro, is a builtin one. */
@@ -5534,7 +5534,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_isFunctionInlined Cursor_isFunctionInlined} */
     public static int nclang_Cursor_isFunctionInlined(long C) {
         long __functionAddress = Functions.Cursor_isFunctionInlined;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine whether a {@code CXCursor} that is a function declaration, is an inline declaration. */
@@ -5548,7 +5548,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_isVolatileQualifiedType isVolatileQualifiedType} */
     public static int nclang_isVolatileQualifiedType(long T) {
         long __functionAddress = Functions.isVolatileQualifiedType;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /**
@@ -5565,7 +5565,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_isRestrictQualifiedType isRestrictQualifiedType} */
     public static int nclang_isRestrictQualifiedType(long T) {
         long __functionAddress = Functions.isRestrictQualifiedType;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /**
@@ -5582,7 +5582,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getAddressSpace getAddressSpace} */
     public static int nclang_getAddressSpace(long T) {
         long __functionAddress = Functions.getAddressSpace;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /** Returns the address space of the given type. */
@@ -5594,12 +5594,12 @@ public class ClangIndex {
     // --- [ clang_getTypedefName ] ---
 
     /** Unsafe version of: {@link #clang_getTypedefName getTypedefName} */
-    public static native void nclang_getTypedefName(long __functionAddress, long CT, long __result);
+    public static native void nclang_getTypedefName(long CT, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getTypedefName getTypedefName} */
     public static void nclang_getTypedefName(long CT, long __result) {
         long __functionAddress = Functions.getTypedefName;
-        nclang_getTypedefName(__functionAddress, CT, __result);
+        nclang_getTypedefName(CT, __functionAddress, __result);
     }
 
     /** Returns the typedef name of the given type. */
@@ -5611,12 +5611,12 @@ public class ClangIndex {
     // --- [ clang_getPointeeType ] ---
 
     /** Unsafe version of: {@link #clang_getPointeeType getPointeeType} */
-    public static native void nclang_getPointeeType(long __functionAddress, long T, long __result);
+    public static native void nclang_getPointeeType(long T, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getPointeeType getPointeeType} */
     public static void nclang_getPointeeType(long T, long __result) {
         long __functionAddress = Functions.getPointeeType;
-        nclang_getPointeeType(__functionAddress, T, __result);
+        nclang_getPointeeType(T, __functionAddress, __result);
     }
 
     /** For pointer types, returns the type of the pointee. */
@@ -5628,12 +5628,12 @@ public class ClangIndex {
     // --- [ clang_getTypeDeclaration ] ---
 
     /** Unsafe version of: {@link #clang_getTypeDeclaration getTypeDeclaration} */
-    public static native void nclang_getTypeDeclaration(long __functionAddress, long T, long __result);
+    public static native void nclang_getTypeDeclaration(long T, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getTypeDeclaration getTypeDeclaration} */
     public static void nclang_getTypeDeclaration(long T, long __result) {
         long __functionAddress = Functions.getTypeDeclaration;
-        nclang_getTypeDeclaration(__functionAddress, T, __result);
+        nclang_getTypeDeclaration(T, __functionAddress, __result);
     }
 
     /** Return the cursor for the declaration of the given type. */
@@ -5645,12 +5645,12 @@ public class ClangIndex {
     // --- [ clang_getDeclObjCTypeEncoding ] ---
 
     /** Unsafe version of: {@link #clang_getDeclObjCTypeEncoding getDeclObjCTypeEncoding} */
-    public static native void nclang_getDeclObjCTypeEncoding(long __functionAddress, long C, long __result);
+    public static native void nclang_getDeclObjCTypeEncoding(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getDeclObjCTypeEncoding getDeclObjCTypeEncoding} */
     public static void nclang_getDeclObjCTypeEncoding(long C, long __result) {
         long __functionAddress = Functions.getDeclObjCTypeEncoding;
-        nclang_getDeclObjCTypeEncoding(__functionAddress, C, __result);
+        nclang_getDeclObjCTypeEncoding(C, __functionAddress, __result);
     }
 
     /** Returns the Objective-C type encoding for the specified declaration. */
@@ -5662,12 +5662,12 @@ public class ClangIndex {
     // --- [ clang_Type_getObjCEncoding ] ---
 
     /** Unsafe version of: {@link #clang_Type_getObjCEncoding Type_getObjCEncoding} */
-    public static native void nclang_Type_getObjCEncoding(long __functionAddress, long type, long __result);
+    public static native void nclang_Type_getObjCEncoding(long type, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Type_getObjCEncoding Type_getObjCEncoding} */
     public static void nclang_Type_getObjCEncoding(long type, long __result) {
         long __functionAddress = Functions.Type_getObjCEncoding;
-        nclang_Type_getObjCEncoding(__functionAddress, type, __result);
+        nclang_Type_getObjCEncoding(type, __functionAddress, __result);
     }
 
     /** Returns the Objective-C type encoding for the specified {@code CXType}. */
@@ -5679,12 +5679,12 @@ public class ClangIndex {
     // --- [ clang_getTypeKindSpelling ] ---
 
     /** Unsafe version of: {@link #clang_getTypeKindSpelling getTypeKindSpelling} */
-    public static native void nclang_getTypeKindSpelling(long __functionAddress, int K, long __result);
+    public static native void nclang_getTypeKindSpelling(int K, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getTypeKindSpelling getTypeKindSpelling} */
     public static void nclang_getTypeKindSpelling(int K, long __result) {
         long __functionAddress = Functions.getTypeKindSpelling;
-        nclang_getTypeKindSpelling(__functionAddress, K, __result);
+        nclang_getTypeKindSpelling(K, __functionAddress, __result);
     }
 
     /** Retrieve the spelling of a given {@code CXTypeKind}. */
@@ -5698,7 +5698,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getFunctionTypeCallingConv getFunctionTypeCallingConv} */
     public static int nclang_getFunctionTypeCallingConv(long T) {
         long __functionAddress = Functions.getFunctionTypeCallingConv;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /**
@@ -5714,12 +5714,12 @@ public class ClangIndex {
     // --- [ clang_getResultType ] ---
 
     /** Unsafe version of: {@link #clang_getResultType getResultType} */
-    public static native void nclang_getResultType(long __functionAddress, long T, long __result);
+    public static native void nclang_getResultType(long T, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getResultType getResultType} */
     public static void nclang_getResultType(long T, long __result) {
         long __functionAddress = Functions.getResultType;
-        nclang_getResultType(__functionAddress, T, __result);
+        nclang_getResultType(T, __functionAddress, __result);
     }
 
     /**
@@ -5737,7 +5737,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getExceptionSpecificationType getExceptionSpecificationType} */
     public static int nclang_getExceptionSpecificationType(long T) {
         long __functionAddress = Functions.getExceptionSpecificationType;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /**
@@ -5754,7 +5754,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getNumArgTypes getNumArgTypes} */
     public static int nclang_getNumArgTypes(long T) {
         long __functionAddress = Functions.getNumArgTypes;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /**
@@ -5769,12 +5769,12 @@ public class ClangIndex {
     // --- [ clang_getArgType ] ---
 
     /** Unsafe version of: {@link #clang_getArgType getArgType} */
-    public static native void nclang_getArgType(long __functionAddress, long T, int i, long __result);
+    public static native void nclang_getArgType(long T, int i, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getArgType getArgType} */
     public static void nclang_getArgType(long T, int i, long __result) {
         long __functionAddress = Functions.getArgType;
-        nclang_getArgType(__functionAddress, T, i, __result);
+        nclang_getArgType(T, i, __functionAddress, __result);
     }
 
     /**
@@ -5790,7 +5790,7 @@ public class ClangIndex {
     // --- [ clang_Type_getObjCObjectBaseType ] ---
 
     /** Unsafe version of: {@link #clang_Type_getObjCObjectBaseType Type_getObjCObjectBaseType} */
-    public static native void nclang_Type_getObjCObjectBaseType(long __functionAddress, long T, long __result);
+    public static native void nclang_Type_getObjCObjectBaseType(long T, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Type_getObjCObjectBaseType Type_getObjCObjectBaseType} */
     public static void nclang_Type_getObjCObjectBaseType(long T, long __result) {
@@ -5798,7 +5798,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nclang_Type_getObjCObjectBaseType(__functionAddress, T, __result);
+        nclang_Type_getObjCObjectBaseType(T, __functionAddress, __result);
     }
 
     /**
@@ -5819,7 +5819,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /**
@@ -5835,7 +5835,7 @@ public class ClangIndex {
     // --- [ clang_Type_getObjCProtocolDecl ] ---
 
     /** Unsafe version of: {@link #clang_Type_getObjCProtocolDecl Type_getObjCProtocolDecl} */
-    public static native void nclang_Type_getObjCProtocolDecl(long __functionAddress, long T, int i, long __result);
+    public static native void nclang_Type_getObjCProtocolDecl(long T, int i, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Type_getObjCProtocolDecl Type_getObjCProtocolDecl} */
     public static void nclang_Type_getObjCProtocolDecl(long T, int i, long __result) {
@@ -5843,7 +5843,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nclang_Type_getObjCProtocolDecl(__functionAddress, T, i, __result);
+        nclang_Type_getObjCProtocolDecl(T, i, __functionAddress, __result);
     }
 
     /**
@@ -5864,7 +5864,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /**
@@ -5880,7 +5880,7 @@ public class ClangIndex {
     // --- [ clang_Type_getObjCTypeArg ] ---
 
     /** Unsafe version of: {@link #clang_Type_getObjCTypeArg Type_getObjCTypeArg} */
-    public static native void nclang_Type_getObjCTypeArg(long __functionAddress, long T, int i, long __result);
+    public static native void nclang_Type_getObjCTypeArg(long T, int i, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Type_getObjCTypeArg Type_getObjCTypeArg} */
     public static void nclang_Type_getObjCTypeArg(long T, int i, long __result) {
@@ -5888,7 +5888,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nclang_Type_getObjCTypeArg(__functionAddress, T, i, __result);
+        nclang_Type_getObjCTypeArg(T, i, __functionAddress, __result);
     }
 
     /**
@@ -5906,7 +5906,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_isFunctionTypeVariadic isFunctionTypeVariadic} */
     public static int nclang_isFunctionTypeVariadic(long T) {
         long __functionAddress = Functions.isFunctionTypeVariadic;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /** Return 1 if the {@code CXType} is a variadic function type, and 0 otherwise. */
@@ -5918,12 +5918,12 @@ public class ClangIndex {
     // --- [ clang_getCursorResultType ] ---
 
     /** Unsafe version of: {@link #clang_getCursorResultType getCursorResultType} */
-    public static native void nclang_getCursorResultType(long __functionAddress, long C, long __result);
+    public static native void nclang_getCursorResultType(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorResultType getCursorResultType} */
     public static void nclang_getCursorResultType(long C, long __result) {
         long __functionAddress = Functions.getCursorResultType;
-        nclang_getCursorResultType(__functionAddress, C, __result);
+        nclang_getCursorResultType(C, __functionAddress, __result);
     }
 
     /**
@@ -5941,7 +5941,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCursorExceptionSpecificationType getCursorExceptionSpecificationType} */
     public static int nclang_getCursorExceptionSpecificationType(long C) {
         long __functionAddress = Functions.getCursorExceptionSpecificationType;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /**
@@ -5958,7 +5958,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_isPODType isPODType} */
     public static int nclang_isPODType(long T) {
         long __functionAddress = Functions.isPODType;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /** Return 1 if the {@code CXType} is a POD (plain old data) type, and 0 otherwise. */
@@ -5970,12 +5970,12 @@ public class ClangIndex {
     // --- [ clang_getElementType ] ---
 
     /** Unsafe version of: {@link #clang_getElementType getElementType} */
-    public static native void nclang_getElementType(long __functionAddress, long T, long __result);
+    public static native void nclang_getElementType(long T, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getElementType getElementType} */
     public static void nclang_getElementType(long T, long __result) {
         long __functionAddress = Functions.getElementType;
-        nclang_getElementType(__functionAddress, T, __result);
+        nclang_getElementType(T, __functionAddress, __result);
     }
 
     /**
@@ -5993,7 +5993,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getNumElements getNumElements} */
     public static long nclang_getNumElements(long T) {
         long __functionAddress = Functions.getNumElements;
-        return invokePJ(__functionAddress, T);
+        return invokePJ(T, __functionAddress);
     }
 
     /**
@@ -6009,12 +6009,12 @@ public class ClangIndex {
     // --- [ clang_getArrayElementType ] ---
 
     /** Unsafe version of: {@link #clang_getArrayElementType getArrayElementType} */
-    public static native void nclang_getArrayElementType(long __functionAddress, long T, long __result);
+    public static native void nclang_getArrayElementType(long T, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getArrayElementType getArrayElementType} */
     public static void nclang_getArrayElementType(long T, long __result) {
         long __functionAddress = Functions.getArrayElementType;
-        nclang_getArrayElementType(__functionAddress, T, __result);
+        nclang_getArrayElementType(T, __functionAddress, __result);
     }
 
     /**
@@ -6032,7 +6032,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getArraySize getArraySize} */
     public static long nclang_getArraySize(long T) {
         long __functionAddress = Functions.getArraySize;
-        return invokePJ(__functionAddress, T);
+        return invokePJ(T, __functionAddress);
     }
 
     /**
@@ -6048,12 +6048,12 @@ public class ClangIndex {
     // --- [ clang_Type_getNamedType ] ---
 
     /** Unsafe version of: {@link #clang_Type_getNamedType Type_getNamedType} */
-    public static native void nclang_Type_getNamedType(long __functionAddress, long T, long __result);
+    public static native void nclang_Type_getNamedType(long T, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Type_getNamedType Type_getNamedType} */
     public static void nclang_Type_getNamedType(long T, long __result) {
         long __functionAddress = Functions.Type_getNamedType;
-        nclang_Type_getNamedType(__functionAddress, T, __result);
+        nclang_Type_getNamedType(T, __functionAddress, __result);
     }
 
     /**
@@ -6071,7 +6071,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_isTransparentTagTypedef Type_isTransparentTagTypedef} */
     public static int nclang_Type_isTransparentTagTypedef(long T) {
         long __functionAddress = Functions.Type_isTransparentTagTypedef;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /**
@@ -6095,7 +6095,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /** Retrieve the nullability kind of a pointer type. */
@@ -6109,7 +6109,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getAlignOf Type_getAlignOf} */
     public static long nclang_Type_getAlignOf(long T) {
         long __functionAddress = Functions.Type_getAlignOf;
-        return invokePJ(__functionAddress, T);
+        return invokePJ(T, __functionAddress);
     }
 
     /**
@@ -6127,12 +6127,12 @@ public class ClangIndex {
     // --- [ clang_Type_getClassType ] ---
 
     /** Unsafe version of: {@link #clang_Type_getClassType Type_getClassType} */
-    public static native void nclang_Type_getClassType(long __functionAddress, long T, long __result);
+    public static native void nclang_Type_getClassType(long T, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Type_getClassType Type_getClassType} */
     public static void nclang_Type_getClassType(long T, long __result) {
         long __functionAddress = Functions.Type_getClassType;
-        nclang_Type_getClassType(__functionAddress, T, __result);
+        nclang_Type_getClassType(T, __functionAddress, __result);
     }
 
     /**
@@ -6150,7 +6150,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getSizeOf Type_getSizeOf} */
     public static long nclang_Type_getSizeOf(long T) {
         long __functionAddress = Functions.Type_getSizeOf;
-        return invokePJ(__functionAddress, T);
+        return invokePJ(T, __functionAddress);
     }
 
     /**
@@ -6169,7 +6169,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getOffsetOf Type_getOffsetOf} */
     public static long nclang_Type_getOffsetOf(long T, long S) {
         long __functionAddress = Functions.Type_getOffsetOf;
-        return invokePPJ(__functionAddress, T, S);
+        return invokePPJ(T, S, __functionAddress);
     }
 
     /**
@@ -6211,7 +6211,7 @@ public class ClangIndex {
     // --- [ clang_Type_getModifiedType ] ---
 
     /** Unsafe version of: {@link #clang_Type_getModifiedType Type_getModifiedType} */
-    public static native void nclang_Type_getModifiedType(long __functionAddress, long T, long __result);
+    public static native void nclang_Type_getModifiedType(long T, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Type_getModifiedType Type_getModifiedType} */
     public static void nclang_Type_getModifiedType(long T, long __result) {
@@ -6219,7 +6219,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nclang_Type_getModifiedType(__functionAddress, T, __result);
+        nclang_Type_getModifiedType(T, __functionAddress, __result);
     }
 
     /**
@@ -6237,7 +6237,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getOffsetOfField Cursor_getOffsetOfField} */
     public static long nclang_Cursor_getOffsetOfField(long C) {
         long __functionAddress = Functions.Cursor_getOffsetOfField;
-        return invokePJ(__functionAddress, C);
+        return invokePJ(C, __functionAddress);
     }
 
     /**
@@ -6257,7 +6257,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_isAnonymous Cursor_isAnonymous} */
     public static int nclang_Cursor_isAnonymous(long C) {
         long __functionAddress = Functions.Cursor_isAnonymous;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine whether the given cursor represents an anonymous record declaration. */
@@ -6271,7 +6271,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getNumTemplateArguments Type_getNumTemplateArguments} */
     public static int nclang_Type_getNumTemplateArguments(long T) {
         long __functionAddress = Functions.Type_getNumTemplateArguments;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /** Returns the number of template arguments for given template specialization, or -1 if type {@code T} is not a template specialization. */
@@ -6282,12 +6282,12 @@ public class ClangIndex {
     // --- [ clang_Type_getTemplateArgumentAsType ] ---
 
     /** Unsafe version of: {@link #clang_Type_getTemplateArgumentAsType Type_getTemplateArgumentAsType} */
-    public static native void nclang_Type_getTemplateArgumentAsType(long __functionAddress, long T, int i, long __result);
+    public static native void nclang_Type_getTemplateArgumentAsType(long T, int i, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Type_getTemplateArgumentAsType Type_getTemplateArgumentAsType} */
     public static void nclang_Type_getTemplateArgumentAsType(long T, int i, long __result) {
         long __functionAddress = Functions.Type_getTemplateArgumentAsType;
-        nclang_Type_getTemplateArgumentAsType(__functionAddress, T, i, __result);
+        nclang_Type_getTemplateArgumentAsType(T, i, __functionAddress, __result);
     }
 
     /**
@@ -6305,7 +6305,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Type_getCXXRefQualifier Type_getCXXRefQualifier} */
     public static int nclang_Type_getCXXRefQualifier(long T) {
         long __functionAddress = Functions.Type_getCXXRefQualifier;
-        return invokePI(__functionAddress, T);
+        return invokePI(T, __functionAddress);
     }
 
     /**
@@ -6323,7 +6323,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_isBitField Cursor_isBitField} */
     public static int nclang_Cursor_isBitField(long C) {
         long __functionAddress = Functions.Cursor_isBitField;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Returns non-zero if the cursor specifies a Record member that is a bitfield. */
@@ -6337,7 +6337,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_isVirtualBase isVirtualBase} */
     public static int nclang_isVirtualBase(long cursor) {
         long __functionAddress = Functions.isVirtualBase;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /** Returns 1 if the base class specified by the cursor with kind {@link #CXCursor_CXXBaseSpecifier Cursor_CXXBaseSpecifier} is virtual. */
@@ -6351,7 +6351,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCXXAccessSpecifier getCXXAccessSpecifier} */
     public static int nclang_getCXXAccessSpecifier(long cursor) {
         long __functionAddress = Functions.getCXXAccessSpecifier;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /**
@@ -6370,7 +6370,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getStorageClass Cursor_getStorageClass} */
     public static int nclang_Cursor_getStorageClass(long cursor) {
         long __functionAddress = Functions.Cursor_getStorageClass;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /**
@@ -6388,7 +6388,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getNumOverloadedDecls getNumOverloadedDecls} */
     public static int nclang_getNumOverloadedDecls(long cursor) {
         long __functionAddress = Functions.getNumOverloadedDecls;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /**
@@ -6406,12 +6406,12 @@ public class ClangIndex {
     // --- [ clang_getOverloadedDecl ] ---
 
     /** Unsafe version of: {@link #clang_getOverloadedDecl getOverloadedDecl} */
-    public static native void nclang_getOverloadedDecl(long __functionAddress, long cursor, int index, long __result);
+    public static native void nclang_getOverloadedDecl(long cursor, int index, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getOverloadedDecl getOverloadedDecl} */
     public static void nclang_getOverloadedDecl(long cursor, int index, long __result) {
         long __functionAddress = Functions.getOverloadedDecl;
-        nclang_getOverloadedDecl(__functionAddress, cursor, index, __result);
+        nclang_getOverloadedDecl(cursor, index, __functionAddress, __result);
     }
 
     /**
@@ -6430,12 +6430,12 @@ public class ClangIndex {
     // --- [ clang_getIBOutletCollectionType ] ---
 
     /** Unsafe version of: {@link #clang_getIBOutletCollectionType getIBOutletCollectionType} */
-    public static native void nclang_getIBOutletCollectionType(long __functionAddress, long cursor, long __result);
+    public static native void nclang_getIBOutletCollectionType(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getIBOutletCollectionType getIBOutletCollectionType} */
     public static void nclang_getIBOutletCollectionType(long cursor, long __result) {
         long __functionAddress = Functions.getIBOutletCollectionType;
-        nclang_getIBOutletCollectionType(__functionAddress, cursor, __result);
+        nclang_getIBOutletCollectionType(cursor, __functionAddress, __result);
     }
 
     /** For cursors representing an {@code iboutletcollection} attribute, this function returns the collection element type. */
@@ -6452,7 +6452,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(client_data);
         }
-        return invokePPPI(__functionAddress, parent, visitor, client_data);
+        return invokePPPI(parent, visitor, client_data, __functionAddress);
     }
 
     /**
@@ -6475,12 +6475,12 @@ public class ClangIndex {
     // --- [ clang_getCursorUSR ] ---
 
     /** Unsafe version of: {@link #clang_getCursorUSR getCursorUSR} */
-    public static native void nclang_getCursorUSR(long __functionAddress, long cursor, long __result);
+    public static native void nclang_getCursorUSR(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorUSR getCursorUSR} */
     public static void nclang_getCursorUSR(long cursor, long __result) {
         long __functionAddress = Functions.getCursorUSR;
-        nclang_getCursorUSR(__functionAddress, cursor, __result);
+        nclang_getCursorUSR(cursor, __functionAddress, __result);
     }
 
     /**
@@ -6497,12 +6497,12 @@ public class ClangIndex {
     // --- [ clang_constructUSR_ObjCClass ] ---
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCClass constructUSR_ObjCClass} */
-    public static native void nclang_constructUSR_ObjCClass(long __functionAddress, long class_name, long __result);
+    public static native void nclang_constructUSR_ObjCClass(long class_name, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCClass constructUSR_ObjCClass} */
     public static void nclang_constructUSR_ObjCClass(long class_name, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCClass;
-        nclang_constructUSR_ObjCClass(__functionAddress, class_name, __result);
+        nclang_constructUSR_ObjCClass(class_name, __functionAddress, __result);
     }
 
     /** Construct a USR for a specified Objective-C class. */
@@ -6530,12 +6530,12 @@ public class ClangIndex {
     // --- [ clang_constructUSR_ObjCCategory ] ---
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCCategory constructUSR_ObjCCategory} */
-    public static native void nclang_constructUSR_ObjCCategory(long __functionAddress, long class_name, long category_name, long __result);
+    public static native void nclang_constructUSR_ObjCCategory(long class_name, long category_name, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCCategory constructUSR_ObjCCategory} */
     public static void nclang_constructUSR_ObjCCategory(long class_name, long category_name, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCCategory;
-        nclang_constructUSR_ObjCCategory(__functionAddress, class_name, category_name, __result);
+        nclang_constructUSR_ObjCCategory(class_name, category_name, __functionAddress, __result);
     }
 
     /** Construct a USR for a specified Objective-C category. */
@@ -6566,12 +6566,12 @@ public class ClangIndex {
     // --- [ clang_constructUSR_ObjCProtocol ] ---
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCProtocol constructUSR_ObjCProtocol} */
-    public static native void nclang_constructUSR_ObjCProtocol(long __functionAddress, long protocol_name, long __result);
+    public static native void nclang_constructUSR_ObjCProtocol(long protocol_name, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCProtocol constructUSR_ObjCProtocol} */
     public static void nclang_constructUSR_ObjCProtocol(long protocol_name, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCProtocol;
-        nclang_constructUSR_ObjCProtocol(__functionAddress, protocol_name, __result);
+        nclang_constructUSR_ObjCProtocol(protocol_name, __functionAddress, __result);
     }
 
     /** Construct a USR for a specified Objective-C protocol. */
@@ -6599,12 +6599,12 @@ public class ClangIndex {
     // --- [ clang_constructUSR_ObjCIvar ] ---
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCIvar constructUSR_ObjCIvar} */
-    public static native void nclang_constructUSR_ObjCIvar(long __functionAddress, long name, long classUSR, long __result);
+    public static native void nclang_constructUSR_ObjCIvar(long name, long classUSR, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCIvar constructUSR_ObjCIvar} */
     public static void nclang_constructUSR_ObjCIvar(long name, long classUSR, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCIvar;
-        nclang_constructUSR_ObjCIvar(__functionAddress, name, classUSR, __result);
+        nclang_constructUSR_ObjCIvar(name, classUSR, __functionAddress, __result);
     }
 
     /** Construct a USR for a specified Objective-C instance variable and the USR for its containing class. */
@@ -6632,12 +6632,12 @@ public class ClangIndex {
     // --- [ clang_constructUSR_ObjCMethod ] ---
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCMethod constructUSR_ObjCMethod} */
-    public static native void nclang_constructUSR_ObjCMethod(long __functionAddress, long name, int isInstanceMethod, long classUSR, long __result);
+    public static native void nclang_constructUSR_ObjCMethod(long name, int isInstanceMethod, long classUSR, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCMethod constructUSR_ObjCMethod} */
     public static void nclang_constructUSR_ObjCMethod(long name, int isInstanceMethod, long classUSR, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCMethod;
-        nclang_constructUSR_ObjCMethod(__functionAddress, name, isInstanceMethod, classUSR, __result);
+        nclang_constructUSR_ObjCMethod(name, isInstanceMethod, classUSR, __functionAddress, __result);
     }
 
     /** Construct a USR for a specified Objective-C method and the USR for its containing class. */
@@ -6665,12 +6665,12 @@ public class ClangIndex {
     // --- [ clang_constructUSR_ObjCProperty ] ---
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCProperty constructUSR_ObjCProperty} */
-    public static native void nclang_constructUSR_ObjCProperty(long __functionAddress, long property, long classUSR, long __result);
+    public static native void nclang_constructUSR_ObjCProperty(long property, long classUSR, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_constructUSR_ObjCProperty constructUSR_ObjCProperty} */
     public static void nclang_constructUSR_ObjCProperty(long property, long classUSR, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCProperty;
-        nclang_constructUSR_ObjCProperty(__functionAddress, property, classUSR, __result);
+        nclang_constructUSR_ObjCProperty(property, classUSR, __functionAddress, __result);
     }
 
     /** Construct a USR for a specified Objective-C property and the USR for its containing class. */
@@ -6698,12 +6698,12 @@ public class ClangIndex {
     // --- [ clang_getCursorSpelling ] ---
 
     /** Unsafe version of: {@link #clang_getCursorSpelling getCursorSpelling} */
-    public static native void nclang_getCursorSpelling(long __functionAddress, long cursor, long __result);
+    public static native void nclang_getCursorSpelling(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorSpelling getCursorSpelling} */
     public static void nclang_getCursorSpelling(long cursor, long __result) {
         long __functionAddress = Functions.getCursorSpelling;
-        nclang_getCursorSpelling(__functionAddress, cursor, __result);
+        nclang_getCursorSpelling(cursor, __functionAddress, __result);
     }
 
     /** Retrieve a name for the entity referenced by this cursor. */
@@ -6715,12 +6715,12 @@ public class ClangIndex {
     // --- [ clang_Cursor_getSpellingNameRange ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getSpellingNameRange Cursor_getSpellingNameRange} */
-    public static native void nclang_Cursor_getSpellingNameRange(long __functionAddress, long cursor, int pieceIndex, int options, long __result);
+    public static native void nclang_Cursor_getSpellingNameRange(long cursor, int pieceIndex, int options, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Cursor_getSpellingNameRange Cursor_getSpellingNameRange} */
     public static void nclang_Cursor_getSpellingNameRange(long cursor, int pieceIndex, int options, long __result) {
         long __functionAddress = Functions.Cursor_getSpellingNameRange;
-        nclang_Cursor_getSpellingNameRange(__functionAddress, cursor, pieceIndex, options, __result);
+        nclang_Cursor_getSpellingNameRange(cursor, pieceIndex, options, __functionAddress, __result);
     }
 
     /**
@@ -6745,7 +6745,7 @@ public class ClangIndex {
             check(__functionAddress);
             check(Policy);
         }
-        return invokePI(__functionAddress, Policy, Property);
+        return invokePI(Policy, Property, __functionAddress);
     }
 
     // --- [ clang_PrintingPolicy_setProperty ] ---
@@ -6757,7 +6757,7 @@ public class ClangIndex {
             check(__functionAddress);
             check(Policy);
         }
-        invokePV(__functionAddress, Policy, Property, Value);
+        invokePV(Policy, Property, Value, __functionAddress);
     }
 
     // --- [ clang_getCursorPrintingPolicy ] ---
@@ -6768,7 +6768,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePP(__functionAddress, cursor);
+        return invokePP(cursor, __functionAddress);
     }
 
     /**
@@ -6790,13 +6790,13 @@ public class ClangIndex {
             check(__functionAddress);
             check(Policy);
         }
-        invokePV(__functionAddress, Policy);
+        invokePV(Policy, __functionAddress);
     }
 
     // --- [ clang_getCursorPrettyPrinted ] ---
 
     /** Unsafe version of: {@link #clang_getCursorPrettyPrinted getCursorPrettyPrinted} */
-    public static native void nclang_getCursorPrettyPrinted(long __functionAddress, long Cursor, long Policy, long __result);
+    public static native void nclang_getCursorPrettyPrinted(long Cursor, long Policy, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorPrettyPrinted getCursorPrettyPrinted} */
     public static void nclang_getCursorPrettyPrinted(long Cursor, long Policy, long __result) {
@@ -6805,7 +6805,7 @@ public class ClangIndex {
             check(__functionAddress);
             check(Policy);
         }
-        nclang_getCursorPrettyPrinted(__functionAddress, Cursor, Policy, __result);
+        nclang_getCursorPrettyPrinted(Cursor, Policy, __functionAddress, __result);
     }
 
     /**
@@ -6823,12 +6823,12 @@ public class ClangIndex {
     // --- [ clang_getCursorDisplayName ] ---
 
     /** Unsafe version of: {@link #clang_getCursorDisplayName getCursorDisplayName} */
-    public static native void nclang_getCursorDisplayName(long __functionAddress, long cursor, long __result);
+    public static native void nclang_getCursorDisplayName(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorDisplayName getCursorDisplayName} */
     public static void nclang_getCursorDisplayName(long cursor, long __result) {
         long __functionAddress = Functions.getCursorDisplayName;
-        nclang_getCursorDisplayName(__functionAddress, cursor, __result);
+        nclang_getCursorDisplayName(cursor, __functionAddress, __result);
     }
 
     /**
@@ -6845,12 +6845,12 @@ public class ClangIndex {
     // --- [ clang_getCursorReferenced ] ---
 
     /** Unsafe version of: {@link #clang_getCursorReferenced getCursorReferenced} */
-    public static native void nclang_getCursorReferenced(long __functionAddress, long cursor, long __result);
+    public static native void nclang_getCursorReferenced(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorReferenced getCursorReferenced} */
     public static void nclang_getCursorReferenced(long cursor, long __result) {
         long __functionAddress = Functions.getCursorReferenced;
-        nclang_getCursorReferenced(__functionAddress, cursor, __result);
+        nclang_getCursorReferenced(cursor, __functionAddress, __result);
     }
 
     /**
@@ -6868,12 +6868,12 @@ public class ClangIndex {
     // --- [ clang_getCursorDefinition ] ---
 
     /** Unsafe version of: {@link #clang_getCursorDefinition getCursorDefinition} */
-    public static native void nclang_getCursorDefinition(long __functionAddress, long cursor, long __result);
+    public static native void nclang_getCursorDefinition(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorDefinition getCursorDefinition} */
     public static void nclang_getCursorDefinition(long cursor, long __result) {
         long __functionAddress = Functions.getCursorDefinition;
-        nclang_getCursorDefinition(__functionAddress, cursor, __result);
+        nclang_getCursorDefinition(cursor, __functionAddress, __result);
     }
 
     /**
@@ -6905,7 +6905,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_isCursorDefinition isCursorDefinition} */
     public static int nclang_isCursorDefinition(long cursor) {
         long __functionAddress = Functions.isCursorDefinition;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /** Determine whether the declaration pointed to by this cursor is also a definition of that entity. */
@@ -6917,12 +6917,12 @@ public class ClangIndex {
     // --- [ clang_getCanonicalCursor ] ---
 
     /** Unsafe version of: {@link #clang_getCanonicalCursor getCanonicalCursor} */
-    public static native void nclang_getCanonicalCursor(long __functionAddress, long cursor, long __result);
+    public static native void nclang_getCanonicalCursor(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCanonicalCursor getCanonicalCursor} */
     public static void nclang_getCanonicalCursor(long cursor, long __result) {
         long __functionAddress = Functions.getCanonicalCursor;
-        nclang_getCanonicalCursor(__functionAddress, cursor, __result);
+        nclang_getCanonicalCursor(cursor, __functionAddress, __result);
     }
 
     /**
@@ -6954,7 +6954,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getObjCSelectorIndex Cursor_getObjCSelectorIndex} */
     public static int nclang_Cursor_getObjCSelectorIndex(long cursor) {
         long __functionAddress = Functions.Cursor_getObjCSelectorIndex;
-        return invokePI(__functionAddress, cursor);
+        return invokePI(cursor, __functionAddress);
     }
 
     /**
@@ -6973,7 +6973,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_isDynamicCall Cursor_isDynamicCall} */
     public static int nclang_Cursor_isDynamicCall(long C) {
         long __functionAddress = Functions.Cursor_isDynamicCall;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /**
@@ -6991,12 +6991,12 @@ public class ClangIndex {
     // --- [ clang_Cursor_getReceiverType ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getReceiverType Cursor_getReceiverType} */
-    public static native void nclang_Cursor_getReceiverType(long __functionAddress, long C, long __result);
+    public static native void nclang_Cursor_getReceiverType(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Cursor_getReceiverType Cursor_getReceiverType} */
     public static void nclang_Cursor_getReceiverType(long C, long __result) {
         long __functionAddress = Functions.Cursor_getReceiverType;
-        nclang_Cursor_getReceiverType(__functionAddress, C, __result);
+        nclang_Cursor_getReceiverType(C, __functionAddress, __result);
     }
 
     /** Given a cursor pointing to an Objective-C message or property reference, or C++ method call, returns the {@code CXType} of the receiver. */
@@ -7010,7 +7010,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getObjCPropertyAttributes Cursor_getObjCPropertyAttributes} */
     public static int nclang_Cursor_getObjCPropertyAttributes(long C, int reserved) {
         long __functionAddress = Functions.Cursor_getObjCPropertyAttributes;
-        return invokePI(__functionAddress, C, reserved);
+        return invokePI(C, reserved, __functionAddress);
     }
 
     /**
@@ -7027,7 +7027,7 @@ public class ClangIndex {
     // --- [ clang_Cursor_getObjCPropertyGetterName ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getObjCPropertyGetterName Cursor_getObjCPropertyGetterName} */
-    public static native void nclang_Cursor_getObjCPropertyGetterName(long __functionAddress, long C, long __result);
+    public static native void nclang_Cursor_getObjCPropertyGetterName(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Cursor_getObjCPropertyGetterName Cursor_getObjCPropertyGetterName} */
     public static void nclang_Cursor_getObjCPropertyGetterName(long C, long __result) {
@@ -7035,7 +7035,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nclang_Cursor_getObjCPropertyGetterName(__functionAddress, C, __result);
+        nclang_Cursor_getObjCPropertyGetterName(C, __functionAddress, __result);
     }
 
     /** Given a cursor that represents a property declaration, return the name of the method that implements the getter. */
@@ -7047,7 +7047,7 @@ public class ClangIndex {
     // --- [ clang_Cursor_getObjCPropertySetterName ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getObjCPropertySetterName Cursor_getObjCPropertySetterName} */
-    public static native void nclang_Cursor_getObjCPropertySetterName(long __functionAddress, long C, long __result);
+    public static native void nclang_Cursor_getObjCPropertySetterName(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Cursor_getObjCPropertySetterName Cursor_getObjCPropertySetterName} */
     public static void nclang_Cursor_getObjCPropertySetterName(long C, long __result) {
@@ -7055,7 +7055,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nclang_Cursor_getObjCPropertySetterName(__functionAddress, C, __result);
+        nclang_Cursor_getObjCPropertySetterName(C, __functionAddress, __result);
     }
 
     /** Given a cursor that represents a property declaration, return the name of the method that implements the setter, if any. */
@@ -7069,7 +7069,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getObjCDeclQualifiers Cursor_getObjCDeclQualifiers} */
     public static int nclang_Cursor_getObjCDeclQualifiers(long C) {
         long __functionAddress = Functions.Cursor_getObjCDeclQualifiers;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /**
@@ -7086,7 +7086,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_isObjCOptional Cursor_isObjCOptional} */
     public static int nclang_Cursor_isObjCOptional(long C) {
         long __functionAddress = Functions.Cursor_isObjCOptional;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /**
@@ -7103,7 +7103,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_isVariadic Cursor_isVariadic} */
     public static int nclang_Cursor_isVariadic(long C) {
         long __functionAddress = Functions.Cursor_isVariadic;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Returns non-zero if the given cursor is a variadic function or method. */
@@ -7117,7 +7117,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_isExternalSymbol Cursor_isExternalSymbol} */
     public static int nclang_Cursor_isExternalSymbol(long C, long language, long definedIn, long isGenerated) {
         long __functionAddress = Functions.Cursor_isExternalSymbol;
-        return invokePPPPI(__functionAddress, C, language, definedIn, isGenerated);
+        return invokePPPPI(C, language, definedIn, isGenerated, __functionAddress);
     }
 
     /**
@@ -7140,12 +7140,12 @@ public class ClangIndex {
     // --- [ clang_Cursor_getCommentRange ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getCommentRange Cursor_getCommentRange} */
-    public static native void nclang_Cursor_getCommentRange(long __functionAddress, long C, long __result);
+    public static native void nclang_Cursor_getCommentRange(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Cursor_getCommentRange Cursor_getCommentRange} */
     public static void nclang_Cursor_getCommentRange(long C, long __result) {
         long __functionAddress = Functions.Cursor_getCommentRange;
-        nclang_Cursor_getCommentRange(__functionAddress, C, __result);
+        nclang_Cursor_getCommentRange(C, __functionAddress, __result);
     }
 
     /**
@@ -7160,12 +7160,12 @@ public class ClangIndex {
     // --- [ clang_Cursor_getRawCommentText ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getRawCommentText Cursor_getRawCommentText} */
-    public static native void nclang_Cursor_getRawCommentText(long __functionAddress, long C, long __result);
+    public static native void nclang_Cursor_getRawCommentText(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Cursor_getRawCommentText Cursor_getRawCommentText} */
     public static void nclang_Cursor_getRawCommentText(long C, long __result) {
         long __functionAddress = Functions.Cursor_getRawCommentText;
-        nclang_Cursor_getRawCommentText(__functionAddress, C, __result);
+        nclang_Cursor_getRawCommentText(C, __functionAddress, __result);
     }
 
     /** Given a cursor that represents a declaration, return the associated comment text, including comment markers. */
@@ -7177,12 +7177,12 @@ public class ClangIndex {
     // --- [ clang_Cursor_getBriefCommentText ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getBriefCommentText Cursor_getBriefCommentText} */
-    public static native void nclang_Cursor_getBriefCommentText(long __functionAddress, long C, long __result);
+    public static native void nclang_Cursor_getBriefCommentText(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Cursor_getBriefCommentText Cursor_getBriefCommentText} */
     public static void nclang_Cursor_getBriefCommentText(long C, long __result) {
         long __functionAddress = Functions.Cursor_getBriefCommentText;
-        nclang_Cursor_getBriefCommentText(__functionAddress, C, __result);
+        nclang_Cursor_getBriefCommentText(C, __functionAddress, __result);
     }
 
     /**
@@ -7198,12 +7198,12 @@ public class ClangIndex {
     // --- [ clang_Cursor_getMangling ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getMangling Cursor_getMangling} */
-    public static native void nclang_Cursor_getMangling(long __functionAddress, long cursor, long __result);
+    public static native void nclang_Cursor_getMangling(long cursor, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Cursor_getMangling Cursor_getMangling} */
     public static void nclang_Cursor_getMangling(long cursor, long __result) {
         long __functionAddress = Functions.Cursor_getMangling;
-        nclang_Cursor_getMangling(__functionAddress, cursor, __result);
+        nclang_Cursor_getMangling(cursor, __functionAddress, __result);
     }
 
     /** Retrieve the {@code CXString} representing the mangled name of the cursor. */
@@ -7217,7 +7217,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getCXXManglings Cursor_getCXXManglings} */
     public static long nclang_Cursor_getCXXManglings(long cursor) {
         long __functionAddress = Functions.Cursor_getCXXManglings;
-        return invokePP(__functionAddress, cursor);
+        return invokePP(cursor, __functionAddress);
     }
 
     /** Retrieve the {@code CXString}s representing the mangled symbols of the C++ constructor or destructor at the cursor. */
@@ -7236,7 +7236,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePP(__functionAddress, cursor);
+        return invokePP(cursor, __functionAddress);
     }
 
     /** Retrieve the {@code CXString}s representing the mangled symbols of the ObjC class interface or implementation at the cursor. */
@@ -7252,7 +7252,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_getModule Cursor_getModule} */
     public static long nclang_Cursor_getModule(long C) {
         long __functionAddress = Functions.Cursor_getModule;
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     /** Given a {@link #CXCursor_ModuleImportDecl Cursor_ModuleImportDecl} cursor, return the associated module. */
@@ -7271,7 +7271,7 @@ public class ClangIndex {
             check(TU);
             check(file);
         }
-        return invokePPP(__functionAddress, TU, file);
+        return invokePPP(TU, file, __functionAddress);
     }
 
     // --- [ clang_Module_getASTFile ] ---
@@ -7287,7 +7287,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Module);
         }
-        return invokePP(__functionAddress, Module);
+        return invokePP(Module, __functionAddress);
     }
 
     // --- [ clang_Module_getParent ] ---
@@ -7303,13 +7303,13 @@ public class ClangIndex {
         if (CHECKS) {
             check(Module);
         }
-        return invokePP(__functionAddress, Module);
+        return invokePP(Module, __functionAddress);
     }
 
     // --- [ clang_Module_getName ] ---
 
     /** Unsafe version of: {@link #clang_Module_getName Module_getName} */
-    public static native void nclang_Module_getName(long __functionAddress, long Module, long __result);
+    public static native void nclang_Module_getName(long Module, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Module_getName Module_getName} */
     public static void nclang_Module_getName(long Module, long __result) {
@@ -7317,7 +7317,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Module);
         }
-        nclang_Module_getName(__functionAddress, Module, __result);
+        nclang_Module_getName(Module, __functionAddress, __result);
     }
 
     /**
@@ -7332,7 +7332,7 @@ public class ClangIndex {
     // --- [ clang_Module_getFullName ] ---
 
     /** Unsafe version of: {@link #clang_Module_getFullName Module_getFullName} */
-    public static native void nclang_Module_getFullName(long __functionAddress, long Module, long __result);
+    public static native void nclang_Module_getFullName(long Module, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_Module_getFullName Module_getFullName} */
     public static void nclang_Module_getFullName(long Module, long __result) {
@@ -7340,7 +7340,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Module);
         }
-        nclang_Module_getFullName(__functionAddress, Module, __result);
+        nclang_Module_getFullName(Module, __functionAddress, __result);
     }
 
     /**
@@ -7365,7 +7365,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Module);
         }
-        return invokePI(__functionAddress, Module) != 0;
+        return invokePI(Module, __functionAddress) != 0;
     }
 
     // --- [ clang_Module_getNumTopLevelHeaders ] ---
@@ -7382,7 +7382,7 @@ public class ClangIndex {
             check(TU);
             check(Module);
         }
-        return invokePPI(__functionAddress, TU, Module);
+        return invokePPI(TU, Module, __functionAddress);
     }
 
     // --- [ clang_Module_getTopLevelHeader ] ---
@@ -7400,7 +7400,7 @@ public class ClangIndex {
             check(TU);
             check(Module);
         }
-        return invokePPP(__functionAddress, TU, Module, Index);
+        return invokePPP(TU, Module, Index, __functionAddress);
     }
 
     // --- [ clang_CXXConstructor_isConvertingConstructor ] ---
@@ -7408,7 +7408,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_CXXConstructor_isConvertingConstructor CXXConstructor_isConvertingConstructor} */
     public static int nclang_CXXConstructor_isConvertingConstructor(long C) {
         long __functionAddress = Functions.CXXConstructor_isConvertingConstructor;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine if a C++ constructor is a converting constructor. */
@@ -7422,7 +7422,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_CXXConstructor_isCopyConstructor CXXConstructor_isCopyConstructor} */
     public static int nclang_CXXConstructor_isCopyConstructor(long C) {
         long __functionAddress = Functions.CXXConstructor_isCopyConstructor;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine if a C++ constructor is a copy constructor. */
@@ -7436,7 +7436,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_CXXConstructor_isDefaultConstructor CXXConstructor_isDefaultConstructor} */
     public static int nclang_CXXConstructor_isDefaultConstructor(long C) {
         long __functionAddress = Functions.CXXConstructor_isDefaultConstructor;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine if a C++ constructor is the default constructor. */
@@ -7450,7 +7450,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_CXXConstructor_isMoveConstructor CXXConstructor_isMoveConstructor} */
     public static int nclang_CXXConstructor_isMoveConstructor(long C) {
         long __functionAddress = Functions.CXXConstructor_isMoveConstructor;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine if a C++ constructor is a move constructor. */
@@ -7464,7 +7464,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_CXXField_isMutable CXXField_isMutable} */
     public static int nclang_CXXField_isMutable(long C) {
         long __functionAddress = Functions.CXXField_isMutable;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine if a C++ field is declared 'mutable'. */
@@ -7478,7 +7478,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_CXXMethod_isDefaulted CXXMethod_isDefaulted} */
     public static int nclang_CXXMethod_isDefaulted(long C) {
         long __functionAddress = Functions.CXXMethod_isDefaulted;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine if a C++ method is declared '= default'. */
@@ -7492,7 +7492,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_CXXMethod_isPureVirtual CXXMethod_isPureVirtual} */
     public static int nclang_CXXMethod_isPureVirtual(long C) {
         long __functionAddress = Functions.CXXMethod_isPureVirtual;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine if a C++ member function or member function template is pure virtual. */
@@ -7506,7 +7506,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_CXXMethod_isStatic CXXMethod_isStatic} */
     public static int nclang_CXXMethod_isStatic(long C) {
         long __functionAddress = Functions.CXXMethod_isStatic;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine if a C++ member function or member function template is declared 'static'. */
@@ -7520,7 +7520,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_CXXMethod_isVirtual CXXMethod_isVirtual} */
     public static int nclang_CXXMethod_isVirtual(long C) {
         long __functionAddress = Functions.CXXMethod_isVirtual;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /**
@@ -7540,7 +7540,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine if a C++ record is abstract, i.e. whether a class or struct has a pure virtual member function. */
@@ -7554,7 +7554,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_EnumDecl_isScoped EnumDecl_isScoped} */
     public static int nclang_EnumDecl_isScoped(long C) {
         long __functionAddress = Functions.EnumDecl_isScoped;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine if an enum declaration refers to a scoped enum. */
@@ -7568,7 +7568,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_CXXMethod_isConst CXXMethod_isConst} */
     public static int nclang_CXXMethod_isConst(long C) {
         long __functionAddress = Functions.CXXMethod_isConst;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /** Determine if a C++ member function or member function template is declared 'const'. */
@@ -7582,7 +7582,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getTemplateCursorKind getTemplateCursorKind} */
     public static int nclang_getTemplateCursorKind(long C) {
         long __functionAddress = Functions.getTemplateCursorKind;
-        return invokePI(__functionAddress, C);
+        return invokePI(C, __functionAddress);
     }
 
     /**
@@ -7604,12 +7604,12 @@ public class ClangIndex {
     // --- [ clang_getSpecializedCursorTemplate ] ---
 
     /** Unsafe version of: {@link #clang_getSpecializedCursorTemplate getSpecializedCursorTemplate} */
-    public static native void nclang_getSpecializedCursorTemplate(long __functionAddress, long C, long __result);
+    public static native void nclang_getSpecializedCursorTemplate(long C, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getSpecializedCursorTemplate getSpecializedCursorTemplate} */
     public static void nclang_getSpecializedCursorTemplate(long C, long __result) {
         long __functionAddress = Functions.getSpecializedCursorTemplate;
-        nclang_getSpecializedCursorTemplate(__functionAddress, C, __result);
+        nclang_getSpecializedCursorTemplate(C, __functionAddress, __result);
     }
 
     /**
@@ -7638,12 +7638,12 @@ public class ClangIndex {
     // --- [ clang_getCursorReferenceNameRange ] ---
 
     /** Unsafe version of: {@link #clang_getCursorReferenceNameRange getCursorReferenceNameRange} */
-    public static native void nclang_getCursorReferenceNameRange(long __functionAddress, long C, int NameFlags, int PieceIndex, long __result);
+    public static native void nclang_getCursorReferenceNameRange(long C, int NameFlags, int PieceIndex, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCursorReferenceNameRange getCursorReferenceNameRange} */
     public static void nclang_getCursorReferenceNameRange(long C, int NameFlags, int PieceIndex, long __result) {
         long __functionAddress = Functions.getCursorReferenceNameRange;
-        nclang_getCursorReferenceNameRange(__functionAddress, C, NameFlags, PieceIndex, __result);
+        nclang_getCursorReferenceNameRange(C, NameFlags, PieceIndex, __functionAddress, __result);
     }
 
     /**
@@ -7671,7 +7671,7 @@ public class ClangIndex {
             check(__functionAddress);
             check(TU);
         }
-        return invokePPP(__functionAddress, TU, Location);
+        return invokePPP(TU, Location, __functionAddress);
     }
 
     /**
@@ -7695,7 +7695,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getTokenKind getTokenKind} */
     public static int nclang_getTokenKind(long token) {
         long __functionAddress = Functions.getTokenKind;
-        return invokePI(__functionAddress, token);
+        return invokePI(token, __functionAddress);
     }
 
     /** Determine the kind of the given token. */
@@ -7707,7 +7707,7 @@ public class ClangIndex {
     // --- [ clang_getTokenSpelling ] ---
 
     /** Unsafe version of: {@link #clang_getTokenSpelling getTokenSpelling} */
-    public static native void nclang_getTokenSpelling(long __functionAddress, long TU, long token, long __result);
+    public static native void nclang_getTokenSpelling(long TU, long token, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getTokenSpelling getTokenSpelling} */
     public static void nclang_getTokenSpelling(long TU, long token, long __result) {
@@ -7715,7 +7715,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        nclang_getTokenSpelling(__functionAddress, TU, token, __result);
+        nclang_getTokenSpelling(TU, token, __functionAddress, __result);
     }
 
     /**
@@ -7731,7 +7731,7 @@ public class ClangIndex {
     // --- [ clang_getTokenLocation ] ---
 
     /** Unsafe version of: {@link #clang_getTokenLocation getTokenLocation} */
-    public static native void nclang_getTokenLocation(long __functionAddress, long TU, long token, long __result);
+    public static native void nclang_getTokenLocation(long TU, long token, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getTokenLocation getTokenLocation} */
     public static void nclang_getTokenLocation(long TU, long token, long __result) {
@@ -7739,7 +7739,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        nclang_getTokenLocation(__functionAddress, TU, token, __result);
+        nclang_getTokenLocation(TU, token, __functionAddress, __result);
     }
 
     /** Retrieve the source location of the given token. */
@@ -7751,7 +7751,7 @@ public class ClangIndex {
     // --- [ clang_getTokenExtent ] ---
 
     /** Unsafe version of: {@link #clang_getTokenExtent getTokenExtent} */
-    public static native void nclang_getTokenExtent(long __functionAddress, long TU, long token, long __result);
+    public static native void nclang_getTokenExtent(long TU, long token, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getTokenExtent getTokenExtent} */
     public static void nclang_getTokenExtent(long TU, long token, long __result) {
@@ -7759,7 +7759,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        nclang_getTokenExtent(__functionAddress, TU, token, __result);
+        nclang_getTokenExtent(TU, token, __functionAddress, __result);
     }
 
     /** Retrieve a source range that covers the given token. */
@@ -7776,7 +7776,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        invokePPPPV(__functionAddress, TU, Range, Tokens, NumTokens);
+        invokePPPPV(TU, Range, Tokens, NumTokens, __functionAddress);
     }
 
     /**
@@ -7808,7 +7808,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        invokePPPV(__functionAddress, TU, Tokens, NumTokens, Cursors);
+        invokePPPV(TU, Tokens, NumTokens, Cursors, __functionAddress);
     }
 
     /**
@@ -7846,7 +7846,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        invokePPV(__functionAddress, TU, Tokens, NumTokens);
+        invokePPV(TU, Tokens, NumTokens, __functionAddress);
     }
 
     /** Free the given set of tokens. */
@@ -7856,11 +7856,11 @@ public class ClangIndex {
 
     // --- [ clang_getCursorKindSpelling ] ---
 
-    public static native void nclang_getCursorKindSpelling(long __functionAddress, int Kind, long __result);
+    public static native void nclang_getCursorKindSpelling(int Kind, long __functionAddress, long __result);
 
     public static void nclang_getCursorKindSpelling(int Kind, long __result) {
         long __functionAddress = Functions.getCursorKindSpelling;
-        nclang_getCursorKindSpelling(__functionAddress, Kind, __result);
+        nclang_getCursorKindSpelling(Kind, __functionAddress, __result);
     }
 
     public static CXString clang_getCursorKindSpelling(@NativeType("enum CXCursorKind") int Kind, CXString __result) {
@@ -7872,7 +7872,7 @@ public class ClangIndex {
 
     public static void nclang_getDefinitionSpellingAndExtent(long cursor, long startBuf, long endBuf, long startLine, long startColumn, long endLine, long endColumn) {
         long __functionAddress = Functions.getDefinitionSpellingAndExtent;
-        invokePPPPPPPV(__functionAddress, cursor, startBuf, endBuf, startLine, startColumn, endLine, endColumn);
+        invokePPPPPPPV(cursor, startBuf, endBuf, startLine, startColumn, endLine, endColumn, __functionAddress);
     }
 
     public static void clang_getDefinitionSpellingAndExtent(CXCursor cursor, @Nullable @NativeType("char const **") PointerBuffer startBuf, @Nullable @NativeType("char const **") PointerBuffer endBuf, @Nullable @NativeType("unsigned *") IntBuffer startLine, @Nullable @NativeType("unsigned *") IntBuffer startColumn, @Nullable @NativeType("unsigned *") IntBuffer endLine, @Nullable @NativeType("unsigned *") IntBuffer endColumn) {
@@ -7898,7 +7898,7 @@ public class ClangIndex {
 
     public static void nclang_executeOnThread(long fn, long user_data, int stack_size) {
         long __functionAddress = Functions.executeOnThread;
-        invokePPV(__functionAddress, fn, user_data, stack_size);
+        invokePPV(fn, user_data, stack_size, __functionAddress);
     }
 
     public static void clang_executeOnThread(@NativeType("void (*) (void *)") CXExecuteOnThreadI fn, @NativeType("void *") long user_data, @NativeType("unsigned") int stack_size) {
@@ -7921,13 +7921,13 @@ public class ClangIndex {
         if (CHECKS) {
             check(completion_string);
         }
-        return invokePI(__functionAddress, completion_string, chunk_number);
+        return invokePI(completion_string, chunk_number, __functionAddress);
     }
 
     // --- [ clang_getCompletionChunkText ] ---
 
     /** Unsafe version of: {@link #clang_getCompletionChunkText getCompletionChunkText} */
-    public static native void nclang_getCompletionChunkText(long __functionAddress, long completion_string, int chunk_number, long __result);
+    public static native void nclang_getCompletionChunkText(long completion_string, int chunk_number, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCompletionChunkText getCompletionChunkText} */
     public static void nclang_getCompletionChunkText(long completion_string, int chunk_number, long __result) {
@@ -7935,7 +7935,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(completion_string);
         }
-        nclang_getCompletionChunkText(__functionAddress, completion_string, chunk_number, __result);
+        nclang_getCompletionChunkText(completion_string, chunk_number, __functionAddress, __result);
     }
 
     /**
@@ -7966,7 +7966,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(completion_string);
         }
-        return invokePP(__functionAddress, completion_string, chunk_number);
+        return invokePP(completion_string, chunk_number, __functionAddress);
     }
 
     // --- [ clang_getNumCompletionChunks ] ---
@@ -7978,7 +7978,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(completion_string);
         }
-        return invokePI(__functionAddress, completion_string);
+        return invokePI(completion_string, __functionAddress);
     }
 
     // --- [ clang_getCompletionPriority ] ---
@@ -7999,7 +7999,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(completion_string);
         }
-        return invokePI(__functionAddress, completion_string);
+        return invokePI(completion_string, __functionAddress);
     }
 
     // --- [ clang_getCompletionAvailability ] ---
@@ -8017,7 +8017,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(completion_string);
         }
-        return invokePI(__functionAddress, completion_string);
+        return invokePI(completion_string, __functionAddress);
     }
 
     // --- [ clang_getCompletionNumAnnotations ] ---
@@ -8035,13 +8035,13 @@ public class ClangIndex {
         if (CHECKS) {
             check(completion_string);
         }
-        return invokePI(__functionAddress, completion_string);
+        return invokePI(completion_string, __functionAddress);
     }
 
     // --- [ clang_getCompletionAnnotation ] ---
 
     /** Unsafe version of: {@link #clang_getCompletionAnnotation getCompletionAnnotation} */
-    public static native void nclang_getCompletionAnnotation(long __functionAddress, long completion_string, int annotation_number, long __result);
+    public static native void nclang_getCompletionAnnotation(long completion_string, int annotation_number, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCompletionAnnotation getCompletionAnnotation} */
     public static void nclang_getCompletionAnnotation(long completion_string, int annotation_number, long __result) {
@@ -8049,7 +8049,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(completion_string);
         }
-        nclang_getCompletionAnnotation(__functionAddress, completion_string, annotation_number, __result);
+        nclang_getCompletionAnnotation(completion_string, annotation_number, __functionAddress, __result);
     }
 
     /**
@@ -8067,7 +8067,7 @@ public class ClangIndex {
     // --- [ clang_getCompletionParent ] ---
 
     /** Unsafe version of: {@link #clang_getCompletionParent getCompletionParent} */
-    public static native void nclang_getCompletionParent(long __functionAddress, long completion_string, long kind, long __result);
+    public static native void nclang_getCompletionParent(long completion_string, long kind, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCompletionParent getCompletionParent} */
     public static void nclang_getCompletionParent(long completion_string, long kind, long __result) {
@@ -8075,7 +8075,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(completion_string);
         }
-        nclang_getCompletionParent(__functionAddress, completion_string, kind, __result);
+        nclang_getCompletionParent(completion_string, kind, __functionAddress, __result);
     }
 
     /**
@@ -8099,7 +8099,7 @@ public class ClangIndex {
     // --- [ clang_getCompletionBriefComment ] ---
 
     /** Unsafe version of: {@link #clang_getCompletionBriefComment getCompletionBriefComment} */
-    public static native void nclang_getCompletionBriefComment(long __functionAddress, long completion_string, long __result);
+    public static native void nclang_getCompletionBriefComment(long completion_string, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCompletionBriefComment getCompletionBriefComment} */
     public static void nclang_getCompletionBriefComment(long completion_string, long __result) {
@@ -8107,7 +8107,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(completion_string);
         }
-        nclang_getCompletionBriefComment(__functionAddress, completion_string, __result);
+        nclang_getCompletionBriefComment(completion_string, __functionAddress, __result);
     }
 
     /** Retrieve the brief documentation comment attached to the declaration that corresponds to the given completion string. */
@@ -8121,7 +8121,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getCursorCompletionString getCursorCompletionString} */
     public static long nclang_getCursorCompletionString(long cursor) {
         long __functionAddress = Functions.getCursorCompletionString;
-        return invokePP(__functionAddress, cursor);
+        return invokePP(cursor, __functionAddress);
     }
 
     /**
@@ -8144,7 +8144,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePI(__functionAddress, results, completion_index);
+        return invokePI(results, completion_index, __functionAddress);
     }
 
     /**
@@ -8165,7 +8165,7 @@ public class ClangIndex {
     // --- [ clang_getCompletionFixIt ] ---
 
     /** Unsafe version of: {@link #clang_getCompletionFixIt getCompletionFixIt} */
-    public static native void nclang_getCompletionFixIt(long __functionAddress, long results, int completion_index, int fixit_index, long replacement_range, long __result);
+    public static native void nclang_getCompletionFixIt(long results, int completion_index, int fixit_index, long replacement_range, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_getCompletionFixIt getCompletionFixIt} */
     public static void nclang_getCompletionFixIt(long results, int completion_index, int fixit_index, long replacement_range, long __result) {
@@ -8173,7 +8173,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(__functionAddress);
         }
-        nclang_getCompletionFixIt(__functionAddress, results, completion_index, fixit_index, replacement_range, __result);
+        nclang_getCompletionFixIt(results, completion_index, fixit_index, replacement_range, __functionAddress, __result);
     }
 
     /**
@@ -8230,7 +8230,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(TU);
         }
-        return invokePPPP(__functionAddress, TU, complete_filename, complete_line, complete_column, unsaved_files, num_unsaved_files, options);
+        return invokePPPP(TU, complete_filename, complete_line, complete_column, unsaved_files, num_unsaved_files, options, __functionAddress);
     }
 
     /**
@@ -8334,7 +8334,7 @@ public class ClangIndex {
      */
     public static void nclang_sortCodeCompletionResults(long Results, int NumResults) {
         long __functionAddress = Functions.sortCodeCompletionResults;
-        invokePV(__functionAddress, Results, NumResults);
+        invokePV(Results, NumResults, __functionAddress);
     }
 
     /**
@@ -8351,7 +8351,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_disposeCodeCompleteResults disposeCodeCompleteResults} */
     public static void nclang_disposeCodeCompleteResults(long Results) {
         long __functionAddress = Functions.disposeCodeCompleteResults;
-        invokePV(__functionAddress, Results);
+        invokePV(Results, __functionAddress);
     }
 
     /** Free the given set of code-completion results. */
@@ -8364,7 +8364,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_codeCompleteGetNumDiagnostics codeCompleteGetNumDiagnostics} */
     public static int nclang_codeCompleteGetNumDiagnostics(long Results) {
         long __functionAddress = Functions.codeCompleteGetNumDiagnostics;
-        return invokePI(__functionAddress, Results);
+        return invokePI(Results, __functionAddress);
     }
 
     /** Determine the number of diagnostics produced prior to the location where code completion was performed. */
@@ -8378,7 +8378,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_codeCompleteGetDiagnostic codeCompleteGetDiagnostic} */
     public static long nclang_codeCompleteGetDiagnostic(long Results, int Index) {
         long __functionAddress = Functions.codeCompleteGetDiagnostic;
-        return invokePP(__functionAddress, Results, Index);
+        return invokePP(Results, Index, __functionAddress);
     }
 
     /**
@@ -8399,7 +8399,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_codeCompleteGetContexts codeCompleteGetContexts} */
     public static long nclang_codeCompleteGetContexts(long Results) {
         long __functionAddress = Functions.codeCompleteGetContexts;
-        return invokePJ(__functionAddress, Results);
+        return invokePJ(Results, __functionAddress);
     }
 
     /**
@@ -8419,7 +8419,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_codeCompleteGetContainerKind codeCompleteGetContainerKind} */
     public static int nclang_codeCompleteGetContainerKind(long Results, long IsIncomplete) {
         long __functionAddress = Functions.codeCompleteGetContainerKind;
-        return invokePPI(__functionAddress, Results, IsIncomplete);
+        return invokePPI(Results, IsIncomplete, __functionAddress);
     }
 
     /**
@@ -8443,12 +8443,12 @@ public class ClangIndex {
     // --- [ clang_codeCompleteGetContainerUSR ] ---
 
     /** Unsafe version of: {@link #clang_codeCompleteGetContainerUSR codeCompleteGetContainerUSR} */
-    public static native void nclang_codeCompleteGetContainerUSR(long __functionAddress, long Results, long __result);
+    public static native void nclang_codeCompleteGetContainerUSR(long Results, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_codeCompleteGetContainerUSR codeCompleteGetContainerUSR} */
     public static void nclang_codeCompleteGetContainerUSR(long Results, long __result) {
         long __functionAddress = Functions.codeCompleteGetContainerUSR;
-        nclang_codeCompleteGetContainerUSR(__functionAddress, Results, __result);
+        nclang_codeCompleteGetContainerUSR(Results, __functionAddress, __result);
     }
 
     /**
@@ -8466,12 +8466,12 @@ public class ClangIndex {
     // --- [ clang_codeCompleteGetObjCSelector ] ---
 
     /** Unsafe version of: {@link #clang_codeCompleteGetObjCSelector codeCompleteGetObjCSelector} */
-    public static native void nclang_codeCompleteGetObjCSelector(long __functionAddress, long Results, long __result);
+    public static native void nclang_codeCompleteGetObjCSelector(long Results, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_codeCompleteGetObjCSelector codeCompleteGetObjCSelector} */
     public static void nclang_codeCompleteGetObjCSelector(long Results, long __result) {
         long __functionAddress = Functions.codeCompleteGetObjCSelector;
-        nclang_codeCompleteGetObjCSelector(__functionAddress, Results, __result);
+        nclang_codeCompleteGetObjCSelector(Results, __functionAddress, __result);
     }
 
     /**
@@ -8512,7 +8512,7 @@ public class ClangIndex {
      */
     public static void clang_toggleCrashRecovery(@NativeType("unsigned") boolean isEnabled) {
         long __functionAddress = Functions.toggleCrashRecovery;
-        invokeV(__functionAddress, isEnabled ? 1 : 0);
+        invokeV(isEnabled ? 1 : 0, __functionAddress);
     }
 
     // --- [ clang_getInclusions ] ---
@@ -8523,7 +8523,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(tu);
         }
-        invokePPPV(__functionAddress, tu, visitor, client_data);
+        invokePPPV(tu, visitor, client_data, __functionAddress);
     }
 
     /**
@@ -8539,7 +8539,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_Cursor_Evaluate Cursor_Evaluate} */
     public static long nclang_Cursor_Evaluate(long C) {
         long __functionAddress = Functions.Cursor_Evaluate;
-        return invokePP(__functionAddress, C);
+        return invokePP(C, __functionAddress);
     }
 
     /**
@@ -8560,7 +8560,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(E);
         }
-        return invokePI(__functionAddress, E);
+        return invokePI(E, __functionAddress);
     }
 
     // --- [ clang_EvalResult_getAsInt ] ---
@@ -8571,7 +8571,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(E);
         }
-        return invokePI(__functionAddress, E);
+        return invokePI(E, __functionAddress);
     }
 
     // --- [ clang_EvalResult_getAsLongLong ] ---
@@ -8586,7 +8586,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(E);
         }
-        return invokePJ(__functionAddress, E);
+        return invokePJ(E, __functionAddress);
     }
 
     // --- [ clang_EvalResult_isUnsignedInt ] ---
@@ -8598,7 +8598,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(E);
         }
-        return invokePI(__functionAddress, E) != 0;
+        return invokePI(E, __functionAddress) != 0;
     }
 
     // --- [ clang_EvalResult_getAsUnsigned ] ---
@@ -8610,7 +8610,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(E);
         }
-        return invokePJ(__functionAddress, E);
+        return invokePJ(E, __functionAddress);
     }
 
     // --- [ clang_EvalResult_getAsDouble ] ---
@@ -8621,7 +8621,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(E);
         }
-        return invokePD(__functionAddress, E);
+        return invokePD(E, __functionAddress);
     }
 
     // --- [ clang_EvalResult_getAsStr ] ---
@@ -8632,7 +8632,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(E);
         }
-        return invokePP(__functionAddress, E);
+        return invokePP(E, __functionAddress);
     }
 
     /**
@@ -8654,7 +8654,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(E);
         }
-        invokePV(__functionAddress, E);
+        invokePV(E, __functionAddress);
     }
 
     // --- [ clang_getRemappings ] ---
@@ -8662,7 +8662,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_getRemappings getRemappings} */
     public static long nclang_getRemappings(long path) {
         long __functionAddress = Functions.getRemappings;
-        return invokePP(__functionAddress, path);
+        return invokePP(path, __functionAddress);
     }
 
     /**
@@ -8708,7 +8708,7 @@ public class ClangIndex {
      */
     public static long nclang_getRemappingsFromFileList(long filePaths, int numFiles) {
         long __functionAddress = Functions.getRemappingsFromFileList;
-        return invokePP(__functionAddress, filePaths, numFiles);
+        return invokePP(filePaths, numFiles, __functionAddress);
     }
 
     /**
@@ -8732,7 +8732,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Remapping);
         }
-        return invokePI(__functionAddress, Remapping);
+        return invokePI(Remapping, __functionAddress);
     }
 
     // --- [ clang_remap_getFilenames ] ---
@@ -8743,7 +8743,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Remapping);
         }
-        invokePPPV(__functionAddress, Remapping, index, original, transformed);
+        invokePPPV(Remapping, index, original, transformed, __functionAddress);
     }
 
     /**
@@ -8764,7 +8764,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(Remapping);
         }
-        invokePV(__functionAddress, Remapping);
+        invokePV(Remapping, __functionAddress);
     }
 
     // --- [ clang_findReferencesInFile ] ---
@@ -8776,7 +8776,7 @@ public class ClangIndex {
             check(file);
             CXCursorAndRangeVisitor.validate(visitor);
         }
-        return invokePPPI(__functionAddress, cursor, file, visitor);
+        return invokePPPI(cursor, file, visitor, __functionAddress);
     }
 
     /**
@@ -8804,7 +8804,7 @@ public class ClangIndex {
             check(file);
             CXCursorAndRangeVisitor.validate(visitor);
         }
-        return invokePPPI(__functionAddress, TU, file, visitor);
+        return invokePPPI(TU, file, visitor, __functionAddress);
     }
 
     /**
@@ -8826,14 +8826,14 @@ public class ClangIndex {
     @NativeType("int")
     public static boolean clang_index_isEntityObjCContainerKind(@NativeType("CXIdxEntityKind") int kind) {
         long __functionAddress = Functions.index_isEntityObjCContainerKind;
-        return invokeI(__functionAddress, kind) != 0;
+        return invokeI(kind, __functionAddress) != 0;
     }
 
     // --- [ clang_index_getObjCContainerDeclInfo ] ---
 
     public static long nclang_index_getObjCContainerDeclInfo(long info) {
         long __functionAddress = Functions.index_getObjCContainerDeclInfo;
-        return invokePP(__functionAddress, info);
+        return invokePP(info, __functionAddress);
     }
 
     @Nullable
@@ -8847,7 +8847,7 @@ public class ClangIndex {
 
     public static long nclang_index_getObjCInterfaceDeclInfo(long info) {
         long __functionAddress = Functions.index_getObjCInterfaceDeclInfo;
-        return invokePP(__functionAddress, info);
+        return invokePP(info, __functionAddress);
     }
 
     @Nullable
@@ -8861,7 +8861,7 @@ public class ClangIndex {
 
     public static long nclang_index_getObjCCategoryDeclInfo(long info) {
         long __functionAddress = Functions.index_getObjCCategoryDeclInfo;
-        return invokePP(__functionAddress, info);
+        return invokePP(info, __functionAddress);
     }
 
     @Nullable
@@ -8875,7 +8875,7 @@ public class ClangIndex {
 
     public static long nclang_index_getObjCProtocolRefListInfo(long info) {
         long __functionAddress = Functions.index_getObjCProtocolRefListInfo;
-        return invokePP(__functionAddress, info);
+        return invokePP(info, __functionAddress);
     }
 
     @Nullable
@@ -8889,7 +8889,7 @@ public class ClangIndex {
 
     public static long nclang_index_getObjCPropertyDeclInfo(long info) {
         long __functionAddress = Functions.index_getObjCPropertyDeclInfo;
-        return invokePP(__functionAddress, info);
+        return invokePP(info, __functionAddress);
     }
 
     @Nullable
@@ -8903,7 +8903,7 @@ public class ClangIndex {
 
     public static long nclang_index_getIBOutletCollectionAttrInfo(long info) {
         long __functionAddress = Functions.index_getIBOutletCollectionAttrInfo;
-        return invokePP(__functionAddress, info);
+        return invokePP(info, __functionAddress);
     }
 
     @Nullable
@@ -8917,7 +8917,7 @@ public class ClangIndex {
 
     public static long nclang_index_getCXXClassDeclInfo(long info) {
         long __functionAddress = Functions.index_getCXXClassDeclInfo;
-        return invokePP(__functionAddress, info);
+        return invokePP(info, __functionAddress);
     }
 
     @Nullable
@@ -8932,7 +8932,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_index_getClientContainer index_getClientContainer} */
     public static long nclang_index_getClientContainer(long info) {
         long __functionAddress = Functions.index_getClientContainer;
-        return invokePP(__functionAddress, info);
+        return invokePP(info, __functionAddress);
     }
 
     /** For retrieving a custom {@code CXIdxClientContainer} attached to a container. */
@@ -8949,7 +8949,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(container);
         }
-        invokePPV(__functionAddress, info, container);
+        invokePPV(info, container, __functionAddress);
     }
 
     /** For setting a custom {@code CXIdxClientContainer} attached to a container. */
@@ -8962,7 +8962,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_index_getClientEntity index_getClientEntity} */
     public static long nclang_index_getClientEntity(long info) {
         long __functionAddress = Functions.index_getClientEntity;
-        return invokePP(__functionAddress, info);
+        return invokePP(info, __functionAddress);
     }
 
     /** For retrieving a custom {@code CXIdxClientEntity} attached to an entity. */
@@ -8979,7 +8979,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(entity);
         }
-        invokePPV(__functionAddress, info, entity);
+        invokePPV(info, entity, __functionAddress);
     }
 
     /** For setting a custom {@code CXIdxClientEntity} attached to an entity. */
@@ -9000,7 +9000,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(CIdx);
         }
-        return invokePP(__functionAddress, CIdx);
+        return invokePP(CIdx, __functionAddress);
     }
 
     // --- [ clang_IndexAction_dispose ] ---
@@ -9015,7 +9015,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(action);
         }
-        invokePV(__functionAddress, action);
+        invokePV(action, __functionAddress);
     }
 
     // --- [ clang_indexSourceFile ] ---
@@ -9026,7 +9026,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(action);
         }
-        return invokePPPPPPPI(__functionAddress, action, client_data, index_callbacks, index_callbacks_size, index_options, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, out_TU, TU_options);
+        return invokePPPPPPPI(action, client_data, index_callbacks, index_callbacks_size, index_options, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, out_TU, TU_options, __functionAddress);
     }
 
     /**
@@ -9087,7 +9087,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(action);
         }
-        return invokePPPPPPPI(__functionAddress, action, client_data, index_callbacks, index_callbacks_size, index_options, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, out_TU, TU_options);
+        return invokePPPPPPPI(action, client_data, index_callbacks, index_callbacks_size, index_options, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, out_TU, TU_options, __functionAddress);
     }
 
     /**
@@ -9129,7 +9129,7 @@ public class ClangIndex {
             check(action);
             check(TU);
         }
-        return invokePPPPI(__functionAddress, action, client_data, index_callbacks, index_callbacks_size, index_options, TU);
+        return invokePPPPI(action, client_data, index_callbacks, index_callbacks_size, index_options, TU, __functionAddress);
     }
 
     /**
@@ -9157,7 +9157,7 @@ public class ClangIndex {
     /** Unsafe version of: {@link #clang_indexLoc_getFileLocation indexLoc_getFileLocation} */
     public static void nclang_indexLoc_getFileLocation(long loc, long indexFile, long file, long line, long column, long offset) {
         long __functionAddress = Functions.indexLoc_getFileLocation;
-        invokePPPPPPV(__functionAddress, loc, indexFile, file, line, column, offset);
+        invokePPPPPPV(loc, indexFile, file, line, column, offset, __functionAddress);
     }
 
     /**
@@ -9180,12 +9180,12 @@ public class ClangIndex {
     // --- [ clang_indexLoc_getCXSourceLocation ] ---
 
     /** Unsafe version of: {@link #clang_indexLoc_getCXSourceLocation indexLoc_getCXSourceLocation} */
-    public static native void nclang_indexLoc_getCXSourceLocation(long __functionAddress, long loc, long __result);
+    public static native void nclang_indexLoc_getCXSourceLocation(long loc, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_indexLoc_getCXSourceLocation indexLoc_getCXSourceLocation} */
     public static void nclang_indexLoc_getCXSourceLocation(long loc, long __result) {
         long __functionAddress = Functions.indexLoc_getCXSourceLocation;
-        nclang_indexLoc_getCXSourceLocation(__functionAddress, loc, __result);
+        nclang_indexLoc_getCXSourceLocation(loc, __functionAddress, __result);
     }
 
     /** Retrieve the {@code CXSourceLocation} represented by the given {@code CXIdxLoc}. */
@@ -9202,7 +9202,7 @@ public class ClangIndex {
         if (CHECKS) {
             check(client_data);
         }
-        return invokePPPI(__functionAddress, T, visitor, client_data);
+        return invokePPPI(T, visitor, client_data, __functionAddress);
     }
 
     /**

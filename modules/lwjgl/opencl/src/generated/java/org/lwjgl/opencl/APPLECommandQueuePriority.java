@@ -45,7 +45,7 @@ public class APPLECommandQueuePriority {
             check(context);
             check(device);
         }
-        return callPPPPP(__functionAddress, context, device, properties, errcode_ret);
+        return callPPPPP(context, device, properties, errcode_ret, __functionAddress);
     }
 
     /** @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned. */
@@ -69,7 +69,7 @@ public class APPLECommandQueuePriority {
             checkNT(properties);
             checkSafe(errcode_ret, 1);
         }
-        return callPPPPP(__functionAddress, context, device, memAddress(properties), errcode_ret);
+        return callPPPPP(context, device, memAddress(properties), errcode_ret, __functionAddress);
     }
 
 }

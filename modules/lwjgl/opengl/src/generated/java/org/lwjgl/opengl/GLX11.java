@@ -41,7 +41,7 @@ public class GLX11 extends GLX {
             check(__functionAddress);
             check(display);
         }
-        return callPP(__functionAddress, display, screen);
+        return callPP(display, screen, __functionAddress);
     }
 
     /**
@@ -66,7 +66,7 @@ public class GLX11 extends GLX {
             check(__functionAddress);
             check(display);
         }
-        return callPP(__functionAddress, display, name);
+        return callPP(display, name, __functionAddress);
     }
 
     /**
@@ -91,7 +91,7 @@ public class GLX11 extends GLX {
             check(__functionAddress);
             check(display);
         }
-        return callPP(__functionAddress, display, screen, name);
+        return callPP(display, screen, name, __functionAddress);
     }
 
     /**

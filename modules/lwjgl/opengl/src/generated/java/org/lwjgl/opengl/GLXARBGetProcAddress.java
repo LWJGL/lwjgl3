@@ -41,7 +41,7 @@ public class GLXARBGetProcAddress {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPP(__functionAddress, procName);
+        return callPP(procName, __functionAddress);
     }
 
     /**

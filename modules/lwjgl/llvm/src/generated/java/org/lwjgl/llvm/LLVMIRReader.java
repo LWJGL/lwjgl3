@@ -40,7 +40,7 @@ public class LLVMIRReader {
             check(ContextRef);
             check(MemBuf);
         }
-        return invokePPPPI(__functionAddress, ContextRef, MemBuf, OutM, OutMessage);
+        return invokePPPPI(ContextRef, MemBuf, OutM, OutMessage, __functionAddress);
     }
 
     /**

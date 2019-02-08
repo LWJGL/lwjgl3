@@ -270,7 +270,7 @@ public class GL14C extends GL13C {
             check(__functionAddress);
             check(count, first.length);
         }
-        callPPV(__functionAddress, mode, first, count, first.length);
+        callPPV(mode, first, count, first.length, __functionAddress);
     }
 
     /**
@@ -284,7 +284,7 @@ public class GL14C extends GL13C {
             check(__functionAddress);
             check(indices, count.length);
         }
-        callPPV(__functionAddress, mode, count, type, memAddress(indices), count.length);
+        callPPV(mode, count, type, memAddress(indices), count.length, __functionAddress);
     }
 
     /**
@@ -298,7 +298,7 @@ public class GL14C extends GL13C {
             check(__functionAddress);
             check(params, 3);
         }
-        callPV(__functionAddress, pname, params);
+        callPV(pname, params, __functionAddress);
     }
 
     /**
@@ -312,7 +312,7 @@ public class GL14C extends GL13C {
             check(__functionAddress);
             check(params, 3);
         }
-        callPV(__functionAddress, pname, params);
+        callPV(pname, params, __functionAddress);
     }
 
 }

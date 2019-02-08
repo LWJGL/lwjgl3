@@ -98,7 +98,7 @@ public class NVNonSquareMatrices {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 6, transpose, value);
+        callPV(location, value.length / 6, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniformMatrix3x2fvNV UniformMatrix3x2fvNV} */
@@ -107,7 +107,7 @@ public class NVNonSquareMatrices {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 6, transpose, value);
+        callPV(location, value.length / 6, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniformMatrix2x4fvNV UniformMatrix2x4fvNV} */
@@ -116,7 +116,7 @@ public class NVNonSquareMatrices {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 3, transpose, value);
+        callPV(location, value.length >> 3, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniformMatrix4x2fvNV UniformMatrix4x2fvNV} */
@@ -125,7 +125,7 @@ public class NVNonSquareMatrices {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length >> 3, transpose, value);
+        callPV(location, value.length >> 3, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniformMatrix3x4fvNV UniformMatrix3x4fvNV} */
@@ -134,7 +134,7 @@ public class NVNonSquareMatrices {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 12, transpose, value);
+        callPV(location, value.length / 12, transpose, value, __functionAddress);
     }
 
     /** Array version of: {@link #glUniformMatrix4x3fvNV UniformMatrix4x3fvNV} */
@@ -143,7 +143,7 @@ public class NVNonSquareMatrices {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, value.length / 12, transpose, value);
+        callPV(location, value.length / 12, transpose, value, __functionAddress);
     }
 
 }

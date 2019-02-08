@@ -52,7 +52,7 @@ public class EXTMigrateMemobject {
             check(__functionAddress);
             check(command_queue);
         }
-        return callPPJPPI(__functionAddress, command_queue, num_mem_objects, mem_objects, flags, num_events_in_wait_list, event_wait_list, event);
+        return callPPJPPI(command_queue, num_mem_objects, mem_objects, flags, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**

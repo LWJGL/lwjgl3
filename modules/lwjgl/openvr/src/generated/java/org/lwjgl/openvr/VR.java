@@ -2733,7 +2733,7 @@ public class VR {
     /** Unsafe version of: {@link #VR_InitInternal InitInternal} */
     public static int nVR_InitInternal(long peError, int eType) {
         long __functionAddress = Functions.InitInternal;
-        return invokePI(__functionAddress, peError, eType);
+        return invokePI(peError, eType, __functionAddress);
     }
 
     /**
@@ -2783,7 +2783,7 @@ public class VR {
     /** Unsafe version of: {@link #VR_GetGenericInterface GetGenericInterface} */
     public static long nVR_GetGenericInterface(long pchInterfaceVersion, long peError) {
         long __functionAddress = Functions.GetGenericInterface;
-        return invokePPP(__functionAddress, pchInterfaceVersion, peError);
+        return invokePPP(pchInterfaceVersion, peError, __functionAddress);
     }
 
     /**
@@ -2854,7 +2854,7 @@ public class VR {
     /** Unsafe version of: {@link #VR_IsInterfaceVersionValid IsInterfaceVersionValid} */
     public static boolean nVR_IsInterfaceVersionValid(long pchInterfaceVersion) {
         long __functionAddress = Functions.IsInterfaceVersionValid;
-        return invokePZ(__functionAddress, pchInterfaceVersion);
+        return invokePZ(pchInterfaceVersion, __functionAddress);
     }
 
     /**
@@ -2901,7 +2901,7 @@ public class VR {
     /** Unsafe version of: {@link #VR_GetVRInitErrorAsSymbol GetVRInitErrorAsSymbol} */
     public static long nVR_GetVRInitErrorAsSymbol(int error) {
         long __functionAddress = Functions.GetVRInitErrorAsSymbol;
-        return invokeP(__functionAddress, error);
+        return invokeP(error, __functionAddress);
     }
 
     /**
@@ -2921,7 +2921,7 @@ public class VR {
     /** Unsafe version of: {@link #VR_GetVRInitErrorAsEnglishDescription GetVRInitErrorAsEnglishDescription} */
     public static long nVR_GetVRInitErrorAsEnglishDescription(int error) {
         long __functionAddress = Functions.GetVRInitErrorAsEnglishDescription;
-        return invokeP(__functionAddress, error);
+        return invokeP(error, __functionAddress);
     }
 
     /**

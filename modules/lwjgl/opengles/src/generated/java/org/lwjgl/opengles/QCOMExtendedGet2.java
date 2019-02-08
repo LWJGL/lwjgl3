@@ -79,7 +79,7 @@ public class QCOMExtendedGet2 {
             check(__functionAddress);
             checkSafe(numShaders, 1);
         }
-        callPPV(__functionAddress, shaders, lengthSafe(shaders), numShaders);
+        callPPV(shaders, lengthSafe(shaders), numShaders, __functionAddress);
     }
 
     /** Array version of: {@link #glExtGetProgramsQCOM ExtGetProgramsQCOM} */
@@ -89,7 +89,7 @@ public class QCOMExtendedGet2 {
             check(__functionAddress);
             checkSafe(numPrograms, 1);
         }
-        callPPV(__functionAddress, programs, lengthSafe(programs), numPrograms);
+        callPPV(programs, lengthSafe(programs), numPrograms, __functionAddress);
     }
 
     /** Array version of: {@link #glExtGetProgramBinarySourceQCOM ExtGetProgramBinarySourceQCOM} */
@@ -99,7 +99,7 @@ public class QCOMExtendedGet2 {
             check(__functionAddress);
             checkSafe(length, 1);
         }
-        callPPV(__functionAddress, program, shadertype, memAddress(source), length);
+        callPPV(program, shadertype, memAddress(source), length, __functionAddress);
     }
 
 }

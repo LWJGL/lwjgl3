@@ -389,7 +389,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Module);
         }
-        return invokePI(__functionAddress, Module);
+        return invokePI(Module, __functionAddress);
     }
 
     // --- [ LLVMStripModuleDebugInfo ] ---
@@ -404,7 +404,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Module);
         }
-        return invokePI(__functionAddress, Module) != 0;
+        return invokePI(Module, __functionAddress) != 0;
     }
 
     // --- [ LLVMCreateDIBuilderDisallowUnresolved ] ---
@@ -416,7 +416,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMCreateDIBuilder ] ---
@@ -431,7 +431,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(M);
         }
-        return invokePP(__functionAddress, M);
+        return invokePP(M, __functionAddress);
     }
 
     // --- [ LLVMDisposeDIBuilder ] ---
@@ -448,7 +448,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Builder);
         }
-        invokePV(__functionAddress, Builder);
+        invokePV(Builder, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderFinalize ] ---
@@ -459,7 +459,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Builder);
         }
-        invokePV(__functionAddress, Builder);
+        invokePV(Builder, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateCompileUnit ] ---
@@ -477,7 +477,7 @@ public class LLVMDebugInfo {
             check(Builder);
             check(FileRef);
         }
-        return invokePPPPPPPPP(__functionAddress, Builder, Lang, FileRef, Producer, ProducerLen, isOptimized, Flags, FlagsLen, RuntimeVer, SplitName, SplitNameLen, Kind, DWOId, SplitDebugInlining, DebugInfoForProfiling);
+        return invokePPPPPPPPP(Builder, Lang, FileRef, Producer, ProducerLen, isOptimized, Flags, FlagsLen, RuntimeVer, SplitName, SplitNameLen, Kind, DWOId, SplitDebugInlining, DebugInfoForProfiling, __functionAddress);
     }
 
     /**
@@ -546,7 +546,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePPPPPP(__functionAddress, Builder, Filename, FilenameLen, Directory, DirectoryLen);
+        return invokePPPPPP(Builder, Filename, FilenameLen, Directory, DirectoryLen, __functionAddress);
     }
 
     /**
@@ -598,7 +598,7 @@ public class LLVMDebugInfo {
             check(Builder);
             check(ParentScope);
         }
-        return invokePPPPPPPPPPP(__functionAddress, Builder, ParentScope, Name, NameLen, ConfigMacros, ConfigMacrosLen, IncludePath, IncludePathLen, ISysRoot, ISysRootLen);
+        return invokePPPPPPPPPPP(Builder, ParentScope, Name, NameLen, ConfigMacros, ConfigMacrosLen, IncludePath, IncludePathLen, ISysRoot, ISysRootLen, __functionAddress);
     }
 
     /**
@@ -657,7 +657,7 @@ public class LLVMDebugInfo {
             check(Builder);
             check(ParentScope);
         }
-        return invokePPPPP(__functionAddress, Builder, ParentScope, Name, NameLen, ExportSymbols);
+        return invokePPPPP(Builder, ParentScope, Name, NameLen, ExportSymbols, __functionAddress);
     }
 
     /**
@@ -709,7 +709,7 @@ public class LLVMDebugInfo {
             check(File);
             check(Ty);
         }
-        return invokePPPPPPPPP(__functionAddress, Builder, Scope, Name, NameLen, LinkageName, LinkageNameLen, File, LineNo, Ty, IsLocalToUnit, IsDefinition, ScopeLine, Flags, IsOptimized);
+        return invokePPPPPPPPP(Builder, Scope, Name, NameLen, LinkageName, LinkageNameLen, File, LineNo, Ty, IsLocalToUnit, IsDefinition, ScopeLine, Flags, IsOptimized, __functionAddress);
     }
 
     /**
@@ -782,7 +782,7 @@ public class LLVMDebugInfo {
             check(Scope);
             check(File);
         }
-        return invokePPPP(__functionAddress, Builder, Scope, File, Line, Column);
+        return invokePPPP(Builder, Scope, File, Line, Column, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateLexicalBlockFile ] ---
@@ -803,7 +803,7 @@ public class LLVMDebugInfo {
             check(Scope);
             check(File);
         }
-        return invokePPPP(__functionAddress, Builder, Scope, File, Discriminator);
+        return invokePPPP(Builder, Scope, File, Discriminator, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateImportedModuleFromNamespace ] ---
@@ -825,7 +825,7 @@ public class LLVMDebugInfo {
             check(NS);
             check(File);
         }
-        return invokePPPPP(__functionAddress, Builder, Scope, NS, File, Line);
+        return invokePPPPP(Builder, Scope, NS, File, Line, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateImportedModuleFromAlias ] ---
@@ -848,7 +848,7 @@ public class LLVMDebugInfo {
             check(ImportedEntity);
             check(File);
         }
-        return invokePPPPP(__functionAddress, Builder, Scope, ImportedEntity, File, Line);
+        return invokePPPPP(Builder, Scope, ImportedEntity, File, Line, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateImportedModuleFromModule ] ---
@@ -871,7 +871,7 @@ public class LLVMDebugInfo {
             check(M);
             check(File);
         }
-        return invokePPPPP(__functionAddress, Builder, Scope, M, File, Line);
+        return invokePPPPP(Builder, Scope, M, File, Line, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateImportedDeclaration ] ---
@@ -889,7 +889,7 @@ public class LLVMDebugInfo {
             check(Decl);
             check(File);
         }
-        return invokePPPPPPP(__functionAddress, Builder, Scope, Decl, File, Line, Name, NameLen);
+        return invokePPPPPPP(Builder, Scope, Decl, File, Line, Name, NameLen, __functionAddress);
     }
 
     /**
@@ -951,7 +951,7 @@ public class LLVMDebugInfo {
             check(Scope);
             check(InlinedAt);
         }
-        return invokePPPP(__functionAddress, Ctx, Line, Column, Scope, InlinedAt);
+        return invokePPPP(Ctx, Line, Column, Scope, InlinedAt, __functionAddress);
     }
 
     // --- [ LLVMDILocationGetLine ] ---
@@ -967,7 +967,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Location);
         }
-        return invokePI(__functionAddress, Location);
+        return invokePI(Location, __functionAddress);
     }
 
     // --- [ LLVMDILocationGetColumn ] ---
@@ -983,7 +983,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Location);
         }
-        return invokePI(__functionAddress, Location);
+        return invokePI(Location, __functionAddress);
     }
 
     // --- [ LLVMDILocationGetScope ] ---
@@ -999,7 +999,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Location);
         }
-        return invokePP(__functionAddress, Location);
+        return invokePP(Location, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderGetOrCreateTypeArray ] ---
@@ -1014,7 +1014,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePPPP(__functionAddress, Builder, Data, NumElements);
+        return invokePPPP(Builder, Data, NumElements, __functionAddress);
     }
 
     /**
@@ -1041,7 +1041,7 @@ public class LLVMDebugInfo {
             check(Builder);
             check(File);
         }
-        return invokePPPP(__functionAddress, Builder, File, ParameterTypes, NumParameterTypes, Flags);
+        return invokePPPP(Builder, File, ParameterTypes, NumParameterTypes, Flags, __functionAddress);
     }
 
     /**
@@ -1073,7 +1073,7 @@ public class LLVMDebugInfo {
             check(File);
             check(ClassTy);
         }
-        return invokePPPPPJPPP(__functionAddress, Builder, Scope, Name, NameLen, File, LineNumber, SizeInBits, AlignInBits, Elements, NumElements, ClassTy);
+        return invokePPPPPJPPP(Builder, Scope, Name, NameLen, File, LineNumber, SizeInBits, AlignInBits, Elements, NumElements, ClassTy, __functionAddress);
     }
 
     /**
@@ -1135,7 +1135,7 @@ public class LLVMDebugInfo {
             check(Scope);
             check(File);
         }
-        return invokePPPPPJPPPP(__functionAddress, Builder, Scope, Name, NameLen, File, LineNumber, SizeInBits, AlignInBits, Flags, Elements, NumElements, RunTimeLang, UniqueId, UniqueIdLen);
+        return invokePPPPPJPPPP(Builder, Scope, Name, NameLen, File, LineNumber, SizeInBits, AlignInBits, Flags, Elements, NumElements, RunTimeLang, UniqueId, UniqueIdLen, __functionAddress);
     }
 
     /**
@@ -1200,7 +1200,7 @@ public class LLVMDebugInfo {
             check(Builder);
             check(Ty);
         }
-        return invokePJPPP(__functionAddress, Builder, Size, AlignInBits, Ty, Subscripts, NumSubscripts);
+        return invokePJPPP(Builder, Size, AlignInBits, Ty, Subscripts, NumSubscripts, __functionAddress);
     }
 
     /**
@@ -1230,7 +1230,7 @@ public class LLVMDebugInfo {
             check(Builder);
             check(Ty);
         }
-        return invokePJPPP(__functionAddress, Builder, Size, AlignInBits, Ty, Subscripts, NumSubscripts);
+        return invokePJPPP(Builder, Size, AlignInBits, Ty, Subscripts, NumSubscripts, __functionAddress);
     }
 
     /**
@@ -1259,7 +1259,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePPPP(__functionAddress, Builder, Name, NameLen);
+        return invokePPPP(Builder, Name, NameLen, __functionAddress);
     }
 
     /**
@@ -1303,7 +1303,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePPPJP(__functionAddress, Builder, Name, NameLen, SizeInBits, Encoding, Flags);
+        return invokePPPJP(Builder, Name, NameLen, SizeInBits, Encoding, Flags, __functionAddress);
     }
 
     /**
@@ -1354,7 +1354,7 @@ public class LLVMDebugInfo {
             check(Builder);
             check(PointeeTy);
         }
-        return invokePPJPPP(__functionAddress, Builder, PointeeTy, SizeInBits, AlignInBits, AddressSpace, Name, NameLen);
+        return invokePPJPPP(Builder, PointeeTy, SizeInBits, AlignInBits, AddressSpace, Name, NameLen, __functionAddress);
     }
 
     /**
@@ -1412,7 +1412,7 @@ public class LLVMDebugInfo {
             check(DerivedFrom);
             check(VTableHolder);
         }
-        return invokePPPPPJPPPPPP(__functionAddress, Builder, Scope, Name, NameLen, File, LineNumber, SizeInBits, AlignInBits, Flags, DerivedFrom, Elements, NumElements, RunTimeLang, VTableHolder, UniqueId, UniqueIdLen);
+        return invokePPPPPJPPPPPP(Builder, Scope, Name, NameLen, File, LineNumber, SizeInBits, AlignInBits, Flags, DerivedFrom, Elements, NumElements, RunTimeLang, VTableHolder, UniqueId, UniqueIdLen, __functionAddress);
     }
 
     /**
@@ -1481,7 +1481,7 @@ public class LLVMDebugInfo {
             check(File);
             check(Ty);
         }
-        return invokePPPPPJJPP(__functionAddress, Builder, Scope, Name, NameLen, File, LineNo, SizeInBits, AlignInBits, OffsetInBits, Flags, Ty);
+        return invokePPPPPJJPP(Builder, Scope, Name, NameLen, File, LineNo, SizeInBits, AlignInBits, OffsetInBits, Flags, Ty, __functionAddress);
     }
 
     /**
@@ -1545,7 +1545,7 @@ public class LLVMDebugInfo {
             check(Type);
             check(ConstantVal);
         }
-        return invokePPPPPPPP(__functionAddress, Builder, Scope, Name, NameLen, File, LineNumber, Type, Flags, ConstantVal, AlignInBits);
+        return invokePPPPPPPP(Builder, Scope, Name, NameLen, File, LineNumber, Type, Flags, ConstantVal, AlignInBits, __functionAddress);
     }
 
     /**
@@ -1611,7 +1611,7 @@ public class LLVMDebugInfo {
             check(PointeeType);
             check(ClassType);
         }
-        return invokePPPJP(__functionAddress, Builder, PointeeType, ClassType, SizeInBits, AlignInBits, Flags);
+        return invokePPPJP(Builder, PointeeType, ClassType, SizeInBits, AlignInBits, Flags, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateObjCIVar ] ---
@@ -1629,7 +1629,7 @@ public class LLVMDebugInfo {
             check(Ty);
             check(PropertyNode);
         }
-        return invokePPPPJJPPP(__functionAddress, Builder, Name, NameLen, File, LineNo, SizeInBits, AlignInBits, OffsetInBits, Flags, Ty, PropertyNode);
+        return invokePPPPJJPPP(Builder, Name, NameLen, File, LineNo, SizeInBits, AlignInBits, OffsetInBits, Flags, Ty, PropertyNode, __functionAddress);
     }
 
     /**
@@ -1693,7 +1693,7 @@ public class LLVMDebugInfo {
             check(File);
             check(Ty);
         }
-        return invokePPPPPPPPPP(__functionAddress, Builder, Name, NameLen, File, LineNo, GetterName, GetterNameLen, SetterName, SetterNameLen, PropertyAttributes, Ty);
+        return invokePPPPPPPPPP(Builder, Name, NameLen, File, LineNo, GetterName, GetterNameLen, SetterName, SetterNameLen, PropertyAttributes, Ty, __functionAddress);
     }
 
     /**
@@ -1756,7 +1756,7 @@ public class LLVMDebugInfo {
             check(Builder);
             check(Type);
         }
-        return invokePPP(__functionAddress, Builder, Type);
+        return invokePPP(Builder, Type, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateQualifiedType ] ---
@@ -1775,7 +1775,7 @@ public class LLVMDebugInfo {
             check(Builder);
             check(Type);
         }
-        return invokePPP(__functionAddress, Builder, Tag, Type);
+        return invokePPP(Builder, Tag, Type, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateReferenceType ] ---
@@ -1794,7 +1794,7 @@ public class LLVMDebugInfo {
             check(Builder);
             check(Type);
         }
-        return invokePPP(__functionAddress, Builder, Tag, Type);
+        return invokePPP(Builder, Tag, Type, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateNullPtrType ] ---
@@ -1810,7 +1810,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePP(__functionAddress, Builder);
+        return invokePP(Builder, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateTypedef ] ---
@@ -1824,7 +1824,7 @@ public class LLVMDebugInfo {
             check(File);
             check(Scope);
         }
-        return invokePPPPPPP(__functionAddress, Builder, Type, Name, NameLen, File, LineNo, Scope);
+        return invokePPPPPPP(Builder, Type, Name, NameLen, File, LineNo, Scope, __functionAddress);
     }
 
     /**
@@ -1884,7 +1884,7 @@ public class LLVMDebugInfo {
             check(Ty);
             check(BaseTy);
         }
-        return invokePPPJP(__functionAddress, Builder, Ty, BaseTy, BaseOffset, VBPtrOffset, Flags);
+        return invokePPPJP(Builder, Ty, BaseTy, BaseOffset, VBPtrOffset, Flags, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateForwardDecl ] ---
@@ -1902,7 +1902,7 @@ public class LLVMDebugInfo {
             check(Scope);
             check(File);
         }
-        return invokePPPPPJPPP(__functionAddress, Builder, Tag, Name, NameLen, Scope, File, Line, RuntimeLang, SizeInBits, AlignInBits, UniqueIdentifier, UniqueIdentifierLen);
+        return invokePPPPPJPPP(Builder, Tag, Name, NameLen, Scope, File, Line, RuntimeLang, SizeInBits, AlignInBits, UniqueIdentifier, UniqueIdentifierLen, __functionAddress);
     }
 
     /**
@@ -1967,7 +1967,7 @@ public class LLVMDebugInfo {
             check(Scope);
             check(File);
         }
-        return invokePPPPPJPPP(__functionAddress, Builder, Tag, Name, NameLen, Scope, File, Line, RuntimeLang, SizeInBits, AlignInBits, Flags, UniqueIdentifier, UniqueIdentifierLen);
+        return invokePPPPPJPPP(Builder, Tag, Name, NameLen, Scope, File, Line, RuntimeLang, SizeInBits, AlignInBits, Flags, UniqueIdentifier, UniqueIdentifierLen, __functionAddress);
     }
 
     /**
@@ -2034,7 +2034,7 @@ public class LLVMDebugInfo {
             check(File);
             check(Type);
         }
-        return invokePPPPPJJJPP(__functionAddress, Builder, Scope, Name, NameLen, File, LineNumber, SizeInBits, OffsetInBits, StorageOffsetInBits, Flags, Type);
+        return invokePPPPPJJJPP(Builder, Scope, Name, NameLen, File, LineNumber, SizeInBits, OffsetInBits, StorageOffsetInBits, Flags, Type, __functionAddress);
     }
 
     /**
@@ -2101,7 +2101,7 @@ public class LLVMDebugInfo {
             check(VTableHolder);
             check(TemplateParamsNode);
         }
-        return invokePPPPPJJPPPPPPP(__functionAddress, Builder, Scope, Name, NameLen, File, LineNumber, SizeInBits, AlignInBits, OffsetInBits, Flags, DerivedFrom, Elements, NumElements, VTableHolder, TemplateParamsNode, UniqueIdentifier, UniqueIdentifierLen);
+        return invokePPPPPJJPPPPPPP(Builder, Scope, Name, NameLen, File, LineNumber, SizeInBits, AlignInBits, OffsetInBits, Flags, DerivedFrom, Elements, NumElements, VTableHolder, TemplateParamsNode, UniqueIdentifier, UniqueIdentifierLen, __functionAddress);
     }
 
     /**
@@ -2172,7 +2172,7 @@ public class LLVMDebugInfo {
             check(Builder);
             check(Type);
         }
-        return invokePPP(__functionAddress, Builder, Type);
+        return invokePPP(Builder, Type, __functionAddress);
     }
 
     // --- [ LLVMDITypeGetName ] ---
@@ -2187,7 +2187,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(DType);
         }
-        return invokePPP(__functionAddress, DType, Length);
+        return invokePPP(DType, Length, __functionAddress);
     }
 
     /**
@@ -2221,7 +2221,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(DType);
         }
-        return invokePJ(__functionAddress, DType);
+        return invokePJ(DType, __functionAddress);
     }
 
     // --- [ LLVMDITypeGetOffsetInBits ] ---
@@ -2237,7 +2237,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(DType);
         }
-        return invokePJ(__functionAddress, DType);
+        return invokePJ(DType, __functionAddress);
     }
 
     // --- [ LLVMDITypeGetAlignInBits ] ---
@@ -2253,7 +2253,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(DType);
         }
-        return invokePI(__functionAddress, DType);
+        return invokePI(DType, __functionAddress);
     }
 
     // --- [ LLVMDITypeGetLine ] ---
@@ -2269,7 +2269,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(DType);
         }
-        return invokePI(__functionAddress, DType);
+        return invokePI(DType, __functionAddress);
     }
 
     // --- [ LLVMDITypeGetFlags ] ---
@@ -2285,7 +2285,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(DType);
         }
-        return invokePI(__functionAddress, DType);
+        return invokePI(DType, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderGetOrCreateSubrange ] ---
@@ -2303,7 +2303,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePJJP(__functionAddress, Builder, LowerBound, Count);
+        return invokePJJP(Builder, LowerBound, Count, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderGetOrCreateArray ] ---
@@ -2318,7 +2318,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePPPP(__functionAddress, Builder, Data, NumElements);
+        return invokePPPP(Builder, Data, NumElements, __functionAddress);
     }
 
     /**
@@ -2344,7 +2344,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePPPP(__functionAddress, Builder, Addr, Length);
+        return invokePPPP(Builder, Addr, Length, __functionAddress);
     }
 
     /**
@@ -2372,7 +2372,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Builder);
         }
-        return invokePJP(__functionAddress, Builder, Value);
+        return invokePJP(Builder, Value, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateGlobalVariableExpression ] ---
@@ -2393,7 +2393,7 @@ public class LLVMDebugInfo {
             check(Expr);
             check(Decl);
         }
-        return invokePPPPPPPPPPP(__functionAddress, Builder, Scope, Name, NameLen, Linkage, LinkLen, File, LineNo, Ty, LocalToUnit, Expr, Decl, AlignInBits);
+        return invokePPPPPPPPPPP(Builder, Scope, Name, NameLen, Linkage, LinkLen, File, LineNo, Ty, LocalToUnit, Expr, Decl, AlignInBits, __functionAddress);
     }
 
     /**
@@ -2455,7 +2455,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Ctx);
         }
-        return invokePPPP(__functionAddress, Ctx, Data, NumElements);
+        return invokePPPP(Ctx, Data, NumElements, __functionAddress);
     }
 
     /**
@@ -2484,7 +2484,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(TempNode);
         }
-        invokePV(__functionAddress, TempNode);
+        invokePV(TempNode, __functionAddress);
     }
 
     // --- [ LLVMMetadataReplaceAllUsesWith ] ---
@@ -2501,7 +2501,7 @@ public class LLVMDebugInfo {
             check(TempTargetMetadata);
             check(Replacement);
         }
-        invokePPV(__functionAddress, TempTargetMetadata, Replacement);
+        invokePPV(TempTargetMetadata, Replacement, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateTempGlobalVariableFwdDecl ] ---
@@ -2521,7 +2521,7 @@ public class LLVMDebugInfo {
             check(Ty);
             check(Decl);
         }
-        return invokePPPPPPPPPP(__functionAddress, Builder, Scope, Name, NameLen, Linkage, LnkLen, File, LineNo, Ty, LocalToUnit, Decl, AlignInBits);
+        return invokePPPPPPPPPP(Builder, Scope, Name, NameLen, Linkage, LnkLen, File, LineNo, Ty, LocalToUnit, Decl, AlignInBits, __functionAddress);
     }
 
     /**
@@ -2592,7 +2592,7 @@ public class LLVMDebugInfo {
             check(DebugLoc);
             check(Instr);
         }
-        return invokePPPPPPP(__functionAddress, Builder, Storage, VarInfo, Expr, DebugLoc, Instr);
+        return invokePPPPPPP(Builder, Storage, VarInfo, Expr, DebugLoc, Instr, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderInsertDeclareAtEnd ] ---
@@ -2619,7 +2619,7 @@ public class LLVMDebugInfo {
             check(DebugLoc);
             check(Block);
         }
-        return invokePPPPPPP(__functionAddress, Builder, Storage, VarInfo, Expr, DebugLoc, Block);
+        return invokePPPPPPP(Builder, Storage, VarInfo, Expr, DebugLoc, Block, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderInsertDbgValueBefore ] ---
@@ -2645,7 +2645,7 @@ public class LLVMDebugInfo {
             check(DebugLoc);
             check(Instr);
         }
-        return invokePPPPPPP(__functionAddress, Builder, Val, VarInfo, Expr, DebugLoc, Instr);
+        return invokePPPPPPP(Builder, Val, VarInfo, Expr, DebugLoc, Instr, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderInsertDbgValueAtEnd ] ---
@@ -2672,7 +2672,7 @@ public class LLVMDebugInfo {
             check(DebugLoc);
             check(Block);
         }
-        return invokePPPPPPP(__functionAddress, Builder, Val, VarInfo, Expr, DebugLoc, Block);
+        return invokePPPPPPP(Builder, Val, VarInfo, Expr, DebugLoc, Block, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateAutoVariable ] ---
@@ -2690,7 +2690,7 @@ public class LLVMDebugInfo {
             check(File);
             check(Ty);
         }
-        return invokePPPPPPP(__functionAddress, Builder, Scope, Name, NameLen, File, LineNo, Ty, AlwaysPreserve, Flags, AlignInBits);
+        return invokePPPPPPP(Builder, Scope, Name, NameLen, File, LineNo, Ty, AlwaysPreserve, Flags, AlignInBits, __functionAddress);
     }
 
     /**
@@ -2751,7 +2751,7 @@ public class LLVMDebugInfo {
             check(File);
             check(Ty);
         }
-        return invokePPPPPPP(__functionAddress, Builder, Scope, Name, NameLen, ArgNo, File, LineNo, Ty, AlwaysPreserve, Flags);
+        return invokePPPPPPP(Builder, Scope, Name, NameLen, ArgNo, File, LineNo, Ty, AlwaysPreserve, Flags, __functionAddress);
     }
 
     /**
@@ -2806,7 +2806,7 @@ public class LLVMDebugInfo {
         if (CHECKS) {
             check(Func);
         }
-        return invokePP(__functionAddress, Func);
+        return invokePP(Func, __functionAddress);
     }
 
     // --- [ LLVMSetSubprogram ] ---
@@ -2818,7 +2818,7 @@ public class LLVMDebugInfo {
             check(Func);
             check(SP);
         }
-        invokePPV(__functionAddress, Func, SP);
+        invokePPV(Func, SP, __functionAddress);
     }
 
     // --- [ LLVMGetMetadataKind ] ---
@@ -2831,7 +2831,7 @@ public class LLVMDebugInfo {
             check(__functionAddress);
             check(Metadata);
         }
-        return invokePI(__functionAddress, Metadata);
+        return invokePI(Metadata, __functionAddress);
     }
 
 }

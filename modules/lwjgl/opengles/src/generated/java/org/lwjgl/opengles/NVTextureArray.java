@@ -152,7 +152,7 @@ public class NVTextureArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, internalFormat, width, height, depth, border, format, type, pixels);
+        callPV(target, level, internalFormat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glTexImage3DNV TexImage3DNV} */
@@ -161,7 +161,7 @@ public class NVTextureArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, internalFormat, width, height, depth, border, format, type, pixels);
+        callPV(target, level, internalFormat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glTexImage3DNV TexImage3DNV} */
@@ -170,7 +170,7 @@ public class NVTextureArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, internalFormat, width, height, depth, border, format, type, pixels);
+        callPV(target, level, internalFormat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glTexSubImage3DNV TexSubImage3DNV} */
@@ -179,7 +179,7 @@ public class NVTextureArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glTexSubImage3DNV TexSubImage3DNV} */
@@ -188,7 +188,7 @@ public class NVTextureArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
     /** Array version of: {@link #glTexSubImage3DNV TexSubImage3DNV} */
@@ -197,7 +197,7 @@ public class NVTextureArray {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        callPV(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
 }

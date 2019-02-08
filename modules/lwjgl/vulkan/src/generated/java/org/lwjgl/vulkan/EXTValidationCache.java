@@ -113,7 +113,7 @@ public class EXTValidationCache {
             VkValidationCacheCreateInfoEXT.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo, pAllocator, pValidationCache);
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pValidationCache, __functionAddress);
     }
 
     /**
@@ -192,7 +192,7 @@ public class EXTValidationCache {
             check(__functionAddress);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        callPJPV(__functionAddress, device.address(), validationCache, pAllocator);
+        callPJPV(device.address(), validationCache, pAllocator, __functionAddress);
     }
 
     /**
@@ -254,7 +254,7 @@ public class EXTValidationCache {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPI(__functionAddress, device.address(), dstCache, srcCacheCount, pSrcCaches);
+        return callPJPI(device.address(), dstCache, srcCacheCount, pSrcCaches, __functionAddress);
     }
 
     /**
@@ -336,7 +336,7 @@ public class EXTValidationCache {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, device.address(), validationCache, pDataSize, pData);
+        return callPJPPI(device.address(), validationCache, pDataSize, pData, __functionAddress);
     }
 
     /**
@@ -429,7 +429,7 @@ public class EXTValidationCache {
             VkValidationCacheCreateInfoEXT.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pValidationCache);
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pValidationCache, __functionAddress);
     }
 
     /** Array version of: {@link #vkMergeValidationCachesEXT MergeValidationCachesEXT} */
@@ -439,7 +439,7 @@ public class EXTValidationCache {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPI(__functionAddress, device.address(), dstCache, pSrcCaches.length, pSrcCaches);
+        return callPJPI(device.address(), dstCache, pSrcCaches.length, pSrcCaches, __functionAddress);
     }
 
 }

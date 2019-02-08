@@ -56,7 +56,7 @@ public class LLVMAnalysis {
         if (CHECKS) {
             check(M);
         }
-        return invokePPI(__functionAddress, M, Action, OutMessage);
+        return invokePPI(M, Action, OutMessage, __functionAddress);
     }
 
     /**
@@ -80,7 +80,7 @@ public class LLVMAnalysis {
         if (CHECKS) {
             check(Fn);
         }
-        return invokePI(__functionAddress, Fn, Action) != 0;
+        return invokePI(Fn, Action, __functionAddress) != 0;
     }
 
     // --- [ LLVMViewFunctionCFG ] ---
@@ -91,7 +91,7 @@ public class LLVMAnalysis {
         if (CHECKS) {
             check(Fn);
         }
-        invokePV(__functionAddress, Fn);
+        invokePV(Fn, __functionAddress);
     }
 
     // --- [ LLVMViewFunctionCFGOnly ] ---
@@ -101,7 +101,7 @@ public class LLVMAnalysis {
         if (CHECKS) {
             check(Fn);
         }
-        invokePV(__functionAddress, Fn);
+        invokePV(Fn, __functionAddress);
     }
 
 }

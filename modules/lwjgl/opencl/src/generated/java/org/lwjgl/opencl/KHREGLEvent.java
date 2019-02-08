@@ -51,7 +51,7 @@ public class KHREGLEvent {
             check(sync);
             check(display);
         }
-        return callPPPPP(__functionAddress, context, sync, display, errcode_ret);
+        return callPPPPP(context, sync, display, errcode_ret, __functionAddress);
     }
 
     /**
@@ -81,7 +81,7 @@ public class KHREGLEvent {
             check(display);
             checkSafe(errcode_ret, 1);
         }
-        return callPPPPP(__functionAddress, context, sync, display, errcode_ret);
+        return callPPPPP(context, sync, display, errcode_ret, __functionAddress);
     }
 
 }

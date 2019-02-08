@@ -107,7 +107,7 @@ public class KHRDescriptorUpdateTemplate {
             VkDescriptorUpdateTemplateCreateInfo.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo, pAllocator, pDescriptorUpdateTemplate);
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pDescriptorUpdateTemplate, __functionAddress);
     }
 
     /**
@@ -135,7 +135,7 @@ public class KHRDescriptorUpdateTemplate {
             check(__functionAddress);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        callPJPV(__functionAddress, device.address(), descriptorUpdateTemplate, pAllocator);
+        callPJPV(device.address(), descriptorUpdateTemplate, pAllocator, __functionAddress);
     }
 
     /**
@@ -165,7 +165,7 @@ public class KHRDescriptorUpdateTemplate {
             check(__functionAddress);
             check(pData);
         }
-        callPJJPV(__functionAddress, device.address(), descriptorSet, descriptorUpdateTemplate, pData);
+        callPJJPV(device.address(), descriptorSet, descriptorUpdateTemplate, pData, __functionAddress);
     }
 
     // --- [ vkCmdPushDescriptorSetWithTemplateKHR ] ---
@@ -282,7 +282,7 @@ public class KHRDescriptorUpdateTemplate {
             check(__functionAddress);
             check(pData);
         }
-        callPJJPV(__functionAddress, commandBuffer.address(), descriptorUpdateTemplate, layout, set, pData);
+        callPJJPV(commandBuffer.address(), descriptorUpdateTemplate, layout, set, pData, __functionAddress);
     }
 
     /** Array version of: {@link #vkCreateDescriptorUpdateTemplateKHR CreateDescriptorUpdateTemplateKHR} */
@@ -295,7 +295,7 @@ public class KHRDescriptorUpdateTemplate {
             VkDescriptorUpdateTemplateCreateInfo.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pDescriptorUpdateTemplate);
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pDescriptorUpdateTemplate, __functionAddress);
     }
 
 }

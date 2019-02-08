@@ -165,7 +165,7 @@ public class INTELMapTexture {
             check(stride, 1);
             check(layout, 1);
         }
-        long __result = callPPP(__functionAddress, texture, level, access, stride, layout);
+        long __result = callPPP(texture, level, access, stride, layout, __functionAddress);
         return memByteBufferSafe(__result, getStride(stride) * GLChecks.getTexLevelParameteri(texture, GL11.GL_TEXTURE_2D, level, GL11.GL_TEXTURE_HEIGHT));
     }
 
@@ -179,7 +179,7 @@ public class INTELMapTexture {
             check(stride, 1);
             check(layout, 1);
         }
-        long __result = callPPP(__functionAddress, texture, level, access, stride, layout);
+        long __result = callPPP(texture, level, access, stride, layout, __functionAddress);
         int length = getStride(stride) * GLChecks.getTexLevelParameteri(texture, GL11.GL_TEXTURE_2D, level, GL11.GL_TEXTURE_HEIGHT);
         return apiGetMappedBuffer(old_buffer, __result, length);
     }
@@ -194,7 +194,7 @@ public class INTELMapTexture {
             check(stride, 1);
             check(layout, 1);
         }
-        long __result = callPPP(__functionAddress, texture, level, access, stride, layout);
+        long __result = callPPP(texture, level, access, stride, layout, __functionAddress);
         return apiGetMappedBuffer(old_buffer, __result, (int)length);
     }
 

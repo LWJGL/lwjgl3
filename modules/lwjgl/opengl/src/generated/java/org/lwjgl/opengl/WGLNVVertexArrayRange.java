@@ -34,7 +34,7 @@ public class WGLNVVertexArrayRange {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, size, readfreq, writefreq, priority);
+        return callP(size, readfreq, writefreq, priority, __functionAddress);
     }
 
     @Nullable
@@ -51,7 +51,7 @@ public class WGLNVVertexArrayRange {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pointer);
+        callPV(pointer, __functionAddress);
     }
 
     public static void wglFreeMemoryNV(@NativeType("void *") ByteBuffer pointer) {

@@ -225,7 +225,7 @@ public class NVVertexAttribInteger64bit {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribL2i64vNV VertexAttribL2i64vNV} */
@@ -235,7 +235,7 @@ public class NVVertexAttribInteger64bit {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribL3i64vNV VertexAttribL3i64vNV} */
@@ -245,7 +245,7 @@ public class NVVertexAttribInteger64bit {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribL4i64vNV VertexAttribL4i64vNV} */
@@ -255,7 +255,7 @@ public class NVVertexAttribInteger64bit {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribL1ui64vNV VertexAttribL1ui64vNV} */
@@ -265,7 +265,7 @@ public class NVVertexAttribInteger64bit {
             check(__functionAddress);
             check(v, 1);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribL2ui64vNV VertexAttribL2ui64vNV} */
@@ -275,7 +275,7 @@ public class NVVertexAttribInteger64bit {
             check(__functionAddress);
             check(v, 2);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribL3ui64vNV VertexAttribL3ui64vNV} */
@@ -285,7 +285,7 @@ public class NVVertexAttribInteger64bit {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glVertexAttribL4ui64vNV VertexAttribL4ui64vNV} */
@@ -295,7 +295,7 @@ public class NVVertexAttribInteger64bit {
             check(__functionAddress);
             check(v, 4);
         }
-        callPV(__functionAddress, index, v);
+        callPV(index, v, __functionAddress);
     }
 
     /** Array version of: {@link #glGetVertexAttribLi64vNV GetVertexAttribLi64vNV} */
@@ -305,7 +305,7 @@ public class NVVertexAttribInteger64bit {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, index, pname, params);
+        callPV(index, pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetVertexAttribLui64vNV GetVertexAttribLui64vNV} */
@@ -315,7 +315,7 @@ public class NVVertexAttribInteger64bit {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, index, pname, params);
+        callPV(index, pname, params, __functionAddress);
     }
 
 }

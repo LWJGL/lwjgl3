@@ -51,7 +51,7 @@ public class WGLNVGPUAffinity {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, gpuIndex, gpu);
+        return callPI(gpuIndex, gpu, __functionAddress);
     }
 
     /**
@@ -81,7 +81,7 @@ public class WGLNVGPUAffinity {
             check(__functionAddress);
             check(gpu);
         }
-        return callPPI(__functionAddress, gpu, deviceIndex, gpuDevice);
+        return callPPI(gpu, deviceIndex, gpuDevice, __functionAddress);
     }
 
     /**
@@ -104,7 +104,7 @@ public class WGLNVGPUAffinity {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPP(__functionAddress, gpuList);
+        return callPP(gpuList, __functionAddress);
     }
 
     /**
@@ -134,7 +134,7 @@ public class WGLNVGPUAffinity {
             check(__functionAddress);
             check(affinityDC);
         }
-        return callPPI(__functionAddress, affinityDC, gpuIndex, gpu);
+        return callPPI(affinityDC, gpuIndex, gpu, __functionAddress);
     }
 
     /**
@@ -170,7 +170,7 @@ public class WGLNVGPUAffinity {
             check(__functionAddress);
             check(hdc);
         }
-        return callPI(__functionAddress, hdc) != 0;
+        return callPI(hdc, __functionAddress) != 0;
     }
 
 }

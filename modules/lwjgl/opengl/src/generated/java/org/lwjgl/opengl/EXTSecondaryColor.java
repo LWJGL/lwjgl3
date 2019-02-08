@@ -351,7 +351,7 @@ public class EXTSecondaryColor {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glSecondaryColor3ivEXT SecondaryColor3ivEXT} */
@@ -361,7 +361,7 @@ public class EXTSecondaryColor {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glSecondaryColor3fvEXT SecondaryColor3fvEXT} */
@@ -371,7 +371,7 @@ public class EXTSecondaryColor {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glSecondaryColor3dvEXT SecondaryColor3dvEXT} */
@@ -381,7 +381,7 @@ public class EXTSecondaryColor {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glSecondaryColor3usvEXT SecondaryColor3usvEXT} */
@@ -391,7 +391,7 @@ public class EXTSecondaryColor {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glSecondaryColor3uivEXT SecondaryColor3uivEXT} */
@@ -401,7 +401,7 @@ public class EXTSecondaryColor {
             check(__functionAddress);
             check(v, 3);
         }
-        callPV(__functionAddress, v);
+        callPV(v, __functionAddress);
     }
 
     /** Array version of: {@link #glSecondaryColorPointerEXT SecondaryColorPointerEXT} */
@@ -410,7 +410,7 @@ public class EXTSecondaryColor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, size, type, stride, pointer);
+        callPV(size, type, stride, pointer, __functionAddress);
     }
 
     /** Array version of: {@link #glSecondaryColorPointerEXT SecondaryColorPointerEXT} */
@@ -419,7 +419,7 @@ public class EXTSecondaryColor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, size, type, stride, pointer);
+        callPV(size, type, stride, pointer, __functionAddress);
     }
 
     /** Array version of: {@link #glSecondaryColorPointerEXT SecondaryColorPointerEXT} */
@@ -428,7 +428,7 @@ public class EXTSecondaryColor {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, size, type, stride, pointer);
+        callPV(size, type, stride, pointer, __functionAddress);
     }
 
 }

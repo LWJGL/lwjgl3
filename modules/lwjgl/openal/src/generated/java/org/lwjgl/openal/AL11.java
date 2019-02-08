@@ -58,7 +58,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, paramName, value1, value2, value3);
+        invokeV(paramName, value1, value2, value3, __functionAddress);
     }
 
     // --- [ alGetListeneriv ] ---
@@ -69,7 +69,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, param, values);
+        invokePV(param, values, __functionAddress);
     }
 
     /**
@@ -103,7 +103,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, source, paramName, value1, value2, value3);
+        invokeV(source, paramName, value1, value2, value3, __functionAddress);
     }
 
     // --- [ alListeneriv ] ---
@@ -114,7 +114,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, listener, value);
+        invokePV(listener, value, __functionAddress);
     }
 
     /**
@@ -139,7 +139,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, source, paramName, value);
+        invokePV(source, paramName, value, __functionAddress);
     }
 
     /**
@@ -172,7 +172,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, buffer, paramName, value);
+        invokeV(buffer, paramName, value, __functionAddress);
     }
 
     // --- [ alBuffer3f ] ---
@@ -192,7 +192,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, buffer, paramName, value1, value2, value3);
+        invokeV(buffer, paramName, value1, value2, value3, __functionAddress);
     }
 
     // --- [ alBufferfv ] ---
@@ -203,7 +203,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, buffer, paramName, value);
+        invokePV(buffer, paramName, value, __functionAddress);
     }
 
     /**
@@ -236,7 +236,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, buffer, paramName, value);
+        invokeV(buffer, paramName, value, __functionAddress);
     }
 
     // --- [ alBuffer3i ] ---
@@ -256,7 +256,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, buffer, paramName, value1, value2, value3);
+        invokeV(buffer, paramName, value1, value2, value3, __functionAddress);
     }
 
     // --- [ alBufferiv ] ---
@@ -267,7 +267,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, buffer, paramName, value);
+        invokePV(buffer, paramName, value, __functionAddress);
     }
 
     /**
@@ -293,7 +293,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, buffer, param, values);
+        invokePV(buffer, param, values, __functionAddress);
     }
 
     /**
@@ -319,7 +319,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokePV(__functionAddress, buffer, param, values);
+        invokePV(buffer, param, values, __functionAddress);
     }
 
     /**
@@ -350,7 +350,7 @@ public class AL11 extends AL10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        invokeV(__functionAddress, value);
+        invokeV(value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetListeneriv GetListeneriv} */
@@ -361,7 +361,7 @@ public class AL11 extends AL10 {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, param, values);
+        invokePV(param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alListeneriv Listeneriv} */
@@ -372,7 +372,7 @@ public class AL11 extends AL10 {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, listener, value);
+        invokePV(listener, value, __functionAddress);
     }
 
     /** Array version of: {@link #alSourceiv Sourceiv} */
@@ -383,7 +383,7 @@ public class AL11 extends AL10 {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, source, paramName, value);
+        invokePV(source, paramName, value, __functionAddress);
     }
 
     /** Array version of: {@link #alBufferfv Bufferfv} */
@@ -394,7 +394,7 @@ public class AL11 extends AL10 {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, buffer, paramName, value);
+        invokePV(buffer, paramName, value, __functionAddress);
     }
 
     /** Array version of: {@link #alBufferiv Bufferiv} */
@@ -405,7 +405,7 @@ public class AL11 extends AL10 {
             check(__functionAddress);
             check(value, 1);
         }
-        invokePV(__functionAddress, buffer, paramName, value);
+        invokePV(buffer, paramName, value, __functionAddress);
     }
 
     /** Array version of: {@link #alGetBufferiv GetBufferiv} */
@@ -416,7 +416,7 @@ public class AL11 extends AL10 {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, buffer, param, values);
+        invokePV(buffer, param, values, __functionAddress);
     }
 
     /** Array version of: {@link #alGetBufferfv GetBufferfv} */
@@ -427,7 +427,7 @@ public class AL11 extends AL10 {
             check(__functionAddress);
             check(values, 1);
         }
-        invokePV(__functionAddress, buffer, param, values);
+        invokePV(buffer, param, values, __functionAddress);
     }
 
 }

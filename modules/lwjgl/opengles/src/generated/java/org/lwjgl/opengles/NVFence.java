@@ -140,7 +140,7 @@ public class NVFence {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, fences.length, fences);
+        callPV(fences.length, fences, __functionAddress);
     }
 
     /** Array version of: {@link #glGenFencesNV GenFencesNV} */
@@ -149,7 +149,7 @@ public class NVFence {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, fences.length, fences);
+        callPV(fences.length, fences, __functionAddress);
     }
 
     /** Array version of: {@link #glGetFenceivNV GetFenceivNV} */
@@ -159,7 +159,7 @@ public class NVFence {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, fence, pname, params);
+        callPV(fence, pname, params, __functionAddress);
     }
 
 }

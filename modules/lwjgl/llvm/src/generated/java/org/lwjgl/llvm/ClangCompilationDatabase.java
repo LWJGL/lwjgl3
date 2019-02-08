@@ -68,7 +68,7 @@ public class ClangCompilationDatabase {
     /** Unsafe version of: {@link #clang_CompilationDatabase_fromDirectory CompilationDatabase_fromDirectory} */
     public static long nclang_CompilationDatabase_fromDirectory(long BuildDir, long ErrorCode) {
         long __functionAddress = Functions.CompilationDatabase_fromDirectory;
-        return invokePPP(__functionAddress, BuildDir, ErrorCode);
+        return invokePPP(BuildDir, ErrorCode, __functionAddress);
     }
 
     /**
@@ -115,7 +115,7 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(database);
         }
-        invokePV(__functionAddress, database);
+        invokePV(database, __functionAddress);
     }
 
     // --- [ clang_CompilationDatabase_getCompileCommands ] ---
@@ -126,7 +126,7 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(database);
         }
-        return invokePPP(__functionAddress, database, CompleteFileName);
+        return invokePPP(database, CompleteFileName, __functionAddress);
     }
 
     /** Find the compile commands used for a file. The compile commands must be freed by {@code clang_CompileCommands_dispose}. */
@@ -160,7 +160,7 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(database);
         }
-        return invokePP(__functionAddress, database);
+        return invokePP(database, __functionAddress);
     }
 
     // --- [ clang_CompileCommands_dispose ] ---
@@ -171,7 +171,7 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(commands);
         }
-        invokePV(__functionAddress, commands);
+        invokePV(commands, __functionAddress);
     }
 
     // --- [ clang_CompileCommands_getSize ] ---
@@ -183,7 +183,7 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(commands);
         }
-        return invokePI(__functionAddress, commands);
+        return invokePI(commands, __functionAddress);
     }
 
     // --- [ clang_CompileCommands_getCommand ] ---
@@ -199,13 +199,13 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(commands);
         }
-        return invokePP(__functionAddress, commands, I);
+        return invokePP(commands, I, __functionAddress);
     }
 
     // --- [ clang_CompileCommand_getDirectory ] ---
 
     /** Unsafe version of: {@link #clang_CompileCommand_getDirectory CompileCommand_getDirectory} */
-    public static native void nclang_CompileCommand_getDirectory(long __functionAddress, long command, long __result);
+    public static native void nclang_CompileCommand_getDirectory(long command, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_CompileCommand_getDirectory CompileCommand_getDirectory} */
     public static void nclang_CompileCommand_getDirectory(long command, long __result) {
@@ -213,7 +213,7 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(command);
         }
-        nclang_CompileCommand_getDirectory(__functionAddress, command, __result);
+        nclang_CompileCommand_getDirectory(command, __functionAddress, __result);
     }
 
     /** Get the working directory where the CompileCommand was executed from */
@@ -225,7 +225,7 @@ public class ClangCompilationDatabase {
     // --- [ clang_CompileCommand_getFilename ] ---
 
     /** Unsafe version of: {@link #clang_CompileCommand_getFilename CompileCommand_getFilename} */
-    public static native void nclang_CompileCommand_getFilename(long __functionAddress, long command, long __result);
+    public static native void nclang_CompileCommand_getFilename(long command, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_CompileCommand_getFilename CompileCommand_getFilename} */
     public static void nclang_CompileCommand_getFilename(long command, long __result) {
@@ -233,7 +233,7 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(command);
         }
-        nclang_CompileCommand_getFilename(__functionAddress, command, __result);
+        nclang_CompileCommand_getFilename(command, __functionAddress, __result);
     }
 
     /** Get the filename associated with the CompileCommand. */
@@ -251,13 +251,13 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(command);
         }
-        return invokePI(__functionAddress, command);
+        return invokePI(command, __functionAddress);
     }
 
     // --- [ clang_CompileCommand_getArg ] ---
 
     /** Unsafe version of: {@link #clang_CompileCommand_getArg CompileCommand_getArg} */
-    public static native void nclang_CompileCommand_getArg(long __functionAddress, long command, int I, long __result);
+    public static native void nclang_CompileCommand_getArg(long command, int I, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_CompileCommand_getArg CompileCommand_getArg} */
     public static void nclang_CompileCommand_getArg(long command, int I, long __result) {
@@ -265,7 +265,7 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(command);
         }
-        nclang_CompileCommand_getArg(__functionAddress, command, I, __result);
+        nclang_CompileCommand_getArg(command, I, __functionAddress, __result);
     }
 
     /**
@@ -291,13 +291,13 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(command);
         }
-        return invokePI(__functionAddress, command);
+        return invokePI(command, __functionAddress);
     }
 
     // --- [ clang_CompileCommand_getMappedSourcePath ] ---
 
     /** Unsafe version of: {@link #clang_CompileCommand_getMappedSourcePath CompileCommand_getMappedSourcePath} */
-    public static native void nclang_CompileCommand_getMappedSourcePath(long __functionAddress, long command, int I, long __result);
+    public static native void nclang_CompileCommand_getMappedSourcePath(long command, int I, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_CompileCommand_getMappedSourcePath CompileCommand_getMappedSourcePath} */
     public static void nclang_CompileCommand_getMappedSourcePath(long command, int I, long __result) {
@@ -305,7 +305,7 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(command);
         }
-        nclang_CompileCommand_getMappedSourcePath(__functionAddress, command, I, __result);
+        nclang_CompileCommand_getMappedSourcePath(command, I, __functionAddress, __result);
     }
 
     /** Get the I'th mapped source path for the compiler invocation. */
@@ -317,7 +317,7 @@ public class ClangCompilationDatabase {
     // --- [ clang_CompileCommand_getMappedSourceContent ] ---
 
     /** Unsafe version of: {@link #clang_CompileCommand_getMappedSourceContent CompileCommand_getMappedSourceContent} */
-    public static native void nclang_CompileCommand_getMappedSourceContent(long __functionAddress, long command, int I, long __result);
+    public static native void nclang_CompileCommand_getMappedSourceContent(long command, int I, long __functionAddress, long __result);
 
     /** Unsafe version of: {@link #clang_CompileCommand_getMappedSourceContent CompileCommand_getMappedSourceContent} */
     public static void nclang_CompileCommand_getMappedSourceContent(long command, int I, long __result) {
@@ -325,7 +325,7 @@ public class ClangCompilationDatabase {
         if (CHECKS) {
             check(command);
         }
-        nclang_CompileCommand_getMappedSourceContent(__functionAddress, command, I, __result);
+        nclang_CompileCommand_getMappedSourceContent(command, I, __functionAddress, __result);
     }
 
     /** Get the I'th mapped source content for the compiler invocation. */

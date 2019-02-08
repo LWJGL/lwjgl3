@@ -359,7 +359,7 @@ public class ARBClearBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, buffer, internalformat, format, type, data);
+        callPV(buffer, internalformat, format, type, data, __functionAddress);
     }
 
     /** Array version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT} */
@@ -368,7 +368,7 @@ public class ARBClearBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, buffer, internalformat, format, type, data);
+        callPV(buffer, internalformat, format, type, data, __functionAddress);
     }
 
     /** Array version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT} */
@@ -377,7 +377,7 @@ public class ARBClearBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, buffer, internalformat, format, type, data);
+        callPV(buffer, internalformat, format, type, data, __functionAddress);
     }
 
     /** Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT} */
@@ -386,7 +386,7 @@ public class ARBClearBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+        callPPPV(buffer, internalformat, offset, size, format, type, data, __functionAddress);
     }
 
     /** Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT} */
@@ -395,7 +395,7 @@ public class ARBClearBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+        callPPPV(buffer, internalformat, offset, size, format, type, data, __functionAddress);
     }
 
     /** Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT} */
@@ -404,7 +404,7 @@ public class ARBClearBufferObject {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, buffer, internalformat, offset, size, format, type, data);
+        callPPPV(buffer, internalformat, offset, size, format, type, data, __functionAddress);
     }
 
 }

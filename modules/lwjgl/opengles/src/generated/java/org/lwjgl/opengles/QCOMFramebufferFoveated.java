@@ -80,7 +80,7 @@ public class QCOMFramebufferFoveated {
             check(__functionAddress);
             check(providedFeatures, 1);
         }
-        callPV(__functionAddress, fbo, numLayers, focalPointsPerLayer, requestedFeatures, providedFeatures);
+        callPV(fbo, numLayers, focalPointsPerLayer, requestedFeatures, providedFeatures, __functionAddress);
     }
 
 }

@@ -147,7 +147,7 @@ public class CU50 extends CU42 {
 
     public static int ncuMipmappedArrayCreate(long pHandle, long pMipmappedArrayDesc, int numMipmapLevels) {
         long __functionAddress = Functions.MipmappedArrayCreate;
-        return callPPI(__functionAddress, pHandle, pMipmappedArrayDesc, numMipmapLevels);
+        return callPPI(pHandle, pMipmappedArrayDesc, numMipmapLevels, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -165,7 +165,7 @@ public class CU50 extends CU42 {
         if (CHECKS) {
             check(hMipmappedArray);
         }
-        return callPPI(__functionAddress, pLevelArray, hMipmappedArray, level);
+        return callPPI(pLevelArray, hMipmappedArray, level, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -184,14 +184,14 @@ public class CU50 extends CU42 {
         if (CHECKS) {
             check(hMipmappedArray);
         }
-        return callPI(__functionAddress, hMipmappedArray);
+        return callPI(hMipmappedArray, __functionAddress);
     }
 
     // --- [ cuTexObjectCreate ] ---
 
     public static int ncuTexObjectCreate(long pTexObject, long pResDesc, long pTexDesc, long pResViewDesc) {
         long __functionAddress = Functions.TexObjectCreate;
-        return callPPPPI(__functionAddress, pTexObject, pResDesc, pTexDesc, pResViewDesc);
+        return callPPPPI(pTexObject, pResDesc, pTexDesc, pResViewDesc, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -207,14 +207,14 @@ public class CU50 extends CU42 {
     @NativeType("CUresult")
     public static int cuTexObjectDestroy(@NativeType("CUtexObject") long texObject) {
         long __functionAddress = Functions.TexObjectDestroy;
-        return callJI(__functionAddress, texObject);
+        return callJI(texObject, __functionAddress);
     }
 
     // --- [ cuTexObjectGetResourceDesc ] ---
 
     public static int ncuTexObjectGetResourceDesc(long pResDesc, long texObject) {
         long __functionAddress = Functions.TexObjectGetResourceDesc;
-        return callPJI(__functionAddress, pResDesc, texObject);
+        return callPJI(pResDesc, texObject, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -226,7 +226,7 @@ public class CU50 extends CU42 {
 
     public static int ncuTexObjectGetTextureDesc(long pTexDesc, long texObject) {
         long __functionAddress = Functions.TexObjectGetTextureDesc;
-        return callPJI(__functionAddress, pTexDesc, texObject);
+        return callPJI(pTexDesc, texObject, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -238,7 +238,7 @@ public class CU50 extends CU42 {
 
     public static int ncuTexObjectGetResourceViewDesc(long pResViewDesc, long texObject) {
         long __functionAddress = Functions.TexObjectGetResourceViewDesc;
-        return callPJI(__functionAddress, pResViewDesc, texObject);
+        return callPJI(pResViewDesc, texObject, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -250,7 +250,7 @@ public class CU50 extends CU42 {
 
     public static int ncuSurfObjectCreate(long pSurfObject, long pResDesc) {
         long __functionAddress = Functions.SurfObjectCreate;
-        return callPPI(__functionAddress, pSurfObject, pResDesc);
+        return callPPI(pSurfObject, pResDesc, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -266,14 +266,14 @@ public class CU50 extends CU42 {
     @NativeType("CUresult")
     public static int cuSurfObjectDestroy(@NativeType("CUsurfObject") long surfObject) {
         long __functionAddress = Functions.SurfObjectDestroy;
-        return callJI(__functionAddress, surfObject);
+        return callJI(surfObject, __functionAddress);
     }
 
     // --- [ cuSurfObjectGetResourceDesc ] ---
 
     public static int ncuSurfObjectGetResourceDesc(long pResDesc, long surfObject) {
         long __functionAddress = Functions.SurfObjectGetResourceDesc;
-        return callPJI(__functionAddress, pResDesc, surfObject);
+        return callPJI(pResDesc, surfObject, __functionAddress);
     }
 
     @NativeType("CUresult")
@@ -288,7 +288,7 @@ public class CU50 extends CU42 {
         if (CHECKS) {
             check(resource);
         }
-        return callPPI(__functionAddress, pMipmappedArray, resource);
+        return callPPI(pMipmappedArray, resource, __functionAddress);
     }
 
     @NativeType("CUresult")

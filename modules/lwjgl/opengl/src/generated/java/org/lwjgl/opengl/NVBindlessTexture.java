@@ -312,7 +312,7 @@ public class NVBindlessTexture {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, location, values.length, values);
+        callPV(location, values.length, values, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramUniformHandleui64vNV ProgramUniformHandleui64vNV} */
@@ -321,7 +321,7 @@ public class NVBindlessTexture {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, program, location, values.length, values);
+        callPV(program, location, values.length, values, __functionAddress);
     }
 
 }

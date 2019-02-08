@@ -38,7 +38,7 @@ public class GLXNVCopyBuffer {
             check(readCtx);
             check(writeCtx);
         }
-        callPPPPPPV(__functionAddress, display, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size);
+        callPPPPPPV(display, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size, __functionAddress);
     }
 
     // --- [ glXNamedCopyBufferSubDataNV ] ---
@@ -52,7 +52,7 @@ public class GLXNVCopyBuffer {
             check(readCtx);
             check(writeCtx);
         }
-        callPPPPPPV(__functionAddress, display, readCtx, writeCtx, readBuffer, writeBuffer, readOffset, writeOffset, size);
+        callPPPPPPV(display, readCtx, writeCtx, readBuffer, writeBuffer, readOffset, writeOffset, size, __functionAddress);
     }
 
 }

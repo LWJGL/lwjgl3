@@ -579,7 +579,7 @@ public class NVCommandList {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, states.length, states);
+        callPV(states.length, states, __functionAddress);
     }
 
     /** Array version of: {@link #glDeleteStatesNV DeleteStatesNV} */
@@ -588,7 +588,7 @@ public class NVCommandList {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, states.length, states);
+        callPV(states.length, states, __functionAddress);
     }
 
     /** Array version of: {@link #glDrawCommandsNV DrawCommandsNV} */
@@ -598,7 +598,7 @@ public class NVCommandList {
             check(__functionAddress);
             check(sizes, indirects.remaining());
         }
-        callPPV(__functionAddress, primitiveMode, buffer, memAddress(indirects), sizes, indirects.remaining());
+        callPPV(primitiveMode, buffer, memAddress(indirects), sizes, indirects.remaining(), __functionAddress);
     }
 
     /** Array version of: {@link #glDrawCommandsAddressNV DrawCommandsAddressNV} */
@@ -608,7 +608,7 @@ public class NVCommandList {
             check(__functionAddress);
             check(sizes, indirects.length);
         }
-        callPPV(__functionAddress, primitiveMode, indirects, sizes, indirects.length);
+        callPPV(primitiveMode, indirects, sizes, indirects.length, __functionAddress);
     }
 
     /** Array version of: {@link #glDrawCommandsStatesNV DrawCommandsStatesNV} */
@@ -620,7 +620,7 @@ public class NVCommandList {
             check(states, indirects.remaining());
             check(fbos, indirects.remaining());
         }
-        callPPPPV(__functionAddress, buffer, memAddress(indirects), sizes, states, fbos, indirects.remaining());
+        callPPPPV(buffer, memAddress(indirects), sizes, states, fbos, indirects.remaining(), __functionAddress);
     }
 
     /** Array version of: {@link #glDrawCommandsStatesAddressNV DrawCommandsStatesAddressNV} */
@@ -632,7 +632,7 @@ public class NVCommandList {
             check(states, indirects.length);
             check(fbos, indirects.length);
         }
-        callPPPPV(__functionAddress, indirects, sizes, states, fbos, indirects.length);
+        callPPPPV(indirects, sizes, states, fbos, indirects.length, __functionAddress);
     }
 
     /** Array version of: {@link #glCreateCommandListsNV CreateCommandListsNV} */
@@ -641,7 +641,7 @@ public class NVCommandList {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, lists.length, lists);
+        callPV(lists.length, lists, __functionAddress);
     }
 
     /** Array version of: {@link #glDeleteCommandListsNV DeleteCommandListsNV} */
@@ -650,7 +650,7 @@ public class NVCommandList {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, lists.length, lists);
+        callPV(lists.length, lists, __functionAddress);
     }
 
     /** Array version of: {@link #glListDrawCommandsStatesClientNV ListDrawCommandsStatesClientNV} */
@@ -662,7 +662,7 @@ public class NVCommandList {
             check(states, indirects.remaining());
             check(fbos, indirects.remaining());
         }
-        callPPPPV(__functionAddress, list, segment, memAddress(indirects), memAddress(sizes), states, fbos, indirects.remaining());
+        callPPPPV(list, segment, memAddress(indirects), memAddress(sizes), states, fbos, indirects.remaining(), __functionAddress);
     }
 
 }

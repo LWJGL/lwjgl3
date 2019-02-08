@@ -888,7 +888,7 @@ public class GL32C extends GL31C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, target, pname, params);
+        callPV(target, pname, params, __functionAddress);
     }
 
     /**
@@ -903,7 +903,7 @@ public class GL32C extends GL31C {
             check(indices, count.length);
             check(basevertex, count.length);
         }
-        callPPPV(__functionAddress, mode, count, type, memAddress(indices), count.length, basevertex);
+        callPPPV(mode, count, type, memAddress(indices), count.length, basevertex, __functionAddress);
     }
 
     /**
@@ -917,7 +917,7 @@ public class GL32C extends GL31C {
             check(__functionAddress);
             check(val, 1);
         }
-        callPV(__functionAddress, pname, index, val);
+        callPV(pname, index, val, __functionAddress);
     }
 
     /**
@@ -931,7 +931,7 @@ public class GL32C extends GL31C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, pname, params);
+        callPV(pname, params, __functionAddress);
     }
 
     /**
@@ -945,7 +945,7 @@ public class GL32C extends GL31C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, pname, index, params);
+        callPV(pname, index, params, __functionAddress);
     }
 
     /**
@@ -960,7 +960,7 @@ public class GL32C extends GL31C {
             check(sync);
             checkSafe(length, 1);
         }
-        callPPPV(__functionAddress, sync, pname, values.length, length, values);
+        callPPPV(sync, pname, values.length, length, values, __functionAddress);
     }
 
 }

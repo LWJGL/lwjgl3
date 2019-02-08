@@ -166,12 +166,12 @@ public final class EGL {
         long QueryString = functionProvider.getFunctionAddress("eglQueryString");
 
         // Available on EGL 1.5 or EGL_EXT_client_extensions
-        long extensionsString = callPP(QueryString, EGL_NO_DISPLAY, EGL_EXTENSIONS);
+        long extensionsString = callPP(EGL_NO_DISPLAY, EGL_EXTENSIONS, QueryString);
         if (extensionsString == NULL) {
             callI(functionProvider.getFunctionAddress("eglGetError")); // clear error
         } else {
             // Available on EGL 1.5 only
-            String versionString = memASCIISafe(callPP(QueryString, EGL_NO_DISPLAY, EGL_VERSION));
+            String versionString = memASCIISafe(callPP(EGL_NO_DISPLAY, EGL_VERSION, QueryString));
             if (versionString == null) {
                 callI(functionProvider.getFunctionAddress("eglGetError")); // clear error
             } else {

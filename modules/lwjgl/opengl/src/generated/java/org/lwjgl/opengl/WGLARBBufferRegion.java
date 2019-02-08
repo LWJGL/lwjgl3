@@ -55,7 +55,7 @@ public class WGLARBBufferRegion {
             check(__functionAddress);
             check(hdc);
         }
-        return callPP(__functionAddress, hdc, layerPlane, type);
+        return callPP(hdc, layerPlane, type, __functionAddress);
     }
 
     // --- [ wglDeleteBufferRegionARB ] ---
@@ -72,7 +72,7 @@ public class WGLARBBufferRegion {
             check(__functionAddress);
             check(region);
         }
-        callPV(__functionAddress, region);
+        callPV(region, __functionAddress);
     }
 
     // --- [ wglSaveBufferRegionARB ] ---
@@ -100,7 +100,7 @@ public class WGLARBBufferRegion {
             check(__functionAddress);
             check(region);
         }
-        return callPI(__functionAddress, region, x, y, width, height) != 0;
+        return callPI(region, x, y, width, height, __functionAddress) != 0;
     }
 
     // --- [ wglRestoreBufferRegionARB ] ---
@@ -123,7 +123,7 @@ public class WGLARBBufferRegion {
             check(__functionAddress);
             check(region);
         }
-        return callPI(__functionAddress, region, x, y, width, height, xSrc, ySrc) != 0;
+        return callPI(region, x, y, width, height, xSrc, ySrc, __functionAddress) != 0;
     }
 
 }

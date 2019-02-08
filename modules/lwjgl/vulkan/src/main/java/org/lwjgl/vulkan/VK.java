@@ -144,7 +144,7 @@ public final class VK {
             if (EnumerateInstanceVersion != NULL) {
                 IntBuffer pi = stack.callocInt(1);
                 VK11.vkEnumerateInstanceVersion(pi);
-                if (callPI(EnumerateInstanceVersion, memAddress(pi)) == VK_SUCCESS) {
+                if (callPI(memAddress(pi), EnumerateInstanceVersion) == VK_SUCCESS) {
                     return pi.get(0);
                 }
             }
@@ -176,7 +176,7 @@ public final class VK {
         private long getFunctionAddress(String name) { return getFunctionAddress(name, true); }
         private long getFunctionAddress(String name, boolean required) {
             try (MemoryStack stack = stackPush()) {
-                long address = callPPP(vkGetInstanceProcAddr, NULL, memAddress(stack.ASCII(name)));
+                long address = callPPP(NULL, memAddress(stack.ASCII(name)), vkGetInstanceProcAddr);
                 if (address == NULL && required) {
                     throw new IllegalArgumentException("A critical function is missing. Make sure that Vulkan is available.");
                 }
