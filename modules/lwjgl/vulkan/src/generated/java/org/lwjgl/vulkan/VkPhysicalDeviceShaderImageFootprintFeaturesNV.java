@@ -75,7 +75,7 @@ public class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends Struct imple
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -131,23 +131,23 @@ public class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends Struct imple
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShaderImageFootprintFeaturesNV malloc() {
         return wrap(VkPhysicalDeviceShaderImageFootprintFeaturesNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShaderImageFootprintFeaturesNV calloc() {
         return wrap(VkPhysicalDeviceShaderImageFootprintFeaturesNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceShaderImageFootprintFeaturesNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPhysicalDeviceShaderImageFootprintFeaturesNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceShaderImageFootprintFeaturesNV create(long address) {
         return wrap(VkPhysicalDeviceShaderImageFootprintFeaturesNV.class, address);
     }
@@ -204,18 +204,18 @@ public class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends Struct imple
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPhysicalDeviceShaderImageFootprintFeaturesNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPhysicalDeviceShaderImageFootprintFeaturesNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -224,7 +224,7 @@ public class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends Struct imple
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPhysicalDeviceShaderImageFootprintFeaturesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -294,7 +294,7 @@ public class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends Struct imple
         private static final VkPhysicalDeviceShaderImageFootprintFeaturesNV ELEMENT_FACTORY = VkPhysicalDeviceShaderImageFootprintFeaturesNV.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceShaderImageFootprintFeaturesNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

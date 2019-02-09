@@ -51,7 +51,7 @@ public class LLVMOptRemarkStringRef extends Struct {
     }
 
     /**
-     * Creates a {@link LLVMOptRemarkStringRef} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code LLVMOptRemarkStringRef} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -75,7 +75,7 @@ public class LLVMOptRemarkStringRef extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link LLVMOptRemarkStringRef} instance for the specified memory address. */
+    /** Returns a new {@code LLVMOptRemarkStringRef} instance for the specified memory address. */
     public static LLVMOptRemarkStringRef create(long address) {
         return wrap(LLVMOptRemarkStringRef.class, address);
     }
@@ -119,7 +119,7 @@ public class LLVMOptRemarkStringRef extends Struct {
         private static final LLVMOptRemarkStringRef ELEMENT_FACTORY = LLVMOptRemarkStringRef.create(-1L);
 
         /**
-         * Creates a new {@link LLVMOptRemarkStringRef.Buffer} instance backed by the specified container.
+         * Creates a new {@code LLVMOptRemarkStringRef.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

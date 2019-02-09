@@ -59,7 +59,7 @@ public abstract class BGFXScreenShotCallback extends Callback implements BGFXScr
         super(SIGNATURE);
     }
 
-    private BGFXScreenShotCallback(long functionPointer) {
+    BGFXScreenShotCallback(long functionPointer) {
         super(functionPointer);
     }
 

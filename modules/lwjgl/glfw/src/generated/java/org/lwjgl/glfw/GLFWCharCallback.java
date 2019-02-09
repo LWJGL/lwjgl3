@@ -57,7 +57,7 @@ public abstract class GLFWCharCallback extends Callback implements GLFWCharCallb
         super(SIGNATURE);
     }
 
-    private GLFWCharCallback(long functionPointer) {
+    GLFWCharCallback(long functionPointer) {
         super(functionPointer);
     }
 

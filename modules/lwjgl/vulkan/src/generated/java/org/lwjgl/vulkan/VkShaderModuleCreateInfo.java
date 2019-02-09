@@ -102,7 +102,7 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VkShaderModuleCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkShaderModuleCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -168,23 +168,23 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkShaderModuleCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkShaderModuleCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkShaderModuleCreateInfo malloc() {
         return wrap(VkShaderModuleCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkShaderModuleCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkShaderModuleCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkShaderModuleCreateInfo calloc() {
         return wrap(VkShaderModuleCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkShaderModuleCreateInfo} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkShaderModuleCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkShaderModuleCreateInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkShaderModuleCreateInfo.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkShaderModuleCreateInfo} instance for the specified memory address. */
+    /** Returns a new {@code VkShaderModuleCreateInfo} instance for the specified memory address. */
     public static VkShaderModuleCreateInfo create(long address) {
         return wrap(VkShaderModuleCreateInfo.class, address);
     }
@@ -241,18 +241,18 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkShaderModuleCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkShaderModuleCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkShaderModuleCreateInfo mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkShaderModuleCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkShaderModuleCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkShaderModuleCreateInfo callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkShaderModuleCreateInfo} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkShaderModuleCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -261,7 +261,7 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VkShaderModuleCreateInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkShaderModuleCreateInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -348,7 +348,7 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -360,7 +360,7 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
         private static final VkShaderModuleCreateInfo ELEMENT_FACTORY = VkShaderModuleCreateInfo.create(-1L);
 
         /**
-         * Creates a new {@link VkShaderModuleCreateInfo.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkShaderModuleCreateInfo.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

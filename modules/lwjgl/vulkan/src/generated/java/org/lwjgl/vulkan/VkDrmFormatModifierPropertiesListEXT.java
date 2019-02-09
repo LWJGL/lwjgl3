@@ -87,7 +87,7 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
     }
 
     /**
-     * Creates a {@link VkDrmFormatModifierPropertiesListEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkDrmFormatModifierPropertiesListEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -151,23 +151,23 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDrmFormatModifierPropertiesListEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDrmFormatModifierPropertiesListEXT malloc() {
         return wrap(VkDrmFormatModifierPropertiesListEXT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkDrmFormatModifierPropertiesListEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDrmFormatModifierPropertiesListEXT calloc() {
         return wrap(VkDrmFormatModifierPropertiesListEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkDrmFormatModifierPropertiesListEXT} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated with {@link BufferUtils}. */
     public static VkDrmFormatModifierPropertiesListEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkDrmFormatModifierPropertiesListEXT.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkDrmFormatModifierPropertiesListEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance for the specified memory address. */
     public static VkDrmFormatModifierPropertiesListEXT create(long address) {
         return wrap(VkDrmFormatModifierPropertiesListEXT.class, address);
     }
@@ -224,18 +224,18 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDrmFormatModifierPropertiesListEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkDrmFormatModifierPropertiesListEXT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkDrmFormatModifierPropertiesListEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkDrmFormatModifierPropertiesListEXT callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkDrmFormatModifierPropertiesListEXT} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -244,7 +244,7 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
     }
 
     /**
-     * Returns a new {@link VkDrmFormatModifierPropertiesListEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -318,7 +318,7 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
         private static final VkDrmFormatModifierPropertiesListEXT ELEMENT_FACTORY = VkDrmFormatModifierPropertiesListEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkDrmFormatModifierPropertiesListEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkDrmFormatModifierPropertiesListEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

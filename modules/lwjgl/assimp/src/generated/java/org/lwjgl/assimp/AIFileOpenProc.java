@@ -52,7 +52,7 @@ public abstract class AIFileOpenProc extends Callback implements AIFileOpenProcI
         super(SIGNATURE);
     }
 
-    private AIFileOpenProc(long functionPointer) {
+    AIFileOpenProc(long functionPointer) {
         super(functionPointer);
     }
 

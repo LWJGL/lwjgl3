@@ -58,7 +58,7 @@ public abstract class GLDebugMessageARBCallback extends Callback implements GLDe
         super(SIGNATURE);
     }
 
-    private GLDebugMessageARBCallback(long functionPointer) {
+    GLDebugMessageARBCallback(long functionPointer) {
         super(functionPointer);
     }
 

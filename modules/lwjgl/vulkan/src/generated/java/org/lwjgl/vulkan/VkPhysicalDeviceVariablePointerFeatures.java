@@ -84,7 +84,7 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceVariablePointerFeatures} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceVariablePointerFeatures} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -147,23 +147,23 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceVariablePointerFeatures} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVariablePointerFeatures malloc() {
         return wrap(VkPhysicalDeviceVariablePointerFeatures.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceVariablePointerFeatures} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVariablePointerFeatures calloc() {
         return wrap(VkPhysicalDeviceVariablePointerFeatures.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPhysicalDeviceVariablePointerFeatures} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceVariablePointerFeatures create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPhysicalDeviceVariablePointerFeatures.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceVariablePointerFeatures} instance for the specified memory address. */
     public static VkPhysicalDeviceVariablePointerFeatures create(long address) {
         return wrap(VkPhysicalDeviceVariablePointerFeatures.class, address);
     }
@@ -220,18 +220,18 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPhysicalDeviceVariablePointerFeatures} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPhysicalDeviceVariablePointerFeatures mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPhysicalDeviceVariablePointerFeatures} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPhysicalDeviceVariablePointerFeatures callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPhysicalDeviceVariablePointerFeatures} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -240,7 +240,7 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceVariablePointerFeatures} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPhysicalDeviceVariablePointerFeatures} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -314,7 +314,7 @@ public class VkPhysicalDeviceVariablePointerFeatures extends Struct implements N
         private static final VkPhysicalDeviceVariablePointerFeatures ELEMENT_FACTORY = VkPhysicalDeviceVariablePointerFeatures.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceVariablePointerFeatures.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceVariablePointerFeatures.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

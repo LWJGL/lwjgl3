@@ -57,7 +57,7 @@ public abstract class CXFieldVisitor extends Callback implements CXFieldVisitorI
         super(SIGNATURE);
     }
 
-    private CXFieldVisitor(long functionPointer) {
+    CXFieldVisitor(long functionPointer) {
         super(functionPointer);
     }
 

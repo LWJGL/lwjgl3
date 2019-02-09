@@ -48,7 +48,7 @@ public class VREventStatus extends Struct {
     }
 
     /**
-     * Creates a {@link VREventStatus} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VREventStatus} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -66,7 +66,7 @@ public class VREventStatus extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VREventStatus} instance for the specified memory address. */
+    /** Returns a new {@code VREventStatus} instance for the specified memory address. */
     public static VREventStatus create(long address) {
         return wrap(VREventStatus.class, address);
     }
@@ -106,7 +106,7 @@ public class VREventStatus extends Struct {
         private static final VREventStatus ELEMENT_FACTORY = VREventStatus.create(-1L);
 
         /**
-         * Creates a new {@link VREventStatus.Buffer} instance backed by the specified container.
+         * Creates a new {@code VREventStatus.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -53,7 +53,7 @@ public abstract class IndexerIndexEntityReference extends Callback implements In
         super(SIGNATURE);
     }
 
-    private IndexerIndexEntityReference(long functionPointer) {
+    IndexerIndexEntityReference(long functionPointer) {
         super(functionPointer);
     }
 

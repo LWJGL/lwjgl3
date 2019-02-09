@@ -58,7 +58,7 @@ public abstract class GLFWFramebufferSizeCallback extends Callback implements GL
         super(SIGNATURE);
     }
 
-    private GLFWFramebufferSizeCallback(long functionPointer) {
+    GLFWFramebufferSizeCallback(long functionPointer) {
         super(functionPointer);
     }
 

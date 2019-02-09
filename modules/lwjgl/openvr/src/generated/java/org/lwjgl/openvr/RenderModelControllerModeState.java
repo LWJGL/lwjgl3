@@ -54,7 +54,7 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
     }
 
     /**
-     * Creates a {@link RenderModelControllerModeState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code RenderModelControllerModeState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -87,23 +87,23 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
 
     // -----------------------------------
 
-    /** Returns a new {@link RenderModelControllerModeState} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code RenderModelControllerModeState} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static RenderModelControllerModeState malloc() {
         return wrap(RenderModelControllerModeState.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link RenderModelControllerModeState} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code RenderModelControllerModeState} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static RenderModelControllerModeState calloc() {
         return wrap(RenderModelControllerModeState.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link RenderModelControllerModeState} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code RenderModelControllerModeState} instance allocated with {@link BufferUtils}. */
     public static RenderModelControllerModeState create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(RenderModelControllerModeState.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link RenderModelControllerModeState} instance for the specified memory address. */
+    /** Returns a new {@code RenderModelControllerModeState} instance for the specified memory address. */
     public static RenderModelControllerModeState create(long address) {
         return wrap(RenderModelControllerModeState.class, address);
     }
@@ -160,18 +160,18 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
 
     // -----------------------------------
 
-    /** Returns a new {@link RenderModelControllerModeState} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code RenderModelControllerModeState} instance allocated on the thread-local {@link MemoryStack}. */
     public static RenderModelControllerModeState mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link RenderModelControllerModeState} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code RenderModelControllerModeState} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static RenderModelControllerModeState callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link RenderModelControllerModeState} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code RenderModelControllerModeState} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -180,7 +180,7 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
     }
 
     /**
-     * Returns a new {@link RenderModelControllerModeState} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code RenderModelControllerModeState} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -242,7 +242,7 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
         private static final RenderModelControllerModeState ELEMENT_FACTORY = RenderModelControllerModeState.create(-1L);
 
         /**
-         * Creates a new {@link RenderModelControllerModeState.Buffer} instance backed by the specified container.
+         * Creates a new {@code RenderModelControllerModeState.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

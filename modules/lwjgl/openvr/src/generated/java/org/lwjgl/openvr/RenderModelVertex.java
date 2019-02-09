@@ -63,7 +63,7 @@ public class RenderModelVertex extends Struct {
     }
 
     /**
-     * Creates a {@link RenderModelVertex} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code RenderModelVertex} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -93,7 +93,7 @@ public class RenderModelVertex extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link RenderModelVertex} instance for the specified memory address. */
+    /** Returns a new {@code RenderModelVertex} instance for the specified memory address. */
     public static RenderModelVertex create(long address) {
         return wrap(RenderModelVertex.class, address);
     }
@@ -141,7 +141,7 @@ public class RenderModelVertex extends Struct {
         private static final RenderModelVertex ELEMENT_FACTORY = RenderModelVertex.create(-1L);
 
         /**
-         * Creates a new {@link RenderModelVertex.Buffer} instance backed by the specified container.
+         * Creates a new {@code RenderModelVertex.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -60,7 +60,7 @@ public class VREventKeyboard extends Struct {
     }
 
     /**
-     * Creates a {@link VREventKeyboard} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VREventKeyboard} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -84,7 +84,7 @@ public class VREventKeyboard extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VREventKeyboard} instance for the specified memory address. */
+    /** Returns a new {@code VREventKeyboard} instance for the specified memory address. */
     public static VREventKeyboard create(long address) {
         return wrap(VREventKeyboard.class, address);
     }
@@ -130,7 +130,7 @@ public class VREventKeyboard extends Struct {
         private static final VREventKeyboard ELEMENT_FACTORY = VREventKeyboard.create(-1L);
 
         /**
-         * Creates a new {@link VREventKeyboard.Buffer} instance backed by the specified container.
+         * Creates a new {@code VREventKeyboard.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

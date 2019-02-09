@@ -51,7 +51,7 @@ public abstract class RMTFree extends Callback implements RMTFreeI {
         super(SIGNATURE);
     }
 
-    private RMTFree(long functionPointer) {
+    RMTFree(long functionPointer) {
         super(functionPointer);
     }
 

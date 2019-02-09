@@ -56,7 +56,7 @@ public abstract class NkQueryFontGlyphCallback extends Callback implements NkQue
         super(SIGNATURE);
     }
 
-    private NkQueryFontGlyphCallback(long functionPointer) {
+    NkQueryFontGlyphCallback(long functionPointer) {
         super(functionPointer);
     }
 

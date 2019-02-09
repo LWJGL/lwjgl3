@@ -53,7 +53,7 @@ public abstract class IndexerIndexDeclaration extends Callback implements Indexe
         super(SIGNATURE);
     }
 
-    private IndexerIndexDeclaration(long functionPointer) {
+    IndexerIndexDeclaration(long functionPointer) {
         super(functionPointer);
     }
 

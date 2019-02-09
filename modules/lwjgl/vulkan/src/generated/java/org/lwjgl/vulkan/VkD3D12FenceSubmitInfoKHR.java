@@ -99,7 +99,7 @@ public class VkD3D12FenceSubmitInfoKHR extends Struct implements NativeResource 
     }
 
     /**
-     * Creates a {@link VkD3D12FenceSubmitInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkD3D12FenceSubmitInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -178,23 +178,23 @@ public class VkD3D12FenceSubmitInfoKHR extends Struct implements NativeResource 
 
     // -----------------------------------
 
-    /** Returns a new {@link VkD3D12FenceSubmitInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkD3D12FenceSubmitInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkD3D12FenceSubmitInfoKHR malloc() {
         return wrap(VkD3D12FenceSubmitInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkD3D12FenceSubmitInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkD3D12FenceSubmitInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkD3D12FenceSubmitInfoKHR calloc() {
         return wrap(VkD3D12FenceSubmitInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkD3D12FenceSubmitInfoKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkD3D12FenceSubmitInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkD3D12FenceSubmitInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkD3D12FenceSubmitInfoKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkD3D12FenceSubmitInfoKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkD3D12FenceSubmitInfoKHR} instance for the specified memory address. */
     public static VkD3D12FenceSubmitInfoKHR create(long address) {
         return wrap(VkD3D12FenceSubmitInfoKHR.class, address);
     }
@@ -251,18 +251,18 @@ public class VkD3D12FenceSubmitInfoKHR extends Struct implements NativeResource 
 
     // -----------------------------------
 
-    /** Returns a new {@link VkD3D12FenceSubmitInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkD3D12FenceSubmitInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkD3D12FenceSubmitInfoKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkD3D12FenceSubmitInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkD3D12FenceSubmitInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkD3D12FenceSubmitInfoKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkD3D12FenceSubmitInfoKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkD3D12FenceSubmitInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -271,7 +271,7 @@ public class VkD3D12FenceSubmitInfoKHR extends Struct implements NativeResource 
     }
 
     /**
-     * Returns a new {@link VkD3D12FenceSubmitInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkD3D12FenceSubmitInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -353,7 +353,7 @@ public class VkD3D12FenceSubmitInfoKHR extends Struct implements NativeResource 
         private static final VkD3D12FenceSubmitInfoKHR ELEMENT_FACTORY = VkD3D12FenceSubmitInfoKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkD3D12FenceSubmitInfoKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkD3D12FenceSubmitInfoKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

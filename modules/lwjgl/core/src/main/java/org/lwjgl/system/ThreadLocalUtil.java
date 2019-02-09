@@ -134,7 +134,7 @@ public final class ThreadLocalUtil {
                 DEBUG_STREAM
                     .println("[LWJGL] [ThreadLocalUtil] Unsupported JNI version detected, this may result in a crash. Please inform LWJGL developers.");
         }
-        SIZE_OF_JNI_NATIVE_INTERFACE = (reservedCount + jniCallCount) * POINTER_SIZE;
+        SIZE_OF_JNI_NATIVE_INTERFACE = Integer.toUnsignedLong((reservedCount + jniCallCount)) * POINTER_SIZE;
     }
 
     private ThreadLocalUtil() {
@@ -166,7 +166,7 @@ public final class ThreadLocalUtil {
                 setThreadJNIEnv(env = newEnv);
             }
 
-            memPutAddress(env + index * POINTER_SIZE, capabilities);
+            memPutAddress(env + Integer.toUnsignedLong(index) * POINTER_SIZE, capabilities);
         }
     }
 
@@ -183,20 +183,20 @@ public final class ThreadLocalUtil {
     // Ensures FUNCTION_MISSING_ABORT will be called even if no context is current,
     public static void setFunctionMissingAddresses(@Nullable Class<?> capabilitiesClass, int index) {
         if (capabilitiesClass == null) {
-            long missingCaps = memGetAddress(JNI_NATIVE_INTERFACE + index * POINTER_SIZE);
+            long missingCaps = memGetAddress(JNI_NATIVE_INTERFACE + Integer.toUnsignedLong(index) * POINTER_SIZE);
             if (missingCaps != NULL) {
                 getAllocator().free(missingCaps);
-                memPutAddress(JNI_NATIVE_INTERFACE + index * POINTER_SIZE, NULL);
+                memPutAddress(JNI_NATIVE_INTERFACE + Integer.toUnsignedLong(index) * POINTER_SIZE, NULL);
             }
         } else {
             int functionCount = getFieldsFromCapabilities(capabilitiesClass).size();
 
-            long missingCaps = getAllocator().malloc(functionCount * POINTER_SIZE);
+            long missingCaps = getAllocator().malloc(Integer.toUnsignedLong(functionCount) * POINTER_SIZE);
             for (int i = 0; i < functionCount; i++) {
-                memPutAddress(missingCaps + i * POINTER_SIZE, FUNCTION_MISSING_ABORT);
+                memPutAddress(missingCaps + Integer.toUnsignedLong(i) * POINTER_SIZE, FUNCTION_MISSING_ABORT);
             }
 
-            memPutAddress(JNI_NATIVE_INTERFACE + index * POINTER_SIZE, missingCaps);
+            memPutAddress(JNI_NATIVE_INTERFACE + Integer.toUnsignedLong(index) * POINTER_SIZE, missingCaps);
         }
     }
 

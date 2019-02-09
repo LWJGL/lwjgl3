@@ -53,7 +53,7 @@ public class CXIdxBaseClassInfo extends Struct {
     }
 
     /**
-     * Creates a {@link CXIdxBaseClassInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code CXIdxBaseClassInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -75,7 +75,7 @@ public class CXIdxBaseClassInfo extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link CXIdxBaseClassInfo} instance for the specified memory address. */
+    /** Returns a new {@code CXIdxBaseClassInfo} instance for the specified memory address. */
     public static CXIdxBaseClassInfo create(long address) {
         return wrap(CXIdxBaseClassInfo.class, address);
     }
@@ -119,7 +119,7 @@ public class CXIdxBaseClassInfo extends Struct {
         private static final CXIdxBaseClassInfo ELEMENT_FACTORY = CXIdxBaseClassInfo.create(-1L);
 
         /**
-         * Creates a new {@link CXIdxBaseClassInfo.Buffer} instance backed by the specified container.
+         * Creates a new {@code CXIdxBaseClassInfo.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

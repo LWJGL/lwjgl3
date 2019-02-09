@@ -56,7 +56,7 @@ public class VRTextureWithPose extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VRTextureWithPose} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VRTextureWithPose} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -91,23 +91,23 @@ public class VRTextureWithPose extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VRTextureWithPose} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VRTextureWithPose} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VRTextureWithPose malloc() {
         return wrap(VRTextureWithPose.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VRTextureWithPose} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VRTextureWithPose} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VRTextureWithPose calloc() {
         return wrap(VRTextureWithPose.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VRTextureWithPose} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VRTextureWithPose} instance allocated with {@link BufferUtils}. */
     public static VRTextureWithPose create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VRTextureWithPose.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VRTextureWithPose} instance for the specified memory address. */
+    /** Returns a new {@code VRTextureWithPose} instance for the specified memory address. */
     public static VRTextureWithPose create(long address) {
         return wrap(VRTextureWithPose.class, address);
     }
@@ -164,18 +164,18 @@ public class VRTextureWithPose extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VRTextureWithPose} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VRTextureWithPose} instance allocated on the thread-local {@link MemoryStack}. */
     public static VRTextureWithPose mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VRTextureWithPose} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VRTextureWithPose} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VRTextureWithPose callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VRTextureWithPose} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VRTextureWithPose} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -184,7 +184,7 @@ public class VRTextureWithPose extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VRTextureWithPose} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VRTextureWithPose} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -246,7 +246,7 @@ public class VRTextureWithPose extends Struct implements NativeResource {
         private static final VRTextureWithPose ELEMENT_FACTORY = VRTextureWithPose.create(-1L);
 
         /**
-         * Creates a new {@link VRTextureWithPose.Buffer} instance backed by the specified container.
+         * Creates a new {@code VRTextureWithPose.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

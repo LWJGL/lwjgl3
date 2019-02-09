@@ -55,7 +55,7 @@ public abstract class VmaAllocateDeviceMemoryFunction extends Callback implement
         super(SIGNATURE);
     }
 
-    private VmaAllocateDeviceMemoryFunction(long functionPointer) {
+    VmaAllocateDeviceMemoryFunction(long functionPointer) {
         super(functionPointer);
     }
 

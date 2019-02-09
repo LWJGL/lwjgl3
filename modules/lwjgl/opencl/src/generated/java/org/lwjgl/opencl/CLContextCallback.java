@@ -55,7 +55,7 @@ public abstract class CLContextCallback extends Callback implements CLContextCal
         super(SIGNATURE);
     }
 
-    private CLContextCallback(long functionPointer) {
+    CLContextCallback(long functionPointer) {
         super(functionPointer);
     }
 

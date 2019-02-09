@@ -75,7 +75,7 @@ public abstract class VkReallocationFunction extends Callback implements VkReall
         super(SIGNATURE);
     }
 
-    private VkReallocationFunction(long functionPointer) {
+    VkReallocationFunction(long functionPointer) {
         super(functionPointer);
     }
 

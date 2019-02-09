@@ -53,7 +53,7 @@ public abstract class IndexerStartedTranslationUnit extends Callback implements 
         super(SIGNATURE);
     }
 
-    private IndexerStartedTranslationUnit(long functionPointer) {
+    IndexerStartedTranslationUnit(long functionPointer) {
         super(functionPointer);
     }
 

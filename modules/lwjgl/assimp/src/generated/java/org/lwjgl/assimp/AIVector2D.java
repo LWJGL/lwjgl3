@@ -50,7 +50,7 @@ public class AIVector2D extends Struct {
     }
 
     /**
-     * Creates a {@link AIVector2D} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code AIVector2D} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -69,7 +69,7 @@ public class AIVector2D extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link AIVector2D} instance for the specified memory address. */
+    /** Returns a new {@code AIVector2D} instance for the specified memory address. */
     public static AIVector2D create(long address) {
         return wrap(AIVector2D.class, address);
     }
@@ -111,7 +111,7 @@ public class AIVector2D extends Struct {
         private static final AIVector2D ELEMENT_FACTORY = AIVector2D.create(-1L);
 
         /**
-         * Creates a new {@link AIVector2D.Buffer} instance backed by the specified container.
+         * Creates a new {@code AIVector2D.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

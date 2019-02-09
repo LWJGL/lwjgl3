@@ -87,7 +87,7 @@ public class JAWT extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link JAWT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code JAWT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -144,23 +144,23 @@ public class JAWT extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link JAWT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code JAWT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static JAWT malloc() {
         return wrap(JAWT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link JAWT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code JAWT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static JAWT calloc() {
         return wrap(JAWT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link JAWT} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code JAWT} instance allocated with {@link BufferUtils}. */
     public static JAWT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(JAWT.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link JAWT} instance for the specified memory address. */
+    /** Returns a new {@code JAWT} instance for the specified memory address. */
     public static JAWT create(long address) {
         return wrap(JAWT.class, address);
     }
@@ -173,18 +173,18 @@ public class JAWT extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link JAWT} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code JAWT} instance allocated on the thread-local {@link MemoryStack}. */
     public static JAWT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link JAWT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code JAWT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static JAWT callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link JAWT} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code JAWT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -193,7 +193,7 @@ public class JAWT extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link JAWT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code JAWT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */

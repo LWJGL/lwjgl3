@@ -77,7 +77,7 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VkDisplayEventInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkDisplayEventInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -133,23 +133,23 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDisplayEventInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDisplayEventInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDisplayEventInfoEXT malloc() {
         return wrap(VkDisplayEventInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkDisplayEventInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDisplayEventInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDisplayEventInfoEXT calloc() {
         return wrap(VkDisplayEventInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkDisplayEventInfoEXT} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkDisplayEventInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkDisplayEventInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkDisplayEventInfoEXT.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkDisplayEventInfoEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkDisplayEventInfoEXT} instance for the specified memory address. */
     public static VkDisplayEventInfoEXT create(long address) {
         return wrap(VkDisplayEventInfoEXT.class, address);
     }
@@ -206,18 +206,18 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDisplayEventInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkDisplayEventInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkDisplayEventInfoEXT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkDisplayEventInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkDisplayEventInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkDisplayEventInfoEXT callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkDisplayEventInfoEXT} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkDisplayEventInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -226,7 +226,7 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VkDisplayEventInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkDisplayEventInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -296,7 +296,7 @@ public class VkDisplayEventInfoEXT extends Struct implements NativeResource {
         private static final VkDisplayEventInfoEXT ELEMENT_FACTORY = VkDisplayEventInfoEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkDisplayEventInfoEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkDisplayEventInfoEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

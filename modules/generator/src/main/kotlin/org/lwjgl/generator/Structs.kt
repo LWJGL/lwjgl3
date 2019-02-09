@@ -224,7 +224,7 @@ class Struct(
     operator fun DataType.invoke(name: String, documentation: String) = add(StructMember(this, name, documentation))
 
     // Converts a plain member to an array member
-    operator fun StructMember.get(size: Int, validSize: Int = size) = this.get(size.toString(), validSize.toString())
+    operator fun StructMember.get(size: Int, validSize: Int = size) = this[size.toString(), validSize.toString()]
     operator fun StructMember.get(size: String, validSize: String = size): StructMemberArray {
         this@Struct.members.remove(this)
         return StructMemberArray(nativeType[size], name, documentation, validSize)
@@ -234,7 +234,7 @@ class Struct(
             }
     }
     // Converts an N-dimensional array to an (N+1)-dimensional array.
-    operator fun StructMemberArray.get(size: Int, validSize: Int = size) = this.get(size.toString(), validSize.toString())
+    operator fun StructMemberArray.get(size: Int, validSize: Int = size) = this[size.toString(), validSize.toString()]
     operator fun StructMemberArray.get(size: String, validSize: String): StructMemberArray {
         this@Struct.members.remove(this)
         return StructMemberArray(arrayType[size], name, documentation, "${this.validSize} * $validSize")
@@ -249,14 +249,14 @@ class Struct(
 
     /** Anonymous nested member struct definition. */
     fun struct(init: Struct.() -> Unit): StructMember {
-        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, false, false, mutable, null, false, false)
+        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, false, false, mutable, null, nativeLayout = false, generateBuffer = false)
         struct.init()
         return StructType(struct).invoke(ANONYMOUS, ANONYMOUS)
     }
 
     /** Anonymous nested member union definition. */
     fun union(init: Struct.() -> Unit): StructMember {
-        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, false, false)
+        val struct = Struct(module, ANONYMOUS, "", ANONYMOUS, true, false, mutable, null, nativeLayout = false, generateBuffer = false)
         struct.init()
         return StructType(struct).invoke(ANONYMOUS, ANONYMOUS)
     }
@@ -712,7 +712,7 @@ $indentation}"""
 
         print("""
     /**
-     * Creates a {@link $className} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code $className} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -771,17 +771,17 @@ $indentation}"""
         // Factory constructors
         if (mallocable) {
             print("""
-    /** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code $className} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static $className malloc() {
         return wrap($className.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code $className} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static $className calloc() {
         return wrap($className.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link $className} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code $className} instance allocated with {@link BufferUtils}. */
     public static $className create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap($className.class, memAddress(container), container);
@@ -790,7 +790,7 @@ $indentation}"""
         }
 
         print("""
-    /** Returns a new {@link $className} instance for the specified memory address. */
+    /** Returns a new {@code $className} instance for the specified memory address. */
     public static $className create(long address) {
         return wrap($className.class, address);
     }
@@ -857,18 +857,18 @@ $indentation}"""
             print("""
     // -----------------------------------
 
-    /** Returns a new {@link $className} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code $className} instance allocated on the thread-local {@link MemoryStack}. */
     public static $className mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link $className} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code $className} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static $className callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link $className} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code $className} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -877,7 +877,7 @@ $indentation}"""
     }
 
     /**
-     * Returns a new {@link $className} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code $className} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -962,7 +962,7 @@ ${validations.joinToString("\n")}
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }""")
                     }
@@ -990,7 +990,7 @@ ${validations.joinToString("\n")}
         private static final $className ELEMENT_FACTORY = $className.create(-1L);
 
         /**
-         * Creates a new {@link $className.Buffer} instance backed by the specified container.
+         * Creates a new {@code $className.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

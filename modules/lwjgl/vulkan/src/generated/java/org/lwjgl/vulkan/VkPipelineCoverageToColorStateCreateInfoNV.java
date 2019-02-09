@@ -98,7 +98,7 @@ public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct implement
     }
 
     /**
-     * Creates a {@link VkPipelineCoverageToColorStateCreateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPipelineCoverageToColorStateCreateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -168,23 +168,23 @@ public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct implement
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineCoverageToColorStateCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineCoverageToColorStateCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineCoverageToColorStateCreateInfoNV malloc() {
         return wrap(VkPipelineCoverageToColorStateCreateInfoNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineCoverageToColorStateCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineCoverageToColorStateCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineCoverageToColorStateCreateInfoNV calloc() {
         return wrap(VkPipelineCoverageToColorStateCreateInfoNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineCoverageToColorStateCreateInfoNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPipelineCoverageToColorStateCreateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkPipelineCoverageToColorStateCreateInfoNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPipelineCoverageToColorStateCreateInfoNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPipelineCoverageToColorStateCreateInfoNV} instance for the specified memory address. */
+    /** Returns a new {@code VkPipelineCoverageToColorStateCreateInfoNV} instance for the specified memory address. */
     public static VkPipelineCoverageToColorStateCreateInfoNV create(long address) {
         return wrap(VkPipelineCoverageToColorStateCreateInfoNV.class, address);
     }
@@ -241,18 +241,18 @@ public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct implement
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineCoverageToColorStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPipelineCoverageToColorStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPipelineCoverageToColorStateCreateInfoNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPipelineCoverageToColorStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPipelineCoverageToColorStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPipelineCoverageToColorStateCreateInfoNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPipelineCoverageToColorStateCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPipelineCoverageToColorStateCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -261,7 +261,7 @@ public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct implement
     }
 
     /**
-     * Returns a new {@link VkPipelineCoverageToColorStateCreateInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPipelineCoverageToColorStateCreateInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -339,7 +339,7 @@ public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct implement
         private static final VkPipelineCoverageToColorStateCreateInfoNV ELEMENT_FACTORY = VkPipelineCoverageToColorStateCreateInfoNV.create(-1L);
 
         /**
-         * Creates a new {@link VkPipelineCoverageToColorStateCreateInfoNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPipelineCoverageToColorStateCreateInfoNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

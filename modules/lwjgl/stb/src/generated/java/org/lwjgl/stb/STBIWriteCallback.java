@@ -56,7 +56,7 @@ public abstract class STBIWriteCallback extends Callback implements STBIWriteCal
         super(SIGNATURE);
     }
 
-    private STBIWriteCallback(long functionPointer) {
+    STBIWriteCallback(long functionPointer) {
         super(functionPointer);
     }
 

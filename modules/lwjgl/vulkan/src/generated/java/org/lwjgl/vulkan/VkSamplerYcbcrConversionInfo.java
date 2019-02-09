@@ -72,7 +72,7 @@ public class VkSamplerYcbcrConversionInfo extends Struct implements NativeResour
     }
 
     /**
-     * Creates a {@link VkSamplerYcbcrConversionInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkSamplerYcbcrConversionInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -128,23 +128,23 @@ public class VkSamplerYcbcrConversionInfo extends Struct implements NativeResour
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSamplerYcbcrConversionInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSamplerYcbcrConversionInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSamplerYcbcrConversionInfo malloc() {
         return wrap(VkSamplerYcbcrConversionInfo.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkSamplerYcbcrConversionInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSamplerYcbcrConversionInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSamplerYcbcrConversionInfo calloc() {
         return wrap(VkSamplerYcbcrConversionInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkSamplerYcbcrConversionInfo} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkSamplerYcbcrConversionInfo} instance allocated with {@link BufferUtils}. */
     public static VkSamplerYcbcrConversionInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkSamplerYcbcrConversionInfo.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkSamplerYcbcrConversionInfo} instance for the specified memory address. */
+    /** Returns a new {@code VkSamplerYcbcrConversionInfo} instance for the specified memory address. */
     public static VkSamplerYcbcrConversionInfo create(long address) {
         return wrap(VkSamplerYcbcrConversionInfo.class, address);
     }
@@ -201,18 +201,18 @@ public class VkSamplerYcbcrConversionInfo extends Struct implements NativeResour
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSamplerYcbcrConversionInfo} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkSamplerYcbcrConversionInfo} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkSamplerYcbcrConversionInfo mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkSamplerYcbcrConversionInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkSamplerYcbcrConversionInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkSamplerYcbcrConversionInfo callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkSamplerYcbcrConversionInfo} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkSamplerYcbcrConversionInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -221,7 +221,7 @@ public class VkSamplerYcbcrConversionInfo extends Struct implements NativeResour
     }
 
     /**
-     * Returns a new {@link VkSamplerYcbcrConversionInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkSamplerYcbcrConversionInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -291,7 +291,7 @@ public class VkSamplerYcbcrConversionInfo extends Struct implements NativeResour
         private static final VkSamplerYcbcrConversionInfo ELEMENT_FACTORY = VkSamplerYcbcrConversionInfo.create(-1L);
 
         /**
-         * Creates a new {@link VkSamplerYcbcrConversionInfo.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkSamplerYcbcrConversionInfo.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

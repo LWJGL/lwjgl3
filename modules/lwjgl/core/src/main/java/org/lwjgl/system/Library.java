@@ -100,7 +100,7 @@ public final class Library {
         // METHOD 2: org.lwjgl.librarypath
         URL libURL = context.getClassLoader().getResource(libName);
         if (libURL == null) {
-            if (loadSystem(load, context, libName, Configuration.LIBRARY_PATH)) {
+            if (loadSystemFromLibraryPath(load, context, libName)) {
                 return;
             }
         } else {
@@ -113,7 +113,7 @@ public final class Library {
                 }
                 // Extract from classpath and try org.lwjgl.librarypath
                 try (FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL)) {
-                    if (loadSystem(load, context, libName, Configuration.LIBRARY_PATH)) {
+                    if (loadSystemFromLibraryPath(load, context, libName)) {
                         return;
                     }
                 }
@@ -147,9 +147,9 @@ public final class Library {
         throw new UnsatisfiedLinkError("Failed to locate library: " + libName);
     }
 
-    private static boolean loadSystem(Consumer<String> load, Class<?> context, String libName, Configuration<String> property) {
-        String paths = property.get();
-        return paths != null && loadSystem(load, context, libName, property.getProperty(), paths);
+    private static boolean loadSystemFromLibraryPath(Consumer<String> load, Class<?> context, String libName) {
+        String paths = Configuration.LIBRARY_PATH.get();
+        return paths != null && loadSystem(load, context, libName, Configuration.LIBRARY_PATH.getProperty(), paths);
     }
 
     private static boolean loadSystem(Consumer<String> load, Class<?> context, String libName, String property, String paths) {
@@ -222,7 +222,7 @@ public final class Library {
         // METHOD 2: org.lwjgl.librarypath
         URL libURL = context.getClassLoader().getResource(libName);
         if (libURL == null) {
-            lib = loadNative(context, libName, Configuration.LIBRARY_PATH);
+            lib = loadNativeFromLibraryPath(context, libName);
             if (lib != null) {
                 return lib;
             }
@@ -236,7 +236,7 @@ public final class Library {
                 }
                 // Extract from classpath and try org.lwjgl.librarypath
                 try (FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL)) {
-                    lib = loadNative(context, libName, Configuration.LIBRARY_PATH);
+                    lib = loadNativeFromLibraryPath(context, libName);
                     if (lib != null) {
                         return lib;
                     }
@@ -316,15 +316,12 @@ public final class Library {
     }
 
     @Nullable
-    private static SharedLibrary loadNative(Class<?> context, String libName, Configuration<String> property) {
-        String paths = property.get();
-        if (paths != null) {
-            SharedLibrary lib = loadNative(context, libName, property.getProperty(), paths);
-            if (lib != null) {
-                return lib;
-            }
+    private static SharedLibrary loadNativeFromLibraryPath(Class<?> context, String libName) {
+        String paths = Configuration.LIBRARY_PATH.get();
+        if (paths == null) {
+            return null;
         }
-        return null;
+        return loadNative(context, libName, Configuration.LIBRARY_PATH.getProperty(), paths);
     }
 
     @Nullable

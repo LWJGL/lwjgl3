@@ -54,7 +54,7 @@ public abstract class OVRLogCallback extends Callback implements OVRLogCallbackI
         super(SIGNATURE);
     }
 
-    private OVRLogCallback(long functionPointer) {
+    OVRLogCallback(long functionPointer) {
         super(functionPointer);
     }
 

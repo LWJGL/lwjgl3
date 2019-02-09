@@ -53,7 +53,7 @@ public abstract class LLVMYieldCallback extends Callback implements LLVMYieldCal
         super(SIGNATURE);
     }
 
-    private LLVMYieldCallback(long functionPointer) {
+    LLVMYieldCallback(long functionPointer) {
         super(functionPointer);
     }
 

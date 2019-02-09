@@ -58,7 +58,7 @@ public abstract class GLFWScrollCallback extends Callback implements GLFWScrollC
         super(SIGNATURE);
     }
 
-    private GLFWScrollCallback(long functionPointer) {
+    GLFWScrollCallback(long functionPointer) {
         super(functionPointer);
     }
 

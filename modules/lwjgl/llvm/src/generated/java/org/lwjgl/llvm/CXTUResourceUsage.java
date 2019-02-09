@@ -65,7 +65,7 @@ public class CXTUResourceUsage extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link CXTUResourceUsage} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code CXTUResourceUsage} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -89,23 +89,23 @@ public class CXTUResourceUsage extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link CXTUResourceUsage} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CXTUResourceUsage} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CXTUResourceUsage malloc() {
         return wrap(CXTUResourceUsage.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link CXTUResourceUsage} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CXTUResourceUsage} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CXTUResourceUsage calloc() {
         return wrap(CXTUResourceUsage.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link CXTUResourceUsage} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code CXTUResourceUsage} instance allocated with {@link BufferUtils}. */
     public static CXTUResourceUsage create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(CXTUResourceUsage.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link CXTUResourceUsage} instance for the specified memory address. */
+    /** Returns a new {@code CXTUResourceUsage} instance for the specified memory address. */
     public static CXTUResourceUsage create(long address) {
         return wrap(CXTUResourceUsage.class, address);
     }
@@ -162,18 +162,18 @@ public class CXTUResourceUsage extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link CXTUResourceUsage} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code CXTUResourceUsage} instance allocated on the thread-local {@link MemoryStack}. */
     public static CXTUResourceUsage mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link CXTUResourceUsage} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code CXTUResourceUsage} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static CXTUResourceUsage callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link CXTUResourceUsage} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code CXTUResourceUsage} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -182,7 +182,7 @@ public class CXTUResourceUsage extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link CXTUResourceUsage} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code CXTUResourceUsage} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -245,7 +245,7 @@ public class CXTUResourceUsage extends Struct implements NativeResource {
         private static final CXTUResourceUsage ELEMENT_FACTORY = CXTUResourceUsage.create(-1L);
 
         /**
-         * Creates a new {@link CXTUResourceUsage.Buffer} instance backed by the specified container.
+         * Creates a new {@code CXTUResourceUsage.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

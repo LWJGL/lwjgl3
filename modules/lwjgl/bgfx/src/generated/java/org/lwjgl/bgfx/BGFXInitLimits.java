@@ -64,7 +64,7 @@ public class BGFXInitLimits extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link BGFXInitLimits} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code BGFXInitLimits} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -120,23 +120,23 @@ public class BGFXInitLimits extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link BGFXInitLimits} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code BGFXInitLimits} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXInitLimits malloc() {
         return wrap(BGFXInitLimits.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link BGFXInitLimits} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code BGFXInitLimits} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXInitLimits calloc() {
         return wrap(BGFXInitLimits.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link BGFXInitLimits} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code BGFXInitLimits} instance allocated with {@link BufferUtils}. */
     public static BGFXInitLimits create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(BGFXInitLimits.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link BGFXInitLimits} instance for the specified memory address. */
+    /** Returns a new {@code BGFXInitLimits} instance for the specified memory address. */
     public static BGFXInitLimits create(long address) {
         return wrap(BGFXInitLimits.class, address);
     }
@@ -149,18 +149,18 @@ public class BGFXInitLimits extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link BGFXInitLimits} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code BGFXInitLimits} instance allocated on the thread-local {@link MemoryStack}. */
     public static BGFXInitLimits mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link BGFXInitLimits} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code BGFXInitLimits} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static BGFXInitLimits callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link BGFXInitLimits} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code BGFXInitLimits} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -169,7 +169,7 @@ public class BGFXInitLimits extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link BGFXInitLimits} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code BGFXInitLimits} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */

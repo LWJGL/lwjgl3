@@ -52,7 +52,7 @@ public abstract class CUoccupancyB2DSize extends Callback implements CUoccupancy
         super(SIGNATURE);
     }
 
-    private CUoccupancyB2DSize(long functionPointer) {
+    CUoccupancyB2DSize(long functionPointer) {
         super(functionPointer);
     }
 

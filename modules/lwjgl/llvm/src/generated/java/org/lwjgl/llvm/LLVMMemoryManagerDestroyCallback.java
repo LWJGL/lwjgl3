@@ -52,7 +52,7 @@ public abstract class LLVMMemoryManagerDestroyCallback extends Callback implemen
         super(SIGNATURE);
     }
 
-    private LLVMMemoryManagerDestroyCallback(long functionPointer) {
+    LLVMMemoryManagerDestroyCallback(long functionPointer) {
         super(functionPointer);
     }
 

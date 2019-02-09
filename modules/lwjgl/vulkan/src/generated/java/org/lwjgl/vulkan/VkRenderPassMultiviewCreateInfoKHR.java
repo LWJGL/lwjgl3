@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
 public class VkRenderPassMultiviewCreateInfoKHR extends VkRenderPassMultiviewCreateInfo {
 
     /**
-     * Creates a {@link VkRenderPassMultiviewCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkRenderPassMultiviewCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -93,23 +93,23 @@ public class VkRenderPassMultiviewCreateInfoKHR extends VkRenderPassMultiviewCre
 
     // -----------------------------------
 
-    /** Returns a new {@link VkRenderPassMultiviewCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkRenderPassMultiviewCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkRenderPassMultiviewCreateInfoKHR malloc() {
         return wrap(VkRenderPassMultiviewCreateInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkRenderPassMultiviewCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkRenderPassMultiviewCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkRenderPassMultiviewCreateInfoKHR calloc() {
         return wrap(VkRenderPassMultiviewCreateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkRenderPassMultiviewCreateInfoKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkRenderPassMultiviewCreateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkRenderPassMultiviewCreateInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkRenderPassMultiviewCreateInfoKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkRenderPassMultiviewCreateInfoKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkRenderPassMultiviewCreateInfoKHR} instance for the specified memory address. */
     public static VkRenderPassMultiviewCreateInfoKHR create(long address) {
         return wrap(VkRenderPassMultiviewCreateInfoKHR.class, address);
     }
@@ -166,18 +166,18 @@ public class VkRenderPassMultiviewCreateInfoKHR extends VkRenderPassMultiviewCre
 
     // -----------------------------------
 
-    /** Returns a new {@link VkRenderPassMultiviewCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkRenderPassMultiviewCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkRenderPassMultiviewCreateInfoKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkRenderPassMultiviewCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkRenderPassMultiviewCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkRenderPassMultiviewCreateInfoKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkRenderPassMultiviewCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkRenderPassMultiviewCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -186,7 +186,7 @@ public class VkRenderPassMultiviewCreateInfoKHR extends VkRenderPassMultiviewCre
     }
 
     /**
-     * Returns a new {@link VkRenderPassMultiviewCreateInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkRenderPassMultiviewCreateInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -240,7 +240,7 @@ public class VkRenderPassMultiviewCreateInfoKHR extends VkRenderPassMultiviewCre
         private static final VkRenderPassMultiviewCreateInfoKHR ELEMENT_FACTORY = VkRenderPassMultiviewCreateInfoKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkRenderPassMultiviewCreateInfoKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkRenderPassMultiviewCreateInfoKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

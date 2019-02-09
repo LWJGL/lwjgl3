@@ -74,7 +74,7 @@ public class VREvent extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VREvent} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VREvent} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -100,23 +100,23 @@ public class VREvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VREvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VREvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VREvent malloc() {
         return wrap(VREvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VREvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VREvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VREvent calloc() {
         return wrap(VREvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VREvent} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VREvent} instance allocated with {@link BufferUtils}. */
     public static VREvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VREvent.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VREvent} instance for the specified memory address. */
+    /** Returns a new {@code VREvent} instance for the specified memory address. */
     public static VREvent create(long address) {
         return wrap(VREvent.class, address);
     }
@@ -173,18 +173,18 @@ public class VREvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VREvent} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VREvent} instance allocated on the thread-local {@link MemoryStack}. */
     public static VREvent mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VREvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VREvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VREvent callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VREvent} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VREvent} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -193,7 +193,7 @@ public class VREvent extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VREvent} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VREvent} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -258,7 +258,7 @@ public class VREvent extends Struct implements NativeResource {
         private static final VREvent ELEMENT_FACTORY = VREvent.create(-1L);
 
         /**
-         * Creates a new {@link VREvent.Buffer} instance backed by the specified container.
+         * Creates a new {@code VREvent.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

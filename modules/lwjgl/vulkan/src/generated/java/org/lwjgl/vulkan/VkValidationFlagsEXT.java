@@ -79,7 +79,7 @@ public class VkValidationFlagsEXT extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VkValidationFlagsEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkValidationFlagsEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -138,23 +138,23 @@ public class VkValidationFlagsEXT extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkValidationFlagsEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkValidationFlagsEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkValidationFlagsEXT malloc() {
         return wrap(VkValidationFlagsEXT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkValidationFlagsEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkValidationFlagsEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkValidationFlagsEXT calloc() {
         return wrap(VkValidationFlagsEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkValidationFlagsEXT} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkValidationFlagsEXT} instance allocated with {@link BufferUtils}. */
     public static VkValidationFlagsEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkValidationFlagsEXT.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkValidationFlagsEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkValidationFlagsEXT} instance for the specified memory address. */
     public static VkValidationFlagsEXT create(long address) {
         return wrap(VkValidationFlagsEXT.class, address);
     }
@@ -211,18 +211,18 @@ public class VkValidationFlagsEXT extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkValidationFlagsEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkValidationFlagsEXT} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkValidationFlagsEXT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkValidationFlagsEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkValidationFlagsEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkValidationFlagsEXT callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkValidationFlagsEXT} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkValidationFlagsEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -231,7 +231,7 @@ public class VkValidationFlagsEXT extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VkValidationFlagsEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkValidationFlagsEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -314,7 +314,7 @@ public class VkValidationFlagsEXT extends Struct implements NativeResource {
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -326,7 +326,7 @@ public class VkValidationFlagsEXT extends Struct implements NativeResource {
         private static final VkValidationFlagsEXT ELEMENT_FACTORY = VkValidationFlagsEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkValidationFlagsEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkValidationFlagsEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

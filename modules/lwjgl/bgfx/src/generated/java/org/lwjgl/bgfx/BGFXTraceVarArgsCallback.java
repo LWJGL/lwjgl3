@@ -58,7 +58,7 @@ public abstract class BGFXTraceVarArgsCallback extends Callback implements BGFXT
         super(SIGNATURE);
     }
 
-    private BGFXTraceVarArgsCallback(long functionPointer) {
+    BGFXTraceVarArgsCallback(long functionPointer) {
         super(functionPointer);
     }
 

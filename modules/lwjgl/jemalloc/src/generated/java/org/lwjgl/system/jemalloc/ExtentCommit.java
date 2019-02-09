@@ -57,7 +57,7 @@ public abstract class ExtentCommit extends Callback implements ExtentCommitI {
         super(SIGNATURE);
     }
 
-    private ExtentCommit(long functionPointer) {
+    ExtentCommit(long functionPointer) {
         super(functionPointer);
     }
 

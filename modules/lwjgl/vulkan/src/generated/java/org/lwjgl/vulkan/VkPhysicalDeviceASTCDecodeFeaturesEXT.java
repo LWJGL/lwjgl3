@@ -73,7 +73,7 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements Nat
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceASTCDecodeFeaturesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -129,23 +129,23 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements Nat
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceASTCDecodeFeaturesEXT malloc() {
         return wrap(VkPhysicalDeviceASTCDecodeFeaturesEXT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceASTCDecodeFeaturesEXT calloc() {
         return wrap(VkPhysicalDeviceASTCDecodeFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceASTCDecodeFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPhysicalDeviceASTCDecodeFeaturesEXT.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceASTCDecodeFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceASTCDecodeFeaturesEXT create(long address) {
         return wrap(VkPhysicalDeviceASTCDecodeFeaturesEXT.class, address);
     }
@@ -202,18 +202,18 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements Nat
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPhysicalDeviceASTCDecodeFeaturesEXT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPhysicalDeviceASTCDecodeFeaturesEXT callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -222,7 +222,7 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements Nat
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPhysicalDeviceASTCDecodeFeaturesEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -292,7 +292,7 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements Nat
         private static final VkPhysicalDeviceASTCDecodeFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceASTCDecodeFeaturesEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceASTCDecodeFeaturesEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceASTCDecodeFeaturesEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

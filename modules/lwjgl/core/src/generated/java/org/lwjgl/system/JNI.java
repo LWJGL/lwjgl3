@@ -43,7 +43,6 @@ public final class JNI {
     public static native double invokeD(int param0, long __functionAddress);
     public static native double invokePD(long param0, long __functionAddress);
     public static native double invokePPD(long param0, long param1, long __functionAddress);
-    public static native float invokeF(float param0, long __functionAddress);
     public static native float invokeF(int param0, long __functionAddress);
     public static native float invokePF(long param0, long __functionAddress);
     public static native float invokePF(long param0, int param1, long __functionAddress);
@@ -100,15 +99,11 @@ public final class JNI {
     public static native int invokePPPPPPPI(long param0, long param1, long param2, int param3, int param4, long param5, long param6, int param7, long param8, int param9, long param10, int param11, long __functionAddress);
     public static native int invokePPPPPPPPI(long param0, int param1, int param2, long param3, long param4, long param5, long param6, long param7, long param8, long param9, long __functionAddress);
     public static native long invokeJ(long __functionAddress);
-    public static native long invokeJJ(long param0, long __functionAddress);
     public static native long invokePJ(long param0, long __functionAddress);
     public static native long invokePJ(long param0, int param1, long __functionAddress);
     public static native long invokePJ(long param0, float param1, int param2, float param3, int param4, long __functionAddress);
-    public static native long invokeJJJ(long param0, long param1, long __functionAddress);
     public static native long invokePPJ(long param0, long param1, long __functionAddress);
     public static native long invokePPJ(long param0, long param1, int param2, long __functionAddress);
-    public static native long invokeJJJJ(long param0, long param1, long param2, long __functionAddress);
-    public static native long invokeJJJJJ(long param0, long param1, long param2, long param3, long __functionAddress);
     public static native long invokeP(long __functionAddress);
     public static native long invokeP(int param0, long __functionAddress);
     public static native long invokeP(short param0, long __functionAddress);

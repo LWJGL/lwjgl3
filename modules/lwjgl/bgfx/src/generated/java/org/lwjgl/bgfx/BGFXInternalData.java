@@ -59,7 +59,7 @@ public class BGFXInternalData extends Struct {
     }
 
     /**
-     * Creates a {@link BGFXInternalData} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code BGFXInternalData} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -80,7 +80,7 @@ public class BGFXInternalData extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link BGFXInternalData} instance for the specified memory address. */
+    /** Returns a new {@code BGFXInternalData} instance for the specified memory address. */
     public static BGFXInternalData create(long address) {
         return wrap(BGFXInternalData.class, address);
     }

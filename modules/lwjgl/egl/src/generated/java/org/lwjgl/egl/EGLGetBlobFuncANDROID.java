@@ -55,7 +55,7 @@ public abstract class EGLGetBlobFuncANDROID extends Callback implements EGLGetBl
         super(SIGNATURE);
     }
 
-    private EGLGetBlobFuncANDROID(long functionPointer) {
+    EGLGetBlobFuncANDROID(long functionPointer) {
         super(functionPointer);
     }
 

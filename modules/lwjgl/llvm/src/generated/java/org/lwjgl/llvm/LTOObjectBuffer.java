@@ -53,7 +53,7 @@ public class LTOObjectBuffer extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link LTOObjectBuffer} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code LTOObjectBuffer} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -74,23 +74,23 @@ public class LTOObjectBuffer extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link LTOObjectBuffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code LTOObjectBuffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static LTOObjectBuffer malloc() {
         return wrap(LTOObjectBuffer.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link LTOObjectBuffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code LTOObjectBuffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static LTOObjectBuffer calloc() {
         return wrap(LTOObjectBuffer.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link LTOObjectBuffer} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code LTOObjectBuffer} instance allocated with {@link BufferUtils}. */
     public static LTOObjectBuffer create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(LTOObjectBuffer.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link LTOObjectBuffer} instance for the specified memory address. */
+    /** Returns a new {@code LTOObjectBuffer} instance for the specified memory address. */
     public static LTOObjectBuffer create(long address) {
         return wrap(LTOObjectBuffer.class, address);
     }
@@ -147,18 +147,18 @@ public class LTOObjectBuffer extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link LTOObjectBuffer} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code LTOObjectBuffer} instance allocated on the thread-local {@link MemoryStack}. */
     public static LTOObjectBuffer mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link LTOObjectBuffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code LTOObjectBuffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static LTOObjectBuffer callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link LTOObjectBuffer} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code LTOObjectBuffer} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -167,7 +167,7 @@ public class LTOObjectBuffer extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link LTOObjectBuffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code LTOObjectBuffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -228,7 +228,7 @@ public class LTOObjectBuffer extends Struct implements NativeResource {
         private static final LTOObjectBuffer ELEMENT_FACTORY = LTOObjectBuffer.create(-1L);
 
         /**
-         * Creates a new {@link LTOObjectBuffer.Buffer} instance backed by the specified container.
+         * Creates a new {@code LTOObjectBuffer.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

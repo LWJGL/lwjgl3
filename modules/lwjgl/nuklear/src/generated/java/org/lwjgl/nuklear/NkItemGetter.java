@@ -54,7 +54,7 @@ public abstract class NkItemGetter extends Callback implements NkItemGetterI {
         super(SIGNATURE);
     }
 
-    private NkItemGetter(long functionPointer) {
+    NkItemGetter(long functionPointer) {
         super(functionPointer);
     }
 

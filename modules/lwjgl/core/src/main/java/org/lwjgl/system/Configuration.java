@@ -181,7 +181,7 @@ public class Configuration<T> {
     /**
      * Can be set to override the default {@link APIUtil#DEBUG_STREAM}. It must be the name of a class that implements the
      * {@link Supplier Supplier&lt;PrintStream&gt;} interface. The class will be instantiated using reflection and the result of {@link Supplier#get get} will
-     * become the {@link #DEBUG_STREAM} used by LWJGL.
+     * become the {@code #DEBUG_STREAM} used by LWJGL.
      *
      * <p>When set programmatically, it can also be a {@link PrintStream} instance.</p>
      *

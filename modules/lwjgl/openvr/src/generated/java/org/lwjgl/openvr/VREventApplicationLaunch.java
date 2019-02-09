@@ -50,7 +50,7 @@ public class VREventApplicationLaunch extends Struct {
     }
 
     /**
-     * Creates a {@link VREventApplicationLaunch} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VREventApplicationLaunch} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -71,7 +71,7 @@ public class VREventApplicationLaunch extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VREventApplicationLaunch} instance for the specified memory address. */
+    /** Returns a new {@code VREventApplicationLaunch} instance for the specified memory address. */
     public static VREventApplicationLaunch create(long address) {
         return wrap(VREventApplicationLaunch.class, address);
     }
@@ -113,7 +113,7 @@ public class VREventApplicationLaunch extends Struct {
         private static final VREventApplicationLaunch ELEMENT_FACTORY = VREventApplicationLaunch.create(-1L);
 
         /**
-         * Creates a new {@link VREventApplicationLaunch.Buffer} instance backed by the specified container.
+         * Creates a new {@code VREventApplicationLaunch.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

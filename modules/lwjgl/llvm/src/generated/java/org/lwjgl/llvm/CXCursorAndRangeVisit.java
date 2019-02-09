@@ -58,7 +58,7 @@ public abstract class CXCursorAndRangeVisit extends Callback implements CXCursor
         super(SIGNATURE);
     }
 
-    private CXCursorAndRangeVisit(long functionPointer) {
+    CXCursorAndRangeVisit(long functionPointer) {
         super(functionPointer);
     }
 

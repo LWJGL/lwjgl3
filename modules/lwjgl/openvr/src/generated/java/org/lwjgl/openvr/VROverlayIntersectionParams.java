@@ -56,7 +56,7 @@ public class VROverlayIntersectionParams extends Struct implements NativeResourc
     }
 
     /**
-     * Creates a {@link VROverlayIntersectionParams} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VROverlayIntersectionParams} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -116,23 +116,23 @@ public class VROverlayIntersectionParams extends Struct implements NativeResourc
 
     // -----------------------------------
 
-    /** Returns a new {@link VROverlayIntersectionParams} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VROverlayIntersectionParams} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VROverlayIntersectionParams malloc() {
         return wrap(VROverlayIntersectionParams.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VROverlayIntersectionParams} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VROverlayIntersectionParams} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VROverlayIntersectionParams calloc() {
         return wrap(VROverlayIntersectionParams.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VROverlayIntersectionParams} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VROverlayIntersectionParams} instance allocated with {@link BufferUtils}. */
     public static VROverlayIntersectionParams create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VROverlayIntersectionParams.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VROverlayIntersectionParams} instance for the specified memory address. */
+    /** Returns a new {@code VROverlayIntersectionParams} instance for the specified memory address. */
     public static VROverlayIntersectionParams create(long address) {
         return wrap(VROverlayIntersectionParams.class, address);
     }
@@ -189,18 +189,18 @@ public class VROverlayIntersectionParams extends Struct implements NativeResourc
 
     // -----------------------------------
 
-    /** Returns a new {@link VROverlayIntersectionParams} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VROverlayIntersectionParams} instance allocated on the thread-local {@link MemoryStack}. */
     public static VROverlayIntersectionParams mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VROverlayIntersectionParams} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VROverlayIntersectionParams} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VROverlayIntersectionParams callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VROverlayIntersectionParams} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VROverlayIntersectionParams} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -209,7 +209,7 @@ public class VROverlayIntersectionParams extends Struct implements NativeResourc
     }
 
     /**
-     * Returns a new {@link VROverlayIntersectionParams} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VROverlayIntersectionParams} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -279,7 +279,7 @@ public class VROverlayIntersectionParams extends Struct implements NativeResourc
         private static final VROverlayIntersectionParams ELEMENT_FACTORY = VROverlayIntersectionParams.create(-1L);
 
         /**
-         * Creates a new {@link VROverlayIntersectionParams.Buffer} instance backed by the specified container.
+         * Creates a new {@code VROverlayIntersectionParams.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

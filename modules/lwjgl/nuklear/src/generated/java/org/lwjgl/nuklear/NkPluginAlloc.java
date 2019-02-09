@@ -52,7 +52,7 @@ public abstract class NkPluginAlloc extends Callback implements NkPluginAllocI {
         super(SIGNATURE);
     }
 
-    private NkPluginAlloc(long functionPointer) {
+    NkPluginAlloc(long functionPointer) {
         super(functionPointer);
     }
 

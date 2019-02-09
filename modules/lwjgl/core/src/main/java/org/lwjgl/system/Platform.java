@@ -43,16 +43,16 @@ public enum Platform {
         }
     };
 
-    private static final Platform PLATFORM;
+    private static final Platform current;
 
     static {
         String osName = System.getProperty("os.name");
         if (osName.startsWith("Windows")) {
-            PLATFORM = Platform.WINDOWS;
+            current = WINDOWS;
         } else if (osName.startsWith("Linux") || osName.startsWith("FreeBSD") || osName.startsWith("SunOS") || osName.startsWith("Unix")) {
-            PLATFORM = Platform.LINUX;
+            current = LINUX;
         } else if (osName.startsWith("Mac OS X") || osName.startsWith("Darwin")) {
-            PLATFORM = Platform.MACOSX;
+            current = MACOSX;
         } else {
             throw new LinkageError("Unknown platform: " + osName);
         }
@@ -73,7 +73,7 @@ public enum Platform {
 
     /** Returns the platform on which the library is running. */
     public static Platform get() {
-        return PLATFORM;
+        return current;
     }
 
     public static String mapLibraryNameBundled(String name) {

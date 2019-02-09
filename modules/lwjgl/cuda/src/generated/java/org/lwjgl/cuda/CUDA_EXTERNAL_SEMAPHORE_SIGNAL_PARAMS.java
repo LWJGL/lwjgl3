@@ -80,7 +80,7 @@ public class CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS extends Struct implements Nat
     }
 
     /**
-     * Creates a {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -153,23 +153,23 @@ public class CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS extends Struct implements Nat
 
     // -----------------------------------
 
-    /** Returns a new {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS malloc() {
         return wrap(CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS calloc() {
         return wrap(CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated with {@link BufferUtils}. */
     public static CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance for the specified memory address. */
+    /** Returns a new {@code CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance for the specified memory address. */
     public static CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS create(long address) {
         return wrap(CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.class, address);
     }
@@ -226,18 +226,18 @@ public class CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS extends Struct implements Nat
 
     // -----------------------------------
 
-    /** Returns a new {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated on the thread-local {@link MemoryStack}. */
     public static CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -246,7 +246,7 @@ public class CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS extends Struct implements Nat
     }
 
     /**
-     * Returns a new {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -342,7 +342,7 @@ public class CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS extends Struct implements Nat
         private static final CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS ELEMENT_FACTORY = CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.create(-1L);
 
         /**
-         * Creates a new {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.Buffer} instance backed by the specified container.
+         * Creates a new {@code CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

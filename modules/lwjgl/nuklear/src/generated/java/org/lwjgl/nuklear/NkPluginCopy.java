@@ -54,7 +54,7 @@ public abstract class NkPluginCopy extends Callback implements NkPluginCopyI {
         super(SIGNATURE);
     }
 
-    private NkPluginCopy(long functionPointer) {
+    NkPluginCopy(long functionPointer) {
         super(functionPointer);
     }
 

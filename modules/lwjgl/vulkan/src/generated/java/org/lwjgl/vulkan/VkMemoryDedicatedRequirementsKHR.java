@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequirements {
 
     /**
-     * Creates a {@link VkMemoryDedicatedRequirementsKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkMemoryDedicatedRequirementsKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -71,7 +71,7 @@ public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequireme
 
     // -----------------------------------
 
-    /** Returns a new {@link VkMemoryDedicatedRequirementsKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkMemoryDedicatedRequirementsKHR} instance for the specified memory address. */
     public static VkMemoryDedicatedRequirementsKHR create(long address) {
         return wrap(VkMemoryDedicatedRequirementsKHR.class, address);
     }
@@ -106,7 +106,7 @@ public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequireme
         private static final VkMemoryDedicatedRequirementsKHR ELEMENT_FACTORY = VkMemoryDedicatedRequirementsKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkMemoryDedicatedRequirementsKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkMemoryDedicatedRequirementsKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

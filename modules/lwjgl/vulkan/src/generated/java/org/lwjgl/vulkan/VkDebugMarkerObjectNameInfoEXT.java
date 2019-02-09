@@ -101,7 +101,7 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
     }
 
     /**
-     * Creates a {@link VkDebugMarkerObjectNameInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkDebugMarkerObjectNameInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -174,23 +174,23 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDebugMarkerObjectNameInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDebugMarkerObjectNameInfoEXT malloc() {
         return wrap(VkDebugMarkerObjectNameInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDebugMarkerObjectNameInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDebugMarkerObjectNameInfoEXT calloc() {
         return wrap(VkDebugMarkerObjectNameInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkDebugMarkerObjectNameInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkDebugMarkerObjectNameInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkDebugMarkerObjectNameInfoEXT.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkDebugMarkerObjectNameInfoEXT} instance for the specified memory address. */
     public static VkDebugMarkerObjectNameInfoEXT create(long address) {
         return wrap(VkDebugMarkerObjectNameInfoEXT.class, address);
     }
@@ -247,18 +247,18 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkDebugMarkerObjectNameInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkDebugMarkerObjectNameInfoEXT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkDebugMarkerObjectNameInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkDebugMarkerObjectNameInfoEXT callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkDebugMarkerObjectNameInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -267,7 +267,7 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
     }
 
     /**
-     * Returns a new {@link VkDebugMarkerObjectNameInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkDebugMarkerObjectNameInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -359,7 +359,7 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -371,7 +371,7 @@ public class VkDebugMarkerObjectNameInfoEXT extends Struct implements NativeReso
         private static final VkDebugMarkerObjectNameInfoEXT ELEMENT_FACTORY = VkDebugMarkerObjectNameInfoEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkDebugMarkerObjectNameInfoEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkDebugMarkerObjectNameInfoEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

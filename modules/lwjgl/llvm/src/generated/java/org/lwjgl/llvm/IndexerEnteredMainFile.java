@@ -54,7 +54,7 @@ public abstract class IndexerEnteredMainFile extends Callback implements Indexer
         super(SIGNATURE);
     }
 
-    private IndexerEnteredMainFile(long functionPointer) {
+    IndexerEnteredMainFile(long functionPointer) {
         super(functionPointer);
     }
 

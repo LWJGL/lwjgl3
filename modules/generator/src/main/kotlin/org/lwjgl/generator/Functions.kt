@@ -1343,7 +1343,7 @@ class Func(
             if (params.isEmpty())
                 return@let
 
-            fun Parameter.getAutoSizeReference(): Parameter? = getParams { it ->
+            fun Parameter.getAutoSizeReference(): Parameter? = getParams {
                 it.has<AutoSize>() && it.get<AutoSize>().reference == this.name
             }.firstOrNull()
 
@@ -1945,7 +1945,7 @@ class Func(
     }
 
     private fun workaroundJDK8167409(ignoreArrayType: Boolean = false): Boolean = parameters.count().let {
-        6 <= it || (5 <= it && returns.isStructValue && !hasParam { it has ReturnParam })
+        6 <= it || (5 <= it && returns.isStructValue && !hasParam { param -> param has ReturnParam })
     } && parameters[0].nativeType.let { type ->
         (type is PointerType<*> && (ignoreArrayType || type !is ArrayType<*>)) || type.mapping.let { it is PrimitiveMapping && 4 < it.bytes }
     }

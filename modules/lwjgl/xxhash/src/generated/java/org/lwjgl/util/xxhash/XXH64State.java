@@ -79,7 +79,7 @@ public class XXH64State extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link XXH64State} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code XXH64State} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -180,23 +180,23 @@ public class XXH64State extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link XXH64State} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code XXH64State} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XXH64State malloc() {
         return wrap(XXH64State.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link XXH64State} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code XXH64State} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XXH64State calloc() {
         return wrap(XXH64State.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link XXH64State} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code XXH64State} instance allocated with {@link BufferUtils}. */
     public static XXH64State create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XXH64State.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link XXH64State} instance for the specified memory address. */
+    /** Returns a new {@code XXH64State} instance for the specified memory address. */
     public static XXH64State create(long address) {
         return wrap(XXH64State.class, address);
     }
@@ -253,18 +253,18 @@ public class XXH64State extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link XXH64State} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code XXH64State} instance allocated on the thread-local {@link MemoryStack}. */
     public static XXH64State mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link XXH64State} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code XXH64State} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XXH64State callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link XXH64State} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code XXH64State} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -273,7 +273,7 @@ public class XXH64State extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link XXH64State} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code XXH64State} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -385,7 +385,7 @@ public class XXH64State extends Struct implements NativeResource {
         private static final XXH64State ELEMENT_FACTORY = XXH64State.create(-1L);
 
         /**
-         * Creates a new {@link XXH64State.Buffer} instance backed by the specified container.
+         * Creates a new {@code XXH64State.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -77,7 +77,7 @@ public class OVREyeRenderDesc extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link OVREyeRenderDesc} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code OVREyeRenderDesc} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -115,23 +115,23 @@ public class OVREyeRenderDesc extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link OVREyeRenderDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code OVREyeRenderDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVREyeRenderDesc malloc() {
         return wrap(OVREyeRenderDesc.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link OVREyeRenderDesc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code OVREyeRenderDesc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVREyeRenderDesc calloc() {
         return wrap(OVREyeRenderDesc.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link OVREyeRenderDesc} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code OVREyeRenderDesc} instance allocated with {@link BufferUtils}. */
     public static OVREyeRenderDesc create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(OVREyeRenderDesc.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link OVREyeRenderDesc} instance for the specified memory address. */
+    /** Returns a new {@code OVREyeRenderDesc} instance for the specified memory address. */
     public static OVREyeRenderDesc create(long address) {
         return wrap(OVREyeRenderDesc.class, address);
     }
@@ -188,18 +188,18 @@ public class OVREyeRenderDesc extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link OVREyeRenderDesc} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code OVREyeRenderDesc} instance allocated on the thread-local {@link MemoryStack}. */
     public static OVREyeRenderDesc mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link OVREyeRenderDesc} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code OVREyeRenderDesc} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static OVREyeRenderDesc callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link OVREyeRenderDesc} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code OVREyeRenderDesc} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -208,7 +208,7 @@ public class OVREyeRenderDesc extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link OVREyeRenderDesc} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code OVREyeRenderDesc} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -275,7 +275,7 @@ public class OVREyeRenderDesc extends Struct implements NativeResource {
         private static final OVREyeRenderDesc ELEMENT_FACTORY = OVREyeRenderDesc.create(-1L);
 
         /**
-         * Creates a new {@link OVREyeRenderDesc.Buffer} instance backed by the specified container.
+         * Creates a new {@code OVREyeRenderDesc.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

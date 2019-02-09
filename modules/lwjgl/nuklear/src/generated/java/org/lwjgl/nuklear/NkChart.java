@@ -67,7 +67,7 @@ public class NkChart extends Struct {
     }
 
     /**
-     * Creates a {@link NkChart} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NkChart} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -98,7 +98,7 @@ public class NkChart extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkChart} instance for the specified memory address. */
+    /** Returns a new {@code NkChart} instance for the specified memory address. */
     public static NkChart create(long address) {
         return wrap(NkChart.class, address);
     }
@@ -152,7 +152,7 @@ public class NkChart extends Struct {
         private static final NkChart ELEMENT_FACTORY = NkChart.create(-1L);
 
         /**
-         * Creates a new {@link NkChart.Buffer} instance backed by the specified container.
+         * Creates a new {@code NkChart.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

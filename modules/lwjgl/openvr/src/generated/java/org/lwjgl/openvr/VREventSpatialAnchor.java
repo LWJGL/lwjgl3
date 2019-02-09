@@ -46,7 +46,7 @@ public class VREventSpatialAnchor extends Struct {
     }
 
     /**
-     * Creates a {@link VREventSpatialAnchor} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VREventSpatialAnchor} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -64,7 +64,7 @@ public class VREventSpatialAnchor extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VREventSpatialAnchor} instance for the specified memory address. */
+    /** Returns a new {@code VREventSpatialAnchor} instance for the specified memory address. */
     public static VREventSpatialAnchor create(long address) {
         return wrap(VREventSpatialAnchor.class, address);
     }
@@ -104,7 +104,7 @@ public class VREventSpatialAnchor extends Struct {
         private static final VREventSpatialAnchor ELEMENT_FACTORY = VREventSpatialAnchor.create(-1L);
 
         /**
-         * Creates a new {@link VREventSpatialAnchor.Buffer} instance backed by the specified container.
+         * Creates a new {@code VREventSpatialAnchor.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

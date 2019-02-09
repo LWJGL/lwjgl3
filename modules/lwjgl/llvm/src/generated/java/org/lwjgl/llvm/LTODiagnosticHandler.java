@@ -54,7 +54,7 @@ public abstract class LTODiagnosticHandler extends Callback implements LTODiagno
         super(SIGNATURE);
     }
 
-    private LTODiagnosticHandler(long functionPointer) {
+    LTODiagnosticHandler(long functionPointer) {
         super(functionPointer);
     }
 

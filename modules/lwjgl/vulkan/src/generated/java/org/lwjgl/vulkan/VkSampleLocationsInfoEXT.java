@@ -108,7 +108,7 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VkSampleLocationsInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkSampleLocationsInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -183,23 +183,23 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSampleLocationsInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSampleLocationsInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSampleLocationsInfoEXT malloc() {
         return wrap(VkSampleLocationsInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkSampleLocationsInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSampleLocationsInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSampleLocationsInfoEXT calloc() {
         return wrap(VkSampleLocationsInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkSampleLocationsInfoEXT} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkSampleLocationsInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkSampleLocationsInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkSampleLocationsInfoEXT.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkSampleLocationsInfoEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkSampleLocationsInfoEXT} instance for the specified memory address. */
     public static VkSampleLocationsInfoEXT create(long address) {
         return wrap(VkSampleLocationsInfoEXT.class, address);
     }
@@ -256,18 +256,18 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSampleLocationsInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkSampleLocationsInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkSampleLocationsInfoEXT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkSampleLocationsInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkSampleLocationsInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkSampleLocationsInfoEXT callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkSampleLocationsInfoEXT} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkSampleLocationsInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -276,7 +276,7 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VkSampleLocationsInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkSampleLocationsInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -369,7 +369,7 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -381,7 +381,7 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
         private static final VkSampleLocationsInfoEXT ELEMENT_FACTORY = VkSampleLocationsInfoEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkSampleLocationsInfoEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkSampleLocationsInfoEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -85,7 +85,7 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
     }
 
     /**
-     * Creates a {@link VkObjectTablePushConstantEntryNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkObjectTablePushConstantEntryNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -148,23 +148,23 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
 
     // -----------------------------------
 
-    /** Returns a new {@link VkObjectTablePushConstantEntryNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkObjectTablePushConstantEntryNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkObjectTablePushConstantEntryNVX malloc() {
         return wrap(VkObjectTablePushConstantEntryNVX.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkObjectTablePushConstantEntryNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkObjectTablePushConstantEntryNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkObjectTablePushConstantEntryNVX calloc() {
         return wrap(VkObjectTablePushConstantEntryNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkObjectTablePushConstantEntryNVX} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkObjectTablePushConstantEntryNVX} instance allocated with {@link BufferUtils}. */
     public static VkObjectTablePushConstantEntryNVX create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkObjectTablePushConstantEntryNVX.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkObjectTablePushConstantEntryNVX} instance for the specified memory address. */
+    /** Returns a new {@code VkObjectTablePushConstantEntryNVX} instance for the specified memory address. */
     public static VkObjectTablePushConstantEntryNVX create(long address) {
         return wrap(VkObjectTablePushConstantEntryNVX.class, address);
     }
@@ -221,18 +221,18 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
 
     // -----------------------------------
 
-    /** Returns a new {@link VkObjectTablePushConstantEntryNVX} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkObjectTablePushConstantEntryNVX} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkObjectTablePushConstantEntryNVX mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkObjectTablePushConstantEntryNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkObjectTablePushConstantEntryNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkObjectTablePushConstantEntryNVX callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkObjectTablePushConstantEntryNVX} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkObjectTablePushConstantEntryNVX} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -241,7 +241,7 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
     }
 
     /**
-     * Returns a new {@link VkObjectTablePushConstantEntryNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkObjectTablePushConstantEntryNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -315,7 +315,7 @@ public class VkObjectTablePushConstantEntryNVX extends Struct implements NativeR
         private static final VkObjectTablePushConstantEntryNVX ELEMENT_FACTORY = VkObjectTablePushConstantEntryNVX.create(-1L);
 
         /**
-         * Creates a new {@link VkObjectTablePushConstantEntryNVX.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkObjectTablePushConstantEntryNVX.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

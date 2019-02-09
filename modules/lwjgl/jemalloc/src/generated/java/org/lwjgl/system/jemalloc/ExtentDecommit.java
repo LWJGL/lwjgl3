@@ -57,7 +57,7 @@ public abstract class ExtentDecommit extends Callback implements ExtentDecommitI
         super(SIGNATURE);
     }
 
-    private ExtentDecommit(long functionPointer) {
+    ExtentDecommit(long functionPointer) {
         super(functionPointer);
     }
 

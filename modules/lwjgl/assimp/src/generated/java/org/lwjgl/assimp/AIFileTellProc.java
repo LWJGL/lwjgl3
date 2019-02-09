@@ -50,7 +50,7 @@ public abstract class AIFileTellProc extends Callback implements AIFileTellProcI
         super(SIGNATURE);
     }
 
-    private AIFileTellProc(long functionPointer) {
+    AIFileTellProc(long functionPointer) {
         super(functionPointer);
     }
 

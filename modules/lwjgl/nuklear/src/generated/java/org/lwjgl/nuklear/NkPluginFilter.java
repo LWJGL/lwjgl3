@@ -53,7 +53,7 @@ public abstract class NkPluginFilter extends Callback implements NkPluginFilterI
         super(SIGNATURE);
     }
 
-    private NkPluginFilter(long functionPointer) {
+    NkPluginFilter(long functionPointer) {
         super(functionPointer);
     }
 

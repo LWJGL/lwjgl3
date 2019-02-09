@@ -58,7 +58,7 @@ public abstract class GLDebugMessageKHRCallback extends Callback implements GLDe
         super(SIGNATURE);
     }
 
-    private GLDebugMessageKHRCallback(long functionPointer) {
+    GLDebugMessageKHRCallback(long functionPointer) {
         super(functionPointer);
     }
 

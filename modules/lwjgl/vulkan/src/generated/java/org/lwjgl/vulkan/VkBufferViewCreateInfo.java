@@ -114,7 +114,7 @@ public class VkBufferViewCreateInfo extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VkBufferViewCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkBufferViewCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -198,23 +198,23 @@ public class VkBufferViewCreateInfo extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkBufferViewCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkBufferViewCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkBufferViewCreateInfo malloc() {
         return wrap(VkBufferViewCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkBufferViewCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkBufferViewCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkBufferViewCreateInfo calloc() {
         return wrap(VkBufferViewCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkBufferViewCreateInfo} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkBufferViewCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkBufferViewCreateInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkBufferViewCreateInfo.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkBufferViewCreateInfo} instance for the specified memory address. */
+    /** Returns a new {@code VkBufferViewCreateInfo} instance for the specified memory address. */
     public static VkBufferViewCreateInfo create(long address) {
         return wrap(VkBufferViewCreateInfo.class, address);
     }
@@ -271,18 +271,18 @@ public class VkBufferViewCreateInfo extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkBufferViewCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkBufferViewCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkBufferViewCreateInfo mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkBufferViewCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkBufferViewCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkBufferViewCreateInfo callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkBufferViewCreateInfo} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkBufferViewCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -291,7 +291,7 @@ public class VkBufferViewCreateInfo extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VkBufferViewCreateInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkBufferViewCreateInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -377,7 +377,7 @@ public class VkBufferViewCreateInfo extends Struct implements NativeResource {
         private static final VkBufferViewCreateInfo ELEMENT_FACTORY = VkBufferViewCreateInfo.create(-1L);
 
         /**
-         * Creates a new {@link VkBufferViewCreateInfo.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkBufferViewCreateInfo.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -96,7 +96,7 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
     }
 
     /**
-     * Creates a {@link VkDeviceGeneratedCommandsLimitsNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkDeviceGeneratedCommandsLimitsNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -180,23 +180,23 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDeviceGeneratedCommandsLimitsNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDeviceGeneratedCommandsLimitsNVX malloc() {
         return wrap(VkDeviceGeneratedCommandsLimitsNVX.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDeviceGeneratedCommandsLimitsNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDeviceGeneratedCommandsLimitsNVX calloc() {
         return wrap(VkDeviceGeneratedCommandsLimitsNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkDeviceGeneratedCommandsLimitsNVX} instance allocated with {@link BufferUtils}. */
     public static VkDeviceGeneratedCommandsLimitsNVX create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkDeviceGeneratedCommandsLimitsNVX.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance for the specified memory address. */
+    /** Returns a new {@code VkDeviceGeneratedCommandsLimitsNVX} instance for the specified memory address. */
     public static VkDeviceGeneratedCommandsLimitsNVX create(long address) {
         return wrap(VkDeviceGeneratedCommandsLimitsNVX.class, address);
     }
@@ -253,18 +253,18 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkDeviceGeneratedCommandsLimitsNVX} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkDeviceGeneratedCommandsLimitsNVX mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkDeviceGeneratedCommandsLimitsNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkDeviceGeneratedCommandsLimitsNVX callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkDeviceGeneratedCommandsLimitsNVX} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -273,7 +273,7 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
     }
 
     /**
-     * Returns a new {@link VkDeviceGeneratedCommandsLimitsNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkDeviceGeneratedCommandsLimitsNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -359,7 +359,7 @@ public class VkDeviceGeneratedCommandsLimitsNVX extends Struct implements Native
         private static final VkDeviceGeneratedCommandsLimitsNVX ELEMENT_FACTORY = VkDeviceGeneratedCommandsLimitsNVX.create(-1L);
 
         /**
-         * Creates a new {@link VkDeviceGeneratedCommandsLimitsNVX.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkDeviceGeneratedCommandsLimitsNVX.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

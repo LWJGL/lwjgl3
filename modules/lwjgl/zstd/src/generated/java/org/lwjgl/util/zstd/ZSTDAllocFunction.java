@@ -51,7 +51,7 @@ public abstract class ZSTDAllocFunction extends Callback implements ZSTDAllocFun
         super(SIGNATURE);
     }
 
-    private ZSTDAllocFunction(long functionPointer) {
+    ZSTDAllocFunction(long functionPointer) {
         super(functionPointer);
     }
 

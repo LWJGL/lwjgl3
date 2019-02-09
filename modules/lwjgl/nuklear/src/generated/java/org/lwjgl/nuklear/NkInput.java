@@ -52,7 +52,7 @@ public class NkInput extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link NkInput} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NkInput} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -73,23 +73,23 @@ public class NkInput extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkInput} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code NkInput} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkInput malloc() {
         return wrap(NkInput.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link NkInput} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code NkInput} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkInput calloc() {
         return wrap(NkInput.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link NkInput} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code NkInput} instance allocated with {@link BufferUtils}. */
     public static NkInput create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(NkInput.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link NkInput} instance for the specified memory address. */
+    /** Returns a new {@code NkInput} instance for the specified memory address. */
     public static NkInput create(long address) {
         return wrap(NkInput.class, address);
     }
@@ -146,18 +146,18 @@ public class NkInput extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkInput} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code NkInput} instance allocated on the thread-local {@link MemoryStack}. */
     public static NkInput mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link NkInput} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code NkInput} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static NkInput callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link NkInput} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code NkInput} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -166,7 +166,7 @@ public class NkInput extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link NkInput} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code NkInput} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -227,7 +227,7 @@ public class NkInput extends Struct implements NativeResource {
         private static final NkInput ELEMENT_FACTORY = NkInput.create(-1L);
 
         /**
-         * Creates a new {@link NkInput.Buffer} instance backed by the specified container.
+         * Creates a new {@code NkInput.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

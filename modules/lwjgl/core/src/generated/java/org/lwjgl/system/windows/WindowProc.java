@@ -55,7 +55,7 @@ public abstract class WindowProc extends Callback implements WindowProcI {
         super(SIGNATURE);
     }
 
-    private WindowProc(long functionPointer) {
+    WindowProc(long functionPointer) {
         super(functionPointer);
     }
 

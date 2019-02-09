@@ -249,7 +249,7 @@ class NativeClass internal constructor(
                 // This will generate additional signatures that cover the entire
                 // GL/GLES API. They will not be used by LWJGL, but may be useful
                 // to users. Using !it.hasCustomJNI here will eliminate them.
-                .filter { !it.hasCustomJNIWithIgnoreAddress }
+                .filter { !it.hasCustomJNIWithIgnoreAddress && (!it.has<Macro>() || !it.get<Macro>().function) }
                 .forEach { JNI.register(it) }
         }
 

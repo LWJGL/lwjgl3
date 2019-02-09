@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
 public class VkPhysicalDeviceExternalFenceInfoKHR extends VkPhysicalDeviceExternalFenceInfo {
 
     /**
-     * Creates a {@link VkPhysicalDeviceExternalFenceInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceExternalFenceInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -77,23 +77,23 @@ public class VkPhysicalDeviceExternalFenceInfoKHR extends VkPhysicalDeviceExtern
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceExternalFenceInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceExternalFenceInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceExternalFenceInfoKHR malloc() {
         return wrap(VkPhysicalDeviceExternalFenceInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceExternalFenceInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceExternalFenceInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceExternalFenceInfoKHR calloc() {
         return wrap(VkPhysicalDeviceExternalFenceInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceExternalFenceInfoKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPhysicalDeviceExternalFenceInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceExternalFenceInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPhysicalDeviceExternalFenceInfoKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPhysicalDeviceExternalFenceInfoKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceExternalFenceInfoKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceExternalFenceInfoKHR create(long address) {
         return wrap(VkPhysicalDeviceExternalFenceInfoKHR.class, address);
     }
@@ -150,18 +150,18 @@ public class VkPhysicalDeviceExternalFenceInfoKHR extends VkPhysicalDeviceExtern
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceExternalFenceInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPhysicalDeviceExternalFenceInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPhysicalDeviceExternalFenceInfoKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPhysicalDeviceExternalFenceInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPhysicalDeviceExternalFenceInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPhysicalDeviceExternalFenceInfoKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceExternalFenceInfoKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPhysicalDeviceExternalFenceInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -170,7 +170,7 @@ public class VkPhysicalDeviceExternalFenceInfoKHR extends VkPhysicalDeviceExtern
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceExternalFenceInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPhysicalDeviceExternalFenceInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -224,7 +224,7 @@ public class VkPhysicalDeviceExternalFenceInfoKHR extends VkPhysicalDeviceExtern
         private static final VkPhysicalDeviceExternalFenceInfoKHR ELEMENT_FACTORY = VkPhysicalDeviceExternalFenceInfoKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceExternalFenceInfoKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceExternalFenceInfoKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

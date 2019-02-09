@@ -57,7 +57,7 @@ public abstract class GLFWWindowIconifyCallback extends Callback implements GLFW
         super(SIGNATURE);
     }
 
-    private GLFWWindowIconifyCallback(long functionPointer) {
+    GLFWWindowIconifyCallback(long functionPointer) {
         super(functionPointer);
     }
 

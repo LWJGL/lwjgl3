@@ -46,7 +46,7 @@ public class VREventSeatedZeroPoseReset extends Struct {
     }
 
     /**
-     * Creates a {@link VREventSeatedZeroPoseReset} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VREventSeatedZeroPoseReset} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -64,7 +64,7 @@ public class VREventSeatedZeroPoseReset extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VREventSeatedZeroPoseReset} instance for the specified memory address. */
+    /** Returns a new {@code VREventSeatedZeroPoseReset} instance for the specified memory address. */
     public static VREventSeatedZeroPoseReset create(long address) {
         return wrap(VREventSeatedZeroPoseReset.class, address);
     }
@@ -104,7 +104,7 @@ public class VREventSeatedZeroPoseReset extends Struct {
         private static final VREventSeatedZeroPoseReset ELEMENT_FACTORY = VREventSeatedZeroPoseReset.create(-1L);
 
         /**
-         * Creates a new {@link VREventSeatedZeroPoseReset.Buffer} instance backed by the specified container.
+         * Creates a new {@code VREventSeatedZeroPoseReset.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

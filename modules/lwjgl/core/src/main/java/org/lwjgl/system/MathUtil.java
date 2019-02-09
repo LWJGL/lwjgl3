@@ -109,11 +109,9 @@ public final class MathUtil {
      */
     public static long mathDivideUnsigned(long dividend, long divisor) {
         if (0L <= divisor) {
-            if (0L <= dividend) {
-                return dividend / divisor;
-            } else {
-                return udivdi3(dividend, divisor);
-            }
+            return 0L <= dividend
+                ? dividend / divisor
+                : udivdi3(dividend, divisor);
         } else {
             return Long.compareUnsigned(dividend, divisor) < 0 ? 0L : 1L;
         }

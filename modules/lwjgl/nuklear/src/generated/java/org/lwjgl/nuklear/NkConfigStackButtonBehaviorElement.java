@@ -50,7 +50,7 @@ class NkConfigStackButtonBehaviorElement extends Struct {
     }
 
     /**
-     * Creates a {@link NkConfigStackButtonBehaviorElement} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NkConfigStackButtonBehaviorElement} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -75,7 +75,7 @@ class NkConfigStackButtonBehaviorElement extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkConfigStackButtonBehaviorElement} instance for the specified memory address. */
+    /** Returns a new {@code NkConfigStackButtonBehaviorElement} instance for the specified memory address. */
     public static NkConfigStackButtonBehaviorElement create(long address) {
         return wrap(NkConfigStackButtonBehaviorElement.class, address);
     }
@@ -117,7 +117,7 @@ class NkConfigStackButtonBehaviorElement extends Struct {
         private static final NkConfigStackButtonBehaviorElement ELEMENT_FACTORY = NkConfigStackButtonBehaviorElement.create(-1L);
 
         /**
-         * Creates a new {@link NkConfigStackButtonBehaviorElement.Buffer} instance backed by the specified container.
+         * Creates a new {@code NkConfigStackButtonBehaviorElement.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

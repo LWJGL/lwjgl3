@@ -56,7 +56,7 @@ public abstract class LLVMSymbolLookupCallback extends Callback implements LLVMS
         super(SIGNATURE);
     }
 
-    private LLVMSymbolLookupCallback(long functionPointer) {
+    LLVMSymbolLookupCallback(long functionPointer) {
         super(functionPointer);
     }
 

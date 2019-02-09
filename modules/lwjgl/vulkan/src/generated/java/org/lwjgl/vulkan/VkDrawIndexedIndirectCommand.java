@@ -91,7 +91,7 @@ public class VkDrawIndexedIndirectCommand extends Struct implements NativeResour
     }
 
     /**
-     * Creates a {@link VkDrawIndexedIndirectCommand} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkDrawIndexedIndirectCommand} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -161,23 +161,23 @@ public class VkDrawIndexedIndirectCommand extends Struct implements NativeResour
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDrawIndexedIndirectCommand} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDrawIndexedIndirectCommand} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDrawIndexedIndirectCommand malloc() {
         return wrap(VkDrawIndexedIndirectCommand.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkDrawIndexedIndirectCommand} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDrawIndexedIndirectCommand} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDrawIndexedIndirectCommand calloc() {
         return wrap(VkDrawIndexedIndirectCommand.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkDrawIndexedIndirectCommand} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkDrawIndexedIndirectCommand} instance allocated with {@link BufferUtils}. */
     public static VkDrawIndexedIndirectCommand create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkDrawIndexedIndirectCommand.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkDrawIndexedIndirectCommand} instance for the specified memory address. */
+    /** Returns a new {@code VkDrawIndexedIndirectCommand} instance for the specified memory address. */
     public static VkDrawIndexedIndirectCommand create(long address) {
         return wrap(VkDrawIndexedIndirectCommand.class, address);
     }
@@ -234,18 +234,18 @@ public class VkDrawIndexedIndirectCommand extends Struct implements NativeResour
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDrawIndexedIndirectCommand} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkDrawIndexedIndirectCommand} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkDrawIndexedIndirectCommand mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkDrawIndexedIndirectCommand} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkDrawIndexedIndirectCommand} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkDrawIndexedIndirectCommand callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkDrawIndexedIndirectCommand} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkDrawIndexedIndirectCommand} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -254,7 +254,7 @@ public class VkDrawIndexedIndirectCommand extends Struct implements NativeResour
     }
 
     /**
-     * Returns a new {@link VkDrawIndexedIndirectCommand} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkDrawIndexedIndirectCommand} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -332,7 +332,7 @@ public class VkDrawIndexedIndirectCommand extends Struct implements NativeResour
         private static final VkDrawIndexedIndirectCommand ELEMENT_FACTORY = VkDrawIndexedIndirectCommand.create(-1L);
 
         /**
-         * Creates a new {@link VkDrawIndexedIndirectCommand.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkDrawIndexedIndirectCommand.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -62,7 +62,7 @@ public class VRTextureBounds extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VRTextureBounds} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VRTextureBounds} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -121,23 +121,23 @@ public class VRTextureBounds extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VRTextureBounds} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VRTextureBounds} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VRTextureBounds malloc() {
         return wrap(VRTextureBounds.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VRTextureBounds} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VRTextureBounds} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VRTextureBounds calloc() {
         return wrap(VRTextureBounds.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VRTextureBounds} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VRTextureBounds} instance allocated with {@link BufferUtils}. */
     public static VRTextureBounds create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VRTextureBounds.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VRTextureBounds} instance for the specified memory address. */
+    /** Returns a new {@code VRTextureBounds} instance for the specified memory address. */
     public static VRTextureBounds create(long address) {
         return wrap(VRTextureBounds.class, address);
     }
@@ -194,18 +194,18 @@ public class VRTextureBounds extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VRTextureBounds} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VRTextureBounds} instance allocated on the thread-local {@link MemoryStack}. */
     public static VRTextureBounds mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VRTextureBounds} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VRTextureBounds} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VRTextureBounds callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VRTextureBounds} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VRTextureBounds} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -214,7 +214,7 @@ public class VRTextureBounds extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VRTextureBounds} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VRTextureBounds} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -288,7 +288,7 @@ public class VRTextureBounds extends Struct implements NativeResource {
         private static final VRTextureBounds ELEMENT_FACTORY = VRTextureBounds.create(-1L);
 
         /**
-         * Creates a new {@link VRTextureBounds.Buffer} instance backed by the specified container.
+         * Creates a new {@code VRTextureBounds.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

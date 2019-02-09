@@ -80,7 +80,7 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceShadingRateImageFeaturesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -143,23 +143,23 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV malloc() {
         return wrap(VkPhysicalDeviceShadingRateImageFeaturesNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV calloc() {
         return wrap(VkPhysicalDeviceShadingRateImageFeaturesNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPhysicalDeviceShadingRateImageFeaturesNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceShadingRateImageFeaturesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV create(long address) {
         return wrap(VkPhysicalDeviceShadingRateImageFeaturesNV.class, address);
     }
@@ -216,18 +216,18 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPhysicalDeviceShadingRateImageFeaturesNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -236,7 +236,7 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPhysicalDeviceShadingRateImageFeaturesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -310,7 +310,7 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
         private static final VkPhysicalDeviceShadingRateImageFeaturesNV ELEMENT_FACTORY = VkPhysicalDeviceShadingRateImageFeaturesNV.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

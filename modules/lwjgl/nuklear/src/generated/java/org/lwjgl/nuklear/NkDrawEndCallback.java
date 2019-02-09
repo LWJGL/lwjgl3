@@ -53,7 +53,7 @@ public abstract class NkDrawEndCallback extends Callback implements NkDrawEndCal
         super(SIGNATURE);
     }
 
-    private NkDrawEndCallback(long functionPointer) {
+    NkDrawEndCallback(long functionPointer) {
         super(functionPointer);
     }
 

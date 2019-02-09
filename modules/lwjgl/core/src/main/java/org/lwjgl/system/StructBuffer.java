@@ -158,6 +158,9 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
         }
 
         @Override public T next() {
+            if (CHECKS && fence <= index) {
+                throw new NoSuchElementException();
+            }
             return factory.wrap(address, index++, container);
         }
 

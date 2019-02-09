@@ -183,7 +183,7 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
     }
 
     /**
-     * Creates a {@link OVRPerfStatsPerCompositorFrame} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code OVRPerfStatsPerCompositorFrame} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -235,7 +235,7 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link OVRPerfStatsPerCompositorFrame} instance for the specified memory address. */
+    /** Returns a new {@code OVRPerfStatsPerCompositorFrame} instance for the specified memory address. */
     public static OVRPerfStatsPerCompositorFrame create(long address) {
         return wrap(OVRPerfStatsPerCompositorFrame.class, address);
     }
@@ -309,7 +309,7 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
         private static final OVRPerfStatsPerCompositorFrame ELEMENT_FACTORY = OVRPerfStatsPerCompositorFrame.create(-1L);
 
         /**
-         * Creates a new {@link OVRPerfStatsPerCompositorFrame.Buffer} instance backed by the specified container.
+         * Creates a new {@code OVRPerfStatsPerCompositorFrame.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -59,7 +59,7 @@ public abstract class MDBRelFunc extends Callback implements MDBRelFuncI {
         super(SIGNATURE);
     }
 
-    private MDBRelFunc(long functionPointer) {
+    MDBRelFunc(long functionPointer) {
         super(functionPointer);
     }
 

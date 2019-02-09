@@ -52,7 +52,7 @@ public abstract class CUhostFn extends Callback implements CUhostFnI {
         super(SIGNATURE);
     }
 
-    private CUhostFn(long functionPointer) {
+    CUhostFn(long functionPointer) {
         super(functionPointer);
     }
 

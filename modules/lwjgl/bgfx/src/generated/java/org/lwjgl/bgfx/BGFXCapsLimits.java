@@ -164,7 +164,7 @@ public class BGFXCapsLimits extends Struct {
     }
 
     /**
-     * Creates a {@link BGFXCapsLimits} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code BGFXCapsLimits} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -248,7 +248,7 @@ public class BGFXCapsLimits extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link BGFXCapsLimits} instance for the specified memory address. */
+    /** Returns a new {@code BGFXCapsLimits} instance for the specified memory address. */
     public static BGFXCapsLimits create(long address) {
         return wrap(BGFXCapsLimits.class, address);
     }
@@ -332,7 +332,7 @@ public class BGFXCapsLimits extends Struct {
         private static final BGFXCapsLimits ELEMENT_FACTORY = BGFXCapsLimits.create(-1L);
 
         /**
-         * Creates a new {@link BGFXCapsLimits.Buffer} instance backed by the specified container.
+         * Creates a new {@code BGFXCapsLimits.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

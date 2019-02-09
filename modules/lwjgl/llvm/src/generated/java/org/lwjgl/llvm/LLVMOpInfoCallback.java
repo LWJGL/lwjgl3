@@ -57,7 +57,7 @@ public abstract class LLVMOpInfoCallback extends Callback implements LLVMOpInfoC
         super(SIGNATURE);
     }
 
-    private LLVMOpInfoCallback(long functionPointer) {
+    LLVMOpInfoCallback(long functionPointer) {
         super(functionPointer);
     }
 

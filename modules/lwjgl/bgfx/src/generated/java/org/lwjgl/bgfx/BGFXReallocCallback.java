@@ -57,7 +57,7 @@ public abstract class BGFXReallocCallback extends Callback implements BGFXReallo
         super(SIGNATURE);
     }
 
-    private BGFXReallocCallback(long functionPointer) {
+    BGFXReallocCallback(long functionPointer) {
         super(functionPointer);
     }
 

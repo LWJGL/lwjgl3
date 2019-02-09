@@ -20,7 +20,7 @@ class CallbackFunction internal constructor(
         }
     }
 
-    val javaSignature = signature.asSequence().filter { !it.has<UserData>() }
+    private val javaSignature = signature.asSequence().filter { !it.has<UserData>() }
 
     internal var functionDoc: (CallbackFunction) -> String = { "" }
     var additionalCode = ""
@@ -152,7 +152,7 @@ import static org.lwjgl.system.MemoryUtil.*;
         super(SIGNATURE);
     }
 
-    private $className(long functionPointer) {
+    $className(long functionPointer) {
         super(functionPointer);
     }
 """)

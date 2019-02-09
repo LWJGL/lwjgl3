@@ -52,7 +52,7 @@ public abstract class CXExecuteOnThread extends Callback implements CXExecuteOnT
         super(SIGNATURE);
     }
 
-    private CXExecuteOnThread(long functionPointer) {
+    CXExecuteOnThread(long functionPointer) {
         super(functionPointer);
     }
 

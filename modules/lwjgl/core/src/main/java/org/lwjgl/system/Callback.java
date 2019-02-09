@@ -40,7 +40,7 @@ public abstract class Callback implements Pointer, NativeResource {
         try (MemoryStack stack = stackPush()) {
             Class<?>[] params = new Class<?>[] {long.class};
 
-            Method[] methods = new Method[] {
+            Method[] methods = {
                 CallbackI.V.class.getDeclaredMethod("callback", params),
                 CallbackI.Z.class.getDeclaredMethod("callback", params),
                 CallbackI.B.class.getDeclaredMethod("callback", params),
@@ -102,7 +102,7 @@ public abstract class Callback implements Pointer, NativeResource {
 
     @Override
     public void free() {
-        Callback.free(address());
+        free(address());
     }
 
     private static native long getNativeCallbacks(Method[] methods, long callbacks);
@@ -122,7 +122,7 @@ public abstract class Callback implements Pointer, NativeResource {
      * @return the dynamically generated native function
      */
     static long create(String signature, Object instance) {
-        long funcptr = Callback.getNativeFunction(signature.charAt(signature.length() - 1));
+        long funcptr = getNativeFunction(signature.charAt(signature.length() - 1));
 
         long handle = dcbNewCallback(signature, funcptr, NewGlobalRef(instance));
         if (handle == NULL) {
@@ -130,7 +130,7 @@ public abstract class Callback implements Pointer, NativeResource {
         }
 
         if (DEBUG_ALLOCATOR) {
-            MemoryManage.DebugAllocator.track(handle, 2 * POINTER_SIZE);
+            MemoryManage.DebugAllocator.track(handle, 2L * POINTER_SIZE);
         }
 
         return handle;

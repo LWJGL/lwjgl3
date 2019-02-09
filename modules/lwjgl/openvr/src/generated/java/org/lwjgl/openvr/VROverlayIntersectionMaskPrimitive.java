@@ -52,7 +52,7 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
     }
 
     /**
-     * Creates a {@link VROverlayIntersectionMaskPrimitive} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VROverlayIntersectionMaskPrimitive} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -103,23 +103,23 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
 
     // -----------------------------------
 
-    /** Returns a new {@link VROverlayIntersectionMaskPrimitive} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VROverlayIntersectionMaskPrimitive} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VROverlayIntersectionMaskPrimitive malloc() {
         return wrap(VROverlayIntersectionMaskPrimitive.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VROverlayIntersectionMaskPrimitive} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VROverlayIntersectionMaskPrimitive} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VROverlayIntersectionMaskPrimitive calloc() {
         return wrap(VROverlayIntersectionMaskPrimitive.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VROverlayIntersectionMaskPrimitive} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VROverlayIntersectionMaskPrimitive} instance allocated with {@link BufferUtils}. */
     public static VROverlayIntersectionMaskPrimitive create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VROverlayIntersectionMaskPrimitive.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VROverlayIntersectionMaskPrimitive} instance for the specified memory address. */
+    /** Returns a new {@code VROverlayIntersectionMaskPrimitive} instance for the specified memory address. */
     public static VROverlayIntersectionMaskPrimitive create(long address) {
         return wrap(VROverlayIntersectionMaskPrimitive.class, address);
     }
@@ -176,18 +176,18 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
 
     // -----------------------------------
 
-    /** Returns a new {@link VROverlayIntersectionMaskPrimitive} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VROverlayIntersectionMaskPrimitive} instance allocated on the thread-local {@link MemoryStack}. */
     public static VROverlayIntersectionMaskPrimitive mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VROverlayIntersectionMaskPrimitive} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VROverlayIntersectionMaskPrimitive} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VROverlayIntersectionMaskPrimitive callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VROverlayIntersectionMaskPrimitive} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VROverlayIntersectionMaskPrimitive} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -196,7 +196,7 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
     }
 
     /**
-     * Returns a new {@link VROverlayIntersectionMaskPrimitive} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VROverlayIntersectionMaskPrimitive} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -262,7 +262,7 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
         private static final VROverlayIntersectionMaskPrimitive ELEMENT_FACTORY = VROverlayIntersectionMaskPrimitive.create(-1L);
 
         /**
-         * Creates a new {@link VROverlayIntersectionMaskPrimitive.Buffer} instance backed by the specified container.
+         * Creates a new {@code VROverlayIntersectionMaskPrimitive.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

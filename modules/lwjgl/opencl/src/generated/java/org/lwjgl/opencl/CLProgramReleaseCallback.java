@@ -53,7 +53,7 @@ public abstract class CLProgramReleaseCallback extends Callback implements CLPro
         super(SIGNATURE);
     }
 
-    private CLProgramReleaseCallback(long functionPointer) {
+    CLProgramReleaseCallback(long functionPointer) {
         super(functionPointer);
     }
 

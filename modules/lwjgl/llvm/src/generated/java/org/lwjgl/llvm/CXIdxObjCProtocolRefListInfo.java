@@ -50,7 +50,7 @@ public class CXIdxObjCProtocolRefListInfo extends Struct {
     }
 
     /**
-     * Creates a {@link CXIdxObjCProtocolRefListInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code CXIdxObjCProtocolRefListInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -71,7 +71,7 @@ public class CXIdxObjCProtocolRefListInfo extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link CXIdxObjCProtocolRefListInfo} instance for the specified memory address. */
+    /** Returns a new {@code CXIdxObjCProtocolRefListInfo} instance for the specified memory address. */
     public static CXIdxObjCProtocolRefListInfo create(long address) {
         return wrap(CXIdxObjCProtocolRefListInfo.class, address);
     }
@@ -113,7 +113,7 @@ public class CXIdxObjCProtocolRefListInfo extends Struct {
         private static final CXIdxObjCProtocolRefListInfo ELEMENT_FACTORY = CXIdxObjCProtocolRefListInfo.create(-1L);
 
         /**
-         * Creates a new {@link CXIdxObjCProtocolRefListInfo.Buffer} instance backed by the specified container.
+         * Creates a new {@code CXIdxObjCProtocolRefListInfo.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

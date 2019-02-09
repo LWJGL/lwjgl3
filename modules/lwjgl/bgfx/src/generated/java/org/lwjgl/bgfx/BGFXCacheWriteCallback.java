@@ -55,7 +55,7 @@ public abstract class BGFXCacheWriteCallback extends Callback implements BGFXCac
         super(SIGNATURE);
     }
 
-    private BGFXCacheWriteCallback(long functionPointer) {
+    BGFXCacheWriteCallback(long functionPointer) {
         super(functionPointer);
     }
 

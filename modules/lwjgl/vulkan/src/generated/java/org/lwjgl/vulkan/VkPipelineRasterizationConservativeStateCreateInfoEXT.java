@@ -89,7 +89,7 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
     }
 
     /**
-     * Creates a {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPipelineRasterizationConservativeStateCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -158,23 +158,23 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT malloc() {
         return wrap(VkPipelineRasterizationConservativeStateCreateInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT calloc() {
         return wrap(VkPipelineRasterizationConservativeStateCreateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPipelineRasterizationConservativeStateCreateInfoEXT.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkPipelineRasterizationConservativeStateCreateInfoEXT} instance for the specified memory address. */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT create(long address) {
         return wrap(VkPipelineRasterizationConservativeStateCreateInfoEXT.class, address);
     }
@@ -231,18 +231,18 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPipelineRasterizationConservativeStateCreateInfoEXT callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -251,7 +251,7 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
     }
 
     /**
-     * Returns a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPipelineRasterizationConservativeStateCreateInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -329,7 +329,7 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
         private static final VkPipelineRasterizationConservativeStateCreateInfoEXT ELEMENT_FACTORY = VkPipelineRasterizationConservativeStateCreateInfoEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

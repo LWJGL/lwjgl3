@@ -57,7 +57,7 @@ public abstract class EGLDebugMessageKHRCallback extends Callback implements EGL
         super(SIGNATURE);
     }
 
-    private EGLDebugMessageKHRCallback(long functionPointer) {
+    EGLDebugMessageKHRCallback(long functionPointer) {
         super(functionPointer);
     }
 

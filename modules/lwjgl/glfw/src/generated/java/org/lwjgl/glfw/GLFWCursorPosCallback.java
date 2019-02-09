@@ -58,7 +58,7 @@ public abstract class GLFWCursorPosCallback extends Callback implements GLFWCurs
         super(SIGNATURE);
     }
 
-    private GLFWCursorPosCallback(long functionPointer) {
+    GLFWCursorPosCallback(long functionPointer) {
         super(functionPointer);
     }
 

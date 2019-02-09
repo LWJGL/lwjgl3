@@ -111,7 +111,7 @@ public class VkBindAccelerationStructureMemoryInfoNV extends Struct implements N
     }
 
     /**
-     * Creates a {@link VkBindAccelerationStructureMemoryInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkBindAccelerationStructureMemoryInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -192,23 +192,23 @@ public class VkBindAccelerationStructureMemoryInfoNV extends Struct implements N
 
     // -----------------------------------
 
-    /** Returns a new {@link VkBindAccelerationStructureMemoryInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkBindAccelerationStructureMemoryInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkBindAccelerationStructureMemoryInfoNV malloc() {
         return wrap(VkBindAccelerationStructureMemoryInfoNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkBindAccelerationStructureMemoryInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkBindAccelerationStructureMemoryInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkBindAccelerationStructureMemoryInfoNV calloc() {
         return wrap(VkBindAccelerationStructureMemoryInfoNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkBindAccelerationStructureMemoryInfoNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkBindAccelerationStructureMemoryInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkBindAccelerationStructureMemoryInfoNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkBindAccelerationStructureMemoryInfoNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkBindAccelerationStructureMemoryInfoNV} instance for the specified memory address. */
+    /** Returns a new {@code VkBindAccelerationStructureMemoryInfoNV} instance for the specified memory address. */
     public static VkBindAccelerationStructureMemoryInfoNV create(long address) {
         return wrap(VkBindAccelerationStructureMemoryInfoNV.class, address);
     }
@@ -265,18 +265,18 @@ public class VkBindAccelerationStructureMemoryInfoNV extends Struct implements N
 
     // -----------------------------------
 
-    /** Returns a new {@link VkBindAccelerationStructureMemoryInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkBindAccelerationStructureMemoryInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkBindAccelerationStructureMemoryInfoNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkBindAccelerationStructureMemoryInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkBindAccelerationStructureMemoryInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkBindAccelerationStructureMemoryInfoNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkBindAccelerationStructureMemoryInfoNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkBindAccelerationStructureMemoryInfoNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -285,7 +285,7 @@ public class VkBindAccelerationStructureMemoryInfoNV extends Struct implements N
     }
 
     /**
-     * Returns a new {@link VkBindAccelerationStructureMemoryInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkBindAccelerationStructureMemoryInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -382,7 +382,7 @@ public class VkBindAccelerationStructureMemoryInfoNV extends Struct implements N
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -394,7 +394,7 @@ public class VkBindAccelerationStructureMemoryInfoNV extends Struct implements N
         private static final VkBindAccelerationStructureMemoryInfoNV ELEMENT_FACTORY = VkBindAccelerationStructureMemoryInfoNV.create(-1L);
 
         /**
-         * Creates a new {@link VkBindAccelerationStructureMemoryInfoNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkBindAccelerationStructureMemoryInfoNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

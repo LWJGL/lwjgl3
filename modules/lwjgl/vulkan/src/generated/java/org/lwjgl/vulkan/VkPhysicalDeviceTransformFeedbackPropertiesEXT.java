@@ -118,7 +118,7 @@ public class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends Struct {
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceTransformFeedbackPropertiesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -197,7 +197,7 @@ public class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceTransformFeedbackPropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceTransformFeedbackPropertiesEXT create(long address) {
         return wrap(VkPhysicalDeviceTransformFeedbackPropertiesEXT.class, address);
     }
@@ -264,7 +264,7 @@ public class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends Struct {
         private static final VkPhysicalDeviceTransformFeedbackPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceTransformFeedbackPropertiesEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceTransformFeedbackPropertiesEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

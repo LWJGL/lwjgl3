@@ -65,7 +65,7 @@ public class CXVersion extends Struct {
     }
 
     /**
-     * Creates a {@link CXVersion} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code CXVersion} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -86,7 +86,7 @@ public class CXVersion extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link CXVersion} instance for the specified memory address. */
+    /** Returns a new {@code CXVersion} instance for the specified memory address. */
     public static CXVersion create(long address) {
         return wrap(CXVersion.class, address);
     }
@@ -130,7 +130,7 @@ public class CXVersion extends Struct {
         private static final CXVersion ELEMENT_FACTORY = CXVersion.create(-1L);
 
         /**
-         * Creates a new {@link CXVersion.Buffer} instance backed by the specified container.
+         * Creates a new {@code CXVersion.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

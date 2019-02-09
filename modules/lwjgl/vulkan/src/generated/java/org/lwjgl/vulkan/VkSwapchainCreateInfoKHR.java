@@ -195,7 +195,7 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VkSwapchainCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkSwapchainCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -354,23 +354,23 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSwapchainCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSwapchainCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSwapchainCreateInfoKHR malloc() {
         return wrap(VkSwapchainCreateInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkSwapchainCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSwapchainCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSwapchainCreateInfoKHR calloc() {
         return wrap(VkSwapchainCreateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkSwapchainCreateInfoKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkSwapchainCreateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkSwapchainCreateInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkSwapchainCreateInfoKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkSwapchainCreateInfoKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkSwapchainCreateInfoKHR} instance for the specified memory address. */
     public static VkSwapchainCreateInfoKHR create(long address) {
         return wrap(VkSwapchainCreateInfoKHR.class, address);
     }
@@ -427,18 +427,18 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSwapchainCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkSwapchainCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkSwapchainCreateInfoKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkSwapchainCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkSwapchainCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkSwapchainCreateInfoKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkSwapchainCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkSwapchainCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -447,7 +447,7 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VkSwapchainCreateInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkSwapchainCreateInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -588,7 +588,7 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -600,7 +600,7 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
         private static final VkSwapchainCreateInfoKHR ELEMENT_FACTORY = VkSwapchainCreateInfoKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkSwapchainCreateInfoKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkSwapchainCreateInfoKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

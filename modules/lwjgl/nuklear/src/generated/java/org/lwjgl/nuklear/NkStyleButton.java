@@ -112,7 +112,7 @@ public class NkStyleButton extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link NkStyleButton} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NkStyleButton} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -290,23 +290,23 @@ public class NkStyleButton extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkStyleButton} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code NkStyleButton} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkStyleButton malloc() {
         return wrap(NkStyleButton.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link NkStyleButton} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code NkStyleButton} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkStyleButton calloc() {
         return wrap(NkStyleButton.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link NkStyleButton} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code NkStyleButton} instance allocated with {@link BufferUtils}. */
     public static NkStyleButton create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(NkStyleButton.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link NkStyleButton} instance for the specified memory address. */
+    /** Returns a new {@code NkStyleButton} instance for the specified memory address. */
     public static NkStyleButton create(long address) {
         return wrap(NkStyleButton.class, address);
     }
@@ -363,18 +363,18 @@ public class NkStyleButton extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkStyleButton} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code NkStyleButton} instance allocated on the thread-local {@link MemoryStack}. */
     public static NkStyleButton mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link NkStyleButton} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code NkStyleButton} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static NkStyleButton callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link NkStyleButton} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code NkStyleButton} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -383,7 +383,7 @@ public class NkStyleButton extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link NkStyleButton} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code NkStyleButton} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -509,7 +509,7 @@ public class NkStyleButton extends Struct implements NativeResource {
         private static final NkStyleButton ELEMENT_FACTORY = NkStyleButton.create(-1L);
 
         /**
-         * Creates a new {@link NkStyleButton.Buffer} instance backed by the specified container.
+         * Creates a new {@code NkStyleButton.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

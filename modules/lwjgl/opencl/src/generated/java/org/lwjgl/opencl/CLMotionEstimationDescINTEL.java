@@ -74,7 +74,7 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
     }
 
     /**
-     * Creates a {@link CLMotionEstimationDescINTEL} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code CLMotionEstimationDescINTEL} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -137,23 +137,23 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
 
     // -----------------------------------
 
-    /** Returns a new {@link CLMotionEstimationDescINTEL} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CLMotionEstimationDescINTEL} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CLMotionEstimationDescINTEL malloc() {
         return wrap(CLMotionEstimationDescINTEL.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link CLMotionEstimationDescINTEL} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CLMotionEstimationDescINTEL} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CLMotionEstimationDescINTEL calloc() {
         return wrap(CLMotionEstimationDescINTEL.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link CLMotionEstimationDescINTEL} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code CLMotionEstimationDescINTEL} instance allocated with {@link BufferUtils}. */
     public static CLMotionEstimationDescINTEL create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(CLMotionEstimationDescINTEL.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link CLMotionEstimationDescINTEL} instance for the specified memory address. */
+    /** Returns a new {@code CLMotionEstimationDescINTEL} instance for the specified memory address. */
     public static CLMotionEstimationDescINTEL create(long address) {
         return wrap(CLMotionEstimationDescINTEL.class, address);
     }
@@ -210,18 +210,18 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
 
     // -----------------------------------
 
-    /** Returns a new {@link CLMotionEstimationDescINTEL} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code CLMotionEstimationDescINTEL} instance allocated on the thread-local {@link MemoryStack}. */
     public static CLMotionEstimationDescINTEL mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link CLMotionEstimationDescINTEL} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code CLMotionEstimationDescINTEL} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static CLMotionEstimationDescINTEL callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link CLMotionEstimationDescINTEL} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code CLMotionEstimationDescINTEL} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -230,7 +230,7 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
     }
 
     /**
-     * Returns a new {@link CLMotionEstimationDescINTEL} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code CLMotionEstimationDescINTEL} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -304,7 +304,7 @@ public class CLMotionEstimationDescINTEL extends Struct implements NativeResourc
         private static final CLMotionEstimationDescINTEL ELEMENT_FACTORY = CLMotionEstimationDescINTEL.create(-1L);
 
         /**
-         * Creates a new {@link CLMotionEstimationDescINTEL.Buffer} instance backed by the specified container.
+         * Creates a new {@code CLMotionEstimationDescINTEL.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -61,7 +61,7 @@ public class VRControllerAxis extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VRControllerAxis} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VRControllerAxis} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -108,23 +108,23 @@ public class VRControllerAxis extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VRControllerAxis} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VRControllerAxis} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VRControllerAxis malloc() {
         return wrap(VRControllerAxis.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VRControllerAxis} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VRControllerAxis} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VRControllerAxis calloc() {
         return wrap(VRControllerAxis.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VRControllerAxis} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VRControllerAxis} instance allocated with {@link BufferUtils}. */
     public static VRControllerAxis create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VRControllerAxis.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VRControllerAxis} instance for the specified memory address. */
+    /** Returns a new {@code VRControllerAxis} instance for the specified memory address. */
     public static VRControllerAxis create(long address) {
         return wrap(VRControllerAxis.class, address);
     }
@@ -181,18 +181,18 @@ public class VRControllerAxis extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VRControllerAxis} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VRControllerAxis} instance allocated on the thread-local {@link MemoryStack}. */
     public static VRControllerAxis mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VRControllerAxis} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VRControllerAxis} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VRControllerAxis callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VRControllerAxis} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VRControllerAxis} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -201,7 +201,7 @@ public class VRControllerAxis extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VRControllerAxis} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VRControllerAxis} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -267,7 +267,7 @@ public class VRControllerAxis extends Struct implements NativeResource {
         private static final VRControllerAxis ELEMENT_FACTORY = VRControllerAxis.create(-1L);
 
         /**
-         * Creates a new {@link VRControllerAxis.Buffer} instance backed by the specified container.
+         * Creates a new {@code VRControllerAxis.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

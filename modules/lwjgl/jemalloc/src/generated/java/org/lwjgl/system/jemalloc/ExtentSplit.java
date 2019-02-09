@@ -58,7 +58,7 @@ public abstract class ExtentSplit extends Callback implements ExtentSplitI {
         super(SIGNATURE);
     }
 
-    private ExtentSplit(long functionPointer) {
+    ExtentSplit(long functionPointer) {
         super(functionPointer);
     }
 

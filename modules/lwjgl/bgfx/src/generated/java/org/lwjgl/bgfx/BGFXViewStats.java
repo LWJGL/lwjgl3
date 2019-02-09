@@ -69,7 +69,7 @@ public class BGFXViewStats extends Struct {
     }
 
     /**
-     * Creates a {@link BGFXViewStats} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code BGFXViewStats} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -99,7 +99,7 @@ public class BGFXViewStats extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link BGFXViewStats} instance for the specified memory address. */
+    /** Returns a new {@code BGFXViewStats} instance for the specified memory address. */
     public static BGFXViewStats create(long address) {
         return wrap(BGFXViewStats.class, address);
     }
@@ -147,7 +147,7 @@ public class BGFXViewStats extends Struct {
         private static final BGFXViewStats ELEMENT_FACTORY = BGFXViewStats.create(-1L);
 
         /**
-         * Creates a new {@link BGFXViewStats.Buffer} instance backed by the specified container.
+         * Creates a new {@code BGFXViewStats.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

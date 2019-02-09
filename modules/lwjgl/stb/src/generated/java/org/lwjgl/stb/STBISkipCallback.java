@@ -53,7 +53,7 @@ public abstract class STBISkipCallback extends Callback implements STBISkipCallb
         super(SIGNATURE);
     }
 
-    private STBISkipCallback(long functionPointer) {
+    STBISkipCallback(long functionPointer) {
         super(functionPointer);
     }
 

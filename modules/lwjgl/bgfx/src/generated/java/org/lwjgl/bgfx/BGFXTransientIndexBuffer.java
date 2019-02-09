@@ -72,7 +72,7 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link BGFXTransientIndexBuffer} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code BGFXTransientIndexBuffer} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -131,23 +131,23 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link BGFXTransientIndexBuffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code BGFXTransientIndexBuffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXTransientIndexBuffer malloc() {
         return wrap(BGFXTransientIndexBuffer.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link BGFXTransientIndexBuffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code BGFXTransientIndexBuffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXTransientIndexBuffer calloc() {
         return wrap(BGFXTransientIndexBuffer.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link BGFXTransientIndexBuffer} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code BGFXTransientIndexBuffer} instance allocated with {@link BufferUtils}. */
     public static BGFXTransientIndexBuffer create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(BGFXTransientIndexBuffer.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link BGFXTransientIndexBuffer} instance for the specified memory address. */
+    /** Returns a new {@code BGFXTransientIndexBuffer} instance for the specified memory address. */
     public static BGFXTransientIndexBuffer create(long address) {
         return wrap(BGFXTransientIndexBuffer.class, address);
     }
@@ -204,18 +204,18 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link BGFXTransientIndexBuffer} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code BGFXTransientIndexBuffer} instance allocated on the thread-local {@link MemoryStack}. */
     public static BGFXTransientIndexBuffer mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link BGFXTransientIndexBuffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code BGFXTransientIndexBuffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static BGFXTransientIndexBuffer callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link BGFXTransientIndexBuffer} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code BGFXTransientIndexBuffer} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -224,7 +224,7 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link BGFXTransientIndexBuffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code BGFXTransientIndexBuffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -307,7 +307,7 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -319,7 +319,7 @@ public class BGFXTransientIndexBuffer extends Struct implements NativeResource {
         private static final BGFXTransientIndexBuffer ELEMENT_FACTORY = BGFXTransientIndexBuffer.create(-1L);
 
         /**
-         * Creates a new {@link BGFXTransientIndexBuffer.Buffer} instance backed by the specified container.
+         * Creates a new {@code BGFXTransientIndexBuffer.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

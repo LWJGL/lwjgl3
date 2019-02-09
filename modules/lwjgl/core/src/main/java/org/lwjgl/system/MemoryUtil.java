@@ -1592,7 +1592,7 @@ public final class MemoryUtil {
          */
 
         //UNSAFE.setMemory(dst, bytes, (byte)(value & 0xFF));
-        if (256L < bytes) {
+        if (256L <= bytes) {
             nmemset(ptr, value, bytes);
             return;
         }
@@ -1600,7 +1600,7 @@ public final class MemoryUtil {
         long fill = (value & 0xFF) * FILL_PATTERN;
 
         int i = 0,
-            length = (int)bytes & 0xFFFF_FFFF;
+            length = (int)bytes & 0xFF;
 
         if (length != 0) {
             int misalignment = (int)ptr & 7;
@@ -1677,11 +1677,9 @@ public final class MemoryUtil {
     public static float memGetFloat(long ptr)     { return UNSAFE.getFloat(null, ptr); }
     public static double memGetDouble(long ptr)   { return UNSAFE.getDouble(null, ptr); }
     public static long memGetAddress(long ptr) {
-        if (BITS64) {
-            return UNSAFE.getLong(null, ptr);
-        } else {
-            return ((long)UNSAFE.getInt(null, ptr)) & 0xFFFF_FFFFL;
-        }
+        return BITS64
+            ? UNSAFE.getLong(null, ptr) :
+            UNSAFE.getInt(null, ptr) & 0xFFFF_FFFFL;
     }
 
     public static void memPutByte(long ptr, byte value)     { UNSAFE.putByte(null, ptr, value); }
@@ -2059,10 +2057,10 @@ public final class MemoryUtil {
     static int encodeUTF16(CharSequence text, boolean nullTerminated, long target) {
         int len = text.length();
         for (int i = 0; i < len; i++) {
-            UNSAFE.putShort(target + 2 * i, (short)text.charAt(i));
+            UNSAFE.putShort(target + Integer.toUnsignedLong(i) * 2, (short)text.charAt(i));
         }
         if (nullTerminated) {
-            UNSAFE.putShort(target + 2 * len++, (short)0);
+            UNSAFE.putShort(target + Integer.toUnsignedLong(len++) * 2, (short)0);
         }
         return 2 * len;
     }

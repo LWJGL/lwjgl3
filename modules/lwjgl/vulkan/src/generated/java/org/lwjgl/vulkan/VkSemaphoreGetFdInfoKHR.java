@@ -97,7 +97,7 @@ public class VkSemaphoreGetFdInfoKHR extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VkSemaphoreGetFdInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkSemaphoreGetFdInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -160,23 +160,23 @@ public class VkSemaphoreGetFdInfoKHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSemaphoreGetFdInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSemaphoreGetFdInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSemaphoreGetFdInfoKHR malloc() {
         return wrap(VkSemaphoreGetFdInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkSemaphoreGetFdInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSemaphoreGetFdInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSemaphoreGetFdInfoKHR calloc() {
         return wrap(VkSemaphoreGetFdInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkSemaphoreGetFdInfoKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkSemaphoreGetFdInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkSemaphoreGetFdInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkSemaphoreGetFdInfoKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkSemaphoreGetFdInfoKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkSemaphoreGetFdInfoKHR} instance for the specified memory address. */
     public static VkSemaphoreGetFdInfoKHR create(long address) {
         return wrap(VkSemaphoreGetFdInfoKHR.class, address);
     }
@@ -233,18 +233,18 @@ public class VkSemaphoreGetFdInfoKHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSemaphoreGetFdInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkSemaphoreGetFdInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkSemaphoreGetFdInfoKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkSemaphoreGetFdInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkSemaphoreGetFdInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkSemaphoreGetFdInfoKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkSemaphoreGetFdInfoKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkSemaphoreGetFdInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -253,7 +253,7 @@ public class VkSemaphoreGetFdInfoKHR extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VkSemaphoreGetFdInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkSemaphoreGetFdInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -327,7 +327,7 @@ public class VkSemaphoreGetFdInfoKHR extends Struct implements NativeResource {
         private static final VkSemaphoreGetFdInfoKHR ELEMENT_FACTORY = VkSemaphoreGetFdInfoKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkSemaphoreGetFdInfoKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkSemaphoreGetFdInfoKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

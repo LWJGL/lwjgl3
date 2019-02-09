@@ -49,7 +49,7 @@ public class HmdMatrix44 extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link HmdMatrix44} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code HmdMatrix44} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -86,23 +86,23 @@ public class HmdMatrix44 extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link HmdMatrix44} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code HmdMatrix44} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static HmdMatrix44 malloc() {
         return wrap(HmdMatrix44.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link HmdMatrix44} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code HmdMatrix44} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static HmdMatrix44 calloc() {
         return wrap(HmdMatrix44.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link HmdMatrix44} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code HmdMatrix44} instance allocated with {@link BufferUtils}. */
     public static HmdMatrix44 create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(HmdMatrix44.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link HmdMatrix44} instance for the specified memory address. */
+    /** Returns a new {@code HmdMatrix44} instance for the specified memory address. */
     public static HmdMatrix44 create(long address) {
         return wrap(HmdMatrix44.class, address);
     }
@@ -159,18 +159,18 @@ public class HmdMatrix44 extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link HmdMatrix44} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code HmdMatrix44} instance allocated on the thread-local {@link MemoryStack}. */
     public static HmdMatrix44 mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link HmdMatrix44} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code HmdMatrix44} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static HmdMatrix44 callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link HmdMatrix44} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code HmdMatrix44} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -179,7 +179,7 @@ public class HmdMatrix44 extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link HmdMatrix44} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code HmdMatrix44} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -252,7 +252,7 @@ public class HmdMatrix44 extends Struct implements NativeResource {
         private static final HmdMatrix44 ELEMENT_FACTORY = HmdMatrix44.create(-1L);
 
         /**
-         * Creates a new {@link HmdMatrix44.Buffer} instance backed by the specified container.
+         * Creates a new {@code HmdMatrix44.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

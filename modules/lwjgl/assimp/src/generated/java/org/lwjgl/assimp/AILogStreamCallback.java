@@ -51,7 +51,7 @@ public abstract class AILogStreamCallback extends Callback implements AILogStrea
         super(SIGNATURE);
     }
 
-    private AILogStreamCallback(long functionPointer) {
+    AILogStreamCallback(long functionPointer) {
         super(functionPointer);
     }
 

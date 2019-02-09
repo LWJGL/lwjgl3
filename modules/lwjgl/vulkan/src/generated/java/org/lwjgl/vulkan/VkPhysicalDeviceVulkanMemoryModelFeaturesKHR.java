@@ -76,7 +76,7 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -139,23 +139,23 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVulkanMemoryModelFeaturesKHR malloc() {
         return wrap(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVulkanMemoryModelFeaturesKHR calloc() {
         return wrap(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceVulkanMemoryModelFeaturesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceVulkanMemoryModelFeaturesKHR create(long address) {
         return wrap(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.class, address);
     }
@@ -212,18 +212,18 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPhysicalDeviceVulkanMemoryModelFeaturesKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPhysicalDeviceVulkanMemoryModelFeaturesKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -232,7 +232,7 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPhysicalDeviceVulkanMemoryModelFeaturesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -306,7 +306,7 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
         private static final VkPhysicalDeviceVulkanMemoryModelFeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

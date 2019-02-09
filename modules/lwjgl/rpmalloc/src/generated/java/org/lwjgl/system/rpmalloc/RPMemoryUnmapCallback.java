@@ -55,7 +55,7 @@ public abstract class RPMemoryUnmapCallback extends Callback implements RPMemory
         super(SIGNATURE);
     }
 
-    private RPMemoryUnmapCallback(long functionPointer) {
+    RPMemoryUnmapCallback(long functionPointer) {
         super(functionPointer);
     }
 

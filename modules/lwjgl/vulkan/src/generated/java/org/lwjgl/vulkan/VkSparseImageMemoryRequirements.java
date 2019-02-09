@@ -85,7 +85,7 @@ public class VkSparseImageMemoryRequirements extends Struct implements NativeRes
     }
 
     /**
-     * Creates a {@link VkSparseImageMemoryRequirements} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkSparseImageMemoryRequirements} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -114,23 +114,23 @@ public class VkSparseImageMemoryRequirements extends Struct implements NativeRes
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSparseImageMemoryRequirements} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSparseImageMemoryRequirements} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSparseImageMemoryRequirements malloc() {
         return wrap(VkSparseImageMemoryRequirements.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkSparseImageMemoryRequirements} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSparseImageMemoryRequirements} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSparseImageMemoryRequirements calloc() {
         return wrap(VkSparseImageMemoryRequirements.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkSparseImageMemoryRequirements} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkSparseImageMemoryRequirements} instance allocated with {@link BufferUtils}. */
     public static VkSparseImageMemoryRequirements create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkSparseImageMemoryRequirements.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkSparseImageMemoryRequirements} instance for the specified memory address. */
+    /** Returns a new {@code VkSparseImageMemoryRequirements} instance for the specified memory address. */
     public static VkSparseImageMemoryRequirements create(long address) {
         return wrap(VkSparseImageMemoryRequirements.class, address);
     }
@@ -187,18 +187,18 @@ public class VkSparseImageMemoryRequirements extends Struct implements NativeRes
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSparseImageMemoryRequirements} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkSparseImageMemoryRequirements} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkSparseImageMemoryRequirements mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkSparseImageMemoryRequirements} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkSparseImageMemoryRequirements} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkSparseImageMemoryRequirements callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkSparseImageMemoryRequirements} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkSparseImageMemoryRequirements} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -207,7 +207,7 @@ public class VkSparseImageMemoryRequirements extends Struct implements NativeRes
     }
 
     /**
-     * Returns a new {@link VkSparseImageMemoryRequirements} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkSparseImageMemoryRequirements} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -274,7 +274,7 @@ public class VkSparseImageMemoryRequirements extends Struct implements NativeRes
         private static final VkSparseImageMemoryRequirements ELEMENT_FACTORY = VkSparseImageMemoryRequirements.create(-1L);
 
         /**
-         * Creates a new {@link VkSparseImageMemoryRequirements.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkSparseImageMemoryRequirements.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

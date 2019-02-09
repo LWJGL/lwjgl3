@@ -51,7 +51,7 @@ public abstract class RMTInputHandler extends Callback implements RMTInputHandle
         super(SIGNATURE);
     }
 
-    private RMTInputHandler(long functionPointer) {
+    RMTInputHandler(long functionPointer) {
         super(functionPointer);
     }
 

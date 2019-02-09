@@ -53,7 +53,7 @@ public abstract class IndexerImportedASTFile extends Callback implements Indexer
         super(SIGNATURE);
     }
 
-    private IndexerImportedASTFile(long functionPointer) {
+    IndexerImportedASTFile(long functionPointer) {
         super(functionPointer);
     }
 

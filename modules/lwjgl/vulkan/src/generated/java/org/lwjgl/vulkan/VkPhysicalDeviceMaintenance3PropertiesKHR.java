@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceMaintenance3Properties {
 
     /**
-     * Creates a {@link VkPhysicalDeviceMaintenance3PropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceMaintenance3PropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -71,7 +71,7 @@ public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceM
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceMaintenance3PropertiesKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceMaintenance3PropertiesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceMaintenance3PropertiesKHR create(long address) {
         return wrap(VkPhysicalDeviceMaintenance3PropertiesKHR.class, address);
     }
@@ -106,7 +106,7 @@ public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceM
         private static final VkPhysicalDeviceMaintenance3PropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceMaintenance3PropertiesKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

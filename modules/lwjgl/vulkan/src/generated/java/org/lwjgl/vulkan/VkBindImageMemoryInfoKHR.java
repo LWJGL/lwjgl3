@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
 public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
 
     /**
-     * Creates a {@link VkBindImageMemoryInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkBindImageMemoryInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -89,23 +89,23 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkBindImageMemoryInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkBindImageMemoryInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkBindImageMemoryInfoKHR malloc() {
         return wrap(VkBindImageMemoryInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkBindImageMemoryInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkBindImageMemoryInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkBindImageMemoryInfoKHR calloc() {
         return wrap(VkBindImageMemoryInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkBindImageMemoryInfoKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkBindImageMemoryInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkBindImageMemoryInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkBindImageMemoryInfoKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkBindImageMemoryInfoKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkBindImageMemoryInfoKHR} instance for the specified memory address. */
     public static VkBindImageMemoryInfoKHR create(long address) {
         return wrap(VkBindImageMemoryInfoKHR.class, address);
     }
@@ -162,18 +162,18 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkBindImageMemoryInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkBindImageMemoryInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkBindImageMemoryInfoKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkBindImageMemoryInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkBindImageMemoryInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkBindImageMemoryInfoKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkBindImageMemoryInfoKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkBindImageMemoryInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -182,7 +182,7 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
     }
 
     /**
-     * Returns a new {@link VkBindImageMemoryInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkBindImageMemoryInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -236,7 +236,7 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
         private static final VkBindImageMemoryInfoKHR ELEMENT_FACTORY = VkBindImageMemoryInfoKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkBindImageMemoryInfoKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkBindImageMemoryInfoKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

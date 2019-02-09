@@ -54,7 +54,7 @@ public abstract class YGLogger extends Callback implements YGLoggerI {
         super(SIGNATURE);
     }
 
-    private YGLogger(long functionPointer) {
+    YGLogger(long functionPointer) {
         super(functionPointer);
     }
 

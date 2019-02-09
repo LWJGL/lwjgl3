@@ -86,7 +86,7 @@ public class GLXStereoNotifyEventEXT extends Struct {
     }
 
     /**
-     * Creates a {@link GLXStereoNotifyEventEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code GLXStereoNotifyEventEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -122,7 +122,7 @@ public class GLXStereoNotifyEventEXT extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link GLXStereoNotifyEventEXT} instance for the specified memory address. */
+    /** Returns a new {@code GLXStereoNotifyEventEXT} instance for the specified memory address. */
     public static GLXStereoNotifyEventEXT create(long address) {
         return wrap(GLXStereoNotifyEventEXT.class, address);
     }
@@ -176,7 +176,7 @@ public class GLXStereoNotifyEventEXT extends Struct {
         private static final GLXStereoNotifyEventEXT ELEMENT_FACTORY = GLXStereoNotifyEventEXT.create(-1L);
 
         /**
-         * Creates a new {@link GLXStereoNotifyEventEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code GLXStereoNotifyEventEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

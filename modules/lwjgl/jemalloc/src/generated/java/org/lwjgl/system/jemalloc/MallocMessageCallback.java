@@ -53,7 +53,7 @@ public abstract class MallocMessageCallback extends Callback implements MallocMe
         super(SIGNATURE);
     }
 
-    private MallocMessageCallback(long functionPointer) {
+    MallocMessageCallback(long functionPointer) {
         super(functionPointer);
     }
 

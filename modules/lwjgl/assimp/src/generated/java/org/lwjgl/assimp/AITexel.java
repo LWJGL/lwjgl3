@@ -69,7 +69,7 @@ public class AITexel extends Struct {
     }
 
     /**
-     * Creates a {@link AITexel} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code AITexel} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -96,7 +96,7 @@ public class AITexel extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link AITexel} instance for the specified memory address. */
+    /** Returns a new {@code AITexel} instance for the specified memory address. */
     public static AITexel create(long address) {
         return wrap(AITexel.class, address);
     }
@@ -142,7 +142,7 @@ public class AITexel extends Struct {
         private static final AITexel ELEMENT_FACTORY = AITexel.create(-1L);
 
         /**
-         * Creates a new {@link AITexel.Buffer} instance backed by the specified container.
+         * Creates a new {@code AITexel.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -51,7 +51,7 @@ public abstract class RMTMalloc extends Callback implements RMTMallocI {
         super(SIGNATURE);
     }
 
-    private RMTMalloc(long functionPointer) {
+    RMTMalloc(long functionPointer) {
         super(functionPointer);
     }
 

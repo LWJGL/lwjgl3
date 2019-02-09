@@ -55,7 +55,7 @@ public abstract class CLSVMFreeCallback extends Callback implements CLSVMFreeCal
         super(SIGNATURE);
     }
 
-    private CLSVMFreeCallback(long functionPointer) {
+    CLSVMFreeCallback(long functionPointer) {
         super(functionPointer);
     }
 

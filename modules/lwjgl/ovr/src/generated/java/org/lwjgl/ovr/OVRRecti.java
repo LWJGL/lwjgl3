@@ -61,7 +61,7 @@ public class OVRRecti extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link OVRRecti} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code OVRRecti} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -114,23 +114,23 @@ public class OVRRecti extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link OVRRecti} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code OVRRecti} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRRecti malloc() {
         return wrap(OVRRecti.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link OVRRecti} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code OVRRecti} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRRecti calloc() {
         return wrap(OVRRecti.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link OVRRecti} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code OVRRecti} instance allocated with {@link BufferUtils}. */
     public static OVRRecti create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(OVRRecti.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link OVRRecti} instance for the specified memory address. */
+    /** Returns a new {@code OVRRecti} instance for the specified memory address. */
     public static OVRRecti create(long address) {
         return wrap(OVRRecti.class, address);
     }
@@ -187,18 +187,18 @@ public class OVRRecti extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link OVRRecti} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code OVRRecti} instance allocated on the thread-local {@link MemoryStack}. */
     public static OVRRecti mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link OVRRecti} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code OVRRecti} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static OVRRecti callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link OVRRecti} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code OVRRecti} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -207,7 +207,7 @@ public class OVRRecti extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link OVRRecti} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code OVRRecti} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -273,7 +273,7 @@ public class OVRRecti extends Struct implements NativeResource {
         private static final OVRRecti ELEMENT_FACTORY = OVRRecti.create(-1L);
 
         /**
-         * Creates a new {@link OVRRecti.Buffer} instance backed by the specified container.
+         * Creates a new {@code OVRRecti.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

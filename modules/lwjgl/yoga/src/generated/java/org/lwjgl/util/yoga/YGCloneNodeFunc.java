@@ -52,7 +52,7 @@ public abstract class YGCloneNodeFunc extends Callback implements YGCloneNodeFun
         super(SIGNATURE);
     }
 
-    private YGCloneNodeFunc(long functionPointer) {
+    YGCloneNodeFunc(long functionPointer) {
         super(functionPointer);
     }
 

@@ -50,7 +50,7 @@ public abstract class YGDirtiedFunc extends Callback implements YGDirtiedFuncI {
         super(SIGNATURE);
     }
 
-    private YGDirtiedFunc(long functionPointer) {
+    YGDirtiedFunc(long functionPointer) {
         super(functionPointer);
     }
 

@@ -83,7 +83,7 @@ public class VkCheckpointDataNV extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VkCheckpointDataNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkCheckpointDataNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -138,23 +138,23 @@ public class VkCheckpointDataNV extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkCheckpointDataNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkCheckpointDataNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkCheckpointDataNV malloc() {
         return wrap(VkCheckpointDataNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkCheckpointDataNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkCheckpointDataNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkCheckpointDataNV calloc() {
         return wrap(VkCheckpointDataNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkCheckpointDataNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkCheckpointDataNV} instance allocated with {@link BufferUtils}. */
     public static VkCheckpointDataNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkCheckpointDataNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkCheckpointDataNV} instance for the specified memory address. */
+    /** Returns a new {@code VkCheckpointDataNV} instance for the specified memory address. */
     public static VkCheckpointDataNV create(long address) {
         return wrap(VkCheckpointDataNV.class, address);
     }
@@ -211,18 +211,18 @@ public class VkCheckpointDataNV extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkCheckpointDataNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkCheckpointDataNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkCheckpointDataNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkCheckpointDataNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkCheckpointDataNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkCheckpointDataNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkCheckpointDataNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkCheckpointDataNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -231,7 +231,7 @@ public class VkCheckpointDataNV extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VkCheckpointDataNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkCheckpointDataNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -301,7 +301,7 @@ public class VkCheckpointDataNV extends Struct implements NativeResource {
         private static final VkCheckpointDataNV ELEMENT_FACTORY = VkCheckpointDataNV.create(-1L);
 
         /**
-         * Creates a new {@link VkCheckpointDataNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkCheckpointDataNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

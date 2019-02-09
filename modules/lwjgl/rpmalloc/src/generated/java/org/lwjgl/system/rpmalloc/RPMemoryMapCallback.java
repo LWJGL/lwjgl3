@@ -53,7 +53,7 @@ public abstract class RPMemoryMapCallback extends Callback implements RPMemoryMa
         super(SIGNATURE);
     }
 
-    private RPMemoryMapCallback(long functionPointer) {
+    RPMemoryMapCallback(long functionPointer) {
         super(functionPointer);
     }
 

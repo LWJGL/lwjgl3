@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
 public class VkDeviceGroupDeviceCreateInfoKHR extends VkDeviceGroupDeviceCreateInfo {
 
     /**
-     * Creates a {@link VkDeviceGroupDeviceCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkDeviceGroupDeviceCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -79,23 +79,23 @@ public class VkDeviceGroupDeviceCreateInfoKHR extends VkDeviceGroupDeviceCreateI
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDeviceGroupDeviceCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDeviceGroupDeviceCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDeviceGroupDeviceCreateInfoKHR malloc() {
         return wrap(VkDeviceGroupDeviceCreateInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkDeviceGroupDeviceCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDeviceGroupDeviceCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDeviceGroupDeviceCreateInfoKHR calloc() {
         return wrap(VkDeviceGroupDeviceCreateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkDeviceGroupDeviceCreateInfoKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkDeviceGroupDeviceCreateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkDeviceGroupDeviceCreateInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkDeviceGroupDeviceCreateInfoKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkDeviceGroupDeviceCreateInfoKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkDeviceGroupDeviceCreateInfoKHR} instance for the specified memory address. */
     public static VkDeviceGroupDeviceCreateInfoKHR create(long address) {
         return wrap(VkDeviceGroupDeviceCreateInfoKHR.class, address);
     }
@@ -152,18 +152,18 @@ public class VkDeviceGroupDeviceCreateInfoKHR extends VkDeviceGroupDeviceCreateI
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDeviceGroupDeviceCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkDeviceGroupDeviceCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkDeviceGroupDeviceCreateInfoKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkDeviceGroupDeviceCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkDeviceGroupDeviceCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkDeviceGroupDeviceCreateInfoKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkDeviceGroupDeviceCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkDeviceGroupDeviceCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -172,7 +172,7 @@ public class VkDeviceGroupDeviceCreateInfoKHR extends VkDeviceGroupDeviceCreateI
     }
 
     /**
-     * Returns a new {@link VkDeviceGroupDeviceCreateInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkDeviceGroupDeviceCreateInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -226,7 +226,7 @@ public class VkDeviceGroupDeviceCreateInfoKHR extends VkDeviceGroupDeviceCreateI
         private static final VkDeviceGroupDeviceCreateInfoKHR ELEMENT_FACTORY = VkDeviceGroupDeviceCreateInfoKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkDeviceGroupDeviceCreateInfoKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkDeviceGroupDeviceCreateInfoKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -73,7 +73,7 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -125,7 +125,7 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX} instance for the specified memory address. */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX create(long address) {
         return wrap(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.class, address);
     }
@@ -174,7 +174,7 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
         private static final VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX ELEMENT_FACTORY = VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

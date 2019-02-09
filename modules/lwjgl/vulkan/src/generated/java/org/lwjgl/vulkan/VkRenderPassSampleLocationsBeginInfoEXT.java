@@ -93,7 +93,7 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements N
     }
 
     /**
-     * Creates a {@link VkRenderPassSampleLocationsBeginInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkRenderPassSampleLocationsBeginInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -164,23 +164,23 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements N
 
     // -----------------------------------
 
-    /** Returns a new {@link VkRenderPassSampleLocationsBeginInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkRenderPassSampleLocationsBeginInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkRenderPassSampleLocationsBeginInfoEXT malloc() {
         return wrap(VkRenderPassSampleLocationsBeginInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkRenderPassSampleLocationsBeginInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkRenderPassSampleLocationsBeginInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkRenderPassSampleLocationsBeginInfoEXT calloc() {
         return wrap(VkRenderPassSampleLocationsBeginInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkRenderPassSampleLocationsBeginInfoEXT} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkRenderPassSampleLocationsBeginInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkRenderPassSampleLocationsBeginInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkRenderPassSampleLocationsBeginInfoEXT.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkRenderPassSampleLocationsBeginInfoEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkRenderPassSampleLocationsBeginInfoEXT} instance for the specified memory address. */
     public static VkRenderPassSampleLocationsBeginInfoEXT create(long address) {
         return wrap(VkRenderPassSampleLocationsBeginInfoEXT.class, address);
     }
@@ -237,18 +237,18 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements N
 
     // -----------------------------------
 
-    /** Returns a new {@link VkRenderPassSampleLocationsBeginInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkRenderPassSampleLocationsBeginInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkRenderPassSampleLocationsBeginInfoEXT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkRenderPassSampleLocationsBeginInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkRenderPassSampleLocationsBeginInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkRenderPassSampleLocationsBeginInfoEXT callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkRenderPassSampleLocationsBeginInfoEXT} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkRenderPassSampleLocationsBeginInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -257,7 +257,7 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements N
     }
 
     /**
-     * Returns a new {@link VkRenderPassSampleLocationsBeginInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkRenderPassSampleLocationsBeginInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -359,7 +359,7 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements N
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -371,7 +371,7 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements N
         private static final VkRenderPassSampleLocationsBeginInfoEXT ELEMENT_FACTORY = VkRenderPassSampleLocationsBeginInfoEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkRenderPassSampleLocationsBeginInfoEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkRenderPassSampleLocationsBeginInfoEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

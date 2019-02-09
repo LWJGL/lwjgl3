@@ -56,7 +56,7 @@ public class InputOriginInfo extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link InputOriginInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code InputOriginInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -83,23 +83,23 @@ public class InputOriginInfo extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link InputOriginInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code InputOriginInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static InputOriginInfo malloc() {
         return wrap(InputOriginInfo.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link InputOriginInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code InputOriginInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static InputOriginInfo calloc() {
         return wrap(InputOriginInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link InputOriginInfo} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code InputOriginInfo} instance allocated with {@link BufferUtils}. */
     public static InputOriginInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(InputOriginInfo.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link InputOriginInfo} instance for the specified memory address. */
+    /** Returns a new {@code InputOriginInfo} instance for the specified memory address. */
     public static InputOriginInfo create(long address) {
         return wrap(InputOriginInfo.class, address);
     }
@@ -156,18 +156,18 @@ public class InputOriginInfo extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link InputOriginInfo} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code InputOriginInfo} instance allocated on the thread-local {@link MemoryStack}. */
     public static InputOriginInfo mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link InputOriginInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code InputOriginInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static InputOriginInfo callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link InputOriginInfo} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code InputOriginInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -176,7 +176,7 @@ public class InputOriginInfo extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link InputOriginInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code InputOriginInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -241,7 +241,7 @@ public class InputOriginInfo extends Struct implements NativeResource {
         private static final InputOriginInfo ELEMENT_FACTORY = InputOriginInfo.create(-1L);
 
         /**
-         * Creates a new {@link InputOriginInfo.Buffer} instance backed by the specified container.
+         * Creates a new {@code InputOriginInfo.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -133,11 +133,11 @@ public abstract class Struct extends Pointer.Default {
     }
 
     private static long getBytes(int elements, int elementSize) {
-        return ((long)elements & 0xFFFF_FFFFL) * elementSize;
+        return (elements & 0xFFFF_FFFFL) * elementSize;
     }
 
     protected static long __checkMalloc(int elements, int elementSize) {
-        long bytes = ((long)elements & 0xFFFF_FFFFL) * elementSize;
+        long bytes = (elements & 0xFFFF_FFFFL) * elementSize;
         if (DEBUG) {
             if (elements < 0) {
                 throw new IllegalArgumentException("Invalid number of elements");
@@ -247,9 +247,7 @@ public abstract class Struct extends Pointer.Default {
 
         int size      = 0;
         int alignment = alignas;
-        for (int i = 0; i < members.length; i++) {
-            Member m = members[i];
-
+        for (Member m : members) {
             int memberAlignment = m.getAlignment(packAlignment);
 
             m.offset = align(size, memberAlignment);

@@ -83,7 +83,7 @@ public class VkImageViewUsageCreateInfo extends Struct implements NativeResource
     }
 
     /**
-     * Creates a {@link VkImageViewUsageCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkImageViewUsageCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -139,23 +139,23 @@ public class VkImageViewUsageCreateInfo extends Struct implements NativeResource
 
     // -----------------------------------
 
-    /** Returns a new {@link VkImageViewUsageCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkImageViewUsageCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageViewUsageCreateInfo malloc() {
         return wrap(VkImageViewUsageCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkImageViewUsageCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkImageViewUsageCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageViewUsageCreateInfo calloc() {
         return wrap(VkImageViewUsageCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkImageViewUsageCreateInfo} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkImageViewUsageCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkImageViewUsageCreateInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkImageViewUsageCreateInfo.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkImageViewUsageCreateInfo} instance for the specified memory address. */
+    /** Returns a new {@code VkImageViewUsageCreateInfo} instance for the specified memory address. */
     public static VkImageViewUsageCreateInfo create(long address) {
         return wrap(VkImageViewUsageCreateInfo.class, address);
     }
@@ -212,18 +212,18 @@ public class VkImageViewUsageCreateInfo extends Struct implements NativeResource
 
     // -----------------------------------
 
-    /** Returns a new {@link VkImageViewUsageCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkImageViewUsageCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkImageViewUsageCreateInfo mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkImageViewUsageCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkImageViewUsageCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkImageViewUsageCreateInfo callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkImageViewUsageCreateInfo} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkImageViewUsageCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -232,7 +232,7 @@ public class VkImageViewUsageCreateInfo extends Struct implements NativeResource
     }
 
     /**
-     * Returns a new {@link VkImageViewUsageCreateInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkImageViewUsageCreateInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -302,7 +302,7 @@ public class VkImageViewUsageCreateInfo extends Struct implements NativeResource
         private static final VkImageViewUsageCreateInfo ELEMENT_FACTORY = VkImageViewUsageCreateInfo.create(-1L);
 
         /**
-         * Creates a new {@link VkImageViewUsageCreateInfo.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkImageViewUsageCreateInfo.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

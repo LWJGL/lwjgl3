@@ -58,7 +58,7 @@ public class VREventInputActionManifestLoad extends Struct {
     }
 
     /**
-     * Creates a {@link VREventInputActionManifestLoad} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VREventInputActionManifestLoad} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -85,7 +85,7 @@ public class VREventInputActionManifestLoad extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VREventInputActionManifestLoad} instance for the specified memory address. */
+    /** Returns a new {@code VREventInputActionManifestLoad} instance for the specified memory address. */
     public static VREventInputActionManifestLoad create(long address) {
         return wrap(VREventInputActionManifestLoad.class, address);
     }
@@ -131,7 +131,7 @@ public class VREventInputActionManifestLoad extends Struct {
         private static final VREventInputActionManifestLoad ELEMENT_FACTORY = VREventInputActionManifestLoad.create(-1L);
 
         /**
-         * Creates a new {@link VREventInputActionManifestLoad.Buffer} instance backed by the specified container.
+         * Creates a new {@code VREventInputActionManifestLoad.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

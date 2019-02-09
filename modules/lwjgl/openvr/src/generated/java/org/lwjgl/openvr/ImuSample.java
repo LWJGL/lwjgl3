@@ -58,7 +58,7 @@ public class ImuSample extends Struct {
     }
 
     /**
-     * Creates a {@link ImuSample} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code ImuSample} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -88,7 +88,7 @@ public class ImuSample extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link ImuSample} instance for the specified memory address. */
+    /** Returns a new {@code ImuSample} instance for the specified memory address. */
     public static ImuSample create(long address) {
         return wrap(ImuSample.class, address);
     }
@@ -134,7 +134,7 @@ public class ImuSample extends Struct {
         private static final ImuSample ELEMENT_FACTORY = ImuSample.create(-1L);
 
         /**
-         * Creates a new {@link ImuSample.Buffer} instance backed by the specified container.
+         * Creates a new {@code ImuSample.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -57,7 +57,7 @@ public abstract class ExtentPurge extends Callback implements ExtentPurgeI {
         super(SIGNATURE);
     }
 
-    private ExtentPurge(long functionPointer) {
+    ExtentPurge(long functionPointer) {
         super(functionPointer);
     }
 

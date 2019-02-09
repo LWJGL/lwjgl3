@@ -60,7 +60,7 @@ public class NkColor extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link NkColor} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NkColor} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -123,23 +123,23 @@ public class NkColor extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkColor} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code NkColor} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkColor malloc() {
         return wrap(NkColor.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link NkColor} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code NkColor} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkColor calloc() {
         return wrap(NkColor.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link NkColor} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code NkColor} instance allocated with {@link BufferUtils}. */
     public static NkColor create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(NkColor.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link NkColor} instance for the specified memory address. */
+    /** Returns a new {@code NkColor} instance for the specified memory address. */
     public static NkColor create(long address) {
         return wrap(NkColor.class, address);
     }
@@ -196,18 +196,18 @@ public class NkColor extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkColor} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code NkColor} instance allocated on the thread-local {@link MemoryStack}. */
     public static NkColor mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link NkColor} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code NkColor} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static NkColor callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link NkColor} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code NkColor} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -216,7 +216,7 @@ public class NkColor extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link NkColor} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code NkColor} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -290,7 +290,7 @@ public class NkColor extends Struct implements NativeResource {
         private static final NkColor ELEMENT_FACTORY = NkColor.create(-1L);
 
         /**
-         * Creates a new {@link NkColor.Buffer} instance backed by the specified container.
+         * Creates a new {@code NkColor.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

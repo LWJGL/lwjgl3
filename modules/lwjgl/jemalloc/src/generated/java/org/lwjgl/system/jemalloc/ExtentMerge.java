@@ -58,7 +58,7 @@ public abstract class ExtentMerge extends Callback implements ExtentMergeI {
         super(SIGNATURE);
     }
 
-    private ExtentMerge(long functionPointer) {
+    ExtentMerge(long functionPointer) {
         super(functionPointer);
     }
 

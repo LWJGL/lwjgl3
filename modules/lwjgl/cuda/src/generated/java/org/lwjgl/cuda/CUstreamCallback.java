@@ -54,7 +54,7 @@ public abstract class CUstreamCallback extends Callback implements CUstreamCallb
         super(SIGNATURE);
     }
 
-    private CUstreamCallback(long functionPointer) {
+    CUstreamCallback(long functionPointer) {
         super(functionPointer);
     }
 

@@ -113,9 +113,9 @@ class CArrayType<T : DataType> internal constructor(
     val size: String get() = dimensions.joinToString(" * ")
 }
 operator fun <T : DataType> T.get(size: Int) = this[size.toString()]
-operator fun <T : DataType> T.get(size: String) = CArrayType<T>(this.name, this, arrayOf(size))
+operator fun <T : DataType> T.get(size: String) = CArrayType(this.name, this, arrayOf(size))
 operator fun <T : DataType> CArrayType<T>.get(size: Int) = this[size.toString()]
-operator fun <T : DataType> CArrayType<T>.get(size: String) = CArrayType<T>(this.name, this.elementType, this.dimensions + size)
+operator fun <T : DataType> CArrayType<T>.get(size: String) = CArrayType(this.name, this.elementType, this.dimensions + size)
 
 // Structs
 class StructType internal constructor(

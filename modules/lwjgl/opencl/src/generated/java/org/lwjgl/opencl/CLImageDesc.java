@@ -122,7 +122,7 @@ public class CLImageDesc extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link CLImageDesc} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code CLImageDesc} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -227,23 +227,23 @@ public class CLImageDesc extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link CLImageDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CLImageDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CLImageDesc malloc() {
         return wrap(CLImageDesc.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link CLImageDesc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CLImageDesc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CLImageDesc calloc() {
         return wrap(CLImageDesc.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link CLImageDesc} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code CLImageDesc} instance allocated with {@link BufferUtils}. */
     public static CLImageDesc create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(CLImageDesc.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link CLImageDesc} instance for the specified memory address. */
+    /** Returns a new {@code CLImageDesc} instance for the specified memory address. */
     public static CLImageDesc create(long address) {
         return wrap(CLImageDesc.class, address);
     }
@@ -300,18 +300,18 @@ public class CLImageDesc extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link CLImageDesc} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code CLImageDesc} instance allocated on the thread-local {@link MemoryStack}. */
     public static CLImageDesc mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link CLImageDesc} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code CLImageDesc} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static CLImageDesc callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link CLImageDesc} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code CLImageDesc} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -320,7 +320,7 @@ public class CLImageDesc extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link CLImageDesc} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code CLImageDesc} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -418,7 +418,7 @@ public class CLImageDesc extends Struct implements NativeResource {
         private static final CLImageDesc ELEMENT_FACTORY = CLImageDesc.create(-1L);
 
         /**
-         * Creates a new {@link CLImageDesc.Buffer} instance backed by the specified container.
+         * Creates a new {@code CLImageDesc.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

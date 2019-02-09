@@ -51,7 +51,7 @@ public abstract class ZSTDFreeFunction extends Callback implements ZSTDFreeFunct
         super(SIGNATURE);
     }
 
-    private ZSTDFreeFunction(long functionPointer) {
+    ZSTDFreeFunction(long functionPointer) {
         super(functionPointer);
     }
 

@@ -95,7 +95,7 @@ public class VkCmdReserveSpaceForCommandsInfoNVX extends Struct implements Nativ
     }
 
     /**
-     * Creates a {@link VkCmdReserveSpaceForCommandsInfoNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkCmdReserveSpaceForCommandsInfoNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -165,23 +165,23 @@ public class VkCmdReserveSpaceForCommandsInfoNVX extends Struct implements Nativ
 
     // -----------------------------------
 
-    /** Returns a new {@link VkCmdReserveSpaceForCommandsInfoNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkCmdReserveSpaceForCommandsInfoNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkCmdReserveSpaceForCommandsInfoNVX malloc() {
         return wrap(VkCmdReserveSpaceForCommandsInfoNVX.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkCmdReserveSpaceForCommandsInfoNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkCmdReserveSpaceForCommandsInfoNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkCmdReserveSpaceForCommandsInfoNVX calloc() {
         return wrap(VkCmdReserveSpaceForCommandsInfoNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkCmdReserveSpaceForCommandsInfoNVX} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkCmdReserveSpaceForCommandsInfoNVX} instance allocated with {@link BufferUtils}. */
     public static VkCmdReserveSpaceForCommandsInfoNVX create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkCmdReserveSpaceForCommandsInfoNVX.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkCmdReserveSpaceForCommandsInfoNVX} instance for the specified memory address. */
+    /** Returns a new {@code VkCmdReserveSpaceForCommandsInfoNVX} instance for the specified memory address. */
     public static VkCmdReserveSpaceForCommandsInfoNVX create(long address) {
         return wrap(VkCmdReserveSpaceForCommandsInfoNVX.class, address);
     }
@@ -238,18 +238,18 @@ public class VkCmdReserveSpaceForCommandsInfoNVX extends Struct implements Nativ
 
     // -----------------------------------
 
-    /** Returns a new {@link VkCmdReserveSpaceForCommandsInfoNVX} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkCmdReserveSpaceForCommandsInfoNVX} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkCmdReserveSpaceForCommandsInfoNVX mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkCmdReserveSpaceForCommandsInfoNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkCmdReserveSpaceForCommandsInfoNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkCmdReserveSpaceForCommandsInfoNVX callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkCmdReserveSpaceForCommandsInfoNVX} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkCmdReserveSpaceForCommandsInfoNVX} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -258,7 +258,7 @@ public class VkCmdReserveSpaceForCommandsInfoNVX extends Struct implements Nativ
     }
 
     /**
-     * Returns a new {@link VkCmdReserveSpaceForCommandsInfoNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkCmdReserveSpaceForCommandsInfoNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -336,7 +336,7 @@ public class VkCmdReserveSpaceForCommandsInfoNVX extends Struct implements Nativ
         private static final VkCmdReserveSpaceForCommandsInfoNVX ELEMENT_FACTORY = VkCmdReserveSpaceForCommandsInfoNVX.create(-1L);
 
         /**
-         * Creates a new {@link VkCmdReserveSpaceForCommandsInfoNVX.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkCmdReserveSpaceForCommandsInfoNVX.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

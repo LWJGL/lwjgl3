@@ -80,7 +80,7 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -143,23 +143,23 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV malloc() {
         return wrap(VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV calloc() {
         return wrap(VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV create(long address) {
         return wrap(VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.class, address);
     }
@@ -216,18 +216,18 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -236,7 +236,7 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -310,7 +310,7 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
         private static final VkPhysicalDeviceComputeShaderDerivativesFeaturesNV ELEMENT_FACTORY = VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

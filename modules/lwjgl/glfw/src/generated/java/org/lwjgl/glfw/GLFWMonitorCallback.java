@@ -57,7 +57,7 @@ public abstract class GLFWMonitorCallback extends Callback implements GLFWMonito
         super(SIGNATURE);
     }
 
-    private GLFWMonitorCallback(long functionPointer) {
+    GLFWMonitorCallback(long functionPointer) {
         super(functionPointer);
     }
 

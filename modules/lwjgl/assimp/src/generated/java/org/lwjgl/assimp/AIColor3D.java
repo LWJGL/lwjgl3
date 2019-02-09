@@ -64,7 +64,7 @@ public class AIColor3D extends Struct {
     }
 
     /**
-     * Creates a {@link AIColor3D} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code AIColor3D} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -85,7 +85,7 @@ public class AIColor3D extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link AIColor3D} instance for the specified memory address. */
+    /** Returns a new {@code AIColor3D} instance for the specified memory address. */
     public static AIColor3D create(long address) {
         return wrap(AIColor3D.class, address);
     }
@@ -129,7 +129,7 @@ public class AIColor3D extends Struct {
         private static final AIColor3D ELEMENT_FACTORY = AIColor3D.create(-1L);
 
         /**
-         * Creates a new {@link AIColor3D.Buffer} instance backed by the specified container.
+         * Creates a new {@code AIColor3D.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

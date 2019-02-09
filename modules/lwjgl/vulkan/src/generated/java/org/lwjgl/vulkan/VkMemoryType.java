@@ -58,7 +58,7 @@ public class VkMemoryType extends Struct {
     }
 
     /**
-     * Creates a {@link VkMemoryType} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkMemoryType} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -79,7 +79,7 @@ public class VkMemoryType extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkMemoryType} instance for the specified memory address. */
+    /** Returns a new {@code VkMemoryType} instance for the specified memory address. */
     public static VkMemoryType create(long address) {
         return wrap(VkMemoryType.class, address);
     }
@@ -121,7 +121,7 @@ public class VkMemoryType extends Struct {
         private static final VkMemoryType ELEMENT_FACTORY = VkMemoryType.create(-1L);
 
         /**
-         * Creates a new {@link VkMemoryType.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkMemoryType.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

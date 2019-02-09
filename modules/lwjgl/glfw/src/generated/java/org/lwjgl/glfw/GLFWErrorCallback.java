@@ -60,7 +60,7 @@ public abstract class GLFWErrorCallback extends Callback implements GLFWErrorCal
         super(SIGNATURE);
     }
 
-    private GLFWErrorCallback(long functionPointer) {
+    GLFWErrorCallback(long functionPointer) {
         super(functionPointer);
     }
 

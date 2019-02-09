@@ -56,7 +56,7 @@ public abstract class GLFWWindowRefreshCallback extends Callback implements GLFW
         super(SIGNATURE);
     }
 
-    private GLFWWindowRefreshCallback(long functionPointer) {
+    GLFWWindowRefreshCallback(long functionPointer) {
         super(functionPointer);
     }
 

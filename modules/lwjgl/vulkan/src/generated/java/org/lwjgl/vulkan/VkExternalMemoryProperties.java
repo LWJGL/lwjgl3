@@ -71,7 +71,7 @@ public class VkExternalMemoryProperties extends Struct {
     }
 
     /**
-     * Creates a {@link VkExternalMemoryProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkExternalMemoryProperties} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -95,7 +95,7 @@ public class VkExternalMemoryProperties extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkExternalMemoryProperties} instance for the specified memory address. */
+    /** Returns a new {@code VkExternalMemoryProperties} instance for the specified memory address. */
     public static VkExternalMemoryProperties create(long address) {
         return wrap(VkExternalMemoryProperties.class, address);
     }
@@ -139,7 +139,7 @@ public class VkExternalMemoryProperties extends Struct {
         private static final VkExternalMemoryProperties ELEMENT_FACTORY = VkExternalMemoryProperties.create(-1L);
 
         /**
-         * Creates a new {@link VkExternalMemoryProperties.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkExternalMemoryProperties.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

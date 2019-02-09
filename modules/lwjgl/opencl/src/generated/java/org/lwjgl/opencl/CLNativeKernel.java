@@ -52,7 +52,7 @@ public abstract class CLNativeKernel extends Callback implements CLNativeKernelI
         super(SIGNATURE);
     }
 
-    private CLNativeKernel(long functionPointer) {
+    CLNativeKernel(long functionPointer) {
         super(functionPointer);
     }
 

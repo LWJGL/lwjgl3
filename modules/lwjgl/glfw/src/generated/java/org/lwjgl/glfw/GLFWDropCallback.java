@@ -58,7 +58,7 @@ public abstract class GLFWDropCallback extends Callback implements GLFWDropCallb
         super(SIGNATURE);
     }
 
-    private GLFWDropCallback(long functionPointer) {
+    GLFWDropCallback(long functionPointer) {
         super(functionPointer);
     }
 

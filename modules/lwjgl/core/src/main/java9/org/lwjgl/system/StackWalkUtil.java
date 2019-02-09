@@ -39,7 +39,7 @@ final class StackWalkUtil {
     }
 
     private static boolean isSameMethod(StackWalker.StackFrame a, StackWalker.StackFrame b, String methodName) {
-        return a.getMethodName() == methodName &&
+        return a.getMethodName().equals(methodName) &&
                a.getClassName().equals(b.getClassName()) &&
                a.getFileName().equals(b.getFileName());
     }

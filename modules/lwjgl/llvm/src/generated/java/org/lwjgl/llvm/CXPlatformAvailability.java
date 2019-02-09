@@ -83,7 +83,7 @@ public class CXPlatformAvailability extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link CXPlatformAvailability} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code CXPlatformAvailability} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -110,23 +110,23 @@ public class CXPlatformAvailability extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link CXPlatformAvailability} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CXPlatformAvailability} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CXPlatformAvailability malloc() {
         return wrap(CXPlatformAvailability.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link CXPlatformAvailability} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CXPlatformAvailability} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CXPlatformAvailability calloc() {
         return wrap(CXPlatformAvailability.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link CXPlatformAvailability} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code CXPlatformAvailability} instance allocated with {@link BufferUtils}. */
     public static CXPlatformAvailability create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(CXPlatformAvailability.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link CXPlatformAvailability} instance for the specified memory address. */
+    /** Returns a new {@code CXPlatformAvailability} instance for the specified memory address. */
     public static CXPlatformAvailability create(long address) {
         return wrap(CXPlatformAvailability.class, address);
     }
@@ -183,18 +183,18 @@ public class CXPlatformAvailability extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link CXPlatformAvailability} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code CXPlatformAvailability} instance allocated on the thread-local {@link MemoryStack}. */
     public static CXPlatformAvailability mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link CXPlatformAvailability} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code CXPlatformAvailability} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static CXPlatformAvailability callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link CXPlatformAvailability} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code CXPlatformAvailability} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -203,7 +203,7 @@ public class CXPlatformAvailability extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link CXPlatformAvailability} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code CXPlatformAvailability} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -272,7 +272,7 @@ public class CXPlatformAvailability extends Struct implements NativeResource {
         private static final CXPlatformAvailability ELEMENT_FACTORY = CXPlatformAvailability.create(-1L);
 
         /**
-         * Creates a new {@link CXPlatformAvailability.Buffer} instance backed by the specified container.
+         * Creates a new {@code CXPlatformAvailability.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

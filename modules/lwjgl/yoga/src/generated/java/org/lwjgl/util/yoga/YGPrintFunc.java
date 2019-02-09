@@ -50,7 +50,7 @@ public abstract class YGPrintFunc extends Callback implements YGPrintFuncI {
         super(SIGNATURE);
     }
 
-    private YGPrintFunc(long functionPointer) {
+    YGPrintFunc(long functionPointer) {
         super(functionPointer);
     }
 

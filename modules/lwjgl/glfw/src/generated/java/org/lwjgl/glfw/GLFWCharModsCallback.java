@@ -60,7 +60,7 @@ public abstract class GLFWCharModsCallback extends Callback implements GLFWCharM
         super(SIGNATURE);
     }
 
-    private GLFWCharModsCallback(long functionPointer) {
+    GLFWCharModsCallback(long functionPointer) {
         super(functionPointer);
     }
 

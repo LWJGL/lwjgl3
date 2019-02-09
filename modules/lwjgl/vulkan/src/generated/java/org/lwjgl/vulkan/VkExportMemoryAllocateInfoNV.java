@@ -72,7 +72,7 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
     }
 
     /**
-     * Creates a {@link VkExportMemoryAllocateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkExportMemoryAllocateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -128,23 +128,23 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
 
     // -----------------------------------
 
-    /** Returns a new {@link VkExportMemoryAllocateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkExportMemoryAllocateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkExportMemoryAllocateInfoNV malloc() {
         return wrap(VkExportMemoryAllocateInfoNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkExportMemoryAllocateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkExportMemoryAllocateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkExportMemoryAllocateInfoNV calloc() {
         return wrap(VkExportMemoryAllocateInfoNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkExportMemoryAllocateInfoNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkExportMemoryAllocateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkExportMemoryAllocateInfoNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkExportMemoryAllocateInfoNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkExportMemoryAllocateInfoNV} instance for the specified memory address. */
+    /** Returns a new {@code VkExportMemoryAllocateInfoNV} instance for the specified memory address. */
     public static VkExportMemoryAllocateInfoNV create(long address) {
         return wrap(VkExportMemoryAllocateInfoNV.class, address);
     }
@@ -201,18 +201,18 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
 
     // -----------------------------------
 
-    /** Returns a new {@link VkExportMemoryAllocateInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkExportMemoryAllocateInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkExportMemoryAllocateInfoNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkExportMemoryAllocateInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkExportMemoryAllocateInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkExportMemoryAllocateInfoNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkExportMemoryAllocateInfoNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkExportMemoryAllocateInfoNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -221,7 +221,7 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
     }
 
     /**
-     * Returns a new {@link VkExportMemoryAllocateInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkExportMemoryAllocateInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -291,7 +291,7 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
         private static final VkExportMemoryAllocateInfoNV ELEMENT_FACTORY = VkExportMemoryAllocateInfoNV.create(-1L);
 
         /**
-         * Creates a new {@link VkExportMemoryAllocateInfoNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkExportMemoryAllocateInfoNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -54,7 +54,7 @@ public abstract class CLEventCallback extends Callback implements CLEventCallbac
         super(SIGNATURE);
     }
 
-    private CLEventCallback(long functionPointer) {
+    CLEventCallback(long functionPointer) {
         super(functionPointer);
     }
 

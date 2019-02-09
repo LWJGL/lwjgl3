@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
 public class VkImagePlaneMemoryRequirementsInfoKHR extends VkImagePlaneMemoryRequirementsInfo {
 
     /**
-     * Creates a {@link VkImagePlaneMemoryRequirementsInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkImagePlaneMemoryRequirementsInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -77,23 +77,23 @@ public class VkImagePlaneMemoryRequirementsInfoKHR extends VkImagePlaneMemoryReq
 
     // -----------------------------------
 
-    /** Returns a new {@link VkImagePlaneMemoryRequirementsInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkImagePlaneMemoryRequirementsInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImagePlaneMemoryRequirementsInfoKHR malloc() {
         return wrap(VkImagePlaneMemoryRequirementsInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkImagePlaneMemoryRequirementsInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkImagePlaneMemoryRequirementsInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImagePlaneMemoryRequirementsInfoKHR calloc() {
         return wrap(VkImagePlaneMemoryRequirementsInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkImagePlaneMemoryRequirementsInfoKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkImagePlaneMemoryRequirementsInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkImagePlaneMemoryRequirementsInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkImagePlaneMemoryRequirementsInfoKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkImagePlaneMemoryRequirementsInfoKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkImagePlaneMemoryRequirementsInfoKHR} instance for the specified memory address. */
     public static VkImagePlaneMemoryRequirementsInfoKHR create(long address) {
         return wrap(VkImagePlaneMemoryRequirementsInfoKHR.class, address);
     }
@@ -150,18 +150,18 @@ public class VkImagePlaneMemoryRequirementsInfoKHR extends VkImagePlaneMemoryReq
 
     // -----------------------------------
 
-    /** Returns a new {@link VkImagePlaneMemoryRequirementsInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkImagePlaneMemoryRequirementsInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkImagePlaneMemoryRequirementsInfoKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkImagePlaneMemoryRequirementsInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkImagePlaneMemoryRequirementsInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkImagePlaneMemoryRequirementsInfoKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkImagePlaneMemoryRequirementsInfoKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkImagePlaneMemoryRequirementsInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -170,7 +170,7 @@ public class VkImagePlaneMemoryRequirementsInfoKHR extends VkImagePlaneMemoryReq
     }
 
     /**
-     * Returns a new {@link VkImagePlaneMemoryRequirementsInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkImagePlaneMemoryRequirementsInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -224,7 +224,7 @@ public class VkImagePlaneMemoryRequirementsInfoKHR extends VkImagePlaneMemoryReq
         private static final VkImagePlaneMemoryRequirementsInfoKHR ELEMENT_FACTORY = VkImagePlaneMemoryRequirementsInfoKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkImagePlaneMemoryRequirementsInfoKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkImagePlaneMemoryRequirementsInfoKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

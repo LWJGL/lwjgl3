@@ -76,7 +76,7 @@ public class VkSparseImageFormatProperties2 extends Struct implements NativeReso
     }
 
     /**
-     * Creates a {@link VkSparseImageFormatProperties2} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkSparseImageFormatProperties2} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -127,23 +127,23 @@ public class VkSparseImageFormatProperties2 extends Struct implements NativeReso
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSparseImageFormatProperties2} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSparseImageFormatProperties2} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSparseImageFormatProperties2 malloc() {
         return wrap(VkSparseImageFormatProperties2.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkSparseImageFormatProperties2} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSparseImageFormatProperties2} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSparseImageFormatProperties2 calloc() {
         return wrap(VkSparseImageFormatProperties2.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkSparseImageFormatProperties2} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkSparseImageFormatProperties2} instance allocated with {@link BufferUtils}. */
     public static VkSparseImageFormatProperties2 create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkSparseImageFormatProperties2.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkSparseImageFormatProperties2} instance for the specified memory address. */
+    /** Returns a new {@code VkSparseImageFormatProperties2} instance for the specified memory address. */
     public static VkSparseImageFormatProperties2 create(long address) {
         return wrap(VkSparseImageFormatProperties2.class, address);
     }
@@ -200,18 +200,18 @@ public class VkSparseImageFormatProperties2 extends Struct implements NativeReso
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSparseImageFormatProperties2} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkSparseImageFormatProperties2} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkSparseImageFormatProperties2 mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkSparseImageFormatProperties2} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkSparseImageFormatProperties2} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkSparseImageFormatProperties2 callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkSparseImageFormatProperties2} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkSparseImageFormatProperties2} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -220,7 +220,7 @@ public class VkSparseImageFormatProperties2 extends Struct implements NativeReso
     }
 
     /**
-     * Returns a new {@link VkSparseImageFormatProperties2} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkSparseImageFormatProperties2} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -288,7 +288,7 @@ public class VkSparseImageFormatProperties2 extends Struct implements NativeReso
         private static final VkSparseImageFormatProperties2 ELEMENT_FACTORY = VkSparseImageFormatProperties2.create(-1L);
 
         /**
-         * Creates a new {@link VkSparseImageFormatProperties2.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkSparseImageFormatProperties2.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -53,7 +53,7 @@ public abstract class NkDrawBeginCallback extends Callback implements NkDrawBegi
         super(SIGNATURE);
     }
 
-    private NkDrawBeginCallback(long functionPointer) {
+    NkDrawBeginCallback(long functionPointer) {
         super(functionPointer);
     }
 

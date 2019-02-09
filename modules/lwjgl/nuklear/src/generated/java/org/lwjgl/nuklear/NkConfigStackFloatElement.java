@@ -50,7 +50,7 @@ class NkConfigStackFloatElement extends Struct {
     }
 
     /**
-     * Creates a {@link NkConfigStackFloatElement} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NkConfigStackFloatElement} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -74,7 +74,7 @@ class NkConfigStackFloatElement extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkConfigStackFloatElement} instance for the specified memory address. */
+    /** Returns a new {@code NkConfigStackFloatElement} instance for the specified memory address. */
     public static NkConfigStackFloatElement create(long address) {
         return wrap(NkConfigStackFloatElement.class, address);
     }
@@ -116,7 +116,7 @@ class NkConfigStackFloatElement extends Struct {
         private static final NkConfigStackFloatElement ELEMENT_FACTORY = NkConfigStackFloatElement.create(-1L);
 
         /**
-         * Creates a new {@link NkConfigStackFloatElement.Buffer} instance backed by the specified container.
+         * Creates a new {@code NkConfigStackFloatElement.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

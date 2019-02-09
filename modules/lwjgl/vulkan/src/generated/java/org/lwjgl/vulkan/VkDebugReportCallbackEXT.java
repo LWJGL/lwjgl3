@@ -72,7 +72,7 @@ public abstract class VkDebugReportCallbackEXT extends Callback implements VkDeb
         super(SIGNATURE);
     }
 
-    private VkDebugReportCallbackEXT(long functionPointer) {
+    VkDebugReportCallbackEXT(long functionPointer) {
         super(functionPointer);
     }
 

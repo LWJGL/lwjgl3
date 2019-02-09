@@ -58,7 +58,7 @@ public abstract class CXCursorVisitor extends Callback implements CXCursorVisito
         super(SIGNATURE);
     }
 
-    private CXCursorVisitor(long functionPointer) {
+    CXCursorVisitor(long functionPointer) {
         super(functionPointer);
     }
 

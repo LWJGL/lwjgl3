@@ -58,7 +58,7 @@ public abstract class GLFWWindowPosCallback extends Callback implements GLFWWind
         super(SIGNATURE);
     }
 
-    private GLFWWindowPosCallback(long functionPointer) {
+    GLFWWindowPosCallback(long functionPointer) {
         super(functionPointer);
     }
 

@@ -50,7 +50,7 @@ class NkConfigStackColorElement extends Struct {
     }
 
     /**
-     * Creates a {@link NkConfigStackColorElement} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NkConfigStackColorElement} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -73,7 +73,7 @@ class NkConfigStackColorElement extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkConfigStackColorElement} instance for the specified memory address. */
+    /** Returns a new {@code NkConfigStackColorElement} instance for the specified memory address. */
     public static NkConfigStackColorElement create(long address) {
         return wrap(NkConfigStackColorElement.class, address);
     }
@@ -115,7 +115,7 @@ class NkConfigStackColorElement extends Struct {
         private static final NkConfigStackColorElement ELEMENT_FACTORY = NkConfigStackColorElement.create(-1L);
 
         /**
-         * Creates a new {@link NkConfigStackColorElement.Buffer} instance backed by the specified container.
+         * Creates a new {@code NkConfigStackColorElement.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

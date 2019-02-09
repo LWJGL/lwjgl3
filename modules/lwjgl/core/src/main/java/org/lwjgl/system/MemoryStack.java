@@ -36,6 +36,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         }
     }
 
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
     @Nullable
     private final ByteBuffer container;
 
@@ -163,7 +164,6 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      */
     @Override
     public void close() {
-        //noinspection resource
         pop();
     }
 
@@ -205,7 +205,6 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         }
 
         private static void reportAsymmetricPop(Object pushed, Object popped) {
-            //noinspection resource
             DEBUG_STREAM.format(
                 "[LWJGL] Asymmetric pop detected:\n\tPUSHED: %s\n\tPOPPED: %s\n\tTHREAD: %s\n",
                 pushed.toString(),
@@ -281,7 +280,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     private static void checkAlignment(int alignment) {
-        if (!(Integer.bitCount(alignment) == 1)) {
+        if (Integer.bitCount(alignment) != 1) {
             throw new IllegalArgumentException("Alignment must be a power-of-two value.");
         }
     }
@@ -308,7 +307,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      */
     public long nmalloc(int alignment, int size) {
         // Align address to the specified alignment
-        long address = (this.address + pointer - size) & ~(long)(alignment - 1);
+        long address = (this.address + pointer - size) & ~Integer.toUnsignedLong(alignment - 1);
 
         pointer = (int)(address - this.address);
         if (CHECKS && pointer < 0) {

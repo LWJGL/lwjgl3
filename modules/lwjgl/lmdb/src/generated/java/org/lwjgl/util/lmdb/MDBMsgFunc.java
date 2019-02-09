@@ -53,7 +53,7 @@ public abstract class MDBMsgFunc extends Callback implements MDBMsgFuncI {
         super(SIGNATURE);
     }
 
-    private MDBMsgFunc(long functionPointer) {
+    MDBMsgFunc(long functionPointer) {
         super(functionPointer);
     }
 

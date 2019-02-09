@@ -110,7 +110,7 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceRayTracingPropertiesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceRayTracingPropertiesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -215,23 +215,23 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceRayTracingPropertiesNV malloc() {
         return wrap(VkPhysicalDeviceRayTracingPropertiesNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceRayTracingPropertiesNV calloc() {
         return wrap(VkPhysicalDeviceRayTracingPropertiesNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceRayTracingPropertiesNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPhysicalDeviceRayTracingPropertiesNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceRayTracingPropertiesNV create(long address) {
         return wrap(VkPhysicalDeviceRayTracingPropertiesNV.class, address);
     }
@@ -288,18 +288,18 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPhysicalDeviceRayTracingPropertiesNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPhysicalDeviceRayTracingPropertiesNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -308,7 +308,7 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -406,7 +406,7 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
         private static final VkPhysicalDeviceRayTracingPropertiesNV ELEMENT_FACTORY = VkPhysicalDeviceRayTracingPropertiesNV.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceRayTracingPropertiesNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceRayTracingPropertiesNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -78,7 +78,7 @@ public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct implements Nati
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceMeshShaderFeaturesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceMeshShaderFeaturesNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -141,23 +141,23 @@ public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct implements Nati
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMeshShaderFeaturesNV malloc() {
         return wrap(VkPhysicalDeviceMeshShaderFeaturesNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMeshShaderFeaturesNV calloc() {
         return wrap(VkPhysicalDeviceMeshShaderFeaturesNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceMeshShaderFeaturesNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPhysicalDeviceMeshShaderFeaturesNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPhysicalDeviceMeshShaderFeaturesNV} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceMeshShaderFeaturesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceMeshShaderFeaturesNV create(long address) {
         return wrap(VkPhysicalDeviceMeshShaderFeaturesNV.class, address);
     }
@@ -214,18 +214,18 @@ public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct implements Nati
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPhysicalDeviceMeshShaderFeaturesNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPhysicalDeviceMeshShaderFeaturesNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -234,7 +234,7 @@ public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct implements Nati
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPhysicalDeviceMeshShaderFeaturesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -308,7 +308,7 @@ public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct implements Nati
         private static final VkPhysicalDeviceMeshShaderFeaturesNV ELEMENT_FACTORY = VkPhysicalDeviceMeshShaderFeaturesNV.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceMeshShaderFeaturesNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceMeshShaderFeaturesNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

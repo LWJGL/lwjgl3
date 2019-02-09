@@ -53,7 +53,7 @@ public class B3RaycastInformation extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link B3RaycastInformation} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code B3RaycastInformation} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -88,23 +88,23 @@ public class B3RaycastInformation extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link B3RaycastInformation} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code B3RaycastInformation} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static B3RaycastInformation malloc() {
         return wrap(B3RaycastInformation.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link B3RaycastInformation} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code B3RaycastInformation} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static B3RaycastInformation calloc() {
         return wrap(B3RaycastInformation.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link B3RaycastInformation} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code B3RaycastInformation} instance allocated with {@link BufferUtils}. */
     public static B3RaycastInformation create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(B3RaycastInformation.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link B3RaycastInformation} instance for the specified memory address. */
+    /** Returns a new {@code B3RaycastInformation} instance for the specified memory address. */
     public static B3RaycastInformation create(long address) {
         return wrap(B3RaycastInformation.class, address);
     }
@@ -161,18 +161,18 @@ public class B3RaycastInformation extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link B3RaycastInformation} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code B3RaycastInformation} instance allocated on the thread-local {@link MemoryStack}. */
     public static B3RaycastInformation mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link B3RaycastInformation} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code B3RaycastInformation} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static B3RaycastInformation callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link B3RaycastInformation} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code B3RaycastInformation} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -181,7 +181,7 @@ public class B3RaycastInformation extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link B3RaycastInformation} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code B3RaycastInformation} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -256,7 +256,7 @@ public class B3RaycastInformation extends Struct implements NativeResource {
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -268,7 +268,7 @@ public class B3RaycastInformation extends Struct implements NativeResource {
         private static final B3RaycastInformation ELEMENT_FACTORY = B3RaycastInformation.create(-1L);
 
         /**
-         * Creates a new {@link B3RaycastInformation.Buffer} instance backed by the specified container.
+         * Creates a new {@code B3RaycastInformation.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

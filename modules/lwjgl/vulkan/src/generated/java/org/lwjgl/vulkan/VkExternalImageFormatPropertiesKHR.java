@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class VkExternalImageFormatPropertiesKHR extends VkExternalImageFormatProperties {
 
     /**
-     * Creates a {@link VkExternalImageFormatPropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkExternalImageFormatPropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -70,7 +70,7 @@ public class VkExternalImageFormatPropertiesKHR extends VkExternalImageFormatPro
 
     // -----------------------------------
 
-    /** Returns a new {@link VkExternalImageFormatPropertiesKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkExternalImageFormatPropertiesKHR} instance for the specified memory address. */
     public static VkExternalImageFormatPropertiesKHR create(long address) {
         return wrap(VkExternalImageFormatPropertiesKHR.class, address);
     }
@@ -105,7 +105,7 @@ public class VkExternalImageFormatPropertiesKHR extends VkExternalImageFormatPro
         private static final VkExternalImageFormatPropertiesKHR ELEMENT_FACTORY = VkExternalImageFormatPropertiesKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkExternalImageFormatPropertiesKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkExternalImageFormatPropertiesKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

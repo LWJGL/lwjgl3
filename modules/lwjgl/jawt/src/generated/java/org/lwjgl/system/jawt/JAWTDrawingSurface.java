@@ -81,7 +81,7 @@ public class JAWTDrawingSurface extends Struct {
     }
 
     /**
-     * Creates a {@link JAWTDrawingSurface} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code JAWTDrawingSurface} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -114,7 +114,7 @@ public class JAWTDrawingSurface extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link JAWTDrawingSurface} instance for the specified memory address. */
+    /** Returns a new {@code JAWTDrawingSurface} instance for the specified memory address. */
     public static JAWTDrawingSurface create(long address) {
         return wrap(JAWTDrawingSurface.class, address);
     }
@@ -164,7 +164,7 @@ public class JAWTDrawingSurface extends Struct {
         private static final JAWTDrawingSurface ELEMENT_FACTORY = JAWTDrawingSurface.create(-1L);
 
         /**
-         * Creates a new {@link JAWTDrawingSurface.Buffer} instance backed by the specified container.
+         * Creates a new {@code JAWTDrawingSurface.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

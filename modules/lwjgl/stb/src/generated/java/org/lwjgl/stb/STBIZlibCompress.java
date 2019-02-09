@@ -55,7 +55,7 @@ public abstract class STBIZlibCompress extends Callback implements STBIZlibCompr
         super(SIGNATURE);
     }
 
-    private STBIZlibCompress(long functionPointer) {
+    STBIZlibCompress(long functionPointer) {
         super(functionPointer);
     }
 

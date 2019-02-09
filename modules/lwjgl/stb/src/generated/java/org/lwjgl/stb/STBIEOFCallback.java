@@ -52,7 +52,7 @@ public abstract class STBIEOFCallback extends Callback implements STBIEOFCallbac
         super(SIGNATURE);
     }
 
-    private STBIEOFCallback(long functionPointer) {
+    STBIEOFCallback(long functionPointer) {
         super(functionPointer);
     }
 

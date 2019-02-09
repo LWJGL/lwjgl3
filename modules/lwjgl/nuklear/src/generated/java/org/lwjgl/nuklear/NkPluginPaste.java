@@ -53,7 +53,7 @@ public abstract class NkPluginPaste extends Callback implements NkPluginPasteI {
         super(SIGNATURE);
     }
 
-    private NkPluginPaste(long functionPointer) {
+    NkPluginPaste(long functionPointer) {
         super(functionPointer);
     }
 

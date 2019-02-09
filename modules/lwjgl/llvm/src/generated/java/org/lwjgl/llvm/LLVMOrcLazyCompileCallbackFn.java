@@ -53,7 +53,7 @@ public abstract class LLVMOrcLazyCompileCallbackFn extends Callback implements L
         super(SIGNATURE);
     }
 
-    private LLVMOrcLazyCompileCallbackFn(long functionPointer) {
+    LLVMOrcLazyCompileCallbackFn(long functionPointer) {
         super(functionPointer);
     }
 

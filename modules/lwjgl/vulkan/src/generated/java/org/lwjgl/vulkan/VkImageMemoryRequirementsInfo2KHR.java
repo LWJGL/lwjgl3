@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
 public class VkImageMemoryRequirementsInfo2KHR extends VkImageMemoryRequirementsInfo2 {
 
     /**
-     * Creates a {@link VkImageMemoryRequirementsInfo2KHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkImageMemoryRequirementsInfo2KHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -77,23 +77,23 @@ public class VkImageMemoryRequirementsInfo2KHR extends VkImageMemoryRequirements
 
     // -----------------------------------
 
-    /** Returns a new {@link VkImageMemoryRequirementsInfo2KHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkImageMemoryRequirementsInfo2KHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageMemoryRequirementsInfo2KHR malloc() {
         return wrap(VkImageMemoryRequirementsInfo2KHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkImageMemoryRequirementsInfo2KHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkImageMemoryRequirementsInfo2KHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageMemoryRequirementsInfo2KHR calloc() {
         return wrap(VkImageMemoryRequirementsInfo2KHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkImageMemoryRequirementsInfo2KHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkImageMemoryRequirementsInfo2KHR} instance allocated with {@link BufferUtils}. */
     public static VkImageMemoryRequirementsInfo2KHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkImageMemoryRequirementsInfo2KHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkImageMemoryRequirementsInfo2KHR} instance for the specified memory address. */
+    /** Returns a new {@code VkImageMemoryRequirementsInfo2KHR} instance for the specified memory address. */
     public static VkImageMemoryRequirementsInfo2KHR create(long address) {
         return wrap(VkImageMemoryRequirementsInfo2KHR.class, address);
     }
@@ -150,18 +150,18 @@ public class VkImageMemoryRequirementsInfo2KHR extends VkImageMemoryRequirements
 
     // -----------------------------------
 
-    /** Returns a new {@link VkImageMemoryRequirementsInfo2KHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkImageMemoryRequirementsInfo2KHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkImageMemoryRequirementsInfo2KHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkImageMemoryRequirementsInfo2KHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkImageMemoryRequirementsInfo2KHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkImageMemoryRequirementsInfo2KHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkImageMemoryRequirementsInfo2KHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkImageMemoryRequirementsInfo2KHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -170,7 +170,7 @@ public class VkImageMemoryRequirementsInfo2KHR extends VkImageMemoryRequirements
     }
 
     /**
-     * Returns a new {@link VkImageMemoryRequirementsInfo2KHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkImageMemoryRequirementsInfo2KHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -224,7 +224,7 @@ public class VkImageMemoryRequirementsInfo2KHR extends VkImageMemoryRequirements
         private static final VkImageMemoryRequirementsInfo2KHR ELEMENT_FACTORY = VkImageMemoryRequirementsInfo2KHR.create(-1L);
 
         /**
-         * Creates a new {@link VkImageMemoryRequirementsInfo2KHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkImageMemoryRequirementsInfo2KHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

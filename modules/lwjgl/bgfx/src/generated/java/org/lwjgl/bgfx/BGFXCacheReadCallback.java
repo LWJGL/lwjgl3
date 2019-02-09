@@ -55,7 +55,7 @@ public abstract class BGFXCacheReadCallback extends Callback implements BGFXCach
         super(SIGNATURE);
     }
 
-    private BGFXCacheReadCallback(long functionPointer) {
+    BGFXCacheReadCallback(long functionPointer) {
         super(functionPointer);
     }
 

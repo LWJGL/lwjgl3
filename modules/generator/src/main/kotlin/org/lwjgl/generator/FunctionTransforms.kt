@@ -170,7 +170,7 @@ internal class CharSequenceTransform(
     override fun setupStack(func: Func, qtype: Parameter, writer: PrintWriter) {
         writer.print(
             if (nullTerminated)
-                "$t$t${t}"
+                "$t$t$t"
             else
                 "$t$t${t}int ${qtype.name}EncodedLength = "
         )

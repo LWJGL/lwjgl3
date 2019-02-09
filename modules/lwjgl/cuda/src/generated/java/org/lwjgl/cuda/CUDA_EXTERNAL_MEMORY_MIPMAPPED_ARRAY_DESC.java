@@ -70,7 +70,7 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct implements
     }
 
     /**
-     * Creates a {@link CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -139,23 +139,23 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct implements
 
     // -----------------------------------
 
-    /** Returns a new {@link CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC malloc() {
         return wrap(CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC calloc() {
         return wrap(CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated with {@link BufferUtils}. */
     public static CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance for the specified memory address. */
+    /** Returns a new {@code CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance for the specified memory address. */
     public static CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC create(long address) {
         return wrap(CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.class, address);
     }
@@ -212,18 +212,18 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct implements
 
     // -----------------------------------
 
-    /** Returns a new {@link CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated on the thread-local {@link MemoryStack}. */
     public static CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -232,7 +232,7 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct implements
     }
 
     /**
-     * Returns a new {@link CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -317,7 +317,7 @@ public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct implements
         private static final CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC ELEMENT_FACTORY = CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.create(-1L);
 
         /**
-         * Creates a new {@link CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.Buffer} instance backed by the specified container.
+         * Creates a new {@code CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

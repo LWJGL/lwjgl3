@@ -100,7 +100,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -174,23 +174,23 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT malloc() {
         return wrap(VkPhysicalDeviceImageDrmFormatModifierInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT calloc() {
         return wrap(VkPhysicalDeviceImageDrmFormatModifierInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPhysicalDeviceImageDrmFormatModifierInfoEXT.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT create(long address) {
         return wrap(VkPhysicalDeviceImageDrmFormatModifierInfoEXT.class, address);
     }
@@ -247,18 +247,18 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -267,7 +267,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
     }
 
     /**
-     * Returns a new {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -360,7 +360,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -372,7 +372,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
         private static final VkPhysicalDeviceImageDrmFormatModifierInfoEXT ELEMENT_FACTORY = VkPhysicalDeviceImageDrmFormatModifierInfoEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

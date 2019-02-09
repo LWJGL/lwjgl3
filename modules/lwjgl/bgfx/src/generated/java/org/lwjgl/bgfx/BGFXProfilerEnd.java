@@ -52,7 +52,7 @@ public abstract class BGFXProfilerEnd extends Callback implements BGFXProfilerEn
         super(SIGNATURE);
     }
 
-    private BGFXProfilerEnd(long functionPointer) {
+    BGFXProfilerEnd(long functionPointer) {
         super(functionPointer);
     }
 

@@ -56,7 +56,7 @@ public abstract class STBIReadCallback extends Callback implements STBIReadCallb
         super(SIGNATURE);
     }
 
-    private STBIReadCallback(long functionPointer) {
+    STBIReadCallback(long functionPointer) {
         super(functionPointer);
     }
 

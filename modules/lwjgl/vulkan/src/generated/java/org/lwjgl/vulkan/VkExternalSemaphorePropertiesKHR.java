@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
 public class VkExternalSemaphorePropertiesKHR extends VkExternalSemaphoreProperties {
 
     /**
-     * Creates a {@link VkExternalSemaphorePropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkExternalSemaphorePropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -74,23 +74,23 @@ public class VkExternalSemaphorePropertiesKHR extends VkExternalSemaphorePropert
 
     // -----------------------------------
 
-    /** Returns a new {@link VkExternalSemaphorePropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkExternalSemaphorePropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkExternalSemaphorePropertiesKHR malloc() {
         return wrap(VkExternalSemaphorePropertiesKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkExternalSemaphorePropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkExternalSemaphorePropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkExternalSemaphorePropertiesKHR calloc() {
         return wrap(VkExternalSemaphorePropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkExternalSemaphorePropertiesKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkExternalSemaphorePropertiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkExternalSemaphorePropertiesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkExternalSemaphorePropertiesKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkExternalSemaphorePropertiesKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkExternalSemaphorePropertiesKHR} instance for the specified memory address. */
     public static VkExternalSemaphorePropertiesKHR create(long address) {
         return wrap(VkExternalSemaphorePropertiesKHR.class, address);
     }
@@ -147,18 +147,18 @@ public class VkExternalSemaphorePropertiesKHR extends VkExternalSemaphorePropert
 
     // -----------------------------------
 
-    /** Returns a new {@link VkExternalSemaphorePropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkExternalSemaphorePropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkExternalSemaphorePropertiesKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkExternalSemaphorePropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkExternalSemaphorePropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkExternalSemaphorePropertiesKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkExternalSemaphorePropertiesKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkExternalSemaphorePropertiesKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -167,7 +167,7 @@ public class VkExternalSemaphorePropertiesKHR extends VkExternalSemaphorePropert
     }
 
     /**
-     * Returns a new {@link VkExternalSemaphorePropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkExternalSemaphorePropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -221,7 +221,7 @@ public class VkExternalSemaphorePropertiesKHR extends VkExternalSemaphorePropert
         private static final VkExternalSemaphorePropertiesKHR ELEMENT_FACTORY = VkExternalSemaphorePropertiesKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkExternalSemaphorePropertiesKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkExternalSemaphorePropertiesKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

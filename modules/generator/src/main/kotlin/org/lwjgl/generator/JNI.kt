@@ -17,8 +17,6 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
         // Force generation of signatures that are not used by any binding, but are required for
         // bootstrapping or other internal functionality.
 
-        // callP(GL_EXTENSIONS, i, GetStringi)
-        signatures[Signature(CallingConvention.STDCALL, opaque_p, listOf(int, int))] = Unit
         // invokePPV(NSView, setWantsBestResolutionOpenGLSurface, true/false, objc_msgSend);
         signatures[Signature(CallingConvention.DEFAULT, void, listOf(opaque_p, opaque_p, bool))] = Unit
     }
@@ -187,12 +185,12 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
         .joinToString(", ")}, $FUNCTION_ADDRESS);
     ${it.arguments.asSequence()
         .withIndex()
-        .sortedByDescending { arg -> arg.index }
-        .mapNotNull { arg ->
-            if (arg.value !is ArrayType<*>)
+        .sortedByDescending { (index) -> index }
+        .mapNotNull { (index, value) ->
+            if (value !is ArrayType<*>)
                 null
             else
-                "if (param${arg.index} != NULL) { (*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, param${arg.index}, paramArray${arg.index}, 0); }"
+                "if (param$index != NULL) { (*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, param$index, paramArray$index, 0); }"
         }
         .joinToString("\n$t")}${if (it.returnType.mapping === TypeMapping.VOID) "" else """
     return __result;"""}

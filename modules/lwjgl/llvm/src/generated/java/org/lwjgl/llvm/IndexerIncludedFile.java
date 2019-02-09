@@ -53,7 +53,7 @@ public abstract class IndexerIncludedFile extends Callback implements IndexerInc
         super(SIGNATURE);
     }
 
-    private IndexerIncludedFile(long functionPointer) {
+    IndexerIncludedFile(long functionPointer) {
         super(functionPointer);
     }
 

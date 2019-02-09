@@ -55,7 +55,7 @@ public abstract class CLReportLiveObjectsAlteraCallback extends Callback impleme
         super(SIGNATURE);
     }
 
-    private CLReportLiveObjectsAlteraCallback(long functionPointer) {
+    CLReportLiveObjectsAlteraCallback(long functionPointer) {
         super(functionPointer);
     }
 

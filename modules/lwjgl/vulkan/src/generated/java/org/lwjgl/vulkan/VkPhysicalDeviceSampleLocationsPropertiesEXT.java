@@ -98,7 +98,7 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct {
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceSampleLocationsPropertiesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceSampleLocationsPropertiesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -165,7 +165,7 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceSampleLocationsPropertiesEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceSampleLocationsPropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceSampleLocationsPropertiesEXT create(long address) {
         return wrap(VkPhysicalDeviceSampleLocationsPropertiesEXT.class, address);
     }
@@ -226,7 +226,7 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct {
         private static final VkPhysicalDeviceSampleLocationsPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceSampleLocationsPropertiesEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -102,7 +102,7 @@ public class BGFXCaps extends Struct {
     }
 
     /**
-     * Creates a {@link BGFXCaps} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code BGFXCaps} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -153,7 +153,7 @@ public class BGFXCaps extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link BGFXCaps} instance for the specified memory address. */
+    /** Returns a new {@code BGFXCaps} instance for the specified memory address. */
     public static BGFXCaps create(long address) {
         return wrap(BGFXCaps.class, address);
     }

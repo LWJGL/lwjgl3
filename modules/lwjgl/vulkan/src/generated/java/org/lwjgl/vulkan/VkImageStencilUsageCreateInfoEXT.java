@@ -87,7 +87,7 @@ public class VkImageStencilUsageCreateInfoEXT extends Struct implements NativeRe
     }
 
     /**
-     * Creates a {@link VkImageStencilUsageCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkImageStencilUsageCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -143,23 +143,23 @@ public class VkImageStencilUsageCreateInfoEXT extends Struct implements NativeRe
 
     // -----------------------------------
 
-    /** Returns a new {@link VkImageStencilUsageCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkImageStencilUsageCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageStencilUsageCreateInfoEXT malloc() {
         return wrap(VkImageStencilUsageCreateInfoEXT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkImageStencilUsageCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkImageStencilUsageCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageStencilUsageCreateInfoEXT calloc() {
         return wrap(VkImageStencilUsageCreateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkImageStencilUsageCreateInfoEXT} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkImageStencilUsageCreateInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkImageStencilUsageCreateInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkImageStencilUsageCreateInfoEXT.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkImageStencilUsageCreateInfoEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkImageStencilUsageCreateInfoEXT} instance for the specified memory address. */
     public static VkImageStencilUsageCreateInfoEXT create(long address) {
         return wrap(VkImageStencilUsageCreateInfoEXT.class, address);
     }
@@ -216,18 +216,18 @@ public class VkImageStencilUsageCreateInfoEXT extends Struct implements NativeRe
 
     // -----------------------------------
 
-    /** Returns a new {@link VkImageStencilUsageCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkImageStencilUsageCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkImageStencilUsageCreateInfoEXT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkImageStencilUsageCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkImageStencilUsageCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkImageStencilUsageCreateInfoEXT callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkImageStencilUsageCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkImageStencilUsageCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -236,7 +236,7 @@ public class VkImageStencilUsageCreateInfoEXT extends Struct implements NativeRe
     }
 
     /**
-     * Returns a new {@link VkImageStencilUsageCreateInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkImageStencilUsageCreateInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -306,7 +306,7 @@ public class VkImageStencilUsageCreateInfoEXT extends Struct implements NativeRe
         private static final VkImageStencilUsageCreateInfoEXT ELEMENT_FACTORY = VkImageStencilUsageCreateInfoEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkImageStencilUsageCreateInfoEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkImageStencilUsageCreateInfoEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -51,7 +51,7 @@ public class YGValue extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link YGValue} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code YGValue} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -99,23 +99,23 @@ public class YGValue extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link YGValue} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code YGValue} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static YGValue malloc() {
         return wrap(YGValue.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link YGValue} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code YGValue} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static YGValue calloc() {
         return wrap(YGValue.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link YGValue} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code YGValue} instance allocated with {@link BufferUtils}. */
     public static YGValue create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(YGValue.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link YGValue} instance for the specified memory address. */
+    /** Returns a new {@code YGValue} instance for the specified memory address. */
     public static YGValue create(long address) {
         return wrap(YGValue.class, address);
     }
@@ -172,18 +172,18 @@ public class YGValue extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link YGValue} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code YGValue} instance allocated on the thread-local {@link MemoryStack}. */
     public static YGValue mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link YGValue} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code YGValue} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static YGValue callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link YGValue} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code YGValue} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -192,7 +192,7 @@ public class YGValue extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link YGValue} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code YGValue} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -258,7 +258,7 @@ public class YGValue extends Struct implements NativeResource {
         private static final YGValue ELEMENT_FACTORY = YGValue.create(-1L);
 
         /**
-         * Creates a new {@link YGValue.Buffer} instance backed by the specified container.
+         * Creates a new {@code YGValue.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

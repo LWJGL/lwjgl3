@@ -54,7 +54,7 @@ public class NkCommand extends Struct {
     }
 
     /**
-     * Creates a {@link NkCommand} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NkCommand} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -80,7 +80,7 @@ public class NkCommand extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkCommand} instance for the specified memory address. */
+    /** Returns a new {@code NkCommand} instance for the specified memory address. */
     public static NkCommand create(long address) {
         return wrap(NkCommand.class, address);
     }
@@ -124,7 +124,7 @@ public class NkCommand extends Struct {
         private static final NkCommand ELEMENT_FACTORY = NkCommand.create(-1L);
 
         /**
-         * Creates a new {@link NkCommand.Buffer} instance backed by the specified container.
+         * Creates a new {@code NkCommand.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

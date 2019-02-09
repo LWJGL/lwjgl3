@@ -52,7 +52,7 @@ public abstract class LLVMFatalErrorHandler extends Callback implements LLVMFata
         super(SIGNATURE);
     }
 
-    private LLVMFatalErrorHandler(long functionPointer) {
+    LLVMFatalErrorHandler(long functionPointer) {
         super(functionPointer);
     }
 

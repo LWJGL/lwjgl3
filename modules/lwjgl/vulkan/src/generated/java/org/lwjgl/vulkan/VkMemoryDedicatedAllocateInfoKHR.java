@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
 public class VkMemoryDedicatedAllocateInfoKHR extends VkMemoryDedicatedAllocateInfo {
 
     /**
-     * Creates a {@link VkMemoryDedicatedAllocateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkMemoryDedicatedAllocateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -83,23 +83,23 @@ public class VkMemoryDedicatedAllocateInfoKHR extends VkMemoryDedicatedAllocateI
 
     // -----------------------------------
 
-    /** Returns a new {@link VkMemoryDedicatedAllocateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkMemoryDedicatedAllocateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkMemoryDedicatedAllocateInfoKHR malloc() {
         return wrap(VkMemoryDedicatedAllocateInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkMemoryDedicatedAllocateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkMemoryDedicatedAllocateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkMemoryDedicatedAllocateInfoKHR calloc() {
         return wrap(VkMemoryDedicatedAllocateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkMemoryDedicatedAllocateInfoKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkMemoryDedicatedAllocateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkMemoryDedicatedAllocateInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkMemoryDedicatedAllocateInfoKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkMemoryDedicatedAllocateInfoKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkMemoryDedicatedAllocateInfoKHR} instance for the specified memory address. */
     public static VkMemoryDedicatedAllocateInfoKHR create(long address) {
         return wrap(VkMemoryDedicatedAllocateInfoKHR.class, address);
     }
@@ -156,18 +156,18 @@ public class VkMemoryDedicatedAllocateInfoKHR extends VkMemoryDedicatedAllocateI
 
     // -----------------------------------
 
-    /** Returns a new {@link VkMemoryDedicatedAllocateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkMemoryDedicatedAllocateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkMemoryDedicatedAllocateInfoKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkMemoryDedicatedAllocateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkMemoryDedicatedAllocateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkMemoryDedicatedAllocateInfoKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkMemoryDedicatedAllocateInfoKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkMemoryDedicatedAllocateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -176,7 +176,7 @@ public class VkMemoryDedicatedAllocateInfoKHR extends VkMemoryDedicatedAllocateI
     }
 
     /**
-     * Returns a new {@link VkMemoryDedicatedAllocateInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkMemoryDedicatedAllocateInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -230,7 +230,7 @@ public class VkMemoryDedicatedAllocateInfoKHR extends VkMemoryDedicatedAllocateI
         private static final VkMemoryDedicatedAllocateInfoKHR ELEMENT_FACTORY = VkMemoryDedicatedAllocateInfoKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkMemoryDedicatedAllocateInfoKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkMemoryDedicatedAllocateInfoKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -53,7 +53,7 @@ public abstract class LLVMMemoryManagerFinalizeMemoryCallback extends Callback i
         super(SIGNATURE);
     }
 
-    private LLVMMemoryManagerFinalizeMemoryCallback(long functionPointer) {
+    LLVMMemoryManagerFinalizeMemoryCallback(long functionPointer) {
         super(functionPointer);
     }
 

@@ -82,7 +82,7 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link AIMatrix3x3} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code AIMatrix3x3} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -171,23 +171,23 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link AIMatrix3x3} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code AIMatrix3x3} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIMatrix3x3 malloc() {
         return wrap(AIMatrix3x3.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link AIMatrix3x3} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code AIMatrix3x3} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIMatrix3x3 calloc() {
         return wrap(AIMatrix3x3.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link AIMatrix3x3} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code AIMatrix3x3} instance allocated with {@link BufferUtils}. */
     public static AIMatrix3x3 create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(AIMatrix3x3.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link AIMatrix3x3} instance for the specified memory address. */
+    /** Returns a new {@code AIMatrix3x3} instance for the specified memory address. */
     public static AIMatrix3x3 create(long address) {
         return wrap(AIMatrix3x3.class, address);
     }
@@ -244,18 +244,18 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link AIMatrix3x3} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code AIMatrix3x3} instance allocated on the thread-local {@link MemoryStack}. */
     public static AIMatrix3x3 mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link AIMatrix3x3} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code AIMatrix3x3} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static AIMatrix3x3 callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link AIMatrix3x3} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code AIMatrix3x3} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -264,7 +264,7 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link AIMatrix3x3} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code AIMatrix3x3} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -358,7 +358,7 @@ public class AIMatrix3x3 extends Struct implements NativeResource {
         private static final AIMatrix3x3 ELEMENT_FACTORY = AIMatrix3x3.create(-1L);
 
         /**
-         * Creates a new {@link AIMatrix3x3.Buffer} instance backed by the specified container.
+         * Creates a new {@code AIMatrix3x3.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

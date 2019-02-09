@@ -7,10 +7,12 @@ package org.lwjgl.system;
 import org.lwjgl.*;
 
 import javax.annotation.*;
+import javax.annotation.concurrent.*;
 import java.io.*;
 import java.net.*;
 import java.nio.channels.*;
 import java.nio.file.*;
+import java.util.concurrent.locks.*;
 import java.util.zip.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -26,6 +28,9 @@ import static org.lwjgl.system.APIUtil.*;
  */
 final class SharedLibraryLoader {
 
+    private static final Lock EXTRACT_PATH_LOCK = new ReentrantLock();
+
+    @GuardedBy("EXTRACT_PATH_LOCK")
     @Nullable
     private static Path extractPath;
 
@@ -62,6 +67,19 @@ final class SharedLibraryLoader {
         }
     }
 
+    private static void initExtractPath(Path extractPath) {
+        String newLibPath = extractPath.toAbsolutePath().toString();
+
+        // Prepend the path in which the libraries were extracted to org.lwjgl.librarypath
+        String libPath = Configuration.LIBRARY_PATH.get();
+        if (libPath != null && !libPath.isEmpty()) {
+            newLibPath += File.pathSeparator + libPath;
+        }
+
+        System.setProperty(Configuration.LIBRARY_PATH.getProperty(), newLibPath);
+        Configuration.LIBRARY_PATH.set(newLibPath);
+    }
+
     /**
      * Extracts the specified file into the temp directory if it does not already exist or the CRC does not match.
      *
@@ -70,21 +88,18 @@ final class SharedLibraryLoader {
      * @return The extracted file.
      */
     private static Path extractFile(String libraryFile, URL libURL) throws IOException {
-        Path extractedFile = getExtractedFile(extractPath, libraryFile);
+        Path extractedFile;
 
-        if (extractPath == null) {
-            extractPath = extractedFile.getParent();
-
-            String newLibPath = extractPath.toAbsolutePath().toString();
-
-            // Prepend the path in which the libraries were extracted to org.lwjgl.librarypath
-            String libPath = Configuration.LIBRARY_PATH.get();
-            if (libPath != null && !libPath.isEmpty()) {
-                newLibPath += File.pathSeparator + libPath;
+        EXTRACT_PATH_LOCK.lock();
+        try {
+            extractedFile = getExtractedFile(extractPath, libraryFile);
+            if (extractPath == null) {
+                //noinspection NonThreadSafeLazyInitialization
+                extractPath = extractedFile.getParent();
+                initExtractPath(extractPath);
             }
-
-            System.setProperty(Configuration.LIBRARY_PATH.getProperty(), newLibPath);
-            Configuration.LIBRARY_PATH.set(newLibPath);
+        } finally {
+            EXTRACT_PATH_LOCK.unlock();
         }
 
         extractFile(libURL, extractedFile);
@@ -159,7 +174,7 @@ final class SharedLibraryLoader {
         if (Files.exists(extractedFile)) {
             try (
                 InputStream input = libURL.openStream();
-                InputStream target = Files.newInputStream(extractedFile);
+                InputStream target = Files.newInputStream(extractedFile)
             ) {
                 if (crc(input) == crc(target)) {
                     apiLog(String.format("\tFound at: %s", extractedFile));

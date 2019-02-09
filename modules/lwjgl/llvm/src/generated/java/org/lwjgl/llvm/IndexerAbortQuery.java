@@ -53,7 +53,7 @@ public abstract class IndexerAbortQuery extends Callback implements IndexerAbort
         super(SIGNATURE);
     }
 
-    private IndexerAbortQuery(long functionPointer) {
+    IndexerAbortQuery(long functionPointer) {
         super(functionPointer);
     }
 

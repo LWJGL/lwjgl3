@@ -67,7 +67,7 @@ public class NSVGGradient extends Struct {
     }
 
     /**
-     * Creates a {@link NSVGGradient} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NSVGGradient} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -102,7 +102,7 @@ public class NSVGGradient extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link NSVGGradient} instance for the specified memory address. */
+    /** Returns a new {@code NSVGGradient} instance for the specified memory address. */
     public static NSVGGradient create(long address) {
         return wrap(NSVGGradient.class, address);
     }
@@ -160,7 +160,7 @@ public class NSVGGradient extends Struct {
         private static final NSVGGradient ELEMENT_FACTORY = NSVGGradient.create(-1L);
 
         /**
-         * Creates a new {@link NSVGGradient.Buffer} instance backed by the specified container.
+         * Creates a new {@code NSVGGradient.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

@@ -37,7 +37,7 @@ public class MeowHashState extends Struct implements NativeResource {
     private static native int offsets(long buffer);
 
     /**
-     * Creates a {@link MeowHashState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code MeowHashState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -51,23 +51,23 @@ public class MeowHashState extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link MeowHashState} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code MeowHashState} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static MeowHashState malloc() {
         return wrap(MeowHashState.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link MeowHashState} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code MeowHashState} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static MeowHashState calloc() {
         return wrap(MeowHashState.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link MeowHashState} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code MeowHashState} instance allocated with {@link BufferUtils}. */
     public static MeowHashState create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(MeowHashState.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link MeowHashState} instance for the specified memory address. */
+    /** Returns a new {@code MeowHashState} instance for the specified memory address. */
     public static MeowHashState create(long address) {
         return wrap(MeowHashState.class, address);
     }
@@ -124,18 +124,18 @@ public class MeowHashState extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link MeowHashState} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code MeowHashState} instance allocated on the thread-local {@link MemoryStack}. */
     public static MeowHashState mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link MeowHashState} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code MeowHashState} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static MeowHashState callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link MeowHashState} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code MeowHashState} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -144,7 +144,7 @@ public class MeowHashState extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link MeowHashState} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code MeowHashState} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -200,7 +200,7 @@ public class MeowHashState extends Struct implements NativeResource {
         private static final MeowHashState ELEMENT_FACTORY = MeowHashState.create(-1L);
 
         /**
-         * Creates a new {@link MeowHashState.Buffer} instance backed by the specified container.
+         * Creates a new {@code MeowHashState.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

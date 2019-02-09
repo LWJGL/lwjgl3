@@ -84,7 +84,7 @@ public class VkObjectTableIndexBufferEntryNVX extends Struct implements NativeRe
     }
 
     /**
-     * Creates a {@link VkObjectTableIndexBufferEntryNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkObjectTableIndexBufferEntryNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -147,23 +147,23 @@ public class VkObjectTableIndexBufferEntryNVX extends Struct implements NativeRe
 
     // -----------------------------------
 
-    /** Returns a new {@link VkObjectTableIndexBufferEntryNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkObjectTableIndexBufferEntryNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkObjectTableIndexBufferEntryNVX malloc() {
         return wrap(VkObjectTableIndexBufferEntryNVX.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkObjectTableIndexBufferEntryNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkObjectTableIndexBufferEntryNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkObjectTableIndexBufferEntryNVX calloc() {
         return wrap(VkObjectTableIndexBufferEntryNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkObjectTableIndexBufferEntryNVX} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkObjectTableIndexBufferEntryNVX} instance allocated with {@link BufferUtils}. */
     public static VkObjectTableIndexBufferEntryNVX create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkObjectTableIndexBufferEntryNVX.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkObjectTableIndexBufferEntryNVX} instance for the specified memory address. */
+    /** Returns a new {@code VkObjectTableIndexBufferEntryNVX} instance for the specified memory address. */
     public static VkObjectTableIndexBufferEntryNVX create(long address) {
         return wrap(VkObjectTableIndexBufferEntryNVX.class, address);
     }
@@ -220,18 +220,18 @@ public class VkObjectTableIndexBufferEntryNVX extends Struct implements NativeRe
 
     // -----------------------------------
 
-    /** Returns a new {@link VkObjectTableIndexBufferEntryNVX} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkObjectTableIndexBufferEntryNVX} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkObjectTableIndexBufferEntryNVX mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkObjectTableIndexBufferEntryNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkObjectTableIndexBufferEntryNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkObjectTableIndexBufferEntryNVX callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkObjectTableIndexBufferEntryNVX} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkObjectTableIndexBufferEntryNVX} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -240,7 +240,7 @@ public class VkObjectTableIndexBufferEntryNVX extends Struct implements NativeRe
     }
 
     /**
-     * Returns a new {@link VkObjectTableIndexBufferEntryNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkObjectTableIndexBufferEntryNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -314,7 +314,7 @@ public class VkObjectTableIndexBufferEntryNVX extends Struct implements NativeRe
         private static final VkObjectTableIndexBufferEntryNVX ELEMENT_FACTORY = VkObjectTableIndexBufferEntryNVX.create(-1L);
 
         /**
-         * Creates a new {@link VkObjectTableIndexBufferEntryNVX.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkObjectTableIndexBufferEntryNVX.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

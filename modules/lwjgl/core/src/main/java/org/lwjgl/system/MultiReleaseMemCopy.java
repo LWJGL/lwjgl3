@@ -16,7 +16,7 @@ final class MultiReleaseMemCopy {
         if (bytes < 384) {
             // A custom Java loop is fastest at small sizes, approximately up to 384 bytes.
             if (((int)src & 7) == 0 && ((int)dst & 7) == 0) { // both src and dst must be aligned to 8 bytes
-                memCopyAligned(src, dst, (int)bytes & 0xFFFF_FFFF);
+                memCopyAligned(src, dst, (int)bytes & 0x1FF);
             } else {
                 // Unaligned fallback. Poor performance until Java 10.
                 UNSAFE.copyMemory(src, dst, bytes);

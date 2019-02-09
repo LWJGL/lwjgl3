@@ -85,7 +85,7 @@ public class VkDrawIndirectCommand extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VkDrawIndirectCommand} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkDrawIndirectCommand} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -148,23 +148,23 @@ public class VkDrawIndirectCommand extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDrawIndirectCommand} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDrawIndirectCommand} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDrawIndirectCommand malloc() {
         return wrap(VkDrawIndirectCommand.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkDrawIndirectCommand} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDrawIndirectCommand} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDrawIndirectCommand calloc() {
         return wrap(VkDrawIndirectCommand.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkDrawIndirectCommand} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkDrawIndirectCommand} instance allocated with {@link BufferUtils}. */
     public static VkDrawIndirectCommand create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkDrawIndirectCommand.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkDrawIndirectCommand} instance for the specified memory address. */
+    /** Returns a new {@code VkDrawIndirectCommand} instance for the specified memory address. */
     public static VkDrawIndirectCommand create(long address) {
         return wrap(VkDrawIndirectCommand.class, address);
     }
@@ -221,18 +221,18 @@ public class VkDrawIndirectCommand extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDrawIndirectCommand} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkDrawIndirectCommand} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkDrawIndirectCommand mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkDrawIndirectCommand} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkDrawIndirectCommand} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkDrawIndirectCommand callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkDrawIndirectCommand} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkDrawIndirectCommand} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -241,7 +241,7 @@ public class VkDrawIndirectCommand extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VkDrawIndirectCommand} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkDrawIndirectCommand} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -315,7 +315,7 @@ public class VkDrawIndirectCommand extends Struct implements NativeResource {
         private static final VkDrawIndirectCommand ELEMENT_FACTORY = VkDrawIndirectCommand.create(-1L);
 
         /**
-         * Creates a new {@link VkDrawIndirectCommand.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkDrawIndirectCommand.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

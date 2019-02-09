@@ -60,7 +60,7 @@ public abstract class VkInternalFreeNotification extends Callback implements VkI
         super(SIGNATURE);
     }
 
-    private VkInternalFreeNotification(long functionPointer) {
+    VkInternalFreeNotification(long functionPointer) {
         super(functionPointer);
     }
 

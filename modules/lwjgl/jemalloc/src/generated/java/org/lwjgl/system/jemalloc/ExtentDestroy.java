@@ -56,7 +56,7 @@ public abstract class ExtentDestroy extends Callback implements ExtentDestroyI {
         super(SIGNATURE);
     }
 
-    private ExtentDestroy(long functionPointer) {
+    ExtentDestroy(long functionPointer) {
         super(functionPointer);
     }
 

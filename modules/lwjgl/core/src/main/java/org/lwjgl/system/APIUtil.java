@@ -40,9 +40,8 @@ public final class APIUtil {
      */
     public static final PrintStream DEBUG_STREAM = getDebugStream();
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "resource", "UseOfSystemOutOrSystemErr"})
     private static PrintStream getDebugStream() {
-        @SuppressWarnings("UseOfSystemOutOrSystemErr")
         PrintStream debugStream = System.err;
 
         Object state = Configuration.DEBUG_STREAM.get();
@@ -89,10 +88,10 @@ public final class APIUtil {
         if (url != null) {
             String classURL = url.toString();
             if (classURL.startsWith("jar:")) {
-                try (InputStream stream = new URL(classURL.substring(0, classURL.lastIndexOf("!") + 1) + '/' + JarFile.MANIFEST_NAME).openStream()) {
+                try (InputStream stream = new URL(classURL.substring(0, classURL.lastIndexOf('!') + 1) + '/' + JarFile.MANIFEST_NAME).openStream()) {
                     return Optional.ofNullable(new Manifest(stream).getMainAttributes().getValue(attributeName));
                 } catch (Exception e) {
-                    e.printStackTrace(APIUtil.DEBUG_STREAM);
+                    e.printStackTrace(DEBUG_STREAM);
                 }
             }
         }
@@ -152,7 +151,7 @@ public final class APIUtil {
     }
 
     public static long apiGetBytes(int elements, int elementShift) {
-        return ((long)elements & 0xFFFF_FFFFL) << elementShift;
+        return (elements & 0xFFFF_FFFFL) << elementShift;
     }
 
     public static long apiCheckAllocation(int elements, long bytes, long maxBytes) {
@@ -204,6 +203,32 @@ public final class APIUtil {
                 sb.append(" (").append(implementation).append(')');
             }
             return sb.toString();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof APIVersion)) {
+                return false;
+            }
+
+            APIVersion that = (APIVersion)o;
+
+            return this.major == that.major &&
+                   this.minor == that.major &&
+                   Objects.equals(this.revision, that.revision) &&
+                   Objects.equals(this.implementation, that.implementation);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = major;
+            result = 31 * result + minor;
+            result = 31 * result + (revision != null ? revision.hashCode() : 0);
+            result = 31 * result + (implementation != null ? implementation.hashCode() : 0);
+            return result;
         }
 
         @Override
@@ -305,6 +330,7 @@ public final class APIUtil {
      */
     public static Map<Integer, String> apiClassTokens(@Nullable BiPredicate<Field, Integer> filter, @Nullable Map<Integer, String> target, Class<?>... tokenClasses) {
         if (target == null) {
+            //noinspection AssignmentToMethodParameter
             target = new HashMap<>(64);
         }
 
@@ -482,7 +508,7 @@ public final class APIUtil {
      */
     public static void apiArrayFree(long pointers, int length) {
         for (int i = length; --i >= 0; ) {
-            nmemFree(memGetAddress(pointers + (i << POINTER_SHIFT)));
+            nmemFree(memGetAddress(pointers + Integer.toUnsignedLong(i) * POINTER_SIZE));
         }
     }
 

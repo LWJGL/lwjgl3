@@ -86,7 +86,7 @@ public class NkEditState extends Struct {
     }
 
     /**
-     * Creates a {@link NkEditState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NkEditState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -129,7 +129,7 @@ public class NkEditState extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkEditState} instance for the specified memory address. */
+    /** Returns a new {@code NkEditState} instance for the specified memory address. */
     public static NkEditState create(long address) {
         return wrap(NkEditState.class, address);
     }
@@ -189,7 +189,7 @@ public class NkEditState extends Struct {
         private static final NkEditState ELEMENT_FACTORY = NkEditState.create(-1L);
 
         /**
-         * Creates a new {@link NkEditState.Buffer} instance backed by the specified container.
+         * Creates a new {@code NkEditState.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

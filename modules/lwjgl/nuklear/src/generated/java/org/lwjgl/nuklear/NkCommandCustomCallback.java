@@ -55,7 +55,7 @@ public abstract class NkCommandCustomCallback extends Callback implements NkComm
         super(SIGNATURE);
     }
 
-    private NkCommandCustomCallback(long functionPointer) {
+    NkCommandCustomCallback(long functionPointer) {
         super(functionPointer);
     }
 

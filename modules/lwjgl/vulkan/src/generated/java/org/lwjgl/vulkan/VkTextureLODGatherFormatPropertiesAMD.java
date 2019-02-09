@@ -63,7 +63,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct {
     }
 
     /**
-     * Creates a {@link VkTextureLODGatherFormatPropertiesAMD} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkTextureLODGatherFormatPropertiesAMD} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -115,7 +115,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkTextureLODGatherFormatPropertiesAMD} instance for the specified memory address. */
+    /** Returns a new {@code VkTextureLODGatherFormatPropertiesAMD} instance for the specified memory address. */
     public static VkTextureLODGatherFormatPropertiesAMD create(long address) {
         return wrap(VkTextureLODGatherFormatPropertiesAMD.class, address);
     }
@@ -164,7 +164,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct {
         private static final VkTextureLODGatherFormatPropertiesAMD ELEMENT_FACTORY = VkTextureLODGatherFormatPropertiesAMD.create(-1L);
 
         /**
-         * Creates a new {@link VkTextureLODGatherFormatPropertiesAMD.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkTextureLODGatherFormatPropertiesAMD.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

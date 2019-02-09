@@ -57,7 +57,7 @@ public abstract class GLFWJoystickCallback extends Callback implements GLFWJoyst
         super(SIGNATURE);
     }
 
-    private GLFWJoystickCallback(long functionPointer) {
+    GLFWJoystickCallback(long functionPointer) {
         super(functionPointer);
     }
 

@@ -62,7 +62,7 @@ public abstract class VkFreeFunction extends Callback implements VkFreeFunctionI
         super(SIGNATURE);
     }
 
-    private VkFreeFunction(long functionPointer) {
+    VkFreeFunction(long functionPointer) {
         super(functionPointer);
     }
 

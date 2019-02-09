@@ -53,7 +53,7 @@ public abstract class NkValueGetter extends Callback implements NkValueGetterI {
         super(SIGNATURE);
     }
 
-    private NkValueGetter(long functionPointer) {
+    NkValueGetter(long functionPointer) {
         super(functionPointer);
     }
 

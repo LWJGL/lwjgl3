@@ -56,7 +56,7 @@ public abstract class YGMeasureFunc extends Callback implements YGMeasureFuncI {
         super(SIGNATURE);
     }
 
-    private YGMeasureFunc(long functionPointer) {
+    YGMeasureFunc(long functionPointer) {
         super(functionPointer);
     }
 

@@ -53,7 +53,7 @@ public abstract class LLVMDiagnosticHandler extends Callback implements LLVMDiag
         super(SIGNATURE);
     }
 
-    private LLVMDiagnosticHandler(long functionPointer) {
+    LLVMDiagnosticHandler(long functionPointer) {
         super(functionPointer);
     }
 

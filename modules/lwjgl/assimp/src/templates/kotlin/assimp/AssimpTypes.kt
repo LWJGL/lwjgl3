@@ -624,7 +624,7 @@ val aiMeshMorphKey = struct(Module.ASSIMP, "AIMeshMorphKey", nativeName = "struc
     double("mTime", "the time of this key")
     unsigned_int.p("mValues", "the values at the time of this key")
     double.p("mWeights", "the weights at the time of this key")
-    AutoSize("mValues", "mWeights")..unsigned_int("mNumValuesAndWeights", "the number of values and weights");
+    AutoSize("mValues", "mWeights")..unsigned_int("mNumValuesAndWeights", "the number of values and weights")
 }
 
 val aiAnimBehaviour = "aiAnimBehaviour".enumType

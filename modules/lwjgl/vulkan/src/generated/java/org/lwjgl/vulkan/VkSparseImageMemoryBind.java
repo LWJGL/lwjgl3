@@ -106,7 +106,7 @@ public class VkSparseImageMemoryBind extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VkSparseImageMemoryBind} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkSparseImageMemoryBind} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -186,23 +186,23 @@ public class VkSparseImageMemoryBind extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSparseImageMemoryBind} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSparseImageMemoryBind} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSparseImageMemoryBind malloc() {
         return wrap(VkSparseImageMemoryBind.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkSparseImageMemoryBind} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkSparseImageMemoryBind} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSparseImageMemoryBind calloc() {
         return wrap(VkSparseImageMemoryBind.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkSparseImageMemoryBind} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkSparseImageMemoryBind} instance allocated with {@link BufferUtils}. */
     public static VkSparseImageMemoryBind create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkSparseImageMemoryBind.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkSparseImageMemoryBind} instance for the specified memory address. */
+    /** Returns a new {@code VkSparseImageMemoryBind} instance for the specified memory address. */
     public static VkSparseImageMemoryBind create(long address) {
         return wrap(VkSparseImageMemoryBind.class, address);
     }
@@ -259,18 +259,18 @@ public class VkSparseImageMemoryBind extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkSparseImageMemoryBind} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkSparseImageMemoryBind} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkSparseImageMemoryBind mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkSparseImageMemoryBind} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkSparseImageMemoryBind} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkSparseImageMemoryBind callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkSparseImageMemoryBind} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkSparseImageMemoryBind} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -279,7 +279,7 @@ public class VkSparseImageMemoryBind extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VkSparseImageMemoryBind} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkSparseImageMemoryBind} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -361,7 +361,7 @@ public class VkSparseImageMemoryBind extends Struct implements NativeResource {
         private static final VkSparseImageMemoryBind ELEMENT_FACTORY = VkSparseImageMemoryBind.create(-1L);
 
         /**
-         * Creates a new {@link VkSparseImageMemoryBind.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkSparseImageMemoryBind.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

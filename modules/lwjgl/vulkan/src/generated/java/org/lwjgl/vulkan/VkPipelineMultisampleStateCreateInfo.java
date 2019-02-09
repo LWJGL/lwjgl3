@@ -119,7 +119,7 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
     }
 
     /**
-     * Creates a {@link VkPipelineMultisampleStateCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPipelineMultisampleStateCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -221,23 +221,23 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineMultisampleStateCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineMultisampleStateCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineMultisampleStateCreateInfo malloc() {
         return wrap(VkPipelineMultisampleStateCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineMultisampleStateCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineMultisampleStateCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineMultisampleStateCreateInfo calloc() {
         return wrap(VkPipelineMultisampleStateCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineMultisampleStateCreateInfo} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPipelineMultisampleStateCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkPipelineMultisampleStateCreateInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPipelineMultisampleStateCreateInfo.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPipelineMultisampleStateCreateInfo} instance for the specified memory address. */
+    /** Returns a new {@code VkPipelineMultisampleStateCreateInfo} instance for the specified memory address. */
     public static VkPipelineMultisampleStateCreateInfo create(long address) {
         return wrap(VkPipelineMultisampleStateCreateInfo.class, address);
     }
@@ -294,18 +294,18 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineMultisampleStateCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPipelineMultisampleStateCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPipelineMultisampleStateCreateInfo mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPipelineMultisampleStateCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPipelineMultisampleStateCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPipelineMultisampleStateCreateInfo callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPipelineMultisampleStateCreateInfo} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPipelineMultisampleStateCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -314,7 +314,7 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
     }
 
     /**
-     * Returns a new {@link VkPipelineMultisampleStateCreateInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPipelineMultisampleStateCreateInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -408,7 +408,7 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
         private static final VkPipelineMultisampleStateCreateInfo ELEMENT_FACTORY = VkPipelineMultisampleStateCreateInfo.create(-1L);
 
         /**
-         * Creates a new {@link VkPipelineMultisampleStateCreateInfo.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPipelineMultisampleStateCreateInfo.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

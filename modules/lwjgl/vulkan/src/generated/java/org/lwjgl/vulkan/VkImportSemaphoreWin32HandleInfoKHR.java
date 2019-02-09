@@ -135,7 +135,7 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct implements Nativ
     }
 
     /**
-     * Creates a {@link VkImportSemaphoreWin32HandleInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkImportSemaphoreWin32HandleInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -222,23 +222,23 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct implements Nativ
 
     // -----------------------------------
 
-    /** Returns a new {@link VkImportSemaphoreWin32HandleInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkImportSemaphoreWin32HandleInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImportSemaphoreWin32HandleInfoKHR malloc() {
         return wrap(VkImportSemaphoreWin32HandleInfoKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkImportSemaphoreWin32HandleInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkImportSemaphoreWin32HandleInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImportSemaphoreWin32HandleInfoKHR calloc() {
         return wrap(VkImportSemaphoreWin32HandleInfoKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkImportSemaphoreWin32HandleInfoKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkImportSemaphoreWin32HandleInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkImportSemaphoreWin32HandleInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkImportSemaphoreWin32HandleInfoKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkImportSemaphoreWin32HandleInfoKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkImportSemaphoreWin32HandleInfoKHR} instance for the specified memory address. */
     public static VkImportSemaphoreWin32HandleInfoKHR create(long address) {
         return wrap(VkImportSemaphoreWin32HandleInfoKHR.class, address);
     }
@@ -295,18 +295,18 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct implements Nativ
 
     // -----------------------------------
 
-    /** Returns a new {@link VkImportSemaphoreWin32HandleInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkImportSemaphoreWin32HandleInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkImportSemaphoreWin32HandleInfoKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkImportSemaphoreWin32HandleInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkImportSemaphoreWin32HandleInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkImportSemaphoreWin32HandleInfoKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkImportSemaphoreWin32HandleInfoKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkImportSemaphoreWin32HandleInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -315,7 +315,7 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct implements Nativ
     }
 
     /**
-     * Returns a new {@link VkImportSemaphoreWin32HandleInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkImportSemaphoreWin32HandleInfoKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -416,7 +416,7 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct implements Nativ
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -428,7 +428,7 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct implements Nativ
         private static final VkImportSemaphoreWin32HandleInfoKHR ELEMENT_FACTORY = VkImportSemaphoreWin32HandleInfoKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkImportSemaphoreWin32HandleInfoKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkImportSemaphoreWin32HandleInfoKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

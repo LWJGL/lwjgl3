@@ -58,7 +58,7 @@ public class CXSourceRangeList extends Struct {
     }
 
     /**
-     * Creates a {@link CXSourceRangeList} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code CXSourceRangeList} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -79,7 +79,7 @@ public class CXSourceRangeList extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link CXSourceRangeList} instance for the specified memory address. */
+    /** Returns a new {@code CXSourceRangeList} instance for the specified memory address. */
     public static CXSourceRangeList create(long address) {
         return wrap(CXSourceRangeList.class, address);
     }
@@ -121,7 +121,7 @@ public class CXSourceRangeList extends Struct {
         private static final CXSourceRangeList ELEMENT_FACTORY = CXSourceRangeList.create(-1L);
 
         /**
-         * Creates a new {@link CXSourceRangeList.Buffer} instance backed by the specified container.
+         * Creates a new {@code CXSourceRangeList.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

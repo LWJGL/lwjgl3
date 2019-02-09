@@ -121,8 +121,9 @@ fun main(args: Array<String>) {
     if (args.isEmpty())
         throw IllegalArgumentException("Module root path not specified")
 
-    if (!Files.isDirectory(Paths.get(args[0])))
-            throw IllegalArgumentException("Invalid module root path: ${args[0]}")
+    if (!Files.isDirectory(Paths.get(args[0]))) {
+        throw IllegalArgumentException("Invalid module root path: ${args[0]}")
+    }
 
     Generator(args[0]).apply {
         // We discover templates reflectively.
@@ -144,7 +145,7 @@ fun main(args: Array<String>) {
                     pool.submit {
                         try {
                             this.generateModule(it)
-                        } catch(t: Throwable) {
+                        } catch (t: Throwable) {
                             errors.incrementAndGet()
                             t.printStackTrace()
                         }
@@ -164,7 +165,7 @@ fun main(args: Array<String>) {
                     pool.submit {
                         try {
                             work()
-                        } catch(t: Throwable) {
+                        } catch (t: Throwable) {
                             errors.incrementAndGet()
                             t.printStackTrace()
                         }
@@ -248,8 +249,10 @@ class Generator(private val moduleRoot: String) {
                     javaImport("org.lwjgl.system.*")
                     if (setupAllocator)
                         javaImport("static org.lwjgl.system.MemoryUtil.*")
-                    nativeDirective("""#define LWJGL_MALLOC_LIB $nativeFileNameJNI
-#include "lwjgl_malloc.h"""")
+                    nativeDirective(
+                        """#define LWJGL_MALLOC_LIB $nativeFileNameJNI
+#include "lwjgl_malloc.h""""
+                    )
                 }
 
                 override fun PrintWriter.generateJava() {
@@ -288,7 +291,8 @@ class Generator(private val moduleRoot: String) {
         long aligned_free
     );""" else ""}
 
-}""")
+}"""
+                    )
                 }
 
                 override val skipNative
@@ -307,7 +311,7 @@ class Generator(private val moduleRoot: String) {
     ).fold(0L, ::max)
 
     private fun methodFilter(method: Method, javaClass: Class<*>) =
-        // static
+    // static
         method.modifiers and Modifier.STATIC != 0 &&
         // returns NativeClass
         method.returnType === javaClass &&
@@ -480,10 +484,11 @@ class Generator(private val moduleRoot: String) {
 
 private val moduleLastModifiedMap: MutableMap<Module, Long> = ConcurrentHashMap()
 
-internal val Path.lastModified get() = if (Files.isRegularFile(this))
-    Files.getLastModifiedTime(this).toMillis()
-else
-    0L
+internal val Path.lastModified
+    get() = if (Files.isRegularFile(this))
+        Files.getLastModifiedTime(this).toMillis()
+    else
+        0L
 
 private val KOTLIN_PATH_MATCHER = FileSystems.getDefault().getPathMatcher("glob:**/*.kt")
 
@@ -578,7 +583,8 @@ internal inline fun <T> Array<out T>.forEachWithMore(apply: (T, Boolean) -> Unit
 }
 
 /** Returns true if the collection was empty. */
-internal fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean = this.asSequence().forEachWithMore(moreOverride, apply)
+internal fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean =
+    this.asSequence().forEachWithMore(moreOverride, apply)
 
 /** Returns true if the sequence was empty. */
 internal fun <T> Sequence<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean {

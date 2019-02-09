@@ -128,7 +128,7 @@ public class NSVGShape extends Struct {
     }
 
     /**
-     * Creates a {@link NSVGShape} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NSVGShape} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -194,7 +194,7 @@ public class NSVGShape extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link NSVGShape} instance for the specified memory address. */
+    /** Returns a new {@code NSVGShape} instance for the specified memory address. */
     public static NSVGShape create(long address) {
         return wrap(NSVGShape.class, address);
     }
@@ -274,7 +274,7 @@ public class NSVGShape extends Struct {
         private static final NSVGShape ELEMENT_FACTORY = NSVGShape.create(-1L);
 
         /**
-         * Creates a new {@link NSVGShape.Buffer} instance backed by the specified container.
+         * Creates a new {@code NSVGShape.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

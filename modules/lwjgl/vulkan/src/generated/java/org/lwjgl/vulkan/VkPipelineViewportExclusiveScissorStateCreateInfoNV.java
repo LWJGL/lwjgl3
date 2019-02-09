@@ -94,7 +94,7 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct 
     }
 
     /**
-     * Creates a {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -158,23 +158,23 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct 
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportExclusiveScissorStateCreateInfoNV malloc() {
         return wrap(VkPipelineViewportExclusiveScissorStateCreateInfoNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportExclusiveScissorStateCreateInfoNV calloc() {
         return wrap(VkPipelineViewportExclusiveScissorStateCreateInfoNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkPipelineViewportExclusiveScissorStateCreateInfoNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPipelineViewportExclusiveScissorStateCreateInfoNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance for the specified memory address. */
+    /** Returns a new {@code VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance for the specified memory address. */
     public static VkPipelineViewportExclusiveScissorStateCreateInfoNV create(long address) {
         return wrap(VkPipelineViewportExclusiveScissorStateCreateInfoNV.class, address);
     }
@@ -231,18 +231,18 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct 
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPipelineViewportExclusiveScissorStateCreateInfoNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPipelineViewportExclusiveScissorStateCreateInfoNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -251,7 +251,7 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct 
     }
 
     /**
-     * Returns a new {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPipelineViewportExclusiveScissorStateCreateInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -325,7 +325,7 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct 
         private static final VkPipelineViewportExclusiveScissorStateCreateInfoNV ELEMENT_FACTORY = VkPipelineViewportExclusiveScissorStateCreateInfoNV.create(-1L);
 
         /**
-         * Creates a new {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPipelineViewportExclusiveScissorStateCreateInfoNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

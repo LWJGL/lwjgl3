@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
 public class VkExternalBufferPropertiesKHR extends VkExternalBufferProperties {
 
     /**
-     * Creates a {@link VkExternalBufferPropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkExternalBufferPropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -72,23 +72,23 @@ public class VkExternalBufferPropertiesKHR extends VkExternalBufferProperties {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkExternalBufferPropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkExternalBufferPropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkExternalBufferPropertiesKHR malloc() {
         return wrap(VkExternalBufferPropertiesKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkExternalBufferPropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkExternalBufferPropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkExternalBufferPropertiesKHR calloc() {
         return wrap(VkExternalBufferPropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkExternalBufferPropertiesKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkExternalBufferPropertiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkExternalBufferPropertiesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkExternalBufferPropertiesKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkExternalBufferPropertiesKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkExternalBufferPropertiesKHR} instance for the specified memory address. */
     public static VkExternalBufferPropertiesKHR create(long address) {
         return wrap(VkExternalBufferPropertiesKHR.class, address);
     }
@@ -145,18 +145,18 @@ public class VkExternalBufferPropertiesKHR extends VkExternalBufferProperties {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkExternalBufferPropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkExternalBufferPropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkExternalBufferPropertiesKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkExternalBufferPropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkExternalBufferPropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkExternalBufferPropertiesKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkExternalBufferPropertiesKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkExternalBufferPropertiesKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -165,7 +165,7 @@ public class VkExternalBufferPropertiesKHR extends VkExternalBufferProperties {
     }
 
     /**
-     * Returns a new {@link VkExternalBufferPropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkExternalBufferPropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -219,7 +219,7 @@ public class VkExternalBufferPropertiesKHR extends VkExternalBufferProperties {
         private static final VkExternalBufferPropertiesKHR ELEMENT_FACTORY = VkExternalBufferPropertiesKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkExternalBufferPropertiesKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkExternalBufferPropertiesKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

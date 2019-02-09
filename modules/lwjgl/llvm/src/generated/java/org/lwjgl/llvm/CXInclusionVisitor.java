@@ -55,7 +55,7 @@ public abstract class CXInclusionVisitor extends Callback implements CXInclusion
         super(SIGNATURE);
     }
 
-    private CXInclusionVisitor(long functionPointer) {
+    CXInclusionVisitor(long functionPointer) {
         super(functionPointer);
     }
 

@@ -57,7 +57,7 @@ public abstract class GLFWWindowMaximizeCallback extends Callback implements GLF
         super(SIGNATURE);
     }
 
-    private GLFWWindowMaximizeCallback(long functionPointer) {
+    GLFWWindowMaximizeCallback(long functionPointer) {
         super(functionPointer);
     }
 

@@ -75,7 +75,7 @@ public abstract class VkAllocationFunction extends Callback implements VkAllocat
         super(SIGNATURE);
     }
 
-    private VkAllocationFunction(long functionPointer) {
+    VkAllocationFunction(long functionPointer) {
         super(functionPointer);
     }
 

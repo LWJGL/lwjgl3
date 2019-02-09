@@ -52,7 +52,7 @@ public abstract class AIFileSeek extends Callback implements AIFileSeekI {
         super(SIGNATURE);
     }
 
-    private AIFileSeek(long functionPointer) {
+    AIFileSeek(long functionPointer) {
         super(functionPointer);
     }
 

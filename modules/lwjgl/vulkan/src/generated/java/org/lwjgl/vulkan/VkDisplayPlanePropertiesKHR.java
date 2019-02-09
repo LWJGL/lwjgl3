@@ -60,7 +60,7 @@ public class VkDisplayPlanePropertiesKHR extends Struct implements NativeResourc
     }
 
     /**
-     * Creates a {@link VkDisplayPlanePropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkDisplayPlanePropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -81,23 +81,23 @@ public class VkDisplayPlanePropertiesKHR extends Struct implements NativeResourc
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDisplayPlanePropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDisplayPlanePropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDisplayPlanePropertiesKHR malloc() {
         return wrap(VkDisplayPlanePropertiesKHR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkDisplayPlanePropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkDisplayPlanePropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDisplayPlanePropertiesKHR calloc() {
         return wrap(VkDisplayPlanePropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkDisplayPlanePropertiesKHR} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkDisplayPlanePropertiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkDisplayPlanePropertiesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkDisplayPlanePropertiesKHR.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkDisplayPlanePropertiesKHR} instance for the specified memory address. */
+    /** Returns a new {@code VkDisplayPlanePropertiesKHR} instance for the specified memory address. */
     public static VkDisplayPlanePropertiesKHR create(long address) {
         return wrap(VkDisplayPlanePropertiesKHR.class, address);
     }
@@ -154,18 +154,18 @@ public class VkDisplayPlanePropertiesKHR extends Struct implements NativeResourc
 
     // -----------------------------------
 
-    /** Returns a new {@link VkDisplayPlanePropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkDisplayPlanePropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkDisplayPlanePropertiesKHR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkDisplayPlanePropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkDisplayPlanePropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkDisplayPlanePropertiesKHR callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkDisplayPlanePropertiesKHR} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkDisplayPlanePropertiesKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -174,7 +174,7 @@ public class VkDisplayPlanePropertiesKHR extends Struct implements NativeResourc
     }
 
     /**
-     * Returns a new {@link VkDisplayPlanePropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkDisplayPlanePropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -235,7 +235,7 @@ public class VkDisplayPlanePropertiesKHR extends Struct implements NativeResourc
         private static final VkDisplayPlanePropertiesKHR ELEMENT_FACTORY = VkDisplayPlanePropertiesKHR.create(-1L);
 
         /**
-         * Creates a new {@link VkDisplayPlanePropertiesKHR.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkDisplayPlanePropertiesKHR.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

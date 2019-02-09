@@ -133,7 +133,7 @@ public class VkObjectTableCreateInfoNVX extends Struct implements NativeResource
     }
 
     /**
-     * Creates a {@link VkObjectTableCreateInfoNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkObjectTableCreateInfoNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -245,23 +245,23 @@ public class VkObjectTableCreateInfoNVX extends Struct implements NativeResource
 
     // -----------------------------------
 
-    /** Returns a new {@link VkObjectTableCreateInfoNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkObjectTableCreateInfoNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkObjectTableCreateInfoNVX malloc() {
         return wrap(VkObjectTableCreateInfoNVX.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkObjectTableCreateInfoNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkObjectTableCreateInfoNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkObjectTableCreateInfoNVX calloc() {
         return wrap(VkObjectTableCreateInfoNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkObjectTableCreateInfoNVX} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkObjectTableCreateInfoNVX} instance allocated with {@link BufferUtils}. */
     public static VkObjectTableCreateInfoNVX create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkObjectTableCreateInfoNVX.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkObjectTableCreateInfoNVX} instance for the specified memory address. */
+    /** Returns a new {@code VkObjectTableCreateInfoNVX} instance for the specified memory address. */
     public static VkObjectTableCreateInfoNVX create(long address) {
         return wrap(VkObjectTableCreateInfoNVX.class, address);
     }
@@ -318,18 +318,18 @@ public class VkObjectTableCreateInfoNVX extends Struct implements NativeResource
 
     // -----------------------------------
 
-    /** Returns a new {@link VkObjectTableCreateInfoNVX} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkObjectTableCreateInfoNVX} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkObjectTableCreateInfoNVX mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkObjectTableCreateInfoNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkObjectTableCreateInfoNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkObjectTableCreateInfoNVX callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkObjectTableCreateInfoNVX} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkObjectTableCreateInfoNVX} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -338,7 +338,7 @@ public class VkObjectTableCreateInfoNVX extends Struct implements NativeResource
     }
 
     /**
-     * Returns a new {@link VkObjectTableCreateInfoNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkObjectTableCreateInfoNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -451,7 +451,7 @@ public class VkObjectTableCreateInfoNVX extends Struct implements NativeResource
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -463,7 +463,7 @@ public class VkObjectTableCreateInfoNVX extends Struct implements NativeResource
         private static final VkObjectTableCreateInfoNVX ELEMENT_FACTORY = VkObjectTableCreateInfoNVX.create(-1L);
 
         /**
-         * Creates a new {@link VkObjectTableCreateInfoNVX.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkObjectTableCreateInfoNVX.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

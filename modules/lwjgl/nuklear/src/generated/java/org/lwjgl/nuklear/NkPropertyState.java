@@ -89,7 +89,7 @@ public class NkPropertyState extends Struct {
     }
 
     /**
-     * Creates a {@link NkPropertyState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NkPropertyState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -133,7 +133,7 @@ public class NkPropertyState extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkPropertyState} instance for the specified memory address. */
+    /** Returns a new {@code NkPropertyState} instance for the specified memory address. */
     public static NkPropertyState create(long address) {
         return wrap(NkPropertyState.class, address);
     }
@@ -197,7 +197,7 @@ public class NkPropertyState extends Struct {
         private static final NkPropertyState ELEMENT_FACTORY = NkPropertyState.create(-1L);
 
         /**
-         * Creates a new {@link NkPropertyState.Buffer} instance backed by the specified container.
+         * Creates a new {@code NkPropertyState.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

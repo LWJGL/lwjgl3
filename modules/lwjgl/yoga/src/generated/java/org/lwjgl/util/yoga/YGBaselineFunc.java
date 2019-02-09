@@ -52,7 +52,7 @@ public abstract class YGBaselineFunc extends Callback implements YGBaselineFuncI
         super(SIGNATURE);
     }
 
-    private YGBaselineFunc(long functionPointer) {
+    YGBaselineFunc(long functionPointer) {
         super(functionPointer);
     }
 

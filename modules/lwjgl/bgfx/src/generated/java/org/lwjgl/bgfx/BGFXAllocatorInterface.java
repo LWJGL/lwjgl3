@@ -57,7 +57,7 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link BGFXAllocatorInterface} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code BGFXAllocatorInterface} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -90,23 +90,23 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link BGFXAllocatorInterface} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code BGFXAllocatorInterface} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXAllocatorInterface malloc() {
         return wrap(BGFXAllocatorInterface.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link BGFXAllocatorInterface} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code BGFXAllocatorInterface} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXAllocatorInterface calloc() {
         return wrap(BGFXAllocatorInterface.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link BGFXAllocatorInterface} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code BGFXAllocatorInterface} instance allocated with {@link BufferUtils}. */
     public static BGFXAllocatorInterface create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(BGFXAllocatorInterface.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link BGFXAllocatorInterface} instance for the specified memory address. */
+    /** Returns a new {@code BGFXAllocatorInterface} instance for the specified memory address. */
     public static BGFXAllocatorInterface create(long address) {
         return wrap(BGFXAllocatorInterface.class, address);
     }
@@ -119,18 +119,18 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link BGFXAllocatorInterface} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code BGFXAllocatorInterface} instance allocated on the thread-local {@link MemoryStack}. */
     public static BGFXAllocatorInterface mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link BGFXAllocatorInterface} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code BGFXAllocatorInterface} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static BGFXAllocatorInterface callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link BGFXAllocatorInterface} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code BGFXAllocatorInterface} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -139,7 +139,7 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link BGFXAllocatorInterface} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code BGFXAllocatorInterface} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -174,7 +174,7 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 

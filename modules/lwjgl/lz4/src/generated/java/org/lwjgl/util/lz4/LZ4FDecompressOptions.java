@@ -60,7 +60,7 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link LZ4FDecompressOptions} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code LZ4FDecompressOptions} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -114,23 +114,23 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link LZ4FDecompressOptions} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code LZ4FDecompressOptions} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static LZ4FDecompressOptions malloc() {
         return wrap(LZ4FDecompressOptions.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link LZ4FDecompressOptions} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code LZ4FDecompressOptions} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static LZ4FDecompressOptions calloc() {
         return wrap(LZ4FDecompressOptions.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link LZ4FDecompressOptions} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code LZ4FDecompressOptions} instance allocated with {@link BufferUtils}. */
     public static LZ4FDecompressOptions create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(LZ4FDecompressOptions.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link LZ4FDecompressOptions} instance for the specified memory address. */
+    /** Returns a new {@code LZ4FDecompressOptions} instance for the specified memory address. */
     public static LZ4FDecompressOptions create(long address) {
         return wrap(LZ4FDecompressOptions.class, address);
     }
@@ -187,18 +187,18 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link LZ4FDecompressOptions} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code LZ4FDecompressOptions} instance allocated on the thread-local {@link MemoryStack}. */
     public static LZ4FDecompressOptions mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link LZ4FDecompressOptions} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code LZ4FDecompressOptions} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static LZ4FDecompressOptions callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link LZ4FDecompressOptions} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code LZ4FDecompressOptions} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -207,7 +207,7 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link LZ4FDecompressOptions} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code LZ4FDecompressOptions} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -284,7 +284,7 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
         private static final LZ4FDecompressOptions ELEMENT_FACTORY = LZ4FDecompressOptions.create(-1L);
 
         /**
-         * Creates a new {@link LZ4FDecompressOptions.Buffer} instance backed by the specified container.
+         * Creates a new {@code LZ4FDecompressOptions.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

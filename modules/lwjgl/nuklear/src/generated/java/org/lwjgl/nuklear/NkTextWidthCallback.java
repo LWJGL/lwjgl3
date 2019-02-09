@@ -55,7 +55,7 @@ public abstract class NkTextWidthCallback extends Callback implements NkTextWidt
         super(SIGNATURE);
     }
 
-    private NkTextWidthCallback(long functionPointer) {
+    NkTextWidthCallback(long functionPointer) {
         super(functionPointer);
     }
 

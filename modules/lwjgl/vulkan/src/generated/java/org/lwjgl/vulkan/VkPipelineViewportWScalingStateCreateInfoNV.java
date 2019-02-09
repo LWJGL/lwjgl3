@@ -87,7 +87,7 @@ public class VkPipelineViewportWScalingStateCreateInfoNV extends Struct implemen
     }
 
     /**
-     * Creates a {@link VkPipelineViewportWScalingStateCreateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPipelineViewportWScalingStateCreateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -153,23 +153,23 @@ public class VkPipelineViewportWScalingStateCreateInfoNV extends Struct implemen
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineViewportWScalingStateCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineViewportWScalingStateCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportWScalingStateCreateInfoNV malloc() {
         return wrap(VkPipelineViewportWScalingStateCreateInfoNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineViewportWScalingStateCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineViewportWScalingStateCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportWScalingStateCreateInfoNV calloc() {
         return wrap(VkPipelineViewportWScalingStateCreateInfoNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineViewportWScalingStateCreateInfoNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPipelineViewportWScalingStateCreateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkPipelineViewportWScalingStateCreateInfoNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPipelineViewportWScalingStateCreateInfoNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPipelineViewportWScalingStateCreateInfoNV} instance for the specified memory address. */
+    /** Returns a new {@code VkPipelineViewportWScalingStateCreateInfoNV} instance for the specified memory address. */
     public static VkPipelineViewportWScalingStateCreateInfoNV create(long address) {
         return wrap(VkPipelineViewportWScalingStateCreateInfoNV.class, address);
     }
@@ -226,18 +226,18 @@ public class VkPipelineViewportWScalingStateCreateInfoNV extends Struct implemen
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineViewportWScalingStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPipelineViewportWScalingStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPipelineViewportWScalingStateCreateInfoNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPipelineViewportWScalingStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPipelineViewportWScalingStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPipelineViewportWScalingStateCreateInfoNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPipelineViewportWScalingStateCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPipelineViewportWScalingStateCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -246,7 +246,7 @@ public class VkPipelineViewportWScalingStateCreateInfoNV extends Struct implemen
     }
 
     /**
-     * Returns a new {@link VkPipelineViewportWScalingStateCreateInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPipelineViewportWScalingStateCreateInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -333,7 +333,7 @@ public class VkPipelineViewportWScalingStateCreateInfoNV extends Struct implemen
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -345,7 +345,7 @@ public class VkPipelineViewportWScalingStateCreateInfoNV extends Struct implemen
         private static final VkPipelineViewportWScalingStateCreateInfoNV ELEMENT_FACTORY = VkPipelineViewportWScalingStateCreateInfoNV.create(-1L);
 
         /**
-         * Creates a new {@link VkPipelineViewportWScalingStateCreateInfoNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPipelineViewportWScalingStateCreateInfoNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

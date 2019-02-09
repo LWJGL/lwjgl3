@@ -50,7 +50,7 @@ class NkConfigStackVec2Element extends Struct {
     }
 
     /**
-     * Creates a {@link NkConfigStackVec2Element} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code NkConfigStackVec2Element} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -73,7 +73,7 @@ class NkConfigStackVec2Element extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link NkConfigStackVec2Element} instance for the specified memory address. */
+    /** Returns a new {@code NkConfigStackVec2Element} instance for the specified memory address. */
     public static NkConfigStackVec2Element create(long address) {
         return wrap(NkConfigStackVec2Element.class, address);
     }
@@ -115,7 +115,7 @@ class NkConfigStackVec2Element extends Struct {
         private static final NkConfigStackVec2Element ELEMENT_FACTORY = NkConfigStackVec2Element.create(-1L);
 
         /**
-         * Creates a new {@link NkConfigStackVec2Element.Buffer} instance backed by the specified container.
+         * Creates a new {@code NkConfigStackVec2Element.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

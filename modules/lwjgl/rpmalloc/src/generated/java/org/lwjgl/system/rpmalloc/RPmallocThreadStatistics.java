@@ -79,7 +79,7 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link RPmallocThreadStatistics} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code RPmallocThreadStatistics} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -112,23 +112,23 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link RPmallocThreadStatistics} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code RPmallocThreadStatistics} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static RPmallocThreadStatistics malloc() {
         return wrap(RPmallocThreadStatistics.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link RPmallocThreadStatistics} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code RPmallocThreadStatistics} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static RPmallocThreadStatistics calloc() {
         return wrap(RPmallocThreadStatistics.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link RPmallocThreadStatistics} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code RPmallocThreadStatistics} instance allocated with {@link BufferUtils}. */
     public static RPmallocThreadStatistics create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(RPmallocThreadStatistics.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link RPmallocThreadStatistics} instance for the specified memory address. */
+    /** Returns a new {@code RPmallocThreadStatistics} instance for the specified memory address. */
     public static RPmallocThreadStatistics create(long address) {
         return wrap(RPmallocThreadStatistics.class, address);
     }
@@ -185,18 +185,18 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link RPmallocThreadStatistics} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code RPmallocThreadStatistics} instance allocated on the thread-local {@link MemoryStack}. */
     public static RPmallocThreadStatistics mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link RPmallocThreadStatistics} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code RPmallocThreadStatistics} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static RPmallocThreadStatistics callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link RPmallocThreadStatistics} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code RPmallocThreadStatistics} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -205,7 +205,7 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link RPmallocThreadStatistics} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code RPmallocThreadStatistics} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -274,7 +274,7 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
         private static final RPmallocThreadStatistics ELEMENT_FACTORY = RPmallocThreadStatistics.create(-1L);
 
         /**
-         * Creates a new {@link RPmallocThreadStatistics.Buffer} instance backed by the specified container.
+         * Creates a new {@code RPmallocThreadStatistics.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

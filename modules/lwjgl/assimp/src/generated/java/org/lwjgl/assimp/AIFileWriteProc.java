@@ -53,7 +53,7 @@ public abstract class AIFileWriteProc extends Callback implements AIFileWritePro
         super(SIGNATURE);
     }
 
-    private AIFileWriteProc(long functionPointer) {
+    AIFileWriteProc(long functionPointer) {
         super(functionPointer);
     }
 

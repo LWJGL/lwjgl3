@@ -46,13 +46,6 @@ JNIEXPORT jdouble JNICALL Java_org_lwjgl_system_JNI_invokePPD__JJJ(JNIEnv *__env
     UNUSED_PARAMS(__env, clazz)
     return JavaCritical_org_lwjgl_system_JNI_invokePPD__JJJ(param0, param1, __functionAddress);
 }
-JNIEXPORT jfloat JNICALL JavaCritical_org_lwjgl_system_JNI_invokeF__FJ(jfloat param0, jlong __functionAddress) {
-    return ((jfloat (*) (jfloat))(intptr_t)__functionAddress)(param0);
-}
-JNIEXPORT jfloat JNICALL Java_org_lwjgl_system_JNI_invokeF__FJ(JNIEnv *__env, jclass clazz, jfloat param0, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_JNI_invokeF__FJ(param0, __functionAddress);
-}
 JNIEXPORT jfloat JNICALL JavaCritical_org_lwjgl_system_JNI_invokeF__IJ(jint param0, jlong __functionAddress) {
     return ((jfloat (*) (jint))(intptr_t)__functionAddress)(param0);
 }
@@ -445,13 +438,6 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_JNI_invokeJ__J(JNIEnv *__env, jcla
     UNUSED_PARAMS(__env, clazz)
     return JavaCritical_org_lwjgl_system_JNI_invokeJ__J(__functionAddress);
 }
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokeJJ__JJ(jlong param0, jlong __functionAddress) {
-    return ((jlong (*) (jlong))(intptr_t)__functionAddress)(param0);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_JNI_invokeJJ__JJ(JNIEnv *__env, jclass clazz, jlong param0, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_JNI_invokeJJ__JJ(param0, __functionAddress);
-}
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokePJ__JJ(jlong param0, jlong __functionAddress) {
     return ((jlong (*) (intptr_t))(intptr_t)__functionAddress)((intptr_t)param0);
 }
@@ -473,13 +459,6 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_JNI_invokePJ__JFIFIJ(JNIEnv *__env
     UNUSED_PARAMS(__env, clazz)
     return CRITICAL(org_lwjgl_system_JNI_invokePJ__JFIFIJ)(param0, param1, param2, param3, param4, __functionAddress);
 }
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokeJJJ__JJJ(jlong param0, jlong param1, jlong __functionAddress) {
-    return ((jlong (*) (jlong, jlong))(intptr_t)__functionAddress)(param0, param1);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_JNI_invokeJJJ__JJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_JNI_invokeJJJ__JJJ(param0, param1, __functionAddress);
-}
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokePPJ__JJJ(jlong param0, jlong param1, jlong __functionAddress) {
     return ((jlong (*) (intptr_t, intptr_t))(intptr_t)__functionAddress)((intptr_t)param0, (intptr_t)param1);
 }
@@ -493,20 +472,6 @@ JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokePPJ__JJIJ(jlong 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_JNI_invokePPJ__JJIJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jint param2, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     return JavaCritical_org_lwjgl_system_JNI_invokePPJ__JJIJ(param0, param1, param2, __functionAddress);
-}
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokeJJJJ__JJJJ(jlong param0, jlong param1, jlong param2, jlong __functionAddress) {
-    return ((jlong (*) (jlong, jlong, jlong))(intptr_t)__functionAddress)(param0, param1, param2);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_JNI_invokeJJJJ__JJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_JNI_invokeJJJJ__JJJJ(param0, param1, param2, __functionAddress);
-}
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokeJJJJJ__JJJJJ(jlong param0, jlong param1, jlong param2, jlong param3, jlong __functionAddress) {
-    return ((jlong (*) (jlong, jlong, jlong, jlong))(intptr_t)__functionAddress)(param0, param1, param2, param3);
-}
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_JNI_invokeJJJJJ__JJJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong param3, jlong __functionAddress) {
-    UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_JNI_invokeJJJJJ__JJJJJ(param0, param1, param2, param3, __functionAddress);
 }
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_JNI_invokeP__J(jlong __functionAddress) {
     return (jlong)((intptr_t (*) ())(intptr_t)__functionAddress)();

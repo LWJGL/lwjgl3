@@ -58,7 +58,7 @@ public abstract class GLFWWindowContentScaleCallback extends Callback implements
         super(SIGNATURE);
     }
 
-    private GLFWWindowContentScaleCallback(long functionPointer) {
+    GLFWWindowContentScaleCallback(long functionPointer) {
         super(functionPointer);
     }
 

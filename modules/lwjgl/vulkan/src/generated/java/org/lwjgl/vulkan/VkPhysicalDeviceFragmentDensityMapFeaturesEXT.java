@@ -81,7 +81,7 @@ public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct {
     }
 
     /**
-     * Creates a {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -139,7 +139,7 @@ public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance for the specified memory address. */
+    /** Returns a new {@code VkPhysicalDeviceFragmentDensityMapFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceFragmentDensityMapFeaturesEXT create(long address) {
         return wrap(VkPhysicalDeviceFragmentDensityMapFeaturesEXT.class, address);
     }
@@ -192,7 +192,7 @@ public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct {
         private static final VkPhysicalDeviceFragmentDensityMapFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceFragmentDensityMapFeaturesEXT.create(-1L);
 
         /**
-         * Creates a new {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

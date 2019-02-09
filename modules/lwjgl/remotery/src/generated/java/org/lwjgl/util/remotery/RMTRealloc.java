@@ -52,7 +52,7 @@ public abstract class RMTRealloc extends Callback implements RMTReallocI {
         super(SIGNATURE);
     }
 
-    private RMTRealloc(long functionPointer) {
+    RMTRealloc(long functionPointer) {
         super(functionPointer);
     }
 

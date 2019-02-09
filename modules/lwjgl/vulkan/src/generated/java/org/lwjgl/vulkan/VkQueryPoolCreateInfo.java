@@ -104,7 +104,7 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link VkQueryPoolCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkQueryPoolCreateInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -181,23 +181,23 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkQueryPoolCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkQueryPoolCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkQueryPoolCreateInfo malloc() {
         return wrap(VkQueryPoolCreateInfo.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkQueryPoolCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkQueryPoolCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkQueryPoolCreateInfo calloc() {
         return wrap(VkQueryPoolCreateInfo.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkQueryPoolCreateInfo} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkQueryPoolCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkQueryPoolCreateInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkQueryPoolCreateInfo.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkQueryPoolCreateInfo} instance for the specified memory address. */
+    /** Returns a new {@code VkQueryPoolCreateInfo} instance for the specified memory address. */
     public static VkQueryPoolCreateInfo create(long address) {
         return wrap(VkQueryPoolCreateInfo.class, address);
     }
@@ -254,18 +254,18 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link VkQueryPoolCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkQueryPoolCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkQueryPoolCreateInfo mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkQueryPoolCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkQueryPoolCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkQueryPoolCreateInfo callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkQueryPoolCreateInfo} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkQueryPoolCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -274,7 +274,7 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link VkQueryPoolCreateInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkQueryPoolCreateInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -356,7 +356,7 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
         private static final VkQueryPoolCreateInfo ELEMENT_FACTORY = VkQueryPoolCreateInfo.create(-1L);
 
         /**
-         * Creates a new {@link VkQueryPoolCreateInfo.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkQueryPoolCreateInfo.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

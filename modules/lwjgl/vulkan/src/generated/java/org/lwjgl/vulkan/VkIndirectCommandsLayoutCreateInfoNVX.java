@@ -129,7 +129,7 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
     }
 
     /**
-     * Creates a {@link VkIndirectCommandsLayoutCreateInfoNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkIndirectCommandsLayoutCreateInfoNVX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -202,23 +202,23 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
 
     // -----------------------------------
 
-    /** Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkIndirectCommandsLayoutCreateInfoNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkIndirectCommandsLayoutCreateInfoNVX malloc() {
         return wrap(VkIndirectCommandsLayoutCreateInfoNVX.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkIndirectCommandsLayoutCreateInfoNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkIndirectCommandsLayoutCreateInfoNVX calloc() {
         return wrap(VkIndirectCommandsLayoutCreateInfoNVX.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkIndirectCommandsLayoutCreateInfoNVX} instance allocated with {@link BufferUtils}. */
     public static VkIndirectCommandsLayoutCreateInfoNVX create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkIndirectCommandsLayoutCreateInfoNVX.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance for the specified memory address. */
+    /** Returns a new {@code VkIndirectCommandsLayoutCreateInfoNVX} instance for the specified memory address. */
     public static VkIndirectCommandsLayoutCreateInfoNVX create(long address) {
         return wrap(VkIndirectCommandsLayoutCreateInfoNVX.class, address);
     }
@@ -275,18 +275,18 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
 
     // -----------------------------------
 
-    /** Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkIndirectCommandsLayoutCreateInfoNVX} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkIndirectCommandsLayoutCreateInfoNVX mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkIndirectCommandsLayoutCreateInfoNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkIndirectCommandsLayoutCreateInfoNVX callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkIndirectCommandsLayoutCreateInfoNVX} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -295,7 +295,7 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
     }
 
     /**
-     * Returns a new {@link VkIndirectCommandsLayoutCreateInfoNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkIndirectCommandsLayoutCreateInfoNVX} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -386,7 +386,7 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -398,7 +398,7 @@ public class VkIndirectCommandsLayoutCreateInfoNVX extends Struct implements Nat
         private static final VkIndirectCommandsLayoutCreateInfoNVX ELEMENT_FACTORY = VkIndirectCommandsLayoutCreateInfoNVX.create(-1L);
 
         /**
-         * Creates a new {@link VkIndirectCommandsLayoutCreateInfoNVX.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkIndirectCommandsLayoutCreateInfoNVX.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

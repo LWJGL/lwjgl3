@@ -66,7 +66,7 @@ public abstract class VkDebugUtilsMessengerCallbackEXT extends Callback implemen
         super(SIGNATURE);
     }
 
-    private VkDebugUtilsMessengerCallbackEXT(long functionPointer) {
+    VkDebugUtilsMessengerCallbackEXT(long functionPointer) {
         super(functionPointer);
     }
 

@@ -73,7 +73,7 @@ public class EXRVersion extends Struct implements NativeResource {
     }
 
     /**
-     * Creates a {@link EXRVersion} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code EXRVersion} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -142,23 +142,23 @@ public class EXRVersion extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link EXRVersion} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code EXRVersion} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static EXRVersion malloc() {
         return wrap(EXRVersion.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link EXRVersion} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code EXRVersion} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static EXRVersion calloc() {
         return wrap(EXRVersion.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link EXRVersion} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code EXRVersion} instance allocated with {@link BufferUtils}. */
     public static EXRVersion create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(EXRVersion.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link EXRVersion} instance for the specified memory address. */
+    /** Returns a new {@code EXRVersion} instance for the specified memory address. */
     public static EXRVersion create(long address) {
         return wrap(EXRVersion.class, address);
     }
@@ -215,18 +215,18 @@ public class EXRVersion extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@link EXRVersion} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code EXRVersion} instance allocated on the thread-local {@link MemoryStack}. */
     public static EXRVersion mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link EXRVersion} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code EXRVersion} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static EXRVersion callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link EXRVersion} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code EXRVersion} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -235,7 +235,7 @@ public class EXRVersion extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link EXRVersion} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code EXRVersion} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -313,7 +313,7 @@ public class EXRVersion extends Struct implements NativeResource {
         private static final EXRVersion ELEMENT_FACTORY = EXRVersion.create(-1L);
 
         /**
-         * Creates a new {@link EXRVersion.Buffer} instance backed by the specified container.
+         * Creates a new {@code EXRVersion.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided

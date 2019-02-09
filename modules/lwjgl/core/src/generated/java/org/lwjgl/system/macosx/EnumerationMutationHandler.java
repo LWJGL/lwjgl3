@@ -52,7 +52,7 @@ public abstract class EnumerationMutationHandler extends Callback implements Enu
         super(SIGNATURE);
     }
 
-    private EnumerationMutationHandler(long functionPointer) {
+    EnumerationMutationHandler(long functionPointer) {
         super(functionPointer);
     }
 

@@ -103,7 +103,7 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
     }
 
     /**
-     * Creates a {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
@@ -170,23 +170,23 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportCoarseSampleOrderStateCreateInfoNV malloc() {
         return wrap(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportCoarseSampleOrderStateCreateInfoNV calloc() {
         return wrap(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated with {@link BufferUtils}. */
+    /** Returns a new {@code VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkPipelineViewportCoarseSampleOrderStateCreateInfoNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.class, memAddress(container), container);
     }
 
-    /** Returns a new {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance for the specified memory address. */
+    /** Returns a new {@code VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance for the specified memory address. */
     public static VkPipelineViewportCoarseSampleOrderStateCreateInfoNV create(long address) {
         return wrap(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.class, address);
     }
@@ -243,18 +243,18 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
 
     // -----------------------------------
 
-    /** Returns a new {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
+    /** Returns a new {@code VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
     public static VkPipelineViewportCoarseSampleOrderStateCreateInfoNV mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /** Returns a new {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    /** Returns a new {@code VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static VkPipelineViewportCoarseSampleOrderStateCreateInfoNV callocStack() {
         return callocStack(stackGet());
     }
 
     /**
-     * Returns a new {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
@@ -263,7 +263,7 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
     }
 
     /**
-     * Returns a new {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
@@ -355,7 +355,7 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
      */
     public static void validate(long array, int count) {
         for (int i = 0; i < count; i++) {
-            validate(array + i * SIZEOF);
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 
@@ -367,7 +367,7 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
         private static final VkPipelineViewportCoarseSampleOrderStateCreateInfoNV ELEMENT_FACTORY = VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.create(-1L);
 
         /**
-         * Creates a new {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.Buffer} instance backed by the specified container.
+         * Creates a new {@code VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
