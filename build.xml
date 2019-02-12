@@ -853,11 +853,29 @@
         </apply>
     </target>
 
+    <macrodef name="get-release-offline">
+        <attribute name="url"/>
+
+        <sequential>
+            <local name="base"/>
+            <basename file="@{url}" property="base"/>
+
+            <local name="available"/>
+            <available file="${lib}/${base}" property="available"/>
+
+            <echo message="release: ${lib}${file.separator}${base} is missing" level="warning" unless:set="available"/>
+            <quiet if:set="available">
+                <copy file="${lib}/${base}" todir="${release}/${module}/native"/>
+            </quiet>
+        </sequential>
+    </macrodef>
+
     <macrodef name="get-release">
         <attribute name="url"/>
 
         <sequential>
-            <get src="https://build.lwjgl.org/${build.type}/@{url}" dest="${release}/${module}/native" verbose="false" usetimestamp="true"/>
+            <get src="https://build.lwjgl.org/${build.type}/@{url}" dest="${release}/${module}/native" verbose="false" usetimestamp="true" unless:true="${build.offline}"/>
+            <get-release-offline url="@{url}" if:true="${build.offline}"/>
         </sequential>
     </macrodef>
 
@@ -908,7 +926,9 @@
         <attribute name="native-library"/>
         <element name="content" optional="true" implicit="true"/>
         <sequential>
-            <mkdir dir="${release}/${module}/native"/>
+            <quiet>
+                <mkdir dir="${release}/${module}/native"/>
+            </quiet>
 
             <local name="auto-natives"/>
             <condition property="auto-natives">
@@ -938,7 +958,21 @@
                 <content/>
             </parallel>
 
-            <checksum algorithm="SHA-1" fileext=".sha1">
+            <local name="checksum.skip"/>
+            <condition property="checksum.skip">
+                <and>
+                    <istrue value="${build.offline}"/>
+                    <resourcecount when="eq" count="0">
+                        <fileset dir="${release}/${module}/native">
+                            <include name="*.dll"/>
+                            <include name="*.dylib"/>
+                            <include name="*.so"/>
+                        </fileset>
+                    </resourcecount>
+                </and>
+            </condition>
+
+            <checksum algorithm="SHA-1" fileext=".sha1" unless:set="checksum.skip">
                 <fileset dir="${release}/${module}/native">
                     <include name="*.dll"/>
                     <include name="*.dylib"/>
@@ -982,12 +1016,15 @@
                 <fileset dir="${release}/${module}/native" includes="*.sha1" unless:set="java-only.binding.@{name}"/>
                 <fileset dir="${bin.lwjgl}/@{name}" includes="**"/>
             </lwjgl-jar>
-            <delete dir="${release}/${module}/native" unless:set="java-only.binding.@{name}"/>
+            <quiet>
+                <delete dir="${release}/${module}/native" unless:set="java-only.binding.@{name}"/>
+            </quiet>
 
             <local name="hasMain"/>
             <available file="${module.lwjgl}/@{name}/src/main/java" type="dir" property="hasMain"/>
 
             <!-- Bundle javadoc -->
+            <!-- This is slow, comment out the following section for fast local builds -->
             <mkdir dir="${release}/${module}/javadoc"/>
             <javadoc
                 destdir="${release}/${module}/javadoc"
@@ -1033,22 +1070,28 @@
             <delete dir="${release}/${module}/javadoc"/>
 
             <!-- Bundle source -->
-            <copy
-                file ="${module.lwjgl}/@{name}/src/main/resources/module-info.java"
-                todir="${module.lwjgl}/@{name}/src/generated/java/META-INF/versions/9"
-                quiet="true"
-                if:set="jdk9"
-            />
+            <quiet>
+                <copy
+                    file ="${module.lwjgl}/@{name}/src/main/resources/module-info.java"
+                    todir="${module.lwjgl}/@{name}/src/generated/java/META-INF/versions/9"
+                    quiet="true"
+                    if:set="jdk9"
+                />
+            </quiet>
             <jar destfile="${release}/${module}/${module}-sources.jar" level="9">
                 <fileset dir="${module.lwjgl}/@{name}/src/main/java" includes="**" if:set="hasMain"/>
                 <fileset dir="${module.lwjgl}/@{name}/src/generated/java" includes="**"/>
             </jar>
-            <delete dir="${module.lwjgl}/@{name}/src/generated/java/META-INF" quiet="true"/>
+            <quiet>
+                <delete dir="${module.lwjgl}/@{name}/src/generated/java/META-INF" quiet="true"/>
+            </quiet>
 
             <!-- Copy license -->
-            <copy todir="${release}/${module}">
-                <fileset dir="${module.lwjgl}/@{name}" includes="@{license}*"/>
-            </copy>
+            <quiet>
+                <copy todir="${release}/${module}">
+                    <fileset dir="${module.lwjgl}/@{name}" includes="@{license}*"/>
+                </copy>
+            </quiet>
         </sequential>
     </macrodef>
 
@@ -1072,8 +1115,12 @@
                 <equals arg1="n" arg2="${input}"/>
             </condition>
         </fail>
+
+        <!-- cleanup in case there was an earlier "release" failure -->
+        <delete dir="${module.lwjgl}/core/src/generated/java/META-INF"/>
     </target>
 
+    <!-- Set the LWJGL_BUILD_OFFLINE=true environment variable for local builds. -->
     <target name="release" depends="-check-release-jdk,clean-java,compile,-build-version">
         <local name="revision"/>
         <condition property="revision" value="build ${build.revision}" else="SNAPSHOT">
@@ -1084,7 +1131,9 @@
         <mkdir dir="${release}"/>
 
         <!-- Copy license -->
-        <copy file="LICENSE.md" tofile="${release}/LICENSE"/>
+        <quiet>
+            <copy file="LICENSE.md" tofile="${release}/LICENSE"/>
+        </quiet>
 
         <!-- Generate build.txt -->
         <echo file="${release}/build.txt" if:set="build.revision">LWJGL ${build.version} ${revision}</echo>
@@ -1105,12 +1154,14 @@
         <parallel threadcount="4" failonany="true">
 
         <!-- CORE -->
-        <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/9" if:set="jdk9">
-            <fileset dir="${module.lwjgl}/core/src/main/java9" includes="**"/>
-        </copy>
-        <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/10" if:set="jdk10">
-            <fileset dir="${module.lwjgl}/core/src/main/java10" includes="**"/>
-        </copy>
+        <quiet>
+            <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/9" if:set="jdk9">
+                <fileset dir="${module.lwjgl}/core/src/main/java9" includes="**"/>
+            </copy>
+            <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/10" if:set="jdk10">
+                <fileset dir="${module.lwjgl}/core/src/main/java10" includes="**"/>
+            </copy>
+        </quiet>
         <release-module package="org.lwjgl" name="core" native-library="lwjgl" license="dyncall" title="Core"/>
 
         <!-- Assimp -->

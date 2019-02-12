@@ -25,14 +25,14 @@ class Deployment {
 }
 
 Deployment deployment
-if ( hasProperty("release") ) {
+if (hasProperty("release")) {
     deployment = new Deployment(
         type: BuildType.RELEASE,
         repo: "https://oss.sonatype.org/service/local/staging/deploy/maven2/",
         user: sonatypeUsername,
         password: sonatypePassword
     )
-} else if ( hasProperty("snapshot") ) {
+} else if (hasProperty("snapshot")) {
     project.version += "-SNAPSHOT"
     deployment = new Deployment(
         type: BuildType.SNAPSHOT,
@@ -41,6 +41,7 @@ if ( hasProperty("release") ) {
         password: sonatypePassword
     )
 } else {
+    //project.version += "-LOCAL"
     deployment = new Deployment(
         type: BuildType.LOCAL,
         repo: repositories.mavenLocal().url
@@ -279,11 +280,14 @@ enum Artifacts {
         return new File(directory("bin/RELEASE")).exists()
     }
 
-    Map<String, Object> artifactNotation(String classifier = null) {
-        if ( classifier == null )
-            return [file: new File("${path()}.jar"), name: artifact, type: "jar"]
-        else
-            return [file: new File("${path()}-${classifier}.jar"), name: artifact, type: "jar", classifier: classifier]
+    boolean hasArtifact(String classifier) {
+        return new File("${directory("bin/RELEASE")}/${artifact}-${classifier}.jar" as String).exists()
+    }
+
+    Map<String, ? extends Object> artifactNotation(String classifier = null) {
+        return classifier == null
+            ? [file: new File("${path()}.jar" as String), name: artifact, type: "jar"]
+            : [file: new File("${path()}-${classifier}.jar" as String), name: artifact, type: "jar", classifier: classifier]
     }
 }
 
@@ -324,12 +328,18 @@ artifacts {
     is going to alleviate the pain.
      */
     Artifacts.values().each { module ->
-        if ( module.active() ) {
+        if (module.active()) {
             archives module.artifactNotation()
-            archives module.artifactNotation("sources")
-            archives module.artifactNotation("javadoc")
+            if (deployment.type != BuildType.LOCAL || module.hasArtifact("sources")) {
+                archives module.artifactNotation("sources")
+            }
+            if (deployment.type != BuildType.LOCAL || module.hasArtifact("javadoc")) {
+                archives module.artifactNotation("javadoc")
+            }
             module.platforms.each {
-                archives module.artifactNotation("natives-${it.name}")
+                if (deployment.type != BuildType.LOCAL || module.hasArtifact("natives-${it.name}")) {
+                    archives module.artifactNotation("natives-${it.name}")
+                }
             }
         }
     }
