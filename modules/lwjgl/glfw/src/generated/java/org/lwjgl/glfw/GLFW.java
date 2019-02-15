@@ -424,7 +424,7 @@ public class GLFW {
      * {@code WindowHint}: specifies whether the window framebuffer will be transparent. If enabled and supported by the system, the window framebuffer
      * alpha channel will be used to combine the framebuffer with the background. This does not affect window decorations.
      * </li>
-     * <li>{@link #GLFW_HOVERED HOVERED} - {@code GetWindowAttrib}: indicates whether the cursor is currently directly over the client area of the window, with no other windows between.</li>
+     * <li>{@link #GLFW_HOVERED HOVERED} - {@code GetWindowAttrib}: indicates whether the cursor is currently directly over the content area of the window, with no other windows between.</li>
      * <li>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW} - 
      * {@code WindowHint}: specifies whether input focuses on calling show window.
      * 
@@ -1381,8 +1381,10 @@ public class GLFW {
     // --- [ glfwSetGamma ] ---
 
     /**
-     * Generates a 256-element gamma ramp from the specified exponent and then calls {@link #glfwSetGammaRamp SetGammaRamp} with it. The value must be a finite number greater than
-     * zero.
+     * Generates a gamma ramp and sets it for the specified monitor.
+     * 
+     * <p>This function generates an appropriately sized gamma ramp from the specified exponent and then calls {@link #glfwSetGammaRamp SetGammaRamp} with it. The value must be a
+     * finite number greater than zero.</p>
      * 
      * <p>The software controlled gamma ramp is applied <em>in addition</em> to the hardware gamma correction, which today is usually an approximation of sRGB
      * gamma. This means that setting a perfectly linear ramp, or gamma 1.0, will produce the default (usually sRGB-like) behavior.</p>
@@ -1460,8 +1462,10 @@ public class GLFW {
     }
 
     /**
-     * Sets the current gamma ramp for the specified monitor. The original gamma ramp for that monitor is saved by GLFW the first time this function is called
-     * and is restored by {@link #glfwTerminate Terminate}.
+     * Sets the current gamma ramp for the specified monitor.
+     * 
+     * <p>This function sets the current gamma ramp for the specified monitor. The original gamma ramp for that monitor is saved by GLFW the first time this
+     * function is called and is restored by {@link #glfwTerminate Terminate}.</p>
      * 
      * <p>The software controlled gamma ramp is applied <em>in addition</em> to the hardware gamma correction, which today is usually an approximation of sRGB
      * gamma. This means that setting a perfectly linear ramp, or gamma 1.0, will produce the default (usually sRGB-like) behavior.</p>
@@ -1472,7 +1476,7 @@ public class GLFW {
      * 
      * <ul>
      * <li>This function must only be called from the main thread.</li>
-     * <li>Gamma ramp sizes other than 256 are not supported by all hardware</li>
+     * <li>The size of the specified gamma ramp should match the size of the current ramp for that monitor.</li>
      * <li><b>Windows</b>: The gamma ramp size must be 256.</li>
      * <li><b>Wayland</b>: Gamma handling is a privileged protocol, this function will thus never be implemented and emits {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR}.</li>
      * <li>The specified gamma ramp is copied before this function returns.</li>
@@ -2030,7 +2034,7 @@ public class GLFW {
     }
 
     /**
-     * Retrieves the position, in screen coordinates, of the upper-left corner of the client area of the specified window.
+     * Retrieves the position, in screen coordinates, of the upper-left corner of the content area of the specified window.
      * 
      * <p>Any or all of the position arguments may be {@code NULL}. If an error occurs, all non-{@code NULL} position arguments will be set to zero.</p>
      * 
@@ -2042,8 +2046,8 @@ public class GLFW {
      * </ul>
      *
      * @param window the window to query
-     * @param xpos   where to store the x-coordinate of the upper-left corner of the client area, or {@code NULL}
-     * @param ypos   where to store the y-coordinate of the upper-left corner of the client area, or {@code NULL}
+     * @param xpos   where to store the x-coordinate of the upper-left corner of the content area, or {@code NULL}
+     * @param ypos   where to store the y-coordinate of the upper-left corner of the content area, or {@code NULL}
      *
      * @since version 3.0
      */
@@ -2058,7 +2062,7 @@ public class GLFW {
     // --- [ glfwSetWindowPos ] ---
 
     /**
-     * Sets the position, in screen coordinates, of the upper-left corner of the client area of the specified windowed mode window. If the window is a full
+     * Sets the position, in screen coordinates, of the upper-left corner of the content area of the specified windowed mode window. If the window is a full
      * screen window, this function does nothing.
      * 
      * <p><b>Do not use this function</b> to move an already visible window unless you have very good reasons for doing so, as it will confuse and annoy the
@@ -2074,8 +2078,8 @@ public class GLFW {
      * </ul>
      *
      * @param window the window to query
-     * @param xpos   the x-coordinate of the upper-left corner of the client area
-     * @param ypos   the y-coordinate of the upper-left corner of the client area
+     * @param xpos   the x-coordinate of the upper-left corner of the content area
+     * @param ypos   the y-coordinate of the upper-left corner of the content area
      *
      * @since version 1.0
      */
@@ -2099,7 +2103,7 @@ public class GLFW {
     }
 
     /**
-     * Retrieves the size, in screen coordinates, of the client area of the specified window. If you wish to retrieve the size of the framebuffer of the
+     * Retrieves the size, in screen coordinates, of the content area of the specified window. If you wish to retrieve the size of the framebuffer of the
      * window in pixels, see {@link #glfwGetFramebufferSize GetFramebufferSize}.
      * 
      * <p>Any or all of the size arguments may be {@code NULL}. If an error occurs, all non-{@code NULL} size arguments will be set to zero.</p>
@@ -2107,8 +2111,8 @@ public class GLFW {
      * <p>This function must only be called from the main thread.</p>
      *
      * @param window the window whose size to retrieve
-     * @param width  where to store the width, in screen coordinates, of the client area, or {@code NULL}
-     * @param height where to store the height, in screen coordinates, of the client area, or {@code NULL}
+     * @param width  where to store the width, in screen coordinates, of the content area, or {@code NULL}
+     * @param height where to store the height, in screen coordinates, of the content area, or {@code NULL}
      *
      * @since version 1.0
      */
@@ -2123,7 +2127,7 @@ public class GLFW {
     // --- [ glfwSetWindowSizeLimits ] ---
 
     /**
-     * Sets the size limits of the client area of the specified window. If the window is full screen, the size limits only take effect if once it is made
+     * Sets the size limits of the content area of the specified window. If the window is full screen, the size limits only take effect if once it is made
      * windowed. If the window is not resizable, this function does nothing.
      * 
      * <p>The size limits are applied immediately to a windowed mode window and may cause it to be resized.</p>
@@ -2138,10 +2142,10 @@ public class GLFW {
      * </ul>
      *
      * @param window    the window to set limits for
-     * @param minwidth  the minimum width, in screen coordinates, of the client area, or {@link #GLFW_DONT_CARE DONT_CARE}
-     * @param minheight the minimum height, in screen coordinates, of the client area, or {@link #GLFW_DONT_CARE DONT_CARE}
-     * @param maxwidth  the maximum width, in screen coordinates, of the client area, or {@link #GLFW_DONT_CARE DONT_CARE}
-     * @param maxheight the maximum height, in screen coordinates, of the client area, or {@link #GLFW_DONT_CARE DONT_CARE}
+     * @param minwidth  the minimum width, in screen coordinates, of the content area, or {@link #GLFW_DONT_CARE DONT_CARE}
+     * @param minheight the minimum height, in screen coordinates, of the content area, or {@link #GLFW_DONT_CARE DONT_CARE}
+     * @param maxwidth  the maximum width, in screen coordinates, of the content area, or {@link #GLFW_DONT_CARE DONT_CARE}
+     * @param maxheight the maximum height, in screen coordinates, of the content area, or {@link #GLFW_DONT_CARE DONT_CARE}
      *
      * @since version 3.2
      */
@@ -2156,7 +2160,7 @@ public class GLFW {
     // --- [ glfwSetWindowAspectRatio ] ---
 
     /**
-     * Sets the required aspect ratio of the client area of the specified window. If the window is full screen, the aspect ratio only takes effect once it is
+     * Sets the required aspect ratio of the content area of the specified window. If the window is full screen, the aspect ratio only takes effect once it is
      * made windowed. If the window is not resizable, this function does nothing.
      * 
      * <p>The aspect ratio is specified as a numerator and a denominator and both values must be greater than zero. For example, the common 16:9 aspect ratio is
@@ -2190,7 +2194,7 @@ public class GLFW {
     // --- [ glfwSetWindowSize ] ---
 
     /**
-     * Sets the size, in pixels, of the client area of the specified window.
+     * Sets the size, in pixels, of the content area of the specified window.
      * 
      * <p>For full screen windows, this function updates the resolution of its desired video mode and switches to the video mode closest to it, without affecting
      * the window's context. As the context is unaffected, the bit depths of the framebuffer remain unchanged.</p>
@@ -2207,8 +2211,8 @@ public class GLFW {
      * </ul>
      *
      * @param window the window to resize
-     * @param width  the desired width, in screen coordinates, of the window client area
-     * @param height the desired height, in screen coordinates, of the window client area
+     * @param width  the desired width, in screen coordinates, of the window content area
+     * @param height the desired height, in screen coordinates, of the window content area
      *
      * @since version 1.0
      */
@@ -2590,7 +2594,7 @@ public class GLFW {
      * <p>When setting a monitor, this function updates the width, height and refresh rate of the desired video mode and switches to the video mode closest to
      * it. The window position is ignored when setting a monitor.</p>
      * 
-     * <p>When the monitor is {@code NULL}, the position, width and height are used to place the window client area. The refresh rate is ignored when no monitor is
+     * <p>When the monitor is {@code NULL}, the position, width and height are used to place the window content area. The refresh rate is ignored when no monitor is
      * specified.</p>
      * 
      * <p>If you only wish to update the resolution of a full screen window or the size of a windowed mode window, see {@link #glfwSetWindowSize SetWindowSize}.</p>
@@ -2608,10 +2612,10 @@ public class GLFW {
      *
      * @param window      the window whose monitor, size or video mode to set
      * @param monitor     the desired monitor, or {@code NULL} to set windowed mode
-     * @param xpos        the desired x-coordinate of the upper-left corner of the client area
-     * @param ypos        the desired y-coordinate of the upper-left corner of the client area
-     * @param width       the desired with, in screen coordinates, of the client area or video mode
-     * @param height      the desired height, in screen coordinates, of the client area or video mode
+     * @param xpos        the desired x-coordinate of the upper-left corner of the content area
+     * @param ypos        the desired y-coordinate of the upper-left corner of the content area
+     * @param width       the desired with, in screen coordinates, of the content area or video mode
+     * @param height      the desired height, in screen coordinates, of the content area or video mode
      * @param refreshRate the desired refresh rate, in Hz, of the video mode, or {@link #GLFW_DONT_CARE DONT_CARE}
      *
      * @since version 3.2
@@ -2731,7 +2735,7 @@ public class GLFW {
 
     /**
      * Sets the position callback of the specified window, which is called when the window is moved. The callback is provided with the position, in screen
-     * coordinates, of the upper-left corner of the client area of the window.
+     * coordinates, of the upper-left corner of the content area of the window.
      * 
      * <p>Notes:</p>
      * 
@@ -2767,7 +2771,7 @@ public class GLFW {
 
     /**
      * Sets the size callback of the specified window, which is called when the window is resized. The callback is provided with the size, in screen
-     * coordinates, of the client area of the window.
+     * coordinates, of the content area of the window.
      * 
      * <p>This function must only be called from the main thread.</p>
      *
@@ -2837,7 +2841,7 @@ public class GLFW {
     }
 
     /**
-     * Sets the refresh callback of the specified window, which is called when the client area of the window needs to be redrawn, for example if the window has
+     * Sets the refresh callback of the specified window, which is called when the content area of the window needs to be redrawn, for example if the window has
      * been exposed after having been covered by another window.
      * 
      * <p>On compositing window systems such as Aero, Compiz or Aqua, where the window contents are saved off-screen, this callback may be called only very
@@ -3068,9 +3072,6 @@ public class GLFW {
      * 
      * <p>On some platforms, certain callbacks may be called outside of a call to one of the event processing functions.</p>
      * 
-     * <p>If no windows exist, this function returns immediately. For synchronization of threads in applications that do not create windows, use your threading
-     * library of choice.</p>
-     * 
      * <p>Event processing is not required for joystick input to work.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -3107,9 +3108,6 @@ public class GLFW {
      * 
      * <p>On some platforms, certain callbacks may be called outside of a call to one of the event processing functions.</p>
      * 
-     * <p>If no windows exist, this function returns immediately. For synchronization of threads in applications that do not create windows, use your threading
-     * library of choice.</p>
-     * 
      * <p>Event processing is not required for joystick input to work.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -3133,9 +3131,6 @@ public class GLFW {
 
     /**
      * Posts an empty event from the current thread to the main thread event queue, causing {@link #glfwWaitEvents WaitEvents} or {@link #glfwWaitEventsTimeout WaitEventsTimeout} to return.
-     * 
-     * <p>If no windows exist, this function returns immediately. For synchronization of threads in applications that do not create windows, use your threading
-     * library of choice.</p>
      * 
      * <p>This function may be called from any thread.</p>
      *
@@ -3177,7 +3172,7 @@ public class GLFW {
      * 
      * <ul>
      * <li>{@link #GLFW_CURSOR_NORMAL CURSOR_NORMAL} makes the cursor visible and behaving normally.</li>
-     * <li>{@link #GLFW_CURSOR_HIDDEN CURSOR_HIDDEN} makes the cursor invisible when it is over the client area of the window but does not restrict the cursor from leaving.</li>
+     * <li>{@link #GLFW_CURSOR_HIDDEN CURSOR_HIDDEN} makes the cursor invisible when it is over the content area of the window but does not restrict the cursor from leaving.</li>
      * <li>{@link #GLFW_CURSOR_DISABLED CURSOR_DISABLED} hides and grabs the cursor, providing virtual and unlimited cursor movement. This is useful for implementing for example 3D camera
      * controls.</li>
      * </ul>
@@ -3378,7 +3373,7 @@ public class GLFW {
     }
 
     /**
-     * Returns the position of the cursor, in screen coordinates, relative to the upper-left corner of the client area of the specified window.
+     * Returns the position of the cursor, in screen coordinates, relative to the upper-left corner of the content area of the specified window.
      * 
      * <p>If the cursor is disabled (with {@link #GLFW_CURSOR_DISABLED CURSOR_DISABLED}) then the cursor position is unbounded and limited only by the minimum and maximum values of a
      * <b>double</b>.</p>
@@ -3391,8 +3386,8 @@ public class GLFW {
      * <p>This function must only be called from the main thread.</p>
      *
      * @param window the desired window
-     * @param xpos   where to store the cursor x-coordinate, relative to the left edge of the client area, or {@code NULL}
-     * @param ypos   where to store the cursor y-coordinate, relative to the to top edge of the client area, or {@code NULL}.
+     * @param xpos   where to store the cursor x-coordinate, relative to the left edge of the content area, or {@code NULL}
+     * @param ypos   where to store the cursor y-coordinate, relative to the to top edge of the content area, or {@code NULL}.
      *
      * @since version 1.0
      */
@@ -3407,7 +3402,7 @@ public class GLFW {
     // --- [ glfwSetCursorPos ] ---
 
     /**
-     * Sets the position, in screen coordinates, of the cursor relative to the upper-left corner of the client area of the specified window. The window must
+     * Sets the position, in screen coordinates, of the cursor relative to the upper-left corner of the content area of the specified window. The window must
      * have input focus. If the window does not have input focus when this function is called, it fails silently.
      * 
      * <p><b>Do not use this function</b> to implement things like camera controls. GLFW already provides the {@link #GLFW_CURSOR_DISABLED CURSOR_DISABLED} cursor mode that hides the cursor,
@@ -3423,8 +3418,8 @@ public class GLFW {
      * </ul>
      *
      * @param window the desired window
-     * @param xpos   the desired x-coordinate, relative to the left edge of the client area
-     * @param ypos   the desired y-coordinate, relative to the top edge of the client area
+     * @param xpos   the desired x-coordinate, relative to the left edge of the content area
+     * @param ypos   the desired y-coordinate, relative to the top edge of the content area
      *
      * @since version 1.0
      */
@@ -3523,7 +3518,7 @@ public class GLFW {
     // --- [ glfwSetCursor ] ---
 
     /**
-     * Sets the cursor image to be used when the cursor is over the client area of the specified window. The set cursor will only be visible when the
+     * Sets the cursor image to be used when the cursor is over the content area of the specified window. The set cursor will only be visible when the
      * <a target="_blank" href="http://www.glfw.org/docs/latest/input.html#cursor_mode">cursor mode</a> of the window is {@link #GLFW_CURSOR_NORMAL CURSOR_NORMAL}.
      * 
      * <p>On some platforms, the set cursor may not be visible unless the window also has input focus.</p>
@@ -3603,7 +3598,7 @@ public class GLFW {
      * was pressed or released, see the key callback instead.</p>
      * 
      * <p>The character callback behaves as system text input normally does and will not be called if modifier keys are held down that would prevent normal text
-     * input on that platform, for example a Super (Command) key on macOS or Alt key on Windows. There is {@link #glfwSetCharModsCallback SetCharModsCallback} that receives these events.</p>
+     * input on that platform, for example a Super (Command) key on macOS or Alt key on Windows.</p>
      * 
      * <p>This function must only be called from the main thread.</p>
      *
@@ -3642,7 +3637,7 @@ public class GLFW {
      * 
      * <p>This function must only be called from the main thread.</p>
      * 
-     * <p>Deprecared: scheduled for removal in version 4.0.</p>
+     * <p>Deprecated: scheduled for removal in version 4.0.</p>
      *
      * @param window the window whose callback to set
      * @param cbfun  the new callback or {@code NULL} to remove the currently set callback
@@ -3703,7 +3698,7 @@ public class GLFW {
 
     /**
      * Sets the cursor position callback of the specified window, which is called when the cursor is moved. The callback is provided with the position, in
-     * screen coordinates, relative to the upper-left corner of the client area of the window.
+     * screen coordinates, relative to the upper-left corner of the content area of the window.
      * 
      * <p>This function must only be called from the main thread.</p>
      *
@@ -3732,7 +3727,7 @@ public class GLFW {
     }
 
     /**
-     * Sets the cursor boundary crossing callback of the specified window, which is called when the cursor enters or leaves the client area of the window.
+     * Sets the cursor boundary crossing callback of the specified window, which is called when the cursor enters or leaves the content area of the window.
      * 
      * <p>This function must only be called from the main thread.</p>
      *

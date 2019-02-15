@@ -48,8 +48,8 @@ public interface GLFWCursorPosCallbackI extends CallbackI.V {
      * platforms that provide it, the full sub-pixel cursor position is passed on.</p>
      *
      * @param window the window that received the event
-     * @param xpos   the new cursor x-coordinate, relative to the left edge of the client area
-     * @param ypos   the new cursor y-coordinate, relative to the top edge of the client area
+     * @param xpos   the new cursor x-coordinate, relative to the left edge of the content area
+     * @param ypos   the new cursor y-coordinate, relative to the top edge of the content area
      */
     void invoke(@NativeType("GLFWwindow *") long window, double xpos, double ypos);
 

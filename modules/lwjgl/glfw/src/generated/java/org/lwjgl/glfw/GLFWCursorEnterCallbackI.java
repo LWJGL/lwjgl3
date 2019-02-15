@@ -43,7 +43,7 @@ public interface GLFWCursorEnterCallbackI extends CallbackI.V {
      * Will be called when the cursor enters or leaves the client area of the window.
      *
      * @param window  the window that received the event
-     * @param entered {@link GLFW#GLFW_TRUE TRUE} if the cursor entered the window's client area, or {@link GLFW#GLFW_FALSE FALSE} if it left it
+     * @param entered {@link GLFW#GLFW_TRUE TRUE} if the cursor entered the window's content area, or {@link GLFW#GLFW_FALSE FALSE} if it left it
      */
     void invoke(@NativeType("GLFWwindow *") long window, @NativeType("int") boolean entered);
 

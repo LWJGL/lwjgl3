@@ -45,8 +45,8 @@ public interface GLFWWindowPosCallbackI extends CallbackI.V {
      * Will be called when the specified window moves.
      *
      * @param window the window that was moved
-     * @param xpos   the new x-coordinate, in pixels, of the upper-left corner of the client area of the window
-     * @param ypos   the new y-coordinate, in pixels, of the upper-left corner of the client area of the window
+     * @param xpos   the new x-coordinate, in screen coordinates, of the upper-left corner of the content area of the window
+     * @param ypos   the new y-coordinate, in screen coordinates, of the upper-left corner of the content area of the window
      */
     void invoke(@NativeType("GLFWwindow *") long window, int xpos, int ypos);
 

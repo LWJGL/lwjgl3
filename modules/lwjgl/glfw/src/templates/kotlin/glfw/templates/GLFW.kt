@@ -469,7 +469,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             """,
             0x0002000A),
         "HOVERED".enum(
-            "{@code GetWindowAttrib}: indicates whether the cursor is currently directly over the client area of the window, with no other windows between.",
+            "{@code GetWindowAttrib}: indicates whether the cursor is currently directly over the content area of the window, with no other windows between.",
             0x0002000B),
         "FOCUS_ON_SHOW".enum(
             """
@@ -1119,8 +1119,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "SetGamma",
         """
-        Generates a 256-element gamma ramp from the specified exponent and then calls #SetGammaRamp() with it. The value must be a finite number greater than
-        zero.
+        Generates a gamma ramp and sets it for the specified monitor.
+
+        This function generates an appropriately sized gamma ramp from the specified exponent and then calls #SetGammaRamp() with it. The value must be a
+        finite number greater than zero.
 
         The software controlled gamma ramp is applied <em>in addition</em> to the hardware gamma correction, which today is usually an approximation of sRGB
         gamma. This means that setting a perfectly linear ramp, or gamma 1.0, will produce the default (usually sRGB-like) behavior.
@@ -1166,8 +1168,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "SetGammaRamp",
         """
-        Sets the current gamma ramp for the specified monitor. The original gamma ramp for that monitor is saved by GLFW the first time this function is called
-        and is restored by #Terminate().
+        Sets the current gamma ramp for the specified monitor.
+
+        This function sets the current gamma ramp for the specified monitor. The original gamma ramp for that monitor is saved by GLFW the first time this
+        function is called and is restored by #Terminate().
 
         The software controlled gamma ramp is applied <em>in addition</em> to the hardware gamma correction, which today is usually an approximation of sRGB
         gamma. This means that setting a perfectly linear ramp, or gamma 1.0, will produce the default (usually sRGB-like) behavior.
@@ -1176,7 +1180,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         ${note(ul(
             "This function must only be called from the main thread.",
-            "Gamma ramp sizes other than 256 are not supported by all hardware",
+            "The size of the specified gamma ramp should match the size of the current ramp for that monitor.",
             "<b>Windows</b>: The gamma ramp size must be 256.",
             "<b>Wayland</b>: Gamma handling is a privileged protocol, this function will thus never be implemented and emits #PLATFORM_ERROR.",
             "The specified gamma ramp is copied before this function returns."
@@ -1521,7 +1525,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "GetWindowPos",
         """
-        Retrieves the position, in screen coordinates, of the upper-left corner of the client area of the specified window.
+        Retrieves the position, in screen coordinates, of the upper-left corner of the content area of the specified window.
 
         Any or all of the position arguments may be #NULL. If an error occurs, all non-#NULL position arguments will be set to zero.
 
@@ -1533,8 +1537,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the window to query"),
-        nullable..Check(1)..int.p("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or #NULL"),
-        nullable..Check(1)..int.p("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or #NULL"),
+        nullable..Check(1)..int.p("xpos", "where to store the x-coordinate of the upper-left corner of the content area, or #NULL"),
+        nullable..Check(1)..int.p("ypos", "where to store the y-coordinate of the upper-left corner of the content area, or #NULL"),
 
         since = "version 3.0"
     )
@@ -1542,7 +1546,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "SetWindowPos",
         """
-        Sets the position, in screen coordinates, of the upper-left corner of the client area of the specified windowed mode window. If the window is a full
+        Sets the position, in screen coordinates, of the upper-left corner of the content area of the specified windowed mode window. If the window is a full
         screen window, this function does nothing.
 
         <b>Do not use this function</b> to move an already visible window unless you have very good reasons for doing so, as it will confuse and annoy the
@@ -1558,8 +1562,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the window to query"),
-        int("xpos", "the x-coordinate of the upper-left corner of the client area"),
-        int("ypos", "the y-coordinate of the upper-left corner of the client area"),
+        int("xpos", "the x-coordinate of the upper-left corner of the content area"),
+        int("ypos", "the y-coordinate of the upper-left corner of the content area"),
 
         since = "version 1.0"
     )
@@ -1567,7 +1571,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "GetWindowSize",
         """
-        Retrieves the size, in screen coordinates, of the client area of the specified window. If you wish to retrieve the size of the framebuffer of the
+        Retrieves the size, in screen coordinates, of the content area of the specified window. If you wish to retrieve the size of the framebuffer of the
         window in pixels, see #GetFramebufferSize().
 
         Any or all of the size arguments may be #NULL. If an error occurs, all non-#NULL size arguments will be set to zero.
@@ -1576,8 +1580,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the window whose size to retrieve"),
-        nullable..Check(1)..int.p("width", "where to store the width, in screen coordinates, of the client area, or #NULL"),
-        nullable..Check(1)..int.p("height", "where to store the height, in screen coordinates, of the client area, or #NULL"),
+        nullable..Check(1)..int.p("width", "where to store the width, in screen coordinates, of the content area, or #NULL"),
+        nullable..Check(1)..int.p("height", "where to store the height, in screen coordinates, of the content area, or #NULL"),
 
         since = "version 1.0"
     )
@@ -1585,7 +1589,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "SetWindowSizeLimits",
         """
-        Sets the size limits of the client area of the specified window. If the window is full screen, the size limits only take effect if once it is made
+        Sets the size limits of the content area of the specified window. If the window is full screen, the size limits only take effect if once it is made
         windowed. If the window is not resizable, this function does nothing.
 
         The size limits are applied immediately to a windowed mode window and may cause it to be resized.
@@ -1600,10 +1604,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the window to set limits for"),
-        int("minwidth", "the minimum width, in screen coordinates, of the client area, or #DONT_CARE"),
-        int("minheight", "the minimum height, in screen coordinates, of the client area, or #DONT_CARE"),
-        int("maxwidth", "the maximum width, in screen coordinates, of the client area, or #DONT_CARE"),
-        int("maxheight", "the maximum height, in screen coordinates, of the client area, or #DONT_CARE"),
+        int("minwidth", "the minimum width, in screen coordinates, of the content area, or #DONT_CARE"),
+        int("minheight", "the minimum height, in screen coordinates, of the content area, or #DONT_CARE"),
+        int("maxwidth", "the maximum width, in screen coordinates, of the content area, or #DONT_CARE"),
+        int("maxheight", "the maximum height, in screen coordinates, of the content area, or #DONT_CARE"),
 
         since = "version 3.2"
     )
@@ -1611,7 +1615,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "SetWindowAspectRatio",
         """
-        Sets the required aspect ratio of the client area of the specified window. If the window is full screen, the aspect ratio only takes effect once it is
+        Sets the required aspect ratio of the content area of the specified window. If the window is full screen, the aspect ratio only takes effect once it is
         made windowed. If the window is not resizable, this function does nothing.
 
         The aspect ratio is specified as a numerator and a denominator and both values must be greater than zero. For example, the common 16:9 aspect ratio is
@@ -1638,7 +1642,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "SetWindowSize",
         """
-        Sets the size, in pixels, of the client area of the specified window.
+        Sets the size, in pixels, of the content area of the specified window.
 
         For full screen windows, this function updates the resolution of its desired video mode and switches to the video mode closest to it, without affecting
         the window's context. As the context is unaffected, the bit depths of the framebuffer remain unchanged.
@@ -1655,8 +1659,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the window to resize"),
-        int("width", "the desired width, in screen coordinates, of the window client area"),
-        int("height", "the desired height, in screen coordinates, of the window client area"),
+        int("width", "the desired width, in screen coordinates, of the window content area"),
+        int("height", "the desired height, in screen coordinates, of the window content area"),
 
         since = "version 1.0"
     )
@@ -1920,7 +1924,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         When setting a monitor, this function updates the width, height and refresh rate of the desired video mode and switches to the video mode closest to
         it. The window position is ignored when setting a monitor.
 
-        When the monitor is #NULL, the position, width and height are used to place the window client area. The refresh rate is ignored when no monitor is
+        When the monitor is #NULL, the position, width and height are used to place the window content area. The refresh rate is ignored when no monitor is
         specified.
 
         If you only wish to update the resolution of a full screen window or the size of a windowed mode window, see #SetWindowSize().
@@ -1938,10 +1942,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         GLFWwindow.p("window", "the window whose monitor, size or video mode to set"),
         nullable..GLFWmonitor.p("monitor", "the desired monitor, or #NULL to set windowed mode"),
-        int("xpos", "the desired x-coordinate of the upper-left corner of the client area"),
-        int("ypos", "the desired y-coordinate of the upper-left corner of the client area"),
-        int("width", "the desired with, in screen coordinates, of the client area or video mode"),
-        int("height", "the desired height, in screen coordinates, of the client area or video mode"),
+        int("xpos", "the desired x-coordinate of the upper-left corner of the content area"),
+        int("ypos", "the desired y-coordinate of the upper-left corner of the content area"),
+        int("width", "the desired with, in screen coordinates, of the content area or video mode"),
+        int("height", "the desired height, in screen coordinates, of the content area or video mode"),
         int("refreshRate", "the desired refresh rate, in Hz, of the video mode, or #DONT_CARE"),
 
         since = "version 3.2"
@@ -2037,7 +2041,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "SetWindowPosCallback",
         """
         Sets the position callback of the specified window, which is called when the window is moved. The callback is provided with the position, in screen
-        coordinates, of the upper-left corner of the client area of the window.
+        coordinates, of the upper-left corner of the content area of the window.
 
         Notes:
         ${ul(
@@ -2057,7 +2061,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "SetWindowSizeCallback",
         """
         Sets the size callback of the specified window, which is called when the window is resized. The callback is provided with the size, in screen
-        coordinates, of the client area of the window.
+        coordinates, of the content area of the window.
 
         This function must only be called from the main thread.
         """,
@@ -2095,7 +2099,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     GLFWwindowrefreshfun(
         "SetWindowRefreshCallback",
         """
-        Sets the refresh callback of the specified window, which is called when the client area of the window needs to be redrawn, for example if the window has
+        Sets the refresh callback of the specified window, which is called when the content area of the window needs to be redrawn, for example if the window has
         been exposed after having been covered by another window.
 
         On compositing window systems such as Aero, Compiz or Aqua, where the window contents are saved off-screen, this callback may be called only very
@@ -2243,9 +2247,6 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         On some platforms, certain callbacks may be called outside of a call to one of the event processing functions.
 
-        If no windows exist, this function returns immediately. For synchronization of threads in applications that do not create windows, use your threading
-        library of choice.
-
         Event processing is not required for joystick input to work.
 
         ${note(ul(
@@ -2277,9 +2278,6 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         On some platforms, certain callbacks may be called outside of a call to one of the event processing functions.
 
-        If no windows exist, this function returns immediately. For synchronization of threads in applications that do not create windows, use your threading
-        library of choice.
-
         Event processing is not required for joystick input to work.
 
         ${note(ul(
@@ -2297,9 +2295,6 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "PostEmptyEvent",
         """
         Posts an empty event from the current thread to the main thread event queue, causing #WaitEvents() or #WaitEventsTimeout() to return.
-
-        If no windows exist, this function returns immediately. For synchronization of threads in applications that do not create windows, use your threading
-        library of choice.
 
         This function may be called from any thread.
         """,
@@ -2330,7 +2325,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         If {@code mode} is #CURSOR, the value must be one of the following cursor modes:
         ${ul(
             "#CURSOR_NORMAL makes the cursor visible and behaving normally.",
-            "#CURSOR_HIDDEN makes the cursor invisible when it is over the client area of the window but does not restrict the cursor from leaving.",
+            "#CURSOR_HIDDEN makes the cursor invisible when it is over the content area of the window but does not restrict the cursor from leaving.",
             """
             #CURSOR_DISABLED hides and grabs the cursor, providing virtual and unlimited cursor movement. This is useful for implementing for example 3D camera
             controls.
@@ -2484,7 +2479,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "GetCursorPos",
         """
-        Returns the position of the cursor, in screen coordinates, relative to the upper-left corner of the client area of the specified window.
+        Returns the position of the cursor, in screen coordinates, relative to the upper-left corner of the content area of the specified window.
 
         If the cursor is disabled (with #CURSOR_DISABLED) then the cursor position is unbounded and limited only by the minimum and maximum values of a
         <b>double</b>.
@@ -2498,8 +2493,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the desired window"),
-        nullable..Check(1)..double.p("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or #NULL"),
-        nullable..Check(1)..double.p("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or #NULL."),
+        nullable..Check(1)..double.p("xpos", "where to store the cursor x-coordinate, relative to the left edge of the content area, or #NULL"),
+        nullable..Check(1)..double.p("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the content area, or #NULL."),
 
         since = "version 1.0"
     )
@@ -2507,7 +2502,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "SetCursorPos",
         """
-        Sets the position, in screen coordinates, of the cursor relative to the upper-left corner of the client area of the specified window. The window must
+        Sets the position, in screen coordinates, of the cursor relative to the upper-left corner of the content area of the specified window. The window must
         have input focus. If the window does not have input focus when this function is called, it fails silently.
 
         <b>Do not use this function</b> to implement things like camera controls. GLFW already provides the #CURSOR_DISABLED cursor mode that hides the cursor,
@@ -2523,8 +2518,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         GLFWwindow.p("window", "the desired window"),
-        double("xpos", "the desired x-coordinate, relative to the left edge of the client area"),
-        double("ypos", "the desired y-coordinate, relative to the top edge of the client area"),
+        double("xpos", "the desired x-coordinate, relative to the left edge of the content area"),
+        double("ypos", "the desired y-coordinate, relative to the top edge of the content area"),
 
         since = "version 1.0"
     )
@@ -2588,7 +2583,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     void(
         "SetCursor",
         """
-        Sets the cursor image to be used when the cursor is over the client area of the specified window. The set cursor will only be visible when the
+        Sets the cursor image to be used when the cursor is over the content area of the specified window. The set cursor will only be visible when the
         ${url("http://www.glfw.org/docs/latest/input.html\\#cursor_mode", "cursor mode")} of the window is #CURSOR_NORMAL.
 
         On some platforms, the set cursor may not be visible unless the window also has input focus.
@@ -2639,7 +2634,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         was pressed or released, see the key callback instead.
 
         The character callback behaves as system text input normally does and will not be called if modifier keys are held down that would prevent normal text
-        input on that platform, for example a Super (Command) key on macOS or Alt key on Windows. There is #SetCharModsCallback() that receives these events.
+        input on that platform, for example a Super (Command) key on macOS or Alt key on Windows.
 
         This function must only be called from the main thread.
         """,
@@ -2664,7 +2659,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         This function must only be called from the main thread.
 
-        Deprecared: scheduled for removal in version 4.0.
+        Deprecated: scheduled for removal in version 4.0.
         """,
 
         GLFWwindow.p("window", "the window whose callback to set"),
@@ -2697,7 +2692,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "SetCursorPosCallback",
         """
         Sets the cursor position callback of the specified window, which is called when the cursor is moved. The callback is provided with the position, in
-        screen coordinates, relative to the upper-left corner of the client area of the window.
+        screen coordinates, relative to the upper-left corner of the content area of the window.
 
         This function must only be called from the main thread.
         """,
@@ -2712,7 +2707,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     GLFWcursorenterfun(
         "SetCursorEnterCallback",
         """
-        Sets the cursor boundary crossing callback of the specified window, which is called when the cursor enters or leaves the client area of the window.
+        Sets the cursor boundary crossing callback of the specified window, which is called when the cursor enters or leaves the content area of the window.
 
         This function must only be called from the main thread.
         """,

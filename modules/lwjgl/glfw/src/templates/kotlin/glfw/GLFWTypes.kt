@@ -222,8 +222,8 @@ val GLFWwindowposfun = Module.GLFW.callback {
         "Will be called when the specified window moves.",
 
         GLFWwindow.p("window", "the window that was moved"),
-        int("xpos", "the new x-coordinate, in pixels, of the upper-left corner of the client area of the window"),
-        int("ypos", "the new y-coordinate, in pixels, of the upper-left corner of the client area of the window"),
+        int("xpos", "the new x-coordinate, in screen coordinates, of the upper-left corner of the content area of the window"),
+        int("ypos", "the new y-coordinate, in screen coordinates, of the upper-left corner of the content area of the window"),
 
         nativeType = "GLFWwindowposfun"
     ) {
@@ -539,8 +539,8 @@ val GLFWcursorposfun = Module.GLFW.callback {
         """,
 
         GLFWwindow.p("window", "the window that received the event"),
-        double("xpos", "the new cursor x-coordinate, relative to the left edge of the client area"),
-        double("ypos", "the new cursor y-coordinate, relative to the top edge of the client area"),
+        double("xpos", "the new cursor x-coordinate, relative to the left edge of the content area"),
+        double("ypos", "the new cursor y-coordinate, relative to the top edge of the content area"),
 
         nativeType = "GLFWcursorposfun"
     ) {
@@ -563,7 +563,7 @@ val GLFWcursorenterfun = Module.GLFW.callback {
         "Will be called when the cursor enters or leaves the client area of the window.",
 
         GLFWwindow.p("window", "the window that received the event"),
-        intb("entered", "#TRUE if the cursor entered the window's client area, or #FALSE if it left it"),
+        intb("entered", "#TRUE if the cursor entered the window's content area, or #FALSE if it left it"),
 
         nativeType = "GLFWcursorenterfun"
     ) {
