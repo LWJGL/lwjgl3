@@ -165,7 +165,7 @@ static void WaitForCleanup(void)
                                  
 /* public */
 
-nfdresult_t NFD_OpenDialog( const char *filterList,
+nfdresult_t NFD_OpenDialog( const nfdchar_t *filterList,
                             const nfdchar_t *defaultPath,
                             nfdchar_t **outPath )
 {    
@@ -342,19 +342,19 @@ nfdresult_t NFD_PickFolder(const nfdchar_t *defaultPath,
                                           GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
                                           "_Cancel", GTK_RESPONSE_CANCEL,
                                           "_Select", GTK_RESPONSE_ACCEPT,
-                                          NULL );
+                                          NULL ); 
     gtk_file_chooser_set_do_overwrite_confirmation( GTK_FILE_CHOOSER(dialog), TRUE );
 
 
     /* Set the default path */
     SetDefaultPath(dialog, defaultPath);
-
-    result = NFD_CANCEL;
+    
+    result = NFD_CANCEL;    
     if ( gtk_dialog_run( GTK_DIALOG(dialog) ) == GTK_RESPONSE_ACCEPT )
     {
         char *filename;
         filename = gtk_file_chooser_get_filename( GTK_FILE_CHOOSER(dialog) );
-
+        
         {
             size_t len = strlen(filename);
             *outPath = NFDi_Malloc( len + 1 );
@@ -374,6 +374,6 @@ nfdresult_t NFD_PickFolder(const nfdchar_t *defaultPath,
     WaitForCleanup();
     gtk_widget_destroy(dialog);
     WaitForCleanup();
-
+    
     return result;
 }
