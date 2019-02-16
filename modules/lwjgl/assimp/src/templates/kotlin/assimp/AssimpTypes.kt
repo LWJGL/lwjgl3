@@ -93,6 +93,7 @@ val aiTexel = struct(Module.ASSIMP, "AITexel", nativeName = "struct aiTexel", mu
     unsigned_char("a", "The alpha color component")
 }
 
+private const val HINTMAXTEXTURELEN = 9
 val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTexture", mutable = false) {
     documentation =
         """
@@ -142,7 +143,7 @@ val aiTexture = struct(Module.ASSIMP, "AITexture", nativeName = "struct aiTextur
         used OR the file extension of the format without a trailing dot. If there are multiple file extensions for a format, the shortest extension is chosen
         (JPEG maps to 'jpg', not to 'jpeg'). E.g. 'dds\0', 'pcx\0', 'jpg\0'. All characters are lower-case. The fourth character will always be '\0'.
         """
-    )[9] // 8 for string + 1 for terminator.
+    )[HINTMAXTEXTURELEN] // 8 for string + 1 for terminator.
     Unsafe..aiTexel.p(
         "pcData",
         """
@@ -324,13 +325,14 @@ val aiBone = struct(Module.ASSIMP, "AIBone", nativeName = "struct aiBone") {
 val aiAnimMesh = struct(Module.ASSIMP, "AIAnimMesh", nativeName = "struct aiAnimMesh") {
     documentation =
         """
-        NOT CURRENTLY IN USE. An AnimMesh is an attachment to an ##AIMesh stores per-vertex animations for a particular frame.
+        An {@code AnimMesh} is an attachment to an ##AIMesh stores per-vertex animations for a particular frame.
 
         You may think of an {@code aiAnimMesh} as a `patch` for the host mesh, which replaces only certain vertex data streams at a particular time. Each mesh
         stores n attached attached meshes (##AIMesh{@code ::mAnimMeshes}). The actual relationship between the time line and anim meshes is established by
         {@code aiMeshAnim}, which references singular mesh attachments by their ID and binds them to a time offset.
         """
 
+    aiString("mName", "the {@code AnimMesh} name")
     nullable..aiVector3D.p(
         "mVertices",
         """

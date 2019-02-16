@@ -476,6 +476,16 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Input parameter to the #Process_FindInvalidData step: Set to true to ignore texture coordinates.
+
+        This may be useful if you have to assign different kind of textures like one for the summer or one for the winter.
+        """,
+
+        "AI_CONFIG_PP_FID_IGNORE_TEXTURECOORDS".."PP_FID_IGNORE_TEXTURECOORDS"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Input parameter to the #Process_TransformUVCoords step: Specifies which UV transformations are evaluated.
 
         This is a bitwise combination of the {@code AI_UVTRAFO_XXX} flags (integer property, of course). By default all transformations are enabled
@@ -684,6 +694,16 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         "AI_CONFIG_IMPORT_UNREAL_KEYFRAME".."IMPORT_UNREAL_KEYFRAME",
 
         see = arrayOf("#AI_CONFIG_IMPORT_GLOBAL_KEYFRAME")
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Smd load multiple animations.
+
+        Property type: bool. Default value: true.
+        """,
+
+        "AI_CONFIG_IMPORT_SMD_LOAD_ANIMATION_LIST".."IMPORT_SMD_LOAD_ANIMATION_LIST"
     ).noPrefix()
 
     StringConstant(

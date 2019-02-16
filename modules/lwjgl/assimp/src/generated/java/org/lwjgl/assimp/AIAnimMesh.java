@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * NOT CURRENTLY IN USE. An AnimMesh is an attachment to an {@link AIMesh} stores per-vertex animations for a particular frame.
+ * An {@code AnimMesh} is an attachment to an {@link AIMesh} stores per-vertex animations for a particular frame.
  * 
  * <p>You may think of an {@code aiAnimMesh} as a `patch` for the host mesh, which replaces only certain vertex data streams at a particular time. Each mesh
  * stores n attached attached meshes ({@link AIMesh}{@code ::mAnimMeshes}). The actual relationship between the time line and anim meshes is established by
@@ -26,6 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
+ * <li>{@code mName} &ndash; the {@code AnimMesh} name</li>
  * <li>{@code mVertices} &ndash; 
  * Replacement for {@link AIMesh}{@code ::mVertices}. If this array is non-{@code NULL}, it *must* contain {@code mNumVertices} entries. The corresponding array in the
  * host mesh must be non-{@code NULL} as well - animation meshes may neither add or nor remove vertex components (if a replacement array is {@code NULL} and the
@@ -46,6 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct aiAnimMesh {
+ *     {@link AIString struct aiString} mName;
  *     {@link AIVector3D struct aiVector3D} * mVertices;
  *     {@link AIVector3D struct aiVector3D} * mNormals;
  *     {@link AIVector3D struct aiVector3D} * mTangents;
@@ -67,6 +69,7 @@ public class AIAnimMesh extends Struct implements NativeResource {
 
     /** The struct member offsets. */
     public static final int
+        MNAME,
         MVERTICES,
         MNORMALS,
         MTANGENTS,
@@ -78,6 +81,7 @@ public class AIAnimMesh extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
+            __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -91,14 +95,15 @@ public class AIAnimMesh extends Struct implements NativeResource {
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        MVERTICES = layout.offsetof(0);
-        MNORMALS = layout.offsetof(1);
-        MTANGENTS = layout.offsetof(2);
-        MBITANGENTS = layout.offsetof(3);
-        MCOLORS = layout.offsetof(4);
-        MTEXTURECOORDS = layout.offsetof(5);
-        MNUMVERTICES = layout.offsetof(6);
-        MWEIGHT = layout.offsetof(7);
+        MNAME = layout.offsetof(0);
+        MVERTICES = layout.offsetof(1);
+        MNORMALS = layout.offsetof(2);
+        MTANGENTS = layout.offsetof(3);
+        MBITANGENTS = layout.offsetof(4);
+        MCOLORS = layout.offsetof(5);
+        MTEXTURECOORDS = layout.offsetof(6);
+        MNUMVERTICES = layout.offsetof(7);
+        MWEIGHT = layout.offsetof(8);
     }
 
     /**
@@ -114,6 +119,11 @@ public class AIAnimMesh extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** Returns a {@link AIString} view of the {@code mName} field. */
+    @NativeType("struct aiString")
+    public AIString mName() { return nmName(address()); }
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public AIAnimMesh mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
     /** Returns a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@code mVertices} field. */
     @Nullable
     @NativeType("struct aiVector3D *")
@@ -150,6 +160,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
     /** Returns the value of the {@code mWeight} field. */
     public float mWeight() { return nmWeight(address()); }
 
+    /** Copies the specified {@link AIString} to the {@code mName} field. */
+    public AIAnimMesh mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
     /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mVertices} field. */
     public AIAnimMesh mVertices(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { nmVertices(address(), value); return this; }
     /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mNormals} field. */
@@ -173,6 +185,7 @@ public class AIAnimMesh extends Struct implements NativeResource {
 
     /** Initializes this struct with the specified values. */
     public AIAnimMesh set(
+        AIString mName,
         @Nullable AIVector3D.Buffer mVertices,
         @Nullable AIVector3D.Buffer mNormals,
         @Nullable AIVector3D.Buffer mTangents,
@@ -182,6 +195,7 @@ public class AIAnimMesh extends Struct implements NativeResource {
         int mNumVertices,
         float mWeight
     ) {
+        mName(mName);
         mVertices(mVertices);
         mNormals(mNormals);
         mTangents(mTangents);
@@ -349,6 +363,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #mName}. */
+    public static AIString nmName(long struct) { return AIString.create(struct + AIAnimMesh.MNAME); }
     /** Unsafe version of {@link #mVertices}. */
     @Nullable public static AIVector3D.Buffer nmVertices(long struct) { return AIVector3D.createSafe(memGetAddress(struct + AIAnimMesh.MVERTICES), nmNumVertices(struct)); }
     /** Unsafe version of {@link #mNormals}. */
@@ -374,6 +390,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
     /** Unsafe version of {@link #mWeight}. */
     public static float nmWeight(long struct) { return UNSAFE.getFloat(null, struct + AIAnimMesh.MWEIGHT); }
 
+    /** Unsafe version of {@link #mName(AIString) mName}. */
+    public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIAnimMesh.MNAME, AIString.SIZEOF); }
     /** Unsafe version of {@link #mVertices(AIVector3D.Buffer) mVertices}. */
     public static void nmVertices(long struct, @Nullable AIVector3D.Buffer value) { memPutAddress(struct + AIAnimMesh.MVERTICES, memAddressSafe(value)); }
     /** Unsafe version of {@link #mNormals(AIVector3D.Buffer) mNormals}. */
@@ -443,6 +461,11 @@ public class AIAnimMesh extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
+        /** Returns a {@link AIString} view of the {@code mName} field. */
+        @NativeType("struct aiString")
+        public AIString mName() { return AIAnimMesh.nmName(address()); }
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public AIAnimMesh.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
         /** Returns a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@code mVertices} field. */
         @Nullable
         @NativeType("struct aiVector3D *")
@@ -479,6 +502,8 @@ public class AIAnimMesh extends Struct implements NativeResource {
         /** Returns the value of the {@code mWeight} field. */
         public float mWeight() { return AIAnimMesh.nmWeight(address()); }
 
+        /** Copies the specified {@link AIString} to the {@code mName} field. */
+        public AIAnimMesh.Buffer mName(@NativeType("struct aiString") AIString value) { AIAnimMesh.nmName(address(), value); return this; }
         /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mVertices} field. */
         public AIAnimMesh.Buffer mVertices(@Nullable @NativeType("struct aiVector3D *") AIVector3D.Buffer value) { AIAnimMesh.nmVertices(address(), value); return this; }
         /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mNormals} field. */
