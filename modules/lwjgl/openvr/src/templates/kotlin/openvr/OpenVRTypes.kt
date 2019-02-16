@@ -237,6 +237,7 @@ val VREvent_Process_t = struct(Module.OPENVR, "VREventProcess", nativeName = "VR
     uint32_t("pid", "")
     uint32_t("oldPid", "")
     bool("bForced", "")
+    bool("bConnectionLost", "if the associated event was triggered by a connection loss")
 }
 
 val VREvent_Notification_t = struct(Module.OPENVR, "VREventNotification", nativeName = "VREvent_Notification_t", mutable = false) {

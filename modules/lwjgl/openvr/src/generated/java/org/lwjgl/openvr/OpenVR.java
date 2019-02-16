@@ -20,22 +20,22 @@ import static org.lwjgl.system.MemoryUtil.*;
 public final class OpenVR {
 
     @Nullable public static IVRSystem VRSystem;
-    @Nullable public static IVRApplications VRApplications;
     @Nullable public static IVRChaperone VRChaperone;
     @Nullable public static IVRChaperoneSetup VRChaperoneSetup;
     @Nullable public static IVRCompositor VRCompositor;
-    @Nullable public static IVRDriverManager VRDriverManager;
-    @Nullable public static IVRExtendedDisplay VRExtendedDisplay;
-    @Nullable public static IVRNotifications VRNotifications;
     @Nullable public static IVROverlay VROverlay;
-    @Nullable public static IVRRenderModels VRRenderModels;
     @Nullable public static IVRResources VRResources;
-    @Nullable public static IVRScreenshots VRScreenshots;
+    @Nullable public static IVRRenderModels VRRenderModels;
+    @Nullable public static IVRExtendedDisplay VRExtendedDisplay;
     @Nullable public static IVRSettings VRSettings;
+    @Nullable public static IVRApplications VRApplications;
     @Nullable public static IVRTrackedCamera VRTrackedCamera;
+    @Nullable public static IVRScreenshots VRScreenshots;
+    @Nullable public static IVRDriverManager VRDriverManager;
     @Nullable public static IVRInput VRInput;
     @Nullable public static IVRIOBuffer VRIOBuffer;
     @Nullable public static IVRSpatialAnchors VRSpatialAnchors;
+    @Nullable public static IVRNotifications VRNotifications;
 
     private static int token;
 
@@ -55,22 +55,22 @@ public final class OpenVR {
         OpenVR.token = token;
 
         VRSystem = getGenericInterface(IVRSystem_Version, IVRSystem::new);
-        VRApplications = getGenericInterface(IVRApplications_Version, IVRApplications::new);
         VRChaperone = getGenericInterface(IVRChaperone_Version, IVRChaperone::new);
         VRChaperoneSetup = getGenericInterface(IVRChaperoneSetup_Version, IVRChaperoneSetup::new);
         VRCompositor = getGenericInterface(IVRCompositor_Version, IVRCompositor::new);
-        VRDriverManager = getGenericInterface(IVRDriverManager_Version, IVRDriverManager::new);
-        VRExtendedDisplay = getGenericInterface(IVRExtendedDisplay_Version, IVRExtendedDisplay::new);
-        VRNotifications = getGenericInterface(IVRNotifications_Version, IVRNotifications::new);
         VROverlay = getGenericInterface(IVROverlay_Version, IVROverlay::new);
-        VRRenderModels = getGenericInterface(IVRRenderModels_Version, IVRRenderModels::new);
         VRResources = getGenericInterface(IVRResources_Version, IVRResources::new);
-        VRScreenshots = getGenericInterface(IVRScreenshots_Version, IVRScreenshots::new);
+        VRRenderModels = getGenericInterface(IVRRenderModels_Version, IVRRenderModels::new);
+        VRExtendedDisplay = getGenericInterface(IVRExtendedDisplay_Version, IVRExtendedDisplay::new);
         VRSettings = getGenericInterface(IVRSettings_Version, IVRSettings::new);
+        VRApplications = getGenericInterface(IVRApplications_Version, IVRApplications::new);
         VRTrackedCamera = getGenericInterface(IVRTrackedCamera_Version, IVRTrackedCamera::new);
+        VRScreenshots = getGenericInterface(IVRScreenshots_Version, IVRScreenshots::new);
+        VRDriverManager = getGenericInterface(IVRDriverManager_Version, IVRDriverManager::new);
         VRInput = getGenericInterface(IVRInput_Version, IVRInput::new);
         VRIOBuffer = getGenericInterface(IVRIOBuffer_Version, IVRIOBuffer::new);
         VRSpatialAnchors = getGenericInterface(IVRSpatialAnchors_Version, IVRSpatialAnchors::new);
+        VRNotifications = getGenericInterface(IVRNotifications_Version, IVRNotifications::new);
     }
 
     @Nullable
@@ -98,22 +98,22 @@ public final class OpenVR {
         token = 0;
 
         VRSystem = null;
-        VRApplications = null;
         VRChaperone = null;
         VRChaperoneSetup = null;
         VRCompositor = null;
-        VRDriverManager = null;
-        VRExtendedDisplay = null;
-        VRNotifications = null;
         VROverlay = null;
-        VRRenderModels = null;
         VRResources = null;
-        VRScreenshots = null;
+        VRRenderModels = null;
+        VRExtendedDisplay = null;
         VRSettings = null;
+        VRApplications = null;
         VRTrackedCamera = null;
+        VRScreenshots = null;
+        VRDriverManager = null;
         VRInput = null;
         VRIOBuffer = null;
         VRSpatialAnchors = null;
+        VRNotifications = null;
     }
 
     public static final class IVRSystem {
@@ -216,78 +216,6 @@ public final class OpenVR {
             PerformFirmwareUpdate = table.get(44);
             AcknowledgeQuit_Exiting = table.get(45);
             AcknowledgeQuit_UserPrompt = table.get(46);
-        }
-
-    }
-
-    public static final class IVRApplications {
-
-        public final long
-            AddApplicationManifest,
-            RemoveApplicationManifest,
-            IsApplicationInstalled,
-            GetApplicationCount,
-            GetApplicationKeyByIndex,
-            GetApplicationKeyByProcessId,
-            LaunchApplication,
-            LaunchTemplateApplication,
-            LaunchApplicationFromMimeType,
-            LaunchDashboardOverlay,
-            CancelApplicationLaunch,
-            IdentifyApplication,
-            GetApplicationProcessId,
-            GetApplicationsErrorNameFromEnum,
-            GetApplicationPropertyString,
-            GetApplicationPropertyBool,
-            GetApplicationPropertyUint64,
-            SetApplicationAutoLaunch,
-            GetApplicationAutoLaunch,
-            SetDefaultApplicationForMimeType,
-            GetDefaultApplicationForMimeType,
-            GetApplicationSupportedMimeTypes,
-            GetApplicationsThatSupportMimeType,
-            GetApplicationLaunchArguments,
-            GetStartingApplication,
-            GetTransitionState,
-            PerformApplicationPrelaunchCheck,
-            GetApplicationsTransitionStateNameFromEnum,
-            IsQuitUserPromptRequested,
-            LaunchInternalProcess,
-            GetCurrentSceneProcessId;
-
-        public IVRApplications(long tableAddress) {
-            PointerBuffer table = memPointerBuffer(tableAddress, 31);
-            AddApplicationManifest = table.get(0);
-            RemoveApplicationManifest = table.get(1);
-            IsApplicationInstalled = table.get(2);
-            GetApplicationCount = table.get(3);
-            GetApplicationKeyByIndex = table.get(4);
-            GetApplicationKeyByProcessId = table.get(5);
-            LaunchApplication = table.get(6);
-            LaunchTemplateApplication = table.get(7);
-            LaunchApplicationFromMimeType = table.get(8);
-            LaunchDashboardOverlay = table.get(9);
-            CancelApplicationLaunch = table.get(10);
-            IdentifyApplication = table.get(11);
-            GetApplicationProcessId = table.get(12);
-            GetApplicationsErrorNameFromEnum = table.get(13);
-            GetApplicationPropertyString = table.get(14);
-            GetApplicationPropertyBool = table.get(15);
-            GetApplicationPropertyUint64 = table.get(16);
-            SetApplicationAutoLaunch = table.get(17);
-            GetApplicationAutoLaunch = table.get(18);
-            SetDefaultApplicationForMimeType = table.get(19);
-            GetDefaultApplicationForMimeType = table.get(20);
-            GetApplicationSupportedMimeTypes = table.get(21);
-            GetApplicationsThatSupportMimeType = table.get(22);
-            GetApplicationLaunchArguments = table.get(23);
-            GetStartingApplication = table.get(24);
-            GetTransitionState = table.get(25);
-            PerformApplicationPrelaunchCheck = table.get(26);
-            GetApplicationsTransitionStateNameFromEnum = table.get(27);
-            IsQuitUserPromptRequested = table.get(28);
-            LaunchInternalProcess = table.get(29);
-            GetCurrentSceneProcessId = table.get(30);
         }
 
     }
@@ -460,52 +388,6 @@ public final class OpenVR {
             SetExplicitTimingMode = table.get(41);
             SubmitExplicitTimingData = table.get(42);
             IsMotionSmoothingEnabled = table.get(43);
-        }
-
-    }
-
-    public static final class IVRDriverManager {
-
-        public final long
-            GetDriverCount,
-            GetDriverName,
-            GetDriverHandle;
-
-        public IVRDriverManager(long tableAddress) {
-            PointerBuffer table = memPointerBuffer(tableAddress, 3);
-            GetDriverCount = table.get(0);
-            GetDriverName = table.get(1);
-            GetDriverHandle = table.get(2);
-        }
-
-    }
-
-    public static final class IVRExtendedDisplay {
-
-        public final long
-            GetWindowBounds,
-            GetEyeOutputViewport,
-            GetDXGIOutputInfo;
-
-        public IVRExtendedDisplay(long tableAddress) {
-            PointerBuffer table = memPointerBuffer(tableAddress, 3);
-            GetWindowBounds = table.get(0);
-            GetEyeOutputViewport = table.get(1);
-            GetDXGIOutputInfo = table.get(2);
-        }
-
-    }
-
-    public static final class IVRNotifications {
-
-        public final long
-            CreateNotification,
-            RemoveNotification;
-
-        public IVRNotifications(long tableAddress) {
-            PointerBuffer table = memPointerBuffer(tableAddress, 2);
-            CreateNotification = table.get(0);
-            RemoveNotification = table.get(1);
         }
 
     }
@@ -684,6 +566,20 @@ public final class OpenVR {
 
     }
 
+    public static final class IVRResources {
+
+        public final long
+            LoadSharedResource,
+            GetResourceFullPath;
+
+        public IVRResources(long tableAddress) {
+            PointerBuffer table = memPointerBuffer(tableAddress, 2);
+            LoadSharedResource = table.get(0);
+            GetResourceFullPath = table.get(1);
+        }
+
+    }
+
     public static final class IVRRenderModels {
 
         public final long
@@ -732,40 +628,18 @@ public final class OpenVR {
 
     }
 
-    public static final class IVRResources {
+    public static final class IVRExtendedDisplay {
 
         public final long
-            LoadSharedResource,
-            GetResourceFullPath;
+            GetWindowBounds,
+            GetEyeOutputViewport,
+            GetDXGIOutputInfo;
 
-        public IVRResources(long tableAddress) {
-            PointerBuffer table = memPointerBuffer(tableAddress, 2);
-            LoadSharedResource = table.get(0);
-            GetResourceFullPath = table.get(1);
-        }
-
-    }
-
-    public static final class IVRScreenshots {
-
-        public final long
-            RequestScreenshot,
-            HookScreenshot,
-            GetScreenshotPropertyType,
-            GetScreenshotPropertyFilename,
-            UpdateScreenshotProgress,
-            TakeStereoScreenshot,
-            SubmitScreenshot;
-
-        public IVRScreenshots(long tableAddress) {
-            PointerBuffer table = memPointerBuffer(tableAddress, 7);
-            RequestScreenshot = table.get(0);
-            HookScreenshot = table.get(1);
-            GetScreenshotPropertyType = table.get(2);
-            GetScreenshotPropertyFilename = table.get(3);
-            UpdateScreenshotProgress = table.get(4);
-            TakeStereoScreenshot = table.get(5);
-            SubmitScreenshot = table.get(6);
+        public IVRExtendedDisplay(long tableAddress) {
+            PointerBuffer table = memPointerBuffer(tableAddress, 3);
+            GetWindowBounds = table.get(0);
+            GetEyeOutputViewport = table.get(1);
+            GetDXGIOutputInfo = table.get(2);
         }
 
     }
@@ -804,6 +678,78 @@ public final class OpenVR {
 
     }
 
+    public static final class IVRApplications {
+
+        public final long
+            AddApplicationManifest,
+            RemoveApplicationManifest,
+            IsApplicationInstalled,
+            GetApplicationCount,
+            GetApplicationKeyByIndex,
+            GetApplicationKeyByProcessId,
+            LaunchApplication,
+            LaunchTemplateApplication,
+            LaunchApplicationFromMimeType,
+            LaunchDashboardOverlay,
+            CancelApplicationLaunch,
+            IdentifyApplication,
+            GetApplicationProcessId,
+            GetApplicationsErrorNameFromEnum,
+            GetApplicationPropertyString,
+            GetApplicationPropertyBool,
+            GetApplicationPropertyUint64,
+            SetApplicationAutoLaunch,
+            GetApplicationAutoLaunch,
+            SetDefaultApplicationForMimeType,
+            GetDefaultApplicationForMimeType,
+            GetApplicationSupportedMimeTypes,
+            GetApplicationsThatSupportMimeType,
+            GetApplicationLaunchArguments,
+            GetStartingApplication,
+            GetTransitionState,
+            PerformApplicationPrelaunchCheck,
+            GetApplicationsTransitionStateNameFromEnum,
+            IsQuitUserPromptRequested,
+            LaunchInternalProcess,
+            GetCurrentSceneProcessId;
+
+        public IVRApplications(long tableAddress) {
+            PointerBuffer table = memPointerBuffer(tableAddress, 31);
+            AddApplicationManifest = table.get(0);
+            RemoveApplicationManifest = table.get(1);
+            IsApplicationInstalled = table.get(2);
+            GetApplicationCount = table.get(3);
+            GetApplicationKeyByIndex = table.get(4);
+            GetApplicationKeyByProcessId = table.get(5);
+            LaunchApplication = table.get(6);
+            LaunchTemplateApplication = table.get(7);
+            LaunchApplicationFromMimeType = table.get(8);
+            LaunchDashboardOverlay = table.get(9);
+            CancelApplicationLaunch = table.get(10);
+            IdentifyApplication = table.get(11);
+            GetApplicationProcessId = table.get(12);
+            GetApplicationsErrorNameFromEnum = table.get(13);
+            GetApplicationPropertyString = table.get(14);
+            GetApplicationPropertyBool = table.get(15);
+            GetApplicationPropertyUint64 = table.get(16);
+            SetApplicationAutoLaunch = table.get(17);
+            GetApplicationAutoLaunch = table.get(18);
+            SetDefaultApplicationForMimeType = table.get(19);
+            GetDefaultApplicationForMimeType = table.get(20);
+            GetApplicationSupportedMimeTypes = table.get(21);
+            GetApplicationsThatSupportMimeType = table.get(22);
+            GetApplicationLaunchArguments = table.get(23);
+            GetStartingApplication = table.get(24);
+            GetTransitionState = table.get(25);
+            PerformApplicationPrelaunchCheck = table.get(26);
+            GetApplicationsTransitionStateNameFromEnum = table.get(27);
+            IsQuitUserPromptRequested = table.get(28);
+            LaunchInternalProcess = table.get(29);
+            GetCurrentSceneProcessId = table.get(30);
+        }
+
+    }
+
     public static final class IVRTrackedCamera {
 
         public final long
@@ -834,6 +780,46 @@ public final class OpenVR {
             GetVideoStreamTextureD3D11 = table.get(9);
             GetVideoStreamTextureGL = table.get(10);
             ReleaseVideoStreamTextureGL = table.get(11);
+        }
+
+    }
+
+    public static final class IVRScreenshots {
+
+        public final long
+            RequestScreenshot,
+            HookScreenshot,
+            GetScreenshotPropertyType,
+            GetScreenshotPropertyFilename,
+            UpdateScreenshotProgress,
+            TakeStereoScreenshot,
+            SubmitScreenshot;
+
+        public IVRScreenshots(long tableAddress) {
+            PointerBuffer table = memPointerBuffer(tableAddress, 7);
+            RequestScreenshot = table.get(0);
+            HookScreenshot = table.get(1);
+            GetScreenshotPropertyType = table.get(2);
+            GetScreenshotPropertyFilename = table.get(3);
+            UpdateScreenshotProgress = table.get(4);
+            TakeStereoScreenshot = table.get(5);
+            SubmitScreenshot = table.get(6);
+        }
+
+    }
+
+    public static final class IVRDriverManager {
+
+        public final long
+            GetDriverCount,
+            GetDriverName,
+            GetDriverHandle;
+
+        public IVRDriverManager(long tableAddress) {
+            PointerBuffer table = memPointerBuffer(tableAddress, 3);
+            GetDriverCount = table.get(0);
+            GetDriverName = table.get(1);
+            GetDriverHandle = table.get(2);
         }
 
     }
@@ -903,15 +889,17 @@ public final class OpenVR {
             Close,
             Read,
             Write,
-            PropertyContainer;
+            PropertyContainer,
+            HasReaders;
 
         public IVRIOBuffer(long tableAddress) {
-            PointerBuffer table = memPointerBuffer(tableAddress, 5);
+            PointerBuffer table = memPointerBuffer(tableAddress, 6);
             Open = table.get(0);
             Close = table.get(1);
             Read = table.get(2);
             Write = table.get(3);
             PropertyContainer = table.get(4);
+            HasReaders = table.get(5);
         }
 
     }
@@ -930,6 +918,20 @@ public final class OpenVR {
             CreateSpatialAnchorFromPose = table.get(1);
             GetSpatialAnchorPose = table.get(2);
             GetSpatialAnchorDescriptor = table.get(3);
+        }
+
+    }
+
+    public static final class IVRNotifications {
+
+        public final long
+            CreateNotification,
+            RemoveNotification;
+
+        public IVRNotifications(long tableAddress) {
+            PointerBuffer table = memPointerBuffer(tableAddress, 2);
+            CreateNotification = table.get(0);
+            RemoveNotification = table.get(1);
         }
 
     }

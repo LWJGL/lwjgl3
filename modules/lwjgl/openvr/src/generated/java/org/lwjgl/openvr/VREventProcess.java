@@ -16,6 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Used for events about processes.
  * 
+ * <h3>Member documentation</h3>
+ * 
+ * <ul>
+ * <li>{@code bConnectionLost} &ndash; if the associated event was triggered by a connection loss</li>
+ * </ul>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -23,6 +29,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint32_t pid;
  *     uint32_t oldPid;
  *     bool bForced;
+ *     bool bConnectionLost;
  * }</code></pre>
  */
 @NativeType("struct VREvent_Process_t")
@@ -38,12 +45,14 @@ public class VREventProcess extends Struct {
     public static final int
         PID,
         OLDPID,
-        BFORCED;
+        BFORCED,
+        BCONNECTIONLOST;
 
     static {
         Layout layout = __struct(
             __member(4),
             __member(4),
+            __member(1),
             __member(1)
         );
 
@@ -53,6 +62,7 @@ public class VREventProcess extends Struct {
         PID = layout.offsetof(0);
         OLDPID = layout.offsetof(1);
         BFORCED = layout.offsetof(2);
+        BCONNECTIONLOST = layout.offsetof(3);
     }
 
     /**
@@ -77,6 +87,9 @@ public class VREventProcess extends Struct {
     /** Returns the value of the {@code bForced} field. */
     @NativeType("bool")
     public boolean bForced() { return nbForced(address()); }
+    /** Returns the value of the {@code bConnectionLost} field. */
+    @NativeType("bool")
+    public boolean bConnectionLost() { return nbConnectionLost(address()); }
 
     // -----------------------------------
 
@@ -115,6 +128,8 @@ public class VREventProcess extends Struct {
     public static int noldPid(long struct) { return UNSAFE.getInt(null, struct + VREventProcess.OLDPID); }
     /** Unsafe version of {@link #bForced}. */
     public static boolean nbForced(long struct) { return UNSAFE.getByte(null, struct + VREventProcess.BFORCED) != 0; }
+    /** Unsafe version of {@link #bConnectionLost}. */
+    public static boolean nbConnectionLost(long struct) { return UNSAFE.getByte(null, struct + VREventProcess.BCONNECTIONLOST) != 0; }
 
     // -----------------------------------
 
@@ -163,6 +178,9 @@ public class VREventProcess extends Struct {
         /** Returns the value of the {@code bForced} field. */
         @NativeType("bool")
         public boolean bForced() { return VREventProcess.nbForced(address()); }
+        /** Returns the value of the {@code bConnectionLost} field. */
+        @NativeType("bool")
+        public boolean bConnectionLost() { return VREventProcess.nbConnectionLost(address()); }
 
     }
 

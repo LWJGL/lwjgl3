@@ -126,4 +126,16 @@ public class VRIOBuffer {
         return callJJ(ulBuffer, __functionAddress);
     }
 
+    // --- [ VRIOBuffer_HasReaders ] ---
+
+    /** Inexpensively checks for readers to allow writers to fast-fail potentially expensive copies and writes. */
+    @NativeType("bool")
+    public static boolean VRIOBuffer_HasReaders(@NativeType("IOBufferHandle_t") long ulBuffer) {
+        long __functionAddress = OpenVR.VRIOBuffer.HasReaders;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callJZ(ulBuffer, __functionAddress);
+    }
+
 }

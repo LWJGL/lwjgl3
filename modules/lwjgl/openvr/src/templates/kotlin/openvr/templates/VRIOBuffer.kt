@@ -60,4 +60,11 @@ val VRIOBuffer = "VRIOBuffer".nativeClass(
 
         IOBufferHandle_t("ulBuffer", "")
     )
+
+    bool(
+        "HasReaders",
+        "Inexpensively checks for readers to allow writers to fast-fail potentially expensive copies and writes.",
+
+        IOBufferHandle_t("ulBuffer", "")
+    )
 }
