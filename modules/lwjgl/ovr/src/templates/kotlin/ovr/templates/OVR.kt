@@ -308,8 +308,9 @@ ENABLE_WARNINGS()""")
         "Viewport stencil types provided by the #GetFovStencil() call. {@code ovrFovStencilType}",
 
         "FovStencil_HiddenArea".enum("Triangle list covering parts that are hidden to users.", "0"),
-        "FovStencil_VisibleArea".enum("Triangle list covering parts that are visible to users.", "1"),
-        "FovStencil_BorderLine".enum("Line list that draws the boundary visible to users.", "2")
+        "FovStencil_VisibleArea".enum("Triangle list covering parts that are visible to users."),
+        "FovStencil_BorderLine".enum("Line list that draws the boundary visible to users."),
+        "FovStencil_VisibleRectangle".enum("Axis-aligned rectangle fit in visible region. 4x vertices: TopLeft, TopRight, BottomRight, BottomLeft.")
     )
 
     EnumConstant(

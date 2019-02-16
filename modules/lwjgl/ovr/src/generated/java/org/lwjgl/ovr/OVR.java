@@ -406,12 +406,14 @@ public class OVR {
      * <li>{@link #ovrFovStencil_HiddenArea FovStencil_HiddenArea} - Triangle list covering parts that are hidden to users.</li>
      * <li>{@link #ovrFovStencil_VisibleArea FovStencil_VisibleArea} - Triangle list covering parts that are visible to users.</li>
      * <li>{@link #ovrFovStencil_BorderLine FovStencil_BorderLine} - Line list that draws the boundary visible to users.</li>
+     * <li>{@link #ovrFovStencil_VisibleRectangle FovStencil_VisibleRectangle} - Axis-aligned rectangle fit in visible region. 4x vertices: TopLeft, TopRight, BottomRight, BottomLeft.</li>
      * </ul>
      */
     public static final int
-        ovrFovStencil_HiddenArea  = 0,
-        ovrFovStencil_VisibleArea = 1,
-        ovrFovStencil_BorderLine  = 2;
+        ovrFovStencil_HiddenArea       = 0,
+        ovrFovStencil_VisibleArea      = 1,
+        ovrFovStencil_BorderLine       = 2,
+        ovrFovStencil_VisibleRectangle = 3;
 
     /**
      * Flags used by {@link OVRFovStencilDesc} and which are passed to {@link #ovr_GetFovStencil GetFovStencil}. ({@code ovrFovStencilFlags}
