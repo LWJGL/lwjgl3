@@ -142,7 +142,7 @@ ENABLE_WARNINGS()""")
         "NOLOCK".enum("Don't do any locking, caller must manage their own locks.", 0x400000),
         "NORDAHEAD".enum("Don't do readahead (no effect on Windows).", 0x800000),
         "NOMEMINIT".enum("Don't initialize malloc'd memory before writing to datafile.", 0x1000000),
-        "PREVMETA".enum("Use the previous meta page rather than the latest one.", 0x2000000)
+        "PREVSNAPSHOT".enum("Use the previous snapshot rather than the latest one.", 0x2000000)
     )
 
     EnumConstant(
@@ -380,10 +380,11 @@ ENABLE_WARNINGS()""")
 
                 This flag may be changed at any time using #env_set_flags().
                 """,
-                """#PREVMETA
+                """#PREVSNAPSHOT
 
-                Open the environment with the previous meta page rather than the latest one. This loses the latest transaction, but may help work around some
-                types of corruption.
+                Open the environment with the previous snapshot rather than the latest one. This loses the latest transaction, but may help work around some
+                types of corruption. If opened with write access, this must be the only process using the environment. This flag is automatically reset after a
+                write transaction is successfully committed.
                 """
             )}
             """

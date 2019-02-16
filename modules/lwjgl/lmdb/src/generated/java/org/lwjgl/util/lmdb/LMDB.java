@@ -145,22 +145,22 @@ public class LMDB {
      * <li>{@link #MDB_NOLOCK NOLOCK} - Don't do any locking, caller must manage their own locks.</li>
      * <li>{@link #MDB_NORDAHEAD NORDAHEAD} - Don't do readahead (no effect on Windows).</li>
      * <li>{@link #MDB_NOMEMINIT NOMEMINIT} - Don't initialize malloc'd memory before writing to datafile.</li>
-     * <li>{@link #MDB_PREVMETA PREVMETA} - Use the previous meta page rather than the latest one.</li>
+     * <li>{@link #MDB_PREVSNAPSHOT PREVSNAPSHOT} - Use the previous snapshot rather than the latest one.</li>
      * </ul>
      */
     public static final int
-        MDB_FIXEDMAP   = 0x1,
-        MDB_NOSUBDIR   = 0x4000,
-        MDB_NOSYNC     = 0x10000,
-        MDB_RDONLY     = 0x20000,
-        MDB_NOMETASYNC = 0x40000,
-        MDB_WRITEMAP   = 0x80000,
-        MDB_MAPASYNC   = 0x100000,
-        MDB_NOTLS      = 0x200000,
-        MDB_NOLOCK     = 0x400000,
-        MDB_NORDAHEAD  = 0x800000,
-        MDB_NOMEMINIT  = 0x1000000,
-        MDB_PREVMETA   = 0x2000000;
+        MDB_FIXEDMAP     = 0x1,
+        MDB_NOSUBDIR     = 0x4000,
+        MDB_NOSYNC       = 0x10000,
+        MDB_RDONLY       = 0x20000,
+        MDB_NOMETASYNC   = 0x40000,
+        MDB_WRITEMAP     = 0x80000,
+        MDB_MAPASYNC     = 0x100000,
+        MDB_NOTLS        = 0x200000,
+        MDB_NOLOCK       = 0x400000,
+        MDB_NORDAHEAD    = 0x800000,
+        MDB_NOMEMINIT    = 0x1000000,
+        MDB_PREVSNAPSHOT = 0x2000000;
 
     /**
      * Database flags.
@@ -498,10 +498,11 @@ public class LMDB {
      *              the caller is expected to overwrite all of the memory that was reserved in that case.</p>
      *              
      *              <p>This flag may be changed at any time using {@link #mdb_env_set_flags env_set_flags}.</p></li>
-     *              <li>{@link #MDB_PREVMETA PREVMETA}
+     *              <li>{@link #MDB_PREVSNAPSHOT PREVSNAPSHOT}
      *              
-     *              <p>Open the environment with the previous meta page rather than the latest one. This loses the latest transaction, but may help work around some
-     *              types of corruption.</p></li>
+     *              <p>Open the environment with the previous snapshot rather than the latest one. This loses the latest transaction, but may help work around some
+     *              types of corruption. If opened with write access, this must be the only process using the environment. This flag is automatically reset after a
+     *              write transaction is successfully committed.</p></li>
      *              </ul>
      * @param mode  The UNIX permissions to set on created files and semaphores.
      *              
@@ -613,10 +614,11 @@ public class LMDB {
      *              the caller is expected to overwrite all of the memory that was reserved in that case.</p>
      *              
      *              <p>This flag may be changed at any time using {@link #mdb_env_set_flags env_set_flags}.</p></li>
-     *              <li>{@link #MDB_PREVMETA PREVMETA}
+     *              <li>{@link #MDB_PREVSNAPSHOT PREVSNAPSHOT}
      *              
-     *              <p>Open the environment with the previous meta page rather than the latest one. This loses the latest transaction, but may help work around some
-     *              types of corruption.</p></li>
+     *              <p>Open the environment with the previous snapshot rather than the latest one. This loses the latest transaction, but may help work around some
+     *              types of corruption. If opened with write access, this must be the only process using the environment. This flag is automatically reset after a
+     *              write transaction is successfully committed.</p></li>
      *              </ul>
      * @param mode  The UNIX permissions to set on created files and semaphores.
      *              
