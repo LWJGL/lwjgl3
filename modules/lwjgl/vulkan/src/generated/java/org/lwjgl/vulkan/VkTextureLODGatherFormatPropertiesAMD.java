@@ -16,6 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Structure informing whether or not texture gather bias/LOD functionality is supported for a given image format and a given physical device.
  * 
+ * <h5>Valid Usage (Implicit)</h5>
+ * 
+ * <ul>
+ * <li>{@code sType} <b>must</b> be {@link AMDTextureGatherBiasLod#VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD}</li>
+ * </ul>
+ * 
  * <h3>Member documentation</h3>
  * 
  * <ul>

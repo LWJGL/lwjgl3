@@ -9,11 +9,9 @@ import javax.annotation.*;
 
 import java.nio.*;
 
-import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing discard rectangle limits that can be supported by an implementation.
@@ -45,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxDiscardRectangles;
  * }</code></pre>
  */
-public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -101,18 +99,14 @@ public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct implem
     public VkPhysicalDeviceDiscardRectanglePropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDiscardRectanglePropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDiscardRectangles} field. */
-    public VkPhysicalDeviceDiscardRectanglePropertiesEXT maxDiscardRectangles(@NativeType("uint32_t") int value) { nmaxDiscardRectangles(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceDiscardRectanglePropertiesEXT set(
         int sType,
-        long pNext,
-        int maxDiscardRectangles
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        maxDiscardRectangles(maxDiscardRectangles);
 
         return this;
     }
@@ -131,22 +125,6 @@ public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct implem
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceDiscardRectanglePropertiesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT malloc() {
-        return wrap(VkPhysicalDeviceDiscardRectanglePropertiesEXT.class, nmemAllocChecked(SIZEOF));
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceDiscardRectanglePropertiesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT calloc() {
-        return wrap(VkPhysicalDeviceDiscardRectanglePropertiesEXT.class, nmemCallocChecked(1, SIZEOF));
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceDiscardRectanglePropertiesEXT} instance allocated with {@link BufferUtils}. */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT create() {
-        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceDiscardRectanglePropertiesEXT.class, memAddress(container), container);
-    }
-
     /** Returns a new {@code VkPhysicalDeviceDiscardRectanglePropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceDiscardRectanglePropertiesEXT create(long address) {
         return wrap(VkPhysicalDeviceDiscardRectanglePropertiesEXT.class, address);
@@ -156,34 +134,6 @@ public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct implem
     @Nullable
     public static VkPhysicalDeviceDiscardRectanglePropertiesEXT createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceDiscardRectanglePropertiesEXT.class, address);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer create(int capacity) {
-        ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -204,74 +154,6 @@ public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct implem
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceDiscardRectanglePropertiesEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceDiscardRectanglePropertiesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT callocStack() {
-        return callocStack(stackGet());
-    }
-
-    /**
-     * Returns a new {@code VkPhysicalDeviceDiscardRectanglePropertiesEXT} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT mallocStack(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceDiscardRectanglePropertiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@code VkPhysicalDeviceDiscardRectanglePropertiesEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT callocStack(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceDiscardRectanglePropertiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
-    }
-
-    // -----------------------------------
-
     /** Unsafe version of {@link #sType}. */
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
@@ -283,13 +165,11 @@ public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct implem
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #maxDiscardRectangles(int) maxDiscardRectangles}. */
-    public static void nmaxDiscardRectangles(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceDiscardRectanglePropertiesEXT.MAXDISCARDRECTANGLES, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceDiscardRectanglePropertiesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceDiscardRectanglePropertiesEXT, Buffer> {
 
         private static final VkPhysicalDeviceDiscardRectanglePropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceDiscardRectanglePropertiesEXT.create(-1L);
 
@@ -338,8 +218,6 @@ public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct implem
         public VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDiscardRectanglePropertiesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDiscardRectanglePropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDiscardRectangles} field. */
-        public VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer maxDiscardRectangles(@NativeType("uint32_t") int value) { VkPhysicalDeviceDiscardRectanglePropertiesEXT.nmaxDiscardRectangles(address(), value); return this; }
 
     }
 

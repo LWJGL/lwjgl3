@@ -14,7 +14,7 @@ val NV_sample_mask_override_coverage = "NVSampleMaskOverrideCoverage".nativeClas
         This extension adds support for the following SPIR-V extension in Vulkan:
 
         <ul>
-            <li>SPV_NV_sample_mask_override_coverage</li>
+            <li>{@code SPV_NV_sample_mask_override_coverage}</li>
         </ul>
 
         The extension provides access to the {@code OverrideCoverageNV} decoration under the {@code SampleMaskOverrideCoverageNV} capability. Adding this decoration to a variable with the {@code SampleMask} builtin decoration allows the shader to modify the coverage mask and affect which samples are used to process the fragment.
@@ -52,8 +52,8 @@ val NV_sample_mask_override_coverage = "NVSampleMaskOverrideCoverage".nativeClas
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_sample_mask_override_coverage.html">SPV_NV_sample_mask_override_coverage</a> SPIR-V extension.</li>
-                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_sample_mask_override_coverage.txt">GL_NV_sample_mask_override_coverage</a> extension for GLSL source languages.</li>
+                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_sample_mask_override_coverage.html">{@code SPV_NV_sample_mask_override_coverage}</a> SPIR-V extension.</li>
+                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_sample_mask_override_coverage.txt">{@code GL_NV_sample_mask_override_coverage}</a> extension for GLSL source languages.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

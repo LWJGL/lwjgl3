@@ -16,7 +16,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>225</dd>
  * <dt><b>Revision</b></dt>
- * <dd>0</dd>
+ * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -31,7 +31,7 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires the <a target="_blank" href="https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/GOOGLE/SPV_GOOGLE_decorate_string.asciidoc">SPV_GOOGLE_decorate_string</a> SPIR-V extension.</li>
+ * <li>Requires the <a target="_blank" href="https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/GOOGLE/SPV_GOOGLE_decorate_string.asciidoc">{@code SPV_GOOGLE_decorate_string}</a> SPIR-V extension.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
@@ -43,7 +43,7 @@ package org.lwjgl.vulkan;
 public final class GOOGLEDecorateString {
 
     /** The extension specification version. */
-    public static final int VK_GOOGLE_DECORATE_STRING_SPEC_VERSION = 0;
+    public static final int VK_GOOGLE_DECORATE_STRING_SPEC_VERSION = 1;
 
     /** The extension name. */
     public static final String VK_GOOGLE_DECORATE_STRING_EXTENSION_NAME = "VK_GOOGLE_decorate_string";

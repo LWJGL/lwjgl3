@@ -25,7 +25,7 @@ import org.lwjgl.system.windows.*;
  * 
  * <p>The handle types supported by {@code handleType} are:</p>
  * 
- * <h6>Handle Types Supported by VkImportSemaphoreWin32HandleInfoKHR</h6>
+ * <h6>Handle Types Supported by {@link VkImportSemaphoreWin32HandleInfoKHR}</h6>
  * 
  * <table class="lwjgl">
  * <thead><tr><th>Handle Type</th><th>Transference</th><th>Permanence Supported</th></tr></thead>

@@ -154,9 +154,10 @@ public class EXTExternalMemoryHost {
      * 
      * <p>{@link VkMemoryHostPointerPropertiesEXT}</p>
      *
-     * @param device       the logical device that will be importing {@code pHostPointer}.
-     * @param handleType   the type of the handle {@code pHostPointer}.
-     * @param pHostPointer the host pointer to import from.
+     * @param device                       the logical device that will be importing {@code pHostPointer}.
+     * @param handleType                   the type of the handle {@code pHostPointer}.
+     * @param pHostPointer                 the host pointer to import from.
+     * @param pMemoryHostPointerProperties a pointer to a {@link VkMemoryHostPointerPropertiesEXT} structure in which the host pointer properties are returned.
      */
     @NativeType("VkResult")
     public static int vkGetMemoryHostPointerPropertiesEXT(VkDevice device, @NativeType("VkExternalMemoryHandleTypeFlagBits") int handleType, @NativeType("void const *") long pHostPointer, @NativeType("VkMemoryHostPointerPropertiesEXT *") VkMemoryHostPointerPropertiesEXT pMemoryHostPointerProperties) {

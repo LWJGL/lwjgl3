@@ -177,7 +177,7 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The pipelineBindPoint specified during the creation of the descriptor update template <b>must</b> be supported by the {@code commandBuffer}&#8217;s parent {@code VkCommandPool}&#8217;s queue family</li>
+            <li>The {@code pipelineBindPoint} specified during the creation of the descriptor update template <b>must</b> be supported by the {@code commandBuffer}&#8217;s parent {@code VkCommandPool}&#8217;s queue family</li>
             <li>{@code pData} <b>must</b> be a valid pointer to a memory that contains one or more valid instances of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with #CreateDescriptorUpdateTemplateKHR()</li>
         </ul>
 
@@ -204,11 +204,6 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
         </table>
 
         <pre><code>
-￿struct AppBufferView {
-￿    VkBufferView bufferView;
-￿    uint32_t     applicationRelatedInformation;
-￿};
-￿
 ￿struct AppDataStructure
 ￿{
 ￿    VkDescriptorImageInfo  imageInfo;          // a single image info
@@ -224,24 +219,23 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 ￿        1,                                           // descriptorCount
 ￿        VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,   // descriptorType
 ￿        offsetof(AppDataStructure, imageInfo),       // offset
-￿        0                                            // stride is not required if descriptorCount is 1.
+￿        0                                            // stride is not required if descriptorCount is 1
 ￿    }
-￿
 ￿};
 ￿
 ￿// create a descriptor update template for descriptor set updates
 ￿const VkDescriptorUpdateTemplateCreateInfo createInfo =
 ￿{
 ￿    VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO,  // sType
-￿    NULL,                                                          // pNext
-￿    0,                                                             // flags
-￿    1,                                                             // descriptorUpdateEntryCount
-￿    descriptorUpdateTemplateEntries,                               // pDescriptorUpdateEntries
-￿    VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR,       // templateType
-￿    0,                                                             // descriptorSetLayout, ignored by given templateType
-￿    VK_PIPELINE_BIND_POINT_GRAPHICS,                               // pipelineBindPoint
-￿    myPipelineLayout,                                              // pipelineLayout
-￿    0,                                                             // set
+￿    NULL,                                                      // pNext
+￿    0,                                                         // flags
+￿    1,                                                         // descriptorUpdateEntryCount
+￿    descriptorUpdateTemplateEntries,                           // pDescriptorUpdateEntries
+￿    VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR,   // templateType
+￿    0,                                                         // descriptorSetLayout, ignored by given templateType
+￿    VK_PIPELINE_BIND_POINT_GRAPHICS,                           // pipelineBindPoint
+￿    myPipelineLayout,                                          // pipelineLayout
+￿    0,                                                         // set
 ￿};
 ￿
 ￿VkDescriptorUpdateTemplate myDescriptorUpdateTemplate;
@@ -258,9 +252,9 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer that the descriptors will be recorded in."),
-        VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "A descriptor update template which defines how to interpret the descriptor information in pData."),
+        VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "a descriptor update template that defines how to interpret the descriptor information in {@code pData}."),
         VkPipelineLayout("layout", "a {@code VkPipelineLayout} object used to program the bindings. It <b>must</b> be compatible with the layout used to create the {@code descriptorUpdateTemplate} handle."),
         uint32_t("set", "the set number of the descriptor set in the pipeline layout that will be updated. This <b>must</b> be the same number used to create the {@code descriptorUpdateTemplate} handle."),
-        opaque_const_p("pData", "Points to memory which contains the descriptors for the templated update.")
+        opaque_const_p("pData", "points to memory which contains the descriptors for the templated update.")
     )
 }

@@ -30,7 +30,7 @@ package org.lwjgl.vulkan;
  * <dd>2018-07-05</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_gpu_shader_int64.txt">GL_ARB_gpu_shader_int64</a> and <a target="_blank" href="https://github.com/KhronosGroup/GLSL/tree/master/extensions/ext/GL_EXT_shader_atomic_int64.txt">GL_EXT_shader_atomic_int64</a> extensions for GLSL source languages.</li>
+ * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_gpu_shader_int64.txt">{@code GL_ARB_gpu_shader_int64}</a> and <a target="_blank" href="https://github.com/KhronosGroup/GLSL/tree/master/extensions/ext/GL_EXT_shader_atomic_int64.txt">{@code GL_EXT_shader_atomic_int64}</a> extensions for GLSL source languages.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

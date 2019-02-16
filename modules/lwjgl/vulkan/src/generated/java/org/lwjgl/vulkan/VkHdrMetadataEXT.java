@@ -18,11 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * structure to specify Hdr metadata.
  * 
- * <h5>Description</h5>
+ * <h5>Valid Usage (Implicit)</h5>
+ * 
+ * <ul>
+ * <li>{@code sType} <b>must</b> be {@link EXTHdrMetadata#VK_STRUCTURE_TYPE_HDR_METADATA_EXT STRUCTURE_TYPE_HDR_METADATA_EXT}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * </ul>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>The validity and use of this data is outside the scope of Vulkan and thus no +Valid Usage+ is given.</p>
+ * <p>The validity and use of this data is outside the scope of Vulkan.</p>
  * </div>
  * 
  * <h5>See Also</h5>

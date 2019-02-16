@@ -9,7 +9,7 @@ package org.lwjgl.vulkan;
  * This extension adds support for the following SPIR-V extension in Vulkan:
  * 
  * <ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_image_load_store_lod.html">SPV_AMD_shader_image_load_store_lod</a></li>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_image_load_store_lod.html">{@code SPV_AMD_shader_image_load_store_lod}</a></li>
  * </ul>
  * 
  * <dl>
@@ -33,8 +33,8 @@ package org.lwjgl.vulkan;
  * <dd>2017-08-21</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_image_load_store_lod.html">SPV_AMD_shader_image_load_store_lod</a> SPIR-V extension.</li>
- * <li>This extension requires <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_shader_image_load_store_lod.txt">GL_AMD_shader_image_load_store_lod</a> for GLSL-based source languages.</li>
+ * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_image_load_store_lod.html">{@code SPV_AMD_shader_image_load_store_lod}</a> SPIR-V extension.</li>
+ * <li>This extension requires <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_shader_image_load_store_lod.txt">{@code GL_AMD_shader_image_load_store_lod}</a> for GLSL-based source languages.</li>
  * </ul></dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>

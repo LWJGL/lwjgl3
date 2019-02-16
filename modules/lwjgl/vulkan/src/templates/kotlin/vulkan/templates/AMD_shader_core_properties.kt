@@ -11,7 +11,7 @@ import vulkan.*
 val AMD_shader_core_properties = "AMDShaderCoreProperties".nativeClassVK("AMD_shader_core_properties", type = "device", postfix = AMD) {
     documentation =
         """
-        This extension exposes shader core properties for a target physical device through the VK_KHR_get_physical_device_properties2 extension. Please refer to the example below for proper usage.
+        This extension exposes shader core properties for a target physical device through the {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} extension. Please refer to the example below for proper usage.
 
         <h5>Examples</h5>
         This example retrieves the shader core properties for a physical device.

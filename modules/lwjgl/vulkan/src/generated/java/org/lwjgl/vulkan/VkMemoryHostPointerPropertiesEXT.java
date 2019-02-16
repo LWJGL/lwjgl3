@@ -102,18 +102,14 @@ public class VkMemoryHostPointerPropertiesEXT extends Struct implements NativeRe
     public VkMemoryHostPointerPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryHostPointerPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code memoryTypeBits} field. */
-    public VkMemoryHostPointerPropertiesEXT memoryTypeBits(@NativeType("uint32_t") int value) { nmemoryTypeBits(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkMemoryHostPointerPropertiesEXT set(
         int sType,
-        long pNext,
-        int memoryTypeBits
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        memoryTypeBits(memoryTypeBits);
 
         return this;
     }
@@ -284,8 +280,6 @@ public class VkMemoryHostPointerPropertiesEXT extends Struct implements NativeRe
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryHostPointerPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryHostPointerPropertiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #memoryTypeBits(int) memoryTypeBits}. */
-    public static void nmemoryTypeBits(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryHostPointerPropertiesEXT.MEMORYTYPEBITS, value); }
 
     // -----------------------------------
 
@@ -339,8 +333,6 @@ public class VkMemoryHostPointerPropertiesEXT extends Struct implements NativeRe
         public VkMemoryHostPointerPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryHostPointerPropertiesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryHostPointerPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkMemoryHostPointerPropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code memoryTypeBits} field. */
-        public VkMemoryHostPointerPropertiesEXT.Buffer memoryTypeBits(@NativeType("uint32_t") int value) { VkMemoryHostPointerPropertiesEXT.nmemoryTypeBits(address(), value); return this; }
 
     }
 

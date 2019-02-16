@@ -9,7 +9,7 @@ package org.lwjgl.vulkan;
  * This extension adds support for the following SPIR-V extension in Vulkan:
  * 
  * <ul>
- * <li>SPV_NV_geometry_shader_passthrough</li>
+ * <li>{@code SPV_NV_geometry_shader_passthrough}</li>
  * </ul>
  * 
  * <p>Geometry shaders provide the ability for applications to process each primitive sent through the graphics pipeline using a programmable shader. However, one common use case treats them largely as a "{@code passthrough}". In this use case, the bulk of the geometry shader code simply copies inputs from each vertex of the input primitive to corresponding outputs in the vertices of the output primitive. Such shaders might also compute values for additional built-in or user-defined per-primitive attributes (e.g., {@code Layer}) to be assigned to all the vertices of the output primitive.</p>
@@ -99,8 +99,8 @@ package org.lwjgl.vulkan;
  * <dd>2017-02-15</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_geometry_shader_passthrough.html">SPV_NV_geometry_shader_passthrough</a> SPIR-V extension.</li>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_geometry_shader_passthrough.txt">GL_NV_geometry_shader_passthrough</a> extension for GLSL source languages.</li>
+ * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_geometry_shader_passthrough.html">{@code SPV_NV_geometry_shader_passthrough}</a> SPIR-V extension.</li>
+ * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_geometry_shader_passthrough.txt">{@code GL_NV_geometry_shader_passthrough}</a> extension for GLSL source languages.</li>
  * <li>This extension requires the {@code geometryShader} feature.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>

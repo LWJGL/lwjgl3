@@ -86,7 +86,7 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
         <ul>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV specifies a handle to memory returned by #GetMemoryWin32HandleNV().</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV specifies a handle to memory returned by #GetMemoryWin32HandleNV(), or one duplicated from such a handle using {@code DuplicateHandle()}.</li>
-            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV specifies a valid NT handle to memory returned by {@code IDXGIResource1::{@code CreateSharedHandle}()}, or a handle duplicated from such a handle using {@code DuplicateHandle()}.</li>
+            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV specifies a valid NT handle to memory returned by {@code IDXGIResource1::CreateSharedHandle}, or a handle duplicated from such a handle using {@code DuplicateHandle()}.</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV specifies a handle to memory returned by {@code IDXGIResource::GetSharedHandle()}.</li>
         </ul>
 

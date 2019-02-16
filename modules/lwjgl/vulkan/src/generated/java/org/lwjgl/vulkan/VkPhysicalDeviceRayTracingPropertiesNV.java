@@ -9,11 +9,9 @@ import javax.annotation.*;
 
 import java.nio.*;
 
-import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Properties of the physical device for ray tracing.
@@ -59,7 +57,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxDescriptorSetAccelerationStructures;
  * }</code></pre>
  */
-public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements NativeResource {
+public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -157,46 +155,14 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
     public VkPhysicalDeviceRayTracingPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceRayTracingPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderGroupHandleSize} field. */
-    public VkPhysicalDeviceRayTracingPropertiesNV shaderGroupHandleSize(@NativeType("uint32_t") int value) { nshaderGroupHandleSize(address(), value); return this; }
-    /** Sets the specified value to the {@code maxRecursionDepth} field. */
-    public VkPhysicalDeviceRayTracingPropertiesNV maxRecursionDepth(@NativeType("uint32_t") int value) { nmaxRecursionDepth(address(), value); return this; }
-    /** Sets the specified value to the {@code maxShaderGroupStride} field. */
-    public VkPhysicalDeviceRayTracingPropertiesNV maxShaderGroupStride(@NativeType("uint32_t") int value) { nmaxShaderGroupStride(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderGroupBaseAlignment} field. */
-    public VkPhysicalDeviceRayTracingPropertiesNV shaderGroupBaseAlignment(@NativeType("uint32_t") int value) { nshaderGroupBaseAlignment(address(), value); return this; }
-    /** Sets the specified value to the {@code maxGeometryCount} field. */
-    public VkPhysicalDeviceRayTracingPropertiesNV maxGeometryCount(@NativeType("uint64_t") long value) { nmaxGeometryCount(address(), value); return this; }
-    /** Sets the specified value to the {@code maxInstanceCount} field. */
-    public VkPhysicalDeviceRayTracingPropertiesNV maxInstanceCount(@NativeType("uint64_t") long value) { nmaxInstanceCount(address(), value); return this; }
-    /** Sets the specified value to the {@code maxTriangleCount} field. */
-    public VkPhysicalDeviceRayTracingPropertiesNV maxTriangleCount(@NativeType("uint64_t") long value) { nmaxTriangleCount(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDescriptorSetAccelerationStructures} field. */
-    public VkPhysicalDeviceRayTracingPropertiesNV maxDescriptorSetAccelerationStructures(@NativeType("uint32_t") int value) { nmaxDescriptorSetAccelerationStructures(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceRayTracingPropertiesNV set(
         int sType,
-        long pNext,
-        int shaderGroupHandleSize,
-        int maxRecursionDepth,
-        int maxShaderGroupStride,
-        int shaderGroupBaseAlignment,
-        long maxGeometryCount,
-        long maxInstanceCount,
-        long maxTriangleCount,
-        int maxDescriptorSetAccelerationStructures
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        shaderGroupHandleSize(shaderGroupHandleSize);
-        maxRecursionDepth(maxRecursionDepth);
-        maxShaderGroupStride(maxShaderGroupStride);
-        shaderGroupBaseAlignment(shaderGroupBaseAlignment);
-        maxGeometryCount(maxGeometryCount);
-        maxInstanceCount(maxInstanceCount);
-        maxTriangleCount(maxTriangleCount);
-        maxDescriptorSetAccelerationStructures(maxDescriptorSetAccelerationStructures);
 
         return this;
     }
@@ -215,22 +181,6 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
-    public static VkPhysicalDeviceRayTracingPropertiesNV malloc() {
-        return wrap(VkPhysicalDeviceRayTracingPropertiesNV.class, nmemAllocChecked(SIZEOF));
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
-    public static VkPhysicalDeviceRayTracingPropertiesNV calloc() {
-        return wrap(VkPhysicalDeviceRayTracingPropertiesNV.class, nmemCallocChecked(1, SIZEOF));
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated with {@link BufferUtils}. */
-    public static VkPhysicalDeviceRayTracingPropertiesNV create() {
-        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceRayTracingPropertiesNV.class, memAddress(container), container);
-    }
-
     /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceRayTracingPropertiesNV create(long address) {
         return wrap(VkPhysicalDeviceRayTracingPropertiesNV.class, address);
@@ -240,34 +190,6 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
     @Nullable
     public static VkPhysicalDeviceRayTracingPropertiesNV createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceRayTracingPropertiesNV.class, address);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceRayTracingPropertiesNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceRayTracingPropertiesNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceRayTracingPropertiesNV.Buffer create(int capacity) {
-        ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -284,74 +206,6 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
     @Nullable
     public static VkPhysicalDeviceRayTracingPropertiesNV.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
-    }
-
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceRayTracingPropertiesNV mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceRayTracingPropertiesNV callocStack() {
-        return callocStack(stackGet());
-    }
-
-    /**
-     * Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkPhysicalDeviceRayTracingPropertiesNV mallocStack(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceRayTracingPropertiesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@code VkPhysicalDeviceRayTracingPropertiesNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkPhysicalDeviceRayTracingPropertiesNV callocStack(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceRayTracingPropertiesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceRayTracingPropertiesNV.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceRayTracingPropertiesNV.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceRayTracingPropertiesNV.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceRayTracingPropertiesNV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceRayTracingPropertiesNV.Buffer callocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -381,27 +235,11 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRayTracingPropertiesNV.PNEXT, value); }
-    /** Unsafe version of {@link #shaderGroupHandleSize(int) shaderGroupHandleSize}. */
-    public static void nshaderGroupHandleSize(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.SHADERGROUPHANDLESIZE, value); }
-    /** Unsafe version of {@link #maxRecursionDepth(int) maxRecursionDepth}. */
-    public static void nmaxRecursionDepth(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXRECURSIONDEPTH, value); }
-    /** Unsafe version of {@link #maxShaderGroupStride(int) maxShaderGroupStride}. */
-    public static void nmaxShaderGroupStride(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXSHADERGROUPSTRIDE, value); }
-    /** Unsafe version of {@link #shaderGroupBaseAlignment(int) shaderGroupBaseAlignment}. */
-    public static void nshaderGroupBaseAlignment(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.SHADERGROUPBASEALIGNMENT, value); }
-    /** Unsafe version of {@link #maxGeometryCount(long) maxGeometryCount}. */
-    public static void nmaxGeometryCount(long struct, long value) { UNSAFE.putLong(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXGEOMETRYCOUNT, value); }
-    /** Unsafe version of {@link #maxInstanceCount(long) maxInstanceCount}. */
-    public static void nmaxInstanceCount(long struct, long value) { UNSAFE.putLong(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXINSTANCECOUNT, value); }
-    /** Unsafe version of {@link #maxTriangleCount(long) maxTriangleCount}. */
-    public static void nmaxTriangleCount(long struct, long value) { UNSAFE.putLong(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXTRIANGLECOUNT, value); }
-    /** Unsafe version of {@link #maxDescriptorSetAccelerationStructures(int) maxDescriptorSetAccelerationStructures}. */
-    public static void nmaxDescriptorSetAccelerationStructures(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceRayTracingPropertiesNV.MAXDESCRIPTORSETACCELERATIONSTRUCTURES, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceRayTracingPropertiesNV} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceRayTracingPropertiesNV, Buffer> implements NativeResource {
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceRayTracingPropertiesNV, Buffer> {
 
         private static final VkPhysicalDeviceRayTracingPropertiesNV ELEMENT_FACTORY = VkPhysicalDeviceRayTracingPropertiesNV.create(-1L);
 
@@ -471,22 +309,6 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
         public VkPhysicalDeviceRayTracingPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRayTracingPropertiesNV.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceRayTracingPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRayTracingPropertiesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderGroupHandleSize} field. */
-        public VkPhysicalDeviceRayTracingPropertiesNV.Buffer shaderGroupHandleSize(@NativeType("uint32_t") int value) { VkPhysicalDeviceRayTracingPropertiesNV.nshaderGroupHandleSize(address(), value); return this; }
-        /** Sets the specified value to the {@code maxRecursionDepth} field. */
-        public VkPhysicalDeviceRayTracingPropertiesNV.Buffer maxRecursionDepth(@NativeType("uint32_t") int value) { VkPhysicalDeviceRayTracingPropertiesNV.nmaxRecursionDepth(address(), value); return this; }
-        /** Sets the specified value to the {@code maxShaderGroupStride} field. */
-        public VkPhysicalDeviceRayTracingPropertiesNV.Buffer maxShaderGroupStride(@NativeType("uint32_t") int value) { VkPhysicalDeviceRayTracingPropertiesNV.nmaxShaderGroupStride(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderGroupBaseAlignment} field. */
-        public VkPhysicalDeviceRayTracingPropertiesNV.Buffer shaderGroupBaseAlignment(@NativeType("uint32_t") int value) { VkPhysicalDeviceRayTracingPropertiesNV.nshaderGroupBaseAlignment(address(), value); return this; }
-        /** Sets the specified value to the {@code maxGeometryCount} field. */
-        public VkPhysicalDeviceRayTracingPropertiesNV.Buffer maxGeometryCount(@NativeType("uint64_t") long value) { VkPhysicalDeviceRayTracingPropertiesNV.nmaxGeometryCount(address(), value); return this; }
-        /** Sets the specified value to the {@code maxInstanceCount} field. */
-        public VkPhysicalDeviceRayTracingPropertiesNV.Buffer maxInstanceCount(@NativeType("uint64_t") long value) { VkPhysicalDeviceRayTracingPropertiesNV.nmaxInstanceCount(address(), value); return this; }
-        /** Sets the specified value to the {@code maxTriangleCount} field. */
-        public VkPhysicalDeviceRayTracingPropertiesNV.Buffer maxTriangleCount(@NativeType("uint64_t") long value) { VkPhysicalDeviceRayTracingPropertiesNV.nmaxTriangleCount(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDescriptorSetAccelerationStructures} field. */
-        public VkPhysicalDeviceRayTracingPropertiesNV.Buffer maxDescriptorSetAccelerationStructures(@NativeType("uint32_t") int value) { VkPhysicalDeviceRayTracingPropertiesNV.nmaxDescriptorSetAccelerationStructures(address(), value); return this; }
 
     }
 

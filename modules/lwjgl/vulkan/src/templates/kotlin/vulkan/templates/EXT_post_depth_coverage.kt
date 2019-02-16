@@ -14,7 +14,7 @@ val EXT_post_depth_coverage = "EXTPostDepthCoverage".nativeClassVK("EXT_post_dep
         This extension adds support for the following SPIR-V extension in Vulkan:
 
         <ul>
-            <li>SPV_KHR_post_depth_coverage</li>
+            <li>{@code SPV_KHR_post_depth_coverage}</li>
         </ul>
 
         which allows the fragment shader to control whether values in the {@code SampleMask} built-in input variable reflect the coverage after the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#fragops-early">early per-fragment</a> depth and stencil tests are applied.
@@ -51,8 +51,8 @@ val EXT_post_depth_coverage = "EXTPostDepthCoverage".nativeClassVK("EXT_post_dep
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_post_depth_coverage.html">SPV_KHR_post_depth_coverage</a> SPIR-V extension.</li>
-                <li>This extension requires <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_post_depth_coverage.txt">GL_ARB_post_depth_coverage</a> or <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_post_depth_coverage.txt">GL_EXT_post_depth_coverage</a> for GLSL-based source languages.</li>
+                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_post_depth_coverage.html">{@code SPV_KHR_post_depth_coverage}</a> SPIR-V extension.</li>
+                <li>This extension requires <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_post_depth_coverage.txt">{@code GL_ARB_post_depth_coverage}</a> or <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_post_depth_coverage.txt">{@code GL_EXT_post_depth_coverage}</a> for GLSL-based source languages.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

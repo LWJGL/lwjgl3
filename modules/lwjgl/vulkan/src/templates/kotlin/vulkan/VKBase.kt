@@ -21,9 +21,10 @@ fun config() {
     )
 }
 
-val VkFlags = typedef(uint32_t, "VkFlags")
 val VkBool32 = PrimitiveType("VkBool32", PrimitiveMapping.BOOLEAN4)
+val VkDeviceAddress = typedef(uint64_t, "VkDeviceAddress")
 val VkDeviceSize = typedef(uint64_t, "VkDeviceSize")
+val VkFlags = typedef(uint32_t, "VkFlags")
 val VkSampleMask = typedef(uint32_t, "VkSampleMask")
 
 val PFN_vkVoidFunction = typedef(opaque_p, "PFN_vkVoidFunction")

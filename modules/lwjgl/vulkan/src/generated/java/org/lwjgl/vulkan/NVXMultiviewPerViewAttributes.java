@@ -60,8 +60,8 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NVX_multiview_per_view_attributes.html">SPV_NVX_multiview_per_view_attributes</a> SPIR-V extension.</li>
- * <li>This extension requires the GL_NVX_multiview_per_view_attributes extension for GLSL source languages.</li>
+ * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NVX_multiview_per_view_attributes.html">{@code SPV_NVX_multiview_per_view_attributes}</a> SPIR-V extension.</li>
+ * <li>This extension requires the {@code GL_NVX_multiview_per_view_attributes} extension for GLSL source languages.</li>
  * <li>This extension interacts with {@link NVViewportArray2 VK_NV_viewport_array2}.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>

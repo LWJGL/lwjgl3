@@ -9,7 +9,7 @@ package org.lwjgl.vulkan;
  * This extension adds support for the following SPIR-V extension in Vulkan:
  * 
  * <ul>
- * <li>SPV_KHR_subgroup_vote</li>
+ * <li>{@code SPV_KHR_subgroup_vote}</li>
  * </ul>
  * 
  * <p>This extension provides new SPIR-V instructions:</p>
@@ -77,8 +77,8 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_subgroup_vote.html">SPV_KHR_subgroup_vote</a> SPIR-V extension.</li>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_group_vote.txt">GL_ARB_shader_group_vote</a> extension for GLSL source languages.</li>
+ * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_subgroup_vote.html">{@code SPV_KHR_subgroup_vote}</a> SPIR-V extension.</li>
+ * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_group_vote.txt">{@code GL_ARB_shader_group_vote}</a> extension for GLSL source languages.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

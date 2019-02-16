@@ -9,7 +9,7 @@ package org.lwjgl.vulkan;
  * This extension adds support for the following SPIR-V extension in Vulkan:
  * 
  * <ul>
- * <li>SPV_KHR_shader_draw_parameters</li>
+ * <li>{@code SPV_KHR_shader_draw_parameters}</li>
  * </ul>
  * 
  * <p>The extension provides access to three additional built-in shader variables in Vulkan:</p>
@@ -59,8 +59,8 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_shader_draw_parameters.html">SPV_KHR_shader_draw_parameters</a> SPIR-V extension.</li>
- * <li>Requires <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_draw_parameters.txt">GL_ARB_shader_draw_parameters</a> for GLSL source languages.</li>
+ * <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_shader_draw_parameters.html">{@code SPV_KHR_shader_draw_parameters}</a> SPIR-V extension.</li>
+ * <li>Requires <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_draw_parameters.txt">{@code GL_ARB_shader_draw_parameters}</a> for GLSL source languages.</li>
  * <li>Promoted to Vulkan 1.1 Core</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>

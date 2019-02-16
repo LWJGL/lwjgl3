@@ -14,7 +14,7 @@ val AMD_shader_explicit_vertex_parameter = "AMDShaderExplicitVertexParameter".na
         This extension adds support for the following SPIR-V extension in Vulkan:
 
         <ul>
-            <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_explicit_vertex_parameter.html">SPV_AMD_shader_explicit_vertex_parameter</a></li>
+            <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_explicit_vertex_parameter.html">{@code SPV_AMD_shader_explicit_vertex_parameter}</a></li>
         </ul>
 
         <dl>

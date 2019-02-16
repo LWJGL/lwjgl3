@@ -12,6 +12,7 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -29,6 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link NVViewportSwizzle#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV}</li>
  * <li>{@code flags} <b>must</b> be 0</li>
+ * <li>{@code pViewportSwizzles} <b>must</b> be a valid pointer to an array of {@code viewportCount} valid {@link VkViewportSwizzleNV} structures</li>
  * <li>{@code viewportCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
@@ -118,7 +120,6 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
     @NativeType("uint32_t")
     public int viewportCount() { return nviewportCount(address()); }
     /** Returns a {@link VkViewportSwizzleNV.Buffer} view of the struct array pointed to by the {@code pViewportSwizzles} field. */
-    @Nullable
     @NativeType("VkViewportSwizzleNV const *")
     public VkViewportSwizzleNV.Buffer pViewportSwizzles() { return npViewportSwizzles(address()); }
 
@@ -128,23 +129,19 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
     public VkPipelineViewportSwizzleStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
     public VkPipelineViewportSwizzleStateCreateInfoNV flags(@NativeType("VkPipelineViewportSwizzleStateCreateFlagsNV") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code viewportCount} field. */
-    public VkPipelineViewportSwizzleStateCreateInfoNV viewportCount(@NativeType("uint32_t") int value) { nviewportCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkViewportSwizzleNV.Buffer} to the {@code pViewportSwizzles} field. */
-    public VkPipelineViewportSwizzleStateCreateInfoNV pViewportSwizzles(@Nullable @NativeType("VkViewportSwizzleNV const *") VkViewportSwizzleNV.Buffer value) { npViewportSwizzles(address(), value); return this; }
+    public VkPipelineViewportSwizzleStateCreateInfoNV pViewportSwizzles(@NativeType("VkViewportSwizzleNV const *") VkViewportSwizzleNV.Buffer value) { npViewportSwizzles(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPipelineViewportSwizzleStateCreateInfoNV set(
         int sType,
         long pNext,
         int flags,
-        int viewportCount,
-        @Nullable VkViewportSwizzleNV.Buffer pViewportSwizzles
+        VkViewportSwizzleNV.Buffer pViewportSwizzles
     ) {
         sType(sType);
         pNext(pNext);
         flags(flags);
-        viewportCount(viewportCount);
         pViewportSwizzles(pViewportSwizzles);
 
         return this;
@@ -314,7 +311,7 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
     /** Unsafe version of {@link #viewportCount}. */
     public static int nviewportCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.VIEWPORTCOUNT); }
     /** Unsafe version of {@link #pViewportSwizzles}. */
-    @Nullable public static VkViewportSwizzleNV.Buffer npViewportSwizzles(long struct) { return VkViewportSwizzleNV.createSafe(memGetAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PVIEWPORTSWIZZLES), nviewportCount(struct)); }
+    public static VkViewportSwizzleNV.Buffer npViewportSwizzles(long struct) { return VkViewportSwizzleNV.create(memGetAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PVIEWPORTSWIZZLES), nviewportCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.STYPE, value); }
@@ -325,7 +322,28 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
     /** Sets the specified value to the {@code viewportCount} field of the specified {@code struct}. */
     public static void nviewportCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineViewportSwizzleStateCreateInfoNV.VIEWPORTCOUNT, value); }
     /** Unsafe version of {@link #pViewportSwizzles(VkViewportSwizzleNV.Buffer) pViewportSwizzles}. */
-    public static void npViewportSwizzles(long struct, @Nullable VkViewportSwizzleNV.Buffer value) { memPutAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PVIEWPORTSWIZZLES, memAddressSafe(value)); if (value != null) { nviewportCount(struct, value.remaining()); } }
+    public static void npViewportSwizzles(long struct, VkViewportSwizzleNV.Buffer value) { memPutAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PVIEWPORTSWIZZLES, value.address()); nviewportCount(struct, value.remaining()); }
+
+    /**
+     * Validates pointer members that should not be {@code NULL}.
+     *
+     * @param struct the struct to validate
+     */
+    public static void validate(long struct) {
+        check(memGetAddress(struct + VkPipelineViewportSwizzleStateCreateInfoNV.PVIEWPORTSWIZZLES));
+    }
+
+    /**
+     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
+     *
+     * @param array the struct array to validate
+     * @param count the number of structs in {@code array}
+     */
+    public static void validate(long array, int count) {
+        for (int i = 0; i < count; i++) {
+            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
+        }
+    }
 
     // -----------------------------------
 
@@ -378,7 +396,6 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
         @NativeType("uint32_t")
         public int viewportCount() { return VkPipelineViewportSwizzleStateCreateInfoNV.nviewportCount(address()); }
         /** Returns a {@link VkViewportSwizzleNV.Buffer} view of the struct array pointed to by the {@code pViewportSwizzles} field. */
-        @Nullable
         @NativeType("VkViewportSwizzleNV const *")
         public VkViewportSwizzleNV.Buffer pViewportSwizzles() { return VkPipelineViewportSwizzleStateCreateInfoNV.npViewportSwizzles(address()); }
 
@@ -388,10 +405,8 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
         public VkPipelineViewportSwizzleStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineViewportSwizzleStateCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */
         public VkPipelineViewportSwizzleStateCreateInfoNV.Buffer flags(@NativeType("VkPipelineViewportSwizzleStateCreateFlagsNV") int value) { VkPipelineViewportSwizzleStateCreateInfoNV.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code viewportCount} field. */
-        public VkPipelineViewportSwizzleStateCreateInfoNV.Buffer viewportCount(@NativeType("uint32_t") int value) { VkPipelineViewportSwizzleStateCreateInfoNV.nviewportCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkViewportSwizzleNV.Buffer} to the {@code pViewportSwizzles} field. */
-        public VkPipelineViewportSwizzleStateCreateInfoNV.Buffer pViewportSwizzles(@Nullable @NativeType("VkViewportSwizzleNV const *") VkViewportSwizzleNV.Buffer value) { VkPipelineViewportSwizzleStateCreateInfoNV.npViewportSwizzles(address(), value); return this; }
+        public VkPipelineViewportSwizzleStateCreateInfoNV.Buffer pViewportSwizzles(@NativeType("VkViewportSwizzleNV const *") VkViewportSwizzleNV.Buffer value) { VkPipelineViewportSwizzleStateCreateInfoNV.npViewportSwizzles(address(), value); return this; }
 
     }
 

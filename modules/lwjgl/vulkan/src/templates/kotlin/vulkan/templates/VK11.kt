@@ -421,8 +421,8 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
         <h5>Description</h5>
         <ul>
-            <li>#PEER_MEMORY_FEATURE_COPY_SRC_BIT specifies that the memory <b>can</b> be accessed as the source of a {@code vkCmdCopyBuffer}, {@code vkCmdCopyImage}, {@code vkCmdCopyBufferToImage}, or {@code vkCmdCopyImageToBuffer} command.</li>
-            <li>#PEER_MEMORY_FEATURE_COPY_DST_BIT specifies that the memory <b>can</b> be accessed as the destination of a {@code vkCmdCopyBuffer}, {@code vkCmdCopyImage}, {@code vkCmdCopyBufferToImage}, or {@code vkCmdCopyImageToBuffer} command.</li>
+            <li>#PEER_MEMORY_FEATURE_COPY_SRC_BIT specifies that the memory <b>can</b> be accessed as the source of a #CmdCopyBuffer(), #CmdCopyImage(), #CmdCopyBufferToImage(), or #CmdCopyImageToBuffer() command.</li>
+            <li>#PEER_MEMORY_FEATURE_COPY_DST_BIT specifies that the memory <b>can</b> be accessed as the destination of a #CmdCopyBuffer(), #CmdCopyImage(), #CmdCopyBufferToImage(), or #CmdCopyImageToBuffer() command.</li>
             <li>#PEER_MEMORY_FEATURE_GENERIC_SRC_BIT specifies that the memory <b>can</b> be read as any memory access type.</li>
             <li>#PEER_MEMORY_FEATURE_GENERIC_DST_BIT specifies that the memory <b>can</b> be written as any memory access type. Shader atomics are considered to be writes.</li>
         </ul>
@@ -1019,7 +1019,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>{@code heapIndex} <b>must</b> be less than {@code memoryHeapCount}</li>
             <li>{@code localDeviceIndex} <b>must</b> be a valid device index</li>
             <li>{@code remoteDeviceIndex} <b>must</b> be a valid device index</li>
-            <li>{@code localDeviceIndex} <b>must</b> not equal remoteDeviceIndex</li>
+            <li>{@code localDeviceIndex} <b>must</b> not equal {@code remoteDeviceIndex}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1122,7 +1122,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿    uint32_t                                    groupCountZ);</code></pre>
 
         <h5>Description</h5>
-        When the command is executed, a global workgroup consisting of <code>groupCountX × groupCountY × groupCountZ</code> local workgroups is assembled, with {@code WorkgroupId} values ranging from <code>[baseGroup, baseGroup + groupCount)</code> in each component. #CmdDispatch() is equivalent to {@code vkCmdDispatchBase(0,0,0,groupCountX,groupCountY,groupCountZ)}.
+        When the command is executed, a global workgroup consisting of <code>groupCountX × groupCountY × groupCountZ</code> local workgroups is assembled, with {@code WorkgroupId} values ranging from <code>[baseGroup*, baseGroup* + groupCount*)</code> in each component. #CmdDispatch() is equivalent to {@code vkCmdDispatchBase(0,0,0,groupCountX,groupCountY,groupCountZ)}.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2022,12 +2022,12 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿        1,                                           // descriptorCount
 ￿        VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,   // descriptorType
 ￿        offsetof(AppDataStructure, imageInfo),       // offset
-￿        0                                            // stride is not required if descriptorCount is 1.
+￿        0                                            // stride is not required if descriptorCount is 1
 ￿    },
 ￿
 ￿    // binding to an array of buffer descriptors
 ￿    {
-￿        0,                                           // binding
+￿        1,                                           // binding
 ￿        0,                                           // dstArrayElement
 ￿        3,                                           // descriptorCount
 ￿        VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,           // descriptorType
@@ -2037,11 +2037,12 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿
 ￿    // binding to an array of buffer views
 ￿    {
-￿        0,                                           // binding
-￿        3,                                           // dstArrayElement
-￿        1,                                           // descriptorCount
+￿        2,                                           // binding
+￿        0,                                           // dstArrayElement
+￿        2,                                           // descriptorCount
 ￿        VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER,     // descriptorType
-￿        offsetof(AppDataStructure, bufferView),      // offset
+￿        offsetof(AppDataStructure, bufferView) +
+￿          offsetof(AppBufferView, bufferView),       // offset
 ￿        sizeof(AppBufferView)                        // stride, bufferViews do not have to be compact
 ￿    },
 ￿};
@@ -2050,15 +2051,15 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 ￿const VkDescriptorUpdateTemplateCreateInfo createInfo =
 ￿{
 ￿    VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO,  // sType
-￿    NULL,                                                          // pNext
-￿    0,                                                             // flags
-￿    3,                                                             // descriptorUpdateEntryCount
-￿    descriptorUpdateTemplateEntries,                               // pDescriptorUpdateEntries
+￿    NULL,                                                      // pNext
+￿    0,                                                         // flags
+￿    3,                                                         // descriptorUpdateEntryCount
+￿    descriptorUpdateTemplateEntries,                           // pDescriptorUpdateEntries
 ￿    VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET,         // templateType
-￿    myLayout,                                                      // descriptorSetLayout
-￿    0,                                                             // pipelineBindPoint, ignored by given templateType
-￿    0,                                                             // pipelineLayout, ignored by given templateType
-￿    0,                                                             // set, ignored by given templateType
+￿    myLayout,                                                  // descriptorSetLayout
+￿    0,                                                         // pipelineBindPoint, ignored by given templateType
+￿    0,                                                         // pipelineLayout, ignored by given templateType
+￿    0,                                                         // set, ignored by given templateType
 ￿};
 ￿
 ￿VkDescriptorUpdateTemplate myDescriptorUpdateTemplate;

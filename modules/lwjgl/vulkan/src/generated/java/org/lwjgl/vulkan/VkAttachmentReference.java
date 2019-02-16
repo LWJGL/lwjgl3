@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code attachment} &ndash; the index of the attachment of the render pass, and corresponds to the index of the corresponding element in the {@code pAttachments} array of the {@link VkRenderPassCreateInfo} structure. If any color or depth/stencil attachments are {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, then no writes occur for those attachments.</li>
+ * <li>{@code attachment} &ndash; either an integer value identifying an attachment at the corresponding index in {@link VkRenderPassCreateInfo}{@code ::pAttachments}, or {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} to signify that this attachment is not used.</li>
  * <li>{@code layout} &ndash; a {@code VkImageLayout} value specifying the layout the attachment uses during the subpass.</li>
  * </ul>
  * 

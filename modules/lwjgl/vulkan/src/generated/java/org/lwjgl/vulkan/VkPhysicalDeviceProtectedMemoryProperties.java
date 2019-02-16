@@ -9,11 +9,9 @@ import javax.annotation.*;
 
 import java.nio.*;
 
-import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing protected memory properties that can be supported by an implementation.
@@ -45,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 protectedNoFault;
  * }</code></pre>
  */
-public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements NativeResource {
+public class VkPhysicalDeviceProtectedMemoryProperties extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -101,18 +99,14 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
     public VkPhysicalDeviceProtectedMemoryProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceProtectedMemoryProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code protectedNoFault} field. */
-    public VkPhysicalDeviceProtectedMemoryProperties protectedNoFault(@NativeType("VkBool32") boolean value) { nprotectedNoFault(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceProtectedMemoryProperties set(
         int sType,
-        long pNext,
-        boolean protectedNoFault
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        protectedNoFault(protectedNoFault);
 
         return this;
     }
@@ -131,22 +125,6 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceProtectedMemoryProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
-    public static VkPhysicalDeviceProtectedMemoryProperties malloc() {
-        return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, nmemAllocChecked(SIZEOF));
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceProtectedMemoryProperties} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
-    public static VkPhysicalDeviceProtectedMemoryProperties calloc() {
-        return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, nmemCallocChecked(1, SIZEOF));
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceProtectedMemoryProperties} instance allocated with {@link BufferUtils}. */
-    public static VkPhysicalDeviceProtectedMemoryProperties create() {
-        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, memAddress(container), container);
-    }
-
     /** Returns a new {@code VkPhysicalDeviceProtectedMemoryProperties} instance for the specified memory address. */
     public static VkPhysicalDeviceProtectedMemoryProperties create(long address) {
         return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, address);
@@ -156,34 +134,6 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
     @Nullable
     public static VkPhysicalDeviceProtectedMemoryProperties createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceProtectedMemoryProperties.class, address);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceProtectedMemoryProperties.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceProtectedMemoryProperties.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceProtectedMemoryProperties.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceProtectedMemoryProperties.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceProtectedMemoryProperties.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceProtectedMemoryProperties.Buffer create(int capacity) {
-        ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -204,74 +154,6 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceProtectedMemoryProperties} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceProtectedMemoryProperties mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceProtectedMemoryProperties} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceProtectedMemoryProperties callocStack() {
-        return callocStack(stackGet());
-    }
-
-    /**
-     * Returns a new {@code VkPhysicalDeviceProtectedMemoryProperties} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkPhysicalDeviceProtectedMemoryProperties mallocStack(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@code VkPhysicalDeviceProtectedMemoryProperties} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkPhysicalDeviceProtectedMemoryProperties callocStack(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceProtectedMemoryProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceProtectedMemoryProperties.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceProtectedMemoryProperties.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceProtectedMemoryProperties.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceProtectedMemoryProperties.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceProtectedMemoryProperties.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceProtectedMemoryProperties.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceProtectedMemoryProperties.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceProtectedMemoryProperties.Buffer callocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
-    }
-
-    // -----------------------------------
-
     /** Unsafe version of {@link #sType}. */
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceProtectedMemoryProperties.STYPE); }
     /** Unsafe version of {@link #pNext}. */
@@ -283,13 +165,11 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceProtectedMemoryProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceProtectedMemoryProperties.PNEXT, value); }
-    /** Unsafe version of {@link #protectedNoFault(boolean) protectedNoFault}. */
-    public static void nprotectedNoFault(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceProtectedMemoryProperties.PROTECTEDNOFAULT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceProtectedMemoryProperties} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceProtectedMemoryProperties, Buffer> implements NativeResource {
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceProtectedMemoryProperties, Buffer> {
 
         private static final VkPhysicalDeviceProtectedMemoryProperties ELEMENT_FACTORY = VkPhysicalDeviceProtectedMemoryProperties.create(-1L);
 
@@ -338,8 +218,6 @@ public class VkPhysicalDeviceProtectedMemoryProperties extends Struct implements
         public VkPhysicalDeviceProtectedMemoryProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceProtectedMemoryProperties.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceProtectedMemoryProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceProtectedMemoryProperties.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code protectedNoFault} field. */
-        public VkPhysicalDeviceProtectedMemoryProperties.Buffer protectedNoFault(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceProtectedMemoryProperties.nprotectedNoFault(address(), value ? 1 : 0); return this; }
 
     }
 

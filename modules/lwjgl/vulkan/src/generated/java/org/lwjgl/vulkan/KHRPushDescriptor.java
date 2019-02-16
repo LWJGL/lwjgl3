@@ -191,7 +191,7 @@ public class KHRPushDescriptor {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The pipelineBindPoint specified during the creation of the descriptor update template <b>must</b> be supported by the {@code commandBuffer}&#8217;s parent {@code VkCommandPool}&#8217;s queue family</li>
+     * <li>The {@code pipelineBindPoint} specified during the creation of the descriptor update template <b>must</b> be supported by the {@code commandBuffer}&#8217;s parent {@code VkCommandPool}&#8217;s queue family</li>
      * <li>{@code pData} <b>must</b> be a valid pointer to a memory that contains one or more valid instances of {@link VkDescriptorImageInfo}, {@link VkDescriptorBufferInfo}, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with {@link KHRDescriptorUpdateTemplate#vkCreateDescriptorUpdateTemplateKHR CreateDescriptorUpdateTemplateKHR}</li>
      * </ul>
      * 
@@ -221,11 +221,6 @@ public class KHRPushDescriptor {
      * </table>
      * 
      * <pre><code>
-     * struct AppBufferView {
-     *     VkBufferView bufferView;
-     *     uint32_t     applicationRelatedInformation;
-     * };
-     * 
      * struct AppDataStructure
      * {
      *     VkDescriptorImageInfo  imageInfo;          // a single image info
@@ -241,24 +236,23 @@ public class KHRPushDescriptor {
      *         1,                                           // descriptorCount
      *         VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,   // descriptorType
      *         offsetof(AppDataStructure, imageInfo),       // offset
-     *         0                                            // stride is not required if descriptorCount is 1.
+     *         0                                            // stride is not required if descriptorCount is 1
      *     }
-     * 
      * };
      * 
      * // create a descriptor update template for descriptor set updates
      * const VkDescriptorUpdateTemplateCreateInfo createInfo =
      * {
      *     VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO,  // sType
-     *     NULL,                                                          // pNext
-     *     0,                                                             // flags
-     *     1,                                                             // descriptorUpdateEntryCount
-     *     descriptorUpdateTemplateEntries,                               // pDescriptorUpdateEntries
-     *     VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR,       // templateType
-     *     0,                                                             // descriptorSetLayout, ignored by given templateType
-     *     VK_PIPELINE_BIND_POINT_GRAPHICS,                               // pipelineBindPoint
-     *     myPipelineLayout,                                              // pipelineLayout
-     *     0,                                                             // set
+     *     NULL,                                                      // pNext
+     *     0,                                                         // flags
+     *     1,                                                         // descriptorUpdateEntryCount
+     *     descriptorUpdateTemplateEntries,                           // pDescriptorUpdateEntries
+     *     VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR,   // templateType
+     *     0,                                                         // descriptorSetLayout, ignored by given templateType
+     *     VK_PIPELINE_BIND_POINT_GRAPHICS,                           // pipelineBindPoint
+     *     myPipelineLayout,                                          // pipelineLayout
+     *     0,                                                         // set
      * };
      * 
      * VkDescriptorUpdateTemplate myDescriptorUpdateTemplate;
@@ -274,10 +268,10 @@ public class KHRPushDescriptor {
      * vkCmdPushDescriptorSetWithTemplateKHR(myCmdBuffer, myDescriptorUpdateTemplate, myPipelineLayout, 0,&amp;appData);</code></pre>
      *
      * @param commandBuffer            the command buffer that the descriptors will be recorded in.
-     * @param descriptorUpdateTemplate A descriptor update template which defines how to interpret the descriptor information in pData.
+     * @param descriptorUpdateTemplate a descriptor update template that defines how to interpret the descriptor information in {@code pData}.
      * @param layout                   a {@code VkPipelineLayout} object used to program the bindings. It <b>must</b> be compatible with the layout used to create the {@code descriptorUpdateTemplate} handle.
      * @param set                      the set number of the descriptor set in the pipeline layout that will be updated. This <b>must</b> be the same number used to create the {@code descriptorUpdateTemplate} handle.
-     * @param pData                    Points to memory which contains the descriptors for the templated update.
+     * @param pData                    points to memory which contains the descriptors for the templated update.
      */
     public static void vkCmdPushDescriptorSetWithTemplateKHR(VkCommandBuffer commandBuffer, @NativeType("VkDescriptorUpdateTemplate") long descriptorUpdateTemplate, @NativeType("VkPipelineLayout") long layout, @NativeType("uint32_t") int set, @NativeType("void const *") long pData) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdPushDescriptorSetWithTemplateKHR;

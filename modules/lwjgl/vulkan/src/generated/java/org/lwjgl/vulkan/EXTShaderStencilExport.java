@@ -31,7 +31,7 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/EXT/SPV_EXT_shader_stencil_export.html">SPV_EXT_shader_stencil_export</a> SPIR-V extension.</li>
+ * <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/EXT/SPV_EXT_shader_stencil_export.html">{@code SPV_EXT_shader_stencil_export}</a> SPIR-V extension.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

@@ -9,7 +9,7 @@ package org.lwjgl.vulkan;
  * This extension adds support for the following SPIR-V extension in Vulkan:
  * 
  * <ul>
- * <li>SPV_NV_fragment_shader_barycentric</li>
+ * <li>{@code SPV_NV_fragment_shader_barycentric}</li>
  * </ul>
  * 
  * <p>The extension provides access to three additional fragment shader variable decorations in SPIR-V:</p>

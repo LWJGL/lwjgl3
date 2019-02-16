@@ -24,7 +24,7 @@ val GOOGLE_hlsl_functionality1 = "GOOGLEHlslFunctionality1".nativeClassVK("GOOGL
             <dd>224</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>0</dd>
+            <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -44,7 +44,7 @@ val GOOGLE_hlsl_functionality1 = "GOOGLEHlslFunctionality1".nativeClassVK("GOOGL
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Requires the <a target="_blank" href="https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/GOOGLE/SPV_GOOGLE_hlsl_functionality1.asciidoc">SPV_GOOGLE_hlsl_functionality1</a> SPIR-V extension.</li>
+                <li>Requires the <a target="_blank" href="https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/GOOGLE/SPV_GOOGLE_hlsl_functionality1.asciidoc">{@code SPV_GOOGLE_hlsl_functionality1}</a> SPIR-V extension.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>
@@ -58,7 +58,7 @@ val GOOGLE_hlsl_functionality1 = "GOOGLEHlslFunctionality1".nativeClassVK("GOOGL
     IntConstant(
         "The extension specification version.",
 
-        "GOOGLE_HLSL_FUNCTIONALITY1_SPEC_VERSION".."0"
+        "GOOGLE_HLSL_FUNCTIONALITY1_SPEC_VERSION".."1"
     )
 
     StringConstant(

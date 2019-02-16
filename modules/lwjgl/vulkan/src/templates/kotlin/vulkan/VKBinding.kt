@@ -129,20 +129,18 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
         val instanceCommands = LinkedHashSet<String>()
         classes.asSequence()
             .filter { it.hasNativeFunctions }
-            .forEach { it ->
+            .forEach {
                 val functions = it.functions.asSequence()
-                    .filter {
-                        if (it.isInstanceFunction) {
-                            if (!instanceCommands.contains(it.name)) {
-                                instanceCommands.add(it.name)
+                    .filter { cmd ->
+                        if (cmd.isInstanceFunction) {
+                            if (!instanceCommands.contains(cmd.name)) {
+                                instanceCommands.add(cmd.name)
                                 return@filter true
                             }
                         }
                         false
                     }
-                    .joinToString(",\n$t$t") {
-                        it.name
-                    }
+                    .joinToString(",\n$t$t") { cmd -> cmd.name }
 
                 if (functions.isNotEmpty()) {
                     println("\n$t// ${it.templateName}")

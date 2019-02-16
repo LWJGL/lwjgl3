@@ -9,11 +9,9 @@ import javax.annotation.*;
 
 import java.nio.*;
 
-import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing conservative raster properties that can be supported by an implementation.
@@ -61,7 +59,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 conservativeRasterizationPostDepthCoverage;
  * }</code></pre>
  */
-public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -162,50 +160,14 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
     public VkPhysicalDeviceConservativeRasterizationPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceConservativeRasterizationPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code primitiveOverestimationSize} field. */
-    public VkPhysicalDeviceConservativeRasterizationPropertiesEXT primitiveOverestimationSize(float value) { nprimitiveOverestimationSize(address(), value); return this; }
-    /** Sets the specified value to the {@code maxExtraPrimitiveOverestimationSize} field. */
-    public VkPhysicalDeviceConservativeRasterizationPropertiesEXT maxExtraPrimitiveOverestimationSize(float value) { nmaxExtraPrimitiveOverestimationSize(address(), value); return this; }
-    /** Sets the specified value to the {@code extraPrimitiveOverestimationSizeGranularity} field. */
-    public VkPhysicalDeviceConservativeRasterizationPropertiesEXT extraPrimitiveOverestimationSizeGranularity(float value) { nextraPrimitiveOverestimationSizeGranularity(address(), value); return this; }
-    /** Sets the specified value to the {@code primitiveUnderestimation} field. */
-    public VkPhysicalDeviceConservativeRasterizationPropertiesEXT primitiveUnderestimation(@NativeType("VkBool32") boolean value) { nprimitiveUnderestimation(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code conservativePointAndLineRasterization} field. */
-    public VkPhysicalDeviceConservativeRasterizationPropertiesEXT conservativePointAndLineRasterization(@NativeType("VkBool32") boolean value) { nconservativePointAndLineRasterization(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code degenerateTrianglesRasterized} field. */
-    public VkPhysicalDeviceConservativeRasterizationPropertiesEXT degenerateTrianglesRasterized(@NativeType("VkBool32") boolean value) { ndegenerateTrianglesRasterized(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code degenerateLinesRasterized} field. */
-    public VkPhysicalDeviceConservativeRasterizationPropertiesEXT degenerateLinesRasterized(@NativeType("VkBool32") boolean value) { ndegenerateLinesRasterized(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code fullyCoveredFragmentShaderInputVariable} field. */
-    public VkPhysicalDeviceConservativeRasterizationPropertiesEXT fullyCoveredFragmentShaderInputVariable(@NativeType("VkBool32") boolean value) { nfullyCoveredFragmentShaderInputVariable(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code conservativeRasterizationPostDepthCoverage} field. */
-    public VkPhysicalDeviceConservativeRasterizationPropertiesEXT conservativeRasterizationPostDepthCoverage(@NativeType("VkBool32") boolean value) { nconservativeRasterizationPostDepthCoverage(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceConservativeRasterizationPropertiesEXT set(
         int sType,
-        long pNext,
-        float primitiveOverestimationSize,
-        float maxExtraPrimitiveOverestimationSize,
-        float extraPrimitiveOverestimationSizeGranularity,
-        boolean primitiveUnderestimation,
-        boolean conservativePointAndLineRasterization,
-        boolean degenerateTrianglesRasterized,
-        boolean degenerateLinesRasterized,
-        boolean fullyCoveredFragmentShaderInputVariable,
-        boolean conservativeRasterizationPostDepthCoverage
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        primitiveOverestimationSize(primitiveOverestimationSize);
-        maxExtraPrimitiveOverestimationSize(maxExtraPrimitiveOverestimationSize);
-        extraPrimitiveOverestimationSizeGranularity(extraPrimitiveOverestimationSizeGranularity);
-        primitiveUnderestimation(primitiveUnderestimation);
-        conservativePointAndLineRasterization(conservativePointAndLineRasterization);
-        degenerateTrianglesRasterized(degenerateTrianglesRasterized);
-        degenerateLinesRasterized(degenerateLinesRasterized);
-        fullyCoveredFragmentShaderInputVariable(fullyCoveredFragmentShaderInputVariable);
-        conservativeRasterizationPostDepthCoverage(conservativeRasterizationPostDepthCoverage);
 
         return this;
     }
@@ -224,22 +186,6 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceConservativeRasterizationPropertiesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT malloc() {
-        return wrap(VkPhysicalDeviceConservativeRasterizationPropertiesEXT.class, nmemAllocChecked(SIZEOF));
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceConservativeRasterizationPropertiesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT calloc() {
-        return wrap(VkPhysicalDeviceConservativeRasterizationPropertiesEXT.class, nmemCallocChecked(1, SIZEOF));
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceConservativeRasterizationPropertiesEXT} instance allocated with {@link BufferUtils}. */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT create() {
-        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceConservativeRasterizationPropertiesEXT.class, memAddress(container), container);
-    }
-
     /** Returns a new {@code VkPhysicalDeviceConservativeRasterizationPropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT create(long address) {
         return wrap(VkPhysicalDeviceConservativeRasterizationPropertiesEXT.class, address);
@@ -249,34 +195,6 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
     @Nullable
     public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceConservativeRasterizationPropertiesEXT.class, address);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer create(int capacity) {
-        ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -293,74 +211,6 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
     @Nullable
     public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
-    }
-
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceConservativeRasterizationPropertiesEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceConservativeRasterizationPropertiesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT callocStack() {
-        return callocStack(stackGet());
-    }
-
-    /**
-     * Returns a new {@code VkPhysicalDeviceConservativeRasterizationPropertiesEXT} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT mallocStack(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceConservativeRasterizationPropertiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@code VkPhysicalDeviceConservativeRasterizationPropertiesEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT callocStack(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceConservativeRasterizationPropertiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -392,29 +242,11 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #primitiveOverestimationSize(float) primitiveOverestimationSize}. */
-    public static void nprimitiveOverestimationSize(long struct, float value) { UNSAFE.putFloat(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.PRIMITIVEOVERESTIMATIONSIZE, value); }
-    /** Unsafe version of {@link #maxExtraPrimitiveOverestimationSize(float) maxExtraPrimitiveOverestimationSize}. */
-    public static void nmaxExtraPrimitiveOverestimationSize(long struct, float value) { UNSAFE.putFloat(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.MAXEXTRAPRIMITIVEOVERESTIMATIONSIZE, value); }
-    /** Unsafe version of {@link #extraPrimitiveOverestimationSizeGranularity(float) extraPrimitiveOverestimationSizeGranularity}. */
-    public static void nextraPrimitiveOverestimationSizeGranularity(long struct, float value) { UNSAFE.putFloat(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.EXTRAPRIMITIVEOVERESTIMATIONSIZEGRANULARITY, value); }
-    /** Unsafe version of {@link #primitiveUnderestimation(boolean) primitiveUnderestimation}. */
-    public static void nprimitiveUnderestimation(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.PRIMITIVEUNDERESTIMATION, value); }
-    /** Unsafe version of {@link #conservativePointAndLineRasterization(boolean) conservativePointAndLineRasterization}. */
-    public static void nconservativePointAndLineRasterization(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.CONSERVATIVEPOINTANDLINERASTERIZATION, value); }
-    /** Unsafe version of {@link #degenerateTrianglesRasterized(boolean) degenerateTrianglesRasterized}. */
-    public static void ndegenerateTrianglesRasterized(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.DEGENERATETRIANGLESRASTERIZED, value); }
-    /** Unsafe version of {@link #degenerateLinesRasterized(boolean) degenerateLinesRasterized}. */
-    public static void ndegenerateLinesRasterized(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.DEGENERATELINESRASTERIZED, value); }
-    /** Unsafe version of {@link #fullyCoveredFragmentShaderInputVariable(boolean) fullyCoveredFragmentShaderInputVariable}. */
-    public static void nfullyCoveredFragmentShaderInputVariable(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.FULLYCOVEREDFRAGMENTSHADERINPUTVARIABLE, value); }
-    /** Unsafe version of {@link #conservativeRasterizationPostDepthCoverage(boolean) conservativeRasterizationPostDepthCoverage}. */
-    public static void nconservativeRasterizationPostDepthCoverage(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceConservativeRasterizationPropertiesEXT.CONSERVATIVERASTERIZATIONPOSTDEPTHCOVERAGE, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceConservativeRasterizationPropertiesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceConservativeRasterizationPropertiesEXT, Buffer> {
 
         private static final VkPhysicalDeviceConservativeRasterizationPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceConservativeRasterizationPropertiesEXT.create(-1L);
 
@@ -484,24 +316,6 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
         public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code primitiveOverestimationSize} field. */
-        public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer primitiveOverestimationSize(float value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nprimitiveOverestimationSize(address(), value); return this; }
-        /** Sets the specified value to the {@code maxExtraPrimitiveOverestimationSize} field. */
-        public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer maxExtraPrimitiveOverestimationSize(float value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nmaxExtraPrimitiveOverestimationSize(address(), value); return this; }
-        /** Sets the specified value to the {@code extraPrimitiveOverestimationSizeGranularity} field. */
-        public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer extraPrimitiveOverestimationSizeGranularity(float value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nextraPrimitiveOverestimationSizeGranularity(address(), value); return this; }
-        /** Sets the specified value to the {@code primitiveUnderestimation} field. */
-        public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer primitiveUnderestimation(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nprimitiveUnderestimation(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code conservativePointAndLineRasterization} field. */
-        public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer conservativePointAndLineRasterization(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nconservativePointAndLineRasterization(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code degenerateTrianglesRasterized} field. */
-        public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer degenerateTrianglesRasterized(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.ndegenerateTrianglesRasterized(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code degenerateLinesRasterized} field. */
-        public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer degenerateLinesRasterized(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.ndegenerateLinesRasterized(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code fullyCoveredFragmentShaderInputVariable} field. */
-        public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer fullyCoveredFragmentShaderInputVariable(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nfullyCoveredFragmentShaderInputVariable(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code conservativeRasterizationPostDepthCoverage} field. */
-        public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer conservativeRasterizationPostDepthCoverage(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nconservativeRasterizationPostDepthCoverage(address(), value ? 1 : 0); return this; }
 
     }
 

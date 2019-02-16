@@ -1,0 +1,359 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
+ */
+package org.lwjgl.vulkan;
+
+import javax.annotation.*;
+
+import java.nio.*;
+
+import org.lwjgl.*;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
+
+/**
+ * Request a specific address for a buffer.
+ * 
+ * <h5>Description</h5>
+ * 
+ * <p>If {@code deviceAddress} is zero, no specific address is requested.</p>
+ * 
+ * <p>If {@code deviceAddress} is not zero, {@code deviceAddress} <b>must</b> be an address retrieved from an identically created buffer on the same implementation. The buffer <b>must</b> also be bound to an identically created {@code VkDeviceMemory} object.</p>
+ * 
+ * <p>If this structure is not present, it is as if {@code deviceAddress} is zero.</p>
+ * 
+ * <p>Apps <b>should</b> avoid creating buffers with app-provided addresses and implementation-provided addresses in the same process, to reduce the likelihood of {@link EXTBufferDeviceAddress#VK_ERROR_INVALID_DEVICE_ADDRESS_EXT ERROR_INVALID_DEVICE_ADDRESS_EXT} errors.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>The expected usage for this is that a trace capture/replay tool will add the {@link EXTBufferDeviceAddress#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT} flag to all buffers that use {@link EXTBufferDeviceAddress#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT_EXT}, and during capture will save the queried device addresses in the trace. During replay, the buffers will be created specifying the original address so any address values stored in the trace data will remain valid.</p>
+ * 
+ * <p>Implementations are expected to separate such buffers in the GPU address space so normal allocations will avoid using these addresses. Apps/tools should avoid mixing app-provided and implementation-provided addresses for buffers created with {@link EXTBufferDeviceAddress#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT}, to avoid address space allocation conflicts.</p>
+ * </div>
+ * 
+ * <h5>Valid Usage (Implicit)</h5>
+ * 
+ * <ul>
+ * <li>{@code sType} <b>must</b> be {@link EXTBufferDeviceAddress#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT}</li>
+ * </ul>
+ * 
+ * <h3>Member documentation</h3>
+ * 
+ * <ul>
+ * <li>{@code sType} &ndash; the type of this structure.</li>
+ * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code deviceAddress} &ndash; the device address requested for the buffer.</li>
+ * </ul>
+ * 
+ * <h3>Layout</h3>
+ * 
+ * <pre><code>
+ * struct VkBufferDeviceAddressCreateInfoEXT {
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceSize deviceAddress;
+ * }</code></pre>
+ */
+public class VkBufferDeviceAddressCreateInfoEXT extends Struct implements NativeResource {
+
+    /** The struct size in bytes. */
+    public static final int SIZEOF;
+
+    /** The struct alignment in bytes. */
+    public static final int ALIGNOF;
+
+    /** The struct member offsets. */
+    public static final int
+        STYPE,
+        PNEXT,
+        DEVICEADDRESS;
+
+    static {
+        Layout layout = __struct(
+            __member(4),
+            __member(POINTER_SIZE),
+            __member(8)
+        );
+
+        SIZEOF = layout.getSize();
+        ALIGNOF = layout.getAlignment();
+
+        STYPE = layout.offsetof(0);
+        PNEXT = layout.offsetof(1);
+        DEVICEADDRESS = layout.offsetof(2);
+    }
+
+    /**
+     * Creates a {@code VkBufferDeviceAddressCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * visible to the struct instance and vice versa.
+     *
+     * <p>The created instance holds a strong reference to the container object.</p>
+     */
+    public VkBufferDeviceAddressCreateInfoEXT(ByteBuffer container) {
+        super(memAddress(container), __checkContainer(container, SIZEOF));
+    }
+
+    @Override
+    public int sizeof() { return SIZEOF; }
+
+    /** Returns the value of the {@code sType} field. */
+    @NativeType("VkStructureType")
+    public int sType() { return nsType(address()); }
+    /** Returns the value of the {@code pNext} field. */
+    @NativeType("void const *")
+    public long pNext() { return npNext(address()); }
+    /** Returns the value of the {@code deviceAddress} field. */
+    @NativeType("VkDeviceSize")
+    public long deviceAddress() { return ndeviceAddress(address()); }
+
+    /** Sets the specified value to the {@code sType} field. */
+    public VkBufferDeviceAddressCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the specified value to the {@code pNext} field. */
+    public VkBufferDeviceAddressCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@code deviceAddress} field. */
+    public VkBufferDeviceAddressCreateInfoEXT deviceAddress(@NativeType("VkDeviceSize") long value) { ndeviceAddress(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public VkBufferDeviceAddressCreateInfoEXT set(
+        int sType,
+        long pNext,
+        long deviceAddress
+    ) {
+        sType(sType);
+        pNext(pNext);
+        deviceAddress(deviceAddress);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public VkBufferDeviceAddressCreateInfoEXT set(VkBufferDeviceAddressCreateInfoEXT src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkBufferDeviceAddressCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkBufferDeviceAddressCreateInfoEXT malloc() {
+        return wrap(VkBufferDeviceAddressCreateInfoEXT.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkBufferDeviceAddressCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkBufferDeviceAddressCreateInfoEXT calloc() {
+        return wrap(VkBufferDeviceAddressCreateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkBufferDeviceAddressCreateInfoEXT} instance allocated with {@link BufferUtils}. */
+    public static VkBufferDeviceAddressCreateInfoEXT create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkBufferDeviceAddressCreateInfoEXT.class, memAddress(container), container);
+    }
+
+    /** Returns a new {@code VkBufferDeviceAddressCreateInfoEXT} instance for the specified memory address. */
+    public static VkBufferDeviceAddressCreateInfoEXT create(long address) {
+        return wrap(VkBufferDeviceAddressCreateInfoEXT.class, address);
+    }
+
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
+    @Nullable
+    public static VkBufferDeviceAddressCreateInfoEXT createSafe(long address) {
+        return address == NULL ? null : wrap(VkBufferDeviceAddressCreateInfoEXT.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkBufferDeviceAddressCreateInfoEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkBufferDeviceAddressCreateInfoEXT.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkBufferDeviceAddressCreateInfoEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkBufferDeviceAddressCreateInfoEXT.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkBufferDeviceAddressCreateInfoEXT.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkBufferDeviceAddressCreateInfoEXT.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
+    }
+
+    /**
+     * Create a {@link VkBufferDeviceAddressCreateInfoEXT.Buffer} instance at the specified memory.
+     *
+     * @param address  the memory address
+     * @param capacity the buffer capacity
+     */
+    public static VkBufferDeviceAddressCreateInfoEXT.Buffer create(long address, int capacity) {
+        return wrap(Buffer.class, address, capacity);
+    }
+
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
+    @Nullable
+    public static VkBufferDeviceAddressCreateInfoEXT.Buffer createSafe(long address, int capacity) {
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkBufferDeviceAddressCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
+    public static VkBufferDeviceAddressCreateInfoEXT mallocStack() {
+        return mallocStack(stackGet());
+    }
+
+    /** Returns a new {@code VkBufferDeviceAddressCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
+    public static VkBufferDeviceAddressCreateInfoEXT callocStack() {
+        return callocStack(stackGet());
+    }
+
+    /**
+     * Returns a new {@code VkBufferDeviceAddressCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkBufferDeviceAddressCreateInfoEXT mallocStack(MemoryStack stack) {
+        return wrap(VkBufferDeviceAddressCreateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkBufferDeviceAddressCreateInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkBufferDeviceAddressCreateInfoEXT callocStack(MemoryStack stack) {
+        return wrap(VkBufferDeviceAddressCreateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkBufferDeviceAddressCreateInfoEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkBufferDeviceAddressCreateInfoEXT.Buffer mallocStack(int capacity) {
+        return mallocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkBufferDeviceAddressCreateInfoEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkBufferDeviceAddressCreateInfoEXT.Buffer callocStack(int capacity) {
+        return callocStack(capacity, stackGet());
+    }
+
+    /**
+     * Returns a new {@link VkBufferDeviceAddressCreateInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkBufferDeviceAddressCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkBufferDeviceAddressCreateInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkBufferDeviceAddressCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
+    // -----------------------------------
+
+    /** Unsafe version of {@link #sType}. */
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBufferDeviceAddressCreateInfoEXT.STYPE); }
+    /** Unsafe version of {@link #pNext}. */
+    public static long npNext(long struct) { return memGetAddress(struct + VkBufferDeviceAddressCreateInfoEXT.PNEXT); }
+    /** Unsafe version of {@link #deviceAddress}. */
+    public static long ndeviceAddress(long struct) { return UNSAFE.getLong(null, struct + VkBufferDeviceAddressCreateInfoEXT.DEVICEADDRESS); }
+
+    /** Unsafe version of {@link #sType(int) sType}. */
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferDeviceAddressCreateInfoEXT.STYPE, value); }
+    /** Unsafe version of {@link #pNext(long) pNext}. */
+    public static void npNext(long struct, long value) { memPutAddress(struct + VkBufferDeviceAddressCreateInfoEXT.PNEXT, value); }
+    /** Unsafe version of {@link #deviceAddress(long) deviceAddress}. */
+    public static void ndeviceAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferDeviceAddressCreateInfoEXT.DEVICEADDRESS, value); }
+
+    // -----------------------------------
+
+    /** An array of {@link VkBufferDeviceAddressCreateInfoEXT} structs. */
+    public static class Buffer extends StructBuffer<VkBufferDeviceAddressCreateInfoEXT, Buffer> implements NativeResource {
+
+        private static final VkBufferDeviceAddressCreateInfoEXT ELEMENT_FACTORY = VkBufferDeviceAddressCreateInfoEXT.create(-1L);
+
+        /**
+         * Creates a new {@code VkBufferDeviceAddressCreateInfoEXT.Buffer} instance backed by the specified container.
+         *
+         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
+         * by {@link VkBufferDeviceAddressCreateInfoEXT#SIZEOF}, and its mark will be undefined.
+         *
+         * <p>The created buffer instance holds a strong reference to the container object.</p>
+         */
+        public Buffer(ByteBuffer container) {
+            super(container, container.remaining() / SIZEOF);
+        }
+
+        public Buffer(long address, int cap) {
+            super(address, null, -1, 0, cap, cap);
+        }
+
+        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
+            super(address, container, mark, pos, lim, cap);
+        }
+
+        @Override
+        protected Buffer self() {
+            return this;
+        }
+
+        @Override
+        protected VkBufferDeviceAddressCreateInfoEXT getElementFactory() {
+            return ELEMENT_FACTORY;
+        }
+
+        /** Returns the value of the {@code sType} field. */
+        @NativeType("VkStructureType")
+        public int sType() { return VkBufferDeviceAddressCreateInfoEXT.nsType(address()); }
+        /** Returns the value of the {@code pNext} field. */
+        @NativeType("void const *")
+        public long pNext() { return VkBufferDeviceAddressCreateInfoEXT.npNext(address()); }
+        /** Returns the value of the {@code deviceAddress} field. */
+        @NativeType("VkDeviceSize")
+        public long deviceAddress() { return VkBufferDeviceAddressCreateInfoEXT.ndeviceAddress(address()); }
+
+        /** Sets the specified value to the {@code sType} field. */
+        public VkBufferDeviceAddressCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferDeviceAddressCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the specified value to the {@code pNext} field. */
+        public VkBufferDeviceAddressCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkBufferDeviceAddressCreateInfoEXT.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@code deviceAddress} field. */
+        public VkBufferDeviceAddressCreateInfoEXT.Buffer deviceAddress(@NativeType("VkDeviceSize") long value) { VkBufferDeviceAddressCreateInfoEXT.ndeviceAddress(address(), value); return this; }
+
+    }
+
+}

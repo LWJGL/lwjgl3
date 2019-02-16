@@ -31,7 +31,7 @@ val EXT_pci_bus_info = "EXTPciBusInfo".nativeClassVK("EXT_pci_bus_info", type = 
             <dd>213</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -45,7 +45,7 @@ val EXT_pci_bus_info = "EXTPciBusInfo".nativeClassVK("EXT_pci_bus_info", type = 
             </ul></dd>
 
             <dt><b>Last Modified Date</b></dt>
-            <dd>2018-10-11</dd>
+            <dd>2018-12-10</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -61,7 +61,7 @@ val EXT_pci_bus_info = "EXTPciBusInfo".nativeClassVK("EXT_pci_bus_info", type = 
     IntConstant(
         "The extension specification version.",
 
-        "EXT_PCI_BUS_INFO_SPEC_VERSION".."1"
+        "EXT_PCI_BUS_INFO_SPEC_VERSION".."2"
     )
 
     StringConstant(

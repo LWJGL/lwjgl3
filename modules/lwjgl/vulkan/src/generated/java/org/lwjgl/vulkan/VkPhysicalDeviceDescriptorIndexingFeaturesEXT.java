@@ -50,7 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code descriptorBindingUpdateUnusedWhilePending} &ndash; indicates whether the implementation supports updating descriptors while the set is in use. If this feature is not enabled, {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT} <b>must</b> not be used.</li>
  * <li>{@code descriptorBindingPartiallyBound} &ndash; indicates whether the implementation supports statically using a descriptor set binding in which some descriptors are not valid. If this feature is not enabled, {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT} <b>must</b> not be used.</li>
  * <li>{@code descriptorBindingVariableDescriptorCount} &ndash; indicates whether the implementation supports descriptor sets with a variable-sized last binding. If this feature is not enabled, {@link EXTDescriptorIndexing#VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT} <b>must</b> not be used.</li>
- * <li>{@code runtimeDescriptorArray} &ndash; indicates whether the implementation supports the SPIR-V RuntimeDescriptorArrayEXT capability. If this feature is not enabled, descriptors <b>must</b> not be declared in runtime arrays.</li>
+ * <li>{@code runtimeDescriptorArray} &ndash; indicates whether the implementation supports the SPIR-V {@code RuntimeDescriptorArrayEXT} capability. If this feature is not enabled, descriptors <b>must</b> not be declared in runtime arrays.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

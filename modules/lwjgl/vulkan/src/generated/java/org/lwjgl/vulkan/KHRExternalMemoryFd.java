@@ -206,7 +206,7 @@ public class KHRExternalMemoryFd {
      * @param device              the logical device that will be importing {@code fd}.
      * @param handleType          the type of the handle {@code fd}.
      * @param fd                  the handle which will be imported.
-     * @param pMemoryFdProperties will return properties of the handle {@code fd}.
+     * @param pMemoryFdProperties a pointer to a {@link VkMemoryFdPropertiesKHR} structure in which the properties of the handle {@code fd} are returned.
      */
     @NativeType("VkResult")
     public static int vkGetMemoryFdPropertiesKHR(VkDevice device, @NativeType("VkExternalMemoryHandleTypeFlagBits") int handleType, int fd, @NativeType("VkMemoryFdPropertiesKHR *") VkMemoryFdPropertiesKHR pMemoryFdProperties) {

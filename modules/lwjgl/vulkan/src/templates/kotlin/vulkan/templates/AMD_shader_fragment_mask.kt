@@ -82,7 +82,7 @@ val AMD_shader_fragment_mask = "AMDShaderFragmentMask".nativeClassVK("AMD_shader
 
             <dt><b>Dependencies</b></dt>
             <dd><ul>
-                <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_fragment_mask.html">SPV_AMD_shader_fragment_mask</a> SPIR-V extension.</li>
+                <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_fragment_mask.html">{@code SPV_AMD_shader_fragment_mask}</a> SPIR-V extension.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

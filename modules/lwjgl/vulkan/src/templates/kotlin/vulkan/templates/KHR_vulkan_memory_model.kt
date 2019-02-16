@@ -17,7 +17,7 @@ val KHR_vulkan_memory_model = "KHRVulkanMemoryModel".nativeClassVK("KHR_vulkan_m
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VULKAN_MEMORY_MODEL_SPEC_VERSION".."2"
+        "KHR_VULKAN_MEMORY_MODEL_SPEC_VERSION".."3"
     )
 
     StringConstant(

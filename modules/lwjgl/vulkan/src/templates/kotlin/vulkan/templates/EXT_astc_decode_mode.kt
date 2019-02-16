@@ -24,7 +24,7 @@ val EXT_astc_decode_mode = "EXTAstcDecodeMode".nativeClassVK("EXT_astc_decode_mo
         </ul>
 
         <h5>Example</h5>
-        Create an image view that decodes to VK_FORMAT_R8G8B8A8_UNORM precision:
+        Create an image view that decodes to #FORMAT_R8G8B8A8_UNORM precision:
 
         <pre><code>
 ￿    VkImageViewASTCDecodeModeEXT decodeMode =

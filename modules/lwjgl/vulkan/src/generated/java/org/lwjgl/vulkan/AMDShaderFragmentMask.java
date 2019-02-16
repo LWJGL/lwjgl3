@@ -70,7 +70,7 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_fragment_mask.html">SPV_AMD_shader_fragment_mask</a> SPIR-V extension.</li>
+ * <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_fragment_mask.html">{@code SPV_AMD_shader_fragment_mask}</a> SPIR-V extension.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

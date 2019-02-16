@@ -9,11 +9,9 @@ import javax.annotation.*;
 
 import java.nio.*;
 
-import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure specifying the list of DRM format modifiers supported for a format.
@@ -28,7 +26,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT}</li>
- * <li>If {@code drmFormatModifierCount} is not 0, and {@code pDrmFormatModifierProperties} is not {@code NULL}, {@code pDrmFormatModifierProperties} <b>must</b> be a valid pointer to an array of {@code drmFormatModifierCount} {@link VkDrmFormatModifierPropertiesEXT} structures</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -54,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkDrmFormatModifierPropertiesEXT VkDrmFormatModifierPropertiesEXT} * pDrmFormatModifierProperties;
  * }</code></pre>
  */
-public class VkDrmFormatModifierPropertiesListEXT extends Struct implements NativeResource {
+public class VkDrmFormatModifierPropertiesListEXT extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -117,22 +114,14 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
     public VkDrmFormatModifierPropertiesListEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDrmFormatModifierPropertiesListEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code drmFormatModifierCount} field. */
-    public VkDrmFormatModifierPropertiesListEXT drmFormatModifierCount(@NativeType("uint32_t") int value) { ndrmFormatModifierCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDrmFormatModifierPropertiesEXT.Buffer} to the {@code pDrmFormatModifierProperties} field. */
-    public VkDrmFormatModifierPropertiesListEXT pDrmFormatModifierProperties(@Nullable @NativeType("VkDrmFormatModifierPropertiesEXT *") VkDrmFormatModifierPropertiesEXT.Buffer value) { npDrmFormatModifierProperties(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkDrmFormatModifierPropertiesListEXT set(
         int sType,
-        long pNext,
-        int drmFormatModifierCount,
-        @Nullable VkDrmFormatModifierPropertiesEXT.Buffer pDrmFormatModifierProperties
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        drmFormatModifierCount(drmFormatModifierCount);
-        pDrmFormatModifierProperties(pDrmFormatModifierProperties);
 
         return this;
     }
@@ -151,22 +140,6 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
 
     // -----------------------------------
 
-    /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
-    public static VkDrmFormatModifierPropertiesListEXT malloc() {
-        return wrap(VkDrmFormatModifierPropertiesListEXT.class, nmemAllocChecked(SIZEOF));
-    }
-
-    /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
-    public static VkDrmFormatModifierPropertiesListEXT calloc() {
-        return wrap(VkDrmFormatModifierPropertiesListEXT.class, nmemCallocChecked(1, SIZEOF));
-    }
-
-    /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated with {@link BufferUtils}. */
-    public static VkDrmFormatModifierPropertiesListEXT create() {
-        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkDrmFormatModifierPropertiesListEXT.class, memAddress(container), container);
-    }
-
     /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance for the specified memory address. */
     public static VkDrmFormatModifierPropertiesListEXT create(long address) {
         return wrap(VkDrmFormatModifierPropertiesListEXT.class, address);
@@ -176,34 +149,6 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
     @Nullable
     public static VkDrmFormatModifierPropertiesListEXT createSafe(long address) {
         return address == NULL ? null : wrap(VkDrmFormatModifierPropertiesListEXT.class, address);
-    }
-
-    /**
-     * Returns a new {@link VkDrmFormatModifierPropertiesListEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDrmFormatModifierPropertiesListEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkDrmFormatModifierPropertiesListEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDrmFormatModifierPropertiesListEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkDrmFormatModifierPropertiesListEXT.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDrmFormatModifierPropertiesListEXT.Buffer create(int capacity) {
-        ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -224,74 +169,6 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
 
     // -----------------------------------
 
-    /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkDrmFormatModifierPropertiesListEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkDrmFormatModifierPropertiesListEXT callocStack() {
-        return callocStack(stackGet());
-    }
-
-    /**
-     * Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkDrmFormatModifierPropertiesListEXT mallocStack(MemoryStack stack) {
-        return wrap(VkDrmFormatModifierPropertiesListEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@code VkDrmFormatModifierPropertiesListEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkDrmFormatModifierPropertiesListEXT callocStack(MemoryStack stack) {
-        return wrap(VkDrmFormatModifierPropertiesListEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkDrmFormatModifierPropertiesListEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDrmFormatModifierPropertiesListEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkDrmFormatModifierPropertiesListEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDrmFormatModifierPropertiesListEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkDrmFormatModifierPropertiesListEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkDrmFormatModifierPropertiesListEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkDrmFormatModifierPropertiesListEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkDrmFormatModifierPropertiesListEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
-    }
-
-    // -----------------------------------
-
     /** Unsafe version of {@link #sType}. */
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDrmFormatModifierPropertiesListEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
@@ -305,15 +182,11 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDrmFormatModifierPropertiesListEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDrmFormatModifierPropertiesListEXT.PNEXT, value); }
-    /** Sets the specified value to the {@code drmFormatModifierCount} field of the specified {@code struct}. */
-    public static void ndrmFormatModifierCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDrmFormatModifierPropertiesListEXT.DRMFORMATMODIFIERCOUNT, value); }
-    /** Unsafe version of {@link #pDrmFormatModifierProperties(VkDrmFormatModifierPropertiesEXT.Buffer) pDrmFormatModifierProperties}. */
-    public static void npDrmFormatModifierProperties(long struct, @Nullable VkDrmFormatModifierPropertiesEXT.Buffer value) { memPutAddress(struct + VkDrmFormatModifierPropertiesListEXT.PDRMFORMATMODIFIERPROPERTIES, memAddressSafe(value)); if (value != null) { ndrmFormatModifierCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
     /** An array of {@link VkDrmFormatModifierPropertiesListEXT} structs. */
-    public static class Buffer extends StructBuffer<VkDrmFormatModifierPropertiesListEXT, Buffer> implements NativeResource {
+    public static class Buffer extends StructBuffer<VkDrmFormatModifierPropertiesListEXT, Buffer> {
 
         private static final VkDrmFormatModifierPropertiesListEXT ELEMENT_FACTORY = VkDrmFormatModifierPropertiesListEXT.create(-1L);
 
@@ -366,10 +239,6 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
         public VkDrmFormatModifierPropertiesListEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDrmFormatModifierPropertiesListEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDrmFormatModifierPropertiesListEXT.Buffer pNext(@NativeType("void *") long value) { VkDrmFormatModifierPropertiesListEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code drmFormatModifierCount} field. */
-        public VkDrmFormatModifierPropertiesListEXT.Buffer drmFormatModifierCount(@NativeType("uint32_t") int value) { VkDrmFormatModifierPropertiesListEXT.ndrmFormatModifierCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDrmFormatModifierPropertiesEXT.Buffer} to the {@code pDrmFormatModifierProperties} field. */
-        public VkDrmFormatModifierPropertiesListEXT.Buffer pDrmFormatModifierProperties(@Nullable @NativeType("VkDrmFormatModifierPropertiesEXT *") VkDrmFormatModifierPropertiesEXT.Buffer value) { VkDrmFormatModifierPropertiesListEXT.npDrmFormatModifierProperties(address(), value); return this; }
 
     }
 

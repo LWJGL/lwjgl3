@@ -14,7 +14,7 @@ val AMD_gcn_shader = "AMDGCNShader".nativeClassVK("AMD_gcn_shader", type = "devi
         This extension adds support for the following SPIR-V extension in Vulkan:
 
         <ul>
-            <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_gcn_shader.html">SPV_AMD_gcn_shader</a></li>
+            <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_gcn_shader.html">{@code SPV_AMD_gcn_shader}</a></li>
         </ul>
 
         <dl>

@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The handle types supported by {@code handleType} are:</p>
  * 
- * <h6>Handle Types Supported by VkImportFenceFdInfoKHR</h6>
+ * <h6>Handle Types Supported by {@link VkImportFenceFdInfoKHR}</h6>
  * 
  * <table class="lwjgl">
  * <thead><tr><th>Handle Type</th><th>Transference</th><th>Permanence Supported</th></tr></thead>

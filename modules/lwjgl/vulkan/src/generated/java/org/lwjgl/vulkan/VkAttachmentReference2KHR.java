@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkSubpassDescription2KHR}</p>
+ * <p>{@link VkSubpassDescription2KHR}, {@link VkSubpassDescriptionDepthStencilResolveKHR}</p>
  * 
  * <h3>Member documentation</h3>
  * 

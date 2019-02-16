@@ -24,7 +24,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>213</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -35,7 +35,7 @@ package org.lwjgl.vulkan;
  * <li>Matthaeus G. Chajdas <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_pci_bus_info:%20&amp;body=@anteru%20">anteru</a></li>
  * </ul></dd>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2018-10-11</dd>
+ * <dd>2018-12-10</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -48,7 +48,7 @@ package org.lwjgl.vulkan;
 public final class EXTPciBusInfo {
 
     /** The extension specification version. */
-    public static final int VK_EXT_PCI_BUS_INFO_SPEC_VERSION = 1;
+    public static final int VK_EXT_PCI_BUS_INFO_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_PCI_BUS_INFO_EXTENSION_NAME = "VK_EXT_pci_bus_info";

@@ -167,6 +167,10 @@ public class VKCapabilitiesDevice {
     public final long
         vkGetShaderInfoAMD;
 
+    // EXT_buffer_device_address
+    public final long
+        vkGetBufferDeviceAddressEXT;
+
     // EXT_calibrated_timestamps
     public final long
         vkGetCalibratedTimestampsEXT;
@@ -445,6 +449,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_astc_decode_mode;
     /** When true, {@link EXTBlendOperationAdvanced} is supported. */
     public final boolean VK_EXT_blend_operation_advanced;
+    /** When true, {@link EXTBufferDeviceAddress} is supported. */
+    public final boolean VK_EXT_buffer_device_address;
     /** When true, {@link EXTCalibratedTimestamps} is supported. */
     public final boolean VK_EXT_calibrated_timestamps;
     /** When true, {@link EXTConditionalRendering} is supported. */
@@ -465,6 +471,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_external_memory_dma_buf;
     /** When true, {@link EXTExternalMemoryHost} is supported. */
     public final boolean VK_EXT_external_memory_host;
+    /** When true, {@link EXTFilterCubic} is supported. */
+    public final boolean VK_EXT_filter_cubic;
     /** When true, {@link EXTFragmentDensityMap} is supported. */
     public final boolean VK_EXT_fragment_density_map;
     /** When true, {@link EXTGlobalPriority} is supported. */
@@ -475,6 +483,10 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_image_drm_format_modifier;
     /** When true, {@link EXTInlineUniformBlock} is supported. */
     public final boolean VK_EXT_inline_uniform_block;
+    /** When true, {@link EXTMemoryBudget} is supported. */
+    public final boolean VK_EXT_memory_budget;
+    /** When true, {@link EXTMemoryPriority} is supported. */
+    public final boolean VK_EXT_memory_priority;
     /** When true, {@link EXTPciBusInfo} is supported. */
     public final boolean VK_EXT_pci_bus_info;
     /** When true, {@link EXTPostDepthCoverage} is supported. */
@@ -523,6 +535,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_create_renderpass2;
     /** When true, {@link KHRDedicatedAllocation} is supported. */
     public final boolean VK_KHR_dedicated_allocation;
+    /** When true, {@link KHRDepthStencilResolve} is supported. */
+    public final boolean VK_KHR_depth_stencil_resolve;
     /** When true, {@link KHRDescriptorUpdateTemplate} is supported. */
     public final boolean VK_KHR_descriptor_update_template;
     /** When true, {@link KHRDeviceGroup} is supported. */
@@ -603,6 +617,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_corner_sampled_image;
     /** When true, {@link NVDedicatedAllocation} is supported. */
     public final boolean VK_NV_dedicated_allocation;
+    /** When true, {@link NVDedicatedAllocationImageAliasing} is supported. */
+    public final boolean VK_NV_dedicated_allocation_image_aliasing;
     /** When true, {@link NVDeviceDiagnosticCheckpoints} is supported. */
     public final boolean VK_NV_device_diagnostic_checkpoints;
     /** When true, {@link NVExternalMemory} is supported. */
@@ -651,7 +667,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, Set<String> ext) {
         this.apiVersion = capsInstance.apiVersion;
 
-        Map<String, Long> caps = new HashMap<>(254);
+        Map<String, Long> caps = new HashMap<>(255);
 
         Vulkan10 = VK10.checkCapsDevice(provider, caps, ext);
         Vulkan11 = VK11.checkCapsDevice(provider, caps, ext);
@@ -674,6 +690,7 @@ public class VKCapabilitiesDevice {
         VK_AMD_texture_gather_bias_lod = ext.contains("VK_AMD_texture_gather_bias_lod");
         VK_EXT_astc_decode_mode = ext.contains("VK_EXT_astc_decode_mode");
         VK_EXT_blend_operation_advanced = ext.contains("VK_EXT_blend_operation_advanced");
+        VK_EXT_buffer_device_address = EXTBufferDeviceAddress.checkCapsDevice(provider, caps, ext);
         VK_EXT_calibrated_timestamps = EXTCalibratedTimestamps.checkCapsDevice(provider, caps, ext);
         VK_EXT_conditional_rendering = EXTConditionalRendering.checkCapsDevice(provider, caps, ext);
         VK_EXT_conservative_rasterization = ext.contains("VK_EXT_conservative_rasterization");
@@ -685,11 +702,14 @@ public class VKCapabilitiesDevice {
         VK_EXT_display_control = EXTDisplayControl.checkCapsDevice(provider, caps, ext);
         VK_EXT_external_memory_dma_buf = ext.contains("VK_EXT_external_memory_dma_buf");
         VK_EXT_external_memory_host = EXTExternalMemoryHost.checkCapsDevice(provider, caps, ext);
+        VK_EXT_filter_cubic = ext.contains("VK_EXT_filter_cubic");
         VK_EXT_fragment_density_map = ext.contains("VK_EXT_fragment_density_map");
         VK_EXT_global_priority = ext.contains("VK_EXT_global_priority");
         VK_EXT_hdr_metadata = EXTHdrMetadata.checkCapsDevice(provider, caps, ext);
         VK_EXT_image_drm_format_modifier = EXTImageDrmFormatModifier.checkCapsDevice(provider, caps, ext);
         VK_EXT_inline_uniform_block = ext.contains("VK_EXT_inline_uniform_block");
+        VK_EXT_memory_budget = ext.contains("VK_EXT_memory_budget");
+        VK_EXT_memory_priority = ext.contains("VK_EXT_memory_priority");
         VK_EXT_pci_bus_info = ext.contains("VK_EXT_pci_bus_info");
         VK_EXT_post_depth_coverage = ext.contains("VK_EXT_post_depth_coverage");
         VK_EXT_queue_family_foreign = ext.contains("VK_EXT_queue_family_foreign");
@@ -714,6 +734,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_bind_memory2 = KHRBindMemory2.checkCapsDevice(provider, caps, ext);
         VK_KHR_create_renderpass2 = KHRCreateRenderpass2.checkCapsDevice(provider, caps, ext);
         VK_KHR_dedicated_allocation = ext.contains("VK_KHR_dedicated_allocation");
+        VK_KHR_depth_stencil_resolve = ext.contains("VK_KHR_depth_stencil_resolve");
         VK_KHR_descriptor_update_template = KHRDescriptorUpdateTemplate.checkCapsDevice(provider, caps, ext);
         VK_KHR_device_group = KHRDeviceGroup.checkCapsDevice(provider, caps, ext);
         VK_KHR_display_swapchain = KHRDisplaySwapchain.checkCapsDevice(provider, caps, ext);
@@ -754,6 +775,7 @@ public class VKCapabilitiesDevice {
         VK_NV_compute_shader_derivatives = ext.contains("VK_NV_compute_shader_derivatives");
         VK_NV_corner_sampled_image = ext.contains("VK_NV_corner_sampled_image");
         VK_NV_dedicated_allocation = ext.contains("VK_NV_dedicated_allocation");
+        VK_NV_dedicated_allocation_image_aliasing = ext.contains("VK_NV_dedicated_allocation_image_aliasing");
         VK_NV_device_diagnostic_checkpoints = NVDeviceDiagnosticCheckpoints.checkCapsDevice(provider, caps, ext);
         VK_NV_external_memory = ext.contains("VK_NV_external_memory");
         VK_NV_external_memory_win32 = NVExternalMemoryWin32.checkCapsDevice(provider, caps, ext);
@@ -918,6 +940,7 @@ public class VKCapabilitiesDevice {
         vkCmdDrawIndirectCountAMD = VK.get(caps, "vkCmdDrawIndirectCountAMD");
         vkCmdDrawIndexedIndirectCountAMD = VK.get(caps, "vkCmdDrawIndexedIndirectCountAMD");
         vkGetShaderInfoAMD = VK.get(caps, "vkGetShaderInfoAMD");
+        vkGetBufferDeviceAddressEXT = VK.get(caps, "vkGetBufferDeviceAddressEXT");
         vkGetCalibratedTimestampsEXT = VK.get(caps, "vkGetCalibratedTimestampsEXT");
         vkCmdBeginConditionalRenderingEXT = VK.get(caps, "vkCmdBeginConditionalRenderingEXT");
         vkCmdEndConditionalRenderingEXT = VK.get(caps, "vkCmdEndConditionalRenderingEXT");

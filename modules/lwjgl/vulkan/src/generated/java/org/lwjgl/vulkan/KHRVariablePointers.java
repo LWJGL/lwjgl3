@@ -43,7 +43,7 @@ package org.lwjgl.vulkan;
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_variable_pointers.html">SPV_KHR_variable_pointers</a> SPIR-V extension.</li>
+ * <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/KHR/SPV_KHR_variable_pointers.html">{@code SPV_KHR_variable_pointers}</a> SPIR-V extension.</li>
  * <li>Promoted to Vulkan 1.1 Core</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>

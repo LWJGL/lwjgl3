@@ -166,6 +166,6 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
         VkDevice("device", "the logical device that will be importing {@code fd}."),
         VkExternalMemoryHandleTypeFlagBits("handleType", "the type of the handle {@code fd}."),
         int("fd", "the handle which will be imported."),
-        VkMemoryFdPropertiesKHR.p("pMemoryFdProperties", "will return properties of the handle {@code fd}.")
+        VkMemoryFdPropertiesKHR.p("pMemoryFdProperties", "a pointer to a ##VkMemoryFdPropertiesKHR structure in which the properties of the handle {@code fd} are returned.")
     )
 }

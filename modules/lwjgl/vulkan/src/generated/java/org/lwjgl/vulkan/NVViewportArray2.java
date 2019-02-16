@@ -9,7 +9,7 @@ package org.lwjgl.vulkan;
  * This extension adds support for the following SPIR-V extension in Vulkan:
  * 
  * <ul>
- * <li>SPV_NV_viewport_array2</li>
+ * <li>{@code SPV_NV_viewport_array2}</li>
  * </ul>
  * 
  * <p>which allows a single primitive to be broadcast to multiple viewports and/or multiple layers. A new shader built-in output {@code ViewportMaskNV} is provided, which allows a single primitive to be output to multiple viewports simultaneously. Also, a new SPIR-V decoration is added to control whether the effective viewport index is added into the variable decorated with the {@code Layer} built-in decoration. These capabilities allow a single primitive to be output to multiple layers simultaneously.</p>
@@ -46,8 +46,8 @@ package org.lwjgl.vulkan;
  * <dd>2017-02-15</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_viewport_array2.html">SPV_NV_viewport_array2</a> SPIR-V extension.</li>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array2.txt">GL_NV_viewport_array2</a> extension for GLSL source languages.</li>
+ * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/NV/SPV_NV_viewport_array2.html">{@code SPV_NV_viewport_array2}</a> SPIR-V extension.</li>
+ * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array2.txt">{@code GL_NV_viewport_array2}</a> extension for GLSL source languages.</li>
  * <li>This extension requires the {@code geometryShader} and {@code multiViewport} features.</li>
  * <li>This extension interacts with the {@code tessellationShader} feature.</li>
  * </ul></dd>

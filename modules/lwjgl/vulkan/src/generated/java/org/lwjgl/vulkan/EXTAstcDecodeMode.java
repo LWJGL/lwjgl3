@@ -20,7 +20,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Example</h5>
  * 
- * <p>Create an image view that decodes to VK_FORMAT_R8G8B8A8_UNORM precision:</p>
+ * <p>Create an image view that decodes to {@link VK10#VK_FORMAT_R8G8B8A8_UNORM FORMAT_R8G8B8A8_UNORM} precision:</p>
  * 
  * <pre><code>
  *     VkImageViewASTCDecodeModeEXT decodeMode =

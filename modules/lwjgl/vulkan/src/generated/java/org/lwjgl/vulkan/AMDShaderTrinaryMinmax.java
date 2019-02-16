@@ -9,7 +9,7 @@ package org.lwjgl.vulkan;
  * This extension adds support for the following SPIR-V extension in Vulkan:
  * 
  * <ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_trinary_minmax.html">SPV_AMD_shader_trinary_minmax</a></li>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_shader_trinary_minmax.html">{@code SPV_AMD_shader_trinary_minmax}</a></li>
  * </ul>
  * 
  * <dl>

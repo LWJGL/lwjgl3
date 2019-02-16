@@ -39,10 +39,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * struct VkPhysicalDevicePCIBusInfoPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     uint16_t pciDomain;
- *     uint8_t pciBus;
- *     uint8_t pciDevice;
- *     uint8_t pciFunction;
+ *     uint32_t pciDomain;
+ *     uint32_t pciBus;
+ *     uint32_t pciDevice;
+ *     uint32_t pciFunction;
  * }</code></pre>
  */
 public class VkPhysicalDevicePCIBusInfoPropertiesEXT extends Struct {
@@ -66,10 +66,10 @@ public class VkPhysicalDevicePCIBusInfoPropertiesEXT extends Struct {
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
-            __member(2),
-            __member(1),
-            __member(1),
-            __member(1)
+            __member(4),
+            __member(4),
+            __member(4),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -103,17 +103,17 @@ public class VkPhysicalDevicePCIBusInfoPropertiesEXT extends Struct {
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** Returns the value of the {@code pciDomain} field. */
-    @NativeType("uint16_t")
-    public short pciDomain() { return npciDomain(address()); }
+    @NativeType("uint32_t")
+    public int pciDomain() { return npciDomain(address()); }
     /** Returns the value of the {@code pciBus} field. */
-    @NativeType("uint8_t")
-    public byte pciBus() { return npciBus(address()); }
+    @NativeType("uint32_t")
+    public int pciBus() { return npciBus(address()); }
     /** Returns the value of the {@code pciDevice} field. */
-    @NativeType("uint8_t")
-    public byte pciDevice() { return npciDevice(address()); }
+    @NativeType("uint32_t")
+    public int pciDevice() { return npciDevice(address()); }
     /** Returns the value of the {@code pciFunction} field. */
-    @NativeType("uint8_t")
-    public byte pciFunction() { return npciFunction(address()); }
+    @NativeType("uint32_t")
+    public int pciFunction() { return npciFunction(address()); }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDevicePCIBusInfoPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -179,13 +179,13 @@ public class VkPhysicalDevicePCIBusInfoPropertiesEXT extends Struct {
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PNEXT); }
     /** Unsafe version of {@link #pciDomain}. */
-    public static short npciDomain(long struct) { return UNSAFE.getShort(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIDOMAIN); }
+    public static int npciDomain(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIDOMAIN); }
     /** Unsafe version of {@link #pciBus}. */
-    public static byte npciBus(long struct) { return UNSAFE.getByte(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIBUS); }
+    public static int npciBus(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIBUS); }
     /** Unsafe version of {@link #pciDevice}. */
-    public static byte npciDevice(long struct) { return UNSAFE.getByte(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIDEVICE); }
+    public static int npciDevice(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIDEVICE); }
     /** Unsafe version of {@link #pciFunction}. */
-    public static byte npciFunction(long struct) { return UNSAFE.getByte(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIFUNCTION); }
+    public static int npciFunction(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.PCIFUNCTION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePCIBusInfoPropertiesEXT.STYPE, value); }
@@ -237,17 +237,17 @@ public class VkPhysicalDevicePCIBusInfoPropertiesEXT extends Struct {
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npNext(address()); }
         /** Returns the value of the {@code pciDomain} field. */
-        @NativeType("uint16_t")
-        public short pciDomain() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciDomain(address()); }
+        @NativeType("uint32_t")
+        public int pciDomain() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciDomain(address()); }
         /** Returns the value of the {@code pciBus} field. */
-        @NativeType("uint8_t")
-        public byte pciBus() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciBus(address()); }
+        @NativeType("uint32_t")
+        public int pciBus() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciBus(address()); }
         /** Returns the value of the {@code pciDevice} field. */
-        @NativeType("uint8_t")
-        public byte pciDevice() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciDevice(address()); }
+        @NativeType("uint32_t")
+        public int pciDevice() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciDevice(address()); }
         /** Returns the value of the {@code pciFunction} field. */
-        @NativeType("uint8_t")
-        public byte pciFunction() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciFunction(address()); }
+        @NativeType("uint32_t")
+        public int pciFunction() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciFunction(address()); }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDevicePCIBusInfoPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePCIBusInfoPropertiesEXT.nsType(address(), value); return this; }

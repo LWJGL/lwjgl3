@@ -32,7 +32,7 @@ package org.lwjgl.vulkan;
  * <dd>2018-09-25</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/EXT/SPV_EXT_fragment_invocation_density.html">SPV_EXT_fragment_invocation_density</a> SPIR-V extension.</li>
+ * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/EXT/SPV_EXT_fragment_invocation_density.html">{@code SPV_EXT_fragment_invocation_density}</a> SPIR-V extension.</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

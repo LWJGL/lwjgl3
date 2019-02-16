@@ -9,11 +9,9 @@ import javax.annotation.*;
 
 import java.nio.*;
 
-import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Structure describing external memory host pointer limits that can be supported by an implementation.
@@ -45,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceSize minImportedHostPointerAlignment;
  * }</code></pre>
  */
-public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -101,18 +99,14 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
     public VkPhysicalDeviceExternalMemoryHostPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceExternalMemoryHostPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code minImportedHostPointerAlignment} field. */
-    public VkPhysicalDeviceExternalMemoryHostPropertiesEXT minImportedHostPointerAlignment(@NativeType("VkDeviceSize") long value) { nminImportedHostPointerAlignment(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceExternalMemoryHostPropertiesEXT set(
         int sType,
-        long pNext,
-        long minImportedHostPointerAlignment
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        minImportedHostPointerAlignment(minImportedHostPointerAlignment);
 
         return this;
     }
@@ -131,22 +125,6 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT malloc() {
-        return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, nmemAllocChecked(SIZEOF));
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT calloc() {
-        return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, nmemCallocChecked(1, SIZEOF));
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance allocated with {@link BufferUtils}. */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT create() {
-        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, memAddress(container), container);
-    }
-
     /** Returns a new {@code VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT create(long address) {
         return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, address);
@@ -156,34 +134,6 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
     @Nullable
     public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT createSafe(long address) {
         return address == NULL ? null : wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, address);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer create(int capacity) {
-        ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -204,74 +154,6 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT callocStack() {
-        return callocStack(stackGet());
-    }
-
-    /**
-     * Returns a new {@code VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT mallocStack(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@code VkPhysicalDeviceExternalMemoryHostPropertiesEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT callocStack(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceExternalMemoryHostPropertiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
-    }
-
-    // -----------------------------------
-
     /** Unsafe version of {@link #sType}. */
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
@@ -283,13 +165,11 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #minImportedHostPointerAlignment(long) minImportedHostPointerAlignment}. */
-    public static void nminImportedHostPointerAlignment(long struct, long value) { UNSAFE.putLong(null, struct + VkPhysicalDeviceExternalMemoryHostPropertiesEXT.MINIMPORTEDHOSTPOINTERALIGNMENT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceExternalMemoryHostPropertiesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceExternalMemoryHostPropertiesEXT, Buffer> {
 
         private static final VkPhysicalDeviceExternalMemoryHostPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceExternalMemoryHostPropertiesEXT.create(-1L);
 
@@ -338,8 +218,6 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct impl
         public VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalMemoryHostPropertiesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExternalMemoryHostPropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code minImportedHostPointerAlignment} field. */
-        public VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer minImportedHostPointerAlignment(@NativeType("VkDeviceSize") long value) { VkPhysicalDeviceExternalMemoryHostPropertiesEXT.nminImportedHostPointerAlignment(address(), value); return this; }
 
     }
 

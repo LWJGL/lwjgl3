@@ -31,6 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
  * <li>{@code vulkanMemoryModel} &ndash; indicates whether the Vulkan Memory Model is supported, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#memory-model">Vulkan Memory Model</a>. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModelKHR} capability.</li>
  * <li>{@code vulkanMemoryModelDeviceScope} &ndash; indicates whether the Vulkan Memory Model can use {@code Device} scope synchronization. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModelDeviceScopeKHR} capability.</li>
+ * <li>{@code vulkanMemoryModelAvailabilityVisibilityChains} &ndash; indicates whether the Vulkan Memory Model can use <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#memory-model-availability-visibility">availability and visibility chains</a> with more than one element.</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -41,6 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * pNext;
  *     VkBool32 vulkanMemoryModel;
  *     VkBool32 vulkanMemoryModelDeviceScope;
+ *     VkBool32 vulkanMemoryModelAvailabilityVisibilityChains;
  * }</code></pre>
  */
 public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct implements NativeResource {
@@ -56,12 +58,14 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
         STYPE,
         PNEXT,
         VULKANMEMORYMODEL,
-        VULKANMEMORYMODELDEVICESCOPE;
+        VULKANMEMORYMODELDEVICESCOPE,
+        VULKANMEMORYMODELAVAILABILITYVISIBILITYCHAINS;
 
     static {
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
+            __member(4),
             __member(4),
             __member(4)
         );
@@ -73,6 +77,7 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
         PNEXT = layout.offsetof(1);
         VULKANMEMORYMODEL = layout.offsetof(2);
         VULKANMEMORYMODELDEVICESCOPE = layout.offsetof(3);
+        VULKANMEMORYMODELAVAILABILITYVISIBILITYCHAINS = layout.offsetof(4);
     }
 
     /**
@@ -100,6 +105,9 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
     /** Returns the value of the {@code vulkanMemoryModelDeviceScope} field. */
     @NativeType("VkBool32")
     public boolean vulkanMemoryModelDeviceScope() { return nvulkanMemoryModelDeviceScope(address()) != 0; }
+    /** Returns the value of the {@code vulkanMemoryModelAvailabilityVisibilityChains} field. */
+    @NativeType("VkBool32")
+    public boolean vulkanMemoryModelAvailabilityVisibilityChains() { return nvulkanMemoryModelAvailabilityVisibilityChains(address()) != 0; }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -109,18 +117,22 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
     public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR vulkanMemoryModel(@NativeType("VkBool32") boolean value) { nvulkanMemoryModel(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code vulkanMemoryModelDeviceScope} field. */
     public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR vulkanMemoryModelDeviceScope(@NativeType("VkBool32") boolean value) { nvulkanMemoryModelDeviceScope(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code vulkanMemoryModelAvailabilityVisibilityChains} field. */
+    public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR vulkanMemoryModelAvailabilityVisibilityChains(@NativeType("VkBool32") boolean value) { nvulkanMemoryModelAvailabilityVisibilityChains(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR set(
         int sType,
         long pNext,
         boolean vulkanMemoryModel,
-        boolean vulkanMemoryModelDeviceScope
+        boolean vulkanMemoryModelDeviceScope,
+        boolean vulkanMemoryModelAvailabilityVisibilityChains
     ) {
         sType(sType);
         pNext(pNext);
         vulkanMemoryModel(vulkanMemoryModel);
         vulkanMemoryModelDeviceScope(vulkanMemoryModelDeviceScope);
+        vulkanMemoryModelAvailabilityVisibilityChains(vulkanMemoryModelAvailabilityVisibilityChains);
 
         return this;
     }
@@ -288,6 +300,8 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
     public static int nvulkanMemoryModel(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.VULKANMEMORYMODEL); }
     /** Unsafe version of {@link #vulkanMemoryModelDeviceScope}. */
     public static int nvulkanMemoryModelDeviceScope(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.VULKANMEMORYMODELDEVICESCOPE); }
+    /** Unsafe version of {@link #vulkanMemoryModelAvailabilityVisibilityChains}. */
+    public static int nvulkanMemoryModelAvailabilityVisibilityChains(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.VULKANMEMORYMODELAVAILABILITYVISIBILITYCHAINS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.STYPE, value); }
@@ -297,6 +311,8 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
     public static void nvulkanMemoryModel(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.VULKANMEMORYMODEL, value); }
     /** Unsafe version of {@link #vulkanMemoryModelDeviceScope(boolean) vulkanMemoryModelDeviceScope}. */
     public static void nvulkanMemoryModelDeviceScope(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.VULKANMEMORYMODELDEVICESCOPE, value); }
+    /** Unsafe version of {@link #vulkanMemoryModelAvailabilityVisibilityChains(boolean) vulkanMemoryModelAvailabilityVisibilityChains}. */
+    public static void nvulkanMemoryModelAvailabilityVisibilityChains(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.VULKANMEMORYMODELAVAILABILITYVISIBILITYCHAINS, value); }
 
     // -----------------------------------
 
@@ -348,6 +364,9 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
         /** Returns the value of the {@code vulkanMemoryModelDeviceScope} field. */
         @NativeType("VkBool32")
         public boolean vulkanMemoryModelDeviceScope() { return VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.nvulkanMemoryModelDeviceScope(address()) != 0; }
+        /** Returns the value of the {@code vulkanMemoryModelAvailabilityVisibilityChains} field. */
+        @NativeType("VkBool32")
+        public boolean vulkanMemoryModelAvailabilityVisibilityChains() { return VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.nvulkanMemoryModelAvailabilityVisibilityChains(address()) != 0; }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.nsType(address(), value); return this; }
@@ -357,6 +376,8 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends Struct impleme
         public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.Buffer vulkanMemoryModel(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.nvulkanMemoryModel(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code vulkanMemoryModelDeviceScope} field. */
         public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.Buffer vulkanMemoryModelDeviceScope(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.nvulkanMemoryModelDeviceScope(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code vulkanMemoryModelAvailabilityVisibilityChains} field. */
+        public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.Buffer vulkanMemoryModelAvailabilityVisibilityChains(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.nvulkanMemoryModelAvailabilityVisibilityChains(address(), value ? 1 : 0); return this; }
 
     }
 

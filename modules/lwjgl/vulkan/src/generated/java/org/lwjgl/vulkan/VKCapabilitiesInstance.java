@@ -180,6 +180,8 @@ public class VKCapabilitiesInstance {
     public final boolean VK_EXT_display_surface_counter;
     /** When true, {@link EXTSwapchainColorspace} is supported. */
     public final boolean VK_EXT_swapchain_colorspace;
+    /** When true, {@link EXTValidationFeatures} is supported. */
+    public final boolean VK_EXT_validation_features;
     /** When true, {@link EXTValidationFlags} is supported. */
     public final boolean VK_EXT_validation_flags;
     /** When true, {@link KHRDeviceGroupCreation} is supported. */
@@ -226,6 +228,7 @@ public class VKCapabilitiesInstance {
         VK_EXT_display_surface_counter = EXTDisplaySurfaceCounter.checkCapsInstance(provider, caps, ext);
         EXTSampleLocations.checkCapsInstance(provider, caps, deviceExt);
         VK_EXT_swapchain_colorspace = ext.contains("VK_EXT_swapchain_colorspace");
+        VK_EXT_validation_features = ext.contains("VK_EXT_validation_features");
         VK_EXT_validation_flags = ext.contains("VK_EXT_validation_flags");
         KHRDeviceGroup.checkCapsInstance(provider, caps, deviceExt);
         VK_KHR_device_group_creation = KHRDeviceGroupCreation.checkCapsInstance(provider, caps, ext);

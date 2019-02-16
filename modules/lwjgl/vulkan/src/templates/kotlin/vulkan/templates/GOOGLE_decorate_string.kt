@@ -24,7 +24,7 @@ val GOOGLE_decorate_string = "GOOGLEDecorateString".nativeClassVK("GOOGLE_decora
             <dd>225</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>0</dd>
+            <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -44,7 +44,7 @@ val GOOGLE_decorate_string = "GOOGLEDecorateString".nativeClassVK("GOOGLE_decora
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Requires the <a target="_blank" href="https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/GOOGLE/SPV_GOOGLE_decorate_string.asciidoc">SPV_GOOGLE_decorate_string</a> SPIR-V extension.</li>
+                <li>Requires the <a target="_blank" href="https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/GOOGLE/SPV_GOOGLE_decorate_string.asciidoc">{@code SPV_GOOGLE_decorate_string}</a> SPIR-V extension.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>
@@ -58,7 +58,7 @@ val GOOGLE_decorate_string = "GOOGLEDecorateString".nativeClassVK("GOOGLE_decora
     IntConstant(
         "The extension specification version.",
 
-        "GOOGLE_DECORATE_STRING_SPEC_VERSION".."0"
+        "GOOGLE_DECORATE_STRING_SPEC_VERSION".."1"
     )
 
     StringConstant(

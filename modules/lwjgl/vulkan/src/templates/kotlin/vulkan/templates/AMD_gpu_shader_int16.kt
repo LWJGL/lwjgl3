@@ -14,7 +14,7 @@ val AMD_gpu_shader_int16 = "AMDGPUShaderInt16".nativeClassVK("AMD_gpu_shader_int
         This extension adds support for the following SPIR-V extension in Vulkan:
 
         <ul>
-            <li>SPV_AMD_gpu_shader_int16</li>
+            <li>{@code SPV_AMD_gpu_shader_int16}</li>
         </ul>
 
         <dl>
@@ -48,7 +48,7 @@ val AMD_gpu_shader_int16 = "AMDGPUShaderInt16".nativeClassVK("AMD_gpu_shader_int
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_gpu_shader_int16.html">SPV_AMD_gpu_shader_int16</a> SPIR-V extension.</li>
+                <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_gpu_shader_int16.html">{@code SPV_AMD_gpu_shader_int16}</a> SPIR-V extension.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

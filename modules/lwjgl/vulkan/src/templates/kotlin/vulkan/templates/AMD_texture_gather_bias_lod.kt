@@ -16,7 +16,7 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
         Firstly, support for the following SPIR-V extension in Vulkan is added:
 
         <ul>
-            <li>SPV_AMD_texture_gather_bias_lod</li>
+            <li>{@code SPV_AMD_texture_gather_bias_lod}</li>
         </ul>
 
         Secondly, the extension allows the application to query which formats can be used together with the new function prototypes introduced by the SPIR-V extension.
@@ -95,7 +95,7 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_texture_gather_bias_lod.html">SPV_AMD_texture_gather_bias_lod</a> SPIR-V extension.</li>
+                <li>Requires the <a target="_blank" href="https://www.khronos.org/registry/spir-v/extensions/AMD/SPV_AMD_texture_gather_bias_lod.html">{@code SPV_AMD_texture_gather_bias_lod}</a> SPIR-V extension.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>
