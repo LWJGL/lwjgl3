@@ -1734,9 +1734,10 @@ public class GLFW {
      * <li><b>X11</b>: The class part of the {@code WM_CLASS} window property will by default be set to the window title passed to this function. The instance
      * part will use the contents of the {@code RESOURCE_NAME} environment variable, if present and not empty, or fall back to the window title. Set the
      * {@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME} and {@link #GLFW_X11_INSTANCE_NAME X11_INSTANCE_NAME} window hints to override this.</li>
-     * <li><b>Wayland</b>: The window frame is currently very simple, only allowing window resize or move. A compositor can still emit close, maximize or
-     * fullscreen events, using for example a keybind mechanism. Additionally, the {@code wp_viewporter} protocol is required for this feature, otherwise
-     * the window will not be decorated.</li>
+     * <li><b>Wayland</b>: Compositors should implement the xdg-decoration protocol for GLFW to decorate the window properly. If this protocol isn't
+     * supported, or if the compositor prefers client-side decorations, a very simple fallback frame will be drawn using the {@code wp_viewporter}
+     * protocol. A compositor can still emit close, maximize or fullscreen events, using for instance a keybind mechanism. If neither of these protocols
+     * is supported, the window won't be decorated.</li>
      * <li><b>Wayland</b>: A full screen window will not attempt to change the mode, no matter what the requested size or refresh rate.</li>
      * <li><b>Wayland</b>: Screensaver inhibition requires the idle-inhibit protocol to be implemented in the user's compositor.</li>
      * </ul></div>
@@ -1824,9 +1825,10 @@ public class GLFW {
      * <li><b>X11</b>: The class part of the {@code WM_CLASS} window property will by default be set to the window title passed to this function. The instance
      * part will use the contents of the {@code RESOURCE_NAME} environment variable, if present and not empty, or fall back to the window title. Set the
      * {@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME} and {@link #GLFW_X11_INSTANCE_NAME X11_INSTANCE_NAME} window hints to override this.</li>
-     * <li><b>Wayland</b>: The window frame is currently very simple, only allowing window resize or move. A compositor can still emit close, maximize or
-     * fullscreen events, using for example a keybind mechanism. Additionally, the {@code wp_viewporter} protocol is required for this feature, otherwise
-     * the window will not be decorated.</li>
+     * <li><b>Wayland</b>: Compositors should implement the xdg-decoration protocol for GLFW to decorate the window properly. If this protocol isn't
+     * supported, or if the compositor prefers client-side decorations, a very simple fallback frame will be drawn using the {@code wp_viewporter}
+     * protocol. A compositor can still emit close, maximize or fullscreen events, using for instance a keybind mechanism. If neither of these protocols
+     * is supported, the window won't be decorated.</li>
      * <li><b>Wayland</b>: A full screen window will not attempt to change the mode, no matter what the requested size or refresh rate.</li>
      * <li><b>Wayland</b>: Screensaver inhibition requires the idle-inhibit protocol to be implemented in the user's compositor.</li>
      * </ul></div>

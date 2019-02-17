@@ -1402,9 +1402,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             #X11_CLASS_NAME and #X11_INSTANCE_NAME window hints to override this.
             """,
             """
-            <b>Wayland</b>: The window frame is currently very simple, only allowing window resize or move. A compositor can still emit close, maximize or
-            fullscreen events, using for example a keybind mechanism. Additionally, the {@code wp_viewporter} protocol is required for this feature, otherwise
-            the window will not be decorated.
+            <b>Wayland</b>: Compositors should implement the xdg-decoration protocol for GLFW to decorate the window properly. If this protocol isn't
+            supported, or if the compositor prefers client-side decorations, a very simple fallback frame will be drawn using the {@code wp_viewporter}
+            protocol. A compositor can still emit close, maximize or fullscreen events, using for instance a keybind mechanism. If neither of these protocols
+            is supported, the window won't be decorated.
             """,
             "<b>Wayland</b>: A full screen window will not attempt to change the mode, no matter what the requested size or refresh rate.",
             "<b>Wayland</b>: Screensaver inhibition requires the idle-inhibit protocol to be implemented in the user's compositor."

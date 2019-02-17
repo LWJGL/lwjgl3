@@ -7,6 +7,7 @@ package org.lwjgl.demo.glfw;
 import org.lwjgl.glfw.*;
 import org.lwjgl.system.*;
 
+import javax.annotation.*;
 import java.nio.*;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -27,8 +28,8 @@ public final class GLFWUtil {
      */
     public static void glfwInvoke(
         long window,
-        GLFWWindowSizeCallbackI windowSizeCB,
-        GLFWFramebufferSizeCallbackI framebufferSizeCB
+        @Nullable GLFWWindowSizeCallbackI windowSizeCB,
+        @Nullable GLFWFramebufferSizeCallbackI framebufferSizeCB
     ) {
         try (MemoryStack stack = stackPush()) {
             IntBuffer w = stack.mallocInt(1);
