@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."90"
+        "API_VERSION".."94"
     )
 
     ShortConstant(
@@ -321,6 +321,10 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "SAMPLER_W_CLAMP"..0x00000020,
         "SAMPLER_W_BORDER"..0x00000030,
 
+        "SAMPLER_UVW_MIRROR".."(0 | BGFX_SAMPLER_U_MIRROR | BGFX_SAMPLER_V_MIRROR | BGFX_SAMPLER_W_MIRROR)",
+        "SAMPLER_UVW_CLAMP".."(0 | BGFX_SAMPLER_U_CLAMP | BGFX_SAMPLER_V_CLAMP | BGFX_SAMPLER_W_CLAMP)",
+        "SAMPLER_UVW_BORDER".."(0 | BGFX_SAMPLER_U_BORDER | BGFX_SAMPLER_V_BORDER | BGFX_SAMPLER_W_BORDER)",
+
         "SAMPLER_MIN_POINT"..0x00000040,
         "SAMPLER_MIN_ANISOTROPIC"..0x00000080,
 
@@ -328,6 +332,8 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "SAMPLER_MAG_ANISOTROPIC"..0x00000200,
 
         "SAMPLER_MIP_POINT"..0x00000400,
+
+        "SAMPLER_POINT".."(0 | BGFX_SAMPLER_MIN_POINT | BGFX_SAMPLER_MAG_POINT | BGFX_SAMPLER_MIP_POINT)",
 
         "SAMPLER_COMPARE_LESS"..0x00010000,
         "SAMPLER_COMPARE_LEQUAL"..0x00020000,
@@ -424,25 +430,26 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_DRAW_INDIRECT"..0x0000000000000010L,
         "CAPS_FRAGMENT_DEPTH"..0x0000000000000020L,
         "CAPS_FRAGMENT_ORDERING"..0x0000000000000040L,
-        "CAPS_GRAPHICS_DEBUGGER"..0x0000000000000080L,
-        "CAPS_HDR10"..0x0000000000000100L,
-        "CAPS_HIDPI"..0x0000000000000400L,
-        "CAPS_INDEX32"..0x0000000000000800L,
-        "CAPS_INSTANCING"..0x0000000000001000L,
-        "CAPS_OCCLUSION_QUERY"..0x0000000000002000L,
-        "CAPS_RENDERER_MULTITHREADED"..0x0000000000004000L,
-        "CAPS_SWAP_CHAIN"..0x0000000000008000L,
-        "CAPS_TEXTURE_2D_ARRAY"..0x0000000000010000L,
-        "CAPS_TEXTURE_3D"..0x0000000000020000L,
-        "CAPS_TEXTURE_BLIT"..0x0000000000040000L,
-        "CAPS_TEXTURE_COMPARE_ALL"..0x0000000000180000L,
-        "CAPS_TEXTURE_COMPARE_LEQUAL"..0x0000000000100000L,
-        "CAPS_TEXTURE_CUBE_ARRAY"..0x0000000000200000L,
-        "CAPS_TEXTURE_DIRECT_ACCESS"..0x0000000000400000L,
-        "CAPS_TEXTURE_READ_BACK"..0x0000000000800000L,
-        "CAPS_VERTEX_ATTRIB_HALF"..0x0000000001000000L,
-        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000002000000L,
-        "CAPS_VERTEX_ID"..0x0000000004000000L
+        "CAPS_FRAMEBUFFER_RW"..0x0000000000000080L,
+        "CAPS_GRAPHICS_DEBUGGER"..0x0000000000000100L,
+        "CAPS_HDR10"..0x0000000000000400L,
+        "CAPS_HIDPI"..0x0000000000000800L,
+        "CAPS_INDEX32"..0x0000000000001000L,
+        "CAPS_INSTANCING"..0x0000000000002000L,
+        "CAPS_OCCLUSION_QUERY"..0x0000000000004000L,
+        "CAPS_RENDERER_MULTITHREADED"..0x0000000000008000L,
+        "CAPS_SWAP_CHAIN"..0x0000000000010000L,
+        "CAPS_TEXTURE_2D_ARRAY"..0x0000000000020000L,
+        "CAPS_TEXTURE_3D"..0x0000000000040000L,
+        "CAPS_TEXTURE_BLIT"..0x0000000000180000L,
+        "CAPS_TEXTURE_COMPARE_ALL"..0x0000000000100000L,
+        "CAPS_TEXTURE_COMPARE_LEQUAL"..0x0000000000200000L,
+        "CAPS_TEXTURE_CUBE_ARRAY"..0x0000000000400000L,
+        "CAPS_TEXTURE_DIRECT_ACCESS"..0x0000000000800000L,
+        "CAPS_TEXTURE_READ_BACK"..0x0000000001000000L,
+        "CAPS_VERTEX_ATTRIB_HALF"..0x0000000002000000L,
+        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000004000000L,
+        "CAPS_VERTEX_ID"..0x0000000008000000L
     )
 
     ShortConstant(
@@ -464,30 +471,6 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_FORMAT_TEXTURE_FRAMEBUFFER_MSAA"..0x1000.s,
         "CAPS_FORMAT_TEXTURE_MSAA"..0x2000.s,
         "CAPS_FORMAT_TEXTURE_MIP_AUTOGEN"..0x4000.s
-    )
-
-    val ViewFlags = ByteConstant(
-        "View",
-
-        "VIEW_NONE"..0x00.b,
-        "VIEW_STEREO"..0x01.b
-    ).javaDocLinks
-
-    val SubmitFlags = ByteConstant(
-        "Submit",
-
-        "SUBMIT_EYE_LEFT"..0x01.b,
-        "SUBMIT_EYE_RIGHT"..0x02.b,
-        "SUBMIT_EYE_FIRST".."BGFX_SUBMIT_EYE_LEFT"
-    ).javaDocLinks
-
-    ByteConstant(
-        "Submit",
-
-        "SUBMIT_EYE_MASK"..0x03.b,
-
-        "SUBMIT_RESERVED_SHIFT".."7",
-        "SUBMIT_RESERVED_MASK".."(byte)0x80"
     )
 
     ByteConstant(
@@ -694,7 +677,7 @@ RGBA16S
     val UniformType = EnumConstant(
         "Uniform type ({@code bgfx_uniform_type_t}).",
 
-        "UNIFORM_TYPE_INT1".enum("Int, used for samplers only."),
+        "UNIFORM_TYPE_SAMPLER".enum("Sampler."),
         "UNIFORM_TYPE_END".enum("Reserved, do not use."),
 
         "UNIFORM_TYPE_VEC4".enum("4 floats vector."),
@@ -1186,6 +1169,18 @@ RGBA16S
     )
 
     void(
+        "set_index_buffer_name",
+        "Set static index buffer debug name.",
+
+        bgfx_index_buffer_handle_t("_handle", "static index buffer handle"),
+        charASCII.const.p("_name", "static index buffer name"),
+        AutoSize("_name")..int32_t(
+            "_len",
+            "static index buffer name length (if length is {@code INT32_MAX}, it's expected that {@code _name} is zero terminated string)"
+        )
+    )
+
+    void(
         "destroy_index_buffer",
         "Destroys static index buffer.",
 
@@ -1199,6 +1194,18 @@ RGBA16S
         bgfx_memory_t.const.p("_mem", "vertex buffer data"),
         bgfx_vertex_decl_t.const.p("_decl", "vertex declaration"),
         MapToInt..uint16_t("_flags", "buffer creation flags", BufferFlags, LinkMode.BITFIELD)
+    )
+
+    void(
+        "set_vertex_buffer_name",
+        "Set static vertex buffer debug name.",
+
+        bgfx_vertex_buffer_handle_t("_handle", "static vertex buffer handle"),
+        charASCII.const.p("_name", "static vertex buffer name"),
+        AutoSize("_name")..int32_t(
+            "_len",
+            "static vertex buffer name length (if length is {@code INT32_MAX}, it's expected that {@code _name} is zero terminated string)"
+        )
     )
 
     void(
@@ -1693,6 +1700,18 @@ RGBA16S
         returnDoc = "handle to frame buffer object"
     )
 
+    void(
+        "set_frame_buffer_name",
+        "Set frame buffer debug name.",
+
+        bgfx_frame_buffer_handle_t("_handle", "frame buffer handle"),
+        charASCII.const.p("_name", "frame buffer name"),
+        AutoSize("_name")..int32_t(
+            "_len",
+            "frame buffer name length (if length is {@code INT32_MAX}, it's expected that {@code _name} is zero terminated string)"
+        )
+    )
+
     bgfx_frame_buffer_handle_t(
         "create_frame_buffer_scaled",
         "Creates frame buffer with size based on backbuffer ratio. Frame buffer will maintain ratio if back buffer resolution changes.",
@@ -1959,23 +1978,6 @@ RGBA16S
         MultiType(
             PointerMapping.DATA_FLOAT
         )..Check(4 x 4 x 4)..nullable..void.const.p("_proj", "projection matrix")
-    )
-
-    void(
-        "set_view_transform_stereo",
-        "Sets view view and projection matrices, all draw primitives in this view will use these matrices.",
-
-        MapToInt..bgfx_view_id_t("_id", "view id"),
-        MultiType(
-            PointerMapping.DATA_FLOAT
-        )..Check(4 x 4 x 4)..nullable..void.const.p("_view", "project matrix"),
-        MultiType(
-            PointerMapping.DATA_FLOAT
-        )..Check(4 x 4 x 4)..nullable..void.const.p("_projL", "projection matrix for left eye in stereo mode"),
-        MapToInt..uint8_t("_flags", "view flags", ViewFlags),
-        MultiType(
-            PointerMapping.DATA_FLOAT
-        )..Check(4 x 4 x 4)..nullable..void.const.p("_projR", "projection matrix for right eye in stereo mode")
     )
 
     void(
@@ -2339,8 +2341,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_program_handle_t("_handle", "compute program"),
         uint32_t("_numX", "number of groups X"),
         uint32_t("_numY", "number of groups Y"),
-        uint32_t("_numZ", "number of groups Z"),
-        MapToInt..uint8_t("_flags", "view flags", SubmitFlags)
+        uint32_t("_numZ", "number of groups Z")
     )
 
     void(
@@ -2351,8 +2352,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_program_handle_t("_handle", "compute program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
         MapToInt..uint16_t("_start", "first element in indirect buffer"),
-        MapToInt..uint16_t("_num", "number of dispatches"),
-        MapToInt..uint8_t("_flags", "view flags", SubmitFlags)
+        MapToInt..uint16_t("_num", "number of dispatches")
     )
 
     void(
@@ -2774,8 +2774,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_program_handle_t("_handle", "compute program"),
         uint32_t("_numX", "number of groups X"),
         uint32_t("_numY", "number of groups Y"),
-        uint32_t("_numZ", "number of groups Z"),
-        MapToInt..uint8_t("_flags", "view flags", SubmitFlags)
+        uint32_t("_numZ", "number of groups Z")
     )
 
     void(
@@ -2787,8 +2786,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         bgfx_program_handle_t("_handle", "compute program"),
         bgfx_indirect_buffer_handle_t("_indirectHandle", "indirect buffer"),
         MapToInt..uint16_t("_start", "first element in indirect buffer"),
-        MapToInt..uint16_t("_num", "number of dispatches"),
-        MapToInt..uint8_t("_flags", "view flags", SubmitFlags)
+        MapToInt..uint16_t("_num", "number of dispatches")
     )
 
     void(
