@@ -230,6 +230,7 @@ val stbtt_pack_context = struct(Module.STB, "STBTTPackContext", nativeName = "st
     int("height", "")
     int("stride_in_bytes", "")
     int("padding", "")
+    intb("skip_missing", "")
     unsigned_int("h_oversample", "")
     unsigned_int("v_oversample", "")
     unsigned_char.p("pixels", "")

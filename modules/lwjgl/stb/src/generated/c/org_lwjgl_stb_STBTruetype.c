@@ -40,6 +40,18 @@ JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1GetBakedQuad__JIII
     CRITICAL(org_lwjgl_stb_STBTruetype_nstbtt_1GetBakedQuad__JIIIJJJI)(chardataAddress, pw, ph, char_index, xposAddress, yposAddress, qAddress, opengl_fillrule);
 }
 
+JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_stb_STBTruetype_nstbtt_1GetScaledFontVMetrics__JIFJJJ)(jlong fontdataAddress, jint index, jfloat size, jlong ascentAddress, jlong descentAddress, jlong lineGapAddress) {
+    unsigned char const *fontdata = (unsigned char const *)(intptr_t)fontdataAddress;
+    float *ascent = (float *)(intptr_t)ascentAddress;
+    float *descent = (float *)(intptr_t)descentAddress;
+    float *lineGap = (float *)(intptr_t)lineGapAddress;
+    stbtt_GetScaledFontVMetrics(fontdata, index, size, ascent, descent, lineGap);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1GetScaledFontVMetrics__JIFJJJ(JNIEnv *__env, jclass clazz, jlong fontdataAddress, jint index, jfloat size, jlong ascentAddress, jlong descentAddress, jlong lineGapAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    CRITICAL(org_lwjgl_stb_STBTruetype_nstbtt_1GetScaledFontVMetrics__JIFJJJ)(fontdataAddress, index, size, ascentAddress, descentAddress, lineGapAddress);
+}
+
 JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_stb_STBTruetype_nstbtt_1PackBegin)(jlong spcAddress, jlong pixelsAddress, jint width, jint height, jint stride_in_bytes, jint padding, jlong alloc_contextAddress) {
     stbtt_pack_context *spc = (stbtt_pack_context *)(intptr_t)spcAddress;
     unsigned char *pixels = (unsigned char *)(intptr_t)pixelsAddress;
@@ -89,6 +101,15 @@ JNIEXPORT void JNICALL JavaCritical_org_lwjgl_stb_STBTruetype_nstbtt_1PackSetOve
 JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1PackSetOversampling(JNIEnv *__env, jclass clazz, jlong spcAddress, jint h_oversample, jint v_oversample) {
     UNUSED_PARAMS(__env, clazz)
     JavaCritical_org_lwjgl_stb_STBTruetype_nstbtt_1PackSetOversampling(spcAddress, h_oversample, v_oversample);
+}
+
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_stb_STBTruetype_nstbtt_1PackSetSkipMissingCodepoints(jlong spcAddress, jint skip) {
+    stbtt_pack_context *spc = (stbtt_pack_context *)(intptr_t)spcAddress;
+    stbtt_PackSetSkipMissingCodepoints(spc, skip);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1PackSetSkipMissingCodepoints(JNIEnv *__env, jclass clazz, jlong spcAddress, jint skip) {
+    UNUSED_PARAMS(__env, clazz)
+    JavaCritical_org_lwjgl_stb_STBTruetype_nstbtt_1PackSetSkipMissingCodepoints(spcAddress, skip);
 }
 
 JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_stb_STBTruetype_nstbtt_1GetPackedQuad__JIIIJJJI)(jlong chardataAddress, jint pw, jint ph, jint char_index, jlong xposAddress, jlong yposAddress, jlong qAddress, jint align_to_integer) {
@@ -601,6 +622,23 @@ JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1GetBakedQuad__JIII
     CRITICAL(org_lwjgl_stb_STBTruetype_nstbtt_1GetBakedQuad__JIIIJJJI)(chardataAddress, pw, ph, char_index, (intptr_t)xpos, (intptr_t)ypos, qAddress, opengl_fillrule);
     (*__env)->ReleasePrimitiveArrayCritical(__env, yposAddress, ypos, 0);
     (*__env)->ReleasePrimitiveArrayCritical(__env, xposAddress, xpos, 0);
+}
+
+JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_stb_STBTruetype_nstbtt_1GetScaledFontVMetrics__JIF_3F_3F_3F)(jlong fontdataAddress, jint index, jfloat size, jint ascent__length, jfloat* ascent, jint descent__length, jfloat* descent, jint lineGap__length, jfloat* lineGap) {
+    UNUSED_PARAM(ascent__length)
+    UNUSED_PARAM(descent__length)
+    UNUSED_PARAM(lineGap__length)
+    CRITICAL(org_lwjgl_stb_STBTruetype_nstbtt_1GetScaledFontVMetrics__JIFJJJ)(fontdataAddress, index, size, (intptr_t)ascent, (intptr_t)descent, (intptr_t)lineGap);
+}
+JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1GetScaledFontVMetrics__JIF_3F_3F_3F(JNIEnv *__env, jclass clazz, jlong fontdataAddress, jint index, jfloat size, jfloatArray ascentAddress, jfloatArray descentAddress, jfloatArray lineGapAddress) {
+    jfloat *ascent = (*__env)->GetPrimitiveArrayCritical(__env, ascentAddress, 0);
+    jfloat *descent = (*__env)->GetPrimitiveArrayCritical(__env, descentAddress, 0);
+    jfloat *lineGap = (*__env)->GetPrimitiveArrayCritical(__env, lineGapAddress, 0);
+    UNUSED_PARAMS(__env, clazz)
+    CRITICAL(org_lwjgl_stb_STBTruetype_nstbtt_1GetScaledFontVMetrics__JIFJJJ)(fontdataAddress, index, size, (intptr_t)ascent, (intptr_t)descent, (intptr_t)lineGap);
+    (*__env)->ReleasePrimitiveArrayCritical(__env, lineGapAddress, lineGap, 0);
+    (*__env)->ReleasePrimitiveArrayCritical(__env, descentAddress, descent, 0);
+    (*__env)->ReleasePrimitiveArrayCritical(__env, ascentAddress, ascent, 0);
 }
 
 JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_stb_STBTruetype_nstbtt_1GetPackedQuad__JIII_3F_3FJI)(jlong chardataAddress, jint pw, jint ph, jint char_index, jint xpos__length, jfloat* xpos, jint ypos__length, jfloat* ypos, jlong qAddress, jint align_to_integer) {

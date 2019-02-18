@@ -41,37 +41,64 @@ public class STBPerlin {
      */
     public static native float stb_perlin_noise3(float x, float y, float z, int x_wrap, int y_wrap, int z_wrap);
 
+    // --- [ stb_perlin_noise3_seed ] ---
+
+    /**
+     * As {@link #stb_perlin_noise3 perlin_noise3}, but {@code seed} selects from multiple different variations of the noise function.
+     * 
+     * <p>The current implementation only uses the bottom 8 bits of {@code seed}, but possibly in the future more bits will be used.</p>
+     *
+     * @param x      the x coordinate
+     * @param y      the y coordinate
+     * @param z      the z coordinate
+     * @param x_wrap 0, or a power of two value that specifies the x wraparound coordinate
+     * @param y_wrap 0, or a power of two value that specifies the y wraparound coordinate
+     * @param z_wrap 0, or a power of two value that specifies the z wraparound coordinate
+     * @param seed   selects from multiple different variations of the noise function
+     */
+    public static native float stb_perlin_noise3_seed(float x, float y, float z, int x_wrap, int y_wrap, int z_wrap, int seed);
+
     // --- [ stb_perlin_ridge_noise3 ] ---
 
     /**
      * Computes ridged noise. Calls {@link #stb_perlin_noise3 perlin_noise3} {@code octaves} times, so this parameter will affect runtime.
      *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
+     * @param x          the x coordinate
+     * @param y          the y coordinate
+     * @param z          the z coordinate
+     * @param lacunarity spacing between successive octaves (use exactly 2.0 for wrapping output)
+     * @param gain       relative weighting applied to each successive octave
+     * @param offset     used to invert the ridges, may need to be larger, not sure
+     * @param octaves    number of "octaves" of {@code noise3()} to sum
      */
-    public static native float stb_perlin_ridge_noise3(float x, float y, float z, float lacunarity, float gain, float offset, int octaves, int x_wrap, int y_wrap, int z_wrap);
+    public static native float stb_perlin_ridge_noise3(float x, float y, float z, float lacunarity, float gain, float offset, int octaves);
 
     // --- [ stb_perlin_fbm_noise3 ] ---
 
     /**
      * Computes Fractal Brownian Motion noise. Calls {@link #stb_perlin_noise3 perlin_noise3} {@code octaves} times, so this parameter will affect runtime.
      *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
+     * @param x          the x coordinate
+     * @param y          the y coordinate
+     * @param z          the z coordinate
+     * @param lacunarity spacing between successive octaves (use exactly 2.0 for wrapping output)
+     * @param gain       relative weighting applied to each successive octave
+     * @param octaves    number of "octaves" of {@code noise3()} to sum
      */
-    public static native float stb_perlin_fbm_noise3(float x, float y, float z, float lacunarity, float gain, int octaves, int x_wrap, int y_wrap, int z_wrap);
+    public static native float stb_perlin_fbm_noise3(float x, float y, float z, float lacunarity, float gain, int octaves);
 
     // --- [ stb_perlin_turbulence_noise3 ] ---
 
     /**
      * Computes turbulence noise. Calls {@link #stb_perlin_noise3 perlin_noise3} {@code octaves} times, so this parameter will affect runtime.
      *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
+     * @param x          the x coordinate
+     * @param y          the y coordinate
+     * @param z          the z coordinate
+     * @param lacunarity spacing between successive octaves (use exactly 2.0 for wrapping output)
+     * @param gain       relative weighting applied to each successive octave
+     * @param octaves    number of "octaves" of {@code noise3()} to sum
      */
-    public static native float stb_perlin_turbulence_noise3(float x, float y, float z, float lacunarity, float gain, int octaves, int x_wrap, int y_wrap, int z_wrap);
+    public static native float stb_perlin_turbulence_noise3(float x, float y, float z, float lacunarity, float gain, int octaves);
 
 }

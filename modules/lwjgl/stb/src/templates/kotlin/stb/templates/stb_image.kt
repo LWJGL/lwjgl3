@@ -17,6 +17,9 @@ val stb_image = "STBImage".nativeClass(Module.STB, prefix = "STBI_", library = S
 #define STBI_ASSERT(x)
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_STATIC
+#ifdef LWJGL_WINDOWS
+    #define STBI_WINDOWS_UTF8
+#endif
 #include "stb_image.h"""")
 
     documentation =
@@ -66,9 +69,9 @@ stbi_image_free(data)""")}
 
         <h3>HDR image support</h3>
 
-        stb_image now supports loading HDR images in general, and currently the Radiance .HDR file format, although the support is provided generically. You
-        can still load any file through the existing interface; if you attempt to load an HDR file, it will be automatically remapped to LDR, assuming gamma
-        2.2 and an arbitrary scale factor defaulting to 1; both of these constants can be reconfigured through this interface:
+        stb_image supports loading HDR images in general, and currently the Radiance .HDR file format specifically. You can still load any file through the
+        existing interface; if you attempt to load an HDR file, it will be automatically remapped to LDR, assuming gamma 2.2 and an arbitrary scale factor
+        defaulting to 1; both of these constants can be reconfigured through this interface:
         ${codeBlock("""
 stbi_hdr_to_ldr_gamma(2.2f);
 stbi_hdr_to_ldr_scale(1.0f);"""
@@ -132,7 +135,7 @@ N=\#channels_in_file     components
         Paletted PNG, BMP, GIF, and PIC images are automatically depalettized.
         """,
 
-        charASCII.const.p("filename", "the file name"),
+        charUTF8.const.p("filename", "the file name"),
         Check(1)..AutoSizeResult..int.p("x", "outputs the image width in pixels"),
         Check(1)..AutoSizeResult..int.p("y", "outputs the image height in pixels"),
         Check(1)..AutoSizeResult("(desired_channels != 0 ? desired_channels : \$original)")..int.p(

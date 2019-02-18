@@ -403,6 +403,29 @@ public class STBTruetype {
         nstbtt_GetBakedQuad(chardata.address(), pw, ph, char_index, memAddress(xpos), memAddress(ypos), q.address(), opengl_fillrule ? 1 : 0);
     }
 
+    // --- [ stbtt_GetScaledFontVMetrics ] ---
+
+    /** Unsafe version of: {@link #stbtt_GetScaledFontVMetrics GetScaledFontVMetrics} */
+    public static native void nstbtt_GetScaledFontVMetrics(long fontdata, int index, float size, long ascent, long descent, long lineGap);
+
+    /**
+     * Query the font vertical metrics without having to create a font first.
+     *
+     * @param index   the font index (use 0 if you don't know what that is)
+     * @param size    the font height, in pixels
+     * @param ascent  returns the coordinate above the baseline the font extends
+     * @param descent returns the coordinate below the baseline the font extends (i.e. it is typically negative)
+     * @param lineGap returns the spacing between one row's descent and the next row's ascent
+     */
+    public static void stbtt_GetScaledFontVMetrics(@NativeType("unsigned char const *") ByteBuffer fontdata, int index, float size, @NativeType("float *") FloatBuffer ascent, @NativeType("float *") FloatBuffer descent, @NativeType("float *") FloatBuffer lineGap) {
+        if (CHECKS) {
+            check(ascent, 1);
+            check(descent, 1);
+            check(lineGap, 1);
+        }
+        nstbtt_GetScaledFontVMetrics(memAddress(fontdata), index, size, memAddress(ascent), memAddress(descent), memAddress(lineGap));
+    }
+
     // --- [ stbtt_PackBegin ] ---
 
     /** Unsafe version of: {@link #stbtt_PackBegin PackBegin} */
@@ -527,7 +550,7 @@ public class STBTruetype {
      *
      * @param spc        an {@link STBTTPackContext} struct
      * @param fontdata   the font data
-     * @param font_index the font index (use 0 if you don't know what that is
+     * @param font_index the font index (use 0 if you don't know what that is)
      * @param ranges     an array of {@link STBTTPackRange} structs
      *
      * @return 1 on success, 0 on failure
@@ -562,6 +585,22 @@ public class STBTruetype {
      */
     public static void stbtt_PackSetOversampling(@NativeType("stbtt_pack_context *") STBTTPackContext spc, @NativeType("unsigned int") int h_oversample, @NativeType("unsigned int") int v_oversample) {
         nstbtt_PackSetOversampling(spc.address(), h_oversample, v_oversample);
+    }
+
+    // --- [ stbtt_PackSetSkipMissingCodepoints ] ---
+
+    /** Unsafe version of: {@link #stbtt_PackSetSkipMissingCodepoints PackSetSkipMissingCodepoints} */
+    public static native void nstbtt_PackSetSkipMissingCodepoints(long spc, int skip);
+
+    /**
+     * If {@code skip != 0}, this tells stb_truetype to skip any codepoints for which there is no corresponding glyph. If {@code skip=0}, which is the
+     * default, then codepoints without a glyph recived the font's "missing character" glyph, typically an empty box by convention.
+     *
+     * @param spc  an {@link STBTTPackContext} struct
+     * @param skip the skip flag
+     */
+    public static void stbtt_PackSetSkipMissingCodepoints(@NativeType("stbtt_pack_context *") STBTTPackContext spc, @NativeType("int") boolean skip) {
+        nstbtt_PackSetSkipMissingCodepoints(spc.address(), skip ? 1 : 0);
     }
 
     // --- [ stbtt_GetPackedQuad ] ---
@@ -750,7 +789,7 @@ public class STBTruetype {
      * @param info              an {@link STBTTFontinfo} struct
      * @param unicode_codepoint the unicode code point
      *
-     * @return the glyph index
+     * @return the glyph index or 0 if the character codepoint is not defined in the font
      */
     public static int stbtt_FindGlyphIndex(@NativeType("stbtt_fontinfo const *") STBTTFontinfo info, int unicode_codepoint) {
         return nstbtt_FindGlyphIndex(info.address(), unicode_codepoint);
@@ -1022,7 +1061,7 @@ public class STBTruetype {
     /**
      * Returns number of vertices and fills {@code *vertices} with the pointer to them
      * 
-     * <p>The shape is a series of countours. Each one starts with a {@link #STBTT_vmove vmove}, then consists of a series of mixed {@link #STBTT_vline vline} and {@link #STBTT_vcurve vcurve} segments. A {@link #STBTT_vline vline} draws a
+     * <p>The shape is a series of contours. Each one starts with a {@link #STBTT_vmove vmove}, then consists of a series of mixed {@link #STBTT_vline vline} and {@link #STBTT_vcurve vcurve} segments. A {@link #STBTT_vline vline} draws a
      * line from previous endpoint to its {@code x,y}; a {@link #STBTT_vcurve vcurve} draws a quadratic bezier from previous endpoint to its {@code x,y}, using {@code cx,cy} as
      * the bezier control point.</p>
      * 
@@ -1042,7 +1081,7 @@ public class STBTruetype {
     /**
      * Returns number of vertices and fills {@code *vertices} with the pointer to them
      * 
-     * <p>The shape is a series of countours. Each one starts with a {@link #STBTT_vmove vmove}, then consists of a series of mixed {@link #STBTT_vline vline} and {@link #STBTT_vcurve vcurve} segments. A {@link #STBTT_vline vline} draws a
+     * <p>The shape is a series of contours. Each one starts with a {@link #STBTT_vmove vmove}, then consists of a series of mixed {@link #STBTT_vline vline} and {@link #STBTT_vcurve vcurve} segments. A {@link #STBTT_vline vline} draws a
      * line from previous endpoint to its {@code x,y}; a {@link #STBTT_vcurve vcurve} draws a quadratic bezier from previous endpoint to its {@code x,y}, using {@code cx,cy} as
      * the bezier control point.</p>
      * 
@@ -1610,7 +1649,7 @@ public class STBTruetype {
 
     /**
      * Computes a discretized SDF field for a single character, suitable for storing in a single-channel texture, sampling with bilinear filtering, and
-     * testing against larger than some threshhold to produce scalable fonts.
+     * testing against larger than some threshold to produce scalable fonts.
      * 
      * <p>{@code pixel_dist_scale} &amp; {@code onedge_value} are a scale &amp; bias that allows you to make optimal use of the limited {@code 0..255} for your
      * application, trading off precision and special effects. SDF values outside the range {@code 0..255} are clamped to {@code 0..255}.</p>
@@ -1808,6 +1847,19 @@ public class STBTruetype {
             check(ypos, 1);
         }
         nstbtt_GetBakedQuad(chardata.address(), pw, ph, char_index, xpos, ypos, q.address(), opengl_fillrule ? 1 : 0);
+    }
+
+    /** Array version of: {@link #nstbtt_GetScaledFontVMetrics} */
+    public static native void nstbtt_GetScaledFontVMetrics(long fontdata, int index, float size, float[] ascent, float[] descent, float[] lineGap);
+
+    /** Array version of: {@link #stbtt_GetScaledFontVMetrics GetScaledFontVMetrics} */
+    public static void stbtt_GetScaledFontVMetrics(@NativeType("unsigned char const *") ByteBuffer fontdata, int index, float size, @NativeType("float *") float[] ascent, @NativeType("float *") float[] descent, @NativeType("float *") float[] lineGap) {
+        if (CHECKS) {
+            check(ascent, 1);
+            check(descent, 1);
+            check(lineGap, 1);
+        }
+        nstbtt_GetScaledFontVMetrics(memAddress(fontdata), index, size, ascent, descent, lineGap);
     }
 
     /** Array version of: {@link #nstbtt_GetPackedQuad} */

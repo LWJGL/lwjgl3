@@ -13,6 +13,9 @@ DISABLE_WARNINGS()
 #define STBI_ASSERT(x)
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_STATIC
+#ifdef LWJGL_WINDOWS
+    #define STBI_WINDOWS_UTF8
+#endif
 #include "stb_image.h"
 ENABLE_WARNINGS()
 

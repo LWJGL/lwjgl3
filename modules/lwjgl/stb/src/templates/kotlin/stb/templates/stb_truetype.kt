@@ -304,6 +304,18 @@ int main(int arg, char **argv)
         intb("opengl_fillrule", "1 if opengl fill rule; 0 if DX9 or earlier")
     )
 
+    void(
+        "GetScaledFontVMetrics",
+        "Query the font vertical metrics without having to create a font first.",
+
+        Unsafe..unsigned_char.const.p("fontdata", ""),
+        int("index", "the font index (use 0 if you don't know what that is)"),
+        float("size", "the font height, in pixels"),
+        Check(1)..float.p("ascent", "returns the coordinate above the baseline the font extends"),
+        Check(1)..float.p("descent", "returns the coordinate below the baseline the font extends (i.e. it is typically negative)"),
+        Check(1)..float.p("lineGap", "returns the spacing between one row's descent and the next row's ascent")
+    )
+
     // NEW TEXTURE BAKING API
 
     intb(
@@ -387,7 +399,7 @@ int main(int arg, char **argv)
 
         stbtt_pack_context.p("spc", "an ##STBTTPackContext struct"),
         Unsafe..unsigned_char.const.p("fontdata", "the font data"),
-        int("font_index", "the font index (use 0 if you don't know what that is"),
+        int("font_index", "the font index (use 0 if you don't know what that is)"),
         Input..stbtt_pack_range.p("ranges", "an array of ##STBTTPackRange structs"),
         AutoSize("ranges")..int("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
 
@@ -411,6 +423,17 @@ int main(int arg, char **argv)
         stbtt_pack_context.p("spc", "an ##STBTTPackContext struct"),
         unsigned_int("h_oversample", "the horizontal oversampling amount"),
         unsigned_int("v_oversample", "the vertical oversampling amount")
+    )
+
+    void(
+        "PackSetSkipMissingCodepoints",
+        """
+        If {@code skip != 0}, this tells stb_truetype to skip any codepoints for which there is no corresponding glyph. If {@code skip=0}, which is the
+        default, then codepoints without a glyph recived the font's "missing character" glyph, typically an empty box by convention.
+        """,
+
+        stbtt_pack_context.p("spc", "an ##STBTTPackContext struct"),
+        intb("skip", "the skip flag")
     )
 
     void(
@@ -525,7 +548,7 @@ int main(int arg, char **argv)
         stbtt_fontinfo.const.p("info", "an ##STBTTFontinfo struct"),
         int("unicode_codepoint", "the unicode code point"),
 
-        returnDoc = "the glyph index"
+        returnDoc = "the glyph index or 0 if the character codepoint is not defined in the font"
     )
 
     // CHARACTER PROPERTIES
@@ -685,7 +708,7 @@ int main(int arg, char **argv)
         """
         Returns number of vertices and fills {@code *vertices} with the pointer to them
 
-        The shape is a series of countours. Each one starts with a #vmove, then consists of a series of mixed #vline and #vcurve segments. A #vline draws a
+        The shape is a series of contours. Each one starts with a #vmove, then consists of a series of mixed #vline and #vcurve segments. A #vline draws a
         line from previous endpoint to its {@code x,y}; a #vcurve draws a quadratic bezier from previous endpoint to its {@code x,y}, using {@code cx,cy} as
         the bezier control point.
 
@@ -992,7 +1015,7 @@ int main(int arg, char **argv)
         "GetGlyphSDF",
         """
         Computes a discretized SDF field for a single character, suitable for storing in a single-channel texture, sampling with bilinear filtering, and
-        testing against larger than some threshhold to produce scalable fonts.
+        testing against larger than some threshold to produce scalable fonts.
         
         {@code pixel_dist_scale} &amp; {@code onedge_value} are a scale &amp; bias that allows you to make optimal use of the limited {@code 0..255} for your
         application, trading off precision and special effects. SDF values outside the range {@code 0..255} are clamped to {@code 0..255}.

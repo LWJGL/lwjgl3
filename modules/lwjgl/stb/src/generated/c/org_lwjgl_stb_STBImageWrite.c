@@ -13,6 +13,7 @@ DISABLE_WARNINGS()
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_STATIC
 #ifdef LWJGL_WINDOWS
+    #define STBIW_WINDOWS_UTF8
     #define STBI_MSC_SECURE_CRT
 #endif
 #include "stb_image_write.h"

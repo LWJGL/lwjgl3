@@ -81,7 +81,8 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
         "invalid_first_page".enum,
         "bad_packet_type".enum,
         "cant_find_last_page".enum,
-        "seek_failed".enum
+        "seek_failed".enum,
+        "ogg_skeleton_not_supported".enum
     )
 
     // FUNCTIONS USEABLE WITH ALL INPUT MODES

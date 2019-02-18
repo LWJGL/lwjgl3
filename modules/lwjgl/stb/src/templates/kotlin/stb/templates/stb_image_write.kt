@@ -17,6 +17,7 @@ val stb_image_write = "STBImageWrite".nativeClass(Module.STB, prefix = "STBI", p
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_STATIC
 #ifdef LWJGL_WINDOWS
+    #define STBIW_WINDOWS_UTF8
     #define STBI_MSC_SECURE_CRT
 #endif
 #include "stb_image_write.h"""")
@@ -80,7 +81,7 @@ int stbi_write_force_png_filter;         // defaults to -1; set to 0..5 to force
         PNG allows you to set the deflate compression level by setting the global variable #write_png_compression_level() (it defaults to 8).
         """,
 
-        charASCII.const.p("filename", "the image file path"),
+        charUTF8.const.p("filename", "the image file path"),
         int("w", "the image width, in pixels"),
         int("h", "the image height, in pixels"),
         int("comp", "the number of channels in each pixel"),

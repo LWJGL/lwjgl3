@@ -28,6 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int height;
  *     int stride_in_bytes;
  *     int padding;
+ *     int skip_missing;
  *     unsigned int h_oversample;
  *     unsigned int v_oversample;
  *     unsigned char * pixels;
@@ -51,6 +52,7 @@ public class STBTTPackContext extends Struct implements NativeResource {
         HEIGHT,
         STRIDE_IN_BYTES,
         PADDING,
+        SKIP_MISSING,
         H_OVERSAMPLE,
         V_OVERSAMPLE,
         PIXELS,
@@ -60,6 +62,7 @@ public class STBTTPackContext extends Struct implements NativeResource {
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
+            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -79,10 +82,11 @@ public class STBTTPackContext extends Struct implements NativeResource {
         HEIGHT = layout.offsetof(3);
         STRIDE_IN_BYTES = layout.offsetof(4);
         PADDING = layout.offsetof(5);
-        H_OVERSAMPLE = layout.offsetof(6);
-        V_OVERSAMPLE = layout.offsetof(7);
-        PIXELS = layout.offsetof(8);
-        NODES = layout.offsetof(9);
+        SKIP_MISSING = layout.offsetof(6);
+        H_OVERSAMPLE = layout.offsetof(7);
+        V_OVERSAMPLE = layout.offsetof(8);
+        PIXELS = layout.offsetof(9);
+        NODES = layout.offsetof(10);
     }
 
     /**
@@ -112,6 +116,9 @@ public class STBTTPackContext extends Struct implements NativeResource {
     public int stride_in_bytes() { return nstride_in_bytes(address()); }
     /** Returns the value of the {@code padding} field. */
     public int padding() { return npadding(address()); }
+    /** Returns the value of the {@code skip_missing} field. */
+    @NativeType("int")
+    public boolean skip_missing() { return nskip_missing(address()) != 0; }
     /** Returns the value of the {@code h_oversample} field. */
     @NativeType("unsigned int")
     public int h_oversample() { return nh_oversample(address()); }
@@ -288,6 +295,8 @@ public class STBTTPackContext extends Struct implements NativeResource {
     public static int nstride_in_bytes(long struct) { return UNSAFE.getInt(null, struct + STBTTPackContext.STRIDE_IN_BYTES); }
     /** Unsafe version of {@link #padding}. */
     public static int npadding(long struct) { return UNSAFE.getInt(null, struct + STBTTPackContext.PADDING); }
+    /** Unsafe version of {@link #skip_missing}. */
+    public static int nskip_missing(long struct) { return UNSAFE.getInt(null, struct + STBTTPackContext.SKIP_MISSING); }
     /** Unsafe version of {@link #h_oversample}. */
     public static int nh_oversample(long struct) { return UNSAFE.getInt(null, struct + STBTTPackContext.H_OVERSAMPLE); }
     /** Unsafe version of {@link #v_oversample}. */
@@ -349,6 +358,9 @@ public class STBTTPackContext extends Struct implements NativeResource {
         public int stride_in_bytes() { return STBTTPackContext.nstride_in_bytes(address()); }
         /** Returns the value of the {@code padding} field. */
         public int padding() { return STBTTPackContext.npadding(address()); }
+        /** Returns the value of the {@code skip_missing} field. */
+        @NativeType("int")
+        public boolean skip_missing() { return STBTTPackContext.nskip_missing(address()) != 0; }
         /** Returns the value of the {@code h_oversample} field. */
         @NativeType("unsigned int")
         public int h_oversample() { return STBTTPackContext.nh_oversample(address()); }

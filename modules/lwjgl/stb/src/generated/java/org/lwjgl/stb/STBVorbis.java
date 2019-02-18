@@ -78,6 +78,7 @@ public class STBVorbis {
      * <li>{@link #VORBIS_bad_packet_type bad_packet_type}</li>
      * <li>{@link #VORBIS_cant_find_last_page cant_find_last_page}</li>
      * <li>{@link #VORBIS_seek_failed seek_failed}</li>
+     * <li>{@link #VORBIS_ogg_skeleton_not_supported ogg_skeleton_not_supported}</li>
      * </ul>
      */
     public static final int
@@ -100,7 +101,8 @@ public class STBVorbis {
         VORBIS_invalid_first_page               = 34,
         VORBIS_bad_packet_type                  = 35,
         VORBIS_cant_find_last_page              = 36,
-        VORBIS_seek_failed                      = 37;
+        VORBIS_seek_failed                      = 37,
+        VORBIS_ogg_skeleton_not_supported       = 38;
 
     static { LibSTB.initialize(); }
 
