@@ -1964,7 +1964,7 @@ $indent */""")
         preamble.printNative(this)
 
         println("""
-EXTERN_C_EXIT
+EXTERN_C_ENTER
 
 JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress) {
     jint *buffer = (jint *)(intptr_t)bufferAddress;

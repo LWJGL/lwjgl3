@@ -12,7 +12,7 @@
     #include <stdalign.h>
 #endif
 
-EXTERN_C_EXIT
+EXTERN_C_ENTER
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NFDPathSet_offsets(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
     jint *buffer = (jint *)(intptr_t)bufferAddress;
