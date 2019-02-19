@@ -254,8 +254,8 @@ static ${returns.jniFunctionType} delegate(${signature.asSequence().joinToString
 
 EXTERN_C_ENTER
 
-JNIEXPORT jlong JNICALL Java_${nativeFileNameJNI}_getDelegate(JNIEnv *env, jclass clazz) {
-    UNUSED_PARAMS(env, clazz);
+JNIEXPORT jlong JNICALL Java_${nativeFileNameJNI}_getDelegate(JNIEnv *$JNIENV, jclass clazz) {
+    UNUSED_PARAMS($JNIENV, clazz)
     return (intptr_t)delegate;
 }
 

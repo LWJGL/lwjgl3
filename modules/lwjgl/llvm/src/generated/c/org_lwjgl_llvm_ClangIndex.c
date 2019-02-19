@@ -949,15 +949,15 @@ JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCompletionAnnot
     JavaCritical_org_lwjgl_llvm_ClangIndex_nclang_1getCompletionAnnotation(completion_stringAddress, annotation_number, __functionAddress, __result);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_llvm_ClangIndex_nclang_1getCompletionParent__JJJJ(jlong completion_stringAddress, jlong kindAddress, jlong __functionAddress, jlong __result) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_llvm_ClangIndex_nclang_1getCompletionParent(jlong completion_stringAddress, jlong kindAddress, jlong __functionAddress, jlong __result) {
     clang_getCompletionParentPROC clang_getCompletionParent = (clang_getCompletionParentPROC)(intptr_t)__functionAddress;
     intptr_t completion_string = (intptr_t)completion_stringAddress;
     intptr_t kind = (intptr_t)kindAddress;
     *((CXString*)(intptr_t)__result) = clang_getCompletionParent(completion_string, kind);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCompletionParent__JJJJ(JNIEnv *__env, jclass clazz, jlong completion_stringAddress, jlong kindAddress, jlong __functionAddress, jlong __result) {
+JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCompletionParent(JNIEnv *__env, jclass clazz, jlong completion_stringAddress, jlong kindAddress, jlong __functionAddress, jlong __result) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_llvm_ClangIndex_nclang_1getCompletionParent__JJJJ(completion_stringAddress, kindAddress, __functionAddress, __result);
+    JavaCritical_org_lwjgl_llvm_ClangIndex_nclang_1getCompletionParent(completion_stringAddress, kindAddress, __functionAddress, __result);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_llvm_ClangIndex_nclang_1getCompletionBriefComment(jlong completion_stringAddress, jlong __functionAddress, jlong __result) {

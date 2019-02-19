@@ -180,7 +180,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
     ${it.arguments.asSequence()
         .mapIndexedNotNull { i, param -> if (param !is ArrayType<*>) null else "void *paramArray$i = param$i == NULL ? NULL : (*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, param$i, 0);" }
         .joinToString("\n$t")}
-    ${if (it.returnType.mapping === TypeMapping.VOID) "" else "${it.returnType.jniFunctionType} __result = "}${it.CRITICAL(true)}(${it.arguments
+    ${if (it.returnType.mapping === TypeMapping.VOID) "" else "${it.returnType.jniFunctionType} $RESULT = "}${it.CRITICAL(true)}(${it.arguments
         .mapIndexed { i, param -> if (param is ArrayType<*>) "(intptr_t)paramArray$i" else "param$i" }
         .joinToString(", ")}, $FUNCTION_ADDRESS);
     ${it.arguments.asSequence()
@@ -193,7 +193,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
                 "if (param$index != NULL) { (*$JNIENV)->ReleasePrimitiveArrayCritical($JNIENV, param$index, paramArray$index, 0); }"
         }
         .joinToString("\n$t")}${if (it.returnType.mapping === TypeMapping.VOID) "" else """
-    return __result;"""}
+    return $RESULT;"""}
 }""")
             if (it.workaroundJDK8167409()) println("#ifdef LWJGL_WINDOWS")
             println(

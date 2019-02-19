@@ -38,13 +38,13 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_meow_Meow_nMeowHashesAreEqual(JNIEnv 
     return JavaCritical_org_lwjgl_util_meow_Meow_nMeowHashesAreEqual(AAddress, BAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_meow_Meow_nMeowHash_1Accelerated__JJJJ(jlong Seed, jlong TotalLengthInBytes, jlong SourceInitAddress, jlong __result) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_meow_Meow_nMeowHash_1Accelerated(jlong Seed, jlong TotalLengthInBytes, jlong SourceInitAddress, jlong __result) {
     void *SourceInit = (void *)(intptr_t)SourceInitAddress;
     *((meow_hash*)(intptr_t)__result) = MeowHash_Accelerated((meow_u64)Seed, (meow_u64)TotalLengthInBytes, SourceInit);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_util_meow_Meow_nMeowHash_1Accelerated__JJJJ(JNIEnv *__env, jclass clazz, jlong Seed, jlong TotalLengthInBytes, jlong SourceInitAddress, jlong __result) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meow_Meow_nMeowHash_1Accelerated(JNIEnv *__env, jclass clazz, jlong Seed, jlong TotalLengthInBytes, jlong SourceInitAddress, jlong __result) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_meow_Meow_nMeowHash_1Accelerated__JJJJ(Seed, TotalLengthInBytes, SourceInitAddress, __result);
+    JavaCritical_org_lwjgl_util_meow_Meow_nMeowHash_1Accelerated(Seed, TotalLengthInBytes, SourceInitAddress, __result);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_meow_Meow_nMeowHashBegin(jlong StateAddress) {

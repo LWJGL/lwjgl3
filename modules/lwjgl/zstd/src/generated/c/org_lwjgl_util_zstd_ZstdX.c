@@ -723,14 +723,14 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1setParameter
     return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1setParameter(cctxAddress, param, value);
 }
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1getParameter__JIJ(jlong cctxAddress, jint param, jlong valueAddress) {
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1getParameter(jlong cctxAddress, jint param, jlong valueAddress) {
     ZSTD_CCtx *cctx = (ZSTD_CCtx *)(intptr_t)cctxAddress;
     unsigned *value = (unsigned *)(intptr_t)valueAddress;
     return (jlong)ZSTD_CCtx_getParameter(cctx, (ZSTD_cParameter)param, value);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1getParameter__JIJ(JNIEnv *__env, jclass clazz, jlong cctxAddress, jint param, jlong valueAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1getParameter(JNIEnv *__env, jclass clazz, jlong cctxAddress, jint param, jlong valueAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1getParameter__JIJ(cctxAddress, param, valueAddress);
+    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1getParameter(cctxAddress, param, valueAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1setPledgedSrcSize(jlong cctxAddress, jlong pledgedSrcSize) {
@@ -898,14 +898,14 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1setPara
     return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1setParameter(paramsAddress, param, value);
 }
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1getParameter__JIJ(jlong paramsAddress, jint param, jlong valueAddress) {
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1getParameter(jlong paramsAddress, jint param, jlong valueAddress) {
     ZSTD_CCtx_params *params = (ZSTD_CCtx_params *)(intptr_t)paramsAddress;
     unsigned *value = (unsigned *)(intptr_t)valueAddress;
     return (jlong)ZSTD_CCtxParam_getParameter(params, (ZSTD_cParameter)param, value);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1getParameter__JIJ(JNIEnv *__env, jclass clazz, jlong paramsAddress, jint param, jlong valueAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1getParameter(JNIEnv *__env, jclass clazz, jlong paramsAddress, jint param, jlong valueAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1getParameter__JIJ(paramsAddress, param, valueAddress);
+    return JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtxParam_1getParameter(paramsAddress, param, valueAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_util_zstd_ZstdX_nZSTD_1CCtx_1setParametersUsingCCtxParams(jlong cctxAddress, jlong paramsAddress) {

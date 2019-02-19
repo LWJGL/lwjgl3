@@ -185,14 +185,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CustomCommandExecu
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CustomCommandExecuteAddFloatArgument(commandHandleAddress, floatVal);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusBodyIndices__JJI(jlong statusHandleAddress, jlong bodyIndicesOutAddress, jint bodyIndicesCapacity) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusBodyIndices(jlong statusHandleAddress, jlong bodyIndicesOutAddress, jint bodyIndicesCapacity) {
     b3SharedMemoryStatusHandle statusHandle = (b3SharedMemoryStatusHandle)(intptr_t)statusHandleAddress;
     int *bodyIndicesOut = (int *)(intptr_t)bodyIndicesOutAddress;
     return (jint)b3GetStatusBodyIndices(statusHandle, bodyIndicesOut, bodyIndicesCapacity);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusBodyIndices__JJI(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong bodyIndicesOutAddress, jint bodyIndicesCapacity) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusBodyIndices(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong bodyIndicesOutAddress, jint bodyIndicesCapacity) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusBodyIndices__JJI(statusHandleAddress, bodyIndicesOutAddress, bodyIndicesCapacity);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusBodyIndices(statusHandleAddress, bodyIndicesOutAddress, bodyIndicesCapacity);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusBodyIndex(jlong statusHandleAddress) {
@@ -204,7 +204,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusBodyIndex
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusBodyIndex(statusHandleAddress);
 }
 
-JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState__JJJJJJJJ)(jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong numDegreeOfFreedomQAddress, jlong numDegreeOfFreedomUAddress, jlong rootLocalInertialFrameAddress, jlong actualStateQAddress, jlong actualStateQdotAddress, jlong jointReactionForcesAddress) {
+JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState)(jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong numDegreeOfFreedomQAddress, jlong numDegreeOfFreedomUAddress, jlong rootLocalInertialFrameAddress, jlong actualStateQAddress, jlong actualStateQdotAddress, jlong jointReactionForcesAddress) {
     b3SharedMemoryStatusHandle statusHandle = (b3SharedMemoryStatusHandle)(intptr_t)statusHandleAddress;
     int *bodyUniqueId = (int *)(intptr_t)bodyUniqueIdAddress;
     int *numDegreeOfFreedomQ = (int *)(intptr_t)numDegreeOfFreedomQAddress;
@@ -215,12 +215,12 @@ JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetSt
     double const **jointReactionForces = (double const **)(intptr_t)jointReactionForcesAddress;
     return (jint)b3GetStatusActualState(statusHandle, bodyUniqueId, numDegreeOfFreedomQ, numDegreeOfFreedomU, rootLocalInertialFrame, actualStateQ, actualStateQdot, jointReactionForces);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState__JJJJJJJJ(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong numDegreeOfFreedomQAddress, jlong numDegreeOfFreedomUAddress, jlong rootLocalInertialFrameAddress, jlong actualStateQAddress, jlong actualStateQdotAddress, jlong jointReactionForcesAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong numDegreeOfFreedomQAddress, jlong numDegreeOfFreedomUAddress, jlong rootLocalInertialFrameAddress, jlong actualStateQAddress, jlong actualStateQdotAddress, jlong jointReactionForcesAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState__JJJJJJJJ)(statusHandleAddress, bodyUniqueIdAddress, numDegreeOfFreedomQAddress, numDegreeOfFreedomUAddress, rootLocalInertialFrameAddress, actualStateQAddress, actualStateQdotAddress, jointReactionForcesAddress);
+    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState)(statusHandleAddress, bodyUniqueIdAddress, numDegreeOfFreedomQAddress, numDegreeOfFreedomUAddress, rootLocalInertialFrameAddress, actualStateQAddress, actualStateQdotAddress, jointReactionForcesAddress);
 }
 
-JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState2__JJJJJJJJJJJJJ)(jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong numLinksAddress, jlong numDegreeOfFreedomQAddress, jlong numDegreeOfFreedomUAddress, jlong rootLocalInertialFrameAddress, jlong actualStateQAddress, jlong actualStateQdotAddress, jlong jointReactionForcesAddress, jlong linkLocalInertialFramesAddress, jlong jointMotorForcesAddress, jlong linkStatesAddress, jlong linkWorldVelocitiesAddress) {
+JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState2)(jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong numLinksAddress, jlong numDegreeOfFreedomQAddress, jlong numDegreeOfFreedomUAddress, jlong rootLocalInertialFrameAddress, jlong actualStateQAddress, jlong actualStateQdotAddress, jlong jointReactionForcesAddress, jlong linkLocalInertialFramesAddress, jlong jointMotorForcesAddress, jlong linkStatesAddress, jlong linkWorldVelocitiesAddress) {
     b3SharedMemoryStatusHandle statusHandle = (b3SharedMemoryStatusHandle)(intptr_t)statusHandleAddress;
     int *bodyUniqueId = (int *)(intptr_t)bodyUniqueIdAddress;
     int *numLinks = (int *)(intptr_t)numLinksAddress;
@@ -236,9 +236,9 @@ JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetSt
     double const **linkWorldVelocities = (double const **)(intptr_t)linkWorldVelocitiesAddress;
     return (jint)b3GetStatusActualState2(statusHandle, bodyUniqueId, numLinks, numDegreeOfFreedomQ, numDegreeOfFreedomU, rootLocalInertialFrame, actualStateQ, actualStateQdot, jointReactionForces, linkLocalInertialFrames, jointMotorForces, linkStates, linkWorldVelocities);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState2__JJJJJJJJJJJJJ(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong numLinksAddress, jlong numDegreeOfFreedomQAddress, jlong numDegreeOfFreedomUAddress, jlong rootLocalInertialFrameAddress, jlong actualStateQAddress, jlong actualStateQdotAddress, jlong jointReactionForcesAddress, jlong linkLocalInertialFramesAddress, jlong jointMotorForcesAddress, jlong linkStatesAddress, jlong linkWorldVelocitiesAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState2(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong numLinksAddress, jlong numDegreeOfFreedomQAddress, jlong numDegreeOfFreedomUAddress, jlong rootLocalInertialFrameAddress, jlong actualStateQAddress, jlong actualStateQdotAddress, jlong jointReactionForcesAddress, jlong linkLocalInertialFramesAddress, jlong jointMotorForcesAddress, jlong linkStatesAddress, jlong linkWorldVelocitiesAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState2__JJJJJJJJJJJJJ)(statusHandleAddress, bodyUniqueIdAddress, numLinksAddress, numDegreeOfFreedomQAddress, numDegreeOfFreedomUAddress, rootLocalInertialFrameAddress, actualStateQAddress, actualStateQdotAddress, jointReactionForcesAddress, linkLocalInertialFramesAddress, jointMotorForcesAddress, linkStatesAddress, linkWorldVelocitiesAddress);
+    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetStatusActualState2)(statusHandleAddress, bodyUniqueIdAddress, numLinksAddress, numDegreeOfFreedomQAddress, numDegreeOfFreedomUAddress, rootLocalInertialFrameAddress, actualStateQAddress, actualStateQdotAddress, jointReactionForcesAddress, linkLocalInertialFramesAddress, jointMotorForcesAddress, linkStatesAddress, linkWorldVelocitiesAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCollisionInfoCommandInit(jlong physClientAddress, jint bodyUniqueId) {
@@ -250,15 +250,15 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RequestCollisionI
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCollisionInfoCommandInit(physClientAddress, bodyUniqueId);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusAABB__JIJJ(jlong statusHandleAddress, jint linkIndex, jlong aabbMinAddress, jlong aabbMaxAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusAABB(jlong statusHandleAddress, jint linkIndex, jlong aabbMinAddress, jlong aabbMaxAddress) {
     b3SharedMemoryStatusHandle statusHandle = (b3SharedMemoryStatusHandle)(intptr_t)statusHandleAddress;
     double *aabbMin = (double *)(intptr_t)aabbMinAddress;
     double *aabbMax = (double *)(intptr_t)aabbMaxAddress;
     return (jint)b3GetStatusAABB(statusHandle, linkIndex, aabbMin, aabbMax);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusAABB__JIJJ(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jint linkIndex, jlong aabbMinAddress, jlong aabbMaxAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusAABB(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jint linkIndex, jlong aabbMinAddress, jlong aabbMaxAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusAABB__JIJJ(statusHandleAddress, linkIndex, aabbMinAddress, aabbMaxAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusAABB(statusHandleAddress, linkIndex, aabbMinAddress, aabbMaxAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitSyncBodyInfoCommand(jlong physClientAddress) {
@@ -402,7 +402,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetNumUserData(JNI
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetNumUserData(physClientAddress, bodyUniqueId);
 }
 
-JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetUserDataInfo__JIIJJJJ)(jlong physClientAddress, jint bodyUniqueId, jint userDataIndex, jlong keyOutAddress, jlong userDataIdOutAddress, jlong linkIndexOutAddress, jlong visualShapeIndexOutAddress) {
+JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetUserDataInfo)(jlong physClientAddress, jint bodyUniqueId, jint userDataIndex, jlong keyOutAddress, jlong userDataIdOutAddress, jlong linkIndexOutAddress, jlong visualShapeIndexOutAddress) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     char const **keyOut = (char const **)(intptr_t)keyOutAddress;
     int *userDataIdOut = (int *)(intptr_t)userDataIdOutAddress;
@@ -410,9 +410,9 @@ JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetUs
     int *visualShapeIndexOut = (int *)(intptr_t)visualShapeIndexOutAddress;
     b3GetUserDataInfo(physClient, bodyUniqueId, userDataIndex, keyOut, userDataIdOut, linkIndexOut, visualShapeIndexOut);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetUserDataInfo__JIIJJJJ(JNIEnv *__env, jclass clazz, jlong physClientAddress, jint bodyUniqueId, jint userDataIndex, jlong keyOutAddress, jlong userDataIdOutAddress, jlong linkIndexOutAddress, jlong visualShapeIndexOutAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetUserDataInfo(JNIEnv *__env, jclass clazz, jlong physClientAddress, jint bodyUniqueId, jint userDataIndex, jlong keyOutAddress, jlong userDataIdOutAddress, jlong linkIndexOutAddress, jlong visualShapeIndexOutAddress) {
     UNUSED_PARAMS(__env, clazz)
-    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetUserDataInfo__JIIJJJJ)(physClientAddress, bodyUniqueId, userDataIndex, keyOutAddress, userDataIdOutAddress, linkIndexOutAddress, visualShapeIndexOutAddress);
+    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3GetUserDataInfo)(physClientAddress, bodyUniqueId, userDataIndex, keyOutAddress, userDataIdOutAddress, linkIndexOutAddress, visualShapeIndexOutAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetDynamicsInfoCommandInit(jlong physClientAddress, jint bodyUniqueId, jint linkIndex) {
@@ -470,14 +470,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ChangeDynamicsInfo
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ChangeDynamicsInfoSetMass(commandHandleAddress, bodyUniqueId, linkIndex, mass);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ChangeDynamicsInfoSetLocalInertiaDiagonal__JIIJ(jlong commandHandleAddress, jint bodyUniqueId, jint linkIndex, jlong localInertiaDiagonalAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ChangeDynamicsInfoSetLocalInertiaDiagonal(jlong commandHandleAddress, jint bodyUniqueId, jint linkIndex, jlong localInertiaDiagonalAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *localInertiaDiagonal = (double const *)(intptr_t)localInertiaDiagonalAddress;
     return (jint)b3ChangeDynamicsInfoSetLocalInertiaDiagonal(commandHandle, bodyUniqueId, linkIndex, localInertiaDiagonal);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ChangeDynamicsInfoSetLocalInertiaDiagonal__JIIJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint bodyUniqueId, jint linkIndex, jlong localInertiaDiagonalAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ChangeDynamicsInfoSetLocalInertiaDiagonal(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint bodyUniqueId, jint linkIndex, jlong localInertiaDiagonalAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ChangeDynamicsInfoSetLocalInertiaDiagonal__JIIJ(commandHandleAddress, bodyUniqueId, linkIndex, localInertiaDiagonalAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ChangeDynamicsInfoSetLocalInertiaDiagonal(commandHandleAddress, bodyUniqueId, linkIndex, localInertiaDiagonalAddress);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ChangeDynamicsInfoSetLateralFriction(jlong commandHandleAddress, jint bodyUniqueId, jint linkIndex, jdouble lateralFriction) {
@@ -617,24 +617,24 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserCon
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintCommand(physClientAddress, userConstraintUniqueId);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetPivotInB__JJ(jlong commandHandleAddress, jlong jointChildPivotAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetPivotInB(jlong commandHandleAddress, jlong jointChildPivotAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *jointChildPivot = (double const *)(intptr_t)jointChildPivotAddress;
     return (jint)b3InitChangeUserConstraintSetPivotInB(commandHandle, jointChildPivot);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetPivotInB__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong jointChildPivotAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetPivotInB(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong jointChildPivotAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetPivotInB__JJ(commandHandleAddress, jointChildPivotAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetPivotInB(commandHandleAddress, jointChildPivotAddress);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetFrameInB__JJ(jlong commandHandleAddress, jlong jointChildFrameOrnAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetFrameInB(jlong commandHandleAddress, jlong jointChildFrameOrnAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *jointChildFrameOrn = (double const *)(intptr_t)jointChildFrameOrnAddress;
     return (jint)b3InitChangeUserConstraintSetFrameInB(commandHandle, jointChildFrameOrn);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetFrameInB__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong jointChildFrameOrnAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetFrameInB(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong jointChildFrameOrnAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetFrameInB__JJ(commandHandleAddress, jointChildFrameOrnAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetFrameInB(commandHandleAddress, jointChildFrameOrnAddress);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitChangeUserConstraintSetMaxForce(jlong commandHandleAddress, jdouble maxAppliedForce) {
@@ -784,14 +784,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ConfigureOpenGLVis
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ConfigureOpenGLVisualizerSetVisualizationFlags(commandHandleAddress, flag, enabled);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ConfigureOpenGLVisualizerSetViewMatrix__JFFFJ(jlong commandHandleAddress, jfloat cameraDistance, jfloat cameraPitch, jfloat cameraYaw, jlong cameraTargetPositionAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ConfigureOpenGLVisualizerSetViewMatrix(jlong commandHandleAddress, jfloat cameraDistance, jfloat cameraPitch, jfloat cameraYaw, jlong cameraTargetPositionAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     float const *cameraTargetPosition = (float const *)(intptr_t)cameraTargetPositionAddress;
     b3ConfigureOpenGLVisualizerSetViewMatrix(commandHandle, cameraDistance, cameraPitch, cameraYaw, cameraTargetPosition);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ConfigureOpenGLVisualizerSetViewMatrix__JFFFJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jfloat cameraDistance, jfloat cameraPitch, jfloat cameraYaw, jlong cameraTargetPositionAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ConfigureOpenGLVisualizerSetViewMatrix(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jfloat cameraDistance, jfloat cameraPitch, jfloat cameraYaw, jlong cameraTargetPositionAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ConfigureOpenGLVisualizerSetViewMatrix__JFFFJ(commandHandleAddress, cameraDistance, cameraPitch, cameraYaw, cameraTargetPositionAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ConfigureOpenGLVisualizerSetViewMatrix(commandHandleAddress, cameraDistance, cameraPitch, cameraYaw, cameraTargetPositionAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitRequestOpenGLVisualizerCameraCommand(jlong physClientAddress) {
@@ -813,28 +813,28 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusOpenGLVis
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusOpenGLVisualizerCamera(statusHandleAddress, cameraAddress);
 }
 
-JNIEXPORT_CRITICAL jlong JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddLine3D__JJJJDD)(jlong physClientAddress, jlong fromXYZAddress, jlong toXYZAddress, jlong colorRGBAddress, jdouble lineWidth, jdouble lifeTime) {
+JNIEXPORT_CRITICAL jlong JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddLine3D)(jlong physClientAddress, jlong fromXYZAddress, jlong toXYZAddress, jlong colorRGBAddress, jdouble lineWidth, jdouble lifeTime) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     double const *fromXYZ = (double const *)(intptr_t)fromXYZAddress;
     double const *toXYZ = (double const *)(intptr_t)toXYZAddress;
     double const *colorRGB = (double const *)(intptr_t)colorRGBAddress;
     return (jlong)(intptr_t)b3InitUserDebugDrawAddLine3D(physClient, fromXYZ, toXYZ, colorRGB, lineWidth, lifeTime);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddLine3D__JJJJDD(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong fromXYZAddress, jlong toXYZAddress, jlong colorRGBAddress, jdouble lineWidth, jdouble lifeTime) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddLine3D(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong fromXYZAddress, jlong toXYZAddress, jlong colorRGBAddress, jdouble lineWidth, jdouble lifeTime) {
     UNUSED_PARAMS(__env, clazz)
-    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddLine3D__JJJJDD)(physClientAddress, fromXYZAddress, toXYZAddress, colorRGBAddress, lineWidth, lifeTime);
+    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddLine3D)(physClientAddress, fromXYZAddress, toXYZAddress, colorRGBAddress, lineWidth, lifeTime);
 }
 
-JNIEXPORT_CRITICAL jlong JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddText3D__JJJJDD)(jlong physClientAddress, jlong txtAddress, jlong positionXYZAddress, jlong colorRGBAddress, jdouble textSize, jdouble lifeTime) {
+JNIEXPORT_CRITICAL jlong JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddText3D)(jlong physClientAddress, jlong txtAddress, jlong positionXYZAddress, jlong colorRGBAddress, jdouble textSize, jdouble lifeTime) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     char const *txt = (char const *)(intptr_t)txtAddress;
     double const *positionXYZ = (double const *)(intptr_t)positionXYZAddress;
     double const *colorRGB = (double const *)(intptr_t)colorRGBAddress;
     return (jlong)(intptr_t)b3InitUserDebugDrawAddText3D(physClient, txt, positionXYZ, colorRGB, textSize, lifeTime);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddText3D__JJJJDD(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong txtAddress, jlong positionXYZAddress, jlong colorRGBAddress, jdouble textSize, jdouble lifeTime) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddText3D(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong txtAddress, jlong positionXYZAddress, jlong colorRGBAddress, jdouble textSize, jdouble lifeTime) {
     UNUSED_PARAMS(__env, clazz)
-    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddText3D__JJJJDD)(physClientAddress, txtAddress, positionXYZAddress, colorRGBAddress, textSize, lifeTime);
+    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawAddText3D)(physClientAddress, txtAddress, positionXYZAddress, colorRGBAddress, textSize, lifeTime);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UserDebugTextSetOptionFlags(jlong commandHandleAddress, jint optionFlags) {
@@ -846,14 +846,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3UserDebugTextSetOp
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UserDebugTextSetOptionFlags(commandHandleAddress, optionFlags);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UserDebugTextSetOrientation__JJ(jlong commandHandleAddress, jlong orientationAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UserDebugTextSetOrientation(jlong commandHandleAddress, jlong orientationAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *orientation = (double const *)(intptr_t)orientationAddress;
     b3UserDebugTextSetOrientation(commandHandle, orientation);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3UserDebugTextSetOrientation__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong orientationAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3UserDebugTextSetOrientation(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong orientationAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UserDebugTextSetOrientation__JJ(commandHandleAddress, orientationAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UserDebugTextSetOrientation(commandHandleAddress, orientationAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UserDebugItemSetReplaceItemUniqueId(jlong commandHandleAddress, jint replaceItem) {
@@ -893,14 +893,14 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugRead
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugReadParameter(physClientAddress, debugItemUniqueId);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusDebugParameterValue__JJ(jlong statusHandleAddress, jlong paramValueAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusDebugParameterValue(jlong statusHandleAddress, jlong paramValueAddress) {
     b3SharedMemoryStatusHandle statusHandle = (b3SharedMemoryStatusHandle)(intptr_t)statusHandleAddress;
     double *paramValue = (double *)(intptr_t)paramValueAddress;
     return (jint)b3GetStatusDebugParameterValue(statusHandle, paramValue);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusDebugParameterValue__JJ(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong paramValueAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusDebugParameterValue(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong paramValueAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusDebugParameterValue__JJ(statusHandleAddress, paramValueAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusDebugParameterValue(statusHandleAddress, paramValueAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitUserDebugDrawRemove(jlong physClientAddress, jint debugItemUniqueId) {
@@ -930,14 +930,14 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitDebugDrawingC
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitDebugDrawingCommand(physClientAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetDebugObjectColor__JIIJ(jlong commandHandleAddress, jint objectUniqueId, jint linkIndex, jlong objectColorRGBAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetDebugObjectColor(jlong commandHandleAddress, jint objectUniqueId, jint linkIndex, jlong objectColorRGBAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *objectColorRGB = (double const *)(intptr_t)objectColorRGBAddress;
     b3SetDebugObjectColor(commandHandle, objectUniqueId, linkIndex, objectColorRGB);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetDebugObjectColor__JIIJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint objectUniqueId, jint linkIndex, jlong objectColorRGBAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetDebugObjectColor(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint objectUniqueId, jint linkIndex, jlong objectColorRGBAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetDebugObjectColor__JIIJ(commandHandleAddress, objectUniqueId, linkIndex, objectColorRGBAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetDebugObjectColor(commandHandleAddress, objectUniqueId, linkIndex, objectColorRGBAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RemoveDebugObjectColor(jlong commandHandleAddress, jint objectUniqueId, jint linkIndex) {
@@ -976,15 +976,15 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitRequestCamera
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitRequestCameraImage2(commandHandleAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetCameraMatrices__JJJ(jlong commandHandleAddress, jlong viewMatrixAddress, jlong projectionMatrixAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetCameraMatrices(jlong commandHandleAddress, jlong viewMatrixAddress, jlong projectionMatrixAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     float *viewMatrix = (float *)(intptr_t)viewMatrixAddress;
     float *projectionMatrix = (float *)(intptr_t)projectionMatrixAddress;
     b3RequestCameraImageSetCameraMatrices(commandHandle, viewMatrix, projectionMatrix);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetCameraMatrices__JJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong viewMatrixAddress, jlong projectionMatrixAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetCameraMatrices(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong viewMatrixAddress, jlong projectionMatrixAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetCameraMatrices__JJJ(commandHandleAddress, viewMatrixAddress, projectionMatrixAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetCameraMatrices(commandHandleAddress, viewMatrixAddress, projectionMatrixAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetPixelResolution(jlong commandHandleAddress, jint width, jint height) {
@@ -996,24 +996,24 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImage
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetPixelResolution(commandHandleAddress, width, height);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightDirection__JJ(jlong commandHandleAddress, jlong lightDirectionAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightDirection(jlong commandHandleAddress, jlong lightDirectionAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     float const *lightDirection = (float const *)(intptr_t)lightDirectionAddress;
     b3RequestCameraImageSetLightDirection(commandHandle, lightDirection);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightDirection__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong lightDirectionAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightDirection(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong lightDirectionAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightDirection__JJ(commandHandleAddress, lightDirectionAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightDirection(commandHandleAddress, lightDirectionAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightColor__JJ(jlong commandHandleAddress, jlong lightColorAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightColor(jlong commandHandleAddress, jlong lightColorAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     float const *lightColor = (float const *)(intptr_t)lightColorAddress;
     b3RequestCameraImageSetLightColor(commandHandle, lightColor);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightColor__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong lightColorAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightColor(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong lightColorAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightColor__JJ(commandHandleAddress, lightColorAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightColor(commandHandleAddress, lightColorAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetLightDistance(jlong commandHandleAddress, jfloat lightDistance) {
@@ -1089,67 +1089,67 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetCameraImageData
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetCameraImageData(physClientAddress, imageDataAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetProjectiveTextureMatrices__JJJ(jlong commandHandleAddress, jlong viewMatrixAddress, jlong projectionMatrixAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetProjectiveTextureMatrices(jlong commandHandleAddress, jlong viewMatrixAddress, jlong projectionMatrixAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     float *viewMatrix = (float *)(intptr_t)viewMatrixAddress;
     float *projectionMatrix = (float *)(intptr_t)projectionMatrixAddress;
     b3RequestCameraImageSetProjectiveTextureMatrices(commandHandle, viewMatrix, projectionMatrix);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetProjectiveTextureMatrices__JJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong viewMatrixAddress, jlong projectionMatrixAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetProjectiveTextureMatrices(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong viewMatrixAddress, jlong projectionMatrixAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetProjectiveTextureMatrices__JJJ(commandHandleAddress, viewMatrixAddress, projectionMatrixAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RequestCameraImageSetProjectiveTextureMatrices(commandHandleAddress, viewMatrixAddress, projectionMatrixAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromPositions__JJJJ(jlong cameraPositionAddress, jlong cameraTargetPositionAddress, jlong cameraUpAddress, jlong viewMatrixAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromPositions(jlong cameraPositionAddress, jlong cameraTargetPositionAddress, jlong cameraUpAddress, jlong viewMatrixAddress) {
     float const *cameraPosition = (float const *)(intptr_t)cameraPositionAddress;
     float const *cameraTargetPosition = (float const *)(intptr_t)cameraTargetPositionAddress;
     float const *cameraUp = (float const *)(intptr_t)cameraUpAddress;
     float *viewMatrix = (float *)(intptr_t)viewMatrixAddress;
     b3ComputeViewMatrixFromPositions(cameraPosition, cameraTargetPosition, cameraUp, viewMatrix);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromPositions__JJJJ(JNIEnv *__env, jclass clazz, jlong cameraPositionAddress, jlong cameraTargetPositionAddress, jlong cameraUpAddress, jlong viewMatrixAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromPositions(JNIEnv *__env, jclass clazz, jlong cameraPositionAddress, jlong cameraTargetPositionAddress, jlong cameraUpAddress, jlong viewMatrixAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromPositions__JJJJ(cameraPositionAddress, cameraTargetPositionAddress, cameraUpAddress, viewMatrixAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromPositions(cameraPositionAddress, cameraTargetPositionAddress, cameraUpAddress, viewMatrixAddress);
 }
 
-JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromYawPitchRoll__JFFFFIJ)(jlong cameraTargetPositionAddress, jfloat distance, jfloat yaw, jfloat pitch, jfloat roll, jint upAxis, jlong viewMatrixAddress) {
+JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromYawPitchRoll)(jlong cameraTargetPositionAddress, jfloat distance, jfloat yaw, jfloat pitch, jfloat roll, jint upAxis, jlong viewMatrixAddress) {
     float const *cameraTargetPosition = (float const *)(intptr_t)cameraTargetPositionAddress;
     float *viewMatrix = (float *)(intptr_t)viewMatrixAddress;
     b3ComputeViewMatrixFromYawPitchRoll(cameraTargetPosition, distance, yaw, pitch, roll, upAxis, viewMatrix);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromYawPitchRoll__JFFFFIJ(JNIEnv *__env, jclass clazz, jlong cameraTargetPositionAddress, jfloat distance, jfloat yaw, jfloat pitch, jfloat roll, jint upAxis, jlong viewMatrixAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromYawPitchRoll(JNIEnv *__env, jclass clazz, jlong cameraTargetPositionAddress, jfloat distance, jfloat yaw, jfloat pitch, jfloat roll, jint upAxis, jlong viewMatrixAddress) {
     UNUSED_PARAMS(__env, clazz)
-    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromYawPitchRoll__JFFFFIJ)(cameraTargetPositionAddress, distance, yaw, pitch, roll, upAxis, viewMatrixAddress);
+    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3ComputeViewMatrixFromYawPitchRoll)(cameraTargetPositionAddress, distance, yaw, pitch, roll, upAxis, viewMatrixAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputePositionFromViewMatrix__JJJJ(jlong viewMatrixAddress, jlong cameraPositionAddress, jlong cameraTargetPositionAddress, jlong cameraUpAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputePositionFromViewMatrix(jlong viewMatrixAddress, jlong cameraPositionAddress, jlong cameraTargetPositionAddress, jlong cameraUpAddress) {
     float const *viewMatrix = (float const *)(intptr_t)viewMatrixAddress;
     float *cameraPosition = (float *)(intptr_t)cameraPositionAddress;
     float *cameraTargetPosition = (float *)(intptr_t)cameraTargetPositionAddress;
     float *cameraUp = (float *)(intptr_t)cameraUpAddress;
     b3ComputePositionFromViewMatrix(viewMatrix, cameraPosition, cameraTargetPosition, cameraUp);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ComputePositionFromViewMatrix__JJJJ(JNIEnv *__env, jclass clazz, jlong viewMatrixAddress, jlong cameraPositionAddress, jlong cameraTargetPositionAddress, jlong cameraUpAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ComputePositionFromViewMatrix(JNIEnv *__env, jclass clazz, jlong viewMatrixAddress, jlong cameraPositionAddress, jlong cameraTargetPositionAddress, jlong cameraUpAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputePositionFromViewMatrix__JJJJ(viewMatrixAddress, cameraPositionAddress, cameraTargetPositionAddress, cameraUpAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputePositionFromViewMatrix(viewMatrixAddress, cameraPositionAddress, cameraTargetPositionAddress, cameraUpAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrix__FFFFFFJ(jfloat left, jfloat right, jfloat bottom, jfloat top, jfloat nearVal, jfloat farVal, jlong projectionMatrixAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrix(jfloat left, jfloat right, jfloat bottom, jfloat top, jfloat nearVal, jfloat farVal, jlong projectionMatrixAddress) {
     float *projectionMatrix = (float *)(intptr_t)projectionMatrixAddress;
     b3ComputeProjectionMatrix(left, right, bottom, top, nearVal, farVal, projectionMatrix);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrix__FFFFFFJ(JNIEnv *__env, jclass clazz, jfloat left, jfloat right, jfloat bottom, jfloat top, jfloat nearVal, jfloat farVal, jlong projectionMatrixAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrix(JNIEnv *__env, jclass clazz, jfloat left, jfloat right, jfloat bottom, jfloat top, jfloat nearVal, jfloat farVal, jlong projectionMatrixAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrix__FFFFFFJ(left, right, bottom, top, nearVal, farVal, projectionMatrixAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrix(left, right, bottom, top, nearVal, farVal, projectionMatrixAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrixFOV__FFFFJ(jfloat fov, jfloat aspect, jfloat nearVal, jfloat farVal, jlong projectionMatrixAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrixFOV(jfloat fov, jfloat aspect, jfloat nearVal, jfloat farVal, jlong projectionMatrixAddress) {
     float *projectionMatrix = (float *)(intptr_t)projectionMatrixAddress;
     b3ComputeProjectionMatrixFOV(fov, aspect, nearVal, farVal, projectionMatrix);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrixFOV__FFFFJ(JNIEnv *__env, jclass clazz, jfloat fov, jfloat aspect, jfloat nearVal, jfloat farVal, jlong projectionMatrixAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrixFOV(JNIEnv *__env, jclass clazz, jfloat fov, jfloat aspect, jfloat nearVal, jfloat farVal, jlong projectionMatrixAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrixFOV__FFFFJ(fov, aspect, nearVal, farVal, projectionMatrixAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ComputeProjectionMatrixFOV(fov, aspect, nearVal, farVal, projectionMatrixAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitRequestContactPointInformation(jlong physClientAddress) {
@@ -1279,44 +1279,44 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistance
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeB(commandHandleAddress, collisionShapeB);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionA__JJ(jlong commandHandleAddress, jlong collisionShapePositionAAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionA(jlong commandHandleAddress, jlong collisionShapePositionAAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *collisionShapePositionA = (double const *)(intptr_t)collisionShapePositionAAddress;
     b3SetClosestDistanceFilterCollisionShapePositionA(commandHandle, collisionShapePositionA);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionA__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong collisionShapePositionAAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionA(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong collisionShapePositionAAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionA__JJ(commandHandleAddress, collisionShapePositionAAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionA(commandHandleAddress, collisionShapePositionAAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionB__JJ(jlong commandHandleAddress, jlong collisionShapePositionBAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionB(jlong commandHandleAddress, jlong collisionShapePositionBAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *collisionShapePositionB = (double const *)(intptr_t)collisionShapePositionBAddress;
     b3SetClosestDistanceFilterCollisionShapePositionB(commandHandle, collisionShapePositionB);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionB__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong collisionShapePositionBAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionB(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong collisionShapePositionBAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionB__JJ(commandHandleAddress, collisionShapePositionBAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapePositionB(commandHandleAddress, collisionShapePositionBAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationA__JJ(jlong commandHandleAddress, jlong collisionShapeOrientationAAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationA(jlong commandHandleAddress, jlong collisionShapeOrientationAAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *collisionShapeOrientationA = (double const *)(intptr_t)collisionShapeOrientationAAddress;
     b3SetClosestDistanceFilterCollisionShapeOrientationA(commandHandle, collisionShapeOrientationA);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationA__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong collisionShapeOrientationAAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationA(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong collisionShapeOrientationAAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationA__JJ(commandHandleAddress, collisionShapeOrientationAAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationA(commandHandleAddress, collisionShapeOrientationAAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationB__JJ(jlong commandHandleAddress, jlong collisionShapeOrientationBAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationB(jlong commandHandleAddress, jlong collisionShapeOrientationBAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *collisionShapeOrientationB = (double const *)(intptr_t)collisionShapeOrientationBAddress;
     b3SetClosestDistanceFilterCollisionShapeOrientationB(commandHandle, collisionShapeOrientationB);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationB__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong collisionShapeOrientationBAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationB(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong collisionShapeOrientationBAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationB__JJ(commandHandleAddress, collisionShapeOrientationBAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetClosestDistanceFilterCollisionShapeOrientationB(commandHandleAddress, collisionShapeOrientationBAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetClosestPointInformation(jlong physClientAddress, jlong contactPointInfoAddress) {
@@ -1329,15 +1329,15 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetClosestPointInf
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetClosestPointInformation(physClientAddress, contactPointInfoAddress);
 }
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitAABBOverlapQuery__JJJ(jlong physClientAddress, jlong aabbMinAddress, jlong aabbMaxAddress) {
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitAABBOverlapQuery(jlong physClientAddress, jlong aabbMinAddress, jlong aabbMaxAddress) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     double const *aabbMin = (double const *)(intptr_t)aabbMinAddress;
     double const *aabbMax = (double const *)(intptr_t)aabbMaxAddress;
     return (jlong)(intptr_t)b3InitAABBOverlapQuery(physClient, aabbMin, aabbMax);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitAABBOverlapQuery__JJJ(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong aabbMinAddress, jlong aabbMaxAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitAABBOverlapQuery(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong aabbMinAddress, jlong aabbMaxAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitAABBOverlapQuery__JJJ(physClientAddress, aabbMinAddress, aabbMaxAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitAABBOverlapQuery(physClientAddress, aabbMinAddress, aabbMaxAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetAABBOverlapResults(jlong physClientAddress, jlong dataAddress) {
@@ -1426,24 +1426,24 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InitUpdateVisualS
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitUpdateVisualShape(physClientAddress, bodyUniqueId, jointIndex, shapeIndex, textureUniqueId);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeRGBAColor__JJ(jlong commandHandleAddress, jlong rgbaColorAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeRGBAColor(jlong commandHandleAddress, jlong rgbaColorAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *rgbaColor = (double const *)(intptr_t)rgbaColorAddress;
     b3UpdateVisualShapeRGBAColor(commandHandle, rgbaColor);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeRGBAColor__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong rgbaColorAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeRGBAColor(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong rgbaColorAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeRGBAColor__JJ(commandHandleAddress, rgbaColorAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeRGBAColor(commandHandleAddress, rgbaColorAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeSpecularColor__JJ(jlong commandHandleAddress, jlong specularColorAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeSpecularColor(jlong commandHandleAddress, jlong specularColorAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *specularColor = (double const *)(intptr_t)specularColorAddress;
     b3UpdateVisualShapeSpecularColor(commandHandle, specularColor);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeSpecularColor__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong specularColorAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeSpecularColor(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong specularColorAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeSpecularColor__JJ(commandHandleAddress, specularColorAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3UpdateVisualShapeSpecularColor(commandHandleAddress, specularColorAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InitPhysicsParamCommand(jlong physClientAddress) {
@@ -1931,31 +1931,31 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3LoadMJCFCommandSet
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3LoadMJCFCommandSetFlags(commandHandleAddress, flags);
 }
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseDynamicsCommandInit__JIJJJ(jlong physClientAddress, jint bodyUniqueId, jlong jointPositionsQAddress, jlong jointVelocitiesQdotAddress, jlong jointAccelerationsAddress) {
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseDynamicsCommandInit(jlong physClientAddress, jint bodyUniqueId, jlong jointPositionsQAddress, jlong jointVelocitiesQdotAddress, jlong jointAccelerationsAddress) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     double const *jointPositionsQ = (double const *)(intptr_t)jointPositionsQAddress;
     double const *jointVelocitiesQdot = (double const *)(intptr_t)jointVelocitiesQdotAddress;
     double const *jointAccelerations = (double const *)(intptr_t)jointAccelerationsAddress;
     return (jlong)(intptr_t)b3CalculateInverseDynamicsCommandInit(physClient, bodyUniqueId, jointPositionsQ, jointVelocitiesQdot, jointAccelerations);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseDynamicsCommandInit__JIJJJ(JNIEnv *__env, jclass clazz, jlong physClientAddress, jint bodyUniqueId, jlong jointPositionsQAddress, jlong jointVelocitiesQdotAddress, jlong jointAccelerationsAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseDynamicsCommandInit(JNIEnv *__env, jclass clazz, jlong physClientAddress, jint bodyUniqueId, jlong jointPositionsQAddress, jlong jointVelocitiesQdotAddress, jlong jointAccelerationsAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseDynamicsCommandInit__JIJJJ(physClientAddress, bodyUniqueId, jointPositionsQAddress, jointVelocitiesQdotAddress, jointAccelerationsAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseDynamicsCommandInit(physClientAddress, bodyUniqueId, jointPositionsQAddress, jointVelocitiesQdotAddress, jointAccelerationsAddress);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseDynamicsJointForces__JJJJ(jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong dofCountAddress, jlong jointForcesAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseDynamicsJointForces(jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong dofCountAddress, jlong jointForcesAddress) {
     b3SharedMemoryStatusHandle statusHandle = (b3SharedMemoryStatusHandle)(intptr_t)statusHandleAddress;
     int *bodyUniqueId = (int *)(intptr_t)bodyUniqueIdAddress;
     int *dofCount = (int *)(intptr_t)dofCountAddress;
     double *jointForces = (double *)(intptr_t)jointForcesAddress;
     return (jint)b3GetStatusInverseDynamicsJointForces(statusHandle, bodyUniqueId, dofCount, jointForces);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseDynamicsJointForces__JJJJ(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong dofCountAddress, jlong jointForcesAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseDynamicsJointForces(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong dofCountAddress, jlong jointForcesAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseDynamicsJointForces__JJJJ(statusHandleAddress, bodyUniqueIdAddress, dofCountAddress, jointForcesAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseDynamicsJointForces(statusHandleAddress, bodyUniqueIdAddress, dofCountAddress, jointForcesAddress);
 }
 
-JNIEXPORT_CRITICAL jlong JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateJacobianCommandInit__JIIJJJJ)(jlong physClientAddress, jint bodyUniqueId, jint linkIndex, jlong localPositionAddress, jlong jointPositionsQAddress, jlong jointVelocitiesQdotAddress, jlong jointAccelerationsAddress) {
+JNIEXPORT_CRITICAL jlong JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateJacobianCommandInit)(jlong physClientAddress, jint bodyUniqueId, jint linkIndex, jlong localPositionAddress, jlong jointPositionsQAddress, jlong jointVelocitiesQdotAddress, jlong jointAccelerationsAddress) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     double const *localPosition = (double const *)(intptr_t)localPositionAddress;
     double const *jointPositionsQ = (double const *)(intptr_t)jointPositionsQAddress;
@@ -1963,43 +1963,43 @@ JNIEXPORT_CRITICAL jlong JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3Calc
     double const *jointAccelerations = (double const *)(intptr_t)jointAccelerationsAddress;
     return (jlong)(intptr_t)b3CalculateJacobianCommandInit(physClient, bodyUniqueId, linkIndex, localPosition, jointPositionsQ, jointVelocitiesQdot, jointAccelerations);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateJacobianCommandInit__JIIJJJJ(JNIEnv *__env, jclass clazz, jlong physClientAddress, jint bodyUniqueId, jint linkIndex, jlong localPositionAddress, jlong jointPositionsQAddress, jlong jointVelocitiesQdotAddress, jlong jointAccelerationsAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateJacobianCommandInit(JNIEnv *__env, jclass clazz, jlong physClientAddress, jint bodyUniqueId, jint linkIndex, jlong localPositionAddress, jlong jointPositionsQAddress, jlong jointVelocitiesQdotAddress, jlong jointAccelerationsAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateJacobianCommandInit__JIIJJJJ)(physClientAddress, bodyUniqueId, linkIndex, localPositionAddress, jointPositionsQAddress, jointVelocitiesQdotAddress, jointAccelerationsAddress);
+    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateJacobianCommandInit)(physClientAddress, bodyUniqueId, linkIndex, localPositionAddress, jointPositionsQAddress, jointVelocitiesQdotAddress, jointAccelerationsAddress);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusJacobian__JJJJ(jlong statusHandleAddress, jlong dofCountAddress, jlong linearJacobianAddress, jlong angularJacobianAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusJacobian(jlong statusHandleAddress, jlong dofCountAddress, jlong linearJacobianAddress, jlong angularJacobianAddress) {
     b3SharedMemoryStatusHandle statusHandle = (b3SharedMemoryStatusHandle)(intptr_t)statusHandleAddress;
     int *dofCount = (int *)(intptr_t)dofCountAddress;
     double *linearJacobian = (double *)(intptr_t)linearJacobianAddress;
     double *angularJacobian = (double *)(intptr_t)angularJacobianAddress;
     return (jint)b3GetStatusJacobian(statusHandle, dofCount, linearJacobian, angularJacobian);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusJacobian__JJJJ(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong dofCountAddress, jlong linearJacobianAddress, jlong angularJacobianAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusJacobian(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong dofCountAddress, jlong linearJacobianAddress, jlong angularJacobianAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusJacobian__JJJJ(statusHandleAddress, dofCountAddress, linearJacobianAddress, angularJacobianAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusJacobian(statusHandleAddress, dofCountAddress, linearJacobianAddress, angularJacobianAddress);
 }
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateMassMatrixCommandInit__JIJ(jlong physClientAddress, jint bodyUniqueId, jlong jointPositionsQAddress) {
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateMassMatrixCommandInit(jlong physClientAddress, jint bodyUniqueId, jlong jointPositionsQAddress) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     double const *jointPositionsQ = (double const *)(intptr_t)jointPositionsQAddress;
     return (jlong)(intptr_t)b3CalculateMassMatrixCommandInit(physClient, bodyUniqueId, jointPositionsQ);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateMassMatrixCommandInit__JIJ(JNIEnv *__env, jclass clazz, jlong physClientAddress, jint bodyUniqueId, jlong jointPositionsQAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateMassMatrixCommandInit(JNIEnv *__env, jclass clazz, jlong physClientAddress, jint bodyUniqueId, jlong jointPositionsQAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateMassMatrixCommandInit__JIJ(physClientAddress, bodyUniqueId, jointPositionsQAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateMassMatrixCommandInit(physClientAddress, bodyUniqueId, jointPositionsQAddress);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusMassMatrix__JJJJ(jlong physClientAddress, jlong statusHandleAddress, jlong dofCountAddress, jlong massMatrixAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusMassMatrix(jlong physClientAddress, jlong statusHandleAddress, jlong dofCountAddress, jlong massMatrixAddress) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     b3SharedMemoryStatusHandle statusHandle = (b3SharedMemoryStatusHandle)(intptr_t)statusHandleAddress;
     int *dofCount = (int *)(intptr_t)dofCountAddress;
     double *massMatrix = (double *)(intptr_t)massMatrixAddress;
     return (jint)b3GetStatusMassMatrix(physClient, statusHandle, dofCount, massMatrix);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusMassMatrix__JJJJ(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong statusHandleAddress, jlong dofCountAddress, jlong massMatrixAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusMassMatrix(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong statusHandleAddress, jlong dofCountAddress, jlong massMatrixAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusMassMatrix__JJJJ(physClientAddress, statusHandleAddress, dofCountAddress, massMatrixAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusMassMatrix(physClientAddress, statusHandleAddress, dofCountAddress, massMatrixAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsCommandInit(jlong physClientAddress, jint bodyUniqueId) {
@@ -2011,28 +2011,28 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseK
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsCommandInit(physClientAddress, bodyUniqueId);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPurePosition__JIJ(jlong commandHandleAddress, jint endEffectorLinkIndex, jlong targetPositionAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPurePosition(jlong commandHandleAddress, jint endEffectorLinkIndex, jlong targetPositionAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *targetPosition = (double const *)(intptr_t)targetPositionAddress;
     b3CalculateInverseKinematicsAddTargetPurePosition(commandHandle, endEffectorLinkIndex, targetPosition);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPurePosition__JIJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint endEffectorLinkIndex, jlong targetPositionAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPurePosition(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint endEffectorLinkIndex, jlong targetPositionAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPurePosition__JIJ(commandHandleAddress, endEffectorLinkIndex, targetPositionAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPurePosition(commandHandleAddress, endEffectorLinkIndex, targetPositionAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPositionWithOrientation__JIJJ(jlong commandHandleAddress, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong targetOrientationAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPositionWithOrientation(jlong commandHandleAddress, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong targetOrientationAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *targetPosition = (double const *)(intptr_t)targetPositionAddress;
     double const *targetOrientation = (double const *)(intptr_t)targetOrientationAddress;
     b3CalculateInverseKinematicsAddTargetPositionWithOrientation(commandHandle, endEffectorLinkIndex, targetPosition, targetOrientation);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPositionWithOrientation__JIJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong targetOrientationAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPositionWithOrientation(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong targetOrientationAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPositionWithOrientation__JIJJ(commandHandleAddress, endEffectorLinkIndex, targetPositionAddress, targetOrientationAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsAddTargetPositionWithOrientation(commandHandleAddress, endEffectorLinkIndex, targetPositionAddress, targetOrientationAddress);
 }
 
-JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosWithNullSpaceVel__JIIJJJJJ)(jlong commandHandleAddress, jint numDof, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong lowerLimitAddress, jlong upperLimitAddress, jlong jointRangeAddress, jlong restPoseAddress) {
+JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosWithNullSpaceVel)(jlong commandHandleAddress, jint numDof, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong lowerLimitAddress, jlong upperLimitAddress, jlong jointRangeAddress, jlong restPoseAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *targetPosition = (double const *)(intptr_t)targetPositionAddress;
     double const *lowerLimit = (double const *)(intptr_t)lowerLimitAddress;
@@ -2041,12 +2041,12 @@ JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3Calcu
     double const *restPose = (double const *)(intptr_t)restPoseAddress;
     b3CalculateInverseKinematicsPosWithNullSpaceVel(commandHandle, numDof, endEffectorLinkIndex, targetPosition, lowerLimit, upperLimit, jointRange, restPose);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosWithNullSpaceVel__JIIJJJJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numDof, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong lowerLimitAddress, jlong upperLimitAddress, jlong jointRangeAddress, jlong restPoseAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosWithNullSpaceVel(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numDof, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong lowerLimitAddress, jlong upperLimitAddress, jlong jointRangeAddress, jlong restPoseAddress) {
     UNUSED_PARAMS(__env, clazz)
-    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosWithNullSpaceVel__JIIJJJJJ)(commandHandleAddress, numDof, endEffectorLinkIndex, targetPositionAddress, lowerLimitAddress, upperLimitAddress, jointRangeAddress, restPoseAddress);
+    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosWithNullSpaceVel)(commandHandleAddress, numDof, endEffectorLinkIndex, targetPositionAddress, lowerLimitAddress, upperLimitAddress, jointRangeAddress, restPoseAddress);
 }
 
-JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosOrnWithNullSpaceVel__JIIJJJJJJ)(jlong commandHandleAddress, jint numDof, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong targetOrientationAddress, jlong lowerLimitAddress, jlong upperLimitAddress, jlong jointRangeAddress, jlong restPoseAddress) {
+JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosOrnWithNullSpaceVel)(jlong commandHandleAddress, jint numDof, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong targetOrientationAddress, jlong lowerLimitAddress, jlong upperLimitAddress, jlong jointRangeAddress, jlong restPoseAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *targetPosition = (double const *)(intptr_t)targetPositionAddress;
     double const *targetOrientation = (double const *)(intptr_t)targetOrientationAddress;
@@ -2056,19 +2056,19 @@ JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3Calcu
     double const *restPose = (double const *)(intptr_t)restPoseAddress;
     b3CalculateInverseKinematicsPosOrnWithNullSpaceVel(commandHandle, numDof, endEffectorLinkIndex, targetPosition, targetOrientation, lowerLimit, upperLimit, jointRange, restPose);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosOrnWithNullSpaceVel__JIIJJJJJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numDof, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong targetOrientationAddress, jlong lowerLimitAddress, jlong upperLimitAddress, jlong jointRangeAddress, jlong restPoseAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosOrnWithNullSpaceVel(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numDof, jint endEffectorLinkIndex, jlong targetPositionAddress, jlong targetOrientationAddress, jlong lowerLimitAddress, jlong upperLimitAddress, jlong jointRangeAddress, jlong restPoseAddress) {
     UNUSED_PARAMS(__env, clazz)
-    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosOrnWithNullSpaceVel__JIIJJJJJJ)(commandHandleAddress, numDof, endEffectorLinkIndex, targetPositionAddress, targetOrientationAddress, lowerLimitAddress, upperLimitAddress, jointRangeAddress, restPoseAddress);
+    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsPosOrnWithNullSpaceVel)(commandHandleAddress, numDof, endEffectorLinkIndex, targetPositionAddress, targetOrientationAddress, lowerLimitAddress, upperLimitAddress, jointRangeAddress, restPoseAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetJointDamping__JIJ(jlong commandHandleAddress, jint numDof, jlong jointDampingCoeffAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetJointDamping(jlong commandHandleAddress, jint numDof, jlong jointDampingCoeffAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *jointDampingCoeff = (double const *)(intptr_t)jointDampingCoeffAddress;
     b3CalculateInverseKinematicsSetJointDamping(commandHandle, numDof, jointDampingCoeff);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetJointDamping__JIJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numDof, jlong jointDampingCoeffAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetJointDamping(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numDof, jlong jointDampingCoeffAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetJointDamping__JIJ(commandHandleAddress, numDof, jointDampingCoeffAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetJointDamping(commandHandleAddress, numDof, jointDampingCoeffAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSelectSolver(jlong commandHandleAddress, jint solver) {
@@ -2080,26 +2080,26 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKi
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSelectSolver(commandHandleAddress, solver);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseKinematicsJointPositions__JJJJ(jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong dofCountAddress, jlong jointPositionsAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseKinematicsJointPositions(jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong dofCountAddress, jlong jointPositionsAddress) {
     b3SharedMemoryStatusHandle statusHandle = (b3SharedMemoryStatusHandle)(intptr_t)statusHandleAddress;
     int *bodyUniqueId = (int *)(intptr_t)bodyUniqueIdAddress;
     int *dofCount = (int *)(intptr_t)dofCountAddress;
     double *jointPositions = (double *)(intptr_t)jointPositionsAddress;
     return (jint)b3GetStatusInverseKinematicsJointPositions(statusHandle, bodyUniqueId, dofCount, jointPositions);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseKinematicsJointPositions__JJJJ(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong dofCountAddress, jlong jointPositionsAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseKinematicsJointPositions(JNIEnv *__env, jclass clazz, jlong statusHandleAddress, jlong bodyUniqueIdAddress, jlong dofCountAddress, jlong jointPositionsAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseKinematicsJointPositions__JJJJ(statusHandleAddress, bodyUniqueIdAddress, dofCountAddress, jointPositionsAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusInverseKinematicsJointPositions(statusHandleAddress, bodyUniqueIdAddress, dofCountAddress, jointPositionsAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetCurrentPositions__JIJ(jlong commandHandleAddress, jint numDof, jlong currentJointPositionsAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetCurrentPositions(jlong commandHandleAddress, jint numDof, jlong currentJointPositionsAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *currentJointPositions = (double const *)(intptr_t)currentJointPositionsAddress;
     b3CalculateInverseKinematicsSetCurrentPositions(commandHandle, numDof, currentJointPositions);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetCurrentPositions__JIJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numDof, jlong currentJointPositionsAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetCurrentPositions(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numDof, jlong currentJointPositionsAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetCurrentPositions__JIJ(commandHandleAddress, numDof, currentJointPositionsAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetCurrentPositions(commandHandleAddress, numDof, currentJointPositionsAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CalculateInverseKinematicsSetMaxNumIterations(jlong commandHandleAddress, jint maxNumIterations) {
@@ -2303,14 +2303,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionSha
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddSphere(commandHandleAddress, radius);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddBox__JJ(jlong commandHandleAddress, jlong halfExtentsAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddBox(jlong commandHandleAddress, jlong halfExtentsAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *halfExtents = (double const *)(intptr_t)halfExtentsAddress;
     return (jint)b3CreateCollisionShapeAddBox(commandHandle, halfExtents);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddBox__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong halfExtentsAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddBox(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong halfExtentsAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddBox__JJ(commandHandleAddress, halfExtentsAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddBox(commandHandleAddress, halfExtentsAddress);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddCapsule(jlong commandHandleAddress, jdouble radius, jdouble height) {
@@ -2331,25 +2331,25 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionSha
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddCylinder(commandHandleAddress, radius, height);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddPlane__JJD(jlong commandHandleAddress, jlong planeNormalAddress, jdouble planeConstant) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddPlane(jlong commandHandleAddress, jlong planeNormalAddress, jdouble planeConstant) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *planeNormal = (double const *)(intptr_t)planeNormalAddress;
     return (jint)b3CreateCollisionShapeAddPlane(commandHandle, planeNormal, planeConstant);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddPlane__JJD(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong planeNormalAddress, jdouble planeConstant) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddPlane(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong planeNormalAddress, jdouble planeConstant) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddPlane__JJD(commandHandleAddress, planeNormalAddress, planeConstant);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddPlane(commandHandleAddress, planeNormalAddress, planeConstant);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddMesh__JJJ(jlong commandHandleAddress, jlong fileNameAddress, jlong meshScaleAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddMesh(jlong commandHandleAddress, jlong fileNameAddress, jlong meshScaleAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     char const *fileName = (char const *)(intptr_t)fileNameAddress;
     double const *meshScale = (double const *)(intptr_t)meshScaleAddress;
     return (jint)b3CreateCollisionShapeAddMesh(commandHandle, fileName, meshScale);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddMesh__JJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong fileNameAddress, jlong meshScaleAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddMesh(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong fileNameAddress, jlong meshScaleAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddMesh__JJJ(commandHandleAddress, fileNameAddress, meshScaleAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeAddMesh(commandHandleAddress, fileNameAddress, meshScaleAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionSetFlag(jlong commandHandleAddress, jint shapeIndex, jint flags) {
@@ -2361,15 +2361,15 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionSet
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionSetFlag(commandHandleAddress, shapeIndex, flags);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeSetChildTransform__JIJJ(jlong commandHandleAddress, jint shapeIndex, jlong childPositionAddress, jlong childOrientationAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeSetChildTransform(jlong commandHandleAddress, jint shapeIndex, jlong childPositionAddress, jlong childOrientationAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *childPosition = (double const *)(intptr_t)childPositionAddress;
     double const *childOrientation = (double const *)(intptr_t)childOrientationAddress;
     b3CreateCollisionShapeSetChildTransform(commandHandle, shapeIndex, childPosition, childOrientation);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeSetChildTransform__JIJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint shapeIndex, jlong childPositionAddress, jlong childOrientationAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeSetChildTransform(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint shapeIndex, jlong childPositionAddress, jlong childOrientationAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeSetChildTransform__JIJJ(commandHandleAddress, shapeIndex, childPositionAddress, childOrientationAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateCollisionShapeSetChildTransform(commandHandleAddress, shapeIndex, childPositionAddress, childOrientationAddress);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusCollisionShapeUniqueId(jlong statusHandleAddress) {
@@ -2408,14 +2408,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeA
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddSphere(commandHandleAddress, radius);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddBox__JJ(jlong commandHandleAddress, jlong halfExtentsAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddBox(jlong commandHandleAddress, jlong halfExtentsAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *halfExtents = (double const *)(intptr_t)halfExtentsAddress;
     return (jint)b3CreateVisualShapeAddBox(commandHandle, halfExtents);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddBox__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong halfExtentsAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddBox(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong halfExtentsAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddBox__JJ(commandHandleAddress, halfExtentsAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddBox(commandHandleAddress, halfExtentsAddress);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddCapsule(jlong commandHandleAddress, jdouble radius, jdouble height) {
@@ -2436,25 +2436,25 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeA
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddCylinder(commandHandleAddress, radius, height);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddPlane__JJD(jlong commandHandleAddress, jlong planeNormalAddress, jdouble planeConstant) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddPlane(jlong commandHandleAddress, jlong planeNormalAddress, jdouble planeConstant) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *planeNormal = (double const *)(intptr_t)planeNormalAddress;
     return (jint)b3CreateVisualShapeAddPlane(commandHandle, planeNormal, planeConstant);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddPlane__JJD(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong planeNormalAddress, jdouble planeConstant) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddPlane(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong planeNormalAddress, jdouble planeConstant) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddPlane__JJD(commandHandleAddress, planeNormalAddress, planeConstant);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddPlane(commandHandleAddress, planeNormalAddress, planeConstant);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddMesh__JJJ(jlong commandHandleAddress, jlong fileNameAddress, jlong meshScaleAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddMesh(jlong commandHandleAddress, jlong fileNameAddress, jlong meshScaleAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     char const *fileName = (char const *)(intptr_t)fileNameAddress;
     double const *meshScale = (double const *)(intptr_t)meshScaleAddress;
     return (jint)b3CreateVisualShapeAddMesh(commandHandle, fileName, meshScale);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddMesh__JJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong fileNameAddress, jlong meshScaleAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddMesh(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong fileNameAddress, jlong meshScaleAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddMesh__JJJ(commandHandleAddress, fileNameAddress, meshScaleAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeAddMesh(commandHandleAddress, fileNameAddress, meshScaleAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualSetFlag(jlong commandHandleAddress, jint shapeIndex, jint flags) {
@@ -2466,35 +2466,35 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualSetFla
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualSetFlag(commandHandleAddress, shapeIndex, flags);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetChildTransform__JIJJ(jlong commandHandleAddress, jint shapeIndex, jlong childPositionAddress, jlong childOrientationAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetChildTransform(jlong commandHandleAddress, jint shapeIndex, jlong childPositionAddress, jlong childOrientationAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *childPosition = (double const *)(intptr_t)childPositionAddress;
     double const *childOrientation = (double const *)(intptr_t)childOrientationAddress;
     b3CreateVisualShapeSetChildTransform(commandHandle, shapeIndex, childPosition, childOrientation);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetChildTransform__JIJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint shapeIndex, jlong childPositionAddress, jlong childOrientationAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetChildTransform(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint shapeIndex, jlong childPositionAddress, jlong childOrientationAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetChildTransform__JIJJ(commandHandleAddress, shapeIndex, childPositionAddress, childOrientationAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetChildTransform(commandHandleAddress, shapeIndex, childPositionAddress, childOrientationAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetSpecularColor__JIJ(jlong commandHandleAddress, jint shapeIndex, jlong specularColorAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetSpecularColor(jlong commandHandleAddress, jint shapeIndex, jlong specularColorAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *specularColor = (double const *)(intptr_t)specularColorAddress;
     b3CreateVisualShapeSetSpecularColor(commandHandle, shapeIndex, specularColor);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetSpecularColor__JIJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint shapeIndex, jlong specularColorAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetSpecularColor(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint shapeIndex, jlong specularColorAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetSpecularColor__JIJ(commandHandleAddress, shapeIndex, specularColorAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetSpecularColor(commandHandleAddress, shapeIndex, specularColorAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetRGBAColor__JIJ(jlong commandHandleAddress, jint shapeIndex, jlong rgbaColorAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetRGBAColor(jlong commandHandleAddress, jint shapeIndex, jlong rgbaColorAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *rgbaColor = (double const *)(intptr_t)rgbaColorAddress;
     b3CreateVisualShapeSetRGBAColor(commandHandle, shapeIndex, rgbaColor);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetRGBAColor__JIJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint shapeIndex, jlong rgbaColorAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetRGBAColor(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint shapeIndex, jlong rgbaColorAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetRGBAColor__JIJ(commandHandleAddress, shapeIndex, rgbaColorAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateVisualShapeSetRGBAColor(commandHandleAddress, shapeIndex, rgbaColorAddress);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3GetStatusVisualShapeUniqueId(jlong statusHandleAddress) {
@@ -2515,7 +2515,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyCo
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyCommandInit(physClientAddress);
 }
 
-JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyBase__JDIIJJJJ)(jlong commandHandleAddress, jdouble mass, jint collisionShapeUnique, jint visualShapeUniqueId, jlong basePositionAddress, jlong baseOrientationAddress, jlong baseInertialFramePositionAddress, jlong baseInertialFrameOrientationAddress) {
+JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyBase)(jlong commandHandleAddress, jdouble mass, jint collisionShapeUnique, jint visualShapeUniqueId, jlong basePositionAddress, jlong baseOrientationAddress, jlong baseInertialFramePositionAddress, jlong baseInertialFrameOrientationAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *basePosition = (double const *)(intptr_t)basePositionAddress;
     double const *baseOrientation = (double const *)(intptr_t)baseOrientationAddress;
@@ -2523,12 +2523,12 @@ JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3Creat
     double const *baseInertialFrameOrientation = (double const *)(intptr_t)baseInertialFrameOrientationAddress;
     return (jint)b3CreateMultiBodyBase(commandHandle, mass, collisionShapeUnique, visualShapeUniqueId, basePosition, baseOrientation, baseInertialFramePosition, baseInertialFrameOrientation);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyBase__JDIIJJJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jdouble mass, jint collisionShapeUnique, jint visualShapeUniqueId, jlong basePositionAddress, jlong baseOrientationAddress, jlong baseInertialFramePositionAddress, jlong baseInertialFrameOrientationAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyBase(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jdouble mass, jint collisionShapeUnique, jint visualShapeUniqueId, jlong basePositionAddress, jlong baseOrientationAddress, jlong baseInertialFramePositionAddress, jlong baseInertialFrameOrientationAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyBase__JDIIJJJJ)(commandHandleAddress, mass, collisionShapeUnique, visualShapeUniqueId, basePositionAddress, baseOrientationAddress, baseInertialFramePositionAddress, baseInertialFrameOrientationAddress);
+    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyBase)(commandHandleAddress, mass, collisionShapeUnique, visualShapeUniqueId, basePositionAddress, baseOrientationAddress, baseInertialFramePositionAddress, baseInertialFrameOrientationAddress);
 }
 
-JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyLink__JDDDJJJJIIJ)(jlong commandHandleAddress, jdouble linkMass, jdouble linkCollisionShapeIndex, jdouble linkVisualShapeIndex, jlong linkPositionAddress, jlong linkOrientationAddress, jlong linkInertialFramePositionAddress, jlong linkInertialFrameOrientationAddress, jint linkParentIndex, jint linkJointType, jlong linkJointAxisAddress) {
+JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyLink)(jlong commandHandleAddress, jdouble linkMass, jdouble linkCollisionShapeIndex, jdouble linkVisualShapeIndex, jlong linkPositionAddress, jlong linkOrientationAddress, jlong linkInertialFramePositionAddress, jlong linkInertialFrameOrientationAddress, jint linkParentIndex, jint linkJointType, jlong linkJointAxisAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *linkPosition = (double const *)(intptr_t)linkPositionAddress;
     double const *linkOrientation = (double const *)(intptr_t)linkOrientationAddress;
@@ -2537,9 +2537,9 @@ JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3Creat
     double const *linkJointAxis = (double const *)(intptr_t)linkJointAxisAddress;
     return (jint)b3CreateMultiBodyLink(commandHandle, linkMass, linkCollisionShapeIndex, linkVisualShapeIndex, linkPosition, linkOrientation, linkInertialFramePosition, linkInertialFrameOrientation, linkParentIndex, linkJointType, linkJointAxis);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyLink__JDDDJJJJIIJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jdouble linkMass, jdouble linkCollisionShapeIndex, jdouble linkVisualShapeIndex, jlong linkPositionAddress, jlong linkOrientationAddress, jlong linkInertialFramePositionAddress, jlong linkInertialFrameOrientationAddress, jint linkParentIndex, jint linkJointType, jlong linkJointAxisAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyLink(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jdouble linkMass, jdouble linkCollisionShapeIndex, jdouble linkVisualShapeIndex, jlong linkPositionAddress, jlong linkOrientationAddress, jlong linkInertialFramePositionAddress, jlong linkInertialFrameOrientationAddress, jint linkParentIndex, jint linkJointType, jlong linkJointAxisAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyLink__JDDDJJJJIIJ)(commandHandleAddress, linkMass, linkCollisionShapeIndex, linkVisualShapeIndex, linkPositionAddress, linkOrientationAddress, linkInertialFramePositionAddress, linkInertialFrameOrientationAddress, linkParentIndex, linkJointType, linkJointAxisAddress);
+    return CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyLink)(commandHandleAddress, linkMass, linkCollisionShapeIndex, linkVisualShapeIndex, linkPositionAddress, linkOrientationAddress, linkInertialFramePositionAddress, linkInertialFrameOrientationAddress, linkParentIndex, linkJointType, linkJointAxisAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateMultiBodyUseMaximalCoordinates(jlong commandHandleAddress) {
@@ -2659,34 +2659,34 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandS
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseOrientation(commandHandleAddress, startOrnX, startOrnY, startOrnZ, startOrnW);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseLinearVelocity__JJ(jlong commandHandleAddress, jlong linVelAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseLinearVelocity(jlong commandHandleAddress, jlong linVelAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *linVel = (double const *)(intptr_t)linVelAddress;
     return (jint)b3CreatePoseCommandSetBaseLinearVelocity(commandHandle, linVel);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseLinearVelocity__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong linVelAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseLinearVelocity(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong linVelAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseLinearVelocity__JJ(commandHandleAddress, linVelAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseLinearVelocity(commandHandleAddress, linVelAddress);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseAngularVelocity__JJ(jlong commandHandleAddress, jlong angVelAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseAngularVelocity(jlong commandHandleAddress, jlong angVelAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *angVel = (double const *)(intptr_t)angVelAddress;
     return (jint)b3CreatePoseCommandSetBaseAngularVelocity(commandHandle, angVel);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseAngularVelocity__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong angVelAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseAngularVelocity(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong angVelAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseAngularVelocity__JJ(commandHandleAddress, angVelAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetBaseAngularVelocity(commandHandleAddress, angVelAddress);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositions__JIJ(jlong commandHandleAddress, jint numJointPositions, jlong jointPositionsAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositions(jlong commandHandleAddress, jint numJointPositions, jlong jointPositionsAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *jointPositions = (double const *)(intptr_t)jointPositionsAddress;
     return (jint)b3CreatePoseCommandSetJointPositions(commandHandle, numJointPositions, jointPositions);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositions__JIJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numJointPositions, jlong jointPositionsAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositions(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numJointPositions, jlong jointPositionsAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositions__JIJ(commandHandleAddress, numJointPositions, jointPositionsAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositions(commandHandleAddress, numJointPositions, jointPositionsAddress);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPosition(jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jdouble jointPosition) {
@@ -2699,48 +2699,48 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandS
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPosition(physClientAddress, commandHandleAddress, jointIndex, jointPosition);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositionMultiDof__JJIJI(jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jlong jointPositionAddress, jint posSize) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositionMultiDof(jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jlong jointPositionAddress, jint posSize) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *jointPosition = (double const *)(intptr_t)jointPositionAddress;
     return (jint)b3CreatePoseCommandSetJointPositionMultiDof(physClient, commandHandle, jointIndex, jointPosition, posSize);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositionMultiDof__JJIJI(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jlong jointPositionAddress, jint posSize) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositionMultiDof(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jlong jointPositionAddress, jint posSize) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositionMultiDof__JJIJI(physClientAddress, commandHandleAddress, jointIndex, jointPositionAddress, posSize);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointPositionMultiDof(physClientAddress, commandHandleAddress, jointIndex, jointPositionAddress, posSize);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQ__JIJJ(jlong commandHandleAddress, jint numJointPositions, jlong qAddress, jlong hasQAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQ(jlong commandHandleAddress, jint numJointPositions, jlong qAddress, jlong hasQAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *q = (double const *)(intptr_t)qAddress;
     int const *hasQ = (int const *)(intptr_t)hasQAddress;
     return (jint)b3CreatePoseCommandSetQ(commandHandle, numJointPositions, q, hasQ);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQ__JIJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numJointPositions, jlong qAddress, jlong hasQAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numJointPositions, jlong qAddress, jlong hasQAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQ__JIJJ(commandHandleAddress, numJointPositions, qAddress, hasQAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQ(commandHandleAddress, numJointPositions, qAddress, hasQAddress);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQdots__JIJJ(jlong commandHandleAddress, jint numJointVelocities, jlong qDotsAddress, jlong hasQdotsAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQdots(jlong commandHandleAddress, jint numJointVelocities, jlong qDotsAddress, jlong hasQdotsAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *qDots = (double const *)(intptr_t)qDotsAddress;
     int const *hasQdots = (int const *)(intptr_t)hasQdotsAddress;
     return (jint)b3CreatePoseCommandSetQdots(commandHandle, numJointVelocities, qDots, hasQdots);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQdots__JIJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numJointVelocities, jlong qDotsAddress, jlong hasQdotsAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQdots(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint numJointVelocities, jlong qDotsAddress, jlong hasQdotsAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQdots__JIJJ(commandHandleAddress, numJointVelocities, qDotsAddress, hasQdotsAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetQdots(commandHandleAddress, numJointVelocities, qDotsAddress, hasQdotsAddress);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocities__JJIJ(jlong physClientAddress, jlong commandHandleAddress, jint numJointVelocities, jlong jointVelocitiesAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocities(jlong physClientAddress, jlong commandHandleAddress, jint numJointVelocities, jlong jointVelocitiesAddress) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *jointVelocities = (double const *)(intptr_t)jointVelocitiesAddress;
     return (jint)b3CreatePoseCommandSetJointVelocities(physClient, commandHandle, numJointVelocities, jointVelocities);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocities__JJIJ(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong commandHandleAddress, jint numJointVelocities, jlong jointVelocitiesAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocities(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong commandHandleAddress, jint numJointVelocities, jlong jointVelocitiesAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocities__JJIJ(physClientAddress, commandHandleAddress, numJointVelocities, jointVelocitiesAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocities(physClientAddress, commandHandleAddress, numJointVelocities, jointVelocitiesAddress);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocity(jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jdouble jointVelocity) {
@@ -2753,15 +2753,15 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandS
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocity(physClientAddress, commandHandleAddress, jointIndex, jointVelocity);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocityMultiDof__JJIJI(jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jlong jointVelocityAddress, jint velSize) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocityMultiDof(jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jlong jointVelocityAddress, jint velSize) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *jointVelocity = (double const *)(intptr_t)jointVelocityAddress;
     return (jint)b3CreatePoseCommandSetJointVelocityMultiDof(physClient, commandHandle, jointIndex, jointVelocity, velSize);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocityMultiDof__JJIJI(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jlong jointVelocityAddress, jint velSize) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocityMultiDof(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong commandHandleAddress, jint jointIndex, jlong jointVelocityAddress, jint velSize) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocityMultiDof__JJIJI(physClientAddress, commandHandleAddress, jointIndex, jointVelocityAddress, velSize);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreatePoseCommandSetJointVelocityMultiDof(physClientAddress, commandHandleAddress, jointIndex, jointVelocityAddress, velSize);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3CreateSensorCommandInit(jlong physClientAddress, jint bodyUniqueId) {
@@ -2914,27 +2914,27 @@ JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchSetNum
     JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchSetNumThreads(commandHandleAddress, numThreads);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRay__JJJ(jlong commandHandleAddress, jlong rayFromWorldAddress, jlong rayToWorldAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRay(jlong commandHandleAddress, jlong rayFromWorldAddress, jlong rayToWorldAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *rayFromWorld = (double const *)(intptr_t)rayFromWorldAddress;
     double const *rayToWorld = (double const *)(intptr_t)rayToWorldAddress;
     b3RaycastBatchAddRay(commandHandle, rayFromWorld, rayToWorld);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRay__JJJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong rayFromWorldAddress, jlong rayToWorldAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRay(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong rayFromWorldAddress, jlong rayToWorldAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRay__JJJ(commandHandleAddress, rayFromWorldAddress, rayToWorldAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRay(commandHandleAddress, rayFromWorldAddress, rayToWorldAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRays__JJJJI(jlong physClientAddress, jlong commandHandleAddress, jlong rayFromWorldAddress, jlong rayToWorldAddress, jint numRays) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRays(jlong physClientAddress, jlong commandHandleAddress, jlong rayFromWorldAddress, jlong rayToWorldAddress, jint numRays) {
     b3PhysicsClientHandle physClient = (b3PhysicsClientHandle)(intptr_t)physClientAddress;
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *rayFromWorld = (double const *)(intptr_t)rayFromWorldAddress;
     double const *rayToWorld = (double const *)(intptr_t)rayToWorldAddress;
     b3RaycastBatchAddRays(physClient, commandHandle, rayFromWorld, rayToWorld, numRays);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRays__JJJJI(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong commandHandleAddress, jlong rayFromWorldAddress, jlong rayToWorldAddress, jint numRays) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRays(JNIEnv *__env, jclass clazz, jlong physClientAddress, jlong commandHandleAddress, jlong rayFromWorldAddress, jlong rayToWorldAddress, jint numRays) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRays__JJJJI(physClientAddress, commandHandleAddress, rayFromWorldAddress, rayToWorldAddress, numRays);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchAddRays(physClientAddress, commandHandleAddress, rayFromWorldAddress, rayToWorldAddress, numRays);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3RaycastBatchSetParentObject(jlong commandHandleAddress, jint parentObjectUniqueId, jint parentLinkIndex) {
@@ -2965,25 +2965,25 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalForc
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalForceCommandInit(physClientAddress);
 }
 
-JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalForce__JIIJJI)(jlong commandHandleAddress, jint bodyUniqueId, jint linkId, jlong forceAddress, jlong positionAddress, jint flag) {
+JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalForce)(jlong commandHandleAddress, jint bodyUniqueId, jint linkId, jlong forceAddress, jlong positionAddress, jint flag) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *force = (double const *)(intptr_t)forceAddress;
     double const *position = (double const *)(intptr_t)positionAddress;
     b3ApplyExternalForce(commandHandle, bodyUniqueId, linkId, force, position, flag);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalForce__JIIJJI(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint bodyUniqueId, jint linkId, jlong forceAddress, jlong positionAddress, jint flag) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalForce(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint bodyUniqueId, jint linkId, jlong forceAddress, jlong positionAddress, jint flag) {
     UNUSED_PARAMS(__env, clazz)
-    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalForce__JIIJJI)(commandHandleAddress, bodyUniqueId, linkId, forceAddress, positionAddress, flag);
+    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalForce)(commandHandleAddress, bodyUniqueId, linkId, forceAddress, positionAddress, flag);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalTorque__JIIJI(jlong commandHandleAddress, jint bodyUniqueId, jint linkId, jlong torqueAddress, jint flag) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalTorque(jlong commandHandleAddress, jint bodyUniqueId, jint linkId, jlong torqueAddress, jint flag) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *torque = (double const *)(intptr_t)torqueAddress;
     b3ApplyExternalTorque(commandHandle, bodyUniqueId, linkId, torque, flag);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalTorque__JIIJI(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint bodyUniqueId, jint linkId, jlong torqueAddress, jint flag) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalTorque(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jint bodyUniqueId, jint linkId, jlong torqueAddress, jint flag) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalTorque__JIIJI(commandHandleAddress, bodyUniqueId, linkId, torqueAddress, flag);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3ApplyExternalTorque(commandHandleAddress, bodyUniqueId, linkId, torqueAddress, flag);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3LoadSoftBodyCommandInit(jlong physClientAddress, jlong fileNameAddress) {
@@ -3060,24 +3060,24 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraStateC
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraStateCommandInit(physClientAddress);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootPosition__JJ(jlong commandHandleAddress, jlong rootPosAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootPosition(jlong commandHandleAddress, jlong rootPosAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *rootPos = (double const *)(intptr_t)rootPosAddress;
     return (jint)b3SetVRCameraRootPosition(commandHandle, rootPos);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootPosition__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong rootPosAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootPosition(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong rootPosAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootPosition__JJ(commandHandleAddress, rootPosAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootPosition(commandHandleAddress, rootPosAddress);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootOrientation__JJ(jlong commandHandleAddress, jlong rootOrnAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootOrientation(jlong commandHandleAddress, jlong rootOrnAddress) {
     b3SharedMemoryCommandHandle commandHandle = (b3SharedMemoryCommandHandle)(intptr_t)commandHandleAddress;
     double const *rootOrn = (double const *)(intptr_t)rootOrnAddress;
     return (jint)b3SetVRCameraRootOrientation(commandHandle, rootOrn);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootOrientation__JJ(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong rootOrnAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootOrientation(JNIEnv *__env, jclass clazz, jlong commandHandleAddress, jlong rootOrnAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootOrientation__JJ(commandHandleAddress, rootOrnAddress);
+    return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraRootOrientation(commandHandleAddress, rootOrnAddress);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetVRCameraTrackingObject(jlong commandHandleAddress, jint objectUniqueId) {
@@ -3320,7 +3320,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3SetAdditionalSear
     return JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3SetAdditionalSearchPath(physClientAddress, pathAddress);
 }
 
-JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3MultiplyTransforms__JJJJJJ)(jlong posAAddress, jlong ornAAddress, jlong posBAddress, jlong ornBAddress, jlong outPosAddress, jlong outOrnAddress) {
+JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3MultiplyTransforms)(jlong posAAddress, jlong ornAAddress, jlong posBAddress, jlong ornBAddress, jlong outPosAddress, jlong outOrnAddress) {
     double const *posA = (double const *)(intptr_t)posAAddress;
     double const *ornA = (double const *)(intptr_t)ornAAddress;
     double const *posB = (double const *)(intptr_t)posBAddress;
@@ -3329,21 +3329,21 @@ JNIEXPORT_CRITICAL void JNICALL CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3Multi
     double *outOrn = (double *)(intptr_t)outOrnAddress;
     b3MultiplyTransforms(posA, ornA, posB, ornB, outPos, outOrn);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3MultiplyTransforms__JJJJJJ(JNIEnv *__env, jclass clazz, jlong posAAddress, jlong ornAAddress, jlong posBAddress, jlong ornBAddress, jlong outPosAddress, jlong outOrnAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3MultiplyTransforms(JNIEnv *__env, jclass clazz, jlong posAAddress, jlong ornAAddress, jlong posBAddress, jlong ornBAddress, jlong outPosAddress, jlong outOrnAddress) {
     UNUSED_PARAMS(__env, clazz)
-    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3MultiplyTransforms__JJJJJJ)(posAAddress, ornAAddress, posBAddress, ornBAddress, outPosAddress, outOrnAddress);
+    CRITICAL(org_lwjgl_bullet_PhysicsClient_nb3MultiplyTransforms)(posAAddress, ornAAddress, posBAddress, ornBAddress, outPosAddress, outOrnAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InvertTransform__JJJJ(jlong posAddress, jlong ornAddress, jlong outPosAddress, jlong outOrnAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InvertTransform(jlong posAddress, jlong ornAddress, jlong outPosAddress, jlong outOrnAddress) {
     double const *pos = (double const *)(intptr_t)posAddress;
     double const *orn = (double const *)(intptr_t)ornAddress;
     double *outPos = (double *)(intptr_t)outPosAddress;
     double *outOrn = (double *)(intptr_t)outOrnAddress;
     b3InvertTransform(pos, orn, outPos, outOrn);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InvertTransform__JJJJ(JNIEnv *__env, jclass clazz, jlong posAddress, jlong ornAddress, jlong outPosAddress, jlong outOrnAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_bullet_PhysicsClient_nb3InvertTransform(JNIEnv *__env, jclass clazz, jlong posAddress, jlong ornAddress, jlong outPosAddress, jlong outOrnAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InvertTransform__JJJJ(posAddress, ornAddress, outPosAddress, outOrnAddress);
+    JavaCritical_org_lwjgl_bullet_PhysicsClient_nb3InvertTransform(posAddress, ornAddress, outPosAddress, outOrnAddress);
 }
 
 EXTERN_C_EXIT

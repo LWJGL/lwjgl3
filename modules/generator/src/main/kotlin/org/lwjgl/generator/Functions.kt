@@ -1953,7 +1953,7 @@ class Func(
     }
 
     private fun JNI_NAME(hasArrays: Boolean, critical: Boolean, ignoreArrayType: Boolean = false): String {
-        return "${nativeClass.nativeFileNameJNI}_${if (isNativeOnly) "" else "n"}${name.asJNIName}${if (hasArrays || hasArrayOverloads)
+        return "${nativeClass.nativeFileNameJNI}_${if (isNativeOnly) "" else "n"}${name.asJNIName}${if (nativeClass.module.arrayOverloads && (hasArrays || hasArrayOverloads))
             getNativeParams(withExplicitFunctionAddress = false)
                 .map {
                     if (it.nativeType is ArrayType<*> && !(critical && ignoreArrayType))
@@ -1963,8 +1963,8 @@ class Func(
                 }
                 .joinToString(
                     "",
-                    prefix = if (hasFunctionAddressParam) "__J" else "__",
-                    postfix = if (returns.isStructValue) "J" else ""
+                    prefix = "__",
+                    postfix = "J".repeat((if (returns.isStructValue) 1 else 0) + (if (hasFunctionAddressParam) 1 else 0))
                 )
         else
             ""

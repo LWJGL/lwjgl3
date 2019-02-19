@@ -12,8 +12,8 @@ static jint delegate(CXCursor cursor, CXCursor parent, CXClientData client_data)
 
 EXTERN_C_ENTER
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_CXCursorVisitor_getDelegate(JNIEnv *env, jclass clazz) {
-    UNUSED_PARAMS(env, clazz);
+JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_CXCursorVisitor_getDelegate(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
     return (intptr_t)delegate;
 }
 

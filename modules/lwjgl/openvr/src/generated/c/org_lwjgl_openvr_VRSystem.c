@@ -89,14 +89,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_openvr_VRSystem_nVRSystem_1GetRawZeroPoseT
     JavaCritical_org_lwjgl_openvr_VRSystem_nVRSystem_1GetRawZeroPoseToStandingAbsoluteTrackingPose(__functionAddress, __result);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_openvr_VRSystem_nVRSystem_1GetMatrix34TrackedDeviceProperty__JIIJJ(jint unDeviceIndex, jint prop, jlong pErrorAddress, jlong __functionAddress, jlong __result) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_openvr_VRSystem_nVRSystem_1GetMatrix34TrackedDeviceProperty(jint unDeviceIndex, jint prop, jlong pErrorAddress, jlong __functionAddress, jlong __result) {
     VRSystem_GetMatrix34TrackedDevicePropertyPROC VRSystem_GetMatrix34TrackedDeviceProperty = (VRSystem_GetMatrix34TrackedDevicePropertyPROC)(intptr_t)__functionAddress;
     intptr_t pError = (intptr_t)pErrorAddress;
     *((HmdMatrix34_t*)(intptr_t)__result) = VRSystem_GetMatrix34TrackedDeviceProperty(unDeviceIndex, prop, pError);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_openvr_VRSystem_nVRSystem_1GetMatrix34TrackedDeviceProperty__JIIJJ(JNIEnv *__env, jclass clazz, jint unDeviceIndex, jint prop, jlong pErrorAddress, jlong __functionAddress, jlong __result) {
+JNIEXPORT void JNICALL Java_org_lwjgl_openvr_VRSystem_nVRSystem_1GetMatrix34TrackedDeviceProperty(JNIEnv *__env, jclass clazz, jint unDeviceIndex, jint prop, jlong pErrorAddress, jlong __functionAddress, jlong __result) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_openvr_VRSystem_nVRSystem_1GetMatrix34TrackedDeviceProperty__JIIJJ(unDeviceIndex, prop, pErrorAddress, __functionAddress, __result);
+    JavaCritical_org_lwjgl_openvr_VRSystem_nVRSystem_1GetMatrix34TrackedDeviceProperty(unDeviceIndex, prop, pErrorAddress, __functionAddress, __result);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_openvr_VRSystem_nVRSystem_1GetHiddenAreaMesh(jint eEye, jint type, jlong __functionAddress, jlong __result) {

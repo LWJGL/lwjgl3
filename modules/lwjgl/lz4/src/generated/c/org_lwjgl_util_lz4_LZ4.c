@@ -84,15 +84,15 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1fast_1extStat
     return CRITICAL(org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1fast_1extState)(stateAddress, srcAddress, dstAddress, srcSize, dstCapacity, acceleration);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1destSize__JJJI(jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1destSize(jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize) {
     char const *src = (char const *)(intptr_t)srcAddress;
     char *dst = (char *)(intptr_t)dstAddress;
     int *srcSizePtr = (int *)(intptr_t)srcSizePtrAddress;
     return (jint)LZ4_compress_destSize(src, dst, srcSizePtr, targetDstSize);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1destSize__JJJI(JNIEnv *__env, jclass clazz, jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1destSize(JNIEnv *__env, jclass clazz, jlong srcAddress, jlong dstAddress, jlong srcSizePtrAddress, jint targetDstSize) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1destSize__JJJI(srcAddress, dstAddress, srcSizePtrAddress, targetDstSize);
+    return JavaCritical_org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1destSize(srcAddress, dstAddress, srcSizePtrAddress, targetDstSize);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_lz4_LZ4_nLZ4_1decompress_1fast(jlong srcAddress, jlong dstAddress, jint originalSize) {

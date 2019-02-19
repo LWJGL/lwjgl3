@@ -81,14 +81,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1LogText(JNIEn
     JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1LogText(textAddress);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1BeginCPUSample__JIJ(jlong nameAddress, jint flags, jlong hash_cacheAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1BeginCPUSample(jlong nameAddress, jint flags, jlong hash_cacheAddress) {
     rmtPStr name = (rmtPStr)(intptr_t)nameAddress;
     rmtU32 *hash_cache = (rmtU32 *)(intptr_t)hash_cacheAddress;
     _rmt_BeginCPUSample(name, flags, hash_cache);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1BeginCPUSample__JIJ(JNIEnv *__env, jclass clazz, jlong nameAddress, jint flags, jlong hash_cacheAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_Remotery_nrmt_1BeginCPUSample(JNIEnv *__env, jclass clazz, jlong nameAddress, jint flags, jlong hash_cacheAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1BeginCPUSample__JIJ(nameAddress, flags, hash_cacheAddress);
+    JavaCritical_org_lwjgl_util_remotery_Remotery_nrmt_1BeginCPUSample(nameAddress, flags, hash_cacheAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_Remotery_rmt_1EndCPUSample(void) {

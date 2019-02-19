@@ -142,13 +142,13 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc(JNIEnv
     return JavaCritical_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc(size);
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_system_rpmalloc_RPmalloc_nrpfree__J(jlong ptrAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_system_rpmalloc_RPmalloc_nrpfree(jlong ptrAddress) {
     void *ptr = (void *)(intptr_t)ptrAddress;
     rpfree(ptr);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpfree__J(JNIEnv *__env, jclass clazz, jlong ptrAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpfree(JNIEnv *__env, jclass clazz, jlong ptrAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_system_rpmalloc_RPmalloc_nrpfree__J(ptrAddress);
+    JavaCritical_org_lwjgl_system_rpmalloc_RPmalloc_nrpfree(ptrAddress);
 }
 
 JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_rpmalloc_RPmalloc_nrpcalloc(jlong num, jlong size) {
@@ -202,13 +202,13 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpposix_1memalig
     return JavaCritical_org_lwjgl_system_rpmalloc_RPmalloc_nrpposix_1memalign(memptrAddress, alignment, size);
 }
 
-JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1usable_1size__J(jlong ptrAddress) {
+JNIEXPORT jlong JNICALL JavaCritical_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1usable_1size(jlong ptrAddress) {
     void *ptr = (void *)(intptr_t)ptrAddress;
     return (jlong)rpmalloc_usable_size(ptr);
 }
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1usable_1size__J(JNIEnv *__env, jclass clazz, jlong ptrAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1usable_1size(JNIEnv *__env, jclass clazz, jlong ptrAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1usable_1size__J(ptrAddress);
+    return JavaCritical_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1usable_1size(ptrAddress);
 }
 
 EXTERN_C_EXIT

@@ -34,14 +34,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_RemoteryMetal_rmt_1UnbindMet
     JavaCritical_org_lwjgl_util_remotery_RemoteryMetal_rmt_1UnbindMetal();
 }
 
-JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_RemoteryMetal_nrmt_1BeginMetalSample__JJ(jlong nameAddress, jlong hash_cacheAddress) {
+JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_RemoteryMetal_nrmt_1BeginMetalSample(jlong nameAddress, jlong hash_cacheAddress) {
     rmtPStr name = (rmtPStr)(intptr_t)nameAddress;
     rmtU32 *hash_cache = (rmtU32 *)(intptr_t)hash_cacheAddress;
     _rmt_BeginMetalSample(name, hash_cache);
 }
-JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_RemoteryMetal_nrmt_1BeginMetalSample__JJ(JNIEnv *__env, jclass clazz, jlong nameAddress, jlong hash_cacheAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_RemoteryMetal_nrmt_1BeginMetalSample(JNIEnv *__env, jclass clazz, jlong nameAddress, jlong hash_cacheAddress) {
     UNUSED_PARAMS(__env, clazz)
-    JavaCritical_org_lwjgl_util_remotery_RemoteryMetal_nrmt_1BeginMetalSample__JJ(nameAddress, hash_cacheAddress);
+    JavaCritical_org_lwjgl_util_remotery_RemoteryMetal_nrmt_1BeginMetalSample(nameAddress, hash_cacheAddress);
 }
 
 JNIEXPORT void JNICALL JavaCritical_org_lwjgl_util_remotery_RemoteryMetal_rmt_1EndMetalSample(void) {

@@ -99,7 +99,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRHeaderFromMe
     return JavaCritical_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRHeaderFromMemory(headerAddress, versionAddress, memoryAddress, size, errAddress);
 }
 
-JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromFile__JJJJJ(jlong headersAddress, jlong num_headersAddress, jlong versionAddress, jlong filenameAddress, jlong errAddress) {
+JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromFile(jlong headersAddress, jlong num_headersAddress, jlong versionAddress, jlong filenameAddress, jlong errAddress) {
     EXRHeader ***headers = (EXRHeader ***)(intptr_t)headersAddress;
     int *num_headers = (int *)(intptr_t)num_headersAddress;
     EXRVersion const *version = (EXRVersion const *)(intptr_t)versionAddress;
@@ -107,12 +107,12 @@ JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMult
     char const **err = (char const **)(intptr_t)errAddress;
     return (jint)ParseEXRMultipartHeaderFromFile(headers, num_headers, version, filename, err);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromFile__JJJJJ(JNIEnv *__env, jclass clazz, jlong headersAddress, jlong num_headersAddress, jlong versionAddress, jlong filenameAddress, jlong errAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromFile(JNIEnv *__env, jclass clazz, jlong headersAddress, jlong num_headersAddress, jlong versionAddress, jlong filenameAddress, jlong errAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return JavaCritical_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromFile__JJJJJ(headersAddress, num_headersAddress, versionAddress, filenameAddress, errAddress);
+    return JavaCritical_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromFile(headersAddress, num_headersAddress, versionAddress, filenameAddress, errAddress);
 }
 
-JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromMemory__JJJJJJ)(jlong headersAddress, jlong num_headersAddress, jlong versionAddress, jlong memoryAddress, jlong size, jlong errAddress) {
+JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromMemory)(jlong headersAddress, jlong num_headersAddress, jlong versionAddress, jlong memoryAddress, jlong size, jlong errAddress) {
     EXRHeader ***headers = (EXRHeader ***)(intptr_t)headersAddress;
     int *num_headers = (int *)(intptr_t)num_headersAddress;
     EXRVersion const *version = (EXRVersion const *)(intptr_t)versionAddress;
@@ -120,9 +120,9 @@ JNIEXPORT_CRITICAL jint JNICALL CRITICAL(org_lwjgl_util_tinyexr_TinyEXR_nParseEX
     char const **err = (char const **)(intptr_t)errAddress;
     return (jint)ParseEXRMultipartHeaderFromMemory(headers, num_headers, version, memory, (size_t)size, err);
 }
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromMemory__JJJJJJ(JNIEnv *__env, jclass clazz, jlong headersAddress, jlong num_headersAddress, jlong versionAddress, jlong memoryAddress, jlong size, jlong errAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromMemory(JNIEnv *__env, jclass clazz, jlong headersAddress, jlong num_headersAddress, jlong versionAddress, jlong memoryAddress, jlong size, jlong errAddress) {
     UNUSED_PARAMS(__env, clazz)
-    return CRITICAL(org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromMemory__JJJJJJ)(headersAddress, num_headersAddress, versionAddress, memoryAddress, size, errAddress);
+    return CRITICAL(org_lwjgl_util_tinyexr_TinyEXR_nParseEXRMultipartHeaderFromMemory)(headersAddress, num_headersAddress, versionAddress, memoryAddress, size, errAddress);
 }
 
 JNIEXPORT jint JNICALL JavaCritical_org_lwjgl_util_tinyexr_TinyEXR_nLoadEXRImageFromFile(jlong imageAddress, jlong headerAddress, jlong filenameAddress, jlong errAddress) {
