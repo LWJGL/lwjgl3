@@ -39,7 +39,8 @@ private val BUFFER_KEYWORDS = setOf(
 open class StructMember(
     val nativeType: DataType,
     val name: String,
-    val documentation: String
+    val documentation: String,
+    val bits: Int
 ) : ModifierTarget<StructMemberModifier>() {
 
     override fun validate(modifier: StructMemberModifier) = modifier.validate(this)
@@ -83,7 +84,7 @@ open class StructMemberArray(
     documentation: String,
     /** Number of pointer elements that must not be null. */
     val validSize: String
-) : StructMember(arrayType.elementType, name, documentation) {
+) : StructMember(arrayType.elementType, name, documentation, -1) {
     val size: String get() = arrayType.size
     val primitiveMapping get() = nativeType.let {
         if (it is PointerType<*>) PrimitiveMapping.POINTER else it.mapping as PrimitiveMapping
@@ -221,7 +222,10 @@ class Struct(
     }
 
     // Plain struct member
-    operator fun DataType.invoke(name: String, documentation: String) = add(StructMember(this, name, documentation))
+    operator fun DataType.invoke(name: String, documentation: String) = add(StructMember(this, name, documentation, -1))
+
+    // Bitfield struct member
+    operator fun PrimitiveType.invoke(name: String, documentation: String, bits: Int) = add(StructMember(this, name, documentation, bits))
 
     // Converts a plain member to an array member
     operator fun StructMember.get(size: Int, validSize: Int = size) = this[size.toString(), validSize.toString()]
@@ -449,9 +453,9 @@ $indent}"""
     private fun printStructLayout(indentation: String = ""): String {
         val memberIndentation = "$indentation    "
         return """$nativeNameQualified {
-${members.joinToString("\n$memberIndentation", prefix = memberIndentation) {member ->
+${members.joinToString(";\n$memberIndentation", prefix = memberIndentation, postfix = ";") {member ->
             if (member.isNestedStructDefinition)
-                "${(member.nativeType as StructType).definition.printStructLayout(memberIndentation)}${if (member.name === ANONYMOUS) "" else " ${member.name}"};"
+                "${(member.nativeType as StructType).definition.printStructLayout(memberIndentation)}${if (member.name === ANONYMOUS) "" else " ${member.name}"}"
             else {
                 val anonymous = member.name === ANONYMOUS || (member.nativeType is FunctionType && member.nativeType.name.contains("(*)"))
                 member.nativeType
@@ -482,13 +486,18 @@ ${members.joinToString("\n$memberIndentation", prefix = memberIndentation) {memb
                             else                                                     -> it
                         }
                     }
+                    .let { if (anonymous) it else "$it ${member.name}" }
                     .let {
-                        "$it${if (anonymous) "" else " ${member.name}"}${if (member !is StructMemberArray) "" else member.arrayType
-                            .dimensions
-                            .joinToString("") {
-                                "[$it]"
-                            }
-                        };"
+                        if (member.bits != -1)
+                            "$it : ${member.bits}"
+                        else if (member is StructMemberArray)
+                            "$it${member.arrayType
+                                .dimensions
+                                .joinToString("") { dim ->
+                                    "[$dim]"
+                                }}"
+                        else
+                            it
                     }
             }
         }}
@@ -617,19 +626,20 @@ $indentation}"""
 """
             )
 
-            if (members.isNotEmpty() && (!nativeLayout || visibleMembers.any())) {
+            val visibleMembersExceptBitfields = visibleMembers.filter { it.bits == -1 }
+            if (members.isNotEmpty() && (!nativeLayout || visibleMembersExceptBitfields.any())) {
                 val memberCount = getMemberCount(members)
 
                 // Member offset fields
 
-                if (visibleMembers.any()) {
+                if (visibleMembersExceptBitfields.any()) {
                     print(
                         """
     /** The struct member offsets. */
     public static final int
 """
                     )
-                    generateOffsetFields(visibleMembers)
+                    generateOffsetFields(visibleMembersExceptBitfields)
                     println(";")
                 }
 
@@ -655,7 +665,7 @@ $indentation}"""
 
 """
                     )
-                    generateOffsetInit(members, indentation = "$t$t$t")
+                    generateOffsetInit(true, members, indentation = "$t$t$t")
                     println(
                         """
             ALIGNOF = offsets.get($memberCount);
@@ -675,11 +685,11 @@ $indentation}"""
 
 """
                     )
-                    generateOffsetInit(members)
+                    generateOffsetInit(false, members)
                 }
 
                 println("$t}")
-            } else {
+            } else if (nativeLayout) {
                 print(
                     """
     static {"""
@@ -1077,13 +1087,14 @@ ${validations.joinToString("\n")}
     }
 
     private fun getMemberCount(members: List<StructMember>): Int {
-        var count = members.size
+        var count = members.count { it.bits == -1 }
         for (member in members.asSequence().filter { it.isNestedStructDefinition })
             count += getMemberCount((member.nativeType as StructType).definition.members) // recursion
         return count
     }
 
     private fun PrintWriter.generateOffsetInit(
+        nativeLayout: Boolean,
         members: List<StructMember>,
         indentation: String = "$t$t",
         parentField: String = "",
@@ -1092,21 +1103,16 @@ ${validations.joinToString("\n")}
         var index = offset
         members.forEach {
             if (it.name === ANONYMOUS && it.isNestedStruct) {
-                index = generateOffsetInit((it.nativeType as StructType).definition.members, indentation, parentField, index + 1) // recursion
-            } else {
+                index = generateOffsetInit(nativeLayout, (it.nativeType as StructType).definition.members, indentation, parentField, index + 1) // recursion
+            } else if (it is StructMemberPadding) {
+                index++
+            } else if (it.bits == -1) {
                 val field = it.offsetField(parentField)
-                try {
-                    if (it is StructMemberPadding)
-                        return@forEach
-
-                    println("$indentation$field = ${if (nativeLayout) "offsets.get" else "layout.offsetof"}($index);")
-                } finally {
-                    index++
-                }
+                println("$indentation$field = ${if (nativeLayout) "offsets.get" else "layout.offsetof"}(${index++});")
 
                 // Output nested fields
                 if (it.isNestedStructDefinition)
-                    index = generateOffsetInit((it.nativeType as StructType).definition.members, "$indentation$t", field, index) // recursion
+                    index = generateOffsetInit(nativeLayout, (it.nativeType as StructType).definition.members, "$indentation$t", field, index) // recursion
             }
         }
         return index
@@ -1401,15 +1407,21 @@ ${validations.joinToString("\n")}
                                 else
                                     "$t/** Unsafe version of {@link #$setter(${if (it.nativeType.mapping == PrimitiveMapping.BOOLEAN4) "boolean" else javaType}) $setter}. */"
                             )
-                        print("${t}public static void n$setter(long $STRUCT, $javaType value) { ${getBufferMethod("put", it, javaType)}$STRUCT + $field, ")
-                        print(when {
-                            javaType == "boolean"
-                                 -> "value ? (byte)1 : (byte)0"
-                            it.nativeType.mapping === PointerMapping.OPAQUE_POINTER
-                                 -> it.pointerValue
-                            else -> "value"
-                        })
-                        println("); }")
+                        if (it.bits != -1) {
+                            println("${t}public static native void n$setter(long $STRUCT, $javaType value);")
+                        } else {
+                            print("${t}public static void n$setter(long $STRUCT, $javaType value) { ${getBufferMethod("put", it, javaType)}$STRUCT + $field, ")
+                            print(
+                                when {
+                                    javaType == "boolean"
+                                         -> "value ? (byte)1 : (byte)0"
+                                    it.nativeType.mapping === PointerMapping.OPAQUE_POINTER
+                                         -> it.pointerValue
+                                    else -> "value"
+                                }
+                            )
+                            println("); }")
+                        }
                     }
                 }
 
@@ -1685,6 +1697,8 @@ ${validations.joinToString("\n")}
                                 getFieldOffset(userDataMember, parentStruct, parentField)
                         }
                         println("$t${it.nullable("public")} static ${it.nativeType.className} n$getter(long $STRUCT) { return ${it.construct(it.nativeType.className)}(memGetAddress($STRUCT + $callbackField)); }")
+                    } else if (it.bits != -1) {
+                        println("${t}public static native ${it.nativeType.nativeMethodType} n$getter(long $STRUCT);")
                     } else {
                         val javaType = it.nativeType.nativeMethodType
 
@@ -1948,7 +1962,7 @@ $indent */""")
         bufferMethodMap[javaType] ?: throw UnsupportedOperationException("Unsupported struct member java type: $className.${member.name} ($javaType)")
         }(null, "
 
-    override val skipNative get() = !nativeLayout && members.isNotEmpty()
+    override val skipNative get() = !nativeLayout && members.isNotEmpty() && members.none { it.bits != -1 }
 
     override fun PrintWriter.generateNative() {
         print(HEADER)
@@ -1985,13 +1999,18 @@ JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *$JNIENV, jclass
         var index = 0
         if (members.isNotEmpty()) {
             index = generateNativeMembers(members)
-            println()
+            if (index != 0) {
+                println()
+            }
         }
-        println(
+        print(
             """    buffer[$index] = alignof($nativeName);
 
     return sizeof($nativeName);
-}
+}""")
+        generateNativeGetters(members)
+        generateNativeSetters(mutableMembers())
+        println("""
 
 EXTERN_C_EXIT""")
     }
@@ -2001,7 +2020,7 @@ EXTERN_C_EXIT""")
         members.forEach {
             if (it.name === ANONYMOUS && it.isNestedStruct) {
                 index = generateNativeMembers((it.nativeType as StructType).definition.members, index + 1, prefix) // recursion
-            } else {
+            } else if (it.bits == -1) {
                 println("${t}buffer[$index] = (jint)offsetof($nativeName, $prefix${it.name});")
                 index++
 
@@ -2015,6 +2034,57 @@ EXTERN_C_EXIT""")
         }
         return index
     }
+
+    private fun PrintWriter.generateNativeGetters(members: List<StructMember>, prefix: String = "") {
+        members.forEach {
+            if (it.name === ANONYMOUS && it.isNestedStruct) {
+                generateNativeGetters((it.nativeType as StructType).definition.members, prefix) // recursion
+            } else if (it.isNestedStruct) {
+                // Output nested structs
+                val structType = it.nativeType as StructType
+                if (structType.name === ANONYMOUS)
+                    generateNativeGetters(structType.definition.members, "$prefix${it.name}.") // recursion
+            } else if (it.bits != -1) {
+                val signature = "${nativeFileNameJNI}_n${"${prefix.replace('.', '_')}${it.name}".asJNIName}__J"
+                print("""
+
+JNIEXPORT ${it.nativeType.jniFunctionType} JNICALL JavaCritical_$signature(jlong bufferAddress) {
+    $nativeName *buffer = ($nativeName *)(intptr_t)bufferAddress;
+    return (${it.nativeType.jniFunctionType})buffer->$prefix${it.name};
+}
+JNIEXPORT ${it.nativeType.jniFunctionType} JNICALL Java_$signature(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress) {
+    UNUSED_PARAMS($JNIENV, clazz)
+    return JavaCritical_$signature(bufferAddress);
+}""")
+            }
+        }
+    }
+
+    private fun PrintWriter.generateNativeSetters(members: Sequence<StructMember>, prefix: String = "") {
+        members.forEach {
+            if (it.name === ANONYMOUS && it.isNestedStruct) {
+                generateNativeSetters((it.nativeType as StructType).definition.mutableMembers(), prefix) // recursion
+            } else if (it.isNestedStruct) {
+                // Output nested structs
+                val structType = it.nativeType as StructType
+                if (structType.name === ANONYMOUS)
+                    generateNativeSetters(structType.definition.mutableMembers(), "$prefix${it.name}.") // recursion
+            } else if (it.bits != -1) {
+                val signature = "${nativeFileNameJNI}_n${"${prefix.replace('.', '_')}${it.name}".asJNIName}__J${it.nativeType.jniSignatureStrict}"
+                print("""
+
+JNIEXPORT void JNICALL JavaCritical_$signature(jlong bufferAddress, ${it.nativeType.jniFunctionType} value) {
+    $nativeName *buffer = ($nativeName *)(intptr_t)bufferAddress;
+    buffer->$prefix${it.name} = (${it.nativeType.name})value;
+}
+JNIEXPORT void JNICALL Java_$signature(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress, ${it.nativeType.jniFunctionType} value) {
+    $nativeName *buffer = ($nativeName *)(intptr_t)bufferAddress;
+    buffer->$prefix${it.name} = (${it.nativeType.name})value;
+}""")
+            }
+        }
+    }
+
 
     fun AutoSize(reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
         AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
