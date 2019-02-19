@@ -638,7 +638,9 @@ class Func(
         if (constantMacro && !has(private)) {
             writer.println()
             writer.printDocumentation { true }
-            writer.println("$t${accessModifier}static final ${if (returns.nativeType is CharSequenceType) "String" else returns.javaMethodType} $name = $name();")
+            writer.println("$t${accessModifier}static final ${if (returns.nativeType is CharSequenceType) "String" else returns.javaMethodType} $name = $name(${
+                if (returns.nativeType !is StructType) "" else "${returns.nativeType.javaMethodType}.create()"
+            });")
         }
     }
 
