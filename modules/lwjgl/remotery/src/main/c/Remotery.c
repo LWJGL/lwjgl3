@@ -78,8 +78,8 @@ static rmtBool g_SettingsInitialized = RMT_FALSE;
 //
 #if RMT_USE_TINYCRT
 
-    #include <TinyCRT/TinyCRT.h>
-    #include <TinyCRT/TinyWinsock.h>
+	#include <TinyCRT/TinyCRT.h>
+	#include <TinyCRT/TinyWinsock.h>
     #include <Memory/Memory.h>
 
     #define CreateFileMapping CreateFileMappingA
@@ -139,7 +139,7 @@ static rmtBool g_SettingsInitialized = RMT_FALSE;
 
 #endif
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && !defined(__clang__)
     #define RMT_UNREFERENCED_PARAMETER(i) (i)
 #else
     #define RMT_UNREFERENCED_PARAMETER(i) (void)(1 ? (void)0 : ((void)i))
@@ -492,14 +492,57 @@ static void AtomicSub(rmtS32 volatile* value, rmtS32 sub)
 }
 
 
-// Compiler write fences
-static void WriteFence()
+static void CompilerWriteFence()
 {
-#if defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
+#if defined (__clang__)
+    __asm__ volatile("" : : : "memory");
+#elif defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
     _WriteBarrier();
 #else
-	__asm__ volatile("" : : : "memory");
+    asm volatile ("" : : : "memory");
 #endif
+}
+
+
+static void CompilerReadFence()
+{
+#if defined (__clang__)
+    __asm__ volatile("" : : : "memory");
+#elif defined(RMT_PLATFORM_WINDOWS) && !defined(__MINGW32__)
+    _ReadBarrier();
+#else
+    asm volatile ("" : : : "memory");
+#endif
+}
+
+
+static rmtU32 LoadAcquire(rmtU32* volatile address)
+{
+    rmtU32 value = *address;
+    CompilerReadFence();
+    return value;
+}
+
+
+static long* LoadAcquirePointer(long* volatile* ptr)
+{
+    long* value = *ptr;
+    CompilerReadFence();
+    return value;
+}
+
+
+static void StoreRelease(rmtU32* volatile address, rmtU32 value)
+{
+    CompilerWriteFence();
+    *address = value;
+}
+
+
+static void StoreReleasePointer(long* volatile* ptr, long* value)
+{
+    CompilerWriteFence();
+    *ptr = value;
 }
 
 
@@ -653,7 +696,6 @@ error:
 }
 #endif // __ANDROID__
 
-
 static rmtError VirtualMirrorBuffer_Constructor(VirtualMirrorBuffer* buffer, rmtU32 size, int nb_attempts)
 {
     static const rmtU32 k_64 = 64 * 1024;
@@ -693,7 +735,7 @@ static rmtError VirtualMirrorBuffer_Constructor(VirtualMirrorBuffer* buffer, rmt
     {
         free( buffer->page_mapping );
     }
-    buffer->page_mapping = malloc( sizeof( ULONG )*buffer->page_count );
+    buffer->page_mapping = (size_t*)malloc( sizeof( ULONG )*buffer->page_count );
 
     while(nb_attempts-- > 0)
     {
@@ -749,24 +791,47 @@ static rmtError VirtualMirrorBuffer_Constructor(VirtualMirrorBuffer* buffer, rmt
         if (buffer->file_map_handle == NULL)
             break;
 
-        // Reserve two contiguous pages of virtual memory
-        desired_addr = (rmtU8*)VirtualAlloc(0, size * 2, MEM_RESERVE, PAGE_NOACCESS);
-        if (desired_addr == NULL)
-            break;
+		
+#ifndef _UWP // NON-UWP Windows Desktop Version
 
-        // Release the range immediately but retain the address for the next sequence of code to
-        // try and map to it. In the mean-time some other OS thread may come along and allocate this
-        // address range from underneath us so multiple attempts need to be made.
-        VirtualFree(desired_addr, 0, MEM_RELEASE);
+		// Reserve two contiguous pages of virtual memory
+		desired_addr = (rmtU8*)VirtualAlloc(0, size * 2, MEM_RESERVE, PAGE_NOACCESS);
+		if (desired_addr == NULL)
+			break;
 
-        // Immediately try to point both pages at the file mapping
-        if (MapViewOfFileEx(buffer->file_map_handle, FILE_MAP_ALL_ACCESS, 0, 0, size, desired_addr) == desired_addr &&
-            MapViewOfFileEx(buffer->file_map_handle, FILE_MAP_ALL_ACCESS, 0, 0, size, desired_addr + size) == desired_addr + size)
-        {
-            buffer->ptr = desired_addr;
-            break;
-        }
+		// Release the range immediately but retain the address for the next sequence of code to
+		// try and map to it. In the mean-time some other OS thread may come along and allocate this
+		// address range from underneath us so multiple attempts need to be made.
+		VirtualFree(desired_addr, 0, MEM_RELEASE);
 
+		// Immediately try to point both pages at the file mapping		
+		if (MapViewOfFileEx(buffer->file_map_handle, FILE_MAP_ALL_ACCESS, 0, 0, size, desired_addr) == desired_addr &&
+			MapViewOfFileEx(buffer->file_map_handle, FILE_MAP_ALL_ACCESS, 0, 0, size, desired_addr + size) == desired_addr + size)
+		{
+			buffer->ptr = desired_addr;
+			break;
+		}
+
+#else   // UWP 
+
+		// Implementation based on example from: https://docs.microsoft.com/en-us/windows/desktop/api/memoryapi/nf-memoryapi-virtualalloc2
+		//
+		// Notes
+		//  - just replaced the non-uwp functions by the uwp variants. 
+		//  - Both versions could be rewritten to not need the try-loop, see the example mentioned above. I just keep it as is for now.
+		//  - Successfully tested on Hololens
+		desired_addr = (rmtU8*) VirtualAlloc2FromApp(NULL, NULL, 2 * size,MEM_RESERVE | MEM_RESERVE_PLACEHOLDER,PAGE_NOACCESS,NULL, 0);
+
+		// Split the placeholder region into two regions of equal size.
+		VirtualFree(desired_addr, size,	MEM_RELEASE | MEM_PRESERVE_PLACEHOLDER);
+		
+		// Immediately try to point both pages at the file mapping. 
+		if(MapViewOfFile3FromApp(buffer->file_map_handle,NULL, desired_addr, 0, size, MEM_REPLACE_PLACEHOLDER,PAGE_READWRITE,NULL,0)==desired_addr &&
+   		   MapViewOfFile3FromApp(buffer->file_map_handle,NULL, desired_addr+size, 0, size, MEM_REPLACE_PLACEHOLDER,PAGE_READWRITE,NULL,0)== desired_addr + size) {
+			buffer->ptr = desired_addr;			
+			break;
+		}
+#endif
         // Failed to map the virtual pages; cleanup and try again
         CloseHandle(buffer->file_map_handle);
         buffer->file_map_handle = NULL;
@@ -926,6 +991,9 @@ static void VirtualMirrorBuffer_Destructor(VirtualMirrorBuffer* buffer)
     #else
         if (buffer->file_map_handle != NULL)
         {
+			// FIXME, don't we need to unmap the file views obtained in VirtualMirrorBuffer_Constructor, both for uwp/non-uwp
+			// See example https://docs.microsoft.com/en-us/windows/desktop/api/memoryapi/nf-memoryapi-virtualalloc2
+	
             CloseHandle(buffer->file_map_handle);
             buffer->file_map_handle = NULL;
         }
@@ -1165,18 +1233,13 @@ static void rmtThread_Destructor(rmtThread* thread)
 typedef int errno_t;
 #endif
 
-#if (!defined(_WIN64) && !defined(__APPLE__)) || (defined(__MINGW32__) && !defined(RSIZE_T_DEFINED))
-typedef unsigned int rsize_t;
-#endif
+// rsize_t equivalent without going to the hassle of detecting if a platform has implemented C11/K3.2
+typedef unsigned int r_size_t;
 
-#if defined(RMT_PLATFORM_MACOS) && !defined(_RSIZE_T)
-typedef __darwin_size_t rsize_t;
-#endif
-
-static rsize_t
-strnlen_s (const char *dest, rsize_t dmax)
+static r_size_t
+strnlen_s (const char *dest, r_size_t dmax)
 {
-    rsize_t count;
+    r_size_t count;
 
     if (dest == NULL) {
         return RCNEGATE(0);
@@ -1202,11 +1265,11 @@ strnlen_s (const char *dest, rsize_t dmax)
 
 
 static errno_t
-strstr_s (char *dest, rsize_t dmax,
-          const char *src, rsize_t slen, char **substring)
+strstr_s (char *dest, r_size_t dmax,
+          const char *src, r_size_t slen, char **substring)
 {
-    rsize_t len;
-    rsize_t dlen;
+    r_size_t len;
+    r_size_t dlen;
     int i;
 
     if (substring == NULL) {
@@ -1282,7 +1345,7 @@ strstr_s (char *dest, rsize_t dmax,
 
 
 static errno_t
-strncat_s (char *dest, rsize_t dmax, const char *src, rsize_t slen)
+strncat_s (char *dest, r_size_t dmax, const char *src, r_size_t slen)
 {
     const char *overlap_bumper;
 
@@ -1399,7 +1462,7 @@ strncat_s (char *dest, rsize_t dmax, const char *src, rsize_t slen)
 
 
 errno_t
-strcpy_s(char *dest, rsize_t dmax, const char *src)
+strcpy_s(char *dest, r_size_t dmax, const char *src)
 {
     const char *overlap_bumper;
 
@@ -1474,9 +1537,9 @@ strcpy_s(char *dest, rsize_t dmax, const char *src)
 /* very simple integer to hex */
 static const char* hex_encoding_table = "0123456789ABCDEF";
 
-static void itoahex_s( char *dest, rsize_t dmax, rmtS32 value )
+static void itoahex_s( char *dest, r_size_t dmax, rmtS32 value )
 {
-    rsize_t len;
+    r_size_t len;
     rmtS32 halfbytepos;
 
     halfbytepos = 8;
@@ -2965,12 +3028,12 @@ typedef struct
 static void WebSocket_Close(WebSocket* web_socket);
 
 
-static char* GetField(char* buffer, rsize_t buffer_length, rmtPStr field_name)
+static char* GetField(char* buffer, r_size_t buffer_length, rmtPStr field_name)
 {
     char* field = NULL;
     char* buffer_end = buffer + buffer_length - 1;
 
-    rsize_t field_length = strnlen_s(field_name, buffer_length);
+    r_size_t field_length = strnlen_s(field_name, buffer_length);
     if (field_length == 0)
         return NULL;
 
@@ -3075,7 +3138,7 @@ static rmtError WebSocketHandshake(TCPSocket* tcp_socket, rmtPStr limit_host)
         return RMT_ERROR_WEBSOCKET_HANDSHAKE_NO_HOST;
     if (limit_host != NULL)
     {
-        rsize_t limit_host_len = strnlen_s(limit_host, 128);
+        r_size_t limit_host_len = strnlen_s(limit_host, 128);
         char* found = NULL;
         if (strstr_s(host, buffer_end - host, limit_host, limit_host_len, &found) != EOK)
             return RMT_ERROR_WEBSOCKET_HANDSHAKE_BAD_HOST;
@@ -3213,10 +3276,10 @@ static void WebSocket_PrepareBuffer(Buffer* buffer)
     char empty_frame_header[WEBSOCKET_MAX_FRAME_HEADER_SIZE];
 
     assert(buffer != NULL);
-
+ 
     // Reset to start
     buffer->bytes_used = 0;
-
+ 
     // Allocate enough space for a maximum-sized frame header
     Buffer_Write(buffer, empty_frame_header, sizeof(empty_frame_header));
 }
@@ -3238,7 +3301,7 @@ static void WebSocket_WriteFrameHeader(WebSocket* web_socket, rmtU8* dest, rmtU3
     rmtU8 frame_type = (rmtU8)web_socket->mode;
 
     dest[0] = final_fragment | frame_type;
-
+ 
      // Construct the frame header, correctly applying the narrowest size
      if (length <= 125)
      {
@@ -3431,6 +3494,8 @@ typedef enum MessageID
     MsgID_NotReady,
     MsgID_LogText,
     MsgID_SampleTree,
+    MsgID_None,
+    MsgID_Force32Bits = 0xFFFFFFFF,
 } MessageID;
 
 
@@ -3520,9 +3585,11 @@ static Message* rmtMessageQueue_AllocMessage(rmtMessageQueue* queue, rmtU32 payl
     for (;;)
     {
         // Check for potential overflow
+        // Order of loads means allocation failure can happen when enough space has just been freed
+        // However, incorrect overflows are not possible
         rmtU32 s = queue->size;
-        rmtU32 r = queue->read_pos;
-        rmtU32 w = queue->write_pos;
+        rmtU32 w = LoadAcquire(&queue->write_pos);
+        rmtU32 r = LoadAcquire(&queue->read_pos);
         if ((int)(w - r) > ((int)(s - write_size)))
             return NULL;
 
@@ -3547,32 +3614,33 @@ static void rmtMessageQueue_CommitMessage(Message* message, MessageID id)
 {
     assert(message != NULL);
 
-    // Ensure message writes complete before commit
-    WriteFence();
-
     // Setting the message ID signals to the consumer that the message is ready
-    assert(message->id == MsgID_NotReady);
-    message->id = id;
+    assert(LoadAcquire((rmtU32*)&message->id) == MsgID_NotReady);
+    StoreRelease((rmtU32*)&message->id, id);
 }
 
 
 Message* rmtMessageQueue_PeekNextMessage(rmtMessageQueue* queue)
 {
     Message* ptr;
-    rmtU32 r;
+    rmtU32 r, w;
+    MessageID id;
 
     assert(queue != NULL);
 
     // First check that there are bytes queued
-    if (queue->write_pos - queue->read_pos == 0)
+    w = LoadAcquire(&queue->write_pos);
+    r = queue->read_pos;
+    if (w - r == 0)
         return NULL;
 
     // Messages are in the queue but may not have been commit yet
     // Messages behind this one may have been commit but it's not reachable until
     // the next one in the queue is ready.
-    r = queue->read_pos & (queue->size - 1);
+    r = r & (queue->size - 1);
     ptr = (Message*)(queue->data->ptr + r);
-    if (ptr->id != MsgID_NotReady)
+    id = (MessageID)LoadAcquire((rmtU32*)&ptr->id);
+    if (id != MsgID_NotReady)
         return ptr;
 
     return NULL;
@@ -3581,7 +3649,7 @@ Message* rmtMessageQueue_PeekNextMessage(rmtMessageQueue* queue)
 
 static void rmtMessageQueue_ConsumeNextMessage(rmtMessageQueue* queue, Message* message)
 {
-    rmtU32 message_size;
+    rmtU32 message_size, read_pos;
 
     assert(queue != NULL);
     assert(message != NULL);
@@ -3598,9 +3666,9 @@ static void rmtMessageQueue_ConsumeNextMessage(rmtMessageQueue* queue, Message* 
     message_size = rmtMessageQueue_SizeForPayload(message->payload_size);
     memset(message, MsgID_NotReady, message_size);
 
-    // Ensure clear completes before advancing the read position
-    WriteFence();
-    queue->read_pos += message_size;
+    // Advance read position
+    read_pos = queue->read_pos + message_size;
+    StoreRelease(&queue->read_pos, read_pos);
 }
 
 /*
@@ -3699,7 +3767,7 @@ static void Server_DisconnectClient(Server* server)
     // NULL the variable before destroying the socket
     client_socket = server->client_socket;
     server->client_socket = NULL;
-    WriteFence();
+    CompilerWriteFence();
     Delete(WebSocket, client_socket);
 }
 
@@ -3847,7 +3915,7 @@ static void Server_Update(Server* server)
 #define SAMPLE_NAME_LEN 128
 
 
-enum SampleType
+typedef enum SampleType
 {
     SampleType_CPU,
     SampleType_CUDA,
@@ -3855,7 +3923,7 @@ enum SampleType
     SampleType_OpenGL,
     SampleType_Metal,
     SampleType_Count,
-};
+} SampleType;
 
 
 typedef struct Sample
@@ -4416,6 +4484,10 @@ struct Remotery
     // The main server thread
     rmtThread* thread;
 
+    // Set to trigger a map of each message on the remotery thread message queue
+    void (*map_message_queue_fn)(Remotery* rmt, Message*);
+    void* map_message_queue_data;
+
 #if RMT_USE_CUDA
     rmtCUDABind cuda;
 #endif
@@ -4507,7 +4579,7 @@ static rmtError Remotery_SendLogTextMessage(Remotery* rmt, Message* message)
 
     assert(rmt != NULL);
     assert(message != NULL);
-
+    
     bin_buf = rmt->server->bin_buf;
     WebSocket_PrepareBuffer(bin_buf);
     Buffer_Write(bin_buf, message->payload, message->payload_size);
@@ -4708,6 +4780,37 @@ static void Remotery_FlushMessageQueue(Remotery* rmt)
 }
 
 
+static void Remotery_MapMessageQueue(Remotery* rmt)
+{
+    rmtU32 read_pos, write_pos;
+    rmtMessageQueue* queue;
+
+    assert(rmt != NULL);
+
+    // Wait until the caller sets the custom data
+    while (LoadAcquirePointer((long* volatile*)&rmt->map_message_queue_data) == NULL)
+        msSleep(1);
+
+    // Snapshot the current write position so that we're not constantly chasing other threads
+    // that can have no effect on the thread requesting the map.
+    queue = rmt->mq_to_rmt_thread;
+    write_pos = LoadAcquire(&queue->write_pos);
+
+    // Walk every message in the queue and call the map function
+    read_pos = queue->read_pos;
+    while (read_pos < write_pos)
+    {
+        rmtU32 r = read_pos & (queue->size - 1);
+        Message* message = (Message*)(queue->data->ptr + r);
+        rmtU32 message_size = rmtMessageQueue_SizeForPayload(message->payload_size);
+        rmt->map_message_queue_fn(rmt, message);
+        read_pos += message_size;
+    }
+
+    StoreReleasePointer((long* volatile*)&rmt->map_message_queue_data, NULL);
+}
+
+
 static rmtError Remotery_ThreadMain(rmtThread* thread)
 {
     Remotery* rmt = (Remotery*)thread->param;
@@ -4728,6 +4831,13 @@ static rmtError Remotery_ThreadMain(rmtThread* thread)
             rmt_EndCPUSample();
 
         rmt_EndCPUSample();
+
+        // Process any queue map requests
+        if (LoadAcquirePointer((long* volatile*)&rmt->map_message_queue_fn) != NULL)
+        {
+            Remotery_MapMessageQueue(rmt);
+            StoreReleasePointer((long* volatile*)&rmt->map_message_queue_fn, NULL);
+        }
 
         //
         // [NOTE-A]
@@ -4827,6 +4937,8 @@ static rmtError Remotery_Constructor(Remotery* rmt)
     rmt->first_thread_sampler = NULL;
     rmt->mq_to_rmt_thread = NULL;
     rmt->thread = NULL;
+    rmt->map_message_queue_fn = NULL;
+    rmt->map_message_queue_data = NULL;
 
     #if RMT_USE_CUDA
         rmt->cuda.CtxSetCurrent = NULL;
@@ -4896,7 +5008,7 @@ static rmtError Remotery_Constructor(Remotery* rmt)
     g_RemoteryCreated = RMT_TRUE;
 
     // Ensure global instance writes complete before other threads get a chance to use it
-    WriteFence();
+    CompilerWriteFence();
 
     // Create the main update thread once everything has been defined for the global remotery object
     New_2(rmtThread, rmt->thread, Remotery_ThreadMain, rmt);
@@ -5061,6 +5173,9 @@ RMT_API rmtSettings* _rmt_Settings(void)
 RMT_API rmtError _rmt_CreateGlobalInstance(Remotery** remotery)
 {
     rmtError error;
+
+    // Ensure load/acquire store/release operations match this enum size
+    assert(sizeof(MessageID) == sizeof(rmtU32));
 
     // Default-initialise if user has not set values
     rmt_Settings();
@@ -5312,28 +5427,23 @@ RMT_API void _rmt_EndCPUSample(void)
 }
 
 #if RMT_USE_OPENGL || RMT_USE_D3D11
-static void Remotery_BlockingDeleteSampleTree(Remotery* rmt, enum SampleType sample_type)
+static void Remotery_DeleteSampleTree(Remotery* rmt, enum SampleType sample_type)
 {
     ThreadSampler* ts;
 
-    // Get the attached thread sampler
+    // Get the attached thread sampler and delete the sample tree
     assert(rmt != NULL);
     if (Remotery_GetThreadSampler(rmt, &ts) == RMT_ERROR_NONE)
     {
         SampleTree* sample_tree = ts->sample_trees[sample_type];
         if (sample_tree != NULL)
         {
-            // Wait around until the Remotery server thread has sent all sample trees
-            // of this type to the client
-            while (sample_tree->allocator->nb_inuse > 1)
-                msSleep(1);
-
-            // Now free to delete
             Delete(SampleTree, sample_tree);
             ts->sample_trees[sample_type] = NULL;
         }
     }
 }
+
 
 static rmtBool rmtMessageQueue_IsEmpty(rmtMessageQueue* queue)
 {
@@ -5341,7 +5451,77 @@ static rmtBool rmtMessageQueue_IsEmpty(rmtMessageQueue* queue)
     return queue->write_pos - queue->read_pos == 0;
 }
 
+typedef struct GatherQueuedSampleData
+{
+    SampleType sample_type;
+    Buffer* flush_samples;
+} GatherQueuedSampleData;
+
+
+static void MapMessageQueueAndWait(Remotery* rmt, void (*map_message_queue_fn)(Remotery*rmt, Message*), void* data)
+{
+    // Basic spin lock on the map function itself
+    while (AtomicCompareAndSwapPointer((long* volatile*)&rmt->map_message_queue_fn, NULL, (long*)map_message_queue_fn) == RMT_FALSE)
+        msSleep(1);
+    
+    StoreReleasePointer((long* volatile*)&rmt->map_message_queue_data, (long*)data);
+
+    // Wait until map completes
+    while (LoadAcquirePointer((long* volatile*)&rmt->map_message_queue_fn) != NULL)
+        msSleep(1);
+}
+
+
+static void GatherQueuedSamples(Remotery* rmt, Message* message)
+{
+    GatherQueuedSampleData* gather_data = (GatherQueuedSampleData*)rmt->map_message_queue_data;
+
+    // Filter sample trees
+    if (message->id == MsgID_SampleTree)
+    {
+        Msg_SampleTree* sample_tree = (Msg_SampleTree*)message->payload;
+        Sample* sample = sample_tree->root_sample;
+        if (sample->type == gather_data->sample_type)
+        {
+            // Make a copy of the entire sample tree as the remotery thread may overwrite it while
+            // the calling thread tries to delete
+            rmtU32 message_size = rmtMessageQueue_SizeForPayload(message->payload_size);
+            Buffer_Write(gather_data->flush_samples, message, message_size);
+
+            // Mark the message empty
+            message->id = MsgID_None;
+        }
+    }
+}
+
+
+static void FreePendingSampleTrees(Remotery* rmt, SampleType sample_type, Buffer* flush_samples)
+{
+    rmtU8* data;
+    rmtU8* data_end;
+
+    // Gather all sample trees currently queued for the Remotery thread
+    GatherQueuedSampleData gather_data;
+    gather_data.sample_type = sample_type;
+    gather_data.flush_samples = flush_samples;
+    MapMessageQueueAndWait(rmt, GatherQueuedSamples, &gather_data);
+
+    // Release all sample trees to their allocators
+    data = flush_samples->data;
+    data_end = data + flush_samples->bytes_used;
+    while (data < data_end)
+    {
+        Message* message = (Message*)data;
+        rmtU32 message_size = rmtMessageQueue_SizeForPayload(message->payload_size);
+        Msg_SampleTree* sample_tree = (Msg_SampleTree*)message->payload;
+        FreeSampleTree(sample_tree->root_sample, sample_tree->allocator);
+        data += message_size;
+    }
+}
+
+
 #endif
+
 
 /*
 ------------------------------------------------------------------------------------------------------------------------
@@ -5684,6 +5864,9 @@ typedef struct D3D11
     rmtU64 first_timestamp;
     // Last time in us (CPU time, via usTimer_Get) since we last resync'ed CPU & GPU
     rmtU64 last_resync;
+
+    // Sample trees in transit in the message queue for release on shutdown
+    Buffer* flush_samples;
 } D3D11;
 
 
@@ -5705,8 +5888,16 @@ static rmtError D3D11_Create(D3D11** d3d11)
     (*d3d11)->mq_to_d3d11_main = NULL;
     (*d3d11)->first_timestamp = 0;
     (*d3d11)->last_resync = 0;
+    (*d3d11)->flush_samples = NULL;
 
     New_1(rmtMessageQueue, (*d3d11)->mq_to_d3d11_main, g_Settings.messageQueueSizeInBytes);
+    if (error != RMT_ERROR_NONE)
+    {
+        Delete(D3D11, *d3d11);
+        return error;
+    }
+
+    New_1(Buffer, (*d3d11)->flush_samples, 8 * 1024);
     if (error != RMT_ERROR_NONE)
     {
         Delete(D3D11, *d3d11);
@@ -5720,6 +5911,7 @@ static rmtError D3D11_Create(D3D11** d3d11)
 static void D3D11_Destructor(D3D11* d3d11)
 {
     assert(d3d11 != NULL);
+    Delete(Buffer, d3d11->flush_samples);
     Delete(rmtMessageQueue, d3d11->mq_to_d3d11_main);
 }
 
@@ -6056,14 +6248,17 @@ RMT_API void _rmt_UnbindD3D11(void)
         // Stall waiting for the D3D queue to empty into the Remotery queue
         while (!rmtMessageQueue_IsEmpty(d3d11->mq_to_d3d11_main))
             UpdateD3D11Frame();
-
+        
+        // There will be a whole bunch of D3D11 sample trees queued up the remotery queue that need releasing
+        FreePendingSampleTrees(g_Remotery, SampleType_D3D11, d3d11->flush_samples);
+        
         // Inform sampler to not add any more samples
         d3d11->device = NULL;
         d3d11->context = NULL;
 
         // Forcefully delete sample tree on this thread to release time stamps from
         // the same thread that created them
-        Remotery_BlockingDeleteSampleTree(g_Remotery, SampleType_D3D11);
+        Remotery_DeleteSampleTree(g_Remotery, SampleType_D3D11);
     }
 }
 
@@ -6156,6 +6351,12 @@ static rmtBool GetD3D11SampleTimes(Sample* sample, rmtU64* out_first_timestamp, 
         }
 
         sample->us_length = sample->us_end - sample->us_start;
+    }
+
+    // Sum length on the parent to track un-sampled time in the parent
+    if (sample->parent != NULL)
+    {
+        sample->parent->us_sampled_length += sample->us_length;
     }
 
     // Get child sample times
@@ -6357,6 +6558,9 @@ struct OpenGL_t
     rmtU64 first_timestamp;
     // Last time in us (CPU time, via usTimer_Get) since we last resync'ed CPU & GPU
     rmtU64 last_resync;
+
+    // Sample trees in transit in the message queue for release on shutdown
+    Buffer* flush_samples;
 };
 
 
@@ -6438,8 +6642,17 @@ static rmtError OpenGL_Create(OpenGL** opengl)
     (*opengl)->mq_to_opengl_main = NULL;
     (*opengl)->first_timestamp = 0;
     (*opengl)->last_resync = 0;
+    (*opengl)->flush_samples = NULL;
+
+    New_1(Buffer, (*opengl)->flush_samples, 8 * 1024);
+    if (error != RMT_ERROR_NONE)
+    {
+        Delete(OpenGL, *opengl);
+        return error;
+    }
 
     New_1(rmtMessageQueue, (*opengl)->mq_to_opengl_main, g_Settings.messageQueueSizeInBytes);
+
     return error;
 }
 
@@ -6448,6 +6661,7 @@ static void OpenGL_Destructor(OpenGL* opengl)
 {
     assert(opengl != NULL);
     Delete(rmtMessageQueue, opengl->mq_to_opengl_main);
+    Delete(Buffer, opengl->flush_samples);
 }
 
 static void SyncOpenGLCpuGpuTimes(rmtU64* out_first_timestamp, rmtU64* out_last_resync)
@@ -6621,6 +6835,7 @@ static void OpenGLSample_Destructor(OpenGLSample* sample)
     Sample_Destructor((Sample*)sample);
 }
 
+
 RMT_API void _rmt_BindOpenGL()
 {
     if (g_Remotery != NULL)
@@ -6666,9 +6881,12 @@ RMT_API void _rmt_UnbindOpenGL(void)
         while (!rmtMessageQueue_IsEmpty(opengl->mq_to_opengl_main))
             UpdateOpenGLFrame();
 
+        // There will be a whole bunch of OpenGL sample trees queued up the remotery queue that need releasing
+        FreePendingSampleTrees(g_Remotery, SampleType_OpenGL, opengl->flush_samples);
+        
         // Forcefully delete sample tree on this thread to release time stamps from
         // the same thread that created them
-        Remotery_BlockingDeleteSampleTree(g_Remotery, SampleType_OpenGL);
+        Remotery_DeleteSampleTree(g_Remotery, SampleType_OpenGL);
 
         // Release reference to the OpenGL DLL
         if (opengl->dll_handle != NULL)
