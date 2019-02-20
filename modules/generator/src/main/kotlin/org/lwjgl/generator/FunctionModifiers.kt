@@ -133,7 +133,7 @@ val private = AccessModifier(Access.PRIVATE)
 val internal = AccessModifier(Access.INTERNAL)
 
 /** Overrides the native function name. This is useful for functions like Windows functions that have both a Unicode (W suffix) and ANSI version (A suffix). */
-class NativeName(val nativeName: String) : FunctionModifier {
+class NativeName(val nativeName: String) : FunctionModifier, StructMemberModifier {
     companion object {
         private val EXPRESSION_REGEX = "[ (]".toRegex()
     }

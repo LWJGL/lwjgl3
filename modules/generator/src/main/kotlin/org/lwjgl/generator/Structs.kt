@@ -2030,7 +2030,7 @@ EXTERN_C_EXIT""")
             if (it.name === ANONYMOUS && it.isNestedStruct) {
                 index = generateNativeMembers((it.nativeType as StructType).definition.members, index + 1, prefix) // recursion
             } else if (it.bits == -1) {
-                println("${t}buffer[$index] = (jint)offsetof($nativeName, $prefix${it.name});")
+                println("${t}buffer[$index] = (jint)offsetof($nativeName, $prefix${if (it.has<NativeName>()) it.get<NativeName>().nativeName else it.name});")
                 index++
 
                 if (it.isNestedStruct) {
