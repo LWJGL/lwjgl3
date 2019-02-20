@@ -170,22 +170,6 @@ class Check(
 /** Factory method for Check modifiers with integer expressions. */
 fun Check(value: Int) = Check(Integer.toString(value))
 
-/** Should be used on pointer parameters whose size cannot be validated and may be unsafe. */
-val Unsafe = Check("0")
-
-class Nullable internal constructor(val optional: Boolean) : ParameterModifier {
-    override val isSpecial = optional
-    override fun validate(param: Parameter) {
-        if (param.nativeType !is PointerType<*>)
-            throw IllegalArgumentException("The nullable modifier can only be applied to pointer types.")
-    }
-}
-
-/** Marks a pointer parameter as nullable. */
-val nullable = Nullable(false)
-/** Marks a pointer parameter as optional. Similar to nullable, but the parameter either doesn't exist or it exists and is not null. */
-val optional = Nullable(true)
-
 /** Marks a buffer parameter as terminated by the specified value. */
 class Terminated(val value: String) : ParameterModifier {
     override val isSpecial = true

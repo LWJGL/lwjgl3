@@ -217,7 +217,7 @@ class Func(
 
     private fun Parameter.asJavaMethodParam(annotate: Boolean) =
         (
-            if (nativeType is PointerType<*> && nativeType.elementType is StructType && (has<Check>() || getReferenceParam<AutoSize>(name) != null))
+            if (nativeType is PointerType<*> && nativeType.elementType is StructType && (has<Check>() || has<Unsafe>() || getReferenceParam<AutoSize>(name) != null))
                 "$javaMethodType.Buffer"
             else if (nativeType is ArrayType<*>)
                 "${nativeType.mapping.primitive}[]"
@@ -344,6 +344,7 @@ class Func(
             if (it.isBufferPointer
                 && it.nativeType !is CharSequenceType
                 && !it.has<Check>()
+                && !it.has<Unsafe>()
                 && !hasAutoSizeFor(it)
                 && !it.has<AutoSizeResultParam>()
                 && !it.has<Terminated>()
@@ -491,7 +492,7 @@ class Func(
 
             var Safe = if (it.has<Nullable>()) "Safe" else ""
 
-            if (it.nativeType is CharSequenceType && !it.has<Check>() && !hasAutoSizeFor(it) && transforms?.get(it) == null)
+            if (it.nativeType is CharSequenceType && !it.has<Check>() && !it.has<Unsafe>() && !hasAutoSizeFor(it) && transforms?.get(it) == null)
                 checks.add("checkNT${it.nativeType.charMapping.bytes}$Safe(${it.name});")
 
             if (it.has<Terminated>()) {
@@ -502,7 +503,7 @@ class Func(
             if (it.has<Check>() && (!it.has<AutoSizeResultParam>() || !hideAutoSizeResultParam)) {
                 val check = it.get<Check>()
                 val transform = transforms?.get(it)
-                if (check !== Unsafe && transform !is SkipCheckFunctionTransform) {
+                if (transform !is SkipCheckFunctionTransform) {
                     checks.add(when {
                         it.has<MultiType>()         -> "check$Safe(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});"
                         it.nativeType is StructType -> "check$Safe(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});"

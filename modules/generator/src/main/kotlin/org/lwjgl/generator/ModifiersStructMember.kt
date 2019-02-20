@@ -33,7 +33,7 @@ class AutoSizeMember(
 
     internal fun members(members: Sequence<StructMember>) = references.map { ref -> members.first { it.name == ref } }
 
-    internal fun keepSetter(members: Sequence<StructMember>) = (dependent.isNotEmpty() || members(members).any { it has NullableMember }) && !atLeastOne
+    internal fun keepSetter(members: Sequence<StructMember>) = (dependent.isNotEmpty() || members(members).any { it.has<Nullable>() }) && !atLeastOne
 
     override fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 
@@ -72,22 +72,6 @@ class AutoSizeIndirect(
             else                     -> true
         })
             throw IllegalArgumentException("Members with the AutoSizeIndirect modifier must be integer primitive types.")
-    }
-}
-
-object NullableMember : StructMemberModifier {
-    override val isSpecial = true
-    override fun validate(member: StructMember) {
-        if (member.nativeType !is PointerType<*> && !(member.nativeType is CArrayType<*> && member.nativeType.elementType is PointerType<*>))
-            throw IllegalArgumentException("The nullable modifier can only be applied to pointer or pointer array members.")
-    }
-}
-
-object UnsafeMember : StructMemberModifier {
-    override val isSpecial = true
-    override fun validate(member: StructMember) {
-        if (member.nativeType !is PointerType<*> || member.nativeType.elementType !is StructType)
-            throw IllegalArgumentException("The Unsafe modifier can only be applied to pointer to struct members.")
     }
 }
 

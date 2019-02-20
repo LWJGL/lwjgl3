@@ -285,7 +285,7 @@ class Struct(
 
     /** A pointer-to-struct member points to an array of structs, rather than a single struct. */
     private val StructMember.isStructBuffer
-        get() = getReferenceMember<AutoSizeMember>(this.name) != null || this.has<UnsafeMember>()
+        get() = getReferenceMember<AutoSizeMember>(this.name) != null || this.has<Unsafe>()
 
     /** The nested struct's members are embedded in the parent struct. */
     private val StructMember.isNestedStruct
@@ -598,7 +598,7 @@ $indentation}"""
                 (
                     it is StructMemberArray ||
                     it.nativeType is CharSequenceType ||
-                    (it.nativeType is PointerType<*> && !it.has(NullableMember))
+                    (it.nativeType is PointerType<*> && !it.has<Nullable>())
                 )
             ) ||
             it.isNestedStructDefinition && (it.nativeType as StructType).definition.hasChecks()
@@ -2094,7 +2094,6 @@ JNIEXPORT void JNICALL Java_$signature(JNIEnv *$JNIENV, jclass clazz, jlong buff
         }
     }
 
-
     fun AutoSize(reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
         AutoSizeMember(reference, *dependent, optional = optional, atLeastOne = atLeastOne)
 
@@ -2117,12 +2116,6 @@ JNIEXPORT void JNICALL Java_$signature(JNIEnv *$JNIENV, jclass clazz, jlong buff
 
     fun AutoSizeShl(expression: String, reference: String, vararg dependent: String, optional: Boolean = false, atLeastOne: Boolean = false) =
         AutoSizeMember(reference, *dependent, factor = AutoSizeFactor.shl(expression), optional = optional, atLeastOne = atLeastOne)
-
-    /** Marks a pointer member as nullable. */
-    val nullable get() = NullableMember
-
-    /** Marks a pointer to struct member as Unsafe (mapped to .Buffer). */
-    val Unsafe get() = UnsafeMember
 }
 
 fun struct(

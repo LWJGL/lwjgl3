@@ -315,12 +315,9 @@ class NativeClass internal constructor(
                                         .copy(ArrayType(it.nativeType as PointerType<*>, autoType))
                                         .removeArrayModifiers()
                                         .replaceModifier<Check> { check ->
-                                            if (check === Unsafe)
-                                                check
-                                            else
-                                                Check("${check.expression.let { expression ->
-                                                    if (expression.contains(' ')) "($expression)" else expression
-                                                }} >> ${autoType.byteShift}")
+                                            Check("${check.expression.let { expression ->
+                                                if (expression.contains(' ')) "($expression)" else expression
+                                            }} >> ${autoType.byteShift}")
                                         }
                                 else
                                     func[it.name].removeArrayModifiers()
