@@ -8,33 +8,6 @@ import org.lwjgl.generator.*
 import java.io.*
 
 fun config() {
-    packageInfo(
-        Module.JEMALLOC,
-        """
-        Contains bindings to the ${url("http://jemalloc.net/", "jemalloc")} library. jemalloc is a general purpose malloc implementation that emphasizes
-        fragmentation avoidance and scalable concurrency support.
-
-        The jemalloc documentation can be found ${url("http://jemalloc.net/jemalloc.3.html", "here")}. The jemalloc
-        ${url("https://github.com/jemalloc/jemalloc/wiki", "wiki")} also contains useful information.
-
-        The jemalloc shared library that comes with LWJGL is configured with:
-        ${ul(
-            "--with-jemalloc-prefix=je_",
-            "--enable-lazy-lock (Linux)",
-            "--disable-stats",
-            "--disable-fill",
-            "--disable-cxx",
-            "--disable-initial-exec-tls (Linux &amp; macOS)",
-            "--disable-zone-allocator (macOS)"
-        )}
-
-        The shared library may be replaced with a custom build that has more features enabled.
-
-        Dynamic configuration (for enabled features) is also possible, using either the {@code MALLOC_CONF} environment variable or the
-        ${url("http://jemalloc.net/jemalloc.3.html\\#mallctl_namespace", "MALLCTL NAMESPACE")} and the {@code mallctl*} functions.
-        """
-    )
-
     Generator.register(object : GeneratorTarget(Module.JEMALLOC, "JEmallocAllocator") {
 
         init {

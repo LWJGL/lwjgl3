@@ -8,14 +8,6 @@ import org.lwjgl.generator.*
 import java.io.*
 
 fun config() {
-    packageInfo(
-        Module.RPMALLOC,
-        """
-        Contains bindings to the ${url("https://github.com/rampantpixels/rpmalloc", "rpmalloc")} library. rpmalloc is a public domain cross platform lock free
-        thread caching 16-byte aligned memory allocator implemented in C.
-        """
-    )
-
     Generator.register(object : GeneratorTarget(Module.RPMALLOC, "RPmallocAllocator") {
 
         init {

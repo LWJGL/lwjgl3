@@ -75,11 +75,6 @@ val Component = java.awt.Component::class.jobject
 val Frame = java.awt.Frame::class.jobject
 
 fun config() {
-    packageInfo(
-        Module.JAWT,
-        "Contains bindings to the AWT native interface (jawt.h)."
-    )
-
     struct(Module.JAWT, "JAWTX11DrawingSurfaceInfo", nativeName = "JAWT_X11DrawingSurfaceInfo", mutable = false) {
         documentation = "X11-specific declarations for AWT native interface."
 

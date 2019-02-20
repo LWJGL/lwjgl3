@@ -6,18 +6,6 @@ package xxhash
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.XXHASH,
-        """
-        Contains bindings to ${url("https://github.com/Cyan4973/xxHash", "xxHash")}, an extremely fash non-cryptographic hash algorithm.
-
-        xxHash successfully completes the ${url("https://github.com/aappleby/smhasher", "SMHasher")} test suite which evaluates collision, dispersion and
-        randomness qualities of hash functions.
-        """
-    )
-}
-
 val XXH32_hash_t = typedef(unsigned_int, "XXH32_hash_t")
 val XXH64_hash_t = typedef(unsigned_long_long, "XXH32_hash_t")
 

@@ -6,13 +6,6 @@ package core.macos
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.CORE_MACOS,
-        "Contains bindings to native APIs specific to the macOS operating system."
-    )
-}
-
 val id = "id".handle // Opaque object pointer
 
 val Boolean = IntegerType("Boolean", PrimitiveMapping.BOOLEAN, unsigned = true)

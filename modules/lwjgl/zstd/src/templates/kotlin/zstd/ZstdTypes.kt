@@ -6,20 +6,6 @@ package zstd
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.ZSTD,
-        """
-        Contains bindings to ${url("http://facebook.github.io/zstd/", "Zstandard")} (zstd), a fast lossless compression algorithm, targeting real-time
-        compression scenarios at zlib-level and better compression ratios.
-
-        Zstandard is a real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-off, while
-        being backed by a very fast decoder. It also offers a special mode for small data, called dictionary compression, and can create dictionaries from any
-        sample set.
-        """
-    )
-}
-
 val ZSTD_CCtx = "ZSTD_CCtx".opaque
 val ZSTD_DCtx = "ZSTD_DCtx".opaque
 val ZSTD_CDict = "ZSTD_CDict".opaque

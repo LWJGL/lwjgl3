@@ -25,20 +25,6 @@ internal fun Func.ptsz(version: Int = 1): Func = "\"${this.name}\""
             }
     }
 
-fun config() {
-    packageInfo(
-        Module.CUDA,
-        """
-        Contains bindings to <a href="https://developer.nvidia.com/cuda-zone">CUDA</a>.
-
-        <h3>UNSTABLE API</h3>
-
-        Until these bindings are sufficiently tested, this API should be considered unstable. Also, bindings to more (and eventually, all) CUDA Toolkit
-        libraries will be added in the near future.
-        """
-    )
-}
-
 val CUdevice = typedef(int, "CUdevice")
 
 val cuuint32_t = typedef(uint32_t, "cuuint32_t")

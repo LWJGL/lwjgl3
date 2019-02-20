@@ -6,13 +6,6 @@ package core.jni
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.CORE_JNI,
-        "Contains bindings to the Java Native Interface (JNI)."
-    )
-}
-
 val jboolean = IntegerType("jboolean", PrimitiveMapping.BOOLEAN)
 val jbyte = IntegerType("jbyte", PrimitiveMapping.BYTE)
 val jchar = CharType("jchar", CharMapping.UTF16)

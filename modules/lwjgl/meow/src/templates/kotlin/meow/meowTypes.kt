@@ -6,10 +6,6 @@ package meow
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(Module.MEOW, "Contains bindings to ${url("https://github.com/cmuratori/meow_hash", "Meow hash")}, an extremely fast non-cryptographic hash.")
-}
-
 val meow_u8 = typedef(unsigned_char, "meow_u8")
 val meow_u32 = typedef(unsigned_int, "meow_u32")
 val meow_u64 = typedef(unsigned_long_long, "meow_u64")

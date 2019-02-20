@@ -6,13 +6,6 @@ package core.windows
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.CORE_WINDOWS,
-        "Contains bindings to native APIs specific to the Windows operating system."
-    )
-}
-
 val SaveLastError = Code(nativeAfterCall = "${t}saveLastError();")
 
 // UNICODE is defined WindowsLWJGL.h, so all T* types below are UTF16.

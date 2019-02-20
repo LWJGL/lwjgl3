@@ -6,23 +6,6 @@ package opengles
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.OPENGLES,
-        """
-        Contains bindings to the ${url("https://www.khronos.org/opengles/", "OpenGL ES")}, a royalty-free, cross-platform API for full-function 2D and 3D
-        graphics on embedded systems - including consoles, phones, appliances and vehicles. It consists of well-defined subsets of desktop OpenGL, creating a
-        flexible and powerful low-level interface between software and graphics acceleration.
-
-        The ${url("https://www.khronos.org/registry/OpenGL/index_es.php", "Khronos OpenGL ES registry")} is a useful online resource that contains the OpenGL ES and OpenGL
-        ES Shading Language specifications, as well as specifications of OpenGL ES extensions. The ${url(
-            "https://www.khronos.org/registry/OpenGL-Refpages/",
-            "OpenGL ES Reference Pages")
-        } is another convenient source of documentation.
-        """
-    )
-}
-
 val GLboolean = IntegerType("GLboolean", PrimitiveMapping.BOOLEAN, unsigned = true)
 val GLbyte = IntegerType("GLbyte", PrimitiveMapping.BYTE)
 val GLubyte = IntegerType("GLubyte", PrimitiveMapping.BYTE, unsigned = true)

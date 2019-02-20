@@ -6,19 +6,6 @@ package bullet
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.BULLET,
-        """
-		Contains bindings to the ${url("http://bulletphysics.org/", "Bullet")} library.
-
-		<h3>UNSTABLE API</h3>
-
-        Until these bindings are sufficiently tested, this API should be considered unstable.
-		"""
-    )
-}
-
 val b3PhysicsClientHandle = "b3PhysicsClientHandle".handle
 val b3SharedMemoryStatusHandle = "b3SharedMemoryStatusHandle".handle
 val b3SharedMemoryCommandHandle = "b3SharedMemoryCommandHandle".handle

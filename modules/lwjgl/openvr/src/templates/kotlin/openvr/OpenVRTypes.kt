@@ -6,18 +6,6 @@ package openvr
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.OPENVR, // TODO
-        """
-        Contains bindings to ${url("https://github.com/ValveSoftware/openvr", "OpenVR")}.
-
-        OpenVR is an API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the
-        hardware they are targeting.
-        """
-    )
-}
-
 val OPENVR_API_BINDING = simpleBinding(
     Module.OPENVR,
     libraryExpression = """Configuration.OPENVR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("openvr_api"))""",

@@ -9,24 +9,6 @@ import org.lwjgl.generator.*
 val LLVM_BINDING = simpleBinding(Module.LLVM, libraryName = "LLVM", libraryExpression = "Configuration.LLVM_LIBRARY_NAME, \"libLLVM\"")
 val LLVM_BINDING_DELEGATE = LLVM_BINDING.delegate("LLVMCore.getLibrary()")
 
-fun config() {
-    packageInfo(
-        Module.LLVM,
-        """
-        Contains bindings to <a href="https://llvm.org/">LLVM</a>, a collection of modular and reusable compiler and toolchain technologies.
-
-        <h3>UNSTABLE API</h3>
-
-        Until these bindings are sufficiently tested, this API should be considered unstable.
-
-        <h3>BINDINGS ONLY</h3>
-
-        LWJGL does not currently include pre-built LLVM/Clang binaries. The user must download or build LLVM separately and use
-        {@link org.lwjgl.system.Configuration Configuration} to point LWJGL to the appropriate binaries.
-        """
-    )
-}
-
 val LLVMAttributeRef = "LLVMAttributeRef".handle
 val LLVMBasicBlockRef = "LLVMBasicBlockRef".handle
 val LLVMBuilderRef = "LLVMBuilderRef".handle

@@ -6,29 +6,6 @@ package bgfx
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.BGFX,
-        """
-        Contains bindings to the ${url("https://github.com/bkaradzic/bgfx", "bgfx")} library.
-
-        The bgfx documentation can be found online ${url("https://bkaradzic.github.io/bgfx/", "here")}. The API reference is available
-        ${url("https://bkaradzic.github.io/bgfx/bgfx.html", "here")}.
-
-        Starting with LWJGL 3.2.1, builds of the bgfx tools are available for download via the LWJGL site's <a href="https://www.lwjgl.org/browse">file
-        browser</a>. These tools are:
-        ${ul(
-            "Geometry Compiler (geometryc)",
-            "Shader Compiler (shaderc)",
-            "Texture Compiler (texturec)",
-            "Texture Viewer (texturev)"
-        )}
-        The binaries are built from source, at the corresponding commit that was used to build the bgfx library. For example, the latest Windows x64 version of
-        shaderc can be found under {@code nightly/windows/x64/bgfx-tools/}.
-        """
-    )
-}
-
 val BGFX_BINDING = simpleBinding(
     Module.BGFX,
     libraryExpression = """Configuration.BGFX_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("bgfx"))""",

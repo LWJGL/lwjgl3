@@ -6,16 +6,6 @@ package remotery
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.REMOTERY,
-        """
-        Contains bindings to ${url("https://github.com/Celtoys/Remotery", "Remotery")}, a realtime CPU/GPU profiler hosted in a single C file with a viewer
-        that runs in a web browser.
-        """
-    )
-}
-
 fun NativeClass.remoteryIncludes(type: String) {
     nativeDirective(
         """DISABLE_WARNINGS()

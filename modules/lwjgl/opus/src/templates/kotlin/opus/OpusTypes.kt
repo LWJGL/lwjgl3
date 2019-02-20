@@ -6,10 +6,6 @@ package opus
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(Module.OPUS, "Contains bindings to the <a href=\"https://opus-codec.org\">opus-codec</a> library.")
-}
-
 val OPUS_BINDING = simpleBinding(
     Module.OPUS,
     libraryExpression = """Configuration.OPUS_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("opus"))""",

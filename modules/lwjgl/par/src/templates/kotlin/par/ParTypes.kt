@@ -6,15 +6,6 @@ package par
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.PAR,
-        """
-        Contains bindings to the ${url("https://github.com/prideout/par", "par")} library.
-        """
-    )
-}
-
 val PAR_SHAPES_T = typedef(uint32_t, "PAR_SHAPES_T")
 
 val par_shapes_mesh = struct(Module.PAR, "ParShapesMesh", nativeName = "par_shapes_mesh", mutable = false) {

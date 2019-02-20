@@ -1256,15 +1256,6 @@ val ovrHapticsClip = struct(Module.OVR, "OVRHapticsClip", nativeName = "ovrHapti
 }
 
 fun config() {
-    packageInfo(
-        Module.OVR,
-        """
-        Contains bindings to LibOVR, the ${url("https://developer.oculus.com/", "Oculus SDK")} library.
-
-        Documentation on how to get started with the Oculus SDK can be found ${url("https://developer.oculus.com/documentation/", "here")}.
-        """
-    )
-
     union(Module.OVR, "OVRLayerUnion", nativeName = "ovrLayer_Union") {
         documentation = "Union that combines {@code ovrLayer} types in a way that allows them to be used in a polymorphic way."
 

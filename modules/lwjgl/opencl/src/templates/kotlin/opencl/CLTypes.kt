@@ -184,16 +184,6 @@ val cl_bus_address_amd = struct(Module.OPENCL, "CLBusAddressAMD", nativeName = "
 }
 
 fun config() {
-    packageInfo(
-        Module.OPENCL,
-        """
-        Contains bindings to the ${url("https://www.khronos.org/opencl/", "OpenCL")} cross-platform parallel programming API.
-
-        The ${url("https://www.khronos.org/registry/OpenCL/", "Khronos OpenCL registry")} is a useful online resource that contains the OpenCL specification, as
-        well as the specifications of OpenCL extensions.
-        """
-    )
-
     struct(Module.OPENCL, "CLBufferRegion", nativeName = "cl_buffer_region") {
         documentation = "Buffer region struct."
 

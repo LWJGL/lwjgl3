@@ -6,17 +6,6 @@ package lz4
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.LZ4,
-        """
-        Contains bindings to ${url("http://lz4.github.io/lz4/", "LZ4")}, a lossless compression algorithm, providing compression speed &gt; 500 MB/s per core,
-        scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on
-        multi-core systems.
-        """
-    )
-}
-
 val LZ4_stream_t = "LZ4_stream_t".opaque
 val LZ4_streamDecode_t = "LZ4_streamDecode_t".opaque
 

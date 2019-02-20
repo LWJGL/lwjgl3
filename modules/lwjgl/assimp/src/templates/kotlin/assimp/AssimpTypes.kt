@@ -6,23 +6,6 @@ package assimp
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.ASSIMP,
-        """
-        Contains bindings to the ${url("http://www.assimp.org/", "Assimp")} library, a library to import and export various 3d-model-formats including
-        scene-post-processing to generate missing render data.
-
-        Assimp aims to provide a full asset conversion pipeline for use in game engines / realtime rendering systems of any kind, but it is not limited to this
-        purpose. In the past, it has been used in a wide range of applications.
-
-        Written in C++, it is available under a liberal BSD license. Assimp loads all input model formats into one straightforward data structure for further
-        processing. This feature set is augmented by various post processing tools, including frequently-needed operations such as computing normal and tangent
-        vectors.
-        """
-    )
-}
-
 val ASSIMP_BINDING = simpleBinding(
     Module.ASSIMP,
     libraryExpression = """Configuration.ASSIMP_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("assimp"))""",

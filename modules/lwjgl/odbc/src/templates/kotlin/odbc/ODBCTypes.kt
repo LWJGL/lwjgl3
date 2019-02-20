@@ -10,23 +10,6 @@ import core.windows.*
 val ODBC_BINDING = simpleBinding(Module.ODBC, libraryExpression = "Configuration.ODBC_LIBRARY_NAME, \"odbc32\", \"odbc\"")
 val ODBC_BINDING_DELEGATE = ODBC_BINDING.delegate("SQL.getLibrary()")
 
-fun config() {
-    packageInfo(
-        Module.ODBC,
-        """
-        Contains bindings to ${url("https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc", "ODBC")}.
-
-        The Microsoft Open Database Connectivity (ODBC) interface is a C programming language interface that makes it possible for applications to access data
-        from a variety of database management systems (DBMSs). ODBC is a low-level, high-performance interface that is designed specifically for relational
-        data stores.
-
-        The ODBC interface allows maximum interoperability — an application can access data in diverse DBMSs through a single interface. Moreover, that
-        application will be independent of any DBMS from which it accesses data. Users of the application can add software components called drivers, which
-        interface between an application and a specific DBMS.
-        """
-    )
-}
-
 val SQLCHAR = typedef(unsigned_char, "SQLCHAR")
 val SQLSCHAR = IntegerType("SQLSCHAR", PrimitiveMapping.BYTE, unsigned = true)
 val SQLWCHAR = typedef(unsigned_short, "SQLWCHAR")

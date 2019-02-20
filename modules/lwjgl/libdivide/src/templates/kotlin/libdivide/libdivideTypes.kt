@@ -6,13 +6,6 @@ package libdivide
 
 import org.lwjgl.generator.*
 
-fun config() {
-    packageInfo(
-        Module.LIBDIVIDE,
-        "Contains bindings to ${url("https://libdivide.com/", "libdivide")}."
-    )
-}
-
 val libdivide_u32_t = struct(Module.LIBDIVIDE, "LibDivideU32", nativeName = "struct libdivide_u32_t") {
     uint32_t("magic", "")
     uint8_t("more", "")

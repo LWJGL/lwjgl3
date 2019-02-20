@@ -344,7 +344,7 @@ fun packageInfo(
     module: Module,
     documentation: String
 ) {
-    val pi = object : GeneratorTarget(module, "package-info") {
+    Generator.register(object : GeneratorTarget(module, "package-info") {
         override fun PrintWriter.generateJava() {
             print(HEADER)
             println()
@@ -353,7 +353,5 @@ fun packageInfo(
 package $packageName;
 """)
         }
-    }
-
-    Generator.register(pi)
+    })
 }
