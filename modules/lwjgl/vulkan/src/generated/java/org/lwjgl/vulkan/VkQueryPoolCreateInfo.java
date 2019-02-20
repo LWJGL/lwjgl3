@@ -50,7 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code queryType} &ndash; a {@code VkQueryType} value specifying the type of queries managed by the pool.</li>
  * <li>{@code queryCount} &ndash; the number of queries managed by the pool.</li>
- * <li>{@code pipelineStatistics} &ndash; a bitmask of {@code VkQueryPipelineStatisticFlagBits} specifying which counters will be returned in queries on the new pool, as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#queries-pipestats">the “Pipeline Statistics Queries” section</a>.</li>
+ * <li>{@code pipelineStatistics} &ndash; a bitmask of {@code VkQueryPipelineStatisticFlagBits} specifying which counters will be returned in queries on the new pool, as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#queries-pipestats">Pipeline Statistics Queries</a>.</li>
  * </ul>
  * 
  * <h3>Layout</h3>

@@ -463,7 +463,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
     EnumConstant(
         """
-        VkPointClippingBehavior - Enum specifying the point clipping behaviour
+        VkPointClippingBehavior - Enum specifying the point clipping behavior
 
         <h5>Description</h5>
         <ul>
@@ -849,7 +849,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         Query instance-level version before instance creation.
 
         <h5>C Specification</h5>
-        The version of Vulkan that is supported by an instance <b>may</b> be different than the version of Vulkan supported by a device or physical device. To query properties that <b>can</b> be used in creating an instance, call:
+        To query the version of instance-level functionality supported by the implementation, call:
 
         <pre><code>
 ￿VkResult vkEnumerateInstanceVersion(
@@ -869,7 +869,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </dl>
         """,
 
-        Check(1)..uint32_t.p("pApiVersion", "points to a {@code uint32_t}, which is the version of Vulkan supported by instance-level functionality, encoded as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#fundamentals-versionnum\">API Version Numbers and Semantics</a> section.")
+        Check(1)..uint32_t.p("pApiVersion", "points to a {@code uint32_t}, which is the version of Vulkan supported by instance-level functionality, encoded as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#extendingvulkan-coreversions-versionnumbers\">Version Numbers</a>.")
     )
 
     // Promoted from VK_KHR_bind_memory2
@@ -1679,7 +1679,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
         Implementations utilize many internal allocation strategies that make it impossible to guarantee that all unused memory is released back to the system. For instance, an implementation of a command pool <b>may</b> involve allocating memory in bulk from the system and sub-allocating from that memory. In such an implementation any live command buffer that holds a reference to a bulk allocation would prevent that allocation from being freed, even if only a small proportion of the bulk allocation is in use.
 
-        In most cases trimming will result in a reduction in allocated but unused memory, but it does not guarantee the "{@code ideal}" behaviour.
+        In most cases trimming will result in a reduction in allocated but unused memory, but it does not guarantee the "{@code ideal}" behavior.
 
         Trimming <b>may</b> be an expensive operation, and <b>should</b> not be called frequently. Trimming <b>should</b> be treated as a way to relieve memory pressure after application-known points when there exists enough unused memory that the cost of trimming is "{@code worth}" it.
         </div>

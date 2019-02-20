@@ -58,7 +58,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * <h3>Member documentation</h3>
  * 
  * <ul>
- * <li>{@code apiVersion} &ndash; the version of Vulkan supported by the device, encoded as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#fundamentals-versionnum">API Version Numbers and Semantics</a> section.</li>
+ * <li>{@code apiVersion} &ndash; the version of Vulkan supported by the device, encoded as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>.</li>
  * <li>{@code driverVersion} &ndash; the vendor-specified version of the driver.</li>
  * <li>{@code vendorID} &ndash; a unique identifier for the <em>vendor</em> (see below) of the physical device.</li>
  * <li>{@code deviceID} &ndash; a unique identifier for the physical device among devices available from the vendor.</li>

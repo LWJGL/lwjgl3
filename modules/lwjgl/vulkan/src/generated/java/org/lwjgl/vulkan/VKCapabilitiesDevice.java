@@ -459,6 +459,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_conservative_rasterization;
     /** When true, {@link EXTDebugMarker} is supported. */
     public final boolean VK_EXT_debug_marker;
+    /** When true, {@link EXTDepthClipEnable} is supported. */
+    public final boolean VK_EXT_depth_clip_enable;
     /** When true, {@link EXTDepthRangeUnrestricted} is supported. */
     public final boolean VK_EXT_depth_range_unrestricted;
     /** When true, {@link EXTDescriptorIndexing} is supported. */
@@ -613,6 +615,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_clip_space_w_scaling;
     /** When true, {@link NVComputeShaderDerivatives} is supported. */
     public final boolean VK_NV_compute_shader_derivatives;
+    /** When true, {@link NVCooperativeMatrix} is supported. */
+    public final boolean VK_NV_cooperative_matrix;
     /** When true, {@link NVCornerSampledImage} is supported. */
     public final boolean VK_NV_corner_sampled_image;
     /** When true, {@link NVDedicatedAllocation} is supported. */
@@ -696,6 +700,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_conservative_rasterization = ext.contains("VK_EXT_conservative_rasterization");
         VK_EXT_debug_marker = EXTDebugMarker.checkCapsDevice(provider, caps, ext);
         EXTDebugUtils.checkCapsDevice(provider, caps, capsInstance);
+        VK_EXT_depth_clip_enable = ext.contains("VK_EXT_depth_clip_enable");
         VK_EXT_depth_range_unrestricted = ext.contains("VK_EXT_depth_range_unrestricted");
         VK_EXT_descriptor_indexing = ext.contains("VK_EXT_descriptor_indexing");
         VK_EXT_discard_rectangles = EXTDiscardRectangles.checkCapsDevice(provider, caps, ext);
@@ -773,6 +778,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_win32_keyed_mutex = ext.contains("VK_KHR_win32_keyed_mutex");
         VK_NV_clip_space_w_scaling = NVClipSpaceWScaling.checkCapsDevice(provider, caps, ext);
         VK_NV_compute_shader_derivatives = ext.contains("VK_NV_compute_shader_derivatives");
+        VK_NV_cooperative_matrix = ext.contains("VK_NV_cooperative_matrix");
         VK_NV_corner_sampled_image = ext.contains("VK_NV_corner_sampled_image");
         VK_NV_dedicated_allocation = ext.contains("VK_NV_dedicated_allocation");
         VK_NV_dedicated_allocation_image_aliasing = ext.contains("VK_NV_dedicated_allocation_image_aliasing");

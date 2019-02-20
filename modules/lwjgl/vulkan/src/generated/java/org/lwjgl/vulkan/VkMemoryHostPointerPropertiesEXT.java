@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Properties of external memory host pointer.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>The value returned by {@code memoryTypeBits} <b>must</b> only include bits that identify memory types which are host visible.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

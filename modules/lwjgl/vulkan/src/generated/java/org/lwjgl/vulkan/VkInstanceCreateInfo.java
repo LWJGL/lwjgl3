@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code flags} &ndash; reserved for future use.</li>
  * <li>{@code pApplicationInfo} &ndash; {@code NULL} or a pointer to an instance of {@link VkApplicationInfo}. If not {@code NULL}, this information helps implementations recognize behavior inherent to classes of applications. {@link VkApplicationInfo} is defined in detail below.</li>
  * <li>{@code enabledLayerCount} &ndash; the number of global layers to enable.</li>
- * <li>{@code ppEnabledLayerNames} &ndash; a pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings containing the names of layers to enable for the created instance. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#extended-functionality-layers">Layers</a> section for further details.</li>
+ * <li>{@code ppEnabledLayerNames} &ndash; a pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings containing the names of layers to enable for the created instance. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#extendingvulkan-layers">Layers</a> section for further details.</li>
  * <li>{@code enabledExtensionCount} &ndash; the number of global extensions to enable.</li>
  * <li>{@code ppEnabledExtensionNames} &ndash; a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings containing the names of extensions to enable.</li>
  * </ul>

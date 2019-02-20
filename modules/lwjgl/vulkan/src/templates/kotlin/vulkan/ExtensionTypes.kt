@@ -71,6 +71,8 @@ val VkDriverIdKHR = "VkDriverIdKHR".enumType
 val VkResolveModeFlagBitsKHR = "VkResolveModeFlagBitsKHR".enumType
 val VkValidationFeatureEnableEXT = "VkValidationFeatureEnableEXT".enumType
 val VkValidationFeatureDisableEXT = "VkValidationFeatureDisableEXT".enumType
+val VkComponentTypeNV = "VkComponentTypeNV".enumType
+val VkScopeNV = "VkScopeNV".enumType
 
 // Bitmask types
 val VkSurfaceTransformFlagsKHR = typedef(VkFlags, "VkSurfaceTransformFlagsKHR")
@@ -103,6 +105,7 @@ val VkSurfaceCounterFlagsEXT = typedef(VkFlags, "VkSurfaceCounterFlagsEXT")
 val VkPipelineViewportSwizzleStateCreateFlagsNV = typedef(VkFlags, "VkPipelineViewportSwizzleStateCreateFlagsNV")
 val VkPipelineDiscardRectangleStateCreateFlagsEXT = typedef(VkFlags, "VkPipelineDiscardRectangleStateCreateFlagsEXT")
 val VkPipelineRasterizationConservativeStateCreateFlagsEXT = typedef(VkFlags, "VkPipelineRasterizationConservativeStateCreateFlagsEXT")
+val VkPipelineRasterizationDepthClipStateCreateFlagsEXT = typedef(VkFlags, "VkPipelineRasterizationDepthClipStateCreateFlagsEXT")
 val VkExternalFenceHandleTypeFlagsKHR = typedef(VkFlags, "VkExternalFenceHandleTypeFlagsKHR")
 val VkExternalFenceFeatureFlagsKHR = typedef(VkFlags, "VkExternalFenceFeatureFlagsKHR")
 val VkFenceImportFlagsKHR = typedef(VkFlags, "VkFenceImportFlagsKHR")
@@ -160,7 +163,7 @@ val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
 
         The callback returns a {@code VkBool32}, which is interpreted in a layer-specified manner. The application <b>should</b> always return #FALSE. The #TRUE value is reserved for use in layer development.
 
-        {@code object} <b>must</b> be a Vulkan object or #NULL_HANDLE. If {@code objectType} is not #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT and {@code object} is not #NULL_HANDLE, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.
+        {@code object} <b>must</b> be a Vulkan object or #NULL_HANDLE. If {@code objectType} is not #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT and {@code object} is not #NULL_HANDLE, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a>.
 
         <h5>See Also</h5>
         ##VkDebugReportCallbackCreateInfoEXT
@@ -918,7 +921,7 @@ val VkDebugMarkerObjectNameInfoEXT = struct(Module.VULKAN, "VkDebugMarkerObjectN
         <ul>
             <li>{@code objectType} <b>must</b> not be #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT</li>
             <li>{@code object} <b>must</b> not be #NULL_HANDLE</li>
-            <li>{@code object} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.</li>
+            <li>{@code object} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -952,7 +955,7 @@ val VkDebugMarkerObjectTagInfoEXT = struct(Module.VULKAN, "VkDebugMarkerObjectTa
         <ul>
             <li>{@code objectType} <b>must</b> not be #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT</li>
             <li>{@code object} <b>must</b> not be #NULL_HANDLE</li>
-            <li>{@code object} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debug-report-object-types">the “{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship” table</a>.</li>
+            <li>{@code object} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a>.</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3279,6 +3282,43 @@ val VkPipelineRasterizationConservativeStateCreateInfoEXT = struct(Module.VULKAN
     float("extraPrimitiveOverestimationSize", "the extra size in pixels to increase the generating primitive during conservative rasterization at each of its edges in {@code X} and {@code Y} equally in screen space beyond the base overestimation specified in ##VkPhysicalDeviceConservativeRasterizationPropertiesEXT{@code ::primitiveOverestimationSize}.")
 }
 
+val VkPhysicalDeviceDepthClipEnableFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceDepthClipEnableFeaturesEXT") {
+    documentation =
+        """
+        Structure indicating support for explicit enable of depth clip.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceDepthClipEnableFeaturesEXT structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether the feature is supported. ##VkPhysicalDeviceDepthClipEnableFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable this feature.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("depthClipEnable", "indicates that the implementation supports setting the depth clipping operation explicitly via the ##VkPipelineRasterizationDepthClipStateCreateInfoEXT pipeline state. Otherwise depth clipping is only enabled when ##VkPipelineRasterizationStateCreateInfo{@code ::depthClampEnable} is set to #FALSE.")
+}
+
+val VkPipelineRasterizationDepthClipStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRasterizationDepthClipStateCreateInfoEXT") {
+    documentation =
+        """
+        Structure specifying depth clipping state.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT</li>
+            <li>{@code flags} <b>must</b> be 0</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkPipelineRasterizationDepthClipStateCreateFlagsEXT("flags", "reserved for future use.")
+    VkBool32("depthClipEnable", "controls whether depth clipping is enabled as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#vertexpostproc-clipping\">Primitive Clipping</a>.")
+}
+
 val VkXYColorEXT = struct(Module.VULKAN, "VkXYColorEXT") {
     documentation =
         """
@@ -3376,7 +3416,7 @@ val VkAttachmentReference2KHR = struct(Module.VULKAN, "VkAttachmentReference2KHR
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code layout} <b>must</b> not be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED</li>
+            <li>If {@code attachment} is not #ATTACHMENT_UNUSED, {@code layout} <b>must</b> not be #IMAGE_LAYOUT_UNDEFINED or #IMAGE_LAYOUT_PREINITIALIZED</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3412,8 +3452,8 @@ val VkSubpassDescription2KHR = struct(Module.VULKAN, "VkSubpassDescription2KHR")
             <li>{@code colorAttachmentCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxColorAttachments}</li>
             <li>If the first use of an attachment in this render pass is as an input attachment, and the attachment is not also used as a color or depth/stencil attachment in the same subpass, then {@code loadOp} <b>must</b> not be #ATTACHMENT_LOAD_OP_CLEAR</li>
             <li>If {@code pResolveAttachments} is not {@code NULL}, for each resolve attachment that does not have the value #ATTACHMENT_UNUSED, the corresponding color attachment <b>must</b> not have the value #ATTACHMENT_UNUSED</li>
-            <li>If {@code pResolveAttachments} is not {@code NULL}, the sample count of each element of {@code pColorAttachments} <b>must</b> be anything other than #SAMPLE_COUNT_1_BIT</li>
-            <li>Any given element of {@code pResolveAttachments} <b>must</b> have a sample count of #SAMPLE_COUNT_1_BIT</li>
+            <li>If {@code pResolveAttachments} is not {@code NULL}, for each resolve attachment that is not #ATTACHMENT_UNUSED, the corresponding color attachment <b>must</b> not have a sample count of #SAMPLE_COUNT_1_BIT</li>
+            <li>If {@code pResolveAttachments} is not {@code NULL}, each resolve attachment that is not #ATTACHMENT_UNUSED <b>must</b> have a sample count of #SAMPLE_COUNT_1_BIT</li>
             <li>Any given element of {@code pResolveAttachments} <b>must</b> have the same {@code VkFormat} as its corresponding color attachment</li>
             <li>All attachments in {@code pColorAttachments} that are not #ATTACHMENT_UNUSED <b>must</b> have the same sample count</li>
             <li>If the {@code VK_AMD_mixed_attachment_samples} extension is enabled, all attachments in {@code pColorAttachments} that are not #ATTACHMENT_UNUSED <b>must</b> have a sample count that is smaller than or equal to the sample count of {@code pDepthStencilAttachment} if it is not #ATTACHMENT_UNUSED</li>
@@ -6142,6 +6182,9 @@ val VkMemoryHostPointerPropertiesEXT = struct(Module.VULKAN, "VkMemoryHostPointe
         """
         Properties of external memory host pointer.
 
+        <h5>Description</h5>
+        The value returned by {@code memoryTypeBits} <b>must</b> only include bits that identify memory types which are host visible.
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT</li>
@@ -6436,8 +6479,9 @@ val VkSubpassDescriptionDepthStencilResolveKHR = struct(Module.VULKAN, "VkSubpas
         <ul>
             <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value #ATTACHMENT_UNUSED, {@code pDepthStencilAttachment} <b>must</b> not have the value #ATTACHMENT_UNUSED</li>
             <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value #ATTACHMENT_UNUSED, {@code depthResolveMode} and {@code stencilResolveMode} <b>must</b> not both be #RESOLVE_MODE_NONE_KHR</li>
-            <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL}, the sample count of {@code pDepthStencilAttachment} <b>must</b> be anything other than #SAMPLE_COUNT_1_BIT</li>
-            <li>{@code pDepthStencilResolveAttachment} <b>must</b> have a sample count of #SAMPLE_COUNT_1_BIT</li>
+            <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value #ATTACHMENT_UNUSED, {@code pDepthStencilAttachment} <b>must</b> not have a sample count of #SAMPLE_COUNT_1_BIT</li>
+            <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value #ATTACHMENT_UNUSED, {@code pDepthStencilResolveAttachment} <b>must</b> have a sample count of #SAMPLE_COUNT_1_BIT</li>
+            <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value #ATTACHMENT_UNUSED then it <b>must</b> have a format whose features contain #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
             <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has a depth component, then the {@code VkFormat} of {@code pDepthStencilAttachment} <b>must</b> have a depth component with the same number of bits and numerical type</li>
             <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has a stencil component, then the {@code VkFormat} of {@code pDepthStencilAttachment} <b>must</b> have a stencil component with the same number of bits and numerical type</li>
             <li>The value of {@code depthResolveMode} <b>must</b> be one of the bits set in ##VkPhysicalDeviceDepthStencilResolvePropertiesKHR{@code ::supportedDepthResolveModes} or #RESOLVE_MODE_NONE_KHR</li>
@@ -6542,7 +6586,7 @@ val VkPhysicalDeviceMeshShaderPropertiesNV = struct(Module.VULKAN, "VkPhysicalDe
 
     VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
-    uint32_t("maxDrawMeshTasksCount", "the maximum number of local workgroups that <b>can</b> be launched by a single draw mesh tasks command. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#drawing-mesh-shading\">the “Programmable Mesh Shading” section</a>.")
+    uint32_t("maxDrawMeshTasksCount", "the maximum number of local workgroups that <b>can</b> be launched by a single draw mesh tasks command. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html\\#drawing-mesh-shading\">Programmable Mesh Shading</a>.")
     uint32_t("maxTaskWorkGroupInvocations", "the maximum total number of task shader invocations in a single local workgroup. The product of the X, Y, and Z sizes as specified by the {@code LocalSize} execution mode in shader modules and by the object decorated by the {@code WorkgroupSize} decoration <b>must</b> be less than or equal to this limit.")
     uint32_t("maxTaskWorkGroupSize", "the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes specified by the {@code LocalSize} execution mode and by the object decorated by the {@code WorkgroupSize} decoration in shader modules <b>must</b> be less than or equal to the corresponding limit.")[3]
     uint32_t("maxTaskTotalMemorySize", "the maximum number of bytes that the task shader can use in total for shared and output memory combined.")
@@ -7065,4 +7109,80 @@ val VkValidationFeaturesEXT = struct(Module.VULKAN, "VkValidationFeaturesEXT") {
     VkValidationFeatureEnableEXT.const.p("pEnabledValidationFeatures", "a pointer to an array of {@code VkValidationFeatureEnableEXT} values specifying the validation features to be enabled.")
     AutoSize("pDisabledValidationFeatures", optional = true)..uint32_t("disabledValidationFeatureCount", "the number of features to disable.")
     VkValidationFeatureDisableEXT.const.p("pDisabledValidationFeatures", "a pointer to an array of {@code VkValidationFeatureDisableEXT} values specifying the validation features to be disabled.")
+}
+
+val VkCooperativeMatrixPropertiesNV = struct(Module.VULKAN, "VkCooperativeMatrixPropertiesNV") {
+    documentation =
+        """
+        Structure specifying cooperative matrix properties.
+
+        <h5>Description</h5>
+        If some types are preferred over other types (e.g. for performance), they <b>should</b> appear earlier in the list enumerated by #GetPhysicalDeviceCooperativeMatrixPropertiesNV().
+
+        At least one entry in the list <b>must</b> have power of two values for all of {@code MSize}, {@code KSize}, and {@code NSize}.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code AType} <b>must</b> be a valid {@code VkComponentTypeNV} value</li>
+            <li>{@code BType} <b>must</b> be a valid {@code VkComponentTypeNV} value</li>
+            <li>{@code CType} <b>must</b> be a valid {@code VkComponentTypeNV} value</li>
+            <li>{@code DType} <b>must</b> be a valid {@code VkComponentTypeNV} value</li>
+            <li>{@code scope} <b>must</b> be a valid {@code VkScopeNV} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetPhysicalDeviceCooperativeMatrixPropertiesNV()
+        """
+
+    VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    uint32_t("MSize", "the number of rows in matrices A, C, and D.")
+    uint32_t("NSize", "the number of columns in matrices B, C, D.")
+    uint32_t("KSize", "the number of columns in matrix A and rows in matrix B.")
+    VkComponentTypeNV("AType", "the component type of matrix A, of type {@code VkComponentTypeNV}.")
+    VkComponentTypeNV("BType", "the component type of matrix B, of type {@code VkComponentTypeNV}.")
+    VkComponentTypeNV("CType", "the component type of matrix C, of type {@code VkComponentTypeNV}.")
+    VkComponentTypeNV("DType", "the component type of matrix D, of type {@code VkComponentTypeNV}.")
+    VkScopeNV("scope", "the scope of all the matrix types, of type {@code VkScopeNV}.")
+}
+
+val VkPhysicalDeviceCooperativeMatrixFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceCooperativeMatrixFeaturesNV") {
+    documentation =
+        """
+        Structure describing cooperative matrix features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceCooperativeMatrixFeaturesNV structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2KHR, it is filled with values indicating whether the feature is supported. ##VkPhysicalDeviceCooperativeMatrixFeaturesNV <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("cooperativeMatrix", "indicates that the implementation supports the {@code CooperativeMatrixNV} SPIR-V capability.")
+    VkBool32("cooperativeMatrixRobustBufferAccess", "indicates that the implementation supports robust buffer access for SPIR-V {@code OpCooperativeMatrixLoadNV} and {@code OpCooperativeMatrixStoreNV} instructions.")
+}
+
+val VkPhysicalDeviceCooperativeMatrixPropertiesNV = struct(Module.VULKAN, "VkPhysicalDeviceCooperativeMatrixPropertiesNV", mutable = false) {
+    documentation =
+        """
+        Structure describing cooperative matrix properties supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceCooperativeMatrixPropertiesNV structure is included in the {@code pNext} chain of ##VkPhysicalDeviceProperties2, it is filled with the implementation-dependent limits.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV</li>
+        </ul>
+        """
+
+    VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.").mutable()
+    VkShaderStageFlags("cooperativeMatrixSupportedStages", "a bitfield of {@code VkShaderStageFlagBits} describing the shader stages that cooperative matrix instructions are supported in. {@code cooperativeMatrixSupportedStages} will have the #SHADER_STAGE_COMPUTE_BIT bit set if any of the physical device&#8217;s queues support #QUEUE_COMPUTE_BIT.")
 }
